@@ -8,6 +8,11 @@ shows the sources behind every number.
 
 Pick a county from the list on the front page; its data loads when you open it.
 
+**Update, 9 Nov 2026:** the search box now finds any US street address (the U.S. Census Bureau geocoder, then OpenStreetMap's
+Nominatim): press Enter and the map opens that address's county and neighborhood. Orange County's tree-canopy and crime figures are
+corrected (a canopy gap was scaled twice; the sheriff's rate now counts residents of unincorporated communities), and several
+sentences are clearer. The other counties' files are still round 8.5's; the round 8.6 rebuild with the same fixes is running.
+
 ## What is here
 
 | Path | What it is |
