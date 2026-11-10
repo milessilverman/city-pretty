@@ -2482,11 +2482,11 @@ function underSection(p) {
     <div class="recs">${S.slice(0, 6).map(s => `<div class="rec qolrec" style="cursor:pointer" data-site="${s.i}"><div class="small">${siteHtml(s)}</div></div>`).join("")}</div></div>`;
 }
 function facilitySection(m) {
-  if (isOCArea(m)) return `<div class="section"><h3>Public facilities nearby</h3><p class="small muted">Not yet mapped for ${esc(countyOf(m))} (the LA County facilities layer stops at the county line).</p></div>`;
+  if (isOCArea(m) && !m.fc) return `<div class="section"><h3>Public facilities nearby</h3><p class="small muted">No facility distances for this block group in ${esc(countyOf(m))}.</p></div>`;
   if (!m.fc) return "";
   const order = ["school", "library", "community center", "fire station", "police", "city hall", "post office", "clinic", "hospital"];
-  const rows = order.filter(k => m.fc[k] != null).map(k => { const [col, ch] = FAC_STYLE[k]; return `<span><span class="fac" style="background:${col};display:inline-block;vertical-align:middle;margin-right:6px">${ch}</span>${esc(k[0].toUpperCase() + k.slice(1))}</span><span>${(m.fc[k] / 1609).toFixed(1)} mi</span>`; });
-  return rows.length ? `<div class="section"><h3>Public facilities nearby</h3><div class="kv">${rows.join("")}</div><p class="small muted">Distance from the middle of this block group to the nearest one. LA County Location Management System, filled in with OpenStreetMap.</p></div>` : "";
+  const rows = order.filter(k => m.fc[k] != null).map(k => { const [col, ch] = FAC_STYLE[k]; return `<span><span class="fac" style="background:${col};display:inline-block;vertical-align:middle;margin-right:6px">${ch}</span>${esc(k[0].toUpperCase() + k.slice(1))}</span><span>${m.fc[k] < 80.45 ? "&lt;0.1" : (m.fc[k] / 1609).toFixed(1)} mi</span>`; });
+  return rows.length ? `<div class="section"><h3>Public facilities nearby</h3><div class="kv">${rows.join("")}</div><p class="small muted">Distance from the middle of this block group to the nearest one. ${isOCArea(m) ? (s => `OpenStreetMap${s ? "; schools from the " + esc(s[0]) : ""}.`)((((COUNTY_BUNDLES[m.__fips] || D_OC || {}).meta || {}).sources || []).find(r => r && r[3] && /^(CDE School Directory|NCES EDGE)/.test(r[0]))) : "LA County Location Management System, filled in with OpenStreetMap."}</p></div>` : "";
 }
 
 // ---------------- find me
@@ -2865,6 +2865,7 @@ const CA_ONLY_FUNDING = new Set(["ATP", "TCC", "AHSC", "UCF", "P4", "R20", "QUIM
 function stepFunding(st, m) {
   if (!st.funding || !D.funding[st.funding]) return "";
   if (!isCAActive() && (CA_ONLY_FUNDING.has(st.funding) || LA_ONLY_FUNDING.has(st.funding))) return "";
+  if (!isCAActive() && st.funding === "NEVI") return `; could be paid for by NEVI (${esc(D.funding.NEVI[1])})`;   // LA's label 'NEVI / CEC charger programs' names California Energy Commission programmes
   if (isOCArea(m) && LA_ONLY_FUNDING.has(st.funding)) return isOrangeArea(m) && st.funding === "M" ? "; could be paid for by OCTA Measure M2 (Orange County transportation sales tax)" : "";
   return `; could be paid for by ${esc(D.funding[st.funding][0])}`;
 }
@@ -2912,7 +2913,7 @@ function gapSection(p, m) {
       `<li style="margin-bottom:4px">${esc(why)} <span class="muted">${sev >= 0.995 ? "Worse than every similar area." : "Worse than " + Math.round(sev * 100) + "% of similar areas."}</span> <b>Fix:</b> ${esc(fixName(fix))}${cost ? ` (~${fmt$(cost)})` : ""}.</li>`).join("")}</ul>`;
   else h += `<p class="small">Nothing stands out: this block group is at or above similar areas on parks, shade, shops, schools, services, transit, safety and street safety.</p>`;
   if (G.s.length) h += `<p class="small"><b>Already strong:</b> ${G.s.map(([k, x, med]) => `${esc((k === "dining" ? "restaurants and cafés within 400 m" : (D.gap_labels || {})[k]) || k)} (${esc(x)}; similar areas ${esc(med)})`).join("; ")}.</p>`;
-  h += `<p class="small muted">Compared with the 50 block groups ${typeof activeCounty !== "undefined" && activeCounty === "oc" && typeof countyOf === "function" ? "in Los Angeles County and " + esc((c => c === "District of Columbia" ? "the " + c : c)(countyOf(m))) : "county-wide"} most like this one in income, density, home values, housing age, children, car ownership and single-family share.</p>`;
+  h += `<p class="small muted">Compared with the 50 block groups ${typeof activeCounty !== "undefined" && activeCounty === "oc" && typeof countyOf === "function" ? "in Los Angeles County and " + esc((c => c === "District of Columbia" ? "the " + c : c)(countyOf(m))) : "county-wide"} most like this one in income, density, home values, housing age, ${typeof activeCounty !== "undefined" && activeCounty === "oc" ? "" : "children, "}car ownership and single-family share.</p>`;
   if (plan) {
     const steps = plan.steps || [];
     h += `<div class="pkg" style="display:block;margin-top:10px"><div class="small" style="font-weight:600;margin-bottom:6px">A plan for ${esc(p.n)} (${plan.bgs} block group${plan.bgs > 1 ? "s" : ""}, ${fmtN(plan.homes)} homes)</div>`;
@@ -4258,7 +4259,7 @@ function select(id, fly) {
   const topRng = top ? formatVpdRange(top.vpd, D.catalog[top.id]?.grade, top.id, m) : null;
   const inC = compareList.includes(id), oc = isOCArea(m), ocReal = oc && !!(D_OC && D_OC.meta && D_OC.meta.schema >= 2);
   let h = `<div class="eyebrow">${String(id).length === 12 ? "BLOCK GROUP" : "CENSUS TRACT"} ${esc(id)} · ${esc(p.c)} · ${fmtN(m.acres)} acres</div><h2>${esc(p.n)}</h2>
-    <p class="subname">Name from ${esc(m.ns || "")}${m.csa && m.csa !== p.n ? " · County area: " + esc(m.csa) : ""}</p>
+    <p class="subname">Name from ${esc(m.ns || "")}${m.csa && m.csa !== p.n && !m.county ? " · County area: " + esc(m.csa) : ""}</p>
     <div class="action-bar">
       <button type="button" class="action-pill" onclick="copyShareLink()" title="Copy shareable link">🔗 Share</button>
       <button type="button" class="action-pill" onclick="copyAreaSummary('${id}')" title="Copy markdown brief">📋 Copy summary</button>
