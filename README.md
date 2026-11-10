@@ -13,6 +13,11 @@ Nominatim): press Enter and the map opens that address's county and neighborhood
 corrected (a canopy gap was scaled twice; the sheriff's rate now counts residents of unincorporated communities), and several
 sentences are clearer. The other counties' files are still round 8.5's; the round 8.6 rebuild with the same fixes is running.
 
+**Lots, 10 Nov 2026:** zoom in to street level (zoom 17+) with "Property lines" on to see lot lines, and click a lot for its public record
+(parcel number, site address, land use, assessed or appraised value, where the county publishes them; never owner names). The lines come
+live from each state's or county's own open parcel service: statewide in 27 states and DC, plus New York City, Maricopa, Cook, San Diego,
+Franklin (OH), Fulton (GA), Allegheny and Clark (NV) counties. An address search outlines its lot.
+
 ## What is here
 
 | Path | What it is |
