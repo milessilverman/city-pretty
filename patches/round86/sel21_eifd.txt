@@ -1,0 +1,5 @@
+@@OLD
+"eifd": {k: v for k, v in ((M.get("coverage") or {}).get("tax_rate_areas") or {}).items()}}
+@@NEW
+"eifd": {k: v for k, v in ((M.get("coverage") or {}).get("tax_rate_areas") or {}).items() if not (k == "note" and "run fetch_oc.py" in str(v))}}
+@@END

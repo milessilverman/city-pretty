@@ -1,0 +1,2721 @@
+{
+ "source": "LA County bundle stations checked against GTFS rail stops (round 8.4): LA Metro Rail, Metrolink and Amtrak feeds via MobilityData",
+ "dropped_stations": [
+  [
+   -117.92454,
+   33.8094,
+   "Downtown Disney Monorail Station"
+  ],
+  [
+   -118.47569,
+   34.08752,
+   "Lower Tram Station"
+  ],
+  [
+   -118.47498,
+   34.07835,
+   "Upper Tram Station"
+  ],
+  [
+   -117.91928,
+   33.81372,
+   "Fantasyland Station"
+  ],
+  [
+   -117.91854,
+   33.81485,
+   "Mickey's Toontown Depot"
+  ],
+  [
+   -117.92193,
+   33.8112,
+   "New Orleans Square Station"
+  ],
+  [
+   -117.9158,
+   33.81245,
+   "Tomorrowland Station"
+  ],
+  [
+   -117.91896,
+   33.80991,
+   "Main Street Station"
+  ],
+  [
+   -117.99865,
+   33.84525,
+   "Camp Snoopy Depot"
+  ],
+  [
+   -117.91667,
+   33.81282,
+   "Tomorrowland Monorail Station"
+  ],
+  [
+   -118.79335,
+   34.41493,
+   "Piru"
+  ],
+  [
+   -118.9109,
+   34.39888,
+   "Fillmore"
+  ],
+  [
+   -118.00032,
+   33.84434,
+   "Calico Railroad"
+  ],
+  [
+   -117.84321,
+   33.7431,
+   ""
+  ],
+  [
+   -118.00035,
+   33.84436,
+   "Calico Railroad"
+  ],
+  [
+   -117.84326,
+   33.74308,
+   ""
+  ]
+ ],
+ "block_groups": {
+  "060372641031": {
+   "rm": [
+    2625.0,
+    2961.0
+   ],
+   "nearest": "Expo/Bundy",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2625.0,
+    2961.0
+   ]
+  },
+  "060375550021": {
+   "rm": [
+    7837.0,
+    8972.0
+   ],
+   "nearest": "Norwalk",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    7837.0,
+    8972.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.9 mi",
+      "1.8 mi",
+      1.0,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.9 mi away; in similar neighborhoods it's about 1.8 mi.",
+      null
+     ],
+     [
+      "rail",
+      "5.6 mi",
+      "1.8 mi",
+      1.0,
+      "rail_station",
+      "The nearest rail station is Norwalk, 5.6 mi away; in similar neighborhoods it's about 1.8 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060375549002": {
+   "rm": [
+    6615.0,
+    6823.0
+   ],
+   "nearest": "Norwalk/Santa Fe Springs",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    6615.0,
+    6823.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.1 mi",
+      "2.5 mi",
+      0.85,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.1 mi away; in similar neighborhoods it's about 2.5 mi.",
+      null
+     ],
+     [
+      "rail",
+      "4.2 mi",
+      "2.5 mi",
+      0.85,
+      "rail_station",
+      "The nearest rail station is Norwalk/Santa Fe Springs, 4.2 mi away; in similar neighborhoods it's about 2.5 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060372654101": {
+   "rm": [
+    2238.0,
+    3477.0
+   ],
+   "nearest": "Expo/Bundy",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2238.0,
+    3477.0
+   ]
+  },
+  "060375551053": {
+   "rm": [
+    7098.0,
+    8143.0
+   ],
+   "nearest": "Norwalk",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    7098.0,
+    8143.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.4 mi",
+      "2.3 mi",
+      0.94,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.4 mi away; in similar neighborhoods it's about 2.3 mi.",
+      null
+     ],
+     [
+      "rail",
+      "5.1 mi",
+      "2.3 mi",
+      0.94,
+      "rail_station",
+      "The nearest rail station is Norwalk, 5.1 mi away; in similar neighborhoods it's about 2.3 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060372653042": {
+   "rm": [
+    2578.0,
+    3740.0
+   ],
+   "nearest": "Expo/Sepulveda",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2578.0,
+    3740.0
+   ]
+  },
+  "060372654201": {
+   "rm": [
+    1464.0,
+    4586.0
+   ],
+   "nearest": "Expo/Bundy",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    1464.0,
+    4586.0
+   ]
+  },
+  "060375551061": {
+   "rm": [
+    6566.0,
+    8766.0
+   ],
+   "nearest": "Buena Park",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    6566.0,
+    8766.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.1 mi",
+      "1.1 mi",
+      1.0,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.1 mi away; in similar neighborhoods it's about 1.1 mi.",
+      null
+     ],
+     [
+      "rail",
+      "5.4 mi",
+      "1.1 mi",
+      1.0,
+      "rail_station",
+      "The nearest rail station is Buena Park, 5.4 mi away; in similar neighborhoods it's about 1.1 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060375551071": {
+   "rm": [
+    6370.0,
+    8401.0
+   ],
+   "nearest": "Buena Park",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    6370.0,
+    8401.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.0 mi",
+      "2.1 mi",
+      0.96,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.0 mi away; in similar neighborhoods it's about 2.1 mi.",
+      null
+     ],
+     [
+      "rail",
+      "5.2 mi",
+      "2.1 mi",
+      0.96,
+      "rail_station",
+      "The nearest rail station is Buena Park, 5.2 mi away; in similar neighborhoods it's about 2.1 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060372641032": {
+   "rm": [
+    2713.0,
+    2841.0
+   ],
+   "nearest": "Expo/Bundy",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2713.0,
+    2841.0
+   ]
+  },
+  "060372653012": {
+   "rm": [
+    3213.0,
+    3803.0
+   ],
+   "nearest": "Expo/Sepulveda",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    3213.0,
+    3803.0
+   ]
+  },
+  "060372653072": {
+   "rm": [
+    2741.0,
+    3482.0
+   ],
+   "nearest": "Expo/Sepulveda",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2741.0,
+    3482.0
+   ],
+   "gap": [
+    [
+     4,
+     [
+      "rail",
+      "1.7 mi",
+      "0.4 mi",
+      0.92,
+      "rail_station",
+      "The nearest rail station is Upper Tram Station, 1.7 mi away; in similar neighborhoods it's about 0.4 mi.",
+      null
+     ],
+     [
+      "rail",
+      "2.2 mi",
+      "0.4 mi",
+      0.92,
+      "rail_station",
+      "The nearest rail station is Expo/Sepulveda, 2.2 mi away; in similar neighborhoods it's about 0.4 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060375552121": {
+   "rm": [
+    6644.0,
+    9246.0
+   ],
+   "nearest": "Buena Park",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    6644.0,
+    9246.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.1 mi",
+      "1.5 mi",
+      0.94,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.1 mi away; in similar neighborhoods it's about 1.5 mi.",
+      null
+     ],
+     [
+      "rail",
+      "5.7 mi",
+      "1.5 mi",
+      0.94,
+      "rail_station",
+      "The nearest rail station is Buena Park, 5.7 mi away; in similar neighborhoods it's about 1.5 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060375550013": {
+   "rm": [
+    7787.0,
+    8257.0
+   ],
+   "nearest": "Norwalk",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    7787.0,
+    8257.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.8 mi",
+      "1.6 mi",
+      0.98,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.8 mi away; in similar neighborhoods it's about 1.6 mi.",
+      null
+     ],
+     [
+      "rail",
+      "5.1 mi",
+      "1.6 mi",
+      0.98,
+      "rail_station",
+      "The nearest rail station is Norwalk, 5.1 mi away; in similar neighborhoods it's about 1.6 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060372653041": {
+   "rm": [
+    2573.0,
+    3782.0
+   ],
+   "nearest": "Expo/Sepulveda",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2573.0,
+    3782.0
+   ],
+   "gap": [
+    [
+     2,
+     [
+      "rail",
+      "1.6 mi",
+      "0.5 mi",
+      0.9,
+      "rail_station",
+      "The nearest rail station is Upper Tram Station, 1.6 mi away; in similar neighborhoods it's about 0.5 mi.",
+      null
+     ],
+     [
+      "rail",
+      "2.4 mi",
+      "0.5 mi",
+      0.9,
+      "rail_station",
+      "The nearest rail station is Expo/Sepulveda, 2.4 mi away; in similar neighborhoods it's about 0.5 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060375545152": {
+   "rm": [
+    7129.0,
+    7551.0
+   ],
+   "nearest": "Norwalk/Santa Fe Springs",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    7129.0,
+    7551.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.4 mi",
+      "2.4 mi",
+      0.93,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.4 mi away; in similar neighborhoods it's about 2.4 mi.",
+      null
+     ],
+     [
+      "rail",
+      "4.7 mi",
+      "2.4 mi",
+      0.93,
+      "rail_station",
+      "The nearest rail station is Norwalk/Santa Fe Springs, 4.7 mi away; in similar neighborhoods it's about 2.4 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060372653061": {
+   "rm": [
+    2760.0,
+    3680.0
+   ],
+   "nearest": "Expo/Sepulveda",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2760.0,
+    3680.0
+   ],
+   "gap": [
+    [
+     1,
+     [
+      "rail",
+      "1.7 mi",
+      "0.5 mi",
+      0.88,
+      "rail_station",
+      "The nearest rail station is Upper Tram Station, 1.7 mi away; in similar neighborhoods it's about 0.5 mi.",
+      78559061
+     ],
+     [
+      "rail",
+      "2.3 mi",
+      "0.5 mi",
+      0.88,
+      "rail_station",
+      "The nearest rail station is Expo/Sepulveda, 2.3 mi away; in similar neighborhoods it's about 0.5 mi.",
+      78559061
+     ]
+    ]
+   ],
+   "row_text": [
+    [
+     2,
+     "brt",
+     "19 buses an hour; nearest rail 1.7 mi away",
+     "19 buses an hour; nearest rail 2.3 mi away"
+    ],
+    [
+     3,
+     "rail_station",
+     "dense area 1.7 mi from rail with busy bus service; a station costs ~$300M+ shared across ~8 block groups",
+     "dense area 2.3 mi from rail with busy bus service; a station costs ~$300M+ shared across ~8 block groups"
+    ]
+   ]
+  },
+  "060375545183": {
+   "rm": [
+    4425.0,
+    5241.0
+   ],
+   "nearest": "Buena Park",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    4425.0,
+    5241.0
+   ]
+  },
+  "060375552021": {
+   "rm": [
+    6851.0,
+    9609.0
+   ],
+   "nearest": "Buena Park",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    6851.0,
+    9609.0
+   ],
+   "gap": [
+    [
+     1,
+     [
+      "rail",
+      "4.3 mi",
+      "2.7 mi",
+      0.82,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.2 mi away; in similar neighborhoods it's about 2.7 mi.",
+      null
+     ],
+     [
+      "rail",
+      "6.0 mi",
+      "2.7 mi",
+      0.82,
+      "rail_station",
+      "The nearest rail station is Buena Park, 6.0 mi away; in similar neighborhoods it's about 2.7 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060375545182": {
+   "rm": [
+    4769.0,
+    4977.0
+   ],
+   "nearest": "Buena Park",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    4769.0,
+    4977.0
+   ]
+  },
+  "060375552112": {
+   "rm": [
+    7149.0,
+    9536.0
+   ],
+   "nearest": "Buena Park",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    7149.0,
+    9536.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.4 mi",
+      "1.2 mi",
+      1.0,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.4 mi away; in similar neighborhoods it's about 1.2 mi.",
+      null
+     ],
+     [
+      "rail",
+      "5.9 mi",
+      "1.2 mi",
+      1.0,
+      "rail_station",
+      "The nearest rail station is Buena Park, 5.9 mi away; in similar neighborhoods it's about 1.2 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060372621002": {
+   "rm": [
+    2937.0,
+    5217.0
+   ],
+   "nearest": "Expo/Sepulveda",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2937.0,
+    5217.0
+   ]
+  },
+  "060372621001": {
+   "rm": [
+    2993.0,
+    6465.0
+   ],
+   "nearest": "Expo/Sepulveda",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    2993.0,
+    6465.0
+   ]
+  },
+  "060372653031": {
+   "rm": [
+    2212.0,
+    4141.0
+   ],
+   "nearest": "Expo/Sepulveda",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2212.0,
+    4141.0
+   ]
+  },
+  "060372623033": {
+   "rm": [
+    2003.0,
+    4789.0
+   ],
+   "nearest": "26th Street/Bergamot",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2003.0,
+    4789.0
+   ]
+  },
+  "060375552113": {
+   "rm": [
+    7225.0,
+    9738.0
+   ],
+   "nearest": "Buena Park",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    7225.0,
+    9738.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.5 mi",
+      "1.6 mi",
+      0.94,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.5 mi away; in similar neighborhoods it's about 1.6 mi.",
+      null
+     ],
+     [
+      "rail",
+      "6.1 mi",
+      "1.6 mi",
+      0.94,
+      "rail_station",
+      "The nearest rail station is Buena Park, 6.1 mi away; in similar neighborhoods it's about 1.6 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060372621003": {
+   "rm": [
+    2589.0,
+    8132.0
+   ],
+   "nearest": "Expo/Sepulveda",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    2589.0,
+    8132.0
+   ]
+  },
+  "060372623011": {
+   "rm": [
+    2013.0,
+    8272.0
+   ],
+   "nearest": "26th Street/Bergamot",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    2013.0,
+    8272.0
+   ],
+   "strength_removed": [
+    [
+     0,
+     [
+      "rail",
+      "1.3 mi",
+      "2.6 mi"
+     ]
+    ]
+   ]
+  },
+  "060372623032": {
+   "rm": [
+    1855.0,
+    4385.0
+   ],
+   "nearest": "26th Street/Bergamot",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    1855.0,
+    4385.0
+   ]
+  },
+  "060372653011": {
+   "rm": [
+    2696.0,
+    4294.0
+   ],
+   "nearest": "Expo/Sepulveda",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2696.0,
+    4294.0
+   ]
+  },
+  "060372623021": {
+   "rm": [
+    302.0,
+    5259.0
+   ],
+   "nearest": "Expo/Bundy",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    302.0,
+    5259.0
+   ],
+   "strength_removed": [
+    [
+     0,
+     [
+      "rail",
+      "0.2 mi",
+      "1.9 mi"
+     ]
+    ]
+   ],
+   "row_removed": [
+    [
+     8,
+     "upzone_transit"
+    ]
+   ]
+  },
+  "060372611022": {
+   "rm": [
+    5819.0,
+    6494.0
+   ],
+   "nearest": "Universal City/Studio City",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    5819.0,
+    6494.0
+   ],
+   "gap": [
+    [
+     1,
+     [
+      "rail",
+      "3.6 mi",
+      "2.0 mi",
+      0.87,
+      "rail_station",
+      "The nearest rail station is Lower Tram Station, 3.6 mi away; in similar neighborhoods it's about 2.0 mi.",
+      null
+     ],
+     [
+      "rail",
+      "4.0 mi",
+      "2.0 mi",
+      0.87,
+      "rail_station",
+      "The nearest rail station is Universal City/Studio City, 4.0 mi away; in similar neighborhoods it's about 2.0 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060372653033": {
+   "rm": [
+    2491.0,
+    3728.0
+   ],
+   "nearest": "Expo/Bundy",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2491.0,
+    3728.0
+   ]
+  },
+  "060372623031": {
+   "rm": [
+    1416.0,
+    4572.0
+   ],
+   "nearest": "26th Street/Bergamot",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    1416.0,
+    4572.0
+   ],
+   "strength_removed": [
+    [
+     1,
+     [
+      "rail",
+      "0.9 mi",
+      "1.9 mi"
+     ]
+    ]
+   ]
+  },
+  "060371415001": {
+   "rm": [
+    5580.0,
+    8693.0
+   ],
+   "nearest": "Van Nuys",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    5580.0,
+    8693.0
+   ]
+  },
+  "060375552111": {
+   "rm": [
+    7641.0,
+    9686.0
+   ],
+   "nearest": "Norwalk",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    7641.0,
+    9686.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.7 mi",
+      "1.7 mi",
+      0.96,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.7 mi away; in similar neighborhoods it's about 1.7 mi.",
+      null
+     ],
+     [
+      "rail",
+      "6.0 mi",
+      "1.7 mi",
+      0.96,
+      "rail_station",
+      "The nearest rail station is Norwalk, 6.0 mi away; in similar neighborhoods it's about 1.7 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060371416002": {
+   "rm": [
+    5966.0,
+    8026.0
+   ],
+   "nearest": "Van Nuys",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    5966.0,
+    8026.0
+   ],
+   "gap": [
+    [
+     4,
+     [
+      "rail",
+      "3.7 mi",
+      "1.5 mi",
+      0.9,
+      "rail_station",
+      "The nearest rail station is Lower Tram Station, 3.7 mi away; in similar neighborhoods it's about 1.5 mi.",
+      null
+     ],
+     [
+      "rail",
+      "5.0 mi",
+      "1.5 mi",
+      0.9,
+      "rail_station",
+      "The nearest rail station is Van Nuys, 5.0 mi away; in similar neighborhoods it's about 1.5 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060372624002": {
+   "rm": [
+    3389.0,
+    8321.0
+   ],
+   "nearest": "26th Street/Bergamot",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    3389.0,
+    8321.0
+   ]
+  },
+  "060372640003": {
+   "rm": [
+    2783.0,
+    2969.0
+   ],
+   "nearest": "26th Street/Bergamot",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2783.0,
+    2969.0
+   ]
+  },
+  "060372654202": {
+   "rm": [
+    1825.0,
+    3953.0
+   ],
+   "nearest": "Expo/Bundy",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    1825.0,
+    3953.0
+   ]
+  },
+  "060372624001": {
+   "rm": [
+    3046.0,
+    4652.0
+   ],
+   "nearest": "17th Street/SMC",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    3046.0,
+    4652.0
+   ]
+  },
+  "060371397041": {
+   "rm": [
+    6973.0,
+    9650.0
+   ],
+   "nearest": "Van Nuys",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    6973.0,
+    9650.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.3 mi",
+      "2.2 mi",
+      0.92,
+      "rail_station",
+      "The nearest rail station is Lower Tram Station, 4.3 mi away; in similar neighborhoods it's about 2.2 mi.",
+      null
+     ],
+     [
+      "rail",
+      "6.0 mi",
+      "2.2 mi",
+      0.92,
+      "rail_station",
+      "The nearest rail station is Van Nuys, 6.0 mi away; in similar neighborhoods it's about 2.2 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060375545162": {
+   "rm": [
+    6273.0,
+    7406.0
+   ],
+   "nearest": "Norwalk/Santa Fe Springs",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    6273.0,
+    7406.0
+   ],
+   "gap": [
+    [
+     1,
+     [
+      "rail",
+      "3.9 mi",
+      "2.8 mi",
+      0.82,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 3.9 mi away; in similar neighborhoods it's about 2.8 mi.",
+      null
+     ],
+     [
+      "rail",
+      "4.6 mi",
+      "2.8 mi",
+      0.82,
+      "rail_station",
+      "The nearest rail station is Norwalk/Santa Fe Springs, 4.6 mi away; in similar neighborhoods it's about 2.8 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060371416003": {
+   "rm": [
+    5753.0,
+    8278.0
+   ],
+   "nearest": "Van Nuys",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    5753.0,
+    8278.0
+   ]
+  },
+  "060375545171": {
+   "rm": [
+    5784.0,
+    5811.0
+   ],
+   "nearest": "Norwalk/Santa Fe Springs",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    5784.0,
+    5811.0
+   ],
+   "gap": [
+    [
+     1,
+     [
+      "rail",
+      "3.6 mi",
+      "2.7 mi",
+      0.82,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 3.6 mi away; in similar neighborhoods it's about 2.7 mi.",
+      null
+     ],
+     [
+      "rail",
+      "3.6 mi",
+      "2.7 mi",
+      0.82,
+      "rail_station",
+      "The nearest rail station is Norwalk/Santa Fe Springs, 3.6 mi away; in similar neighborhoods it's about 2.7 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060371397014": {
+   "rm": [
+    7351.0,
+    8232.0
+   ],
+   "nearest": "Van Nuys",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    7351.0,
+    8232.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.6 mi",
+      "1.8 mi",
+      1.0,
+      "rail_station",
+      "The nearest rail station is Lower Tram Station, 4.6 mi away; in similar neighborhoods it's about 1.8 mi.",
+      null
+     ],
+     [
+      "rail",
+      "5.1 mi",
+      "1.8 mi",
+      1.0,
+      "rail_station",
+      "The nearest rail station is Van Nuys, 5.1 mi away; in similar neighborhoods it's about 1.8 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060372623022": {
+   "rm": [
+    787.0,
+    4986.0
+   ],
+   "nearest": "26th Street/Bergamot",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    787.0,
+    4986.0
+   ],
+   "strength_removed": [
+    [
+     0,
+     [
+      "rail",
+      "0.5 mi",
+      "2.0 mi"
+     ]
+    ]
+   ],
+   "row_removed": [
+    [
+     6,
+     "upzone_transit"
+    ]
+   ]
+  },
+  "060371397053": {
+   "rm": [
+    5385.0,
+    9540.0
+   ],
+   "nearest": "Van Nuys",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    5385.0,
+    9540.0
+   ]
+  },
+  "060371397051": {
+   "rm": [
+    6054.0,
+    8902.0
+   ],
+   "nearest": "Van Nuys",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    6054.0,
+    8902.0
+   ]
+  },
+  "060375551052": {
+   "rm": [
+    6853.0,
+    8496.0
+   ],
+   "nearest": "Norwalk/Santa Fe Springs",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    6853.0,
+    8496.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.3 mi",
+      "2.0 mi",
+      0.9,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.3 mi away; in similar neighborhoods it's about 2.0 mi.",
+      null
+     ],
+     [
+      "rail",
+      "5.3 mi",
+      "2.0 mi",
+      0.9,
+      "rail_station",
+      "The nearest rail station is Norwalk/Santa Fe Springs, 5.3 mi away; in similar neighborhoods it's about 2.0 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060375552122": {
+   "rm": [
+    6345.0,
+    8850.0
+   ],
+   "nearest": "Buena Park",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    6345.0,
+    8850.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "3.9 mi",
+      "1.2 mi",
+      1.0,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 3.9 mi away; in similar neighborhoods it's about 1.2 mi.",
+      null
+     ],
+     [
+      "rail",
+      "5.5 mi",
+      "1.2 mi",
+      1.0,
+      "rail_station",
+      "The nearest rail station is Buena Park, 5.5 mi away; in similar neighborhoods it's about 1.2 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060375551062": {
+   "rm": [
+    7061.0,
+    9076.0
+   ],
+   "nearest": "Norwalk/Santa Fe Springs",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    7061.0,
+    9076.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.4 mi",
+      "1.6 mi",
+      1.0,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.4 mi away; in similar neighborhoods it's about 1.6 mi.",
+      null
+     ],
+     [
+      "rail",
+      "5.6 mi",
+      "1.6 mi",
+      1.0,
+      "rail_station",
+      "The nearest rail station is Norwalk/Santa Fe Springs, 5.6 mi away; in similar neighborhoods it's about 1.6 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060375551073": {
+   "rm": [
+    5894.0,
+    8166.0
+   ],
+   "nearest": "Buena Park",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    5894.0,
+    8166.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "3.7 mi",
+      "1.7 mi",
+      0.9,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 3.7 mi away; in similar neighborhoods it's about 1.7 mi.",
+      null
+     ],
+     [
+      "rail",
+      "5.1 mi",
+      "1.7 mi",
+      0.9,
+      "rail_station",
+      "The nearest rail station is Buena Park, 5.1 mi away; in similar neighborhoods it's about 1.7 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060372641022": {
+   "rm": [
+    2271.0,
+    3302.0
+   ],
+   "nearest": "Expo/Bundy",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2271.0,
+    3302.0
+   ]
+  },
+  "060375551051": {
+   "rm": [
+    7464.0,
+    8726.0
+   ],
+   "nearest": "Norwalk",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    7464.0,
+    8726.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.6 mi",
+      "2.1 mi",
+      0.96,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.6 mi away; in similar neighborhoods it's about 2.1 mi.",
+      null
+     ],
+     [
+      "rail",
+      "5.4 mi",
+      "2.1 mi",
+      0.96,
+      "rail_station",
+      "The nearest rail station is Norwalk, 5.4 mi away; in similar neighborhoods it's about 2.1 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060372611023": {
+   "rm": [
+    4952.0,
+    6913.0
+   ],
+   "nearest": "Wilshire/La Cienega",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    4952.0,
+    6913.0
+   ]
+  },
+  "060372626012": {
+   "rm": [
+    7238.0,
+    8618.0
+   ],
+   "nearest": "Downtown Santa Monica",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    7238.0,
+    8618.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.5 mi",
+      "2.0 mi",
+      1.0,
+      "rail_station",
+      "The nearest rail station is Upper Tram Station, 4.5 mi away; in similar neighborhoods it's about 2.0 mi.",
+      null
+     ],
+     [
+      "rail",
+      "5.4 mi",
+      "2.0 mi",
+      1.0,
+      "rail_station",
+      "The nearest rail station is Downtown Santa Monica, 5.4 mi away; in similar neighborhoods it's about 2.0 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060372622003": {
+   "rm": [
+    579.0,
+    6314.0
+   ],
+   "nearest": "Expo/Bundy",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    579.0,
+    6314.0
+   ],
+   "strength_removed": [
+    [
+     0,
+     [
+      "rail",
+      "0.4 mi",
+      "2.1 mi"
+     ]
+    ]
+   ],
+   "row_removed": [
+    [
+     14,
+     "upzone_transit"
+    ]
+   ]
+  },
+  "060372626042": {
+   "rm": [
+    6167.0,
+    6327.0
+   ],
+   "nearest": "Downtown Santa Monica",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    6167.0,
+    6327.0
+   ],
+   "gap": [
+    [
+     1,
+     [
+      "rail",
+      "3.8 mi",
+      "2.2 mi",
+      0.86,
+      "rail_station",
+      "The nearest rail station is Upper Tram Station, 3.8 mi away; in similar neighborhoods it's about 2.2 mi.",
+      null
+     ],
+     [
+      "rail",
+      "3.9 mi",
+      "2.2 mi",
+      0.86,
+      "rail_station",
+      "The nearest rail station is Downtown Santa Monica, 3.9 mi away; in similar neighborhoods it's about 2.2 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060372612001": {
+   "rm": [
+    4008.0,
+    8402.0
+   ],
+   "nearest": "Universal City/Studio City",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    4008.0,
+    8402.0
+   ]
+  },
+  "060372611021": {
+   "rm": [
+    5808.0,
+    6125.0
+   ],
+   "nearest": "Universal City/Studio City",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    5808.0,
+    6125.0
+   ]
+  },
+  "060372612002": {
+   "rm": [
+    3899.0,
+    7412.0
+   ],
+   "nearest": "Wilshire/La Cienega",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    3899.0,
+    7412.0
+   ]
+  },
+  "060379800191": {
+   "rm": [
+    7246.0,
+    9973.0
+   ],
+   "nearest": "17th Street/SMC",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    7246.0,
+    9973.0
+   ],
+   "gap": [
+    [
+     2,
+     [
+      "rail",
+      "4.5 mi",
+      "2.0 mi",
+      0.97,
+      "rail_station",
+      "The nearest rail station is Lower Tram Station, 4.5 mi away; in similar neighborhoods it's about 2.0 mi.",
+      null
+     ],
+     [
+      "rail",
+      "6.2 mi",
+      "2.0 mi",
+      0.97,
+      "rail_station",
+      "The nearest rail station is 17th Street/SMC, 6.2 mi away; in similar neighborhoods it's about 2.0 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060375551054": {
+   "rm": [
+    6357.0,
+    8029.0
+   ],
+   "nearest": "Norwalk/Santa Fe Springs",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    6357.0,
+    8029.0
+   ],
+   "gap": [
+    [
+     1,
+     [
+      "rail",
+      "4.0 mi",
+      "1.4 mi",
+      0.96,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.0 mi away; in similar neighborhoods it's about 1.4 mi.",
+      null
+     ],
+     [
+      "rail",
+      "5.0 mi",
+      "1.4 mi",
+      0.96,
+      "rail_station",
+      "The nearest rail station is Norwalk/Santa Fe Springs, 5.0 mi away; in similar neighborhoods it's about 1.4 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060375551072": {
+   "rm": [
+    5753.0,
+    7764.0
+   ],
+   "nearest": "Buena Park",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    5753.0,
+    7764.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "3.6 mi",
+      "1.8 mi",
+      0.98,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 3.6 mi away; in similar neighborhoods it's about 1.8 mi.",
+      null
+     ],
+     [
+      "rail",
+      "4.8 mi",
+      "1.8 mi",
+      0.98,
+      "rail_station",
+      "The nearest rail station is Buena Park, 4.8 mi away; in similar neighborhoods it's about 1.8 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060372622002": {
+   "rm": [
+    2034.0,
+    8337.0
+   ],
+   "nearest": "Expo/Bundy",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    2034.0,
+    8337.0
+   ],
+   "strength_removed": [
+    [
+     0,
+     [
+      "rail",
+      "1.3 mi",
+      "2.5 mi"
+     ]
+    ]
+   ]
+  },
+  "060372622001": {
+   "rm": [
+    1283.0,
+    5439.0
+   ],
+   "nearest": "Expo/Bundy",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    1283.0,
+    5439.0
+   ],
+   "strength_removed": [
+    [
+     0,
+     [
+      "rail",
+      "0.8 mi",
+      "2.0 mi"
+     ]
+    ]
+   ]
+  },
+  "060371416001": {
+   "rm": [
+    5790.0,
+    8237.0
+   ],
+   "nearest": "Van Nuys",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    5790.0,
+    8237.0
+   ]
+  },
+  "060372654102": {
+   "rm": [
+    1338.0,
+    4332.0
+   ],
+   "nearest": "Expo/Bundy",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    1338.0,
+    4332.0
+   ],
+   "strength_removed": [
+    [
+     1,
+     [
+      "rail",
+      "0.8 mi",
+      "1.6 mi"
+     ]
+    ]
+   ]
+  },
+  "060372641021": {
+   "rm": [
+    2014.0,
+    3570.0
+   ],
+   "nearest": "Expo/Bundy",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2014.0,
+    3570.0
+   ]
+  },
+  "060372640002": {
+   "rm": [
+    2394.0,
+    3241.0
+   ],
+   "nearest": "26th Street/Bergamot",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2394.0,
+    3241.0
+   ]
+  },
+  "060371417003": {
+   "rm": [
+    6057.0,
+    7521.0
+   ],
+   "nearest": "North Hollywood",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    6057.0,
+    7521.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "3.8 mi",
+      "2.0 mi",
+      0.81,
+      "rail_station",
+      "The nearest rail station is Lower Tram Station, 3.8 mi away; in similar neighborhoods it's about 2.0 mi.",
+      null
+     ],
+     [
+      "rail",
+      "4.7 mi",
+      "2.0 mi",
+      0.81,
+      "rail_station",
+      "The nearest rail station is North Hollywood, 4.7 mi away; in similar neighborhoods it's about 2.0 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060375545172": {
+   "rm": [
+    5047.0,
+    5781.0
+   ],
+   "nearest": "Buena Park",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    5047.0,
+    5781.0
+   ],
+   "gap": [
+    [
+     4,
+     [
+      "rail",
+      "3.1 mi",
+      "1.5 mi",
+      0.84,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 3.1 mi away; in similar neighborhoods it's about 1.5 mi.",
+      null
+     ],
+     [
+      "rail",
+      "3.6 mi",
+      "1.5 mi",
+      0.84,
+      "rail_station",
+      "The nearest rail station is Buena Park, 3.6 mi away; in similar neighborhoods it's about 1.5 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060371397052": {
+   "rm": [
+    6936.0,
+    7928.0
+   ],
+   "nearest": "Van Nuys",
+   "dropped_nearest": "Lower Tram Station",
+   "tr0": [
+    6936.0,
+    7928.0
+   ],
+   "gap": [
+    [
+     3,
+     [
+      "rail",
+      "4.3 mi",
+      "2.1 mi",
+      0.89,
+      "rail_station",
+      "The nearest rail station is Lower Tram Station, 4.3 mi away; in similar neighborhoods it's about 2.1 mi.",
+      null
+     ],
+     [
+      "rail",
+      "4.9 mi",
+      "2.1 mi",
+      0.89,
+      "rail_station",
+      "The nearest rail station is Van Nuys, 4.9 mi away; in similar neighborhoods it's about 2.1 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060372653032": {
+   "rm": [
+    2318.0,
+    3966.0
+   ],
+   "nearest": "Expo/Bundy",
+   "dropped_nearest": "Upper Tram Station",
+   "tr0": [
+    2318.0,
+    3966.0
+   ],
+   "gap": [
+    [
+     2,
+     [
+      "rail",
+      "1.4 mi",
+      "0.6 mi",
+      0.88,
+      "rail_station",
+      "The nearest rail station is Upper Tram Station, 1.4 mi away; in similar neighborhoods it's about 0.6 mi.",
+      null
+     ],
+     [
+      "rail",
+      "2.5 mi",
+      "0.6 mi",
+      0.88,
+      "rail_station",
+      "The nearest rail station is Expo/Bundy, 2.5 mi away; in similar neighborhoods it's about 0.6 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060375545192": {
+   "rm": [
+    5303.0,
+    6870.0
+   ],
+   "nearest": "Buena Park",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    5303.0,
+    6870.0
+   ],
+   "gap": [
+    [
+     1,
+     [
+      "rail",
+      "3.3 mi",
+      "2.4 mi",
+      0.86,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 3.3 mi away; in similar neighborhoods it's about 2.4 mi.",
+      null
+     ],
+     [
+      "rail",
+      "4.3 mi",
+      "2.4 mi",
+      0.86,
+      "rail_station",
+      "The nearest rail station is Buena Park, 4.3 mi away; in similar neighborhoods it's about 2.4 mi.",
+      null
+     ]
+    ]
+   ]
+  },
+  "060375545191": {
+   "rm": [
+    4961.0,
+    6342.0
+   ],
+   "nearest": "Buena Park",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    4961.0,
+    6342.0
+   ]
+  },
+  "060375552022": {
+   "rm": [
+    7659.0,
+    10322.0
+   ],
+   "nearest": "Buena Park",
+   "dropped_nearest": "Calico Railroad",
+   "tr0": [
+    7659.0,
+    10322.0
+   ],
+   "gap": [
+    [
+     0,
+     [
+      "rail",
+      "4.8 mi",
+      "3.2 mi",
+      1.0,
+      "rail_station",
+      "The nearest rail station is Calico Railroad, 4.8 mi away; in similar neighborhoods it's about 3.2 mi.",
+      null
+     ],
+     [
+      "rail",
+      "6.4 mi",
+      "3.2 mi",
+      1.0,
+      "rail_station",
+      "The nearest rail station is Buena Park, 6.4 mi away; in similar neighborhoods it's about 3.2 mi.",
+      null
+     ]
+    ]
+   ]
+  }
+ },
+ "sites": [
+  [
+   45,
+   "Piru",
+   33607,
+   "Santa Clarita",
+   42267
+  ],
+  [
+   46,
+   "Piru",
+   42603,
+   "Santa Clarita",
+   51881
+  ],
+  [
+   47,
+   "Piru",
+   42602,
+   "Santa Clarita",
+   51859
+  ],
+  [
+   1118,
+   "Lower Tram Station",
+   4100,
+   "Van Nuys",
+   9972
+  ],
+  [
+   1856,
+   "Calico Railroad",
+   4671,
+   "Buena Park",
+   5725
+  ],
+  [
+   1857,
+   "Calico Railroad",
+   4753,
+   "Buena Park",
+   5802
+  ],
+  [
+   1858,
+   "Calico Railroad",
+   4674,
+   "Buena Park",
+   5610
+  ],
+  [
+   1859,
+   "Calico Railroad",
+   4913,
+   "Buena Park",
+   5988
+  ],
+  [
+   1874,
+   "Calico Railroad",
+   7032,
+   "Norwalk/Santa Fe Springs",
+   8994
+  ],
+  [
+   1875,
+   "Calico Railroad",
+   7552,
+   "Norwalk",
+   9298
+  ],
+  [
+   1876,
+   "Calico Railroad",
+   7589,
+   "Norwalk",
+   9330
+  ],
+  [
+   1877,
+   "Calico Railroad",
+   7411,
+   "Norwalk",
+   9326
+  ],
+  [
+   1878,
+   "Calico Railroad",
+   7552,
+   "Norwalk",
+   9378
+  ],
+  [
+   1879,
+   "Calico Railroad",
+   7355,
+   "Norwalk",
+   9366
+  ],
+  [
+   1880,
+   "Calico Railroad",
+   6419,
+   "Buena Park",
+   8802
+  ],
+  [
+   1881,
+   "Calico Railroad",
+   7041,
+   "Buena Park",
+   9658
+  ],
+  [
+   4213,
+   "Lower Tram Station",
+   8850,
+   "Northridge",
+   9226
+  ],
+  [
+   4214,
+   "Lower Tram Station",
+   9172,
+   "Northridge",
+   9432
+  ],
+  [
+   4216,
+   "Lower Tram Station",
+   9208,
+   "Northridge",
+   9521
+  ],
+  [
+   4217,
+   "Lower Tram Station",
+   8751,
+   "Northridge",
+   9709
+  ],
+  [
+   4218,
+   "Lower Tram Station",
+   8546,
+   "Northridge",
+   9828
+  ],
+  [
+   4220,
+   "Lower Tram Station",
+   9763,
+   "Northridge",
+   9787
+  ],
+  [
+   4247,
+   "Upper Tram Station",
+   1852,
+   "Expo/Sepulveda",
+   5372
+  ],
+  [
+   4248,
+   "Upper Tram Station",
+   1961,
+   "Expo/Sepulveda",
+   5124
+  ],
+  [
+   4249,
+   "Upper Tram Station",
+   1820,
+   "Expo/Sepulveda",
+   4998
+  ],
+  [
+   4250,
+   "Upper Tram Station",
+   2197,
+   "Expo/Sepulveda",
+   4904
+  ],
+  [
+   4251,
+   "Upper Tram Station",
+   2146,
+   "Expo/Sepulveda",
+   5125
+  ],
+  [
+   4255,
+   "Upper Tram Station",
+   1605,
+   "Expo/Bundy",
+   5718
+  ],
+  [
+   4256,
+   "Upper Tram Station",
+   1707,
+   "Expo/Sepulveda",
+   5761
+  ],
+  [
+   4260,
+   "Lower Tram Station",
+   2990,
+   "26th Street/Bergamot",
+   9487
+  ],
+  [
+   4261,
+   "Lower Tram Station",
+   2430,
+   "26th Street/Bergamot",
+   8837
+  ],
+  [
+   4262,
+   "Lower Tram Station",
+   2108,
+   "Expo/Bundy",
+   8615
+  ],
+  [
+   4263,
+   "Lower Tram Station",
+   1869,
+   "Expo/Bundy",
+   8375
+  ],
+  [
+   4848,
+   "Calico Railroad",
+   6783,
+   "Norwalk/Santa Fe Springs",
+   8634
+  ],
+  [
+   4849,
+   "Calico Railroad",
+   5912,
+   "Buena Park",
+   8363
+  ],
+  [
+   4850,
+   "Calico Railroad",
+   6206,
+   "Buena Park",
+   8597
+  ],
+  [
+   4851,
+   "Calico Railroad",
+   7166,
+   "Buena Park",
+   9774
+  ],
+  [
+   4852,
+   "Calico Railroad",
+   6250,
+   "Buena Park",
+   8918
+  ],
+  [
+   4853,
+   "Calico Railroad",
+   6928,
+   "Buena Park",
+   9540
+  ],
+  [
+   5254,
+   "Piru",
+   42689,
+   "Santa Clarita",
+   51936
+  ],
+  [
+   5547,
+   "Upper Tram Station",
+   8349,
+   "Downtown Santa Monica",
+   9698
+  ],
+  [
+   5548,
+   "Lower Tram Station",
+   10995,
+   "Northridge",
+   11394
+  ],
+  [
+   5549,
+   "Lower Tram Station",
+   10800,
+   "Northridge",
+   11743
+  ],
+  [
+   5550,
+   "Lower Tram Station",
+   10776,
+   "Northridge",
+   12052
+  ],
+  [
+   5551,
+   "Lower Tram Station",
+   10702,
+   "Northridge",
+   11861
+  ],
+  [
+   5552,
+   "Lower Tram Station",
+   11015,
+   "Northridge",
+   11567
+  ],
+  [
+   5553,
+   "Lower Tram Station",
+   10879,
+   "Northridge",
+   11569
+  ],
+  [
+   5842,
+   "Calico Railroad",
+   6572,
+   "Norwalk/Santa Fe Springs",
+   8598
+  ],
+  [
+   5843,
+   "Calico Railroad",
+   6923,
+   "Norwalk/Santa Fe Springs",
+   8793
+  ],
+  [
+   5844,
+   "Calico Railroad",
+   6821,
+   "Norwalk/Santa Fe Springs",
+   8757
+  ],
+  [
+   5845,
+   "Calico Railroad",
+   6320,
+   "Buena Park",
+   8725
+  ],
+  [
+   6672,
+   "Upper Tram Station",
+   1980,
+   "Expo/Sepulveda",
+   4727
+  ],
+  [
+   6728,
+   "Lower Tram Station",
+   188,
+   "Expo/Bundy",
+   6621
+  ],
+  [
+   6805,
+   "Piru",
+   29302,
+   "Santa Clarita",
+   37730
+  ],
+  [
+   6806,
+   "Piru",
+   29541,
+   "Santa Clarita",
+   38001
+  ],
+  [
+   7337,
+   "Piru",
+   27740,
+   "Santa Clarita",
+   35159
+  ],
+  [
+   7500,
+   "Calico Railroad",
+   8118,
+   "Norwalk",
+   9580
+  ],
+  [
+   7501,
+   "Calico Railroad",
+   7976,
+   "Norwalk",
+   9396
+  ],
+  [
+   7502,
+   "Calico Railroad",
+   8013,
+   "Norwalk",
+   9545
+  ],
+  [
+   7503,
+   "Calico Railroad",
+   8039,
+   "Norwalk",
+   9703
+  ],
+  [
+   7504,
+   "Calico Railroad",
+   8326,
+   "Norwalk",
+   9548
+  ],
+  [
+   7505,
+   "Calico Railroad",
+   8313,
+   "Norwalk",
+   9371
+  ],
+  [
+   7506,
+   "Calico Railroad",
+   8383,
+   "Norwalk",
+   9311
+  ],
+  [
+   7507,
+   "Calico Railroad",
+   8316,
+   "Norwalk",
+   9347
+  ],
+  [
+   7508,
+   "Calico Railroad",
+   8250,
+   "Norwalk",
+   9546
+  ],
+  [
+   7509,
+   "Calico Railroad",
+   8638,
+   "Willow Street",
+   9457
+  ],
+  [
+   7525,
+   "Piru",
+   29092,
+   "Santa Clarita",
+   37424
+  ],
+  [
+   7582,
+   "Calico Railroad",
+   6948,
+   "Buena Park",
+   9317
+  ],
+  [
+   7583,
+   "Calico Railroad",
+   6738,
+   "Buena Park",
+   9148
+  ],
+  [
+   7700,
+   "Calico Railroad",
+   7093,
+   "Norwalk/Santa Fe Springs",
+   8073
+  ],
+  [
+   7707,
+   "Calico Railroad",
+   6277,
+   "Norwalk/Santa Fe Springs",
+   7726
+  ],
+  [
+   7729,
+   "Piru",
+   27551,
+   "Santa Clarita",
+   35232
+  ],
+  [
+   8118,
+   "Lower Tram Station",
+   2514,
+   "26th Street/Bergamot",
+   8999
+  ],
+  [
+   8120,
+   "Lower Tram Station",
+   4605,
+   "Van Nuys",
+   9786
+  ],
+  [
+   8121,
+   "Lower Tram Station",
+   4615,
+   "Van Nuys",
+   9762
+  ],
+  [
+   8128,
+   "Lower Tram Station",
+   2771,
+   "Expo/Sepulveda",
+   5772
+  ],
+  [
+   8373,
+   "Lower Tram Station",
+   4832,
+   "Van Nuys",
+   9609
+  ],
+  [
+   8614,
+   "Calico Railroad",
+   5790,
+   "Norwalk/Santa Fe Springs",
+   7193
+  ],
+  [
+   8649,
+   "Lower Tram Station",
+   8754,
+   "Northridge",
+   10840
+  ],
+  [
+   8650,
+   "Lower Tram Station",
+   8718,
+   "Northridge",
+   10624
+  ],
+  [
+   8708,
+   "Calico Railroad",
+   7631,
+   "Norwalk",
+   7758
+  ],
+  [
+   8709,
+   "Calico Railroad",
+   7464,
+   "Norwalk",
+   7812
+  ],
+  [
+   8898,
+   "Upper Tram Station",
+   1587,
+   "Expo/Bundy",
+   3978
+  ],
+  [
+   8908,
+   "Calico Railroad",
+   6314,
+   "Norwalk/Santa Fe Springs",
+   6875
+  ],
+  [
+   9053,
+   "Piru",
+   45389,
+   "Santa Clarita",
+   55724
+  ],
+  [
+   9054,
+   "Piru",
+   45413,
+   "Santa Clarita",
+   55630
+  ],
+  [
+   9183,
+   "Calico Railroad",
+   4850,
+   "Buena Park",
+   5906
+  ],
+  [
+   9199,
+   "Calico Railroad",
+   6121,
+   "Norwalk/Santa Fe Springs",
+   6506
+  ]
+ ],
+ "plans": [
+  [
+   "Around Bloomfield Park|Hawaiian Gardens",
+   "steps",
+   1,
+   "why",
+   "The nearest rail station is Calico Railroad, 4.4 mi away; in similar neighborhoods it's about 1.6 mi.",
+   "The nearest rail station is Norwalk/Santa Fe Springs, 5.6 mi away; in similar neighborhoods it's about 1.6 mi."
+  ],
+  [
+   "Around Bloomfield Park|Lakewood",
+   "steps",
+   1,
+   "why",
+   "The nearest rail station is Calico Railroad, 4.9 mi away; in similar neighborhoods it's about 1.8 mi.",
+   "The nearest rail station is Norwalk, 5.6 mi away; in similar neighborhoods it's about 1.8 mi."
+  ],
+  [
+   "Around Don Knabe Community Regional Park|Cerritos",
+   "steps",
+   1,
+   "why",
+   "The nearest rail station is Calico Railroad, 3.3 mi away; in similar neighborhoods it's about 2.4 mi.",
+   "The nearest rail station is Buena Park, 4.3 mi away; in similar neighborhoods it's about 2.4 mi."
+  ],
+  [
+   "Around El Dorado East Regional Park|Hawaiian Gardens",
+   "steps",
+   1,
+   "why",
+   "The nearest rail station is Calico Railroad, 4.7 mi away; in similar neighborhoods it's about 1.7 mi.",
+   "The nearest rail station is Norwalk, 6.0 mi away; in similar neighborhoods it's about 1.7 mi."
+  ],
+  [
+   "Around Heritage Park|Cerritos",
+   "steps",
+   1,
+   "why",
+   "The nearest rail station is Calico Railroad, 3.6 mi away; in similar neighborhoods it's about 2.7 mi.",
+   "The nearest rail station is Norwalk/Santa Fe Springs, 3.6 mi away; in similar neighborhoods it's about 2.7 mi."
+  ],
+  [
+   "Around Jacob Street Park|Cerritos",
+   "steps",
+   0,
+   "why",
+   "The nearest rail station is Calico Railroad, 4.4 mi away; in similar neighborhoods it's about 2.4 mi.",
+   "The nearest rail station is Norwalk/Santa Fe Springs, 4.7 mi away; in similar neighborhoods it's about 2.4 mi."
+  ],
+  [
+   "Around Palm Park|Lakewood",
+   "steps",
+   0,
+   "why",
+   "The nearest rail station is Calico Railroad, 3.6 mi away; in similar neighborhoods it's about 1.8 mi.",
+   "The nearest rail station is Buena Park, 4.8 mi away; in similar neighborhoods it's about 1.8 mi."
+  ],
+  [
+   "Around Pat Nixon Park|Artesia",
+   "steps",
+   0,
+   "why",
+   "The nearest rail station is Calico Railroad, 4.1 mi away; in similar neighborhoods it's about 2.5 mi.",
+   "The nearest rail station is Norwalk/Santa Fe Springs, 4.2 mi away; in similar neighborhoods it's about 2.5 mi."
+  ],
+  [
+   "Bel-Air|Los Angeles",
+   "ctx",
+   0,
+   null,
+   "The Lower Tram Station station puts parts of the area within ½ mile of rail, where SB 79 and AB 2097 now allow more homes and no parking minimums; 84% of homes here are single-family.",
+   null
+  ],
+  [
+   "Bel-Air|Los Angeles",
+   "strong",
+   0,
+   null,
+   [
+    "rail",
+    "distance to rail"
+   ],
+   null
+  ],
+  [
+   "Brentwood|Los Angeles",
+   "ctx",
+   0,
+   null,
+   "The Upper Tram Station station puts parts of the area within ½ mile of rail, where SB 79 and AB 2097 now allow more homes and no parking minimums; 41% of homes here are single-family.",
+   null
+  ],
+  [
+   "Hawaiian Gardens|Hawaiian Gardens",
+   "steps",
+   2,
+   "why",
+   "The nearest rail station is Calico Railroad, 4.1 mi away; in similar neighborhoods it's about 1.1 mi.",
+   "The nearest rail station is Buena Park, 5.4 mi away; in similar neighborhoods it's about 1.1 mi."
+  ],
+  [
+   "Imperial Estates|Long Beach",
+   "steps",
+   1,
+   "why",
+   "The nearest rail station is Calico Railroad, 4.2 mi away; in similar neighborhoods it's about 2.7 mi.",
+   "The nearest rail station is Buena Park, 6.0 mi away; in similar neighborhoods it's about 2.7 mi."
+  ],
+  [
+   "Pacific Palisades|Los Angeles",
+   "steps",
+   2,
+   "why",
+   "The nearest rail station is Upper Tram Station, 4.5 mi away; in similar neighborhoods it's about 2.0 mi.",
+   "The nearest rail station is Downtown Santa Monica, 5.4 mi away; in similar neighborhoods it's about 2.0 mi."
+  ]
+ ]
+}

@@ -1,0 +1,10 @@
+28:def _feed_label(f):
+29-    """one feed in the transit sources row: its agencies, MobilityData id, the copy read when it is not MobilityData's hosted one, the
+30-    weekday measured and, when the newest copy that could be read has ended (fetch_oc selection 20), the end of its bus schedule"""
+31-    cp = COPY_TEXT.get(f.get("copy"))
+32-    if cp and f.get("calitp"):
+33-        cp += f" ({f['calitp'].get('name')}, snapshot of {f['calitp'].get('snapshot')})"
+34-    return (f"{', '.join(f['agencies']) if f.get('agencies') else f['provider']} (MobilityData {f['id']}" + (f", read from {cp}" if cp else "")
+35-            + f", {_d(f['weekday'], True)}" + (f"; the newest copy that could be read ends on {_d(f['schedule_ended'])}" if f.get("schedule_ended") else "") + ")")
+36-
+37-

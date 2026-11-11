@@ -1,0 +1,21 @@
+const { chromium } = require('playwright');
+const URL = process.argv[2];
+(async () => {
+  const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1300, height: 900 } });
+  const errs = []; p.on('pageerror', e => errs.push(e.message.slice(0, 160)));
+  await p.goto(URL + '#bg=371830501003', { waitUntil: 'load', timeout: 300000 });
+  await p.waitForFunction(() => typeof selected !== 'undefined' && selected === '371830501003', null, { timeout: 300000 });
+  const st = () => p.evaluate(() => ({ fips: activeFips(), zoom: map.getZoom(), lots: (window.natLots && window.natLots._count) || 0, hit: window.lotHit ? window.lotHit._how : null, popup: (document.querySelector('.leaflet-popup-content') || {}).innerText || '' }));
+  await p.evaluate(() => { map.setView([35.7784, -78.6422], 18, { animate: false }); });
+  await p.waitForFunction(() => window.natLots && window.natLots._count > 0, null, { timeout: 60000 }).catch(() => {});
+  console.log('L1 zoom 18 downtown Raleigh', JSON.stringify(await st()));
+  await p.evaluate(() => { map.setView([35.7784, -78.6422], 15, { animate: false }); }); await p.waitForTimeout(2500);
+  console.log('L2 zoom 15 (no lot lines)', JSON.stringify(await st()));
+  await p.fill('#q', '222 W Hargett St, Raleigh, NC 27601'); await p.dispatchEvent('#q', 'change');
+  await p.waitForFunction(() => !!window.lotHit, null, { timeout: 60000 }).catch(() => {});
+  await p.waitForTimeout(1500);
+  const s3 = await st(); s3.popup = s3.popup.replace(/\s+/g, ' ').slice(0, 400);
+  console.log('L3 address search lot record', JSON.stringify(s3));
+  console.log('errors', JSON.stringify(errs));
+  await b.close();
+})().catch(e => { console.error('TEST ERROR', e.message); process.exit(1); });

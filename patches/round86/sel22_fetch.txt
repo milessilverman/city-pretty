@@ -1,0 +1,27 @@
+@@OLD
+GTFS_SELECTION = 21   # 21 (round 8.6, text only, measurements unchanged): a skipped feed records how many of its stops lie in the county's
+@@NEW
+GTFS_SELECTION = 22   # 22 (round 8.6): a catalog row that MobilityData's legacy catalog marks inactive but its current export marks active or
+#   future is a candidate (mdb_catalog_rows): 7 US feeds on 9 Nov, all with current hosted copies, e.g. CityBus of Greater Lafayette (391,
+#   to 1 Jan 2027: Tippecanoe IN had no counted feed), LINK Transit in Wenatchee (275), Plumas Transit (119), I-Ride Trolley (1143).
+#   21 (round 8.6, text only, measurements unchanged): a skipped feed records how many of its stops lie in the county's
+@@OLD
+    Ids are normalised ("mdb-75" is "75"). A row in both keeps its legacy status, so feeds the legacy catalog marked inactive stay out, and
+    takes the current export's bounding box, redirect and download URL where that has one. Rows only in the current export are added
+@@NEW
+    Ids are normalised ("mdb-75" is "75"). A row in both keeps its legacy status, so feeds the legacy catalog marked inactive stay out, unless
+    the current export marks it active or future (selection 22: CityBus of Greater Lafayette 391, inactive in the legacy catalog, has a hosted
+    copy running to 1 Jan 2027), and takes the current export's bounding box, redirect and download URL where that has one. Rows only in the current export are added
+@@OLD
+                for k in ("redirect.id", "urls.direct_download"):
+                    if (r.get(k) or "").strip():
+                        old[k] = r[k]
+                old["_catalog"] = "legacy+v2"
+@@NEW
+                for k in ("redirect.id", "urls.direct_download"):
+                    if (r.get(k) or "").strip():
+                        old[k] = r[k]
+                old["_catalog"] = "legacy+v2"
+                if old.get("status") == "inactive" and r.get("status") in ("active", "future"):   # selection 22: the current export's judgment
+                    old["status"] = r["status"]; old["_catalog"] = "legacy+v2 (status from v2)"
+@@END

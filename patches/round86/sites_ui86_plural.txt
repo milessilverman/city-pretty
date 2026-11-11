@@ -1,0 +1,5 @@
+@@OLD
+${s.ped + s.bike} people walking or biking hurt ${yrs}
+@@NEW
+${s.ped + s.bike} ${s.ped + s.bike === 1 ? "person" : "people"} walking or biking hurt ${yrs}
+@@END

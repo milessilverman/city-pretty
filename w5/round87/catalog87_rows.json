@@ -1,0 +1,462 @@
+[
+ {
+  "group": "flood_hurricane",
+  "key": "flood_buyout",
+  "eff": "Effect on nearby home values: negative for adjacent homes in the short run.\n- New York coastal counties, post-Sandy NY Rising program: homes sold with",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "Unit cost: the pre-flood fair market value of the home, plus about $23,000 per property in local and state gov",
+  "cs": "OK",
+  "td": "Main dataset: OpenFEMA 'NFIP Multiple Loss Properties' v1 (FEMA).\n- Contents: one record per NFIP repetitive-l"
+ },
+ {
+  "group": "flood_hurricane",
+  "key": "flood_elevation",
+  "eff": "Effect on home values: no resale premium measured.\n- Charleston, SC: repeated floods slowed appreciation, and elevated homes lost more appreciation th",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "About $120,000 per single-family home: the average elevation cost set by Louisiana GOHSEP for Jefferson Parish",
+  "cs": "FAIL:Verifiable alternative wording (Research Square preprint v1, 12 Oct 2022, https://www.rese",
+  "td": "1) FEMA National Flood Hazard Layer, layer 28 Flood Hazard Zones, https://hazards.fema.gov/arcgis/rest/service"
+ },
+ {
+  "group": "flood_hurricane",
+  "key": "living_shoreline",
+  "eff": "Dunes, home values: building dunes raised New Jersey coastal home prices by about 3.6% net. Lost ocean views and privacy partly offset the protection ",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "$300 to more than $1,500 per linear foot of living shoreline, depending on wave energy and technique (Maryland",
+  "cs": "OK",
+  "td": "FEMA National Flood Hazard Layer MapServer, https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServe"
+ },
+ {
+  "group": "flood_hurricane",
+  "key": "wind_retrofit",
+  "eff": "Effect on home values (coastal Alabama):\n- FORTIFIED-designated homes sold for about 2-4% more, from sales 2011-2021 (Petrolia et al. 2023).\n- A secon",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "About $13,000 average per FORTIFIED Roof retrofit in Alabama's Strengthen Alabama Homes program, which pays up",
+  "cs": "OK",
+  "td": "1) FEMA Building Code Adoption Tracking (BCAT) Counties, ArcGIS feature service https://services.arcgis.com/DN"
+ },
+ {
+  "group": "flood_hurricane",
+  "key": "flood_crs",
+  "eff": "Effect on home values: no peer-reviewed estimate found.\n- Losses (nationwide, 1998-2020): CRS participation is linked to fewer NFIP claims, roughly in",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "About $4.17 million a year across 2,170 communities for CRS paperwork: application, annual recertification, en",
+  "cs": "OK",
+  "td": "1) OpenFEMA 'NFIP Community Status Book' v1, https://www.fema.gov/api/open/v1/NfipCommunityStatusBook (CSV: ht"
+ },
+ {
+  "group": "flood_hurricane",
+  "key": "flood_drainage",
+  "eff": "Grey storm-drain upgrades: no home-value effect measured; I found no study.\n\nGreen stormwater infrastructure (bioswales, rain gardens, tree trenches),",
+  "et": "working_paper",
+  "es": "OK",
+  "cost": "Grey: about $500 per linear foot of storm sewer replacement or capital project, about $2.64 million per mile (",
+  "cs": "OK",
+  "td": "1) FEMA National Flood Hazard Layer, layer 28 Flood Hazard Zones, https://hazards.fema.gov/arcgis/rest/service"
+ },
+ {
+  "group": "cold_snow",
+  "key": "snow_clearing",
+  "eff": "Home values: none measured for snow clearing itself. The only related study (Dayton, Ohio hedonic regression) found that resident satisfaction with a ",
+  "et": "working_paper",
+  "es": "OK",
+  "cost": "Municipal sidewalk clearing costs $1,400 to $4,000 per mile of sidewalk per season (SMTC memo for the City of ",
+  "cs": "OK",
+  "td": "NOAA NCEI U.S. Climate Normals 1991-2020, Annual/Seasonal (gov.noaa.ncdc:C01619, doi:10.25921/4ek7-fk11; publi"
+ },
+ {
+  "group": "cold_snow",
+  "key": "heated_shelter",
+  "eff": "Home values: none measured.\n\nRidership (Salt Lake City, UTA stop-level data): extreme cold, extreme heat and heavy rain reduce ridership, and shelters",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "Heated, lit BRT-station shelters: not to exceed $2,060,000 for 67 shelters, about $30,700 each (my arithmetic)",
+  "cs": "FAIL:Quote should mark the omission: \"That the Council authorize the Regional Administrator to ",
+  "td": "GTFS schedules for U.S. agencies listed in the Mobility Database Catalogs (MobilityData):\n- Catalog CSV: https"
+ },
+ {
+  "group": "cold_snow",
+  "key": "ice_rink",
+  "eff": "None measured, for home values, health or use.\n\nThere is feasibility evidence only. The Minneapolis Park Board needs at least ten consecutive days bel",
+  "et": "none_found",
+  "es": "OK",
+  "cost": "Dasher boards for a 120 x 80 ft outdoor rink cost $29,083.25 including shipping and supervised installation (L",
+  "cs": "OK",
+  "td": "OpenStreetMap leisure=ice_rink features (planet or Geofabrik extracts; updated continuously).\n- License (https"
+ },
+ {
+  "group": "cold_snow",
+  "key": "weatherization",
+  "eff": "Energy: in a randomized encouragement trial with about 30,000 eligible Michigan households, WAP cut monthly energy use by 10-20%, but upfront costs we",
+  "et": "working_paper",
+  "es": "OK",
+  "cost": "DOE's program-year 2026 limit on the average cost per weatherized home is $8,813, covering labor, materials an",
+  "cs": "OK",
+  "td": "NOAA NCEI Annual/Seasonal Normals 1991-2020 (gov.noaa.ncdc:C01619, doi:10.25921/4ek7-fk11), field ANN-HTDD-NOR"
+ },
+ {
+  "group": "wildfire_heat_drought",
+  "key": "wildfire_hardening",
+  "eff": "Home values (California, sales 2013\u20132020, event-study difference-in-differences on home vintages): homes built after California's wildfire building co",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "$52,408 average per completed home/site (construction $41,231 + defensible space $11,177). Source: California ",
+  "cs": "OK",
+  "td": "USDA Forest Service, Wildfire Hazard Potential for the United States (270-m), version 2023, 4th ed. (Dillon 20"
+ },
+ {
+  "group": "wildfire_heat_drought",
+  "key": "drought_landscaping",
+  "eff": "Home values (Las Vegas valley, SNWA lawn-to-desert 'Cash-for-Grass' rebate participants, event studies and panel fixed effects): the average conversio",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "$2.00 per sq ft of lawn replaced, up to 5,000 sq ft per year (Metropolitan Water District of Southern Californ",
+  "cs": "OK",
+  "td": "Drought: U.S. Drought Monitor county statistics, weekly maps since 2000, % of area in D0\u2013D4 (cumulative or cat"
+ },
+ {
+  "group": "wildfire_heat_drought",
+  "key": "water_recycling",
+  "eff": "Home values: none measured; searches found no U.S. hedonic study of recycled-water or supply-reliability projects. Losses avoided: across 53 Californi",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "Indirect potable reuse in California, levelized, 2015 dollars: large projects (>12 million m3/yr) cost $0.91\u2013$",
+  "cs": "FAIL:The paper continues right after the quoted sentences: 'If the water is used to recharge gr",
+  "td": "WRI Aqueduct 4.0 Current and Future Global Maps Data, published 16 Aug 2023 (https://www.wri.org/data/aqueduct"
+ },
+ {
+  "group": "wildfire_heat_drought",
+  "key": "cool_roofs",
+  "eff": "Home values: none measured. No hedonic study of cool (reflective) roofs was found, and a 2010 UC Berkeley literature review found none. Health (modell",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "Rebate of up to $0.60 per sq ft of qualifying cool roof (LADWP Consumer Rebate Program, Los Angeles, 2024 fact",
+  "cs": "OK",
+  "td": "American Forests Tree Equity Score (block groups; per-state CSV zips used by the pipeline at https://tes-app-d"
+ },
+ {
+  "group": "tornado_storm",
+  "key": "storm_shelter",
+  "eff": "Home values: none measured. No study was found on how a community shelter affects nearby home values. The closest housing-market evidence is from Okla",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "One project: $1,657,000 total construction cost for a 10,000 sq ft, FEMA P-361 multi-purpose safe room for 1,5",
+  "cs": "OK",
+  "td": "(1) FEMA National Risk Index, 'National Risk Index Census Tracts' feature service, field TRND_RISKR (Tornado -"
+ },
+ {
+  "group": "tornado_storm",
+  "key": "warning_sirens",
+  "eff": "Home values: none measured; I found no study of sirens and home prices. Safety: CDC ran a case-control study of the 27 April 2011 Alabama tornadoes wi",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "$30,000-$50,000 to install one outdoor warning siren (St. Charles County, Missouri, county page current as of ",
+  "cs": "OK",
+  "td": "(1) OpenStreetMap features tagged emergency=siren. Tag definition: https://wiki.openstreetmap.org/wiki/Tag:eme"
+ },
+ {
+  "group": "tornado_storm",
+  "key": "safe_room_rebate",
+  "eff": "Oklahoma City homes with a tornado shelter sold for 3.5% to 4% more, about $4,200 at the 2005 mean sale price. At the time, shelters cost $2,500-$3,00",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "For a safe room built during construction of a new home: $9,400-$13,100 for 8 x 8 ft and $18,900-$25,500 for 1",
+  "cs": "OK",
+  "td": "(1) FEMA NRI tract field TRND_RISKR, v1.20 (Dec 2025): https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/res"
+ },
+ {
+  "group": "shrinking_city",
+  "key": "land_bank",
+  "eff": "Cuyahoga County (Cleveland), OH, home sales 2009-2013. In the six months before the land bank buys it, each distressed property within 500 ft lowers a",
+  "et": "working_paper",
+  "es": "FAIL:Replace 'home sales 2009-2013' with 'single-family home sales January 2010 - March 2013 (4; Replace 'Cleveland (Cuyahoga Land Bank, sales 2009-2013)' with 'Cleveland (Cuyahoga Land B",
+  "cost": "About $23,600 per property handled, all-in (acquisition, demolition, renovation, new construction and other wo",
+  "cs": "OK",
+  "td": "(1) U.S. Census Bureau, ACS 2020-2024 5-year, table B25004 Vacancy Status (line 008 'Other vacant') and B25001"
+ },
+ {
+  "group": "shrinking_city",
+  "key": "side_lot",
+  "eff": "Home values: no gain measured. For Detroit Land Bank Side Lot sales in 2011-2020, values near the lots were lower before the sale, and the abstract re",
+  "et": "peer_reviewed",
+  "es": "FAIL:Home values: no post-sale gain reported. For Detroit Land Bank Side Lot sales in 2011-2020",
+  "cost": "$100 per lot paid by the adjacent owner (Detroit Land Bank Authority Side Lots, current price in 2026). Relate",
+  "cs": "OK",
+  "td": "(1) 2010 and 2020 Census P.L. 94-171 P1 and H1 by block group, with the 2020-to-2010 block group relationship "
+ },
+ {
+  "group": "shrinking_city",
+  "key": "blight_demolition",
+  "eff": "Cleveland (Cuyahoga Land Bank, sales 2009-2013): demolishing a distressed house cuts its drag on homes within 500 ft from -5.2% to -2.4%, a gain of 2.",
+  "et": "working_paper",
+  "es": "FAIL:Replace 'home sales 2009-2013' with 'single-family home sales January 2010 - March 2013 (4; Replace 'Cleveland (Cuyahoga Land Bank, sales 2009-2013)' with 'Cleveland (Cuyahoga Land B",
+  "cost": "$14,100 to $17,643 per house (Michigan, demolitions funded by the TARP Hardest Hit Fund). The average rose fro",
+  "cs": "OK",
+  "td": "(1) ACS 2020-2024 5-year B25004, B25001 and B25077 by block group (www2.census.gov table-based summary files d"
+ },
+ {
+  "group": "shrinking_city",
+  "key": "urban_farm",
+  "eff": "Home values: none measured for urban farms or planted forests on assembled vacant land; no study was found, and Detroit's Hantz Woodlands is unstudied",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "About $60,000 per acre to set up a commercial urban farm on city-owned vacant land (derived). Strength to Love",
+  "cs": "OK",
+  "td": "(1) 2010 and 2020 Census P.L. 94-171 P1 and H1 by block group, with the relationship file https://www2.census."
+ },
+ {
+  "group": "shrinking_city",
+  "key": "lead_service_line",
+  "eff": "Rhode Island (Providence Water service area): replacing the public-side lead line raised home sale prices 7-8%, about $16,000-$19,000 on the $238,000 ",
+  "et": "working_paper",
+  "es": "OK",
+  "cost": "$6,507 to $8,519 per full service line replacement, the 25th to 75th percentile of project costs in EPA's 7th ",
+  "cs": "OK",
+  "td": "(1) EPA SDWIS Federal Reporting Services, Service Line Inventory https://sdwis.epa.gov/ords/sfdw_pub/r/sfdw/sd"
+ },
+ {
+  "group": "shrinking_city",
+  "key": "home_repair_grant",
+  "eff": "Home values: none measured. Safety (Philadelphia, 2006-2013, 13,632 repaired homes on 6,732 block faces, compared with waitlisted blocks): each additi",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "Up to $20,000 per home: the BSRP grant cap during the 2006-2013 study period, Philadelphia. Covers free electr",
+  "cs": "OK",
+  "td": "(1) HUD CHAS (Comprehensive Housing Affordability Strategy) custom ACS tabulations, 2018-2022, released Dec 23"
+ },
+ {
+  "group": "shrinking_city",
+  "key": "vacant_lot_green",
+  "eff": "Philadelphia LandCare (Pennsylvania Horticultural Society, PHS): homes within 1,000 ft of a greened lot gain about 4%, rising from 4.3% after year 1 t",
+  "et": "working_paper",
+  "es": "OK",
+  "cost": "About $5 per square meter (about $0.46 per sq ft) to clean and green a lot, plus about $0.50 per square meter ",
+  "cs": "FAIL:About $5 per square meter (about $0.46 per sq ft) to clean and green a lot, with maintenan",
+  "td": "(1) ACS 2020-2024 5-year B25004 and B25001 by block group (www2.census.gov summary files dated Jan 2026; API k"
+ },
+ {
+  "group": "rural",
+  "key": "rural_hospital",
+  "eff": "Home values: no price effect measured. Across 100+ rural hospital closures in 2005-2017, county housing markets did not change: HMDA mortgage originat",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "$295,051.54 per month per Rural Emergency Hospital in calendar 2026, paid in 12 monthly installments: about $3",
+  "cs": "OK",
+  "td": "CMS Provider Data Catalog, Hospital General Information (dataset xubh-q36u), https://data.cms.gov/provider-dat"
+ },
+ {
+  "group": "rural",
+  "key": "fire_station",
+  "eff": "Home values: house values fell at least 6.7% in the year after a community voted to cut fire protection funding. The study is a regression discontinui",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "About $1.74 million per fire station project (my division). FEMA's 2009 Recovery Act fire station construction",
+  "cs": "OK",
+  "td": "U.S. Fire Administration National Fire Department Registry, https://apps.usfa.fema.gov/registry/download. Two "
+ },
+ {
+  "group": "rural",
+  "key": "outdoor_access",
+  "eff": "Home values: a review of 20 hedonic studies found that homes near trails typically sold for 3% to 5% more than comparable homes. The rural premium is ",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "Rural trailhead: a $406,822.79 federal Recreational Trails Program (RTP) award for the Town of Haysi, VA River",
+  "cs": "OK",
+  "td": "USGS Protected Areas Database of the United States (PAD-US) 4.1, https://doi.org/10.5066/P96WBCHS. Released Ma"
+ },
+ {
+  "group": "rural",
+  "key": "gravel_road_paving",
+  "eff": "Home values: no U.S. estimate found. In Acayucan, Mexico, first-time paving of residential streets in outlying neighborhoods was assigned at random. W",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "$600,000-$800,000 per mile to grade and pave a road, depending on terrain and the number of drainage structure",
+  "cs": "OK",
+  "td": "OpenStreetMap road network and surface tags (planet file or Geofabrik state extracts), https://www.openstreetm"
+ },
+ {
+  "group": "rural",
+  "key": "water_sewer_extension",
+  "eff": "Home values: no study measures a water or sewer line extension itself. Closest: in Washington County, PA, across the public-water service boundary, gr",
+  "et": "working_paper",
+  "es": "OK",
+  "cost": "Water: $36,467 average long-term cost per connection to tie a domestic-well home into a public water system ('",
+  "cs": "OK",
+  "td": "USGS, Johnson & Belitz (2019), 'Domestic well locations and populations served in the contiguous U.S.: dataset"
+ },
+ {
+  "group": "rural",
+  "key": "broadband_fiber",
+  "eff": "Home values: homes with access to 25 Mbps broadband sold for about $5,977 (3%) more than similar homes in neighborhoods with 1 Mbps; the rural premium",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "About $10,744 per location in West Virginia's approved BEAD plan, which is 93.6% fiber-to-the-premises across ",
+  "cs": "OK",
+  "td": "FCC National Broadband Map / Broadband Data Collection, data download at https://broadbandmap.fcc.gov/data-dow"
+ },
+ {
+  "group": "rural",
+  "key": "main_street",
+  "eff": "Home values: none measured. Jobs and businesses: pooled across four Midwest states, adopting the Main Street Program had no significant effect on down",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "Program operations: $45,000 to $150,000 a year depending on district size, with Georgia's average at $338,000 ",
+  "cs": "OK",
+  "td": "Census Bureau 2020 urban areas and TIGER/Line places (https://www.census.gov/programs-surveys/geography/guidan"
+ },
+ {
+  "group": "rural",
+  "key": "rural_grocery",
+  "eff": "Home values: no rural grocery-closure study found. Closest: using over one million sales near 159 Walmarts that opened in 2000-2006, prices of nearby ",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "Opening or renovating a store: about $2.4 million of state grant per store under the Illinois Grocery Initiati",
+  "cs": "OK",
+  "td": "USDA ERS Food Access Research Atlas, https://www.ers.usda.gov/data-products/food-access-research-atlas. Census"
+ },
+ {
+  "group": "suburban",
+  "key": "mall_retrofit",
+  "eff": "+1.43% on average for a home next to a shopping center just after the center is redeveloped. The gain fades quickly with distance and over time. This ",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "Public cost on a 52-acre regional mall site in Alexandria, Virginia (approved July 6, 2021): $86 million in ci",
+  "cs": "OK",
+  "td": "(1) OpenStreetMap, via Geofabrik's state extracts. It is updated all the time. License: 'OpenStreetMap is open"
+ },
+ {
+  "group": "suburban",
+  "key": "cul_de_sac_connector",
+  "eff": "Home values: I found no measurement for adding a path to an existing cul-de-sac. Related home-price evidence points both ways. Portland-area buyers pa",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "Paved multi-use trail: median $261,000 per mile, average $481,140, range $64,710 to $4,288,520 (42 observation",
+  "cs": "OK",
+  "td": "(1) EPA Smart Location Database v3.0 and EPA National Walkability Index, covering every 2019 Census block grou"
+ },
+ {
+  "group": "suburban",
+  "key": "new_sidewalks",
+  "eff": "Home values: small where streets are car-dependent. Austin, Texas, 2010\u20132012 single-family sales, spatial hedonic model: adding sidewalks in car-depen",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "About $750,000 per mile of new sidewalk, including engineering design, survey and construction (City of Tampa,",
+  "cs": "OK",
+  "td": "OpenStreetMap, ODbL 1.0 (https://www.openstreetmap.org/copyright), updated all the time and downloadable as da"
+ },
+ {
+  "group": "stabilize_schools_safety",
+  "key": "home_repair",
+  "eff": "Home values: none measured for owner repair grants as such. Safety: in Philadelphia (Basic Systems Repair Program, 1 Jan 2006 to 30 Apr 2013, 13,632 h",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "Average estimated cost of needed repairs per owner-occupied home that has repair needs, United States, 2024 do",
+  "cs": "OK",
+  "td": "U.S. Census Bureau, American Community Survey 2020-2024 5-year estimates, block group, Census Data API https:/"
+ },
+ {
+  "group": "stabilize_schools_safety",
+  "key": "code_enforcement",
+  "eff": "Proactive rental inspection for lead hazards (Rochester, NY, law adopted 2005, rentals built before 1978): among tested children, the share with eleva",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "The city's added cost was about $600,000 a year (four new inspectors, administration and dust-wipe analysis) f",
+  "cs": "OK",
+  "td": "ACS 2020-2024 5-year estimates (B25003 tenure, B25035 median year built, B25034 year built, B25002 occupancy),"
+ },
+ {
+  "group": "stabilize_schools_safety",
+  "key": "homebuyer_assistance",
+  "eff": "Spillover to neighbors: each housing unit that switches from renting to owning creates about $1,300 in total measured benefits, in the form of higher ",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "Philadelphia's Philly First Home grant: up to $10,000 per first-time buyer, or 6% of the purchase price if low",
+  "cs": "OK",
+  "td": "ACS 2020-2024 5-year estimates B25003, B25077_001E and B19013_001E (confirmed in the 2024 vintage), block grou"
+ },
+ {
+  "group": "stabilize_schools_safety",
+  "key": "targeted_investment",
+  "eff": "Richmond, VA, Neighborhoods in Bloom (from 1999; about 80% of the city's federal housing aid concentrated in 7-to-12 square-block areas): home prices ",
+  "et": "government",
+  "es": "OK",
+  "cost": "About $20,000 of public and nonprofit investment per housing block per year, sustained for five years (about $",
+  "cs": "OK",
+  "td": "ACS 2020-2024 5-year estimates, block group (Census Data API https://api.census.gov/data/2024/acs/acs5; free k"
+ },
+ {
+  "group": "stabilize_schools_safety",
+  "key": "lead_pipes",
+  "eff": "Providence, RI (about 10,000 public-side lead service lines replaced 2007-2010): homes whose public-side line was replaced sold for 7-8% more (about $",
+  "et": "working_paper",
+  "es": "OK",
+  "cost": "U.S. (EPA 7th DWINSA, 2021 dollars, full and partial replacements): $5,328 (25th percentile) to $9,015 (75th p",
+  "cs": "OK",
+  "td": "ACS 2020-2024 5-year estimates B25034 (Year Structure Built), block group, Census Data API https://api.census."
+ },
+ {
+  "group": "stabilize_schools_safety",
+  "key": "tax_relief",
+  "eff": "Relief keeps older owners in place. Using state property-tax relief programs as instruments, a $100 increase in annual property taxes raised the 2-yea",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "Pennsylvania's Property Tax/Rent Rebate program, a statewide circuit breaker: $380 to $1,000 per eligible olde",
+  "cs": "OK",
+  "td": "FHFA annual House Price Index for census tracts (developmental index, not seasonally adjusted), annual through"
+ },
+ {
+  "group": "stabilize_schools_safety",
+  "key": "safe_routes_school",
+  "eff": "New York City Safe Routes to School (improvements at 124 high-injury schools): pedestrian injuries to school-aged children during school-travel hours ",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "$10,298,000 for safety improvements at 124 schools in New York City, about $83,000 per school (derived), funde",
+  "cs": "FAIL:Not independently verifiable: the PMC page served a reCAPTCHA, efetch returns only the fro",
+  "td": "NCES EDGE public school geocodes, 2024-25 (https://nces.ed.gov/programs/edge/Geographic/SchoolLocations, file "
+ },
+ {
+  "group": "stabilize_schools_safety",
+  "key": "childcare",
+  "eff": "Home values: none measured. Parents' work: when public kindergarten (an implicit child care subsidy) became available, four in ten single mothers with",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "Operating-cost proxy: in FY 2019 the federal CCDF subsidy paid to child care centers averaged $506 per child p",
+  "cs": "OK",
+  "td": "ACS 2020-2024 5-year estimates B01001 (Sex by Age; under-5 counts confirmed), block group, Census Data API htt"
+ },
+ {
+  "group": "stabilize_schools_safety",
+  "key": "shared_schoolyard",
+  "eff": "New Orleans pilot (April 2003 to May 2005): opening one locked elementary schoolyard after school and on Saturdays, with paid attendants, drew a mean ",
+  "et": "peer_reviewed",
+  "es": "FAIL:Not independently verifiable: reCAPTCHA on PMC, efetch abstract only, AJPH 403, and the re",
+  "cost": "$49,000 a year for attendant and custodian salaries, plus $550 a year for added liability insurance, for one s",
+  "cs": "FAIL:Not independently verifiable: reCAPTCHA on PMC, efetch abstract only, AJPH 403, and the re",
+  "td": "NCES EDGE public school geocodes, 2024-25 (https://nces.ed.gov/programs/edge/Geographic/SchoolLocations, EDGE_"
+ },
+ {
+  "group": "stabilize_schools_safety",
+  "key": "cpted",
+  "eff": "New York City public housing, randomized trial (temporary street lights allocated to 40 developments, March-August 2016): after accounting for spatial",
+  "et": "working_paper",
+  "es": "OK",
+  "cost": "Permanent lighting upgrade for a whole public housing development of about 700,000 sq ft: $3-4 million up fron",
+  "cs": "OK",
+  "td": "FBI Crime Data Explorer API (https://api.usa.gov/crime/fbi/cde/; needs a free api.data.gov key, and DEMO_KEY w"
+ },
+ {
+  "group": "stabilize_schools_safety",
+  "key": "school_facilities",
+  "eff": "In a poor urban district (the IDEAS abstract does not name it), school construction raised home prices in affected neighborhoods by about 10%, and rea",
+  "et": "peer_reviewed",
+  "es": "OK",
+  "cost": "About $4.5 million per school: the average need among the 53% of U.S. public schools that needed repairs, reno",
+  "cs": "OK",
+  "td": "NCES School Attendance Boundary Survey (SABS), 2013-14 and 2015-16 boundaries for more than 70,000 schools, ex"
+ }
+]

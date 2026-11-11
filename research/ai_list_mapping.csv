@@ -1,0 +1,515 @@
+source,item,decision,type_key,trigger,reason
+DeepSeek,Fix-It First (code enforcement paired with rapid-repair grants or zero-interest loans),new_type,home_repair,"Pre-1960 homes, mostly owners, lower income",Enforcement backed by repair grants is a home-repair program.
+DeepSeek,"prioritize urgent repairs (roofs, porches, electrical, accessibility)",new_type,home_repair,"Pre-1960 homes, mostly owners, lower income",What home-repair grants pay for.
+DeepSeek,"""House Lift"" local repair crew",new_type,home_repair,"Pre-1960 homes, mostly owners, lower income",A way to deliver home_repair.
+DeepSeek,vetted contractor roster,not_modelled,,,Admin part of home_repair (duplicate).
+DeepSeek,pause fines for good-faith progress (10-15 days to opt into repair programs),new_type,code_enforcement,Older rentals or high long-term vacancy,A rule within fair code enforcement.
+DeepSeek,target absentee landlords / nuisance properties,new_type,code_enforcement,Older rentals or high long-term vacancy,Enforcement on neglected rentals.
+DeepSeek,spot acquisition of severe nuisance properties,new_type,land_bank,"Population fell 2010-2020, high vacancy",Land-bank work.
+DeepSeek,accelerate tax-delinquent property acquisition,new_type,land_bank,"Population fell 2010-2020, high vacancy",Land-bank work.
+DeepSeek,prioritize repairs over demolitions (track repair vs demolition permits),not_modelled,,,"A preference between blight_rehab and blight_demolition, not a project."
+DeepSeek,turn renters into owners,new_type,homebuyer_assistance,"Over 60% renters, homes within reach",Down-payment help lets renters buy where they live.
+DeepSeek,"bundle block-level fixes (punch list: sidewalks, curbs, lighting in one season)",new_type,targeted_investment,"Below-median values, low vacancy, near an anchor",Concentrating fixes on a few blocks is targeted investment.
+DeepSeek,replace sidewalks and curbs,existing_type,sidewalks,,Same as the catalog's sidewalk repair.
+DeepSeek,upgrade water/sewer service lines,new_type,lead_pipes,Most homes built before 1986,Public service-line programs replace lead lines.
+DeepSeek,weatherize homes,new_type,weatherization,"Cold climate, pre-1980 homes, lower income",Same program.
+DeepSeek,home-maintenance checklists,not_modelled,,,A handout with no measurable effect.
+DeepSeek,clean up alleys,existing_type,litter,,Alley trash and dumping cleanup is the litter type's work.
+DeepSeek,fix porch lights and rails,owner_level,,,A single-home fix (a home-repair program can pay for it).
+DeepSeek,street trees,existing_type,street_trees,,Same project.
+DeepSeek,water features or beaches,new_type,waterfront_access,"Water within 1 km, no public access",Beaches and water access where water is near.
+DeepSeek,playgrounds,existing_type,park_upgrade,,Part of the park renovation.
+DeepSeek,green vacant lots,existing_type,vacant_lot_green,,Same project.
+DeepSeek,keep vacant lots clean,existing_type,vacant_lot_green,,Clean-and-green includes regular lot upkeep.
+DeepSeek,community gardens,existing_type,community_garden,,Same project.
+DeepSeek,park maintenance,existing_type,park_upgrade,,Upkeep sustains the quality park_upgrade measures.
+DeepSeek,"park safety (lighting, design)",new_type,cpted,Violent crime 2x the county median,Park lighting and design fixes are CPTED work.
+DeepSeek,"passive (natural, medium-sized) parks",new_type,nature_park,"No park within 800 m, 5+ acres of open land",Larger than a pocket park; needs open land.
+DeepSeek,bike trails in parks,existing_type,park_upgrade,,Paths in an existing park are part of the park renovation.
+DeepSeek,park shelters,new_type,seating_shade,"Hot or busy walking area, few benches or shade",Picnic shelters are shade structures.
+DeepSeek,tree-planting program,existing_type,street_trees,,Same project.
+DeepSeek,landscaping on commercial corridors,new_type,streetscape,"Shopping strip on an arterial, low canopy",Corridor landscaping is the core of a streetscape project.
+DeepSeek,(home-level) repaint/replace worn carpet,owner_level,,,Interior refresh of one home.
+DeepSeek,"new steel entry door (""can return over 200% of its cost at resale"")",owner_level,,,A single-home remodel; the claim is unsourced.
+DeepSeek,"garage door replacement (""often the single highest-ROI project"")",owner_level,,,A single-home remodel; the claim is unsourced.
+DeepSeek,manufactured stone veneer,owner_level,,,A single-home remodel.
+DeepSeek,yard clean-up,owner_level,,,Upkeep of one lot.
+DeepSeek,avoid half-finished projects,not_modelled,,,"Advice to owners, not a project."
+DeepSeek,skip luxury pools,not_modelled,,,"Advice on a single-home choice, not a project."
+DeepSeek,avoid excessive landscaping,not_modelled,,,"Advice to owners, not a project."
+DeepSeek,"sidewalks present and repaired (""89% of buyers say sidewalks are important"")",existing_type,sidewalks,,Repair; missing ones are new_sidewalks.
+DeepSeek,safe pedestrian crossings,existing_type,crosswalks,,Same project.
+DeepSeek,street lighting (walkability),existing_type,street_lighting,,Same project.
+DeepSeek,mixed-use development,new_type,mixed_use_zoning,Retail-only zoning next to homes or transit,Allowing homes above shops on commercial streets.
+DeepSeek,street connectivity,new_type,cul_de_sac_connector,"Many dead ends, few intersections",Paths between dead ends.
+DeepSeek,benches (walkability),new_type,seating_shade,"Hot or busy walking area, few benches or shade",Benches are street and park furniture.
+DeepSeek,bike racks,new_type,bike_parking,"Station or shopping strip, no bike parking",Bike racks at shops and stations.
+DeepSeek,wayfinding,existing_type,wayfinding,,Same project.
+DeepSeek,residential traffic calming,existing_type,traffic_calming,,Same project.
+DeepSeek,transit connection,new_type,mobility_hub,"Rail station or 12+ buses an hour, dense",Transit links gathered at a hub.
+DeepSeek,shade trees along sidewalks,existing_type,street_trees,,Same project.
+DeepSeek,remote-work-friendly amenities,new_type,coworking,"Over 15% work from home, no coworking nearby",The public piece of remote-work amenities.
+DeepSeek,support public schools,existing_type,school_bond,,School investment is the bond-funded modernization type.
+DeepSeek,high-performing charter school,not_modelled,,,"Charter seats go by citywide lottery, so living nearby gives no access."
+DeepSeek,school facilities (renovate abandoned school building),new_type,adaptive_reuse,"Vacant commercial, industrial or school buildings",A closed school reused; reopened as a school it is new_school.
+DeepSeek,school choice (caution),not_modelled,,,A district or state policy with no block-group trigger.
+DeepSeek,after-school programs,quality_of_life_only,,,A family service; no measured value effect.
+DeepSeek,safe routes to school,new_type,safe_routes_school,"School within 800 m, ped/bike crashes nearby","Crossings, sidewalks and calming near a school."
+DeepSeek,parent engagement,not_modelled,,,A school program with no block-group effect.
+DeepSeek,market school quality,not_modelled,,,"Marketing, not a project."
+DeepSeek,early childhood centers,new_type,childcare,Over 3 young children per licensed slot,A childcare or pre-K center where slots are scarce.
+DeepSeek,school-community events,quality_of_life_only,,,Events; no measured value effect.
+DeepSeek,street lighting (crime and safety),existing_type,street_lighting,,Same project.
+DeepSeek,block watch,quality_of_life_only,,,Resident-run watch; no measured value effect.
+DeepSeek,clean vacant lots,existing_type,vacant_lot_green,,Same project.
+DeepSeek,nuisance properties,new_type,code_enforcement,Older rentals or high long-term vacancy,Enforcement on nuisance properties.
+DeepSeek,community policing,existing_type,foot_patrol,,Foot patrols are the catalog's community-policing type.
+DeepSeek,cameras in common areas,existing_type,cameras,,Same project.
+DeepSeek,youth programs,quality_of_life_only,,,A youth service; no measured value effect.
+DeepSeek,CPTED design,new_type,cpted,Violent crime 2x the county median,Same project.
+DeepSeek,clean and light alleys,existing_type,alley_gating,,"Gate, pave and light problem alleys."
+DeepSeek,eyes on the street,new_type,cpted,Violent crime 2x the county median,A CPTED principle.
+DeepSeek,secure or redevelop abandoned buildings,existing_type,blight_rehab,,Rehab or replace blighted homes.
+DeepSeek,neighborhood emergency plan,not_modelled,,,"A plan, not a project; no measurable effect."
+DeepSeek,neighborhood association,not_modelled,,,"Civic organizing, not a project."
+DeepSeek,block parties,quality_of_life_only,,,Events; no measured value effect.
+DeepSeek,newsletter / social media group,not_modelled,,,"Communication, not a project."
+DeepSeek,public art,existing_type,murals,,Public art is the murals type.
+DeepSeek,benches (community),new_type,seating_shade,"Hot or busy walking area, few benches or shade",Same as the walkability item.
+DeepSeek,community kiosk,existing_type,wayfinding,,The wayfinding type includes kiosks.
+DeepSeek,farmers markets,existing_type,farmers_market,,Same project.
+DeepSeek,local history,existing_type,wayfinding,,History and landmark signs are part of wayfinding.
+DeepSeek,welcome new neighbors,quality_of_life_only,,,A neighborly practice; no measurable value effect.
+DeepSeek,tool library,quality_of_life_only,,,A shared-tool service; no measurable value effect.
+DeepSeek,local businesses,existing_type,main_street,,Small-business help on the main street.
+DeepSeek,Main Street program,existing_type,main_street,,Same project.
+DeepSeek,diverse housing types,new_type,missing_middle_zoning,Single-family zoning on high-value land,Allowing duplexes to fourplexes and smaller lots.
+DeepSeek,homeownership,new_type,homebuyer_assistance,"Over 60% renters, homes within reach",Same as turning renters into owners.
+DeepSeek,scattered subsidized housing,existing_type,affordable_housing,,Small affordable buildings on scattered sites.
+DeepSeek,New Urbanist design,not_modelled,,,"A design approach for new subdivisions, not existing blocks."
+DeepSeek,small infill homes on vacant lots,new_type,infill_homes,Vacant lots or large parking lots,Same project.
+DeepSeek,minimum lot size reform,new_type,missing_middle_zoning,Single-family zoning on high-value land,The same zoning change.
+DeepSeek,streamline permits,not_modelled,,,Citywide process; no block-group trigger.
+DeepSeek,Target Investment Neighborhood (TIN) strategy (Milwaukee),new_type,targeted_investment,"Below-median values, low vacancy, near an anchor",TIN concentrates help on a few blocks.
+DeepSeek,tax increment financing,not_modelled,,,"A way to pay for projects, not a project."
+DeepSeek,business improvement districts,existing_type,bid,,Same project.
+DeepSeek,coordinate departments,not_modelled,,,"Administration, not a project."
+DeepSeek,neighborhood master plan,not_modelled,,,"A plan, not a project."
+DeepSeek,protect historic assets,new_type,historic_district,"Built before 1940, not designated",Designation and rehab incentives for historic buildings.
+DeepSeek,"fair, helpful code enforcement",new_type,code_enforcement,Older rentals or high long-term vacancy,Same project.
+DeepSeek,monitor green gentrification,not_modelled,,,"Monitoring, not a project; displacement risk is shown per type."
+DeepSeek,maintain water/sewer/roads,new_type,water_sewer_mains,Median year built before 1960,Pipe renewal; the road part is street_repaving.
+DeepSeek,home-based businesses,not_modelled,,,A citywide zoning allowance; no block-group trigger.
+DeepSeek,neighborhood brand,existing_type,wayfinding,,A brand shows as gateway signs.
+DeepSeek,"track data (code cases, permits, sales, satisfaction)",not_modelled,,,"Data tracking, not a project."
+DeepSeek,communicate wins,not_modelled,,,"Communication, not a project."
+DeepSeek,phase improvements citywide,not_modelled,,,"A rollout plan, not a project."
+DeepSeek,property-tax relief for long-term owners,new_type,tax_relief,"Values up 30%+ in 5 years, long-time owners",Keeps long-time owners in place as values rise.
+DeepSeek,community land trusts,existing_type,clt,,Same project.
+Kimi,neighborhood park,existing_type,pocket_park,,A new park where none is near.
+Kimi,modern playgrounds,existing_type,park_upgrade,,Same as the park renovation.
+Kimi,street trees,existing_type,street_trees,,Same project.
+Kimi,community gardens,existing_type,community_garden,,Same project.
+Kimi,walking and biking trails,existing_type,corridor_trail,,"A trail on a power-line, rail or creek corridor."
+Kimi,pocket parks on vacant lots,existing_type,pocket_park,,Same project.
+Kimi,rain gardens,existing_type,green_street,,Rain-garden curb extensions.
+Kimi,creek restoration,new_type,creek_restoration,Buried or lined stream within 400 m,Restore or daylight a buried or lined stream.
+Kimi,dog parks,existing_type,dog_park,,Same project.
+Kimi,benches and shade structures,new_type,seating_shade,"Hot or busy walking area, few benches or shade",Same project.
+Kimi,street lighting,existing_type,street_lighting,,Same project.
+Kimi,neighborhood watch,quality_of_life_only,,,Resident-run watch; no measured value effect.
+Kimi,responsive policing,existing_type,foot_patrol,,Hot-spot foot patrols are the catalog's policing type.
+Kimi,speed cameras / traffic calming,existing_type,speed_cameras,,Speed cameras; physical calming is traffic_calming.
+Kimi,crosswalks and pedestrian signals,existing_type,crosswalks,,Crossings; signal changes are ped_signals.
+Kimi,clear overgrown lots,existing_type,vacant_lot_green,,Clean-and-green of vacant lots.
+Kimi,911 response advocacy,not_modelled,,,"Advocacy, not a project; station coverage is fire_station."
+Kimi,emergency call boxes in parks,quality_of_life_only,,,Small safety equipment; no measured value effect.
+Kimi,safety meetings,not_modelled,,,"Meetings, not a project."
+Kimi,vacant and abandoned properties,existing_type,blight_rehab,,Rehab or replace blighted homes.
+Kimi,reliable transit,existing_type,transit_priority,,Signal priority and bus bulbs make buses more reliable.
+Kimi,bike lanes,existing_type,protected_bike,,Same project.
+Kimi,road resurfacing and potholes,new_type,street_repaving,Poor pavement or many freeze-thaw days,Repaving streets in poor condition.
+Kimi,bike racks,new_type,bike_parking,"Station or shopping strip, no bike parking",Same project.
+Kimi,bus shelters,existing_type,bus_shelters,,Same project.
+Kimi,rideshare/transit connection points,new_type,mobility_hub,"Rail station or 12+ buses an hour, dense",Pick-up points at a transit hub.
+Kimi,wider sidewalks,new_type,streetscape,"Shopping strip on an arterial, low canopy",Part of a corridor streetscape.
+Kimi,pedestrian zones,existing_type,plaza,,A block closed to cars.
+Kimi,carpool programs,not_modelled,,,A commuter program with no block-group effect.
+Kimi,signal timing,quality_of_life_only,,,Smoother traffic; no measured value effect.
+Kimi,grocery store,existing_type,grocery,,Same project.
+Kimi,small-business grants,existing_type,main_street,,Same project.
+Kimi,farmers markets,existing_type,farmers_market,,Same project.
+Kimi,pop-up shops in vacant storefronts,new_type,storefront_activation,Over 10% vacant storefronts,Same project.
+Kimi,BID,existing_type,bid,,Same project.
+Kimi,coffee shop,existing_type,corner_store,,Cafés in residential areas.
+Kimi,outdoor dining permits,existing_type,outdoor_dining,,Same project.
+Kimi,business directory,not_modelled,,,"Marketing, not a project."
+Kimi,small-business workshops,existing_type,main_street,,Small-business help is part of main_street.
+Kimi,less permitting red tape,not_modelled,,,Citywide process; no block-group trigger.
+Kimi,renovate aging housing,new_type,home_repair,"Pre-1960 homes, mostly owners, lower income",Repairs to older homes.
+Kimi,energy-efficiency programs,new_type,weatherization,"Cold climate, pre-1980 homes, lower income",Same project.
+Kimi,affordable housing,existing_type,affordable_housing,,Same project.
+Kimi,rental standards enforcement,new_type,code_enforcement,Older rentals or high long-term vacancy,Proactive rental inspection.
+Kimi,historic preservation incentives,new_type,historic_district,"Built before 1940, not designated",Same project.
+Kimi,commercial-to-residential conversion,new_type,adaptive_reuse,"Vacant commercial, industrial or school buildings",Same project.
+Kimi,down-payment assistance,new_type,homebuyer_assistance,"Over 60% renters, homes within reach",Same project.
+Kimi,home improvement loans/grants,new_type,home_repair,"Pre-1960 homes, mostly owners, lower income",Same project.
+Kimi,prompt code enforcement,new_type,code_enforcement,Older rentals or high long-term vacancy,Same project.
+Kimi,ADUs,existing_type,adu,,Same project (owner-level type).
+Kimi,school partnerships,not_modelled,,,"School administration, not a project."
+Kimi,after-school tutoring,quality_of_life_only,,,A student service; no measured value effect.
+Kimi,shared-use school playgrounds,new_type,shared_schoolyard,"No park within 800 m, school within 400 m",Open schoolyards after hours.
+Kimi,school fundraising,not_modelled,,,"Fundraising, not a project."
+Kimi,scholarships,not_modelled,,,"Aid to people, not to a place."
+Kimi,adult education,not_modelled,,,"Helps participants, not homes."
+Kimi,childcare centers,new_type,childcare,Over 3 young children per licensed slot,Same project.
+Kimi,school-community gardens,existing_type,community_garden,,A community garden at a school.
+Kimi,libraries / reading rooms,existing_type,library,,Same project.
+Kimi,STEM and arts programs,quality_of_life_only,,,Youth programs; no measured home-value effect.
+Kimi,block parties,quality_of_life_only,,,Events; no measured value effect.
+Kimi,neighborhood association,not_modelled,,,"Civic organizing, not a project."
+Kimi,festivals,quality_of_life_only,,,Events; no measured value effect.
+Kimi,newsletter,not_modelled,,,"Communication, not a project."
+Kimi,tool library,quality_of_life_only,,,A shared-tool service; no measured value effect.
+Kimi,cleanup days,quality_of_life_only,,,A volunteer event; the city service is litter.
+Kimi,community center,existing_type,rec_center,,Recreation and community center.
+Kimi,mutual aid,not_modelled,,,"A social network, not a public project."
+Kimi,garage sales,not_modelled,,,"A private sale, not a public improvement."
+Kimi,social media group,not_modelled,,,"Communication, not a project."
+Kimi,murals,existing_type,murals,,Same project.
+Kimi,historical markers,existing_type,wayfinding,,Landmark and history signs.
+Kimi,outdoor concerts,quality_of_life_only,,,Events; no measured value effect.
+Kimi,arts council,not_modelled,,,"An organization, not a project."
+Kimi,community theater,new_type,arts_center,"Dense, no arts venue within 2 km",A community arts venue.
+Kimi,decorative streetscape,new_type,streetscape,"Shopping strip on an arterial, low canopy",Same project.
+Kimi,art walks,quality_of_life_only,,,Events; no measured value effect.
+Kimi,historic architecture,new_type,historic_district,"Built before 1940, not designated",Protect historic buildings by designation.
+Kimi,cultural festivals,quality_of_life_only,,,Events; no measured value effect.
+Kimi,entrance signs,existing_type,wayfinding,,Gateway signs.
+Kimi,water and sewer upgrades,new_type,water_sewer_mains,Median year built before 1960,Same project.
+Kimi,bury or tidy power lines,existing_type,undergrounding,,Same project.
+Kimi,broadband,existing_type,fiber_5g,,Same project.
+Kimi,drainage and flood prevention,new_type,flood_drainage,FEMA flood zone or many flood claims,Drainage on flood-prone streets.
+Kimi,EV charging,existing_type,ev_hub,,Same project.
+Kimi,public Wi-Fi,quality_of_life_only,,,Free Wi-Fi; no measured value effect.
+Kimi,trash and recycling service,quality_of_life_only,,,A basic city service; no measured value effect.
+Kimi,wayfinding,existing_type,wayfinding,,Same project.
+Kimi,climate-resilience retrofits,existing_type,microgrid,,Resilience hub; home retrofits follow the local hazard's type.
+Kimi,green roofs / permeable pavement,existing_type,green_alley,,Permeable paving is green_alley; green roofs are cool_roofs.
+Kimi,walking groups,quality_of_life_only,,,An activity; no measured value effect.
+Kimi,outdoor fitness equipment,new_type,outdoor_fitness,Park nearby without fitness equipment,Same project.
+Kimi,health screenings,not_modelled,,,A personal health service; no block-group effect.
+Kimi,mental health resources,existing_type,clinic,,Community clinics house these services.
+Kimi,safe routes to school,new_type,safe_routes_school,"School within 800 m, ped/bike crashes nearby",Same project.
+Kimi,drinking fountains,existing_type,restroom,,Park restroom and drinking fountains.
+Kimi,sports leagues,quality_of_life_only,,,An activity; no measured value effect.
+Kimi,bike share,existing_type,bike_share,,Same project.
+Kimi,healthy food access,existing_type,grocery,,A full grocery store.
+Kimi,urgent care / clinics,existing_type,clinic,,Same project.
+Kimi,council meetings,not_modelled,,,"Civic process, not a project."
+Kimi,neighborhood strategic plan,not_modelled,,,"A plan, not a project."
+Kimi,zoning participation,not_modelled,,,"Civic process, not a project."
+Kimi,relationships with officials,not_modelled,,,"Civic process, not a project."
+Kimi,government grants,not_modelled,,,"A funding source, not a project."
+Kimi,annual neighborhood report,not_modelled,,,"A report, not a project."
+Kimi,boards and commissions,not_modelled,,,"Civic process, not a project."
+Kimi,coordinate with nearby neighborhoods,not_modelled,,,"Civic process, not a project."
+Kimi,community organizer,not_modelled,,,"A staff role, not a project."
+Kimi,document wins,not_modelled,,,"Communication, not a project."
+ChatGPT,#1 large-canopy street trees,existing_type,street_trees,,Same project.
+ChatGPT,#2 fill tree gaps,existing_type,street_trees,,Same project.
+ChatGPT,#3 continuous shaded walking routes,existing_type,street_trees,,Shade along walking routes comes from street trees.
+ChatGPT,#4 replace unnecessary pavement with landscaping,existing_type,green_street,,Depaving into rain-garden curb extensions.
+ChatGPT,#5 landscaped medians,new_type,streetscape,"Shopping strip on an arterial, low canopy",Median landscaping on a corridor.
+ChatGPT,#6 pocket parks,existing_type,pocket_park,,Same project.
+ChatGPT,#7 drought-tolerant native gardens,new_type,drought_landscaping,"Arid or often in drought, mostly lawns",Same project.
+ChatGPT,#8 restore urban streams,new_type,creek_restoration,Buried or lined stream within 400 m,Same project.
+ChatGPT,#9 community gardens,existing_type,community_garden,,Same project.
+ChatGPT,#10 green walls,quality_of_life_only,,,A building feature; no measured value effect.
+ChatGPT,#11 renovate parks,existing_type,park_upgrade,,Same project.
+ChatGPT,#12 playgrounds,existing_type,park_upgrade,,Part of the park renovation.
+ChatGPT,#13 outdoor fitness equipment,new_type,outdoor_fitness,Park nearby without fitness equipment,Same project.
+ChatGPT,#14 sports courts,existing_type,basketball,,Courts; tennis and pickleball are separate.
+ChatGPT,#15 dog parks,existing_type,dog_park,,Same project.
+ChatGPT,#16 walking/jogging loops,existing_type,park_upgrade,,New paths in the park.
+ChatGPT,#17 shaded seating and picnic areas,new_type,seating_shade,"Hot or busy walking area, few benches or shade",Same project.
+ChatGPT,#18 pools or splash pads,existing_type,pool,,Public pool; splash pads are splash_pad.
+ChatGPT,#19 skate parks and pump tracks,existing_type,skate_park,,Same project.
+ChatGPT,#20 vacant lots to open space,existing_type,vacant_lot_green,,Same project.
+ChatGPT,#21 repair sidewalks,existing_type,sidewalks,,Same project.
+ChatGPT,#22 build missing sidewalks,new_type,new_sidewalks,"No sidewalk near schools, transit or shops",Same project.
+ChatGPT,#23 widen commercial sidewalks,new_type,streetscape,"Shopping strip on an arterial, low canopy",Part of a corridor streetscape.
+ChatGPT,#24 high-visibility crosswalks,existing_type,crosswalks,,Same project.
+ChatGPT,#25 refuge islands,existing_type,crosswalks,,The crossing type includes refuges.
+ChatGPT,#26 curb extensions,existing_type,crosswalks,,Bulb-outs.
+ChatGPT,#27 shorter crossings,existing_type,crosswalks,,Bulb-outs and refuges shorten crossings.
+ChatGPT,#28 longer crossing time,existing_type,ped_signals,,Signal retiming.
+ChatGPT,#29 pedestrian plazas,existing_type,plaza,,Same project.
+ChatGPT,#30 ADA curb ramps,existing_type,crosswalks,,The crossing type includes ramps.
+ChatGPT,#31 speed humps,existing_type,traffic_calming,,Same project.
+ChatGPT,#32 raised crossings,existing_type,crosswalks,,Same project.
+ChatGPT,#33 traffic-calming zones,existing_type,traffic_calming,,Same project.
+ChatGPT,#34 redesign dangerous intersections,existing_type,crosswalks,,Intersection safety fixes; a full rebuild can be roundabout.
+ChatGPT,#35 protected left turns,existing_type,ped_signals,,A signal-phase change.
+ChatGPT,#36 roundabouts,existing_type,roundabout,,Same project.
+ChatGPT,#37 reduce cut-through traffic,existing_type,traffic_calming,,The calming type targets cut-through streets.
+ChatGPT,#38 noise barriers,existing_type,noise_wall,,Same project.
+ChatGPT,#39 low-noise pavement,new_type,quiet_pavement,Homes within 150 m of a freeway or busy road,Same project.
+ChatGPT,#40 speeding enforcement,existing_type,speed_cameras,,Same project.
+ChatGPT,#41 protected bike lanes,existing_type,protected_bike,,Same project.
+ChatGPT,#42 connected bikeway network,existing_type,protected_bike,,Gaps in the network filled with protected lanes.
+ChatGPT,#43 secure bike parking,new_type,bike_parking,"Station or shopping strip, no bike parking",Same project.
+ChatGPT,#44 neighborhood greenways,existing_type,slow_streets,,Bike boulevards.
+ChatGPT,#45 bike share,existing_type,bike_share,,Same project.
+ChatGPT,#46 safe bike crossings,existing_type,crosswalks,,Same project.
+ChatGPT,#47 e-bike charging and storage,new_type,bike_parking,"Station or shopping strip, no bike parking",Secure e-bike parking with charging.
+ChatGPT,#48 off-street multiuse paths,existing_type,corridor_trail,,Same project.
+ChatGPT,#49 bike routes to schools,new_type,safe_routes_school,"School within 800 m, ped/bike crashes nearby",Same project.
+ChatGPT,#50 bike routes to transit,existing_type,protected_bike,,Same project.
+ChatGPT,#51 bus frequency,new_type,bus_frequency,"Dense, car-free homes, under 4 buses an hour",Same project.
+ChatGPT,#52 reliability,existing_type,transit_priority,,Same project.
+ChatGPT,#53 sheltered stops,existing_type,bus_shelters,,Same project.
+ChatGPT,#54 real-time displays,existing_type,bus_shelters,,Real-time signs go on the busy-stop shelters.
+ChatGPT,#55 bus lanes,existing_type,bus_lane,,Same project.
+ChatGPT,#56 signal priority,existing_type,transit_priority,,Same project.
+ChatGPT,#57 access to stations,new_type,mobility_hub,"Rail station or 12+ buses an hour, dense","First and last links to a station, gathered at a hub."
+ChatGPT,#58 paratransit,not_modelled,,,A rider service required everywhere; no block-group effect.
+ChatGPT,#59 first/last mile,existing_type,microtransit,,A neighborhood shuttle to transit.
+ChatGPT,#60 transit-oriented mixed use,existing_type,upzone_transit,,Same project.
+ChatGPT,#61 lighting at conflict points,existing_type,street_lighting,,Same project.
+ChatGPT,#62 repair abandoned buildings,existing_type,blight_rehab,,Same project.
+ChatGPT,#63 activate vacant storefronts,new_type,storefront_activation,Over 10% vacant storefronts,Same project.
+ChatGPT,#64 sightlines,new_type,cpted,Violent crime 2x the county median,Same project.
+ChatGPT,#65 community violence prevention,existing_type,violence_interruption,,Same project.
+ChatGPT,#66 neighborhood watch,quality_of_life_only,,,Resident-run watch; no measured value effect.
+ChatGPT,#67 emergency response access,new_type,fire_station,Over 5 road miles from a fire station,Response time depends on how far the station is.
+ChatGPT,#68 safe routes to school,new_type,safe_routes_school,"School within 800 m, ped/bike crashes nearby",Same project.
+ChatGPT,#69 hazardous vacant properties,existing_type,blight_rehab,,Rehab or replace; demolition alone is blight_demolition.
+ChatGPT,#70 privacy-conscious security design,new_type,cpted,Violent crime 2x the county median,Same project.
+ChatGPT,#71 exterior renovation,new_type,home_repair,"Pre-1960 homes, mostly owners, lower income",As a city program; for one owner it is owner-level.
+ChatGPT,#72 energy efficiency,new_type,weatherization,"Cold climate, pre-1980 homes, lower income",Same project.
+ChatGPT,#73 rooftop solar,existing_type,solar,,Same project.
+ChatGPT,#74 insulation and soundproofing,new_type,weatherization,"Cold climate, pre-1980 homes, lower income",Insulation; noise-zone soundproofing is a variant.
+ChatGPT,#75 ADUs,existing_type,adu,,Same project.
+ChatGPT,#76 housing near jobs and transit,existing_type,upzone_transit,,Same project.
+ChatGPT,#77 replace unsafe structures,existing_type,blight_rehab,,Same project.
+ChatGPT,#78 apartment common areas,owner_level,,,A building owner's upgrade.
+ChatGPT,#79 balconies and patios,owner_level,,,A single-building upgrade.
+ChatGPT,#80 historic rehabilitation,new_type,historic_district,"Built before 1940, not designated",Same project.
+ChatGPT,#81 full-service grocery,existing_type,grocery,,Same project.
+ChatGPT,#82 fill vacant storefronts,new_type,storefront_activation,Over 10% vacant storefronts,Same project.
+ChatGPT,#83 cafés,existing_type,corner_store,,Same project.
+ChatGPT,#84 outdoor dining,existing_type,outdoor_dining,,Same project.
+ChatGPT,#85 pharmacies and essential services,new_type,pharmacy,No pharmacy within 1 mi (urban) or 10 mi (rural),Same project.
+ChatGPT,#86 neighborhood retail clusters,existing_type,main_street,,Same project.
+ChatGPT,#87 renovate shopping centers,new_type,mall_retrofit,Mall or strip center with many vacancies,Same project.
+ChatGPT,#88 small businesses,existing_type,main_street,,Same project.
+ChatGPT,#89 pedestrian shopping streets,existing_type,plaza,,Same project.
+ChatGPT,#90 public markets and food halls,existing_type,food_hall,,Same project.
+ChatGPT,#91 modernize schools,existing_type,school_bond,,Same project.
+ChatGPT,#92 school playgrounds,existing_type,schoolyard_green,,Same project.
+ChatGPT,#93 shade trees on campuses,existing_type,schoolyard_green,,Same project.
+ChatGPT,#94 after-school programs,quality_of_life_only,,,A family service; no measured value effect.
+ChatGPT,#95 libraries,existing_type,library,,Same project.
+ChatGPT,#96 recreation centers,existing_type,rec_center,,Same project.
+ChatGPT,#97 school pedestrian access,new_type,safe_routes_school,"School within 800 m, ped/bike crashes nearby",Same project.
+ChatGPT,#98 sports fields,existing_type,sports_field,,Same project.
+ChatGPT,#99 youth centers,existing_type,rec_center,,Same project.
+ChatGPT,#100 open school facilities after hours,new_type,shared_schoolyard,"No park within 800 m, school within 400 m",Same project.
+ChatGPT,#101 potholes,new_type,street_repaving,Poor pavement or many freeze-thaw days,Same project.
+ChatGPT,#102 graffiti,existing_type,graffiti,,Same project.
+ChatGPT,#103 litter,existing_type,litter,,Same project.
+ChatGPT,#104 public bins,existing_type,litter,,Bins are part of litter cleanup.
+ChatGPT,#105 illegal dumping,existing_type,litter,,Same project.
+ChatGPT,#106 storm drains,new_type,flood_drainage,FEMA flood zone or many flood claims,Same project.
+ChatGPT,#107 public landscaping,new_type,streetscape,"Shopping strip on an arterial, low canopy",Upkeep of public planting.
+ChatGPT,#108 street furniture,new_type,seating_shade,"Hot or busy walking area, few benches or shade",Same project.
+ChatGPT,#109 alleys,existing_type,alley_gating,,Same project.
+ChatGPT,#110 beautification programs,new_type,streetscape,"Shopping strip on an arterial, low canopy",Planting and upkeep on public streets.
+ChatGPT,#111 reduce traffic air pollution exposure,existing_type,school_filters,,Classroom filters; tree buffers are freeway_buffer.
+ChatGPT,#112 green stormwater infrastructure,existing_type,green_street,,Same project.
+ChatGPT,#113 replace high-heat asphalt,existing_type,cool_pavement,,Same project.
+ChatGPT,#114 cool roofs,new_type,cool_roofs,Hotter than the county average,Same project.
+ChatGPT,#115 flood risk,new_type,flood_drainage,FEMA flood zone or many flood claims,Drainage work; buyouts and elevation are their own types.
+ChatGPT,#116 remediate contaminated land,new_type,brownfield_cleanup,EPA cleanup site in the block group,Same project.
+ChatGPT,#117 drinking-water infrastructure,new_type,water_sewer_mains,Median year built before 1960,Mains; lead lines are lead_pipes.
+ChatGPT,#118 industrial noise,new_type,industrial_buffer,Homes within 150 m of industry,Same project.
+ChatGPT,#119 wildfire resilience,new_type,wildfire_hardening,High or very high wildfire hazard,Same project.
+ChatGPT,#120 shaded cooling areas,new_type,seating_shade,"Hot or busy walking area, few benches or shade",Outdoor shade; indoor cooling is cooling_center.
+ChatGPT,#121 redevelop abandoned commercial buildings,new_type,adaptive_reuse,"Vacant commercial, industrial or school buildings",Same project.
+ChatGPT,#122 parking lots to productive uses,new_type,infill_homes,Vacant lots or large parking lots,Same project.
+ChatGPT,#123 mixed-use projects,new_type,mixed_use_zoning,Retail-only zoning next to homes or transit,Same project.
+ChatGPT,#124 infill parcels,new_type,infill_homes,Vacant lots or large parking lots,Same project.
+ChatGPT,#125 housing above retail,new_type,mixed_use_zoning,Retail-only zoning next to homes or transit,Same project.
+ChatGPT,#126 transitions between incompatible uses,new_type,industrial_buffer,Homes within 150 m of industry,Same project.
+ChatGPT,#127 convert industrial buildings,new_type,adaptive_reuse,"Vacant commercial, industrial or school buildings",Same project.
+ChatGPT,#128 small-scale infill,new_type,missing_middle_zoning,Single-family zoning on high-value land,Same project.
+ChatGPT,#129 zoning predictability,not_modelled,,,Citywide process; no block-group trigger.
+ChatGPT,#130 reuse public land,existing_type,affordable_housing,,Affordable housing on underused public land.
+ChatGPT,#131 seating,new_type,seating_shade,"Hot or busy walking area, few benches or shade",Same project.
+ChatGPT,#132 gateways,existing_type,wayfinding,,Same project.
+ChatGPT,#133 historic architecture,new_type,historic_district,"Built before 1940, not designated",Same project.
+ChatGPT,#134 murals,existing_type,murals,,Same project.
+ChatGPT,#135 pedestrian lighting,existing_type,street_lighting,,Same project.
+ChatGPT,#136 gathering plazas,existing_type,plaza,,Same project.
+ChatGPT,#137 streetscape consistency,new_type,streetscape,"Shopping strip on an arterial, low canopy",Same project.
+ChatGPT,#138 cultural events,quality_of_life_only,,,Events; no measured value effect.
+ChatGPT,#139 wayfinding and history signs,existing_type,wayfinding,,Same project.
+ChatGPT,#140 small gathering spaces near retail,existing_type,outdoor_dining,,Parklets.
+ChatGPT,#141 broadband,existing_type,fiber_5g,,Same project.
+ChatGPT,#142 cellular coverage,existing_type,fiber_5g,,5G small cells.
+ChatGPT,#143 public EV charging,existing_type,ev_hub,,Same project.
+ChatGPT,#144 water and sewer pipes,new_type,water_sewer_mains,Median year built before 1960,Same project.
+ChatGPT,#145 undergrounding where cost-effective,existing_type,undergrounding,,Same project.
+ChatGPT,#146 smart irrigation,new_type,drought_landscaping,"Arid or often in drought, mostly lawns",Same project.
+ChatGPT,#147 adaptive signals,quality_of_life_only,,,Smoother traffic; no measured value effect.
+ChatGPT,#148 flood and environmental sensors,quality_of_life_only,,,Warning data; no measured value effect.
+ChatGPT,#149 streetlight modernization,existing_type,street_lighting,,Same project.
+ChatGPT,#150 grid resilience,existing_type,microgrid,,Same project.
+Claude,street trees,existing_type,street_trees,,Same project.
+Claude,wider/repaired sidewalks,existing_type,sidewalks,,Repair; widening is streetscape.
+Claude,protected bike lanes,existing_type,protected_bike,,Same project.
+Claude,traffic calming,existing_type,traffic_calming,,Same project.
+Claude,narrower lanes,existing_type,road_diet,,Lane narrowing is a road diet.
+Claude,curb extensions,existing_type,crosswalks,,Same project.
+Claude,roundabouts,existing_type,roundabout,,Same project.
+Claude,crosswalks and signals,existing_type,crosswalks,,Crossings; signals are ped_signals.
+Claude,lower residential speed limits,existing_type,slow_streets,,Lower limits come with slow streets.
+Claude,ADA ramps,existing_type,crosswalks,,Same project.
+Claude,repaving,new_type,street_repaving,Poor pavement or many freeze-thaw days,Same project.
+Claude,bury overhead lines,existing_type,undergrounding,,Same project.
+Claude,pedestrian lighting,existing_type,street_lighting,,Same project.
+Claude,one-way to two-way conversion,new_type,two_way_conversion,One-way arterial pair,Same project.
+Claude,slow streets / greenways,existing_type,slow_streets,,Same project.
+Claude,bike parking and bike share,existing_type,bike_share,,Bike share; racks are bike_parking.
+Claude,bus stop shelters and real-time signs,existing_type,bus_shelters,,Same project.
+Claude,bus lanes and signal priority,existing_type,bus_lane,,Bus lanes; signal priority is transit_priority.
+Claude,rail stations,existing_type,rail_station,,Same project.
+Claude,safe routes to school,new_type,safe_routes_school,"School within 800 m, ped/bike crashes nearby",Same project.
+Claude,parking permits / demand pricing,quality_of_life_only,,,Parking management; no measured value effect.
+Claude,EV charging,existing_type,ev_hub,,Same project.
+Claude,green alleys / alley closures,existing_type,green_alley,,Green alleys; closures are alley_gating.
+Claude,pedestrianize a main block,existing_type,plaza,,Same project.
+Claude,pocket parks on vacant lots,existing_type,pocket_park,,Same project.
+Claude,park renovation,existing_type,park_upgrade,,Same project.
+Claude,playgrounds,existing_type,park_upgrade,,Part of the park renovation.
+Claude,dog parks,existing_type,dog_park,,Same project.
+Claude,community gardens,existing_type,community_garden,,Same project.
+Claude,trails along rail corridors or waterways,existing_type,corridor_trail,,Same project.
+Claude,sports courts and fields,existing_type,sports_field,,"Fields; courts are basketball, tennis and pickleball."
+Claude,splash pads or pools,existing_type,splash_pad,,Splash pad; pools are pool.
+Claude,landscaped medians and parkways,new_type,streetscape,"Shopping strip on an arterial, low canopy",Same project.
+Claude,creek restoration,new_type,creek_restoration,Buried or lined stream within 400 m,Same project.
+Claude,outdoor fitness,new_type,outdoor_fitness,Park nearby without fitness equipment,Same project.
+Claude,parklets,existing_type,outdoor_dining,,Same project.
+Claude,plazas,existing_type,plaza,,Same project.
+Claude,shade and benches,new_type,seating_shade,"Hot or busy walking area, few benches or shade",Same project.
+Claude,shared-use schoolyards,new_type,shared_schoolyard,"No park within 800 m, school within 400 m",Same project.
+Claude,bioswales and rain gardens,existing_type,green_street,,Same project.
+Claude,permeable pavement,existing_type,green_alley,,The green alley uses permeable paving.
+Claude,storm drain upgrades,new_type,flood_drainage,FEMA flood zone or many flood claims,Same project.
+Claude,cool pavement and cool roofs,existing_type,cool_pavement,,Cool pavement; roofs are cool_roofs.
+Claude,brownfield cleanup,new_type,brownfield_cleanup,EPA cleanup site in the block group,Same project.
+Claude,sound walls / quiet pavement,existing_type,noise_wall,,Walls; pavement is quiet_pavement.
+Claude,reroute truck traffic,new_type,truck_reroute,Truck traffic on residential streets,Same project.
+Claude,neighborhood solar and microgrids,existing_type,microgrid,,Same project.
+Claude,water and sewer mains,new_type,water_sewer_mains,Median year built before 1960,Same project.
+Claude,defensible space and home hardening in fire zones,new_type,wildfire_hardening,High or very high wildfire hazard,Same project.
+Claude,shielded lighting,quality_of_life_only,,,Dark-sky fixtures; a street_lighting specification.
+Claude,vegetation buffers along freeways,new_type,freeway_buffer,Homes within 150 m of a freeway,Same project.
+Claude,community policing and foot patrols,existing_type,foot_patrol,,Same project.
+Claude,neighborhood watch,quality_of_life_only,,,Resident-run watch; no measured value effect.
+Claude,CPTED,new_type,cpted,Violent crime 2x the county median,Same project.
+Claude,clean and green vacant lots (reduces gun violence),existing_type,vacant_lot_green,,Same project.
+Claude,demolish or rehab abandoned buildings,existing_type,blight_rehab,,Rehab; demolition alone is blight_demolition.
+Claude,violence interruption,existing_type,violence_interruption,,Same project.
+Claude,nearby fire/paramedic station,new_type,fire_station,Over 5 road miles from a fire station,Same project.
+Claude,fix streetlights quickly,existing_type,street_lighting,,Prompt repair keeps the lighting effect.
+Claude,fast graffiti removal,existing_type,graffiti,,Same project.
+Claude,cameras in commercial areas,existing_type,cameras,,Same project.
+Claude,street sweeping,existing_type,litter,,Street cleaning.
+Claude,public bins,existing_type,litter,,Bins are part of litter cleanup.
+Claude,bulky item pickup and dumping enforcement,existing_type,litter,,Same project.
+Claude,code enforcement,new_type,code_enforcement,Older rentals or high long-term vacancy,Same project.
+Claude,facade grants,existing_type,main_street,,Same project.
+Claude,home repair grants for low-income and senior owners,new_type,home_repair,"Pre-1960 homes, mostly owners, lower income",Same project.
+Claude,cleanup days,quality_of_life_only,,,A volunteer event; the city service is litter.
+Claude,pressure-washed sidewalks,existing_type,bid,,Sidewalk washing is a core BID service.
+Claude,landscape maintenance,new_type,streetscape,"Shopping strip on an arterial, low canopy",Upkeep of public planting.
+Claude,mixed-use zoning,new_type,mixed_use_zoning,Retail-only zoning next to homes or transit,Same project.
+Claude,backyard units and gentle density,existing_type,adu,,Backyard homes; gentle density is missing_middle_zoning.
+Claude,infill on parking lots and vacant land,new_type,infill_homes,Vacant lots or large parking lots,Same project.
+Claude,transit-oriented development,existing_type,upzone_transit,,Same project.
+Claude,adaptive reuse,new_type,adaptive_reuse,"Vacant commercial, industrial or school buildings",Same project.
+Claude,historic districts,new_type,historic_district,"Built before 1940, not designated",Same project.
+Claude,design standards,not_modelled,,,Design rules act only as buildings are rebuilt; no separable effect.
+Claude,remove parking minimums,existing_type,upzone_transit,,Parking rules near transit change with the same rezoning.
+Claude,ground-floor retail requirements,new_type,mixed_use_zoning,Retail-only zoning next to homes or transit,Same project.
+Claude,homeownership assistance,new_type,homebuyer_assistance,"Over 60% renters, homes within reach",Same project.
+Claude,affordable housing to prevent displacement,existing_type,affordable_housing,,Same project.
+Claude,BID,existing_type,bid,,Same project.
+Claude,grocery store,existing_type,grocery,,Same project.
+Claude,"cafés, restaurants, independent retail",existing_type,main_street,,Same project.
+Claude,farmers market,existing_type,farmers_market,,Same project.
+Claude,pop-ups,new_type,storefront_activation,Over 10% vacant storefronts,Same project.
+Claude,small-business grants and loans,existing_type,main_street,,Same project.
+Claude,outdoor dining,existing_type,outdoor_dining,,Same project.
+Claude,wayfinding and branding,existing_type,wayfinding,,Same project.
+Claude,coworking,new_type,coworking,"Over 15% work from home, no coworking nearby",Same project.
+Claude,anchor employers or institutions,new_type,anchor_employer,Job losses and a large vacant industrial site,"A regional project, like grocery at larger scale."
+Claude,broadband and fiber,existing_type,fiber_5g,,Same project.
+Claude,school quality and facilities,existing_type,school_bond,,Same project.
+Claude,after-school and youth programs,quality_of_life_only,,,A family service; no measured value effect.
+Claude,library,existing_type,library,,Same project.
+Claude,community center,existing_type,rec_center,,Same project.
+Claude,clinic or urgent care,existing_type,clinic,,Same project.
+Claude,childcare,new_type,childcare,Over 3 young children per licensed slot,Same project.
+Claude,senior center,new_type,senior_center,"Over 25% aged 65+, no center within 2 km",Same project.
+Claude,job training and adult education,not_modelled,,,"Helps participants, not homes."
+Claude,murals,existing_type,murals,,Same project.
+Claude,block parties and festivals,quality_of_life_only,,,Events; no measured value effect.
+Claude,concerts and movie nights,quality_of_life_only,,,Events; no measured value effect.
+Claude,neighborhood association,not_modelled,,,"Civic organizing, not a project."
+Claude,gateway signs and banners,existing_type,wayfinding,,Same project.
+Claude,"theaters, galleries, music venues",new_type,arts_center,"Dense, no arts venue within 2 km",Same project.
+Claude,seasonal decorations,quality_of_life_only,,,Decorations; no measured value effect.
+Claude,tool libraries,quality_of_life_only,,,A shared-tool service; no measured value effect.
+Claude,participatory budgeting,not_modelled,,,"A way to choose projects, not a project."
+Claude,published neighborhood plan,not_modelled,,,"A plan, not a project."
+Claude,Cold and snowy: snow plowing and sidewalk clearing,new_type,snow_clearing,Over 20 in of snow a year,Same project.
+Claude,Cold and snowy: heated or covered bus shelters,new_type,heated_shelter,Busy stop where January averages below 32°F,Same project.
+Claude,Cold and snowy: ice rinks and sledding hills,new_type,ice_rink,"January below 32°F, no rink within 5 km",Same project.
+Claude,Cold and snowy: weatherization and insulation,new_type,weatherization,"Cold climate, pre-1980 homes, lower income",Same project.
+Claude,Cold and snowy: freeze-thaw resistant road materials,new_type,street_repaving,Cold climate with many freeze-thaw days a year,A cold-climate specification for repaving.
+Claude,Flood and hurricane: buyouts of repeatedly flooded homes converted to open space,new_type,flood_buyout,FEMA 1% flood zone with repeat flood claims,Same project.
+Claude,Flood and hurricane: elevating homes and roads,new_type,flood_elevation,Pre-1975 homes in a FEMA 1% flood zone,Same project.
+Claude,"Flood and hurricane: living shorelines, dunes, wetland restoration",new_type,living_shoreline,Shore in a FEMA coastal flood zone,Same project.
+Claude,Flood and hurricane: stronger wind codes,new_type,wind_retrofit,Hurricane coast (design wind 130 mph+),Same project.
+Claude,Flood and hurricane: FEMA Community Rating System (lower flood insurance premiums),new_type,flood_crs,FEMA flood zone; community outside CRS or low class,Same project.
+Claude,Hot and dry: drought-tolerant landscaping,new_type,drought_landscaping,"Arid or often in drought, mostly lawns",Same project.
+Claude,Hot and dry: cooling centers,existing_type,cooling_center,,Same project; its trigger is already heat-based.
+Claude,Hot and dry: water recycling and secure water supply,new_type,water_recycling,High water stress or recurring drought,Same project.
+Claude,Hot and dry: shaded transit stops and walkways,existing_type,transit_shade,,Stops; shaded walkways come from street_trees.
+Claude,Tornado and storms: community storm shelters and safe rooms,new_type,storm_shelter,"High tornado risk, many mobile homes",Same project.
+Claude,Tornado and storms: warning sirens and alert systems,new_type,warning_sirens,"High tornado risk, no siren within 1.5 km",Same project.
+Claude,Shrinking cities: land banks,new_type,land_bank,"Population fell 2010-2020, high vacancy",Same project.
+Claude,Shrinking cities: side-lot programs,new_type,side_lot,Shrinking city with many vacant lots,Same project.
+Claude,Shrinking cities: strategic demolition,new_type,blight_demolition,"Shrinking, vacant, values below rebuild cost",Same project.
+Claude,Shrinking cities: urban farms and forests,new_type,urban_farm,Shrinking city with acres of vacant lots,Farms; small forests are tiny_forest.
+Claude,Shrinking cities: lead pipe replacement and lead paint removal,new_type,lead_pipes,Most homes built before 1986,Same project.
+Claude,Rural: rural broadband,existing_type,fiber_5g,Homes without 100/20 Mbps service on the FCC National Broadband Map,Same project; needs a rural trigger from the FCC map.
+Claude,"Rural: keeping the local hospital, pharmacy and grocery open",new_type,rural_hospital,Rural; the only hospital within 30 minutes,Hospital part; pharmacy and grocery map to those types.
+Claude,Rural: main street revitalization,existing_type,main_street,,Same project; its trigger works in small towns.
+Claude,Rural: paving gravel roads and extending water and sewer,new_type,gravel_road_paving,Unpaved roads serving homes,Paving; the water and sewer part is water_sewer_extension.
+Claude,Rural: volunteer fire and EMS support,new_type,fire_station,Over 5 road miles from a fire station,Same project.
+Claude,"Rural: outdoor recreation tourism (trailheads, river access, campgrounds)",new_type,outdoor_access,"Rural, near public land or river, no access",Same project.
+Claude,Suburbs: retrofit dead malls and strip centers into town centers,new_type,mall_retrofit,Mall or strip center with many vacancies,Same project.
+Claude,Suburbs: connect cul-de-sacs with walking paths,new_type,cul_de_sac_connector,"Many dead ends, few intersections",Same project.
+Claude,Suburbs: add sidewalks where none were built,new_type,new_sidewalks,"No sidewalk near schools, transit or shops",Same project.
+user,Big projects: build a new freeway,new_type,new_freeway,Planned highway nearby or no freeway within 10 mi,"Regional what-if: access gains farther out, noise losses next to the road."
+user,Big projects: build high-speed rail (example: Cheyenne WY to Pueblo CO),new_type,high_speed_rail,Within 2 mi of a planned or what-if station,"Regional what-if corridor; gains found so far are near stations, not along the whole line."
+user,Big projects: a high-voltage transmission line on the same corridor,new_type,transmission_line,Within 1 mi of a planned or what-if line,Regional what-if; show the small losses found next to lines so far alongside any regional gain.
+user,Planned transit: suggest a new metro line from what the city already plans,new_type,planned_transit_line,Within 1/2 mi of an adopted-plan station,"Uses the agency's adopted plan, not the generic rail_station what-if."
+user,"Planned transit: show how building it would affect prices, whether prices have already risen, and when they likely will",new_type,planned_transit_line,Within 1/2 mi of an adopted-plan station,Part of the planned-line type: prices near future stations vs the county since announcement.
+user,Map: specific lots (parcels) shown on the map,not_modelled,,,"A map feature, not a project type; covered by round 8.7's parcel work."
+user,Map: address search that works,not_modelled,,,"A page feature, not a project type; covered by round 8.7's address work."

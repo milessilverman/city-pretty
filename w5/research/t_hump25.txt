@@ -1,0 +1,340 @@
+                                         CITY OF LOS ANGELES
+                                 INTER-DEPARTMENTAL MEMORANDUM
+
+
+Date:           November 5, 2025
+
+To:             The Honorable City Council
+                c/o City Clerk, Room 395
+                Honorable Heather Hutt, Chair, Transportation Committee
+
+From:           Laura Rubio-Cornejo, General Manager
+                Department of Transportation
+
+Subject:        RESIDENTIAL SPEED HUMP PROGRAM METHODOLOGY UPDATE
+
+SUMMARY
+
+As directed in Council File (CF) 24-0332, this report provides a prioritized list of street segments for
+Los Angeles Department of Transportation’s (LADOT) 2025 Residential Speed Hump Program. The report
+also details the cost efficiency of speed hump installations as compared to other California cities.
+
+RECOMMENDATIONS
+
+That the City Council NOTE and FILE this report.
+
+BACKGROUND
+
+LADOT historically operated its Residential Speed Hump Program with an annual open Citywide
+application process. Through the portal, LADOT accepted up to 25 applications from residents in each
+Council District (CD) and evaluated them for feasibility, neighborhood support, and traffic volume and
+speed. Of the 25 applications, LADOT typically qualified and delivered speed humps along up to six
+residential street segments in each CD. This application process ensured an equal distribution of speed
+humps across all Council Districts, but its annual demand far exceeded capacity and the request-based
+system did not ensure an equitable distribution of speed humps based on the City’s safety and mobility
+goals.
+
+Budgetary challenges exacerbate these constraints. Previous budget cycles allocated $1.9 million
+annually to the Residential Speed Hump Program. In Fiscal Years (FY) 24-25 and 25-26, program funding
+was reduced to $715,000 annually, which LADOT estimates could implement approximately 1-2
+residential speed hump locations per Council district annually, depending on street width and design
+considerations. During these fiscal years, $1.2 million has been allocated to a separate elementary school
+speed hump program that delivers speed humps at approximately 30 school locations based on the
+methodology approved in CF 23-0306.
+
+In April 2025, City Council approved LADOT’s safety- and equity-focused criteria to identify and prioritize
+neighborhood locations to install residential speed humps. Council further directed LADOT to identify
+and prioritize eligible streets along the Neighborhood Enhanced Network (NEN) as defined in the City’s
+Mobility Plan 2035 (MP2035). At that time, Council further instructed LADOT to report with a ranked list
+Honorable Heather Hutt​                             -2-​                               November 5, 2025
+
+
+of corridors for the 2025 Residential Speed Hump Program, as well as the relative cost efficiency for the
+installation of speed humps, including comparisons of cost per speed hump with other California
+jurisdictions.
+
+DISCUSSION
+
+Speed Hump Installation Costs Comparisons Across Cities
+
+Speed hump installation costs can vary based on several key factors, including material, size, design,
+labor costs, drainage challenges, traffic control needs, and more. Short-term cost reductions may also
+incur higher long-term maintenance costs. For example, “quick-build” rubber and plastic options are
+generally less expensive but less durable than LADOT’s standard asphalt or concrete humps. While
+asphalt and concrete humps have a lifespan of up to 25 years, according to manufacturers, rubber and
+plastic humps typically last no more than 10 years. The size and design of the speed hump also affects
+overall price. For example, wider streets require more speed hump material and faster streets require
+more complex installations like speed tables or raised crosswalks. Labor costs and contractor rates differ
+by region, particularly in areas that require union labor. Additional expenses can arise from drainage
+modifications if adjustments to stormwater infrastructure are needed. Traffic control during
+construction, such as signage, lane closures, or flaggers, can also contribute to the overall costs. These
+variations complicate the exercise of comparing costs across regions, but costs presented below provide
+high level estimates and approximations.
+
+In the March 4, 2025 Council report (CF 24-0332), LADOT provided information about speed hump costs
+in three California cities - Oakland, San Francisco, and Los Angeles. After meeting with city staff and a
+closer look at program-level constraints, LADOT concluded that Los Angeles has the lowest per-hump
+cost among the three cities with an average cost of $5,958 per speed hump.
+
+San Francisco spends approximately $650,000 on speed humps annually as part of a $6 million traffic
+calming program that includes other devices like speed cushions and speed tables. LADOT’s prior report
+referenced 200 speed humps delivered, but based on updated information from the San Francisco
+Municipal Transportation Agency (SFMTA), that number included all safety treatments delivered within
+that program. The average hard cost for a speed hump in San Francisco is approximately $10,000,
+depending on delivery method. This does not include soft costs such as design and administration, which
+vary and staff did not break down by device type.
+
+Oakland Department of Transportation staff reported an annual budget of $1,000,000 for traffic calming,
+which includes roughly 80 speed humps. However, due to engineering staffing limitations, only 40–50
+are typically installed each year. Oakland did not provide a per-hump cost but based on program
+performance, the estimated cost per installed hump is significantly higher than Los Angeles’.
+
+In contrast, Los Angeles can install approximately 120 speed humps per year with a $715,000 annual
+budget through the Residential Speed Hump program, resulting in an estimated average cost of $5,958
+per hump. A summary of these comparisons is provided in Table 1.
+Honorable Heather Hutt​                               -3-​                                 November 5, 2025
+
+
+Table 1. Overview of Los Angeles, Oakland, and San Francisco’s Speed Hump Costs
+Note: Table is sorted by Highest Per Speed Hump Cost
+
+                       Population         City Size           Program        Estimated Cost Per
+       City
+                         (2022)            (sq mi)             Budget           Speed Hump
+   Oakland, CA          430,553              78              $1,000,000           $12,500
+
+San Francisco, CA       808,437              47              $650,000             $10,000
+
+ Los Angeles, CA       3,822,000             502             $715,000             $5,958
+
+
+LADOT has a pre-approved on-call contractor that builds speed humps and speed tables Citywide. When
+LADOT prepares and approves design plans for speed humps and speed tables, their installation is then
+coordinated through this contract, and LADOT pays based on a linear foot basis and per the
+pre-approved LADOT specifications. The contractor’s cost includes all labor and associated material
+costs. This process has proven to be the most cost effective strategy as reflected in the cost comparison
+analysis shown above.
+
+2025 Residential Speed Hump Program
+
+The Council-approved methodology to prioritize residential speed hump locations is driven by three
+primary criteria: Safety, Equity, and People Generators, each carrying a specific weight (Table 2). Safety
+has a 50-point weight, which includes 85th percentile speed and collision data, assigning points based on
+speed ranges, incident types, and presence of sidewalks. Equity has a 30-point weight, which uses the
+City’s adopted transportation equity metric, the Community Health and Equity (CHE) Index, as well as
+density data to allocate points. The People Generators criteria has a 20-point weight, which awards
+points for proximity to highly frequented locations, such as schools, parks, senior centers, libraries,
+medical centers, and transit stops. This comprehensive scoring system is designed to prioritize residential
+speed hump installations by promoting safety and equity, and serving areas with significant activity.
+
+Table 2. Prioritization Methodology
+                      Weight
+   Indicators                                                             Data
+                    (Out of 100)
+
+     Safety             50                            Collisions, Speeding, Lack of Sidewalks
+
+     Equity             30                  Community Health and Equity Index, Population Density
+
+   People
+                        20          Schools, Parks, Libraries, Senior Centers, Medical Facilities, Transit Stops
+  Generators
+
+
+As directed by Council, LADOT applied the approved prioritization methodology to street segments
+within the Neighborhood Enhanced Network (NEN) in order to align the Residential Speed Hump
+Program with the City’s Mobility Plan 2035 safety and equity goals. The NEN is identified in the Mobility
+Plan 2035 as a system of local streets designed to create low-speed corridors that support walking,
+Honorable Heather Hutt​                               -4-​                                November 5, 2025
+
+
+bicycling, and neighborhood connections. Prioritizing NEN streets builds a connected network for people
+to bike, walk, and roll safely between neighborhoods, improving access and livability.
+
+LADOT scored each NEN segment and conducted an initial screening to exclude corridors that did not
+meet basic eligibility criteria for speed humps, such as streets with more than one lane in each direction,
+posted speed limits above 30 miles per hour, roadway grades greater than 8 percent, and corridors with
+previously installed speed humps. Residential speed hump eligibility criteria is outlined in more detail in
+LADOT’s March 2024 report in this Council File.
+
+The list of 2025 residential speed hump segments (Attachment A) includes the highest-need corridors for
+residential speed humps that can be constructed with current funding. In total, this amounts to
+approximately 26 miles of residential speed humps constructed across 33 corridors that can be delivered
+with the current FY 24-25 and 25-26 program budget. The total number of corridors will vary annually
+based on variations in street width/length and complexity in installation.
+
+The list includes corridors that staff deemed eligible based on an initial review, but must still undergo
+detailed engineering design in order to confirm final constructability. Therefore, inclusion on the list does
+not guarantee that segment will receive residential speed humps. LADOT will coordinate with individual
+Council Districts to confirm feasibility prior to construction.
+
+In addition to constructing speed humps at these locations through the Residential Speed Hump
+Program, LADOT completed the construction of speed humps at 30 school locations with FY 24-25
+funding. With increased funding in FY 25-26, LADOT anticipates constructing speed humps at an
+additional 50 locations. The full list of school speed hump locations is outlined in CF 23-0306, and the
+anticipated upcoming locations to be constructed are provided in Attachment B.
+
+Residential Speed Hump Program Resources
+
+With maintained funding for both the residential and school speed hump programs, LADOT plans to
+continue to deliver these treatments at a similar scale in future years. While LADOT has a current firm
+fixed contract, it is possible that materials and labor costs may increase in the future as a result of
+external factors like inflation and tariffs, necessitating additional funding to maintain current
+implementation levels. Additional funding for the Residential Speed Hump Program can offset these
+potential cost increases and accelerate the pace of delivery on NEN streets in future years.
+
+LADOT estimates there are about 500 miles of NEN streets that could be eligible for residential speed
+humps Citywide. At current funding levels, it is not feasible to construct residential speed humps in every
+Council District, every year, while also fulfilling Council’s direction to prioritize safety and equity on the
+NEN. At current funding levels, it will take close to 40 years to construct speed humps on the identified
+corridors Citywide. Increasing the program’s budget would reduce the timeline for addressing highest
+need locations.
+
+Additional Potential Resources for Speed Hump Construction
+
+LADOT can also construct speed humps at additional locations identified and prioritized for future fiscal
+years of the Residential Speed Hump program with outside funding, if provided. Based on current staff
+resources, LADOT anticipates capacity to construct speed humps identified in the priority list along an
+additional 16 street segments with additional funding. Funding may be identified through developer fees
+Honorable Heather Hutt​                             -5-​                               November 5, 2025
+
+
+and/or Council discretionary funding transfers. While the City traditionally pursues local, state, and
+federal grant funding opportunities for capital projects, there are no grant programs that specifically
+fund the design and installation of speed humps as a stand alone element of the roadway. However, staff
+will continue to seek funds for capital projects that may include speed humps among other traffic
+calming elements, such as stress-free connections projects that improve conditions on neighborhood
+streets for people walking and bicycling.
+
+Another source of speed hump installations is the development review process. The installation of speed
+humps can be imposed on new developments as a condition of approval. Per the City’s Transportation
+Assessment Guidelines, projects that generate a net increase of 250 or more daily vehicle trips may be
+required to conduct an access, safety, and circulation evaluation. Based on the results of these
+evaluations, land use proposals on or adjacent to a Neighborhood Enhanced Network facility can be
+required to lead the engagement, design, and construction of speed humps through the Bureau of
+Engineering’s B-permit process.
+
+During the FY 24-25 budget process, Council requested additional information about the feasibility of
+constructing speed humps on certain street types of streets as a part of the City’s Pavement Preservation
+Program. While installing speed humps in conjunction with resurfacing activities may provide more
+cost-effective delivery, and could increase overall Citywide capacity to deliver speed humps on the NEN
+as identified in this report, additional resources may be required by the Bureau of Street Services. Should
+the City move to implement such a program, LADOT recommends speed humps be installed on all NEN
+segments that meet the defined eligibility criteria for residential speed humps, as outlined above.
+
+FISCAL IMPACT
+
+No impact to the General Fund is anticipated with this action.
+
+LRC:TC:rg/rj
+Attachments
+Honorable Heather Hutt​                         -6-​                              November 5, 2025
+
+
+
+
+                                       Attachments A and B
+              2025 Residential Speed Hump Locations (funding from FY24-25 and FY25-26)
+
+
+    STREET NAME                      TO                FROM                CD            MILES
+103RD ST                  AVALON BLVD         CENTRAL AVE                   8            0.66
+11TH ST                   UNION AVE           ALVARADO ST                   1            0.37
+29TH ST                   GRIFFITH AVE        SAN PEDRO ST                  9            0.25
+2ND ST                    SOTO ST             CUMMINGS ST                  14            0.32
+39TH ST                   BUCKINGHAM RD       BRONSON AVE                  8,10          0.42
+47TH ST                   SAN PEDRO ST        GRAND AVE                     9            0.62
+51ST ST                   HOOPER AVE          CENTRAL AVE                   9            0.25
+7TH ST                    MEYLER ST           HARBOR BLVD                  15            0.97
+AVALON BLVD               DENNI ST            HARRY BRIDGES BLVD           15            0.93
+BEACON AVE                11TH ST             7TH ST                        1            0.48
+BONNIE BRAE ST            11TH ST             6TH ST                        1            0.72
+BONNIE BRAE ST            6TH ST              BEVERLY BLVD                  1            0.56
+BOYLE AVE                 PLEASANT AVE        GOLDEN STATE FWY             14            0.62
+COLDEN AVE                CLOVIS AVE          BROADWAY                      8            1.25
+COLDEN AVE                VERMONT AVE         BROADWAY                      8            0.76
+COLISEUM ST               CARMONA AVE         OBAMA BLVD                   10             2.5
+COMMONWEALTH AVE 6TH ST                       3RD ST                      1, 10          0.36
+EUCLID AVE                7TH ST              4TH ST                       14            0.63
+GRIFFIN AVE               AVENUE 43           NORTH MAIN ST                 1            1.98
+HARVARD BLVD              SAN MARINO ST       4TH ST                       10            0.88
+HOOVER ST                 115TH ST            MANCHESTER AVE                8            2.09
+NEPTUNE AVE               ANAHEIM ST          W C St                       15             0.5
+OAKWOOD AVE               WESTERN AVE         NORMANDIE AVE               10,13           0.5
+OWENSMOUTH AVE            SATICOY ST          VALERIO ST                    3            0.25
+OXFORD AVE                MELROSE AVE         7TH ST                      10,13          1.64
+Honorable Heather Hutt​                       -7-​               November 5, 2025
+
+
+RAMPART BLVD              8TH ST            7TH ST          1          0.12
+RAYEN ST                  KESTER AVE        VAN NUYS BLVD   6          0.41
+SANTA FE AVE              7TH ST            1ST ST          14         2.07
+ST LOUIS ST               BOYLE AVE         3RD ST          14         0.51
+UNION AVE                 TEMPLE ST         BEVERLY BLVD    13         0.32
+WABASH AVE                CITY TERRACE DR   SOTO ST         14         0.71
+WEST BLVD                 FLORENCE AVE      SLAUSON AVE     8            1
+WESTMORELAND AVE          17TH ST           7TH ST          1          1.14
+Honorable Heather Hutt​                           -8-​                           November 5, 2025
+
+
+
+             2025 School Speed Hump Locations (implementation expected by September 2026)
+
+                                                                                            COUNCIL
+SCHOOL NAME                                              ADDRESS                            DISTRICT
+28TH ST ES                                               2807 STANFORD AVE                      9
+99TH ST ES                                               9900 WADSWORTH AVE                     8
+ALLIANCE CINDY AND BILL SIMON TECHNOLOGY ACADEMY
+HIGH SCHOOL                                      10720 SOUTH WILMINGTON AVENUE                 15
+ALLIANCE COLLEGE-READY MIDDLE SCHOOL ACADEMY 12 100 EAST 49TH STREET                            9
+ALLIANCE COLLEGE-READY MIDDLE SCHOOL ACADEMY 4           9719 SOUTH MAIN STREET                 8
+ALLIANCE COLLEGE-READY MIDDLE SCHOOL ACADEMY 5           211 SOUTH AVENUE 20                    1
+ALLIANCE LEADERSHIP ACADEMY                              2941 W 70TH ST                         9
+ANN ES                                                   126 BLOOM ST                           1
+ARTS IN ACTION COMMUNITY CHARTER                         1241 SOTO STREET, SUITE 212           14
+ASPIRE-TATE                                              123 W 59TH ST                          9
+BAIS CHAYA HIGH SCHOOL                                   9051 W PICO BLVD                       5
+BAKEWELL PC                                              8621 SOUTH BARING CROSS ST             8
+BANNING HS                                               1527 LAKME AVE                        15
+BELMONT HS                                               1575 W 2ND                             1
+BERNSTEIN HS                                             1309 N WILTON PL                      13
+BETHUNE MS                                               155 W 69TH ST                          9
+DOWNTOWN BUSINESS MAG                                    1081 W TEMPLE ST                       1
+EL SERENO MS                                             2839 N EASTERN AVE.                   14
+EQUITAS ACADEMY 4                                        1700 W PICO BLVD                       1
+GOMPERS MS                                                234 E 112TH ST                        8
+GRAPE ST ES                                              1940 E 111TH ST                       15
+J MILLER CAREER/TRANSITION CTR                           8218 VANALDEN AVE                     12
+JEFFERSON HS                                             1319 E 41ST ST                         9
+JONES PC                                                 4617 VERMONT AVE                       9
+KING JR ES                                               3989 S HOBART BLV                      8
+KNOX ES                                                  8919 S MAIN ST                         8
+Honorable Heather Hutt​                      -9-​                           November 5, 2025
+
+
+LIZARRAGA ES                                        401 EAST 40TH PLACE                    9
+MAIN ST ES                                          129 E 53RD ST.                         9
+MOTHER OF SORROWS SCHOOL                            100 WEST 87TH PLACE                    8
+NEW VILLAGE GIRLS ACADEMY                           147 N OCCIDENTAL BLVD                  1
+NOBLE AVE ES                                        8329 NOBLE AVE                         6
+NORMANDIE AVE ES                                    4505 S RAYMOND AVE                     9
+NORMANDIE CHRISTIAN OF LOS ANGELES                  6306 SOUTH NORMANDIE AVENUE            8
+NORTHRIDGE EARLY ED CENTER                          18050 CHASE ST                        12
+OUR LADY OF PEACE ELEMENTARY SCHOOL                 9022 LANGDON AVENUE                    7
+PACOIMA EEC                                         11059 HERRICK AVE                      7
+PIO PICO MS                                         1512 S ARLINGTON AVE                  10
+PLASENCIA ES                                        1321 CORTEZ ST                         1
+RESEDA CHRTR HS                                     18230 KITTRIDGE ST                     4
+RESURRECTION CATHOLIC SCHOOL                        3360 OPAL STREET                      14
+SANTA MONICA BLVD COMM                              1022 N VAN NESS AVE                   13
+SOLEDAD ENRICHMENT ACTION, INC. - MANCHESTER
+SCHOOL                                              1100 W. MANCHESTER BLVD.               8
+SOUTH PARK ES                                       8510 TOWNE AVE                         9
+ST JANE FRANCIS DE CHANTAL                          12930 HAMLIN ST                        2
+ST. LAWRENCE OF BRINDISI ELEMENTARY SCHOOL          10044 COMPTON AVENUE                  15
+ST. PAUL ELEMENTARY SCHOOL                          1908 SOUTH BRONSON AVENUE             10
+VALOR ACADEMY MS                                    9034 BURNET AVE                        6
+WADSWORTH AVE ES                                    981 EAST 41ST ST.                      9
+WESTERN AVE TECH MAG                                1724 W 53RD ST                         8
+WINNETKA AVE ES                                     8240 WINNETKA AVE                      3
+

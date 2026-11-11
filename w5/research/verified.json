@@ -1,0 +1,71 @@
+{
+ "speed_hump": {
+  "value": "$5,958 per speed hump (LA Residential Speed Hump Program: ~120 humps a year on a $715,000 budget; contractor paid per linear foot, labor and materials)",
+  "source": "https://cityclerk.lacity.org/onlinedocs/2024/24-0332_rpt_dot_11-05-25.pdf",
+  "quote": "Los Angeles can install approximately 120 speed humps per year with a $715,000 annual budget through the Residential Speed Hump program, resulting in an estimated average cost of $5,958 per hump.",
+  "date": "LADOT memo, 5 Nov 2025 (CF 24-0332)"
+ },
+ "hump_eligibility": {
+  "value": "LADOT screens out streets with more than one lane in each direction, posted limits above 30 mph, grades above 8% and corridors that already have humps; eligible streets also need at least 1,000 vehicles a day and a critical speed 5 mph over the limit",
+  "source": "https://cityclerk.lacity.org/onlinedocs/2024/24-0332_rpt_dot_03-05-25.pdf",
+  "quote": "Eligible streets must meet specific thresholds, including a minimum daily traffic volume of 1,000 vehicles and a critical speed threshold of five mph over the posted speed limit to be eligible for speed humps.",
+  "date": "LADOT memo, 4 Mar 2025 (CF 24-0332); screening list also in the 5 Nov 2025 memo",
+  "source2": "https://cityclerk.lacity.org/onlinedocs/2024/24-0332_rpt_dot_11-05-25.pdf",
+  "quote2": "LADOT scored each NEN segment and conducted an initial screening to exclude corridors that did not meet basic eligibility criteria for speed humps, such as streets with more than one lane in each direction, posted speed limits above 30 miles per hour, roadway grades greater than 8 percent, and corridors with previously installed speed humps."
+ },
+ "channel_trail_coyote": {
+  "value": "$5,699,000 ATP allocation for a 1.6-mile Class I trail along the Coyote Creek Flood Channel (OC Loop Segments P and Q, Buena Park / La Mirada); vote list shows phase R/W, text says construction funds",
+  "source": "https://catc.ca.gov/-/media/ctc-media/documents/ctc-meetings/2025/2025-03/97-2-5w1-a11y.pdf",
+  "quote": "Construction funds for a Class I trail along the Coyote Creek Flood Channel (1.6 miles) that closes a gap along the 66-mile multi-modal regional route known as the 'OC Loop'.",
+  "date": "CTC meeting March 2025"
+ },
+ "channel_trail_puente": {
+  "value": "$3,700,000 programmed in ATP for 1.86 miles of Class I path along Puente Creek plus 0.37 miles of Class III route (LA County); withdrawn from ATP at the County's request in June 2025, so a budget, not a built cost",
+  "source": "https://catc.ca.gov/-/media/ctc-media/documents/ctc-meetings/2025/2025-06/75-4-27-a11y.pdf",
+  "quote": "Design and construct 1.86 miles of Class I bike path along Puente Creek and 0.37 miles of enhanced Class III bike route along surface streets.",
+  "quote_source": "https://catc.ca.gov/-/media/ctc-media/documents/ctc-meetings/2019/2019_06/137-2-5w1.pdf",
+  "date": "CTC 26-27 Jun 2019 (scope); CTC 26-27 Jun 2025 (deprogramming)"
+ },
+ "rail_trail_ocloop_a": {
+  "value": "OC Loop Segment A (La Habra rails-to-trails): 3.1-mile Class I gap closure, total project cost $45,998k in the 2024 RTIP (about $14.8M per mile incl. right-of-way and structures)",
+  "source": "https://www.octa.net/pdf/STIP_Submittal_StaffReport_2024.pdf",
+  "quote": "The project will close a 3.1-mile gap in the OC Loop, a portion of Orange County's bicycle network, with a Class I",
+  "date": "OCTA Board item 9 Oct 2023 (2024 STIP); RTIP total from https://www.octa.net/pdf/RTIP_Template_OCTA_2024.pdf"
+ },
+ "pocket_park_walnut": {
+  "value": "Walnut Park Pocket Park (LA County): new 0.5-acre park on undeveloped land with staff office/restroom, playgrounds, splash pad, lawn; total project budget $4,622,842 (construction $3,330,000); land bought with $1,265,000 of state funds; ~$385,000 a year to operate; substantial completion scheduled July 2023",
+  "source": "https://file.lacounty.gov/SDSInter/bos/supdocs/168842.pdf",
+  "quote": "The Development Project includes the construction of a new 0.5-acre park with a staff office and public restroom building, playground areas, splash pad, an open lawn area, and additional park amenities.",
+  "date": "LA County Public Works Board letter, 17 May 2022"
+ },
+ "ev_l2": {
+  "value": "$9,575 per Level 2 connector and $103,238 per DC fast charger, total cost incl. private funding, completed CALeVIP projects reported through 30 Sep 2021",
+  "source": "https://ww2.arb.ca.gov/sites/default/files/2022-08/2022_State_SIP_Strategy.pdf",
+  "quote": "Reported total costs, including private funding, are $9,575 per Level 2 connector and $103,238 per DC fast charger.",
+  "date": "CARB 2022 State SIP Strategy"
+ },
+ "afdc_stations": {
+  "value": "Station list: USDOT/BTS National Transportation Atlas copy of the AFDC station list, updated daily; unrestricted public use",
+  "source": "https://services.arcgis.com/xOi1kZaI0eWDREZv/arcgis/rest/services/Alternative_Fueling_Stations/FeatureServer/0",
+  "quote": "The Alternative Fueling Stations dataset is updated daily from the National Laboratory of the Rockies (NLR) and is part of the U.S. Department of Transportation (USDOT)/Bureau of Transportation Statistics (BTS) National Transportation Atlas Database (NTAD).",
+  "date": "downloaded 6 Nov 2026"
+ },
+ "la_speed_humps": {
+  "value": "City of Los Angeles speed hump locations (4,628 points; layer last edited 26 Aug 2024)",
+  "source": "https://services1.arcgis.com/tp9wqSVX1AitKgjd/arcgis/rest/services/Speed_Humps/FeatureServer/0",
+  "quote": "City of Los Angeles Speed Humps",
+  "date": "downloaded 6 Nov 2026"
+ },
+ "la_open_channels": {
+  "value": "LA County Public Works open flood-control channels (7,093 features)",
+  "source": "https://services.arcgis.com/RmCCgQtiZLDCtblq/arcgis/rest/services/Open_Channels/FeatureServer/3",
+  "quote": "Open Channels collect storm water and carry it through to lakes and oceans without pipes.",
+  "date": "downloaded 6 Nov 2026"
+ },
+ "crossing_units_la": {
+  "value": "LA City unit prices (with escalation and contingency), 2022: continental high-visibility crosswalk $3,950; ADA curb ramp $38,122; curb extension half corner/midblock $158,016, full corner $237,024; at a signalized intersection (APS included) $181,718 half / $260,726 full; pedestrian refuge island $110,611; sidewalk $603 per linear foot; leading pedestrian interval $34,034; speed feedback sign $14,221; rapid rectangular flashing beacon $118,512; pedestrian HAWK beacon $158,016 (T-intersection) to $237,024 (4-lane road); accessible pedestrian signal $20,542; Class II bike lanes $15 and Class III bike route $27 per foot; 7th St protected bike lane with landscape $297, signing $66 and signal modifications $175 per linear foot",
+  "source": "https://cityclerk.lacity.org/onlinedocs/2015/15-0087-S8_rpt_lahd_5-17-22.pdf",
+  "quote": "Crosswalk (upgrade to continental type with high visibility paint) STI DOT EA 16 $3,950 $63,200",
+  "date": "Mayor's transmittal to Council, 17 May 2022 (CF 15-0087-S6), Attachment C - Round 6 Detailed Budgets (AHSC); column 'Unit Price (w/ Escalation and Contingency)'"
+ }
+}

@@ -1,0 +1,120 @@
+Contra Costa County, CA (06013)
+  added: -['Oakland Coliseum/Airport Amtrak'] +[]
+Riverside County, CA (06065)
+  added: -['Perris - South'] +[]
+San Diego County, CA (06073)
+  added: -['Carlsbad Poinsettia Station', 'Carlsbad Village Station', 'San Diego - Santa Fe Depot', 'Solana Beach Station'] +[]
+San Francisco County, CA (06075)
+  added: -['Bayshore Station'] +[]
+San Mateo County, CA (06081)
+  added: -['Bayshore Station', 'South San Francisco Caltrain Station'] +[]
+Ventura County, CA (06111)
+  added: -['Ventura - East'] +[]
+Greater Bridgeport Planning Region, CT (09120)
+  added: -['Milford', 'Southport'] +[]
+Naugatuck Valley Planning Region, CT (09140)
+  added: -['Naugatuck', 'New Haven', 'Waterbury'] +[]
+South Central Connecticut Planning Region, CT (09170)
+  added: -['Milford', 'Naugatuck', 'New Haven', 'Waterbury'] +[]
+Western Connecticut Planning Region, CT (09190)
+  added: -['Branchville', 'Cos Cob', 'Old Greenwich', 'Port Chester', 'Southport'] +[]
+District of Columbia, DC (11001)
+  added: -['Ballston-MU', 'L Enfant', 'Stadium-Armory', 'Union Station', 'Union Station'] +[]
+Duval County, FL (12031)
+  dropped: -[] +['Central', 'Jacksonville Regional Transportation Center', 'James Weldon Johnson Park', 'Jefferson', 'Kings Avenue', 'Riverplace', 'Rosa Parks', 'San Marco']
+  mode: -['Central', 'Jacksonville Regional Transportation Center', 'James Weldon Johnson Park', 'Jefferson', 'Kings Avenue', 'Riverplace', 'Rosa Parks', 'San Marco'] +[]
+Clayton County, GA (13063)
+  added: -['COLLEGE PARK STATION'] +[]
+Fulton County, GA (13121)
+  added: -['COLLEGE PARK STATION'] +[]
+Cook County, IL (17031)
+  added: -['51st/53rd St. (Hyde Park)', 'Cicero (Blue)', 'Elmhurst', 'Hammond Gateway', 'Kedzie-Homan', 'Pulaski (Blue)', 'Westmont'] +[]
+DuPage County, IL (17043)
+  added: -['Bartlett'] +[]
+Will County, IL (17197)
+  added: -['New Lenox'] +[]
+Lake County, IN (18089)
+  added: -['Hammond Gateway', 'Munster Dyer Station', 'South Hammond'] +[]
+Wyandotte County, KS (20209)
+  added: -['Kansas City'] +[]
+Lafayette Parish, LA (22055)
+  added: -['Lafayette Amtrak Station'] +[]
+Baltimore County, MD (24005)
+  added: -['CHARLES CENTER METRO'] +[]
+Prince George's County, MD (24033)
+  added: -['L Enfant', 'Stadium-Armory', 'Union Station', 'Union Station'] +[]
+Baltimore city, MD (24510)
+  added: -['CHARLES CENTER METRO'] +[]
+Essex County, MA (25009)
+  added: -['Manchester', 'North Wilmington'] +[]
+Middlesex County, MA (25017)
+  added: -['Boston', 'Littleton/Route 495', 'Lowell', 'North Wilmington', 'Wellesley Farms'] +[]
+Norfolk County, MA (25021)
+  added: -['Boston', 'Southborough', 'Wellesley Farms'] +[]
+Plymouth County, MA (25023)
+  added: -['Boston'] +[]
+Suffolk County, MA (25025)
+  added: -['Boston'] +[]
+Worcester County, MA (25027)
+  added: -['Littleton/Route 495'] +[]
+Jackson County, MO (29095)
+  added: -['Kansas City'] +[]
+Bergen County, NJ (34003)
+  added: -['Ludlow'] +[]
+Burlington County, NJ (34005)
+  added: -['Cornwells Heights', 'Woodbourne'] +[]
+Gloucester County, NJ (34015)
+  added: -['Eastwick'] +[]
+Mercer County, NJ (34021)
+  added: -['Woodbourne'] +[]
+Middlesex County, NJ (34023)
+  added: -['ABERDEEN-MATAWAN'] +[]
+Monmouth County, NJ (34025)
+  added: -['ABERDEEN-MATAWAN'] +[]
+Bernalillo County, NM (35001)
+  added: -['Albuquerque Alvarado Transportation Center'] +[]
+Bronx County, NY (36005)
+  added: -['Flushing Main Street'] +[]
+Dutchess County, NY (36027)
+  added: -['Beacon', 'Breakneck Ridge', 'Dover Plains'] +[]
+Erie County, NY (36029)
+  added: -['Canadian Border'] +[]
+Kings County, NY (36047)
+  added: -['Crown Hts-Utica Av'] +[]
+New York County, NY (36061)
+  added: -['Crown Hts-Utica Av'] +[]
+Niagara County, NY (36063)
+  added: -['Canadian Border'] +[]
+Orange County, NY (36071)
+  added: -['Beacon', 'Breakneck Ridge', 'Peekskill'] +[]
+Queens County, NY (36081)
+  added: -['Crown Hts-Utica Av', 'Great Neck'] +[]
+Rockland County, NY (36087)
+  added: -['PARK RIDGE', 'Peekskill'] +[]
+Suffolk County, NY (36103)
+  added: -['New Haven', 'St. James'] +[]
+Westchester County, NY (36119)
+  added: -['Bronxville', 'Larchmont', 'Ludlow', 'Peekskill', 'Port Chester', 'Riverdale', 'Tuckahoe', 'Valhalla'] +[]
+Bucks County, PA (42017)
+  added: -['Cornwells Heights', 'Woodbourne'] +[]
+Dauphin County, PA (42043)
+  added: -['Middletown'] +[]
+Delaware County, PA (42045)
+  added: -['Eastwick'] +[]
+Lancaster County, PA (42071)
+  added: -['Middletown'] +[]
+Montgomery County, PA (42091)
+  added: -['30TH ST. PHL.', 'Philadelphia'] +['Gray 30th St Station']
+Philadelphia County, PA (42101)
+  added: -['Cornwells Heights', 'Eastwick'] +[]
+York County, PA (42133)
+  added: -['Middletown'] +[]
+Arlington County, VA (51013)
+  added: -['Ballston-MU', 'L Enfant', 'Union Station'] +[]
+Fairfax County, VA (51059)
+  added: -['Ballston-MU', 'Broad Run', 'L Enfant'] +[]
+Prince William County, VA (51153)
+  added: -['Broad Run'] +[]
+King County, WA (53033)
+  added: -['Seattle'] +[]
+59 counties changed; {'added -': 116, 'added +': 1, 'dropped -': 0, 'dropped +': 8, 'mode -': 8, 'mode +': 0}

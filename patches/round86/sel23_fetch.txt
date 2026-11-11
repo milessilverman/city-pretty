@@ -1,0 +1,119 @@
+@@OLD
+GTFS_SELECTION = 22   # 22 (round 8.6): a catalog row that MobilityData's legacy catalog marks inactive but its current export marks active or
+@@NEW
+GTFS_SELECTION = 23   # 23 (round 8.6): a catalog row MobilityData marks inactive is never counted, but where no counted feed has its agency,
+#   the bus stops of its last copy inside the county's box are gap stops (bus frequency unknown nearby, not 0): Indianapolis counted only
+#   CIRTA's 34 stops while IndyGo's rows are inactive (copies ending Feb 2024 and Jun 2025) and showed 0 buses an hour in 684 of 759
+#   block groups. 22 (round 8.6): a catalog row that MobilityData's legacy catalog marks inactive but its current export marks active or
+@@OLD
+NO_BUS_NEAR_TODAY = "no bus service on the Wednesdays within three weeks of today"
+@@NEW
+NO_BUS_NEAR_TODAY = "no bus service on the Wednesdays within three weeks of today"
+
+
+def _zip_reader(z):
+    """rd(name) over a GTFS zip, as fetch_gtfs_mdb reads a copy: tables in a subfolder or as .csv are found, header names stripped"""
+    names = set(z.namelist()); alias = {}
+    for nm in sorted(names):
+        base, dot, ext = nm.rsplit("/", 1)[-1].rpartition(".")
+        if dot and base and ext.lower() in ("txt", "csv"):
+            alias.setdefault(base.lower() + ".txt", nm)
+    def rd(n):
+        m = n if n in names else alias.get(n.lower())
+        if not m:
+            return []
+        return ({(k or "").strip(): (v.strip() if isinstance(v, str) else v) for k, v in row.items()}
+                for row in csv.DictReader(io.TextIOWrapper(z.open(m), encoding="utf-8-sig")))
+    return rd
+
+
+def _inactive_gap(r, rd, W, S, E, N, gap):
+    """selection 23: the bus stops of an inactive catalog row's last copy inside the county's box, added to gap with their agencies as the
+    stale branch of _gtfs_feed adds a stale copy's; returns (bus stops in the box, the copy's last service date or None, its agencies' keys)"""
+    import datetime
+    agencies = {(a.get("agency_id") or "").strip(): (a.get("agency_name") or "").strip() for a in rd("agency.txt")}
+    one = next(iter(agencies.values())) if len(agencies) == 1 else None
+    route_ag = {}
+    for x in rd("routes.txt"):
+        rt = (x.get("route_type") or "").strip()
+        if rt.isdigit() and int(rt) in BUS_TYPES and x.get("route_id"):
+            route_ag[x["route_id"]] = agencies.get((x.get("agency_id") or "").strip()) or one or r["provider"]
+    trips = {t["trip_id"]: route_ag[t["route_id"]] for t in rd("trips.txt") if t.get("route_id") in route_ag and t.get("trip_id")}
+    stop_ags = collections.defaultdict(set)
+    for st in rd("stop_times.txt"):
+        a = trips.get(st.get("trip_id"))
+        if a:
+            stop_ags[st.get("stop_id")].add(_agency_key(a))
+    n = 0
+    for x in rd("stops.txt"):
+        if x.get("stop_id") in stop_ags:
+            try:
+                lon, lat = float(x["stop_lon"]), float(x["stop_lat"])
+            except (KeyError, TypeError, ValueError):
+                continue
+            if W <= lon <= E and S <= lat <= N:
+                gap.append([lon, lat, r["provider"], frozenset(stop_ags[x["stop_id"]])]); n += 1
+    ok8 = lambda v: isinstance(v, str) and len(v) == 8 and v.isdigit()
+    d = [c.get("end_date") for c in rd("calendar.txt") if ok8(c.get("end_date"))] + [c.get("date") for c in rd("calendar_dates.txt") if ok8(c.get("date"))]
+    return n, (datetime.datetime.strptime(max(d), "%Y%m%d").date() if d else None), set().union(*stop_ags.values()) if stop_ags else set()
+@@OLD
+    by_provider = collections.OrderedDict()   # provider -> candidate feeds: active ones first, then deprecated mirrors as a fallback
+@@NEW
+    by_provider = collections.OrderedDict()   # provider -> candidate feeds: active ones first, then deprecated mirrors as a fallback
+    inactive_rows = []   # selection 23: rows MobilityData marks inactive, read after the others for gap stops only
+@@OLD
+        if (r.get("status") in ("inactive", "development")   # selection 19: 'future' rows are read, their calendars judged as any feed's
+                or "flex" in (r.get("name") or "").lower()
+@@NEW
+        if (r.get("status") == "development"   # selection 19: 'future' rows are read, their calendars judged as any feed's
+                or "flex" in (r.get("name") or "").lower()
+@@OLD
+            if b[2] < W or b[0] > E or b[3] < S or b[1] > N or (b[2] - b[0]) * (b[3] - b[1]) > 20:   # no overlap, or multi-state (Amtrak, intercity coaches)
+                continue
+        else:   # no box at all (no hosted copy to read, e.g. SFMTA 2886): same state, or no state and a municipality in this county
+@@NEW
+            if b[2] < W or b[0] > E or b[3] < S or b[1] > N or (b[2] - b[0]) * (b[3] - b[1]) > 20:   # no overlap, or multi-state (Amtrak, intercity coaches)
+                continue
+            if r.get("status") == "inactive":   # selection 23: placed by its box only, read later for gap stops
+                inactive_rows.append(r); continue
+        elif r.get("status") == "inactive":
+            continue
+        else:   # no box at all (no hosted copy to read, e.g. SFMTA 2886): same state, or no state and a municipality in this county
+@@OLD
+      if not done and ended_g is not None:
+        pick(ended_g, seen_g)
+@@NEW
+      if not done and ended_g is not None:
+        pick(ended_g, seen_g)
+    # selection 23: an inactive row is never counted; where no counted feed has its agency (the gap filter below drops a gap stop whose
+    # agencies are all read), its last copy's bus stops in the county's box are gap stops, so that a block group near one with no counted
+    # stop within 400 m has unknown bus frequency (metrics_oc), as near a schedule that ended over a year ago
+    run_now = {a for res in results for a in res["agencies"]}
+    for r in inactive_rows:
+        fid = r["mdb_source_id"]
+        if fid in tried:
+            continue
+        tried[fid] = False; z = None; kind = None
+        for kind, url in [("hosted", f"{MDB_HOSTED}/{'mdb-' + fid if fid.isdigit() else fid}/latest.zip")] + (
+                [("legacy mirror", f"https://storage.googleapis.com/storage/v1/b/mdb-latest/o/{IDX[fid]['name']}?alt=media")] if fid in IDX else []):
+            try:
+                z = zipfile.ZipFile(io.BytesIO(get(url, binary=True, timeout=900, retries=2))); break
+            except Exception:
+                z = None
+        if z is None:
+            log("   gtfs inactive, no copy", fid, r["provider"][:40]); continue
+        try:
+            n_here, last, ags = _inactive_gap(r, _zip_reader(z), W, S, E, N, gap)
+        except Exception as e:
+            log("   gtfs inactive, unreadable", fid, r["provider"][:40], repr(e)[:80]); continue
+        if n_here and not (ags and ags <= run_now):   # listed only when its agency is not counted from another feed
+            skipped.append({"id": fid, "provider": r["provider"], "copy": kind, "inactive": True, "stops_in_county": n_here,
+                            **({"calendar_end": last.isoformat()} if last else {}),
+                            "why": "marked inactive in MobilityData's catalog" + ((f"; its last copy ended on {last.isoformat()}" if last < today else f"; its last copy runs to {last.isoformat()}") if last else "")})
+        log("   gtfs inactive, gap stops only", fid, r["provider"][:40], n_here, "bus stops here; last copy to", last)
+@@OLD
+            elif r.get("status") not in ("inactive", "development"):   # selection 19: 'future' is MobilityData's status when it last
+@@NEW
+            elif r.get("status") != "development":   # selection 19: 'future' is MobilityData's status when it last; selection 23: an inactive
+                #   row is added too, read only for gap stops (IndyGo's ntd-50050, ending Jun 2025, is only in the current export)
+@@END

@@ -1,0 +1,2812 @@
+<script>/* @preserve
+ * Leaflet 1.9.4, a JS library for interactive maps. https://leafletjs.com
+ * (c) 2010-2023 Vladimir Agafonkin, (c) 2010-2011 CloudMade
+ */
+!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"function"==typeof define&&define.amd?define(["exports"],e):e((t="undefined"!=typeof globalThis?globalThis:t||self).leaflet={})}(this,function(t){"use strict";function l(t){for(var e,i,n=1,o=arguments.length;n<o;n++)for(e in i=arguments[n])t[e]=i[e];return t}var R=Object.create||function(t){return N.prototype=t,new N};function N(){}function a(t,e){var i,n=Array.prototype.slice;return t.bind?t.bind.apply(t,n.call(arguments,1)):(i=n.call(arguments,2),function(){return t.apply(e,i.length?i.concat(n.call(arguments)):arguments)})}var D=0;function h(t){return"_leaflet_id"in t||(t._leaflet_id=++D),t._leaflet_id}function j(t,e,i){var n,o,s=function(){n=!1,o&&(r.apply(i,o),o=!1)},r=function(){n?o=arguments:(t.apply(i,arguments),setTimeout(s,e),n=!0)};return r}function H(t,e,i){var n=e[1],e=e[0],o=n-e;return t===n&&i?t:((t-e)%o+o)%o+e}function u(){return!1}function i(t,e){return!1===e?t:(e=Math.pow(10,void 0===e?6:e),Math.round(t*e)/e)}function W(t){return t.trim?t.trim():t.replace(/^\s+|\s+$/g,"")}function F(t){return W(t).split(/\s+/)}function c(t,e){for(var i in Object.prototype.hasOwnProperty.call(t,"options")||(t.options=t.options?R(t.options):{}),e)t.options[i]=e[i];return t.options}function U(t,e,i){var n,o=[];for(n in t)o.push(encodeURIComponent(i?n.toUpperCase():n)+"="+encodeURIComponent(t[n]));return(e&&-1!==e.indexOf("?")?"&":"?")+o.join("&")}var V=/\{ *([\w_ -]+) *\}/g;function q(t,i){return t.replace(V,function(t,e){e=i[e];if(void 0===e)throw new Error("No value provided for variable "+t);return e="function"==typeof e?e(i):e})}var d=Array.isArray||function(t){return"[object Array]"===Object.prototype.toString.call(t)};function G(t,e){for(var i=0;i<t.length;i++)if(t[i]===e)return i;return-1}var K="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";function Y(t){return window["webkit"+t]||window["moz"+t]||window["ms"+t]}var X=0;function J(t){var e=+new Date,i=Math.max(0,16-(e-X));return X=e+i,window.setTimeout(t,i)}var $=window.requestAnimationFrame||Y("RequestAnimationFrame")||J,Q=window.cancelAnimationFrame||Y("CancelAnimationFrame")||Y("CancelRequestAnimationFrame")||function(t){window.clearTimeout(t)};function x(t,e,i){if(!i||$!==J)return $.call(window,a(t,e));t.call(e)}function r(t){t&&Q.call(window,t)}var tt={__proto__:null,extend:l,create:R,bind:a,get lastId(){return D},stamp:h,throttle:j,wrapNum:H,falseFn:u,formatNum:i,trim:W,splitWords:F,setOptions:c,getParamString:U,template:q,isArray:d,indexOf:G,emptyImageUrl:K,requestFn:$,cancelFn:Q,requestAnimFrame:x,cancelAnimFrame:r};function et(){}et.extend=function(t){function e(){c(this),this.initialize&&this.initialize.apply(this,arguments),this.callInitHooks()}var i,n=e.__super__=this.prototype,o=R(n);for(i in(o.constructor=e).prototype=o,this)Object.prototype.hasOwnProperty.call(this,i)&&"prototype"!==i&&"__super__"!==i&&(e[i]=this[i]);if(t.statics&&l(e,t.statics),t.includes){var s=t.includes;if("undefined"!=typeof L&&L&&L.Mixin){s=d(s)?s:[s];for(var r=0;r<s.length;r++)s[r]===L.Mixin.Events&&console.warn("Deprecated include of L.Mixin.Events: this property will be removed in future releases, please inherit from L.Evented instead.",(new Error).stack)}l.apply(null,[o].concat(t.includes))}return l(o,t),delete o.statics,delete o.includes,o.options&&(o.options=n.options?R(n.options):{},l(o.options,t.options)),o._initHooks=[],o.callInitHooks=function(){if(!this._initHooksCalled){n.callInitHooks&&n.callInitHooks.call(this),this._initHooksCalled=!0;for(var t=0,e=o._initHooks.length;t<e;t++)o._initHooks[t].call(this)}},e},et.include=function(t){var e=this.prototype.options;return l(this.prototype,t),t.options&&(this.prototype.options=e,this.mergeOptions(t.options)),this},et.mergeOptions=function(t){return l(this.prototype.options,t),this},et.addInitHook=function(t){var e=Array.prototype.slice.call(arguments,1),i="function"==typeof t?t:function(){this[t].apply(this,e)};return this.prototype._initHooks=this.prototype._initHooks||[],this.prototype._initHooks.push(i),this};var e={on:function(t,e,i){if("object"==typeof t)for(var n in t)this._on(n,t[n],e);else for(var o=0,s=(t=F(t)).length;o<s;o++)this._on(t[o],e,i);return this},off:function(t,e,i){if(arguments.length)if("object"==typeof t)for(var n in t)this._off(n,t[n],e);else{t=F(t);for(var o=1===arguments.length,s=0,r=t.length;s<r;s++)o?this._off(t[s]):this._off(t[s],e,i)}else delete this._events;return this},_on:function(t,e,i,n){"function"!=typeof e?console.warn("wrong listener type: "+typeof e):!1===this._listens(t,e,i)&&(e={fn:e,ctx:i=i===this?void 0:i},n&&(e.once=!0),this._events=this._events||{},this._events[t]=this._events[t]||[],this._events[t].push(e))},_off:function(t,e,i){var n,o,s;if(this._events&&(n=this._events[t]))if(1===arguments.length){if(this._firingCount)for(o=0,s=n.length;o<s;o++)n[o].fn=u;delete this._events[t]}else"function"!=typeof e?console.warn("wrong listener type: "+typeof e):!1!==(e=this._listens(t,e,i))&&(i=n[e],this._firingCount&&(i.fn=u,this._events[t]=n=n.slice()),n.splice(e,1))},fire:function(t,e,i){if(this.listens(t,i)){var n=l({},e,{type:t,target:this,sourceTarget:e&&e.sourceTarget||this});if(this._events){var o=this._events[t];if(o){this._firingCount=this._firingCount+1||1;for(var s=0,r=o.length;s<r;s++){var a=o[s],h=a.fn;a.once&&this.off(t,h,a.ctx),h.call(a.ctx||this,n)}this._firingCount--}}i&&this._propagateEvent(n)}return this},listens:function(t,e,i,n){"string"!=typeof t&&console.warn('"string" type argument expected');var o=e,s=("function"!=typeof e&&(n=!!e,i=o=void 0),this._events&&this._events[t]);if(s&&s.length&&!1!==this._listens(t,o,i))return!0;if(n)for(var r in this._eventParents)if(this._eventParents[r].listens(t,e,i,n))return!0;return!1},_listens:function(t,e,i){if(this._events){var n=this._events[t]||[];if(!e)return!!n.length;i===this&&(i=void 0);for(var o=0,s=n.length;o<s;o++)if(n[o].fn===e&&n[o].ctx===i)return o}return!1},once:function(t,e,i){if("object"==typeof t)for(var n in t)this._on(n,t[n],e,!0);else for(var o=0,s=(t=F(t)).length;o<s;o++)this._on(t[o],e,i,!0);return this},addEventParent:function(t){return this._eventParents=this._eventParents||{},this._eventParents[h(t)]=t,this},removeEventParent:function(t){return this._eventParents&&delete this._eventParents[h(t)],this},_propagateEvent:function(t){for(var e in this._eventParents)this._eventParents[e].fire(t.type,l({layer:t.target,propagatedFrom:t.target},t),!0)}},it=(e.addEventListener=e.on,e.removeEventListener=e.clearAllEventListeners=e.off,e.addOneTimeEventListener=e.once,e.fireEvent=e.fire,e.hasEventListeners=e.listens,et.extend(e));function p(t,e,i){this.x=i?Math.round(t):t,this.y=i?Math.round(e):e}var nt=Math.trunc||function(t){return 0<t?Math.floor(t):Math.ceil(t)};function m(t,e,i){return t instanceof p?t:d(t)?new p(t[0],t[1]):null==t?t:"object"==typeof t&&"x"in t&&"y"in t?new p(t.x,t.y):new p(t,e,i)}function f(t,e){if(t)for(var i=e?[t,e]:t,n=0,o=i.length;n<o;n++)this.extend(i[n])}function _(t,e){return!t||t instanceof f?t:new f(t,e)}function s(t,e){if(t)for(var i=e?[t,e]:t,n=0,o=i.length;n<o;n++)this.extend(i[n])}function g(t,e){return t instanceof s?t:new s(t,e)}function v(t,e,i){if(isNaN(t)||isNaN(e))throw new Error("Invalid LatLng object: ("+t+", "+e+")");this.lat=+t,this.lng=+e,void 0!==i&&(this.alt=+i)}function w(t,e,i){return t instanceof v?t:d(t)&&"object"!=typeof t[0]?3===t.length?new v(t[0],t[1],t[2]):2===t.length?new v(t[0],t[1]):null:null==t?t:"object"==typeof t&&"lat"in t?new v(t.lat,"lng"in t?t.lng:t.lon,t.alt):void 0===e?null:new v(t,e,i)}p.prototype={clone:function(){return new p(this.x,this.y)},add:function(t){return this.clone()._add(m(t))},_add:function(t){return this.x+=t.x,this.y+=t.y,this},subtract:function(t){return this.clone()._subtract(m(t))},_subtract:function(t){return this.x-=t.x,this.y-=t.y,this},divideBy:function(t){return this.clone()._divideBy(t)},_divideBy:function(t){return this.x/=t,this.y/=t,this},multiplyBy:function(t){return this.clone()._multiplyBy(t)},_multiplyBy:function(t){return this.x*=t,this.y*=t,this},scaleBy:function(t){return new p(this.x*t.x,this.y*t.y)},unscaleBy:function(t){return new p(this.x/t.x,this.y/t.y)},round:function(){return this.clone()._round()},_round:function(){return this.x=Math.round(this.x),this.y=Math.round(this.y),this},floor:function(){return this.clone()._floor()},_floor:function(){return this.x=Math.floor(this.x),this.y=Math.floor(this.y),this},ceil:function(){return this.clone()._ceil()},_ceil:function(){return this.x=Math.ceil(this.x),this.y=Math.ceil(this.y),this},trunc:function(){return this.clone()._trunc()},_trunc:function(){return this.x=nt(this.x),this.y=nt(this.y),this},distanceTo:function(t){var e=(t=m(t)).x-this.x,t=t.y-this.y;return Math.sqrt(e*e+t*t)},equals:function(t){return(t=m(t)).x===this.x&&t.y===this.y},contains:function(t){return t=m(t),Math.abs(t.x)<=Math.abs(this.x)&&Math.abs(t.y)<=Math.abs(this.y)},toString:function(){return"Point("+i(this.x)+", "+i(this.y)+")"}},f.prototype={extend:function(t){var e,i;if(t){if(t instanceof p||"number"==typeof t[0]||"x"in t)e=i=m(t);else if(e=(t=_(t)).min,i=t.max,!e||!i)return this;this.min||this.max?(this.min.x=Math.min(e.x,this.min.x),this.max.x=Math.max(i.x,this.max.x),this.min.y=Math.min(e.y,this.min.y),this.max.y=Math.max(i.y,this.max.y)):(this.min=e.clone(),this.max=i.clone())}return this},getCenter:function(t){return m((this.min.x+this.max.x)/2,(this.min.y+this.max.y)/2,t)},getBottomLeft:function(){return m(this.min.x,this.max.y)},getTopRight:function(){return m(this.max.x,this.min.y)},getTopLeft:function(){return this.min},getBottomRight:function(){return this.max},getSize:function(){return this.max.subtract(this.min)},contains:function(t){var e,i;return(t=("number"==typeof t[0]||t instanceof p?m:_)(t))instanceof f?(e=t.min,i=t.max):e=i=t,e.x>=this.min.x&&i.x<=this.max.x&&e.y>=this.min.y&&i.y<=this.max.y},intersects:function(t){t=_(t);var e=this.min,i=this.max,n=t.min,t=t.max,o=t.x>=e.x&&n.x<=i.x,t=t.y>=e.y&&n.y<=i.y;return o&&t},overlaps:function(t){t=_(t);var e=this.min,i=this.max,n=t.min,t=t.max,o=t.x>e.x&&n.x<i.x,t=t.y>e.y&&n.y<i.y;return o&&t},isValid:function(){return!(!this.min||!this.max)},pad:function(t){var e=this.min,i=this.max,n=Math.abs(e.x-i.x)*t,t=Math.abs(e.y-i.y)*t;return _(m(e.x-n,e.y-t),m(i.x+n,i.y+t))},equals:function(t){return!!t&&(t=_(t),this.min.equals(t.getTopLeft())&&this.max.equals(t.getBottomRight()))}},s.prototype={extend:function(t){var e,i,n=this._southWest,o=this._northEast;if(t instanceof v)i=e=t;else{if(!(t instanceof s))return t?this.extend(w(t)||g(t)):this;if(e=t._southWest,i=t._northEast,!e||!i)return this}return n||o?(n.lat=Math.min(e.lat,n.lat),n.lng=Math.min(e.lng,n.lng),o.lat=Math.max(i.lat,o.lat),o.lng=Math.max(i.lng,o.lng)):(this._southWest=new v(e.lat,e.lng),this._northEast=new v(i.lat,i.lng)),this},pad:function(t){var e=this._southWest,i=this._northEast,n=Math.abs(e.lat-i.lat)*t,t=Math.abs(e.lng-i.lng)*t;return new s(new v(e.lat-n,e.lng-t),new v(i.lat+n,i.lng+t))},getCenter:function(){return new v((this._southWest.lat+this._northEast.lat)/2,(this._southWest.lng+this._northEast.lng)/2)},getSouthWest:function(){return this._southWest},getNorthEast:function(){return this._northEast},getNorthWest:function(){return new v(this.getNorth(),this.getWest())},getSouthEast:function(){return new v(this.getSouth(),this.getEast())},getWest:function(){return this._southWest.lng},getSouth:function(){return this._southWest.lat},getEast:function(){return this._northEast.lng},getNorth:function(){return this._northEast.lat},contains:function(t){t=("number"==typeof t[0]||t instanceof v||"lat"in t?w:g)(t);var e,i,n=this._southWest,o=this._northEast;return t instanceof s?(e=t.getSouthWest(),i=t.getNorthEast()):e=i=t,e.lat>=n.lat&&i.lat<=o.lat&&e.lng>=n.lng&&i.lng<=o.lng},intersects:function(t){t=g(t);var e=this._southWest,i=this._northEast,n=t.getSouthWest(),t=t.getNorthEast(),o=t.lat>=e.lat&&n.lat<=i.lat,t=t.lng>=e.lng&&n.lng<=i.lng;return o&&t},overlaps:function(t){t=g(t);var e=this._southWest,i=this._northEast,n=t.getSouthWest(),t=t.getNorthEast(),o=t.lat>e.lat&&n.lat<i.lat,t=t.lng>e.lng&&n.lng<i.lng;return o&&t},toBBoxString:function(){return[this.getWest(),this.getSouth(),this.getEast(),this.getNorth()].join(",")},equals:function(t,e){return!!t&&(t=g(t),this._southWest.equals(t.getSouthWest(),e)&&this._northEast.equals(t.getNorthEast(),e))},isValid:function(){return!(!this._southWest||!this._northEast)}};var ot={latLngToPoint:function(t,e){t=this.projection.project(t),e=this.scale(e);return this.transformation._transform(t,e)},pointToLatLng:function(t,e){e=this.scale(e),t=this.transformation.untransform(t,e);return this.projection.unproject(t)},project:function(t){return this.projection.project(t)},unproject:function(t){return this.projection.unproject(t)},scale:function(t){return 256*Math.pow(2,t)},zoom:function(t){return Math.log(t/256)/Math.LN2},getProjectedBounds:function(t){var e;return this.infinite?null:(e=this.projection.bounds,t=this.scale(t),new f(this.transformation.transform(e.min,t),this.transformation.transform(e.max,t)))},infinite:!(v.prototype={equals:function(t,e){return!!t&&(t=w(t),Math.max(Math.abs(this.lat-t.lat),Math.abs(this.lng-t.lng))<=(void 0===e?1e-9:e))},toString:function(t){return"LatLng("+i(this.lat,t)+", "+i(this.lng,t)+")"},distanceTo:function(t){return st.distance(this,w(t))},wrap:function(){return st.wrapLatLng(this)},toBounds:function(t){var t=180*t/40075017,e=t/Math.cos(Math.PI/180*this.lat);return g([this.lat-t,this.lng-e],[this.lat+t,this.lng+e])},clone:function(){return new v(this.lat,this.lng,this.alt)}}),wrapLatLng:function(t){var e=this.wrapLng?H(t.lng,this.wrapLng,!0):t.lng;return new v(this.wrapLat?H(t.lat,this.wrapLat,!0):t.lat,e,t.alt)},wrapLatLngBounds:function(t){var e=t.getCenter(),i=this.wrapLatLng(e),n=e.lat-i.lat,e=e.lng-i.lng;return 0==n&&0==e?t:(i=t.getSouthWest(),t=t.getNorthEast(),new s(new v(i.lat-n,i.lng-e),new v(t.lat-n,t.lng-e)))}},st=l({},ot,{wrapLng:[-180,180],R:6371e3,distance:function(t,e){var i=Math.PI/180,n=t.lat*i,o=e.lat*i,s=Math.sin((e.lat-t.lat)*i/2),e=Math.sin((e.lng-t.lng)*i/2),t=s*s+Math.cos(n)*Math.cos(o)*e*e,i=2*Math.atan2(Math.sqrt(t),Math.sqrt(1-t));return this.R*i}}),rt=6378137,rt={R:rt,MAX_LATITUDE:85.0511287798,project:function(t){var e=Math.PI/180,i=this.MAX_LATITUDE,i=Math.max(Math.min(i,t.lat),-i),i=Math.sin(i*e);return new p(this.R*t.lng*e,this.R*Math.log((1+i)/(1-i))/2)},unproject:function(t){var e=180/Math.PI;return new v((2*Math.atan(Math.exp(t.y/this.R))-Math.PI/2)*e,t.x*e/this.R)},bounds:new f([-(rt=rt*Math.PI),-rt],[rt,rt])};function at(t,e,i,n){d(t)?(this._a=t[0],this._b=t[1],this._c=t[2],this._d=t[3]):(this._a=t,this._b=e,this._c=i,this._d=n)}function ht(t,e,i,n){return new at(t,e,i,n)}at.prototype={transform:function(t,e){return this._transform(t.clone(),e)},_transform:function(t,e){return t.x=(e=e||1)*(this._a*t.x+this._b),t.y=e*(this._c*t.y+this._d),t},untransform:function(t,e){return new p((t.x/(e=e||1)-this._b)/this._a,(t.y/e-this._d)/this._c)}};var lt=l({},st,{code:"EPSG:3857",projection:rt,transformation:ht(lt=.5/(Math.PI*rt.R),.5,-lt,.5)}),ut=l({},lt,{code:"EPSG:900913"});function ct(t){return document.createElementNS("http://www.w3.org/2000/svg",t)}function dt(t,e){for(var i,n,o,s,r="",a=0,h=t.length;a<h;a++){for(i=0,n=(o=t[a]).length;i<n;i++)r+=(i?"L":"M")+(s=o[i]).x+" "+s.y;r+=e?b.svg?"z":"x":""}return r||"M0 0"}var _t=document.documentElement.style,pt="ActiveXObject"in window,mt=pt&&!document.addEventListener,n="msLaunchUri"in navigator&&!("documentMode"in document),ft=y("webkit"),gt=y("android"),vt=y("android 2")||y("android 3"),yt=parseInt(/WebKit\/([0-9]+)|$/.exec(navigator.userAgent)[1],10),yt=gt&&y("Google")&&yt<537&&!("AudioNode"in window),xt=!!window.opera,wt=!n&&y("chrome"),bt=y("gecko")&&!ft&&!xt&&!pt,Pt=!wt&&y("safari"),Lt=y("phantom"),o="OTransition"in _t,Tt=0===navigator.platform.indexOf("Win"),Mt=pt&&"transition"in _t,zt="WebKitCSSMatrix"in window&&"m11"in new window.WebKitCSSMatrix&&!vt,_t="MozPerspective"in _t,Ct=!window.L_DISABLE_3D&&(Mt||zt||_t)&&!o&&!Lt,Zt="undefined"!=typeof orientation||y("mobile"),St=Zt&&ft,Et=Zt&&zt,kt=!window.PointerEvent&&window.MSPointerEvent,Ot=!(!window.PointerEvent&&!kt),At="ontouchstart"in window||!!window.TouchEvent,Bt=!window.L_NO_TOUCH&&(At||Ot),It=Zt&&xt,Rt=Zt&&bt,Nt=1<(window.devicePixelRatio||window.screen.deviceXDPI/window.screen.logicalXDPI),Dt=function(){var t=!1;try{var e=Object.defineProperty({},"passive",{get:function(){t=!0}});window.addEventListener("testPassiveEventSupport",u,e),window.removeEventListener("testPassiveEventSupport",u,e)}catch(t){}return t}(),jt=!!document.createElement("canvas").getContext,Ht=!(!document.createElementNS||!ct("svg").createSVGRect),Wt=!!Ht&&((Wt=document.createElement("div")).innerHTML="<svg/>","http://www.w3.org/2000/svg"===(Wt.firstChild&&Wt.firstChild.namespaceURI));function y(t){return 0<=navigator.userAgent.toLowerCase().indexOf(t)}var b={ie:pt,ielt9:mt,edge:n,webkit:ft,android:gt,android23:vt,androidStock:yt,opera:xt,chrome:wt,gecko:bt,safari:Pt,phantom:Lt,opera12:o,win:Tt,ie3d:Mt,webkit3d:zt,gecko3d:_t,any3d:Ct,mobile:Zt,mobileWebkit:St,mobileWebkit3d:Et,msPointer:kt,pointer:Ot,touch:Bt,touchNative:At,mobileOpera:It,mobileGecko:Rt,retina:Nt,passiveEvents:Dt,canvas:jt,svg:Ht,vml:!Ht&&function(){try{var t=document.createElement("div"),e=(t.innerHTML='<v:shape adj="1"/>',t.firstChild);return e.style.behavior="url(#default#VML)",e&&"object"==typeof e.adj}catch(t){return!1}}(),inlineSvg:Wt,mac:0===navigator.platform.indexOf("Mac"),linux:0===navigator.platform.indexOf("Linux")},Ft=b.msPointer?"MSPointerDown":"pointerdown",Ut=b.msPointer?"MSPointerMove":"pointermove",Vt=b.msPointer?"MSPointerUp":"pointerup",qt=b.msPointer?"MSPointerCancel":"pointercancel",Gt={touchstart:Ft,touchmove:Ut,touchend:Vt,touchcancel:qt},Kt={touchstart:function(t,e){e.MSPOINTER_TYPE_TOUCH&&e.pointerType===e.MSPOINTER_TYPE_TOUCH&&O(e);ee(t,e)},touchmove:ee,touchend:ee,touchcancel:ee},Yt={},Xt=!1;function Jt(t,e,i){return"touchstart"!==e||Xt||(document.addEventListener(Ft,$t,!0),document.addEventListener(Ut,Qt,!0),document.addEventListener(Vt,te,!0),document.addEventListener(qt,te,!0),Xt=!0),Kt[e]?(i=Kt[e].bind(this,i),t.addEventListener(Gt[e],i,!1),i):(console.warn("wrong event specified:",e),u)}function $t(t){Yt[t.pointerId]=t}function Qt(t){Yt[t.pointerId]&&(Yt[t.pointerId]=t)}function te(t){delete Yt[t.pointerId]}function ee(t,e){if(e.pointerType!==(e.MSPOINTER_TYPE_MOUSE||"mouse")){for(var i in e.touches=[],Yt)e.touches.push(Yt[i]);e.changedTouches=[e],t(e)}}var ie=200;function ne(t,i){t.addEventListener("dblclick",i);var n,o=0;function e(t){var e;1!==t.detail?n=t.detail:"mouse"===t.pointerType||t.sourceCapabilities&&!t.sourceCapabilities.firesTouchEvents||((e=Ne(t)).some(function(t){return t instanceof HTMLLabelElement&&t.attributes.for})&&!e.some(function(t){return t instanceof HTMLInputElement||t instanceof HTMLSelectElement})||((e=Date.now())-o<=ie?2===++n&&i(function(t){var e,i,n={};for(i in t)e=t[i],n[i]=e&&e.bind?e.bind(t):e;return(t=n).type="dblclick",n.detail=2,n.isTrusted=!1,n._simulated=!0,n}(t)):n=1,o=e))}return t.addEventListener("click",e),{dblclick:i,simDblclick:e}}var oe,se,re,ae,he,le,ue=we(["transform","webkitTransform","OTransform","MozTransform","msTransform"]),ce=we(["webkitTransition","transition","OTransition","MozTransition","msTransition"]),de="webkitTransition"===ce||"OTransition"===ce?ce+"End":"transitionend";function _e(t){return"string"==typeof t?document.getElementById(t):t}function pe(t,e){var i=t.style[e]||t.currentStyle&&t.currentStyle[e];return"auto"===(i=i&&"auto"!==i||!document.defaultView?i:(t=document.defaultView.getComputedStyle(t,null))?t[e]:null)?null:i}function P(t,e,i){t=document.createElement(t);return t.className=e||"",i&&i.appendChild(t),t}function T(t){var e=t.parentNode;e&&e.removeChild(t)}function me(t){for(;t.firstChild;)t.removeChild(t.firstChild)}function fe(t){var e=t.parentNode;e&&e.lastChild!==t&&e.appendChild(t)}function ge(t){var e=t.parentNode;e&&e.firstChild!==t&&e.insertBefore(t,e.firstChild)}function ve(t,e){return void 0!==t.classList?t.classList.contains(e):0<(t=xe(t)).length&&new RegExp("(^|\\s)"+e+"(\\s|$)").test(t)}function M(t,e){var i;if(void 0!==t.classList)for(var n=F(e),o=0,s=n.length;o<s;o++)t.classList.add(n[o]);else ve(t,e)||ye(t,((i=xe(t))?i+" ":"")+e)}function z(t,e){void 0!==t.classList?t.classList.remove(e):ye(t,W((" "+xe(t)+" ").replace(" "+e+" "," ")))}function ye(t,e){void 0===t.className.baseVal?t.className=e:t.className.baseVal=e}function xe(t){return void 0===(t=t.correspondingElement?t.correspondingElement:t).className.baseVal?t.className:t.className.baseVal}function C(t,e){if("opacity"in t.style)t.style.opacity=e;else if("filter"in t.style){var i=!1,n="DXImageTransform.Microsoft.Alpha";try{i=t.filters.item(n)}catch(t){if(1===e)return}e=Math.round(100*e),i?(i.Enabled=100!==e,i.Opacity=e):t.style.filter+=" progid:"+n+"(opacity="+e+")"}}function we(t){for(var e=document.documentElement.style,i=0;i<t.length;i++)if(t[i]in e)return t[i];return!1}function be(t,e,i){e=e||new p(0,0);t.style[ue]=(b.ie3d?"translate("+e.x+"px,"+e.y+"px)":"translate3d("+e.x+"px,"+e.y+"px,0)")+(i?" scale("+i+")":"")}function Z(t,e){t._leaflet_pos=e,b.any3d?be(t,e):(t.style.left=e.x+"px",t.style.top=e.y+"px")}function Pe(t){return t._leaflet_pos||new p(0,0)}function Le(){S(window,"dragstart",O)}function Te(){k(window,"dragstart",O)}function Me(t){for(;-1===t.tabIndex;)t=t.parentNode;t.style&&(ze(),le=(he=t).style.outlineStyle,t.style.outlineStyle="none",S(window,"keydown",ze))}function ze(){he&&(he.style.outlineStyle=le,le=he=void 0,k(window,"keydown",ze))}function Ce(t){for(;!((t=t.parentNode).offsetWidth&&t.offsetHeight||t===document.body););return t}function Ze(t){var e=t.getBoundingClientRect();return{x:e.width/t.offsetWidth||1,y:e.height/t.offsetHeight||1,boundingClientRect:e}}ae="onselectstart"in document?(re=function(){S(window,"selectstart",O)},function(){k(window,"selectstart",O)}):(se=we(["userSelect","WebkitUserSelect","OUserSelect","MozUserSelect","msUserSelect"]),re=function(){var t;se&&(t=document.documentElement.style,oe=t[se],t[se]="none")},function(){se&&(document.documentElement.style[se]=oe,oe=void 0)});pt={__proto__:null,TRANSFORM:ue,TRANSITION:ce,TRANSITION_END:de,get:_e,getStyle:pe,create:P,remove:T,empty:me,toFront:fe,toBack:ge,hasClass:ve,addClass:M,removeClass:z,setClass:ye,getClass:xe,setOpacity:C,testProp:we,setTransform:be,setPosition:Z,getPosition:Pe,get disableTextSelection(){return re},get enableTextSelection(){return ae},disableImageDrag:Le,enableImageDrag:Te,preventOutline:Me,restoreOutline:ze,getSizedParentNode:Ce,getScale:Ze};function S(t,e,i,n){if(e&&"object"==typeof e)for(var o in e)ke(t,o,e[o],i);else for(var s=0,r=(e=F(e)).length;s<r;s++)ke(t,e[s],i,n);return this}var E="_leaflet_events";function k(t,e,i,n){if(1===arguments.length)Se(t),delete t[E];else if(e&&"object"==typeof e)for(var o in e)Oe(t,o,e[o],i);else if(e=F(e),2===arguments.length)Se(t,function(t){return-1!==G(e,t)});else for(var s=0,r=e.length;s<r;s++)Oe(t,e[s],i,n);return this}function Se(t,e){for(var i in t[E]){var n=i.split(/\d/)[0];e&&!e(n)||Oe(t,n,null,null,i)}}var Ee={mouseenter:"mouseover",mouseleave:"mouseout",wheel:!("onwheel"in window)&&"mousewheel"};function ke(e,t,i,n){var o,s,r=t+h(i)+(n?"_"+h(n):"");e[E]&&e[E][r]||(s=o=function(t){return i.call(n||e,t||window.event)},!b.touchNative&&b.pointer&&0===t.indexOf("touch")?o=Jt(e,t,o):b.touch&&"dblclick"===t?o=ne(e,o):"addEventListener"in e?"touchstart"===t||"touchmove"===t||"wheel"===t||"mousewheel"===t?e.addEventListener(Ee[t]||t,o,!!b.passiveEvents&&{passive:!1}):"mouseenter"===t||"mouseleave"===t?e.addEventListener(Ee[t],o=function(t){t=t||window.event,We(e,t)&&s(t)},!1):e.addEventListener(t,s,!1):e.attachEvent("on"+t,o),e[E]=e[E]||{},e[E][r]=o)}function Oe(t,e,i,n,o){o=o||e+h(i)+(n?"_"+h(n):"");var s,r,i=t[E]&&t[E][o];i&&(!b.touchNative&&b.pointer&&0===e.indexOf("touch")?(n=t,r=i,Gt[s=e]?n.removeEventListener(Gt[s],r,!1):console.warn("wrong event specified:",s)):b.touch&&"dblclick"===e?(n=i,(r=t).removeEventListener("dblclick",n.dblclick),r.removeEventListener("click",n.simDblclick)):"removeEventListener"in t?t.removeEventListener(Ee[e]||e,i,!1):t.detachEvent("on"+e,i),t[E][o]=null)}function Ae(t){return t.stopPropagation?t.stopPropagation():t.originalEvent?t.originalEvent._stopped=!0:t.cancelBubble=!0,this}function Be(t){return ke(t,"wheel",Ae),this}function Ie(t){return S(t,"mousedown touchstart dblclick contextmenu",Ae),t._leaflet_disable_click=!0,this}function O(t){return t.preventDefault?t.preventDefault():t.returnValue=!1,this}function Re(t){return O(t),Ae(t),this}function Ne(t){if(t.composedPath)return t.composedPath();for(var e=[],i=t.target;i;)e.push(i),i=i.parentNode;return e}function De(t,e){var i,n;return e?(n=(i=Ze(e)).boundingClientRect,new p((t.clientX-n.left)/i.x-e.clientLeft,(t.clientY-n.top)/i.y-e.clientTop)):new p(t.clientX,t.clientY)}var je=b.linux&&b.chrome?window.devicePixelRatio:b.mac?3*window.devicePixelRatio:0<window.devicePixelRatio?2*window.devicePixelRatio:1;function He(t){return b.edge?t.wheelDeltaY/2:t.deltaY&&0===t.deltaMode?-t.deltaY/je:t.deltaY&&1===t.deltaMode?20*-t.deltaY:t.deltaY&&2===t.deltaMode?60*-t.deltaY:t.deltaX||t.deltaZ?0:t.wheelDelta?(t.wheelDeltaY||t.wheelDelta)/2:t.detail&&Math.abs(t.detail)<32765?20*-t.detail:t.detail?t.detail/-32765*60:0}function We(t,e){var i=e.relatedTarget;if(!i)return!0;try{for(;i&&i!==t;)i=i.parentNode}catch(t){return!1}return i!==t}var mt={__proto__:null,on:S,off:k,stopPropagation:Ae,disableScrollPropagation:Be,disableClickPropagation:Ie,preventDefault:O,stop:Re,getPropagationPath:Ne,getMousePosition:De,getWheelDelta:He,isExternalTarget:We,addListener:S,removeListener:k},Fe=it.extend({run:function(t,e,i,n){this.stop(),this._el=t,this._inProgress=!0,this._duration=i||.25,this._easeOutPower=1/Math.max(n||.5,.2),this._startPos=Pe(t),this._offset=e.subtract(this._startPos),this._startTime=+new Date,this.fire("start"),this._animate()},stop:function(){this._inProgress&&(this._step(!0),this._complete())},_animate:function(){this._animId=x(this._animate,this),this._step()},_step:function(t){var e=+new Date-this._startTime,i=1e3*this._duration;e<i?this._runFrame(this._easeOut(e/i),t):(this._runFrame(1),this._complete())},_runFrame:function(t,e){t=this._startPos.add(this._offset.multiplyBy(t));e&&t._round(),Z(this._el,t),this.fire("step")},_complete:function(){r(this._animId),this._inProgress=!1,this.fire("end")},_easeOut:function(t){return 1-Math.pow(1-t,this._easeOutPower)}}),A=it.extend({options:{crs:lt,center:void 0,zoom:void 0,minZoom:void 0,maxZoom:void 0,layers:[],maxBounds:void 0,renderer:void 0,zoomAnimation:!0,zoomAnimationThreshold:4,fadeAnimation:!0,markerZoomAnimation:!0,transform3DLimit:8388608,zoomSnap:1,zoomDelta:1,trackResize:!0},initialize:function(t,e){e=c(this,e),this._handlers=[],this._layers={},this._zoomBoundLayers={},this._sizeChanged=!0,this._initContainer(t),this._initLayout(),this._onResize=a(this._onResize,this),this._initEvents(),e.maxBounds&&this.setMaxBounds(e.maxBounds),void 0!==e.zoom&&(this._zoom=this._limitZoom(e.zoom)),e.center&&void 0!==e.zoom&&this.setView(w(e.center),e.zoom,{reset:!0}),this.callInitHooks(),this._zoomAnimated=ce&&b.any3d&&!b.mobileOpera&&this.options.zoomAnimation,this._zoomAnimated&&(this._createAnimProxy(),S(this._proxy,de,this._catchTransitionEnd,this)),this._addLayers(this.options.layers)},setView:function(t,e,i){if((e=void 0===e?this._zoom:this._limitZoom(e),t=this._limitCenter(w(t),e,this.options.maxBounds),i=i||{},this._stop(),this._loaded&&!i.reset&&!0!==i)&&(void 0!==i.animate&&(i.zoom=l({animate:i.animate},i.zoom),i.pan=l({animate:i.animate,duration:i.duration},i.pan)),this._zoom!==e?this._tryAnimatedZoom&&this._tryAnimatedZoom(t,e,i.zoom):this._tryAnimatedPan(t,i.pan)))return clearTimeout(this._sizeTimer),this;return this._resetView(t,e,i.pan&&i.pan.noMoveStart),this},setZoom:function(t,e){return this._loaded?this.setView(this.getCenter(),t,{zoom:e}):(this._zoom=t,this)},zoomIn:function(t,e){return t=t||(b.any3d?this.options.zoomDelta:1),this.setZoom(this._zoom+t,e)},zoomOut:function(t,e){return t=t||(b.any3d?this.options.zoomDelta:1),this.setZoom(this._zoom-t,e)},setZoomAround:function(t,e,i){var n=this.getZoomScale(e),o=this.getSize().divideBy(2),t=(t instanceof p?t:this.latLngToContainerPoint(t)).subtract(o).multiplyBy(1-1/n),n=this.containerPointToLatLng(o.add(t));return this.setView(n,e,{zoom:i})},_getBoundsCenterZoom:function(t,e){e=e||{},t=t.getBounds?t.getBounds():g(t);var i=m(e.paddingTopLeft||e.padding||[0,0]),n=m(e.paddingBottomRight||e.padding||[0,0]),o=this.getBoundsZoom(t,!1,i.add(n));return(o="number"==typeof e.maxZoom?Math.min(e.maxZoom,o):o)===1/0?{center:t.getCenter(),zoom:o}:(e=n.subtract(i).divideBy(2),n=this.project(t.getSouthWest(),o),i=this.project(t.getNorthEast(),o),{center:this.unproject(n.add(i).divideBy(2).add(e),o),zoom:o})},fitBounds:function(t,e){if((t=g(t)).isValid())return t=this._getBoundsCenterZoom(t,e),this.setView(t.center,t.zoom,e);throw new Error("Bounds are not valid.")},fitWorld:function(t){return this.fitBounds([[-90,-180],[90,180]],t)},panTo:function(t,e){return this.setView(t,this._zoom,{pan:e})},panBy:function(t,e){var i;return e=e||{},(t=m(t).round()).x||t.y?(!0===e.animate||this.getSize().contains(t)?(this._panAnim||(this._panAnim=new Fe,this._panAnim.on({step:this._onPanTransitionStep,end:this._onPanTransitionEnd},this)),e.noMoveStart||this.fire("movestart"),!1!==e.animate?(M(this._mapPane,"leaflet-pan-anim"),i=this._getMapPanePos().subtract(t).round(),this._panAnim.run(this._mapPane,i,e.duration||.25,e.easeLinearity)):(this._rawPanBy(t),this.fire("move").fire("moveend"))):this._resetView(this.unproject(this.project(this.getCenter()).add(t)),this.getZoom()),this):this.fire("moveend")},flyTo:function(n,o,t){if(!1===(t=t||{}).animate||!b.any3d)return this.setView(n,o,t);this._stop();var s=this.project(this.getCenter()),r=this.project(n),e=this.getSize(),a=this._zoom,h=(n=w(n),o=void 0===o?a:o,Math.max(e.x,e.y)),i=h*this.getZoomScale(a,o),l=r.distanceTo(s)||1,u=1.42,c=u*u;function d(t){t=(i*i-h*h+(t?-1:1)*c*c*l*l)/(2*(t?i:h)*c*l),t=Math.sqrt(t*t+1)-t;return t<1e-9?-18:Math.log(t)}function _(t){return(Math.exp(t)-Math.exp(-t))/2}function p(t){return(Math.exp(t)+Math.exp(-t))/2}var m=d(0);function f(t){return h*(p(m)*(_(t=m+u*t)/p(t))-_(m))/c}var g=Date.now(),v=(d(1)-m)/u,y=t.duration?1e3*t.duration:1e3*v*.8;return this._moveStart(!0,t.noMoveStart),function t(){var e=(Date.now()-g)/y,i=(1-Math.pow(1-e,1.5))*v;e<=1?(this._flyToFrame=x(t,this),this._move(this.unproject(s.add(r.subtract(s).multiplyBy(f(i)/l)),a),this.getScaleZoom(h/(e=i,h*(p(m)/p(m+u*e))),a),{flyTo:!0})):this._move(n,o)._moveEnd(!0)}.call(this),this},flyToBounds:function(t,e){t=this._getBoundsCenterZoom(t,e);return this.flyTo(t.center,t.zoom,e)},setMaxBounds:function(t){return t=g(t),this.listens("moveend",this._panInsideMaxBounds)&&this.off("moveend",this._panInsideMaxBounds),t.isValid()?(this.options.maxBounds=t,this._loaded&&this._panInsideMaxBounds(),this.on("moveend",this._panInsideMaxBounds)):(this.options.maxBounds=null,this)},setMinZoom:function(t){var e=this.options.minZoom;return this.options.minZoom=t,this._loaded&&e!==t&&(this.fire("zoomlevelschange"),this.getZoom()<this.options.minZoom)?this.setZoom(t):this},setMaxZoom:function(t){var e=this.options.maxZoom;return this.options.maxZoom=t,this._loaded&&e!==t&&(this.fire("zoomlevelschange"),this.getZoom()>this.options.maxZoom)?this.setZoom(t):this},panInsideBounds:function(t,e){this._enforcingBounds=!0;var i=this.getCenter(),t=this._limitCenter(i,this._zoom,g(t));return i.equals(t)||this.panTo(t,e),this._enforcingBounds=!1,this},panInside:function(t,e){var i=m((e=e||{}).paddingTopLeft||e.padding||[0,0]),n=m(e.paddingBottomRight||e.padding||[0,0]),o=this.project(this.getCenter()),t=this.project(t),s=this.getPixelBounds(),i=_([s.min.add(i),s.max.subtract(n)]),s=i.getSize();return i.contains(t)||(this._enforcingBounds=!0,n=t.subtract(i.getCenter()),i=i.extend(t).getSize().subtract(s),o.x+=n.x<0?-i.x:i.x,o.y+=n.y<0?-i.y:i.y,this.panTo(this.unproject(o),e),this._enforcingBounds=!1),this},invalidateSize:function(t){if(!this._loaded)return this;t=l({animate:!1,pan:!0},!0===t?{animate:!0}:t);var e=this.getSize(),i=(this._sizeChanged=!0,this._lastCenter=null,this.getSize()),n=e.divideBy(2).round(),o=i.divideBy(2).round(),n=n.subtract(o);return n.x||n.y?(t.animate&&t.pan?this.panBy(n):(t.pan&&this._rawPanBy(n),this.fire("move"),t.debounceMoveend?(clearTimeout(this._sizeTimer),this._sizeTimer=setTimeout(a(this.fire,this,"moveend"),200)):this.fire("moveend")),this.fire("resize",{oldSize:e,newSize:i})):this},stop:function(){return this.setZoom(this._limitZoom(this._zoom)),this.options.zoomSnap||this.fire("viewreset"),this._stop()},locate:function(t){var e,i;return t=this._locateOptions=l({timeout:1e4,watch:!1},t),"geolocation"in navigator?(e=a(this._handleGeolocationResponse,this),i=a(this._handleGeolocationError,this),t.watch?this._locationWatchId=navigator.geolocation.watchPosition(e,i,t):navigator.geolocation.getCurrentPosition(e,i,t)):this._handleGeolocationError({code:0,message:"Geolocation not supported."}),this},stopLocate:function(){return navigator.geolocation&&navigator.geolocation.clearWatch&&navigator.geolocation.clearWatch(this._locationWatchId),this._locateOptions&&(this._locateOptions.setView=!1),this},_handleGeolocationError:function(t){var e;this._container._leaflet_id&&(e=t.code,t=t.message||(1===e?"permission denied":2===e?"position unavailable":"timeout"),this._locateOptions.setView&&!this._loaded&&this.fitWorld(),this.fire("locationerror",{code:e,message:"Geolocation error: "+t+"."}))},_handleGeolocationResponse:function(t){if(this._container._leaflet_id){var e,i,n=new v(t.coords.latitude,t.coords.longitude),o=n.toBounds(2*t.coords.accuracy),s=this._locateOptions,r=(s.setView&&(e=this.getBoundsZoom(o),this.setView(n,s.maxZoom?Math.min(e,s.maxZoom):e)),{latlng:n,bounds:o,timestamp:t.timestamp});for(i in t.coords)"number"==typeof t.coords[i]&&(r[i]=t.coords[i]);this.fire("locationfound",r)}},addHandler:function(t,e){return e&&(e=this[t]=new e(this),this._handlers.push(e),this.options[t]&&e.enable()),this},remove:function(){if(this._initEvents(!0),this.options.maxBounds&&this.off("moveend",this._panInsideMaxBounds),this._containerId!==this._container._leaflet_id)throw new Error("Map container is being reused by another instance");try{delete this._container._leaflet_id,delete this._containerId}catch(t){this._container._leaflet_id=void 0,this._containerId=void 0}for(var t in void 0!==this._locationWatchId&&this.stopLocate(),this._stop(),T(this._mapPane),this._clearControlPos&&this._clearControlPos(),this._resizeRequest&&(r(this._resizeRequest),this._resizeRequest=null),this._clearHandlers(),this._loaded&&this.fire("unload"),this._layers)this._layers[t].remove();for(t in this._panes)T(this._panes[t]);return this._layers=[],this._panes=[],delete this._mapPane,delete this._renderer,this},createPane:function(t,e){e=P("div","leaflet-pane"+(t?" leaflet-"+t.replace("Pane","")+"-pane":""),e||this._mapPane);return t&&(this._panes[t]=e),e},getCenter:function(){return this._checkIfLoaded(),this._lastCenter&&!this._moved()?this._lastCenter.clone():this.layerPointToLatLng(this._getCenterLayerPoint())},getZoom:function(){return this._zoom},getBounds:function(){var t=this.getPixelBounds();return new s(this.unproject(t.getBottomLeft()),this.unproject(t.getTopRight()))},getMinZoom:function(){return void 0===this.options.minZoom?this._layersMinZoom||0:this.options.minZoom},getMaxZoom:function(){return void 0===this.options.maxZoom?void 0===this._layersMaxZoom?1/0:this._layersMaxZoom:this.options.maxZoom},getBoundsZoom:function(t,e,i){t=g(t),i=m(i||[0,0]);var n=this.getZoom()||0,o=this.getMinZoom(),s=this.getMaxZoom(),r=t.getNorthWest(),t=t.getSouthEast(),i=this.getSize().subtract(i),t=_(this.project(t,n),this.project(r,n)).getSize(),r=b.any3d?this.options.zoomSnap:1,a=i.x/t.x,i=i.y/t.y,t=e?Math.max(a,i):Math.min(a,i),n=this.getScaleZoom(t,n);return r&&(n=Math.round(n/(r/100))*(r/100),n=e?Math.ceil(n/r)*r:Math.floor(n/r)*r),Math.max(o,Math.min(s,n))},getSize:function(){return this._size&&!this._sizeChanged||(this._size=new p(this._container.clientWidth||0,this._container.clientHeight||0),this._sizeChanged=!1),this._size.clone()},getPixelBounds:function(t,e){t=this._getTopLeftPoint(t,e);return new f(t,t.add(this.getSize()))},getPixelOrigin:function(){return this._checkIfLoaded(),this._pixelOrigin},getPixelWorldBounds:function(t){return this.options.crs.getProjectedBounds(void 0===t?this.getZoom():t)},getPane:function(t){return"string"==typeof t?this._panes[t]:t},getPanes:function(){return this._panes},getContainer:function(){return this._container},getZoomScale:function(t,e){var i=this.options.crs;return e=void 0===e?this._zoom:e,i.scale(t)/i.scale(e)},getScaleZoom:function(t,e){var i=this.options.crs,t=(e=void 0===e?this._zoom:e,i.zoom(t*i.scale(e)));return isNaN(t)?1/0:t},project:function(t,e){return e=void 0===e?this._zoom:e,this.options.crs.latLngToPoint(w(t),e)},unproject:function(t,e){return e=void 0===e?this._zoom:e,this.options.crs.pointToLatLng(m(t),e)},layerPointToLatLng:function(t){t=m(t).add(this.getPixelOrigin());return this.unproject(t)},latLngToLayerPoint:function(t){return this.project(w(t))._round()._subtract(this.getPixelOrigin())},wrapLatLng:function(t){return this.options.crs.wrapLatLng(w(t))},wrapLatLngBounds:function(t){return this.options.crs.wrapLatLngBounds(g(t))},distance:function(t,e){return this.options.crs.distance(w(t),w(e))},containerPointToLayerPoint:function(t){return m(t).subtract(this._getMapPanePos())},layerPointToContainerPoint:function(t){return m(t).add(this._getMapPanePos())},containerPointToLatLng:function(t){t=this.containerPointToLayerPoint(m(t));return this.layerPointToLatLng(t)},latLngToContainerPoint:function(t){return this.layerPointToContainerPoint(this.latLngToLayerPoint(w(t)))},mouseEventToContainerPoint:function(t){return De(t,this._container)},mouseEventToLayerPoint:function(t){return this.containerPointToLayerPoint(this.mouseEventToContainerPoint(t))},mouseEventToLatLng:function(t){return this.layerPointToLatLng(this.mouseEventToLayerPoint(t))},_initContainer:function(t){t=this._container=_e(t);if(!t)throw new Error("Map container not found.");if(t._leaflet_id)throw new Error("Map container is already initialized.");S(t,"scroll",this._onScroll,this),this._containerId=h(t)},_initLayout:function(){var t=this._container,e=(this._fadeAnimated=this.options.fadeAnimation&&b.any3d,M(t,"leaflet-container"+(b.touch?" leaflet-touch":"")+(b.retina?" leaflet-retina":"")+(b.ielt9?" leaflet-oldie":"")+(b.safari?" leaflet-safari":"")+(this._fadeAnimated?" leaflet-fade-anim":"")),pe(t,"position"));"absolute"!==e&&"relative"!==e&&"fixed"!==e&&"sticky"!==e&&(t.style.position="relative"),this._initPanes(),this._initControlPos&&this._initControlPos()},_initPanes:function(){var t=this._panes={};this._paneRenderers={},this._mapPane=this.createPane("mapPane",this._container),Z(this._mapPane,new p(0,0)),this.createPane("tilePane"),this.createPane("overlayPane"),this.createPane("shadowPane"),this.createPane("markerPane"),this.createPane("tooltipPane"),this.createPane("popupPane"),this.options.markerZoomAnimation||(M(t.markerPane,"leaflet-zoom-hide"),M(t.shadowPane,"leaflet-zoom-hide"))},_resetView:function(t,e,i){Z(this._mapPane,new p(0,0));var n=!this._loaded,o=(this._loaded=!0,e=this._limitZoom(e),this.fire("viewprereset"),this._zoom!==e);this._moveStart(o,i)._move(t,e)._moveEnd(o),this.fire("viewreset"),n&&this.fire("load")},_moveStart:function(t,e){return t&&this.fire("zoomstart"),e||this.fire("movestart"),this},_move:function(t,e,i,n){void 0===e&&(e=this._zoom);var o=this._zoom!==e;return this._zoom=e,this._lastCenter=t,this._pixelOrigin=this._getNewPixelOrigin(t),n?i&&i.pinch&&this.fire("zoom",i):((o||i&&i.pinch)&&this.fire("zoom",i),this.fire("move",i)),this},_moveEnd:function(t){return t&&this.fire("zoomend"),this.fire("moveend")},_stop:function(){return r(this._flyToFrame),this._panAnim&&this._panAnim.stop(),this},_rawPanBy:function(t){Z(this._mapPane,this._getMapPanePos().subtract(t))},_getZoomSpan:function(){return this.getMaxZoom()-this.getMinZoom()},_panInsideMaxBounds:function(){this._enforcingBounds||this.panInsideBounds(this.options.maxBounds)},_checkIfLoaded:function(){if(!this._loaded)throw new Error("Set map center and zoom first.")},_initEvents:function(t){this._targets={};var e=t?k:S;e((this._targets[h(this._container)]=this)._container,"click dblclick mousedown mouseup mouseover mouseout mousemove contextmenu keypress keydown keyup",this._handleDOMEvent,this),this.options.trackResize&&e(window,"resize",this._onResize,this),b.any3d&&this.options.transform3DLimit&&(t?this.off:this.on).call(this,"moveend",this._onMoveEnd)},_onResize:function(){r(this._resizeRequest),this._resizeRequest=x(function(){this.invalidateSize({debounceMoveend:!0})},this)},_onScroll:function(){this._container.scrollTop=0,this._container.scrollLeft=0},_onMoveEnd:function(){var t=this._getMapPanePos();Math.max(Math.abs(t.x),Math.abs(t.y))>=this.options.transform3DLimit&&this._resetView(this.getCenter(),this.getZoom())},_findEventTargets:function(t,e){for(var i,n=[],o="mouseout"===e||"mouseover"===e,s=t.target||t.srcElement,r=!1;s;){if((i=this._targets[h(s)])&&("click"===e||"preclick"===e)&&this._draggableMoved(i)){r=!0;break}if(i&&i.listens(e,!0)){if(o&&!We(s,t))break;if(n.push(i),o)break}if(s===this._container)break;s=s.parentNode}return n=n.length||r||o||!this.listens(e,!0)?n:[this]},_isClickDisabled:function(t){for(;t&&t!==this._container;){if(t._leaflet_disable_click)return!0;t=t.parentNode}},_handleDOMEvent:function(t){var e,i=t.target||t.srcElement;!this._loaded||i._leaflet_disable_events||"click"===t.type&&this._isClickDisabled(i)||("mousedown"===(e=t.type)&&Me(i),this._fireDOMEvent(t,e))},_mouseEvents:["click","dblclick","mouseover","mouseout","contextmenu"],_fireDOMEvent:function(t,e,i){"click"===t.type&&((a=l({},t)).type="preclick",this._fireDOMEvent(a,a.type,i));var n=this._findEventTargets(t,e);if(i){for(var o=[],s=0;s<i.length;s++)i[s].listens(e,!0)&&o.push(i[s]);n=o.concat(n)}if(n.length){"contextmenu"===e&&O(t);var r,a=n[0],h={originalEvent:t};for("keypress"!==t.type&&"keydown"!==t.type&&"keyup"!==t.type&&(r=a.getLatLng&&(!a._radius||a._radius<=10),h.containerPoint=r?this.latLngToContainerPoint(a.getLatLng()):this.mouseEventToContainerPoint(t),h.layerPoint=this.containerPointToLayerPoint(h.containerPoint),h.latlng=r?a.getLatLng():this.layerPointToLatLng(h.layerPoint)),s=0;s<n.length;s++)if(n[s].fire(e,h,!0),h.originalEvent._stopped||!1===n[s].options.bubblingMouseEvents&&-1!==G(this._mouseEvents,e))return}},_draggableMoved:function(t){return(t=t.dragging&&t.dragging.enabled()?t:this).dragging&&t.dragging.moved()||this.boxZoom&&this.boxZoom.moved()},_clearHandlers:function(){for(var t=0,e=this._handlers.length;t<e;t++)this._handlers[t].disable()},whenReady:function(t,e){return this._loaded?t.call(e||this,{target:this}):this.on("load",t,e),this},_getMapPanePos:function(){return Pe(this._mapPane)||new p(0,0)},_moved:function(){var t=this._getMapPanePos();return t&&!t.equals([0,0])},_getTopLeftPoint:function(t,e){return(t&&void 0!==e?this._getNewPixelOrigin(t,e):this.getPixelOrigin()).subtract(this._getMapPanePos())},_getNewPixelOrigin:function(t,e){var i=this.getSize()._divideBy(2);return this.project(t,e)._subtract(i)._add(this._getMapPanePos())._round()},_latLngToNewLayerPoint:function(t,e,i){i=this._getNewPixelOrigin(i,e);return this.project(t,e)._subtract(i)},_latLngBoundsToNewLayerBounds:function(t,e,i){i=this._getNewPixelOrigin(i,e);return _([this.project(t.getSouthWest(),e)._subtract(i),this.project(t.getNorthWest(),e)._subtract(i),this.project(t.getSouthEast(),e)._subtract(i),this.project(t.getNorthEast(),e)._subtract(i)])},_getCenterLayerPoint:function(){return this.containerPointToLayerPoint(this.getSize()._divideBy(2))},_getCenterOffset:function(t){return this.latLngToLayerPoint(t).subtract(this._getCenterLayerPoint())},_limitCenter:function(t,e,i){var n,o;return!i||(n=this.project(t,e),o=this.getSize().divideBy(2),o=new f(n.subtract(o),n.add(o)),o=this._getBoundsOffset(o,i,e),Math.abs(o.x)<=1&&Math.abs(o.y)<=1)?t:this.unproject(n.add(o),e)},_limitOffset:function(t,e){var i;return e?(i=new f((i=this.getPixelBounds()).min.add(t),i.max.add(t)),t.add(this._getBoundsOffset(i,e))):t},_getBoundsOffset:function(t,e,i){e=_(this.project(e.getNorthEast(),i),this.project(e.getSouthWest(),i)),i=e.min.subtract(t.min),e=e.max.subtract(t.max);return new p(this._rebound(i.x,-e.x),this._rebound(i.y,-e.y))},_rebound:function(t,e){return 0<t+e?Math.round(t-e)/2:Math.max(0,Math.ceil(t))-Math.max(0,Math.floor(e))},_limitZoom:function(t){var e=this.getMinZoom(),i=this.getMaxZoom(),n=b.any3d?this.options.zoomSnap:1;return n&&(t=Math.round(t/n)*n),Math.max(e,Math.min(i,t))},_onPanTransitionStep:function(){this.fire("move")},_onPanTransitionEnd:function(){z(this._mapPane,"leaflet-pan-anim"),this.fire("moveend")},_tryAnimatedPan:function(t,e){t=this._getCenterOffset(t)._trunc();return!(!0!==(e&&e.animate)&&!this.getSize().contains(t))&&(this.panBy(t,e),!0)},_createAnimProxy:function(){var t=this._proxy=P("div","leaflet-proxy leaflet-zoom-animated");this._panes.mapPane.appendChild(t),this.on("zoomanim",function(t){var e=ue,i=this._proxy.style[e];be(this._proxy,this.project(t.center,t.zoom),this.getZoomScale(t.zoom,1)),i===this._proxy.style[e]&&this._animatingZoom&&this._onZoomTransitionEnd()},this),this.on("load moveend",this._animMoveEnd,this),this._on("unload",this._destroyAnimProxy,this)},_destroyAnimProxy:function(){T(this._proxy),this.off("load moveend",this._animMoveEnd,this),delete this._proxy},_animMoveEnd:function(){var t=this.getCenter(),e=this.getZoom();be(this._proxy,this.project(t,e),this.getZoomScale(e,1))},_catchTransitionEnd:function(t){this._animatingZoom&&0<=t.propertyName.indexOf("transform")&&this._onZoomTransitionEnd()},_nothingToAnimate:function(){return!this._container.getElementsByClassName("leaflet-zoom-animated").length},_tryAnimatedZoom:function(t,e,i){if(!this._animatingZoom){if(i=i||{},!this._zoomAnimated||!1===i.animate||this._nothingToAnimate()||Math.abs(e-this._zoom)>this.options.zoomAnimationThreshold)return!1;var n=this.getZoomScale(e),n=this._getCenterOffset(t)._divideBy(1-1/n);if(!0!==i.animate&&!this.getSize().contains(n))return!1;x(function(){this._moveStart(!0,i.noMoveStart||!1)._animateZoom(t,e,!0)},this)}return!0},_animateZoom:function(t,e,i,n){this._mapPane&&(i&&(this._animatingZoom=!0,this._animateToCenter=t,this._animateToZoom=e,M(this._mapPane,"leaflet-zoom-anim")),this.fire("zoomanim",{center:t,zoom:e,noUpdate:n}),this._tempFireZoomEvent||(this._tempFireZoomEvent=this._zoom!==this._animateToZoom),this._move(this._animateToCenter,this._animateToZoom,void 0,!0),setTimeout(a(this._onZoomTransitionEnd,this),250))},_onZoomTransitionEnd:function(){this._animatingZoom&&(this._mapPane&&z(this._mapPane,"leaflet-zoom-anim"),this._animatingZoom=!1,this._move(this._animateToCenter,this._animateToZoom,void 0,!0),this._tempFireZoomEvent&&this.fire("zoom"),delete this._tempFireZoomEvent,this.fire("move"),this._moveEnd(!0))}});function Ue(t){return new B(t)}var B=et.extend({options:{position:"topright"},initialize:function(t){c(this,t)},getPosition:function(){return this.options.position},setPosition:function(t){var e=this._map;return e&&e.removeControl(this),this.options.position=t,e&&e.addControl(this),this},getContainer:function(){return this._container},addTo:function(t){this.remove(),this._map=t;var e=this._container=this.onAdd(t),i=this.getPosition(),t=t._controlCorners[i];return M(e,"leaflet-control"),-1!==i.indexOf("bottom")?t.insertBefore(e,t.firstChild):t.appendChild(e),this._map.on("unload",this.remove,this),this},remove:function(){return this._map&&(T(this._container),this.onRemove&&this.onRemove(this._map),this._map.off("unload",this.remove,this),this._map=null),this},_refocusOnMap:function(t){this._map&&t&&0<t.screenX&&0<t.screenY&&this._map.getContainer().focus()}}),Ve=(A.include({addControl:function(t){return t.addTo(this),this},removeControl:function(t){return t.remove(),this},_initControlPos:function(){var i=this._controlCorners={},n="leaflet-",o=this._controlContainer=P("div",n+"control-container",this._container);function t(t,e){i[t+e]=P("div",n+t+" "+n+e,o)}t("top","left"),t("top","right"),t("bottom","left"),t("bottom","right")},_clearControlPos:function(){for(var t in this._controlCorners)T(this._controlCorners[t]);T(this._controlContainer),delete this._controlCorners,delete this._controlContainer}}),B.extend({options:{collapsed:!0,position:"topright",autoZIndex:!0,hideSingleBase:!1,sortLayers:!1,sortFunction:function(t,e,i,n){return i<n?-1:n<i?1:0}},initialize:function(t,e,i){for(var n in c(this,i),this._layerControlInputs=[],this._layers=[],this._lastZIndex=0,this._handlingClick=!1,this._preventClick=!1,t)this._addLayer(t[n],n);for(n in e)this._addLayer(e[n],n,!0)},onAdd:function(t){this._initLayout(),this._update(),(this._map=t).on("zoomend",this._checkDisabledLayers,this);for(var e=0;e<this._layers.length;e++)this._layers[e].layer.on("add remove",this._onLayerChange,this);return this._container},addTo:function(t){return B.prototype.addTo.call(this,t),this._expandIfNotCollapsed()},onRemove:function(){this._map.off("zoomend",this._checkDisabledLayers,this);for(var t=0;t<this._layers.length;t++)this._layers[t].layer.off("add remove",this._onLayerChange,this)},addBaseLayer:function(t,e){return this._addLayer(t,e),this._map?this._update():this},addOverlay:function(t,e){return this._addLayer(t,e,!0),this._map?this._update():this},removeLayer:function(t){t.off("add remove",this._onLayerChange,this);t=this._getLayer(h(t));return t&&this._layers.splice(this._layers.indexOf(t),1),this._map?this._update():this},expand:function(){M(this._container,"leaflet-control-layers-expanded"),this._section.style.height=null;var t=this._map.getSize().y-(this._container.offsetTop+50);return t<this._section.clientHeight?(M(this._section,"leaflet-control-layers-scrollbar"),this._section.style.height=t+"px"):z(this._section,"leaflet-control-layers-scrollbar"),this._checkDisabledLayers(),this},collapse:function(){return z(this._container,"leaflet-control-layers-expanded"),this},_initLayout:function(){var t="leaflet-control-layers",e=this._container=P("div",t),i=this.options.collapsed,n=(e.setAttribute("aria-haspopup",!0),Ie(e),Be(e),this._section=P("section",t+"-list")),o=(i&&(this._map.on("click",this.collapse,this),S(e,{mouseenter:this._expandSafely,mouseleave:this.collapse},this)),this._layersLink=P("a",t+"-toggle",e));o.href="#",o.title="Layers",o.setAttribute("role","button"),S(o,{keydown:function(t){13===t.keyCode&&this._expandSafely()},click:function(t){O(t),this._expandSafely()}},this),i||this.expand(),this._baseLayersList=P("div",t+"-base",n),this._separator=P("div",t+"-separator",n),this._overlaysList=P("div",t+"-overlays",n),e.appendChild(n)},_getLayer:function(t){for(var e=0;e<this._layers.length;e++)if(this._layers[e]&&h(this._layers[e].layer)===t)return this._layers[e]},_addLayer:function(t,e,i){this._map&&t.on("add remove",this._onLayerChange,this),this._layers.push({layer:t,name:e,overlay:i}),this.options.sortLayers&&this._layers.sort(a(function(t,e){return this.options.sortFunction(t.layer,e.layer,t.name,e.name)},this)),this.options.autoZIndex&&t.setZIndex&&(this._lastZIndex++,t.setZIndex(this._lastZIndex)),this._expandIfNotCollapsed()},_update:function(){if(this._container){me(this._baseLayersList),me(this._overlaysList),this._layerControlInputs=[];for(var t,e,i,n=0,o=0;o<this._layers.length;o++)i=this._layers[o],this._addItem(i),e=e||i.overlay,t=t||!i.overlay,n+=i.overlay?0:1;this.options.hideSingleBase&&(this._baseLayersList.style.display=(t=t&&1<n)?"":"none"),this._separator.style.display=e&&t?"":"none"}return this},_onLayerChange:function(t){this._handlingClick||this._update();var e=this._getLayer(h(t.target)),t=e.overlay?"add"===t.type?"overlayadd":"overlayremove":"add"===t.type?"baselayerchange":null;t&&this._map.fire(t,e)},_createRadioElement:function(t,e){t='<input type="radio" class="leaflet-control-layers-selector" name="'+t+'"'+(e?' checked="checked"':"")+"/>",e=document.createElement("div");return e.innerHTML=t,e.firstChild},_addItem:function(t){var e,i=document.createElement("label"),n=this._map.hasLayer(t.layer),n=(t.overlay?((e=document.createElement("input")).type="checkbox",e.className="leaflet-control-layers-selector",e.defaultChecked=n):e=this._createRadioElement("leaflet-base-layers_"+h(this),n),this._layerControlInputs.push(e),e.layerId=h(t.layer),S(e,"click",this._onInputClick,this),document.createElement("span")),o=(n.innerHTML=" "+t.name,document.createElement("span"));return i.appendChild(o),o.appendChild(e),o.appendChild(n),(t.overlay?this._overlaysList:this._baseLayersList).appendChild(i),this._checkDisabledLayers(),i},_onInputClick:function(){if(!this._preventClick){var t,e,i=this._layerControlInputs,n=[],o=[];this._handlingClick=!0;for(var s=i.length-1;0<=s;s--)t=i[s],e=this._getLayer(t.layerId).layer,t.checked?n.push(e):t.checked||o.push(e);for(s=0;s<o.length;s++)this._map.hasLayer(o[s])&&this._map.removeLayer(o[s]);for(s=0;s<n.length;s++)this._map.hasLayer(n[s])||this._map.addLayer(n[s]);this._handlingClick=!1,this._refocusOnMap()}},_checkDisabledLayers:function(){for(var t,e,i=this._layerControlInputs,n=this._map.getZoom(),o=i.length-1;0<=o;o--)t=i[o],e=this._getLayer(t.layerId).layer,t.disabled=void 0!==e.options.minZoom&&n<e.options.minZoom||void 0!==e.options.maxZoom&&n>e.options.maxZoom},_expandIfNotCollapsed:function(){return this._map&&!this.options.collapsed&&this.expand(),this},_expandSafely:function(){var t=this._section,e=(this._preventClick=!0,S(t,"click",O),this.expand(),this);setTimeout(function(){k(t,"click",O),e._preventClick=!1})}})),qe=B.extend({options:{position:"topleft",zoomInText:'<span aria-hidden="true">+</span>',zoomInTitle:"Zoom in",zoomOutText:'<span aria-hidden="true">&#x2212;</span>',zoomOutTitle:"Zoom out"},onAdd:function(t){var e="leaflet-control-zoom",i=P("div",e+" leaflet-bar"),n=this.options;return this._zoomInButton=this._createButton(n.zoomInText,n.zoomInTitle,e+"-in",i,this._zoomIn),this._zoomOutButton=this._createButton(n.zoomOutText,n.zoomOutTitle,e+"-out",i,this._zoomOut),this._updateDisabled(),t.on("zoomend zoomlevelschange",this._updateDisabled,this),i},onRemove:function(t){t.off("zoomend zoomlevelschange",this._updateDisabled,this)},disable:function(){return this._disabled=!0,this._updateDisabled(),this},enable:function(){return this._disabled=!1,this._updateDisabled(),this},_zoomIn:function(t){!this._disabled&&this._map._zoom<this._map.getMaxZoom()&&this._map.zoomIn(this._map.options.zoomDelta*(t.shiftKey?3:1))},_zoomOut:function(t){!this._disabled&&this._map._zoom>this._map.getMinZoom()&&this._map.zoomOut(this._map.options.zoomDelta*(t.shiftKey?3:1))},_createButton:function(t,e,i,n,o){i=P("a",i,n);return i.innerHTML=t,i.href="#",i.title=e,i.setAttribute("role","button"),i.setAttribute("aria-label",e),Ie(i),S(i,"click",Re),S(i,"click",o,this),S(i,"click",this._refocusOnMap,this),i},_updateDisabled:function(){var t=this._map,e="leaflet-disabled";z(this._zoomInButton,e),z(this._zoomOutButton,e),this._zoomInButton.setAttribute("aria-disabled","false"),this._zoomOutButton.setAttribute("aria-disabled","false"),!this._disabled&&t._zoom!==t.getMinZoom()||(M(this._zoomOutButton,e),this._zoomOutButton.setAttribute("aria-disabled","true")),!this._disabled&&t._zoom!==t.getMaxZoom()||(M(this._zoomInButton,e),this._zoomInButton.setAttribute("aria-disabled","true"))}}),Ge=(A.mergeOptions({zoomControl:!0}),A.addInitHook(function(){this.options.zoomControl&&(this.zoomControl=new qe,this.addControl(this.zoomControl))}),B.extend({options:{position:"bottomleft",maxWidth:100,metric:!0,imperial:!0},onAdd:function(t){var e="leaflet-control-scale",i=P("div",e),n=this.options;return this._addScales(n,e+"-line",i),t.on(n.updateWhenIdle?"moveend":"move",this._update,this),t.whenReady(this._update,this),i},onRemove:function(t){t.off(this.options.updateWhenIdle?"moveend":"move",this._update,this)},_addScales:function(t,e,i){t.metric&&(this._mScale=P("div",e,i)),t.imperial&&(this._iScale=P("div",e,i))},_update:function(){var t=this._map,e=t.getSize().y/2,t=t.distance(t.containerPointToLatLng([0,e]),t.containerPointToLatLng([this.options.maxWidth,e]));this._updateScales(t)},_updateScales:function(t){this.options.metric&&t&&this._updateMetric(t),this.options.imperial&&t&&this._updateImperial(t)},_updateMetric:function(t){var e=this._getRoundNum(t);this._updateScale(this._mScale,e<1e3?e+" m":e/1e3+" km",e/t)},_updateImperial:function(t){var e,i,t=3.2808399*t;5280<t?(i=this._getRoundNum(e=t/5280),this._updateScale(this._iScale,i+" mi",i/e)):(i=this._getRoundNum(t),this._updateScale(this._iScale,i+" ft",i/t))},_updateScale:function(t,e,i){t.style.width=Math.round(this.options.maxWidth*i)+"px",t.innerHTML=e},_getRoundNum:function(t){var e=Math.pow(10,(Math.floor(t)+"").length-1),t=t/e;return e*(t=10<=t?10:5<=t?5:3<=t?3:2<=t?2:1)}})),Ke=B.extend({options:{position:"bottomright",prefix:'<a href="https://leafletjs.com" title="A JavaScript library for interactive maps">'+(b.inlineSvg?'<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" class="leaflet-attribution-flag"><path fill="#4C7BE1" d="M0 0h12v4H0z"/><path fill="#FFD500" d="M0 4h12v3H0z"/><path fill="#E0BC00" d="M0 7h12v1H0z"/></svg> ':"")+"Leaflet</a>"},initialize:function(t){c(this,t),this._attributions={}},onAdd:function(t){for(var e in(t.attributionControl=this)._container=P("div","leaflet-control-attribution"),Ie(this._container),t._layers)t._layers[e].getAttribution&&this.addAttribution(t._layers[e].getAttribution());return this._update(),t.on("layeradd",this._addAttribution,this),this._container},onRemove:function(t){t.off("layeradd",this._addAttribution,this)},_addAttribution:function(t){t.layer.getAttribution&&(this.addAttribution(t.layer.getAttribution()),t.layer.once("remove",function(){this.removeAttribution(t.layer.getAttribution())},this))},setPrefix:function(t){return this.options.prefix=t,this._update(),this},addAttribution:function(t){return t&&(this._attributions[t]||(this._attributions[t]=0),this._attributions[t]++,this._update()),this},removeAttribution:function(t){return t&&this._attributions[t]&&(this._attributions[t]--,this._update()),this},_update:function(){if(this._map){var t,e=[];for(t in this._attributions)this._attributions[t]&&e.push(t);var i=[];this.options.prefix&&i.push(this.options.prefix),e.length&&i.push(e.join(", ")),this._container.innerHTML=i.join(' <span aria-hidden="true">|</span> ')}}}),n=(A.mergeOptions({attributionControl:!0}),A.addInitHook(function(){this.options.attributionControl&&(new Ke).addTo(this)}),B.Layers=Ve,B.Zoom=qe,B.Scale=Ge,B.Attribution=Ke,Ue.layers=function(t,e,i){return new Ve(t,e,i)},Ue.zoom=function(t){return new qe(t)},Ue.scale=function(t){return new Ge(t)},Ue.attribution=function(t){return new Ke(t)},et.extend({initialize:function(t){this._map=t},enable:function(){return this._enabled||(this._enabled=!0,this.addHooks()),this},disable:function(){return this._enabled&&(this._enabled=!1,this.removeHooks()),this},enabled:function(){return!!this._enabled}})),ft=(n.addTo=function(t,e){return t.addHandler(e,this),this},{Events:e}),Ye=b.touch?"touchstart mousedown":"mousedown",Xe=it.extend({options:{clickTolerance:3},initialize:function(t,e,i,n){c(this,n),this._element=t,this._dragStartTarget=e||t,this._preventOutline=i},enable:function(){this._enabled||(S(this._dragStartTarget,Ye,this._onDown,this),this._enabled=!0)},disable:function(){this._enabled&&(Xe._dragging===this&&this.finishDrag(!0),k(this._dragStartTarget,Ye,this._onDown,this),this._enabled=!1,this._moved=!1)},_onDown:function(t){var e,i;this._enabled&&(this._moved=!1,ve(this._element,"leaflet-zoom-anim")||(t.touches&&1!==t.touches.length?Xe._dragging===this&&this.finishDrag():Xe._dragging||t.shiftKey||1!==t.which&&1!==t.button&&!t.touches||((Xe._dragging=this)._preventOutline&&Me(this._element),Le(),re(),this._moving||(this.fire("down"),i=t.touches?t.touches[0]:t,e=Ce(this._element),this._startPoint=new p(i.clientX,i.clientY),this._startPos=Pe(this._element),this._parentScale=Ze(e),i="mousedown"===t.type,S(document,i?"mousemove":"touchmove",this._onMove,this),S(document,i?"mouseup":"touchend touchcancel",this._onUp,this)))))},_onMove:function(t){var e;this._enabled&&(t.touches&&1<t.touches.length?this._moved=!0:!(e=new p((e=t.touches&&1===t.touches.length?t.touches[0]:t).clientX,e.clientY)._subtract(this._startPoint)).x&&!e.y||Math.abs(e.x)+Math.abs(e.y)<this.options.clickTolerance||(e.x/=this._parentScale.x,e.y/=this._parentScale.y,O(t),this._moved||(this.fire("dragstart"),this._moved=!0,M(document.body,"leaflet-dragging"),this._lastTarget=t.target||t.srcElement,window.SVGElementInstance&&this._lastTarget instanceof window.SVGElementInstance&&(this._lastTarget=this._lastTarget.correspondingUseElement),M(this._lastTarget,"leaflet-drag-target")),this._newPos=this._startPos.add(e),this._moving=!0,this._lastEvent=t,this._updatePosition()))},_updatePosition:function(){var t={originalEvent:this._lastEvent};this.fire("predrag",t),Z(this._element,this._newPos),this.fire("drag",t)},_onUp:function(){this._enabled&&this.finishDrag()},finishDrag:function(t){z(document.body,"leaflet-dragging"),this._lastTarget&&(z(this._lastTarget,"leaflet-drag-target"),this._lastTarget=null),k(document,"mousemove touchmove",this._onMove,this),k(document,"mouseup touchend touchcancel",this._onUp,this),Te(),ae();var e=this._moved&&this._moving;this._moving=!1,Xe._dragging=!1,e&&this.fire("dragend",{noInertia:t,distance:this._newPos.distanceTo(this._startPos)})}});function Je(t,e,i){for(var n,o,s,r,a,h,l,u=[1,4,2,8],c=0,d=t.length;c<d;c++)t[c]._code=si(t[c],e);for(s=0;s<4;s++){for(h=u[s],n=[],c=0,o=(d=t.length)-1;c<d;o=c++)r=t[c],a=t[o],r._code&h?a._code&h||((l=oi(a,r,h,e,i))._code=si(l,e),n.push(l)):(a._code&h&&((l=oi(a,r,h,e,i))._code=si(l,e),n.push(l)),n.push(r));t=n}return t}function $e(t,e){var i,n,o,s,r,a,h;if(!t||0===t.length)throw new Error("latlngs not passed");I(t)||(console.warn("latlngs are not flat! Only the first ring will be used"),t=t[0]);for(var l=w([0,0]),u=g(t),c=(u.getNorthWest().distanceTo(u.getSouthWest())*u.getNorthEast().distanceTo(u.getNorthWest())<1700&&(l=Qe(t)),t.length),d=[],_=0;_<c;_++){var p=w(t[_]);d.push(e.project(w([p.lat-l.lat,p.lng-l.lng])))}for(_=r=a=h=0,i=c-1;_<c;i=_++)n=d[_],o=d[i],s=n.y*o.x-o.y*n.x,a+=(n.x+o.x)*s,h+=(n.y+o.y)*s,r+=3*s;u=0===r?d[0]:[a/r,h/r],u=e.unproject(m(u));return w([u.lat+l.lat,u.lng+l.lng])}function Qe(t){for(var e=0,i=0,n=0,o=0;o<t.length;o++){var s=w(t[o]);e+=s.lat,i+=s.lng,n++}return w([e/n,i/n])}var ti,gt={__proto__:null,clipPolygon:Je,polygonCenter:$e,centroid:Qe};function ei(t,e){if(e&&t.length){var i=t=function(t,e){for(var i=[t[0]],n=1,o=0,s=t.length;n<s;n++)(function(t,e){var i=e.x-t.x,e=e.y-t.y;return i*i+e*e})(t[n],t[o])>e&&(i.push(t[n]),o=n);o<s-1&&i.push(t[s-1]);return i}(t,e=e*e),n=i.length,o=new(typeof Uint8Array!=void 0+""?Uint8Array:Array)(n);o[0]=o[n-1]=1,function t(e,i,n,o,s){var r,a,h,l=0;for(a=o+1;a<=s-1;a++)h=ri(e[a],e[o],e[s],!0),l<h&&(r=a,l=h);n<l&&(i[r]=1,t(e,i,n,o,r),t(e,i,n,r,s))}(i,o,e,0,n-1);var s,r=[];for(s=0;s<n;s++)o[s]&&r.push(i[s]);return r}return t.slice()}function ii(t,e,i){return Math.sqrt(ri(t,e,i,!0))}function ni(t,e,i,n,o){var s,r,a,h=n?ti:si(t,i),l=si(e,i);for(ti=l;;){if(!(h|l))return[t,e];if(h&l)return!1;a=si(r=oi(t,e,s=h||l,i,o),i),s===h?(t=r,h=a):(e=r,l=a)}}function oi(t,e,i,n,o){var s,r,a=e.x-t.x,e=e.y-t.y,h=n.min,n=n.max;return 8&i?(s=t.x+a*(n.y-t.y)/e,r=n.y):4&i?(s=t.x+a*(h.y-t.y)/e,r=h.y):2&i?(s=n.x,r=t.y+e*(n.x-t.x)/a):1&i&&(s=h.x,r=t.y+e*(h.x-t.x)/a),new p(s,r,o)}function si(t,e){var i=0;return t.x<e.min.x?i|=1:t.x>e.max.x&&(i|=2),t.y<e.min.y?i|=4:t.y>e.max.y&&(i|=8),i}function ri(t,e,i,n){var o=e.x,e=e.y,s=i.x-o,r=i.y-e,a=s*s+r*r;return 0<a&&(1<(a=((t.x-o)*s+(t.y-e)*r)/a)?(o=i.x,e=i.y):0<a&&(o+=s*a,e+=r*a)),s=t.x-o,r=t.y-e,n?s*s+r*r:new p(o,e)}function I(t){return!d(t[0])||"object"!=typeof t[0][0]&&void 0!==t[0][0]}function ai(t){return console.warn("Deprecated use of _flat, please use L.LineUtil.isFlat instead."),I(t)}function hi(t,e){var i,n,o,s,r,a;if(!t||0===t.length)throw new Error("latlngs not passed");I(t)||(console.warn("latlngs are not flat! Only the first ring will be used"),t=t[0]);for(var h=w([0,0]),l=g(t),u=(l.getNorthWest().distanceTo(l.getSouthWest())*l.getNorthEast().distanceTo(l.getNorthWest())<1700&&(h=Qe(t)),t.length),c=[],d=0;d<u;d++){var _=w(t[d]);c.push(e.project(w([_.lat-h.lat,_.lng-h.lng])))}for(i=d=0;d<u-1;d++)i+=c[d].distanceTo(c[d+1])/2;if(0===i)a=c[0];else for(n=d=0;d<u-1;d++)if(o=c[d],s=c[d+1],i<(n+=r=o.distanceTo(s))){a=[s.x-(r=(n-i)/r)*(s.x-o.x),s.y-r*(s.y-o.y)];break}l=e.unproject(m(a));return w([l.lat+h.lat,l.lng+h.lng])}var vt={__proto__:null,simplify:ei,pointToSegmentDistance:ii,closestPointOnSegment:function(t,e,i){return ri(t,e,i)},clipSegment:ni,_getEdgeIntersection:oi,_getBitCode:si,_sqClosestPointOnSegment:ri,isFlat:I,_flat:ai,polylineCenter:hi},yt={project:function(t){return new p(t.lng,t.lat)},unproject:function(t){return new v(t.y,t.x)},bounds:new f([-180,-90],[180,90])},xt={R:6378137,R_MINOR:6356752.314245179,bounds:new f([-20037508.34279,-15496570.73972],[20037508.34279,18764656.23138]),project:function(t){var e=Math.PI/180,i=this.R,n=t.lat*e,o=this.R_MINOR/i,o=Math.sqrt(1-o*o),s=o*Math.sin(n),s=Math.tan(Math.PI/4-n/2)/Math.pow((1-s)/(1+s),o/2),n=-i*Math.log(Math.max(s,1e-10));return new p(t.lng*e*i,n)},unproject:function(t){for(var e,i=180/Math.PI,n=this.R,o=this.R_MINOR/n,s=Math.sqrt(1-o*o),r=Math.exp(-t.y/n),a=Math.PI/2-2*Math.atan(r),h=0,l=.1;h<15&&1e-7<Math.abs(l);h++)e=s*Math.sin(a),e=Math.pow((1-e)/(1+e),s/2),a+=l=Math.PI/2-2*Math.atan(r*e)-a;return new v(a*i,t.x*i/n)}},wt={__proto__:null,LonLat:yt,Mercator:xt,SphericalMercator:rt},Pt=l({},st,{code:"EPSG:3395",projection:xt,transformation:ht(bt=.5/(Math.PI*xt.R),.5,-bt,.5)}),li=l({},st,{code:"EPSG:4326",projection:yt,transformation:ht(1/180,1,-1/180,.5)}),Lt=l({},ot,{projection:yt,transformation:ht(1,0,-1,0),scale:function(t){return Math.pow(2,t)},zoom:function(t){return Math.log(t)/Math.LN2},distance:function(t,e){var i=e.lng-t.lng,e=e.lat-t.lat;return Math.sqrt(i*i+e*e)},infinite:!0}),o=(ot.Earth=st,ot.EPSG3395=Pt,ot.EPSG3857=lt,ot.EPSG900913=ut,ot.EPSG4326=li,ot.Simple=Lt,it.extend({options:{pane:"overlayPane",attribution:null,bubblingMouseEvents:!0},addTo:function(t){return t.addLayer(this),this},remove:function(){return this.removeFrom(this._map||this._mapToAdd)},removeFrom:function(t){return t&&t.removeLayer(this),this},getPane:function(t){return this._map.getPane(t?this.options[t]||t:this.options.pane)},addInteractiveTarget:function(t){return this._map._targets[h(t)]=this},removeInteractiveTarget:function(t){return delete this._map._targets[h(t)],this},getAttribution:function(){return this.options.attribution},_layerAdd:function(t){var e,i=t.target;i.hasLayer(this)&&(this._map=i,this._zoomAnimated=i._zoomAnimated,this.getEvents&&(e=this.getEvents(),i.on(e,this),this.once("remove",function(){i.off(e,this)},this)),this.onAdd(i),this.fire("add"),i.fire("layeradd",{layer:this}))}})),ui=(A.include({addLayer:function(t){var e;if(t._layerAdd)return e=h(t),this._layers[e]||((this._layers[e]=t)._mapToAdd=this,t.beforeAdd&&t.beforeAdd(this),this.whenReady(t._layerAdd,t)),this;throw new Error("The provided object is not a Layer.")},removeLayer:function(t){var e=h(t);return this._layers[e]&&(this._loaded&&t.onRemove(this),delete this._layers[e],this._loaded&&(this.fire("layerremove",{layer:t}),t.fire("remove")),t._map=t._mapToAdd=null),this},hasLayer:function(t){return h(t)in this._layers},eachLayer:function(t,e){for(var i in this._layers)t.call(e,this._layers[i]);return this},_addLayers:function(t){for(var e=0,i=(t=t?d(t)?t:[t]:[]).length;e<i;e++)this.addLayer(t[e])},_addZoomLimit:function(t){isNaN(t.options.maxZoom)&&isNaN(t.options.minZoom)||(this._zoomBoundLayers[h(t)]=t,this._updateZoomLevels())},_removeZoomLimit:function(t){t=h(t);this._zoomBoundLayers[t]&&(delete this._zoomBoundLayers[t],this._updateZoomLevels())},_updateZoomLevels:function(){var t,e=1/0,i=-1/0,n=this._getZoomSpan();for(t in this._zoomBoundLayers)var o=this._zoomBoundLayers[t].options,e=void 0===o.minZoom?e:Math.min(e,o.minZoom),i=void 0===o.maxZoom?i:Math.max(i,o.maxZoom);this._layersMaxZoom=i===-1/0?void 0:i,this._layersMinZoom=e===1/0?void 0:e,n!==this._getZoomSpan()&&this.fire("zoomlevelschange"),void 0===this.options.maxZoom&&this._layersMaxZoom&&this.getZoom()>this._layersMaxZoom&&this.setZoom(this._layersMaxZoom),void 0===this.options.minZoom&&this._layersMinZoom&&this.getZoom()<this._layersMinZoom&&this.setZoom(this._layersMinZoom)}}),o.extend({initialize:function(t,e){var i,n;if(c(this,e),this._layers={},t)for(i=0,n=t.length;i<n;i++)this.addLayer(t[i])},addLayer:function(t){var e=this.getLayerId(t);return this._layers[e]=t,this._map&&this._map.addLayer(t),this},removeLayer:function(t){t=t in this._layers?t:this.getLayerId(t);return this._map&&this._layers[t]&&this._map.removeLayer(this._layers[t]),delete this._layers[t],this},hasLayer:function(t){return("number"==typeof t?t:this.getLayerId(t))in this._layers},clearLayers:function(){return this.eachLayer(this.removeLayer,this)},invoke:function(t){var e,i,n=Array.prototype.slice.call(arguments,1);for(e in this._layers)(i=this._layers[e])[t]&&i[t].apply(i,n);return this},onAdd:function(t){this.eachLayer(t.addLayer,t)},onRemove:function(t){this.eachLayer(t.removeLayer,t)},eachLayer:function(t,e){for(var i in this._layers)t.call(e,this._layers[i]);return this},getLayer:function(t){return this._layers[t]},getLayers:function(){var t=[];return this.eachLayer(t.push,t),t},setZIndex:function(t){return this.invoke("setZIndex",t)},getLayerId:h})),ci=ui.extend({addLayer:function(t){return this.hasLayer(t)?this:(t.addEventParent(this),ui.prototype.addLayer.call(this,t),this.fire("layeradd",{layer:t}))},removeLayer:function(t){return this.hasLayer(t)?((t=t in this._layers?this._layers[t]:t).removeEventParent(this),ui.prototype.removeLayer.call(this,t),this.fire("layerremove",{layer:t})):this},setStyle:function(t){return this.invoke("setStyle",t)},bringToFront:function(){return this.invoke("bringToFront")},bringToBack:function(){return this.invoke("bringToBack")},getBounds:function(){var t,e=new s;for(t in this._layers){var i=this._layers[t];e.extend(i.getBounds?i.getBounds():i.getLatLng())}return e}}),di=et.extend({options:{popupAnchor:[0,0],tooltipAnchor:[0,0],crossOrigin:!1},initialize:function(t){c(this,t)},createIcon:function(t){return this._createIcon("icon",t)},createShadow:function(t){return this._createIcon("shadow",t)},_createIcon:function(t,e){var i=this._getIconUrl(t);if(i)return i=this._createImg(i,e&&"IMG"===e.tagName?e:null),this._setIconStyles(i,t),!this.options.crossOrigin&&""!==this.options.crossOrigin||(i.crossOrigin=!0===this.options.crossOrigin?"":this.options.crossOrigin),i;if("icon"===t)throw new Error("iconUrl not set in Icon options (see the docs).");return null},_setIconStyles:function(t,e){var i=this.options,n=i[e+"Size"],n=m(n="number"==typeof n?[n,n]:n),o=m("shadow"===e&&i.shadowAnchor||i.iconAnchor||n&&n.divideBy(2,!0));t.className="leaflet-marker-"+e+" "+(i.className||""),o&&(t.style.marginLeft=-o.x+"px",t.style.marginTop=-o.y+"px"),n&&(t.style.width=n.x+"px",t.style.height=n.y+"px")},_createImg:function(t,e){return(e=e||document.createElement("img")).src=t,e},_getIconUrl:function(t){return b.retina&&this.options[t+"RetinaUrl"]||this.options[t+"Url"]}});var _i=di.extend({options:{iconUrl:"marker-icon.png",iconRetinaUrl:"marker-icon-2x.png",shadowUrl:"marker-shadow.png",iconSize:[25,41],iconAnchor:[12,41],popupAnchor:[1,-34],tooltipAnchor:[16,-28],shadowSize:[41,41]},_getIconUrl:function(t){return"string"!=typeof _i.imagePath&&(_i.imagePath=this._detectIconPath()),(this.options.imagePath||_i.imagePath)+di.prototype._getIconUrl.call(this,t)},_stripUrl:function(t){function e(t,e,i){return(e=e.exec(t))&&e[i]}return(t=e(t,/^url\((['"])?(.+)\1\)$/,2))&&e(t,/^(.*)marker-icon\.png$/,1)},_detectIconPath:function(){var t=P("div","leaflet-default-icon-path",document.body),e=pe(t,"background-image")||pe(t,"backgroundImage");return document.body.removeChild(t),(e=this._stripUrl(e))?e:(t=document.querySelector('link[href$="leaflet.css"]'))?t.href.substring(0,t.href.length-"leaflet.css".length-1):""}}),pi=n.extend({initialize:function(t){this._marker=t},addHooks:function(){var t=this._marker._icon;this._draggable||(this._draggable=new Xe(t,t,!0)),this._draggable.on({dragstart:this._onDragStart,predrag:this._onPreDrag,drag:this._onDrag,dragend:this._onDragEnd},this).enable(),M(t,"leaflet-marker-draggable")},removeHooks:function(){this._draggable.off({dragstart:this._onDragStart,predrag:this._onPreDrag,drag:this._onDrag,dragend:this._onDragEnd},this).disable(),this._marker._icon&&z(this._marker._icon,"leaflet-marker-draggable")},moved:function(){return this._draggable&&this._draggable._moved},_adjustPan:function(t){var e=this._marker,i=e._map,n=this._marker.options.autoPanSpeed,o=this._marker.options.autoPanPadding,s=Pe(e._icon),r=i.getPixelBounds(),a=i.getPixelOrigin(),a=_(r.min._subtract(a).add(o),r.max._subtract(a).subtract(o));a.contains(s)||(o=m((Math.max(a.max.x,s.x)-a.max.x)/(r.max.x-a.max.x)-(Math.min(a.min.x,s.x)-a.min.x)/(r.min.x-a.min.x),(Math.max(a.max.y,s.y)-a.max.y)/(r.max.y-a.max.y)-(Math.min(a.min.y,s.y)-a.min.y)/(r.min.y-a.min.y)).multiplyBy(n),i.panBy(o,{animate:!1}),this._draggable._newPos._add(o),this._draggable._startPos._add(o),Z(e._icon,this._draggable._newPos),this._onDrag(t),this._panRequest=x(this._adjustPan.bind(this,t)))},_onDragStart:function(){this._oldLatLng=this._marker.getLatLng(),this._marker.closePopup&&this._marker.closePopup(),this._marker.fire("movestart").fire("dragstart")},_onPreDrag:function(t){this._marker.options.autoPan&&(r(this._panRequest),this._panRequest=x(this._adjustPan.bind(this,t)))},_onDrag:function(t){var e=this._marker,i=e._shadow,n=Pe(e._icon),o=e._map.layerPointToLatLng(n);i&&Z(i,n),e._latlng=o,t.latlng=o,t.oldLatLng=this._oldLatLng,e.fire("move",t).fire("drag",t)},_onDragEnd:function(t){r(this._panRequest),delete this._oldLatLng,this._marker.fire("moveend").fire("dragend",t)}}),mi=o.extend({options:{icon:new _i,interactive:!0,keyboard:!0,title:"",alt:"Marker",zIndexOffset:0,opacity:1,riseOnHover:!1,riseOffset:250,pane:"markerPane",shadowPane:"shadowPane",bubblingMouseEvents:!1,autoPanOnFocus:!0,draggable:!1,autoPan:!1,autoPanPadding:[50,50],autoPanSpeed:10},initialize:function(t,e){c(this,e),this._latlng=w(t)},onAdd:function(t){this._zoomAnimated=this._zoomAnimated&&t.options.markerZoomAnimation,this._zoomAnimated&&t.on("zoomanim",this._animateZoom,this),this._initIcon(),this.update()},onRemove:function(t){this.dragging&&this.dragging.enabled()&&(this.options.draggable=!0,this.dragging.removeHooks()),delete this.dragging,this._zoomAnimated&&t.off("zoomanim",this._animateZoom,this),this._removeIcon(),this._removeShadow()},getEvents:function(){return{zoom:this.update,viewreset:this.update}},getLatLng:function(){return this._latlng},setLatLng:function(t){var e=this._latlng;return this._latlng=w(t),this.update(),this.fire("move",{oldLatLng:e,latlng:this._latlng})},setZIndexOffset:function(t){return this.options.zIndexOffset=t,this.update()},getIcon:function(){return this.options.icon},setIcon:function(t){return this.options.icon=t,this._map&&(this._initIcon(),this.update()),this._popup&&this.bindPopup(this._popup,this._popup.options),this},getElement:function(){return this._icon},update:function(){var t;return this._icon&&this._map&&(t=this._map.latLngToLayerPoint(this._latlng).round(),this._setPos(t)),this},_initIcon:function(){var t=this.options,e="leaflet-zoom-"+(this._zoomAnimated?"animated":"hide"),i=t.icon.createIcon(this._icon),n=!1,i=(i!==this._icon&&(this._icon&&this._removeIcon(),n=!0,t.title&&(i.title=t.title),"IMG"===i.tagName&&(i.alt=t.alt||"")),M(i,e),t.keyboard&&(i.tabIndex="0",i.setAttribute("role","button")),this._icon=i,t.riseOnHover&&this.on({mouseover:this._bringToFront,mouseout:this._resetZIndex}),this.options.autoPanOnFocus&&S(i,"focus",this._panOnFocus,this),t.icon.createShadow(this._shadow)),o=!1;i!==this._shadow&&(this._removeShadow(),o=!0),i&&(M(i,e),i.alt=""),this._shadow=i,t.opacity<1&&this._updateOpacity(),n&&this.getPane().appendChild(this._icon),this._initInteraction(),i&&o&&this.getPane(t.shadowPane).appendChild(this._shadow)},_removeIcon:function(){this.options.riseOnHover&&this.off({mouseover:this._bringToFront,mouseout:this._resetZIndex}),this.options.autoPanOnFocus&&k(this._icon,"focus",this._panOnFocus,this),T(this._icon),this.removeInteractiveTarget(this._icon),this._icon=null},_removeShadow:function(){this._shadow&&T(this._shadow),this._shadow=null},_setPos:function(t){this._icon&&Z(this._icon,t),this._shadow&&Z(this._shadow,t),this._zIndex=t.y+this.options.zIndexOffset,this._resetZIndex()},_updateZIndex:function(t){this._icon&&(this._icon.style.zIndex=this._zIndex+t)},_animateZoom:function(t){t=this._map._latLngToNewLayerPoint(this._latlng,t.zoom,t.center).round();this._setPos(t)},_initInteraction:function(){var t;this.options.interactive&&(M(this._icon,"leaflet-interactive"),this.addInteractiveTarget(this._icon),pi&&(t=this.options.draggable,this.dragging&&(t=this.dragging.enabled(),this.dragging.disable()),this.dragging=new pi(this),t&&this.dragging.enable()))},setOpacity:function(t){return this.options.opacity=t,this._map&&this._updateOpacity(),this},_updateOpacity:function(){var t=this.options.opacity;this._icon&&C(this._icon,t),this._shadow&&C(this._shadow,t)},_bringToFront:function(){this._updateZIndex(this.options.riseOffset)},_resetZIndex:function(){this._updateZIndex(0)},_panOnFocus:function(){var t,e,i=this._map;i&&(t=(e=this.options.icon.options).iconSize?m(e.iconSize):m(0,0),e=e.iconAnchor?m(e.iconAnchor):m(0,0),i.panInside(this._latlng,{paddingTopLeft:e,paddingBottomRight:t.subtract(e)}))},_getPopupAnchor:function(){return this.options.icon.options.popupAnchor},_getTooltipAnchor:function(){return this.options.icon.options.tooltipAnchor}});var fi=o.extend({options:{stroke:!0,color:"#3388ff",weight:3,opacity:1,lineCap:"round",lineJoin:"round",dashArray:null,dashOffset:null,fill:!1,fillColor:null,fillOpacity:.2,fillRule:"evenodd",interactive:!0,bubblingMouseEvents:!0},beforeAdd:function(t){this._renderer=t.getRenderer(this)},onAdd:function(){this._renderer._initPath(this),this._reset(),this._renderer._addPath(this)},onRemove:function(){this._renderer._removePath(this)},redraw:function(){return this._map&&this._renderer._updatePath(this),this},setStyle:function(t){return c(this,t),this._renderer&&(this._renderer._updateStyle(this),this.options.stroke&&t&&Object.prototype.hasOwnProperty.call(t,"weight")&&this._updateBounds()),this},bringToFront:function(){return this._renderer&&this._renderer._bringToFront(this),this},bringToBack:function(){return this._renderer&&this._renderer._bringToBack(this),this},getElement:function(){return this._path},_reset:function(){this._project(),this._update()},_clickTolerance:function(){return(this.options.stroke?this.options.weight/2:0)+(this._renderer.options.tolerance||0)}}),gi=fi.extend({options:{fill:!0,radius:10},initialize:function(t,e){c(this,e),this._latlng=w(t),this._radius=this.options.radius},setLatLng:function(t){var e=this._latlng;return this._latlng=w(t),this.redraw(),this.fire("move",{oldLatLng:e,latlng:this._latlng})},getLatLng:function(){return this._latlng},setRadius:function(t){return this.options.radius=this._radius=t,this.redraw()},getRadius:function(){return this._radius},setStyle:function(t){var e=t&&t.radius||this._radius;return fi.prototype.setStyle.call(this,t),this.setRadius(e),this},_project:function(){this._point=this._map.latLngToLayerPoint(this._latlng),this._updateBounds()},_updateBounds:function(){var t=this._radius,e=this._radiusY||t,i=this._clickTolerance(),t=[t+i,e+i];this._pxBounds=new f(this._point.subtract(t),this._point.add(t))},_update:function(){this._map&&this._updatePath()},_updatePath:function(){this._renderer._updateCircle(this)},_empty:function(){return this._radius&&!this._renderer._bounds.intersects(this._pxBounds)},_containsPoint:function(t){return t.distanceTo(this._point)<=this._radius+this._clickTolerance()}});var vi=gi.extend({initialize:function(t,e,i){if(c(this,e="number"==typeof e?l({},i,{radius:e}):e),this._latlng=w(t),isNaN(this.options.radius))throw new Error("Circle radius cannot be NaN");this._mRadius=this.options.radius},setRadius:function(t){return this._mRadius=t,this.redraw()},getRadius:function(){return this._mRadius},getBounds:function(){var t=[this._radius,this._radiusY||this._radius];return new s(this._map.layerPointToLatLng(this._point.subtract(t)),this._map.layerPointToLatLng(this._point.add(t)))},setStyle:fi.prototype.setStyle,_project:function(){var t,e,i,n,o,s=this._latlng.lng,r=this._latlng.lat,a=this._map,h=a.options.crs;h.distance===st.distance?(n=Math.PI/180,o=this._mRadius/st.R/n,t=a.project([r+o,s]),e=a.project([r-o,s]),e=t.add(e).divideBy(2),i=a.unproject(e).lat,n=Math.acos((Math.cos(o*n)-Math.sin(r*n)*Math.sin(i*n))/(Math.cos(r*n)*Math.cos(i*n)))/n,!isNaN(n)&&0!==n||(n=o/Math.cos(Math.PI/180*r)),this._point=e.subtract(a.getPixelOrigin()),this._radius=isNaN(n)?0:e.x-a.project([i,s-n]).x,this._radiusY=e.y-t.y):(o=h.unproject(h.project(this._latlng).subtract([this._mRadius,0])),this._point=a.latLngToLayerPoint(this._latlng),this._radius=this._point.x-a.latLngToLayerPoint(o).x),this._updateBounds()}});var yi=fi.extend({options:{smoothFactor:1,noClip:!1},initialize:function(t,e){c(this,e),this._setLatLngs(t)},getLatLngs:function(){return this._latlngs},setLatLngs:function(t){return this._setLatLngs(t),this.redraw()},isEmpty:function(){return!this._latlngs.length},closestLayerPoint:function(t){for(var e=1/0,i=null,n=ri,o=0,s=this._parts.length;o<s;o++)for(var r=this._parts[o],a=1,h=r.length;a<h;a++){var l,u,c=n(t,l=r[a-1],u=r[a],!0);c<e&&(e=c,i=n(t,l,u))}return i&&(i.distance=Math.sqrt(e)),i},getCenter:function(){if(this._map)return hi(this._defaultShape(),this._map.options.crs);throw new Error("Must add layer to map before using getCenter()")},getBounds:function(){return this._bounds},addLatLng:function(t,e){return e=e||this._defaultShape(),t=w(t),e.push(t),this._bounds.extend(t),this.redraw()},_setLatLngs:function(t){this._bounds=new s,this._latlngs=this._convertLatLngs(t)},_defaultShape:function(){return I(this._latlngs)?this._latlngs:this._latlngs[0]},_convertLatLngs:function(t){for(var e=[],i=I(t),n=0,o=t.length;n<o;n++)i?(e[n]=w(t[n]),this._bounds.extend(e[n])):e[n]=this._convertLatLngs(t[n]);return e},_project:function(){var t=new f;this._rings=[],this._projectLatlngs(this._latlngs,this._rings,t),this._bounds.isValid()&&t.isValid()&&(this._rawPxBounds=t,this._updateBounds())},_updateBounds:function(){var t=this._clickTolerance(),t=new p(t,t);this._rawPxBounds&&(this._pxBounds=new f([this._rawPxBounds.min.subtract(t),this._rawPxBounds.max.add(t)]))},_projectLatlngs:function(t,e,i){var n,o,s=t[0]instanceof v,r=t.length;if(s){for(o=[],n=0;n<r;n++)o[n]=this._map.latLngToLayerPoint(t[n]),i.extend(o[n]);e.push(o)}else for(n=0;n<r;n++)this._projectLatlngs(t[n],e,i)},_clipPoints:function(){var t=this._renderer._bounds;if(this._parts=[],this._pxBounds&&this._pxBounds.intersects(t))if(this.options.noClip)this._parts=this._rings;else for(var e,i,n,o,s=this._parts,r=0,a=0,h=this._rings.length;r<h;r++)for(e=0,i=(o=this._rings[r]).length;e<i-1;e++)(n=ni(o[e],o[e+1],t,e,!0))&&(s[a]=s[a]||[],s[a].push(n[0]),n[1]===o[e+1]&&e!==i-2||(s[a].push(n[1]),a++))},_simplifyPoints:function(){for(var t=this._parts,e=this.options.smoothFactor,i=0,n=t.length;i<n;i++)t[i]=ei(t[i],e)},_update:function(){this._map&&(this._clipPoints(),this._simplifyPoints(),this._updatePath())},_updatePath:function(){this._renderer._updatePoly(this)},_containsPoint:function(t,e){var i,n,o,s,r,a,h=this._clickTolerance();if(this._pxBounds&&this._pxBounds.contains(t))for(i=0,s=this._parts.length;i<s;i++)for(n=0,o=(r=(a=this._parts[i]).length)-1;n<r;o=n++)if((e||0!==n)&&ii(t,a[o],a[n])<=h)return!0;return!1}});yi._flat=ai;var xi=yi.extend({options:{fill:!0},isEmpty:function(){return!this._latlngs.length||!this._latlngs[0].length},getCenter:function(){if(this._map)return $e(this._defaultShape(),this._map.options.crs);throw new Error("Must add layer to map before using getCenter()")},_convertLatLngs:function(t){var t=yi.prototype._convertLatLngs.call(this,t),e=t.length;return 2<=e&&t[0]instanceof v&&t[0].equals(t[e-1])&&t.pop(),t},_setLatLngs:function(t){yi.prototype._setLatLngs.call(this,t),I(this._latlngs)&&(this._latlngs=[this._latlngs])},_defaultShape:function(){return(I(this._latlngs[0])?this._latlngs:this._latlngs[0])[0]},_clipPoints:function(){var t=this._renderer._bounds,e=this.options.weight,e=new p(e,e),t=new f(t.min.subtract(e),t.max.add(e));if(this._parts=[],this._pxBounds&&this._pxBounds.intersects(t))if(this.options.noClip)this._parts=this._rings;else for(var i,n=0,o=this._rings.length;n<o;n++)(i=Je(this._rings[n],t,!0)).length&&this._parts.push(i)},_updatePath:function(){this._renderer._updatePoly(this,!0)},_containsPoint:function(t){var e,i,n,o,s,r,a,h,l=!1;if(!this._pxBounds||!this._pxBounds.contains(t))return!1;for(o=0,a=this._parts.length;o<a;o++)for(s=0,r=(h=(e=this._parts[o]).length)-1;s<h;r=s++)i=e[s],n=e[r],i.y>t.y!=n.y>t.y&&t.x<(n.x-i.x)*(t.y-i.y)/(n.y-i.y)+i.x&&(l=!l);return l||yi.prototype._containsPoint.call(this,t,!0)}});var wi=ci.extend({initialize:function(t,e){c(this,e),this._layers={},t&&this.addData(t)},addData:function(t){var e,i,n,o=d(t)?t:t.features;if(o){for(e=0,i=o.length;e<i;e++)((n=o[e]).geometries||n.geometry||n.features||n.coordinates)&&this.addData(n);return this}var s,r=this.options;return(!r.filter||r.filter(t))&&(s=bi(t,r))?(s.feature=Zi(t),s.defaultOptions=s.options,this.resetStyle(s),r.onEachFeature&&r.onEachFeature(t,s),this.addLayer(s)):this},resetStyle:function(t){return void 0===t?this.eachLayer(this.resetStyle,this):(t.options=l({},t.defaultOptions),this._setLayerStyle(t,this.options.style),this)},setStyle:function(e){return this.eachLayer(function(t){this._setLayerStyle(t,e)},this)},_setLayerStyle:function(t,e){t.setStyle&&("function"==typeof e&&(e=e(t.feature)),t.setStyle(e))}});function bi(t,e){var i,n,o,s,r="Feature"===t.type?t.geometry:t,a=r?r.coordinates:null,h=[],l=e&&e.pointToLayer,u=e&&e.coordsToLatLng||Li;if(!a&&!r)return null;switch(r.type){case"Point":return Pi(l,t,i=u(a),e);case"MultiPoint":for(o=0,s=a.length;o<s;o++)i=u(a[o]),h.push(Pi(l,t,i,e));return new ci(h);case"LineString":case"MultiLineString":return n=Ti(a,"LineString"===r.type?0:1,u),new yi(n,e);case"Polygon":case"MultiPolygon":return n=Ti(a,"Polygon"===r.type?1:2,u),new xi(n,e);case"GeometryCollection":for(o=0,s=r.geometries.length;o<s;o++){var c=bi({geometry:r.geometries[o],type:"Feature",properties:t.properties},e);c&&h.push(c)}return new ci(h);case"FeatureCollection":for(o=0,s=r.features.length;o<s;o++){var d=bi(r.features[o],e);d&&h.push(d)}return new ci(h);default:throw new Error("Invalid GeoJSON object.")}}function Pi(t,e,i,n){return t?t(e,i):new mi(i,n&&n.markersInheritOptions&&n)}function Li(t){return new v(t[1],t[0],t[2])}function Ti(t,e,i){for(var n,o=[],s=0,r=t.length;s<r;s++)n=e?Ti(t[s],e-1,i):(i||Li)(t[s]),o.push(n);return o}function Mi(t,e){return void 0!==(t=w(t)).alt?[i(t.lng,e),i(t.lat,e),i(t.alt,e)]:[i(t.lng,e),i(t.lat,e)]}function zi(t,e,i,n){for(var o=[],s=0,r=t.length;s<r;s++)o.push(e?zi(t[s],I(t[s])?0:e-1,i,n):Mi(t[s],n));return!e&&i&&0<o.length&&o.push(o[0].slice()),o}function Ci(t,e){return t.feature?l({},t.feature,{geometry:e}):Zi(e)}function Zi(t){return"Feature"===t.type||"FeatureCollection"===t.type?t:{type:"Feature",properties:{},geometry:t}}Tt={toGeoJSON:function(t){return Ci(this,{type:"Point",coordinates:Mi(this.getLatLng(),t)})}};function Si(t,e){return new wi(t,e)}mi.include(Tt),vi.include(Tt),gi.include(Tt),yi.include({toGeoJSON:function(t){var e=!I(this._latlngs);return Ci(this,{type:(e?"Multi":"")+"LineString",coordinates:zi(this._latlngs,e?1:0,!1,t)})}}),xi.include({toGeoJSON:function(t){var e=!I(this._latlngs),i=e&&!I(this._latlngs[0]),t=zi(this._latlngs,i?2:e?1:0,!0,t);return Ci(this,{type:(i?"Multi":"")+"Polygon",coordinates:t=e?t:[t]})}}),ui.include({toMultiPoint:function(e){var i=[];return this.eachLayer(function(t){i.push(t.toGeoJSON(e).geometry.coordinates)}),Ci(this,{type:"MultiPoint",coordinates:i})},toGeoJSON:function(e){var i,n,t=this.feature&&this.feature.geometry&&this.feature.geometry.type;return"MultiPoint"===t?this.toMultiPoint(e):(i="GeometryCollection"===t,n=[],this.eachLayer(function(t){t.toGeoJSON&&(t=t.toGeoJSON(e),i?n.push(t.geometry):"FeatureCollection"===(t=Zi(t)).type?n.push.apply(n,t.features):n.push(t))}),i?Ci(this,{geometries:n,type:"GeometryCollection"}):{type:"FeatureCollection",features:n})}});var Mt=Si,Ei=o.extend({options:{opacity:1,alt:"",interactive:!1,crossOrigin:!1,errorOverlayUrl:"",zIndex:1,className:""},initialize:function(t,e,i){this._url=t,this._bounds=g(e),c(this,i)},onAdd:function(){this._image||(this._initImage(),this.options.opacity<1&&this._updateOpacity()),this.options.interactive&&(M(this._image,"leaflet-interactive"),this.addInteractiveTarget(this._image)),this.getPane().appendChild(this._image),this._reset()},onRemove:function(){T(this._image),this.options.interactive&&this.removeInteractiveTarget(this._image)},setOpacity:function(t){return this.options.opacity=t,this._image&&this._updateOpacity(),this},setStyle:function(t){return t.opacity&&this.setOpacity(t.opacity),this},bringToFront:function(){return this._map&&fe(this._image),this},bringToBack:function(){return this._map&&ge(this._image),this},setUrl:function(t){return this._url=t,this._image&&(this._image.src=t),this},setBounds:function(t){return this._bounds=g(t),this._map&&this._reset(),this},getEvents:function(){var t={zoom:this._reset,viewreset:this._reset};return this._zoomAnimated&&(t.zoomanim=this._animateZoom),t},setZIndex:function(t){return this.options.zIndex=t,this._updateZIndex(),this},getBounds:function(){return this._bounds},getElement:function(){return this._image},_initImage:function(){var t="IMG"===this._url.tagName,e=this._image=t?this._url:P("img");M(e,"leaflet-image-layer"),this._zoomAnimated&&M(e,"leaflet-zoom-animated"),this.options.className&&M(e,this.options.className),e.onselectstart=u,e.onmousemove=u,e.onload=a(this.fire,this,"load"),e.onerror=a(this._overlayOnError,this,"error"),!this.options.crossOrigin&&""!==this.options.crossOrigin||(e.crossOrigin=!0===this.options.crossOrigin?"":this.options.crossOrigin),this.options.zIndex&&this._updateZIndex(),t?this._url=e.src:(e.src=this._url,e.alt=this.options.alt)},_animateZoom:function(t){var e=this._map.getZoomScale(t.zoom),t=this._map._latLngBoundsToNewLayerBounds(this._bounds,t.zoom,t.center).min;be(this._image,t,e)},_reset:function(){var t=this._image,e=new f(this._map.latLngToLayerPoint(this._bounds.getNorthWest()),this._map.latLngToLayerPoint(this._bounds.getSouthEast())),i=e.getSize();Z(t,e.min),t.style.width=i.x+"px",t.style.height=i.y+"px"},_updateOpacity:function(){C(this._image,this.options.opacity)},_updateZIndex:function(){this._image&&void 0!==this.options.zIndex&&null!==this.options.zIndex&&(this._image.style.zIndex=this.options.zIndex)},_overlayOnError:function(){this.fire("error");var t=this.options.errorOverlayUrl;t&&this._url!==t&&(this._url=t,this._image.src=t)},getCenter:function(){return this._bounds.getCenter()}}),ki=Ei.extend({options:{autoplay:!0,loop:!0,keepAspectRatio:!0,muted:!1,playsInline:!0},_initImage:function(){var t="VIDEO"===this._url.tagName,e=this._image=t?this._url:P("video");if(M(e,"leaflet-image-layer"),this._zoomAnimated&&M(e,"leaflet-zoom-animated"),this.options.className&&M(e,this.options.className),e.onselectstart=u,e.onmousemove=u,e.onloadeddata=a(this.fire,this,"load"),t){for(var i=e.getElementsByTagName("source"),n=[],o=0;o<i.length;o++)n.push(i[o].src);this._url=0<i.length?n:[e.src]}else{d(this._url)||(this._url=[this._url]),!this.options.keepAspectRatio&&Object.prototype.hasOwnProperty.call(e.style,"objectFit")&&(e.style.objectFit="fill"),e.autoplay=!!this.options.autoplay,e.loop=!!this.options.loop,e.muted=!!this.options.muted,e.playsInline=!!this.options.playsInline;for(var s=0;s<this._url.length;s++){var r=P("source");r.src=this._url[s],e.appendChild(r)}}}});var Oi=Ei.extend({_initImage:function(){var t=this._image=this._url;M(t,"leaflet-image-layer"),this._zoomAnimated&&M(t,"leaflet-zoom-animated"),this.options.className&&M(t,this.options.className),t.onselectstart=u,t.onmousemove=u}});var Ai=o.extend({options:{interactive:!1,offset:[0,0],className:"",pane:void 0,content:""},initialize:function(t,e){t&&(t instanceof v||d(t))?(this._latlng=w(t),c(this,e)):(c(this,t),this._source=e),this.options.content&&(this._content=this.options.content)},openOn:function(t){return(t=arguments.length?t:this._source._map).hasLayer(this)||t.addLayer(this),this},close:function(){return this._map&&this._map.removeLayer(this),this},toggle:function(t){return this._map?this.close():(arguments.length?this._source=t:t=this._source,this._prepareOpen(),this.openOn(t._map)),this},onAdd:function(t){this._zoomAnimated=t._zoomAnimated,this._container||this._initLayout(),t._fadeAnimated&&C(this._container,0),clearTimeout(this._removeTimeout),this.getPane().appendChild(this._container),this.update(),t._fadeAnimated&&C(this._container,1),this.bringToFront(),this.options.interactive&&(M(this._container,"leaflet-interactive"),this.addInteractiveTarget(this._container))},onRemove:function(t){t._fadeAnimated?(C(this._container,0),this._removeTimeout=setTimeout(a(T,void 0,this._container),200)):T(this._container),this.options.interactive&&(z(this._container,"leaflet-interactive"),this.removeInteractiveTarget(this._container))},getLatLng:function(){return this._latlng},setLatLng:function(t){return this._latlng=w(t),this._map&&(this._updatePosition(),this._adjustPan()),this},getContent:function(){return this._content},setContent:function(t){return this._content=t,this.update(),this},getElement:function(){return this._container},update:function(){this._map&&(this._container.style.visibility="hidden",this._updateContent(),this._updateLayout(),this._updatePosition(),this._container.style.visibility="",this._adjustPan())},getEvents:function(){var t={zoom:this._updatePosition,viewreset:this._updatePosition};return this._zoomAnimated&&(t.zoomanim=this._animateZoom),t},isOpen:function(){return!!this._map&&this._map.hasLayer(this)},bringToFront:function(){return this._map&&fe(this._container),this},bringToBack:function(){return this._map&&ge(this._container),this},_prepareOpen:function(t){if(!(i=this._source)._map)return!1;if(i instanceof ci){var e,i=null,n=this._source._layers;for(e in n)if(n[e]._map){i=n[e];break}if(!i)return!1;this._source=i}if(!t)if(i.getCenter)t=i.getCenter();else if(i.getLatLng)t=i.getLatLng();else{if(!i.getBounds)throw new Error("Unable to get source layer LatLng.");t=i.getBounds().getCenter()}return this.setLatLng(t),this._map&&this.update(),!0},_updateContent:function(){if(this._content){var t=this._contentNode,e="function"==typeof this._content?this._content(this._source||this):this._content;if("string"==typeof e)t.innerHTML=e;else{for(;t.hasChildNodes();)t.removeChild(t.firstChild);t.appendChild(e)}this.fire("contentupdate")}},_updatePosition:function(){var t,e,i;this._map&&(e=this._map.latLngToLayerPoint(this._latlng),t=m(this.options.offset),i=this._getAnchor(),this._zoomAnimated?Z(this._container,e.add(i)):t=t.add(e).add(i),e=this._containerBottom=-t.y,i=this._containerLeft=-Math.round(this._containerWidth/2)+t.x,this._container.style.bottom=e+"px",this._container.style.left=i+"px")},_getAnchor:function(){return[0,0]}}),Bi=(A.include({_initOverlay:function(t,e,i,n){var o=e;return o instanceof t||(o=new t(n).setContent(e)),i&&o.setLatLng(i),o}}),o.include({_initOverlay:function(t,e,i,n){var o=i;return o instanceof t?(c(o,n),o._source=this):(o=e&&!n?e:new t(n,this)).setContent(i),o}}),Ai.extend({options:{pane:"popupPane",offset:[0,7],maxWidth:300,minWidth:50,maxHeight:null,autoPan:!0,autoPanPaddingTopLeft:null,autoPanPaddingBottomRight:null,autoPanPadding:[5,5],keepInView:!1,closeButton:!0,autoClose:!0,closeOnEscapeKey:!0,className:""},openOn:function(t){return!(t=arguments.length?t:this._source._map).hasLayer(this)&&t._popup&&t._popup.options.autoClose&&t.removeLayer(t._popup),t._popup=this,Ai.prototype.openOn.call(this,t)},onAdd:function(t){Ai.prototype.onAdd.call(this,t),t.fire("popupopen",{popup:this}),this._source&&(this._source.fire("popupopen",{popup:this},!0),this._source instanceof fi||this._source.on("preclick",Ae))},onRemove:function(t){Ai.prototype.onRemove.call(this,t),t.fire("popupclose",{popup:this}),this._source&&(this._source.fire("popupclose",{popup:this},!0),this._source instanceof fi||this._source.off("preclick",Ae))},getEvents:function(){var t=Ai.prototype.getEvents.call(this);return(void 0!==this.options.closeOnClick?this.options.closeOnClick:this._map.options.closePopupOnClick)&&(t.preclick=this.close),this.options.keepInView&&(t.moveend=this._adjustPan),t},_initLayout:function(){var t="leaflet-popup",e=this._container=P("div",t+" "+(this.options.className||"")+" leaflet-zoom-animated"),i=this._wrapper=P("div",t+"-content-wrapper",e);this._contentNode=P("div",t+"-content",i),Ie(e),Be(this._contentNode),S(e,"contextmenu",Ae),this._tipContainer=P("div",t+"-tip-container",e),this._tip=P("div",t+"-tip",this._tipContainer),this.options.closeButton&&((i=this._closeButton=P("a",t+"-close-button",e)).setAttribute("role","button"),i.setAttribute("aria-label","Close popup"),i.href="#close",i.innerHTML='<span aria-hidden="true">&#215;</span>',S(i,"click",function(t){O(t),this.close()},this))},_updateLayout:function(){var t=this._contentNode,e=t.style,i=(e.width="",e.whiteSpace="nowrap",t.offsetWidth),i=Math.min(i,this.options.maxWidth),i=(i=Math.max(i,this.options.minWidth),e.width=i+1+"px",e.whiteSpace="",e.height="",t.offsetHeight),n=this.options.maxHeight,o="leaflet-popup-scrolled";(n&&n<i?(e.height=n+"px",M):z)(t,o),this._containerWidth=this._container.offsetWidth},_animateZoom:function(t){var t=this._map._latLngToNewLayerPoint(this._latlng,t.zoom,t.center),e=this._getAnchor();Z(this._container,t.add(e))},_adjustPan:function(){var t,e,i,n,o,s,r,a;this.options.autoPan&&(this._map._panAnim&&this._map._panAnim.stop(),this._autopanning?this._autopanning=!1:(t=this._map,e=parseInt(pe(this._container,"marginBottom"),10)||0,e=this._container.offsetHeight+e,a=this._containerWidth,(i=new p(this._containerLeft,-e-this._containerBottom))._add(Pe(this._container)),i=t.layerPointToContainerPoint(i),o=m(this.options.autoPanPadding),n=m(this.options.autoPanPaddingTopLeft||o),o=m(this.options.autoPanPaddingBottomRight||o),s=t.getSize(),r=0,i.x+a+o.x>s.x&&(r=i.x+a-s.x+o.x),i.x-r-n.x<(a=0)&&(r=i.x-n.x),i.y+e+o.y>s.y&&(a=i.y+e-s.y+o.y),i.y-a-n.y<0&&(a=i.y-n.y),(r||a)&&(this.options.keepInView&&(this._autopanning=!0),t.fire("autopanstart").panBy([r,a]))))},_getAnchor:function(){return m(this._source&&this._source._getPopupAnchor?this._source._getPopupAnchor():[0,0])}})),Ii=(A.mergeOptions({closePopupOnClick:!0}),A.include({openPopup:function(t,e,i){return this._initOverlay(Bi,t,e,i).openOn(this),this},closePopup:function(t){return(t=arguments.length?t:this._popup)&&t.close(),this}}),o.include({bindPopup:function(t,e){return this._popup=this._initOverlay(Bi,this._popup,t,e),this._popupHandlersAdded||(this.on({click:this._openPopup,keypress:this._onKeyPress,remove:this.closePopup,move:this._movePopup}),this._popupHandlersAdded=!0),this},unbindPopup:function(){return this._popup&&(this.off({click:this._openPopup,keypress:this._onKeyPress,remove:this.closePopup,move:this._movePopup}),this._popupHandlersAdded=!1,this._popup=null),this},openPopup:function(t){return this._popup&&(this instanceof ci||(this._popup._source=this),this._popup._prepareOpen(t||this._latlng)&&this._popup.openOn(this._map)),this},closePopup:function(){return this._popup&&this._popup.close(),this},togglePopup:function(){return this._popup&&this._popup.toggle(this),this},isPopupOpen:function(){return!!this._popup&&this._popup.isOpen()},setPopupContent:function(t){return this._popup&&this._popup.setContent(t),this},getPopup:function(){return this._popup},_openPopup:function(t){var e;this._popup&&this._map&&(Re(t),e=t.layer||t.target,this._popup._source!==e||e instanceof fi?(this._popup._source=e,this.openPopup(t.latlng)):this._map.hasLayer(this._popup)?this.closePopup():this.openPopup(t.latlng))},_movePopup:function(t){this._popup.setLatLng(t.latlng)},_onKeyPress:function(t){13===t.originalEvent.keyCode&&this._openPopup(t)}}),Ai.extend({options:{pane:"tooltipPane",offset:[0,0],direction:"auto",permanent:!1,sticky:!1,opacity:.9},onAdd:function(t){Ai.prototype.onAdd.call(this,t),this.setOpacity(this.options.opacity),t.fire("tooltipopen",{tooltip:this}),this._source&&(this.addEventParent(this._source),this._source.fire("tooltipopen",{tooltip:this},!0))},onRemove:function(t){Ai.prototype.onRemove.call(this,t),t.fire("tooltipclose",{tooltip:this}),this._source&&(this.removeEventParent(this._source),this._source.fire("tooltipclose",{tooltip:this},!0))},getEvents:function(){var t=Ai.prototype.getEvents.call(this);return this.options.permanent||(t.preclick=this.close),t},_initLayout:function(){var t="leaflet-tooltip "+(this.options.className||"")+" leaflet-zoom-"+(this._zoomAnimated?"animated":"hide");this._contentNode=this._container=P("div",t),this._container.setAttribute("role","tooltip"),this._container.setAttribute("id","leaflet-tooltip-"+h(this))},_updateLayout:function(){},_adjustPan:function(){},_setPosition:function(t){var e,i=this._map,n=this._container,o=i.latLngToContainerPoint(i.getCenter()),i=i.layerPointToContainerPoint(t),s=this.options.direction,r=n.offsetWidth,a=n.offsetHeight,h=m(this.options.offset),l=this._getAnchor(),i="top"===s?(e=r/2,a):"bottom"===s?(e=r/2,0):(e="center"===s?r/2:"right"===s?0:"left"===s?r:i.x<o.x?(s="right",0):(s="left",r+2*(h.x+l.x)),a/2);t=t.subtract(m(e,i,!0)).add(h).add(l),z(n,"leaflet-tooltip-right"),z(n,"leaflet-tooltip-left"),z(n,"leaflet-tooltip-top"),z(n,"leaflet-tooltip-bottom"),M(n,"leaflet-tooltip-"+s),Z(n,t)},_updatePosition:function(){var t=this._map.latLngToLayerPoint(this._latlng);this._setPosition(t)},setOpacity:function(t){this.options.opacity=t,this._container&&C(this._container,t)},_animateZoom:function(t){t=this._map._latLngToNewLayerPoint(this._latlng,t.zoom,t.center);this._setPosition(t)},_getAnchor:function(){return m(this._source&&this._source._getTooltipAnchor&&!this.options.sticky?this._source._getTooltipAnchor():[0,0])}})),Ri=(A.include({openTooltip:function(t,e,i){return this._initOverlay(Ii,t,e,i).openOn(this),this},closeTooltip:function(t){return t.close(),this}}),o.include({bindTooltip:function(t,e){return this._tooltip&&this.isTooltipOpen()&&this.unbindTooltip(),this._tooltip=this._initOverlay(Ii,this._tooltip,t,e),this._initTooltipInteractions(),this._tooltip.options.permanent&&this._map&&this._map.hasLayer(this)&&this.openTooltip(),this},unbindTooltip:function(){return this._tooltip&&(this._initTooltipInteractions(!0),this.closeTooltip(),this._tooltip=null),this},_initTooltipInteractions:function(t){var e,i;!t&&this._tooltipHandlersAdded||(e=t?"off":"on",i={remove:this.closeTooltip,move:this._moveTooltip},this._tooltip.options.permanent?i.add=this._openTooltip:(i.mouseover=this._openTooltip,i.mouseout=this.closeTooltip,i.click=this._openTooltip,this._map?this._addFocusListeners():i.add=this._addFocusListeners),this._tooltip.options.sticky&&(i.mousemove=this._moveTooltip),this[e](i),this._tooltipHandlersAdded=!t)},openTooltip:function(t){return this._tooltip&&(this instanceof ci||(this._tooltip._source=this),this._tooltip._prepareOpen(t)&&(this._tooltip.openOn(this._map),this.getElement?this._setAriaDescribedByOnLayer(this):this.eachLayer&&this.eachLayer(this._setAriaDescribedByOnLayer,this))),this},closeTooltip:function(){if(this._tooltip)return this._tooltip.close()},toggleTooltip:function(){return this._tooltip&&this._tooltip.toggle(this),this},isTooltipOpen:function(){return this._tooltip.isOpen()},setTooltipContent:function(t){return this._tooltip&&this._tooltip.setContent(t),this},getTooltip:function(){return this._tooltip},_addFocusListeners:function(){this.getElement?this._addFocusListenersOnLayer(this):this.eachLayer&&this.eachLayer(this._addFocusListenersOnLayer,this)},_addFocusListenersOnLayer:function(t){var e="function"==typeof t.getElement&&t.getElement();e&&(S(e,"focus",function(){this._tooltip._source=t,this.openTooltip()},this),S(e,"blur",this.closeTooltip,this))},_setAriaDescribedByOnLayer:function(t){t="function"==typeof t.getElement&&t.getElement();t&&t.setAttribute("aria-describedby",this._tooltip._container.id)},_openTooltip:function(t){var e;this._tooltip&&this._map&&(this._map.dragging&&this._map.dragging.moving()&&!this._openOnceFlag?(this._openOnceFlag=!0,(e=this)._map.once("moveend",function(){e._openOnceFlag=!1,e._openTooltip(t)})):(this._tooltip._source=t.layer||t.target,this.openTooltip(this._tooltip.options.sticky?t.latlng:void 0)))},_moveTooltip:function(t){var e=t.latlng;this._tooltip.options.sticky&&t.originalEvent&&(t=this._map.mouseEventToContainerPoint(t.originalEvent),t=this._map.containerPointToLayerPoint(t),e=this._map.layerPointToLatLng(t)),this._tooltip.setLatLng(e)}}),di.extend({options:{iconSize:[12,12],html:!1,bgPos:null,className:"leaflet-div-icon"},createIcon:function(t){var t=t&&"DIV"===t.tagName?t:document.createElement("div"),e=this.options;return e.html instanceof Element?(me(t),t.appendChild(e.html)):t.innerHTML=!1!==e.html?e.html:"",e.bgPos&&(e=m(e.bgPos),t.style.backgroundPosition=-e.x+"px "+-e.y+"px"),this._setIconStyles(t,"icon"),t},createShadow:function(){return null}}));di.Default=_i;var Ni=o.extend({options:{tileSize:256,opacity:1,updateWhenIdle:b.mobile,updateWhenZooming:!0,updateInterval:200,zIndex:1,bounds:null,minZoom:0,maxZoom:void 0,maxNativeZoom:void 0,minNativeZoom:void 0,noWrap:!1,pane:"tilePane",className:"",keepBuffer:2},initialize:function(t){c(this,t)},onAdd:function(){this._initContainer(),this._levels={},this._tiles={},this._resetView()},beforeAdd:function(t){t._addZoomLimit(this)},onRemove:function(t){this._removeAllTiles(),T(this._container),t._removeZoomLimit(this),this._container=null,this._tileZoom=void 0},bringToFront:function(){return this._map&&(fe(this._container),this._setAutoZIndex(Math.max)),this},bringToBack:function(){return this._map&&(ge(this._container),this._setAutoZIndex(Math.min)),this},getContainer:function(){return this._container},setOpacity:function(t){return this.options.opacity=t,this._updateOpacity(),this},setZIndex:function(t){return this.options.zIndex=t,this._updateZIndex(),this},isLoading:function(){return this._loading},redraw:function(){var t;return this._map&&(this._removeAllTiles(),(t=this._clampZoom(this._map.getZoom()))!==this._tileZoom&&(this._tileZoom=t,this._updateLevels()),this._update()),this},getEvents:function(){var t={viewprereset:this._invalidateAll,viewreset:this._resetView,zoom:this._resetView,moveend:this._onMoveEnd};return this.options.updateWhenIdle||(this._onMove||(this._onMove=j(this._onMoveEnd,this.options.updateInterval,this)),t.move=this._onMove),this._zoomAnimated&&(t.zoomanim=this._animateZoom),t},createTile:function(){return document.createElement("div")},getTileSize:function(){var t=this.options.tileSize;return t instanceof p?t:new p(t,t)},_updateZIndex:function(){this._container&&void 0!==this.options.zIndex&&null!==this.options.zIndex&&(this._container.style.zIndex=this.options.zIndex)},_setAutoZIndex:function(t){for(var e,i=this.getPane().children,n=-t(-1/0,1/0),o=0,s=i.length;o<s;o++)e=i[o].style.zIndex,i[o]!==this._container&&e&&(n=t(n,+e));isFinite(n)&&(this.options.zIndex=n+t(-1,1),this._updateZIndex())},_updateOpacity:function(){if(this._map&&!b.ielt9){C(this._container,this.options.opacity);var t,e=+new Date,i=!1,n=!1;for(t in this._tiles){var o,s=this._tiles[t];s.current&&s.loaded&&(o=Math.min(1,(e-s.loaded)/200),C(s.el,o),o<1?i=!0:(s.active?n=!0:this._onOpaqueTile(s),s.active=!0))}n&&!this._noPrune&&this._pruneTiles(),i&&(r(this._fadeFrame),this._fadeFrame=x(this._updateOpacity,this))}},_onOpaqueTile:u,_initContainer:function(){this._container||(this._container=P("div","leaflet-layer "+(this.options.className||"")),this._updateZIndex(),this.options.opacity<1&&this._updateOpacity(),this.getPane().appendChild(this._container))},_updateLevels:function(){var t=this._tileZoom,e=this.options.maxZoom;if(void 0!==t){for(var i in this._levels)i=Number(i),this._levels[i].el.children.length||i===t?(this._levels[i].el.style.zIndex=e-Math.abs(t-i),this._onUpdateLevel(i)):(T(this._levels[i].el),this._removeTilesAtZoom(i),this._onRemoveLevel(i),delete this._levels[i]);var n=this._levels[t],o=this._map;return n||((n=this._levels[t]={}).el=P("div","leaflet-tile-container leaflet-zoom-animated",this._container),n.el.style.zIndex=e,n.origin=o.project(o.unproject(o.getPixelOrigin()),t).round(),n.zoom=t,this._setZoomTransform(n,o.getCenter(),o.getZoom()),u(n.el.offsetWidth),this._onCreateLevel(n)),this._level=n}},_onUpdateLevel:u,_onRemoveLevel:u,_onCreateLevel:u,_pruneTiles:function(){if(this._map){var t,e,i,n=this._map.getZoom();if(n>this.options.maxZoom||n<this.options.minZoom)this._removeAllTiles();else{for(t in this._tiles)(i=this._tiles[t]).retain=i.current;for(t in this._tiles)(i=this._tiles[t]).current&&!i.active&&(e=i.coords,this._retainParent(e.x,e.y,e.z,e.z-5)||this._retainChildren(e.x,e.y,e.z,e.z+2));for(t in this._tiles)this._tiles[t].retain||this._removeTile(t)}}},_removeTilesAtZoom:function(t){for(var e in this._tiles)this._tiles[e].coords.z===t&&this._removeTile(e)},_removeAllTiles:function(){for(var t in this._tiles)this._removeTile(t)},_invalidateAll:function(){for(var t in this._levels)T(this._levels[t].el),this._onRemoveLevel(Number(t)),delete this._levels[t];this._removeAllTiles(),this._tileZoom=void 0},_retainParent:function(t,e,i,n){var t=Math.floor(t/2),e=Math.floor(e/2),i=i-1,o=new p(+t,+e),o=(o.z=i,this._tileCoordsToKey(o)),o=this._tiles[o];return o&&o.active?o.retain=!0:(o&&o.loaded&&(o.retain=!0),n<i&&this._retainParent(t,e,i,n))},_retainChildren:function(t,e,i,n){for(var o=2*t;o<2*t+2;o++)for(var s=2*e;s<2*e+2;s++){var r=new p(o,s),r=(r.z=i+1,this._tileCoordsToKey(r)),r=this._tiles[r];r&&r.active?r.retain=!0:(r&&r.loaded&&(r.retain=!0),i+1<n&&this._retainChildren(o,s,i+1,n))}},_resetView:function(t){t=t&&(t.pinch||t.flyTo);this._setView(this._map.getCenter(),this._map.getZoom(),t,t)},_animateZoom:function(t){this._setView(t.center,t.zoom,!0,t.noUpdate)},_clampZoom:function(t){var e=this.options;return void 0!==e.minNativeZoom&&t<e.minNativeZoom?e.minNativeZoom:void 0!==e.maxNativeZoom&&e.maxNativeZoom<t?e.maxNativeZoom:t},_setView:function(t,e,i,n){var o=Math.round(e),o=void 0!==this.options.maxZoom&&o>this.options.maxZoom||void 0!==this.options.minZoom&&o<this.options.minZoom?void 0:this._clampZoom(o),s=this.options.updateWhenZooming&&o!==this._tileZoom;n&&!s||(this._tileZoom=o,this._abortLoading&&this._abortLoading(),this._updateLevels(),this._resetGrid(),void 0!==o&&this._update(t),i||this._pruneTiles(),this._noPrune=!!i),this._setZoomTransforms(t,e)},_setZoomTransforms:function(t,e){for(var i in this._levels)this._setZoomTransform(this._levels[i],t,e)},_setZoomTransform:function(t,e,i){var n=this._map.getZoomScale(i,t.zoom),e=t.origin.multiplyBy(n).subtract(this._map._getNewPixelOrigin(e,i)).round();b.any3d?be(t.el,e,n):Z(t.el,e)},_resetGrid:function(){var t=this._map,e=t.options.crs,i=this._tileSize=this.getTileSize(),n=this._tileZoom,o=this._map.getPixelWorldBounds(this._tileZoom);o&&(this._globalTileRange=this._pxBoundsToTileRange(o)),this._wrapX=e.wrapLng&&!this.options.noWrap&&[Math.floor(t.project([0,e.wrapLng[0]],n).x/i.x),Math.ceil(t.project([0,e.wrapLng[1]],n).x/i.y)],this._wrapY=e.wrapLat&&!this.options.noWrap&&[Math.floor(t.project([e.wrapLat[0],0],n).y/i.x),Math.ceil(t.project([e.wrapLat[1],0],n).y/i.y)]},_onMoveEnd:function(){this._map&&!this._map._animatingZoom&&this._update()},_getTiledPixelBounds:function(t){var e=this._map,i=e._animatingZoom?Math.max(e._animateToZoom,e.getZoom()):e.getZoom(),i=e.getZoomScale(i,this._tileZoom),t=e.project(t,this._tileZoom).floor(),e=e.getSize().divideBy(2*i);return new f(t.subtract(e),t.add(e))},_update:function(t){var e=this._map;if(e){var i=this._clampZoom(e.getZoom());if(void 0===t&&(t=e.getCenter()),void 0!==this._tileZoom){var n,e=this._getTiledPixelBounds(t),o=this._pxBoundsToTileRange(e),s=o.getCenter(),r=[],e=this.options.keepBuffer,a=new f(o.getBottomLeft().subtract([e,-e]),o.getTopRight().add([e,-e]));if(!(isFinite(o.min.x)&&isFinite(o.min.y)&&isFinite(o.max.x)&&isFinite(o.max.y)))throw new Error("Attempted to load an infinite number of tiles");for(n in this._tiles){var h=this._tiles[n].coords;h.z===this._tileZoom&&a.contains(new p(h.x,h.y))||(this._tiles[n].current=!1)}if(1<Math.abs(i-this._tileZoom))this._setView(t,i);else{for(var l=o.min.y;l<=o.max.y;l++)for(var u=o.min.x;u<=o.max.x;u++){var c,d=new p(u,l);d.z=this._tileZoom,this._isValidTile(d)&&((c=this._tiles[this._tileCoordsToKey(d)])?c.current=!0:r.push(d))}if(r.sort(function(t,e){return t.distanceTo(s)-e.distanceTo(s)}),0!==r.length){this._loading||(this._loading=!0,this.fire("loading"));for(var _=document.createDocumentFragment(),u=0;u<r.length;u++)this._addTile(r[u],_);this._level.el.appendChild(_)}}}}},_isValidTile:function(t){var e=this._map.options.crs;if(!e.infinite){var i=this._globalTileRange;if(!e.wrapLng&&(t.x<i.min.x||t.x>i.max.x)||!e.wrapLat&&(t.y<i.min.y||t.y>i.max.y))return!1}return!this.options.bounds||(e=this._tileCoordsToBounds(t),g(this.options.bounds).overlaps(e))},_keyToBounds:function(t){return this._tileCoordsToBounds(this._keyToTileCoords(t))},_tileCoordsToNwSe:function(t){var e=this._map,i=this.getTileSize(),n=t.scaleBy(i),i=n.add(i);return[e.unproject(n,t.z),e.unproject(i,t.z)]},_tileCoordsToBounds:function(t){t=this._tileCoordsToNwSe(t),t=new s(t[0],t[1]);return t=this.options.noWrap?t:this._map.wrapLatLngBounds(t)},_tileCoordsToKey:function(t){return t.x+":"+t.y+":"+t.z},_keyToTileCoords:function(t){var t=t.split(":"),e=new p(+t[0],+t[1]);return e.z=+t[2],e},_removeTile:function(t){var e=this._tiles[t];e&&(T(e.el),delete this._tiles[t],this.fire("tileunload",{tile:e.el,coords:this._keyToTileCoords(t)}))},_initTile:function(t){M(t,"leaflet-tile");var e=this.getTileSize();t.style.width=e.x+"px",t.style.height=e.y+"px",t.onselectstart=u,t.onmousemove=u,b.ielt9&&this.options.opacity<1&&C(t,this.options.opacity)},_addTile:function(t,e){var i=this._getTilePos(t),n=this._tileCoordsToKey(t),o=this.createTile(this._wrapCoords(t),a(this._tileReady,this,t));this._initTile(o),this.createTile.length<2&&x(a(this._tileReady,this,t,null,o)),Z(o,i),this._tiles[n]={el:o,coords:t,current:!0},e.appendChild(o),this.fire("tileloadstart",{tile:o,coords:t})},_tileReady:function(t,e,i){e&&this.fire("tileerror",{error:e,tile:i,coords:t});var n=this._tileCoordsToKey(t);(i=this._tiles[n])&&(i.loaded=+new Date,this._map._fadeAnimated?(C(i.el,0),r(this._fadeFrame),this._fadeFrame=x(this._updateOpacity,this)):(i.active=!0,this._pruneTiles()),e||(M(i.el,"leaflet-tile-loaded"),this.fire("tileload",{tile:i.el,coords:t})),this._noTilesToLoad()&&(this._loading=!1,this.fire("load"),b.ielt9||!this._map._fadeAnimated?x(this._pruneTiles,this):setTimeout(a(this._pruneTiles,this),250)))},_getTilePos:function(t){return t.scaleBy(this.getTileSize()).subtract(this._level.origin)},_wrapCoords:function(t){var e=new p(this._wrapX?H(t.x,this._wrapX):t.x,this._wrapY?H(t.y,this._wrapY):t.y);return e.z=t.z,e},_pxBoundsToTileRange:function(t){var e=this.getTileSize();return new f(t.min.unscaleBy(e).floor(),t.max.unscaleBy(e).ceil().subtract([1,1]))},_noTilesToLoad:function(){for(var t in this._tiles)if(!this._tiles[t].loaded)return!1;return!0}});var Di=Ni.extend({options:{minZoom:0,maxZoom:18,subdomains:"abc",errorTileUrl:"",zoomOffset:0,tms:!1,zoomReverse:!1,detectRetina:!1,crossOrigin:!1,referrerPolicy:!1},initialize:function(t,e){this._url=t,(e=c(this,e)).detectRetina&&b.retina&&0<e.maxZoom?(e.tileSize=Math.floor(e.tileSize/2),e.zoomReverse?(e.zoomOffset--,e.minZoom=Math.min(e.maxZoom,e.minZoom+1)):(e.zoomOffset++,e.maxZoom=Math.max(e.minZoom,e.maxZoom-1)),e.minZoom=Math.max(0,e.minZoom)):e.zoomReverse?e.minZoom=Math.min(e.maxZoom,e.minZoom):e.maxZoom=Math.max(e.minZoom,e.maxZoom),"string"==typeof e.subdomains&&(e.subdomains=e.subdomains.split("")),this.on("tileunload",this._onTileRemove)},setUrl:function(t,e){return this._url===t&&void 0===e&&(e=!0),this._url=t,e||this.redraw(),this},createTile:function(t,e){var i=document.createElement("img");return S(i,"load",a(this._tileOnLoad,this,e,i)),S(i,"error",a(this._tileOnError,this,e,i)),!this.options.crossOrigin&&""!==this.options.crossOrigin||(i.crossOrigin=!0===this.options.crossOrigin?"":this.options.crossOrigin),"string"==typeof this.options.referrerPolicy&&(i.referrerPolicy=this.options.referrerPolicy),i.alt="",i.src=this.getTileUrl(t),i},getTileUrl:function(t){var e={r:b.retina?"@2x":"",s:this._getSubdomain(t),x:t.x,y:t.y,z:this._getZoomForUrl()};return this._map&&!this._map.options.crs.infinite&&(t=this._globalTileRange.max.y-t.y,this.options.tms&&(e.y=t),e["-y"]=t),q(this._url,l(e,this.options))},_tileOnLoad:function(t,e){b.ielt9?setTimeout(a(t,this,null,e),0):t(null,e)},_tileOnError:function(t,e,i){var n=this.options.errorTileUrl;n&&e.getAttribute("src")!==n&&(e.src=n),t(i,e)},_onTileRemove:function(t){t.tile.onload=null},_getZoomForUrl:function(){var t=this._tileZoom,e=this.options.maxZoom;return(t=this.options.zoomReverse?e-t:t)+this.options.zoomOffset},_getSubdomain:function(t){t=Math.abs(t.x+t.y)%this.options.subdomains.length;return this.options.subdomains[t]},_abortLoading:function(){var t,e,i;for(t in this._tiles)this._tiles[t].coords.z!==this._tileZoom&&((i=this._tiles[t].el).onload=u,i.onerror=u,i.complete||(i.src=K,e=this._tiles[t].coords,T(i),delete this._tiles[t],this.fire("tileabort",{tile:i,coords:e})))},_removeTile:function(t){var e=this._tiles[t];if(e)return e.el.setAttribute("src",K),Ni.prototype._removeTile.call(this,t)},_tileReady:function(t,e,i){if(this._map&&(!i||i.getAttribute("src")!==K))return Ni.prototype._tileReady.call(this,t,e,i)}});function ji(t,e){return new Di(t,e)}var Hi=Di.extend({defaultWmsParams:{service:"WMS",request:"GetMap",layers:"",styles:"",format:"image/jpeg",transparent:!1,version:"1.1.1"},options:{crs:null,uppercase:!1},initialize:function(t,e){this._url=t;var i,n=l({},this.defaultWmsParams);for(i in e)i in this.options||(n[i]=e[i]);var t=(e=c(this,e)).detectRetina&&b.retina?2:1,o=this.getTileSize();n.width=o.x*t,n.height=o.y*t,this.wmsParams=n},onAdd:function(t){this._crs=this.options.crs||t.options.crs,this._wmsVersion=parseFloat(this.wmsParams.version);var e=1.3<=this._wmsVersion?"crs":"srs";this.wmsParams[e]=this._crs.code,Di.prototype.onAdd.call(this,t)},getTileUrl:function(t){var e=this._tileCoordsToNwSe(t),i=this._crs,i=_(i.project(e[0]),i.project(e[1])),e=i.min,i=i.max,e=(1.3<=this._wmsVersion&&this._crs===li?[e.y,e.x,i.y,i.x]:[e.x,e.y,i.x,i.y]).join(","),i=Di.prototype.getTileUrl.call(this,t);return i+U(this.wmsParams,i,this.options.uppercase)+(this.options.uppercase?"&BBOX=":"&bbox=")+e},setParams:function(t,e){return l(this.wmsParams,t),e||this.redraw(),this}});Di.WMS=Hi,ji.wms=function(t,e){return new Hi(t,e)};var Wi=o.extend({options:{padding:.1},initialize:function(t){c(this,t),h(this),this._layers=this._layers||{}},onAdd:function(){this._container||(this._initContainer(),M(this._container,"leaflet-zoom-animated")),this.getPane().appendChild(this._container),this._update(),this.on("update",this._updatePaths,this)},onRemove:function(){this.off("update",this._updatePaths,this),this._destroyContainer()},getEvents:function(){var t={viewreset:this._reset,zoom:this._onZoom,moveend:this._update,zoomend:this._onZoomEnd};return this._zoomAnimated&&(t.zoomanim=this._onAnimZoom),t},_onAnimZoom:function(t){this._updateTransform(t.center,t.zoom)},_onZoom:function(){this._updateTransform(this._map.getCenter(),this._map.getZoom())},_updateTransform:function(t,e){var i=this._map.getZoomScale(e,this._zoom),n=this._map.getSize().multiplyBy(.5+this.options.padding),o=this._map.project(this._center,e),n=n.multiplyBy(-i).add(o).subtract(this._map._getNewPixelOrigin(t,e));b.any3d?be(this._container,n,i):Z(this._container,n)},_reset:function(){for(var t in this._update(),this._updateTransform(this._center,this._zoom),this._layers)this._layers[t]._reset()},_onZoomEnd:function(){for(var t in this._layers)this._layers[t]._project()},_updatePaths:function(){for(var t in this._layers)this._layers[t]._update()},_update:function(){var t=this.options.padding,e=this._map.getSize(),i=this._map.containerPointToLayerPoint(e.multiplyBy(-t)).round();this._bounds=new f(i,i.add(e.multiplyBy(1+2*t)).round()),this._center=this._map.getCenter(),this._zoom=this._map.getZoom()}}),Fi=Wi.extend({options:{tolerance:0},getEvents:function(){var t=Wi.prototype.getEvents.call(this);return t.viewprereset=this._onViewPreReset,t},_onViewPreReset:function(){this._postponeUpdatePaths=!0},onAdd:function(){Wi.prototype.onAdd.call(this),this._draw()},_initContainer:function(){var t=this._container=document.createElement("canvas");S(t,"mousemove",this._onMouseMove,this),S(t,"click dblclick mousedown mouseup contextmenu",this._onClick,this),S(t,"mouseout",this._handleMouseOut,this),t._leaflet_disable_events=!0,this._ctx=t.getContext("2d")},_destroyContainer:function(){r(this._redrawRequest),delete this._ctx,T(this._container),k(this._container),delete this._container},_updatePaths:function(){if(!this._postponeUpdatePaths){for(var t in this._redrawBounds=null,this._layers)this._layers[t]._update();this._redraw()}},_update:function(){var t,e,i,n;this._map._animatingZoom&&this._bounds||(Wi.prototype._update.call(this),t=this._bounds,e=this._container,i=t.getSize(),n=b.retina?2:1,Z(e,t.min),e.width=n*i.x,e.height=n*i.y,e.style.width=i.x+"px",e.style.height=i.y+"px",b.retina&&this._ctx.scale(2,2),this._ctx.translate(-t.min.x,-t.min.y),this.fire("update"))},_reset:function(){Wi.prototype._reset.call(this),this._postponeUpdatePaths&&(this._postponeUpdatePaths=!1,this._updatePaths())},_initPath:function(t){this._updateDashArray(t);t=(this._layers[h(t)]=t)._order={layer:t,prev:this._drawLast,next:null};this._drawLast&&(this._drawLast.next=t),this._drawLast=t,this._drawFirst=this._drawFirst||this._drawLast},_addPath:function(t){this._requestRedraw(t)},_removePath:function(t){var e=t._order,i=e.next,e=e.prev;i?i.prev=e:this._drawLast=e,e?e.next=i:this._drawFirst=i,delete t._order,delete this._layers[h(t)],this._requestRedraw(t)},_updatePath:function(t){this._extendRedrawBounds(t),t._project(),t._update(),this._requestRedraw(t)},_updateStyle:function(t){this._updateDashArray(t),this._requestRedraw(t)},_updateDashArray:function(t){if("string"==typeof t.options.dashArray){for(var e,i=t.options.dashArray.split(/[, ]+/),n=[],o=0;o<i.length;o++){if(e=Number(i[o]),isNaN(e))return;n.push(e)}t.options._dashArray=n}else t.options._dashArray=t.options.dashArray},_requestRedraw:function(t){this._map&&(this._extendRedrawBounds(t),this._redrawRequest=this._redrawRequest||x(this._redraw,this))},_extendRedrawBounds:function(t){var e;t._pxBounds&&(e=(t.options.weight||0)+1,this._redrawBounds=this._redrawBounds||new f,this._redrawBounds.extend(t._pxBounds.min.subtract([e,e])),this._redrawBounds.extend(t._pxBounds.max.add([e,e])))},_redraw:function(){this._redrawRequest=null,this._redrawBounds&&(this._redrawBounds.min._floor(),this._redrawBounds.max._ceil()),this._clear(),this._draw(),this._redrawBounds=null},_clear:function(){var t,e=this._redrawBounds;e?(t=e.getSize(),this._ctx.clearRect(e.min.x,e.min.y,t.x,t.y)):(this._ctx.save(),this._ctx.setTransform(1,0,0,1,0,0),this._ctx.clearRect(0,0,this._container.width,this._container.height),this._ctx.restore())},_draw:function(){var t,e,i=this._redrawBounds;this._ctx.save(),i&&(e=i.getSize(),this._ctx.beginPath(),this._ctx.rect(i.min.x,i.min.y,e.x,e.y),this._ctx.clip()),this._drawing=!0;for(var n=this._drawFirst;n;n=n.next)t=n.layer,(!i||t._pxBounds&&t._pxBounds.intersects(i))&&t._updatePath();this._drawing=!1,this._ctx.restore()},_updatePoly:function(t,e){if(this._drawing){var i,n,o,s,r=t._parts,a=r.length,h=this._ctx;if(a){for(h.beginPath(),i=0;i<a;i++){for(n=0,o=r[i].length;n<o;n++)s=r[i][n],h[n?"lineTo":"moveTo"](s.x,s.y);e&&h.closePath()}this._fillStroke(h,t)}}},_updateCircle:function(t){var e,i,n,o;this._drawing&&!t._empty()&&(e=t._point,i=this._ctx,n=Math.max(Math.round(t._radius),1),1!=(o=(Math.max(Math.round(t._radiusY),1)||n)/n)&&(i.save(),i.scale(1,o)),i.beginPath(),i.arc(e.x,e.y/o,n,0,2*Math.PI,!1),1!=o&&i.restore(),this._fillStroke(i,t))},_fillStroke:function(t,e){var i=e.options;i.fill&&(t.globalAlpha=i.fillOpacity,t.fillStyle=i.fillColor||i.color,t.fill(i.fillRule||"evenodd")),i.stroke&&0!==i.weight&&(t.setLineDash&&t.setLineDash(e.options&&e.options._dashArray||[]),t.globalAlpha=i.opacity,t.lineWidth=i.weight,t.strokeStyle=i.color,t.lineCap=i.lineCap,t.lineJoin=i.lineJoin,t.stroke())},_onClick:function(t){for(var e,i,n=this._map.mouseEventToLayerPoint(t),o=this._drawFirst;o;o=o.next)(e=o.layer).options.interactive&&e._containsPoint(n)&&(("click"===t.type||"preclick"===t.type)&&this._map._draggableMoved(e)||(i=e));this._fireEvent(!!i&&[i],t)},_onMouseMove:function(t){var e;!this._map||this._map.dragging.moving()||this._map._animatingZoom||(e=this._map.mouseEventToLayerPoint(t),this._handleMouseHover(t,e))},_handleMouseOut:function(t){var e=this._hoveredLayer;e&&(z(this._container,"leaflet-interactive"),this._fireEvent([e],t,"mouseout"),this._hoveredLayer=null,this._mouseHoverThrottled=!1)},_handleMouseHover:function(t,e){if(!this._mouseHoverThrottled){for(var i,n,o=this._drawFirst;o;o=o.next)(i=o.layer).options.interactive&&i._containsPoint(e)&&(n=i);n!==this._hoveredLayer&&(this._handleMouseOut(t),n&&(M(this._container,"leaflet-interactive"),this._fireEvent([n],t,"mouseover"),this._hoveredLayer=n)),this._fireEvent(!!this._hoveredLayer&&[this._hoveredLayer],t),this._mouseHoverThrottled=!0,setTimeout(a(function(){this._mouseHoverThrottled=!1},this),32)}},_fireEvent:function(t,e,i){this._map._fireDOMEvent(e,i||e.type,t)},_bringToFront:function(t){var e,i,n=t._order;n&&(e=n.next,i=n.prev,e&&((e.prev=i)?i.next=e:e&&(this._drawFirst=e),n.prev=this._drawLast,(this._drawLast.next=n).next=null,this._drawLast=n,this._requestRedraw(t)))},_bringToBack:function(t){var e,i,n=t._order;n&&(e=n.next,(i=n.prev)&&((i.next=e)?e.prev=i:i&&(this._drawLast=i),n.prev=null,n.next=this._drawFirst,this._drawFirst.prev=n,this._drawFirst=n,this._requestRedraw(t)))}});function Ui(t){return b.canvas?new Fi(t):null}var Vi=function(){try{return document.namespaces.add("lvml","urn:schemas-microsoft-com:vml"),function(t){return document.createElement("<lvml:"+t+' class="lvml">')}}catch(t){}return function(t){return document.createElement("<"+t+' xmlns="urn:schemas-microsoft.com:vml" class="lvml">')}}(),zt={_initContainer:function(){this._container=P("div","leaflet-vml-container")},_update:function(){this._map._animatingZoom||(Wi.prototype._update.call(this),this.fire("update"))},_initPath:function(t){var e=t._container=Vi("shape");M(e,"leaflet-vml-shape "+(this.options.className||"")),e.coordsize="1 1",t._path=Vi("path"),e.appendChild(t._path),this._updateStyle(t),this._layers[h(t)]=t},_addPath:function(t){var e=t._container;this._container.appendChild(e),t.options.interactive&&t.addInteractiveTarget(e)},_removePath:function(t){var e=t._container;T(e),t.removeInteractiveTarget(e),delete this._layers[h(t)]},_updateStyle:function(t){var e=t._stroke,i=t._fill,n=t.options,o=t._container;o.stroked=!!n.stroke,o.filled=!!n.fill,n.stroke?(e=e||(t._stroke=Vi("stroke")),o.appendChild(e),e.weight=n.weight+"px",e.color=n.color,e.opacity=n.opacity,n.dashArray?e.dashStyle=d(n.dashArray)?n.dashArray.join(" "):n.dashArray.replace(/( *, *)/g," "):e.dashStyle="",e.endcap=n.lineCap.replace("butt","flat"),e.joinstyle=n.lineJoin):e&&(o.removeChild(e),t._stroke=null),n.fill?(i=i||(t._fill=Vi("fill")),o.appendChild(i),i.color=n.fillColor||n.color,i.opacity=n.fillOpacity):i&&(o.removeChild(i),t._fill=null)},_updateCircle:function(t){var e=t._point.round(),i=Math.round(t._radius),n=Math.round(t._radiusY||i);this._setPath(t,t._empty()?"M0 0":"AL "+e.x+","+e.y+" "+i+","+n+" 0,23592600")},_setPath:function(t,e){t._path.v=e},_bringToFront:function(t){fe(t._container)},_bringToBack:function(t){ge(t._container)}},qi=b.vml?Vi:ct,Gi=Wi.extend({_initContainer:function(){this._container=qi("svg"),this._container.setAttribute("pointer-events","none"),this._rootGroup=qi("g"),this._container.appendChild(this._rootGroup)},_destroyContainer:function(){T(this._container),k(this._container),delete this._container,delete this._rootGroup,delete this._svgSize},_update:function(){var t,e,i;this._map._animatingZoom&&this._bounds||(Wi.prototype._update.call(this),e=(t=this._bounds).getSize(),i=this._container,this._svgSize&&this._svgSize.equals(e)||(this._svgSize=e,i.setAttribute("width",e.x),i.setAttribute("height",e.y)),Z(i,t.min),i.setAttribute("viewBox",[t.min.x,t.min.y,e.x,e.y].join(" ")),this.fire("update"))},_initPath:function(t){var e=t._path=qi("path");t.options.className&&M(e,t.options.className),t.options.interactive&&M(e,"leaflet-interactive"),this._updateStyle(t),this._layers[h(t)]=t},_addPath:function(t){this._rootGroup||this._initContainer(),this._rootGroup.appendChild(t._path),t.addInteractiveTarget(t._path)},_removePath:function(t){T(t._path),t.removeInteractiveTarget(t._path),delete this._layers[h(t)]},_updatePath:function(t){t._project(),t._update()},_updateStyle:function(t){var e=t._path,t=t.options;e&&(t.stroke?(e.setAttribute("stroke",t.color),e.setAttribute("stroke-opacity",t.opacity),e.setAttribute("stroke-width",t.weight),e.setAttribute("stroke-linecap",t.lineCap),e.setAttribute("stroke-linejoin",t.lineJoin),t.dashArray?e.setAttribute("stroke-dasharray",t.dashArray):e.removeAttribute("stroke-dasharray"),t.dashOffset?e.setAttribute("stroke-dashoffset",t.dashOffset):e.removeAttribute("stroke-dashoffset")):e.setAttribute("stroke","none"),t.fill?(e.setAttribute("fill",t.fillColor||t.color),e.setAttribute("fill-opacity",t.fillOpacity),e.setAttribute("fill-rule",t.fillRule||"evenodd")):e.setAttribute("fill","none"))},_updatePoly:function(t,e){this._setPath(t,dt(t._parts,e))},_updateCircle:function(t){var e=t._point,i=Math.max(Math.round(t._radius),1),n="a"+i+","+(Math.max(Math.round(t._radiusY),1)||i)+" 0 1,0 ",e=t._empty()?"M0 0":"M"+(e.x-i)+","+e.y+n+2*i+",0 "+n+2*-i+",0 ";this._setPath(t,e)},_setPath:function(t,e){t._path.setAttribute("d",e)},_bringToFront:function(t){fe(t._path)},_bringToBack:function(t){ge(t._path)}});function Ki(t){return b.svg||b.vml?new Gi(t):null}b.vml&&Gi.include(zt),A.include({getRenderer:function(t){t=(t=t.options.renderer||this._getPaneRenderer(t.options.pane)||this.options.renderer||this._renderer)||(this._renderer=this._createRenderer());return this.hasLayer(t)||this.addLayer(t),t},_getPaneRenderer:function(t){var e;return"overlayPane"!==t&&void 0!==t&&(void 0===(e=this._paneRenderers[t])&&(e=this._createRenderer({pane:t}),this._paneRenderers[t]=e),e)},_createRenderer:function(t){return this.options.preferCanvas&&Ui(t)||Ki(t)}});var Yi=xi.extend({initialize:function(t,e){xi.prototype.initialize.call(this,this._boundsToLatLngs(t),e)},setBounds:function(t){return this.setLatLngs(this._boundsToLatLngs(t))},_boundsToLatLngs:function(t){return[(t=g(t)).getSouthWest(),t.getNorthWest(),t.getNorthEast(),t.getSouthEast()]}});Gi.create=qi,Gi.pointsToPath=dt,wi.geometryToLayer=bi,wi.coordsToLatLng=Li,wi.coordsToLatLngs=Ti,wi.latLngToCoords=Mi,wi.latLngsToCoords=zi,wi.getFeature=Ci,wi.asFeature=Zi,A.mergeOptions({boxZoom:!0});var _t=n.extend({initialize:function(t){this._map=t,this._container=t._container,this._pane=t._panes.overlayPane,this._resetStateTimeout=0,t.on("unload",this._destroy,this)},addHooks:function(){S(this._container,"mousedown",this._onMouseDown,this)},removeHooks:function(){k(this._container,"mousedown",this._onMouseDown,this)},moved:function(){return this._moved},_destroy:function(){T(this._pane),delete this._pane},_resetState:function(){this._resetStateTimeout=0,this._moved=!1},_clearDeferredResetState:function(){0!==this._resetStateTimeout&&(clearTimeout(this._resetStateTimeout),this._resetStateTimeout=0)},_onMouseDown:function(t){if(!t.shiftKey||1!==t.which&&1!==t.button)return!1;this._clearDeferredResetState(),this._resetState(),re(),Le(),this._startPoint=this._map.mouseEventToContainerPoint(t),S(document,{contextmenu:Re,mousemove:this._onMouseMove,mouseup:this._onMouseUp,keydown:this._onKeyDown},this)},_onMouseMove:function(t){this._moved||(this._moved=!0,this._box=P("div","leaflet-zoom-box",this._container),M(this._container,"leaflet-crosshair"),this._map.fire("boxzoomstart")),this._point=this._map.mouseEventToContainerPoint(t);var t=new f(this._point,this._startPoint),e=t.getSize();Z(this._box,t.min),this._box.style.width=e.x+"px",this._box.style.height=e.y+"px"},_finish:function(){this._moved&&(T(this._box),z(this._container,"leaflet-crosshair")),ae(),Te(),k(document,{contextmenu:Re,mousemove:this._onMouseMove,mouseup:this._onMouseUp,keydown:this._onKeyDown},this)},_onMouseUp:function(t){1!==t.which&&1!==t.button||(this._finish(),this._moved&&(this._clearDeferredResetState(),this._resetStateTimeout=setTimeout(a(this._resetState,this),0),t=new s(this._map.containerPointToLatLng(this._startPoint),this._map.containerPointToLatLng(this._point)),this._map.fitBounds(t).fire("boxzoomend",{boxZoomBounds:t})))},_onKeyDown:function(t){27===t.keyCode&&(this._finish(),this._clearDeferredResetState(),this._resetState())}}),Ct=(A.addInitHook("addHandler","boxZoom",_t),A.mergeOptions({doubleClickZoom:!0}),n.extend({addHooks:function(){this._map.on("dblclick",this._onDoubleClick,this)},removeHooks:function(){this._map.off("dblclick",this._onDoubleClick,this)},_onDoubleClick:function(t){var e=this._map,i=e.getZoom(),n=e.options.zoomDelta,i=t.originalEvent.shiftKey?i-n:i+n;"center"===e.options.doubleClickZoom?e.setZoom(i):e.setZoomAround(t.containerPoint,i)}})),Zt=(A.addInitHook("addHandler","doubleClickZoom",Ct),A.mergeOptions({dragging:!0,inertia:!0,inertiaDeceleration:3400,inertiaMaxSpeed:1/0,easeLinearity:.2,worldCopyJump:!1,maxBoundsViscosity:0}),n.extend({addHooks:function(){var t;this._draggable||(t=this._map,this._draggable=new Xe(t._mapPane,t._container),this._draggable.on({dragstart:this._onDragStart,drag:this._onDrag,dragend:this._onDragEnd},this),this._draggable.on("predrag",this._onPreDragLimit,this),t.options.worldCopyJump&&(this._draggable.on("predrag",this._onPreDragWrap,this),t.on("zoomend",this._onZoomEnd,this),t.whenReady(this._onZoomEnd,this))),M(this._map._container,"leaflet-grab leaflet-touch-drag"),this._draggable.enable(),this._positions=[],this._times=[]},removeHooks:function(){z(this._map._container,"leaflet-grab"),z(this._map._container,"leaflet-touch-drag"),this._draggable.disable()},moved:function(){return this._draggable&&this._draggable._moved},moving:function(){return this._draggable&&this._draggable._moving},_onDragStart:function(){var t,e=this._map;e._stop(),this._map.options.maxBounds&&this._map.options.maxBoundsViscosity?(t=g(this._map.options.maxBounds),this._offsetLimit=_(this._map.latLngToContainerPoint(t.getNorthWest()).multiplyBy(-1),this._map.latLngToContainerPoint(t.getSouthEast()).multiplyBy(-1).add(this._map.getSize())),this._viscosity=Math.min(1,Math.max(0,this._map.options.maxBoundsViscosity))):this._offsetLimit=null,e.fire("movestart").fire("dragstart"),e.options.inertia&&(this._positions=[],this._times=[])},_onDrag:function(t){var e,i;this._map.options.inertia&&(e=this._lastTime=+new Date,i=this._lastPos=this._draggable._absPos||this._draggable._newPos,this._positions.push(i),this._times.push(e),this._prunePositions(e)),this._map.fire("move",t).fire("drag",t)},_prunePositions:function(t){for(;1<this._positions.length&&50<t-this._times[0];)this._positions.shift(),this._times.shift()},_onZoomEnd:function(){var t=this._map.getSize().divideBy(2),e=this._map.latLngToLayerPoint([0,0]);this._initialWorldOffset=e.subtract(t).x,this._worldWidth=this._map.getPixelWorldBounds().getSize().x},_viscousLimit:function(t,e){return t-(t-e)*this._viscosity},_onPreDragLimit:function(){var t,e;this._viscosity&&this._offsetLimit&&(t=this._draggable._newPos.subtract(this._draggable._startPos),e=this._offsetLimit,t.x<e.min.x&&(t.x=this._viscousLimit(t.x,e.min.x)),t.y<e.min.y&&(t.y=this._viscousLimit(t.y,e.min.y)),t.x>e.max.x&&(t.x=this._viscousLimit(t.x,e.max.x)),t.y>e.max.y&&(t.y=this._viscousLimit(t.y,e.max.y)),this._draggable._newPos=this._draggable._startPos.add(t))},_onPreDragWrap:function(){var t=this._worldWidth,e=Math.round(t/2),i=this._initialWorldOffset,n=this._draggable._newPos.x,o=(n-e+i)%t+e-i,n=(n+e+i)%t-e-i,t=Math.abs(o+i)<Math.abs(n+i)?o:n;this._draggable._absPos=this._draggable._newPos.clone(),this._draggable._newPos.x=t},_onDragEnd:function(t){var e,i,n,o,s=this._map,r=s.options,a=!r.inertia||t.noInertia||this._times.length<2;s.fire("dragend",t),!a&&(this._prunePositions(+new Date),t=this._lastPos.subtract(this._positions[0]),a=(this._lastTime-this._times[0])/1e3,e=r.easeLinearity,a=(t=t.multiplyBy(e/a)).distanceTo([0,0]),i=Math.min(r.inertiaMaxSpeed,a),t=t.multiplyBy(i/a),n=i/(r.inertiaDeceleration*e),(o=t.multiplyBy(-n/2).round()).x||o.y)?(o=s._limitOffset(o,s.options.maxBounds),x(function(){s.panBy(o,{duration:n,easeLinearity:e,noMoveStart:!0,animate:!0})})):s.fire("moveend")}})),St=(A.addInitHook("addHandler","dragging",Zt),A.mergeOptions({keyboard:!0,keyboardPanDelta:80}),n.extend({keyCodes:{left:[37],right:[39],down:[40],up:[38],zoomIn:[187,107,61,171],zoomOut:[189,109,54,173]},initialize:function(t){this._map=t,this._setPanDelta(t.options.keyboardPanDelta),this._setZoomDelta(t.options.zoomDelta)},addHooks:function(){var t=this._map._container;t.tabIndex<=0&&(t.tabIndex="0"),S(t,{focus:this._onFocus,blur:this._onBlur,mousedown:this._onMouseDown},this),this._map.on({focus:this._addHooks,blur:this._removeHooks},this)},removeHooks:function(){this._removeHooks(),k(this._map._container,{focus:this._onFocus,blur:this._onBlur,mousedown:this._onMouseDown},this),this._map.off({focus:this._addHooks,blur:this._removeHooks},this)},_onMouseDown:function(){var t,e,i;this._focused||(i=document.body,t=document.documentElement,e=i.scrollTop||t.scrollTop,i=i.scrollLeft||t.scrollLeft,this._map._container.focus(),window.scrollTo(i,e))},_onFocus:function(){this._focused=!0,this._map.fire("focus")},_onBlur:function(){this._focused=!1,this._map.fire("blur")},_setPanDelta:function(t){for(var e=this._panKeys={},i=this.keyCodes,n=0,o=i.left.length;n<o;n++)e[i.left[n]]=[-1*t,0];for(n=0,o=i.right.length;n<o;n++)e[i.right[n]]=[t,0];for(n=0,o=i.down.length;n<o;n++)e[i.down[n]]=[0,t];for(n=0,o=i.up.length;n<o;n++)e[i.up[n]]=[0,-1*t]},_setZoomDelta:function(t){for(var e=this._zoomKeys={},i=this.keyCodes,n=0,o=i.zoomIn.length;n<o;n++)e[i.zoomIn[n]]=t;for(n=0,o=i.zoomOut.length;n<o;n++)e[i.zoomOut[n]]=-t},_addHooks:function(){S(document,"keydown",this._onKeyDown,this)},_removeHooks:function(){k(document,"keydown",this._onKeyDown,this)},_onKeyDown:function(t){if(!(t.altKey||t.ctrlKey||t.metaKey)){var e,i,n=t.keyCode,o=this._map;if(n in this._panKeys)o._panAnim&&o._panAnim._inProgress||(i=this._panKeys[n],t.shiftKey&&(i=m(i).multiplyBy(3)),o.options.maxBounds&&(i=o._limitOffset(m(i),o.options.maxBounds)),o.options.worldCopyJump?(e=o.wrapLatLng(o.unproject(o.project(o.getCenter()).add(i))),o.panTo(e)):o.panBy(i));else if(n in this._zoomKeys)o.setZoom(o.getZoom()+(t.shiftKey?3:1)*this._zoomKeys[n]);else{if(27!==n||!o._popup||!o._popup.options.closeOnEscapeKey)return;o.closePopup()}Re(t)}}})),Et=(A.addInitHook("addHandler","keyboard",St),A.mergeOptions({scrollWheelZoom:!0,wheelDebounceTime:40,wheelPxPerZoomLevel:60}),n.extend({addHooks:function(){S(this._map._container,"wheel",this._onWheelScroll,this),this._delta=0},removeHooks:function(){k(this._map._container,"wheel",this._onWheelScroll,this)},_onWheelScroll:function(t){var e=He(t),i=this._map.options.wheelDebounceTime,e=(this._delta+=e,this._lastMousePos=this._map.mouseEventToContainerPoint(t),this._startTime||(this._startTime=+new Date),Math.max(i-(+new Date-this._startTime),0));clearTimeout(this._timer),this._timer=setTimeout(a(this._performZoom,this),e),Re(t)},_performZoom:function(){var t=this._map,e=t.getZoom(),i=this._map.options.zoomSnap||0,n=(t._stop(),this._delta/(4*this._map.options.wheelPxPerZoomLevel)),n=4*Math.log(2/(1+Math.exp(-Math.abs(n))))/Math.LN2,i=i?Math.ceil(n/i)*i:n,n=t._limitZoom(e+(0<this._delta?i:-i))-e;this._delta=0,this._startTime=null,n&&("center"===t.options.scrollWheelZoom?t.setZoom(e+n):t.setZoomAround(this._lastMousePos,e+n))}})),kt=(A.addInitHook("addHandler","scrollWheelZoom",Et),A.mergeOptions({tapHold:b.touchNative&&b.safari&&b.mobile,tapTolerance:15}),n.extend({addHooks:function(){S(this._map._container,"touchstart",this._onDown,this)},removeHooks:function(){k(this._map._container,"touchstart",this._onDown,this)},_onDown:function(t){var e;clearTimeout(this._holdTimeout),1===t.touches.length&&(e=t.touches[0],this._startPos=this._newPos=new p(e.clientX,e.clientY),this._holdTimeout=setTimeout(a(function(){this._cancel(),this._isTapValid()&&(S(document,"touchend",O),S(document,"touchend touchcancel",this._cancelClickPrevent),this._simulateEvent("contextmenu",e))},this),600),S(document,"touchend touchcancel contextmenu",this._cancel,this),S(document,"touchmove",this._onMove,this))},_cancelClickPrevent:function t(){k(document,"touchend",O),k(document,"touchend touchcancel",t)},_cancel:function(){clearTimeout(this._holdTimeout),k(document,"touchend touchcancel contextmenu",this._cancel,this),k(document,"touchmove",this._onMove,this)},_onMove:function(t){t=t.touches[0];this._newPos=new p(t.clientX,t.clientY)},_isTapValid:function(){return this._newPos.distanceTo(this._startPos)<=this._map.options.tapTolerance},_simulateEvent:function(t,e){t=new MouseEvent(t,{bubbles:!0,cancelable:!0,view:window,screenX:e.screenX,screenY:e.screenY,clientX:e.clientX,clientY:e.clientY});t._simulated=!0,e.target.dispatchEvent(t)}})),Ot=(A.addInitHook("addHandler","tapHold",kt),A.mergeOptions({touchZoom:b.touch,bounceAtZoomLimits:!0}),n.extend({addHooks:function(){M(this._map._container,"leaflet-touch-zoom"),S(this._map._container,"touchstart",this._onTouchStart,this)},removeHooks:function(){z(this._map._container,"leaflet-touch-zoom"),k(this._map._container,"touchstart",this._onTouchStart,this)},_onTouchStart:function(t){var e,i,n=this._map;!t.touches||2!==t.touches.length||n._animatingZoom||this._zooming||(e=n.mouseEventToContainerPoint(t.touches[0]),i=n.mouseEventToContainerPoint(t.touches[1]),this._centerPoint=n.getSize()._divideBy(2),this._startLatLng=n.containerPointToLatLng(this._centerPoint),"center"!==n.options.touchZoom&&(this._pinchStartLatLng=n.containerPointToLatLng(e.add(i)._divideBy(2))),this._startDist=e.distanceTo(i),this._startZoom=n.getZoom(),this._moved=!1,this._zooming=!0,n._stop(),S(document,"touchmove",this._onTouchMove,this),S(document,"touchend touchcancel",this._onTouchEnd,this),O(t))},_onTouchMove:function(t){if(t.touches&&2===t.touches.length&&this._zooming){var e=this._map,i=e.mouseEventToContainerPoint(t.touches[0]),n=e.mouseEventToContainerPoint(t.touches[1]),o=i.distanceTo(n)/this._startDist;if(this._zoom=e.getScaleZoom(o,this._startZoom),!e.options.bounceAtZoomLimits&&(this._zoom<e.getMinZoom()&&o<1||this._zoom>e.getMaxZoom()&&1<o)&&(this._zoom=e._limitZoom(this._zoom)),"center"===e.options.touchZoom){if(this._center=this._startLatLng,1==o)return}else{i=i._add(n)._divideBy(2)._subtract(this._centerPoint);if(1==o&&0===i.x&&0===i.y)return;this._center=e.unproject(e.project(this._pinchStartLatLng,this._zoom).subtract(i),this._zoom)}this._moved||(e._moveStart(!0,!1),this._moved=!0),r(this._animRequest);n=a(e._move,e,this._center,this._zoom,{pinch:!0,round:!1},void 0);this._animRequest=x(n,this,!0),O(t)}},_onTouchEnd:function(){this._moved&&this._zooming?(this._zooming=!1,r(this._animRequest),k(document,"touchmove",this._onTouchMove,this),k(document,"touchend touchcancel",this._onTouchEnd,this),this._map.options.zoomAnimation?this._map._animateZoom(this._center,this._map._limitZoom(this._zoom),!0,this._map.options.zoomSnap):this._map._resetView(this._center,this._map._limitZoom(this._zoom))):this._zooming=!1}})),Xi=(A.addInitHook("addHandler","touchZoom",Ot),A.BoxZoom=_t,A.DoubleClickZoom=Ct,A.Drag=Zt,A.Keyboard=St,A.ScrollWheelZoom=Et,A.TapHold=kt,A.TouchZoom=Ot,t.Bounds=f,t.Browser=b,t.CRS=ot,t.Canvas=Fi,t.Circle=vi,t.CircleMarker=gi,t.Class=et,t.Control=B,t.DivIcon=Ri,t.DivOverlay=Ai,t.DomEvent=mt,t.DomUtil=pt,t.Draggable=Xe,t.Evented=it,t.FeatureGroup=ci,t.GeoJSON=wi,t.GridLayer=Ni,t.Handler=n,t.Icon=di,t.ImageOverlay=Ei,t.LatLng=v,t.LatLngBounds=s,t.Layer=o,t.LayerGroup=ui,t.LineUtil=vt,t.Map=A,t.Marker=mi,t.Mixin=ft,t.Path=fi,t.Point=p,t.PolyUtil=gt,t.Polygon=xi,t.Polyline=yi,t.Popup=Bi,t.PosAnimation=Fe,t.Projection=wt,t.Rectangle=Yi,t.Renderer=Wi,t.SVG=Gi,t.SVGOverlay=Oi,t.TileLayer=Di,t.Tooltip=Ii,t.Transformation=at,t.Util=tt,t.VideoOverlay=ki,t.bind=a,t.bounds=_,t.canvas=Ui,t.circle=function(t,e,i){return new vi(t,e,i)},t.circleMarker=function(t,e){return new gi(t,e)},t.control=Ue,t.divIcon=function(t){return new Ri(t)},t.extend=l,t.featureGroup=function(t,e){return new ci(t,e)},t.geoJSON=Si,t.geoJson=Mt,t.gridLayer=function(t){return new Ni(t)},t.icon=function(t){return new di(t)},t.imageOverlay=function(t,e,i){return new Ei(t,e,i)},t.latLng=w,t.latLngBounds=g,t.layerGroup=function(t,e){return new ui(t,e)},t.map=function(t,e){return new A(t,e)},t.marker=function(t,e){return new mi(t,e)},t.point=m,t.polygon=function(t,e){return new xi(t,e)},t.polyline=function(t,e){return new yi(t,e)},t.popup=function(t,e){return new Bi(t,e)},t.rectangle=function(t,e){return new Yi(t,e)},t.setOptions=c,t.stamp=h,t.svg=Ki,t.svgOverlay=function(t,e,i){return new Oi(t,e,i)},t.tileLayer=ji,t.tooltip=function(t,e){return new Ii(t,e)},t.transformation=ht,t.version="1.9.4",t.videoOverlay=function(t,e,i){return new ki(t,e,i)},window.L);t.noConflict=function(){return window.L=Xi,this},window.L=t});
+//# sourceMappingURL=leafle
+/*SPLIT*/
+<script>!function(f){typeof module!='undefined'&&typeof exports=='object'?module.exports=f():typeof define!='undefined'&&define.amd?define(f):(typeof self!='undefined'?self:this).fflate=f()}(function(){var _e={};"use strict";_e.deflate=zt,_e.deflateSync=kt,_e.inflate=At,_e.inflateSync=Tt,_e.gzip=It,_e.compress=It,_e.gzipSync=Ut,_e.compressSync=Ut,_e.gunzip=Zt,_e.gunzipSync=qt,_e.zlib=Lt,_e.zlibSync=Bt,_e.unzlib=Nt,_e.unzlibSync=Pt,_e.gzip=It,_e.compress=It,_e.decompress=Jt,_e.decompressSync=Kt,_e.strToU8=nn,_e.strFromU8=rn,_e.zip=dn,_e.zipSync=gn,_e.unzip=zn,_e.unzipSync=kn;var t=(typeof module!='undefined'&&typeof exports=='object'?function(_f){"use strict";var e,r,t,n=";var __w=require('worker_threads');__w.parentPort.on('message',function(m){onmessage({data:m})}),postMessage=function(m,t){__w.parentPort.postMessage(m,t)},close=process.exit;self=global";try{e=require("worker_threads"),r=e.Worker,t=e.isMarkedAsUntransferable}catch(e){}exports.default=r?function(e,o,a,s,u){var i=!1,l=new r(e+n,{eval:!0}).on("error",function(e){return u(e,null)}).on("message",function(e){return u(null,e)}).on("exit",function(e){e&&!i&&u(Error("exited with code "+e),null)});return t&&(s=s.filter(function(e){return!t(e)})),l.postMessage(a,s),l.terminate=function(){return i=!0,r.prototype.terminate.call(l)},l}:function(e,r,t,n,o){setImmediate(function(){return o(Error("async operations unsupported - update to Node 12+ (or Node 10-11 with the --experimental-worker CLI flag)"),null)});var a=function(){};return{terminate:a,postMessage:a}};return _f}:function(_f){"use strict";var e={};_f.default=function(r,t,s,a,n){var o=new Worker(e[t]||(e[t]=URL.createObjectURL(new Blob([r+';addEventListener("error",function(e){e=e.error;postMessage({$e$:[e.message,e.code,e.stack]})})'],{type:"text/javascript"}))));return o.onmessage=function(e){var r=e.data,t=r.$e$;if(t){var s=Error(t[0]);s.code=t[1],s.stack=t[2],n(s,null)}else n(null,r)},o.postMessage(s,a),o};return _f})({}),n=Uint8Array,r=Uint16Array,i=Int32Array,e=new n([0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,0,0,0,0]),o=new n([0,0,0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,0,0]),s=new n([16,17,18,0,8,7,9,6,10,5,11,4,12,3,13,2,14,1,15]),a=function(t,n){for(var e=new r(31),o=0;o<31;++o)e[o]=n+=1<<t[o-1];var s=new i(e[30]);for(o=1;o<30;++o)for(var a=e[o];a<e[o+1];++a)s[a]=a-e[o]<<5|o;return{b:e,r:s}},u=a(e,2),h=u.b,f=u.r;h[28]=258,f[258]=28;for(var c=a(o,0),l=c.b,p=c.r,v=new r(32768),d=0;d<32768;++d){var g=(43690&d)>>1|(21845&d)<<1;v[d]=((65280&(g=(61680&(g=(52428&g)>>2|(13107&g)<<2))>>4|(3855&g)<<4))>>8|(255&g)<<8)>>1}var y=function(t,n,i){for(var e=t.length,o=0,s=new r(n);o<e;++o)t[o]&&++s[t[o]-1];var a,u=new r(n);for(o=1;o<n;++o)u[o]=u[o-1]+s[o-1]<<1;if(i){a=new r(1<<n);var h=15-n;for(o=0;o<e;++o)if(t[o])for(var f=o<<4|t[o],c=n-t[o],l=u[t[o]-1]++<<c,p=l|(1<<c)-1;l<=p;++l)a[v[l]>>h]=f}else for(a=new r(e),o=0;o<e;++o)t[o]&&(a[o]=v[u[t[o]-1]++]>>15-t[o]);return a},m=new n(288);for(d=0;d<144;++d)m[d]=8;for(d=144;d<256;++d)m[d]=9;for(d=256;d<280;++d)m[d]=7;for(d=280;d<288;++d)m[d]=8;var b=new n(32);for(d=0;d<32;++d)b[d]=5;var w=y(m,9,0),x=y(m,9,1),z=y(b,5,0),k=y(b,5,1),M=function(t){for(var n=t[0],r=1;r<t.length;++r)t[r]>n&&(n=t[r]);return n},S=function(t,n,r){var i=n/8|0;return(t[i]|t[i+1]<<8)>>(7&n)&r},A=function(t,n){var r=n/8|0;return(t[r]|t[r+1]<<8|t[r+2]<<16)>>(7&n)},T=function(t){return(t+7)/8|0},D=function(t,r,i){return(null==r||r<0)&&(r=0),(null==i||i>t.length)&&(i=t.length),new n(t.subarray(r,i))};_e.FlateErrorCode={UnexpectedEOF:0,InvalidBlockType:1,InvalidLengthLiteral:2,InvalidDistance:3,StreamFinished:4,NoStreamHandler:5,InvalidHeader:6,NoCallback:7,InvalidUTF8:8,ExtraFieldTooLong:9,InvalidDate:10,FilenameTooLong:11,StreamFinishing:12,InvalidZipData:13,UnknownCompressionMethod:14};var C=["unexpected EOF","invalid block type","invalid length/literal","invalid distance","stream finished","no stream handler",,"no callback","invalid UTF-8 data","extra field too long","date not in range 1980-2099","filename too long","stream finishing","invalid zip data"],I=function(t,n,r){var i=Error(n||C[t]);if(i.code=t,Error.captureStackTrace&&Error.captureStackTrace(i,I),!r)throw i;return i},U=function(t,r,i,a){var u=t.length,f=a?a.length:0;if(!u||r.f&&!r.l)return i||new n(0);var c=!i,p=c||2!=r.i,v=r.i;c&&(i=new n(3*u));var d=function(t){var r=i.length;if(t>r){var e=new n(Math.max(2*r,t));e.set(i),i=e}},g=r.f||0,m=r.p||0,b=r.b||0,w=r.l,z=r.d,C=r.m,U=r.n,F=8*u;do{if(!w){g=S(t,m,1);var E=S(t,m+1,3);if(m+=3,!E){var Z=t[(Y=T(m)+4)-4]|t[Y-3]<<8,q=Y+Z;if(q>u){v&&I(0);break}p&&d(b+Z),i.set(t.subarray(Y,q),b),r.b=b+=Z,r.p=m=8*q,r.f=g;continue}if(1==E)w=x,z=k,C=9,U=5;else if(2==E){var O=S(t,m,31)+257,G=S(t,m+10,15)+4,L=O+S(t,m+5,31)+1;m+=14;for(var B=new n(L),H=new n(19),j=0;j<G;++j)H[s[j]]=S(t,m+3*j,7);m+=3*G;var N=M(H),P=(1<<N)-1,V=y(H,N,1);for(j=0;j<L;){var Y,J=V[S(t,m,P)];if(m+=15&J,(Y=J>>4)<16)B[j++]=Y;else{var K=0,Q=0;for(16==Y?(Q=3+S(t,m,3),m+=2,K=B[j-1]):17==Y?(Q=3+S(t,m,7),m+=3):18==Y&&(Q=11+S(t,m,127),m+=7);Q--;)B[j++]=K}}var R=B.subarray(0,O),W=B.subarray(O);C=M(R),U=M(W),w=y(R,C,1),z=y(W,U,1)}else I(1);if(m>F){v&&I(0);break}}p&&d(b+131072);for(var X=(1<<C)-1,$=(1<<U)-1,_=m;;_=m){var tt=(K=w[A(t,m)&X])>>4;if((m+=15&K)>F){v&&I(0);break}if(K||I(2),tt<256)i[b++]=tt;else{if(256==tt){_=m,w=null;break}var nt=tt-254;tt>264&&(nt=S(t,m,(1<<(et=e[j=tt-257]))-1)+h[j],m+=et);var rt=z[A(t,m)&$],it=rt>>4;if(rt||I(3),m+=15&rt,W=l[it],it>3){var et=o[it];W+=A(t,m)&(1<<et)-1,m+=et}if(m>F){v&&I(0);break}p&&d(b+131072);var ot=b+nt;if(b<W){var st=f-W,at=Math.min(W,ot);for(st+b<0&&I(3);b<at;++b)i[b]=a[st+b]}for(;b<ot;++b)i[b]=i[b-W]}}r.l=w,r.p=_,r.b=b,r.f=g,w&&(g=1,r.m=C,r.d=z,r.n=U)}while(!g);return b!=i.length&&c?D(i,0,b):i.subarray(0,b)},F=function(t,n,r){var i=n/8|0;t[i]|=r<<=7&n,t[i+1]|=r>>8},E=function(t,n,r){var i=n/8|0;t[i]|=r<<=7&n,t[i+1]|=r>>8,t[i+2]|=r>>16},Z=function(t,i){for(var e=[],o=0;o<t.length;++o)t[o]&&e.push({s:o,f:t[o]});var s=e.length,a=e.slice();if(!s)return{t:j,l:0};if(1==s){var u=new n(e[0].s+1);return u[e[0].s]=1,{t:u,l:1}}e.sort(function(t,n){return t.f-n.f}),e.push({s:-1,f:25001});var h=e[0],f=e[1],c=0,l=1,p=2;for(e[0]={s:-1,f:h.f+f.f,l:h,r:f};l!=s-1;)h=e[e[c].f<e[p].f?c++:p++],f=e[c!=l&&e[c].f<e[p].f?c++:p++],e[l++]={s:-1,f:h.f+f.f,l:h,r:f};var v=a[0].s;for(o=1;o<s;++o)a[o].s>v&&(v=a[o].s);var d=new r(v+1),g=q(e[l-1],d,0);if(g>i){o=0;var y=0,m=g-i,b=1<<m;for(a.sort(function(t,n){return d[n.s]-d[t.s]||t.f-n.f});o<s;++o){var w=a[o].s;if(!(d[w]>i))break;y+=b-(1<<g-d[w]),d[w]=i}for(y>>=m;y>0;){var x=a[o].s;d[x]<i?y-=1<<i-d[x]++-1:++o}for(;o>=0&&y;--o){var z=a[o].s;d[z]==i&&(--d[z],++y)}g=i}return{t:new n(d),l:g}},q=function(t,n,r){return-1==t.s?Math.max(q(t.l,n,r+1),q(t.r,n,r+1)):n[t.s]=r},O=function(t){for(var n=t.length;n&&!t[--n];);for(var i=new r(++n),e=0,o=t[0],s=1,a=function(t){i[e++]=t},u=1;u<=n;++u)if(t[u]==o&&u!=n)++s;else{if(!o&&s>2){for(;s>138;s-=138)a(32754);s>2&&(a(s>10?s-11<<5|28690:s-3<<5|12305),s=0)}else if(s>3){for(a(o),--s;s>6;s-=6)a(8304);s>2&&(a(s-3<<5|8208),s=0)}for(;s--;)a(o);s=1,o=t[u]}return{c:i.subarray(0,e),n:n}},G=function(t,n){for(var r=0,i=0;i<n.length;++i)r+=t[i]*n[i];return r},L=function(t,n,r){var i=r.length,e=T(n+2);t[e]=255&i,t[e+1]=i>>8,t[e+2]=255^t[e],t[e+3]=255^t[e+1];for(var o=0;o<i;++o)t[e+o+4]=r[o];return 8*(e+4+i)},B=function(t,n,i,a,u,h,f,c,l,p,v){F(n,v++,i),++u[256];for(var d=Z(u,15),g=d.t,x=d.l,k=Z(h,15),M=k.t,S=k.l,A=O(g),T=A.c,D=A.n,C=O(M),I=C.c,U=C.n,q=new r(19),B=0;B<T.length;++B)++q[31&T[B]];for(B=0;B<I.length;++B)++q[31&I[B]];for(var H=Z(q,7),j=H.t,N=H.l,P=19;P>4&&!j[s[P-1]];--P);var V,Y,J,K,Q=p+5<<3,R=G(u,m)+G(h,b)+f,W=G(u,g)+G(h,M)+f+14+3*P+G(q,j)+2*q[16]+3*q[17]+7*q[18];if(l>=0&&Q<=R&&Q<=W)return L(n,v,t.subarray(l,l+p));if(F(n,v,1+(W<R)),v+=2,W<R){V=y(g,x,0),Y=g,J=y(M,S,0),K=M;var X=y(j,N,0);for(F(n,v,D-257),F(n,v+5,U-1),F(n,v+10,P-4),v+=14,B=0;B<P;++B)F(n,v+3*B,j[s[B]]);v+=3*P;for(var $=[T,I],_=0;_<2;++_){var tt=$[_];for(B=0;B<tt.length;++B)F(n,v,X[rt=31&tt[B]]),v+=j[rt],rt>15&&(F(n,v,tt[B]>>5&127),v+=tt[B]>>12)}}else V=w,Y=m,J=z,K=b;for(B=0;B<c;++B){var nt=a[B];if(nt>255){var rt;E(n,v,V[257+(rt=nt>>18&31)]),v+=Y[rt+257],rt>7&&(F(n,v,nt>>23&31),v+=e[rt]);var it=31&nt;E(n,v,J[it]),v+=K[it],it>3&&(E(n,v,nt>>5&8191),v+=o[it])}else E(n,v,V[nt]),v+=Y[nt]}return E(n,v,V[256]),v+Y[256]},H=new i([65540,131080,131088,131104,262176,1048704,1048832,2114560,2117632]),j=new n(0),N=function(t,s,a,u,h,c){var l=c.z||t.length,v=new n(u+l+5*(1+Math.ceil(l/7e3))+h),d=v.subarray(u,v.length-h),g=c.l,y=7&(c.r||0);if(s){y&&(d[0]=c.r>>3);for(var m=H[s-1],b=m>>13,w=8191&m,x=(1<<a)-1,z=c.p||new r(32768),k=c.h||new r(x+1),M=Math.ceil(a/3),S=2*M,A=function(n){return(t[n]^t[n+1]<<M^t[n+2]<<S)&x},C=new i(25e3),I=new r(288),U=new r(32),F=0,E=0,Z=c.i||0,q=0,O=c.w||0,G=0;Z+2<l;++Z){var j=A(Z),N=32767&Z,P=k[j];if(z[N]=P,k[j]=N,O<=Z){var V=l-Z;if((F>7e3||q>24576)&&(V>423||!g)){y=B(t,d,0,C,I,U,E,q,G,Z-G,y),q=F=E=0,G=Z;for(var Y=0;Y<286;++Y)I[Y]=0;for(Y=0;Y<30;++Y)U[Y]=0}var J=2,K=0,Q=w,R=N-P&32767;if(V>2&&j==A(Z-R))for(var W=Math.min(b,V)-1,X=Math.min(32767,Z),$=Math.min(258,V);R<=X&&--Q&&N!=P;){if(t[Z+J]==t[Z+J-R]){for(var _=0;_<$&&t[Z+_]==t[Z+_-R];++_);if(_>J){if(J=_,K=R,_>W)break;var tt=Math.min(R,_-2),nt=0;for(Y=0;Y<tt;++Y){var rt=Z-R+Y&32767,it=rt-z[rt]&32767;it>nt&&(nt=it,P=rt)}}}R+=(N=P)-(P=z[N])&32767}if(K){C[q++]=268435456|f[J]<<18|p[K];var et=31&f[J],ot=31&p[K];E+=e[et]+o[ot],++I[257+et],++U[ot],O=Z+J,++F}else C[q++]=t[Z],++I[t[Z]]}}for(Z=Math.max(Z,O);Z<l;++Z)C[q++]=t[Z],++I[t[Z]];y=B(t,d,g,C,I,U,E,q,G,Z-G,y),g||(c.r=7&y|d[y/8|0]<<3,y-=7,c.h=k,c.p=z,c.i=Z,c.w=O)}else{for(Z=c.w||0;Z<l+g;Z+=65535){var st=Z+65535;st>=l&&(d[y/8|0]=g,st=l),y=L(d,y+1,t.subarray(Z,st))}c.i=l}return D(v,0,u+T(y)+h)},P=function(){for(var t=new Int32Array(256),n=0;n<256;++n){for(var r=n,i=9;--i;)r=(1&r&&-306674912)^r>>>1;t[n]=r}return t}(),V=function(){var t=-1;return{p:function(n){for(var r=t,i=0;i<n.length;++i)r=P[255&r^n[i]]^r>>>8;t=r},d:function(){return~t}}},Y=function(){var t=1,n=0;return{p:function(r){for(var i=t,e=n,o=0|r.length,s=0;s!=o;){for(var a=Math.min(s+2655,o);s<a;++s)e+=i+=r[s];i=(65535&i)+15*(i>>16),e=(65535&e)+15*(e>>16)}t=i,n=e},d:function(){return(255&(t%=65521))<<24|(65280&t)<<8|(255&(n%=65521))<<8|n>>8}}},J=function(t,r,i,e,o){if(!o&&(o={l:1},r.dictionary)){var s=r.dictionary.subarray(-32768),a=new n(s.length+t.length);a.set(s),a.set(t,s.length),t=a,o.w=s.length}return N(t,null==r.level?6:r.level,null==r.mem?o.l?Math.ceil(1.5*Math.max(8,Math.min(13,Math.log(t.length)))):20:12+r.mem,i,e,o)},K=function(t,n){var r={};for(var i in t)r[i]=t[i];for(var i in n)r[i]=n[i];return r},Q=function(t,n,r){for(var i=t(),e=""+t,o=e.slice(e.indexOf("[")+1,e.lastIndexOf("]")).replace(/\s+/g,"").split(","),s=0;s<i.length;++s){var a=i[s],u=o[s];if("function"==typeof a){n+=";"+u+"=";var h=""+a;if(a.prototype)if(-1!=h.indexOf("[native code]")){var f=h.indexOf(" ",8)+1;n+=h.slice(f,h.indexOf("(",f))}else for(var c in n+=h,a.prototype)n+=";"+u+".prototype."+c+"="+a.prototype[c];else n+=h}else r[u]=a}return n},R=[],W=function(t){var n=[];for(var r in t)t[r].buffer&&n.push((t[r]=new t[r].constructor(t[r])).buffer);return n},X=function(n,r,i,e){if(!R[i]){for(var o="",s={},a=n.length-1,u=0;u<a;++u)o=Q(n[u],o,s);R[i]={c:Q(n[a],o,s),e:s}}var h=K({},R[i].e);return(0,t.default)(R[i].c+";onmessage=function(e){for(var k in e.data)self[k]=e.data[k];onmessage="+r+"}",i,h,W(h),e)},$=function(){return[n,r,i,e,o,s,h,l,x,k,v,C,y,M,S,A,T,D,I,U,Tt,et,ot]},_=function(){return[n,r,i,e,o,s,f,p,w,m,z,b,v,H,j,y,F,E,Z,q,O,G,L,B,T,D,N,J,kt,et]},tt=function(){return[pt,gt,lt,V,P]},nt=function(){return[vt,dt]},rt=function(){return[yt,lt,Y]},it=function(){return[mt]},et=function(t){return postMessage(t,[t.buffer])},ot=function(t){return t&&{out:t.size&&new n(t.size),dictionary:t.dictionary}},st=function(t,n,r,i,e,o){var s=X(r,i,e,function(t,n){s.terminate(),o(t,n)});return s.postMessage([t,n],n.consume?[t.buffer]:[]),function(){s.terminate()}},at=function(t){return t.ondata=function(t,n){return postMessage([t,n],[t.buffer])},function(n){n.data[0]?(t.push(n.data[0],n.data[1]),postMessage([n.data[0].length])):t.flush(n.data[1])}},ut=function(t,n,r,i,e,o,s){var a,u=X(t,i,e,function(t,r){t?(u.terminate(),n.ondata.call(n,t)):Array.isArray(r)?1==r.length?(n.queuedSize-=r[0],n.ondrain&&n.ondrain(r[0])):(r[1]&&u.terminate(),n.ondata.call(n,t,r[0],r[1])):s(r)});u.postMessage(r),n.queuedSize=0,n.push=function(t,r){n.ondata||I(5),a&&n.ondata(I(4,0,1),null,!!r),n.queuedSize+=t.length,u.postMessage([t,a=r],t.buffer instanceof ArrayBuffer?[t.buffer]:[])},n.terminate=function(){u.terminate()},o&&(n.flush=function(t){u.postMessage([0,t])})},ht=function(t,n){return t[n]|t[n+1]<<8},ft=function(t,n){return(t[n]|t[n+1]<<8|t[n+2]<<16|t[n+3]<<24)>>>0},ct=function(t,n){return ft(t,n)+4294967296*ft(t,n+4)},lt=function(t,n,r){for(;r;++n)t[n]=r,r>>>=8},pt=function(t,n){var r=n.filename;if(t[0]=31,t[1]=139,t[2]=8,t[8]=n.level<2?4:9==n.level?2:0,t[9]=3,0!=n.mtime&&lt(t,4,Math.floor(new Date(n.mtime||Date.now())/1e3)),r){t[3]=8;for(var i=0;i<=r.length;++i)t[i+10]=r.charCodeAt(i)}},vt=function(t){31==t[0]&&139==t[1]&&8==t[2]||I(6,"invalid gzip data");var n=t[3],r=10;4&n&&(r+=2+(t[10]|t[11]<<8));for(var i=(n>>3&1)+(n>>4&1);i>0;i-=!t[r++]);return r+(2&n)},dt=function(t){var n=t.length;return(t[n-4]|t[n-3]<<8|t[n-2]<<16|t[n-1]<<24)>>>0},gt=function(t){return 10+(t.filename?t.filename.length+1:0)},yt=function(t,n){var r=n.level,i=0==r?0:r<6?1:9==r?3:2;if(t[0]=120,t[1]=i<<6|(n.dictionary&&32),t[1]|=31-(t[0]<<8|t[1])%31,n.dictionary){var e=Y();e.p(n.dictionary),lt(t,2,e.d())}},mt=function(t,n){return(8!=(15&t[0])||t[0]>>4>7||(t[0]<<8|t[1])%31)&&I(6,"invalid zlib data"),(t[1]>>5&1)==+!n&&I(6,"invalid zlib data: "+(32&t[1]?"need":"unexpected")+" dictionary"),2+(t[1]>>3&4)};function bt(t,n){return"function"==typeof t&&(n=t,t={}),this.ondata=n,t}var wt=function(){function t(t,r){if("function"==typeof t&&(r=t,t={}),this.ondata=r,this.o=t||{},this.s={l:0,i:32768,w:32768,z:32768},this.b=new n(98304),this.o.dictionary){var i=this.o.dictionary.subarray(-32768);this.b.set(i,32768-i.length),this.s.i=32768-i.length}}return t.prototype.p=function(t,n){this.ondata(J(t,this.o,0,0,this.s),n)},t.prototype.push=function(t,r){this.ondata||I(5),this.s.l&&I(4);var i=t.length+this.s.z;if(i>this.b.length){if(i>2*this.b.length-32768){var e=new n(-32768&i);e.set(this.b.subarray(0,this.s.z)),this.b=e}var o=this.b.length-this.s.z;this.b.set(t.subarray(0,o),this.s.z),this.s.z=this.b.length,this.p(this.b,!1),this.b.set(this.b.subarray(-32768)),this.b.set(t.subarray(o),32768),this.s.z=t.length-o+32768,this.s.i=32766,this.s.w=32768}else this.b.set(t,this.s.z),this.s.z+=t.length;this.s.l=1&r,(this.s.z>this.s.w+8191||r)&&(this.p(this.b,r||!1),this.s.w=this.s.i,this.s.i-=2),r&&(this.s=this.o={},this.b=j)},t.prototype.flush=function(t){if(this.ondata||I(5),this.s.l&&I(4),this.p(this.b,!1),this.s.w=this.s.i,this.s.i-=2,t){var r=new n(6);r[0]=this.s.r>>3;var i=L(r,this.s.r,j);this.s.r=0,this.ondata(r.subarray(0,i>>3),!1)}},t}();_e.Deflate=wt;var xt=function(){return function(t,n){ut([_,function(){return[at,wt]}],this,bt.call(this,t,n),function(t){var n=new wt(t.data);onmessage=at(n)},6,1)}}();function zt(t,n,r){return r||(r=n,n={}),"function"!=typeof r&&I(7),st(t,n,[_],function(t){return et(kt(t.data[0],t.data[1]))},0,r)}function kt(t,n){return J(t,n||{},0,0)}_e.AsyncDeflate=xt;var Mt=function(){function t(t,r){"function"==typeof t&&(r=t,t={}),this.ondata=r;var i=t&&t.dictionary&&t.dictionary.subarray(-32768);this.s={i:0,b:i?i.length:0},this.o=new n(32768),this.p=new n(0),i&&this.o.set(i)}return t.prototype.e=function(t){if(this.ondata||I(5),this.d&&I(4),this.p.length){if(t.length){var r=new n(this.p.length+t.length);r.set(this.p),r.set(t,this.p.length),this.p=r}}else this.p=t},t.prototype.c=function(t){this.s.i=+(this.d=t||!1);var n=this.s.b,r=U(this.p,this.s,this.o);this.ondata(D(r,n,this.s.b),this.d),this.o=D(r,this.s.b-32768),this.s.b=this.o.length,this.p=D(this.p,this.s.p/8|0),this.s.p&=7},t.prototype.push=function(t,n){this.e(t),this.c(n)},t}();_e.Inflate=Mt;var St=function(){return function(t,n){ut([$,function(){return[at,Mt]}],this,bt.call(this,t,n),function(t){var n=new Mt(t.data);onmessage=at(n)},7,0)}}();function At(t,n,r){return r||(r=n,n={}),"function"!=typeof r&&I(7),st(t,n,[$],function(t){return et(Tt(t.data[0],ot(t.data[1])))},1,r)}function Tt(t,n){return U(t,{i:2},n&&n.out,n&&n.dictionary)}_e.AsyncInflate=St;var Dt=function(){function t(t,n){this.c=V(),this.l=0,this.v=1,wt.call(this,t,n)}return t.prototype.push=function(t,n){this.c.p(t),this.l+=t.length,wt.prototype.push.call(this,t,n)},t.prototype.p=function(t,n){var r=J(t,this.o,this.v&&gt(this.o),n&&8,this.s);this.v&&(pt(r,this.o),this.v=0),n&&(lt(r,r.length-8,this.c.d()),lt(r,r.length-4,this.l)),this.ondata(r,n)},t.prototype.flush=function(t){wt.prototype.flush.call(this,t)},t}();_e.Gzip=Dt,_e.Compress=Dt;var Ct=function(){return function(t,n){ut([_,tt,function(){return[at,wt,Dt]}],this,bt.call(this,t,n),function(t){var n=new Dt(t.data);onmessage=at(n)},8,1)}}();function It(t,n,r){return r||(r=n,n={}),"function"!=typeof r&&I(7),st(t,n,[_,tt,function(){return[Ut]}],function(t){return et(Ut(t.data[0],t.data[1]))},2,r)}function Ut(t,n){n||(n={});var r=V(),i=t.length;r.p(t);var e=J(t,n,gt(n),8),o=e.length;return pt(e,n),lt(e,o-8,r.d()),lt(e,o-4,i),e}_e.AsyncGzip=Ct,_e.AsyncCompress=Ct;var Ft=function(){function t(t,n){this.v=1,this.r=0,Mt.call(this,t,n)}return t.prototype.push=function(t,r){if(Mt.prototype.e.call(this,t),this.r+=t.length,this.v){var i=this.p.subarray(this.v-1),e=i.length>3?vt(i):4;if(e>i.length){if(!r)return}else this.v>1&&this.onmember&&this.onmember(this.r-i.length);this.p=i.subarray(e),this.v=0}Mt.prototype.c.call(this,0),this.s.f&&!this.s.l?(this.v=T(this.s.p)+9,this.s={i:0},this.o=new n(0),this.push(new n(0),r)):r&&Mt.prototype.c.call(this,r)},t}();_e.Gunzip=Ft;var Et=function(){return function(t,n){var r=this;ut([$,nt,function(){return[at,Mt,Ft]}],this,bt.call(this,t,n),function(t){var n=new Ft(t.data);n.onmember=function(t){return postMessage(t)},onmessage=at(n)},9,0,function(t){return r.onmember&&r.onmember(t)})}}();function Zt(t,n,r){return r||(r=n,n={}),"function"!=typeof r&&I(7),st(t,n,[$,nt,function(){return[qt]}],function(t){return et(qt(t.data[0],t.data[1]))},3,r)}function qt(t,r){var i=vt(t);return i+8>t.length&&I(6,"invalid gzip data"),U(t.subarray(i,-8),{i:2},r&&r.out||new n(dt(t)),r&&r.dictionary)}_e.AsyncGunzip=Et;var Ot=function(){function t(t,n){this.c=Y(),this.v=1,wt.call(this,t,n)}return t.prototype.push=function(t,n){this.c.p(t),wt.prototype.push.call(this,t,n)},t.prototype.p=function(t,n){var r=J(t,this.o,this.v&&(this.o.dictionary?6:2),n&&4,this.s);this.v&&(yt(r,this.o),this.v=0),n&&lt(r,r.length-4,this.c.d()),this.ondata(r,n)},t.prototype.flush=function(t){wt.prototype.flush.call(this,t)},t}();_e.Zlib=Ot;var Gt=function(){return function(t,n){ut([_,rt,function(){return[at,wt,Ot]}],this,bt.call(this,t,n),function(t){var n=new Ot(t.data);onmessage=at(n)},10,1)}}();function Lt(t,n,r){return r||(r=n,n={}),"function"!=typeof r&&I(7),st(t,n,[_,rt,function(){return[Bt]}],function(t){return et(Bt(t.data[0],t.data[1]))},4,r)}function Bt(t,n){n||(n={});var r=Y();r.p(t);var i=J(t,n,n.dictionary?6:2,4);return yt(i,n),lt(i,i.length-4,r.d()),i}_e.AsyncZlib=Gt;var Ht=function(){function t(t,n){Mt.call(this,t,n),this.v=t&&t.dictionary?2:1}return t.prototype.push=function(t,n){if(Mt.prototype.e.call(this,t),this.v){if(this.p.length<6&&!n)return;this.p=this.p.subarray(mt(this.p,this.v-1)),this.v=0}n&&(this.p.length<4&&I(6,"invalid zlib data"),this.p=this.p.subarray(0,-4)),Mt.prototype.c.call(this,n)},t}();_e.Unzlib=Ht;var jt=function(){return function(t,n){ut([$,it,function(){return[at,Mt,Ht]}],this,bt.call(this,t,n),function(t){var n=new Ht(t.data);onmessage=at(n)},11,0)}}();function Nt(t,n,r){return r||(r=n,n={}),"function"!=typeof r&&I(7),st(t,n,[$,it,function(){return[Pt]}],function(t){return et(Pt(t.data[0],ot(t.data[1])))},5,r)}function Pt(t,n){return U(t.subarray(mt(t,n&&n.dictionary),-4),{i:2},n&&n.out,n&&n.dictionary)}_e.AsyncUnzlib=jt;var Vt=function(){function t(t,n){this.o=bt.call(this,t,n)||{},this.G=Ft,this.I=Mt,this.Z=Ht}return t.prototype.i=function(){var t=this;this.s.ondata=function(n,r){t.ondata(n,r)}},t.prototype.push=function(t,r){if(this.ondata||I(5),this.s)this.s.push(t,r);else{if(this.p&&this.p.length){var i=new n(this.p.length+t.length);i.set(this.p),i.set(t,this.p.length)}else this.p=t;this.p.length>2&&(this.s=31==this.p[0]&&139==this.p[1]&&8==this.p[2]?new this.G(this.o):8!=(15&this.p[0])||this.p[0]>>4>7||(this.p[0]<<8|this.p[1])%31?new this.I(this.o):new this.Z(this.o),this.i(),this.s.push(this.p,r),this.p=null)}},t}();_e.Decompress=Vt;var Yt=function(){function t(t,n){Vt.call(this,t,n),this.queuedSize=0,this.G=Et,this.I=St,this.Z=jt}return t.prototype.i=function(){var t=this;this.s.ondata=function(n,r,i){t.ondata(n,r,i)},this.s.ondrain=function(n){t.queuedSize-=n,t.ondrain&&t.ondrain(n)}},t.prototype.push=function(t,n){this.queuedSize+=t.length,Vt.prototype.push.call(this,t,n)},t}();function Jt(t,n,r){return r||(r=n,n={}),"function"!=typeof r&&I(7),31==t[0]&&139==t[1]&&8==t[2]?Zt(t,n,r):8!=(15&t[0])||t[0]>>4>7||(t[0]<<8|t[1])%31?At(t,n,r):Nt(t,n,r)}function Kt(t,n){return 31==t[0]&&139==t[1]&&8==t[2]?qt(t,n):8!=(15&t[0])||t[0]>>4>7||(t[0]<<8|t[1])%31?Tt(t,n):Pt(t,n)}_e.AsyncDecompress=Yt;var Qt=function(t,r,i,e){for(var o in t){var s=t[o],a=r+o,u=e;Array.isArray(s)&&(u=K(e,s[1]),s=s[0]),ArrayBuffer.isView(s)?i[a]=[s,u]:(i[a+="/"]=[new n(0),u],Qt(s,a,i,e))}},Rt="undefined"!=typeof TextEncoder&&new TextEncoder,Wt="undefined"!=typeof TextDecoder&&new TextDecoder,Xt=0;try{Wt.decode(j,{stream:!0}),Xt=1}catch(t){}var $t=function(t){for(var n="",r=0;;){var i=t[r++],e=(i>127)+(i>223)+(i>239);if(r+e>t.length)return{s:n,r:D(t,r-1)};e?3==e?(i=((15&i)<<18|(63&t[r++])<<12|(63&t[r++])<<6|63&t[r++])-65536,n+=String.fromCharCode(55296|i>>10,56320|1023&i)):n+=String.fromCharCode(1&e?(31&i)<<6|63&t[r++]:(15&i)<<12|(63&t[r++])<<6|63&t[r++]):n+=String.fromCharCode(i)}},_t=function(){function t(t){this.ondata=t,Xt?this.t=new TextDecoder:this.p=j}return t.prototype.push=function(t,r){if(this.ondata||I(5),r=!!r,this.t)return this.ondata(this.t.decode(t,{stream:!0}),r),void(r&&(this.t.decode().length&&I(8),this.t=null));this.p||I(4);var i=new n(this.p.length+t.length);i.set(this.p),i.set(t,this.p.length);var e=$t(i),o=e.s,s=e.r;r?(s.length&&I(8),this.p=null):this.p=s,this.ondata(o,r)},t}();_e.DecodeUTF8=_t;var tn=function(){function t(t){this.ondata=t}return t.prototype.push=function(t,n){this.ondata||I(5),this.d&&I(4),this.ondata(nn(t),this.d=n||!1)},t}();function nn(t,r){if(r){for(var i=new n(t.length),e=0;e<t.length;++e)i[e]=t.charCodeAt(e);return i}if(Rt)return Rt.encode(t);var o=t.length,s=new n(t.length+(t.length>>1)),a=0,u=function(t){s[a++]=t};for(e=0;e<o;++e){if(a+5>s.length){var h=new n(a+8+(o-e<<1));h.set(s),s=h}var f=t.charCodeAt(e);f<128||r?u(f):f<2048?(u(192|f>>6),u(128|63&f)):f>55295&&f<57344?(u(240|(f=65536+(1047552&f)|1023&t.charCodeAt(++e))>>18),u(128|f>>12&63),u(128|f>>6&63),u(128|63&f)):(u(224|f>>12),u(128|f>>6&63),u(128|63&f))}return D(s,0,a)}function rn(t,n){if(n){for(var r="",i=0;i<t.length;i+=16384)r+=String.fromCharCode.apply(null,t.subarray(i,i+16384));return r}if(Wt)return Wt.decode(t);var e=$t(t),o=e.s;return(r=e.r).length&&I(8),o}_e.EncodeUTF8=tn;var en=function(t){return 1==t?3:t<6?2:9==t?1:0},on=function(t,n){return n+30+ht(t,n+26)+ht(t,n+28)},sn=function(t,n,r){var i=ht(t,n+28),e=ht(t,n+30),o=rn(t.subarray(n+46,n+46+i),!(2048&ht(t,n+8))),s=n+46+i,a=an(t,s,e,r,ft(t,n+20),ft(t,n+24),ft(t,n+42)),u=a[0],h=a[1],f=a[2];return[ht(t,n+10),u,h,o,s+e+ht(t,n+32),f]},an=function(t,n,r,i,e,o,s){var a=4294967295==e,u=4294967295==o,h=4294967295==s,f=n+r;if(i&&a+u+h){for(;n+4<f;n+=4+ht(t,n+2))if(1==ht(t,n))return[a?ct(t,n+4+8*u):e,u?ct(t,n+4):o,h?ct(t,n+4+8*(u+a)):s,1];i<2&&I(13)}return[e,o,s,0]},un=function(t){var n=0;if(t)for(var r in t){var i=t[r].length;i>65535&&I(9),n+=i+4}return n},hn=function(t,n,r,i,e,o,s,a){var u=i.length,h=r.extra,f=a&&a.length,c=un(h);lt(t,n,null!=s?33639248:67324752),n+=4,null!=s&&(t[n++]=20,t[n++]=r.os),t[n]=20,n+=2,t[n++]=r.flag<<1|(o<0&&8),t[n++]=e&&8,t[n++]=255&r.compression,t[n++]=r.compression>>8;var l=new Date(null==r.mtime?Date.now():r.mtime),p=l.getFullYear()-1980;if((p<0||p>119)&&I(10),lt(t,n,p<<25|l.getMonth()+1<<21|l.getDate()<<16|l.getHours()<<11|l.getMinutes()<<5|l.getSeconds()>>1),n+=4,-1!=o&&(lt(t,n,r.crc),lt(t,n+4,o<0?-o-2:o),lt(t,n+8,r.size)),lt(t,n+12,u),lt(t,n+14,c),n+=16,null!=s&&(lt(t,n,f),lt(t,n+6,r.attrs),lt(t,n+10,s),n+=14),t.set(i,n),n+=u,c)for(var v in h){var d=h[v],g=d.length;lt(t,n,+v),lt(t,n+2,g),t.set(d,n+4),n+=4+g}return f&&(t.set(a,n),n+=f),n},fn=function(t,n,r,i,e){lt(t,n,101010256),lt(t,n+8,r),lt(t,n+10,r),lt(t,n+12,i),lt(t,n+16,e)},cn=function(){function t(t){this.filename=t,this.c=V(),this.size=0,this.compression=0}return t.prototype.process=function(t,n){this.ondata(null,t,n)},t.prototype.push=function(t,n){this.ondata||I(5),this.c.p(t),this.size+=t.length,n&&(this.crc=this.c.d()),this.process(t,n||!1)},t}();_e.ZipPassThrough=cn;var ln=function(){function t(t,n){var r=this;n||(n={}),cn.call(this,t),this.d=new wt(n,function(t,n){r.ondata(null,t,n)}),this.compression=8,this.flag=en(n.level)}return t.prototype.process=function(t,n){try{this.d.push(t,n)}catch(t){this.ondata(t,null,n)}},t.prototype.push=function(t,n){cn.prototype.push.call(this,t,n)},t}();_e.ZipDeflate=ln;var pn=function(){function t(t,n){var r=this;n||(n={}),cn.call(this,t),this.d=new xt(n,function(t,n,i){r.ondata(t,n,i)}),this.compression=8,this.flag=en(n.level),this.terminate=this.d.terminate}return t.prototype.process=function(t,n){this.d.push(t,n)},t.prototype.push=function(t,n){cn.prototype.push.call(this,t,n)},t}();_e.AsyncZipDeflate=pn;var vn=function(){function t(t){this.ondata=t,this.u=[],this.d=1}return t.prototype.add=function(t){var r=this;if(this.ondata||I(5),2&this.d)this.ondata(I(4+8*(1&this.d),0,1),null,!1);else{var i=nn(t.filename),e=i.length,o=t.comment,s=o&&nn(o),a=e!=t.filename.length||s&&o.length!=s.length,u=e+un(t.extra)+30;e>65535&&this.ondata(I(11,0,1),null,!1);var h=new n(u);hn(h,0,t,i,a,-1);var f=[h],c=function(){for(var t=0,n=f;t<n.length;t++)r.ondata(null,n[t],!1);f=[]},l=this.d;this.d=0;var p=this.u.length,v=K(t,{f:i,u:a,o:s,t:function(){t.terminate&&t.terminate()},r:function(){if(c(),l){var t=r.u[p+1];t?t.r():r.d=1}l=1}}),d=0;t.ondata=function(i,e,o){if(i)r.ondata(i,e,o),r.terminate();else if(d+=e.length,f.push(e),o){var s=new n(16);lt(s,0,134695760),lt(s,4,t.crc),lt(s,8,d),lt(s,12,t.size),f.push(s),v.c=d,v.b=u+d+16,v.crc=t.crc,v.size=t.size,l&&v.r(),l=1}else l&&c()},this.u.push(v)}},t.prototype.end=function(){var t=this;2&this.d?this.ondata(I(4+8*(1&this.d),0,1),null,!0):(this.d?this.e():this.u.push({r:function(){1&t.d&&(t.u.splice(-1,1),t.e())},t:function(){}}),this.d=3)},t.prototype.e=function(){for(var t=0,r=0,i=0,e=0,o=this.u;e<o.length;e++)i+=46+(h=o[e]).f.length+un(h.extra)+(h.o?h.o.length:0);for(var s=new n(i+22),a=0,u=this.u;a<u.length;a++){var h;hn(s,t,h=u[a],h.f,h.u,-h.c-2,r,h.o),t+=46+h.f.length+un(h.extra)+(h.o?h.o.length:0),r+=h.b}fn(s,t,this.u.length,i,r),this.ondata(null,s,!0),this.d=2},t.prototype.terminate=function(){for(var t=0,n=this.u;t<n.length;t++)n[t].t();this.d=2},t}();function dn(t,r,i){i||(i=r,r={}),"function"!=typeof i&&I(7);var e={};Qt(t,"",e,r);var o=Object.keys(e),s=o.length,a=0,u=0,h=s,f=Array(s),c=[],l=function(){for(var t=0;t<c.length;++t)c[t]()},p=function(t,n){xn(function(){i(t,n)})};xn(function(){p=i});var v=function(){var t=new n(u+22),r=a,i=u-a;u=0;for(var e=0;e<h;++e){var o=f[e];try{var s=o.c.length;hn(t,u,o,o.f,o.u,s);var c=30+o.f.length+un(o.extra),l=u+c;t.set(o.c,l),hn(t,a,o,o.f,o.u,s,u,o.m),a+=16+c+(o.m?o.m.length:0),u=l+s}catch(t){return p(t,null)}}fn(t,a,f.length,i,r),p(null,t)};s||v();for(var d=function(t){var n=o[t],r=e[n],i=r[0],h=r[1],d=V(),g=i.length;d.p(i);var y=nn(n),m=y.length,b=h.comment,w=b&&nn(b),x=w&&w.length,z=un(h.extra),k=0==h.level?0:8,M=function(r,i){if(r)l(),p(r,null);else{var e=i.length;f[t]=K(h,{size:g,crc:d.d(),c:i,f:y,m:w,u:m!=n.length||w&&b.length!=x,compression:k}),a+=30+m+z+e,u+=76+2*(m+z)+(x||0)+e,--s||v()}};if(m>65535&&M(I(11,0,1),null),k)if(g<16e4)try{M(null,kt(i,h))}catch(t){M(t,null)}else c.push(zt(i,h,M));else M(null,i)},g=0;g<h;++g)d(g);return l}function gn(t,r){r||(r={});var i={},e=[];Qt(t,"",i,r);var o=0,s=0;for(var a in i){var u=i[a],h=u[0],f=u[1],c=0==f.level?0:8,l=(M=nn(a)).length,p=f.comment,v=p&&nn(p),d=v&&v.length,g=un(f.extra);l>65535&&I(11);var y=c?kt(h,f):h,m=y.length,b=V();b.p(h),e.push(K(f,{size:h.length,crc:b.d(),c:y,f:M,m:v,u:l!=a.length||v&&p.length!=d,o:o,compression:c})),o+=30+l+g+m,s+=76+2*(l+g)+(d||0)+m}for(var w=new n(s+22),x=o,z=s-o,k=0;k<e.length;++k){var M;hn(w,(M=e[k]).o,M,M.f,M.u,M.c.length);var S=30+M.f.length+un(M.extra);w.set(M.c,M.o+S),hn(w,o,M,M.f,M.u,M.c.length,M.o,M.m),o+=16+S+(M.m?M.m.length:0)}return fn(w,o,e.length,z,x),w}_e.Zip=vn;var yn=function(){function t(){}return t.prototype.push=function(t,n){this.ondata(null,t,n)},t.compression=0,t}();_e.UnzipPassThrough=yn;var mn=function(){function t(){var t=this;this.i=new Mt(function(n,r){t.ondata(null,n,r)})}return t.prototype.push=function(t,n){try{this.i.push(t,n)}catch(t){this.ondata(t,null,n)}},t.compression=8,t}();_e.UnzipInflate=mn;var bn=function(){function t(t,n){var r=this;n<32e4?this.i=new Mt(function(t,n){r.ondata(null,t,n)}):(this.i=new St(function(t,n,i){r.ondata(t,n,i)}),this.terminate=this.i.terminate)}return t.prototype.push=function(t,n){this.i.terminate&&(t=D(t,0)),this.i.push(t,n)},t.compression=8,t}();_e.AsyncUnzipInflate=bn;var wn=function(){function t(t){this.onfile=t,this.k=[],this.o={0:yn},this.p=j}return t.prototype.push=function(t,r){var i=this;if(this.onfile||I(5),this.p||I(4),this.c>0){var e=Math.min(this.c,t.length),o=t.subarray(0,e);if(this.c-=e,this.d?this.d.push(o,!this.c):this.k[0].push(o),(t=t.subarray(e)).length)return this.push(t,r)}else{var s=0,a=0,u=void 0,h=void 0;this.p.length?t.length?((h=new n(this.p.length+t.length)).set(this.p),h.set(t,this.p.length)):h=this.p:h=t;for(var f=h.length,c=this.c,l=c&&this.d,p=function(){var t=ft(h,a);if(67324752==t){s=1,u=a,v.d=null,v.c=0;var n=ht(h,a+6),r=ht(h,a+8),e=2048&n,o=8&n,l=ht(h,a+26),p=ht(h,a+28);if(f>a+30+l+p){var d=[];v.k.unshift(d),s=2;var g,y=ft(h,a+18),m=ft(h,a+22),b=rn(h.subarray(a+30,a+=30+l),!e),w=an(h,a,p,2,y,m,0),x=w[0],z=w[1];o&&(x=-1-w[3]),a+=p,v.c=x;var k={name:b,compression:r,start:function(){if(k.ondata||I(5),x){var t=i.o[r];t||k.ondata(I(14,"unknown compression type "+r,1),null,!1),(g=x<0?new t(b):new t(b,x,z)).ondata=function(t,n,r){k.ondata(t,n,r)};for(var n=0,e=d;n<e.length;n++)g.push(e[n],!1);i.k[0]==d&&i.c?i.d=g:g.push(j,!0)}else k.ondata(null,j,!0)},terminate:function(){g&&g.terminate&&g.terminate()}};x>=0&&(k.size=x,k.originalSize=z),v.onfile(k)}return"break"}if(c){if(134695760==t)return u=a+=12+(-2==c&&8),s=3,v.c=0,"break";if(33639248==t)return u=a-=4,s=3,v.c=0,"break"}},v=this;a<f-4&&"break"!==p();++a);if(this.p=j,c<0){var d=h.subarray(0,s?u-12-(-2==c&&8)-(134695760==ft(h,u-16)&&4):a);l?l.push(d,!!s):this.k[+(2==s)].push(d)}if(2&s)return this.push(h.subarray(a),r);this.p=h.subarray(a)}r&&(this.c&&I(13),this.p=null)},t.prototype.register=function(t){this.o[t.compression]=t},t}();_e.Unzip=wn;var xn="function"==typeof queueMicrotask?queueMicrotask:"function"==typeof setTimeout?setTimeout:function(t){t()};function zn(t,r,i){i||(i=r,r={}),"function"!=typeof i&&I(7);var e=[],o=function(){for(var t=0;t<e.length;++t)e[t]()},s={},a=function(t,n){xn(function(){i(t,n)})};xn(function(){a=i});for(var u=t.length-22;101010256!=ft(t,u);--u)if(!u||t.length-u>65558)return a(I(13,0,1),null),o;var h=ht(t,u+8);if(h){var f=h,c=ft(t,u+16),l=117853008==ft(t,u-20);if(l){var p=ft(t,u-12);(l=101075792==ft(t,p))&&(f=h=ft(t,p+32),c=ft(t,p+48))}for(var v=r&&r.filter,d=function(r){var i=sn(t,c,l),u=i[0],f=i[1],p=i[2],d=i[3],g=i[4],y=on(t,i[5]);c=g;var m=function(t,n){t?(o(),a(t,null)):(n&&(s[d]=n),--h||a(null,s))};if(!v||v({name:d,size:f,originalSize:p,compression:u}))if(u)if(8==u){var b=t.subarray(y,y+f);if(p<524288||f>.8*p)try{m(null,Tt(b,{out:new n(p)}))}catch(t){m(t,null)}else e.push(At(b,{size:p},m))}else m(I(14,"unknown compression type "+u,1),null);else m(null,D(t,y,y+f));else m(null,null)},g=0;g<f;++g)d()}else a(null,{});return o}function kn(t,r){for(var i={},e=t.length-22;101010256!=ft(t,e);--e)(!e||t.length-e>65558)&&I(13);var o=ht(t,e+8);if(!o)return{};var s=ft(t,e+16),a=117853008==ft(t,e-20);if(a){var u=ft(t,e-12);(a=101075792==ft(t,u))&&(o=ft(t,u+32),s=ft(t,u+48))}for(var h=r&&r.filter,f=0;f<o;++f){var c=sn(t,s,a),l=c[0],p=c[1],v=c[2],d=c[3],g=c[4],y=on(t,c[5]);s=g,h&&!h({name:d,size:p,originalSize:v,compression:l})||(l?8==l?i[d]=Tt(t.subarray(y,y+p),{out:new n(v)}):I(14,"unknown compression type "+l):i[d]=D(t,y,y+p))}return i}retu
+/*SPLIT2*/
+<script>
+const $ = s => document.querySelector(s);
+var ENHANCEMENTS = {"street_trees": {"lead_agency": "City Public Works (StreetsLA) / Urban Forestry Division","process": "Board of Public Works street tree planting contract & Urban Forestry permit","beneficiary": "All Residents / Renters","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Cuts urban heat island 3-5°F, lowers cooling bills for unconditioned apartments; broad distribution prevents hyper-localized rent spikes."},"schoolyard_green": {"lead_agency": "School district (e.g. LAUSD Facilities Services) with partners such as Los Angeles Neighborhood Land Trust and Trust for Public Land","process": "District greening priority list (LAUSD Greening Index), board-approved capital project & grant match (Measure W, Prop 4)","beneficiary": "Students / Families","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Replaces asphalt on school grounds; benefits children; negligible direct rent capitalization on surrounding rental parcels."},"vacant_lot_green": {"lead_agency": "City Community Investment for Families & Landowner","process": "Interim lease agreement, clean & green grant award & community volunteer stewardship","beneficiary": "All Residents","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Blended neighborhood stabilization; reduces blight and gun violence; modest land value bump buffered by in-place rent controls."},"community_garden": {"lead_agency": "City Recreation and Parks or the LA Community Garden Council; County Parks (LA County Department of Parks and Recreation) outside the city","process": "Site lease or Recreation and Parks allocation, Measure A or Quimby funding & community garden operating agreement","beneficiary": "Renters / Low-Income Families","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Direct food security and green space access for apartment dwellers without private yards."},"green_alley": {"lead_agency": "City Public Works & LA County Flood Control District","process": "Measure W Municipal/Regional funding application & green alley engineering design","beneficiary": "Adjacent Residents","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Permeable pavers, stormwater, and pedestrian lighting; primarily localized sanitation and flood prevention."},"cool_pavement": {"lead_agency": "City Public Works (StreetsLA) & Urban Forestry","process": "Capital Improvement Program (CIP) allocation & Board of Public Works public hearing","beneficiary": "All Residents / Renters","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Surface temperature reduction on public rights-of-way; public good with zero rent-increase pass-through mechanism."},"pocket_park": {"lead_agency": "City Department of Recreation and Parks & City Council","process": "Lot acquisition negotiation, Quimby fee allocation & Park Commission approval","beneficiary": "Local Neighbors / Renters","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": true,"economic_nuance": "Open space in park-poor rental tracts; provides recreational access, moderate positive spillover."},"park_upgrade": {"lead_agency": "City Department of Recreation and Parks","process": "Park needs assessment priority ranking, Measure A funding & community design charrette","beneficiary": "All Residents / Families","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": true,"economic_nuance": "Upgraded playground equipment and lighting in existing municipal parks; no direct displacement driver."},"pickleball": {"lead_agency": "City Department of Recreation and Parks","process": "Park Advisory Board review, tennis court conversion approval & resurfacing RFP","beneficiary": "Recreation Players","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Court conversion; amenity sorting toward higher-income active adults; minimal displacement impact."},"tennis": {"lead_agency": "City Department of Recreation and Parks","process": "Park master plan update & Capital Improvement Program funding allocation","beneficiary": "Recreation Players","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Public tennis infrastructure; baseline municipal recreation."},"basketball": {"lead_agency": "City Department of Recreation and Parks (RAP)","process": "Quimby / Measure A grant allocation & Park Advisory Board hearing","beneficiary": "Youth / Renters","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "High-utilization recreation for youth and multi-family residents; zero luxury capitalization."},"dog_park": {"lead_agency": "City Department of Recreation and Parks (RAP)","process": "Quimby / Measure A grant allocation & Park Advisory Board hearing","beneficiary": "Dog Owners","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Fenced exercise space; highly desired by millennial renters and condo owners."},"pool": {"lead_agency": "City Department of Recreation and Parks (RAP)","process": "Quimby / Measure A grant allocation & Park Advisory Board hearing","beneficiary": "All Residents / Children","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Public swimming access; critical summer heat relief for households without private pools."},"splash_pad": {"lead_agency": "City Department of Recreation and Parks (RAP)","process": "Quimby / Measure A grant allocation & Park Advisory Board hearing","beneficiary": "Families / Children","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Free, accessible water play for young children in park-poor, renter-dense neighborhoods."},"skate_park": {"lead_agency": "City Department of Recreation and Parks (RAP)","process": "Quimby / Measure A grant allocation & Park Advisory Board hearing","beneficiary": "Youth","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Public youth athletic facility; minimal luxury real estate impact."},"sports_field": {"lead_agency": "City Department of Recreation and Parks (RAP)","process": "Quimby / Measure A grant allocation & Park Advisory Board hearing","beneficiary": "Youth / League Players","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Grass turf fields for community soccer/baseball; general civic amenity."},"rec_center": {"lead_agency": "City Department of Recreation and Parks (RAP)","process": "Quimby / Measure A grant allocation & Park Advisory Board hearing","beneficiary": "Youth, Seniors & Families","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Community programming, after-school care, cooling shelter, and civic space."},"restroom": {"lead_agency": "City Department of Recreation and Parks (RAP)","process": "Quimby / Measure A grant allocation & Park Advisory Board hearing","beneficiary": "Park Users / Unhoused","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Basic sanitation and clean drinking water in public spaces; high human-dignity utility."},"bus_lane": {"lead_agency": "LA Metro & LADOT","process": "Metro Board & City Council joint approval; transit lane designation under Caltrans/CVC","beneficiary": "Transit Commuters / Low-Income Renters","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Most Metro bus riders are low-income; dedicated lanes cut bus travel times by roughly a fifth to a third on treated corridors, with little direct rent-hike risk."},"brt": {"lead_agency": "LA Metro & Caltrans District 7","process": "Full CEQA/NEPA Environmental Impact Report, FTA Capital Investment Grant & Metro Board vote","beneficiary": "Transit Commuters / Renters","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": true,"economic_nuance": "High-capacity transit line with signal priority; speeds regional access; modest land uplift near stations."},"rail_station": {"lead_agency": "LA Metro & City Department of Transportation (LADOT)","process": "Corridor transit study, CEQA environmental review & Metro Board approval","beneficiary": "Regional Commuters / Landowners","displacement_risk": "high_risk","displacement_text": "High Risk","renter_direct": false,"economic_nuance": "Major rail infrastructure draws speculative land buying, upzoning and redevelopment of older apartments near stations (Kahn 2007)."},"bus_shelters": {"lead_agency": "City Bureau of Street Services (StreetsLA) Sidewalk and Transit Amenities Program; LA Metro outside the city","process": "STAP site request, Council office approval & contractor installation under the advertising concession","beneficiary": "Transit Commuters / Renters","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Shade, seating, and rain cover at bus stops; direct benefit to transit-dependent riders with zero land price escalation."},"traffic_calming": {"lead_agency": "City Department of Transportation (LADOT)","process": "Neighborhood speed radar study & Council District local return allocation","beneficiary": "Pedestrians / Local Residents","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Speed humps and chicanes reduce traffic violence on residential streets, protecting renter children."},"crosswalks": {"lead_agency": "City Department of Transportation (LADOT)","process": "Vision Zero pedestrian warrant study & LADOT rapid-response striping crew","beneficiary": "Pedestrians / Transit Commuters","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "High-visibility bulb-outs and pedestrian refuges eliminate fatal collisions on arterial corridors."},"road_diet": {"lead_agency": "City Department of Transportation (LADOT) & Public Works","process": "Traffic engineering study, community outreach & City Council district authorization","beneficiary": "Pedestrians, Cyclists, Local Residents","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": true,"economic_nuance": "Reallocates excessive vehicular lanes for safety and bike infrastructure; calms neighborhood speeds."},"sidewalks": {"lead_agency": "City Bureau of Street Services (StreetsLA)","process": "Willits v. City of LA ADA settlement compliance queue & concrete replacement contract","beneficiary": "Pedestrians / Mobility Impaired","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Repairs broken concrete and removes trip hazards (the Willits ADA settlement obliges LA City to fix sidewalks); essential basic infrastructure."},"street_lighting": {"lead_agency": "City Bureau of Street Lighting (BSL)","process": "Lighting assessment district vote or citywide energy-efficiency capital program","beneficiary": "Pedestrians / Shift Workers","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Pedestrian-scale LED lighting enhances nighttime safety for transit riders walking home late at night."},"cameras": {"lead_agency": "LAPD (or the city's police department) & City Council","process": "Police department site selection, Council office funding & privacy/retention policy review","beneficiary": "Police / Property Owners","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Surveillance cameras at hot spots; mixed community sentiment; potential civil liberties concerns."},"foot_patrol": {"lead_agency": "LAPD or the city's police department (LASD in contract cities and unincorporated areas)","process": "Hot-spot analysis by the police department & City Council budget allocation for patrol deployment","beneficiary": "All Residents / Shoppers","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "High-visibility foot patrols; short-term crime deterrence on commercial corridors."},"violence_interruption": {"lead_agency": "Mayor's Office of Gang Reduction and Youth Development (GRYD) in LA City; city or County Peace & Community programs elsewhere","process": "GRYD zone designation & contract with a community intervention provider; City Council budget allocation","beneficiary": "At-Risk Youth / Community","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Community-based gang intervention and truce mediation; saves lives in vulnerable renter tracts."},"bid": {"lead_agency": "Property Owners & City Council","process": "Prop 218 weighted property owner petition & City Council establishment ordinance","beneficiary": "Commercial Property / Business Owners","displacement_risk": "high_risk","displacement_text": "High Risk","renter_direct": false,"economic_nuance": "Business Improvement District assessments fund private security/clean teams; frequently precedes rapid commercial/residential gentrification."},"litter": {"lead_agency": "City Bureau of Sanitation (LASAN) & Board of Public Works","process": "CleanStat service routing & annual municipal operating budget appropriation","beneficiary": "All Residents","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": true,"economic_nuance": "Weekly public trash and bulky item cleanup; improves environmental dignity without raising rents."},"graffiti": {"lead_agency": "City Office of Community Beautification (Board of Public Works) & contracted removal crews","process": "MyLA311 request routing to the contracted graffiti-removal crew; annual operating budget appropriation","beneficiary": "Property Owners / Residents","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Rapid paint-out of tagging; municipal maintenance."},"encampment": {"lead_agency": "Mayor's Office (Inside Safe) & Los Angeles Homeless Services Authority (LAHSA); County Homeless Initiative outside the city","process": "Inside Safe or County encampment-resolution operation: outreach, interim housing placement & services contracts","beneficiary": "Unhoused Individuals / Neighbors","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Housing-first outreach, supportive services, and interim shelter; addresses homelessness humanely."},"blight_rehab": {"lead_agency": "City / County Housing Department (LAHD / LACDA)","process": "Affordable housing NOFA allocation, bond issuance & City Council approval","beneficiary": "Property Owners / Neighbors","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Rehabilitates abandoned single-family homes; eliminates blighting influence on adjacent owners."},"affordable_housing": {"lead_agency": "City / County Housing Department (LAHD / LACDA)","process": "Affordable housing NOFA allocation, bond issuance & City Council approval","beneficiary": "Low-Income Renters","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Deed-restricted 100% affordable housing (30-80% AMI) with permanent covenants (55 years); directly counters displacement."},"adu": {"lead_agency": "The homeowner, with the city's building department (LADBS in LA City) and City Planning","process": "Ministerial ADU permit (the city must act within 60 days of a complete application); standard plans speed review","beneficiary": "Homeowners","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": true,"economic_nuance": "Adds backyard rental unit; increases rental supply, but exempt from rent control and primarily enriches single-family lot owner."},"solar": {"lead_agency": "The homeowner, with LADWP or Southern California Edison for interconnection","process": "Building and electrical permit (SolarAPP+ instant permitting in many cities) & utility interconnection application","beneficiary": "Homeowners / Landlords","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Rooftop solar reduces electric bills for the property owner; renters rarely receive direct pass-through savings."},"undergrounding": {"lead_agency": "City Public Works, LADWP / SCE & CPUC","process": "Rule 20 / Municipal underground utility assessment district formation & utility engineering","beneficiary": "Homeowners / Utility","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Buries overhead electrical wires; high capital cost; visual aesthetic and wildfire risk mitigation for homeowners."},"ev_hub": {"lead_agency": "LADWP / Southern California Edison & City Fleet/Parking","process": "Electric utility service transformer upgrade & commercial EV charging operator lease","beneficiary": "EV Drivers / Fleet Operators","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "DC fast chargers; primarily benefits EV owners; minimal direct utility for transit-reliant renters."},"microgrid": {"lead_agency": "Municipal Electric Utility (LADWP / SCE) & Public Works","process": "Grid interconnection capacity study & Utility Commission contract award","beneficiary": "Community / Facility Users","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Resilience hub maintaining islanded power during blackouts at community centers/clinics."},"noise_wall": {"lead_agency": "Caltrans District 7 & LA Metro (soundwall program), with the City","process": "Caltrans/Metro noise-barrier eligibility study (Caltrans Noise Abatement protocol) & Metro Board programming of local funds","beneficiary": "Freeway-Adjacent Residents","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Decibel reduction (5-10 dB) along major highway corridors; protects lower-income freeway-adjacent tenants."},"freeway_cap": {"lead_agency": "Caltrans District 7, LA Metro & the City (Bureau of Engineering / Recreation and Parks)","process": "Caltrans air-rights agreement, CEQA/NEPA environmental review, Metro and City Council funding votes","beneficiary": "Surrounding Neighborhood","displacement_risk": "high_risk","displacement_text": "High Risk","renter_direct": false,"economic_nuance": "Multi-block park cap over sunken freeway; massive regional amenity triggering intense real estate speculation and land value spikes."},"school_filters": {"lead_agency": "School district (e.g. LAUSD Facilities) with South Coast AQMD","process": "District facilities work order; AQMD / settlement-funded classroom air-filtration grants","beneficiary": "Students / Teachers","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "High-efficiency MERV 16/HEPA filtration in classrooms near freeways; protects children from diesel PM2.5."},"school_bond": {"lead_agency": "School District (e.g. LAUSD) or County Health Services","process": "School Board bond program allocation or County Board of Supervisors approval","beneficiary": "Students / Homeowners","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Campus modernizations, science labs, and air conditioning funded by LAUSD general obligation bonds."},"library": {"lead_agency": "Los Angeles Public Library or LA County Library (or the city's library department)","process": "Library capital program / branch renovation list & City Council or Board of Supervisors budget allocation","beneficiary": "All Residents / Students / Renters","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Free access to books, computers, Wi-Fi, air conditioning, and job-seeking resources; vital public commons."},"clinic": {"lead_agency": "Federally Qualified Health Center (FQHC) & County Dept of Health","process": "HRSA Section 330 federal grant, county clinic licensing & lease execution","beneficiary": "Uninsured / Medicaid Renters","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Federally Qualified Health Center (FQHC) offering sliding-scale primary, pediatric, and dental care."},"grocery": {"lead_agency": "City Economic & Workforce Development / City Council","process": "Business Improvement District (BID) formation or commercial facade grant cycle","beneficiary": "Local Residents / Renters","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Eliminates food desert; provides fresh produce and affordable staples within walking distance."},"main_street": {"lead_agency": "City Economic & Workforce Development / City Council","process": "Business Improvement District (BID) formation or commercial facade grant cycle","beneficiary": "Retailers / Property Owners","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Facade improvement grants and streetscape enhancements on neighborhood commercial corridors."},"outdoor_dining": {"lead_agency": "City Economic & Workforce Development / City Council","process": "Business Improvement District (BID) formation or commercial facade grant cycle","beneficiary": "Restaurant Owners / Diners","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Parklets and sidewalk dining corrals under Al Fresco ordinance; enhances vibrancy for diners."},"farmers_market": {"lead_agency": "City Economic & Workforce Development / City Council","process": "Business Improvement District (BID) formation or commercial facade grant cycle","beneficiary": "Local Vendors / Shoppers","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Weekly open-air market; enhances food options and weekend foot traffic."},"upzone_transit": {"lead_agency": "City Planning Commission & City Council","process": "Transit-Oriented Development (TOD) community plan update, CEQA review & City Council ordinance","beneficiary": "Developers / Commuters","displacement_risk": "high_risk","displacement_text": "High Risk","renter_direct": false,"economic_nuance": "Upzoning near transit without aggressive anti-demolition and right-to-return covenants risks tearing down older rent-stabilized stock."},"protected_bike": {"lead_agency": "City Department of Transportation (LADOT)","process": "Mobility Plan corridor engineering, parking lane reallocation & Council approval","beneficiary": "Cyclists / Commuters","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": true,"economic_nuance": "Physical concrete curb protection for active transportation; safe commuting for non-car owners."},"corridor_trail": {"lead_agency": "City Department of Recreation and Parks (RAP)","process": "Quimby / Measure A grant allocation & Park Advisory Board hearing","beneficiary": "Cyclists, Walkers, Neighbors","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Multi-use path along utility/river corridors; enhances active mobility; moderate property uplift."},"transit_priority": {"lead_agency": "LA Metro & City Department of Transportation (LADOT)","process": "Corridor transit study, CEQA environmental review & Metro Board approval","beneficiary": "Transit Commuters / Renters","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Transit signal priority and bus bulbs accelerate existing bus service; immediate user-cost savings."},"speed_cameras": {"lead_agency": "City Department of Transportation & LAPD","process": "State AB 645 speed safety camera program approval & City Council system contract","beneficiary": "Pedestrians / Drivers","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Automated speed enforcement under AB 645; discourages dangerous speeding; municipal fine risk for drivers."},"roundabout": {"lead_agency": "City Department of Transportation (LADOT) & Public Works","process": "Traffic engineering study, community outreach & City Council district authorization","beneficiary": "Drivers / Pedestrians","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Intersection traffic calming; reduces severe broadside collisions."},"ped_signals": {"lead_agency": "City Department of Transportation (LADOT)","process": "Pedestrian signal warrant analysis & Traffic signal modernization CIP","beneficiary": "Pedestrians / Transit Riders","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Leading Pedestrian Intervals (LPI) give walkers a 3-7 second head start before turning vehicles."},"school_street": {"lead_agency": "City Department of Transportation (LADOT) & Public Works","process": "Traffic engineering study, community outreach & City Council district authorization","beneficiary": "Students / Parents","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Car-free zones during morning drop-off and afternoon pick-up; protects school children."},"murals": {"lead_agency": "City Department of Cultural Affairs (mural registration) & the property owner","process": "Original Art Mural registration (LA City Mural Ordinance), owner consent & neighborhood notice; artist commission","beneficiary": "Community / Pedestrians","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Neighborhood cultural identity and public art; zero direct rent pass-through."},"tiny_forest": {"lead_agency": "City Public Works (StreetsLA) & Urban Forestry","process": "Capital Improvement Program (CIP) allocation & Board of Public Works public hearing","beneficiary": "All Residents","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Pocket biodiversity and cooling; small footprint limits speculative property revaluation."},"fiber_5g": {"lead_agency": "Telecom carriers with the City's Bureau of Engineering and Information Technology Agency (permits)","process": "Right-of-way and small-cell permits (Bureau of Engineering), franchise/pole agreements & broadband grant applications","beneficiary": "Broadband Users / Telecommuters","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "High-speed gigabit fiber and 5G cellular coverage; general digital infrastructure."},"green_street": {"lead_agency": "City Public Works (StreetsLA) & Urban Forestry","process": "Capital Improvement Program (CIP) allocation & Board of Public Works public hearing","beneficiary": "All Residents","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Bioswales and rain-garden curb extensions; green infrastructure benefits without direct rent shocks."},"stormwater_park": {"lead_agency": "LA County Flood Control District (Safe Clean Water Program) & City Recreation and Parks","process": "Measure W Regional Watershed Area Steering Committee (WASC) scoring (60+ pts) & SIP grant","beneficiary": "All Residents / Sports Leagues","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Large underground stormwater cistern beneath sports fields; utility-scale municipal drainage."},"corner_store": {"lead_agency": "City Planning (zoning change) & Economic and Workforce Development (grants)","process": "Zoning code amendment or specific-plan change by City Council, then small-business facade and equipment grants","beneficiary": "Neighborhood Renters","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Allows healthy produce and basic sundries in walkable neighborhood commercial corners."},"food_hall": {"lead_agency": "Private Developer & City Planning Dept","process": "Commercial conditional use permit (CUP), building plan check & health department approval","beneficiary": "Food Entrepreneurs / Diners","displacement_risk": "high_risk","displacement_text": "High Risk","renter_direct": false,"economic_nuance": "Curated artisan culinary hall; often catalyzes neighborhood re-branding and upscale demographic turnover."},"park_cafe": {"lead_agency": "City Recreation and Parks (Board of Recreation and Park Commissioners)","process": "Concession request for proposals & Park Commission approval of the operating agreement","beneficiary": "Park Visitors","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Park kiosk concession offering refreshments; minor park activation."},"new_school": {"lead_agency": "School District (e.g. LAUSD) or County Health Services","process": "School Board bond program allocation or County Board of Supervisors approval","beneficiary": "Families / Students","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Relieves overcrowding in urban school districts; reduces class sizes and commute distances."},"plaza": {"lead_agency": "City Department of Transportation (LADOT People St program) & City Council office","process": "People St plaza application by a community partner, LADOT design review & Council office support","beneficiary": "Pedestrians / Local Shoppers","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": true,"economic_nuance": "Pedestrianized public plaza with seating, planters, and events; creates civic gathering space."},"slow_streets": {"lead_agency": "City Department of Transportation (LADOT) & Public Works","process": "Traffic engineering study, community outreach & City Council district authorization","beneficiary": "Neighbors / Children","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": true,"economic_nuance": "Neighborhood greenways prioritized for walking and play; calms local traffic."},"transit_shade": {"lead_agency": "City Bureau of Street Services (StreetsLA) Sidewalk and Transit Amenities Program; LA Metro","process": "STAP shade-structure request, Council office approval & installation under the advertising concession","beneficiary": "Transit Commuters / Renters","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Solar canopies over bus waiting areas; protects low-income commuters from extreme heat exposure."},"bike_share": {"lead_agency": "LA Metro (Metro Bike Share) & City Department of Transportation (LADOT)","process": "Metro Bike Share expansion request, LADOT station siting & Council office approval","beneficiary": "Commuters / Renters","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "First/last mile micro-mobility; reduced transportation expenses for urban renters."},"ebike_library": {"lead_agency": "City Department of Transportation (LADOT) or a community nonprofit, with LA Metro grant support","process": "Grant application (CARB Clean Mobility, Metro) & operating agreement with a community organization","beneficiary": "Low-Income Renters / Commuters","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Free or subsidized long-term e-bike loans; replaces expensive vehicle trips for working-class tenants."},"microtransit": {"lead_agency": "LA Metro (Metro Micro) or the city's transit division","process": "Metro Micro zone request or city shuttle contract; Measure M local return and LCTOP funding","beneficiary": "Seniors / Renters / Transit Dependent","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "On-demand neighborhood electric shuttles bridging gaps in fixed-route bus service."},"alley_gating": {"lead_agency": "City Bureau of Engineering & Council office (alley vacation or gating permit); Bureau of Street Lighting","process": "Alley vacation or gating application by abutting owners, Bureau of Engineering review & Council approval; lighting assessment","beneficiary": "Abutting Residents","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Gating, lighting, and paving problem alleys; eliminates illicit dumping and crime hot spots."},"cooling_center": {"lead_agency": "City Recreation and Parks or the library system, with the County Office of Emergency Management and Public Health","process": "Cooling-center designation, HVAC/backup-power retrofit in the capital budget & grant match (Prop 4, FEMA BRIC)","beneficiary": "Vulnerable Renters / Seniors","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Designated air-conditioned shelter during extreme heat events for tenants without adequate home cooling."},"wayfinding": {"lead_agency": "City Department of Transportation (LADOT) with the local business improvement district","process": "Wayfinding sign plan, LADOT encroachment/sign permits & BID or Council office funding","beneficiary": "Visitors / Pedestrians","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Informational signs directing pedestrians to transit, civic hubs, and historic landmarks."},"box_art": {"lead_agency": "City Council office with the Department of Cultural Affairs and LADOT (signal-box owner)","process": "Council office sponsorship, LADOT permission for the signal cabinet & artist selection","beneficiary": "All Residents","displacement_risk": "neutral","displacement_text": "Neutral / Low Risk","renter_direct": false,"economic_nuance": "Decorative vinyl wraps on traffic signal boxes; modest visual beautification."},"vending_zone": {"lead_agency": "City Bureau of Street Services (StreetsLA) sidewalk vending program & Economic and Workforce Development","process": "Vending-zone designation ordinance, StreetsLA permits & utility/shade improvements in the capital budget","beneficiary": "Street Vendors / Low-Income Shoppers","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Permitted sidewalk vending plazas with utility connections, protecting immigrant micro-entrepreneurs."},"night_market": {"lead_agency": "City Economic & Workforce Development / City Council","process": "Business Improvement District (BID) formation or commercial facade grant cycle","beneficiary": "Local Artisans / Community","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Affordable evening market supporting local vendors and affordable culinary culture."},"clt": {"lead_agency": "Community Land Trust & LAHD","process": "Measure ULA tenant acquisition grant & property transfer into non-profit land trust","beneficiary": "Working-Class Renters","displacement_risk": "protective","displacement_text": "Protective / Direct Renter Benefit","renter_direct": true,"economic_nuance": "Community Land Trust permanently removes multi-family buildings from speculative market, establishing non-profit cooperative or tenant-owned housing."}};
+if (typeof window !== "undefined") window.ENHANCEMENTS = ENHANCEMENTS;
+
+// Global active house tracker for reactive story toggling & cost recalculation
+var activeHouse = null; if (typeof window !== "undefined") window.activeHouse = activeHouse;
+
+// Return per $1 exactly as the model ranks it (the same number the map, tooltips and report use), plus
+// (a) a judgment band by evidence grade and (b) an experimental local adjustment for heat, canopy gap, bus frequency,
+// dining density, freeway proximity and price tier. The adjustment is shown for context only: it never changes the
+// headline, the ranking or the map colors.
+const VPD_GREEN = ["street_trees", "pocket_park", "cool_pavement", "community_garden", "tiny_forest", "green_street", "schoolyard_green", "vacant_lot_green"];
+const VPD_WALK = ["bus_shelters", "transit_shade", "protected_bike", "crosswalks", "street_lighting", "bike_share", "transit_priority", "bus_lane", "brt", "slow_streets", "ped_signals"];
+const VPD_BAND = { A: 0.09, B: 0.12, C: 0.16, D: 0.22, U: 0.22 };
+function calibrateVpd(v, grade, id, m) {
+  const f = x => x >= 10 ? String(Math.round(x)) : x >= 1 ? x.toFixed(1) : x.toFixed(2);
+  if (v == null || isNaN(v) || v <= 0) return { low: "–", high: "–", badge: "", str: "–", estStr: "–", adjStr: "", point: null, adj: null, factor: 1, notes: [], band: 0 };
+  const g = (grade || "C").toUpperCase(), m_ = m || {};
+  let factor = 1; const notes = [];
+  if (VPD_GREEN.includes(id)) {
+    const tg = m_.tg != null ? +m_.tg : 20, ht = m_.ht != null ? +m_.ht : 0;     // canopy gap to goal; heat vs county median
+    const heat = 1 + Math.min(Math.max(ht * 0.035 + (tg - 15) * 0.008, -0.20), 0.35);
+    const hv = m_.hv != null ? +m_.hv : 850000;
+    const wealth = Math.pow(850000 / Math.max(hv, 300000), 0.28);                  // damps percentage effects in the priciest areas
+    factor *= heat * wealth; notes.push(`heat and canopy gap ×${heat.toFixed(2)}`, `price tier ×${wealth.toFixed(2)}`);
+  } else if (VPD_WALK.includes(id)) {
+    const bt = m_.bt != null ? +m_.bt : 4, din = m_.din != null ? +m_.din : 2;     // buses per hour; restaurants and cafés nearby
+    const walk = 1 + Math.min(Math.max((bt - 6) * 0.02 + Math.min(din, 15) * 0.015, -0.15), 0.30);
+    factor *= walk; notes.push(`bus frequency and dining density ×${walk.toFixed(2)}`);
+  }
+  if (m_.fw != null && m_.fw < 300) { factor *= 0.90; notes.push("within 300 m of a freeway ×0.90"); }
+  const rad = VPD_BAND[g] ?? 0.22, low = v * (1 - rad), high = v * (1 + rad), adj = v * factor;
+  return { low: f(low), high: f(high), point: v, adj, factor, notes, band: rad,
+    badge: g !== "NONE" ? "Grade " + g : "", str: "$" + f(low) + " – $" + f(high) + " / $1", estStr: `~$${f(v)} / $1`,
+    adjStr: Math.abs(factor - 1) < 0.005 ? "" : `~$${f(adj)} / $1 (×${factor.toFixed(2)})` };
+}
+function formatVpdRange(v, grade, id, m) { return calibrateVpd(v, grade, id, m); }
+
+const css = (n, fb) => getComputedStyle(document.documentElement).getPropertyValue(n).trim() || fb;
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt$ = v => v == null || isNaN(v) ? "–" : v >= 1e9 ? "$" + (v/1e9).toFixed(1) + "B" : v >= 1e6 ? "$" + (v/1e6).toFixed(v >= 1e7 ? 0 : 1) + "M" : v >= 1e3 ? "$" + Math.round(v/1e3) + "k" : "$" + Math.round(v);
+const fmtN = v => v == null || isNaN(v) ? "–" : Math.round(v).toLocaleString();
+const GRADE_TXT = { A: "A · measured on LA sales", B: "B · studied elsewhere", C: "C · transferred from a related study", D: "D · assumption", U: "U · unverified research lead (round 6)" };
+const allowed = id => { const g = D.catalog[id].grade; return g === "none" || g <= $("#evid").value; };
+const fvpd = v => "$" + (v < 1 ? v.toFixed(2) : v < 10 ? v.toFixed(1) : Math.round(v));
+const CATS = ["Greening", "Parks & recreation", "Transit", "Streets & safety", "Clean streets", "Housing", "Energy", "Environment", "Schools & services", "Amenities & economy", "Zoning"];
+const CAT_COLOR = { "Greening": "--cat-3", "Parks & recreation": "--park-line", "Transit": "--cat-1", "Streets & safety": "--school", "Clean streets": "--warn-ink", "Housing": "--cat-2", "Energy": "--fw-casing", "Environment": "--water-line", "Schools & services": "--seq-5", "Amenities & economy": "--heat-4", "Zoning": "--ink-3" };
+const METRICS = {
+  top_vpd: { label: "Best value per $1 (where ≥ $1)", f: p => p.v >= 1 ? p.v : null, unit: fvpd, ramp: "seq", none: "Nothing returns $1 per $1" },
+  pkg_cost: { label: "Cost of every project returning ≥ $1 per $1", f: p => p.pc || null, unit: fmt$, ramp: "seq" },
+  value: { label: "Typical home value", f: p => p.hv, unit: fmt$, ramp: "seq" },
+  heat: { label: "Heat vs. county median", f: p => p.ht, unit: v => (v > 0 ? "+" : "") + v.toFixed(1) + "°F", ramp: "heat" },
+  crime: { label: "Violent crimes per 1,000 residents, 12 mo", f: p => p.vc, unit: v => v.toFixed(1), ramp: "heat" },
+  park: { label: "Park acres within ½ mile", f: p => p.pa, unit: v => v.toFixed(1) + " ac", ramp: "seq" },
+  bus: { label: "Buses per hour, busiest stop within 400 m (7–9am)", f: p => p.bt, unit: v => Math.round(v) + "/hr", ramp: "seq" },
+  sites: { label: "Open street-tree sites", f: p => p.ts, unit: v => fmtN(v), ramp: "heat" },
+  profit: { label: "Experimental: Profit potential (unverified)", f: p => p.pp > 0 ? p.pp * 100 : null, unit: v => v.toFixed(1) + "%", ramp: "seq", none: "No paying projects or sites" },
+};
+var D, map, bgs, layers = {}, selected = null, selLayer = null, breaks = [], tiles = null, byId = new Map();
+
+// Speed: the core bundle (map shapes, scores, catalog) is unpacked at start. Block-group details ship as small
+// gzip chunks and are unpacked the first time anything reads D.details[id], so existing code needs no changes.
+async function b64Bytes(text) {
+  try { return new Uint8Array(await (await fetch("data:application/octet-stream;base64," + text)).arrayBuffer()); }
+  catch { const s = atob(text), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i); return u; }
+}
+function lazyDetails() {
+  const el = $("#details-chunks"), src = el && el.textContent.trim();
+  if (!src || src.startsWith("/*")) return {};
+  const { key, chunks } = JSON.parse(src), open = new Map(), extra = {};   // extra: records added after load (Orange County)
+  const chunk = k => {
+    if (!open.has(k)) {
+      const b = chunks[k]; let v = {};
+      if (b) { const s = atob(b), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i);
+        v = JSON.parse(fflate.strFromU8(fflate.gunzipSync(u))); }
+      open.set(k, v);
+    }
+    return open.get(k);
+  };
+  return new Proxy(extra, {
+    get: (t, id) => typeof id === "string" ? (id in t ? t[id] : chunk(id.slice(0, key))[id]) : undefined,
+    has: (t, id) => typeof id === "string" && (id in t || id in chunk(id.slice(0, key))),
+    set: (t, id, v) => { t[id] = v; return true; },
+  });
+}
+// Every area on the map: LA County block groups plus Orange County tracts once that bundle is unpacked.
+function allFeatures() {
+  const la = (typeof D !== "undefined" && D && D.bgs && D.bgs.features) ? D.bgs.features : [];
+  const oc = (typeof D_OC !== "undefined" && D_OC && D_OC.features) ? D_OC.features : [];
+  return oc.length ? la.concat(oc) : la;
+}
+const isOCArea = m => !!(m && m.county === "Orange County");
+// Speed: the nine "is this lot inside X?" house checks (historic districts and monuments, hillside, landslide,
+// liquefaction, fault, fire zones) are answered from polygons shipped with the page (pipeline stage `overlays`),
+// unpacked one ~5 km grid cell at a time. Any layer missing from the build is still queried live.
+let OV;
+function overlayData() {
+  if (OV !== undefined) return OV;
+  const t = ($("#overlay-chunks") || {}).textContent, s = t && t.trim();
+  OV = s && !s.startsWith("/*") && s !== "null" ? JSON.parse(s) : null;
+  if (OV) OV.open = new Map();
+  return OV;
+}
+function inRing(r, lat, lng) {
+  let inside = false;
+  for (let i = 0, j = r.length - 1; i < r.length; j = i++) {
+    const [yi, xi] = r[i], [yj, xj] = r[j];
+    if ((yi > lat) !== (yj > lat) && lng < (xj - xi) * (lat - yi) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+function localOverlays(ll) {
+  const O = overlayData(); if (!O) return {};
+  const k = `${Math.floor((ll.lng + 180) / O.cell)},${Math.floor((ll.lat + 90) / O.cell)}`;
+  if (!O.open.has(k)) {
+    let items = [];
+    const b = O.chunks[k];
+    if (b) { const s = atob(b), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i);
+      items = JSON.parse(fflate.strFromU8(fflate.gunzipSync(u))).map(([li, ai, rings]) => [li, ai, rings.map(decodeLine)]); }
+    O.open.set(k, items);
+  }
+  const out = Object.fromEntries(O.layers.map(l => [l, { ok: true, v: [], local: true }]));
+  for (const [li, ai, rings] of O.open.get(k))
+    if (inRing(rings[0], ll.lat, ll.lng) && !rings.slice(1).some(h => inRing(h, ll.lat, ll.lng))) out[O.layers[li]].v.push(O.attrs[ai]);
+  return out;
+}
+async function unpack() {
+  const bin = await b64Bytes($("#bundle").textContent.trim());
+  const d = JSON.parse(await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream("gzip"))).text());
+  if (!d.details) d.details = lazyDetails();
+  if (typeof ENHANCEMENTS !== "undefined" && d && d.catalog) {
+    for (const k in ENHANCEMENTS) {
+      if (d.catalog[k]) Object.assign(d.catalog[k], ENHANCEMENTS[k]);
+    }
+  }
+  if (d && d.funding && d.funding["W"]) {
+    d.funding["W"] = ["Measure W (Safe Clean Water)", "Regional 50% through Watershed Area Steering Committees (110-point scoring, 60 to qualify, benefits to disadvantaged communities at least 110% of their population share); Municipal 40% straight to cities for local stormwater, green-street and tree projects; District 10% for administration, education and workforce", "https://safecleanwaterla.org"];
+  }
+  return d;
+}
+const ramp = kind => [0,1,2,3,4,5,6].map(i => css(`--${kind}-${i}`));
+function computeBreaks() {
+  const m = METRICS[$("#metric").value]; if (!m) return [];
+  const feats = (activeCounty === "oc" && D_OC) ? D_OC.features : ((typeof D !== "undefined" && D && D.bgs && D.bgs.features) ? D.bgs.features : []);
+  if (!feats.length) return [];
+  const v = feats.map(f => m.f(f.properties)).filter(x => x != null && !isNaN(x)).sort((a, b) => a - b);
+  return v.length ? [1,2,3,4,5,6].map(i => v[Math.min(v.length - 1, Math.floor(i / 7 * v.length))]) : [];
+}
+function colorFor(p) {
+  const k = $("#metric").value;
+  if (k === "top") return p.t ? css(CAT_COLOR[D.catalog[p.t].category] || "--ink-3") : css("--none");
+  const v = METRICS[k].f(p); if (v == null || isNaN(v)) return css("--none");
+  let i = 0; while (i < breaks.length && v > breaks[i]) i++;
+  return ramp(METRICS[k].ramp)[i];
+}
+const zoningOn = () => typeof map !== "undefined" && map && map._loaded && $("#l-zone").checked && map.getZoom() >= 14;
+const streetLevel = () => typeof map !== "undefined" && map && map._loaded && map.getZoom() >= 17;
+const aerialOn = () => !!$("#l-aerial") && $("#l-aerial").checked;
+const styleBg = f => ({ fillColor: colorFor(f.properties), fillOpacity: zoningOn() ? 0.12 : aerialOn() ? (streetLevel() ? 0.05 : 0.3) : streetLevel() ? 0.22 : tiles ? 0.45 : 0.75, color: css("--block-line"), weight: 0.4 });
+function legend() {
+  const k = $("#metric").value, el = $("#legend");
+  if (!el) return;
+  const feats = (activeCounty === "oc" && D_OC) ? D_OC.features : ((typeof D !== "undefined" && D && D.bgs && D.bgs.features) ? D.bgs.features : []);
+  if (!feats.length) { el.innerHTML = ""; return; }
+  if (k === "top") {
+    const used = new Set(feats.map(f => f.properties.t && D.catalog[f.properties.t] && D.catalog[f.properties.t].category).filter(Boolean));
+    el.innerHTML = `<h4>Best improvement type</h4><div class="cats">${CATS.filter(c => used.has(c)).map(c => `<div><i style="background:${css(CAT_COLOR[c])}"></i>${esc(c)}</div>`).join("")}<div><i style="background:${css("--none")}"></i>Nothing returns $1 per $1</div></div>`;
+    return;
+  }
+  const m = METRICS[k];
+  el.innerHTML = breaks.length ? `<h4>${m.label}</h4><div class="sw">${ramp(m.ramp).map(c => `<i style="background:${c}"></i>`).join("")}</div><div class="ends"><span>${m.unit(breaks[0])}</span><span>${m.unit(breaks[5])}</span></div><div class="note">7 equal-count groups. Gray = ${m.none || "no data"}.</div>`
+    : `<h4>${m.label}</h4><div class="note">No data loaded for this.</div>`;
+}
+
+function drawContext() {
+  if (typeof D === "undefined" || !D || !D.layers || typeof map === "undefined" || !map) return;
+  Object.values(layers).forEach(l => l && map.removeLayer(l)); layers = {};
+  const L_ = D.layers, on = id => $(id) && $(id).checked;
+  const noPts = { pointToLayer: (f, ll) => L.circleMarker(ll, { radius: 0, opacity: 0, fillOpacity: 0, interactive: false }) };
+  if (on("#l-parks")) {
+    if (L_.parks) layers.parks = L.geoJSON(L_.parks, { ...noPts, renderer: parkCanvas(),
+      style: f => ({ fillColor: f.properties.k === "beach" ? css("--sand", "#eadfbf") : css("--park"), fillOpacity: f.properties.k === "open space" ? .55 : .85,
+                     color: css("--park-line"), weight: f.properties.a < 2 ? 1.2 : .6 }),
+      interactive: false }).addTo(map);
+    if (L_.park_labels && L_.park_labels.length) layers.parkLabels = L.layerGroup().addTo(map);
+    if (L_.water) layers.water = L.geoJSON(L_.water, { ...noPts, interactive: false, style: { color: css("--water-line"), weight: 1.8, opacity: .9 } }).addTo(map);
+  }
+  if (on("#l-roads")) {
+    if (L_.arterials) layers.art = L.geoJSON(L_.arterials, { ...noPts, interactive: false, style: { color: css("--road-casing"), weight: 1, opacity: .8 } });
+    if (L_.streets) { layers.streets = L.layerGroup().addTo(map); layers.stLabels = L.layerGroup().addTo(map); }
+    if (L_.freeways) { layers.fwC = L.geoJSON(L_.freeways, { ...noPts, interactive: false, style: { color: css("--fw-casing"), weight: 3.6, opacity: .9 } }).addTo(map);
+      layers.fw = L.geoJSON(L_.freeways, { ...noPts, interactive: false, style: { color: css("--fw"), weight: 2.2, opacity: 1 } }).addTo(map); }
+    if (L_.walls) layers.walls = L.geoJSON(L_.walls, { ...noPts, interactive: false, style: { color: css("--ink"), weight: 2, opacity: .8 } });
+  }
+  if (on("#l-transit")) {
+    if (L_.rail) layers.rail = L.geoJSON(L_.rail, { ...noPts, interactive: false, style: { color: css("--rail"), weight: 1.8, dashArray: "6 4", opacity: .9 } }).addTo(map);
+    if (L_.stations) layers.stations = L.geoJSON(L_.stations, { pointToLayer: (f, ll) => L.circleMarker(ll, { radius: 4, color: css("--sheet"), weight: 1.5, fillColor: css("--rail"), fillOpacity: 1 }),
+      onEachFeature: (f, l) => f.properties.n && l.bindTooltip(esc(f.properties.n) + " station") }).addTo(map);
+    if (L_.stops) layers.stops = L.geoJSON(L_.stops, { pointToLayer: (f, ll) => L.circleMarker(ll, { radius: 2.2, weight: 0, fillColor: css("--cat-1"), fillOpacity: .8 }),
+      onEachFeature: (f, l) => l.bindTooltip(`${f.properties.t} buses an hour (7–9am)`) });
+  }
+  if (on("#l-amen") && L_.amenities) {
+    const sym = { "tennis": "T", "pickleball": "P", "basketball": "B", "playground": "▲", "dog park": "D", "pool": "≈", "skate park": "S", "library": "L", "community garden": "G" };
+    layers.amen = L.geoJSON(L_.amenities, { pointToLayer: (f, ll) => L.circleMarker(ll, { radius: 3.5, color: css("--sheet"), weight: 1, fillColor: css("--school"), fillOpacity: 1 }),
+      onEachFeature: (f, l) => l.bindTooltip(`<b>${esc(f.properties.k)}</b>${f.properties.n ? " · " + esc(f.properties.n) : ""}`) });
+  }
+  if (on("#l-fac") && L_.facilities) { layers.fac = L.layerGroup(); layers.facArea = L.layerGroup().addTo(map); _fDrawn.clear(); }
+  if (on("#l-under") && L_.underused) { layers.under = L.layerGroup().addTo(map); _uDrawn.clear(); }
+  if (on("#l-proj") && L_.projects) layers.proj = L.layerGroup();
+  if (on("#l-transit") && L_.rail_con) {
+    layers.railCon = L.layerGroup(L_.rail_con.filter(r => r.length === 2).map(([n, e]) => L.polyline(decodeLine(e), { interactive: !!n, color: "#e8590c", weight: 2.4, dashArray: "2 6", opacity: .95 }).bindTooltip(`${n ? esc(n) + " · " : ""}rail under construction`))).addTo(map);
+    (L_.stations_con || []).filter(r => r.length === 3).forEach(([n, lat, lon]) => layers.railCon.addLayer(L.circleMarker([lat, lon], { radius: 5, color: "#e8590c", weight: 2, fillColor: css("--sheet"), fillOpacity: 1 }).bindTooltip(`<b>${esc(n)}</b> · station under construction`)));
+  }
+  if (on("#l-zone") && L_.zoning) { layers.zone = L.layerGroup().addTo(map); layers.zoneLabels = L.layerGroup().addTo(map); }
+  if (on("#l-hoods") && D.hoods) {
+    layers.hoods = L.geoJSON(D.hoods, { ...noPts, interactive: false, style: { fill: false, color: css("--hood-line"), weight: 1.1, opacity: .5 } });
+    layers.hoodLabels = L.layerGroup((D.hood_labels || []).map(([n, lat, lon]) => L.marker([lat, lon], { interactive: false, keyboard: false, icon: L.divIcon({ className: "", iconSize: null, html: `<div class="lbl-hood" style="transform:translate(-50%,-50%)">${esc(n)}</div>` }) })));
+    layers.cities = L.geoJSON(D.cities, { ...noPts, interactive: false, style: { fill: false, color: css("--hood-line"), weight: 1.8, opacity: .55 } }).addTo(map);
+    layers.cityLabels = L.layerGroup((D.city_labels || []).map(([n, lat, lon]) => L.marker([lat, lon], { interactive: false, keyboard: false, icon: L.divIcon({ className: "", iconSize: null, html: `<div class="lbl-city" style="transform:translate(-50%,-50%)">${esc(n)}</div>` }) })));
+  }
+  zoomed();
+}
+function zoomed() {
+  const z = map.getZoom();
+  const toggle = (l, show) => { if (!l) return; if (show && !map.hasLayer(l)) l.addTo(map); if (!show && map.hasLayer(l)) map.removeLayer(l); };
+  toggle(layers.art, z >= 12); toggle(layers.walls, z >= 14); toggle(layers.stops, z >= 13); toggle(layers.amen, z >= 13);
+  toggle(layers.hoods, z >= 12); toggle(layers.hoodLabels, z >= 13 && z < 15); toggle(layers.cityLabels, z >= 10 && z < 13);
+  drawStreets(); drawLabels(); drawZoning(); drawFacilities(); drawUnder(); drawProjects();
+  const zon = zoningOn() + "|" + streetLevel(); if (zon !== zoomed._last) { zoomed._last = zon; if (typeof activeCounty !== "undefined" && activeCounty === "oc" && typeof ocLayer !== "undefined" && ocLayer && ocLayer.setStyle) ocLayer.setStyle(styleBg); else if (typeof bgs !== "undefined" && bgs && bgs.setStyle) bgs.setStyle(styleBg); }
+}
+
+// ---------------- streets, names, shields and park labels (drawn only for what's on screen)
+let _parkCanvas = null, _stCanvas = null;
+// Parks and streets draw on their own canvases in panes that ignore the pointer, so clicks and hovers always
+// reach the block groups underneath (a canvas on top would otherwise swallow every click).
+function passPane(name, z) {
+  if (!map.getPane(name)) { const p = map.createPane(name); p.style.zIndex = z; p.style.pointerEvents = "none"; }
+  return name;
+}
+const parkCanvas = () => _parkCanvas || (_parkCanvas = L.canvas({ padding: .3, pane: passPane("parksPane", 405) }));
+function decodeLine(str) {
+  const pts = []; let i = 0, lat = 0, lon = 0;
+  while (i < str.length) {
+    for (const k of [0, 1]) { let b, sh = 0, r = 0;
+      do { b = str.charCodeAt(i++) - 63; r |= (b & 0x1f) << sh; sh += 5; } while (b >= 0x20);
+      const d = r & 1 ? ~(r >> 1) : r >> 1; if (k === 0) lat += d; else lon += d; }
+    pts.push([lat / 1e5, lon / 1e5]);
+  }
+  return pts;
+}
+const _cellCache = new Map(); let _fwyLines = null;
+function cellLines(key) {
+  if (!_cellCache.has(key)) _cellCache.set(key, (D.layers.streets.cells[key] || []).map(([c, n, e]) => ({ c, n: D.layers.streets.names[n], pts: decodeLine(e) })));
+  return _cellCache.get(key);
+}
+function visibleCells(pad = 0) {
+  const S = D.layers.streets, b = map.getBounds().pad(pad), k = [];
+  for (let x = Math.floor((b.getWest() + 180) / S.cell); x <= Math.floor((b.getEast() + 180) / S.cell); x++)
+    for (let y = Math.floor((b.getSouth() + 90) / S.cell); y <= Math.floor((b.getNorth() + 90) / S.cell); y++) k.push(x + "," + y);
+  return k;
+}
+const _drawn = new Map();
+function drawStreets() {
+  if (!map._loaded) return;
+  if (!layers.streets) return;
+  const z = map.getZoom(), want = new Set();
+  // collectors (class 2) from zoom 13, local streets (class 3) from zoom 14; arterials/freeways already drawn
+  if (z >= 13 && visibleCells(0).length <= 40) visibleCells(.2).forEach(k => { want.add(k + "|2"); if (z >= 14) want.add(k + "|3"); });
+  for (const [key, lyr] of _drawn) if (!want.has(key)) { layers.streets.removeLayer(lyr); _drawn.delete(key); }
+  _stCanvas = _stCanvas || L.canvas({ padding: .3, pane: passPane("streetsPane", 406) });
+  for (const key of want) {
+    if (_drawn.has(key)) continue;
+    const [cell, c] = key.split("|"), lines = cellLines(cell).filter(l => l.c === +c).map(l => l.pts);
+    if (!lines.length) continue;
+    const lyr = L.polyline(lines, { renderer: _stCanvas, interactive: false, color: css(+c === 2 ? "--road-casing" : "--res"), weight: +c === 2 ? 1.6 : 1.1, opacity: .95 });
+    layers.streets.addLayer(lyr); _drawn.set(key, lyr);
+  }
+}
+function shieldHtml(ref) {
+  const r = (String(ref).split(";").map(x => x.trim()).find(x => !/hist/i.test(x)) || ""), m = r.match(/^(I|US|CA|SR)[ -]?(\d+[A-Z]?)\b/i);
+  if (!m) return null;
+  const t = m[1].toUpperCase(), cls = t === "I" ? "" : t === "US" ? " us" : " sr";
+  return `<div class="shield${cls}" style="transform:translate(-50%,-50%)">${t === "I" ? "I-" : t === "US" ? "US " : ""}${m[2]}</div>`;
+}
+function drawLabels() {
+  if (!map._loaded) return;
+  const z = map.getZoom(), taken = [], fits = (p, r) => { if (taken.some(q => Math.abs(q.x - p.x) < r && Math.abs(q.y - p.y) < r * .5)) return false; taken.push(p); return true; };
+  const mk = (ll, html) => L.marker(ll, { interactive: false, keyboard: false, icon: L.divIcon({ className: "", iconSize: null, html }) });
+  if (layers.stLabels) {
+    layers.stLabels.clearLayers();
+    const size = map.getSize(), inView = p => p.x > 0 && p.y > 0 && p.x < size.x && p.y < size.y;
+    if (z >= 10.5) {
+      // spacing between repeated labels of the same street, in screen pixels
+      const gap = { 0: 380, 1: 420, 2: 380, 3: 300 }, minZ = { 0: 10.5, 1: 13, 2: 14, 3: 15 };
+      if (!_fwyLines) _fwyLines = (D.layers.streets.fwy || []).map(([c, n, e]) => ({ c, n: D.layers.streets.names[n], pts: decodeLine(e) }));
+      const vb = map.getBounds().pad(.1);
+      const lines = _fwyLines.filter(l => l.pts.some(p => vb.contains(p)))
+        .concat(z >= 13 && visibleCells(0).length <= 60 ? visibleCells(0).flatMap(cellLines).filter(l => z >= minZ[l.c]).sort((a, b) => a.c - b.c) : []);
+      let count = 0;
+      const placed = new Map(); // street name -> screen points already labeled
+      const farFromSame = (n, p, g) => !(placed.get(n) || []).some(q => q.distanceTo(p) < g);
+      for (const l of lines) {
+        if (count > 500) break;
+        const px = l.pts.map(p => map.latLngToContainerPoint(p)), g = gap[l.c];
+        let since = g / 3;
+        for (let i = 1; i < px.length; i++) {
+          const a = px[i - 1], b = px[i], seg = a.distanceTo(b);
+          since += seg;
+          if (since < g / 3 || seg < (l.c === 0 ? 4 : l.n.length * 6.2)) continue;
+          const mid = L.point((a.x + b.x) / 2, (a.y + b.y) / 2);
+          const key = l.c === 0 ? (shieldHtml(l.n) || l.n) : l.n;
+          if (!inView(mid) || !farFromSame(key, mid, g)) continue;
+          let html;
+          if (l.c === 0) { html = shieldHtml(l.n); if (!html || !fits(mid, 50)) continue; }
+          else {
+            let ang = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI; if (ang > 90) ang -= 180; if (ang < -90) ang += 180;
+            if (!fits(mid, Math.max(70, l.n.length * 6))) continue;
+            html = `<div class="lbl-st${l.c === 1 ? " art" : ""}" style="transform:translate(-50%,-50%) rotate(${ang.toFixed(1)}deg)">${esc(l.n)}</div>`;
+          }
+          layers.stLabels.addLayer(mk(map.containerPointToLatLng(mid), html)); since = 0; count++;
+          if (!placed.has(key)) placed.set(key, []); placed.get(key).push(mid);
+        }
+      }
+    }
+  }
+  if (layers.parkLabels) {
+    layers.parkLabels.clearLayers();
+    const b = map.getBounds(), minAc = z >= 15 ? 0 : z >= 14 ? 1 : z >= 13 ? 5 : z >= 12 ? 25 : z >= 11 ? 150 : 1e9;
+    let n = 0;
+    for (const [nm, lat, lon, ac] of D.layers.park_labels) {
+      if (ac < minAc) break;
+      if (!b.contains([lat, lon])) continue;
+      const p = map.latLngToContainerPoint([lat, lon]);
+      if (!fits(p, Math.max(60, nm.length * 6))) continue;
+      layers.parkLabels.addLayer(mk([lat, lon], `<div class="lbl-park" style="transform:translate(-50%,-50%)">${esc(nm)}</div>`));
+      if (++n > 150) break;
+    }
+  }
+}
+
+// ---------------- public facilities (County LMS + OpenStreetMap)
+const FAC_STYLE = { "school": ["#2563eb", "S"], "college": ["#4338ca", "U"], "library": ["#7c3aed", "L"], "city hall": ["#111827", "C"],
+  "fire station": ["#dc2626", "F"], "police": ["#1e3a8a", "P"], "post office": ["#6b7280", "✉"], "hospital": ["#be123c", "H"], "clinic": ["#db2777", "+"],
+  "community center": ["#ea580c", "R"], "museum": ["#0f766e", "M"], "courthouse": ["#78350f", "J"] };
+function drawFacilities() {
+  if (!map._loaded || !layers.fac) return;
+  drawFacilityAreas();
+  const z = map.getZoom(), b = map.getBounds().pad(.1), K = D.layers.fac_kinds;
+  layers.fac.clearLayers();
+  if (z < 12) { if (map.hasLayer(layers.fac)) map.removeLayer(layers.fac); return; }
+  if (!map.hasLayer(layers.fac)) layers.fac.addTo(map);
+  // schools are numerous: from zoom 13; civic buildings from zoom 12
+  for (const [k, n, lat, lon] of D.layers.facilities) {
+    if (!facOn.has(k)) continue;
+    const kind = K[k]; if (z < 13 && (kind === "school" || kind === "clinic")) continue;
+    if (!b.contains([lat, lon])) continue;
+    const [col, ch] = FAC_STYLE[kind] || ["#444", "•"];
+    layers.fac.addLayer(L.marker([lat, lon], { keyboard: false, icon: L.divIcon({ className: "", iconSize: [14, 14], html: `<div class="fac" style="background:${col}">${ch}</div>` }) })
+      .bindTooltip(`<b>${esc(kind[0].toUpperCase() + kind.slice(1))}</b>${n ? " · " + esc(n) : ""}`).on("click", e => selectAt(e.latlng)));
+  }
+}
+
+let facOn = new Set(Array.from({ length: 20 }, (_, i) => i));
+const _fDrawn = new Map(); let _fCanvas = null;
+function cellKeys(cell, pad) {
+  const b = map.getBounds().pad(pad), k = [];
+  for (let x = Math.floor((b.getWest() + 180) / cell); x <= Math.floor((b.getEast() + 180) / cell); x++)
+    for (let y = Math.floor((b.getSouth() + 90) / cell); y <= Math.floor((b.getNorth() + 90) / cell); y++) k.push(x + "," + y);
+  return k;
+}
+function drawFacilityAreas() {
+  // footprints (school grounds, library and civic buildings) from zoom 14, colored like their markers
+  const A = D.layers.fac_areas; if (!A || !layers.facArea) return;
+  const want = new Set(map.getZoom() >= 14 ? cellKeys(A.cell, .2) : []);
+  for (const [k, l] of _fDrawn) if (!want.has(k)) { layers.facArea.removeLayer(l); _fDrawn.delete(k); }
+  _fCanvas = _fCanvas || L.canvas({ padding: .3, pane: passPane("facPane", 407) });
+  for (const k of want) {
+    if (_fDrawn.has(k)) continue;
+    const polys = (A.cells[k] || []).filter(([fk]) => facOn.has(fk)).map(([fk, rings]) => { const col = (FAC_STYLE[D.layers.fac_kinds[fk]] || ["#444"])[0];
+      return L.polygon(rings.map(decodeLine), { renderer: _fCanvas, interactive: false, color: col, weight: 1.6, fillColor: col, fillOpacity: .18 }); });
+    const g = L.layerGroup(polys); layers.facArea.addLayer(g); _fDrawn.set(k, g);
+  }
+}
+
+// ---------------- work already under way: housing approved/permitted/completed (HCD reports), LA affordable pipeline, new-building permits
+const PJ_STYLE = { "housing completed": "#15803d", "housing permitted": "#2563eb", "housing approved": "#7c3aed", "affordable housing": "#db2777",
+  "new apartments": "#0891b2", "new ADU": "#ca8a04", "new house": "#a16207", "new building": "#64748b", "city capital project": "#0f766e" };
+function drawProjects() {
+  if (!map._loaded || !layers.proj) return;
+  layers.proj.clearLayers();
+  const z = map.getZoom();
+  if (z < 13) { if (map.hasLayer(layers.proj)) map.removeLayer(layers.proj); return; }
+  if (!map.hasLayer(layers.proj)) layers.proj.addTo(map);
+  const b = map.getBounds().pad(.1), K = D.layers.pj_kinds; let n = 0;
+  for (const [k, nm, ad, st, u, yr, lat, lon] of D.layers.projects) {
+    if (!b.contains([lat, lon])) continue; if (++n > 1500) break;
+    const kind = K[k], big = u && u >= 10;
+    layers.proj.addLayer(L.circleMarker([lat, lon], { radius: big ? 5 + Math.min(Math.sqrt(u) / 2, 6) : 3.2, color: "#fff", weight: 1, fillColor: PJ_STYLE[kind] || "#666", fillOpacity: .9 })
+      .bindTooltip(`<b>${esc(kind[0].toUpperCase() + kind.slice(1))}</b>${nm ? " · " + esc(nm) : ""}${ad ? "<br>" + esc(ad) : ""}${u ? `<br>${fmtN(u)} home${u > 1 ? "s" : ""}` : ""}${st ? " · " + esc(st) : ""}${yr ? " · " + esc(yr) : ""}`)
+      .on("click", e => selectAt(e.latlng)));
+  }
+}
+
+// ---------------- underused land: parking lots, golf courses, vacant parcels, lightly built commercial lots
+const UCOL = { "parking lot": "#6b7280", "golf course": "#65a30d", "vacant": "#d97706", "lightly built commercial": "#9333ea" };
+const _uDrawn = new Map();
+function siteHtml(s) {
+  const A = D.under.assumptions || {};
+  const BS = { built: "Already built", building: "Under construction", planned: "Project already approved" };
+  return `<div class="small" style="max-width:300px">${s.bs ? `<div class="site-done">${BS[s.bs]}: not counted as underused</div>` : ""}<b>${esc(s.k[0].toUpperCase() + s.k.slice(1))}</b>${s.bs ? ' <span class="muted">(per the Assessor\'s use code, which can lag construction)</span>' : ""}${s.nm ? " · " + esc(s.nm) : ""}${s.ad ? "<br>" + esc(s.ad) : ""}
+    <br>${s.ac.toFixed(s.ac < 10 ? 2 : 0)} acres${s.use ? " · " + esc(s.use) : ""}
+    ${s.lav != null ? `<br>Assessed land value: <b>${fmt$(s.lav)}</b>${s.by ? ` (Prop 13 base from ${s.by})` : ""}` : ""}
+    ${s.mkt != null ? `<br>Estimated market land value: <b>~${fmt$(s.mkt)}</b>` : ""}
+    <br>Zoning: ${esc(s.z || s.zc || "unknown")}${s.rail != null && s.rail < 805 ? ` · ${(s.rail / 1609).toFixed(2)} mi from ${esc(s.st || "rail")}${s.sts === "coming" ? " (station under construction)" : ""}` : ""}
+    ${s.own ? `<br><b>Publicly owned:</b> ${esc(s.own)} (County public-agency parcels)` : ""}${s.known ? `<br><b>Known site:</b> ${esc(s.known)}` : ""}${s.ease ? `<br><b>Conservation easement:</b> recorded easement on this land (state CCED); building is generally not allowed.` : ""}
+    ${s.he != null ? `<br><b>Already planned:</b> this site is in the city's Housing Element inventory${s.he ? ` for ~${fmtN(s.he)} homes` : ""}.` : ""}
+    <br><b>${s.bs ? "Status" : "Could be"}:</b> ${esc(s.idea)}
+    ${s.margin != null && s.homes ? `<br>Rough development margin: <b>${s.margin >= 0 ? "~" + fmt$(s.margin) : "negative (" + fmt$(s.margin) + ")"}</b> (${fmtN(s.homes)} homes)` : ""}
+    <br><span class="muted">Screening estimate: apartment value from LA rents and cap rates, build cost from LA case studies (round-7 research); land prices and fees are estimates.</span></div>`;
+}
+function drawUnder() {
+  const U = D.layers.underused; if (!map._loaded || !U || !layers.under) return;
+  const want = new Set(map.getZoom() >= 13 ? cellKeys(U.cell, .2) : []);
+  for (const [k, l] of _uDrawn) if (!want.has(k)) { layers.under.removeLayer(l); _uDrawn.delete(k); }
+  for (const k of want) {
+    if (_uDrawn.has(k)) continue;
+    const g = L.layerGroup((U.cells[k] || []).map(([sid, rings]) => { const s = D.under.sites[sid]; if (!s) return null; const col = UCOL[s.k] || "#888";
+      const done = !!s.bs;
+      return L.polygon(rings.map(decodeLine), done ? { color: "#868e96", weight: 1.2, fillColor: "#868e96", fillOpacity: .08, dashArray: "1 4" }
+          : { color: col, weight: 1.4, fillColor: col, fillOpacity: .35, dashArray: s.k === "parking lot" ? "3 3" : null })
+        .bindTooltip(done ? `${{ built: "already built", building: "under construction", planned: "project approved" }[s.bs]} (was listed as ${esc(s.k)}) · click for details`
+          : `${esc(s.k)} · ${s.ac.toFixed(1)} ac${s.mkt ? " · ~" + fmt$(s.mkt) + " land" : ""} (click for more)`, { sticky: true }).bindPopup(() => siteHtml(s), { maxWidth: 320 })
+        .on("click", () => { if (selected !== s.gid) select(s.gid, false); }); }).filter(Boolean));
+    layers.under.addLayer(g); _uDrawn.set(k, g);
+  }
+}
+
+// ---------------- plain-language zoning: what a zone code lets you build (summaries; the city's code is the authority)
+const ZBASE_LA = [
+  [/^OS$/, "Open space: parks and natural land; no homes."], [/^A1$/, "Agricultural: one home per 2+ acres, farming and animals."],
+  [/^A2$/, "Agricultural: one home per 5+ acres, farming."], [/^RA$/, "Suburban: one house per 17,500+ sq ft lot, some animals."],
+  [/^RE(\d+)$/, m => `Estate homes: one house per ${m[1]},000+ sq ft lot (plus ADUs).`], [/^RS$/, "Suburban: one house per 7,500+ sq ft lot (plus ADUs)."],
+  [/^R1[VFRH]\d?$/, "One house per 5,000+ sq ft lot (plus ADUs), with stricter house-size limits to curb mansions."],
+  [/^R1$/, "One house per 5,000+ sq ft lot, plus an ADU and junior ADU; SB 9 can allow two homes."],
+  [/^RU$|^RZ/, "Small-lot houses: one house per small lot (about 2,500–3,500 sq ft)."], [/^RW1$/, "Venice waterways: one house per lot."],
+  [/^RW2$/, "Venice waterways: up to two homes per lot."], [/^R2$/, "Two-family: a duplex or two houses per 5,000 sq ft lot."],
+  [/^RD(\d(\.\d)?)$/, m => `Townhomes or small apartments: one home per ${fmtN(+m[1] * 1000)} sq ft of lot.`],
+  [/^R3$/, "Apartments: about one home per 800 sq ft of lot (a 5,000 sq ft lot holds ~6)."], [/^RAS3$/, "Apartments with shops allowed on the ground floor (R3 density)."],
+  [/^R4$/, "Apartments: about one home per 400 sq ft of lot (a 5,000 sq ft lot holds ~12)."], [/^RAS4$/, "Apartments with ground-floor shops (R4 density)."],
+  [/^R5$/, "High-rise apartments: about one home per 200 sq ft of lot."], [/^RMP$/, "Mobile home park."],
+  [/^CR$/, "Limited commercial: offices, banks, clinics; homes at R4 density."], [/^C1$/, "Neighborhood shops and offices; homes allowed at R3 density."],
+  [/^C1\.5$/, "Shops, offices and hotels; homes allowed at R4 density."], [/^C2$/, "Commercial: shops, restaurants, offices; apartments allowed at R4 density."],
+  [/^C4$/, "Commercial like C2 (a few uses such as auto repair excluded); apartments at R4 density."], [/^C5$/, "Commercial including light industry; apartments at R4 density."],
+  [/^CM$/, "Commercial-manufacturing: workshops, wholesale, offices; apartments at R3 density."], [/^MR[12]$/, "Restricted industrial: light industry and offices, no new homes."],
+  [/^M1$/, "Limited industrial: light manufacturing, warehouses; no new homes."], [/^M2$/, "Light industrial: manufacturing, storage; no homes."],
+  [/^M3$/, "Heavy industrial; no homes."], [/^P$/, "Parking lots (often paired with a commercial zone next door)."], [/^PB$/, "Parking buildings."],
+  [/^PF$/, "Public facilities: schools, fire stations, government buildings."], [/^SL$/, "Submerged lands (harbor and ocean)."],
+  [/^HI$|^HJ$|^HR$/, "Hybrid industrial: light industry and creative offices, with live-work units."], [/^NI$/, "Neighborhood industrial: small industry and workshops."],
+  [/^U[RVICN]\d?$|^(RI|IG|GC)$/, "Zone from a specific plan (for example the Cornfield Arroyo Seco plan): see that plan's rules."],
+  [/^LAX|^ADP|^PV|^WC|^CEC|^USC|^PVSP/, "Covered by a specific plan or airport plan: see that plan's rules."],
+];
+const ZHD_LA = { "1": "height district 1: no fixed height in most zones, but floor area is capped (1.5× the lot in commercial zones, 3× in residential)",
+  "1L": "height limit 75 ft (about 6 stories)", "1VL": "height limit 45 ft (about 3–4 stories)", "1XL": "height limit 30 ft (2 stories)", "1SS": "one story only",
+  "2": "floor area up to 6× the lot (mid-rise)", "3": "floor area up to 10× the lot (high-rise)", "4": "floor area up to 13× the lot (high-rise)" };
+const ZTAG = { Q: "Q conditions: extra site-specific limits from the ordinance that zoned it", T: "T (tentative): the zone takes effect only after conditions such as street improvements are met",
+  F: "F: a special condition recorded for this site (check ZIMAS)", D: "D limit: height or floor area capped below the district's normal limit",
+  CPIO: "CPIO overlay: community-plan rules on design and height, sometimes with bonuses for affordable homes", HPOZ: "historic district: exterior changes need design review",
+  O: "oil drilling district", RIO: "LA River overlay: landscaping and design rules near the river", CUGU: "Clean Up Green Up overlay: stricter rules for polluting uses",
+  SN: "sign district", K: "horsekeeping allowed", POD: "pedestrian-oriented district: storefronts and limits on drive-throughs", CDO: "community design overlay",
+  HCR: "hillside construction rules", RFA: "residential floor-area limits", CA: "commercial and artcraft district", FH: "fence-height district", MU: "mixed-use district",
+  NSO: "neighborhood stabilization overlay", RG: "rear-yard rules", SP: "specific plan" };
+const ZBASE_CO = [
+  [/^R-1$/, "One house per lot (usually 5,000+ sq ft), plus ADUs; SB 9 can allow two homes."], [/^R-2$/, "Two-family: a duplex or two houses per lot."],
+  [/^R-3$/, "Apartments, limited density (about 30 homes per acre)."], [/^R-4$/, "Apartments, medium density (about 50 homes per acre)."],
+  [/^R-5$/, "High-density apartments."], [/^R-A$/, "Houses on large lots with small farm animals."], [/^RPD$/, "Planned residential development (density set by the plan)."],
+  [/^A-1$/, "Light agriculture: houses on large lots, some farming and animals."], [/^A-2$/, "Heavy agriculture: farming and ranching, houses on large lots."],
+  [/^C-1$/, "Restricted business: offices and small shops."], [/^C-2$/, "Neighborhood shops and services; homes allowed in mixed-use projects."],
+  [/^C-3$/, "General commercial; homes allowed in mixed-use projects."], [/^C-H$/, "Commercial highway: auto-oriented services."],
+  [/^C-M$/, "Commercial-manufacturing: workshops, wholesale."], [/^C-R$/, "Commercial recreation: amusement and sports uses."], [/^CPD$/, "Planned commercial development."],
+  [/^M-1$/, "Light manufacturing; no new homes."], [/^M-1\.5$/, "Restricted heavy manufacturing; no new homes."], [/^M-2/, "Heavy manufacturing; no homes."],
+  [/^MPD$/, "Planned industrial development."], [/^MXD/, "Mixed use: apartments with shops or offices."], [/^IT$/, "Institutional: schools, hospitals, churches."],
+  [/^O-S$|^OS$/, "Open space; no homes."], [/^W$/, "Watershed: protected natural land."], [/^SP$/, "Specific plan: see that plan's rules."], [/^B-[12]$/, "Buffer strip between zones."],
+  [/^PR$/, "Public recreation."], [/^SR-D$/, "Scientific research and development."],
+];
+const ZBASE_SC = [
+  [/^NU\d$/, "Rural homes on large lots (non-urban)."], [/^UR1$/, "Houses at up to ~2 per acre."], [/^UR2$/, "Houses at up to ~5 per acre."],
+  [/^UR3$/, "Houses and townhomes at up to ~11 per acre."], [/^UR4$/, "Townhomes and apartments at up to ~18 per acre."], [/^UR5$/, "Apartments at up to ~30 per acre."],
+  [/^CN$/, "Neighborhood shops."], [/^CC$/, "Community commercial."], [/^CR$/, "Regional commercial (malls, big stores)."], [/^CO$/, "Commercial offices."],
+  [/^MX/, "Mixed use: homes with shops or offices."], [/^BP$/, "Business park."], [/^I$/, "Industrial."], [/^OS$|^PI$/, "Open space or public land."],
+];
+const ZCAT_TXT = { "single-family": "Mostly one house per lot (plus ADUs).", "multifamily": "Apartments, townhomes or duplexes.", "commercial / mixed use": "Shops and offices; many commercial zones also allow apartments.",
+  "industrial": "Industry and warehouses; new homes generally not allowed.", "open space / public": "Parks, open space or public facilities.", "agricultural": "Farming, with homes on large lots.",
+  "parking": "Parking.", "other": "Special or planned zone: check the city's code." };
+function explainZone(code, cat, juris) {
+  const raw = String(code || "").toUpperCase().trim(); if (!raw) return null;
+  const tags = []; let t = raw;
+  t = t.replace(/[\[\(]([A-Z]+)[\]\)]/g, (_, x) => { for (const ch of x.length > 2 ? [x] : x.split("")) if (ZTAG[ch]) tags.push(ZTAG[ch]); return ""; });
+  const la = /los angeles/i.test(juris || "") && !/unincorporated/i.test(juris || ""), co = /unincorporated/i.test(juris || ""), sc = /santa clarita/i.test(juris || "");
+  let base = null, extra = [], bkey = null;
+  if (co || (!la && !sc && /^[A-Z]+-\d/.test(t))) {
+    const parts = t.split("-"); let b = parts[0];
+    if (parts.length > 1 && /^\d(\.\d)?$|^[A-Z]$/.test(parts[1])) { b += "-" + parts[1]; parts.splice(0, 2); } else parts.splice(0, 1);
+    const hit = ZBASE_CO.find(([re]) => re.test(b)); base = hit ? hit[1] : null; bkey = b;
+    for (const p of parts) { if (/^\d{4,}$/.test(p)) extra.push(`minimum lot ${fmtN(+p)} sq ft`); else if (/^\d+U$/.test(p)) extra.push(`up to ${parseInt(p)} homes per acre`);
+      else if (/^\d+$/.test(p)) extra.push(`minimum lot ${p} acre${+p > 1 ? "s" : ""}`); else if (p === "DP") extra.push("needs an approved development program");
+      else if (p === "P") extra.push("parking combining zone: parking lots allowed, the underlying zone still applies"); else if (ZTAG[p]) extra.push(ZTAG[p]); }
+  } else if (sc) {
+    const hit = ZBASE_SC.find(([re]) => re.test(t)); base = hit ? hit[1] : null; bkey = t;
+  } else {
+    const parts = t.split("-"); let b = parts.shift();
+    const qd = b.match(/^([QT]+)(?=[A-Z]{1,2}\d|C\d|R\d|RD|RE|RS|M\d|CM|CR|P)/); if (qd) { for (const ch of qd[1]) if (ZTAG[ch]) tags.push(ZTAG[ch]); b = b.slice(qd[1].length); }
+    const hit = ZBASE_LA.find(([re]) => re.test(b)); base = hit ? (typeof hit[1] === "function" ? hit[1](b.match(hit[0])) : hit[1]) : null; bkey = b;
+    for (let p of parts) { const d = /^(1L|1VL|1XL|1SS|[1-4])D$/.test(p); if (d) p = p.slice(0, -1);
+      if (ZHD_LA[p]) extra.push(ZHD_LA[p]); if (d) extra.push(ZTAG.D); else if (ZTAG[p]) extra.push(ZTAG[p]); }
+  }
+  // round-10 research rows (official zone names, verified height and floor-area limits)
+  const jz = la ? "Los Angeles" : co ? "Unincorporated LA County" : sc ? "Santa Clarita" : String(juris || "").replace(/ \(SCAG 2019\)$/, "");
+  const rz = ((D.r10 || {}).zp || {})[jz], row = rz && bkey ? rz[bkey] : null, facts = [];
+  if (row) {
+    if (!base && row[0]) base = row[0];
+    const hm = String(row[1]).match(/^(?:front )?(\d+)/);
+    if (hm) facts.push(/front/.test(row[1]) ? `height ${row[1].replace(/,/g, " ft,")} ft` : `height ${hm[1]} ft${/(\d) stor/.test(row[1]) ? " (" + row[1].match(/(\d) stor/)[1] + " stories)" : ""}`);
+    const rf = String(row[2]).match(/RFAR ([.\d]+),.*,([.\d]+) for lot bins/), rb = String(row[2]).match(/RFAR ([.\d]+)/), dl = String(row[2]).match(/^(?:Maximum generally |Generally )?1 dwelling\/(\d+) ?sqft|^Generally (\d+) sqft lot area per dwelling/);
+    if (rf) facts.push(`house size up to ${(+rf[1]).toFixed(2)}× the lot on lots of 6,000 sq ft or less, down to ${(+rf[2]).toFixed(2)}× on lots over 10,000 sq ft`);
+    else if (rb) facts.push(`house size up to ${(+rb[1]).toFixed(2)}× the lot area`);
+    else if (dl) facts.push(`one home per ${fmtN(+(dl[1] || dl[2]))} sq ft of lot`);
+    else if (/FAR/.test(row[2]) && row[2].length < 90) facts.push(row[2].replace(/sqft/g, "sq ft"));
+    const ml = String(row[3]).match(/^(\d+)/); if (ml) facts.push(`minimum lot ${fmtN(+ml[1])} sq ft${/generally/.test(row[3]) ? " (generally)" : ""}`);
+  }
+  return { base: base || ZCAT_TXT[cat] || "Special zone: check the city's code.", more: [...extra, ...tags], facts, known: !!base, official: row ? row[0] : null };
+}
+function zoneSentence(code, cat, juris) {
+  const e = explainZone(code, cat, juris); if (!e) return "";
+  return e.base + (e.facts.length ? " Code: " + e.facts.join("; ") + "." : "") + (e.more.length ? " Also: " + e.more.join("; ") + "." : "");
+}
+
+// ---------------- zoning polygons (zoom 14+), colored by what each zone allows
+const ZCOL = { "single-family": "#f6d36b", "multifamily": "#e8833a", "commercial / mixed use": "#d4383c", "industrial": "#8e6bbf",
+  "open space / public": "#4f9d5d", "agricultural": "#b9c97a", "parking": "#9aa0a6", "other": "#c7c7c7" };
+let _zCanvas = null; const _zDrawn = new Map(), _zDec = new Map();
+function zCell(key) {
+  if (!_zDec.has(key)) _zDec.set(key, (D.layers.zoning.cells[key] || []).map(([c, z, rings]) => { const rr = rings.map(decodeLine), b = L.latLngBounds(rr[0]), cc = b.getCenter();
+    return { cat: D.layers.zoning.cats[c], zone: D.layers.zoning.zones[z], juris: (D.layers.zoning.jur || [])[(D.layers.zoning.zj || [])[z]] || "", rings: rr, lat: cc.lat, lon: cc.lng }; }));
+  return _zDec.get(key);
+}
+let _zKey = null;
+function zoneKey(want) {
+  if (!_zKey) { _zKey = L.control({ position: "topright" }); _zKey.onAdd = () => { const d = L.DomUtil.create("div", "zone-key"); L.DomEvent.disableScrollPropagation(d); L.DomEvent.disableClickPropagation(d); return d; }; }
+  const show = layers.zone && want && want.size && map.getZoom() >= 14;
+  if (!show) { if (_zKey._map) _zKey.remove(); return; }
+  if (!_zKey._map) _zKey.addTo(map);
+  const b = map.getBounds(), cnt = new Map();
+  for (const k of want) for (const p of zCell(k)) { if (!b.contains([p.lat, p.lon])) continue;
+    const base = String(p.zone).toUpperCase().replace(/[\[\(][A-Z]+[\]\)]/g, "").split("-").slice(0, /^[A-Z]+-\d/.test(String(p.zone).replace(/[\[\(][A-Z]+[\]\)]/g, "")) && !/los angeles/i.test(p.juris) || /unincorporated/i.test(p.juris) ? 2 : 1).join("-").replace(/^[QT]+(?=[A-Z])/, "");
+    const e = cnt.get(base) || { n: 0, cat: p.cat, juris: p.juris }; e.n++; cnt.set(base, e); }
+  const top = [...cnt.entries()].sort((a, b) => b[1].n - a[1].n).slice(0, 7);
+  _zKey.getContainer().innerHTML = `<b>Zones in view, in plain words</b>${top.map(([c, e]) => `<div class="zk-row"><i style="background:${ZCOL[e.cat] || "#999"}"></i><span><b>${esc(c)}</b> ${esc(explainZone(c, e.cat, e.juris).base)}</span></div>`).join("")}
+    <div class="muted" style="margin-top:4px">Point at the map for the full code (height limits, overlays). Summaries only; the city's code decides.</div>`;
+}
+let _zTipT = null;
+function zoneTip(e) {
+  clearTimeout(_zTipT);
+  _zTipT = setTimeout(() => {
+    const z = map.getZoom();
+    const hide = () => { if (zoneTip.t) map.closeTooltip(zoneTip.t); };
+    if (!layers.zone || z < 14 || z >= 17) { hide(); return; }
+    const p = zoneAt(e.latlng); if (!p) { hide(); return; }
+    zoneTip.t = zoneTip.t || L.tooltip({ direction: "top", offset: [0, -8], className: "zone-tip" });
+    zoneTip.t.setLatLng(e.latlng).setContent(`<b>${esc(p.zone)}</b> <span class="muted">${esc(p.juris)}</span><br>${esc(zoneSentence(p.zone, p.cat, p.juris))}`);
+    map.openTooltip(zoneTip.t);
+  }, 120);
+}
+function drawZoning() {
+  if (!map._loaded || !layers.zone) { zoneKey(null); return; }
+  const z = map.getZoom(), Zc = D.layers.zoning.cell, want = new Set();
+  if (z >= 14) { const b = map.getBounds().pad(.2);
+    for (let x = Math.floor((b.getWest() + 180) / Zc); x <= Math.floor((b.getEast() + 180) / Zc); x++)
+      for (let y = Math.floor((b.getSouth() + 90) / Zc); y <= Math.floor((b.getNorth() + 90) / Zc); y++) want.add(x + "," + y); }
+  for (const [k, l] of _zDrawn) if (!want.has(k)) { layers.zone.removeLayer(l); _zDrawn.delete(k); }
+  _zCanvas = _zCanvas || L.canvas({ padding: .3, pane: passPane("zonePane", 404) });
+  for (const k of want) {
+    if (_zDrawn.has(k)) continue;
+    const g = L.layerGroup(zCell(k).map(p => L.polygon(p.rings, { renderer: _zCanvas, interactive: false, color: ZCOL[p.cat] || "#999", weight: .7, fillColor: ZCOL[p.cat] || "#999", fillOpacity: .55 })));
+    layers.zone.addLayer(g); _zDrawn.set(k, g);
+  }
+  zoneKey(want);
+  layers.zoneLabels.clearLayers();
+  if (z >= 16) { const b = map.getBounds(); let n = 0;
+    for (const k of want) for (const p of zCell(k)) { if (n > 250 || !b.contains([p.lat, p.lon])) continue; n++;
+      layers.zoneLabels.addLayer(L.marker([p.lat, p.lon], { interactive: false, keyboard: false, icon: L.divIcon({ className: "", iconSize: null, html: `<div class="lbl-zone" style="transform:translate(-50%,-50%)">${esc(p.zone)}</div>` }) })); } }
+}
+
+// ---------------- panel: zoning and state housing laws, public facilities nearby
+function zoneRules(code, juris) {
+  const t = String(code).toUpperCase().replace(/\[[^\]]*\]|\([^)]*\)/g, "").replace(/^[QTD]+(?=[A-Z])/, "");
+  juris = String(juris).replace(/ \(SCAG 2019\)$/, "");
+  return (D.zone_rules || []).find(r => r.jurisdiction === juris && new RegExp("^" + r.zone_prefix.replace(/[.]/g, "\\.") + "(?![0-9.])").test(t));
+}
+const p_city = m => (byId.get(selected) || { properties: {} }).properties.c || "";
+function zoningSection(m) {
+  const z = m.z, tr = m.tr || [], rail = Math.min(tr[0] ?? 1e9, tr[1] ?? 1e9), tph = Math.max(tr[2] || 0, tr[3] || 0);
+  let h = `<div class="section"><h3>Zoning: what can be built here</h3>`;
+  if (z && isOCArea(m)) {
+    const sh = Object.entries(z.sh || {}).map(([c, v]) => [c === "multi-family" ? "multifamily" : c, v]).sort((a, b) => b[1] - a[1]);
+    const desc = String(z.desc || "").split(/\. (?=ADU exempt|School fee|AB 1033)/)[0].replace(/\s*\([^()]*$/, "").replace(/\s*\([^()]*\)\s*$/, "").replace(/\.$/, "") + (z.desc ? " (city zoning code)" : "");
+    h += `<div class="small" style="margin:4px 0 6px">${sh.map(([c, v]) => `<span class="zkey"><i style="background:${ZCOL[c] || "#999"}"></i>${esc(c)} ${Math.round(v * 100)}%</span>`).join("")}</div>
+      <p class="small">Typical zone (${esc(z.j)}): <b>${esc(z.top || "")}</b>.${desc ? " " + esc(desc) + "." : ""}</p>
+      <p class="small muted">Orange County zoning is summarized at the neighborhood level from each city's code (preliminary). Parcel zoning maps are not loaded for Orange County, so check the city's zoning map for a specific lot.</p>`;
+  } else if (z) {
+    h += `<div class="small" style="margin:4px 0 6px">${Object.entries(z.sh).sort((a, b) => b[1] - a[1]).map(([c, v]) => `<span class="zkey"><i style="background:${ZCOL[c]}"></i>${esc(c)} ${Math.round(v * 100)}%</span>`).join("")}</div>
+      <p class="small">Most common zones (${esc(z.j)}): <b>${esc(String(z.top || "").split("; ").filter(x => !/ 0%$/.test(x)).join("; "))}</b>. ${/SCAG/.test(z.j) ? "From SCAG's 2019 parcel data (this city's own zoning map isn't loaded yet, so recent rezonings may be missing)." : "Turn on <b>Zoning</b> above and zoom in to see each parcel's zone."}</p>`;
+    const tops = String(z.top || "").split("; ").filter(x => !/ 0%$/.test(x)).map(x => x.replace(/ \d+%$/, "")).slice(0, 5);
+    if (tops.length) h += `<div class="small zplain">${tops.map(c => `<div><b>${esc(c)}</b>: ${esc(zoneSentence(c, null, z.j))}</div>`).join("")}</div>`;
+    const seen = new Set(), rules = String(z.top || "").split("; ").map(x => x.replace(/ \d+%$/, "")).map(c => zoneRules(c, z.j)).filter(r => r && !seen.has(r.zone_prefix) && seen.add(r.zone_prefix));
+    if (rules.length) h += `<div style="overflow-x:auto"><table class="small" style="width:100%;border-collapse:collapse"><thead><tr style="text-align:left"><th>Zone</th><th>Allows</th><th>Homes/acre</th><th>Height</th><th>FAR</th><th>Setbacks F/S/R</th></tr></thead><tbody>
+      ${rules.map(r => `<tr style="border-top:1px solid var(--rule)"><td><b>${esc(r.zone_prefix)}</b> ${esc(r.zone_name)}</td><td>${esc(r.allowed)}</td><td>${esc(r.units_per_acre)}</td><td>${esc(r.max_height_ft)} ft</td><td>${esc(r.max_far)}</td><td>${esc(r.front_ft)}/${esc(r.side_ft)}/${esc(r.rear_ft)} ft</td></tr>`).join("")}</tbody></table></div>
+      <p class="small muted">Base-zone standards from the round-6 research (${rules.map(r => esc(r.code_section)).join(", ")}); not yet checked against the code. Height districts, overlays and specific plans can change them.</p>`;
+  } else h += `<p class="small muted">No zoning map is loaded for this city yet (${esc(m.city || "")}). State laws below still apply.</p>`;
+  const L_ = [];
+  L_.push("<b>ADUs:</b> state law makes cities allow at least an 800 sq ft ADU (local caps are often 1,200 sq ft) plus a junior ADU on single-family lots, and more units on apartment lots (Gov. Code § 66310 and following).");
+  if (z && (z.sh["single-family"] || 0) > 0) L_.push("<b>SB 9:</b> most single-family lots can hold two homes and be split into two lots, except in very-high fire zones and historic districts.");
+  const sb = m.sb || [null, null], near79 = [["Tier 1", sb[0]], ["Tier 2", sb[1]]].filter(([, d]) => d != null && d <= 805).sort((a, b) => a[1] - b[1]);
+  if (near79.length && /^Unincorporated/i.test(m.city || p_city(m))) L_.push("<b>SB 79:</b> SB 79 (Ch. 512, Stats. 2025) applies in cities from 1 July 2026 but in unincorporated areas only from the 7th housing-element cycle (about 30 June 2029), even near an official stop.");
+  else if (near79.length) L_.push(`<b>SB 79 (in force in cities from 1 July 2026):</b> the nearest official ${near79[0][0]} stop (SCAG map) is ${(near79[0][1] / 1609).toFixed(2)} mi away, so ${near79[0][1] <= 402 ? "much of this area is within ¼ mile, the band with the highest allowed height and density" : "parts of this area are within ½ mile, where SB 79 allows more height and homes"}. Exact standards depend on the tier and the parcel.`);
+  else if (m.sb) L_.push("<b>SB 79:</b> no official SB 79 transit stop within ½ mile (SCAG map), so SB 79's transit upzoning doesn't apply here.");
+  else if (rail <= 805) L_.push(`<b>SB 79 (in force in cities from 1 July 2026):</b> rail is ${(rail / 1609).toFixed(2)} mi away, so parts of this area are likely in a transit upzoning zone. Check SCAG's official SB 79 map.`);
+  if (rail <= 805 || tph >= 8) L_.push("<b>AB 2097:</b> within ½ mile of a major transit stop, cities can't require parking for new homes. Here " + (rail <= 805 ? "rail is within ½ mile" : `buses run ${tph}/hr nearby (likely a major stop)`) + ".");
+  if (m.city === "Los Angeles" && (rail <= 805 || tph >= 8)) L_.push("<b>LA City CHIP:</b> mixed-income and 100%-affordable projects near transit and on corridors get density and height bonuses.");
+  h += `<ul class="small" style="margin:6px 0 0 18px;padding:0">${L_.map(x => `<li>${x}</li>`).join("")}</ul><p class="small muted">Transit distances are approximate (rail stations and bus frequency); official eligibility depends on the parcel.</p></div>`;
+  return h;
+}
+function underSection(p) {
+  if (isOCArea((D.details[p.id] || {}).m)) return `<div class="section"><h3>Underused land here</h3><p class="small muted">The underused-land inventory (parking lots, golf courses, vacant and lightly built parcels) covers LA County only so far.</p></div>`;
+  const all = ((D.under && D.under.sites) || []).filter(s => s.gid === p.id), S = all.filter(s => !s.bs).sort((a, b) => (b.mkt || 0) - (a.mkt || 0)), done = all.filter(s => s.bs);
+  if (!S.length) return done.length ? `<div class="section"><h3>Underused land here</h3><p class="small muted">None left: ${done.length} site${done.length > 1 ? "s" : ""} the Assessor still lists as parking or vacant ${done.length > 1 ? "are" : "is"} already built, under construction or approved (${done.map(s => esc(s.idea.split(";")[0])).slice(0, 2).join("; ")}).</p></div>` : "";
+  return `<div class="section"><h3>Underused land here</h3><p class="small muted">${S.length} site${S.length > 1 ? "s" : ""} in this block group: parking lots, golf courses, vacant parcels or lightly built commercial lots. Click one to zoom to it.${done.length ? ` ${done.length} more listed by the Assessor ${done.length > 1 ? "are" : "is"} already built or under way, so ${done.length > 1 ? "they're" : "it's"} left out.` : ""}</p>
+    <div class="recs">${S.slice(0, 6).map(s => `<div class="rec qolrec" style="cursor:pointer" data-site="${s.i}"><div class="small">${siteHtml(s)}</div></div>`).join("")}</div></div>`;
+}
+function facilitySection(m) {
+  if (isOCArea(m)) return `<div class="section"><h3>Public facilities nearby</h3><p class="small muted">Not yet mapped for Orange County (the LA County facilities layer stops at the county line).</p></div>`;
+  if (!m.fc) return "";
+  const order = ["school", "library", "community center", "fire station", "police", "city hall", "post office", "clinic", "hospital"];
+  const rows = order.filter(k => m.fc[k] != null).map(k => { const [col, ch] = FAC_STYLE[k]; return `<span><span class="fac" style="background:${col};display:inline-block;vertical-align:middle;margin-right:6px">${ch}</span>${esc(k[0].toUpperCase() + k.slice(1))}</span><span>${(m.fc[k] / 1609).toFixed(1)} mi</span>`; });
+  return rows.length ? `<div class="section"><h3>Public facilities nearby</h3><div class="kv">${rows.join("")}</div><p class="small muted">Distance from the middle of this block group to the nearest one. LA County Location Management System, filled in with OpenStreetMap.</p></div>` : "";
+}
+
+// ---------------- find me
+function pointInFeature(f, lon, lat) {
+  const inRing = ring => { let c = false;
+    for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) { const [xi, yi] = ring[i], [xj, yj] = ring[j];
+      if ((yi > lat) !== (yj > lat) && lon < (xj - xi) * (lat - yi) / (yj - yi) + xi) c = !c; }
+    return c; };
+  const polys = f.geometry.type === "Polygon" ? [f.geometry.coordinates] : f.geometry.coordinates;
+  return polys.some(([outer, ...holes]) => inRing(outer) && !holes.some(inRing));
+}
+let youMarker = null;
+function selectAt(ll) {
+  const f = allFeatures().find(f => pointInFeature(f, ll.lng, ll.lat));
+  if (f && f.properties.id !== selected) select(f.properties.id, false);
+}
+function locateMe(btn) {
+  if (!navigator.geolocation) { btn.textContent = "Location not available"; return; }
+  btn.textContent = "Finding you…";
+  navigator.geolocation.getCurrentPosition(pos => {
+    const { latitude: lat, longitude: lon } = pos.coords;
+    if (youMarker) map.removeLayer(youMarker);
+    youMarker = L.marker([lat, lon], { interactive: false, icon: L.divIcon({ className: "", iconSize: [14, 14], html: '<div class="you"></div>' }) }).addTo(map);
+    const f = allFeatures().find(f => pointInFeature(f, lon, lat));
+    if (f) select(f.properties.id, false);
+    map.setView([lat, lon], 16);
+    btn.textContent = f ? "📍 Find me" : "You're outside the mapped area";
+  }, () => { btn.textContent = "Location blocked"; }, { enableHighAccuracy: true, timeout: 10000 });
+}
+function retop() {
+  const ti = "ABCDU".indexOf($("#evid").value);
+  const feats = (activeCounty === "oc" && D_OC) ? D_OC.features : ((typeof D !== "undefined" && D && D.bgs && D.bgs.features) ? D.bgs.features : []);
+  feats.forEach(f => {
+    const p = f.properties;
+    if (p.tp && ti >= 0 && ti < p.tp.length) { [p.t, p.v, p.pc] = p.tp[ti]; return; }
+    const r = (D.details[p.id] || {}).r || [];
+    let best = null, pc = 0;
+    r.forEach(a => { const c = D.catalog[a[0]]; if (!c || c.kind !== "value" || !allowed(a[0])) return;
+      if (!best || a[8] > best[8]) best = a; if (a[8] >= 1) pc += a[3]; });
+    p.t = best && best[8] >= 1 ? best[0] : null; p.v = best ? best[8] : null; p.pc = pc || null;
+  });
+}
+function restyle() {
+  breaks = computeBreaks();
+  if (activeCounty === "oc" && ocLayer) {
+    if (ocLayer.setStyle) ocLayer.setStyle(styleBg);
+  } else if (typeof bgs !== "undefined" && bgs && bgs.setStyle) {
+    bgs.setStyle(styleBg);
+  }
+  legend();
+  highlight();
+}
+function highlight() {
+  if (selLayer) { map.removeLayer(selLayer); selLayer = null; }
+  const f = byId.get(selected);
+  if (f) selLayer = L.geoJSON(f, { interactive: false, style: { fill: false, color: css("--sel"), weight: 3 } }).addTo(map);
+}
+const tile = (k, v, s) => `<div class="tile"><div class="k">${k}</div><div class="v">${v}</div>${s ? `<div class="s">${s}</div>` : ""}</div>`;
+const REC_KEYS = ["id", "project", "homes", "cost", "capex", "land", "om", "value", "vpd", "pct", "why", "qol"];
+
+// where a transit, bike or street-safety project should go: the named street and segment, and what's there already
+const CORRIDOR_ROLE = { bus_lane: "bus", brt: "bus", transit_priority: "bus", transit_shade: "bus", bus_shelters: "bus", rail_station: "bus",
+  protected_bike: "bike", road_diet: "bike", speed_cameras: "art", slow_streets: "local", traffic_calming: "local" };
+// The catalog's "who decides" entries are written for LA County agencies; swap in the Orange County equivalents there.
+const OC_AGENCY = [[/LA Metro/g, "OCTA"], [/City Department of Transportation \(LADOT\)|\bLADOT\b/g, "the city's traffic engineering division"],
+  [/City Bureau of Street Services \(StreetsLA\)|City Public Works \(StreetsLA\)|\bStreetsLA\b/g, "city public works"],
+  [/City Department of Recreation and Parks( \(RAP\))?|\bRAP\b/g, "the city's parks department (or OC Parks)"],
+  [/City \/ County Housing Department \(LAHD \/ LACDA\)|LAHD \/ LACDA|\bLAHD\b/g, "the city's housing division / OC Housing & Community Development"],
+  [/Municipal Electric Utility \(LADWP \/ SCE\)|LADWP \/ Southern California Edison|LADWP \/ SCE|\bLADWP\b/g, "SCE or the city utility (for example Anaheim Public Utilities)"],
+  [/City Bureau of Sanitation \(LASAN\)|\bLASAN\b/g, "city public works"], [/City Bureau of Street Lighting \(BSL\)/g, "city public works (street lighting)"],
+  [/\bLAUSD\b/g, "the local school district"], [/\bLAPD\b/g, "the city police department"], [/LA County Flood Control District/g, "OC Public Works (OC Flood Control District)"],
+  [/Measure W Regional Watershed Area Steering Committee \(WASC\) scoring \(60\+ pts\) & SIP grant|Measure W Watershed Area Steering Committee \(WASC\) scoring & grant approval|Measure W Municipal\/Regional funding application/g, "county or city stormwater funding application"],
+  [/Measure ULA tenant acquisition grant/g, "city or county housing-fund grant"], [/Quimby \/ Measure A grant allocation/g, "Quimby fees or city park funds"], [/Measure A funding/g, "city park funds"],
+  [/Willits v\. City of LA ADA settlement compliance queue & /g, ""], [/Board of Public Works/g, "the city council or public works commission"], [/Council office/g, "city council"], [/LA City Mural Ordinance/g, "the city's mural rules"], [/MyLA311/g, "the city's service-request line"], [/CleanStat service routing/g, "the city's service-request routing"], [/Council District local return allocation/g, "the city's Measure M2 local-return allocation"]];
+function agencyFor(text, m) { let t = String(text || ""); if (!isOCArea(m)) return t; for (const [re, to] of OC_AGENCY) t = t.replace(re, to); return t; }
+function whereLine(id) {
+  const m0 = (D.details[selected] || {}).m || {};
+  if (isOCArea(m0)) return "";   // the Orange County corridor table is a neighborhood-level sketch, not a street inventory
+  const role = CORRIDOR_ROLE[id], co = role && m0.co, c = co && co[role];
+  if (!c) return "";
+  const [st, fr, to, mi, tph, bike, bus, n79, t79, rc, station, metro, city, metroArea] = c;
+  const seg = `<b>${esc(st)}</b>${fr && to && fr !== to ? ` from ${esc(fr)} to ${esc(to)}` : fr ? ` near ${esc(fr)}` : ""} (~${mi} mi)`;
+  const lead = id === "rail_station" ? `Corridor: along ${seg}, the busiest bus street here${tph ? ` (${tph} buses/hr)` : ""}${station && station[0] ? `, linking to ${esc(station[0])} station (${station[1]} mi)` : ""}`
+    : role === "local" ? `Where: ${seg}, the main local street through this area`
+    : role === "bike" ? `Where: ${seg}`
+    : role === "bus" ? `Where: ${seg}${tph ? `, where the busiest stop gets ${tph} buses an hour` : ""}`
+    : `Where: ${seg}, the main arterial here`;
+  const notes = [];
+  if (bike) notes.push("already there: " + bike);
+  if (bus) notes.push("already there: a bus-only lane on part of it (LA City)");
+  if (n79) notes.push(`${n79} official SB 79 transit stop${n79 > 1 ? "s" : ""} on this stretch (${t79}), so state law already allows more homes here`);
+  if (rc) notes.push("rail under construction nearby" + (rc !== "-" ? ` (${rc})` : ""));
+  const planned = [...(metro || []), ...((id === "rail_station" ? metroArea : []) || []).filter(x => !(metro || []).includes(x)), ...(city || []).map(x => "LA City capital project: " + x)];
+  const status = planned.length ? `<b>Already planned:</b> ${planned.map(esc).join("; ")}.`
+    : `<span class="muted">No Metro project or LA City capital project found on this street${role === "bike" ? "; city bike-plan maps are still being added" : ""}.</span>`;
+  return `<p class="small" style="margin:4px 0 2px">${lead}.${notes.length ? " " + notes.map(esc).join("; ") + "." : ""} ${status}</p>`;
+}
+
+// ---------------- who pays: what an EIFD could raise from a project's own value gain, and the rest of the stack
+// Prop 13: a home's assessed value only catches up to market when it sells, so the project's value gain enters the
+// tax roll as homes turn over (3.5% a year assumed; Prop 13 lock-in keeps LA turnover low). The district keeps
+// the city's and County's shares of the 1% tax on that gain (pledges from the EIFD calculator defaults).
+// pledges: Artesia EIFD (County participation approved 14 Jul 2026): County 49% of its General Fund increment (Board letter); city 75% per the IFP (round-10 research, larger than the County's share);
+// County shares in formed districts range from 11% (Santa Fe Springs) to 50% (La Verne, Norwalk), and policy keeps them under 100%.
+const FUND_ASSUME = { turnover: 0.035, cityPledge: 0.75, countyPledge: 0.49, countyPledgeUninc: 0.5, admin: 0.03, rate: 0.0525, dscr: 1.35, years: 30, housing: 0.20 };
+function fundPlan(r, gid) {
+  const c = D.catalog[r.id]; if (!c || c.kind === "owner" || c.kind === "policy") return null;
+  const m = (D.details[gid] || {}).m || {}, p = (byId.get(gid) || { properties: {} }).properties;
+  const uninc = /^Unincorporated/i.test(p.c || "") || p.c === "Los Angeles County";
+  const sh = m.e && m.e.sh ? m.e.sh : [uninc ? 0 : 0.20, 0.24];
+  const A = FUND_ASSUME, cityK = sh[0] * A.cityPledge, cntyK = sh[1] * (uninc ? A.countyPledgeUninc : A.countyPledge);
+  const ann = (1 - Math.pow(1 + A.rate, -A.years)) / A.rate;
+  let y10 = 0, tot = 0, cityTot = 0, cntyTot = 0;
+  for (let t = 1; t <= A.years; t++) {
+    const gain = (r.value || 0) * (1 - Math.pow(1 - A.turnover, t)) * Math.pow(1.02, t);   // reassessed share of the gain, +2%/yr
+    const city = gain * 0.01 * cityK * (1 - A.admin), cnty = gain * 0.01 * cntyK * (1 - A.admin);
+    tot += city + cnty; cityTot += city; cntyTot += cnty; if (t === 10) y10 = city + cnty;
+  }
+  const bond = y10 * (1 - (cntyK > 0 ? A.housing : 0)) / A.dscr * ann;
+  const buildable = (r.capex || 0) + (r.land || 0);                    // bonds pay for building and land, not yearly upkeep
+  const eifd = Math.min(bond, buildable), rest = Math.max(r.cost - eifd, 0), program = buildable <= 0;
+  const others = (c.funding || []).filter(k => k !== "EIFD" && D.funding[k]).map(k => D.funding[k]);
+  const cm = ((D.r10 || {}).city || {})[p.c] || null, ex = ((D.r10 || {}).stacks || {})[r.id] || null;
+  return { eifd, bond, y10, tot, cityTot, cntyTot, cityK, cntyK, rest, others, uninc, share: r.cost > 0 ? eifd / r.cost : 0, om: r.om || 0, sh, city: p.c, cm, ex, keys: c.funding || [], program };
+}
+function fundHtml(r, gid) {
+  const f = fundPlan(r, gid); if (!f) return "";
+  const pct = x => (x * 100).toFixed(x < 0.1 ? 1 : 0) + "%";
+  const who = f.uninc ? `the County (${pct(f.cntyK)} of each $1 of new tax here)` : `${esc(f.city)} (${pct(f.cityK)} of each $1 of new tax) and the County (${pct(f.cntyK)})`;
+  const lead = f.others[0];
+  return `<div class="fund small"><b>Who pays — a possible funding plan</b>
+    <div class="fund-bar" title="EIFD ${fmt$(f.eifd)} of ${fmt$(r.cost)}"><i style="width:${Math.min(100, f.share * 100).toFixed(1)}%"></i></div>
+    <div class="kv">${f.program ? `<span>EIFD</span><span>bonds can't pay for a yearly program, but the ~${fmt$(f.y10)}/yr of tax growth it creates could help cover it</span>` : `<span>EIFD bonds from this project's own value gain</span><span><b>${fmt$(f.eifd)}</b> (${pct(f.share)} of the cost)</span>`}
+      <span>Put in by</span><span>${who}: ~${fmt$(f.y10)}/yr of tax growth by year 10, ~${fmt$(f.tot)} over 30 years (city ${fmt$(f.cityTot)}, County ${fmt$(f.cntyTot)})</span>
+      <span>Left to raise</span><span><b>${fmt$(f.rest)}</b>${f.om ? ` (incl. ${fmt$(f.om)}/yr upkeep, which bonds can't pay)` : ""}</span>
+      ${f.others.length ? `<span>Best fits for the rest</span><span>${f.others.map((o, i) => `${o[2] ? `<a href="${esc(o[2])}" target="_blank" rel="noopener">${esc(o[0])}</a>` : esc(o[0])}${i === 0 ? "" : ""} <span class="muted">(${esc(o[1])})</span>`).join("; ")}</span>` : `<span>Rest</span><span>city general fund or capital budget</span>`}</div>
+    ${cityMoney(f)}${f.ex ? `<p style="margin:6px 0 0"><b>Real example${activeCounty === "oc" ? " (LA County)" : ""}:</b> ${esc(f.ex.p)} (${esc(f.ex.c)}${f.ex.s ? ", " + esc(f.ex.s.split(";")[0]) : ""}): ${fmt$(f.ex.t)} — ${f.ex.src.map(([n, a]) => `${esc(n)} ${fmt$(a)} (${Math.round(100 * a / f.ex.t)}%)`).join("; ")}.</p>` : ""}
+    <p class="muted" style="margin:4px 0 0">How: the city (and the County, if it joins) forms an EIFD, pledges its share of the property-tax growth this project creates, and issues bonds against it; ${lead ? esc(lead[0]) : "grants and the city's budget"} would cover most of the rest. Assumes ${pct(FUND_ASSUME.turnover)} of homes resell each year (Prop 13 reassesses only on sale), the city pledges 75% of its share and the County 49% (Artesia's 2026 district; County shares elsewhere run 11–50%)${f.uninc ? "; in unincorporated areas the County alone, assumed 50%" : ""}, ${(FUND_ASSUME.rate * 100).toFixed(2)}% 30-year bonds at ${FUND_ASSUME.dscr}x coverage${f.cntyK > 0 ? ", 20% of County-backed bonds held for housing" : ""}. A district over the whole area (calculator below) also captures ordinary growth and raises far more. Since AB 116 (2019) EIFD bonds need no public vote.</p></div>`;
+}
+function cityMoney(f) {
+  const cm = f.cm; if (!cm) return "";
+  const lr = (cm.pa || 0) + (cm.pc || 0) + (cm.mr || 0) + (cm.mm || 0), useLR = f.keys.includes("M"), useW = f.keys.includes("W") && cm.mw;
+  if (!useLR && !useW) return `<p style="margin:6px 0 0"><b>${esc(f.city)}'s own yearly money:</b> ~${fmt$(lr)} of Metro sales-tax local return${cm.mw ? ` and ${fmt$(cm.mw)} of Measure W` : ""} (FY 2026-27 estimates), mostly for transportation and water projects; this one would rely on grants or the general fund.</p>`;
+  const parts = [];
+  if (useLR && lr) parts.push(`~${fmt$(lr)} a year of Metro local return (Prop A ${fmt$(cm.pa || 0)}, Prop C ${fmt$(cm.pc || 0)}, Measure R ${fmt$(cm.mr || 0)}, Measure M ${fmt$(cm.mm || 0)}), which can pay for street and transit projects like this`);
+  if (useW) parts.push(`${fmt$(cm.mw)} a year of Measure W municipal money for green streets, trees and stormwater`);
+  return `<p style="margin:6px 0 0"><b>What ${esc(f.city)} already gets:</b> ${parts.join("; and ")} (FY 2026-27 estimates; much is already committed).</p>`;
+}
+function fundSummary(pkg, gid) {
+  const F = pkg.map(r => [r, fundPlan(r, gid)]).filter(([, f]) => f);
+  if (!F.length) return "";
+  const cost = F.reduce((s, [r]) => s + r.cost, 0), eifd = F.reduce((s, [, f]) => s + f.eifd, 0), y10 = F.reduce((s, [, f]) => s + f.y10, 0);
+  const src = new Map(); F.forEach(([r, f]) => { const o = f.others[0]; if (o) src.set(o[0], (src.get(o[0]) || 0) + Math.max(r.cost - f.eifd, 0)); });
+  const top = [...src].sort((a, b) => b[1] - a[1]).slice(0, 3);
+  return `<div class="pkg">${tile("EIFD could fund", fmt$(eifd), `${(100 * eifd / Math.max(cost, 1)).toFixed(0)}% of the cost, from these projects' own value gain`)}${tile("City + County put in", fmt$(y10) + "/yr", "their share of the new property tax by year 10")}${tile("Left for grants and budgets", fmt$(Math.max(cost - eifd, 0)), top.length ? "mostly " + top.map(([k]) => esc(k)).join(", ") : "")}</div>
+    <p class="small muted" style="margin:4px 0 0">Open any project's <i>Why here, cost and sources</i> for its funding plan; the EIFD calculator below shows a district over the whole area.</p>`;
+}
+function recCard(r, i, mode) {
+  const c = D.catalog[r.id], ev = String(c.evidence);
+  const m = selected && D.details[selected] ? D.details[selected].m || {} : {};
+  const rng = formatVpdRange(r.vpd, c.grade, r.id, m);
+  const head = mode === "value" ? `<span class="vpd-badge grade-${(c.grade || "none").toLowerCase()}">${rng.badge}</span><span class="vpd" title="Model estimate ${rng.estStr}; band of ±${Math.round(rng.band * 100)}% by evidence grade">${rng.str}</span>` : mode === "owner" ? `<span class="vpd">adds ~${fmt$(r.value)}</span>` : `<span class="vpd none">${mode === "qol" ? "need: " + (r.qol >= .8 ? "high" : r.qol >= .5 ? "medium" : "low") : "policy"}</span>`;
+  const costs = `${fmt$(r.capex)} to build${r.land ? " + " + fmt$(r.land) + " land" : ""}${r.om ? " + " + fmt$(r.om) + "/yr upkeep or operations" : ""}`;
+  const agencyHtml = c.lead_agency ? `<p class="small agency-line" style="margin:4px 0 2px"><b>Who decides:</b> ${esc(agencyFor(c.lead_agency, m))} · <b>Next step:</b> ${esc(agencyFor(c.process, m))}${isOCArea(m) ? ' <span class="muted">(Orange County equivalents of the LA County catalog; verify with the city)</span>' : ""}</p>` : "";
+  const dispHtml = renterViewOn || c.displacement_risk === "high_risk" ? (
+    c.displacement_risk === "high_risk" ? `<div class="displacement-badge high-risk">⚠️ <b>High Displacement Risk:</b> Significant land value uplift. Pair with tenant protections, RSO enforcement &amp; Community Land Trusts.</div>`
+    : c.renter_direct ? `<div class="displacement-badge protective">✓ <b>Direct Renter Benefit:</b> Improves tenant comfort, transit mobility, or safety with minimal displacement pressure.</div>`
+    : ""
+  ) : "";
+  return `<div class="rec${i === 0 && mode === "value" ? " top" : ""}${mode === "qol" ? " qolrec" : ""}">
+    <div class="cat">${esc(c.category)}</div>
+    <div class="row1"><span class="nm">${esc(c.name)}</span>${head}</div>
+    <div class="meta">${esc(r.project)} · <b>total ~${fmt$(r.cost)}</b>${r.value > 0 ? (c.kind === "owner" ? ` · adds ~${fmt$(r.value)} to that home's value` : ` · adds ~${fmt$(r.value)} across ~${fmtN(r.homes)} homes`) : ""}${c.grade !== "none" ? `<span class="chip${c.grade === "A" || c.grade === "B" ? " strong" : c.grade === "D" || c.grade === "U" ? " reg" : ""}" title="${esc(GRADE_TXT[c.grade])}">evidence ${c.grade}</span>` : `<span class="chip">${esc(ev.split(" (")[0])}</span>`}${c.kind === "regional" ? '<span class="chip reg">regional project</span>' : ""}</div>
+    ${whereLine(r.id)}
+    ${agencyHtml}
+    ${dispHtml}
+    <details><summary>Why here, cost and sources</summary>
+      <p class="small"><b>Why:</b> ${esc(r.why)}</p>
+      <div class="costline">total = ${costs}${r.om ? " (10 yrs, present value)" : ""}</div>
+      ${c.benefit && mode === "qol" ? `<p class="small"><b>Public benefit (unverified estimate):</b> about ${fmt$(c.benefit[0])} a year from ${esc(c.benefit[1].toLowerCase())}, roughly <b>${fvpd(c.benefit[0] * 8.53 / Math.max(r.cost, 1))}</b> of benefit per $1 over 10 years. From the round-6 research, not yet checked against its sources.${c.benefit[2] ? " " + esc(c.benefit[2]) : ""}</p>` : ""}
+      ${r.pct > 0 ? `<p class="small"><b>Price effect used:</b> +${r.pct}% for homes reached${c.years ? `, full effect after ~${c.years} yr (discounted)` : ""}. Model estimate: <b>${rng.estStr}</b>; judgment band of ±${Math.round(rng.band * 100)}% for evidence grade ${esc(c.grade)}: ${rng.str}.${rng.adjStr ? ` <span class="muted">Experimental local adjustment (${esc(rng.notes.join(", "))}): ${rng.adjStr}; shown for context, not used in the ranking.</span>` : ""}</p>` : `<p class="small"><b>Home-value effect:</b> not measured in the research, so it is ranked by how much this area needs it, not by value per $1.</p>`}
+      ${c.grade !== "none" ? `<p class="small"><b>Evidence grade ${c.grade}:</b> ${esc(GRADE_TXT[c.grade].slice(4))}.${c.caveat ? " " + esc(c.caveat) : ""}</p>` : c.caveat ? `<p class="small">${esc(c.caveat)}</p>` : ""}
+      ${mode === "value" || mode === "qol" ? fundHtml(r, selected) : ""}
+      ${(c.funding || []).length && !(mode === "value" || mode === "qol") ? `<p class="small"><b>Who pays:</b> ${c.funding.map(k => { const f = D.funding[k]; return f ? `${f[2] ? `<a href="${esc(f[2])}" target="_blank" rel="noopener">${esc(f[0])}</a>` : esc(f[0])} (${esc(f[1])})` : ""; }).filter(Boolean).join("; ")}</p>` : ""}
+      <p class="src muted">${c.sources.map(esc).join("<br>")}</p>
+    </details></div>`;
+}
+
+// ---------------- what this place is missing (vs. its 50 most similar block groups) and the neighborhood's plan
+function stepWhere(st) {
+  const role = CORRIDOR_ROLE[st.fix], co = role && st.bg && ((D.details[st.bg] || {}).m || {}).co, c = co && co[role];
+  return c ? ` on <b>${esc(c[0])}</b>${c[1] && c[2] && c[1] !== c[2] ? ` from ${esc(c[1])} to ${esc(c[2])}` : ""}` : "";
+}
+function gapSection(p, m) {
+  const G = m.gp || { g: [], s: [] }, plan = (D.plans || {})[p.n + "|" + p.c];
+  const fixName = id => D.catalog[id] ? D.catalog[id].name : id;
+  let h = `<div class="section"><h3>What this area is missing</h3>`;
+  if (G.g.length) h += `<ul class="small" style="margin:4px 0 0 18px;padding:0">${G.g.map(([k, x, med, sev, fix, why, cost]) =>
+      `<li style="margin-bottom:4px">${esc(why)} <span class="muted">${sev >= 0.995 ? "Worse than every similar area." : "Worse than " + Math.round(sev * 100) + "% of similar areas."}</span> <b>Fix:</b> ${esc(fixName(fix))}${cost ? ` (~${fmt$(cost)})` : ""}.</li>`).join("")}</ul>`;
+  else h += `<p class="small">Nothing stands out: this block group is at or above similar areas on parks, shade, shops, schools, services, transit, safety and street safety.</p>`;
+  if (G.s.length) h += `<p class="small"><b>Already strong:</b> ${G.s.map(([k, x, med]) => `${esc((D.gap_labels || {})[k] || k)} (${esc(x)}; similar areas ${esc(med)})`).join("; ")}.</p>`;
+  h += `<p class="small muted">Compared with the 50 block groups county-wide most like this one in income, density, home values, housing age, children, car ownership and single-family share.</p>`;
+  if (plan) {
+    const steps = plan.steps || [];
+    h += `<div class="pkg" style="display:block;margin-top:10px"><div class="small" style="font-weight:600;margin-bottom:6px">A plan for ${esc(p.n)} (${plan.bgs} block group${plan.bgs > 1 ? "s" : ""}, ${fmtN(plan.homes)} homes)</div>`;
+    if (steps.length) h += `<ol class="small" style="margin:0 0 0 18px;padding:0">${steps.map((st, i) => `<li style="margin-bottom:6px"><b>${i === 0 && steps.length > 1 ? "Quick win: " : ""}${esc(st.name)}</b>${st.project ? ` (${esc(st.project)}${st.near ? ", " + esc(st.near) : ""})` : ""}${stepWhere(st)}. ${esc(st.why)} This gap shows up in ${st.parts} of ${plan.bgs} parts of the neighborhood.${st.cost ? ` About ${fmt$(st.cost)}` : " Not costed here yet"}${st.vpd ? `, returning ${fvpd(st.vpd)} of home value per $1` : ""}${st.funding && D.funding[st.funding] ? `; could be paid for by ${esc(D.funding[st.funding][0])}` : ""}.</li>`).join("")}</ol>`;
+    else h += `<p class="small">No neighborhood-wide gaps compared with similar areas. The best value-per-dollar projects are ranked below.</p>`;
+    const pf = ((D.under && D.under.profit) || {})[p.n + "|" + p.c];
+    if (pf && pf.total > 0) {
+      const all = (D.under && D.under.profit ? Object.values(D.under.profit).map(x => x.total).sort((a, b) => b - a) : []), rank = all.indexOf(pf.total) + 1;
+      h += `<p class="small"><b>Profit potential:</b> about <b>${fmt$(pf.total)}</b> of value created (${pf.pct != null ? (pf.pct * 100).toFixed(1) + "% of the neighborhood's home value, ~" + fmt$(pf.per_home) + " per home" : "few homes here, so it's shown as a total only"}), #${rank} of ${all.length} neighborhoods by total. ${fmt$(pf.proj)} from projects that pay back, net of cost${pf.land ? `, and ${fmt$(pf.land)} from developing ${pf.sites} underused site${pf.sites > 1 ? "s" : ""} (~${fmtN(pf.site_homes)} homes)` : ""}.${pf.soon && pf.soon.length ? ` Already under way: rail stations under construction nearby (${pf.soon.map(esc).join(", ")}), which usually lift nearby values.` : ""}</p>`;
+    }
+    const W = (pf && pf.way) || {}, wl = [];
+    const wu = k => W[k] ? W[k][1] || W[k][0] : 0;
+    if (wu("housing completed")) wl.push(`${fmtN(wu("housing completed"))} homes completed`);
+    if (wu("housing permitted")) wl.push(`${fmtN(wu("housing permitted"))} permitted`);
+    if (wu("housing approved")) wl.push(`${fmtN(wu("housing approved"))} approved`);
+    if (W["affordable housing"]) wl.push(`${W["affordable housing"][0]} city-financed affordable project${W["affordable housing"][0] > 1 ? "s" : ""}`);
+    const nb = ["new apartments", "new ADU", "new house", "new building"].reduce((t, k) => t + (W[k] ? W[k][0] : 0), 0);
+    if (nb) wl.push(`${fmtN(nb)} new-building permits since 2024 (LA City)`);
+    if (wl.length) h += `<p class="small"><b>Already under way:</b> ${wl.join(", ")} (state housing reports since 2021 and city data). Turn on <b>Housing &amp; projects under way</b> to see them.</p>`;
+    if ((plan.ctx || []).length) h += plan.ctx.map(c => `<p class="small">${esc(c)}</p>`).join("");
+    if ((plan.strong || []).length) h += `<p class="small"><b>Strengths to build on:</b> ${plan.strong.map(x => esc(x[1])).join("; ")}.</p>`;
+    h += `<p class="small muted">Steps tackle the gaps shared by the most homes. The first is the cheapest, then the rest are ordered by return. Each is a project City Pretty already sized for the most affected part of the neighborhood. These plans will be rewritten monthly, with an assistant on this page later.</p></div>`;
+  }
+  return h + `</div>`;
+}
+
+// ---------------- per-house analysis: the clicked parcel, fetched live from the County Assessor's public parcel service
+const PARCEL_URL = "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query";
+const PARCEL_FIELDS = ["AIN", "SitusFullAddress", "SitusHouseNo", "SitusStreet", "UseCode", "UseType", "UseDescription", "Roll_LandValue", "Roll_ImpValue",
+  "Roll_LandBaseYear", "Roll_ImpBaseYear", "Roll_HomeOwnersExemp",
+  ...[1, 2, 3, 4, 5].flatMap(i => [`DesignType${i}`, `QualityClass${i}`, `YearBuilt${i}`, `EffectiveYear${i}`, `Units${i}`, `Bedrooms${i}`, `Bathrooms${i}`, `SQFTmain${i}`])].join(",");
+const OVERPASS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"];
+// round-9 sources (research/round9): per-lot checks queried live from the page
+const R9 = {
+  permits: "https://data.lacity.org/resource/pi9x-tg5x.json",          // LADBS permits 2020-present (ADU/JADU fields)
+  permitsOld: "https://data.lacity.org/resource/d9aa-v8bm.json",       // LADBS building permits (of_stories)
+  sales: "https://egispais.gis.lacounty.gov/pais/rest/services/PAIS/pais_sales_parcels/MapServer/0",
+  hpoz: "https://services5.arcgis.com/7nsPwEMP38bSkCjy/ArcGIS/rest/services/Historic_Preservation_Overlay_Zones/FeatureServer/5",
+  hcm: "https://services5.arcgis.com/7nsPwEMP38bSkCjy/ArcGIS/rest/services/Historic_Cultural_Monuments/FeatureServer/4",
+  histCounty: "https://rpgis.isd.lacounty.gov/arcgis/rest/services/GISNET_Public/MapServer/331",
+  hillside: "https://maps.lacity.org/lahub/rest/services/Special_Areas/MapServer/6",
+  landslide: "https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Landslide_Zones/FeatureServer/0",
+  liquefaction: "https://services2.arcgis.com/zr3KAIbsRSUyARHG/ArcGIS/rest/services/CGS_Liquefaction_Zones/FeatureServer/0",
+  fault: "https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Alquist_Priolo_Fault_Zones/FeatureServer/0",
+  fireSRA: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/ArcGIS/rest/services/FHSZSRA_23_3/FeatureServer/0",
+  fireLRA: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/FHSALRA25_v1_All/FeatureServer/0",
+  cams: "https://arcgis.gis.lacounty.gov/arcgis/rest/services/LACounty_Dynamic/CAMS/MapServer/1",
+};
+async function arcQuery(url, params, ms = 12000) {
+  const q = `${url}/query?` + new URLSearchParams({ f: "json", ...params }).toString();
+  try {
+    const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), ms);
+    const r = await fetch(q, { signal: ctl.signal }); clearTimeout(t);
+    const d = await r.json(); if (d.error) throw new Error(d.error.message); return d;
+  } catch (e) { const d = await jsonp(q); if (d.error) throw new Error(d.error.message); return d; }
+}
+async function socrata(url, where, ms = 12000) {
+  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), ms);
+  const r = await fetch(`${url}?$limit=60&$where=${encodeURIComponent(where)}`, { signal: ctl.signal }); clearTimeout(t);
+  if (!r.ok) throw new Error("HTTP " + r.status); return r.json();
+}
+const limit = (pr, ms = 8000) => Promise.race([pr, new Promise((_, rej) => setTimeout(() => rej(new Error("timed out")), ms))]);
+const settle = (pr) => limit(pr).then(v => ({ ok: true, v }), e => ({ ok: false, e: e.message || String(e) }));
+async function lotChecks(ll, a) {
+  const pt = { geometry: `${ll.lng},${ll.lat}`, geometryType: "esriGeometryPoint", inSR: 4326, spatialRel: "esriSpatialRelIntersects", returnGeometry: false };
+  const hit = (url, fields) => arcQuery(url, { ...pt, outFields: fields || "*", resultRecordCount: 3 }).then(d => (d.features || []).map(f => f.attributes));
+  const ain = String(a.AIN || "").replace(/\D/g, "");
+  const loc = localOverlays(ll), q = (key, run) => loc[key] ? Promise.resolve(loc[key]) : settle(run());
+  const [hpoz, hcm, hc, hill, slide, liq, fault, sra, lra, sales, prm, old] = await Promise.all([
+    q("hpoz", () => hit(R9.hpoz, "NAME")), q("hcm", () => hit(R9.hcm, "NAME,MNT_NUM")), q("hc", () => hit(R9.histCounty, "Name,Status_Code_Description,Mills_Act_Contract")),
+    q("hill", () => hit(R9.hillside, "H_TYPE")), q("slide", () => hit(R9.landslide, "QUAD_NAME")), q("liq", () => hit(R9.liquefaction, "QUAD_NAME")), q("fault", () => hit(R9.fault, "QUAD_NAME")),
+    q("sra", () => hit(R9.fireSRA, "*")), q("lra", () => hit(R9.fireLRA, "*")),
+    settle(arcQuery(R9.sales, { where: `AIN='${ain}'`, outFields: "*", returnGeometry: false }).then(d => (d.features || []).map(f => f.attributes))),
+    settle(socrata(R9.permits, `apn='${ain}'`)),
+    settle(socrata(R9.permitsOld, `assessor_book='${ain.slice(0, 4)}' AND assessor_page='${ain.slice(4, 7)}' AND assessor_parcel='${ain.slice(7, 10)}'`)),
+  ]);
+  const fireVals = [sra, lra].flatMap(x => x.ok ? x.v : []).map(r => String(r.FHSZ_Description || r.FHSZ || r.HAZ_CLASS || "")).filter(Boolean);
+  return { hpoz, hcm, hc, hill, slide, liq, fault, sales, prm, old,
+    fire: (sra.ok || lra.ok) ? { vh: fireVals.some(v => /very high|^3$/i.test(v)), any: fireVals.length > 0, label: fireVals[0] || "" } : null };
+}
+// Assessor code decoding (round-9 code tables): UseCode 0101/0103 pool, 0106 ADU, 0107 JADU, 0108 guest house,
+// 010G Mills Act; DesignType 01xx: 3rd digit heating/cooling, 4th digit pool/spa
+function decodeAssessor(a) {
+  const uc = String(a.UseCode || ""), dt = String(a.DesignType1 || "").padStart(4, "0");
+  const heat = { "0": "none recorded", "1": "floor or wall heat", "2": "central heat", "3": "central heating and cooling", "4": "central solar heat" };
+  const pool = { "0": null, "1": "pool", "2": null, "3": "pool", "4": "spa", "5": "solar-heated pool" };
+  return { pool: /^010[13]/.test(uc) || (dt.startsWith("01") && ["1", "3", "5"].includes(dt[3])) ? (pool[dt[3]] || "pool") : dt.startsWith("01") && dt[3] === "4" ? "spa" : null,
+    adu: uc.startsWith("0106") ? "ADU" : uc.startsWith("0107") ? "junior ADU" : uc.startsWith("0108") ? "guest house (no kitchen or bath)" : null,
+    mills: uc.startsWith("010G"), heat: dt.startsWith("01") ? heat[dt[2]] || null : null, ac: dt.startsWith("01") && dt[2] === "3" };
+}
+function permitFacts(L) {
+  const out = { list: [], stories: null, storiesSrc: null, adu: false };
+  if (L && L.prm.ok) for (const r of L.prm.v) {
+    const w = `${r.permit_type || ""} ${r.permit_sub_type || ""} ${r.work_desc || ""}`;
+    const kind = /adu|accessory dwelling/i.test(w) || +r.adu_changed > 0 || +r.junior_adu > 0 ? "ADU" : /pool|spa/i.test(w) ? "pool" : /solar|photovoltaic/i.test(w) ? "solar"
+      : /addition|add .*sq|second story|2nd story/i.test(w) ? "addition" : /re-?roof/i.test(w) ? "re-roof" : /new/i.test(r.permit_type || "") ? "new building" : null;
+    if (kind === "ADU") out.adu = true;
+    if (kind) out.list.push({ kind, date: String(r.issue_date || r.status_date || "").slice(0, 10), status: r.status_desc || "", desc: String(r.work_desc || "").slice(0, 120) });
+  }
+  if (L && L.old.ok) {
+    const st = L.old.v.filter(r => +r.of_stories > 0 && /new|dwelling|sfd|single family|addition/i.test(r.work_description || ""))
+      .sort((x, y) => String(y.issue_date || "").localeCompare(String(x.issue_date || "")));
+    if (st.length) { out.stories = +st[0].of_stories; out.storiesSrc = `LA City building permit (${String(st[0].issue_date || "").slice(0, 4)}): ${st[0].of_stories} stor${+st[0].of_stories > 1 ? "ies" : "y"} permitted`; }
+  }
+  return out;
+}
+let parcelLayer = null;
+function houseHint() {
+  const el = $("#house"); if (el) el.remove();
+  const box = document.createElement("div"); box.id = "house"; box.className = "section";
+  box.innerHTML = `<p class="small muted">Zoom in to street level (zoom 17) and click a single home to check what that house can add: ADU, SB 9 split, pool, solar and more.</p>`;
+  const v = $("#panel .verdict"); if (v) v.after(box);
+}
+function jsonp(url) {
+  return new Promise((res, rej) => { const cb = "cp" + Math.random().toString(36).slice(2), s = document.createElement("script");
+    window[cb] = d => { delete window[cb]; s.remove(); res(d); }; s.onerror = () => { delete window[cb]; s.remove(); rej(new Error("parcel service unreachable")); };
+    s.src = url + "&callback=" + cb; document.head.appendChild(s); setTimeout(() => { if (window[cb]) { delete window[cb]; s.remove(); rej(new Error("timeout")); } }, 15000); });
+}
+async function fetchParcel(ll) {
+  const isOC = (activeCounty === "oc") || (ll.lat >= 33.35 && ll.lat <= 33.95 && ll.lng >= -118.15 && ll.lng <= -117.40);
+  if (isOC) {
+    const q = `https://www.ocgis.com/arcpub/rest/services/Map_Layers/Parcels/MapServer/0/query?geometry=${ll.lng.toFixed(6)},${ll.lat.toFixed(6)}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&distance=20&units=esriSRUnit_Meter&outFields=*&returnGeometry=true&outSR=4326&f=json`;
+    let d;
+    try { d = await (await fetch(q)).json(); } catch (e) { d = await jsonp(q); }
+    if (d && d.features && d.features.length) {
+      const feat = d.features[0], a = feat.attributes || {};
+      // Only what the OC parcel service actually reports; anything missing stays blank rather than guessed
+      const num = x => (x == null || x === "" || isNaN(+x)) ? 0 : +x;
+      const addr = String(a.SITE_ADDRESS || a.SITUS_ADDRESS || a.ADDRESS || "").replace(/\s+/g, " ").trim();
+      const apn = a.ASSESSMENT_NO || a.APN || a.AIN || "";
+      const normA = {
+        AIN: apn || "OC-PARCEL",
+        SitusFullAddress: addr || ("Parcel " + apn),
+        SitusHouseNo: addr.split(" ")[0] || "",
+        SitusStreet: addr.split(" ").slice(1).join(" ") || "",
+        UseDescription: a.LAND_USE || a.USE_DESC || a.USE_CODE_DESC || "Orange County parcel (use not reported by the OC parcel service)",
+        UseCode: "",
+        UseType: "residential (assumed: the OC parcel service does not report use)",
+        YearBuilt1: num(a.YEAR_BUILT), Bedrooms1: num(a.NBR_BEDROOMS ?? a.BEDROOMS), Bathrooms1: num(a.NBR_BATHS ?? a.BATHROOMS), SQFTmain1: num(a.BLDG_SQFT ?? a.LIVING_AREA ?? a.SQFT), Units1: num(a.UNITS),
+        county: "Orange County"
+      };
+      return { attributes: normA, geometry: feat.geometry };
+    }
+  }
+  const q = `${PARCEL_URL}?geometry=${ll.lng.toFixed(6)},${ll.lat.toFixed(6)}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=${PARCEL_FIELDS}&returnGeometry=true&outSR=4326&f=json`;
+  let d;
+  try { d = await (await fetch(q)).json(); } catch (e) { d = await jsonp(q); }
+  if (d.error) throw new Error(d.error.message || "parcel service error");
+  return (d.features || [])[0];
+}
+function ringAreaM2(ring) {
+  // planar area after projecting lon/lat to meters around the ring (accurate at parcel scale)
+  const lat0 = ring[0][1] * Math.PI / 180, kx = 111320 * Math.cos(lat0), ky = 110540; let a = 0;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) a += (ring[j][0] * kx) * (ring[i][1] * ky) - (ring[i][0] * kx) * (ring[j][1] * ky);
+  return Math.abs(a / 2);
+}
+function zoneAt(ll) {
+  const Z = (typeof D !== "undefined" && D && D.layers && D.layers.zoning) ? D.layers.zoning : null; if (!Z) return null;
+  const key = `${Math.floor((ll.lng + 180) / Z.cell)},${Math.floor((ll.lat + 90) / Z.cell)}`;
+  for (const k of [key, ...cellKeys(Z.cell, 0)]) for (const p of zCell(k)) {
+    const f = { geometry: { type: "Polygon", coordinates: p.rings.map(r => r.map(([la, lo]) => [lo, la])) } };
+    if (pointInFeature(f, ll.lng, ll.lat)) return p;
+  }
+  return null;
+}
+// building outlines (and pools) on this lot from OpenStreetMap; in LA most outlines come from the County's building
+// data import, often with a height. Returns null when OSM can't be reached.
+async function fetchOsmLot(rings) {
+  const ring = rings[0] || [];
+  const step = Math.max(1, Math.ceil(ring.length / 40));
+  const poly = ring.filter((_, i) => i % step === 0).map(([x, y]) => `${y.toFixed(6)} ${x.toFixed(6)}`).join(" ");
+  const q = `[out:json][timeout:12];(way["building"](poly:"${poly}");way["leisure"="swimming_pool"](poly:"${poly}"););out tags geom;`;
+  const one = async (url, delay) => {
+      if (delay) await new Promise(r => setTimeout(r, delay));
+      const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 10000);
+      const r = await fetch(url, { method: "POST", body: "data=" + encodeURIComponent(q), signal: ctl.signal,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" } });
+      clearTimeout(t);
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      const d = await r.json();
+      const ways = (d.elements || []).filter(e => e.type === "way" && e.geometry && e.geometry.length > 2);
+      const toRing = e => e.geometry.map(g => [g.lon, g.lat]);
+      const bl = ways.filter(e => e.tags && e.tags.building).map(e => {
+        const r_ = toRing(e), t_ = e.tags; const hm = parseFloat(String(t_.height || "").replace(/[^0-9.]/g, ""));
+        return { ring: r_, sqft: Math.round(ringAreaM2(r_) * 10.7639), levels: parseInt(t_["building:levels"]) || null,
+                 height: isFinite(hm) && hm > 0 ? hm : null, type: t_.building, roof: t_["roof:shape"] || null };
+      }).sort((a, b) => b.sqft - a.sqft);
+      const pools = ways.filter(e => e.tags && e.tags.leisure === "swimming_pool").length;
+      return { bl, pools };
+  };
+  try { return await Promise.any(OVERPASS.map((u, k) => one(u, k * 2500))); } catch (e) { /* every mirror failed */ }
+  return null;
+}
+function houseFacts(a, lot, osm, PF, st) {
+  const slots = [1, 2, 3, 4, 5].map(i => ({ i, sqft: +a[`SQFTmain${i}`] || 0, units: +a[`Units${i}`] || 0, beds: +a[`Bedrooms${i}`] || 0,
+    baths: +a[`Bathrooms${i}`] || 0, yb: +a[`YearBuilt${i}`] || 0, eff: +a[`EffectiveYear${i}`] || 0, design: a[`DesignType${i}`] || "", qc: a[`QualityClass${i}`] || "" }))
+    .filter(x => x.sqft > 0 || x.units > 0);
+  const main = slots[0] || { sqft: 0, units: 0, beds: 0, baths: 0, yb: 0, eff: 0, design: "", qc: "" };
+  const F = { slots, main, bldg: main.sqft, beds: main.beds, baths: main.baths, units: slots.reduce((t, x) => t + x.units, 0) || main.units,
+    living: slots.reduce((t, x) => t + x.sqft, 0), yb: main.yb || main.eff, eff: main.eff, qc: main.qc, design: main.design, src: {} };
+  const B = osm && osm.bl ? osm.bl.filter(b => b.sqft >= 80) : [];
+  const big = B[0];
+
+  // Footprint determination
+  if (big) {
+    F.foot = big.sqft; F.footAll = B.reduce((t, b) => t + b.sqft, 0); F.outlines = B.map(b => b.ring); F.others = B.length - 1;
+    F.src.foot = "building outline (OpenStreetMap, from County LiDAR/GIS)";
+    F.roof = big.roof;
+  } else {
+    F.foot = Math.min(F.bldg || lot * 0.3, lot * 0.6);
+    F.footAll = F.foot + (slots.slice(1).reduce((t, x) => t + x.sqft, 0));
+    F.src.foot = osm ? "estimated from living area (no building outline)" : "estimated from living area (building outlines offline)";
+  }
+
+  // Stories determination (Never 'unknown' - uses Street View toggle, LiDAR, or physical living area ratio)
+  if (st && st.manualStories != null) {
+    F.stories = st.manualStories;
+    F.conf = "manual";
+    F.src.stories = `User confirmed via Street View (${st.manualStories} stor${st.manualStories > 1 ? "ies" : "y"})`;
+  } else if (big && big.levels) {
+    F.stories = big.levels; F.src.stories = `OpenStreetMap levels tag (${big.levels})`; F.conf = "recorded";
+  } else if (big && big.height) {
+    F.stories = Math.max(1, Math.round((big.height - 1) / 3.2));
+    F.src.stories = `building height ${big.height.toFixed(1)} m (County LiDAR via OpenStreetMap)`; F.conf = "measured";
+  } else if (big && F.bldg && big.sqft > 0) {
+    const r = F.bldg / big.sqft;
+    F.stories = r >= 1.38 ? 2 : 1;
+    F.src.stories = r >= 1.38 ? `2 stories (living area ÷ footprint = ${r.toFixed(2)})` : `1 story (living area ÷ footprint = ${r.toFixed(2)})`;
+    F.conf = "estimated";
+  } else if (PF && PF.stories) {
+    F.stories = PF.stories; F.src.stories = PF.storiesSrc; F.conf = "permit";
+  } else {
+    // Intelligent physical inference from Assessor living area and lot coverage
+    if (F.bldg >= 2600 || (lot > 0 && F.bldg / lot > 0.42)) {
+      F.stories = 2;
+      F.src.stories = `inferred: ${fmtN(F.bldg)} sq ft living area indicates 2-story layout`;
+      F.conf = "estimated";
+    } else {
+      F.stories = 1;
+      F.src.stories = F.bldg ? `inferred: single-story profile (${fmtN(F.bldg)} sq ft living area)` : "assumed 1 story (no living-area record for this parcel)";
+      F.conf = "estimated";
+    }
+  }
+
+  F.dec = decodeAssessor(a);
+  F.pool = F.dec.pool ? true : osm ? osm.pools > 0 : null;
+  F.src.pool = F.dec.pool ? `County Assessor code (${F.dec.pool})` : osm ? "OpenStreetMap" : "";
+  F.yard = Math.max(lot - F.footAll - lot * 0.2, 0); // setbacks and driveway allowance
+  F.second = slots.length > 1 || (F.others || 0) > 0 || !!F.dec.adu;
+  return F;
+}
+
+function houseChecks(a, lot, m, z, hMax, F, R) {
+  const res = /^0/.test(String(a.UseCode || "")) || /resid/i.test(a.UseType || "");
+  const { bldg, beds, baths, units, yb, foot, yard } = F;
+  const cat = z ? z.cat : null, sf = cat === "single-family" || (!cat && res && units <= 1);
+  const fire = R && R.fire ? R.fire.vh : (m.fire || 0) >= 0.5;
+  const hist = R ? [R.hpoz, R.hcm].some(x => x.ok && x.v.length) || (R.hc.ok && R.hc.v.some(r => /design|landmark|register/i.test(r.Status_Code_Description || ""))) : false;
+  const hill = R && R.hill && R.hill.ok && R.hill.v.length > 0;
+  const slide = R && R.slide && R.slide.ok && R.slide.v.length > 0;
+  const liq = R && R.liq && R.liq.ok && R.liq.v.length > 0;
+  const fault = R && R.fault && R.fault.ok && R.fault.v.length > 0;
+  
+  const C = [], add = (name, v, why) => C.push({ name, v, why });
+  const out = () => ({ C, yard, foot, sf, yb, beds, baths, bldg, units, res, lot, stories: F.stories, pool: F.pool, hist, fire, hill, slide, liq, fault, R, a });
+  
+  if (hist) add("Historic district or landmark", "note", "This lot is in a historic district or is a designated resource: exterior alterations require HPOZ design review, and SB 9 does not apply.");
+  if (hill) add("Hillside area", "note", "LA Hillside Ordinance applies: stepped foundation, grading limits and height restrictions make additions and second stories more complex.");
+  if (slide || liq || fault) {
+    const gz = [slide && "landslide", liq && "liquefaction", fault && "fault"].filter(Boolean);
+    add("Geologic hazard zone", "note", `In state ${gz.join(", ")} hazard zone: new additions or ADUs require a site-specific geotechnical/soils investigation.`);
+  }
+  if (F.dec && F.dec.adu) add("Recorded ADU", "note", `The Assessor records ${/^[AEIOU]/.test(F.dec.adu) ? "an" : "a"} ${F.dec.adu} on this lot.`);
+  if (F.dec && F.dec.mills) add("Mills Act contract", "note", "This home has a Mills Act historic contract (lower property tax in exchange for preservation).");
+  if (!res) { add("Home upgrades", "no", `This parcel is ${esc(a.UseDescription || "not residential")}, so residential homeowner checks do not apply.`); return out(); }
+  if (F.second) add("Second building on the lot", "note", F.slots.length > 1 ? `The Assessor lists ${F.slots.length} structures (${F.slots.map(x => fmtN(x.sqft) + " sq ft").join(", ")}): an existing ADU or guest house may already be present.` : "Second structure (garage or studio) detected on building footprint outlines.");
+  
+  if (yard >= 800) add("Detached ADU (backyard home)", "yes", `${F.dec && F.dec.adu ? `One ${F.dec.adu} is already recorded; room for another. ` : ""}About ${fmtN(yard)} sq ft of open yard after setbacks; easily fits a 600–800 sq ft detached ADU with 4-ft rear/side setbacks.`);
+  else if (yard >= 400) add("Detached ADU", "maybe", `Only ~${fmtN(yard)} sq ft of open yard: a 400 sq ft studio ADU or garage conversion is more viable.`);
+  else add("Detached ADU", "no", `Limited open yard (~${fmtN(yard)} sq ft); a garage conversion or Junior ADU is recommended.`);
+  
+  if (sf && bldg >= 1000) add("Junior ADU (inside the house, up to 500 sq ft)", "yes", `${fmtN(bldg)} sq ft single-family home: state law (Gov. Code §§ 66313 and 66333) allows converting up to 500 sq ft of interior livable space; since 1 Jan 2026 (AB 1154) owner-occupancy is required only if the JADU shares bathroom facilities with the main home, and rentals must be longer than 30 days.`);
+  if (units >= 2 && sf) add("Existing second unit", "note", `Assessor roll shows ${units} units here.`);
+  
+  if (sf && hist) add("SB 9 lot split", "no", "SB 9 does not apply in historic districts or on designated landmarks.");
+  else if (sf && lot >= 2400 && !fire && !slide && !fault) add("SB 9 lot split / second home", "yes", `${fmtN(lot)} sq ft single-family parcel: SB 9 allows a split into two ~${fmtN(Math.round(lot/2))} sq ft lots and up to 4 total units.`);
+  else if (sf && lot >= 2400 && fire) add("SB 9 lot split", "no", "This lot is in a Very High Fire Hazard Severity Zone (CAL FIRE), statutorily ineligible for SB 9 lot splits.");
+  else if (sf && lot >= 2400 && (slide || fault)) add("SB 9 lot split", "no", "Located in an Alquist-Priolo fault or landslide hazard zone; statutorily restricted under SB 9 unless seismic clearance is certified.");
+  else if (sf) add("SB 9 lot split", "no", `Lot size is ${fmtN(lot)} sq ft; SB 9 requires at least 2,400 sq ft to create two legal lots of ≥1,200 sq ft.`);
+  
+  if (F.pool) add("Swimming pool", "note", `There is already a ${F.dec && F.dec.pool ? F.dec.pool : "pool"} on this lot (${F.src.pool}).`);
+  else if (yard >= 1200) add("Swimming pool", "yes", `~${fmtN(yard)} sq ft of open yard.`);
+  
+  if (F.stories === 1) {
+    add("Second story", hMax != null && hMax < 28 ? "no" : "yes",
+      hMax != null && hMax < 28 ? `One story (${F.src.stories}), but local zoning height limit of ${hMax} ft restricts a full second story.` :
+      `One story (${F.src.stories}). ${hMax ? `Height limit here is ${hMax} ft.` : "Check the zone's height limit."} Foundation inspection required to carry upper-floor loads.`);
+  } else {
+    add("Second story", "note", `Already ${F.stories} stories (${F.src.stories}).`);
+  }
+  
+  add("Rooftop deck", F.roof === "flat" ? "yes" : F.roof ? "no" : "maybe", F.roof === "flat" ? "Flat roof recorded: deck requires structural framing verification and waterproof membrane." : F.roof ? `Roof shape is ${esc(F.roof)}; deck requires a flat section or garage roof.` : "Requires a flat roof or flat garage roof section.");
+  if (yard >= 400) add("Garden, deck or patio", "yes", `~${fmtN(yard)} sq ft of open yard.`);
+  if (foot >= 350) add("Rooftop solar", "yes", `~${fmtN(foot)} sq ft of roof footprint.`);
+  if (yb && yb < 1980 && sf) add("Seismic bolting and bracing", "yes", `Built in ${yb}: raised foundation qualifies for California Earthquake Brace + Bolt grant (up to $3,000).`);
+  if (yb && yb < 1975) add("Whole-house repiping", "maybe", `Built in ${yb}: galvanized steel supply piping common in pre-1975 homes.`);
+  if (beds >= 3 && baths && baths < beds - 1) add("Add a bathroom", "yes", `${beds} bedrooms but only ${baths} bath${baths > 1 ? "s" : ""}: strong resale ROI.`);
+  if (F.dec && F.dec.heat && !F.dec.ac) add("Heat-pump heating and cooling", "yes", `Existing heating is ${F.dec.heat} with no central AC: heat pump provides both.`);
+  if (fire) add("Wildfire hardening (Zone 0)", "yes", "Very High fire zone: ember-resistant vents, boxed eaves and a 5-ft ember-resistant (Zone 0) perimeter. The Board of Forestry adopted emergency Zone 0 regulations on 19 Aug 2026 but withdrew them from the Office of Administrative Law on 8 Sep 2026, so no Zone 0 rule is in effect yet; check for the re-adopted rule and its phase-in for existing homes.");
+  
+  return out();
+}
+
+// ---------------- Detailed House-Specific Cost Analysis Engine ----------------
+function getHouseUpgradeCostDetails(u, h, m) {
+  const yb = h.yb || 1965;
+  const hv = h.houseHv || m.hv || 900000;
+  const lot = h.lot || 6000;
+  const yard = h.yard || 1000;
+  const foot = h.foot || 1400;
+  const bldg = h.bldg || 1600;
+  const medRent = (typeof D !== "undefined" && D && D.meta && D.meta.rent_med) ? D.meta.rent_med : 2102;
+  const locRent = Math.min(Math.max((m.rent || medRent) / medRent, 0.7), 1.6);
+  const houseVpsf = h.houseVpsf || Math.min(Math.max(hv / 1800, 250), 1400);
+
+  let sqft = 0, timelineMonths = "6–9", baseCost = 0, breakdown = [], siteAdjustments = [], totalCost = 0, resaleValue = 0, impactFees = 0, schoolFee = 0;
+
+  if (/^Detached ADU/.test(u.n || u.name)) {
+    const defaultSqft = yard >= 1500 ? 800 : yard >= 800 ? 600 : 400;
+    sqft = u.customSqft ? +u.customSqft : (h.st && h.st.aduSqft ? +h.st.aduSqft : defaultSqft);
+    timelineMonths = sqft >= 800 ? "9–12" : sqft >= 500 ? "8–10" : "6–8";
+
+    // Calibrated to Argon 2025-2026 Trade Schedules:
+    // 400 sf Studio: $201,500 hard, $18,500 soft = $220,000 ($550.00/sf)
+    // 650 sf 1-Bed: $317,500 hard, $27,500 soft = $345,000 ($530.77/sf)
+    // 800 sf 2-Bed: $378,000 hard, $35,000 soft, $8,000 impact = $421,000 ($526.25/sf)
+    let hard = 0, soft = 0;
+    if (sqft <= 400) {
+      hard = Math.round(sqft * 503.75);
+      soft = 18500;
+    } else if (sqft <= 650) {
+      const t = (sqft - 400) / 250;
+      hard = Math.round(201500 + t * (317500 - 201500));
+      soft = Math.round(18500 + t * (27500 - 18500));
+    } else if (sqft <= 800) {
+      const t = (sqft - 650) / 150;
+      hard = Math.round(317500 + t * (378000 - 317500));
+      soft = Math.round(27500 + t * (35000 - 27500));
+    } else {
+      hard = Math.round(378000 + (sqft - 800) * 440);
+      soft = Math.round(35000 + (sqft - 800) * 15);
+    }
+
+    const fnd = Math.round(hard * 0.12);
+    const frame = Math.round(hard * 0.36);
+    const env = Math.round(hard * 0.13);
+    const mep = Math.round(hard * 0.18);
+    const fin = hard - (fnd + frame + env + mep);
+    const plans = Math.round(soft * 0.60);
+    const permits = soft - plans;
+
+    // Statutory developer fees:
+    // School developer fee: ADUs/JADUs under 500 sf of interior livable space are exempt (Gov. Code § 66311.5(c)(3) "less than 500 square feet"; Ed. Code § 17620(a)(1)(C)(i)); modeled at the SAB Level 1 cap ($5.38/sf, set 28 Jan 2026) at 500 sf and up
+    schoolFee = sqft >= 500 ? Math.round(sqft * 5.38) : 0;   // districts set their own rate up to the SAB Level 1 cap; verify locally
+    // Development impact fee: ADUs of 750 sf or less of interior livable space are exempt (Gov. Code § 66311.5, renumbered from § 66324 by SB 543, eff. 1 Jan 2026); proportional above that
+    impactFees = sqft <= 750 ? 0 : Math.round(8000 + (sqft - 750) * 18.0);
+
+    breakdown = [
+      { cat: "Foundation & Reinforced Concrete Slab", amount: fnd, desc: `~$${Math.round(fnd/sqft)}/sq ft: 4\" fiber-reinforced monolithic slab with continuous grade beam footings` },
+      { cat: "Framing & Structural Shell", amount: frame, desc: `~$${Math.round(frame/sqft)}/sq ft: 2x6 exterior framing, engineered roof trusses, OSB shear wall assemblies` },
+      { cat: "Exterior Envelope & Roofing", amount: env, desc: `~$${Math.round(env/sqft)}/sq ft: 3-coat cementitious stucco / fiber-cement siding, Title 24 cool composition roof, Low-E vinyl windows` },
+      { cat: "Mechanical, Electrical & Plumbing (MEP)", amount: mep, desc: `~$${Math.round(mep/sqft)}/sq ft: Ductless multi-zone heat pump, 100A subpanel, PEX plumbing, high-efficiency heat pump water heater` },
+      { cat: "Interior Architectural Finishes", amount: fin, desc: `~$${Math.round(fin/sqft)}/sq ft: Drywall, luxury vinyl plank, complete kitchen with quartz counters, stainless appliances, full tile bath` },
+      { cat: "Architecture, Engineering & City Permits", amount: plans + permits, desc: "Architectural drawings, structural engineering calculations, Title 24 energy compliance report, municipal plan check" }
+    ];
+
+    if (schoolFee > 0) {
+      breakdown.push({ cat: "School District Developer Fee (500 sq ft and up)", amount: schoolFee, desc: "Modeled at the State Allocation Board Level 1 cap ($5.38/sq ft, adopted 28 Jan 2026); districts set their own rate up to that cap. ADUs under 500 sq ft are exempt (Gov. Code § 66311.5(c)(3); Ed. Code § 17620(a)(1)(C)(i))" });
+    }
+    if (impactFees > 0) {
+      breakdown.push({ cat: "Development Impact Fees (over 750 sq ft)", amount: impactFees, desc: "Proportional parks, traffic and utility fees (ADUs of 750 sq ft or less are exempt, Gov. Code § 66311.5 as amended by SB 543)" });
+    }
+
+    let siteCost = 0;
+    if (yb < 1978) {
+      siteAdjustments.push({ name: `Pre-1978 Electrical Service Upgrade (${yb} build)`, amount: 4800, desc: "Existing home has 100A panel: upgraded to 200A main meter service to feed ADU subpanel" });
+      siteCost += 4800;
+    }
+    if (h.hill) {
+      siteAdjustments.push({ name: "Hillside Ordinance Foundation", amount: 26000, desc: "Drilled concrete friction caissons and grade beams for sloped ground" });
+      siteCost += 26000;
+    }
+    if (h.fire) {
+      siteAdjustments.push({ name: "CalFire VHFHSZ Wildfire Hardening (Title 24 Ch. 7A)", amount: 9500, desc: "Non-combustible exterior siding, 1/8\" ember-resistant Vulcan vents, and interior NFPA 13D fire sprinkler system" });
+      siteCost += 9500;
+    }
+    if (h.slide || h.liq || h.fault) {
+      siteAdjustments.push({ name: "Geotechnical Soils & Seismic Investigation", amount: 6500, desc: "Certified soils engineering report required for building permit approval in geologic hazard zone" });
+      siteCost += 6500;
+    }
+    const runFt = Math.max(35, Math.min(Math.round(Math.sqrt(yard) * 1.5), 130));
+    const trench = runFt * 110;
+    siteAdjustments.push({ name: `Rear Yard Utility Lateral Trenching (~${runFt} ft run)`, amount: trench, desc: "Trenching for dedicated 4\" sewer lateral connection, 1\" water line, and electrical conduit across yard" });
+    siteCost += trench;
+
+    const hardSub = fnd + frame + env + mep + fin + siteCost;
+    const gc = Math.round(hardSub * 0.15);
+    breakdown.push({ cat: "Site-Specific Adjustments for This Parcel", amount: siteCost, desc: `${siteAdjustments.length} parcel conditions identified (panel, trenching, environmental)` });
+    breakdown.push({ cat: "GC Overhead, Profit & Contingency (15%)", amount: gc, desc: "General contractor project supervision, builder risk insurance, and 15% construction contingency" });
+
+    totalCost = fnd + frame + env + mep + fin + plans + permits + schoolFee + impactFees + siteCost + gc;
+
+    const baseRentMo = sqft < 500 ? 1750 : sqft < 750 ? 2250 : Math.round(2850 + (sqft - 750) * 1.5);
+    const rentMo = Math.round(baseRentMo * locRent);
+    const annualNoi = rentMo * 12 * 0.70;
+    const incomeVal = annualNoi / 0.055;
+    const appraisalVal = sqft * houseVpsf * 0.82;
+    resaleValue = Math.round(0.50 * incomeVal + 0.50 * appraisalVal);
+
+    u.monthlyRent = rentMo;
+    u.impactFees = impactFees;
+    u.schoolFee = schoolFee;
+  } else if (/^Full second story/.test(u.n || u.name)) {
+    const defaultSqft = Math.min(Math.max(foot, 600), 1400);
+    sqft = u.customSqft ? +u.customSqft : defaultSqft;
+    timelineMonths = "9–14";
+    // Calibrated to Argon 2025-2026 Schedule: 600 sf = $393,000 ($655/sf all-in)
+    const baseTradeCost = Math.round(sqft * 490);
+    const under = yb < 1965 ? 35000 : 25000;
+    const demo = 28000;
+    const frame = Math.round(baseTradeCost * 0.44);
+    const env = Math.round(baseTradeCost * 0.18);
+    const mep = Math.round(baseTradeCost * 0.18);
+    const fin = Math.round(baseTradeCost * 0.20);
+    const stairs = 19000;
+    const plans = 24000;
+    const permits = Math.round(14000 + (sqft - 600) * 12);
+    const tempHousing = 28000;
+
+    breakdown = [
+      { cat: "Existing Foundation Underpinning & Retrofit", amount: under, desc: "Reinforced perimeter concrete footings and Simpson hold-downs to support upper floor gravity and seismic loads" },
+      { cat: "Roof Tear-Off & 1st Floor Joist Reinforcement", amount: demo, desc: "Removal of existing roof, structural LVL beams, sistering joists, and temporary weatherproofing" },
+      { cat: "Second Story Framing & Shear Walls", amount: frame, desc: `$145/sq ft: 2x6 framing, engineered I-joist floor system, subflooring, and plywood shear walls` },
+      { cat: "Exterior Envelope & Roofing", amount: env, desc: `$45/sq ft: Stucco/siding to match existing residence, cool composition shingle roof, windows` },
+      { cat: "MEP Multi-Zone Distribution", amount: mep, desc: `$70/sq ft: Multi-zone heat pump system, plumbing drop stacks, electrical home runs` },
+      { cat: "Interior Finishes & Stairway", amount: fin + stairs, desc: `Drywall, custom hardwood staircase, bedroom suites, luxury bathrooms, flooring, doors` },
+      { cat: "Architecture, Structural Engineering & Permits", amount: plans + permits, desc: "Architectural construction documents, licensed structural engineer stamped calculations, city plan check" },
+      { cat: "Temporary Living Expenses during Construction", amount: tempHousing, desc: "Allowance for homeowner relocation (~5 months) during unroofed framing phase" }
+    ];
+
+    let siteCost = 0;
+    if (yb < 1978) { siteAdjustments.push({ name: "200A Electrical Service Upgrade", amount: 4800, desc: "Service drop and 200A main panel upgrade" }); siteCost += 4800; }
+    if (h.hill) { siteAdjustments.push({ name: "Hillside Height & Slope Structural Engineering", amount: 22000, desc: "Structural review and baseline envelope compliance" }); siteCost += 22000; }
+    if (h.fire) { siteAdjustments.push({ name: "Wildfire Chapter 7A Hardening", amount: 12000, desc: "Class A fire-rated roofing, boxed eaves, and interior fire sprinklers" }); siteCost += 12000; }
+
+    const hardSub = under + demo + frame + env + mep + fin + stairs + siteCost;
+    const gc = Math.round(hardSub * 0.15);
+    breakdown.push({ cat: "Site-Specific Adjustments for This Parcel", amount: siteCost, desc: `${siteAdjustments.length} parcel conditions identified` });
+    breakdown.push({ cat: "GC Overhead, Profit & 15% Contingency", amount: gc, desc: "15% General Contractor management, safety, and contingency" });
+
+    totalCost = under + demo + frame + env + mep + fin + stairs + plans + permits + tempHousing + siteCost + gc;
+    resaleValue = Math.round(sqft * houseVpsf * 0.88);
+  } else {
+    totalCost = u.c || 25000;
+    resaleValue = u.v || 30000;
+    breakdown = [
+      { cat: "Standard Construction & Installation", amount: Math.round(totalCost * 0.85), desc: "Direct materials, licensed trade labor, equipment, and required municipal building permit fees" },
+      { cat: "Permitting, Testing & Contingency", amount: Math.round(totalCost * 0.15), desc: "City inspection, title compliance testing, and contingency" }
+    ];
+  }
+
+  return {
+    sqft,
+    timelineMonths,
+    schoolFee,
+    impactFees,
+    totalCost,
+    costPerSqFt: sqft > 0 ? totalCost / sqft : null,
+    breakdown,
+    siteAdjustments,
+    resaleValue,
+    netProfit: resaleValue - totalCost,
+    paybackPerDollar: resaleValue / Math.max(totalCost, 1)
+  };
+}
+function renderCostAnalysisSchedule(u, h, m) {
+  const ca = u.cost_analysis;
+  if (!ca) return `<p class="small muted">Detailed cost analysis not available for this upgrade.</p>`;
+  
+  let htm = `<div class="cost-schedule-card">
+    <div class="cs-head">
+      <div><b>Specific Cost Analysis: ${esc(u.n)}</b> <span class="muted">(${ca.sqft ? fmtN(ca.sqft) + " sq ft · " : ""}${ca.timelineMonths ? ca.timelineMonths + " mos timeline" : ""})</span></div>
+      <div><b>Total All-In Cost: ${fmt$(u.c)}</b> ${ca.costPerSqFt ? `<span class="muted">(~$${Math.round(ca.costPerSqFt)}/sq ft)</span>` : ""}</div>
+    </div>
+    <table class="cs-table">
+      <thead><tr><th>Component / Budget Category</th><th style="text-align:right">Estimated Cost</th><th>Scope &amp; Parcel Specifics</th></tr></thead>
+      <tbody>`;
+      
+  ca.breakdown.forEach(item => {
+    htm += `<tr>
+      <td><b>${esc(item.cat)}</b></td>
+      <td style="text-align:right;font-weight:600">${fmt$(item.amount)}</td>
+      <td class="muted">${esc(item.desc)}</td>
+    </tr>`;
+  });
+
+  htm += `</tbody></table>`;
+  
+  if (ca.siteAdjustments && ca.siteAdjustments.length) {
+    htm += `<div class="cs-site-adjustments">
+      <div style="font-weight:600;font-size:11.5px;margin-bottom:4px">📍 Specific Adjustments Applied to This House:</div>
+      <ul style="margin:0;padding-left:18px;font-size:11.5px;color:var(--ink-2)">
+        ${ca.siteAdjustments.map(adj => `<li><b>${esc(adj.name)}:</b> ${esc(adj.desc)} (<b>${adj.amount >= 0 ? "+" : ""}${fmt$(adj.amount)}</b>)</li>`).join("")}
+      </ul>
+    </div>`;
+  }
+  
+  htm += `<div class="cs-roi-summary">
+    <span><b>Resale Value Added:</b> ~${fmt$(u.v)}</span>
+    <span><b>Net Profit / Equity Created:</b> <b style="color:${u.net >= 0 ? 'var(--good-ink)' : 'var(--warn-ink)'}">${u.net >= 0 ? "+" + fmt$(u.net) : "−" + fmt$(-u.net)}</b></span>
+    <span><b>Expected Return:</b> <b>${fvpd(u.per)} / $1</b></span>
+    ${u.sav > 0 ? `<span><b>Income / Operating Savings:</b> ~${fmt$(u.sav)}/yr</span>` : ""}
+  </div>
+  </div>`;
+  return htm;
+}
+
+function toggleUpgradeCost(idx) {
+  const el = $(`#upgrade-cost-${idx}`);
+  if (el) el.hidden = !el.hidden;
+}
+
+function toggleHouseStories() {
+  if (!activeHouse || !activeHouse.box || !activeHouse.box.isConnected) return;
+  const { box, a, lot, ll, st } = activeHouse;
+  const current = st.manualStories != null ? st.manualStories : (activeHouse.lastStories || 1);
+  st.manualStories = current === 1 ? 2 : 1;
+  renderHouse(box, a, lot, ll, st);
+  showToast(`Updated to ${st.manualStories}-story house model`);
+}
+
+function houseUpgrades(h, m, R) {
+  const houseHv = h.houseHv || m.hv || 900000;
+  const houseVpsf = h.houseVpsf || Math.min(Math.max(houseHv / 1800, 250), 1400);
+  const scale = Math.sqrt(Math.min(Math.max(houseHv / 900000, 0.6), 2.2));
+  const medRent = (typeof D !== "undefined" && D && D.meta && D.meta.rent_med) ? D.meta.rent_med : 2102;
+  const locRent = Math.min(Math.max((m.rent || medRent) / medRent, 0.7), 1.6);
+  const rent1 = 2102 * locRent;
+  const fits = { onestory: h.stories === 1, yard800: h.yard >= 800, yard400: h.yard >= 400,
+    yard1200: h.yard >= 1200 && !h.pool, flatroof: true, roof350: h.foot >= 350, pre1980: !!h.yb && h.yb < 1980, pre1975: !!h.yb && h.yb < 1975,
+    fire: (m.fire || 0) >= 0.5 || h.fire };
+  
+  const rows = [];
+  const curD = (typeof D !== "undefined" && D) ? D : ((typeof window !== "undefined" && window.D) ? window.D : {});
+  for (const u of (curD.upgrades || [])) {
+    if (u.applies_if && fits[u.applies_if] === false) continue;
+    
+    const dummy = { n: u.name, c: u.cost_2025, v: u.resale_value_added * scale };
+    if (/^Detached ADU/.test(u.name) && h.st && h.st.aduSqft) dummy.customSqft = h.st.aduSqft;
+    const ca = getHouseUpgradeCostDetails(dummy, h, m);
+    
+    let c = ca.totalCost || u.cost_2025;
+    let v = ca.resaleValue || (u.resale_value_added * scale);
+    let note = "";
+
+    if (/^Full second story/.test(u.name)) {
+      note = `${fmtN(ca.sqft)} sq ft addition at ~$${Math.round(c/ca.sqft)}/sq ft all-in; counts as above-grade living area; new space valued at ~${fmt$(houseVpsf * 0.85)}/sq ft`;
+    } else if (/^Partial second story/.test(u.name)) {
+      note = `400 sq ft primary suite at ~$${Math.round(c/400)}/sq ft all-in; new space valued at ~${fmt$(houseVpsf * 0.85)}/sq ft`;
+    } else if (/^Ground-floor room addition/.test(u.name)) {
+      note = `400 sq ft at ~$${Math.round(c/400)}/sq ft; new space valued at ~${fmt$(houseVpsf * 0.85)}/sq ft`;
+    } else if (/^Detached ADU/.test(u.name)) {
+      const rentMo = ca.u && ca.u.monthlyRent ? ca.u.monthlyRent : Math.round(rent1 * (ca.sqft >= 750 ? 1.3 : ca.sqft >= 500 ? 1.05 : 0.82));
+      const feeText = ca.impactFees === 0 ? "exempt from impact fees (750 sf or less)" : `~${fmt$(ca.impactFees)} impact fees (over 750 sf)`;
+      note = `${ca.sqft} sq ft (${ca.sqft >= 750 ? "2-bed" : ca.sqft >= 500 ? "1-bed" : "studio"}); appraised separately from the main home's living area; ~$${fmtN(rentMo)}/mo rent; ${feeText}`;
+    } else if (/^Junior ADU/.test(u.name)) {
+      if (!(h.sf && h.bldg >= 1000)) continue;
+      v = Math.round(rent1 * 0.72 * 12 * 0.65 / 0.055);
+      note = "Interior conversion up to 500 sq ft; rent ~72% of 1-bedroom (capitalized @ 5.5% cap rate)";
+    } else if (/^Add a full bathroom/.test(u.name)) {
+      if (!(h.beds >= 2 && h.baths < h.beds)) continue;
+      v = Math.round(houseHv * 0.10); note = `Cures the bedroom-to-bath imbalance; modeled at ~10% of this home's ${fmt$(houseHv)} value (estimate)`;
+    } else if (/^Convert a den/.test(u.name)) {
+      if (!(h.beds && h.bldg / h.beds > 550)) continue;
+      v = Math.round(houseHv * 0.05); note = `Modeled at ~5% of home value with total square footage unchanged (estimate)`;
+    } else if (/^In-ground pool/.test(u.name)) {
+      const isOC = (activeCounty === "oc" || (h.a && h.a.county === "Orange County"));
+      v = isOC ? 56000 : ((m.ht || 0) > 0 ? 95000 : 20000);
+      note = isOC ? "modeled ~$56k resale premium (Redfin 2019 Orange County estimate; not verified on local sales)" : ((m.ht || 0) > 0 ? "modeled ~$95k premium in hotter inland areas (Redfin 2019 Los Angeles estimate; not verified on local sales)" : "modeled ~$20k premium in cooler coastal areas (traces to Redfin's 2019 San Diego estimate; not verified)");
+    } else if (/^Rooftop deck/.test(u.name)) {
+      v = Math.round(Math.min(houseHv * 0.035, 160000)); note = "flat roof or garage roof; worth more with a view";
+    } else if (/^Garage to living space/.test(u.name)) {
+      v = Math.round(360 * houseVpsf * 0.65); note = "~360 sq ft conversion; loses parking";
+    } else if (/^Seismic/.test(u.name)) {
+      c = Math.max(c - 3000, 3500); note = "after $3,000 California Earthquake Brace + Bolt grant";
+    } else if (/^Legalize|^Staging|^Kitchen|^Bathroom remodel|^Home gym|^Kids/.test(u.name)) continue;
+
+    rows.push({
+      n: u.name,
+      c: Math.round(c),
+      v: Math.round(v),
+      net: Math.round(v - c),
+      per: v / Math.max(c, 1),
+      note,
+      sav: u.annual_savings,
+      cost_analysis: ca
+    });
+  }
+  return rows;
+}
+let houseLabel = null, houseBldgs = null;
+function showParcel(a, rings) {
+  if (parcelLayer) map.removeLayer(parcelLayer);
+  if (houseLabel) map.removeLayer(houseLabel);
+  if (!rings.length) return;
+  const ll = rings.map(r => r.map(([x, y]) => [y, x]));
+  parcelLayer = L.polygon(ll, { interactive: false, color: "#e8590c", weight: 4, fillColor: "#e8590c", fillOpacity: .14 }).addTo(map);
+  const c = parcelLayer.getBounds().getCenter(), label = a.SitusHouseNo ? `${a.SitusHouseNo} ${String(a.SitusStreet || "").replace(/\s+/g, " ").trim()}` : (a.SitusFullAddress || "").split(/\s{2,}| CA /)[0];
+  houseLabel = L.marker(c, { interactive: false, keyboard: false, icon: L.divIcon({ className: "", iconSize: null,
+    html: `<div class="house-tag" style="transform:translate(-50%,-140%)">${esc(label || "Parcel " + a.AIN)}</div>` }) }).addTo(map);
+}
+function showOutlines(F) {
+  if (houseBldgs && typeof map !== "undefined" && map && map.removeLayer) map.removeLayer(houseBldgs);
+  if (typeof map === "undefined" || !map || !map.addLayer) return;
+  houseBldgs = F.outlines ? L.layerGroup(F.outlines.map((r, i) => L.polygon(r.map(([x, y]) => [y, x]), { interactive: false, color: "#111", weight: i ? 1 : 1.6, fillColor: "#111", fillOpacity: i ? .12 : .22 }))).addTo(map) : null;
+}
+
+async function houseAt(ll) {
+  clearTimeout(hoverTimer); if (hoverLayer) { map.removeLayer(hoverLayer); hoverLayer = null; }
+  const el0 = $("#house"); if (el0) el0.remove();
+  const box = document.createElement("div"); box.id = "house"; box.className = "section";
+  const _cRec = (typeof activeCounty !== "undefined" && activeCounty === "oc") ? "Orange County" : "LA County";
+  box.innerHTML = `<h3>This home</h3><div class="house-loading"><span class="spin"></span><div>Pulling records from ${_cRec}…</div></div>`;
+  const v = $("#panel .verdict"); (v || $("#panel h2")).after(box);
+  const tok = {}; houseTok = tok;
+  let f = hoverFeat && hoverFeat.geometry && ringsContain(hoverFeat.geometry.rings, ll) ? hoverFeat : null;
+  if (!f) try { f = await fetchParcel(ll); } catch (e) {
+    box.innerHTML = `<h3>This home</h3><p class="small">Couldn't reach the County's parcel service (${esc(e.message)}). Per-house checks need an internet connection; the rest of the map works offline.</p>`; return; }
+  if (!f) { box.innerHTML = `<h3>This home</h3><p class="small muted">No parcel at that spot (street or public land). Click on a lot.</p>`; return; }
+  const a = f.attributes, rings = (f.geometry && f.geometry.rings) || [];
+  showParcel(a, rings);
+  const lot = rings.length ? Math.round(ringAreaM2(rings[0]) * 10.7639) : 0;
+  
+  const hit_ = houseCache.get(a.AIN) || {};
+  const st = { osm: hit_.osm, R: hit_.R, osmDone: "osm" in hit_ || !rings.length, rDone: "R" in hit_, manualStories: null };
+  activeHouse = { box, a, lot, ll, st, tok };
+
+  const draw = () => { if (houseTok === tok && box.isConnected) renderHouse(box, a, lot, ll, st); };
+  draw();
+  const keep = () => { if (st.osmDone && st.rDone) houseCache.set(a.AIN, { osm: st.osm, R: st.R }); };
+  const pend = housePending.get(a.AIN);
+  if (!st.osmDone) (pend ? pend.osm : fetchOsmLot(rings)).then(v => { st.osm = v; }, () => { st.osm = null; }).finally(() => { st.osmDone = true; keep(); draw(); });
+  if (!st.rDone) (pend ? pend.R : lotChecks(ll, a)).then(v => { st.R = v; }, () => { st.R = null; }).finally(() => { st.rDone = true; keep(); draw(); });
+}
+
+let houseTok = null;
+const houseCache = new Map(), housePending = new Map();
+function prefetchHouse(f, ll) {
+  const a = f && f.attributes, rings = (f && f.geometry && f.geometry.rings) || [];
+  if (!a || !a.AIN || houseCache.has(a.AIN) || housePending.has(a.AIN) || housePending.size >= 3) return;
+  const p = { osm: rings.length ? fetchOsmLot(rings).catch(() => null) : Promise.resolve(null), R: lotChecks(ll, a).catch(() => null) };
+  housePending.set(a.AIN, p);
+  Promise.all([p.osm, p.R]).then(([osm, R]) => { houseCache.set(a.AIN, { osm, R }); housePending.delete(a.AIN); });
+}
+function ringsContain(rings, ll) {
+  let inside = false;
+  for (const r of rings) for (let i = 0, j = r.length - 1; i < r.length; j = i++) {
+    const [xi, yi] = r[i], [xj, yj] = r[j];
+    if ((yi > ll.lat) !== (yj > ll.lat) && ll.lng < (xj - xi) * (ll.lat - yi) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+
+function renderHouse(box, a, lot, ll, st) {
+  const osm = st.osmDone ? st.osm : null, R = st.rDone ? st.R : null, rOff = st.rDone && !st.R;   // rOff: the live checks could not be reached
+  const PF = permitFacts(R);
+  const F = houseFacts(a, lot, osm, PF, st);
+  if (activeHouse) activeHouse.lastStories = F.stories;
+  if (!st.osmDone) { F.src.foot = "estimated from living area; building outline still loading"; }
+  showOutlines(F);
+  const waiting = [!st.osmDone && "building outline and height", !st.rDone && "permits, last sale, historic, fire and geologic zones"].filter(Boolean);
+  const offline = [st.osmDone && !st.osm && "building outlines (OpenStreetMap)", st.rDone && !st.R && "permits, last sale, historic, fire and geologic checks"].filter(Boolean);
+  
+  const p = byId.get(selected) ? byId.get(selected).properties : { c: "Los Angeles", hv: 950000, rent: 2200 };
+  const curD = (typeof D !== "undefined" && D) ? D : ((typeof window !== "undefined" && window.D) ? window.D : {});
+  const m = ((curD.details && curD.details[selected]) || {}).m || p;
+  const z = zoneAt(ll);
+  const rule = z ? zoneRules(z.zone, (m.z || {}).j || p.c) : null;
+  const ocH = !rule && m.z && m.z.desc ? String(m.z.desc).match(/max height (\d+) ft/i) : null;   // Orange County neighborhood summary
+  const hMax = rule && +rule.max_height_ft ? +rule.max_height_ft : ocH ? +ocH[1] : null;
+
+  const rollLand = +a.Roll_LandValue || 0;
+  const rollImp = +a.Roll_ImpValue || 0;
+  const totalRoll = rollLand + rollImp;
+  const rollBaseYear = a.Roll_LandBaseYear || a.Roll_ImpBaseYear || null;
+  // PAIS sales rows: price and date field names vary by service version, so accept the common spellings
+  const saleRows = R && R.sales && R.sales.ok && Array.isArray(R.sales.v) ? R.sales.v.map(r => ({ price: +(r.SALEPRICE ?? r.DOCUMENTVALUE ?? r.SalePrice ?? r.FORMATTED_SALEPRICE ?? 0) || 0,
+      date: String(r.SALEDATE ?? r.SaleDate ?? r.FORMATTED_SALEDATE ?? "").replace(/\D/g, "").slice(0, 8) })).filter(r => r.price > 0) : [];
+  const sale = saleRows.length ? saleRows.sort((x, y) => y.date.localeCompare(x.date))[0] : null;
+
+  const baseNeighborhoodHv = m.hv || p.hv || 900000;
+  const localVpsf = Math.min(Math.max(baseNeighborhoodHv / 1800, 250), 1500);
+  const livingSqft = F.bldg || (F.foot ? Math.round(F.foot * F.stories) : 1600);
+  
+  // Hedonic Multi-Variate Comp Valuation Model
+  const ageFactor = F.yb ? Math.max(0.75, Math.min(1.25, 1 + (F.yb - 1975) * 0.0035)) : 1.0;
+  const bedBathFactor = 1.0 + Math.max(-0.15, Math.min(0.20, ((F.beds || 3) - 3) * 0.04 + ((F.baths || 2) - 2) * 0.03));
+  const poolBonus = F.pool ? baseNeighborhoodHv * 0.045 : 0;
+  const lotBonus = Math.max(-0.08, Math.min(0.12, (((lot || 6000) - 5500) / 5500) * 0.10)) * baseNeighborhoodHv;
+
+  let houseHv = Math.round((livingSqft * localVpsf * 0.88 * ageFactor * bedBathFactor + lotBonus + poolBonus) / 5000) * 5000;
+  if (sale && sale.price > 50000) {
+    // blend the last recorded price (aged forward) with the size-based estimate
+    const yrs = sale.date.length === 8 ? Math.max(0, (new Date().getFullYear() - +sale.date.slice(0, 4))) : 3;
+    const saleAdj = Math.round(sale.price * Math.pow(1.04, Math.min(yrs, 8)));
+    houseHv = Math.round((0.65 * saleAdj + 0.35 * houseHv) / 5000) * 5000;
+  }
+  const houseVpsf = Math.round(houseHv / Math.max(livingSqft, 1));
+
+  // Tight precision confidence interval (+-6.5%)
+  const confMarginPct = 0.065;
+  const valLow = Math.round((houseHv * (1 - confMarginPct)) / 5000) * 5000;
+  const valHigh = Math.round((houseHv * (1 + confMarginPct)) / 5000) * 5000;
+
+  if (!st.sortCol) st.sortCol = "net";
+  if (!st.sortDir) st.sortDir = "desc";
+  if (!st.aduSqft) st.aduSqft = F.yard >= 1500 ? 800 : F.yard >= 800 ? 600 : 400;
+
+  const h = houseChecks(a, lot, m, z, hMax, F, R);
+  h.houseHv = houseHv;
+  h.houseVpsf = houseVpsf;
+  h.st = st;
+
+  let ups = h.res ? houseUpgrades(h, m, R) : [];
+  
+  ups.sort((x, y) => {
+    let vx = x[st.sortCol], vy = y[st.sortCol];
+    if (typeof vx === "string") return st.sortDir === "asc" ? vx.localeCompare(vy) : vy.localeCompare(vx);
+    return st.sortDir === "asc" ? vx - vy : vy - vx;
+  });
+
+  const GROUPS = [/^(Full second story|Partial second story|Ground-floor room addition|Garage to living space|Convert a den)/, /^(Detached ADU|Junior ADU)/];
+  const pkgH = [], taken = new Set();
+  for (const u of ups.filter(u => u.per >= 1)) { const gi = GROUPS.findIndex(g => g.test(u.n)); if (gi >= 0) { if (taken.has(gi)) continue; taken.add(gi); } pkgH.push(u); }
+  const bestH = ups.slice().filter(u => u.per >= 1).sort((x, y) => y.per - x.per)[0];
+  
+  const tag = { yes: "✓", maybe: "?", no: "✗", note: "•" }, col = { yes: "var(--ok-ink, #15803d)", maybe: "var(--warn-ink)", no: "var(--ink-3)", note: "var(--ink-2)" };
+  const fact = (k, v, src) => v == null || v === "" ? "" : `<tr><td>${k}</td><td><b>${v}</b>${src ? `<br><span class="muted">${src}</span>` : ""}</td></tr>`;
+  const slotTxt = F.slots.length > 1 ? F.slots.map((x, i) => `${i ? "building " + (i + 1) : "main"}: ${fmtN(x.sqft)} sq ft${x.units ? `, ${x.units} unit${x.units > 1 ? "s" : ""}` : ""}${x.yb ? `, ${x.yb}` : ""}`).join("; ") : null;
+
+  const svUrl = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${ll.lat.toFixed(6)},${ll.lng.toFixed(6)}`;
+
+  const aduUp = ups.find(u => /^Detached ADU/.test(u.n));
+  const aduCa = aduUp ? aduUp.cost_analysis : null;
+
+  box.innerHTML = `<h3>This home</h3>
+    <div class="prelim-banner"><span class="prelim-icon">ℹ️</span><span class="prelim-text"><b>Preliminary screening:</b> Automated checks use public county records and state maps. Always verify zoning, setbacks, easements, utilities, and permits with your city building department before committing funds or hiring contractors.</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:6px">
+      <p class="small" style="margin:0"><b>${esc(a.SitusFullAddress || "Parcel " + a.AIN)}</b> · AIN/APN ${esc(a.AIN)} · ${esc(a.UseDescription || "")}</p>
+      <a href="${svUrl}" target="_blank" rel="noopener" class="streetview-pill" title="Open Google Street View to inspect facade, roof, and stories">
+        📷 Street View ↗
+      </a>
+    </div>
+    ${waiting.length ? `<div class="house-loading"><span class="spin"></span><div>Pulling this home's records from County GIS (${waiting.join("; ")})…</div></div>` : ""}
+    ${offline.length ? `<p class="small muted">Could not reach: ${offline.join("; ")}. Those rows fall back to the area-level maps shipped with this page.</p>` : ""}
+    <table class="small facts"><tbody>
+      ${fact("Estimated market value", `<span><b>${fmt$(houseHv)}</b> <span class="vpd-range" style="font-size:12px;margin-left:6px;font-weight:normal;color:var(--ink-2)">(${fmt$(valLow)} – ${fmt$(valHigh)} · screening range ±6.5%)</span></span>`, `screening estimate: ${fmtN(livingSqft)} sq ft at ~$${houseVpsf}/sq ft from this area's typical price per sq ft, adjusted for age, bedrooms, baths, lot size, pool${sale ? " and the last recorded sale" : ""}; not an appraisal`)}
+      ${totalRoll > 0 ? fact("Assessor Roll Value", `<span>${fmt$(totalRoll)} <span class="muted">(Land ${fmt$(rollLand)} + Imp ${fmt$(rollImp)}${rollBaseYear ? `, base year ${rollBaseYear}` : ""})</span></span>`, "County Assessor Assessment Roll") : ""}
+      ${sale ? fact("Last recorded sale", `<span>${fmt$(sale.price)} <span class="muted">(${sale.date.length === 8 ? sale.date.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3") : "date not recorded"})</span></span>`, "County PAIS recorded deed transfer") : ""}
+      ${fact("Stories", `<span><b>${F.stories} stor${F.stories > 1 ? "ies" : "y"}</b>${F.conf === "estimated" ? " (estimate)" : ""} <button type="button" class="story-toggle-btn" onclick="toggleHouseStories()" title="Click to switch story count and recalculate upgrades">Switch to ${F.stories === 1 ? "2-story" : "1-story"}</button> <a href="${svUrl}" target="_blank" rel="noopener" class="streetview-link" title="Open Google Street View in a new tab">📷 Street View ↗</a></span>`, esc(F.src.stories))}
+      ${fact("Living area (GLA)", F.bldg ? `${fmtN(F.bldg)} sq ft${F.living > F.bldg ? ` (${fmtN(F.living)} across all structures)` : ""}` : null, "ANSI Z765 Above-Grade Gross Living Area (Assessor Roll)")}
+      ${fact("Bedrooms / baths", F.beds ? `${F.beds} / ${F.baths}` : null, "County Assessor")}
+      ${fact("Units", F.units || null, "County Assessor")}
+      ${fact("Built", F.yb ? `${F.yb}${F.eff && F.eff !== F.yb ? ` (effective year ${F.eff}, after updates)` : ""}` : null, "County Assessor")}
+      ${fact("Buildings on the lot", slotTxt || (F.others ? `${F.others + 1} structures` : null), slotTxt ? "County Assessor" : "building outlines")}
+      ${fact("Building footprint", F.foot ? `${fmtN(Math.round(F.foot))} sq ft${F.footAll > F.foot ? ` (${fmtN(Math.round(F.footAll))} with other buildings)` : ""}` : null, F.src.foot)}
+      ${fact("Lot", lot ? `${fmtN(lot)} sq ft` : null, "parcel outline (County Assessor GIS)")}
+      ${fact("Open yard (est.)", `${fmtN(Math.round(F.yard))} sq ft`, "lot minus buildings, less ~20% for setbacks")}
+      ${fact("Zoning", z ? `${esc(z.zone)}` : (m.z ? esc(m.z.top) : null), z ? `parcel zoning layer (${esc(z.juris || "city")})` : isOCArea(m) ? "neighborhood summary (preliminary)" : "block-group summary")}
+      ${fact("Height limit", hMax ? `${hMax} ft` : null, rule ? `${esc(rule.code_section)} (round-6 research, not yet checked against the code)` : ocH ? "city code summary (preliminary)" : null)}
+      ${fact("Selling an ADU separately (AB 1033)", (m.c || p.c || "").toLowerCase().trim() === "santa monica" ? "<span style='color:var(--ok-ink);font-weight:600'>Santa Monica has an AB 1033 opt-in ordinance (SMMC § 9.31.026), so an ADU can be sold as a condominium under the city's conditions (the adoption date and conditions were not verified; read the ordinance)</span>" : "<span style='color:var(--ink-2)'>Not allowed here: an ADU can be rented but not sold apart from the main home (Gov. Code § 66314(d)(1)) unless the city opts in to AB 1033 (§ 66342)</span>", "state ADU law; verify the city's current ordinance")}
+      ${fact("Fire zone", rOff ? ((m.fire || 0) >= 0.5 ? "Very High Fire Hazard Severity Zone (area map; lot-level check offline)" : "Not in a Very High zone on the area map (lot-level check offline)") : !R ? "checking…" : (R.fire && R.fire.vh ? "Very High Fire Hazard Severity Zone" : ((m.fire || 0) >= 0.5 ? "Very High Fire Hazard Severity Zone (area map; Title 24 Ch. 7A applies)" : "Not in a Very High zone")), "CAL FIRE Fire Hazard Severity Zones (SRA 2024 / LRA 2025)")}
+      ${fact("Historic status", rOff ? "lot-level check offline (HPOZ, monuments, County register)" : !R ? "checking…" : (histText(R) || "None on record"), R && R.hpoz && R.hpoz.ok ? "LA City / County historic resources" : null)}
+      ${fact("Hillside area", rOff ? "lot-level check offline" : !R ? "checking…" : (R.hill && R.hill.ok && R.hill.v.length ? "In designated Hillside Area" : "Not in Hillside Area"), R && R.hill && R.hill.ok ? "LA City Hillside Area map" : null)}
+      ${fact("Geologic hazard", rOff ? "lot-level check offline" : !R ? "checking…" : (geoText(R) || "None on state map"), R && R.fault && R.fault.ok ? "California Geological Survey" : null)}
+    </tbody></table>
+    
+    ${bestH ? `<p class="verdict" style="margin-top:8px">Best bet for this home: <b>${esc(bestH.n)}</b>. Expected return: <b>${fvpd(bestH.per)} / $1</b> (adds ~${fmt$(bestH.v)} on ~${fmt$(bestH.c)} investment).</p>` : h.res ? `<p class="verdict" style="margin-top:8px">No upgrade here returns $1 of value per $1 spent; the list below shows the closest.</p>` : ""}
+    ${pkgH.length ? `<div class="pkg">${tile("Upgrades that pay back", pkgH.length, "≥ $1 of value per $1; either/or options counted once")}${tile("Total cost", fmt$(pkgH.reduce((t, u) => t + u.c, 0)), "2025–2026 market estimates")}${tile("Value added", fmt$(pkgH.reduce((t, u) => t + u.v, 0)), "to this home")}</div>` : ""}
+    
+    <ul class="small" style="margin:8px 0 0 0;padding:0;list-style:none">${h.C.map(c => `<li style="margin:3px 0"><b style="color:${col[c.v]}">${tag[c.v]} ${esc(c.name)}</b> — ${c.why}</li>`).join("")}</ul>
+
+    <!-- Interactive ADU Sizing & Return Modeler -->
+    ${aduCa ? `
+      <div class="adu-interactive-card">
+        <div class="adu-card-header">
+          <div style="font-weight:700;font-size:12.5px;color:var(--ink)">📐 Interactive ADU Sizing &amp; Return Modeler</div>
+          <div class="muted small">Drag the slider to change the floor area; construction cost, fee exemptions, rent and return per $1 update as you go.</div>
+        </div>
+        <div class="adu-slider-container">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+            <span><b>Planned Floor Area:</b> <span class="adu-sqft-badge" id="adu-sqft-val">${st.aduSqft}</span> sq ft</span>
+            <span class="adu-type-badge">${st.aduSqft >= 750 ? "2-Bed / 1–2 Bath" : st.aduSqft >= 500 ? "1-Bed / 1-Bath" : "Studio ADU"}</span>
+          </div>
+          <input type="range" class="adu-range-slider" min="250" max="1200" step="25" value="${st.aduSqft}" oninput="onAduSliderChange(this.value)">
+          <div class="adu-slider-ticks">
+            <span>250 sf (Studio)</span>
+            <span>500 sf (1-BR)</span>
+            <span style="color:var(--ok-ink);font-weight:600">up to 750 sf: no impact fees</span>
+            <span>over 750 sf (proportional fees)</span>
+            <span>1,200 sf (Max State Limit)</span>
+          </div>
+        </div>
+        <div class="adu-metrics-strip">
+          <div class="adu-m-tile"><div class="m-k">All-In Cost</div><div class="m-v">${fmt$(aduUp.c)}</div><div class="m-s">~$${Math.round(aduUp.c/st.aduSqft)}/sq ft</div></div>
+          <div class="adu-m-tile"><div class="m-k">Impact Fees</div><div class="m-v" style="color:${aduCa.impactFees === 0 ? 'var(--ok-ink)' : 'var(--warn-ink)'}">${aduCa.impactFees === 0 ? '$0 (exempt)' : '~' + fmt$(aduCa.impactFees)}</div><div class="m-s">${st.aduSqft <= 750 ? 'Gov. Code § 66311.5' : 'proportional fees'}</div></div>
+          <div class="adu-m-tile"><div class="m-k">School Fee</div><div class="m-v" style="color:${(aduCa.schoolFee || 0) === 0 ? 'var(--ok-ink)' : 'var(--warn-ink)'}">${(aduCa.schoolFee || 0) === 0 ? '$0 (under 500 sf)' : fmt$(aduCa.schoolFee)}</div><div class="m-s">${st.aduSqft < 500 ? 'exempt under 500 sf' : 'modeled at SAB Level 1 cap'}</div></div>
+          <div class="adu-m-tile"><div class="m-k">Est. Rent</div><div class="m-v">~${fmt$(aduUp.monthlyRent || 2300)}/mo</div><div class="m-s">calibrated local rent</div></div>
+          <div class="adu-m-tile"><div class="m-k">Resale Uplift</div><div class="m-v">${fmt$(aduUp.v)}</div><div class="m-s">appraisal + income cap</div></div>
+          <div class="adu-m-tile"><div class="m-k">Net Profit</div><div class="m-v" style="color:var(--ok-ink)">${aduUp.net >= 0 ? '+' + fmt$(aduUp.net) : '−' + fmt$(-aduUp.net)}</div><div class="m-s">equity created</div></div>
+          <div class="adu-m-tile"><div class="m-k">Return per $1</div><div class="m-v" style="color:var(--accent)">${fvpd(aduUp.per)}</div><div class="m-s">payback ratio</div></div>
+        </div>
+      </div>
+    ` : ""}
+
+    ${ups.length ? `
+      <div style="margin-top:12px;margin-bottom:4px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px">
+        <h4 style="margin:0;font-size:12.5px;color:var(--ink)">Upgrades for this house (click any item for itemized cost schedule)</h4>
+        <span class="small muted">Specific to parcel &amp; year built</span>
+      </div>
+
+      <!-- Quick Sort Pill Bar -->
+      <div class="upgrade-sort-bar">
+        <span class="sort-label">Sort by:</span>
+        <button type="button" class="sort-pill ${st.sortCol === 'net' ? 'active' : ''}" onclick="toggleHouseSort('net')">Net Profit ${st.sortCol === 'net' ? (st.sortDir === 'desc' ? '▼' : '▲') : ''}</button>
+        <button type="button" class="sort-pill ${st.sortCol === 'per' ? 'active' : ''}" onclick="toggleHouseSort('per')">Return / $1 ${st.sortCol === 'per' ? (st.sortDir === 'desc' ? '▼' : '▲') : ''}</button>
+        <button type="button" class="sort-pill ${st.sortCol === 'c' ? 'active' : ''}" onclick="toggleHouseSort('c')">Cost ${st.sortCol === 'c' ? (st.sortDir === 'asc' ? '▲' : '▼') : ''}</button>
+        <button type="button" class="sort-pill ${st.sortCol === 'v' ? 'active' : ''}" onclick="toggleHouseSort('v')">Value Added ${st.sortCol === 'v' ? (st.sortDir === 'desc' ? '▼' : '▲') : ''}</button>
+        <button type="button" class="sort-pill ${st.sortCol === 'n' ? 'active' : ''}" onclick="toggleHouseSort('n')">Name ${st.sortCol === 'n' ? (st.sortDir === 'asc' ? '▲' : '▼') : ''}</button>
+      </div>
+
+      <table class="small sticky-head" style="width:100%;border-collapse:collapse;margin-top:4px">
+        <thead>
+          <tr style="text-align:left">
+            <th class="sortable-th" onclick="toggleHouseSort('n')">Upgrade ${st.sortCol === 'n' ? (st.sortDir === 'asc' ? '▲' : '▼') : ''}</th>
+            <th class="sortable-th" onclick="toggleHouseSort('c')" style="text-align:right">Estimated Cost ${st.sortCol === 'c' ? (st.sortDir === 'asc' ? '▲' : '▼') : ''}</th>
+            <th class="sortable-th" onclick="toggleHouseSort('v')" style="text-align:right">Value Adds ${st.sortCol === 'v' ? (st.sortDir === 'desc' ? '▼' : '▲') : ''}</th>
+            <th class="sortable-th" onclick="toggleHouseSort('per')" style="text-align:right">Per $1 ${st.sortCol === 'per' ? (st.sortDir === 'desc' ? '▼' : '▲') : ''}</th>
+            <th class="sortable-th" onclick="toggleHouseSort('net')" style="text-align:right">Net Profit ${st.sortCol === 'net' ? (st.sortDir === 'desc' ? '▼' : '▲') : ''}</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${ups.slice(0, 14).map((u, i) => `
+            <tr style="border-top:1px solid var(--rule);cursor:pointer" onclick="toggleUpgradeCost(${i})">
+              <td>
+                <b>${esc(u.n)}</b>
+                <button type="button" class="cost-breakdown-btn" onclick="event.stopPropagation(); toggleUpgradeCost(${i})">🔍 View house cost breakdown</button>
+                ${u.note ? `<br><span class="muted">${esc(u.note)}</span>` : ""}
+                ${u.sav > 0 ? `<br><span class="muted">${/ADU/.test(u.n) ? "rent" : "saves"} ~${fmt$(u.sav)}/yr</span>` : ""}
+              </td>
+              <td style="text-align:right;font-weight:600">${fmt$(u.c)}</td>
+              <td style="text-align:right">${fmt$(u.v)}</td>
+              <td style="text-align:right;font-weight:600;color:var(--accent)">${fvpd(u.per)}</td>
+              <td style="text-align:right;font-weight:600;color:${u.net >= 0 ? 'var(--ok-ink)' : 'inherit'}">${u.net >= 0 ? "+" + fmt$(u.net) : "−" + fmt$(-u.net)}</td>
+            </tr>
+            <tr id="upgrade-cost-${i}" class="upgrade-cost-row" hidden>
+              <td colspan="5" style="padding:10px 12px;background:var(--ground);border-bottom:1px solid var(--rule)">
+                ${renderCostAnalysisSchedule(u, h, m)}
+              </td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+      ${ups.length > 14 ? `<p class="small muted">${ups.length - 14} more fit this lot but return less.</p>` : ""}` : ""}
+    <p class="small muted" style="margin-top:8px">Facts compiled from County Assessor records, city permits, state hazard maps and mapped building footprints. Values use this area's price per sq ft and rents scaled from the county median; construction costs are City Pretty's 2025–2026 estimates, not bids.</p>`;
+}
+
+// Plain-language summaries of the historic and geologic checks (used in the per-house facts table)
+function histText(R) {
+  if (!R) return "";
+  const out = [];
+  if (R.hpoz && R.hpoz.ok && R.hpoz.v.length) out.push("HPOZ: " + R.hpoz.v.map(x => x.NAME || x.Name || "historic district").filter(Boolean).slice(0, 2).map(esc).join(", "));
+  if (R.hcm && R.hcm.ok && R.hcm.v.length) out.push("Historic-Cultural Monument" + (R.hcm.v[0].MNT_NUM ? " #" + esc(R.hcm.v[0].MNT_NUM) : "") + (R.hcm.v[0].NAME ? " (" + esc(R.hcm.v[0].NAME) + ")" : ""));
+  if (R.hc && R.hc.ok && R.hc.v.length) out.push(R.hc.v.map(x => [x.Name, x.Status_Code_Description].filter(Boolean).map(esc).join(": ")).slice(0, 2).join("; ") + (R.hc.v.some(x => /yes|true|1/i.test(String(x.Mills_Act_Contract || ""))) ? " (Mills Act)" : ""));
+  return out.join(" · ");
+}
+function geoText(R) {
+  if (!R) return "";
+  const z = [];
+  if (R.fault && R.fault.ok && R.fault.v.length) z.push("Alquist-Priolo earthquake fault zone");
+  if (R.liq && R.liq.ok && R.liq.v.length) z.push("liquefaction zone");
+  if (R.slide && R.slide.ok && R.slide.v.length) z.push("earthquake-induced landslide zone");
+  if (!z.length) {
+    const failed = ["fault", "liq", "slide"].filter(k => R[k] && !R[k].ok);
+    return failed.length === 3 ? "state map not reachable" : "";
+  }
+  return z.join("; ") + " (CGS Seismic Hazard Zones)";
+}
+
+function toggleHouseSort(col) {
+  const ah = (typeof activeHouse !== "undefined" && activeHouse) || (typeof window !== "undefined" && window.activeHouse);
+  if (!ah || !ah.st) return;
+  const st = ah.st;
+  if (st.sortCol === col) {
+    st.sortDir = st.sortDir === "desc" ? "asc" : "desc";
+  } else {
+    st.sortCol = col;
+    st.sortDir = (col === "c" || col === "n") ? "asc" : "desc";
+  }
+  if (typeof renderHouse === "function") renderHouse(ah.box, ah.a, ah.lot, ah.ll, st);
+}
+
+if (typeof window !== "undefined") {
+  window.renderHouse = renderHouse;
+  window.toggleHouseSort = toggleHouseSort;
+  window.onAduSliderChange = onAduSliderChange;
+  window.applyPreset = applyPreset;
+}
+function onAduSliderChange(val) {
+  const ah = (typeof activeHouse !== "undefined" && activeHouse) || (typeof window !== "undefined" && window.activeHouse);
+  if (!ah || !ah.st) return;
+  ah.st.aduSqft = +val;
+  if (typeof renderHouse === "function") renderHouse(ah.box, ah.a, ah.lot, ah.ll, ah.st);
+}
+// ---------------- address search: find a home by street address (County Assessor parcels)
+let addrTimer = null;
+function hideAddr() { const el = $("#addr-results"); if (el) el.remove(); }
+async function goToParcel(f) {
+  hideAddr();
+  const rings = (f.geometry && f.geometry.rings) || []; if (!rings.length) return;
+  const poly = L.polygon(rings.map(r => r.map(([x, y]) => [y, x]))), c = poly.getBounds().getCenter();
+  map.fitBounds(poly.getBounds(), { maxZoom: 18, padding: [120, 120], animate: false });
+  const bg = allFeatures().find(ff => pointInFeature(ff, c.lng, c.lat));
+  if (bg) select(bg.properties.id, false);
+  houseAt(c);
+}
+async function addressSearch(text, go) {
+  const t = text.toUpperCase().replace(/[^A-Z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
+  let d;
+  try { d = await arcQuery(PARCEL_URL.replace(/\/query$/, ""), { where: `SitusFullAddress LIKE '${t.replace(/'/g, "")}%'`, outFields: "AIN,SitusFullAddress", returnGeometry: true, outSR: 4326, resultRecordCount: 8 }); }
+  catch (e) { return; }
+  const feats = (d.features || []).filter(f => f.attributes.SitusFullAddress);
+  if (go && feats.length) return goToParcel(feats[0]);
+  hideAddr(); if (!feats.length) return;
+  const box = document.createElement("div"); box.id = "addr-results";
+  box.innerHTML = feats.map((f, i) => `<button type="button" data-i="${i}">${esc(f.attributes.SitusFullAddress.replace(/\s+/g, " "))}</button>`).join("");
+  $("#q").parentElement.style.position = "relative"; $("#q").after(box);
+  box.querySelectorAll("button").forEach(b => b.onclick = () => goToParcel(feats[+b.dataset.i]));
+}
+
+// ---------------- house numbers at zoom 18+ (County CAMS address points)
+let numLayer = null, numTimer = null;
+function drawNumbers() {
+  clearTimeout(numTimer);
+  numTimer = setTimeout(async () => {
+    if (!map._loaded) return;
+    if (map.getZoom() < 18) { if (numLayer) { map.removeLayer(numLayer); numLayer = null; } return; }
+    const b = map.getBounds();
+    const isOc = (typeof activeCounty !== "undefined" && activeCounty === "oc") || (b.getSouth() < 33.95 && b.getNorth() > 33.35 && b.getEast() > -118.15 && b.getWest() < -117.40);
+    if (isOc) {
+      let d;
+      try {
+        const q = `https://www.ocgis.com/arcpub/rest/services/Map_Layers/Parcels/MapServer/0/query?geometry=${b.getWest()},${b.getSouth()},${b.getEast()},${b.getNorth()}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=SITE_ADDRESS,ASSESSMENT_NO&returnGeometry=true&outSR=4326&resultRecordCount=300&f=json`;
+        d = await (await fetch(q)).json();
+      } catch (e) { return; }
+      if (numLayer) map.removeLayer(numLayer);
+      const seen = new Set();
+      numLayer = L.layerGroup((d.features || []).filter(f => f.geometry && f.geometry.rings && f.attributes && f.attributes.SITE_ADDRESS).map(f => {
+        const addr = (f.attributes.SITE_ADDRESS || "").trim();
+        const num = addr.split(" ")[0];
+        if (!/^\d+/.test(num)) return null;
+        const pts = f.geometry.rings[0];
+        if (!pts || !pts.length) return null;
+        const cy = pts.reduce((s, p) => s + p[1], 0) / pts.length;
+        const cx = pts.reduce((s, p) => s + p[0], 0) / pts.length;
+        const k = num + "@" + cx.toFixed(4) + cy.toFixed(4);
+        if (seen.has(k)) return null; seen.add(k);
+        return L.marker([cy, cx], { interactive: false, keyboard: false, icon: L.divIcon({ className: "", iconSize: null, html: `<div class="hnum" style="transform:translate(-50%,-50%)">${esc(num)}</div>` }) });
+      }).filter(Boolean)).addTo(map);
+      return;
+    }
+    let d; try { d = await arcQuery(R9.cams, { geometry: `${b.getWest()},${b.getSouth()},${b.getEast()},${b.getNorth()}`, geometryType: "esriGeometryEnvelope", inSR: 4326, outSR: 4326,
+      spatialRel: "esriSpatialRelIntersects", outFields: "Number,NumPrefix,NumSuffix", returnGeometry: true, resultRecordCount: 500 }); } catch (e) { return; }
+    if (numLayer) map.removeLayer(numLayer);
+    const seen = new Set();
+    numLayer = L.layerGroup((d.features || []).filter(f => f.geometry && f.geometry.rings && f.attributes && f.attributes.Number).map(f => {
+      const n = `${f.attributes.NumPrefix || ""}${f.attributes.Number}${f.attributes.NumSuffix || ""}`, k = n + "@" + f.geometry.x.toFixed(4) + f.geometry.y.toFixed(4);
+      if (seen.has(k)) return null; seen.add(k);
+      return L.marker([f.geometry.y, f.geometry.x], { interactive: false, keyboard: false, icon: L.divIcon({ className: "", iconSize: null, html: `<div class="hnum" style="transform:translate(-50%,-50%)">${esc(n)}</div>` }) });
+    }).filter(Boolean)).addTo(map);
+  }, 350);
+}
+
+// ---------------- hover preview at street level: outline the lot under the mouse and show its address
+let hoverTimer = null, hoverLayer = null, hoverKey = "", hoverFeat = null, prefetchTimer = null;
+const hoverCache = new Map();
+function hoverParcel(e) {
+  clearTimeout(hoverTimer);
+  if (map.getZoom() < 17) { if (hoverLayer) { map.removeLayer(hoverLayer); hoverLayer = null; } return; }
+  hoverTimer = setTimeout(async () => {
+    const key = `${e.latlng.lat.toFixed(5)},${e.latlng.lng.toFixed(5)}`; if (key === hoverKey) return; hoverKey = key;
+    let f = hoverCache.get(key);
+    if (f === undefined) { try { f = await fetchParcel(e.latlng); } catch (er) { f = null; } hoverCache.set(key, f); }
+    if (hoverLayer) { map.removeLayer(hoverLayer); hoverLayer = null; }
+    hoverFeat = f;
+    if (!f || !f.geometry) return;
+    const a = f.attributes;
+    clearTimeout(prefetchTimer);
+    prefetchTimer = setTimeout(() => { if (hoverFeat === f) prefetchHouse(f, e.latlng); }, 350);
+    hoverLayer = L.polygon(f.geometry.rings.map(r => r.map(([x, y]) => [y, x])), { interactive: false, color: css("--ink", "#111"), weight: 2, fill: false, dashArray: "3 3" })
+      .bindTooltip(`<b>${esc(a.SitusFullAddress || "Parcel " + a.AIN)}</b><br><span class="muted">click to analyze this home</span>`, { permanent: true, direction: "top", className: "" }).addTo(map);
+  }, 450);
+}
+
+// ---------------- lot lines from the County parcel map (drawn by the County server, online only)
+// Speed: 512 px tiles (4x fewer server renders per screen than 256 px). If the County service has a pre-drawn tile
+// cache in the standard web-mercator grid, cachedLotLines() is used instead: those tiles are files, not renders.
+var PARCEL_MS = "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer";
+var PARCEL_MS_OC = "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Parcels/MapServer";
+var LotLines = L.TileLayer.extend({
+  getTileUrl(c) {
+    const ts = this.getTileSize().x, nw = this._map.unproject([c.x * ts, c.y * ts], c.z), se = this._map.unproject([(c.x + 1) * ts, (c.y + 1) * ts], c.z);
+    const a = L.CRS.EPSG3857.project(nw), b = L.CRS.EPSG3857.project(se);
+    const cLat = (nw.lat + se.lat) / 2, cLng = (nw.lng + se.lng) / 2;
+    const isOc = (typeof activeCounty !== "undefined" && activeCounty === "oc") || (cLat < 33.95 && cLat > 33.35 && cLng > -118.15 && cLng < -117.40);
+    const ms = isOc ? PARCEL_MS_OC : PARCEL_MS;
+    return `${ms}/export?bbox=${a.x},${b.y},${b.x},${a.y}&bboxSR=3857&imageSR=3857&size=${ts},${ts}&layers=show:0&format=png32&transparent=true&f=image&dpi=96`;
+  }
+});
+var LOT_OPTS = { minZoom: 15, maxZoom: 20, opacity: .95, tileSize: 512, keepBuffer: 3, attribution: "Parcels © County GIS" };
+var lots = null, lotCache = null;
+
+function syncLots() {
+  const cb = $("#l-lots");
+  const want = cb ? cb.checked : false;
+  const isOc = (typeof activeCounty !== "undefined" && activeCounty === "oc");
+  const m = (typeof map !== "undefined" && map) ? map : (typeof window !== "undefined" && window.map ? window.map : null);
+  
+  if (lots) {
+    if ((isOc && lots._isLa) || (!isOc && !lots._isLa)) {
+      if (m && m.hasLayer && m.hasLayer(lots)) m.removeLayer(lots);
+      lots = null;
+      if (typeof window !== "undefined") window.lots = null;
+    }
+  }
+
+  if (want && !lots && m && m.addLayer) {
+    if (isOc) {
+      const opts = Object.assign({}, LOT_OPTS, {
+        minZoom: 15,
+        maxZoom: 20,
+        opacity: 0.95,
+        attribution: "Parcels © OCGIS / OC Public Works"
+      });
+      lots = new LotLines("", opts);
+      lots._isLa = false;
+      lots.addTo(m);
+      if (typeof watchLots === "function") watchLots(lots);
+    } else {
+      const opts = Object.assign({}, LOT_OPTS, {
+        minZoom: 15,
+        maxZoom: 20,
+        opacity: 0.9,
+        attribution: "Parcels © LA County Assessor"
+      });
+      lots = lotCache ? lotCache : new LotLines("", opts);
+      lots._isLa = true;
+      lots.addTo(m);
+      if (typeof watchLots === "function") watchLots(lots);
+    }
+    if (typeof window !== "undefined") window.lots = lots;
+  }
+  
+  if (!want && lots && m) {
+    if (m.hasLayer && m.hasLayer(lots)) m.removeLayer(lots);
+    lots = null;
+    if (typeof window !== "undefined") window.lots = null;
+  }
+}
+
+if (typeof window !== "undefined") {
+  window.LotLines = LotLines;
+  window.PARCEL_MS = PARCEL_MS;
+  window.PARCEL_MS_OC = PARCEL_MS_OC;
+  window.LOT_OPTS = LOT_OPTS;
+  window.lots = lots;
+  window.lotCache = lotCache;
+  window.syncLots = syncLots;
+}
+// Resolves to a tile layer when the service publishes a standard web-mercator cache down to zoom 17, else null.
+async function cachedLotLines() {
+  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 4000);
+  try {
+    const j = await (await fetch(`${PARCEL_MS}?f=json`, { signal: ctl.signal })).json(), ti = j.tileInfo || {};
+    const wkid = (ti.spatialReference || {}).latestWkid || (ti.spatialReference || {}).wkid;
+    const lod = (ti.lods || []).find(l => l.level === 17);
+    const web = [3857, 102100].includes(wkid) && ti.origin && Math.abs(ti.origin.x + 20037508.3428) < 1 && ti.rows === 256;
+    if (!j.singleFusedMapCache || !web || !lod || Math.abs(lod.resolution / 1.194328566855 - 1) > .01) return null;
+    const maxNative = Math.max(...ti.lods.map(l => l.level));
+    return L.tileLayer(`${PARCEL_MS}/tile/{z}/{y}/{x}`, { ...LOT_OPTS, tileSize: 256, maxNativeZoom: Math.min(maxNative, 19) });
+  } catch { return null; } finally { clearTimeout(t); }
+}
+// "Loading property lines…" note: shown while lot-line tiles are loading at zoom 15+, hidden when they finish.
+function watchLots(layer) {
+  const note = $("#lots-note"); if (!note || !layer) return;
+  let timer = null, doneTimer = null, shown = false;
+  const hide = () => { clearTimeout(timer); timer = null; clearTimeout(doneTimer); note.hidden = true; note.classList.remove("done"); shown = false; };
+  // After the lines have loaded, show a green check for a moment so the wait visibly ends well
+  const done = () => {
+    clearTimeout(timer); timer = null;
+    if (!shown || note.hidden) { note.hidden = true; shown = false; return; }
+    const isOc = (typeof activeCounty !== "undefined" && activeCounty === "oc");
+    note.classList.add("done");
+    note.innerHTML = `<span class="check" aria-hidden="true">✓</span><div>Property lines loaded from ${isOc ? "Orange County" : "the LA County Assessor"}. Click any lot to analyze that home.</div>`;
+    clearTimeout(doneTimer); doneTimer = setTimeout(() => { note.hidden = true; note.classList.remove("done"); shown = false; }, 2600);
+  };
+  const getMinZ = () => 15;
+  layer.on("loading", () => {
+    clearTimeout(timer); clearTimeout(doneTimer); note.classList.remove("done");
+    if (typeof map !== "undefined" && map && map.getZoom && map.getZoom() >= getMinZ()) {
+      timer = setTimeout(() => {
+        const isOc = (typeof activeCounty !== "undefined" && activeCounty === "oc");
+        const div = note.querySelector("div");
+        if (div) {
+          const cName = isOc ? "Orange County (OC Survey / County GIS)" : "LA County Assessor";
+          div.innerHTML = `Loading property lines from ${cName}… <button type="button" id="lots-hood">See the neighborhood meanwhile</button>`;
+          const bh = $("#lots-hood");
+          if (bh) bh.onclick = () => { hide(); if (typeof selectAt === "function") selectAt(map.getCenter()); };
+        }
+        note.innerHTML = `<span class="spin"></span>` + (note.querySelector("div") ? note.querySelector("div").outerHTML : "");
+        if (!note.querySelector("div")) note.innerHTML = `<span class="spin"></span><div>Loading property lines from ${cName}… <button type="button" id="lots-hood">See the neighborhood meanwhile</button></div>`;
+        const bh2 = $("#lots-hood"); if (bh2) bh2.onclick = () => { hide(); if (typeof selectAt === "function") selectAt(map.getCenter()); };
+        note.hidden = false; shown = true;
+      }, LOTS_NOTE_MS);
+    }
+  });
+  layer.on("load", done);
+  layer.on("remove", hide);
+  if (typeof map !== "undefined" && map && map.on) {
+    map.on("zoomend", () => { if (map.getZoom() < getMinZ()) hide(); });
+  }
+}
+const LOTS_NOTE_MS = 1200;
+
+// ---------------- homeowner upgrades (round 6; LA-metro averages, not this house)
+function upgradeTable(m) {
+  const fire = (m.fire || 0) >= 0.5;
+  const U = (D.upgrades || []).filter(u => !(u.applies_if === "pre1975" && m.yb >= 1975) && !(u.applies_if === "pre1980" && m.yb >= 1980) && !(u.applies_if === "fire" && !fire));
+  if (!U.length) return "";
+  const rows = U.map(u => ({ ...u, net: u.resale_value_added - u.cost_2025, per: u.resale_value_added / Math.max(u.cost_2025, 1) })).sort((a, b) => b.per - a.per);
+  return `<details class="more"><summary>${rows.length} home upgrades: cost, value added and return per $1</summary>
+    <div><table class="small sticky-head" style="width:100%;border-collapse:collapse;margin-top:6px">
+      <thead><tr style="text-align:left"><th>Upgrade</th><th style="text-align:right">Cost</th><th style="text-align:right">Adds to resale</th><th style="text-align:right">Per $1</th><th style="text-align:right">Saves / yr</th><th>Rebates (Nov 2026)</th><th>Property tax</th><th>Permits</th></tr></thead>
+      <tbody>${rows.map(u => `<tr style="border-top:1px solid var(--rule)"><td>${esc(u.name)}</td><td style="text-align:right">${fmt$(u.cost_2025)}</td><td style="text-align:right">${fmt$(u.resale_value_added)}</td><td style="text-align:right;font-weight:600">${fvpd(u.per)}</td><td style="text-align:right">${u.annual_savings > 0 ? fmt$(u.annual_savings) : u.annual_savings < 0 ? "−" + fmt$(-u.annual_savings) + " cost" : "–"}</td><td>${esc(u.rebates_nov_2026)}</td><td>${esc(u.property_tax)}</td><td>${esc(u.permits)}</td></tr>`).join("")}</tbody></table></div>
+    <p class="small muted">Typical 2025 LA costs and resale values (City Pretty estimates; second stories and additions run about $450–$700 per sq ft all-in). They're being checked against round-8 research. These are LA-wide averages: zoom in and click a home for numbers sized to that house and its yard. Federal credits: 25D (solar, batteries) ended for expenditures made after 31 Dec 2025; 25C (heat pumps, insulation) for property placed in service after 31 Dec 2025.</p></details>`;
+}
+
+// ---------------- EIFD calculator (Gov. Code 53398.50 et seq.)
+// m.e (from the pipeline): av = net taxable assessed value on the Assessor roll, avr/avc = residential/commercial part,
+// np = parcels, ry = roll year, sh = AV-weighted shares of the 1% levy [city, County General, other districts, schools+ERAF]
+// from the Auditor-Controller AF49 Modified ATI ratios for the tax-rate areas here, t = largest TRAs [tra, net AV].
+function eifdArea(p, scope) {
+  const feats = (activeCounty === "oc" && D_OC) ? D_OC.features : D.bgs.features;
+  const fs = scope === "hood" ? feats.filter(f => f.properties.n === p.n && f.properties.c === p.c) : [byId.get(p.id)];
+  let mv = 0, homes = 0, av = 0, avr = 0, avc = 0, np = 0, ry = null, shw = [0, 0, 0, 0], shav = 0, n = 0;
+  const tras = new Map(), ex = new Set();
+  fs.forEach(f => { const m = (D.details[f.properties.id] || {}).m || {};
+    if (m.hv && m.homes) { mv += m.hv * m.homes; homes += m.homes; }
+    const e = m.e; if (!e) return; n++;
+    av += e.av || 0; avr += e.avr || 0; avc += e.avc || 0; np += e.np || 0; ry = e.ry || ry;
+    if (e.sh) { e.sh.forEach((x, i) => shw[i] += x * e.av); shav += e.av; }
+    (e.t || []).forEach(([t, v]) => tras.set(t, (tras.get(t) || 0) + v)); (e.x || []).forEach(x => ex.add(x)); });
+  const sh = shav > 0 ? shw.map(x => x / shav) : null;
+  return { n: fs.length, withRoll: n, mv, homes, av, avr, avc, np, ry, sh, tras: [...tras].sort((a, b) => b[1] - a[1]), ex: [...ex] };
+}
+function eifdSection(p, m) {
+  const fld = (id, label, val, step, note) => `<label class="small" style="display:grid;grid-template-columns:1fr 110px;gap:8px;align-items:center;margin:4px 0"><span>${label}${note ? ` <span class="muted" id="${id}-n">${note}</span>` : ""}</span><input id="${id}" type="number" step="${step}" value="${val}" style="font:500 13px var(--mono);padding:4px 6px;border:1px solid var(--rule-strong);border-radius:6px;background:var(--ground);color:var(--ink)"></label>`;
+  return `<div class="section"><h3>EIFD calculator: tax-increment financing for this area</h3>
+    <p class="small muted">An Enhanced Infrastructure Financing District pledges part of the future growth in the 1% property tax to pay for projects. No vote is needed to form one; since AB 116 (2019) bonds need 3 hearings and fail only on a 50% protest. Schools can't take part. State law has no housing set-aside, but LA County Board Policy 3.106 (in effect since 1 Aug 2017; amendments proposed in October 2025 were sent for drafting, not adopted) sets conditions when the County joins (see below).</p>
+    <div class="cat-tabs" role="group" aria-label="EIFD area"><button type="button" data-scope="bg" aria-pressed="true">This block group</button><button type="button" data-scope="hood" aria-pressed="false">All of ${esc(p.n)}</button></div>
+    ${fld("e-av", "Base assessed value ($M)", "", 0.1, "")}
+    ${fld("e-g", "Yearly value growth (%)", 3.0, 0.1, "2% Prop 13 cap + resales")}
+    ${fld("e-new", "New development, year 3 ($M)", 0, 1, "")}
+    ${fld("e-city", "City share of the 1% tax (%)", "", 0.01, "")}
+    ${fld("e-cp", "City pledge (%)", 75, 5, "Artesia 2026: 75%")}
+    ${fld("e-county", "County General share of the 1% tax (%)", "", 0.01, "")}
+    ${fld("e-kp", "County pledge (%)", 49, 1, "Artesia 49%; range 11–50%")}
+    ${fld("e-rate", "Bond interest rate (%)", 5.25, 0.05, "")}
+    ${fld("e-dscr", "Debt-service coverage (x)", 1.35, 0.05, "")}
+    <div class="pkg" id="e-out" style="margin-top:10px"></div>
+    <div id="e-split"></div>
+    <p class="small muted" id="e-note"></p><p class="small" id="e-warn"></p>${eifdRegister()}</div>`;
+}
+function eifdRegister() {
+  const E = (D.r10 || {}).eifds || []; if (!E.length) return "";
+  const formed = E.filter(e => /^FORMED|ADOPTED/i.test(e[2])), other = E.filter(e => !/^FORMED|ADOPTED/i.test(e[2]));
+  const row = e => `<li><b>${esc(e[0])}</b> — ${esc(e[2].split(";")[0].toLowerCase())}${e[3] ? `; ${esc(e[3])}` : ""}${e[4] ? `; ${esc(e[4].split(";")[0])}` : ""}${e[5] ? `. Pays for: ${esc(e[5])}` : ""}.</li>`;
+  return `<details style="margin-top:8px"><summary class="small"><b>Real districts in LA County</b> (${formed.length} formed, ${other.length} proposed, expired or related)${activeCounty === "oc" ? " — for reference; no Orange County EIFD was found in the sources reached" : ""}</summary>
+    <ul class="small" style="margin:6px 0 0 18px;padding:0">${formed.map(row).join("")}</ul>
+    <p class="small muted" style="margin:6px 0 2px">Proposed, expired or related:</p><ul class="small" style="margin:0 0 0 18px;padding:0">${other.map(row).join("")}</ul>
+    <p class="small muted">From the round-10 research (County, city and IFP documents, accessed Nov 2026). Shares are of each agency's own part of the 1% tax, not of the whole levy. Projected totals are lifetime forecasts, not money in hand.</p></details>`;
+}
+function eifdWire(p) {
+  if (!$("#e-av")) return;
+  let scope = "bg";
+  const v = id => parseFloat($("#" + id).value) || 0;
+  const pct = x => (100 * x).toFixed(1) + "%";
+  const setAV = () => {
+    const a = eifdArea(p, scope), unincorp = /^Unincorporated/i.test(p.c) || p.c === "Los Angeles County";
+    const real = a.withRoll > 0 && a.av > 0;
+    $("#e-av").value = ((real ? a.av : a.mv * 0.55) / 1e6).toFixed(1);
+    $("#e-av-n") && ($("#e-av-n").textContent = "");
+    if (a.sh) { $("#e-city").value = (a.sh[0] * 100).toFixed(2); $("#e-county").value = (a.sh[1] * 100).toFixed(2); }
+    else { $("#e-city").value = unincorp ? 0 : 20; $("#e-county").value = 24; }
+    const split = a.sh ? `<div class="kv small" style="margin-top:8px"><span>City${unincorp ? " (none: unincorporated)" : ""}</span><span>${pct(a.sh[0])}</span><span>County General Fund</span><span>${pct(a.sh[1])}</span><span>Other districts (fire, flood, water, library, parks...)</span><span>${pct(a.sh[2])}</span><span>Schools, colleges and ERAF (can't join an EIFD)</span><span>${pct(a.sh[3])}</span></div>
+      <p class="small muted">Where each $1 of the 1% tax goes here, weighted by assessed value across ${a.tras.length} tax-rate area${a.tras.length > 1 ? "s" : ""} (largest: ${a.tras.filter(t => t[1] > 0).slice(0, 3).map(([t, x]) => `TRA ${esc(t)}, ${fmt$(x)}`).join("; ")}). Source: LA County Auditor-Controller ${esc((D.eifd || {}).factor_year || "")} Modified ATI ratios (AF49 report), the shares the Auditor uses to split tax increment. Special districts can also join; their shares are shown but not pledged in this screen.</p>` : "";
+    $("#e-split").innerHTML = split + (a.ex.length ? `<p class="small"><b>Already in a district:</b> part of this area is in the ${a.ex.map(esc).join(" and ")}, so its increment is already pledged there. A new district here would need to avoid or amend it.</p>` : "");
+    $("#e-note").textContent = real
+      ? `Base value is the net taxable value on the ${a.ry || ""} Assessor roll (land + improvements + fixtures, less exemptions) for ${a.np.toLocaleString()} parcels in ${a.n} block group${a.n > 1 ? "s" : ""}: ${fmt$(a.avr)} residential, ${fmt$(a.avc)} commercial/industrial, the rest other uses. A real district's base is the roll in its formation year. All figures are a screening estimate, not a financing plan.`
+      : `No Assessor roll value matched this area, so the base is estimated as 55% of market value (${a.homes.toLocaleString()} homes). ${a.sh ? "" : "Tax shares are placeholders: no apportionment factors matched. "}All figures are a screening estimate, not a financing plan.`;
+  };
+  const run = () => {
+    const base = v("e-av") * 1e6, gr = v("e-g") / 100, nd = v("e-new") * 1e6, r = v("e-rate") / 100, dscr = Math.max(v("e-dscr"), 1);
+    const cityC = v("e-city") / 100 * v("e-cp") / 100, cntyC = v("e-county") / 100 * v("e-kp") / 100;
+    const county = cntyC > 0, capture = cityC + cntyC;
+    const housing = county ? 0.20 : 0, admin = 0.03;
+    let av = base, tot = 0, y10 = 0;
+    for (let t = 1; t <= 30; t++) { av = av * (1 + gr) + (t === 3 ? nd : 0);
+      const net = Math.max(0, av - base) * 0.01 * capture * (1 - admin); tot += net; if (t === 10) y10 = net; }
+    const bond = r > 0 ? y10 * (1 - housing) / dscr * (1 - Math.pow(1 + r, -30)) / r : y10 * (1 - housing) / dscr * 30;
+    $("#e-out").innerHTML = `${tile("Year-10 increment", fmt$(y10), "per year, after 3% admin")}${tile("30-year total", fmt$(tot), county ? "before the County's housing condition" : "")}${tile("Bond capacity", fmt$(bond), county ? "30-yr, sized on year 10, 20% held for housing" : "30-yr bonds sized on year 10")}`;
+    const w = [];
+    const uninc = v("e-city") === 0;
+    if (county && !uninc && cntyC > cityC + 1e-9) w.push(`The County would put in more than the city (${(cntyC * 100).toFixed(2)}¢ vs ${(cityC * 100).toFixed(2)}¢ of each $1 of increment). Board Policy 3.106 requires the city's contribution to at least equal the County General Fund's plus any special districts'.`);
+    if (county && !uninc && capture > 0 && cityC / capture < 0.15 - 1e-9) w.push("Policy 3.106 also expects at least 15¢ of each captured $1 from the city, with limited exceptions.");
+    if (uninc) w.push("No city share here (unincorporated), so the County would form and run the district itself, as it did for West Carson.");
+    $("#e-warn").innerHTML = w.length ? (uninc ? "<b>Note:</b> " : "<b>County policy check:</b> ") + w.map(esc).join(" ") : "";
+  };
+  $("#panel").querySelectorAll("[data-scope]").forEach(b => b.onclick = () => { scope = b.dataset.scope;
+    $("#panel").querySelectorAll("[data-scope]").forEach(x => x.setAttribute("aria-pressed", x === b)); setAV(); run(); });
+  ["e-av", "e-g", "e-new", "e-city", "e-cp", "e-county", "e-kp", "e-rate", "e-dscr"].forEach(id => { const el = $("#" + id); if (el) el.oninput = run; });
+  setAV(); run();
+}
+
+function select(id, fly) {
+  selected = id; highlight(); syncHash(id); updateCompareUI();
+  const f = byId.get(id); if (!f) return;
+  if (fly) map.fitBounds(L.geoJSON(f).getBounds(), { maxZoom: 15, padding: [60, 60] });
+  const p = f.properties, d = D.details[id] || {}, m = d.m || {};
+  const recs = (d.r || []).map(a => Object.fromEntries(REC_KEYS.map((k, i) => [k, a[i]])));
+  const kind = r => D.catalog[r.id].kind;
+  const valAll = recs.filter(r => kind(r) === "value" || kind(r) === "regional");
+  const val = valAll.filter(r => allowed(r.id)).sort((a, b) => b.vpd - a.vpd);
+  const hidden = valAll.length - val.length;
+  const qol = recs.filter(r => kind(r) === "qol").sort((a, b) => b.qol - a.qol || a.cost - b.cost);
+  const pol = recs.filter(r => kind(r) === "policy"), own = recs.filter(r => kind(r) === "owner").sort((a, b) => b.vpd - a.vpd);
+  const pkg = val.filter(r => r.vpd >= 1 && kind(r) === "value");
+  const top = val.find(r => kind(r) === "value");
+
+  // Determine Top 3 for First-Task presentation
+  let top3 = [];
+  if (renterViewOn) {
+    const renterDirect = [...val, ...qol].filter(r => D.catalog[r.id].renter_direct || D.catalog[r.id].displacement_risk === "protective");
+    top3 = (renterDirect.length ? renterDirect : [...val, ...qol]).slice(0, 3);
+  } else {
+    top3 = (val.length >= 3 ? val.slice(0, 3) : [...val, ...qol].slice(0, 3));
+  }
+
+  const topRng = top ? formatVpdRange(top.vpd, D.catalog[top.id]?.grade, top.id, m) : null;
+  const inC = compareList.includes(id), oc = isOCArea(m), ocReal = oc && !!(D_OC && D_OC.meta && D_OC.meta.schema >= 2);
+  let h = `<div class="eyebrow">${String(id).length === 12 ? "BLOCK GROUP" : "CENSUS TRACT"} ${esc(id)} · ${esc(p.c)} · ${fmtN(m.acres)} acres</div><h2>${esc(p.n)}</h2>
+    <p class="subname">Name from ${esc(m.ns || "")}${m.csa && m.csa !== p.n ? " · County area: " + esc(m.csa) : ""}</p>
+    <div class="action-bar">
+      <button type="button" class="action-pill" onclick="copyShareLink()" title="Copy shareable link">🔗 Share</button>
+      <button type="button" class="action-pill" onclick="copyAreaSummary('${id}')" title="Copy markdown brief">📋 Copy summary</button>
+      <button type="button" class="action-pill" onclick="window.print()" title="Print 1-page dossier">🖨️ Print</button>
+      <button type="button" class="action-pill${inC ? " active" : ""}" id="btn-compare-panel" onclick="toggleCompare('${id}')">${inC ? "✓ In comparison" : "⚖️ + Compare"}</button>
+      <button type="button" class="action-pill${renterViewOn ? " active" : ""}" id="btn-renter-panel" onclick="toggleRenterView()">${renterViewOn ? "👥 Renter view (on)" : "👥 Renter view"}</button>
+      <button type="button" class="action-pill" onclick="openCorrection('${id}')">📝 Suggest correction</button>
+    </div>`;
+  if (oc && !(D_OC && D_OC.meta && D_OC.meta.schema >= 2)) h += `<div class="prelim-banner warn"><span class="prelim-icon">⚠️</span><span><b>Orange County coverage is preliminary.</b> Home values, rents, crime, heat and project sizing here are neighborhood-level estimates assembled from public sources. They have not been checked against Census, Assessor, police or transit-schedule records the way LA County's block groups have. Read them as a sketch, not a measurement.</span></div>`;
+
+  h += top && top.vpd >= 1 ? `<p class="verdict">Best bet: <b>${esc(D.catalog[top.id].name.replace(/^([A-Z])(?=[a-z])/, c => c.toLowerCase()))}</b>${/\d/.test(top.project) ? ` (${esc(top.project)})` : ""}. Expected return: <b>${topRng.estStr}</b> of home value per $1 (band ${topRng.str}, evidence ${esc(D.catalog[top.id]?.grade || "evaluated")}).</p>`
+    : `<p class="verdict">Nothing here returns $1 of home value per $1 spent. The quality-of-life projects below are still worth a look.</p>`;
+
+  // First Task Presentation: Top 3 cards prominent at top
+  h += `<div class="top3-section">
+    <h3>${renterViewOn ? "Top 3 renter &amp; community priorities" : "Top 3 recommended investments"}</h3>
+    <div class="recs">
+      ${top3.map((r, i) => recCard(r, i, kind(r) === "value" ? "value" : "qol")).join("")}
+    </div>
+  </div>`;
+
+  // Core Vitals Tiles
+  h += `<div class="section"><div class="tiles">
+    ${tile("Typical home value", fmt$(m.hv), esc(oc && !ocReal ? "neighborhood estimate (preliminary)" : (m.hvs || "")))}
+    ${tile("Median rent", m.rent ? fmt$(m.rent) + "/mo" : "–", oc && !ocReal ? "estimate (preliminary)" : ocReal ? "Census ACS 2020–24" : "Census ACS 5-Year")}
+    ${tile("Homes", fmtN(m.homes), `${m.own != null ? Math.round(m.own) + "% owner-occupied" : ""}`)}
+    ${tile("Heat vs median", m.ht != null ? (m.ht > 0 ? "+" : "") + (+m.ht).toFixed(1) + "°F" : "–", oc && !ocReal ? "estimate (preliminary)" : ocReal ? "Tree Equity Score 2021 vs urbanized-area mean" : "Tree Equity Score")}
+    ${tile("Violent crime", m.vc != null ? (+m.vc).toFixed(1) + " per 1k" : "no data", m.vc != null ? `12 mo · ${esc(m.ag || "")}` : "independent police")}
+    ${tile("Bus service", m.bt != null ? Math.round(m.bt) + "/hr" : "–", m.rm != null ? `rail ${(m.rm / 1609).toFixed(1)} mi` : "")}
+  </div></div>`;
+
+  if (pkg.length) h += `<div class="pkg" style="margin-bottom:12px">${tile("Paying projects", pkg.length, "≥ $1 per $1")}${tile("Total cost", fmt$(pkg.reduce((s, r) => s + r.cost, 0)), "build + land + 10-yr upkeep")}${tile("Value created", fmt$(pkg.reduce((s, r) => s + r.value, 0)), "nearby homes, combined")}</div>`;
+
+  // Collapsible Sections for everything else
+  h += `<details class="panel-sec"><summary><b>Neighborhood Plan &amp; Missing Amenities</b></summary><div class="sec-content">${gapSection(p, m)}</div></details>`;
+
+  const cats = ["All", ...CATS.filter(c => val.some(r => D.catalog[r.id].category === c))];
+  h += `<details class="panel-sec"><summary><b>All Ranked Value Projects (${val.length})</b></summary><div class="sec-content">
+    <div class="cat-tabs" role="group" aria-label="Filter by category">${cats.map((c, i) => `<button type="button" data-cat="${esc(c)}" aria-pressed="${i === 0}">${esc(c)}</button>`).join("")}</div>
+    <div class="recs" id="valrecs"></div>
+    ${hidden ? `<p class="small muted">${hidden} lower-graded estimate${hidden > 1 ? "s" : ""} hidden by the evidence filter above.</p>` : ""}
+    <p class="small muted">Value counts nearby homes reached. Cost includes physical construction plus 10 years of ongoing operations/maintenance.</p>
+  </div></details>`;
+
+  if (qol.length) h += `<details class="panel-sec"><summary><b>Quality-of-Life Projects (${qol.length})</b></summary><div class="sec-content"><p class="small muted">Sorted by neighborhood need compared with county medians.</p><div class="recs">${qol.map((r, i) => recCard(r, i, "qol")).join("")}</div></div></details>`;
+
+  if (pol.length) h += `<details class="panel-sec"><summary><b>Zoning &amp; Policy Reforms</b></summary><div class="sec-content"><div class="recs">${pol.map((r, i) => recCard(r, i, "policy")).join("")}</div></div></details>`;
+
+  if (own.length || (D.upgrades || []).length) h += `<details class="panel-sec"><summary><b>For an Individual Homeowner Here</b></summary><div class="sec-content"><div class="recs">${own.map((r, i) => recCard(r, i, "owner")).join("")}</div>${upgradeTable(m)}</div></details>`;
+
+  h += `<details class="panel-sec"><summary><b>Zoning: What Can Be Built Here</b></summary><div class="sec-content">${zoningSection({ ...m, city: p.c })}</div></details>`;
+  h += `<details class="panel-sec"><summary><b>Underused Land &amp; Infill Sites</b></summary><div class="sec-content">${underSection(p)}</div></details>`;
+  h += `<details class="panel-sec"><summary><b>Public Facilities Nearby</b></summary><div class="sec-content">${facilitySection(m)}</div></details>`;
+  h += `<details class="panel-sec"><summary><b>EIFD Tax-Increment Financing Calculator</b></summary><div class="sec-content">${fundSummary(pkg, id)}${eifdSection(p, m)}</div></details>`;
+
+  const kv = [], add = (k, v, f = x => x) => { if (v != null && v !== "" && !(typeof v === "number" && isNaN(v))) kv.push(`<span>${k}</span><span>${f(v)}</span>`); };
+  add("Population", m.pop, fmtN); add("Median household income", m.inc, fmt$); add("Median rent", m.rent, v => fmt$(v) + "/mo"); add("Median year built", m.yb, v => Math.round(v));
+  add("Single-family share", m.sf, v => Math.round(v) + "%"); add("Households without a car", m.nocar, v => Math.round(v) + "%");
+  if (!oc) { add("Street trees (city survey)", m.st, fmtN); add("Open tree sites", m.ts, fmtN); }
+  add("Canopy gap to goal (Tree Equity)", m.tg, v => (+v).toFixed(0) + " pts");
+  add("Property crimes, 12 mo", m.pcr, fmtN); add("Fatal/severe crashes recorded", m.ksi, fmtN);
+  if (!oc) { add("Dumping/litter reports, 12 mo (311)", m.dump, fmtN); add("Graffiti reports, 12 mo (311)", m.graf, fmtN); }
+  if (oc && m.nearest_transit && m.nearest_transit.station) add("Nearest rail station", `${esc(m.nearest_transit.station)}${m.nearest_transit.lines ? " (" + esc(m.nearest_transit.lines) + ")" : ""}${m.nearest_transit.distance_mi != null ? ", " + m.nearest_transit.distance_mi + " mi" : ""}`);
+  add("Freeway distance", m.fw, v => fmtN(v) + " m"); add("Nearest supermarket", m.gro, v => (v / 1609).toFixed(1) + " mi"); add("Restaurants & cafés within 400 m", m.din, fmtN);
+  add("Nearest public tennis court", m.ten, v => (v / 1609).toFixed(1) + " mi"); add("Nearest dog park", m.dog, v => (v / 1609).toFixed(1) + " mi"); add("Nearest public pool", m.pool, v => (v / 1609).toFixed(1) + " mi");
+  add("Nearest EV fast charger mapped", m.ev, v => (v / 1609).toFixed(1) + " mi");
+  if (kv.length) h += `<details class="panel-sec"><summary><b>Area Profile &amp; ${oc ? "Statistics" : "Census Statistics"}</b></summary><div class="sec-content">${oc && !ocReal ? '<p class="small muted">Neighborhood-level estimates (preliminary Orange County pass), not Census block-group tabulations.</p>' : ocReal ? '<p class="small muted">Census ACS 2020–24 block-group tabulations (tract medians where the block-group value is not published); distances and counts computed from OpenStreetMap (5 Nov 2026 extract), OCTA GTFS, CDE, CHP CCRS 2016–2025, CA DOJ and OC Parks data.</p>' : ""}<div class="kv">${kv.join("")}</div></div></details>`;
+
+  h += `<details class="panel-sec technical-appendix"><summary><b>Technical Appendix &amp; Data Pipeline Status</b></summary><div class="sec-content">${renderTechAppendix(ocReal)}</div></details>`;
+
+  $("#panel").innerHTML = h; $("#panel").scrollTop = 0;
+  eifdWire(p);
+  $("#panel").querySelectorAll("[data-site]").forEach(el => el.onclick = () => { const U = D.layers.underused, sid = +el.dataset.site;
+    for (const k in U.cells) for (const [id, rings] of U.cells[k]) if (id === sid) { if (!$("#l-under").checked) { $("#l-under").checked = true; drawContext(); } map.fitBounds(L.polygon(rings.map(decodeLine)).getBounds(), { maxZoom: 17, padding: [80, 80] }); return; } });
+  const draw = cat => { const list = val.filter(r => cat === "All" || D.catalog[r.id].category === cat);
+    const vr = $("#valrecs");
+    if (vr) {
+      vr.innerHTML = list.length ? list.slice(0, 12).map((r, i) => recCard(r, i, "value")).join("") + (list.length > 12 ? `<details class="more"><summary>${list.length - 12} more</summary><div class="recs">${list.slice(12).map((r, i) => recCard(r, i + 12, "value")).join("")}</div></details>` : "") : `<p class="empty">Nothing in this category applies here.</p>`;
+    }
+  };
+  draw("All");
+  $("#panel").querySelectorAll(".cat-tabs button[data-cat]").forEach(b => b.onclick = () => { $("#panel").querySelectorAll(".cat-tabs button[data-cat]").forEach(x => x.setAttribute("aria-pressed", x === b)); draw(b.dataset.cat); });
+}
+
+// The build log leaves "<dataset-id> error: ;" fragments for feeds that failed; they are noise to a reader.
+const cleanBuild = x => String(x ?? "").replace(/\b[a-z0-9]{4}-[a-z0-9]{4}\s*error:\s*;?\s*/gi, "").replace(/;\s*;/g, ";").replace(/^\s*;\s*/, "").trim();
+function report() {
+  const R = D.report || {};
+  let h = `<section><h2>${esc(R.title || "")}</h2>${(R.paragraphs || []).map(p => `<p>${cleanBuild(p)}</p>`).join("")}</section>`;
+  (R.sections || []).forEach(s => {
+    h += `<section><h2>${esc(s.title)}</h2>${(s.paragraphs || []).map(p => `<p>${cleanBuild(p)}</p>`).join("")}`;
+    if (s.table) h += `<div class="tablewrap"><table><thead><tr>${s.table.head.map(x => `<th>${esc(x)}</th>`).join("")}</tr></thead><tbody>${s.table.rows.map(r => `<tr>${r.map((c, i) => `<td${s.table.num && s.table.num.includes(i) ? ' class="num"' : ""}>${cleanBuild(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+    if (s.list) h += `<ul>${s.list.map(x => `<li>${cleanBuild(x)}</li>`).join("")}</ul>`;
+    h += `</section>`;
+  });
+  $("#report").innerHTML = h;
+}
+
+
+// --- Presets, Share, Compare, Renter View & Modal Handlers ---
+let renterViewOn = false;
+let compareList = [];
+
+function applyPreset(name) {
+  document.querySelectorAll(".preset-btn").forEach(b => b.classList.toggle("active", b.dataset.preset === name));
+  
+  // Update checkbox state directly without event dispatch loop
+  const setVal = (id, val) => {
+    const el = $(id);
+    if (el) el.checked = val;
+  };
+
+  const keepLots = (typeof activeCounty !== "undefined" && activeCounty === "oc") || name === "housing";
+  if (name === "streets") {
+    setVal("#l-roads", true);
+    setVal("#l-transit", true);
+    setVal("#l-hoods", true);
+    setVal("#l-parks", false);
+    setVal("#l-amen", false);
+    setVal("#l-fac", false);
+    setVal("#l-under", false);
+    setVal("#l-proj", false);
+    setVal("#l-zone", false);
+    setVal("#l-lots", keepLots);
+    setVal("#l-aerial", false);
+    const mSel = $("#metric");
+    if (mSel) { mSel.value = "top_vpd"; restyle(); legend(); }
+  } else if (name === "green") {
+    setVal("#l-roads", true);
+    setVal("#l-transit", false);
+    setVal("#l-parks", true);
+    setVal("#l-amen", true);
+    setVal("#l-hoods", true);
+    setVal("#l-fac", false);
+    setVal("#l-under", false);
+    setVal("#l-proj", false);
+    setVal("#l-zone", false);
+    setVal("#l-lots", keepLots);
+    setVal("#l-aerial", false);
+    const mSel = $("#metric");
+    if (mSel) { mSel.value = "heat"; restyle(); legend(); }
+  } else if (name === "housing") {
+    setVal("#l-roads", true);
+    setVal("#l-transit", true);
+    setVal("#l-zone", true);
+    setVal("#l-under", true);
+    setVal("#l-proj", true);
+    setVal("#l-lots", true);
+    setVal("#l-parks", false);
+    setVal("#l-amen", false);
+    setVal("#l-fac", false);
+    setVal("#l-aerial", false);
+    const mSel = $("#metric");
+    if (mSel) { mSel.value = "value"; restyle(); legend(); }
+  }
+
+  // Single clean redraw - zero flickering or event thrashing
+  drawContext();
+  if (typeof syncLots === "function") syncLots();
+  if (typeof syncAerial === "function") syncAerial();
+}
+
+function showToast(msg) {
+  let t = $("#toast");
+  if (!t) {
+    t = document.createElement("div");
+    t.id = "toast";
+    t.className = "toast";
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove("show"), 2600);
+}
+
+function syncHash(id) {
+  if (!id) return;
+  const hash = "#bg=" + id;
+  if (window.location.hash !== hash) {
+    history.replaceState(null, null, hash);
+  }
+}
+
+function checkHash() {
+  const m = window.location.hash.match(/#bg=([0-9]+)/);
+  if (m && byId.has(m[1]) && m[1] !== selected) {
+    select(m[1], true);
+  }
+}
+
+function copyShareLink() {
+  syncHash(selected);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      showToast("Shareable link copied to clipboard!");
+    }).catch(() => {
+      showToast("Link: " + window.location.href);
+    });
+  } else {
+    showToast("Link: " + window.location.href);
+  }
+}
+
+function copyAreaSummary(id) {
+  const f = byId.get(id); if (!f) return;
+  const p = f.properties, d = D.details[id] || {}, m = d.m || {};
+  const recs = (d.r || []).map(a => Object.fromEntries(REC_KEYS.map((k, i) => [k, a[i]])));
+  const val = recs.filter(r => allowed(r.id) && D.catalog[r.id].kind === "value").sort((a, b) => b.vpd - a.vpd);
+  const top3 = val.slice(0, 3);
+  
+  let txt = `City Pretty Brief: ${p.n} (${p.c})\n`;
+  txt += `Block Group ID: ${id} | Typical Home Value: ${fmt$(m.hv)} | Homes: ${fmtN(m.homes)}\n\n`;
+  txt += `Top 3 Recommended Projects:\n`;
+  top3.forEach((r, i) => {
+    const c = D.catalog[r.id], rng = formatVpdRange(r.vpd, c.grade, r.id, m);
+    txt += `${i+1}. ${c.name} (${r.project})\n`;
+    txt += `   - Return: ${rng.estStr} of home value per $1 (band ${rng.str}, ${rng.badge})\n`;
+    txt += `   - Cost: ${fmt$(r.cost)} (Build + Upkeep)\n`;
+    txt += `   - Who decides: ${c.lead_agency || "City Council"}\n`;
+    txt += `   - Next step: ${c.process || "CIP budget inclusion"}\n`;
+  });
+  txt += `\nExplore interactive map: ${window.location.href}\n`;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(() => {
+      showToast("Summary brief copied to clipboard!");
+    });
+  } else {
+    showToast("Summary generated for " + p.n);
+  }
+}
+
+function toggleRenterView() {
+  renterViewOn = !renterViewOn;
+  const hBtn = $("#btn-renter-header"); if (hBtn) hBtn.classList.toggle("active", renterViewOn);
+  const pBtn = $("#btn-renter-panel"); if (pBtn) pBtn.classList.toggle("active", renterViewOn);
+  if (selected) select(selected, false);
+  showToast(renterViewOn ? "Renter & Community Impact lens active" : "Standard investor view active");
+}
+
+function toggleCompare(id) {
+  const idx = compareList.indexOf(id);
+  if (idx >= 0) {
+    compareList.splice(idx, 1);
+    showToast("Removed from comparison");
+  } else {
+    if (compareList.length >= 3) {
+      showToast("Comparison is limited to 3 neighborhoods");
+      return;
+    }
+    compareList.push(id);
+    showToast("Added to comparison drawer");
+  }
+  updateCompareUI();
+}
+
+function clearCompare() {
+  compareList = [];
+  updateCompareUI();
+  renderCompareDrawer();
+}
+
+function updateCompareUI() {
+  const hBtn = $("#btn-compare-header");
+  if (hBtn) hBtn.textContent = `Compare (${compareList.length})`;
+  const pBtn = $("#btn-compare-panel");
+  if (pBtn) {
+    const inC = compareList.includes(selected);
+    pBtn.textContent = inC ? "✓ In comparison" : "⚖️ + Compare";
+    pBtn.classList.toggle("active", inC);
+  }
+}
+
+function openCompareDrawer() {
+  if (compareList.length === 0) {
+    if (selected) compareList.push(selected);
+    else {
+      showToast("Select a neighborhood to compare first");
+      return;
+    }
+    updateCompareUI();
+  }
+  renderCompareDrawer();
+  const m = $("#compare-modal");
+  if (m) m.hidden = false;
+}
+
+function closeCompareDrawer() {
+  const m = $("#compare-modal");
+  if (m) m.hidden = true;
+}
+
+function renderCompareDrawer() {
+  const box = $("#compare-content");
+  if (!box) return;
+  if (!compareList.length) {
+    box.innerHTML = `<p class="empty">No neighborhoods selected. Click "+ Compare" on any neighborhood card.</p>`;
+    return;
+  }
+  box.innerHTML = compareList.map(id => {
+    const f = byId.get(id); if (!f) return "";
+    const p = f.properties, d = D.details[id] || {}, m = d.m || {};
+    const recs = (d.r || []).map(a => Object.fromEntries(REC_KEYS.map((k, i) => [k, a[i]])));
+    const val = recs.filter(r => allowed(r.id) && D.catalog[r.id].kind === "value").sort((a, b) => b.vpd - a.vpd);
+    const top = val[0];
+    const topC = top ? D.catalog[top.id] : null;
+    const topRng = top && topC ? formatVpdRange(top.vpd, topC.grade, top.id, m) : null;
+    return `
+      <div class="compare-col">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <h4>${esc(p.n)}</h4>
+          <button type="button" class="small" style="background:none;border:none;cursor:pointer;color:var(--ink-3)" onclick="toggleCompare('${id}'); renderCompareDrawer();">✕</button>
+        </div>
+        <div class="c-row"><span class="k">City</span><span class="v">${esc(p.c)}</span></div>
+        <div class="c-row"><span class="k">Typical Home Value</span><span class="v">${fmt$(m.hv)}</span></div>
+        <div class="c-row"><span class="k">Median Rent</span><span class="v">${m.rent ? fmt$(m.rent) + "/mo" : "–"}</span></div>
+        <div class="c-row"><span class="k">Homes / Owner-Occ</span><span class="v">${fmtN(m.homes)} (${m.own != null ? Math.round(m.own) + "%" : "–"})</span></div>
+        <div class="c-row"><span class="k">Best Bet</span><span class="v">${topC ? esc(topC.name) : "–"}</span></div>
+        <div class="c-row"><span class="k">Expected Return</span><span class="v">${topRng ? topRng.estStr + " (" + topRng.str + ")" : "–"}</span></div>
+        <div class="c-row"><span class="k">Heat vs County</span><span class="v">${m.ht != null ? (m.ht > 0 ? "+" : "") + (+m.ht).toFixed(1) + "°F" : "–"}</span></div>
+        <div class="c-row"><span class="k">Violent Crime / 1k</span><span class="v">${m.vc != null ? (+m.vc).toFixed(1) : "–"}</span></div>
+        <div class="c-row"><span class="k">Bus Frequency</span><span class="v">${m.bt != null ? Math.round(m.bt) + "/hr" : "–"}</span></div>
+      </div>
+    `;
+  }).join("");
+}
+
+function openMethodsModal() {
+  const m = $("#methods-modal");
+  if (m) m.hidden = false;
+}
+
+function closeMethodsModal() {
+  const m = $("#methods-modal");
+  if (m) m.hidden = true;
+}
+
+function openCorrection(id) {
+  const f = byId.get(id); const p = f ? f.properties : {};
+  const subj = encodeURIComponent(`Correction for Block Group ${id} (${p.n || "LA County"})`);
+  const body = encodeURIComponent(`Hi City Pretty team,\n\nI have a data correction for Block Group ${id} in ${p.n || ""}, ${p.c || ""}:\n\n- Project or metric name:\n- Corrected value or finding:\n- Source or documentation link:\n\nThank you!`);
+  window.open(`mailto:corrections@citypretty.org?subject=${subj}&body=${body}`, '_blank');
+}
+
+function renderTechAppendix(ocReal) {
+  const row = (id, what, status, ok) => `<tr style="border-top:1px solid var(--rule)"><td style="padding:4px 6px"><code>${esc(id)}</code></td><td style="padding:4px 6px">${esc(what)}</td><td style="padding:4px 6px;color:${ok ? "var(--good-ink)" : "var(--warn-ink)"}">${ok ? "✓" : "✗"} ${esc(status)}</td></tr>`;
+  if (ocReal && D_OC && D_OC.meta && D_OC.meta.sources) return `
+    <p class="small">Orange County was built on ${esc(D_OC.meta.built || "")} from the public files below (every file is kept raw in the build folder so each number can be traced). Nothing was estimated where a source is missing: those projects are simply not scored here.</p>
+    <table class="small" style="width:100%;border-collapse:collapse;margin-top:6px">
+      <thead><tr style="background:var(--ground)"><th style="text-align:left;padding:4px 6px">Source</th><th style="text-align:left;padding:4px 6px">Used for</th><th style="text-align:left;padding:4px 6px">Status in this build</th></tr></thead>
+      <tbody>${D_OC.meta.sources.map(r => row(r[0], r[1], r[2], r[3])).join("")}</tbody>
+    </table>`;
+  return `
+    <p class="small">What the build log recorded for the live feeds this page uses (build ${esc((D.meta && D.meta.built) || "")}). The full source list, with row counts and vintages, is in the field report below the map under "Data in this build".</p>
+    <table class="small" style="width:100%;border-collapse:collapse;margin-top:6px">
+      <thead><tr style="background:var(--ground)"><th style="text-align:left;padding:4px 6px">Resource / endpoint</th><th style="text-align:left;padding:4px 6px">Service</th><th style="text-align:left;padding:4px 6px">Status in this build</th></tr></thead>
+      <tbody>
+        ${row("pi9x-tg5x", "LADBS \"Building and Safety - Building Permits Issued from 2020 to Present\" (queried live per lot)", "Live query", true)}
+        ${row("d9aa-v8bm", "LADBS \"Building Permit Information Data\" (older permits with story counts; queried live per lot)", "Live query", true)}
+        ${row("h73f-gn57", "\"MyLA311 Service Request Data 2025\" (dumping, graffiti; Nov 2024 – Nov 2025 window)", "Loaded", true)}
+        ${row("2cy6-i7zn", "\"MyLA311 Cases 2026\"", "Not reached in this build; 2025 data used instead", false)}
+        ${row("73a2-6ar5", "\"MyLA311 Cases March 2025 to December 2025\"", "Not reached in this build", false)}
+        ${row("k7nn-b2ep", "\"LAPD NIBRS Offenses Dataset\" (latest record 2026-10-26)", "Loaded", true)}
+        ${row("2nrs-mtv8", "\"Crime Data from 2020 to 2024\" (frozen series; latest record 2025-03-28)", "Loaded", true)}
+        ${row("gqf2-vm2j", "\"LAPD NIBRS Victims Dataset\" (victim table; not needed)", "Not reached in this build", false)}
+        ${row("FHSZSRA_23_3", "CAL FIRE Fire Hazard Severity Zones, State Responsibility Area (2024)", "Live query / shipped polygons", true)}
+        ${row("FHSALRA25_v1_All", "CAL FIRE Fire Hazard Severity Zones, Local Responsibility Area (2025)", "Live query / shipped polygons", true)}
+        ${row("CGS_Alquist_Priolo_Fault_Zones", "California Geological Survey earthquake fault zones (with landslide and liquefaction zones)", "Live query / shipped polygons", true)}
+        ${row("LACounty_Parcel", "LA County Assessor parcel service (lot lines, per-house records)", "Live query", true)}
+        ${row("pais_sales_parcels", "LA County PAIS recorded sales (per-house last sale)", "Live query", true)}
+      </tbody>
+    </table>
+    <p class="small muted" style="margin-top:6px">Per-lot checks (permits, sales, historic, hillside, hazard and fire zones) are queried from the agencies' public services when the page is online; nine of them are also answered from polygons shipped with this file.</p>
+  `;
+}
+
+
+// ---------------- Orange County Expansion Module ----------------
+var D_OC = null;
+var ocLayer = null;
+var activeCounty = "la"; // "la" or "oc"
+if (typeof window !== "undefined") {
+  window.D_OC = D_OC;
+  window.activeCounty = activeCounty;
+  window.switchCounty = switchCounty;
+  window.initOrangeCounty = initOrangeCounty;
+}
+
+async function unpackGzipB64(b64Text) {
+  const bin = await b64Bytes(b64Text);
+  if (typeof DecompressionStream !== "undefined") {
+    try {
+      const s = await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream("gzip"))).text();
+      return JSON.parse(s);
+    } catch(e) {}
+  }
+  const s = atob(b64Text);
+  const u = new Uint8Array(s.length);
+  for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i);
+  const decomp = fflate.gunzipSync(u);
+  const jsonStr = (typeof TextDecoder !== "undefined") ? new TextDecoder().decode(decomp) : fflate.strFromU8(decomp);
+  return JSON.parse(jsonStr);
+}
+
+let _ocLayersMerged = false;
+async function initOrangeCounty() {
+  const elOC = document.getElementById("bundle-oc");
+  if (!elOC || !elOC.textContent) return;
+  try {
+    const b64Text = elOC.textContent.trim();
+    D_OC = await unpackGzipB64(b64Text);
+    if (typeof window !== "undefined") window.D_OC = D_OC;
+    
+    if (D_OC.plans && typeof D !== "undefined" && D && D.plans) {
+      Object.assign(D.plans, D_OC.plans);
+    }
+    if (D_OC.profit && typeof D !== "undefined" && D && D.under) {
+      if (!D.under.profit) D.under.profit = {};
+      Object.assign(D.under.profit, D_OC.profit);
+    }
+
+    const ocReal = (D_OC.meta && D_OC.meta.schema >= 2);   // real geometry (schema 2); the first bundle's parks and neighborhoods are placeholders
+    if (!_ocLayersMerged && D_OC.layers && typeof D !== "undefined" && D && D.layers) {
+      const ocl = D_OC.layers;
+      (ocReal ? ["freeways", "arterials", "parks", "water", "rail", "stations", "walls", "amenities", "stops", "facilities", "projects"] : ["freeways", "arterials", "water", "rail", "stations"]).forEach(k => {
+        if (ocl[k] && ocl[k].features && D.layers[k] && D.layers[k].features) {
+          D.layers[k].features.push(...ocl[k].features);
+        } else if (ocl[k] && !D.layers[k]) {
+          D.layers[k] = ocl[k];
+        }
+      });
+      if (ocl.streets && D.layers.streets && (ocReal || ocl.streets.cell === D.layers.streets.cell)) {
+        if (ocReal && ocl.streets.fwy && D.layers.streets.fwy) D.layers.streets.fwy.push(...ocl.streets.fwy.map(([c, n, e]) => [c, n, e]));
+        const baseNames = D.layers.streets.names || [];
+        const nameMap = new Map();
+        (ocl.streets.names || []).forEach((n, idx) => {
+          let mappedIdx = baseNames.indexOf(n);
+          if (mappedIdx === -1) {
+            mappedIdx = baseNames.length;
+            baseNames.push(n);
+          }
+          nameMap.set(idx, mappedIdx);
+        });
+        if (ocReal && ocl.streets.fwy && D.layers.streets.fwy) {
+          const n0 = D.layers.streets.fwy.length - ocl.streets.fwy.length;
+          for (let i = n0; i < D.layers.streets.fwy.length; i++) D.layers.streets.fwy[i] = [D.layers.streets.fwy[i][0], nameMap.get(D.layers.streets.fwy[i][1]) ?? D.layers.streets.fwy[i][1], D.layers.streets.fwy[i][2]];
+        }
+        if (ocl.streets.cells) {
+          if (!D.layers.streets.cells) D.layers.streets.cells = {};
+          for (const [cellKey, lines] of Object.entries(ocl.streets.cells)) {
+            const remappedLines = lines.map(([c, nIdx, poly]) => [c, nameMap.get(nIdx) ?? nIdx, poly]);
+            if (D.layers.streets.cells[cellKey]) {
+              D.layers.streets.cells[cellKey].push(...remappedLines);
+            } else {
+              D.layers.streets.cells[cellKey] = remappedLines;
+            }
+          }
+        }
+      }
+      if (D_OC.cities && D_OC.cities.features && D.cities && D.cities.features) {
+        D.cities.features.push(...D_OC.cities.features);
+      }
+      if (D_OC.city_labels && D.city_labels) {
+        D.city_labels.push(...D_OC.city_labels);
+      }
+      if (ocReal && D_OC.hoods && D_OC.hoods.features && D.hoods && D.hoods.features) {
+        D.hoods.features.push(...D_OC.hoods.features);
+      }
+      if (ocReal && D_OC.hood_labels && D.hood_labels) {
+        D.hood_labels.push(...D_OC.hood_labels);
+      }
+      if (ocReal && D_OC.layers.park_labels && D.layers.park_labels) {
+        D.layers.park_labels.push(...D_OC.layers.park_labels);
+        D.layers.park_labels.sort((a, b) => b[3] - a[3]);   // drawLabels stops at the first park below the zoom's acreage cutoff
+      }
+      if (ocReal && D_OC.layers.fac_areas && D.layers.fac_areas && D.layers.fac_areas.cells) Object.assign(D.layers.fac_areas.cells, D_OC.layers.fac_areas.cells || {});
+      _ocLayersMerged = true;
+    }
+
+    if (D_OC.features) {
+      D_OC.features.forEach(f => {
+        const p = f.properties;
+        if (typeof byId !== "undefined" && byId) byId.set(p.id, f);
+        if (typeof D !== "undefined" && D && D.details && !D.details[p.id]) {
+          D.details[p.id] = D_OC.details[p.id];
+        }
+      });
+    }
+    console.log("Orange County bundle unpacked successfully (" + (D_OC.features ? D_OC.features.length : 0) + " neighborhood tracts across " + Object.keys(D_OC.plans || {}).length + " neighborhoods).");
+  } catch (e) {
+    console.log("Could not unpack OC bundle:", e.message || e);
+  }
+}
+
+function buildStamp(override) {
+  const b = override || (typeof D !== "undefined" && D && D.meta && D.meta.built) || "";
+  const m = String(b).match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (!m) return "";
+  return `${m[3]} ${["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"][+m[2] - 1]} ${m[1]}`;
+}
+function switchCounty(c) {
+  activeCounty = c;
+  if (typeof window !== "undefined") window.activeCounty = activeCounty;
+  const btnLa = $("#btn-county-la"), btnOc = $("#btn-county-oc");
+  if (btnLa) btnLa.classList.toggle("active", c === "la");
+  if (btnOc) btnOc.classList.toggle("active", c === "oc");
+  
+  // Ensure property lines checkbox is checked
+  const cbLots = $("#l-lots");
+  if (cbLots) cbLots.checked = true;
+
+  if (typeof lots !== "undefined" && lots && typeof map !== "undefined" && map) {
+    if (map.hasLayer(lots)) map.removeLayer(lots);
+    lots = null;
+    if (typeof window !== "undefined") window.lots = null;
+  }
+  if (typeof syncLots === "function") syncLots();
+  if (typeof numLayer !== "undefined" && numLayer && typeof map !== "undefined" && map) {
+    if (map.hasLayer(numLayer)) map.removeLayer(numLayer);
+    numLayer = null;
+  }
+  if (typeof drawNumbers === "function") drawNumbers();
+
+  // Clear street / vector caches so they re-render immediately for the new county bounds
+  if (typeof _drawn !== "undefined" && _drawn && _drawn.clear) _drawn.clear();
+  if (typeof _cellCache !== "undefined" && _cellCache && _cellCache.clear) _cellCache.clear();
+  if (typeof _fwyLines !== "undefined") _fwyLines = null;
+  if (typeof drawContext === "function") drawContext();
+
+  const eb = $(".eyebrow");
+  if (c === "oc") {
+    if (eb) eb.textContent = "CITY PRETTY · ORANGE COUNTY" + (D_OC && D_OC.meta && D_OC.meta.schema >= 2 ? "" : " (PRELIMINARY)") + " · " + (buildStamp(D_OC && D_OC.meta && D_OC.meta.built) || buildStamp());
+    if (typeof bgs !== "undefined" && bgs && map && map.hasLayer(bgs)) map.removeLayer(bgs);
+    if (!ocLayer && D_OC && typeof L !== "undefined" && L.geoJSON && typeof map !== "undefined" && map) {
+      ocLayer = L.geoJSON(D_OC, {
+        style: styleBg,
+        onEachFeature: (f, l) => {
+          const p = f.properties;
+          l.bindTooltip(() => {
+            const k = $("#metric").value;
+            const m = METRICS[k];
+            const mv = m ? m.unit(m.f(p)) : "";
+            const catName = p.t && D.catalog[p.t] ? D.catalog[p.t].name : p.t;
+            return `<b>${esc(p.n)}</b> · ${esc(p.c)}<br>${m ? m.label.split("(")[0] + ": " + mv + "<br>" : ""}${p.t && p.v >= 1 ? "Best bet: " + esc(catName) + " (" + fvpd(p.v) + " / $1)" : "Nothing returns $1 per $1"}`;
+          }, { sticky: true });
+          l.on("click", e => {
+            select(p.id, false);
+            if (map.getZoom() >= 16) houseAt(e.latlng);
+            else map.fitBounds(l.getBounds(), { maxZoom: 16, padding: [50, 50] });
+          });
+        }
+      }).addTo(map);
+    } else if (ocLayer && typeof map !== "undefined" && map) {
+      if (!map.hasLayer(ocLayer)) ocLayer.addTo(map);
+      ocLayer.setStyle(styleBg);
+    }
+    retop();
+    restyle();
+    if (typeof map !== "undefined" && map && map.flyTo) map.flyTo([33.71, -117.83], 11);
+    
+    // Update datalist names for OC
+    if (D_OC && D_OC.search) {
+      const namesEl = $("#names");
+      if (namesEl) {
+        namesEl.innerHTML = Object.keys(D_OC.search).sort().map(n => `<option value="${esc(n)}">`).join("");
+      }
+    }
+    const target = D_OC && (D_OC.features.find(f => f.properties.n === "Woodbridge") || D_OC.features[0]);
+    if (target && typeof select === "function") select(target.properties.id, false);
+    const nT = D_OC && D_OC.features ? D_OC.features.length : 0, nC = D_OC && D_OC.features ? new Set(D_OC.features.map(f => f.properties.c)).size : 0;
+    const real = D_OC && D_OC.meta && D_OC.meta.schema >= 2;
+    if (typeof showToast === "function") showToast(real ? `Orange County: ${fmtN(nT)} block groups in ${nC} cities and communities` : `Orange County: ${fmtN(nT)} census tracts in ${nC} cities and communities (preliminary data)`);
+  } else {
+    if (eb) eb.textContent = "CITY PRETTY · ALL OF LOS ANGELES COUNTY · " + buildStamp();
+    if (ocLayer && typeof map !== "undefined" && map && map.hasLayer(ocLayer)) map.removeLayer(ocLayer);
+    if (typeof bgs !== "undefined" && bgs && map && !map.hasLayer(bgs)) bgs.addTo(map);
+    retop();
+    restyle();
+    if (typeof map !== "undefined" && map && map.flyTo) map.flyTo([34.05, -118.25], 11);
+    const names = new Map(Object.entries((D && D.meta && D.meta.search) || {}));
+    const namesEl = $("#names");
+    if (namesEl) {
+      namesEl.innerHTML = [...names.keys()].sort().map(n => `<option value="${esc(n)}">`).join("");
+    }
+    const start = (D && D.meta && D.meta.default_bg) || (D && D.bgs && D.bgs.features && D.bgs.features[0] && D.bgs.features[0].properties.id);
+    if (start && typeof select === "function") select(start, false);
+    if (typeof showToast === "function") showToast("Returned to Los Angeles County");
+  }
+}
+
+async function init() {
+  D = await unpack();
+  map = L.map("map", { preferCanvas: true, zoomSnap: 0.5, minZoom: 9, maxZoom: 19 });
+  map.attributionControl.setPrefix(false).addAttribution("© OpenStreetMap contributors · US Census · LA County Assessor, Auditor-Controller and Parks · LAPD · LASD · MyLA311 · CHP · LA Metro · city tree surveys · Tree Equity Score");
+  D.bgs.features.forEach(f => byId.set(f.properties.id, f));
+  retop();
+  breaks = computeBreaks();
+  bgs = L.geoJSON(D.bgs, { style: styleBg, onEachFeature: (f, l) => {
+    const p = f.properties;
+    l.bindTooltip(() => `<b>${esc(p.n)}</b> · ${esc(p.c)}<br>${p.t && p.v >= 1 ? esc(D.catalog[p.t].name) + ": " + fvpd(p.v) + " per $1" : "Nothing returns $1 per $1"}`, { sticky: true });
+    l.on("click", e => { select(p.id, false); if (map.getZoom() >= 17) houseAt(e.latlng); else houseHint(); }); } }).addTo(map);
+  drawContext(); legend(); report();
+  { const eb = $(".eyebrow"), st = buildStamp(); if (eb && st) eb.textContent = "CITY PRETTY · ALL OF LOS ANGELES COUNTY · " + st; }
+
+  // Wire Presets & Top Actions
+  document.querySelectorAll(".preset-btn").forEach(b => b.onclick = () => applyPreset(b.dataset.preset));
+  const rBtn = $("#btn-renter-header"); if (rBtn) rBtn.onclick = toggleRenterView;
+  const cBtn = $("#btn-compare-header"); if (cBtn) cBtn.onclick = openCompareDrawer;
+  const mBtn = $("#btn-methods-header"); if (mBtn) mBtn.onclick = openMethodsModal;
+  window.addEventListener("hashchange", checkHash);
+
+  const names = new Map(Object.entries(D.meta.search || {}));
+  $("#names").innerHTML = [...names.keys()].sort().map(n => `<option value="${esc(n)}">`).join("");
+  $("#q").onchange = e => {
+    const val = e.target.value;
+    const ocId = (activeCounty === "oc" && D_OC && D_OC.search) ? D_OC.search[val] : null;
+    const id = ocId || names.get(val);
+    if (id) select(id, true);
+    else if (/^\d+\s+\S/.test(val)) addressSearch(val, true);
+  };
+  $("#q").addEventListener("input", e => { clearTimeout(addrTimer); const v = e.target.value; if (/^\d+\s+\S{2,}/.test(v)) addrTimer = setTimeout(() => addressSearch(v, false), 450); else hideAddr(); });
+  $("#metric").onchange = restyle;
+  $("#evid").onchange = () => { retop(); restyle(); if (selected) select(selected, false); };
+  ["#l-roads", "#l-transit", "#l-parks", "#l-amen", "#l-hoods", "#l-fac", "#l-zone", "#l-under", "#l-proj"].forEach(id => $(id).onchange = drawContext);
+  $("#fac-kinds").innerHTML = D.layers.fac_kinds.map((k, i) => `<label style="display:block"><input type="checkbox" data-fk="${i}" checked> <span class="fac" style="display:inline-block;vertical-align:middle;background:${(FAC_STYLE[k] || ["#444"])[0]}">${(FAC_STYLE[k] || ["", "•"])[1]}</span> ${esc(k)}</label>`).join("");
+  $("#fac-kinds").querySelectorAll("input").forEach(x => x.onchange = () => { facOn = new Set([...$("#fac-kinds").querySelectorAll("input:checked")].map(y => +y.dataset.fk)); _fDrawn.forEach(l => layers.facArea && layers.facArea.removeLayer(l)); _fDrawn.clear(); drawFacilities(); });
+  $("#l-tiles").onchange = e => {
+    if (e.target.checked) { const dark = matchMedia("(prefers-color-scheme: dark)").matches && document.documentElement.dataset.theme !== "light";
+      tiles = L.tileLayer(`https://{s}.basemaps.cartocdn.com/${dark ? "dark_all" : "rastertiles/voyager"}/{z}/{x}/{y}{r}.png`, { attribution: "© CARTO", subdomains: "abcd", maxZoom: 19 }).addTo(map); tiles.bringToBack(); }
+    else if (tiles) { map.removeLayer(tiles); tiles = null; }
+    restyle();
+  };
+  map.on("zoomend", zoomed);
+  if ($("#l-lots")) $("#l-lots").onchange = syncLots;
+  syncLots();
+  cachedLotLines().then(c => {
+    if (!c) return;
+    lotCache = c;
+    if (typeof window !== "undefined") window.lotCache = lotCache;
+    const isOc = (typeof activeCounty !== "undefined" && activeCounty === "oc");
+    if (lots && !isOc && typeof map !== "undefined" && map) {
+      if (map.hasLayer(lots)) map.removeLayer(lots);
+      lots = null;
+      syncLots();
+    }
+  });
+  $("#lots-hood").onclick = () => { $("#lots-note").hidden = true; selectAt(map.getCenter()); };
+  map.on("moveend", drawNumbers);
+  let aerial = null;
+  window.syncAerial = () => { const want = $("#l-aerial").checked;
+    if (want && !aerial) { aerial = L.tileLayer("https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}",
+      { maxNativeZoom: 16, maxZoom: 19, attribution: "Imagery: USGS The National Map (public domain)" }).addTo(map); aerial.bringToBack(); restyle(); }
+    if (!want && aerial) { map.removeLayer(aerial); aerial = null; restyle(); } };
+  $("#l-aerial").onchange = window.syncAerial;
+  map.on("mousemove", hoverParcel);
+  map.on("mousemove", zoneTip);
+  // at street level the address preview replaces the area tooltip
+  map.on("zoomend", () => { const hi = map.getZoom() >= 17; bgs.eachLayer(l => { const t = l.getTooltip(); if (t) { t.options.opacity = hi ? 0 : 0.9; if (hi) l.closeTooltip(); } }); });
+  map.on("mouseout", () => { clearTimeout(hoverTimer); });
+  map.on("moveend", () => { drawStreets(); drawLabels(); drawZoning(); drawFacilities(); drawUnder(); drawProjects(); });
+  L.control.scale({ imperial: true, metric: false, maxWidth: 140, position: "bottomleft" }).addTo(map);
+  const Loc = L.Control.extend({ options: { position: "topleft" }, onAdd() { const b = L.DomUtil.create("button", "locate"); b.type = "button"; b.textContent = "📍 Find me";
+    b.title = "Center the map on where you are and open your block group"; L.DomEvent.disableClickPropagation(b); b.onclick = () => locateMe(b); return b; } });
+  new Loc().addTo(map);
+  map.fitBounds(L.geoJSON(D.bgs).getBounds(), { animate: false });
+  const start = D.meta.default_bg && byId.has(D.meta.default_bg) ? D.meta.default_bg : D.bgs.features[0].properties.id;
+  const initHash = window.location.hash.match(/#bg=([0-9]+)/);
+  if (initHash && byId.has(initHash[1])) select(initHash[1], true);
+  else select(start, false);
+  map.setView(L.geoJSON(byId.get(start)).getBounds().getCenter(), 12, { animate: false });
+  $("#loading").hidden = true;
+  // Orange County unpacks after LA County is on screen (keeps the first paint fast); its button waits for it
+  { const btnOc = $("#btn-county-oc"); if (btnOc) { btnOc.disabled = true; btnOc.dataset.title = btnOc.title; btnOc.title = "Unpacking Orange County…"; }
+    window.ocReady = initOrangeCounty().then(() => {
+      if (btnOc) { btnOc.disabled = false; btnOc.title = btnOc.dataset.title || "Expand to Orange County"; }
+      if (typeof _drawn !== "undefined" && _drawn && _drawn.clear) _drawn.clear();
+      if (typeof _cellCache !== "undefined" && _cellCache && _cellCache.clear) _cellCache.clear();
+      drawContext();
+      const mh = window.location.hash.match(/#bg=([0-9]+)/);
+      if (mh && mh[1].startsWith("06059") && byId.has(mh[1]) && mh[1] !== selected) { switchCounty("oc"); select(mh[1], true); }
+    }).catch(e => console.warn("Orange County bundle failed to unpack", e)); }
+  matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => { drawContext(); restyle(); });
+}
+init().catch(e => { $("#loading").textContent = "Could not open the map data: " + e.message + ". Open this file in a current Chrome, Edge, Safari or Firefox

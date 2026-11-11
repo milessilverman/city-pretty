@@ -1,0 +1,33 @@
+1. embedded county bundle 06073 San Diego County (2058 block groups, 8.3 MB)
+2. multi-county loader (COUNTY_BUNDLES, loadCountyBundle, openCounty) and county helpers
+3. Orange County bundle registered in COUNTY_BUNDLES
+4. eyebrow names the active county
+5. county switch flies to the active county
+6. county toast names the active county
+7. Orange County button lit only for Orange County
+8. county picker: 'More counties' list next to the LA / Orange County buttons
+9. init: list the embedded counties in the picker
+10. isOCArea means 'outside LA County'; isOrangeArea for Orange County-only data
+11. agency names: OCTA-specific wording only in Orange County
+12. agency note names the county
+13. facilities note names the county
+14. funding plan: no LA County programmes offered outside LA County
+15. project card: honest note where a county's funding programmes are not verified yet
+16. EIFD text: non-Orange counties do not get Orange County's policy
+17. EIFD pledge note: Orange County cap only in Orange County
+18. EIFD: Placentia / OC policy note only in Orange County
+19. EIFD split source text: Orange County only (others have no shares yet)
+20. EIFD base note: Orange County wording only there
+21. EIFD policy checks: none claimed for counties whose policy is unverified
+22. per-house: clear message where no parcel service is connected
+23. pool premium: San Diego uses Redfin's San Diego estimate ($20,001)
+24. pool premium note for San Diego
+25. per-house loading text names the county
+26. technical appendix names the county
+27. agency names outside Orange County: no OC Parks / OC Housing / Anaheim utility / OC Flood Control wording
+28. neighborhood plan steps: LA-only funding (Measure W, A, M/R, ULA) not offered outside LA County; Orange County gets OCTA Measure M2
+29. stepFunding helper
+30. area profile source line lists the active county's own loaded sources
+31. Caltrans district and Metro board wording outside LA County (Orange: District 12 / OCTA; San Diego: District 11)
+32. upgrade table: LA-only rebates (LADWP, City Plants, Measure W) reworded outside LA County
+33. rebateFor helper

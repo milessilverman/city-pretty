@@ -1,0 +1,54 @@
+@@OLD
+def _and(xs):
+@@NEW
+def _count(n, noun):
+    """'1 feed', '2 feeds', '1,234 stops'"""
+    return f"{n:,} {noun}" + ("" if n == 1 else "s")
+
+
+def _and(xs):
+@@OLD
+f"Loaded ({len(tr.get('feeds') or [])} feeds, {tr.get('stops', 0):,} stops"
+@@NEW
+f"Loaded ({_count(len(tr.get('feeds') or []), 'feed')}, {_count(tr.get('stops', 0), 'stop')}"
+@@OLD
+f"; bus frequency left unknown in all {tr['bt_unknown']:,} block groups: OpenStreetMap maps
+@@NEW
+f"; bus frequency left unknown in {'its one block group' if tr['bt_unknown'] == 1 else 'all ' + format(tr['bt_unknown'], ',') + ' block groups'}: OpenStreetMap maps
+@@OLD
+f"; bus frequency left unknown in {tr['bt_unknown']:,} block groups"
+@@NEW
+f"; bus frequency left unknown in {_count(tr['bt_unknown'], 'block group')}"
+@@OLD
+f"Loaded ({len(RC['gtfs']):,} stations confirmed by a stop,
+@@NEW
+f"Loaded ({_count(len(RC['gtfs']), 'station')} confirmed by a stop,
+@@OLD
+{len((json.load(open(os.path.join(DATA, 'afdc_dcfc.json'))) or {}).get('fuel_stations', []))} stations, downloaded
+@@NEW
+{_count(len((json.load(open(os.path.join(DATA, 'afdc_dcfc.json'))) or {}).get('fuel_stations', [])), 'station')}, downloaded
+@@OLD
+        return f"{int(v)} buses/hr"
+@@NEW
+        return f"{int(v)} bus{'' if int(v) == 1 else 'es'}/hr"
+@@OLD
+        return f"{int(v)} pts below goal"
+@@NEW
+        return f"{int(v)} pt{'' if int(v) == 1 else 's'} below goal"
+@@OLD
+"canopy": lambda x, p: f"Tree canopy is {int(x)} points below the Tree Equity goal
+@@NEW
+"canopy": lambda x, p: f"Tree canopy is {_count(int(x), 'point')} below the Tree Equity goal
+@@OLD
+"dining": lambda x, p: f"{int(x)} restaurants and cafés within ½ mile (similar neighborhoods: {int(p)}).",
+@@NEW
+"dining": lambda x, p: ("1 restaurant or café" if int(x) == 1 else f"{int(x)} restaurants and cafés") + f" within ½ mile (similar neighborhoods: {int(p)}).",
+@@OLD
+"pedbike": lambda x, p: f"{int(x)} crashes injured people walking or biking here
+@@NEW
+"pedbike": lambda x, p: f"{int(x)} {'crash' if int(x) == 1 else 'crashes'} injured people walking or biking here
+@@OLD
+"bus": lambda x, p: f"{int(x)} buses an hour at the busiest stop
+@@NEW
+"bus": lambda x, p: f"{int(x)} {'bus' if int(x) == 1 else 'buses'} an hour at the busiest stop
+@@END

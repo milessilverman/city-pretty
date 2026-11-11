@@ -1,0 +1,5 @@
+@@OLD
+f"{int(din)} cafés within 400 m and the nearest grocery {gro / 1609:.1f} mi away"
+@@NEW
+f"{int(din)} {'café' if int(din) == 1 else 'cafés'} within 400 m and the nearest grocery {gro / 1609:.1f} mi away"
+@@END

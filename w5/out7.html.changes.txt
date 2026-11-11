@@ -1,0 +1,55 @@
+1. embedded county bundle 06073 San Diego County (2058 block groups, 8.4 MB)
+2. embedded county bundle 06065 Riverside County (1394 block groups, 6.5 MB)
+3. embedded county bundle 06111 Ventura County (479 block groups, 3.4 MB)
+4. embedded county bundle 06071 San Bernardino County (1275 block groups, 6.2 MB)
+5. embedded county bundle 08031 Denver County (571 block groups, 3.9 MB)
+6. LA crash counts table (CCRS 2023-2025 pedestrian/bicycle and killed-or-seriously-injured per block group)
+7. multi-county loader (COUNTY_BUNDLES, loadCountyBundle, openCounty) and county helpers
+8. Orange County bundle registered in COUNTY_BUNDLES
+9. eyebrow names the active county
+10. county switch flies to the active county
+11. county toast names the active county
+12. Orange County button lit only for Orange County
+13. county picker: 'More counties' list next to the LA / Orange County buttons
+14. init: list the embedded counties in the picker
+15. isOCArea means 'outside LA County'; isOrangeArea for Orange County-only data
+16. agency names: OCTA-specific wording only in Orange County
+17. agency note names the county
+18. facilities note names the county
+19. funding plan: no LA County programmes offered outside LA County
+20. project card: honest note where a county's funding programmes are not verified yet
+21. EIFD text: non-Orange counties do not get Orange County's policy
+22. EIFD pledge note: Orange County cap only in Orange County
+23. EIFD: Placentia / OC policy note only in Orange County
+24. EIFD split source text: Orange County only (others have no shares yet)
+25. EIFD base note: Orange County wording only there
+26. EIFD policy checks: none claimed for counties whose policy is unverified
+27. per-house: clear message where no parcel service is connected
+28. pool premium: San Diego uses Redfin's San Diego estimate ($20,001)
+29. pool premium note for San Diego
+30. per-house loading text names the county
+31. technical appendix names the county
+32. agency names outside Orange County: no OC Parks / OC Housing / Anaheim utility / OC Flood Control wording
+33. neighborhood plan steps: LA-only funding (Measure W, A, M/R, ULA) not offered outside LA County; Orange County gets OCTA Measure M2
+34. stepFunding helper
+35. area profile source line lists the active county's own loaded sources
+36. Caltrans district and Metro board wording outside LA County (Orange: District 12 / OCTA; San Diego: District 11)
+37. upgrade table: LA-only rebates (LADWP, City Plants, Measure W) reworded outside LA County
+38. rebateFor helper
+39. funding plan (EIFD-based) not shown outside California
+40. EIFD calculator replaced by a note outside California
+41. California-only funding codes
+42. plan steps: no California programmes outside California
+43. upgrade table: California-only rebates marked outside California
+44. upgrade table: Prop 13 reassessment notes only in California
+45. project caveats use the county's agency names (e.g. Caltrans outside California)
+46. panel section title: EIFD only in California
+47. LA rows: crash counts labelled as all crashes (not pedestrian/bike), fatal/severe shown as missing, not 0
+48. whyFix helper
+49. links: #bg= opens the block group's county (any embedded or hosted county)
+50. init: remember the #bg= link before the first selection overwrites it
+51. Orange County links: use the remembered link (pre-existing bug: the first selection had already replaced it)
+52. init: follow a #bg= link into another county
+53. Bus service tile: 'unknown' where an operator is missing from the open feeds
+54. busUnknown helper
+55. agency texts: LA land trust / garden council / LA County Parks, Metro, Measure M and A, and California-only law outside California

@@ -1,0 +1,41 @@
+@@OLD
+l.bindTooltip(`${f.properties.t} buses an hour (7–9am)`)
+@@NEW
+l.bindTooltip(`${f.properties.t} ${+f.properties.t === 1 ? "bus" : "buses"} an hour (7–9am)`)
+@@OLD
+where the busiest stop gets ${tph} buses an hour
+@@NEW
+where the busiest stop gets ${tph} ${+tph === 1 ? "bus" : "buses"} an hour
+@@OLD
+for ~${fmtN(s.he)} homes
+@@NEW
+for ~${fmtN(s.he)} home${Math.round(+s.he) === 1 ? "" : "s"}
+@@OLD
+(${fmtN(s.homes)} homes)
+@@NEW
+(${fmtN(s.homes)} home${Math.round(+s.homes) === 1 ? "" : "s"})
+@@OLD
+up to ${parseInt(p)} homes per acre
+@@NEW
+up to ${parseInt(p)} home${parseInt(p) === 1 ? "" : "s"} per acre
+@@OLD
+across ~${fmtN(r.homes)} homes
+@@NEW
+across ~${fmtN(r.homes)} home${Math.round(+r.homes) === 1 ? "" : "s"}
+@@OLD
+), #${rank} of ${all.length} neighborhoods by total. 
+@@NEW
+)${all.length > 1 ? `, #${rank} of ${all.length} neighborhoods by total` : ""}. 
+@@OLD
+(~${fmtN(pf.site_homes)} homes)
+@@NEW
+(~${fmtN(pf.site_homes)} home${Math.round(+pf.site_homes) === 1 ? "" : "s"})
+@@OLD
+`${fmtN(wu("housing completed"))} homes completed`
+@@NEW
+`${fmtN(wu("housing completed"))} ${Math.round(+wu("housing completed")) === 1 ? "home" : "homes"} completed`
+@@OLD
+the main tax-rate areas of these ${a.n} block groups (largest:
+@@NEW
+the main tax-rate areas of ${a.n > 1 ? `these ${a.n} block groups` : "this block group"} (largest:
+@@END

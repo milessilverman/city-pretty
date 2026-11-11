@@ -1,0 +1,11 @@
+@@OLD
+    counted = {f["id"] for f in (tr.get("feeds") or []) + (tr.get("read_no_stops_here") or [])}
+    return [x for x in (tr.get("skipped") or []) if x["id"] not in counted and x.get("stops_in_county", 1) > 0 and not _unlocated(x)]
+@@NEW
+    counted = {f["id"] for f in (tr.get("feeds") or []) + (tr.get("read_no_stops_here") or [])}
+    out = collections.OrderedDict()   # one entry a feed: a later copy's reason replaces an earlier one, since the last copy read decided
+    for x in (tr.get("skipped") or []):   # (Tri-Rail 333: its hosted copy ended over a year ago, its other copy has no bus routes)
+        if x["id"] not in counted and x.get("stops_in_county", 1) > 0 and not _unlocated(x):
+            out[x["id"]] = x
+    return list(out.values())
+@@END

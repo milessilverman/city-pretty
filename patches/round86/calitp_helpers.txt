@@ -1,0 +1,140 @@
+CALITP_PKG = "cal-itp-gtfs-ingest-pipeline-dataset"   # the State of California's Cal-ITP GTFS schedule tables (data.ca.gov datastore)
+CALITP_COPY = "Cal-ITP statewide tables"
+CALITP_TABLES = {"agency": "agency_id,agency_name,agency_url,agency_timezone",
+                 "routes": "route_id,agency_id,route_short_name,route_long_name,route_type",
+                 "trips": "route_id,service_id,trip_id,direction_id",
+                 "stops": "stop_id,stop_name,stop_lat,stop_lon,location_type,parent_station",
+                 "stop_times": "trip_id,arrival_time,departure_time,stop_id,stop_sequence,pickup_type,drop_off_type,shape_dist_traveled",
+                 "calendar": "service_id,monday,tuesday,wednesday,thursday,friday,saturday,sunday,start_date,end_date",
+                 "calendar_dates": "service_id,date,exception_type",
+                 "frequencies": "trip_id,start_time,end_time,headway_secs,exact_times"}
+
+
+def _calitp_sql(sql):
+    return json.loads(get("https://data.ca.gov/api/3/action/datastore_search_sql", {"sql": sql}, timeout=900))["result"]["records"]
+
+
+def calitp_index():
+    """Cal-ITP, California's statewide GTFS schedule tables on data.ca.gov (selection 20): the tables' resource ids, the snapshot date (the
+    stop_times table's last update), and per schedule dataset its name, URL, agencies and last service date (calendar end or added date).
+    Cached daily in cache/calitp/index.json. Cal-ITP collects every California feed nightly; its 1 Oct 2026 snapshot has current schedules
+    for operators whose MobilityData copies ended (Muni to 15 Jan 2027 as 'Bay Area 511 Muni Schedule'; MobilityData's ends 28 Aug 2026)."""
+    import re
+    p = os.path.join(SHARED, "calitp", "index.json")
+    if os.path.exists(p) and time.time() - os.path.getmtime(p) < 86400:
+        return json.load(open(p))
+    pk = json.loads(get("https://data.ca.gov/api/3/action/package_show", {"id": CALITP_PKG}, timeout=300))["result"]
+    res = {x["name"]: {"id": x["id"], "modified": (x.get("last_modified") or "")[:10]} for x in pk["resources"]}
+    need = list(CALITP_TABLES) + ["gtfs_datasets"]
+    if not all(t in res and re.fullmatch(r"[0-9a-f-]{36}", res[t]["id"]) for t in need):
+        raise ValueError("Cal-ITP tables not found: " + ", ".join(t for t in need if t not in res))
+    q = lambda t: res[t]["id"]
+    ds = _calitp_sql(f'SELECT name, url, base64_url FROM "{q("gtfs_datasets")}" WHERE type = \'schedule\'')
+    ag = _calitp_sql(f'SELECT base64_url, agency_name FROM "{q("agency")}"')
+    hi = {}
+    for x in (_calitp_sql(f'SELECT base64_url, max(end_date) AS hi FROM "{q("calendar")}" GROUP BY base64_url')
+              + _calitp_sql(f'SELECT base64_url, max(date) AS hi FROM "{q("calendar_dates")}" WHERE exception_type = 1 GROUP BY base64_url')):
+        if x.get("hi") and x.get("base64_url"):
+            hi[x["base64_url"]] = max(hi.get(x["base64_url"], ""), str(x["hi"])[:10])
+    agencies = collections.defaultdict(list)
+    for x in ag:
+        agencies[x.get("base64_url")].append((x.get("agency_name") or "").strip())
+    idx = {"snapshot": res["stop_times"]["modified"], "dataset_page": "https://data.ca.gov/dataset/" + CALITP_PKG, "resources": {t: q(t) for t in CALITP_TABLES},
+           "datasets": [{"b64": d["base64_url"], "name": d.get("name") or "", "url": d.get("url") or "", "agencies": agencies.get(d["base64_url"], []), "hi": hi.get(d["base64_url"], "")}
+                        for d in ds if re.fullmatch(r"[A-Za-z0-9+/=]+", d.get("base64_url") or "")]}
+    os.makedirs(os.path.dirname(p), exist_ok=True); tmp = f"{p}.{os.getpid()}.tmp"; json.dump(idx, open(tmp, "w")); os.replace(tmp, p)
+    return idx
+
+
+def calitp_candidates(keys, after):
+    """Cal-ITP datasets that are copies of a feed: one to three agencies, one of them the feed's (by _agency_key), not demand-response
+    ('Flex'), service listed after `after` (ISO date, '' for any); latest service first, at most two. [] when the tables cannot be read."""
+    try:
+        idx = calitp_index()
+    except Exception as e:
+        log("   Cal-ITP tables not read:", repr(e)[:100]); return []
+    c = [d for d in idx["datasets"] if "flex" not in d["name"].lower() and 1 <= len(d["agencies"]) <= 3
+         and keys & {_agency_key(a) for a in d["agencies"]} and d["hi"] > after]
+    return sorted(c, key=lambda d: d["hi"], reverse=True)[:2]
+
+
+def _calitp_val(col, v):
+    if v is None:
+        return ""
+    if col in ("start_date", "end_date", "date"):
+        return str(v)[:10].replace("-", "")
+    if isinstance(v, float) and v.is_integer() and col not in ("stop_lat", "stop_lon", "shape_dist_traveled"):
+        return str(int(v))
+    return str(v)
+
+
+def calitp_zip(b64):
+    """one Cal-ITP dataset as a GTFS zip, built from the statewide tables (the dataset's rows, in pages of 32,000 by _id), cached in
+    cache/calitp for the snapshot"""
+    import re, hashlib
+    if not re.fullmatch(r"[A-Za-z0-9+/=]+", b64 or ""):
+        raise ValueError("not a Cal-ITP dataset key")
+    idx = calitp_index()
+    p = os.path.join(SHARED, "calitp", f"{hashlib.sha1(b64.encode()).hexdigest()[:16]}-{idx['snapshot']}.zip")
+    if os.path.exists(p):
+        return open(p, "rb").read()
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zo:
+        for t, cols in CALITP_TABLES.items():
+            out = io.StringIO(); w = csv.writer(out); cl = cols.split(","); w.writerow(cl); last = 0
+            while True:
+                rows = _calitp_sql(f'SELECT _id, {cols} FROM "{idx["resources"][t]}" WHERE base64_url = \'{b64}\' AND _id > {int(last)} ORDER BY _id LIMIT 32000')
+                for x in rows:
+                    w.writerow([_calitp_val(c, x.get(c)) for c in cl])
+                if len(rows) < 32000:
+                    break
+                last = rows[-1]["_id"]
+            zo.writestr(t + ".txt", out.getvalue())
+    b = buf.getvalue(); os.makedirs(os.path.dirname(p), exist_ok=True)
+    tmp = f"{p}.{os.getpid()}.tmp"; open(tmp, "wb").write(b); os.replace(tmp, p)
+    log("   Cal-ITP dataset built", b64[:24], f"{len(b) / 1e6:.1f} MB")
+    return b
+
+
+def _stop_name_key(s):
+    import re
+    return " ".join(re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).split())
+
+
+def calitp_positions(rd, ref):
+    """exact positions for a Cal-ITP copy's stops, which the State's tables give rounded to 3 decimals (about 100 m: two stops on one
+    corner become one): the position of the same stop in the feed's other copies (the newest copy's, by its last service date), by
+    stop_id, by stop_code (Bay Area 511 writes Muni's stop codes as ids), or by name when the newest copy's stops of that name within
+    0.0012 degrees share one position. Checked on 8 Nov 2026 for the
+    eight California candidates: 95% (Tehama, by name) to 100% matched. Returns ({stop_id: (lon, lat)}, stops, matched)."""
+    out = {}; n = 0
+    for x in rd("stops.txt"):
+        try:
+            lon, lat = float(x["stop_lon"]), float(x["stop_lat"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        n += 1; sid = x.get("stop_id")
+        near = lambda p: p is not None and abs(p[0] - lon) <= 0.0012 and abs(p[1] - lat) <= 0.0012
+        p = (ref["id"].get(sid) or (None, None))[1]
+        if not near(p):
+            p = (ref["code"].get(sid) or (None, None))[1]
+        if not near(p):   # by name: the newest copy's stops of that name nearby, when they share one position
+            c = [(v, q) for v, q in ref["name"].get(_stop_name_key(x.get("stop_name")), []) if near(q)]
+            top = {q for v, q in c if v == max(v_ for v_, _ in c)} if c else set()
+            p = next(iter(top)) if len(top) == 1 else None
+        if near(p):
+            out[sid] = p
+    return out, n, len(out)
+
+
+def _with_positions(rd, fixed):
+    """rd with stops.txt rows moved to their exact positions; a stop without one is flagged _rounded (it is never merged with another)"""
+    def rd2(n):
+        rows = rd(n)
+        if n != "stops.txt":
+            return rows
+        return ({**x, "stop_lon": repr(fixed[x.get("stop_id")][0]), "stop_lat": repr(fixed[x.get("stop_id")][1])} if x.get("stop_id") in fixed else {**x, "_rounded": "1"}
+                for x in rows)
+    return rd2
+
+

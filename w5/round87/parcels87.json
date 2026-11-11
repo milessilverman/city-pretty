@@ -1,0 +1,1872 @@
+[
+ {
+  "scope": "North Carolina",
+  "states": [
+   "37"
+  ],
+  "url": "https://services.nconemap.gov/secure/rest/services/NC1Map_Parcels/FeatureServer/1",
+  "name": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+  "terms": "https://services.nconemap.gov/secure/rest/services/NC1Map_Parcels/MapServer/1/metadata",
+  "fields": [
+   [
+    "parno",
+    "Parcel Number"
+   ],
+   [
+    "siteadd",
+    "Full Site Address"
+   ],
+   [
+    "scity",
+    "Site Address City"
+   ],
+   [
+    "parusedesc",
+    "Tax Parcel Use Code Description"
+   ],
+   [
+    "parusecode",
+    "Tax Parcel Use Code"
+   ],
+   [
+    "landval",
+    "Land Value\n"
+   ],
+   [
+    "improvval",
+    "Improved Value\n"
+   ],
+   [
+    "parval",
+    "Parcel Value\n"
+   ],
+   [
+    "parvaltype",
+    "Type of Value Reported"
+   ],
+   [
+    "saledate",
+    "Last Sale Date\n"
+   ],
+   [
+    "gisacres",
+    "GIS Acres"
+   ],
+   [
+    "cntyname",
+    "County Name"
+   ]
+  ],
+  "max": 5000,
+  "test": {
+   "n": 3,
+   "rings": true,
+   "error": null
+  },
+  "addr": "siteadd"
+ },
+ {
+  "scope": "Florida",
+  "states": [
+   "12"
+  ],
+  "url": "https://services9.arcgis.com/Gh9awoU677aKree0/arcgis/rest/services/Florida_Statewide_Cadastral/FeatureServer/0",
+  "name": "Florida Statewide Parcels (FGIO / Dept. of Revenue Property Tax Oversight)",
+  "terms": "https://www.arcgis.com/sharing/rest/content/items/efa909d6b1c841d298b0a649e7f71cf2?f=json",
+  "fields": [
+   [
+    "PARCEL_ID",
+    "PARCEL_ID"
+   ],
+   [
+    "PHY_ADDR1",
+    "PHY_ADDR1"
+   ],
+   [
+    "PHY_CITY",
+    "PHY_CITY"
+   ],
+   [
+    "DOR_UC",
+    "DOR_UC"
+   ],
+   [
+    "JV",
+    "JV"
+   ],
+   [
+    "LND_VAL",
+    "LND_VAL"
+   ],
+   [
+    "AV_SD",
+    "AV_SD"
+   ],
+   [
+    "TV_SD",
+    "TV_SD"
+   ],
+   [
+    "ASMNT_YR",
+    "ASMNT_YR"
+   ],
+   [
+    "SALE_PRC1",
+    "SALE_PRC1"
+   ],
+   [
+    "SALE_YR1",
+    "SALE_YR1"
+   ],
+   [
+    "SALE_MO1",
+    "SALE_MO1"
+   ],
+   [
+    "ACT_YR_BLT",
+    "ACT_YR_BLT"
+   ],
+   [
+    "LND_SQFOOT",
+    "LND_SQFOOT"
+   ],
+   [
+    "NO_RES_UNT",
+    "NO_RES_UNT"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 134,
+   "rings": true,
+   "error": null
+  },
+  "addr": "PHY_ADDR1"
+ },
+ {
+  "scope": "Wisconsin",
+  "states": [
+   "55"
+  ],
+  "url": "https://services3.arcgis.com/n6uYoouQZW75n5WI/arcgis/rest/services/Wisconsin_Statewide_Parcels_DB/FeatureServer/0",
+  "name": "Wisconsin Statewide Parcels V12 (Statewide Parcel Map Initiative)",
+  "terms": "https://www.arcgis.com/sharing/rest/content/items/2386813b23ea4e51a009f7d1d6b76e02?f=json",
+  "fields": [
+   [
+    "PARCELID",
+    "Parcel ID"
+   ],
+   [
+    "SITEADRESS",
+    "Full Physical Address"
+   ],
+   [
+    "PLACENAME",
+    "Place Name"
+   ],
+   [
+    "PROPCLASS",
+    "Class of Property"
+   ],
+   [
+    "CNTASSDVALUE",
+    "Total Assessed Value"
+   ],
+   [
+    "LNDVALUE",
+    "Assessed Value of Land"
+   ],
+   [
+    "IMPVALUE",
+    "Assessed Value of Improvements"
+   ],
+   [
+    "ESTFMKVALUE",
+    "Estimated Fair Market Value"
+   ],
+   [
+    "TAXROLLYEAR",
+    "Tax Roll Year"
+   ],
+   [
+    "GISACRES",
+    "GIS Acres"
+   ],
+   [
+    "CONAME",
+    "County Name"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 28,
+   "rings": true,
+   "error": null
+  },
+  "addr": "SITEADRESS"
+ },
+ {
+  "scope": "Massachusetts",
+  "states": [
+   "25"
+  ],
+  "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/Massachusetts_Property_Tax_Parcels/FeatureServer/0",
+  "name": "MassGIS Massachusetts Property Tax Parcels (Level 3 + assessor extract)",
+  "terms": "https://www.arcgis.com/sharing/rest/content/items/73d4c766167848b795f1048cad3919c7?f=json",
+  "fields": [
+   [
+    "PROP_ID",
+    "PROP_ID"
+   ],
+   [
+    "SITE_ADDR",
+    "SITE_ADDR"
+   ],
+   [
+    "CITY",
+    "CITY"
+   ],
+   [
+    "USE_CODE",
+    "USE_CODE"
+   ],
+   [
+    "USE_DESC",
+    "Use Description"
+   ],
+   [
+    "LAND_VAL",
+    "LAND_VAL"
+   ],
+   [
+    "BLDG_VAL",
+    "BLDG_VAL"
+   ],
+   [
+    "TOTAL_VAL",
+    "TOTAL_VAL"
+   ],
+   [
+    "FY",
+    "FY"
+   ],
+   [
+    "LS_DATE",
+    "LS_DATE"
+   ],
+   [
+    "LS_PRICE",
+    "LS_PRICE"
+   ],
+   [
+    "LOT_SIZE",
+    "LOT_SIZE"
+   ],
+   [
+    "YEAR_BUILT",
+    "YEAR_BUILT"
+   ],
+   [
+    "UNITS",
+    "UNITS"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 2,
+   "rings": true,
+   "error": null
+  },
+  "addr": "SITE_ADDR"
+ },
+ {
+  "scope": "Utah",
+  "states": [
+   "49"
+  ],
+  "url": "https://services1.arcgis.com/99lidPhWCzftIe9K/arcgis/rest/services/UtahStatewideParcels/FeatureServer/0",
+  "name": "UGRC Utah Statewide Parcels + county LIR (Land Information Records) parcels",
+  "terms": "https://gis.utah.gov/products/sgid/cadastre/parcels/",
+  "fields": [
+   [
+    "PARCEL_ID",
+    "Parcel Id"
+   ],
+   [
+    "PARCEL_ADD",
+    "Address"
+   ],
+   [
+    "PARCEL_CITY",
+    "City"
+   ],
+   [
+    "PARCEL_ZIP",
+    "Zip Code"
+   ],
+   [
+    "County",
+    "County"
+   ],
+   [
+    "CoParcel_URL",
+    "County Parcel Website"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 4,
+   "rings": true,
+   "error": null
+  },
+  "addr": "PARCEL_ADD"
+ },
+ {
+  "scope": "Montana",
+  "states": [
+   "30"
+  ],
+  "url": "https://gisservice.mt.gov/ArcGIS/rest/services/msdi_cadastral_map_v1/MapServer/1",
+  "name": "Montana Cadastral Framework (Montana State Library / Dept. of Revenue ORION)",
+  "terms": "https://gisservice.mt.gov/ArcGIS/rest/services/msdi_cadastral_map_v1/MapServer/info/iteminfo?f=json",
+  "fields": [
+   [
+    "PARCELID",
+    "PARCELID"
+   ],
+   [
+    "AddressLine1",
+    "AddressLine1"
+   ],
+   [
+    "CityStateZip",
+    "CityStateZip"
+   ],
+   [
+    "PropType",
+    "PropType"
+   ],
+   [
+    "TotalLandValue",
+    "TotalLandValue"
+   ],
+   [
+    "TotalBuildingValue",
+    "TotalBuildingValue"
+   ],
+   [
+    "TotalValue",
+    "TotalValue"
+   ],
+   [
+    "TaxYear",
+    "TaxYear"
+   ],
+   [
+    "GISAcres",
+    "GISAcres"
+   ],
+   [
+    "CountyName",
+    "CountyName"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 9,
+   "rings": true,
+   "error": null
+  },
+  "addr": "AddressLine1"
+ },
+ {
+  "scope": "Washington",
+  "states": [
+   "53"
+  ],
+  "url": "https://services.arcgis.com/jsIt88o09Q0r1j8h/arcgis/rest/services/Current_Parcels/FeatureServer/0",
+  "name": "Washington State Current Parcels (WaTech / WA Geoportal)",
+  "terms": "https://www.arcgis.com/sharing/rest/content/items/2b603a599a0842a3b2284c04c8927f35?f=json",
+  "fields": [
+   [
+    "PARCEL_ID_NR",
+    "FIPS Parcel ID Number"
+   ],
+   [
+    "SITUS_ADDRESS",
+    "Situs Address"
+   ],
+   [
+    "SITUS_CITY_NM",
+    "Situs City"
+   ],
+   [
+    "LANDUSE_CD",
+    "DOR Land Use Code"
+   ],
+   [
+    "VALUE_LAND",
+    "Market Land Value"
+   ],
+   [
+    "VALUE_BLDG",
+    "Market Building Value"
+   ],
+   [
+    "DATA_LINK",
+    "External Data Link"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 2,
+   "rings": true,
+   "error": null
+  },
+  "addr": "SITUS_ADDRESS"
+ },
+ {
+  "scope": "New Jersey",
+  "states": [
+   "34"
+  ],
+  "url": "https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/arcgis/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0",
+  "name": "Parcels and MOD-IV Composite of NJ, Web Mercator (NJOGIS)",
+  "terms": "https://www.arcgis.com/sharing/rest/content/items/533599bbfbaa4748bf39faf1375a8a9c?f=json",
+  "fields": [
+   [
+    "PAMS_PIN",
+    "PAMS_PIN"
+   ],
+   [
+    "PROP_LOC",
+    "PROP_LOC"
+   ],
+   [
+    "MUN_NAME",
+    "MUN_NAME"
+   ],
+   [
+    "PROP_CLASS",
+    "PROP_CLASS"
+   ],
+   [
+    "PROP_USE",
+    "PROP_USE"
+   ],
+   [
+    "LAND_VAL",
+    "LAND_VAL"
+   ],
+   [
+    "IMPRVT_VAL",
+    "IMPRVT_VAL"
+   ],
+   [
+    "NET_VALUE",
+    "NET_VALUE"
+   ],
+   [
+    "LAST_YR_TX",
+    "LAST_YR_TX"
+   ],
+   [
+    "SALE_PRICE",
+    "SALE_PRICE"
+   ],
+   [
+    "DEED_DATE",
+    "DEED_DATE"
+   ],
+   [
+    "YR_CONSTR",
+    "YR_CONSTR"
+   ],
+   [
+    "CALC_ACRE",
+    "CALC_ACRE"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 2,
+   "rings": true,
+   "error": null
+  },
+  "addr": "PROP_LOC"
+ },
+ {
+  "scope": "Connecticut",
+  "states": [
+   "09"
+  ],
+  "url": "https://services3.arcgis.com/3FL1kr7L4LvwA2Kb/arcgis/rest/services/Connecticut_CAMA_and_Parcel_Layer/FeatureServer/0",
+  "name": "Connecticut CAMA and Parcel Layer (CT GIS Office / OPM)",
+  "terms": "https://www.arcgis.com/sharing/rest/content/items/82a733423a244c43a9d4bf552954cea9?f=json",
+  "fields": [
+   [
+    "Parcel_ID",
+    "Parcel_ID"
+   ],
+   [
+    "Location_1",
+    "Location"
+   ],
+   [
+    "Property_City",
+    "Property City"
+   ],
+   [
+    "State_Use_Description",
+    "State Use Description"
+   ],
+   [
+    "Assessed_Total",
+    "Assessed Total"
+   ],
+   [
+    "Assessed_Land",
+    "Assessed Land"
+   ],
+   [
+    "Assessed_Building",
+    "Assessed Building"
+   ],
+   [
+    "Appraised_Land",
+    "Appraised Land"
+   ],
+   [
+    "Appraised_Building",
+    "Appraised Building"
+   ],
+   [
+    "Valuation_Year",
+    "Valuation Year"
+   ],
+   [
+    "Sale_Price",
+    "Sale Price"
+   ],
+   [
+    "Sale_Date",
+    "Sale Date"
+   ],
+   [
+    "Land_Acres",
+    "Land Acres"
+   ],
+   [
+    "Zone",
+    "Zone"
+   ],
+   [
+    "AYB",
+    "AYB"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 29,
+   "rings": true,
+   "error": null
+  },
+  "addr": "Location_1"
+ },
+ {
+  "scope": "Maryland",
+  "states": [
+   "24"
+  ],
+  "url": "https://mdgeodata.md.gov/imap/rest/services/PlanningCadastre/MD_ParcelBoundaries/MapServer/0",
+  "name": "Maryland Parcel Boundaries (MD iMAP / MDP / SDAT)",
+  "terms": "https://www.arcgis.com/sharing/rest/content/items/b33e5f03d50844b8819a4046ecfe0d97?f=json",
+  "fields": [
+   [
+    "ACCTID",
+    "Account ID"
+   ],
+   [
+    "PREMSNUM",
+    "Premise Address Number"
+   ],
+   [
+    "PREMSNAM",
+    "Premise Street Name"
+   ],
+   [
+    "PREMSTYP",
+    "Premise Address Street Type"
+   ],
+   [
+    "PREMCITY",
+    "Premise City"
+   ],
+   [
+    "DESCLU",
+    "Land Use Description"
+   ],
+   [
+    "ZONING",
+    "Zoning"
+   ],
+   [
+    "ACRES",
+    "Acres"
+   ],
+   [
+    "NFMLNDVL",
+    "New Appraised Land Value"
+   ],
+   [
+    "NFMIMPVL",
+    "New Appraised Improvement Value"
+   ],
+   [
+    "NFMTTLVL",
+    "New Appraised Full Value"
+   ],
+   [
+    "YEARBLT",
+    "Year Built"
+   ]
+  ],
+  "max": 1000,
+  "test": {
+   "n": 2,
+   "rings": true,
+   "error": null
+  }
+ },
+ {
+  "scope": "Vermont",
+  "states": [
+   "50"
+  ],
+  "url": "https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/FS_VCGI_OPENDATA_Cadastral_VTPARCELS_poly_standardized_parcels_SP_v1/FeatureServer/0",
+  "name": "VCGI Statewide Standardized Parcel Data (VTPARCELS, Grand List joined)",
+  "terms": "https://maps.vcgi.vermont.gov/gisdata/metadata/CadastralParcels_VTPARCELS.htm",
+  "fields": [
+   [
+    "SPAN",
+    "GIS SPAN"
+   ],
+   [
+    "E911ADDR",
+    "Emergency 911 Address"
+   ],
+   [
+    "TNAME",
+    "Grand-List Town-Name"
+   ],
+   [
+    "DESCPROP",
+    "Property Description"
+   ],
+   [
+    "CAT",
+    "Category (Real Estate only)"
+   ],
+   [
+    "REAL_FLV",
+    "Listed Real Value (Full)"
+   ],
+   [
+    "LAND_LV",
+    "Listed Value of Land"
+   ],
+   [
+    "IMPRV_LV",
+    "Listed Value of Improvements"
+   ],
+   [
+    "YEAR",
+    "GIS Year"
+   ],
+   [
+    "ACRESGL",
+    "Total Acres"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 10,
+   "rings": true,
+   "error": null
+  },
+  "addr": "E911ADDR"
+ },
+ {
+  "scope": "New York (38",
+  "states": [
+   "36"
+  ],
+  "url": "https://gisservices.its.ny.gov/arcgis/rest/services/NYS_Tax_Parcels_Public/MapServer/1",
+  "name": "NYS Tax Parcels Public (NYS ITS Geospatial Services + ORPTS)",
+  "terms": "https://gisservices.its.ny.gov/arcgis/rest/services/NYS_Tax_Parcels_Public/MapServer/1?f=json",
+  "fields": [
+   [
+    "PRINT_KEY",
+    "PRINT_KEY"
+   ],
+   [
+    "PARCEL_ADDR",
+    "PARCEL_ADDR"
+   ],
+   [
+    "CITYTOWN_NAME",
+    "CITYTOWN_NAME"
+   ],
+   [
+    "MUNI_NAME",
+    "MUNI_NAME"
+   ],
+   [
+    "PROP_CLASS",
+    "PROP_CLASS"
+   ],
+   [
+    "USED_AS_DESC",
+    "USED_AS_DESC"
+   ],
+   [
+    "LAND_AV",
+    "LAND_AV"
+   ],
+   [
+    "TOTAL_AV",
+    "TOTAL_AV"
+   ],
+   [
+    "FULL_MARKET_VAL",
+    "FULL_MARKET_VAL"
+   ],
+   [
+    "YR_BLT",
+    "YR_BLT"
+   ],
+   [
+    "ACRES",
+    "ACRES"
+   ],
+   [
+    "COUNTY_NAME",
+    "COUNTY_NAME"
+   ]
+  ],
+  "max": 50000,
+  "test": {
+   "n": 3,
+   "rings": true,
+   "error": null
+  },
+  "addr": "PARCEL_ADDR"
+ },
+ {
+  "scope": "Colorado",
+  "states": [
+   "08"
+  ],
+  "url": "https://gis.colorado.gov/public/rest/services/Address_and_Parcel/Colorado_Public_Parcels/FeatureServer/0",
+  "name": "Colorado Public Parcels (Governor's Office of Information Technology)",
+  "terms": "https://gis.colorado.gov/public/rest/services/Address_and_Parcel/Colorado_Public_Parcels/FeatureServer/info/iteminfo?f=json",
+  "fields": [
+   [
+    "parcel_id",
+    "Parcel Number"
+   ],
+   [
+    "situsAdd",
+    "Street Address"
+   ],
+   [
+    "sitAddCty",
+    "City Name"
+   ],
+   [
+    "landUseDsc",
+    "Tax Land Use Description"
+   ],
+   [
+    "zoningDesc",
+    "Zoning Description"
+   ],
+   [
+    "apprValTot",
+    "Parcel Total Value"
+   ],
+   [
+    "asedValTot",
+    "Taxable Value"
+   ],
+   [
+    "saleDate",
+    "Date of Last Sale"
+   ],
+   [
+    "salePrice",
+    "Price of Last Sale"
+   ],
+   [
+    "landAcres",
+    "Parcel Acres"
+   ],
+   [
+    "URL",
+    "URL"
+   ],
+   [
+    "countyName",
+    "County Name"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 3,
+   "rings": true,
+   "error": null
+  },
+  "addr": "situsAdd"
+ },
+ {
+  "scope": "Indiana",
+  "states": [
+   "18"
+  ],
+  "url": "https://gisdata.in.gov/server/rest/services/Hosted/Parcel_Boundaries_of_Indiana_Current/FeatureServer/0",
+  "name": "Parcel Boundaries of Indiana Current (IGIO Data Harvest)",
+  "terms": "https://gisdata.in.gov/portal/sharing/rest/content/items/ce78e8017fcb479c81a06a6255cfcfa6?f=json",
+  "fields": [
+   [
+    "parcel_id",
+    "PARCEL_ID"
+   ],
+   [
+    "prop_add",
+    "PROP_ADD"
+   ],
+   [
+    "prop_city",
+    "PROP_CITY"
+   ],
+   [
+    "dlgf_prop_class_code",
+    "DLGF_PROP_CLASS_CODE"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 5,
+   "rings": true,
+   "error": null
+  },
+  "addr": "prop_add"
+ },
+ {
+  "scope": "Minnesota",
+  "states": [
+   "27"
+  ],
+  "url": "https://enterprise.gisdata.mn.gov/aghost/rest/services/us_mn_state_mngeo/plan_parcels_open/FeatureServer/1",
+  "name": "Parcels, Compiled from Opt-In Open Data Counties, Minnesota (MnGeo)",
+  "terms": "https://www.arcgis.com/sharing/rest/content/items/69148d3959194a05a23964cc60f6517b?f=json",
+  "fields": [
+   [
+    "county_pin",
+    "county_pin"
+   ],
+   [
+    "anumber",
+    "anumber"
+   ],
+   [
+    "st_name",
+    "st_name"
+   ],
+   [
+    "st_pos_typ",
+    "st_pos_typ"
+   ],
+   [
+    "ctu_name",
+    "ctu_name"
+   ],
+   [
+    "useclass1",
+    "useclass1"
+   ],
+   [
+    "emv_land",
+    "emv_land"
+   ],
+   [
+    "emv_bldg",
+    "emv_bldg"
+   ],
+   [
+    "emv_total",
+    "emv_total"
+   ],
+   [
+    "tax_year",
+    "tax_year"
+   ],
+   [
+    "mkt_year",
+    "mkt_year"
+   ],
+   [
+    "acres_poly",
+    "acres_poly"
+   ],
+   [
+    "co_name",
+    "co_name"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 5,
+   "rings": true,
+   "error": null
+  }
+ },
+ {
+  "scope": "Virginia",
+  "states": [
+   "51"
+  ],
+  "url": "https://vginmaps.vdem.virginia.gov/arcgis/rest/services/VA_Base_Layers/VA_Parcels/MapServer/0",
+  "name": "Virginia Parcels (VGIN, VA_Base_Layers/VA_Parcels)",
+  "terms": "https://vginmaps.vdem.virginia.gov/arcgis/rest/services/VA_Base_Layers/VA_Parcels/MapServer/info/iteminfo?f=json",
+  "fields": [
+   [
+    "PARCELID",
+    "Parcel ID"
+   ],
+   [
+    "LOCALITY",
+    "LOCALITY"
+   ],
+   [
+    "PTM_ID",
+    "Parcel Tax Map ID"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 261,
+   "rings": true,
+   "error": null
+  }
+ },
+ {
+  "scope": "West Virginia",
+  "states": [
+   "54"
+  ],
+  "url": "https://services.wvgis.wvu.edu/arcgis/rest/services/Planning_Cadastre/WV_Parcels/MapServer/0",
+  "name": "WV Parcels (WVGIS Technical Center / WV Property Tax Division)",
+  "terms": "https://services.wvgis.wvu.edu/arcgis/rest/services/Planning_Cadastre/WV_Parcels/MapServer/0?f=json",
+  "fields": [
+   [
+    "CleanParcelID",
+    "CleanParcelID"
+   ],
+   [
+    "FullPhysicalAddress",
+    "FullPhysicalAddress"
+   ],
+   [
+    "FullLegalDescription",
+    "FullLegalDescription"
+   ],
+   [
+    "CALC_ACRE",
+    "CALC_ACRE"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 5,
+   "rings": true,
+   "error": null
+  },
+  "addr": "FullPhysicalAddress"
+ },
+ {
+  "scope": "Delaware",
+  "states": [
+   "10"
+  ],
+  "url": "https://enterprise.firstmap.delaware.gov/arcgis/rest/services/PlanningCadastre/DE_StateParcels/MapServer/0",
+  "name": "Delaware State Parcels (FirstMap)",
+  "terms": "https://enterprise.firstmap.delaware.gov/arcgis/rest/services/PlanningCadastre/DE_StateParcels/MapServer/info/iteminfo?f=json",
+  "fields": [
+   [
+    "PIN",
+    "PIN"
+   ],
+   [
+    "ACRES",
+    "Acres"
+   ],
+   [
+    "COUNTY",
+    "County"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 2,
+   "rings": true,
+   "error": null
+  }
+ },
+ {
+  "scope": "Arkansas",
+  "states": [
+   "05"
+  ],
+  "url": "https://gis.arkansas.gov/arcgis/rest/services/FEATURESERVICES/Planning_Cadastre/FeatureServer/6",
+  "name": "Arkansas Parcel Polygons - County Assessor Mapping Program (AGISO)",
+  "terms": "https://gis.arkansas.gov/arcgis/rest/services/FEATURESERVICES/Planning_Cadastre/MapServer/6/metadata",
+  "fields": [
+   [
+    "parcelid",
+    "ParcelId"
+   ],
+   [
+    "adrlabel",
+    "AdrLabel"
+   ],
+   [
+    "adrcity",
+    "AdrCity"
+   ],
+   [
+    "parceltype",
+    "ParcelType"
+   ],
+   [
+    "landvalue",
+    "LandValue"
+   ],
+   [
+    "impvalue",
+    "ImpValue"
+   ],
+   [
+    "totalvalue",
+    "TotalValue"
+   ],
+   [
+    "assessvalue",
+    "AssessValue"
+   ],
+   [
+    "county",
+    "County"
+   ],
+   [
+    "camadate",
+    "CAMADate"
+   ]
+  ],
+  "max": 200,
+  "test": {
+   "n": 1,
+   "rings": true,
+   "error": null
+  },
+  "addr": "adrlabel"
+ },
+ {
+  "scope": "District of Columbia",
+  "states": [
+   "11"
+  ],
+  "url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Property_and_Land_WebMercator/MapServer/40",
+  "name": "DC Owner Polygons (Common Ownership Layer) + ITSPE / CAMA sales",
+  "terms": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Property_and_Land_WebMercator/MapServer/40/iteminfo?f=json",
+  "fields": [
+   [
+    "SSL",
+    "Square, Suffix, Lot"
+   ],
+   [
+    "PREMISEADD",
+    "Premise Address"
+   ],
+   [
+    "USECODE",
+    "Use Code"
+   ],
+   [
+    "PROPTYPE",
+    "Property Type"
+   ],
+   [
+    "NEWLAND",
+    "Proposed Land value"
+   ],
+   [
+    "NEWIMPR",
+    "Proposed Improvement Value"
+   ],
+   [
+    "NEWTOTAL",
+    "Proposed Total Value"
+   ],
+   [
+    "LANDAREA",
+    "Land Area"
+   ],
+   [
+    "NBHDNAME",
+    "Neighborhood Assessment Name"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 3,
+   "rings": true,
+   "error": null
+  },
+  "addr": "PREMISEADD"
+ },
+ {
+  "scope": "Maine",
+  "states": [
+   "23"
+  ],
+  "url": "https://services1.arcgis.com/RbMX0mRVOFNTdLzd/arcgis/rest/services/Maine_Parcels_Organized_Towns/FeatureServer/10",
+  "name": "Maine Parcels Organized Towns (Maine GeoLibrary / MEGIS)",
+  "terms": "https://www.arcgis.com/sharing/rest/content/items/346131b710a645ffb624f448a9cba6d4?f=json",
+  "fields": [
+   [
+    "MAP_BK_LOT",
+    "MAP_BK_LOT"
+   ],
+   [
+    "PROP_LOC",
+    "PROP_LOC"
+   ],
+   [
+    "TOWN",
+    "TOWN"
+   ],
+   [
+    "COUNTY",
+    "COUNTY"
+   ],
+   [
+    "TYPE",
+    "TYPE"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 9,
+   "rings": true,
+   "error": null
+  },
+  "addr": "PROP_LOC"
+ },
+ {
+  "scope": "Ohio",
+  "states": [
+   "39"
+  ],
+  "url": "https://services2.arcgis.com/MlJ0G8iWUyC7jAmu/arcgis/rest/services/OhioStatewidePacels_full_view/FeatureServer/0",
+  "name": "Ohio Statewide Parcels Public View (OGRIP)",
+  "terms": "https://www.arcgis.com/sharing/rest/content/items/26ab5fad8d5d4258a7492a14de83bc0e?f=json",
+  "fields": [
+   [
+    "LocalParcelID",
+    "LocalParcelID"
+   ],
+   [
+    "SitusAddressAll",
+    "Situs Address All"
+   ],
+   [
+    "StateLUC",
+    "Land Use"
+   ],
+   [
+    "County",
+    "County"
+   ],
+   [
+    "CAMADataSite",
+    "CAMA Data"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 4,
+   "rings": true,
+   "error": null
+  },
+  "addr": "SitusAddressAll"
+ },
+ {
+  "scope": "North Dakota",
+  "states": [
+   "38"
+  ],
+  "url": "https://services1.arcgis.com/GOcSXpzwBHyk2nog/arcgis/rest/services/NDGISHUB_Parcels/FeatureServer/0",
+  "name": "NDGISHUB Parcels + Parcels_TaxRoll (North Dakota State Parcel Program)",
+  "terms": "https://www.arcgis.com/sharing/rest/content/items/ac6da1176038457db16e8debe3f1abaf?f=json",
+  "fields": [
+   [
+    "GISID",
+    "GIS ID"
+   ],
+   [
+    "CountyName",
+    "County Name"
+   ],
+   [
+    "SubdivisionPlat",
+    "Subdivision Plat"
+   ],
+   [
+    "Lot",
+    "Lot"
+   ],
+   [
+    "Block",
+    "Block"
+   ],
+   [
+    "CalculatedAcres",
+    "Calculated Acres"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 4,
+   "rings": true,
+   "error": null
+  }
+ },
+ {
+  "scope": "Wyoming",
+  "states": [
+   "56"
+  ],
+  "url": "https://services3.arcgis.com/r0iJ85SKZ4zAzz3P/arcgis/rest/services/Wyoming_Parcels_for_2026/FeatureServer/0",
+  "name": "Wyoming Parcels for 2026 (Wyoming Statewide Parcel Viewer, Dept. of Revenue)",
+  "terms": "https://www.arcgis.com/sharing/rest/content/items/4bb9a66f7287402b8f650aa9f21d3fa5?f=json",
+  "fields": [
+   [
+    "parcelnb",
+    "parcelnb"
+   ],
+   [
+    "locationad",
+    "locationad"
+   ],
+   [
+    "jurisdicti",
+    "jurisdicti"
+   ],
+   [
+    "actualvalu",
+    "actualvalu"
+   ],
+   [
+    "assessedva",
+    "assessedva"
+   ],
+   [
+    "taxyear",
+    "taxyear"
+   ],
+   [
+    "landgrossa",
+    "landgrossa"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 7,
+   "rings": true,
+   "error": null
+  },
+  "addr": "locationad"
+ },
+ {
+  "scope": "Idaho",
+  "states": [
+   "16"
+  ],
+  "url": "https://services1.arcgis.com/CNPdEkvnGl65jCX8/arcgis/rest/services/Public_Idaho_Parcels_/FeatureServer/7",
+  "name": "Public Idaho Parcels (Idaho ITS, Idaho Parcel Data Exchange Standard)",
+  "terms": "https://www.arcgis.com/sharing/rest/content/items/65a3f7c6d4ca404ba6ab677913953b35?f=json",
+  "fields": [
+   [
+    "PARCEL_ID",
+    "Parcel Identification Number"
+   ],
+   [
+    "SITE_ADD",
+    "Situs Address"
+   ],
+   [
+    "SITE_CITY",
+    "Situs City"
+   ],
+   [
+    "ASR_CATS",
+    "Assessment Categories"
+   ],
+   [
+    "VAL_LAND",
+    "Value of Land"
+   ],
+   [
+    "VAL_IMPVTS",
+    "Value of all Improvements"
+   ],
+   [
+    "VAL_TOTAL",
+    "Total Value"
+   ],
+   [
+    "ASR_ACRES",
+    "Legal Acres"
+   ],
+   [
+    "County",
+    "County"
+   ],
+   [
+    "WEBSITE",
+    "Website"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 3,
+   "rings": true,
+   "error": null
+  },
+  "addr": "SITE_ADD"
+ },
+ {
+  "scope": "Nebraska",
+  "states": [
+   "31"
+  ],
+  "url": "https://giscat.ne.gov/enterprise/rest/services/StatewideParcelsExternal/MapServer/0",
+  "name": "Nebraska StatewideParcelsExternal (OCIO, county CAMA)",
+  "terms": "https://giscat.ne.gov/enterprise/rest/services/StatewideParcelsExternal/MapServer/0?f=json",
+  "fields": [
+   [
+    "Parcel_ID",
+    "Parcel_ID"
+   ],
+   [
+    "Situs_Address",
+    "Situs_Address"
+   ],
+   [
+    "Ph_City",
+    "Ph_City"
+   ],
+   [
+    "Classification_Code",
+    "Classification_Code"
+   ],
+   [
+    "Property_SubClass",
+    "Property_SubClass"
+   ],
+   [
+    "Total_Assessed_Value",
+    "Total_Assessed_Value"
+   ],
+   [
+    "Land_Value",
+    "Land_Value"
+   ],
+   [
+    "Improvements_Value",
+    "Improvements_Value"
+   ],
+   [
+    "Sales_Date",
+    "Sales_Date"
+   ],
+   [
+    "Sales_Value",
+    "Sales_Value"
+   ],
+   [
+    "GIS_Acres",
+    "GIS_Acres"
+   ],
+   [
+    "BuildingYear",
+    "BuildingYear"
+   ],
+   [
+    "Parcel_URL",
+    "Parcel_URL"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 1,
+   "rings": true,
+   "error": null
+  },
+  "addr": "Situs_Address"
+ },
+ {
+  "scope": "Rhode Island",
+  "states": [
+   "44"
+  ],
+  "url": "https://risegis.ri.gov/hosting/rest/services/RIDEM/Tax_Parcels/MapServer/0",
+  "name": "Rhode Island Tax Parcels (RIDEM / RIGIS, 37 towns)",
+  "terms": "https://risegis.ri.gov/hosting/rest/services/RIDEM/Tax_Parcels/MapServer/info/iteminfo?f=json",
+  "fields": [
+   [
+    "PlatLot",
+    "PlatLot"
+   ],
+   [
+    "TownCode",
+    "TownCode"
+   ],
+   [
+    "E911Desc",
+    "E911Desc"
+   ],
+   [
+    "Acres",
+    "Acres"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 6,
+   "rings": true,
+   "error": null
+  }
+ },
+ {
+  "scope": "New York City",
+  "counties": [
+   "36005",
+   "36047",
+   "36061",
+   "36081",
+   "36085"
+  ],
+  "url": "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/MAPPLUTO/FeatureServer/0",
+  "name": "NYC MapPLUTO (NYC Department of City Planning)",
+  "terms": "https://www.arcgis.com/sharing/rest/content/items/1564ace0b4f44318ac39920737f9bd07?f=json",
+  "fields": [
+   [
+    "Borough",
+    "Borough"
+   ],
+   [
+    "Block",
+    "Block"
+   ],
+   [
+    "Lot",
+    "Lot"
+   ],
+   [
+    "Address",
+    "Address"
+   ],
+   [
+    "LandUse",
+    "LandUse"
+   ],
+   [
+    "BldgClass",
+    "BldgClass"
+   ],
+   [
+    "ZoneDist1",
+    "ZoneDist1"
+   ],
+   [
+    "LotArea",
+    "LotArea"
+   ],
+   [
+    "BldgArea",
+    "BldgArea"
+   ],
+   [
+    "UnitsRes",
+    "UnitsRes"
+   ],
+   [
+    "NumFloors",
+    "NumFloors"
+   ],
+   [
+    "AssessLand",
+    "AssessLand"
+   ],
+   [
+    "AssessTot",
+    "AssessTot"
+   ],
+   [
+    "YearBuilt",
+    "YearBuilt"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 3,
+   "rings": true,
+   "error": null
+  },
+  "addr": "Address"
+ },
+ {
+  "scope": "Maricopa",
+  "counties": [
+   "04013"
+  ],
+  "url": "https://gis.mcassessor.maricopa.gov/arcgis/rest/services/Parcels/MapServer/0",
+  "name": "Maricopa County Assessor Parcels",
+  "terms": "https://gis.mcassessor.maricopa.gov/arcgis/rest/services/Parcels/MapServer/info/iteminfo?f=json",
+  "fields": [
+   [
+    "APN_DASH",
+    "APN_DASH"
+   ],
+   [
+    "PHYSICAL_ADDRESS",
+    "Property Address"
+   ],
+   [
+    "PHYSICAL_CITY",
+    "Property City"
+   ],
+   [
+    "PUC",
+    "PUC"
+   ],
+   [
+    "FCV_CUR",
+    "Current Full Cash Value"
+   ],
+   [
+    "LPV_CUR",
+    "Current Limited Property Value"
+   ],
+   [
+    "TAX_YR_CUR",
+    "Current Tax Year"
+   ],
+   [
+    "SALE_DATE",
+    "Sale Date"
+   ],
+   [
+    "SALE_PRICE",
+    "Sale Price"
+   ],
+   [
+    "LAND_SIZE",
+    "Land Size"
+   ],
+   [
+    "CONST_YEAR",
+    "Construction Year"
+   ],
+   [
+    "CITY_ZONING",
+    "Zoning"
+   ]
+  ],
+  "max": 1000,
+  "test": {
+   "n": 2,
+   "rings": true,
+   "error": null
+  },
+  "addr": "PHYSICAL_ADDRESS"
+ },
+ {
+  "scope": "Cook",
+  "counties": [
+   "17031"
+  ],
+  "url": "https://gis.cookcountyil.gov/traditional/rest/services/cookVwrDynmc/MapServer/44",
+  "name": "Cook County GIS - Current Parcel (cookVwrDynmc layer 44)",
+  "terms": "https://gis.cookcountyil.gov/traditional/rest/services/cookVwrDynmc/MapServer/info/iteminfo?f=json",
+  "fields": [
+   [
+    "PIN14",
+    "PIN14"
+   ],
+   [
+    "Address",
+    "Address"
+   ],
+   [
+    "City",
+    "City"
+   ],
+   [
+    "BLDGClass",
+    "BLDGClass"
+   ],
+   [
+    "LandValue",
+    "LandValue"
+   ],
+   [
+    "BldgValue",
+    "BldgValue"
+   ],
+   [
+    "TotalValue",
+    "TotalValue"
+   ],
+   [
+    "TAXYR",
+    "TAXYR"
+   ],
+   [
+    "BldgAge",
+    "BldgAge"
+   ],
+   [
+    "LandSqft",
+    "LandSqft"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 1,
+   "rings": true,
+   "error": null
+  },
+  "addr": "Address"
+ },
+ {
+  "scope": "San Diego",
+  "counties": [
+   "06073"
+  ],
+  "url": "https://geo.sandag.org/server/rest/services/Hosted/Parcels/FeatureServer/0",
+  "name": "SanGIS Parcels (hosted by SANDAG)",
+  "terms": "https://geo.sandag.org/server/rest/services/Hosted/Parcels/FeatureServer/0?f=json",
+  "fields": [
+   [
+    "apn",
+    "APN"
+   ],
+   [
+    "situs_address",
+    "SITUS_ADDRESS"
+   ],
+   [
+    "situs_community",
+    "SITUS_COMMUNITY"
+   ],
+   [
+    "asr_landuse",
+    "ASR_LANDUSE"
+   ],
+   [
+    "asr_land",
+    "ASR_LAND"
+   ],
+   [
+    "asr_impr",
+    "ASR_IMPR"
+   ],
+   [
+    "asr_total",
+    "ASR_TOTAL"
+   ],
+   [
+    "acreage",
+    "ACREAGE"
+   ],
+   [
+    "total_lvg_area",
+    "TOTAL_LVG_AREA"
+   ],
+   [
+    "year_effective",
+    "YEAR_EFFECTIVE"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 3,
+   "rings": true,
+   "error": null
+  },
+  "addr": "situs_address"
+ },
+ {
+  "scope": "Franklin County, OH",
+  "counties": [
+   "39049"
+  ],
+  "url": "https://gis.franklincountyohio.gov/hosting/rest/services/ParcelFeatures/Parcel_Features/MapServer/0",
+  "name": "Franklin County Auditor Tax Parcel (Parcel_Features)",
+  "terms": "https://gis.franklincountyohio.gov/hosting/rest/services/ParcelFeatures/Parcel_Features/MapServer/info/iteminfo?f=json",
+  "fields": [
+   [
+    "PARCELID",
+    "PARCELID"
+   ],
+   [
+    "SITEADDRESS",
+    "Site Address"
+   ],
+   [
+    "CLASSDSCRP",
+    "Property Class Description"
+   ],
+   [
+    "ACRES",
+    "GIS Acres"
+   ],
+   [
+    "SALEDATE",
+    "Sale Date"
+   ],
+   [
+    "SALEPRICE",
+    "Sale Price"
+   ],
+   [
+    "RESYRBLT",
+    "Res. Year Built"
+   ]
+  ],
+  "max": 3000,
+  "test": {
+   "n": 4,
+   "rings": true,
+   "error": null
+  },
+  "addr": "SITEADDRESS"
+ },
+ {
+  "scope": "Fulton",
+  "counties": [
+   "13121"
+  ],
+  "url": "https://gismaps.fultoncountyga.gov/arcgispub/rest/services/OpenData/Tax_Parcels/MapServer/0",
+  "name": "Fulton County OpenData Tax_Parcels",
+  "terms": "https://gismaps.fultoncountyga.gov/arcgispub/rest/services/OpenData/Tax_Parcels/MapServer/info/iteminfo?f=json",
+  "fields": [
+   [
+    "ParcelID",
+    "ParcelID"
+   ],
+   [
+    "Address",
+    "Address"
+   ],
+   [
+    "LUCode",
+    "LUCode"
+   ],
+   [
+    "ClassCode",
+    "ClassCode"
+   ],
+   [
+    "LivUnits",
+    "LivUnits"
+   ],
+   [
+    "LandAcres",
+    "LandAcres"
+   ],
+   [
+    "TaxYear",
+    "TaxYear"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 1,
+   "rings": true,
+   "error": null
+  },
+  "addr": "Address"
+ },
+ {
+  "scope": "Allegheny",
+  "counties": [
+   "42003"
+  ],
+  "url": "https://gisdata.alleghenycounty.us/arcgis/rest/services/OPENDATA/Parcels/MapServer/0",
+  "name": "Allegheny County OPENDATA Parcels (geometry)",
+  "terms": "https://gisdata.alleghenycounty.us/arcgis/rest/services/OPENDATA/Parcels/MapServer/info/iteminfo?f=json",
+  "fields": [
+   [
+    "PIN",
+    "PIN"
+   ],
+   [
+    "MAPBLOCKLOT",
+    "Map Block Lot"
+   ],
+   [
+    "CALCACREAGE",
+    "Calculated Acreage"
+   ]
+  ],
+  "max": 1000,
+  "test": {
+   "n": 4,
+   "rings": true,
+   "error": null
+  }
+ },
+ {
+  "scope": "Clark County, NV",
+  "counties": [
+   "32003"
+  ],
+  "url": "https://maps.clarkcountynv.gov/arcgis/rest/services/Assessor/Layers/MapServer/1",
+  "name": "Clark County Assessor Parcels (Assessor/Layers)",
+  "terms": "https://maps.clarkcountynv.gov/arcgis/rest/services/Assessor/Layers/MapServer/info/iteminfo?f=json",
+  "fields": [
+   [
+    "APN",
+    "APN"
+   ],
+   [
+    "ASSR_ACRES",
+    "ASSR_ACRES"
+   ],
+   [
+    "PARCELTYPE",
+    "PARCELTYPE"
+   ]
+  ],
+  "max": 2000,
+  "test": {
+   "n": 2,
+   "rings": true,
+   "error": null
+  }
+ }
+]

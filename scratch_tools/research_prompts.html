@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>City Pretty Research Prompts</title>
+<style>
+:root{
+  --bg:#f7f6f2; --card:#ffffff; --fg:#1d1d1b; --muted:#5f5e58; --border:#e2e0d8; --code:#f2f1ec;
+  --accent:#1f5f8b; --accent-fg:#ffffff;
+  --p1:#a33a1f; --p1bg:#fbe9e3; --p2:#7a5a00; --p2bg:#fbf1d6; --p3:#3d6b35; --p3bg:#e6f2e2;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#161614; --card:#1f1f1c; --fg:#ecebe6; --muted:#a8a69d; --border:#34332e; --code:#262622;
+    --accent:#7fb6dd; --accent-fg:#0f1b24;
+    --p1:#f0a088; --p1bg:#3a211a; --p2:#e8c76a; --p2bg:#352c14; --p3:#9fd18f; --p3bg:#1f3019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#161614; --card:#1f1f1c; --fg:#ecebe6; --muted:#a8a69d; --border:#34332e; --code:#262622;
+  --accent:#7fb6dd; --accent-fg:#0f1b24;
+  --p1:#f0a088; --p1bg:#3a211a; --p2:#e8c76a; --p2bg:#352c14; --p3:#9fd18f; --p3bg:#1f3019;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+main{max-width:860px;margin:0 auto;padding:28px 16px 64px}
+h1{font-size:1.7rem;line-height:1.2;margin:0 0 6px}
+.lede{color:var(--muted);margin:0 0 20px}
+.box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin:0 0 14px}
+.box h2{font-size:1rem;margin:0 0 6px}
+.box ol,.box ul{margin:6px 0 0;padding-left:20px}
+.box li{margin:3px 0}
+.small{font-size:.9rem;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin:16px 0}
+.head{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.head h3{font-size:1.08rem;margin:0;flex:1 1 320px}
+.tag{font-size:.78rem;font-weight:600;border-radius:999px;padding:2px 10px;white-space:nowrap}
+.t1{color:var(--p1);background:var(--p1bg)} .t2{color:var(--p2);background:var(--p2bg)} .t3{color:var(--p3);background:var(--p3bg)}
+.why{margin:8px 0 10px;color:var(--muted)}
+pre{white-space:pre-wrap;word-wrap:break-word;background:var(--code);border:1px solid var(--border);border-radius:8px;padding:12px;margin:0;font:13.5px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;max-height:340px;overflow:auto}
+.row{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+button{font:inherit;font-weight:600;border:0;border-radius:8px;padding:8px 16px;background:var(--accent);color:var(--accent-fg);cursor:pointer;min-height:40px}
+button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
+.ok{font-size:.9rem;color:var(--muted)}
+details{margin-top:8px} summary{cursor:pointer;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<main>
+<h1>City Pretty Research Prompts</h1>
+<p class="lede">Thirteen prompts aimed at the biggest gaps in the map's data, highest priority first. Each one is self-contained: <b>Copy</b> adds the project background and the source rules shown below.</p>
+
+<section class="card" id="handoff">
+  <div class="head"><h3>Hand-off: check the research and turn it into data files (for ChatGPT and Gemini)</h3><span class="tag t1">Next step</span></div>
+  <p class="why">Send this with the research answers attached. It asks for checked, machine-readable files that can be loaded into the map.</p>
+  <pre id="handoffText"></pre>
+  <div class="row"><button type="button" id="handoffBtn">Copy hand-off prompt</button><span class="ok" id="handoffOk" aria-live="polite"></span></div>
+</section>
+
+<div class="box">
+  <h2>How to use them</h2>
+  <ol>
+    <li>Paste one prompt per chat into an AI research tool that can browse the web (ChatGPT deep research, Gemini Deep Research, Claude Research, Perplexity).</li>
+    <li>Send me the full answer, pasted or as a file. Keep the URLs and quotes.</li>
+    <li>I open every cited page and check the quote before anything goes into the map. Anything I can't confirm gets dropped.</li>
+  </ol>
+  <p class="small">Already being researched, so no prompt here: project types that depend on local conditions (flood, snow, wildfire and heat, tornado, shrinking cities, rural areas, suburbs, schools and safety). I'll fetch HUD income limits by county myself.</p>
+</div>
+
+<div class="box">
+  <h2>Included in every copied prompt</h2>
+  <pre id="shared"></pre>
+</div>
+
+<div id="list"></div>
+</main>
+
+<script>
+const CONTEXT = `Context: I'm building City Pretty, a free public map that scores every Census block group in about 730 US counties for neighborhood projects (street trees, sidewalks, parks, bus lanes, lighting and more), each with a cost and an expected effect on home values. Today is November 2026, so I need the most recent data and documents.`;
+
+const RULES = `Rules:
+1. Primary sources only: the agency's or data owner's own page, an official open-data portal, a peer-reviewed paper, or a working paper from a university, a Federal Reserve bank or NBER. No blogs, Wikipedia, aggregator sites or AI-written pages. News only for a project date that no agency page states, and label it as news.
+2. For every number, URL, date and license, give the exact page you opened (a deep link, not a home page) and copy one or two sentences from it verbatim that state the fact.
+3. If you could not open a source or could not find something, write "not found". Never guess a URL, number, year or license.
+4. Give each source's date (published, last updated, or years covered).
+5. Do not include personal data (owner names, mailing addresses, victims).`;
+
+const P = [
+{pri:1, title:"Crime rates outside California",
+why:"The map has crime rates only in California, from state Department of Justice agency data. No other state has any, so safety projects there are scored without crime data.",
+task:`Task: find open, agency-level annual crime counts for every US state except California, plus DC and Puerto Rico, for the latest years available (2023, 2024, 2025).
+A. FBI Crime Data Explorer (cde.ucr.cjis.gov): direct download links for agency-level annual counts of violent and property offenses that include each agency's population. Examples: "Offenses Known to Law Enforcement" by city, by county agency and by other agency, or the agency-level NIBRS or summary files. Give links for each year released. Also: does the CDE API (key from api.data.gov) have an agency-level annual summary endpoint? Give its exact path, parameters and rate limits.
+B. A crosswalk from agency ORI codes to Census place and county FIPS codes, such as the BJS/ICPSR Law Enforcement Agency Identifiers Crosswalk: latest version, download URL, terms.
+C. Who polices places that have no department of their own: for each state, an official list of cities, towns or townships that contract with the county sheriff or rely on the state police (for example Pennsylvania State Police coverage, New Jersey State Police patrol towns, Michigan townships).
+D. State portals with agency-level counts that are newer or more complete than the FBI's, for example Texas DPS, Florida FDLE, New York DCJS, New Jersey State Police, Illinois State Police, Pennsylvania UCR, Michigan State Police, Ohio OIBRS, Georgia GBI: URL, years, fields, terms.
+Return a table: State | Source | Exact URL | Years | Agency-level (y/n) | Has population (y/n) | Format or API | Terms | Verbatim quote. Then list the states where you found nothing.`},
+
+{pri:1, title:"Crashes involving people walking or biking",
+why:"Crash records with locations are loaded only for California, Illinois, Maine, Pennsylvania, Tennessee, Utah, Virginia and one Colorado county. Everywhere else the map has only fatal crashes from NHTSA's FARS.",
+task:`Task: for each of these states and territories, find an open crash dataset with one row per crash and a location: AL, AR, AZ, CT, DC, DE, FL, GA, IA, ID, IN, KS, KY, LA, MA, MD, MI, MN, MO, MS, MT, NC, ND, NE, NH, NJ, NM, NV, NY, OH, OK, OR, PR, RI, SC, SD, TX, VT, WA, WI, WV, WY.
+Needed fields: latitude/longitude or a geometry, crash date, severity (KABCO or injury level), and whether a pedestrian or bicyclist was involved.
+Prefer a statewide dataset. If the state's data is not open, list open city or county datasets for its largest cities instead. Examples: New York City, Austin, Dallas, Houston, San Antonio, Seattle, Boston, Baltimore, Cincinnati, Louisville, Kansas City, Detroit, Minneapolis, Charlotte, Raleigh, Jacksonville, Miami-Dade, Atlanta, Phoenix, Las Vegas, Albuquerque, Portland, Milwaukee, Columbus, Cleveland, Oklahoma City, Tulsa, Omaha, Des Moines, Washington DC.
+For each dataset give:
+- the machine-readable endpoint (an ArcGIS FeatureServer or MapServer layer URL that supports /query, a Socrata dataset ID, a CKAN resource, or a direct CSV/ZIP);
+- years covered;
+- the exact field names for severity and for pedestrian/bicyclist involvement;
+- update frequency and whether download needs an account;
+- terms of use (quote any "23 U.S.C. 407" or no-redistribution clause).
+Return a table: State | City/county (if not statewide) | Dataset | Endpoint URL | Years | Severity field | Ped/bike field | Terms | Verbatim quote. Where the answer is "no open row-level data", write that and give the page that says so.`},
+
+{pri:1, title:"Bus and rail schedule feeds (GTFS) for 30 counties with none",
+why:"These counties show no transit service on the map because no working public schedule feed was found for them.",
+task:`Task: for each county below, list every fixed-route public transit operator that serves it (bus, rail, streetcar or ferry; skip dial-a-ride-only and paratransit-only services) and give its official GTFS static feed. Operators we already know of are in parentheses.
+Shelby County TN (Memphis Area Transit Authority); Pulaski County AR (Rock Region METRO); Nueces County TX (Corpus Christi Regional Transportation Authority); Cumberland County NC (Fayetteville Area System of Transit); Escambia County FL; Chatham County GA (Chatham Area Transit); Leon County FL (StarMetro); Erie County PA (Erie Metropolitan Transit Authority); Minnehaha County SD (Sioux Area Metro); Charlotte County FL; Santa Rosa County FL; Beaufort County SC; DeSoto County MS; Pitt County NC; Kanawha County WV (Kanawha Valley Regional Transportation Authority); Cameron County TX; Bell County TX; Hamilton County IN; Greene County MO; St. Tammany Parish LA; McLennan County TX; Jefferson County TX; Lafayette Parish LA; Brazos County TX; Smith County TX; Okaloosa County FL; Richmond County GA; Tippecanoe County IN; Vanderburgh County IN; Hernando County FL.
+For each operator give:
+- the GTFS zip URL and the agency web page that links to it;
+- the feed's last service date, from calendar.txt, calendar_dates.txt or feed_info.txt if you can open the zip;
+- the license;
+- its Mobility Database or Transitland ID, if it is listed.
+Many small agencies' feeds used to be hosted at data.trilliumtransit.com, which no longer resolves; find where those feeds moved. If an operator publishes no GTFS at all, say so and give the page that shows its routes and schedules.
+Return a table: County | Operator | Modes | GTFS URL | Linked from (page URL) | Last service date | License | Verbatim quote.`},
+
+{pri:1, title:"Construction costs by region",
+why:"Project costs come from Los Angeles-area sources and are used unchanged in every state. Projects therefore look too expensive in low-cost regions and too cheap in high-cost ones.",
+task:`Task:
+A. Find public, citable cost-adjustment factors by state or metro area for public-works construction. Examples: the U.S. Army Corps of Engineers' Civil Works Construction Cost Index System or its area cost factors, state DOT construction cost indexes, the FHWA National Highway Construction Cost Index, and BEA Regional Price Parities. For each, give the latest table's URL, what it covers and its terms.
+B. Find awarded unit prices from 2022 to 2026 for the items below. Use state DOT bid tabulations or average-bid-price reports, or city capital-project bids.
+- concrete sidewalk (per sq ft or sq yd)
+- ADA curb ramp (each)
+- street tree planted with 3 years of watering (each)
+- LED streetlight with pole (each)
+- high-visibility crosswalk (each)
+- rectangular rapid flashing beacon (each)
+- speed hump or speed cushion (each)
+- curb-protected bike lane (per mile)
+- installed bus shelter (each)
+- red-colored bus lane (per lane-mile)
+- bioswale curb extension (each)
+- playground replacement (each)
+- moving overhead power lines underground (per mile)
+- highway sound wall (per linear foot)
+Cover at least Texas, Florida, Georgia, North Carolina, Ohio, Pennsylvania, Illinois, Michigan, Arizona, Colorado, Washington, Massachusetts, New York, Minnesota, Missouri and Tennessee.
+Return a table: State/city | Item | Unit price | Unit | Year | Source (agency, document) | URL | Verbatim quote.`},
+
+{pri:1, title:"Effects on home values outside California",
+why:"Most effect sizes in the model come from Los Angeles studies or national averages. Effects likely differ in cold climates, weak housing markets and rural places.",
+task:`Task: for each project type below, find studies that measured the effect on nearby home values or rents OUTSIDE California. Ideally cover several regions (Northeast, Midwest, South, Mountain West, Pacific Northwest) and both strong and weak housing markets.
+For each estimate give:
+- the effect size with units (for example +3% within 500 ft) and the distance band;
+- the city and years studied;
+- the method (hedonic, repeat sales, or difference-in-differences);
+- the sentence that states the number.
+Project types: street trees; new or renovated parks and playgrounds; pocket parks; vacant-lot greening; demolition or rehab of vacant buildings; street lighting; traffic calming; sidewalks; protected bike lanes; bike share; bus rapid transit and bus lanes; new light-rail or commuter-rail stations; freeway noise walls; freeway caps (deck parks); burying overhead power lines; new supermarkets; main-street and façade programs; business improvement districts; pedestrian plazas; affordable housing developments (effect on neighbors); community land trusts; school facility bonds; police foot patrols and street violence-interruption programs (through lower crime).
+Flag any evidence that the effect depends on climate (for example trees in hot versus cold cities), market strength, or rural versus urban setting.
+Return a table: Project type | Effect | Distance | Place, years | Method | Authors, year, title, journal | URL | Verbatim quote.`},
+
+{pri:2, title:"Planned transit lines, and when prices move",
+why:"You asked the map to show planned metro lines, and whether nearby prices have already risen or when they likely will.",
+task:`Task:
+A. For the 70 most populous US counties and the Colorado Front Range, list every rail, bus rapid transit or streetcar project that is funded, in design or under construction, or that is adopted in an agency's official plan with a target date. Skip ideas that were never adopted. For each project give:
+- name, agency, mode and length;
+- stations (names and coordinates, or a link to a GIS, KML or GeoJSON file);
+- stage (planning, environmental review, design or construction);
+- funding (FTA Capital Investment Grants rating and grant-agreement date, or a local tax measure);
+- the agency's current opening year and any recent delay;
+- the agency page URL.
+B. Intercity projects: Front Range Passenger Rail (Fort Collins–Denver–Pueblo, and any extension to Cheyenne), Brightline West, California High-Speed Rail, Texas Central, Cascadia high-speed rail, and the corridors in the FRA Corridor Identification and Development Program. For each: stage, stations and official dates.
+C. Timing of price effects. Find studies that measured when home prices near new stations changed: at announcement, at funding, at construction start, or at opening. Give effect sizes and lags. Lines to check: Denver FasTracks, Charlotte LYNX Blue Line, Minneapolis–St. Paul Green Line, Seattle Link, Portland MAX, Houston METRORail, Phoenix Valley Metro, Dallas DART, Salt Lake TRAX and FrontRunner, the Washington Silver Line, Honolulu Skyline and Brightline Florida.
+Return three tables (A, B, C) with URLs and verbatim quotes.`},
+
+{pri:2, title:"Big corridor projects: high-speed rail, power lines, freeways",
+why:"You asked for big projects, such as a Cheyenne–Pueblo high-speed line with a transmission line in the same corridor. Those need measured effects and per-mile costs.",
+task:`Task:
+A. High-speed rail and property values: studies of land or home prices near high-speed rail stations versus along the line away from stations, including how the effect falls with distance. Cover Japan, France, Spain, China, Taiwan, Korea, the UK and Brightline Florida.
+B. High-voltage transmission lines and nearby home values by distance (for example within 100 m, 200 m and 500 m), including US studies and any Lawrence Berkeley National Laboratory work. Also: do buried lines differ?
+C. New freeways and interchanges, and freeway removals: measured effects on nearby home values near interchanges versus along the corridor.
+D. Costs per mile, with year and source, for:
+- high-speed rail (California HSR business plans, Brightline West, Texas Central);
+- conventional passenger rail upgrades (Front Range Passenger Rail studies);
+- 345 kV AC and ±525 kV HVDC transmission (MISO, SPP or ERCOT transmission cost guides, NREL or LBNL);
+- transmission built inside rail or highway rights-of-way (for example the SOO Green HVDC Link), and the federal rules or programs that allow it (DOE National Interest Electric Transmission Corridors, FHWA right-of-way rules).
+Return one table per part, with URLs and verbatim quotes.`},
+
+{pri:2, title:"Lot lines (parcels) for 23 states",
+why:"The address search draws lot lines from public parcel services. These states have no statewide service we can query, so many lots don't show.",
+task:`Task: these states have no statewide public parcel service we can query: AL, AZ, CA, GA, IA, IL, KS, KY, LA, MI, MO, MS, NH, NM, NV, OK, OR, PA, PR, SC, SD, TN, TX. For each state, find public parcel layers for its most populous counties (at least the five largest). We need:
+- an ArcGIS FeatureServer or MapServer layer URL that supports /query with a geometry envelope and returns JSON or GeoJSON;
+- the field names for site address, parcel ID, land use, lot area, and assessed land and improvement values;
+- the maximum record count;
+- the terms of use, quoting any clause against redistribution or display.
+Do not list owner-name or mailing-address fields.
+Also check:
+- Texas: TxGIO StratMap Land Parcels. Is there a queryable service?
+- New Hampshire: GRANIT statewide parcels.
+- Tennessee: Comptroller of the Treasury parcels.
+- Pennsylvania: PASDA and county services, and Philadelphia's OPA properties.
+Return a table: State | County | Layer URL | Address field | Parcel ID field | Max records | Terms | Verbatim quote.`},
+
+{pri:2, title:"Vacant lots, land banks and public land",
+why:"Suggestions for a specific lot, such as a pocket park, garden or housing, need to know which lots are vacant or publicly owned.",
+task:`Task: for the 100 most populous US cities, find open datasets of:
+- vacant lots and vacant buildings (city inventories, code-enforcement registries);
+- land bank inventories (for example Detroit Land Bank Authority, Cuyahoga Land Bank, Philadelphia Land Bank, Atlanta Land Bank, Shelby County Land Bank, Baltimore's vacant building notices);
+- publicly owned surplus land (city, county or state surplus property lists).
+For each dataset give: the endpoint URL (ArcGIS layer, Socrata or CSV); fields (address, parcel ID, status, area, zoning, asking price if any); update date; terms.
+Return a table: City | Dataset | Endpoint URL | Key fields | Updated | Terms | Verbatim quote.`},
+
+{pri:2, title:"Home price data the map is allowed to show",
+why:"To show whether prices near a planned project have already risen, the map needs neighborhood price trends that it may publish.",
+task:`Task: find neighborhood-level home price series and their terms for display on a free public website:
+- FHFA House Price Index at census tract and ZIP code level: latest release, URL, terms.
+- Zillow Home Value Index by ZIP and neighborhood: quote the terms on public display and attribution.
+- Redfin Data Center: terms.
+- Open county assessor sales files: examples from 10 large counties.
+- Any other public, openly licensed price or rent index at tract or ZIP level.
+For each give: geography, frequency, latest period, URL and the license quote.
+Return a table: Source | Geography | Frequency | Latest period | URL | Public display allowed? | Verbatim license quote.`},
+
+{pri:3, title:"Tree canopy and summer heat beyond city limits",
+why:"Canopy and heat come from Tree Equity Score, which covers only urban areas, so rural and small-town block groups have no value.",
+task:`Task: find national, openly licensed data for:
+A. Tree canopy cover: the latest USFS/NLCD Tree Canopy Cover release (year, resolution, download URL, license), Meta and WRI's 1 m global canopy height map, and any block-group summaries already published.
+B. Summer heat: national land-surface-temperature or heat-island layers based on Landsat, for example Trust for Public Land's Heat Severity, the Yale Center for Earth Observation's urban heat island data, or NOAA/NIHHIS heat mapping campaigns. Give the license (can a free public site show it?), resolution and year.
+C. The current Tree Equity Score national release: version, date, coverage and terms.
+Return a table: Dataset | Covers | Resolution | Year | URL | License quote.`},
+
+{pri:3, title:"City data: sidewalks, street trees, neighborhoods, zoning",
+why:"Sidewalk gaps, tree-planting spots and neighborhood names now come from OpenStreetMap, which is incomplete in many cities.",
+task:`Task: for the 50 most populous US cities other than Los Angeles, find open datasets for:
+- sidewalk inventory (presence or condition);
+- street tree inventory, including vacant planting sites;
+- official neighborhood boundaries;
+- zoning districts;
+- pavement condition.
+For each give: endpoint URL, key fields, update date and terms.
+Return a table: City | Dataset | Endpoint URL | Key fields | Updated | Terms | Verbatim quote.`},
+
+{pri:3, title:"Quick check: California cities policed by the sheriff",
+why:"In California a city policed by the county sheriff gets the sheriff's crime rate. Two cases could not be confirmed because the towns' websites block automated requests.",
+task:`Task:
+A. Confirm from each town's own website, or from the county sheriff's website, whether Portola Valley (San Mateo County) and Live Oak (Sutter County) get police services under contract from the county sheriff. Quote the page.
+B. List every California city whose crimes the county sheriff reports to the California Department of Justice, meaning cities with no row of their own in the DOJ "Crimes and Clearances" data. Give the source for each.
+Return a table: City | County | Policed by | Source URL | Verbatim quote.`}
+];
+
+const LABEL = {1:"Priority 1", 2:"Priority 2", 3:"Priority 3"};
+document.getElementById("shared").textContent = CONTEXT + "\n\n" + RULES;
+
+function full(p){ return CONTEXT + "\n\n" + p.task + "\n\n" + RULES; }
+
+function copyText(text){
+  try {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+  } catch (e) {}
+  return new Promise(function(resolve, reject){
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.top = "-1000px";
+      document.body.appendChild(ta); ta.select();
+      const ok = document.execCommand("copy"); document.body.removeChild(ta);
+      ok ? resolve() : reject(new Error("copy failed"));
+    } catch (e) { reject(e); }
+  });
+}
+
+const list = document.getElementById("list");
+P.forEach(function(p, i){
+  const c = document.createElement("section"); c.className = "card";
+  c.innerHTML = '<div class="head"><h3></h3><span class="tag t' + p.pri + '"></span></div><p class="why"></p><pre></pre>' +
+    '<div class="row"><button type="button">Copy prompt ' + (i + 1) + '</button><span class="ok" aria-live="polite"></span></div>';
+  c.querySelector("h3").textContent = (i + 1) + ". " + p.title;
+  c.querySelector(".tag").textContent = LABEL[p.pri];
+  c.querySelector(".why").textContent = p.why;
+  c.querySelector("pre").textContent = p.task;
+  const btn = c.querySelector("button"), ok = c.querySelector(".ok");
+  btn.addEventListener("click", function(){
+    copyText(full(p)).then(function(){ ok.textContent = "Copied, with background and rules."; },
+      function(){ ok.textContent = "Couldn't copy here. Select the text above and copy it, and add the shared block at the top."; });
+    setTimeout(function(){ ok.textContent = ""; }, 4000);
+  });
+  list.appendChild(c);
+});
+
+const HANDOFF = `City Pretty: check the research and turn it into data files
+
+Context: City Pretty is a free public map (https://milessilverman.github.io/city-pretty/) that scores every Census block group in hundreds of US counties for neighborhood projects: street trees, sidewalks, parks, bus lanes, lighting and more. Each project shows a cost and an expected effect on home values, and every number must trace to a primary source. A separate assistant (Claude Code) runs the data pipeline. Code will load your files into it, so the file formats below matter. Today is November 2026.
+
+Attached is research that AI assistants wrote in answer to 13 questions. Treat every URL, number, field name and quote in it as an unverified lead. Any of it may be wrong, out of date or made up.
+
+The 13 topics, and the gap in the map each one fills:
+1. Crime rates outside California. The map has crime data only for California.
+2. Crashes involving people walking or biking. Crash records with locations are loaded only for CA, IL, ME, PA, TN, UT, VA and one Colorado county. Elsewhere the map has only fatal crashes (NHTSA FARS).
+3. GTFS schedule feeds for 30 counties that show no transit.
+4. Construction costs by region. All costs are Los Angeles prices today.
+5. Home-value effects measured outside California.
+6. Planned transit lines, and when nearby home prices move.
+7. High-speed rail, transmission lines and freeways: effects on home values, and costs per mile.
+8. Parcel (lot line) services for the 23 states with no statewide service.
+9. Vacant lots, land banks and public land.
+10. Home price data the map may publish.
+11. Tree canopy and summer heat outside cities.
+12. City data: sidewalks, street trees, neighborhoods, zoning and pavement.
+13. California cities policed by the county sheriff.
+
+Your job, one topic at a time:
+1. Check every item in the research. Open the cited page yourself and find the quoted words. Check the number, units, year, place, and what it is "per". Test every data endpoint (see below).
+2. Correct whatever is wrong, using the page's own words.
+3. Fill the gaps. Search again for a primary source wherever the research says "not found", leaves out a state, county, city or item the question asked for, or cites a weak source.
+4. Deliver the files below. If you run out of room, finish whole topics, and say which topics are left.
+
+Rules:
+- Primary sources only. That means the agency's or data owner's own page, an official open-data portal, a peer-reviewed paper, or a working paper from a university, a Federal Reserve bank or NBER. No blogs, Wikipedia, aggregator sites or AI-written pages. News is allowed only for a project date that no agency page states; mark it "news".
+- Every number, URL, date and license needs the exact page you opened (a deep link) and one or two sentences copied verbatim from it.
+- Never guess a URL, number, year, field name or license. Write "not found" instead.
+- If a page blocks you (a login, CAPTCHA or bot check), mark it "blocked". Do not use a third-party copy unless the agency hosts it.
+- No personal data: no owner names, mailing addresses or victim details.
+- Do not create accounts, ask for API keys or contact agencies. List anything that needs a person in gaps.md.
+
+How to test endpoints. Write what you got in endpoint_test, for example "200; Query; maxRecordCount 2000":
+- ArcGIS: open the layer URL (ending in /FeatureServer/N or /MapServer/N) with ?f=json. Record the capabilities (they must include Query), the maxRecordCount and the exact field names.
+- Socrata: open https://DOMAIN/resource/ID.json?$limit=1 and record the field names.
+- CKAN or a file: confirm that the link downloads, and record its format and date.
+- GTFS: confirm that the zip link answers. If you can open the zip, record the last service date from calendar.txt, calendar_dates.txt, or feed_end_date in feed_info.txt.
+
+Every row gets one status:
+- confirmed: you opened the page, and the quote and the value are there.
+- corrected: the page says something else. Give its words and the right value, and put the old value in notes.
+- new: you found it yourself.
+- blocked: the page exists but you could not open it.
+- not_found: you could not find the page or the claim.
+
+Files: UTF-8 CSV with a header row and standard quoting, one row per item. After the columns listed for each file, every file ends with: status, url, quote, source_date, checked_on (YYYY-MM-DD), endpoint_test, notes. Several FIPS codes in one cell are separated by semicolons.
+1. crime_sources.csv: state, source_name, years, agency_level (y/n), has_population (y/n), format_or_api, terms
+   police_coverage.csv: state, county, place_or_township, policed_by (own_department, sheriff, state_police, another_city)
+2. crash_sources.csv: state, city_or_county (blank if statewide), dataset, endpoint_url, endpoint_type (arcgis, socrata, ckan, file), years, location_fields, date_field, severity_field, severity_codes, ped_field, bike_field, update_frequency, account_needed (y/n), terms
+3. gtfs_feeds.csv: county_fips, county, state, operator, modes, gtfs_url, linked_from_url, last_service_date, license, mobility_database_id, transitland_id
+4. cost_factors.csv: index_name, geography_type (state, metro, city), geography, factor, base, year, terms
+   unit_costs.csv: state, city, item, unit_price, unit, year, source_agency, document, page
+   The item ids are: sidewalk, curb_ramp, street_tree, led_streetlight, crosswalk, rrfb, speed_hump, protected_bike_lane, bus_shelter, red_bus_lane, bioswale_extension, playground, undergrounding, sound_wall.
+5. effects.csv: project_type, effect, effect_unit, distance, place, years, method, region (northeast, midwest, south, mountain_west, pacific_northwest, other), market (strong, weak, mixed), climate_note, authors, year, title, venue
+   The project_type ids are: street_trees, park_upgrade, pocket_park, vacant_lot_green, blight_demolition, blight_rehab, street_lighting, traffic_calming, sidewalks, new_sidewalks, protected_bike, bike_share, brt, bus_lane, rail_station, noise_wall, freeway_cap, undergrounding, grocery, main_street, bid, plaza, affordable_housing, clt, school_bond, foot_patrol, violence_interruption.
+6. transit_projects.csv: project_id (a short slug), project, agency, county_fips, mode, length_mi, stage (planning, environmental_review, design, construction, open), funding, cig_rating, grant_agreement_date, official_opening_year, delay_note, stations_file_url
+   transit_stations.csv: project_id, station, lat, lon, coordinate_source (agency_gis, agency_map, estimated)
+   price_timing.csv: line, city, effect, effect_unit, distance, stage (announcement, funding, construction_start, opening, after_opening), lag_years, method, authors, year, title, venue
+7. corridors.csv: topic (hsr, intercity_rail, transmission, freeway, freeway_removal, shared_corridor), kind (effect, cost, rule), value, unit, distance, place, year, authors_or_agency, title
+8. parcel_services.csv: state, county_fips, county, layer_url, max_record_count, address_field, parcel_id_field, land_use_field, lot_area_field, land_value_field, improvement_value_field, cors (y/n/unknown), terms. Never include owner or mailing-address fields.
+9. vacant_land.csv: city, state, dataset_type (vacant_lot, vacant_building, land_bank, surplus_public_land), dataset, endpoint_url, key_fields, updated, terms
+10. price_data.csv: source, geography, frequency, latest_period, public_display (yes, no, unclear), terms
+11. canopy_heat.csv: dataset, measures (canopy, heat), coverage, resolution, year, license
+12. city_data.csv: city, state, dataset_type (sidewalk, street_tree, neighborhood, zoning, pavement), dataset, endpoint_url, key_fields, updated, terms
+13. ca_sheriff_cities.csv: city, county, policed_by
+
+Also write gaps.md. It covers: what you could not find; what needs a person (logins, keys, data requests); where your findings contradict the attached research; and which topics are unfinished.
+
+If the attachments include location_types_research.csv (research on project types that depend on local hazards and conditions), check it the same way. Return location_types_verified.csv with its columns plus the shared ones.
+
+Return the files as downloads if you can. Otherwise put each CSV in its own code block, headed by its file name.`;
+document.getElementById("handoffText").textContent = HANDOFF;
+document.getElementById("handoffBtn").addEventListener("click", function(){
+  const ok = document.getElementById("handoffOk");
+  copyText(HANDOFF).then(function(){ ok.textContent = "Copied."; },
+    function(){ ok.textContent = "Couldn't copy here. Select the text above and copy it."; });
+  setTimeout(function(){ ok.textContent = ""; }, 4000);
+});
+</script>
+</body>
+</html>

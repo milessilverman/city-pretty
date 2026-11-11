@@ -1,0 +1,801 @@
+{
+ "confirmed": [
+  {
+   "key": "code-selection",
+   "severity": "high",
+   "title": "Two Wednesdays with zero departures outvote a real schedule, and selection 16 then drops the whole feed as 'no service near today'",
+   "file": "/home/user/national/pipeline/fetch_oc.py",
+   "location": "_choose_wednesday lines 408-411 (within / shared / ref); consequence in _gtfs_feed lines 478-485 (elif not svc branch) and fetch_gtfs_mdb lines 744-745, 751-753",
+   "problem": "`within(0, 0)` is True (0.9*0 <= 0 <= 0/0.9), so any two candidates with 0 departures form a 'shared' level of 0. If the candidates that do have service are not within 10% of each other (a single one, or an unequal pair like the docstring's own Greater Portland 3,066 / 2,744), `ref = max(shared)` is 0. The chosen day is then the nearest Wednesday with no departures. When that day has no active service, the selection-16 branch records the feed as skipped with a false reason ('no service on the Wednesdays within three weeks of today'). It returns a result with no stops, and fetch_gtfs_mdb treats that as final: no other copy and no other candidate of the provider is tried. The operator's buses are lost for the county. Selection 14 introduced the tie; the busiest-Wednesday fallback hid it in 14/15; selection 16 turned it into a dropped feed. It also contradicts REPORT line 178: 'the busier schedule is measured, whether it is the coming one or the one before'.",
+   "fix": "In _choose_wednesday, take the shared level only among candidates with departures:\n    within = lambda x, ref: 0.9 * ref <= x <= ref / 0.9\n    pos = [d for d in cand if n[d] > 0]   # Wednesdays without departures are no level of service: two of them must not outvote a schedule\n    shared = [n[d] for d in pos if sum(1 for e in pos if within(n[e], n[d])) >= 2]\n    ref = max(shared) if shared else max(n.values())\nVerified on a scratch copy (.../sel_audit/fetch_oc_patched.py, run_patched.py): the Lewis variant goes to 2026-11-18 with 78 stops. SRTA (4 Nov), Greater Portland (18 Nov), Middletown (18 Nov), Dutchess (28 Oct) and an all-zero feed (4 Nov) are unchanged. Also add \"wednesdays_7_9am_departures\": wed_counts to the skipped record at lines 483-484, so a 'no service' skip carries the counts it rests on.",
+   "votes": "2/2",
+   "corrected": [
+    "Confirmed as a latent defect. No delivered round-8.4 or batch-6 feed is affected today. 'Both pass only because their service days are equal' is exact for Lewis (two non-zero days). PART (three days of 415) would still pass if any two of its three days stayed within 10%.",
+    "Latent: no delivered or batch-6 county is affected yet. PART (three equal non-zero days) fails only if all three differ pairwise by more than 10%. A Lewis-type feed also fails with just one non-zero candidate, i.e. a new schedule starting within the window. The finding's 'high' severity is about future builds, not delivered data."
+   ]
+  },
+  {
+   "key": "code-selection",
+   "severity": "medium",
+   "title": "The selection's 07:00-09:00 count ignores frequencies.txt: headway-based feeds record 0 departures on every Wednesday and the weekday rules cannot act on them",
+   "file": "/home/user/national/pipeline/fetch_oc.py",
+   "location": "_gtfs_feed lines 470-477 (per_sid / ntrips), against the measurement at lines 498-501 and 516-520",
+   "problem": "The comment at l.470 says the count is 'the quantity measured'. In fact per_sid counts a stop_times row only when its literal time is between 07:00:00 and 09:00:00. Trips defined in frequencies.txt (template times such as 00:00:00 plus headways) count 0, while the measurement expands them. Three consequences:\n(1) wednesdays_7_9am_departures in the meta is wrong for these feeds. REPORT line 100 presents these counts as each feed's evidence ('Each feed's candidate counts are now in the county's transit meta').\n(2) All candidates tie at 0, so the holiday-level, feed-error and lapse rules cannot work, and the choice degenerates to the nearest non-holiday Wednesday.\n(3) Selection 16's rule at l.406 ('nearest Wednesday that has departures 07:00-09:00') never matches, so a future or ended headway-based copy is judged around a day without service. When that day is empty, the fallback `max(weds, key=ntrips)` returns the calendar's first Wednesday, because every count ties at 0.",
+   "fix": "Expand frequency-based trips in the selection count exactly as the measurement does (replace lines 472-476):\n    hs_ = lambda v: sum(int(x) * m for x, m in zip(v.split(\":\"), (3600, 60, 1)))\n    fq = collections.defaultdict(list)\n    for f in rd(\"frequencies.txt\"):\n        if f.get(\"trip_id\") in sid_of and f.get(\"start_time\") and f.get(\"end_time\") and int(f.get(\"headway_secs\") or 0) > 0:\n            fq[f[\"trip_id\"]].append((hs_(f[\"start_time\"]), hs_(f[\"end_time\"]), int(f[\"headway_secs\"])))\n    per_sid = collections.Counter(); t0 = {}; ftimes = []\n    for st in rd(\"stop_times.txt\"):\n        tid = st.get(\"trip_id\"); x = sid_of.get(tid); tm = (st.get(\"departure_time\") or st.get(\"arrival_time\") or \"\").strip()\n        if x is None or not tm: continue\n        sec = hs_(tm)\n        if tid in fq: ftimes.append((tid, x, sec)); t0[tid] = min(t0.get(tid, sec), sec)\n        elif 25200 <= sec < 32400: per_sid[x] += 1\n    for tid, x, sec in ftimes:\n        for a, b_, h in fq[tid]:\n            per_sid[x] += sum(1 for k in range(int((b_ - a) / h) + 1) if a + k * h < b_ and 25200 <= a + sec - t0[tid] + k * h < 32400)\nVerified on the scratch copy: Clovis 215, JAC 549 and Stinger 898 departures per Wednesday (twice the measured buses/h); chosen days unchanged.",
+   "votes": "2/2",
+   "corrected": [
+    "As stated, with two small detail fixes. Clovis template times are 00:00:00-01:05:00 or blank, not only '01:00:00'. JAC headways run 2940-3220 s, with a second window of 08:15-16:45. Dana Point's zeros are correct, since it runs 10:00-22:00. The effect is wrong evidence counts and inoperative rules for headway feeds; no delivered bus value changes for the cited feeds.",
+    "Two evidence details are imprecise. Clovis template times are not only '01:00:00' or blank; there are also 00:00:00, 00:06:00 and 00:09:00. JAC headways run 2940-3220 s, and one window is 08:15-16:45. Mixed feeds are affected too: Mountain Line 407 in 54061 records 337 against 751 measured. No chosen day changes in delivered data."
+   ]
+  },
+  {
+   "key": "code-selection",
+   "severity": "medium",
+   "title": "hi_bus counts holiday-swap dates, so Tri-Rail's expired copy passes the staleness test, is recorded as 'no service' and its other copies are never tried; the report misreads this as the shuttle ending",
+   "file": "/home/user/national/pipeline/fetch_oc.py",
+   "location": "_gtfs_feed line 446 (last / hi_bus) with lines 481-485; fetch_gtfs_mdb lines 744-747, 751-753; REPORT-round8.4.md line 98; comment at line 482",
+   "problem": "`last` takes every exception_type-1 date of a bus service. An expired copy that lists holiday swaps for future years (one service removed, the Sunday/holiday service added) therefore gets a far-future hi_bus and is not judged stale. Its Wednesdays near today are empty, so the selection-16 branch records 'no service on the Wednesdays within three weeks of today' with a misleading calendar_end, and returns a dict. That ends the copy loop and the provider loop. The legacy mirror and the operator URL, which the stale path would try ('when both are stale or missing, the operator's own download URL', l.703), are never tried, and no gap stops are kept. Cherriots' expired copy, by contrast, is stale and its stops become gaps (unknown). The report presents the case as the shuttle's service ending, but the copy shows the whole Tri-Rail timetable (rail too) ending, and the shuttle is still counted from another feed.",
+   "fix": "Do not let holiday swaps extend a schedule (line 446):\n    last = [cal[x][\"end_date\"] for x in bus_sids if x in cal and ok8(cal[x].get(\"end_date\"))] + [d for d, m in exc.items() if any(t == \"1\" and x in bus_sids for x, t in m.items())\n            and not any(t == \"2\" and x in bus_sids for x, t in m.items())]   # a holiday swap (one bus service removed, another added) extends nothing\nVerified on the scratch copy: 333 becomes 'schedule ended over a year ago' with 4 gap stops, so the next copies are tried and tld-492 still supplies the shuttle. PHLASH, San Clemente Trolley, Lewis County, Clovis, JAC, Stinger and Dana Point are unchanged.\nReplace the report sentence with: \"MobilityData's Tri-Rail copy (333) lists holiday exceptions to 25 Nov 2027, but its whole timetable, rail and the FLL airport shuttle alike, ended on 12 Aug 2025. The shuttle still runs and is counted from Transitland's Tri-Rail feed (tld-492: 41 departures 07:00-09:00 on 4 Nov 2026), so Broward's bus values are unchanged from round 8.3.\" Fix the example in the comment at l.482 to match.",
+   "votes": "2/2",
+   "corrected": [
+    "Confirmed. In Broward the 4 gap stops would still be filtered out at l.843-845, because tld-492 runs agency 'Tri-Rail', and Broward's values do not change. The real effects are: a false skip reason and calendar_end, two copies never tried, and the report's misstatement that the shuttle's service ended.",
+    "No effect on Broward's numbers. With a stale verdict, 333's 4 gap stops would be dropped at line 845 (same agency as the running tld-492), so transit_gap_stops.json would stay [] and the shuttle stays counted from tld-492. The real harms are smaller:\n- a skip record with the wrong reason and calendar_end 2027-11-25\n- the legacy mirror and producer URL never tried\n- REPORT line 98 describing an expired copy of the whole Tri-Rail feed as the shuttle's weekday service ending\n\nThe report's 'was counted at its 2024 frequency' is accurate: round 8.3 counted it in addition to tld-492. Severity: low."
+   ]
+  },
+  {
+   "key": "code-selection",
+   "severity": "low",
+   "title": "The 'no service near today' branch tests services of every mode: a multimodal feed whose buses stopped is recorded nowhere, and headway trips outside 07:00-09:00 are recorded as used with 0-bus stops",
+   "file": "/home/user/national/pipeline/fetch_oc.py",
+   "location": "_gtfs_feed lines 478-485 (svc = active(day)) and line 520; fetch_gtfs_mdb lines 837-842",
+   "problem": "active() returns every service of any mode running that day, so the new branch fires only when nothing at all runs. In a feed with rail and bus, where the bus service ended less than a year ago and the rail still runs, svc is non-empty and no skip is recorded. The result has no stops, so lines 837-842 list it neither under 'feeds' nor under 'skipped', yet the provider is marked covered (752-753). The notes at 07:02:01 say such a feed is 'recorded in the meta's skipped list'. Separately, l.520 `per[rr][st[\"stop_id\"]] += sum(...)` creates a stop even when the sum is 0. A headway-only feed with no 07:00-09:00 service is therefore listed as used with stops at 0.0 buses/h, while an equivalent feed with no Wednesday service is listed as skipped.",
+   "fix": "Test the bus services at lines 478 and 480: `svc = active(day) & bus_sids`. Verified: test A is then recorded as 'no service on the Wednesdays within three weeks of today', and the real feeds are unchanged. At line 520, add the count only when it is positive: `c = sum(...); if c: per[rr][st[\"stop_id\"]] += c`.",
+   "votes": "2/2",
+   "corrected": [
+    "As stated, except the log quote. The Dana Point log line says 'in county 32' in every log; 37 is the count over the world box.",
+    "The county log line reads 'bus stops served 7-9am in county 32' (37 is the world-box count). The 0.0-stop behaviour already existed before selection 16 (in the 7 Nov .sel5 file). The multimodal case is demonstrated only on a synthetic feed. Impact: missing or inconsistent meta records, and 0.0 stops counted by the coverage guard; no metric change was shown."
+   ]
+  },
+  {
+   "key": "code-selection",
+   "severity": "low",
+   "title": "Docstrings and comments misstate the selection-16 rules: nearest Wednesday 'with departures', the lapse rule, the return contract, and the nearest-Wednesday summary",
+   "file": "/home/user/national/pipeline/fetch_oc.py",
+   "location": "_choose_wednesday docstring lines 380-382, 389-390 and 396; _gtfs_feed docstring lines 417-418; comment lines 481-482; fetch_gtfs_mdb docstring lines 648-649; REPORT-round8.4.md lines 99 and 178",
+   "problem": "(a) l.380-382 say a feed with no Wednesday near today 'is judged on the three weeks around its own non-holiday Wednesday nearest today'. The code at l.406 uses the nearest one that has 07:00-09:00 departures, and l.396 calls it 'its last Wednesday that has some', which is wrong for a schedule that starts later.\n(b) l.389-390, REPORT l.99 and l.178 say 'A schedule that lapses with nothing published after it is measured on its last full Wednesday (Dutchess County ...)'. That holds only while two full Wednesdays remain within three weeks.\n(c) l.417-418 say a dict is returned 'when its schedule is fresh', 'or None to try the provider's next candidate'. Selection 16 returns a dict for a feed with no service near today, which ends both loops; a stale copy's None tries the next copy first.\n(d) l.648-649 say the weekday is 'the Wednesday nearest today inside each feed's calendar, with calendar_dates exceptions and frequencies.txt'. Since selection 10 the day is _choose_wednesday's, and frequencies.txt plays no part in choosing it.\n(e) l.481 says 'a feed whose calendar covers today but runs no service on its Wednesdays near today'. The code tests that the chosen day has no service of any mode and that some Wednesday, holidays included, is within 21 days.",
+   "fix": "(a) \"A feed with none that near is judged on the three weeks around its non-holiday Wednesday nearest today that has 07:00-09:00 departures (its nearest non-holiday Wednesday when none has)\"; at l.396 replace \"its last Wednesday that has some\" with \"the nearest Wednesday that has some\".\n(b) \"A lapsed schedule is measured on its last full Wednesday while at least two full Wednesdays are within three weeks of the build (Dutchess County on 8 Nov: 28 Oct, 1,717; from 12 Nov the 216 level is measured)\"; same wording in the report.\n(c) \"Returns a dict for a copy whose bus schedule ended less than a year ago, including one with no service on its Wednesdays near today (recorded as skipped, no stops), which ends the search for this provider; None for a stale copy (the next copy is tried) or a feed with no bus routes, dates or Wednesdays (the provider's next candidate is tried).\"\n(d) \"one representative weekday per feed, chosen by _choose_wednesday (a Wednesday within three weeks of today, fixed-date holidays excluded, at full weekday service)\".\n(e) \"the chosen Wednesday has no active service while some Wednesday of the calendar is within three weeks of today\".",
+   "votes": "2/2",
+   "corrected": [
+    "Confirmed for (a), (b), (d) and (e). (c) is not a substantive misstatement: the only inexact part is 'None to try the provider's next candidate', since a stale copy's None tries the feed's next copy first.",
+    "(c) is overstated: the 'no service' dict matches 'fresh' under the staleness test. The only inaccuracy is that a stale copy's None tries the feed's next copy before the provider's next candidate. (a), (b), (d) and (e) stand. The README's line 202 has the same 'last Wednesday' and 'last full Wednesday' wording."
+   ]
+  },
+  {
+   "key": "code-rail",
+   "severity": "low",
+   "title": "Amtrak's 'Canadian Border' timing point gets past the selection-15 non-passenger filter and was added as a rail station in Erie and Niagara, NY",
+   "file": "/home/user/national/pipeline/fetch_oc.py",
+   "location": "_rail_stops: line 361 (`if not ((st.get(\"pickup_type\") or \"0\").strip() == \"1\" and (st.get(\"drop_off_type\") or \"0\").strip() == \"1\"): board.add(sid)`) and line 368 (`if re.search(r\"employees? only\", nm + \" \" + pnm, re.I):`)",
+   "problem": "Selection 15 only drops a stop if every rail visit has pickup_type=1 and drop_off_type=1, or if its name says it is for employees only. Amtrak codes its border-crossing point CBN 'Canadian Border' with regular pickup and drop-off (0/0). The stop sits on the Whirlpool Rapids Bridge and has no platform, yet it stays in transit_rail_stops.json, and confirm_rail_stations adds it as a station: nothing kept is within 150 m. The round-8.4 national site therefore shows a fake 'Canadian Border' rail station in Erie and Niagara counties, and some Niagara Falls block groups measure their rail distance to it. In round 8.5 it disappears only by chance: the stop is still in the re-fetched files, and v4's Amtrak rule merges anything within 300 m. The real station happens to be 289\u2013291 m away; a stop placed slightly farther would be added again.",
+   "fix": "In fetch_oc._rail_stops, line 368, treat border, customs and non-public points like employee-only stops:\n            if re.search(r\"employees? only|\\b(?:canadian|mexican|international) border\\b|\\bcustoms\\b|not a public stop\", nm + \" \" + pnm, re.I):\n                continue\nAcross all current data_*/transit_rail_stops.json this pattern matches only the two 'Canadian Border' entries. Bump GTFS_SELECTION and re-run 36029 and 36063, so the stop leaves the rail-stop file instead of depending on the 300 m Amtrak merge. Report addition: \"Amtrak's 'Canadian Border' timing point on the Whirlpool Rapids Bridge has regular pickup and drop-off in the feed and is now left out by name. In round 8.4 it appeared as a station in Erie and Niagara, NY, and 3 Niagara Falls block groups measured their rail distance to it (a difference of 30 m or less).\"",
+   "votes": "2/2",
+   "corrected": [
+    "Confirmed as stated. Since the finding, transit selection 17 (fetch_oc.py, 13:23:46) adds `or re.fullmatch(r\"canadian border\", nm, re.I)` at line 368. 36029 and 36063 are not in logs/rebundle85b_queue.txt, so their rail-stop files keep CBN until they are rebuilt. Their station layers drop it only through the Amtrak 300 m merge.",
+    "Confirmed as stated. The fetch-side fix is already in transit selection 17 (fetch_oc.py line 368). The round-8.4 report addition is still needed: in round 8.4 'Canadian Border' was shown as a station in Erie and Niagara NY, and 3 Niagara Falls block groups measured to it (differences of 1, 19 and 30 m; no thresholds crossed)."
+   ]
+  },
+  {
+   "key": "code-rail",
+   "severity": "low",
+   "title": "v4's name-aware merge treats distinct same-numbered stations as one, and its tokenizer turns a possessive 's into 'south'",
+   "file": "/home/user/national/pipeline/metrics_oc.py",
+   "location": "_MERGE_ABBR/_merge_tokens/_same_station, lines 69-94 (`return bool(a and b) and len(a & b) / len(a | b) >= 0.5`), used in the addition loop at lines 202-203",
+   "problem": "The 300 m name test compares only token sets. 'avenue', 'boulevard', 'park' and similar tokens count as matching words, and identical numbered names always match. So two different stations of the same feed (different GTFS parent ids) on the same street are merged whenever one of them is an addition, and the second one vanishes from the station layer. The v4 docstring and the 09:52 notes say distinct stations stay; that holds only when the names differ. Separately, _merge_tokens splits \"Mary's\" into 'mary' + 's', and _MERGE_ABBR maps 's' to 'south'. As a result \"St. Mary's\" matches 'South St' (Jaccard 0.5), and \"Hunter's Point Avenue\" fails to match 'Hunters Point Av' (0.4). No block group is affected today, but the rule now runs on every new county.",
+   "fix": "def _merge_tokens(name):\n    s = \"\".join(ch for ch in unicodedata.normalize(\"NFKD\", name or \"\") if not unicodedata.combining(ch))\n    s = re.sub(r\"(\\w)['\u2019]s\\b\", r\"\\1\", s)                       # possessive, not 'south'\n    s = re.sub(r\"\\b(\\d+)(?:st|nd|rd|th)\\b\", r\"\\1\", s, flags=re.I)   # 4th -> 4\n    t = [_MERGE_ABBR.get(w, w) for w in re.findall(r\"[a-z0-9]+\", s.lower().replace(\"&\", \" and \"))]\n    return {w for w in t if w not in _MERGE_GENERIC}\n\ndef _same_station(d, name, fid, other, R_SAME=150.0, R_NAMED=300.0, pid=\"\", okey=None):\n    if d <= R_SAME: return True\n    if d > R_NAMED: return False\n    if okey and okey[0] == str(fid) and okey[1] and pid and okey[1] != pid:\n        return False   # two parent stations of one feed are two stations (NYCT 50 St 126 / A25)\n    if str(fid) == \"11\": return True\n    a, b = _merge_tokens(name), _merge_tokens(other)\n    if {w for w in a if w.isdigit()} != {w for w in b if w.isdigit()}:\n        return False   # '7 Av' is not '57 St-7 Av'\n    return bool(a and b) and len(a & b) / len(a | b) >= 0.5\n\nIn confirm_rail_stations, keep a list pkey parallel to pts/pnm: None for kept OSM stations, (str(fid), ag[1] if len(ag) > 1 else \"\") for additions. Pass pid=ag[1] if len(ag) > 1 else \"\" and okey=pk to the call. Replayed on every county's current files, this restores exactly the 3 distinct stations (Kings: '50 St' 126 and '7 Av' D14; Westchester: 'Bedford Park Blvd-Lehman College') and changes nothing else. The round-8.5 notes and report should say 118 duplicates removed, 3 distinct stations wrongly merged and 2 non-station points removed, rather than 121 duplicates.",
+   "votes": "2/2",
+   "corrected": [
+    "Confirmed, with three corrections.\n\n1. Split of the 121 removals: they are at most 116 duplicates, plus 3 distinct NYCT stations and 2 Canadian Border points. The suggested '118 duplicates removed, 3 ... and 2 ...' adds up to 123, not 121.\n2. Docstring and notes: these claim only that distinct stations 'under other names' stay, and even that fails for '7 Av'/'57 St-7 Av' and the Bedford Park pair. So the problem is not limited to identical names.\n3. A cross-feed case the proposed parent-id fix would not catch: 36005 LIRR 'Flushing Main Street' is merged into the separate NYCT 'Flushing-Main St' at 219 m.\n\nmetrics_oc v5 (13:23:46) has since changed the tokenizer and stopped name-merging two stops of one feed that are more than 150 m apart.",
+    "The problem stands as described. Correct the suggested notes/report wording: the simulation's 121 includes one phantom, Westchester's 'North White Plains'. It was not a round-8.4 addition (station84_review.json has 80 additions for 36119, none of them NWP). Against site84, v4's station layers lost 120 stations: 115 duplicates, 3 distinct stations (Kings '50 St' 126 and '7 Av' D14; Westchester 'Bedford Park Blvd-Lehman College' 405) and 2 non-station points (Canadian Border in 36029 and 36063). They gained 1 (Gray 30th St Station, 42091). The wording should therefore say 115 duplicates, not 118. The fix code as proposed restores exactly the 3 stations."
+   ]
+  },
+  {
+   "key": "code-rail",
+   "severity": "low",
+   "title": "The page's sources row still describes the 150 m addition rule, but metrics_oc v4 merges up to 300 m",
+   "file": "/home/user/national/pipeline/build_oc.py",
+   "location": "line 47: \"... heritage, excursion, airport and unserved stations are left out, and a rail stop with no station within 150 m is added\"",
+   "problem": "Every county built since 09:52 uses metrics_oc v4. Under v4, a rail stop 150\u2013300 m from a station is not added when the names match or when the stop is Amtrak's. The 'GTFS rail stops' row on those pages still states the old rule, and that county's own data contradict it. This affects the 58 rebuilt merge85 counties and every batch-6 county.",
+   "fix": "Change the sentence to \"... and a rail stop with no station within 150 m (300 m when the station names match, or for Amtrak's city-named stops) is added, once per GTFS parent station\". Keep it in step with metrics_oc, for example by building it from constants that metrics_oc exports (R_SAME, R_NAMED).",
+   "votes": "2/2",
+   "corrected": [
+    "Confirmed. The count of band-only v4 merges is 121 in the 487 round-8.4 counties and 123 across all current files, rather than 113. The stale sentence also applies to builds made with v5/v6.",
+    "Confirmed. The band-merge count is about 120 (my replay: 121, one of them a rounding artifact), not 113. Suggested text: '...and a rail stop with no station within 150 m (300 m when the station names match or the stop is Amtrak's) is added, once per GTFS parent station.' Keep it tied to metrics_oc's R_SAME/R_NAMED."
+   ]
+  },
+  {
+   "key": "code-rail",
+   "severity": "low",
+   "title": "The report says rail15_sim reproduces every county's additions, but its own output shows 5 counties that do not",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "line 36: \"It reproduces every county's current additions with the old stops, and finds 49 counties whose additions or confirmations change.\"",
+   "problem": "The simulation's self-check, `replay_matches_file`, fails for 5 of the 481 counties it covers, so the report overstates how far the simulation was validated. The simulation's 'unchanged' result is the justification for leaving about 195 counties with pre-selection-15 rail-stop files. All five mismatching counties were re-run, so no data are affected, but the claim as written is false.",
+   "fix": "\"It reproduces the current additions of 476 of the 481 counties it covers with the old stops. The other five (San Francisco, Queens, Westchester, Arlington, Fairfax) differ in the replay and are among the 49 counties whose additions or confirmations change, all of which were re-run.\"",
+   "votes": "2/2",
+   "corrected": [
+    "Confirmed as stated. A re-run of the simulation at 06:54, not delivered, also differed for 51510 Alexandria (6 counties in total).",
+    "Real in a narrower form. Report line 36 should read: 'It reproduces every county's current additions with the old stops to within coordinate rounding. Its exact check (replay_matches_file) fails for 5 of the 481 counties. In San Francisco, Queens, Arlington and Fairfax this is only because coordinates already rounded to 6 decimals are rounded again (0.00001\u00b0 differences on the same stations). In Westchester, the kept stations' 6-decimal positions put Metro-North's North White Plains stop 150.05 m from the mapped station, so the replay adds it although the build did not. All five are among the 49 counties re-run.' Do not say that the five counties' additions differ."
+   ]
+  },
+  {
+   "key": "code-rail",
+   "severity": "low",
+   "title": "The report says funicular stops are added as stations; the code never adds them",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "line 27: \"A GTFS stop of a subway, commuter, intercity, monorail or funicular route with no kept station within 150 m is added, under its GTFS station name.\" (line 31: \"Tram, light-rail, cable-car and funicular stops only confirm.\")",
+   "problem": "The report contradicts itself on funicular stops, and line 27 misdescribes the delivered rule. Since 23:03 on 7 Nov the addition loop skips funicular route types. The confirm_rail_stations docstring (metrics_oc.py lines 109-112) has the same contradiction.",
+   "fix": "\"A GTFS stop of a subway, commuter, intercity or monorail route with no kept station within 150 m is added, under its GTFS station name.\" Make the same correction in the confirm_rail_stations docstring: drop 'or funicular' from the list of route types whose stops become stations.",
+   "votes": "2/2",
+   "corrected": [
+    "Confirmed as stated. The v4 docstring wording is at lines 109-111, and the round-8.4 (v3) code line is 167.",
+    "Line 27 should read: 'A GTFS stop of a subway, commuter, intercity or monorail route with no kept station within 150 m is added, under its GTFS station name.' Drop 'or funicular' from the same sentence in national-README.md line 177 and from the confirm_rail_stations docstring (v3 lines 81-82; v4 lines 109-110)."
+   ]
+  },
+  {
+   "key": "code-audit-tools",
+   "severity": "low",
+   "title": "transit_day_audit.py never sees feeds that had no stops in the county on the recorded day, so Guilford NC and Kern CA stay on selection 9 with feeds that selection 16 would add",
+   "file": "/home/user/national/transit_day_audit.py",
+   "location": "main(): line 139 `urls = sorted({fd[\"url\"] for m in metas.values() if m.get(\"selection\", 0) < 16 for fd in m[\"feeds\"] ...})` and line 154 `for fd in m[\"feeds\"]:`. The meta's feeds come from pipeline/fetch_oc.py line 837 `if keys: used.append(...)`, which lists only feeds with at least one bus stop in the county box on the chosen day. Report line 100: \"it downloads each feed the counties use\".",
+   "problem": "A feed the build read but that had 0 county stops on its recorded day (for example a Veterans Day holiday service on 11 Nov) is never written to the meta. The audit therefore cannot replay it, and the 46-county list and the 84k/84l re-runs cannot catch a county where selection 16's day gives that feed stops. Everything else in the audit matches the pipeline as coded in the current and backup fetch_oc files, selections 9-16: BUS_TYPES, the 07:00-09:00 count, active services with calendar_dates, hi_bus, and the stale/none rules.",
+   "fix": "Have fetch_oc record the feeds it read with no county stops in the meta (for example a `read_no_stops` list with id, url, copy, weekday and calendar). Have the audit iterate `m[\"feeds\"] + m.get(\"read_no_stops\", [])`; for existing metas, take those feeds from the build log's \"   gtfs ... in county 0\" lines. Queue a county when such a feed's selection-16 day runs other services, as for recorded feeds. Re-run 37081 and 06029 with selection 16.",
+   "votes": "2/2",
+   "corrected": [
+    "Confirmed as stated. Guilford's selection-9 build measured Link Transit on Veterans Day: 0 county stops, so the feed is absent from the meta, while the 7 Nov build and a selection-16 run on the same copy give 43 stops on 4 Nov. Kern's TCAT gives 0 on 11 Nov and 2 on 4 Nov. The audit cannot see either feed. bt is unchanged; the stops file, the meta's feed list and the sources providers would change.",
+    "Confirmed as stated. One addition: Kern's selection-17 rebuild at 13:42 (logs/rebuild85b_06029.log line 69) already shows TCAT with 2 county stops on 4 Nov. Fix: record the feeds that were read with no county stops in the meta (id, url, copy, weekday, calendar). The audit should iterate over them as well (for existing metas, take them from the build logs' \"gtfs ... in county 0\" lines) and queue a county when such a feed's selection-16 day runs other services. Re-run 37081 and 06029."
+   ]
+  },
+  {
+   "key": "code-audit-tools",
+   "severity": "low",
+   "title": "Sandoval was locked out on a false premise: fetch_oc reads Rio Metro from MobilityData's legacy mirror, and only rail15_sim.py cannot read it",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 100: \"and Sandoval, NM because Rio Metro's feed cannot be downloaded today (a re-run would lose its Rail Runner stops)\". Line 177: \"Rio Metro's MobilityData copy is not a valid zip today. ... and Sandoval keeps its earlier build\". Cause: /home/user/national/rail15_sim.py line 26 reads only the hosted copy, while pipeline/fetch_oc.py lines 706-708 try the hosted copy and then the legacy mirror, and line 736 runs _rail_stops on every copy read.",
+   "problem": "The simulation reads only `mobilitydata-datasets-prod/<id>/latest.zip`, which is empty for Rio Metro (feed 165). The pipeline falls back to the legacy mirror and keeps the Rail Runner stops. So a re-run would not lose them, and the simulation never actually evaluated the Rail Runner counties: its \"unchanged\" verdict for them is a default. The same applies to San Diego's NCTD entries (hosted copy returns 403).",
+   "fix": "Report line 100: \"...and Sandoval, NM, whose only rail feed (Rio Metro) the simulation could not read: MobilityData's hosted copy is empty. The pipeline reads its legacy mirror, and Rio Metro lists no parent stations, so its stops do not change.\" Line 177: say the legacy mirror copy is read, and drop \"Sandoval keeps its earlier build\" as a consequence. rail15_sim.py: read the copy fetch_oc reads (hosted, else the legacy mirror from cache/mdb/latest_index.json, else the producer URL), and list counties with unreadable rail feeds as \"not simulated\" rather than unchanged.",
+   "votes": "2/2",
+   "corrected": [
+    "Report line 100 should read: \"...and Sandoval, NM, whose only rail feed (Rio Metro) the simulation could not read, because MobilityData's hosted copy is empty. The pipeline reads MobilityData's legacy mirror, which keeps the Rail Runner stops, and Rio Metro lists no parent stations, so a re-run would not change them.\" Line 177 should say that the hosted copy is empty and the stale legacy mirror is read, and drop \"Sandoval keeps its earlier build\" as a consequence. The simulation's \"unchanged\" verdict for 35001, 35043 and 35049 is a default, not a simulation.",
+    "Line 100: \"...and Sandoval, NM, whose only rail feed (Rio Metro) the simulation could not read, because MobilityData's hosted copy is empty. The pipeline reads MobilityData's legacy mirror, and Rio Metro lists no parent stations, so its stops do not change.\" Line 177: Rio Metro's hosted copy is empty, the pipeline reads the legacy mirror, and Sandoval was not left out because of a feed it could not reach. Make rail15_sim.py read the copy fetch_oc reads (hosted, then the legacy mirror, then the producer URL) and report counties with unreadable rail feeds as \"not simulated\"."
+   ]
+  },
+  {
+   "key": "code-audit-tools",
+   "severity": "low",
+   "title": "rail15_sim.py's replay check rounds the file's coordinates twice, so it reports 5 mismatches, while the report says every county's additions were reproduced",
+   "file": "/home/user/national/rail15_sim.py",
+   "location": "Line 88 `out.append((round(lon, 5), round(lat, 5), name))`, compared with line 127 `cur = sorted((round(a[0], 5), round(a[1], 5), a[2]) for a in R.get(\"added\", []))` and line 129 `\"replay_matches_file\": sorted(a_old) == cur`. Report line 36: \"It reproduces every county's current additions with the old stops\".",
+   "problem": "metrics_oc stores added stops already rounded to 6 decimals. The simulation re-rounds those to 5 decimals but rounds its own raw coordinates to 5 directly, so identical stations can compare unequal. The tool's own output contradicts the report's validation claim. The 49-county result is not affected: old and new additions are compared at the same rounding.",
+   "fix": "Compare at the file's precision: line 88 `out.append((round(lon, 6), round(lat, 6), name))` and line 127 `cur = sorted((round(a[0], 6), round(a[1], 6), a[2]) for a in R.get(\"added\", []))`. Report line 36: \"It reproduces the current additions with the old stops in 476 of 481 counties. The other 5 (San Francisco, Queens, Westchester, Arlington, Fairfax), all re-run, differ in the check's re-rounding of coordinates (shown for San Francisco and Arlington).\"",
+   "votes": "2/2",
+   "corrected": [
+    "Report line 36 should read: \"It reproduces the current additions with the old stops in 476 of 481 counties. In San Francisco, Queens, Arlington and Fairfax the check re-rounds the file's 6-decimal coordinates to 5 decimals (SMART Larkspur; LIRR Gibson, Lawrence, Port Washington, Woodmere; WMATA Capitol South, Federal Center SW, Navy Yard-Ballpark, Van Dorn St). In Westchester the replay adds one station the build did not (82 against 81): Metro-North's North White Plains lies 150.05 m from the logged, 6-decimal position of OSM's station, at the 150 m merge distance. All 5 were re-run.\" Comparing at 6 decimals (lines 88 and 127) fixes the first four; Westchester also needs the kept stations' unrounded positions, or a tolerance at the 150 m test.",
+    "Report line 36 should read: \"Replaying the current additions with the old stops matches the file in 476 of 481 counties. In San Francisco, Queens, Arlington and Fairfax the only differences come from the check rounding the file's 6-decimal coordinates a second time. In Westchester the replay adds North White Plains (Metro-North), which the build did not add, because the replay reads the OSM station's position at 6 decimals and the stop then lies 150.05 m away, just past the 150 m limit. All 5 counties were re-run.\" Code fix: compare at 6 decimals (line 88 round(...,6), line 127 round(...,6)). Also read the kept stations' positions at full precision, or apply a small tolerance at the 150 m limit, or Westchester will still mismatch."
+   ]
+  },
+  {
+   "key": "code-audit-tools",
+   "severity": "low",
+   "title": "The audit's re-run test ignores feed_changed, so Dakota MN and Lucas OH keep superseded feed copies that a re-run would replace",
+   "file": "/home/user/national/transit_day_audit.py",
+   "location": "Lines 159-170: `row[\"feed_changed\"] = ...`, `row[\"same_services\"] = bool(rec) and s16 in W and rec[3] == W[s16][3]`, `if not row[\"same_services\"]: ... queue.add(F)`. Docstring line 11: \"(then a re-run gives the same buses)\". Report line 100: \"1,596 of 1,600 county feeds reproduce the recorded day exactly, and the other 4 feeds were updated since\".",
+   "problem": "same_services compares two days within today's copy of the feed. When the county was built from an earlier copy (feed_changed is true), that comparison says nothing about what a re-run would give, yet the county is not queued. The report also counts only the 4 updated feeds that lost their recorded day.",
+   "fix": "Change the test to `if not row[\"same_services\"] or row[\"feed_changed\"]: queue.add(F)`, correct the docstring, and re-run 27037 and 39095. Report: \"...and the other 4 feeds were updated since. Three more county feeds (Cumberland ME, Dakota MN, Lucas OH) were also updated but still give the recorded day.\"",
+   "votes": "2/2",
+   "corrected": [
+    "Confirmed, with one correction: of the 3 changed feeds that still reproduce the recorded day, 23005 has same_services false (queued for that reason), and only 27037 and 39095 have same_services true and were left out. A re-run would give Lucas bt 4.0 instead of 3.0 (390950027001) and 4.0 instead of 5.0 (390950028001), and Dakota 47 new or changed stop positions with no bt change. The report's \"1,596 of 1,600 reproduce\" is literally true, but 3 of those feeds (Cumberland ME, Dakota MN, Lucas OH) were also updated.",
+    "Two counties, not three: Dakota MN (27037) and Lucas OH (39095). Cumberland's changed feed failed same_services and was queued for that reason. Dakota's stops change in 55 positions by my count (36 new, 8 gone, 11 with new buses/h), not 47, with no bt change. Lucas changes as stated. Fix: queue a county when `not row[\"same_services\"] or row[\"feed_changed\"]`, correct the docstring and re-run 27037 and 39095. The report sentence about 1,596 of 1,600 feeds is accurate as written. If wanted, add: \"Two more county feeds (Dakota MN, Lucas OH) were updated since but still give the recorded day, and were not re-run.\""
+   ]
+  },
+  {
+   "key": "code-audit-tools",
+   "severity": "low",
+   "title": "The report says each feed's candidate counts are in the transit meta, but 265 counties' metas have none",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 100: \"Each feed's candidate counts are now in the county's transit meta (`wednesdays_7_9am_departures`).\"",
+   "problem": "The field was introduced with selection 13 (backups_fetch_oc_sel13.py adds `\"wednesdays_7_9am_departures\": res.get(\"wednesdays\")` to each used feed). Counties left on selections 9-12 never got it, so the sentence is false for most counties.",
+   "fix": "\"Feeds of counties built with selection 13 or later record their candidate counts (`wednesdays_7_9am_departures`); the 265 counties still on selections 9-12 do not.\"",
+   "votes": "2/2",
+   "corrected": [
+    "\"Feeds of counties built with selection 13 or later record their candidate counts (`wednesdays_7_9am_departures`); the 288 counties still on selections 9-12 at delivery do not.\" Today the number is 237 and falling as rebundle85b re-runs them.",
+    "Report line 100: \"Feeds of counties built with selection 13 or later record their candidate counts (`wednesdays_7_9am_departures`). The counties still on selections 9-12 (about 288 at delivery) do not.\""
+   ]
+  },
+  {
+   "key": "report-s1",
+   "severity": "high",
+   "title": "\"No block group's top-ranked project changes\" is unsupported, and the evidence contradicts it",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 45: \"No block group's top-ranked project changes.\"",
+   "problem": "The only evidence for this sentence is the top_project_changed column that transit7_effect.py writes to logs/transit_effect_site83.json (0 in all 336 rows). That script does not compare top-ranked projects. It compares the first row of each block group's details 'r' list. build_oc.py stores that list in engine order, which almost always starts with street_trees. The top-ranked project (feature property 't') is computed separately, so the 0 could not have come out any other way. When the round-8.3 station layers are rebuilt from rail_confirm.json, the top-ranked project does change in about 11 block groups. Six of them are in downtown Denver, where bus lanes become the top project once RTD's downtown light-rail stations are dropped.",
+   "fix": "The top-ranked project changes in an estimated 11 block groups, among them six in downtown Denver (Theatre District, Upper Downtown, Central Business District, Curtis-Champa, Clement), where bus lanes become the top project once RTD's downtown light-rail stations are dropped. This is an estimate: round 8.3's station layers were rebuilt from rail_confirm.json. transit7_effect.py's 'Top project changed' column compares each block group's first project row, not its top-ranked project, so it cannot measure this.",
+   "votes": "2/2",
+   "corrected": [
+    "The top-ranked project changes in an estimated 11 block groups (6 Denver, 2 Baltimore city, 2 Queens, 1 DC). This is an estimate from round 8.3's station layers rebuilt as site84 layer minus added plus dropped. In six downtown Denver block groups (Theatre District, Central Business District, Upper Downtown, Curtis-Champa, Clement), bus lanes become the top project once RTD's downtown light-rail stations are dropped. transit7_effect.py's 'Top project changed' column compared each block group's first (unranked) row, so it could not measure this. The round-8.4 code is in /home/user/handoff/round8.4/stations/transit7_effect.py lines 43-44.",
+    "The claim is false as an estimate: the top-ranked project (feature 't') changes in about 11 block groups when round 8.3's station layers are rebuilt from station84_review.json. Six are in downtown Denver (Theatre District x2, Central Business District, Upper Downtown, Curtis-Champa, Clement), where bus lanes become the top project once RTD's downtown light-rail stations are dropped. The others are 2 in Baltimore city, 2 in Queens and 1 in DC (Capitol Hill, bus_lane -> ev_hub). The quoted lines 43-44 are in the delivered copy /home/user/handoff/round8.4/stations/transit7_effect.py; the live /home/user/national/transit7_effect.py was changed after delivery. Line 107's identical sentence rests on the same column and is equally unsupported."
+   ]
+  },
+  {
+   "key": "report-s1",
+   "severity": "medium",
+   "title": "Rail-dependent project count leaves out transit upzoning, which also depends on rm",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 45: \"Projects that depend on the rail distance (bus lanes, BRT, a share of a new station, bike share) change in 27 block groups.\"",
+   "problem": "engine.py also gates transit upzoning on the rail distance (rm <= 810 m). station_effect.py does not count it, and neither does the list of rm-dependent projects at lines 6-10. Section 2 of the same report counts 'transit-upzoning rows' as rail-dependent for LA ('no rail within 810 m'). So 27 understates the project changes by a wide margin: transit-upzoning rows change in an estimated 174 block groups, mostly removed where excursion or unserved stations were dropped. The 27 also includes changes caused by bus frequency (e.g. Dutchess), not only by rail.",
+   "fix": "Projects that depend on the rail distance change in an estimated 190-200 block groups. Bus lanes, BRT, a share of a new station or bike share change in 27 (station_effect.py, which also counts changes from bus frequency). Transit upzoning (single-family lots with rail within 810 m), which station_effect.py does not count, changes in about 174 (an estimate from round 8.3's station sets rebuilt from rail_confirm.json): it is removed in about 168 and added in about 6. Also add '- transit upzoning, rail within 810 m;' to the list at lines 6-10.",
+   "votes": "2/2",
+   "corrected": [
+    "Projects that depend on the rail distance change in an estimated ~190-195 block groups. Bus lanes, BRT, a share of a new station or bike share change in 27 (station_effect.py's count, which also includes changes from bus frequency, e.g. Dutchess). Transit upzoning (single-family lots with rail within 810 m), which station_effect.py does not count, changes in about 170 (an estimate from round 8.3's station sets rebuilt from rail_confirm.json): removed in about 166-168, added in 6. Add 'transit upzoning, rail within 810 m' to the list at lines 6-10.",
+    "Projects that depend on the rail distance change in an estimated ~190-195 block groups. Bus lanes, BRT, a new-station share or bike share change in 27 (station_effect.py). Transit upzoning (sf >= 50, rail within 810 m), which station_effect.py does not count, changes in about 172 (about 166 removed, 6 added), an estimate from round 8.3's station layers rebuilt from station84_review.json. Lines 6-10 should also list transit upzoning (rail within 810 m)."
+   ]
+  },
+  {
+   "key": "report-s1",
+   "severity": "medium",
+   "title": "Addison example is wrong: OpenStreetMap already has the station",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 28: \"DART's new Addison station (Silver Line), not yet in OpenStreetMap;\"",
+   "problem": "Addison station is in Dallas County. Dallas County's OpenStreetMap extract has it as a DART train station, and a GTFS stop 25 m away confirms it there, so nothing was added in Dallas. 'ADDISON STATION' was added only in Collin and Denton counties, because their box-clipped OpenStreetMap extracts end just north of it. So it belongs to the second category (stations across a county line), and the bullet's reason is false.",
+   "fix": "That adds, for example, stations just across a county line that the county's OpenStreetMap extract leaves out: Davis and Roseville for Sacramento, Metra's DuPage stations for Cook, and DART's new Addison station (Silver Line) for Collin and Denton (it is in Dallas County, where OpenStreetMap has it and a stop confirms it).",
+   "votes": "2/2",
+   "corrected": [
+    "That adds, for example, stations just across a county line that the county's OpenStreetMap extract leaves out: Davis and Roseville for Sacramento, Metra's DuPage stations for Cook, and DART's new Addison station (Silver Line) for Collin and Denton. Addison is in Dallas County, where OpenStreetMap has it and a GTFS stop confirms it.",
+    "DART's new Addison station (Silver Line) belongs in the cross-county-line example: it was added for Collin and Denton, whose OpenStreetMap extracts stop north of it. It is in Dallas County, where OpenStreetMap has it and a stop confirms it."
+   ]
+  },
+  {
+   "key": "report-s1",
+   "severity": "medium",
+   "title": "Rule 2 says 'no current feed here', but code and section 6 keep stations of operators with a current bus-only feed",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 20: \"2. it is a named subway, light-rail or monorail station of a named network or operator that has no current feed here and is not an amusement park, fair, zoo, museum, farm, shop, resort or airport people mover.\"",
+   "problem": "The code does not test whether the operator has a current feed. It tests whether the operator runs rail routes in a current feed: current_ag is built only from the agencies of rail stops. NFTA and JTA both have current feeds (buses only), and their stations are kept by this rule: 12 Buffalo Metro Rail and 8 Skyway stations, a third of the 60 'kept by type'. As written, rule 2 would drop them. That contradicts section 6 ('Lines whose operator's feed has buses but no rail are kept as mapped: Buffalo's Metro Rail (NFTA's current feed, Transitland 401, has no rail routes...)').",
+   "fix": "2. it is a named subway, light-rail or monorail station of a named network or operator that runs no rail routes in a current feed here (it may have a current bus-only feed, as NFTA and JTA do), and is not an amusement park, fair, zoo, museum, farm, shop, resort or airport people mover.",
+   "votes": "2/2",
+   "corrected": [
+    "2. it is a named subway, light-rail or monorail station of a named network or operator that runs no rail routes in a current feed here (it may have a current bus-only feed, as NFTA and JTA do), and is not an amusement park, fair, zoo, museum, farm, shop, resort or airport people mover.",
+    "2. it is a named subway, light-rail or monorail station of a named network or operator that runs no rail routes in a current feed here (it may have a current bus-only feed, as NFTA and JTA do), and is not an amusement park, fair, zoo, museum, farm, shop, resort or airport people mover."
+   ]
+  },
+  {
+   "key": "report-s1",
+   "severity": "medium",
+   "title": "The simulation did not reproduce every county's additions: its own output flags 5 counties",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 36: \"It reproduces every county's current additions with the old stops, and finds 49 counties whose additions or confirmations change.\"",
+   "problem": "rail15_sim.py records, for each county, whether replaying the additions with the old stops matches the county's rail_confirm.json. For 5 of the 481 counties it does not. None of the 5 was being rebuilt when the simulation ran, so in-flight builds do not explain the mismatches. This fidelity claim is what justifies leaving 12 counties as built 'because the simulation shows their stations unchanged' (section 3).",
+   "fix": "With the old stops it reproduces the current additions of 476 of the 481 counties it read (not San Francisco, Queens, Westchester, Arlington or Fairfax, all of which were re-run anyway), and finds 49 counties whose additions or confirmations change.",
+   "votes": "2/2",
+   "corrected": [
+    "With the old stops it reproduces the current additions of 476 of the 481 counties it read. It does not reproduce San Francisco, Queens, Westchester, Arlington or Fairfax, all of which were re-run anyway. It finds 49 counties whose additions or confirmations change.",
+    "With the old stops it reproduces the current additions of 476 of the 481 counties it read. The exceptions are San Francisco, Queens, Westchester, Arlington and Fairfax, all of which were re-run anyway. It finds 49 counties whose additions or confirmations change."
+   ]
+  },
+  {
+   "key": "report-s1",
+   "severity": "low",
+   "title": "Funicular stops are said to be added, but line 31 and the code say they only confirm",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 27: \"A GTFS stop of a subway, commuter, intercity, monorail or funicular route with no kept station within 150 m is added, under its GTFS station name.\"",
+   "problem": "Funicular stops (route types 7 and 1400) are never added. This sentence contradicts line 31 ('Tram, light-rail, cable-car and funicular stops only confirm') and the installed code. The 150 m test also counts stations already added, not only kept ones.",
+   "fix": "A GTFS stop of a subway, commuter, intercity or monorail route with no kept or already added station within 150 m is added, under its GTFS station name.",
+   "votes": "2/2",
+   "corrected": [
+    "A GTFS stop of a subway, commuter, intercity or monorail route with no kept or already added station within 150 m is added, under its GTFS station name.",
+    "A GTFS stop of a subway, commuter, intercity or monorail route with no kept or already added station within 150 m is added, under its GTFS station name."
+   ]
+  },
+  {
+   "key": "report-s1",
+   "severity": "low",
+   "title": "Bus-lane threshold is 796 m, not 800 m",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 7: \"bus lanes need no rail within 800 m;\"",
+   "problem": "engine.py offers bus lanes when rm >= 796, so block groups with rail 796-799 m away get bus-lane rows. That contradicts 'no rail within 800 m'. Twelve such rows are on the delivered national site.",
+   "fix": "bus lanes need no rail within 796 m (engine.py's threshold; the row text says 800 m);",
+   "votes": "2/2",
+   "corrected": [
+    "bus lanes need no rail within 796 m (engine.py's threshold; the row text says 800 m);",
+    "bus lanes need no rail within 796 m (engine.py's threshold; the row text says 800 m);"
+   ]
+  },
+  {
+   "key": "report-s2",
+   "severity": "high",
+   "title": "Most of Orange's 499 shorter rail distances come from an OC Streetcar stop, not from ARTIC or the stations across the county line",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "line 83: \"shorter in 499, mostly near ARTIC and the stations just across the county line;\" (also line 82: \"longer in 375, where a ride had been the nearest station;\")",
+   "problem": "The report attributes the shorter distances to the wrong cause. In 387 of the 499 block groups that got shorter, the nearest station is now \"Fairview\", a stop position on the OC Streetcar. Rule 2 kept it by type. Only 35 are near ARTIC and 9 near Corona-West (across the county line). This stop also has no service evidence. OCTA's current GTFS has no streetcar route. OSM maps the OC Streetcar as railway=tram. Section 1 of the same report says \"A streetcar or cable-car stop is a street stop, not a rail station\" (line 31) and \"A station missing from its operator's current feed is not served\" (line 25). The code keeps the stop only because OCTA has no rail routes in transit_rail_stops.json, so OCTA never counts as a current rail agency. The Fairview stop also accounts for most of the rail-gap removals and for new transit-upzoning rows (see evidence). The \"longer in 375\" bullet is slightly off too: in 7 of the 375 no ride had been the nearest station.",
+   "fix": "  - longer in 375: in 368 a ride had been the nearest station; in 7, the land-only shape moved the reference point;\n  - shorter in 499: in 387 the nearest station is now Fairview, an OC Streetcar stop that rule 2 keeps by type although OCTA's current schedule has no streetcar service; 55 are nearer Metrolink's Buena Park stop, added 189 m from the mapped station; 35 are near ARTIC; 9 are near Corona\u2013West across the county line; 13 changed with the land-only reference point. (Fairview also removes the rail gap from 83 of the 102 panels and adds 3 transit-upzoning rows in Santa Ana.)\n\nSeparately: under the section-1 rules (no streetcar stops; a station missing from its operator's current feed is not served) Fairview should be dropped and Orange rebuilt.",
+   "votes": "2/2",
+   "corrected": [
+    "  - longer in 375: in 368 a ride had been the nearest station; in 7 the land-only shape moved the reference point;\n  - shorter in 499: in 387 the nearest station is now Fairview, an OC Streetcar stop position (OpenStreetMap tags it as under construction) that rule 2 kept by type, although OCTA's current schedule has no streetcar service; 55 are nearer Metrolink's Buena Park stop, added 189 m from the mapped station; 35 are near ARTIC; 9 are near Corona\u2013West across the county line; 13 changed only with the land-only reference point. Fairview also removes the rail gap from 83 of the 102 panels and adds 3 transit-upzoning rows in Santa Ana.",
+    "- longer in 375: in 368 a ride had been the nearest station; in 7, the land-only shape moved the reference point;\n- shorter in 499:\n  - 387: the nearest station is now Fairview, an OC Streetcar stop position kept by type (rule 2) although OCTA's current schedule has only bus routes;\n  - 55: nearer Metrolink's Buena Park stop, added 189 m from the mapped station;\n  - 35: near ARTIC (its three dots);\n  - 9: near Corona-West, across the county line;\n  - 13: changed with the land-only reference point.\n\nFairview is the nearest station for 460 of the 2,049 block groups. It also accounts for 83 of the 102 removed rail gaps and for 3 new transit-upzoning rows in Santa Ana."
+   ]
+  },
+  {
+   "key": "report-s2",
+   "severity": "high",
+   "title": "Orange rebuild did change top-ranked projects (11 block groups at the default setting, 28 at some setting)",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "line 86: \"No block group's top project changed (28,448 \u2192 28,474 rows), and the LA + Orange regression passes 91/91 on a page with the new bundle.\"",
+   "problem": "The claim is false. The bundles' stored top-project fields show changes: \"t\", the top project at the page's default evidence filter, and \"tp\", the top project for each evidence level. The page shows exactly these values. Most changes are coastal block groups whose acreage fell with the land-only shapes. The row counts are correct.",
+   "fix": "The top-ranked project changed in 11 block groups at the page's default evidence setting (A\u2013D), and in 28 at some setting. Most are coastal block groups whose acreage fell with the land-only shapes, e.g. Newport Beach 060590628004 (traffic calming \u2192 grocery) and 060590628002 (farmers market \u2192 traffic calming). Rows: 28,448 \u2192 28,474. The LA + Orange regression passes 91/91 on a page with the new bundle.",
+   "votes": "2/2",
+   "corrected": [
+    "The top-ranked project changed in 11 block groups at the page's default evidence setting (A\u2013D), and in 28 at some setting, mostly coastal block groups whose acreage fell with the land-only shapes (e.g. Newport Beach 060590628004: traffic calming \u2192 grocery). Rows: 28,448 \u2192 28,474. The LA + Orange regression passes 91/91 on a page with the new bundle.",
+    "The top-ranked project changed in 11 block groups at the page's default evidence setting (A\u2013D), and in 28 at some setting. Most are coastal block groups whose acreage fell with the land-only shapes, e.g. Newport Beach 060590628004 (traffic calming \u2192 grocery). Rows: 28,448 \u2192 28,474. The LA + Orange regression passes 91/91 on a page with the new bundle."
+   ]
+  },
+  {
+   "key": "report-s2",
+   "severity": "medium",
+   "title": "The list of Orange station changes leaves out the OC Streetcar stop kept by type and the six GTFS additions",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "line 78: \"`pipeline/oc_rail_stops.py` now reads the rail stops of the feeds covering Orange (Metrolink, Amtrak and others), and Orange was rebuilt with them:\" followed by \"the 8 rides are dropped;\" / \"ARTIC is in;\"",
+   "problem": "The bullets present the station changes as only \"8 rides dropped, ARTIC in\". The new layer actually goes from 19 to 20 stations:\n- Fairview, an OC Streetcar stop kept by type rather than confirmed by a GTFS stop. It is now the nearest \"rail station\" for 460 of 2,049 block groups.\n- Six GTFS-added Metrolink stops, two of which duplicate mapped stations (ARTIC and Buena Park).\n\nThe section's opening says both bundles \"were checked against their GTFS rail stops\", but Fairview was not, and OCTA's current schedule has no streetcar service. A reader cannot tell from these bullets what now drives Orange's rail distances.",
+   "fix": "- the 8 rides are dropped;\n- ARTIC is in, as three dots: OpenStreetMap's station, its \"Anaheim\" stop position 397 m away, and Metrolink's \"Anaheim - ARTIC\" stop 163 m away;\n- one OC Streetcar stop, Fairview, is kept as a light-rail station by type, because OCTA's feed has no rail routes. OCTA's current schedule has no streetcar service, so by the section-1 rule it should not count. It is now the nearest station for 460 of the 2,049 block groups;\n- six Metrolink stops are added: Anaheim \u2013 ARTIC; a second Buena Park dot, 189 m from the mapped station; and Corona\u2013North Main, Corona\u2013West, Norwalk/Santa Fe Springs and Riverside\u2013La Sierra across the county line;",
+   "votes": "2/2",
+   "corrected": [
+    "- the 8 rides are dropped;\n- ARTIC is in, as three dots: OpenStreetMap's station, its \"Anaheim\" stop position 397 m away, and Metrolink's \"Anaheim - ARTIC\" stop 163 m away;\n- one OC Streetcar stop, Fairview, is kept as a light-rail station by type, because OCTA's feed has no rail routes; no GTFS rail stop lies within 4.4 km and OCTA's current schedule has no streetcar service. It is now the nearest station for 460 of the 2,049 block groups;\n- Metrolink stops are added: a second Buena Park dot 189 m from the mapped station, and Corona\u2013North Main, Corona\u2013West, Norwalk/Santa Fe Springs and Riverside\u2013La Sierra across the county line;",
+    "Lines 78-80 list only '8 rides dropped; ARTIC in'. Orange's layer actually goes from 19 to 20 stations:\n- the 8 rides are dropped;\n- ARTIC is in as three dots: OSM's station, its 'Anaheim' stop position 397 m away, and Metrolink's 'Anaheim - ARTIC' stop 163 m away;\n- one OC Streetcar stop position, Fairview, is kept as a light-rail station by type (no GTFS rail stop within 4.4 km; OCTA's current feed has only bus routes). It is now the nearest station for 460 of the 2,049 block groups, and the report never mentions it;\n- Metrolink stops are added: a second Buena Park dot 189 m from the mapped station (nearest for 55 of the shortened block groups), plus Corona-North Main, Corona-West, Norwalk/Santa Fe Springs and Riverside-La Sierra across the county line. The report alludes to these only in line 83."
+   ]
+  },
+  {
+   "key": "report-s2",
+   "severity": "medium",
+   "title": "The 15 reassigned coastal block groups include Dana Point and San Clemente, not only Huntington, Laguna and Newport Beach",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "line 86: \"Fifteen coastal block groups in Huntington Beach, Laguna Beach and Newport Beach were \"Unincorporated Orange County\" only because their old shapes reached into the ocean; they now belong to their cities, with the matching police agency and tax shares.\"",
+   "problem": "The count (15) and the reason are right, but the city list is wrong. Only 10 of the 15 are in the three cities named; 5 are in Dana Point (3) and San Clemente (2).",
+   "fix": "Fifteen coastal block groups in Newport Beach (4), Huntington Beach (3), Laguna Beach (3), Dana Point (3) and San Clemente (2) were \"Unincorporated Orange County\" only because their old shapes reached into the ocean; they now belong to their cities, with the matching police agency and tax shares.",
+   "votes": "2/2",
+   "corrected": [
+    "Fifteen coastal block groups in Newport Beach (4), Huntington Beach (3), Laguna Beach (3), Dana Point (3) and San Clemente (2) were \"Unincorporated Orange County\" only because their old shapes reached into the ocean; they now belong to their cities, with the matching police agency and tax shares.",
+    "Fifteen coastal block groups in Newport Beach (4), Huntington Beach (3), Laguna Beach (3), Dana Point (3) and San Clemente (2) were \"Unincorporated Orange County\" only because their old shapes reached into the ocean; they now belong to their cities, with the matching police agency and tax shares."
+   ]
+  },
+  {
+   "key": "report-s2",
+   "severity": "low",
+   "title": "\"Fantasyland\" is the Casey Jr. Circus Train's station, not a Disneyland Railroad station",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "line 72: \"Disneyland Railroad: Main Street, New Orleans Square, Mickey's Toontown, Fantasyland and Tomorrowland;\"",
+   "problem": "The OSM record the pipeline used ties Fantasyland Station to the Casey Jr. Circus Train. Only four of the five listed stations are Disneyland Railroad stations. The total of 8 rides is unaffected.",
+   "fix": "- Disneyland Railroad: Main Street, New Orleans Square, Mickey's Toontown and Tomorrowland;\n- the Casey Jr. Circus Train: Fantasyland;",
+   "votes": "2/2",
+   "corrected": [
+    "- Disneyland Railroad: Main Street, New Orleans Square, Mickey's Toontown and Tomorrowland;\n- the Casey Jr. Circus Train: Fantasyland;",
+    "- Disneyland Railroad: Main Street, New Orleans Square, Mickey's Toontown and Tomorrowland;\n- the Casey Jr. Circus Train: Fantasyland;\n- the Disneyland Monorail: Tomorrowland and Downtown Disney;\n- Knott's Berry Farm: Camp Snoopy Depot."
+   ]
+  },
+  {
+   "key": "report-s2",
+   "severity": "low",
+   "title": "Orange's pre-8.4 regression copy was built on 6 Nov, not 7 Nov 03:30",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "line 71: \"Its bundle on every page is the regression copy (`oc_regress`, built 7 Nov 03:30), and 8 of its 19 \"rail stations\" were theme-park rides:\"",
+   "problem": "The build time is wrong. The bundle the pages carried until round 8.4 records its own build date as 6 Nov, and the same bundle was already on a page written on 6 Nov evening. The 7 Nov 03:30 log is from a later run with the same counts; that run's bundle is not the copy on the pages.",
+   "fix": "Its bundle on every page is the regression copy (`oc_regress`, built 6 Nov and unchanged since round 5), and 8 of its 19 \"rail stations\" were theme-park rides:",
+   "votes": "2/2",
+   "corrected": [
+    "Its bundle on every page is the regression copy (`oc_regress`, built 6 Nov and unchanged since round 5), and 8 of its 19 \"rail stations\" were theme-park rides:",
+    "Its bundle on every page is the regression copy (`oc_regress`, built 6 Nov and unchanged since round 5), and 8 of its 19 \"rail stations\" were theme-park rides:"
+   ]
+  },
+  {
+   "key": "report-s2",
+   "severity": "low",
+   "title": "Many of the plan and site edits listed as \"outside those 78 block groups\" are inside them",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "line 65: \"Outside those 78 block groups:\" (introducing \"14 neighborhood-plan texts are corrected or removed\u2026\" and \"88 underused-site listings name their nearest served station.\")",
+   "problem": "The heading places these edits outside the 78 block groups, but many lie inside them:\n- all 11 corrected plan steps quote the rail gap of one of the 78 block groups;\n- 48 of the 88 edited site listings are in those block groups.\n\nA reader would count up to 102 further affected areas beyond the 78.",
+   "fix": "In the neighbourhood plans and site listings (11 of the plan texts quote those block groups' rail gaps, and 48 of the 88 sites lie in them):",
+   "votes": "2/2",
+   "corrected": [
+    "In the neighbourhood plans and site listings (the 11 plan steps quote those block groups' rail gaps, Bel-Air's and Brentwood's plans cover mostly those block groups, and 48 of the 88 sites lie in them, 40 outside):",
+    "In the neighbourhood plans and site listings: 14 plan texts are corrected or removed (11 quote those block groups' rail gaps; the other 3 are Bel-Air's and Brentwood's context sentences and Bel-Air's rail strength), and 88 underused-site listings name their nearest served station (48 of them lie in the 78 block groups, 40 outside)."
+   ]
+  },
+  {
+   "key": "report-s3",
+   "severity": "medium",
+   "title": "The Tri-Rail airport shuttle has not stopped weekday service; only one copy of its feed has",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 98: \"A feed whose calendar covers today but runs no service on any Wednesday within three weeks now counts no buses, where it used to be measured on its busiest Wednesday ever: Tri-Rail's airport shuttle, whose weekday service ended on 12 Aug 2025, was counted at its 2024 frequency.\"",
+   "problem": "The sentence says the shuttle's weekday service ended in August 2025, so a reader concludes the buses no longer run and that earlier rounds counted a dead service. In fact 12 Aug 2025 is only where one third-party copy of the feed (MobilityData 333) ends its weekday calendar. Tri-Rail's other feed, which the same Broward build reads and counts, still runs the shuttle every weekday. Broward's bus values do not change: it is not among the 10 differing counties.",
+   "fix": "A feed whose calendar covers today but runs no service on any Wednesday within three weeks now counts no buses, where it used to be measured on its busiest Wednesday ever. MobilityData's copy of Tri-Rail's feed (333, a third-party copy whose weekday calendar ends on 12 Aug 2025) was counted at its 14 Aug 2024 frequency. The airport shuttle itself still runs on weekdays in Tri-Rail's other feed (tld-492: 41 departures 07:00\u201309:00 every Wednesday from 21 Oct to 2 Dec 2026). Broward still counts that feed, so its bus values do not change.",
+   "votes": "2/2",
+   "corrected": [
+    "A feed whose calendar covers today but runs no service on any Wednesday within three weeks now counts no buses, where it used to be measured on its busiest Wednesday ever. MobilityData's copy of Tri-Rail's feed (333, a third-party copy whose regular weekday and weekend services end on 12 Aug 2025; only holiday dates continue after that) was counted at its 14 Aug 2024 frequency. The airport shuttle itself still runs on weekdays in Tri-Rail's other feed (tld-492: the same four stops, 41 departures 07:00\u201309:00 every Wednesday from 14 Oct to 2 Dec 2026). Broward counts that feed, so its bus values do not change.",
+    "A feed whose calendar covers today but runs no service on any Wednesday within three weeks now counts no buses, where it used to be measured on its busiest Wednesday ever. MobilityData's copy 333 of Tri-Rail's old download URL (published Nov 2024; its regular weekday and weekend services end on 12 Aug 2025, and only holiday exceptions run after that) was counted at its 14 Aug 2024 frequency. The airport shuttle itself still runs on weekdays in Tri-Rail's current feed (tld-492, gtfs.tri-rail.com: 41 departures 07:00-09:00 every Wednesday from 21 Oct to 2 Dec 2026, service through 2027). Broward still counts that feed, so its bus values do not change. Note: 333 is official (is_official=True, tri-rail.com URL), not a third-party copy."
+   ]
+  },
+  {
+   "key": "report-s3",
+   "severity": "low",
+   "title": "SRTA's 25 Nov feed error is misdescribed: there is no Thursday schedule",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 95: \"SRTA's feed (New Bedford and Fall River) adds its Thursday schedule on 25 Nov without removing the regular one: 5,980 departures, against 4,426 on every other Wednesday.\"",
+   "problem": "The feed has no Thursday schedule, and on 25 Nov it does remove New Bedford's regular schedule. What actually doubles the day is Fall River: its alternate weekday schedule runs on top of its regular one, because the calendar_dates exception that removes the alternate on every other weekday is missing for 25 Nov. Also, not every other Wednesday has 4,426: Veterans Day has 2,436, a Saturday schedule.",
+   "fix": "SRTA's feed (New Bedford and Fall River) switches New Bedford to its alternate weekday schedule on 25 Nov but runs Fall River's alternate schedule on top of its regular one: the exception that removes it on other weekdays is missing. That gives 5,980 departures, against 4,426 on the other Wednesdays (2,436 on Veterans Day, a Saturday schedule).",
+   "votes": "2/2",
+   "corrected": [
+    "SRTA's feed (New Bedford and Fall River) switches New Bedford to its alternate weekday schedule on 25 Nov but runs Fall River's alternate schedule on top of its regular one: the exception that removes it on other weekdays is missing. That gives 5,980 departures, against 4,426 on the other Wednesdays (2,436 on Veterans Day, a Saturday schedule).",
+    "SRTA's feed (New Bedford and Fall River) switches New Bedford to its alternate weekday schedule on 25 Nov. Fall River's alternate schedule then runs on top of its regular one, because the calendar_dates exception that removes it on other weekdays is missing for that day. That gives 5,980 departures, against 4,426 on the other Wednesdays (2,436 on Veterans Day, a Saturday schedule). Evidence detail: on 3 Nov only Fall River's alternate replaces its regular schedule; New Bedford runs services 1 and 7 together."
+   ]
+  },
+  {
+   "key": "report-s3",
+   "severity": "low",
+   "title": "The claim that no top-ranked project changes rests on a column that compares the unranked first row",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 107: \"No block group's top-ranked project changes.\"",
+   "problem": "The only evidence is the 'Top project changed' column of logs/transit84_effect_table.md. As delivered, transit7_effect.py fills that column by comparing the first row of each block group's project list. That list is in engine rule order, not ranked, and its first row is almost always street_trees. The page's top project is a different value: the best paying evidence-tier-D project. So the column cannot show whether a top-ranked project changed, and the claim has no supporting evidence. An independent re-ranking of the three biggest changes found no top-project change, so the claim may be true, but the other seven counties are unchecked.",
+   "fix": "The effect table cannot show this: its 'Top project changed' column compares each block group's first listed row (street_trees in 4,291 of these counties' 4,368 block groups), not the page's top-ranked project. Re-ranking Dutchess, Marion and Cumberland with the page's rule (best paying tier-D project) finds no top-project change; the other seven counties (at most 6 changed block groups each) were not re-checked.",
+   "votes": "2/2",
+   "corrected": [
+    "The effect table cannot show this: its 'Top project changed' column compares each block group's first listed row (rule order; street_trees in 4,291 of these 10 counties' 4,368 block groups), not the page's top-ranked project (the best paying tier-D project). Re-ranking with engine.py finds no top-project change in Marion (page top project reproduced in 196/196 block groups), nor, by report-s3's simulation, in Dutchess and Cumberland. The other seven counties (up to 6 block groups with a changed frequency and 4 newly known each) were not re-checked.",
+    "The effect table cannot show this. Its 'Top project changed' column compares each block group's first listed row, which is in engine rule order (street_trees in 4,291 of these counties' 4,368 block groups), not the page's top project (best paying tier-D project, build_oc.py line 186). The claim needs a re-check against the page's top project ('t')."
+   ]
+  },
+  {
+   "key": "report-s3",
+   "severity": "low",
+   "title": "Most counties' transit metas do not have wednesdays_7_9am_departures",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 100: \"Each feed's candidate counts are now in the county's transit meta (`wednesdays_7_9am_departures`).\"",
+   "problem": "Only builds from selection 13 on (06:19) write the field. 288 of the 443 counties with bus feeds were delivered with a selection 9-12 transit step that was never re-run, and their metas lack it. A reader who goes to a county's meta to see the candidate Wednesdays will usually not find them.",
+   "fix": "Builds from selection 13 on record each feed's candidate counts in the county's transit meta (`wednesdays_7_9am_departures`). The 288 of 443 counties with bus feeds that were left with a selection 9\u201312 build (210 of them selection 9) do not have them.",
+   "votes": "2/2",
+   "corrected": [
+    "Builds from selection 13 on record each feed's candidate counts in the county's transit meta (`wednesdays_7_9am_departures`). The 288 of 443 counties with bus feeds that were left with a selection 9\u201312 build (210 of them selection 9) do not have them.",
+    "Builds from selection 13 on record each feed's candidate counts in the county's transit meta (`wednesdays_7_9am_departures`). The 288 of 443 counties with bus feeds that were left with a selection 9-12 build (210 of them selection 9) do not have them."
+   ]
+  },
+  {
+   "key": "report-s3",
+   "severity": "low",
+   "title": "Sandoval's reason contradicts its own 06:37 build",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 100: \"Thirteen counties queued only as a precaution were left as built: twelve because the simulation shows their stations unchanged, and Sandoval, NM because Rio Metro's feed cannot be downloaded today (a re-run would lose its Rail Runner stops).\"",
+   "problem": "Only the hosted copy fails: it downloads as an empty file. fetch_oc.py then reads MobilityData's legacy mirror, and _rail_stops keeps rail stops from any readable copy, whatever its age. Sandoval's build at 06:37, with the hosted copy already unreadable, saved all five Rail Runner stops that way. So the evidence says a re-run would keep them. The doubt came from rail15_sim.py, which reads only the hosted copy and therefore could not match Sandoval's 5 stops.",
+   "fix": "\u2026and Sandoval, NM, because Rio Metro's hosted MobilityData copy is an empty file today, so the simulation could not check its stations. Its 06:37 build kept the Rail Runner stops from MobilityData's legacy-mirror copy, and its selection-16 weekday is unchanged.",
+   "votes": "2/2",
+   "corrected": [
+    "\u2026and Sandoval, NM, because Rio Metro's hosted MobilityData copy is an empty file today, so the simulation (which reads only hosted copies) could not check its stations. The pipeline reads MobilityData's legacy-mirror copy instead: Sandoval's 06:37 build kept its five Rail Runner stops that way, a re-run would too, and its selection-16 weekday is unchanged.",
+    "...and Sandoval, NM, because Rio Metro's hosted MobilityData copy is an empty file, so the simulation could not check its stations. Its 06:37 build had kept the Rail Runner stops from MobilityData's legacy-mirror copy, which a re-run reads too, and its selection-16 weekday is unchanged."
+   ]
+  },
+  {
+   "key": "report-s3",
+   "severity": "low",
+   "title": "Cherriots has 771 gap stops, not 775",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 102: \"Round 8.3 read Cherriots' expired copy as current and counted none of its buses; Cherriots' 775 stops are now marked as a gap.\"",
+   "problem": "775 is Marion County's total of gap stops. Four of them belong to three other stale feeds; Cherriots accounts for 771.",
+   "fix": "Round 8.3 read Cherriots' expired copy as current and counted none of its buses; Cherriots' 771 stops are now marked as a gap (775 gap stops in all, with 4 of three other stale feeds).",
+   "votes": "2/2",
+   "corrected": [
+    "Round 8.3 read Cherriots' expired copy as current and counted none of its buses; Cherriots' 771 stops are now marked as a gap (775 gap stops in all, with 4 of three other stale feeds).",
+    "Round 8.3 read Cherriots' expired copy as current and counted none of its buses; Cherriots' 771 stops are now marked as a gap (775 gap stops in all, with 4 of three other stale feeds)."
+   ]
+  },
+  {
+   "key": "report-s3",
+   "severity": "low",
+   "title": "The Colusa problem came from the re-run list, and the stop is not in Colusa County",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 91: \"**The checks found two problems with it.** Colusa County's only stop vanished from its map (Lake Transit), and Rochester stayed low: RTS runs 91% of its day's trips on 11 Nov, but not its school and peak services, which are what the 07:00\u201309:00 count measures.\"",
+   "problem": "Selection 10 itself measures Lake Transit on 4 Nov. Colusa lost its stop because the first selection-10 pass re-ran only counties whose block-group bus frequency had changed, so Colusa was still on its selection-9 (11 Nov) build. The 16-county re-run that fixed this is already inside the '105 counties' of the previous bullet, so the order of the text suggests the stop stayed lost. Also, the only stop on Colusa's map is a Lake Transit stop at the Clearlake Walmart in Lake County: it is inside Colusa's bounding box, about 15 km outside the county.",
+   "fix": "**The checks found two problems.** The first selection-10 pass re-ran only counties whose block-group bus frequency had changed. Counties still measured on 11 Nov therefore kept Veterans Day stops: Colusa's map lost its only stop (Lake Transit's Clearlake Walmart stop, in Lake County inside Colusa's box). It came back when those 16 counties were re-run with selection 10 (`rebundle84h.sh`, included in the 105). And Rochester stayed low: RTS runs 91% of its day's trips on 11 Nov, but not its school and peak services, which are what the 07:00\u201309:00 count measures.",
+   "votes": "2/2",
+   "corrected": [
+    "**The checks found two problems.** The first selection-10 pass re-ran only counties whose block-group bus frequency had changed, so counties still measured on 11 Nov kept their Veterans Day stops: Colusa's map lost its only stop (Lake Transit's Clearlake Walmart stop, in Lake County but inside Colusa's box, about 17 km from the county's nearest block group). It came back when those 16 counties were re-run with selection 10 (`rebundle84h.sh`, included in the 105). And Rochester stayed low: RTS runs 91% of its day's trips on 11 Nov, but not its school and peak services, which are what the 07:00\u201309:00 count measures.",
+    "The checks found two problems. The first selection-10 pass re-ran only counties whose block-group bus frequency had changed, so counties still measured on 11 Nov kept Veterans Day stops. Colusa's map lost its only stop, Lake Transit's Clearlake Walmart stop, which lies in Lake County inside Colusa's box. It came back when those 16 counties were re-run with selection 10 (rebundle84h.sh, included in the 105). And Rochester stayed low: RTS runs 91% of its day's trips on 11 Nov, but not its school and peak services, which are what the 07:00-09:00 count measures."
+   ]
+  },
+  {
+   "key": "report-s3",
+   "severity": "low",
+   "title": "The Mariposa example is not among the 46 counties of the last run",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 100: \"Most were built after midnight under selection 9 and still name 11 Nov for a feed whose holiday changes fall outside the county (Merced County Transit's 13 stops inside Mariposa County's box), so their bus values matched round 8.3 and the earlier passes left them alone.\"",
+   "problem": "The example is not one of the 46 counties this sentence describes. Mariposa appears only in the selection-13 and selection-14 audits, and it had been rebuilt with selection 15 before the last run started. For 12 of the 31 selection-9 counties in the list, the feed's 11 Nov schedule has exactly the same 07:00-09:00 departures as 4 Nov; only the service IDs differ. For those, there are no holiday changes at all.",
+   "fix": "Most (31) were built after midnight under selection 9 and still name 11 Nov for a feed whose Veterans Day schedule does not change the county's values. For 12 of them (Pace, SEPTA, Cincinnati Metro, Embark) it has the same 07:00\u201309:00 departures as 4 Nov. So their bus values matched round 8.3 and the earlier passes left them alone. Mariposa, with Merced County Transit's 13 stops in its box, was such a case in the selection-13 and -14 audits and had been re-run before this one.",
+   "votes": "2/2",
+   "corrected": [
+    "Most (31) were built after midnight under selection 9 and still name 11 Nov for a feed whose Veterans Day schedule does not change the county's values; for 12 of them (Pace, SEPTA, Cincinnati Metro, Embark) the feed's 07:00\u201309:00 departures on 11 Nov equal 4 Nov's. So their bus values matched round 8.3 and the earlier passes left them alone. Mariposa, with Merced County Transit's 13 stops in its box, was such a case in the selection-13 and -14 audits and had been re-run (selection 15, 07:01) before this one.",
+    "Most (31) were built after midnight under selection 9 and still name 11 Nov for a feed whose Veterans Day schedule does not change the county's values. For 12 of them (Pace, SEPTA, Cincinnati Metro, Embark), 11 Nov has exactly the same 07:00-09:00 bus departures as 4 Nov; their schedules differ only outside that window or on Cincinnati's streetcar. So their bus values matched round 8.3 and the earlier passes left them alone. Mariposa, with Merced County Transit's 13 stops in its box, was such a case in the selection-13 and -14 audits and had been re-run before this one."
+   ]
+  },
+  {
+   "key": "report-s4",
+   "severity": "medium",
+   "title": "San Juan: the two Bayam\u00f3n-feed stops counted for the county are in Bayam\u00f3n, so no bus is counted in San Juan and 108 block groups show 0/hr",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 119: \"Only the Bayam\u00f3n municipal feed reaches the county (2 stops), and most block groups show bus frequency as unknown rather than 0.\"",
+   "problem": "Neither stop is in San Juan. fetch_oc.py looks for GTFS stops inside the block groups' extent plus 0.03\u00b0: county_bbox adds 0.01\u00b0 (line 95), then line 660 adds another 0.02\u00b0 (the same code is at backups_fetch_oc_sel9_final.py:587, the selection San Juan's delivered build used). Both stops lie inside Bayam\u00f3n municipio, 4.8 km and 6.4 km from the nearest San Juan block group. None of the Bayam\u00f3n feed's 128 stops is in San Juan, so no feed that is read reaches San Juan. The two stops still change the map. metrics_oc sets `bt = max(...) or [0] ... if stops else None` (backups_metrics_oc_pre_sel15.py:399). Because the stop list is not empty, every block group with fewer than 3 OSM bus stops nearby gets 0 instead of unknown. On the delivered pages 108 of San Juan's 363 block groups show \"0/hr\" (patch6.py section 9 prints `Math.round(m.bt) + \"/hr\"`), and none shows a bus. With no stops, all 363 would show unknown, as Carolina's do. 36 of the 108 have a bus stop from ATI's own (expired 2023-24) feed within 400 m of their centre, so the 0 is not a measurement. The sentence says the opposite: that a feed reaches San Juan and that zeros were avoided.",
+   "fix": "No feed that is read reaches San Juan. The two stops counted for it (Terminal Multimodal and Sector Oliveras, from Bayam\u00f3n's municipal feed) lie in Bayam\u00f3n, 4.8 and 6.4 km outside the municipio, inside the 0.03\u00b0 margin of the transit step's search box. Bus frequency is unknown in 255 of San Juan's 363 block groups. The other 108 show 0 buses an hour only because those two stops make the county count as having a feed. No San Juan block group shows a bus.",
+   "votes": "2/2",
+   "corrected": [
+    "No feed that is read has a stop in San Juan. The two stops counted for it come from Bayam\u00f3n's municipal feed: Terminal Multimodal (13 buses/hr) and Sector Oliveras (1/hr). Both lie in Bayam\u00f3n, 4.8 and 6.4 km from San Juan, and were picked up only because the transit step searches the block groups' extent plus 0.03\u00b0. Bus frequency is unknown in 255 of San Juan's 363 block groups. The other 108 show 0 buses an hour only because those two out-of-municipio stops make the county count as having a feed. No San Juan block group shows a bus.",
+    "No feed that is read reaches San Juan. The two stops counted for it (Terminal Multimodal and Sector Oliveras, from Bayam\u00f3n's municipal feed) are in Bayam\u00f3n, 4.8 and 6.4 km outside the municipio. They are counted because the transit step searches the block groups' extent plus 0.03\u00b0. Bus frequency is unknown in 255 of San Juan's 363 block groups. The other 108 show 0 buses an hour only because those two stops make the county count as having a feed; about a third of them (32-36) have an ATI bus stop within 400 m. No San Juan block group shows a bus."
+   ]
+  },
+  {
+   "key": "report-s4",
+   "severity": "medium",
+   "title": "Bayam\u00f3n: all 110 'known' block groups show 0 buses an hour; the feed's 124 untimed stops are not counted",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 119: \"Bayam\u00f3n's own feed gives bus frequency for 110 of Bayam\u00f3n's 149 block groups.\"",
+   "problem": "The 110 is just 149 minus the 39 block groups the build log marks unknown. Every one of the 110 has bt = 0 (\"0/hr\" on the page), and no Bayam\u00f3n block group has a frequency above 0. The 39 unknown include block group 720210303001, which holds the feed's hub, the Terminal Multimodal. The feed (6 BayaTrolley/BayaRide routes, 128 stops served) gives times only at 4 timepoint stops. fetch_oc.py skips every stop_time without a time (`if not t: continue   # non-timepoint stop: no time to count`), so 124 served stops count nothing. 24 of the 110 zero block groups have one of the feed's own stops within 400 m of their centre. The reader is told the feed measures bus frequency in 110 block groups; it measures nothing above zero anywhere in Bayam\u00f3n.",
+   "fix": "Bayam\u00f3n's own feed (BayaTrolley and BayaRide, 128 stops) gives times at only 4 stops, and the transit step counts only stops with a time, so no Bayam\u00f3n block group shows a bus. 39 of its 149 block groups show unknown, among them the one holding the Terminal Multimodal. The other 110 show 0 buses an hour, 24 of them with one of the feed's stops within 400 m.",
+   "votes": "2/2",
+   "corrected": [
+    "Bayam\u00f3n's own feed (BayaTrolley and BayaRide: 6 routes, 128 stops) gives times at only 4 stops. The transit step counted only stops with a time: Terminal Multimodal at 13 buses an hour and three others at 1 an hour. So no Bayam\u00f3n block group shows a bus. 39 of its 149 block groups show unknown, among them the one holding the Terminal Multimodal. The other 110 show 0 buses an hour, and 24 of those have one of the feed's stops within 400 m. (Cite the skip as stations/fetch_oc_selection16.py:512-513 or backups_fetch_oc_sel12.py:457-458. The current pipeline/fetch_oc.py is selection 17.)",
+    "Bayam\u00f3n's own feed (BayaTrolley and BayaRide, 128 stops) gives times at only 4 stops, and the transit step counts only stops with a time, so no Bayam\u00f3n block group shows a bus. 39 of its 149 block groups show unknown, among them the one holding the Terminal Multimodal. The other 110 show 0 buses an hour, 24 of them with one of the feed's stops within 400 m."
+   ]
+  },
+  {
+   "key": "report-s4",
+   "severity": "low",
+   "title": "Carolina is covered by ATI's feed; it has no feed that is read, not 'no bus feed at all'",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 119: \"Carolina has no bus feed at all, so its 128 block groups all show unknown.\"",
+   "problem": "The ATI feed that the same bullet says is not read for San Juan also covers Carolina: 251 of its AMA bus stops lie inside Carolina's block groups. Carolina has no feed that is read, which is why it has no stops. It is not true that no operator publishes a feed for it. The '128 block groups all show unknown' part is correct.",
+   "fix": "Carolina's only bus feed is ATI's (251 of its bus stops are in Carolina), which is not read for the same reason, so its 128 block groups all show unknown.",
+   "votes": "2/2",
+   "corrected": [
+    "Carolina's only bus feed is ATI's: 10 AMA bus routes, 251 stops in Carolina, schedule ended 31 Dec 2024. It is not read for the same reason as San Juan's, so no feed is read for Carolina and its 128 block groups all show unknown.",
+    "Carolina's only bus feed is ATI's (251 of its bus stops are in Carolina), which is not read for the same reason, so its 128 block groups all show unknown."
+   ]
+  },
+  {
+   "key": "report-s4",
+   "severity": "low",
+   "title": "Tren Urbano has 16 stations; San Juan's layer holds 14 of them, two outside San Juan",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 119: \"Tren Urbano's 14 stations count as rail stations under rule 2 (tagged subway, network ATI).\"",
+   "problem": "'Tren Urbano's 14 stations' reads as the size of the system. Tren Urbano has 16 stations. San Juan's layer holds 14 of them, and 2 of those 14 (Torrimar and Jardines) lie outside San Juan. Bayam\u00f3n and Deportivo appear only in Bayam\u00f3n's layer. The rule-2 and tagging part is correct.",
+   "fix": "San Juan's station layer holds 14 of Tren Urbano's 16 stations (12 in the municipio, plus Torrimar and Jardines just outside it). They count as rail stations under rule 2 (tagged subway, network ATI). Bayam\u00f3n and Deportivo are in Bayam\u00f3n's layer.",
+   "votes": "2/2",
+   "corrected": [
+    "San Juan's station layer holds 14 of Tren Urbano's 16 stations: 12 in the municipio, plus Jardines (in Bayam\u00f3n) and Torrimar, each 1-2 km outside it. They count as rail stations under rule 2 (tagged subway, network ATI). Bayam\u00f3n and Deportivo are in Bayam\u00f3n's layer only.",
+    "San Juan's station layer holds 14 of Tren Urbano's 16 stations (12 in the municipio, plus Torrimar and Jardines just outside it). They count as rail stations under rule 2 (tagged subway, network ATI). Bayam\u00f3n and Deportivo are in Bayam\u00f3n's layer."
+   ]
+  },
+  {
+   "key": "report-s4",
+   "severity": "low",
+   "title": "Batch 5 is the 150 largest unbuilt counties that have an OpenStreetMap file; four larger Hawaii and Alaska counties were left out",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 114: \"The batch is the 150 largest counties not built before (populations from 336,160 (San Juan) down to 145,807 (ACS 2020-2024)).\"",
+   "problem": "make_queue.py keeps only counties with an OpenStreetMap URL, so Alaska and Hawaii are excluded. Four unbuilt counties are larger than the smallest in the batch (145,807), and two of them (Honolulu, Anchorage) are larger than San Juan. As written, the sentence implies no unbuilt county is larger than San Juan.",
+   "fix": "The batch is the 150 largest counties not built before among those with an OpenStreetMap file (populations from 336,160 (San Juan) down to 145,807 (ACS 2020-2024)). Alaska and Hawaii have no OpenStreetMap file here, so Honolulu (1,001,146), Anchorage (288,976), Hawaii County (205,769) and Maui (164,522) are left out.",
+   "votes": "2/2",
+   "corrected": [
+    "The batch is the 150 largest counties not built before among those with an OpenStreetMap file (populations from 336,160 (San Juan) down to 145,807 (ACS 2020-2024)). Alaska and Hawaii have no OpenStreetMap file here, so Honolulu (1,001,146), Anchorage (288,976), Hawaii County (205,769) and Maui (164,522) are left out. Only Honolulu is larger than San Juan; Anchorage is not, contrary to the finding.",
+    "Only Honolulu is larger than San Juan; Anchorage (288,976), Hawaii County and Maui fall inside the batch's range. Suggested text: 'The batch is the 150 largest counties not built before among those with an OpenStreetMap file (populations from 336,160 (San Juan) down to 145,807 (ACS 2020-2024)). Alaska and Hawaii have no OpenStreetMap file here, so Honolulu (1,001,146), Anchorage (288,976), Hawaii County (205,769) and Maui (164,522) are left out.'"
+   ]
+  },
+  {
+   "key": "report-s4",
+   "severity": "low",
+   "title": "Batch 5 started at 22:19; 22:21 is when the first county finished",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 112: \"**All 150 counties were built**, each through the whole pipeline and with its site suggestions, from 22:21 on 7 Nov to 06:51 on 8 Nov.\"",
+   "problem": "queue_worker.sh writes each batch5a.log line after a county's build ends. 22:21:41 is when the first county, San Juan, finished; its build and the batch started at 22:19:44. The end time (06:50:59) is right. The rest of the sentence also checks out: all 150 counties (plus Laramie) finished with no FAILED line, and each has sites_<fips>.json and 'site suggestions included' in site84.log.",
+   "fix": "**All 150 counties were built**, each through the whole pipeline and with its site suggestions, from 22:19 on 7 Nov to 06:51 on 8 Nov.",
+   "votes": "2/2",
+   "corrected": [
+    "**All 150 counties were built**, each through the whole pipeline and with its site suggestions. The batch started at 22:19 on 7 Nov, and the last county finished at 06:51 on 8 Nov (the first finished at 22:21).",
+    "**All 150 counties were built**, each through the whole pipeline and with its site suggestions, from 22:19 on 7 Nov to 06:51 on 8 Nov."
+   ]
+  },
+  {
+   "key": "report-s5",
+   "severity": "low",
+   "title": "The 825 MB site size leaves out the 28.8 MB index.html that carries LA and Orange; site84 is 853 MB",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "- **National site (`site84`: 487 pipeline counties plus LA and Orange, 825 MB, served over plain HTTP):** LA + Orange 91/91, King WA 38/38, Hamilton OH 38/38, Forsyth NC 36/36, Philadelphia 34/34, San Juan PR 30/30; no page or console errors. (line 141)",
+   "problem": "The sentence gives 825 MB as the size of the site with LA and Orange. 825 MB is only the counties/ folder of the 487 pipeline counties. LA and Orange are embedded in index.html, which is another 28.8 MB, so the number understates the site.",
+   "fix": "- **National site (`site84`: 487 pipeline counties plus LA and Orange, 853 MB: a 28.8 MB index.html that embeds LA and Orange plus 825 MB of county files, served over plain HTTP):** LA + Orange 91/91, King WA 38/38, Hamilton OH 38/38, Forsyth NC 36/36, Philadelphia 34/34, San Juan PR 30/30; no page or console errors.",
+   "votes": "2/2",
+   "corrected": [
+    "- **National site (`site84`: 487 pipeline counties plus LA and Orange, 853 MB: a 28.8 MB index.html that embeds LA and Orange plus 825 MB of county files, served over plain HTTP):** LA + Orange 91/91, King WA 38/38, Hamilton OH 38/38, Forsyth NC 36/36, Philadelphia 34/34, San Juan PR 30/30; no page or console errors.",
+    "- **National site (`site84`: 487 pipeline counties plus LA and Orange, 853 MB: a 28.8 MB index.html that embeds LA and Orange plus 825 MB of county files, served over plain HTTP):** LA + Orange 91/91, King WA 38/38, Hamilton OH 38/38, Forsyth NC 36/36, Philadelphia 34/34, San Juan PR 30/30; no page or console errors."
+   ]
+  },
+  {
+   "key": "report-s5",
+   "severity": "low",
+   "title": "The LA check does not confirm a served station in every panel: the Bel-Air and Brentwood panels name no station",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "The check opens four of the 78 edited block groups (Bel-Air, Brentwood, Westwood, Lakewood) and confirms: / - each panel shows the served station and distance; (lines 142-143; line 144 also says none shows \"the old distance\")",
+   "problem": "Only the Lakewood and Westwood panels show the served station's name, and only for those two does lacheck84.js look for one. For Bel-Air and Brentwood the script checks only the distance tile, and those panels name no station at all. The old distance is tested only for Westwood (1.7 mi) and Bel-Air (0.4 mi), not for Lakewood (4.9 mi) or Brentwood (0.2 mi). The check is real, but the report overstates what it covers.",
+   "fix": "The check opens four of the 78 edited block groups (Bel-Air, Brentwood, Westwood, Lakewood) and confirms: the Lakewood and Westwood panels name the served station and its distance (\"Norwalk, 5.6 mi\", \"Expo/Sepulveda, 2.3 mi\"); the Bel-Air and Brentwood panels, which name no station, show the new rail distance (\"rail 3.9 mi\", \"rail 3.3 mi\"); none shows a removed station, a removed upzoning row or the removed \"within \u00bd mile of rail\" sentence, and the old distance is absent where it is tested (Westwood 1.7 mi, Bel-Air 0.4 mi); LA's stations layer has no station whose name matches Tram Station, Calico, Camp Snoopy, Fantasyland or Tomorrowland.",
+   "votes": "2/2",
+   "corrected": [
+    "The check opens four of the 78 edited block groups (Bel-Air, Brentwood, Westwood, Lakewood) and confirms:\n- the Lakewood and Westwood panels name the served station and its distance (\"Norwalk, 5.6 mi\", \"Expo/Sepulveda, 2.3 mi\");\n- the Bel-Air and Brentwood panels, which name no station, show the new rail distance (\"rail 3.9 mi\", \"rail 3.3 mi\");\n- none shows a removed station, a removed upzoning row or the removed \"within \u00bd mile of rail\" sentence, and the old distance is absent where it is tested (Westwood 1.7 mi, Bel-Air 0.4 mi);\n- LA's stations layer has no station whose name matches Tram Station, Calico, Camp Snoopy, Fantasyland or Tomorrowland.",
+    "The check opens four of the 78 edited block groups (Bel-Air, Brentwood, Westwood, Lakewood) and confirms: the Lakewood and Westwood panels name the served station and its distance (\"Norwalk, 5.6 mi\", \"Expo/Sepulveda, 2.3 mi\"); the Bel-Air and Brentwood panels, which name no station, show the new rail distance (\"rail 3.9 mi\", \"rail 3.3 mi\"); no panel shows a removed station; the old distance is absent where it is tested (Westwood 1.7 mi, Bel-Air 0.4 mi); Bel-Air and Brentwood no longer show their removed upzoning row, and Bel-Air no longer shows the \"within \u00bd mile of rail\" sentence; LA's stations layer has no station whose name matches Tram Station, Calico, Camp Snoopy, Fantasyland or Tomorrowland."
+   ]
+  },
+  {
+   "key": "report-s5",
+   "severity": "low",
+   "title": "Stafford's selection-15 full build ran after install, not before",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "- **Transit selections 10\u201316** were tested before install: \u2026 - selection 15 on Arlington VA (transit step only: 82 rail stops, all under station names, 77 grouped by parent station) and Stafford VA (full build: VRE's track \"1\" added as Spotsylvania, as the simulation predicted). (lines 158, 164)",
+   "problem": "The Stafford full build was a production rebuild. It started 11 seconds after selection 15 and metrics_oc v3 were installed, so it was not a test before install. The report itself counts it as one of the \"three single rebuilds (San Juan twice, Stafford VA)\" (line 151). Before install, selection 15 was tried only on Arlington's transit step, plus the simulation.",
+   "fix": "  - selection 15 on Arlington VA before install (transit step only: 82 rail stops, all under station names, 77 grouped by parent station); Stafford VA's full rebuild just after install (06:42, logs/rebuild15_51179.log) added VRE's track \"1\" as Spotsylvania, as the simulation predicted.",
+   "votes": "2/2",
+   "corrected": [
+    "  - selection 15 on Arlington VA before install (transit step only: 82 rail stops, all under station names, 77 grouped by parent station); Stafford VA's full rebuild just after install (06:42, logs/rebuild15_51179.log) added VRE's track \"1\" as Spotsylvania, as the simulation predicted.",
+    "  - selection 15 on Arlington VA before install (transit step only: 82 rail stops, all under station names, 77 grouped by parent station); Stafford VA's full rebuild just after install (06:42, logs/rebuild15_51179.log) added VRE's track \"1\" as Spotsylvania, as the simulation predicted."
+   ]
+  },
+  {
+   "key": "report-s5",
+   "severity": "low",
+   "title": "Hinds's 5 names are 4 cities plus \"Unincorporated Hinds County\", not 5 cities",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Hinds County, MS (Jackson) has no OpenStreetMap neighborhood labels, so its 189 block groups are named by their 5 cities, and the old rule failed it (35/36). (line 168)",
+   "problem": "Only 4 of the 5 names are cities. The fifth, which covers 22 block groups, is the unincorporated remainder \"Unincorporated Hinds County\".",
+   "fix": "Hinds County, MS (Jackson) has no OpenStreetMap neighborhood labels, so its 189 block groups carry only 5 names, its four cities (Jackson 141, Clinton 18, Byram 7, Raymond 1) and \"Unincorporated Hinds County\" (22), and the old rule failed it (35/36).",
+   "votes": "2/2",
+   "corrected": [
+    "Hinds County, MS (Jackson) has no OpenStreetMap neighborhood labels, so its 189 block groups carry only 5 names: four cities (Jackson 141, Clinton 18, Byram 7, Raymond 1) and \"Unincorporated Hinds County\" (22). The old rule failed it (35/36).",
+    "Hinds County, MS (Jackson) has no OpenStreetMap neighborhood labels, so its 189 block groups carry only 5 names, its four cities (Jackson 141, Clinton 18, Byram 7, Raymond 1) and \"Unincorporated Hinds County\" (22), and the old rule failed it (35/36)."
+   ]
+  },
+  {
+   "key": "report-s5",
+   "severity": "low",
+   "title": "The report's old search-index rule leaves out its cap of 10 names",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "It used to ask for one name per 20 block groups. (line 168)",
+   "problem": "The old rule was min(10, ceil(block groups / 20)): one name per 20 block groups, but never more than 10. Without the cap, a reader would think large counties used to need far more names (King, 1,545 block groups: 78) and that the change weakened the test for them. In fact both rules ask large counties for 10 names. The change only matters for a county with fewer distinct names than that, like Hinds.",
+   "fix": "It used to ask for one name per 20 block groups, up to 10 (min(10, ceil(block groups/20))), so only counties with fewer distinct names than that are affected.",
+   "votes": "2/2",
+   "corrected": [
+    "It used to ask for one name per 20 block groups, up to 10 (min(10, ceil(block groups / 20))). The test is looser only for counties with fewer distinct names than that, such as Hinds.",
+    "It used to ask for one name per 20 block groups, up to 10 (min(10, ceil(block groups / 20))), so counties of 181 or more block groups needed 10 names under both rules; Hinds (189 block groups) needed 10 and has only 5."
+   ]
+  },
+  {
+   "key": "report-s5",
+   "severity": "low",
+   "title": "county-quality.md lists 486 of the 487 counties: San Diego is missing",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "- **County quality:** `county-quality.md`, regenerated after the re-bundles. (line 167)",
+   "problem": "The table was indeed regenerated after the last re-run (08:17, after 84l ended at 08:12:59). But it leaves out San Diego County (06073), one of the largest counties on the pages and the site. Nothing says so, and readers of the Tests section would assume it covers every built county.",
+   "fix": "- **County quality:** `county-quality.md`, regenerated after the re-bundles (08:17). It covers 486 of the 487 pipeline counties: San Diego is missing because `quality.py` reads only `logs/build_<fips>.log`, and San Diego's build log is `pipeline/build_06073.log`.",
+   "votes": "2/2",
+   "corrected": [
+    "- **County quality:** `county-quality.md`, regenerated after the re-bundles (08:17). It covers 486 of the 487 pipeline counties. San Diego is missing because `quality.py` reads only `logs/build_<fips>.log`, and San Diego's build log is `pipeline/build_06073.log`.",
+    "- **County quality:** `county-quality.md`, regenerated after the re-bundles (08:17). It covers 486 of the 487 pipeline counties: San Diego is missing because `quality.py` reads only `logs/build_<fips>.log`, and San Diego's build log is `pipeline/build_06073.log`."
+   ]
+  },
+  {
+   "key": "report-s6",
+   "severity": "medium",
+   "title": "\"Feeds this machine cannot reach\" names 2 feeds, but 10 more operators' feeds could not be downloaded, and NCTD's current copy was refused too",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 177: \"**Feeds this machine cannot reach:** Cherriots' current feed (cherriots.org) is refused by the network proxy, and Rio Metro's MobilityData copy is not a valid zip today.\"",
+   "problem": "The bullet reads as the full list of unreachable feeds, but it isn't. In the round-8.4 builds, 11 more feed ids (10 operators) had no copy that could be downloaded. MobilityData's hosted copy answers 403 and the proxy refuses the operator's own URL. Several of these change what the map shows. Cumberland County, NC (Fayetteville) has no bus data at all, so all 228 block groups show unknown. In Loveland, CO, 45 block groups show 0 buses even though City of Loveland Transit's catalog feed is listed as active. Fredericksburg Regional Transit's current feed is refused, so Spotsylvania and Stafford have only stale copies. NCTD's current copy is also refused, so San Diego measures NCTD on a legacy-mirror schedule that ended on 2 Aug 2026. A reader would think only Salem and Sandoval are affected.",
+   "fix": "**Feeds this machine cannot reach:** Cherriots' current feed (cherriots.org) is refused by the network proxy, and Rio Metro's hosted MobilityData copy is an empty file today. For ten more operators no copy can be downloaded at all: MobilityData's hosted copy answers 403 and the proxy refuses the operator's URL. They include Fayetteville Area System of Transit (Cumberland County, NC has no bus data: all 228 block groups unknown), City of Loveland Transit (45 Loveland block groups show 0 buses), Fredericksburg Regional Transit (only stale copies), Tulare InterModal Express and Lompoc Transit. NCTD's current copy also answers 403, so San Diego measures NCTD on its legacy-mirror schedule, which ended on 2 Aug 2026 (measured on 29 Jul).",
+   "votes": "2/2",
+   "corrected": [
+    "**Feeds this machine cannot reach:** Cherriots' current feed (cherriots.org) is refused by the network proxy. Rio Metro's hosted MobilityData copy is an empty file, but its legacy-mirror copy (ended 2024) is read. Ten more operators (11 feed ids, 93 counties) have no copy that can be downloaded: MobilityData hosts none, and the proxy refuses the operator's own URL. Fayetteville Area System of Transit is one: Cumberland County, NC has no bus data, and all 228 block groups are unknown. City of Loveland Transit is another: 45 of Loveland's 46 block groups show 0 buses, not unknown. Fredericksburg Regional Transit has only copies that ended in 2023\u20132025, used in Spotsylvania, Stafford and Prince William. Tulare InterModal Express, City of Lompoc Transit and Danville Mass Transit cannot be downloaded either. So can't Torrance, Glendale Beeline, West Hollywood and I-Line, but those serve only LA County. (NCTD is not a reachability case. MobilityData has no hosted copy, and the pipeline does not try NCTD's own URL while its legacy-mirror schedule is under a year old, so San Diego measures NCTD on 29 Jul 2026 on a schedule that ended on 2 Aug 2026.)",
+    "**Feeds this machine cannot reach:** Cherriots' current feed (cherriots.org) is refused by the network proxy, and Rio Metro's hosted MobilityData copy is an empty file today. For ten more operators (11 catalog ids, 93 county builds) no copy could be downloaded at all: MobilityData's hosted copy answers 403 and the proxy refuses the operator's URL. Among them:\n- Fayetteville Area System of Transit: Cumberland County, NC has no bus data, and all 228 block groups show unknown.\n- City of Loveland Transit: 45 of Loveland's 46 block groups show 0 buses rather than unknown.\n- Fredericksburg Regional Transit: only expired copies remain, so its stops are unknown in Spotsylvania and Stafford.\n- Tulare InterModal Express and Lompoc Transit.\n\nNCTD's hosted copy also answers 403, so San Diego measures NCTD on its legacy-mirror schedule (calendar to 2 Aug 2026, measured on 29 Jul 2026)."
+   ]
+  },
+  {
+   "key": "report-s6",
+   "severity": "medium",
+   "title": "The disk estimate of 35 GB does not follow from the sentence's own per-county figures (about 27 GB)",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 179: \"The remaining ~2,700 counties would need about 35 GB, more than this machine has free (about 5 GB).\"",
+   "problem": "The sentence before it gives about 8 MB of data plus about 2 MB on the national site per county, which is about 10 MB. 2,700 \u00d7 10 MB \u2248 27 GB, not 35 GB. No evidence file gives 35 GB, and NEXT_ROUND.md itself budgets \"about 10 MB per county\". The counties still to build are smaller than the 487 already built, so 27 GB is an upper bound.",
+   "fix": "a built county keeps about 8 MB of data plus about 2 MB on the national site. The remaining ~2,700 counties would need about 27 GB (less in practice, since they are smaller), more than this machine has free (about 5 GB).",
+   "votes": "2/2",
+   "corrected": [
+    "a built county keeps about 8 MB of data plus about 2 MB on the national site. The remaining ~2,700 counties would need about 27 GB (less in practice: the smaller batch-5 counties average about 5 MB in all), more than this machine has free (about 5 GB).",
+    "a built county keeps about 8 MB of data plus about 2 MB on the national site, so the remaining ~2,700 counties would need about 27 GB. It would be less in practice, since batch-5 and batch-6 data folders average about 4 MB. That is still more than this machine has free (about 5 GB)."
+   ]
+  },
+  {
+   "key": "report-s6",
+   "severity": "medium",
+   "title": "The \"Unchanged from round 8.3\" list silently drops two limits that still apply: no crime data outside California, and LA's crash-gated rows",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 180: \"Unchanged from round 8.3: bus operators without a current schedule (SacRT, MATA, Mountain Metro, and others), feeds taken as published, no earthquake-retrofit row or fire hazard outside California, crash data only where a state or county source exists, Alaska and Hawaii not built.\"",
+   "problem": "Round 8.3's list (and 8.2's) also had \"no crime data outside California\" and \"LA's crash-gated rows (la_crash_count_check.md)\". Both are still true in round 8.4. Dropping them from a list labelled \"unchanged\" suggests they were fixed. In fact, crime data exists only for California counties. LA's bundle is the old build that the re-bundle does not touch (\u00a72), so the LA engine still decides traffic-calming and bike-lane eligibility from all crashes rather than pedestrian and bike crashes.",
+   "fix": "Unchanged from round 8.3: bus operators without a current schedule (SacRT, MATA, Mountain Metro, and others), feeds taken as published, no earthquake-retrofit row, fire hazard or crime data outside California, crash data only where a state or county source exists, LA's crash-gated rows (`la_crash_count_check.md`), Alaska and Hawaii not built.",
+   "votes": "2/2",
+   "corrected": [
+    "Unchanged from round 8.3: bus operators without a current schedule (SacRT, MATA, Mountain Metro, and others), feeds taken as published, no earthquake-retrofit row, fire hazard or crime data outside California, crash data only where a state or county source exists, LA's crash-gated rows (`la_crash_count_check.md`), Alaska and Hawaii not built.",
+    "Unchanged from round 8.3: bus operators without a current schedule (SacRT, MATA, Mountain Metro, and others), feeds taken as published, no earthquake-retrofit row, fire hazard or crime data outside California, crash data only where a state or county source exists, LA's crash-gated rows (`la_crash_count_check.md`), Alaska and Hawaii not built."
+   ]
+  },
+  {
+   "key": "report-s6",
+   "severity": "low",
+   "title": "Rio Metro: only the hosted copy is broken. The legacy-mirror copy is read and supplies the Rail Runner stops, so Sandoval's old build was not forced",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 177: \"Rio Metro's MobilityData copy is not a valid zip today. Salem shows bus frequency as unknown, and Sandoval keeps its earlier build.\"",
+   "problem": "MobilityData has two copies of Rio Metro (165). The hosted copy is an empty file. The legacy-mirror copy is a valid zip, and every New Mexico build reads it. Its bus schedule ended in 2024, so Rio Metro's bus stops become gap stops. fetch_oc still reads rail stops from every copy it can open, so the Rail Runner stops are present. A selection-16 rebuild keeps them. That contradicts the reason \u00a73 gives for leaving Sandoval at its selection-14 build (\"a re-run would lose its Rail Runner stops\"). Rio Metro's own URL (riometro.org) is also refused by the proxy, which the bullet does not say.",
+   "fix": "Rio Metro's hosted MobilityData copy is an empty file today and its own site (riometro.org) is refused by the proxy. Its legacy-mirror copy, whose bus schedule ended in 2024, is still read, so Rio Metro's bus stops count as unknown while its Rail Runner stops still confirm stations. Salem shows bus frequency as unknown, and Sandoval was left at its selection-14 build (a re-run would read the same Rail Runner stops).",
+   "votes": "2/2",
+   "corrected": [
+    "Rio Metro's hosted MobilityData copy is an empty file, and its own site (riometro.org) is refused by the proxy. Its legacy-mirror copy, whose bus schedule ended in 2024, is still read: Rio Metro's buses are treated as stale, and its Rail Runner stops still confirm and add stations. Salem shows bus frequency as unknown. Sandoval was left at its selection-14 build, though a re-run would read the same Rail Runner stops. (Line 100 should drop 'a re-run would lose its Rail Runner stops'.)",
+    "Line 177: Rio Metro's hosted MobilityData copy is an empty file today and its own site (riometro.org) is refused by the proxy. Its legacy-mirror copy, whose bus schedule ended in 2024, is still read: Rio Metro's buses are not counted (its stops mark nearby block groups unknown), while its Rail Runner stops still confirm stations. Salem shows bus frequency as unknown. Sandoval was left at its selection-14 build, which a re-run would reproduce (it would read the same Rail Runner stops).\n\nLine 100: replace 'because Rio Metro's feed cannot be downloaded today (a re-run would lose its Rail Runner stops)' with a reason that holds, e.g. that the simulation could not read the hosted copy, so it was left as built."
+   ]
+  },
+  {
+   "key": "report-s6",
+   "severity": "low",
+   "title": "Not all of the 112 \"duplicate\" station dots are duplicates",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 176: \"112 added GTFS stops lie 150\u2013300 m from the mapped station they duplicate, just outside the 150 m merge distance.\"",
+   "problem": "112 is the right count of added stops whose nearest kept OpenStreetMap station is 150\u2013300 m away. But some of them are not duplicates of that station. Some are distinct stations: SEPTA's 13th St is 267 m from 11th Street; the subway's 49 St is 274 m from 47th\u201350th Streets\u2013Rockefeller Center; Amtrak's \"Seattle\" is King Street Station, which is not mapped in King County, and sits 163 m from International District/Chinatown. Others are not stations at all: Amtrak's \"Canadian Border\" point (Erie and Niagara, NY) is about 290 m from Niagara Falls, and Metrolink's misplaced \"Moreno Valley / March Field\" is 257 m from Hunter Park. Calling all 112 duplicates supports a blanket 300 m merge (NEXT_ROUND.md item 1), which would delete real stations. Separately, duplicates between two added stops are not counted at all, for example four 'Union Station' dots 168\u2013189 m apart in Arlington's layer.",
+   "fix": "112 added GTFS stops lie 150\u2013300 m from a mapped station, just outside the 150 m merge distance. Most duplicate it, but a few are distinct stations or not stations at all (SEPTA's 13th St, 267 m from 11th Street; the subway's 49 St, 274 m from 47th\u201350th Streets\u2013Rockefeller Center; Amtrak's Seattle, i.e. King Street Station, 163 m from International District/Chinatown; Amtrak's \"Canadian Border\" point, about 290 m from Niagara Falls). Duplicates between two added stops (four \"Union Station\" dots in Arlington's layer) are not in the 112.",
+   "votes": "2/2",
+   "corrected": [
+    "112 added GTFS stops lie 150\u2013300 m from a mapped station, just outside the 150 m merge distance. Most duplicate it (Metro-North's Milford and Waterbury, Caltrain's Bayshore, Amtrak's \"Boston\" at South Station). A few are separate stations or not stations at all: SEPTA's 13th St, 267 m from 11th Street; the subway's 49 St, 274 m from 47th\u201350th Streets\u2013Rockefeller Center; Amtrak's Seattle (King Street Station), 163 m from International District/Chinatown; Amtrak's \"Canadian Border\" timing point, about 290 m from Niagara Falls; and Metrolink's misplaced Moreno Valley / March Field. Duplicates between two added stops (e.g. four \"Union Station\" dots in Arlington's layer) are not in the 112, so a blanket 300 m merge would also remove real stations.",
+    "112 added GTFS stops lie 150\u2013300 m from the nearest mapped station, just outside the 150 m merge distance.\n- Most duplicate it: Metro-North's Milford and Waterbury, Caltrain's Bayshore, Amtrak's 'Boston' at South Station.\n- A few are distinct stations: SEPTA's 13th St, 267 m from 11th Street; the subway's 49 St, 274 m from 47th\u201350th Streets\u2013Rockefeller Center; Amtrak's 'Seattle', i.e. King Street Station, 163 m from International District/Chinatown.\n- A few are not stations at that spot: Amtrak's 'Canadian Border' timing point, about 290 m from Niagara Falls; Metrolink's misplaced 'Moreno Valley / March Field', 258 m from Hunter Park.\n\nDuplicates between two added stops are not in the 112, e.g. four 'Union Station' dots in Arlington's layer. A blanket 300 m merge would remove real stations."
+   ]
+  },
+  {
+   "key": "report-s6",
+   "severity": "low",
+   "title": "The intro says every county on the national site was re-bundled, but LA was only patched",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 3: \"Every county on the national site was re-bundled with it, and batch 5 (the next 150 largest counties, starting with San Juan, Puerto Rico) was built with it from the start.\"",
+   "problem": "This contradicts \u00a72. The re-bundle covered the 336 pipeline counties, and Orange was rebuilt. LA's older bundle was not re-bundled. A patch only removed 16 stations that have no rail stop within 400 m. No GTFS stations were added to LA, and the keep-by-type rule was not applied there.",
+   "fix": "Every pipeline county on the national site was re-bundled with it and Orange was rebuilt with it. LA's older bundle was patched instead: 16 stations with no rail stop within 400 m were removed, and none were added. Batch 5 (the next 150 largest counties, starting with San Juan, Puerto Rico) was built with it from the start.",
+   "votes": "2/2",
+   "corrected": [
+    "Every pipeline county on the national site was re-bundled with it, and Orange was rebuilt with it. LA's older bundle was patched instead: 16 stations with no rail stop within 400 m were removed, and none were added. Batch 5 (the next 150 largest counties, starting with San Juan, Puerto Rico) was built with it from the start.",
+    "Every pipeline county on the national site was re-bundled with it, and Orange was rebuilt with it. LA's older bundle was patched instead: the 16 stations with no rail stop within 400 m were removed, and no GTFS stops were added. Batch 5 (the next 150 largest counties, starting with San Juan, Puerto Rico) was built with it from the start."
+   ]
+  },
+  {
+   "key": "report-s6",
+   "severity": "low",
+   "title": "The title undercounts the new counties: 151 were added (batch 5 plus Laramie), and \"Puerto Rico\" is only 3 of 78 municipios",
+   "file": "/home/user/handoff/round8.4/REPORT-round8.4.md",
+   "location": "Line 1: \"City Pretty, round 8.4: rail stations checked against the trains that stop there, Puerto Rico and 150 more counties (8 Nov 2026)\"",
+   "problem": "Round 8.4 built 151 new counties: the 150 of batch 5 plus Laramie County, WY. The national site went from 338 to 489 counties. The three Puerto Rico municipios are part of the 150, not in addition to them. \"Puerto Rico and 150 more counties\" undercounts by one and reads as though all of Puerto Rico was added.",
+   "fix": "City Pretty, round 8.4: rail stations checked against the trains that stop there, 151 more counties including the first three Puerto Rico municipios (8 Nov 2026)",
+   "votes": "2/2",
+   "corrected": [
+    "City Pretty, round 8.4: rail stations checked against the trains that stop there, 151 more counties including the first three Puerto Rico municipios (8 Nov 2026)",
+    "City Pretty, round 8.4: rail stations checked against the trains that stop there, 151 more counties including the first three Puerto Rico municipios (8 Nov 2026)"
+   ]
+  }
+ ],
+ "plausible": [],
+ "refuted": [
+  {
+   "key": "report-s3",
+   "title": "Two Cherriots sentences seem to contradict each other",
+   "votes": "0/2"
+  },
+  {
+   "key": "report-s6",
+   "title": "The intro says stations count only where rail service stops, but 60 stations are kept without any stop",
+   "votes": "0/2"
+  }
+ ]
+}

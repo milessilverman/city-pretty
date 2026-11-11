@@ -1,0 +1,262 @@
+FORM GEN. 160 (Rev. 8-12)
+
+
+
+                                    CITY OF LOS ANGELES
+                            INTER-DEPARTMENTAL CORRESPONDENCE
+
+DATE:               September 13, 2022
+
+TO:                Honorable Mitch O’Farrell, Chair
+                   Honorable Paul Koretz
+                   Honorable Gil. A. Cedillo
+                   Honorable Kevin de Leon
+                   Honorable Paul Krekorian
+
+FROM:              Keith Mozee, Executive Director and General Manager
+                   Bureau of Street Services (StreetsLA)
+
+SUBJECT:            STREETSLA ELECTRIC VEHICLE (EV) FLEET UPDATE CITY OF
+                    LOS ANGELES ELECTRIC VEHICLE MASTER PLAN, STREETSLA
+                    RESPONSE TO CF 21-0890______________________________________
+
+Pursuant to Council File No. 21-0890, The Bureau of Street Services (StreetsLA) has been
+instructed to report on the Bureau's electric vehicle fleet efforts to date, and a plan forward towards
+meeting the City of Los Angeles' (City’s) goal of zero carbon transportation by 2050, in
+compliance with LA’s Green New Deal. The Bureau is aggressively driving improvements through
+operational changes and piloting zero emissions vehicles, along with fuel flexible strategies, to
+obtain its goal of zero carbon transportation by 2050, with some caveats delineated in Challenge
+No. 6 - Page 6. An innovative, fuel-flexible strategy can significantly reduce emissions during the
+transition to an all-electric, zero-emissions fleet. StreetsLA is proud of its efforts to date but
+understands the need to be up-to-date on innovative technologies that are rapidly becoming
+available to meet the City’s goals.
+
+Background
+In April 2020, the Bureau hired a FUSE Fellow to assess, measure and reduce StreetsLA’s carbon
+and air pollution emissions. Based on findings the Bureau developed a baseline model to evaluate
+the environmental impacts of its 1,300 vehicle fleet. Utilizing the life cycle assessment (LCA)
+methodology, we adapted the Argonne National Laboratory AFLEET tool to reflect local
+conditions in Southern California and the variety of vehicle types operated by our Bureau.
+
+Environmental impacts were measured across the lifecycle of each vehicle class-from the fuel used
+through to the end of service life. In addition to evaluating greenhouse gas (GHG) emissions, the
+tool measured criteria pollutants such as particulate matter (PM) and the total cost to human health
+and the environment. The project scope separately evaluated an additional 1,000 extra-large
+equipment that are trailered to each work location, and smaller powered hand tools, batteries,
+trailers, and other stationary materials processing equipment and separately evaluated the asphalt,
+Electrical Vehicle Master Plan
+September 13, 2022
+Page 2 of 6
+
+concrete and tree waste used and reused in our city street operations. The study showed that 1,080
+vehicles in the fleet use over 1.25, gallon fuel emitting 13k metric tons of CO2e per year.
+
+In 2020, the Department of General Services (GSD) conducted a pilot for the use of Renewable
+Diesel (RD) from Tac Energy at the Reseda, Southwest, and Harbor Street Services Yards. This
+led to a 12% reduction in fleet emissions and there were no adverse impacts to the engines of the
+vehicles or operations. In February 2021, GSD switched back to conventional diesel fuel.
+StreetsLA worked with GSD to help secure another one-year pilot and currently all fueling stations
+will receive RD as part of this pilot program through 2023. In line with LA’s Green New Deal,
+GSD should procure long term contracts.
+
+Additionally, StreetsLA is using Compressed Natural Gas (CNG) and RD as clean fuels for 52%
+of its fleet vehicles. These clean fuel alternatives reduce carbon-monoxide and nitrogen-oxide
+emissions. Of the 1,388 vehicles in StreetsLA fleet, 33% are operating with RD and 19% of the
+fleet is being operated by CNG.
+
+EV Charging Stations at StreetsLA Yards/Facilities
+
+Charging Options
+There are three types of charging stations for electric vehicles (EVs): Level 1, Level 2 and Direct
+Current (DC), referred to as Level 3. Level 1 charging station can be plugged into a standard
+household 110-volt grounded wall outlet and usually requires no upgrade to the utility panel. A
+Level 1 charging station will deliver about 5 miles per hour of charge. Level 2 charging stations
+are four times faster than Level 1 and can provide about 25 miles per hour of charge. Level 2
+stations require a professionally installed 240-volt outlet on a dedicated circuit. Level 3 charging
+stations are the fastest type of charging available and can recharge an EV at a rate of 3 to 20 miles
+of range per minute. These commercial grade charging stations require high voltage.
+
+Current EV Charging Station locations:
+       North Hollywood Yard (2 hard wire and 2 stand-alone Beam solar chargers procured by
+       StreetsLA in 21/22)
+       Various Investigation and Enforcement Division (IED) Yard/Facility locations:
+           o 19040 Vanowen Street
+           o 7166 W. Manchester Boulevard
+           o 2222 E. 7th Street
+           o 1400 N. Gaffey Street
+
+Proposed EV Fleet Charging Station locations:
+Currently all chargers are Level 2 chargers. Installing a combination of Level 2 (L-2) and Level 3
+(L-3) at our yards will provide broad charging options. Below is a cost estimate for the installation
+of chargers at nine of our yards. The cost estimate for L-3 charging stations is $50,000 per unit
+and $30,000 for L-2. StreetsLA’s success of these upgrades will require the coordination and
+collaboration of General Services, Bureau of Engineering and Department of Water and Power.
+Electrical Vehicle Master Plan
+September 13, 2022
+Page 3 of 6
+
+                               Total number of
+        StreetsLA Yard            chargers     Electrical Upgrade Cost                L-3               L-2
+
+Wilshire Yard                                  10               $200,000.00          $250,000.00      $150,000.00
+
+Van Nuys                                       10               $200,000.00          $250,000.00      $150,000.00
+
+Topanga                                        10               $200,000.00          $250,000.00      $150,000.00
+
+Southeast                                      10               $200,000.00          $250,000.00      $150,000.00
+
+Reseda                                         10               $200,000.00          $250,000.00      $150,000.00
+
+Hollywood                                      10               $200,000.00          $250,000.00      $150,000.00
+
+Granada Hills                                  10               $200,000.00          $250,000.00      $150,000.00
+
+East Yard                                      10               $200,000.00          $250,000.00      $150,000.00
+                                               21
+North Hollywood Yard* *                                       $1,600,000.00              included         included
+
+Total per column                                              $3,200,000.00        $2,000,000.00     $1,200,000.00
+
+Total                                                                                               $6,400,000.00*
+*All figures are estimates and need to be further evaluated.
+“Depending on when these yards can be updated, there may be a 5-10% inflation factor.
+***
+    Facility upgrades subject to Council adoption of CF 21-0890 and Electric Vehicle Master Plan
+
+
+StreetsLA EV Fleet Accomplishments
+With the rapidly advancing technologies at hand, StreetsLA has been leading the effort in acquiring
+and testing electric vehicles and equipment for the City and learning more about best practices in
+utilizing this technology. This has prompted the Bureau to engage in several pilot projects by
+leveraging our relationships with various automotive companies to borrow, rent and purchase
+vehicles to keep up with the latest sustainable technologies.
+
+In collaboration with the Department of Water and Power (DWP), GSD, StreetsLA has begun its
+path to zero emissions. To date, we have acquired the following EV and equipment:
+
+1- Nissan Leaf EV
+10- Honda Clarity plug-in Hybrids
+1- Chevy Volt EV
+1- Ford Lightning EV
+2- Hyundai Kono EV (rental)
+1-Volvo mini-excavator (rental)
+1- Electric Delevo Mini Sweeper
+2- Beam portable stand-alone solar chargers
+
+Due to the infrastructure challenges and in support of accessing off the grid electricity, StreetsLA
+has procured two stand-alone Beam solar powered charging stations. These stations each charge
+two vehicles at a time. They are portable and can be moved to different yards if needed. The Bureau
+Electrical Vehicle Master Plan
+September 13, 2022
+Page 4 of 6
+
+is currently assessing the efficacy of these units and may procure additional units (or something
+comparable) in the upcoming fiscal year.
+
+Field Accomplishments using EV’s
+
+        All Street Vending-assigned Investigators in the Bureau’s Investigation and Enforcement
+        Division (IED) are now using Honda Clarity plug-in hybrids, making this team the first
+        100% clean-air team at StreetsLA.
+        The Nissan LEAF is also used by IED for the Hollywood Walkability program.
+        The electric Delevo mini-sweeper was purchased for sweeping the 1,100 lane miles of bike
+        lanes throughout the City.
+        The Volvo mini-excavator has been rented for use by the Urban Forestry Division (UFD).
+        This equipment is being used to dig for tree plantings and breaking-up of hard surfaces.
+        The ROUSH-650 eclectic stake bed was taken on loan and used by UFD in transporting
+        trees and equipment.
+        Two Beam portable solar chargers have been purchased and installed at our North
+        Hollywood Yard for Green Innovations.
+        Using alternative modes of transportation, StreetsLA partnered with Cake Bikes. Street
+        Maintenance Division (SMD) took on-loan four electric mopeds and conducted an
+        inspection of 1,100 lane miles of bike lanes throughout the City.
+        The Bureau has taken possession of 1 out of the 16 Ford F-150 Lightnings procured by
+        GSD to be used by the SMD Supervisor for pothole inspections.
+
+The following table includes a listing of all purchased EV Fleet. StreetsLA is working closely with
+GSD to expedite the procurement of the following EV Fleet in 22/23:
+
+                                 MICLA EV FLEET PURCHASES
+Quantity Description                                             Unit Cost       Total
+1           Sweeper, Hybrid, CNG/Electric                        $ 806, 000      $ 806,000
+6           Truck, <10,000#GVWR                                  $ 60,000        $ 360,000
+7           Truck, 10,001 - 26,000#GVWR                          $ 100,000       $ 700,000
+3           Sweeper, Bicycle Lane                                $ 305,000       $ 915,000
+4           Truck, Stake Bed                                     $ 200,000       $ 800,000
+4           Van, Box                                             $ 240,000       $ 960,000
+            Ford F-150 Pickup Truck, 1/2 Ton (1 received, 15
+16          additional on order)                                 $ 65,000        $ 1,040,000
+                                                                 TOTAL           $5,581,000
+
+StreetsLA EV Fleet Funding
+Historically, StreetsLA has received vehicles and equipment procured by GSD with Municipal
+Improvement Corporation of Los Angeles (MICLA) funds. $5.6M was allocated to the Bureau for
+FY 22/23 for all purchases. The FY22/23 Adopted Budget has earmarked an additional $3.4M
+exclusively to be used for EV purchases.
+Electrical Vehicle Master Plan
+September 13, 2022
+Page 5 of 6
+
+$2M has been allocated in the FY 22/23 Capital and Technology Improvement and Expenditure
+Program (CTIEP) for upgrades to StreetsLA facilities to support EV technologies.
+
+StreetsLA has identified its North Hollywood Yard as the “Center for Green Innovations” where
+its electric fleet is being housed. Due to the age of this Yard, extensive work is required to upgrade
+the electrical service along with the other necessary construction. Staff is currently working with
+Shell Recharge Solutions (SRS), a GSD vendor, on developing a cost proposal to upgrade the
+electrical service (new transformer & electrical conduits/cables), replace outdated electrical
+service panels, and add electric vehicle charging infrastructure along with (5) Level 3 chargers and
+(16) Level 2 chargers at the North Hollywood Yard. SRS is in contact with DWP on gathering
+information for the required service upgrade.
+
+StreetsLA EV Fleet Goals
+StreetsLA is proud to be in the forefront of accomplishing sustainability goals. Pilot projects are
+continuously being performed for feedback on use of equipment. Our team is in constant
+communication with industry leaders to purchase and/or rent EV equipment. The Bureau continues
+to use its buying power to request fabrication of vehicles and equipment that best meets Bureau
+needs. Most of the projects listed below have been launched but not yet completed.
+        The Urban Forestry Division (UFD) has acquired a Volvo mini-excavator to be used for
+        digging for the tree planting crews. The goal is to create a zero-emissions tree planting
+        crew so when we plant trees, it will be a complete net positive for the City.
+        The Bureau's long-term goal is to have all the pothole inspection crews use EV trucks, such
+        as the F-150. We have started this process by acquiring 16 EV trucks that will be used by
+        pothole inspection crews out of our Center for Green Innovations in North Hollywood.
+        In collaboration with DWP, StreetsLA is exploring building out a charging island for
+        heavyweight trucks at the Van Norman Yard. Funding for this project could be derived via
+        DWP reimbursement program and/or variety grants offered for such projects.
+        StreetsLA was loaned two (2) UBCO Electric Mopeds to be used for the inspection of Cool
+        Neighborhood projects recently completed. We will compile data on how well the new
+        material used for this project is holding up. Using alternative modes of transportation to
+        accomplish our goals.
+
+StreetsLA EV Fleet Challenges
+The biggest challenges in achieving citywide EV goals are as follows:
+       1) The competition for obtaining EVs in California is a challenge for the City due to high
+          demand for such equipment.
+       2) Electric powertrain options for most StreetsLA vehicle types are still not yet
+          commercially available. The industry has not yet perfected EV technologies for all
+          Bureau fleet and equipment.
+       3) There is insufficient supporting infrastructure and funding for this type of EV
+          equipment at our StreetsLA Yards. To continue to successfully enhance this program,
+          all of the Yards’ electrical infrastructure will need to be updated to support Level 2 (L-
+          2) and Level 3 (L-3) charging stations.
+Electrical Vehicle Master Plan
+September 13, 2022
+Page 6 of 6
+
+        4) Fluctuating increase in cost for procurement of electric vehicles and supporting
+           equipment.
+        5) Coordination and collaboration with other Departments who may have conflicting
+           priorities.
+        6) StreetsLA must take into consideration that an emergency situation may cause a break
+           in electricity due to power outages. The inability to recharge EV vehicles would cause
+           a breach in service. Charging times will also be an issue in case of emergency
+           situations. If all the Bureau’s fleet were electric, the Bureau would not be able to
+           respond to critical emergencies during power failures because our fleet couldn’t be
+           adequately charged. The Bureau should develop guidelines on what percentage of its
+           fleet should be converted to electric to ensure it can respond to all emergencies. The
+           desire to be a net zero Bureau and the obligation to perform duties as first responders
+           must be balanced.
+        7) Procurement of long-term clean fuel contracts.
+

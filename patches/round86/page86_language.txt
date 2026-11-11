@@ -1,0 +1,17 @@
+@@OLD
+h += `<p class="small muted">Compared with the 50 block groups county-wide most like this one in income, density, home values, housing age, children, car ownership and single-family share.</p>`;
+@@NEW
+h += `<p class="small muted">Compared with the 50 block groups ${typeof activeCounty !== "undefined" && activeCounty === "oc" && typeof countyOf === "function" ? "in Los Angeles County and " + esc((c => c === "District of Columbia" ? "the " + c : c)(countyOf(m))) : "county-wide"} most like this one in income, density, home values, housing age, children, car ownership and single-family share.</p>`;
+@@OLD
+${i === 0 && steps.length > 1 ? "Quick win: " : ""}
+@@NEW
+${i === 0 && steps.length > 1 && st.cost != null ? "Quick win: " : ""}
+@@OLD
+Steps tackle the gaps shared by the most homes. The first is the cheapest, then the rest are ordered by return.
+@@NEW
+Steps tackle the gaps shared by the most homes. ${(plan.steps || []).length > 1 && (plan.steps || [])[0].cost != null ? "The first is the cheapest, then the rest are ordered by return." : "They are ordered by how many homes share the gap, then by return."}
+@@OLD
+${esc((D.gap_labels || {})[k] || k)}
+@@NEW
+${esc((k === "dining" ? "restaurants and cafés within 400 m" : (D.gap_labels || {})[k]) || k)}
+@@END

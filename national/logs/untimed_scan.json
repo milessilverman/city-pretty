@@ -1,0 +1,6562 @@
+{
+ "https://s3.amazonaws.com/datatools-511ny/public/Westchester_County_Bee-Line_System.zip": {
+  "stop_times": 403762,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2836,
+  "counties": [
+   "09190",
+   "34003",
+   "34017",
+   "36005",
+   "36027",
+   "36047",
+   "36059",
+   "36061",
+   "36071",
+   "36081",
+   "36087",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-104/latest.zip": {
+  "stop_times": 3733,
+  "untimed": 3074,
+  "stops_only_untimed": 138,
+  "stops": 170,
+  "counties": [
+   "06065",
+   "06071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-101/latest.zip": {
+  "stop_times": 547508,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1990,
+  "counties": [
+   "06065",
+   "06071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-106/latest.zip": {
+  "stop_times": 2309,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 129,
+  "counties": [
+   "06065",
+   "06071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1053/latest.zip": {
+  "stop_times": 70362,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 510,
+  "counties": [
+   "11001",
+   "24021",
+   "24031",
+   "24033",
+   "24043",
+   "51013",
+   "51059",
+   "51107",
+   "51153",
+   "51510"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1060/latest.zip": {
+  "stop_times": 38846,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 850,
+  "counties": [
+   "22015",
+   "22017"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1067/latest.zip": {
+  "stop_times": 11617,
+  "untimed": 8915,
+  "stops_only_untimed": 156,
+  "stops": 193,
+  "counties": [
+   "06061",
+   "06067",
+   "06113"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-107/latest.zip": {
+  "stop_times": 4467,
+  "untimed": 2359,
+  "stops_only_untimed": 35,
+  "stops": 138,
+  "counties": [
+   "06065",
+   "06071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-109/latest.zip": {
+  "stop_times": 1620,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 70,
+  "counties": [
+   "04015",
+   "06071",
+   "32003"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-111/latest.zip": {
+  "stop_times": 3225,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 155,
+  "counties": [
+   "49053"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-113/latest.zip": {
+  "stop_times": 63,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 26,
+  "counties": [
+   "06035",
+   "06049"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1156/latest.zip": {
+  "stop_times": 35847,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 514,
+  "counties": [
+   "11001",
+   "24017",
+   "24031",
+   "24033",
+   "51013",
+   "51059",
+   "51107",
+   "51153",
+   "51177",
+   "51179",
+   "51510"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-116/latest.zip": {
+  "stop_times": 1367,
+  "untimed": 432,
+  "stops_only_untimed": 24,
+  "stops": 74,
+  "counties": [
+   "06021",
+   "06089",
+   "06103"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-117/latest.zip": {
+  "stop_times": 521,
+  "untimed": 7,
+  "stops_only_untimed": 0,
+  "stops": 112,
+  "counties": [
+   "06089",
+   "06093"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-118/latest.zip": {
+  "stop_times": 1326,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 97,
+  "counties": [
+   "06035",
+   "06063"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-120/latest.zip": {
+  "stop_times": 80217,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 855,
+  "counties": [
+   "32031"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-121/latest.zip": {
+  "stop_times": 2069,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 127,
+  "counties": [
+   "41029"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1210/latest.zip": {
+  "stop_times": 217201,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2782,
+  "counties": [
+   "06111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1235/latest.zip": {
+  "stop_times": 167585,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2334,
+  "counties": [
+   "10001",
+   "10003",
+   "10005",
+   "24015",
+   "24045",
+   "34011",
+   "34015",
+   "42029",
+   "42045"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1240/latest.zip": {
+  "stop_times": 43632,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 216,
+  "counties": [
+   "35043",
+   "35049"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1246/latest.zip": {
+  "stop_times": 304199,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 631,
+  "counties": [
+   "06083",
+   "06111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-126/latest.zip": {
+  "stop_times": 127,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 27,
+  "counties": [
+   "41043"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1287/latest.zip": {
+  "stop_times": 2749,
+  "untimed": 1988,
+  "stops_only_untimed": 105,
+  "stops": 178,
+  "counties": [
+   "51003"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1288/latest.zip": {
+  "stop_times": 18429,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 290,
+  "counties": [
+   "06001",
+   "06013",
+   "06041",
+   "06055",
+   "06075",
+   "06095",
+   "06097",
+   "06113"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1295/latest.zip": {
+  "stop_times": 28383,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 374,
+  "counties": [
+   "06055",
+   "06067",
+   "06095",
+   "06113"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1080/latest.zip": {
+  "stop_times": 2276610,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 12865,
+  "counties": [
+   "53033",
+   "53035"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-130/latest.zip": {
+  "stop_times": 100,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 13,
+  "counties": [
+   "41019",
+   "41039"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-131/latest.zip": {
+  "stop_times": 85487,
+  "untimed": 58769,
+  "stops_only_untimed": 863,
+  "stops": 1135,
+  "counties": [
+   "41019",
+   "41039"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-132/latest.zip": {
+  "stop_times": 320,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 8,
+  "counties": [
+   "41005",
+   "41043",
+   "41047",
+   "41051",
+   "41071",
+   "53011"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-133/latest.zip": {
+  "stop_times": 141,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 53,
+  "counties": [
+   "41017",
+   "41039",
+   "41043",
+   "41047",
+   "41071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-135/latest.zip": {
+  "stop_times": 2330,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 126,
+  "counties": [
+   "41043"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-13/latest.zip": {
+  "stop_times": 716994,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 4124,
+  "counties": [
+   "06073"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-137/latest.zip": {
+  "stop_times": 750,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 28,
+  "counties": [
+   "41043"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-139/latest.zip": {
+  "stop_times": 30,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 11,
+  "counties": [
+   "41017"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-141/latest.zip": {
+  "stop_times": 316,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 27,
+  "counties": [
+   "16027"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-142/latest.zip": {
+  "stop_times": 74084,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 574,
+  "counties": [
+   "16001",
+   "16027"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-148/latest.zip": {
+  "stop_times": 105882,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2337,
+  "counties": [
+   "35013",
+   "48141"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-15/latest.zip": {
+  "stop_times": 453744,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 5080,
+  "counties": [
+   "06065",
+   "06071",
+   "06073"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-147/latest.zip": {
+  "stop_times": 891413,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 7894,
+  "counties": [
+   "04013",
+   "04021"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-151/latest.zip": {
+  "stop_times": 11608,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 144,
+  "counties": [
+   "48121"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-152/latest.zip": {
+  "stop_times": 904149,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 6856,
+  "counties": [
+   "48085",
+   "48113",
+   "48121",
+   "48139",
+   "48439"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-150/latest.zip": {
+  "stop_times": 914046,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2328,
+  "counties": [
+   "48021",
+   "48209",
+   "48453",
+   "48491"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-153/latest.zip": {
+  "stop_times": 210,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 19,
+  "counties": [
+   "48113"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-158/latest.zip": {
+  "stop_times": 3652,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 121,
+  "counties": [
+   "04005",
+   "04025"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-160/latest.zip": {
+  "stop_times": 1490,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 137,
+  "counties": [
+   "35045"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-17/latest.zip": {
+  "stop_times": 6524,
+  "untimed": 4942,
+  "stops_only_untimed": 334,
+  "stops": 427,
+  "counties": [
+   "04027",
+   "06025"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-166/latest.zip": {
+  "stop_times": 218628,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1758,
+  "counties": [
+   "35001",
+   "35043"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-172/latest.zip": {
+  "stop_times": 1626,
+  "untimed": 90,
+  "stops_only_untimed": 0,
+  "stops": 11,
+  "counties": [
+   "08001",
+   "08031"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-176/latest.zip": {
+  "stop_times": 700,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 12,
+  "counties": [
+   "08069"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-170/latest.zip": {
+  "stop_times": 435665,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 5295,
+  "counties": [
+   "49005",
+   "49011",
+   "49035",
+   "49049",
+   "49057"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1784/latest.zip": {
+  "stop_times": 4970,
+  "untimed": 2074,
+  "stops_only_untimed": 1,
+  "stops": 48,
+  "counties": [
+   "24005",
+   "24025",
+   "24510"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-181/latest.zip": {
+  "stop_times": 6537,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 23,
+  "counties": [
+   "08013"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-182/latest.zip": {
+  "stop_times": 1438,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 33,
+  "counties": [
+   "40027"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1826/latest.zip": {
+  "stop_times": 2867,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 155,
+  "counties": [
+   "17161",
+   "19163"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1842/latest.zip": {
+  "stop_times": 9711,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 37,
+  "counties": [
+   "06085",
+   "06087"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-178/latest.zip": {
+  "stop_times": 763335,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 7334,
+  "counties": [
+   "08001",
+   "08005",
+   "08013",
+   "08031",
+   "08035",
+   "08059",
+   "08123"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-190/latest.zip": {
+  "stop_times": 457573,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 5078,
+  "counties": [
+   "17119",
+   "17163",
+   "29099",
+   "29183",
+   "29189",
+   "29510"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1905/latest.zip": {
+  "stop_times": 5136,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 36,
+  "counties": [
+   "04005"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-191/latest.zip": {
+  "stop_times": 16043,
+  "untimed": 77,
+  "stops_only_untimed": 2,
+  "stops": 507,
+  "counties": [
+   "19193"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-193/latest.zip": {
+  "stop_times": 166023,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 954,
+  "counties": [
+   "19049",
+   "19153"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-196/latest.zip": {
+  "stop_times": 3744,
+  "untimed": 2844,
+  "stops_only_untimed": 63,
+  "stops": 81,
+  "counties": [
+   "19103"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-197/latest.zip": {
+  "stop_times": 11552,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 94,
+  "counties": [
+   "19103"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1971/latest.zip": {
+  "stop_times": 3762,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 200,
+  "counties": [
+   "37001",
+   "37135"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1974/latest.zip": {
+  "stop_times": 23396,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 408,
+  "counties": [
+   "06001",
+   "06013",
+   "06067",
+   "06095"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1979/latest.zip": {
+  "stop_times": 26426,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 180,
+  "counties": [
+   "04005",
+   "04025"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-198/latest.zip": {
+  "stop_times": 18960,
+  "untimed": 16294,
+  "stops_only_untimed": 511,
+  "stops": 580,
+  "counties": [
+   "19103",
+   "19113"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-20/latest.zip": {
+  "stop_times": 2070,
+  "untimed": 1457,
+  "stops_only_untimed": 87,
+  "stops": 127,
+  "counties": [
+   "06015",
+   "06023"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-200/latest.zip": {
+  "stop_times": 4119,
+  "untimed": 3489,
+  "stops_only_untimed": 154,
+  "stops": 179,
+  "counties": [
+   "17161"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2000/latest.zip": {
+  "stop_times": 107947,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1270,
+  "counties": [
+   "42011",
+   "42029",
+   "42043",
+   "42071",
+   "42075",
+   "42133"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2001/latest.zip": {
+  "stop_times": 52912,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1370,
+  "counties": [
+   "39029",
+   "39099",
+   "39151",
+   "39153"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-201/latest.zip": {
+  "stop_times": 596475,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1230,
+  "counties": [
+   "17161",
+   "19163"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2030/latest.zip": {
+  "stop_times": 90,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 9,
+  "counties": [
+   "06073"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-1846/latest.zip": {
+  "stop_times": 4176900,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 7540,
+  "counties": [
+   "11001",
+   "24003",
+   "24017",
+   "24027",
+   "24031",
+   "24033",
+   "51013",
+   "51059",
+   "51107",
+   "51153",
+   "51510"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-206/latest.zip": {
+  "stop_times": 77890,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 624,
+  "counties": [
+   "27019",
+   "27037",
+   "27053",
+   "27123",
+   "27139"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-205/latest.zip": {
+  "stop_times": 2035488,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 8199,
+  "counties": [
+   "27003",
+   "27019",
+   "27037",
+   "27053",
+   "27123",
+   "27139",
+   "27163",
+   "27171"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2060/latest.zip": {
+  "stop_times": 1387656,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 8717,
+  "counties": [
+   "48039",
+   "48157",
+   "48167",
+   "48201",
+   "48291",
+   "48339"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2063/latest.zip": {
+  "stop_times": 31542,
+  "untimed": 25229,
+  "stops_only_untimed": 354,
+  "stops": 429,
+  "counties": [
+   "20045"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2064/latest.zip": {
+  "stop_times": 71434,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 904,
+  "counties": [
+   "42011",
+   "42029",
+   "42071",
+   "42075",
+   "42077",
+   "42107"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2062/latest.zip": {
+  "stop_times": 384782,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1590,
+  "counties": [
+   "40017",
+   "40027",
+   "40109"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2065/latest.zip": {
+  "stop_times": 63499,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1371,
+  "counties": [
+   "22005",
+   "22033",
+   "22063"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2066/latest.zip": {
+  "stop_times": 30053,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 532,
+  "counties": [
+   "18105"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2067/latest.zip": {
+  "stop_times": 62030,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 870,
+  "counties": [
+   "21067"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2068/latest.zip": {
+  "stop_times": 75552,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 770,
+  "counties": [
+   "21015",
+   "21117",
+   "39061"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2069/latest.zip": {
+  "stop_times": 17662,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 915,
+  "counties": [
+   "55009",
+   "55087",
+   "55139"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2072/latest.zip": {
+  "stop_times": 108658,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 112,
+  "counties": [
+   "26161"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2071/latest.zip": {
+  "stop_times": 267966,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1827,
+  "counties": [
+   "39035",
+   "39103",
+   "39133",
+   "39151",
+   "39153",
+   "39169"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2075/latest.zip": {
+  "stop_times": 10364,
+  "untimed": 8005,
+  "stops_only_untimed": 243,
+  "stops": 300,
+  "counties": [
+   "35013"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2076/latest.zip": {
+  "stop_times": 11112,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 250,
+  "counties": [
+   "08069",
+   "08123"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2074/latest.zip": {
+  "stop_times": 226222,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1386,
+  "counties": [
+   "37063",
+   "37101",
+   "37183"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2079/latest.zip": {
+  "stop_times": 27977,
+  "untimed": 11201,
+  "stops_only_untimed": 302,
+  "stops": 796,
+  "counties": [
+   "36007"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-208/latest.zip": {
+  "stop_times": 14645,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 494,
+  "counties": [
+   "55035"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-21/latest.zip": {
+  "stop_times": 786,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 74,
+  "counties": [
+   "41019",
+   "41039"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2081/latest.zip": {
+  "stop_times": 46848,
+  "untimed": 43038,
+  "stops_only_untimed": 361,
+  "stops": 383,
+  "counties": [
+   "01089",
+   "01103"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-210/latest.zip": {
+  "stop_times": 6906,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 338,
+  "counties": [
+   "39003"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-212/latest.zip": {
+  "stop_times": 910,
+  "untimed": 528,
+  "stops_only_untimed": 45,
+  "stops": 70,
+  "counties": [
+   "08077"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2189/latest.zip": {
+  "stop_times": 1069,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 101,
+  "counties": [
+   "53005"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2194/latest.zip": {
+  "stop_times": 8838,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 215,
+  "counties": [
+   "25003"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2197/latest.zip": {
+  "stop_times": 66,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 6,
+  "counties": [
+   "53067"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-22/latest.zip": {
+  "stop_times": 78,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 14,
+  "counties": [
+   "41019"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2122/latest.zip": {
+  "stop_times": 349002,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 876,
+  "counties": [
+   "53005"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-220/latest.zip": {
+  "stop_times": 5955,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 92,
+  "counties": [
+   "06065",
+   "06071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2203/latest.zip": {
+  "stop_times": 212,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 22,
+  "counties": [
+   "06067",
+   "06077",
+   "06095",
+   "06113"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2204/latest.zip": {
+  "stop_times": 7547,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 238,
+  "counties": [
+   "06019",
+   "06031",
+   "06107"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2205/latest.zip": {
+  "stop_times": 1008,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 41,
+  "counties": [
+   "41043"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2208/latest.zip": {
+  "stop_times": 170532,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 883,
+  "counties": [
+   "17143",
+   "17179"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2209/latest.zip": {
+  "stop_times": 196570,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1300,
+  "counties": [
+   "45063",
+   "45079",
+   "45085"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2224/latest.zip": {
+  "stop_times": 9347,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 41,
+  "counties": [
+   "06001",
+   "06013",
+   "06075"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2232/latest.zip": {
+  "stop_times": 10624,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 384,
+  "counties": [
+   "08101"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-224/latest.zip": {
+  "stop_times": 315,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 33,
+  "counties": [
+   "24037"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2240/latest.zip": {
+  "stop_times": 21570,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 610,
+  "counties": [
+   "09110",
+   "09180",
+   "36103",
+   "44009"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2242/latest.zip": {
+  "stop_times": 24501,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 253,
+  "counties": [
+   "09120",
+   "09140",
+   "09170",
+   "09190",
+   "36103",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2241/latest.zip": {
+  "stop_times": 182260,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 872,
+  "counties": [
+   "13089",
+   "13117",
+   "13121",
+   "13135",
+   "13139",
+   "13297"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2244/latest.zip": {
+  "stop_times": 7468,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 280,
+  "counties": [
+   "37025",
+   "37119",
+   "37159"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2245/latest.zip": {
+  "stop_times": 22861,
+  "untimed": 114,
+  "stops_only_untimed": 0,
+  "stops": 108,
+  "counties": [
+   "37101",
+   "37183"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2246/latest.zip": {
+  "stop_times": 30632,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 728,
+  "counties": [
+   "55059",
+   "55101"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2255/latest.zip": {
+  "stop_times": 7467,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 507,
+  "counties": [
+   "12069",
+   "12083",
+   "12095",
+   "12097",
+   "12105",
+   "12119",
+   "12127"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2256/latest.zip": {
+  "stop_times": 70079,
+  "untimed": 394,
+  "stops_only_untimed": 0,
+  "stops": 407,
+  "counties": [
+   "39035",
+   "39133",
+   "39153"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2258/latest.zip": {
+  "stop_times": 44981,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 928,
+  "counties": [
+   "12057",
+   "12081",
+   "12115"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2259/latest.zip": {
+  "stop_times": 18558,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 556,
+  "counties": [
+   "12021",
+   "12071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2262/latest.zip": {
+  "stop_times": 9495,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 241,
+  "counties": [
+   "42003",
+   "42007",
+   "42125"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2261/latest.zip": {
+  "stop_times": 152547,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2064,
+  "counties": [
+   "31055",
+   "31153"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2266/latest.zip": {
+  "stop_times": 23260,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 746,
+  "counties": [
+   "18003"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2265/latest.zip": {
+  "stop_times": 274866,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2850,
+  "counties": [
+   "37025",
+   "37071",
+   "37097",
+   "37119",
+   "37179",
+   "45057",
+   "45091"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2267/latest.zip": {
+  "stop_times": 41076,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 458,
+  "counties": [
+   "17113"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2268/latest.zip": {
+  "stop_times": 2636,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 105,
+  "counties": [
+   "24017",
+   "24037"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2269/latest.zip": {
+  "stop_times": 39625,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 814,
+  "counties": [
+   "31109"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2272/latest.zip": {
+  "stop_times": 12595,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 290,
+  "counties": [
+   "06079",
+   "06083"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2277/latest.zip": {
+  "stop_times": 34686,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 303,
+  "counties": [
+   "37101",
+   "37183"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2273/latest.zip": {
+  "stop_times": 186784,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 901,
+  "counties": [
+   "06001",
+   "06013",
+   "06019",
+   "06047",
+   "06077",
+   "06099"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2280/latest.zip": {
+  "stop_times": 2024,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 41,
+  "counties": [
+   "08001",
+   "08005",
+   "08031",
+   "08035",
+   "08041",
+   "08059",
+   "08069",
+   "08077",
+   "08123"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2283/latest.zip": {
+  "stop_times": 14936,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 276,
+  "counties": [
+   "41043"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2285/latest.zip": {
+  "stop_times": 8843,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 166,
+  "counties": [
+   "24003"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2286/latest.zip": {
+  "stop_times": 2275,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 34,
+  "counties": [
+   "24021",
+   "24043",
+   "42055",
+   "54003"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-229/latest.zip": {
+  "stop_times": 125,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 23,
+  "counties": [
+   "04003"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2287/latest.zip": {
+  "stop_times": 67422,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1203,
+  "counties": [
+   "26049",
+   "26093",
+   "26125",
+   "26145"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2299/latest.zip": {
+  "stop_times": 179,
+  "untimed": 108,
+  "stops_only_untimed": 3,
+  "stops": 7,
+  "counties": [
+   "25005",
+   "25009",
+   "25017",
+   "25021",
+   "25023",
+   "25025"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-23/latest.zip": {
+  "stop_times": 1038,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 144,
+  "counties": [
+   "41039",
+   "41043"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2303/latest.zip": {
+  "stop_times": 8977,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 567,
+  "counties": [
+   "20045",
+   "20091",
+   "20209",
+   "29047",
+   "29095"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2309/latest.zip": {
+  "stop_times": 3290,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 204,
+  "counties": [
+   "53025",
+   "53077"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2312/latest.zip": {
+  "stop_times": 7301,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 28,
+  "counties": [
+   "34003",
+   "34031",
+   "36071",
+   "36087",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2315/latest.zip": {
+  "stop_times": 299,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 21,
+  "counties": [
+   "06111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2316/latest.zip": {
+  "stop_times": 793,
+  "untimed": 8,
+  "stops_only_untimed": 0,
+  "stops": 74,
+  "counties": [
+   "08001",
+   "08031",
+   "08069",
+   "08123",
+   "56021"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2320/latest.zip": {
+  "stop_times": 548,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 50,
+  "counties": [
+   "53073"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2322/latest.zip": {
+  "stop_times": 13402,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 196,
+  "counties": [
+   "12086"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2323/latest.zip": {
+  "stop_times": 1734,
+  "untimed": 1208,
+  "stops_only_untimed": 86,
+  "stops": 117,
+  "counties": [
+   "12011",
+   "12086"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2326/latest.zip": {
+  "stop_times": 1522,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 58,
+  "counties": [
+   "53033",
+   "53053"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2325/latest.zip": {
+  "stop_times": 204,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 16,
+  "counties": [
+   "53063"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2328/latest.zip": {
+  "stop_times": 396,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 48,
+  "counties": [
+   "06057",
+   "06061",
+   "32031"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-233/latest.zip": {
+  "stop_times": 500,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 29,
+  "counties": [
+   "36065"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2331/latest.zip": {
+  "stop_times": 199,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 33,
+  "counties": [
+   "53077"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2346/latest.zip": {
+  "stop_times": 338,
+  "untimed": 3,
+  "stops_only_untimed": 2,
+  "stops": 103,
+  "counties": [
+   "04017"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-235/latest.zip": {
+  "stop_times": 1377,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 158,
+  "counties": [
+   "51041"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2347/latest.zip": {
+  "stop_times": 734839,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 13765,
+  "counties": [
+   "17031",
+   "17043",
+   "17089",
+   "17093",
+   "17097",
+   "17111",
+   "17197",
+   "18089"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2351/latest.zip": {
+  "stop_times": 729171,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 3785,
+  "counties": [
+   "32003"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2361/latest.zip": {
+  "stop_times": 37,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 37,
+  "counties": [
+   "06065"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-238/latest.zip": {
+  "stop_times": 334,
+  "untimed": 110,
+  "stops_only_untimed": 9,
+  "stops": 22,
+  "counties": [
+   "47163"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2354/latest.zip": {
+  "stop_times": 165825,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2177,
+  "counties": [
+   "04019"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2394/latest.zip": {
+  "stop_times": 554,
+  "untimed": 70,
+  "stops_only_untimed": 0,
+  "stops": 65,
+  "counties": [
+   "06019",
+   "06039",
+   "06043",
+   "06047",
+   "06051",
+   "06099",
+   "06109"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2395/latest.zip": {
+  "stop_times": 11357,
+  "untimed": 8494,
+  "stops_only_untimed": 65,
+  "stops": 148,
+  "counties": [
+   "08013"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2413/latest.zip": {
+  "stop_times": 2905,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 30,
+  "counties": [
+   "08059"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2414/latest.zip": {
+  "stop_times": 7297,
+  "untimed": 188,
+  "stops_only_untimed": 6,
+  "stops": 278,
+  "counties": [
+   "19013"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2418/latest.zip": {
+  "stop_times": 619,
+  "untimed": 420,
+  "stops_only_untimed": 36,
+  "stops": 55,
+  "counties": [
+   "53005"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2419/latest.zip": {
+  "stop_times": 2185,
+  "untimed": 2033,
+  "stops_only_untimed": 107,
+  "stops": 115,
+  "counties": [
+   "01055"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2420/latest.zip": {
+  "stop_times": 761,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 68,
+  "counties": [
+   "47119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2416/latest.zip": {
+  "stop_times": 397662,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1973,
+  "counties": [
+   "09110",
+   "25003",
+   "25013",
+   "25015",
+   "25027"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2421/latest.zip": {
+  "stop_times": 42109,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1214,
+  "counties": [
+   "06001",
+   "06013",
+   "06067",
+   "06095"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2432/latest.zip": {
+  "stop_times": 16031,
+  "untimed": 11351,
+  "stops_only_untimed": 222,
+  "stops": 355,
+  "counties": [
+   "24013",
+   "24021",
+   "24031",
+   "24043",
+   "42001",
+   "51107"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-245/latest.zip": {
+  "stop_times": 305,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 71,
+  "counties": [
+   "53005",
+   "53025",
+   "53033",
+   "53035",
+   "53061",
+   "53063",
+   "53077"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2425/latest.zip": {
+  "stop_times": 235038,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 759,
+  "counties": [
+   "06053",
+   "06081",
+   "06085",
+   "06087"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2456/latest.zip": {
+  "stop_times": 2073,
+  "untimed": 36,
+  "stops_only_untimed": 0,
+  "stops": 80,
+  "counties": [
+   "53077"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-246/latest.zip": {
+  "stop_times": 1551,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 153,
+  "counties": [
+   "41051",
+   "41067",
+   "41071",
+   "53011"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2455/latest.zip": {
+  "stop_times": 639131,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 4692,
+  "counties": [
+   "06001",
+   "06013",
+   "06041",
+   "06075",
+   "06081",
+   "06085"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-25/latest.zip": {
+  "stop_times": 47002,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 157,
+  "counties": [
+   "06019",
+   "06027",
+   "06051",
+   "06107"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-250/latest.zip": {
+  "stop_times": 2083,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 178,
+  "counties": [
+   "41005",
+   "41047",
+   "41051",
+   "41067",
+   "41071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-251/latest.zip": {
+  "stop_times": 1444,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 58,
+  "counties": [
+   "41005",
+   "41047",
+   "41071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-252/latest.zip": {
+  "stop_times": 2196,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 48,
+  "counties": [
+   "41005",
+   "41047",
+   "41071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-253/latest.zip": {
+  "stop_times": 6391,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 138,
+  "counties": [
+   "41005",
+   "41051",
+   "41067",
+   "53011"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-255/latest.zip": {
+  "stop_times": 552,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 38,
+  "counties": [
+   "41051",
+   "53011"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-258/latest.zip": {
+  "stop_times": 117667,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 897,
+  "counties": [
+   "41051",
+   "53011",
+   "53015"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-259/latest.zip": {
+  "stop_times": 12086,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 225,
+  "counties": [
+   "41051",
+   "53011",
+   "53015"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-260/latest.zip": {
+  "stop_times": 644,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 25,
+  "counties": [
+   "41051",
+   "53011"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-261/latest.zip": {
+  "stop_times": 3885,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 161,
+  "counties": [
+   "41005",
+   "41047",
+   "41051"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2611/latest.zip": {
+  "stop_times": 1863,
+  "untimed": 54,
+  "stops_only_untimed": 7,
+  "stops": 146,
+  "counties": [
+   "36045",
+   "36089"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2616/latest.zip": {
+  "stop_times": 362,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 12,
+  "counties": [
+   "08001",
+   "08031"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-262/latest.zip": {
+  "stop_times": 109,
+  "untimed": 8,
+  "stops_only_untimed": 0,
+  "stops": 12,
+  "counties": [
+   "41051",
+   "53011"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-263/latest.zip": {
+  "stop_times": 10608,
+  "untimed": 2940,
+  "stops_only_untimed": 16,
+  "stops": 344,
+  "counties": [
+   "53067"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2634/latest.zip": {
+  "stop_times": 15019,
+  "untimed": 1346,
+  "stops_only_untimed": 2,
+  "stops": 652,
+  "counties": [
+   "48135",
+   "48329"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-264/latest.zip": {
+  "stop_times": 1692,
+  "untimed": 590,
+  "stops_only_untimed": 31,
+  "stops": 66,
+  "counties": [
+   "53035",
+   "53053",
+   "53067"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2642/latest.zip": {
+  "stop_times": 108579,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 718,
+  "counties": [
+   "23001",
+   "23005",
+   "23031"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2649/latest.zip": {
+  "stop_times": 36984,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 304,
+  "counties": [
+   "51700"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-265/latest.zip": {
+  "stop_times": 296654,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1974,
+  "counties": [
+   "53033",
+   "53035",
+   "53053",
+   "53067"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-247/latest.zip": {
+  "stop_times": 3107024,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 5747,
+  "counties": [
+   "41005",
+   "41047",
+   "41051",
+   "41067",
+   "41071",
+   "53011"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2650/latest.zip": {
+  "stop_times": 333,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 38,
+  "counties": [
+   "36091",
+   "36093"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2652/latest.zip": {
+  "stop_times": 21444,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 609,
+  "counties": [
+   "28049",
+   "28089",
+   "28121"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2662/latest.zip": {
+  "stop_times": 327835,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1370,
+  "counties": [
+   "18019",
+   "21111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-266/latest.zip": {
+  "stop_times": 446468,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1118,
+  "counties": [
+   "53033",
+   "53053",
+   "53067"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2706/latest.zip": {
+  "stop_times": 6523,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 167,
+  "counties": [
+   "41005",
+   "41047",
+   "41051",
+   "41067",
+   "41071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2708/latest.zip": {
+  "stop_times": 321197,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1853,
+  "counties": [
+   "06001",
+   "06013",
+   "06041",
+   "06075",
+   "06081",
+   "06085"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2709/latest.zip": {
+  "stop_times": 1127,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 73,
+  "counties": [
+   "06023",
+   "06089",
+   "06105"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-271/latest.zip": {
+  "stop_times": 344,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 62,
+  "counties": [
+   "53005",
+   "53025",
+   "53077"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2739/latest.zip": {
+  "stop_times": 3892,
+  "untimed": 2388,
+  "stops_only_untimed": 59,
+  "stops": 175,
+  "counties": [
+   "41005",
+   "41047",
+   "41051"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2740/latest.zip": {
+  "stop_times": 1329,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 98,
+  "counties": [
+   "41005",
+   "41047",
+   "41051"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-267/latest.zip": {
+  "stop_times": 1095283,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 6247,
+  "counties": [
+   "53033",
+   "53035",
+   "53053",
+   "53061"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-276/latest.zip": {
+  "stop_times": 20341,
+  "untimed": 17910,
+  "stops_only_untimed": 503,
+  "stops": 569,
+  "counties": [
+   "53077"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-277/latest.zip": {
+  "stop_times": 690,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 14,
+  "counties": [
+   "53077"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-278/latest.zip": {
+  "stop_times": 768,
+  "untimed": 494,
+  "stops_only_untimed": 19,
+  "stops": 32,
+  "counties": [
+   "53077"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-280/latest.zip": {
+  "stop_times": 12291,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 447,
+  "counties": [
+   "53035",
+   "53057",
+   "53061"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-284/latest.zip": {
+  "stop_times": 79015,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 878,
+  "counties": [
+   "53073"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2855/latest.zip": {
+  "stop_times": 2299,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 108,
+  "counties": [
+   "04015",
+   "32003"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2840/latest.zip": {
+  "stop_times": 341,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 9,
+  "counties": [
+   "09130",
+   "09140",
+   "09170",
+   "09180",
+   "36103"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2856/latest.zip": {
+  "stop_times": 660,
+  "untimed": 2,
+  "stops_only_untimed": 0,
+  "stops": 37,
+  "counties": [
+   "04013",
+   "04021"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2857/latest.zip": {
+  "stop_times": 620,
+  "untimed": 501,
+  "stops_only_untimed": 27,
+  "stops": 35,
+  "counties": [
+   "04003"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2859/latest.zip": {
+  "stop_times": 2582,
+  "untimed": 1239,
+  "stops_only_untimed": 1,
+  "stops": 91,
+  "counties": [
+   "27037"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2860/latest.zip": {
+  "stop_times": 497,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 26,
+  "counties": [
+   "04021"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2863/latest.zip": {
+  "stop_times": 629,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 53,
+  "counties": [
+   "04017"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2864/latest.zip": {
+  "stop_times": 523,
+  "untimed": 25,
+  "stops_only_untimed": 1,
+  "stops": 47,
+  "counties": [
+   "04003"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2861/latest.zip": {
+  "stop_times": 105452,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 291,
+  "counties": [
+   "48167"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2881/latest.zip": {
+  "stop_times": 1085,
+  "untimed": 482,
+  "stops_only_untimed": 29,
+  "stops": 57,
+  "counties": [
+   "36045"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2883/latest.zip": {
+  "stop_times": 1913,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 58,
+  "counties": [
+   "06081",
+   "06085"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2885/latest.zip": {
+  "stop_times": 11996,
+  "untimed": 240,
+  "stops_only_untimed": 0,
+  "stops": 200,
+  "counties": [
+   "51059",
+   "51107",
+   "51153"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-287/latest.zip": {
+  "stop_times": 276099,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1713,
+  "counties": [
+   "53033",
+   "53057",
+   "53061"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2894/latest.zip": {
+  "stop_times": 444,
+  "untimed": 360,
+  "stops_only_untimed": 150,
+  "stops": 175,
+  "counties": [
+   "06019",
+   "06039"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2886/latest.zip": {
+  "stop_times": 1651007,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2976,
+  "counties": [
+   "06001",
+   "06013",
+   "06041",
+   "06075",
+   "06081"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-290/latest.zip": {
+  "stop_times": 198246,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1669,
+  "counties": [
+   "53063"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-292/latest.zip": {
+  "stop_times": 21133,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 334,
+  "counties": [
+   "30063"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2937/latest.zip": {
+  "stop_times": 39380,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 543,
+  "counties": [
+   "06013",
+   "06041",
+   "06075",
+   "06097"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2947/latest.zip": {
+  "stop_times": 9751,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 152,
+  "counties": [
+   "06041",
+   "06055",
+   "06097"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-2948/latest.zip": {
+  "stop_times": 21276,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 400,
+  "counties": [
+   "06055",
+   "06097"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-295/latest.zip": {
+  "stop_times": 4215,
+  "untimed": 3376,
+  "stops_only_untimed": 138,
+  "stops": 162,
+  "counties": [
+   "30031"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-29/latest.zip": {
+  "stop_times": 2106179,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 11892,
+  "counties": [
+   "06111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-301/latest.zip": {
+  "stop_times": 164667,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 777,
+  "counties": [
+   "27137"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3031/latest.zip": {
+  "stop_times": 6041,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 256,
+  "counties": [
+   "06089",
+   "06103"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3033/latest.zip": {
+  "stop_times": 279,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 6,
+  "counties": [
+   "25009",
+   "25017",
+   "25021",
+   "25023",
+   "25025",
+   "33011",
+   "33015"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3032/latest.zip": {
+  "stop_times": 13850,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 336,
+  "counties": [
+   "06023"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3037/latest.zip": {
+  "stop_times": 150,
+  "untimed": 122,
+  "stops_only_untimed": 1,
+  "stops": 10,
+  "counties": [
+   "41051",
+   "41067",
+   "53011",
+   "53015"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3038/latest.zip": {
+  "stop_times": 37862,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 496,
+  "counties": [
+   "53061"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-304/latest.zip": {
+  "stop_times": 1122,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 85,
+  "counties": [
+   "36013",
+   "36029"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-308/latest.zip": {
+  "stop_times": 94205,
+  "untimed": 71394,
+  "stops_only_untimed": 154,
+  "stops": 209,
+  "counties": [
+   "17037",
+   "17089"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-309/latest.zip": {
+  "stop_times": 895,
+  "untimed": 671,
+  "stops_only_untimed": 27,
+  "stops": 35,
+  "counties": [
+   "08041"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3094/latest.zip": {
+  "stop_times": 661,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 62,
+  "counties": [
+   "06007",
+   "06021"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3096/latest.zip": {
+  "stop_times": 2505,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 100,
+  "counties": [
+   "06083",
+   "06111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3099/latest.zip": {
+  "stop_times": 5206,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 265,
+  "counties": [
+   "06001",
+   "06077",
+   "06099"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-307/latest.zip": {
+  "stop_times": 674436,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 3495,
+  "counties": [
+   "21015",
+   "21117",
+   "39017",
+   "39025",
+   "39061",
+   "39165"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3100/latest.zip": {
+  "stop_times": 3832,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 118,
+  "counties": [
+   "06083",
+   "06111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3114/latest.zip": {
+  "stop_times": 1102,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 46,
+  "counties": [
+   "36055",
+   "36069"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3115/latest.zip": {
+  "stop_times": 139539,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2224,
+  "counties": [
+   "09130",
+   "36059",
+   "36103"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3116/latest.zip": {
+  "stop_times": 704,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 53,
+  "counties": [
+   "25003",
+   "36001",
+   "36027",
+   "36083"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3117/latest.zip": {
+  "stop_times": 13020,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 363,
+  "counties": [
+   "06019",
+   "06039",
+   "06043",
+   "06047",
+   "06099"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-312/latest.zip": {
+  "stop_times": 1200,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 82,
+  "counties": [
+   "41005",
+   "41047",
+   "41051"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3130/latest.zip": {
+  "stop_times": 543,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 37,
+  "counties": [
+   "10003",
+   "42029",
+   "42045",
+   "42071",
+   "42091"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3149/latest.zip": {
+  "stop_times": 1478,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 71,
+  "counties": [
+   "10005",
+   "24045"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-316/latest.zip": {
+  "stop_times": 199,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 8,
+  "counties": [
+   "19103",
+   "19113"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3178/latest.zip": {
+  "stop_times": 1920,
+  "untimed": 752,
+  "stops_only_untimed": 34,
+  "stops": 108,
+  "counties": [
+   "10003",
+   "24015",
+   "24025"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3183/latest.zip": {
+  "stop_times": 43493,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 496,
+  "counties": [
+   "37001",
+   "37063",
+   "37101",
+   "37135",
+   "37183"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3187/latest.zip": {
+  "stop_times": 115463,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1026,
+  "counties": [
+   "17167"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3193/latest.zip": {
+  "stop_times": 45893,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 625,
+  "counties": [
+   "13067",
+   "13097",
+   "13121"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-320/latest.zip": {
+  "stop_times": 1088,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 61,
+  "counties": [
+   "06029",
+   "06107"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3219/latest.zip": {
+  "stop_times": 8170,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 292,
+  "counties": [
+   "41029"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3206/latest.zip": {
+  "stop_times": 35476,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 156,
+  "counties": [
+   "06019",
+   "06027",
+   "06039",
+   "06051"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-324/latest.zip": {
+  "stop_times": 105216,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1550,
+  "counties": [
+   "12021",
+   "12071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-325/latest.zip": {
+  "stop_times": 195934,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2232,
+  "counties": [
+   "12057",
+   "12101",
+   "12103"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-329/latest.zip": {
+  "stop_times": 521,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 125,
+  "counties": [
+   "12057"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-326/latest.zip": {
+  "stop_times": 568014,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 3985,
+  "counties": [
+   "12057",
+   "12101",
+   "12103"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-332/latest.zip": {
+  "stop_times": 319565,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2696,
+  "counties": [
+   "12011",
+   "12085",
+   "12099"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-331/latest.zip": {
+  "stop_times": 918916,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 6885,
+  "counties": [
+   "12011",
+   "12086"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-337/latest.zip": {
+  "stop_times": 5133,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 242,
+  "counties": [
+   "12005"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-338/latest.zip": {
+  "stop_times": 36266,
+  "untimed": 31284,
+  "stops_only_untimed": 592,
+  "stops": 680,
+  "counties": [
+   "01101"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3392/latest.zip": {
+  "stop_times": 293,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 48,
+  "counties": [
+   "36045",
+   "36075",
+   "36089"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3419/latest.zip": {
+  "stop_times": 4746,
+  "untimed": 3508,
+  "stops_only_untimed": 162,
+  "stops": 209,
+  "counties": [
+   "35013",
+   "48141"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3432/latest.zip": {
+  "stop_times": 14152,
+  "untimed": 11959,
+  "stops_only_untimed": 525,
+  "stops": 593,
+  "counties": [
+   "25009",
+   "25017",
+   "33011",
+   "33013",
+   "33015"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3434/latest.zip": {
+  "stop_times": 37194,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 951,
+  "counties": [
+   "01073",
+   "01117"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3460/latest.zip": {
+  "stop_times": 7388,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 218,
+  "counties": [
+   "34041",
+   "42069",
+   "42089",
+   "42095"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3474/latest.zip": {
+  "stop_times": 117713,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1055,
+  "counties": [
+   "47065"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-347/latest.zip": {
+  "stop_times": 359274,
+  "untimed": 321819,
+  "stops_only_untimed": 3423,
+  "stops": 3687,
+  "counties": [
+   "12069",
+   "12095",
+   "12097",
+   "12105",
+   "12117",
+   "12127"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-348/latest.zip": {
+  "stop_times": 31988,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1057,
+  "counties": [
+   "12009",
+   "12095",
+   "12127"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3479/latest.zip": {
+  "stop_times": 64197,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 946,
+  "counties": [
+   "37057",
+   "37067"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3492/latest.zip": {
+  "stop_times": 163,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 31,
+  "counties": [
+   "51003"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3493/latest.zip": {
+  "stop_times": 19815,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 315,
+  "counties": [
+   "51003"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3506/latest.zip": {
+  "stop_times": 112,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 35,
+  "counties": [
+   "51003",
+   "51700"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3512/latest.zip": {
+  "stop_times": 63488,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 719,
+  "counties": [
+   "47009",
+   "47093"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3518/latest.zip": {
+  "stop_times": 168482,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1596,
+  "counties": [
+   "51041",
+   "51085",
+   "51087",
+   "51760"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3519/latest.zip": {
+  "stop_times": 167568,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2266,
+  "counties": [
+   "20091",
+   "20209",
+   "29047",
+   "29095",
+   "29165"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3520/latest.zip": {
+  "stop_times": 236,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 30,
+  "counties": [
+   "36045",
+   "36065",
+   "36067",
+   "36075"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-352/latest.zip": {
+  "stop_times": 95350,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 862,
+  "counties": [
+   "45015",
+   "45019",
+   "45035"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3525/latest.zip": {
+  "stop_times": 11983,
+  "untimed": 9605,
+  "stops_only_untimed": 342,
+  "stops": 408,
+  "counties": [
+   "28047",
+   "28059"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3521/latest.zip": {
+  "stop_times": 172326,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 436,
+  "counties": [
+   "08013",
+   "08069",
+   "08123"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3532/latest.zip": {
+  "stop_times": 22410,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 334,
+  "counties": [
+   "53035"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3533/latest.zip": {
+  "stop_times": 16350,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 161,
+  "counties": [
+   "06079"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3536/latest.zip": {
+  "stop_times": 28815,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 416,
+  "counties": [
+   "37019",
+   "37129"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-360/latest.zip": {
+  "stop_times": 468693,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1607,
+  "counties": [
+   "47037",
+   "47149",
+   "47165",
+   "47187",
+   "47189"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-361/latest.zip": {
+  "stop_times": 5291,
+  "untimed": 4375,
+  "stops_only_untimed": 131,
+  "stops": 155,
+  "counties": [
+   "47037",
+   "47187"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-362/latest.zip": {
+  "stop_times": 2795,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 122,
+  "counties": [
+   "21067"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-3534/latest.zip": {
+  "stop_times": 869870,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 5000,
+  "counties": [
+   "12011",
+   "12086",
+   "12099"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-373/latest.zip": {
+  "stop_times": 2814,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 114,
+  "counties": [
+   "37001",
+   "37057",
+   "37067",
+   "37081",
+   "37135",
+   "37151"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-387/latest.zip": {
+  "stop_times": 1806,
+  "untimed": 939,
+  "stops_only_untimed": 72,
+  "stops": 111,
+  "counties": [
+   "18167"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-368/latest.zip": {
+  "stop_times": 2342902,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 6918,
+  "counties": [
+   "13057",
+   "13063",
+   "13067",
+   "13077",
+   "13089",
+   "13097",
+   "13113",
+   "13117",
+   "13121",
+   "13135",
+   "13151",
+   "13217"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-393/latest.zip": {
+  "stop_times": 8646,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 285,
+  "counties": [
+   "17201",
+   "55105"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-394/latest.zip": {
+  "stop_times": 603662,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1659,
+  "counties": [
+   "55025"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-397/latest.zip": {
+  "stop_times": 6803,
+  "untimed": 5342,
+  "stops_only_untimed": 206,
+  "stops": 251,
+  "counties": [
+   "55139"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-399/latest.zip": {
+  "stop_times": 19675,
+  "untimed": 11040,
+  "stops_only_untimed": 307,
+  "stops": 641,
+  "counties": [
+   "55117"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-40/latest.zip": {
+  "stop_times": 3654,
+  "untimed": 2982,
+  "stops_only_untimed": 119,
+  "stops": 143,
+  "counties": [
+   "06111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-400/latest.zip": {
+  "stop_times": 183527,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1518,
+  "counties": [
+   "26081",
+   "26139"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-402/latest.zip": {
+  "stop_times": 633644,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1367,
+  "counties": [
+   "26045",
+   "26065",
+   "26093"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-403/latest.zip": {
+  "stop_times": 286104,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2620,
+  "counties": [
+   "39023",
+   "39057",
+   "39109",
+   "39113",
+   "39165"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-404/latest.zip": {
+  "stop_times": 381220,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2977,
+  "counties": [
+   "39041",
+   "39045",
+   "39049",
+   "39089"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-389/latest.zip": {
+  "stop_times": 5787775,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 10683,
+  "counties": [
+   "17031",
+   "17197",
+   "18089"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-407/latest.zip": {
+  "stop_times": 1151,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 191,
+  "counties": [
+   "54061"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-409/latest.zip": {
+  "stop_times": 814091,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 6250,
+  "counties": [
+   "42003",
+   "42007",
+   "42019",
+   "42125",
+   "42129"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-406/latest.zip": {
+  "stop_times": 1853486,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 5450,
+  "counties": [
+   "39035",
+   "39085",
+   "39093",
+   "39103",
+   "39153"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-410/latest.zip": {
+  "stop_times": 34096,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 795,
+  "counties": [
+   "39035",
+   "39085"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-415/latest.zip": {
+  "stop_times": 106869,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1060,
+  "counties": [
+   "26161",
+   "26163"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-420/latest.zip": {
+  "stop_times": 2360,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 82,
+  "counties": [
+   "25001"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-414/latest.zip": {
+  "stop_times": 250610,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 5421,
+  "counties": [
+   "26099",
+   "26125",
+   "26147",
+   "26163"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-421/latest.zip": {
+  "stop_times": 121004,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1017,
+  "counties": [
+   "25001",
+   "25005",
+   "25023"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-422/latest.zip": {
+  "stop_times": 85809,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 790,
+  "counties": [
+   "25005",
+   "25017",
+   "25021",
+   "25023",
+   "25025"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-429/latest.zip": {
+  "stop_times": 3180,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 195,
+  "counties": [
+   "25013",
+   "25015",
+   "25027"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-43/latest.zip": {
+  "stop_times": 9695,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 340,
+  "counties": [
+   "06079",
+   "06083"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-433/latest.zip": {
+  "stop_times": 6127,
+  "untimed": 37,
+  "stops_only_untimed": 0,
+  "stops": 114,
+  "counties": [
+   "25015",
+   "25017",
+   "25027",
+   "33011"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-432/latest.zip": {
+  "stop_times": 223219,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1238,
+  "counties": [
+   "25017",
+   "25027"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-439/latest.zip": {
+  "stop_times": 7231,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 125,
+  "counties": [
+   "25017",
+   "25021",
+   "25027"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-441/latest.zip": {
+  "stop_times": 33511,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 59,
+  "counties": [
+   "25009",
+   "25017",
+   "25021",
+   "25023",
+   "25025"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-442/latest.zip": {
+  "stop_times": 17,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 5,
+  "counties": [
+   "25009",
+   "25017",
+   "25021",
+   "25025"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-443/latest.zip": {
+  "stop_times": 10,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 3,
+  "counties": [
+   "25017",
+   "25021",
+   "25023",
+   "25025"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-444/latest.zip": {
+  "stop_times": 28966,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 816,
+  "counties": [
+   "25009",
+   "25017",
+   "25027",
+   "33011"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-445/latest.zip": {
+  "stop_times": 62299,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 734,
+  "counties": [
+   "25009",
+   "25017",
+   "33011",
+   "33015"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-447/latest.zip": {
+  "stop_times": 3092,
+  "untimed": 251,
+  "stops_only_untimed": 17,
+  "stops": 141,
+  "counties": [
+   "25009"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-452/latest.zip": {
+  "stop_times": 114,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 7,
+  "counties": [
+   "23001",
+   "23005",
+   "23031"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-455/latest.zip": {
+  "stop_times": 146,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 29,
+  "counties": [
+   "08041"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-457/latest.zip": {
+  "stop_times": 14782,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 319,
+  "counties": [
+   "09190",
+   "36027",
+   "36071",
+   "36111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-46/latest.zip": {
+  "stop_times": 78120,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1053,
+  "counties": [
+   "06029"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-464/latest.zip": {
+  "stop_times": 480326,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 5110,
+  "counties": [
+   "26099",
+   "26125",
+   "26147",
+   "26163"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-437/latest.zip": {
+  "stop_times": 2486202,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 7098,
+  "counties": [
+   "25005",
+   "25009",
+   "25017",
+   "25021",
+   "25023",
+   "25025"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-467/latest.zip": {
+  "stop_times": 10924,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 487,
+  "counties": [
+   "11001",
+   "24003",
+   "24005",
+   "24015",
+   "24017",
+   "24021",
+   "24025",
+   "24027",
+   "24031",
+   "24033",
+   "24037",
+   "24043",
+   "24510",
+   "51013",
+   "51059",
+   "51107",
+   "51510"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-47/latest.zip": {
+  "stop_times": 2403,
+  "untimed": 1106,
+  "stops_only_untimed": 138,
+  "stops": 219,
+  "counties": [
+   "06029",
+   "06071",
+   "06079",
+   "06083",
+   "06107",
+   "06111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-466/latest.zip": {
+  "stop_times": 1383459,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 4056,
+  "counties": [
+   "24003",
+   "24005",
+   "24013",
+   "24025",
+   "24027",
+   "24031",
+   "24033",
+   "24510"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-473/latest.zip": {
+  "stop_times": 474361,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2656,
+  "counties": [
+   "51550",
+   "51650",
+   "51700",
+   "51710",
+   "51810"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-477/latest.zip": {
+  "stop_times": 93691,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1652,
+  "counties": [
+   "11001",
+   "24003",
+   "24017",
+   "24027",
+   "24031",
+   "24033",
+   "51013",
+   "51510"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-482/latest.zip": {
+  "stop_times": 64753,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 533,
+  "counties": [
+   "11001",
+   "24033",
+   "51013",
+   "51059",
+   "51510"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-485/latest.zip": {
+  "stop_times": 57310,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 570,
+  "counties": [
+   "11001",
+   "24031",
+   "24033",
+   "51013",
+   "51059",
+   "51510"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-483/latest.zip": {
+  "stop_times": 322257,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 3118,
+  "counties": [
+   "11001",
+   "24017",
+   "24031",
+   "24033",
+   "51013",
+   "51059",
+   "51107",
+   "51153",
+   "51510"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-489/latest.zip": {
+  "stop_times": 33756,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 645,
+  "counties": [
+   "11001",
+   "24003",
+   "24005",
+   "24027",
+   "24031",
+   "24033",
+   "24510"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-488/latest.zip": {
+  "stop_times": 710266,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 4580,
+  "counties": [
+   "11001",
+   "24003",
+   "24005",
+   "24021",
+   "24027",
+   "24031",
+   "24033",
+   "51013",
+   "51059",
+   "51107"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-508/latest.zip": {
+  "stop_times": 1776403,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 16563,
+  "counties": [
+   "10001",
+   "10003",
+   "34001",
+   "34003",
+   "34005",
+   "34007",
+   "34011",
+   "34013",
+   "34015",
+   "34017",
+   "34019",
+   "34021",
+   "34023",
+   "34025",
+   "34027",
+   "34029",
+   "34031",
+   "34035",
+   "34037",
+   "34039",
+   "34041",
+   "36005",
+   "36047",
+   "36061",
+   "36071",
+   "36081",
+   "36085",
+   "36087",
+   "36119",
+   "42017",
+   "42029",
+   "42045",
+   "42091",
+   "42095",
+   "42101"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-51/latest.zip": {
+  "stop_times": 888,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 19,
+  "counties": [
+   "06001",
+   "06013",
+   "06041",
+   "06075"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-502/latest.zip": {
+  "stop_times": 2561626,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 12866,
+  "counties": [
+   "10003",
+   "34005",
+   "34007",
+   "34015",
+   "34019",
+   "34021",
+   "42011",
+   "42017",
+   "42029",
+   "42045",
+   "42091",
+   "42101"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-510/latest.zip": {
+  "stop_times": 1077998,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2758,
+  "counties": [
+   "34003",
+   "34017",
+   "36005",
+   "36047",
+   "36059",
+   "36061",
+   "36081",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-513/latest.zip": {
+  "stop_times": 1174640,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1823,
+  "counties": [
+   "34003",
+   "34017",
+   "36005",
+   "36047",
+   "36061",
+   "36081",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-512/latest.zip": {
+  "stop_times": 2399470,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 4575,
+  "counties": [
+   "34003",
+   "34017",
+   "36005",
+   "36047",
+   "36059",
+   "36061",
+   "36081",
+   "36085"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-515/latest.zip": {
+  "stop_times": 403,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 25,
+  "counties": [
+   "36047",
+   "36059",
+   "36081"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-514/latest.zip": {
+  "stop_times": 805448,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1965,
+  "counties": [
+   "34003",
+   "34013",
+   "34017",
+   "34023",
+   "34025",
+   "34039",
+   "36047",
+   "36061",
+   "36081",
+   "36085"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-520/latest.zip": {
+  "stop_times": 817866,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1422,
+  "counties": [
+   "34003",
+   "34017",
+   "36005",
+   "36047",
+   "36059",
+   "36061",
+   "36081",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-526/latest.zip": {
+  "stop_times": 2489,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 135,
+  "counties": [
+   "36027",
+   "36071",
+   "36111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-521/latest.zip": {
+  "stop_times": 308895,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2484,
+  "counties": [
+   "36005",
+   "36047",
+   "36059",
+   "36081",
+   "36103",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-530/latest.zip": {
+  "stop_times": 81886,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1183,
+  "counties": [
+   "09120",
+   "09140",
+   "09170",
+   "09190",
+   "36103"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-533/latest.zip": {
+  "stop_times": 309832,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1883,
+  "counties": [
+   "36055",
+   "36069"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-534/latest.zip": {
+  "stop_times": 212989,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 5546,
+  "counties": [
+   "36007",
+   "36065",
+   "36067",
+   "36075",
+   "36109"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-528/latest.zip": {
+  "stop_times": 1160917,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1890,
+  "counties": [
+   "34003",
+   "34017",
+   "36005",
+   "36059",
+   "36061",
+   "36081",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-537/latest.zip": {
+  "stop_times": 5002,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 171,
+  "counties": [
+   "25003",
+   "25015",
+   "36083"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-535/latest.zip": {
+  "stop_times": 92332,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 628,
+  "counties": [
+   "36109"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-539/latest.zip": {
+  "stop_times": 1473,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 79,
+  "counties": [
+   "25003",
+   "36083"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-551/latest.zip": {
+  "stop_times": 46639,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 801,
+  "counties": [
+   "09110",
+   "09130",
+   "09170",
+   "09180",
+   "36103"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-538/latest.zip": {
+  "stop_times": 487306,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2924,
+  "counties": [
+   "36001",
+   "36083",
+   "36091",
+   "36093"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-556/latest.zip": {
+  "stop_times": 666,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 9,
+  "counties": [
+   "25001",
+   "25009",
+   "25017",
+   "25021",
+   "25023",
+   "25025"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-559/latest.zip": {
+  "stop_times": 17280,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 355,
+  "counties": [
+   "19103"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-56/latest.zip": {
+  "stop_times": 71053,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 961,
+  "counties": [
+   "06053",
+   "06069",
+   "06085",
+   "06087"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-566/latest.zip": {
+  "stop_times": 1164,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 115,
+  "counties": [
+   "36045",
+   "36065",
+   "36089"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-553/latest.zip": {
+  "stop_times": 736288,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 9611,
+  "counties": [
+   "09110",
+   "09120",
+   "09130",
+   "09140",
+   "09160",
+   "09170",
+   "09180",
+   "09190",
+   "25013",
+   "36059",
+   "36103",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-569/latest.zip": {
+  "stop_times": 16588,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 578,
+  "counties": [
+   "48303"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-571/latest.zip": {
+  "stop_times": 12042,
+  "untimed": 60,
+  "stops_only_untimed": 2,
+  "stops": 398,
+  "counties": [
+   "18039"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-572/latest.zip": {
+  "stop_times": 254,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 35,
+  "counties": [
+   "06019",
+   "06039",
+   "06043",
+   "06047"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-573/latest.zip": {
+  "stop_times": 174,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 38,
+  "counties": [
+   "36065"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-578/latest.zip": {
+  "stop_times": 434,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 34,
+  "counties": [
+   "06111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-57/latest.zip": {
+  "stop_times": 361735,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 3108,
+  "counties": [
+   "06001",
+   "06069",
+   "06081",
+   "06085",
+   "06087"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-58/latest.zip": {
+  "stop_times": 365,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 33,
+  "counties": [
+   "06053",
+   "06069",
+   "06085",
+   "06087"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-579/latest.zip": {
+  "stop_times": 3886,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 171,
+  "counties": [
+   "06065",
+   "06071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-583/latest.zip": {
+  "stop_times": 703,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 32,
+  "counties": [
+   "04015",
+   "06071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-589/latest.zip": {
+  "stop_times": 184,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 41,
+  "counties": [
+   "36007"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-59/latest.zip": {
+  "stop_times": 9146,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 183,
+  "counties": [
+   "06001",
+   "06081",
+   "06085"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-591/latest.zip": {
+  "stop_times": 5467,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 331,
+  "counties": [
+   "51041",
+   "51087",
+   "51760"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-599/latest.zip": {
+  "stop_times": 5964,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 190,
+  "counties": [
+   "06095",
+   "06113"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-61/latest.zip": {
+  "stop_times": 2603,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 235,
+  "counties": [
+   "06001",
+   "06013",
+   "06075",
+   "06081",
+   "06085"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-613/latest.zip": {
+  "stop_times": 434,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 91,
+  "counties": [
+   "36001",
+   "36083",
+   "36111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-619/latest.zip": {
+  "stop_times": 5754,
+  "untimed": 84,
+  "stops_only_untimed": 1,
+  "stops": 117,
+  "counties": [
+   "06019",
+   "06047",
+   "06099"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-620/latest.zip": {
+  "stop_times": 3381,
+  "untimed": 2530,
+  "stops_only_untimed": 118,
+  "stops": 155,
+  "counties": [
+   "17031",
+   "18127"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-621/latest.zip": {
+  "stop_times": 3309,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 219,
+  "counties": [
+   "51003",
+   "51107"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-624/latest.zip": {
+  "stop_times": 211471,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 3553,
+  "counties": [
+   "25005",
+   "25021",
+   "25027",
+   "44003",
+   "44007",
+   "44009"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-629/latest.zip": {
+  "stop_times": 30860,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 532,
+  "counties": [
+   "50007"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-645/latest.zip": {
+  "stop_times": 10490,
+  "untimed": 193,
+  "stops_only_untimed": 9,
+  "stops": 153,
+  "counties": [
+   "25001",
+   "25023"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-64/latest.zip": {
+  "stop_times": 81031,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 665,
+  "counties": [
+   "06001",
+   "06013"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-65/latest.zip": {
+  "stop_times": 150,
+  "untimed": 105,
+  "stops_only_untimed": 29,
+  "stops": 41,
+  "counties": [
+   "06009",
+   "06077",
+   "06099"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-646/latest.zip": {
+  "stop_times": 21556,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 325,
+  "counties": [
+   "06019",
+   "06027",
+   "06107"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-67/latest.zip": {
+  "stop_times": 15072,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 246,
+  "counties": [
+   "06001",
+   "06013",
+   "06041",
+   "06055",
+   "06075",
+   "06097"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-68/latest.zip": {
+  "stop_times": 3046,
+  "untimed": 2070,
+  "stops_only_untimed": 201,
+  "stops": 276,
+  "counties": [
+   "06011",
+   "06033",
+   "06045",
+   "06055",
+   "06097"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-69/latest.zip": {
+  "stop_times": 2446,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 182,
+  "counties": [
+   "06045",
+   "06097"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-70/latest.zip": {
+  "stop_times": 25980,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1016,
+  "counties": [
+   "06033",
+   "06041",
+   "06045",
+   "06055",
+   "06097"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-74/latest.zip": {
+  "stop_times": 154,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 7,
+  "counties": [
+   "06001",
+   "06013",
+   "06041",
+   "06075"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-75/latest.zip": {
+  "stop_times": 5614,
+  "untimed": 1836,
+  "stops_only_untimed": 31,
+  "stops": 124,
+  "counties": [
+   "06005",
+   "06017",
+   "06061",
+   "06067",
+   "06113"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-76/latest.zip": {
+  "stop_times": 5360,
+  "untimed": 3671,
+  "stops_only_untimed": 94,
+  "stops": 120,
+  "counties": [
+   "06055",
+   "06095"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-77/latest.zip": {
+  "stop_times": 3444,
+  "untimed": 1231,
+  "stops_only_untimed": 26,
+  "stops": 134,
+  "counties": [
+   "06017",
+   "06057",
+   "06061",
+   "06067",
+   "06113",
+   "06115"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-79/latest.zip": {
+  "stop_times": 10866,
+  "untimed": 8362,
+  "stops_only_untimed": 218,
+  "stops": 287,
+  "counties": [
+   "06067",
+   "06101",
+   "06113",
+   "06115"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-78/latest.zip": {
+  "stop_times": 17902,
+  "untimed": 12191,
+  "stops_only_untimed": 147,
+  "stops": 219,
+  "counties": [
+   "06001",
+   "06013",
+   "06041",
+   "06075",
+   "06095"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-804/latest.zip": {
+  "stop_times": 74,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 16,
+  "counties": [
+   "36001",
+   "36083",
+   "36091"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-80/latest.zip": {
+  "stop_times": 91259,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 307,
+  "counties": [
+   "06001",
+   "06013",
+   "06041",
+   "06055",
+   "06067",
+   "06075",
+   "06095",
+   "06113"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-812/latest.zip": {
+  "stop_times": 33523,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 364,
+  "counties": [
+   "06111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-813/latest.zip": {
+  "stop_times": 834,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 35,
+  "counties": [
+   "06083"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-816/latest.zip": {
+  "stop_times": 294,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 25,
+  "counties": [
+   "53033",
+   "53053"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-822/latest.zip": {
+  "stop_times": 242,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 20,
+  "counties": [
+   "53053",
+   "53067"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-82/latest.zip": {
+  "stop_times": 85628,
+  "untimed": 54286,
+  "stops_only_untimed": 187,
+  "stops": 277,
+  "counties": [
+   "06067",
+   "06095",
+   "06113"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-824/latest.zip": {
+  "stop_times": 47,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 12,
+  "counties": [
+   "36055",
+   "36069",
+   "42069",
+   "42079"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-83/latest.zip": {
+  "stop_times": 823,
+  "untimed": 378,
+  "stops_only_untimed": 108,
+  "stops": 194,
+  "counties": [
+   "06067",
+   "06077",
+   "06099"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-838/latest.zip": {
+  "stop_times": 5093,
+  "untimed": 2866,
+  "stops_only_untimed": 152,
+  "stops": 240,
+  "counties": [
+   "53033",
+   "53035"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-830/latest.zip": {
+  "stop_times": 43211,
+  "untimed": 38362,
+  "stops_only_untimed": 493,
+  "stops": 556,
+  "counties": [
+   "55073"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-839/latest.zip": {
+  "stop_times": 15703,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 434,
+  "counties": [
+   "35049"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-84/latest.zip": {
+  "stop_times": 4430,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 223,
+  "counties": [
+   "06007",
+   "06017",
+   "06057",
+   "06061",
+   "06091",
+   "06115"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-85/latest.zip": {
+  "stop_times": 283,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 83,
+  "counties": [
+   "06019",
+   "06031",
+   "06039",
+   "06047",
+   "06053",
+   "06107"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-875/latest.zip": {
+  "stop_times": 277,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 81,
+  "counties": [
+   "36069"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-852/latest.zip": {
+  "stop_times": 7124,
+  "untimed": 913,
+  "stops_only_untimed": 60,
+  "stops": 385,
+  "counties": [
+   "50007"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-883/latest.zip": {
+  "stop_times": 2497,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 89,
+  "counties": [
+   "41005",
+   "41047"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-886/latest.zip": {
+  "stop_times": 41232,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 898,
+  "counties": [
+   "06001",
+   "06013",
+   "06067",
+   "06077",
+   "06099",
+   "06113"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-885/latest.zip": {
+  "stop_times": 189862,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1566,
+  "counties": [
+   "48113",
+   "48251",
+   "48439"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-897/latest.zip": {
+  "stop_times": 2409,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 123,
+  "counties": [
+   "06003",
+   "06017",
+   "06061",
+   "32031"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-903/latest.zip": {
+  "stop_times": 43456,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 647,
+  "counties": [
+   "37021",
+   "37089"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-90/latest.zip": {
+  "stop_times": 150183,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1480,
+  "counties": [
+   "06019",
+   "06039"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-905/latest.zip": {
+  "stop_times": 1755,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 386,
+  "counties": [
+   "36059",
+   "36103",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-91/latest.zip": {
+  "stop_times": 2576,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 102,
+  "counties": [
+   "06019",
+   "06039",
+   "06047"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-910/latest.zip": {
+  "stop_times": 319,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 26,
+  "counties": [
+   "09190",
+   "36027",
+   "36059",
+   "36071",
+   "36087",
+   "36111",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-911/latest.zip": {
+  "stop_times": 862,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 37,
+  "counties": [
+   "34003",
+   "36071",
+   "36087",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-916/latest.zip": {
+  "stop_times": 4735,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 99,
+  "counties": [
+   "36059",
+   "36081"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-92/latest.zip": {
+  "stop_times": 551,
+  "untimed": 83,
+  "stops_only_untimed": 5,
+  "stops": 65,
+  "counties": [
+   "06005",
+   "06009",
+   "06077",
+   "06109"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-923/latest.zip": {
+  "stop_times": 51249,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 358,
+  "counties": [
+   "19169"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-927/latest.zip": {
+  "stop_times": 718,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 98,
+  "counties": [
+   "36071",
+   "36111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-928/latest.zip": {
+  "stop_times": 3653,
+  "untimed": 23,
+  "stops_only_untimed": 0,
+  "stops": 180,
+  "counties": [
+   "09160",
+   "09190",
+   "36027",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-93/latest.zip": {
+  "stop_times": 287,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 20,
+  "counties": [
+   "06005",
+   "06009",
+   "06099",
+   "06109"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-932/latest.zip": {
+  "stop_times": 57,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 10,
+  "counties": [
+   "41039"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-94/latest.zip": {
+  "stop_times": 3606,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 196,
+  "counties": [
+   "06017",
+   "06057",
+   "06061",
+   "32031"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-97/latest.zip": {
+  "stop_times": 162327,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2276,
+  "counties": [
+   "06065",
+   "06071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-10004/latest.zip": {
+  "stop_times": 76353,
+  "untimed": 68821,
+  "stops_only_untimed": 611,
+  "stops": 815,
+  "counties": [
+   "25005",
+   "25017",
+   "25021",
+   "25023",
+   "25025"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-10107/latest.zip": {
+  "stop_times": 525,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 15,
+  "counties": [
+   "09120",
+   "09140",
+   "09170",
+   "36103"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-11152/latest.zip": {
+  "stop_times": 101,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 16,
+  "counties": [
+   "09180"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-20005/latest.zip": {
+  "stop_times": 2570,
+  "untimed": 65,
+  "stops_only_untimed": 3,
+  "stops": 85,
+  "counties": [
+   "36109"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/mdb-98/latest.zip": {
+  "stop_times": 720934,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2157,
+  "counties": [
+   "06065",
+   "06071",
+   "06073"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-20122/latest.zip": {
+  "stop_times": 4465,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 566,
+  "counties": [
+   "34003",
+   "34005",
+   "34017",
+   "34021",
+   "34023",
+   "34025",
+   "34029",
+   "34035",
+   "36047",
+   "36061",
+   "36081",
+   "36085",
+   "42017"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-20208/latest.zip": {
+  "stop_times": 356,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 27,
+  "counties": [
+   "34005",
+   "34007",
+   "34029",
+   "42017"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-20209/latest.zip": {
+  "stop_times": 818,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 115,
+  "counties": [
+   "34019",
+   "34023",
+   "34025",
+   "34027",
+   "34035",
+   "34039"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-20169/latest.zip": {
+  "stop_times": 434,
+  "untimed": 11,
+  "stops_only_untimed": 5,
+  "stops": 32,
+  "counties": [
+   "34003",
+   "34017",
+   "34019",
+   "34027",
+   "34041",
+   "36047",
+   "36061",
+   "36081",
+   "42011",
+   "42017",
+   "42077",
+   "42095"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-20950/latest.zip": {
+  "stop_times": 847,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 74,
+  "counties": [
+   "34027",
+   "34037",
+   "34041",
+   "36071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-22929/latest.zip": {
+  "stop_times": 1156,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 55,
+  "counties": [
+   "36013",
+   "36029"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-30054/latest.zip": {
+  "stop_times": 102895,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 331,
+  "counties": [
+   "42027"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-30116/latest.zip": {
+  "stop_times": 625,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 71,
+  "counties": [
+   "42107"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-30010/latest.zip": {
+  "stop_times": 232377,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2165,
+  "counties": [
+   "34019",
+   "34041",
+   "42011",
+   "42017",
+   "42077",
+   "42089",
+   "42095",
+   "42107"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-40024/latest.zip": {
+  "stop_times": 16215,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 939,
+  "counties": [
+   "01081",
+   "13215"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-40054/latest.zip": {
+  "stop_times": 9360,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 389,
+  "counties": [
+   "47163",
+   "47179"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-40055/latest.zip": {
+  "stop_times": 996,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 87,
+  "counties": [
+   "47163"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-40056/latest.zip": {
+  "stop_times": 7184,
+  "untimed": 25,
+  "stops_only_untimed": 1,
+  "stops": 733,
+  "counties": [
+   "37155",
+   "45041",
+   "45051",
+   "45057",
+   "45085"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-40080/latest.zip": {
+  "stop_times": 230,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 183,
+  "counties": [
+   "47163"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-40131/latest.zip": {
+  "stop_times": 1990,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 125,
+  "counties": [
+   "37057",
+   "37081",
+   "37151",
+   "37159"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-40104/latest.zip": {
+  "stop_times": 12751,
+  "untimed": 11762,
+  "stops_only_untimed": 449,
+  "stops": 474,
+  "counties": [
+   "12009",
+   "12061",
+   "12111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-40137/latest.zip": {
+  "stop_times": 1736,
+  "untimed": 1566,
+  "stops_only_untimed": 124,
+  "stops": 128,
+  "counties": [
+   "72021",
+   "72025",
+   "72127"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-40184/latest.zip": {
+  "stop_times": 2138,
+  "untimed": 33,
+  "stops_only_untimed": 0,
+  "stops": 167,
+  "counties": [
+   "21227"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-41136/latest.zip": {
+  "stop_times": 7161,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 158,
+  "counties": [
+   "47009",
+   "47093"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-40206/latest.zip": {
+  "stop_times": 1370,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 202,
+  "counties": [
+   "45015",
+   "45019",
+   "45035"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-50029/latest.zip": {
+  "stop_times": 2398,
+  "untimed": 13,
+  "stops_only_untimed": 2,
+  "stops": 86,
+  "counties": [
+   "26017",
+   "26145"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-50028/latest.zip": {
+  "stop_times": 42514,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 707,
+  "counties": [
+   "27141",
+   "27145"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-50163/latest.zip": {
+  "stop_times": 2575,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 159,
+  "counties": [
+   "39045",
+   "39089"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-50209/latest.zip": {
+  "stop_times": 1307,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 78,
+  "counties": [
+   "18063",
+   "18081",
+   "18097"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-50060/latest.zip": {
+  "stop_times": 201050,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1914,
+  "counties": [
+   "17019"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-60023/latest.zip": {
+  "stop_times": 2046,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 176,
+  "counties": [
+   "22019"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-60058/latest.zip": {
+  "stop_times": 618,
+  "untimed": 504,
+  "stops_only_untimed": 78,
+  "stops": 94,
+  "counties": [
+   "22051",
+   "22071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-60080/latest.zip": {
+  "stop_times": 3937,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 368,
+  "counties": [
+   "22109"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-60086/latest.zip": {
+  "stop_times": 5175,
+  "untimed": 62,
+  "stops_only_untimed": 5,
+  "stops": 379,
+  "counties": [
+   "05131"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-60099/latest.zip": {
+  "stop_times": 11156,
+  "untimed": 19,
+  "stops_only_untimed": 1,
+  "stops": 367,
+  "counties": [
+   "48215"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-60103/latest.zip": {
+  "stop_times": 436,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 22,
+  "counties": [
+   "48039",
+   "48157",
+   "48201"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-60032/latest.zip": {
+  "stop_times": 316424,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1796,
+  "counties": [
+   "22051",
+   "22071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-70016/latest.zip": {
+  "stop_times": 3372,
+  "untimed": 2525,
+  "stops_only_untimed": 178,
+  "stops": 222,
+  "counties": [
+   "29019"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-80028/latest.zip": {
+  "stop_times": 15881,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 296,
+  "counties": [
+   "49005"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-80003/latest.zip": {
+  "stop_times": 36840,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 654,
+  "counties": [
+   "38017"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-80188/latest.zip": {
+  "stop_times": 3942,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 71,
+  "counties": [
+   "16019"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-90091/latest.zip": {
+  "stop_times": 32699,
+  "untimed": 24085,
+  "stops_only_untimed": 373,
+  "stops": 511,
+  "counties": [
+   "06019",
+   "06039",
+   "06107"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-90163/latest.zip": {
+  "stop_times": 50707,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1237,
+  "counties": [
+   "06083",
+   "06111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-90208/latest.zip": {
+  "stop_times": 30402,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 483,
+  "counties": [
+   "06007",
+   "06021",
+   "06103",
+   "06115"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-91122/latest.zip": {
+  "stop_times": 3552,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 302,
+  "counties": [
+   "04019",
+   "04021"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/ntd-99419/latest.zip": {
+  "stop_times": 316,
+  "untimed": 111,
+  "stops_only_untimed": 10,
+  "stops": 28,
+  "counties": [
+   "04005",
+   "04025"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-1200/latest.zip": {
+  "stop_times": 242,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 17,
+  "counties": [
+   "36069"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-1201/latest.zip": {
+  "stop_times": 484,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 77,
+  "counties": [
+   "36055",
+   "36069"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-1256/latest.zip": {
+  "stop_times": 40545,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 734,
+  "counties": [
+   "06111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-1660_1/latest.zip": {
+  "stop_times": 17741,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 572,
+  "counties": [
+   "20177"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-1319/latest.zip": {
+  "stop_times": 40018,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 391,
+  "counties": [
+   "35043",
+   "35049"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-170/latest.zip": {
+  "stop_times": 7383,
+  "untimed": 10,
+  "stops_only_untimed": 0,
+  "stops": 255,
+  "counties": [
+   "41017"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-1716_1/latest.zip": {
+  "stop_times": 73652,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1453,
+  "counties": [
+   "26115",
+   "39095",
+   "39173"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-1717/latest.zip": {
+  "stop_times": 35609,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1019,
+  "counties": [
+   "39099",
+   "39155"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-223/latest.zip": {
+  "stop_times": 62339,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 720,
+  "counties": [
+   "24005",
+   "24025",
+   "24510",
+   "42001",
+   "42041",
+   "42043",
+   "42071",
+   "42133"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-2276/latest.zip": {
+  "stop_times": 4351,
+  "untimed": 2400,
+  "stops_only_untimed": 69,
+  "stops": 117,
+  "counties": [
+   "13059"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-235/latest.zip": {
+  "stop_times": 49413,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1191,
+  "counties": [
+   "40143"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-288_1/latest.zip": {
+  "stop_times": 31107,
+  "untimed": 476,
+  "stops_only_untimed": 2,
+  "stops": 130,
+  "counties": [
+   "24003",
+   "24005",
+   "24025",
+   "24510"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-3364/latest.zip": {
+  "stop_times": 11698,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 24,
+  "counties": [
+   "34003",
+   "34017",
+   "36005",
+   "36047",
+   "36061",
+   "36081"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-217/latest.zip": {
+  "stop_times": 705789,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 6004,
+  "counties": [
+   "48029",
+   "48091",
+   "48187"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-395/latest.zip": {
+  "stop_times": 122929,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1125,
+  "counties": [
+   "20173"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4129/latest.zip": {
+  "stop_times": 7750,
+  "untimed": 127,
+  "stops_only_untimed": 11,
+  "stops": 271,
+  "counties": [
+   "17031",
+   "17197",
+   "18089",
+   "18127"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4131/latest.zip": {
+  "stop_times": 30904,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 643,
+  "counties": [
+   "47125"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-401/latest.zip": {
+  "stop_times": 255052,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 3724,
+  "counties": [
+   "36013",
+   "36029",
+   "36063"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4134/latest.zip": {
+  "stop_times": 1786,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 139,
+  "counties": [
+   "42003",
+   "42125",
+   "42129"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4379/latest.zip": {
+  "stop_times": 183,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 61,
+  "counties": [
+   "34003",
+   "34013",
+   "34017",
+   "34039",
+   "36047",
+   "36061",
+   "36081",
+   "42027",
+   "42055",
+   "42081",
+   "42107"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4298/latest.zip": {
+  "stop_times": 59554,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1394,
+  "counties": [
+   "42001",
+   "42041",
+   "42043",
+   "42055",
+   "42071",
+   "42075",
+   "42133"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4380/latest.zip": {
+  "stop_times": 1528,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 50,
+  "counties": [
+   "34003",
+   "34017",
+   "34031",
+   "36047",
+   "36061",
+   "36071",
+   "36081",
+   "36087"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4385/latest.zip": {
+  "stop_times": 21422,
+  "untimed": 17580,
+  "stops_only_untimed": 450,
+  "stops": 575,
+  "counties": [
+   "09120",
+   "09160",
+   "09190",
+   "36027",
+   "36103",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4459/latest.zip": {
+  "stop_times": 1474,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 81,
+  "counties": [
+   "24043",
+   "51107",
+   "54003"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4465/latest.zip": {
+  "stop_times": 232,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 7,
+  "counties": [
+   "34003",
+   "36005",
+   "36081",
+   "36087",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4470/latest.zip": {
+  "stop_times": 8157,
+  "untimed": 6966,
+  "stops_only_untimed": 261,
+  "stops": 292,
+  "counties": [
+   "05007",
+   "05143"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4472/latest.zip": {
+  "stop_times": 6179,
+  "untimed": 4634,
+  "stops_only_untimed": 57,
+  "stops": 93,
+  "counties": [
+   "17031"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4506/latest.zip": {
+  "stop_times": 2128,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 94,
+  "counties": [
+   "12085",
+   "12099",
+   "12111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4473/latest.zip": {
+  "stop_times": 11913,
+  "untimed": 42,
+  "stops_only_untimed": 1,
+  "stops": 230,
+  "counties": [
+   "09110",
+   "09180"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4551/latest.zip": {
+  "stop_times": 12248,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 204,
+  "counties": [
+   "42027"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4548/latest.zip": {
+  "stop_times": 148397,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1260,
+  "counties": [
+   "42027",
+   "42081"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4553/latest.zip": {
+  "stop_times": 33798,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1423,
+  "counties": [
+   "42069",
+   "42079"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4555/latest.zip": {
+  "stop_times": 17774,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 687,
+  "counties": [
+   "42069",
+   "42079"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-461/latest.zip": {
+  "stop_times": 56924,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 574,
+  "counties": [
+   "06065",
+   "06071"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4659/latest.zip": {
+  "stop_times": 4064,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 203,
+  "counties": [
+   "42003",
+   "42007",
+   "42019",
+   "42125"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4661/latest.zip": {
+  "stop_times": 25610,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 292,
+  "counties": [
+   "42129"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4663/latest.zip": {
+  "stop_times": 3484,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 160,
+  "counties": [
+   "39155",
+   "42085"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4665/latest.zip": {
+  "stop_times": 3228,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 104,
+  "counties": [
+   "42079",
+   "42107"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4668/latest.zip": {
+  "stop_times": 10487,
+  "untimed": 8785,
+  "stops_only_untimed": 300,
+  "stops": 362,
+  "counties": [
+   "23031",
+   "33015",
+   "33017"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4688/latest.zip": {
+  "stop_times": 16116,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 360,
+  "counties": [
+   "42011",
+   "42107"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4669/latest.zip": {
+  "stop_times": 56789,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 502,
+  "counties": [
+   "42013",
+   "42021"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4756/latest.zip": {
+  "stop_times": 13119,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 232,
+  "counties": [
+   "23005",
+   "23031"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4777/latest.zip": {
+  "stop_times": 20017,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 509,
+  "counties": [
+   "13059"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-478_1/latest.zip": {
+  "stop_times": 335,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 68,
+  "counties": [
+   "13067",
+   "13089",
+   "13121"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4791/latest.zip": {
+  "stop_times": 1760,
+  "untimed": 20,
+  "stops_only_untimed": 1,
+  "stops": 82,
+  "counties": [
+   "16055"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4792/latest.zip": {
+  "stop_times": 538,
+  "untimed": 306,
+  "stops_only_untimed": 11,
+  "stops": 19,
+  "counties": [
+   "16055"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-4831/latest.zip": {
+  "stop_times": 4070,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 312,
+  "counties": [
+   "26121",
+   "26139"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-492/latest.zip": {
+  "stop_times": 580,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 4,
+  "counties": [
+   "12011"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-490/latest.zip": {
+  "stop_times": 53164,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 475,
+  "counties": [
+   "45007",
+   "45045",
+   "45077",
+   "45083"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5503/latest.zip": {
+  "stop_times": 29926,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 286,
+  "counties": [
+   "42003",
+   "42051",
+   "42125",
+   "42129"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5531/latest.zip": {
+  "stop_times": 2913,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 158,
+  "counties": [
+   "42011",
+   "42041",
+   "42043",
+   "42071",
+   "42075"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5537/latest.zip": {
+  "stop_times": 1145,
+  "untimed": 479,
+  "stops_only_untimed": 13,
+  "stops": 152,
+  "counties": [
+   "35001",
+   "35013",
+   "35043",
+   "35049",
+   "48141"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5551/latest.zip": {
+  "stop_times": 3886,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 153,
+  "counties": [
+   "13067",
+   "13097",
+   "13121",
+   "13223"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5579/latest.zip": {
+  "stop_times": 2664,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 106,
+  "counties": [
+   "53015",
+   "53053",
+   "53067"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5750/latest.zip": {
+  "stop_times": 19370,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 755,
+  "counties": [
+   "09110",
+   "09130",
+   "09170",
+   "36103"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5754/latest.zip": {
+  "stop_times": 112,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 17,
+  "counties": [
+   "53061"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5756/latest.zip": {
+  "stop_times": 99,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 18,
+  "counties": [
+   "53063"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5755/latest.zip": {
+  "stop_times": 144,
+  "untimed": 108,
+  "stops_only_untimed": 6,
+  "stops": 7,
+  "counties": [
+   "53033"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5783/latest.zip": {
+  "stop_times": 156,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 52,
+  "counties": [
+   "34003",
+   "34013",
+   "34017",
+   "34039",
+   "36047",
+   "36061",
+   "36081",
+   "42027",
+   "42079",
+   "42081",
+   "42107"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5787/latest.zip": {
+  "stop_times": 113,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 28,
+  "counties": [
+   "36059",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5788/latest.zip": {
+  "stop_times": 644,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 27,
+  "counties": [
+   "34003",
+   "36005",
+   "36061",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5790/latest.zip": {
+  "stop_times": 1217,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 57,
+  "counties": [
+   "34003",
+   "34017",
+   "36047",
+   "36061",
+   "36071",
+   "36081",
+   "36087"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5791/latest.zip": {
+  "stop_times": 321,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 18,
+  "counties": [
+   "36029",
+   "36063"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5873/latest.zip": {
+  "stop_times": 4550,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 282,
+  "counties": [
+   "26005",
+   "26139"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5877/latest.zip": {
+  "stop_times": 468,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 47,
+  "counties": [
+   "36001",
+   "36083",
+   "36093"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5893/latest.zip": {
+  "stop_times": 15532,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 447,
+  "counties": [
+   "30111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5899/latest.zip": {
+  "stop_times": 3030,
+  "untimed": 2511,
+  "stops_only_untimed": 208,
+  "stops": 236,
+  "counties": [
+   "12069",
+   "12095",
+   "12097",
+   "12105"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-5895/latest.zip": {
+  "stop_times": 20813,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 479,
+  "counties": [
+   "53057",
+   "53061",
+   "53073"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-6679/latest.zip": {
+  "stop_times": 339,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2,
+  "counties": [
+   "06019",
+   "06039",
+   "06043",
+   "06051"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-6095/latest.zip": {
+  "stop_times": 2067,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 55,
+  "counties": [
+   "38015"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-6681/latest.zip": {
+  "stop_times": 1978,
+  "untimed": 1674,
+  "stops_only_untimed": 16,
+  "stops": 18,
+  "counties": [
+   "06039",
+   "06043",
+   "06051",
+   "06109"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-6682/latest.zip": {
+  "stop_times": 13719,
+  "untimed": 10251,
+  "stops_only_untimed": 25,
+  "stops": 30,
+  "counties": [
+   "49053"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-6735/latest.zip": {
+  "stop_times": 6048,
+  "untimed": 4736,
+  "stops_only_untimed": 164,
+  "stops": 198,
+  "counties": [
+   "37049",
+   "37133"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-6741/latest.zip": {
+  "stop_times": 1456,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 49,
+  "counties": [
+   "37119",
+   "45091"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-674/latest.zip": {
+  "stop_times": 53760,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 701,
+  "counties": [
+   "26077"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-6743/latest.zip": {
+  "stop_times": 88,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 10,
+  "counties": [
+   "04013",
+   "04021"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-6745/latest.zip": {
+  "stop_times": 699,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 59,
+  "counties": [
+   "36001",
+   "36027",
+   "36083"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-6773/latest.zip": {
+  "stop_times": 14379,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 630,
+  "counties": [
+   "01003",
+   "01097"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-679/latest.zip": {
+  "stop_times": 1179,
+  "untimed": 16,
+  "stops_only_untimed": 1,
+  "stops": 45,
+  "counties": [
+   "04003"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-6785/latest.zip": {
+  "stop_times": 10011,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1010,
+  "counties": [
+   "42003",
+   "42021",
+   "42051",
+   "42125",
+   "42129"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-688/latest.zip": {
+  "stop_times": 366,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 183,
+  "counties": [
+   "32031"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-6883/latest.zip": {
+  "stop_times": 1124,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 54,
+  "counties": [
+   "26115",
+   "39095"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7019/latest.zip": {
+  "stop_times": 29687,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 925,
+  "counties": [
+   "18039",
+   "18141",
+   "26021"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7021/latest.zip": {
+  "stop_times": 6357,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 144,
+  "counties": [
+   "42081"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7025/latest.zip": {
+  "stop_times": 2623,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 49,
+  "counties": [
+   "42011",
+   "42029",
+   "42091"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7027/latest.zip": {
+  "stop_times": 1880,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 156,
+  "counties": [
+   "42003",
+   "42051",
+   "42125",
+   "42129"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7030/latest.zip": {
+  "stop_times": 10629,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 127,
+  "counties": [
+   "42003",
+   "42007",
+   "42019",
+   "42085",
+   "42125"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7035/latest.zip": {
+  "stop_times": 43453,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 322,
+  "counties": [
+   "26099",
+   "26147"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7036/latest.zip": {
+  "stop_times": 46393,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 897,
+  "counties": [
+   "17115"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7037/latest.zip": {
+  "stop_times": 24225,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 148,
+  "counties": [
+   "49011",
+   "49035",
+   "49049"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7039/latest.zip": {
+  "stop_times": 2022,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 148,
+  "counties": [
+   "39093"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7040/latest.zip": {
+  "stop_times": 672,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 24,
+  "counties": [
+   "36055"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7038/latest.zip": {
+  "stop_times": 196861,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1073,
+  "counties": [
+   "48479"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7041/latest.zip": {
+  "stop_times": 702,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 48,
+  "counties": [
+   "36055",
+   "36069"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7043/latest.zip": {
+  "stop_times": 443,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 53,
+  "counties": [
+   "36029"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7046/latest.zip": {
+  "stop_times": 3147,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 183,
+  "counties": [
+   "01125"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-77/latest.zip": {
+  "stop_times": 4542,
+  "untimed": 30,
+  "stops_only_untimed": 1,
+  "stops": 307,
+  "counties": [
+   "17201",
+   "55105"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7824/latest.zip": {
+  "stop_times": 7612,
+  "untimed": 6279,
+  "stops_only_untimed": 368,
+  "stops": 413,
+  "counties": [
+   "23019"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7827/latest.zip": {
+  "stop_times": 1105,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 54,
+  "counties": [
+   "47011"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-764/latest.zip": {
+  "stop_times": 157980,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 2354,
+  "counties": [
+   "12001",
+   "12019",
+   "12031",
+   "12109"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7841/latest.zip": {
+  "stop_times": 4085,
+  "untimed": 2752,
+  "stops_only_untimed": 93,
+  "stops": 129,
+  "counties": [
+   "40109"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7848/latest.zip": {
+  "stop_times": 12799,
+  "untimed": 11806,
+  "stops_only_untimed": 449,
+  "stops": 474,
+  "counties": [
+   "12061",
+   "12111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7885/latest.zip": {
+  "stop_times": 946,
+  "untimed": 253,
+  "stops_only_untimed": 6,
+  "stops": 63,
+  "counties": [
+   "37135"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7914/latest.zip": {
+  "stop_times": 315,
+  "untimed": 1,
+  "stops_only_untimed": 0,
+  "stops": 49,
+  "counties": [
+   "12099"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7930/latest.zip": {
+  "stop_times": 1800,
+  "untimed": 1619,
+  "stops_only_untimed": 55,
+  "stops": 68,
+  "counties": [
+   "06065"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-7929/latest.zip": {
+  "stop_times": 2573,
+  "untimed": 2100,
+  "stops_only_untimed": 130,
+  "stops": 163,
+  "counties": [
+   "55039"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-89/latest.zip": {
+  "stop_times": 41438,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 524,
+  "counties": [
+   "37063",
+   "37135",
+   "37183"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-918/latest.zip": {
+  "stop_times": 21564,
+  "untimed": 17937,
+  "stops_only_untimed": 227,
+  "stops": 307,
+  "counties": [
+   "34003",
+   "34017",
+   "34023",
+   "34025",
+   "36047",
+   "36061",
+   "36081",
+   "36085",
+   "36119"
+  ]
+ },
+ "https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-california-gold-coast-transit-south-coast-area-transit-gtfs-32.zip?alt=media": {
+  "stop_times": 36139,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 643,
+  "counties": [
+   "06083",
+   "06111"
+  ]
+ },
+ "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-98/latest.zip": {
+  "stop_times": 154161,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 831,
+  "counties": [
+   "37063",
+   "37135",
+   "37183"
+  ]
+ },
+ "https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-california-north-county-transit-district-nctd-gtfs-3093.zip?alt=media": {
+  "stop_times": 388537,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 1756,
+  "counties": [
+   "06073"
+  ]
+ },
+ "https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-wisconsin-milwaukee-county-transit-system-gtfs-2127.zip?alt=media": {
+  "stop_times": 990767,
+  "untimed": 0,
+  "stops_only_untimed": 0,
+  "stops": 3694,
+  "counties": [
+   "55079",
+   "55101",
+   "55131",
+   "55133"
+  ]
+ }
+}

@@ -1,0 +1,164 @@
+{
+ "blockgroups": {
+  "name": "Census TIGERweb 2020 block groups",
+  "scope": "national",
+  "status": "ready",
+  "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Tracts_Blocks/MapServer"
+ },
+ "acs": {
+  "name": "ACS 2020-2024 5-year table-based summary files",
+  "scope": "national",
+  "status": "ready",
+  "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF"
+ },
+ "places": {
+  "name": "Census TIGERweb incorporated places and CDPs (city names and limits)",
+  "scope": "national",
+  "status": "adapter",
+  "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer"
+ },
+ "osm": {
+  "name": "OpenStreetMap extract (openstreetmap.fr)",
+  "scope": "national",
+  "status": "ready",
+  "url": "https://download.openstreetmap.fr/extracts/north-america/"
+ },
+ "parks_national": {
+  "name": "Esri USA Parks",
+  "scope": "national",
+  "status": "ready",
+  "url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/USA_Parks/FeatureServer/0"
+ },
+ "ev": {
+  "name": "AFDC station list (USDOT/BTS NTAD copy, daily)",
+  "scope": "national",
+  "status": "ready",
+  "url": "https://services.arcgis.com/xOi1kZaI0eWDREZv/arcgis/rest/services/Alternative_Fueling_Stations/FeatureServer/0"
+ },
+ "tree_equity": {
+  "name": "American Forests Tree Equity Score, state block-group files",
+  "scope": "national",
+  "status": "ready",
+  "url": "https://tes-app-data-share.s3.amazonaws.com/{st}/{st}_csv.zip"
+ },
+ "crash_ca": {
+  "name": "CHP CCRS crashes (data.ca.gov)",
+  "scope": "state:CA",
+  "status": "ready",
+  "url": "https://data.ca.gov/dataset/ccrs"
+ },
+ "crash_national": {
+  "name": "NHTSA FARS fatal crashes 2023 (final) and 2024 (initial), USDOT/BTS NTAD copies",
+  "scope": "national",
+  "status": "ready",
+  "url": "https://services.arcgis.com/xOi1kZaI0eWDREZv/arcgis/rest/services/NTAD_Fatality_Analysis_Reporting_System_FinalRelease_Accidents/FeatureServer/0",
+  "note": "fetch_oc.py fetch_fars; fatal crashes only, so the injury-crash scores (pbcr, ksi) stay absent outside California until a state injury source is added"
+ },
+ "crash_il": {
+  "name": "Illinois DOT crash records 2016-2025 (all reportable crashes, KABCO injuries, pedestrian / pedalcyclist first harmful event)",
+  "scope": "state:IL",
+  "status": "ready",
+  "url": "https://services2.arcgis.com/aIrBD8yn1TDTEXoz/arcgis/rest/services",
+  "note": "region.STATE_DEFAULTS; 2016-2018 extracts store longitude unsigned (fixed on read)"
+ },
+ "crash_va": {
+  "name": "Virginia DOT crash records 2017-2025 (all reportable crashes, KABCO injuries, pedestrian / bike flags)",
+  "scope": "state:VA",
+  "status": "ready",
+  "url": "https://services.arcgis.com/p5v98VHDX9Atv3l7/arcgis/rest/services/Full_Crash/FeatureServer/0",
+  "note": "no 2016 records in the layer: a 9-year window"
+ },
+ "crash_ut": {
+  "name": "Utah DOT crash records 2019-2025 (UDOT UPlan, all reportable crashes, killed / suspected serious injury counts, pedestrian / bicyclist flags)",
+  "scope": "state:UT",
+  "status": "ready",
+  "url": "https://services.arcgis.com/pA2nEVnB6tquxgOW/arcgis/rest/services/Utah_Crash_Locations/FeatureServer",
+  "note": "one layer per year; each misses about one day at its edges (1 Jan before 07:00, 31 Dec after 07:00 as stored)"
+ },
+ "crash_pa": {
+  "name": "Pennsylvania DOT crash records 2017-2023 (PennShare, all reportable crashes, fatal / suspected serious injury counts, pedestrian and bicycle counts)",
+  "scope": "state:PA",
+  "status": "ready",
+  "url": "https://services1.arcgis.com/jOy9iZUXBy03ojXb/arcgis/rest/services/CRASH2019_2023/FeatureServer/8",
+  "note": "2019-2023 has crash month and year only (no day); 2017-2018 from the 2017-2021 table, deduplicated by CRN; 2024 onwards not on an allowed host (gis.penndot.gov)"
+ },
+ "crash_me": {
+  "name": "MaineDOT crash records 2016-2025 (all reportable crashes, K / A / B / C person counts, pedestrian / bicycle flags)",
+  "scope": "state:ME",
+  "status": "ready",
+  "url": "https://services1.arcgis.com/RbMX0mRVOFNTdLzd/arcgis/rest/services/Crashes_Attributes_10_Year_and_Current_Year_Test_View/FeatureServer/44",
+  "note": "a rolling ten-year view, updated weekly: 2016 will drop out of it"
+ },
+ "crash_tn": {
+  "name": "Tennessee Dept. of Safety TITAN injury and fatal crashes 2021 - 2 Dec 2025 (pedestrian / pedalcyclist flags, crash severity)",
+  "scope": "state:TN",
+  "status": "ready",
+  "url": "https://services8.arcgis.com/LXsQ6ODUaTWmnnpV/arcgis/rest/services/TITAN_Dashboard_Crashes__12_03_25_WFL1/FeatureServer/17",
+  "note": "two dashboard snapshots (July 2023 for 2021-2022, Dec 2025 for 2023-2025); property-damage-only crashes are not included"
+ },
+ "schools_ca": {
+  "name": "CDE public school directory",
+  "scope": "state:CA",
+  "status": "ready",
+  "url": "https://www.cde.ca.gov/SchoolDirectory/report?rid=dl1&tp=txt"
+ },
+ "schools_national": {
+  "name": "NCES EDGE public school locations (current school year)",
+  "scope": "national",
+  "status": "ready",
+  "url": "https://services1.arcgis.com/Ua5sjt3LWTPigjyD/arcgis/rest/services/Public_School_Locations_Current/FeatureServer/0",
+  "note": "fetch_oc.py fetch_schools outside California (NCES's own ArcGIS Online layer)"
+ },
+ "crime_ca": {
+  "name": "CA DOJ Crimes & Clearances by agency",
+  "scope": "state:CA",
+  "status": "ready",
+  "url": "https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2026-07/Crimes_and_Clearances_with_Arson-1985-2025.csv"
+ },
+ "crime_national": {
+  "name": "FBI Crime Data Explorer (agency level)",
+  "scope": "national",
+  "status": "key",
+  "url": "https://api.usa.gov/crime/fbi/cde/",
+  "note": "needs an api.data.gov key"
+ },
+ "fire_ca": {
+  "name": "CAL FIRE Fire Hazard Severity Zones (SRA 2023, LRA 2025)",
+  "scope": "state:CA",
+  "status": "ready",
+  "url": "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services"
+ },
+ "fire_national": {
+  "name": "USFS Wildfire Hazard Potential",
+  "scope": "national",
+  "status": "none",
+  "url": "https://services.arcgis.com/jIL9msH9OI208GCb/arcgis/rest/services/USA_Wildfire_Hazard_Potential/FeatureServer/5",
+  "note": "candidate checked 6 Nov 2026: Esri's block-group summary of USFS WHP gives MIN/MAX/MEAN only, not the share of a block group in the highest class that the engine's fire metric uses (CAL FIRE Very High share); the USFS rasters (imagery.geoplatform.gov) are on a host not allowed here. Fire stays absent outside CA"
+ },
+ "transit": {
+  "name": "GTFS feeds from the MobilityData catalog (mirrored on storage.googleapis.com)",
+  "scope": "national",
+  "status": "ready",
+  "url": "https://storage.googleapis.com/mdb-csv/sources.csv",
+  "note": "fetch_oc.py fetch_gtfs_mdb: active feeds overlapping the county, one per provider, schedules ended over a year ago skipped; bus departures 07:00-09:00 on one weekday per feed. Orange County keeps its OCTA feed"
+ },
+ "tax_shares_ca": {
+  "name": "County Auditor-Controller tax-rate-area factors + BOE TRA map",
+  "scope": "state:CA",
+  "status": "adapter",
+  "url": "https://services7.arcgis.com/iwxhJVOFEKDxO7gk/arcgis/rest/services",
+  "note": "BOE publishes TRA maps for every CA county; each Auditor's factor report format differs (OC parser written)"
+ },
+ "assessor": {
+  "name": "County Assessor parcels/sales",
+  "scope": "county",
+  "status": "adapter",
+  "note": "LA County: ready (page inventory); others vary"
+ },
+ "city_311": {
+  "name": "City 311 service requests",
+  "scope": "county",
+  "status": "none",
+  "note": "LA City only so far"
+ }
+}

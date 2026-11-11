@@ -1,0 +1,9036 @@
+{
+ "01003": {
+  "county": "Baldwin County",
+  "st": "AL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "01073": {
+  "county": "Jefferson County",
+  "st": "AL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "01081": {
+  "county": "Lee County",
+  "st": "AL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "01089": {
+  "county": "Madison County",
+  "st": "AL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "01097": {
+  "county": "Mobile County",
+  "st": "AL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "01101": {
+  "county": "Montgomery County",
+  "st": "AL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "01117": {
+  "county": "Shelby County",
+  "st": "AL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "01125": {
+  "county": "Tuscaloosa County",
+  "st": "AL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "04013": {
+  "county": "Maricopa County",
+  "st": "AZ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "04015": {
+  "county": "Mohave County",
+  "st": "AZ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "04019": {
+  "county": "Pima County",
+  "st": "AZ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "04021": {
+  "county": "Pinal County",
+  "st": "AZ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "04025": {
+  "county": "Yavapai County",
+  "st": "AZ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "04027": {
+  "county": "Yuma County",
+  "st": "AZ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "05007": {
+  "county": "Benton County",
+  "st": "AR",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "05119": {
+  "county": "Pulaski County",
+  "st": "AR",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "05143": {
+  "county": "Washington County",
+  "st": "AR",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06001": {
+  "county": "Alameda County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 33,
+  "replay_matches_file": true,
+  "added_old": 22,
+  "added_new": 22,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -122.40164,
+    37.78921,
+    "Montgomery Street"
+   ],
+   [
+    -122.40159,
+    37.70954,
+    "Bayshore Caltrain Northbound"
+   ],
+   [
+    -122.39708,
+    37.79279,
+    "Embarcadero"
+   ],
+   [
+    -122.39499,
+    37.77639,
+    "San Francisco Caltrain Northbound"
+   ],
+   [
+    -122.39205,
+    37.61609,
+    "San Francisco International Airport"
+   ],
+   [
+    -122.39188,
+    37.7576,
+    "22nd Street Caltrain Northbound"
+   ],
+   [
+    -122.38684,
+    37.6002,
+    "Millbrae (Caltrain Transfer Platform)"
+   ],
+   [
+    -122.36265,
+    37.58764,
+    "Broadway Caltrain Northbound"
+   ],
+   [
+    -122.3449,
+    37.5802,
+    "Burlingame Caltrain Northbound"
+   ],
+   [
+    -122.32385,
+    37.56809,
+    "San Mateo Caltrain Northbound"
+   ],
+   [
+    -122.30934,
+    37.55294,
+    "Hayward Park Caltrain Northbound"
+   ],
+   [
+    -122.3015,
+    37.54261,
+    "Hillsdale Caltrain Northbound"
+   ]
+  ],
+  "new": [
+   [
+    -122.40178,
+    37.70954,
+    "Bayshore Station"
+   ],
+   [
+    -122.4016,
+    37.78918,
+    "Montgomery Street"
+   ],
+   [
+    -122.39705,
+    37.79277,
+    "Embarcadero"
+   ],
+   [
+    -122.39496,
+    37.77637,
+    "San Francisco Caltrain Station"
+   ],
+   [
+    -122.39214,
+    37.75759,
+    "22nd Street Station"
+   ],
+   [
+    -122.392,
+    37.61614,
+    "San Francisco International Airport"
+   ],
+   [
+    -122.38684,
+    37.6002,
+    "Millbrae"
+   ],
+   [
+    -122.36268,
+    37.5876,
+    "Broadway Station"
+   ],
+   [
+    -122.34499,
+    37.58019,
+    "Burlingame Station"
+   ],
+   [
+    -122.32397,
+    37.56819,
+    "San Mateo Station"
+   ],
+   [
+    -122.30947,
+    37.55297,
+    "Hayward Park Station"
+   ],
+   [
+    -122.30158,
+    37.54257,
+    "Hillsdale Station"
+   ]
+  ]
+ },
+ "06003": {
+  "county": "Alpine County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06005": {
+  "county": "Amador County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06007": {
+  "county": "Butte County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06009": {
+  "county": "Calaveras County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06011": {
+  "county": "Colusa County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06013": {
+  "county": "Contra Costa County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 8,
+  "replay_matches_file": true,
+  "added_old": 35,
+  "added_new": 34,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -122.46899,
+    37.7063,
+    "Daly City"
+   ],
+   [
+    -122.44751,
+    37.72176,
+    "Balboa Park"
+   ],
+   [
+    -122.43356,
+    37.73327,
+    "Glen Park"
+   ],
+   [
+    -122.41975,
+    37.76518,
+    "16th Street / Mission"
+   ],
+   [
+    -122.41852,
+    37.75242,
+    "24th Street / Mission"
+   ],
+   [
+    -122.41388,
+    37.77945,
+    "Civic Center / UN Plaza"
+   ],
+   [
+    -122.40739,
+    37.78464,
+    "Powell Street"
+   ],
+   [
+    -122.40164,
+    37.78921,
+    "Montgomery Street"
+   ],
+   [
+    -122.40159,
+    37.70954,
+    "Bayshore Caltrain Northbound"
+   ],
+   [
+    -122.39708,
+    37.79279,
+    "Embarcadero"
+   ],
+   [
+    -122.39499,
+    37.77639,
+    "San Francisco Caltrain Northbound"
+   ],
+   [
+    -122.39188,
+    37.7576,
+    "22nd Street Caltrain Northbound"
+   ]
+  ],
+  "new": [
+   [
+    -122.46892,
+    37.70626,
+    "Daly City"
+   ],
+   [
+    -122.44747,
+    37.72175,
+    "Balboa Park"
+   ],
+   [
+    -122.43353,
+    37.73324,
+    "Glen Park"
+   ],
+   [
+    -122.41972,
+    37.76518,
+    "16th Street / Mission"
+   ],
+   [
+    -122.41848,
+    37.75242,
+    "24th Street / Mission"
+   ],
+   [
+    -122.41384,
+    37.77942,
+    "Civic Center / UN Plaza"
+   ],
+   [
+    -122.40734,
+    37.78461,
+    "Powell Street"
+   ],
+   [
+    -122.40178,
+    37.70954,
+    "Bayshore Station"
+   ],
+   [
+    -122.4016,
+    37.78918,
+    "Montgomery Street"
+   ],
+   [
+    -122.39705,
+    37.79277,
+    "Embarcadero"
+   ],
+   [
+    -122.39496,
+    37.77637,
+    "San Francisco Caltrain Station"
+   ],
+   [
+    -122.39214,
+    37.75759,
+    "22nd Street Station"
+   ]
+  ]
+ },
+ "06015": {
+  "county": "Del Norte County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06017": {
+  "county": "El Dorado County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06019": {
+  "county": "Fresno County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 5,
+  "added_new": 5,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06021": {
+  "county": "Glenn County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06023": {
+  "county": "Humboldt County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06025": {
+  "county": "Imperial County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06027": {
+  "county": "Inyo County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06029": {
+  "county": "Kern County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06031": {
+  "county": "Kings County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06033": {
+  "county": "Lake County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06035": {
+  "county": "Lassen County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06039": {
+  "county": "Madera County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06041": {
+  "county": "Marin County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 7,
+  "added_new": 7,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -122.69105,
+    38.33094,
+    "SMART Cotati"
+   ],
+   [
+    -122.65496,
+    38.26692,
+    "SMART Petaluma North"
+   ],
+   [
+    -122.63483,
+    38.23726,
+    "SMART Petaluma Downtown"
+   ],
+   [
+    -122.40164,
+    37.78921,
+    "Montgomery Street"
+   ],
+   [
+    -122.39708,
+    37.79279,
+    "Embarcadero"
+   ],
+   [
+    -122.35312,
+    37.93673,
+    "Richmond"
+   ]
+  ],
+  "new": [
+   [
+    -122.69102,
+    38.33101,
+    "SMART Cotati"
+   ],
+   [
+    -122.65495,
+    38.26694,
+    "SMART Petaluma North"
+   ],
+   [
+    -122.63482,
+    38.23726,
+    "SMART Petaluma Downtown"
+   ],
+   [
+    -122.4016,
+    37.78918,
+    "Montgomery Street"
+   ],
+   [
+    -122.39705,
+    37.79277,
+    "Embarcadero"
+   ],
+   [
+    -122.35306,
+    37.93676,
+    "Richmond"
+   ]
+  ]
+ },
+ "06043": {
+  "county": "Mariposa County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06045": {
+  "county": "Mendocino County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06047": {
+  "county": "Merced County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06049": {
+  "county": "Modoc County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06051": {
+  "county": "Mono County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06053": {
+  "county": "Monterey County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06055": {
+  "county": "Napa County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 3,
+  "added_new": 3,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -122.65496,
+    38.26692,
+    "SMART Petaluma North"
+   ],
+   [
+    -122.63483,
+    38.23726,
+    "SMART Petaluma Downtown"
+   ]
+  ],
+  "new": [
+   [
+    -122.65495,
+    38.26694,
+    "SMART Petaluma North"
+   ],
+   [
+    -122.63482,
+    38.23726,
+    "SMART Petaluma Downtown"
+   ]
+  ]
+ },
+ "06057": {
+  "county": "Nevada County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06061": {
+  "county": "Placer County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06063": {
+  "county": "Plumas County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06065": {
+  "county": "Riverside County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 17,
+  "added_new": 17,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06067": {
+  "county": "Sacramento County",
+  "st": "CA",
+  "unmatched": 1,
+  "removed": 2,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 5,
+  "added_new": 5,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'Employee Platform Station (WB)' (1296, no boarding)",
+   "removed 'Employee Platform Station (EB)' (1296, no boarding)"
+  ],
+  "gone": [
+   [
+    -121.88904,
+    38.0168,
+    "Pittsburg Center"
+   ]
+  ],
+  "new": [
+   [
+    -121.88903,
+    38.01684,
+    "Pittsburg Center"
+   ]
+  ]
+ },
+ "06069": {
+  "county": "San Benito County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 2,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -121.56609,
+    37.00354,
+    "Gilroy Caltrain Northbound"
+   ]
+  ],
+  "new": [
+   [
+    -121.56616,
+    37.00351,
+    "Gilroy Station"
+   ]
+  ]
+ },
+ "06071": {
+  "county": "San Bernardino County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 8,
+  "added_new": 8,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06073": {
+  "county": "San Diego County",
+  "st": "CA",
+  "unmatched": 36,
+  "removed": 0,
+  "renamed": 7,
+  "replay_matches_file": true,
+  "added_old": 6,
+  "added_new": 6,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06075": {
+  "county": "San Francisco County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 9,
+  "replay_matches_file": false,
+  "added_old": 22,
+  "added_new": 22,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -122.51249,
+    37.9478,
+    "SMART Larkspur"
+   ],
+   [
+    -122.46617,
+    37.68464,
+    "Colma"
+   ],
+   [
+    -122.44425,
+    37.66444,
+    "South San Francisco"
+   ],
+   [
+    -122.41638,
+    37.63772,
+    "San Bruno"
+   ],
+   [
+    -122.41159,
+    37.6305,
+    "San Bruno Caltrain Northbound"
+   ],
+   [
+    -122.40498,
+    37.65594,
+    "South San Francisco Caltrain Southbound"
+   ],
+   [
+    -122.40159,
+    37.70954,
+    "Bayshore Caltrain Northbound"
+   ],
+   [
+    -122.39205,
+    37.61609,
+    "San Francisco International Airport"
+   ],
+   [
+    -122.35312,
+    37.93673,
+    "Richmond"
+   ],
+   [
+    -122.31694,
+    37.92517,
+    "El Cerrito Del Norte"
+   ],
+   [
+    -122.29897,
+    37.9026,
+    "El Cerrito Plaza"
+   ],
+   [
+    -122.29519,
+    37.80486,
+    "West Oakland"
+   ]
+  ],
+  "new": [
+   [
+    -122.51249,
+    37.94781,
+    "SMART Larkspur"
+   ],
+   [
+    -122.46614,
+    37.68467,
+    "Colma"
+   ],
+   [
+    -122.44422,
+    37.66447,
+    "South San Francisco"
+   ],
+   [
+    -122.41634,
+    37.63774,
+    "San Bruno"
+   ],
+   [
+    -122.41165,
+    37.63048,
+    "San Bruno Caltrain Station"
+   ],
+   [
+    -122.40498,
+    37.65594,
+    "South San Francisco Caltrain Station"
+   ],
+   [
+    -122.40178,
+    37.70954,
+    "Bayshore Station"
+   ],
+   [
+    -122.392,
+    37.61614,
+    "San Francisco International Airport"
+   ],
+   [
+    -122.35306,
+    37.93676,
+    "Richmond"
+   ],
+   [
+    -122.3169,
+    37.92519,
+    "El Cerrito Del Norte"
+   ],
+   [
+    -122.29893,
+    37.90261,
+    "El Cerrito Plaza"
+   ],
+   [
+    -122.29516,
+    37.80489,
+    "West Oakland"
+   ]
+  ]
+ },
+ "06077": {
+  "county": "San Joaquin County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06079": {
+  "county": "San Luis Obispo County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06081": {
+  "county": "San Mateo County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 35,
+  "replay_matches_file": true,
+  "added_old": 14,
+  "added_new": 14,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -122.44751,
+    37.72176,
+    "Balboa Park"
+   ],
+   [
+    -122.43356,
+    37.73327,
+    "Glen Park"
+   ],
+   [
+    -122.40498,
+    37.65594,
+    "South San Francisco Caltrain Southbound"
+   ],
+   [
+    -122.40159,
+    37.70954,
+    "Bayshore Caltrain Northbound"
+   ],
+   [
+    -122.21224,
+    37.71326,
+    "Oakland International Airport Station"
+   ],
+   [
+    -122.16079,
+    37.72177,
+    "San Leandro"
+   ],
+   [
+    -122.14193,
+    37.42936,
+    "California Avenue Caltrain Northbound"
+   ],
+   [
+    -122.12649,
+    37.69689,
+    "Bay Fair"
+   ],
+   [
+    -122.107,
+    37.40733,
+    "San Antonio Caltrain Northbound"
+   ],
+   [
+    -122.087,
+    37.66968,
+    "Hayward"
+   ],
+   [
+    -122.07596,
+    37.39446,
+    "Mountain View Caltrain Northbound"
+   ],
+   [
+    -122.07561,
+    37.69078,
+    "Castro Valley"
+   ]
+  ],
+  "new": [
+   [
+    -122.44747,
+    37.72175,
+    "Balboa Park"
+   ],
+   [
+    -122.43353,
+    37.73324,
+    "Glen Park"
+   ],
+   [
+    -122.40498,
+    37.65594,
+    "South San Francisco Caltrain Station"
+   ],
+   [
+    -122.40178,
+    37.70954,
+    "Bayshore Station"
+   ],
+   [
+    -122.21224,
+    37.71326,
+    "Oakland International Airport"
+   ],
+   [
+    -122.16075,
+    37.72179,
+    "San Leandro"
+   ],
+   [
+    -122.14195,
+    37.42935,
+    "California Avenue Station"
+   ],
+   [
+    -122.12646,
+    37.69691,
+    "Bay Fair"
+   ],
+   [
+    -122.10706,
+    37.40729,
+    "San Antonio Station"
+   ],
+   [
+    -122.08697,
+    37.6697,
+    "Hayward"
+   ],
+   [
+    -122.07597,
+    37.39443,
+    "Mountain View Station"
+   ],
+   [
+    -122.07561,
+    37.69074,
+    "Castro Valley"
+   ]
+  ]
+ },
+ "06083": {
+  "county": "Santa Barbara County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 5,
+  "added_new": 5,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06085": {
+  "county": "Santa Clara County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 2,
+  "renamed": 34,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'Light Rail Yard (NOT A PUBLIC STOP)' (57, no boarding)",
+   "removed 'Patrick Henry Pocket Track (NOT A PUBLIC STOP)' (57, no boarding)"
+  ],
+  "gone": [
+   [
+    -122.23194,
+    37.48616,
+    "Redwood City Caltrain Northbound"
+   ],
+   [
+    -121.93946,
+    37.50227,
+    "Warm Springs / South Fremont"
+   ]
+  ],
+  "new": [
+   [
+    -122.23197,
+    37.48613,
+    "Redwood City Station"
+   ],
+   [
+    -121.93941,
+    37.50229,
+    "Warm Springs / South Fremont"
+   ]
+  ]
+ },
+ "06087": {
+  "county": "Santa Cruz County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 12,
+  "replay_matches_file": true,
+  "added_old": 7,
+  "added_new": 6,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -121.88372,
+    37.31174,
+    "Tamien Caltrain Northbound"
+   ],
+   [
+    -121.84195,
+    37.2841,
+    "Capitol Caltrain Northbound"
+   ],
+   [
+    -121.79764,
+    37.25242,
+    "Blossom Hill Caltrain Northbound"
+   ],
+   [
+    -121.65024,
+    37.12936,
+    "Morgan Hill Caltrain Northbound"
+   ],
+   [
+    -121.61094,
+    37.08665,
+    "San Martin Caltrain Southbound"
+   ],
+   [
+    -121.61005,
+    37.08523,
+    "San Martin Caltrain Northbound"
+   ],
+   [
+    -121.56609,
+    37.00354,
+    "Gilroy Caltrain Northbound"
+   ]
+  ],
+  "new": [
+   [
+    -121.88386,
+    37.31175,
+    "Tamien Caltrain Station"
+   ],
+   [
+    -121.842,
+    37.28408,
+    "Capitol Caltrain Station"
+   ],
+   [
+    -121.79766,
+    37.2524,
+    "Blossom Hill Caltrain Station"
+   ],
+   [
+    -121.65027,
+    37.12934,
+    "Morgan Hill Station"
+   ],
+   [
+    -121.61049,
+    37.08594,
+    "San Martin Station"
+   ],
+   [
+    -121.56616,
+    37.00351,
+    "Gilroy Station"
+   ]
+  ]
+ },
+ "06089": {
+  "county": "Shasta County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06091": {
+  "county": "Sierra County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06093": {
+  "county": "Siskiyou County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06095": {
+  "county": "Solano County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 5,
+  "added_new": 5,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -122.02456,
+    38.00341,
+    "North Concord / Martinez"
+   ],
+   [
+    -121.94425,
+    38.01888,
+    "Pittsburg / Bay Point"
+   ],
+   [
+    -121.88904,
+    38.0168,
+    "Pittsburg Center"
+   ]
+  ],
+  "new": [
+   [
+    -122.02453,
+    38.00339,
+    "North Concord / Martinez"
+   ],
+   [
+    -121.94425,
+    38.01892,
+    "Pittsburg / Bay Point"
+   ],
+   [
+    -121.88903,
+    38.01684,
+    "Pittsburg Center"
+   ]
+  ]
+ },
+ "06097": {
+  "county": "Sonoma County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 1,
+  "replay_matches_file": true,
+  "added_old": 3,
+  "added_new": 3,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -122.56606,
+    38.12088,
+    "SMART Novato San Marin"
+   ],
+   [
+    -122.52388,
+    38.05629,
+    "SMART Novato Hamilton"
+   ]
+  ],
+  "new": [
+   [
+    -122.56606,
+    38.1209,
+    "SMART Novato San Marin"
+   ],
+   [
+    -122.52387,
+    38.05629,
+    "SMART Novato Hamilton"
+   ]
+  ]
+ },
+ "06099": {
+  "county": "Stanislaus County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 5,
+  "added_new": 5,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06101": {
+  "county": "Sutter County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06103": {
+  "county": "Tehama County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06105": {
+  "county": "Trinity County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06107": {
+  "county": "Tulare County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06109": {
+  "county": "Tuolumne County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06111": {
+  "county": "Ventura County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06113": {
+  "county": "Yolo County",
+  "st": "CA",
+  "unmatched": 1,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "06115": {
+  "county": "Yuba County",
+  "st": "CA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "08001": {
+  "county": "Adams County",
+  "st": "CO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 53,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -105.07995,
+    39.79904,
+    "Olde Town Arvada E-Bound"
+   ]
+  ],
+  "new": [
+   [
+    -105.08034,
+    39.79894,
+    "Olde Town Arvada"
+   ]
+  ]
+ },
+ "08005": {
+  "county": "Arapahoe County",
+  "st": "CO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 34,
+  "replay_matches_file": true,
+  "added_old": 4,
+  "added_new": 4,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -104.97427,
+    39.77036,
+    "38th & Blake Station Track 2"
+   ],
+   [
+    -104.8911,
+    39.77056,
+    "Central Park Station Track 1"
+   ],
+   [
+    -104.84997,
+    39.76748,
+    "Peoria Station Track 1"
+   ],
+   [
+    -104.78763,
+    39.77032,
+    "40th Ave & Airport Blvd - Gateway Park Station Track 1"
+   ]
+  ],
+  "new": [
+   [
+    -104.97427,
+    39.77036,
+    "38th / Blake Station"
+   ],
+   [
+    -104.89165,
+    39.77065,
+    "Central Park Station"
+   ],
+   [
+    -104.85047,
+    39.76743,
+    "Peoria Station"
+   ],
+   [
+    -104.7877,
+    39.76988,
+    "40th  / Airport - Gateway Park Station"
+   ]
+  ]
+ },
+ "08013": {
+  "county": "Boulder County",
+  "st": "CO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "08031": {
+  "county": "Denver County",
+  "st": "CO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 64,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -105.13266,
+    39.78808,
+    "Wheat Ridge - Ward Station Track 1"
+   ]
+  ],
+  "new": [
+   [
+    -105.133,
+    39.78803,
+    "Wheat Ridge / Ward Road Station"
+   ]
+  ]
+ },
+ "08035": {
+  "county": "Douglas County",
+  "st": "CO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 2,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "08041": {
+  "county": "El Paso County",
+  "st": "CO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "08059": {
+  "county": "Jefferson County",
+  "st": "CO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 22,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -105.02374,
+    39.80402,
+    "Clear Creek - Federal Station Track 1"
+   ]
+  ],
+  "new": [
+   [
+    -105.02332,
+    39.80395,
+    "Clear Creek / Federal Station"
+   ]
+  ]
+ },
+ "08069": {
+  "county": "Larimer County",
+  "st": "CO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "08077": {
+  "county": "Mesa County",
+  "st": "CO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "08101": {
+  "county": "Pueblo County",
+  "st": "CO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "08123": {
+  "county": "Weld County",
+  "st": "CO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "09110": {
+  "county": "Capitol Planning Region",
+  "st": "CT",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "09120": {
+  "county": "Greater Bridgeport Planning Region",
+  "st": "CT",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "09130": {
+  "county": "Lower Connecticut River Valley Planning Region",
+  "st": "CT",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "09140": {
+  "county": "Naugatuck Valley Planning Region",
+  "st": "CT",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 6,
+  "added_new": 6,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "09170": {
+  "county": "South Central Connecticut Planning Region",
+  "st": "CT",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 5,
+  "added_new": 5,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "09180": {
+  "county": "Southeastern Connecticut Planning Region",
+  "st": "CT",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "09190": {
+  "county": "Western Connecticut Planning Region",
+  "st": "CT",
+  "unmatched": 0,
+  "removed": 1,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 6,
+  "added_new": 5,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'Springdale MW Facility' (3110, no boarding)"
+  ],
+  "gone": [
+   [
+    -73.51968,
+    41.08215,
+    "Springdale MW Facility"
+   ]
+  ],
+  "new": []
+ },
+ "10001": {
+  "county": "Kent County",
+  "st": "DE",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "10003": {
+  "county": "New Castle County",
+  "st": "DE",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "10005": {
+  "county": "Sussex County",
+  "st": "DE",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "11001": {
+  "county": "District of Columbia",
+  "st": "DC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 105,
+  "replay_matches_file": true,
+  "added_old": 5,
+  "added_new": 5,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -77.11322,
+    38.88231,
+    "Ballston, Orange/Silver Line Track 2 Platform"
+   ],
+   [
+    -77.0251,
+    38.88538,
+    "4"
+   ],
+   [
+    -77.00563,
+    38.89698,
+    "Lead"
+   ],
+   [
+    -76.97707,
+    38.88692,
+    "Stadium-Armory, Blue/Orange/Silver Line Center Platform"
+   ]
+  ],
+  "new": [
+   [
+    -77.11322,
+    38.88225,
+    "Ballston-MU"
+   ],
+   [
+    -77.0251,
+    38.88538,
+    "L Enfant"
+   ],
+   [
+    -77.00563,
+    38.89698,
+    "Union Station"
+   ],
+   [
+    -76.97707,
+    38.88692,
+    "Stadium-Armory"
+   ]
+  ]
+ },
+ "12001": {
+  "county": "Alachua County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12005": {
+  "county": "Bay County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12009": {
+  "county": "Brevard County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12011": {
+  "county": "Broward County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12015": {
+  "county": "Charlotte County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12017": {
+  "county": "Citrus County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12019": {
+  "county": "Clay County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12021": {
+  "county": "Collier County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12031": {
+  "county": "Duval County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12033": {
+  "county": "Escambia County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12053": {
+  "county": "Hernando County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12057": {
+  "county": "Hillsborough County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12061": {
+  "county": "Indian River County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12069": {
+  "county": "Lake County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12071": {
+  "county": "Lee County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12073": {
+  "county": "Leon County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12081": {
+  "county": "Manatee County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12083": {
+  "county": "Marion County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12085": {
+  "county": "Martin County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12086": {
+  "county": "Miami-Dade County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12091": {
+  "county": "Okaloosa County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12095": {
+  "county": "Orange County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12097": {
+  "county": "Osceola County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12099": {
+  "county": "Palm Beach County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12101": {
+  "county": "Pasco County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12103": {
+  "county": "Pinellas County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12105": {
+  "county": "Polk County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 4,
+  "added_new": 4,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12109": {
+  "county": "St. Johns County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12111": {
+  "county": "St. Lucie County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12113": {
+  "county": "Santa Rosa County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12115": {
+  "county": "Sarasota County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12117": {
+  "county": "Seminole County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "12127": {
+  "county": "Volusia County",
+  "st": "FL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13021": {
+  "county": "Bibb County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13051": {
+  "county": "Chatham County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13057": {
+  "county": "Cherokee County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13063": {
+  "county": "Clayton County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13067": {
+  "county": "Cobb County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 25,
+  "added_new": 25,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13073": {
+  "county": "Columbia County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13077": {
+  "county": "Coweta County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13089": {
+  "county": "DeKalb County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13117": {
+  "county": "Forsyth County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13121": {
+  "county": "Fulton County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13135": {
+  "county": "Gwinnett County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 6,
+  "added_new": 6,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13139": {
+  "county": "Hall County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13151": {
+  "county": "Henry County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13153": {
+  "county": "Houston County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13215": {
+  "county": "Muscogee County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13223": {
+  "county": "Paulding County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "13245": {
+  "county": "Richmond County",
+  "st": "GA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "16001": {
+  "county": "Ada County",
+  "st": "ID",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "16027": {
+  "county": "Canyon County",
+  "st": "ID",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "16055": {
+  "county": "Kootenai County",
+  "st": "ID",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "17019": {
+  "county": "Champaign County",
+  "st": "IL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "17031": {
+  "county": "Cook County",
+  "st": "IL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 78,
+  "replay_matches_file": true,
+  "added_old": 36,
+  "added_new": 36,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -87.74515,
+    41.87157,
+    "Cicero-Forest Park"
+   ],
+   [
+    -87.72566,
+    41.8738,
+    "Pulaski-Forest Park"
+   ]
+  ],
+  "new": [
+   [
+    -87.74515,
+    41.87157,
+    "Cicero (Blue)"
+   ],
+   [
+    -87.72566,
+    41.8738,
+    "Pulaski (Blue)"
+   ]
+  ]
+ },
+ "17043": {
+  "county": "DuPage County",
+  "st": "IL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 3,
+  "added_new": 3,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "17089": {
+  "county": "Kane County",
+  "st": "IL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "17097": {
+  "county": "Lake County",
+  "st": "IL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "17111": {
+  "county": "McHenry County",
+  "st": "IL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "17113": {
+  "county": "McLean County",
+  "st": "IL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "17119": {
+  "county": "Madison County",
+  "st": "IL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 17,
+  "added_new": 17,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "17143": {
+  "county": "Peoria County",
+  "st": "IL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "17163": {
+  "county": "St. Clair County",
+  "st": "IL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 9,
+  "added_new": 9,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "17167": {
+  "county": "Sangamon County",
+  "st": "IL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "17197": {
+  "county": "Will County",
+  "st": "IL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 1,
+  "replay_matches_file": true,
+  "added_old": 71,
+  "added_new": 71,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -87.62434,
+    41.72238,
+    "95th"
+   ]
+  ],
+  "new": [
+   [
+    -87.62434,
+    41.72238,
+    "95th/Dan Ryan"
+   ]
+  ]
+ },
+ "17201": {
+  "county": "Winnebago County",
+  "st": "IL",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "18003": {
+  "county": "Allen County",
+  "st": "IN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "18039": {
+  "county": "Elkhart County",
+  "st": "IN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "18057": {
+  "county": "Hamilton County",
+  "st": "IN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "18063": {
+  "county": "Hendricks County",
+  "st": "IN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "18081": {
+  "county": "Johnson County",
+  "st": "IN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "18089": {
+  "county": "Lake County",
+  "st": "IN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 7,
+  "added_new": 7,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "18097": {
+  "county": "Marion County",
+  "st": "IN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "18127": {
+  "county": "Porter County",
+  "st": "IN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "18141": {
+  "county": "St. Joseph County",
+  "st": "IN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "18157": {
+  "county": "Tippecanoe County",
+  "st": "IN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "18163": {
+  "county": "Vanderburgh County",
+  "st": "IN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "19103": {
+  "county": "Johnson County",
+  "st": "IA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "19113": {
+  "county": "Linn County",
+  "st": "IA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "19153": {
+  "county": "Polk County",
+  "st": "IA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "19163": {
+  "county": "Scott County",
+  "st": "IA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "20091": {
+  "county": "Johnson County",
+  "st": "KS",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "20173": {
+  "county": "Sedgwick County",
+  "st": "KS",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "20177": {
+  "county": "Shawnee County",
+  "st": "KS",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "20209": {
+  "county": "Wyandotte County",
+  "st": "KS",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "21067": {
+  "county": "Fayette County",
+  "st": "KY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "21111": {
+  "county": "Jefferson County",
+  "st": "KY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "21117": {
+  "county": "Kenton County",
+  "st": "KY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "22017": {
+  "county": "Caddo Parish",
+  "st": "LA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "22019": {
+  "county": "Calcasieu Parish",
+  "st": "LA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "22033": {
+  "county": "East Baton Rouge Parish",
+  "st": "LA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "22051": {
+  "county": "Jefferson Parish",
+  "st": "LA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "22055": {
+  "county": "Lafayette Parish",
+  "st": "LA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "22063": {
+  "county": "Livingston Parish",
+  "st": "LA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "22071": {
+  "county": "Orleans Parish",
+  "st": "LA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "22073": {
+  "county": "Ouachita Parish",
+  "st": "LA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "22103": {
+  "county": "St. Tammany Parish",
+  "st": "LA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "23005": {
+  "county": "Cumberland County",
+  "st": "ME",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "23019": {
+  "county": "Penobscot County",
+  "st": "ME",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "23031": {
+  "county": "York County",
+  "st": "ME",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "24003": {
+  "county": "Anne Arundel County",
+  "st": "MD",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 24,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -76.86771,
+    38.89399,
+    "Morgan Blvd, Blue/Silver Line Center Platform"
+   ]
+  ],
+  "new": [
+   [
+    -76.86771,
+    38.89399,
+    "Morgan Blvd"
+   ]
+  ]
+ },
+ "24005": {
+  "county": "Baltimore County",
+  "st": "MD",
+  "unmatched": 0,
+  "removed": 1,
+  "renamed": 92,
+  "replay_matches_file": true,
+  "added_old": 3,
+  "added_new": 2,
+  "added_changed": true,
+  "confirm_lost": [
+   "Relief Point & Division"
+  ],
+  "notes": [
+   "removed 'MTA Light Rail Division' (469, no boarding)"
+  ],
+  "gone": [
+   [
+    -76.62162,
+    39.30023,
+    "STATE CENTER (METRO) sb"
+   ],
+   [
+    -76.61309,
+    39.2896,
+    "CHARLES CENTER (METRO) sb"
+   ]
+  ],
+  "new": [
+   [
+    -76.61392,
+    39.28953,
+    "CHARLES CENTER METRO"
+   ]
+  ]
+ },
+ "24013": {
+  "county": "Carroll County",
+  "st": "MD",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 1,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "24017": {
+  "county": "Charles County",
+  "st": "MD",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 8,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "24021": {
+  "county": "Frederick County",
+  "st": "MD",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "24025": {
+  "county": "Harford County",
+  "st": "MD",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 1,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -76.59417,
+    39.29658,
+    "JOHNS HOPKINS STATION (METRO)"
+   ]
+  ],
+  "new": [
+   [
+    -76.59417,
+    39.29658,
+    "JOHNS HOPKINS METRO"
+   ]
+  ]
+ },
+ "24027": {
+  "county": "Howard County",
+  "st": "MD",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 16,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -76.67301,
+    39.33667,
+    "WEST COLD SPRING STATION (METRO)"
+   ]
+  ],
+  "new": [
+   [
+    -76.67237,
+    39.33629,
+    "WEST COLD SPRING METRO"
+   ]
+  ]
+ },
+ "24031": {
+  "county": "Montgomery County",
+  "st": "MD",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 51,
+  "replay_matches_file": true,
+  "added_old": 6,
+  "added_new": 6,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -77.04366,
+    38.90989,
+    "Dupont Circle, Red Line Track 1 Platform"
+   ],
+   [
+    -77.02192,
+    38.90657,
+    "Mt Vernon Square, Green/Yellow Line Center Platform"
+   ],
+   [
+    -77.02192,
+    38.91351,
+    "Shaw-Howard, Green/Yellow Line Center Platform"
+   ],
+   [
+    -77.00331,
+    38.90661,
+    "NoMa-Gallaudet U, Red Line Center Platform"
+   ],
+   [
+    -76.93516,
+    38.90822,
+    "Deanwood, Orange/Silver Line Center Platform"
+   ]
+  ],
+  "new": [
+   [
+    -77.0436,
+    38.9099,
+    "Dupont Circle"
+   ],
+   [
+    -77.02192,
+    38.90657,
+    "Mt Vernon Sq"
+   ],
+   [
+    -77.02192,
+    38.91351,
+    "Shaw-Howard U"
+   ],
+   [
+    -77.00331,
+    38.90661,
+    "NoMa-Gallaudet U"
+   ],
+   [
+    -76.93516,
+    38.90822,
+    "Deanwood"
+   ]
+  ]
+ },
+ "24033": {
+  "county": "Prince George's County",
+  "st": "MD",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 111,
+  "replay_matches_file": true,
+  "added_old": 7,
+  "added_new": 7,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -77.11321,
+    38.8822,
+    "Ballston, Orange/Silver Line Track 1 Platform"
+   ],
+   [
+    -77.11308,
+    39.04852,
+    "North Bethesda, Red Line Center Platform"
+   ],
+   [
+    -77.0251,
+    38.88538,
+    "4"
+   ],
+   [
+    -77.00563,
+    38.89698,
+    "Lead"
+   ],
+   [
+    -76.97707,
+    38.88692,
+    "Stadium-Armory, Blue/Orange/Silver Line Center Platform"
+   ]
+  ],
+  "new": [
+   [
+    -77.11322,
+    38.88225,
+    "Ballston-MU"
+   ],
+   [
+    -77.11308,
+    39.04852,
+    "North Bethesda"
+   ],
+   [
+    -77.0251,
+    38.88538,
+    "L Enfant"
+   ],
+   [
+    -77.00563,
+    38.89698,
+    "Union Station"
+   ],
+   [
+    -76.97707,
+    38.88692,
+    "Stadium-Armory"
+   ]
+  ]
+ },
+ "24043": {
+  "county": "Washington County",
+  "st": "MD",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "24510": {
+  "county": "Baltimore city",
+  "st": "MD",
+  "unmatched": 0,
+  "removed": 1,
+  "renamed": 73,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 1,
+  "added_changed": true,
+  "confirm_lost": [
+   "Relief Point & Division"
+  ],
+  "notes": [
+   "removed 'MTA Light Rail Division' (469, no boarding)"
+  ],
+  "gone": [
+   [
+    -76.62162,
+    39.30023,
+    "STATE CENTER (METRO) sb"
+   ],
+   [
+    -76.61309,
+    39.2896,
+    "CHARLES CENTER (METRO) sb"
+   ]
+  ],
+  "new": [
+   [
+    -76.61392,
+    39.28953,
+    "CHARLES CENTER METRO"
+   ]
+  ]
+ },
+ "25001": {
+  "county": "Barnstable County",
+  "st": "MA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "25005": {
+  "county": "Bristol County",
+  "st": "MA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 4,
+  "added_new": 3,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -71.28552,
+    41.94023,
+    "Attleboro"
+   ]
+  ],
+  "new": []
+ },
+ "25009": {
+  "county": "Essex County",
+  "st": "MA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 13,
+  "added_new": 12,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -71.23867,
+    42.3737,
+    "Waltham"
+   ],
+   [
+    -71.08561,
+    42.36236,
+    "Kendall/MIT"
+   ],
+   [
+    -71.0716,
+    42.36126,
+    "Charles/MGH"
+   ],
+   [
+    -71.061,
+    42.35511,
+    "Downtown Crossing"
+   ]
+  ],
+  "new": [
+   [
+    -71.0856,
+    42.36239,
+    "Kendall/MIT"
+   ],
+   [
+    -71.07155,
+    42.36123,
+    "Charles/MGH"
+   ],
+   [
+    -71.05995,
+    42.35511,
+    "Downtown Crossing"
+   ]
+  ]
+ },
+ "25013": {
+  "county": "Hampden County",
+  "st": "MA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "25015": {
+  "county": "Hampshire County",
+  "st": "MA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "25017": {
+  "county": "Middlesex County",
+  "st": "MA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 14,
+  "added_new": 9,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -71.32646,
+    42.41498,
+    "Lincoln"
+   ],
+   [
+    -71.29675,
+    42.29656,
+    "Wellesley Square"
+   ],
+   [
+    -71.23867,
+    42.3737,
+    "Waltham"
+   ],
+   [
+    -71.15284,
+    42.16175,
+    "Canton Junction"
+   ],
+   [
+    -71.08774,
+    42.33766,
+    "Ruggles"
+   ],
+   [
+    -71.05524,
+    42.35227,
+    "South Station"
+   ],
+   [
+    -70.99732,
+    42.39042,
+    "Suffolk Downs"
+   ],
+   [
+    -70.99265,
+    42.39722,
+    "Beachmont"
+   ],
+   [
+    -70.99259,
+    42.40776,
+    "Revere Beach"
+   ],
+   [
+    -70.99171,
+    42.41351,
+    "Wonderland"
+   ]
+  ],
+  "new": [
+   [
+    -71.0553,
+    42.35231,
+    "Boston"
+   ],
+   [
+    -70.99718,
+    42.39052,
+    "Suffolk Downs"
+   ],
+   [
+    -70.9926,
+    42.39721,
+    "Beachmont"
+   ],
+   [
+    -70.99254,
+    42.40782,
+    "Revere Beach"
+   ],
+   [
+    -70.9917,
+    42.41344,
+    "Wonderland"
+   ]
+  ]
+ },
+ "25021": {
+  "county": "Norfolk County",
+  "st": "MA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 14,
+  "added_new": 10,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -71.29675,
+    42.29656,
+    "Wellesley Square"
+   ],
+   [
+    -71.23867,
+    42.3737,
+    "Waltham"
+   ],
+   [
+    -71.15284,
+    42.16175,
+    "Canton Junction"
+   ],
+   [
+    -71.08774,
+    42.33766,
+    "Ruggles"
+   ],
+   [
+    -71.07725,
+    42.40151,
+    "Wellington"
+   ],
+   [
+    -71.05524,
+    42.35227,
+    "South Station"
+   ],
+   [
+    -71.04241,
+    42.39734,
+    "Chelsea"
+   ],
+   [
+    -70.99265,
+    42.39722,
+    "Beachmont"
+   ]
+  ],
+  "new": [
+   [
+    -71.0772,
+    42.40151,
+    "Wellington"
+   ],
+   [
+    -71.0553,
+    42.35231,
+    "Boston"
+   ],
+   [
+    -71.04235,
+    42.39728,
+    "Chelsea"
+   ],
+   [
+    -70.9926,
+    42.39721,
+    "Beachmont"
+   ]
+  ]
+ },
+ "25023": {
+  "county": "Plymouth County",
+  "st": "MA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 9,
+  "added_new": 8,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -71.10806,
+    42.30983,
+    "Green Street"
+   ],
+   [
+    -71.10362,
+    42.3653,
+    "Central"
+   ],
+   [
+    -71.08774,
+    42.33766,
+    "Ruggles"
+   ],
+   [
+    -71.07725,
+    42.40151,
+    "Wellington"
+   ],
+   [
+    -71.05524,
+    42.35227,
+    "South Station"
+   ],
+   [
+    -71.04241,
+    42.39734,
+    "Chelsea"
+   ],
+   [
+    -70.99265,
+    42.39722,
+    "Beachmont"
+   ]
+  ],
+  "new": [
+   [
+    -71.10802,
+    42.30981,
+    "Green Street"
+   ],
+   [
+    -71.10359,
+    42.36534,
+    "Central"
+   ],
+   [
+    -71.0772,
+    42.40151,
+    "Wellington"
+   ],
+   [
+    -71.0553,
+    42.35231,
+    "Boston"
+   ],
+   [
+    -71.04235,
+    42.39728,
+    "Chelsea"
+   ],
+   [
+    -70.9926,
+    42.39721,
+    "Beachmont"
+   ]
+  ]
+ },
+ "25025": {
+  "county": "Suffolk County",
+  "st": "MA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 5,
+  "added_new": 3,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -71.08774,
+    42.33766,
+    "Ruggles"
+   ],
+   [
+    -71.05524,
+    42.35227,
+    "South Station"
+   ],
+   [
+    -71.00164,
+    42.20742,
+    "Braintree"
+   ]
+  ],
+  "new": [
+   [
+    -71.0553,
+    42.35231,
+    "Boston"
+   ]
+  ]
+ },
+ "25027": {
+  "county": "Worcester County",
+  "st": "MA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "26021": {
+  "county": "Berrien County",
+  "st": "MI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "26049": {
+  "county": "Genesee County",
+  "st": "MI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "26065": {
+  "county": "Ingham County",
+  "st": "MI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "26075": {
+  "county": "Jackson County",
+  "st": "MI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "26077": {
+  "county": "Kalamazoo County",
+  "st": "MI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "26081": {
+  "county": "Kent County",
+  "st": "MI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "26093": {
+  "county": "Livingston County",
+  "st": "MI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "26099": {
+  "county": "Macomb County",
+  "st": "MI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "26115": {
+  "county": "Monroe County",
+  "st": "MI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "26121": {
+  "county": "Muskegon County",
+  "st": "MI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "26125": {
+  "county": "Oakland County",
+  "st": "MI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "26139": {
+  "county": "Ottawa County",
+  "st": "MI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "26145": {
+  "county": "Saginaw County",
+  "st": "MI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "26147": {
+  "county": "St. Clair County",
+  "st": "MI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "26161": {
+  "county": "Washtenaw County",
+  "st": "MI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "26163": {
+  "county": "Wayne County",
+  "st": "MI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "27003": {
+  "county": "Anoka County",
+  "st": "MN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "27037": {
+  "county": "Dakota County",
+  "st": "MN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 2,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "27053": {
+  "county": "Hennepin County",
+  "st": "MN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 2,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "27109": {
+  "county": "Olmsted County",
+  "st": "MN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "27123": {
+  "county": "Ramsey County",
+  "st": "MN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 2,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "27137": {
+  "county": "St. Louis County",
+  "st": "MN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "27139": {
+  "county": "Scott County",
+  "st": "MN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "27145": {
+  "county": "Stearns County",
+  "st": "MN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "27163": {
+  "county": "Washington County",
+  "st": "MN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "27171": {
+  "county": "Wright County",
+  "st": "MN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "28033": {
+  "county": "DeSoto County",
+  "st": "MS",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "28047": {
+  "county": "Harrison County",
+  "st": "MS",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "28049": {
+  "county": "Hinds County",
+  "st": "MS",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "28121": {
+  "county": "Rankin County",
+  "st": "MS",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "29019": {
+  "county": "Boone County",
+  "st": "MO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "29047": {
+  "county": "Clay County",
+  "st": "MO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "29077": {
+  "county": "Greene County",
+  "st": "MO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "29095": {
+  "county": "Jackson County",
+  "st": "MO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "29099": {
+  "county": "Jefferson County",
+  "st": "MO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "29183": {
+  "county": "St. Charles County",
+  "st": "MO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "29189": {
+  "county": "St. Louis County",
+  "st": "MO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "29510": {
+  "county": "St. Louis city",
+  "st": "MO",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "30111": {
+  "county": "Yellowstone County",
+  "st": "MT",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "31055": {
+  "county": "Douglas County",
+  "st": "NE",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "31109": {
+  "county": "Lancaster County",
+  "st": "NE",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "31153": {
+  "county": "Sarpy County",
+  "st": "NE",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "32003": {
+  "county": "Clark County",
+  "st": "NV",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "32031": {
+  "county": "Washoe County",
+  "st": "NV",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "33011": {
+  "county": "Hillsborough County",
+  "st": "NH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "33013": {
+  "county": "Merrimack County",
+  "st": "NH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "33015": {
+  "county": "Rockingham County",
+  "st": "NH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "34001": {
+  "county": "Atlantic County",
+  "st": "NJ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "34003": {
+  "county": "Bergen County",
+  "st": "NJ",
+  "unmatched": 0,
+  "removed": 1,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 34,
+  "added_new": 34,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'Highbridge Yard' (3110, no boarding)"
+  ],
+  "gone": [],
+  "new": []
+ },
+ "34005": {
+  "county": "Burlington County",
+  "st": "NJ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 7,
+  "added_new": 7,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "34007": {
+  "county": "Camden County",
+  "st": "NJ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 9,
+  "replay_matches_file": true,
+  "added_old": 19,
+  "added_new": 19,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -75.16529,
+    39.95257,
+    "15th St/City Hall"
+   ],
+   [
+    -75.1626,
+    39.95703,
+    "Race-Vine"
+   ],
+   [
+    -75.07804,
+    40.02306,
+    "Frankford Transit Center"
+   ]
+  ],
+  "new": [
+   [
+    -75.16479,
+    39.95254,
+    "15th St/City Hall Station"
+   ],
+   [
+    -75.16259,
+    39.95703,
+    "Race Vine Station - BSL"
+   ],
+   [
+    -75.07795,
+    40.023,
+    "Frankford Transit Center"
+   ]
+  ]
+ },
+ "34011": {
+  "county": "Cumberland County",
+  "st": "NJ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "34013": {
+  "county": "Essex County",
+  "st": "NJ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 3,
+  "added_new": 3,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "34015": {
+  "county": "Gloucester County",
+  "st": "NJ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 8,
+  "added_new": 8,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "34017": {
+  "county": "Hudson County",
+  "st": "NJ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 36,
+  "added_new": 36,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "34021": {
+  "county": "Mercer County",
+  "st": "NJ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "34023": {
+  "county": "Middlesex County",
+  "st": "NJ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 4,
+  "added_new": 4,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "34025": {
+  "county": "Monmouth County",
+  "st": "NJ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 4,
+  "added_new": 4,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "34027": {
+  "county": "Morris County",
+  "st": "NJ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 3,
+  "added_new": 3,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "34029": {
+  "county": "Ocean County",
+  "st": "NJ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "34031": {
+  "county": "Passaic County",
+  "st": "NJ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 3,
+  "added_new": 3,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "34035": {
+  "county": "Somerset County",
+  "st": "NJ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "34039": {
+  "county": "Union County",
+  "st": "NJ",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 6,
+  "added_new": 6,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "35001": {
+  "county": "Bernalillo County",
+  "st": "NM",
+  "unmatched": 6,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "35013": {
+  "county": "Do\u00f1a Ana County",
+  "st": "NM",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "35043": {
+  "county": "Sandoval County",
+  "st": "NM",
+  "unmatched": 5,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "35049": {
+  "county": "Santa Fe County",
+  "st": "NM",
+  "unmatched": 4,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36001": {
+  "county": "Albany County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36005": {
+  "county": "Bronx County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 1,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 27,
+  "added_new": 27,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'Highbridge Yard' (3110, no boarding)"
+  ],
+  "gone": [],
+  "new": []
+ },
+ "36007": {
+  "county": "Broome County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36027": {
+  "county": "Dutchess County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 5,
+  "added_new": 5,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36029": {
+  "county": "Erie County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36047": {
+  "county": "Kings County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 26,
+  "added_new": 26,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36055": {
+  "county": "Monroe County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36059": {
+  "county": "Nassau County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 1,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 22,
+  "added_new": 21,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'Hillside Facility' (3136, no boarding)"
+  ],
+  "gone": [
+   [
+    -73.77696,
+    40.70774,
+    "Hillside Facility"
+   ]
+  ],
+  "new": []
+ },
+ "36061": {
+  "county": "New York County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 1,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 34,
+  "added_new": 34,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'Highbridge Yard' (3110, no boarding)"
+  ],
+  "gone": [],
+  "new": []
+ },
+ "36063": {
+  "county": "Niagara County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36065": {
+  "county": "Oneida County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36067": {
+  "county": "Onondaga County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36071": {
+  "county": "Orange County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 5,
+  "added_new": 5,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36081": {
+  "county": "Queens County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 2,
+  "renamed": 0,
+  "replay_matches_file": false,
+  "added_old": 35,
+  "added_new": 34,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'Hillside Facility' (3136, no boarding)",
+   "removed 'Highbridge Yard' (3110, no boarding)"
+  ],
+  "gone": [
+   [
+    -73.77696,
+    40.70774,
+    "Hillside Facility"
+   ]
+  ],
+  "new": []
+ },
+ "36083": {
+  "county": "Rensselaer County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36085": {
+  "county": "Richmond County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 12,
+  "added_new": 12,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36087": {
+  "county": "Rockland County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 13,
+  "added_new": 13,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36091": {
+  "county": "Saratoga County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36093": {
+  "county": "Schenectady County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36103": {
+  "county": "Suffolk County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 1,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 35,
+  "added_new": 34,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'Springdale MW Facility' (3110, no boarding)"
+  ],
+  "gone": [
+   [
+    -73.51968,
+    41.08215,
+    "Springdale MW Facility"
+   ]
+  ],
+  "new": []
+ },
+ "36111": {
+  "county": "Ulster County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "36119": {
+  "county": "Westchester County",
+  "st": "NY",
+  "unmatched": 0,
+  "removed": 1,
+  "renamed": 0,
+  "replay_matches_file": false,
+  "added_old": 82,
+  "added_new": 81,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'Springdale MW Facility' (3110, no boarding)"
+  ],
+  "gone": [
+   [
+    -73.51968,
+    41.08215,
+    "Springdale MW Facility"
+   ]
+  ],
+  "new": []
+ },
+ "37001": {
+  "county": "Alamance County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37019": {
+  "county": "Brunswick County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37021": {
+  "county": "Buncombe County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37025": {
+  "county": "Cabarrus County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 1,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37035": {
+  "county": "Catawba County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37051": {
+  "county": "Cumberland County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37057": {
+  "county": "Davidson County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37063": {
+  "county": "Durham County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37067": {
+  "county": "Forsyth County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37071": {
+  "county": "Gaston County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37081": {
+  "county": "Guilford County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37097": {
+  "county": "Iredell County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37101": {
+  "county": "Johnston County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37119": {
+  "county": "Mecklenburg County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 6,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37129": {
+  "county": "New Hanover County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37133": {
+  "county": "Onslow County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37135": {
+  "county": "Orange County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37147": {
+  "county": "Pitt County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37159": {
+  "county": "Rowan County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37179": {
+  "county": "Union County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 5,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "37183": {
+  "county": "Wake County",
+  "st": "NC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "38017": {
+  "county": "Cass County",
+  "st": "ND",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39017": {
+  "county": "Butler County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39025": {
+  "county": "Clermont County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39035": {
+  "county": "Cuyahoga County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 43,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39041": {
+  "county": "Delaware County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39045": {
+  "county": "Fairfield County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39049": {
+  "county": "Franklin County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39057": {
+  "county": "Greene County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39061": {
+  "county": "Hamilton County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39085": {
+  "county": "Lake County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39089": {
+  "county": "Licking County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39093": {
+  "county": "Lorain County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39095": {
+  "county": "Lucas County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39099": {
+  "county": "Mahoning County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39103": {
+  "county": "Medina County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39113": {
+  "county": "Montgomery County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39133": {
+  "county": "Portage County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39151": {
+  "county": "Stark County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39153": {
+  "county": "Summit County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39155": {
+  "county": "Trumbull County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "39165": {
+  "county": "Warren County",
+  "st": "OH",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "40017": {
+  "county": "Canadian County",
+  "st": "OK",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "40027": {
+  "county": "Cleveland County",
+  "st": "OK",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "40109": {
+  "county": "Oklahoma County",
+  "st": "OK",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "40143": {
+  "county": "Tulsa County",
+  "st": "OK",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "41005": {
+  "county": "Clackamas County",
+  "st": "OR",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 2,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "41017": {
+  "county": "Deschutes County",
+  "st": "OR",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "41029": {
+  "county": "Jackson County",
+  "st": "OR",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "41039": {
+  "county": "Lane County",
+  "st": "OR",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "41047": {
+  "county": "Marion County",
+  "st": "OR",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "41051": {
+  "county": "Multnomah County",
+  "st": "OR",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 6,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "41067": {
+  "county": "Washington County",
+  "st": "OR",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 2,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42003": {
+  "county": "Allegheny County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42007": {
+  "county": "Beaver County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42011": {
+  "county": "Berks County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42017": {
+  "county": "Bucks County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 5,
+  "replay_matches_file": true,
+  "added_old": 13,
+  "added_new": 13,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -75.07804,
+    40.02306,
+    "Frankford Transit Center"
+   ]
+  ],
+  "new": [
+   [
+    -75.07795,
+    40.023,
+    "Frankford Transit Center"
+   ]
+  ]
+ },
+ "42019": {
+  "county": "Butler County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42027": {
+  "county": "Centre County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42029": {
+  "county": "Chester County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 1,
+  "replay_matches_file": true,
+  "added_old": 7,
+  "added_new": 7,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42041": {
+  "county": "Cumberland County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42043": {
+  "county": "Dauphin County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42045": {
+  "county": "Delaware County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 2,
+  "renamed": 7,
+  "replay_matches_file": true,
+  "added_old": 11,
+  "added_new": 10,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'Employee Platform - Employees Only' (502, employees only)",
+   "removed 'Employee Platform - Employees Only' (502, employees only)"
+  ],
+  "gone": [
+   [
+    -75.26331,
+    39.96455,
+    "Employee Platform - Employees Only"
+   ],
+   [
+    -75.18328,
+    39.95481,
+    "Drexel Station at 30th St"
+   ]
+  ],
+  "new": [
+   [
+    -75.1833,
+    39.95485,
+    "Drexel Station at 30th St"
+   ]
+  ]
+ },
+ "42049": {
+  "county": "Erie County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42055": {
+  "county": "Franklin County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42069": {
+  "county": "Lackawanna County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42071": {
+  "county": "Lancaster County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42077": {
+  "county": "Lehigh County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42079": {
+  "county": "Luzerne County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42089": {
+  "county": "Monroe County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42091": {
+  "county": "Montgomery County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 2,
+  "renamed": 20,
+  "replay_matches_file": true,
+  "added_old": 18,
+  "added_new": 17,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'Employee Platform - Employees Only' (502, employees only)",
+   "removed 'Employee Platform - Employees Only' (502, employees only)"
+  ],
+  "gone": [
+   [
+    -75.26331,
+    39.96455,
+    "Employee Platform - Employees Only"
+   ],
+   [
+    -75.18328,
+    39.95481,
+    "Drexel Station at 30th St"
+   ],
+   [
+    -75.16529,
+    39.95257,
+    "15th St/City Hall"
+   ]
+  ],
+  "new": [
+   [
+    -75.1833,
+    39.95485,
+    "Drexel Station at 30th St"
+   ],
+   [
+    -75.16479,
+    39.95254,
+    "15th St/City Hall Station"
+   ]
+  ]
+ },
+ "42095": {
+  "county": "Northampton County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42101": {
+  "county": "Philadelphia County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 2,
+  "renamed": 19,
+  "replay_matches_file": true,
+  "added_old": 9,
+  "added_new": 8,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'Employee Platform - Employees Only' (502, employees only)",
+   "removed 'Employee Platform - Employees Only' (502, employees only)"
+  ],
+  "gone": [
+   [
+    -75.26331,
+    39.96455,
+    "Employee Platform - Employees Only"
+   ]
+  ],
+  "new": []
+ },
+ "42125": {
+  "county": "Washington County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42129": {
+  "county": "Westmoreland County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "42133": {
+  "county": "York County",
+  "st": "PA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "44003": {
+  "county": "Kent County",
+  "st": "RI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "44007": {
+  "county": "Providence County",
+  "st": "RI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "45003": {
+  "county": "Aiken County",
+  "st": "SC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "45007": {
+  "county": "Anderson County",
+  "st": "SC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "45013": {
+  "county": "Beaufort County",
+  "st": "SC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "45015": {
+  "county": "Berkeley County",
+  "st": "SC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "45019": {
+  "county": "Charleston County",
+  "st": "SC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "45035": {
+  "county": "Dorchester County",
+  "st": "SC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "45045": {
+  "county": "Greenville County",
+  "st": "SC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "45051": {
+  "county": "Horry County",
+  "st": "SC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "45063": {
+  "county": "Lexington County",
+  "st": "SC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "45079": {
+  "county": "Richland County",
+  "st": "SC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "45083": {
+  "county": "Spartanburg County",
+  "st": "SC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "45091": {
+  "county": "York County",
+  "st": "SC",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "46099": {
+  "county": "Minnehaha County",
+  "st": "SD",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "47037": {
+  "county": "Davidson County",
+  "st": "TN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "47065": {
+  "county": "Hamilton County",
+  "st": "TN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "47093": {
+  "county": "Knox County",
+  "st": "TN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "47125": {
+  "county": "Montgomery County",
+  "st": "TN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "47149": {
+  "county": "Rutherford County",
+  "st": "TN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "47157": {
+  "county": "Shelby County",
+  "st": "TN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "47163": {
+  "county": "Sullivan County",
+  "st": "TN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "47165": {
+  "county": "Sumner County",
+  "st": "TN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "47187": {
+  "county": "Williamson County",
+  "st": "TN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "47189": {
+  "county": "Wilson County",
+  "st": "TN",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48027": {
+  "county": "Bell County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48029": {
+  "county": "Bexar County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48039": {
+  "county": "Brazoria County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48041": {
+  "county": "Brazos County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48061": {
+  "county": "Cameron County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48085": {
+  "county": "Collin County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48091": {
+  "county": "Comal County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48113": {
+  "county": "Dallas County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 5,
+  "renamed": 1,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'MCKINNEY @ ALLEN - N - NS' (152, no boarding)",
+   "removed 'CONVENTION CENTER STATION' (152, no boarding)",
+   "removed 'SHERMAN POCKET TRACK' (152, no boarding)",
+   "removed 'EAST TEX YARD LIMIT' (152, no boarding)",
+   "removed 'WEST TEX YARD LIMIT' (152, no boarding)"
+  ],
+  "gone": [],
+  "new": []
+ },
+ "48121": {
+  "county": "Denton County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48135": {
+  "county": "Ector County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48139": {
+  "county": "Ellis County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48141": {
+  "county": "El Paso County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48157": {
+  "county": "Fort Bend County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48167": {
+  "county": "Galveston County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48187": {
+  "county": "Guadalupe County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48201": {
+  "county": "Harris County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48209": {
+  "county": "Hays County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 1,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48215": {
+  "county": "Hidalgo County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48245": {
+  "county": "Jefferson County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48251": {
+  "county": "Johnson County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48257": {
+  "county": "Kaufman County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48303": {
+  "county": "Lubbock County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48309": {
+  "county": "McLennan County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48329": {
+  "county": "Midland County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48339": {
+  "county": "Montgomery County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48355": {
+  "county": "Nueces County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48367": {
+  "county": "Parker County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48423": {
+  "county": "Smith County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48439": {
+  "county": "Tarrant County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 2,
+  "renamed": 3,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'EAST TEX YARD LIMIT' (152, no boarding)",
+   "removed 'WEST TEX YARD LIMIT' (152, no boarding)"
+  ],
+  "gone": [],
+  "new": []
+ },
+ "48453": {
+  "county": "Travis County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 4,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48479": {
+  "county": "Webb County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "48491": {
+  "county": "Williamson County",
+  "st": "TX",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 3,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "49011": {
+  "county": "Davis County",
+  "st": "UT",
+  "unmatched": 0,
+  "removed": 1,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 0,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'WARM SPRINGS RELIEF POINT' (2349, no boarding)"
+  ],
+  "gone": [
+   [
+    -111.90769,
+    40.79063,
+    "WARM SPRINGS RELIEF POINT"
+   ]
+  ],
+  "new": []
+ },
+ "49035": {
+  "county": "Salt Lake County",
+  "st": "UT",
+  "unmatched": 0,
+  "removed": 3,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 0,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [
+   "removed 'JORDAN RIVER SERVICE CENTER RELIEF' (2349, no boarding)",
+   "removed 'WARM SPRINGS RELIEF POINT' (2349, no boarding)",
+   "removed 'MRSC OPERATOR RELIEF' (2349, no boarding)"
+  ],
+  "gone": [
+   [
+    -111.90769,
+    40.79063,
+    "WARM SPRINGS RELIEF POINT"
+   ]
+  ],
+  "new": []
+ },
+ "49049": {
+  "county": "Utah County",
+  "st": "UT",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "49053": {
+  "county": "Washington County",
+  "st": "UT",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "49057": {
+  "county": "Weber County",
+  "st": "UT",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "50007": {
+  "county": "Chittenden County",
+  "st": "VT",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "51013": {
+  "county": "Arlington County",
+  "st": "VA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 77,
+  "replay_matches_file": false,
+  "added_old": 37,
+  "added_new": 37,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -77.12927,
+    38.79929,
+    "Van Dorn St, Blue Line Center Platform"
+   ],
+   [
+    -77.11322,
+    38.88231,
+    "Ballston, Orange/Silver Line Track 2 Platform"
+   ],
+   [
+    -77.08502,
+    38.95938,
+    "Friendship Heights, Red Line Center Platform"
+   ],
+   [
+    -77.07967,
+    38.94888,
+    "Tenleytown, Red Line Center Platform"
+   ],
+   [
+    -77.07108,
+    38.80029,
+    "Eisenhower Ave, Yellow Line Track 1 Platform"
+   ],
+   [
+    -77.06295,
+    38.9432,
+    "Van Ness, Red Line Center Platform"
+   ],
+   [
+    -77.06097,
+    38.8066,
+    "King St-Old Town, Yellow/Blue Line Center Platform"
+   ],
+   [
+    -77.05813,
+    38.93491,
+    "Cleveland Park, Red Line Center Platform"
+   ],
+   [
+    -77.05269,
+    38.92555,
+    "Woodley Park, Red Line Center Platform"
+   ],
+   [
+    -77.0501,
+    38.90069,
+    "Foggy Bottom-GWU, Blue/Orange/Silver Line Center Platform"
+   ],
+   [
+    -77.04366,
+    38.90989,
+    "Dupont Circle, Red Line Track 1 Platform"
+   ],
+   [
+    -77.04047,
+    38.90128,
+    "Farragut West, Blue/Orange/Silver Line Track 1 Platform"
+   ]
+  ],
+  "new": [
+   [
+    -77.12927,
+    38.79929,
+    "Van Dorn St"
+   ],
+   [
+    -77.11322,
+    38.88225,
+    "Ballston-MU"
+   ],
+   [
+    -77.08502,
+    38.95938,
+    "Friendship Heights"
+   ],
+   [
+    -77.07967,
+    38.94888,
+    "Tenleytown-AU"
+   ],
+   [
+    -77.07113,
+    38.80037,
+    "Eisenhower Av"
+   ],
+   [
+    -77.06295,
+    38.9432,
+    "Van Ness-UDC"
+   ],
+   [
+    -77.06097,
+    38.8066,
+    "King St-Old Town"
+   ],
+   [
+    -77.05813,
+    38.93491,
+    "Cleveland Park"
+   ],
+   [
+    -77.05269,
+    38.92555,
+    "Woodley Park"
+   ],
+   [
+    -77.0501,
+    38.90069,
+    "Foggy Bottom-GWU"
+   ],
+   [
+    -77.0436,
+    38.9099,
+    "Dupont Circle"
+   ],
+   [
+    -77.04047,
+    38.90133,
+    "Farragut West"
+   ]
+  ]
+ },
+ "51041": {
+  "county": "Chesterfield County",
+  "st": "VA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "51059": {
+  "county": "Fairfax County",
+  "st": "VA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 116,
+  "replay_matches_file": false,
+  "added_old": 40,
+  "added_new": 40,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -77.5242,
+    38.73058,
+    "Lead"
+   ],
+   [
+    -77.14618,
+    39.08427,
+    "Rockville, Red Line Center Platform"
+   ],
+   [
+    -77.12121,
+    39.06269,
+    "Twinbrook, Red Line Center Platform"
+   ],
+   [
+    -77.11322,
+    38.88231,
+    "Ballston, Orange/Silver Line Track 2 Platform"
+   ],
+   [
+    -77.11308,
+    39.04852,
+    "North Bethesda, Red Line Center Platform"
+   ],
+   [
+    -77.10412,
+    39.02972,
+    "Grosvenor-Strathmore, Red Line Center Platform"
+   ],
+   [
+    -77.09676,
+    38.99822,
+    "Medical Center, Red Line Center Platform"
+   ],
+   [
+    -77.09365,
+    38.98327,
+    "Bethesda, Red Line Center Platform"
+   ],
+   [
+    -77.08502,
+    38.95938,
+    "Friendship Heights, Red Line Center Platform"
+   ],
+   [
+    -77.07967,
+    38.94888,
+    "Tenleytown, Red Line Center Platform"
+   ],
+   [
+    -77.06295,
+    38.9432,
+    "Van Ness, Red Line Center Platform"
+   ],
+   [
+    -77.05813,
+    38.93491,
+    "Cleveland Park, Red Line Center Platform"
+   ]
+  ],
+  "new": [
+   [
+    -77.5242,
+    38.73058,
+    "Broad Run"
+   ],
+   [
+    -77.14618,
+    39.08427,
+    "Rockville"
+   ],
+   [
+    -77.12121,
+    39.06269,
+    "Twinbrook"
+   ],
+   [
+    -77.11322,
+    38.88225,
+    "Ballston-MU"
+   ],
+   [
+    -77.11308,
+    39.04852,
+    "North Bethesda"
+   ],
+   [
+    -77.10412,
+    39.02972,
+    "Grosvenor-Strathmore"
+   ],
+   [
+    -77.09676,
+    38.99822,
+    "Medical Center"
+   ],
+   [
+    -77.09365,
+    38.98327,
+    "Bethesda"
+   ],
+   [
+    -77.08502,
+    38.95938,
+    "Friendship Heights"
+   ],
+   [
+    -77.07967,
+    38.94888,
+    "Tenleytown-AU"
+   ],
+   [
+    -77.06295,
+    38.9432,
+    "Van Ness-UDC"
+   ],
+   [
+    -77.05813,
+    38.93491,
+    "Cleveland Park"
+   ]
+  ]
+ },
+ "51087": {
+  "county": "Henrico County",
+  "st": "VA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "51107": {
+  "county": "Loudoun County",
+  "st": "VA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 7,
+  "replay_matches_file": true,
+  "added_old": 5,
+  "added_new": 5,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "51153": {
+  "county": "Prince William County",
+  "st": "VA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 29,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -77.5242,
+    38.73058,
+    "Lead"
+   ]
+  ],
+  "new": [
+   [
+    -77.5242,
+    38.73058,
+    "Broad Run"
+   ]
+  ]
+ },
+ "51179": {
+  "county": "Stafford County",
+  "st": "VA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 10,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -77.44081,
+    38.22099,
+    "1"
+   ]
+  ],
+  "new": [
+   [
+    -77.44081,
+    38.22099,
+    "Spotsylvania"
+   ]
+  ]
+ },
+ "51510": {
+  "county": "Alexandria city",
+  "st": "VA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 23,
+  "replay_matches_file": true,
+  "added_old": 2,
+  "added_new": 2,
+  "added_changed": true,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [
+   [
+    -77.16799,
+    38.7665,
+    "Franconia-Springfield, Blue Line Center Platform"
+   ],
+   [
+    -77.05409,
+    38.86917,
+    "Pentagon, Yellow/Blue Line Track 1 Platform"
+   ]
+  ],
+  "new": [
+   [
+    -77.16799,
+    38.7665,
+    "Franconia-Springfield"
+   ],
+   [
+    -77.05411,
+    38.86918,
+    "Pentagon"
+   ]
+  ]
+ },
+ "51550": {
+  "county": "Chesapeake city",
+  "st": "VA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "51700": {
+  "county": "Newport News city",
+  "st": "VA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "51710": {
+  "county": "Norfolk city",
+  "st": "VA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "51760": {
+  "county": "Richmond city",
+  "st": "VA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "51810": {
+  "county": "Virginia Beach city",
+  "st": "VA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "53005": {
+  "county": "Benton County",
+  "st": "WA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "53011": {
+  "county": "Clark County",
+  "st": "WA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 2,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "53033": {
+  "county": "King County",
+  "st": "WA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "53035": {
+  "county": "Kitsap County",
+  "st": "WA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "53053": {
+  "county": "Pierce County",
+  "st": "WA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "53061": {
+  "county": "Snohomish County",
+  "st": "WA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "53063": {
+  "county": "Spokane County",
+  "st": "WA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "53067": {
+  "county": "Thurston County",
+  "st": "WA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "53073": {
+  "county": "Whatcom County",
+  "st": "WA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "53077": {
+  "county": "Yakima County",
+  "st": "WA",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "54039": {
+  "county": "Kanawha County",
+  "st": "WV",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "55009": {
+  "county": "Brown County",
+  "st": "WI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "55025": {
+  "county": "Dane County",
+  "st": "WI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "55059": {
+  "county": "Kenosha County",
+  "st": "WI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "55079": {
+  "county": "Milwaukee County",
+  "st": "WI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "55087": {
+  "county": "Outagamie County",
+  "st": "WI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "55101": {
+  "county": "Racine County",
+  "st": "WI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 1,
+  "added_new": 1,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "55105": {
+  "county": "Rock County",
+  "st": "WI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "55133": {
+  "county": "Waukesha County",
+  "st": "WI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "55139": {
+  "county": "Winnebago County",
+  "st": "WI",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "56021": {
+  "county": "Laramie County",
+  "st": "WY",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "72021": {
+  "county": "Bayam\u00f3n Municipio",
+  "st": "PR",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "72031": {
+  "county": "Carolina Municipio",
+  "st": "PR",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ },
+ "72127": {
+  "county": "San Juan Municipio",
+  "st": "PR",
+  "unmatched": 0,
+  "removed": 0,
+  "renamed": 0,
+  "replay_matches_file": true,
+  "added_old": 0,
+  "added_new": 0,
+  "added_changed": false,
+  "confirm_lost": [],
+  "notes": [],
+  "gone": [],
+  "new": []
+ }
+}

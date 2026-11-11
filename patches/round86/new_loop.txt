@@ -1,0 +1,133 @@
+    # selection 20: a copy whose bus schedule has ended (before today) is no longer final. The feed's other copies are read, then, in
+    # California, the State's Cal-ITP tables (calitp_candidates: a dataset with the feed's agency), then the provider's other catalog
+    # candidates (deprecated rows, redirects); the first current copy is used, else the ended one whose bus schedule ends last, recorded in
+    # the meta (schedule_ended, copies_read) and named on the page. Selection 19 stopped at the first ended copy under a year old (MARTA's
+    # 21 Aug 2026 schedule, SFMTA's 28 Aug while Cal-ITP's tables hold Muni's schedule to 15 Jan 2027). A copy read only for this search
+    # adds its rail stops (and its skips and gap stops) only if it is the copy used.
+    def pick(res, seen):
+        tried[res["r"]["mdb_source_id"]] = True; results.append(res); res["copies_read"] = seen
+        if res.get("rail_"):
+            rail.extend(res["rail_"])
+        if res["hi_bus"] < today:
+            log("   gtfs ended schedule used", res["r"]["mdb_source_id"], res["r"]["provider"][:40], "bus schedule ended", res["hi_bus"], "copies read", seen)
+    for cands in feeds:
+      ended_g = None; seen_g = []; done = False   # this provider's newest ended result so far; every copy read for it
+      for r in cands:
+        fid = r["mdb_source_id"]
+        if fid in tried:   # the same feed under another catalog entry: read once, counted once
+            if tried[fid]:
+                break
+            continue
+        tried[fid] = False
+        extra = ended_g is not None   # read only because the provider's schedule read so far has ended
+        # MobilityData's current hosted copy first (mdb-<id> or the tld-<id> a deprecated feed redirects to), then the legacy mirror, then,
+        # when both are stale or missing, the operator's own download URL from the catalog where this environment can reach it (e.g.
+        # Westchester's Bee-Line on NYSDOT's 511NY bucket, s3.amazonaws.com/datatools-511ny: current while both MobilityData copies ended
+        # in 2025); since selection 20 also when the copies read have ended, and then Cal-ITP's tables in California
+        srcs = [("hosted", f"{MDB_HOSTED}/{'mdb-' + fid if fid.isdigit() else fid}/latest.zip")]
+        if fid in IDX:
+            srcs.append(("legacy mirror", f"https://storage.googleapis.com/storage/v1/b/mdb-latest/o/{IDX[fid]['name']}?alt=media"))
+        arch = (CAT.get(fid, {}).get("urls.latest") or "").strip()
+        if fid.startswith("tfs-") and arch.startswith("https://openmobilitydata-data.s3"):
+            srcs.append(("TransitFeeds archive", arch))
+        prod = (CAT.get(fid, {}).get("urls.direct_download") or "").strip()
+        if prod.startswith(("http://", "https://")):
+            srcs.append(("producer URL", prod))
+        res = None; errs = []; read_any = False; ended = None; qi = 0; ca_done = region.STATE != "CA" or extra; keys = {_agency_key(r["provider"])}; ca_info = {}
+        ref = {"id": {}, "code": {}, "name": collections.defaultdict(list)}   # exact stop positions of the copies read (for Cal-ITP's rounded ones)
+        read_reg = False   # a copy other than Cal-ITP's was read
+        while True:
+            if qi >= len(srcs):
+                if not ca_done:   # no current copy so far: California's Cal-ITP tables
+                    ca_done = True
+                    for d in calitp_candidates(keys, ended["hi_bus"].isoformat() if ended else ""):
+                        ca_info[d["b64"]] = d; srcs.append((CALITP_COPY, d["b64"]))
+                    if qi < len(srcs):
+                        continue
+                break
+            kind, url = srcs[qi]; qi += 1
+            try:
+                z = zipfile.ZipFile(io.BytesIO(calitp_zip(url) if kind == CALITP_COPY else get(url, binary=True, timeout=900, retries=1 if kind == "producer URL" else 3)))
+            except Exception as e:
+                errs.append(f"{kind}: {repr(e)[:50]}"); seen_g.append([fid, kind, "not downloaded"]); continue
+            read_any = True
+            shown = ca_info[url]["url"] if kind == CALITP_COPY else url
+            later = extra or ended is not None   # selection 20: this copy counts only if it is the one used
+            if later:
+                r_ = {**r, "urls.latest": shown, "_copy": kind}; sk_, gap_, rail_ = [], [], []
+            else:
+                r["urls.latest"] = shown; r["_copy"] = kind; r_ = r; sk_, gap_, rail_ = skipped, gap, rail
+            if kind == CALITP_COPY:
+                r_["_calitp"] = {"name": ca_info[url]["name"], "key": url, "snapshot": calitp_index()["snapshot"], "tables": "https://data.ca.gov/dataset/" + CALITP_PKG}
+            names = set(z.namelist())
+            alias = {}   # some agencies zip their tables in a subfolder or as .csv (BJCTA 3434: google_transit_Working.zip/routes.csv)
+            for nm in sorted(names):
+                base, dot, ext = nm.rsplit("/", 1)[-1].rpartition(".")
+                if dot and base and ext.lower() in ("txt", "csv"):
+                    alias.setdefault(base.lower() + ".txt", nm)
+            def rd(n, z=z, names=names, alias=alias):   # header names stripped (some feeds pad them with spaces)
+                m = n if n in names else alias.get(n.lower())
+                if not m:
+                    return []
+                return ({(k or "").strip(): (v.strip() if isinstance(v, str) else v) for k, v in row.items()}
+                        for row in csv.DictReader(io.TextIOWrapper(z.open(m), encoding="utf-8-sig")))
+            if kind != CALITP_COPY:
+                read_reg = True
+                keys |= {_agency_key(a.get("agency_name")) for a in rd("agency.txt") if (a.get("agency_name") or "").strip()}
+                d8 = lambda v: isinstance(v, str) and len(v) == 8 and v.isdigit()   # this copy's last service date: the newest copy's position wins
+                ver = max([c.get("end_date") for c in rd("calendar.txt") if d8(c.get("end_date"))] + [c.get("date") for c in rd("calendar_dates.txt") if d8(c.get("date"))] or [""])
+                for x in rd("stops.txt"):
+                    try:
+                        p_ = (float(x["stop_lon"]), float(x["stop_lat"]))
+                    except (KeyError, TypeError, ValueError):
+                        continue
+                    for tab, kk in ((ref["id"], x.get("stop_id")), (ref["code"], (x.get("stop_code") or "").strip())):
+                        if kk and (kk not in tab or tab[kk][0] < ver):
+                            tab[kk] = (ver, p_)
+                    ref["name"][_stop_name_key(x.get("stop_name"))].append((ver, p_))
+            else:   # the State's tables round stop positions to 3 decimals: exact ones from the feed's other copies, or the copy is not used
+                fixed, n_all, n_fix = calitp_positions(rd, ref)
+                if not n_all or n_fix < 0.9 * n_all:
+                    seen_g.append([fid, f"{kind}: {ca_info[url]['name']}", f"not used: {n_fix} of {n_all} stops have an exact position in another copy"])
+                    if not later:
+                        sk_.append({"id": fid, "provider": r["provider"], "copy": kind, "why": ("" if read_reg else "no copy could be downloaded (" + "; ".join(errs)[:120] + "); ")
+                                    + f"its Cal-ITP copy places only {n_fix} of {n_all} stops exactly (the State's tables round positions to about 100 m)"})
+                    continue
+                rd = _with_positions(rd, fixed); r_["_calitp"]["exact_positions"] = [n_fix, n_all]
+            n_sk = len(sk_)
+            try:
+                _rail_stops(r_, rd, W, S, E, N, rail_)
+            except Exception as e:
+                log("   rail stops unreadable", fid, repr(e)[:80])
+            try:
+                res = _gtfs_feed(r_, rd, W, S, E, N, today, sk_, gap_)
+            except Exception as e:
+                sk_.append({"id": fid, "provider": r["provider"], "copy": kind, "why": "feed could not be read (" + repr(e)[:60] + ")"})
+                seen_g.append([fid, kind, "could not be read"])
+                log("   gtfs feed unreadable", fid, kind, r["provider"][:40], repr(e)[:80]); continue
+            if res is not None:
+                res["rail_"] = rail_ if later else None
+                seen_g.append([fid, kind if kind != CALITP_COPY else f"{kind}: {ca_info[url]['name']}", ("bus schedule ended " if res["hi_bus"] < today else "bus schedule runs to ") + res["hi_bus"].isoformat()])
+                if res["hi_bus"] >= today:
+                    break
+                if ended is None or res["hi_bus"] > ended["hi_bus"]:   # selection 20: ended; the next copy may be newer
+                    ended = res
+                res = None; continue
+            seen_g.append([fid, kind, (sk_[-1]["why"] + (", " + sk_[-1]["calendar_end"] if sk_[-1].get("calendar_end") else "")) if len(sk_) > n_sk else "no bus routes or service dates"])
+            if not (len(sk_) > n_sk and sk_[-1].get("why") in ("schedule ended over a year ago", NO_BUS_NEAR_TODAY)):
+                break   # no bus routes or no dates: a property of the feed, not of this copy
+        if res is None:
+            res = ended
+        if not read_any:
+            if not extra:
+                skipped.append({"id": fid, "provider": r["provider"], "why": "no copy could be downloaded (" + "; ".join(errs)[:160] + ")"})
+            log("   gtfs no copy", fid, r["provider"][:40]); continue
+        if res is not None:
+            if res["hi_bus"] < today:   # selection 20: the provider's other candidates may be newer
+                if ended_g is None or res["hi_bus"] > ended_g["hi_bus"]:
+                    ended_g = res
+                continue
+            pick(res, seen_g); done = True
+            break   # this provider is covered; deprecated fallbacks are not needed
+      if not done and ended_g is not None:
+        pick(ended_g, seen_g)

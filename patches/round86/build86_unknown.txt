@@ -1,0 +1,5 @@
+@@OLD
+" where the feeds miss OpenStreetMap's bus stops"
+@@NEW
+" where OpenStreetMap or an out-of-date schedule shows bus stops that the feeds read do not have"
+@@END

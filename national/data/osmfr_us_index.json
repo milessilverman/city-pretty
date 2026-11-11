@@ -1,0 +1,162 @@
+{
+ "us-midwest/": [
+  "illinois-latest.osm.pbf",
+  "michigan-latest.osm.pbf"
+ ],
+ "us-midwest/illinois/": [
+  "central-latest.osm.pbf",
+  "cook-latest.osm.pbf",
+  "east_central-latest.osm.pbf",
+  "north-latest.osm.pbf",
+  "northeast-latest.osm.pbf",
+  "northwest-latest.osm.pbf",
+  "southern-latest.osm.pbf",
+  "southwest-latest.osm.pbf"
+ ],
+ "us-midwest/michigan/": [
+  "central-latest.osm.pbf",
+  "detroit_metro-latest.osm.pbf",
+  "northern_lower-latest.osm.pbf",
+  "southeast-latest.osm.pbf",
+  "southwest-latest.osm.pbf",
+  "upper_peninsula-latest.osm.pbf",
+  "west-latest.osm.pbf"
+ ],
+ "us-northeast/": [
+  "new-york-latest.osm.pbf"
+ ],
+ "us-northeast/new-york/": [
+  "capital_district-latest.osm.pbf",
+  "central_new_york-latest.osm.pbf",
+  "finger_lakes-latest.osm.pbf",
+  "hudson_valley-latest.osm.pbf",
+  "long_island-latest.osm.pbf",
+  "mohawk_valley-latest.osm.pbf",
+  "new_york_city-latest.osm.pbf",
+  "north_country-latest.osm.pbf",
+  "southern_tier-latest.osm.pbf",
+  "western_new_york-latest.osm.pbf"
+ ],
+ "us-south/": [
+  "florida-latest.osm.pbf",
+  "georgia-latest.osm.pbf",
+  "north-carolina-latest.osm.pbf",
+  "texas-latest.osm.pbf",
+  "virginia-latest.osm.pbf"
+ ],
+ "us-south/florida/": [
+  "east_central-latest.osm.pbf",
+  "gatorland-latest.osm.pbf",
+  "gold_coast-latest.osm.pbf",
+  "northeast-latest.osm.pbf",
+  "northwest-latest.osm.pbf",
+  "panhandle-latest.osm.pbf",
+  "southwest-latest.osm.pbf",
+  "suncoast-latest.osm.pbf",
+  "treasure_coast-latest.osm.pbf"
+ ],
+ "us-south/georgia/": [
+  "north_metro-latest.osm.pbf",
+  "northeast-latest.osm.pbf",
+  "northwest-latest.osm.pbf",
+  "southeast-latest.osm.pbf",
+  "southwest-latest.osm.pbf"
+ ],
+ "us-south/north-carolina/": [
+  "north_central-latest.osm.pbf",
+  "northeast-latest.osm.pbf",
+  "northwest-latest.osm.pbf",
+  "piedmont_triad-latest.osm.pbf",
+  "south_central-latest.osm.pbf",
+  "southeast-latest.osm.pbf",
+  "western-latest.osm.pbf"
+ ],
+ "us-south/texas/": [
+  "central-latest.osm.pbf",
+  "north-latest.osm.pbf",
+  "northwest-latest.osm.pbf",
+  "south-latest.osm.pbf",
+  "southeast-latest.osm.pbf",
+  "west-latest.osm.pbf"
+ ],
+ "us-south/virginia/": [
+  "appomattox-latest.osm.pbf",
+  "chesapeake-latest.osm.pbf",
+  "culpeper-latest.osm.pbf",
+  "fairfax-latest.osm.pbf",
+  "richmond-latest.osm.pbf",
+  "salem-latest.osm.pbf",
+  "wytheville-latest.osm.pbf"
+ ],
+ "us-west/": [
+  "california-latest.osm.pbf",
+  "colorado-latest.osm.pbf"
+ ],
+ "us-west/california/": [
+  "alameda-latest.osm.pbf",
+  "alpine-latest.osm.pbf",
+  "amador-latest.osm.pbf",
+  "butte-latest.osm.pbf",
+  "calaveras-latest.osm.pbf",
+  "colusa-latest.osm.pbf",
+  "contra_costa-latest.osm.pbf",
+  "del_norte-latest.osm.pbf",
+  "el_dorado-latest.osm.pbf",
+  "fresno-latest.osm.pbf",
+  "glenn-latest.osm.pbf",
+  "humboldt-latest.osm.pbf",
+  "imperial-latest.osm.pbf",
+  "inyo-latest.osm.pbf",
+  "kern-latest.osm.pbf",
+  "kings-latest.osm.pbf",
+  "lake-latest.osm.pbf",
+  "lassen-latest.osm.pbf",
+  "los_angeles-latest.osm.pbf",
+  "madera-latest.osm.pbf",
+  "marin-latest.osm.pbf",
+  "mariposa-latest.osm.pbf",
+  "mendocino-latest.osm.pbf",
+  "merced-latest.osm.pbf",
+  "modoc-latest.osm.pbf",
+  "mono-latest.osm.pbf",
+  "monterey-latest.osm.pbf",
+  "napa-latest.osm.pbf",
+  "nevada-latest.osm.pbf",
+  "orange-latest.osm.pbf",
+  "placer-latest.osm.pbf",
+  "plumas-latest.osm.pbf",
+  "riverside-latest.osm.pbf",
+  "sacramento-latest.osm.pbf",
+  "san_benito-latest.osm.pbf",
+  "san_bernardino-latest.osm.pbf",
+  "san_diego-latest.osm.pbf",
+  "san_francisco-latest.osm.pbf",
+  "san_joaquin-latest.osm.pbf",
+  "san_luis_obispo-latest.osm.pbf",
+  "san_mateo-latest.osm.pbf",
+  "santa_barbara-latest.osm.pbf",
+  "santa_clara-latest.osm.pbf",
+  "santa_cruz-latest.osm.pbf",
+  "shasta-latest.osm.pbf",
+  "sierra-latest.osm.pbf",
+  "siskiyou-latest.osm.pbf",
+  "solano-latest.osm.pbf",
+  "sonoma-latest.osm.pbf",
+  "stanislaus-latest.osm.pbf",
+  "sutter-latest.osm.pbf",
+  "tehama-latest.osm.pbf",
+  "trinity-latest.osm.pbf",
+  "tulare-latest.osm.pbf",
+  "tuolumne-latest.osm.pbf",
+  "ventura-latest.osm.pbf",
+  "yolo-latest.osm.pbf",
+  "yuba-latest.osm.pbf"
+ ],
+ "us-west/colorado/": [
+  "denver-latest.osm.pbf",
+  "northeast-latest.osm.pbf",
+  "northwest-latest.osm.pbf",
+  "southeast-latest.osm.pbf",
+  "southwest-latest.osm.pbf"
+ ]
+}

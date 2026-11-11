@@ -1,0 +1,1481 @@
+{
+ "workflow": "wf_2504b585-c1b (station-status-r85)",
+ "note": "research stage complete (6 lines); verification stage stopped at 16:59: the pages it would open are refused by this machine's network policy and the shared WebSearch budget was exhausted",
+ "research": [
+  {
+   "system": "JTA Skyway (Jacksonville Transportation Authority automated monorail people mover, downtown Jacksonville, Florida)",
+   "status": "suspended",
+   "summary": "Unverified (I could not open any JTA or news page because this session's network allowlist blocks those hosts, so I saw them only as search-engine extracts): the JTA Skyway carries no passengers today. JTA suspended all Skyway passenger service indefinitely as part of its FY2027 budget cuts. The pause was planned for the Nov. 2, 2026 service changes, with the last scheduled run on Friday evening, Oct. 30, but staffing problems ended service early on the morning of Friday, Oct. 30, 2026; no part of the line runs and no reopening date has been announced. All eight stations are closed, including the LaVilla platform at the JRTC (found fenced off), and the JRTC has no other rail service (Amtrak still uses its Clifford Lane station); the NAVI autonomous vans on the Bay Street Innovation Corridor run at street level, not on the Skyway guideway.",
+   "stations": [
+    {
+     "name": "Jacksonville Regional Transportation Center (JRTC) at LaVilla - Skyway LaVilla platform (OSM node 8427291139)",
+     "status": "closed",
+     "since": "2026-10-30",
+     "evidence_indexes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      7,
+      8,
+      13
+     ]
+    },
+    {
+     "name": "Central",
+     "status": "closed",
+     "since": "2026-10-30",
+     "evidence_indexes": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      14
+     ]
+    },
+    {
+     "name": "Jefferson",
+     "status": "closed",
+     "since": "2026-10-30",
+     "evidence_indexes": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      16
+     ]
+    },
+    {
+     "name": "Rosa Parks (FSCJ)",
+     "status": "closed",
+     "since": "2026-10-30",
+     "evidence_indexes": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      15
+     ]
+    },
+    {
+     "name": "James Weldon Johnson Park (Hemming Park)",
+     "status": "closed",
+     "since": "2026-10-30",
+     "evidence_indexes": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      15
+     ]
+    },
+    {
+     "name": "Riverplace",
+     "status": "closed",
+     "since": "2026-10-30",
+     "evidence_indexes": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      16
+     ]
+    },
+    {
+     "name": "Kings Avenue",
+     "status": "closed",
+     "since": "2026-10-30",
+     "evidence_indexes": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      15
+     ]
+    },
+    {
+     "name": "San Marco",
+     "status": "closed",
+     "since": "2026-10-30",
+     "evidence_indexes": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      16
+     ]
+    }
+   ],
+   "evidence": [
+    {
+     "url": "https://www.jtafla.com/rider-guide/",
+     "quote": "Skyway Service Update: Due to unexpected operational circumstances, the Skyway service has concluded early today, October 30.",
+     "source_date": "2026-10-30",
+     "publisher": "Jacksonville Transportation Authority (site-wide banner, also indexed on its Park-n-Ride and U2C pages)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.actionnewsjax.com/news/local/jta-shuts-down-skyway-earlier-than-planned-over-staffing-issues-no-reopening-date-announced/3JKR5AEACZCT5BOOYU3L6RO6OY/",
+     "quote": "\"As part of the service changes beginning Nov. 2, Skyway operations were scheduled to pause Friday evening,\" JTA said. \"Due to staffing issues, service ended Friday morning, ahead of the planned pause.\"",
+     "source_date": "2026-10-30 (inferred: the article reports the Friday Oct. 30 shutdown; I did not see its own date)",
+     "publisher": "Action News Jax (WJAX/WFOX, Cox Media Group)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.actionnewsjax.com/news/local/jta-shuts-down-skyway-earlier-than-planned-over-staffing-issues-no-reopening-date-announced/3JKR5AEACZCT5BOOYU3L6RO6OY/",
+     "quote": "JTA has not yet announced a date for when Skyway services will resume.",
+     "source_date": "2026-10-30 (inferred; I did not see the article's own date)",
+     "publisher": "Action News Jax (WJAX/WFOX, Cox Media Group)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.yahoo.com/news/us/articles/jta-shuts-down-skyway-earlier-232742203.html",
+     "quote": "Riders arriving at the La Villa Skyway platform found the entrance fenced off. JTA app users received a notification citing unexpected operational circumstances.",
+     "source_date": "2026-10-30 (inferred; Yahoo syndication of the Action News Jax story)",
+     "publisher": "Yahoo News (syndicating Action News Jax)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.news4jax.com/news/local/2026/09/17/jta-to-cut-39-million-from-fy-2027-budget-suspend-skyway-service-in-november/",
+     "quote": "The JTA plans to suspend passenger operations on the Skyway beginning Nov. 2, resulting in estimated savings of about $10 million during the fiscal year while the agency and community determine the system's future.",
+     "source_date": "2026-09-17",
+     "publisher": "News4JAX (WJXT, Graham Media Group)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.jtafla.com/media-center/press-release/jacksonville-transportation-authority-announces-budget-reductions-and-service-changes/",
+     "quote": "Jacksonville Transportation Authority Announces Budget Reductions and Service Changes",
+     "source_date": "undated in search results (it accompanies the Sept. 2026 FY2027 budget announcement)",
+     "publisher": "Jacksonville Transportation Authority (press release; only the title was visible in search)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://jaxtoday.org/2026/09/17/jta-layoffs-bus-service-skyway-navi/",
+     "quote": "Facing shortfall, JTA will cuts jobs, reduce bus service and halt Skyway and NAVI",
+     "source_date": "2026-09-17",
+     "publisher": "Jacksonville Today",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://jaxtoday.org/2026/11/04/askjaxtdy-jta-cuts-election-day/",
+     "quote": "halting the Skyway will save $10 million next year from operators, maintenance, parts and operations of escalators",
+     "source_date": "2026-11-04",
+     "publisher": "Jacksonville Today (#AskJAXTDY)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.actionnewsjax.com/news/local/years-inertia-grant-puts-amtrak-stations-move-back-downtown-jacksonville-top-list/5F37IZ3IDBDRZDHJNKIO43KH3I/",
+     "quote": "One of the eight projects JAX FAST will focus on is relocating the Amtrak station from Clifford Lane on the Westside to Downtown.",
+     "source_date": "undated in search results (2026 grant story)",
+     "publisher": "Action News Jax (WJAX/WFOX, Cox Media Group)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://jaxtoday.org/2026/02/25/skyway-changes-jacksonville/",
+     "quote": "The commuter system, called U2C for short, mixes autonomous vans on Downtown streets with the 35-year-old Skyway trains on overhead rails.",
+     "source_date": "2026-02-25",
+     "publisher": "Jacksonville Today",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://jtafla.com/media-center/press-release/jta-launches-nation-s-first-public-transportation-autonomous-vehicle-revenue-service/",
+     "quote": "NAVI will operate Monday through Friday from 7:00 a.m. to 7:00 p.m. along the 3.5-mile Bay Street Innovation Corridor",
+     "source_date": "2025-06-27",
+     "publisher": "Jacksonville Transportation Authority (press release)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.news4jax.com/news/local/2026/09/17/jta-to-cut-39-million-from-fy-2027-budget-suspend-skyway-service-in-november/",
+     "quote": "The Jacksonville Transportation Authority will reduce its Fiscal Year 2027 budget by $39 million, suspend passenger service on the Skyway and pause Navi service",
+     "source_date": "2026-09-17",
+     "publisher": "News4JAX (WJXT, Graham Media Group)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.news4jax.com/news/local/2026/09/03/jta-says-redeveloping-skyway-system-could-cost-up-to-565m/",
+     "quote": "JTA said options for redeveloping Downtown Jacksonville's Skyway system will cost $151.95 million to $565.44 million.",
+     "source_date": "2026-09-03",
+     "publisher": "News4JAX (WJXT, Graham Media Group)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://maps.mail.ru/osm/tools/overpass/api/interpreter?data=%5Bout%3Acsv(%3A%3Atype%2C%3A%3Aid%2Cname%2Crailway%2C%22disused%3Arailway%22%2Cstation%2C%3A%3Atimestamp%3Btrue%3B%22%7C%22)%5D%5Btimeout%3A25%5D%3Bnwr(30.312%2C-81.675%2C30.335%2C-81.650)%5B%22station%22%3D%22monorail%22%5D%3Bout%20meta%3B",
+     "quote": "@type|@id|name|railway|disused:railway|station|@timestamp\nnode|8427291139|Jacksonville Regional Transportation Center|station||monorail|2022-01-21T19:59:10Z",
+     "source_date": "2026-11-08 (live OSM data at query time; node last edited 2022-01-21)",
+     "publisher": "OpenStreetMap contributors (via the Overpass API instance at maps.mail.ru)",
+     "primary": false,
+     "opened": true
+    },
+    {
+     "url": "https://maps.mail.ru/osm/tools/overpass/api/interpreter?data=%5Bout%3Acsv(%3A%3Atype%2C%3A%3Aid%2Cname%2Crailway%2C%22disused%3Arailway%22%2Cstation%2C%3A%3Atimestamp%3Btrue%3B%22%7C%22)%5D%5Btimeout%3A25%5D%3Bnwr(30.312%2C-81.675%2C30.335%2C-81.650)%5B%22station%22%3D%22monorail%22%5D%3Bout%20meta%3B",
+     "quote": "node|8427291143|Central|station|station|monorail|2026-10-30T22:31:45Z",
+     "source_date": "2026-11-08 (live OSM data at query time)",
+     "publisher": "OpenStreetMap contributors (via the Overpass API instance at maps.mail.ru)",
+     "primary": false,
+     "opened": true
+    },
+    {
+     "url": "https://maps.mail.ru/osm/tools/overpass/api/interpreter?data=%5Bout%3Acsv(%3A%3Atype%2C%3A%3Aid%2Cname%2Crailway%2C%22disused%3Arailway%22%2Cstation%2C%3A%3Atimestamp%3Btrue%3B%22%7C%22)%5D%5Btimeout%3A25%5D%3Bnwr(30.312%2C-81.675%2C30.335%2C-81.650)%5B%22station%22%3D%22monorail%22%5D%3Bout%20meta%3B",
+     "quote": "node|6188786590|Rosa Parks|station|station|monorail|2026-10-30T22:31:45Z\nnode|7744831001|James Weldon Johnson Park|station|station|monorail|2026-10-30T22:31:45Z\nnode|8427291130|Kings Avenue|station|station|monorail|2026-10-30T22:31:45Z",
+     "source_date": "2026-11-08 (live OSM data at query time)",
+     "publisher": "OpenStreetMap contributors (via the Overpass API instance at maps.mail.ru)",
+     "primary": false,
+     "opened": true
+    },
+    {
+     "url": "https://maps.mail.ru/osm/tools/overpass/api/interpreter?data=%5Bout%3Acsv(%3A%3Atype%2C%3A%3Aid%2Cname%2Crailway%2C%22disused%3Arailway%22%2Cstation%2C%3A%3Atimestamp%3Btrue%3B%22%7C%22)%5D%5Btimeout%3A25%5D%3Bnwr(30.312%2C-81.675%2C30.335%2C-81.650)%5B%22station%22%3D%22monorail%22%5D%3Bout%20meta%3B",
+     "quote": "node|8427291133|Riverplace|station|station|monorail|2026-10-30T22:31:45Z\nnode|8427291138|San Marco|station|station|monorail|2026-10-30T22:31:45Z\nnode|8427291140|Jefferson|station|station|monorail|2026-10-30T22:31:45Z",
+     "source_date": "2026-11-08 (live OSM data at query time)",
+     "publisher": "OpenStreetMap contributors (via the Overpass API instance at maps.mail.ru)",
+     "primary": false,
+     "opened": true
+    },
+    {
+     "url": "https://www.actionnewsjax.com/news/local/jta-announces-nearly-200-layoffs-major-service-cuts-agency-works-close-39-million-budget-gap/6PH35QX55FECFKABUDUCKCEZCA/",
+     "quote": "NAVI shuttle service is also set to cease operations January 1.",
+     "source_date": "undated in search results (Sept. 2026 budget story)",
+     "publisher": "Action News Jax (WJAX/WFOX, Cox Media Group)",
+     "primary": false,
+     "opened": false
+    }
+   ],
+   "latest_evidence_date": "2026-11-04",
+   "blocked_sites": [
+    "www.actionnewsjax.com: DNS lookup failed (ENOTFOUND). The host is outside this session's network allowlist; this was not a bot check.",
+    "jaxtoday.org: DNS lookup failed (ENOTFOUND). The host is outside this session's network allowlist.",
+    "www.arcgis.com: DNS lookup failed (ENOTFOUND), even though it is on the allowlist.",
+    "Not tried because they are not on the allowlist (the fetch tool advised stopping after repeated DNS failures): jtafla.com / www.jtafla.com, www.news4jax.com, www.yahoo.com, en.wikipedia.org, usa.streetsblog.org, www.jaxdailyrecord.com, news.wjct.org, www.firstcoastnews.com, www.amtrak.com",
+    "Server errors, not blocks: overpass-api.de returned HTTP 503 and then 502; overpass.kumi.systems and overpass.private.coffee timed out. The Overpass instance at maps.mail.ru worked."
+   ],
+   "open_questions": "1) Verification gap: none of the JTA or news pages could be opened. Every real-world status claim above rests on search-engine extracts (opened=false), and those quotes may differ slightly from the live pages. Before these decisions are applied, jtafla.com (service alerts, the Skyway page, the budget press release) should be opened. To do that, jtafla.com, www.actionnewsjax.com, jaxtoday.org and www.news4jax.com would have to be allowed in the session's network settings. I changed no settings. The only page I opened was live OSM data from the Overpass API.\n2) Dates agree once read closely. The press release and news describe the pause as starting 'Nov. 2'. JTA's own statement says operations were 'scheduled to pause Friday evening' (Oct. 30) as part of the Nov. 2 changes, and that staffing problems ended service on Friday morning, Oct. 30. JTA's site banner says service 'concluded early today, October 30'. A search extract of Wikipedia's Skyway infobox also gives the closure date as Oct. 30, 2026. No source suggests that any segment still runs, and I found no bus bridge set up for this shutdown.\n3) What happens to the guideway: JTA calls this a pause while the system's future is decided. A Jacksonville Today extract says JTA's CEO told the FTA in February 2026 that talks on the Skyway's remaining useful life had begun. The 2026 study (PD&E) alternatives include rehabilitation, new automated people-mover trains, a trail with autonomous vehicles at street level, and demolition; News4JAX put the costs at $151.95M to $565.44M. JTA postponed the second round of public meetings in May 2026. No decision on a replacement was found.\n4) NAVI (U2C phase 1, the Bay Street Innovation Corridor) context: its vans run at street level on Bay Street, from Pearl Street to EverBank Stadium, with 12 stops, weekdays 7am to 7pm. They never used the Skyway guideway; the phase 2 plan to convert the guideway with ramps was only studied. Sources disagree on when NAVI ends: Jan. 1, 2027 (Action News Jax, News4JAX), 'beginning Dec.' (Jacksonville Today, Sept. 17), or Dec. 31, 2026 (a Wikipedia extract). One report says the autonomous software licence is expiring, so the vans would revert to manual driving. Search summaries conflict on whether NAVI has a stop at the JRTC, so that is unconfirmed.\n5) Other rail at the JRTC: none. Amtrak still serves Jacksonville from Clifford Lane. Moving it to LaVilla is one of eight JAX FAST master-planning projects, with no design or timeline yet (source date not seen).\n6) OSM: changeset 191257956 at 2026-10-30T22:31:45Z added disused:railway=station to the seven station nodes, which still also carry railway=station. The JRTC node 8427291139 (last edited 2022-01-21) and its stop_area relation 12322087 were not touched. The JRTC's LaVilla stop positions 8427291021 and 8427291022 and the Skyway track ways are tagged disused, as are the Northbank route relations (disused=yes). So the JRTC node's missing disused tag looks like an editing omission, not evidence of service."
+  },
+  {
+   "system": "Las Colinas Area Personal Transit (APT), Irving, Texas",
+   "status": "closed",
+   "summary": "UNVERIFIED: no page could be opened in this session, so every source below is a search-engine excerpt (opened=false). The excerpts say the APT has carried no passengers since 29 August 2020, when its owner-operator, the Dallas County Utility and Reclamation District (DCURD), suspended all passenger service because of COVID-19; the district's website reads 'THE APT SYSTEM IS CLOSED INDEFINITELY', and no source reports a reopening up to November 2026. Before that it was free and open to anyone but ran on weekdays only (6 a.m.-6 p.m. by 2014; lunch hours only after a 1993-1996 shutdown); today NCTCOG is only procuring engineering design to retrofit part of the guideway for new automated vehicles, and in mid-2026 the City of Irving introduced the free 'Loop at Las Colinas' van circulator in the Urban Center.",
+   "stations": [
+    {
+     "name": "600 Las Colinas Boulevard",
+     "status": "closed",
+     "since": "2020-08-29",
+     "evidence_indexes": [
+      0,
+      1,
+      2,
+      3,
+      11,
+      12
+     ]
+    },
+    {
+     "name": "Urban Towers",
+     "status": "closed",
+     "since": "2020-08-29",
+     "evidence_indexes": [
+      0,
+      1,
+      2,
+      3,
+      11
+     ]
+    },
+    {
+     "name": "Bell Tower",
+     "status": "closed",
+     "since": "2020-08-29",
+     "evidence_indexes": [
+      0,
+      1,
+      2,
+      3,
+      11,
+      12
+     ]
+    }
+   ],
+   "evidence": [
+    {
+     "url": "https://dcurd.org/",
+     "quote": "THE APT SYSTEM IS CLOSED INDEFINITELY",
+     "source_date": "undated",
+     "publisher": "Dallas County Utility and Reclamation District (DCURD), APT owner/operator",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://dcurd.org/apt-system/",
+     "quote": "THE APT SYSTEM IS CLOSED INDEFINITELY",
+     "source_date": "undated",
+     "publisher": "Dallas County Utility and Reclamation District (DCURD), APT owner/operator",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.dcurd.org/calendar-3/",
+     "quote": "Due to continued COVID-19 restrictions, beginning August 29, 2020, the APT System is suspending all passenger services until further notice.",
+     "source_date": "undated",
+     "publisher": "Dallas County Utility and Reclamation District (DCURD), APT owner/operator",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Las_Colinas_APT_System",
+     "quote": "In July 1993, the system was closed due to rising expenses and a lack of envisioned development following the Dallas-area real estate crash. ... Service was suspended on August 29, 2020. As of April 2021, it was announced that the Las Colinas APT is closed indefinitely.",
+     "source_date": "undated",
+     "publisher": "Wikipedia",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.nctcog.org/getContentAsset/7dc33ef8-90d5-4236-abed-3cecd2a115cc/dfc3d011-8f63-43f6-9ed8-4b444333a1d0/6-Mobility-Options-2045U.pdf",
+     "quote": "low ridership, complicated by the effects of the COVID-19 pandemic and aging vehicle technology, have halted the operation indefinitely",
+     "source_date": "undated (Mobility 2045 Update, chapter 6)",
+     "publisher": "North Central Texas Council of Governments (NCTCOG)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.nctcog.org/getContentAsset/569b62c3-cf6c-40f1-ae68-56b72b0dbc98/dfc3d011-8f63-43f6-9ed8-4b444333a1d0/agendapacketsttc7282023.pdf?language=en-US",
+     "quote": "retrofitting the existing guideway and operating the pilot would be future phases to be considered by RTC at a future date",
+     "source_date": "2023-07-28",
+     "publisher": "NCTCOG Surface Transportation Technical Committee",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://communityimpact.com/dallas-fort-worth/lewisville-coppell/transportation/2023/07/21/regional-transportation-council-to-pilot-automated-vehicle-project-in-dfw/",
+     "quote": "the infrastructure for Las Colinas' vacant Area Personal Transit System may serve as a testing ground for a next-generation people mover system",
+     "source_date": "2023-07-21",
+     "publisher": "Community Impact",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.nctcog.org/getContentAsset/785b7f9b-e437-4e59-b5b4-4c3d4e151318/dfc3d011-8f63-43f6-9ed8-4b444333a1d0/RFP-Las-Colinas-ATS_Engineering-with-Instructions-to-Proposers.pdf",
+     "quote": "evaluation of track/rail removal and integration of new decking materials combined with safety features added to the existing structure ... NCTCOG anticipates the contract will begin early October 2025.",
+     "source_date": "undated (2025 RFP)",
+     "publisher": "North Central Texas Council of Governments (NCTCOG)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.nctcog.org/getmedia/dc11f0d4-e213-4604-b8df-a31dd2e9483b/FY26-Procurements-Anticipated.pdf",
+     "quote": "Las Colinas Retrofit – Engineering Study",
+     "source_date": "undated (FY2026 anticipated procurements list)",
+     "publisher": "North Central Texas Council of Governments (NCTCOG)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.keranews.org/news/2026-06-30/new-van-service-restores-axed-irving-bus-routes-with-las-colinas-loop-incoming",
+     "quote": "New van service restores axed Irving bus routes, with Las Colinas loop incoming",
+     "source_date": "2026-06-30",
+     "publisher": "KERA News",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://irvingtx.gov/transit",
+     "quote": "The Loop at Las Colinas follows a figure-eight around Las Colinas Boulevard and Lake Carolyn Parkway with through access at O'Connor Road and Promenade Parkway.",
+     "source_date": "undated",
+     "publisher": "City of Irving",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.dallasnews.com/news/2014/03/03/dart-orange-line-link-gives-languishing-las-colinas-tram-a-lift/",
+     "quote": "There are four stations: Urban Towers, 222 W. Las Colinas Blvd.; Bell Tower/Mandalay Canal, 217 Mandalay Canal; Tower 909, 909 Lake Carolyn Parkway, and a stop that is named after its address: 600 Las Colinas Blvd.",
+     "source_date": "2014-03-03 (date in URL)",
+     "publisher": "The Dallas Morning News",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.irvingtexas.com/plan-your-visit/transportation/?bounds=false&view=list&sort=qualityScore",
+     "quote": "The APT is a climate-controlled, on-demand people mover system covering the Las Colinas Urban Center with four passenger stations. ... within walking distance from stations at either the Bell Tower or 600 Las Colinas Blvd.",
+     "source_date": "undated",
+     "publisher": "Visit Irving (Irving Convention and Visitors Bureau)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.dallasnews.com/news/2014/02/14/las-colinas-apt-system-sees-new-riders-with-dart-connection/",
+     "quote": "trams run 6 a.m. to 6 p.m. on weekdays, and passengers ride for free",
+     "source_date": "2014-02-14 (date in URL)",
+     "publisher": "The Dallas Morning News",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://staff.washington.edu/jbs/itrans/lascol.htm",
+     "quote": "Operations were resumed in December, 1996, but are limited to the lunch hours of 10:30 a.m. to 2 p.m., Monday through Friday.",
+     "source_date": "undated",
+     "publisher": "Innovative Transportation Technologies infopage (J. Schneider, University of Washington)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://dartdaily.dart.org/home/shuttle-bus-to-sub-for-las-colinas-apt-during-construction-effective-tues-sept-5",
+     "quote": "Shuttle Bus to sub for Las Colinas APT during construction, Effective Tues., Sept. 5",
+     "source_date": "2017-09-05 (effective date; year from search excerpt)",
+     "publisher": "Dallas Area Rapid Transit (DART), DART Daily",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://dcurd.org/event/tower-909-apt-station-closed-3/",
+     "quote": "Tower 909 APT Station Closed ... all other APT stations are open",
+     "source_date": "2018-03-12",
+     "publisher": "Dallas County Utility and Reclamation District (DCURD), APT owner/operator",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://dartdaily.dart.org/home/dart-your-ride-this-weekend-May-18-20",
+     "quote": "Take a short walk from Las Colinas Urban Center Station, or hop the Las Colinas APT System to get right to the colorful action.",
+     "source_date": "undated (weekend of May 18-20; 2018 per search excerpt)",
+     "publisher": "Dallas Area Rapid Transit (DART), DART Daily",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://dartorgcmsblob.dart.org/prod/docs/default-source/marketing/railstationdocuments/las-colinas-urban-center-station.pdf?sfvrsn=c4eac4b7_1",
+     "quote": "Effective January 24, 2022 LAS COLINAS URBAN CENTER STATION ... APT Connection",
+     "source_date": "2022-01-24",
+     "publisher": "Dallas Area Rapid Transit (DART)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.nctcog.org/trans/plan/lumo/transit-management-and-planning/general-public-information/transit-planning-activities/transit-planning-projects/people-mover",
+     "quote": "two people mover systems currently operate in North Central Texas",
+     "source_date": "undated",
+     "publisher": "North Central Texas Council of Governments (NCTCOG)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.tdlr.texas.gov/TABS/Search/Print/EABPRJB7800234",
+     "quote": "Gables Water Street APT Station ... APT Station with elevated platforms on either side of an existing guideway",
+     "source_date": "undated (project dates 2016-10-01 to 2018-08-23)",
+     "publisher": "Texas Department of Licensing and Regulation (TABS registry)",
+     "primary": true,
+     "opened": false
+    }
+   ],
+   "latest_evidence_date": "2026-06-30",
+   "blocked_sites": [
+    "en.wikipedia.org",
+    "lascolinas.org"
+   ],
+   "open_questions": "VERIFICATION: Nothing was checked on the page itself, so this result does not meet the strict opened-page rule and should be treated as unverified until a page is opened. en.wikipedia.org and lascolinas.org both failed DNS resolution (the hosts are outside this session's allowed network domains; this was not a bot check). After those two failures the harness notice said to stop trying more sites, so dcurd.org, nctcog.org, dart.org, irvingtexas.com, irvingtx.gov, tdlr.texas.gov and the news sites were never fetched. Both blocked hosts must be allowed in the session's network settings before they can be fetched. Every quote is a search-engine excerpt and may not match the page word for word. To confirm, open https://dcurd.org/ and https://dcurd.org/apt-system/ ('CLOSED INDEFINITELY' banner) and the 2020 notice. The excerpts place that notice on https://www.dcurd.org/calendar-3/ and also on https://www.dcurd.org/pay-your-dcurd-property-taxes-online/. DATES: The DCURD banner is undated in the excerpts. The April 2021 date for the 'closed indefinitely' announcement comes only from Wikipedia-derived text. The newest dated APT-specific evidence is the 2025 NCTCOG RFP and the FY2026 procurement list; the 2026-06-30 date belongs to the KERA article about the Loop. CONFLICTS: Three sources still describe the APT as available: NCTCOG's undated People Mover Initiative page says it 'currently' operates, DART's Las Colinas Urban Center station guide (effective 24 Jan 2022) still shows an 'APT Connection', and Visit Irving still describes it in the present tense. All are older or undated. They are outweighed by the operator's own suspension and closure notices and by NCTCOG's later documents, which describe the operation as halted and the guideway as a retrofit candidate. FUTURE: NCTCOG is procuring engineering design to retrofit about one mile of the guideway for next-generation automated vehicles, including evaluating removal of the track/rail. The RFP expected a contract start in early October 2025, and the item is still on the FY2026 procurement list. I found no contract award, construction start or reopening date. A future pilot could use different vehicles and station names. STATIONS: The operator's own station list was not retrieved. The three OSM names match the names used by The Dallas Morning News in 2014 (Urban Towers at 222 W. Las Colinas Blvd., the northern end; Bell Tower/Mandalay Canal; 600 Las Colinas Blvd.) and by Visit Irving (Bell Tower; 600 Las Colinas Blvd.). The network also had a Tower 909 station (the interchange with DART's Las Colinas Urban Center station, named in a 2018 DCURD notice) and a Water Street station (TDLR 'Gables Water Street APT Station', built 2016-2018). Neither is among the three OSM nodes. PAST LIMITS: shut from 1993 until December 1996; after reopening, weekday lunch hours only (10:30 a.m.-2 p.m.); by 2014, free on weekdays 6 a.m.-6 p.m.; temporary construction closures in September 2017 (DART shuttle bus substitute) and March 2018 (Tower 909 station only); DART promoted riding it to a weekend festival (May 18-20, year given as 2018 in excerpts), so weekend service may have run only for special events."
+  },
+  {
+   "system": "SacRT light rail (Sacramento Regional Transit District), Sacramento, California",
+   "status": "unknown",
+   "summary": "Not established: I could not open any page that states the current status of SacRT light rail, Dos Rios or 7th & Railyards. www.sacrt.com and www.masstransitmag.com are outside this session's network allowlist, and the allowlisted www.cpuc.ca.gov and www.arcgis.com failed DNS lookup in WebFetch, so under the sourcing rules both stations stay unknown. The one source I could reach, the state's Cal-ITP GTFS snapshot on data.ca.gov (stops file dated 1 Oct 2026), lists SacRT's schedule feed but contains none of its stops, so it neither confirms nor rules out service. Search-result listings I did not open point to SacRT releases saying Dos Rios opened to Blue Line passengers on 28 Sept 2026 and 7th & Railyards opened on the Green Line in mid-October 2026. These are unverified leads (see open_questions).",
+   "stations": [
+    {
+     "name": "Dos Rios",
+     "status": "unknown",
+     "evidence_indexes": [
+      1,
+      3,
+      4,
+      6
+     ]
+    },
+    {
+     "name": "7th & Railyards",
+     "status": "unknown",
+     "evidence_indexes": [
+      1,
+      3,
+      5,
+      6
+     ]
+    }
+   ],
+   "evidence": [
+    {
+     "url": "https://data.ca.gov/dataset/cal-itp-gtfs-ingest-pipeline-dataset",
+     "quote": "Cal-ITP collects the GTFS feeds from a statewide list every night and aggregates it into a statewide table",
+     "source_date": "2026-10-13 (dataset last updated; stops file last updated 2026-10-01)",
+     "publisher": "Caltrans (Cal-ITP), California Open Data Portal",
+     "primary": true,
+     "opened": true
+    },
+    {
+     "url": "https://data.ca.gov/api/3/action/datastore_search?resource_id=e4ca5bd4-e9ce-40aa-a58a-3a6d78b042bd&q=Sacramento",
+     "quote": "\"url\":\"https://apps.sacrt.com/gtfs/srtd/google_transit.zip\"",
+     "source_date": "undated (live Data API response read 2026-11-08; gtfs_datasets file last updated 2026-10-01)",
+     "publisher": "Caltrans (Cal-ITP), data.ca.gov Data API",
+     "primary": true,
+     "opened": true
+    },
+    {
+     "url": "https://data.ca.gov/api/3/action/datastore_search?resource_id=8c876204-e12b-48a2-8299-10f6ae3d4f2b&limit=0",
+     "quote": "\"total\": 134428",
+     "source_date": "undated (live Data API response read 2026-11-08; stops file last updated 2026-10-01)",
+     "publisher": "Caltrans (Cal-ITP), data.ca.gov Data API",
+     "primary": true,
+     "opened": true
+    },
+    {
+     "url": "https://data.ca.gov/api/3/action/datastore_search?resource_id=8c876204-e12b-48a2-8299-10f6ae3d4f2b&q=Alkali%20Flat",
+     "quote": "\"total\": 0",
+     "source_date": "undated (live Data API response read 2026-11-08; stops file last updated 2026-10-01)",
+     "publisher": "Caltrans (Cal-ITP), data.ca.gov Data API",
+     "primary": true,
+     "opened": true
+    },
+    {
+     "url": "https://data.ca.gov/api/3/action/datastore_search?resource_id=8c876204-e12b-48a2-8299-10f6ae3d4f2b&q=Dos%20Rios",
+     "quote": "Bollinger Canyon Rd and Dos Rios Dr",
+     "source_date": "undated (live Data API response read 2026-11-08; stops file last updated 2026-10-01)",
+     "publisher": "Caltrans (Cal-ITP), data.ca.gov Data API",
+     "primary": true,
+     "opened": true
+    },
+    {
+     "url": "https://data.ca.gov/api/3/action/datastore_search?resource_id=8c876204-e12b-48a2-8299-10f6ae3d4f2b&q=Railyards",
+     "quote": "Railyard Mobility Hub",
+     "source_date": "undated (live Data API response read 2026-11-08; stops file last updated 2026-10-01)",
+     "publisher": "Caltrans (Cal-ITP), data.ca.gov Data API",
+     "primary": true,
+     "opened": true
+    },
+    {
+     "url": "https://data.ca.gov/api/3/action/datastore_search?resource_id=c3828596-e796-4b3b-a146-ebeb09b3a4d2&q=Sacramento",
+     "quote": "Sacramento Airport (LAZ Parking)",
+     "source_date": "undated (live Data API response read 2026-11-08; agency file last updated 2026-10-01)",
+     "publisher": "Caltrans (Cal-ITP), data.ca.gov Data API",
+     "primary": true,
+     "opened": true
+    },
+    {
+     "url": "https://data.ca.gov/dataset/california-transit-stops",
+     "quote": "October 28, 2026 at 10:32 PM (UTC+00:00)",
+     "source_date": "2026-10-28 (dataset last updated)",
+     "publisher": "Caltrans, California Open Data Portal",
+     "primary": true,
+     "opened": true
+    }
+   ],
+   "latest_evidence_date": "2026-10-28",
+   "blocked_sites": [
+    "www.sacrt.com: not on this session's network allowlist, so the DNS lookup fails (no bot check involved)",
+    "www.masstransitmag.com: not on this session's network allowlist, so the DNS lookup fails",
+    "www.cpuc.ca.gov: on the session allowlist, but the WebFetch DNS lookup failed (getaddrinfo ENOTFOUND)",
+    "www.arcgis.com: on the session allowlist, but the WebFetch DNS lookup failed (getaddrinfo ENOTFOUND)"
+   ],
+   "open_questions": "1) WHY UNKNOWN. data.ca.gov was the only host WebFetch could reach. SacRT's own site (www.sacrt.com) and Mass Transit are not on the 'City Pretty' environment's network allowlist. www.cpuc.ca.gov and www.arcgis.com are on the allowlist but still failed DNS resolution in WebFetch, which looks like a tooling or DNS fault worth reporting. To verify, allow www.sacrt.com, plus apps.sacrt.com for the live GTFS feed, in the environment's network settings and re-run. I changed no settings, files or environments.\n2) LEADS TO VERIFY. These come from WebSearch result titles and summaries only. I did not open these pages and they are not evidence.\n(a) Dos Rios. SacRT release 'SacRT Announces Public Opening of New Dos Rios Light Rail Station' (https://www.sacrt.com/sacrt-announces-public-opening-of-new-dos-rios-light-rail-station/). Its summary says the station opens to passengers Monday 28 Sept 2026 after final CPUC approval, with Blue Line trains stopping as regular service about every 15 min peak and 30 min off-peak, and bus route 33 discontinued (route 133 in early October). Summaries of Mass Transit (https://www.masstransitmag.com/rail/infrastructure/news/55408045/sacramento-regional-transit-sacrt-sacrt-opens-dos-rios-light-rail-station-for-passenger-service) and Planetizen (https://www.planetizen.com/node/138523) also say it opened on 28 Sept. A SacRT homepage item 'Dos Rios Light Rail Station Now Open' appears in the listing with 10 Oct 2026, probably a post date; check it.\n(b) 7th & Railyards. SacRT releases 'SacRT Green Line Light Rail Service Returns October 12' (https://www.sacrt.com/sacrt-green-line-light-rail-service-returns-october-12/) and 'SacRT Celebrates Grand Opening of New 7th & Railyards Station' (https://www.sacrt.com/sacrt-celebrates-grand-opening-of-new-7th-railyards-station/). Their summaries say the Green Line returned Monday 12 Oct 2026 after a suspension that began 16 June 2025, and the station was set to open Thursday 15 Oct 2026. The Green Line runs weekdays about 6 a.m. to 8:30 p.m. between 13th Street and 7th & Richards/Township 9, about every 30 min. Mass Transit (https://www.masstransitmag.com/technology/facilities/shelters-stations-fixtures-parking-lighting/news/55413381/sacramento-regional-transit-sacrt-sacrt-opens-new-7th-railyards-station) also reports the opening. The older 'Coming Summer 2026' page (https://www.sacrt.com/railyards/) would be superseded.\n(c) 'Blue Line Service Update: Now Open with Single-Track Operations' (https://www.sacrt.com/BlueLineService/) has no date in the listing. Check whether any current Blue Line disruption affects Dos Rios.\nIf these leads are confirmed: Dos Rios is served since 2026-09-28 on the Blue Line, and 7th & Railyards is served since about 2026-10-15 on the Green Line, so question 3 (expected opening) would not apply.\n3) GTFS CROSS-CHECK. Cal-ITP's statewide dataset list includes SacRT's 'Sacramento Schedule' feed at https://apps.sacrt.com/gtfs/srtd/google_transit.zip and GTFS-RT feeds at bustime.sacrt.com. Its published stops table (134,428 rows, file dated 1 Oct 2026) has no SacRT rows: searches for Alkali Flat, Meadowview, Dos Rios and Railyards return none, and the only 'Sacramento' agency row is the airport shuttle. The absence of these two stations there therefore says nothing about service. Caltrans' 'California Transit Stops' dataset (data.ca.gov record last updated 28 Oct 2026) has no searchable Data API (404), and its data is served from gis.data.ca.gov and caltrans-gis.dot.ca.gov, which are not allowlisted and were not tried. Search also found CPUC Rail Safety Division quarterly reports for Q1 and Q2 2026 (not opened); they predate the reported openings."
+  },
+  {
+   "system": "NFTA Metro Rail (Buffalo, New York)",
+   "status": "partly_operating",
+   "summary": "Metro Rail is carrying passengers. Since 1 November 2026 NFTA has run it on one track in two zones (Humboldt-Hospital to Allen/Medical Campus underground, Church to Canalside above ground), with a train about every 20 minutes and trains ending at Canalside because DL&W station is temporarily closed until about mid- to late November 2026. The other 13 stations are served, several from one platform only, including Seneca and Canalside (the former Erie Canal Harbor, which reopened under the new name on 2 July 2024); DL&W first opened to passengers on 8 December 2025. No page could be opened because the NFTA sites are outside this session's network allowlist, so all evidence comes from search results and is marked opened=false.",
+   "stations": [
+    {
+     "name": "University",
+     "status": "served",
+     "evidence_indexes": [
+      0,
+      1
+     ]
+    },
+    {
+     "name": "LaSalle",
+     "status": "served",
+     "evidence_indexes": [
+      0,
+      1
+     ]
+    },
+    {
+     "name": "Amherst Street",
+     "status": "served",
+     "evidence_indexes": [
+      0,
+      1
+     ]
+    },
+    {
+     "name": "Humboldt-Hospital",
+     "status": "served",
+     "evidence_indexes": [
+      2,
+      3,
+      4
+     ]
+    },
+    {
+     "name": "Delavan/Canisius College",
+     "status": "served",
+     "evidence_indexes": [
+      3,
+      4
+     ]
+    },
+    {
+     "name": "Utica",
+     "status": "served",
+     "evidence_indexes": [
+      3,
+      4
+     ]
+    },
+    {
+     "name": "Summer-Best",
+     "status": "served",
+     "evidence_indexes": [
+      3,
+      4
+     ]
+    },
+    {
+     "name": "Allen/Medical Campus",
+     "status": "served",
+     "evidence_indexes": [
+      2,
+      4,
+      10
+     ]
+    },
+    {
+     "name": "Fountain Plaza",
+     "status": "served",
+     "evidence_indexes": [
+      1,
+      10
+     ]
+    },
+    {
+     "name": "Lafayette Square",
+     "status": "served",
+     "evidence_indexes": [
+      1,
+      10
+     ]
+    },
+    {
+     "name": "Church",
+     "status": "served",
+     "evidence_indexes": [
+      0,
+      4,
+      6
+     ]
+    },
+    {
+     "name": "DL&W",
+     "status": "closed",
+     "since": "2026-11-01 (temporary; station first opened 2025-12-08)",
+     "evidence_indexes": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    },
+    {
+     "name": "Seneca (not in list)",
+     "status": "served",
+     "evidence_indexes": [
+      0,
+      4
+     ]
+    },
+    {
+     "name": "Canalside, formerly Erie Canal Harbor (not in list)",
+     "status": "served",
+     "since": "2024-07-02 (reopened and renamed)",
+     "evidence_indexes": [
+      0,
+      1,
+      7,
+      8
+     ]
+    },
+    {
+     "name": "Theater (not in list; permanently closed)",
+     "status": "closed",
+     "since": "2013-02-18",
+     "evidence_indexes": [
+      9
+     ]
+    }
+   ],
+   "evidence": [
+    {
+     "url": "https://metro.nfta.com/schedules/route/rail",
+     "quote": "Trains travel in both directions on the outbound track (to University), and the inbound (to Canalside) platforms are closed at Church, Seneca, and Canalside Stations. ... During this period, DL&W Station will remain CLOSED, and rail service will terminate at Canalside Station.",
+     "source_date": "undated",
+     "publisher": "NFTA-Metro (Metro Rail route page)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://metro.nfta.com/programs/how-to-ride-metro",
+     "quote": "Metro Rail operates seven days a week, serving eight underground stations and five above-ground stations from University Station in North Buffalo at UB South Campus to Canalside Station in downtown Buffalo.",
+     "source_date": "undated",
+     "publisher": "NFTA-Metro (How to Ride Guide)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.nfta.com/news/authority-announcements",
+     "quote": "Beginning November 1, Metro Rail will operate on a single track in two zones: between Church and Canalside stations and between Humboldt-Hospital and Allen-Medical Campus stations.",
+     "source_date": "2026-10-27 (release date as shown in search results)",
+     "publisher": "Niagara Frontier Transportation Authority",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://buffalonews.com/news/community/article_261905c2-3184-57b1-b328-d0c1156e8947.html",
+     "quote": "Metro Rail single-tracking begins November 1, 2026",
+     "source_date": "undated",
+     "publisher": "The Buffalo News",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.yahoo.com/news/us/articles/dl-w-rail-station-close-190015589.html",
+     "quote": "Riders at the aboveground Church, Seneca, and Canalside stations will have to board on the outbound tracks... Riders at the underground Humboldt, Delevan, Utica, Summer-Best and Allen/Medical Campus stations will only be able to board on the inbound side",
+     "source_date": "undated (search results place it in late October 2026)",
+     "publisher": "Yahoo News (syndicated Buffalo TV report)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.nfta.com/news/authority-announcements/nfta-opens-dlw-train-station",
+     "quote": "NFTA Opens DL&W Train Station",
+     "source_date": "2025-12-08",
+     "publisher": "Niagara Frontier Transportation Authority",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://metro.nfta.com/schedules/rail-renewal/",
+     "quote": "DL&W Station opened on December 8, 2025, marking the first extension of the Metro Rail line since its opening in 1985. ... Work on the project is expected to resume Fall 2026, following coordination to address outstanding project requirements.",
+     "source_date": "undated",
+     "publisher": "NFTA-Metro (Rail Renewal page)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.nfta.com/news/authority-announcements/nfta-celebrates-grand-opening-canalside-station",
+     "quote": "On July 2, NFTA representatives, in conjunction with Congressman Tim Kennedy, NYS Senator Sean Ryan, and NYS Assemblywoman Crystal Peoples-Stokes cut red and blue ribbons to celebrate the grand opening of Metro's Canalside Station.",
+     "source_date": "2024-07-02",
+     "publisher": "Niagara Frontier Transportation Authority",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Canalside_station",
+     "quote": "The station was temporarily closed for construction and rebuilt to modern standards throughout 2023 and 2024, being renamed to Canalside station upon its reopening on July 2, 2024.",
+     "source_date": "undated",
+     "publisher": "Wikipedia",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Theater_station",
+     "quote": "Closed: February 18, 2013 ... The Buffalo Theater District is now served by the Fountain Plaza station, located 546 feet (166 m) south.",
+     "source_date": "undated",
+     "publisher": "Wikipedia",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://metro.nfta.com/",
+     "quote": "when boarding at Fountain Plaza or Lafayette traveling inbound to Church, Seneca or Canalside, you first must enter an outbound train and travel to Allen. After arriving at Allen, you must exit, then enter the rear car of an inbound train.",
+     "source_date": "undated",
+     "publisher": "NFTA-Metro (home page rail alert)",
+     "primary": true,
+     "opened": false
+    }
+   ],
+   "latest_evidence_date": "2026-10-27",
+   "blocked_sites": [
+    "metro.nfta.com",
+    "www.nfta.com"
+   ],
+   "open_questions": "1) Verification. No page could be opened. WebFetch to metro.nfta.com and www.nfta.com failed with getaddrinfo ENOTFOUND because neither host is on the City Pretty environment's network allowlist. This was a network block, not a bot check. A read-only check of the environment showed the allowlist also lacks Wikipedia, buffalonews.com, yahoo.com and the Buffalo TV news sites, so, as the fetch tool advised, no other hosts were tried. No settings were changed. All evidence comes from WebSearch results: each quote is the text the search engine returned, and which URL it came from was not checked on the page (opened=false everywhere). To verify, metro.nfta.com and www.nfta.com would need to be allowed in the session's network settings.\n2) DL&W reopening date. NFTA's rail page keeps DL&W closed until Phase 1 of Cars on Main Street is finished, which it puts at mid-November. The NFTA release (printed by the Buffalo News) says this construction phase should finish by the end of November 2026. Re-check after mid-November.\n3) Year of undated alerts. They are dated to 2026 because DL&W only opened on 8 Dec 2025 and the release headline names 1 Nov 2026. A WGRZ story titled 'NFTA Metro Rail concludes single tracking' (wgrz.com/article/news/local/nfta-metro-rail-down-to-single-tracking-at-some-stations-for-construction/71-adc4172b-9728-49cb-94b7-0fb047ccee89) covers an earlier phase in January 2026, not the current one.\n4) University, LaSalle and Amherst Street. No closure notice was found. They are marked served because trains run to University and these three stations are not among the platform closures named for November 2026. Search results also mention construction in the University Station bus loop from 1 Nov 2026 to 1 Jun 2027 that moves bus stops only; this is not verified.\n5) Church. Its rehabilitation is paused and expected to resume in fall 2026, so its platform arrangement may change.\n6) Two former stations that are rightly not on the map. Theater closed permanently in February 2013. Special Events station was replaced by DL&W and was reported demolished; this comes from search results only.\n7) GTFS lead. NFTA's pages list Metro Rail as route 145 (titles 'Route #145 Details' and '145 - Metro Rail Single Tracking'). That number may help find rail service in another NFTA GTFS feed."
+  },
+  {
+   "system": "Las Vegas Monorail (Clark County, Nevada)",
+   "status": "unknown",
+   "summary": "Unverified: I could not open any page, because this session's network allowlist blocks lvmonorail.com, lvcva.com and every news and reference site (DNS lookups fail), so under the sourcing rules the line and all seven stations are reported as unknown. Unopened search excerpts and page titles from the operator's site consistently indicate the monorail is carrying passengers: they show extended hours for the SEMA Show on 3-6 Nov 2026 [0], modified-hours notices for dates up to 15 Dec 2026 [2], and pages for all seven stations [3-9], with no station closure found. The same leads show no LVCVA end-of-service date: CEO Steve Hill said in 2026 that it will eventually become an elevated Vegas Loop roadway reusing the stations, but not soon [10, 11], and upgrades approved in 2025 aim to keep it running to at least 2035 [12].",
+   "stations": [
+    {
+     "name": "Sahara (operator page title: SAHARA Las Vegas Monorail Station)",
+     "status": "unknown",
+     "evidence_indexes": [
+      4,
+      0,
+      2
+     ]
+    },
+    {
+     "name": "Westgate (operator page title: Monorail Station at Westgate Hotel and Casino)",
+     "status": "unknown",
+     "evidence_indexes": [
+      5,
+      0,
+      2
+     ]
+    },
+    {
+     "name": "Harrah's & The LINQ (operator: Harrah's & The LINQ Station; route map writes Harrah's/The LINQ Station)",
+     "status": "unknown",
+     "evidence_indexes": [
+      7,
+      3,
+      0,
+      2
+     ]
+    },
+    {
+     "name": "Caesars Palace/Flamingo, OSM \"Caesar's Palace/Flamingo\" (operator: Flamingo/Caesars Palace Station)",
+     "status": "unknown",
+     "evidence_indexes": [
+      3,
+      0,
+      2
+     ]
+    },
+    {
+     "name": "Horseshoe/Paris Las Vegas (operator page title: Horseshoe/Paris Monorail Station)",
+     "status": "unknown",
+     "evidence_indexes": [
+      8,
+      0,
+      2
+     ]
+    },
+    {
+     "name": "Convention Center (operator: Boingo Station at Las Vegas Convention Center)",
+     "status": "unknown",
+     "evidence_indexes": [
+      6,
+      0,
+      2
+     ]
+    },
+    {
+     "name": "MGM Grand (operator page title: MGM Grand Monorail Station)",
+     "status": "unknown",
+     "evidence_indexes": [
+      9,
+      0,
+      2
+     ]
+    }
+   ],
+   "evidence": [
+    {
+     "url": "https://www.lvmonorail.com/events/sema-show-las-vegas/",
+     "quote": "November 3 – November 5: 6 am – 2 am; November 6: 6am – 3am",
+     "source_date": "not seen (page not opened); the notice is for SEMA 2026, 3-6 Nov 2026",
+     "publisher": "Las Vegas Monorail (owned by the LVCVA)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.sema.org/news-media/enews/2026/44/2026-sema-show-transportation-guide-shuttles-vegas-loop-monorail-and",
+     "quote": "2026 SEMA Show Transportation Guide: Shuttles, Vegas Loop, Monorail and Parking",
+     "source_date": "2026, eNews issue 44 per the URL (exact date not seen)",
+     "publisher": "SEMA (Specialty Equipment Market Association), the show organizer",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.lvmonorail.com/",
+     "quote": "December 3, 2026 (7am – 1am)",
+     "source_date": "not seen (fetch failed: DNS ENOTFOUND); the search excerpt lists modified-hours dates from 29 Nov to 15 Dec 2026",
+     "publisher": "Las Vegas Monorail (owned by the LVCVA)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.lvmonorail.com/route-map/",
+     "quote": "Flamingo/Caesars Palace Station: One minute to Harrah's/The LINQ Station.",
+     "source_date": "not seen (page not opened)",
+     "publisher": "Las Vegas Monorail (owned by the LVCVA)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.lvmonorail.com/stations/SAHARA/",
+     "quote": "SAHARA Las Vegas Monorail Station",
+     "source_date": "not seen (page not opened)",
+     "publisher": "Las Vegas Monorail (owned by the LVCVA)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.lvmonorail.com/stations/westgate/",
+     "quote": "Monorail Station at Westgate Hotel and Casino",
+     "source_date": "not seen (page not opened)",
+     "publisher": "Las Vegas Monorail (owned by the LVCVA)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.lvmonorail.com/stations/convention-center/",
+     "quote": "Boingo Station at Las Vegas Convention Center",
+     "source_date": "not seen (page not opened)",
+     "publisher": "Las Vegas Monorail (owned by the LVCVA)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.lvmonorail.com/stations/harrahs-linq/",
+     "quote": "About the Harrah’s & the LINQ Monorail Station",
+     "source_date": "not seen (page not opened)",
+     "publisher": "Las Vegas Monorail (owned by the LVCVA)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://lvmonorail.com/?p=103",
+     "quote": "Horseshoe/Paris Monorail Station",
+     "source_date": "not seen (page not opened)",
+     "publisher": "Las Vegas Monorail (owned by the LVCVA)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.lvmonorail.com/?p=102",
+     "quote": "MGM Grand Monorail Station",
+     "source_date": "not seen (page not opened)",
+     "publisher": "Las Vegas Monorail (owned by the LVCVA)",
+     "primary": true,
+     "opened": false
+    },
+    {
+     "url": "https://www.reviewjournal.com/local/traffic/monrail-on-track-for-vegas-loop-conversion-but-not-any-time-soon-3823180/",
+     "quote": "Vegas Loop to one day go above ground on monorail track",
+     "source_date": "2026; search results describe it as a May 2026 piece (exact date not seen)",
+     "publisher": "Las Vegas Review-Journal",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://thenevadaindependent.com/article/elon-musk-backed-loop-to-incorporate-troubled-vegas-monorail-lines",
+     "quote": "Elon Musk-backed Loop to incorporate troubled Vegas monorail lines",
+     "source_date": "April 2026 per search metadata (exact date not seen)",
+     "publisher": "The Nevada Independent",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.reviewjournal.com/local/traffic/with-improvements-las-vegas-monorail-may-get-a-longer-lease-on-life-3306035/",
+     "quote": "Las Vegas monorail could last another 10 years",
+     "source_date": "2025; search results place this coverage in Feb-Apr 2025 (exact date not seen)",
+     "publisher": "Las Vegas Review-Journal",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://news3lv.com/news/local/lvcva-denies-reports-las-vegas-monorail-is-winding-down-operations",
+     "quote": "LVCVA denies reports Las Vegas Monorail is winding down operations",
+     "source_date": "2024 (exact date not seen; related Yogonet coverage is dated 15 Apr 2024)",
+     "publisher": "News 3 Las Vegas (KSNV)",
+     "primary": false,
+     "opened": false
+    }
+   ],
+   "latest_evidence_date": "None verified, because no page could be opened. The newest unverified lead is the operator's SEMA 2026 notice for service on 2026-11-03 to 2026-11-06; operator homepage notices name modified-hours dates up to 2026-12-15.",
+   "blocked_sites": [
+    "www.lvmonorail.com (WebFetch failed with DNS ENOTFOUND because the host is not on this session's network allowlist; this was not a bot check)",
+    "www.lvcva.com (WebFetch failed with DNS ENOTFOUND because the host is not on this session's network allowlist; this was not a bot check)"
+   ],
+   "open_questions": "1) Verification was blocked. www.lvmonorail.com and www.lvcva.com failed with DNS ENOTFOUND because they are not on this session's network allowlist. I confirmed this with a read-only environment lookup and changed nothing. The news and reference hosts (reviewjournal.com, thenevadaindependent.com, news3lv.com, sema.org, en.wikipedia.org) are not on the allowlist either, so I did not try them, following the harness guidance to stop after repeated failures of this kind. To verify, the user has to allow at least www.lvmonorail.com and www.lvcva.com in the session network settings, and then this task should be re-run. 2) Every evidence item is opened=false. Each quote is copied from a WebSearch result title or excerpt and was not checked against the live page, and no source date was seen. Treat them as leads, not verified quotes. 3) Official names according to those leads: SAHARA Las Vegas Station; Westgate (page titled 'Monorail Station at Westgate Hotel and Casino'); Boingo Station at Las Vegas Convention Center (search results tie the sponsor name to a 2022 Boingo wireless partnership with the LVCVA); Harrah's & The LINQ Station ('Harrah's/The LINQ' on the route map); Flamingo/Caesars Palace Station (OSM's 'Caesar's Palace/Flamingo' reverses the order and adds an apostrophe); Horseshoe/Paris Station (formerly Bally's & Paris); MGM Grand Station. 4) Conflicts that do not change whether the line runs: the operator's SEMA page gives a 6 am start for 3-6 Nov 2026, while a search summary of SEMA's guide gives 7 am, and the operator's pages disagree on the December modified-hours dates. Search excerpts of 2026 coverage say the Loop conversion comes 'after 2034', but I could not tell which page that wording came from; 2025 coverage says 'at least 2035'. I found no LVCVA board action or announcement setting a closure date; in 2024 the LVCVA denied reports that the monorail was winding down. A third-party MapQuest listing that shows Harrah's & The LINQ as 'Closed' is probably a stale snapshot. 5) One search result (a Wikiwand MGM Grand station page) contained embedded text addressed to AI tools. I ignored it."
+  },
+  {
+   "system": "Tren Urbano (San Juan, Puerto Rico)",
+   "status": "unknown",
+   "summary": "I could not establish this under the sourcing rules. No page could be opened in this session: WebFetch hit DNS failures because of the network allowlist, and the WebSearch budget shared by all agents ran out. So every item below is unverified search-result text (opened=false), and every status is left as unknown. That text consistently says Tren Urbano carries passengers fare-free since March 2024, with all 16 stations running normally from Saturday 28 March 2026 after LUMA work closed Bayamon and Deportivo from 25 March, no station closures planned for the $227.6 million modernization announced 13-14 August 2026, and reports of the still-free service as recent as about mid-October 2026. Secondary sources give daily service from 5:30 a.m. to 11:30 p.m. One aggregator lists 6:00 a.m. to 10:00 p.m. on weekends, and I could not check any official ATI or DTOP schedule.",
+   "stations": [
+    {
+     "name": "Bayamon",
+     "status": "unknown",
+     "evidence_indexes": [
+      0,
+      1,
+      2,
+      6,
+      7,
+      10,
+      17,
+      18,
+      19
+     ]
+    },
+    {
+     "name": "Deportivo",
+     "status": "unknown",
+     "evidence_indexes": [
+      0,
+      1,
+      2,
+      6,
+      7,
+      10,
+      17,
+      18,
+      19
+     ]
+    },
+    {
+     "name": "Jardines",
+     "status": "unknown",
+     "evidence_indexes": [
+      0,
+      6,
+      7,
+      10,
+      17,
+      18,
+      19
+     ]
+    },
+    {
+     "name": "Torrimar",
+     "status": "unknown",
+     "evidence_indexes": [
+      0,
+      6,
+      7,
+      10,
+      14,
+      17,
+      18,
+      19
+     ]
+    },
+    {
+     "name": "Martinez Nadal",
+     "status": "unknown",
+     "evidence_indexes": [
+      0,
+      6,
+      7,
+      10,
+      17,
+      18,
+      19
+     ]
+    },
+    {
+     "name": "Las Lomas",
+     "status": "unknown",
+     "evidence_indexes": [
+      0,
+      6,
+      7,
+      10,
+      17,
+      18,
+      19
+     ]
+    },
+    {
+     "name": "San Francisco",
+     "status": "unknown",
+     "evidence_indexes": [
+      0,
+      6,
+      7,
+      10
+     ]
+    },
+    {
+     "name": "Centro Medico",
+     "status": "unknown",
+     "evidence_indexes": [
+      0,
+      6,
+      7,
+      10
+     ]
+    },
+    {
+     "name": "Cupey",
+     "status": "unknown",
+     "evidence_indexes": [
+      0,
+      6,
+      7,
+      10
+     ]
+    },
+    {
+     "name": "Rio Piedras",
+     "status": "unknown",
+     "evidence_indexes": [
+      0,
+      6,
+      7,
+      10
+     ]
+    },
+    {
+     "name": "Universidad",
+     "status": "unknown",
+     "evidence_indexes": [
+      0,
+      6,
+      7,
+      10
+     ]
+    },
+    {
+     "name": "Pinero",
+     "status": "unknown",
+     "evidence_indexes": [
+      0,
+      3,
+      4,
+      6,
+      7,
+      10
+     ]
+    },
+    {
+     "name": "Domenech",
+     "status": "unknown",
+     "evidence_indexes": [
+      0,
+      3,
+      4,
+      6,
+      7,
+      10
+     ]
+    },
+    {
+     "name": "Roosevelt",
+     "status": "unknown",
+     "evidence_indexes": [
+      0,
+      3,
+      4,
+      6,
+      7,
+      10
+     ]
+    },
+    {
+     "name": "Hato Rey",
+     "status": "unknown",
+     "evidence_indexes": [
+      0,
+      3,
+      4,
+      6,
+      7,
+      10,
+      15
+     ]
+    },
+    {
+     "name": "Sagrado Corazon",
+     "status": "unknown",
+     "evidence_indexes": [
+      0,
+      3,
+      4,
+      6,
+      7,
+      10
+     ]
+    }
+   ],
+   "evidence": [
+    {
+     "url": "https://www.metro.pr/noticias/2026/03/30/ati-presenta-su-plan-operacional-para-semana-santa-estamos-preparados/",
+     "quote": "[paraphrase; attribution inferred] En marzo de 2026, la ATI informó que desde el sábado, 28 de marzo, el tren opera con normalidad en sus 16 estaciones.",
+     "source_date": "2026-03-30 (from URL)",
+     "publisher": "Metro Puerto Rico (metro.pr)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.plateapr.com/que-saber/fuera-de-servicio-estaciones-tren-urbano-bayamon-deportivo",
+     "quote": "[snippet] Reanudaron sus servicios tras interrumpir operaciones desde el pasado miércoles, 25 de marzo, por trabajos de LUMA Energy en un \"componente crítico\" del sistema eléctrico. … la Autoridad de Transporte Integrado (ATI) informó el sábado que los trabajos se completaron antes de lo previsto.",
+     "source_date": "undated in search results (25 March falls on a Wednesday in 2026, so the reopening was Saturday 28 March 2026)",
+     "publisher": "PlateaPR",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.elnuevodia.com/noticias/locales/notas/fuera-de-servicio-dos-estaciones-del-tren-urbano-por-trabajos-de-luma-energy/",
+     "quote": "[paraphrase] La ATI anunció que las estaciones de Bayamón y Deportivo cerrarían por trabajos de LUMA Energy en el sistema eléctrico. El cierre sería desde el 25 de marzo hasta el 3 de abril",
+     "source_date": "undated in search results (March 2026 per search summary)",
+     "publisher": "El Nuevo Día",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.metro.pr/noticias/2026/02/23/averia-afecta-operacion-del-tren-urbano/",
+     "quote": "[paraphrase] Una avería eléctrica afectó varias estaciones. La ATI activó autobuses entre Piñeiro y Sagrado Corazón, mientras el tren seguía entre Bayamón y Piñeiro.",
+     "source_date": "2026-02-23 (from URL)",
+     "publisher": "Metro Puerto Rico (metro.pr)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.metro.pr/noticias/2026/02/24/tren-urbano-retomara-su-operacion-regular-este-martes/",
+     "quote": "[paraphrase; attribution inferred] La ATI confirmó que el servicio reanudaría al día siguiente, con operación regular desde las 5:30 a.m. entre Bayamón y Sagrado Corazón",
+     "source_date": "2026-02-24 (from URL)",
+     "publisher": "Metro Puerto Rico (metro.pr)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.metro.pr/noticias/2026/08/13/anuncian-inversion-de-227-millones-de-dolares-para-modernizar-el-tren-urbano/",
+     "quote": "[headline] Anuncian inversión de $227 millones para modernizar el Tren Urbano",
+     "source_date": "2026-08-13 (from URL)",
+     "publisher": "Metro Puerto Rico (metro.pr)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.newspr.com/article/gobierno-anuncia-inversin-de-227-millones-para-modernizar-el-tren-urbano",
+     "quote": "[paraphrase; exact page unverified] El 13 de agosto de 2026 ... por el momento, el Tren Urbano continuará operando de manera gratuita. Menéndez Agosto aseguró que no va a haber ningún cierre de ninguna estación.",
+     "source_date": "undated in search results (coverage of the 13 Aug 2026 announcement)",
+     "publisher": "newspr.com",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.elnuevodia.com/noticias/gobierno/notas/gobernadora-anuncia-millonaria-inversion-para-rehabilitar-y-modernizar-el-tren-urbano/",
+     "quote": "[paraphrase of English search summary; attribution inferred] ATI's executive director, Josué Menéndez Agosto, said the train will keep operating across its 16 stations while the work is carried out.",
+     "source_date": "undated in search results (August 2026 announcement)",
+     "publisher": "El Nuevo Día",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://noticel.com/en/noticias/20260814/modernizaran-las-16-estaciones-del-tren-urbano-con-una-inversion-millonaria/",
+     "quote": "[headline] Modernizarán las 16 estaciones del Tren Urbano con una inversión millonaria",
+     "source_date": "2026-08-14 (from URL)",
+     "publisher": "NotiCel",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://noticel.com/en/noticias/20260717/sigue-sin-fecha-cuando-se-cobrara-nuevamente-a-los-usuarios-del-tren-urbano/",
+     "quote": "[snippet] Desde marzo de 2024 los pasajeros no han pagado por utilizar el tren debido a que se realizaban mejoras al sistema de cobro",
+     "source_date": "2026-07-17 (from URL)",
+     "publisher": "NotiCel",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.primerahora.com/noticias/gobierno-politica/notas/hasta-cuando-sera-gratis-el-tren-urbano-esto-es-lo-que-se-sabe-sobre-el-regreso-del-cobro/",
+     "quote": "[snippet] se espera por culminar con las pruebas sobre el funcionamiento del nuevo sistema para fijar una fecha del reinicio del cobro",
+     "source_date": "undated in search results; search metadata put the page at about 3 weeks old on 2026-11-08 (around mid-October 2026)",
+     "publisher": "Primera Hora",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.primerahora.com/noticias/gobierno-politica/notas/tren-urbano-reiniciara-operaciones-parciales-manana-jueves/",
+     "quote": "[paraphrase; attribution inferred] el horario habitual del Tren Urbano, operado por la ATI, es de 5:30 a.m. a 11:30 p.m.",
+     "source_date": "undated in search results (partial reopening of May 2025)",
+     "publisher": "Primera Hora",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://mapa-metro.com/en/puerto-rico/san-juan/san-juan-tren-urbano-map.htm",
+     "quote": "[paraphrase; attribution inferred] intervalo de 8 minutos en hora pico y de 12 a 16 minutos fuera de ella, con operación de 5:30 a. m. a 11:30 p. m. todos los días",
+     "source_date": "undated (described as a 2026 guide in search summary)",
+     "publisher": "mapa-metro.com (third-party guide)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.metrolinehub.com/en/puerto-rico/san-juan",
+     "quote": "[paraphrase; attribution inferred] 5:30 AM - 11:30 PM (weekdays), 6:00 AM - 10:00 PM (weekends)",
+     "source_date": "undated (result title says 2026)",
+     "publisher": "metrolinehub.com (third-party guide)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.yelp.com/biz/tren-urbano-estaci%C3%B3n-torrimar-guaynabo",
+     "quote": "[paraphrase] A Yelp listing for the Torrimar station shows 5:30 am - 11:30 pm every day.",
+     "source_date": "Updated January 2026 (per result title)",
+     "publisher": "Yelp (user-generated listing)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Hato_Rey_station",
+     "quote": "[paraphrase] The Hato Rey station is the only station to extend operating hours after nighttime events end at the Choliseo until all passengers in line have entered the station.",
+     "source_date": "undated (not opened; host unreachable)",
+     "publisher": "Wikipedia",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Tren_Urbano",
+     "quote": "[snippet] In 2025, the system had a ridership of 4,438,400, or about 22,600 per weekday as of the first quarter of 2026.",
+     "source_date": "undated (not opened; WebFetch DNS failure)",
+     "publisher": "Wikipedia",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.metro.pr/noticias/2025/07/11/ati-anuncia-todas-las-estaciones-del-tren-urbano-estan-funcionando/",
+     "quote": "[headline] ATI anuncia todas las estaciones del Tren Urbano están funcionando",
+     "source_date": "2025-07-11 (from URL)",
+     "publisher": "Metro Puerto Rico (metro.pr)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.metro.pr/noticias/2025/06/26/ati-recalca-que-sigue-fuera-de-servicio-tramo-del-tren-urbano-entre-bayamon-y-martinez-nadal/",
+     "quote": "[headline] Sigue fuera de servicio tramo del Tren Urbano de Puerto Rico entre Bayamón y Martínez Nadal",
+     "source_date": "2025-06-26 (from URL)",
+     "publisher": "Metro Puerto Rico (metro.pr)",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://eyboricua.com/ati-avanza-en-la-reconexion-del-tren-urbano-tras-incendio-de-mayo/",
+     "quote": "[paraphrase] 10 de las 16 estaciones del Tren Urbano están operando, y el resto recibe servicio mediante el sistema de autobuses intermodal. El tramo entre Bayamón y Martínez Nadal sigue fuera de operación",
+     "source_date": "conflicting: search metadata says 9 Sep 2026, but the content matches the May-July 2025 outage (another search identified it as a 2025 EFE item)",
+     "publisher": "Eyboricua",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.elnuevodia.com/noticias/locales/notas/un-aparente-cortocircuito-detiene-las-operaciones-del-tren-urbano/",
+     "quote": "[paraphrase] el servicio no pudo arrancar esa mañana por un presunto cortocircuito que provocó un incendio pequeño en una subestación ... El servicio reanudó operaciones en la tarde de ese mismo día.",
+     "source_date": "conflicting: one search's metadata says 8 Sep 2026; another ties the same incident to Monday 1 Jul 2024",
+     "publisher": "El Nuevo Día",
+     "primary": false,
+     "opened": false
+    },
+    {
+     "url": "https://www.metro.pr/noticias/2024/07/01/corto-circuito-en-facilidades-del-tren-urbano-tienen-suspendido-el-servicio/",
+     "quote": "[headline] Corto circuito en facilidades del Tren Urbano tienen suspendido el servicio",
+     "source_date": "2024-07-01 (from URL)",
+     "publisher": "Metro Puerto Rico (metro.pr)",
+     "primary": false,
+     "opened": false
+    }
+   ],
+   "latest_evidence_date": "2026-10 (approximate and unverified: Primera Hora item about 3 weeks old per search metadata); latest URL-dated item is 2026-08-14",
+   "blocked_sites": [
+    "www.tutrenpr.com: WebFetch DNS failure (ENOTFOUND). The host is outside this session's network allowlist; this was not a bot check.",
+    "www.telemundopr.com: same DNS failure (ENOTFOUND), network allowlist",
+    "en.wikipedia.org: same DNS failure (ENOTFOUND), network allowlist"
+   ],
+   "open_questions": "1) Access. WebFetch could not reach www.telemundopr.com, www.tutrenpr.com or en.wikipedia.org (DNS ENOTFOUND: the hosts are outside this session's network allowlist; these were not bot checks). The tool advised stopping after repeated failures, so I did not try ati.pr.gov, dtop.pr.gov, fortaleza.pr.gov, metro.pr, elnuevodia.com, primerahora.com, noticel.com or plateapr.com. Those hosts must be allowed in the session's network settings before any claim can be checked on a page. The WebSearch budget for this turn (200 calls, shared by every agent) also ran out before I could run searches limited to ati.pr.gov, dtop.pr.gov and fortaleza.pr.gov, so no primary ATI, DTOP or Government of Puerto Rico page was found. A follow-up run with network access is needed before any status can be confirmed.\n\n2) Reading the quotes. [snippet] is an excerpt as the search tool returned it, not checked against the page. [paraphrase] is a search-tool summary, not verbatim. [headline] is the result title. Where a statement could not be tied to one page, the quote says \"attribution inferred\" or \"exact page unverified\". evidence_indexes are 0-based.\n\n3) Conflicts. Items 19 and 20 carry September 2026 dates in search metadata but describe older events:\n- Item 19 (10 of 16 stations open, Bayamon to Martinez Nadal out of service) matches the outage after the 14 May 2025 fire at the Martinez Nadal substation. That outage ended with all 16 stations reopened around 11 July 2025 (items 17, 18).\n- Item 20 (short circuit, service back the same afternoon) matches the 1 July 2024 incident (item 21). Even if it were dated 2026, it was a same-day outage.\n- The Telemundo tag page has an undated line, \"11 de 16 estaciones en servicio\". It most likely dates from June 2025, and I could not open it.\n\n4) Hours conflict. Items 11, 12 and 14 give daily 5:30 a.m. to 11:30 p.m. Item 13, a third-party aggregator, gives 6:00 a.m. to 10:00 p.m. on weekends. For special events, Hato Rey station stays open after Choliseo events until the queue clears (item 15). I found no official schedule page.\n\n5) Not checked:\n- any ATI service alert after about mid-October 2026;\n- whether fare collection has restarted, which does not affect whether passengers ride (all 2026 reports say it is still free, with no restart date);\n- the MobilityData status of the inactive ATI GTFS feed."
+  },
+  {
+   "verdict": "uncertain",
+   "status_you_found": "unknown",
+   "quotes_checked": [
+    {
+     "url": "https://www.jtafla.com/rider-guide/",
+     "found_on_page": false,
+     "note": "Not verified. WebFetch failed with getaddrinfo ENOTFOUND www.jtafla.com, which means the host is outside this session's allowed network domains. This was a network block, not a bot check or captcha. I could not check the banner quote 'Skyway Service Update: Due to unexpected operational circumstances, the Skyway service has concluded early today, October 30.', its 2026-10-30 date, or whether the banner is still up on 8 Nov 2026."
+    },
+    {
+     "url": "https://www.actionnewsjax.com/news/local/jta-shuts-down-skyway-earlier-than-planned-over-staffing-issues-no-reopening-date-announced/3JKR5AEACZCT5BOOYU3L6RO6OY/",
+     "found_on_page": false,
+     "note": "Not verified. WebFetch failed with getaddrinfo ENOTFOUND www.actionnewsjax.com (outside the allowed network domains). I could not check either quote: the JTA statement about pausing Friday evening and ending Friday morning because of staffing, and 'JTA has not yet announced a date for when Skyway services will resume.' The 2026-10-30 date is the original researcher's inference; they never saw the article's own date."
+    },
+    {
+     "url": "https://www.yahoo.com/news/us/articles/jta-shuts-down-skyway-earlier-232742203.html",
+     "found_on_page": false,
+     "note": "Not attempted. Three hosts had already failed DNS resolution, and the tool's guidance said to stop trying more sites. The 'La Villa Skyway platform ... fenced off' quote is unverified. It is the only evidence specific to the JRTC platform."
+    },
+    {
+     "url": "https://www.news4jax.com/news/local/2026/09/17/jta-to-cut-39-million-from-fy-2027-budget-suspend-skyway-service-in-november/",
+     "found_on_page": false,
+     "note": "Not verified. WebFetch failed with getaddrinfo ENOTFOUND www.news4jax.com (outside the allowed network domains). Both quotes are unchecked: the plan to suspend passenger operations from Nov. 2 with about $10 million saved, and the $39 million budget cut with the pause of Navi. The 2026-09-17 date matches the URL path only."
+    },
+    {
+     "url": "https://www.jtafla.com/media-center/press-release/jacksonville-transportation-authority-announces-budget-reductions-and-service-changes/",
+     "found_on_page": false,
+     "note": "Not fetched. Its host, www.jtafla.com, had already failed with ENOTFOUND, and the tool said not to fetch it again until the host is allowed. The quote is only the title and the item is undated. Unverified."
+    },
+    {
+     "url": "https://jaxtoday.org/2026/09/17/jta-layoffs-bus-service-skyway-navi/",
+     "found_on_page": false,
+     "note": "Not attempted, because I stopped trying new hosts after three DNS failures, as the tool guided. The headline quote is unverified. The 2026-09-17 date matches the URL path only."
+    },
+    {
+     "url": "https://jaxtoday.org/2026/11/04/askjaxtdy-jta-cuts-election-day/",
+     "found_on_page": false,
+     "note": "Not attempted, for the same reason. This is the newest cited item (2026-11-04 by its URL path). Its '$10 million' quote is unverified."
+    },
+    {
+     "url": "https://www.actionnewsjax.com/news/local/years-inertia-grant-puts-amtrak-stations-move-back-downtown-jacksonville-top-list/5F37IZ3IDBDRZDHJNKIO43KH3I/",
+     "found_on_page": false,
+     "note": "Not fetched, because www.actionnewsjax.com had already failed with ENOTFOUND. The Clifford Lane Amtrak quote and the article's date are unverified. The claim that the JRTC has no rail service today therefore rests on an undated extract that nobody opened."
+    },
+    {
+     "url": "https://jaxtoday.org/2026/02/25/skyway-changes-jacksonville/",
+     "found_on_page": false,
+     "note": "Not attempted, because I stopped trying new hosts as the tool guided. The context quote on U2C is unverified."
+    },
+    {
+     "url": "https://jtafla.com/media-center/press-release/jta-launches-nation-s-first-public-transportation-autonomous-vehicle-revenue-service/",
+     "found_on_page": false,
+     "note": "Not attempted. www.jtafla.com had already failed, and the tool's guidance said to stop trying more sites. The NAVI hours and corridor quote and its 2025-06-27 date are unverified."
+    },
+    {
+     "url": "https://www.news4jax.com/news/local/2026/09/03/jta-says-redeveloping-skyway-system-could-cost-up-to-565m/",
+     "found_on_page": false,
+     "note": "Not fetched, because www.news4jax.com had already failed with ENOTFOUND. The $151.95M to $565.44M quote and the 2026-09-03 date (from the URL path) are unverified."
+    },
+    {
+     "url": "https://maps.mail.ru/osm/tools/overpass/api/interpreter?data=%5Bout%3Acsv(%3A%3Atype%2C%3A%3Aid%2Cname%2Crailway%2C%22disused%3Arailway%22%2Cstation%2C%3A%3Atimestamp%3Btrue%3B%22%7C%22)%5D%5Btimeout%3A25%5D%3Bnwr(30.312%2C-81.675%2C30.335%2C-81.650)%5B%22station%22%3D%22monorail%22%5D%3Bout%20meta%3B",
+     "found_on_page": false,
+     "note": "Not attempted, because I stopped trying new hosts as the tool guided. The four quoted rows show OSM tagging only, not whether trains run. Read against the quoted header, the seven 'disused' nodes still carry railway=station alongside disused:railway=station (edited 2026-10-30T22:31:45Z). The JRTC node 8427291139 (edited 2022-01-21) has no disused tag. I did not check any of this."
+    },
+    {
+     "url": "https://www.actionnewsjax.com/news/local/jta-announces-nearly-200-layoffs-major-service-cuts-agency-works-close-39-million-budget-gap/6PH35QX55FECFKABUDUCKCEZCA/",
+     "found_on_page": false,
+     "note": "Not fetched, because www.actionnewsjax.com had already failed with ENOTFOUND. The quote 'NAVI shuttle service is also set to cease operations January 1.' and its date are unverified."
+    }
+   ],
+   "newer_evidence": [],
+   "station_disagreements": [],
+   "reason": "UNCERTAIN: I could neither verify nor refute this conclusion, because I could not open any source.\n\n(1) Blocked sites. WebFetch to www.jtafla.com, www.actionnewsjax.com and www.news4jax.com failed with getaddrinfo ENOTFOUND, meaning those hosts are outside this session's allowed network domains. These were network blocks, not bot checks or captchas. The tool said that when several hosts fail this way I should stop trying more sites and not re-fetch the failed ones until they are allowed. So I did not try jaxtoday.org, www.yahoo.com, jtafla.com or maps.mail.ru.\n\n(2) No independent search. Every WebSearch call returned \"web search budget is used up\". That limit is 200 calls per turn, shared by all agents in the workflow. So I found no operator alerts, board or council minutes, or local news of my own, and no newer or contrary evidence.\n\n(3) The conclusion itself is unverified at its foundation. Every JTA and news item it cites is opened=false, seen only as a search-engine extract. The only items marked opened are OSM Overpass rows, and those show map tagging, not whether trains run. The newest primary item, the JTA site banner dated 2026-10-30, was seen only in a search extract, and nobody checked whether it is still up. Two claims rest on unopened secondary extracts:\n- The JRTC platform claim (\"fenced off\") comes from a Yahoo syndication.\n- The claim that the JRTC has no rail service (Amtrak still at Clifford Lane) comes from an undated Action News Jax extract.\nThe summary also says in the present tense that NAVI vans run, but its own extracts say NAVI is to cease on January 1. That is context only.\n\n(4) Internal consistency. I found no contradiction. Oct 30, 2026 is a Friday and Nov 2, 2026 is a Monday, which matches the quotes \"pause Friday evening\" and \"service changes beginning Nov. 2\". The Nov. 2 suspension plan also matches the Sept. 17, 2026 budget reports. The line status (suspended) and all eight station statuses (closed since 2026-10-30) are plausible but unverified, so the status I found is unknown.\n\nSide note, also unverified: as quoted, the seven OSM nodes tagged disused still carry railway=station, so a map layer that filters on railway=station would still show them.\n\nTo verify, the session's network settings must allow www.jtafla.com (and jtafla.com), www.actionnewsjax.com, www.news4jax.com and jaxtoday.org. The web-search limit (CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION) would also need raising, or the check re-run in a follow-up."
+  }
+ ]
+}

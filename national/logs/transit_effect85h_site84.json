@@ -1,0 +1,17 @@
+[
+ {
+  "fips": "42129",
+  "county": "Westmoreland County",
+  "st": "PA",
+  "bgs": 265,
+  "bt_changed": 0,
+  "bt_up": 0,
+  "bt_down": 0,
+  "became_unknown": 0,
+  "became_known": 0,
+  "median_ratio": 1.0,
+  "top_project_changed": 0,
+  "top_any_tier_changed": 0,
+  "bus_projects_changed": 0
+ }
+]

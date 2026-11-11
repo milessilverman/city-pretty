@@ -1,0 +1,84 @@
+{
+ "San Mateo County": {
+  "cities": [
+   "Half Moon Bay",
+   "Millbrae",
+   "San Carlos",
+   "Woodside"
+  ],
+  "evidence": {
+   "Half Moon Bay": "https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2026-07/Crimes-Clear-Arson%20Context_06222026.pdf | 2011: Half Moon Bay Police Department (located in San Mateo County) disbanded in June and the City of Half Moon Bay began contracting law enforcement responsibilities with the San Mateo County Sheriff's Department. Criminal statistics for Half Moon Bay are now included in those of the Sheriff's Department.",
+   "Millbrae": "same DOJ context PDF | 2012: Millbrae Police Department (located in San Mateo County) disbanded in March and the City of Millbrae began contracting law enforcement responsibilities with the San Mateo County Sheriff's Department. Criminal statistics for Millbrae are now included in those of the Sheriff's Department.",
+   "San Carlos": "same DOJ context PDF | 2010: San Carlos Police Department (located in San Mateo County) disbanded in November and the City of San Carlos began contracting law enforcement responsibilities with the San Mateo County Sheriff's Department. Criminal statistics for San Carlos are now included in those of the Sheriff's Department.",
+   "Woodside": "https://www.woodsideca.gov/DocumentCenter/View/2052/Woodside-Law-Enforcement-Services---2025-2030-PDF (Agreement for Law Enforcement Services, Town of Woodside / San Mateo County Sheriff's Office, July 1, 2025 through June 30, 2030; the town has never had a DOJ row) | WHEREAS, Town is desirous of having the County provide law enforcement services through the Sheriff's Office, as hereinafter set forth, for and on behalf of Town"
+  }
+ },
+ "Glenn County": {
+  "cities": [
+   "Willows"
+  ],
+  "evidence": {
+   "Willows": "same DOJ context PDF | 2017: Willows Police Department (located in Glenn County) disbanded in July. Criminal statistics are now included in those of the Sheriff's Department. Contract in force through 2025: https://cityofwillows.org/departments/law-enforcement/ | On July 1, 2026, the Law Enforcement Services contract with the Glenn County Sheriff ended."
+  }
+ },
+ "San Benito County": {
+  "cities": [
+   "San Juan Bautista"
+  ],
+  "evidence": {
+   "San Juan Bautista": "same DOJ context PDF | 1993: San Juan Bautista Police Department (located in San Benito County) disbanded in January. Criminal statistics are now included in those of the San Benito County Sheriff's Department."
+  }
+ },
+ "Humboldt County": {
+  "cities": [
+   "Trinidad",
+   "Blue Lake"
+  ],
+  "evidence": {
+   "Trinidad": "same DOJ context PDF | 2010: Trinidad Police Department (located in Humboldt County) disbanded in July and the City of Trinidad began contracting law enforcement responsibilities with the Humboldt County Sheriff's Department. Criminal statistics for Trinidad are now included with the Sheriff's Department.",
+   "Blue Lake": "same DOJ context PDF | 2008: Blue Lake Police Department (located in Humboldt County) disbanded in July. Their criminal statistics are now included in those of the Humboldt County Sheriff's Department."
+  }
+ },
+ "Kern County": {
+  "cities": [
+   "Maricopa"
+  ],
+  "evidence": {
+   "Maricopa": "same DOJ context PDF | 1999: Maricopa Police Department (located in Kern County) disbanded in September. Criminal statistics are now included in those of the Kern County Sheriff's Department."
+  }
+ },
+ "Placer County": {
+  "cities": [
+   "Colfax",
+   "Loomis"
+  ],
+  "evidence": {
+   "Colfax": "same DOJ context PDF | 1996: Colfax Police Department (located Placer County) closed in July. Their criminal statistics are now included in those of the Placer County Sheriff's Department.",
+   "Loomis": "https://loomis.ca.gov/law-enforcement-services-from-placer-county-sheriffs-office-faq/ (posted 17 Sep 2025) | As a smaller community, the Town of Loomis contracts with the Placer County Sheriff's Office to provide top-quality law enforcement services to businesses, residents, and visitors"
+  }
+ },
+ "Shasta County": {
+  "cities": [
+   "Shasta Lake"
+  ],
+  "evidence": {
+   "Shasta Lake": "https://www.cityofshastalake.gov/1288/Fire-Protection-Services | Law enforcement services in the City of Shasta Lake are provided through a contract with the Shasta County Sheriff's Office"
+  }
+ },
+ "San Joaquin County": {
+  "cities": [
+   "Mountain House"
+  ],
+  "evidence": {
+   "Mountain House": "https://www.mountainhouseca.gov/233/Police-Services (incorporated 2024; no DOJ row) | The San Joaquin County Sheriff's Office provides full police services to Mountain House, including patrol, investigations, traffic enforcement, and crime prevention support."
+  }
+ },
+ "Fresno County": {
+  "cities": [
+   "San Joaquin"
+  ],
+  "evidence": {
+   "San Joaquin": "https://www.fresnosheriff.org/units/enforcement/patrol-areas/area-1.html (no DOJ row) | The Fresno County Sheriff's Office is the contracted law enforcement agency for the City of San Joaquin."
+  }
+ }
+}

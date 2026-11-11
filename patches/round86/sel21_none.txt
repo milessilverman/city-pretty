@@ -1,0 +1,5 @@
+@@OLD
++ "; ".join(_feed_label(f) for f in (tr.get("feeds") or [])) + (". Not included: "
+@@NEW
++ ("; ".join(_feed_label(f) for f in (tr.get("feeds") or [])) or "none") + (". Not included: "
+@@END

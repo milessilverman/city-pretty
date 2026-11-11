@@ -1,0 +1,2189 @@
+{
+ "totals": {
+  "counties": 97,
+  "feeds on 11 Nov before": 154,
+  "feeds on 11 Nov now": 0,
+  "feeds newly counted": 0,
+  "feeds no longer counted": 0,
+  "bt changed": 0,
+  "bt up": 0,
+  "bt down": 0,
+  "became known": 0,
+  "became unknown": 0,
+  "counties with a bus change": 0
+ },
+ "counties": [
+  {
+   "fips": "01003",
+   "county": "Baldwin County",
+   "st": "AL",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "tld-6773",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "01097",
+   "county": "Mobile County",
+   "st": "AL",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "tld-6773",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "01125",
+   "county": "Tuscaloosa County",
+   "st": "AL",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "tld-7046",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "06003",
+   "county": "Alpine County",
+   "st": "CA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "897",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "06031",
+   "county": "Kings County",
+   "st": "CA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2204",
+     "2026-07-08",
+     "2026-11-04"
+    ],
+    [
+     "85",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "06035",
+   "county": "Lassen County",
+   "st": "CA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "113",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "118",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "04019",
+   "county": "Pima County",
+   "st": "AZ",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "ntd-91122",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "10005",
+   "county": "Sussex County",
+   "st": "DE",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "1235",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "3149",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "06049",
+   "county": "Modoc County",
+   "st": "CA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "113",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "08035",
+   "county": "Douglas County",
+   "st": "CO",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "178",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "2280",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "06063",
+   "county": "Plumas County",
+   "st": "CA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "118",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "12001",
+   "county": "Alachua County",
+   "st": "FL",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "tld-764",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "12021",
+   "county": "Collier County",
+   "st": "FL",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2259",
+     "2026-11-11",
+     "2026-11-18"
+    ],
+    [
+     "324",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "12071",
+   "county": "Lee County",
+   "st": "FL",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2259",
+     "2026-11-11",
+     "2026-11-18"
+    ],
+    [
+     "324",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "12081",
+   "county": "Manatee County",
+   "st": "FL",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2258",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "12057",
+   "county": "Hillsborough County",
+   "st": "FL",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2258",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "325",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "329",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "12083",
+   "county": "Marion County",
+   "st": "FL",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2255",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "12109",
+   "county": "St. Johns County",
+   "st": "FL",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "tld-764",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "13067",
+   "county": "Cobb County",
+   "st": "GA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "3193",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-478_1",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-5551",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "12101",
+   "county": "Pasco County",
+   "st": "FL",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "325",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "13089",
+   "county": "DeKalb County",
+   "st": "GA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2241",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-478_1",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "12103",
+   "county": "Pinellas County",
+   "st": "FL",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "325",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "12115",
+   "county": "Sarasota County",
+   "st": "FL",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2258",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "13117",
+   "county": "Forsyth County",
+   "st": "GA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2241",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "13135",
+   "county": "Gwinnett County",
+   "st": "GA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2241",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "18003",
+   "county": "Allen County",
+   "st": "IN",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2266",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "18141",
+   "county": "St. Joseph County",
+   "st": "IN",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "tld-7019",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "19153",
+   "county": "Polk County",
+   "st": "IA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "193",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "18097",
+   "county": "Marion County",
+   "st": "IN",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "ntd-50209",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "20091",
+   "county": "Johnson County",
+   "st": "KS",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2303",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "3519",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "21067",
+   "county": "Fayette County",
+   "st": "KY",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2067",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "362",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "22033",
+   "county": "East Baton Rouge Parish",
+   "st": "LA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2065",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "26049",
+   "county": "Genesee County",
+   "st": "MI",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2287",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "21111",
+   "county": "Jefferson County",
+   "st": "KY",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2662",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "26077",
+   "county": "Kalamazoo County",
+   "st": "MI",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "tld-674",
+     "2026-11-11",
+     "2026-11-18"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "26065",
+   "county": "Ingham County",
+   "st": "MI",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "402",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "26081",
+   "county": "Kent County",
+   "st": "MI",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "400",
+     "2026-11-11",
+     "2026-11-18"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "25013",
+   "county": "Hampden County",
+   "st": "MA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "429",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "553",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "26099",
+   "county": "Macomb County",
+   "st": "MI",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "414",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "464",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-7035",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "26125",
+   "county": "Oakland County",
+   "st": "MI",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2287",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "414",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "464",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "26161",
+   "county": "Washtenaw County",
+   "st": "MI",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2072",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "415",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "26139",
+   "county": "Ottawa County",
+   "st": "MI",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "400",
+     "2026-11-11",
+     "2026-11-18"
+    ],
+    [
+     "tld-4831",
+     "2026-09-09",
+     "2026-11-04"
+    ],
+    [
+     "tld-5873",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "26163",
+   "county": "Wayne County",
+   "st": "MI",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "414",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "415",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "464",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "31055",
+   "county": "Douglas County",
+   "st": "NE",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2261",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "29047",
+   "county": "Clay County",
+   "st": "MO",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2303",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "3519",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "31109",
+   "county": "Lancaster County",
+   "st": "NE",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2269",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "27003",
+   "county": "Anoka County",
+   "st": "MN",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "205",
+     "2026-11-11",
+     "2026-11-18"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "36001",
+   "county": "Albany County",
+   "st": "NY",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "3116",
+     "2026-01-07",
+     "2026-11-04"
+    ],
+    [
+     "613",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "804",
+     "2026-08-19",
+     "2026-11-04"
+    ],
+    [
+     "tld-5877",
+     "2026-04-15",
+     "2026-11-04"
+    ],
+    [
+     "tld-6745",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "32031",
+   "county": "Washoe County",
+   "st": "NV",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "120",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "2328",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "897",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "94",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-688",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "36055",
+   "county": "Monroe County",
+   "st": "NY",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "3114",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "824",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-1201",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-7040",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-7041",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "34001",
+   "county": "Atlantic County",
+   "st": "NJ",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "508",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "36067",
+   "county": "Onondaga County",
+   "st": "NY",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "3520",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "36091",
+   "county": "Saratoga County",
+   "st": "NY",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2650",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "804",
+     "2026-08-19",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "34029",
+   "county": "Ocean County",
+   "st": "NJ",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "508",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "ntd-20122",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "ntd-20208",
+     "2026-01-07",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "37021",
+   "county": "Buncombe County",
+   "st": "NC",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "903",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "37025",
+   "county": "Cabarrus County",
+   "st": "NC",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2244",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "2265",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "37067",
+   "county": "Forsyth County",
+   "st": "NC",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "3479",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "373",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "37063",
+   "county": "Durham County",
+   "st": "NC",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2074",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "3183",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-89",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-98",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "37071",
+   "county": "Gaston County",
+   "st": "NC",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2265",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "37129",
+   "county": "New Hanover County",
+   "st": "NC",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "3536",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "37179",
+   "county": "Union County",
+   "st": "NC",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2265",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "39085",
+   "county": "Lake County",
+   "st": "OH",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "406",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "410",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "39113",
+   "county": "Montgomery County",
+   "st": "OH",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "403",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "39093",
+   "county": "Lorain County",
+   "st": "OH",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "406",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "39151",
+   "county": "Stark County",
+   "st": "OH",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2001",
+     "2026-11-11",
+     "2026-11-18"
+    ],
+    [
+     "2071",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "40143",
+   "county": "Tulsa County",
+   "st": "OK",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "tld-235",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "42041",
+   "county": "Cumberland County",
+   "st": "PA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "tld-223",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-4298",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-5531",
+     "2026-11-11",
+     "2026-11-18"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "42079",
+   "county": "Luzerne County",
+   "st": "PA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "824",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-4553",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-4555",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-4665",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-5783",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "42003",
+   "county": "Allegheny County",
+   "st": "PA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "tld-6785",
+     "2026-11-11",
+     "2026-11-18"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "45015",
+   "county": "Berkeley County",
+   "st": "SC",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "352",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "ntd-40206",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "42129",
+   "county": "Westmoreland County",
+   "st": "PA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "409",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-4134",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-4661",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-5503",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-6785",
+     "2026-11-11",
+     "2026-11-18"
+    ],
+    [
+     "tld-7027",
+     "2026-07-22",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "45019",
+   "county": "Charleston County",
+   "st": "SC",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "352",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "ntd-40206",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "45045",
+   "county": "Greenville County",
+   "st": "SC",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "tld-490",
+     "2026-11-11",
+     "2026-11-18"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "45091",
+   "county": "York County",
+   "st": "SC",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2265",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-6741",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "45083",
+   "county": "Spartanburg County",
+   "st": "SC",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "tld-490",
+     "2026-11-11",
+     "2026-11-18"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "47065",
+   "county": "Hamilton County",
+   "st": "TN",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "3474",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "47093",
+   "county": "Knox County",
+   "st": "TN",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "3512",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "ntd-41136",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "47125",
+   "county": "Montgomery County",
+   "st": "TN",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "tld-4131",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "48029",
+   "county": "Bexar County",
+   "st": "TX",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "tld-217",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "48039",
+   "county": "Brazoria County",
+   "st": "TX",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2060",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "ntd-60103",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "48085",
+   "county": "Collin County",
+   "st": "TX",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "152",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "48121",
+   "county": "Denton County",
+   "st": "TX",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "152",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "48303",
+   "county": "Lubbock County",
+   "st": "TX",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "569",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "48167",
+   "county": "Galveston County",
+   "st": "TX",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2060",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "48157",
+   "county": "Fort Bend County",
+   "st": "TX",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2060",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "ntd-60103",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "48479",
+   "county": "Webb County",
+   "st": "TX",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "tld-7038",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "48339",
+   "county": "Montgomery County",
+   "st": "TX",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2060",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "51041",
+   "county": "Chesterfield County",
+   "st": "VA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "235",
+     "2025-07-02",
+     "2026-11-04"
+    ],
+    [
+     "3518",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "591",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "49057",
+   "county": "Weber County",
+   "st": "UT",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "170",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "51087",
+   "county": "Henrico County",
+   "st": "VA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "3518",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "591",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "51550",
+   "county": "Chesapeake city",
+   "st": "VA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "473",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "49049",
+   "county": "Utah County",
+   "st": "UT",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "170",
+     "2026-11-11",
+     "2026-11-04"
+    ],
+    [
+     "tld-7037",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "51710",
+   "county": "Norfolk city",
+   "st": "VA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "473",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "36063",
+   "county": "Niagara County",
+   "st": "NY",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "55009",
+   "county": "Brown County",
+   "st": "WI",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "2069",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "51810",
+   "county": "Virginia Beach city",
+   "st": "VA",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "473",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  },
+  {
+   "fips": "55025",
+   "county": "Dane County",
+   "st": "WI",
+   "new_feeds": [],
+   "gone_feeds": [],
+   "moved": [
+    [
+     "394",
+     "2026-11-11",
+     "2026-11-04"
+    ]
+   ],
+   "bt_changed": 0,
+   "bt_up": 0,
+   "bt_down": 0,
+   "became_known": 0,
+   "became_unknown": 0
+  }
+ ]
+}

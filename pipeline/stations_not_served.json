@@ -1,0 +1,16 @@
+[
+ {"id": "jta-skyway",
+  "line": "JTA Skyway (Jacksonville, Florida)",
+  "match": {"network_or_operator": "JTA", "mode": "monorail"},
+  "not_served_from": "2026-11-02",
+  "rule": "A station of this line is not kept by type or operator (rules 2 and 3 of metrics_oc.confirm_rail_stations): the operator publishes the line in its GTFS when it runs, and its current schedule has no such route. A GTFS rail stop within 400 m would still confirm the station.",
+  "evidence": [
+   {"url": "https://storage.googleapis.com/mobilitydata-datasets-prod/tld-764/latest.zip", "file": "feed_info.txt",
+    "quote": "Jacksonville Transportation Authority,https://www.jtafla.com,en,20261102,20270321,S1000222",
+    "note": "JTA's current GTFS (MobilityData copy, sha256 c41a1f106be1d742..., read 8 Nov 2026): the schedule effective 2 Nov 2026. Its routes.txt has 40 routes, all route_type 3 (bus); none is the Skyway."},
+   {"url": "https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-florida-jacksonville-transportation-authority-jta-gtfs-346.zip?alt=media", "file": "routes.txt and stops.txt",
+    "quote": "605,SKYWAY,\"Skyway\",,1,,, | 1659,,\"JRTC at LaVilla\",,  30.329000, -81.672110,,,0,",
+    "note": "JTA's 2023 GTFS (MobilityData legacy mirror, calendar 23 Jan - 3 Sep 2023, sha256 a19abb8cca27f6b3..., read 8 Nov 2026): when the Skyway ran, JTA's feed listed it (route 605, route_type 1) with a stop at the JRTC's LaVilla platform, 9 m from OpenStreetMap's station node."}
+  ],
+  "leads_not_opened": "Search-engine excerpts (the pages themselves are refused by this machine's network policy, so they are leads, not evidence): JTA's site banner 'Skyway Service Update: Due to unexpected operational circumstances, the Skyway service has concluded early today, October 30.' (jtafla.com/rider-guide); News4JAX, 17 Sep 2026: 'The JTA plans to suspend passenger operations on the Skyway beginning Nov. 2'. OpenStreetMap already tags the line's other seven stations disused."}
+]

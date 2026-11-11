@@ -1,0 +1,89 @@
+Alameda County, CA (06001)
+  added: -['22nd Street Caltrain Northbound', 'Bayshore Caltrain Northbound', 'Belmont Caltrain Northbound', 'Broadway Caltrain Northbound', 'Burlingame Caltrain Northbound', 'California Avenue Caltrain Northbound', 'Hayward Park Caltrain Northbound', 'Hillsdale Caltrain Northbound'] +['22nd Street Station', 'Bayshore Station', 'Belmont Station', 'Broadway Station', 'Burlingame Station', 'California Avenue Station', 'Hayward Park Station', 'Hillsdale Station']
+Contra Costa County, CA (06013)
+  added: -['22nd Street Caltrain Northbound', 'Bayshore Caltrain Northbound', 'Coliseum - OAC', 'Oakland International Airport Station', 'San Francisco Caltrain Northbound'] +['22nd Street Station', 'Bayshore Station', 'Oakland International Airport', 'San Francisco Caltrain Station']
+San Benito County, CA (06069)
+  added: -['Gilroy Caltrain Northbound'] +['Gilroy Station']
+San Francisco County, CA (06075)
+  added: -['Bayshore Caltrain Northbound', 'San Bruno Caltrain Northbound', 'South San Francisco Caltrain Southbound'] +['Bayshore Station', 'San Bruno Caltrain Station', 'South San Francisco Caltrain Station']
+San Mateo County, CA (06081)
+  added: -['Bayshore Caltrain Northbound', 'California Avenue Caltrain Northbound', 'Mountain View Caltrain Northbound', 'Oakland International Airport Station', 'San Antonio Caltrain Northbound', 'South San Francisco Caltrain Southbound'] +['Bayshore Station', 'California Avenue Station', 'Mountain View Station', 'Oakland International Airport', 'San Antonio Station', 'South San Francisco Caltrain Station']
+Santa Clara County, CA (06085)
+  added: -['Redwood City Caltrain Northbound'] +['Redwood City Station']
+Santa Cruz County, CA (06087)
+  added: -['Blossom Hill Caltrain Northbound', 'Capitol Caltrain Northbound', 'Gilroy Caltrain Northbound', 'Morgan Hill Caltrain Northbound', 'San Martin Caltrain Northbound', 'San Martin Caltrain Southbound', 'Tamien Caltrain Northbound'] +['Blossom Hill Caltrain Station', 'Capitol Caltrain Station', 'Gilroy Station', 'Morgan Hill Station', 'San Martin Station', 'Tamien Caltrain Station']
+Adams County, CO (08001)
+  added: -['Olde Town Arvada E-Bound'] +['Olde Town Arvada']
+Arapahoe County, CO (08005)
+  added: -['38th & Blake Station Track 2', '40th Ave & Airport Blvd - Gateway Park Station Track 1', 'Central Park Station Track 1', 'Peoria Station Track 1'] +['38th / Blake Station', '40th  / Airport - Gateway Park Station', 'Central Park Station', 'Peoria Station']
+Denver County, CO (08031)
+  added: -['Wheat Ridge - Ward Station Track 1'] +['Wheat Ridge / Ward Road Station']
+Jefferson County, CO (08059)
+  added: -['Clear Creek - Federal Station Track 1'] +['Clear Creek / Federal Station']
+Western Connecticut Planning Region, CT (09190)
+  added: -['Springdale MW Facility'] +[]
+District of Columbia, DC (11001)
+  added: -['4', 'Ballston, Orange/Silver Line Track 2 Platform', 'Lead', 'Stadium-Armory, Blue/Orange/Silver Line Center Platform'] +['Ballston-MU', 'L Enfant', 'Stadium-Armory', 'Union Station']
+Cook County, IL (17031)
+  added: -['Cicero-Forest Park', 'Pulaski-Forest Park'] +['Cicero (Blue)', 'Pulaski (Blue)']
+Will County, IL (17197)
+  added: -['95th'] +['95th/Dan Ryan']
+Anne Arundel County, MD (24003)
+  added: -['Morgan Blvd, Blue/Silver Line Center Platform'] +['Morgan Blvd']
+Baltimore County, MD (24005)
+  added: -['CHARLES CENTER (METRO) sb', 'STATE CENTER (METRO) sb'] +['CHARLES CENTER METRO']
+  dropped: -[] +['Relief Point & Division']
+  confirmed by a stop: 58 -> 57
+Harford County, MD (24025)
+  added: -['JOHNS HOPKINS STATION (METRO)'] +['JOHNS HOPKINS METRO']
+Howard County, MD (24027)
+  added: -['WEST COLD SPRING STATION (METRO)'] +['WEST COLD SPRING METRO']
+Montgomery County, MD (24031)
+  added: -['Deanwood, Orange/Silver Line Center Platform', 'Dupont Circle, Red Line Track 1 Platform', 'Mt Vernon Square, Green/Yellow Line Center Platform', 'NoMa-Gallaudet U, Red Line Center Platform', 'Shaw-Howard, Green/Yellow Line Center Platform'] +['Deanwood', 'Dupont Circle', 'Mt Vernon Sq', 'NoMa-Gallaudet U', 'Shaw-Howard U']
+Prince George's County, MD (24033)
+  added: -['4', 'Ballston, Orange/Silver Line Track 1 Platform', 'Lead', 'North Bethesda, Red Line Center Platform', 'Stadium-Armory, Blue/Orange/Silver Line Center Platform'] +['Ballston-MU', 'L Enfant', 'North Bethesda', 'Stadium-Armory', 'Union Station']
+Baltimore city, MD (24510)
+  added: -['CHARLES CENTER (METRO) sb', 'STATE CENTER (METRO) sb'] +['CHARLES CENTER METRO']
+  dropped: -[] +['Relief Point & Division']
+  confirmed by a stop: 43 -> 42
+Bristol County, MA (25005)
+  added: -['Attleboro'] +[]
+Essex County, MA (25009)
+  added: -['Waltham'] +[]
+Middlesex County, MA (25017)
+  added: -['Canton Junction', 'Lincoln', 'Ruggles', 'South Station', 'Waltham', 'Wellesley Square'] +['Boston']
+Norfolk County, MA (25021)
+  added: -['Canton Junction', 'Ruggles', 'South Station', 'Waltham', 'Wellesley Square'] +['Boston']
+Plymouth County, MA (25023)
+  added: -['Ruggles', 'South Station'] +['Boston']
+Suffolk County, MA (25025)
+  added: -['Braintree', 'Ruggles', 'South Station'] +['Boston']
+Camden County, NJ (34007)
+  added: -['15th St/City Hall', 'Race-Vine'] +['15th St/City Hall Station', 'Race Vine Station - BSL']
+Nassau County, NY (36059)
+  added: -['Hillside Facility'] +[]
+Queens County, NY (36081)
+  added: -['Hillside Facility'] +[]
+Suffolk County, NY (36103)
+  added: -['Springdale MW Facility'] +[]
+Westchester County, NY (36119)
+  added: -['Springdale MW Facility'] +[]
+Delaware County, PA (42045)
+  added: -['Employee Platform - Employees Only'] +[]
+Montgomery County, PA (42091)
+  added: -['15th St/City Hall', 'Employee Platform - Employees Only'] +['15th St/City Hall Station']
+Philadelphia County, PA (42101)
+  added: -['Employee Platform - Employees Only'] +[]
+Davis County, UT (49011)
+  added: -['WARM SPRINGS RELIEF POINT'] +[]
+Salt Lake County, UT (49035)
+  added: -['WARM SPRINGS RELIEF POINT'] +[]
+Arlington County, VA (51013)
+  added: -['4', 'Archives, Green/Yellow Line Center Platform', 'Ballston, Orange/Silver Line Track 2 Platform', 'Capitol South, Blue/Orange/Silver Line Center Platform', 'Cleveland Park, Red Line Center Platform', 'Columbia Heights, Green/Yellow Line Center Platform', 'Dupont Circle, Red Line Track 1 Platform', 'Eisenhower Ave, Yellow Line Track 1 Platform'] +['Archives', 'Ballston-MU', 'Capitol South', 'Cleveland Park', 'Columbia Heights', 'Dupont Circle', 'Eisenhower Av', 'Farragut North']
+Fairfax County, VA (51059)
+  added: -['4', 'Archives, Green/Yellow Line Center Platform', 'Ballston, Orange/Silver Line Track 2 Platform', 'Bethesda, Red Line Center Platform', 'Cleveland Park, Red Line Center Platform', 'Columbia Heights, Green/Yellow Line Center Platform', 'Dupont Circle, Red Line Track 1 Platform', 'Farragut North, Red Line Center Platform'] +['Archives', 'Ballston-MU', 'Bethesda', 'Broad Run', 'Cleveland Park', 'Columbia Heights', 'Dupont Circle', 'Farragut North']
+Prince William County, VA (51153)
+  added: -['Lead'] +['Broad Run']
+Stafford County, VA (51179)
+  added: -['1'] +['Spotsylvania']
+42 counties changed; {'added -': 175, 'added +': 147, 'dropped -': 0, 'dropped +': 2, 'gtfs delta': -2}

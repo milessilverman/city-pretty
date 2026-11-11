@@ -1,0 +1,12 @@
+1. new data block #sites-data: 7436 block groups with specific-place candidates (1.29 MB base64)
+2. bundle-oc replaced (nearest DC fast charger from the official AFDC list via USDOT/BTS instead of OpenStreetMap)
+3. catalog crosswalks.sources: correction r5-1 (https://cityclerk.lacity.org/onlinedocs/2015/15-0087-S8_rpt_lahd_5-17-22.pdf)
+4. catalog corridor_trail.sources: correction r5-2 (https://catc.ca.gov/-/media/ctc-media/documents/ctc-meetings/2025/2025-03/97-2-5w1-a11y.pdf)
+5. catalog pocket_park.sources: correction r5-3 (https://file.lacounty.gov/SDSInter/bos/supdocs/168842.pdf)
+6. catalog ped_signals.sources: correction r5-4 (https://cityclerk.lacity.org/onlinedocs/2015/15-0087-S8_rpt_lahd_5-17-22.pdf)
+7. catalog protected_bike.sources: correction r5-5 (https://cityclerk.lacity.org/onlinedocs/2015/15-0087-S8_rpt_lahd_5-17-22.pdf)
+8. specific-places UI (loadSites, sitesHtml, fillSites, drawSites)
+9. panel: new 'Specific Places for These Projects' section
+10. panel: fill the specific places after render
+11. project cards: placeholder for the crash/map-based specific candidate
+12. init: preload the site candidates in the background

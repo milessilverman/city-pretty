@@ -1,0 +1,67 @@
+[
+ {
+  "item": "r5-1",
+  "round": 5,
+  "target": "catalog",
+  "key": "crosswalks",
+  "find": "Santa Monica Blvd Safety Study 2026: ADA ramp $9,000; bulb-out $11,000-18,000",
+  "replace": "Santa Monica Blvd Safety Study 2026: ADA ramp $9,000; bulb-out $11,000-18,000 (not checked against the study). LA City's own engineering unit prices (2022, with escalation and contingency) are far higher for concrete work: high-visibility continental crosswalk $3,950; ADA curb ramp $38,122; curb extension $158,016 (half corner) to $260,726 (full corner at a signal); pedestrian refuge island $110,611. The $58,000 per intersection used here covers crosswalks and ramps, not curb extensions",
+  "source": "https://cityclerk.lacity.org/onlinedocs/2015/15-0087-S8_rpt_lahd_5-17-22.pdf",
+  "quote": "Crosswalk (upgrade to continental type with high visibility paint) STI DOT EA 16 $3,950 $63,200",
+  "date": "Mayor's transmittal to Council, 17 May 2022 (CF 15-0087-S6), Attachment C - Round 6 Detailed Budgets (AHSC); column 'Unit Price (w/ Escalation and Contingency)'",
+  "grade": "A",
+  "note": "Cost only; the engine's $58,000 per intersection is unchanged (no formula changes)."
+ },
+ {
+  "item": "r5-2",
+  "round": 5,
+  "target": "catalog",
+  "key": "corridor_trail",
+  "find": "Cost from a Gemini research pass, unverified (re-audit kept the figure but quoted no source); $2.4M per mile (power-line ROW) to $4.5M (river)",
+  "replace": "Cost from a Gemini research pass, unverified (re-audit kept the figure but quoted no source); $2.4M per mile (power-line ROW) to $4.5M (river). Checked benchmarks: Coyote Creek flood-channel trail (OC Loop P-Q), $5,699,000 state ATP allocation for 1.6 miles (~$3.6M/mi, CTC March 2025); Puente Creek Bikeway, $3.7M programmed for 1.86 miles of channel path (~$2.0M/mi; withdrawn from ATP June 2025); OC Loop Segment A rail-to-trail, $46.0M for 3.1 miles (~$14.8M/mi, OCTA 2024 RTIP)",
+  "source": "https://catc.ca.gov/-/media/ctc-media/documents/ctc-meetings/2025/2025-03/97-2-5w1-a11y.pdf",
+  "quote": "Construction funds for a Class I trail along the Coyote Creek Flood Channel (1.6 miles) that closes a gap along the 66-mile multi-modal regional route known as the 'OC Loop'.",
+  "date": "CTC meeting March 2025",
+  "grade": "A",
+  "note": "Adds checked cost benchmarks next to the unverified range; engine cost unchanged."
+ },
+ {
+  "item": "r5-3",
+  "round": 5,
+  "target": "catalog",
+  "key": "pocket_park",
+  "find": "LA 50 Parks Initiative: 5,000-20,000 sq ft parks $250k-700k to develop, land extra",
+  "replace": "LA 50 Parks Initiative: 5,000-20,000 sq ft parks $250k-700k to develop, land extra (not checked). Checked example: LA County's 0.5-acre Walnut Park pocket park (playground, splash pad, restroom/staff building) budgeted at $4,622,842 including $3,330,000 construction, land bought separately for $1,265,000 (state funds), about $385,000 a year to run (Board letter, 17 May 2022)",
+  "source": "https://file.lacounty.gov/SDSInter/bos/supdocs/168842.pdf",
+  "quote": "The Development Project includes the construction of a new 0.5-acre park with a staff office and public restroom building, playground areas, splash pad, an open lawn area, and additional park amenities.",
+  "date": "LA County Public Works Board letter, 17 May 2022",
+  "grade": "A",
+  "note": "Adds a checked cost example; engine cost unchanged."
+ },
+ {
+  "item": "r5-4",
+  "round": 5,
+  "target": "catalog",
+  "key": "ped_signals",
+  "find": "Cost from a Gemini research pass, unverified (re-audit kept the figure but quoted no source); $8,500 per signal retiming, $1,800 per daylit corner (AB 413)",
+  "replace": "Cost from a Gemini research pass, unverified (re-audit kept the figure but quoted no source); $8,500 per signal retiming, $1,800 per daylit corner (AB 413). LA City unit prices (2022, with escalation and contingency): leading pedestrian interval $34,034 each; accessible pedestrian signal $20,542; rapid rectangular flashing beacon $118,512; pedestrian HAWK beacon $158,016-237,024",
+  "source": "https://cityclerk.lacity.org/onlinedocs/2015/15-0087-S8_rpt_lahd_5-17-22.pdf",
+  "quote": "Leading Pedestrian Interval STI DOT EA 2 $34,034 $68,068",
+  "date": "Mayor's transmittal to Council, 17 May 2022 (CF 15-0087-S6), Attachment C - Round 6 Detailed Budgets (AHSC); column 'Unit Price (w/ Escalation and Contingency)'",
+  "grade": "A",
+  "note": "Engine cost unchanged."
+ },
+ {
+  "item": "r5-5",
+  "round": 5,
+  "target": "catalog",
+  "key": "protected_bike",
+  "find": "Cost from a Gemini research pass, unverified (re-audit kept the figure but quoted no source); $1.85M per mile with concrete curbs and bike signals",
+  "replace": "Cost from a Gemini research pass, unverified (re-audit kept the figure but quoted no source); $1.85M per mile with concrete curbs and bike signals. LA City unit prices for the 7th Street protected bike lane (2022, with escalation and contingency): $297 per linear foot with landscaping, plus $66 signing and $175 signal modifications per foot, about $2.8M per mile combined; Class II bike lanes $15 per foot",
+  "source": "https://cityclerk.lacity.org/onlinedocs/2015/15-0087-S8_rpt_lahd_5-17-22.pdf",
+  "quote": "7th St Protected Bike Lane with Landscape STI BOE LF 1,740 $297 $516,780",
+  "date": "Mayor's transmittal to Council, 17 May 2022 (CF 15-0087-S6), Attachment C - Round 6 Detailed Budgets (AHSC); column 'Unit Price (w/ Escalation and Contingency)'",
+  "grade": "A",
+  "note": "Engine cost unchanged."
+ }
+]

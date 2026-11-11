@@ -1,0 +1,36 @@
+def fmt_gap(key, v):
+    if v is None:
+        return "–"
+    if key in ("fw", "fc_library", "rm", "pool", "ev", "fc_center", "playground_m", "pn", "gro", "fc_clinic", "fc_school"):
+        return f"{v / 1609:.1f} mi"
+    if key == "ht":
+        return f"{v:+.1f}°F"
+    if key in ("vc", "pcr"):
+        return f"{v:.1f}/1k"
+    if key == "pa":
+        return f"{v:.1f} ac within 1/2 mi"
+    if key == "bt":
+        return f"{int(v)} bus{'' if int(v) == 1 else 'es'}/hr"
+    if key == "tg":
+        return f"{int(v)} pt{'' if int(v) == 1 else 's'} below goal"
+    return str(int(v))
+
+
+WHY = {"heat": lambda x, p: f"Summers run {x - p:.1f}°F hotter than in similar neighborhoods.", "canopy": lambda x, p: f"Tree canopy is {_count(int(x), 'point')} below the Tree Equity goal (similar neighborhoods: {int(p)}).",
+       "violent": lambda x, p: f"{x:.1f} violent crimes per 1,000 residents a year (similar neighborhoods: {p:.1f}).", "property": lambda x, p: f"{x:.1f} property crimes per 1,000 residents a year (similar neighborhoods: {p:.1f}).",
+       "freeway": lambda x, p: f"Homes sit {x / 1609:.2f} mi from the freeway (similar neighborhoods: {p / 1609:.1f} mi), so noise and exhaust are higher.", "library": lambda x, p: f"The nearest library is {x / 1609:.1f} mi away; in similar neighborhoods it's about {p / 1609:.1f} mi.",
+       "rail": lambda x, p: f"Rail is {x / 1609:.1f} mi away; in similar neighborhoods it's about {p / 1609:.1f} mi.", "pool": lambda x, p: f"The nearest public pool is {x / 1609:.1f} mi away; in similar neighborhoods it's about {p / 1609:.1f} mi.",
+       "ev": lambda x, p: f"The nearest EV fast charger is {x / 1609:.1f} mi away; in similar neighborhoods it's about {p / 1609:.1f} mi.", "dining": lambda x, p: ("1 restaurant or café" if int(x) == 1 else f"{int(x)} restaurants and cafés") + f" within ½ mile (similar neighborhoods: {int(p)}).",
+       "center": lambda x, p: f"The nearest community or rec center is {x / 1609:.1f} mi away; in similar neighborhoods it's about {p / 1609:.1f} mi.", "play_d": lambda x, p: f"The nearest playground is {x / 1609:.1f} mi away; in similar neighborhoods it's about {p / 1609:.1f} mi.",
+       "pedbike": lambda x, p: f"{int(x)} {'crash' if int(x) == 1 else 'crashes'} injured people walking or biking here (similar neighborhoods: {int(p)}).", "park_d": lambda x, p: f"The nearest park is {x / 1609:.1f} mi away; in similar neighborhoods it's about {p / 1609:.1f} mi.",
+       "bus": lambda x, p: f"{int(x)} {'bus' if int(x) == 1 else 'buses'} an hour at the busiest stop (similar neighborhoods: {int(p)}).", "park_ac": lambda x, p: f"{x:.1f} acres of park within ½ mile (similar neighborhoods: {p:.1f}).",
+       "grocery": lambda x, p: f"The nearest supermarket is {x / 1609:.1f} mi away; in similar neighborhoods it's about {p / 1609:.1f} mi.", "clinic": lambda x, p: f"The nearest clinic is {x / 1609:.1f} mi away; in similar neighborhoods it's about {p / 1609:.1f} mi.",
+       "school": lambda x, p: f"The nearest public school is {x / 1609:.1f} mi away; in similar neighborhoods it's about {p / 1609:.1f} mi."}
+
+
+def main():
+    M = json.load(open(os.path.join(DATA, "metrics.json"))); metrics = M["metrics"]
+    LY = json.load(open(os.path.join(DATA, "layers.json")))
+    bg = json.load(open(os.path.join(DATA, "bg.geojson")))
+    la_det = json.load(open(os.path.join(LA, "details.json"))); la_b = json.load(open(os.path.join(LA, "bundle.json")))
+    cat = la_b["catalog"]

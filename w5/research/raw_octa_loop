@@ -1,0 +1,1453 @@
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <title>OC Loop - Orange County Transportation Authority</title>
+
+
+<meta property="og:title" content="OC Loop">
+<meta property="og:type" content="website" />
+
+<meta property="og:url" content="https://www.octa.net/getting-around/active/oc-bike/oc-loop">
+<meta name="twitter:card" content="summary_large_image">
+
+<meta property="og:site_name" content="Orange County Transportation Authority">
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" crossorigin href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public&#x2B;Sans:wght@300;500;700;900&amp;display=swap">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5M2JC6V');</script>
+<!-- End Google Tag Manager -->
+    <link rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+
+    <link rel="stylesheet" href="/dist/css/site.css?v=1793665175673" />
+    <link rel="shortcut icon" href="/dist/images/favicon.ico">
+
+    
+    
+
+</head>
+
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5M2JC6V"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->    <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
+    <header>
+        
+
+
+<nav class="main-nav navbar navbar-expand-lg navbar-light container-fluid" id="main-nav">
+    <div class="container">
+        <div class="main-nav__wrap">
+            <a class="navbar-brand d-block" href="/">
+                <img class="main-nav__wrap-logo" src="/dist/images/octa-logo.svg" alt="OCTA" width="45">
+            </a>
+            <h2 class="sr-only">Main navigation</h2>
+            <button id="mobileToggle" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+                    aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle main navigation">
+                <img class="navbar-toggler__menu" src="/dist/images/icon-Menu.svg" alt="" width="26" aria-hidden="true">
+                <img class="navbar-toggler__close" src="/dist/images/icon-Close-X.svg" alt="" width="26" aria-hidden="true">
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <form role='search' action="/search" method="get" class="main-nav__search-form mb-0">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Enter keyword" aria-label="Search keyword"
+                           aria-describedby="button-addon2" name="q">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                        <span class='visually-hidden'>Submit Search</span>
+                        <img class="" src="/dist/images/icon-Search.svg" alt="" width="26" aria-hidden="true">
+                    </button>
+                </div>
+            </form>
+            <ul class="navbar-nav">
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarMenuLink-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <h3 class="p-0 m-0"><strong>Getting Around</strong></h3>
+                        </a>
+                        <div class="container-flexible p-0 dropdown-menu dropdown-menu-light" aria-labelledby="navbarMenuLink-0">
+
+                            <div class="main-nav__dropdown container d-lg-flex">
+                                <div class="d-lg-flex  main-nav__dropdown-left">
+                                    <div class="main-nav__sub-menu-container d-lg-flex">
+
+                                                <div class="main-nav__sub-menu-wrap main-nav__sub-menu-wrap--has-featured">
+                                                    <h4 id="subMenu-0-0" class="dropdown-header">Bus</h4>
+                                                    <ul class="list-unstyled main-nav__sub-menu" aria-describedby="subMenu-0-0">
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/getting-around/bus/oc-bus/bus-overview">OC Bus</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/getting-around/bus/oc-access/overview">OC ACCESS</a>
+                                                                </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav__sub-menu-wrap main-nav__sub-menu-wrap--has-featured">
+                                                    <h4 id="subMenu-0-1" class="dropdown-header">Rail</h4>
+                                                    <ul class="list-unstyled main-nav__sub-menu" aria-describedby="subMenu-0-1">
+                                                                <li>
+                                                                    <a class="dropdown-item" target="_self" href="/programs-projects/projects/rail-projects/oc-streetcar/overview/">OC Streetcar</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/getting-around/rail/metrolink/overview">Metrolink</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" target="_blank" href="https://www.pacificsurfliner.com/">Pacific Surfliner</a>
+                                                                </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav__sub-menu-wrap main-nav__sub-menu-wrap--has-featured">
+                                                    <h4 id="subMenu-0-2" class="dropdown-header">Rideshare</h4>
+                                                    <ul class="list-unstyled main-nav__sub-menu" aria-describedby="subMenu-0-2">
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/getting-around/rideshare/oc-rideshare/overview">OC Rideshare</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/getting-around/rideshare/oc-vanpool/overview">OC Vanpool</a>
+                                                                </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav__sub-menu-wrap main-nav__sub-menu-wrap--has-featured">
+                                                    <h4 id="subMenu-0-3" class="dropdown-header">Active</h4>
+                                                    <ul class="list-unstyled main-nav__sub-menu" aria-describedby="subMenu-0-3">
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/getting-around/active/oc-bike/overview">OC Bike</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/getting-around/active/oc-walk/overview">OC Walk</a>
+                                                                </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav__sub-menu-wrap main-nav__sub-menu-wrap--has-featured">
+                                                    <h4 id="subMenu-0-4" class="dropdown-header">Express Lanes</h4>
+                                                    <ul class="list-unstyled main-nav__sub-menu" aria-describedby="subMenu-0-4">
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/getting-around/express-lanes/91-express-lanes/overview">91 Express Lanes</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" target="_self" href="https://405expresslanes.com/">405 Express Lanes</a>
+                                                                </li>
+                                                    </ul>
+                                                </div>
+                                    </div>
+                                </div>
+                                    <div class="main-nav__featured-content">
+                                            <span class="dropdown-header text-uppercase">Rider Tools</span>
+                                        <ul class="main-nav__featured-content--list-underline list-unstyled">
+<li><a href="/getting-around/trip-planner/trip-planner" class="dropdown-item" title="Trip Planner" style="padding-top: 10px !important; padding-bottom: 10px !important;"><img style="top: 11px; height: 20px;" class="main-nav__featured-content-img" src="/dist/images/icon-Trip-Planner.svg" alt="Trip Planner" aria-hidden="true" /> Trip Planner</a></li>
+<li><a href="/getting-around/bus/oc-bus/routes-and-schedules/routes-and-schedules" class="dropdown-item" title="Routes and Schedules" data-anchor="#" style="padding-top: 10px !important; padding-bottom: 10px !important;"><img style="top: 11px; height: 20px;" class="main-nav__featured-content-img" src="/dist/images/icon-Maps-Schedules.svg" alt="Routes and Schedules" aria-hidden="true" /> Routes &amp; Schedules </a></li>
+<li><a href="/getting-around/bus/oc-bus/rider-tools/next-ride" class="dropdown-item" title="Next Ride" data-anchor="#" style="padding-top: 10px !important; padding-bottom: 10px !important;"><img style="top: 11px; height: 20px;" class="main-nav__featured-content-img" src="/dist/images/icon-Arrivals.svg" alt="Next Ride" aria-hidden="true" /> Arrivals </a></li>
+<li><a href="/getting-around/bus/oc-bus/fares-and-passes/overview" class="dropdown-item" title="All Fares and Passes" style="padding-top: 10px !important; padding-bottom: 10px !important;"><img style="top: 11px; height: 20px;" class="main-nav__featured-content-img" src="/dist/images/icon-Fares.svg" alt="Fares and Passes" aria-hidden="true" /> Fares </a></li>
+<li><a href="/getting-around/promotions/promotions" class="dropdown-item" title="All Promotions" style="padding-top: 10px !important; padding-bottom: 10px !important;"><img style="top: 11px; height: 20px;" class="main-nav__featured-content-img" src="/media/l5udfbyi/icon-promotion.svg" alt="All Promotions" aria-hidden="true" /> Promotions </a></li>
+</ul>
+                                    </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarMenuLink-1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <h3 class="p-0 m-0"><strong>Programs &amp; Projects</strong></h3>
+                        </a>
+                        <div class="container-flexible p-0 dropdown-menu dropdown-menu-light" aria-labelledby="navbarMenuLink-1">
+
+                            <div class="main-nav__dropdown container d-lg-flex">
+                                <div class="d-lg-flex  main-nav__dropdown-left">
+                                    <div class="main-nav__sub-menu-container d-lg-flex">
+
+                                                <div class="main-nav__sub-menu-wrap main-nav__sub-menu-wrap--has-featured">
+                                                    <h4 id="subMenu-1-0" class="dropdown-header">Programs</h4>
+                                                    <ul class="list-unstyled main-nav__sub-menu" aria-describedby="subMenu-1-0">
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/programs-projects/programs/measure-m/about-measure-m/renewed-measure-m-2011-2041">Measure M</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" target="_self" href="/programs-projects/programs/oc-go-measure-m/environmental-programs/environmental-programs/">Environmental Programs</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/programs-projects/programs/active-transportation-programs/overview">Active Transportation Programs</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/programs-projects/programs/senior-transit-programs/overview">Senior Transit Programs</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/programs-projects/programs/motorist-services-programs/overview">Motorist Services Programs</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/programs-projects/programs/funding-programs/overview">Funding Programs</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/programs-projects/programs/plans-and-studies/overview">Plans and Studies</a>
+                                                                </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav__sub-menu-wrap main-nav__sub-menu-wrap--has-featured">
+                                                    <h4 id="subMenu-1-1" class="dropdown-header">Projects</h4>
+                                                    <ul class="list-unstyled main-nav__sub-menu" aria-describedby="subMenu-1-1">
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/programs-projects/projects/freeway-projects/overview">Freeway Projects</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/programs-projects/projects/rail-projects/overview">Rail Projects</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/programs-projects/projects/streets-projects/overview">Streets Projects</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/programs-projects/projects/transit-facility-projects/overview">Transit Facility Projects</a>
+                                                                </li>
+                                                    </ul>
+                                                </div>
+                                    </div>
+                                </div>
+                                    <div class="main-nav__featured-content">
+                                            <span class="dropdown-header text-uppercase">Under Construction</span>
+                                        <ul class="list-unstyled">
+<li><a href="/programs-projects/projects/rail-projects/oc-streetcar/overview" title="OC Streetcar Overview" class="dropdown-item">OC Streetcar</a></li>
+<li><a href="/programs-projects/projects/freeway-projects/i-5-i-405-to-sr-55/overview" title=" I-5 (I-405 to SR-55)Overview" class="dropdown-item">I-5 (I-405 to SR-55)</a></li>
+<li><a href="/programs-projects/projects/freeway-projects/sr-91-sr-57-to-sr-55-improvement-project/overview" title="SR-91 (SR-57 to SR-55) Improvement Project Overview" class="dropdown-item">SR-91 (SR-57 to SR-55) Improvement Project</a></li>
+<li><a href="/programs-projects/projects/freeway-projects/sr-55-i-405-to-i-5-improvement-project/overview" title="SR-55 (I-405 to I-5) Improvement Project" class="dropdown-item" data-anchor="#">SR-55 (I-405 to I-5) Improvement Project</a></li>
+<li><a href="/programs-projects/projects/rail-projects/san-juan-creek-bridge-replacement-project/overview" title="San Juan Creek Bridge Replacement Project Overview" class="dropdown-item">San Juan Creek Bridge Replacement Project</a></li>
+<li><a href="/programs-projects/projects/rail-projects/coastal-rail-emergency-projects/overview" title="Coastal Rail Emergency Projects Overview" class="dropdown-item">Coastal Rail Emergency Projects</a></li>
+<li><a href="/programs-projects/projects/freeway-projects/i-605katella-avenue-interchange/overview" title="I-605/Katella Avenue Interchange Project Overview" class="dropdown-item">I-605/Katella Avenue Interchange Project</a></li>
+<li><a href="/programs-projects/projects/freeway-projects/sr-57-orangewood-to-katella/overview" title="SR-57 (Orangewood to Katella) Project Overview" class="dropdown-item">SR-57 (Orangewood to Katella)</a></li>
+</ul>
+                                    </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarMenuLink-2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <h3 class="p-0 m-0"><strong>News</strong></h3>
+                        </a>
+                        <div class="container-flexible p-0 dropdown-menu dropdown-menu-light" aria-labelledby="navbarMenuLink-2">
+
+                            <div class="main-nav__dropdown container d-lg-flex">
+                                <div class="d-lg-flex  ">
+                                    <div class="main-nav__sub-menu-container d-lg-flex">
+
+                                            <div class="main-nav__sub-menu-wrap">
+                                                <ul class="list-unstyled main-nav__sub-menu">
+                                                            <li>
+                                                                <a class="dropdown-item" href="/news/news-releases">News Releases</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" href="/news/media-resources">Media Resources</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" target="_self" href="/news/publications-2/">Publications</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" target="_self" href="https://blog.octa.net">On the Move Blog</a>
+                                                            </li>
+                                                </ul>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarMenuLink-3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <h3 class="p-0 m-0"><strong>About</strong></h3>
+                        </a>
+                        <div class="container-flexible p-0 dropdown-menu dropdown-menu-light" aria-labelledby="navbarMenuLink-3">
+
+                            <div class="main-nav__dropdown container d-lg-flex">
+                                <div class="d-lg-flex  ">
+                                    <div class="main-nav__sub-menu-container d-lg-flex">
+
+                                                <div class="main-nav__sub-menu-wrap ">
+                                                    <h4 id="subMenu-3-0" class="dropdown-header">About OCTA</h4>
+                                                    <ul class="list-unstyled main-nav__sub-menu" aria-describedby="subMenu-3-0">
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/about/about-octa/overview">Overview</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/about/about-octa/environmental-sustainability/overview">Environmental Sustainability</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/about/about-octa/octa-in-the-community/overview">OCTA in the Community</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/about/about-octa/public-committees/overview">Public Committees</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" target="_blank" href="https://www.octabonds.com/orange-county-transportation-authority-ca/i4719">Investor Relations</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/about/about-octa/government-relations/overview">Government Relations</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/about/about-octa/internal-audit/overview">Internal Audit</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/about/about-octa/financials/overview">Financials</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" target="_self" href="/about/leadership/lossan-agency/overview/">About LOSSAN</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/about/about-octa/measure-m-branding-and-media-guidelines">Measure M Branding and Media Guidelines</a>
+                                                                </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav__sub-menu-wrap ">
+                                                    <h4 id="subMenu-3-1" class="dropdown-header">Careers</h4>
+                                                    <ul class="list-unstyled main-nav__sub-menu" aria-describedby="subMenu-3-1">
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/about/careers/work-for-octa/overview">Work for OCTA</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" target="_self" href="https://octa.net/about/careers/work-for-octa/oc-bus-drivers">OC Bus Drivers</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/about/careers/bus-driver-academy">Bus Driver Academy</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/about/careers/job-descriptions/overview">Job Descriptions</a>
+                                                                </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav__sub-menu-wrap ">
+                                                    <h4 id="subMenu-3-2" class="dropdown-header">Leadership</h4>
+                                                    <ul class="list-unstyled main-nav__sub-menu" aria-describedby="subMenu-3-2">
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/about/leadership/board-of-directors/overview">Board of Directors</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" target="_self" href="https://octa.legistar.com/Calendar.aspx">Board Agendas</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" target="_self" href="/about/leadership/board-of-directors/board-calendar/">Board Calendar</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/about/leadership/executive-office">Executive Office</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/about/leadership/executive-compensation">Executive Compensation</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" target="_self" href="/about/leadership/lossan-agency/board-of-directors/">LOSSAN Board</a>
+                                                                </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav__sub-menu-wrap ">
+                                                    <h4 id="subMenu-3-3" class="dropdown-header">Procurement</h4>
+                                                    <ul class="list-unstyled main-nav__sub-menu" aria-describedby="subMenu-3-3">
+                                                                <li>
+                                                                    <a class="dropdown-item" target="_blank" href="https://cammnet.octa.net/">Doing Business with OCTA</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" target="_blank" href="https://cammnet.octa.net/about-us/working/">Basics for Vendors</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" target="_blank" href="https://cammnet.octa.net/procurements/">Open Procurements</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" target="_blank" href="https://cammnet.octa.net/procurements/future/">Future Procurements</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="/about/procurement/unsolicited-proposals">Unsolicited Proposals</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" target="_blank" href="https://cammnet.octa.net/dbe-accordion/">DBE Program</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" target="_blank" href="https://cammnet.octa.net/awards/">Contract Awards</a>
+                                                                </li>
+                                                    </ul>
+                                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarMenuLink-4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <h3 class="p-0 m-0"><strong>Contact</strong></h3>
+                        </a>
+                        <div class="container-flexible p-0 dropdown-menu dropdown-menu-light" aria-labelledby="navbarMenuLink-4">
+
+                            <div class="main-nav__dropdown container d-lg-flex">
+                                <div class="d-lg-flex  main-nav__dropdown-left">
+                                    <div class="main-nav__sub-menu-container d-lg-flex">
+
+                                            <div class="main-nav__sub-menu-wrap">
+                                                <ul class="list-unstyled main-nav__sub-menu">
+                                                            <li>
+                                                                <a class="dropdown-item" href="/contact/contact-us">Contact Us</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" href="/contact/octa-store">OCTA Store</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" href="/contact/customer-comment-form">Customer Comment Form</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" target="_self" href="https://octa.govqa.us/WEBAPP/_rs/(S(xmlppcglhxqtvwuce5xoee0m))/supporthome.aspx">Public Records Request</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" href="/contact/lost-and-found">Lost and Found</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" target="_self" href="/about/about-octa/internal-audit/fraud-hotline/">Fraud Hotline</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" target="_self" href="/contact/contact-us/get-connected/">Get Connected</a>
+                                                            </li>
+                                                </ul>
+                                            </div>
+                                    </div>
+                                </div>
+                                    <div class="main-nav__featured-content">
+                                        <ul class="main-nav__featured-content--list-underline main-nav__featured-content--contact list-unstyled">
+<li><a href="tel:714-560-6282" class="dropdown-item"><img style="height: 20px;" class="main-nav__featured-content-img" src="/dist/images/icon-Contact.svg" alt="Phone" aria-hidden="true" /> <strong>Phone</strong><br />(714) 560-OCTA (6282)</a></li>
+<li><a class="dropdown-item unlink"><img style="height: 20px;" class="main-nav__featured-content-img" src="/dist/images/icon-Arrivals.svg" alt="Business Hours" aria-hidden="true" /> <strong>Business Hours</strong><br />Monday - Friday<br />8:00 a.m. - 5:00 p.m.</a></li>
+<li><a href="https://goo.gl/maps/NpmPvxMDMYt1AHmK9" class="dropdown-item"><img style="height: 20px;" class="main-nav__featured-content-img" src="/dist/images/icon-Trip-Planner.svg" alt="Business Address" aria-hidden="true" /> <strong>Street Address</strong><br />550 S. Main Street<br />Orange, CA 92868</a></li>
+</ul>
+                                    </div>
+                            </div>
+                        </div>
+                    </li>
+
+                <!--<li class="nav-item dropdown mobile-translate">
+                    <button><i class="fa-solid fa-language fa-xl me-2"></i>Translate</button>
+                </li>-->
+                <li class="nav-item dropdown mobile-translate-list">
+                    <a class="nav-link" href="#" id="navbarMenuLink-00" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button>
+                            <img src="/dist/images/icon-Translate-mobile.svg" alt="" width="18" aria-hidden="true"> Translate
+                        </button>
+                    </a>
+                    <div class="container-flexible p-0 dropdown-menu dropdown-menu-light" aria-labelledby="navbarMenuLink-00">
+                        <div class="main-nav__dropdown container d-lg-flex">
+                            <div class="d-lg-flex  ">
+                                <div class="main-nav__sub-menu-container d-lg-flex">
+                                    <div class="main-nav__sub-menu-wrap">
+                                        <ul class="translate-list-mobile list-unstyled main-nav__sub-menu">
+                                            <li data-value="en|ar"><a class="dropdown-item" href="#">Arabic</a></li>
+                                            <li data-value="en|zh-CN"><a class="dropdown-item" href="#">Chinese (Simplified)</a></li>
+                                            <li data-value="en|zh-TW"><a class="dropdown-item" href="#">Chinese (Traditional)</a></li>
+                                            <li data-value="en|en"><a class="dropdown-item" href="#">English</a></li>
+                                            <li data-value="en|tl"><a class="dropdown-item" href="#">Filipino</a></li>
+                                            <li data-value="en|de"><a class="dropdown-item" href="#">German</a></li>
+                                            <li data-value="en|gu"><a class="dropdown-item" href="#">Gujarati</a></li>
+                                            <li data-value="en|hi"><a class="dropdown-item" href="#">Hindi</a></li>
+                                            <li data-value="en|ja"><a class="dropdown-item" href="#">Japanese</a></li>
+                                            <li data-value="en|km"><a class="dropdown-item" href="#">Khmer</a></li>
+                                            <li data-value="en|ko"><a class="dropdown-item" href="#">Korean</a></li>
+                                            <li data-value="en|fa"><a class="dropdown-item" href="#">Persian</a></li>
+                                            <li data-value="en|pt"><a class="dropdown-item" href="#">Portuguese</a></li>
+                                            <li data-value="en|pa"><a class="dropdown-item" href="#">Punjabi</a></li>
+                                            <li data-value="en|ru"><a class="dropdown-item" href="#">Russian</a></li>
+                                            <li data-value="en|es"><a class="dropdown-item" href="#">Spanish</a></li>
+                                            <li data-value="en|th"><a class="dropdown-item" href="#">Thai</a></li>
+                                            <li data-value="en|uk"><a class="dropdown-item" href="#">Ukrainian</a></li>
+                                            <li data-value="en|ur"><a class="dropdown-item" href="#">Urdu</a></li>
+                                            <li data-value="en|vi"><a class="dropdown-item" href="#">Vietnamese</a></li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="help-translate-wrap">
+
+            
+            <button type="button" class="desktop-translate d-flex align-items-center btn btn-link text-decoration-none d-none d-lg-flex"
+                    style="color: black">
+                <img class="translate-icon" src="/dist/images/icon-Translate.svg" alt="" width="18" aria-hidden="true"> Translate
+
+                <div class="translate-list hidden">
+                    <ul>
+                        <li data-value="en|ar">Arabic</li>
+                        <li data-value="en|zh-CN">Chinese (Simplified)</li>
+                        <li data-value="en|zh-TW">Chinese (Traditional)</li>
+                        <li data-value="en|en">English</li>
+                        <li data-value="en|tl">Filipino</li>
+                        <li data-value="en|de">German</li>
+                        <li data-value="en|gu">Gujarati</li>
+                        <li data-value="en|hi">Hindi</li>
+                        <li data-value="en|ja">Japanese</li>
+                        <li data-value="en|km">Khmer</li>
+                        <li data-value="en|ko">Korean</li>
+                        <li data-value="en|fa">Persian</li>
+                        <li data-value="en|pt">Portuguese</li>
+                        <li data-value="en|pa">Punjabi</li>
+                        <li data-value="en|ru">Russian</li>
+                        <li data-value="en|es">Spanish</li>
+                        <li data-value="en|th">Thai</li>
+                        <li data-value="en|uk">Ukrainian</li>
+                        <li data-value="en|ur">Urdu</li>
+                        <li data-value="en|vi">Vietnamese</li>
+                    </ul>
+                </div>
+            </button>
+
+            <div class="g-translate" aria-hidden="true"></div>
+            <script type="text/javascript">
+                (function () {
+                    const translateListEl = document.querySelectorAll('.translate-list li');
+
+                    translateListEl.forEach((el) => {
+                        el.addEventListener('click', () => {
+                            const gtSelectEl = document.querySelector('.g-translate select');
+                            const lang = el.getAttribute('data-value');
+
+                            gtSelectEl.value = lang;
+                            gtSelectEl.dispatchEvent(new Event('change'));
+                        });
+                    });
+                })();
+            </script>
+
+        </div>
+
+        <button class="navbar-toggler main-nav__search-toggler ms-2" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false" aria-label="Toggle search bar" id="navbarSearchToggler">
+            <img class="main-nav__search-toggler__search" src="/dist/images/icon-Search.svg" alt="" width="26" aria-hidden="true">
+            <img class="main-nav__search-toggler__close" src="/dist/images/icon-Close-X.svg" alt="" width="26" aria-hidden="true">
+        </button>
+        <div class="container-flexible p-0 dropdown-menu dropdown-menu-light main-nav__search-dropdown"
+             aria-labelledby="navbarSearchToggler" data-bs-popper="none">
+            <div class="main-nav__dropdown container">
+                <div class="main-nav__sub-menu-container">
+                    <form role='search' action="/search" method="get" class="main-nav__search-form mb-0">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter keyword" aria-label="Search keyword"
+                                   aria-describedby="button-addon3" name="q">
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon3">
+                                <span class='visually-hidden'>Submit Search</span>
+                                <img class="" src="/dist/images/icon-Search.svg" alt="" width="26" aria-hidden="true">
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    </header>
+    <main id="main-content">
+        
+        
+
+
+<div>
+
+
+
+
+    <div class="bg-dark text-light secondary-nav__parent fullwidth">
+        <div class="container secondary-nav__header">
+            <h2 class="heading fs-3"><img alt="oc bike" src="/media/ia4blr0u/ocbike-logo.png?width=300&amp;height=116" width="100"></h2>
+        </div>
+    </div>
+
+
+
+<nav class="secondary-nav navbar navbar-expand-lg navbar-dark fullwidth" id="secondary-nav"
+     aria-label="secondary navigation">
+    <div class="container">
+        <h2 class="sr-only">Secondary navigation</h2>
+        <button class="secondary-nav__button d-flex flex-row d-lg-none" data-bs-toggle="collapse"
+                data-bs-target="#secondaryNavbar" aria-expanded="false" id="secondaryToggleButton"
+                aria-label="secondary menu dropdown button" type="button">
+            <span>
+                <img src="/dist/images/icon-subnav-white.svg" width="14" height="12" alt="" />OC Bike
+            </span>
+        </button>
+        <div class="navbar navbar-expand-lg navbar-collapse collapse py-0" id="secondaryNavbar"
+             aria-describedby="secondaryToggleButton">
+            <ul class="navbar-nav w-100 pb-3 pb-lg-0">
+
+                            <li class="nav-item">
+                                <a href="/getting-around/active/oc-bike/overview" class="nav-link secondary-nav__link border-0">Overview</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/getting-around/active/oc-bike/bicycling-in-orange-county" class="nav-link secondary-nav__link border-0">Bicycling in Orange County</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/getting-around/active/oc-bike/oc-loop" class="nav-link secondary-nav__link border-0 active">OC Loop</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/getting-around/active/oc-bike/e-bikes" class="nav-link secondary-nav__link border-0">E-Bikes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/getting-around/active/oc-bike/safety-awareness/overview" class="nav-link secondary-nav__link border-0">Safety Awareness</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/getting-around/active/oc-bike/bikeways-planning/overview" class="nav-link secondary-nav__link border-0">Bikeways Planning</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/getting-around/active/oc-bike/e-bike-safety" class="nav-link secondary-nav__link border-0">E-Bike Safety</a>
+                            </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+    
+
+    <div class="breadcrumb-wrap fullwidth">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="main-breadcrumb breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="/">Home</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="/getting-around/active/oc-bike/overview">OC Bike</a>
+                                </li>
+
+                    <li class="breadcrumb-item active" aria-current="page">OC Loop</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+
+
+        <div class="container mb-2 pb-1 mt-3 template-1">
+            <h3 class="heading h1 page-title">OC Loop</h3>
+        </div>
+    
+
+
+    
+
+
+    
+
+
+</div>
+
+
+
+<section>
+    
+<div class="umb-block-grid"
+     data-grid-columns="12;"
+     style="--umb-block-grid--grid-columns: 12;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            data-content-element-type-alias="BlockGridLayout_1Column"
+            data-content-element-type-key="73a5ee3d-f22e-36ed-be59-772ae5da229c"
+            data-element-udi="umb://element/b196c632824447fdb3db02e9168542b2"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item width-full edge-to-edge margin-none"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div class="BlockGridLayout_1Column container">
+    
+<div class="umb-block-grid__area-container"
+     style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="area_0"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            data-content-element-type-alias="imageWithMobileAlternate"
+            data-content-element-type-key="34de7157-9caa-47a4-ab44-ad28a63686ac"
+            data-element-udi="umb://element/0c558b3aead545b087ce833969e197d8"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div class="grid-editor-view">
+    <section class="image-with-mobile">
+        <div class="image-with-mobile__desktop">
+                    <img src="/media/2mtplwli/ocloop-1670_helmet.jpg" alt="">
+        </div>
+        <div class="image-with-mobile__mobile">
+                    <img src="/media/2mtplwli/ocloop-1670_helmet.jpg" alt="">
+        </div>
+    </section>
+</div>        </div>
+</div>
+
+
+
+
+</div>
+</div>
+
+</div>
+        </div>
+        <div
+            data-content-element-type-alias="BlockGridLayout_ArticleRight"
+            data-content-element-type-key="5ad15a42-fd01-36aa-b60b-fc99fd9c75f9"
+            data-element-udi="umb://element/3c54cfa41bea4752b7b55c34015191f5"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item two-col-padded-between width-full-bg padding-medium margin-negative-top"
+            style="background-color: f5f5f5; --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div class="BlockGridLayout_ArticleRight container">
+    
+<div class="umb-block-grid__area-container"
+     style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="8"
+     data-area-row-span="1"
+     data-area-alias="area_0"
+     style="--umb-block-grid--grid-columns: 8;--umb-block-grid--area-column-span: 8; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            data-content-element-type-alias="BlockElement_rte"
+            data-content-element-type-key="48ba1fc4-8797-3f42-abb4-d8c392623022"
+            data-element-udi="umb://element/e7551d2ba4eb4fc8addcadb6cab68b28"
+            data-col-span="8"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item"
+            style=" --umb-block-grid--item-column-span: 8; --umb-block-grid--item-row-span: 1;">
+
+<div>
+    <h3 class="heading" style="text-align: left;">What is the OC Loop?</h3>
+<p class="body-copy-med">The Orange County (OC) Loop is a vision for 66 miles of seamless connections and an opportunity for people to bike, walk, and connect to some of California’s most scenic beaches and inland reaches. About 88% of the OC Loop is already in place and is used by thousands of people. Currently, nearly 58 miles use existing off-street trails along the San Gabriel River, Coyote Creek, Santa Ana River, and the Coastal/Beach Trail.</p>
+</div>        </div>
+</div>
+
+
+
+
+</div>
+
+<div class="umb-block-grid__area"
+     data-area-col-span="4"
+     data-area-row-span="1"
+     data-area-alias="area_1"
+     style="--umb-block-grid--grid-columns: 4;--umb-block-grid--area-column-span: 4; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            data-content-element-type-alias="BlockElement_rte"
+            data-content-element-type-key="48ba1fc4-8797-3f42-abb4-d8c392623022"
+            data-element-udi="umb://element/26e2995f3809424a9c9d892198735ecf"
+            data-col-span="4"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item"
+            style=" --umb-block-grid--item-column-span: 4; --umb-block-grid--item-row-span: 1;">
+
+<div>
+    <section class="env-contact">
+<div><strong><span style="color: var(--bs-body-color); text-align: var(--bs-body-text-align);">PROJECT CONTACT</span></strong></div>
+<div>
+<div class="env-contact__info">
+<div><strong>Peter Sotherland</strong><br />Active Transportation Coordinator</div>
+<a href="tel:714-560-5386">(714) 560-5386</a> | <a href="mailto:psotherland@octa.net">psotherland@octa.net</a></div>
+</div>
+</section>
+</div>        </div>
+</div>
+
+
+
+
+</div>
+</div>
+
+</div>        </div>
+        <div
+            data-content-element-type-alias="BlockGridLayout_1Column"
+            data-content-element-type-key="73a5ee3d-f22e-36ed-be59-772ae5da229c"
+            data-element-udi="umb://element/a5c6527e158a4290b6554bf0a599960b"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item width-full-bg padded-100 margin-negative-top-50 margin-none"
+            style="background-color: f5f5f5; --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div class="BlockGridLayout_1Column container">
+    
+<div class="umb-block-grid__area-container"
+     style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="area_0"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            data-content-element-type-alias="mediaItemPreviews"
+            data-content-element-type-key="afd64919-53c5-4ed8-b95a-8f5dd404355f"
+            data-element-udi="umb://element/9bce92893b86489a84f2846488cf4f15"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+﻿
+
+
+
+
+
+<div class="container">
+    <section class="media-previews media-previews--single">
+        <div class="media-previews__header">
+            <h2 class="heading"></h2>
+            <p></p>
+        </div>
+
+        <div class="media-previews__items">
+
+                    <div class="media-previews__item media-previews__item--shadow">
+
+                            <div class="media-previews__item-img">
+                                <div class="media-previews__item-img-img"><img src="/media/ty5nkrxf/icon-document-pdf-word.svg" alt="Blue pdf icon"></div>
+                                <div class="media-previews__item-img-type">PDF</div>
+                            </div>
+
+                        <div class="media-previews__item-text">
+                            <div class="media-previews__item-text-type">PDF</div>
+                                        <div class="media-previews__item-text-title">
+                                            <a href="/pdf/OCLoopBrochure.pdf">Project Brochure</a>
+                                        </div>
+
+
+                        </div>
+                    </div>
+
+        </div>
+
+    </section>
+</div>        </div>
+        <div
+            data-content-element-type-alias="divider"
+            data-content-element-type-key="b5a47950-e124-44de-98cc-9385ee601adf"
+            data-element-udi="umb://element/3a2acf7aaec84fc78101cad6cad408b7"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+
+
+
+<div class="grid-editor-view">
+    <section class="divider divider--top-small ">
+    </section>
+</div>        </div>
+</div>
+
+
+
+
+</div>
+</div>
+
+</div>
+        </div>
+        <div
+            data-content-element-type-alias="BlockGridLayout_1Column"
+            data-content-element-type-key="73a5ee3d-f22e-36ed-be59-772ae5da229c"
+            data-element-udi="umb://element/6da19aac5612458883c6e56f667df4ce"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item padded-100"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div class="BlockGridLayout_1Column container">
+    
+<div class="umb-block-grid__area-container"
+     style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="area_0"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            data-content-element-type-alias="BlockElement_rte"
+            data-content-element-type-key="48ba1fc4-8797-3f42-abb4-d8c392623022"
+            data-element-udi="umb://element/b829f9fe37424ec08a2efcdb9e1b56bb"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div>
+    <h3 class="heading" style="text-align: left;">Project Map</h3>
+<br /><br /><iframe width="100%" height="580" align="left" style="border: 1px solid #000000;" src="https://forms.octa.net/GISMap/BikewayOCLoop.htm" scrolling="no" title="Bikeway OC Loop Map"></iframe>
+</div>        </div>
+</div>
+
+
+
+
+</div>
+</div>
+
+</div>
+        </div>
+        <div
+            data-content-element-type-alias="BlockGridLayout_1Column"
+            data-content-element-type-key="73a5ee3d-f22e-36ed-be59-772ae5da229c"
+            data-element-udi="umb://element/4693e4c422d447789e6c223af82c0e49"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item padded-100"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div class="BlockGridLayout_1Column container">
+    
+<div class="umb-block-grid__area-container"
+     style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="area_0"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            data-content-element-type-alias="BlockElement_rte"
+            data-content-element-type-key="48ba1fc4-8797-3f42-abb4-d8c392623022"
+            data-element-udi="umb://element/2824176020064968a512834483f1330e"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div>
+    <h3 class="heading" style="text-align: left;">Project Updates</h3>
+<h5 class="heading">Completed Segments</h5>
+<p class="body-copy-med">The following OC Loop segments have been completed:</p>
+<ul>
+<li>
+<p class="body-copy-med">Segment C – Completed by the City of Brea in 2018</p>
+</li>
+<li>
+<p class="body-copy-med">Segment E – Completed by the County of Orange in 1990</p>
+</li>
+<li>
+<p class="body-copy-med">Segment F – Completed by the County of Orange in 2017</p>
+</li>
+<li>
+<p class="body-copy-med">Segment G – Completed by the County of Orange in 1990</p>
+</li>
+<li>
+<p class="body-copy-med">Segment H – Completed by the County of Orange in 2021</p>
+</li>
+<li>
+<p class="body-copy-med">Segment I – Completed by the County of Orange in 2008</p>
+</li>
+<li>
+<p class="body-copy-med">Segment J – Completed by the City of Huntington Beach in 1990</p>
+</li>
+<li>
+<p class="body-copy-med">Segment K – Completed by the City of Huntington Beach in 2015</p>
+</li>
+<li>
+<p class="body-copy-med">Segment N – Completed by the County of Orange in 1985</p>
+</li>
+<li>
+<p class="body-copy-med">Segment R – Completed by the County of Orange in 2014</p>
+</li>
+<li>
+<p class="body-copy-med">Segment S – Completed by the City of La Habra in 2010</p>
+</li>
+</ul>
+<br />
+<h5 class="heading">Continued Progress</h5>
+<p class="body-copy-med">Work continues to advance the remaining OC Loop segments:</p>
+<ul>
+<li>
+<p class="body-copy-med">Segments A &amp; B – Discussions continue with Union Pacific Railroad to secure right-of-way in the Cities of La Habra and Brea. Both Cities have completed Environmental Review of Segments A &amp; B and are working on Design and securing funding for Right-of-Way Acquisition and Construction. Construction of Segment B will align with the recently completed Tracks at Brea (OC Loop Segment C). The Cities and OCTA have secured approximately $58 million of the approximately $82 million needed to complete the two segments.</p>
+</li>
+<li>
+<p class="body-copy-med">Segment D – The County issued Notice to Proceed for construction in June of 2024. Construction is scheduled to be completed by the Winter of 2025.</p>
+</li>
+<li>
+<p class="body-copy-med">Segments O, P, &amp; Q – The County of Orange is undertaking final design for these segments with completion anticipated in late 2025. The right-of-way phase for Segments P &amp; Q have started as of April 2025. The County has secured the $72 million needed to complete the project.</p>
+</li>
+<li>
+<p class="body-copy-med">Segment T – Caltrans will be completing a Project Initiation Document (PID) which will inform the subsequent phases of the project. No funding has been secured of the estimated $4 million needed for the project.</p>
+</li>
+</ul>
+<br />
+<h5 class="heading">No Current Activities</h5>
+<ul>
+<li>
+<p class="body-copy-med">Segment L &amp; M – There are no current activities being undertaken for these segments. An estimated $10 million would be needed for both segments.</p>
+</li>
+</ul>
+</div>        </div>
+</div>
+
+
+
+
+</div>
+</div>
+
+</div>
+        </div>
+        <div
+            data-content-element-type-alias="BlockGridLayout_1Column"
+            data-content-element-type-key="73a5ee3d-f22e-36ed-be59-772ae5da229c"
+            data-element-udi="umb://element/01517512027a4b2882e9650a7eb8911d"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item padded-100"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div class="BlockGridLayout_1Column container">
+    
+<div class="umb-block-grid__area-container"
+     style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="area_0"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            data-content-element-type-alias="BlockElement_rte"
+            data-content-element-type-key="48ba1fc4-8797-3f42-abb4-d8c392623022"
+            data-element-udi="umb://element/c7b1c9d3eb374a51965c1bd225e003bb"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div>
+    <h3 class="heading" style="text-align: left;">Benefits</h3>
+<h5 class="heading">Improved Quality of Life</h5>
+<p class="body-copy-med">OC Loop improved quality of life imageA major factor in improving quality of life is access to recreational opportunities and the ability to bike and walk in your neighborhood. The OC Loop serves about 650,000 Orange County residents and thousands of visitors every year seeking refuge from the traffic and noise of urban life. The OC Loop allows people to connect with their environment and see parts of Orange County that most people in their cars don’t often notice.</p>
+<h5 class="heading">Expanded Transportation Options</h5>
+<p class="body-copy-med">The OC Loop provides convenient paths to some of the area’s most popular destinations. It provides first and last mile connections to numerous bus stops and three Metrolink stations. The OC Loop is also another option for residents and visitors to visit local parks, beaches, schools and shopping areas without worrying about traffic and parking. With minimal stops and crossings, the OC Loop is also a viable commuting route to the many major employers in the area.</p>
+<h5 class="heading">Safer Journey to Serve Ages 8 to 80</h5>
+<p class="body-copy-med">Paths along the OC Loop attract and serve users of all ages and skill levels. The vast majority of people do not feel safe bicycling and walking on streets with high-speed car traffic. The OC Loop provides a low-stress bicycling and walking route that is suitable for people of all ages!</p>
+<h5 class="heading">Stretching the Dollar</h5>
+<p class="body-copy-med">Completing the OC Loop would turn underutilized, abandoned space along rivers and railroad right of way into a community amenity. Studies across the country have shown that trail projects are associated with the growth of property values, increased retail spending, improved tax bases and attraction of new businesses. Within Orange County, the return in benefits to health, mobility, recreation and safety can be expected to exceed the cost of completing the OC Loop.</p>
+</div>        </div>
+</div>
+
+
+
+
+</div>
+</div>
+
+</div>
+        </div>
+        <div
+            data-content-element-type-alias="BlockGridLayout_1Column"
+            data-content-element-type-key="73a5ee3d-f22e-36ed-be59-772ae5da229c"
+            data-element-udi="umb://element/12b810d77a6b4b7393fbdbffbc1b0d68"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item padded-100"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div class="BlockGridLayout_1Column container">
+    
+<div class="umb-block-grid__area-container"
+     style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="area_0"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            data-content-element-type-alias="BlockElement_rte"
+            data-content-element-type-key="48ba1fc4-8797-3f42-abb4-d8c392623022"
+            data-element-udi="umb://element/d44289030b1d46aab7832f9197c469b7"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div>
+    <h3 class="heading" style="text-align: left;">Resources</h3>
+</div>        </div>
+        <div
+            data-content-element-type-alias="BlockElement_rte"
+            data-content-element-type-key="48ba1fc4-8797-3f42-abb4-d8c392623022"
+            data-element-udi="umb://element/ee7d1c9b7b614a5db26b37fdae2dc144"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div>
+    <h5 class="heading">OC Loops Virtual Workshop – 3/24/2022</h5>
+<p>On March 24, 2022, OCTA hosted a virtual workshop providing updates on the Gap Closure Feasibility Study. Please see below for information on the project partners and background, project goals, input from participants and next steps.</p>
+</div>        </div>
+        <div
+            data-content-element-type-alias="mediaItemPreviews"
+            data-content-element-type-key="afd64919-53c5-4ed8-b95a-8f5dd404355f"
+            data-element-udi="umb://element/3752090fdc4d4a08ac8232af04fd2263"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+﻿
+
+
+
+
+
+<div class="container">
+    <section class="media-previews ">
+        <div class="media-previews__header">
+            <h2 class="heading"></h2>
+            <p></p>
+        </div>
+
+        <div class="media-previews__items">
+
+                    <div class="media-previews__item media-previews__item--shadow">
+
+                            <div class="media-previews__item-img">
+                                <div class="media-previews__item-img-img"><img src="/media/ty5nkrxf/icon-document-pdf-word.svg" alt="Blue pdf icon"></div>
+                                <div class="media-previews__item-img-type">PDF</div>
+                            </div>
+
+                        <div class="media-previews__item-text">
+                            <div class="media-previews__item-text-type">PDF</div>
+                                        <div class="media-previews__item-text-title">
+                                            <a href="/pdf/OCLoop-20220324-VirtualWorkshopPresentation.pdf">OC Loops Virtual Workshop</a>
+                                        </div>
+
+
+                        </div>
+                    </div>
+
+        </div>
+
+    </section>
+</div>        </div>
+        <div
+            data-content-element-type-alias="BlockElement_rte"
+            data-content-element-type-key="48ba1fc4-8797-3f42-abb4-d8c392623022"
+            data-element-udi="umb://element/795f3941436f4d7fad293251126d283c"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div>
+    <h5 class="heading"><br />The Tracks at Brea Trail</h5>
+<p>The City of Brea completed the "<a href="http://www.ci.brea.ca.us/791/The-Tracks-at-Brea-Trail" target="_blank" rel="noopener">Tracks at Brea Trail</a>" project (OC Loop Segment C) with a grand opening ceremony on May 5th, 2018! See the City website and go visit the newly minted trail in person and envision future connections to the west and east.</p>
+</div>        </div>
+        <div
+            data-content-element-type-alias="BlockElement_rte"
+            data-content-element-type-key="48ba1fc4-8797-3f42-abb4-d8c392623022"
+            data-element-udi="umb://element/9d342043ef344d25ab596da9168f2db0"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div>
+    <h5 class="heading">OC Loop 70/30 Plan</h5>
+<p>In June 2015, OCTA prepared a consolidated document that summarizes investment made into the OC Loop and the information about closing the gaps remaining on the final 30-percent of the 66-mile route.</p>
+</div>        </div>
+        <div
+            data-content-element-type-alias="mediaItemPreviews"
+            data-content-element-type-key="afd64919-53c5-4ed8-b95a-8f5dd404355f"
+            data-element-udi="umb://element/4ec766632fa6409f9710507eca8b6be6"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+﻿
+
+
+
+
+
+<div class="container">
+    <section class="media-previews ">
+        <div class="media-previews__header">
+            <h2 class="heading"></h2>
+            <p></p>
+        </div>
+
+        <div class="media-previews__items">
+
+                    <div class="media-previews__item media-previews__item--shadow">
+
+                            <div class="media-previews__item-img">
+                                <div class="media-previews__item-img-img"><img src="/media/ty5nkrxf/icon-document-pdf-word.svg" alt="Blue pdf icon"></div>
+                                <div class="media-previews__item-img-type">PDF</div>
+                            </div>
+
+                        <div class="media-previews__item-text">
+                            <div class="media-previews__item-text-type">PDF</div>
+                                        <div class="media-previews__item-text-title">
+                                            <a href="https://octa.net/pdf/OCLoop7030Plan.pdf">OC Loop 70/30 Plan</a>
+                                        </div>
+
+
+                        </div>
+                    </div>
+
+        </div>
+
+    </section>
+</div>        </div>
+        <div
+            data-content-element-type-alias="BlockElement_rte"
+            data-content-element-type-key="48ba1fc4-8797-3f42-abb4-d8c392623022"
+            data-element-udi="umb://element/6d1085e3b7d94fb69d3d2d24fbfa6a70"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div>
+    <h5 class="heading"><br />OC Loop Gap Feasibility Study</h5>
+<p>In March 2015, OC Parks prepared an engineering feasibility study to document current conditions, provide recommendations and cost estimates to close gaps remaining on the final 30-percent of the 66-mile OC Loop. Funding for the engineering feasibility study was provided by the Southern California Association of Governments (SCAG) <a href="http://sustain.scag.ca.gov/Pages/Grants%20and%20Local%20Assistance/GrantsLocalAssistance.aspx" target="_blank" rel="noopener">Sustainability Program</a>.<br /><br />See this <a href="http://ocparks.com/about/projects/oc_loop" target="_blank" rel="noopener">OC Parks website</a> to access the engineering feasibility study.</p>
+</div>        </div>
+        <div
+            data-content-element-type-alias="BlockElement_rte"
+            data-content-element-type-key="48ba1fc4-8797-3f42-abb4-d8c392623022"
+            data-element-udi="umb://element/5a1f8ff02cca4b918bfa5da2cd3cfe3d"
+            data-col-span="12"
+            data-row-span="1"
+            
+            class="umb-block-grid__layout-item"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1;">
+
+<div>
+    <h5 class="heading">Coyote Creek Bikeway Master Plan</h5>
+<p>In April 2008, <a href="http://trails4all.org/" target="_blank" rel="noopener">Trails4All</a> convened a planning team of advocates and consultants to prepare a feasibility assessment and implementation guide to expand the existing Coyote Creek bikeway and improve connections to the San Gabriel River Trail and other trail systems. Funding for the Coyote Creek Bikeway Master Plan was provided by the San Gabriel and Lower Los Angeles Rivers and Mountains Conservancy (RMC) through a Proposition 40 grant award.</p>
+<p>See this <a href="http://www.rmc.ca.gov/plans/bikeway.html" target="_blank" rel="noopener">RMC website</a> to access the Coyote Creek Bikeway Master Plan.</p>
+</div>        </div>
+</div>
+
+
+
+
+</div>
+</div>
+
+</div>
+        </div>
+</div>
+
+
+
+
+</div>
+
+</section>
+
+
+
+
+
+
+
+
+    </main>
+
+    <div class="back-to-top-wrapper">
+    <div class="container">
+        <div class="back-link back-to-top">
+            <a href="#"><i class="fa-solid fa-chevron-up" aria-hidden="true"></i><span>Back to Top</span></a>
+        </div>
+    </div>
+</div>
+
+
+
+
+<footer>
+    <div class="footer-top fullwidth">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-block">
+                    <div class="footer-block__header">
+                        Contact
+                    </div>
+                    <div class="footer-block__body">
+                        <ul>
+                            <li>
+                                <div>OCTA</div>
+                                <div><a href="https://www.google.com/maps/place/550&#x2B;S&#x2B;Main&#x2B;St,&#x2B;Orange,&#x2B;CA&#x2B;92868">550 S. Main Street<br>Orange, CA 92868<br>(714) 560-6282</a></div>
+                            </li>
+                            <li>
+                                <div>Bus Information</div>
+                                <div><a href="tel:(714) 636-7433">(714) 636-7433</a></div>
+                            </li>
+                            <li>
+                                <div>91 Express Lanes</div>
+                                <div><a href="tel:(800) 600-9191">(800) 600-9191</a></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-block">
+                    <div class="footer-block__header">
+                        About octa
+                    </div>
+                    <div class="footer-block__body">
+                        <ul>
+                                    <li><a href="/about/about-octa/overview">Overview</a></li>
+                                    <li><a href="https://octa.net/about/careers/work-for-octa/overview">Careers</a></li>
+                                    <li><a href="/about/about-octa/environmental-sustainability/overview">Sustainability</a></li>
+                                    <li><a                                    <li><a href="/about/about-octa/open-data">Open Data</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-block">
+                    <div class="footer-block__header">
+                        Public meetings
+                    </div>
+                    <div class="footer-block__body">
+                        <ul>
+                                    <li><a href="/about/leadership/board-of-directors/participate">Participate</a></li>
+                                    <li><a href="https://octa.legistar.com/Calendar.aspx">Agendas &amp; Meetings</a></li>
+                                    <li><a href="/about/leadership/board-of-directors/board-members/overview/">Board Members</a></li>
+                                    <li><a href="/about/leadership/board-of-directors/board-committees/">Board Committees</a></li>
+                                    <li><a href="/about/about-octa/public-committees/overview">Public Committees</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-block">
+                    <div class="footer-block__header">
+                        Policies
+                    </div>
+                    <div class="footer-block__body">
+                        <ul>
+                                    <li><a href="/about/about-octa/title-vi/">Title VI</a></li>
+                                    <li><a href="/about/about-octa/ada/overview/">ADA</a></li>
+                                    <li><a href="/about/about-octa/privacy-notice">Privacy Notice</a></li>
+                                    <li><a href="/about/about-octa/terms-of-use">Terms of Use</a></li>
+                                    <li><a href="/getting-around/express-lanes/91-express-lanes/privacy-policy/">91 Express Lanes Privacy Policy</a></li>
+                                    <li><a href="https://www.405expresslanes.com/en/support/frequently-asked-questions/forms-and-policies/privacy-policy/">405 Express Lanes Privacy Policy</a></li>
+                                    <li><a href="https://octa.net/pdf/Statement_of_EEO_Policy.pdf?n=2024">Statement Of EEO Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-block">
+                    <div class="footer-block__header">
+                        Sign-Up for updates
+                    </div>
+                    <div class="footer-block__body">
+                        <p>Get updates on projects and programs.</p>
+                        <div class="footer-block__body-email">
+                            <a href="/contact/contact-us"><span class="button button--primary">Email sign-up</span></a>
+                        </div>
+                        <div class="footer-block__body-icons">
+                            <div class="footer-block__body-icons-img">
+                                <a href="http://www.facebook.com/goOCTA" aria-label="Facebook"><img class="" src="/dist/images/icon-social-facebook.svg" alt="" aria-hidden="true"></a>
+                            </div>
+                            <div></div>
+                            <div class="footer-block__body-icons-img">
+                                <a href="https://twitter.com/goocta" aria-label="Twitter"><img class="" src="/dist/images/icon-social-twitter.svg" alt="" aria-hidden="true"></a>
+                            </div>
+                            <div></div>
+                            <div class="footer-block__body-icons-img">
+                                <a href="http://www.youtube.com/goOCTA" aria-label="Youtube"><img class="" src="/dist/images/icon-social-youtube.svg" alt="" aria-hidden="true"></a>
+                            </div>
+                            <div></div>
+                            <div class="footer-block__body-icons-img">
+                                <a href="http://www.instagram.com/goOCTA" aria-label="Instagram"><img class="" src="/dist/images/icon-social-instagram.svg" alt="" aria-hidden="true"></a>
+                            </div>
+                            <div></div>
+                            <div class="footer-block__body-icons-img">
+                                <a href="https://www.tiktok.com/@goocta" aria-label="Tiktok"><img class="" src="/dist/images/icon-social-tiktok.svg" alt="" aria-hidden="true"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="footer-copy">
+                <div>
+                    <a href="/site-map">Sitemap</a>
+                </div>
+                <div>
+                    Copyright © 2026 Orange County Transportation Authority
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    <script src="/dist/js/global.js?v=1793665175673"></script>
+    
+    
+
+
+    <script>window.gtranslateSettings = { "default_language": "en", "url_structure": "sub_domain", "languages": ["ar", "zh-CN", "zh-TW", "tl", "de", "gu", "hi", "ja", "km", "ko", "fa", "pt", "pa", "ru", "es","en", "th", "uk","ur", "vi"], "wrapper_selector": ".g-translate" }</script>
+    <script defer src="https://cdn.gtranslate.net/widgets/latest/dropdown.js"></script>
+
+
+    
+
+
+</body>
+</html>

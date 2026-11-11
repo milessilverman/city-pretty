@@ -1,0 +1,717 @@
+State of California                                      California State Transportation Agency
+DEPARTMENT OF TRANSPORTATION
+
+
+                                   MEMORANDUM
+
+To: CHAIR AND COMMISSIONERS                              CTC Meeting: March 20-21, 2025
+    CALIFORNIA TRANSPORTATION COMMISSION
+
+
+
+From: STEVEN KECK, Chief Financial Officer
+
+Reference Number: 2.5w.(1), Action Item
+
+Prepared By: Keith Duncan, Chief
+             Division of Budgets
+Subject: ALLOCATION FOR LOCALLY-ADMINISTERED ACTIVE TRANSPORTATION
+         PROGRAM PROJECTS OFF THE STATE HIGHWAY SYSTEM
+         RESOLUTION FATP-2425-17
+
+ISSUE:
+Should the California Transportation Commission (Commission) approve an allocation of
+$99,089,000 for 22 locally-administered Active Transportation Program (ATP) projects, off the
+State Highway System?
+RECOMMENDATION:
+The California Department of Transportation recommends that the Commission approve an
+allocation of $99,089,000 for 22 locally-administered ATP projects, off the State Highway
+System.
+BACKGROUND:
+The attached vote list describes 22 locally-administered ATP projects totaling $99,089,000.
+The local agencies are ready to proceed with these projects, and are requesting an allocation
+at this time.
+FINANCIAL RESOLUTION:
+Resolved, that $99,089,000 be allocated from the Budget Acts of 2023 and 2024, Budget Act
+Items 2660-108-0890, 2660-108-3290 and Non-Budget Act Item 2660-608-0001 for 22
+locally-administered ATP projects described on the attached vote list.
+Attachment
+
+
+
+
+                   “Improving lives and communities through transportation.”
+ CTC Financial Vote List                                                                                       March 20-21, 2025
+ 2.5 Highway Financial Matters
+
+
+
+      Project #                                                                               PPNO
+ Allocation Amount                                                                        Program/Year      Budget Year
+      Recipient                             Project Title                                     Phase            Item #
+     RTPA/CTC                                 Location                                    Prgm'd Amount      Fund Type     Amount by
+  District-County                        Project Description                                Project ID     Program Code    Fund Type
+
+                     Locally-Administered Active Transportation Program Projects Off the State
+    2.5w.(1)                                                                                                 Resolution FATP-2425-17
+                     Highway System
+
+
+        1            South Oroville Bike and Ped Connectivity Project. Construct            03-6126A         2024-25
+   $6,904,000        bike lanes, sidewalks, pedestrian crossing safety                     ATP/23-24      608-0001 GF      $6,904,000
+                     enhancements, and driver feedback signs along various                   CONST        20.30.720.100
+  Butte County       locations of Autrey Lane, Monte Vista Avenue, and Lower               $6,904,000
+     BCAG            Wyandotte Road in the City of South Oroville.                        0325000117
+    03-Butte
+                     Small Urban and Rural
+
+                     Outcome/Outputs: Construct 3,000 feet of Class I bike lanes,
+                     10,000 feet of Class II bike lanes, 2,500 feet of new sidewalk, 3
+                     new ADA ramps, 4 new crosswalks, and reconstruct 4 ramps to
+                     standard.
+
+                     CEQA - CE, 12/10/2020
+                     NEPA - CE, 03/25/2021; Re-validation 02/26/2025
+
+                     Right of Way Certification: 12/23/2024
+
+                     Time Extension for FY 23-24 CONST expires 02/28/2026.
+
+                     PPNO 6126A is the infrastructure component to PPNO 6126B
+
+
+
+
+        2            Bell Street Safe Routes to School. Construct new sidewalks             03-1818A          2024-25
+   $2,102,000        and curb ramps. Relocate signal poles and straighten sidewalks.       ATP/24-25      108-3290 RMRA    $340,000
+                     Install pedestrian signal, Rectangular Rapid-Flashing Beacon             PS&E         20.30.720.100
+Sacramento County    (RRFB), new signs, bike lanes, lighting and bike detectors.            $340,000
+     SACOG                                                                                     R/W           2024-25
+  03-Sacramento      MPO                                                                   $1,762,000     608-0001 GF      $1,762,000
+                                                                                          0323000299      20.30.720.100
+                     Outcome/Outputs: Construction of approximately 12,500 linear
+                     feet of sidewalk infill, 46 ADA curb ramps, 3 curb extensions, 2
+                     mid-block Beacon Signals, and installation of 7,904 linear feet of
+                     bicycle lanes.
+
+                     CEQA - MND, 01/28/2025
+
+                     Concurrent consideration of funding under
+                     Resolution E-25-19; March 2025.
+
+                     PPNO 1818A is the infrastructure component to PPNO 1818B
+ CTC Financial Vote List                                                                                        March 20-21, 2025
+ 2.5 Highway Financial Matters
+
+
+
+     Project #                                                                                 PPNO
+Allocation Amount                                                                          Program/Year      Budget Year
+     Recipient                               Project Title                                     Phase            Item #
+    RTPA/CTC                                   Location                                    Prgm'd Amount      Fund Type     Amount by
+ District-County                          Project Description                                Project ID     Program Code    Fund Type
+
+                      Locally-Administered Active Transportation Program Projects Off the State
+    2.5w.(1)                                                                                                  Resolution FATP-2425-17
+                      Highway System
+
+
+         3            Willow-Keyes Complete Streets Improvements. Complete                   04-2336          2023-24
+   $12,926,000        streets improvements on Willow Street, Graham Avenue,                 ATP/22-23      108-0890 FTF     $12,926,000
+                      Goodyear Street, and Keyes Street from the underpass of SR             CONST         20.30.720.100
+ City of San Jose     -87 to 3rd Street (project corridor).                                $12,926,000
+       MTC                                                                                 0423000290
+ 04-Santa Clara       MPO
+
+                      Outcome/Outputs: Construct 880 feet of Class IV protected bike
+                      lane, 600 feet of sidewalk, curb-extensions, enhanced
+                      crosswalks, pedestrian-scale lighting, transit boarding
+                      improvements; reconfigure complex intersections.
+
+                      CEQA - CE, 08/15/2023
+                      NEPA: Pending
+
+                      Right of Way Certification: Pending
+
+                      Time Extension for FY 22-23 CONST expires 02/28/2025.
+
+                      Concurrent Baseline Agreement under Resolution
+                      ATP-P-2425-05B; March 2025.
+
+
+
+
+         4            Safer Access to Pajaro Valley High School and Beyond.                 05-0413A           2023-24
+   $10,541,000        Harkins Slough Road between Pajaro Valley High School and             ATP/22-23      108-3290 RMRA    $10,541,000
+                      Green Valley Road/Silver Leaf Drive intersection as well as at         CONST          20.30.720.100
+City of Watsonville   feeder schools and various locations within the Pajaro Valley        $10,541,000
+     SCCRTC           High School attendance area.                                         0525000134
+  05-Santa Cruz                                                                              1G490
+                      Statewide
+
+                      Outcome/Outputs: Construction of 1 pedestrian bridge, 310
+                      linear feet of new sidewalk, 338 linear feet of widened
+                      sidewalks, and 662 linear feet of reconstructed sidewalks. Install
+                      9,510 linear feet of Class IV bikeway, 4 enhanced crosswalks at
+                      signalized intersections, 2 new rectangular rapid flashing
+                      beacons (RRFBs), 5 new ADA ramps, 17 reconstructed ADA
+                      ramps, 12 shortened crossings, 16 crossing-surface
+                      improvements, and bicycle lanes through one signalized
+                      intersection.
+
+                      CEQA - CE, 06/17/2021
+
+                      Right of Way Certification: 12/27/2024
+
+                      Time Extension for FY 22-23 CONST expires 02/28/2025.
+
+                      PPNO 0413A is the infrastructure component to PPNO 0413B.
+
+                      Baseline Agreement approved under
+                      Resolution ATP-P-2122-02B; October 2021.
+ CTC Financial Vote List                                                                                      March 20-21, 2025
+ 2.5 Highway Financial Matters
+
+
+
+      Project #                                                                              PPNO
+ Allocation Amount                                                                       Program/Year      Budget Year
+      Recipient                             Project Title                                    Phase            Item #
+     RTPA/CTC                                 Location                                   Prgm'd Amount      Fund Type     Amount by
+  District-County                        Project Description                               Project ID     Program Code    Fund Type
+
+                     Locally-Administered Active Transportation Program Projects Off the State
+    2.5w.(1)                                                                                                Resolution FATP-2425-17
+                     Highway System
+
+
+         5           Bob Jones Multi-Use Path Gap Closure Segment 1. South of              05-3060          2023-24
+   $15,953,000       San Luis Obispo and north of Pismo Beach, along US 101,              ATP/22-23      108-0890 FTF     $15,953,000
+                     between San Luis Obispo trailhead, at the Octagon Barn, and a         CONST         20.30.720.100
+ San Luis Obispo     temporary mid-point trailhead at Clover Ridge Lane.                 $15,953,000
+     County                                                                              0522000012
+    SLOCOG           Statewide
+05-San Luis Obispo
+                     Outcome/Outputs: Construct 7,700 linear feet of new Class I
+                     multi-use path, one bicycle/pedestrian bridge, and one
+                     bicycle/pedestrian under-crossing.
+
+                     CEQA - EIR, 02/24/2015
+                     NEPA - CE, 01/23/2018; Re-validation 02/07/2025
+
+                     Future consideration of funding approved under
+                     Resolution E-21-96; October 2021.
+
+                     Right of Way Certification: Pending
+
+                     Baseline Agreement Approved under
+                     Resolution ATP-P-2122-02B; October 2021.
+
+                     Time Extension for FY 22-23 CONST expires 02/28/2025.
+
+                     As part of the allocation request, the local agency is requesting
+                     to extend the completion of construction an additional 36 months
+                     beyond the 36-months Timely Use of Funds deadline.
+
+                     Concurrent ATP Scope Amendment under Resolution
+                     ATP-P-2425-06; March 2025.
+
+                     Concurrent STIP Amendment under 24S-02; March 2025.
+
+
+
+
+         6           Citywide Sidewalk Improvements. In the City of Huron at               06-8080           2023-24
+   $1,532,000        various locations. Construct sidewalks and repair sections of        ATP/24-25      108-3290 RMRA    $1,532,000
+                     tree-damaged sidewalks.                                               CONST          20.30.720.100
+   City of Huron                                                                          $1,532,000
+       FCOG          MPO                                                                 0624000153
+    06-Fresno
+                     Outcome/Outputs: Construct 7,880 linear feet of sidewalk and
+                     reconstruct 240 linear feet of sidewalk.
+
+                     CEQA - CE, 03/12/2024
+
+                     Right of Way Certification: 12/16/2024
+CTC Financial Vote List                                                                                       March 20-21, 2025
+2.5 Highway Financial Matters
+
+
+
+     Project #                                                                               PPNO
+Allocation Amount                                                                        Program/Year      Budget Year
+     Recipient                              Project Title                                    Phase            Item #
+    RTPA/CTC                                  Location                                   Prgm'd Amount      Fund Type     Amount by
+ District-County                         Project Description                               Project ID     Program Code    Fund Type
+
+                    Locally-Administered Active Transportation Program Projects Off the State
+   2.5w.(1)                                                                                                 Resolution FATP-2425-17
+                    Highway System
+
+
+       7            Kern River Parkway Multi-use Path Safety & Connectivity                06-8065           2023-24
+   $900,000         Project. The project is located in unincorporated areas of metro      ATP/24-25      108-3290 RMRA    $900,000
+                    Bakersfield from the existing Lake Ming path terminus to an area        PS&E          20.30.720.100
+ Kern County        west of China Grade Loop. Resurfacing and safety                      $900,000
+    KCOG            improvements on portions of Kern River Bike Path. Construct          0625000132
+   06-Kern          new multi-use path from China Grade Loop to Camino Grande.
+                    Crossing improvements at Alfred Harrell Highway.
+
+                    MPO
+
+                    Outcome/Outputs: Construct 7,000 linear feet of Class I multi-
+                    use path, reconstruct 24,400 linear feet of Class I multi-use
+                    path, install 1 intersection lighting, 1 crosswalk, and 6 flashing
+                    beacons.
+
+                    CEQA - CE, 01/28/2025
+
+
+
+
+       8            Central Avenue Class I and Class II Bicycle Trails. The                06-8067           2023-24
+    $71,000         project is located on Central Avenue between Filburn and              ATP/24-25      108-3290 RMRA    $71,000
+                    Highway 46. The project will install Class I and Class II bicycle       PS&E          20.30.720.100
+ City of Wasco      trails, ADA curb ramps and drive approaches, and related               $71,000
+     KCOG           pedestrian and landscape improvements to provide safety and          0624000034
+    06-Kern         improve air quality.
+
+                    MPO
+
+                    Outcome/Outputs: Construct 470 linear feet of Class I multi-use
+                    path, 2,500 linear feet of Class II bike lanes, reconstruct 760
+                    linear feet of Class I multi-use path and 11 ramps to ADA
+                    standard.
+
+                    CEQA - CE, 04/03/2024
+ CTC Financial Vote List                                                                                         March 20-21, 2025
+ 2.5 Highway Financial Matters
+
+
+
+      Project #                                                                                 PPNO
+ Allocation Amount                                                                          Program/Year      Budget Year
+      Recipient                               Project Title                                     Phase            Item #
+     RTPA/CTC                                   Location                                    Prgm'd Amount      Fund Type     Amount by
+  District-County                          Project Description                                Project ID     Program Code    Fund Type
+
+                      Locally-Administered Active Transportation Program Projects Off the State
+    2.5w.(1)                                                                                                   Resolution FATP-2425-17
+                      Highway System
+
+
+         9            10th St and San Emidio St - Intersection Safety                         06-8069           2023-24
+     $42,000          Improvements. This project is located at the intersection of 10th      ATP/24-25      108-3290 RMRA    $42,000
+                      street and San Emidio street. The project will upgrade                   PS&E          20.30.720.100
+    City of Taft      pedestrian crossings, install ADA curb ramps, raised median,            $42,000
+      KCOG            repaint crosswalks, markings, stripes, install 4 solar LED            0624000319
+     06-Kern          flashing stop signs and 2 solar speed feedback signs.
+
+                      MPO
+
+                      Outcome/Outputs: Reconstruct 4 ramps to ADA standard, install
+                      2 speed feedback signs, 4 LED flashing stop signs, and
+                      enhance 4 crosswalks.
+
+                      CEQA - CE, 12/06/2024
+
+
+
+
+        10            Liechty Middle and Neighborhood Elementary Schools                      07-5576          2023-24
+   $18,157,000        Safety Improvement Project. 0.25-mile within 10th St ES,               ATP/22-23      108-0890 FTF     $18,157,000
+                      Esperanza ES, Gratts LAYS, Gratts EEC, and Liechty MS in                CONST         20.30.720.100
+City of Los Angeles   Central Los Angeles. Transform five of the City's most traffic-       $18,157,000
+      LACMTA          stressed schools through the implementation of safety                 0720000016
+  07-Los Angeles      improvements bicycle infrastructure, and speed-reduction
+                      measures.
+
+                      Statewide
+
+                      Outcome/Outputs: 9,300 feet of Class III and 2,000 feet of Class
+                      II bike facilities, 800 feet of reconstructed or enhanced sidewalks
+                      with bulb-outs, lighting, and ADA signals.
+
+                      CEQA - CE, 06/09/2020
+                      NEPA - CE, 11/28/2023
+
+                      Right of Way Certification: Pending
+
+                      Time Extension for FY 22-23 CONST expires 02/28/2025.
+
+                      ATP Baseline Agreement approved under Resolution
+                      ATP-P-2021-04B; May 2021.
+
+                      As part of the allocation request, the local agency is requesting
+                      to extend the completion of construction an additional 12 months
+                      beyond the 36-month Timely Use of Funds deadline.
+ CTC Financial Vote List                                                                                       March 20-21, 2025
+ 2.5 Highway Financial Matters
+
+
+
+      Project #                                                                                PPNO
+ Allocation Amount                                                                         Program/Year     Budget Year
+      Recipient                               Project Title                                    Phase           Item #
+     RTPA/CTC                                   Location                                   Prgm'd Amount     Fund Type     Amount by
+  District-County                          Project Description                               Project ID    Program Code    Fund Type
+
+                      Locally-Administered Active Transportation Program Projects Off the State
+    2.5w.(1)                                                                                                 Resolution FATP-2425-17
+                      Highway System
+
+
+        11            112th Street and Flournoy Elementary Schools Safety                    07-5579          2023-24
+   $4,448,000         Improvements Project . 0.25-mile vicinity of 112th Street and         ATP/22-23      108-0890 FTF    $4,448,000
+                      Flournoy Elementary Schools in the Watts neighborhood within           CONST         20.30.720.100
+City of Los Angeles   the City of Los Angeles. Transform two of the City's most traffic-    $4,448,000
+      LACMTA          stressed schools through the implementation of safety                0720000014
+  07-Los Angeles      improvements, bicycle infrastructure, and speed-reduction
+                      measures.
+
+                      Statewide
+
+                      Outcome/Outputs: 7,520 feet of Class III bike route, 100 feet of
+                      reconstructed/enhanced sidewalks, ADA ramps, crosswalks, 9
+                      rectangular rapid flashing beacons, lighting and 1 new signal.
+
+                      CEQA - CE, 08/26/2020
+                      NEPA - CE, 11/29/2023
+
+                      Right of Way Certification: Pending
+
+                      Time Extension for FY 22-23 CONST expires 02/28/2025.
+
+                      As part of the allocation request, the local agency is requesting
+                      to extend the completion of construction an additional 12 months
+                      beyond the 36-month Timely Use of Funds deadline.
+
+
+
+
+        12            Alexandria Avenue Elementary School Neighborhood                       07-5586          2023-24
+   $3,366,000         Safety Improvements Project. 0.25-mile vicinity of Alexandria         ATP/22-23      108-0890 FTF    $3,366,000
+                      Avenue Elementary School in the East Hollywood neighborhood            CONST         20.30.720.100
+City of Los Angeles   within the City of Los Angeles. Transform one of the City’s most      $3,366,000
+      LACMTA          traffic-stressed schools through the implementation of safety        0720000015
+  07-Los Angeles      improvements, bicycle infrastructure, and speed-reduction
+                      measures.
+
+                      Statewide
+
+                      Outcome/Outputs: 760 feet of reconstructed sidewalks with
+                      bulb-outs, 17 ADA ramps, 1 rectangular rapid flashing beacon,
+                      and lighting.
+
+                      CEQA - CE, 07/30/2020
+                      NEPA - CE, 11/22/2023
+
+                      Right of Way Certification: Pending
+
+                      Time Extension for FY 22-23 CONST expires 02/28/2025.
+
+                      As part of the allocation request, the local agency is requesting
+                      to extend the completion of construction an additional 12 months
+                      beyond the 36-month Timely Use of Funds deadline.
+  CTC Financial Vote List                                                                                         March 20-21, 2025
+  2.5 Highway Financial Matters
+
+
+
+      Project #                                                                                  PPNO
+ Allocation Amount                                                                           Program/Year      Budget Year
+      Recipient                                 Project Title                                    Phase            Item #
+     RTPA/CTC                                     Location                                   Prgm'd Amount      Fund Type     Amount by
+  District-County                            Project Description                               Project ID     Program Code    Fund Type
+
+                        Locally-Administered Active Transportation Program Projects Off the State
+     2.5w.(1)                                                                                                   Resolution FATP-2425-17
+                        Highway System
+
+
+         13             Randolph Street Bike and Facilities Improvement Project.               07-6174          2024-25
+      $15,000           Bike and pedestrian facility improvements will be completed on        ATP/24-25      608-0001 GF      $15,000
+                        Randolph Street, from 200 feet west of Fishburn Avenue at the          PA&ED         20.30.720.100
+  City of Maywood       westerly end to District Boulevard/LA River at the easterly end.       $15,000
+      LACMTA            The Randolph Street Bike and Facilities Project will a create new    0724000186
+  07-Los Angeles        Class III shared bike path, and pedestrian path with
+                        beautification and traffic safety enhancements.
+
+                        MPO
+
+                        Outcome/Outputs: 5,900 feet of Class III Shared Path/Sharrows,
+                        4,386 feet of Pedestrian Path/Sidewalk Improvement, 9 New
+                        Curb Ramps, 2 Reconstructed Curb Ramps, 4 Bike Racks, 15
+                        Street Lights, 40 (15 gal) trees.
+
+
+
+
+         14             Murrieta Creek Multi-Use Trail. The project is located in the          08-1262           2023-24
+    $3,904,000          City of Lake Elsinore between the Lake Levee trail and Palomar        ATP/22-23      108-3290 RMRA    $3,904,000
+                        Trail in the southwest part of the City.                               CONST          20.30.720.100
+City of Lake Elsinore                                                                         $3,904,000
+        RCTC            MPO                                                                  0820000038
+    08-Riverside
+                        Outcome/Outputs: Construct 1 Mile of Multi-Use Trail, one
+                        viewpoint, retaining walls, safety fences, striping and pedestrian
+                        lights to connect places of destinations.
+
+                        CEQA - MND, 3/17/2022
+
+                        Future consideration of funding approved under
+                        Resolution E-22-21; March 2022.
+
+                        Right of Way Certification: 01/14/2025
+
+                        Time Extension for FY 22-23 CONST expires 02/28/2025.
+CTC Financial Vote List                                                                                       March 20-21, 2025
+2.5 Highway Financial Matters
+
+
+
+     Project #                                                                               PPNO
+Allocation Amount                                                                        Program/Year      Budget Year
+     Recipient                             Project Title                                     Phase            Item #
+    RTPA/CTC                                 Location                                    Prgm'd Amount      Fund Type     Amount by
+ District-County                        Project Description                                Project ID     Program Code    Fund Type
+
+                    Locally-Administered Active Transportation Program Projects Off the State
+   2.5w.(1)                                                                                                 Resolution FATP-2425-17
+                    Highway System
+
+
+       15           Riverside County Safe Routes for All - Palm Springs.                   08-1343           2023-24
+   $556,000         Targets students pre-K through 12th grade, parents, park users,       ATP/24-25      108-3290 RMRA    $556,000
+                    older adults and the community at large. Activities include            CONST          20.30.720.100
+Riverside County    ped/bike skills workshops, safety campaigns, and community            $556,000
+     RCTC           events.                                                              0825000062
+  08-Riverside
+                    MPO
+
+                    Outcome/Outputs: Implement pedestrian and bicycle safety
+                    program geared toward students grades pre-k through 12,
+                    parents, park users, and older adults within targeted locations in
+                    Palm Springs by implementing comprehensive education and
+                    encouragement activities.
+
+                    CEQA - CE, 11/19/2024
+
+
+
+
+       16           Riverside County Safe Routes for All - Cathedral City.                 08-1344           2024-25
+   $745,000         Targets students pre-K through 12th grade, parents, park users,       ATP/24-25      108-3290 RMRA    $745,000
+                    older adults, and the community at large. Activities include           CONST          20.30.720.100
+Riverside County    ped/bike skills workshops, safety campaigns, and community            $745,000
+     RCTC           events.                                                              0825000063
+  08-Riverside
+                    MPO
+
+                    Outcome/Outputs: Implement pedestrian and bicycle safety
+                    program geared toward students grades pre-k through 12,
+                    parents, park users, and older adults within targeted locations in
+                    Cathedral City by implementing comprehensive education and
+                    encouragement activities.
+
+                    CEQA - CE, 11/19/2024
+  CTC Financial Vote List                                                                                       March 20-21, 2025
+  2.5 Highway Financial Matters
+
+
+
+       Project #                                                                               PPNO
+  Allocation Amount                                                                        Program/Year      Budget Year
+       Recipient                              Project Title                                    Phase            Item #
+      RTPA/CTC                                  Location                                   Prgm'd Amount      Fund Type     Amount by
+   District-County                         Project Description                               Project ID     Program Code    Fund Type
+
+                       Locally-Administered Active Transportation Program Projects Off the State
+     2.5w.(1)                                                                                                 Resolution FATP-2425-17
+                       Highway System
+
+
+         17            Powhatan Road Complete Streets, Apple Valley. Powhatan                08-1303           2024-25
+     $202,000          Road from Navajo Road to Central Road and Quinnault Road             ATP/23-24      108-3290 RMRA    $202,000
+                       from Powhatan Road to Outer State Highway 18 South in the              PS&E          20.30.720.100
+Town of Apple Valley   Town of Apple Valley. Construct new sidewalk, curb ramps, and        $202,000
+      SBCTA            install Class III bike lanes.                                       0825000021
+ 08-San Bernardino
+                       MPO
+
+                       Outcome/Outputs: Install 5,680 feet of Class III bike lanes.
+                       Construct 6,921 feet of new sidewalk, 17 new curb ramps, and
+                       reconstruct 2 curb ramps to standard.
+
+                       CEQA - CE, 10/30/2024
+
+                       Time Extension for FY 23-24 PS&E expires 06/30/2025.
+
+
+
+
+         18            Mariposa Elementary School Connectivity Project. The                  10-3513           2023-24
+    $1,800,000         project is in the unincorporated community of Mariposa on            ATP/23-24      108-3290 RMRA    $1,800,000
+                       Bullion Street, 6th Street, 7th Street, and Jones Street adjacent     CONST          20.30.720.100
+ Mariposa County       to Mariposa Elementary School. Construct new curb, gutter,           $1,800,000
+      MATC             sidewalks, ADA ramps, drainage improvements, high visibility        1021000214
+  10-Mariposa          school zone striping and signage for pedestrians and schools.
+
+                       Statewide
+
+                       Outcome/Outputs: Construct 3,200 linear feet of sidewalk, 13
+                       ADA ramps, and install 9 crossing-surface improvements.
+
+                       CEQA - CE, 4/24/2024
+
+                       Right of Way Certification: 01/01/2025
+
+                       Time Extension for FY 23-24 CONST expires 06/30/2025.
+CTC Financial Vote List                                                                                     March 20-21, 2025
+2.5 Highway Financial Matters
+
+
+
+     Project #                                                                              PPNO
+Allocation Amount                                                                       Program/Year     Budget Year
+     Recipient                             Project Title                                    Phase           Item #
+    RTPA/CTC                                 Location                                   Prgm'd Amount     Fund Type     Amount by
+ District-County                        Project Description                               Project ID    Program Code    Fund Type
+
+                    Locally-Administered Active Transportation Program Projects Off the State
+   2.5w.(1)                                                                                               Resolution FATP-2425-17
+                    Highway System
+
+
+       19           Safe Routes to School Sidewalk Gap Closure. Five Four                 10-3462          2023-24
+  $1,020,000        locations surrounding various schools from South Stockton to         ATP/22-23      108-0890 FTF    $1,020,000
+                    North Stockton. Install curb, gutter and sidewalk to close            CONST         20.30.720.100
+City of Stockton    sidewalk gaps, upgrade or install curb ramps, bulb-outs and          $1,020,000
+    SJCOG           install crosswalks to complete the pedestrian network at various    1020000016
+10-San Joaquin      schools.
+
+                    MPO
+
+                    Outcome/Outputs: 4,316 feet of sidewalk improvements, 51 curb
+                    ramps, and 40 crosswalks to encourage the use of active modes
+                    of transportation for pedestrians. Construct 2,066 linear feet of
+                    sidewalk, 105 linear feet of barrier protected sidewalk,
+                    reconstruct 45 ramps to ADA standard, install 8 bike racks,
+                    24 crosswalks, and enhance 16 crosswalks.
+
+                    CEQA - CE, 12/15/2020
+                    NEPA - CE, 11/05/2020; Re-validation 02/06/2025
+
+                    Right of Way Certification: Pending
+
+                    Time Extension for FY 22-23 CONST expires 02/28/2025.
+
+                    Commission staff recommended approval of a minor scope
+                    change on March 2025.
+  CTC Financial Vote List                                                                                     March 20-21, 2025
+  2.5 Highway Financial Matters
+
+
+
+      Project #                                                                               PPNO
+ Allocation Amount                                                                        Program/Year     Budget Year
+      Recipient                                Project Title                                  Phase           Item #
+     RTPA/CTC                                    Location                                 Prgm'd Amount     Fund Type     Amount by
+  District-County                           Project Description                             Project ID    Program Code    Fund Type
+
+                        Locally-Administered Active Transportation Program Projects Off the State
+     2.5w.(1)                                                                                               Resolution FATP-2425-17
+                        Highway System
+
+
+         20             8th Street and Roosevelt Ave Active Transportation                  11-1395          2023-24
+    $5,185,000          Corridor, National City. In western National City, at 8th and      ATP/22-23      108-0890 FTF    $5,185,000
+                        Harbor to Roosevelt and at Roosevelt to Main Street and then to     CONST         20.30.720.100
+City of National City   Yama Street. Construct cycle track, multi-use path, and various    $5,185,000
+      SANDAG            intersection adjustments for safety improvements.                 1120000060
+   11-San Diego
+                        MPO
+
+                        Outcome/Outputs: Construct 4,540 4,160 linear feet of Class I
+                        multi-use path, 200 linear feet of sidewalk, 22 28 ADA ramps,
+                        reconstruct 4,270 linear feet of sidewalk, 6 ramps to ADA
+                        standard, install 3 bike share program station, 50 bikes, 350
+                        linear feet of Class IV bikeway, and 6 20 bike racks.
+
+                        CEQA - CE, 12/3/2024
+                        NEPA - CE, 12/01/2022; Re-validation 1/21/2025
+
+                        Right of Way Certification: 02/26/2025
+
+                        Time Extension for FY 22-23 CONST expires 02/28/2025.
+
+                        Commission staff recommended approval of a minor scope
+                        change on March 2025.
+CTC Financial Vote List                                                                                      March 20-21, 2025
+2.5 Highway Financial Matters
+
+
+
+     Project #                                                                              PPNO
+Allocation Amount                                                                       Program/Year      Budget Year
+     Recipient                             Project Title                                    Phase            Item #
+    RTPA/CTC                                 Location                                   Prgm'd Amount      Fund Type     Amount by
+ District-County                        Project Description                               Project ID     Program Code    Fund Type
+
+                    Locally-Administered Active Transportation Program Projects Off the State
+   2.5w.(1)                                                                                                Resolution FATP-2425-17
+                    Highway System
+
+
+       21           OC Loop Segment P and Q. OC Loop Segment P and Q,                     12-1309           2024-25
+  $5,699,000        Coyote Creek Bikeway within flood control channel from Artesia       ATP/23-24      108-3290 RMRA    $5,699,000
+                    Boulevard in La Mirada/Buena Park La Mirada Boulevard in                R/W          20.30.720.100
+Orange County       Buena Park. Construction funds for a Class I trail along the         $5,699,000
+    OCTA            Coyote Creek Flood Channel (1.6 miles) that closes a gap along      1224000086
+  12-Orange         the 66-mile multi-modal regional route known as the ‘OC Loop’.
+
+                    Statewide
+
+                    Outcome/Outputs: Install 8,448 feet of Class I bike lanes/routes,
+                    1 timing improvement, 1 flashing beacon, 1 crossing-surface
+                    improvement, 4 striping, signage, and wayfinding, 596 feet of
+                    widened existing sidewalk, 4 curb ramps, 8,448 feet of Class I
+                    trails, and 5 roadway/railway underpass.
+
+                    CEQA - MND, 02/25/2021
+                    NEPA - CE, 02/25/2021; Re-validation 9/10/2024
+
+                    Future consideration of funding approved under
+                    Resolution E-21-104; December 2021.
+
+                    Time Extension for FY 23-24 R/W expires 03/31/2025.
+
+                    Concurrent Baseline Agreement under Resolution
+                    ATP-P-2425-05B; March 2025.
+
+
+
+
+       22           Citywide Safe Routes to School Sidewalk Gap Closure.                  12-2196A         2023-24
+  $3,021,000        Anaheim, Orange County: Gaps located on Acacia Street, La            ATP/22-23      108-0890 FTF     $3,021,000
+                    Palma Avenue (east of Whittier), Frontera Street, La Palma             CONST        20.30.720.100
+City of Anaheim     Avenue (from N. Lakeview Avenue to Imperial Hwy.), and Santa         $3,021,000
+     OCTA           Ana Canyon Rd. Construct ADA accessible sidewalk segments           1220000040
+   12-Orange        to close all remaining sidewalk gaps located within one-half mile
+                    of school entrances.
+
+                    Statewide
+
+                    Outcome/Outputs: Construct 3,268 feet of multi-use pathway
+                    and 10 new curb ramps, and reconstruct 4 curb ramps to
+                    standards.
+
+                    CEQA - CE, 10/06/2020
+                    NEPA - CE, 10/29/2021; Re-validation 02/05/2025
+
+                    Right of Way Certification: Pending
+
+                    Time Extension for FY 22-23 CONST expires 02/28/2025.
+
+                    PPNO 2196A is the infrastructure component to PPNO 2196B
+

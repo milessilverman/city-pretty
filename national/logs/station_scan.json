@@ -1,0 +1,3335 @@
+{
+ "72127": {
+  "nodes": 14,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "17031": {
+  "nodes": 324,
+  "areas_added": 1,
+  "stops_added": 15,
+  "added_names": [
+   "Bartlett",
+   "Bensenville",
+   "Clarendon Hills",
+   "Downers Grove Main Street",
+   "Elmhurst",
+   "Fairview Avenue",
+   "Homewood",
+   "Itasca",
+   "Mokena",
+   "O'Hare",
+   "Riverside",
+   "Romeoville",
+   "West Hinsdale",
+   "Westmont",
+   "Wood Dale"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Hollywood (Zoo Stop)"
+  ]
+ },
+ "17043": {
+  "nodes": 26,
+  "areas_added": 0,
+  "stops_added": 4,
+  "added_names": [
+   "Bartlett",
+   "Berkeley",
+   "Lemont"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "17089": {
+  "nodes": 7,
+  "areas_added": 0,
+  "stops_added": 2,
+  "added_names": [
+   "?"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "17197": {
+  "nodes": 9,
+  "areas_added": 0,
+  "stops_added": 6,
+  "added_names": [
+   "179th Street (Orland Park)",
+   "Homewood",
+   "Lemont",
+   "Richton Park",
+   "Tinley Park-80th Avenue",
+   "Willow Springs"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "17097": {
+  "nodes": 38,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "17111": {
+  "nodes": 8,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "50th Avenue \"L\" Station"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "East Union Depot"
+  ]
+ },
+ "17201": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "17119": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "17163": {
+  "nodes": 11,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Laclede's Landing"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "26139": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "26049": {
+  "nodes": 1,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "?"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "26099": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "26125": {
+  "nodes": 3,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "26161": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "26163": {
+  "nodes": 22,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "26065": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "26077": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "26081": {
+  "nodes": 36,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36029": {
+  "nodes": 16,
+  "areas_added": 1,
+  "stops_added": 2,
+  "added_names": [
+   "?",
+   "Buffalo\u2013Exchange Street Station",
+   "iron horse train"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36001": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36091": {
+  "nodes": 4,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36067": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36055": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36027": {
+  "nodes": 11,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Beacon"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Catskill Mountain Railroad"
+  ]
+ },
+ "36071": {
+  "nodes": 13,
+  "areas_added": 2,
+  "stops_added": 0,
+  "added_names": [
+   "Beacon",
+   "Garrison"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36087": {
+  "nodes": 17,
+  "areas_added": 0,
+  "stops_added": 6,
+  "added_names": [
+   "Hillsdale",
+   "Mahwah",
+   "Montvale",
+   "Park Ridge",
+   "Scarborough",
+   "Woodcliff Lake"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36119": {
+  "nodes": 47,
+  "areas_added": 1,
+  "stops_added": 4,
+  "added_names": [
+   "Fleetwood",
+   "Garrison",
+   "North White Plains",
+   "Riverdale",
+   "Woodlawn"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36059": {
+  "nodes": 70,
+  "areas_added": 0,
+  "stops_added": 4,
+  "added_names": [
+   "Beach 44th Street",
+   "Beach 60th Street",
+   "Beach 67th Street",
+   "Laurelton"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36103": {
+  "nodes": 49,
+  "areas_added": 0,
+  "stops_added": 2,
+  "added_names": [
+   "Kings Park",
+   "Saint James"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36065": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36005": {
+  "nodes": 124,
+  "areas_added": 0,
+  "stops_added": 2,
+  "added_names": [
+   "137th Street\u2013City College",
+   "Ludlow"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36047": {
+  "nodes": 341,
+  "areas_added": 1,
+  "stops_added": 1,
+  "added_names": [
+   "Exchange Place",
+   "Grand Central Terminal"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36061": {
+  "nodes": 342,
+  "areas_added": 1,
+  "stops_added": 1,
+  "added_names": [
+   "Exchange Place",
+   "Grand Central Terminal"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36081": {
+  "nodes": 457,
+  "areas_added": 1,
+  "stops_added": 3,
+  "added_names": [
+   "Exchange Place",
+   "Floral Park",
+   "Grand Central Terminal",
+   "Great Neck"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36085": {
+  "nodes": 23,
+  "areas_added": 3,
+  "stops_added": 1,
+  "added_names": [
+   "53rd Street",
+   "Dongan Hills",
+   "Grasmere",
+   "Old Town"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "36007": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12021": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12033": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12057": {
+  "nodes": 3,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Congo Station (WestBound Only)"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12071": {
+  "nodes": 0,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Colonial Station"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12081": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12086": {
+  "nodes": 57,
+  "areas_added": 2,
+  "stops_added": 0,
+  "added_names": [
+   "Hialeah Market",
+   "Opa-Locka"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12101": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12103": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12115": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12009": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12069": {
+  "nodes": 28,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Church Street"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12095": {
+  "nodes": 29,
+  "areas_added": 6,
+  "stops_added": 1,
+  "added_names": [
+   "Airside 1",
+   "Airside 2",
+   "Airside 3",
+   "Airside 4",
+   "Church Street",
+   "Terminal B"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12097": {
+  "nodes": 7,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Train Depot"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12117": {
+  "nodes": 8,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12127": {
+  "nodes": 9,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12001": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12083": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12011": {
+  "nodes": 8,
+  "areas_added": 2,
+  "stops_added": 0,
+  "added_names": [
+   "Hollywood",
+   "Sheridan Street"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12099": {
+  "nodes": 7,
+  "areas_added": 2,
+  "stops_added": 0,
+  "added_names": [
+   "Boca Raton",
+   "Delray Beach"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12031": {
+  "nodes": 9,
+  "areas_added": 2,
+  "stops_added": 0,
+  "added_names": [
+   "?",
+   "Main Camp Train Station"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12109": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12073": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12105": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "12111": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "13089": {
+  "nodes": 18,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "13117": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "13121": {
+  "nodes": 50,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Midtown Transit Station"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "13135": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "13057": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "13063": {
+  "nodes": 13,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "13067": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "13151": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "13051": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "37063": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "37183": {
+  "nodes": 5,
+  "areas_added": 0,
+  "stops_added": 2,
+  "added_names": [
+   "North Carolina State Fair",
+   "Raleigh"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "37067": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "37081": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "37025": {
+  "nodes": 10,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "37051": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "37119": {
+  "nodes": 26,
+  "areas_added": 4,
+  "stops_added": 0,
+  "added_names": [
+   "3rd Street/Convention Center",
+   "7th Street",
+   "Brooklyn Village",
+   "CTC/Arena"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "37179": {
+  "nodes": 3,
+  "areas_added": 4,
+  "stops_added": 0,
+  "added_names": [
+   "3rd Street/Convention Center",
+   "7th Street",
+   "Brooklyn Village",
+   "CTC/Arena"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "37129": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "37021": {
+  "nodes": 0,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Silver Line Station"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48027": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48029": {
+  "nodes": 6,
+  "areas_added": 0,
+  "stops_added": 2,
+  "added_names": [
+   "?",
+   "Witte/Parking Garage Stop"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "San Antonio Zoo Eagle Train Station"
+  ]
+ },
+ "48209": {
+  "nodes": 8,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48309": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48453": {
+  "nodes": 13,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Cedar Rock Railroad"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Cedar Park"
+  ]
+ },
+ "48491": {
+  "nodes": 6,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Cedar Rock Railroad"
+  ],
+  "nodes_dropped": 2,
+  "dropped_names": [
+   "Bertram Depot",
+   "Cedar Park"
+  ]
+ },
+ "48303": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48085": {
+  "nodes": 0,
+  "areas_added": 10,
+  "stops_added": 0,
+  "added_names": [
+   "12th Street",
+   "Arapaho Center",
+   "CityLine/Bush",
+   "Downtown Plano",
+   "Galatyn Park",
+   "Knoll Trail",
+   "Parker Road",
+   "Shiloh Road",
+   "UT Dallas"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48113": {
+  "nodes": 25,
+  "areas_added": 62,
+  "stops_added": 0,
+  "added_names": [
+   "8th & Corinth",
+   "Addison",
+   "Akard",
+   "Arapaho Center",
+   "Bachman",
+   "Baylor University Medical Center",
+   "Belt Line",
+   "Buckner",
+   "Burbank",
+   "Camp Wisdom",
+   "Cedars",
+   "CityLine/Bush",
+   "Cypress Waters",
+   "DFW Airport North",
+   "DFW Airport Terminal A",
+   "DFW Airport Terminal B",
+   "Dallas College North Lake Campus",
+   "Deep Ellum",
+   "Downtown Carrollton",
+   "Downtown Garland",
+   "Downtown Irving/Heritage Crossing",
+   "Downtown Rowlett",
+   "Fair Park",
+   "Farmers Branch",
+   "Forest Lane",
+   "Forest/Jupiter",
+   "Galatyn Park",
+   "Hampton",
+   "Hatcher",
+   "Illinois",
+   "Inwood/Love Field",
+   "Kiest",
+   "Knoll Trail",
+   "LBJ/Central",
+   "LBJ/Skillman",
+   "Lake Highlands",
+   "Lake June",
+   "Lawnview",
+   "Ledbetter",
+   "Lovers Lane"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48121": {
+  "nodes": 1,
+  "areas_added": 6,
+  "stops_added": 0,
+  "added_names": [
+   "Hebron",
+   "Highland Village/Lewisville Lake",
+   "MedPark",
+   "North Carrollton/Frankford",
+   "Old Town",
+   "Trinity Mills"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48423": {
+  "nodes": 0,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Mineola"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48439": {
+  "nodes": 21,
+  "areas_added": 4,
+  "stops_added": 0,
+  "added_names": [
+   "DFW Airport North",
+   "DFW Airport Terminal A",
+   "DFW Airport Terminal B",
+   "Grapevine-Main Street"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Grapevine Vintage Railroad Tickets"
+  ]
+ },
+ "48061": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48215": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48355": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48479": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48039": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48041": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48157": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48167": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48201": {
+  "nodes": 52,
+  "areas_added": 3,
+  "stops_added": 0,
+  "added_names": [
+   "Dewville Station",
+   "Kinder Station",
+   "Transco Railyard first edit"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Memorial Hermann Hospital/Houston Zoo"
+  ]
+ },
+ "48245": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48339": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "48141": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "51810": {
+  "nodes": 3,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "51550": {
+  "nodes": 13,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Beazley"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "51710": {
+  "nodes": 13,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Beazley"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "51013": {
+  "nodes": 15,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "51059": {
+  "nodes": 49,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "51107": {
+  "nodes": 10,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Brunswick"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "51153": {
+  "nodes": 25,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "51041": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "51087": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "08001": {
+  "nodes": 48,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "?"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "08005": {
+  "nodes": 48,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "08031": {
+  "nodes": 73,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "08035": {
+  "nodes": 7,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "08059": {
+  "nodes": 15,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "?"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "08013": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "08069": {
+  "nodes": 3,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Mountain & Howes"
+  ]
+ },
+ "08123": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "08041": {
+  "nodes": 3,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "18003": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "18057": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "18089": {
+  "nodes": 11,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "18097": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "18141": {
+  "nodes": 3,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "19153": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "20091": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "20173": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "27003": {
+  "nodes": 4,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Depot"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "27037": {
+  "nodes": 11,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "27053": {
+  "nodes": 51,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Hamline Avenue"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "27123": {
+  "nodes": 28,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Saint Paul Union Depot"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "27163": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "29047": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "29077": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "29095": {
+  "nodes": 4,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "29183": {
+  "nodes": 40,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Old Chicago Train Station"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "29189": {
+  "nodes": 38,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Old Chicago Train Station"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "29510": {
+  "nodes": 31,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "31055": {
+  "nodes": 0,
+  "areas_added": 1,
+  "stops_added": 2,
+  "added_names": [
+   "?",
+   "Omaha"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "31109": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Train Depot"
+  ]
+ },
+ "39017": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "39035": {
+  "nodes": 54,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Big Creek & Memphis Railway"
+  ],
+  "nodes_dropped": 4,
+  "dropped_names": [
+   "Boston Mill",
+   "Brecksville",
+   "Canal Exploration Center",
+   "Rockside"
+  ]
+ },
+ "39049": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "39061": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Safari Train Station"
+  ]
+ },
+ "39093": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "39095": {
+  "nodes": 4,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "39113": {
+  "nodes": 0,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Carillon Park Railroad"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "39151": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "39153": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 5,
+  "dropped_names": [
+   "Akron Northside",
+   "Boston Mill",
+   "Brecksville",
+   "Indigo Lake",
+   "Peninsula"
+  ]
+ },
+ "55009": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "?"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "55025": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "55079": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "?"
+  ]
+ },
+ "55133": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "09110": {
+  "nodes": 4,
+  "areas_added": 2,
+  "stops_added": 0,
+  "added_names": [
+   "Isle of Safety",
+   "Windsor Locks"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "09120": {
+  "nodes": 11,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "09140": {
+  "nodes": 9,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "09170": {
+  "nodes": 17,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "09180": {
+  "nodes": 5,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "New London"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "09190": {
+  "nodes": 41,
+  "areas_added": 2,
+  "stops_added": 0,
+  "added_names": [
+   "Bethel",
+   "Danbury"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "23005": {
+  "nodes": 5,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "25005": {
+  "nodes": 24,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Edaville"
+  ]
+ },
+ "25009": {
+  "nodes": 58,
+  "areas_added": 12,
+  "stops_added": 0,
+  "added_names": [
+   "?",
+   "Airport Station",
+   "Assembly",
+   "Community College",
+   "Malden Center",
+   "Maverick",
+   "North Station",
+   "Oak Grove",
+   "Orient Heights",
+   "Science Park/West End",
+   "Sullivan Square",
+   "Wellington"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "25013": {
+  "nodes": 4,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "25017": {
+  "nodes": 172,
+  "areas_added": 34,
+  "stops_added": 1,
+  "added_names": [
+   "?",
+   "Airport Station",
+   "Ashmont/Peabody Square",
+   "Assembly",
+   "Back Bay Station",
+   "Blue Hill Avenue",
+   "Charles/MGH",
+   "Community College",
+   "Fields Corner",
+   "Forest Hills",
+   "Green",
+   "JFK/UMass",
+   "Jackson Square",
+   "Lansdowne",
+   "Lowell",
+   "Malden Center",
+   "Massachusetts Avenue",
+   "Maverick",
+   "North Station",
+   "Oak Grove",
+   "Orient Heights",
+   "Riverside",
+   "Route 128",
+   "Roxbury Crossing",
+   "Ruggles",
+   "Savin Hill",
+   "Science Park/West End",
+   "Shawmut",
+   "South Station",
+   "Stony Brook",
+   "Sullivan Square",
+   "Walpole",
+   "Wellington",
+   "Worcester"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Symphony"
+  ]
+ },
+ "25021": {
+  "nodes": 162,
+  "areas_added": 29,
+  "stops_added": 2,
+  "added_names": [
+   "?",
+   "Airport Station",
+   "Ashmont/Peabody Square",
+   "Assembly",
+   "Back Bay Station",
+   "Blue Hill Avenue",
+   "Charles/MGH",
+   "Community College",
+   "Fields Corner",
+   "Forest Hills",
+   "Green",
+   "JFK/UMass",
+   "Jackson Square",
+   "Lansdowne",
+   "Massachusetts Avenue",
+   "Maverick",
+   "North Station",
+   "Orient Heights",
+   "Riverside",
+   "Route 128",
+   "Roxbury Crossing",
+   "Ruggles",
+   "Savin Hill",
+   "Science Park/West End",
+   "Shawmut",
+   "South Station",
+   "Southborough",
+   "Stony Brook",
+   "Sullivan Square",
+   "Walpole"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Symphony"
+  ]
+ },
+ "25023": {
+  "nodes": 79,
+  "areas_added": 22,
+  "stops_added": 0,
+  "added_names": [
+   "Airport Station",
+   "Ashmont/Peabody Square",
+   "Assembly",
+   "Back Bay Station",
+   "Blue Hill Avenue",
+   "Charles/MGH",
+   "Community College",
+   "Fields Corner",
+   "JFK/UMass",
+   "Jackson Square",
+   "Lansdowne",
+   "Massachusetts Avenue",
+   "Maverick",
+   "North Station",
+   "Orient Heights",
+   "Roxbury Crossing",
+   "Ruggles",
+   "Savin Hill",
+   "Science Park/West End",
+   "Shawmut",
+   "South Station",
+   "Sullivan Square"
+  ],
+  "nodes_dropped": 2,
+  "dropped_names": [
+   "Edaville",
+   "Symphony"
+  ]
+ },
+ "25025": {
+  "nodes": 131,
+  "areas_added": 29,
+  "stops_added": 1,
+  "added_names": [
+   "Airport Station",
+   "Ashmont/Peabody Square",
+   "Assembly",
+   "Back Bay Station",
+   "Blue Hill Avenue",
+   "Charles/MGH",
+   "Community College",
+   "Fields Corner",
+   "Forest Hills",
+   "Green",
+   "JFK/UMass",
+   "Jackson Square",
+   "Lansdowne",
+   "Malden Center",
+   "Massachusetts Avenue",
+   "Maverick",
+   "North Station",
+   "Oak Grove",
+   "Orient Heights",
+   "Route 128",
+   "Roxbury Crossing",
+   "Ruggles",
+   "Savin Hill",
+   "Science Park/West End",
+   "Shawmut",
+   "South Station",
+   "Stony Brook",
+   "Sullivan Square",
+   "Wellington"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Symphony"
+  ]
+ },
+ "25027": {
+  "nodes": 11,
+  "areas_added": 1,
+  "stops_added": 1,
+  "added_names": [
+   "South Acton",
+   "Worcester"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "33011": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "33015": {
+  "nodes": 7,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "34001": {
+  "nodes": 6,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "34003": {
+  "nodes": 268,
+  "areas_added": 7,
+  "stops_added": 3,
+  "added_names": [
+   "23rd Street",
+   "?",
+   "Allendale",
+   "East 180th Street",
+   "Grand Central Terminal",
+   "Hillsdale",
+   "Ho-Ho-Kus",
+   "Waldwick",
+   "Wesmont",
+   "Wood-Ridge"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "34005": {
+  "nodes": 44,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "34007": {
+  "nodes": 57,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Arrott Transportation Center"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "34013": {
+  "nodes": 73,
+  "areas_added": 1,
+  "stops_added": 1,
+  "added_names": [
+   "?",
+   "Wesmont"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "34015": {
+  "nodes": 32,
+  "areas_added": 1,
+  "stops_added": 1,
+  "added_names": [
+   "Curtis Park",
+   "Moylan-Rose Valley"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "34017": {
+  "nodes": 227,
+  "areas_added": 2,
+  "stops_added": 2,
+  "added_names": [
+   "96th Street",
+   "Eastern Parkway\u2013Brooklyn Museum",
+   "Grand Central Terminal",
+   "Hoboken Terminal"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "34021": {
+  "nodes": 16,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Bowne Station"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "34023": {
+  "nodes": 25,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Linden"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "34025": {
+  "nodes": 27,
+  "areas_added": 1,
+  "stops_added": 1,
+  "added_names": [
+   "?",
+   "Red Bank"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "34027": {
+  "nodes": 45,
+  "areas_added": 2,
+  "stops_added": 1,
+  "added_names": [
+   "?",
+   "Basking Ridge",
+   "Bernardsville"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "34029": {
+  "nodes": 6,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "?"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "34031": {
+  "nodes": 38,
+  "areas_added": 4,
+  "stops_added": 0,
+  "added_names": [
+   "Allendale",
+   "Ho-Ho-Kus",
+   "Waldwick",
+   "Wesmont"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "34035": {
+  "nodes": 25,
+  "areas_added": 2,
+  "stops_added": 0,
+  "added_names": [
+   "Basking Ridge",
+   "Bernardsville"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "34039": {
+  "nodes": 53,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "42003": {
+  "nodes": 54,
+  "areas_added": 4,
+  "stops_added": 2,
+  "added_names": [
+   "Duquesne Lower Station",
+   "Duquesne Upper Station",
+   "Monongahela Lower Station",
+   "Monongahela Upper Station",
+   "Pennant",
+   "Warrington + Allen"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "42011": {
+  "nodes": 3,
+  "areas_added": 2,
+  "stops_added": 0,
+  "added_names": [
+   "WK&S Railroad",
+   "Wanamakers"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Colebrookdale Railroad Station"
+  ]
+ },
+ "42017": {
+  "nodes": 116,
+  "areas_added": 2,
+  "stops_added": 0,
+  "added_names": [
+   "Bowne Station",
+   "Flemington Station"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "42029": {
+  "nodes": 43,
+  "areas_added": 1,
+  "stops_added": 2,
+  "added_names": [
+   "Groff's Grove",
+   "Moylan-Rose Valley",
+   "Paradise"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "42041": {
+  "nodes": 2,
+  "areas_added": 2,
+  "stops_added": 0,
+  "added_names": [
+   "Train Station",
+   "Walnut Street Station"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "42043": {
+  "nodes": 4,
+  "areas_added": 3,
+  "stops_added": 0,
+  "added_names": [
+   "M&H Railroad",
+   "Train Station",
+   "Walnut Street Station"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "42045": {
+  "nodes": 103,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Moylan-Rose Valley"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "42049": {
+  "nodes": 1,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "L. Ruth Express"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Erie Zoo Train Station"
+  ]
+ },
+ "42071": {
+  "nodes": 9,
+  "areas_added": 2,
+  "stops_added": 2,
+  "added_names": [
+   "Groff's Grove",
+   "M&H Railroad",
+   "Paradise",
+   "Stewartstown Station"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "42077": {
+  "nodes": 2,
+  "areas_added": 2,
+  "stops_added": 0,
+  "added_names": [
+   "WK&S Railroad",
+   "Wanamakers"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "42079": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "42091": {
+  "nodes": 165,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Race-Vine"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Colebrookdale Railroad Station"
+  ]
+ },
+ "42095": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Phillipsburg (Scenic train rides)"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "42101": {
+  "nodes": 182,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "42129": {
+  "nodes": 3,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "42133": {
+  "nodes": 6,
+  "areas_added": 3,
+  "stops_added": 1,
+  "added_names": [
+   "Hanover Junction",
+   "M&H Railroad",
+   "Stewartstown Station",
+   "Train Station"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Brillhart"
+  ]
+ },
+ "44007": {
+  "nodes": 5,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "01073": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "01089": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "01097": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "05007": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "05119": {
+  "nodes": 1,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "?"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "05143": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "10003": {
+  "nodes": 5,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Marcus Hook"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "10005": {
+  "nodes": 0,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Historic Milford Railroad Station"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "11001": {
+  "nodes": 84,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 6,
+  "dropped_names": [
+   "Dirksen",
+   "Hart",
+   "Rayburn",
+   "Russell",
+   "U.S. Capitol"
+  ]
+ },
+ "21067": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "21111": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "22033": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "22051": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "22071": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "22103": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "24003": {
+  "nodes": 22,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "24005": {
+  "nodes": 56,
+  "areas_added": 1,
+  "stops_added": 1,
+  "added_names": [
+   "Penn\u2013North",
+   "Relief Point & Division"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "24021": {
+  "nodes": 6,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "24025": {
+  "nodes": 3,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Perryville"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "24027": {
+  "nodes": 18,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "24031": {
+  "nodes": 62,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "24033": {
+  "nodes": 98,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 6,
+  "dropped_names": [
+   "Dirksen",
+   "Hart",
+   "Rayburn",
+   "Russell",
+   "U.S. Capitol"
+  ]
+ },
+ "24510": {
+  "nodes": 41,
+  "areas_added": 1,
+  "stops_added": 1,
+  "added_names": [
+   "Penn\u2013North",
+   "Relief Point & Division"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "40027": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "40109": {
+  "nodes": 3,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "40143": {
+  "nodes": 0,
+  "areas_added": 2,
+  "stops_added": 0,
+  "added_names": [
+   "?"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "45019": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "45045": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "45051": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "45063": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "45079": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "45083": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "45091": {
+  "nodes": 6,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "47037": {
+  "nodes": 5,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Tennessee Central Railway Museum"
+  ]
+ },
+ "47065": {
+  "nodes": 2,
+  "areas_added": 3,
+  "stops_added": 0,
+  "added_names": [
+   "Eagle Point",
+   "Point Park",
+   "St. Elmo's"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Grand Junction"
+  ]
+ },
+ "47093": {
+  "nodes": 0,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Three Rivers Rambler"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "47149": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Watertown"
+  ]
+ },
+ "47157": {
+  "nodes": 1,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Farm Train Station"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "47187": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "04013": {
+  "nodes": 107,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "?"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "04019": {
+  "nodes": 5,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "04021": {
+  "nodes": 57,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "16001": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "16027": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "32003": {
+  "nodes": 3,
+  "areas_added": 12,
+  "stops_added": 2,
+  "added_names": [
+   "?",
+   "C Gates",
+   "Caesar's Palace/Flamingo",
+   "Convention Center",
+   "Harrah's & The LINQ",
+   "Horseshoe/Paris Las Vegas",
+   "Las Vegas Train Depot",
+   "MGM Grand",
+   "Park MGM Tram Station",
+   "Sahara Las Vegas Monorail Station",
+   "Terminal 1",
+   "Terminal 3 - Red Line",
+   "The Crystals Tram Station",
+   "Westgate"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "32031": {
+  "nodes": 9,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "35001": {
+  "nodes": 6,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Albuquerque"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "41005": {
+  "nodes": 16,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "41039": {
+  "nodes": 0,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Eugene"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "41047": {
+  "nodes": 1,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Brooks Historical Society Depot"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "41051": {
+  "nodes": 97,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "41067": {
+  "nodes": 22,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "49011": {
+  "nodes": 29,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Wild Kingdom Train"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "49035": {
+  "nodes": 52,
+  "areas_added": 6,
+  "stops_added": 0,
+  "added_names": [
+   "Bingham Junction",
+   "Draper Town Center",
+   "Fashion Place West",
+   "Historic Gardner",
+   "Meadowbrook",
+   "Midvale Fort Union"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "49049": {
+  "nodes": 19,
+  "areas_added": 3,
+  "stops_added": 0,
+  "added_names": [
+   "Draper Town Center",
+   "Heber Valley Railroad Depot",
+   "Soldier Hollow"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "49057": {
+  "nodes": 4,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "53011": {
+  "nodes": 30,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "53033": {
+  "nodes": 38,
+  "areas_added": 21,
+  "stops_added": 1,
+  "added_names": [
+   "Angle Lake",
+   "Auburn",
+   "Columbia City",
+   "Downtown Redmond",
+   "East Main",
+   "Judkins Park",
+   "Kent",
+   "Lakewood",
+   "Marymoor Village Garage",
+   "Mercer Island",
+   "Mount Baker",
+   "Othello",
+   "Puyallup",
+   "Rainier Beach",
+   "SODO",
+   "SeaTac/Airport",
+   "South Tacoma",
+   "Stadium",
+   "Sumner",
+   "Tacoma Dome",
+   "Tukwila International Boulevard"
+  ],
+  "nodes_dropped": 2,
+  "dropped_names": [
+   "North Bend",
+   "Snoqualmie Depot"
+  ]
+ },
+ "53035": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "53053": {
+  "nodes": 4,
+  "areas_added": 9,
+  "stops_added": 1,
+  "added_names": [
+   "Angle Lake",
+   "Auburn",
+   "Kent",
+   "Lakewood",
+   "Olympia-Lacey",
+   "Puyallup",
+   "South Tacoma",
+   "Sumner",
+   "Tacoma Dome"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Elbe"
+  ]
+ },
+ "53061": {
+  "nodes": 6,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Mukilteo"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "53063": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "53067": {
+  "nodes": 1,
+  "areas_added": 5,
+  "stops_added": 0,
+  "added_names": [
+   "Lakewood",
+   "Olympia-Lacey",
+   "Puyallup",
+   "South Tacoma",
+   "Sumner"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Elbe"
+  ]
+ },
+ "53077": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06001": {
+  "nodes": 33,
+  "areas_added": 1,
+  "stops_added": 4,
+  "added_names": [
+   "?",
+   "El Cerrito Plaza",
+   "El Cerrito del Norte",
+   "Emeryville",
+   "Niles"
+  ],
+  "nodes_dropped": 2,
+  "dropped_names": [
+   "Arden",
+   "Deer Park"
+  ]
+ },
+ "06003": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06005": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06007": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06009": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06011": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06013": {
+  "nodes": 17,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06015": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06017": {
+  "nodes": 3,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "El Dorado Western Depot"
+  ]
+ },
+ "06019": {
+  "nodes": 6,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Fresno"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06021": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06023": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06025": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Yuma"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06027": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06029": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Bakersfield"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06031": {
+  "nodes": 2,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Kings/Tulare"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06033": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06035": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06039": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06041": {
+  "nodes": 6,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06043": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06045": {
+  "nodes": 7,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06047": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06049": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06051": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06053": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06055": {
+  "nodes": 7,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06057": {
+  "nodes": 6,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06061": {
+  "nodes": 4,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Rocklin"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06063": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06065": {
+  "nodes": 11,
+  "areas_added": 1,
+  "stops_added": 1,
+  "added_names": [
+   "Downtown Perris",
+   "Palm Springs Station"
+  ],
+  "nodes_dropped": 2,
+  "dropped_names": [
+   "Cottonwood Station",
+   "Pinacate Station"
+  ]
+ },
+ "06067": {
+  "nodes": 62,
+  "areas_added": 2,
+  "stops_added": 0,
+  "added_names": [
+   "7th & Railyards",
+   "Dos Rios"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Central Pacific Freight Depot"
+  ]
+ },
+ "06069": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06071": {
+  "nodes": 18,
+  "areas_added": 0,
+  "stops_added": 4,
+  "added_names": [
+   "Auto Club Speedway",
+   "Corona\u2013West",
+   "Riverside\u2013Hunter Park/UCR"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06073": {
+  "nodes": 67,
+  "areas_added": 22,
+  "stops_added": 1,
+  "added_names": [
+   "12th & Imperial Transit Center",
+   "24th Street",
+   "25th/Commercial",
+   "32nd/Commercial",
+   "5th Avenue",
+   "Beyer Boulevard",
+   "Carlsbad Village",
+   "City College",
+   "Civic Center",
+   "Clairemont Drive",
+   "Convention Center",
+   "Courthouse",
+   "Gaslamp Quarter",
+   "Guajome AGSEM Ticket Office",
+   "Iris Avenue",
+   "La Mesa Boulevard",
+   "Mission San Diego",
+   "Morena/Linda Vista",
+   "Oceanside",
+   "Park & Market",
+   "Seaport Village",
+   "Stadium",
+   "Union Grantville"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06075": {
+  "nodes": 76,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 4,
+  "dropped_names": [
+   "?"
+  ]
+ },
+ "06077": {
+  "nodes": 4,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Lodi"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06079": {
+  "nodes": 4,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06081": {
+  "nodes": 31,
+  "areas_added": 0,
+  "stops_added": 3,
+  "added_names": [
+   "Arleta",
+   "Palo Alto",
+   "Stanford"
+  ],
+  "nodes_dropped": 2,
+  "dropped_names": [
+   "?"
+  ]
+ },
+ "06083": {
+  "nodes": 9,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Santa Barbara"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Zoo Train"
+  ]
+ },
+ "06085": {
+  "nodes": 84,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06087": {
+  "nodes": 6,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06089": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06091": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06093": {
+  "nodes": 0,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "Dunsmuir"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06095": {
+  "nodes": 9,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06097": {
+  "nodes": 13,
+  "areas_added": 1,
+  "stops_added": 0,
+  "added_names": [
+   "?"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06099": {
+  "nodes": 3,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06101": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06103": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06105": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06107": {
+  "nodes": 1,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Corcoran"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06109": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06111": {
+  "nodes": 9,
+  "areas_added": 0,
+  "stops_added": 1,
+  "added_names": [
+   "Oxnard"
+  ],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ },
+ "06113": {
+  "nodes": 20,
+  "areas_added": 1,
+  "stops_added": 1,
+  "added_names": [
+   "7th & Railyards",
+   "Alkali Flat/La Valentina"
+  ],
+  "nodes_dropped": 1,
+  "dropped_names": [
+   "Central Pacific Freight Depot"
+  ]
+ },
+ "06115": {
+  "nodes": 0,
+  "areas_added": 0,
+  "stops_added": 0,
+  "added_names": [],
+  "nodes_dropped": 0,
+  "dropped_names": []
+ }
+}

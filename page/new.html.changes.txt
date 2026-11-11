@@ -1,0 +1,32 @@
+1. catalog school_bond.sources: correction item 18 (https://jesse-rothstein.com/wp-content/uploads/2024/01/cellini-ferreira-rothstein-QJE-2010.pdf)
+2. catalog ev_hub.sources: correction item 20 (https://ww2.arb.ca.gov/sites/default/files/2022-08/2022_State_SIP_Strategy.pdf)
+3. catalog affordable_housing.sources: correction item 21 (https://cityclerk.lacity.org/onlinedocs/2026/26-0025_rpt_lahd_3-20-26.pdf)
+4. catalog undergrounding.sources: correction item 22 (https://www.cpuc.ca.gov/industries-and-topics/electrical-energy/infrastructure/electric-reliability/undergrounding-program-description)
+5. catalog noise_wall.sources: correction item 23 (https://metro.legistar.com/LegislationDetail.aspx?FullText=1&GUID=8A44D134-C42E-4F97-AFDC-26E0D72EC166&ID=3864494)
+6. catalog bus_shelters.sources: correction item 18 (https://cao.lacity.gov/content/budget/budgetmemos/FY%202025-26%20All%20CAO%20Budget%20Memos.pdf)
+7. catalog foot_patrol.sources: Schwartz coefficient worded like street_lighting (unverified caveat)
+8. catalog violence_interruption.sources: Schwartz coefficient worded like street_lighting (unverified caveat)
+9. catalog bid.sources: Schwartz coefficient worded like street_lighting (unverified caveat)
+10. upgrades 'Add a full bathroom': cost 60,000 -> 63,595, value 75,000 -> 36,603 (JLC/Zonda Cost vs Value 2025, Los Angeles, midrange)
+11. bundle-oc replaced with the round-4 build (Anaheim street-site survey, tax-rate-area shares in m.e, GTFS 8 Nov 2026-13 Feb 2027, verified OC funding and fees)
+12. EIFD calculator: block groups weighted by e.w (market value) when no roll value (Orange County)
+13. EIFD text: Policy 3.106 sentence corrected (16 Jul 2025 revision); Orange County shows its own 2019 County policy
+14. EIFD calculator: Orange County pledge note shows the County's 50% cap
+15. EIFD calculator: Orange County split cites the Auditor's Section 99 report and BOE TRA map
+16. EIFD calculator: Orange County base-value note explains why the 55% estimate is used
+17. EIFD calculator: Orange County policy checks (city >= County, County cap 50%, 20 years)
+18. EIFD register: removed 'no Orange County EIFD was found' (Placentia EIFD, 2019, verified)
+19. EIFD calculator: Orange County note (County policy, Placentia EIFD) shown above the LA register
+20. EIFD register: helper for the Orange County note
+21. Funding plan: Orange County named unincorporated communities count as unincorporated
+22. EIFD calculator: Orange County named unincorporated communities count as unincorporated
+23. Funding plan: Orange County uses verified OC programmes (oc_funding) instead of LA County programmes
+24. Funding plan: Orange County helpers (programmes, M2 Local Fair Share per city, verified city fees)
+25. Funding plan: carry project id and county flag
+26. Project card: Orange County shows verified OC funding, process and city fees instead of LA programmes
+27. OC agency wording: OCTA's programme is 'Measure M2 Local Fair Share' (not 'local return')
+28. Per-house: 'Add a full bathroom' value from JLC/Zonda 2025 LA ($36,603) instead of 10% of home value
+29. ADU cost model comment: removed the unfound 'Argon' attribution
+30. Second-story cost model comment: removed the unfound 'Argon' attribution
+31. Cost analysis card: visible note that construction costs are unverified model estimates
+32. Per-house checklist: 'Add a bathroom' no longer claims 'strong resale ROI' (JLC 2025 LA: 57.6% recouped)
