@@ -302,7 +302,7 @@ def sources_table(M):
         ["City 311 requests", "requests about dumping, graffiti, litter and encampments (used for cleanup projects)", ("No " + NM + " city publishes an open 311 export (checked Nov 2026); projects not scored" if region.FIPS == "06059" else "Not connected for " + NM + " yet; projects not scored"), False],
         ["Assessor parcels / sales", "parcel zoning, underused land, recorded sales at block-group level", ("Not loaded (OCGIS parcels carry no value or sale fields); per-house lookups still query OCGIS live" if region.FIPS == "06059" else
                                                                                                           f"Not loaded for {NM}; the EIFD calculator estimates the assessed base as 55% of market value" if CA else f"Not loaded for {NM}"), False],
-        (["City street-tree inventories", "open planting sites (street sites only)", f"Anaheim inventory ({', '.join(f"{c['city']}: {c['vacant_sites']:,} open street sites" for c in st.get('cities', []))}; {_count(st.get('block_groups', 0), 'block group')}); elsewhere open sites are estimated from block-group area (about 68 plus 0.11 per acre, halved where the canopy gap is under 10 points; the fit used for Los Angeles County)", True]
+        (["City street-tree inventories", "open planting sites (street sites only)", f"Anaheim inventory ({', '.join(str(c['city']) + ': ' + format(c['vacant_sites'], ',d') + ' open street sites' for c in st.get('cities', []))}; {_count(st.get('block_groups', 0), 'block group')}); elsewhere open sites are estimated from block-group area (about 68 plus 0.11 per acre, halved where the canopy gap is under 10 points; the fit used for Los Angeles County)", True]
          if st.get("block_groups") else
          ["Street-tree survey", "open planting sites", f"No street-tree inventory connected for {NM}; open sites estimated from block-group area (about 68 plus 0.11 per acre, halved where the canopy gap is under 10 points; the fit used for Los Angeles County)", False]),
         (["Tax-rate areas (BOE 2026) + Auditor Section 99 factors FY 2026-27", "County and city share of property-tax increment per block group, for the EIFD calculator", f"Loaded ({_count(ta.get('block_groups', 0), 'block group')})", True]
@@ -431,8 +431,16 @@ def main():
         EV_WHAT = "The nearest public charging station mapped in OpenStreetMap (no fast-charger list here)"
     LY = json.load(open(os.path.join(DATA, "layers.json")))
     bg = json.load(open(os.path.join(DATA, "bg.geojson")))
-    la_det = json.load(open(os.path.join(LA, "details.json"))); la_b = json.load(open(os.path.join(LA, "bundle.json")))
+    def _load_la(base):
+        p = os.path.join(LA, base + ".json")
+        if os.path.exists(p): return json.load(open(p))
+        pgz = os.path.join(LA, base + ".json.gz")
+        if os.path.exists(pgz): return json.load(gzip.open(pgz, "rt"))
+        raise FileNotFoundError(f"Neither {p} nor {pgz} found")
+    la_det = _load_la("details"); la_b = _load_la("bundle")
     cat = la_b["catalog"]
+    cat.update(engine.CATALOG_EXTENSIONS)
+    la_b.setdefault("funding", {}).update(engine.FUNDING_EXTENSIONS)
     # ---- percentile pools across LA + OC ----
     KEYS = ["ht", "vc", "pcr", "pa", "pn", "bt", "gro", "din", "ten", "dog", "pool", "ev", "fw", "tg", "nocar", "inc", "yb", "pop"]
     pool_lists = {k: [v["m"][k] for v in la_det.values() if v["m"].get(k) is not None] + [m[k] for m in metrics.values() if m.get(k) is not None] for k in KEYS}
@@ -519,10 +527,12 @@ def main():
             c = cat.get(fix, {})
             steps.append({"gap": gk, "share": round(n / P["bgs"], 2), "parts": n, "why": why, "fix": fix, "name": re.sub(r"\s*\([^()]*\)$", "", c.get("name", fix)) if r else c.get("name", fix), "kind": c.get("kind", "qol"), "bg": gid, "near": None,
                           "cost": r[3] if r else None, "value": r[7] if r else None, "vpd": r[8] if r else None, "project": r[1] if r else None, "funding": (c.get("funding") or [None])[0]})
-        steps.sort(key=lambda s: (-(s["vpd"] or 0), -(s["share"])))   # round 8.6: by return, then by how many parts share the gap (the LA build's order, as the page says)
-        costed = [s for s in steps if s["cost"] is not None]   # round 8.6: a step with no cost is never put first as the cheapest
-        if len(steps) > 1 and costed:
-            cheap = min(costed, key=lambda s: s["cost"]); steps.remove(cheap); steps.insert(0, cheap)
+        steps.sort(key=lambda s: (-(s["vpd"] or 0), -(s["share"])))   # rank by return (VPD), then neighborhood gap share
+        costed = [s for s in steps if s["cost"] is not None and s["cost"] > 0]
+        if costed:
+            cheap = min(costed, key=lambda s: s["cost"])
+            for s in steps:
+                s["quick_win"] = (s == cheap)
         plans[key] = {"homes": int(P["homes"]), "bgs": P["bgs"], "steps": steps, "strong": [[k, labels.get(k, k)] for k, n in P["strong"].most_common(3)], "ctx": [],
                       "peer_note": ("Compared with the 50 most similar block groups across LA and Orange County for each part of the neighborhood." if region.FIPS == "06059" else "Compared with the 50 most similar block groups across LA County and " + ("the District of Columbia" if region.NAME == "District of Columbia" else region.NAME) + " for each part of the neighborhood.")}
         hv_tot = sum((metrics[g]["hv"] or 0) * metrics[g]["homes"] for g in metrics if f"{metrics[g]['n']}|{metrics[g]['c']}" == key)

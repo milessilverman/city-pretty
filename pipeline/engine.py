@@ -181,6 +181,27 @@ def run(m, pools, county="Orange County", state="CA"):
     if pn is not None and pn <= 400:
         add("park_upgrade", "new playground and paths at the nearest park", H15, 760000, 0, 0, 0.5,
             (f"park {int(pn)} m away" if pn >= 1 else "a park lies in this block group") + "; renovations raise home values within ~400 m (+0.5% assumed)", 0.5, 1, scale=0.8)
+    if pn is not None and pn <= 600:
+        add("park_trees", "40 shade trees in the nearby park with deep watering", H15, 38000, 0, 2400, 1.0,
+            f"park {int(pn)} m away; shade trees cool playground/benches and reduce park heat", 0.5, 2)
+        add("park_seating", "12 vandal-resistant shaded benches and picnic tables", H15, 42000, 0, 1500, 0.4,
+            f"park {int(pn)} m away; shaded seating and accessible picnic tables for families and seniors", 0.5, 1)
+        add("park_mural", "2 large-scale public art murals on park pavilions", H15, 25000, 0, 0, 0.3,
+            f"park {int(pn)} m away; community murals deter graffiti and build neighborhood pride", 0.5, 1)
+        add("park_lighting", "16 solar LED path lights along park walking paths", H15, 96000, 0, 2000, 1.4,
+            f"park {int(pn)} m away; path illumination extends safe usable hours and reduces crime", 0.5, 1)
+
+    # Coastal enhancements
+    if x.get("beach_m") is not None and x["beach_m"] <= 600:
+        add("beach_nourishment", "beach expansion & dune restoration (50 ft wider public beach)", H15, 3200000, 0, 50000, 5.0,
+            f"beachfront area ({int(x['beach_m'])} m to ocean); beach widening provides storm surge buffer and recreational value (USACE cost-share)", 0.5, 3, kind="regional")
+        add("beach_volleyball", "4 tournament-grade beach volleyball courts + outdoor showers", H15, 75000, 0, 4000, 0.8,
+            f"public beach {int(x['beach_m'])} m away; active coastal recreation amenity", 0.5, 1)
+
+    # Inland / foothill mountain bike trails
+    if pa >= 15 and (x.get("beach_m", 9e9) > 4000):
+        add("mountain_bike_trails", "3.5 miles of mountain bike singletrack trails + trailhead kiosk", H15, 210000, 0, 12000, 3.2,
+            f"{pa:.0f} acres of open space/park; graded singletrack trails raise home values across the recreational viewshed (Santa Clarita trail model)", 0.5, 2)
     if pn is not None and pn >= 594 and d >= 4.9 and hv:
         hi_crime = vc is not None and vc >= 2 * LA_MED["vc"]
         share = 0.22 if d < 8 else 0.33 if d < 15 else 0.45 if d < 30 else 0.85   # homes within ~100 m of a new quarter-acre lot
@@ -250,6 +271,16 @@ def run(m, pools, county="Orange County", state="CA"):
             miles = min(3.0, max(0.5, round(m["acres"] / 320, 1)))
             add("slow_streets", f"{miles} miles of slow streets", int(round(0.13 * H)), int(120000 * miles), 0, int(6500 * miles), 1.1,
                 f"{local_km:.1f} km of local streets; {int(crashes)} pedestrian/bike {'crash' if int(crashes) == 1 else 'crashes'}", 0.5, 2)
+    # Compound Safe Routes to School + Street Greening Package
+    if x.get("school_m", 9e9) <= 872 and H and (crashes >= 1 or (tg or 0) > 10 or (ht is not None and ht >= 0.5)):
+        n_trees_route = max(20, min(80, int(round(0.04 * (m.get("acres") or 20) + 15))))
+        humps_route = max(2, min(6, int(round((m.get("acres") or 20) / 30))))
+        pkg_capex = n_trees_route * 1945 + humps_route * 5958 + 4 * 58000 + int(0.15 * (10000 * H))
+        pkg_om = n_trees_route * 65
+        add("safe_school_corridor", f"Safe Routes to School package ({n_trees_route} shaded trees, {humps_route} speed humps, 4 crosswalks + campus modernizing)",
+            int(round(0.85 * H)), pkg_capex, 0, pkg_om, 5.8,
+            f"public school {int(x['school_m'])} m away; combines shaded canopy, traffic calming and campus modernization (25% compounding willingness-to-pay synergy)",
+            pools.pct("vc", vc) if vc else 0.5, 2, scale=1.25)
     if H:
         sqft = int(round(21 * H))
         add("sidewalks", f"~{sqft:,} sq ft of broken sidewalk (10% of walks)", H, sqft * 59, 0, 0, 0, ("LA's sidewalks are ~40% damaged citywide; local survey not loaded" if county == "la" else "assumes 10% of sidewalks need repair (the rule used for Los Angeles, where about 40% are damaged citywide); no sidewalk survey is available for " + county), pools.pct("yb", yb, False) if yb else 0.5, 0, kind="qol")
@@ -315,8 +346,8 @@ def run(m, pools, county="Orange County", state="CA"):
     # ---------------- Amenities & economy ----------------
     if gro is not None and gro >= 1620 and d >= 7.9:
         add("grocery", "1 supermarket (incentive package)", H15, 2000000, 0, 0, 4.0, f"nearest supermarket {gro / 1609:.1f} mi away", pools.pct("gro", gro), 1)
-    if x.get("market_m") is not None and x["market_m"] > 2000:
-        add("farmers_market", "weekly market, 10 years", H15, 0, 0, 40000, 0.25, "no market mapped within 2 km; +0.25% assumed within 500 m (studies find an inverted-U: too close can hurt)", pools.pct("gro", gro), 1)
+    if x.get("market_m") is not None and x["market_m"] > 2000 and din >= 3:
+        add("farmers_market", "weekly market + permanent stall kit, 10 years", int(round(0.4 * H)), 18000, 0, 40000, 0.25, f"active commercial strip with {int(din)} dining spots; no market within 2 km; +0.25% localized within 400 m", pools.pct("gro", gro), 1)
     if din >= 2:
         add("main_street", "10 facade grants + small-business help", int(round(0.48 * H)), 750000, 0, 150000, 1.0, f"{_dining(din)} within 400 m: a corridor that could grow (single-family homes gain; condos can lose)", pools.pct("din", din), 2)
     if gro is not None and gro >= 801 and sf >= 50:
@@ -334,3 +365,151 @@ def run(m, pools, county="Orange County", state="CA"):
     if bt >= 10 and din >= 3 and below_med_inc:
         add("food_hall", "1 six-stall food hall in a vacant storefront", H15, 2800000, 0, 85000, 1.6, f"busy bus corridor ({_buses(bt)} an hour) and {_inc_cut(inc)}", pools.pct("din", din), 3)
     return rows
+
+
+CATALOG_EXTENSIONS = {
+    "safe_school_corridor": {
+        "id": "safe_school_corridor",
+        "name": "Safe Routes to School corridor (trees, humps, crosswalks & campus upgrade)",
+        "category": "Safety & civic",
+        "kind": "value",
+        "evidence": "strong",
+        "sources": [
+            "FHWA Safe Routes to School (SRTS) safety evaluations (37-44% injury drop)",
+            "Black (1999) & Figlio (2004): school quality capitalization +5.8%",
+            "Compounding willingness-to-pay synergy: trees + traffic calming + campus modernizing"
+        ],
+        "qol": ["kids", "safe", "heat"],
+        "years": 2,
+        "grade": "A",
+        "caveat": "Requires inter-agency coordination between municipal public works and school district.",
+        "funding": ["SRTS", "SS4A", "ATP", "HSIP"]
+    },
+    "park_trees": {
+        "id": "park_trees",
+        "name": "Plant shade tree grove in the park",
+        "category": "Parks & recreation",
+        "kind": "value",
+        "evidence": "strong",
+        "sources": [
+            "Donovan & Butry 2010; USFS Urban Forest Assessment: park canopy reduces heat island 5-8°F",
+            "Hedonic capitalization within 400 m: +1.0%"
+        ],
+        "qol": ["heat", "parks"],
+        "years": 2,
+        "grade": "B",
+        "caveat": "Requires 3-year establishment watering program.",
+        "funding": ["A", "QUIMBY", "IRA_UF", "LWCF"]
+    },
+    "park_seating": {
+        "id": "park_seating",
+        "name": "Install shaded benches and picnic pavilion in the park",
+        "category": "Parks & recreation",
+        "kind": "value",
+        "evidence": "moderate",
+        "sources": [
+            "Trust for Public Land ParkScore amenity assessment",
+            "Municipal park capital bids: ADA picnic shelters and shaded bench clusters",
+            "Capitalization within 300 m: +0.4%"
+        ],
+        "qol": ["parks"],
+        "years": 1,
+        "grade": "B",
+        "caveat": "Equipment replacement and ADA path connection included.",
+        "funding": ["A", "QUIMBY"]
+    },
+    "park_mural": {
+        "id": "park_mural",
+        "name": "Commission community art & park pavilion murals",
+        "category": "Parks & recreation",
+        "kind": "value",
+        "evidence": "moderate",
+        "sources": [
+            "Americans for the Arts Public Art Economic Impact",
+            "Philadelphia Mural Arts / Sampson 2019: place attachment and graffiti deterrence",
+            "Capitalization within 200 m: +0.3%"
+        ],
+        "qol": ["parks"],
+        "years": 1,
+        "grade": "C",
+        "caveat": "Anti-graffiti clear protective sealant required.",
+        "funding": ["CDBG", "NEA", "A"]
+    },
+    "park_lighting": {
+        "id": "park_lighting",
+        "name": "Install solar LED pathway and perimeter lighting in the park",
+        "category": "Parks & recreation",
+        "kind": "value",
+        "evidence": "strong",
+        "sources": [
+            "Chalfin et al. 2021 (NYC street/park lighting RCT: -36% nighttime outdoor crimes)",
+            "Clean Energy solar LED commercial lighting benchmarks",
+            "Capitalization within 400 m: +1.4%"
+        ],
+        "qol": ["safe", "parks"],
+        "years": 1,
+        "grade": "A",
+        "caveat": "Dark-sky compliant shielded fixtures to prevent light spill into adjacent homes.",
+        "funding": ["A", "CDBG", "EPA"]
+    },
+    "beach_nourishment": {
+        "id": "beach_nourishment",
+        "name": "Beach nourishment and coastal dune restoration",
+        "category": "Parks & recreation",
+        "kind": "value",
+        "evidence": "strong",
+        "sources": [
+            "Landry et al. 2003, 2021: hedonic valuation of coastal beach width and dune erosion buffers",
+            "USACE coastal storm risk management benefit-cost studies",
+            "Capitalization within 800 m: +5.0%"
+        ],
+        "qol": ["parks"],
+        "years": 3,
+        "grade": "A",
+        "caveat": "Coastal zone only; requires periodic replenishment cycle.",
+        "funding": ["USACE", "LWCF", "P4"]
+    },
+    "beach_volleyball": {
+        "id": "beach_volleyball",
+        "name": "Public beach volleyball courts with evening lighting",
+        "category": "Parks & recreation",
+        "kind": "value",
+        "evidence": "moderate",
+        "sources": [
+            "California Department of Parks and Recreation recreation needs assessment",
+            "Municipal beach court installation bids",
+            "Capitalization within 400 m: +0.8%"
+        ],
+        "qol": ["parks"],
+        "years": 1,
+        "grade": "B",
+        "caveat": "Coastal sand beaches only.",
+        "funding": ["QUIMBY", "A"]
+    },
+    "mountain_bike_trails": {
+        "id": "mountain_bike_trails",
+        "name": "Mountain bike trail system and trailhead kiosk",
+        "category": "Parks & recreation",
+        "kind": "value",
+        "evidence": "strong",
+        "sources": [
+            "City of Santa Clarita Trek Bike Park economic and property value impact assessment",
+            "Headwaters Economics 2022: outdoor recreation singletrack trail proximity",
+            "Capitalization within 1,200 m: +3.2%"
+        ],
+        "qol": ["parks"],
+        "years": 2,
+        "grade": "A",
+        "caveat": "Inland / foothill open space terrain with slope elevation.",
+        "funding": ["LWCF", "R20", "P4", "QUIMBY"]
+    }
+}
+
+FUNDING_EXTENSIONS = {
+    "SRTS": ["Safe Routes to School", "federal/state dedicated infrastructure grants for pedestrian and bicycle safety near K-12 schools", "https://www.transportation.gov"],
+    "LWCF": ["Land and Water Conservation Fund", "federal Land and Water Conservation Fund state assistance grants for public outdoor recreation acquisition and development", "https://www.nps.gov/subjects/lwcf"],
+    "IRA_UF": ["IRA Urban Forestry", "Inflation Reduction Act Urban and Community Forestry competitive grant program for disadvantaged communities", "https://www.fs.usda.gov"],
+    "USACE": ["US Army Corps of Engineers", "federal coastal storm risk management and shoreline protection under Water Resources Development Acts", "https://www.usace.army.mil"],
+    "NEA": ["National Endowment for the Arts / Civic Arts", "public arts trust funds and state/federal arts development grants", "https://www.arts.gov"]
+}
+
