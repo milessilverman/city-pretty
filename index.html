@@ -5970,7 +5970,12 @@ var activeCounty = "la"; // "la" or "oc" ("oc" = any non-LA county bundle; which
 // ---------------- Multi-county support (round 6): any county bundle built by the national pipeline
 var COUNTY_BUNDLES = {};          // fips -> unpacked bundle (Orange County is stored here too once unpacked)
 const ORANGE_FIPS = "06059";
-function activeFips() { if (typeof selected !== "undefined" && selected && selected.length >= 5 && selected.slice(0, 5) !== "06037") return selected.slice(0, 5); return activeCounty === "oc" && D_OC ? ((D_OC.meta && D_OC.meta.fips) || ORANGE_FIPS) : "06037"; }
+function activeFips() {
+  if (activeCounty === "la") return "06037";
+  if (activeCounty === "oc" && D_OC && D_OC.meta && D_OC.meta.fips) return D_OC.meta.fips;
+  if (typeof selected !== "undefined" && selected && selected.length >= 5) return selected.slice(0, 5);
+  return "06037";
+}
 function isOrangeActive() { return activeCounty === "oc" && activeFips() === ORANGE_FIPS; }
 const STATE_FULL = { AL: "Alabama", AK: "Alaska", AZ: "Arizona", AR: "Arkansas", CA: "California", CO: "Colorado", CT: "Connecticut", DE: "Delaware", DC: "District of Columbia",
   FL: "Florida", GA: "Georgia", HI: "Hawaii", ID: "Idaho", IL: "Illinois", IN: "Indiana", IA: "Iowa", KS: "Kansas", KY: "Kentucky", LA: "Louisiana", ME: "Maine", MD: "Maryland",
@@ -6072,55 +6077,52 @@ function syncAttribution() {
 }
 async function openCounty(fips, wantBgId) {
   if (fips === "06037") return switchCounty("la", wantBgId);
-  let B = COUNTY_BUNDLES[fips];
-  if (!B && fips === ORANGE_FIPS) {
-    if (!D_OC && window.ocReady) await window.ocReady;
-    B = D_OC;
-  }
-  if (!B) {
-    if (typeof showToast === "function") showToast("Loading county…");
-    try {
+  try {
+    let B = COUNTY_BUNDLES[fips];
+    if (!B && fips === ORANGE_FIPS) {
+      if (!D_OC && window.ocReady) await window.ocReady;
+      B = D_OC;
+    }
+    if (!B) {
+      if (typeof showToast === "function") showToast("Loading county…");
       B = await loadCountyBundle(fips);
-    } catch (err) {
-      console.error("County load failed:", err);
-      if (typeof showToast === "function") showToast("Could not load county: " + (err.message || "network error"));
-      const sel = document.getElementById("county-more");
-      if (sel) sel.value = isOrangeActive() ? "" : (activeFips() === "06037" ? "" : activeFips());
-      return;
     }
-  }
-  if (D_OC !== B) {
-    if (ocLayer && typeof map !== "undefined" && map && map.hasLayer(ocLayer)) map.removeLayer(ocLayer);
-    ocLayer = null; D_OC = B; if (typeof window !== "undefined") window.D_OC = D_OC;
-  }
-  if (B && B.features) {
-    for (const f of B.features) {
-      if (f.properties && f.properties.id) byId.set(f.properties.id, f);
+    if (!B) throw new Error("County bundle not found");
+    if (D_OC !== B) {
+      if (ocLayer && typeof map !== "undefined" && map && map.hasLayer(ocLayer)) map.removeLayer(ocLayer);
+      ocLayer = null; D_OC = B; if (typeof window !== "undefined") window.D_OC = D_OC;
     }
+    if (B && B.features) {
+      for (const f of B.features) {
+        if (f.properties && f.properties.id) byId.set(f.properties.id, f);
+      }
+    }
+    if (B && B.details && D && D.details) {
+      Object.assign(D.details, B.details);
+    }
+    if (B && B.plans && D && D.plans) {
+      Object.assign(D.plans, B.plans);
+    }
+    switchCounty("oc", wantBgId);
+    if (typeof _ctxGeom !== "undefined") _ctxGeom.clear();
+    if (typeof _fDrawn !== "undefined" && _fDrawn.clear) _fDrawn.clear();
+    if (typeof _drawn !== "undefined" && _drawn.clear) _drawn.clear();
+    if (typeof _cellCache !== "undefined" && _cellCache.clear) _cellCache.clear();
+    if (layers.fac && layers.fac.clearLayers) layers.fac.clearLayers();
+    if (layers.facArea && layers.facArea.clearLayers) layers.facArea.clearLayers();
+    if (layers.amen && map.hasLayer(layers.amen)) { map.removeLayer(layers.amen); layers.amen = null; }
+    if (layers._lazy) delete layers._lazy.amen;
+    if (typeof drawContext === "function") drawContext();
+    if (typeof drawFacilities === "function") drawFacilities();
+    if (typeof drawAmenities === "function") drawAmenities();
+    if (typeof drawZoning === "function") drawZoning();
+    if (typeof scheduleNatLots === "function") scheduleNatLots();
+  } catch (err) {
+    console.error("County load failed:", err);
+    if (typeof showToast === "function") showToast("Could not load county: " + (err.message || "network error"));
+    const sel = document.getElementById("county-more");
+    if (sel) sel.value = isOrangeActive() ? "" : (activeFips() === "06037" ? "" : activeFips());
   }
-  if (B && B.details && D && D.details) {
-    Object.assign(D.details, B.details);
-  }
-  if (B && B.plans && D && D.plans) {
-    Object.assign(D.plans, B.plans);
-  }
-  if (B && B.search && typeof names !== "undefined") {
-    for (const [k, v] of Object.entries(B.search)) names.set(k, v);
-  }
-  switchCounty("oc", wantBgId);
-  if (typeof _ctxGeom !== "undefined") _ctxGeom.clear();
-  if (typeof _fDrawn !== "undefined" && _fDrawn.clear) _fDrawn.clear();
-  if (typeof _drawn !== "undefined" && _drawn.clear) _drawn.clear();
-  if (typeof _cellCache !== "undefined" && _cellCache.clear) _cellCache.clear();
-  if (layers.fac && layers.fac.clearLayers) layers.fac.clearLayers();
-  if (layers.facArea && layers.facArea.clearLayers) layers.facArea.clearLayers();
-  if (layers.amen && map.hasLayer(layers.amen)) { map.removeLayer(layers.amen); layers.amen = null; }
-  if (layers._lazy) delete layers._lazy.amen;
-  if (typeof drawContext === "function") drawContext();
-  if (typeof drawFacilities === "function") drawFacilities();
-  if (typeof drawAmenities === "function") drawAmenities();
-  if (typeof drawZoning === "function") drawZoning();
-  if (typeof scheduleNatLots === "function") scheduleNatLots();
 }
 if (typeof window !== "undefined") {
   window.D_OC = D_OC;
