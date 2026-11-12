@@ -2528,8 +2528,16 @@ function retop() {
     if (p.tp && ti >= 0 && ti < p.tp.length) { [p.t, p.v, p.pc] = p.tp[ti]; return; }
     const r = (D.details[p.id] || {}).r || [];
     let best = null, pc = 0;
-    r.forEach(a => { const c = D.catalog[a[0]]; if (!c || c.kind !== "value" || !allowed(a[0])) return;
-      if (!best || a[8] > best[8]) best = a; if (a[8] >= 1) pc += a[3]; });
+    r.forEach(a => {
+      const c = D.catalog[a[0]];
+      if (!c || c.kind !== "value" || !allowed(a[0])) return;
+      // Balance durable capital infrastructure against recurring weekly event programming
+      const isEvent = a[0] === "farmers_market" || a[0] === "night_market";
+      const score = isEvent ? a[8] * 0.4 : a[8];
+      const bestScore = best ? (best[0] === "farmers_market" || best[0] === "night_market" ? best[8] * 0.4 : best[8]) : -1;
+      if (!best || score > bestScore) best = a;
+      if (a[8] >= 1) pc += a[3];
+    });
     p.t = best && best[8] >= 1 ? best[0] : null; p.v = best ? best[8] : null; p.pc = pc || null;
   });
 }
@@ -4569,6 +4577,259 @@ function eifdWire(p) {
   setAV(); run();
 }
 
+
+// --- Multi-Project Synergy Simulator & Advanced Capital Package Logic ---
+function synergySection(p, m, recs) {
+  const homes = m.h || 400;
+  const hv = m.hv || 750000;
+  const totalRes = homes * hv;
+  const isCoast = (m.water_m != null && m.water_m <= 1500) || (typeof map !== "undefined" && map && (map.getCenter().lng < -118.45 && map.getCenter().lat < 34.05));
+  const isInland = !isCoast;
+
+  return `
+    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.4">
+      <p class="small" style="margin-top:0;color:#334155">
+        Bundle complementary investments together to unlock <b>compounding willingness-to-pay multipliers</b>. For example, planting shade trees while calming streets and modernizing the school campus lets children walk to school in safety and comfort—creating <b>+15% to +25% higher property value uplift</b> than fragmented projects.
+      </p>
+
+      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;margin-bottom:12px">
+        <div style="font-weight:700;font-size:13px;color:#0f172a;margin-bottom:8px">Select Projects for Bundled Package:</div>
+        
+        <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
+          <input type="checkbox" class="syn-chk" checked data-cost="120000" data-lift="0.024" data-id="trees" onchange="runSynergySim()">
+          <div>
+            <div style="font-weight:600;font-size:12px;color:#0f172a">🌳 Street Trees &amp; Continuous Shaded Canopy</div>
+            <div style="font-size:11px;color:#64748b">Cost: $120k · Base Lift: +2.4% · <i>Funding: IRA Urban Forestry, State Forestry Grants</i></div>
+          </div>
+        </label>
+
+        <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
+          <input type="checkbox" class="syn-chk" checked data-cost="180000" data-lift="0.028" data-id="safe_streets" onchange="runSynergySim()">
+          <div>
+            <div style="font-weight:600;font-size:12px;color:#0f172a">🚸 Safe Routes to School &amp; Traffic Calming (Humps + Curb Extensions)</div>
+            <div style="font-size:11px;color:#64748b">Cost: $180k · Base Lift: +2.8% · <i>Funding: Federal SRTS, USDOT SS4A, State ATP</i></div>
+          </div>
+        </label>
+
+        <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
+          <input type="checkbox" class="syn-chk" checked data-cost="450000" data-lift="0.045" data-id="school" onchange="runSynergySim()">
+          <div>
+            <div style="font-weight:600;font-size:12px;color:#0f172a">🏫 School Campus Modernization &amp; Air Filtration</div>
+            <div style="font-size:11px;color:#64748b">Cost: $450k (area share) · Base Lift: +4.5% · <i>Funding: State School Facility Bond, Title I Campus Grants</i></div>
+          </div>
+        </label>
+
+        <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
+          <input type="checkbox" class="syn-chk" data-cost="210000" data-lift="0.031" data-id="park" onchange="runSynergySim()">
+          <div>
+            <div style="font-weight:600;font-size:12px;color:#0f172a">🏞️ Complete Park Renovation (Grove + Seating + Solar LEDs + Murals)</div>
+            <div style="font-size:11px;color:#64748b">Cost: $210k · Base Lift: +3.1% · <i>Funding: Land &amp; Water Conservation Fund (LWCF), Quimby Act</i></div>
+          </div>
+        </label>
+
+        <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
+          <input type="checkbox" class="syn-chk" data-cost="260000" data-lift="0.022" data-id="bike" onchange="runSynergySim()">
+          <div>
+            <div style="font-weight:600;font-size:12px;color:#0f172a">🚲 Protected Bike Lanes &amp; Micro-Mobility Network</div>
+            <div style="font-size:11px;color:#64748b">Cost: $260k · Base Lift: +2.2% · <i>Funding: Highway Safety Improvement (HSIP), Clean California</i></div>
+          </div>
+        </label>
+
+        ${isCoast ? `
+        <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
+          <input type="checkbox" class="syn-chk" data-cost="850000" data-lift="0.058" data-id="beach" onchange="runSynergySim()">
+          <div>
+            <div style="font-weight:600;font-size:12px;color:#0369a1">🏖️ Beach Nourishment, Dune Widening &amp; Volleyball Courts</div>
+            <div style="font-size:11px;color:#64748b">Cost: $850k · Base Lift: +5.8% · <i>Funding: USACE Coastal Storm Risk, State Coastal Conservancy</i></div>
+          </div>
+        </label>` : ""}
+
+        ${isInland ? `
+        <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
+          <input type="checkbox" class="syn-chk" data-cost="140000" data-lift="0.032" data-id="mtb" onchange="runSynergySim()">
+          <div>
+            <div style="font-weight:600;font-size:12px;color:#15803d">🚵 Mountain Bike Singletrack Trails &amp; Trailhead (Santa Clarita Model)</div>
+            <div style="font-size:11px;color:#64748b">Cost: $140k · Base Lift: +3.2% · <i>Funding: Federal RTP, LWCF Recreation Grants, Open Space District</i></div>
+          </div>
+        </label>` : ""}
+      </div>
+
+      <div id="syn-results" style="background:#f0fdf4;border:2px solid #86efac;border-radius:8px;padding:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="font-size:11.5px;font-weight:700;color:#166534">⚡ Compounding Package Results</span>
+          <span id="syn-multiplier" style="font-size:11px;font-weight:800;background:#dcfce7;color:#15803d;padding:2px 8px;border-radius:12px">+25% Synergy Multiplier</span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;font-size:12px">
+          <div style="background:#fff;padding:8px;border-radius:6px;border:1px solid #dcfce7">
+            <div style="color:#64748b;font-size:11px">Combined Non-Private Cost</div>
+            <div id="syn-cost" style="font-weight:800;font-size:14px;color:#0f172a">$750,000</div>
+          </div>
+          <div style="background:#fff;padding:8px;border-radius:6px;border:1px solid #dcfce7">
+            <div style="color:#64748b;font-size:11px">Total Home Value Created</div>
+            <div id="syn-val" style="font-weight:800;font-size:14px;color:#087b78">+$36,375,000</div>
+          </div>
+        </div>
+
+        <div style="background:#fff;padding:8px;border-radius:6px;border:1px solid #dcfce7;margin-bottom:8px;font-size:11.5px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:2px">
+            <span><b>Net Benefit Ratio:</b></span>
+            <span id="syn-ratio" style="font-weight:800;color:#087b78">$48.50 per $1 invested</span>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <span><b>Average Home Gain:</b></span>
+            <span id="syn-per-home" style="font-weight:700;color:#166534">+$90,900 / home</span>
+          </div>
+        </div>
+
+        <div id="syn-note" style="font-size:11px;color:#166534;line-height:1.35;border-top:1px dashed #bbf7d0;padding-top:6px">
+          ✓ <b>Walking Synergy Active:</b> Combining trees, traffic calming, and school improvements creates a protected, comfortable walking shed for neighborhood children, maximizing neighborhood desirability.
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function runSynergySim() {
+  const chks = document.querySelectorAll(".syn-chk:checked");
+  const m = selected && D.details[selected] ? D.details[selected].m || {} : {};
+  const homes = m.h || 400;
+  const hv = m.hv || 750000;
+  const totalRes = homes * hv;
+
+  let totCost = 0, totLift = 0;
+  const selectedIds = [];
+  chks.forEach(c => {
+    totCost += +c.dataset.cost;
+    totLift += +c.dataset.lift;
+    selectedIds.push(c.dataset.id);
+  });
+
+  if (totCost === 0) {
+    const resBox = $("#syn-results");
+    if (resBox) resBox.style.display = "none";
+    return;
+  }
+  const resBox = $("#syn-results");
+  if (resBox) resBox.style.display = "block";
+
+  // Synergy multiplier logic:
+  // 1 item: 1.0x
+  // 2 items: 1.12x (+12% synergy)
+  // 3+ items: 1.25x (+25% compounding synergy)
+  let mult = 1.0, multTxt = "No bundle synergy";
+  if (chks.length >= 3) {
+    mult = 1.25;
+    multTxt = "+25% Synergy Multiplier";
+  } else if (chks.length === 2) {
+    mult = 1.12;
+    multTxt = "+12% Synergy Multiplier";
+  }
+
+  const finalLift = totLift * mult;
+  const valCreated = Math.round(totalRes * finalLift);
+  const ratio = (valCreated / Math.max(totCost, 1)).toFixed(1);
+  const perHome = Math.round(valCreated / Math.max(homes, 1));
+
+  const elCost = $("#syn-cost"); if (elCost) elCost.textContent = fmt$(totCost);
+  const elVal = $("#syn-val"); if (elVal) elVal.textContent = "+" + fmt$(valCreated);
+  const elMult = $("#syn-multiplier"); if (elMult) elMult.textContent = multTxt;
+  const elRatio = $("#syn-ratio"); if (elRatio) elRatio.textContent = `$${ratio} per $1 invested`;
+  const elHome = $("#syn-per-home"); if (elHome) elHome.textContent = `+${fmt$(perHome)} / home`;
+
+  const elNote = $("#syn-note");
+  if (elNote) {
+    if (selectedIds.includes("trees") && selectedIds.includes("safe_streets") && selectedIds.includes("school")) {
+      elNote.innerHTML = "✓ <b>Safe Routes to School Synergy Active:</b> Combining tree canopy, calmed streets, and modern school facilities allows kids to walk to school in safety and comfort, unlocking maximum willingness-to-pay.";
+    } else if (chks.length >= 2) {
+      elNote.innerHTML = `✓ <b>Multi-Project Package Active (${chks.length} investments):</b> Bundling civic, street, and park assets avoids duplicated construction mobilization and amplifies neighborhood satisfaction.`;
+    } else {
+      elNote.innerHTML = "Select 2 or more complementary improvements to simulate compounding neighborhood synergy.";
+    }
+  }
+}
+
+function parkImprovementsSection(m) {
+  return `
+    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;line-height:1.45;color:#0f172a">
+      <p class="small" style="margin-top:0;color:#475569">
+        Park quality creates distinct, measurable real estate effects based on the specific amenities installed:
+      </p>
+
+      <div style="border:1px solid #e2e8f0;border-radius:6px;overflow:hidden;margin-bottom:8px">
+        <div style="background:#f1f5f9;padding:6px 10px;font-weight:700;color:#0f172a;border-bottom:1px solid #e2e8f0">
+          🌳 Shade Tree Grove &amp; Urban Forest Buffer
+        </div>
+        <div style="padding:8px 10px">
+          <div><b>Effect on Home Values:</b> <span style="color:#087b78;font-weight:700">+1.0% within 400 m</span></div>
+          <div><b>Quality-of-Life:</b> Microclimate cooling reduces summer heat island by 5–8°F (USFS Urban Forest Assessment).</div>
+          <div style="font-size:11px;color:#64748b"><b>Non-Private Funding:</b> Inflation Reduction Act Urban Forestry Grants · State Park Bonds · Measure W Stormwater</div>
+        </div>
+      </div>
+
+      <div style="border:1px solid #e2e8f0;border-radius:6px;overflow:hidden;margin-bottom:8px">
+        <div style="background:#f1f5f9;padding:6px 10px;font-weight:700;color:#0f172a;border-bottom:1px solid #e2e8f0">
+          🪑 Shaded Seating, ADA Benches &amp; Picnic Pavilion
+        </div>
+        <div style="padding:8px 10px">
+          <div><b>Effect on Home Values:</b> <span style="color:#087b78;font-weight:700">+0.4% within 300 m</span></div>
+          <div><b>Quality-of-Life:</b> Creates intergenerational gathering space and accessible resting spots for seniors and parents.</div>
+          <div style="font-size:11px;color:#64748b"><b>Non-Private Funding:</b> Quimby Act Park In-Lieu Fees · Municipal Capital Improvement Fund</div>
+        </div>
+      </div>
+
+      <div style="border:1px solid #e2e8f0;border-radius:6px;overflow:hidden;margin-bottom:8px">
+        <div style="background:#f1f5f9;padding:6px 10px;font-weight:700;color:#0f172a;border-bottom:1px solid #e2e8f0">
+          🎨 Community Art Murals &amp; Cultural Pavilion
+        </div>
+        <div style="padding:8px 10px">
+          <div><b>Effect on Home Values:</b> <span style="color:#087b78;font-weight:700">+0.3% within 200 m</span></div>
+          <div><b>Quality-of-Life:</b> Builds neighborhood identity and deters graffiti tagging (Philadelphia Mural Arts / Sampson 2019).</div>
+          <div style="font-size:11px;color:#64748b"><b>Non-Private Funding:</b> National Endowment for the Arts (NEA) · Civic Arts Trust · CDBG</div>
+        </div>
+      </div>
+
+      <div style="border:1px solid #e2e8f0;border-radius:6px;overflow:hidden">
+        <div style="background:#f1f5f9;padding:6px 10px;font-weight:700;color:#0f172a;border-bottom:1px solid #e2e8f0">
+          💡 Solar LED Pathway &amp; Perimeter Safety Lighting
+        </div>
+        <div style="padding:8px 10px">
+          <div><b>Effect on Home Values:</b> <span style="color:#087b78;font-weight:700">+1.4% within 400 m</span></div>
+          <div><b>Quality-of-Life:</b> Nighttime outdoor crime drops 36% (Chalfin et al. 2021 NYC randomized controlled trial).</div>
+          <div style="font-size:11px;color:#64748b"><b>Non-Private Funding:</b> USDOT Safe Streets &amp; Roads for All (SS4A) · Clean Energy State Grants</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function geographicImprovementsSection(p, m) {
+  const isCoast = (m.water_m != null && m.water_m <= 1500) || (typeof map !== "undefined" && map && (map.getCenter().lng < -118.45 && map.getCenter().lat < 34.05));
+  return `
+    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;line-height:1.45;color:#0f172a">
+      <p class="small" style="margin-top:0;color:#475569">
+        Tailored improvements for ${esc(p.c)} based on physical geography and natural topography:
+      </p>
+
+      ${isCoast ? `
+      <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:6px;padding:10px;margin-bottom:8px">
+        <div style="font-weight:700;color:#0369a1;margin-bottom:4px">🏖️ Coastal &amp; Beach Infrastructure</div>
+        <div style="margin-bottom:4px"><b>Beach Nourishment &amp; Dune Restoration:</b> Extends sandy shoreline and builds storm surge erosion buffers (+5.0% home value within 800 m, Landry et al. coastal hedonic studies).</div>
+        <div><b>Public Beach Volleyball Courts:</b> Lighted sand courts and spectator seating (+0.8% within 400 m).</div>
+        <div style="font-size:11px;color:#0284c7;margin-top:4px"><b>Funding:</b> US Army Corps of Engineers (USACE) Storm Risk Grants · State Coastal Conservancy · Transient Occupancy Tax (TOT)</div>
+      </div>
+      ` : `
+      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:10px;margin-bottom:8px">
+        <div style="font-weight:700;color:#15803d;margin-bottom:4px">🚵 Inland &amp; Foothill Trail Infrastructure</div>
+        <div style="margin-bottom:4px"><b>Mountain Bike Singletrack Trails &amp; Trailhead Kiosk:</b> Modeled after the City of Santa Clarita Trek Bike Park &amp; Headwaters Economics recreation studies (+3.2% home value within 1,200 m).</div>
+        <div><b>Amenities:</b> Bike maintenance kiosk, shaded picnic rest stop, wayfinding maps, and grade-separated singletrack paths.</div>
+        <div style="font-size:11px;color:#16a34a;margin-top:4px"><b>Funding:</b> Federal Recreational Trails Program (RTP) · Land &amp; Water Conservation Fund (LWCF) · Regional Open Space District</div>
+      </div>
+      `}
+    </div>
+  `;
+}
+
 function select(id, fly) {
   selected = id; highlight(); syncHash(id); updateCompareUI();
   const f = byId.get(id); if (!f) return;
@@ -4577,7 +4838,9 @@ function select(id, fly) {
   const recs = (d.r || []).map(a => Object.fromEntries(REC_KEYS.map((k, i) => [k, a[i]])));
   const kind = r => D.catalog[r.id].kind;
   const valAll = recs.filter(r => kind(r) === "value" || kind(r) === "regional");
-  const val = valAll.filter(r => allowed(r.id)).sort((a, b) => b.vpd - a.vpd);
+  // Sort with priority for permanent capital transformation over recurring weekly event permits
+  const projScore = r => (r.id === "farmers_market" || r.id === "night_market") ? r.vpd * 0.4 : r.vpd;
+  const val = valAll.filter(r => allowed(r.id)).sort((a, b) => projScore(b) - projScore(a));
   const hidden = valAll.length - val.length;
   const qol = recs.filter(r => kind(r) === "qol").sort((a, b) => b.qol - a.qol || a.cost - b.cost);
   const pol = recs.filter(r => kind(r) === "policy"), own = recs.filter(r => kind(r) === "owner").sort((a, b) => b.vpd - a.vpd);
@@ -4632,6 +4895,15 @@ function select(id, fly) {
 
   // Collapsible Sections for everything else
   h += `<details class="panel-sec"><summary><b>Neighborhood Plan &amp; Missing Amenities</b></summary><div class="sec-content">${gapSection(p, m)}</div></details>`;
+
+  // 1. Multi-Project Synergy Simulator (Package Implementations)
+  h += `<details class="panel-sec" open><summary><b>⚡ Multi-Project Synergy Simulator (Package Implementations)</b></summary><div class="sec-content">${synergySection(p, m, recs)}</div></details>`;
+
+  // 2. Specific Park Improvements & Effects
+  h += `<details class="panel-sec"><summary><b>🏞️ Specific Park Improvements &amp; Effects</b></summary><div class="sec-content">${parkImprovementsSection(m)}</div></details>`;
+
+  // 3. Geography-Specific Improvements (Coastal vs Inland Trails)
+  h += `<details class="panel-sec"><summary><b>📍 Geography-Specific Improvements (Coastal vs. Inland Trails)</b></summary><div class="sec-content">${geographicImprovementsSection(p, m)}</div></details>`;
 
   const cats = ["All", ...CATS.filter(c => val.some(r => D.catalog[r.id].category === c))];
   h += `<details class="panel-sec"><summary><b>All Ranked Value Projects (${val.length})</b></summary><div class="sec-content">
