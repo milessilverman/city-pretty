@@ -1,0 +1,7462 @@
+{
+ "built": "2026-11-08",
+ "counties": [
+  {
+   "fips": "01003",
+   "name": "Baldwin County",
+   "state": "AL",
+   "block_groups": 118,
+   "bundle_mb": 1.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "01015",
+   "name": "Calhoun County",
+   "state": "AL",
+   "block_groups": 107,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "01055",
+   "name": "Etowah County",
+   "state": "AL",
+   "block_groups": 90,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "01069",
+   "name": "Houston County",
+   "state": "AL",
+   "block_groups": 73,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "01073",
+   "name": "Jefferson County",
+   "state": "AL",
+   "block_groups": 583,
+   "bundle_mb": 2.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "01081",
+   "name": "Lee County",
+   "state": "AL",
+   "block_groups": 129,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "01083",
+   "name": "Limestone County",
+   "state": "AL",
+   "block_groups": 52,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "01089",
+   "name": "Madison County",
+   "state": "AL",
+   "block_groups": 245,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "01095",
+   "name": "Marshall County",
+   "state": "AL",
+   "block_groups": 74,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "01097",
+   "name": "Mobile County",
+   "state": "AL",
+   "block_groups": 334,
+   "bundle_mb": 1.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "01101",
+   "name": "Montgomery County",
+   "state": "AL",
+   "block_groups": 203,
+   "bundle_mb": 0.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "01103",
+   "name": "Morgan County",
+   "state": "AL",
+   "block_groups": 88,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "01117",
+   "name": "Shelby County",
+   "state": "AL",
+   "block_groups": 137,
+   "bundle_mb": 1.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "01125",
+   "name": "Tuscaloosa County",
+   "state": "AL",
+   "block_groups": 150,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "04003",
+   "name": "Cochise County",
+   "state": "AZ",
+   "block_groups": 105,
+   "bundle_mb": 1.0,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "04005",
+   "name": "Coconino County",
+   "state": "AZ",
+   "block_groups": 114,
+   "bundle_mb": 8.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "04013",
+   "name": "Maricopa County",
+   "state": "AZ",
+   "block_groups": 2806,
+   "bundle_mb": 9.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "04015",
+   "name": "Mohave County",
+   "state": "AZ",
+   "block_groups": 166,
+   "bundle_mb": 6.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "04017",
+   "name": "Navajo County",
+   "state": "AZ",
+   "block_groups": 91,
+   "bundle_mb": 1.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "04019",
+   "name": "Pima County",
+   "state": "AZ",
+   "block_groups": 720,
+   "bundle_mb": 4.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "04021",
+   "name": "Pinal County",
+   "state": "AZ",
+   "block_groups": 227,
+   "bundle_mb": 4.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "04025",
+   "name": "Yavapai County",
+   "state": "AZ",
+   "block_groups": 175,
+   "bundle_mb": 4.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "04027",
+   "name": "Yuma County",
+   "state": "AZ",
+   "block_groups": 165,
+   "bundle_mb": 0.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "05007",
+   "name": "Benton County",
+   "state": "AR",
+   "block_groups": 153,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "05031",
+   "name": "Craighead County",
+   "state": "AR",
+   "block_groups": 77,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "05045",
+   "name": "Faulkner County",
+   "state": "AR",
+   "block_groups": 74,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "05051",
+   "name": "Garland County",
+   "state": "AR",
+   "block_groups": 83,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "05119",
+   "name": "Pulaski County",
+   "state": "AR",
+   "block_groups": 287,
+   "bundle_mb": 1.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "05125",
+   "name": "Saline County",
+   "state": "AR",
+   "block_groups": 70,
+   "bundle_mb": 1.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "05131",
+   "name": "Sebastian County",
+   "state": "AR",
+   "block_groups": 104,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "05143",
+   "name": "Washington County",
+   "state": "AR",
+   "block_groups": 149,
+   "bundle_mb": 1.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "06001",
+   "name": "Alameda County",
+   "state": "CA",
+   "block_groups": 1134,
+   "bundle_mb": 3.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06003",
+   "name": "Alpine County",
+   "state": "CA",
+   "block_groups": 1,
+   "bundle_mb": 0.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06005",
+   "name": "Amador County",
+   "state": "CA",
+   "block_groups": 30,
+   "bundle_mb": 0.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:50Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06007",
+   "name": "Butte County",
+   "state": "CA",
+   "block_groups": 200,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06009",
+   "name": "Calaveras County",
+   "state": "CA",
+   "block_groups": 36,
+   "bundle_mb": 0.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06011",
+   "name": "Colusa County",
+   "state": "CA",
+   "block_groups": 20,
+   "bundle_mb": 0.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06013",
+   "name": "Contra Costa County",
+   "state": "CA",
+   "block_groups": 708,
+   "bundle_mb": 2.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06015",
+   "name": "Del Norte County",
+   "state": "CA",
+   "block_groups": 19,
+   "bundle_mb": 1.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06017",
+   "name": "El Dorado County",
+   "state": "CA",
+   "block_groups": 154,
+   "bundle_mb": 1.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06019",
+   "name": "Fresno County",
+   "state": "CA",
+   "block_groups": 637,
+   "bundle_mb": 5.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06021",
+   "name": "Glenn County",
+   "state": "CA",
+   "block_groups": 27,
+   "bundle_mb": 0.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06023",
+   "name": "Humboldt County",
+   "state": "CA",
+   "block_groups": 115,
+   "bundle_mb": 2.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:50Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06025",
+   "name": "Imperial County",
+   "state": "CA",
+   "block_groups": 114,
+   "bundle_mb": 0.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:50Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06027",
+   "name": "Inyo County",
+   "state": "CA",
+   "block_groups": 16,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06029",
+   "name": "Kern County",
+   "state": "CA",
+   "block_groups": 600,
+   "bundle_mb": 4.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06031",
+   "name": "Kings County",
+   "state": "CA",
+   "block_groups": 84,
+   "bundle_mb": 0.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06033",
+   "name": "Lake County",
+   "state": "CA",
+   "block_groups": 59,
+   "bundle_mb": 0.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:05Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06035",
+   "name": "Lassen County",
+   "state": "CA",
+   "block_groups": 24,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06039",
+   "name": "Madera County",
+   "state": "CA",
+   "block_groups": 98,
+   "bundle_mb": 2.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06041",
+   "name": "Marin County",
+   "state": "CA",
+   "block_groups": 181,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06043",
+   "name": "Mariposa County",
+   "state": "CA",
+   "block_groups": 17,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06045",
+   "name": "Mendocino County",
+   "state": "CA",
+   "block_groups": 86,
+   "bundle_mb": 1.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06047",
+   "name": "Merced County",
+   "state": "CA",
+   "block_groups": 164,
+   "bundle_mb": 1.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:50Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06049",
+   "name": "Modoc County",
+   "state": "CA",
+   "block_groups": 11,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:50Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06051",
+   "name": "Mono County",
+   "state": "CA",
+   "block_groups": 16,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06053",
+   "name": "Monterey County",
+   "state": "CA",
+   "block_groups": 272,
+   "bundle_mb": 2.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:05Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06055",
+   "name": "Napa County",
+   "state": "CA",
+   "block_groups": 108,
+   "bundle_mb": 0.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06057",
+   "name": "Nevada County",
+   "state": "CA",
+   "block_groups": 80,
+   "bundle_mb": 1.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:50Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06061",
+   "name": "Placer County",
+   "state": "CA",
+   "block_groups": 253,
+   "bundle_mb": 1.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06063",
+   "name": "Plumas County",
+   "state": "CA",
+   "block_groups": 22,
+   "bundle_mb": 3.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06065",
+   "name": "Riverside County",
+   "state": "CA",
+   "block_groups": 1394,
+   "bundle_mb": 4.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:50Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06067",
+   "name": "Sacramento County",
+   "state": "CA",
+   "block_groups": 1024,
+   "bundle_mb": 2.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06069",
+   "name": "San Benito County",
+   "state": "CA",
+   "block_groups": 46,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:05Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06071",
+   "name": "San Bernardino County",
+   "state": "CA",
+   "block_groups": 1275,
+   "bundle_mb": 4.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06073",
+   "name": "San Diego County",
+   "state": "CA",
+   "block_groups": 2058,
+   "bundle_mb": 6.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:05Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06075",
+   "name": "San Francisco County",
+   "state": "CA",
+   "block_groups": 681,
+   "bundle_mb": 1.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": "San Francisco injury crashes (DataSF)",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06077",
+   "name": "San Joaquin County",
+   "state": "CA",
+   "block_groups": 501,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06079",
+   "name": "San Luis Obispo County",
+   "state": "CA",
+   "block_groups": 181,
+   "bundle_mb": 2.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:50Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06081",
+   "name": "San Mateo County",
+   "state": "CA",
+   "block_groups": 500,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:50Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06083",
+   "name": "Santa Barbara County",
+   "state": "CA",
+   "block_groups": 315,
+   "bundle_mb": 1.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06085",
+   "name": "Santa Clara County",
+   "state": "CA",
+   "block_groups": 1173,
+   "bundle_mb": 4.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:50Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06087",
+   "name": "Santa Cruz County",
+   "state": "CA",
+   "block_groups": 150,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06089",
+   "name": "Shasta County",
+   "state": "CA",
+   "block_groups": 133,
+   "bundle_mb": 3.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06091",
+   "name": "Sierra County",
+   "state": "CA",
+   "block_groups": 5,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06093",
+   "name": "Siskiyou County",
+   "state": "CA",
+   "block_groups": 45,
+   "bundle_mb": 3.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06095",
+   "name": "Solano County",
+   "state": "CA",
+   "block_groups": 298,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06097",
+   "name": "Sonoma County",
+   "state": "CA",
+   "block_groups": 404,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06099",
+   "name": "Stanislaus County",
+   "state": "CA",
+   "block_groups": 340,
+   "bundle_mb": 1.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06101",
+   "name": "Sutter County",
+   "state": "CA",
+   "block_groups": 69,
+   "bundle_mb": 0.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06103",
+   "name": "Tehama County",
+   "state": "CA",
+   "block_groups": 45,
+   "bundle_mb": 2.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06105",
+   "name": "Trinity County",
+   "state": "CA",
+   "block_groups": 12,
+   "bundle_mb": 2.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:50Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06107",
+   "name": "Tulare County",
+   "state": "CA",
+   "block_groups": 305,
+   "bundle_mb": 2.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:50Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06109",
+   "name": "Tuolumne County",
+   "state": "CA",
+   "block_groups": 55,
+   "bundle_mb": 1.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06111",
+   "name": "Ventura County",
+   "state": "CA",
+   "block_groups": 479,
+   "bundle_mb": 2.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:52:00Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06113",
+   "name": "Yolo County",
+   "state": "CA",
+   "block_groups": 137,
+   "bundle_mb": 0.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:51:06Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "06115",
+   "name": "Yuba County",
+   "state": "CA",
+   "block_groups": 56,
+   "bundle_mb": 0.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:49:50Z",
+   "crash_source": null,
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "08001",
+   "name": "Adams County",
+   "state": "CO",
+   "block_groups": 312,
+   "bundle_mb": 1.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:48:04Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "08005",
+   "name": "Arapahoe County",
+   "state": "CO",
+   "block_groups": 439,
+   "bundle_mb": 2.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:48:04Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "08013",
+   "name": "Boulder County",
+   "state": "CO",
+   "block_groups": 228,
+   "bundle_mb": 1.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:48:04Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "08031",
+   "name": "Denver County",
+   "state": "CO",
+   "block_groups": 571,
+   "bundle_mb": 2.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-05T00:46:07Z",
+   "crash_source": "Denver Police traffic accidents",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "08035",
+   "name": "Douglas County",
+   "state": "CO",
+   "block_groups": 198,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:48:04Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "08041",
+   "name": "El Paso County",
+   "state": "CO",
+   "block_groups": 465,
+   "bundle_mb": 1.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:48:04Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "08059",
+   "name": "Jefferson County",
+   "state": "CO",
+   "block_groups": 430,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:48:04Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "08069",
+   "name": "Larimer County",
+   "state": "CO",
+   "block_groups": 243,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:48:04Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "08077",
+   "name": "Mesa County",
+   "state": "CO",
+   "block_groups": 101,
+   "bundle_mb": 3.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:48:04Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "08101",
+   "name": "Pueblo County",
+   "state": "CO",
+   "block_groups": 153,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:48:04Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "08123",
+   "name": "Weld County",
+   "state": "CO",
+   "block_groups": 198,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:48:04Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "09110",
+   "name": "Capitol Planning Region",
+   "state": "CT",
+   "block_groups": 731,
+   "bundle_mb": 3.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "09120",
+   "name": "Greater Bridgeport Planning Region",
+   "state": "CT",
+   "block_groups": 235,
+   "bundle_mb": 1.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "09130",
+   "name": "Lower Connecticut River Valley Planning Region",
+   "state": "CT",
+   "block_groups": 137,
+   "bundle_mb": 1.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "09140",
+   "name": "Naugatuck Valley Planning Region",
+   "state": "CT",
+   "block_groups": 319,
+   "bundle_mb": 2.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "09160",
+   "name": "Northwest Hills Planning Region",
+   "state": "CT",
+   "block_groups": 114,
+   "bundle_mb": 1.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "09170",
+   "name": "South Central Connecticut Planning Region",
+   "state": "CT",
+   "block_groups": 436,
+   "bundle_mb": 2.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "09180",
+   "name": "Southeastern Connecticut Planning Region",
+   "state": "CT",
+   "block_groups": 225,
+   "bundle_mb": 2.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "09190",
+   "name": "Western Connecticut Planning Region",
+   "state": "CT",
+   "block_groups": 437,
+   "bundle_mb": 3.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "10001",
+   "name": "Kent County",
+   "state": "DE",
+   "block_groups": 102,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "10003",
+   "name": "New Castle County",
+   "state": "DE",
+   "block_groups": 412,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "10005",
+   "name": "Sussex County",
+   "state": "DE",
+   "block_groups": 192,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "11001",
+   "name": "District of Columbia",
+   "state": "DC",
+   "block_groups": 571,
+   "bundle_mb": 2.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12001",
+   "name": "Alachua County",
+   "state": "FL",
+   "block_groups": 160,
+   "bundle_mb": 0.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:42:54Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12005",
+   "name": "Bay County",
+   "state": "FL",
+   "block_groups": 117,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12009",
+   "name": "Brevard County",
+   "state": "FL",
+   "block_groups": 383,
+   "bundle_mb": 1.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12011",
+   "name": "Broward County",
+   "state": "FL",
+   "block_groups": 1121,
+   "bundle_mb": 2.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:42:54Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12015",
+   "name": "Charlotte County",
+   "state": "FL",
+   "block_groups": 121,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12017",
+   "name": "Citrus County",
+   "state": "FL",
+   "block_groups": 102,
+   "bundle_mb": 1.2,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12019",
+   "name": "Clay County",
+   "state": "FL",
+   "block_groups": 111,
+   "bundle_mb": 0.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12021",
+   "name": "Collier County",
+   "state": "FL",
+   "block_groups": 268,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12031",
+   "name": "Duval County",
+   "state": "FL",
+   "block_groups": 582,
+   "bundle_mb": 2.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12033",
+   "name": "Escambia County",
+   "state": "FL",
+   "block_groups": 199,
+   "bundle_mb": 1.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12035",
+   "name": "Flagler County",
+   "state": "FL",
+   "block_groups": 60,
+   "bundle_mb": 0.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12053",
+   "name": "Hernando County",
+   "state": "FL",
+   "block_groups": 114,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12055",
+   "name": "Highlands County",
+   "state": "FL",
+   "block_groups": 85,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12057",
+   "name": "Hillsborough County",
+   "state": "FL",
+   "block_groups": 914,
+   "bundle_mb": 3.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12061",
+   "name": "Indian River County",
+   "state": "FL",
+   "block_groups": 108,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:42:54Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12069",
+   "name": "Lake County",
+   "state": "FL",
+   "block_groups": 180,
+   "bundle_mb": 2.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12071",
+   "name": "Lee County",
+   "state": "FL",
+   "block_groups": 579,
+   "bundle_mb": 2.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12073",
+   "name": "Leon County",
+   "state": "FL",
+   "block_groups": 206,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:42:54Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12081",
+   "name": "Manatee County",
+   "state": "FL",
+   "block_groups": 260,
+   "bundle_mb": 1.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12083",
+   "name": "Marion County",
+   "state": "FL",
+   "block_groups": 231,
+   "bundle_mb": 1.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:42:54Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12085",
+   "name": "Martin County",
+   "state": "FL",
+   "block_groups": 93,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:42:54Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12086",
+   "name": "Miami-Dade County",
+   "state": "FL",
+   "block_groups": 1843,
+   "bundle_mb": 3.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12091",
+   "name": "Okaloosa County",
+   "state": "FL",
+   "block_groups": 128,
+   "bundle_mb": 0.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12095",
+   "name": "Orange County",
+   "state": "FL",
+   "block_groups": 673,
+   "bundle_mb": 3.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12097",
+   "name": "Osceola County",
+   "state": "FL",
+   "block_groups": 139,
+   "bundle_mb": 1.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12099",
+   "name": "Palm Beach County",
+   "state": "FL",
+   "block_groups": 982,
+   "bundle_mb": 2.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:42:54Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12101",
+   "name": "Pasco County",
+   "state": "FL",
+   "block_groups": 303,
+   "bundle_mb": 1.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12103",
+   "name": "Pinellas County",
+   "state": "FL",
+   "block_groups": 737,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12105",
+   "name": "Polk County",
+   "state": "FL",
+   "block_groups": 415,
+   "bundle_mb": 1.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12109",
+   "name": "St. Johns County",
+   "state": "FL",
+   "block_groups": 130,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12111",
+   "name": "St. Lucie County",
+   "state": "FL",
+   "block_groups": 198,
+   "bundle_mb": 0.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:42:54Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12113",
+   "name": "Santa Rosa County",
+   "state": "FL",
+   "block_groups": 97,
+   "bundle_mb": 1.1,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12115",
+   "name": "Sarasota County",
+   "state": "FL",
+   "block_groups": 308,
+   "bundle_mb": 1.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12117",
+   "name": "Seminole County",
+   "state": "FL",
+   "block_groups": 243,
+   "bundle_mb": 1.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12119",
+   "name": "Sumter County",
+   "state": "FL",
+   "block_groups": 67,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:42:54Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "12127",
+   "name": "Volusia County",
+   "state": "FL",
+   "block_groups": 343,
+   "bundle_mb": 2.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13015",
+   "name": "Bartow County",
+   "state": "GA",
+   "block_groups": 75,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13021",
+   "name": "Bibb County",
+   "state": "GA",
+   "block_groups": 136,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:42:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13045",
+   "name": "Carroll County",
+   "state": "GA",
+   "block_groups": 77,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13051",
+   "name": "Chatham County",
+   "state": "GA",
+   "block_groups": 246,
+   "bundle_mb": 1.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:42:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13057",
+   "name": "Cherokee County",
+   "state": "GA",
+   "block_groups": 141,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13059",
+   "name": "Clarke County",
+   "state": "GA",
+   "block_groups": 87,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:42:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13063",
+   "name": "Clayton County",
+   "state": "GA",
+   "block_groups": 192,
+   "bundle_mb": 0.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13067",
+   "name": "Cobb County",
+   "state": "GA",
+   "block_groups": 513,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13073",
+   "name": "Columbia County",
+   "state": "GA",
+   "block_groups": 82,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:42:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13077",
+   "name": "Coweta County",
+   "state": "GA",
+   "block_groups": 75,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13089",
+   "name": "DeKalb County",
+   "state": "GA",
+   "block_groups": 536,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:42:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13097",
+   "name": "Douglas County",
+   "state": "GA",
+   "block_groups": 87,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13113",
+   "name": "Fayette County",
+   "state": "GA",
+   "block_groups": 67,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13115",
+   "name": "Floyd County",
+   "state": "GA",
+   "block_groups": 75,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13117",
+   "name": "Forsyth County",
+   "state": "GA",
+   "block_groups": 111,
+   "bundle_mb": 0.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:42:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13121",
+   "name": "Fulton County",
+   "state": "GA",
+   "block_groups": 858,
+   "bundle_mb": 3.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:42:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13135",
+   "name": "Gwinnett County",
+   "state": "GA",
+   "block_groups": 559,
+   "bundle_mb": 2.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:42:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13139",
+   "name": "Hall County",
+   "state": "GA",
+   "block_groups": 114,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:42:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13151",
+   "name": "Henry County",
+   "state": "GA",
+   "block_groups": 135,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13153",
+   "name": "Houston County",
+   "state": "GA",
+   "block_groups": 108,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:42:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13185",
+   "name": "Lowndes County",
+   "state": "GA",
+   "block_groups": 81,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:42:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13215",
+   "name": "Muscogee County",
+   "state": "GA",
+   "block_groups": 136,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:42:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13217",
+   "name": "Newton County",
+   "state": "GA",
+   "block_groups": 63,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:42:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13223",
+   "name": "Paulding County",
+   "state": "GA",
+   "block_groups": 89,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13245",
+   "name": "Richmond County",
+   "state": "GA",
+   "block_groups": 157,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:42:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13297",
+   "name": "Walton County",
+   "state": "GA",
+   "block_groups": 52,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:42:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "13313",
+   "name": "Whitfield County",
+   "state": "GA",
+   "block_groups": 77,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "16001",
+   "name": "Ada County",
+   "state": "ID",
+   "block_groups": 330,
+   "bundle_mb": 1.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "16019",
+   "name": "Bonneville County",
+   "state": "ID",
+   "block_groups": 77,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "16027",
+   "name": "Canyon County",
+   "state": "ID",
+   "block_groups": 133,
+   "bundle_mb": 0.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "16055",
+   "name": "Kootenai County",
+   "state": "ID",
+   "block_groups": 100,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "17019",
+   "name": "Champaign County",
+   "state": "IL",
+   "block_groups": 158,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17031",
+   "name": "Cook County",
+   "state": "IL",
+   "block_groups": 4002,
+   "bundle_mb": 7.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17037",
+   "name": "DeKalb County",
+   "state": "IL",
+   "block_groups": 66,
+   "bundle_mb": 0.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17043",
+   "name": "DuPage County",
+   "state": "IL",
+   "block_groups": 621,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17089",
+   "name": "Kane County",
+   "state": "IL",
+   "block_groups": 325,
+   "bundle_mb": 1.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17091",
+   "name": "Kankakee County",
+   "state": "IL",
+   "block_groups": 85,
+   "bundle_mb": 0.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17093",
+   "name": "Kendall County",
+   "state": "IL",
+   "block_groups": 65,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17097",
+   "name": "Lake County",
+   "state": "IL",
+   "block_groups": 425,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17099",
+   "name": "LaSalle County",
+   "state": "IL",
+   "block_groups": 102,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17111",
+   "name": "McHenry County",
+   "state": "IL",
+   "block_groups": 194,
+   "bundle_mb": 0.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17113",
+   "name": "McLean County",
+   "state": "IL",
+   "block_groups": 119,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17115",
+   "name": "Macon County",
+   "state": "IL",
+   "block_groups": 105,
+   "bundle_mb": 0.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17119",
+   "name": "Madison County",
+   "state": "IL",
+   "block_groups": 191,
+   "bundle_mb": 1.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17143",
+   "name": "Peoria County",
+   "state": "IL",
+   "block_groups": 148,
+   "bundle_mb": 1.1,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17161",
+   "name": "Rock Island County",
+   "state": "IL",
+   "block_groups": 117,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17163",
+   "name": "St. Clair County",
+   "state": "IL",
+   "block_groups": 198,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17167",
+   "name": "Sangamon County",
+   "state": "IL",
+   "block_groups": 182,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17179",
+   "name": "Tazewell County",
+   "state": "IL",
+   "block_groups": 90,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17197",
+   "name": "Will County",
+   "state": "IL",
+   "block_groups": 447,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "17201",
+   "name": "Winnebago County",
+   "state": "IL",
+   "block_groups": 260,
+   "bundle_mb": 0.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": "Illinois DOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "18003",
+   "name": "Allen County",
+   "state": "IN",
+   "block_groups": 276,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "18019",
+   "name": "Clark County",
+   "state": "IN",
+   "block_groups": 98,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "18035",
+   "name": "Delaware County",
+   "state": "IN",
+   "block_groups": 105,
+   "bundle_mb": 0.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "18039",
+   "name": "Elkhart County",
+   "state": "IN",
+   "block_groups": 148,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "18057",
+   "name": "Hamilton County",
+   "state": "IN",
+   "block_groups": 169,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "18063",
+   "name": "Hendricks County",
+   "state": "IN",
+   "block_groups": 102,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "18081",
+   "name": "Johnson County",
+   "state": "IN",
+   "block_groups": 86,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "18089",
+   "name": "Lake County",
+   "state": "IN",
+   "block_groups": 398,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "18091",
+   "name": "LaPorte County",
+   "state": "IN",
+   "block_groups": 86,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "18095",
+   "name": "Madison County",
+   "state": "IN",
+   "block_groups": 111,
+   "bundle_mb": 0.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "18097",
+   "name": "Marion County",
+   "state": "IN",
+   "block_groups": 759,
+   "bundle_mb": 2.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "18105",
+   "name": "Monroe County",
+   "state": "IN",
+   "block_groups": 99,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "18127",
+   "name": "Porter County",
+   "state": "IN",
+   "block_groups": 107,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "18141",
+   "name": "St. Joseph County",
+   "state": "IN",
+   "block_groups": 237,
+   "bundle_mb": 0.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "18157",
+   "name": "Tippecanoe County",
+   "state": "IN",
+   "block_groups": 122,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "18163",
+   "name": "Vanderburgh County",
+   "state": "IN",
+   "block_groups": 159,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "18167",
+   "name": "Vigo County",
+   "state": "IN",
+   "block_groups": 95,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "19013",
+   "name": "Black Hawk County",
+   "state": "IA",
+   "block_groups": 103,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "19049",
+   "name": "Dallas County",
+   "state": "IA",
+   "block_groups": 42,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "19103",
+   "name": "Johnson County",
+   "state": "IA",
+   "block_groups": 95,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "19113",
+   "name": "Linn County",
+   "state": "IA",
+   "block_groups": 162,
+   "bundle_mb": 0.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "19153",
+   "name": "Polk County",
+   "state": "IA",
+   "block_groups": 336,
+   "bundle_mb": 1.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "19163",
+   "name": "Scott County",
+   "state": "IA",
+   "block_groups": 132,
+   "bundle_mb": 1.1,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "19169",
+   "name": "Story County",
+   "state": "IA",
+   "block_groups": 75,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "19193",
+   "name": "Woodbury County",
+   "state": "IA",
+   "block_groups": 108,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "20045",
+   "name": "Douglas County",
+   "state": "KS",
+   "block_groups": 73,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "20091",
+   "name": "Johnson County",
+   "state": "KS",
+   "block_groups": 462,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "20173",
+   "name": "Sedgwick County",
+   "state": "KS",
+   "block_groups": 406,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "20177",
+   "name": "Shawnee County",
+   "state": "KS",
+   "block_groups": 141,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "20209",
+   "name": "Wyandotte County",
+   "state": "KS",
+   "block_groups": 165,
+   "bundle_mb": 1.0,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "21015",
+   "name": "Boone County",
+   "state": "KY",
+   "block_groups": 77,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "21059",
+   "name": "Daviess County",
+   "state": "KY",
+   "block_groups": 78,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "21067",
+   "name": "Fayette County",
+   "state": "KY",
+   "block_groups": 213,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "21093",
+   "name": "Hardin County",
+   "state": "KY",
+   "block_groups": 82,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "21111",
+   "name": "Jefferson County",
+   "state": "KY",
+   "block_groups": 646,
+   "bundle_mb": 1.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "21117",
+   "name": "Kenton County",
+   "state": "KY",
+   "block_groups": 117,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "21227",
+   "name": "Warren County",
+   "state": "KY",
+   "block_groups": 84,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "22005",
+   "name": "Ascension Parish",
+   "state": "LA",
+   "block_groups": 77,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "22015",
+   "name": "Bossier Parish",
+   "state": "LA",
+   "block_groups": 86,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "22017",
+   "name": "Caddo Parish",
+   "state": "LA",
+   "block_groups": 216,
+   "bundle_mb": 1.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "22019",
+   "name": "Calcasieu Parish",
+   "state": "LA",
+   "block_groups": 162,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "22033",
+   "name": "East Baton Rouge Parish",
+   "state": "LA",
+   "block_groups": 324,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "22051",
+   "name": "Jefferson Parish",
+   "state": "LA",
+   "block_groups": 328,
+   "bundle_mb": 1.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "22055",
+   "name": "Lafayette Parish",
+   "state": "LA",
+   "block_groups": 353,
+   "bundle_mb": 0.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "22063",
+   "name": "Livingston Parish",
+   "state": "LA",
+   "block_groups": 84,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "22071",
+   "name": "Orleans Parish",
+   "state": "LA",
+   "block_groups": 440,
+   "bundle_mb": 1.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "22073",
+   "name": "Ouachita Parish",
+   "state": "LA",
+   "block_groups": 122,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "22079",
+   "name": "Rapides Parish",
+   "state": "LA",
+   "block_groups": 106,
+   "bundle_mb": 1.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "22103",
+   "name": "St. Tammany Parish",
+   "state": "LA",
+   "block_groups": 161,
+   "bundle_mb": 1.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "22105",
+   "name": "Tangipahoa Parish",
+   "state": "LA",
+   "block_groups": 83,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "22109",
+   "name": "Terrebonne Parish",
+   "state": "LA",
+   "block_groups": 92,
+   "bundle_mb": 1.1,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "23001",
+   "name": "Androscoggin County",
+   "state": "ME",
+   "block_groups": 101,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "MaineDOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "23005",
+   "name": "Cumberland County",
+   "state": "ME",
+   "block_groups": 235,
+   "bundle_mb": 2.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "MaineDOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "23011",
+   "name": "Kennebec County",
+   "state": "ME",
+   "block_groups": 109,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "MaineDOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "23019",
+   "name": "Penobscot County",
+   "state": "ME",
+   "block_groups": 117,
+   "bundle_mb": 2.2,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "MaineDOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "23031",
+   "name": "York County",
+   "state": "ME",
+   "block_groups": 154,
+   "bundle_mb": 2.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "MaineDOT crash records",
+   "crash_years": [
+    2016,
+    2025
+   ]
+  },
+  {
+   "fips": "24003",
+   "name": "Anne Arundel County",
+   "state": "MD",
+   "block_groups": 340,
+   "bundle_mb": 2.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "24005",
+   "name": "Baltimore County",
+   "state": "MD",
+   "block_groups": 562,
+   "bundle_mb": 4.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "24013",
+   "name": "Carroll County",
+   "state": "MD",
+   "block_groups": 100,
+   "bundle_mb": 1.1,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "24015",
+   "name": "Cecil County",
+   "state": "MD",
+   "block_groups": 65,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "24017",
+   "name": "Charles County",
+   "state": "MD",
+   "block_groups": 88,
+   "bundle_mb": 1.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "24021",
+   "name": "Frederick County",
+   "state": "MD",
+   "block_groups": 200,
+   "bundle_mb": 1.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "24025",
+   "name": "Harford County",
+   "state": "MD",
+   "block_groups": 171,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "24027",
+   "name": "Howard County",
+   "state": "MD",
+   "block_groups": 166,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "24031",
+   "name": "Montgomery County",
+   "state": "MD",
+   "block_groups": 664,
+   "bundle_mb": 4.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "24033",
+   "name": "Prince George's County",
+   "state": "MD",
+   "block_groups": 538,
+   "bundle_mb": 4.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "24037",
+   "name": "St. Mary's County",
+   "state": "MD",
+   "block_groups": 63,
+   "bundle_mb": 1.1,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "24043",
+   "name": "Washington County",
+   "state": "MD",
+   "block_groups": 105,
+   "bundle_mb": 1.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "24045",
+   "name": "Wicomico County",
+   "state": "MD",
+   "block_groups": 72,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "24510",
+   "name": "Baltimore city",
+   "state": "MD",
+   "block_groups": 618,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "25001",
+   "name": "Barnstable County",
+   "state": "MA",
+   "block_groups": 196,
+   "bundle_mb": 2.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "25003",
+   "name": "Berkshire County",
+   "state": "MA",
+   "block_groups": 135,
+   "bundle_mb": 1.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "25005",
+   "name": "Bristol County",
+   "state": "MA",
+   "block_groups": 402,
+   "bundle_mb": 3.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "25009",
+   "name": "Essex County",
+   "state": "MA",
+   "block_groups": 566,
+   "bundle_mb": 3.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "25013",
+   "name": "Hampden County",
+   "state": "MA",
+   "block_groups": 336,
+   "bundle_mb": 2.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "25015",
+   "name": "Hampshire County",
+   "state": "MA",
+   "block_groups": 108,
+   "bundle_mb": 1.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "25017",
+   "name": "Middlesex County",
+   "state": "MA",
+   "block_groups": 1176,
+   "bundle_mb": 7.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "25021",
+   "name": "Norfolk County",
+   "state": "MA",
+   "block_groups": 505,
+   "bundle_mb": 4.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "25023",
+   "name": "Plymouth County",
+   "state": "MA",
+   "block_groups": 345,
+   "bundle_mb": 3.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "25025",
+   "name": "Suffolk County",
+   "state": "MA",
+   "block_groups": 681,
+   "bundle_mb": 2.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "25027",
+   "name": "Worcester County",
+   "state": "MA",
+   "block_groups": 571,
+   "bundle_mb": 4.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26005",
+   "name": "Allegan County",
+   "state": "MI",
+   "block_groups": 84,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:54:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26017",
+   "name": "Bay County",
+   "state": "MI",
+   "block_groups": 96,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:54:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26021",
+   "name": "Berrien County",
+   "state": "MI",
+   "block_groups": 139,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:54:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26025",
+   "name": "Calhoun County",
+   "state": "MI",
+   "block_groups": 121,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26045",
+   "name": "Eaton County",
+   "state": "MI",
+   "block_groups": 87,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26049",
+   "name": "Genesee County",
+   "state": "MI",
+   "block_groups": 372,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26065",
+   "name": "Ingham County",
+   "state": "MI",
+   "block_groups": 238,
+   "bundle_mb": 0.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26075",
+   "name": "Jackson County",
+   "state": "MI",
+   "block_groups": 137,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26077",
+   "name": "Kalamazoo County",
+   "state": "MI",
+   "block_groups": 214,
+   "bundle_mb": 0.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26081",
+   "name": "Kent County",
+   "state": "MI",
+   "block_groups": 415,
+   "bundle_mb": 1.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26093",
+   "name": "Livingston County",
+   "state": "MI",
+   "block_groups": 140,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26099",
+   "name": "Macomb County",
+   "state": "MI",
+   "block_groups": 682,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26115",
+   "name": "Monroe County",
+   "state": "MI",
+   "block_groups": 136,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:54:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26121",
+   "name": "Muskegon County",
+   "state": "MI",
+   "block_groups": 146,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:54:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26125",
+   "name": "Oakland County",
+   "state": "MI",
+   "block_groups": 1060,
+   "bundle_mb": 3.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26139",
+   "name": "Ottawa County",
+   "state": "MI",
+   "block_groups": 183,
+   "bundle_mb": 0.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:54:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26145",
+   "name": "Saginaw County",
+   "state": "MI",
+   "block_groups": 164,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26147",
+   "name": "St. Clair County",
+   "state": "MI",
+   "block_groups": 164,
+   "bundle_mb": 1.1,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26161",
+   "name": "Washtenaw County",
+   "state": "MI",
+   "block_groups": 308,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "26163",
+   "name": "Wayne County",
+   "state": "MI",
+   "block_groups": 1507,
+   "bundle_mb": 3.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:53:03Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "27003",
+   "name": "Anoka County",
+   "state": "MN",
+   "block_groups": 280,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "27019",
+   "name": "Carver County",
+   "state": "MN",
+   "block_groups": 83,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "27037",
+   "name": "Dakota County",
+   "state": "MN",
+   "block_groups": 333,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "27053",
+   "name": "Hennepin County",
+   "state": "MN",
+   "block_groups": 1098,
+   "bundle_mb": 3.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "27109",
+   "name": "Olmsted County",
+   "state": "MN",
+   "block_groups": 115,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "27123",
+   "name": "Ramsey County",
+   "state": "MN",
+   "block_groups": 471,
+   "bundle_mb": 1.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "27137",
+   "name": "St. Louis County",
+   "state": "MN",
+   "block_groups": 208,
+   "bundle_mb": 2.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "27139",
+   "name": "Scott County",
+   "state": "MN",
+   "block_groups": 107,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "27141",
+   "name": "Sherburne County",
+   "state": "MN",
+   "block_groups": 55,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "27145",
+   "name": "Stearns County",
+   "state": "MN",
+   "block_groups": 106,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "27163",
+   "name": "Washington County",
+   "state": "MN",
+   "block_groups": 196,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "27171",
+   "name": "Wright County",
+   "state": "MN",
+   "block_groups": 85,
+   "bundle_mb": 1.0,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "28033",
+   "name": "DeSoto County",
+   "state": "MS",
+   "block_groups": 100,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "28047",
+   "name": "Harrison County",
+   "state": "MS",
+   "block_groups": 196,
+   "bundle_mb": 0.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "28049",
+   "name": "Hinds County",
+   "state": "MS",
+   "block_groups": 189,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "28059",
+   "name": "Jackson County",
+   "state": "MS",
+   "block_groups": 117,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "28089",
+   "name": "Madison County",
+   "state": "MS",
+   "block_groups": 62,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "28121",
+   "name": "Rankin County",
+   "state": "MS",
+   "block_groups": 98,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "29019",
+   "name": "Boone County",
+   "state": "MO",
+   "block_groups": 123,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "29037",
+   "name": "Cass County",
+   "state": "MO",
+   "block_groups": 83,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "29047",
+   "name": "Clay County",
+   "state": "MO",
+   "block_groups": 192,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "29071",
+   "name": "Franklin County",
+   "state": "MO",
+   "block_groups": 73,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "29077",
+   "name": "Greene County",
+   "state": "MO",
+   "block_groups": 242,
+   "bundle_mb": 0.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "29095",
+   "name": "Jackson County",
+   "state": "MO",
+   "block_groups": 640,
+   "bundle_mb": 2.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "29097",
+   "name": "Jasper County",
+   "state": "MO",
+   "block_groups": 100,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "29099",
+   "name": "Jefferson County",
+   "state": "MO",
+   "block_groups": 150,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "29165",
+   "name": "Platte County",
+   "state": "MO",
+   "block_groups": 80,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "29183",
+   "name": "St. Charles County",
+   "state": "MO",
+   "block_groups": 230,
+   "bundle_mb": 3.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "29189",
+   "name": "St. Louis County",
+   "state": "MO",
+   "block_groups": 748,
+   "bundle_mb": 3.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "29510",
+   "name": "St. Louis city",
+   "state": "MO",
+   "block_groups": 314,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "30029",
+   "name": "Flathead County",
+   "state": "MT",
+   "block_groups": 85,
+   "bundle_mb": 3.0,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "30031",
+   "name": "Gallatin County",
+   "state": "MT",
+   "block_groups": 75,
+   "bundle_mb": 1.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "30063",
+   "name": "Missoula County",
+   "state": "MT",
+   "block_groups": 87,
+   "bundle_mb": 1.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "30111",
+   "name": "Yellowstone County",
+   "state": "MT",
+   "block_groups": 115,
+   "bundle_mb": 0.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "31055",
+   "name": "Douglas County",
+   "state": "NE",
+   "block_groups": 489,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "31109",
+   "name": "Lancaster County",
+   "state": "NE",
+   "block_groups": 231,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "31153",
+   "name": "Sarpy County",
+   "state": "NE",
+   "block_groups": 141,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "32003",
+   "name": "Clark County",
+   "state": "NV",
+   "block_groups": 1325,
+   "bundle_mb": 4.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "32031",
+   "name": "Washoe County",
+   "state": "NV",
+   "block_groups": 374,
+   "bundle_mb": 3.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "33011",
+   "name": "Hillsborough County",
+   "state": "NH",
+   "block_groups": 290,
+   "bundle_mb": 2.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "33013",
+   "name": "Merrimack County",
+   "state": "NH",
+   "block_groups": 106,
+   "bundle_mb": 1.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "33015",
+   "name": "Rockingham County",
+   "state": "NH",
+   "block_groups": 195,
+   "bundle_mb": 2.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "33017",
+   "name": "Strafford County",
+   "state": "NH",
+   "block_groups": 85,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34001",
+   "name": "Atlantic County",
+   "state": "NJ",
+   "block_groups": 194,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34003",
+   "name": "Bergen County",
+   "state": "NJ",
+   "block_groups": 788,
+   "bundle_mb": 3.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34005",
+   "name": "Burlington County",
+   "state": "NJ",
+   "block_groups": 311,
+   "bundle_mb": 3.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34007",
+   "name": "Camden County",
+   "state": "NJ",
+   "block_groups": 379,
+   "bundle_mb": 2.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34011",
+   "name": "Cumberland County",
+   "state": "NJ",
+   "block_groups": 103,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34013",
+   "name": "Essex County",
+   "state": "NJ",
+   "block_groups": 672,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34015",
+   "name": "Gloucester County",
+   "state": "NJ",
+   "block_groups": 213,
+   "bundle_mb": 1.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34017",
+   "name": "Hudson County",
+   "state": "NJ",
+   "block_groups": 467,
+   "bundle_mb": 1.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34019",
+   "name": "Hunterdon County",
+   "state": "NJ",
+   "block_groups": 85,
+   "bundle_mb": 1.2,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34021",
+   "name": "Mercer County",
+   "state": "NJ",
+   "block_groups": 271,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34023",
+   "name": "Middlesex County",
+   "state": "NJ",
+   "block_groups": 576,
+   "bundle_mb": 2.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34025",
+   "name": "Monmouth County",
+   "state": "NJ",
+   "block_groups": 474,
+   "bundle_mb": 2.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34027",
+   "name": "Morris County",
+   "state": "NJ",
+   "block_groups": 318,
+   "bundle_mb": 2.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34029",
+   "name": "Ocean County",
+   "state": "NJ",
+   "block_groups": 406,
+   "bundle_mb": 2.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34031",
+   "name": "Passaic County",
+   "state": "NJ",
+   "block_groups": 379,
+   "bundle_mb": 2.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34035",
+   "name": "Somerset County",
+   "state": "NJ",
+   "block_groups": 197,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34037",
+   "name": "Sussex County",
+   "state": "NJ",
+   "block_groups": 113,
+   "bundle_mb": 1.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34039",
+   "name": "Union County",
+   "state": "NJ",
+   "block_groups": 422,
+   "bundle_mb": 1.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "34041",
+   "name": "Warren County",
+   "state": "NJ",
+   "block_groups": 78,
+   "bundle_mb": 1.1,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "35001",
+   "name": "Bernalillo County",
+   "state": "NM",
+   "block_groups": 468,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "35013",
+   "name": "Do\u00f1a Ana County",
+   "state": "NM",
+   "block_groups": 161,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "35043",
+   "name": "Sandoval County",
+   "state": "NM",
+   "block_groups": 88,
+   "bundle_mb": 1.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "35045",
+   "name": "San Juan County",
+   "state": "NM",
+   "block_groups": 102,
+   "bundle_mb": 3.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "35049",
+   "name": "Santa Fe County",
+   "state": "NM",
+   "block_groups": 113,
+   "bundle_mb": 1.0,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36001",
+   "name": "Albany County",
+   "state": "NY",
+   "block_groups": 238,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36005",
+   "name": "Bronx County",
+   "state": "NY",
+   "block_groups": 1182,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36007",
+   "name": "Broome County",
+   "state": "NY",
+   "block_groups": 197,
+   "bundle_mb": 0.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36013",
+   "name": "Chautauqua County",
+   "state": "NY",
+   "block_groups": 125,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:58:19Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36027",
+   "name": "Dutchess County",
+   "state": "NY",
+   "block_groups": 255,
+   "bundle_mb": 1.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:58:19Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36029",
+   "name": "Erie County",
+   "state": "NY",
+   "block_groups": 813,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36045",
+   "name": "Jefferson County",
+   "state": "NY",
+   "block_groups": 101,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36047",
+   "name": "Kings County",
+   "state": "NY",
+   "block_groups": 2156,
+   "bundle_mb": 2.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36055",
+   "name": "Monroe County",
+   "state": "NY",
+   "block_groups": 597,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36059",
+   "name": "Nassau County",
+   "state": "NY",
+   "block_groups": 1139,
+   "bundle_mb": 2.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36061",
+   "name": "New York County",
+   "state": "NY",
+   "block_groups": 1292,
+   "bundle_mb": 2.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36063",
+   "name": "Niagara County",
+   "state": "NY",
+   "block_groups": 175,
+   "bundle_mb": 0.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:58:19Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36065",
+   "name": "Oneida County",
+   "state": "NY",
+   "block_groups": 193,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:58:19Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36067",
+   "name": "Onondaga County",
+   "state": "NY",
+   "block_groups": 392,
+   "bundle_mb": 1.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36069",
+   "name": "Ontario County",
+   "state": "NY",
+   "block_groups": 95,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36071",
+   "name": "Orange County",
+   "state": "NY",
+   "block_groups": 292,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:58:19Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36075",
+   "name": "Oswego County",
+   "state": "NY",
+   "block_groups": 95,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36081",
+   "name": "Queens County",
+   "state": "NY",
+   "block_groups": 1803,
+   "bundle_mb": 3.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36083",
+   "name": "Rensselaer County",
+   "state": "NY",
+   "block_groups": 126,
+   "bundle_mb": 1.1,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36085",
+   "name": "Richmond County",
+   "state": "NY",
+   "block_groups": 374,
+   "bundle_mb": 0.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36087",
+   "name": "Rockland County",
+   "state": "NY",
+   "block_groups": 223,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:58:19Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36089",
+   "name": "St. Lawrence County",
+   "state": "NY",
+   "block_groups": 106,
+   "bundle_mb": 1.0,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36091",
+   "name": "Saratoga County",
+   "state": "NY",
+   "block_groups": 169,
+   "bundle_mb": 1.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36093",
+   "name": "Schenectady County",
+   "state": "NY",
+   "block_groups": 142,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36103",
+   "name": "Suffolk County",
+   "state": "NY",
+   "block_groups": 1058,
+   "bundle_mb": 3.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36109",
+   "name": "Tompkins County",
+   "state": "NY",
+   "block_groups": 65,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36111",
+   "name": "Ulster County",
+   "state": "NY",
+   "block_groups": 155,
+   "bundle_mb": 1.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:58:19Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "36119",
+   "name": "Westchester County",
+   "state": "NY",
+   "block_groups": 725,
+   "bundle_mb": 2.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:58:19Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37001",
+   "name": "Alamance County",
+   "state": "NC",
+   "block_groups": 110,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37019",
+   "name": "Brunswick County",
+   "state": "NC",
+   "block_groups": 122,
+   "bundle_mb": 1.2,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37021",
+   "name": "Buncombe County",
+   "state": "NC",
+   "block_groups": 168,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37025",
+   "name": "Cabarrus County",
+   "state": "NC",
+   "block_groups": 120,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37035",
+   "name": "Catawba County",
+   "state": "NC",
+   "block_groups": 99,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37045",
+   "name": "Cleveland County",
+   "state": "NC",
+   "block_groups": 77,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37049",
+   "name": "Craven County",
+   "state": "NC",
+   "block_groups": 71,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37051",
+   "name": "Cumberland County",
+   "state": "NC",
+   "block_groups": 228,
+   "bundle_mb": 1.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37057",
+   "name": "Davidson County",
+   "state": "NC",
+   "block_groups": 115,
+   "bundle_mb": 1.1,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37063",
+   "name": "Durham County",
+   "state": "NC",
+   "block_groups": 238,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37067",
+   "name": "Forsyth County",
+   "state": "NC",
+   "block_groups": 250,
+   "bundle_mb": 1.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37071",
+   "name": "Gaston County",
+   "state": "NC",
+   "block_groups": 190,
+   "bundle_mb": 1.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37081",
+   "name": "Guilford County",
+   "state": "NC",
+   "block_groups": 338,
+   "bundle_mb": 1.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37085",
+   "name": "Harnett County",
+   "state": "NC",
+   "block_groups": 67,
+   "bundle_mb": 1.2,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37089",
+   "name": "Henderson County",
+   "state": "NC",
+   "block_groups": 76,
+   "bundle_mb": 1.2,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37097",
+   "name": "Iredell County",
+   "state": "NC",
+   "block_groups": 121,
+   "bundle_mb": 1.0,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37101",
+   "name": "Johnston County",
+   "state": "NC",
+   "block_groups": 158,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37119",
+   "name": "Mecklenburg County",
+   "state": "NC",
+   "block_groups": 624,
+   "bundle_mb": 3.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37125",
+   "name": "Moore County",
+   "state": "NC",
+   "block_groups": 72,
+   "bundle_mb": 1.0,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37129",
+   "name": "New Hanover County",
+   "state": "NC",
+   "block_groups": 153,
+   "bundle_mb": 0.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37133",
+   "name": "Onslow County",
+   "state": "NC",
+   "block_groups": 110,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37135",
+   "name": "Orange County",
+   "state": "NC",
+   "block_groups": 121,
+   "bundle_mb": 1.0,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37147",
+   "name": "Pitt County",
+   "state": "NC",
+   "block_groups": 123,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37151",
+   "name": "Randolph County",
+   "state": "NC",
+   "block_groups": 99,
+   "bundle_mb": 1.1,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37155",
+   "name": "Robeson County",
+   "state": "NC",
+   "block_groups": 99,
+   "bundle_mb": 1.0,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37159",
+   "name": "Rowan County",
+   "state": "NC",
+   "block_groups": 96,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37179",
+   "name": "Union County",
+   "state": "NC",
+   "block_groups": 132,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37183",
+   "name": "Wake County",
+   "state": "NC",
+   "block_groups": 597,
+   "bundle_mb": 4.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "37191",
+   "name": "Wayne County",
+   "state": "NC",
+   "block_groups": 83,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "38015",
+   "name": "Burleigh County",
+   "state": "ND",
+   "block_groups": 63,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "38017",
+   "name": "Cass County",
+   "state": "ND",
+   "block_groups": 132,
+   "bundle_mb": 0.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39003",
+   "name": "Allen County",
+   "state": "OH",
+   "block_groups": 90,
+   "bundle_mb": 0.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39017",
+   "name": "Butler County",
+   "state": "OH",
+   "block_groups": 271,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39023",
+   "name": "Clark County",
+   "state": "OH",
+   "block_groups": 128,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39025",
+   "name": "Clermont County",
+   "state": "OH",
+   "block_groups": 139,
+   "bundle_mb": 0.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39029",
+   "name": "Columbiana County",
+   "state": "OH",
+   "block_groups": 95,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39035",
+   "name": "Cuyahoga County",
+   "state": "OH",
+   "block_groups": 1185,
+   "bundle_mb": 2.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39041",
+   "name": "Delaware County",
+   "state": "OH",
+   "block_groups": 111,
+   "bundle_mb": 0.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39045",
+   "name": "Fairfield County",
+   "state": "OH",
+   "block_groups": 106,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39049",
+   "name": "Franklin County",
+   "state": "OH",
+   "block_groups": 952,
+   "bundle_mb": 2.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39057",
+   "name": "Greene County",
+   "state": "OH",
+   "block_groups": 124,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39061",
+   "name": "Hamilton County",
+   "state": "OH",
+   "block_groups": 678,
+   "bundle_mb": 2.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39085",
+   "name": "Lake County",
+   "state": "OH",
+   "block_groups": 156,
+   "bundle_mb": 0.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39089",
+   "name": "Licking County",
+   "state": "OH",
+   "block_groups": 125,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39093",
+   "name": "Lorain County",
+   "state": "OH",
+   "block_groups": 209,
+   "bundle_mb": 0.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39095",
+   "name": "Lucas County",
+   "state": "OH",
+   "block_groups": 480,
+   "bundle_mb": 1.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39099",
+   "name": "Mahoning County",
+   "state": "OH",
+   "block_groups": 216,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39103",
+   "name": "Medina County",
+   "state": "OH",
+   "block_groups": 110,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39109",
+   "name": "Miami County",
+   "state": "OH",
+   "block_groups": 87,
+   "bundle_mb": 0.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39113",
+   "name": "Montgomery County",
+   "state": "OH",
+   "block_groups": 422,
+   "bundle_mb": 1.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39133",
+   "name": "Portage County",
+   "state": "OH",
+   "block_groups": 105,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39139",
+   "name": "Richland County",
+   "state": "OH",
+   "block_groups": 96,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39151",
+   "name": "Stark County",
+   "state": "OH",
+   "block_groups": 293,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39153",
+   "name": "Summit County",
+   "state": "OH",
+   "block_groups": 456,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39155",
+   "name": "Trumbull County",
+   "state": "OH",
+   "block_groups": 179,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39165",
+   "name": "Warren County",
+   "state": "OH",
+   "block_groups": 113,
+   "bundle_mb": 0.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39169",
+   "name": "Wayne County",
+   "state": "OH",
+   "block_groups": 82,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "39173",
+   "name": "Wood County",
+   "state": "OH",
+   "block_groups": 91,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "40017",
+   "name": "Canadian County",
+   "state": "OK",
+   "block_groups": 109,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "40027",
+   "name": "Cleveland County",
+   "state": "OK",
+   "block_groups": 237,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "40031",
+   "name": "Comanche County",
+   "state": "OK",
+   "block_groups": 91,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "40109",
+   "name": "Oklahoma County",
+   "state": "OK",
+   "block_groups": 768,
+   "bundle_mb": 2.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "40143",
+   "name": "Tulsa County",
+   "state": "OK",
+   "block_groups": 508,
+   "bundle_mb": 1.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "41005",
+   "name": "Clackamas County",
+   "state": "OR",
+   "block_groups": 266,
+   "bundle_mb": 2.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "41017",
+   "name": "Deschutes County",
+   "state": "OR",
+   "block_groups": 112,
+   "bundle_mb": 1.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "41019",
+   "name": "Douglas County",
+   "state": "OR",
+   "block_groups": 94,
+   "bundle_mb": 2.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "41029",
+   "name": "Jackson County",
+   "state": "OR",
+   "block_groups": 150,
+   "bundle_mb": 2.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "41039",
+   "name": "Lane County",
+   "state": "OR",
+   "block_groups": 271,
+   "bundle_mb": 2.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "41043",
+   "name": "Linn County",
+   "state": "OR",
+   "block_groups": 89,
+   "bundle_mb": 1.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "41047",
+   "name": "Marion County",
+   "state": "OR",
+   "block_groups": 196,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "41051",
+   "name": "Multnomah County",
+   "state": "OR",
+   "block_groups": 592,
+   "bundle_mb": 3.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "41067",
+   "name": "Washington County",
+   "state": "OR",
+   "block_groups": 382,
+   "bundle_mb": 2.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "41071",
+   "name": "Yamhill County",
+   "state": "OR",
+   "block_groups": 60,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "42001",
+   "name": "Adams County",
+   "state": "PA",
+   "block_groups": 68,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42003",
+   "name": "Allegheny County",
+   "state": "PA",
+   "block_groups": 1062,
+   "bundle_mb": 3.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42007",
+   "name": "Beaver County",
+   "state": "PA",
+   "block_groups": 137,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42011",
+   "name": "Berks County",
+   "state": "PA",
+   "block_groups": 283,
+   "bundle_mb": 2.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42013",
+   "name": "Blair County",
+   "state": "PA",
+   "block_groups": 112,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42017",
+   "name": "Bucks County",
+   "state": "PA",
+   "block_groups": 431,
+   "bundle_mb": 4.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42019",
+   "name": "Butler County",
+   "state": "PA",
+   "block_groups": 130,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42021",
+   "name": "Cambria County",
+   "state": "PA",
+   "block_groups": 128,
+   "bundle_mb": 1.0,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42027",
+   "name": "Centre County",
+   "state": "PA",
+   "block_groups": 109,
+   "bundle_mb": 1.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42029",
+   "name": "Chester County",
+   "state": "PA",
+   "block_groups": 365,
+   "bundle_mb": 2.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42041",
+   "name": "Cumberland County",
+   "state": "PA",
+   "block_groups": 168,
+   "bundle_mb": 1.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42043",
+   "name": "Dauphin County",
+   "state": "PA",
+   "block_groups": 198,
+   "bundle_mb": 1.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42045",
+   "name": "Delaware County",
+   "state": "PA",
+   "block_groups": 417,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42049",
+   "name": "Erie County",
+   "state": "PA",
+   "block_groups": 232,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42051",
+   "name": "Fayette County",
+   "state": "PA",
+   "block_groups": 98,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42055",
+   "name": "Franklin County",
+   "state": "PA",
+   "block_groups": 100,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42069",
+   "name": "Lackawanna County",
+   "state": "PA",
+   "block_groups": 180,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42071",
+   "name": "Lancaster County",
+   "state": "PA",
+   "block_groups": 365,
+   "bundle_mb": 2.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42075",
+   "name": "Lebanon County",
+   "state": "PA",
+   "block_groups": 92,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42077",
+   "name": "Lehigh County",
+   "state": "PA",
+   "block_groups": 264,
+   "bundle_mb": 1.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42079",
+   "name": "Luzerne County",
+   "state": "PA",
+   "block_groups": 278,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42081",
+   "name": "Lycoming County",
+   "state": "PA",
+   "block_groups": 109,
+   "bundle_mb": 1.2,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42085",
+   "name": "Mercer County",
+   "state": "PA",
+   "block_groups": 115,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42089",
+   "name": "Monroe County",
+   "state": "PA",
+   "block_groups": 136,
+   "bundle_mb": 1.2,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42091",
+   "name": "Montgomery County",
+   "state": "PA",
+   "block_groups": 623,
+   "bundle_mb": 3.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42095",
+   "name": "Northampton County",
+   "state": "PA",
+   "block_groups": 215,
+   "bundle_mb": 1.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42101",
+   "name": "Philadelphia County",
+   "state": "PA",
+   "block_groups": 1338,
+   "bundle_mb": 3.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42107",
+   "name": "Schuylkill County",
+   "state": "PA",
+   "block_groups": 135,
+   "bundle_mb": 1.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42125",
+   "name": "Washington County",
+   "state": "PA",
+   "block_groups": 173,
+   "bundle_mb": 2.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42129",
+   "name": "Westmoreland County",
+   "state": "PA",
+   "block_groups": 265,
+   "bundle_mb": 2.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "42133",
+   "name": "York County",
+   "state": "PA",
+   "block_groups": 338,
+   "bundle_mb": 2.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare)",
+   "crash_years": [
+    2017,
+    2023
+   ]
+  },
+  {
+   "fips": "44003",
+   "name": "Kent County",
+   "state": "RI",
+   "block_groups": 116,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "44007",
+   "name": "Providence County",
+   "state": "RI",
+   "block_groups": 493,
+   "bundle_mb": 1.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "44009",
+   "name": "Washington County",
+   "state": "RI",
+   "block_groups": 83,
+   "bundle_mb": 1.0,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "45003",
+   "name": "Aiken County",
+   "state": "SC",
+   "block_groups": 119,
+   "bundle_mb": 1.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "45007",
+   "name": "Anderson County",
+   "state": "SC",
+   "block_groups": 141,
+   "bundle_mb": 2.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "45013",
+   "name": "Beaufort County",
+   "state": "SC",
+   "block_groups": 104,
+   "bundle_mb": 1.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "45015",
+   "name": "Berkeley County",
+   "state": "SC",
+   "block_groups": 117,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "45019",
+   "name": "Charleston County",
+   "state": "SC",
+   "block_groups": 261,
+   "bundle_mb": 2.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "45035",
+   "name": "Dorchester County",
+   "state": "SC",
+   "block_groups": 86,
+   "bundle_mb": 1.0,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "45041",
+   "name": "Florence County",
+   "state": "SC",
+   "block_groups": 106,
+   "bundle_mb": 1.0,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "45045",
+   "name": "Greenville County",
+   "state": "SC",
+   "block_groups": 301,
+   "bundle_mb": 3.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "45051",
+   "name": "Horry County",
+   "state": "SC",
+   "block_groups": 186,
+   "bundle_mb": 1.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "45057",
+   "name": "Lancaster County",
+   "state": "SC",
+   "block_groups": 56,
+   "bundle_mb": 1.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "45063",
+   "name": "Lexington County",
+   "state": "SC",
+   "block_groups": 181,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "45077",
+   "name": "Pickens County",
+   "state": "SC",
+   "block_groups": 88,
+   "bundle_mb": 1.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "45079",
+   "name": "Richland County",
+   "state": "SC",
+   "block_groups": 246,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "45083",
+   "name": "Spartanburg County",
+   "state": "SC",
+   "block_groups": 216,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "45085",
+   "name": "Sumter County",
+   "state": "SC",
+   "block_groups": 79,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "45091",
+   "name": "York County",
+   "state": "SC",
+   "block_groups": 150,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "46099",
+   "name": "Minnehaha County",
+   "state": "SD",
+   "block_groups": 138,
+   "bundle_mb": 0.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "46103",
+   "name": "Pennington County",
+   "state": "SD",
+   "block_groups": 74,
+   "bundle_mb": 1.1,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "47009",
+   "name": "Blount County",
+   "state": "TN",
+   "block_groups": 83,
+   "bundle_mb": 1.2,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Tennessee TITAN injury crash records",
+   "crash_years": [
+    2021,
+    2025
+   ]
+  },
+  {
+   "fips": "47011",
+   "name": "Bradley County",
+   "state": "TN",
+   "block_groups": 59,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Tennessee TITAN injury crash records",
+   "crash_years": [
+    2021,
+    2025
+   ]
+  },
+  {
+   "fips": "47037",
+   "name": "Davidson County",
+   "state": "TN",
+   "block_groups": 487,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Tennessee TITAN injury crash records",
+   "crash_years": [
+    2021,
+    2025
+   ]
+  },
+  {
+   "fips": "47065",
+   "name": "Hamilton County",
+   "state": "TN",
+   "block_groups": 278,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Tennessee TITAN injury crash records",
+   "crash_years": [
+    2021,
+    2025
+   ]
+  },
+  {
+   "fips": "47093",
+   "name": "Knox County",
+   "state": "TN",
+   "block_groups": 301,
+   "bundle_mb": 1.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Tennessee TITAN injury crash records",
+   "crash_years": [
+    2021,
+    2025
+   ]
+  },
+  {
+   "fips": "47119",
+   "name": "Maury County",
+   "state": "TN",
+   "block_groups": 58,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Tennessee TITAN injury crash records",
+   "crash_years": [
+    2021,
+    2025
+   ]
+  },
+  {
+   "fips": "47125",
+   "name": "Montgomery County",
+   "state": "TN",
+   "block_groups": 113,
+   "bundle_mb": 0.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Tennessee TITAN injury crash records",
+   "crash_years": [
+    2021,
+    2025
+   ]
+  },
+  {
+   "fips": "47149",
+   "name": "Rutherford County",
+   "state": "TN",
+   "block_groups": 161,
+   "bundle_mb": 1.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Tennessee TITAN injury crash records",
+   "crash_years": [
+    2021,
+    2025
+   ]
+  },
+  {
+   "fips": "47157",
+   "name": "Shelby County",
+   "state": "TN",
+   "block_groups": 685,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Tennessee TITAN injury crash records",
+   "crash_years": [
+    2021,
+    2025
+   ]
+  },
+  {
+   "fips": "47163",
+   "name": "Sullivan County",
+   "state": "TN",
+   "block_groups": 112,
+   "bundle_mb": 1.2,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Tennessee TITAN injury crash records",
+   "crash_years": [
+    2021,
+    2025
+   ]
+  },
+  {
+   "fips": "47165",
+   "name": "Sumner County",
+   "state": "TN",
+   "block_groups": 94,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Tennessee TITAN injury crash records",
+   "crash_years": [
+    2021,
+    2025
+   ]
+  },
+  {
+   "fips": "47179",
+   "name": "Washington County",
+   "state": "TN",
+   "block_groups": 93,
+   "bundle_mb": 1.1,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Tennessee TITAN injury crash records",
+   "crash_years": [
+    2021,
+    2025
+   ]
+  },
+  {
+   "fips": "47187",
+   "name": "Williamson County",
+   "state": "TN",
+   "block_groups": 112,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Tennessee TITAN injury crash records",
+   "crash_years": [
+    2021,
+    2025
+   ]
+  },
+  {
+   "fips": "47189",
+   "name": "Wilson County",
+   "state": "TN",
+   "block_groups": 77,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": "Tennessee TITAN injury crash records",
+   "crash_years": [
+    2021,
+    2025
+   ]
+  },
+  {
+   "fips": "48021",
+   "name": "Bastrop County",
+   "state": "TX",
+   "block_groups": 62,
+   "bundle_mb": 1.1,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48027",
+   "name": "Bell County",
+   "state": "TX",
+   "block_groups": 246,
+   "bundle_mb": 1.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48029",
+   "name": "Bexar County",
+   "state": "TX",
+   "block_groups": 1139,
+   "bundle_mb": 3.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48039",
+   "name": "Brazoria County",
+   "state": "TX",
+   "block_groups": 231,
+   "bundle_mb": 2.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48041",
+   "name": "Brazos County",
+   "state": "TX",
+   "block_groups": 152,
+   "bundle_mb": 0.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48061",
+   "name": "Cameron County",
+   "state": "TX",
+   "block_groups": 327,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48085",
+   "name": "Collin County",
+   "state": "TX",
+   "block_groups": 588,
+   "bundle_mb": 2.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48091",
+   "name": "Comal County",
+   "state": "TX",
+   "block_groups": 87,
+   "bundle_mb": 1.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48113",
+   "name": "Dallas County",
+   "state": "TX",
+   "block_groups": 1570,
+   "bundle_mb": 4.5,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48121",
+   "name": "Denton County",
+   "state": "TX",
+   "block_groups": 483,
+   "bundle_mb": 2.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48135",
+   "name": "Ector County",
+   "state": "TX",
+   "block_groups": 119,
+   "bundle_mb": 0.3,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48139",
+   "name": "Ellis County",
+   "state": "TX",
+   "block_groups": 96,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48141",
+   "name": "El Paso County",
+   "state": "TX",
+   "block_groups": 598,
+   "bundle_mb": 1.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48157",
+   "name": "Fort Bend County",
+   "state": "TX",
+   "block_groups": 366,
+   "bundle_mb": 2.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48167",
+   "name": "Galveston County",
+   "state": "TX",
+   "block_groups": 276,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48181",
+   "name": "Grayson County",
+   "state": "TX",
+   "block_groups": 100,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48183",
+   "name": "Gregg County",
+   "state": "TX",
+   "block_groups": 103,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48187",
+   "name": "Guadalupe County",
+   "state": "TX",
+   "block_groups": 106,
+   "bundle_mb": 1.1,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48201",
+   "name": "Harris County",
+   "state": "TX",
+   "block_groups": 2830,
+   "bundle_mb": 8.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48209",
+   "name": "Hays County",
+   "state": "TX",
+   "block_groups": 116,
+   "bundle_mb": 2.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48215",
+   "name": "Hidalgo County",
+   "state": "TX",
+   "block_groups": 572,
+   "bundle_mb": 1.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48231",
+   "name": "Hunt County",
+   "state": "TX",
+   "block_groups": 55,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48245",
+   "name": "Jefferson County",
+   "state": "TX",
+   "block_groups": 216,
+   "bundle_mb": 0.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48251",
+   "name": "Johnson County",
+   "state": "TX",
+   "block_groups": 96,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48257",
+   "name": "Kaufman County",
+   "state": "TX",
+   "block_groups": 64,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48291",
+   "name": "Liberty County",
+   "state": "TX",
+   "block_groups": 53,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48303",
+   "name": "Lubbock County",
+   "state": "TX",
+   "block_groups": 222,
+   "bundle_mb": 0.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48309",
+   "name": "McLennan County",
+   "state": "TX",
+   "block_groups": 174,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48329",
+   "name": "Midland County",
+   "state": "TX",
+   "block_groups": 113,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48339",
+   "name": "Montgomery County",
+   "state": "TX",
+   "block_groups": 328,
+   "bundle_mb": 2.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48355",
+   "name": "Nueces County",
+   "state": "TX",
+   "block_groups": 271,
+   "bundle_mb": 0.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48367",
+   "name": "Parker County",
+   "state": "TX",
+   "block_groups": 74,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48375",
+   "name": "Potter County",
+   "state": "TX",
+   "block_groups": 101,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48381",
+   "name": "Randall County",
+   "state": "TX",
+   "block_groups": 107,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48397",
+   "name": "Rockwall County",
+   "state": "TX",
+   "block_groups": 59,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48423",
+   "name": "Smith County",
+   "state": "TX",
+   "block_groups": 168,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48439",
+   "name": "Tarrant County",
+   "state": "TX",
+   "block_groups": 1246,
+   "bundle_mb": 3.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48441",
+   "name": "Taylor County",
+   "state": "TX",
+   "block_groups": 118,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48451",
+   "name": "Tom Green County",
+   "state": "TX",
+   "block_groups": 102,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48453",
+   "name": "Travis County",
+   "state": "TX",
+   "block_groups": 766,
+   "bundle_mb": 3.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48479",
+   "name": "Webb County",
+   "state": "TX",
+   "block_groups": 177,
+   "bundle_mb": 0.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48485",
+   "name": "Wichita County",
+   "state": "TX",
+   "block_groups": 115,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "48491",
+   "name": "Williamson County",
+   "state": "TX",
+   "block_groups": 324,
+   "bundle_mb": 2.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:44:55Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "49005",
+   "name": "Cache County",
+   "state": "UT",
+   "block_groups": 80,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": "Utah DOT crash records",
+   "crash_years": [
+    2019,
+    2025
+   ]
+  },
+  {
+   "fips": "49011",
+   "name": "Davis County",
+   "state": "UT",
+   "block_groups": 193,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": "Utah DOT crash records",
+   "crash_years": [
+    2019,
+    2025
+   ]
+  },
+  {
+   "fips": "49035",
+   "name": "Salt Lake County",
+   "state": "UT",
+   "block_groups": 712,
+   "bundle_mb": 2.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": "Utah DOT crash records",
+   "crash_years": [
+    2019,
+    2025
+   ]
+  },
+  {
+   "fips": "49049",
+   "name": "Utah County",
+   "state": "UT",
+   "block_groups": 434,
+   "bundle_mb": 2.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": "Utah DOT crash records",
+   "crash_years": [
+    2019,
+    2025
+   ]
+  },
+  {
+   "fips": "49053",
+   "name": "Washington County",
+   "state": "UT",
+   "block_groups": 94,
+   "bundle_mb": 1.2,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": "Utah DOT crash records",
+   "crash_years": [
+    2019,
+    2025
+   ]
+  },
+  {
+   "fips": "49057",
+   "name": "Weber County",
+   "state": "UT",
+   "block_groups": 166,
+   "bundle_mb": 1.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": "Utah DOT crash records",
+   "crash_years": [
+    2019,
+    2025
+   ]
+  },
+  {
+   "fips": "50007",
+   "name": "Chittenden County",
+   "state": "VT",
+   "block_groups": 120,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "51003",
+   "name": "Albemarle County",
+   "state": "VA",
+   "block_groups": 84,
+   "bundle_mb": 1.2,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "51013",
+   "name": "Arlington County",
+   "state": "VA",
+   "block_groups": 204,
+   "bundle_mb": 0.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "51041",
+   "name": "Chesterfield County",
+   "state": "VA",
+   "block_groups": 203,
+   "bundle_mb": 1.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "51059",
+   "name": "Fairfax County",
+   "state": "VA",
+   "block_groups": 678,
+   "bundle_mb": 4.0,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "51085",
+   "name": "Hanover County",
+   "state": "VA",
+   "block_groups": 63,
+   "bundle_mb": 1.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "51087",
+   "name": "Henrico County",
+   "state": "VA",
+   "block_groups": 243,
+   "bundle_mb": 1.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "51107",
+   "name": "Loudoun County",
+   "state": "VA",
+   "block_groups": 202,
+   "bundle_mb": 1.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "51153",
+   "name": "Prince William County",
+   "state": "VA",
+   "block_groups": 285,
+   "bundle_mb": 2.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "51177",
+   "name": "Spotsylvania County",
+   "state": "VA",
+   "block_groups": 87,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "51179",
+   "name": "Stafford County",
+   "state": "VA",
+   "block_groups": 79,
+   "bundle_mb": 0.7,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "51510",
+   "name": "Alexandria city",
+   "state": "VA",
+   "block_groups": 134,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "51550",
+   "name": "Chesapeake city",
+   "state": "VA",
+   "block_groups": 144,
+   "bundle_mb": 1.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "51650",
+   "name": "Hampton city",
+   "state": "VA",
+   "block_groups": 103,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "51700",
+   "name": "Newport News city",
+   "state": "VA",
+   "block_groups": 133,
+   "bundle_mb": 0.8,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "51710",
+   "name": "Norfolk city",
+   "state": "VA",
+   "block_groups": 203,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "51760",
+   "name": "Richmond city",
+   "state": "VA",
+   "block_groups": 190,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:45:52Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "51810",
+   "name": "Virginia Beach city",
+   "state": "VA",
+   "block_groups": 324,
+   "bundle_mb": 1.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": "Virginia DOT crash records",
+   "crash_years": [
+    2017,
+    2025
+   ]
+  },
+  {
+   "fips": "53005",
+   "name": "Benton County",
+   "state": "WA",
+   "block_groups": 136,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "53011",
+   "name": "Clark County",
+   "state": "WA",
+   "block_groups": 313,
+   "bundle_mb": 1.8,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "53015",
+   "name": "Cowlitz County",
+   "state": "WA",
+   "block_groups": 92,
+   "bundle_mb": 1.2,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "53025",
+   "name": "Grant County",
+   "state": "WA",
+   "block_groups": 57,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "53033",
+   "name": "King County",
+   "state": "WA",
+   "block_groups": 1545,
+   "bundle_mb": 6.2,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "53035",
+   "name": "Kitsap County",
+   "state": "WA",
+   "block_groups": 190,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "53053",
+   "name": "Pierce County",
+   "state": "WA",
+   "block_groups": 618,
+   "bundle_mb": 4.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "53057",
+   "name": "Skagit County",
+   "state": "WA",
+   "block_groups": 94,
+   "bundle_mb": 1.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "53061",
+   "name": "Snohomish County",
+   "state": "WA",
+   "block_groups": 575,
+   "bundle_mb": 2.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "53063",
+   "name": "Spokane County",
+   "state": "WA",
+   "block_groups": 371,
+   "bundle_mb": 1.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "53067",
+   "name": "Thurston County",
+   "state": "WA",
+   "block_groups": 182,
+   "bundle_mb": 2.4,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "53073",
+   "name": "Whatcom County",
+   "state": "WA",
+   "block_groups": 129,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "53077",
+   "name": "Yakima County",
+   "state": "WA",
+   "block_groups": 166,
+   "bundle_mb": 1.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "54003",
+   "name": "Berkeley County",
+   "state": "WV",
+   "block_groups": 77,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "54039",
+   "name": "Kanawha County",
+   "state": "WV",
+   "block_groups": 173,
+   "bundle_mb": 1.1,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "54061",
+   "name": "Monongalia County",
+   "state": "WV",
+   "block_groups": 104,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:59:21Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "55009",
+   "name": "Brown County",
+   "state": "WI",
+   "block_groups": 177,
+   "bundle_mb": 0.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "55025",
+   "name": "Dane County",
+   "state": "WI",
+   "block_groups": 353,
+   "bundle_mb": 1.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "55035",
+   "name": "Eau Claire County",
+   "state": "WI",
+   "block_groups": 75,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "55039",
+   "name": "Fond du Lac County",
+   "state": "WI",
+   "block_groups": 88,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "55059",
+   "name": "Kenosha County",
+   "state": "WI",
+   "block_groups": 139,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "55063",
+   "name": "La Crosse County",
+   "state": "WI",
+   "block_groups": 95,
+   "bundle_mb": 0.9,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "55073",
+   "name": "Marathon County",
+   "state": "WI",
+   "block_groups": 106,
+   "bundle_mb": 1.1,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "55079",
+   "name": "Milwaukee County",
+   "state": "WI",
+   "block_groups": 861,
+   "bundle_mb": 1.7,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "55087",
+   "name": "Outagamie County",
+   "state": "WI",
+   "block_groups": 143,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "55101",
+   "name": "Racine County",
+   "state": "WI",
+   "block_groups": 170,
+   "bundle_mb": 0.6,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "55105",
+   "name": "Rock County",
+   "state": "WI",
+   "block_groups": 119,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "55117",
+   "name": "Sheboygan County",
+   "state": "WI",
+   "block_groups": 69,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "55127",
+   "name": "Walworth County",
+   "state": "WI",
+   "block_groups": 90,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "55131",
+   "name": "Washington County",
+   "state": "WI",
+   "block_groups": 91,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "55133",
+   "name": "Waukesha County",
+   "state": "WI",
+   "block_groups": 305,
+   "bundle_mb": 1.3,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "55139",
+   "name": "Winnebago County",
+   "state": "WI",
+   "block_groups": 133,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:47:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "56021",
+   "name": "Laramie County",
+   "state": "WY",
+   "block_groups": 78,
+   "bundle_mb": 0.6,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T01:00:22Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "72021",
+   "name": "Bayam\u00f3n Municipio",
+   "state": "PR",
+   "block_groups": 149,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "72025",
+   "name": "Caguas Municipio",
+   "state": "PR",
+   "block_groups": 94,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "72031",
+   "name": "Carolina Municipio",
+   "state": "PR",
+   "block_groups": 128,
+   "bundle_mb": 0.5,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "72113",
+   "name": "Ponce Municipio",
+   "state": "PR",
+   "block_groups": 125,
+   "bundle_mb": 0.4,
+   "built": "2026-11-08",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "72127",
+   "name": "San Juan Municipio",
+   "state": "PR",
+   "block_groups": 363,
+   "bundle_mb": 0.9,
+   "built": "2026-11-07",
+   "osm": "2026-11-07T00:40:59Z",
+   "crash_source": null,
+   "crash_years": null
+  }
+ ]
+}
