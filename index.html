@@ -2869,17 +2869,24 @@ function selectAt(ll) {
   const f = allFeatures().find(f => pointInFeature(f, ll.lng, ll.lat));
   if (f && f.properties.id !== selected) select(f.properties.id, false);
 }
-function locateMe(btn) {
+async function locateMe(btn) {
   if (!navigator.geolocation) { btn.textContent = "Location not available"; return; }
   btn.textContent = "Finding you…";
-  navigator.geolocation.getCurrentPosition(pos => {
+  navigator.geolocation.getCurrentPosition(async pos => {
     const { latitude: lat, longitude: lon } = pos.coords;
     if (youMarker) map.removeLayer(youMarker);
     youMarker = L.marker([lat, lon], { interactive: false, icon: L.divIcon({ className: "", iconSize: [14, 14], html: '<div class="you"></div>' }) }).addTo(map);
-    const f = allFeatures().find(f => pointInFeature(f, lon, lat));
+    let f = allFeatures().find(f => pointInFeature(f, lon, lat));
+    if (!f && typeof getParcelService === "function") {
+      const svc = getParcelService({ lat, lng: lon });
+      if (svc && svc.counties && svc.counties[0]) {
+        try { await openCounty(svc.counties[0]); f = allFeatures().find(f => pointInFeature(f, lon, lat)); } catch(e) {}
+      }
+    }
     if (f) select(f.properties.id, false);
-    map.setView([lat, lon], 16);
-    btn.textContent = f ? "📍 Find me" : "You're outside the mapped area";
+    map.setView([lat, lon], 17);
+    if (typeof houseAt === "function") houseAt({ lat, lng: lon });
+    btn.textContent = "📍 Find me";
   }, () => { btn.textContent = "Location blocked"; }, { enableHighAccuracy: true, timeout: 10000 });
 }
 function retop() {
@@ -4521,12 +4528,26 @@ async function addressSearchUS(text) {
     showToast("Address not found. Please include street, city and state (e.g. 3924 NE 199th Ter, Miami, FL)");
     return;
   }
-  const fips = h.bg ? h.bg.slice(0, 5) : null;
+  let fips = h.fips || (h.bg ? h.bg.slice(0, 5) : null);
+  if (!fips && typeof getParcelService === "function") {
+    const svc = getParcelService({ lat: h.lat, lng: h.lon });
+    if (svc && svc.counties && svc.counties.length) fips = svc.counties[0];
+  }
+  if (!fips && typeof countyBundleEls === "function") {
+    const pPt = [h.lat, h.lon];
+    const match = countyBundleEls().find(e => {
+      const b = COUNTY_BUNDLES[e.dataset.fips];
+      return b && b.features && b.features.length && L.geoJSON(b).getBounds().pad(0.05).contains(pPt);
+    });
+    if (match) fips = match.dataset.fips;
+  }
   if (fips && typeof openCounty === "function" && fips !== activeFips()) {
     try { await openCounty(fips); } catch(e) {}
   }
   if (h.bg && byId.has(h.bg)) {
     select(h.bg, false);
+  } else if (typeof selectAt === "function") {
+    selectAt({ lat: h.lat, lng: h.lon });
   }
   
   if (map.stop) map.stop();
