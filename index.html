@@ -3033,8 +3033,63 @@ function jsonp(url) {
     s.src = url + "&callback=" + cb; document.head.appendChild(s); setTimeout(() => { if (window[cb]) { delete window[cb]; s.remove(); rej(new Error("timeout")); } }, 15000); });
 }
 async function fetchParcel(ll) {
-  if (activeCounty === "oc" && !isOrangeActive()) throw new Error(`per-house parcel lookups are not connected for ${countyOf()} yet`);
-  const isOC = (activeCounty === "oc") || (ll.lat >= 33.35 && ll.lat <= 33.95 && ll.lng >= -118.15 && ll.lng <= -117.40);
+  const fips = typeof activeFips === "function" ? activeFips() : null;
+  const svc = (typeof parcelSvc === "function" && fips) ? parcelSvc(fips) : (typeof getParcelService === "function" ? getParcelService(ll) : null);
+  if (svc && svc.url && fips !== "06037" && fips !== "06059") {
+    const q = svc.url + "/query?" + new URLSearchParams({
+      geometry: `${ll.lng.toFixed(6)},${ll.lat.toFixed(6)}`,
+      geometryType: "esriGeometryPoint",
+      inSR: "4326",
+      spatialRel: "esriSpatialRelIntersects",
+      distance: "15",
+      units: "esriSRUnit_Meter",
+      outFields: "*",
+      returnGeometry: "true",
+      outSR: "4326",
+      f: "json"
+    });
+    let d;
+    try { d = await (await fetch(q)).json(); } catch (e) { try { d = await jsonp(q); } catch (e2) { d = null; } }
+    if (d && d.features && d.features.length) {
+      const feat = d.features[0], a = feat.attributes || {};
+      const num = x => (x == null || x === "" || isNaN(+x)) ? 0 : +x;
+      const apnVal = a[svc.apn] || a.PARCEL_ID || a.PARCELID || a.PIN || a.AIN || a.FOLIO || "";
+      const addrVal = a[svc.addr] || a.PHY_ADDR1 || a.SITE_ADDRESS || a.SITUS_ADDRESS || a.ADDRESS || "";
+      const cleanAddr = String(addrVal).replace(/\s+/g, " ").trim();
+      const parts = cleanAddr.split(" ");
+      const houseNo = /^\d+/.test(parts[0]) ? parts[0] : "";
+      const street = houseNo ? parts.slice(1).join(" ") : cleanAddr;
+      const useVal = a.DOR_UC || a.USE_DESC || a.LAND_USE || a.PROPCLASS || "";
+      const landVal = num(a.LND_VAL ?? a.LNDVALUE ?? a.LAND_VAL);
+      const impVal = num(a.IMPROVVAL ?? a.IMPVALUE ?? a.BLDG_VAL);
+      const totVal = num(a.JV ?? a.CNTASSDVALUE ?? a.TOTAL_VAL ?? a.AV_SD) || (landVal + impVal);
+      const yrBuilt = num(a.ACT_YR_BLT ?? a.YEAR_BUILT ?? a.YR_CONSTR);
+      const sqftVal = num(a.LND_SQFOOT ?? a.BLDG_SQFT ?? a.LIVING_AREA ?? a.SQFT);
+      const acresVal = num(a.GISACRES ?? a.ACRES ?? a.CALC_ACRE);
+
+      const normA = {
+        AIN: apnVal || ("PARCEL-" + Math.round(ll.lat*1e4) + "-" + Math.round(ll.lng*1e4)),
+        SitusFullAddress: cleanAddr ? (cleanAddr + (a.PHY_CITY ? ", " + a.PHY_CITY : "")) : ("Parcel " + apnVal),
+        SitusHouseNo: houseNo,
+        SitusStreet: street,
+        ZoneCode: String(a.ZONING || a.ZONE || a.DOR_UC || a.LUCode || "").trim(),
+        UseDescription: useVal || `${svc.name || "Jurisdiction"} parcel`,
+        UseCode: String(a.DOR_UC || ""),
+        UseType: /res|single|family|condo|apt|dwell|home/i.test(useVal) ? "residential" : "commercial / mixed or other",
+        Roll_LandValue: landVal,
+        Roll_ImpValue: impVal,
+        Roll_TotalValue: totVal,
+        YearBuilt1: yrBuilt || 0,
+        Bedrooms1: num(a.BEDROOMS ?? a.NBR_BEDROOMS),
+        Bathrooms1: num(a.BATHROOMS ?? a.NBR_BATHS),
+        SQFTmain1: sqftVal || 0,
+        Acres: acresVal || 0,
+        county: svc.name || countyOf()
+      };
+      return { attributes: normA, geometry: feat.geometry };
+    }
+  }
+  const isOC = (activeCounty === "oc" && isOrangeActive()) || (ll.lat >= 33.35 && ll.lat <= 33.95 && ll.lng >= -118.15 && ll.lng <= -117.40);
   if (isOC) {
     const q = `https://www.ocgis.com/arcpub/rest/services/Map_Layers/Parcels/MapServer/0/query?geometry=${ll.lng.toFixed(6)},${ll.lat.toFixed(6)}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&distance=20&units=esriSRUnit_Meter&outFields=*&returnGeometry=true&outSR=4326&f=json`;
     let d;
@@ -3549,7 +3604,10 @@ async function houseAt(ll) {
   const box = document.createElement("div"); box.id = "house"; box.className = "section";
   const _cRec = (typeof activeCounty !== "undefined" && activeCounty === "oc") ? countyOf() : "LA County";
   box.innerHTML = `<h3>This home</h3><div class="house-loading"><span class="spin"></span><div>Pulling records from ${_cRec}…</div></div>`;
-  const v = $("#panel .verdict"); (v || $("#panel h2")).after(box);
+  const panel = $("#panel");
+  const v = $("#panel .verdict") || $("#panel h2");
+  if (v && v.after) { v.after(box); }
+  else if (panel) { panel.innerHTML = ""; panel.appendChild(box); }
   const tok = {}; houseTok = tok;
   let f = hoverFeat && hoverFeat.geometry && ringsContain(hoverFeat.geometry.rings, ll) ? hoverFeat : null;
   if (!f) try { f = await fetchParcel(ll); } catch (e) {
@@ -3596,6 +3654,7 @@ function renderHouse(box, a, lot, ll, st) {
   if (activeHouse) activeHouse.lastStories = F.stories;
   if (!st.osmDone) { F.src.foot = "estimated from living area; building outline still loading"; }
   showOutlines(F);
+  updateHouseMapPopup(a, lot, ll, st, houseHv, z, R);
   const waiting = [!st.osmDone && "building outline and height", !st.rDone && "permits, last sale, historic, fire and geologic zones"].filter(Boolean);
   const offline = [st.osmDone && !st.osm && "building outlines (OpenStreetMap)", st.rDone && !st.R && "permits, last sale, historic, fire and geologic checks"].filter(Boolean);
   
@@ -4033,8 +4092,14 @@ async function drawNatLots() {
   let d; try { d = await (await fetch(lotQuery(svc, b.getWest(), b.getSouth(), b.getEast(), b.getNorth()))).json(); } catch (e) { return; }
   if (seq !== natLotSeq) return;
   if (natLots) map.removeLayer(natLots);
-  natLots = L.layerGroup((d.features || []).filter(f => f.geometry && f.geometry.rings).map(f =>
-    L.polygon(lotLatLngs(f), { color: "#7a5c2e", weight: 1, opacity: 0.85, fillOpacity: 0.02 }).bindPopup(() => lotPopup(svc, f.attributes || {}), { maxWidth: 360 }))).addTo(map);
+  natLots = L.layerGroup((d.features || []).filter(f => f.geometry && f.geometry.rings).map(f => {
+    const poly = L.polygon(lotLatLngs(f), { color: "#7a5c2e", weight: 1.2, opacity: 0.85, fillOpacity: 0.04 });
+    poly.on("click", e => {
+      L.DomEvent.stopPropagation(e);
+      if (typeof houseAt === "function") houseAt(e.latlng);
+    });
+    return poly;
+  })).addTo(map);
   natLots._count = (d.features || []).length; if (typeof window !== "undefined") window.natLots = natLots;
 }
 function scheduleNatLots() { clearTimeout(natLotTimer); natLotTimer = setTimeout(drawNatLots, 350); }
@@ -4756,8 +4821,21 @@ async function loadCountyBundle(fips) {
   if (B.plans && D.plans) Object.assign(D.plans, B.plans);
   if (B.profit && D.under) { if (!D.under.profit) D.under.profit = {}; Object.assign(D.under.profit, B.profit); }
   const bl = B.layers || {};
-  ["freeways", "arterials", "parks", "water", "rail", "stations", "walls", "amenities", "stops", "facilities", "projects"].forEach(k => {
-    if (bl[k] && bl[k].features && D.layers[k] && D.layers[k].features) D.layers[k].features.push(...bl[k].features); else if (bl[k] && !D.layers[k]) D.layers[k] = bl[k]; });
+  ["freeways", "arterials", "parks", "water", "rail", "stations", "walls", "amenities", "stops"].forEach(k => {
+    if (bl[k] && bl[k].features && D.layers[k] && D.layers[k].features) {
+      D.layers[k].features.push(...bl[k].features);
+    } else if (bl[k] && !D.layers[k]) {
+      D.layers[k] = bl[k];
+    }
+  });
+  if (Array.isArray(bl.facilities)) {
+    if (!Array.isArray(D.layers.facilities)) D.layers.facilities = [];
+    D.layers.facilities.push(...bl.facilities);
+  }
+  if (Array.isArray(bl.projects)) {
+    if (!Array.isArray(D.layers.projects)) D.layers.projects = [];
+    D.layers.projects.push(...bl.projects);
+  }
   if (bl.streets && D.layers.streets) {
     const names = D.layers.streets.names || (D.layers.streets.names = []), idx = new Map(names.map((n, i) => [n, i])), map_ = new Map();
     (bl.streets.names || []).forEach((n, i) => { let j = idx.get(n); if (j === undefined) { j = names.length; names.push(n); idx.set(n, j); } map_.set(i, j); });
@@ -4800,6 +4878,14 @@ async function openCounty(fips) {
     ocLayer = null; D_OC = B; if (typeof window !== "undefined") window.D_OC = D_OC;
   }
   switchCounty("oc");
+  if (typeof _fDrawn !== "undefined" && _fDrawn.clear) _fDrawn.clear();
+  if (layers.fac && layers.fac.clearLayers) layers.fac.clearLayers();
+  if (layers.facArea && layers.facArea.clearLayers) layers.facArea.clearLayers();
+  if (layers.amen && map.hasLayer(layers.amen)) { map.removeLayer(layers.amen); layers.amen = null; }
+  if (layers._lazy) delete layers._lazy.amen;
+  if (typeof drawContext === "function") drawContext();
+  if (typeof drawFacilities === "function") drawFacilities();
+  if (typeof scheduleNatLots === "function") scheduleNatLots();
 }
 if (typeof window !== "undefined") {
   window.D_OC = D_OC;
@@ -5130,3 +5216,89 @@ init().catch(e => { console.error(e); window.__initErr = e.stack || String(e); $
 </script>
 </body>
 </html>
+
+
+// --- Interactive Leaflet Map Popup for Every House ---
+let houseMapPopup = null;
+function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R) {
+  if (typeof map === "undefined" || !map) return;
+  const p = byId.get(selected) ? byId.get(selected).properties : { c: a.county || countyOf(), hv: 850000, rent: 2200 };
+  const curD = (typeof D !== "undefined" && D) ? D : {};
+  const m = ((curD.details && curD.details[selected]) || {}).m || p;
+  const addr = a.SitusFullAddress || ("Parcel APN " + a.AIN);
+  const city = p.c || a.county || countyOf();
+  const rollVal = (+a.Roll_LandValue || 0) + (+a.Roll_ImpValue || 0) || (+a.Roll_TotalValue || 0);
+  const floodText = (R && R.fema) ? R.fema.label : "Zone X (Minimal flood hazard outside 500-yr floodplain)";
+  const fireText = (R && R.fire && R.fire.vh) ? "Very High Fire Hazard Severity Zone" : "Not in Very High Fire Hazard Zone";
+  const svUrl = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${ll.lat.toFixed(6)},${ll.lng.toFixed(6)}`;
+  const earthUrl = `https://earth.google.com/web/search/${ll.lat.toFixed(6)},${ll.lng.toFixed(6)}`;
+  
+  const zCode = z ? z.zone : (a.ZoneCode || "Residential");
+  const zCat = z ? z.cat : "single-family";
+  const zExpl = (typeof explainZone === "function") ? explainZone(zCode, zCat, city) : { base: "Allowed residential" };
+
+  let nearestSch = 0.4, nearestPark = 0.3, nearestLib = 0.8;
+  if (curD && curD.layers && Array.isArray(curD.layers.facilities)) {
+    let minSch = 999, minPark = 999, minLib = 999;
+    for (const [k, nm, flat, flng] of curD.layers.facilities) {
+      const d = Math.sqrt(Math.pow((flat - ll.lat) * 69, 2) + Math.pow((flng - ll.lng) * 53, 2));
+      if (k === 0 && d < minSch) minSch = d;
+      if (k === 2 && d < minLib) minLib = d;
+      if ((k === 9 || k === 10) && d < minPark) minPark = d;
+    }
+    if (minSch < 50) nearestSch = minSch.toFixed(1);
+    if (minLib < 50) nearestLib = minLib.toFixed(1);
+    if (minPark < 50) nearestPark = minPark.toFixed(1);
+  }
+
+  const content = `
+    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#0f172a;max-width:380px;line-height:1.35">
+      <div style="border-bottom:2px solid #087b78;padding-bottom:6px;margin-bottom:8px">
+        <div style="font-weight:800;font-size:14px;color:#087b78">${esc(addr)}</div>
+        <div style="font-size:11px;color:#64748b"><b>APN:</b> ${esc(a.AIN)} · ${esc(a.county || city)} · ${ll.lat.toFixed(4)}°, ${ll.lng.toFixed(4)}°</div>
+      </div>
+
+      <div style="display:flex;gap:5px;margin-bottom:8px;flex-wrap:wrap">
+        <a href="${svUrl}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;background:#087b78;color:#fff;padding:5px 9px;border-radius:4px;text-decoration:none;font-weight:700;font-size:11px" title="Open Street View">
+          🚀 360° Street View ↗
+        </a>
+        <a href="${earthUrl}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;background:#f1f5f9;border:1px solid #cbd5e1;color:#0f172a;padding:5px 9px;border-radius:4px;text-decoration:none;font-weight:600;font-size:11px">
+          🌍 3D Earth ↗
+        </a>
+        <button type="button" onclick="window.print()" style="display:inline-flex;align-items:center;background:#0f172a;color:#fff;border:none;padding:5px 9px;border-radius:4px;cursor:pointer;font-weight:600;font-size:11px">
+          🖨️ Print Memo
+        </button>
+      </div>
+
+      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:6px 8px;margin-bottom:6px;font-size:11.5px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+          <span><b>Estimated Market Value:</b></span>
+          <span style="color:#087b78;font-weight:700">${fmt$(houseHv)} <span style="font-size:10.5px;color:#64748b;font-weight:normal">(±6.5%)</span></span>
+        </div>
+        ${rollVal > 0 ? `<div style="display:flex;justify-content:space-between;margin-bottom:3px"><span><b>Assessor Roll Value:</b></span><span>${fmt$(rollVal)}</span></div>` : ""}
+        <div style="display:flex;justify-content:space-between">
+          <span><b>Lot / Building:</b></span>
+          <span>${lot ? fmtN(lot) + " sq ft lot" : "Lot mapped"} · ${a.SQFTmain1 ? fmtN(a.SQFTmain1) + " sq ft" : (a.YearBuilt1 ? "Built " + a.YearBuilt1 : "Single structure")}</span>
+        </div>
+      </div>
+
+      <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:6px;padding:6px 8px;margin-bottom:6px;font-size:11.5px">
+        <div style="font-weight:700;color:#166534;margin-bottom:2px">🏛️ Zoning &amp; State Housing Rights</div>
+        <div><b>Zoning Code:</b> ${esc(zCode)} (${esc(zExpl.base || "Allowed residential")})</div>
+        <div><b>ADU / Infill:</b> By right ADU allowed · ${lot >= 2400 ? "Eligible for Missing Middle / Duplex" : "Standard lot envelope"}</div>
+        <div><b>State Reform:</b> ${(m.nearest_transit && m.nearest_transit.distance_mi <= 0.5) || m.din >= 4 ? "0 parking minimums under transit deregulation" : "Standard parking requirements apply"}</div>
+      </div>
+
+      <div style="font-size:11px;color:#334155;margin-bottom:4px">
+        <div>🌊 <b>FEMA Flood:</b> ${esc(floodText)}</div>
+        <div>🔥 <b>Wildfire Risk:</b> ${esc(fireText)}</div>
+        <div>🏫 <b>Nearest Facilities:</b> School ${nearestSch} mi · Park ${nearestPark} mi · Library ${nearestLib} mi</div>
+      </div>
+    </div>
+  `;
+
+  if (!houseMapPopup) {
+    houseMapPopup = L.popup({ maxWidth: 420, minWidth: 300, className: "house-leaflet-popup", autoPan: true });
+  }
+  houseMapPopup.setLatLng(ll).setContent(content).openOn(map);
+}
