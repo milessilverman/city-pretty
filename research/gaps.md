@@ -129,3 +129,8 @@ Currently, `pipeline/engine.py` evaluates project types largely independently. T
 - **Inland / Hillside Block Groups**: In foothill or suburban locations (e.g. Santa Clarita, Boise, suburban Denver), trigger:
   - Multi-use trailheads and mountain bike trail construction on municipal open space
   - Wildfire defensible space and home hardening (from `location_types_verified.csv`, `wildfire_hardening`)
+
+
+### Texas Building Footprints and LiDAR Access (TxGIO / TNRIS)
+- **API Resource**: `https://api.tnris.org/api/v1/resources/` feeds AWS S3 URLs for compressed data collections via the TNRIS bulk-downloader utility (`https://github.com/TNRIS/bulk-downloader`).
+- **Service Gap**: Direct anonymous public ArcGIS ImageServer for statewide lidar height or single-endpoint FeatureServer for statewide building footprints is not published without collection-by-collection scripted retrieval.
