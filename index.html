@@ -909,6 +909,13 @@ tr:last-child td { border-bottom: 0; } td.num { font-family: var(--mono); color:
 .fac-pick { display: inline-block; } .fac-pick summary { cursor: pointer; color: var(--ink-2); } .fac-pick > div { position: absolute; z-index: 1000; background: var(--sheet); border: 1px solid var(--rule-strong); border-radius: 8px; padding: 6px 10px; box-shadow: 0 4px 14px rgba(0,0,0,.15); }
 .fac { font: 700 9px/14px var(--mono); width: 14px; height: 14px; border-radius: 50%; color: #fff; text-align: center; border: 1.5px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.35); }
 .amen-badge { font: 700 10px/16px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; width: 16px; height: 16px; border-radius: 50%; color: #fff; text-align: center; border: 1.5px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.45); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.house-leaflet-popup .leaflet-popup-content-wrapper { border-radius: 10px; box-shadow: 0 4px 24px rgba(0,0,0,.22); padding: 4px; }
+.house-leaflet-popup .leaflet-popup-content { margin: 10px 12px; line-height: 1.4; }
+.house-leaflet-popup .leaflet-popup-tip { box-shadow: 0 4px 14px rgba(0,0,0,.15); }
+@media (max-width: 640px) {
+  .house-leaflet-popup { max-width: 92vw !important; }
+  .house-leaflet-popup .leaflet-popup-content { margin: 8px 10px; font-size: 11px; }
+}
 .lbl-zone { font: 600 10px/1 var(--mono); color: var(--ink-2); white-space: nowrap; pointer-events: none; text-shadow: 0 0 2px var(--sheet), 0 0 3px var(--sheet); }
 .site-done { font-weight: 600; color: #2f9e44; margin-bottom: 3px; }
 .fund { margin: 8px 0; padding: 8px 10px; border: 1px solid var(--rule); border-radius: 8px; } .fund .kv { margin-top: 6px; grid-template-columns: minmax(120px, 2fr) minmax(0, 3fr); }
@@ -3743,18 +3750,20 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
   const slide = R && R.slide && R.slide.ok && R.slide.v.length > 0;
   const liq = R && R.liq && R.liq.ok && R.liq.v.length > 0;
   const fault = R && R.fault && R.fault.ok && R.fault.v.length > 0;
+  const st = (typeof activeState === "function" ? activeState() : null) || "CA";
+  const city = (m && m.c) || (a && a.county) || countyOf();
   
   const C = [], add = (name, v, why) => C.push({ name, v, why });
   const out = () => ({ C, yard, foot, sf, yb, beds, baths, bldg, units, res, lot, stories: F.stories, pool: F.pool, hist, fire, hill, slide, liq, fault, R, a });
   
-  if (hist) add("Historic district or landmark", "note", "This lot is in a historic district or is a designated resource: exterior alterations require HPOZ design review, and SB 9 does not apply.");
-  if (hill) add("Hillside area", "note", "LA Hillside Ordinance applies: stepped foundation, grading limits and height restrictions make additions and second stories more complex.");
+  if (hist) add("Historic district or landmark", "note", `This lot is in a historic district or is a designated resource: exterior alterations require ${st === "CA" ? "HPOZ design review, and SB 9 does not apply" : "historic preservation review, and lot-split deregulation does not apply"}.`);
+  if (hill) add("Hillside & sloped terrain", "note", `${esc(st === "CA" ? "Hillside Ordinance" : "Municipal steep-slope ordinance")} applies: stepped foundation, grading limits and height restrictions make additions and second stories more complex.`);
   if (slide || liq || fault) {
     const gz = [slide && "landslide", liq && "liquefaction", fault && "fault"].filter(Boolean);
     add("Geologic hazard zone", "note", `In state ${gz.join(", ")} hazard zone: new additions or ADUs require a site-specific geotechnical/soils investigation.`);
   }
   if (F.dec && F.dec.adu) add("Recorded ADU", "note", `The Assessor records ${/^[AEIOU]/.test(F.dec.adu) ? "an" : "a"} ${F.dec.adu} on this lot.`);
-  if (F.dec && F.dec.mills) add("Mills Act contract", "note", "This home has a Mills Act historic contract (lower property tax in exchange for preservation).");
+  if (F.dec && F.dec.mills) add("Historic tax incentive (Mills Act / Landmark)", "note", "This property has a historic preservation tax incentive contract.");
   if (!res) { add("Home upgrades", "no", `This parcel is ${esc(a.UseDescription || "not residential")}, so residential homeowner checks do not apply.`); return out(); }
   if (F.second) add("Second building on the lot", "note", F.slots.length > 1 ? `The Assessor lists ${F.slots.length} structures (${F.slots.map(x => fmtN(x.sqft) + " sq ft").join(", ")}): an existing ADU or guest house may already be present.` : "Second structure (garage or studio) detected on building footprint outlines.");
   
@@ -3762,14 +3771,31 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
   else if (yard >= 400) add("Detached ADU", "maybe", `Only ~${fmtN(yard)} sq ft of open yard: a 400 sq ft studio ADU or garage conversion is more viable.`);
   else add("Detached ADU", "no", `Limited open yard (~${fmtN(yard)} sq ft); a garage conversion or Junior ADU is recommended.`);
   
-  if (sf && bldg >= 1000) add("Junior ADU (inside the house, up to 500 sq ft)", "yes", `${fmtN(bldg)} sq ft single-family home: state law (Gov. Code §§ 66313 and 66333) allows converting up to 500 sq ft of interior livable space; since 1 Jan 2026 (AB 1154) owner-occupancy is required only if the JADU shares bathroom facilities with the main home, and rentals must be longer than 30 days.`);
+  if (sf && bldg >= 1000) {
+    if (st === "CA") {
+      add("Junior ADU (inside the house, up to 500 sq ft)", "yes", `${fmtN(bldg)} sq ft single-family home: state law (Gov. Code §§ 66313 and 66333) allows converting up to 500 sq ft of interior livable space; since 1 Jan 2026 (AB 1154) owner-occupancy is required only if the JADU shares bathroom facilities with the main home, and rentals must be longer than 30 days.`);
+    } else if (st === "WA") {
+      add("Internal ADU suite (up to 500 sq ft)", "yes", `${fmtN(bldg)} sq ft single-family home: WA HB 1337 allows up to two accessory units per lot including internal conversions by right with zero owner-occupancy mandates.`);
+    } else if (st === "FL") {
+      add("Internal ADU suite (up to 500 sq ft)", "yes", `${fmtN(bldg)} sq ft home: Florida Live Local Act & local infill standards allow internal apartment conversions with utility submetering.`);
+    } else {
+      add("Junior ADU / interior suite (up to 500 sq ft)", "yes", `${fmtN(bldg)} sq ft single-family home: internal accessory conversion generates rental income under federal Fannie Mae / FHA accessory housing standards.`);
+    }
+  }
   if (units >= 2 && sf) add("Existing second unit", "note", `Assessor roll shows ${units} units here.`);
   
-  if (sf && hist) add("SB 9 lot split", "no", "SB 9 does not apply in historic districts or on designated landmarks.");
-  else if (sf && lot >= 2400 && !fire && !slide && !fault) add("SB 9 lot split / second home", "yes", `${fmtN(lot)} sq ft single-family parcel: SB 9 allows a split into two ~${fmtN(Math.round(lot/2))} sq ft lots and up to 4 total units.`);
-  else if (sf && lot >= 2400 && fire) add("SB 9 lot split", "no", "This lot is in a Very High Fire Hazard Severity Zone (CAL FIRE), statutorily ineligible for SB 9 lot splits.");
-  else if (sf && lot >= 2400 && (slide || fault)) add("SB 9 lot split", "no", "Located in an Alquist-Priolo fault or landslide hazard zone; statutorily restricted under SB 9 unless seismic clearance is certified.");
-  else if (sf) add("SB 9 lot split", "no", `Lot size is ${fmtN(lot)} sq ft; SB 9 requires at least 2,400 sq ft to create two legal lots of ≥1,200 sq ft.`);
+  // State-specific lot split / missing-middle housing rights
+  const splitName = st === "CA" ? "SB 9 lot split / second home" : st === "WA" ? "WA HB 1110 Middle Housing split" : st === "TX" ? "Austin HOME 3-unit infill split" : st === "OR" ? "HB 2001 Middle Housing split" : "Missing-middle duplex / lot split";
+  if (sf && hist) add(splitName, "no", `Lot split deregulation does not apply in designated historic districts or on landmarks.`);
+  else if (sf && lot >= 2400 && !fire && !slide && !fault) {
+    if (st === "CA") add(splitName, "yes", `${fmtN(lot)} sq ft single-family parcel: SB 9 allows a split into two ~${fmtN(Math.round(lot/2))} sq ft lots and up to 4 total units.`);
+    else if (st === "WA") add(splitName, "yes", `${fmtN(lot)} sq ft parcel: WA HB 1110 allows up to 2–4 middle housing units by right with zero parking minimums near transit.`);
+    else if (st === "TX") add(splitName, "yes", `${fmtN(lot)} sq ft parcel: Austin HOME Initiative authorizes up to 3 units on single-family lots down to 2,000 sq ft.`);
+    else if (st === "OR") add(splitName, "yes", `${fmtN(lot)} sq ft parcel: Oregon HB 2001 permits duplexes and cottage clusters by right on residential lots.`);
+    else add(splitName, "yes", `${fmtN(lot)} sq ft parcel: eligible for duplex conversion or accessory dwelling infill under municipal infill schedule.`);
+  } else if (sf && lot >= 2400 && fire) add(splitName, "no", `Located in a high wildfire hazard zone, subject to statutory environmental/safety exclusions.`);
+  else if (sf && lot >= 2400 && (slide || fault)) add(splitName, "no", `Located in a fault or landslide hazard zone; restricted unless geotechnical clearance is certified.`);
+  else if (sf) add(splitName, "no", `Lot size is ${fmtN(lot)} sq ft; requires larger parcel envelope to create two legal lots.`);
   
   if (F.pool) add("Swimming pool", "note", `There is already a ${F.dec && F.dec.pool ? F.dec.pool : "pool"} on this lot (${F.src.pool}).`);
   else if (yard >= 1200) add("Swimming pool", "yes", `~${fmtN(yard)} sq ft of open yard.`);
@@ -3785,16 +3811,24 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
   add("Rooftop deck", F.roof === "flat" ? "yes" : F.roof ? "no" : "maybe", F.roof === "flat" ? "Flat roof recorded: deck requires structural framing verification and waterproof membrane." : F.roof ? `Roof shape is ${esc(F.roof)}; deck requires a flat section or garage roof.` : "Requires a flat roof or flat garage roof section.");
   if (yard >= 400) add("Garden, deck or patio", "yes", `~${fmtN(yard)} sq ft of open yard.`);
   if (foot >= 350) add("Rooftop solar", "yes", `~${fmtN(foot)} sq ft of roof footprint.`);
-  if (yb && yb < 1980 && sf) add("Seismic bolting and bracing", "yes", `Built in ${yb}: raised foundation qualifies for California Earthquake Brace + Bolt grant (up to $3,000).`);
+  
+  if (yb && yb < 1980 && sf) {
+    if (st === "CA" || st === "WA" || st === "OR") {
+      add("Seismic bolting and bracing", "yes", `Built in ${yb}: raised foundation qualifies for ${st === "CA" ? "California Earthquake Brace + Bolt grant (up to $3,000)" : "state seismic retrofit standards"}.`);
+    } else if (st === "FL" || st === "TX" || st === "LA" || st === "SC" || st === "NC") {
+      add("Hurricane & storm hardening (roof clips & impact glass)", "yes", `Built in ${yb}: pre-1990 roof-to-wall connections qualify for ${st === "FL" ? "My Safe Florida Home grant (up to $10,000)" : "windstorm insurance mitigation discounts"}.`);
+    } else {
+      add("Foundation & thermal envelope modernization", "yes", `Built in ${yb}: continuous sill plate anchoring and air-barrier insulation sealing.`);
+    }
+  }
   if (yb && yb < 1975) add("Whole-house repiping", "maybe", `Built in ${yb}: galvanized steel supply piping common in pre-1975 homes.`);
-  if (beds >= 3 && baths && baths < beds - 1) add("Add a bathroom", "yes", `${beds} bedrooms but only ${baths} bath${baths > 1 ? "s" : ""}: fixes the bedroom-to-bath imbalance, though an addition recoups only about 58% of its cost at resale (JLC/Zonda Cost vs Value 2025, Los Angeles: $63,595 cost, $36,603 value).`);
+  if (beds >= 3 && baths && baths < beds - 1) add("Add a bathroom", "yes", `${beds} bedrooms but only ${baths} bath${baths > 1 ? "s" : ""}: fixes the bedroom-to-bath imbalance, though an addition recoups only about 58% of its cost at resale (JLC/Zonda Cost vs Value 2025: $63,595 cost, $36,603 value).`);
   if (F.dec && F.dec.heat && !F.dec.ac) add("Heat-pump heating and cooling", "yes", `Existing heating is ${F.dec.heat} with no central AC: heat pump provides both.`);
-  if (fire) add("Wildfire hardening (Zone 0)", "yes", "Very High fire zone: ember-resistant vents, boxed eaves and a 5-ft ember-resistant (Zone 0) perimeter. The Board of Forestry adopted emergency Zone 0 regulations on 19 Aug 2026 but withdrew them from the Office of Administrative Law on 8 Sep 2026, so no Zone 0 rule is in effect yet; check for the re-adopted rule and its phase-in for existing homes.");
+  if (fire) add("Wildfire hardening", "yes", st === "CA" ? "Very High fire zone: ember-resistant vents, boxed eaves and a 5-ft ember-resistant (Zone 0) perimeter under CAL FIRE standards." : "High wildfire risk zone: ember-resistant vents, boxed eaves and defensible space perimeter under NFPA 1144 standards.");
   
   return out();
 }
 
-// ---------------- Detailed House-Specific Cost Analysis Engine ----------------
 function getHouseUpgradeCostDetails(u, h, m) {
   const yb = h.yb || 1965;
   const hv = h.houseHv || m.hv || 900000;
@@ -3843,25 +3877,43 @@ function getHouseUpgradeCostDetails(u, h, m) {
     const permits = soft - plans;
 
     // Statutory developer fees:
-    // School developer fee: ADUs/JADUs under 500 sf of interior livable space are exempt (Gov. Code § 66311.5(c)(3) "less than 500 square feet"; Ed. Code § 17620(a)(1)(C)(i)); modeled at the SAB Level 1 cap ($5.38/sf, set 28 Jan 2026) at 500 sf and up
-    schoolFee = sqft >= 500 ? Math.round(sqft * 5.38) : 0;   // districts set their own rate up to the SAB Level 1 cap; verify locally
-    // Development impact fee: ADUs of 750 sf or less of interior livable space are exempt (Gov. Code § 66311.5, renumbered from § 66324 by SB 543, eff. 1 Jan 2026); proportional above that
-    impactFees = sqft <= 750 ? 0 : Math.round(8000 + (sqft - 750) * 18.0);
+    const activeSt = (typeof activeState === "function" ? activeState() : null) || "CA";
+    if (activeSt === "CA") {
+      schoolFee = sqft >= 500 ? Math.round(sqft * 5.38) : 0;
+      impactFees = sqft <= 750 ? 0 : Math.round(8000 + (sqft - 750) * 18.0);
+    } else if (activeSt === "WA") {
+      schoolFee = 0; impactFees = 0; // WA HB 1337 prohibits discriminatory ADU impact fees
+    } else if (activeSt === "FL") {
+      schoolFee = 0; impactFees = sqft <= 800 ? 0 : Math.round(3500 + (sqft - 800) * 8.0); // FL Live Local Act abatement
+    } else if (activeSt === "TX") {
+      schoolFee = 0; impactFees = sqft <= 750 ? 0 : Math.round(4000 + (sqft - 750) * 10.0); // Austin HOME infill schedule
+    } else {
+      schoolFee = sqft >= 600 ? Math.round(sqft * 2.50) : 0;
+      impactFees = sqft <= 750 ? 0 : Math.round(5000 + (sqft - 750) * 12.0);
+    }
 
     breakdown = [
       { cat: "Foundation & Reinforced Concrete Slab", amount: fnd, desc: `~$${Math.round(fnd/sqft)}/sq ft: 4\" fiber-reinforced monolithic slab with continuous grade beam footings` },
       { cat: "Framing & Structural Shell", amount: frame, desc: `~$${Math.round(frame/sqft)}/sq ft: 2x6 exterior framing, engineered roof trusses, OSB shear wall assemblies` },
-      { cat: "Exterior Envelope & Roofing", amount: env, desc: `~$${Math.round(env/sqft)}/sq ft: 3-coat cementitious stucco / fiber-cement siding, Title 24 cool composition roof, Low-E vinyl windows` },
+      { cat: "Exterior Envelope & Roofing", amount: env, desc: `~$${Math.round(env/sqft)}/sq ft: 3-coat cementitious stucco / fiber-cement siding, cool composition roof, Low-E vinyl windows` },
       { cat: "Mechanical, Electrical & Plumbing (MEP)", amount: mep, desc: `~$${Math.round(mep/sqft)}/sq ft: Ductless multi-zone heat pump, 100A subpanel, PEX plumbing, high-efficiency heat pump water heater` },
       { cat: "Interior Architectural Finishes", amount: fin, desc: `~$${Math.round(fin/sqft)}/sq ft: Drywall, luxury vinyl plank, complete kitchen with quartz counters, stainless appliances, full tile bath` },
-      { cat: "Architecture, Engineering & City Permits", amount: plans + permits, desc: "Architectural drawings, structural engineering calculations, Title 24 energy compliance report, municipal plan check" }
+      { cat: "Architecture, Engineering & City Permits", amount: plans + permits, desc: "Architectural drawings, structural engineering calculations, energy compliance report, municipal plan check" }
     ];
 
     if (schoolFee > 0) {
-      breakdown.push({ cat: "School District Developer Fee (500 sq ft and up)", amount: schoolFee, desc: "Modeled at the State Allocation Board Level 1 cap ($5.38/sq ft, adopted 28 Jan 2026); districts set their own rate up to that cap. ADUs under 500 sq ft are exempt (Gov. Code § 66311.5(c)(3); Ed. Code § 17620(a)(1)(C)(i))" });
+      breakdown.push({
+        cat: `School District Developer Fee (${activeSt === "CA" ? "Gov. Code § 66311.5" : "Local district requirement"})`,
+        amount: schoolFee,
+        desc: activeSt === "CA" ? "Modeled at SAB Level 1 cap ($5.38/sq ft, Jan 2026); under 500 sq ft exempt" : `Standard school facility impact fee for new residential space over threshold in ${activeSt}`
+      });
     }
     if (impactFees > 0) {
-      breakdown.push({ cat: "Development Impact Fees (over 750 sq ft)", amount: impactFees, desc: "Proportional parks, traffic and utility fees (ADUs of 750 sq ft or less are exempt, Gov. Code § 66311.5 as amended by SB 543)" });
+      breakdown.push({
+        cat: `Development Impact Fees (${activeSt === "CA" ? "over 750 sq ft, Gov. Code § 66311.5" : "municipal impact fees"})`,
+        amount: impactFees,
+        desc: activeSt === "CA" ? "Proportional parks, traffic and utility fees (ADUs of 750 sq ft or less are exempt, Gov. Code § 66311.5)" : `Proportional municipal infrastructure fees (${activeSt} infill schedule)`
+      });
     }
 
     let siteCost = 0;
@@ -3870,11 +3922,15 @@ function getHouseUpgradeCostDetails(u, h, m) {
       siteCost += 4800;
     }
     if (h.hill) {
-      siteAdjustments.push({ name: "Hillside Ordinance Foundation", amount: 26000, desc: "Drilled concrete friction caissons and grade beams for sloped ground" });
+      siteAdjustments.push({ name: "Hillside Foundation Engineering", amount: 26000, desc: "Drilled concrete friction caissons and grade beams for sloped ground" });
       siteCost += 26000;
     }
     if (h.fire) {
-      siteAdjustments.push({ name: "CalFire VHFHSZ Wildfire Hardening (Title 24 Ch. 7A)", amount: 9500, desc: "Non-combustible exterior siding, 1/8\" ember-resistant Vulcan vents, and interior NFPA 13D fire sprinkler system" });
+      siteAdjustments.push({
+        name: activeSt === "CA" ? "CalFire VHFHSZ Wildfire Hardening (Title 24 Ch. 7A)" : "Wildfire & High-Risk Hazard Hardening (NFPA 1144)",
+        amount: 9500,
+        desc: "Non-combustible exterior siding, 1/8\" ember-resistant vents, and interior NFPA 13D fire sprinkler system"
+      });
       siteCost += 9500;
     }
     if (h.slide || h.liq || h.fault) {
@@ -4305,11 +4361,11 @@ function renderHouse(box, a, lot, ll, st) {
       ${fact("Open yard (est.)", `${fmtN(Math.round(F.yard))} sq ft`, "lot minus buildings, less ~20% for setbacks")}
       ${fact("Zoning", z ? `${esc(z.zone)}` : (m.z ? esc(m.z.top) : null), z ? `parcel zoning layer (${esc(z.juris || "city")})` : isOCArea(m) ? "neighborhood summary (preliminary)" : "block-group summary")}
       ${fact("Height limit", hMax ? `${hMax} ft` : null, rule ? `${esc(rule.code_section)} (round-6 research, not yet checked against the code)` : ocH ? "city code summary (preliminary)" : null)}
-      ${fact("Selling an ADU separately (AB 1033)", (m.c || p.c || "").toLowerCase().trim() === "santa monica" ? "<span style='color:var(--ok-ink);font-weight:600'>Santa Monica has an AB 1033 opt-in ordinance (SMMC § 9.31.026), so an ADU can be sold as a condominium under the city's conditions (the adoption date and conditions were not verified; read the ordinance)</span>" : "<span style='color:var(--ink-2)'>Not allowed here: an ADU can be rented but not sold apart from the main home (Gov. Code § 66314(d)(1)) unless the city opts in to AB 1033 (§ 66342)</span>", "state ADU law; verify the city's current ordinance")}
-      ${fact("Fire zone", rOff ? ((m.fire || 0) >= 0.5 ? "Very High Fire Hazard Severity Zone (area map; lot-level check offline)" : "Not in a Very High zone on the area map (lot-level check offline)") : !R ? "checking…" : (R.fire && R.fire.vh ? "Very High Fire Hazard Severity Zone" : ((m.fire || 0) >= 0.5 ? "Very High Fire Hazard Severity Zone (area map; Title 24 Ch. 7A applies)" : "Not in a Very High zone")), "CAL FIRE Fire Hazard Severity Zones (SRA 2024 / LRA 2025)")}
-      ${fact("Historic status", rOff ? "lot-level check offline (HPOZ, monuments, County register)" : !R ? "checking…" : (histText(R) || "None on record"), R && R.hpoz && R.hpoz.ok ? "LA City / County historic resources" : null)}
-      ${fact("Hillside area", rOff ? "lot-level check offline" : !R ? "checking…" : (R.hill && R.hill.ok && R.hill.v.length ? "In designated Hillside Area" : "Not in Hillside Area"), R && R.hill && R.hill.ok ? "LA City Hillside Area map" : null)}
-      ${fact("Geologic hazard", rOff ? "lot-level check offline" : !R ? "checking…" : (geoText(R) || "None on state map"), R && R.fault && R.fault.ok ? "California Geological Survey" : null)}
+      ${fact("Selling an ADU separately", (m.c || p.c || "").toLowerCase().trim() === "santa monica" ? "<span style='color:var(--ok-ink);font-weight:600'>Santa Monica has an AB 1033 opt-in ordinance (SMMC § 9.31.026), so an ADU can be sold as a condominium</span>" : (activeState() === "CA" ? "<span style='color:var(--ink-2)'>Not allowed here: an ADU can be rented but not sold apart from the main home (Gov. Code § 66314) unless the city opts in to AB 1033</span>" : activeState() === "WA" ? "<span style='color:var(--ok-ink);font-weight:600'>Unit subdivision authorized under WA HB 1337 if local code permits condo conveyance</span>" : activeState() === "TX" ? "<span style='color:var(--ok-ink);font-weight:600'>Fee-simple lot split allowed down to 2,000 sq ft lots under Austin HOME Phase 2</span>" : "<span style='color:var(--ink-2)'>Rental allowed; separate sale subject to municipal subdivision approval</span>"), activeState() === "CA" ? "California Gov. Code § 66314 / AB 1033" : `${activeState()} accessory housing statutes`)}
+      ${fact("Fire zone", rOff ? ((m.fire || 0) >= 0.5 ? "Very High Fire Hazard Zone (area map)" : "Not in Very High zone") : !R ? "checking…" : (R.fire && R.fire.vh ? "Very High Fire Hazard Severity Zone" : ((m.fire || 0) >= 0.5 ? "Very High Fire Hazard Severity Zone" : "Not in Very High zone")), activeState() === "CA" ? "CAL FIRE Fire Hazard Severity Zones (SRA 2024 / LRA 2025)" : "USFS Wildfire Risk to Communities")}
+      ${fact("Historic status", rOff ? "lot-level check offline" : !R ? "checking…" : (histText(R) || "None on record"), activeState() === "CA" && R && R.hpoz && R.hpoz.ok ? "LA City / County historic resources" : "National Register & Municipal Historic Survey")}
+      ${fact("Hillside area", rOff ? "lot-level check offline" : !R ? "checking…" : (R.hill && R.hill.ok && R.hill.v.length ? "In designated Hillside Area" : "Not in Hillside Area"), activeState() === "CA" && R && R.hill && R.hill.ok ? "LA City Hillside Area map" : "Local Topographic & Slope Ordinance")}
+      ${fact("Geologic hazard", rOff ? "lot-level check offline" : !R ? "checking…" : (geoText(R) || "None on state map"), activeState() === "CA" && R && R.fault && R.fault.ok ? "California Geological Survey" : "USGS Quaternary Faults & National Seismic Map")}
     </tbody></table>
     
     ${bestH ? `<p class="verdict" style="margin-top:8px">Best bet for this home: <b>${esc(bestH.n)}</b>. Expected return: <b>${fvpd(bestH.per)} / $1</b> (adds ~${fmt$(bestH.v)} on ~${fmt$(bestH.c)} investment).</p>` : h.res ? `<p class="verdict" style="margin-top:8px">No upgrade here returns $1 of value per $1 spent; the list below shows the closest.</p>` : ""}
