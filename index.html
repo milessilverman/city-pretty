@@ -1066,7 +1066,7 @@ details.panel-sec .sec-content { padding: 12px; }
     <div class="county-buttons" role="group" aria-label="Select County">
       <button type="button" class="county-btn active" id="btn-county-la" onclick="switchCounty('la')" title="Switch to Los Angeles County">🌴 LA County</button>
       <button type="button" class="county-btn" id="btn-county-oc" onclick="openCounty('06059')" title="Expand to Orange County">🍊 Orange County</button>
-      <select id="county-more" class="county-btn" aria-label="More counties" title="More counties" onchange="this.value && openCounty(this.value)" style="border-left:1px solid var(--rule);font-family:inherit;max-width:10.5em;min-width:0"><option value="">More counties…</option></select>
+      <select id="county-more" class="county-btn" aria-label="More counties" title="More counties" onchange="this.value && openCounty(this.value)" oninput="this.value && openCounty(this.value)" style="border-left:1px solid var(--rule);font-family:inherit;max-width:10.5em;min-width:0"><option value="">More counties…</option></select>
     </div>
   </div>
   <div class="ctl layer-presets"><label>Map Preset</label>
@@ -1859,7 +1859,7 @@ const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;
 const fmt$ = v => v == null || isNaN(v) ? "–" : v >= 1e9 ? "$" + (v/1e9).toFixed(1) + "B" : v >= 1e6 ? "$" + (v/1e6).toFixed(v >= 1e7 ? 0 : 1) + "M" : v >= 1e3 ? "$" + Math.round(v/1e3) + "k" : "$" + Math.round(v);
 const fmtN = v => v == null || isNaN(v) ? "–" : Math.round(v).toLocaleString();
 const GRADE_TXT = { A: "A · measured on LA sales", B: "B · studied elsewhere", C: "C · transferred from a related study", D: "D · assumption", U: "U · unverified research lead (round 6)" };
-const allowed = id => { const g = D.catalog[id].grade; return g === "none" || g <= $("#evid").value; };
+const allowed = id => { const g = (D.catalog[id] && D.catalog[id].grade) || "C"; return g === "none" || g <= $("#evid").value; };
 const fvpd = v => "$" + (v < 1 ? v.toFixed(2) : v < 10 ? v.toFixed(1) : Math.round(v));
 const CATS = ["Greening", "Parks & recreation", "Transit", "Streets & safety", "Clean streets", "Housing", "Energy", "Environment", "Schools & services", "Amenities & economy", "Zoning"];
 const CAT_COLOR = { "Greening": "--cat-3", "Parks & recreation": "--park-line", "Transit": "--cat-1", "Streets & safety": "--school", "Clean streets": "--warn-ink", "Housing": "--cat-2", "Energy": "--fw-casing", "Environment": "--water-line", "Schools & services": "--seq-5", "Amenities & economy": "--heat-4", "Zoning": "--ink-3" };
@@ -1967,7 +1967,7 @@ function computeBreaks() {
 }
 function colorFor(p) {
   const k = $("#metric").value;
-  if (k === "top") return p.t ? css(CAT_COLOR[D.catalog[p.t].category] || "--ink-3") : css("--none");
+  if (k === "top") return p.t && D.catalog[p.t] ? css(CAT_COLOR[D.catalog[p.t].category] || "--ink-3") : css("--none");
   const v = METRICS[k].f(p); if (v == null || isNaN(v)) return css("--none");
   let i = 0; while (i < breaks.length && v > breaks[i]) i++;
   return ramp(METRICS[k].ramp)[i];
@@ -3348,9 +3348,15 @@ function jsonp(url, ms = 7000) {
   });
 }
 async function arcQuery(url, params, ms = 6000) {
+  let cleanUrl = String(url || "").trim();
+  if (params && !cleanUrl.endsWith("/query") && !cleanUrl.includes("/query?") && !cleanUrl.includes("?") && (/\/(MapServer|FeatureServer)\/\d+$/i.test(cleanUrl))) {
+    cleanUrl = cleanUrl + "/query";
+  } else if (params && !cleanUrl.endsWith("/query") && !cleanUrl.includes("/query?") && cleanUrl.includes("?") && (/\/(MapServer|FeatureServer)\/\d+\?/i.test(cleanUrl))) {
+    cleanUrl = cleanUrl.replace(/(\/(MapServer|FeatureServer)\/\d+)\?/i, "$1/query?");
+  }
   const queryStr = params ? (typeof params === "string" ? params : new URLSearchParams(params).toString()) : "";
-  const sep = url.includes("?") ? "&" : "?";
-  const q = params ? (url + sep + "f=json&" + queryStr) : (url + (url.includes("f=json") ? "" : sep + "f=json"));
+  const sep = cleanUrl.includes("?") ? "&" : "?";
+  const q = params ? (cleanUrl + sep + "f=json&" + queryStr) : (cleanUrl + (cleanUrl.includes("f=json") ? "" : sep + "f=json"));
   try {
     const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), ms);
     const r = await fetch(q, { signal: ctl.signal });
@@ -5976,9 +5982,31 @@ function activeState() { const f = activeFips(); if (f.startsWith("06")) return 
 function countyOf(m) { return (m && m.county) || (activeCounty === "oc" && D_OC && D_OC.meta && D_OC.meta.county) || "Los Angeles County"; }
 function countyBundleEls() { return [...document.querySelectorAll("script.county-bundle")]; }
 async function fetchJSON(url) {   // hosted county file: JSON, or gzip-compressed JSON (.json.gz) that the server sent as it is
-  const r = await fetch(url); if (!r.ok) throw new Error(url + ": HTTP " + r.status);
+  const isFile = typeof window !== "undefined" && window.location && window.location.protocol === "file:";
+  const cleanUrl = url.startsWith("http") ? url : (isFile ? "https://milessilverman.github.io/city-pretty/" + url : url);
+  let r;
+  try {
+    r = await fetch(cleanUrl);
+  } catch(e) {
+    if (!cleanUrl.startsWith("http")) {
+      r = await fetch("https://milessilverman.github.io/city-pretty/" + cleanUrl);
+    } else throw e;
+  }
+  if (!r.ok) throw new Error(url + ": HTTP " + r.status);
   const buf = new Uint8Array(await r.arrayBuffer());
-  if (buf[0] === 0x1f && buf[1] === 0x8b) return JSON.parse(await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream("gzip"))).text());
+  if (buf[0] === 0x1f && buf[1] === 0x8b) {
+    try {
+      if (typeof DecompressionStream !== "undefined") {
+        const s = await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream("gzip"))).text();
+        return JSON.parse(s);
+      }
+    } catch(e) {}
+    if (typeof fflate !== "undefined" && fflate.gunzipSync) {
+      const decomp = fflate.gunzipSync(buf);
+      const jsonStr = (typeof TextDecoder !== "undefined") ? new TextDecoder().decode(decomp) : fflate.strFromU8(decomp);
+      return JSON.parse(jsonStr);
+    }
+  }
   return JSON.parse(new TextDecoder().decode(buf));
 }
 async function loadCountyBundle(fips) {
@@ -6045,8 +6073,22 @@ function syncAttribution() {
 async function openCounty(fips, wantBgId) {
   if (fips === "06037") return switchCounty("la", wantBgId);
   let B = COUNTY_BUNDLES[fips];
-  if (!B && fips === ORANGE_FIPS) B = D_OC;
-  if (!B) { if (typeof showToast === "function") showToast("Loading county…"); B = await loadCountyBundle(fips); }
+  if (!B && fips === ORANGE_FIPS) {
+    if (!D_OC && window.ocReady) await window.ocReady;
+    B = D_OC;
+  }
+  if (!B) {
+    if (typeof showToast === "function") showToast("Loading county…");
+    try {
+      B = await loadCountyBundle(fips);
+    } catch (err) {
+      console.error("County load failed:", err);
+      if (typeof showToast === "function") showToast("Could not load county: " + (err.message || "network error"));
+      const sel = document.getElementById("county-more");
+      if (sel) sel.value = isOrangeActive() ? "" : (activeFips() === "06037" ? "" : activeFips());
+      return;
+    }
+  }
   if (D_OC !== B) {
     if (ocLayer && typeof map !== "undefined" && map && map.hasLayer(ocLayer)) map.removeLayer(ocLayer);
     ocLayer = null; D_OC = B; if (typeof window !== "undefined") window.D_OC = D_OC;
@@ -6270,18 +6312,22 @@ function switchCounty(c, wantBgId) {
       }
     }
     
+    const defBg = (D_OC && D_OC.meta && D_OC.meta.default_bg) ? D_OC.meta.default_bg : null;
     const mh = window.location.hash.match(/#bg=([0-9]+)/);
     const hashBg = (mh && mh[1].startsWith(activeFips())) ? mh[1] : null;
-    const selectTarget = wantBgId || hashBg || (window.__linkBg && window.__linkBg.startsWith(activeFips()) ? window.__linkBg : null);
+    const selectTarget = wantBgId || hashBg || (window.__linkBg && window.__linkBg.startsWith(activeFips()) ? window.__linkBg : null) || defBg;
 
     if (selectTarget && byId.has(selectTarget)) {
       select(selectTarget, true);
     } else {
-      const target = D_OC && (D_OC.features.find(f => f.properties.n === "Woodbridge") || D_OC.features[0]);
+      const target = D_OC && (D_OC.features.find(f => f.properties && f.properties.n === "Woodbridge") || D_OC.features[0]);
       if (target && typeof select === "function") select(target.properties.id, false);
       if (typeof map !== "undefined" && map && map.flyTo) {
         if (isOrangeActive()) map.flyTo([33.71, -117.83], 11);
-        else map.flyToBounds(L.geoJSON(D_OC).getBounds(), { maxZoom: 11 });
+        else {
+          const bounds = (ocLayer && ocLayer.getBounds && ocLayer.getBounds().isValid()) ? ocLayer.getBounds() : (D_OC && D_OC.features && D_OC.features.length ? L.geoJSON(D_OC).getBounds() : null);
+          if (bounds && bounds.isValid && bounds.isValid()) map.flyToBounds(bounds, { maxZoom: 11 });
+        }
       }
     }
     const nT = D_OC && D_OC.features ? D_OC.features.length : 0, nC = D_OC && D_OC.features ? new Set(D_OC.features.map(f => f.properties.c)).size : 0;
@@ -6377,7 +6423,38 @@ async function init() {
   });
   $("#lots-hood").onclick = () => { $("#lots-note").hidden = true; selectAt(map.getCenter()); };
   map.on("moveend", drawNumbers);
-  map.on("click", e => {
+  map.on("click", async e => {
+    const ll = e.latlng;
+    const curFips = typeof activeFips === "function" ? activeFips() : "06037";
+    let inCurCounty = false;
+    if (curFips === "06037" && typeof bgs !== "undefined" && bgs && bgs.getLayers) {
+      inCurCounty = (typeof pointInFeature === "function") && bgs.getLayers().some(l => l.feature && pointInFeature(l.feature, ll.lng, ll.lat));
+    } else if (typeof ocLayer !== "undefined" && ocLayer && ocLayer.getLayers) {
+      inCurCounty = (typeof pointInFeature === "function") && ocLayer.getLayers().some(l => l.feature && pointInFeature(l.feature, ll.lng, ll.lat));
+    }
+
+    if (!inCurCounty) {
+      let targetFips = null;
+      if (typeof getParcelService === "function") {
+        const svc = getParcelService(ll);
+        if (svc && svc.counties && svc.counties.length) targetFips = svc.counties[0];
+      }
+      if (!targetFips && typeof fipsFromLatLng === "function") {
+        const fcc = await fipsFromLatLng(ll.lat, ll.lng);
+        if (fcc && fcc.fips) targetFips = fcc.fips;
+      }
+      if (targetFips && targetFips !== curFips) {
+        if (typeof countyBundleEls === "function" && countyBundleEls().some(el => el.dataset.fips === targetFips)) {
+          if (typeof showToast === "function") showToast("Opening county " + targetFips + "…");
+          try {
+            await openCounty(targetFips);
+          } catch(err) {
+            console.warn("Could not switch county on click:", err);
+          }
+        }
+      }
+    }
+
     if (typeof houseAt === "function") {
       if (map.getZoom() < 15) {
         map.flyTo(e.latlng, 16, { animate: true });
