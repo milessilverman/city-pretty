@@ -2264,7 +2264,11 @@ function drawFacilities() {
     if (!b.contains([lat, lon])) continue;
     const [col, ch] = FAC_STYLE[kind] || ["#444", "•"];
     layers.fac.addLayer(L.marker([lat, lon], { keyboard: false, icon: L.divIcon({ className: "", iconSize: [14, 14], html: `<div class="fac" style="background:${col}">${ch}</div>` }) })
-      .bindTooltip(`<b>${esc(kind[0].toUpperCase() + kind.slice(1))}</b>${n ? " · " + esc(n) : ""}`).on("click", e => selectAt(e.latlng)));
+      .bindTooltip(`<b>${esc(kind[0].toUpperCase() + kind.slice(1))}</b>${n ? " · " + esc(n) : ""}`).on("click", e => {
+      L.DomEvent.stopPropagation(e);
+      if (typeof selectAt === "function") selectAt(e.latlng);
+      if (typeof houseAt === "function") houseAt(e.latlng);
+    }));
   }
 }
 
@@ -2303,13 +2307,22 @@ function drawProjects() {
   const z = map.getZoom();
   if (z < 13) { if (map.hasLayer(layers.proj)) map.removeLayer(layers.proj); return; }
   if (!map.hasLayer(layers.proj)) layers.proj.addTo(map);
-  const b = map.getBounds().pad(.1), K = D.layers.pj_kinds; let n = 0;
-  for (const [k, nm, ad, st, u, yr, lat, lon] of D.layers.projects) {
+  const b = map.getBounds().pad(.1);
+  const B = (typeof activeBundle === "function" ? activeBundle() : null) || D;
+  const L_ = (B && B.layers) || (D && D.layers) || {};
+  const K = L_.pj_kinds || (D && D.layers && D.layers.pj_kinds) || [];
+  const projs = Array.isArray(L_.projects) ? L_.projects : (D && D.layers && Array.isArray(D.layers.projects) ? D.layers.projects : []);
+  let n = 0;
+  for (const [k, nm, ad, st, u, yr, lat, lon] of projs) {
     if (!b.contains([lat, lon])) continue; if (++n > 1500) break;
-    const kind = K[k], big = u && u >= 10;
+    const kind = K[k] || "housing project", big = u && u >= 10;
     layers.proj.addLayer(L.circleMarker([lat, lon], { radius: big ? 5 + Math.min(Math.sqrt(u) / 2, 6) : 3.2, color: "#fff", weight: 1, fillColor: PJ_STYLE[kind] || "#666", fillOpacity: .9 })
       .bindTooltip(`<b>${esc(kind[0].toUpperCase() + kind.slice(1))}</b>${nm ? " · " + esc(nm) : ""}${ad ? "<br>" + esc(ad) : ""}${u ? `<br>${fmtN(u)} home${u > 1 ? "s" : ""}` : ""}${st ? " · " + esc(st) : ""}${yr ? " · " + esc(yr) : ""}`)
-      .on("click", e => selectAt(e.latlng)));
+      .on("click", e => {
+        L.DomEvent.stopPropagation(e);
+        if (typeof selectAt === "function") selectAt(e.latlng);
+        if (typeof houseAt === "function") houseAt(e.latlng);
+      }));
   }
 }
 
@@ -2331,18 +2344,24 @@ function siteHtml(s) {
     <br><span class="muted">Screening estimate: apartment value from LA rents and cap rates, build cost from LA case studies (round-7 research); land prices and fees are estimates.</span></div>`;
 }
 function drawUnder() {
-  const U = D.layers.underused; if (!map._loaded || !U || !layers.under) return;
+  const B = (typeof activeBundle === "function" ? activeBundle() : null) || D;
+  const U = (B && B.layers && B.layers.underused) || (D && D.layers && D.layers.underused);
+  if (!map._loaded || !U || !layers.under) return;
+  const sites = (B && B.under && B.under.sites) || (D && D.under && D.under.sites) || {};
   const want = new Set(map.getZoom() >= 13 ? cellKeys(U.cell, .2) : []);
   for (const [k, l] of _uDrawn) if (!want.has(k)) { layers.under.removeLayer(l); _uDrawn.delete(k); }
   for (const k of want) {
     if (_uDrawn.has(k)) continue;
-    const g = L.layerGroup((U.cells[k] || []).map(([sid, rings]) => { const s = D.under.sites[sid]; if (!s) return null; const col = UCOL[s.k] || "#888";
+    const g = L.layerGroup((U.cells[k] || []).map(([sid, rings]) => { const s = sites[sid]; if (!s) return null; const col = UCOL[s.k] || "#888";
       const done = !!s.bs;
       return L.polygon(rings.map(decodeLine), done ? { color: "#868e96", weight: 1.2, fillColor: "#868e96", fillOpacity: .08, dashArray: "1 4" }
           : { color: col, weight: 1.4, fillColor: col, fillOpacity: .35, dashArray: s.k === "parking lot" ? "3 3" : null })
         .bindTooltip(done ? `${{ built: "already built", building: "under construction", planned: "project approved" }[s.bs]} (was listed as ${esc(s.k)}) · click for details`
           : `${esc(s.k)} · ${s.ac.toFixed(1)} ac${s.mkt ? " · ~" + fmt$(s.mkt) + " land" : ""} (click for more)`, { sticky: true }).bindPopup(() => siteHtml(s), { maxWidth: 320 })
-        .on("click", () => { if (selected !== s.gid) select(s.gid, false); }); }).filter(Boolean));
+        .on("click", e => {
+          if (selected !== s.gid) select(s.gid, false);
+          if (typeof houseAt === "function") houseAt(e.latlng);
+        }); }).filter(Boolean));
     layers.under.addLayer(g); _uDrawn.set(k, g);
   }
 }
@@ -4086,9 +4105,42 @@ async function houseAt(ll) {
   else if (panel) { panel.innerHTML = ""; panel.appendChild(box); }
   const tok = {}; houseTok = tok;
   let f = hoverFeat && hoverFeat.geometry && ringsContain(hoverFeat.geometry.rings, ll) ? hoverFeat : null;
-  if (!f) try { f = await fetchParcel(ll); } catch (e) {
-    box.innerHTML = `<h3>This home</h3><p class="small">Couldn't reach the County's parcel service (${esc(e.message)}). Per-house checks need an internet connection; the rest of the map works offline.</p>`; return; }
-  if (!f) { box.innerHTML = `<h3>This home</h3><p class="small muted">No parcel at that spot (street or public land). Click on a lot.</p>`; return; }
+  if (!f) {
+    try { f = await fetchParcel(ll); } catch (e) { f = null; }
+  }
+  if (!f) {
+    const z = (typeof zoneAt === "function" ? zoneAt(ll) : null) || {};
+    const p = (typeof selected !== "undefined" && byId.get(selected)) ? byId.get(selected).properties : { c: countyOf(), hv: 650000 };
+    const curB = (typeof activeBundle === "function" ? activeBundle() : null) || (typeof D !== "undefined" && D) || {};
+    const m = (curB.details && curB.details[selected]) ? (curB.details[selected].m || p) : p;
+    const zoneName = z.zone || "Residential";
+    const zoneDesc = z.desc || z.cat || "Zoned Land Plot";
+    const cityName = z.juris || p.c || countyOf();
+    const addr = `${zoneName} (${zoneDesc}) · ${cityName}`;
+    const pad = 0.00018;
+    const rings = (z.rings && z.rings.length) ? z.rings.map(r => r.map(([la, lo]) => [lo, la])) : [[[ll.lng - pad, ll.lat - pad], [ll.lng + pad, ll.lat - pad], [ll.lng + pad, ll.lat + pad], [ll.lng - pad, ll.lat + pad], [ll.lng - pad, ll.lat - pad]]];
+    f = {
+      attributes: {
+        AIN: `ZONE-${zoneName.replace(/[^A-Za-z0-9]/g, "")}-${Math.round(ll.lat*1e4)}`,
+        SitusFullAddress: addr,
+        SitusHouseNo: "",
+        SitusStreet: `${ll.lat.toFixed(4)}°, ${ll.lng.toFixed(4)}°`,
+        ZoneCode: zoneName,
+        UseDescription: zoneDesc,
+        UseCode: zoneName,
+        UseType: /comm|retail|office|mixed/i.test(zoneDesc) ? "commercial" : /ind/i.test(zoneDesc) ? "industrial" : "residential",
+        Roll_TotalValue: 0,
+        Roll_LandValue: 0,
+        Roll_ImpValue: 0,
+        YearBuilt1: 0,
+        SQFTmain1: 0,
+        Units1: 1,
+        county: countyOf(),
+        city: cityName
+      },
+      geometry: { rings }
+    };
+  }
   const a = f.attributes, rings = (f.geometry && f.geometry.rings) || [];
   showParcel(a, rings);
   const lot = rings.length ? Math.round(ringAreaM2(rings[0]) * 10.7639) : 0;
@@ -6267,6 +6319,33 @@ async function init() {
 
 // --- Interactive Leaflet Map Popup for Every House ---
 let houseMapPopup = null;
+function stateReformHeadline(st, m) {
+  st = String(st || "").toUpperCase();
+  const nearTransit = (m.nearest_transit && m.nearest_transit.distance_mi <= 0.5) || (m.din >= 4);
+  if (st === "CA") {
+    return nearTransit ? "<b>AB 2097:</b> 0 parking minimums within ½ mi of transit · <b>SB 9:</b> By-right duplex & lot split" : "<b>SB 9:</b> By-right lot split & duplex permitted · <b>Gov Code § 66310:</b> By-right ADUs";
+  } else if (st === "WA") {
+    return "<b>HB 1110:</b> By-right duplex & 4-plex · <b>HB 1337:</b> Up to 2 ADUs per lot with zero owner-occupancy requirements";
+  } else if (st === "FL") {
+    return "<b>Live Local Act (SB 102/328):</b> By-right commercial-to-residential infill & matching highest allowable density within 1 mi";
+  } else if (st === "TX") {
+    return "<b>Austin HOME Initiative:</b> Up to 3 homes per single-family lot · 2,000 sq ft lot minimums";
+  } else if (st === "CO") {
+    return "<b>HB 24-1152:</b> By-right ADUs statewide · <b>HB 24-1313:</b> Transit-oriented communities density";
+  } else if (st === "MA") {
+    return "<b>MBTA Communities Act:</b> 15 units/acre by-right multifamily zoning near transit";
+  } else if (st === "OR") {
+    return "<b>HB 2001:</b> Middle housing duplexes & cottage clusters permitted by right · <b>CFEC:</b> 0 parking near transit";
+  } else if (st === "AZ") {
+    return "<b>HB 2720 / SB 1415:</b> Statewide ADU by-right legalization & missing-middle urban infill";
+  } else if (st === "IL") {
+    return "<b>Chicago ADU Ordinance:</b> By-right coach houses & conversion units · Transit-served infill density";
+  } else if (st === "NY") {
+    return "<b>NY Pro-Housing Communities:</b> Discretionary infrastructure funding prioritization & by-right infill financing";
+  }
+  return "<b>By-Right Infill & ADUs:</b> Missing-middle infill authorized under municipal codes and federal Fannie Mae/FHA ADU financing guidelines";
+}
+
 function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R) {
   if (typeof map === "undefined" || !map) return;
   const p = byId.get(selected) ? byId.get(selected).properties : { c: a.county || countyOf(), hv: 850000, rent: 2200 };
@@ -6333,7 +6412,7 @@ function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R) {
         <div style="font-weight:700;color:#166534;margin-bottom:2px">🏛️ Zoning &amp; State Housing Rights</div>
         <div><b>Zoning Code:</b> ${esc(zCode)} (${esc(zExpl.base || "Allowed residential")})</div>
         <div><b>ADU / Infill:</b> By right ADU allowed · ${lot >= 2400 ? "Eligible for Missing Middle / Duplex" : "Standard lot envelope"}</div>
-        <div><b>State Reform:</b> ${(m.nearest_transit && m.nearest_transit.distance_mi <= 0.5) || m.din >= 4 ? "0 parking minimums under transit deregulation" : "Standard parking requirements apply"}</div>
+        <div><b>State Reform:</b> ${stateReformHeadline(activeState(), m)}</div>
       </div>
 
       <div style="font-size:11px;color:#334155;margin-bottom:4px">
