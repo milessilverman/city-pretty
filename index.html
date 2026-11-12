@@ -908,6 +908,7 @@ tr:last-child td { border-bottom: 0; } td.num { font-family: var(--mono); color:
 .locate { background: var(--sheet); border: 1px solid var(--rule-strong); border-radius: 6px; padding: 5px 8px; font: 500 12px var(--body); color: var(--ink); cursor: pointer; }
 .fac-pick { display: inline-block; } .fac-pick summary { cursor: pointer; color: var(--ink-2); } .fac-pick > div { position: absolute; z-index: 1000; background: var(--sheet); border: 1px solid var(--rule-strong); border-radius: 8px; padding: 6px 10px; box-shadow: 0 4px 14px rgba(0,0,0,.15); }
 .fac { font: 700 9px/14px var(--mono); width: 14px; height: 14px; border-radius: 50%; color: #fff; text-align: center; border: 1.5px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.35); }
+.amen-badge { font: 700 10px/16px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; width: 16px; height: 16px; border-radius: 50%; color: #fff; text-align: center; border: 1.5px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.45); display: flex; align-items: center; justify-content: center; cursor: pointer; }
 .lbl-zone { font: 600 10px/1 var(--mono); color: var(--ink-2); white-space: nowrap; pointer-events: none; text-shadow: 0 0 2px var(--sheet), 0 0 3px var(--sheet); }
 .site-done { font-weight: 600; color: #2f9e44; margin-bottom: 3px; }
 .fund { margin: 8px 0; padding: 8px 10px; border: 1px solid var(--rule); border-radius: 8px; } .fund .kv { margin-top: 6px; grid-template-columns: minmax(120px, 2fr) minmax(0, 3fr); }
@@ -2070,7 +2071,7 @@ function zoomed() {
     if (!l) return; if (show && !map.hasLayer(l)) l.addTo(map); if (!show && map.hasLayer(l)) map.removeLayer(l); };
   toggle("art", z >= 12); toggle("walls", z >= 14); toggle("stops", z >= 13); toggle("amen", z >= 13);
   toggle("hoods", z >= 12); toggle("hoodLabels", z >= 13 && z < 15); toggle("cityLabels", z >= 10 && z < 13);
-  drawStreets(); drawLabels(); drawZoning(); drawFacilities(); drawAmenities(); drawUnder(); drawProjects();
+  drawStreets(); drawLabels(); drawZoning(); drawFacilities(); drawAmenities(); drawUnder(); drawProjects(); if (typeof scheduleNatLots === 'function' && $('#l-lots') && $('#l-lots').checked && map.getZoom() >= 16) scheduleNatLots();
   const zon = zoningOn() + "|" + streetLevel(); if (zon !== zoomed._last) { zoomed._last = zon; if (typeof activeCounty !== "undefined" && activeCounty === "oc" && typeof ocLayer !== "undefined" && ocLayer && ocLayer.setStyle) ocLayer.setStyle(styleBg); else if (typeof bgs !== "undefined" && bgs && bgs.setStyle) bgs.setStyle(styleBg); }
 }
 
@@ -2225,18 +2226,23 @@ function drawAmenities() {
     if (!coords || coords.length < 2) continue;
     const lon = coords[0], lat = coords[1];
     if (!b.contains([lat, lon])) continue;
-    if (++count > 350) break;
+    if (++count > 450) break;
     const k = (f.properties && f.properties.k) ? f.properties.k.toLowerCase() : "amenity";
     const n = (f.properties && f.properties.n) ? f.properties.n : "";
     const [col, icon] = AMEN_ICONS[k] || ["#087b78", "•"];
-    const marker = L.circleMarker([lat, lon], {
-      radius: 4,
-      color: "#ffffff",
-      weight: 1.3,
-      fillColor: col,
-      fillOpacity: 0.95
+    const marker = L.marker([lat, lon], {
+      keyboard: false,
+      icon: L.divIcon({
+        className: "",
+        iconSize: [16, 16],
+        html: `<div class="amen-badge" style="background:${col};width:16px;height:16px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,0.35);cursor:pointer">${icon}</div>`
+      })
     }).bindTooltip(`<b>${esc(k[0].toUpperCase() + k.slice(1))}</b>${n ? " · " + esc(n) : ""}`);
-    marker.on("click", e => { L.DomEvent.stopPropagation(e); selectAt(e.latlng); });
+    marker.on("click", e => {
+      L.DomEvent.stopPropagation(e);
+      if (typeof selectAt === "function") selectAt(e.latlng);
+      if (typeof houseAt === "function") houseAt(e.latlng);
+    });
     layers.amen.addLayer(marker);
   }
 }
@@ -2476,70 +2482,38 @@ function zCell(key) {
 }
 let _zKey = null;
 const ZONING_SERVICES = {
-  "06029": {
-    url: "https://gis.bakersfieldcity.us/webmaps/rest/services/General/LandUse/MapServer/7",
-    zoneField: "ZONE",
-    descField: "DESCRIPTION",
-    name: "City of Bakersfield & Kern County Zoning",
-    juris: "Bakersfield"
-  },
-  "12086": {
-    url: "https://gisweb.miamidade.gov/arcgis/rest/services/MD_MDCZoning/MapServer/6",
-    zoneField: "ZONE",
-    descField: "ZONE_DESC",
-    jurisField: "MUNC",
-    name: "Miami-Dade County Zoning Districts",
-    juris: "Miami-Dade"
-  },
-  "53033": {
-    url: "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Current_Land_Use_Zoning_Detail_2/FeatureServer/0",
-    zoneField: "ZONING",
-    descField: "ZONING_DESC",
-    name: "City of Seattle & King County Zoning",
-    juris: "Seattle"
-  },
-  "17031": {
-    url: "https://gis.cookcountyil.gov/traditional/rest/services/cookVwrDynmc/MapServer/65",
-    zoneField: "ZoneID",
-    descField: "ZoneDesc",
-    name: "Cook County & Chicago Zoning",
-    juris: "Cook County"
-  },
-  "04013": {
-    url: "https://maps.phoenix.gov/pubgis/rest/services/Public/PlanningZoning/MapServer/0",
-    zoneField: "ZONE_NAME",
-    descField: "ZONE_DESC",
-    name: "City of Phoenix & Maricopa County Zoning",
-    juris: "Phoenix"
-  },
-  "48453": {
-    url: "https://services.arcgis.com/0L95CJ0VTaxqcmED/arcgis/rest/services/BOUNDARIES_zoning/FeatureServer/0",
-    zoneField: "ZONING_ZNA",
-    descField: "ZONING_DESCRIPTION",
-    name: "City of Austin & Travis County Zoning",
-    juris: "Austin"
-  },
-  "42101": {
-    url: "https://services.arcgis.com/fLeGjb7u4uXqeK9q/arcgis/rest/services/Zoning_BaseDistricts/FeatureServer/0",
-    zoneField: "CODE",
-    descField: "LONG_CODE",
-    name: "Philadelphia City & County Zoning",
-    juris: "Philadelphia"
-  },
-  "06073": {
-    url: "https://sescgis.sandiego.gov/arcgis/rest/services/LandDevelopment/Base_Zones/MapServer/0",
-    zoneField: "ZONE_NAME",
-    descField: "ZONE_NAME",
-    name: "City of San Diego & County Zoning",
-    juris: "San Diego"
-  },
-  "22071": {
-    url: "https://gis.nola.gov/arcgis/rest/services/Planning/Comprehensive_Zoning_Ordinance/MapServer/1",
-    zoneField: "ZONE_CODE",
-    descField: "DISTRICT_NAME",
-    name: "City of New Orleans & Orleans Parish Zoning",
-    juris: "New Orleans"
-  }
+  "06029": { url: "https://gis.bakersfieldcity.us/webmaps/rest/services/General/LandUse/MapServer/7", zoneField: "ZONE", descField: "DESCRIPTION", jurisField: "JURISDICTION", name: "City of Bakersfield & Kern County Zoning", juris: "Bakersfield" },
+  "12086": { url: "https://gisweb.miamidade.gov/arcgis/rest/services/MD_MDCZoning/MapServer/6", zoneField: "ZONE", descField: "ZONE_DESC", jurisField: "MUNC", name: "Miami-Dade County Zoning Districts", juris: "Miami-Dade" },
+  "12057": { url: "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/28", zoneField: "ZONECLASS", descField: "ZONEDESC", juris: "Tampa", name: "City of Tampa & Hillsborough Zoning" },
+  "53033": { url: "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Current_Land_Use_Zoning_Detail_2/FeatureServer/0", zoneField: "ZONING", descField: "ZONING_DESC", name: "City of Seattle & King County Zoning", juris: "Seattle" },
+  "17031": { url: "https://gis.cookcountyil.gov/traditional/rest/services/cookVwrDynmc/MapServer/65", zoneField: "ZoneID", descField: "ZoneDesc", name: "Cook County & Chicago Zoning", juris: "Cook County" },
+  "04013": { url: "https://maps.phoenix.gov/pub/rest/services/Public/Zoning/MapServer/0", zoneField: "ZONING", descField: "ZCASE", name: "City of Phoenix & Maricopa County Zoning", juris: "Phoenix" },
+  "04019": { url: "https://gis.tucsonaz.gov/arcgis/rest/services/PDSD/PRO_Overlays/MapServer/1", zoneField: "ZONE_COT", descField: "ORIG_ZONE", name: "City of Tucson & Pima County Zoning", juris: "Tucson" },
+  "48453": { url: "https://maps.austintexas.gov/gis/rest/Shared/Zoning_1/MapServer/0", zoneField: "ZONING_ZTYPE", descField: "ZONING_BASE", name: "City of Austin & Travis County Zoning", juris: "Austin" },
+  "48113": { url: "https://gis.dallascityhall.com/arcgis/rest/services/sdc_public/Zoning/MapServer/15", zoneField: "ZONE_DIST", descField: "LONG_ZONE_DIST", name: "City of Dallas Zoning", juris: "Dallas" },
+  "48439": { url: "https://mapit.fortworthtexas.gov/ags/rest/services/CIVIC/OpenData_Boundaries/MapServer/54", zoneField: "ZONING", descField: "BASE_ZONING", name: "City of Fort Worth & Tarrant Zoning", juris: "Fort Worth" },
+  "48029": { url: "https://services.arcgis.com/g1fRTDLeMgspWrYp/ArcGIS/rest/services/COSA_Zoning/FeatureServer/12", zoneField: "Base", descField: "Zoning", name: "City of San Antonio & Bexar Zoning", juris: "San Antonio" },
+  "42101": { url: "https://services.arcgis.com/fLeGjb7u4uXqeF9q/arcgis/rest/services/Zoning_BaseDistricts/FeatureServer/0", zoneField: "CODE", descField: "LONG_CODE", name: "Philadelphia City & County Zoning", juris: "Philadelphia" },
+  "06073": { url: "https://sescgis.sandiego.gov/arcgis/rest/services/LandDevelopment/Base_Zones/MapServer/0", zoneField: "ZONE_NAME", descField: "ZONE_NAME", name: "City of San Diego & County Zoning", juris: "San Diego" },
+  "06075": { url: "https://sfplanninggis.org/arcgiswa/rest/services/PlanningData/MapServer/3", zoneField: "zoning", descField: "districtname", name: "San Francisco Planning Zoning", juris: "San Francisco" },
+  "06085": { url: "https://geo.sanjoseca.gov/server/rest/services/OPN/OPN_OpenDataService/MapServer/401", zoneField: "ZONING", descField: "ZONINGABBREV", name: "City of San Jose Zoning", juris: "San Jose" },
+  "06001": { url: "https://gisapps1.mapoakland.com/oakgis/rest/services/Prod/CEDA_App_PRODGIS/MapServer/2", zoneField: "BASEZONE", descField: "BASEZONE", name: "City of Oakland Zoning", juris: "Oakland" },
+  "06067": { url: "https://mapservices.gis.saccounty.gov/arcgis/rest/services/CITY_of_SACRAMENTO/MapServer/3", zoneField: "ZONE", descField: "BASE_ZONE", name: "City of Sacramento Zoning", juris: "Sacramento" },
+  "22071": { url: "https://gis.nola.gov/arcgis/rest/services/Planning/Comprehensive_Zoning_Ordinance/MapServer/1", zoneField: "ZONE_CODE", descField: "DISTRICT_NAME", name: "City of New Orleans & Orleans Parish Zoning", juris: "New Orleans" },
+  "25025": { url: "https://gis.bostonplans.org/hosting/rest/services/Zoning_Districts/FeatureServer/0", zoneField: "DISTRICT", descField: "STAGE", name: "Boston BPDA Zoning Districts", juris: "Boston" },
+  "13121": { url: "https://gis.atlantaga.gov/dpcd/rest/services/OpenDataService1/MapServer/22", zoneField: "ZONECLASS", descField: "ZONEDESC", name: "City of Atlanta Zoning", juris: "Atlanta" },
+  "08031": { url: "https://services1.arcgis.com/zdB7qR0BtYrg0Xpl/ArcGIS/rest/services/ODC_ZONE_ZONING_A/FeatureServer/209", zoneField: "PUD_STD_ZONE_DIST", descField: "PUD_STD_ZONE_DIST", name: "City & County of Denver Zoning", juris: "Denver" },
+  "26163": { url: "https://services2.arcgis.com/qvkbeam7Wirps6zC/ArcGIS/rest/services/Zoning_1/FeatureServer/0", zoneField: "ZONING_REV", descField: "ZDESCR_N", name: "City of Detroit Zoning", juris: "Detroit" },
+  "41051": { url: "https://www.portlandmaps.com/od/rest/services/COP_OpenData_ZoningCode/MapServer/16", zoneField: "ZONE", descField: "ZONE_DESC", name: "City of Portland & Multnomah Zoning", juris: "Portland" },
+  "11001": { url: "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Planning_Landuse_and_Zoning_WebMercator/MapServer/32", zoneField: "ZONING", descField: "ZONE_DESCRIPTION", name: "Washington DC Zoning Regulations", juris: "Washington DC" },
+  "24510": { url: "https://baltegis.baltimorecity.gov/mapping/rest/services/CityView/Zoning_New/FeatureServer/0", zoneField: "Label", descField: "Label", name: "Baltimore City Zoning", juris: "Baltimore" },
+  "37119": { url: "https://gis.charlottenc.gov/arcgis/rest/services/PLN/Zoning/MapServer/0", zoneField: "ZoneClass", descField: "ZoneDes", name: "City of Charlotte & Mecklenburg Zoning", juris: "Charlotte" },
+  "39049": { url: "https://maps2.columbus.gov/arcgis/rest/services/Applications/Zoning/MapServer/31", zoneField: "RULEID", descField: "LIMITATION_TEXT", name: "City of Columbus Zoning", juris: "Columbus" },
+  "32003": { url: "https://mapdata.lasvegasnevada.gov/clvgis/rest/services/DevelopmentServices/Zoning/MapServer/0", zoneField: "ZONING", descField: "ZONING", name: "City of Las Vegas Zoning", juris: "Las Vegas" },
+  "31055": { url: "https://dcgis.org/server/rest/services/Hosted/Zoning_Omaha_view/FeatureServer/0", zoneField: "zoneclass", descField: "zonedesc", name: "City of Omaha Zoning", juris: "Omaha" },
+  "40109": { url: "https://gis.okc.gov/arcgis/rest/services/Public/Data_OKC_Gov_Application_Service/MapServer/6", zoneField: "Zoning_Class", descField: "Zoning_Classification", name: "City of Oklahoma City Zoning", juris: "Oklahoma City" },
+  "40143": { url: "https://map11.incog.org/arcgis11wa/rest/services/Zoning_TulsaCo/MapServer/0", zoneField: "ZONE_TYPE", descField: "ZONE_TYPE", name: "Tulsa County & City Zoning", juris: "Tulsa" },
+  "51810": { url: "https://geo.vbgov.com/mapservices/rest/services/Planning_and_Development/Planning_and_Development/MapServer/37", zoneField: "Zoning", descField: "Reference", name: "City of Virginia Beach Zoning", juris: "Virginia Beach" }
 };
 
 function classifyZone(code, desc) {
@@ -2601,7 +2575,7 @@ function scheduleDynamicZoning() {
 }
 
 async function drawDynamicZoning() {
-  if (!map._loaded) return;
+  if (!map || !map._loaded) return;
   const cb = $("#l-zone");
   const z = map.getZoom();
   if ((cb && !cb.checked) || z < 14) {
@@ -2614,8 +2588,8 @@ async function drawDynamicZoning() {
   if (!layers.zone) layers.zone = L.layerGroup().addTo(map);
   if (!layers.zoneLabels) layers.zoneLabels = L.layerGroup().addTo(map);
 
-  const b = map.getBounds().pad(0.05);
-  const cellKey = `${Math.floor(b.getWest()*100)},${Math.floor(b.getSouth()*100)},${Math.floor(b.getEast()*100)},${Math.floor(b.getNorth()*100)}`;
+  const b = map.getBounds().pad(0.08);
+  const cellKey = `${b.getWest().toFixed(2)},${b.getSouth().toFixed(2)},${b.getEast().toFixed(2)},${b.getNorth().toFixed(2)}`;
 
   const fips = typeof activeFips === "function" ? activeFips() : null;
   const svc = (fips && ZONING_SERVICES[fips]) || (typeof parcelSvc === "function" ? parcelSvc(fips) : null) || (typeof getParcelService === "function" ? getParcelService(map.getCenter()) : null);
@@ -2626,31 +2600,32 @@ async function drawDynamicZoning() {
     return;
   }
 
-  if (_dynZoneAbort) _dynZoneAbort.abort();
-  _dynZoneAbort = new AbortController();
   const seq = ++_dynZoneSeq;
-
   try {
-    const qUrl = svc.url + "/query?" + new URLSearchParams({
+    const zField = svc.zoneField || "ZONE";
+    const dField = svc.descField || "DESCRIPTION";
+    const jField = svc.jurisField || "JURISDICTION";
+    const reqFields = [zField, dField, jField, "ZONE", "DESCRIPTION", "ZONING", "ZoneID", "OBJECTID"].filter(Boolean).join(",");
+    const params = {
       geometry: [b.getWest(), b.getSouth(), b.getEast(), b.getNorth()].map(v => (+v).toFixed(5)).join(","),
       geometryType: "esriGeometryEnvelope",
       inSR: "4326",
       spatialRel: "esriSpatialRelIntersects",
-      outFields: "*",
+      outFields: reqFields,
       returnGeometry: "true",
       outSR: "4326",
       geometryPrecision: "5",
-      resultRecordCount: "350",
+      resultRecordCount: "400",
       f: "json"
-    });
-    const d = await (await fetch(qUrl, { signal: _dynZoneAbort.signal })).json();
+    };
+    const d = await arcQuery(svc.url, params, 6000);
     if (seq !== _dynZoneSeq) return;
     const feats = (d.features || []).filter(f => f.geometry && f.geometry.rings);
     _dynZoneCache.set(cellKey, feats);
-    if (_dynZoneCache.size > 50) _dynZoneCache.delete(_dynZoneCache.keys().next().value);
+    if (_dynZoneCache.size > 80) _dynZoneCache.delete(_dynZoneCache.keys().next().value);
     renderDynamicZoneFeatures(feats, z, svc);
   } catch (e) {
-    if (e.name !== "AbortError") console.warn("Dynamic zoning fetch failed:", e);
+    console.warn("Dynamic zoning fetch failed:", e);
   }
 }
 
@@ -2659,7 +2634,6 @@ function renderDynamicZoneFeatures(feats, z, svc) {
   layers.zone.clearLayers();
   layers.zoneLabels.clearLayers();
   _dynZoneFeats = [];
-  _zCanvas = _zCanvas || L.canvas({ padding: 0.3, pane: passPane("zonePane", 404) });
 
   const b = map.getBounds();
 
@@ -2679,10 +2653,10 @@ function renderDynamicZoneFeatures(feats, z, svc) {
     _dynZoneFeats.push(parsedFeat);
 
     const poly = L.polygon(rings, {
-      renderer: _zCanvas,
       interactive: true,
       color: ZCOL[cat] || "#999",
-      weight: 0.8,
+      weight: 1.1,
+      opacity: 0.85,
       fillColor: ZCOL[cat] || "#999",
       fillOpacity: 0.45
     });
@@ -3343,13 +3317,48 @@ const R9 = {
   fireLRA: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/FHSALRA25_v1_All/FeatureServer/0",
   cams: "https://arcgis.gis.lacounty.gov/arcgis/rest/services/LACounty_Dynamic/CAMS/MapServer/1",
 };
-async function arcQuery(url, params, ms = 12000) {
-  const q = `${url}/query?` + new URLSearchParams({ f: "json", ...params }).toString();
+function jsonp(url, ms = 7000) {
+  return new Promise((res, rej) => {
+    const cb = "cp" + Math.random().toString(36).slice(2);
+    const s = document.createElement("script");
+    let done = false;
+    const cleanup = () => {
+      done = true;
+      if (window[cb]) delete window[cb];
+      if (s.parentNode) s.remove();
+      if (timer) clearTimeout(timer);
+    };
+    const timer = setTimeout(() => {
+      if (!done) { cleanup(); rej(new Error("JSONP timeout")); }
+    }, ms);
+    window[cb] = d => { cleanup(); res(d); };
+    s.onerror = () => { cleanup(); rej(new Error("JSONP network error")); };
+    const sep = url.includes("?") ? "&" : "?";
+    s.src = url + sep + "callback=" + cb;
+    document.head.appendChild(s);
+  });
+}
+async function arcQuery(url, params, ms = 6000) {
+  const queryStr = params ? (typeof params === "string" ? params : new URLSearchParams(params).toString()) : "";
+  const sep = url.includes("?") ? "&" : "?";
+  const q = params ? (url + sep + "f=json&" + queryStr) : (url + (url.includes("f=json") ? "" : sep + "f=json"));
   try {
     const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), ms);
-    const r = await fetch(q, { signal: ctl.signal }); clearTimeout(t);
-    const d = await r.json(); if (d.error) throw new Error(d.error.message); return d;
-  } catch (e) { const d = await jsonp(q); if (d.error) throw new Error(d.error.message); return d; }
+    const r = await fetch(q, { signal: ctl.signal });
+    clearTimeout(t);
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const d = await r.json();
+    if (d && d.error) throw new Error(d.error.message || "ArcGIS error");
+    return d;
+  } catch (e) {
+    try {
+      const d = await jsonp(q, ms);
+      if (d && d.error) throw new Error(d.error.message || "ArcGIS error");
+      return d;
+    } catch (e2) {
+      throw e;
+    }
+  }
 }
 async function socrata(url, where, ms = 12000) {
   const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), ms);
@@ -4742,16 +4751,6 @@ function parcelSvc(fips) {   // round 8.7: the open parcel service for a county 
   return PARCELS87.find(s => s.counties.includes(fips)) || PARCELS87.find(s => s.states.includes(fips.slice(0, 2))) || null;
 }
 let natLots = null, natLotTimer = null, natLotSeq = 0;
-function lotPopup(svc, a) {
-  const fmt = (k, v) => {
-    if (v == null || v === "") return null;
-    if (typeof v === "number") { if (/date|_dt$|dt$/i.test(k) && v > 1e11) return new Date(v).toISOString().slice(0, 10); return Math.abs(v) >= 1000 ? Math.round(v).toLocaleString("en-US") : String(+v.toFixed(3)); }
-    return String(v).trim();
-  };
-  const rows = svc.fields.map(([k, lab]) => [lab, fmt(k, a[k])]).filter(r => r[1] != null && r[1] !== "");
-  return `<div class="small"><b>Lot record</b><table style="border-collapse:collapse">${rows.map(([l, v]) => `<tr><td class="muted" style="padding:0 8px 0 0;vertical-align:top">${esc(l)}</td><td>${/^https?:\/\//.test(v) ? `<a href="${esc(v)}" target="_blank" rel="noopener">open the record</a>` : esc(v)}</td></tr>`).join("")}</table>`
-    + `<p class="muted" style="margin:6px 0 0">From ${esc(svc.name)}, as published (assessed or appraised values are not sale prices).${svc.terms ? ` <a href="${esc(svc.terms)}" target="_blank" rel="noopener">Source</a>` : ""}</p></div>`;
-}
 function lotQuery(svc, w, s_, e_, n) {
   return svc.url + "/query?" + new URLSearchParams({ geometry: [w, s_, e_, n].map(v => (+v).toFixed(6)).join(","), geometryType: "esriGeometryEnvelope", inSR: "4326",
     spatialRel: "esriSpatialRelIntersects", outFields: svc.fields.map(f => f[0]).join(","), returnGeometry: "true", outSR: "4326", geometryPrecision: "6",
@@ -4762,52 +4761,59 @@ const natLotCache = new Map();
 let natLotAbort = null;
 async function drawNatLots() {
   const cb = $("#l-lots"), svc = (typeof activeFips === "function" ? parcelSvc(activeFips()) : null) || (typeof getParcelService === "function" ? getParcelService(map.getCenter()) : null);
-  if (!svc || (cb && !cb.checked) || map.getZoom() < 17) {
+  if (!svc || (cb && !cb.checked) || map.getZoom() < 16) {
     if (natLots) { map.removeLayer(natLots); natLots = null; if (typeof window !== "undefined") window.natLots = null; }
     return;
   }
   const b = map.getBounds();
-  const cellKey = `${Math.floor(b.getWest()*200)},${Math.floor(b.getSouth()*200)},${Math.floor(b.getEast()*200)},${Math.floor(b.getNorth()*200)}`;
+  const cellKey = `${b.getWest().toFixed(3)},${b.getSouth().toFixed(3)},${b.getEast().toFixed(3)},${b.getNorth().toFixed(3)}`;
   
   if (natLotCache.has(cellKey)) {
     const cachedFeats = natLotCache.get(cellKey);
     if (natLots) map.removeLayer(natLots);
     natLots = L.layerGroup(cachedFeats.map(f => {
-      const poly = L.polygon(lotLatLngs(f), { color: "#7a5c2e", weight: 1.2, opacity: 0.85, fillOpacity: 0.04 });
-      poly.on("click", e => { L.DomEvent.stopPropagation(e); if (typeof selectAt === "function") selectAt(e.latlng); if (typeof houseAt === "function") houseAt(e.latlng); });
+      const poly = L.polygon(lotLatLngs(f), { color: "#7a5c2e", weight: 1.3, opacity: 0.9, fillColor: "#7a5c2e", fillOpacity: 0.04 });
+      poly._feat = f;
+      poly.on("click", e => {
+        L.DomEvent.stopPropagation(e);
+        hoverFeat = f;
+        if (typeof selectAt === "function") selectAt(e.latlng);
+        if (typeof houseAt === "function") houseAt(e.latlng);
+      });
       return poly;
     })).addTo(map);
+    natLots._count = cachedFeats.length;
+    if (typeof window !== "undefined") window.natLots = natLots;
     return;
   }
 
-  if (natLotAbort) { natLotAbort.abort(); }
-  natLotAbort = new AbortController();
   const seq = ++natLotSeq;
   let d;
   try {
-    const qUrl = svc.url + "/query?" + new URLSearchParams({
+    const fields = (svc.fields || []).slice(0, 5).map(f => f[0]).join(",") || "OBJECTID";
+    const params = {
       geometry: [b.getWest(), b.getSouth(), b.getEast(), b.getNorth()].map(v => (+v).toFixed(5)).join(","),
       geometryType: "esriGeometryEnvelope",
       inSR: "4326",
       spatialRel: "esriSpatialRelIntersects",
-      outFields: svc.fields.slice(0, 4).map(f => f[0]).join(","),
+      outFields: fields,
       returnGeometry: "true",
       outSR: "4326",
       geometryPrecision: "5",
-      resultRecordCount: "250",
+      resultRecordCount: "300",
       f: "json"
-    });
-    d = await (await fetch(qUrl, { signal: natLotAbort.signal })).json();
+    };
+    d = await arcQuery(svc.url, params, 6000);
   } catch (e) { return; }
   
   if (seq !== natLotSeq) return;
   const feats = (d.features || []).filter(f => f.geometry && f.geometry.rings);
   natLotCache.set(cellKey, feats);
-  if (natLotCache.size > 80) natLotCache.delete(natLotCache.keys().next().value);
+  if (natLotCache.size > 150) natLotCache.delete(natLotCache.keys().next().value);
 
   if (natLots) map.removeLayer(natLots);
   natLots = L.layerGroup(feats.map(f => {
-    const poly = L.polygon(lotLatLngs(f), { color: "#7a5c2e", weight: 1.2, opacity: 0.85, fillOpacity: 0.04 });
+    const poly = L.polygon(lotLatLngs(f), { color: "#7a5c2e", weight: 1.3, opacity: 0.9, fillColor: "#7a5c2e", fillOpacity: 0.04 });
     poly._feat = f;
     poly.on("click", e => {
       L.DomEvent.stopPropagation(e);
@@ -6297,7 +6303,7 @@ async function init() {
   // at street level the address preview replaces the area tooltip
   map.on("zoomend", () => { const hi = map.getZoom() >= 17; bgs.eachLayer(l => { const t = l.getTooltip(); if (t) { t.options.opacity = hi ? 0 : 0.9; if (hi) l.closeTooltip(); } }); });
   map.on("mouseout", () => { clearTimeout(hoverTimer); });
-  map.on("moveend", () => { drawStreets(); drawLabels(); drawZoning(); drawFacilities(); drawAmenities(); drawUnder(); drawProjects(); });
+  map.on("moveend", () => { drawStreets(); drawLabels(); drawZoning(); drawFacilities(); drawAmenities(); drawUnder(); drawProjects(); if (typeof scheduleNatLots === 'function' && $('#l-lots') && $('#l-lots').checked && map.getZoom() >= 16) scheduleNatLots(); });
   L.control.scale({ imperial: true, metric: false, maxWidth: 140, position: "bottomleft" }).addTo(map);
   const Loc = L.Control.extend({ options: { position: "topleft" }, onAdd() { const b = L.DomUtil.create("button", "locate"); b.type = "button"; b.textContent = "📍 Find me";
     b.title = "Center the map on where you are and open your block group"; L.DomEvent.disableClickPropagation(b); b.onclick = () => locateMe(b); return b; } });
@@ -6370,8 +6376,8 @@ function stateReformHeadline(st, m) {
 function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R) {
   if (typeof map === "undefined" || !map) return;
   const p = byId.get(selected) ? byId.get(selected).properties : { c: a.county || countyOf(), hv: 850000, rent: 2200 };
-  const curD = (typeof D !== "undefined" && D) ? D : {};
-  const m = ((curD.details && curD.details[selected]) || {}).m || p;
+  const curB = (typeof activeBundle === "function" ? activeBundle() : null) || (typeof D !== "undefined" && D) || {};
+  const m = ((curB.details && curB.details[selected]) || (D && D.details && D.details[selected]) || {}).m || p;
   const addr = a.SitusFullAddress || ("Parcel APN " + a.AIN);
   const city = p.c || a.county || countyOf();
   const rollVal = (+a.Roll_LandValue || 0) + (+a.Roll_ImpValue || 0) || (+a.Roll_TotalValue || 0);
@@ -6385,9 +6391,10 @@ function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R) {
   const zExpl = (typeof explainZone === "function") ? explainZone(zCode, zCat, city) : { base: "Allowed residential" };
 
   let nearestSch = 0.4, nearestPark = 0.3, nearestLib = 0.8;
-  if (curD && curD.layers && Array.isArray(curD.layers.facilities)) {
+  const facList = (curB.layers && Array.isArray(curB.layers.facilities)) ? curB.layers.facilities : (D && D.layers && Array.isArray(D.layers.facilities) ? D.layers.facilities : []);
+  if (facList.length > 0) {
     let minSch = 999, minPark = 999, minLib = 999;
-    for (const [k, nm, flat, flng] of curD.layers.facilities) {
+    for (const [k, nm, flat, flng] of facList) {
       const d = Math.sqrt(Math.pow((flat - ll.lat) * 69, 2) + Math.pow((flng - ll.lng) * 53, 2));
       if (k === 0 && d < minSch) minSch = d;
       if (k === 2 && d < minLib) minLib = d;
@@ -6397,6 +6404,9 @@ function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R) {
     if (minLib < 50) nearestLib = minLib.toFixed(1);
     if (minPark < 50) nearestPark = minPark.toFixed(1);
   }
+
+  const stName = activeState() || "US";
+  const reformHeadline = (typeof stateReformHeadline === "function") ? stateReformHeadline(stName, m) : "Missing-middle infill authorized";
 
   const content = `
     <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#0f172a;max-width:380px;line-height:1.35">
@@ -6433,7 +6443,7 @@ function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R) {
         <div style="font-weight:700;color:#166534;margin-bottom:2px">🏛️ Zoning &amp; State Housing Rights</div>
         <div><b>Zoning Code:</b> ${esc(zCode)} (${esc(zExpl.base || "Allowed residential")})</div>
         <div><b>ADU / Infill:</b> By right ADU allowed · ${lot >= 2400 ? "Eligible for Missing Middle / Duplex" : "Standard lot envelope"}</div>
-        <div><b>State Reform:</b> ${stateReformHeadline(activeState(), m)}</div>
+        <div style="font-size:11px;color:#166534;margin-top:2px">${reformHeadline}</div>
       </div>
 
       <div style="font-size:11px;color:#334155;margin-bottom:4px">
