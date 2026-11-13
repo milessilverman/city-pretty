@@ -5860,14 +5860,31 @@ function geographicImprovementsSection(p, m) {
 // ---------------- Public-Private Partnerships (P3) & Transit Joint Development Pipeline
 let p3WalkshedLayer = null;
 
-function flyToP3Hub(fips) {
+function flyToP3Station(lat, lng, name, units, affordPct, retailSqft) {
+  if (typeof map === "undefined" || !map) return;
+  const hubLl = [lat, lng];
+  map.flyTo(hubLl, 16, { animate: true, duration: 1.0 });
+
+  if (p3WalkshedLayer) {
+    p3WalkshedLayer.eachLayer(l => {
+      if (l instanceof L.Circle) {
+        l.setLatLng(hubLl);
+      }
+    });
+  }
+  showToast(`Focusing station: ${name} (0.5-mi TOD walkshed)`);
+}
+
+function flyToP3Hub(fips, targetIdx = -1) {
   if (typeof map === "undefined" || !map) return;
   const pipe = getMetroPipeline(fips, (selected && byId.get(selected)) ? byId.get(selected).properties.c : "");
   if (!pipe || !pipe.hubLat || !pipe.hubLng) return;
 
   if (p3WalkshedLayer) { map.removeLayer(p3WalkshedLayer); p3WalkshedLayer = null; }
 
-  const hubLl = [pipe.hubLat, pipe.hubLng];
+  const hubLl = (targetIdx >= 0 && pipe.stations && pipe.stations[targetIdx]) 
+    ? [pipe.stations[targetIdx].lat, pipe.stations[targetIdx].lng] 
+    : [pipe.hubLat, pipe.hubLng];
   map.flyTo(hubLl, 15.5, { animate: true, duration: 1.2 });
 
   const walkshedCircle = L.circle(hubLl, {
@@ -5880,23 +5897,9 @@ function flyToP3Hub(fips) {
     interactive: false
   });
 
-  const hubIcon = L.divIcon({
-    className: "",
-    iconSize: [36, 36],
-    html: `<div style="background:#0284c7;color:#fff;border:3px solid #fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 4px 12px rgba(2,132,199,0.5);cursor:pointer;" title="${esc(pipe.hubName)}">🚆</div>`
-  });
+  const layers = [walkshedCircle];
 
-  const hubMarker = L.marker(hubLl, { icon: hubIcon })
-    .bindPopup(`
-      <div style="font-family:var(--body);line-height:1.4;color:#0f172a;max-width:280px">
-        <div style="font-weight:800;font-size:13px;color:#0369a1;margin-bottom:4px">🚆 ${esc(pipe.hubName)}</div>
-        <div style="font-size:11.5px;color:#334155;margin-bottom:6px"><b>P3 Joint Development Hub:</b> ${pipe.units} homes · ${pipe.affordPct}% affordable · ${pipe.baseIRR}% Private IRR</div>
-        <div style="font-size:11px;color:#64748b">0.5-Mile Station Walkshed & Active Transit Corridor</div>
-      </div>
-    `);
-
-  const layers = [walkshedCircle, hubMarker];
-
+  // Draw transit alignment corridor polyline
   if (pipe.corridorRings && pipe.corridorRings.length) {
     const transitLine = L.polyline(pipe.corridorRings, {
       color: "#0284c7",
@@ -5907,9 +5910,34 @@ function flyToP3Hub(fips) {
     layers.push(transitLine);
   }
 
+  // Draw markers for all stations along the corridor
+  if (pipe.stations && pipe.stations.length) {
+    pipe.stations.forEach((stn, idx) => {
+      const isAnchor = (stn.lat === pipe.hubLat && stn.lng === pipe.hubLng);
+      const icon = L.divIcon({
+        className: "",
+        iconSize: isAnchor ? [36, 36] : [28, 28],
+        html: `<div style="background:${isAnchor ? '#0284c7' : '#0369a1'};color:#fff;border:2.5px solid #fff;border-radius:50%;width:${isAnchor ? '32px' : '24px'};height:${isAnchor ? '32px' : '24px'};display:flex;align-items:center;justify-content:center;font-size:${isAnchor ? '16px' : '12px'};box-shadow:0 3px 10px rgba(2,132,199,0.4);cursor:pointer;" title="${esc(stn.name)}">${isAnchor ? '🚆' : '🚉'}</div>`
+      });
+
+      const m = L.marker([stn.lat, stn.lng], { icon })
+        .bindPopup(`
+          <div style="font-family:var(--body);line-height:1.4;color:#0f172a;max-width:280px">
+            <div style="font-weight:800;font-size:13px;color:#0369a1;margin-bottom:3px">${isAnchor ? '🚆' : '🚉'} ${esc(stn.name)}</div>
+            <div style="font-size:11.5px;color:#334155;margin-bottom:4px"><b>TOD Potential:</b> ${stn.units} mixed-income homes (${stn.affordPct}% affordable)</div>
+            <div style="font-size:11px;color:#64748b;margin-bottom:6px;">${esc(stn.desc)}</div>
+            <button type="button" onclick="flyToP3Station(${stn.lat}, ${stn.lng}, '${esc(stn.name)}', ${stn.units}, ${stn.affordPct}, ${stn.retailSqft})" style="background:#0284c7;color:#fff;border:none;padding:4px 8px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;">
+              Focus 0.5-Mi Walkshed
+            </button>
+          </div>
+        `);
+      layers.push(m);
+      if (isAnchor) setTimeout(() => m.openPopup(), 400);
+    });
+  }
+
   p3WalkshedLayer = L.layerGroup(layers).addTo(map);
-  hubMarker.openPopup();
-  showToast(`Viewing 0.5-mile TOD walkshed: ${pipe.hubName}`);
+  showToast(`Viewing active transit corridor & stations: ${pipe.title.split('&')[0].trim()}`);
 }
 
 function getMetroPipeline(fips, city) {
@@ -5924,10 +5952,18 @@ function getMetroPipeline(fips, city) {
       title: "Project Connect Light Rail & Riverside/South Congress TOD Corridor",
       agency: "Austin Transit Partnership (ATP) & City of Austin",
       status: "Engineering & NEPA Approved · FTA Capital Investment Grant (CIG) Pipeline",
-      hubName: "Riverside & Pleasant Valley / South Congress Transit Hub",
+      hubName: "East Riverside & Pleasant Valley Transit Hub",
       hubLat: 30.2435,
       hubLng: -97.7170,
       corridorRings: [[30.2672, -97.7431], [30.2580, -97.7490], [30.2485, -97.7420], [30.2435, -97.7170], [30.2370, -97.7050], [30.2310, -97.6980]],
+      stations: [
+        { name: "Downtown / Congress", lat: 30.2672, lng: -97.7431, units: 520, affordPct: 35, retailSqft: 35000, desc: "Congress Avenue pedestrian civic integration and high-density office-to-residential conversions." },
+        { name: "Waterfront / Lady Bird Lake", lat: 30.2580, lng: -97.7490, units: 380, affordPct: 35, retailSqft: 22000, desc: "Direct connection to the Ann and Roy Butler Hike-and-Bike Trail." },
+        { name: "South Congress / Travis Heights", lat: 30.2485, lng: -97.7420, units: 420, affordPct: 35, retailSqft: 26000, desc: "South Congress cultural and culinary retail district." },
+        { name: "East Riverside & Pleasant Valley (Hub)", lat: 30.2435, lng: -97.7170, units: 460, affordPct: 35, retailSqft: 28000, desc: "Anchor P3 hub with 16 DC fast EV stalls and 3.4-mi rail-with-trail cycleway." },
+        { name: "Montopolis / Crossing Place", lat: 30.2370, lng: -97.7050, units: 340, affordPct: 40, retailSqft: 18000, desc: "Equitable workforce housing infill and neighborhood health center." },
+        { name: "Yellow Jacket / Riverside Terminus", lat: 30.2310, lng: -97.6980, units: 310, affordPct: 35, retailSqft: 16000, desc: "Park-and-ride parcel conversion with community solar canopy." }
+      ],
       corridorDesc: "9.8-mile phase 1 light rail connecting Downtown Austin to East Riverside and South Congress, transitioning CapMetro to high-capacity grade-separated rail transit.",
       p3Type: "Station-Area Ground Lease & Master Joint Development (99-Year Concession)",
       units: 460,
@@ -5972,10 +6008,18 @@ function getMetroPipeline(fips, city) {
       title: "Metro Measure M/R Rail Expansion & Station Joint Development Pipeline",
       agency: "Los Angeles County Metropolitan Transportation Authority (Metro)",
       status: "Multiple Extensions Active & Under Construction · Metro 10,000-Home TOD Goal",
-      hubName: "Wilshire/La Brea D Line Hub & Slauson Southeast Gateway Hub",
+      hubName: "Wilshire/La Brea D Line Hub",
       hubLat: 34.0625,
       hubLng: -118.3440,
       corridorRings: [[34.0610, -118.2900], [34.0615, -118.3090], [34.0625, -118.3440], [34.0630, -118.3750], [34.0620, -118.3980], [34.0585, -118.4440]],
+      stations: [
+        { name: "Wilshire / Western (D Line)", lat: 34.0615, lng: -118.3090, units: 480, affordPct: 35, retailSqft: 28000, desc: "Koreatown urban core and multimodal rapid transit center." },
+        { name: "Wilshire / La Brea (Anchor Hub)", lat: 34.0625, lng: -118.3440, units: 520, affordPct: 35, retailSqft: 32000, desc: "Major D Line subway hub with 24 fast EV charging bays and community plaza." },
+        { name: "Wilshire / Fairfax (Museum Row)", lat: 34.0628, lng: -118.3610, units: 440, affordPct: 35, retailSqft: 30000, desc: "LACMA, Academy Museum, and La Brea Tar Pits cultural district." },
+        { name: "Wilshire / La Cienega", lat: 34.0630, lng: -118.3750, units: 390, affordPct: 30, retailSqft: 24000, desc: "Beverly Hills gateway transit station." },
+        { name: "Century City / Constellation", lat: 34.0585, lng: -118.4180, units: 550, affordPct: 30, retailSqft: 36000, desc: "Premier employment center high-rise residential joint development." },
+        { name: "Westwood / UCLA", lat: 34.0590, lng: -118.4440, units: 510, affordPct: 40, retailSqft: 30000, desc: "University campus and medical center multimodal portal." }
+      ],
       corridorDesc: "Transformative 28-by-'28 rail expansion (D Line Subway, Southeast Gateway, Sepulveda Pass, K Line) with Metro-owned parcel air rights.",
       p3Type: "Metro Joint Development Ground Lease (Prevailing Wage + 35% Affordable)",
       units: 520,
@@ -6020,10 +6064,18 @@ function getMetroPipeline(fips, city) {
       title: "OC Streetcar Santa Ana–Garden Grove TOD Corridor & SARTC Expansion",
       agency: "Orange County Transportation Authority (OCTA) & City of Santa Ana",
       status: "Revenue Service Launch · Transit-Oriented Development Overlay District",
-      hubName: "Santa Ana Regional Transportation Center (SARTC) & 4th Street Hub",
-      hubLat: 33.7510,
-      hubLng: -117.8550,
+      hubName: "Downtown Santa Ana / French Station Hub",
+      hubLat: 33.7485,
+      hubLng: -117.8680,
       corridorRings: [[33.7510, -117.8550], [33.7485, -117.8680], [33.7520, -117.8900], [33.7650, -117.9150], [33.7740, -117.9380]],
+      stations: [
+        { name: "Santa Ana Regional Transportation Center (SARTC)", lat: 33.7510, lng: -117.8550, units: 380, affordPct: 30, retailSqft: 24000, desc: "Amtrak and Metrolink regional passenger rail terminal." },
+        { name: "Lacy & 4th Street", lat: 33.7495, lng: -117.8610, units: 280, affordPct: 35, retailSqft: 18000, desc: "Historic neighborhood infill and small-business incubation." },
+        { name: "Downtown Santa Ana / French (Anchor Hub)", lat: 33.7485, lng: -117.8680, units: 340, affordPct: 30, retailSqft: 22000, desc: "Artists Village pedestrian pavilion and 14 EV charging bays." },
+        { name: "Civic Center & Flower", lat: 33.7510, lng: -117.8760, units: 310, affordPct: 30, retailSqft: 20000, desc: "County and municipal administrative center station." },
+        { name: "Fairview & Pacific Electric ROW", lat: 33.7650, lng: -117.9150, units: 320, affordPct: 30, retailSqft: 19000, desc: "Direct junction with Pacific Electric Class I regional trail." },
+        { name: "Harbor Blvd / Garden Grove Terminus", lat: 33.7740, lng: -117.9380, units: 350, affordPct: 30, retailSqft: 22000, desc: "Harbor rapid bus transfer and mixed-use commercial gateway." }
+      ],
       corridorDesc: "4.15-mile streetcar linking Amtrak/Metrolink regional rail to Historic Downtown Santa Ana arts district and Garden Grove civic center.",
       p3Type: "Municipal Surface Parking Lot Redevelopment P3 Concession",
       units: 340,
@@ -6068,10 +6120,18 @@ function getMetroPipeline(fips, city) {
       title: "East Colfax Center-Running Bus Rapid Transit & DURA Station Infill",
       agency: "City and County of Denver (DOTI), RTD Denver & DURA",
       status: "Active Construction (Opening 2026-2027) · Dedicated Center Lanes & Signal Priority",
-      hubName: "East Colfax & Colorado Blvd Multi-Modal Station Hub",
+      hubName: "East Colfax & Colorado Blvd Station Hub",
       hubLat: 39.7402,
       hubLng: -104.9405,
       corridorRings: [[39.7398, -104.9880], [39.7400, -104.9600], [39.7402, -104.9405], [39.7404, -104.9100], [39.7406, -104.8800]],
+      stations: [
+        { name: "Civic Center Station", lat: 39.7398, lng: -104.9880, units: 420, affordPct: 40, retailSqft: 26000, desc: "Downtown Denver multimodal terminal and Capitol complex walkshed." },
+        { name: "Colfax & Downing", lat: 39.7400, lng: -104.9730, units: 310, affordPct: 40, retailSqft: 16000, desc: "Capitol Hill commercial corridor infill." },
+        { name: "Colfax & Josephine", lat: 39.7401, lng: -104.9580, units: 290, affordPct: 40, retailSqft: 15000, desc: "Denver Botanic Gardens and City Park connector." },
+        { name: "Colfax & Colorado (Anchor Hub)", lat: 39.7402, lng: -104.9405, units: 320, affordPct: 40, retailSqft: 18000, desc: "Central BRT transfer hub with 12 fast EV charging bays and local grocer." },
+        { name: "Colfax & Monaco", lat: 39.7404, lng: -104.9120, units: 280, affordPct: 40, retailSqft: 14000, desc: "Parkway greenway connection and neighborhood services." },
+        { name: "Colfax & Yosemite / Aurora", lat: 39.7406, lng: -104.8870, units: 330, affordPct: 40, retailSqft: 17000, desc: "Regional RTD connection with R Line light rail." }
+      ],
       corridorDesc: "10-mile high-frequency rapid transit replacing Denver's highest-ridership bus line with protected median platforms and off-board fare collection.",
       p3Type: "Denver Urban Renewal Authority Tax-Increment Financing & P3 Housing Ground Lease",
       units: 320,
@@ -6116,10 +6176,17 @@ function getMetroPipeline(fips, city) {
       title: "ST3 Ballard & West Seattle Link Extensions Equitable TOD Pipeline",
       agency: "Sound Transit & Seattle Office of Housing",
       status: "Final Engineering & NEPA Review · 80-80-80 Equitable Housing Accord",
-      hubName: "Ballard Multi-Modal Station Hub & Transit Plaza",
+      hubName: "Ballard Multi-Modal Station Hub",
       hubLat: 47.6680,
       hubLng: -122.3840,
       corridorRings: [[47.6080, -122.3350], [47.6210, -122.3550], [47.6380, -122.3760], [47.6550, -122.3810], [47.6680, -122.3840]],
+      stations: [
+        { name: "Westlake / Downtown Hub", lat: 47.6110, lng: -122.3370, units: 580, affordPct: 35, retailSqft: 40000, desc: "Regional rail and light rail interchange terminal." },
+        { name: "South Lake Union / Denny", lat: 47.6210, lng: -122.3550, units: 490, affordPct: 40, retailSqft: 32000, desc: "High-tech research and life sciences employment district." },
+        { name: "Smith Cove / Uptown", lat: 47.6380, lng: -122.3760, units: 360, affordPct: 40, retailSqft: 22000, desc: "Cruise terminal and Climate Pledge Arena connector." },
+        { name: "Interbay", lat: 47.6550, lng: -122.3810, units: 420, affordPct: 40, retailSqft: 25000, desc: "Underused industrial buffer redevelopment into mixed-income community." },
+        { name: "Ballard Multi-Modal Hub (Anchor Hub)", lat: 47.6680, lng: -122.3840, units: 380, affordPct: 40, retailSqft: 24000, desc: "Mass timber residential tower over Burke-Gilman trail connector." }
+      ],
       corridorDesc: "62-mile light rail system expansion connecting Seattle urban centers with high-capacity grade-separated rail transit.",
       p3Type: "Surplus ROW Property 99-Year Ground Lease with Mass Timber Density Bonus",
       units: 380,
@@ -6164,10 +6231,17 @@ function getMetroPipeline(fips, city) {
       title: "South Central Extension / Downtown Hub Light Rail & Central Station P3",
       agency: "Valley Metro & City of Phoenix Public Transit",
       status: "Active Construction & Testing · $300M+ Central Station P3 High-Rise Rising",
-      hubName: "Central Station Downtown Transit Hub & Tower",
+      hubName: "Central Station Downtown Transit Hub",
       hubLat: 33.4520,
       hubLng: -112.0740,
       corridorRings: [[33.4520, -112.0740], [33.4410, -112.0735], [33.4280, -112.0730], [33.4050, -112.0730], [33.3850, -112.0730]],
+      stations: [
+        { name: "Central Station Downtown Hub (Anchor)", lat: 33.4520, lng: -112.0740, units: 420, affordPct: 30, retailSqft: 26000, desc: "$300M+ P3 tower featuring apartments, hotel, student housing, and retail." },
+        { name: "Washington / Jefferson", lat: 33.4410, lng: -112.0735, units: 360, affordPct: 30, retailSqft: 22000, desc: "Civic center and government plaza connector." },
+        { name: "South Central & Buckeye", lat: 33.4280, lng: -112.0730, units: 290, affordPct: 35, retailSqft: 18000, desc: "Warehouse district and creative arts infill." },
+        { name: "South Central & Broadway", lat: 33.4050, lng: -112.0730, units: 310, affordPct: 35, retailSqft: 19000, desc: "Equitable community health and culinary hub." },
+        { name: "South Central & Baseline Terminus", lat: 33.3850, lng: -112.0730, units: 340, affordPct: 30, retailSqft: 20000, desc: "South Mountain park-and-ride recreation gateway." }
+      ],
       corridorDesc: "5.5-mile extension linking Downtown Phoenix to Baseline Road, anchoring major P3 mixed-use residential towers.",
       p3Type: "Private Consortium Joint Development with City Air Rights and Long-Term Ground Lease",
       units: 420,
@@ -6216,6 +6290,13 @@ function getMetroPipeline(fips, city) {
       hubLat: 29.9510,
       hubLng: -90.0780,
       corridorRings: [[29.9510, -90.0780], [29.9540, -90.0730], [29.9580, -90.0680], [29.9650, -90.0600], [29.9720, -90.0520]],
+      stations: [
+        { name: "Union Passenger Terminal (Anchor Hub)", lat: 29.9510, lng: -90.0780, units: 280, affordPct: 40, retailSqft: 20000, desc: "Amtrak, regional bus, and streetcar multimodal interchange with stormwater retention." },
+        { name: "Poydras & Loyola (CBD)", lat: 29.9540, lng: -90.0730, units: 310, affordPct: 35, retailSqft: 22000, desc: "Central Business District high-density office-to-housing conversion." },
+        { name: "Canal & Rampart (French Quarter Edge)", lat: 29.9580, lng: -90.0680, units: 260, affordPct: 40, retailSqft: 18000, desc: "Cultural corridor transition and streetcar connection." },
+        { name: "Lafitte Greenway Junction", lat: 29.9650, lng: -90.0600, units: 240, affordPct: 45, retailSqft: 16000, desc: "Direct junction with Lafitte Greenway active mobility path." },
+        { name: "Claiborne Cultural Gateway", lat: 29.9720, lng: -90.0520, units: 270, affordPct: 45, retailSqft: 17000, desc: "Community resilience hub under shaded solar canopy." }
+      ],
       corridorDesc: "Regional rail, streetcar, and high-frequency bus multimodal connection linking Downtown NOLA, BioDistrict, and East NOLA.",
       p3Type: "Resilient Joint Development P3 with Ground-Floor Micro-Market & Stormwater Detention",
       units: 280,
@@ -6254,18 +6335,23 @@ function getMetroPipeline(fips, city) {
 
   // Nationwide Default for any US County
   const cName = countyOf();
-  const cLat = map ? map.getCenter().lat : 37.77;
-  const cLng = map ? map.getCenter().lng : -122.42;
+  const cLat = (typeof map !== "undefined" && map) ? map.getCenter().lat : 37.77;
+  const cLng = (typeof map !== "undefined" && map) ? map.getCenter().lng : -122.42;
   return {
     fips: fips,
     metroName: `${cName} · Regional Transit & Infrastructure`,
     title: `${cName} High-Capacity Transit Corridor & TOD Joint Development`,
     agency: "Regional Transportation Commission & County Transit Authority",
     status: "FTA Capital Investment Grants (CIG) & RAISE Pipeline · Federal P3 Guidelines",
-    hubName: `${cName} Multi-Modal Transit Center & Central Station Hub`,
+    hubName: `${cName} Multi-Modal Transit Center`,
     hubLat: cLat,
     hubLng: cLng,
     corridorRings: [[cLat - 0.02, cLng - 0.02], [cLat, cLng], [cLat + 0.02, cLng + 0.02]],
+    stations: [
+      { name: `${cName} West Station`, lat: cLat - 0.02, lng: cLng - 0.02, units: 280, affordPct: 30, retailSqft: 16000, desc: "West corridor gateway station." },
+      { name: `${cName} Central Station (Hub)`, lat: cLat, lng: cLng, units: 350, affordPct: 30, retailSqft: 20000, desc: "Anchor multi-modal terminal with EV fast charging hub." },
+      { name: `${cName} East Station`, lat: cLat + 0.02, lng: cLng + 0.02, units: 260, affordPct: 30, retailSqft: 15000, desc: "East employment center connector." }
+    ],
     corridorDesc: "High-frequency rapid transit corridor and active transportation revitalization connecting municipal activity centers.",
     p3Type: "Surplus Transit Agency ROW 99-Year Ground Lease with Infill Zoning Incentives",
     units: 350,
@@ -6334,10 +6420,23 @@ function p3Section(p, m) {
         <div style="font-size:12px;color:#334155;margin-bottom:4px;"><b>Lead Sponsoring Agency:</b> ${esc(pipe.agency)}</div>
         <div style="font-size:12px;color:#475569;margin-bottom:6px;"><b>Station Focus Hub:</b> <span style="color:#0369a1;font-weight:600">${esc(pipe.hubName)}</span></div>
         <div style="font-size:12px;color:#475569;margin-bottom:10px;">${esc(pipe.corridorDesc)}</div>
-        <button type="button" onclick="flyToP3Hub('${esc(pipe.fips)}')" style="display:inline-flex;align-items:center;gap:5px;background:#0284c7;color:#fff;border:none;padding:6px 12px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;box-shadow:0 2px 8px rgba(2,132,199,0.3);transition:background 0.15s;">
+        <button type="button" onclick="flyToP3Hub('${esc(pipe.fips)}')" style="display:inline-flex;align-items:center;gap:6px;background:#0284c7;color:#fff;border:none;padding:7px 13px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;box-shadow:0 2px 8px rgba(2,132,199,0.3);transition:background 0.15s;">
           📍 Fly to Station Hub on Map &amp; View 0.5-Mi Walkshed
         </button>
       </div>
+
+      ${pipe.stations && pipe.stations.length ? `
+      <div style="margin-bottom:12px;">
+        <div style="font-size:12px;font-weight:700;color:#0f172a;margin-bottom:6px;">Planned Stations along this Corridor (Click to Inspect):</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">
+          ${pipe.stations.map((stn, idx) => `
+            <button type="button" class="story-btn" onclick="flyToP3Hub('${esc(pipe.fips)}', ${idx})" style="padding:4px 8px;font-size:11px;" title="Focus ${esc(stn.name)}">
+              ${(stn.lat === pipe.hubLat && stn.lng === pipe.hubLng) ? '🚆' : '🚉'} ${esc(stn.name)}
+            </button>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
 
       <div style="margin-bottom:12px;">
         <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px;">P3 Joint Development &amp; Corridor Bundle Simulator</div>
@@ -7549,13 +7648,28 @@ async function init() {
     val = String(val || "").trim();
     if (!val) return;
     hideAddr();
-    const ocId = (activeCounty === "oc" && D_OC && D_OC.search) ? D_OC.search[val] : null;
-    const id = ocId || names.get(val);
+    const valLower = val.toLowerCase();
+    let id = null;
+    if (typeof D_OC !== "undefined" && D_OC && D_OC.search) {
+      id = D_OC.search[val];
+      if (!id) {
+        const k = Object.keys(D_OC.search).find(x => x.toLowerCase() === valLower);
+        if (k) id = D_OC.search[k];
+      }
+    }
+    if (!id && typeof names !== "undefined" && names) {
+      id = names.get(val);
+      if (!id) {
+        for (const [k, v] of names.entries()) {
+          if (k.toLowerCase() === valLower) { id = v; break; }
+        }
+      }
+    }
     if (id) { select(id, true); return; }
     if (typeof countyBundleEls === "function") {
       const matchCounty = countyBundleEls().find(e => {
         const cn = (e.dataset.name || "").toLowerCase().replace(/ county| parish/g, "").trim();
-        return cn === val.toLowerCase().replace(/ county| parish/g, "").trim();
+        return cn === valLower.replace(/ county| parish/g, "").trim();
       });
       if (matchCounty && matchCounty.dataset.fips) { openCounty(matchCounty.dataset.fips); return; }
     }
