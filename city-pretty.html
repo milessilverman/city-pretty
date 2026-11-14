@@ -2189,10 +2189,15 @@ details.panel-sec .sec-content { padding: 12px; }
     <!-- Quick Prompts Strip -->
     <div style="padding:8px 14px;background:#f1f5f9;border-top:1px solid #e2e8f0;display:flex;gap:6px;overflow-x:auto;">
       <button type="button" class="story-btn" onclick="askAiPrompt('best_move')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">🎯 Best Move for this Lot?</button>
+      <button type="button" class="story-btn" onclick="askAiPrompt('home_worth')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">🏠 What is this Home Worth?</button>
+      <button type="button" class="story-btn" onclick="askAiPrompt('property_tax')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">💰 Will ADU Raise My Taxes?</button>
+      <button type="button" class="story-btn" onclick="askAiPrompt('adu_cost')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">🔨 ADU Construction Costs &amp; Payback?</button>
       <button type="button" class="story-btn" onclick="askAiPrompt('adu_parking')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">🚗 Can I Skip Parking for ADU?</button>
       <button type="button" class="story-btn" onclick="askAiPrompt('solar_equity')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">☀️ Solar &amp; Battery Savings?</button>
       <button type="button" class="story-btn" onclick="askAiPrompt('lot_split')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">📐 Can I Split this Lot (SB 9)?</button>
-      <button type="button" class="story-btn" onclick="askAiPrompt('p3_roi')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">🚆 Nearby P3 Transit Infrastructure?</button>
+      <button type="button" class="story-btn" onclick="askAiPrompt('tree_canopy')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">🌳 Satellite Canopy &amp; Cooling ROI?</button>
+      <button type="button" class="story-btn" onclick="askAiPrompt('historic_trends')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">📈 Historic Tax Spending Surges?</button>
+      <button type="button" class="story-btn" onclick="askAiPrompt('p3_roi')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">🚆 Nearby Transit Infrastructure?</button>
     </div>
 
     <!-- Input Bar -->
@@ -23052,9 +23057,14 @@ function handleAiSubmit(e) {
 function askAiPrompt(key) {
   let promptText = "";
   if (key === "best_move") promptText = "What is the single best investment move for this lot?";
+  else if (key === "home_worth") promptText = "What is this home worth and how does the AVM compare to Zillow Zestimates?";
+  else if (key === "property_tax") promptText = "Will building an ADU or home addition raise my property taxes or trigger a reassessment?";
+  else if (key === "adu_cost") promptText = "How much does it cost to build an ADU and what is the payback horizon?";
   else if (key === "adu_parking") promptText = "Can I build an ADU here without adding parking spaces?";
   else if (key === "solar_equity") promptText = "What is the estimated rooftop solar sizing, cost, and equity return?";
   else if (key === "lot_split") promptText = "Can I split this lot into two separate deeded parcels under SB 9?";
+  else if (key === "tree_canopy") promptText = "How do satellite tree canopy and urban cooling impact property values?";
+  else if (key === "historic_trends") promptText = "Show me historical trends where municipal capital generated major real estate surges.";
   else if (key === "p3_roi") promptText = "What P3 transit infrastructure and station corridor investments are nearby?";
   
   aiHistory.push({ role: "user", text: promptText });
@@ -23096,7 +23106,7 @@ function generateAiAnswer(q, promptKey = null) {
     </div>
   ` : "";
 
-  if (qLower.includes("worth") || qLower.includes("value") || qLower.includes("zillow") || qLower.includes("zestimate") || qLower.includes("estimate") || qLower.includes("avm") || qLower.includes("price")) {
+  if (promptKey === "home_worth" || qLower.includes("worth") || qLower.includes("value") || qLower.includes("zillow") || qLower.includes("zestimate") || qLower.includes("estimate") || qLower.includes("avm") || qLower.includes("price")) {
     if (isHouse) {
       const val = activeHouse.valuation;
       const hv = activeHouse.houseHv || (val ? val.estimatedValue : 350000);
@@ -23263,7 +23273,7 @@ function generateAiAnswer(q, promptKey = null) {
       • Curated murals reduce illegal tagging, saving municipal abatement costs while creating neighborhood visual identity.${citeBlock}`;
   }
 
-  if (qLower.includes("tree") || qLower.includes("canopy") || qLower.includes("ndvi") || qLower.includes("satellite") || qLower.includes("heat")) {
+  if (promptKey === "tree_canopy" || qLower.includes("tree") || qLower.includes("canopy") || qLower.includes("ndvi") || qLower.includes("satellite") || qLower.includes("heat")) {
     return `<b>Empirical Analysis of Satellite Tree Canopy &amp; Heat Mitigation:</b><br><br>
       Longitudinal satellite NDVI and high-resolution thermal imaging across 65 studies (including <i>Donovan &amp; Butry, USDA Forest Service</i> and <i>Sander et al., Ecological Economics</i>) establish clear market trends:<br>
       • <b>+$7,130 price premium</b> per home with mature street trees, with a <b>+$12,828 spillover dividend</b> across neighboring properties within 100 feet.<br>
@@ -23271,7 +23281,7 @@ function generateAiAnswer(q, promptKey = null) {
       • Properties in the top quartile of satellite greenness spend <b>18 fewer days on market</b> and trade at a +4.5% premium over regional list price.${citeBlock}`;
   }
 
-  if (qLower.includes("reassessment") || qLower.includes("property tax") || (qLower.includes("tax") && (qLower.includes("adu") || qLower.includes("addition") || qLower.includes("raise") || qLower.includes("increase") || qLower.includes("prop 13") || qLower.includes("roll")))) {
+  if (promptKey === "property_tax" || qLower.includes("reassessment") || qLower.includes("property tax") || (qLower.includes("tax") && (qLower.includes("adu") || qLower.includes("addition") || qLower.includes("raise") || qLower.includes("increase") || qLower.includes("prop 13") || qLower.includes("roll")))) {
     if (isCa) {
       return `<b>Property Tax Assessment &amp; ADUs in California:</b><br><br>
         • <b>No Full Home Reassessment:</b> Under California Proposition 13 (Rev. &amp; Tax Code § 70), building an ADU or home addition <b>does NOT trigger a reassessment</b> of your existing home or land.<br>
@@ -23286,7 +23296,7 @@ function generateAiAnswer(q, promptKey = null) {
     }
   }
 
-  if (qLower.includes("cost") && (qLower.includes("adu") || qLower.includes("build") || qLower.includes("how much"))) {
+  if (promptKey === "adu_cost" || (qLower.includes("cost") && (qLower.includes("adu") || qLower.includes("build") || qLower.includes("how much")))) {
     return `<b>Turnkey ADU Construction Costs &amp; Financial Payback:</b><br><br>
       • <b>Detached 2-Bed ADU (750–800 sq ft):</b> ~$195,000 to $260,000 turnkey ($260–$325 / sq ft).<br>
       • <b>Attached Garage Conversion (350–450 sq ft):</b> ~$95,000 to $145,000 turnkey ($235–$280 / sq ft).<br>
@@ -23296,7 +23306,7 @@ function generateAiAnswer(q, promptKey = null) {
       • <b>Payback Period:</b> ~6.5 to 8.5 years, creating immediate <b>+$180,000 to +$290,000 in unencumbered home equity</b> upon completion.`;
   }
 
-  if (qLower.includes("tax") || qLower.includes("historic") || qLower.includes("trend") || qLower.includes("spend") || qLower.includes("high line") || qLower.includes("beltline")) {
+  if (promptKey === "historic_trends" || qLower.includes("tax") || qLower.includes("historic") || qLower.includes("trend") || qLower.includes("spend") || qLower.includes("high line") || qLower.includes("beltline")) {
     return `<b>Historical Municipal Capital &amp; Local Tax Reinvestment Trends:</b><br><br>
       Longitudinal audits of 60 landmark US municipal capital investments prove that targeted public capital expenditure reliably surges surrounding property values and tax bases:<br>
       • <b>New York High Line:</b> $115M public park investment catalyzed <b>$2.2B in private development</b> and a <b>+103% property value surge</b> in the surrounding 3-block corridor.<br>
