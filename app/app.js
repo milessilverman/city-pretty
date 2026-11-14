@@ -13289,7 +13289,7 @@ function getTierElasticity(salePrice) {
 }
 
 /**
- * Calculates high-precision Zillow-grade automated property valuation.
+ * Screening estimate of a home's market value (not an appraisal); see valuationCheck() for where it is withheld.
  * 
  * @param {Object} params
  * @param {Object} params.attributes Assessor & parcel attributes
@@ -13921,7 +13921,7 @@ if (typeof module !== "undefined" && module.exports) {
 
 /**
  * ArcGIS Multi-State Field Alias Normalizer (ES6 / Browser & Node compatible)
- * Resolves county parcel attributes across 637+ US local jurisdictions.
+ * Resolves county parcel attributes across the US local jurisdictions on the map.
  */
 
 const FIELD_ALIASES = {
@@ -15012,7 +15012,7 @@ function syncHeaderDomToCounty(fips) {
   }
   if (readinessEl) {
     readinessEl.setAttribute("data-tier", comp.readiness_tier);
-    const tierLabel = comp.readiness_tier === "audited_A" ? "AUDITED A" : comp.readiness_tier === "verified_B" ? "VERIFIED B" : comp.readiness_tier === "preliminary_C" ? "PRELIMINARY C" : "CADASTRAL ONLY D";
+    const tierLabel = comp.readiness_tier === "audited_A" ? "A (fullest)" : comp.readiness_tier === "verified_B" ? "B" : comp.readiness_tier === "preliminary_C" ? "C (preliminary)" : "D (basic)";
     const bgCol = comp.readiness_tier === "audited_A" ? "#064e3b" : comp.readiness_tier === "verified_B" ? "#1e3a8a" : comp.readiness_tier === "preliminary_C" ? "#78350f" : "#334155";
     const textCol = comp.readiness_tier === "audited_A" ? "#a7f3d0" : comp.readiness_tier === "verified_B" ? "#bfdbfe" : comp.readiness_tier === "preliminary_C" ? "#fef3c7" : "#e2e8f0";
     const borderCol = comp.readiness_tier === "audited_A" ? "#059669" : comp.readiness_tier === "verified_B" ? "#2563eb" : comp.readiness_tier === "preliminary_C" ? "#d97706" : "#64748b";
@@ -15020,7 +15020,7 @@ function syncHeaderDomToCounty(fips) {
     readinessEl.style.background = bgCol;
     readinessEl.style.color = textCol;
     readinessEl.style.border = "1px solid " + borderCol;
-    readinessEl.textContent = "Tier: " + tierLabel + " · Assessor: " + (comp.assessor_roll_vintage || "Unverified") + " · Zoning: " + comp.zoning_source.replace(/_/g, " ") + " · GTFS: " + comp.gtfs_agencies_count + (comp.gtfs_agencies_count === 1 ? " Agency" : " Agencies");
+    readinessEl.textContent = "Data tier: " + tierLabel + " · Assessor: " + (comp.assessor_roll_vintage || "Unverified") + " · Zoning: " + comp.zoning_source.replace(/_/g, " ") + " · GTFS: " + comp.gtfs_agencies_count + (comp.gtfs_agencies_count === 1 ? " Agency" : " Agencies");
   }
   if (typeof syncMethodsModalToCounty === "function") {
     syncMethodsModalToCounty(f);
@@ -15113,7 +15113,7 @@ function calibrateVpd(v, grade, id, m) {
     low: f(low), high: f(high), point: v, adj, factor, notes,
     band: ciMargin, se: f(v * seRate), ciMarginPct: Math.round(ciMargin * 100) + "%",
     badge: g !== "NONE" ? "Grade " + g : "",
-    str: "$" + f(low) + " – $" + f(high) + " / $1 (95% CI)",
+    str: "$" + f(low) + " – $" + f(high) + " / $1 (model range)",
     estStr: `~$${f(v)} / $1`,
     adjStr: Math.abs(factor - 1) < 0.005 ? "" : `~$${f(adj)} / $1 (locally adjusted ×${factor.toFixed(2)})`
   };
@@ -16850,6 +16850,16 @@ function jsonp(url) {
     window[cb] = d => { delete window[cb]; s.remove(); res(d); }; s.onerror = () => { delete window[cb]; s.remove(); rej(new Error("parcel service unreachable")); };
     s.src = url + "&callback=" + cb; document.head.appendChild(s); setTimeout(() => { if (window[cb]) { delete window[cb]; s.remove(); rej(new Error("timeout")); } }, 15000); });
 }
+// Parcel use from the county's own use field. Many counties publish numeric codes (Florida's DOR "0100" is a
+// single-family home), so anything that is not clearly worded stays "unknown" rather than being guessed.
+function parcelUseType(useVal) {
+  const u = String(useVal || "").toLowerCase();
+  if (!u.trim()) return "unknown";
+  if (/res|single|family|condo|apt|apartment|dwell|home|duplex|triplex|townh/.test(u)) return "residential";
+  if (/vacant|unimproved/.test(u)) return "vacant";
+  if (/commerc|industr|office|retail|warehouse|hotel|exempt|gov|federal|state of|municipal|public|institution|church|relig|school|college|universit|hospital|utilit|cemeter|park|military/.test(u)) return "non-residential";
+  return "unknown";
+}
 function normalizeParcelFeature(feat, ll, svc) {
   if (!feat || !feat.attributes) return null;
   const a = feat.attributes;
@@ -16890,7 +16900,7 @@ function normalizeParcelFeature(feat, ll, svc) {
       ZoneCode: String(a.ZONING || a.ZONE || a.ZoneID || a.ZONECLASS || a.DOR_UC || a.LUCode || a.CITY_ZONING || "").trim(),
       UseDescription: useVal || `${svc.name || "Jurisdiction"} parcel`,
       UseCode: String(a.USECD || a.DOR_UC || ""),
-      UseType: /res|single|family|condo|apt|dwell|home/i.test(useVal) ? "residential" : "commercial / mixed or other",
+      UseType: parcelUseType(useVal),
       Roll_LandValue: landVal, Roll_ImpValue: impVal, Roll_TotalValue: totVal,
       Roll_LandBaseYear: num(a.Roll_LandBaseYear ?? a.Roll_ImpBaseYear ?? a.BASE_YEAR ?? a.TAXROLLYEAR),
       JV: jvVal, SEV: sevVal,
@@ -16902,7 +16912,7 @@ function normalizeParcelFeature(feat, ll, svc) {
       LastSaleDate: saleDate || "",
       Acres: acresVal,
       CenterStories: num(a.NumFloors ?? a.STORIES ?? a.NO_OF_STORIES ?? a.StoryHeight) || 1,
-      BBL: a.BBL || "", Units: num(a.UnitsRes ?? a.UnitsTotal ?? a.UNITS ?? a.Units) || 1, county: svc.name || countyOf()
+      BBL: a.BBL || "", Units: num(a.UnitsRes ?? a.UnitsTotal ?? a.UNITS ?? a.Units) || 1, county: countyOf(), Source: svc.name || ""
     },
     geometry: feat.geometry
   };
@@ -17992,6 +18002,25 @@ function copyPlaybookMemo(title, equity, roi, statute, address, apn) {
   });
 }
 
+// The home-value model is built for houses, condos and small apartment buildings. It must not print a number for
+// the White House, a stadium or a 900-acre farm, and it must not contradict the assessor by a wide margin.
+function valuationCheck(a, lot, est) {
+  a = a || {};
+  const roll = ((+a.Roll_LandValue || 0) + (+a.Roll_ImpValue || 0)) || (+a.Roll_TotalValue || 0);
+  const acres = lot ? lot / 43560 : (+a.Acres || 0);
+  const useWords = (String(a.UseType || "") + " " + String(a.UseDescription || "")).toLowerCase();
+  const isRes = /residential|single|family|condo|dwell|duplex|townh|apartment/.test(useWords);
+  const nonRes = !isRes && (/non-residential|commerc|industr|institution|government|exempt|church|school|hospital|utilit|office|retail|federal/.test(useWords));
+  if (nonRes) return { ok: false, roll, reason: "The county records this lot as non-residential; the home-value model covers houses, condos and small apartment buildings." };
+  if (roll >= 20e6) return { ok: false, roll, reason: `The assessor values this lot at ${fmt$(roll)}, far beyond the homes the model is built from.` };
+  if (acres >= 10 && !isRes) return { ok: false, roll, reason: `The lot is ${Math.round(acres)} acres with no recorded residential use.` };
+  if (est > 0 && roll > 0 && est < roll * 0.5) return { ok: false, roll, reason: `The model's figure (${fmt$(est)}) is less than half the assessor's value (${fmt$(roll)}), so the model does not fit this property.` };
+  return { ok: true, roll };
+}
+function noEstimateHtml(vc) {
+  return `<b>No estimate</b><div class="small muted" style="margin-top:2px">${esc(vc.reason)}${vc.roll > 0 ? ` Assessor value: ${fmt$(vc.roll)}.` : ""}</div>`;
+}
+
 function renderHouse(box, a, lot, ll, st) {
   const osm = st.osmDone ? st.osm : null, R = st.rDone ? st.R : null, rOff = st.rDone && !st.R;   // rOff: the live checks could not be reached
   const PF = permitFacts(R);
@@ -18033,7 +18062,7 @@ function renderHouse(box, a, lot, ll, st) {
   const poolBonus = F.pool ? baseNeighborhoodHv * 0.045 : 0;
   const lotBonus = Math.max(-0.08, Math.min(0.12, (((lot || 6000) - 5500) / 5500) * 0.10)) * baseNeighborhoodHv;
 
-  // Execute Zillow-grade Automated Valuation Model (AVM)
+  // Screening home-value estimate (not an appraisal)
   const valuation = (typeof estimatePropertyMarketValue === "function") ? estimatePropertyMarketValue({
     attributes: a,
     lotSqft: lot || a.LotSqft || 6000,
@@ -18049,11 +18078,12 @@ function renderHouse(box, a, lot, ll, st) {
   const valLow = valuation ? valuation.valueLow : Math.round((houseHv * (1 - confMarginPct)) / 1000) * 1000;
   const valHigh = valuation ? valuation.valueHigh : Math.round((houseHv * (1 + confMarginPct)) / 1000) * 1000;
   const valMethod = valuation ? valuation.valuationMethod : "Hedonic Micro-Model";
+  const valCheck = valuationCheck(a, lot, houseHv);
 
   // Universal Map Popup with Street View, Earth, Assessor Roll, FEMA, Zoning & Amenities Proximity
   if (typeof updateHouseMapPopup === "function") {
     try {
-      updateHouseMapPopup(a, lot, ll, st, houseHv, z, R);
+      updateHouseMapPopup(a, lot, ll, st, houseHv, z, R, valCheck, valLow, valHigh);
     } catch(e) { console.warn("updateHouseMapPopup error:", e); }
   }
 
@@ -18129,6 +18159,7 @@ function renderHouse(box, a, lot, ll, st) {
   h.confMarginPct = confMarginPct;
   h.valMethod = valMethod;
   h.valuation = valuation;
+  h.valCheck = valCheck;
   h.st = st;
 
   if (activeHouse) {
@@ -18138,6 +18169,7 @@ function renderHouse(box, a, lot, ll, st) {
     activeHouse.valHigh = valHigh;
     activeHouse.confMarginPct = confMarginPct;
     activeHouse.valMethod = valMethod;
+    activeHouse.valCheck = valCheck;
     activeHouse.valuation = valuation;
     activeHouse.F = F;
     activeHouse.sale = sale;
@@ -18226,7 +18258,8 @@ function renderHouse(box, a, lot, ll, st) {
       return "";
     })()}
     <table class="small facts"><tbody>
-      ${fact("Estimated market value", `<div>
+      ${!valCheck.ok ? fact("Estimated market value", noEstimateHtml(valCheck), "") : ""}
+      ${valCheck.ok ? fact("Estimated market value", `<div>
         <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;">
           <b>${fmt$(houseHv)}</b> <span class="vpd-range" style="font-size:12px;color:var(--ink-2)">(${fmt$(valLow)} – ${fmt$(valHigh)} · screening range ±${(confMarginPct * 100).toFixed(1)}%)</span>
         </div>
@@ -18267,7 +18300,7 @@ function renderHouse(box, a, lot, ll, st) {
             </div>
           </div>
         </details>
-      </div>`, `screening estimate: ${fmtN(livingSqft)} sq ft at ~$${houseVpsf}/sq ft from this area's typical price per sq ft, adjusted for age, bedrooms, baths, lot size, pool${sale ? " and the last recorded sale" : ""}; cross-check with live Zillow/Redfin valuation comps`)}
+      </div>`, `screening estimate: ${fmtN(livingSqft)} sq ft at ~$${houseVpsf}/sq ft from this area's typical price per sq ft, adjusted for age, bedrooms, baths, lot size, pool${sale ? " and the last recorded sale" : ""}; cross-check with live Zillow/Redfin valuation comps`) : ""}
       ${totalRoll > 0 ? fact("Assessor Roll Value", `<span>${fmt$(totalRoll)} <span class="muted">(Land ${fmt$(rollLand)} + Imp ${fmt$(rollImp)}${rollBaseYear ? `, base year ${rollBaseYear}` : ""})</span></span>`, "County Assessor Assessment Roll") : ""}
       ${sale ? fact("Last recorded sale", `<span>${fmt$(sale.price)} <span class="muted">(${sale.date.length === 8 ? sale.date.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3") : "date not recorded"})</span></span>`, "County PAIS recorded deed transfer") : ""}
       ${fact("Stories", `<div>
@@ -23712,10 +23745,10 @@ function renderCountyReadinessMatrix(targetFips) {
     sales_comps_window: ["2022-01-01", "2026-06-30"]
   };
 
-  const tierBadge = comp.readiness_tier === "audited_A" ? '<span style="background:#064e3b;color:#a7f3d0;border:1px solid #059669;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:800;">AUDITED A · 100% OPERATIONAL</span>' :
-    comp.readiness_tier === "verified_B" ? '<span style="background:#1e3a8a;color:#bfdbfe;border:1px solid #2563eb;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:800;">VERIFIED B · METRO OPERATIONAL</span>' :
-    comp.readiness_tier === "preliminary_C" ? '<span style="background:#78350f;color:#fef3c7;border:1px solid #d97706;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:800;">PRELIMINARY C · INTERMEDIATE PIPELINE</span>' :
-    '<span style="background:#334155;color:#e2e8f0;border:1px solid #64748b;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:800;">CADASTRAL ONLY D · SCREENING PASS</span>';
+  const tierBadge = comp.readiness_tier === "audited_A" ? '<span style="background:#064e3b;color:#a7f3d0;border:1px solid #059669;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:800;">DATA TIER A · FULLEST DATA</span>' :
+    comp.readiness_tier === "verified_B" ? '<span style="background:#1e3a8a;color:#bfdbfe;border:1px solid #2563eb;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:800;">DATA TIER B</span>' :
+    comp.readiness_tier === "preliminary_C" ? '<span style="background:#78350f;color:#fef3c7;border:1px solid #d97706;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:800;">DATA TIER C · PRELIMINARY</span>' :
+    '<span style="background:#334155;color:#e2e8f0;border:1px solid #64748b;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:800;">DATA TIER D · BASIC</span>';
 
   // Subsystem descriptions
   let assessRatioText = "Proposition 13 Base-Year Tenure Recovery & 2.0% Statutory Roll Inflation Cap";
@@ -23794,7 +23827,7 @@ function renderCountyReadinessMatrix(targetFips) {
         <div>${tierBadge}</div>
       </div>
       <div style="font-size:12px;color:#cbd5e1;line-height:1.45;">
-        City Pretty enforces audited cadastral, statutory, and econometric provenance. All 706 US counties and county-equivalent jurisdictions are cataloged below with verifiable assessment roll dates, zoning engine citations, transit feeds, and safety cadastre status.
+        Every US county and county-equivalent jurisdiction on the map is cataloged below with verifiable assessment roll dates, zoning engine citations, transit feeds, and safety cadastre status.
       </div>
     </div>
 
@@ -23874,7 +23907,7 @@ function renderCountyReadinessMatrix(targetFips) {
         <h4 style="margin:0;font-size:15px;font-weight:800;color:var(--ink);">All 639 Audited US Counties Directory</h4>
         <div style="display:flex;gap:6px;flex-wrap:wrap;">
           <button type="button" class="action-pill active" id="btn-filter-all" onclick="filterCountyReadinessTier('all')" style="font-size:11px;padding:3px 9px;">All (639)</button>
-          <button type="button" class="action-pill" id="btn-filter-audited" onclick="filterCountyReadinessTier('audited_A')" style="font-size:11px;padding:3px 9px;">Audited A (LA)</button>
+          <button type="button" class="action-pill" id="btn-filter-audited" onclick="filterCountyReadinessTier('audited_A')" style="font-size:11px;padding:3px 9px;">Tier A (LA)</button>
           <button type="button" class="action-pill" id="btn-filter-verified" onclick="filterCountyReadinessTier('verified_B')" style="font-size:11px;padding:3px 9px;">Verified B (Metros)</button>
           <button type="button" class="action-pill" id="btn-filter-prelim" onclick="filterCountyReadinessTier('preliminary_C')" style="font-size:11px;padding:3px 9px;">Preliminary C</button>
           <button type="button" class="action-pill" id="btn-filter-cadastral" onclick="filterCountyReadinessTier('cadastral_only_D')" style="font-size:11px;padding:3px 9px;">Cadastral D</button>
@@ -23950,7 +23983,7 @@ function renderCountyReadinessTableRows() {
 
   const displayList = filtered.slice(0, 100);
   tbody.innerHTML = displayList.map(c => {
-    const tierPill = c.readiness_tier === "audited_A" ? '<span style="background:#064e3b;color:#a7f3d0;padding:1px 6px;border-radius:10px;font-weight:700;font-size:10px;">Audited A</span>' :
+    const tierPill = c.readiness_tier === "audited_A" ? '<span style="background:#064e3b;color:#a7f3d0;padding:1px 6px;border-radius:10px;font-weight:700;font-size:10px;">Tier A</span>' :
       c.readiness_tier === "verified_B" ? '<span style="background:#1e3a8a;color:#bfdbfe;padding:1px 6px;border-radius:10px;font-weight:700;font-size:10px;">Verified B</span>' :
       c.readiness_tier === "preliminary_C" ? '<span style="background:#78350f;color:#fef3c7;padding:1px 6px;border-radius:10px;font-weight:700;font-size:10px;">Prelim C</span>' :
       '<span style="background:#334155;color:#e2e8f0;padding:1px 6px;border-radius:10px;font-weight:700;font-size:10px;">Cadastral D</span>';
@@ -24201,7 +24234,9 @@ function activeState() {
 function countyOf(m) { return (m && m.county) || (activeCounty === "oc" && D_OC && D_OC.meta && D_OC.meta.county) || "Los Angeles County"; }
 function countyBundleEls() { return [...document.querySelectorAll("script.county-bundle")]; }
 // ---------------- IndexedDB Fast Cache for County Bundles (<20ms instant load on return)
-const CP_DB_NAME = "citypretty_cache_v2";
+// v3 stores { tag, data }: tag is the county file's ETag, so a rebuilt file replaces the copy a visitor kept
+const CP_DB_NAME = "citypretty_cache_v3";
+try { if (typeof indexedDB !== "undefined") indexedDB.deleteDatabase("citypretty_cache_v2"); } catch (e) {}
 const CP_STORE_NAME = "bundles";
 function openBundleDB() {
   return new Promise((resolve) => {
@@ -24291,25 +24326,57 @@ function countyNameOf(fips) {
   return "county " + fips;
 }
 
+// Names chosen as "the nearest OpenStreetMap neighborhood label" are only true when that label lies inside the
+// block group. Otherwise the area is next to that neighborhood, not in it (the National Mall is not "The Wharf"),
+// so the name becomes "Near The Wharf".
+function qualifyNearestNames(B) {
+  if (!B || B.__namesQualified || !Array.isArray(B.features) || !Array.isArray(B.hood_labels)) return B;
+  B.__namesQualified = true;
+  const byName = new Map();
+  for (const [n, lat, lng] of B.hood_labels) { if (!byName.has(n)) byName.set(n, []); byName.get(n).push([lat, lng]); }
+  const inRingXY = (r, x, y) => { let ins = false; for (let i = 0, j = r.length - 1; i < r.length; j = i++) { const [xi, yi] = r[i], [xj, yj] = r[j]; if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) ins = !ins; } return ins; };
+  const inGeom = (g, lat, lng) => {
+    const polys = g && g.type === "Polygon" ? [g.coordinates] : g && g.type === "MultiPolygon" ? g.coordinates : [];
+    return polys.some(p => p[0] && inRingXY(p[0], lng, lat) && !p.slice(1).some(h => inRingXY(h, lng, lat)));
+  };
+  for (const f of B.features) {
+    const p = f && f.properties; if (!p || !p.n || /^Near /.test(p.n)) continue;
+    const det = B.details && B.details[p.id], m = det && det.m;
+    const ns = (m && m.ns) || "";
+    if (!/^nearest/i.test(ns)) continue;
+    const pts = byName.get(p.n); if (!pts) continue;
+    if (pts.some(([lat, lng]) => inGeom(f.geometry, lat, lng))) continue;
+    p.n = "Near " + p.n;
+    if (m) { m.n = p.n; m.ns = ns.replace(/^nearest neighborhood label/i, "nearest neighborhood label, which lies outside this block group"); }
+  }
+  return B;
+}
 async function loadCountyBundle(fips) {
   if (!fips) return null;
   fips = String(fips).padStart(5, "0");
   if (COUNTY_BUNDLES[fips]) return COUNTY_BUNDLES[fips];
   if (_bundlePromises[fips]) return _bundlePromises[fips];
   _bundlePromises[fips] = (async () => {
-    // 0ms instant IndexedDB cache lookup
+    const el = (typeof countyBundleEls === "function") ? countyBundleEls().find(e => e.dataset.fips === fips) : null;
+    // Browser cache, checked against the file's ETag so a rebuilt county replaces the stored copy
+    let tag = null;
+    if (el && el.dataset.src) {
+      try {
+        const h = await fetch(resolveRepoAssetUrl(el.dataset.src), { method: "HEAD", cache: "no-cache" });
+        if (h.ok) tag = h.headers.get("etag") || h.headers.get("last-modified");
+      } catch (e) {}
+    }
     try {
       const cached = await getCachedBundle(fips);
-      if (cached && cached.features && cached.features.length) {
-        COUNTY_BUNDLES[fips] = cached;
-        return cached;
+      if (cached && cached.data && cached.data.features && cached.data.features.length && (!tag || cached.tag === tag)) {
+        COUNTY_BUNDLES[fips] = qualifyNearestNames(cached.data);
+        return cached.data;
       }
     } catch(e) {}
-    const el = (typeof countyBundleEls === "function") ? countyBundleEls().find(e => e.dataset.fips === fips) : null;
     let B = null;
     if (el) {
       try {
-        B = el.dataset.src ? await fetchJSON(el.dataset.src) : await unpackGzipB64(el.textContent.trim());
+        B = el.dataset.src ? await fetchJSON(el.dataset.src) : el.textContent.trim() ? await unpackGzipB64(el.textContent.trim()) : null;
       } catch (err) {
         console.warn("Could not fetch remote bundle for " + fips, err);
       }
@@ -24333,15 +24400,18 @@ async function loadCountyBundle(fips) {
           state: info.state,
           built: "2026-11-08",
           readiness_tier: info.readiness_tier || "cadastral_only_D",
+          load_failed: true, coverage: el && el.dataset.coverage === "lots" ? "lots" : "missing",
           sources: [
-            ["State Cadastre & Assessor", "Audited state cadastre and local tax roll records", "Connected", true],
-            ["US Census TIGERweb", "Census 2020 block-group boundaries", "Integrated", true]
+            el && el.dataset.coverage === "lots"
+              ? ["County data", "Not built yet for this county; only live property lines are shown", "Lot lines only", false]
+              : ["County data file", "This county's data file could not be downloaded; only live property lines are shown", "Not loaded", false]
           ]
         }
       };
     }
     if (B && B.features && B.features.length) {
-      setCachedBundle(fips, B);
+      setCachedBundle(fips, { tag, data: B });
+      qualifyNearestNames(B);
     }
     if (el && el.dataset && el.dataset.sites) {
       try {
@@ -24561,7 +24631,7 @@ async function initOrangeCounty() {
   const b64Text = await cpText("bundle-oc");
   if (!b64Text) return;
   try {
-    D_OC = await unpackGzipB64(b64Text); cpRelease("bundle-oc");
+    D_OC = qualifyNearestNames(await unpackGzipB64(b64Text)); cpRelease("bundle-oc");
     if (D_OC.meta && !D_OC.meta.fips) D_OC.meta.fips = ORANGE_FIPS;
     COUNTY_BUNDLES[ORANGE_FIPS] = D_OC;
     if (typeof window !== "undefined") window.D_OC = D_OC;
@@ -24965,12 +25035,17 @@ async function init() {
         byst[st].sort((a, b) => a.dataset.name.localeCompare(b.dataset.name)).forEach(e => {
           if (sel.querySelector(`option[value="${e.dataset.fips}"]`)) return;
           const o = document.createElement("option"); o.value = e.dataset.fips;
-          o.textContent = e.dataset.name.replace(/ County$/, "") + (st === "CA" ? "" : ", " + st); o.title = e.dataset.name + (st === "CA" ? "" : ", " + STATE_FULL[st]); g.appendChild(o); });
+          const lotsOnly = e.dataset.coverage === "lots";
+          o.textContent = e.dataset.name.replace(/ County$/, "") + (st === "CA" ? "" : ", " + st) + (lotsOnly ? " (lot lines only)" : "");
+          o.title = e.dataset.name + (st === "CA" ? "" : ", " + STATE_FULL[st]) + (lotsOnly ? ": no neighborhood data yet; live property lines only" : ""); g.appendChild(o); });
         sel.appendChild(g); });
       sel.addEventListener("change", e => { if (e.target.value) openCounty(e.target.value); });
       const h1 = document.querySelector(".brand h1"), more = els.map(e => e.dataset.name.replace(/ County$/, ""));
       if (h1 && more.length === 1) h1.textContent = `Which improvements make ${els[0].dataset.name} neighborhoods better, and worth more, per dollar`;   // the full name: "San Juan Municipio", "Orleans Parish"
-      else if (h1 && more.length > 1) h1.textContent = `Which improvements make neighborhoods better, and worth more, per dollar (Audited LA County & ${more.length} Nationwide Counties)`; } }
+      else if (h1 && more.length > 1) h1.textContent = "Which improvements make neighborhoods better, and worth more, per dollar";
+      { const withData = els.filter(e => e.dataset.coverage !== "lots").length, lotsOnly = els.length - withData;
+        const first = sel.querySelector('option[value=""]'); if (first) first.textContent = `More counties (${withData} with data${lotsOnly ? `, ${lotsOnly} lot lines only` : ""})…`;
+        sel.title = sel.ariaLabel = `Select from ${withData} US counties with data` + (lotsOnly ? ` and ${lotsOnly} with property lines only` : ""); } } }
   cpText("la-crash-counts"); setTimeout(() => cpText("overlay-chunks"), 800);   // small/background downloads after first paint
   setTimeout(() => loadSites().then(() => { if (selected) { const f = byId.get(selected); if (f) fillSites(f.properties); } }), 1200);
   const start = D.meta.default_bg && byId.has(D.meta.default_bg) ? D.meta.default_bg : D.bgs.features[0].properties.id;
@@ -25046,10 +25121,10 @@ function stateReformHeadline(st, m) {
   } else if (st === "NY") {
     return "<b>NY Pro-Housing Communities:</b> Discretionary infrastructure funding prioritization & by-right infill financing";
   }
-  return "<b>By-Right Infill & ADUs:</b> Missing-middle infill authorized under municipal codes and federal Fannie Mae/FHA ADU financing guidelines";
+  return "<b>ADUs and missing-middle housing:</b> no statewide rule on file for this state; the city's or county's code decides.";
 }
 
-function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R) {
+function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R, valCheck, valLow, valHigh) {
   if (typeof map === "undefined" || !map) return;
   const p = byId.get(selected) ? byId.get(selected).properties : { c: a.county || countyOf(), hv: 850000, rent: 2200 };
   const curB = (typeof activeBundle === "function" ? activeBundle() : null) || (typeof D !== "undefined" && D) || {};
@@ -25057,16 +25132,26 @@ function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R) {
   const addr = a.SitusFullAddress || ("Parcel APN " + a.AIN);
   const city = p.c || a.county || countyOf();
   const rollVal = (+a.Roll_LandValue || 0) + (+a.Roll_ImpValue || 0) || (+a.Roll_TotalValue || 0);
-  const floodText = (R && R.fema) ? R.fema.label : "Zone X (Minimal flood hazard outside 500-yr floodplain)";
-  const fireText = (R && R.fire && R.fire.vh) ? "Very High Fire Hazard Severity Zone" : "Not in Very High Fire Hazard Zone";
+  // Unknown stays unknown: a missing check is never shown as "no risk"
+  const floodText = (R && R.fema && R.fema.label) ? R.fema.label : "Not checked for this lot";
+  const fireText = (R && R.fire) ? (R.fire.vh ? "Very High Fire Hazard Severity Zone" : "Not in a Very High Fire Hazard Severity Zone") : "Not checked for this lot";
   const svUrl = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${ll.lat.toFixed(6)},${ll.lng.toFixed(6)}`;
   const earthUrl = `https://earth.google.com/web/search/${ll.lat.toFixed(6)},${ll.lng.toFixed(6)}`;
   
-  const zCode = z ? z.zone : (a.ZoneCode || "Residential");
-  const zCat = z ? z.cat : "single-family";
-  const zExpl = (typeof explainZone === "function") ? explainZone(zCode, zCat, city) : { base: "Allowed residential" };
+  const zCode = z ? z.zone : String(a.ZoneCode || "").trim();
+  const zKnown = !!zCode && !/^unzoned$/i.test(zCode);
+  const zCat = z ? z.cat : "";
+  const zExpl = zKnown && typeof explainZone === "function" ? (explainZone(zCode, zCat, city) || {}) : {};
+  const useT = String(a.UseType || "").toLowerCase();
+  const resZone = zKnown && (/single|multi|resid|duplex|r\d|^r/i.test(zCat + " " + zCode));
+  const zoneLine = !zKnown
+    ? `<div><b>Zoning:</b> not published for this lot</div><div><b>ADU / infill:</b> depends on the zone; check the city's or county's code</div>`
+    : `<div><b>Zoning Code:</b> ${esc(zCode)}${zExpl.base ? ` (${esc(zExpl.base)})` : ""}</div>` +
+      (resZone && !/non-residential/.test(useT)
+        ? `<div><b>ADU / infill:</b> ${activeState() === "CA" ? "California law allows an ADU on residential lots (Gov. Code 66314); size and setbacks follow the city's code" : "residential zone; ADU rules are set by the state note below and the city's code"}</div>`
+        : `<div><b>ADU / infill:</b> not a residential zone, so home ADU rules do not apply</div>`);
 
-  let nearestSch = 0.4, nearestPark = 0.3, nearestLib = 0.8;
+  let nearestSch = null, nearestPark = null, nearestLib = null;
   const facList = (curB.layers && Array.isArray(curB.layers.facilities)) ? curB.layers.facilities : (D && D.layers && Array.isArray(D.layers.facilities) ? D.layers.facilities : []);
   if (facList.length > 0) {
     let minSch = 999, minPark = 999, minLib = 999;
@@ -25088,7 +25173,7 @@ function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R) {
     <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#0f172a;max-width:380px;line-height:1.35">
       <div style="border-bottom:2px solid #087b78;padding-bottom:6px;margin-bottom:8px">
         <div style="font-weight:800;font-size:14px;color:#087b78">${esc(addr)}</div>
-        <div style="font-size:11px;color:#64748b"><b>APN:</b> ${esc(a.AIN)} · ${esc(a.county || city)} · ${ll.lat.toFixed(4)}°, ${ll.lng.toFixed(4)}°</div>
+        <div style="font-size:11px;color:#64748b"><b>APN:</b> ${esc(a.AIN)} · ${esc(city)} · ${ll.lat.toFixed(4)}°, ${ll.lng.toFixed(4)}°</div>
       </div>
 
       <div style="display:flex;gap:5px;margin-bottom:8px;flex-wrap:wrap">
@@ -25104,9 +25189,11 @@ function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R) {
       </div>
 
       <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:6px 8px;margin-bottom:6px;font-size:11.5px">
-        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:3px;gap:8px">
           <span><b>Estimated Market Value:</b></span>
-          <span style="color:#087b78;font-weight:700">${fmt$(houseHv)} <span style="font-size:10.5px;color:#64748b;font-weight:normal">(±6.5%)</span></span>
+          ${valCheck && !valCheck.ok
+            ? `<span style="color:#64748b;font-weight:700">No estimate</span></div><div style="font-size:10.5px;color:#64748b;margin-bottom:3px">${esc(valCheck.reason)}</div><div>`
+            : `<span style="color:#087b78;font-weight:700">${fmt$(houseHv)}${valLow && valHigh ? ` <span style="font-size:10.5px;color:#64748b;font-weight:normal">(${fmt$(valLow)}–${fmt$(valHigh)})</span>` : ""}</span>`}
         </div>
         <div style="display:flex;gap:4px;margin-top:4px;margin-bottom:4px;flex-wrap:wrap;">
           <a href="https://www.zillow.com/homes/${encodeURIComponent((addr + ' ' + (city || '') + ' ' + (activeState() || '')).trim())}_rb/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;background:#006aff;color:#fff;padding:3px 7px;border-radius:4px;text-decoration:none;font-weight:700;font-size:10px" title="Cross-check with live Zillow Zestimate">
@@ -25131,15 +25218,14 @@ function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R) {
 
       <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:6px;padding:6px 8px;margin-bottom:6px;font-size:11.5px">
         <div style="font-weight:700;color:#166534;margin-bottom:2px">🏛️ Zoning &amp; State Housing Rights</div>
-        <div><b>Zoning Code:</b> ${esc(zCode)} (${esc(zExpl.base || "Allowed residential")})</div>
-        <div><b>ADU / Infill:</b> By right ADU allowed · ${lot >= 2400 ? "Eligible for Missing Middle / Duplex" : "Standard lot envelope"}</div>
+        ${zoneLine}
         <div style="font-size:11px;color:#166534;margin-top:2px">${reformHeadline}</div>
       </div>
 
       <div style="font-size:11px;color:#334155;margin-bottom:4px">
         <div>🌊 <b>FEMA Flood:</b> ${esc(floodText)}</div>
         <div>🔥 <b>Wildfire Risk:</b> ${esc(fireText)}</div>
-        <div>🏫 <b>Nearest Facilities:</b> School ${nearestSch} mi · Park ${nearestPark} mi · Library ${nearestLib} mi</div>
+        <div>🏫 <b>Nearest Facilities:</b> ${[nearestSch != null && `School ${nearestSch} mi`, nearestPark != null && `Park ${nearestPark} mi`, nearestLib != null && `Library ${nearestLib} mi`].filter(Boolean).join(" · ") || "not in this county's data"}</div>
       </div>
     </div>
   `;
@@ -25222,6 +25308,7 @@ function exportExecutiveProspectus() {
   const valObj = (typeof currentHouse !== "undefined" && currentHouse && currentHouse.valuation) || (typeof activeHouse !== "undefined" && activeHouse && activeHouse.valuation) || null;
   const houseHv = (typeof activeHouse !== "undefined" && activeHouse && activeHouse.houseHv) || (valObj ? valObj.estimatedValue : null);
   const rollVal = a.Roll_TotalValue || a.TAXABLETRIBUNAL1 || (a.Roll_LandValue && a.Roll_ImpValue ? a.Roll_LandValue + a.Roll_ImpValue : 520000);
+  const vcP = (typeof activeHouse !== "undefined" && activeHouse && activeHouse.valCheck) || { ok: true };
   const aPrice = houseHv || F.aPrice || (rollVal * 1.6);
   const sqft = (valObj && valObj.livingSqft) || a.SQFTmain || F.bldg || F.sqft || 1450;
   const lotSqft = (lot && lot.lotSqft) || (a.ACREAGE ? Math.round(a.ACREAGE * 43560) : 6200);
@@ -25230,9 +25317,9 @@ function exportExecutiveProspectus() {
     <!-- Prospectus Print Header -->
     <div style="border-bottom:3px solid #0f172a;padding-bottom:16px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;">
       <div>
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#0284c7;">City Pretty Institutional Advisory Platform</div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#0284c7;">City Pretty property screening</div>
         <div style="font-size:24px;font-weight:900;letter-spacing:-0.5px;color:#0f172a;margin:2px 0;">EXECUTIVE PROPERTY &amp; INVESTMENT PROSPECTUS</div>
-        <div style="font-size:13px;font-weight:600;color:#64748b;">Ground-Truth Cadastre · By-Right Statutory Zoning · Empirical ROI Capitalization</div>
+        <div style="font-size:13px;font-weight:600;color:#64748b;">Public parcel records · State housing rules · Modeled returns (estimates, not an appraisal)</div>
       </div>
       <div style="text-align:right;">
         <div style="font-size:11px;font-weight:700;color:#64748b;">DATE: ${dateStr}</div>
@@ -25258,9 +25345,9 @@ function exportExecutiveProspectus() {
         <div style="font-size:11px;color:#64748b;">${valObj && valObj.isVacantLand ? "Unimproved Site · 0 Units" : `Built ${a.YearBuilt || "N/A"} · ${a.Units || 1} Unit(s)`}</div>
       </div>
       <div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;">Baseline AVM Value</div>
-        <div style="font-size:14px;font-weight:800;color:#059669;">${fmtP(aPrice)}</div>
-        <div style="font-size:11px;color:#64748b;">${valObj && valObj.isVacantLand ? `~$${Math.round(aPrice / Math.max(lotSqft, 1)).toLocaleString()}/sqft lot` : `~$${Math.round(aPrice / Math.max(sqft, 1)).toLocaleString()}/sqft`}</div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;">Estimated Value</div>
+        <div style="font-size:14px;font-weight:800;color:${vcP.ok ? "#059669" : "#64748b"};">${vcP.ok ? fmtP(aPrice) : "No estimate"}</div>
+        <div style="font-size:11px;color:#64748b;">${!vcP.ok ? esc(vcP.reason) : valObj && valObj.isVacantLand ? `~$${Math.round(aPrice / Math.max(lotSqft, 1)).toLocaleString()}/sqft lot` : `~$${Math.round(aPrice / Math.max(sqft, 1)).toLocaleString()}/sqft`}</div>
       </div>
     </div>
 
@@ -25299,8 +25386,8 @@ function exportExecutiveProspectus() {
           <tbody>
             <tr style="border-bottom:1px solid #f1f5f9;">
               <td style="padding:8px 12px;font-weight:600;">Gross Capitalized Real Estate Valuation</td>
-              <td style="padding:8px 12px;text-align:right;">${fmtP(aPrice)}</td>
-              <td style="padding:8px 12px;text-align:right;">${fmtP(aPrice + cost + netEq)}</td>
+              <td style="padding:8px 12px;text-align:right;">${vcP.ok ? fmtP(aPrice) : "–"}</td>
+              <td style="padding:8px 12px;text-align:right;">${vcP.ok ? fmtP(aPrice + cost + netEq) : "–"}</td>
               <td style="padding:8px 12px;text-align:right;font-weight:700;color:#059669;">+${fmtP(cost + netEq)}</td>
             </tr>
             <tr style="border-bottom:1px solid #f1f5f9;">
@@ -25356,7 +25443,7 @@ function exportExecutiveProspectus() {
     <!-- Prospectus Footer & Sign-off -->
     <div style="border-top:1px solid #e2e8f0;padding-top:14px;margin-top:24px;font-size:10.5px;color:#64748b;display:flex;justify-content:space-between;align-items:center;">
       <div>
-        <b>City Pretty Independent Real Estate Backbone</b> · 637+ US Counties Verified · 540 Academic Studies Ingested
+        <b>City Pretty Independent Real Estate Backbone</b> · ${countyBundleEls().filter(e => e.dataset.coverage !== "lots").length} US counties with data
       </div>
       <div style="font-family:var(--mono);">
         REPORT ID: CP-${Date.now().toString(36).toUpperCase()}

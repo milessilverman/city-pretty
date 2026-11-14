@@ -46,7 +46,7 @@
     <div class="brand-title-row" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
       <h1>Which improvements make Los Angeles County neighborhoods better, and worth more, per dollar</h1>
       <div id="county-readiness-pill" class="county-readiness-pill" data-tier="audited_A" style="display:inline-flex;align-items:center;padding:3px 9px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:0.02em;background:#064e3b;color:#a7f3d0;border:1px solid #059669;cursor:pointer;" onclick="openDataAccuracyModal()" title="Click to inspect county data provenance, roll vintage, zoning and transit feeds">
-        Tier: AUDITED A · Assessor: 2026 Roll · Zoning: Live Municipal · GTFS: 19 Agencies
+        Data tier: A (fullest) · Assessor: 2026 roll · Zoning: live city GIS · GTFS: 19 agencies
       </div>
     </div>
   </div>
@@ -87,8 +87,8 @@
     <div class="county-buttons" role="group" aria-label="Select County">
       <button type="button" class="county-btn active" id="btn-county-la" onclick="switchCounty('la')" title="Switch to Los Angeles County">🌴 LA County</button>
       <button type="button" class="county-btn" id="btn-county-oc" onclick="openCounty('06059')" title="Expand to Orange County (Preliminary Coverage)">🍊 Orange County <span style="font-size:9px;padding:1px 5px;background:#fef3c7;color:#92400e;border-radius:4px;margin-left:3px;border:1px solid #fde68a;">Prelim</span></button>
-      <select id="county-more" class="county-btn" aria-label="Select from 700+ US Counties" title="Select from 700+ US Counties" style="border-left:1px solid var(--rule);font-family:inherit;max-width:11.5em;min-width:0">
-      <option value="">More counties (700+)…</option>
+      <select id="county-more" class="county-btn" aria-label="Select another US county" title="Select another US county" style="border-left:1px solid var(--rule);font-family:inherit;max-width:11.5em;min-width:0">
+      <option value="">More counties…</option>
       <optgroup label="California">
       <option value="06001">Alameda</option>
       <option value="06003">Alpine</option>
@@ -1042,7 +1042,7 @@
         <span style="font-size:24px;">🤖</span>
         <div>
           <div style="font-size:16px;font-weight:800;letter-spacing:0.3px;">City Pretty AI Urban &amp; Property Advisor</div>
-          <div style="font-size:11px;color:#e0e7ff;opacity:0.95;">Grounded in Verified GIS Cadastre, State Statutory Housing Rights &amp; Infrastructure ROI</div>
+          <div style="font-size:11px;color:#e0e7ff;opacity:0.95;">Uses public parcel records, state housing rules and this page's estimates</div>
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:8px;">
@@ -1158,7 +1158,7 @@
           <span style="background:#dcfce7;color:#166534;font-weight:800;font-size:12px;padding:2px 8px;border-radius:12px;">~96% Accuracy</span>
         </div>
         <p class="small" style="margin:0;color:#475569;line-height:1.4;">
-          Direct queries to authoritative county assessor and surveyor ArcGIS Server REST endpoints across 637+ US counties. Exact legal lot polygons, APNs, and deeded acreage.
+          Direct queries to authoritative county assessor and surveyor ArcGIS Server REST endpoints across the counties that publish them. Lot polygons, APNs, and deeded acreage.
         </p>
       </div>
 
@@ -1977,75 +1977,75 @@
 <script type="application/json" class="county-bundle" data-fips="72031" data-name="Carolina Municipio" data-st="PR" data-src="counties/bundle_72031.json.gz" data-sites="counties/sites_72031.json.gz"></script>
 <script type="application/json" class="county-bundle" data-fips="72113" data-name="Ponce Municipio" data-st="PR" data-src="counties/bundle_72113.json.gz" data-sites="counties/sites_72113.json.gz"></script>
 <script type="application/json" class="county-bundle" data-fips="72127" data-name="San Juan Municipio" data-st="PR" data-src="counties/bundle_72127.json.gz" data-sites="counties/sites_72127.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02013" data-name="Aleutians East Borough" data-st="AK" data-src="counties/bundle_02013.json.gz" data-sites="counties/sites_02013.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02016" data-name="Aleutians West Census Area" data-st="AK" data-src="counties/bundle_02016.json.gz" data-sites="counties/sites_02016.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02020" data-name="Anchorage Municipality" data-st="AK" data-src="counties/bundle_02020.json.gz" data-sites="counties/sites_02020.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02050" data-name="Bethel Census Area" data-st="AK" data-src="counties/bundle_02050.json.gz" data-sites="counties/sites_02050.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02060" data-name="Bristol Bay Borough" data-st="AK" data-src="counties/bundle_02060.json.gz" data-sites="counties/sites_02060.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02063" data-name="Chugach Census Area" data-st="AK" data-src="counties/bundle_02063.json.gz" data-sites="counties/sites_02063.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02066" data-name="Copper River Census Area" data-st="AK" data-src="counties/bundle_02066.json.gz" data-sites="counties/sites_02066.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02068" data-name="Denali Borough" data-st="AK" data-src="counties/bundle_02068.json.gz" data-sites="counties/sites_02068.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02070" data-name="Dillingham Census Area" data-st="AK" data-src="counties/bundle_02070.json.gz" data-sites="counties/sites_02070.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02090" data-name="Fairbanks North Star Borough" data-st="AK" data-src="counties/bundle_02090.json.gz" data-sites="counties/sites_02090.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02100" data-name="Haines Borough" data-st="AK" data-src="counties/bundle_02100.json.gz" data-sites="counties/sites_02100.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02105" data-name="Hoonah-Angoon Census Area" data-st="AK" data-src="counties/bundle_02105.json.gz" data-sites="counties/sites_02105.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02110" data-name="Juneau City and Borough" data-st="AK" data-src="counties/bundle_02110.json.gz" data-sites="counties/sites_02110.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02122" data-name="Kenai Peninsula Borough" data-st="AK" data-src="counties/bundle_02122.json.gz" data-sites="counties/sites_02122.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02130" data-name="Ketchikan Gateway Borough" data-st="AK" data-src="counties/bundle_02130.json.gz" data-sites="counties/sites_02130.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02150" data-name="Kodiak Island Borough" data-st="AK" data-src="counties/bundle_02150.json.gz" data-sites="counties/sites_02150.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02158" data-name="Kusilvak Census Area" data-st="AK" data-src="counties/bundle_02158.json.gz" data-sites="counties/sites_02158.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02164" data-name="Lake and Peninsula Borough" data-st="AK" data-src="counties/bundle_02164.json.gz" data-sites="counties/sites_02164.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02170" data-name="Matanuska-Susitna Borough" data-st="AK" data-src="counties/bundle_02170.json.gz" data-sites="counties/sites_02170.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02180" data-name="Nome Census Area" data-st="AK" data-src="counties/bundle_02180.json.gz" data-sites="counties/sites_02180.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02185" data-name="North Slope Borough" data-st="AK" data-src="counties/bundle_02185.json.gz" data-sites="counties/sites_02185.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02188" data-name="Northwest Arctic Borough" data-st="AK" data-src="counties/bundle_02188.json.gz" data-sites="counties/sites_02188.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02195" data-name="Petersburg Borough" data-st="AK" data-src="counties/bundle_02195.json.gz" data-sites="counties/sites_02195.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02198" data-name="Prince of Wales-Hyder Census Area" data-st="AK" data-src="counties/bundle_02198.json.gz" data-sites="counties/sites_02198.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02220" data-name="Sitka City and Borough" data-st="AK" data-src="counties/bundle_02220.json.gz" data-sites="counties/sites_02220.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02230" data-name="Skagway Municipality" data-st="AK" data-src="counties/bundle_02230.json.gz" data-sites="counties/sites_02230.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02240" data-name="Southeast Fairbanks Census Area" data-st="AK" data-src="counties/bundle_02240.json.gz" data-sites="counties/sites_02240.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02275" data-name="Wrangell City and Borough" data-st="AK" data-src="counties/bundle_02275.json.gz" data-sites="counties/sites_02275.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02282" data-name="Yakutat City and Borough" data-st="AK" data-src="counties/bundle_02282.json.gz" data-sites="counties/sites_02282.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="02290" data-name="Yukon-Koyukuk Census Area" data-st="AK" data-src="counties/bundle_02290.json.gz" data-sites="counties/sites_02290.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="06037" data-name="Los Angeles County" data-st="CA" data-src="counties/bundle_06037.json.gz" data-sites="counties/sites_06037.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="06059" data-name="Orange County" data-st="CA" data-src="counties/bundle_06059.json.gz" data-sites="counties/sites_06059.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="09150" data-name="Northeastern Connecticut Planning Region" data-st="CT" data-src="counties/bundle_09150.json.gz" data-sites="counties/sites_09150.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="15001" data-name="Hawaii County" data-st="HI" data-src="counties/bundle_15001.json.gz" data-sites="counties/sites_15001.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="15003" data-name="Honolulu County" data-st="HI" data-src="counties/bundle_15003.json.gz" data-sites="counties/sites_15003.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="15005" data-name="Kalawao County" data-st="HI" data-src="counties/bundle_15005.json.gz" data-sites="counties/sites_15005.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="15007" data-name="Kauai County" data-st="HI" data-src="counties/bundle_15007.json.gz" data-sites="counties/sites_15007.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="15009" data-name="Maui County" data-st="HI" data-src="counties/bundle_15009.json.gz" data-sites="counties/sites_15009.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51520" data-name="Bristol city" data-st="VA" data-src="counties/bundle_51520.json.gz" data-sites="counties/sites_51520.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51530" data-name="Buena Vista city" data-st="VA" data-src="counties/bundle_51530.json.gz" data-sites="counties/sites_51530.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51540" data-name="Charlottesville city" data-st="VA" data-src="counties/bundle_51540.json.gz" data-sites="counties/sites_51540.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51570" data-name="Colonial Heights city" data-st="VA" data-src="counties/bundle_51570.json.gz" data-sites="counties/sites_51570.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51580" data-name="Covington city" data-st="VA" data-src="counties/bundle_51580.json.gz" data-sites="counties/sites_51580.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51590" data-name="Danville city" data-st="VA" data-src="counties/bundle_51590.json.gz" data-sites="counties/sites_51590.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51595" data-name="Emporia city" data-st="VA" data-src="counties/bundle_51595.json.gz" data-sites="counties/sites_51595.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51600" data-name="Fairfax city" data-st="VA" data-src="counties/bundle_51600.json.gz" data-sites="counties/sites_51600.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51610" data-name="Falls Church city" data-st="VA" data-src="counties/bundle_51610.json.gz" data-sites="counties/sites_51610.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51620" data-name="Franklin city" data-st="VA" data-src="counties/bundle_51620.json.gz" data-sites="counties/sites_51620.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51630" data-name="Fredericksburg city" data-st="VA" data-src="counties/bundle_51630.json.gz" data-sites="counties/sites_51630.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51640" data-name="Galax city" data-st="VA" data-src="counties/bundle_51640.json.gz" data-sites="counties/sites_51640.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51660" data-name="Harrisonburg city" data-st="VA" data-src="counties/bundle_51660.json.gz" data-sites="counties/sites_51660.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51670" data-name="Hopewell city" data-st="VA" data-src="counties/bundle_51670.json.gz" data-sites="counties/sites_51670.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51678" data-name="Lexington city" data-st="VA" data-src="counties/bundle_51678.json.gz" data-sites="counties/sites_51678.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51680" data-name="Lynchburg city" data-st="VA" data-src="counties/bundle_51680.json.gz" data-sites="counties/sites_51680.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51683" data-name="Manassas city" data-st="VA" data-src="counties/bundle_51683.json.gz" data-sites="counties/sites_51683.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51685" data-name="Manassas Park city" data-st="VA" data-src="counties/bundle_51685.json.gz" data-sites="counties/sites_51685.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51690" data-name="Martinsville city" data-st="VA" data-src="counties/bundle_51690.json.gz" data-sites="counties/sites_51690.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51720" data-name="Norton city" data-st="VA" data-src="counties/bundle_51720.json.gz" data-sites="counties/sites_51720.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51730" data-name="Petersburg city" data-st="VA" data-src="counties/bundle_51730.json.gz" data-sites="counties/sites_51730.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51735" data-name="Poquoson city" data-st="VA" data-src="counties/bundle_51735.json.gz" data-sites="counties/sites_51735.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51740" data-name="Portsmouth city" data-st="VA" data-src="counties/bundle_51740.json.gz" data-sites="counties/sites_51740.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51750" data-name="Radford city" data-st="VA" data-src="counties/bundle_51750.json.gz" data-sites="counties/sites_51750.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51770" data-name="Roanoke city" data-st="VA" data-src="counties/bundle_51770.json.gz" data-sites="counties/sites_51770.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51775" data-name="Salem city" data-st="VA" data-src="counties/bundle_51775.json.gz" data-sites="counties/sites_51775.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51790" data-name="Staunton city" data-st="VA" data-src="counties/bundle_51790.json.gz" data-sites="counties/sites_51790.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51800" data-name="Suffolk city" data-st="VA" data-src="counties/bundle_51800.json.gz" data-sites="counties/sites_51800.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51820" data-name="Waynesboro city" data-st="VA" data-src="counties/bundle_51820.json.gz" data-sites="counties/sites_51820.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51830" data-name="Williamsburg city" data-st="VA" data-src="counties/bundle_51830.json.gz" data-sites="counties/sites_51830.json.gz"></script>
-<script type="application/json" class="county-bundle" data-fips="51840" data-name="Winchester city" data-st="VA" data-src="counties/bundle_51840.json.gz" data-sites="counties/sites_51840.json.gz"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02013" data-name="Aleutians East Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02016" data-name="Aleutians West Census Area" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02020" data-name="Anchorage Municipality" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02050" data-name="Bethel Census Area" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02060" data-name="Bristol Bay Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02063" data-name="Chugach Census Area" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02066" data-name="Copper River Census Area" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02068" data-name="Denali Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02070" data-name="Dillingham Census Area" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02090" data-name="Fairbanks North Star Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02100" data-name="Haines Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02105" data-name="Hoonah-Angoon Census Area" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02110" data-name="Juneau City and Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02122" data-name="Kenai Peninsula Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02130" data-name="Ketchikan Gateway Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02150" data-name="Kodiak Island Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02158" data-name="Kusilvak Census Area" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02164" data-name="Lake and Peninsula Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02170" data-name="Matanuska-Susitna Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02180" data-name="Nome Census Area" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02185" data-name="North Slope Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02188" data-name="Northwest Arctic Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02195" data-name="Petersburg Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02198" data-name="Prince of Wales-Hyder Census Area" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02220" data-name="Sitka City and Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02230" data-name="Skagway Municipality" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02240" data-name="Southeast Fairbanks Census Area" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02275" data-name="Wrangell City and Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02282" data-name="Yakutat City and Borough" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="02290" data-name="Yukon-Koyukuk Census Area" data-st="AK"></script>
+<script type="application/json" class="county-bundle" data-coverage="builtin" data-fips="06037" data-name="Los Angeles County" data-st="CA"></script>
+<script type="application/json" class="county-bundle" data-coverage="builtin" data-fips="06059" data-name="Orange County" data-st="CA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="09150" data-name="Northeastern Connecticut Planning Region" data-st="CT"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="15001" data-name="Hawaii County" data-st="HI"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="15003" data-name="Honolulu County" data-st="HI"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="15005" data-name="Kalawao County" data-st="HI"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="15007" data-name="Kauai County" data-st="HI"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="15009" data-name="Maui County" data-st="HI"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51520" data-name="Bristol city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51530" data-name="Buena Vista city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51540" data-name="Charlottesville city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51570" data-name="Colonial Heights city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51580" data-name="Covington city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51590" data-name="Danville city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51595" data-name="Emporia city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51600" data-name="Fairfax city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51610" data-name="Falls Church city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51620" data-name="Franklin city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51630" data-name="Fredericksburg city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51640" data-name="Galax city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51660" data-name="Harrisonburg city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51670" data-name="Hopewell city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51678" data-name="Lexington city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51680" data-name="Lynchburg city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51683" data-name="Manassas city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51685" data-name="Manassas Park city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51690" data-name="Martinsville city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51720" data-name="Norton city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51730" data-name="Petersburg city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51735" data-name="Poquoson city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51740" data-name="Portsmouth city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51750" data-name="Radford city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51770" data-name="Roanoke city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51775" data-name="Salem city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51790" data-name="Staunton city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51800" data-name="Suffolk city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51820" data-name="Waynesboro city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51830" data-name="Williamsburg city" data-st="VA"></script>
+<script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51840" data-name="Winchester city" data-st="VA"></script>
 
 <script src="app/app.js"></script>
 
@@ -2058,7 +2058,7 @@
         <span style="font-size:22px;">📄</span>
         <div>
           <div style="font-size:15px;font-weight:800;letter-spacing:0.3px;">Executive Property &amp; Investment Prospectus</div>
-          <div style="font-size:11px;color:#94a3b8;">Institutional-Grade Cadastre, Zoning Rights &amp; Empirical Capitalization Memorandum</div>
+          <div style="font-size:11px;color:#94a3b8;">Parcel, zoning and estimated-return memo (screening only)</div>
         </div>
       </div>
       <div style="display:flex;gap:8px;align-items:center;">
