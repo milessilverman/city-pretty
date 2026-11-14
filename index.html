@@ -19240,10 +19240,10 @@ function renderNatLotFeatures(feats) {
   feats.forEach(f => {
     if (!f.geometry || !f.geometry.rings) return;
     const poly = L.polygon(lotLatLngs(f), {
-      color: "#7a5c2e",
-      weight: 1.2,
-      opacity: 0.9,
-      fillColor: "#7a5c2e",
+      color: "#dc2626",
+      weight: 1.35,
+      opacity: 0.88,
+      fillColor: "#ef4444",
       fillOpacity: 0.04
     });
     const normF = (typeof normalizeParcelFeature === "function") ? normalizeParcelFeature(f, null, svc) : f;
@@ -19282,6 +19282,7 @@ async function drawNatLots() {
   let d;
   try {
     const fields = (svc.fields || []).slice(0, 8).map(f => f[0]).join(",") || "OBJECTID";
+    const maxRec = Math.min(svc.max || 1000, 1000);
     const params = {
       geometry: [b.getWest(), b.getSouth(), b.getEast(), b.getNorth()].map(v => (+v).toFixed(5)).join(","),
       geometryType: "esriGeometryEnvelope",
@@ -19290,14 +19291,38 @@ async function drawNatLots() {
       outFields: fields,
       returnGeometry: "true",
       outSR: "4326",
-      resultRecordCount: z >= 16 ? "400" : "250",
+      resultRecordCount: String(maxRec),
       f: "json"
     };
-    d = await arcQuery(svc.url, params, 5000);
+    d = await arcQuery(svc.url, params, 5500);
   } catch (e) { return; }
   
   if (seq !== natLotSeq) return;
-  const feats = (d.features || []).filter(f => f.geometry && f.geometry.rings);
+  let feats = (d && d.features ? d.features : []).filter(f => f.geometry && f.geometry.rings);
+  
+  // If query hit server transfer limit (e.g. dense urban block with >1000 parcels),
+  // split bounding box into West and East quadrants to capture all missing property lines
+  if (d && d.exceededTransferLimit && z >= 16) {
+    try {
+      const midLng = (b.getWest() + b.getEast()) / 2;
+      const fields = (svc.fields || []).slice(0, 8).map(f => f[0]).join(",") || "OBJECTID";
+      const pEast = {
+        geometry: [midLng, b.getSouth(), b.getEast(), b.getNorth()].map(v => (+v).toFixed(5)).join(","),
+        geometryType: "esriGeometryEnvelope", inSR: "4326", spatialRel: "esriSpatialRelIntersects",
+        outFields: fields, returnGeometry: "true", outSR: "4326", resultRecordCount: "800", f: "json"
+      };
+      const dEast = await arcQuery(svc.url, pEast, 4500);
+      if (dEast && dEast.features) {
+        const eastFeats = dEast.features.filter(f => f.geometry && f.geometry.rings);
+        const existingOids = new Set(feats.map(f => (f.attributes && (f.attributes.OBJECTID || f.attributes.FID || (svc.apn && f.attributes[svc.apn])))));
+        eastFeats.forEach(ef => {
+          const id = ef.attributes && (ef.attributes.OBJECTID || ef.attributes.FID || (svc.apn && ef.attributes[svc.apn]));
+          if (!id || !existingOids.has(id)) feats.push(ef);
+        });
+      }
+    } catch(e) {}
+  }
+
   natLotCache.set(cellKey, feats);
   if (natLotCache.size > 150) natLotCache.delete(natLotCache.keys().next().value);
 
@@ -19335,7 +19360,7 @@ async function lotAt(lat, lon, text) {   // the lot of a searched address: the l
       }
     } catch(e) {}
   }
-  const svc = typeof activeFips === "function" ? parcelSvc(activeFips()) : null;
+  const svc = (typeof activeFips === "function" ? parcelSvc(activeFips()) : null) || (typeof getParcelService === "function" ? getParcelService({ lat, lng: lon }) : null);
   if (!svc) {
     if (typeof houseAt === "function") houseAt({ lat, lng: lon });
     return null;
@@ -21807,14 +21832,15 @@ function setEifdBondYield(rate) {
 }
 
 function syncHash(id) {
-  if (!id) return;
   const params = new URLSearchParams();
-  params.set("bg", id);
+  const fips = typeof activeFips === "function" ? activeFips() : "06037";
+  if (fips && fips !== "06037") params.set("county", fips);
+  if (id) params.set("bg", id);
   const evid = $("#evid") ? $("#evid").value : "D";
   if (evid && evid !== "D") params.set("evid", evid);
   const metric = $("#metric") ? $("#metric").value : "top_vpd";
   if (metric && metric !== "top_vpd") params.set("metric", metric);
-  if (roiMode && roiMode !== "base") params.set("roi", roiMode);
+  if (typeof roiMode !== "undefined" && roiMode && roiMode !== "base") params.set("roi", roiMode);
   if (typeof compareList !== "undefined" && compareList && compareList.length) {
     params.set("compare", compareList.join(","));
   }
@@ -21828,7 +21854,17 @@ function checkHash() {
   const hashStr = window.location.hash.replace(/^#/, "");
   if (!hashStr) return;
   const params = new URLSearchParams(hashStr);
+  const county = params.get("county");
   const bgId = params.get("bg");
+
+  if (county && typeof activeFips === "function" && county !== activeFips()) {
+    if (typeof openCounty === "function") {
+      openCounty(county).then(() => {
+        if (bgId && byId.has(bgId)) select(bgId, true);
+      }).catch(e => console.warn("Could not open county from hash:", e));
+      return;
+    }
+  }
   const evid = params.get("evid");
   const metric = params.get("metric");
   const roi = params.get("roi");
