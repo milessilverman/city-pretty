@@ -462,9 +462,63 @@ def run_tests():
     assert 2450000 <= t9["luxuryTierValue"] <= 2750000
     print("  -> PASS: AVM valuation matches Zillow benchmarks across repeat-sales, Michigan SEV, Florida JV, non-linear lot scaling, Cook County & Ohio ratios, and luxury tier dampening.")
 
+    # Test 10: Vacant Infill Land Equity Model
+    t10 = eval_js("""
+    (() => {
+        const { estimatePropertyMarketValue } = window.__TEST_ENGINES__;
+        const vacantLot = estimatePropertyMarketValue({
+            attributes: { UseDescription: "Vacant Residential", Roll_LandValue: 280000, Roll_ImpValue: 0 },
+            lotSqft: 6500, stateCode: "CA",
+            neighborhood: { hv: 950000 },
+            facts: { bldg: 0, foot: 0 }
+        });
+        return {
+            estimatedValue: vacantLot.estimatedValue,
+            livingSqft: vacantLot.livingSqft,
+            isVacantLand: vacantLot.isVacantLand,
+            siteValue: vacantLot.siteValue,
+            structVal: vacantLot.structVal,
+            method: vacantLot.valuationMethod
+        };
+    })()
+    """)
+    print("Test 10 (Vacant Infill Land Equity Model):", t10)
+    assert t10["isVacantLand"] is True
+    assert t10["livingSqft"] == 0
+    assert t10["structVal"] == 0
+    assert t10["siteValue"] > 0
+    assert 550000 <= t10["estimatedValue"] <= 850000
+    print("  -> PASS: Vacant parcel evaluated strictly as land equity without fabricated structural GLA.")
+
+    # Test 11: Multi-Unit Density Bonus (Duplex/Triplex Infill)
+    t11 = eval_js("""
+    (() => {
+        const { estimatePropertyMarketValue } = window.__TEST_ENGINES__;
+        const sfr = estimatePropertyMarketValue({
+            attributes: { Units: 1 }, lotSqft: 6000, stateCode: "CA",
+            neighborhood: { hv: 900000 },
+            facts: { bldg: 2400, units: 1, beds: 4, baths: 3, yb: 1985 }
+        });
+        const duplex = estimatePropertyMarketValue({
+            attributes: { Units: 2 }, lotSqft: 6000, stateCode: "CA",
+            neighborhood: { hv: 900000 },
+            facts: { bldg: 2400, units: 2, beds: 4, baths: 3, yb: 1985 }
+        });
+        return {
+            sfrValue: sfr.estimatedValue,
+            duplexValue: duplex.estimatedValue,
+            delta: duplex.estimatedValue - sfr.estimatedValue
+        };
+    })()
+    """)
+    print("Test 11 (Multi-Unit Density Valuation):", t11)
+    assert t11["duplexValue"] > t11["sfrValue"]
+    assert 20000 <= t11["delta"] <= 70000
+    print("  -> PASS: 2-unit duplex correctly reflects unit rental diversification premium over single-family.")
+
     ws.close()
     print("========================================================")
-    print("ALL 9 CORE REGRESSION TEST SUITES PASSED (100% SUCCESS)!")
+    print("ALL 11 CORE REGRESSION TEST SUITES PASSED (100% SUCCESS)!")
     print("========================================================")
 
 if __name__ == "__main__":
