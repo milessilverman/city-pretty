@@ -1,285 +1,128 @@
-import {
-  CountyDataCompleteness,
-  SolarMicrogridCalculation,
-  StatutoryZoningResult,
-} from "../types";
-import { TaxIncrementOutput } from "../engines/municipalFinanceEngine";
+// The AI advisor's prompt, built in the Worker (workers/api-proxy.ts) from what the page sends.
+//
+// The page (app/app.js, serializeLiveAdvisorContext) sends the data it is showing. Unknown values arrive as null,
+// never as stand-in numbers. The Worker keeps only the fields below (sanitizeAdvisorContext), so a visitor cannot
+// change the instructions, only the data the model reads.
 
-export interface ParcelAuditContext {
-  parcelId: string;
-  address: string;
-  county: string;
-  state: string;
-  lotSqft: number;
-  livingSqft: number;
+export interface AdvisorCounty {
+  fips: string | null;
+  name: string | null;
+  state: string | null;
+  readiness_tier: string | null;
+  assessor_roll_vintage: string | null;
+  zoning_source: string | null;
+}
+
+export interface AdvisorBlockGroup {
+  geoid: string | null;
+  name: string | null;
+  nameSource: string | null;
+  city: string | null;
+  medianHomeValue: number | null;
+  medianRent: number | null;
+  population: number | null;
+  acres: number | null;
+  topProjects: unknown[] | null;
+}
+
+export interface AdvisorParcel {
+  parcelId: string | null;
+  address: string | null;
+  useType: string | null;
+  useDescription: string | null;
+  zoningCode: string | null;
+  lotSqft: number | null;
+  livingSqft: number | null;
   yearBuilt: number | null;
-  effectiveYearBuilt: number | null;
-  bedrooms: number;
-  bathrooms: number;
-  stories: number;
-  units: number;
-  isVacantLand: boolean;
-  zoningCode: string;
-  useDescription: string;
-  avmValuation: {
-    estimatedValue: number;
-    valueLow: number;
-    valueHigh: number;
-    vpsf: number;
-    valuationMethod: string;
-    confidenceMarginPct: number;
-    confidenceRating?: string;
-    permitCapitalizationAdded: number;
-    luxuryDampeningApplied: boolean;
-    multiUnitBonusPct?: number;
-  };
-  recentPermits: Array<{
-    issue_date: string;
-    permit_type: string;
-    valuation_usd: number;
-    description: string;
-  }>;
-  imagery: {
-    confidenceBadge: string;
-    isLidarStale: boolean;
-    isStreetViewStale: boolean;
-    warningMessage: string | null;
-  };
-  statutoryExclusions: {
-    historic_district_hpoz: boolean;
-    coastal_commission_or_sma: boolean;
-    fema_100yr_floodway: boolean;
-    calfire_or_state_vhfhsz: boolean;
-    airport_noise_or_runway_zone?: boolean;
-    williamson_or_ag_preserve?: boolean;
-    population_threshold_ineligible?: boolean;
-    private_hoa_or_ccr_disclaimer_required?: boolean;
-  };
-  solar?: {
-    system_size_dc_kw: number;
-    federal_itc_pct: number;
-    battery_storage_required: boolean;
-    net_25yr_npv_usd: number;
-    annualSavingsUsd?: number;
-  };
-  treeEconomics?: {
-    annualCoolingOrHeatingSavingsUsd: number;
-    capitalizedValueUsd: number;
-    climateRegime: string;
-  };
-  playbookRecommendation?: {
-    strategyTitle: string;
-    badge: string;
-    netEquityLift: number;
-    roiPerDollar: number;
-    statutoryPathway: string;
-    annualCashflow: number;
-    paybackYears: number;
-  };
+  bedrooms: number | null;
+  bathrooms: number | null;
+  stories: number | null;
+  units: number | null;
+  assessorValue: number | null;
+  lastSale: { price: number | null; date: string | null } | null;
+  valueEstimate: { value: number | null; low: number | null; high: number | null; method: string | null } | null;
+  valueEstimateWithheld: string | null;
+  nearestRailOrBrt: { name: string | null; miles: number | null } | null;
 }
 
-export interface AdvisorContextPayload {
-  county: CountyDataCompleteness;
-  blockGroupGeoid?: string;
-  neighborhoodName?: string;
-  neighborhoodMedianHv?: number;
-  neighborhoodMedianRent?: number;
-  nearestTransit?: {
-    stationName: string;
-    distMiles: number;
-    inWalkshed: boolean;
-    ab2097ParkingExempt: boolean;
-  };
-  parcel?: ParcelAuditContext;
-  zoning?: StatutoryZoningResult;
-  finance?: TaxIncrementOutput;
-  solar?: SolarMicrogridCalculation;
-  displacementRiskScore?: number;
-  roiMode?: "base" | "adjusted";
+export interface AdvisorContext {
+  county: AdvisorCounty;
+  roiMode: string | null;
+  blockGroup?: AdvisorBlockGroup;
+  parcel?: AdvisorParcel;
 }
 
-export function buildGroundedAdvisorPrompt(
-  userQuestion: string,
-  ctx: AdvisorContextPayload
-): { systemPrompt: string; userPrompt: string } {
-  const isParcel = !!ctx.parcel;
-  const exclusions = isParcel
-    ? ctx.parcel!.statutoryExclusions
-    : ctx.zoning
-    ? ctx.zoning.statutory_exclusions
-    : null;
+// Stable text: keep it free of per-request values so it can be prompt-cached.
+export const ADVISOR_SYSTEM_PROMPT = [
+  "You answer questions from visitors to City Pretty, a public map of US neighborhoods. For each block group it estimates which public improvements (street trees, parks, bus service, safer streets, clinics, schools and more) would make the area better and raise home values per dollar spent, and it can screen a single lot: its public record, zoning and a rough home-value estimate.",
+  "Each question comes with the data the page is showing, as JSON. Base every figure you give on that JSON. When a value is null or missing, say the page does not have it; do not estimate it or bring in numbers from elsewhere.",
+  "If parcel.valueEstimateWithheld is set, the page deliberately gives no home value for this lot. Do not give one; explain the reason it states.",
+  "The page's figures are screening estimates from public data, not appraisals, zoning determinations, tax advice or legal advice. When a question is about building, adding a unit, splitting a lot, permits or property taxes, give what the data shows and name the city or county office that decides.",
+  "Mention a state or federal law only when you are confident it applies in this state, and say that rules change. As of 2026 the federal 30% residential solar credit (IRC 25D) no longer applies to systems installed after 2025.",
+  "Answer in a few sentences, then at most five short bullet points if they help. Use plain text with **bold** and '-' bullets only.",
+].join("\n\n");
 
-  const activeExclusions = exclusions
-    ? Object.entries(exclusions)
-        .filter(([, active]) => Boolean(active))
-        .map(([key]) => key)
-    : [];
+const str = (v: unknown, max = 200): string | null => (typeof v === "string" && v.trim() ? v.trim().slice(0, max) : null);
+const num = (v: unknown): number | null => (typeof v === "number" && Number.isFinite(v) ? v : null);
+const obj = (v: unknown): Record<string, unknown> => (v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : {});
 
-  const systemPrompt = [
-    "You are the City Pretty Urban & Property Advisor, an institutional econometric and statutory intelligence copilot for municipal leaders, homeowners, and urban infill investors.",
-    "STRICT GROUNDING & ANTI-HALLUCINATION RULES:",
-    "1. Cite ONLY numbers, property attributes, valuations, permit dates, statutory citations, and financial figures present in the verified context payload below. Never invent zoning codes, millage rates, building dimensions, or local ordinances.",
-    `2. Active jurisdiction readiness tier is "${ctx.county.readiness_tier}". If readiness_tier is NOT "audited_A", explicitly state that the jurisdiction is in "${ctx.county.readiness_tier}" screening mode and identify preliminary data sources (e.g., zoning_source="${ctx.county.zoning_source}", crime_feed_status="${ctx.county.crime_feed_status}").`,
-    activeExclusions.length > 0
-      ? `3. CRITICAL STATUTORY OVERLAYS DETECTED: [${activeExclusions.join(", ")}]. You MUST warn the user that these overlays block or restrict ministerial by-right development (e.g. SB 9 lot splits or CEQA exemptions) unless specifically exempted.`
-      : "3. If no statutory exclusions are flagged, advise that local municipal historic preservation overlays, coastal permits, and private HOA / CC&R covenants must still be verified with the local building department.",
-    "4. For rooftop solar inquiries in 2026+: explicitly affirm that the federal residential 30% tax credit under IRC § 25D expired on Dec 31, 2025 (0% for cash/loan purchases); 30% applies only under IRC § 48E commercial/TPO leases. In California, note that NEM 3.0 avoided-cost export tariffs require paired battery storage for positive equity.",
-    "5. For high-value parcels ($2.5M+): note that amenity price-lift reflects non-linear diminishing marginal returns.",
-    "6. Always format responses in clean GitHub-flavored markdown with bold headers and bullet points.",
-    "7. MANDATORY CLOSING NOTICE: You must conclude actionable property and investment outputs with the exact institutional disclaimer:\n'LEGAL & ENGINEERING NON-RELIANCE NOTICE: Preliminary screening based on public municipal GIS, tax rolls, and statutory feeds as of November 2026. Feasibility determinations do not constitute formal zoning verification letters, title opinions, or structural engineering assessments. Verify all easements, utility hookups, and setbacks with local building departments.'",
-  ].join("\n\n");
-
-  const userPrompt = [
-    "VERIFIED GEOSPATIAL & STATUTORY CONTEXT (JSON):",
-    "```json",
-    JSON.stringify(ctx, null, 2),
-    "```",
-    "",
-    `USER QUESTION: ${userQuestion}`,
-  ].join("\n\n");
-
-  return { systemPrompt, userPrompt };
-}
-
-export function serializeLiveAdvisorContext(env: any = {}): AdvisorContextPayload {
-  const g = typeof window !== "undefined" ? window : (env || {}) as any;
-
-  // Active county lookup
-  const curFips = (typeof g.activeFips === "function") ? g.activeFips() : "06037";
-  const compIndex = g.COUNTY_COMPLETENESS_INDEX || {};
-  const countyMeta = compIndex[curFips] || {
-    fips: curFips,
-    name: (typeof g.countyOf === "function" ? g.countyOf() : "County " + curFips),
-    state: (typeof g.activeState === "function" ? g.activeState() : "US"),
-    readiness_tier: "audited_A",
-    assessor_roll_vintage: "2026 Secured Roll",
-    sales_comps_window: ["2022-08-01", "2026-10-31"],
-    zoning_source: "live_municipal_gis",
-    gtfs_agencies_count: 19,
-    crime_feed_status: "rolling_12m",
-    canopy_dataset: "tree_equity_2025",
+export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
+  const r = obj(raw);
+  const c = obj(r.county);
+  const ctx: AdvisorContext = {
+    county: {
+      fips: str(c.fips, 5),
+      name: str(c.name, 80),
+      state: str(c.state, 2),
+      readiness_tier: str(c.readiness_tier, 40),
+      assessor_roll_vintage: str(c.assessor_roll_vintage, 40),
+      zoning_source: str(c.zoning_source, 60),
+    },
+    roiMode: str(r.roiMode, 20),
   };
-
-  const payload: AdvisorContextPayload = {
-    county: countyMeta,
-    roiMode: (typeof g.getRoiMode === "function") ? g.getRoiMode() : "adj",
-  };
-
-  // Selected block group
-  const selBg = g.selected;
-  if (selBg && g.byId && g.byId.get && g.byId.get(selBg)) {
-    const feat = g.byId.get(selBg);
-    const props = feat.properties || {};
-    payload.blockGroupGeoid = selBg;
-    payload.neighborhoodName = props.n || "Local Neighborhood";
-    payload.neighborhoodMedianHv = props.hv ? Math.round(props.hv * 1.165) : 850000;
-    payload.neighborhoodMedianRent = props.rent || 2800;
-    payload.displacementRiskScore = props.rent_risk || 45;
-  }
-
-  // Active house parcel
-  const ah = g.activeHouse;
-  if (ah && ah.a) {
-    const a = ah.a;
-    const audit = ah.audit || {};
-    const val = ah.valuation || (audit ? audit.valuation : null) || {};
-    const lotSqft = ah.lot || a.LotSqft || 6000;
-    const livingSqft = (val && val.livingSqft) ? val.livingSqft : (ah.F ? ah.F.bldg : 1800);
-
-    const parcelCtx: ParcelAuditContext = {
-      parcelId: String(a.AIN || a.APN || "PARCEL"),
-      address: String(a.SitusFullAddress || a.PROPERTYADDRESS || ("Parcel " + (a.AIN || "–"))),
-      county: String(a.county || countyMeta.name),
-      state: String((typeof g.activeState === "function" ? g.activeState() : null) || countyMeta.state || "CA"),
-      lotSqft: lotSqft,
-      livingSqft: livingSqft,
-      yearBuilt: ah.F ? ah.F.yb : null,
-      effectiveYearBuilt: ah.F ? ah.F.eff : null,
-      bedrooms: ah.F ? ah.F.beds : 3,
-      bathrooms: ah.F ? ah.F.baths : 2,
-      stories: ah.F ? ah.F.stories : 1,
-      units: ah.F ? ah.F.units : 1,
-      isVacantLand: !!val.isVacantLand,
-      zoningCode: String(a.ZoneCode || "R-1"),
-      useDescription: String(a.UseDescription || "Residential"),
-      avmValuation: {
-        estimatedValue: val.estimatedValue || 750000,
-        valueLow: val.valueLow || Math.round((val.estimatedValue || 750000) * 0.935),
-        valueHigh: val.valueHigh || Math.round((val.estimatedValue || 750000) * 1.065),
-        vpsf: val.vpsf || Math.round((val.estimatedValue || 750000) / Math.max(livingSqft, 1)),
-        valuationMethod: val.valuationMethod || "Hedonic Micro-Model",
-        confidenceMarginPct: val.confidenceMarginPct || 0.065,
-        confidenceRating: val.confidenceRating || "High Confidence",
-        permitCapitalizationAdded: val.permitCapitalizationAdded || 0,
-        luxuryDampeningApplied: !!val.luxuryDampeningApplied,
-        multiUnitBonusPct: val.multiUnitBonusPct || 0,
-      },
-      recentPermits: (ah.recentPermits || []).map((p: any) => ({
-        issue_date: String(p.issue_date || p.IssueDate || ""),
-        permit_type: String(p.permit_type || p.TYPE || "remodel"),
-        valuation_usd: Number(p.valuation_usd || p.Valuation || 0),
-        description: String(p.description || p.Description || ""),
-      })),
-      imagery: {
-        confidenceBadge: (audit && audit.imagery) ? audit.imagery.confidenceBadge : "verified_current",
-        isLidarStale: !!(audit && audit.imagery && audit.imagery.isLidarStale),
-        isStreetViewStale: !!(audit && audit.imagery && audit.imagery.isStreetViewStale),
-        warningMessage: (audit && audit.imagery) ? audit.imagery.warningMessage : null,
-      },
-      statutoryExclusions: (audit && audit.statutoryZoning) ? audit.statutoryZoning.statutory_exclusions : {
-        historic_district_hpoz: false,
-        coastal_commission_or_sma: false,
-        fema_100yr_floodway: false,
-        calfire_or_state_vhfhsz: false,
-        private_hoa_or_ccr_disclaimer_required: true,
-      },
-      solar: (audit && audit.solarMicrogrid) ? {
-        system_size_dc_kw: audit.solarMicrogrid.system_size_dc_kw,
-        federal_itc_pct: audit.solarMicrogrid.federal_itc_pct,
-        battery_storage_required: audit.solarMicrogrid.battery_storage_required_for_roi,
-        net_25yr_npv_usd: audit.solarMicrogrid.net_25yr_npv_usd,
-      } : undefined,
-      treeEconomics: (audit && audit.treeEconomics) ? {
-        annualCoolingOrHeatingSavingsUsd: audit.treeEconomics.annualCoolingOrHeatingSavingsUsd,
-        capitalizedValueUsd: audit.treeEconomics.capitalizedValueUsd,
-        climateRegime: audit.treeEconomics.climateRegime,
-      } : undefined,
+  if (r.blockGroup) {
+    const b = obj(r.blockGroup);
+    ctx.blockGroup = {
+      geoid: str(b.geoid, 15),
+      name: str(b.name, 120),
+      nameSource: str(b.nameSource, 160),
+      city: str(b.city, 80),
+      medianHomeValue: num(b.medianHomeValue),
+      medianRent: num(b.medianRent),
+      population: num(b.population),
+      acres: num(b.acres),
+      topProjects: Array.isArray(b.topProjects) ? JSON.parse(JSON.stringify(b.topProjects.slice(0, 3)).slice(0, 2000) || "null") : null,
     };
-
-    if (typeof g.computePropertyPlaybook === "function") {
-      try {
-        const pb = g.computePropertyPlaybook(a, lotSqft, ah.F || {}, null, ah.ll, ah.st);
-        if (pb && pb.best) {
-          parcelCtx.playbookRecommendation = {
-            strategyTitle: pb.best.title,
-            badge: pb.best.badge,
-            netEquityLift: pb.best.equity,
-            roiPerDollar: pb.best.roi,
-            statutoryPathway: pb.best.statute,
-            annualCashflow: pb.best.annualCashflow,
-            paybackYears: pb.best.paybackYrs,
-          };
-        }
-      } catch (e) {}
-    }
-
-    payload.parcel = parcelCtx;
   }
-
-  // Nearest transit station
-  if (ah && ah.ll && typeof g.findNearestTransitStation === "function") {
-    try {
-      const stn = g.findNearestTransitStation(ah.ll.lat, ah.ll.lng);
-      if (stn) {
-        payload.nearestTransit = {
-          stationName: stn.name || "Transit Hub",
-          distMiles: stn.distMi || 0,
-          inWalkshed: (stn.distMi || 0) <= 0.5,
-          ab2097ParkingExempt: (stn.distMi || 0) <= 0.5,
-        };
-      }
-    } catch (e) {}
+  if (r.parcel) {
+    const p = obj(r.parcel);
+    const sale = p.lastSale ? obj(p.lastSale) : null;
+    const est = p.valueEstimate ? obj(p.valueEstimate) : null;
+    const rail = p.nearestRailOrBrt ? obj(p.nearestRailOrBrt) : null;
+    ctx.parcel = {
+      parcelId: str(p.parcelId, 40),
+      address: str(p.address, 160),
+      useType: str(p.useType, 40),
+      useDescription: str(p.useDescription, 160),
+      zoningCode: str(p.zoningCode, 40),
+      lotSqft: num(p.lotSqft),
+      livingSqft: num(p.livingSqft),
+      yearBuilt: num(p.yearBuilt),
+      bedrooms: num(p.bedrooms),
+      bathrooms: num(p.bathrooms),
+      stories: num(p.stories),
+      units: num(p.units),
+      assessorValue: num(p.assessorValue),
+      lastSale: sale ? { price: num(sale.price), date: str(sale.date, 10) } : null,
+      valueEstimate: est ? { value: num(est.value), low: num(est.low), high: num(est.high), method: str(est.method, 80) } : null,
+      valueEstimateWithheld: str(p.valueEstimateWithheld, 300),
+      nearestRailOrBrt: rail ? { name: str(rail.name, 80), miles: num(rail.miles) } : null,
+    };
+    if (ctx.parcel.valueEstimateWithheld) ctx.parcel.valueEstimate = null;
   }
+  return ctx;
+}
 
-  return payload;
+export function buildAdvisorUserMessage(question: string, ctx: AdvisorContext): string {
+  return ["Page data (JSON):", "```json", JSON.stringify(ctx, null, 2), "```", "", `Question: ${question}`].join("\n");
 }

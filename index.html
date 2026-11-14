@@ -1046,7 +1046,7 @@
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:8px;">
-        <button type="button" onclick="toggleAiSettings()" style="background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:6px;padding:5px 9px;cursor:pointer;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:4px;">⚙️ API Settings</button>
+        <button type="button" onclick="toggleAiSettings()" style="background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:6px;padding:5px 9px;cursor:pointer;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:4px;">⚙️ Settings</button>
         <button type="button" onclick="closeAiAdvisor()" style="background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;">✕</button>
       </div>
     </div>
@@ -1054,22 +1054,17 @@
     <!-- AI Settings Drawer -->
     <div id="ai-settings-drawer" style="display:none;background:#f8fafc;border-bottom:2px solid #4f46e5;padding:12px 16px;font-size:12px;color:#1e293b;">
       <div style="font-weight:700;margin-bottom:6px;color:#0f172a;display:flex;justify-content:space-between;align-items:center;">
-        <span>⚙️ Live AI Edge Proxy &amp; Direct Model Credentials</span>
+        <span>⚙️ Advisor endpoint (for testing)</span>
         <button type="button" onclick="toggleAiSettings()" style="border:none;background:transparent;cursor:pointer;font-size:13px;color:#64748b;">✕</button>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px;">
-        <div>
-          <label style="display:block;font-size:11px;font-weight:600;color:#475569;margin-bottom:2px;">Cloudflare Edge Worker / Custom AI Endpoint:</label>
-          <input type="text" id="ai-cfg-endpoint" placeholder="/api/ai (default edge proxy)" style="width:100%;border:1px solid #cbd5e1;border-radius:4px;padding:6px 8px;font-size:11.5px;font-family:monospace;box-sizing:border-box;" />
-        </div>
-        <div>
-          <label style="display:block;font-size:11px;font-weight:600;color:#475569;margin-bottom:2px;">Google Gemini API Key (client override):</label>
-          <input type="password" id="ai-cfg-key" placeholder="AIzaSy... (stored locally in browser)" style="width:100%;border:1px solid #cbd5e1;border-radius:4px;padding:6px 8px;font-size:11.5px;font-family:monospace;box-sizing:border-box;" />
-        </div>
+      <div style="margin-bottom:8px;">
+        <label for="ai-cfg-endpoint" style="display:block;font-size:11px;font-weight:600;color:#475569;margin-bottom:2px;">Advisor endpoint URL (saved only in this browser; the site's own setting is workerUrl in app/config.js)</label>
+        <input type="url" id="ai-cfg-endpoint" placeholder="not set in app/config.js" style="width:100%;border:1px solid #cbd5e1;border-radius:4px;padding:6px 8px;font-size:11.5px;font-family:monospace;box-sizing:border-box;" />
+        <div style="font-size:10.5px;color:#64748b;margin-top:3px;">Model keys are never entered here; they stay in the Worker.</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-        <button type="button" onclick="saveAiSettings()" style="background:#4f46e5;color:#fff;border:none;padding:5px 12px;border-radius:4px;font-size:11.5px;font-weight:700;cursor:pointer;">💾 Save Settings</button>
-        <button type="button" onclick="clearAiSettings()" style="background:#e2e8f0;color:#475569;border:none;padding:5px 10px;border-radius:4px;font-size:11.5px;cursor:pointer;">Reset to Defaults</button>
+        <button type="button" onclick="saveAiSettings()" style="background:#4f46e5;color:#fff;border:none;padding:5px 12px;border-radius:4px;font-size:11.5px;font-weight:700;cursor:pointer;">Save</button>
+        <button type="button" onclick="clearAiSettings()" style="background:#e2e8f0;color:#475569;border:none;padding:5px 10px;border-radius:4px;font-size:11.5px;cursor:pointer;">Use site setting</button>
         <span id="ai-cfg-status" style="font-size:11px;color:#059669;font-weight:600;"></span>
       </div>
     </div>
@@ -1078,12 +1073,12 @@
     <div id="ai-context-strip" style="background:#f8fafc;border-bottom:1px solid #e2e8f0;padding:8px 16px;font-size:11.5px;color:#334155;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
       <span style="font-weight:700;color:#0f172a;">📍 Active Context:</span>
       <span id="ai-context-desc" style="background:#e0f2fe;color:#0369a1;padding:2px 8px;border-radius:10px;font-weight:600;">No home selected (select a parcel or neighborhood to ground AI advice)</span>
-      <span id="ai-status-indicator" style="margin-left:auto;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:12px;background:#ecfdf5;color:#059669;border:1px solid #a7f3d0;">🟢 AI Edge API Bridge Ready</span>
+      <span id="ai-status-indicator" style="margin-left:auto;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:12px;background:#f1f5f9;color:#475569;border:1px solid #cbd5e1;">⚪ Not connected</span>
     </div>
 
     <!-- Collapsible Live Grounded Context Inspector -->
     <details id="ai-context-inspector" style="background:#f1f5f9;border-bottom:1px solid #e2e8f0;padding:6px 16px;font-size:11px;color:#475569;">
-      <summary style="cursor:pointer;font-weight:700;color:#4338ca;user-select:none;">🔍 Inspect Grounded Parcel &amp; Statutory Payload (JSON sent to AI)</summary>
+      <summary style="cursor:pointer;font-weight:700;color:#4338ca;user-select:none;">🔍 Inspect the data the advisor is given (JSON)</summary>
       <pre id="ai-grounded-json-preview" style="margin:6px 0 2px;background:#0f172a;color:#e2e8f0;padding:8px;border-radius:6px;max-height:140px;overflow-y:auto;font-size:10px;font-family:monospace;white-space:pre-wrap;"></pre>
     </details>
 
@@ -2047,6 +2042,7 @@
 <script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51830" data-name="Williamsburg city" data-st="VA"></script>
 <script type="application/json" class="county-bundle" data-coverage="lots" data-fips="51840" data-name="Winchester city" data-st="VA"></script>
 
+<script src="app/config.js"></script>
 <script src="app/app.js"></script>
 
 <!-- 📄 EXECUTIVE PROPERTY & INVESTMENT PROSPECTUS MODAL -->

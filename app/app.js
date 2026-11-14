@@ -18357,7 +18357,7 @@ function renderHouse(box, a, lot, ll, st) {
             </div>
             <div style="position:relative;width:100%;height:220px;border-radius:6px;overflow:hidden;border:1px solid #cbd5e1;background:#0f172a;">
               <iframe id="sv-iframe" data-base-lat="${ll.lat.toFixed(6)}" data-base-lng="${ll.lng.toFixed(6)}" src="https://www.google.com/maps?layer=c&cbll=${ll.lat.toFixed(6)},${ll.lng.toFixed(6)}&cbp=11,0,0,0,0&output=svembed" width="100%" height="100%" style="border:0;" loading="lazy"></iframe>
-              <img id="sv-proxy-img" data-base-lat="${ll.lat.toFixed(6)}" data-base-lng="${ll.lng.toFixed(6)}" style="display:none;width:100%;height:100%;object-fit:cover;" src="${(typeof resolveRepoAssetUrl === 'function' ? resolveRepoAssetUrl('/api/streetview') : '/api/streetview')}?lat=${ll.lat.toFixed(6)}&lng=${ll.lng.toFixed(6)}&heading=0" alt="Street View Facade" onerror="onSvProxyImgError(this)" />
+              <img id="sv-proxy-img" data-base-lat="${ll.lat.toFixed(6)}" data-base-lng="${ll.lng.toFixed(6)}" style="display:none;width:100%;height:100%;object-fit:cover;" src="${streetViewProxyUrl() ? `${streetViewProxyUrl()}?lat=${ll.lat.toFixed(6)}&lng=${ll.lng.toFixed(6)}&heading=0` : ""}" alt="Street View Facade" onerror="onSvProxyImgError(this)" />
             </div>
             <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
               <div style="font-size:11.5px;color:#475569;">
@@ -19048,8 +19048,8 @@ function setStreetViewAngle(heading) {
   const img = document.querySelector("#sv-proxy-img");
   if (img && img.dataset.baseLat && img.dataset.baseLng) {
     const lat = img.dataset.baseLat, lng = img.dataset.baseLng;
-    const baseProxy = (typeof resolveRepoAssetUrl === "function" ? resolveRepoAssetUrl("/api/streetview") : "/api/streetview");
-    img.src = `${baseProxy}?lat=${lat}&lng=${lng}&heading=${heading}`;
+    const baseProxy = streetViewProxyUrl();
+    if (baseProxy) img.src = `${baseProxy}?lat=${lat}&lng=${lng}&heading=${heading}`;
   }
 }
 window.setStreetViewAngle = setStreetViewAngle;
@@ -22773,325 +22773,183 @@ function renderResearchList() {
 // 🤖 GROUNDED AI URBAN & PROPERTY ADVISOR CONTRACT & EDGE API INTEGRATION
 // ============================================================================
 
-function buildGroundedAdvisorPrompt(userQuestion, ctx) {
-  const isParcel = Boolean(ctx && ctx.parcel);
-  const exclusions = isParcel
-    ? ctx.parcel.statutoryExclusions
-    : (ctx && ctx.zoning ? ctx.zoning.statutory_exclusions : null);
+// ---------------- AI advisor
+// The page sends the question, the data it is showing (serializeLiveAdvisorContext) and the recent chat to the
+// advisor endpoint: the Cloudflare Worker in workers/api-proxy.ts, which builds the prompt and calls the model.
+// Where the endpoint is set: app/config.js (CITY_PRETTY_CONFIG.workerUrl), or the advisor's settings drawer for
+// testing. With no endpoint the advisor says it is not connected; it never makes up an answer.
+const AI_TIMEOUT_MS = 90000;
+let aiStatus = "off";   // off: no endpoint · checking · ok · down
 
-  const activeExclusions = exclusions
-    ? Object.entries(exclusions)
-        .filter(([, active]) => Boolean(active))
-        .map(([key]) => key)
-    : [];
+function workerUrl() {
+  const cfg = (typeof window !== "undefined" && window.CITY_PRETTY_CONFIG) || {};
+  return String(cfg.workerUrl || "").trim().replace(/\/+$/, "");
+}
+function aiEndpoint() {
+  let o = null;
+  try { o = localStorage.getItem("city_pretty_ai_endpoint"); } catch (e) {}
+  return (o || "").trim() || (workerUrl() ? workerUrl() + "/api/ai" : "");
+}
+function streetViewProxyUrl() { return workerUrl() ? workerUrl() + "/api/streetview" : ""; }
+try { localStorage.removeItem("city_pretty_ai_key"); } catch (e) {}   // the page no longer handles model keys
 
-  const readinessTier = (ctx && ctx.county && ctx.county.readiness_tier) || "audited_A";
-  const zoningSource = (ctx && ctx.county && ctx.county.zoning_source) || "live_municipal_gis";
-  const crimeFeed = (ctx && ctx.county && ctx.county.crime_feed_status) || "rolling_12m";
-
-  const systemPrompt = [
-    "You are the City Pretty Urban & Property Advisor, an institutional econometric and statutory intelligence copilot for municipal leaders, homeowners, and urban infill investors.",
-    "STRICT GROUNDING & ANTI-HALLUCINATION RULES:",
-    "1. Cite ONLY numbers, property attributes, valuations, permit dates, statutory citations, and financial figures present in the verified context payload below. Never invent zoning codes, millage rates, building dimensions, or local ordinances.",
-    `2. Active jurisdiction readiness tier is "${readinessTier}". If readiness_tier is NOT "audited_A", explicitly state that the jurisdiction is in "${readinessTier}" screening mode and identify preliminary data sources (e.g., zoning_source="${zoningSource}", crime_feed_status="${crimeFeed}").`,
-    activeExclusions.length > 0
-      ? `3. CRITICAL STATUTORY OVERLAYS DETECTED: [${activeExclusions.join(", ")}]. You MUST warn the user that these overlays block or restrict ministerial by-right development (e.g. SB 9 lot splits or CEQA exemptions) unless specifically exempted.`
-      : "3. If no statutory exclusions are flagged, advise that local municipal historic preservation overlays, coastal permits, and private HOA / CC&R covenants must still be verified with the local building department.",
-    "4. For rooftop solar inquiries in 2026+: explicitly affirm that the federal residential 30% tax credit under IRC § 25D expired on Dec 31, 2025 (0% for cash/loan purchases); 30% applies only under IRC § 48E commercial/TPO leases. In California, note that NEM 3.0 avoided-cost export tariffs require paired battery storage for positive equity.",
-    "5. For high-value parcels ($2.5M+): note that amenity price-lift reflects non-linear diminishing marginal returns.",
-    "6. Always format responses in clean GitHub-flavored markdown with bold headers and bullet points.",
-    "7. MANDATORY CLOSING NOTICE: You must conclude actionable property and investment outputs with the exact institutional disclaimer:\n'LEGAL & ENGINEERING NON-RELIANCE NOTICE: Preliminary screening based on public municipal GIS, tax rolls, and statutory feeds as of November 2026. Feasibility determinations do not constitute formal zoning verification letters, title opinions, or structural engineering assessments. Verify all easements, utility hookups, and setbacks with local building departments.'",
-  ].join("\n\n");
-
-  const userPrompt = [
-    "VERIFIED GEOSPATIAL & STATUTORY CONTEXT (JSON):",
-    "```json",
-    JSON.stringify(ctx || {}, null, 2),
-    "```",
-    "",
-    `USER QUESTION: ${userQuestion}`,
-  ].join("\n\n");
-
-  return { systemPrompt, userPrompt };
+function setAiStatus(s, detail) {
+  aiStatus = s;
+  const el = document.getElementById("ai-status-indicator");
+  if (!el) return;
+  const look = {
+    off: ["⚪ Not connected", "#f1f5f9", "#475569", "#cbd5e1", "The AI advisor has no endpoint yet (workerUrl in app/config.js)"],
+    checking: ["… Checking", "#f1f5f9", "#475569", "#cbd5e1", "Checking the advisor endpoint"],
+    ok: ["🟢 Connected", "#ecfdf5", "#059669", "#a7f3d0", "The advisor endpoint answered its health check"],
+    down: ["🔴 Unavailable", "#fef2f2", "#b91c1c", "#fecaca", "The advisor endpoint did not answer"],
+  }[s];
+  el.textContent = look[0];
+  el.style.background = look[1]; el.style.color = look[2]; el.style.borderColor = look[3];
+  el.title = detail || look[4];
 }
 
-function serializeLiveAdvisorContext(env) {
-  const g = typeof window !== "undefined" ? window : (env || {});
+async function checkAiStatus() {
+  const ep = aiEndpoint();
+  if (!ep) { setAiStatus("off"); return; }
+  setAiStatus("checking");
+  try {
+    const healthUrl = new URL("health", new URL(ep, location.href)).href;   // .../api/ai -> .../api/health
+    const r = await fetch(healthUrl, { cache: "no-store" });
+    const j = r.ok ? await r.json().catch(() => ({})) : {};
+    setAiStatus(r.ok && j.ai_advisor_ready ? "ok" : "down", r.ok && !j.ai_advisor_ready ? "The Worker is up but its model is not configured yet" : undefined);
+  } catch (e) { setAiStatus("down"); }
+}
 
-  const curFips = (typeof g.activeFips === "function") ? g.activeFips() : "06037";
-  const compIndex = g.COUNTY_COMPLETENESS_INDEX || {};
-  const countyMeta = compIndex[curFips] || {
-    fips: curFips,
-    name: (typeof g.countyOf === "function" ? g.countyOf() : "County " + curFips),
-    state: (typeof g.activeState === "function" ? g.activeState() : "CA"),
-    readiness_tier: "audited_A",
-    assessor_roll_vintage: "2026 Secured Roll",
-    sales_comps_window: ["2022-08-01", "2026-10-31"],
-    zoning_source: "live_municipal_gis",
-    gtfs_agencies_count: 19,
-    crime_feed_status: "rolling_12m",
-    canopy_dataset: "tree_equity_2025",
-  };
-
+// What the advisor is told. Unknown values are null, never a stand-in number.
+function serializeLiveAdvisorContext() {
+  const fips = typeof activeFips === "function" ? activeFips() : null;
+  const comp = (typeof COUNTY_COMPLETENESS_INDEX !== "undefined" && fips && COUNTY_COMPLETENESS_INDEX[fips]) || null;
+  const num = v => (v == null || v === "" || isNaN(+v) || +v === 0) ? null : +v;
   const payload = {
-    county: countyMeta,
-    roiMode: (typeof g.getRoiMode === "function") ? g.getRoiMode() : "adj",
+    county: {
+      fips, name: typeof countyOf === "function" ? countyOf() : null,
+      state: typeof activeState === "function" ? activeState() : null,
+      readiness_tier: comp ? comp.readiness_tier : null,
+      assessor_roll_vintage: comp ? comp.assessor_roll_vintage || null : null,
+      zoning_source: comp ? comp.zoning_source || null : null,
+    },
+    roiMode: typeof getRoiMode === "function" ? getRoiMode() : null,
   };
-
-  const selBg = g.selected;
-  if (selBg && g.byId && g.byId.get && g.byId.get(selBg)) {
-    const feat = g.byId.get(selBg);
-    const props = feat.properties || {};
-    payload.blockGroupGeoid = selBg;
-    payload.neighborhoodName = props.n || "Local Neighborhood";
-    payload.neighborhoodMedianHv = props.hv ? Math.round(props.hv * 1.165) : 850000;
-    payload.neighborhoodMedianRent = props.rent || 2800;
-    payload.displacementRiskScore = props.rent_risk || 45;
-  }
-
-  const ah = g.activeHouse;
-  if (ah && ah.a) {
-    const a = ah.a;
-    const audit = ah.audit || {};
-    const val = ah.valuation || (audit ? audit.valuation : null) || {};
-    const lotSqft = ah.lot || a.LotSqft || 6000;
-    const livingSqft = (val && val.livingSqft) ? val.livingSqft : (ah.F ? ah.F.bldg : 1800);
-
-    const parcelCtx = {
-      parcelId: String(a.AIN || a.APN || "PARCEL"),
-      address: String(a.SitusFullAddress || a.PROPERTYADDRESS || ("Parcel " + (a.AIN || "–"))),
-      county: String(a.county || countyMeta.name),
-      state: String((typeof g.activeState === "function" ? g.activeState() : null) || countyMeta.state || "CA"),
-      lotSqft: lotSqft,
-      livingSqft: livingSqft,
-      yearBuilt: ah.F ? ah.F.yb : null,
-      effectiveYearBuilt: ah.F ? ah.F.eff : null,
-      bedrooms: ah.F ? ah.F.beds : 3,
-      bathrooms: ah.F ? ah.F.baths : 2,
-      stories: ah.F ? ah.F.stories : 1,
-      units: ah.F ? ah.F.units : 1,
-      isVacantLand: Boolean(val.isVacantLand),
-      zoningCode: String(a.ZoneCode || "R-1"),
-      useDescription: String(a.UseDescription || "Residential"),
-      avmValuation: {
-        estimatedValue: val.estimatedValue || 750000,
-        valueLow: val.valueLow || Math.round((val.estimatedValue || 750000) * 0.935),
-        valueHigh: val.valueHigh || Math.round((val.estimatedValue || 750000) * 1.065),
-        vpsf: val.vpsf || Math.round((val.estimatedValue || 750000) / Math.max(livingSqft, 1)),
-        valuationMethod: val.valuationMethod || "Hedonic Micro-Model",
-        confidenceMarginPct: val.confidenceMarginPct || 0.065,
-        confidenceRating: val.confidenceRating || "High Confidence",
-        permitCapitalizationAdded: val.permitCapitalizationAdded || 0,
-        luxuryDampeningApplied: Boolean(val.luxuryDampeningApplied),
-        multiUnitBonusPct: val.multiUnitBonusPct || 0,
-      },
-      recentPermits: (ah.recentPermits || []).map(p => ({
-        issue_date: String(p.issue_date || p.IssueDate || ""),
-        permit_type: String(p.permit_type || p.TYPE || "remodel"),
-        valuation_usd: Number(p.valuation_usd || p.Valuation || 0),
-        description: String(p.description || p.Description || ""),
-      })),
-      imagery: {
-        confidenceBadge: (audit && audit.imagery) ? audit.imagery.confidenceBadge : "verified_current",
-        isLidarStale: Boolean(audit && audit.imagery && audit.imagery.isLidarStale),
-        isStreetViewStale: Boolean(audit && audit.imagery && audit.imagery.isStreetViewStale),
-        warningMessage: (audit && audit.imagery) ? audit.imagery.warningMessage : null,
-      },
-      statutoryExclusions: (audit && audit.statutoryZoning) ? audit.statutoryZoning.statutory_exclusions : {
-        historic_district_hpoz: false,
-        coastal_commission_or_sma: false,
-        fema_100yr_floodway: false,
-        calfire_or_state_vhfhsz: false,
-        private_hoa_or_ccr_disclaimer_required: true,
-      },
-      solar: (audit && audit.solarMicrogrid) ? {
-        system_size_dc_kw: audit.solarMicrogrid.system_size_dc_kw,
-        federal_itc_pct: audit.solarMicrogrid.federal_itc_pct,
-        battery_storage_required: audit.solarMicrogrid.battery_storage_required_for_roi,
-        net_25yr_npv_usd: audit.solarMicrogrid.net_25yr_npv_usd,
-      } : undefined,
-      treeEconomics: (audit && audit.treeEconomics) ? {
-        annualCoolingOrHeatingSavingsUsd: audit.treeEconomics.annualCoolingOrHeatingSavingsUsd,
-        capitalizedValueUsd: audit.treeEconomics.capitalizedValueUsd,
-        climateRegime: audit.treeEconomics.climateRegime,
-      } : undefined,
+  if (selected && byId.get(selected)) {
+    const p = byId.get(selected).properties || {};
+    const bundle = (typeof activeBundle === "function" && activeBundle()) || D;
+    const m = ((bundle && bundle.details && bundle.details[selected]) || {}).m || {};
+    payload.blockGroup = {
+      geoid: selected, name: p.n || null, nameSource: m.ns || null, city: p.c || null,
+      medianHomeValue: num(m.hv != null ? m.hv : p.hv), medianRent: num(m.rent), population: num(m.pop), acres: num(m.acres),
+      topProjects: Array.isArray(p.tp) ? p.tp.slice(0, 3) : null,
     };
-
-    if (typeof g.computePropertyPlaybook === "function") {
-      try {
-        const pb = g.computePropertyPlaybook(a, lotSqft, ah.F || {}, null, ah.ll, ah.st);
-        if (pb && pb.best) {
-          parcelCtx.playbookRecommendation = {
-            strategyTitle: pb.best.title,
-            badge: pb.best.badge,
-            netEquityLift: pb.best.equity,
-            roiPerDollar: pb.best.roi,
-            statutoryPathway: pb.best.statute,
-            annualCashflow: pb.best.annualCashflow,
-            paybackYears: pb.best.paybackYrs,
-          };
-        }
-      } catch (e) {}
+  }
+  const ah = typeof activeHouse !== "undefined" ? activeHouse : null;
+  if (ah && ah.a) {
+    const a = ah.a, F = ah.F || {}, val = ah.valuation || null, vc = ah.valCheck || { ok: !!val };
+    payload.parcel = {
+      parcelId: a.AIN || null, address: a.SitusFullAddress || null,
+      useType: a.UseType || null, useDescription: a.UseDescription || null,
+      zoningCode: (a.ZoneCode && !/^unzoned$/i.test(a.ZoneCode)) ? a.ZoneCode : null,
+      lotSqft: num(ah.lot || a.LotSqft), livingSqft: num(F.bldg), yearBuilt: num(F.yb), bedrooms: num(F.beds), bathrooms: num(F.baths),
+      stories: num(F.stories), units: num(a.Units),
+      assessorValue: num(((+a.Roll_LandValue || 0) + (+a.Roll_ImpValue || 0)) || a.Roll_TotalValue),
+      lastSale: ah.sale ? { price: ah.sale.price, date: ah.sale.date } : null,
+      valueEstimate: vc.ok && val ? { value: val.estimatedValue, low: val.valueLow, high: val.valueHigh, method: val.valuationMethod } : null,
+      valueEstimateWithheld: vc.ok ? null : vc.reason,
+    };
+    if (ah.ll && typeof findNearestTransitStation === "function") {
+      try { const s = findNearestTransitStation(ah.ll.lat, ah.ll.lng); if (s) payload.parcel.nearestRailOrBrt = { name: s.name || null, miles: s.distMi != null ? +(+s.distMi).toFixed(2) : null }; } catch (e) {}
     }
-
-    payload.parcel = parcelCtx;
   }
-
-  if (ah && ah.ll && typeof g.findNearestTransitStation === "function") {
-    try {
-      const stn = g.findNearestTransitStation(ah.ll.lat, ah.ll.lng);
-      if (stn) {
-        payload.nearestTransit = {
-          stationName: stn.name || "Transit Hub",
-          distMiles: stn.distMi || 0,
-          inWalkshed: (stn.distMi || 0) <= 0.5,
-          ab2097ParkingExempt: (stn.distMi || 0) <= 0.5,
-        };
-      }
-    } catch (e) {}
-  }
-
   return payload;
 }
-
-window.buildGroundedAdvisorPrompt = buildGroundedAdvisorPrompt;
 window.serializeLiveAdvisorContext = serializeLiveAdvisorContext;
+
+// Model text is shown as text: escaped, then **bold**, bullet lines and line breaks
+function aiTextToHtml(t) {
+  return esc(String(t || ""))
+    .replace(/\*\*([^*\n]+)\*\*/g, "<b>$1</b>")
+    .replace(/^#{1,4}\s*(.+)$/gm, "<b>$1</b>")
+    .replace(/^\s*[-*]\s+/gm, "• ")
+    .replace(/\n/g, "<br>");
+}
 
 async function sendAiQuery(q, promptKey = null) {
   aiHistory.push({ role: "user", text: q });
+  const ep = aiEndpoint();
+  if (!ep) {
+    aiHistory.push({ role: "notice", text: "The AI advisor isn't connected yet, so this question was not sent anywhere and no answer was made up. The panel beside the map has this page's own figures and sources." });
+    renderAiChat(); return;
+  }
   renderAiChat();
-
   const box = document.getElementById("ai-chat-history");
   const typingId = "ai-typing-indicator";
   if (box) {
     const typingEl = document.createElement("div");
     typingEl.id = typingId;
     typingEl.style.cssText = "align-self:flex-start;background:#f8fafc;border:1px solid #e2e8f0;color:#64748b;padding:10px 14px;border-radius:12px 12px 12px 0;font-size:12px;display:flex;align-items:center;gap:8px;";
-    typingEl.innerHTML = `<span class="spin"></span> <span>🤖 AI analyzing municipal cadastre, zoning rights &amp; statutory ROI…</span>`;
-    box.appendChild(typingEl);
-    box.scrollTop = box.scrollHeight;
+    typingEl.innerHTML = `<span class="spin"></span> <span>Waiting for the advisor…</span>`;
+    box.appendChild(typingEl); box.scrollTop = box.scrollHeight;
   }
-
-  const payload = (typeof serializeLiveAdvisorContext === "function")
-    ? serializeLiveAdvisorContext()
-    : { county: { readiness_tier: "audited_A" } };
-
+  const context = serializeLiveAdvisorContext();
   const previewEl = document.getElementById("ai-grounded-json-preview");
-  if (previewEl) {
-    try { previewEl.textContent = JSON.stringify(payload, null, 2); } catch(e) {}
-  }
+  if (previewEl) { try { previewEl.textContent = JSON.stringify(context, null, 2); } catch (e) {} }
+  const history = aiHistory.filter(m => m.role === "user" || m.role === "assistant").slice(0, -1).slice(-8)
+    .map(m => ({ role: m.role, content: String(m.raw || m.text).slice(0, 4000) }));
 
-  const prompts = (typeof buildGroundedAdvisorPrompt === "function")
-    ? buildGroundedAdvisorPrompt(q, payload)
-    : { systemPrompt: "You are the City Pretty Urban & Property Advisor.", userPrompt: q };
-
-  const customEndpoint = (typeof localStorage !== "undefined" && localStorage.getItem("city_pretty_ai_endpoint")) || (typeof window !== "undefined" && window.CITY_PRETTY_AI_ENDPOINT);
-  const customKey = (typeof localStorage !== "undefined" && localStorage.getItem("city_pretty_ai_key")) || (typeof window !== "undefined" && window.CITY_PRETTY_AI_KEY);
-  const edgeProxyUrl = customEndpoint || (typeof resolveRepoAssetUrl === "function" ? resolveRepoAssetUrl("/api/ai") : "/api/ai");
-
-  let aiAnswer = null;
-  let usedLiveApi = false;
-
+  let reply;
   try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 6000);
-
-    const headers = { "Content-Type": "application/json" };
-    if (customKey) {
-      headers["Authorization"] = "Bearer " + customKey;
-    }
-
-    const res = await fetch(edgeProxyUrl, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({
-        userMessage: q,
-        promptKey,
-        context: payload,
-        systemPrompt: prompts.systemPrompt,
-        userPrompt: prompts.userPrompt,
-        apiKey: customKey || undefined,
-        history: aiHistory.slice(-6).map(m => ({ role: m.role, text: m.text.replace(/<[^>]+>/g, " ") }))
-      }),
-      signal: controller.signal
+    const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), AI_TIMEOUT_MS);
+    const res = await fetch(ep, {
+      method: "POST", headers: { "Content-Type": "application/json" }, signal: ctl.signal,
+      body: JSON.stringify({ question: q, promptKey, context, history }),
     });
-    clearTimeout(timeoutId);
-
-    if (res.ok) {
-      const data = await res.json();
-      if (data && (data.text || data.answer)) {
-        aiAnswer = data.text || data.answer;
-        usedLiveApi = true;
-      }
+    clearTimeout(timer);
+    const data = await res.json().catch(() => null);
+    if (res.ok && data && data.ok && data.text) { reply = { role: "assistant", raw: data.text, text: aiTextToHtml(data.text) }; setAiStatus("ok"); }
+    else {
+      const why = (data && data.error) || `HTTP ${res.status}`;
+      reply = { role: "notice", text: `The AI advisor could not answer (${why}). No answer was generated.` };
+      if (res.status >= 500 || res.status === 404) setAiStatus("down", why);
     }
   } catch (err) {
-    // Seamless fallback to deterministic engine
+    reply = { role: "notice", text: `The AI advisor could not be reached (${err && err.name === "AbortError" ? "no reply within 90 seconds" : "network error"}). No answer was generated.` };
+    setAiStatus("down");
   }
-
-  const typingEl = document.getElementById(typingId);
-  if (typingEl) typingEl.remove();
-
-  if (!aiAnswer) {
-    aiAnswer = generateAiAnswer(q, promptKey);
-  }
-
-  const disclaimer = `<div style="margin-top:8px;padding-top:6px;border-top:1px dashed #cbd5e1;font-size:10px;color:#64748b;line-height:1.35;"><b>LEGAL &amp; ENGINEERING NON-RELIANCE NOTICE:</b> Preliminary screening based on public municipal GIS, tax rolls, and statutory feeds as of November 2026. Feasibility determinations do not constitute formal zoning verification letters, title opinions, or structural engineering assessments. Verify all easements, utility hookups, and setbacks with local building departments.</div>`;
-  if (!aiAnswer.includes("NON-RELIANCE NOTICE")) {
-    aiAnswer += disclaimer;
-  }
-
-  if (usedLiveApi) {
-    aiAnswer = `<div style="font-size:10px;color:#059669;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:4px;"><span>🟢</span> <span>Live Edge AI Copilot (Origin-Grounded)</span></div>` + aiAnswer;
-  }
-
-  aiHistory.push({ role: "assistant", text: aiAnswer });
+  const typingEl = document.getElementById(typingId); if (typingEl) typingEl.remove();
+  aiHistory.push(reply);
   renderAiChat();
 }
 window.sendAiQuery = sendAiQuery;
 
+function toggleAiSettings() {
+  const d = document.getElementById("ai-settings-drawer");
+  if (!d) return;
+  d.style.display = d.style.display === "none" || !d.style.display ? "block" : "none";
+  if (d.style.display === "block") loadAiSettings();
+}
+window.toggleAiSettings = toggleAiSettings;
 function loadAiSettings() {
   const epInput = document.getElementById("ai-cfg-endpoint");
-  const keyInput = document.getElementById("ai-cfg-key");
-  if (typeof localStorage !== "undefined") {
-    if (epInput) epInput.value = localStorage.getItem("city_pretty_ai_endpoint") || "";
-    if (keyInput) keyInput.value = localStorage.getItem("city_pretty_ai_key") || "";
-  }
+  if (epInput) { try { epInput.value = localStorage.getItem("city_pretty_ai_endpoint") || ""; } catch (e) {} epInput.placeholder = workerUrl() ? workerUrl() + "/api/ai" : "not set (workerUrl in app/config.js)"; }
 }
 window.loadAiSettings = loadAiSettings;
-
 function saveAiSettings() {
-  const epInput = document.getElementById("ai-cfg-endpoint");
-  const keyInput = document.getElementById("ai-cfg-key");
-  const statusEl = document.getElementById("ai-cfg-status");
-  if (typeof localStorage !== "undefined") {
-    const ep = epInput ? epInput.value.trim() : "";
-    const k = keyInput ? keyInput.value.trim() : "";
-    if (ep) localStorage.setItem("city_pretty_ai_endpoint", ep);
-    else localStorage.removeItem("city_pretty_ai_endpoint");
-    if (k) localStorage.setItem("city_pretty_ai_key", k);
-    else localStorage.removeItem("city_pretty_ai_key");
-    if (statusEl) {
-      statusEl.textContent = "✓ Settings saved!";
-      setTimeout(() => { if (statusEl) statusEl.textContent = ""; }, 2500);
-    }
-  }
+  const epInput = document.getElementById("ai-cfg-endpoint"), statusEl = document.getElementById("ai-cfg-status");
+  const ep = epInput ? epInput.value.trim() : "";
+  try { if (ep) localStorage.setItem("city_pretty_ai_endpoint", ep); else localStorage.removeItem("city_pretty_ai_endpoint"); } catch (e) {}
+  if (statusEl) { statusEl.textContent = "Saved in this browser."; setTimeout(() => { statusEl.textContent = ""; }, 2500); }
+  checkAiStatus();
 }
 window.saveAiSettings = saveAiSettings;
-
 function clearAiSettings() {
-  const epInput = document.getElementById("ai-cfg-endpoint");
-  const keyInput = document.getElementById("ai-cfg-key");
-  const statusEl = document.getElementById("ai-cfg-status");
-  if (typeof localStorage !== "undefined") {
-    localStorage.removeItem("city_pretty_ai_endpoint");
-    localStorage.removeItem("city_pretty_ai_key");
-  }
+  try { localStorage.removeItem("city_pretty_ai_endpoint"); } catch (e) {}
+  const epInput = document.getElementById("ai-cfg-endpoint"), statusEl = document.getElementById("ai-cfg-status");
   if (epInput) epInput.value = "";
-  if (keyInput) keyInput.value = "";
-  if (statusEl) {
-    statusEl.textContent = "✓ Defaults restored (/api/ai edge proxy).";
-    setTimeout(() => { if (statusEl) statusEl.textContent = ""; }, 2500);
-  }
+  if (statusEl) { statusEl.textContent = "Using the site setting (app/config.js)."; setTimeout(() => { statusEl.textContent = ""; }, 2500); }
+  checkAiStatus();
 }
 window.clearAiSettings = clearAiSettings;
 
@@ -23100,7 +22958,7 @@ function openAiAdvisor() {
   if (m) {
     m.hidden = false;
     document.body.style.overflow = "hidden";
-    loadAiSettings();
+    checkAiStatus();
     updateAiContext();
     if (aiHistory.length === 0) {
       initAiWelcome();
@@ -23123,10 +22981,10 @@ function updateAiContext() {
       const a = activeHouse.a;
       const addr = a.SitusFullAddress || ("Parcel " + a.AIN);
       const lotSqft = activeHouse.lot ? `${activeHouse.lot.toLocaleString()} sq ft` : "Lot area loading";
-      strip.innerHTML = `<b>${esc(addr)}</b> (APN ${esc(a.AIN || "–")}) &middot; ${lotSqft} &middot; ${esc(a.county || countyOf())}`;
+      strip.innerHTML = `<b>${esc(addr)}</b> (APN ${esc(a.AIN || "–")}) &middot; ${lotSqft} &middot; ${esc(countyOf())}`;
     } else if (selected && byId.get(selected)) {
       const p = byId.get(selected).properties;
-      strip.innerHTML = `<b>${esc(p.n)}</b>, ${esc(p.c)} &middot; Neighborhood Focus`;
+      strip.innerHTML = `<b>${esc(p.n)}</b>, ${esc(p.c)} &middot; neighborhood`;
     } else {
       strip.textContent = `General County Focus: ${countyOf() || "United States"}`;
     }
@@ -23142,12 +23000,10 @@ function updateAiContext() {
 }
 
 function initAiWelcome() {
-  const isHouse = activeHouse && activeHouse.a;
-  const initialText = isHouse
-    ? `Hello! I am your AI Urban & Property Advisor. I have examined the official county assessor records, statutory housing laws, transit walkshed buffers, and solar irradiance for <b>${esc(activeHouse.a.SitusFullAddress || "this property")}</b>.<br><br>Click any prompt below or ask me anything about zoning entitlements, building an ADU without parking, lot splitting, or solar payback.`
-    : `Hello! I am your AI Urban & Property Advisor. Select any home or neighborhood on the map, and I will analyze its authoritative property lines, state housing statutes, P3 transit corridors, and optimal return-on-investment pathways.<br><br>How can I assist your planning or investment strategy today?`;
-
-  aiHistory = [{ role: "assistant", text: initialText }];
+  const where = activeHouse && activeHouse.a ? `<b>${esc(activeHouse.a.SitusFullAddress || "the selected lot")}</b>` : "the selected neighborhood";
+  const text = `Ask about ${where}. The advisor is an AI model that is given the data this page shows (open "Inspect" above to see exactly what it gets). It can be wrong; check anything important with the city or county.` +
+    (aiEndpoint() ? "" : `<br><br><b>The AI advisor isn't connected yet</b>, so questions will not be answered.`);
+  aiHistory = [{ role: "notice", text }];
   renderAiChat();
 }
 
@@ -23155,18 +23011,12 @@ function renderAiChat() {
   const box = document.getElementById("ai-chat-history");
   if (!box) return;
   box.innerHTML = aiHistory.map(msg => {
-    if (msg.role === "user") {
-      return `<div style="align-self:flex-end;background:#4f46e5;color:#fff;padding:8px 12px;border-radius:12px 12px 0 12px;max-width:82%;box-shadow:0 1px 3px rgba(0,0,0,0.1);font-weight:500;">
-        ${esc(msg.text)}
-      </div>`;
-    } else {
-      return `<div style="align-self:flex-start;background:#fff;border:1px solid #e2e8f0;color:#0f172a;padding:12px 14px;border-radius:12px 12px 12px 0;max-width:92%;box-shadow:0 1px 4px rgba(0,0,0,0.05);line-height:1.5;">
-        <div style="font-size:11px;font-weight:700;color:#7c3aed;margin-bottom:4px;display:flex;align-items:center;gap:4px;">
-          <span>🤖</span> <span>AI ADVISOR VERDICT</span>
-        </div>
+    if (msg.role === "user") return `<div style="align-self:flex-end;background:#4f46e5;color:#fff;padding:8px 12px;border-radius:12px 12px 0 12px;max-width:82%;box-shadow:0 1px 3px rgba(0,0,0,0.1);font-weight:500;">${esc(msg.text)}</div>`;
+    const isAi = msg.role === "assistant";
+    return `<div style="align-self:flex-start;background:${isAi ? "#fff" : "#f8fafc"};border:1px solid #e2e8f0;color:#0f172a;padding:12px 14px;border-radius:12px 12px 12px 0;max-width:92%;line-height:1.5;">
+        <div style="font-size:11px;font-weight:700;color:${isAi ? "#7c3aed" : "#475569"};margin-bottom:4px;">${isAi ? "🤖 AI advisor (can be wrong)" : "City Pretty"}</div>
         ${msg.text}
       </div>`;
-    }
   }).join("");
   box.scrollTop = box.scrollHeight;
 }
@@ -23184,7 +23034,7 @@ function handleAiSubmit(e) {
 function askAiPrompt(key) {
   let promptText = "";
   if (key === "best_move") promptText = "What is the single best investment move for this lot?";
-  else if (key === "home_worth") promptText = "What is this home worth and how does the AVM compare to Zillow Zestimates?";
+  else if (key === "home_worth") promptText = "What is this home worth, and how sure is that figure?";
   else if (key === "property_tax") promptText = "Will building an ADU or home addition raise my property taxes or trigger a reassessment?";
   else if (key === "adu_cost") promptText = "How much does it cost to build an ADU and what is the payback horizon?";
   else if (key === "adu_parking") promptText = "Can I build an ADU here without adding parking spaces?";
@@ -23196,312 +23046,6 @@ function askAiPrompt(key) {
   else if (key === "data_provenance") promptText = "What is the data provenance, assessor roll vintage, and accuracy readiness tier for this county?";
   
   sendAiQuery(promptText, key);
-}
-
-function generateAiAnswer(q, promptKey = null) {
-  const isHouse = activeHouse && activeHouse.a;
-  const a = isHouse ? activeHouse.a : {};
-  const lotSqft = (isHouse && activeHouse.lot) ? activeHouse.lot : 5500;
-  const ll = (isHouse && activeHouse.ll) ? activeHouse.ll : (map ? map.getCenter() : { lat: 34.05, lng: -118.25 });
-  const nearestStn = (typeof findNearestTransitStation === "function") ? findNearestTransitStation(ll.lat, ll.lng) : null;
-  const inWalkshed = nearestStn && nearestStn.distMi <= 0.50;
-  const isCa = (ll.lat >= 32.5 && ll.lat <= 42.0 && ll.lng >= -124.5 && ll.lng <= -114.1);
-
-  const qLower = q.toLowerCase();
-
-  // Search research corpus for empirical citations matching query
-  const queryWords = qLower.split(/\s+/).filter(w => w.length > 3 && !['what', 'with', 'from', 'this', 'that', 'have', 'your', 'about'].includes(w));
-  const matchedStudies = (typeof RESEARCH_CORPUS_500 !== "undefined") ? RESEARCH_CORPUS_500.filter(s => {
-    const text = (s.title + " " + s.category + " " + s.takeaway + " " + s.authors).toLowerCase();
-    return queryWords.some(w => text.includes(w));
-  }).slice(0, 3) : [];
-
-  const citeBlock = matchedStudies.length ? `
-    <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:6px;padding:8px 10px;margin-top:10px;font-size:11.5px;color:#334155;">
-      <div style="font-weight:700;color:#0f172a;margin-bottom:4px;">📚 Empirical Evidence from our 540-Study Research Library:</div>
-      ${matchedStudies.map(ms => `
-        <div style="margin-bottom:4px;padding-left:8px;border-left:2px solid #0284c7;">
-          <b>${esc(ms.authors)} (${ms.year})</b>: <i>${esc(ms.title)}</i> &mdash; <span style="color:#059669;font-weight:600;">${esc(ms.impact)}</span> (Measured Return: <b>$${ms.vpd} / $1</b>).
-        </div>
-      `).join('')}
-    </div>
-  ` : "";
-
-  if (promptKey === "data_provenance" || qLower.includes("provenance") || qLower.includes("readiness tier") || qLower.includes("accuracy tier") || qLower.includes("roll vintage") || qLower.includes("completeness index")) {
-    const f = typeof activeFips === "function" ? activeFips() : "06037";
-    const comp = (typeof COUNTY_COMPLETENESS_INDEX !== "undefined" && COUNTY_COMPLETENESS_INDEX[f]) ? COUNTY_COMPLETENESS_INDEX[f] : {
-      name: typeof countyOf === "function" ? countyOf() : "Active County",
-      state: typeof activeState === "function" ? activeState() : "CA",
-      readiness_tier: "audited_A",
-      assessor_roll_vintage: "2026-09-17",
-      zoning_source: "live_municipal_gis",
-      gtfs_agencies_count: 19,
-      crime_feed_status: "rolling_12m",
-      canopy_dataset: "tree_equity_2025"
-    };
-    const tierBadge = comp.readiness_tier === "audited_A" ? "AUDITED TIER A (100% Operational)" :
-      comp.readiness_tier === "verified_B" ? "VERIFIED TIER B (Metropolitan Operational)" :
-      comp.readiness_tier === "preliminary_C" ? "PRELIMINARY TIER C (Intermediate Pipeline)" :
-      "CADASTRAL ONLY TIER D (Screening Pass)";
-    return `<b>Authoritative County Data Readiness &amp; Provenance Scorecard:</b><br><br>
-      • <b>Jurisdiction:</b> <b>${esc(comp.name)}, ${esc(comp.state)}</b> (FIPS: <code>${esc(comp.fips || f)}</code>)<br>
-      • <b>Data Readiness Tier:</b> <b style="color:#059669;">${tierBadge}</b><br>
-      • <b>Assessor Roll Vintage:</b> <b>${esc(comp.assessor_roll_vintage || "2026 Secured Roll")}</b> (Sales Window: 2022–2026)<br>
-      • <b>Zoning Source:</b> <b>${esc(comp.zoning_source.replace(/_/g, " ").toUpperCase())}</b> (Codified State &amp; Municipal Preemptions)<br>
-      • <b>Transit Feeds:</b> <b>${comp.gtfs_agencies_count || 1} Integrated GTFS Feeds</b> (Continuous 0.25, 0.50, and 0.75-mi walkshed isochrones)<br>
-      • <b>Safety CAD Feed:</b> <b>${esc(comp.crime_feed_status || "Rolling 12-Month CAD")}</b>${f === "06037" ? "<br>&nbsp;&nbsp;⚠️ <i>Explicit reporting gap notice: Beverly Hills, Burbank, Glendale, Pasadena, Santa Monica, Torrance, and Culver City operate independent closed CAD systems.</i>" : ""}<br><br>
-      City Pretty enforces audited public cadastres rather than opaque broker estimates. You can inspect all 639 US counties in our directory.<br>
-      <div style="margin-top:10px;padding-top:8px;border-top:1px solid #e2e8f0;display:flex;gap:6px;flex-wrap:wrap;">
-        <button type="button" class="story-btn" onclick="openDataAccuracyModal()" style="background:#064e3b;color:#a7f3d0;border:1px solid #059669;padding:5px 11px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:5px;cursor:pointer;">
-          🏛️ Open Full 639-County Data Readiness Matrix
-        </button>
-      </div>`;
-  }
-
-  if (promptKey === "home_worth" || qLower.includes("worth") || qLower.includes("value") || qLower.includes("zillow") || qLower.includes("zestimate") || qLower.includes("estimate") || qLower.includes("avm") || qLower.includes("price")) {
-    if (isHouse) {
-      const val = activeHouse.valuation;
-      const hv = activeHouse.houseHv || (val ? val.estimatedValue : 350000);
-      const vLow = activeHouse.valLow || (val ? val.valueLow : Math.round(hv * 0.935));
-      const vHigh = activeHouse.valHigh || (val ? val.valueHigh : Math.round(hv * 1.065));
-      const vpsf = activeHouse.houseVpsf || (val ? val.vpsf : Math.round(hv / 1800));
-      const mthd = activeHouse.valMethod || (val ? val.valuationMethod : "Multi-Model Hedonic + Assessor Calibration");
-      const sqft = (val && val.livingSqft) ? val.livingSqft : (activeHouse.F ? activeHouse.F.bldg : 1800);
-      const isVacant = val ? !!val.isVacantLand : false;
-      return `<b>Automated Valuation Model (AVM) Breakdown:</b><br><br>
-        • <b>Estimated Market Value:</b> <b style="font-size:14px;color:#0f172a;">$${hv.toLocaleString()}</b> (Range: <b>$${vLow.toLocaleString()}</b> &ndash; <b>$${vHigh.toLocaleString()}</b>)<br>
-        • <b>${isVacant ? "Price per Lot Sq Ft" : "Price per Sq Ft"}:</b> ~$${vpsf.toLocaleString()} / sq ft ${isVacant ? `lot (${(val.lotSqft || activeHouse.lot || 0).toLocaleString()} sq ft buildable land · 0 sq ft living)` : `(${sqft.toLocaleString()} sq ft living area)`}<br>
-        ${isVacant ? `• <b>Property Type:</b> <b style="color:#0284c7;">Unimproved Residential Infill Parcel</b> (Valued strictly as site land equity without fabricated structural GLA)<br>` : ""}
-        • <b>Valuation Methodology:</b> <b>${esc(mthd)}</b><br><br>
-        <b>Why City Pretty Matches or Exceeds Zillow Zestimate Accuracy:</b><br>
-        1. <b>Direct Assessor Grounding:</b> Outside California, assessors (e.g. Florida Just Value, Michigan 2x SEV, Wisconsin Fair Market Value, Texas Appraised Value, Arizona Full Cash Value, Washington 100% True Value) conduct annual mass appraisal deed audits that anchor our valuations.<br>
-        2. <b>HPI Repeat-Sales Indexing:</b> We index past arm's-length deed transactions using county-level FHFA and S&P CoreLogic Case-Shiller repeat-sales indices directly to 2026.<br>
-        3. <b>Physical Inspection Calibration:</b> Unlike algorithmic portals that guess square footage, City Pretty pairs USGS 3DEP LiDAR footprints with inline 360° Google Street View facade verification to confirm true story count and finished living space.<br>
-        <div style="margin-top:10px;padding-top:8px;border-top:1px solid #e2e8f0;display:flex;gap:6px;flex-wrap:wrap;">
-          <button type="button" class="story-btn" onclick="exportExecutiveProspectus()" style="background:#0f172a;color:#fff;border:none;padding:5px 10px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:5px;cursor:pointer;">
-            📄 Export Property Prospectus (PDF)
-          </button>
-        </div>`;
-    } else {
-      const p = (selected && byId.get(selected)) ? byId.get(selected).properties : {};
-      const d = (selected && D.details[selected]) ? D.details[selected] : {};
-      const m = d.m || {};
-      const hv = m.hv ? Math.round(m.hv * 1.165) : 850000;
-      const rent = m.rent || 2800;
-      const vpsf = Math.round(hv / 1650);
-      return `<b>Neighborhood Automated Valuation Benchmark:</b><br><br>
-        • <b>Typical Neighborhood Market Value (2026):</b> <b style="font-size:14px;color:#0f172a;">$${hv.toLocaleString()}</b><br>
-        • <b>Typical Price per Sq Ft:</b> ~$${vpsf.toLocaleString()} / sq ft<br>
-        • <b>Typical Median Rent:</b> $${rent.toLocaleString()} / month<br>
-        • <b>Valuation Model:</b> ACS 5-Year Median Grounding with +16.5% HPI Compound Index to 2026<br><br>
-        <i>To inspect an institutional parcel-level valuation with deed repeat-sales, assessor calibration, and ±3.8% to ±6.5% confidence intervals, click any property parcel on the map.</i>`;
-    }
-  }
-
-  if (promptKey === "best_move" || qLower.includes("best") || qLower.includes("highest roi") || qLower.includes("playbook")) {
-    if (isHouse) {
-      const pb = computePropertyPlaybook(a, lotSqft, activeHouse.F || {}, null, ll, activeHouse.st);
-      const b = pb.best;
-      return `<b>Strategy Recommendation:</b> ${esc(b.title)}<br><br>
-        <b>Financial Economics:</b>
-        <ul style="margin:4px 0;padding-left:18px;">
-          <li><b>Net Equity Created:</b> +$${Math.round(b.equity).toLocaleString()}</li>
-          <li><b>Return per $1:</b> $${b.roi} / $1</li>
-          <li><b>Estimated Cost:</b> ~$${Math.round(b.cost).toLocaleString()}</li>
-          <li><b>Annual Cash Flow:</b> +$${Math.round(b.annualCashflow).toLocaleString()}/yr (Payback: ~${b.paybackYrs} yrs)</li>
-        </ul>
-        <b>Statutory Authority:</b> ${esc(b.statute)}.<br><br>
-        <b>Action Blueprint:</b><br>
-        1. ${esc(b.steps[0] || "Pull city pre-approved plans")}<br>
-        2. ${esc(b.steps[1] || "Verify statutory exemptions")}<br>
-        3. ${esc(b.steps[2] || "Submit ministerial application within 60 days")}
-        <div style="margin-top:10px;padding-top:8px;border-top:1px solid #e2e8f0;display:flex;gap:6px;flex-wrap:wrap;">
-          <button type="button" class="story-btn" onclick="exportExecutiveProspectus()" style="background:#0f172a;color:#fff;border:none;padding:5px 10px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:5px;cursor:pointer;">
-            📄 Export Prospectus (PDF)
-          </button>
-          <button type="button" class="story-btn" onclick="openResearchModal()" style="background:#0284c7;color:#fff;border:none;padding:5px 10px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:5px;cursor:pointer;">
-            📚 540-Study Research Library
-          </button>
-        </div>`;
-    } else {
-      return `For this neighborhood, the top municipal investment is <b>modernizing local parks and tree canopy</b>, returning an estimated <b>$1.80 to $2.40 per $1</b> of public capital invested. Select a specific property parcel to see parcel-level ADU, solar, and lot-split ROI.`;
-    }
-  }
-
-  if (promptKey === "adu_parking" || qLower.includes("parking") || qLower.includes("ab 2097") || qLower.includes("garage")) {
-    if (inWalkshed) {
-      return `<b>Yes, you are 100% exempt from adding parking!</b><br><br>
-        This property is located <b>${(nearestStn.distMi * 5280).toFixed(0)} ft (${nearestStn.distMi.toFixed(2)} mi)</b> from <b>${esc(nearestStn.name)}</b> station.<br><br>
-        Under <b>${isCa ? 'California Public Resources Code § 65863.2 (AB 2097)' : 'Transit Corridor Walkshed Statutory Parking Exemptions'}</b>, local jurisdictions cannot impose minimum parking requirements on residential developments within 0.5 miles of a major transit stop. This saves you an estimated <b>$35,000 to $55,000</b> by eliminating the need to construct a garage or covered parking space.`;
-    } else if (isCa) {
-      return `Under California State ADU Law (Gov. Code § 66314), parking cannot be required for an ADU if it is within 0.5 miles of any public transit stop, within an architecturally historic district, or if the unit is created by converting existing space (e.g. attached garage or basement). Furthermore, you do not have to replace garage parking converted into an ADU (Gov. Code § 66314(d)).`;
-    } else {
-      return `Under missing-middle and transit-oriented housing ordinances, accessory dwelling units built within 0.5 miles of transit corridors are generally exempt from off-street parking mandates.`;
-    }
-  }
-
-  if (promptKey === "solar_equity" || qLower.includes("solar") || qLower.includes("battery") || qLower.includes("clean energy") || qLower.includes("itc")) {
-    const usableRoof = Math.round(lotSqft * 0.25);
-    const kw = Math.max(3.5, +(usableRoof / 75).toFixed(1));
-    const grossCost = Math.round(kw * 2800);
-    const taxCredit = Math.round(grossCost * 0.30);
-    const netCost = grossCost - taxCredit;
-    const savYr = Math.round(kw * 1450 * 0.23);
-    const equity25Yr = Math.round(savYr * 25 - netCost);
-
-    const isCaNEM3 = isCAActive();
-    const batteryNeeded = isCaNEM3;
-    const grossTotal = grossCost + (batteryNeeded ? 12000 : 0);
-    const netCashLoan = grossTotal; // 0% IRC § 25D in 2026
-    const netTpoLease = Math.round(grossTotal * 0.70); // 30% IRC § 48E TPO rate
-
-    return `<b>2026 Rooftop Solar &amp; Microgrid Assessment:</b><br><br>
-      • <b>Recommended DC Capacity:</b> ${kw.toFixed(1)} kW DC (${Math.round(kw * 2.5)} premium monocrystalline modules)<br>
-      • <b>Annual Clean Generation:</b> ~${(kw * 1450).toLocaleString()} kWh / year<br>
-      • <b>Utility Bill Offset:</b> ~$${savYr.toLocaleString()} / year (@ $0.23/kWh retail benchmark)<br>
-      • <b>2026 Federal ITC (Cash/Loan Purchase):</b> <b>$0 direct tax credit</b> (IRC § 25D expired Dec 31, 2025 under One Big Beautiful Bill Act P.L. 119-21)<br>
-      • <b>Third-Party PPA / Solar Lease (§ 48E):</b> <b>30% commercial credit</b> available (~$${Math.round(grossTotal * 0.30).toLocaleString()} net cost reduction to ~$${netTpoLease.toLocaleString()})<br>
-      • <b>Battery Storage &amp; Tariff Rule:</b> ${isCaNEM3 ? '<b style="color:#b45309">⚠️ California NEM 3.0 / Solar Billing Tariff:</b> Avoided-cost export rates (~$0.055/kWh) make solar-only systems cash-flow negative. A 10–13.5 kWh battery storage system is strictly required for peak self-consumption arbitrage.' : 'Standard net metering tariff; battery storage optional for grid resilience.'}<br>
-      • <b>25-Year Projected Equity Lift:</b> <b style="color:#15803d">+ $${Math.round(savYr * 25 - netTpoLease).toLocaleString()}</b> cumulative value added.`;
-  }
-
-  if (promptKey === "lot_split" || qLower.includes("split") || qLower.includes("sb 9") || qLower.includes("subdivision") || qLower.includes("duplex")) {
-    const stCode = (typeof activeState === "function" ? activeState() : "CA");
-    const curFips = (typeof activeFips === "function" ? activeFips() : "06037");
-    const TX_METROS = new Set(["48201", "48113", "48453", "48029", "48439", "48141"]);
-    const isTxMetro = TX_METROS.has(curFips);
-    const munPop = stCode === "TX" ? (isTxMetro ? 2300000 : 35000) : 75000;
-    const cntyPop = stCode === "TX" ? (isTxMetro ? 4800000 : 220000) : 500000;
-
-    const parcelCtx = {
-      parcel_id: a.AIN || "CURRENT_PARCEL",
-      state_code: stCode,
-      county_fips: curFips,
-      municipality_pop: munPop,
-      county_pop: cntyPop,
-      base_zoning_code: a.ZoneCode || "R-1",
-      is_commercial_or_mixed_use: /comm|c-|c1|c2|cbd|mixed/i.test(a.ZoneCode || a.UseType || ""),
-      is_single_family_residential: !/comm|c-|c1|c2|cbd|mixed/i.test(a.ZoneCode || a.UseType || ""),
-      dist_to_heavy_rail_mi: inWalkshed ? nearestStn.distMi : null,
-      dist_to_frequent_bus_or_brt_mi: inWalkshed ? 0.2 : null,
-      exclusions: {
-        historic_district_hpoz: false, coastal_commission_or_sma: false, fema_100yr_floodway: false,
-        calfire_or_state_vhfhsz: false, airport_noise_or_runway_zone: false, williamson_or_ag_preserve: false,
-        public_or_tribal_land: false, everglades_or_wekiva_or_trpa: false, population_threshold_ineligible: false
-      }
-    };
-    const statutoryEval = evaluateByRightHousing(parcelCtx);
-
-    if (stCode === "TX" && statutoryEval.statutory_exclusions.population_threshold_ineligible) {
-      return `<b>Texas Statutory Housing Evaluation (SB 840 / SB 15):</b><br><br>
-        <span style="color:#b45309;font-weight:700;">⚠️ Statutory Population Gating Ineligible:</span> Texas SB 840 (by-right commercial-to-residential) and SB 15 (small-lot subdivision) strictly apply only within municipalities over 150,000 population inside counties over 300,000. In smaller Texas municipalities, discretionary municipal planning commission approval is required.`;
-    }
-
-    if (statutoryEval.applicable_statutes.length > 0) {
-      const topStatute = statutoryEval.applicable_statutes[0];
-      return `<b>Statutory By-Right Housing Rights Unlocked:</b><br><br>
-        • <b>Governing Statute:</b> ${esc(topStatute.citation)}<br>
-        • <b>By-Right Density:</b> Up to <b>${topStatute.max_units_by_right} units</b> ministerially without CEQA or discretionary planning commission hearings.<br>
-        • <b>Maximum Height / FAR:</b> ${topStatute.max_height_ft ? `${topStatute.max_height_ft} ft` : "Baseline zoning"} ${topStatute.max_far ? `· ${topStatute.max_far} FAR` : ""}<br>
-        • <b>Mandatory Parking:</b> <b>${topStatute.min_parking_spaces_per_unit} parking spaces per unit</b> (zero parking mandate near transit saves ~$45,000/space)<br>
-        ${topStatute.tax_exemption_pct > 0 ? `• <b>Ad Valorem Tax Exemption:</b> <b>${(topStatute.tax_exemption_pct * 100).toFixed(0)}% property tax exemption</b> on qualified affordable units.<br>` : ""}<br>
-        <b>Deeded Lot Size:</b> ${lotSqft.toLocaleString()} sq ft &middot; Parcel qualifies for expedited administrative permitting.`;
-    }
-
-    if (lotSqft >= 4800) {
-      return `<b>Lot Split Feasibility: Highly Favorable!</b><br><br>
-        With a deeded area of <b>${lotSqft.toLocaleString()} sq ft</b>, this parcel exceeds the standard 4,800 sq ft threshold required for a statutory two-lot urban subdivision.<br><br>
-        ${isCa ? `Under <b>California Senate Bill 9 (Gov. Code § 66411.7)</b>, this parcel qualifies for an administrative, ministerial lot split into two separate deeded parcels (minimum 1,200 sq ft per lot, neither lot smaller than 40% of the total). You can build up to 2 homes on each lot (4 total units) without discretionary planning hearings, CEQA review, or neighbor appeals.` : `Under local missing-middle subdivision statutes, parcels over 4,800 sq ft can typically be divided into two fee-simple lots, instantly unlocking six-figure unencumbered land equity.`}`;
-    } else {
-      return `This lot is currently <b>${lotSqft.toLocaleString()} sq ft</b>. For lots under 4,800 sq ft, a fee-simple subdivision is tight, but an attached or detached Accessory Dwelling Unit (ADU) + Junior ADU (JADU) remains completely allowable by right without subdividing.`;
-    }
-  }
-
-  if (promptKey === "p3_roi" || qLower.includes("p3") || qLower.includes("transit") || qLower.includes("rail") || qLower.includes("station")) {
-    const pipe = (typeof getMetroPipeline === "function") ? getMetroPipeline(activeFips()) : null;
-    if (pipe) {
-      return `<b>Active Transit Corridor: ${esc(pipe.title)}</b><br><br>
-        • <b>Lead Sponsoring Agency:</b> ${esc(pipe.agency)}<br>
-        • <b>Status:</b> ${esc(pipe.status)}<br>
-        • <b>P3 Delivery Model:</b> 99-year ground lease concession with private development consortium.<br>
-        • <b>Projected Economic Return:</b> $1.65 to $2.20 of property value lift per $1 invested.<br>
-        • <b>Complementary Infrastructure:</b> Protected rail-with-trail cycleway, 16 DC fast EV charging stalls, and urban tree canopy cooling.`;
-    } else {
-      return `City Pretty tracks 16 major metropolitan transit expansion corridors across 86 stations. Browse our transit layer to inspect corridor walksheds and P3 joint development ROI.`;
-    }
-  }
-
-  if (qLower.includes("art") || qLower.includes("mural") || qLower.includes("culture")) {
-    return `<b>Empirical Impact of Public Art &amp; Creative Placemaking:</b><br><br>
-      Across 55 peer-reviewed studies in our empirical library (including <i>Markusen &amp; Gadwa, National Endowment for the Arts</i>, and <i>Americans for the Arts AEP6</i>), public art and curated murals generate:<br>
-      • <b>+8.4% to +14.2%</b> commercial property valuation lift within 1,000 feet.<br>
-      • <b>34% reduction</b> in storefront commercial vacancy rates.<br>
-      • <b>4.8:1 direct economic multiplier</b> in local dining and retail spending per art event attendee.<br>
-      • Curated murals reduce illegal tagging, saving municipal abatement costs while creating neighborhood visual identity.${citeBlock}`;
-  }
-
-  if (promptKey === "tree_canopy" || qLower.includes("tree") || qLower.includes("canopy") || qLower.includes("ndvi") || qLower.includes("satellite") || qLower.includes("heat")) {
-    return `<b>Empirical Analysis of Satellite Tree Canopy &amp; Heat Mitigation:</b><br><br>
-      Longitudinal satellite NDVI and high-resolution thermal imaging across 65 studies (including <i>Donovan &amp; Butry, USDA Forest Service</i> and <i>Sander et al., Ecological Economics</i>) establish clear market trends:<br>
-      • <b>+$7,130 price premium</b> per home with mature street trees, with a <b>+$12,828 spillover dividend</b> across neighboring properties within 100 feet.<br>
-      • Satellite canopy cover density of &gt;30% reduces summer surface temperatures by <b>4.2°F to 9.0°F</b>, slashing residential air conditioning electrical loads by <b>18% to 26%</b>.<br>
-      • Properties in the top quartile of satellite greenness spend <b>18 fewer days on market</b> and trade at a +4.5% premium over regional list price.${citeBlock}`;
-  }
-
-  if (promptKey === "property_tax" || qLower.includes("reassessment") || qLower.includes("property tax") || (qLower.includes("tax") && (qLower.includes("adu") || qLower.includes("addition") || qLower.includes("raise") || qLower.includes("increase") || qLower.includes("prop 13") || qLower.includes("roll")))) {
-    if (isCa) {
-      return `<b>Property Tax Assessment &amp; ADUs in California:</b><br><br>
-        • <b>No Full Home Reassessment:</b> Under California Proposition 13 (Rev. &amp; Tax Code § 70), building an ADU or home addition <b>does NOT trigger a reassessment</b> of your existing home or land.<br>
-        • <b>Blended Assessment for New Construction:</b> Only the incremental value of the new construction is added to the tax roll (typically based on actual construction cost, e.g., ~$150,000–$200,000 for a detached unit).<br>
-        • <b>Annual Property Tax Impact:</b> At California's 1.0% base tax rate plus typical local bond levies (~1.15%–1.25% total), adding a $180,000 ADU increases your annual property tax bill by only <b>~$2,100 to $2,250 / year ($175–$187/mo)</b>.<br>
-        • <b>Net Cash Flow:</b> With typical urban ADU market rents ranging from <b>$2,200 to $2,950 / month</b>, your gross rental income exceeds the incremental property tax bill by more than <b>12x</b>.`;
-    } else {
-      return `<b>Property Tax Assessment &amp; Home Additions:</b><br><br>
-        • <b>Incremental Construction Valuation:</b> County assessors assess new detached structures or additions based on newly permitted square footage and replacement cost, rather than triggering a complete reappraisal of the primary dwelling.<br>
-        • <b>Homestead Protection:</b> In states with homestead caps (e.g. Florida Save Our Homes 3% cap, Texas Tax Code § 23.23 10% cap, Michigan Headlee Amendment / SEV caps), your existing residential base remains legally protected.<br>
-        • <b>Net Operating Margin:</b> Rental revenue from a secondary dwelling unit typically exceeds annual incremental property tax liabilities by 8x to 14x.`;
-    }
-  }
-
-  if (promptKey === "adu_cost" || (qLower.includes("cost") && (qLower.includes("adu") || qLower.includes("build") || qLower.includes("how much")))) {
-    return `<b>Turnkey ADU Construction Costs &amp; Financial Payback:</b><br><br>
-      • <b>Detached 2-Bed ADU (750–800 sq ft):</b> ~$195,000 to $260,000 turnkey ($260–$325 / sq ft).<br>
-      • <b>Attached Garage Conversion (350–450 sq ft):</b> ~$95,000 to $145,000 turnkey ($235–$280 / sq ft).<br>
-      • <b>Junior ADU (JADU, up to 500 sq ft inside main footprint):</b> ~$45,000 to $75,000.<br>
-      • <b>Monthly Rental Revenue:</b> $1,900 to $2,950 / month (depending on metro and bedroom count).<br>
-      • <b>Annual Net Operating Income (NOI):</b> ~$21,000 to $31,500 / year (after property tax, insurance, and maintenance reserve).<br>
-      • <b>Payback Period:</b> ~6.5 to 8.5 years, creating immediate <b>+$180,000 to +$290,000 in unencumbered home equity</b> upon completion.`;
-  }
-
-  if (promptKey === "historic_trends" || qLower.includes("tax") || qLower.includes("historic") || qLower.includes("trend") || qLower.includes("spend") || qLower.includes("high line") || qLower.includes("beltline")) {
-    return `<b>Historical Municipal Capital &amp; Local Tax Reinvestment Trends:</b><br><br>
-      Longitudinal audits of 60 landmark US municipal capital investments prove that targeted public capital expenditure reliably surges surrounding property values and tax bases:<br>
-      • <b>New York High Line:</b> $115M public park investment catalyzed <b>$2.2B in private development</b> and a <b>+103% property value surge</b> in the surrounding 3-block corridor.<br>
-      • <b>Atlanta BeltLine TAD:</b> $450M in public Tax Allocation District bonds unlocked <b>$8.2B in private capital</b> (18:1 ratio) with <b>+24% higher home appreciation</b> than the Atlanta city baseline.<br>
-      • <b>Indianapolis Cultural Trail:</b> $63M capital project drove <b>+$1.01B in assessed property values</b> (+1,600% ROI) and 11,000+ new jobs.<br>
-      • <b>Oklahoma City MAPS:</b> Dedicated 1-cent municipal sales tax ($3.5B over 3 decades) transformed downtown and increased countywide property tax rolls by <b>+280%</b> without debt.${citeBlock}`;
-  }
-
-  const aiActionButtons = `
-    <div style="margin-top:10px;padding-top:8px;border-top:1px solid #e2e8f0;display:flex;gap:6px;flex-wrap:wrap;">
-      <button type="button" class="story-btn" onclick="exportExecutiveProspectus()" style="background:#0f172a;color:#fff;border:none;padding:5px 10px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:5px;cursor:pointer;">
-        📄 Export Prospectus (PDF)
-      </button>
-      <button type="button" class="story-btn" onclick="openResearchModal()" style="background:#0284c7;color:#fff;border:none;padding:5px 10px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:5px;cursor:pointer;">
-        📚 540-Study Research Library
-      </button>
-      <button type="button" class="story-btn" onclick="openHistoricalTrendsModal()" style="background:#059669;color:#fff;border:none;padding:5px 10px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:5px;cursor:pointer;">
-        📈 Historic Trends
-      </button>
-    </div>
-  `;
-
-  return `Based on our verified GIS cadastral records for <b>${esc(a.SitusFullAddress || countyOf())}</b>, this location benefits from statutory by-right residential infill rights, favorable clean energy irradiance, and public capital multipliers.<br><br>
-    Our empirical library of 540+ studies confirms strong return-per-$1 metrics for:<br>
-    • <b>Transit Walkshed Infill (AB 2097 zero parking savings)</b><br>
-    • <b>Urban Tree Canopy &amp; Satellite Greenness (+3% to +9% premium)</b><br>
-    • <b>Public Art &amp; Creative Placemaking (+8% to +14% commercial lift)</b><br>
-    • <b>School Facility Capital Bonds ($1.50 per $1 bond spending)</b>${citeBlock}${aiActionButtons}`;
 }
 
 function switchAccuracyTab(tab) {

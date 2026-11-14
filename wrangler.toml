@@ -2,6 +2,26 @@ name = "city-pretty-api-proxy"
 main = "workers/api-proxy.ts"
 compatibility_date = "2026-11-08"
 
-# Production secrets: set via `wrangler secret put LLM_API_KEY` and `wrangler secret put GOOGLE_MAPS_KEY`
+# Secrets (never in this file):
+#   wrangler secret put ANTHROPIC_API_KEY   # the AI advisor (finish askAdvisorModel in workers/api-proxy.ts first)
+#   wrangler secret put GOOGLE_MAPS_KEY     # Street View photos
+# After deploying, put the Worker's URL in app/config.js (workerUrl).
+
 [vars]
 ENVIRONMENT = "production"
+
+# Per-visitor limits. Approximate and counted per Cloudflare location; period must be 10 or 60 seconds.
+# namespace_id is any positive integer unique within your Cloudflare account.
+[[ratelimits]]
+name = "AI_RATE_LIMITER"
+namespace_id = "1001"
+  [ratelimits.simple]
+  limit = 6
+  period = 60
+
+[[ratelimits]]
+name = "STREETVIEW_RATE_LIMITER"
+namespace_id = "1002"
+  [ratelimits.simple]
+  limit = 60
+  period = 60
