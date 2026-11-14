@@ -15468,6 +15468,28 @@ const VPD_WALK = ["bus_shelters", "transit_shade", "protected_bike", "crosswalks
 // Grade D/U (structural planning assumptions): SE = 0.125 * v, 95% CI margin = 1.96 * SE = 24.5%
 const HEDONIC_SE = { A: 0.041, B: 0.063, C: 0.087, D: 0.125, U: 0.125 };
 
+
+// EPA Level IV Ecoregions Microclimate Normalization Table
+const ECOREGIONS_TABLE = {
+  mediterranean_coastal: { name: "SoCal Coastal Plain", targetCanopy: 24, coolingFactor: 1.0 },
+  mediterranean_interior: { name: "Interior Valleys / Inland Empire", targetCanopy: 20, coolingFactor: 1.25 },
+  desert_arid: { name: "Mojave & Sonoran Desert Basin", targetCanopy: 12, coolingFactor: 1.45 },
+  eastern_temperate: { name: "Eastern Temperate / Great Lakes", targetCanopy: 36, coolingFactor: 1.10 },
+  pacific_northwest: { name: "Puget Lowland & Willamette Valley", targetCanopy: 38, coolingFactor: 0.90 },
+  gulf_subtropical: { name: "Gulf Coastal Plain & South Florida", targetCanopy: 32, coolingFactor: 1.30 }
+};
+
+function resolveEcoregion(lat, lng) {
+  if (lat == null || lng == null) return ECOREGIONS_TABLE.eastern_temperate;
+  if (lat >= 32.5 && lat <= 35.5 && lng >= -120.5 && lng <= -116.5) {
+    return lng < -118.0 ? ECOREGIONS_TABLE.mediterranean_coastal : ECOREGIONS_TABLE.mediterranean_interior;
+  }
+  if (lat >= 31.0 && lat <= 37.0 && lng >= -117.0 && lng <= -111.0) return ECOREGIONS_TABLE.desert_arid;
+  if (lat >= 42.0 && lat <= 49.0 && lng >= -125.0 && lng <= -120.0) return ECOREGIONS_TABLE.pacific_northwest;
+  if (lat >= 24.5 && lat <= 32.0 && lng >= -98.0 && lng <= -80.0) return ECOREGIONS_TABLE.gulf_subtropical;
+  return ECOREGIONS_TABLE.eastern_temperate;
+}
+
 function calibrateVpd(v, grade, id, m) {
   const f = x => x >= 10 ? String(Math.round(x)) : x >= 1 ? x.toFixed(1) : x.toFixed(2);
   if (v == null || isNaN(v) || v <= 0) return { low: "–", high: "–", badge: "", str: "–", estStr: "–", adjStr: "", point: null, adj: null, factor: 1, notes: [], band: 0, se: 0, ciMargin: 0 };
@@ -22744,16 +22766,65 @@ function generateAiAnswer(q, promptKey = null) {
     const savYr = Math.round(kw * 1450 * 0.23);
     const equity25Yr = Math.round(savYr * 25 - netCost);
 
-    return `<b>Rooftop Solar &amp; Electrification Assessment:</b><br><br>
-      • <b>Recommended DC Capacity:</b> ${kw.toFixed(1)} kW DC (${Math.round(kw * 2.5)} premium panels)<br>
+    const isCaNEM3 = isCAActive();
+    const batteryNeeded = isCaNEM3;
+    const grossTotal = grossCost + (batteryNeeded ? 12000 : 0);
+    const netCashLoan = grossTotal; // 0% IRC § 25D in 2026
+    const netTpoLease = Math.round(grossTotal * 0.70); // 30% IRC § 48E TPO rate
+
+    return `<b>2026 Rooftop Solar &amp; Microgrid Assessment:</b><br><br>
+      • <b>Recommended DC Capacity:</b> ${kw.toFixed(1)} kW DC (${Math.round(kw * 2.5)} premium monocrystalline modules)<br>
       • <b>Annual Clean Generation:</b> ~${(kw * 1450).toLocaleString()} kWh / year<br>
-      • <b>Utility Bill Offset:</b> ~$${savYr.toLocaleString()} / year (@ $0.23/kWh)<br>
-      • <b>30% Federal ITC (IRA § 25D):</b> -$${taxCredit.toLocaleString()} direct tax credit<br>
-      • <b>Net Initial Investment:</b> ~$${netCost.toLocaleString()} (Payback in ${(netCost / savYr).toFixed(1)} years)<br>
-      • <b>25-Year Cumulative Equity:</b> <b style="color:#15803d">+ $${equity25Yr.toLocaleString()}</b> net savings. Pair with a 10–13.5 kWh battery storage system to maximize time-of-use peak arbitrage.`;
+      • <b>Utility Bill Offset:</b> ~$${savYr.toLocaleString()} / year (@ $0.23/kWh retail benchmark)<br>
+      • <b>2026 Federal ITC (Cash/Loan Purchase):</b> <b>$0 direct tax credit</b> (IRC § 25D expired Dec 31, 2025 under One Big Beautiful Bill Act P.L. 119-21)<br>
+      • <b>Third-Party PPA / Solar Lease (§ 48E):</b> <b>30% commercial credit</b> available (~$${Math.round(grossTotal * 0.30).toLocaleString()} net cost reduction to ~$${netTpoLease.toLocaleString()})<br>
+      • <b>Battery Storage &amp; Tariff Rule:</b> ${isCaNEM3 ? '<b style="color:#b45309">⚠️ California NEM 3.0 / Solar Billing Tariff:</b> Avoided-cost export rates (~$0.055/kWh) make solar-only systems cash-flow negative. A 10–13.5 kWh battery storage system is strictly required for peak self-consumption arbitrage.' : 'Standard net metering tariff; battery storage optional for grid resilience.'}<br>
+      • <b>25-Year Projected Equity Lift:</b> <b style="color:#15803d">+ $${Math.round(savYr * 25 - netTpoLease).toLocaleString()}</b> cumulative value added.`;
   }
 
   if (promptKey === "lot_split" || qLower.includes("split") || qLower.includes("sb 9") || qLower.includes("subdivision") || qLower.includes("duplex")) {
+    const stCode = (typeof activeState === "function" ? activeState() : "CA");
+    const curFips = (typeof activeFips === "function" ? activeFips() : "06037");
+    const TX_METROS = new Set(["48201", "48113", "48453", "48029", "48439", "48141"]);
+    const isTxMetro = TX_METROS.has(curFips);
+    const munPop = stCode === "TX" ? (isTxMetro ? 2300000 : 35000) : 75000;
+    const cntyPop = stCode === "TX" ? (isTxMetro ? 4800000 : 220000) : 500000;
+
+    const parcelCtx = {
+      parcel_id: a.AIN || "CURRENT_PARCEL",
+      state_code: stCode,
+      county_fips: curFips,
+      municipality_pop: munPop,
+      county_pop: cntyPop,
+      base_zoning_code: a.ZoneCode || "R-1",
+      is_commercial_or_mixed_use: /comm|c-|c1|c2|cbd|mixed/i.test(a.ZoneCode || a.UseType || ""),
+      is_single_family_residential: !/comm|c-|c1|c2|cbd|mixed/i.test(a.ZoneCode || a.UseType || ""),
+      dist_to_heavy_rail_mi: inWalkshed ? nearestStn.distMi : null,
+      dist_to_frequent_bus_or_brt_mi: inWalkshed ? 0.2 : null,
+      exclusions: {
+        historic_district_hpoz: false, coastal_commission_or_sma: false, fema_100yr_floodway: false,
+        calfire_or_state_vhfhsz: false, airport_noise_or_runway_zone: false, williamson_or_ag_preserve: false,
+        public_or_tribal_land: false, everglades_or_wekiva_or_trpa: false, population_threshold_ineligible: false
+      }
+    };
+    const statutoryEval = evaluateByRightHousing(parcelCtx);
+
+    if (stCode === "TX" && statutoryEval.statutory_exclusions.population_threshold_ineligible) {
+      return `<b>Texas Statutory Housing Evaluation (SB 840 / SB 15):</b><br><br>
+        <span style="color:#b45309;font-weight:700;">⚠️ Statutory Population Gating Ineligible:</span> Texas SB 840 (by-right commercial-to-residential) and SB 15 (small-lot subdivision) strictly apply only within municipalities over 150,000 population inside counties over 300,000. In smaller Texas municipalities, discretionary municipal planning commission approval is required.`;
+    }
+
+    if (statutoryEval.applicable_statutes.length > 0) {
+      const topStatute = statutoryEval.applicable_statutes[0];
+      return `<b>Statutory By-Right Housing Rights Unlocked:</b><br><br>
+        • <b>Governing Statute:</b> ${esc(topStatute.citation)}<br>
+        • <b>By-Right Density:</b> Up to <b>${topStatute.max_units_by_right} units</b> ministerially without CEQA or discretionary planning commission hearings.<br>
+        • <b>Maximum Height / FAR:</b> ${topStatute.max_height_ft ? `${topStatute.max_height_ft} ft` : "Baseline zoning"} ${topStatute.max_far ? `· ${topStatute.max_far} FAR` : ""}<br>
+        • <b>Mandatory Parking:</b> <b>${topStatute.min_parking_spaces_per_unit} parking spaces per unit</b> (zero parking mandate near transit saves ~$45,000/space)<br>
+        ${topStatute.tax_exemption_pct > 0 ? `• <b>Ad Valorem Tax Exemption:</b> <b>${(topStatute.tax_exemption_pct * 100).toFixed(0)}% property tax exemption</b> on qualified affordable units.<br>` : ""}<br>
+        <b>Deeded Lot Size:</b> ${lotSqft.toLocaleString()} sq ft &middot; Parcel qualifies for expedited administrative permitting.`;
+    }
+
     if (lotSqft >= 4800) {
       return `<b>Lot Split Feasibility: Highly Favorable!</b><br><br>
         With a deeded area of <b>${lotSqft.toLocaleString()} sq ft</b>, this parcel exceeds the standard 4,800 sq ft threshold required for a statutory two-lot urban subdivision.<br><br>
