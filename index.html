@@ -16784,9 +16784,11 @@ function zoningSection(m) {
   if (st === "CA" || isCAActive()) {
     L_.push("<b>ADUs:</b> California Gov. Code § 66310 mandates cities allow by-right at least an 800 sq ft ADU plus a junior ADU (JADU) on single-family lots, and up to 2 detached ADUs on multifamily lots.");
     if (z && (z.sh["single-family"] || 0) > 0) L_.push("<b>SB 9 (Duplex & Lot Split):</b> Single-family lots can hold up to two primary homes and be subdivided into two lots by right, exempt from CEQA and local discretionary review.");
+    L_.push("<b>SB 79 (Transit Rail Upzoning, Eff. July 1, 2026):</b> Authorizes by-right multifamily upzoning within ½ mile of heavy and light rail stations (Tier 1: up to 75 ft / 120 du/acre; Tier 2: up to 55 ft / 80 du/acre).");
     L_.push("<b>AB 2097 (Parking Deregulation):</b> Eliminates mandatory minimum parking requirements for any residential or commercial project within ½ mile of a major transit stop.");
     L_.push("<b>AB 2011 / SB 6 (Commercial Infill):</b> Allows multifamily residential development by right on commercially zoned land along commercial corridors.");
     L_.push("<b>SB 4 (Affordable Housing on Faith Lands):</b> Permits 100% affordable housing by right on land owned by religious institutions and nonprofit colleges.");
+    L_.push("<b>6th-Cycle Housing Elements (Gov. Code § 65583.2):</b> Statutory by-right density overrides for sites inventory parcels (2021–2029 cycle), superseding legacy SCAG 2019 baseline classifications.");
   } else if (st === "WA") {
     L_.push("<b>HB 1110 (Middle Housing Reform):</b> Legalizes duplexes, fourplexes, and sixplexes across all residential zones in cities over 25,000 and near major transit stops.");
     L_.push("<b>HB 1337 (ADU Reform):</b> Requires municipalities to permit at least two ADUs per residential lot with zero owner-occupancy requirements and no impact fee discrimination.");
@@ -22184,6 +22186,9 @@ function syncHash(id) {
   const metric = $("#metric") ? $("#metric").value : "top_vpd";
   if (metric && metric !== "top_vpd") params.set("metric", metric);
   if (typeof roiMode !== "undefined" && roiMode && roiMode !== "base") params.set("roi", roiMode);
+  const activePresetBtn = document.querySelector(".preset-btn.active");
+  const preset = activePresetBtn ? activePresetBtn.dataset.preset : "streets";
+  if (preset && preset !== "streets") params.set("preset", preset);
   if (typeof compareList !== "undefined" && compareList && compareList.length) {
     params.set("compare", compareList.join(","));
   }
@@ -22211,6 +22216,7 @@ function checkHash() {
   const evid = params.get("evid");
   const metric = params.get("metric");
   const roi = params.get("roi");
+  const preset = params.get("preset");
   const compare = params.get("compare");
 
   if (evid && $("#evid")) { $("#evid").value = evid; }
@@ -22219,6 +22225,9 @@ function checkHash() {
     roiMode = roi;
     const sel = document.getElementById("roi-mode");
     if (sel) sel.value = roi;
+  }
+  if (preset && typeof applyPreset === "function") {
+    applyPreset(preset);
   }
   if (compare && typeof compareList !== "undefined") {
     compareList = compare.split(",").filter(Boolean);
@@ -23985,7 +23994,7 @@ async function init() {
   { if (typeof syncHeaderDomToCounty === "function") syncHeaderDomToCounty("06037"); }
 
   // Wire Presets & Top Actions
-  document.querySelectorAll(".preset-btn").forEach(b => b.onclick = () => applyPreset(b.dataset.preset));
+  document.querySelectorAll(".preset-btn").forEach(b => b.onclick = () => { applyPreset(b.dataset.preset); syncHash(selected); });
   const rBtn = $("#btn-renter-header"); if (rBtn) rBtn.onclick = toggleRenterView;
   const cBtn = $("#btn-compare-header"); if (cBtn) cBtn.onclick = openCompareDrawer;
   const mBtn = $("#btn-methods-header"); if (mBtn) mBtn.onclick = openMethodsModal;
