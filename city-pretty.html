@@ -25088,6 +25088,34 @@ async function init() {
   matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => { drawContext(); restyle(); });
 }
 
+// Global Modal Accessibility: Escape key & Backdrop click dismiss
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    if (typeof hideAddr === "function") hideAddr();
+    if (typeof closeProspectusModal === "function") closeProspectusModal();
+    if (typeof closeAccuracyModal === "function") closeAccuracyModal();
+    if (typeof closeCompareDrawer === "function") closeCompareDrawer();
+    if (typeof closeMethodsModal === "function") closeMethodsModal();
+    if (typeof closeAiAdvisor === "function") closeAiAdvisor();
+    if (typeof closeResearchModal === "function") closeResearchModal();
+    if (typeof closeHistoricalTrendsModal === "function") closeHistoricalTrendsModal();
+  }
+});
+
+document.addEventListener("click", (e) => {
+  if (e.target && e.target.classList && e.target.classList.contains("overlay-modal")) {
+    const id = e.target.id;
+    if (id === "prospectus-modal" && typeof closeProspectusModal === "function") closeProspectusModal();
+    else if (id === "accuracy-modal" && typeof closeAccuracyModal === "function") closeAccuracyModal();
+    else if (id === "compare-modal" && typeof closeCompareDrawer === "function") closeCompareDrawer();
+    else if (id === "methods-modal" && typeof closeMethodsModal === "function") closeMethodsModal();
+    else if (id === "ai-advisor-modal" && typeof closeAiAdvisor === "function") closeAiAdvisor();
+    else if (id === "research-modal" && typeof closeResearchModal === "function") closeResearchModal();
+    else if (id === "trends-modal" && typeof closeHistoricalTrendsModal === "function") closeHistoricalTrendsModal();
+    else e.target.hidden = true;
+  }
+});
+
 
 // --- Interactive Leaflet Map Popup for Every House ---
 let houseMapPopup = null;
