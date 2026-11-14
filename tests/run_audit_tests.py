@@ -76,6 +76,7 @@ def run_tests():
             validateParcelImageryVintage,
             estimatePropertyMarketValue,
             getHpiMultiplier,
+            STATE_BASELINE_PROFILES,
             normalizeArcGisFeature
         }};
         return true;
@@ -382,6 +383,16 @@ def run_tests():
             facts: { bldg: 1800, beds: 3, baths: 2, yb: 1950 }
         });
 
+        // 9E: 50-State Baseline Calibration (Ohio vs Colorado)
+        const ohioHome = estimatePropertyMarketValue({
+            attributes: {}, lotSqft: 8000, stateCode: "OH",
+            facts: { bldg: 1650, beds: 3, baths: 2, yb: 1980 }
+        });
+        const coloradoHome = estimatePropertyMarketValue({
+            attributes: {}, lotSqft: 7500, stateCode: "CO",
+            facts: { bldg: 2000, beds: 3, baths: 2, yb: 1995 }
+        });
+
         return {
             mult2018,
             repeatSaleValue: repeatSale.estimatedValue,
@@ -389,7 +400,11 @@ def run_tests():
             michiganMethod: michiganSEV.valuationMethod,
             floridaJvValue: floridaJV.estimatedValue,
             largeLotLivingSqft: largeLot.livingSqft,
-            largeLotValue: largeLot.estimatedValue
+            largeLotValue: largeLot.estimatedValue,
+            ohioValue: ohioHome.estimatedValue,
+            ohioVpsf: ohioHome.vpsf,
+            coloradoValue: coloradoHome.estimatedValue,
+            coloradoVpsf: coloradoHome.vpsf
         };
     })()
     """)
@@ -405,7 +420,12 @@ def run_tests():
     # Large lot must use 1800 sq ft living, NOT 10,000 sq ft
     assert t9["largeLotLivingSqft"] == 1800
     assert 340000 <= t9["largeLotValue"] <= 430000
-    print("  -> PASS: AVM valuation matches Zillow benchmarks across repeat-sales, Michigan SEV, Florida JV & non-linear lot scaling.")
+    # Ohio home (~$145/sqft baseline) vs Colorado home (~$315/sqft baseline)
+    assert 200000 <= t9["ohioValue"] <= 280000
+    assert 130 <= t9["ohioVpsf"] <= 170
+    assert 500000 <= t9["coloradoValue"] <= 650000
+    assert 270 <= t9["coloradoVpsf"] <= 340
+    print("  -> PASS: AVM valuation matches Zillow benchmarks across repeat-sales, Michigan SEV, Florida JV, non-linear lot scaling & 50-state baselines.")
 
     ws.close()
     print("========================================================")

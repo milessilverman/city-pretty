@@ -43,18 +43,61 @@ const HPI_INDEX_TO_2026 = {
   1980: 9.800
 };
 
-// Regional baseline fallback values when neighborhood Census tract data is absent
+// Regional baseline fallback values across all 50 states + DC + PR when neighborhood Census tract data is absent
 const STATE_BASELINE_PROFILES = {
-  CA: { medianHv: 880000, medianVpsf: 540, refSqft: 1650, refLot: 6200 },
-  MI: { medianHv: 325000, medianVpsf: 195, refSqft: 1700, refLot: 7500 },
-  TX: { medianHv: 315000, medianVpsf: 185, refSqft: 2000, refLot: 7200 },
-  FL: { medianHv: 420000, medianVpsf: 260, refSqft: 1750, refLot: 7000 },
-  NY: { medianHv: 650000, medianVpsf: 420, refSqft: 1550, refLot: 5000 },
-  WA: { medianHv: 640000, medianVpsf: 380, refSqft: 1850, refLot: 6800 },
-  IL: { medianHv: 310000, medianVpsf: 190, refSqft: 1650, refLot: 6000 },
-  NC: { medianHv: 340000, medianVpsf: 200, refSqft: 1850, refLot: 8500 },
-  AZ: { medianHv: 440000, medianVpsf: 250, refSqft: 1800, refLot: 6500 },
-  DEFAULT: { medianHv: 360000, medianVpsf: 210, refSqft: 1750, refLot: 7000 }
+  AL: { medianHv: 235000, medianVpsf: 145, refSqft: 1850, refLot: 12000 },
+  AK: { medianHv: 365000, medianVpsf: 215, refSqft: 1750, refLot: 10000 },
+  AZ: { medianHv: 445000, medianVpsf: 250, refSqft: 1800, refLot: 6800 },
+  AR: { medianHv: 210000, medianVpsf: 130, refSqft: 1750, refLot: 11000 },
+  CA: { medianHv: 885000, medianVpsf: 545, refSqft: 1650, refLot: 6200 },
+  CO: { medianHv: 565000, medianVpsf: 315, refSqft: 2000, refLot: 7500 },
+  CT: { medianHv: 415000, medianVpsf: 240, refSqft: 1850, refLot: 18000 },
+  DE: { medianHv: 370000, medianVpsf: 215, refSqft: 1900, refLot: 9500 },
+  DC: { medianHv: 680000, medianVpsf: 510, refSqft: 1450, refLot: 3200 },
+  FL: { medianHv: 415000, medianVpsf: 255, refSqft: 1750, refLot: 7200 },
+  GA: { medianHv: 340000, medianVpsf: 185, refSqft: 2100, refLot: 14000 },
+  HI: { medianHv: 895000, medianVpsf: 650, refSqft: 1450, refLot: 6500 },
+  ID: { medianHv: 465000, medianVpsf: 255, refSqft: 1950, refLot: 8000 },
+  IL: { medianHv: 295000, medianVpsf: 185, refSqft: 1650, refLot: 6500 },
+  IN: { medianHv: 245000, medianVpsf: 145, refSqft: 1750, refLot: 8500 },
+  IA: { medianHv: 225000, medianVpsf: 145, refSqft: 1600, refLot: 8500 },
+  KS: { medianHv: 235000, medianVpsf: 140, refSqft: 1800, refLot: 9000 },
+  KY: { medianHv: 215000, medianVpsf: 135, refSqft: 1700, refLot: 10500 },
+  LA: { medianHv: 220000, medianVpsf: 135, refSqft: 1750, refLot: 8000 },
+  ME: { medianHv: 395000, medianVpsf: 245, refSqft: 1650, refLot: 30000 },
+  MD: { medianHv: 435000, medianVpsf: 245, refSqft: 1850, refLot: 9000 },
+  MA: { medianHv: 640000, medianVpsf: 410, refSqft: 1700, refLot: 12000 },
+  MI: { medianHv: 265000, medianVpsf: 175, refSqft: 1650, refLot: 8000 },
+  MN: { medianHv: 345000, medianVpsf: 200, refSqft: 1900, refLot: 9500 },
+  MS: { medianHv: 185000, medianVpsf: 115, refSqft: 1800, refLot: 14000 },
+  MO: { medianHv: 255000, medianVpsf: 150, refSqft: 1750, refLot: 9000 },
+  MT: { medianHv: 475000, medianVpsf: 270, refSqft: 1900, refLot: 12000 },
+  NE: { medianHv: 265000, medianVpsf: 160, refSqft: 1700, refLot: 8000 },
+  NV: { medianHv: 455000, medianVpsf: 260, refSqft: 1750, refLot: 6000 },
+  NH: { medianHv: 470000, medianVpsf: 285, refSqft: 1800, refLot: 35000 },
+  NJ: { medianHv: 535000, medianVpsf: 305, refSqft: 1800, refLot: 8500 },
+  NM: { medianHv: 315000, medianVpsf: 185, refSqft: 1750, refLot: 8000 },
+  NY: { medianHv: 475000, medianVpsf: 310, refSqft: 1650, refLot: 7000 },
+  NC: { medianHv: 345000, medianVpsf: 195, refSqft: 1900, refLot: 14000 },
+  ND: { medianHv: 265000, medianVpsf: 150, refSqft: 1850, refLot: 9000 },
+  OH: { medianHv: 235000, medianVpsf: 145, refSqft: 1650, refLot: 8000 },
+  OK: { medianHv: 215000, medianVpsf: 130, refSqft: 1750, refLot: 8500 },
+  OR: { medianHv: 515000, medianVpsf: 305, refSqft: 1750, refLot: 7000 },
+  PA: { medianHv: 275000, medianVpsf: 165, refSqft: 1650, refLot: 9500 },
+  RI: { medianHv: 465000, medianVpsf: 310, refSqft: 1550, refLot: 8000 },
+  SC: { medianHv: 315000, medianVpsf: 175, refSqft: 1950, refLot: 12000 },
+  SD: { medianHv: 310000, medianVpsf: 175, refSqft: 1800, refLot: 9000 },
+  TN: { medianHv: 335000, medianVpsf: 190, refSqft: 1900, refLot: 15000 },
+  TX: { medianHv: 315000, medianVpsf: 175, refSqft: 2050, refLot: 7500 },
+  UT: { medianHv: 535000, medianVpsf: 265, refSqft: 2300, refLot: 8500 },
+  VT: { medianHv: 400000, medianVpsf: 240, refSqft: 1700, refLot: 40000 },
+  VA: { medianHv: 405000, medianVpsf: 225, refSqft: 1950, refLot: 14000 },
+  WA: { medianHv: 620000, medianVpsf: 365, refSqft: 1850, refLot: 7500 },
+  WV: { medianHv: 165000, medianVpsf: 105, refSqft: 1650, refLot: 15000 },
+  WI: { medianHv: 300000, medianVpsf: 185, refSqft: 1700, refLot: 9000 },
+  WY: { medianHv: 355000, medianVpsf: 200, refSqft: 1950, refLot: 11000 },
+  PR: { medianHv: 185000, medianVpsf: 125, refSqft: 1400, refLot: 4500 },
+  DEFAULT: { medianHv: 360000, medianVpsf: 210, refSqft: 1750, refLot: 7500 }
 };
 
 function getHpiMultiplier(year) {
@@ -133,10 +176,12 @@ function estimatePropertyMarketValue(params) {
   const effYear = +(F.eff || a.EffectiveYear1 || a.EffectiveYear || a.EFF_YR_BLT || F.yb || a.YearBuilt1 || a.YearBuilt || a.CONST_YEAR || 1975) || 1975;
   const ageFactor = Math.max(0.80, Math.min(1.22, 1.0 + (effYear - 1980) * 0.0035));
 
-  // Pool & view amenity bonuses
+  // Pool, garage, and view amenity bonuses
   const poolBonus = F.pool ? (baseNeighborhoodHv * 0.045) : 0;
+  const garageBonus = (F.garage || a.GARAGE || a.GARAGESQFT || /garage/i.test(a.UseDescription || "")) ? (baseNeighborhoodHv * 0.025) : 0;
+  const viewBonus = (a.VIEW || /view|hill|ocean|waterfront|lake/i.test(a.ZoneCode || a.UseDescription || "")) ? (baseNeighborhoodHv * 0.035) : 0;
 
-  const hedonicEst = Math.round(baseNeighborhoodHv * sqftElasticity * lotFactor * bedBathFactor * ageFactor + poolBonus);
+  const hedonicEst = Math.round(baseNeighborhoodHv * sqftElasticity * lotFactor * bedBathFactor * ageFactor + poolBonus + garageBonus + viewBonus);
 
   // 4. Municipal Assessor Market Value Calibration
   let assessorMarketEst = null;
