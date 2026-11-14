@@ -397,6 +397,68 @@ def main():
     assert res_house_render["hasStaleImageryBadge"] is True
     print("✓ Full single-house parcel audit panel rendered into live DOM with permit capitalization & imagery badge.")
 
+    # 10. Test AI Settings Persistence, Street View Dual-Mode & Multi-State Playbook
+    res_adv = eval_js("""
+    (() => {
+        // Test AI settings persistence
+        localStorage.setItem("city_pretty_ai_endpoint", "https://custom.worker.dev/api/ai");
+        localStorage.setItem("city_pretty_ai_key", "test-key-12345");
+        loadAiSettings();
+        const epVal = document.getElementById("ai-cfg-endpoint") ? document.getElementById("ai-cfg-endpoint").value : "";
+        const keyVal = document.getElementById("ai-cfg-key") ? document.getElementById("ai-cfg-key").value : "";
+
+        // Clear settings
+        clearAiSettings();
+        const clearedEp = document.getElementById("ai-cfg-endpoint") ? document.getElementById("ai-cfg-endpoint").value : "not-empty";
+
+        // Test Street View Dual Mode in live DOM
+        const box = document.getElementById("test-live-parcel-box");
+        const btnProxy = box ? box.querySelector("#btn-sv-mode-proxy") : null;
+        const btnEmbed = box ? box.querySelector("#btn-sv-mode-embed") : null;
+        const svImg = box ? box.querySelector("#sv-proxy-img") : null;
+        const svIframe = box ? box.querySelector("#sv-iframe") : null;
+
+        if (typeof switchStreetViewMode === "function") {
+            switchStreetViewMode("proxy");
+        }
+        const imgVisibleAfterSwitch = svImg ? (svImg.style.display !== "none") : false;
+        const iframeHiddenAfterSwitch = svIframe ? (svIframe.style.display === "none") : false;
+
+        if (typeof setStreetViewAngle === "function") {
+            setStreetViewAngle(315);
+        }
+        const imgSrcHasHeading = svImg ? svImg.src.includes("heading=315") : false;
+
+        // Restore embed mode
+        if (typeof switchStreetViewMode === "function") {
+            switchStreetViewMode("embed");
+        }
+
+        return {
+            epVal,
+            keyVal,
+            clearedEp,
+            hasBtnProxy: !!btnProxy,
+            hasBtnEmbed: !!btnEmbed,
+            hasSvImg: !!svImg,
+            imgVisibleAfterSwitch,
+            iframeHiddenAfterSwitch,
+            imgSrcHasHeading
+        };
+    })()
+    """)
+    print("10. AI Settings, Street View Dual-Mode & Proxy Check:", res_adv)
+    assert res_adv["epVal"] == "https://custom.worker.dev/api/ai"
+    assert res_adv["keyVal"] == "test-key-12345"
+    assert res_adv["clearedEp"] == ""
+    assert res_adv["hasBtnProxy"] is True
+    assert res_adv["hasBtnEmbed"] is True
+    assert res_adv["hasSvImg"] is True
+    assert res_adv["imgVisibleAfterSwitch"] is True
+    assert res_adv["iframeHiddenAfterSwitch"] is True
+    assert res_adv["imgSrcHasHeading"] is True
+    print("✓ AI configuration lifecycle and Street View edge proxy mode verified.")
+
     ws.close()
     print("========================================================")
     print("ALL BROWSER RUNTIME VERIFICATIONS PASSED (100% SUCCESS)!")

@@ -305,7 +305,8 @@ export function auditSingleHouseParcel(input: HouseParcelAuditInput): HouseParce
 
   // 3. Statutory By-Right Housing Rights & Exclusion Engine
   const exclusions = input.exclusions || {};
-  const isComm = /comm|c-|c1|c2|cbd|mixed/i.test(input.zoningCode || input.useDescription || "");
+  const zoneOrUse = String(input.zoningCode || "") + " " + String(input.useDescription || "");
+  const isComm = /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
   const isSfr = !isComm;
 
   const parcelCtx: ParcelContext = {

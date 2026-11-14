@@ -72,7 +72,27 @@ export default {
       const lat = url.searchParams.get("lat");
       const lng = url.searchParams.get("lng");
       const heading = url.searchParams.get("heading") ?? "0";
-      const upstream = `https://maps.googleapis.com/maps/api/streetview?size=640x400&location=${lat},${lng}&heading=${heading}&pitch=5&key=${env.GOOGLE_MAPS_KEY}`;
+      const clientKey = url.searchParams.get("key");
+      const effectiveKey = env.GOOGLE_MAPS_KEY || clientKey;
+
+      if (!effectiveKey) {
+        return new Response(
+          JSON.stringify({
+            ok: false,
+            error: "GOOGLE_MAPS_KEY is not configured in this Cloudflare Worker environment and no key was supplied.",
+            fallback_suggested: true,
+          }),
+          {
+            status: 503,
+            headers: {
+              "Content-Type": "application/json",
+              ...getCorsHeaders(origin),
+            },
+          }
+        );
+      }
+
+      const upstream = `https://maps.googleapis.com/maps/api/streetview?size=640x400&location=${lat},${lng}&heading=${heading}&pitch=5&key=${effectiveKey}`;
       const res = await fetch(upstream);
       return new Response(res.body, {
         headers: {
@@ -92,11 +112,25 @@ export default {
         });
       }
 
-      if (!env.LLM_API_KEY) {
+      let body: any = {};
+      try {
+        body = await request.json();
+      } catch (e) {
+        body = {};
+      }
+
+      const authHeader = request.headers.get("Authorization");
+      const clientKey = (authHeader && authHeader.startsWith("Bearer "))
+        ? authHeader.slice(7).trim()
+        : (body && body.apiKey ? String(body.apiKey).trim() : null);
+
+      const effectiveKey = env.LLM_API_KEY || clientKey;
+
+      if (!effectiveKey) {
         return new Response(
           JSON.stringify({
             ok: false,
-            error: "LLM_API_KEY is not configured in this Cloudflare Worker environment.",
+            error: "LLM_API_KEY is not configured in this Cloudflare Worker environment and no client key was supplied.",
             fallback_suggested: true,
           }),
           {
@@ -110,12 +144,11 @@ export default {
       }
 
       try {
-        const body: any = await request.json();
         const userPrompt = body.userPrompt || body.userMessage || "Analyze this property";
         const systemPrompt = body.systemPrompt || "You are the City Pretty Urban & Property Advisor.";
         const modelName = body.model || "gemini-1.5-flash";
 
-        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${env.LLM_API_KEY}`;
+        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${effectiveKey}`;
 
         // Format system instruction and multi-turn contents for Gemini
         const geminiPayload: any = {

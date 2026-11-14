@@ -42,6 +42,10 @@ def run_tests():
     call("Page.enable")
     call("Runtime.enable")
 
+    # Reload page to execute fresh index.html
+    call("Page.reload", {"ignoreCache": True})
+    time.sleep(2.0)
+
     # Load engine scripts into page execution context
     with open("src/engines/municipalFinanceEngine.js") as f:
         code_finance = f.read()
@@ -737,9 +741,56 @@ def run_tests():
     assert "Northeastern Connecticut" in (t14["ctName"] or "")
     print("  -> PASS: All 706 nationwide jurisdictions verified in DOM bundles and canonical FIPS lookup.")
 
+    # Test 15: Multi-State 2026 Statutory Playbook, AI Settings & Street View Dual-Mode
+    t15 = eval_js("""
+    (() => {
+        const hasSaveAi = typeof saveAiSettings === "function";
+        const hasLoadAi = typeof loadAiSettings === "function";
+        const hasClearAi = typeof clearAiSettings === "function";
+        const hasSvSwitch = typeof switchStreetViewMode === "function";
+        const hasSvAngle = typeof setStreetViewAngle === "function";
+
+        // Test Multi-State Playbook for Florida commercial lot
+        window.activeFips = () => "12086";
+        const flMockAttrs = { AIN: "FL-COMM-1", UseDescription: "Commercial Office", ZoneCode: "BU-2" };
+        const flPlaybook = (typeof computePropertyPlaybook === "function")
+            ? computePropertyPlaybook(flMockAttrs, 12000, { bldg: 4000 }, null, { lat: 25.7617, lng: -80.1918 }, { R: {} })
+            : null;
+        const flHasLiveLocal = flPlaybook && flPlaybook.all.some(s => s.statute && s.statute.includes("Live Local Act 4.0"));
+
+        // Test CA Heavy Rail SB 79 Playbook
+        window.activeFips = () => "06037";
+        window.findNearestTransitStation = () => ({ name: "Union Station", distMi: 0.18, type: "heavy_rail" });
+        const caMockAttrs = { AIN: "CA-RAIL-1", UseDescription: "Single Family", ZoneCode: "R-1" };
+        const caPlaybook = (typeof computePropertyPlaybook === "function")
+            ? computePropertyPlaybook(caMockAttrs, 6000, { bldg: 1600 }, null, { lat: 34.056, lng: -118.236 }, { R: {} })
+            : null;
+        const caHasSb79 = caPlaybook && caPlaybook.all.some(s => s.statute && s.statute.includes("CA SB 79"));
+
+        return {
+            hasSaveAi,
+            hasLoadAi,
+            hasClearAi,
+            hasSvSwitch,
+            hasSvAngle,
+            flHasLiveLocal,
+            caHasSb79
+        };
+    })()
+    """)
+    print("Test 15 (Multi-State Playbook, AI Settings & SV Mode):", t15)
+    assert t15["hasSaveAi"] is True
+    assert t15["hasLoadAi"] is True
+    assert t15["hasClearAi"] is True
+    assert t15["hasSvSwitch"] is True
+    assert t15["hasSvAngle"] is True
+    assert t15["flHasLiveLocal"] is True
+    assert t15["caHasSb79"] is True
+    print("  -> PASS: Multi-state statutory playbooks, AI configuration lifecycle, and Street View dual-mode verified.")
+
     ws.close()
     print("========================================================")
-    print("ALL 14 CORE REGRESSION TEST SUITES PASSED (100% SUCCESS)!")
+    print("ALL 15 CORE REGRESSION TEST SUITES PASSED (100% SUCCESS)!")
     print("========================================================")
 
 if __name__ == "__main__":
