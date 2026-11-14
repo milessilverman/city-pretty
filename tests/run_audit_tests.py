@@ -393,6 +393,28 @@ def run_tests():
             facts: { bldg: 2000, beds: 3, baths: 2, yb: 1995 }
         });
 
+        // 9F: Cook County 10% Assessment Ratio Normalization
+        const cookCounty = estimatePropertyMarketValue({
+            attributes: { TOTAL_VAL: 75000 }, lotSqft: 3125, stateCode: "IL",
+            neighborhood: { hv: 650000, c: "Chicago" },
+            facts: { bldg: 2200, beds: 4, baths: 2.5, yb: 1910 }
+        });
+
+        // 9G: Ohio 35% Assessment Ratio Normalization
+        const columbusOhio = estimatePropertyMarketValue({
+            attributes: { TOTAL_VAL: 85000 }, lotSqft: 7500, stateCode: "OH",
+            neighborhood: { hv: 240000, c: "Columbus" },
+            facts: { bldg: 1700, beds: 3, baths: 2, yb: 1978 }
+        });
+
+        // 9H: Luxury Tier Elasticity Dampening (Santa Monica 2019 $1.9M sale)
+        const luxuryTier = estimatePropertyMarketValue({
+            neighborhood: { hv: 2100000, c: "Santa Monica" }, stateCode: "CA",
+            facts: { bldg: 1850, beds: 3, baths: 2, yb: 1952, eff: 2018 },
+            lotSqft: 6000,
+            salesInfo: { price: 1900000, year: 2019 }
+        });
+
         return {
             mult2018,
             repeatSaleValue: repeatSale.estimatedValue,
@@ -404,7 +426,12 @@ def run_tests():
             ohioValue: ohioHome.estimatedValue,
             ohioVpsf: ohioHome.vpsf,
             coloradoValue: coloradoHome.estimatedValue,
-            coloradoVpsf: coloradoHome.vpsf
+            coloradoVpsf: coloradoHome.vpsf,
+            cookCountyValue: cookCounty.estimatedValue,
+            cookCountyMethod: cookCounty.valuationMethod,
+            columbusValue: columbusOhio.estimatedValue,
+            columbusMethod: columbusOhio.valuationMethod,
+            luxuryTierValue: luxuryTier.estimatedValue
         };
     })()
     """)
@@ -425,7 +452,15 @@ def run_tests():
     assert 130 <= t9["ohioVpsf"] <= 170
     assert 500000 <= t9["coloradoValue"] <= 650000
     assert 270 <= t9["coloradoVpsf"] <= 340
-    print("  -> PASS: AVM valuation matches Zillow benchmarks across repeat-sales, Michigan SEV, Florida JV, non-linear lot scaling & 50-state baselines.")
+    # Cook County 10% assessment ratio ($75k assessed -> ~$700k - $800k market)
+    assert 680000 <= t9["cookCountyValue"] <= 820000
+    assert "Cook County 10%" in t9["cookCountyMethod"]
+    # Ohio 35% assessment ratio ($85k assessed -> ~$240k - $290k market)
+    assert 240000 <= t9["columbusValue"] <= 290000
+    assert "Ohio 35%" in t9["columbusMethod"]
+    # Luxury tier elasticity dampening prevents $3.0M+ overshoot on $1.9M 2019 sale
+    assert 2450000 <= t9["luxuryTierValue"] <= 2750000
+    print("  -> PASS: AVM valuation matches Zillow benchmarks across repeat-sales, Michigan SEV, Florida JV, non-linear lot scaling, Cook County & Ohio ratios, and luxury tier dampening.")
 
     ws.close()
     print("========================================================")
