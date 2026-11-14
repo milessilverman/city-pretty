@@ -15618,11 +15618,37 @@ function drawFacilities() {
   if (!map.hasLayer(layers.fac)) layers.fac.addTo(map);
   // schools are numerous: from zoom 13; civic buildings from zoom 12
   const facs = Array.isArray(L_.facilities) ? L_.facilities : (D && D.layers && Array.isArray(D.layers.facilities) ? D.layers.facilities : []);
-  for (const [k, n, lat, lon] of facs) {
+  // Below zoom 15, pins close together on screen (70 px at city zoom, 34 px at 14) merge into one numbered circle (click it to zoom in), so the
+  // city-wide view is not buried in overlapping letters.
+  const visible = [];
+  for (const row of facs) {
+    const [k, , lat, lon] = row;
     if (!facOn.has(k)) continue;
     const kind = K[k] || "facility";
     if (z < 13 && (kind === "school" || kind === "clinic")) continue;
-    if (!b.contains([lat, lon])) continue;
+    if (b.contains([lat, lon])) visible.push(row);
+  }
+  let singles = visible;
+  if (z < 15 && visible.length > 1) {
+    const cell = z <= 12 ? 70 : z === 13 ? 50 : 34, groups = new Map();
+    for (const row of visible) {
+      const pt = map.project([row[2], row[3]], z), key = Math.floor(pt.x / cell) + "," + Math.floor(pt.y / cell);
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(row);
+    }
+    singles = [];
+    for (const g of groups.values()) {
+      if (g.length === 1) { singles.push(g[0]); continue; }
+      const lat = g.reduce((t, r) => t + r[2], 0) / g.length, lon = g.reduce((t, r) => t + r[3], 0) / g.length;
+      const kinds = [...new Set(g.map(r => K[r[0]] || "facility"))];
+      const size = g.length < 10 ? 20 : g.length < 50 ? 24 : 28;
+      layers.fac.addLayer(L.marker([lat, lon], { keyboard: false, icon: L.divIcon({ className: "", iconSize: [size, size], html: `<div class="fac-cluster" style="width:${size}px;height:${size}px">${g.length}</div>` }) })
+        .bindTooltip(`${g.length} places: ${esc(kinds.slice(0, 4).join(", "))}${kinds.length > 4 ? "…" : ""}. Click to zoom in.`)
+        .on("click", e => { L.DomEvent.stopPropagation(e); map.setView([lat, lon], Math.min(z + 2, 18)); }));
+    }
+  }
+  for (const [k, n, lat, lon] of singles) {
+    const kind = K[k] || "facility";
     const [col, ch] = FAC_STYLE[kind] || ["#444", "•"];
     layers.fac.addLayer(L.marker([lat, lon], { keyboard: false, icon: L.divIcon({ className: "", iconSize: [14, 14], html: `<div class="fac" style="background:${col}">${ch}</div>` }) })
       .bindTooltip(`<b>${esc(kind[0].toUpperCase() + kind.slice(1))}</b>${n ? " · " + esc(n) : ""}`).on("click", e => {
@@ -24594,7 +24620,7 @@ async function init() {
       if (h1 && more.length === 1) h1.textContent = `Which improvements make ${els[0].dataset.name} neighborhoods better, and worth more, per dollar`;   // the full name: "San Juan Municipio", "Orleans Parish"
       else if (h1 && more.length > 1) h1.textContent = "Which improvements make neighborhoods better, and worth more, per dollar";
       { const withData = els.filter(e => e.dataset.coverage !== "lots").length, lotsOnly = els.length - withData;
-        const first = sel.querySelector('option[value=""]'); if (first) first.textContent = `More counties (${withData} with data${lotsOnly ? `, ${lotsOnly} lot lines only` : ""})…`;
+        const first = sel.querySelector('option[value=""]'); if (first) first.textContent = `More counties (${withData})…`;
         sel.title = sel.ariaLabel = `Select from ${withData} US counties with data` + (lotsOnly ? ` and ${lotsOnly} with property lines only` : ""); } } }
   cpText("la-crash-counts"); setTimeout(() => cpText("overlay-chunks"), 800);   // small/background downloads after first paint
   setTimeout(() => loadSites().then(() => { if (selected) { const f = byId.get(selected); if (f) fillSites(f.properties); } }), 1200);
@@ -24613,6 +24639,8 @@ async function init() {
       else if (id !== selected && !byId.has(id)) { history.replaceState(null, null, "#bg=" + id); checkHash(); }
     }); }
   { const q = $("#q"); if (q) q.addEventListener("focus", () => ensureOrangeCounty(), { once: true }); }
+  { const b = $("#btn-mobile-opts"), hdr = document.querySelector("header.top");   // phones: show or hide the folded controls
+    if (b && hdr) b.addEventListener("click", () => { const open = hdr.classList.toggle("opts-open"); b.setAttribute("aria-expanded", open); b.textContent = open ? "Hide map options ▴" : "Map options and tools ▾"; }); }
   matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => { drawContext(); restyle(); });
 }
 

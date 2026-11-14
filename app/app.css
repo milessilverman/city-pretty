@@ -1206,3 +1206,32 @@ details.panel-sec .sec-content { padding: 12px; }
 }
 
 
+
+/* ---------- Phones and narrow windows ---------- */
+.mobile-opts-btn { display: none; }
+.main > *, .panel, .rec, .rec .row1 > * { min-width: 0; }
+.top-actions { flex-wrap: wrap; }
+@media (max-width: 640px) {
+  header.top .brand h1 { font-size: 17px; line-height: 1.2; }
+  .county-readiness-pill { font-size: 10px !important; padding: 2px 7px !important; }
+  /* the map comes first; secondary controls fold behind one button */
+  header.top .fold { display: none !important; }
+  header.top.opts-open .fold { display: flex !important; }
+  header.top.opts-open details.fold { display: block !important; }
+  .mobile-opts-btn { display: block; width: 100%; font: 600 13px var(--body); color: var(--ink); background: var(--ground); border: 1px solid var(--rule-strong); border-radius: 8px; padding: 9px 12px; text-align: left; cursor: pointer; }
+  .county-buttons { flex-wrap: wrap; }
+  #county-more { max-width: 100%; }
+  .top-actions .top-act-btn { flex: 1 1 auto; }
+  .rec .row1 { flex-wrap: wrap; }
+  .rec .vpd { white-space: normal; }
+  .panel { overflow-wrap: anywhere; }
+  .panel table { display: block; overflow-x: auto; }
+  .mapwrap { height: 56vh; min-height: 320px; }
+}
+@media (max-width: 640px) {
+  .leaflet-control-attribution { font-size: 9px; line-height: 1.3; max-width: 70vw; max-height: 2.6em; overflow: hidden; }
+  .leaflet-control-attribution:hover, .leaflet-control-attribution:focus-within { max-height: 40vh; overflow: auto; }
+  .legend { max-width: 180px; font-size: 11px; }
+}
+.fac-cluster { display: grid; place-items: center; border-radius: 50%; font: 700 10.5px/1 var(--mono); color: var(--ink); background: color-mix(in srgb, var(--sheet) 88%, transparent); border: 1.5px solid var(--ink-3); box-shadow: 0 1px 3px rgba(0,0,0,.3); cursor: pointer; }
+.rec .row1 { flex-wrap: wrap; }
