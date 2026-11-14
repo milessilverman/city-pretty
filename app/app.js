@@ -16660,7 +16660,10 @@ const PARCEL_URL = "https://public.gis.lacounty.gov/public/rest/services/LACount
 const PARCEL_FIELDS = ["AIN", "SitusFullAddress", "SitusHouseNo", "SitusStreet", "UseCode", "UseType", "UseDescription", "Roll_LandValue", "Roll_ImpValue",
   "Roll_LandBaseYear", "Roll_ImpBaseYear", "Roll_HomeOwnersExemp",
   ...[1, 2, 3, 4, 5].flatMap(i => [`DesignType${i}`, `QualityClass${i}`, `YearBuilt${i}`, `EffectiveYear${i}`, `Units${i}`, `Bedrooms${i}`, `Bathrooms${i}`, `SQFTmain${i}`])].join(",");
-const OVERPASS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"];
+// Tried in parallel (staggered); the first good answer wins. A busy mirror's error page often lacks CORS headers,
+// which shows as a console error even though another mirror answers.
+const OVERPASS = ["https://overpass-api.de/api/interpreter", "https://overpass.private.coffee/api/interpreter",
+  "https://overpass.kumi.systems/api/interpreter", "https://maps.mail.ru/osm/tools/overpass/api/interpreter"];
 // round-9 sources (research/round9): per-lot checks queried live from the page
 const R9 = {
   permits: "https://data.lacity.org/resource/pi9x-tg5x.json",          // LADBS permits 2020-present (ADU/JADU fields)
@@ -19659,9 +19662,12 @@ if (typeof window !== "undefined") {
 }
 // Resolves to a tile layer when the service publishes a standard web-mercator cache down to zoom 17, else null.
 async function cachedLotLines() {
-  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 4000);
+  // JSONP, not fetch(): LA County's firewall answers 403 to any request that carries another site's Origin header
+  // (map tiles load as images, which send none). The JSONP helper gives up after 15 s; this waits at most 6 s.
+  let t;
   try {
-    const j = await (await fetch(`${PARCEL_MS}?f=json`, { signal: ctl.signal })).json(), ti = j.tileInfo || {};
+    const j = await Promise.race([jsonp(`${PARCEL_MS}?f=json`), new Promise((_, rej) => { t = setTimeout(() => rej(new Error("timeout")), 6000); })]);
+    const ti = (j && j.tileInfo) || {};
     const wkid = (ti.spatialReference || {}).latestWkid || (ti.spatialReference || {}).wkid;
     const lod = (ti.lods || []).find(l => l.level === 17);
     const web = [3857, 102100].includes(wkid) && ti.origin && Math.abs(ti.origin.x + 20037508.3428) < 1 && ti.rows === 256;
