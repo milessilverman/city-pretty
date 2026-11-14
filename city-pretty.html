@@ -24247,7 +24247,7 @@ function renderCompareDrawer() {
 }
 
 function exportComparisonBrief() {
-  document.body.classList.remove("prospectus-printing");
+  document.body.classList.remove("prospectus-printing", "accuracy-printing");
   document.body.classList.add("compare-printing");
   window.print();
   setTimeout(() => document.body.classList.remove("compare-printing"), 1200);
@@ -25462,6 +25462,7 @@ function exportExecutiveProspectus() {
   `;
 
   m.hidden = false;
+  document.body.classList.remove("compare-printing", "accuracy-printing");
   document.body.classList.add("prospectus-printing");
   document.body.style.overflow = "hidden";
 }
