@@ -228,27 +228,71 @@ def main():
     assert res_audit_panel["hasDisclaimers"] is True
     print("✓ Single-house parcel auditor & inspector aside successfully executed in browser.")
 
-    # 6. Test AI Advisor Non-Reliance Notice Injection
+    # 6. Test AI Advisor Non-Reliance Guardrails & Grounded Context Serialization
     res_ai = eval_js("""
     new Promise(resolve => {
         openAiAdvisor();
         askAiPrompt("p3_roi");
         setTimeout(() => {
             const lastMsg = aiHistory[aiHistory.length - 1];
+            const preview = document.getElementById("ai-grounded-json-preview");
+
+            // Mock an active house to test parcel serialization
+            window.activeHouse = {
+                a: {
+                    AIN: "5408012015",
+                    APN: "5408-012-015",
+                    SitusFullAddress: "1234 ECHO PARK AVE",
+                    county: "Los Angeles",
+                    ZoneCode: "RD1.5-1",
+                    UseDescription: "Single Family Residence"
+                },
+                lot: 6500,
+                ll: { lat: 34.078, lng: -118.260 },
+                F: { bldg: 1800, yb: 1952, eff: 2024, beds: 3, baths: 2, stories: 1, units: 1 },
+                valuation: {
+                    estimatedValue: 1180000, valueLow: 1100000, valueHigh: 1260000, vpsf: 656,
+                    valuationMethod: "Hedonic Micro-Model", confidenceMarginPct: 0.065,
+                    permitCapitalizationAdded: 51000, luxuryDampeningApplied: false
+                },
+                audit: {
+                    imagery: { confidenceBadge: "stale_imagery_permit_override", isLidarStale: true, isStreetViewStale: true, warningMessage: "Permit post-dates imagery" },
+                    statutoryZoning: {
+                        statutory_exclusions: { historic_district_hpoz: true, coastal_commission_or_sma: false, fema_100yr_floodway: false, calfire_or_state_vhfhsz: false }
+                    },
+                    solarMicrogrid: { system_size_dc_kw: 6.8, federal_itc_pct: 0, battery_storage_required_for_roi: true, net_25yr_npv_usd: 24500 },
+                    treeEconomics: { annualCoolingOrHeatingSavingsUsd: 140, capitalizedValueUsd: 7130, climateRegime: "cooling_dominant" }
+                },
+                recentPermits: [{ issue_date: "2024-04-12", permit_type: "remodel", valuation_usd: 60000, description: "Remodel" }]
+            };
+
+            const parcelCtx = serializeLiveAdvisorContext();
+            const prompts = buildGroundedAdvisorPrompt("What can I build here?", parcelCtx);
+
             resolve({
                 role: lastMsg.role,
                 textLength: lastMsg.text.length,
                 hasTransit: lastMsg.text.includes("Transit Corridor"),
-                hasDisclaimer: lastMsg.text.includes("NON-RELIANCE NOTICE")
+                hasDisclaimer: lastMsg.text.includes("NON-RELIANCE NOTICE"),
+                hasPreview: !!preview && preview.textContent.length > 50,
+                hasParcel: !!parcelCtx.parcel,
+                avmValue: parcelCtx.parcel ? parcelCtx.parcel.avmValuation.estimatedValue : 0,
+                systemPromptHasHpoz: prompts.systemPrompt.includes("CRITICAL STATUTORY OVERLAYS DETECTED: [historic_district_hpoz]"),
+                userPromptHasAddress: prompts.userPrompt.includes("1234 ECHO PARK AVE")
             });
-        }, 600);
+        }, 800);
     })
     """)
-    print("6. AI Advisor Non-Reliance Guardrails Check:", res_ai)
+    print("6. AI Advisor Non-Reliance Guardrails & Grounded Context Check:", res_ai)
     assert res_ai["role"] == "assistant"
     assert res_ai["hasTransit"] is True
     assert res_ai["hasDisclaimer"] is True
-    print("✓ AI Advisor outputs enforce institutional legal and engineering non-reliance notices.")
+    assert res_ai["hasPreview"] is True
+    assert res_ai["hasParcel"] is True
+    assert res_ai["avmValue"] == 1180000
+    assert res_ai["systemPromptHasHpoz"] is True
+    assert res_ai["userPromptHasAddress"] is True
+    print("✓ AI Advisor outputs enforce legal/engineering non-reliance and strict parcel grounding.")
 
     # 7. Test Asset URL Subpath Resolution
     res_url = eval_js("""

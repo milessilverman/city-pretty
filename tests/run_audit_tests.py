@@ -61,6 +61,8 @@ def run_tests():
         code_auditor = f.read()
     with open("src/ui/houseInspectorPanel.js") as f:
         code_panel = f.read()
+    with open("src/ai/advisorGroundingContract.js") as f:
+        code_ai = f.read()
 
     test_bundle = f"""
     (() => {{
@@ -73,6 +75,7 @@ def run_tests():
         {code_arcgis}
         {code_auditor}
         {code_panel}
+        {code_ai}
 
         window.__TEST_ENGINES__ = {{
             calculateTaxIncrementCapacity,
@@ -88,7 +91,9 @@ def run_tests():
             calculateCalibratedTreeEconomics,
             renderHouseAuditAside,
             getHpiMultiplier,
-            STATE_BASELINE_PROFILES
+            STATE_BASELINE_PROFILES,
+            buildGroundedAdvisorPrompt,
+            serializeLiveAdvisorContext
         }};
         return true;
     }})();
@@ -650,9 +655,66 @@ def run_tests():
     assert t12["hasDisclaimers"] is True
     print("  -> PASS: Single-house parcel auditor coordinates AVM permits, luxury saturation, imagery checks, 2026 solar rules, multi-climate tree economics, and disclaimer panel.")
 
+    # Test 13: Grounded AI Advisor Contract & Context Serialization
+    t13 = eval_js("""
+    (() => {
+        const { buildGroundedAdvisorPrompt, serializeLiveAdvisorContext } = window.__TEST_ENGINES__;
+
+        const mockPayload = {
+            county: {
+                fips: "06037", name: "Los Angeles County", state: "CA",
+                readiness_tier: "audited_A", zoning_source: "live_municipal_gis",
+                crime_feed_status: "rolling_12m"
+            },
+            parcel: {
+                parcelId: "5408-012-015", address: "1234 Echo Park Ave, Los Angeles, CA",
+                county: "Los Angeles County", state: "CA", lotSqft: 6500, livingSqft: 1800,
+                yearBuilt: 1952, effectiveYearBuilt: 2024, bedrooms: 3, bathrooms: 2, stories: 1, units: 1,
+                isVacantLand: false, zoningCode: "RD1.5-1", useDescription: "Single Family Residence",
+                avmValuation: {
+                    estimatedValue: 1180000, valueLow: 1100000, valueHigh: 1260000, vpsf: 656,
+                    valuationMethod: "Hedonic Micro-Model", confidenceMarginPct: 0.065,
+                    permitCapitalizationAdded: 51000, luxuryDampeningApplied: false
+                },
+                recentPermits: [{ issue_date: "2024-04-12", permit_type: "remodel", valuation_usd: 60000, description: "Remodel" }],
+                imagery: { confidenceBadge: "verified_current", isLidarStale: false, isStreetViewStale: false, warningMessage: null },
+                statutoryExclusions: {
+                    historic_district_hpoz: true, coastal_commission_or_sma: false,
+                    fema_100yr_floodway: false, calfire_or_state_vhfhsz: false
+                },
+                solar: { system_size_dc_kw: 6.8, federal_itc_pct: 0, battery_storage_required: true, net_25yr_npv_usd: 24500 },
+                treeEconomics: { annualCoolingOrHeatingSavingsUsd: 140, capitalizedValueUsd: 7130, climateRegime: "cooling_dominant" }
+            }
+        };
+
+        const { systemPrompt, userPrompt } = buildGroundedAdvisorPrompt("What is my best ROI move?", mockPayload);
+
+        return {
+            hasStrictGrounding: systemPrompt.includes("STRICT GROUNDING & ANTI-HALLUCINATION RULES"),
+            hasReadinessTier: systemPrompt.includes('Active jurisdiction readiness tier is "audited_A"'),
+            hasHpozOverlay: systemPrompt.includes("CRITICAL STATUTORY OVERLAYS DETECTED: [historic_district_hpoz]"),
+            hasSolar2026Rule: systemPrompt.includes("IRC § 25D expired on Dec 31, 2025"),
+            hasNonReliance: systemPrompt.includes("LEGAL & ENGINEERING NON-RELIANCE NOTICE"),
+            userPromptHasJson: userPrompt.includes("VERIFIED GEOSPATIAL & STATUTORY CONTEXT (JSON):"),
+            userPromptHasAddress: userPrompt.includes("1234 Echo Park Ave"),
+            userPromptHasAvm: userPrompt.includes("1180000")
+        };
+    })()
+    """)
+    print("Test 13 (Grounded AI Advisor Contract & Prompt Synthesis):", t13)
+    assert t13["hasStrictGrounding"] is True
+    assert t13["hasReadinessTier"] is True
+    assert t13["hasHpozOverlay"] is True
+    assert t13["hasSolar2026Rule"] is True
+    assert t13["hasNonReliance"] is True
+    assert t13["userPromptHasJson"] is True
+    assert t13["userPromptHasAddress"] is True
+    assert t13["userPromptHasAvm"] is True
+    print("  -> PASS: AI Advisor grounding contract enforces zero-hallucination rules, tier disclaimers, and 2026 solar/statutory mandates.")
+
     ws.close()
     print("========================================================")
-    print("ALL 12 CORE REGRESSION TEST SUITES PASSED (100% SUCCESS)!")
+    print("ALL 13 CORE REGRESSION TEST SUITES PASSED (100% SUCCESS)!")
     print("========================================================")
 
 if __name__ == "__main__":
