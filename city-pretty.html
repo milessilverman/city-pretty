@@ -1087,6 +1087,11 @@ details.panel-sec .sec-content { padding: 12px; }
   body.compare-printing #compare-modal, body.compare-printing #compare-modal * { visibility: visible !important; }
   body.compare-printing #compare-modal { position: absolute !important; left: 0 !important; top: 0 !important; width: 100% !important; margin: 0 !important; padding: 20px !important; background: #fff !important; }
   body.compare-printing .modal-close, body.compare-printing #compare-modal button { display: none !important; }
+
+  body.accuracy-printing * { visibility: hidden !important; }
+  body.accuracy-printing #accuracy-modal, body.accuracy-printing #accuracy-modal * { visibility: visible !important; }
+  body.accuracy-printing #accuracy-modal { position: absolute !important; left: 0 !important; top: 0 !important; width: 100% !important; margin: 0 !important; padding: 20px !important; background: #fff !important; }
+  body.accuracy-printing .modal-close, body.accuracy-printing #accuracy-modal button, body.accuracy-printing #county-matrix-search { display: none !important; }
   .no-print { display: none !important; }
   .prospectus-page { page-break-after: always; padding: 32px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #0f172a; }
 }
@@ -2215,10 +2220,15 @@ details.panel-sec .sec-content { padding: 12px; }
   <div class="modal-card" style="max-width:920px;max-height:88vh;overflow-y:auto;padding:26px;">
     <button type="button" class="modal-close" onclick="closeAccuracyModal()" aria-label="Close">✕</button>
 
-    <!-- Top Tab Switcher -->
-    <div style="display:flex;gap:8px;margin-bottom:18px;border-bottom:1px solid #cbd5e1;padding-bottom:10px;">
-      <button type="button" id="tab-btn-county-readiness" class="action-pill active" onclick="switchAccuracyTab('readiness')" style="font-size:12px;font-weight:700;">🏛️ County Data Readiness &amp; Provenance Matrix</button>
-      <button type="button" id="tab-btn-model-provenance" class="action-pill" onclick="switchAccuracyTab('provenance')" style="font-size:12px;font-weight:700;">🔬 Econometric Hedonic Model &amp; AI Backbone</button>
+    <!-- Top Tab Switcher & Export Header -->
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:18px;border-bottom:1px solid #cbd5e1;padding-bottom:10px;">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button type="button" id="tab-btn-county-readiness" class="action-pill active" onclick="switchAccuracyTab('readiness')" style="font-size:12px;font-weight:700;">🏛️ County Data Readiness &amp; Provenance Matrix</button>
+        <button type="button" id="tab-btn-model-provenance" class="action-pill" onclick="switchAccuracyTab('provenance')" style="font-size:12px;font-weight:700;">🔬 Econometric Hedonic Model &amp; AI Backbone</button>
+      </div>
+      <button type="button" onclick="exportAccuracyReport()" style="background:#0284c7;color:#fff;border:none;padding:5px 12px;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;">
+        🖨️ Print / Save Report (PDF)
+      </button>
     </div>
 
     <!-- TAB 1: County Data Readiness & Provenance Matrix -->
@@ -23602,6 +23612,14 @@ function closeAccuracyModal() {
   if (m) { m.hidden = true; document.body.style.overflow = ""; }
 }
 
+function exportAccuracyReport() {
+  document.body.classList.remove("prospectus-printing", "compare-printing");
+  document.body.classList.add("accuracy-printing");
+  window.print();
+  setTimeout(() => document.body.classList.remove("accuracy-printing"), 1200);
+}
+window.exportAccuracyReport = exportAccuracyReport;
+
 function getEcoregionNorm(p, m) {
   const f = typeof activeFips === "function" ? activeFips() : "06037";
   const st = typeof activeState === "function" ? activeState() : "CA";
@@ -23955,7 +23973,7 @@ function renderCountyReadinessMatrix(targetFips) {
         <input type="text" id="county-matrix-search" placeholder="Search 639 counties by name, state code, or FIPS (e.g. 'Harris', 'Cook', 'FL', '06037')..." oninput="filterCountyReadinessTable(this.value)" style="flex:1;border:1px solid #cbd5e1;border-radius:6px;padding:7px 12px;font-size:12px;outline:none;" />
       </div>
 
-      <div style="max-height:300px;overflow-y:auto;border:1px solid #e2e8f0;border-radius:8px;">
+      <div style="max-height:300px;overflow-y:auto;overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #e2e8f0;border-radius:8px;">
         <table style="width:100%;border-collapse:collapse;font-size:11.5px;text-align:left;">
           <thead style="background:#f1f5f9;position:sticky;top:0;z-index:2;border-bottom:1px solid #cbd5e1;">
             <tr>
@@ -24011,10 +24029,9 @@ function renderCountyReadinessTableRows() {
   const filtered = allEntries.filter(c => {
     if (tierFilter !== "all" && c.readiness_tier !== tierFilter) return false;
     if (q) {
-      const matchName = (c.name || "").toLowerCase().includes(q);
-      const matchState = (c.state || "").toLowerCase().includes(q);
-      const matchFips = (c.fips || "").toLowerCase().includes(q);
-      return matchName || matchState || matchFips;
+      const full = `${c.name || ""} ${c.state || ""} ${c.fips || ""}`.toLowerCase();
+      const tokens = q.split(/\s+/).filter(Boolean);
+      return tokens.every(tok => full.includes(tok));
     }
     return true;
   });
@@ -25183,7 +25200,7 @@ function updateCanopyHud(p = null) {
 
 // --- Round 11: 1-Click Executive Property & Investment Prospectus Generator ---
 function exportExecutiveProspectus() {
-  const fmtP = (v) => (typeof fmt$ === "function" ? fmt$(v) : "$" + Number(v).toLocaleString());
+  const fmtP = (v) => "$" + Math.round(Number(v) || 0).toLocaleString();
   const m = document.getElementById("prospectus-modal");
   const content = document.getElementById("prospectus-content");
   if (!m || !content) return;
@@ -25207,9 +25224,11 @@ function exportExecutiveProspectus() {
   const vpd = strat ? strat.vpd : 2.50;
   const roi = strat ? strat.roi : "17.4% Unlevered Cap Rate";
 
+  const valObj = (typeof currentHouse !== "undefined" && currentHouse && currentHouse.valuation) || (typeof activeHouse !== "undefined" && activeHouse && activeHouse.valuation) || null;
+  const houseHv = (typeof activeHouse !== "undefined" && activeHouse && activeHouse.houseHv) || (valObj ? valObj.estimatedValue : null);
   const rollVal = a.Roll_TotalValue || a.TAXABLETRIBUNAL1 || (a.Roll_LandValue && a.Roll_ImpValue ? a.Roll_LandValue + a.Roll_ImpValue : 520000);
-  const aPrice = F.aPrice || (rollVal * 1.6);
-  const sqft = a.SQFTmain || F.sqft || 1450;
+  const aPrice = houseHv || F.aPrice || (rollVal * 1.6);
+  const sqft = (valObj && valObj.livingSqft) || a.SQFTmain || F.bldg || F.sqft || 1450;
   const lotSqft = (lot && lot.lotSqft) || (a.ACREAGE ? Math.round(a.ACREAGE * 43560) : 6200);
 
   content.innerHTML = `
@@ -25227,7 +25246,7 @@ function exportExecutiveProspectus() {
     </div>
 
     <!-- Property Identification Box -->
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px 18px;margin-bottom:24px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;">
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px 18px;margin-bottom:24px;display:grid;grid-template-columns:2fr 1.2fr 1.2fr 1.2fr;gap:12px;">
       <div>
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;">Deeded Situs Address</div>
         <div style="font-size:15px;font-weight:800;color:#0f172a;">${esc(addr)}</div>
@@ -25242,6 +25261,11 @@ function exportExecutiveProspectus() {
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;">Existing Improvements</div>
         <div style="font-size:14px;font-weight:700;color:#0f172a;">${fmtN(sqft)} sqft Main</div>
         <div style="font-size:11px;color:#64748b;">Built ${a.YearBuilt || "N/A"} · ${a.Units || 1} Unit(s)</div>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;">Baseline AVM Value</div>
+        <div style="font-size:14px;font-weight:800;color:#059669;">${fmtP(aPrice)}</div>
+        <div style="font-size:11px;color:#64748b;">~$${Math.round(aPrice / Math.max(sqft, 1)).toLocaleString()}/sqft</div>
       </div>
     </div>
 
