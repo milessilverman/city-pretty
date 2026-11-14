@@ -264,6 +264,31 @@ def main():
     assert not res_url["u2"].startswith("//")
     print("✓ Asset URL resolution verified.")
 
+    # 8. Test LA Measure W Isolation & Non-LA CA Funding Isolation
+    res_ca_isolation = eval_js("""
+    (() => {
+        // Open methods modal for Alameda County (06001)
+        syncMethodsModalToCounty("06001");
+        const modal = document.getElementById("methods-modal");
+        const alamedaHtml = modal ? modal.innerHTML : "";
+
+        // Open methods modal for Los Angeles County (06037)
+        syncMethodsModalToCounty("06037");
+        const laHtml = modal ? modal.innerHTML : "";
+
+        return {
+            alamedaHasMeasureBB: alamedaHtml.includes("Measure BB"),
+            alamedaExcludesMeasureW: alamedaHtml.includes("LA County Measure W excluded"),
+            laHasMeasureW: laHtml.includes("Measure W Safe Clean Water Program")
+        };
+    })()
+    """)
+    print("8. California County Funding Isolation Check:", res_ca_isolation)
+    assert res_ca_isolation["alamedaHasMeasureBB"] is True
+    assert res_ca_isolation["alamedaExcludesMeasureW"] is True
+    assert res_ca_isolation["laHasMeasureW"] is True
+    print("✓ Measure W strictly isolated to LA County 06037; non-LA CA counties reflect local measures.")
+
     ws.close()
     print("========================================================")
     print("ALL BROWSER RUNTIME VERIFICATIONS PASSED (100% SUCCESS)!")

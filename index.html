@@ -25748,9 +25748,13 @@ function syncMethodsModalToCounty(fips) {
         <p class="small">Enhanced Infrastructure Financing Districts (Gov. Code § 53398.50 and following) pledge part of the growth in the 1% property tax. The calculator's base is the net taxable value on the 2026 Assessor roll for every parcel in the area, and the city and County shares come from the Auditor-Controller's FY 2026-27 Modified ATI ratios (AF49 report) for the area's actual tax-rate areas, weighted by value: 13,392 tax-rate areas, 99.99% of net taxable value matched. School and ERAF shares (about 47% of the 1% levy county-wide, value-weighted) cannot be pledged. Project-level funding plans model Prop 13 statutory reassessments upon deed transfer (with interactive turnover presets from 2.0% mortgage lock-in up to 4.5% high-velocity), a 2.0% statutory annual roll inflation cap, interactive 30-year municipal bond yields (4.25% AAA muni to 6.25% unrated), and a 1.35× debt-service coverage ratio, with city pledges up to 75% and County pledges up to 49% (benchmarked to the certified City of Artesia EIFD Infrastructure Financing Plan).</p>
       `;
     } else if (st === "CA") {
+      const caMeta = (typeof CA_COUNTIES_REGISTRY !== "undefined" && CA_COUNTIES_REGISTRY[f]) ? CA_COUNTIES_REGISTRY[f] : null;
+      const localMeasure = caMeta ? caMeta.funding : "Local Infrastructure / SB 1";
+      const transitList = caMeta ? caMeta.gtfs.join(", ") : "Regional Transit GTFS";
+      const hazardDesc = caMeta ? caMeta.hazard : "CAL FIRE / Regional Hazard Overlays";
       finEl.innerHTML = `
         <h3>California EIFD &amp; Local Transportation Measures (${esc(countyName)})</h3>
-        <p class="small">Enhanced Infrastructure Financing Districts (Gov. Code § 53398.50) operate under California statutory rules, utilizing county-specific ATI allocation shares and local voter-approved sales-tax matching funds (such as Orange County Measure M2 0.5% sales tax, San Diego TransNet, or Riverside Measure A). Assessed value models Proposition 13 base-year acquisition roll-forwards, statutory 2% maximum annual roll escalation, and 1.35× debt-service coverage ratio bonding.</p>
+        <p class="small">Enhanced Infrastructure Financing Districts (Gov. Code § 53398.50) operate under California statutory rules, utilizing county-specific ATI allocation shares and local voter-approved sales-tax matching funds: <strong>${esc(localMeasure)}</strong> (LA County Measure W excluded / non-applicable outside 06037). Regional MPO: <strong>${esc(caMeta ? caMeta.mpo : "Regional MPO")}</strong>. GTFS transit agencies: <strong>${esc(transitList)}</strong>. Environmental hazard overlays: <strong>${esc(hazardDesc)}</strong>. Assessed value models Proposition 13 base-year acquisition roll-forwards, statutory 2% maximum annual roll escalation, and 1.35× debt-service coverage ratio bonding.</p>
       `;
     } else if (st === "TX") {
       finEl.innerHTML = `
@@ -25783,13 +25787,15 @@ function syncMethodsModalToCounty(fips) {
   if (waterEl) {
     if (f === "06037") {
       waterEl.innerHTML = `
-        <h3>Measure W (Safe Clean Water Program)</h3>
-        <p class="small">Stormwater and green-infrastructure co-funding follows the LA County Flood Control District's Safe Clean Water Program: 50% Regional Program (projects scored by Watershed Area Steering Committees on a 110-point scale, 60 points to qualify, with benefits to disadvantaged communities at least 110% of their share of the population), 40% Municipal Program paid directly to cities, 10% District Program.</p>
+        <h3>Measure W Safe Clean Water Program</h3>
+        <p class="small">Stormwater and green-infrastructure co-funding follows the LA County Flood Control District's Safe Clean Water Program: 50% Regional Program (projects scored by Watershed Area Steering Committees on a 110-point scale, 60 points to qualify, with benefits to disadvantaged communities at least 110% of their share of the population), 40% Municipal Program paid directly to cities, 10% District Program. Isolated strictly to Los Angeles County (FIPS 06037).</p>
       `;
     } else if (st === "CA") {
+      const caMeta = (typeof CA_COUNTIES_REGISTRY !== "undefined" && CA_COUNTIES_REGISTRY[f]) ? CA_COUNTIES_REGISTRY[f] : null;
+      const localFunding = caMeta ? caMeta.funding : "Local Clean Water & Parks";
       waterEl.innerHTML = `
         <h3>Regional Clean Water &amp; Stormwater Quality Programs (${esc(countyName)})</h3>
-        <p class="small">Stormwater infrastructure and urban greening co-funding are modeled through regional municipal separate storm sewer system (MS4) compliance programs, California Proposition 1/Proposition 4 stormwater capital grants, and local watershed management area steering committee co-investments.</p>
+        <p class="small">LA County Measure W excluded (applicable only in 06037). Local stormwater infrastructure and urban greening co-funding are modeled through regional municipal separate storm sewer system (MS4) compliance programs, local voter-approved matching funds (<strong>${esc(localFunding)}</strong>), California Proposition 1/Proposition 4 stormwater capital grants, and local watershed management area steering committee co-investments.</p>
       `;
     } else if (st === "TX") {
       waterEl.innerHTML = `
@@ -25852,13 +25858,29 @@ function renderCountyReadinessMatrix(targetFips) {
   // Subsystem descriptions
   let assessRatioText = "Proposition 13 Base-Year Tenure Recovery & 2.0% Statutory Roll Inflation Cap";
   let zoningStatutesText = "CA AB 2097 (Zero Parking near transit) · SB 9 (By-Right 2-Unit Splits) · Gov Code § 66314 (ADU + JADU) · SB 79 (Transit Rail FAR Bonuses)";
-  let transitAgenciesText = "19 Regional Agencies (LA Metro, Metrolink, Muni, Big Blue Bus, Long Beach Transit, Culver CityBus, Torrance, Glendale Beeline, Pasadena Transit...)";
-  let safetyGapsMarkup = `<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:6px;padding:8px 10px;margin-top:6px;font-size:11px;color:#991b1b;line-height:1.4;">
-    <b>⚠️ Explicit Municipal CAD Reporting Gaps:</b> Beverly Hills PD, Burbank PD, Glendale PD, Pasadena PD, Torrance PD, and Culver City PD operate independent municipal CAD systems and do not publish live Open Data incident feeds. Santa Monica PD open CAD feed ended May 2024. LAPD, LASD, and Long Beach PD are rolling 12-month feeds.
-  </div>`;
-  let tifRegimeText = "California EIFD (Gov. Code § 53398.50) + Auditor-Controller FY 2026-27 AF49 Modified ATI Ratios (13,392 TRAs) + Measure W Safe Clean Water Program (50% Regional / 40% Municipal)";
+  let transitAgenciesText = "Regional Transit GTFS";
+  let safetyGapsMarkup = `<div style="font-size:11px;color:#475569;margin-top:4px;">County dispatch and municipal CAD logs; reporting gaps benchmarked to FBI NIBRS tables.</div>`;
+  let tifRegimeText = "California EIFD (Gov. Code § 53398.50)";
 
-  if (comp.state === "TX") {
+  if (comp.state === "CA") {
+    if (f === "06037") {
+      transitAgenciesText = "19 Regional Agencies (LA Metro, Metrolink, Big Blue Bus, Long Beach Transit, Culver CityBus, Torrance, Glendale Beeline, Pasadena Transit...)";
+      safetyGapsMarkup = `<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:6px;padding:8px 10px;margin-top:6px;font-size:11px;color:#991b1b;line-height:1.4;">
+        <b>⚠️ Explicit Municipal CAD Reporting Gaps:</b> Beverly Hills PD, Burbank PD, Glendale PD, Pasadena PD, Torrance PD, and Culver City PD operate independent municipal CAD systems and do not publish live Open Data incident feeds. Santa Monica PD open CAD feed ended May 2024. LAPD, LASD, and Long Beach PD are rolling 12-month feeds.
+      </div>`;
+      tifRegimeText = "California EIFD (Gov. Code § 53398.50) + Auditor-Controller FY 2026-27 AF49 Modified ATI Ratios (13,392 TRAs) + Measure W Safe Clean Water Program (50% Regional / 40% Municipal)";
+    } else {
+      const caInfo = (typeof CA_COUNTIES_REGISTRY !== "undefined" && CA_COUNTIES_REGISTRY[f]) ? CA_COUNTIES_REGISTRY[f] : null;
+      const localMeasure = caInfo ? caInfo.funding : (f === "06059" ? "OCTA Measure M2 (0.5% transportation sales tax)" : "Local Sales Tax Matching Funds / SB 1");
+      const transitList = caInfo ? caInfo.gtfs.join(", ") : (f === "06059" ? "OCTA Bus Transit & Metrolink Commuter Rail" : "Regional Transit GTFS");
+      const hazardDesc = caInfo ? caInfo.hazard : "CAL FIRE / Regional Hazard Overlays";
+      
+      transitAgenciesText = `${(caInfo && caInfo.gtfs) ? caInfo.gtfs.length : (comp.gtfs_agencies_count || 1)} Regional Agencies (${transitList})`;
+      safetyGapsMarkup = `<div style="font-size:11px;color:#475569;margin-top:4px;">County Sheriff CAD and municipal police feeds; local environmental hazards: <b>${esc(hazardDesc)}</b>.</div>`;
+      tifRegimeText = `California EIFD (Gov. Code § 53398.50) + Local Infrastructure: <b>${esc(localMeasure)}</b> (LA County Measure W excluded).`;
+      zoningStatutesText = "CA AB 2097 (Zero Parking near transit) · SB 9 (By-Right Lot Splits) · Gov Code § 66314 (ADU + JADU) · SB 79 (Transit Rail FAR Bonuses) · 6th Cycle (2021–2029) Municipal Housing Element Rezonings";
+    }
+  } else if (comp.state === "TX") {
     assessRatioText = "Texas Property Tax Code § 23.01 100% Market Value CAD Ad Valorem Assessment";
     zoningStatutesText = "TX SB 840 (Commercial/Office-to-Multifamily Infill) · Austin HOME Phase 1 & 2 (3 Units By-Right, 2,500 sqft Lot Minimums) · Tex. Tax Code Ch. 311";
     transitAgenciesText = comp.gtfs_agencies_count ? `${comp.gtfs_agencies_count} Transit Agencies (METRO Houston Fixed-Route & Light Rail GTFS)` : "Regional Transit GTFS";
@@ -25888,13 +25910,7 @@ function renderCountyReadinessMatrix(targetFips) {
     transitAgenciesText = `${comp.gtfs_agencies_count || 1} Transit Agency GTFS Schedule(s)`;
     safetyGapsMarkup = `<div style="font-size:11px;color:#475569;margin-top:4px;">Municipal CAD feeds where published; secondary jurisdictions matched to FBI NIBRS tables.</div>`;
     tifRegimeText = "Ohio TIF (ORC § 5709.40) & Municipal Special Improvement Districts (SIDs)";
-  } else if (comp.fips === "06059") {
-    assessRatioText = "California Proposition 13 Acquisition Base-Year Tenure Recovery & 2.0% Statutory Roll Inflation Cap";
-    zoningStatutesText = "CA AB 2097 (Zero Parking near transit) · SB 9 (By-Right Lot Splits) · Gov Code § 66314 (ADU + JADU) · SCAG 6th Cycle Rezonings";
-    transitAgenciesText = "2 Regional Agencies (OCTA Bus Transit & Metrolink Orange County Commuter Rail)";
-    safetyGapsMarkup = `<div style="font-size:11px;color:#475569;margin-top:4px;">Orange County Sheriff Department open CAD & Anaheim PD feed; independent municipal agencies cross-referenced with CA DOJ OpenJustice.</div>`;
-    tifRegimeText = "California EIFD (Gov. Code § 53398.50) + OCTA Measure M2 (0.5% transportation sales tax matching funds)";
-  } else if (comp.state !== "CA") {
+  } else {
     assessRatioText = "100% Statutory Ad Valorem Market Baseline & State Sales Ratio Normalization";
     zoningStatutesText = "Administrative By-Right Infill & Accessory Dwelling Unit Permitting Framework";
     transitAgenciesText = `${comp.gtfs_agencies_count || 1} Transit Agency GTFS Schedule(s)`;
@@ -25916,7 +25932,7 @@ function renderCountyReadinessMatrix(targetFips) {
         <div>${tierBadge}</div>
       </div>
       <div style="font-size:12px;color:#cbd5e1;line-height:1.45;">
-        City Pretty enforces audited cadastral, statutory, and econometric provenance. All 639 US counties are cataloged below with verifiable assessment roll dates, zoning engine citations, transit feeds, and safety cadastre status.
+        City Pretty enforces audited cadastral, statutory, and econometric provenance. All 706 US counties and county-equivalent jurisdictions are cataloged below with verifiable assessment roll dates, zoning engine citations, transit feeds, and safety cadastre status.
       </div>
     </div>
 
