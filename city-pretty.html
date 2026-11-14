@@ -26806,6 +26806,8 @@ let _currentLoadingFips = null;
 const _bundlePromises = {};
 
 function countyNameOf(fips) {
+  if (!fips) return "";
+  fips = String(fips).padStart(5, "0");
   if (fips === "06037") return "Los Angeles County";
   if (fips === ORANGE_FIPS) return "Orange County";
   const el = (typeof countyBundleEls === "function") && countyBundleEls().find(e => e.dataset.fips === fips);
@@ -26820,6 +26822,8 @@ function countyNameOf(fips) {
 }
 
 async function loadCountyBundle(fips) {
+  if (!fips) return null;
+  fips = String(fips).padStart(5, "0");
   if (COUNTY_BUNDLES[fips]) return COUNTY_BUNDLES[fips];
   if (_bundlePromises[fips]) return _bundlePromises[fips];
   _bundlePromises[fips] = (async () => {
@@ -26869,7 +26873,7 @@ async function loadCountyBundle(fips) {
     if (B && B.features && B.features.length) {
       setCachedBundle(fips, B);
     }
-    if (el.dataset.sites) {
+    if (el && el.dataset && el.dataset.sites) {
       try {
         const S = await fetchJSON(el.dataset.sites);
         await loadSites();
@@ -26969,6 +26973,7 @@ function syncAttribution() {
 
 async function openCounty(fips, wantBgId) {
   if (!fips) return;
+  fips = String(fips).padStart(5, "0");
   if (fips === "06037") return switchCounty("la", wantBgId);
   if (_countyLoading && _currentLoadingFips === fips) return;
   _countyLoading = true;

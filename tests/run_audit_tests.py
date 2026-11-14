@@ -712,9 +712,34 @@ def run_tests():
     assert t13["userPromptHasAvm"] is True
     print("  -> PASS: AI Advisor grounding contract enforces zero-hallucination rules, tier disclaimers, and 2026 solar/statutory mandates.")
 
+    # Test 14: Nationwide 706-Jurisdiction Bundles & Canonical FIPS Resolution
+    t14 = eval_js("""
+    (() => {
+        const totalBundles = typeof countyBundleEls === "function" ? countyBundleEls().length : 0;
+        const ancName = typeof countyNameOf === "function" ? countyNameOf("02020") : null;
+        const honName = typeof countyNameOf === "function" ? countyNameOf("15003") : null;
+        const alexName = typeof countyNameOf === "function" ? countyNameOf("51510") : null;
+        const ctName = typeof countyNameOf === "function" ? countyNameOf("09150") : null;
+        return {
+            totalBundles,
+            ancName,
+            honName,
+            alexName,
+            ctName
+        };
+    })()
+    """)
+    print("Test 14 (Nationwide 706-Jurisdiction Bundles & Resolution):", t14)
+    assert t14["totalBundles"] == 706
+    assert t14["ancName"] == "Anchorage Municipality"
+    assert t14["honName"] == "Honolulu County"
+    assert t14["alexName"] == "Alexandria city"
+    assert "Northeastern Connecticut" in (t14["ctName"] or "")
+    print("  -> PASS: All 706 nationwide jurisdictions verified in DOM bundles and canonical FIPS lookup.")
+
     ws.close()
     print("========================================================")
-    print("ALL 13 CORE REGRESSION TEST SUITES PASSED (100% SUCCESS)!")
+    print("ALL 14 CORE REGRESSION TEST SUITES PASSED (100% SUCCESS)!")
     print("========================================================")
 
 if __name__ == "__main__":

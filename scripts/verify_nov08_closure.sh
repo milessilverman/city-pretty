@@ -7,7 +7,7 @@ echo "========================================================"
 echo "CITY PRETTY NOV 08 AUDIT CLOSURE VERIFICATION SUITE"
 echo "========================================================"
 
-echo "Step 1: Running 13-suite calculation engine test suite..."
+echo "Step 1: Running 14-suite calculation engine test suite..."
 python3 tests/run_audit_tests.py
 
 echo "Step 2: Running live headless browser runtime verification..."

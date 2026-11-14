@@ -25,6 +25,6 @@ jobs:
           date -u +"%d %b %Y" | tr '[:lower:]' '[:upper:]' > public/BUILD_DATE.txt
           git config user.name "city-pretty-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add public/data/ public/BUILD_DATE.txt
+          git add public/data/ src/data/ public/BUILD_DATE.txt
           git commit -m "chore(etl): automated weekly geospatial & dataset vintage refresh" || exit 0
           git push

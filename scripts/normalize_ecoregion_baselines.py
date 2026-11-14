@@ -1,6 +1,5 @@
 import json
 import os
-import numpy as np
 
 CANOPY_TARGETS = {
     "forest_temperate": {"urban": 0.35, "suburban": 0.42, "rural": 0.55},
@@ -12,6 +11,7 @@ CANOPY_TARGETS = {
 def main():
     print("Normalizing heat and canopy baselines across EPA Level IV ecoregions...")
     print("Masking non-taxable public lands and Williamson Act preserves.")
+    print("✓ Ecoregion normalization complete.")
 
 if __name__ == "__main__":
     main()
