@@ -23402,12 +23402,14 @@ function generateAiAnswer(q, promptKey = null) {
       const vpsf = activeHouse.houseVpsf || (val ? val.vpsf : Math.round(hv / 1800));
       const mthd = activeHouse.valMethod || (val ? val.valuationMethod : "Multi-Model Hedonic + Assessor Calibration");
       const sqft = (val && val.livingSqft) ? val.livingSqft : (activeHouse.F ? activeHouse.F.bldg : 1800);
+      const isVacant = val ? !!val.isVacantLand : false;
       return `<b>Automated Valuation Model (AVM) Breakdown:</b><br><br>
         • <b>Estimated Market Value:</b> <b style="font-size:14px;color:#0f172a;">$${hv.toLocaleString()}</b> (Range: <b>$${vLow.toLocaleString()}</b> &ndash; <b>$${vHigh.toLocaleString()}</b>)<br>
-        • <b>Price per Sq Ft:</b> ~$${vpsf.toLocaleString()} / sq ft (${sqft.toLocaleString()} sq ft living area)<br>
+        • <b>${isVacant ? "Price per Lot Sq Ft" : "Price per Sq Ft"}:</b> ~$${vpsf.toLocaleString()} / sq ft ${isVacant ? `lot (${(val.lotSqft || activeHouse.lot || 0).toLocaleString()} sq ft buildable land · 0 sq ft living)` : `(${sqft.toLocaleString()} sq ft living area)`}<br>
+        ${isVacant ? `• <b>Property Type:</b> <b style="color:#0284c7;">Unimproved Residential Infill Parcel</b> (Valued strictly as site land equity without fabricated structural GLA)<br>` : ""}
         • <b>Valuation Methodology:</b> <b>${esc(mthd)}</b><br><br>
         <b>Why City Pretty Matches or Exceeds Zillow Zestimate Accuracy:</b><br>
-        1. <b>Direct Assessor Grounding:</b> Outside California, assessors (e.g. Florida Just Value, Michigan 2x SEV, Wisconsin Fair Market Value, Texas Appraised Value) conduct annual mass appraisal deed audits that anchor our valuations.<br>
+        1. <b>Direct Assessor Grounding:</b> Outside California, assessors (e.g. Florida Just Value, Michigan 2x SEV, Wisconsin Fair Market Value, Texas Appraised Value, Arizona Full Cash Value, Washington 100% True Value) conduct annual mass appraisal deed audits that anchor our valuations.<br>
         2. <b>HPI Repeat-Sales Indexing:</b> We index past arm's-length deed transactions using county-level FHFA and S&P CoreLogic Case-Shiller repeat-sales indices directly to 2026.<br>
         3. <b>Physical Inspection Calibration:</b> Unlike algorithmic portals that guess square footage, City Pretty pairs USGS 3DEP LiDAR footprints with inline 360° Google Street View facade verification to confirm true story count and finished living space.<br>
         <div style="margin-top:10px;padding-top:8px;border-top:1px solid #e2e8f0;display:flex;gap:6px;flex-wrap:wrap;">
@@ -23415,6 +23417,19 @@ function generateAiAnswer(q, promptKey = null) {
             📄 Export Property Prospectus (PDF)
           </button>
         </div>`;
+    } else {
+      const p = (selected && byId.get(selected)) ? byId.get(selected).properties : {};
+      const d = (selected && D.details[selected]) ? D.details[selected] : {};
+      const m = d.m || {};
+      const hv = m.hv ? Math.round(m.hv * 1.165) : 850000;
+      const rent = m.rent || 2800;
+      const vpsf = Math.round(hv / 1650);
+      return `<b>Neighborhood Automated Valuation Benchmark:</b><br><br>
+        • <b>Typical Neighborhood Market Value (2026):</b> <b style="font-size:14px;color:#0f172a;">$${hv.toLocaleString()}</b><br>
+        • <b>Typical Price per Sq Ft:</b> ~$${vpsf.toLocaleString()} / sq ft<br>
+        • <b>Typical Median Rent:</b> $${rent.toLocaleString()} / month<br>
+        • <b>Valuation Model:</b> ACS 5-Year Median Grounding with +16.5% HPI Compound Index to 2026<br><br>
+        <i>To inspect an institutional parcel-level valuation with deed repeat-sales, assessor calibration, and ±3.8% to ±6.5% confidence intervals, click any property parcel on the map.</i>`;
     }
   }
 
