@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { calculateTaxIncrementCapacity } from "../src/engines/municipalFinanceEngine";
-import { evaluateByRightHousing, ParcelContext } from "../src/engines/statutoryZoningEngine";
-import { computeSubAdditivePackage } from "../src/engines/hedonicCapitalizationEngine";
-import { calculateSolarMicrogridRoi } from "../src/engines/solarMicrogridEngine";
-import { normalizeArcGisFeature } from "../src/adapters/arcgisNormalizer";
-import { StateFinanceProfile } from "../src/types";
+import { calculateTaxIncrementCapacity } from "../../src/engines/municipalFinanceEngine";
+import { evaluateByRightHousing, ParcelContext } from "../../src/engines/statutoryZoningEngine";
+import { computeSubAdditivePackage } from "../../src/engines/hedonicCapitalizationEngine";
+import { calculateSolarMicrogridRoi } from "../../src/engines/solarMicrogridEngine";
+import { normalizeArcGisFeature } from "../../src/adapters/arcgisNormalizer";
+import { StateFinanceProfile } from "../../src/types";
 
 const BASE_EXCLUSIONS: ParcelContext["exclusions"] = {
   historic_district_hpoz: false,

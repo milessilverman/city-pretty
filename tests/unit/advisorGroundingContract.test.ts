@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { ADVISOR_SYSTEM_PROMPT, buildAdvisorUserMessage, sanitizeAdvisorContext } from "../src/ai/advisorGroundingContract";
+import { ADVISOR_SYSTEM_PROMPT, buildAdvisorUserMessage, sanitizeAdvisorContext } from "../../src/ai/advisorGroundingContract";
 
 describe("AI advisor prompt contract", () => {
   it("keeps the instructions fixed and free of per-request data", () => {

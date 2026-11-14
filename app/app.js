@@ -18038,7 +18038,7 @@ function valuationCheck(a, lot, est) {
   const roll = ((+a.Roll_LandValue || 0) + (+a.Roll_ImpValue || 0)) || (+a.Roll_TotalValue || 0);
   const acres = lot ? lot / 43560 : (+a.Acres || 0);
   const useWords = (String(a.UseType || "") + " " + String(a.UseDescription || "")).toLowerCase();
-  const isRes = /residential|single|family|condo|dwell|duplex|townh|apartment/.test(useWords);
+  const isRes = /residential|single|family|condo|dwell|duplex|townh|apartment/.test(useWords.replace(/non-residential/g, ""));
   const nonRes = !isRes && (/non-residential|commerc|industr|institution|government|exempt|church|school|hospital|utilit|office|retail|federal/.test(useWords));
   if (nonRes) return { ok: false, roll, reason: "The county records this lot as non-residential; the home-value model covers houses, condos and small apartment buildings." };
   if (roll >= 20e6) return { ok: false, roll, reason: `The assessor values this lot at ${fmt$(roll)}, far beyond the homes the model is built from.` };
@@ -24619,6 +24619,9 @@ async function init() {
       const h1 = document.querySelector(".brand h1"), more = els.map(e => e.dataset.name.replace(/ County$/, ""));
       if (h1 && more.length === 1) h1.textContent = `Which improvements make ${els[0].dataset.name} neighborhoods better, and worth more, per dollar`;   // the full name: "San Juan Municipio", "Orleans Parish"
       else if (h1 && more.length > 1) h1.textContent = "Which improvements make neighborhoods better, and worth more, per dollar";
+      els.filter(e => e.dataset.coverage === "lots").forEach(e => {   // the menu's options are pre-written in index.html
+        const o = sel.querySelector(`option[value="${e.dataset.fips}"]`);
+        if (o && !/lot lines only/.test(o.textContent)) { o.textContent += " (lot lines only)"; o.title = e.dataset.name + ": no neighborhood data yet; live property lines only"; } });
       { const withData = els.filter(e => e.dataset.coverage !== "lots").length, lotsOnly = els.length - withData;
         const first = sel.querySelector('option[value=""]'); if (first) first.textContent = `More counties (${withData})…`;
         sel.title = sel.ariaLabel = `Select from ${withData} US counties with data` + (lotsOnly ? ` and ${lotsOnly} with property lines only` : ""); } } }

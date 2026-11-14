@@ -5,7 +5,7 @@ import {
   calculatePermitCapitalization,
   calculateCalibratedTreeEconomics,
   HouseParcelAuditInput,
-} from "../src/engines/parcelHouseAuditor";
+} from "../../src/engines/parcelHouseAuditor";
 
 describe("Parcel House Auditor Unit Tests", () => {
   it("1. Capitalizes permitted additions/remodels at +85%", () => {

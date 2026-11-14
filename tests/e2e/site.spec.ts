@@ -1,0 +1,122 @@
+// Browser checks against the page served locally (scripts/serve.mjs). They avoid live third-party services where
+// possible: the AI Worker is mocked, and the parcel checks call the page's own functions with fixed records.
+import { expect, test, type Page } from "@playwright/test";
+
+async function openPage(page: Page, path = "") {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto(path);
+  await page.waitForFunction(() => (document.querySelector("#loading") as HTMLElement | null)?.hidden === true, null, { timeout: 60_000 });
+  return errors;
+}
+
+test("loads Los Angeles County without script errors", async ({ page }) => {
+  const errors = await openPage(page);
+  await expect(page.locator("#panel")).toContainText("BLOCK GROUP");
+  await expect(page.locator(".brand h1")).not.toContainText("706");
+  expect(errors).toEqual([]);
+});
+
+test("does not download Orange County until it is opened", async ({ page }) => {
+  let ocRequested = false;
+  page.on("request", (r) => { if (r.url().includes("bundle-oc")) ocRequested = true; });
+  await openPage(page);
+  await page.waitForTimeout(2_000);
+  expect(ocRequested).toBe(false);
+  await page.click("#btn-county-oc");
+  await page.waitForFunction(() => (window as any).activeCounty === "oc", null, { timeout: 60_000 });
+  await expect(page.locator(".brand h1")).toContainText("Orange County");
+});
+
+test("county menu counts only counties that have data", async ({ page }) => {
+  await openPage(page);
+  const { label, withData, lotsOnly } = await page.evaluate(() => {
+    const els = [...document.querySelectorAll<HTMLElement>("script.county-bundle")];
+    return {
+      label: document.querySelector('#county-more option[value=""]')!.textContent,
+      withData: els.filter((e) => e.dataset.coverage !== "lots").length,
+      lotsOnly: els.filter((e) => e.dataset.coverage === "lots").length,
+    };
+  });
+  expect(label).toBe(`More counties (${withData})…`);
+  expect(lotsOnly).toBeGreaterThan(0);
+  await expect(page.locator("#county-more option", { hasText: "(lot lines only)" })).toHaveCount(lotsOnly);
+});
+
+test("withholds home values the model cannot support", async ({ page }) => {
+  await openPage(page);
+  const r = await page.evaluate(() => {
+    const vc = (window as any).valuationCheck ?? (globalThis as any).valuationCheck;
+    return {
+      whiteHouse: vc({ UseType: "unknown", Roll_LandValue: 1189552600, Roll_ImpValue: 31176660 }, 774801, 1210000),
+      office: vc({ UseType: "non-residential", UseDescription: "Office building" }, 9000, 900000),
+      underRoll: vc({ UseType: "residential", Roll_TotalValue: 3000000 }, 6000, 1000000),
+      house: vc({ UseType: "residential", UseDescription: "Single family residence", Roll_TotalValue: 450000 }, 6000, 1100000),
+    };
+  });
+  expect(r.whiteHouse.ok).toBe(false);
+  expect(r.office.ok).toBe(false);
+  expect(r.underRoll.ok).toBe(false);
+  expect(r.house.ok).toBe(true);
+});
+
+test("a numeric or blank use code is unknown, not commercial", async ({ page }) => {
+  await openPage(page);
+  const r = await page.evaluate(() => {
+    const f = (window as any).parcelUseType ?? (globalThis as any).parcelUseType;
+    return [f(""), f("0100"), f("SINGLE FAMILY"), f("Commercial retail")];
+  });
+  expect(r).toEqual(["unknown", "unknown", "residential", "non-residential"]);
+});
+
+test("names a block group after a label outside it as 'Near …'", async ({ page }) => {
+  await openPage(page);
+  await page.evaluate(() => (window as any).openCounty("11001"));
+  await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "11001", null, { timeout: 60_000 });
+  const name = await page.evaluate(() => (window as any).D_OC.features.find((f: any) => f.properties.id === "110019800001")?.properties.n);
+  expect(name).toBe("Near The Wharf");
+});
+
+test("AI advisor says it is not connected and sends nothing", async ({ page }) => {
+  let sent = false;
+  page.on("request", (r) => { if (r.url().includes("/api/ai")) sent = true; });
+  await openPage(page);
+  await page.click("#btn-ai-header");
+  await expect(page.locator("#ai-status-indicator")).toHaveText(/Not connected/);
+  await page.fill("#ai-user-input", "What is the best investment here?");
+  await page.press("#ai-user-input", "Enter");
+  await expect(page.locator("#ai-chat-history")).toContainText("isn't connected yet");
+  await expect(page.locator("#ai-chat-history")).not.toContainText("VERDICT");
+  expect(sent).toBe(false);
+});
+
+test("AI advisor shows a Worker reply as text, not HTML", async ({ page }) => {
+  await page.route("**/app/config.js", (r) => r.fulfill({ contentType: "text/javascript", body: 'window.CITY_PRETTY_CONFIG = { workerUrl: "https://worker.test" };' }));
+  await page.route("https://worker.test/api/health", (r) => r.fulfill({ contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: '{"status":"ok","ai_advisor_ready":true}' }));
+  let body: any = null;
+  await page.route("https://worker.test/api/ai", (r) => {
+    body = JSON.parse(r.request().postData() || "{}");
+    return r.fulfill({ contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: JSON.stringify({ ok: true, text: "**Trees** first.\n- <img src=x onerror=alert(1)>" }) });
+  });
+  await openPage(page);
+  await page.click("#btn-ai-header");
+  await expect(page.locator("#ai-status-indicator")).toHaveText(/Connected/);
+  await page.fill("#ai-user-input", "Best investment?");
+  await page.press("#ai-user-input", "Enter");
+  await expect(page.locator("#ai-chat-history")).toContainText("Trees first.");
+  await expect(page.locator("#ai-chat-history img")).toHaveCount(0);
+  expect(Object.keys(body).sort()).toEqual(["context", "history", "promptKey", "question"]);
+  expect(JSON.stringify(body)).not.toMatch(/systemPrompt|apiKey/);
+});
+
+test("fits a phone screen", async ({ browser }) => {
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  const page = await ctx.newPage();
+  await openPage(page);
+  const r = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, width: document.documentElement.clientWidth, mapTop: document.querySelector("#map")!.getBoundingClientRect().top }));
+  expect(r.scroll).toBeLessThanOrEqual(r.width);
+  expect(r.mapTop).toBeLessThan(420);
+  await page.click("#btn-mobile-opts");
+  await expect(page.locator("#roi-mode")).toBeVisible();
+  await ctx.close();
+});

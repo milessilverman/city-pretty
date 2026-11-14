@@ -1,31 +1,14 @@
+"""Recompute each county's data tier (A to D) from src/data/county_sources_master.csv into
+src/data/county_completeness.json:  python3 scripts/build_county_readiness.py
+
+This only re-scores what the CSV says about each county's sources; it downloads nothing. The page's own copy of
+the tiers is COUNTY_COMPLETENESS_INDEX in app/app.js, so update that too when the tiers change.
+"""
 import csv
 import json
 import os
-from datetime import datetime, timedelta, timezone
 
-BUILD_DIR = "build"
-PUBLIC_DATA_DIR = "public/data"
 SRC_DATA_DIR = "src/data"
-os.makedirs(BUILD_DIR, exist_ok=True)
-os.makedirs(PUBLIC_DATA_DIR, exist_ok=True)
-os.makedirs(SRC_DATA_DIR, exist_ok=True)
-
-ROLLING_12M_START = (datetime.now(timezone.utc) - timedelta(days=365)).strftime("%Y-%m-%d")
-
-def fetch_socrata_rolling_crime(endpoint: str, date_field: str, lat_field: str, lon_field: str):
-    try:
-        import requests
-        params = {
-            "$where": f"{date_field} >= '{ROLLING_12M_START}T00:00:00'",
-            "$limit": 250000,
-        }
-        resp = requests.get(endpoint, params=params, timeout=60)
-        resp.raise_for_status()
-        rows = resp.json()
-        return rows or []
-    except Exception as e:
-        print(f"[WARN] Socrata crime fetch failed for {endpoint}: {e}")
-        return []
 
 def compute_county_readiness(rows: list[dict]) -> list[dict]:
     manifest = []
@@ -77,10 +60,10 @@ def main():
         rows = list(reader)
     
     manifest = compute_county_readiness(rows)
-    for out_path in [f"{PUBLIC_DATA_DIR}/county_completeness.json", f"{SRC_DATA_DIR}/county_completeness.json"]:
-        with open(out_path, "w", encoding="utf-8") as f:
-            json.dump(manifest, f, indent=2)
-    print(f"Wrote {len(manifest)} county readiness records to public/data and src/data.")
+    out_path = f"{SRC_DATA_DIR}/county_completeness.json"
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(manifest, f, indent=2)
+    print(f"Wrote {len(manifest)} county readiness records to {out_path}.")
 
 if __name__ == "__main__":
     main()
