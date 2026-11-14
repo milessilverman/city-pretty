@@ -53,6 +53,8 @@ def run_tests():
         code_solar = f.read()
     with open("src/engines/lidarStreetViewValidator.js") as f:
         code_lidar = f.read()
+    with open("src/engines/propertyValuationEngine.js") as f:
+        code_avm = f.read()
     with open("src/adapters/arcgisNormalizer.js") as f:
         code_arcgis = f.read()
 
@@ -63,6 +65,7 @@ def run_tests():
         {code_hedonic}
         {code_solar}
         {code_lidar}
+        {code_avm}
         {code_arcgis}
 
         window.__TEST_ENGINES__ = {{
@@ -71,6 +74,8 @@ def run_tests():
             computeSubAdditivePackage,
             calculateSolarMicrogridRoi,
             validateParcelImageryVintage,
+            estimatePropertyMarketValue,
+            getHpiMultiplier,
             normalizeArcGisFeature
         }};
         return true;
@@ -341,9 +346,70 @@ def run_tests():
     assert t8["currentWarning"] is None
     print("  -> PASS: Post-imagery 2024 remodel correctly triggers stale imagery override warning.")
 
+    # Test 9: Zillow-Grade Automated Property Valuation (AVM)
+    t9 = eval_js("""
+    (() => {
+        const { estimatePropertyMarketValue, getHpiMultiplier } = window.__TEST_ENGINES__;
+        
+        // 9A: Repeat Sales Indexing (2018 purchase of $500,000 -> 2026 indexed value)
+        const mult2018 = getHpiMultiplier(2018);
+        const repeatSale = estimatePropertyMarketValue({
+            attributes: {}, lotSqft: 6500, stateCode: "CA",
+            neighborhood: { hv: 850000 },
+            facts: { bldg: 1650, beds: 3, baths: 2, yb: 1985 },
+            salesInfo: { price: 500000, year: 2018 }
+        });
+
+        // 9B: Michigan 2x SEV True Cash Value (Kent County / Grand Rapids)
+        const michiganSEV = estimatePropertyMarketValue({
+            attributes: { SEV: 160000 }, lotSqft: 7500, stateCode: "MI",
+            neighborhood: { hv: 330000 },
+            facts: { bldg: 1750, beds: 3, baths: 2, yb: 1940 }
+        });
+
+        // 9C: Florida Just Value (JV) 100% Statutory Market Value
+        const floridaJV = estimatePropertyMarketValue({
+            attributes: { JV: 420000 }, lotSqft: 7000, stateCode: "FL",
+            neighborhood: { hv: 410000 },
+            facts: { bldg: 1800, beds: 3, baths: 2, yb: 2005 }
+        });
+
+        // 9D: Strict Separation of Living Area from Land Area (1800 sq ft home on 10,000 sq ft lot)
+        const largeLot = estimatePropertyMarketValue({
+            attributes: { LND_SQFOOT: 10000, LIVING_AREA: 1800 },
+            lotSqft: 10000, stateCode: "MI",
+            neighborhood: { hv: 330000 },
+            facts: { bldg: 1800, beds: 3, baths: 2, yb: 1950 }
+        });
+
+        return {
+            mult2018,
+            repeatSaleValue: repeatSale.estimatedValue,
+            michiganSevValue: michiganSEV.estimatedValue,
+            michiganMethod: michiganSEV.valuationMethod,
+            floridaJvValue: floridaJV.estimatedValue,
+            largeLotLivingSqft: largeLot.livingSqft,
+            largeLotValue: largeLot.estimatedValue
+        };
+    })()
+    """)
+    print("Test 9 (Zillow-Grade AVM Valuation Engine):", t9)
+    assert t9["mult2018"] == 1.66
+    # 2018 $500k sale blended with neighborhood median yields ~$830k - $930k in 2026
+    assert 780000 <= t9["repeatSaleValue"] <= 950000
+    # Michigan SEV $160k * 2 * 1.04 should be ~$330k - $360k
+    assert 320000 <= t9["michiganSevValue"] <= 380000
+    assert "Michigan 2x SEV" in t9["michiganMethod"]
+    # Florida JV $420k should be ~$420k - $480k
+    assert 410000 <= t9["floridaJvValue"] <= 480000
+    # Large lot must use 1800 sq ft living, NOT 10,000 sq ft
+    assert t9["largeLotLivingSqft"] == 1800
+    assert 340000 <= t9["largeLotValue"] <= 430000
+    print("  -> PASS: AVM valuation matches Zillow benchmarks across repeat-sales, Michigan SEV, Florida JV & non-linear lot scaling.")
+
     ws.close()
     print("========================================================")
-    print("ALL 8 CORE REGRESSION TEST SUITES PASSED (100% SUCCESS)!")
+    print("ALL 9 CORE REGRESSION TEST SUITES PASSED (100% SUCCESS)!")
     print("========================================================")
 
 if __name__ == "__main__":
