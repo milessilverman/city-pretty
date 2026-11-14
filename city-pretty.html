@@ -1083,6 +1083,10 @@ details.panel-sec .sec-content { padding: 12px; }
   body.prospectus-printing * { visibility: hidden !important; }
   body.prospectus-printing #prospectus-modal, body.prospectus-printing #prospectus-modal * { visibility: visible !important; }
   body.prospectus-printing #prospectus-modal { position: absolute !important; left: 0 !important; top: 0 !important; width: 100% !important; margin: 0 !important; padding: 0 !important; background: #fff !important; }
+  body.compare-printing * { visibility: hidden !important; }
+  body.compare-printing #compare-modal, body.compare-printing #compare-modal * { visibility: visible !important; }
+  body.compare-printing #compare-modal { position: absolute !important; left: 0 !important; top: 0 !important; width: 100% !important; margin: 0 !important; padding: 20px !important; background: #fff !important; }
+  body.compare-printing .modal-close, body.compare-printing #compare-modal button { display: none !important; }
   .no-print { display: none !important; }
   .prospectus-page { page-break-after: always; padding: 32px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #0f172a; }
 }
@@ -2344,7 +2348,8 @@ details.panel-sec .sec-content { padding: 12px; }
     <h2>Side-by-Side Neighborhood Comparison</h2>
     <p class="small muted">Compare up to 3 neighborhoods across home values, rents, heat vulnerability, crime, transit, and top return-on-investment improvements.</p>
     <div class="compare-grid" id="compare-content"></div>
-    <div style="margin-top:16px;display:flex;justify-content:flex-end;gap:8px">
+    <div style="margin-top:16px;display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;">
+      <button type="button" class="action-pill" onclick="exportComparisonBrief()" style="background:#0f172a;color:#fff;border-color:#0f172a;display:inline-flex;align-items:center;gap:4px;">📄 Export Comparison (PDF)</button>
       <button type="button" class="action-pill" onclick="clearCompare()">Clear All</button>
       <button type="button" class="action-pill active" onclick="closeCompareDrawer()">Done</button>
     </div>
@@ -23399,6 +23404,7 @@ function renderCompareDrawer() {
           <div class="c-row"><span class="k">Lot Size</span><span class="v">${h.lotSqft.toLocaleString()} sq ft</span></div>
           <div class="c-row"><span class="k">Living Area</span><span class="v">${h.bldgSqft.toLocaleString()} sq ft (${h.stories} story)</span></div>
           <div class="c-row"><span class="k">Est. Value</span><span class="v">$${Number(h.valuation).toLocaleString()}</span></div>
+          <div class="c-row"><span class="k">Price / Sq Ft</span><span class="v">~$${Math.round(h.valuation / Math.max(h.bldgSqft, 1)).toLocaleString()} / sq ft</span></div>
           <div class="c-row"><span class="k">Solar DC Capacity</span><span class="v">${h.solarKw} kW DC</span></div>
           <div class="c-row"><span class="k">Transit Walkshed</span><span class="v">${h.nearestStn ? (h.nearestStn.distMi <= 0.5 ? '<b style="color:#0284c7">0-Parking Exempt</b>' : h.nearestStn.distMi.toFixed(2) + ' mi') : '–'}</span></div>
           <div class="c-row"><span class="k">Payback Horizon</span><span class="v">${b.paybackYrs} yrs</span></div>
@@ -23434,11 +23440,20 @@ function renderCompareDrawer() {
         <div class="c-row"><span class="k">Best Bet</span><span class="v">${topC ? esc(topC.name) : "–"}</span></div>
         <div class="c-row"><span class="k">Expected Return</span><span class="v">${topRng ? topRng.estStr + " (" + topRng.str + ")" : "–"}</span></div>
         <div class="c-row"><span class="k">Heat vs County</span><span class="v">${m.ht != null ? (m.ht > 0 ? "+" : "") + (+m.ht).toFixed(1) + "°F" : "–"}</span></div>
+        <div class="c-row"><span class="k">Tree Canopy Deficit</span><span class="v">${m.tg != null ? m.tg + "% to 35% goal" : "–"}</span></div>
+        <div class="c-row"><span class="k">Renter Displacement</span><span class="v">${m.own != null && m.own < 45 ? '<span style="color:#b45309;font-weight:700">Elevated (' + Math.round(100 - m.own) + '% Renters)</span>' : '<span style="color:#15803d">Low Risk (' + (m.own != null ? Math.round(m.own) : '–') + '% Owners)</span>'}</span></div>
         <div class="c-row"><span class="k">Violent Crime / 1k</span><span class="v">${m.vc != null ? (+m.vc).toFixed(1) : "–"}</span></div>
         <div class="c-row"><span class="k">Bus Frequency</span><span class="v">${m.bt != null ? Math.round(m.bt) + "/hr" : "–"}</span></div>
       </div>
     `;
   }).join("");
+}
+
+function exportComparisonBrief() {
+  document.body.classList.remove("prospectus-printing");
+  document.body.classList.add("compare-printing");
+  window.print();
+  setTimeout(() => document.body.classList.remove("compare-printing"), 1200);
 }
 
 function openMethodsModal() {
