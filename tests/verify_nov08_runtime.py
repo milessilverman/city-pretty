@@ -289,6 +289,70 @@ def main():
     assert res_ca_isolation["laHasMeasureW"] is True
     print("✓ Measure W strictly isolated to LA County 06037; non-LA CA counties reflect local measures.")
 
+    # 9. Test End-to-End Parcel Inspector DOM Rendering
+    res_house_render = eval_js("""
+    (() => {
+        const box = document.createElement("div");
+        box.id = "test-live-parcel-box";
+        document.body.appendChild(box);
+
+        const mockAttrs = {
+            AIN: "5408012015",
+            APN: "5408-012-015",
+            SitusFullAddress: "1234 ECHO PARK AVE",
+            county: "Los Angeles",
+            UseDescription: "Single Family Residence",
+            Roll_LandValue: 420000,
+            Roll_ImpValue: 280000,
+            LastSalePrice: 890000,
+            LastSaleDate: "2023-05-15",
+            ZoneCode: "RD1.5-1"
+        };
+        const mockLot = 6500;
+        const mockLL = { lat: 34.078, lng: -118.260 };
+        const mockSt = {
+            osmDone: true,
+            rDone: true,
+            osm: { foot: 1400 },
+            R: {
+                hpoz: { ok: false, v: [] },
+                flood: { ok: false, v: [] },
+                fire: { ok: false, v: [] },
+                permits: {
+                    ok: true,
+                    v: [
+                        { IssueDate: "2024-04-12", Valuation: 75000, Description: "Permitted kitchen and bathroom remodel" }
+                    ]
+                },
+                sales: {
+                    ok: true,
+                    v: [{ SalePrice: 890000, SaleDate: "20230515" }]
+                }
+            }
+        };
+
+        renderHouse(box, mockAttrs, mockLot, mockLL, mockSt);
+
+        const panel = box.querySelector(".house-audit-panel");
+        return {
+            hasPanel: !!panel,
+            containsAvm: panel ? panel.textContent.includes("Institutional AVM Valuation") : false,
+            containsSolar: panel ? panel.textContent.includes("2026+ Rooftop Solar") : false,
+            containsDisclaimers: panel ? panel.textContent.includes("Institutional Disclaimers") : false,
+            containsPermitCap: panel ? panel.textContent.includes("Permit Capitalization (+85%)") : false,
+            hasStaleImageryBadge: panel ? panel.textContent.includes("Stale Imagery (Post-Construction Permit Override)") : false
+        };
+    })()
+    """)
+    print("9. End-to-End Parcel Inspector DOM Check:", res_house_render)
+    assert res_house_render["hasPanel"] is True
+    assert res_house_render["containsAvm"] is True
+    assert res_house_render["containsSolar"] is True
+    assert res_house_render["containsDisclaimers"] is True
+    assert res_house_render["containsPermitCap"] is True
+    assert res_house_render["hasStaleImageryBadge"] is True
+    print("✓ Full single-house parcel audit panel rendered into live DOM with permit capitalization & imagery badge.")
+
     ws.close()
     print("========================================================")
     print("ALL BROWSER RUNTIME VERIFICATIONS PASSED (100% SUCCESS)!")

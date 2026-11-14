@@ -19664,17 +19664,26 @@ function decodeAssessor(a) {
 }
 function permitFacts(L) {
   const out = { list: [], stories: null, storiesSrc: null, adu: false };
-  if (L && L.prm.ok) for (const r of L.prm.v) {
+  if (L && L.prm && L.prm.ok && Array.isArray(L.prm.v)) for (const r of L.prm.v) {
     const w = `${r.permit_type || ""} ${r.permit_sub_type || ""} ${r.work_desc || ""}`;
     const kind = /adu|accessory dwelling/i.test(w) || +r.adu_changed > 0 || +r.junior_adu > 0 ? "ADU" : /pool|spa/i.test(w) ? "pool" : /solar|photovoltaic/i.test(w) ? "solar"
       : /addition|add .*sq|second story|2nd story/i.test(w) ? "addition" : /re-?roof/i.test(w) ? "re-roof" : /new/i.test(r.permit_type || "") ? "new building" : null;
     if (kind === "ADU") out.adu = true;
     if (kind) out.list.push({ kind, date: String(r.issue_date || r.status_date || "").slice(0, 10), status: r.status_desc || "", desc: String(r.work_desc || "").slice(0, 120) });
   }
-  if (L && L.old.ok) {
+  if (L && L.old && L.old.ok && Array.isArray(L.old.v)) {
     const st = L.old.v.filter(r => +r.of_stories > 0 && /new|dwelling|sfd|single family|addition/i.test(r.work_description || ""))
       .sort((x, y) => String(y.issue_date || "").localeCompare(String(x.issue_date || "")));
     if (st.length) { out.stories = +st[0].of_stories; out.storiesSrc = `LA City building permit (${String(st[0].issue_date || "").slice(0, 4)}): ${st[0].of_stories} stor${+st[0].of_stories > 1 ? "ies" : "y"} permitted`; }
+  }
+  if (L && L.permits && L.permits.ok && Array.isArray(L.permits.v)) {
+    for (const r of L.permits.v) {
+      const w = `${r.TYPE || r.permit_type || ""} ${r.Description || r.work_desc || ""}`;
+      const kind = /adu|accessory dwelling/i.test(w) ? "ADU" : /pool|spa/i.test(w) ? "pool" : /solar|photovoltaic/i.test(w) ? "solar"
+        : /addition|add .*sq|second story|2nd story/i.test(w) ? "addition" : /remodel/i.test(w) ? "remodel" : null;
+      if (kind === "ADU") out.adu = true;
+      if (kind) out.list.push({ kind, date: String(r.IssueDate || r.issue_date || "").slice(0, 10), status: "Finaled", desc: String(r.Description || r.work_desc || "").slice(0, 120) });
+    }
   }
   return out;
 }
@@ -19967,7 +19976,7 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
   const { bldg, beds, baths, units, yb, foot, yard } = F;
   const cat = z ? z.cat : null, sf = cat === "single-family" || (!cat && res && units <= 1);
   const fire = R && R.fire ? R.fire.vh : (m.fire || 0) >= 0.5;
-  const hist = R ? [R.hpoz, R.hcm].some(x => x.ok && x.v.length) || (R.hc.ok && R.hc.v.some(r => /design|landmark|register/i.test(r.Status_Code_Description || ""))) : false;
+  const hist = R ? ([R.hpoz, R.hcm].filter(Boolean).some(x => x && x.ok && x.v && x.v.length) || (R.hc && R.hc.ok && Array.isArray(R.hc.v) && R.hc.v.some(r => /design|landmark|register/i.test(r.Status_Code_Description || "")))) : false;
   const hill = R && R.hill && R.hill.ok && R.hill.v.length > 0;
   const slide = R && R.slide && R.slide.ok && R.slide.v.length > 0;
   const liq = R && R.liq && R.liq.ok && R.liq.v.length > 0;
