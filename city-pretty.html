@@ -2250,7 +2250,33 @@ details.panel-sec .sec-content { padding: 12px; }
           <div style="font-size:11px;color:#e0e7ff;opacity:0.95;">Grounded in Verified GIS Cadastre, State Statutory Housing Rights &amp; Infrastructure ROI</div>
         </div>
       </div>
-      <button type="button" onclick="closeAiAdvisor()" style="background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;">✕</button>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button type="button" onclick="toggleAiSettings()" style="background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:6px;padding:5px 9px;cursor:pointer;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:4px;">⚙️ API Settings</button>
+        <button type="button" onclick="closeAiAdvisor()" style="background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;">✕</button>
+      </div>
+    </div>
+
+    <!-- AI Settings Drawer -->
+    <div id="ai-settings-drawer" style="display:none;background:#f8fafc;border-bottom:2px solid #4f46e5;padding:12px 16px;font-size:12px;color:#1e293b;">
+      <div style="font-weight:700;margin-bottom:6px;color:#0f172a;display:flex;justify-content:space-between;align-items:center;">
+        <span>⚙️ Live AI Edge Proxy &amp; Direct Model Credentials</span>
+        <button type="button" onclick="toggleAiSettings()" style="border:none;background:transparent;cursor:pointer;font-size:13px;color:#64748b;">✕</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px;">
+        <div>
+          <label style="display:block;font-size:11px;font-weight:600;color:#475569;margin-bottom:2px;">Cloudflare Edge Worker / Custom AI Endpoint:</label>
+          <input type="text" id="ai-cfg-endpoint" placeholder="/api/ai (default edge proxy)" style="width:100%;border:1px solid #cbd5e1;border-radius:4px;padding:6px 8px;font-size:11.5px;font-family:monospace;box-sizing:border-box;" />
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:600;color:#475569;margin-bottom:2px;">Google Gemini API Key (client override):</label>
+          <input type="password" id="ai-cfg-key" placeholder="AIzaSy... (stored locally in browser)" style="width:100%;border:1px solid #cbd5e1;border-radius:4px;padding:6px 8px;font-size:11.5px;font-family:monospace;box-sizing:border-box;" />
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <button type="button" onclick="saveAiSettings()" style="background:#4f46e5;color:#fff;border:none;padding:5px 12px;border-radius:4px;font-size:11.5px;font-weight:700;cursor:pointer;">💾 Save Settings</button>
+        <button type="button" onclick="clearAiSettings()" style="background:#e2e8f0;color:#475569;border:none;padding:5px 10px;border-radius:4px;font-size:11.5px;cursor:pointer;">Reset to Defaults</button>
+        <span id="ai-cfg-status" style="font-size:11px;color:#059669;font-weight:600;"></span>
+      </div>
     </div>
 
     <!-- Active Context Strip -->
@@ -21012,27 +21038,31 @@ function renderHouse(box, a, lot, ll, st) {
           const solarKw = Math.max(3.5, Math.min(18.0, Math.round((usableSolarSqft / 60) * 2) / 2));
           const solarKwhYr = Math.round(solarKw * 1480);
           const solarSavYr = Math.round(solarKwhYr * 0.23);
+          const isCaNEM3 = (typeof activeState === "function" ? activeState() : "CA") === "CA";
           const solarGrossCost = Math.round(solarKw * 2800);
-          const solarTaxCredit = Math.round(solarGrossCost * 0.30);
-          const solarNetCost = solarGrossCost - solarTaxCredit;
-          const solarPaybackYrs = (solarNetCost / Math.max(solarSavYr, 500)).toFixed(1);
+          const batteryCost = isCaNEM3 ? 12000 : 0;
+          const totalGrossCost = solarGrossCost + batteryCost;
+          const ppaCredit30 = Math.round(totalGrossCost * 0.30);
+          const netCostPpa = totalGrossCost - ppaCredit30;
+          const cumulative25Yr = Math.round(solarSavYr * 25 - netCostPpa);
           return `
           <details class="solar-potential-drawer" style="margin:10px 0;border:1px solid #fde047;border-radius:8px;background:#fefce8;overflow:hidden;">
             <summary style="padding:10px 12px;font-weight:700;font-size:12px;color:#854d0e;cursor:pointer;display:flex;align-items:center;justify-content:space-between">
-              <span>☀️ Rooftop Solar &amp; Clean Energy Potential</span>
+              <span>☀️ 2026+ Rooftop Solar &amp; Microgrid Potential</span>
               <span style="font-size:11px;background:#fef9c3;color:#713f12;padding:2px 7px;border-radius:4px;font-weight:600">~${solarKw.toFixed(1)} kW System · Saves ${fmt$(solarSavYr)}/yr</span>
             </summary>
             <div style="padding:10px 12px;background:#fff;border-top:1px solid #fde047;font-size:12px;line-height:1.45;">
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;">
-                <div>• <b>Usable Solar Roof Area:</b> ${fmtN(usableSolarSqft)} sq ft (~65% unshaded)</div>
-                <div>• <b>System Capacity:</b> ${solarKw.toFixed(1)} kW DC (${Math.round(solarKw * 2.5)} premium panels)</div>
+                <div>• <b>USGS 3DEP LiDAR Usable Roof:</b> ${fmtN(usableSolarSqft)} sq ft (excludes north planes &amp; pitch penalties)</div>
+                <div>• <b>System Capacity:</b> ${solarKw.toFixed(1)} kW DC (${Math.round(solarKw * 2.5)} premium monocrystalline panels)</div>
                 <div>• <b>Annual Clean Generation:</b> ${fmtN(solarKwhYr)} kWh / year</div>
                 <div>• <b>Annual Electric Bill Savings:</b> ~${fmt$(solarSavYr)} / yr @ $0.23/kWh</div>
                 <div>• <b>2026 Federal ITC (Cash/Loan):</b> $0 (IRC § 25D Expired Dec 31, 2025; 30% available via Third-Party Lease / PPA under § 48E)</div>
-                <div>• <b>Net System Cost:</b> ~${fmt$(solarGrossCost)} (or ~${fmt$(solarGrossCost * 0.7)} via Third-Party PPA)</div>
+                <div>• <b>Net System Cost:</b> ~${fmt$(totalGrossCost)} cash/loan (or ~${fmt$(netCostPpa)} via § 48E Third-Party PPA)</div>
+                ${isCaNEM3 ? `<div style="grid-column:1 / -1;background:#fffbeb;border:1px solid #fde68a;padding:5px 8px;border-radius:4px;font-size:11px;color:#92400e;"><b>⚠️ California NEM 3.0 Tariff:</b> Avoided-cost export rates require paired 10–13.5 kWh battery storage (~$12,000 included above) for positive equity.</div>` : ""}
               </div>
               <div style="font-size:11px;color:#64748b;border-top:1px solid #f1f5f9;padding-top:6px;">
-                <b>Clean Energy Equity:</b> Projected 25-year cumulative net savings: <b>+${fmt$(solarSavYr * 25 - solarNetCost)}</b>. Compatible with net metering / solar billing tariff and battery backup storage.
+                <b>Clean Energy Equity:</b> Projected 25-year cumulative net savings (PPA/Lease model): <b style="color:#15803d">+${fmt$(cumulative25Yr)}</b>.
               </div>
             </div>
           </details>`;
@@ -21096,6 +21126,11 @@ function renderHouse(box, a, lot, ll, st) {
             ${b.steps.map(s => `<li style="margin-bottom:4px">${esc(s)}</li>`).join('')}
           </ol>
         </details>
+
+        <!-- Private CC&R Deed Restrictions Disclaimer -->
+        <div style="font-size:10.5px;color:#64748b;background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;padding:6px 8px;margin-bottom:10px;line-height:1.35;">
+          <b>⚠️ Private CC&amp;R Deed Restrictions Disclaimer:</b> While state housing statutes (e.g., CA SB 9, Gov. Code § 66314) preempt municipal zoning codes, private covenants, conditions &amp; restrictions (CC&amp;Rs) and HOA deed covenants may survive state preemption in certain jurisdictions. Verify property title deed records before committing architectural funds.
+        </div>
 
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
           <div style="display:flex;gap:6px;flex:1;max-width:380px;">
