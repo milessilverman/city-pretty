@@ -1237,7 +1237,7 @@ details.panel-sec .sec-content { padding: 12px; }
       <div id="canopy-hud-gap" style="font-size:13px;font-weight:700;color:#38bdf8;">15% to Goal</div>
     </div>
   </div>
-  <div style="font-size:11px;color:#cbd5e1;line-height:1.4;margin-bottom:8px;">
+  <div id="canopy-hud-economic" style="font-size:11px;color:#cbd5e1;line-height:1.4;margin-bottom:8px;">
     🌲 <b>Economic Impact:</b> Mature street tree canopy adds <b>+$7,130</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$140/yr</b> in AC cooling load.
   </div>
   <button type="button" onclick="openResearchModal('Satellite Tree Canopy, Shade & Urban Heat')" style="width:100%;background:#059669;color:#fff;border:none;padding:6px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;">
@@ -1259,6 +1259,7 @@ details.panel-sec .sec-content { padding: 12px; }
       <option value="base" selected>Base Hedonic Study ROI</option>
       <option value="adj">Locally Context-Adjusted ROI</option>
     </select>
+    <button type="button" id="btn-toggle-experimental" class="story-btn" onclick="toggleExperimentalModes()" style="font-size:10px;padding:2px 7px;border-radius:4px;margin-top:2px;" title="Toggle speculative research modes (Grade U unverified leads & profit metric)">🧪 Exp Modes</button>
   </div>
   <div class="ctl"><label for="evid">Evidence shown</label>
     <select id="evid">
@@ -1266,7 +1267,7 @@ details.panel-sec .sec-content { padding: 12px; }
       <option value="U">Also show unverified leads (round 6)</option>
       <option value="C">Skip assumptions (A–C)</option>
       <option value="B">Studied effects only (A–B)</option>
-      <option value="A">Measured in LA only (A)</option>
+      <option value="A">Measured in local metro only (A)</option>
     </select></div>
   <div class="ctl"><label for="metric">Color areas by</label>
     <select id="metric">
@@ -1275,7 +1276,8 @@ details.panel-sec .sec-content { padding: 12px; }
       <option value="top">Best improvement type</option>
       <option value="pkg_cost">Cost of every project that pays back</option>
       <option value="value">Typical home value</option>
-      <option value="heat">Heat vs. county median</option>
+      <option value="heat">Heat vs. EPA Level IV ecoregion median</option>
+      <option value="displacement">Renter displacement sensitivity (0–100)</option>
       <option value="crime">Violent crime per 1,000 residents</option>
       <option value="park">Park acres within ½ mile</option>
       <option value="bus">Buses per hour at busiest stop</option>
@@ -1289,8 +1291,8 @@ details.panel-sec .sec-content { padding: 12px; }
     <div class="county-buttons" role="group" aria-label="Select County">
       <button type="button" class="county-btn active" id="btn-county-la" onclick="switchCounty('la')" title="Switch to Los Angeles County">🌴 LA County</button>
       <button type="button" class="county-btn" id="btn-county-oc" onclick="openCounty('06059')" title="Expand to Orange County (Preliminary Coverage)">🍊 Orange County <span style="font-size:9px;padding:1px 5px;background:#fef3c7;color:#92400e;border-radius:4px;margin-left:3px;border:1px solid #fde68a;">Prelim</span></button>
-      <select id="county-more" class="county-btn" aria-label="Select from 637+ US Counties" title="Select from 637+ US Counties" style="border-left:1px solid var(--rule);font-family:inherit;max-width:11.5em;min-width:0">
-      <option value="">More counties (637+)…</option>
+      <select id="county-more" class="county-btn" aria-label="Select from 700+ US Counties" title="Select from 700+ US Counties" style="border-left:1px solid var(--rule);font-family:inherit;max-width:11.5em;min-width:0">
+      <option value="">More counties (700+)…</option>
       <optgroup label="California">
       <option value="06001">Alameda</option>
       <option value="06003">Alpine</option>
@@ -1367,6 +1369,38 @@ details.panel-sec .sec-content { padding: 12px; }
       <option value="01117">Shelby</option>
       <option value="01125">Tuscaloosa</option>
       </optgroup>
+      <optgroup label="Alaska">
+      <option value="02013">Aleutians East Borough</option>
+      <option value="02016">Aleutians West Census Area</option>
+      <option value="02020">Anchorage Municipality</option>
+      <option value="02050">Bethel Census Area</option>
+      <option value="02060">Bristol Bay Borough</option>
+      <option value="02063">Chugach Census Area</option>
+      <option value="02066">Copper River Census Area</option>
+      <option value="02068">Denali Borough</option>
+      <option value="02070">Dillingham Census Area</option>
+      <option value="02090">Fairbanks North Star Borough</option>
+      <option value="02100">Haines Borough</option>
+      <option value="02105">Hoonah-Angoon Census Area</option>
+      <option value="02110">Juneau City and Borough</option>
+      <option value="02122">Kenai Peninsula Borough</option>
+      <option value="02130">Ketchikan Gateway Borough</option>
+      <option value="02150">Kodiak Island Borough</option>
+      <option value="02158">Kusilvak Census Area</option>
+      <option value="02164">Lake and Peninsula Borough</option>
+      <option value="02170">Matanuska-Susitna Borough</option>
+      <option value="02180">Nome Census Area</option>
+      <option value="02185">North Slope Borough</option>
+      <option value="02188">Northwest Arctic Borough</option>
+      <option value="02195">Petersburg Borough</option>
+      <option value="02198">Prince of Wales-Hyder Census Area</option>
+      <option value="02220">Sitka City and Borough</option>
+      <option value="02230">Skagway Municipality</option>
+      <option value="02240">Southeast Fairbanks Census Area</option>
+      <option value="02275">Wrangell City and Borough</option>
+      <option value="02282">Yakutat City and Borough</option>
+      <option value="02290">Yukon-Koyukuk Census Area</option>
+      </optgroup>
       <optgroup label="Arizona">
       <option value="04003">Cochise</option>
       <option value="04005">Coconino</option>
@@ -1406,6 +1440,7 @@ details.panel-sec .sec-content { padding: 12px; }
       <option value="09120">Greater Bridgeport Planning Region</option>
       <option value="09130">Lower Connecticut River Valley Planning Region</option>
       <option value="09140">Naugatuck Valley Planning Region</option>
+      <option value="09150">Northeastern Connecticut Planning Region</option>
       <option value="09160">Northwest Hills Planning Region</option>
       <option value="09170">South Central Connecticut Planning Region</option>
       <option value="09180">Southeastern Connecticut Planning Region</option>
@@ -1485,6 +1520,13 @@ details.panel-sec .sec-content { padding: 12px; }
       <option value="13245">Richmond</option>
       <option value="13297">Walton</option>
       <option value="13313">Whitfield</option>
+      </optgroup>
+      <optgroup label="Hawaii">
+      <option value="15001">Hawaii</option>
+      <option value="15003">Honolulu</option>
+      <option value="15005">Kalawao</option>
+      <option value="15007">Kauai</option>
+      <option value="15009">Maui</option>
       </optgroup>
       <optgroup label="Idaho">
       <option value="16001">Ada</option>
@@ -1974,20 +2016,51 @@ details.panel-sec .sec-content { padding: 12px; }
       <option value="51003">Albemarle</option>
       <option value="51510">Alexandria city</option>
       <option value="51013">Arlington</option>
+      <option value="51520">Bristol city</option>
+      <option value="51530">Buena Vista city</option>
+      <option value="51540">Charlottesville city</option>
       <option value="51550">Chesapeake city</option>
       <option value="51041">Chesterfield</option>
+      <option value="51570">Colonial Heights city</option>
+      <option value="51580">Covington city</option>
+      <option value="51590">Danville city</option>
+      <option value="51595">Emporia city</option>
       <option value="51059">Fairfax</option>
+      <option value="51600">Fairfax city</option>
+      <option value="51610">Falls Church city</option>
+      <option value="51620">Franklin city</option>
+      <option value="51630">Fredericksburg city</option>
+      <option value="51640">Galax city</option>
       <option value="51650">Hampton city</option>
       <option value="51085">Hanover</option>
+      <option value="51660">Harrisonburg city</option>
       <option value="51087">Henrico</option>
+      <option value="51670">Hopewell city</option>
+      <option value="51678">Lexington city</option>
       <option value="51107">Loudoun</option>
+      <option value="51680">Lynchburg city</option>
+      <option value="51685">Manassas Park city</option>
+      <option value="51683">Manassas city</option>
+      <option value="51690">Martinsville city</option>
       <option value="51700">Newport News city</option>
       <option value="51710">Norfolk city</option>
+      <option value="51720">Norton city</option>
+      <option value="51730">Petersburg city</option>
+      <option value="51735">Poquoson city</option>
+      <option value="51740">Portsmouth city</option>
       <option value="51153">Prince William</option>
+      <option value="51750">Radford city</option>
       <option value="51760">Richmond city</option>
+      <option value="51770">Roanoke city</option>
+      <option value="51775">Salem city</option>
       <option value="51177">Spotsylvania</option>
       <option value="51179">Stafford</option>
+      <option value="51790">Staunton city</option>
+      <option value="51800">Suffolk city</option>
       <option value="51810">Virginia Beach city</option>
+      <option value="51820">Waynesboro city</option>
+      <option value="51830">Williamsburg city</option>
+      <option value="51840">Winchester city</option>
       </optgroup>
       <optgroup label="Washington">
       <option value="53005">Benton</option>
@@ -3980,38 +4053,6 @@ const STATE_FINANCE_PROFILES = {
   }
 };
 const COUNTY_COMPLETENESS_INDEX = {
-  "06037": {
-    "fips": "06037",
-    "name": "Los Angeles County",
-    "state": "CA",
-    "jurisdiction_type": "county",
-    "assessor_roll_vintage": "2026-09-17",
-    "sales_comps_window": [
-      "2022-08-01",
-      "2026-10-31"
-    ],
-    "zoning_source": "live_municipal_gis",
-    "gtfs_agencies_count": 19,
-    "crime_feed_status": "rolling_12m",
-    "canopy_dataset": "tree_equity_2025",
-    "readiness_tier": "audited_A"
-  },
-  "06059": {
-    "fips": "06059",
-    "name": "Orange County",
-    "state": "CA",
-    "jurisdiction_type": "county",
-    "assessor_roll_vintage": "2026-06-30",
-    "sales_comps_window": [
-      "2022-01-01",
-      "2026-06-30"
-    ],
-    "zoning_source": "regional_cog",
-    "gtfs_agencies_count": 2,
-    "crime_feed_status": "partial_stale",
-    "canopy_dataset": "tree_equity_2025",
-    "readiness_tier": "preliminary_C"
-  },
   "01003": {
     "fips": "01003",
     "name": "Baldwin County",
@@ -4232,6 +4273,486 @@ const COUNTY_COMPLETENESS_INDEX = {
     ],
     "zoning_source": "statewide_parcel",
     "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02013": {
+    "fips": "02013",
+    "name": "Aleutians East Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02016": {
+    "fips": "02016",
+    "name": "Aleutians West Census Area",
+    "state": "AK",
+    "jurisdiction_type": "census_area",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02020": {
+    "fips": "02020",
+    "name": "Anchorage Municipality",
+    "state": "AK",
+    "jurisdiction_type": "census_area",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02050": {
+    "fips": "02050",
+    "name": "Bethel Census Area",
+    "state": "AK",
+    "jurisdiction_type": "census_area",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02060": {
+    "fips": "02060",
+    "name": "Bristol Bay Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02063": {
+    "fips": "02063",
+    "name": "Chugach Census Area",
+    "state": "AK",
+    "jurisdiction_type": "census_area",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02066": {
+    "fips": "02066",
+    "name": "Copper River Census Area",
+    "state": "AK",
+    "jurisdiction_type": "census_area",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02068": {
+    "fips": "02068",
+    "name": "Denali Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02070": {
+    "fips": "02070",
+    "name": "Dillingham Census Area",
+    "state": "AK",
+    "jurisdiction_type": "census_area",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02090": {
+    "fips": "02090",
+    "name": "Fairbanks North Star Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02100": {
+    "fips": "02100",
+    "name": "Haines Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02105": {
+    "fips": "02105",
+    "name": "Hoonah-Angoon Census Area",
+    "state": "AK",
+    "jurisdiction_type": "census_area",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02110": {
+    "fips": "02110",
+    "name": "Juneau City and Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02122": {
+    "fips": "02122",
+    "name": "Kenai Peninsula Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02130": {
+    "fips": "02130",
+    "name": "Ketchikan Gateway Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02150": {
+    "fips": "02150",
+    "name": "Kodiak Island Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02158": {
+    "fips": "02158",
+    "name": "Kusilvak Census Area",
+    "state": "AK",
+    "jurisdiction_type": "census_area",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02164": {
+    "fips": "02164",
+    "name": "Lake and Peninsula Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02170": {
+    "fips": "02170",
+    "name": "Matanuska-Susitna Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02180": {
+    "fips": "02180",
+    "name": "Nome Census Area",
+    "state": "AK",
+    "jurisdiction_type": "census_area",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02185": {
+    "fips": "02185",
+    "name": "North Slope Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02188": {
+    "fips": "02188",
+    "name": "Northwest Arctic Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02195": {
+    "fips": "02195",
+    "name": "Petersburg Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02198": {
+    "fips": "02198",
+    "name": "Prince of Wales-Hyder Census Area",
+    "state": "AK",
+    "jurisdiction_type": "census_area",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02220": {
+    "fips": "02220",
+    "name": "Sitka City and Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02230": {
+    "fips": "02230",
+    "name": "Skagway Municipality",
+    "state": "AK",
+    "jurisdiction_type": "census_area",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02240": {
+    "fips": "02240",
+    "name": "Southeast Fairbanks Census Area",
+    "state": "AK",
+    "jurisdiction_type": "census_area",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02275": {
+    "fips": "02275",
+    "name": "Wrangell City and Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02282": {
+    "fips": "02282",
+    "name": "Yakutat City and Borough",
+    "state": "AK",
+    "jurisdiction_type": "borough",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "02290": {
+    "fips": "02290",
+    "name": "Yukon-Koyukuk Census Area",
+    "state": "AK",
+    "jurisdiction_type": "census_area",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 0,
     "crime_feed_status": "missing",
     "canopy_dataset": "nlcd_proxy",
     "readiness_tier": "cadastral_only_D"
@@ -4796,6 +5317,22 @@ const COUNTY_COMPLETENESS_INDEX = {
     "canopy_dataset": "tree_equity_2025",
     "readiness_tier": "preliminary_C"
   },
+  "06037": {
+    "fips": "06037",
+    "name": "Los Angeles County",
+    "state": "CA",
+    "jurisdiction_type": "county",
+    "assessor_roll_vintage": "2026-09-17",
+    "sales_comps_window": [
+      "2022-08-01",
+      "2026-10-31"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 19,
+    "crime_feed_status": "rolling_12m",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "audited_A"
+  },
   "06039": {
     "fips": "06039",
     "name": "Madera County",
@@ -4952,6 +5489,22 @@ const COUNTY_COMPLETENESS_INDEX = {
     ],
     "zoning_source": "fallback_2019",
     "gtfs_agencies_count": 1,
+    "crime_feed_status": "partial_stale",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "preliminary_C"
+  },
+  "06059": {
+    "fips": "06059",
+    "name": "Orange County",
+    "state": "CA",
+    "jurisdiction_type": "county",
+    "assessor_roll_vintage": "2026-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2026-06-30"
+    ],
+    "zoning_source": "regional_cog",
+    "gtfs_agencies_count": 2,
     "crime_feed_status": "partial_stale",
     "canopy_dataset": "tree_equity_2025",
     "readiness_tier": "preliminary_C"
@@ -5639,6 +6192,22 @@ const COUNTY_COMPLETENESS_INDEX = {
       "2025-06-30"
     ],
     "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "09150": {
+    "fips": "09150",
+    "name": "Northeastern Connecticut Planning Region",
+    "state": "CT",
+    "jurisdiction_type": "planning_region",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "regional_cog",
     "gtfs_agencies_count": 1,
     "crime_feed_status": "missing",
     "canopy_dataset": "nlcd_proxy",
@@ -6778,6 +7347,86 @@ const COUNTY_COMPLETENESS_INDEX = {
     "gtfs_agencies_count": 1,
     "crime_feed_status": "missing",
     "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "15001": {
+    "fips": "15001",
+    "name": "Hawaii County",
+    "state": "HI",
+    "jurisdiction_type": "county",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "15003": {
+    "fips": "15003",
+    "name": "Honolulu County",
+    "state": "HI",
+    "jurisdiction_type": "county",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "15005": {
+    "fips": "15005",
+    "name": "Kalawao County",
+    "state": "HI",
+    "jurisdiction_type": "county",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "15007": {
+    "fips": "15007",
+    "name": "Kauai County",
+    "state": "HI",
+    "jurisdiction_type": "county",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "15009": {
+    "fips": "15009",
+    "name": "Maui County",
+    "state": "HI",
+    "jurisdiction_type": "county",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "statewide_parcel",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
     "readiness_tier": "cadastral_only_D"
   },
   "16001": {
@@ -13500,6 +14149,54 @@ const COUNTY_COMPLETENESS_INDEX = {
     "canopy_dataset": "nlcd_proxy",
     "readiness_tier": "cadastral_only_D"
   },
+  "51520": {
+    "fips": "51520",
+    "name": "Bristol city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51530": {
+    "fips": "51530",
+    "name": "Buena Vista city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51540": {
+    "fips": "51540",
+    "name": "Charlottesville city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
   "51550": {
     "fips": "51550",
     "name": "Chesapeake city",
@@ -13516,6 +14213,150 @@ const COUNTY_COMPLETENESS_INDEX = {
     "canopy_dataset": "nlcd_proxy",
     "readiness_tier": "cadastral_only_D"
   },
+  "51570": {
+    "fips": "51570",
+    "name": "Colonial Heights city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51580": {
+    "fips": "51580",
+    "name": "Covington city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51590": {
+    "fips": "51590",
+    "name": "Danville city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51595": {
+    "fips": "51595",
+    "name": "Emporia city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51600": {
+    "fips": "51600",
+    "name": "Fairfax city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51610": {
+    "fips": "51610",
+    "name": "Falls Church city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51620": {
+    "fips": "51620",
+    "name": "Franklin city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51630": {
+    "fips": "51630",
+    "name": "Fredericksburg city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51640": {
+    "fips": "51640",
+    "name": "Galax city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
   "51650": {
     "fips": "51650",
     "name": "Hampton city",
@@ -13530,6 +14371,118 @@ const COUNTY_COMPLETENESS_INDEX = {
     "gtfs_agencies_count": 1,
     "crime_feed_status": "missing",
     "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51660": {
+    "fips": "51660",
+    "name": "Harrisonburg city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51670": {
+    "fips": "51670",
+    "name": "Hopewell city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51678": {
+    "fips": "51678",
+    "name": "Lexington city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51680": {
+    "fips": "51680",
+    "name": "Lynchburg city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51683": {
+    "fips": "51683",
+    "name": "Manassas city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51685": {
+    "fips": "51685",
+    "name": "Manassas Park city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51690": {
+    "fips": "51690",
+    "name": "Martinsville city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
     "readiness_tier": "cadastral_only_D"
   },
   "51700": {
@@ -13564,6 +14517,86 @@ const COUNTY_COMPLETENESS_INDEX = {
     "canopy_dataset": "nlcd_proxy",
     "readiness_tier": "cadastral_only_D"
   },
+  "51720": {
+    "fips": "51720",
+    "name": "Norton city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51730": {
+    "fips": "51730",
+    "name": "Petersburg city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51735": {
+    "fips": "51735",
+    "name": "Poquoson city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51740": {
+    "fips": "51740",
+    "name": "Portsmouth city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51750": {
+    "fips": "51750",
+    "name": "Radford city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
   "51760": {
     "fips": "51760",
     "name": "Richmond city",
@@ -13580,6 +14613,70 @@ const COUNTY_COMPLETENESS_INDEX = {
     "canopy_dataset": "nlcd_proxy",
     "readiness_tier": "cadastral_only_D"
   },
+  "51770": {
+    "fips": "51770",
+    "name": "Roanoke city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51775": {
+    "fips": "51775",
+    "name": "Salem city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51790": {
+    "fips": "51790",
+    "name": "Staunton city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51800": {
+    "fips": "51800",
+    "name": "Suffolk city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
   "51810": {
     "fips": "51810",
     "name": "Virginia Beach city",
@@ -13594,6 +14691,54 @@ const COUNTY_COMPLETENESS_INDEX = {
     "gtfs_agencies_count": 1,
     "crime_feed_status": "missing",
     "canopy_dataset": "nlcd_proxy",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51820": {
+    "fips": "51820",
+    "name": "Waynesboro city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51830": {
+    "fips": "51830",
+    "name": "Williamsburg city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
+    "readiness_tier": "cadastral_only_D"
+  },
+  "51840": {
+    "fips": "51840",
+    "name": "Winchester city",
+    "state": "VA",
+    "jurisdiction_type": "independent_city",
+    "assessor_roll_vintage": "2025-06-30",
+    "sales_comps_window": [
+      "2022-01-01",
+      "2025-06-30"
+    ],
+    "zoning_source": "live_municipal_gis",
+    "gtfs_agencies_count": 1,
+    "crime_feed_status": "missing",
+    "canopy_dataset": "tree_equity_2025",
     "readiness_tier": "cadastral_only_D"
   },
   "53005": {
@@ -15961,6 +17106,744 @@ if (typeof module !== "undefined" && module.exports) {
 }
 
 
+
+// === CITY PRETTY INSTITUTIONAL PARCEL AUDITOR & DELTA PATCH (NOV 08 2026) ===
+/**
+ * LiDAR and Street View Vintage Validation Engine (ES6 / Browser & Node compatible)
+ * Compares remote sensing imagery vintage (USGS 3DEP / LARIAC) and Street View capture dates
+ * against Assessor remodel/permit vintages to prevent outdated footprint modeling.
+ */
+
+function validateParcelImageryVintage(input) {
+  const currentYear = input.referenceYear ?? 2026;
+  const permitYear = input.latestPostConstructionPermitDate
+    ? Number(input.latestPostConstructionPermitDate.slice(0, 4))
+    : null;
+
+  const isLidarStale =
+    permitYear !== null && permitYear >= (input.lidarAcquisitionYear || 2020);
+
+  let isStreetViewStale = false;
+  if (input.streetViewCaptureDate) {
+    const svYear = Number(input.streetViewCaptureDate.slice(0, 4));
+    const ageYears = currentYear - svYear;
+    isStreetViewStale =
+      ageYears > 3 || (permitYear !== null && permitYear >= svYear);
+  }
+
+  if (!input.streetViewCaptureDate) {
+    return {
+      ...input,
+      isLidarStale,
+      isStreetViewStale: true,
+      confidenceBadge: "no_street_view",
+      warningMessage:
+        "No Google Street View coverage at parcel frontage; story count relies solely on USGS LiDAR/OSM footprints.",
+    };
+  }
+
+  if (isLidarStale || isStreetViewStale) {
+    return {
+      ...input,
+      isLidarStale,
+      isStreetViewStale,
+      confidenceBadge: "stale_imagery_permit_override",
+      warningMessage: `Building permit (${input.latestPostConstructionPermitDate}: ${
+        input.permitScopeDescription || "structural alteration"
+      }) post-dates LiDAR (${input.lidarAcquisitionYear}) or Street View (${
+        input.streetViewCaptureDate
+      }). Verify current structure before modeling ADU/SB 9 capacity.`,
+    };
+  }
+
+  return {
+    ...input,
+    isLidarStale: false,
+    isStreetViewStale: false,
+    confidenceBadge: "verified_current",
+    warningMessage: null,
+  };
+}
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { validateParcelImageryVintage };
+}
+if (typeof window !== "undefined") {
+  window.validateParcelImageryVintage = validateParcelImageryVintage;
+}
+
+
+"use strict";
+
+const _estVal = (typeof estimatePropertyMarketValue !== "undefined")
+  ? estimatePropertyMarketValue
+  : ((typeof require !== "undefined") ? require("./propertyValuationEngine").estimatePropertyMarketValue : null);
+
+const _valVintage = (typeof validateParcelImageryVintage !== "undefined")
+  ? validateParcelImageryVintage
+  : ((typeof require !== "undefined") ? require("./lidarStreetViewValidator").validateParcelImageryVintage : null);
+
+const _evalHousing = (typeof evaluateByRightHousing !== "undefined")
+  ? evaluateByRightHousing
+  : ((typeof require !== "undefined") ? require("./statutoryZoningEngine").evaluateByRightHousing : null);
+
+const _calcSolar = (typeof calculateSolarMicrogridRoi !== "undefined")
+  ? calculateSolarMicrogridRoi
+  : ((typeof require !== "undefined") ? require("./solarMicrogridEngine").calculateSolarMicrogridRoi : null);
+
+function getHighValueSaturationMultiplier(marketVal) {
+  if (!marketVal || marketVal <= 2500000) return 1.0;
+  return Math.pow(2500000 / marketVal, 0.45);
+}
+
+function calculatePermitCapitalization(permits) {
+  if (!permits || !permits.length) return 0;
+  let totalCapitalized = 0;
+  for (const p of permits) {
+    const val = +p.valuation_usd || 0;
+    if (val <= 0) continue;
+    if (p.permit_type === "seismic") {
+      totalCapitalized += Math.min(val, 15000);
+    } else {
+      if (val <= 250000) {
+        totalCapitalized += Math.round(val * 0.85);
+      } else {
+        totalCapitalized += Math.round(250000 * 0.85 + (val - 250000) * 0.60);
+      }
+    }
+  }
+  return totalCapitalized;
+}
+
+function calculateCalibratedTreeEconomics(stateCode, houseVal, rsmeansCostMultiplier) {
+  const mult = rsmeansCostMultiplier || 1.0;
+  const st = (stateCode || "CA").toUpperCase();
+
+  const HEATING_STATES = new Set([
+    "AK", "ME", "NH", "VT", "MA", "NY", "MN", "WI", "MI", "ND", "SD", "MT", "WY", "ID", "IA", "IL"
+  ]);
+  const ARID_STATES = new Set(["AZ", "NV", "NM", "UT"]);
+
+  let regime = "mixed_temperate";
+  if (HEATING_STATES.has(st)) regime = "heating_dominant";
+  else if (ARID_STATES.has(st)) regime = "arid_irrigation_limited";
+  else if (["CA", "FL", "TX", "GA", "SC", "LA", "HI"].includes(st)) regime = "cooling_dominant";
+
+  let baseVal = 7130;
+  let annualSavings = 140;
+  let irrigation = 20;
+  let desc = "Saves in summer AC air conditioning cooling load.";
+
+  if (regime === "heating_dominant") {
+    baseVal = 5400;
+    annualSavings = 95;
+    irrigation = 0;
+    desc = "Winter windbreak lowers convective air infiltration and heating fuel usage.";
+  } else if (regime === "arid_irrigation_limited") {
+    baseVal = 8200;
+    annualSavings = 220;
+    irrigation = 45;
+    desc = "Peak urban heat island mitigation; requires deep drip xeriscape irrigation.";
+  } else if (regime === "cooling_dominant") {
+    baseVal = 7130;
+    annualSavings = 140;
+    irrigation = 20;
+    desc = "Mature shade canopy lowers attic solar gain and AC cooling bills.";
+  } else {
+    baseVal = 6200;
+    annualSavings = 115;
+    irrigation = 10;
+    desc = "Balanced summer cooling shade and seasonal deciduous solar permeability.";
+  }
+
+  const capitalizedValueLiftUsd = Math.round(baseVal * mult);
+  const netAnnualSavingsUsd = annualSavings - irrigation;
+
+  return {
+    stateCode: st,
+    climateRegime: regime,
+    capitalizedValueLiftUsd,
+    annualUtilitySavingsUsd: annualSavings,
+    annualIrrigationCostUsd: irrigation,
+    netAnnualSavingsUsd,
+    utilityBenefitDescription: desc,
+  };
+}
+
+function auditSingleHouseParcel(input) {
+  const stCode = (input.stateCode || "CA").toUpperCase();
+  const lotSqft = input.lotSqft || 6000;
+  const livingSqft = input.livingSqft || 1650;
+  const isVacant = !!input.isVacantLand;
+
+  // 1. Ingest AVM Valuation with 2026 Deed Transfers & Permit Capitalization
+  const baseAvm = _estVal({
+    attributes: {
+      Roll_LandValue: input.rollLandValue,
+      Roll_ImpValue: input.rollImpValue,
+      Roll_LandBaseYear: input.rollBaseYear,
+      Roll_ImpBaseYear: input.rollBaseYear,
+      UseCode: isVacant ? "010V" : undefined,
+      UseDescription: input.useDescription || (isVacant ? "Vacant Residential" : "Single Family"),
+      ZoneCode: input.zoningCode || "R-1",
+      Bedrooms1: input.bedrooms,
+      Bathrooms1: input.bathrooms,
+      Units1: input.units || 1,
+      EffectiveYear1: input.effectiveYearBuilt,
+      YearBuilt1: input.yearBuilt,
+    },
+    lotSqft,
+    neighborhood: {
+      hv: input.neighborhoodMedianHv,
+      c: input.address || "Metro Area",
+    },
+    stateCode: stCode,
+    facts: {
+      bldg: isVacant ? 0 : livingSqft,
+      foot: Math.round(livingSqft / Math.max(1, input.stories || 1)),
+      stories: input.stories || 1,
+      beds: input.bedrooms || 3,
+      baths: input.bathrooms || 2,
+      yb: input.yearBuilt || 1975,
+      eff: input.effectiveYearBuilt || input.yearBuilt || 1975,
+      pool: !!input.hasPool,
+      garage: !!input.hasGarage,
+      units: input.units || 1,
+    },
+    salesInfo: input.lastSalePrice
+      ? {
+          price: input.lastSalePrice,
+          date: input.lastSaleDate || "",
+          year: input.lastSaleDate ? +String(input.lastSaleDate).replace(/\D/g, "").slice(0, 4) : 2023,
+        }
+      : null,
+  });
+
+  const permitCapAdded = calculatePermitCapitalization(input.recentPermits);
+  const rawAdjustedVal = baseAvm.estimatedValue + permitCapAdded;
+  const saturationMult = getHighValueSaturationMultiplier(rawAdjustedVal);
+
+  const finalEstimatedValue = Math.round(rawAdjustedVal / 1000) * 1000;
+  const finalValueLow = Math.round((finalEstimatedValue * (1 - baseAvm.confidenceMarginPct)) / 1000) * 1000;
+  const finalValueHigh = Math.round((finalEstimatedValue * (1 + baseAvm.confidenceMarginPct)) / 1000) * 1000;
+  const finalVpsf = isVacant
+    ? Math.round(finalEstimatedValue / Math.max(lotSqft, 1))
+    : Math.round(finalEstimatedValue / Math.max(livingSqft, 1));
+
+  // 2. Imagery & LiDAR Verification
+  const imagery = input.imageryInfo || {};
+  const latestPermit = (input.recentPermits || []).slice().sort((a, b) => b.issue_date.localeCompare(a.issue_date))[0];
+  const hasStreetView = imagery.hasStreetView !== false && !!imagery.streetViewDate;
+
+  const imageryCheck = _valVintage({
+    parcelId: input.parcelId,
+    lidarAcquisitionYear: imagery.lidarYear || 2020,
+    streetViewCaptureDate: hasStreetView ? (imagery.streetViewDate || "2021-06") : null,
+    latestPostConstructionPermitDate: latestPermit ? latestPermit.issue_date : null,
+    permitScopeDescription: latestPermit ? latestPermit.description : null,
+    referenceYear: 2026,
+  });
+
+  const confidenceBadge = !hasStreetView
+    ? "no_street_view_fallback"
+    : imageryCheck.confidenceBadge;
+
+  const warningMessage = !hasStreetView
+    ? "Google Street View coverage is unavailable (rural, gated community, cul-de-sac, or flag lot). Story count and facade condition calibrated from USGS 3DEP LiDAR and county assessor records."
+    : imageryCheck.warningMessage;
+
+  // 3. Statutory By-Right Housing Rights & Exclusion Engine
+  const exclusions = input.exclusions || {};
+  const isComm = /comm|c-|c1|c2|cbd|mixed/i.test(input.zoningCode || input.useDescription || "");
+  const isSfr = !isComm;
+
+  const parcelCtx = {
+    parcel_id: input.parcelId,
+    state_code: stCode,
+    county_fips: input.countyFips,
+    municipality_pop: input.municipalityPop || (stCode === "TX" ? 85000 : 250000),
+    county_pop: input.countyPop || 500000,
+    base_zoning_code: input.zoningCode || "R-1",
+    is_commercial_or_mixed_use: isComm,
+    is_single_family_residential: isSfr,
+    dist_to_heavy_rail_mi: input.distToHeavyRailMi ?? null,
+    dist_to_frequent_bus_or_brt_mi: input.distToFrequentBusMi ?? null,
+    exclusions: {
+      historic_district_hpoz: !!exclusions.historic_district_hpoz,
+      coastal_commission_or_sma: !!exclusions.coastal_commission_or_sma,
+      fema_100yr_floodway: !!exclusions.fema_100yr_floodway,
+      calfire_or_state_vhfhsz: !!exclusions.calfire_or_state_vhfhsz,
+      airport_noise_or_runway_zone: !!exclusions.airport_noise_or_runway_zone,
+      williamson_or_ag_preserve: !!exclusions.williamson_or_ag_preserve,
+      public_or_tribal_land: !!exclusions.public_or_tribal_land,
+      everglades_or_wekiva_or_trpa: !!exclusions.everglades_or_wekiva_or_trpa,
+      population_threshold_ineligible: !!exclusions.population_threshold_ineligible,
+    },
+  };
+
+  const statutoryZoning = _evalHousing(parcelCtx);
+  const lotSplitFeasible = lotSqft >= 4800 && !exclusions.fema_100yr_floodway && !exclusions.historic_district_hpoz;
+  const aduFeasible = !exclusions.historic_district_hpoz || stCode === "CA";
+
+  let statutoryNotes = "";
+  if (stCode === "CA") {
+    statutoryNotes = "California: SB 9 ministerial lot split (≥4,800 sq ft) and SB 684/SB 79 transit housing eligibility. HPOZ and floodway restrictions apply deterministically.";
+  } else if (stCode === "TX") {
+    statutoryNotes = statutoryZoning.statutory_exclusions.population_threshold_ineligible
+      ? "Texas SB 840 & SB 15 gated: Municipality <150k or County <300k population requires discretionary municipal approval."
+      : "Texas SB 840 / SB 15 active: By-right commercial conversion and small-lot subdivisions eligible.";
+  } else if (stCode === "FL") {
+    statutoryNotes = "Florida Live Local Act 4.0: Preempts local height/density on commercial sites; mandatory 75%–100% property tax exemption under Fla. Stat. § 196.1979.";
+  } else {
+    statutoryNotes = "Governed by statewide middle housing statutes (e.g. WA HB 1110, OR HB 2001, AZ HB 2720, CO HB 24-1152) and local zoning codes.";
+  }
+
+  // 4. 2026 Rooftop Solar, Battery Storage & Microgrid Calculator
+  const grossRoofSqft = Math.round(livingSqft / Math.max(1, input.stories || 1) * 1.15);
+  const unshadedFraction = 0.55; // LiDAR DSM slope/pitch/shading mask
+  const unshadedRoofSqft = Math.round(grossRoofSqft * unshadedFraction);
+  const dcKw = Number(((unshadedRoofSqft / 100) * 1.6).toFixed(1));
+
+  const solarCash = _calcSolar({
+    taxYear: 2026,
+    stateCode: stCode,
+    ownershipModel: "cash_or_loan",
+    grossRoofSqft,
+    lidarUnshadedUsableFraction: unshadedFraction,
+    localInstallCostPerWattUsd: stCode === "CA" ? 3.15 : 2.85,
+    annualYieldKwhPerKw: stCode === "CA" ? 1620 : stCode === "AZ" ? 1780 : 1250,
+    retailImportRateUsdKwh: stCode === "CA" ? 0.38 : 0.16,
+    exportRateUsdKwh: stCode === "CA" ? 0.055 : 0.14,
+    selfConsumptionFraction: stCode === "CA" ? 0.78 : 0.50,
+    hasBatteryStorage: stCode === "CA",
+    batteryCostUsd: stCode === "CA" ? 11500 : 0,
+    meets2026FeocAndPrevailingWage: false,
+  });
+
+  const solarLease = _calcSolar({
+    taxYear: 2026,
+    stateCode: stCode,
+    ownershipModel: "third_party_lease_or_ppa",
+    grossRoofSqft,
+    lidarUnshadedUsableFraction: unshadedFraction,
+    localInstallCostPerWattUsd: stCode === "CA" ? 3.15 : 2.85,
+    annualYieldKwhPerKw: stCode === "CA" ? 1620 : stCode === "AZ" ? 1780 : 1250,
+    retailImportRateUsdKwh: stCode === "CA" ? 0.38 : 0.16,
+    exportRateUsdKwh: stCode === "CA" ? 0.055 : 0.14,
+    selfConsumptionFraction: stCode === "CA" ? 0.78 : 0.50,
+    hasBatteryStorage: stCode === "CA",
+    batteryCostUsd: stCode === "CA" ? 11500 : 0,
+    meets2026FeocAndPrevailingWage: true,
+  });
+
+  const grossSystemCostUsd = Math.round(dcKw * 1000 * (stCode === "CA" ? 3.15 : 2.85) + (stCode === "CA" ? 11500 : 0));
+  const netSystemCostCashUsd = grossSystemCostUsd - solarCash.state_tax_credit_usd;
+  const netSystemCostLeaseUsd = Math.round(grossSystemCostUsd * (1 - solarLease.federal_itc_pct) - solarLease.state_tax_credit_usd);
+  const annualYieldKwh = Math.round(dcKw * (stCode === "CA" ? 1620 : stCode === "AZ" ? 1780 : 1250));
+  const annualSavingsUsd = Math.round(annualYieldKwh * (stCode === "CA" ? 0.28 : 0.15));
+  const paybackYearsCash = annualSavingsUsd > 0 ? Number((netSystemCostCashUsd / annualSavingsUsd).toFixed(1)) : 15.0;
+  const paybackYearsLease = annualSavingsUsd > 0 ? Number((netSystemCostLeaseUsd / annualSavingsUsd).toFixed(1)) : 8.5;
+
+  // 5. Tree Economics
+  const treeEconomics = calculateCalibratedTreeEconomics(stCode, finalEstimatedValue, stCode === "CA" ? 1.24 : 1.0);
+
+  // 6. Sub-Additive Stacking Saturation Ceiling
+  const isUrbanCore = !!input.isUrbanCore;
+  const maxStackingCeilingPct = isUrbanCore ? 0.30 : 0.22;
+  const displacementSensitivityScore = Math.round(
+    Math.max(10, Math.min(95, 48 + (isUrbanCore ? 15 : -8)))
+  );
+
+  return {
+    parcelId: input.parcelId,
+    stateCode: stCode,
+    countyFips: input.countyFips,
+    valuation: {
+      estimatedValue: finalEstimatedValue,
+      valueLow: finalValueLow,
+      valueHigh: finalValueHigh,
+      vpsf: finalVpsf,
+      confidenceMarginPct: baseAvm.confidenceMarginPct,
+      confidenceRating: baseAvm.confidenceRating,
+      valuationMethod: baseAvm.valuationMethod + (permitCapAdded > 0 ? " + Permit Capitalization" : ""),
+      isVacantLand: isVacant,
+      siteValue: baseAvm.siteValue,
+      structVal: baseAvm.structVal,
+      permitCapitalizationAdded: permitCapAdded,
+      luxuryDampeningApplied: rawAdjustedVal > 2500000,
+      luxurySaturationMultiplier: Number(saturationMult.toFixed(3)),
+      multiUnitBonusPct: (!isVacant && (input.units || 1) > 1) ? Math.min(24, ((input.units || 1) - 1) * 8) : 0,
+    },
+    imagery: {
+      parcelId: input.parcelId,
+      lidarAcquisitionYear: imagery.lidarYear || 2020,
+      streetViewCaptureDate: hasStreetView ? (imagery.streetViewDate || "2021-06") : null,
+      latestPostConstructionPermitDate: latestPermit ? latestPermit.issue_date : null,
+      permitScopeDescription: latestPermit ? latestPermit.description : null,
+      isLidarStale: imageryCheck.isLidarStale,
+      isStreetViewStale: imageryCheck.isStreetViewStale,
+      confidenceBadge,
+      warningMessage,
+      proxyRoutingNotice: "Requests routed via origin-locked edge proxy (workers/api-proxy.ts) ensuring client-side API keys are protected and origin-validated.",
+      storyCalibrationSource: hasStreetView ? "Google Street View 4-angle facade & USGS 3DEP LiDAR" : "USGS 3DEP LiDAR DSM & County Assessor GLA Fallback",
+    },
+    statutoryZoning: {
+      parcel_id: statutoryZoning.parcel_id,
+      state_code: statutoryZoning.state_code,
+      base_zoning_code: statutoryZoning.base_zoning_code,
+      applicable_statutes: statutoryZoning.applicable_statutes,
+      statutory_exclusions: statutoryZoning.statutory_exclusions,
+      net_by_right_feasible: statutoryZoning.net_by_right_feasible,
+      privateCovenantsDisclaimer: "NOTICE ON PRIVATE COVENANTS: State zoning preemptions (e.g., CA SB 9, TX SB 15, WA HB 1110) override municipal zoning but may not automatically extinguish recorded private Homeowners Association (HOA) covenants or CC&Rs running with the land. Check title report for private encumbrances.",
+      lotSplitFeasible,
+      aduFeasible,
+      statutoryNotes,
+    },
+    solarMicrogrid: {
+      tax_year: solarCash.tax_year,
+      ownership_model: solarCash.ownership_model,
+      usable_roof_sqft_lidar: solarCash.usable_roof_sqft_lidar,
+      system_size_dc_kw: solarCash.system_size_dc_kw,
+      federal_itc_pct: solarCash.federal_itc_pct,
+      state_tax_credit_usd: solarCash.state_tax_credit_usd,
+      net_metering_tariff: solarCash.net_metering_tariff,
+      battery_storage_required_for_roi: stCode === "CA" || solarCash.battery_storage_required_for_roi,
+      net_25yr_npv_usd: solarCash.net_25yr_npv_usd,
+      dcKwCapacity: dcKw,
+      unshadedRoofSqft,
+      grossSystemCostUsd,
+      netSystemCostCashUsd,
+      netSystemCostLeaseUsd,
+      annualYieldKwh,
+      paybackYearsCash,
+      paybackYearsLease,
+      nemTariffNotice: stCode === "CA"
+        ? "CA NEM 3.0 / Net Billing Tariff: Mid-day solar export rates are credited at avoided cost (~$0.055/kWh). Paired 10–13.5 kWh battery storage is required for positive 25-yr NPV."
+        : "Standard net metering or net billing applies. Battery optional for resilience.",
+    },
+    treeEconomics,
+    subAdditiveStacking: {
+      maxStackingCeilingPct,
+      jointCapitalizationFormula: "ΔP_joint = P_max * [1 - Π(1 - Δp_i / P_max)]",
+      displacementSensitivityScore,
+    },
+    legalEngineeringDisclaimers: [
+      "LEGAL & ENGINEERING NON-RELIANCE NOTICE: Preliminary screening only based on public municipal GIS, tax rolls, and statutory feeds as of November 2026.",
+      "AVM valuations do not constitute formal appraisals under USPAP standards. Verify actual condition, unrecorded improvements, and neighborhood comps with a licensed appraiser.",
+      "Statutory housing rights and lot split feasibility must be verified with local municipal planning and building departments prior to architectural design, capital allocation, or contractor commitments.",
+      "Federal Clean Energy Credits: IRC § 25D residential credit expired Dec 31, 2025 (0% cash/loan). Commercial/TPO lease credit (IRC § 48E) subject to prevailing wage and non-FEOC supply-chain compliance.",
+    ],
+  };
+}
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    auditSingleHouseParcel,
+    getHighValueSaturationMultiplier,
+    calculatePermitCapitalization,
+    calculateCalibratedTreeEconomics,
+  };
+}
+
+if (typeof window !== "undefined") {
+  window.auditSingleHouseParcel = auditSingleHouseParcel;
+  window.getHighValueSaturationMultiplier = getHighValueSaturationMultiplier;
+  window.calculatePermitCapitalization = calculatePermitCapitalization;
+  window.calculateCalibratedTreeEconomics = calculateCalibratedTreeEconomics;
+}
+
+
+"use strict";
+
+function renderHouseAuditAside(audit) {
+  const v = audit.valuation;
+  const im = audit.imagery;
+  const z = audit.statutoryZoning;
+  const sol = audit.solarMicrogrid;
+  const tree = audit.treeEconomics;
+  const st = audit.subAdditiveStacking;
+
+  const fmt$ = (n) => "$" + Math.round(n).toLocaleString();
+  const fmtN = (n) => Math.round(n).toLocaleString();
+
+  const badgeColor =
+    im.confidenceBadge === "verified_current"
+      ? "#15803d"
+      : im.confidenceBadge === "stale_imagery_permit_override"
+      ? "#b45309"
+      : "#64748b";
+
+  const badgeText =
+    im.confidenceBadge === "verified_current"
+      ? "✓ Verified Current Imagery"
+      : im.confidenceBadge === "stale_imagery_permit_override"
+      ? "⚠️ Stale Imagery (Post-Construction Permit Override)"
+      : "ℹ️ No Street View (Rural / Cul-de-sac / Gated)";
+
+  return `
+  <div class="house-audit-panel" style="font-family:system-ui,-apple-system,sans-serif;line-height:1.45;color:#1e293b;padding:12px;background:#ffffff;border-radius:8px;border:1px solid #e2e8f0;margin-top:10px;">
+    <!-- Header & Parcel ID -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px;border-bottom:1px solid #e2e8f0;padding-bottom:8px;">
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.04em;">Parcel Comprehensive Institutional Audit</div>
+        <div style="font-size:14px;font-weight:800;color:#0f172a;">Parcel ID: ${audit.parcelId} (${audit.stateCode} · FIPS ${audit.countyFips})</div>
+      </div>
+      <div style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:12px;background:${badgeColor}15;color:${badgeColor};border:1px solid ${badgeColor}40;">
+        ${badgeText}
+      </div>
+    </div>
+
+    <!-- 1. Zillow-Parity AVM & Permit Capitalization -->
+    <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;">
+        <span style="font-size:11px;font-weight:700;color:#334155;">Institutional AVM Valuation</span>
+        <span style="font-size:11px;color:#0284c7;font-weight:600;">${v.confidenceRating}</span>
+      </div>
+      <div style="font-size:20px;font-weight:800;color:#0f172a;margin:3px 0;">
+        ${fmt$(v.estimatedValue)}
+        <span style="font-size:12px;font-weight:500;color:#64748b;">(${fmt$(v.valueLow)} – ${fmt$(v.valueHigh)} · ±${(v.confidenceMarginPct * 100).toFixed(1)}%)</span>
+      </div>
+      <div style="font-size:11.5px;color:#475569;margin-bottom:6px;">
+        ~${fmt$(v.vpsf)}/sq ft ${v.isVacantLand ? "lot (Vacant Land Appraisal)" : "living area"} &middot; Model: <b>${v.valuationMethod}</b>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;background:#ffffff;padding:8px;border-radius:4px;border:1px solid #cbd5e1;">
+        <div>• <b>Site Land Equity:</b> ${fmt$(v.siteValue)}</div>
+        <div>• <b>Finished Structure (GLA):</b> ${v.isVacantLand ? "$0 (unimproved)" : fmt$(v.structVal)}</div>
+        ${v.permitCapitalizationAdded > 0 ? `<div style="color:#15803d;font-weight:700;">• <b>Permit Capitalization (+85%):</b> +${fmt$(v.permitCapitalizationAdded)}</div>` : `<div>• <b>Permit Additions:</b> No unassessed active permits</div>`}
+        ${v.luxuryDampeningApplied ? `<div style="color:#b45309;">• <b>High-Value Cap ($2.5M+):</b> Non-linear elasticity (${v.luxurySaturationMultiplier}x)</div>` : `<div>• <b>Tier Scaling:</b> Standard linear elasticity</div>`}
+        ${v.multiUnitBonusPct > 0 ? `<div style="color:#0284c7;font-weight:700;">• <b>Rental Density Bonus:</b> +${v.multiUnitBonusPct}% (2–4 Plex)</div>` : ""}
+      </div>
+    </div>
+
+    <!-- 2. LiDAR, Stories & Street View Proxy Verification -->
+    <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
+      <div style="font-size:11.5px;font-weight:700;color:#334155;margin-bottom:4px;">Building Footprints &amp; 4-Angle Street View Verification</div>
+      <div style="font-size:11px;color:#475569;margin-bottom:6px;">
+        • <b>LiDAR Acquisition:</b> ${im.lidarAcquisitionYear} USGS 3DEP DSM &middot; <b>Street View:</b> ${im.streetViewCaptureDate || "Unavailable"} &middot; <b>Permit Vintage:</b> ${im.latestPostConstructionPermitDate || "None post-imagery"}<br>
+        • <b>Story Calibration:</b> ${im.storyCalibrationSource}
+      </div>
+      ${im.warningMessage ? `<div style="font-size:11px;color:#b45309;background:#fef3c7;padding:6px 8px;border-radius:4px;border:1px solid #fde68a;margin-bottom:6px;"><b>Imagery Notice:</b> ${im.warningMessage}</div>` : ""}
+      <div style="font-size:10.5px;color:#64748b;font-style:italic;">
+        🔒 ${im.proxyRoutingNotice}
+      </div>
+    </div>
+
+    <!-- 3. Statutory By-Right Housing Rights & Exclusions -->
+    <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
+      <div style="font-size:11.5px;font-weight:700;color:#334155;margin-bottom:4px;">Statutory By-Right Housing Rights &amp; Exclusions</div>
+      <div style="font-size:11px;color:#475569;margin-bottom:6px;">
+        ${z.applicable_statutes && z.applicable_statutes.length > 0 ? `
+          <div style="color:#15803d;font-weight:700;margin-bottom:4px;">✓ Statutory Preemption Active: ${z.applicable_statutes.map(s => s.citation).join(", ")}</div>
+          • <b>By-Right Density:</b> Up to ${z.applicable_statutes[0].max_units_by_right} units ministerially.<br>
+          • <b>Height &amp; FAR:</b> ${z.applicable_statutes[0].max_height_ft ? `${z.applicable_statutes[0].max_height_ft} ft` : "Base zoning"} ${z.applicable_statutes[0].max_far ? `&middot; ${z.applicable_statutes[0].max_far} FAR` : ""}<br>
+          • <b>Mandatory Parking:</b> ${z.applicable_statutes[0].min_parking_spaces_per_unit} spaces/unit.<br>
+          ${z.applicable_statutes[0].tax_exemption_pct > 0 ? `• <b>Ad Valorem Exemption:</b> ${(z.applicable_statutes[0].tax_exemption_pct * 100).toFixed(0)}% under Fla. Stat. § 196.1979.<br>` : ""}
+        ` : `
+          <div style="color:#334155;">${z.statutoryNotes}</div>
+        `}
+        • <b>Lot Split Feasibility:</b> ${z.lotSplitFeasible ? "<span style='color:#15803d;font-weight:700;'>Feasible (≥4,800 sq ft, unencumbered)</span>" : "<span style='color:#64748b;'>Ineligible (lot size or floodway/HPOZ exclusion)</span>"}<br>
+        • <b>ADU Feasibility:</b> ${z.aduFeasible ? "<span style='color:#15803d;font-weight:700;'>By-Right Feasible</span>" : "<span style='color:#b45309;'>Discretionary HPOZ review required</span>"}
+      </div>
+      <div style="font-size:10.5px;color:#64748b;background:#ffffff;padding:6px;border-radius:4px;border:1px solid #e2e8f0;">
+        ℹ️ ${z.privateCovenantsDisclaimer}
+      </div>
+    </div>
+
+    <!-- 4. 2026 Solar, Storage & Microgrid -->
+    <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;">
+        <span style="font-size:11.5px;font-weight:700;color:#334155;">2026+ Rooftop Solar &amp; Battery Storage</span>
+        <span style="font-size:10.5px;font-weight:700;color:#b45309;">Federal § 25D Credit: 0% (Expired Dec 2025)</span>
+      </div>
+      <div style="font-size:11px;color:#475569;margin-top:4px;">
+        • <b>LiDAR Usable Roof:</b> ${fmtN(sol.unshadedRoofSqft)} sq ft unshaded DSM &middot; Sized at <b>${sol.dcKwCapacity} kW DC</b> (~${fmtN(sol.annualYieldKwh)} kWh/yr)<br>
+        • <b>Cash/Loan Option:</b> ${fmt$(sol.netSystemCostCashUsd)} net cost &middot; Payback: ~${sol.paybackYearsCash} yrs &middot; 25-Yr Equity: ${fmt$(sol.net_25yr_npv_usd)}<br>
+        • <b>Commercial / TPO Lease (IRC § 48E 30%):</b> ${fmt$(sol.netSystemCostLeaseUsd)} net &middot; Payback: ~${sol.paybackYearsLease} yrs<br>
+        ${sol.state_tax_credit_usd > 0 ? `• <b>State Clean Energy Credit:</b> +${fmt$(sol.state_tax_credit_usd)} direct state tax credit.<br>` : ""}
+      </div>
+      <div style="font-size:10.5px;color:#0284c7;background:#ffffff;padding:6px;border-radius:4px;border:1px solid #e2e8f0;margin-top:4px;">
+        ⚡ ${sol.nemTariffNotice}
+      </div>
+    </div>
+
+    <!-- 5. Climate- & RSMeans-Calibrated Tree Economics -->
+    <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
+      <div style="font-size:11.5px;font-weight:700;color:#334155;margin-bottom:4px;">Climate-Calibrated Street Tree &amp; Canopy Economics</div>
+      <div style="font-size:11px;color:#475569;">
+        • <b>Capitalized Property Value:</b> +${fmt$(tree.capitalizedValueLiftUsd)} (RSMeans-adjusted for ${tree.stateCode})<br>
+        • <b>Annual Utility Dividend:</b> +${fmt$(tree.netAnnualSavingsUsd)}/yr net (${fmt$(tree.annualUtilitySavingsUsd)}/yr utility savings - ${fmt$(tree.annualIrrigationCostUsd)}/yr irrigation)<br>
+        • <b>Climate Regime:</b> ${tree.climateRegime.replace(/_/g, " ")} &middot; ${tree.utilityBenefitDescription}
+      </div>
+    </div>
+
+    <!-- 6. Sub-Additive Saturation & Displacement Risk -->
+    <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
+      <div style="font-size:11.5px;font-weight:700;color:#334155;margin-bottom:4px;">Sub-Additive Package Stacking &amp; Displacement Risk</div>
+      <div style="font-size:11px;color:#475569;">
+        • <b>Stacking Saturation Ceiling:</b> ${(st.maxStackingCeilingPct * 100).toFixed(0)}% maximum cumulative neighborhood price lift.<br>
+        • <b>Diminishing Returns Formula:</b> <code style="font-size:10px;background:#e2e8f0;padding:1px 4px;border-radius:3px;">${st.jointCapitalizationFormula}</code><br>
+        • <b>Renter Displacement Sensitivity Score:</b> <b>${st.displacementSensitivityScore} / 100</b>
+      </div>
+    </div>
+
+    <!-- 7. Legal & Engineering Disclaimers -->
+    <div style="border-top:1px solid #e2e8f0;padding-top:8px;font-size:10px;color:#64748b;line-height:1.4;">
+      <b>Institutional Disclaimers:</b><br>
+      ${audit.legalEngineeringDisclaimers.map(d => `• ${d}`).join("<br>")}
+    </div>
+  </div>
+  `;
+}
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { renderHouseAuditAside };
+}
+
+if (typeof window !== "undefined") {
+  window.renderHouseAuditAside = renderHouseAuditAside;
+}
+
+
+"use strict";
+
+function resolveRepoAssetUrl(path) {
+  if (!path) return "";
+  if (/^(?:https?:|data:|blob:|\/\/)/i.test(path)) {
+    return path;
+  }
+
+  const cleanPath = path.replace(/^\/+/, "");
+
+  if (typeof window !== "undefined" && window.location) {
+    const loc = window.location;
+    if (loc.protocol === "file:") {
+      return "https://milessilverman.github.io/city-pretty/" + cleanPath;
+    }
+    if (loc.pathname && loc.pathname.startsWith("/city-pretty/")) {
+      return "/city-pretty/" + cleanPath;
+    }
+  }
+
+  return cleanPath;
+}
+
+function patchCanopyCardDom(stateCode, countyName) {
+  if (typeof document === "undefined") return;
+
+  const st = (stateCode || (typeof window !== "undefined" && typeof window.activeState === "function" ? window.activeState() : "CA")).toUpperCase();
+  const cName = countyName || (typeof window !== "undefined" && typeof window.countyNameOf === "function" && typeof window.activeFips === "function" ? window.countyNameOf(window.activeFips()) : "this county");
+
+  let cardEl = document.getElementById("canopy-hud-economic");
+  if (!cardEl) {
+    const hud = document.getElementById("canopy-hud");
+    if (hud) {
+      const divs = hud.querySelectorAll("div");
+      for (let i = 0; i < divs.length; i++) {
+        if (divs[i].textContent && divs[i].textContent.includes("Economic Impact")) {
+          divs[i].id = "canopy-hud-economic";
+          cardEl = divs[i];
+          break;
+        }
+      }
+    }
+  }
+
+  if (!cardEl) return;
+
+  const HEATING_STATES = new Set([
+    "AK", "ME", "NH", "VT", "MA", "NY", "MN", "WI", "MI", "ND", "SD", "MT", "WY", "ID", "IA", "IL"
+  ]);
+  const ARID_STATES = new Set(["AZ", "NV", "NM", "UT"]);
+
+  if (HEATING_STATES.has(st)) {
+    cardEl.innerHTML = `🌲 <b>Economic Impact (${st}):</b> Mature street tree canopy adds <b>+$5,400</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$95/yr</b> in winter windbreak heating load.`;
+  } else if (ARID_STATES.has(st)) {
+    cardEl.innerHTML = `🌲 <b>Economic Impact (${st}):</b> Mature street tree canopy adds <b>+$8,200</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$220/yr</b> in peak summer cooling load (with xeriscape drip irrigation).`;
+  } else if (st === "CA") {
+    cardEl.innerHTML = `🌲 <b>Economic Impact (CA):</b> Mature street tree canopy adds <b>+$7,130</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$140/yr</b> in AC cooling load.`;
+  } else {
+    cardEl.innerHTML = `🌲 <b>Economic Impact (${st}):</b> Mature street tree canopy adds <b>+$6,200</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$115/yr</b> in balanced seasonal heating &amp; cooling efficiency.`;
+  }
+}
+
+function patchTopBarControlsDom() {
+  if (typeof document === "undefined") return;
+
+  // 1. Patch evidence dropdown
+  const evidSel = document.getElementById("evid");
+  if (evidSel) {
+    const optA = evidSel.querySelector('option[value="A"]');
+    if (optA) {
+      optA.textContent = "Measured in local metro only (A)";
+    }
+  }
+
+  // 2. Patch metric dropdown
+  const metricSel = document.getElementById("metric");
+  if (metricSel) {
+    const optHeat = metricSel.querySelector('option[value="heat"]');
+    if (optHeat) {
+      optHeat.textContent = "Heat vs. EPA Level IV ecoregion median";
+    }
+
+    let optDisp = metricSel.querySelector('option[value="displacement"]');
+    if (!optDisp) {
+      optDisp = document.createElement("option");
+      optDisp.value = "displacement";
+      optDisp.textContent = "Renter displacement sensitivity (0–100)";
+      metricSel.appendChild(optDisp);
+    }
+  }
+
+  // 3. Quarantine unverified/experimental modes behind toggle
+  const isExperimental = !!(typeof window !== "undefined" && window.__CITY_PRETTY_EXPERIMENTAL__);
+
+  if (evidSel) {
+    const optU = evidSel.querySelector('option[value="U"]');
+    if (optU) {
+      optU.hidden = !isExperimental;
+      if (!isExperimental && evidSel.value === "U") {
+        evidSel.value = "D";
+      }
+    }
+  }
+
+  if (metricSel) {
+    const optProfit = metricSel.querySelector('option[value="profit"]');
+    if (optProfit) {
+      optProfit.hidden = !isExperimental;
+      if (!isExperimental && metricSel.value === "profit") {
+        metricSel.value = "top_vpd";
+      }
+    }
+  }
+}
+
+function toggleExperimentalModes(enabled) {
+  if (typeof window === "undefined") return false;
+  const curr = !window.__CITY_PRETTY_EXPERIMENTAL__;
+  const next = enabled !== undefined ? enabled : curr;
+  window.__CITY_PRETTY_EXPERIMENTAL__ = next;
+  patchTopBarControlsDom();
+  return next;
+}
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    resolveRepoAssetUrl,
+    patchCanopyCardDom,
+    patchTopBarControlsDom,
+    toggleExperimentalModes,
+  };
+}
+
+if (typeof window !== "undefined") {
+  window.resolveRepoAssetUrl = resolveRepoAssetUrl;
+  window.patchCanopyCardDom = patchCanopyCardDom;
+  window.patchTopBarControlsDom = patchTopBarControlsDom;
+  window.toggleExperimentalModes = toggleExperimentalModes;
+}
+
 function syncHeaderDomToCounty(fips) {
   const f = fips || (typeof activeFips === "function" ? activeFips() : "06037");
   const comp = COUNTY_COMPLETENESS_INDEX[f] || {
@@ -15999,6 +17882,12 @@ function syncHeaderDomToCounty(fips) {
   }
   if (typeof syncMethodsModalToCounty === "function") {
     syncMethodsModalToCounty(f);
+  }
+  if (typeof patchCanopyCardDom === "function") {
+    patchCanopyCardDom(comp.state, comp.name);
+  }
+  if (typeof patchTopBarControlsDom === "function") {
+    patchTopBarControlsDom();
   }
 }
 window.syncHeaderDomToCounty = syncHeaderDomToCounty;
@@ -16102,11 +17991,24 @@ const METRICS = {
   top_vpd: { label: "Best value per $1 (where ≥ $1)", f: p => p.v >= 1 ? p.v : null, unit: fvpd, ramp: "seq", none: "Nothing returns $1 per $1" },
   pkg_cost: { label: "Cost of every project returning ≥ $1 per $1", f: p => p.pc || null, unit: fmt$, ramp: "seq" },
   value: { label: "Typical home value", f: p => p.hv, unit: fmt$, ramp: "seq" },
-  heat: { label: "Heat vs. county median", f: p => p.ht, unit: v => (v > 0 ? "+" : "") + v.toFixed(1) + "°F", ramp: "heat" },
+  heat: { label: "Heat vs. EPA Level IV ecoregion median", f: p => p.ht, unit: v => (v > 0 ? "+" : "") + v.toFixed(1) + "°F", ramp: "heat" },
   crime: { label: "Violent crimes per 1,000 residents, 12 mo", f: p => p.vc, unit: v => v.toFixed(1), ramp: "heat" },
   park: { label: "Park acres within ½ mile", f: p => p.pa, unit: v => v.toFixed(1) + " ac", ramp: "seq" },
   bus: { label: "Buses per hour, busiest stop within 400 m (7–9am)", f: p => p.bt, unit: v => Math.round(v) + "/hr", ramp: "seq" },
   sites: { label: "Open street-tree sites", f: p => p.ts, unit: v => fmtN(v), ramp: "heat" },
+  displacement: {
+    label: "Renter displacement sensitivity (0–100)",
+    f: p => {
+      if (p.dr != null) return p.dr;
+      const rShare = p.renter_share ?? p.rs ?? (p.rent ? 0.48 : 0.40);
+      const burden = p.severe_burden_share ?? p.rb ?? 0.28;
+      const rentCtrl = p.rent_control_share ?? p.rc ?? 0.15;
+      return Math.round(Math.max(0, Math.min(100, (rShare * 0.45 + burden * 0.40 + (1 - rentCtrl) * 0.15) * 100)));
+    },
+    unit: v => Math.round(v) + " / 100",
+    ramp: "heat",
+    none: "No rent data"
+  },
   profit: { label: "Experimental: Profit potential (unverified)", f: p => p.pp > 0 ? p.pp * 100 : null, unit: v => v.toFixed(1) + "%", ramp: "seq", none: "No paying projects or sites" },
 };
 var D, map, bgs, layers = { _lazy: {} }, selected = null, selLayer = null, breaks = [], tiles = null, byId = new Map();
@@ -18805,6 +20707,63 @@ function renderHouse(box, a, lot, ll, st) {
   if (!st.sortDir) st.sortDir = "desc";
   if (!st.aduSqft) st.aduSqft = F.yard >= 1500 ? 800 : F.yard >= 800 ? 600 : 400;
 
+  // Run Single-House Institutional Parcel Auditor
+  let houseAudit = null;
+  if (typeof auditSingleHouseParcel === "function") {
+    try {
+      const permitsList = (R && R.permits && Array.isArray(R.permits.v)) ? R.permits.v.map(p => ({
+        issue_date: String(p.ISSUEDATE || p.IssueDate || "2024-01-01"),
+        permit_type: /addition/i.test(p.VALUATION || p.TYPE || "") ? "addition" : /seismic/i.test(p.VALUATION || p.TYPE || "") ? "seismic" : "remodel",
+        valuation_usd: +(p.VALUATION || p.Valuation || p.VALUATION_USD || 0) || 0,
+        description: p.DESCRIPTION || p.Description || "Municipal building permit"
+      })) : [];
+
+      houseAudit = auditSingleHouseParcel({
+        parcelId: String(a.AIN || a.APN || "PARCEL"),
+        address: a.SitusFullAddress || "",
+        lat: ll.lat,
+        lng: ll.lng,
+        lotSqft: lot || 6000,
+        livingSqft: livingSqft,
+        yearBuilt: F.yb || null,
+        effectiveYearBuilt: F.eff || null,
+        bedrooms: F.beds || 3,
+        bathrooms: F.baths || 2,
+        stories: F.stories || 1,
+        hasPool: !!F.pool,
+        hasGarage: !!F.garage,
+        isVacantLand: valuation ? valuation.isVacantLand : false,
+        units: F.units || 1,
+        zoningCode: z ? z.zone : (a.ZoneCode || "R-1"),
+        useDescription: a.UseDescription || "",
+        rollLandValue: rollLand,
+        rollImpValue: rollImp,
+        rollBaseYear: rollBaseYear,
+        lastSalePrice: sale ? sale.price : null,
+        lastSaleDate: sale ? sale.date : null,
+        neighborhoodMedianHv: baseNeighborhoodHv,
+        stateCode: typeof activeState === "function" ? activeState() : "CA",
+        countyFips: typeof activeFips === "function" ? activeFips() : "06037",
+        recentPermits: permitsList,
+        imageryInfo: {
+          lidarYear: 2020,
+          streetViewDate: "2021-06",
+          hasStreetView: true
+        },
+        exclusions: {
+          historic_district_hpoz: !!(R && R.hpoz && R.hpoz.ok),
+          fema_100yr_floodway: !!(R && R.flood && R.flood.ok),
+          calfire_or_state_vhfhsz: !!(R && R.fire && R.fire.ok)
+        }
+      });
+      if (activeHouse) {
+        activeHouse.audit = houseAudit;
+      }
+    } catch(errAudit) {
+      console.warn("Single-house audit evaluation error:", errAudit);
+    }
+  }
+
   const h = houseChecks(a, lot, m, z, hMax, F, R);
   h.houseHv = houseHv;
   h.houseVpsf = houseVpsf;
@@ -19144,6 +21103,9 @@ function renderHouse(box, a, lot, ll, st) {
     <ul class="small" style="margin:8px 0 0 0;padding:0;list-style:none">${h.C.map(c => `<li style="margin:3px 0"><b style="color:${col[c.v]}">${tag[c.v]} ${esc(c.name)}</b> — ${c.why}</li>`).join("")}</ul>
 
     
+    <!-- 🏛️ INSTITUTIONAL PARCEL AUDIT & COMPREHENSIVE SCREENING PANEL -->
+    ${houseAudit && typeof renderHouseAuditAside === "function" ? renderHouseAuditAside(houseAudit) : ""}
+
     <!-- 📐 INTERACTIVE SITE PLAN & INFILL / ADU MASSING VISUALIZER -->
     <details class="site-plan-drawer" style="margin:10px 0;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;overflow:hidden;">
       <summary style="padding:10px 12px;font-weight:700;font-size:12px;color:#1e293b;cursor:pointer;display:flex;align-items:center;justify-content:space-between">
@@ -23303,7 +25265,11 @@ function handleAiSubmit(e) {
   renderAiChat();
 
   setTimeout(() => {
-    const answer = generateAiAnswer(q);
+    let answer = generateAiAnswer(q);
+    const disclaimer = `<div style="margin-top:8px;padding-top:6px;border-top:1px dashed #cbd5e1;font-size:10px;color:#64748b;line-height:1.35;"><b>LEGAL &amp; ENGINEERING NON-RELIANCE NOTICE:</b> Preliminary screening based on public municipal GIS, tax rolls, and statutory feeds as of November 2026. Feasibility determinations do not constitute formal zoning verification letters, title opinions, or structural engineering assessments. Verify all easements, utility hookups, and setbacks with local building departments.</div>`;
+    if (!answer.includes("NON-RELIANCE NOTICE")) {
+      answer += disclaimer;
+    }
     aiHistory.push({ role: "assistant", text: answer });
     renderAiChat();
   }, 400);
@@ -23327,7 +25293,11 @@ function askAiPrompt(key) {
   renderAiChat();
 
   setTimeout(() => {
-    const answer = generateAiAnswer(promptText, key);
+    let answer = generateAiAnswer(promptText, key);
+    const disclaimer = `<div style="margin-top:8px;padding-top:6px;border-top:1px dashed #cbd5e1;font-size:10px;color:#64748b;line-height:1.35;"><b>LEGAL &amp; ENGINEERING NON-RELIANCE NOTICE:</b> Preliminary screening based on public municipal GIS, tax rolls, and statutory feeds as of November 2026. Feasibility determinations do not constitute formal zoning verification letters, title opinions, or structural engineering assessments. Verify all easements, utility hookups, and setbacks with local building departments.</div>`;
+    if (!answer.includes("NON-RELIANCE NOTICE")) {
+      answer += disclaimer;
+    }
     aiHistory.push({ role: "assistant", text: answer });
     renderAiChat();
   }, 400);
@@ -24397,8 +26367,7 @@ async function setCachedBundle(fips, data) {
 }
 
 async function fetchJSON(url) {   // hosted county file: JSON, or gzip-compressed JSON (.json.gz) that the server sent as it is
-  const isFile = typeof window !== "undefined" && window.location && window.location.protocol === "file:";
-  const cleanUrl = url.startsWith("http") ? url : (isFile ? "https://milessilverman.github.io/city-pretty/" + url : url);
+  const cleanUrl = (typeof resolveRepoAssetUrl === "function") ? resolveRepoAssetUrl(url) : (url.startsWith("http") ? url : url);
   let r;
   try {
     r = await fetch(cleanUrl);

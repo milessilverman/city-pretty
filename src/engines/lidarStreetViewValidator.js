@@ -58,3 +58,6 @@ function validateParcelImageryVintage(input) {
 if (typeof module !== "undefined" && module.exports) {
   module.exports = { validateParcelImageryVintage };
 }
+if (typeof window !== "undefined") {
+  window.validateParcelImageryVintage = validateParcelImageryVintage;
+}

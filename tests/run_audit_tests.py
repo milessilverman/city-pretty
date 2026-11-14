@@ -57,6 +57,10 @@ def run_tests():
         code_avm = f.read()
     with open("src/adapters/arcgisNormalizer.js") as f:
         code_arcgis = f.read()
+    with open("src/engines/parcelHouseAuditor.js") as f:
+        code_auditor = f.read()
+    with open("src/ui/houseInspectorPanel.js") as f:
+        code_panel = f.read()
 
     test_bundle = f"""
     (() => {{
@@ -67,6 +71,8 @@ def run_tests():
         {code_lidar}
         {code_avm}
         {code_arcgis}
+        {code_auditor}
+        {code_panel}
 
         window.__TEST_ENGINES__ = {{
             calculateTaxIncrementCapacity,
@@ -75,12 +81,17 @@ def run_tests():
             calculateSolarMicrogridRoi,
             validateParcelImageryVintage,
             estimatePropertyMarketValue,
+            normalizeArcGisFeature,
+            auditSingleHouseParcel,
+            getHighValueSaturationMultiplier,
+            calculatePermitCapitalization,
+            calculateCalibratedTreeEconomics,
+            renderHouseAuditAside,
             getHpiMultiplier,
-            STATE_BASELINE_PROFILES,
-            normalizeArcGisFeature
+            STATE_BASELINE_PROFILES
         }};
         return true;
-    }})()
+    }})();
     """
 
     res_load = eval_js(test_bundle)
@@ -540,9 +551,108 @@ def run_tests():
     assert 20000 <= t11["delta"] <= 70000
     print("  -> PASS: 2-unit duplex correctly reflects unit rental diversification premium over single-family.")
 
+    # Test 12: Comprehensive Single-House Parcel Auditor & House Inspector Panel
+    t12 = eval_js("""
+    (() => {
+        const { auditSingleHouseParcel, renderHouseAuditAside, calculatePermitCapitalization, calculateCalibratedTreeEconomics } = window.__TEST_ENGINES__;
+
+        const permits = [
+            { issue_date: "2024-05-10", permit_type: "remodel", valuation_usd: 80000, description: "Master suite remodel" },
+            { issue_date: "2024-09-15", permit_type: "seismic", valuation_usd: 9500, description: "Seismic foundation bolting" }
+        ];
+
+        const parcelAudit = auditSingleHouseParcel({
+            parcelId: "06037-5819001",
+            address: "1234 Maple St, Pasadena, CA",
+            lat: 34.1478,
+            lng: -118.1445,
+            lotSqft: 6500,
+            livingSqft: 1800,
+            yearBuilt: 1965,
+            bedrooms: 3,
+            bathrooms: 2,
+            stories: 1,
+            neighborhoodMedianHv: 950000,
+            stateCode: "CA",
+            countyFips: "06037",
+            recentPermits: permits,
+            imageryInfo: { lidarYear: 2020, streetViewDate: "2021-06", hasStreetView: true }
+        });
+
+        const luxuryAudit = auditSingleHouseParcel({
+            parcelId: "06037-BEVERLY",
+            address: "700 Foothill Rd, Beverly Hills, CA",
+            lat: 34.08,
+            lng: -118.40,
+            lotSqft: 18000,
+            livingSqft: 4800,
+            yearBuilt: 1998,
+            neighborhoodMedianHv: 3800000,
+            stateCode: "CA",
+            countyFips: "06037"
+        });
+
+        const ruralAudit = auditSingleHouseParcel({
+            parcelId: "06003-ALPINE",
+            lat: 38.6,
+            lng: -119.8,
+            lotSqft: 25000,
+            neighborhoodMedianHv: 550000,
+            stateCode: "CA",
+            countyFips: "06003",
+            imageryInfo: { lidarYear: 2021, streetViewDate: null, hasStreetView: false }
+        });
+
+        const mnTree = calculateCalibratedTreeEconomics("MN", 350000, 1.05);
+        const azTree = calculateCalibratedTreeEconomics("AZ", 450000, 1.02);
+
+        const asideHtml = renderHouseAuditAside(parcelAudit);
+
+        return {
+            permitCapAdded: parcelAudit.valuation.permitCapitalizationAdded,
+            finalValue: parcelAudit.valuation.estimatedValue,
+            imageryBadge: parcelAudit.imagery.confidenceBadge,
+            isLidarStale: parcelAudit.imagery.isLidarStale,
+            solarTaxYear: parcelAudit.solarMicrogrid.tax_year,
+            solarFederalItc: parcelAudit.solarMicrogrid.federal_itc_pct,
+            solarBatteryRequired: parcelAudit.solarMicrogrid.battery_storage_required_for_roi,
+            luxuryDampened: luxuryAudit.valuation.luxuryDampeningApplied,
+            luxurySaturationMult: luxuryAudit.valuation.luxurySaturationMultiplier,
+            ruralImageryBadge: ruralAudit.imagery.confidenceBadge,
+            ruralWarning: ruralAudit.imagery.warningMessage,
+            mnClimateRegime: mnTree.climateRegime,
+            mnIrrigation: mnTree.annualIrrigationCostUsd,
+            azClimateRegime: azTree.climateRegime,
+            azSavings: azTree.annualUtilitySavingsUsd,
+            azIrrigation: azTree.annualIrrigationCostUsd,
+            asideLength: asideHtml.length,
+            hasDisclaimers: asideHtml.includes("LEGAL & ENGINEERING NON-RELIANCE NOTICE")
+        };
+    })()
+    """)
+    print("Test 12 (Single-House Parcel Auditor & Inspector Panel):", t12)
+    assert t12["permitCapAdded"] == 77500
+    assert t12["finalValue"] > 900000
+    assert t12["imageryBadge"] == "stale_imagery_permit_override"
+    assert t12["solarTaxYear"] == 2026
+    assert t12["solarFederalItc"] == 0.0
+    assert t12["solarBatteryRequired"] is True
+    assert t12["luxuryDampened"] is True
+    assert t12["luxurySaturationMult"] < 1.0
+    assert t12["ruralImageryBadge"] == "no_street_view_fallback"
+    assert "Google Street View coverage is unavailable" in t12["ruralWarning"]
+    assert t12["mnClimateRegime"] == "heating_dominant"
+    assert t12["mnIrrigation"] == 0
+    assert t12["azClimateRegime"] == "arid_irrigation_limited"
+    assert t12["azSavings"] == 220
+    assert t12["azIrrigation"] == 45
+    assert t12["asideLength"] > 1000
+    assert t12["hasDisclaimers"] is True
+    print("  -> PASS: Single-house parcel auditor coordinates AVM permits, luxury saturation, imagery checks, 2026 solar rules, multi-climate tree economics, and disclaimer panel.")
+
     ws.close()
     print("========================================================")
-    print("ALL 11 CORE REGRESSION TEST SUITES PASSED (100% SUCCESS)!")
+    print("ALL 12 CORE REGRESSION TEST SUITES PASSED (100% SUCCESS)!")
     print("========================================================")
 
 if __name__ == "__main__":
