@@ -274,7 +274,7 @@ export function estimatePropertyMarketValue(params: PropertyValuationInput): Pro
   let assessorWeight = 0;
   let assessorMethodName = "Assessor Market Value";
 
-  const mktVal = +(a.MARKET_VALUE ?? a.TOT_MKT_VAL ?? a.TOTAL_MKT_VAL ?? a.TOTAL_MARKET ?? a.JV ?? a.FCV_CUR ?? a.ESTFMKVALUE ?? a.parval ?? a.MarketTot ?? a.APPRAISED_VALUE ?? a.TOTAL_APPRAISED ?? a.APPRAISED_VAL ?? a.ACTUAL_VAL ?? a.TOTAL_ACTUAL ?? a.RMV ?? a.RMV_TOTAL ?? a.AppraisedValue ?? a.TRUE_CASH_VALUE ?? 0);
+  const mktVal = +(a.MARKET_VALUE ?? a.TOT_MKT_VAL ?? a.TOTAL_MKT_VAL ?? a.TOTAL_MARKET ?? a.JV ?? a.FCV_CUR ?? a.FCV ?? a.FCVTOT ?? a.TOTAL_FCV ?? a.ESTFMKVALUE ?? a.parval ?? a.MarketTot ?? a.APPRAISED_VALUE ?? a.TOTAL_APPRAISED ?? a.APPRAISED_VAL ?? a.APPR_VALUE ?? a.ACTUAL_VAL ?? a.TOTAL_ACTUAL ?? a.RMV ?? a.RMV_TOTAL ?? a.AppraisedValue ?? a.MarketValue ?? a.MARKET_VAL ?? a.TRUE_CASH_VALUE ?? 0);
   const sev = +(a.SEV ?? a.CNTASSDVALUE ?? 0);
   const rollLand = +(a.Roll_LandValue ?? a.LND_VAL ?? a.LNDVALUE ?? 0);
   const rollImp = +(a.Roll_ImpValue ?? a.IMPROVVAL ?? a.IMPVALUE ?? 0);
@@ -294,6 +294,26 @@ export function estimatePropertyMarketValue(params: PropertyValuationInput): Pro
     assessorMarketEst = Math.round(mktVal * 1.03);
     assessorWeight = 0.60;
     assessorMethodName = "Texas CAD Total Market Value";
+  } else if (state === "AZ" && (mktVal > 20000 || +(a.FCV || a.FCVTOT || a.TOTAL_FCV || 0) > 20000)) {
+    const azVal = +(a.FCV || a.FCVTOT || a.TOTAL_FCV || mktVal);
+    assessorMarketEst = Math.round(azVal * 1.02);
+    assessorWeight = 0.60;
+    assessorMethodName = "Arizona Statutory Full Cash Value (FCV)";
+  } else if (state === "WA" && (mktVal > 20000 || +(a.AppraisedValue || a.APPR_VALUE || a.APPRAISED_VALUE || 0) > 20000)) {
+    const waVal = +(a.AppraisedValue || a.APPR_VALUE || a.APPRAISED_VALUE || mktVal);
+    assessorMarketEst = Math.round(waVal * 1.02);
+    assessorWeight = 0.60;
+    assessorMethodName = "Washington King/WA 100% True & Fair Value";
+  } else if (state === "OR" && (mktVal > 20000 || +(a.RMV || a.RMV_TOTAL || 0) > 20000)) {
+    const orVal = +(a.RMV || a.RMV_TOTAL || mktVal);
+    assessorMarketEst = Math.round(orVal * 1.02);
+    assessorWeight = 0.60;
+    assessorMethodName = "Oregon Measure 50 Real Market Value (RMV)";
+  } else if (state === "PA" && (mktVal > 20000 || +(a.MarketValue || a.MARKET_VAL || 0) > 20000)) {
+    const paVal = +(a.MarketValue || a.MARKET_VAL || mktVal);
+    assessorMarketEst = Math.round(paVal * 1.02);
+    assessorWeight = 0.60;
+    assessorMethodName = "Pennsylvania Certified Market Value";
   } else if (state === "NY" && mktVal > 20000) {
     assessorMarketEst = Math.round(mktVal * 1.02);
     assessorWeight = 0.60;

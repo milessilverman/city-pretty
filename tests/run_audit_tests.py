@@ -415,6 +415,20 @@ def run_tests():
             salesInfo: { price: 1900000, year: 2019 }
         });
 
+        // 9I: Arizona Full Cash Value (Maricopa County / Phoenix)
+        const arizonaFCV = estimatePropertyMarketValue({
+            attributes: { FCV: 480000 }, lotSqft: 6800, stateCode: "AZ",
+            neighborhood: { hv: 450000, c: "Phoenix" },
+            facts: { bldg: 1850, beds: 3, baths: 2, yb: 1995 }
+        });
+
+        // 9J: Washington King County 100% True & Fair Value (Seattle)
+        const washingtonKing = estimatePropertyMarketValue({
+            attributes: { AppraisedValue: 720000 }, lotSqft: 7000, stateCode: "WA",
+            neighborhood: { hv: 700000, c: "Seattle" },
+            facts: { bldg: 1900, beds: 3, baths: 2, yb: 1980 }
+        });
+
         return {
             mult2018,
             repeatSaleValue: repeatSale.estimatedValue,
@@ -431,7 +445,11 @@ def run_tests():
             cookCountyMethod: cookCounty.valuationMethod,
             columbusValue: columbusOhio.estimatedValue,
             columbusMethod: columbusOhio.valuationMethod,
-            luxuryTierValue: luxuryTier.estimatedValue
+            luxuryTierValue: luxuryTier.estimatedValue,
+            arizonaValue: arizonaFCV.estimatedValue,
+            arizonaMethod: arizonaFCV.valuationMethod,
+            washingtonValue: washingtonKing.estimatedValue,
+            washingtonMethod: washingtonKing.valuationMethod
         };
     })()
     """)
@@ -460,7 +478,13 @@ def run_tests():
     assert "Ohio 35%" in t9["columbusMethod"]
     # Luxury tier elasticity dampening prevents $3.0M+ overshoot on $1.9M 2019 sale
     assert 2450000 <= t9["luxuryTierValue"] <= 2750000
-    print("  -> PASS: AVM valuation matches Zillow benchmarks across repeat-sales, Michigan SEV, Florida JV, non-linear lot scaling, Cook County & Ohio ratios, and luxury tier dampening.")
+    # Arizona FCV ($480k FCV -> ~$480k - $530k market)
+    assert 470000 <= t9["arizonaValue"] <= 530000
+    assert "Arizona Statutory Full Cash Value" in t9["arizonaMethod"]
+    # Washington King County 100% True & Fair Value ($720k -> ~$720k - $770k market)
+    assert 710000 <= t9["washingtonValue"] <= 770000
+    assert "Washington King/WA" in t9["washingtonMethod"]
+    print("  -> PASS: AVM valuation matches Zillow benchmarks across repeat-sales, Michigan SEV, Florida JV, non-linear lot scaling, Cook County & Ohio ratios, Arizona FCV, Washington True Value, and luxury tier dampening.")
 
     # Test 10: Vacant Infill Land Equity Model
     t10 = eval_js("""
