@@ -94,6 +94,21 @@ export function renderHouseAuditAside(audit: HouseParcelAuditResult): string {
       </div>
     </div>
 
+    <!-- 3.5 Accurate Roof Cadastre & Pitch Engineering -->
+    ${audit.roofCadastre ? `
+    <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;">
+        <span style="font-size:11.5px;font-weight:700;color:#334155;">📐 Accurate Roof Cadastre &amp; Pitch Engineering</span>
+        <span style="font-size:11px;color:#0284c7;font-weight:600;">${audit.roofCadastre.pitchRatio} Pitch (${audit.roofCadastre.slopeAngleDeg}°)</span>
+      </div>
+      <div style="font-size:11px;color:#475569;margin-top:4px;">
+        • <b>Gross 3D Roof Area:</b> <b>${fmtN(audit.roofCadastre.grossRoofSqft)} sq ft</b> (${audit.roofCadastre.roofingSquares} roofing squares &middot; ${audit.roofCadastre.pitchMultiplier}x secant multiplier)<br>
+        • <b>Footprint Breakdown:</b> ${fmtN(audit.roofCadastre.groundFootprintSqft)} sq ft base footprint + ${fmtN(audit.roofCadastre.eavesOverhangSqft)} sq ft eaves overhang ${audit.roofCadastre.garageRoofAdditionSqft > 0 ? `+ ${fmtN(audit.roofCadastre.garageRoofAdditionSqft)} sq ft attached garage` : ""}<br>
+        • <b>Usable Solar Facets:</b> <b>${fmtN(audit.roofCadastre.usableSolarSqft)} sq ft</b> (excluding north planes &amp; 3-ft fire code setbacks &middot; fits ~${audit.roofCadastre.maxSolarPanels} panels)<br>
+        • <b>Re-Roofing Cost:</b> Architectural Shingles: ~$${fmtN(audit.roofCadastre.materials[0].totalCostLowUsd)}–$${fmtN(audit.roofCadastre.materials[0].totalCostHighUsd)} &middot; Metal: ~$${fmtN(audit.roofCadastre.materials[1].totalCostLowUsd)}–$${fmtN(audit.roofCadastre.materials[1].totalCostHighUsd)}
+      </div>
+    </div>` : ""}
+
     <!-- 4. 2026 Solar, Storage & Microgrid -->
     <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
       <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;">

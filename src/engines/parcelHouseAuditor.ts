@@ -17,6 +17,10 @@ import {
   SolarInput,
   SolarMicrogridCalculation,
 } from "./solarMicrogridEngine";
+import {
+  estimateAccurateRoofArea,
+  AccurateRoofCalculation,
+} from "./roofAreaEngine";
 
 export interface BuildingPermitRecord {
   permit_id?: string;
@@ -119,6 +123,7 @@ export interface HouseParcelAuditResult {
     aduFeasible: boolean;
     statutoryNotes: string;
   };
+  roofCadastre: AccurateRoofCalculation;
   solarMicrogrid: SolarMicrogridCalculation & {
     dcKwCapacity: number;
     unshadedRoofSqft: number;
@@ -350,11 +355,20 @@ export function auditSingleHouseParcel(input: HouseParcelAuditInput): HouseParce
     statutoryNotes = "Governed by statewide middle housing statutes (e.g. WA HB 1110, OR HB 2001, AZ HB 2720, CO HB 24-1152) and local zoning codes.";
   }
 
-  // 4. 2026 Rooftop Solar, Battery Storage & Microgrid Calculator
-  const grossRoofSqft = Math.round(livingSqft / Math.max(1, input.stories || 1) * 1.15);
-  const unshadedFraction = 0.55; // LiDAR DSM slope/pitch/shading mask
-  const unshadedRoofSqft = Math.round(grossRoofSqft * unshadedFraction);
-  const dcKw = Number(((unshadedRoofSqft / 100) * 1.6).toFixed(1)); // ~16 W/sqft
+  // 4. Accurate Roof Cadastre & 2026 Solar Microgrid Calculator
+  const roofCalc = estimateAccurateRoofArea({
+    livingSqft,
+    stories: input.stories || 1,
+    hasGarage: input.hasGarage,
+    garageAttached: true,
+    yearBuilt: input.yearBuilt,
+    stateCode: stCode,
+  });
+
+  const grossRoofSqft = roofCalc.grossRoofSqft;
+  const unshadedFraction = roofCalc.grossRoofSqft > 0 ? (roofCalc.usableSolarSqft / roofCalc.grossRoofSqft) : 0.55;
+  const unshadedRoofSqft = roofCalc.usableSolarSqft;
+  const dcKw = roofCalc.solarDcKw;
 
   const solarCash = calculateSolarMicrogridRoi({
     taxYear: 2026,
@@ -446,6 +460,7 @@ export function auditSingleHouseParcel(input: HouseParcelAuditInput): HouseParce
       aduFeasible,
       statutoryNotes,
     },
+    roofCadastre: roofCalc,
     solarMicrogrid: {
       ...solarCash,
       battery_storage_required_for_roi: stCode === "CA" || solarCash.battery_storage_required_for_roi,

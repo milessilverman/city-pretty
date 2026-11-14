@@ -16,6 +16,10 @@ const _calcSolar = (typeof calculateSolarMicrogridRoi !== "undefined")
   ? calculateSolarMicrogridRoi
   : ((typeof require !== "undefined") ? require("./solarMicrogridEngine").calculateSolarMicrogridRoi : null);
 
+const _estRoof = (typeof estimateAccurateRoofArea !== "undefined")
+  ? estimateAccurateRoofArea
+  : ((typeof require !== "undefined") ? require("./roofAreaEngine").estimateAccurateRoofArea : null);
+
 function getHighValueSaturationMultiplier(marketVal) {
   if (!marketVal || marketVal <= 2500000) return 1.0;
   return Math.pow(2500000 / marketVal, 0.45);
@@ -224,11 +228,20 @@ function auditSingleHouseParcel(input) {
     statutoryNotes = "Governed by statewide middle housing statutes (e.g. WA HB 1110, OR HB 2001, AZ HB 2720, CO HB 24-1152) and local zoning codes.";
   }
 
-  // 4. 2026 Rooftop Solar, Battery Storage & Microgrid Calculator
-  const grossRoofSqft = Math.round(livingSqft / Math.max(1, input.stories || 1) * 1.15);
-  const unshadedFraction = 0.55; // LiDAR DSM slope/pitch/shading mask
-  const unshadedRoofSqft = Math.round(grossRoofSqft * unshadedFraction);
-  const dcKw = Number(((unshadedRoofSqft / 100) * 1.6).toFixed(1));
+  // 4. Accurate Roof Cadastre & 2026 Solar Microgrid Calculator
+  const roofCalc = (typeof _estRoof === "function") ? _estRoof({
+    livingSqft,
+    stories: input.stories || 1,
+    hasGarage: input.hasGarage,
+    garageAttached: true,
+    yearBuilt: input.yearBuilt,
+    stateCode: stCode,
+  }) : null;
+
+  const grossRoofSqft = roofCalc ? roofCalc.grossRoofSqft : Math.round(livingSqft / Math.max(1, input.stories || 1) * 1.15);
+  const unshadedFraction = roofCalc && roofCalc.grossRoofSqft > 0 ? (roofCalc.usableSolarSqft / roofCalc.grossRoofSqft) : 0.55;
+  const unshadedRoofSqft = roofCalc ? roofCalc.usableSolarSqft : Math.round(grossRoofSqft * unshadedFraction);
+  const dcKw = roofCalc ? roofCalc.solarDcKw : Number(((unshadedRoofSqft / 100) * 1.6).toFixed(1));
 
   const solarCash = _calcSolar({
     taxYear: 2026,
@@ -325,6 +338,7 @@ function auditSingleHouseParcel(input) {
       aduFeasible,
       statutoryNotes,
     },
+    roofCadastre: roofCalc,
     solarMicrogrid: {
       tax_year: solarCash.tax_year,
       ownership_model: solarCash.ownership_model,

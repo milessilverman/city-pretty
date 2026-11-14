@@ -459,6 +459,83 @@ def main():
     assert res_adv["imgSrcHasHeading"] is True
     print("✓ AI configuration lifecycle and Street View edge proxy mode verified.")
 
+    # 11. Test Accurate Roof Area Engine & Interactive Drawer DOM Reactivity
+    res_roof_drawer = eval_js("""
+    (() => {
+        const box = document.getElementById("test-live-parcel-box");
+        if (!box) return { ok: false, error: "no_box" };
+
+        const drawer = box.querySelector("#roof-area-drawer");
+        if (!drawer) return { ok: false, error: "no_roof_drawer" };
+
+        const valGross = box.querySelector("#roof-val-gross");
+        const valSquares = box.querySelector("#roof-val-squares");
+        const valMult = box.querySelector("#roof-val-mult");
+        const valBadge = box.querySelector("#roof-summary-badge");
+        const svgSlopeText = box.querySelector("#roof-svg-angle-text");
+
+        const initialGross = valGross ? parseInt(valGross.textContent.replace(/[^0-9]/g, ""), 10) : 0;
+        const initialSquares = valSquares ? parseFloat(valSquares.textContent) : 0;
+        const initialBadge = valBadge ? valBadge.textContent.trim() : "";
+
+        // Perform live recalculation: 8:12 pitch, hip roof shape, 24" eaves overhang
+        let recalcResult = null;
+        if (typeof recalculateRoofDrawer === "function") {
+            recalcResult = recalculateRoofDrawer(8.0, "hip", 24);
+        }
+
+        const steepGross = valGross ? parseInt(valGross.textContent.replace(/[^0-9]/g, ""), 10) : 0;
+        const steepSquares = valSquares ? parseFloat(valSquares.textContent) : 0;
+        const steepMult = valMult ? valMult.textContent.trim() : "";
+        const steepBadge = valBadge ? valBadge.textContent.trim() : "";
+        const steepSvgSlope = svgSlopeText ? svgSlopeText.textContent.trim() : "";
+
+        // Perform live recalculation: 1:12 low-slope flat roof, 6" eaves
+        let flatResult = null;
+        if (typeof recalculateRoofDrawer === "function") {
+            flatResult = recalculateRoofDrawer(1.0, "flat", 6);
+        }
+        const flatGross = valGross ? parseInt(valGross.textContent.replace(/[^0-9]/g, ""), 10) : 0;
+        const flatMult = valMult ? valMult.textContent.trim() : "";
+        const flatSvgSlope = svgSlopeText ? svgSlopeText.textContent.trim() : "";
+
+        return {
+            ok: true,
+            hasDrawer: true,
+            initialGross,
+            initialSquares,
+            initialBadge,
+            hasRecalcFunc: typeof recalculateRoofDrawer === "function",
+            recalcOk: !!recalcResult,
+            steepGross,
+            steepSquares,
+            steepMult,
+            steepBadge,
+            steepSvgSlope,
+            flatOk: !!flatResult,
+            flatGross,
+            flatMult,
+            flatSvgSlope
+        };
+    })()
+    """)
+    print("11. Accurate Roof Area Drawer & DOM Reactivity Check:", res_roof_drawer)
+    assert res_roof_drawer["ok"] is True
+    assert res_roof_drawer["hasDrawer"] is True
+    assert res_roof_drawer["initialGross"] > 1000
+    assert res_roof_drawer["hasRecalcFunc"] is True
+    assert res_roof_drawer["recalcOk"] is True
+    assert res_roof_drawer["steepGross"] > res_roof_drawer["initialGross"]
+    assert "8:12" in res_roof_drawer["steepMult"]
+    assert res_roof_drawer["steepSquares"] > res_roof_drawer["initialSquares"]
+    assert "8:12" in res_roof_drawer["steepBadge"]
+    assert "8:12" in res_roof_drawer["steepSvgSlope"]
+    assert res_roof_drawer["flatOk"] is True
+    assert "1:12" in res_roof_drawer["flatMult"]
+    assert "1:12" in res_roof_drawer["flatSvgSlope"]
+    assert res_roof_drawer["flatGross"] < res_roof_drawer["steepGross"]
+    print("✓ Interactive 3D roof area cadastre drawer and real-time DOM reactivity verified.")
+
     ws.close()
     print("========================================================")
     print("ALL BROWSER RUNTIME VERIFICATIONS PASSED (100% SUCCESS)!")

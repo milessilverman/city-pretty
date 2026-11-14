@@ -67,6 +67,8 @@ def run_tests():
         code_panel = f.read()
     with open("src/ai/advisorGroundingContract.js") as f:
         code_ai = f.read()
+    with open("src/engines/roofAreaEngine.js") as f:
+        code_roof = f.read()
 
     test_bundle = f"""
     (() => {{
@@ -80,6 +82,7 @@ def run_tests():
         {code_auditor}
         {code_panel}
         {code_ai}
+        {code_roof}
 
         window.__TEST_ENGINES__ = {{
             calculateTaxIncrementCapacity,
@@ -94,6 +97,8 @@ def run_tests():
             calculatePermitCapitalization,
             calculateCalibratedTreeEconomics,
             renderHouseAuditAside,
+            estimateAccurateRoofArea,
+            getDefaultPitchRise,
             getHpiMultiplier,
             STATE_BASELINE_PROFILES,
             buildGroundedAdvisorPrompt,
@@ -788,9 +793,116 @@ def run_tests():
     assert t15["caHasSb79"] is True
     print("  -> PASS: Multi-state statutory playbooks, AI configuration lifecycle, and Street View dual-mode verified.")
 
+    # Test 16: Accurate Roof Area & Pitch Engineering Cadastre
+    t16 = eval_js("""
+    (() => {
+        const { estimateAccurateRoofArea, getDefaultPitchRise, auditSingleHouseParcel } = window.__TEST_ENGINES__;
+
+        // 16A: Standard 1-Story Ranch (1,800 sq ft living area, 1 story, 4.5:12 pitch, gable, 18" eaves)
+        const ranchRoof = estimateAccurateRoofArea({
+            livingSqft: 1800,
+            stories: 1,
+            hasGarage: true,
+            pitchRise: 4.5,
+            roofShape: "gable",
+            eavesOverhangInches: 18,
+            stateCode: "CA"
+        });
+
+        // 16B: Steep 2-Story Colonial (2,400 sq ft living area, 2 stories, 8:12 pitch, hip, 24" eaves)
+        const steepColonial = estimateAccurateRoofArea({
+            livingSqft: 2400,
+            stories: 2,
+            hasGarage: true,
+            pitchRise: 8.0,
+            roofShape: "hip",
+            eavesOverhangInches: 24,
+            stateCode: "MI"
+        });
+
+        // 16C: Flat Commercial Roof (5,000 sq ft, 1 story, 0.5:12 pitch, flat, 6" eaves)
+        const flatRoof = estimateAccurateRoofArea({
+            footprintSqft: 5000,
+            livingSqft: 5000,
+            stories: 1,
+            pitchRise: 0.5,
+            roofShape: "flat",
+            eavesOverhangInches: 6,
+            hasGarage: false
+        });
+
+        // 16D: Single-House Parcel Auditor Integration
+        const parcelAudit = auditSingleHouseParcel({
+            parcelId: "06037-ROOF-TEST",
+            address: "456 Oak Ave, Pasadena, CA",
+            lotSqft: 7500,
+            livingSqft: 2000,
+            yearBuilt: 1980,
+            stories: 1,
+            stateCode: "CA",
+            countyFips: "06037"
+        });
+
+        // 16E: Regional Default Pitch Inferences
+        const azPitch = getDefaultPitchRise(1995, "AZ");
+        const mnPitchOld = getDefaultPitchRise(1925, "MN");
+        const caRanchPitch = getDefaultPitchRise(1965, "CA");
+
+        return {
+            ranch: {
+                effectiveFootprint: ranchRoof.effectiveGroundFootprintSqft,
+                pitchMultiplier: ranchRoof.pitchMultiplier,
+                grossRoofSqft: ranchRoof.grossRoofSqft,
+                roofingSquares: ranchRoof.roofingSquares,
+                usableSolarSqft: ranchRoof.usableSolarSqft,
+                maxSolarPanels: ranchRoof.maxSolarPanels,
+                solarDcKw: ranchRoof.solarDcKw,
+                annualYieldKwh: ranchRoof.annualYieldKwh,
+                materialsCount: ranchRoof.materials ? ranchRoof.materials.length : 0
+            },
+            colonial: {
+                groundFootprint: steepColonial.groundFootprintSqft,
+                pitchMultiplier: steepColonial.pitchMultiplier,
+                grossRoofSqft: steepColonial.grossRoofSqft,
+                slopeAngleDeg: steepColonial.slopeAngleDeg
+            },
+            flat: {
+                pitchMultiplier: flatRoof.pitchMultiplier,
+                grossRoofSqft: flatRoof.grossRoofSqft,
+                shapeComplexity: flatRoof.shapeComplexityMultiplier
+            },
+            auditRoofCadastre: !!(parcelAudit && parcelAudit.roofCadastre),
+            auditRoofSquares: parcelAudit && parcelAudit.roofCadastre ? parcelAudit.roofCadastre.roofingSquares : 0,
+            regionalPitches: { azPitch, mnPitchOld, caRanchPitch }
+        };
+    })()
+    """)
+    print("Test 16 (Accurate Roof Area & Pitch Cadastre):", t16)
+    assert t16["ranch"]["effectiveFootprint"] > 1800
+    assert 1.06 <= t16["ranch"]["pitchMultiplier"] <= 1.08
+    assert t16["ranch"]["grossRoofSqft"] > t16["ranch"]["effectiveFootprint"]
+    assert t16["ranch"]["roofingSquares"] > 20
+    assert 0 < t16["ranch"]["usableSolarSqft"] < t16["ranch"]["grossRoofSqft"]
+    assert t16["ranch"]["maxSolarPanels"] >= 4
+    assert t16["ranch"]["solarDcKw"] > 0
+    assert t16["ranch"]["annualYieldKwh"] > 0
+    assert t16["ranch"]["materialsCount"] == 4
+    assert t16["colonial"]["groundFootprint"] == 1200
+    assert 1.20 <= t16["colonial"]["pitchMultiplier"] <= 1.21
+    assert t16["colonial"]["slopeAngleDeg"] == 33.7
+    assert t16["colonial"]["grossRoofSqft"] > 1800
+    assert 1.000 <= t16["flat"]["pitchMultiplier"] <= 1.002
+    assert t16["flat"]["shapeComplexity"] == 1.01
+    assert t16["auditRoofCadastre"] is True
+    assert t16["auditRoofSquares"] > 0
+    assert t16["regionalPitches"]["azPitch"] == 3.5
+    assert t16["regionalPitches"]["mnPitchOld"] == 8.0
+    assert t16["regionalPitches"]["caRanchPitch"] == 4.5
+    print("  -> PASS: 3D roof plane trigonometry, pitch multipliers, eaves geometry, solar partitioning, and material cost assemblies verified.")
+
     ws.close()
     print("========================================================")
-    print("ALL 15 CORE REGRESSION TEST SUITES PASSED (100% SUCCESS)!")
+    print("ALL 16 CORE REGRESSION TEST SUITES PASSED (100% SUCCESS)!")
     print("========================================================")
 
 if __name__ == "__main__":
