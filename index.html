@@ -1080,9 +1080,9 @@ details.panel-sec .sec-content { padding: 12px; }
 }
 
 @media print {
-  body * { visibility: hidden !important; }
-  #prospectus-modal, #prospectus-modal * { visibility: visible !important; }
-  #prospectus-modal { position: absolute !important; left: 0 !important; top: 0 !important; width: 100% !important; margin: 0 !important; padding: 0 !important; background: #fff !important; }
+  body.prospectus-printing * { visibility: hidden !important; }
+  body.prospectus-printing #prospectus-modal, body.prospectus-printing #prospectus-modal * { visibility: visible !important; }
+  body.prospectus-printing #prospectus-modal { position: absolute !important; left: 0 !important; top: 0 !important; width: 100% !important; margin: 0 !important; padding: 0 !important; background: #fff !important; }
   .no-print { display: none !important; }
   .prospectus-page { page-break-after: always; padding: 32px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #0f172a; }
 }
@@ -18402,6 +18402,23 @@ function renderHouse(box, a, lot, ll, st) {
               </div>
               <a href="${svUrl}" target="_blank" rel="noopener" style="font-size:11.5px;font-weight:700;color:#0284c7;text-decoration:none;">Open Full Window ↗</a>
             </div>
+            ${(() => {
+              const effYear = num(a.EffectiveYear1 || a.EffectiveYear || a.EFF_YR_BLT || a.EFF_YEAR);
+              const yb = num(a.YearBuilt1 || a.YearBuilt || a.CONST_YEAR || a.ACT_YR_BLT);
+              const lidarYear = (typeof activeState === "function" && activeState() === "CA") ? 2020 : 2023;
+              const hasPostImageryRemodel = effYear && effYear > lidarYear && (!yb || effYear > yb);
+              if (hasPostImageryRemodel) {
+                return `
+                <div style="margin-top:8px;padding:7px 10px;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;font-size:11px;color:#92400e;line-height:1.4;">
+                  <b>⚠️ Imagery Vintage Notice (Post-Imagery Alteration):</b> Assessor roll indicates structural alteration/effective vintage in <b>${effYear}</b>, which post-dates baseline remote sensing LiDAR (${lidarYear}). Verify on-site building envelope before submitting ADU/SB 9 site plans.
+                </div>`;
+              }
+              return `
+              <div style="margin-top:8px;padding:6px 10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;font-size:11px;color:#64748b;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;">
+                <span>✓ <b>Remote Sensing Cadastre:</b> LiDAR (${lidarYear}) &amp; Facade verified current with tax roll vintage (${effYear || yb || "active"}).</span>
+                <span style="font-size:10px;color:#94a3b8;">USGS 3DEP / LARIAC Cadastral Mesh</span>
+              </div>`;
+            })()}
           </div>
         </details>
 
@@ -21508,7 +21525,7 @@ function select(id, fly) {
     <div class="action-bar">
       <button type="button" class="action-pill" onclick="copyShareLink()" title="Copy shareable link">🔗 Share</button>
       <button type="button" class="action-pill" onclick="copyAreaSummary('${id}')" title="Copy markdown brief">📋 Copy summary</button>
-      <button type="button" class="action-pill" onclick="window.print()" title="Print 1-page dossier">🖨️ Print</button>
+      <button type="button" class="action-pill" onclick="document.body.classList.remove('prospectus-printing'); window.print();" title="Print 1-page dossier">🖨️ Print</button>
       <button type="button" class="action-pill${inC ? " active" : ""}" id="btn-compare-panel" onclick="toggleCompare('${id}')">${inC ? "✓ In comparison" : "⚖️ + Compare"}</button>
       <button type="button" class="action-pill${renterViewOn ? " active" : ""}" id="btn-renter-panel" onclick="toggleRenterView()">${renterViewOn ? "👥 Renter view (on)" : "👥 Renter view"}</button>
       <button type="button" class="action-pill" onclick="exportNeighborhoodBrief('${id}', 'csv')" title="Download CSV dataset for this block group">📊 Export CSV</button>
@@ -21933,6 +21950,7 @@ function exportNeighborhoodBrief(id, format) {
     link.click();
     showToast(`✓ Downloaded CSV dataset for Block Group ${id}`);
   } else {
+    document.body.classList.remove("prospectus-printing");
     window.print();
   }
 }
@@ -24159,6 +24177,7 @@ function exportExecutiveProspectus() {
   `;
 
   m.hidden = false;
+  document.body.classList.add("prospectus-printing");
   document.body.style.overflow = "hidden";
 }
 
@@ -24166,6 +24185,7 @@ function closeProspectusModal() {
   const m = document.getElementById("prospectus-modal");
   if (m) {
     m.hidden = true;
+    document.body.classList.remove("prospectus-printing");
     document.body.style.overflow = "";
   }
 }

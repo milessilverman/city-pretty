@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import json
 import urllib.request
 import websocket
@@ -50,6 +51,8 @@ def run_tests():
         code_hedonic = f.read()
     with open("src/engines/solarMicrogridEngine.js") as f:
         code_solar = f.read()
+    with open("src/engines/lidarStreetViewValidator.js") as f:
+        code_lidar = f.read()
     with open("src/adapters/arcgisNormalizer.js") as f:
         code_arcgis = f.read()
 
@@ -59,6 +62,7 @@ def run_tests():
         {code_zoning}
         {code_hedonic}
         {code_solar}
+        {code_lidar}
         {code_arcgis}
 
         window.__TEST_ENGINES__ = {{
@@ -66,6 +70,7 @@ def run_tests():
             evaluateByRightHousing,
             computeSubAdditivePackage,
             calculateSolarMicrogridRoi,
+            validateParcelImageryVintage,
             normalizeArcGisFeature
         }};
         return true;
@@ -309,9 +314,36 @@ def run_tests():
     assert t7["market_total"] == 1250000
     print("  -> PASS: Louisiana parish GIS fields successfully mapped to canonical schema.")
 
+    # Test 8: LiDAR & Street View Imagery Vintage Validation
+    t8 = eval_js("""
+    (() => {
+        const { validateParcelImageryVintage } = window.__TEST_ENGINES__;
+        const remodeled = validateParcelImageryVintage({
+            parcelId: "0603712345", lidarAcquisitionYear: 2020, streetViewCaptureDate: "2021-06",
+            latestPostConstructionPermitDate: "2024-03", permitScopeDescription: "Second story addition and ADU conversion"
+        });
+        const current = validateParcelImageryVintage({
+            parcelId: "0603712346", lidarAcquisitionYear: 2023, streetViewCaptureDate: "2024-05",
+            latestPostConstructionPermitDate: "2021-08", permitScopeDescription: "Kitchen remodel"
+        });
+        return {
+            remodeledBadge: remodeled.confidenceBadge,
+            remodeledWarning: remodeled.warningMessage,
+            currentBadge: current.confidenceBadge,
+            currentWarning: current.warningMessage
+        };
+    })()
+    """)
+    print("Test 8 (LiDAR & Street View Imagery Vintage):", t8)
+    assert t8["remodeledBadge"] == "stale_imagery_permit_override"
+    assert "2024-03" in t8["remodeledWarning"]
+    assert t8["currentBadge"] == "verified_current"
+    assert t8["currentWarning"] is None
+    print("  -> PASS: Post-imagery 2024 remodel correctly triggers stale imagery override warning.")
+
     ws.close()
     print("========================================================")
-    print("ALL 7 CORE REGRESSION TEST SUITES PASSED (100% SUCCESS)!")
+    print("ALL 8 CORE REGRESSION TEST SUITES PASSED (100% SUCCESS)!")
     print("========================================================")
 
 if __name__ == "__main__":
