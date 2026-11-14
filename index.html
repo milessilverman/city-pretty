@@ -18892,7 +18892,7 @@ function renderHouse(box, a, lot, ll, st) {
         </div>
         ${valuation && valuation.confidenceRating ? `<div style="font-size:11px;font-weight:600;color:#0284c7;margin-top:2px;">${esc(valuation.confidenceRating)}</div>` : ""}
         <div style="font-size:11px;color:#64748b;margin-top:2px;">
-          Model: <b>${esc(valMethod)}</b> &middot; ~${fmt$(houseVpsf)}/sq ft (${fmtN(valuation ? valuation.livingSqft : livingSqft)} sq ft living)
+          Model: <b>${esc(valMethod)}</b> &middot; ${valuation && valuation.isVacantLand ? `~${fmt$(houseVpsf)}/sq ft lot (${fmtN(valuation.lotSqft || lot || 0)} sq ft buildable land)` : `~${fmt$(houseVpsf)}/sq ft (${fmtN(valuation ? valuation.livingSqft : livingSqft)} sq ft living)`}
         </div>
         <div style="margin-top:6px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
           <a href="${zillowUrl}" target="_blank" rel="noopener" class="zillow-pill" title="Cross-check this screening estimate against live Zillow Zestimate for ${esc(searchAddress)}">
@@ -18914,7 +18914,7 @@ function renderHouse(box, a, lot, ll, st) {
             <div><b>Appraisal Model Decomposition (Site Land vs Finished Living Structure):</b> Calibrated against county assessor rolls, deed recordings, and Census ACS microdata.</div>
             <div style="margin-top:4px;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
               <div>• <b>Site Land Value:</b> ${valuation && valuation.siteValue ? fmt$(valuation.siteValue) : fmt$(Math.round(baseNeighborhoodHv * 0.5))} <span class="muted">(underlying lot equity)</span></div>
-              <div>• <b>Finished Structure (GLA):</b> ${fmtN(livingSqft)} sq ft @ ~$${houseVpsf}/sq ft ${valuation && valuation.structVal ? `(${fmt$(valuation.structVal)})` : ''}</div>
+              ${valuation && valuation.isVacantLand ? `<div>• <b>Finished Structure (GLA):</b> $0 <span class="muted">(unimproved raw land / development site)</span></div>` : `<div>• <b>Finished Structure (GLA):</b> ${fmtN(livingSqft)} sq ft @ ~$${houseVpsf}/sq ft ${valuation && valuation.structVal ? `(${fmt$(valuation.structVal)})` : ''}</div>`}
               <div>• <b>Age Factor:</b> ${F.yb ? `${F.yb} (${ageFactor >= 1 ? '+' : ''}${((ageFactor - 1) * 100).toFixed(1)}%)` : 'Baseline'}</div>
               <div>• <b>Beds/Baths:</b> ${F.beds || 3} bd / ${F.baths || 2} ba (${bedBathFactor >= 1 ? '+' : ''}${((bedBathFactor - 1) * 100).toFixed(1)}%)</div>
               <div>• <b>Lot Premium:</b> ${fmtN(lot || 6000)} sq ft (${lotBonus >= 0 ? '+' : ''}${fmt$(lotBonus)})</div>
@@ -22645,14 +22645,20 @@ function toggleHomeCompare() {
     const roofSqft = Math.round(((F.foot || Math.min(F.bldg || 1600, lotSqft * 0.35)) * 1.15));
     const solarKw = Math.max(3.5, +(Math.round(roofSqft * 0.65) / 75).toFixed(1));
 
+    const valObj = activeHouse.valuation;
+    const estVal = activeHouse.houseHv || (valObj ? valObj.estimatedValue : null) || a.Roll_TotalValue || 750000;
+    const isVacant = valObj ? !!valObj.isVacantLand : false;
+    const bldgSqft = isVacant ? 0 : (valObj && valObj.livingSqft ? valObj.livingSqft : (F.bldg || 1600));
+
     homeCompareList.push({
       ain: apn,
       address: a.SitusFullAddress || ("Parcel " + apn),
       county: a.county || countyOf(),
       lotSqft: lotSqft,
-      bldgSqft: F.bldg || 1600,
-      stories: F.stories || 1,
-      valuation: a.Roll_TotalValue || 750000,
+      bldgSqft: bldgSqft,
+      stories: isVacant ? 0 : (F.stories || 1),
+      valuation: estVal,
+      isVacantLand: isVacant,
       playbook: pb,
       solarKw: solarKw,
       nearestStn: nearestStn,
@@ -24153,9 +24159,9 @@ function renderCompareDrawer() {
           </div>
 
           <div class="c-row"><span class="k">Lot Size</span><span class="v">${h.lotSqft.toLocaleString()} sq ft</span></div>
-          <div class="c-row"><span class="k">Living Area</span><span class="v">${h.bldgSqft.toLocaleString()} sq ft (${h.stories} story)</span></div>
-          <div class="c-row"><span class="k">Est. Value</span><span class="v">$${Number(h.valuation).toLocaleString()}</span></div>
-          <div class="c-row"><span class="k">Price / Sq Ft</span><span class="v">~$${Math.round(h.valuation / Math.max(h.bldgSqft, 1)).toLocaleString()} / sq ft</span></div>
+          <div class="c-row"><span class="k">Living Area</span><span class="v">${h.isVacantLand ? '<span style="color:#0284c7;font-weight:700">Vacant Infill Land (0 sq ft)</span>' : `${h.bldgSqft.toLocaleString()} sq ft (${h.stories} story)`}</span></div>
+          <div class="c-row"><span class="k">Est. Market Value</span><span class="v">$${Number(h.valuation).toLocaleString()}</span></div>
+          <div class="c-row"><span class="k">${h.isVacantLand ? 'Price / Lot Sq Ft' : 'Price / Sq Ft'}</span><span class="v">~$${Math.round(h.valuation / Math.max(h.isVacantLand ? h.lotSqft : h.bldgSqft, 1)).toLocaleString()} / sq ft</span></div>
           <div class="c-row"><span class="k">Solar DC Capacity</span><span class="v">${h.solarKw} kW DC</span></div>
           <div class="c-row"><span class="k">Transit Walkshed</span><span class="v">${h.nearestStn ? (h.nearestStn.distMi <= 0.5 ? '<b style="color:#0284c7">0-Parking Exempt</b>' : h.nearestStn.distMi.toFixed(2) + ' mi') : '–'}</span></div>
           <div class="c-row"><span class="k">Payback Horizon</span><span class="v">${b.paybackYrs} yrs</span></div>
@@ -25278,13 +25284,13 @@ function exportExecutiveProspectus() {
       </div>
       <div>
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;">Existing Improvements</div>
-        <div style="font-size:14px;font-weight:700;color:#0f172a;">${fmtN(sqft)} sqft Main</div>
-        <div style="font-size:11px;color:#64748b;">Built ${a.YearBuilt || "N/A"} · ${a.Units || 1} Unit(s)</div>
+        <div style="font-size:14px;font-weight:700;color:#0f172a;">${valObj && valObj.isVacantLand ? "Vacant Infill Land" : `${fmtN(sqft)} sqft Main`}</div>
+        <div style="font-size:11px;color:#64748b;">${valObj && valObj.isVacantLand ? "Unimproved Site · 0 Units" : `Built ${a.YearBuilt || "N/A"} · ${a.Units || 1} Unit(s)`}</div>
       </div>
       <div>
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;">Baseline AVM Value</div>
         <div style="font-size:14px;font-weight:800;color:#059669;">${fmtP(aPrice)}</div>
-        <div style="font-size:11px;color:#64748b;">~$${Math.round(aPrice / Math.max(sqft, 1)).toLocaleString()}/sqft</div>
+        <div style="font-size:11px;color:#64748b;">${valObj && valObj.isVacantLand ? `~$${Math.round(aPrice / Math.max(lotSqft, 1)).toLocaleString()}/sqft lot` : `~$${Math.round(aPrice / Math.max(sqft, 1)).toLocaleString()}/sqft`}</div>
       </div>
     </div>
 
