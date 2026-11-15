@@ -15012,11 +15012,11 @@ function syncHeaderDomToCounty(fips) {
   if (titleEl) {
     titleEl.textContent = "Which improvements make " + comp.name + " neighborhoods better, and worth more, per dollar";
   }
+  { const lab = document.getElementById("county-pick-label"); if (lab) lab.textContent = comp.name + (comp.state ? ", " + comp.state : ""); }
   if (readinessEl) {
     readinessEl.setAttribute("data-tier", comp.readiness_tier);
     const tierLabel = comp.readiness_tier === "audited_A" ? "A (fullest)" : comp.readiness_tier === "verified_B" ? "B" : comp.readiness_tier === "preliminary_C" ? "C (preliminary)" : "D (basic)";
     
-    readinessEl.textContent = "Data tier " + comp.readiness_tier.slice(-1);
     readinessEl.title = "Data tier " + tierLabel + " · Assessor roll: " + (comp.assessor_roll_vintage || "not recorded") + " · Zoning: " + String(comp.zoning_source || "not recorded").replace(/_/g, " ") + " · Transit feeds: " + (comp.gtfs_agencies_count || 0) + ". Click for details.";
   }
   if (typeof syncMethodsModalToCounty === "function") {
@@ -22287,7 +22287,9 @@ function switchCompareTab(tab) {
 
 function updateCompareUI() {
   const hBtn = $("#btn-compare-header");
-  if (hBtn) hBtn.textContent = `Compare (${compareList.length})`;
+  if (hBtn) hBtn.innerHTML = `<svg class="ic" aria-hidden="true"><use href="#i-compare"/></svg> Compare (${compareList.length})`;
+  const badge = $("#compare-badge");
+  if (badge) { badge.textContent = compareList.length; badge.hidden = !compareList.length; }
   const pBtn = $("#btn-compare-panel");
   if (pBtn) {
     const inC = compareList.includes(selected);
@@ -24185,6 +24187,74 @@ async function unpackGzipB64(b64Text) {
   return JSON.parse(jsonStr);
 }
 
+// ---------------- County picker: one searchable list of every county, LA and Orange County included
+function initCountyPicker() {
+  const btn = $("#county-pick-btn"), pop = $("#county-pick-pop"), q = $("#county-q"), list = $("#county-list"), foot = $("#county-pick-foot");
+  if (!btn || !pop || !q || !list) return;
+  const all = countyBundleEls().map(e => {
+    const st = e.dataset.st || "", name = e.dataset.name || "";
+    return { fips: e.dataset.fips, name, st, stateName: STATE_FULL[st] || st, lots: e.dataset.coverage === "lots",
+      key: (name + " " + st + " " + (STATE_FULL[st] || "")).toLowerCase() };
+  }).sort((a, b) => a.stateName.localeCompare(b.stateName) || a.name.localeCompare(b.name));
+  const withData = all.filter(c => !c.lots).length;
+  if (foot) foot.textContent = `${withData} counties with data · ${all.length - withData} with property lines only`;
+  q.placeholder = `Search ${all.length} counties or a state`;
+  let shown = [], cursor = -1;
+  const render = () => {
+    const words = q.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    shown = words.length ? all.filter(c => words.every(w => c.key.includes(w))) : all;
+    const cur = activeFips();
+    cursor = Math.min(Math.max(cursor, 0), shown.length - 1);
+    let lastState = "";
+    list.innerHTML = shown.map((c, i) => {
+      const head = !words.length && c.stateName !== lastState ? `<li class="pick-group" role="presentation">${esc(c.stateName)}</li>` : "";
+      lastState = c.stateName;
+      return head + `<li role="option" id="cp-${c.fips}" data-i="${i}" aria-selected="${i === cursor}" class="${c.fips === cur ? "current" : ""}">
+        <span>${words.length ? esc(c.name) + `<span class="muted">, ${esc(c.st)}</span>` : esc(c.name.replace(/ County$/, ""))}</span>${c.lots ? `<span class="pick-tag">lot lines only</span>` : c.fips === cur ? `<span class="pick-tag on">open</span>` : ""}</li>`;
+    }).join("") || `<li class="pick-empty">No county matches “${esc(q.value)}”</li>`;
+    q.setAttribute("aria-activedescendant", shown[cursor] ? "cp-" + shown[cursor].fips : "");
+    const act = list.querySelector('[aria-selected="true"]'); if (act) act.scrollIntoView({ block: "nearest" });
+  };
+  const open = () => { pop.hidden = false; btn.setAttribute("aria-expanded", "true"); q.value = ""; cursor = Math.max(0, all.findIndex(c => c.fips === activeFips())); render(); q.focus(); };
+  const close = () => { pop.hidden = true; btn.setAttribute("aria-expanded", "false"); };
+  const choose = c => { close(); if (!c) return; if (c.fips === "06037") switchCounty("la"); else openCounty(c.fips); };
+  btn.addEventListener("click", () => pop.hidden ? open() : close());
+  q.addEventListener("input", () => { cursor = 0; render(); });
+  q.addEventListener("keydown", e => {
+    if (e.key === "ArrowDown") { cursor = Math.min(cursor + 1, shown.length - 1); render(); e.preventDefault(); }
+    else if (e.key === "ArrowUp") { cursor = Math.max(cursor - 1, 0); render(); e.preventDefault(); }
+    else if (e.key === "Enter") { choose(shown[cursor]); e.preventDefault(); }
+    else if (e.key === "Escape") { close(); btn.focus(); }
+  });
+  list.addEventListener("mousedown", e => { const li = e.target.closest("li[data-i]"); if (li) { e.preventDefault(); choose(shown[+li.dataset.i]); } });
+  document.addEventListener("click", e => { if (!pop.hidden && !e.target.closest("#county-pick")) close(); });
+}
+
+// ---------------- A little fun: fly somewhere promising
+function surpriseMe() {
+  const feats = (activeCounty === "oc" && D_OC && D_OC.features) ? D_OC.features : (D && D.bgs ? D.bgs.features : []);
+  const good = feats.filter(f => f.properties && f.properties.v >= 1 && f.properties.id !== selected).sort((a, b) => b.properties.v - a.properties.v);
+  const pool = good.slice(0, Math.max(12, Math.ceil(good.length / 4)));
+  if (!pool.length) { showToast("No neighborhood here returns $1 or more per $1 yet. Try another county."); return; }
+  const f = pool[Math.floor(Math.random() * pool.length)], p = f.properties;
+  map.flyToBounds(L.geoJSON(f).getBounds(), { maxZoom: 15, padding: [60, 60], duration: 1.4 });
+  map.once("moveend", () => select(p.id, false));
+  showToast(`${p.n || "This neighborhood"}${p.c ? ", " + p.c : ""}: about ${fvpd(p.v)} of home value per $1`);
+}
+window.surpriseMe = surpriseMe;
+
+// ---------------- First-visit welcome card
+function showWelcome(force) {
+  const w = $("#welcome"); if (!w) return;
+  let seen = false; try { seen = localStorage.getItem("cp_welcome_seen") === "1"; } catch (e) {}
+  if (force || !seen) w.hidden = false;
+}
+function hideWelcome() {
+  const w = $("#welcome"); if (w) w.hidden = true;
+  try { localStorage.setItem("cp_welcome_seen", "1"); } catch (e) {}
+}
+window.showWelcome = showWelcome; window.hideWelcome = hideWelcome;
+
 let _ocLayersMerged = false;
 function ensureOrangeCounty() {
   if (window.ocReady) return window.ocReady;
@@ -24601,27 +24671,7 @@ async function init() {
   new Loc().addTo(map);
   performance.mark("init:wired"); map.fitBounds(L.geoJSON(D.bgs).getBounds(), { animate: false }); performance.mark("init:fit");
   drawContext(); performance.mark("init:context");
-  { const sel = $("#county-more"); if (sel) { const els = countyBundleEls(); if (!els.length) sel.hidden = true;
-      const byst = {}; els.forEach(e => { const st = e.dataset.st || "CA"; (byst[st] = byst[st] || []).push(e); });
-      Object.keys(byst).sort((a, b) => a === "CA" ? -1 : b === "CA" ? 1 : (STATE_FULL[a] || a).localeCompare(STATE_FULL[b] || b)).forEach(st => {
-        const g = document.createElement("optgroup"); g.label = STATE_FULL[st] || st;
-        byst[st].sort((a, b) => a.dataset.name.localeCompare(b.dataset.name)).forEach(e => {
-          if (sel.querySelector(`option[value="${e.dataset.fips}"]`)) return;
-          const o = document.createElement("option"); o.value = e.dataset.fips;
-          const lotsOnly = e.dataset.coverage === "lots";
-          o.textContent = e.dataset.name.replace(/ County$/, "") + (st === "CA" ? "" : ", " + st) + (lotsOnly ? " (lot lines only)" : "");
-          o.title = e.dataset.name + (st === "CA" ? "" : ", " + STATE_FULL[st]) + (lotsOnly ? ": no neighborhood data yet; live property lines only" : ""); g.appendChild(o); });
-        sel.appendChild(g); });
-      sel.addEventListener("change", e => { if (e.target.value) openCounty(e.target.value); });
-      const h1 = document.querySelector(".brand h1"), more = els.map(e => e.dataset.name.replace(/ County$/, ""));
-      if (h1 && more.length === 1) h1.textContent = `Which improvements make ${els[0].dataset.name} neighborhoods better, and worth more, per dollar`;   // the full name: "San Juan Municipio", "Orleans Parish"
-      else if (h1 && more.length > 1) h1.textContent = "Which improvements make neighborhoods better, and worth more, per dollar";
-      els.filter(e => e.dataset.coverage === "lots").forEach(e => {   // the menu's options are pre-written in index.html
-        const o = sel.querySelector(`option[value="${e.dataset.fips}"]`);
-        if (o && !/lot lines only/.test(o.textContent)) { o.textContent += " (lot lines only)"; o.title = e.dataset.name + ": no neighborhood data yet; live property lines only"; } });
-      { const withData = els.filter(e => e.dataset.coverage !== "lots").length, lotsOnly = els.length - withData;
-        const first = sel.querySelector('option[value=""]'); if (first) first.textContent = `More counties (${withData})…`;
-        sel.title = sel.ariaLabel = `Select from ${withData} US counties with data` + (lotsOnly ? ` and ${lotsOnly} with property lines only` : ""); } } }
+  initCountyPicker();
   cpText("la-crash-counts"); setTimeout(() => cpText("overlay-chunks"), 800);   // small/background downloads after first paint
   setTimeout(() => loadSites().then(() => { if (selected) { const f = byId.get(selected); if (f) fillSites(f.properties); } }), 1200);
   const start = D.meta.default_bg && byId.has(D.meta.default_bg) ? D.meta.default_bg : D.bgs.features[0].properties.id;
@@ -24642,11 +24692,14 @@ async function init() {
   { const b = $("#btn-mobile-opts"), hdr = document.querySelector("header.top");   // phones: show or hide the folded controls
     if (b && hdr) b.addEventListener("click", () => { const open = hdr.classList.toggle("opts-open"); b.setAttribute("aria-expanded", open); b.textContent = open ? "Hide map options" : "Map options and tools"; }); }
   // Header menus close when you pick an item, click elsewhere or press Escape
-  document.addEventListener("click", e => document.querySelectorAll("header.top details[open]").forEach(d => {
+  const MENUS = "header.top details[open], .map-bar details[open]";
+  document.addEventListener("click", e => document.querySelectorAll(MENUS).forEach(d => {
     if (!d.contains(e.target) || (d.id === "tools-menu" && e.target.closest(".menu-item"))) d.open = false; }));
-  document.addEventListener("keydown", e => { if (e.key === "Escape") document.querySelectorAll("header.top details[open]").forEach(d => { d.open = false; }); });
-  document.querySelectorAll("header.top details.menu").forEach(d => d.addEventListener("toggle", () => {
-    if (d.open) document.querySelectorAll("header.top details.menu[open]").forEach(o => { if (o !== d) o.open = false; }); }));
+  document.addEventListener("keydown", e => { if (e.key === "Escape") document.querySelectorAll(MENUS).forEach(d => { d.open = false; }); });
+  document.querySelectorAll("header.top details.menu, .map-bar details.menu").forEach(d => d.addEventListener("toggle", () => {
+    if (d.open) document.querySelectorAll("header.top details.menu[open], .map-bar details.menu[open]").forEach(o => { if (o !== d) o.open = false; }); }));
+  { const sb = $("#btn-surprise"); if (sb) sb.onclick = () => surpriseMe(); }
+  showWelcome(false);
   matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => { drawContext(); restyle(); });
 }
 

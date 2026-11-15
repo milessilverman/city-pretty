@@ -2,8 +2,9 @@
 // possible: the AI Worker is mocked, and the parcel checks call the page's own functions with fixed records.
 import { expect, test, type Page } from "@playwright/test";
 
-async function openPage(page: Page, path = "") {
+async function openPage(page: Page, path = "", { welcome = false } = {}) {
   const errors: string[] = [];
+  if (!welcome) await page.addInitScript(() => { try { localStorage.setItem("cp_welcome_seen", "1"); } catch (e) {} });
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(path);
   await page.waitForFunction(() => (document.querySelector("#loading") as HTMLElement | null)?.hidden === true, null, { timeout: 60_000 });
@@ -13,7 +14,8 @@ async function openPage(page: Page, path = "") {
 test("loads Los Angeles County without script errors", async ({ page }) => {
   const errors = await openPage(page);
   await expect(page.locator("#panel")).toContainText("BLOCK GROUP");
-  await expect(page.locator(".brand h1")).not.toContainText("706");
+  await expect(page.locator("header h1")).not.toContainText("706");
+  await expect(page.locator("#county-pick-label")).toHaveText("Los Angeles County, CA");
   expect(errors).toEqual([]);
 });
 
@@ -23,24 +25,46 @@ test("does not download Orange County until it is opened", async ({ page }) => {
   await openPage(page);
   await page.waitForTimeout(2_000);
   expect(ocRequested).toBe(false);
-  await page.click("#btn-county-oc");
+  await page.click("#county-pick-btn");
+  await page.fill("#county-q", "orange county ca");
+  await page.keyboard.press("Enter");
   await page.waitForFunction(() => (window as any).activeCounty === "oc", null, { timeout: 60_000 });
-  await expect(page.locator(".brand h1")).toContainText("Orange County");
+  await expect(page.locator("header h1")).toContainText("Orange County");
+  await expect(page.locator("#county-pick-label")).toHaveText("Orange County, CA");
 });
 
-test("county menu counts only counties that have data", async ({ page }) => {
+test("county picker lists and searches every county, LA and Orange County included", async ({ page }) => {
   await openPage(page);
-  const { label, withData, lotsOnly } = await page.evaluate(() => {
+  const { withData, lotsOnly } = await page.evaluate(() => {
     const els = [...document.querySelectorAll<HTMLElement>("script.county-bundle")];
-    return {
-      label: document.querySelector('#county-more option[value=""]')!.textContent,
-      withData: els.filter((e) => e.dataset.coverage !== "lots").length,
-      lotsOnly: els.filter((e) => e.dataset.coverage === "lots").length,
-    };
+    return { withData: els.filter((e) => e.dataset.coverage !== "lots").length, lotsOnly: els.filter((e) => e.dataset.coverage === "lots").length };
   });
-  expect(label).toBe(`More counties (${withData})…`);
-  expect(lotsOnly).toBeGreaterThan(0);
-  await expect(page.locator("#county-more option", { hasText: "(lot lines only)" })).toHaveCount(lotsOnly);
+  await page.click("#county-pick-btn");
+  await expect(page.locator("#county-pick-foot")).toHaveText(`${withData} counties with data · ${lotsOnly} with property lines only`);
+  await expect(page.locator("#county-list .pick-tag", { hasText: "lot lines only" })).toHaveCount(lotsOnly);
+  await page.fill("#county-q", "los angeles");
+  await expect(page.locator("#county-list li[role=option]")).toContainText(["Los Angeles County, CA"]);
+  await page.fill("#county-q", "district columbia");
+  await page.keyboard.press("Enter");
+  await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "11001", null, { timeout: 60_000 });
+  await expect(page.locator("#county-pick-label")).toHaveText("District of Columbia, DC");
+  await page.click("#county-pick-btn");
+  await page.fill("#county-q", "los angeles");
+  await page.keyboard.press("Enter");
+  await page.waitForFunction(() => (window as any).activeCounty === "la", null, { timeout: 60_000 });
+  await expect(page.locator("#county-pick-label")).toHaveText("Los Angeles County, CA");
+});
+
+test("welcome card shows once, and Surprise me flies somewhere new", async ({ page }) => {
+  await openPage(page, "", { welcome: true });
+  await expect(page.locator("#welcome")).toBeVisible();
+  const before = await page.evaluate(() => (window as any).selected);
+  await page.locator("#welcome").getByText("Surprise me").click();
+  await expect(page.locator("#welcome")).toBeHidden();
+  await page.waitForFunction((b) => (window as any).selected && (window as any).selected !== b, before, { timeout: 15_000 });
+  await page.reload();
+  await page.waitForFunction(() => (document.querySelector("#loading") as HTMLElement | null)?.hidden === true, null, { timeout: 60_000 });
+  await expect(page.locator("#welcome")).toBeHidden();
 });
 
 test("withholds home values the model cannot support", async ({ page }) => {
@@ -116,8 +140,8 @@ test("fits a phone screen", async ({ browser }) => {
   const r = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, width: document.documentElement.clientWidth, mapTop: document.querySelector("#map")!.getBoundingClientRect().top }));
   expect(r.scroll).toBeLessThanOrEqual(r.width);
   expect(r.mapTop).toBeLessThan(420);
-  await page.click("#btn-mobile-opts");
-  await expect(page.locator("#metric")).toBeVisible();
+  await expect(page.locator("#metric")).toBeAttached();
+  await expect(page.locator("#county-pick-btn")).toBeVisible();
   await expect(page.locator("#btn-ai-header")).toBeVisible();
   await ctx.close();
 });
@@ -135,9 +159,9 @@ test("shows no emoji on the main screen or in the menus", async ({ page }) => {
   expect(hits).toEqual([]);
 });
 
-test("header is two rows on a laptop screen", async ({ page }) => {
+test("header is one slim row on a laptop screen", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await openPage(page);
   const h = await page.evaluate(() => document.querySelector("header.top")!.getBoundingClientRect().height);
-  expect(h).toBeLessThan(140);
+  expect(h).toBeLessThan(70);
 });
