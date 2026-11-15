@@ -1,0 +1,76 @@
+[
+  {
+    "id": "la_measure_w",
+    "program_name": "Los Angeles County Measure W (Safe, Clean Water Program)",
+    "jurisdiction_fips": "06037",
+    "administering_agency": "Los Angeles County Flood Control District / Public Works",
+    "statutory_citation": "Los Angeles County Flood Control District Code Chapter 16",
+    "source_url": "https://safecleanwaterla.org/",
+    "eligible_improvements": [
+      "Urban street tree canopy planting with verified 24-hr stormwater runoff capture (min. 85th percentile storm event: 0.75-1.0 in)",
+      "Infiltration basins, bio-retention swales, permeable pavers, and curbside rain gardens",
+      "Multi-benefit green stormwater infrastructure"
+    ],
+    "funding_share_pct": 1.0,
+    "funding_share_description": "Regional program funds up to 100% of approved capital costs; municipal program returns 40% of revenues to local cities",
+    "how_to_apply": "Annual Call for Projects via the Safe, Clean Water Portal; technical and community scoring by Watershed Area Steering Committees",
+    "cycle_dates": "Annual call opens spring; deadline July 31",
+    "last_verified": "2026-11-15"
+  },
+  {
+    "id": "la_prop_k",
+    "program_name": "City of Los Angeles Proposition K (L.A. for Kids Program)",
+    "jurisdiction_fips": "06037",
+    "administering_agency": "City of Los Angeles Bureau of Engineering & Department of Recreation and Parks",
+    "statutory_citation": "City of Los Angeles Ordinance No. 171215",
+    "source_url": "https://eng.lacity.gov/prop-k",
+    "eligible_improvements": [
+      "Urban greenway development, trail linkages, and community park expansion",
+      "Urban tree canopy planting in parklands and public rights-of-way",
+      "Recreation facilities and youth athletic field restoration"
+    ],
+    "funding_share_pct": 0.8,
+    "funding_share_description": "Competitive grants up to $1,000,000+ per project with non-profit / community matching funds",
+    "how_to_apply": "Competitive request for proposals (RFP) administered through the Bureau of Engineering",
+    "cycle_dates": "Biennial competitive grant cycles",
+    "last_verified": "2026-11-15"
+  },
+  {
+    "id": "ca_urban_greening",
+    "program_name": "California Urban Greening Grant Program (Cap-and-Trade GGRF)",
+    "jurisdiction_fips": null,
+    "state_code": "CA",
+    "administering_agency": "California Natural Resources Agency (CNRA)",
+    "statutory_citation": "Cal. Pub. Res. Code \u00a7 75114 (SB 859)",
+    "source_url": "https://resources.ca.gov/grants/urban-greening/",
+    "eligible_improvements": [
+      "Street tree planting and urban forest establishment (minimum 20-year maintenance commitment)",
+      "Green streets, active transportation greenways, and urban heat island mitigation corridors",
+      "Community gardens and urban greening on public parcels"
+    ],
+    "funding_share_pct": 1.0,
+    "funding_share_description": "Up to 100% state grant funding with statutory priority for disadvantaged communities (SB 535 DACs)",
+    "how_to_apply": "Annual statewide competitive grant application through CNRA System for Online Application Review (SOAR)",
+    "cycle_dates": "Annual application window",
+    "last_verified": "2026-11-15"
+  },
+  {
+    "id": "calfire_urban_forestry",
+    "program_name": "CAL FIRE Urban & Community Forestry Grants",
+    "jurisdiction_fips": null,
+    "state_code": "CA",
+    "administering_agency": "California Department of Forestry and Fire Protection (CAL FIRE)",
+    "statutory_citation": "Cal. Pub. Res. Code \u00a7\u00a7 4799.06\u20134799.12",
+    "source_url": "https://www.fire.ca.gov/what-we-do/natural-resource-management/urban-community-forestry",
+    "eligible_improvements": [
+      "Urban tree planting, care, and canopy maintenance in urban areas",
+      "Urban forest management plans and inventories",
+      "Green schoolyards and canopy shade over playgrounds"
+    ],
+    "funding_share_pct": 1.0,
+    "funding_share_description": "100% grant funding for disadvantaged communities; up to 75% for non-DAC areas",
+    "how_to_apply": "Statewide solicitation via e-granting system",
+    "cycle_dates": "Annual grant cycles",
+    "last_verified": "2026-11-15"
+  }
+]

@@ -35,10 +35,10 @@
     </div>
   </div>
   <div id="canopy-hud-economic" style="font-size:11px;color:#cbd5e1;line-height:1.4;margin-bottom:8px;">
-    <b>Economic Impact:</b> Mature street tree canopy adds <b>+$7,130</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$140/yr</b> in AC cooling load.
+    <b>Economic Impact:</b> Published hedonic studies (Donovan &amp; Butry 2010; McPherson &amp; Simpson 2003) measured <b>+$7,130</b> home value in Portland, OR and <b>$65–$140/yr</b> in AC cooling savings in Southern California.
   </div>
-  <button type="button" onclick="openResearchModal('Satellite Tree Canopy, Shade & Urban Heat')" style="width:100%;background:#059669;color:#fff;border:none;padding:6px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;">
-    View 65 Canopy &amp; NDVI Studies →
+  <button type="button" onclick="openResearchModal('Urban Tree Canopy &amp; Heat Mitigation')" style="width:100%;background:#059669;color:#fff;border:none;padding:6px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;">
+    View Tree Canopy &amp; Heat Studies →
   </button>
 </div>
 <header class="top gutter">
@@ -154,7 +154,7 @@
 
 <!-- City Pretty AI Urban & Property Advisor Modal -->
 
-<!-- EMPIRICAL URBAN RESEARCH & HISTORIC TRENDS LIBRARY MODAL (540+ STUDIES) -->
+<!-- EMPIRICAL URBAN RESEARCH & HISTORIC TRENDS LIBRARY MODAL (52 VERIFIED STUDIES) -->
 
 <!-- HISTORICAL MUNICIPAL TAX REINVESTMENT & REAL ESTATE SURGE CASE STUDIES MODAL -->
 <div class="overlay-modal" id="trends-modal" hidden>
@@ -202,7 +202,7 @@
         <span style="font-size:26px;"></span>
         <div>
           <div style="font-size:17px;font-weight:800;letter-spacing:0.3px;">Empirical Urban Economics &amp; Historical Research Library</div>
-          <div style="font-size:11.5px;color:#94a3b8;">540+ Peer-Reviewed Studies &middot; Measured Real Estate Impacts &middot; Historical Municipal Tax &amp; Capital Trends</div>
+          <div style="font-size:11.5px;color:#94a3b8;">52 Peer-Reviewed Studies &middot; Measured Real Estate Impacts &middot; Historical Municipal Tax &amp; Capital Trends</div>
         </div>
       </div>
       <button type="button" onclick="closeResearchModal()" style="background:rgba(255,255,255,0.15);border:none;color:#fff;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;">✕</button>
@@ -217,12 +217,7 @@
 
       <!-- Category Filter Pills -->
       <div id="research-cat-pills" role="group" aria-label="Filter research by topic" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;">
-        <button type="button" class="story-btn active" onclick="setResearchCat('All')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">All Studies (540+)</button>
-        <button type="button" class="story-btn" onclick="setResearchCat('Public Art & Cultural Placemaking')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">Public Art (55)</button>
-        <button type="button" class="story-btn" onclick="setResearchCat('Urban Tree Canopy & Heat Mitigation')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">Tree Canopy (65)</button>
-        <button type="button" class="story-btn" onclick="setResearchCat('Historical Capital Projects & Tax Reinvestment')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">Historical Trends (60)</button>
-        <button type="button" class="story-btn" onclick="setResearchCat('Parks, Trails & Green Infrastructure')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">Parks &amp; Trails (60)</button>
-        <button type="button" class="story-btn" onclick="setResearchCat('Transit-Oriented Development (TOD) & Rail')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">Transit TOD (60)</button>
+        <button type="button" class="story-btn active" onclick="setResearchCat('All')" style="font-size:11px;white-space:nowrap;padding:4px 9px;">All Studies (52)</button>
       </div>
     </div>
 
@@ -347,7 +342,7 @@
       </div>
     </div>
     <p class="small muted" style="margin-bottom:16px;line-height:1.5;">
-      City Pretty evaluates urban infrastructure investments and private infill capacity by combining authoritative municipal cadastral GIS with peer-reviewed hedonic price equations. Rather than relying on proprietary, opaque broker estimates, every coefficient and statutory citation is derived from audited public records and published econometric literature.
+      City Pretty evaluates urban infrastructure investments and private infill capacity by combining authoritative municipal cadastral GIS with peer-reviewed hedonic price equations. Rather than relying on proprietary, opaque broker estimates, every coefficient and statutory citation is derived from official public records and published econometric literature.
     </p>
 
     <!-- Subsystem Accuracy Grid -->
@@ -461,7 +456,7 @@
         Large Language Models (LLMs) cannot reliably generate real estate or urban planning advice on their own because they hallucinate lot lines, property taxes, setbacks, and local zoning bylaws. City Pretty solves this by providing the deterministic, verified ground-truth layer:
       </p>
       <ul class="small" style="margin:0;padding-left:18px;color:#1e3a8a;line-height:1.45;">
-        <li><b>Zero-Hallucination Geospatial Grounding:</b> Every parcel boundary comes from audited ArcGIS geodatabases, not model guesses.</li>
+        <li><b>Zero-Hallucination Geospatial Grounding:</b> Every parcel boundary comes from official municipal and county ArcGIS geodatabases, not model guesses.</li>
         <li><b>Deterministic Statutory Engines:</b> State and municipal codes are parsed mathematically with verifiable legal citations.</li>
         <li><b>Structured Multi-Modal Context:</b> Street View facades, LiDAR heights, transit walkshed buffers, and assessor rolls are synthesized into standardized JSON schemas ready for agentic LLM reasoning.</li>
       </ul>
@@ -520,13 +515,13 @@
         <tr><td>Assessor roll and tax-rate areas (EIFD)</td><td>LA County Assessor; Auditor-Controller AF49</td><td>2026 Secured Roll; FY 2026-27 ratios dated 09/17/2026</td></tr>
         <tr><td>Zoning</td><td>City of LA (live ZIMAS), LA County (live DRP), Santa Clarita official layers; California 6th Cycle Housing Element (2021–2029) statutory rezonings (Gov. Code § 65583.2) overlaying regional SCAG parcels</td><td>Official layers (live 2026); 6th Cycle Housing Element statutory rezonings &amp; AB 2097 parking exemptions applied</td></tr>
         <tr><td>Heat and tree canopy</td><td>American Forests Tree Equity Score; city street-tree surveys; USDA Forest Service i-Tree</td><td>Current Tree Equity release (5,251 block groups); 2.07 million tree records</td></tr>
-        <tr><td>Transit frequency and stops</td><td>GTFS schedules, 19 regional transit agencies (Metro, OCTA, Metrolink, Muni, etc.)</td><td>Schedules active at 2026 build time</td></tr>
+        <tr><td>Transit frequency and stops</td><td>GTFS transit schedules from regional transit authorities (LA Metro, OCTA, Metrolink, Muni, CapMetro, etc.)</td><td>Schedules active at 2026 build time</td></tr>
         <tr><td>Crime</td><td>LAPD, LASD, Long Beach PD open CAD feeds; independent municipal police departments flagged with reporting gap notices</td><td>Rolling 12 months to late Oct 2026 (Santa Monica feed ends May 2024; Beverly Hills, Burbank, Glendale, Pasadena flagged)</td></tr>
         <tr><td>Crashes</td><td>CHP Crash Records System (CCRS)</td><td>2023–2026 records</td></tr>
         <tr><td>Housing and projects under way</td><td>HCD annual progress reports, LAHD affordable pipeline, LADBS permits</td><td>Reports since 2021; permits since 2026</td></tr>
         <tr><td>Seismic hazards</td><td>California Geological Survey (Alquist-Priolo fault zones, Special Publication 42; Seismic Hazard Zones)</td><td>Current CGS zones</td></tr>
         <tr><td>Fire hazard severity zones</td><td>CAL FIRE Fire and Resource Assessment Program</td><td>SRA map effective April 2024; LRA map 2025</td></tr>
-        <tr><td>Orange County tracts</td><td>Preliminary neighborhood-level pass — visually distinguished by amber dashed borders</td><td>Preliminary estimates pending full 2026 OC Assessor Secured Roll &amp; OCTA GTFS ingestion. LA County &amp; US metros fully audited.</td></tr>
+        <tr><td>Orange County tracts</td><td>Preliminary neighborhood-level pass — visually distinguished by amber dashed borders</td><td>Preliminary estimates pending full 2026 OC Assessor Secured Roll &amp; OCTA GTFS ingestion. LA County data compiled from official assessor records.</td></tr>
       </tbody>
     </table>
     <div style="margin-top:16px;text-align:right">

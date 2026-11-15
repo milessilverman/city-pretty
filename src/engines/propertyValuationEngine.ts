@@ -241,12 +241,12 @@ export function estimatePropertyMarketValue(params: PropertyValuationInput): Pro
     lotAdj = Math.max(-siteValue * 0.22, Math.min(siteValue * 0.30, lotAdj));
   }
 
-  const beds = F.beds || +(a.Bedrooms1 ?? a.BEDROOMS ?? 3) || 3;
-  const baths = F.baths || +(a.Bathrooms1 ?? a.BATHROOMS ?? 2) || 2;
-  const bedBathAdj = Math.max(-0.15, Math.min(0.20, (beds - 3) * 0.025 + (baths - 2) * 0.035)) * structVal;
+  const beds = F.beds ? +(F.beds) : (a.Bedrooms1 != null || a.BEDROOMS != null ? +(a.Bedrooms1 ?? a.BEDROOMS) : null);
+  const baths = F.baths ? +(F.baths) : (a.Bathrooms1 != null || a.BATHROOMS != null ? +(a.Bathrooms1 ?? a.BATHROOMS) : null);
+  const bedBathAdj = (beds != null && baths != null) ? Math.max(-0.15, Math.min(0.20, (beds - 3) * 0.025 + (baths - 2) * 0.035)) * structVal : 0;
 
-  const effYear = +(F.eff || a.EffectiveYear1 || a.EffectiveYear || a.EFF_YR_BLT || F.yb || a.YearBuilt1 || a.YearBuilt || a.CONST_YEAR || 1975) || 1975;
-  const ageAdj = Math.max(-0.25, Math.min(0.25, (effYear - 1980) * 0.003)) * structVal;
+  const effYear = +(F.eff || a.EffectiveYear1 || a.EffectiveYear || a.EFF_YR_BLT || F.yb || a.YearBuilt1 || a.YearBuilt || a.CONST_YEAR || 0) || null;
+  const ageAdj = effYear ? Math.max(-0.25, Math.min(0.25, (effYear - 1980) * 0.003)) * structVal : 0;
 
   let qualityAdj = 0;
   const qClass = String(a.QualityClass || a.QualityClass1 || a.GRADE || a.IMPRV_QUAL || "").toUpperCase();

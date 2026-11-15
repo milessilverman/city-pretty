@@ -1,0 +1,232 @@
+[
+  {
+    "id": "ca_sb79_tier1",
+    "state_code": "CA",
+    "bill_number": "SB 79",
+    "session": "2025-2026 Regular Session",
+    "short_name": "CA SB 79 (Tier 1 Heavy Rail Transit-Oriented Density)",
+    "statute_citation": "Cal. Gov. Code \u00a7 65913.16",
+    "effective_date": "2026-07-01",
+    "statute_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB79",
+    "eligible_counties": [
+      "06037",
+      "06059",
+      "06073",
+      "06075",
+      "06001",
+      "06013",
+      "06081",
+      "06085",
+      "06067"
+    ],
+    "distance_to_transit_max_mi": 0.25,
+    "transit_mode": "heavy_rail",
+    "max_units_by_right": 120,
+    "max_height_ft": 75,
+    "max_far": 3.5,
+    "min_parking_spaces_per_unit": 0,
+    "affordability_mandate_pct": 0.1,
+    "tax_exemption_pct": 0,
+    "statutory_exclusions": [
+      "historic_district_hpoz",
+      "coastal_commission_or_sma",
+      "fema_100yr_floodway",
+      "calfire_or_state_vhfhsz"
+    ],
+    "summary": "Mandates ministerial by-right approval for multifamily housing developments up to 75 feet and 120 units on parcels within 0.25 miles of an existing or funded heavy rail passenger station, with parking minimums eliminated.",
+    "last_verified": "2026-11-15"
+  },
+  {
+    "id": "ca_sb79_tier2",
+    "state_code": "CA",
+    "bill_number": "SB 79",
+    "session": "2025-2026 Regular Session",
+    "short_name": "CA SB 79 (Tier 2 Heavy Rail Transit-Oriented Density)",
+    "statute_citation": "Cal. Gov. Code \u00a7 65913.16",
+    "effective_date": "2026-07-01",
+    "statute_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB79",
+    "eligible_counties": [
+      "06037",
+      "06059",
+      "06073",
+      "06075",
+      "06001",
+      "06013",
+      "06081",
+      "06085",
+      "06067"
+    ],
+    "distance_to_transit_max_mi": 0.5,
+    "transit_mode": "heavy_rail",
+    "max_units_by_right": 100,
+    "max_height_ft": 65,
+    "max_far": 3.0,
+    "min_parking_spaces_per_unit": 0,
+    "affordability_mandate_pct": 0.1,
+    "tax_exemption_pct": 0,
+    "statutory_exclusions": [
+      "historic_district_hpoz",
+      "coastal_commission_or_sma",
+      "fema_100yr_floodway",
+      "calfire_or_state_vhfhsz"
+    ],
+    "summary": "Mandates ministerial by-right approval for multifamily housing developments up to 65 feet and 100 units on parcels within 0.25 to 0.50 miles of heavy rail passenger stations, with parking minimums eliminated.",
+    "last_verified": "2026-11-15"
+  },
+  {
+    "id": "ca_sb9_lot_split",
+    "state_code": "CA",
+    "bill_number": "SB 9",
+    "session": "2021-2022 Regular Session",
+    "short_name": "CA SB 9 (California Home Opportunity & Act)",
+    "statute_citation": "Cal. Gov. Code \u00a7\u00a7 65852.21, 66411.7",
+    "effective_date": "2022-01-01",
+    "statute_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202120220SB9",
+    "max_units_by_right": 4,
+    "max_height_ft": 25,
+    "max_far": null,
+    "min_parking_spaces_per_unit": 0,
+    "parking_note": "0 parking required if within 0.5 mi of major transit stop or car-share facility; max 1 space otherwise",
+    "affordability_mandate_pct": 0,
+    "tax_exemption_pct": 0,
+    "statutory_exclusions": [
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "calfire_or_state_vhfhsz",
+      "prime_farmland"
+    ],
+    "summary": "Requires ministerial approval of urban lot splits (creating two parcels of at least 1,200 sq ft each) and construction of up to two residential units per lot (up to 4 units total) in single-family residential zones.",
+    "last_verified": "2026-11-15"
+  },
+  {
+    "id": "ca_ab2097",
+    "state_code": "CA",
+    "bill_number": "AB 2097",
+    "session": "2021-2022 Regular Session",
+    "short_name": "CA AB 2097 (Transit Parking Minimum Abolition)",
+    "statute_citation": "Cal. Gov. Code \u00a7 65863.2",
+    "effective_date": "2023-01-01",
+    "statute_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202120220AB2097",
+    "min_parking_spaces_per_unit": 0,
+    "distance_to_transit_max_mi": 0.5,
+    "summary": "Prohibits public agencies from imposing or enforcing minimum automobile parking mandates on residential, commercial, or mixed-use developments located within 0.5 miles of a major transit stop.",
+    "last_verified": "2026-11-15"
+  },
+  {
+    "id": "fl_live_local",
+    "state_code": "FL",
+    "bill_number": "SB 328 / SB 102",
+    "session": "2024 / 2023 Regular Session",
+    "short_name": "FL Live Local Act (Fla. Stat. \u00a7 166.04151 + \u00a7 196.1979)",
+    "statute_citation": "Fla. Stat. \u00a7\u00a7 166.04151, 163.3168, 196.1979",
+    "effective_date": "2024-07-01",
+    "statute_url": "https://www.flsenate.gov/Session/Bill/2024/328",
+    "commercial_or_industrial_only": true,
+    "max_units_by_right": 999,
+    "height_preemption": "Allowed up to tallest commercial or residential height permitted within 1 mile or 3 stories, whichever is higher",
+    "density_preemption": "Allowed up to highest residential density permitted in jurisdiction",
+    "affordability_mandate_pct": 0.4,
+    "affordability_term_years": 30,
+    "affordability_ami_ceiling": 1.2,
+    "tax_exemption_pct": 0.75,
+    "min_parking_spaces_per_unit": 0.5,
+    "statutory_exclusions": [
+      "airport_noise_or_runway_zone",
+      "everglades_or_wekiva_or_trpa"
+    ],
+    "summary": "Authorizes by-right multifamily housing on commercial, industrial, or mixed-use land if at least 40% of units are affordable at \u2264120% AMI for 30 years. Preempts local zoning height and density, and grants 75% ad valorem property tax exemption under Fla. Stat. \u00a7 196.1979.",
+    "last_verified": "2026-11-15"
+  },
+  {
+    "id": "tx_sb840",
+    "state_code": "TX",
+    "bill_number": "SB 840",
+    "session": "88th Legislature Regular Session",
+    "short_name": "TX SB 840 (Commercial/Office-to-Multifamily Redevelopment)",
+    "statute_citation": "Tex. Loc. Gov't Code \u00a7 214.908",
+    "effective_date": "2023-09-01",
+    "statute_url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=88R&Bill=SB840",
+    "municipality_pop_min": 150000,
+    "county_pop_min": 300000,
+    "commercial_or_office_only": true,
+    "max_units_by_right": 999,
+    "min_parking_spaces_per_unit": 1.0,
+    "affordability_mandate_pct": 0,
+    "tax_exemption_pct": 0,
+    "statutory_exclusions": [
+      "airport_noise_or_runway_zone"
+    ],
+    "summary": "In municipalities with population >150,000 located in counties >300,000, prohibits cities from barring by-right adaptive reuse or redevelopment of commercial office buildings into multifamily residential use.",
+    "last_verified": "2026-11-15"
+  },
+  {
+    "id": "wa_hb1110",
+    "state_code": "WA",
+    "bill_number": "HB 1110",
+    "session": "2023 Regular Session",
+    "short_name": "WA HB 1110 (Middle Housing Reform)",
+    "statute_citation": "RCW 36.70A.635",
+    "effective_date": "2023-07-23",
+    "statute_url": "https://app.leg.wa.gov/billsummary?BillNumber=1110&Year=2023",
+    "max_height_ft": 35,
+    "rules": [
+      {
+        "pop_min": 75000,
+        "base_units": 4,
+        "near_transit_or_affordable_units": 6
+      },
+      {
+        "pop_min": 25000,
+        "base_units": 2,
+        "near_transit_or_affordable_units": 4
+      },
+      {
+        "pop_min": 0,
+        "base_units": 2,
+        "near_transit_or_affordable_units": 2
+      }
+    ],
+    "min_parking_spaces_per_unit": 0,
+    "summary": "Requires GMA cities to allow middle housing (duplexes, triplexes, fourplexes, townhomes, cottage clusters) on all lots zoned for residential use, scaling to 4-6 units per lot in cities over 75,000 population.",
+    "last_verified": "2026-11-15"
+  },
+  {
+    "id": "or_hb2001",
+    "state_code": "OR",
+    "bill_number": "HB 2001",
+    "session": "2019 Regular Session",
+    "short_name": "OR HB 2001 (Oregon Housing Choice & Middle Housing)",
+    "statute_citation": "ORS 197.758",
+    "effective_date": "2020-01-01",
+    "statute_url": "https://olis.oregonlegislature.gov/liz/2019R1/Measures/Overview/HB2001",
+    "rules": [
+      {
+        "pop_min": 25000,
+        "allowed": "duplexes, triplexes, quadplexes, cottage clusters, townhouses on all residential lots"
+      },
+      {
+        "pop_min": 10000,
+        "allowed": "duplexes on all lots zoned for single-family homes"
+      }
+    ],
+    "min_parking_spaces_per_unit": 0,
+    "summary": "Requires Oregon cities with population >10,000 within Urban Growth Boundaries to permit duplexes on all lots zoned for single-family detached homes, and cities >25,000 to permit triplexes, quadplexes, and townhomes.",
+    "last_verified": "2026-11-15"
+  },
+  {
+    "id": "az_hb2720_2721",
+    "state_code": "AZ",
+    "bill_number": "HB 2720 / HB 2721",
+    "session": "56th Legislature - 2nd Regular Session (2024)",
+    "short_name": "AZ HB 2720 / 2721 (Arizona Casitas & Middle Housing)",
+    "statute_citation": "A.R.S. \u00a7\u00a7 9-467.04, 9-467.05",
+    "effective_date": "2024-09-14",
+    "statute_url": "https://www.azleg.gov/legtext/56leg/2R/bills/HB2720P.pdf",
+    "municipality_pop_min": 75000,
+    "max_units_by_right": 4,
+    "max_height_ft": 30,
+    "min_parking_spaces_per_unit": 1.0,
+    "summary": "Requires Arizona municipalities with population >75,000 to permit detached and attached casitas (ADUs) by-right on single-family lots and allow duplexes, triplexes, and fourplexes within 1 mile of central business districts without discretionary review.",
+    "last_verified": "2026-11-15"
+  }
+]

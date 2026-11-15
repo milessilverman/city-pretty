@@ -228,8 +228,8 @@ export function calculateCalibratedTreeEconomics(
 
 export function auditSingleHouseParcel(input: HouseParcelAuditInput): HouseParcelAuditResult {
   const stCode = (input.stateCode || "CA").toUpperCase();
-  const lotSqft = input.lotSqft || 6000;
-  const livingSqft = input.livingSqft || 1650;
+  const lotSqft = input.lotSqft ?? null;
+  const livingSqft = input.isVacantLand ? 0 : (input.livingSqft ?? null);
   const isVacant = !!input.isVacantLand;
 
   // 1. Ingest AVM Valuation with 2026 Deed Transfers & Permit Capitalization
@@ -248,7 +248,7 @@ export function auditSingleHouseParcel(input: HouseParcelAuditInput): HouseParce
       EffectiveYear1: input.effectiveYearBuilt,
       YearBuilt1: input.yearBuilt,
     },
-    lotSqft,
+    lotSqft: lotSqft || undefined,
     neighborhood: {
       hv: input.neighborhoodMedianHv,
       c: input.address || "Metro Area",
@@ -256,12 +256,12 @@ export function auditSingleHouseParcel(input: HouseParcelAuditInput): HouseParce
     stateCode: stCode,
     facts: {
       bldg: isVacant ? 0 : livingSqft,
-      foot: Math.round(livingSqft / Math.max(1, input.stories || 1)),
+      foot: livingSqft ? Math.round(livingSqft / Math.max(1, input.stories || 1)) : null,
       stories: input.stories || 1,
-      beds: input.bedrooms || 3,
-      baths: input.bathrooms || 2,
-      yb: input.yearBuilt || 1975,
-      eff: input.effectiveYearBuilt || input.yearBuilt || 1975,
+      beds: input.bedrooms ?? null,
+      baths: input.bathrooms ?? null,
+      yb: input.yearBuilt ?? null,
+      eff: input.effectiveYearBuilt ?? input.yearBuilt ?? null,
       pool: !!input.hasPool,
       garage: !!input.hasGarage,
       units: input.units || 1,
@@ -318,8 +318,8 @@ export function auditSingleHouseParcel(input: HouseParcelAuditInput): HouseParce
     parcel_id: input.parcelId,
     state_code: stCode,
     county_fips: input.countyFips,
-    municipality_pop: input.municipalityPop || (stCode === "TX" ? 85000 : 250000),
-    county_pop: input.countyPop || 500000,
+    municipality_pop: input.municipalityPop ?? null,
+    county_pop: input.countyPop ?? null,
     base_zoning_code: input.zoningCode || "R-1",
     is_commercial_or_mixed_use: isComm,
     is_single_family_residential: isSfr,
@@ -339,7 +339,8 @@ export function auditSingleHouseParcel(input: HouseParcelAuditInput): HouseParce
   };
 
   const statutoryZoning = evaluateByRightHousing(parcelCtx);
-  const lotSplitFeasible = lotSqft >= 4800 && !exclusions.fema_100yr_floodway && !exclusions.historic_district_hpoz;
+  console.log("DEBUG Auditor: input.lotSqft =", input.lotSqft, "lotSqft =", lotSqft, "type =", typeof lotSqft);
+  const lotSplitFeasible = (lotSqft != null && lotSqft >= 4800) && !exclusions.fema_100yr_floodway && !exclusions.historic_district_hpoz;
   const aduFeasible = !exclusions.historic_district_hpoz || stCode === "CA";
 
   let statutoryNotes = "";

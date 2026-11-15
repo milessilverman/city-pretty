@@ -57,7 +57,6 @@ export interface AccurateRoofCalculation {
 
 export function getDefaultPitchRise(yearBuilt?: number | null, stateCode?: string): number {
   const st = (stateCode || "CA").toUpperCase();
-  const yb = yearBuilt || 1975;
 
   // Regional climate adaptations
   const isDesertOrArid = ["AZ", "NV", "NM"].includes(st);
@@ -67,18 +66,19 @@ export function getDefaultPitchRise(yearBuilt?: number | null, stateCode?: strin
     return 3.5; // Predominantly low-pitch ranch or flat tile
   }
   if (isHeavySnowOrRain) {
-    return yb < 1940 ? 8.0 : 7.0; // Steep pitch for snow and ice shedding
+    return (yearBuilt && yearBuilt < 1940) ? 8.0 : 7.0; // Steep pitch for snow and ice shedding
   }
 
   // Era adaptations
-  if (yb < 1940) return 7.5; // Craftsman, Tudor, Victorian, Spanish revival
-  if (yb >= 1945 && yb <= 1978) return 4.5; // California Ranch, Mid-Century Modern
-  return 6.0; // Modern suburban standard (5:12 to 6:12)
+  if (yearBuilt && yearBuilt < 1940) return 7.5; // Craftsman, Tudor, Victorian, Spanish revival
+  if (yearBuilt && yearBuilt >= 1945 && yearBuilt <= 1978) return 4.5; // California Ranch, Mid-Century Modern
+  return 5.5; // Standard typical suburban pitch (5.5:12)
 }
 
 export function estimateAccurateRoofArea(input: RoofInput): AccurateRoofCalculation {
   const stories = Math.max(1, Number(input.stories) || 1);
-  const livingSqft = Math.max(400, Number(input.livingSqft) || 1600);
+  const hasGla = input.livingSqft != null && !isNaN(Number(input.livingSqft)) && Number(input.livingSqft) > 0;
+  const livingSqft = hasGla ? Math.max(200, Number(input.livingSqft)) : 0;
 
   // 1. Base Footprint determination
   let groundFootprintSqft = 0;
@@ -87,9 +87,37 @@ export function estimateAccurateRoofArea(input: RoofInput): AccurateRoofCalculat
   if (input.footprintSqft && input.footprintSqft > 200) {
     groundFootprintSqft = Math.round(input.footprintSqft);
     method = "cadastral_lidar_osm_polygon";
-  } else {
+  } else if (hasGla) {
     // Inferred ground footprint from GLA and story count
     groundFootprintSqft = Math.round(livingSqft / stories);
+  } else {
+    method = "not_recorded";
+  }
+
+  if (method === "not_recorded") {
+    return {
+      groundFootprintSqft: 0,
+      eavesOverhangSqft: 0,
+      garageRoofAdditionSqft: 0,
+      effectiveGroundFootprintSqft: 0,
+      pitchRise: 0,
+      pitchRatio: "0:12",
+      slopeAngleDeg: 0,
+      pitchMultiplier: 1.0,
+      roofShape: "flat",
+      shapeComplexityMultiplier: 1.0,
+      grossRoofSqft: 0,
+      roofingSquares: 0,
+      productiveAzimuthFraction: 0,
+      fireCodeAndVentSetbackFraction: 0,
+      treeShadeFraction: 0,
+      usableSolarSqft: 0,
+      maxSolarPanels: 0,
+      solarDcKw: 0,
+      annualYieldKwh: 0,
+      materials: [],
+      estimationMethod: "not_recorded",
+    };
   }
 
   // 2. Attached Garage Addition (if not already counted in footprint)
