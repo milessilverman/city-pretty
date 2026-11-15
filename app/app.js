@@ -24867,14 +24867,15 @@ function exportExecutiveProspectus() {
   const content = document.getElementById("prospectus-content");
   if (!m || !content) return;
 
-  const a = window.__activeAssessorData || (typeof currentHouse !== "undefined" && currentHouse && currentHouse.a) || {};
-  const lot = window.__activeLotData || (typeof currentHouse !== "undefined" && currentHouse && currentHouse.lot) || {};
-  const F = window.__activeFacts || (typeof currentHouse !== "undefined" && currentHouse && currentHouse.F) || {};
+  const AH = (typeof activeHouse !== "undefined" && activeHouse ? activeHouse : null);   // the lot open in the side panel
+  const a = window.__activeAssessorData || (typeof currentHouse !== "undefined" && currentHouse && currentHouse.a) || (AH && AH.a) || {};
+  const lot = window.__activeLotData || (typeof currentHouse !== "undefined" && currentHouse && currentHouse.lot) || (AH && AH.lot ? { lotSqft: AH.lot } : {});
+  const F = window.__activeFacts || (typeof currentHouse !== "undefined" && currentHouse && currentHouse.F) || (AH && AH.F) || {};
   const zRule = window.__activeZRule || (typeof currentHouse !== "undefined" && currentHouse && currentHouse.zRule) || {};
   const playbook = (typeof computePropertyPlaybook === "function") ? computePropertyPlaybook(a, lot, F, zRule, window.__activeLatLng, activeState()) : null;
 
-  const addr = a.SitusFullAddress || a.PROPERTYADDRESS || a.Address || "Identified US Residential Property";
-  const ain = a.AIN || a.APN || a.PPN_TEXT || a.ParcelID || "US-CADASTRE-PIN";
+  const addr = a.SitusFullAddress || a.PROPERTYADDRESS || a.Address || "Address not recorded";
+  const ain = a.AIN || a.APN || a.PPN_TEXT || a.ParcelID || "not recorded";
   const juris = a.City || F.juris || countyOf();
   const dateStr = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 
@@ -24891,8 +24892,8 @@ function exportExecutiveProspectus() {
   const rollVal = a.Roll_TotalValue || a.TAXABLETRIBUNAL1 || (a.Roll_LandValue && a.Roll_ImpValue ? a.Roll_LandValue + a.Roll_ImpValue : 520000);
   const vcP = (typeof activeHouse !== "undefined" && activeHouse && activeHouse.valCheck) || { ok: true };
   const aPrice = houseHv || F.aPrice || (rollVal * 1.6);
-  const sqft = (valObj && valObj.livingSqft) || a.SQFTmain || F.bldg || F.sqft || 1450;
-  const lotSqft = (lot && lot.lotSqft) || (a.ACREAGE ? Math.round(a.ACREAGE * 43560) : 6200);
+  const sqft = a.SQFTmain1 || a.SQFTmain || F.bldg || F.sqft || (vcP.ok && valObj && valObj.livingSqft) || null;   // recorded living area first
+  const lotSqft = (lot && lot.lotSqft) || (a.ACREAGE ? Math.round(a.ACREAGE * 43560) : a.Acres ? Math.round(a.Acres * 43560) : null);
 
   content.innerHTML = `
     <!-- Prospectus Print Header -->
@@ -24922,22 +24923,22 @@ function exportExecutiveProspectus() {
       </div>
       <div>
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;">Existing Improvements</div>
-        <div style="font-size:14px;font-weight:700;color:#0f172a;">${valObj && valObj.isVacantLand ? "Vacant Infill Land" : `${fmtN(sqft)} sqft Main`}</div>
+        <div style="font-size:14px;font-weight:700;color:#0f172a;">${valObj && valObj.isVacantLand ? "Vacant Infill Land" : sqft ? `${fmtN(sqft)} sqft Main` : "Living area not recorded"}</div>
         <div style="font-size:11px;color:#64748b;">${valObj && valObj.isVacantLand ? "Unimproved Site · 0 Units" : `Built ${a.YearBuilt || "N/A"} · ${a.Units || 1} Unit(s)`}</div>
       </div>
       <div>
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;">Estimated Value</div>
         <div style="font-size:14px;font-weight:800;color:${vcP.ok ? "#059669" : "#64748b"};">${vcP.ok ? fmtP(aPrice) : "No estimate"}</div>
-        <div style="font-size:11px;color:#64748b;">${!vcP.ok ? esc(vcP.reason) : valObj && valObj.isVacantLand ? `~$${Math.round(aPrice / Math.max(lotSqft, 1)).toLocaleString()}/sqft lot` : `~$${Math.round(aPrice / Math.max(sqft, 1)).toLocaleString()}/sqft`}</div>
+        <div style="font-size:11px;color:#64748b;">${!vcP.ok ? esc(vcP.reason) : valObj && valObj.isVacantLand ? `~$${Math.round(aPrice / Math.max(lotSqft, 1)).toLocaleString()}/sqft lot` : (sqft ? `~$${Math.round(aPrice / sqft).toLocaleString()}/sqft` : "")}</div>
       </div>
     </div>
 
     <!-- Section 1: Executive By-Right Zoning Rights -->
     <div style="margin-bottom:24px;">
       <div style="font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;color:#0f172a;border-bottom:1px solid #cbd5e1;padding-bottom:4px;margin-bottom:10px;">
-        1. Regulatory Arbitrage &amp; By-Right Zoning Rights (${activeState()})
+        1. State housing rules (${activeState()})
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:12px;line-height:1.5;">
+      ${["TX", "FL", "WA", "CA"].includes(activeState()) ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:12px;line-height:1.5;">
         <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:12px;">
           <div style="font-weight:800;color:#166534;margin-bottom:4px;">${activeState() === "TX" ? "✓ Texas Missing Middle &amp; Parking Relief (SB 840 / Austin HOME)" : activeState() === "FL" ? "✓ Florida Live Local Act 4.0 Preemption (Fla. Stat. § 166.04151)" : activeState() === "WA" ? "✓ Washington Middle Housing Mandate (HB 1110 / Statewide)" : "✓ Statutory Zero-Parking Exemption (AB 2097 / Statewide)"}</div>
           <div style="color:#14532d;">${activeState() === "TX" ? "Qualifies under enacted Texas infill statutes authorizing up to 3 residential units by-right on single-family parcels with minimum lot sizes reduced to 2,500 sqft and mandatory parking waivers near transit." : activeState() === "FL" ? "Preempts municipal zoning to allow by-right residential infill up to the highest allowable commercial density without rezoning, accompanied by local parking reductions." : activeState() === "WA" ? "Requires by-right authorization of 2 to 4 residential units per lot (up to 6 units within 0.5 mi of transit), completely prohibiting municipal off-street parking mandates." : "This parcel qualifies for complete by-right elimination of parking minimums for all new residential units within 0.5 mi of major transit stops, saving an estimated <b>$35,000–$50,000</b> in garage construction costs."}</div>
@@ -24946,7 +24947,7 @@ function exportExecutiveProspectus() {
           <div style="font-weight:800;color:#0369a1;margin-bottom:4px;">${activeState() === "TX" ? "✓ By-Right Commercial/Office Conversion (Tex. Loc. Gov't Code)" : activeState() === "FL" ? "✓ Middle Housing Infill &amp; 75% Tax Abatement (SB 102/328)" : activeState() === "WA" ? "✓ By-Right Accessory Dwellings (HB 1337 Statewide ADU Law)" : "✓ By-Right ADU &amp; Lot Split Allowance (Gov Code § 66314 / SB 9)"}</div>
           <div style="color:#0c4a6e;">${activeState() === "TX" ? "Streamlined administrative approval for accessory dwelling units and adaptive residential reuse without public hearings or conditional use permit burdens." : activeState() === "FL" ? "Qualifies for statutory expedited administrative site plan approval and up to a 75% ad valorem property tax exemption on qualifying workforce units." : activeState() === "WA" ? "Authorizes at least two ADUs per lot by-right without owner-occupancy requirements, design-review delays, or utility impact fee surcharges." : "Permits up to a 1,200 sqft detached ADU plus a 500 sqft Junior ADU (JADU) or by-right 2-unit lot split without discretionary zoning board approvals or environmental (CEQA) review."}</div>
         </div>
-      </div>
+      </div>` : `<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:12px;font-size:12px;line-height:1.5;color:#334155;">No statewide ADU, lot-split or parking rule for ${esc(activeState() || "this state")} is on file in City Pretty. What can be built on this lot is set by the city's or county's zoning code; check with its planning department.</div>`}
     </div>
 
     <!-- Section 2: Financial Pro-Forma & Recommended Move -->
