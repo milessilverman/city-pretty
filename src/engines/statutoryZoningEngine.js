@@ -25,6 +25,18 @@ function evaluateByRightHousing(parcel) {
   const statutes = [];
   const ex = Object.assign({}, parcel.exclusions);
 
+  // Rule 1 & Item 10: Never infer by-right rights from a missing, unzoned, or unknown zoning code.
+  if (!parcel.base_zoning_code || /^(unzoned|unknown|missing|none|n\/a)$/i.test(String(parcel.base_zoning_code).trim())) {
+    return {
+      parcel_id: parcel.parcel_id,
+      state_code: parcel.state_code,
+      base_zoning_code: null,
+      applicable_statutes: [],
+      statutory_exclusions: ex,
+      net_by_right_feasible: false,
+    };
+  }
+
   const hasHardPhysicalExclusion =
     ex.fema_100yr_floodway ||
     ex.calfire_or_state_vhfhsz ||

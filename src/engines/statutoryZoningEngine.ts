@@ -4,9 +4,9 @@ export interface ParcelContext {
   parcel_id: string;
   state_code: string;
   county_fips: string;
-  municipality_pop: number;
-  county_pop: number;
-  base_zoning_code: string;
+  municipality_pop: number | null;
+  county_pop: number | null;
+  base_zoning_code: string | null;
   is_commercial_or_mixed_use: boolean;
   is_single_family_residential: boolean;
   dist_to_heavy_rail_mi: number | null;
@@ -29,6 +29,18 @@ const CA_SB79_ELIGIBLE_COUNTIES = new Set([
 export function evaluateByRightHousing(parcel: ParcelContext): StatutoryZoningResult {
   const statutes: StatutoryZoningResult["applicable_statutes"] = [];
   const ex = parcel.exclusions;
+
+  // Rule 1 & Item 10: Never infer by-right rights from a missing, unzoned, or unknown zoning code.
+  if (!parcel.base_zoning_code || /^(unzoned|unknown|missing|none|n\/a)$/i.test(parcel.base_zoning_code.trim())) {
+    return {
+      parcel_id: parcel.parcel_id,
+      state_code: parcel.state_code,
+      base_zoning_code: null,
+      applicable_statutes: [],
+      statutory_exclusions: ex,
+      net_by_right_feasible: false,
+    };
+  }
 
   const hasHardPhysicalExclusion =
     ex.fema_100yr_floodway ||

@@ -183,9 +183,11 @@ function auditSingleHouseParcel(input) {
 
   // 3. Statutory By-Right Housing Rights & Exclusion Engine
   const exclusions = input.exclusions || {};
-  const zoneOrUse = String(input.zoningCode || "") + " " + String(input.useDescription || "");
-  const isComm = /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-  const isSfr = !isComm;
+  const hasZoning = !!(input.zoningCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(input.zoningCode).trim()));
+  const rawZone = hasZoning ? String(input.zoningCode).trim() : null;
+  const zoneOrUse = String(rawZone || "") + " " + String(input.useDescription || "");
+  const isComm = hasZoning && /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
+  const isSfr = hasZoning && !isComm && (/r-|r1|sfr|single|res/i.test(zoneOrUse) || (!input.useDescription && !isComm));
 
   const parcelCtx = {
     parcel_id: input.parcelId,
@@ -193,7 +195,7 @@ function auditSingleHouseParcel(input) {
     county_fips: input.countyFips,
     municipality_pop: input.municipalityPop ?? null,
     county_pop: input.countyPop ?? null,
-    base_zoning_code: input.zoningCode || "R-1",
+    base_zoning_code: rawZone,
     is_commercial_or_mixed_use: isComm,
     is_single_family_residential: isSfr,
     dist_to_heavy_rail_mi: input.distToHeavyRailMi ?? null,
@@ -212,11 +214,13 @@ function auditSingleHouseParcel(input) {
   };
 
   const statutoryZoning = _evalHousing(parcelCtx);
-  const lotSplitFeasible = (lotSqft != null && lotSqft >= 4800) && !exclusions.fema_100yr_floodway && !exclusions.historic_district_hpoz;
-  const aduFeasible = !exclusions.historic_district_hpoz || stCode === "CA";
+  const lotSplitFeasible = hasZoning && (lotSqft != null && lotSqft >= 4800) && !exclusions.fema_100yr_floodway && !exclusions.historic_district_hpoz;
+  const aduFeasible = hasZoning && (!exclusions.historic_district_hpoz || stCode === "CA");
 
   let statutoryNotes = "";
-  if (stCode === "CA") {
+  if (!hasZoning) {
+    statutoryNotes = "Zoning is not on file for this parcel; by-right housing rights and ministerial lot splits cannot be determined without verified local zoning.";
+  } else if (stCode === "CA") {
     statutoryNotes = "California: SB 9 ministerial lot split (≥4,800 sq ft) and SB 684/SB 79 transit housing eligibility. HPOZ and floodway restrictions apply deterministically.";
   } else if (stCode === "TX") {
     statutoryNotes = statutoryZoning.statutory_exclusions.population_threshold_ineligible

@@ -7,7 +7,8 @@ const CP_DATA_FILES = {
   "bundle": "bundle-la.b64.txt", "details-chunks": "details-la.json", "overlay-chunks": "overlays-la.json",
   "sites-data": "sites-la.b64.txt", "la-crash-counts": "la-crash-counts.json", "bundle-oc": "bundle-oc.b64.txt",
   "research": "research.json", "statutes": "statutes.json", "state-housing-laws": "state-housing-laws.json",
-  "funding-programs": "funding_programs.json", "case-studies": "case_studies.json", "transit-pipelines": "transit_pipelines.json"
+  "funding-programs": "funding_programs.json", "case-studies": "case_studies.json", "transit-pipelines": "transit_pipelines.json",
+  "state-finance-profiles": "state_finance_profiles.json", "unit-costs": "unit_costs.json"
 };
 const _cpData = {};
 function cpText(id) {
@@ -33,6 +34,29 @@ let HISTORICAL_TRENDS_DATA = [];
 let TRANSIT_PIPELINES_DATA = [];
 let STATE_HOUSING_LAWS_DATA = [];
 let FUNDING_PROGRAMS_DATA = [];
+let UNIT_COSTS_DATA = [];
+
+const DEFAULT_CA_PROFILE = {
+  state_code: "CA",
+  res_assessment_ratio: 1.0,
+  comm_assessment_ratio: 1.0,
+  annual_assessment_cap: 0.02,
+  uncaps_on_sale: true,
+  reassessment_cycle_years: 1,
+  homestead_exemption_rule: { type: "flat_market", amount_or_pct: 7000 },
+  tif_vehicle_name: "CA EIFD (Gov. Code § 53398.50)",
+  non_pledgeable_share: 0.47,
+  rsmeans_cost_multiplier: 1.24,
+  tree_capital_cost_usd: 1945,
+  climate_energy_regime: "mixed_temperate",
+  statutory_citation: "Cal. Const. art. XIII A (Prop 13), RTC § 51 & Gov. Code § 53398.50 (EIFD)",
+  source_url: "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=51.&lawCode=RTC",
+  retrieved: "2026-11-15",
+  last_verified: "2026-11-15",
+  verified_by: "state_statute_database"
+};
+
+let STATE_FINANCE_PROFILES = { CA: DEFAULT_CA_PROFILE };
 
 function loadVerifiedDataFiles() {
   cpJson("research").then(d => { if (Array.isArray(d)) RESEARCH_CORPUS_500 = d; });
@@ -40,6 +64,12 @@ function loadVerifiedDataFiles() {
   cpJson("transit-pipelines").then(d => { if (Array.isArray(d)) TRANSIT_PIPELINES_DATA = d; });
   cpJson("statutes").then(d => { if (Array.isArray(d)) STATE_HOUSING_LAWS_DATA = d; });
   cpJson("funding-programs").then(d => { if (Array.isArray(d)) FUNDING_PROGRAMS_DATA = d; });
+  cpJson("state-finance-profiles").then(d => {
+    if (d && typeof d === "object") {
+      STATE_FINANCE_PROFILES = Object.assign({ CA: DEFAULT_CA_PROFILE }, d);
+    }
+  });
+  cpJson("unit-costs").then(d => { if (Array.isArray(d)) UNIT_COSTS_DATA = d; });
 }
 if (typeof window !== "undefined") {
   loadVerifiedDataFiles();
@@ -48,892 +78,7 @@ if (typeof window !== "undefined") {
 // ============================================================================
 // NATIONWIDE MULTI-COUNTY & MULTI-STATE CALCULATION ENGINES
 // ============================================================================
-const STATE_FINANCE_PROFILES = {
-  "AL": {
-    "state_code": "AL",
-    "res_assessment_ratio": 0.1,
-    "comm_assessment_ratio": 0.2,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "flat_assessed",
-      "amount_or_pct": 4000
-    },
-    "tif_vehicle_name": "AL TIF (Ala. Code \u00a7 11-99)",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.88,
-    "tree_capital_cost_usd": 1380,
-    "climate_energy_regime": "cooling_dominant"
-  },
-  "AK": {
-    "state_code": "AK",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "flat_market",
-      "amount_or_pct": 50000
-    },
-    "tif_vehicle_name": "Municipal TIF / GO Bonds",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.65,
-    "tree_capital_cost_usd": 2590,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "AZ": {
-    "state_code": "AZ",
-    "res_assessment_ratio": 0.1,
-    "comm_assessment_ratio": 0.165,
-    "annual_assessment_cap": 0.05,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "AZ GPLET / CFD",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.94,
-    "tree_capital_cost_usd": 1720,
-    "climate_energy_regime": "arid_irrigation_limited"
-  },
-  "AR": {
-    "state_code": "AR",
-    "res_assessment_ratio": 0.2,
-    "comm_assessment_ratio": 0.2,
-    "annual_assessment_cap": 0.05,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 3,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "AR TIF / Improvement District",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.86,
-    "tree_capital_cost_usd": 1350,
-    "climate_energy_regime": "cooling_dominant"
-  },
-  "CA": {
-    "state_code": "CA",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": 0.02,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "flat_market",
-      "amount_or_pct": 7000
-    },
-    "tif_vehicle_name": "CA EIFD (Gov. Code \u00a7 53398.50)",
-    "non_pledgeable_share": 0.47,
-    "rsmeans_cost_multiplier": 1.24,
-    "tree_capital_cost_usd": 1945,
-    "climate_energy_regime": "mixed_temperate"
-  },
-  "CO": {
-    "state_code": "CO",
-    "res_assessment_ratio": 0.067,
-    "comm_assessment_ratio": 0.279,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 2,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "CO URA TIF / Title 32 Metro District",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.04,
-    "tree_capital_cost_usd": 1630,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "CT": {
-    "state_code": "CT",
-    "res_assessment_ratio": 0.7,
-    "comm_assessment_ratio": 0.7,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 5,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "CT Municipal TIF (CGS \u00a7 7-339cc)",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.18,
-    "tree_capital_cost_usd": 1850,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "DE": {
-    "state_code": "DE",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 5,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "DE TIF / Special Dev. Dist.",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.05,
-    "tree_capital_cost_usd": 1645,
-    "climate_energy_regime": "mixed_temperate"
-  },
-  "DC": {
-    "state_code": "DC",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": 0.1,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "flat_market",
-      "amount_or_pct": 87500
-    },
-    "tif_vehicle_name": "DC TIF / PILOT / SRC Credits",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.14,
-    "tree_capital_cost_usd": 1790,
-    "climate_energy_regime": "mixed_temperate"
-  },
-  "FL": {
-    "state_code": "FL",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": 0.03,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "flat_market",
-      "amount_or_pct": 50000
-    },
-    "tif_vehicle_name": "FL CRA / CDD / Live Local \u00a7 196.1979",
-    "non_pledgeable_share": 0.05,
-    "rsmeans_cost_multiplier": 0.93,
-    "tree_capital_cost_usd": 1460,
-    "climate_energy_regime": "cooling_dominant"
-  },
-  "GA": {
-    "state_code": "GA",
-    "res_assessment_ratio": 0.4,
-    "comm_assessment_ratio": 0.4,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "flat_assessed",
-      "amount_or_pct": 10000
-    },
-    "tif_vehicle_name": "GA TAD (Tax Allocation District)",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.9,
-    "tree_capital_cost_usd": 1410,
-    "climate_energy_regime": "cooling_dominant"
-  },
-  "HI": {
-    "state_code": "HI",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "flat_market",
-      "amount_or_pct": 120000
-    },
-    "tif_vehicle_name": "HI TIF / Community Facilities District",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.68,
-    "tree_capital_cost_usd": 2635,
-    "climate_energy_regime": "cooling_dominant"
-  },
-  "ID": {
-    "state_code": "ID",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "flat_market",
-      "amount_or_pct": 125000
-    },
-    "tif_vehicle_name": "ID URA Revenue Allocation (TIF)",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.95,
-    "tree_capital_cost_usd": 1490,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "IL": {
-    "state_code": "IL",
-    "res_assessment_ratio": 0.3333,
-    "comm_assessment_ratio": 0.3333,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 3,
-    "homestead_exemption_rule": {
-      "type": "flat_assessed",
-      "amount_or_pct": 10000
-    },
-    "tif_vehicle_name": "IL TIF (65 ILCS 5/11-74.4) / SSA",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.19,
-    "tree_capital_cost_usd": 1865,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "IN": {
-    "state_code": "IN",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "circuit_breaker",
-      "amount_or_pct": 0.01
-    },
-    "tif_vehicle_name": "IN Redevelopment TIF",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.96,
-    "tree_capital_cost_usd": 1505,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "IA": {
-    "state_code": "IA",
-    "res_assessment_ratio": 0.5,
-    "comm_assessment_ratio": 0.9,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 2,
-    "homestead_exemption_rule": {
-      "type": "flat_assessed",
-      "amount_or_pct": 4850
-    },
-    "tif_vehicle_name": "IA Urban Renewal TIF",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.94,
-    "tree_capital_cost_usd": 1475,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "KS": {
-    "state_code": "KS",
-    "res_assessment_ratio": 0.115,
-    "comm_assessment_ratio": 0.25,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "KS TIF / CID / STAR Bonds",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.92,
-    "tree_capital_cost_usd": 1440,
-    "climate_energy_regime": "mixed_temperate"
-  },
-  "KY": {
-    "state_code": "KY",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 4,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "KY TIF (KRS 65.7041)",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.91,
-    "tree_capital_cost_usd": 1425,
-    "climate_energy_regime": "mixed_temperate"
-  },
-  "LA": {
-    "state_code": "LA",
-    "res_assessment_ratio": 0.1,
-    "comm_assessment_ratio": 0.15,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 4,
-    "homestead_exemption_rule": {
-      "type": "flat_market",
-      "amount_or_pct": 75000
-    },
-    "tif_vehicle_name": "LA EDD TIF / Industrial Tax Exempt",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.9,
-    "tree_capital_cost_usd": 1410,
-    "climate_energy_regime": "cooling_dominant"
-  },
-  "ME": {
-    "state_code": "ME",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 5,
-    "homestead_exemption_rule": {
-      "type": "flat_assessed",
-      "amount_or_pct": 25000
-    },
-    "tif_vehicle_name": "ME Municipal TIF (30-A MRS \u00a7 5221)",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.02,
-    "tree_capital_cost_usd": 1600,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "MD": {
-    "state_code": "MD",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 3,
-    "homestead_exemption_rule": {
-      "type": "percent_market",
-      "amount_or_pct": 0.05
-    },
-    "tif_vehicle_name": "MD TIF / RISE Zones",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.04,
-    "tree_capital_cost_usd": 1630,
-    "climate_energy_regime": "mixed_temperate"
-  },
-  "MA": {
-    "state_code": "MA",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 3,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "MA DIF / HDIP",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.26,
-    "tree_capital_cost_usd": 1975,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "MI": {
-    "state_code": "MI",
-    "res_assessment_ratio": 0.5,
-    "comm_assessment_ratio": 0.5,
-    "annual_assessment_cap": 0.05,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "MI Brownfield / DDA / CIA TIF",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.03,
-    "tree_capital_cost_usd": 1615,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "MN": {
-    "state_code": "MN",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "MN TIF (Minn. Stat. \u00a7 469.174)",
-    "non_pledgeable_share": 0.4,
-    "rsmeans_cost_multiplier": 1.12,
-    "tree_capital_cost_usd": 1755,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "MS": {
-    "state_code": "MS",
-    "res_assessment_ratio": 0.1,
-    "comm_assessment_ratio": 0.15,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 4,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "MS TIF (Miss. Code \u00a7 21-45-1)",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.85,
-    "tree_capital_cost_usd": 1330,
-    "climate_energy_regime": "cooling_dominant"
-  },
-  "MO": {
-    "state_code": "MO",
-    "res_assessment_ratio": 0.19,
-    "comm_assessment_ratio": 0.32,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 2,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "MO TIF / Ch. 353 Abatement",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.02,
-    "tree_capital_cost_usd": 1600,
-    "climate_energy_regime": "mixed_temperate"
-  },
-  "MT": {
-    "state_code": "MT",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 2,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "MT Urban Renewal TIF / TEDD",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.97,
-    "tree_capital_cost_usd": 1520,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "NE": {
-    "state_code": "NE",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "NE TIF (15\u201320 yr) / SID",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.93,
-    "tree_capital_cost_usd": 1460,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "NV": {
-    "state_code": "NV",
-    "res_assessment_ratio": 0.35,
-    "comm_assessment_ratio": 0.35,
-    "annual_assessment_cap": 0.03,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "NV RDA TIF",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.08,
-    "tree_capital_cost_usd": 1695,
-    "climate_energy_regime": "arid_irrigation_limited"
-  },
-  "NH": {
-    "state_code": "NH",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 5,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "NH Municipal TIF (RSA 162-K)",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.04,
-    "tree_capital_cost_usd": 1630,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "NJ": {
-    "state_code": "NJ",
-    "res_assessment_ratio": 0.85,
-    "comm_assessment_ratio": 0.85,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 3,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "NJ Redevelopment PILOT / RAB",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.25,
-    "tree_capital_cost_usd": 1960,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "NM": {
-    "state_code": "NM",
-    "res_assessment_ratio": 0.3333,
-    "comm_assessment_ratio": 0.3333,
-    "annual_assessment_cap": 0.03,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "flat_assessed",
-      "amount_or_pct": 2000
-    },
-    "tif_vehicle_name": "NM TIDD / MRA",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.93,
-    "tree_capital_cost_usd": 1460,
-    "climate_energy_regime": "arid_irrigation_limited"
-  },
-  "NY": {
-    "state_code": "NY",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "NY NYC 485-x / IDA PILOT",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.38,
-    "tree_capital_cost_usd": 2165,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "NC": {
-    "state_code": "NC",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 4,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "NC Synthetic TIF / PDF",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.89,
-    "tree_capital_cost_usd": 1395,
-    "climate_energy_regime": "cooling_dominant"
-  },
-  "ND": {
-    "state_code": "ND",
-    "res_assessment_ratio": 0.045,
-    "comm_assessment_ratio": 0.05,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "ND TIF (NDCC ch. 40-58)",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.95,
-    "tree_capital_cost_usd": 1490,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "OH": {
-    "state_code": "OH",
-    "res_assessment_ratio": 0.35,
-    "comm_assessment_ratio": 0.35,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 3,
-    "homestead_exemption_rule": {
-      "type": "flat_assessed",
-      "amount_or_pct": 25000
-    },
-    "tif_vehicle_name": "OH TIF (ORC \u00a7 5709.40) / NCA",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.99,
-    "tree_capital_cost_usd": 1550,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "OK": {
-    "state_code": "OK",
-    "res_assessment_ratio": 0.12,
-    "comm_assessment_ratio": 0.135,
-    "annual_assessment_cap": 0.03,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "flat_assessed",
-      "amount_or_pct": 1000
-    },
-    "tif_vehicle_name": "OK Local Dev. Act TIF",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.88,
-    "tree_capital_cost_usd": 1380,
-    "climate_energy_regime": "cooling_dominant"
-  },
-  "OR": {
-    "state_code": "OR",
-    "res_assessment_ratio": 0.65,
-    "comm_assessment_ratio": 0.65,
-    "annual_assessment_cap": 0.03,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "OR Urban Renewal TIF",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.11,
-    "tree_capital_cost_usd": 1740,
-    "climate_energy_regime": "mixed_temperate"
-  },
-  "PA": {
-    "state_code": "PA",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 5,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "PA TIF / LERTA / Phila. Abate",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.13,
-    "tree_capital_cost_usd": 1770,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "RI": {
-    "state_code": "RI",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 3,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "RI TIF (RIGL \u00a7 45-33.2)",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.15,
-    "tree_capital_cost_usd": 1800,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "SC": {
-    "state_code": "SC",
-    "res_assessment_ratio": 0.04,
-    "comm_assessment_ratio": 0.06,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 5,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "SC TIF (SC Code \u00a7 31-6-10)",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.88,
-    "tree_capital_cost_usd": 1380,
-    "climate_energy_regime": "cooling_dominant"
-  },
-  "SD": {
-    "state_code": "SD",
-    "res_assessment_ratio": 0.85,
-    "comm_assessment_ratio": 0.85,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "SD TIF (SDCL ch. 11-9)",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.9,
-    "tree_capital_cost_usd": 1410,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "TN": {
-    "state_code": "TN",
-    "res_assessment_ratio": 0.25,
-    "comm_assessment_ratio": 0.4,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 4,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "TN TIF / IDB PILOT",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.9,
-    "tree_capital_cost_usd": 1410,
-    "climate_energy_regime": "cooling_dominant"
-  },
-  "TX": {
-    "state_code": "TX",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "flat_market",
-      "amount_or_pct": 100000
-    },
-    "tif_vehicle_name": "TX TIRZ / PID / MUD",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.91,
-    "tree_capital_cost_usd": 1425,
-    "climate_energy_regime": "cooling_dominant"
-  },
-  "UT": {
-    "state_code": "UT",
-    "res_assessment_ratio": 0.55,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "percent_market",
-      "amount_or_pct": 0.45
-    },
-    "tif_vehicle_name": "UT HTRZ / CRA TIF",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.97,
-    "tree_capital_cost_usd": 1520,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "VT": {
-    "state_code": "VT",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 3,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "VT TIF (24 VSA \u00a7 1891)",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.03,
-    "tree_capital_cost_usd": 1615,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "VA": {
-    "state_code": "VA",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "VA TIF / CDA",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.98,
-    "tree_capital_cost_usd": 1535,
-    "climate_energy_regime": "mixed_temperate"
-  },
-  "WA": {
-    "state_code": "WA",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "WA TIF (RCW 39.114) / MFTE",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.16,
-    "tree_capital_cost_usd": 1820,
-    "climate_energy_regime": "mixed_temperate"
-  },
-  "WV": {
-    "state_code": "WV",
-    "res_assessment_ratio": 0.6,
-    "comm_assessment_ratio": 0.6,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "WV TIF (W. Va. Code \u00a7 7-11B-1)",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.96,
-    "tree_capital_cost_usd": 1505,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "WI": {
-    "state_code": "WI",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "WI TID (Wis. Stat. \u00a7 66.1105)",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.04,
-    "tree_capital_cost_usd": 1630,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "WY": {
-    "state_code": "WY",
-    "res_assessment_ratio": 0.095,
-    "comm_assessment_ratio": 0.095,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
-    "tif_vehicle_name": "WY Urban Renewal TIF",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 0.95,
-    "tree_capital_cost_usd": 1490,
-    "climate_energy_regime": "heating_dominant"
-  },
-  "PR": {
-    "state_code": "PR",
-    "res_assessment_ratio": 1.0,
-    "comm_assessment_ratio": 1.0,
-    "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
-    "reassessment_cycle_years": 5,
-    "homestead_exemption_rule": {
-      "type": "flat_market",
-      "amount_or_pct": 15000
-    },
-    "tif_vehicle_name": "PR CRIM / Opportunity Zones",
-    "non_pledgeable_share": 0.0,
-    "rsmeans_cost_multiplier": 1.08,
-    "tree_capital_cost_usd": 1695,
-    "climate_energy_regime": "cooling_dominant"
-  }
-};
+// Verified 52-state assessment & finance profiles loaded via app/data/state_finance_profiles.json
 const COUNTY_COMPLETENESS_INDEX = {
   "01003": {
     "fips": "01003",
@@ -13000,6 +12145,18 @@ function evaluateByRightHousing(parcel) {
   const statutes = [];
   const ex = Object.assign({}, parcel.exclusions);
 
+  // Rule 1 & Item 10: Never infer by-right rights from a missing, unzoned, or unknown zoning code.
+  if (!parcel.base_zoning_code || /^(unzoned|unknown|missing|none|n\/a)$/i.test(String(parcel.base_zoning_code).trim())) {
+    return {
+      parcel_id: parcel.parcel_id,
+      state_code: parcel.state_code,
+      base_zoning_code: null,
+      applicable_statutes: [],
+      statutory_exclusions: ex,
+      net_by_right_feasible: false,
+    };
+  }
+
   const hasHardPhysicalExclusion =
     ex.fema_100yr_floodway ||
     ex.calfire_or_state_vhfhsz ||
@@ -14167,7 +13324,7 @@ function auditSingleHouseParcel(input) {
       Roll_ImpBaseYear: input.rollBaseYear,
       UseCode: isVacant ? "010V" : undefined,
       UseDescription: input.useDescription || (isVacant ? "Vacant Residential" : "Single Family"),
-      ZoneCode: input.zoningCode || "R-1",
+      ZoneCode: input.zoningCode ? input.zoningCode : undefined,
       Bedrooms1: input.bedrooms,
       Bathrooms1: input.bathrooms,
       Units1: input.units || 1,
@@ -14236,9 +13393,11 @@ function auditSingleHouseParcel(input) {
 
   // 3. Statutory By-Right Housing Rights & Exclusion Engine
   const exclusions = input.exclusions || {};
-  const zoneOrUse = String(input.zoningCode || "") + " " + String(input.useDescription || "");
-  const isComm = /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-  const isSfr = !isComm;
+  const hasZoning = !!(input.zoningCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(input.zoningCode).trim()));
+  const rawZone = hasZoning ? String(input.zoningCode).trim() : null;
+  const zoneOrUse = String(rawZone || "") + " " + String(input.useDescription || "");
+  const isComm = hasZoning && /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
+  const isSfr = hasZoning && !isComm && (/r-|r1|sfr|single|res/i.test(zoneOrUse) || (!input.useDescription && !isComm));
 
   const parcelCtx = {
     parcel_id: input.parcelId,
@@ -14246,7 +13405,7 @@ function auditSingleHouseParcel(input) {
     county_fips: input.countyFips,
     municipality_pop: input.municipalityPop ?? null,
     county_pop: input.countyPop ?? null,
-    base_zoning_code: input.zoningCode || "R-1",
+    base_zoning_code: rawZone,
     is_commercial_or_mixed_use: isComm,
     is_single_family_residential: isSfr,
     dist_to_heavy_rail_mi: input.distToHeavyRailMi ?? null,
@@ -14265,11 +13424,13 @@ function auditSingleHouseParcel(input) {
   };
 
   const statutoryZoning = _evalHousing(parcelCtx);
-  const lotSplitFeasible = (lotSqft != null && lotSqft >= 4800) && !exclusions.fema_100yr_floodway && !exclusions.historic_district_hpoz;
-  const aduFeasible = !exclusions.historic_district_hpoz || stCode === "CA";
+  const lotSplitFeasible = hasZoning && (lotSqft != null && lotSqft >= 4800) && !exclusions.fema_100yr_floodway && !exclusions.historic_district_hpoz;
+  const aduFeasible = hasZoning && (!exclusions.historic_district_hpoz || stCode === "CA");
 
   let statutoryNotes = "";
-  if (stCode === "CA") {
+  if (!hasZoning) {
+    statutoryNotes = "Zoning is not on file for this parcel; by-right housing rights and ministerial lot splits cannot be determined without verified local zoning.";
+  } else if (stCode === "CA") {
     statutoryNotes = "California: SB 9 ministerial lot split (≥4,800 sq ft) and SB 684/SB 79 transit housing eligibility. HPOZ and floodway restrictions apply deterministically.";
   } else if (stCode === "TX") {
     statutoryNotes = statutoryZoning.statutory_exclusions.population_threshold_ineligible
@@ -17760,16 +16921,18 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
   // Multi-State Statutory By-Right Housing Evaluation (CA SB 79, TX SB 840/15, FL Live Local 4.0, WA HB 1110, OR HB 2001, AZ HB 2720)
   if (typeof evaluateByRightHousing === "function") {
     try {
-      const zoneOrUse = String((a && a.ZoneCode) || "") + " " + String((a && a.UseDescription) || "");
-      const isComm = /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-      const isSfr = !isComm;
+      const hasZon = !!(zRule ? zRule.zone : ((a && a.ZoneCode) && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(a.ZoneCode).trim())));
+      const baseZone = zRule ? zRule.zone : (hasZon ? String(a.ZoneCode).trim() : null);
+      const zoneOrUse = String(baseZone || "") + " " + String((a && a.UseDescription) || "");
+      const isComm = hasZon && /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
+      const isSfr = hasZon && !isComm && (/r-|r1|sfr|single|res/i.test(zoneOrUse) || (!a.UseDescription && !isComm));
       const parcelCtx = {
         parcel_id: String((a && (a.AIN || a.APN)) || "PARCEL"),
         state_code: stCode,
         county_fips: countyFips,
         municipality_pop: (a && a.municipality_pop) ?? null,
         county_pop: (a && a.county_pop) ?? null,
-        base_zoning_code: zRule ? zRule.zone : ((a && a.ZoneCode) || "R-1"),
+        base_zoning_code: baseZone,
         is_commercial_or_mixed_use: isComm,
         is_single_family_residential: isSfr,
         dist_to_heavy_rail_mi: (nearestStn && (nearestStn.type === "heavy_rail" || !nearestStn.type)) ? nearestStn.distMi : null,
@@ -18164,18 +17327,18 @@ function renderHouse(box, a, lot, ll, st) {
         address: a.SitusFullAddress || "",
         lat: ll.lat,
         lng: ll.lng,
-        lotSqft: lot || 6000,
+        lotSqft: (lot != null && !isNaN(lot)) ? Number(lot) : null,
         livingSqft: livingSqft,
         yearBuilt: F.yb || null,
         effectiveYearBuilt: F.eff || null,
-        bedrooms: F.beds || 3,
-        bathrooms: F.baths || 2,
+        bedrooms: (F.beds != null && !isNaN(F.beds)) ? Number(F.beds) : null,
+        bathrooms: (F.baths != null && !isNaN(F.baths)) ? Number(F.baths) : null,
         stories: F.stories || 1,
         hasPool: !!F.pool,
         hasGarage: !!F.garage,
         isVacantLand: valuation ? valuation.isVacantLand : false,
         units: F.units || 1,
-        zoningCode: z ? z.zone : (a.ZoneCode || "R-1"),
+        zoningCode: z ? z.zone : ((a.ZoneCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(a.ZoneCode).trim())) ? String(a.ZoneCode).trim() : null),
         useDescription: a.UseDescription || "",
         rollLandValue: rollLand,
         rollImpValue: rollImp,
@@ -21852,6 +21015,16 @@ function serializeLiveAdvisorContext() {
   const ah = typeof activeHouse !== "undefined" ? activeHouse : null;
   if (ah && ah.a) {
     const a = ah.a, F = ah.F || {}, val = ah.valuation || null, vc = ah.valCheck || { ok: !!val };
+    const audit = ah.audit || null;
+    const stR = (ah.st && ah.st.R) || null;
+    const ex = (audit && audit.statutoryZoning && audit.statutoryZoning.statutory_exclusions) || null;
+    const floodVal = ex ? !!ex.fema_100yr_floodway : (stR && stR.flood ? !!stR.flood.ok : null);
+    const fireVal = ex ? !!ex.calfire_or_state_vhfhsz : (stR && stR.fire ? !!stR.fire.ok : null);
+    const historicVal = ex ? !!ex.historic_district_hpoz : (stR && stR.hpoz ? !!stR.hpoz.ok : null);
+    const lotSplitVal = (audit && audit.statutoryZoning && typeof audit.statutoryZoning.lotSplitFeasible === "boolean")
+      ? audit.statutoryZoning.lotSplitFeasible
+      : null;
+
     payload.parcel = {
       parcelId: a.AIN || null, address: a.SitusFullAddress || null,
       useType: a.UseType || null, useDescription: a.UseDescription || null,
@@ -21862,6 +21035,10 @@ function serializeLiveAdvisorContext() {
       lastSale: ah.sale ? { price: ah.sale.price, date: ah.sale.date } : null,
       valueEstimate: vc.ok && val ? { value: val.estimatedValue, low: val.valueLow, high: val.valueHigh, method: val.valuationMethod } : null,
       valueEstimateWithheld: vc.ok ? null : vc.reason,
+      flood: floodVal,
+      fire: fireVal,
+      historic: historicVal,
+      lotSplitEligibility: lotSplitVal,
     };
     if (ah.ll && typeof findNearestTransitStation === "function") {
       try { const s = findNearestTransitStation(ah.ll.lat, ah.ll.lng); if (s) payload.parcel.nearestRailOrBrt = { name: s.name || null, miles: s.distMi != null ? +(+s.distMi).toFixed(2) : null }; } catch (e) {}

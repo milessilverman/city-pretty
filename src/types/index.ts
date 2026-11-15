@@ -43,7 +43,7 @@ export interface StateFinanceProfile {
 export interface StatutoryZoningResult {
   parcel_id: string;
   state_code: string;
-  base_zoning_code: string;
+  base_zoning_code: string | null;
   applicable_statutes: Array<{
     citation: string;                   // e.g., "CA SB 79 (2026)", "TX SB 840", "FL Live Local 4.0", "WA HB 1110"
     max_units_by_right: number;

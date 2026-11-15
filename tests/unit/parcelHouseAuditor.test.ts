@@ -174,4 +174,42 @@ describe("Parcel House Auditor Unit Tests", () => {
     expect(azTree.annualIrrigationCostUsd).toBe(45);
     expect(azTree.netAnnualSavingsUsd).toBe(175);
   });
+
+  it("7. Never infers by-right rights or lot splits from missing or unzoned zoning records", () => {
+    // Missing zoningCode
+    const auditMissingZoning = auditSingleHouseParcel({
+      parcelId: "06037-NOZONE",
+      lat: 34.05,
+      lng: -118.25,
+      lotSqft: 7500,
+      livingSqft: 1800,
+      neighborhoodMedianHv: 850000,
+      stateCode: "CA",
+      countyFips: "06037",
+    });
+
+    expect(auditMissingZoning.statutoryZoning.base_zoning_code).toBeNull();
+    expect(auditMissingZoning.statutoryZoning.applicable_statutes).toEqual([]);
+    expect(auditMissingZoning.statutoryZoning.net_by_right_feasible).toBe(false);
+    expect(auditMissingZoning.statutoryZoning.lotSplitFeasible).toBe(false);
+    expect(auditMissingZoning.statutoryZoning.statutoryNotes).toContain("Zoning is not on file");
+
+    // Explicit valid zoningCode "R-1" in CA with 7500 sqft lot
+    const auditValidZoning = auditSingleHouseParcel({
+      parcelId: "06037-VALIDZONE",
+      lat: 34.05,
+      lng: -118.25,
+      lotSqft: 7500,
+      livingSqft: 1800,
+      zoningCode: "R-1",
+      neighborhoodMedianHv: 850000,
+      stateCode: "CA",
+      countyFips: "06037",
+    });
+
+    expect(auditValidZoning.statutoryZoning.base_zoning_code).toBe("R-1");
+    expect(auditValidZoning.statutoryZoning.applicable_statutes.length).toBeGreaterThan(0);
+    expect(auditValidZoning.statutoryZoning.net_by_right_feasible).toBe(true);
+    expect(auditValidZoning.statutoryZoning.lotSplitFeasible).toBe(true);
+  });
 });

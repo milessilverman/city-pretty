@@ -140,4 +140,53 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
     expect(estimate.groundFootprintSqft).toBe(0);
     expect(estimate.grossRoofSqft).toBe(0);
   });
+
+  it("8. state_finance_profiles.json contains verified assessment rules and citations for 50 states + DC + PR", () => {
+    const filePath = path.join(rootDir, "app/data/state_finance_profiles.json");
+    expect(fs.existsSync(filePath)).toBe(true);
+
+    const profiles = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+    const stateCodes = Object.keys(profiles);
+    expect(stateCodes.length).toBeGreaterThanOrEqual(51);
+
+    for (const code of stateCodes) {
+      const p = profiles[code];
+      expect(p.state_code).toBe(code);
+      expect(p.res_assessment_ratio).toBeGreaterThan(0);
+      expect(p.comm_assessment_ratio).toBeGreaterThan(0);
+      expect(p.statutory_citation).toBeTruthy();
+      expect(p.source_url).toMatch(/^https?:\/\//);
+      expect(p.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(p.retrieved).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    }
+  });
+
+  it("9. unit_costs.json contains verified public agency bid item costs", () => {
+    const filePath = path.join(rootDir, "app/data/unit_costs.json");
+    expect(fs.existsSync(filePath)).toBe(true);
+
+    const costs = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+    expect(Array.isArray(costs)).toBe(true);
+    expect(costs.length).toBeGreaterThanOrEqual(30);
+
+    const confirmed = costs.filter((c: any) => c.status === "confirmed");
+    expect(confirmed.length).toBeGreaterThanOrEqual(20);
+
+    for (const item of confirmed) {
+      expect(item.item).toBeTruthy();
+      expect(item.state).toBeTruthy();
+      expect(item.unit).toBeTruthy();
+      expect(item.unit_price).toBeGreaterThan(0);
+      expect(item.source_agency).toBeTruthy();
+      expect(item.source_url).toMatch(/^https?:\/\//);
+      expect(item.quote).toBeTruthy();
+      expect(item.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    }
+
+    // Unverified items must have unit_price: null
+    const notFound = costs.filter((c: any) => c.status === "not_found");
+    for (const item of notFound) {
+      expect(item.unit_price).toBeNull();
+    }
+  });
 });

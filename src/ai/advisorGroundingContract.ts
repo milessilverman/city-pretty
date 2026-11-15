@@ -43,6 +43,10 @@ export interface AdvisorParcel {
   valueEstimate: { value: number | null; low: number | null; high: number | null; method: string | null } | null;
   valueEstimateWithheld: string | null;
   nearestRailOrBrt: { name: string | null; miles: number | null } | null;
+  flood: boolean | null;
+  fire: boolean | null;
+  historic: boolean | null;
+  lotSplitEligibility: boolean | null;
 }
 
 export interface AdvisorContext {
@@ -64,6 +68,7 @@ export const ADVISOR_SYSTEM_PROMPT = [
 
 const str = (v: unknown, max = 200): string | null => (typeof v === "string" && v.trim() ? v.trim().slice(0, max) : null);
 const num = (v: unknown): number | null => (typeof v === "number" && Number.isFinite(v) ? v : null);
+const bool = (v: unknown): boolean | null => (typeof v === "boolean" ? v : null);
 const obj = (v: unknown): Record<string, unknown> => (v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : {});
 
 export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
@@ -117,6 +122,10 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       valueEstimate: est ? { value: num(est.value), low: num(est.low), high: num(est.high), method: str(est.method, 80) } : null,
       valueEstimateWithheld: str(p.valueEstimateWithheld, 300),
       nearestRailOrBrt: rail ? { name: str(rail.name, 80), miles: num(rail.miles) } : null,
+      flood: bool(p.flood),
+      fire: bool(p.fire),
+      historic: bool(p.historic),
+      lotSplitEligibility: bool(p.lotSplitEligibility),
     };
     if (ctx.parcel.valueEstimateWithheld) ctx.parcel.valueEstimate = null;
   }
