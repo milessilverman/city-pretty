@@ -117,6 +117,27 @@ test("fits a phone screen", async ({ browser }) => {
   expect(r.scroll).toBeLessThanOrEqual(r.width);
   expect(r.mapTop).toBeLessThan(420);
   await page.click("#btn-mobile-opts");
-  await expect(page.locator("#roi-mode")).toBeVisible();
+  await expect(page.locator("#metric")).toBeVisible();
+  await expect(page.locator("#btn-ai-header")).toBeVisible();
   await ctx.close();
+});
+
+test("shows no emoji on the main screen or in the menus", async ({ page }) => {
+  await openPage(page);
+  await page.click("#tools-menu summary");
+  const hits = await page.evaluate(() => {
+    const re = /[\u{1F000}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{2712}\u{2714}\u{2716}\u{2718}-\u{27BF}\u{2B50}\u{2139}\u{231A}-\u{23FF}\u{FE0F}]/u;
+    const out: string[] = [];
+    const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    while (w.nextNode()) { const t = w.currentNode.textContent || ""; if (re.test(t)) out.push(t.trim().slice(0, 60)); }
+    return out;
+  });
+  expect(hits).toEqual([]);
+});
+
+test("header is two rows on a laptop screen", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await openPage(page);
+  const h = await page.evaluate(() => document.querySelector("header.top")!.getBoundingClientRect().height);
+  expect(h).toBeLessThan(140);
 });

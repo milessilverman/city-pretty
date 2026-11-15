@@ -13596,20 +13596,20 @@ function estimatePropertyMarketValue(params) {
 
   // Determine empirical confidence interval & precision tier
   let confMarginPct = 0.065; // ±6.5% standard
-  let confidenceRating = isVacantLand ? "⭐⭐⭐ High Confidence (Vacant Land Appraisal Model)" : "⭐⭐⭐ Good Precision (Hedonic & Assessment Grounded)";
+  let confidenceRating = isVacantLand ? "High Confidence (Vacant Land Appraisal Model)" : "Good Precision (Hedonic & Assessment Grounded)";
 
   if (saleCompEst && assessorMarketEst) {
     const divergence = Math.abs(saleCompEst - assessorMarketEst) / Math.max(saleCompEst, assessorMarketEst);
     if (divergence <= 0.08) {
       confMarginPct = 0.038; // ±3.8% high-precision institutional agreement
-      confidenceRating = "⭐⭐⭐⭐ High Precision (Dual-Source Sales & Assessor Agreement)";
+      confidenceRating = "High Precision (Dual-Source Sales & Assessor Agreement)";
     } else {
       confMarginPct = 0.050; // ±5.0%
-      confidenceRating = "⭐⭐⭐ High Confidence (Multi-Model Synthesis)";
+      confidenceRating = "High Confidence (Multi-Model Synthesis)";
     }
   } else if (!saleCompEst && !assessorMarketEst) {
     confMarginPct = 0.078; // ±7.8% purely hedonic screening
-    confidenceRating = isVacantLand ? "⭐⭐⭐ High Confidence (Vacant Infill Land Appraisal)" : "⭐⭐ Preliminary Screening (Census Block-Group Grounded)";
+    confidenceRating = isVacantLand ? "High Confidence (Vacant Infill Land Appraisal)" : "Preliminary Screening (Census Block-Group Grounded)";
   }
 
   const valueLow = Math.round((estimatedValue * (1 - confMarginPct)) / 1000) * 1000;
@@ -14704,8 +14704,8 @@ function renderHouseAuditAside(audit) {
     im.confidenceBadge === "verified_current"
       ? "✓ Verified Current Imagery"
       : im.confidenceBadge === "stale_imagery_permit_override"
-      ? "⚠️ Stale Imagery (Post-Construction Permit Override)"
-      : "ℹ️ No Street View (Rural / Cul-de-sac / Gated)";
+      ? "Stale Imagery (Post-Construction Permit Override)"
+      : "No Street View (Rural / Cul-de-sac / Gated)";
 
   return `
   <div class="house-audit-panel" style="font-family:system-ui,-apple-system,sans-serif;line-height:1.45;color:#1e293b;padding:12px;background:#ffffff;border-radius:8px;border:1px solid #e2e8f0;margin-top:10px;">
@@ -14751,7 +14751,7 @@ function renderHouseAuditAside(audit) {
       </div>
       ${im.warningMessage ? `<div style="font-size:11px;color:#b45309;background:#fef3c7;padding:6px 8px;border-radius:4px;border:1px solid #fde68a;margin-bottom:6px;"><b>Imagery Notice:</b> ${im.warningMessage}</div>` : ""}
       <div style="font-size:10.5px;color:#64748b;font-style:italic;">
-        🔒 ${im.proxyRoutingNotice}
+        ${im.proxyRoutingNotice}
       </div>
     </div>
 
@@ -14772,7 +14772,7 @@ function renderHouseAuditAside(audit) {
         • <b>ADU Feasibility:</b> ${z.aduFeasible ? "<span style='color:#15803d;font-weight:700;'>By-Right Feasible</span>" : "<span style='color:#b45309;'>Discretionary HPOZ review required</span>"}
       </div>
       <div style="font-size:10.5px;color:#64748b;background:#ffffff;padding:6px;border-radius:4px;border:1px solid #e2e8f0;">
-        ℹ️ ${z.privateCovenantsDisclaimer}
+        ${z.privateCovenantsDisclaimer}
       </div>
     </div>
 
@@ -14780,7 +14780,7 @@ function renderHouseAuditAside(audit) {
     ${audit.roofCadastre ? `
     <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
       <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;">
-        <span style="font-size:11.5px;font-weight:700;color:#334155;">📐 Accurate Roof Cadastre &amp; Pitch Engineering</span>
+        <span style="font-size:11.5px;font-weight:700;color:#334155;">Accurate Roof Cadastre &amp; Pitch Engineering</span>
         <span style="font-size:11px;color:#0284c7;font-weight:600;">${audit.roofCadastre.pitchRatio} Pitch (${audit.roofCadastre.slopeAngleDeg}°)</span>
       </div>
       <div style="font-size:11px;color:#475569;margin-top:4px;">
@@ -14804,7 +14804,7 @@ function renderHouseAuditAside(audit) {
         ${sol.state_tax_credit_usd > 0 ? `• <b>State Clean Energy Credit:</b> +${fmt$(sol.state_tax_credit_usd)} direct state tax credit.<br>` : ""}
       </div>
       <div style="font-size:10.5px;color:#0284c7;background:#ffffff;padding:6px;border-radius:4px;border:1px solid #e2e8f0;margin-top:4px;">
-        ⚡ ${sol.nemTariffNotice}
+        ${sol.nemTariffNotice}
       </div>
     </div>
 
@@ -14898,13 +14898,13 @@ function patchCanopyCardDom(stateCode, countyName) {
   const ARID_STATES = new Set(["AZ", "NV", "NM", "UT"]);
 
   if (HEATING_STATES.has(st)) {
-    cardEl.innerHTML = `🌲 <b>Economic Impact (${st}):</b> Mature street tree canopy adds <b>+$5,400</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$95/yr</b> in winter windbreak heating load.`;
+    cardEl.innerHTML = `<b>Economic Impact (${st}):</b> Mature street tree canopy adds <b>+$5,400</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$95/yr</b> in winter windbreak heating load.`;
   } else if (ARID_STATES.has(st)) {
-    cardEl.innerHTML = `🌲 <b>Economic Impact (${st}):</b> Mature street tree canopy adds <b>+$8,200</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$220/yr</b> in peak summer cooling load (with xeriscape drip irrigation).`;
+    cardEl.innerHTML = `<b>Economic Impact (${st}):</b> Mature street tree canopy adds <b>+$8,200</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$220/yr</b> in peak summer cooling load (with xeriscape drip irrigation).`;
   } else if (st === "CA") {
-    cardEl.innerHTML = `🌲 <b>Economic Impact (CA):</b> Mature street tree canopy adds <b>+$7,130</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$140/yr</b> in AC cooling load.`;
+    cardEl.innerHTML = `<b>Economic Impact (CA):</b> Mature street tree canopy adds <b>+$7,130</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$140/yr</b> in AC cooling load.`;
   } else {
-    cardEl.innerHTML = `🌲 <b>Economic Impact (${st}):</b> Mature street tree canopy adds <b>+$6,200</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$115/yr</b> in balanced seasonal heating &amp; cooling efficiency.`;
+    cardEl.innerHTML = `<b>Economic Impact (${st}):</b> Mature street tree canopy adds <b>+$6,200</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$115/yr</b> in balanced seasonal heating &amp; cooling efficiency.`;
   }
 }
 
@@ -14967,6 +14967,8 @@ function toggleExperimentalModes(enabled) {
   const next = enabled !== undefined ? enabled : curr;
   window.__CITY_PRETTY_EXPERIMENTAL__ = next;
   patchTopBarControlsDom();
+  const tb = document.getElementById("btn-toggle-experimental");
+  if (tb) tb.textContent = next ? "Hide experimental modes" : "Show experimental modes";
   return next;
 }
 
@@ -15013,14 +15015,9 @@ function syncHeaderDomToCounty(fips) {
   if (readinessEl) {
     readinessEl.setAttribute("data-tier", comp.readiness_tier);
     const tierLabel = comp.readiness_tier === "audited_A" ? "A (fullest)" : comp.readiness_tier === "verified_B" ? "B" : comp.readiness_tier === "preliminary_C" ? "C (preliminary)" : "D (basic)";
-    const bgCol = comp.readiness_tier === "audited_A" ? "#064e3b" : comp.readiness_tier === "verified_B" ? "#1e3a8a" : comp.readiness_tier === "preliminary_C" ? "#78350f" : "#334155";
-    const textCol = comp.readiness_tier === "audited_A" ? "#a7f3d0" : comp.readiness_tier === "verified_B" ? "#bfdbfe" : comp.readiness_tier === "preliminary_C" ? "#fef3c7" : "#e2e8f0";
-    const borderCol = comp.readiness_tier === "audited_A" ? "#059669" : comp.readiness_tier === "verified_B" ? "#2563eb" : comp.readiness_tier === "preliminary_C" ? "#d97706" : "#64748b";
     
-    readinessEl.style.background = bgCol;
-    readinessEl.style.color = textCol;
-    readinessEl.style.border = "1px solid " + borderCol;
-    readinessEl.textContent = "Data tier: " + tierLabel + " · Assessor: " + (comp.assessor_roll_vintage || "Unverified") + " · Zoning: " + comp.zoning_source.replace(/_/g, " ") + " · GTFS: " + comp.gtfs_agencies_count + (comp.gtfs_agencies_count === 1 ? " Agency" : " Agencies");
+    readinessEl.textContent = "Data tier " + comp.readiness_tier.slice(-1);
+    readinessEl.title = "Data tier " + tierLabel + " · Assessor roll: " + (comp.assessor_roll_vintage || "not recorded") + " · Zoning: " + String(comp.zoning_source || "not recorded").replace(/_/g, " ") + " · Transit feeds: " + (comp.gtfs_agencies_count || 0) + ". Click for details.";
   }
   if (typeof syncMethodsModalToCounty === "function") {
     syncMethodsModalToCounty(f);
@@ -15346,7 +15343,7 @@ function drawP3Corridors() {
         weight: 2.5,
         fillColor: isAnchor ? "#38bdf8" : "#ffffff",
         fillOpacity: 1
-      }).bindTooltip(`<b>${isAnchor ? '🚆 ' : '🚉 '}${esc(stn.name)}</b><br><span style="font-size:11px;color:#0284c7">${stn.units} TOD Homes (${stn.affordPct}% affordable)</span>`, { sticky: true });
+      }).bindTooltip(`<b>${isAnchor ? '' : ''}${esc(stn.name)}</b><br><span style="font-size:11px;color:#0284c7">${stn.units} TOD Homes (${stn.affordPct}% affordable)</span>`, { sticky: true });
 
       marker.on("click", (e) => {
         L.DomEvent.stopPropagation(e);
@@ -15542,7 +15539,7 @@ function drawLabels() {
 
 // ---------------- public facilities (County LMS + OpenStreetMap)
 const FAC_STYLE = { "school": ["#2563eb", "S"], "college": ["#4338ca", "U"], "library": ["#7c3aed", "L"], "city hall": ["#111827", "C"],
-  "fire station": ["#dc2626", "F"], "police": ["#1e3a8a", "P"], "post office": ["#6b7280", "✉"], "hospital": ["#be123c", "H"], "clinic": ["#db2777", "+"],
+  "fire station": ["#dc2626", "F"], "police": ["#1e3a8a", "P"], "post office": ["#6b7280", "M"], "hospital": ["#be123c", "H"], "clinic": ["#db2777", "+"],
   "community center": ["#ea580c", "R"], "museum": ["#0f766e", "M"], "courthouse": ["#78350f", "J"] };
 
 const AMEN_COLORS = {
@@ -16236,7 +16233,7 @@ async function locateMe(btn) {
     if (f) select(f.properties.id, false);
     map.setView([lat, lon], 17);
     if (typeof houseAt === "function") houseAt({ lat, lng: lon });
-    btn.textContent = "📍 Find me";
+    btn.innerHTML = "<svg class=ic aria-hidden=true><use href=#i-locate /></svg> Find me";
   }, () => { btn.textContent = "Location blocked"; }, { enableHighAccuracy: true, timeout: 10000 });
 }
 function retop() {
@@ -16563,7 +16560,7 @@ function recCard(r, i, mode) {
   const costs = `${fmt$(r.capex)} to build${r.land ? " + " + fmt$(r.land) + " land" : ""}${r.om ? " + " + fmt$(r.om) + "/yr upkeep or operations" : ""}`;
   const agencyHtml = c.lead_agency ? `<p class="small agency-line" style="margin:4px 0 2px"><b>Who decides:</b> ${esc(agencyFor(c.lead_agency, m))} · <b>Next step:</b> ${esc(agencyFor(c.process, m))}${isOCArea(m) ? ` <span class="muted">(${esc(countyOf(m))} equivalents of the LA County catalog; verify with the city)</span>` : ""}</p>` : "";
   const dispHtml = renterViewOn || c.displacement_risk === "high_risk" ? (
-    c.displacement_risk === "high_risk" ? `<div class="displacement-badge high-risk">⚠️ <b>High Displacement Risk:</b> Significant land value uplift. Pair with tenant protections, RSO enforcement &amp; Community Land Trusts.</div>`
+    c.displacement_risk === "high_risk" ? `<div class="displacement-badge high-risk"><b>High Displacement Risk:</b> Significant land value uplift. Pair with tenant protections, RSO enforcement &amp; Community Land Trusts.</div>`
     : c.renter_direct ? `<div class="displacement-badge protective">✓ <b>Direct Renter Benefit:</b> Improves tenant comfort, transit mobility, or safety with minimal displacement pressure.</div>`
     : ""
   ) : "";
@@ -16586,7 +16583,7 @@ function recCard(r, i, mode) {
       <p class="src muted">${isOCArea(m) ? `<b>Evidence and cost examples (mostly from LA County projects, used here for scale):</b><br>` : ""}${c.sources.map(esc).join("<br>")}</p>
       <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e2e8f0;">
         <button type="button" class="story-btn" onclick="openResearchModal('${esc(c.category)}')" style="display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:4px 9px;background:#f0fdf4;color:#15803d;border:1px solid #86efac;border-radius:4px;font-weight:700;cursor:pointer;">
-          <span>📚</span> <span>Explore 540+ Research Studies for ${esc(c.category)} &rarr;</span>
+          <span></span> <span>Explore 540+ Research Studies for ${esc(c.category)} &rarr;</span>
         </button>
       </div>
     </details></div>`;
@@ -17469,7 +17466,7 @@ function renderCostAnalysisSchedule(u, h, m) {
   
   if (ca.siteAdjustments && ca.siteAdjustments.length) {
     htm += `<div class="cs-site-adjustments">
-      <div style="font-weight:600;font-size:11.5px;margin-bottom:4px">📍 Specific Adjustments Applied to This House:</div>
+      <div style="font-weight:600;font-size:11.5px;margin-bottom:4px">Specific Adjustments Applied to This House:</div>
       <ul style="margin:0;padding-left:18px;font-size:11.5px;color:var(--ink-2)">
         ${ca.siteAdjustments.map(adj => `<li><b>${esc(adj.name)}:</b> ${esc(adj.desc)} (<b>${adj.amount >= 0 ? "+" : ""}${fmt$(adj.amount)}</b>)</li>`).join("")}
       </ul>
@@ -17648,7 +17645,7 @@ async function houseAt(ll, fOverride = null) {
     box.innerHTML = `<h3>This home</h3>
       <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:14px;margin:8px 0;line-height:1.5;">
         <div style="display:flex;align-items:center;gap:6px;font-weight:700;font-size:13px;color:#0f172a;margin-bottom:4px;">
-          <span>🛣️</span> <span>Public Right-of-Way / Roadway</span>
+          <span></span> <span>Public Right-of-Way / Roadway</span>
         </div>
         <div style="font-size:12px;color:#64748b;">
           This point is located within the public street or transportation right-of-way (${ll.lat.toFixed(5)}°, ${ll.lng.toFixed(5)}°). Private zoning and single-family lot improvements only apply to deeded tax parcels. Click directly inside any lot boundary line to view property details.
@@ -17776,7 +17773,7 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
           const netEq = Math.round(lotSqft * (isTier1 ? 210 : 165));
           strategies.push({
             id: "ca_sb79_transit",
-            badge: isTier1 ? "🚆 CA SB 79 TIER 1 HEAVY RAIL (JULY 2026)" : "🚆 CA SB 79 TIER 2 TRANSIT",
+            badge: isTier1 ? "CA SB 79 TIER 1 HEAVY RAIL (JULY 2026)" : "CA SB 79 TIER 2 TRANSIT",
             title: `CA SB 79 Transit By-Right Density (${sb79.max_height_ft} ft / ${sb79.max_units_by_right} Units)`,
             equity: netEq,
             roi: 3.85,
@@ -17799,7 +17796,7 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
           const netEq = Math.round(lotSqft * 95);
           strategies.push({
             id: "tx_sb840_commercial",
-            badge: "🏙️ TX SB 840 COMMERCIAL CONVERSION",
+            badge: "TX SB 840 COMMERCIAL CONVERSION",
             title: "By-Right Commercial/Office-to-Multifamily Redevelopment",
             equity: netEq,
             roi: 2.95,
@@ -17822,7 +17819,7 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
           const netEq = Math.round(lotSqft * 115);
           strategies.push({
             id: "fl_live_local",
-            badge: "🌴 FL LIVE LOCAL ACT 4.0 + 75% TAX ABATEMENT",
+            badge: "FL LIVE LOCAL ACT 4.0 + 75% TAX ABATEMENT",
             title: "By-Right Multifamily Infill with Fla. Stat. § 196.1979 Exemption",
             equity: netEq,
             roi: 3.35,
@@ -17845,7 +17842,7 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
           const netEq = Math.round(lotSqft * 75);
           strategies.push({
             id: "wa_middle_housing",
-            badge: "🌲 WA HB 1110 MIDDLE HOUSING",
+            badge: "WA HB 1110 MIDDLE HOUSING",
             title: `By-Right ${waStat.max_units_by_right}-Unit Middle Housing & ADU Infill`,
             equity: netEq,
             roi: 2.65,
@@ -17868,7 +17865,7 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
           const netEq = Math.round(lotSqft * 68);
           strategies.push({
             id: "or_middle_housing",
-            badge: "🌲 OR HB 2001 MIDDLE HOUSING",
+            badge: "OR HB 2001 MIDDLE HOUSING",
             title: `By-Right ${orStat.max_units_by_right}-Unit Missing Middle Infill`,
             equity: netEq,
             roi: 2.50,
@@ -17891,7 +17888,7 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
           const netEq = Math.round(lotSqft * 58);
           strategies.push({
             id: "az_middle_housing",
-            badge: "☀️ AZ HB 2720/2721 ADU & DUPLEX",
+            badge: "AZ HB 2720/2721 ADU & DUPLEX",
             title: "By-Right Backyard Casita (ADU) & Middle Housing Conversion",
             equity: netEq,
             roi: 2.35,
@@ -17926,7 +17923,7 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
     
     strategies.push({
       id: "transit_adu",
-      badge: inWalkshed ? "🏆 #1 TRANSIT-ORIENTED OPPORTUNITY" : "🏆 #1 HIGHEST ROI INFILL",
+      badge: inWalkshed ? "#1 TRANSIT-ORIENTED OPPORTUNITY" : "#1 HIGHEST ROI INFILL",
       title: inWalkshed ? "Statutory Zero-Parking Infill & Detached 2-BR ADU" : "By-Right Detached Backyard ADU (Rental Equity)",
       equity: netEquity + parkingSavings,
       roi: +( (resValue + parkingSavings) / aduCost ).toFixed(2),
@@ -17949,7 +17946,7 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
   {
     strategies.push({
       id: "solar_clean_energy",
-      badge: "☀️ 2026+ CLEAN ENERGY EQUITY",
+      badge: "2026+ CLEAN ENERGY EQUITY",
       title: isCaPlaybook ? "2026+ Rooftop Solar & Paired Battery Microgrid (NEM 3.0)" : "2026+ Rooftop Solar & Clean Microgrid Optimization",
       equity: solar25YrEquity,
       roi: +((solarSavYr * 25) / Math.max(solarPpaNetCost, 1)).toFixed(2),
@@ -17972,7 +17969,7 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
     const addedLandValue = Math.round(lotSqft * 45);
     strategies.push({
       id: "lot_split_duplex",
-      badge: "📐 SUBDIVISION EQUITY",
+      badge: "SUBDIVISION EQUITY",
       title: isCa ? "Senate Bill 9 (SB 9) Urban Lot Split & Duplex Creation" : "Missing-Middle Two-Unit Subdivision & Infill",
       equity: addedLandValue,
       roi: 2.45,
@@ -17993,7 +17990,7 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
   return {
     best: strategies[0] || {
       id: "modernize",
-      badge: "🏡 PROPERTY MODERNIZATION",
+      badge: "PROPERTY MODERNIZATION",
       title: "Energy & Interior Modernization Retrofit",
       equity: 35000,
       roi: 1.45,
@@ -18023,7 +18020,7 @@ function copyPlaybookMemo(title, equity, roi, statute, address, apn) {
     const btn = document.getElementById("btn-copy-playbook");
     if (btn) {
       const orig = btn.innerHTML;
-      btn.innerHTML = "✅ Copied to Clipboard!";
+      btn.innerHTML = "Copied to Clipboard!";
       btn.style.background = "#15803d";
       btn.style.color = "#fff";
       setTimeout(() => { btn.innerHTML = orig; btn.style.background = ""; btn.style.color = ""; }, 2500);
@@ -18227,17 +18224,17 @@ function renderHouse(box, a, lot, ll, st) {
   const aduCa = aduUp ? aduUp.cost_analysis : null;
 
   box.innerHTML = `<h3>This home</h3>
-    <div class="prelim-banner"><span class="prelim-icon">ℹ️</span><span class="prelim-text"><b>Preliminary screening:</b> Automated checks use public county records and state maps. Always verify zoning, setbacks, easements, utilities, and permits with your city building department before committing funds or hiring contractors.</span></div>
+    <div class="prelim-banner"><span class="prelim-icon"><svg class=ic aria-hidden=true><use href=#i-info /></svg></span><span class="prelim-text"><b>Preliminary screening:</b> Automated checks use public county records and state maps. Always verify zoning, setbacks, easements, utilities, and permits with your city building department before committing funds or hiring contractors.</span></div>
     <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:6px">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap;margin-bottom:4px;">
         <p class="small" style="margin:0;flex:1;"><b>${esc(a.SitusFullAddress || "Parcel " + a.AIN)}</b> &middot; AIN/APN ${esc(a.AIN)} &middot; ${esc(a.UseDescription || "")}</p>
         <div style="display:flex;gap:4px;">
-          <button type="button" id="btn-compare-home-dossier" class="story-btn" onclick="toggleHomeCompare()" style="font-size:11px;padding:3px 8px;font-weight:600;">⚖️ + Compare This Home</button>
-          <button type="button" class="story-btn" onclick="openAiAdvisor()" style="background:#7c3aed;color:#fff;border-color:#6d28d9;font-size:11px;padding:3px 8px;font-weight:700;">🤖 Ask AI</button>
+          <button type="button" id="btn-compare-home-dossier" class="story-btn" onclick="toggleHomeCompare()" style="font-size:11px;padding:3px 8px;font-weight:600;"><svg class=ic aria-hidden=true><use href=#i-compare /></svg> Compare this home</button>
+          <button type="button" class="story-btn" onclick="openAiAdvisor()" style="background:#7c3aed;color:#fff;border-color:#6d28d9;font-size:11px;padding:3px 8px;font-weight:700;"><svg class=ic aria-hidden=true><use href=#i-sparkle /></svg> Ask AI</button>
         </div>
       </div>
       <a href="${svUrl}" target="_blank" rel="noopener" class="streetview-pill" title="Open Google Street View to inspect facade, roof, and stories">
-        📷 Street View ↗
+        <svg class=ic aria-hidden=true><use href=#i-camera /></svg> Street View ↗
       </a>
     </div>
     ${waiting.length ? `<div class="house-loading"><span class="spin"></span><div>Pulling this home's records from County GIS (${waiting.join("; ")})…</div></div>` : ""}
@@ -18272,7 +18269,7 @@ function renderHouse(box, a, lot, ll, st) {
         <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:11px 13px;margin:8px 0;line-height:1.45;">
           <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:4px;">
             <div style="display:flex;align-items:center;gap:6px;font-weight:700;font-size:12.5px;color:#1e40af;">
-              <span>🚆</span> <span>Transit Walkshed: ~${minStationDistMi.toFixed(2)} mi to ${esc(nearestStation.name)}</span>
+              <span></span> <span>Transit Walkshed: ~${minStationDistMi.toFixed(2)} mi to ${esc(nearestStation.name)}</span>
             </div>
             <button type="button" onclick="focusP3Walkshed(${nearestStation.lat}, ${nearestStation.lng}, '${esc(nearestStation.name)}', 805)" style="background:#0284c7;color:#fff;border:none;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;">
               Focus Station Walkshed
@@ -18298,20 +18295,20 @@ function renderHouse(box, a, lot, ll, st) {
         </div>
         <div style="margin-top:6px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
           <a href="${zillowUrl}" target="_blank" rel="noopener" class="zillow-pill" title="Cross-check this screening estimate against live Zillow Zestimate for ${esc(searchAddress)}">
-            🏠 Zillow Zestimate ↗
+            Zillow Zestimate ↗
           </a>
           <a href="${redfinUrl}" target="_blank" rel="noopener" class="redfin-pill" title="Cross-check against live Redfin Estimate for ${esc(searchAddress)}">
-            🏠 Redfin ↗
+            Redfin ↗
           </a>
           <a href="https://www.realtor.com/realestateandhomes-search/${encodeURIComponent(searchAddress.replace(/\s+/g, '-'))}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:3px;background:#d92228;color:#fff;font-weight:700;font-size:11px;padding:3px 8px;border-radius:4px;text-decoration:none;" title="Cross-check on Realtor.com">
-            🏠 Realtor.com ↗
+            Realtor.com ↗
           </a>
           <a href="https://www.google.com/search?q=${encodeURIComponent(searchAddress.replace(/\s+/g, ' ') + ' zillow zestimate')}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:3px;background:#1e293b;color:#fff;font-weight:700;font-size:11px;padding:3px 8px;border-radius:4px;text-decoration:none;" title="Search live MLS comps and Zestimate on Google">
-            🔍 Google Comps ↗
+            Google Comps ↗
           </a>
         </div>
         <details style="margin-top:6px;border:1px solid #e2e8f0;border-radius:6px;padding:6px 9px;background:#f8fafc;font-size:11.5px;">
-          <summary style="font-weight:700;cursor:pointer;color:#0284c7;">📈 How is this estimated? (Valuation Comps &amp; Methodology)</summary>
+          <summary style="font-weight:700;cursor:pointer;color:#0284c7;">How is this estimated? (Valuation Comps &amp; Methodology)</summary>
           <div style="margin-top:6px;padding-top:6px;border-top:1px solid #e2e8f0;line-height:1.45;">
             <div><b>Appraisal Model Decomposition (Site Land vs Finished Living Structure):</b> Calibrated against county assessor rolls, deed recordings, and Census ACS microdata.</div>
             <div style="margin-top:4px;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
@@ -18340,7 +18337,7 @@ function renderHouse(box, a, lot, ll, st) {
             <button type="button" class="story-btn${F.stories === 2 ? " active" : ""}" onclick="setHouseStories(2)" title="Set to 2 stories">2 Stories</button>
             <button type="button" class="story-btn${F.stories >= 3 ? " active" : ""}" onclick="setHouseStories(3)" title="Set to 3+ stories">3+ Stories</button>
           </div>
-          <a href="${svUrl}" target="_blank" rel="noopener" class="streetview-link" title="Open Google Street View in a new tab to inspect facade and roofline">📷 Street View ↗</a>
+          <a href="${svUrl}" target="_blank" rel="noopener" class="streetview-link" title="Open Google Street View in a new tab to inspect facade and roofline"><svg class=ic aria-hidden=true><use href=#i-camera /></svg> Street View ↗</a>
         </div>
       </div>`, esc(F.src.stories))}`;
       })()}
@@ -18363,13 +18360,13 @@ function renderHouse(box, a, lot, ll, st) {
 
         <details class="streetview-inspect-drawer" style="margin:10px 0;border:1px solid #bae6fd;border-radius:8px;background:#f0f9ff;overflow:hidden;">
           <summary style="padding:10px 12px;font-weight:700;font-size:12px;color:#0284c7;cursor:pointer;display:flex;align-items:center;justify-content:space-between">
-            <span>📷 Inspect Street View &amp; Elevation (Verify Stories)</span>
+            <span>Inspect Street View &amp; Elevation (Verify Stories)</span>
             <span style="font-size:11px;background:#e0f2fe;color:#0369a1;padding:2px 7px;border-radius:4px;font-weight:600">360° Facade Camera</span>
           </summary>
           <div style="padding:10px 12px;background:#fff;border-top:1px solid #bae6fd;">
             ${!hasStreetView ? `
             <div class="sv-rural-badge" style="padding:8px 10px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:6px;margin-bottom:8px;font-size:11.5px;color:#475569;line-height:1.4;">
-              <span style="font-weight:700;color:#0369a1;">ℹ️ Street View Coverage Unavailable (Rural / Flag Lot / Gated):</span> Google Street View camera coverage is unavailable for this lot. Story count and facade condition calibrated from USGS 3DEP LiDAR DSM and county assessor GLA.
+              <span style="font-weight:700;color:#0369a1;">Street View Coverage Unavailable (Rural / Flag Lot / Gated):</span> Google Street View camera coverage is unavailable for this lot. Story count and facade condition calibrated from USGS 3DEP LiDAR DSM and county assessor GLA.
             </div>` : ''}
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px;">
               <div style="display:flex;align-items:center;gap:6px;">
@@ -18407,7 +18404,7 @@ function renderHouse(box, a, lot, ll, st) {
               if (hasPostImageryRemodel) {
                 return `
                 <div style="margin-top:8px;padding:7px 10px;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;font-size:11px;color:#92400e;line-height:1.4;">
-                  <b>⚠️ Imagery Vintage Notice (Post-Imagery Alteration):</b> Assessor roll indicates structural alteration/effective vintage in <b>${effYear}</b>, which post-dates baseline remote sensing LiDAR (${lidarYear}). Verify on-site building envelope before submitting ADU/SB 9 site plans.
+                  <b>Imagery Vintage Notice (Post-Imagery Alteration):</b> Assessor roll indicates structural alteration/effective vintage in <b>${effYear}</b>, which post-dates baseline remote sensing LiDAR (${lidarYear}). Verify on-site building envelope before submitting ADU/SB 9 site plans.
                 </div>`;
               }
               return `
@@ -18456,10 +18453,10 @@ function renderHouse(box, a, lot, ll, st) {
           const cumulative25Yr = Math.round(solarSavYr * 25 - netCostPpa);
 
           return `
-          <!-- 📐 ACCURATE ROOF AREA & PITCH ESTIMATOR DRAWER -->
+          <!-- ACCURATE ROOF AREA & PITCH ESTIMATOR DRAWER -->
           <details id="roof-area-drawer" class="roof-area-drawer" style="margin:10px 0;border:1px solid #0284c7;border-radius:8px;background:#f0f9ff;overflow:hidden;">
             <summary style="padding:10px 12px;font-weight:700;font-size:12px;color:#0284c7;cursor:pointer;display:flex;align-items:center;justify-content:space-between">
-              <span>📐 Accurate Roof Area &amp; Architectural Cadastre</span>
+              <span>Accurate Roof Area &amp; Architectural Cadastre</span>
               <span id="roof-summary-badge" style="font-size:11px;background:#e0f2fe;color:#0369a1;padding:2px 7px;border-radius:4px;font-weight:600">
                 ~${roofCalc ? roofCalc.grossRoofSqft.toLocaleString() : "2,400"} Sq Ft (${roofCalc ? roofCalc.roofingSquares : "24"} Squares) &middot; ${roofCalc ? roofCalc.pitchRatio : "6:12"}
               </span>
@@ -18575,7 +18572,7 @@ function renderHouse(box, a, lot, ll, st) {
 
           <details class="solar-potential-drawer" style="margin:10px 0;border:1px solid #fde047;border-radius:8px;background:#fefce8;overflow:hidden;">
             <summary style="padding:10px 12px;font-weight:700;font-size:12px;color:#854d0e;cursor:pointer;display:flex;align-items:center;justify-content:space-between">
-              <span>☀️ 2026+ Rooftop Solar &amp; Microgrid Potential</span>
+              <span>2026+ Rooftop Solar &amp; Microgrid Potential</span>
               <span style="font-size:11px;background:#fef9c3;color:#713f12;padding:2px 7px;border-radius:4px;font-weight:600">~${solarKw.toFixed(1)} kW System · Saves ${fmt$(solarSavYr)}/yr</span>
             </summary>
             <div style="padding:10px 12px;background:#fff;border-top:1px solid #fde047;font-size:12px;line-height:1.45;">
@@ -18586,7 +18583,7 @@ function renderHouse(box, a, lot, ll, st) {
                 <div>• <b>Annual Electric Bill Savings:</b> ~${fmt$(solarSavYr)} / yr @ $0.23/kWh</div>
                 <div>• <b>2026 Federal ITC (Cash/Loan):</b> $0 (IRC § 25D Expired Dec 31, 2025; 30% available via Third-Party Lease / PPA under § 48E)</div>
                 <div>• <b>Net System Cost:</b> ~${fmt$(totalGrossCost)} cash/loan (or ~${fmt$(netCostPpa)} via § 48E Third-Party PPA)</div>
-                ${isCaNEM3 ? `<div style="grid-column:1 / -1;background:#fffbeb;border:1px solid #fde68a;padding:5px 8px;border-radius:4px;font-size:11px;color:#92400e;"><b>⚠️ California NEM 3.0 Tariff:</b> Avoided-cost export rates require paired 10–13.5 kWh battery storage (~$12,000 included above) for positive equity.</div>` : ""}
+                ${isCaNEM3 ? `<div style="grid-column:1 / -1;background:#fffbeb;border:1px solid #fde68a;padding:5px 8px;border-radius:4px;font-size:11px;color:#92400e;"><b>California NEM 3.0 Tariff:</b> Avoided-cost export rates require paired 10–13.5 kWh battery storage (~$12,000 included above) for positive equity.</div>` : ""}
               </div>
               <div style="font-size:11px;color:#64748b;border-top:1px solid #f1f5f9;padding-top:6px;">
                 <b>Clean Energy Equity:</b> Projected 25-year cumulative net savings (PPA/Lease model): <b style="color:#15803d">+${fmt$(cumulative25Yr)}</b>.
@@ -18596,7 +18593,7 @@ function renderHouse(box, a, lot, ll, st) {
         })()}
 
     
-    <!-- 🎯 OWNER & INVESTOR PLAYBOOK: AI-READY BEST ACTION ENGINE -->
+    <!-- OWNER & INVESTOR PLAYBOOK: AI-READY BEST ACTION ENGINE -->
     ${(() => {
       const pb = computePropertyPlaybook(a, lot, F, rule, ll, st);
       const b = pb.best;
@@ -18648,7 +18645,7 @@ function renderHouse(box, a, lot, ll, st) {
 
         <!-- Action Blueprint -->
         <details style="margin-bottom:10px;font-size:12px;background:#fff;border:1px solid #cbd5e1;border-radius:6px;padding:6px 10px;">
-          <summary style="font-weight:700;color:#0f172a;cursor:pointer;">📋 3-Step Action Blueprint (Click to Expand)</summary>
+          <summary style="font-weight:700;color:#0f172a;cursor:pointer;">3-Step Action Blueprint (Click to Expand)</summary>
           <ol style="margin:8px 0 4px 0;padding-left:18px;color:#475569;line-height:1.45;">
             ${b.steps.map(s => `<li style="margin-bottom:4px">${esc(s)}</li>`).join('')}
           </ol>
@@ -18656,16 +18653,16 @@ function renderHouse(box, a, lot, ll, st) {
 
         <!-- Private CC&R Deed Restrictions Disclaimer -->
         <div style="font-size:10.5px;color:#64748b;background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;padding:6px 8px;margin-bottom:10px;line-height:1.35;">
-          <b>⚠️ Private CC&amp;R Deed Restrictions Disclaimer:</b> While state housing statutes (e.g., CA SB 9, Gov. Code § 66314) preempt municipal zoning codes, private covenants, conditions &amp; restrictions (CC&amp;Rs) and HOA deed covenants may survive state preemption in certain jurisdictions. Verify property title deed records before committing architectural funds.
+          <b>Private CC&amp;R Deed Restrictions Disclaimer:</b> While state housing statutes (e.g., CA SB 9, Gov. Code § 66314) preempt municipal zoning codes, private covenants, conditions &amp; restrictions (CC&amp;Rs) and HOA deed covenants may survive state preemption in certain jurisdictions. Verify property title deed records before committing architectural funds.
         </div>
 
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
           <div style="display:flex;gap:6px;flex:1;max-width:380px;">
             <button type="button" id="btn-copy-playbook" onclick="copyPlaybookMemo('${esc(b.title)}', ${b.equity}, ${b.roi}, '${esc(b.statute)}', '${cleanAddr}', '${cleanApn}')" style="flex:1;background:#fff;color:#0f172a;border:1px solid #94a3b8;border-radius:6px;padding:6px 10px;font-size:11px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
-              📋 Copy Memo
+              Copy Memo
             </button>
             <button type="button" onclick="exportExecutiveProspectus()" style="flex:1;background:#0f172a;color:#fff;border:none;border-radius:6px;padding:6px 10px;font-size:11px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 1px 3px rgba(0,0,0,0.15);">
-              📄 Export Prospectus (PDF)
+              Export Prospectus (PDF)
             </button>
           </div>
           <span style="font-size:10.5px;color:#64748b;">
@@ -18681,13 +18678,13 @@ function renderHouse(box, a, lot, ll, st) {
     <ul class="small" style="margin:8px 0 0 0;padding:0;list-style:none">${h.C.map(c => `<li style="margin:3px 0"><b style="color:${col[c.v]}">${tag[c.v]} ${esc(c.name)}</b> — ${c.why}</li>`).join("")}</ul>
 
     
-    <!-- 🏛️ INSTITUTIONAL PARCEL AUDIT & COMPREHENSIVE SCREENING PANEL -->
+    <!-- INSTITUTIONAL PARCEL AUDIT & COMPREHENSIVE SCREENING PANEL -->
     ${houseAudit && typeof renderHouseAuditAside === "function" ? renderHouseAuditAside(houseAudit) : ""}
 
-    <!-- 📐 INTERACTIVE SITE PLAN & INFILL / ADU MASSING VISUALIZER -->
+    <!-- INTERACTIVE SITE PLAN & INFILL / ADU MASSING VISUALIZER -->
     <details class="site-plan-drawer" style="margin:10px 0;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;overflow:hidden;">
       <summary style="padding:10px 12px;font-weight:700;font-size:12px;color:#1e293b;cursor:pointer;display:flex;align-items:center;justify-content:space-between">
-        <span>📐 Interactive Site Plan &amp; Infill Setback Visualizer</span>
+        <span>Interactive Site Plan &amp; Infill Setback Visualizer</span>
         <span style="font-size:11px;background:#e2e8f0;color:#334155;padding:2px 7px;border-radius:4px;font-weight:600">4-Ft Setbacks &middot; By-Right Footprint</span>
       </summary>
       <div style="padding:12px;background:#fff;border-top:1px solid #cbd5e1;font-size:12px;">
@@ -18730,7 +18727,7 @@ function renderHouse(box, a, lot, ll, st) {
     ${aduCa ? `
       <div class="adu-interactive-card">
         <div class="adu-card-header">
-          <div style="font-weight:700;font-size:12.5px;color:var(--ink)">📐 Interactive ADU Sizing &amp; Return Modeler</div>
+          <div style="font-weight:700;font-size:12.5px;color:var(--ink)">Interactive ADU Sizing &amp; Return Modeler</div>
           <div class="muted small">Drag the slider to change the floor area; construction cost, fee exemptions, rent and return per $1 update as you go.</div>
         </div>
         <div class="adu-slider-container">
@@ -18790,7 +18787,7 @@ function renderHouse(box, a, lot, ll, st) {
             <tr style="border-top:1px solid var(--rule);cursor:pointer" onclick="toggleUpgradeCost(${i})">
               <td>
                 <b>${esc(u.n)}</b>
-                <button type="button" class="cost-breakdown-btn" onclick="event.stopPropagation(); toggleUpgradeCost(${i})">🔍 View house cost breakdown</button>
+                <button type="button" class="cost-breakdown-btn" onclick="event.stopPropagation(); toggleUpgradeCost(${i})">View house cost breakdown</button>
                 ${u.note ? `<br><span class="muted">${esc(u.note)}</span>` : ""}
                 ${u.sav > 0 ? `<br><span class="muted">${/ADU/.test(u.n) ? "rent" : "saves"} ~${fmt$(u.sav)}/yr</span>` : ""}
               </td>
@@ -19172,30 +19169,30 @@ async function addressSearch(text, go) {
 
       let html = "";
       if (localMatches.length > 0) {
-        html += `<div style="padding:6px 10px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#64748b;background:#f8fafc;border-bottom:1px solid #e2e8f0;">🏙️ Local Neighborhoods & Communities</div>`;
+        html += `<div style="padding:6px 10px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#64748b;background:#f8fafc;border-bottom:1px solid #e2e8f0;">Local Neighborhoods & Communities</div>`;
         localMatches.forEach(m => {
-          html += `<button type="button" class="addr-item" data-type="local" data-bg="${esc(m.bgId)}" data-label="${esc(m.name)}" style="text-align:left;display:flex;align-items:center;gap:8px;width:100%;padding:9px 12px;border:none;border-bottom:1px solid #f1f5f9;background:#fff;cursor:pointer;font-size:13px;color:#0f172a;transition:background 0.15s;"><span style="color:#0284c7;font-size:14px">🏙️</span> <span>${highlightQuery(m.name, q)}</span></button>`;
+          html += `<button type="button" class="addr-item" data-type="local" data-bg="${esc(m.bgId)}" data-label="${esc(m.name)}" style="text-align:left;display:flex;align-items:center;gap:8px;width:100%;padding:9px 12px;border:none;border-bottom:1px solid #f1f5f9;background:#fff;cursor:pointer;font-size:13px;color:#0f172a;transition:background 0.15s;"><span style="color:#0284c7;font-size:14px"><svg class=ic aria-hidden=true><use href=#i-city /></svg></span> <span>${highlightQuery(m.name, q)}</span></button>`;
         });
       }
 
       if (stationMatches.length > 0) {
-        html += `<div style="padding:6px 10px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#0284c7;background:#f0f9ff;border-bottom:1px solid #bae6fd;">🚆 Planned P3 Rail & Transit Stations</div>`;
+        html += `<div style="padding:6px 10px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#0284c7;background:#f0f9ff;border-bottom:1px solid #bae6fd;">Planned P3 Rail & Transit Stations</div>`;
         stationMatches.forEach((s, idx) => {
-          html += `<button type="button" class="addr-item" data-type="station" data-idx="${idx}" style="text-align:left;display:flex;align-items:center;gap:8px;width:100%;padding:9px 12px;border:none;border-bottom:1px solid #f1f5f9;background:#fff;cursor:pointer;font-size:13px;color:#0f172a;transition:background 0.15s;"><span style="color:#0284c7;font-size:14px">🚆</span> <div><div style="font-weight:600">${highlightQuery(s.name, q)}</div><div style="font-size:11px;color:#64748b">${esc(s.metroName)}</div></div></button>`;
+          html += `<button type="button" class="addr-item" data-type="station" data-idx="${idx}" style="text-align:left;display:flex;align-items:center;gap:8px;width:100%;padding:9px 12px;border:none;border-bottom:1px solid #f1f5f9;background:#fff;cursor:pointer;font-size:13px;color:#0f172a;transition:background 0.15s;"><span style="color:#0284c7;font-size:14px"><svg class=ic aria-hidden=true><use href=#i-train /></svg></span> <div><div style="font-weight:600">${highlightQuery(s.name, q)}</div><div style="font-size:11px;color:#64748b">${esc(s.metroName)}</div></div></button>`;
         });
       }
 
       if (countyMatches.length > 0) {
-        html += `<div style="padding:6px 10px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#64748b;background:#f8fafc;border-bottom:1px solid #e2e8f0;">🏛️ US Counties</div>`;
+        html += `<div style="padding:6px 10px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#64748b;background:#f8fafc;border-bottom:1px solid #e2e8f0;">US Counties</div>`;
         countyMatches.forEach(m => {
-          html += `<button type="button" class="addr-item" data-type="county" data-fips="${esc(m.fips)}" data-label="${esc(m.name)}" style="text-align:left;display:flex;align-items:center;gap:8px;width:100%;padding:9px 12px;border:none;border-bottom:1px solid #f1f5f9;background:#fff;cursor:pointer;font-size:13px;color:#0f172a;transition:background 0.15s;"><span style="color:#8b5cf6;font-size:14px">🏛️</span> <span>${highlightQuery(m.name, q)}</span></button>`;
+          html += `<button type="button" class="addr-item" data-type="county" data-fips="${esc(m.fips)}" data-label="${esc(m.name)}" style="text-align:left;display:flex;align-items:center;gap:8px;width:100%;padding:9px 12px;border:none;border-bottom:1px solid #f1f5f9;background:#fff;cursor:pointer;font-size:13px;color:#0f172a;transition:background 0.15s;"><span style="color:#8b5cf6;font-size:14px"><svg class=ic aria-hidden=true><use href=#i-building /></svg></span> <span>${highlightQuery(m.name, q)}</span></button>`;
         });
       }
 
       if (cands.length > 0) {
-        html += `<div style="padding:6px 10px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#64748b;background:#f8fafc;border-bottom:1px solid #e2e8f0;">📍 Specific Addresses & Houses (USA)</div>`;
+        html += `<div style="padding:6px 10px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#64748b;background:#f8fafc;border-bottom:1px solid #e2e8f0;">Specific Addresses & Houses (USA)</div>`;
         cands.forEach((c, idx) => {
-          html += `<button type="button" class="addr-item" data-type="cand" data-i="${idx}" style="text-align:left;display:flex;align-items:center;gap:8px;width:100%;padding:9px 12px;border:none;border-bottom:1px solid #f1f5f9;background:#fff;cursor:pointer;font-size:13px;color:#0f172a;transition:background 0.15s;"><span style="color:#e11d48;font-size:14px">📍</span> <span>${highlightQuery(c.address, q)}</span></button>`;
+          html += `<button type="button" class="addr-item" data-type="cand" data-i="${idx}" style="text-align:left;display:flex;align-items:center;gap:8px;width:100%;padding:9px 12px;border:none;border-bottom:1px solid #f1f5f9;background:#fff;cursor:pointer;font-size:13px;color:#0f172a;transition:background 0.15s;"><span style="color:#e11d48;font-size:14px"><svg class=ic aria-hidden=true><use href=#i-pin /></svg></span> <span>${highlightQuery(c.address, q)}</span></button>`;
         });
       }
 
@@ -20001,7 +19998,7 @@ function synergySection(p, m, recs) {
         <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
           <input type="checkbox" class="syn-chk" checked data-cost="120000" data-lift="0.024" data-id="trees" onchange="runSynergySim()">
           <div>
-            <div style="font-weight:600;font-size:12px;color:#0f172a">🌳 Street Trees &amp; Continuous Shaded Canopy</div>
+            <div style="font-weight:600;font-size:12px;color:#0f172a">Street Trees &amp; Continuous Shaded Canopy</div>
             <div style="font-size:11px;color:#64748b">Cost: $120k · Base Lift: +2.4% · <i>Funding: IRA Urban Forestry, State Forestry Grants</i></div>
           </div>
         </label>
@@ -20009,7 +20006,7 @@ function synergySection(p, m, recs) {
         <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
           <input type="checkbox" class="syn-chk" checked data-cost="180000" data-lift="0.028" data-id="safe_streets" onchange="runSynergySim()">
           <div>
-            <div style="font-weight:600;font-size:12px;color:#0f172a">🚸 Safe Routes to School &amp; Traffic Calming (Humps + Curb Extensions)</div>
+            <div style="font-weight:600;font-size:12px;color:#0f172a">Safe Routes to School &amp; Traffic Calming (Humps + Curb Extensions)</div>
             <div style="font-size:11px;color:#64748b">Cost: $180k · Base Lift: +2.8% · <i>Funding: Federal SRTS, USDOT SS4A, State ATP</i></div>
           </div>
         </label>
@@ -20017,7 +20014,7 @@ function synergySection(p, m, recs) {
         <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
           <input type="checkbox" class="syn-chk" checked data-cost="450000" data-lift="0.045" data-id="school" onchange="runSynergySim()">
           <div>
-            <div style="font-weight:600;font-size:12px;color:#0f172a">🏫 School Campus Modernization &amp; Air Filtration</div>
+            <div style="font-weight:600;font-size:12px;color:#0f172a">School Campus Modernization &amp; Air Filtration</div>
             <div style="font-size:11px;color:#64748b">Cost: $450k (area share) · Base Lift: +4.5% · <i>Funding: State School Facility Bond, Title I Campus Grants</i></div>
           </div>
         </label>
@@ -20025,7 +20022,7 @@ function synergySection(p, m, recs) {
         <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
           <input type="checkbox" class="syn-chk" data-cost="210000" data-lift="0.031" data-id="park" onchange="runSynergySim()">
           <div>
-            <div style="font-weight:600;font-size:12px;color:#0f172a">🏞️ Complete Park Renovation (Grove + Seating + Solar LEDs + Murals)</div>
+            <div style="font-weight:600;font-size:12px;color:#0f172a">Complete Park Renovation (Grove + Seating + Solar LEDs + Murals)</div>
             <div style="font-size:11px;color:#64748b">Cost: $210k · Base Lift: +3.1% · <i>Funding: Land &amp; Water Conservation Fund (LWCF), Quimby Act</i></div>
           </div>
         </label>
@@ -20033,7 +20030,7 @@ function synergySection(p, m, recs) {
         <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
           <input type="checkbox" class="syn-chk" data-cost="260000" data-lift="0.022" data-id="bike" onchange="runSynergySim()">
           <div>
-            <div style="font-weight:600;font-size:12px;color:#0f172a">🚲 Protected Bike Lanes &amp; Micro-Mobility Network</div>
+            <div style="font-weight:600;font-size:12px;color:#0f172a">Protected Bike Lanes &amp; Micro-Mobility Network</div>
             <div style="font-size:11px;color:#64748b">Cost: $260k · Base Lift: +2.2% · <i>Funding: Highway Safety Improvement (HSIP), Clean California</i></div>
           </div>
         </label>
@@ -20042,14 +20039,14 @@ function synergySection(p, m, recs) {
         <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
           <input type="checkbox" class="syn-chk" data-cost="340000" data-lift="0.036" data-id="stormwater" onchange="runSynergySim()">
           <div>
-            <div style="font-weight:600;font-size:12px;color:#0891b2">🌧️ Green Stormwater Resilience District &amp; Urban Bioswales (Gentilly Model)</div>
+            <div style="font-weight:600;font-size:12px;color:#0891b2">Green Stormwater Resilience District &amp; Urban Bioswales (Gentilly Model)</div>
             <div style="font-size:11px;color:#64748b">Cost: $340k · Base Lift: +3.6% · <i>Funding: HUD CDBG-NDR, FEMA BRIC, EPA Clean Water SRF</i></div>
           </div>
         </label>
         <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
           <input type="checkbox" class="syn-chk" data-cost="280000" data-lift="0.028" data-id="bayou_trail" onchange="runSynergySim()">
           <div>
-            <div style="font-weight:600;font-size:12px;color:#0d9488">🌊 Bayou &amp; Lakefront Levee Greenway Trail (Lafitte Greenway Model)</div>
+            <div style="font-weight:600;font-size:12px;color:#0d9488">Bayou &amp; Lakefront Levee Greenway Trail (Lafitte Greenway Model)</div>
             <div style="font-size:11px;color:#64748b">Cost: $280k · Base Lift: +2.8% · <i>Funding: Federal RTP, LWCF, USDOT RAISE</i></div>
           </div>
         </label>` : ""}
@@ -20058,14 +20055,14 @@ function synergySection(p, m, recs) {
         <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
           <input type="checkbox" class="syn-chk" data-cost="290000" data-lift="0.034" data-id="desert_cool" onchange="runSynergySim()">
           <div>
-            <div style="font-weight:600;font-size:12px;color:#d97706">☀️ Desert Cool Corridor &amp; Shaded Active Transit Spine (Phoenix CoolSeal &amp; Canalscape Model)</div>
+            <div style="font-weight:600;font-size:12px;color:#d97706">Desert Cool Corridor &amp; Shaded Active Transit Spine (Phoenix CoolSeal &amp; Canalscape Model)</div>
             <div style="font-size:11px;color:#64748b">Cost: $290k · Base Lift: +3.4% · <i>Funding: Bureau of Reclamation WaterSMART, EPA EJ Thriving Communities, Urban Heat Mitigation</i></div>
           </div>
         </label>
         <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
           <input type="checkbox" class="syn-chk" data-cost="175000" data-lift="0.026" data-id="xeriscape" onchange="runSynergySim()">
           <div>
-            <div style="font-weight:600;font-size:12px;color:#b45309">🌵 Water-Conserving Xeriscape Pocket Park &amp; Shaded Gathering Pavilion</div>
+            <div style="font-weight:600;font-size:12px;color:#b45309">Water-Conserving Xeriscape Pocket Park &amp; Shaded Gathering Pavilion</div>
             <div style="font-size:11px;color:#64748b">Cost: $175k · Base Lift: +2.6% · <i>Funding: Arizona DWR Conservation, Municipal Open Space, LWCF</i></div>
           </div>
         </label>` : ""}
@@ -20074,7 +20071,7 @@ function synergySection(p, m, recs) {
         <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
           <input type="checkbox" class="syn-chk" data-cost="850000" data-lift="0.052" data-id="beach" onchange="runSynergySim()">
           <div>
-            <div style="font-weight:600;font-size:12px;color:#0369a1">🏖️ Beach Nourishment, Dune Restoration &amp; Volleyball Courts</div>
+            <div style="font-weight:600;font-size:12px;color:#0369a1">Beach Nourishment, Dune Restoration &amp; Volleyball Courts</div>
             <div style="font-size:11px;color:#64748b">Cost: $850k · Base Lift: +5.2% · <i>Funding: USACE Coastal Storm Risk, State Coastal Conservancy</i></div>
           </div>
         </label>` : ""}
@@ -20083,7 +20080,7 @@ function synergySection(p, m, recs) {
         <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
           <input type="checkbox" class="syn-chk" data-cost="140000" data-lift="0.032" data-id="mtb" onchange="runSynergySim()">
           <div>
-            <div style="font-weight:600;font-size:12px;color:#15803d">🚵 Mountain Bike Singletrack Trails &amp; Trailhead (Santa Clarita Model)</div>
+            <div style="font-weight:600;font-size:12px;color:#15803d">Mountain Bike Singletrack Trails &amp; Trailhead (Santa Clarita Model)</div>
             <div style="font-size:11px;color:#64748b">Cost: $140k · Base Lift: +3.2% · <i>Funding: Federal RTP, LWCF Recreation Grants, Open Space District</i></div>
           </div>
         </label>` : ""}
@@ -20092,7 +20089,7 @@ function synergySection(p, m, recs) {
         <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;cursor:pointer">
           <input type="checkbox" class="syn-chk" data-cost="320000" data-lift="0.030" data-id="rail_trail" onchange="runSynergySim()">
           <div>
-            <div style="font-weight:600;font-size:12px;color:#15803d">🌳 Linear Rail-Trail &amp; Urban Greenway Corridor (The 606 / BeltLine Model)</div>
+            <div style="font-weight:600;font-size:12px;color:#15803d">Linear Rail-Trail &amp; Urban Greenway Corridor (The 606 / BeltLine Model)</div>
             <div style="font-size:11px;color:#64748b">Cost: $320k · Base Lift: +3.0% · <i>Funding: USDOT RAISE, Safe Streets &amp; Roads for All (SS4A), EPA Brownfields</i></div>
           </div>
         </label>` : ""}
@@ -20100,7 +20097,7 @@ function synergySection(p, m, recs) {
 
       <div id="syn-results" style="background:#f0fdf4;border:2px solid #86efac;border-radius:8px;padding:12px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-          <span style="font-size:11.5px;font-weight:700;color:#166534">⚡ Compounding Package Results</span>
+          <span style="font-size:11.5px;font-weight:700;color:#166534">Compounding Package Results</span>
           <span id="syn-multiplier" style="font-size:11px;font-weight:800;background:#dcfce7;color:#15803d;padding:2px 8px;border-radius:12px">+25% Synergy Multiplier</span>
         </div>
 
@@ -20202,7 +20199,7 @@ function parkImprovementsSection(m) {
 
       <div style="border:1px solid #e2e8f0;border-radius:6px;overflow:hidden;margin-bottom:8px">
         <div style="background:#f1f5f9;padding:6px 10px;font-weight:700;color:#0f172a;border-bottom:1px solid #e2e8f0">
-          🌳 Shade Tree Grove &amp; Urban Forest Buffer
+          Shade Tree Grove &amp; Urban Forest Buffer
         </div>
         <div style="padding:8px 10px">
           <div><b>Effect on Home Values:</b> <span style="color:#087b78;font-weight:700">+1.0% within 400 m</span></div>
@@ -20213,7 +20210,7 @@ function parkImprovementsSection(m) {
 
       <div style="border:1px solid #e2e8f0;border-radius:6px;overflow:hidden;margin-bottom:8px">
         <div style="background:#f1f5f9;padding:6px 10px;font-weight:700;color:#0f172a;border-bottom:1px solid #e2e8f0">
-          🪑 Shaded Seating, ADA Benches &amp; Picnic Pavilion
+          Shaded Seating, ADA Benches &amp; Picnic Pavilion
         </div>
         <div style="padding:8px 10px">
           <div><b>Effect on Home Values:</b> <span style="color:#087b78;font-weight:700">+0.4% within 300 m</span></div>
@@ -20224,7 +20221,7 @@ function parkImprovementsSection(m) {
 
       <div style="border:1px solid #e2e8f0;border-radius:6px;overflow:hidden;margin-bottom:8px">
         <div style="background:#f1f5f9;padding:6px 10px;font-weight:700;color:#0f172a;border-bottom:1px solid #e2e8f0">
-          🎨 Community Art Murals &amp; Cultural Pavilion
+          Community Art Murals &amp; Cultural Pavilion
         </div>
         <div style="padding:8px 10px">
           <div><b>Effect on Home Values:</b> <span style="color:#087b78;font-weight:700">+0.3% within 200 m</span></div>
@@ -20235,7 +20232,7 @@ function parkImprovementsSection(m) {
 
       <div style="border:1px solid #e2e8f0;border-radius:6px;overflow:hidden">
         <div style="background:#f1f5f9;padding:6px 10px;font-weight:700;color:#0f172a;border-bottom:1px solid #e2e8f0">
-          💡 Solar LED Pathway &amp; Perimeter Safety Lighting
+          Solar LED Pathway &amp; Perimeter Safety Lighting
         </div>
         <div style="padding:8px 10px">
           <div><b>Effect on Home Values:</b> <span style="color:#087b78;font-weight:700">+1.4% within 400 m</span></div>
@@ -20257,7 +20254,7 @@ function geographicImprovementsSection(p, m) {
 
       ${geoEnv === "delta_bayou" ? `
       <div style="background:#f0fdfa;border:1px solid #99f6e4;border-radius:6px;padding:10px;margin-bottom:8px">
-        <div style="font-weight:700;color:#0f766e;margin-bottom:4px">🌧️ Delta &amp; Bayou Stormwater Resilience Infrastructure</div>
+        <div style="font-weight:700;color:#0f766e;margin-bottom:4px">Delta &amp; Bayou Stormwater Resilience Infrastructure</div>
         <div style="margin-bottom:4px"><b>Green Stormwater Bioswales &amp; Urban Water Basins:</b> Modeled after the Gentilly Resilience District and Mirabeau Water Garden (+3.6% home value within 400 m; reduces street subsidence and FEMA flood insurance risk).</div>
         <div><b>Bayou &amp; Levee Waterfront Promenade:</b> Grade-separated active transportation path with native shade trees along bayou banks (+2.8% within 500 m).</div>
         <div style="font-size:11px;color:#0d9488;margin-top:4px"><b>Non-Private Funding:</b> HUD National Disaster Resilience (CDBG-NDR) · FEMA Building Resilient Infrastructure and Communities (BRIC) · EPA Clean Water SRF · Sewerage &amp; Water Board</div>
@@ -20266,7 +20263,7 @@ function geographicImprovementsSection(p, m) {
 
       ${geoEnv === "desert_arid" ? `
       <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:10px;margin-bottom:8px">
-        <div style="font-weight:700;color:#b45309;margin-bottom:4px">☀️ Desert Arid &amp; Extreme Heat Resilience Infrastructure</div>
+        <div style="font-weight:700;color:#b45309;margin-bottom:4px">Desert Arid &amp; Extreme Heat Resilience Infrastructure</div>
         <div style="margin-bottom:4px"><b>Desert Cool Corridor &amp; Canalscape Active Transit:</b> Modeled after the Phoenix CoolSeal Initiative and Salt River Project canal bank shade canopies (+3.4% home value within 600 m; lowers surface temperatures up to 12°F and creates continuous pedestrian shade).</div>
         <div><b>Xeriscape Pocket Park &amp; Native Shade Grove:</b> Low-water native mesquite and palo verde canopy with permeable desert paving and shade pavilions (+2.6% within 400 m).</div>
         <div style="font-size:11px;color:#d97706;margin-top:4px"><b>Non-Private Funding:</b> US Bureau of Reclamation WaterSMART · EPA Environmental Justice Thriving Communities · Arizona DWR Water Conservation · State Parks Land &amp; Water Conservation Fund</div>
@@ -20275,7 +20272,7 @@ function geographicImprovementsSection(p, m) {
 
       ${geoEnv === "ocean_coast" ? `
       <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:6px;padding:10px;margin-bottom:8px">
-        <div style="font-weight:700;color:#0369a1;margin-bottom:4px">🏖️ Coastal &amp; Beach Infrastructure</div>
+        <div style="font-weight:700;color:#0369a1;margin-bottom:4px">Coastal &amp; Beach Infrastructure</div>
         <div style="margin-bottom:4px"><b>Beach Nourishment &amp; Dune Restoration:</b> Extends sandy shoreline and builds storm surge erosion buffers (+5.2% home value within 800 m, Landry et al. coastal hedonic studies).</div>
         <div><b>Public Beach Volleyball Courts:</b> Lighted sand courts and spectator seating (+0.8% within 400 m).</div>
         <div style="font-size:11px;color:#0284c7;margin-top:4px"><b>Non-Private Funding:</b> US Army Corps of Engineers (USACE) Storm Risk Grants · State Coastal Conservancy · Transient Occupancy Tax (TOT)</div>
@@ -20284,7 +20281,7 @@ function geographicImprovementsSection(p, m) {
 
       ${geoEnv === "mountain_foothills" ? `
       <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:10px;margin-bottom:8px">
-        <div style="font-weight:700;color:#15803d;margin-bottom:4px">🚵 Foothill Singletrack Trail Infrastructure</div>
+        <div style="font-weight:700;color:#15803d;margin-bottom:4px">Foothill Singletrack Trail Infrastructure</div>
         <div style="margin-bottom:4px"><b>Mountain Bike Singletrack Trails &amp; Trailhead Kiosk:</b> Modeled after the City of Santa Clarita Trek Bike Park &amp; Headwaters Economics recreation studies (+3.2% home value within 1,200 m).</div>
         <div><b>Amenities:</b> Bike maintenance kiosk, shaded picnic rest stop, wayfinding maps, and grade-separated singletrack paths.</div>
         <div style="font-size:11px;color:#16a34a;margin-top:4px"><b>Non-Private Funding:</b> Federal Recreational Trails Program (RTP) · Land &amp; Water Conservation Fund (LWCF) · Regional Open Space District</div>
@@ -20293,7 +20290,7 @@ function geographicImprovementsSection(p, m) {
 
       ${geoEnv === "urban_inland" ? `
       <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:10px;margin-bottom:8px">
-        <div style="font-weight:700;color:#15803d;margin-bottom:4px">🌳 Urban Linear Rail-Trail &amp; Greenways</div>
+        <div style="font-weight:700;color:#15803d;margin-bottom:4px">Urban Linear Rail-Trail &amp; Greenways</div>
         <div style="margin-bottom:4px"><b>Linear Rail-Trail &amp; Tree Canopy Spine:</b> Modeled after The 606 (Chicago) and Atlanta BeltLine (+3.0% home value within 600 m).</div>
         <div><b>Amenities:</b> Multi-use paved trail, landscaped tree canopy buffers, pedestrian lighting, and neighborhood pocket parks.</div>
         <div style="font-size:11px;color:#16a34a;margin-top:4px"><b>Non-Private Funding:</b> USDOT RAISE · Safe Streets and Roads for All (SS4A) · EPA Brownfields · State Parks Bond</div>
@@ -20335,7 +20332,7 @@ function focusP3Walkshed(lat, lng, name, radiusMeters = 805) {
     fillOpacity: 1.0
   }).bindPopup(`
     <div style="font-family:var(--body);line-height:1.45;padding:4px 2px;min-width:220px;">
-      <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;color:#0284c7;letter-spacing:0.5px;">🚆 Planned Transit Station</div>
+      <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;color:#0284c7;letter-spacing:0.5px;">Planned Transit Station</div>
       <div style="font-size:14px;font-weight:800;color:#0f172a;margin:2px 0 4px;">${esc(name || "Transit Station")}</div>
       <div style="font-size:11.5px;color:#475569;margin-bottom:6px;">
         <b>Walkshed Radius:</b> ${(radiusMeters / 1609.34).toFixed(2)} mi (~${Math.round(radiusMeters / 80)} min walk)
@@ -20415,13 +20412,13 @@ function flyToP3Hub(fips, targetIdx = -1) {
       const icon = L.divIcon({
         className: "",
         iconSize: isAnchor ? [36, 36] : [28, 28],
-        html: `<div style="background:${isAnchor ? '#0284c7' : '#0369a1'};color:#fff;border:2.5px solid #fff;border-radius:50%;width:${isAnchor ? '32px' : '24px'};height:${isAnchor ? '32px' : '24px'};display:flex;align-items:center;justify-content:center;font-size:${isAnchor ? '16px' : '12px'};box-shadow:0 3px 10px rgba(2,132,199,0.4);cursor:pointer;" title="${esc(stn.name)}">${isAnchor ? '🚆' : '🚉'}</div>`
+        html: `<div style="background:${isAnchor ? '#0284c7' : '#0369a1'};color:#fff;border:2.5px solid #fff;border-radius:50%;width:${isAnchor ? '32px' : '24px'};height:${isAnchor ? '32px' : '24px'};display:flex;align-items:center;justify-content:center;font-size:${isAnchor ? '16px' : '12px'};box-shadow:0 3px 10px rgba(2,132,199,0.4);cursor:pointer;" title="${esc(stn.name)}"><svg class=ic aria-hidden=true><use href=#i-train /></svg></div>`
       });
 
       const m = L.marker([stn.lat, stn.lng], { icon })
         .bindPopup(`
           <div style="font-family:var(--body);line-height:1.4;color:#0f172a;max-width:280px">
-            <div style="font-weight:800;font-size:13px;color:#0369a1;margin-bottom:3px">${isAnchor ? '🚆' : '🚉'} ${esc(stn.name)}</div>
+            <div style="font-weight:800;font-size:13px;color:#0369a1;margin-bottom:3px">${isAnchor ? '' : ''} ${esc(stn.name)}</div>
             <div style="font-size:11.5px;color:#334155;margin-bottom:4px"><b>TOD Potential:</b> ${stn.units} mixed-income homes (${stn.affordPct}% affordable)</div>
             <div style="font-size:11px;color:#64748b;margin-bottom:6px;">${esc(stn.desc)}</div>
             <button type="button" onclick="flyToP3Station(${stn.lat}, ${stn.lng}, '${esc(stn.name)}', ${stn.units}, ${stn.affordPct}, ${stn.retailSqft})" style="background:#0284c7;color:#fff;border:none;padding:4px 8px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;">
@@ -21411,7 +21408,7 @@ function p3Section(p, m) {
     <div style="font-family:var(--body);line-height:1.45;color:var(--ink)">
       <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:12px;margin-bottom:12px;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:6px;">
-          <span style="font-size:11px;font-weight:700;text-transform:uppercase;color:#0284c7;letter-spacing:0.5px;">🚆 Active Major Infrastructure Pipeline</span>
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;color:#0284c7;letter-spacing:0.5px;">Active Major Infrastructure Pipeline</span>
           <span style="font-size:11px;font-weight:600;background:#e0f2fe;color:#0369a1;padding:2px 8px;border-radius:12px;">${esc(pipe.status.split('·')[0])}</span>
         </div>
         <div style="font-size:15px;font-weight:800;color:#0c4a6e;margin-bottom:4px;">${esc(pipe.title)}</div>
@@ -21419,7 +21416,7 @@ function p3Section(p, m) {
         <div style="font-size:12px;color:#475569;margin-bottom:6px;"><b>Station Focus Hub:</b> <span style="color:#0369a1;font-weight:600">${esc(pipe.hubName)}</span></div>
         <div style="font-size:12px;color:#475569;margin-bottom:10px;">${esc(pipe.corridorDesc)}</div>
         <button type="button" onclick="flyToP3Hub('${esc(pipe.fips)}')" style="display:inline-flex;align-items:center;gap:6px;background:#0284c7;color:#fff;border:none;padding:7px 13px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;box-shadow:0 2px 8px rgba(2,132,199,0.3);transition:background 0.15s;">
-          📍 Fly to Station Hub on Map &amp; View 0.5-Mi Walkshed
+          Fly to Station Hub on Map &amp; View 0.5-Mi Walkshed
         </button>
       </div>
 
@@ -21429,7 +21426,7 @@ function p3Section(p, m) {
         <div style="display:flex;flex-wrap:wrap;gap:4px;">
           ${pipe.stations.map((stn, idx) => `
             <button type="button" class="story-btn" onclick="flyToP3Hub('${esc(pipe.fips)}', ${idx})" style="padding:4px 8px;font-size:11px;" title="Focus ${esc(stn.name)}">
-              ${(stn.lat === pipe.hubLat && stn.lng === pipe.hubLng) ? '🚆' : '🚉'} ${esc(stn.name)}
+              ${(stn.lat === pipe.hubLat && stn.lng === pipe.hubLng) ? '' : ''} ${esc(stn.name)}
             </button>
           `).join('')}
         </div>
@@ -21532,12 +21529,12 @@ function p3Section(p, m) {
         </div>
         <div style="display:flex;gap:6px;margin-bottom:12px;">
           <button type="button" class="story-btn" onclick="copyP3TermSheet()" style="flex:1;background:#0284c7;color:#fff;border:none;padding:7px 12px;font-size:11.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);">
-            📋 Copy P3 Term Sheet &amp; Pro-Forma Summary
+            Copy P3 Term Sheet &amp; Pro-Forma Summary
           </button>
         </div>
 
         <details style="margin-top:8px;border:1px solid #e2e8f0;border-radius:6px;padding:8px 10px;background:#f8fafc;font-size:12px;">
-          <summary style="font-weight:700;cursor:pointer;color:#0369a1;">📊 View Detailed Capital Stack &amp; 10-Year Pro-Forma Cash Flow</summary>
+          <summary style="font-weight:700;cursor:pointer;color:#0369a1;">View Detailed Capital Stack &amp; 10-Year Pro-Forma Cash Flow</summary>
           <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e2e8f0;">
             <table style="width:100%;border-collapse:collapse;font-size:11.5px;">
               <tr><td style="padding:3px 0;color:#64748b;">Total Development Cost (TDC):</td><td style="text-align:right;font-weight:700;">${fmt$(pipe.tdc)}</td></tr>
@@ -21552,19 +21549,19 @@ function p3Section(p, m) {
         </details>
 
         <details style="margin-top:8px;border:1px solid #e2e8f0;border-radius:6px;padding:8px 10px;background:#f8fafc;font-size:12px;">
-          <summary style="font-weight:700;cursor:pointer;color:#047857;">🛠️ Best-Practice Engineering Specs &amp; Implementation Playbook</summary>
+          <summary style="font-weight:700;cursor:pointer;color:#047857;">Best-Practice Engineering Specs &amp; Implementation Playbook</summary>
           <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e2e8f0;display:flex;flex-direction:column;gap:8px;">
             <div>
-              <b style="color:#0f766e;">🚴 Rail-with-Trail Active Greenway:</b> 12-ft paved dual-direction cycleway with 2-ft decomposed granite shoulders, grade-separated rail crossings with automated pedestrian gates, and solar LED pathway lighting. Connects directly to station turnstiles with secure Bikestation lockers.
+              <b style="color:#0f766e;">Rail-with-Trail Active Greenway:</b> 12-ft paved dual-direction cycleway with 2-ft decomposed granite shoulders, grade-separated rail crossings with automated pedestrian gates, and solar LED pathway lighting. Connects directly to station turnstiles with secure Bikestation lockers.
             </div>
             <div>
-              <b style="color:#15803d;">🌳 Urban Forest Shade Tree Canopy:</b> Silva Cell suspended pavement root trenches providing 1,000 cu ft of uncompacted soil per tree to prevent root heaving and support 40+ year maturity. Reduces station walkshed ambient heat by 4.5°F–6.0°F.
+              <b style="color:#15803d;">Urban Forest Shade Tree Canopy:</b> Silva Cell suspended pavement root trenches providing 1,000 cu ft of uncompacted soil per tree to prevent root heaving and support 40+ year maturity. Reduces station walkshed ambient heat by 4.5°F–6.0°F.
             </div>
             <div>
-              <b style="color:#0284c7;">⚡ DC Fast EV Charging Depot:</b> 150kW–350kW dual-port dispensers sheltered by overhead solar PV canopy with on-site battery energy storage (BESS) to shave utility demand charges. Funded up to 80% through federal NEVI formula grants.
+              <b style="color:#0284c7;">DC Fast EV Charging Depot:</b> 150kW–350kW dual-port dispensers sheltered by overhead solar PV canopy with on-site battery energy storage (BESS) to shave utility demand charges. Funded up to 80% through federal NEVI formula grants.
             </div>
             <div>
-              <b style="color:#b45309;">🏪 Station Plaza Micro-Retail &amp; Bodega:</b> 400–1,200 sq ft modular ground-floor commercial bays anchored by a community cooperative grocery, coffee shop, and dry cleaners. Generates all-day foot traffic and non-farebox municipal revenue.
+              <b style="color:#b45309;">Station Plaza Micro-Retail &amp; Bodega:</b> 400–1,200 sq ft modular ground-floor commercial bays anchored by a community cooperative grocery, coffee shop, and dry cleaners. Generates all-day foot traffic and non-farebox municipal revenue.
             </div>
           </div>
         </details>
@@ -21708,16 +21705,16 @@ function select(id, fly) {
   let h = `<div class="eyebrow">${String(id).length === 12 ? "BLOCK GROUP" : "CENSUS TRACT"} ${esc(id)} · ${esc(p.c)} · ${fmtN(m.acres)} acres</div><h2>${esc(p.n)}</h2>
     <p class="subname">Name from ${esc(m.ns || "")}${m.csa && m.csa !== p.n && !m.county ? " · County area: " + esc(m.csa) : ""}</p>
     <div class="action-bar">
-      <button type="button" class="action-pill" onclick="copyShareLink()" title="Copy shareable link">🔗 Share</button>
-      <button type="button" class="action-pill" onclick="copyAreaSummary('${id}')" title="Copy markdown brief">📋 Copy summary</button>
-      <button type="button" class="action-pill" onclick="document.body.classList.remove('prospectus-printing'); window.print();" title="Print 1-page dossier">🖨️ Print</button>
-      <button type="button" class="action-pill${inC ? " active" : ""}" id="btn-compare-panel" onclick="toggleCompare('${id}')">${inC ? "✓ In comparison" : "⚖️ + Compare"}</button>
-      <button type="button" class="action-pill${renterViewOn ? " active" : ""}" id="btn-renter-panel" onclick="toggleRenterView()">${renterViewOn ? "👥 Renter view (on)" : "👥 Renter view"}</button>
-      <button type="button" class="action-pill" onclick="exportNeighborhoodBrief('${id}', 'csv')" title="Download CSV dataset for this block group">📊 Export CSV</button>
-      <button type="button" class="action-pill" onclick="exportNeighborhoodBrief('${id}', 'pdf')" title="Export policy brief for residents and council">📄 Export Brief (PDF)</button>
-      <button type="button" class="action-pill" onclick="openCorrection('${id}')">📝 Suggest correction</button>
+      <button type="button" class="action-pill" onclick="copyShareLink()" title="Copy shareable link"><svg class=ic aria-hidden=true><use href=#i-link /></svg> Share</button>
+      <button type="button" class="action-pill" onclick="copyAreaSummary('${id}')" title="Copy markdown brief"><svg class=ic aria-hidden=true><use href=#i-copy /></svg> Copy summary</button>
+      <button type="button" class="action-pill" onclick="document.body.classList.remove('prospectus-printing'); window.print();" title="Print 1-page dossier"><svg class=ic aria-hidden=true><use href=#i-print /></svg> Print</button>
+      <button type="button" class="action-pill${inC ? " active" : ""}" id="btn-compare-panel" onclick="toggleCompare('${id}')">${inC ? "✓ In comparison" : "<svg class=ic aria-hidden=true><use href=#i-compare /></svg> Compare"}</button>
+      <button type="button" class="action-pill${renterViewOn ? " active" : ""}" id="btn-renter-panel" onclick="toggleRenterView()">${renterViewOn ? "<svg class=ic aria-hidden=true><use href=#i-users /></svg> Renter view (on)" : "<svg class=ic aria-hidden=true><use href=#i-users /></svg> Renter view"}</button>
+      <button type="button" class="action-pill" onclick="exportNeighborhoodBrief('${id}', 'csv')" title="Download CSV dataset for this block group"><svg class=ic aria-hidden=true><use href=#i-download /></svg> Export CSV</button>
+      <button type="button" class="action-pill" onclick="exportNeighborhoodBrief('${id}', 'pdf')" title="Export policy brief for residents and council"><svg class=ic aria-hidden=true><use href=#i-file /></svg> Export brief (PDF)</button>
+      <button type="button" class="action-pill" onclick="openCorrection('${id}')"><svg class=ic aria-hidden=true><use href=#i-edit /></svg> Suggest correction</button>
     </div>`;
-  if (oc && !(D_OC && D_OC.meta && D_OC.meta.schema >= 2)) h += `<div class="prelim-banner warn"><span class="prelim-icon">⚠️</span><span><b>Orange County coverage is preliminary.</b> Home values, rents, crime, heat and project sizing here are neighborhood-level estimates assembled from public sources. They have not been checked against Census, Assessor, police or transit-schedule records the way LA County's block groups have. Read them as a sketch, not a measurement.</span></div>`;
+  if (oc && !(D_OC && D_OC.meta && D_OC.meta.schema >= 2)) h += `<div class="prelim-banner warn"><span class="prelim-icon"><svg class=ic aria-hidden=true><use href=#i-alert /></svg></span><span><b>Orange County coverage is preliminary.</b> Home values, rents, crime, heat and project sizing here are neighborhood-level estimates assembled from public sources. They have not been checked against Census, Assessor, police or transit-schedule records the way LA County's block groups have. Read them as a sketch, not a measurement.</span></div>`;
 
   h += (top && top.vpd >= 1 && D.catalog[top.id] && topRng) ? `<p class="verdict">Best bet: <b>${esc(D.catalog[top.id].name.replace(/^([A-Z])(?=[a-z])/, c => c.toLowerCase()))}</b>${/\d/.test(top.project) ? ` (${esc(top.project)})` : ""}. Expected return: <b>${topRng.estStr}</b> of home value per $1 (band ${topRng.str}, evidence ${esc(D.catalog[top.id]?.grade || "evaluated")}).</p>`
     : `<p class="verdict">Nothing here returns $1 of home value per $1 spent. The quality-of-life projects below are still worth a look.</p>`;
@@ -21730,7 +21727,7 @@ function select(id, fly) {
   if (renterShare >= 55 && (lowInc || rentBurdened) && highLift) {
     h += `<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:#92400e;line-height:1.45;">
       <div style="font-weight:800;display:flex;align-items:center;gap:6px;margin-bottom:4px;">
-        <span>⚠️</span> <span>Tenant Displacement &amp; Gentrification Risk Indicator</span>
+        <span></span> <span>Tenant Displacement &amp; Gentrification Risk Indicator</span>
       </div>
       <div>
         This block group has a high renter population (<b>${Math.round(renterShare)}% renters</b>) with significant cost burden. The recommended capital investments project a rapid <b>${topRng ? topRng.estStr : 'high'}</b> real estate valuation surge, which creates tenant displacement pressure unless paired with anti-displacement protections.
@@ -21745,7 +21742,7 @@ function select(id, fly) {
   const missingCrimeFeeds = ["Beverly Hills", "Burbank", "Glendale", "Pasadena", "Santa Monica", "Torrance", "Inglewood", "Culver City", "San Fernando", "South Pasadena"];
   if (missingCrimeFeeds.includes(p.c)) {
     h += `<div class="prelim-banner" style="background:#fef2f2;border:1px solid #fecaca;padding:8px 12px;border-radius:6px;margin:8px 0 12px;font-size:11.5px;color:#991b1b;line-height:1.4;">
-      <span>⚠️</span> <b>Municipal Crime Reporting Gap:</b> ${esc(p.c)} operates an independent municipal police department that does not transmit daily automated incident feeds to the regional LAPD/LASD CAD dispatch feed. Crime statistics displayed here reflect regional Sheriff and CHP baseline reporting; local misdemeanor and property crime may be undercounted.
+      <span></span> <b>Municipal Crime Reporting Gap:</b> ${esc(p.c)} operates an independent municipal police department that does not transmit daily automated incident feeds to the regional LAPD/LASD CAD dispatch feed. Crime statistics displayed here reflect regional Sheriff and CHP baseline reporting; local misdemeanor and property crime may be undercounted.
     </div>`;
   }
 
@@ -21800,7 +21797,7 @@ function select(id, fly) {
 
     if (renterViewOn || subPkg.displacementRiskScore > 40) {
       h += `<div style="background:#fff7ed;border:1px solid #fdba74;border-radius:6px;padding:7px 10px;margin-bottom:10px;font-size:11.5px;color:#9a3412;">
-        <b>⚠️ Renter Displacement Sensitivity Index: ${subPkg.displacementRiskScore}/100</b> · Public capital investment of this scale may trigger market rent escalation in non-rent-stabilized parcels. Pair with local tenant protections.
+        <b>Renter Displacement Sensitivity Index: ${subPkg.displacementRiskScore}/100</b> · Public capital investment of this scale may trigger market rent escalation in non-rent-stabilized parcels. Pair with local tenant protections.
       </div>`;
     }
   }
@@ -21809,16 +21806,16 @@ function select(id, fly) {
   h += `<details class="panel-sec"><summary><b>Neighborhood Plan &amp; Missing Amenities</b></summary><div class="sec-content">${gapSection(p, m)}</div></details>`;
 
   // 1. Multi-Project Synergy Simulator (Package Implementations)
-  h += `<details class="panel-sec" open><summary><b>⚡ Multi-Project Synergy Simulator (Package Implementations)</b></summary><div class="sec-content">${synergySection(p, m, recs)}</div></details>`;
+  h += `<details class="panel-sec" open><summary><b>Multi-Project Synergy Simulator (Package Implementations)</b></summary><div class="sec-content">${synergySection(p, m, recs)}</div></details>`;
 
   // 2. Specific Park Improvements & Effects
-  h += `<details class="panel-sec"><summary><b>🏞️ Specific Park Improvements &amp; Effects</b></summary><div class="sec-content">${parkImprovementsSection(m)}</div></details>`;
+  h += `<details class="panel-sec"><summary><b>Specific Park Improvements &amp; Effects</b></summary><div class="sec-content">${parkImprovementsSection(m)}</div></details>`;
 
   // 3. Geography-Specific Improvements (Coastal vs Inland Trails)
-  h += `<details class="panel-sec"><summary><b>📍 Geography-Specific Improvements (Coastal vs. Inland Trails)</b></summary><div class="sec-content">${geographicImprovementsSection(p, m)}</div></details>`;
+  h += `<details class="panel-sec"><summary><b>Geography-Specific Improvements (Coastal vs. Inland Trails)</b></summary><div class="sec-content">${geographicImprovementsSection(p, m)}</div></details>`;
 
   // 4. Public-Private Partnerships (P3) & Transit Joint Development Pipeline
-  h += `<details class="panel-sec" open><summary><b>🚆 Public-Private Partnerships (P3) &amp; Transit Corridor Pipeline</b></summary><div class="sec-content">${p3Section(p, m)}</div></details>`;
+  h += `<details class="panel-sec" open><summary><b>Public-Private Partnerships (P3) &amp; Transit Corridor Pipeline</b></summary><div class="sec-content">${p3Section(p, m)}</div></details>`;
 
   const cats = ["All", ...CATS.filter(c => val.some(r => D.catalog[r.id] && D.catalog[r.id].category === c))];
   h += `<details class="panel-sec"><summary><b>All Ranked Value Projects (${val.length})</b></summary><div class="sec-content">
@@ -22272,11 +22269,11 @@ function updateHomeCompareUI() {
   const btn = document.getElementById("btn-compare-home-dossier");
   if (btn && activeHouse && activeHouse.a) {
     const inC = homeCompareList.some(h => h.ain === activeHouse.a.AIN);
-    btn.textContent = inC ? "✓ In Home Comparison" : "⚖️ + Compare This Home";
+    btn.tnnerHTML = inC ? "✓ In home comparison" : "<svg class=ic aria-hidden=true><use href=#i-compare /></svg> Compare this home";
     btn.classList.toggle("active", inC);
   }
   const tabHomes = document.getElementById("tab-cmp-homes");
-  if (tabHomes) tabHomes.textContent = `🏠 Homes & Lots (${homeCompareList.length})`;
+  if (tabHomes) tabHomes.textContent = `Homes & Lots (${homeCompareList.length})`;
 }
 
 function switchCompareTab(tab) {
@@ -22294,7 +22291,7 @@ function updateCompareUI() {
   const pBtn = $("#btn-compare-panel");
   if (pBtn) {
     const inC = compareList.includes(selected);
-    pBtn.textContent = inC ? "✓ In comparison" : "⚖️ + Compare";
+    pBtn.innerHTML = inC ? "✓ In comparison" : "<svg class=ic aria-hidden=true><use href=#i-compare /></svg> Compare";
     pBtn.classList.toggle("active", inC);
   }
 }
@@ -22567,7 +22564,7 @@ function renderTrendsList() {
         </div>
 
         <div style="font-size:12px;color:#059669;font-weight:700;margin-bottom:6px;">
-          📈 ${esc(t.valueUplift)}
+          ${esc(t.valueUplift)}
         </div>
 
         <!-- 4-Stage Appreciation Trajectory -->
@@ -22585,7 +22582,7 @@ function renderTrendsList() {
 
       <div style="display:flex;gap:6px;">
         <button type="button" class="story-btn" onclick="focusHistoricalProject('${t.id}', ${t.lat}, ${t.lng}, '${t.fips}')" style="flex:1;font-size:11px;padding:6px;font-weight:700;background:#0284c7;color:#fff;border:none;">
-          📍 Focus Corridor on Map
+          Focus Corridor on Map
         </button>
       </div>
     </div>
@@ -22701,16 +22698,16 @@ function renderResearchCategories() {
   if (!bar) return;
   const cats = [
     { id: "All", label: `All Studies (${RESEARCH_CORPUS_500.length})` },
-    { id: "Public Art & Cultural Placemaking", label: "🎨 Public Art (55)" },
-    { id: "Urban Tree Canopy & Heat Mitigation", label: "🌳 Tree Canopy (65)" },
-    { id: "Historical Capital Projects & Tax Reinvestment", label: "📈 Historical Trends (60)" },
-    { id: "Parks, Trails & Green Infrastructure", label: "🏞️ Parks & Trails (60)" },
-    { id: "Transit-Oriented Development (TOD) & Rail", label: "🚆 Transit TOD (60)" },
-    { id: "Active Transportation & Protected Bike Networks", label: "🚲 Bike & Ped (55)" },
-    { id: "School Facility Capital Bonds & Modernization", label: "🏫 School Bonds (50)" },
-    { id: "Clean Energy, Rooftop Solar & EV Mobility", label: "☀️ Clean Energy (45)" },
-    { id: "Public Safety, Street Lighting & CPTED", label: "🛡️ Public Safety (45)" },
-    { id: "Commercial Facade Grants & Historic Preservation", label: "🏛️ Facades & Historic (45)" }
+    { id: "Public Art & Cultural Placemaking", label: "Public Art (55)" },
+    { id: "Urban Tree Canopy & Heat Mitigation", label: "Tree Canopy (65)" },
+    { id: "Historical Capital Projects & Tax Reinvestment", label: "Historical Trends (60)" },
+    { id: "Parks, Trails & Green Infrastructure", label: "Parks & Trails (60)" },
+    { id: "Transit-Oriented Development (TOD) & Rail", label: "Transit TOD (60)" },
+    { id: "Active Transportation & Protected Bike Networks", label: "Bike & Ped (55)" },
+    { id: "School Facility Capital Bonds & Modernization", label: "School Bonds (50)" },
+    { id: "Clean Energy, Rooftop Solar & EV Mobility", label: "Clean Energy (45)" },
+    { id: "Public Safety, Street Lighting & CPTED", label: "Public Safety (45)" },
+    { id: "Commercial Facade Grants & Historic Preservation", label: "Facades & Historic (45)" }
   ];
 
   bar.innerHTML = cats.map(c => `
@@ -22760,7 +22757,7 @@ function renderResearchList() {
 
   if (!filtered.length) {
     list.innerHTML = `<div style="text-align:center;padding:40px 20px;color:#64748b;">
-      <div style="font-size:24px;margin-bottom:8px;">🔍</div>
+      <div style="font-size:24px;margin-bottom:8px;"><svg class=ic style=width:28px;height:28px aria-hidden=true><use href=#i-search /></svg></div>
       <div style="font-size:14px;font-weight:700;">No empirical studies matching "${esc(activeResearchSearch)}"</div>
       <div style="font-size:12px;margin-top:4px;">Try searching for keywords like "mural", "tree", "high line", "school", "transit", "roi", or clear filters.</div>
     </div>`;
@@ -22802,7 +22799,7 @@ function renderResearchList() {
 }
 
 // ============================================================================
-// 🤖 GROUNDED AI URBAN & PROPERTY ADVISOR CONTRACT & EDGE API INTEGRATION
+// GROUNDED AI URBAN & PROPERTY ADVISOR CONTRACT & EDGE API INTEGRATION
 // ============================================================================
 
 // ---------------- AI advisor
@@ -22830,10 +22827,10 @@ function setAiStatus(s, detail) {
   const el = document.getElementById("ai-status-indicator");
   if (!el) return;
   const look = {
-    off: ["⚪ Not connected", "#f1f5f9", "#475569", "#cbd5e1", "The AI advisor has no endpoint yet (workerUrl in app/config.js)"],
+    off: ["Not connected", "#f1f5f9", "#475569", "#cbd5e1", "The AI advisor has no endpoint yet (workerUrl in app/config.js)"],
     checking: ["… Checking", "#f1f5f9", "#475569", "#cbd5e1", "Checking the advisor endpoint"],
-    ok: ["🟢 Connected", "#ecfdf5", "#059669", "#a7f3d0", "The advisor endpoint answered its health check"],
-    down: ["🔴 Unavailable", "#fef2f2", "#b91c1c", "#fecaca", "The advisor endpoint did not answer"],
+    ok: ["Connected", "#ecfdf5", "#059669", "#a7f3d0", "The advisor endpoint answered its health check"],
+    down: ["Unavailable", "#fef2f2", "#b91c1c", "#fecaca", "The advisor endpoint did not answer"],
   }[s];
   el.textContent = look[0];
   el.style.background = look[1]; el.style.color = look[2]; el.style.borderColor = look[3];
@@ -23046,7 +23043,7 @@ function renderAiChat() {
     if (msg.role === "user") return `<div style="align-self:flex-end;background:#4f46e5;color:#fff;padding:8px 12px;border-radius:12px 12px 0 12px;max-width:82%;box-shadow:0 1px 3px rgba(0,0,0,0.1);font-weight:500;">${esc(msg.text)}</div>`;
     const isAi = msg.role === "assistant";
     return `<div style="align-self:flex-start;background:${isAi ? "#fff" : "#f8fafc"};border:1px solid #e2e8f0;color:#0f172a;padding:12px 14px;border-radius:12px 12px 12px 0;max-width:92%;line-height:1.5;">
-        <div style="font-size:11px;font-weight:700;color:${isAi ? "#7c3aed" : "#475569"};margin-bottom:4px;">${isAi ? "🤖 AI advisor (can be wrong)" : "City Pretty"}</div>
+        <div style="font-size:11px;font-weight:700;color:${isAi ? "#7c3aed" : "#475569"};margin-bottom:4px;">${isAi ? "AI advisor (can be wrong)" : "City Pretty"}</div>
         ${msg.text}
       </div>`;
   }).join("");
@@ -23337,7 +23334,7 @@ function renderCountyReadinessMatrix(targetFips) {
     if (f === "06037") {
       transitAgenciesText = "19 Regional Agencies (LA Metro, Metrolink, Big Blue Bus, Long Beach Transit, Culver CityBus, Torrance, Glendale Beeline, Pasadena Transit...)";
       safetyGapsMarkup = `<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:6px;padding:8px 10px;margin-top:6px;font-size:11px;color:#991b1b;line-height:1.4;">
-        <b>⚠️ Explicit Municipal CAD Reporting Gaps:</b> Beverly Hills PD, Burbank PD, Glendale PD, Pasadena PD, Torrance PD, and Culver City PD operate independent municipal CAD systems and do not publish live Open Data incident feeds. Santa Monica PD open CAD feed ended May 2024. LAPD, LASD, and Long Beach PD are rolling 12-month feeds.
+        <b>Explicit Municipal CAD Reporting Gaps:</b> Beverly Hills PD, Burbank PD, Glendale PD, Pasadena PD, Torrance PD, and Culver City PD operate independent municipal CAD systems and do not publish live Open Data incident feeds. Santa Monica PD open CAD feed ended May 2024. LAPD, LASD, and Long Beach PD are rolling 12-month feeds.
       </div>`;
       tifRegimeText = "California EIFD (Gov. Code § 53398.50) + Auditor-Controller FY 2026-27 AF49 Modified ATI Ratios (13,392 TRAs) + Measure W Safe Clean Water Program (50% Regional / 40% Municipal)";
     } else {
@@ -23412,7 +23409,7 @@ function renderCountyReadinessMatrix(targetFips) {
       <!-- Subsystem 1: Cadastre & Assessor Roll -->
       <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-          <b style="font-size:12.5px;color:#0f172a;">🗺️ Assessor Roll &amp; Sales Comps</b>
+          <b style="font-size:12.5px;color:#0f172a;">Assessor Roll &amp; Sales Comps</b>
           <span style="font-size:10.5px;font-weight:700;color:#059669;background:#dcfce7;padding:2px 6px;border-radius:4px;">${esc(comp.assessor_roll_vintage)}</span>
         </div>
         <p class="small" style="margin:0 0 6px 0;color:#475569;line-height:1.4;">
@@ -23424,7 +23421,7 @@ function renderCountyReadinessMatrix(targetFips) {
       <!-- Subsystem 2: Statutory Zoning Engine -->
       <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-          <b style="font-size:12.5px;color:#0f172a;">⚖️ Statutory Zoning GIS</b>
+          <b style="font-size:12.5px;color:#0f172a;">Statutory Zoning GIS</b>
           <span style="font-size:10.5px;font-weight:700;color:#0284c7;background:#e0f2fe;padding:2px 6px;border-radius:4px;">${esc(comp.zoning_source.replace(/_/g, " ").toUpperCase())}</span>
         </div>
         <p class="small" style="margin:0;color:#475569;line-height:1.4;">
@@ -23435,7 +23432,7 @@ function renderCountyReadinessMatrix(targetFips) {
       <!-- Subsystem 3: Transit Network & Walksheds -->
       <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-          <b style="font-size:12.5px;color:#0f172a;">🚆 GTFS Transit &amp; Walksheds</b>
+          <b style="font-size:12.5px;color:#0f172a;">GTFS Transit &amp; Walksheds</b>
           <span style="font-size:10.5px;font-weight:700;color:#7c3aed;background:#ede9fe;padding:2px 6px;border-radius:4px;">${comp.gtfs_agencies_count} Agencies</span>
         </div>
         <p class="small" style="margin:0;color:#475569;line-height:1.4;">
@@ -23447,7 +23444,7 @@ function renderCountyReadinessMatrix(targetFips) {
       <!-- Subsystem 4: Public Safety & Municipal Reporting Gaps -->
       <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-          <b style="font-size:12.5px;color:#0f172a;">🚨 Public Safety CAD Feeds</b>
+          <b style="font-size:12.5px;color:#0f172a;">Public Safety CAD Feeds</b>
           <span style="font-size:10.5px;font-weight:700;color:${comp.crime_feed_status === 'rolling_12m' ? '#059669' : '#d97706'};background:${comp.crime_feed_status === 'rolling_12m' ? '#dcfce7' : '#fef3c7'};padding:2px 6px;border-radius:4px;">${esc(comp.crime_feed_status)}</span>
         </div>
         ${safetyGapsMarkup}
@@ -23456,7 +23453,7 @@ function renderCountyReadinessMatrix(targetFips) {
       <!-- Subsystem 5: Tax-Increment Financing & Water -->
       <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-          <b style="font-size:12.5px;color:#0f172a;">🏛️ TIF &amp; Infrastructure Regime</b>
+          <b style="font-size:12.5px;color:#0f172a;">TIF &amp; Infrastructure Regime</b>
           <span style="font-size:10.5px;font-weight:700;color:#0f172a;background:#e2e8f0;padding:2px 6px;border-radius:4px;">30-Yr Bonds</span>
         </div>
         <p class="small" style="margin:0;color:#475569;line-height:1.4;">
@@ -23467,7 +23464,7 @@ function renderCountyReadinessMatrix(targetFips) {
       <!-- Subsystem 6: Canopy & Climate Normalization -->
       <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-          <b style="font-size:12.5px;color:#0f172a;">🌲 Canopy &amp; Ecoregion Norm</b>
+          <b style="font-size:12.5px;color:#0f172a;">Canopy &amp; Ecoregion Norm</b>
           <span style="font-size:10.5px;font-weight:700;color:#059669;background:#dcfce7;padding:2px 6px;border-radius:4px;">EPA IV Baseline</span>
         </div>
         <p class="small" style="margin:0;color:#475569;line-height:1.4;">
@@ -23620,20 +23617,20 @@ function renderCompareDrawer() {
     tabHeader.id = "compare-tab-bar";
     tabHeader.style.cssText = "display:flex;gap:8px;margin-bottom:14px;border-bottom:1px solid #cbd5e1;padding-bottom:8px;";
     tabHeader.innerHTML = `
-      <button type="button" class="action-pill ${compareActiveTab === 'hoods' ? 'active' : ''}" id="tab-cmp-hoods" onclick="switchCompareTab('hoods')">🏘️ Neighborhoods (${compareList.length})</button>
-      <button type="button" class="action-pill ${compareActiveTab === 'homes' ? 'active' : ''}" id="tab-cmp-homes" onclick="switchCompareTab('homes')">🏠 Homes &amp; Lots (${homeCompareList.length})</button>
+      <button type="button" class="action-pill ${compareActiveTab === 'hoods' ? 'active' : ''}" id="tab-cmp-hoods" onclick="switchCompareTab('hoods')">Neighborhoods (${compareList.length})</button>
+      <button type="button" class="action-pill ${compareActiveTab === 'homes' ? 'active' : ''}" id="tab-cmp-homes" onclick="switchCompareTab('homes')">Homes &amp; Lots (${homeCompareList.length})</button>
     `;
     parent.insertBefore(tabHeader, box);
   } else {
     document.getElementById("tab-cmp-hoods").className = `action-pill ${compareActiveTab === 'hoods' ? 'active' : ''}`;
     document.getElementById("tab-cmp-homes").className = `action-pill ${compareActiveTab === 'homes' ? 'active' : ''}`;
-    document.getElementById("tab-cmp-hoods").textContent = `🏘️ Neighborhoods (${compareList.length})`;
-    document.getElementById("tab-cmp-homes").textContent = `🏠 Homes & Lots (${homeCompareList.length})`;
+    document.getElementById("tab-cmp-hoods").textContent = `Neighborhoods (${compareList.length})`;
+    document.getElementById("tab-cmp-homes").textContent = `Homes & Lots (${homeCompareList.length})`;
   }
 
   if (compareActiveTab === "homes") {
     if (!homeCompareList.length) {
-      box.innerHTML = `<p class="empty" style="padding:20px;text-align:center;">No homes selected. Click <b>"⚖️ + Compare This Home"</b> on any property dossier to compare investment returns side-by-side.</p>`;
+      box.innerHTML = `<p class="empty" style="padding:20px;text-align:center;">No homes selected. Click <b>"+ Compare This Home"</b> on any property dossier to compare investment returns side-by-side.</p>`;
       return;
     }
     box.innerHTML = homeCompareList.map(h => {
@@ -24599,7 +24596,7 @@ async function init() {
   map.on("mouseout", () => { clearTimeout(hoverTimer); });
   map.on("moveend", () => { drawStreets(); drawLabels(); drawZoning(); drawFacilities(); drawAmenities(); drawUnder(); drawProjects(); if (typeof scheduleNatLots === 'function' && $('#l-lots') && $('#l-lots').checked && map.getZoom() >= 15) scheduleNatLots(); });
   L.control.scale({ imperial: true, metric: false, maxWidth: 140, position: "bottomleft" }).addTo(map);
-  const Loc = L.Control.extend({ options: { position: "topleft" }, onAdd() { const b = L.DomUtil.create("button", "locate"); b.type = "button"; b.textContent = "📍 Find me";
+  const Loc = L.Control.extend({ options: { position: "topleft" }, onAdd() { const b = L.DomUtil.create("button", "locate"); b.type = "button"; b.innerHTML = "<svg class=ic aria-hidden=true><use href=#i-locate /></svg> Find me";
     b.title = "Center the map on where you are and open your block group"; L.DomEvent.disableClickPropagation(b); b.onclick = () => locateMe(b); return b; } });
   new Loc().addTo(map);
   performance.mark("init:wired"); map.fitBounds(L.geoJSON(D.bgs).getBounds(), { animate: false }); performance.mark("init:fit");
@@ -24643,7 +24640,13 @@ async function init() {
     }); }
   { const q = $("#q"); if (q) q.addEventListener("focus", () => ensureOrangeCounty(), { once: true }); }
   { const b = $("#btn-mobile-opts"), hdr = document.querySelector("header.top");   // phones: show or hide the folded controls
-    if (b && hdr) b.addEventListener("click", () => { const open = hdr.classList.toggle("opts-open"); b.setAttribute("aria-expanded", open); b.textContent = open ? "Hide map options ▴" : "Map options and tools ▾"; }); }
+    if (b && hdr) b.addEventListener("click", () => { const open = hdr.classList.toggle("opts-open"); b.setAttribute("aria-expanded", open); b.textContent = open ? "Hide map options" : "Map options and tools"; }); }
+  // Header menus close when you pick an item, click elsewhere or press Escape
+  document.addEventListener("click", e => document.querySelectorAll("header.top details[open]").forEach(d => {
+    if (!d.contains(e.target) || (d.id === "tools-menu" && e.target.closest(".menu-item"))) d.open = false; }));
+  document.addEventListener("keydown", e => { if (e.key === "Escape") document.querySelectorAll("header.top details[open]").forEach(d => { d.open = false; }); });
+  document.querySelectorAll("header.top details.menu").forEach(d => d.addEventListener("toggle", () => {
+    if (d.open) document.querySelectorAll("header.top details.menu[open]").forEach(o => { if (o !== d) o.open = false; }); }));
   matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => { drawContext(); restyle(); });
 }
 
@@ -24759,13 +24762,13 @@ function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R, valCheck, valLow, va
 
       <div style="display:flex;gap:5px;margin-bottom:8px;flex-wrap:wrap">
         <a href="${svUrl}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;background:#087b78;color:#fff;padding:5px 9px;border-radius:4px;text-decoration:none;font-weight:700;font-size:11px" title="Open Street View">
-          🚀 360° Street View ↗
+          <svg class=ic aria-hidden=true><use href=#i-camera /></svg> Street View ↗
         </a>
         <a href="${earthUrl}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;background:#f1f5f9;border:1px solid #cbd5e1;color:#0f172a;padding:5px 9px;border-radius:4px;text-decoration:none;font-weight:600;font-size:11px">
-          🌍 3D Earth ↗
+          <svg class=ic aria-hidden=true><use href=#i-globe /></svg> 3D Earth ↗
         </a>
         <button type="button" onclick="window.print()" style="display:inline-flex;align-items:center;background:#0f172a;color:#fff;border:none;padding:5px 9px;border-radius:4px;cursor:pointer;font-weight:600;font-size:11px">
-          🖨️ Print Memo
+          <svg class=ic aria-hidden=true><use href=#i-print /></svg> Print memo
         </button>
       </div>
 
@@ -24778,16 +24781,16 @@ function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R, valCheck, valLow, va
         </div>
         <div style="display:flex;gap:4px;margin-top:4px;margin-bottom:4px;flex-wrap:wrap;">
           <a href="https://www.zillow.com/homes/${encodeURIComponent((addr + ' ' + (city || '') + ' ' + (activeState() || '')).trim())}_rb/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;background:#006aff;color:#fff;padding:3px 7px;border-radius:4px;text-decoration:none;font-weight:700;font-size:10px" title="Cross-check with live Zillow Zestimate">
-            🏠 Zillow Zestimate ↗
+            Zillow Zestimate ↗
           </a>
           <a href="https://www.redfin.com/stingray/do/query-location?location=${encodeURIComponent((addr + ' ' + (city || '') + ' ' + (activeState() || '')).trim())}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;background:#a02021;color:#fff;padding:3px 7px;border-radius:4px;text-decoration:none;font-weight:700;font-size:10px" title="Cross-check with Redfin Estimate">
-            🏠 Redfin ↗
+            Redfin ↗
           </a>
           <a href="https://www.realtor.com/realestateandhomes-search/${encodeURIComponent((addr + ' ' + (city || '') + ' ' + (activeState() || '')).trim().replace(/\s+/g, '-'))}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;background:#d92228;color:#fff;padding:3px 7px;border-radius:4px;text-decoration:none;font-weight:700;font-size:10px" title="Cross-check on Realtor.com">
-            🏠 Realtor.com ↗
+            Realtor.com ↗
           </a>
           <a href="https://www.google.com/search?q=${encodeURIComponent((addr + ' ' + (city || '') + ' ' + (activeState() || '')).trim() + ' zillow zestimate')}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;background:#1e293b;color:#fff;padding:3px 7px;border-radius:4px;text-decoration:none;font-weight:700;font-size:10px" title="Search live MLS comps on Google">
-            🔍 Google Comps ↗
+            Google Comps ↗
           </a>
         </div>
         ${rollVal > 0 ? `<div style="display:flex;justify-content:space-between;margin-bottom:3px"><span><b>Assessor Roll Value:</b></span><span>${fmt$(rollVal)}</span></div>` : ""}
@@ -24798,15 +24801,15 @@ function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R, valCheck, valLow, va
       </div>
 
       <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:6px;padding:6px 8px;margin-bottom:6px;font-size:11.5px">
-        <div style="font-weight:700;color:#166534;margin-bottom:2px">🏛️ Zoning &amp; State Housing Rights</div>
+        <div style="font-weight:700;color:#166534;margin-bottom:2px">Zoning &amp; State Housing Rights</div>
         ${zoneLine}
         <div style="font-size:11px;color:#166534;margin-top:2px">${reformHeadline}</div>
       </div>
 
       <div style="font-size:11px;color:#334155;margin-bottom:4px">
-        <div>🌊 <b>FEMA Flood:</b> ${esc(floodText)}</div>
-        <div>🔥 <b>Wildfire Risk:</b> ${esc(fireText)}</div>
-        <div>🏫 <b>Nearest Facilities:</b> ${[nearestSch != null && `School ${nearestSch} mi`, nearestPark != null && `Park ${nearestPark} mi`, nearestLib != null && `Library ${nearestLib} mi`].filter(Boolean).join(" · ") || "not in this county's data"}</div>
+        <div><b>FEMA Flood:</b> ${esc(floodText)}</div>
+        <div><b>Wildfire Risk:</b> ${esc(fireText)}</div>
+        <div><b>Nearest Facilities:</b> ${[nearestSch != null && `School ${nearestSch} mi`, nearestPark != null && `Park ${nearestPark} mi`, nearestLib != null && `Library ${nearestLib} mi`].filter(Boolean).join(" · ") || "not in this county's data"}</div>
       </div>
     </div>
   `;
