@@ -129,7 +129,10 @@ bundle is rebuilt.
 
 ### Not yet audited (treat as unverified)
 
-- `details-la.json` (LA's per-block-group recommendation rows; audited for money fields, round 2), `overlays-la.json`.
+- `details-la.json` (LA's per-block-group recommendation rows; audited for money fields, round 2).
+- `overlays-la.json` (map snapshot of historic, hillside, landslide, liquefaction, fault and fire-hazard zones): spot
+  check 16 Nov found all 36 of LA City's live Historic Preservation Overlay Zones present by name. The other layers
+  were not re-checked. Per-house historic and monument checks query LA's live services, not this snapshot.
 - Most cost documents behind the catalog (LA agency sites block automated access).
 - The rest of each county file (Census, OSM, GTFS layers) was built by the pipeline from the public sources listed in
   the file; it was not re-checked value by value.
