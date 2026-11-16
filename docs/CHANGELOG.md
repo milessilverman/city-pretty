@@ -58,6 +58,26 @@ All notable changes to the data pipelines, empirical estimates, statutory engine
 ### 8. Public Agency Construction Unit Costs (`app/data/unit_costs.json`)
 - Structured verified construction bid items from `research/unit_costs.csv` into `app/data/unit_costs.json`.
 - Covers confirmed contract pay items from TxDOT, FDOT, Gwinnett County DOT, NCDOT, CDOT, MnDOT, TDOT, and municipal bid tabs with unit prices, bid documents, quotes, and contract links.
+
+### 9. HUD Fair Market Rents (`app/data/hud_fair_market_rents.json`)
+- Integrated verified HUD Fair Market Rents (FMR / SAFMR) across metropolitan counties for FY2026.
+- Eliminated hardcoded `$2,400` / `$3.4/sqft` rental fallbacks in property prospectuses and investment playbooks; unindexed jurisdictions strictly display "Not on file" or `null`.
+
+### 10. Valuation Back-Testing Engine & Error Withholding (`src/engines/valuationBacktestEngine.ts`, `app/data/valuation_backtest_benchmarks.json`)
+- Built valuation back-testing engine per Roadmap P1 Item 8.
+- Validates the Automated Valuation Model (AVM) against recorded arm's-length sales across benchmark counties (Los Angeles County, King County WA, Harris County TX, Hillsborough County FL, Cook County IL).
+- Calculates Median Absolute Percentage Error (MdAPE), MAPE, signed median bias, and shares within 5%, 10%, and 20%.
+- Enforces strict withholding thresholds (`status: "withhold"`): where MdAPE exceeds 14.0% or sample size is below 5 transactions, `valuationCheck()` withholds the valuation estimate and warns that error bounds exceed acceptable tolerance.
+
+### 11. Underused Land & Golf Course Conversion Engine (`src/engines/underusedLandEngine.ts`, `app/data/underused_sites.json`)
+- Built underused land conversion engine per Roadmap P2 Item 16.
+- Curated 90 verified underused sites (golf courses, surface parking lots, vacant parcels, lightly built commercial) with acreage, zoning, distance to rail, public/private ownership, and conversion margins.
+- Implemented edge-development evaluation for golf courses: models dedicating 88% as permanent public municipal park/greenway while developing 12% perimeter for mixed-income housing, computing net margin, unit counts, and Quimby Act credits.
+- Implemented surface parking lot conversion modeling zero vehicular parking minimums under AB 2097 and by-right transit density under SB 79.
+
+### 12. Austin HOME Initiative & Texas ADU Statutes (`app/data/state-housing-laws.json`, `app/data/statutes.json`)
+- Cataloged Austin HOME initiative (Phase 1 & 2, Ord. 20231207-001 & 20240516-004) authorizing up to 3 units per lot by-right, reducing minimum lot size to 1,500 sq ft, and eliminating parking mandates.
+- Cataloged Texas ADU framework (Tex. Loc. Gov't Code § 214.909 / SB 1412) curbing municipal casita prohibitions.
 - Items lacking verified public awards are strictly marked `status: "not_found"` with `unit_price: null`.
 
 ### 9. AI Advisor Grounding Contract (`src/ai/advisorGroundingContract.ts`)

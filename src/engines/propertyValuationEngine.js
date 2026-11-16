@@ -466,20 +466,20 @@ function estimatePropertyMarketValue(params) {
 
   // Determine empirical confidence interval & precision tier
   let confMarginPct = 0.065; // ±6.5% standard
-  let confidenceRating = isVacantLand ? "⭐⭐⭐ High Confidence (Vacant Land Appraisal Model)" : "⭐⭐⭐ Good Precision (Hedonic & Assessment Grounded)";
+  let confidenceRating = isVacantLand ? "High Confidence (Vacant Land Appraisal Model)" : "Good Precision (Hedonic & Assessment Grounded)";
 
   if (saleCompEst && assessorMarketEst) {
     const divergence = Math.abs(saleCompEst - assessorMarketEst) / Math.max(saleCompEst, assessorMarketEst);
     if (divergence <= 0.08) {
       confMarginPct = 0.038; // ±3.8% high-precision institutional agreement
-      confidenceRating = "⭐⭐⭐⭐ High Precision (Dual-Source Sales & Assessor Agreement)";
+      confidenceRating = "High Precision (Dual-Source Sales & Assessor Agreement)";
     } else {
       confMarginPct = 0.050; // ±5.0%
-      confidenceRating = "⭐⭐⭐ High Confidence (Multi-Model Synthesis)";
+      confidenceRating = "High Confidence (Multi-Model Synthesis)";
     }
   } else if (!saleCompEst && !assessorMarketEst) {
     confMarginPct = 0.078; // ±7.8% purely hedonic screening
-    confidenceRating = isVacantLand ? "⭐⭐⭐ High Confidence (Vacant Infill Land Appraisal)" : "⭐⭐ Preliminary Screening (Census Block-Group Grounded)";
+    confidenceRating = isVacantLand ? "High Confidence (Vacant Infill Land Appraisal)" : "Preliminary Screening (Census Block-Group Grounded)";
   }
 
   const valueLow = Math.round((estimatedValue * (1 - confMarginPct)) / 1000) * 1000;

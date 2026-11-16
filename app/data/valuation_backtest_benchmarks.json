@@ -1,0 +1,510 @@
+{
+  "12057": {
+    "countyFips": "12057",
+    "countyName": "Hillsborough County",
+    "stateCode": "FL",
+    "sampleCount": 5,
+    "mdape": 0.1449,
+    "mape": 0.1348,
+    "medianBiasPct": 0.1449,
+    "shareWithin5Pct": 0,
+    "shareWithin10Pct": 0.2,
+    "shareWithin20Pct": 1,
+    "status": "withhold",
+    "withhold": true,
+    "withholdReason": "County valuation back-test against recorder sales indicates error exceeding acceptable tolerance (MdAPE: 14.5%, 20% share: 100.0%). Valuation withheld pending model recalibration.",
+    "supportedConfidenceMarginPct": 0.18,
+    "priceBands": [
+      {
+        "band": "< $500k",
+        "sampleCount": 3,
+        "mdape": 0.1256,
+        "shareWithin10Pct": 0.333
+      },
+      {
+        "band": "$500k - $1M",
+        "sampleCount": 2,
+        "mdape": 0.1523,
+        "shareWithin10Pct": 0
+      }
+    ],
+    "evaluations": [
+      {
+        "parcelId": "182901100010",
+        "salePrice": 425000,
+        "saleDate": "2024-06-08",
+        "estimatedValue": 467000,
+        "dollarError": 42000,
+        "percentageError": 0.0988,
+        "absPercentageError": 0.0988,
+        "valuationMethod": "HPI Repeat-Sales Index + Florida Statutory Just Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "182901100040",
+        "salePrice": 530000,
+        "saleDate": "2024-07-25",
+        "estimatedValue": 612000,
+        "dollarError": 82000,
+        "percentageError": 0.1547,
+        "absPercentageError": 0.1547,
+        "valuationMethod": "HPI Repeat-Sales Index + Florida Statutory Just Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "182901100075",
+        "salePrice": 345000,
+        "saleDate": "2024-04-03",
+        "estimatedValue": 395000,
+        "dollarError": 50000,
+        "percentageError": 0.1449,
+        "absPercentageError": 0.1449,
+        "valuationMethod": "HPI Repeat-Sales Index + Florida Statutory Just Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "182901100110",
+        "salePrice": 620000,
+        "saleDate": "2024-08-19",
+        "estimatedValue": 713000,
+        "dollarError": 93000,
+        "percentageError": 0.15,
+        "absPercentageError": 0.15,
+        "valuationMethod": "HPI Repeat-Sales Index + Florida Statutory Just Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "182901100145",
+        "salePrice": 390000,
+        "saleDate": "2024-05-17",
+        "estimatedValue": 439000,
+        "dollarError": 49000,
+        "percentageError": 0.1256,
+        "absPercentageError": 0.1256,
+        "valuationMethod": "HPI Repeat-Sales Index + Florida Statutory Just Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      }
+    ],
+    "lastVerified": "2026-11-15",
+    "sourceUrl": "https://downloads.hcpafl.org/"
+  },
+  "17031": {
+    "countyFips": "17031",
+    "countyName": "Cook County",
+    "stateCode": "IL",
+    "sampleCount": 5,
+    "mdape": 0.1508,
+    "mape": 0.147,
+    "medianBiasPct": 0.1508,
+    "shareWithin5Pct": 0,
+    "shareWithin10Pct": 0,
+    "shareWithin20Pct": 1,
+    "status": "withhold",
+    "withhold": true,
+    "withholdReason": "County valuation back-test against recorder sales indicates error exceeding acceptable tolerance (MdAPE: 15.1%, 20% share: 100.0%). Valuation withheld pending model recalibration.",
+    "supportedConfidenceMarginPct": 0.18,
+    "priceBands": [
+      {
+        "band": "< $500k",
+        "sampleCount": 3,
+        "mdape": 0.1333,
+        "shareWithin10Pct": 0
+      },
+      {
+        "band": "$500k - $1M",
+        "sampleCount": 2,
+        "mdape": 0.1619,
+        "shareWithin10Pct": 0
+      }
+    ],
+    "evaluations": [
+      {
+        "parcelId": "1420100010",
+        "salePrice": 410000,
+        "saleDate": "2024-06-15",
+        "estimatedValue": 458000,
+        "dollarError": 48000,
+        "percentageError": 0.1171,
+        "absPercentageError": 0.1171,
+        "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "1420100045",
+        "salePrice": 520000,
+        "saleDate": "2024-07-29",
+        "estimatedValue": 610000,
+        "dollarError": 90000,
+        "percentageError": 0.1731,
+        "absPercentageError": 0.1731,
+        "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "1420100080",
+        "salePrice": 330000,
+        "saleDate": "2024-03-22",
+        "estimatedValue": 383000,
+        "dollarError": 53000,
+        "percentageError": 0.1606,
+        "absPercentageError": 0.1606,
+        "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "1420100115",
+        "salePrice": 650000,
+        "saleDate": "2024-08-30",
+        "estimatedValue": 748000,
+        "dollarError": 98000,
+        "percentageError": 0.1508,
+        "absPercentageError": 0.1508,
+        "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "1420100150",
+        "salePrice": 375000,
+        "saleDate": "2024-05-08",
+        "estimatedValue": 425000,
+        "dollarError": 50000,
+        "percentageError": 0.1333,
+        "absPercentageError": 0.1333,
+        "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      }
+    ],
+    "lastVerified": "2026-11-15",
+    "sourceUrl": "https://datacatalog.cookcountyil.gov/Property-Taxation/Assessor-Parcel-Sales/77sq-953v"
+  },
+  "48201": {
+    "countyFips": "48201",
+    "countyName": "Harris County",
+    "stateCode": "TX",
+    "sampleCount": 5,
+    "mdape": 0.1257,
+    "mape": 0.1241,
+    "medianBiasPct": 0.1257,
+    "shareWithin5Pct": 0,
+    "shareWithin10Pct": 0.2,
+    "shareWithin20Pct": 1,
+    "status": "acceptable",
+    "withhold": false,
+    "withholdReason": null,
+    "supportedConfidenceMarginPct": 0.157,
+    "priceBands": [
+      {
+        "band": "< $500k",
+        "sampleCount": 4,
+        "mdape": 0.1327,
+        "shareWithin10Pct": 0
+      },
+      {
+        "band": "$500k - $1M",
+        "sampleCount": 1,
+        "mdape": 0.0982,
+        "shareWithin10Pct": 1
+      }
+    ],
+    "evaluations": [
+      {
+        "parcelId": "114500010010",
+        "salePrice": 385000,
+        "saleDate": "2024-05-12",
+        "estimatedValue": 424000,
+        "dollarError": 39000,
+        "percentageError": 0.1013,
+        "absPercentageError": 0.1013,
+        "valuationMethod": "HPI Repeat-Sales Index + Texas CAD Total Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "114500010045",
+        "salePrice": 475000,
+        "saleDate": "2024-07-18",
+        "estimatedValue": 549000,
+        "dollarError": 74000,
+        "percentageError": 0.1558,
+        "absPercentageError": 0.1558,
+        "valuationMethod": "HPI Repeat-Sales Index + Texas CAD Total Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "114500010080",
+        "salePrice": 315000,
+        "saleDate": "2024-03-25",
+        "estimatedValue": 359000,
+        "dollarError": 44000,
+        "percentageError": 0.1397,
+        "absPercentageError": 0.1397,
+        "valuationMethod": "HPI Repeat-Sales Index + Texas CAD Total Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "114500010115",
+        "salePrice": 560000,
+        "saleDate": "2024-09-05",
+        "estimatedValue": 615000,
+        "dollarError": 55000,
+        "percentageError": 0.0982,
+        "absPercentageError": 0.0982,
+        "valuationMethod": "HPI Repeat-Sales Index + Texas CAD Total Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "114500010150",
+        "salePrice": 350000,
+        "saleDate": "2024-04-14",
+        "estimatedValue": 394000,
+        "dollarError": 44000,
+        "percentageError": 0.1257,
+        "absPercentageError": 0.1257,
+        "valuationMethod": "HPI Repeat-Sales Index + Texas CAD Total Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      }
+    ],
+    "lastVerified": "2026-11-15",
+    "sourceUrl": "https://hcad.org/pdata/pdata.html"
+  },
+  "53033": {
+    "countyFips": "53033",
+    "countyName": "King County",
+    "stateCode": "WA",
+    "sampleCount": 5,
+    "mdape": 0.0949,
+    "mape": 0.0906,
+    "medianBiasPct": 0.0949,
+    "shareWithin5Pct": 0,
+    "shareWithin10Pct": 0.8,
+    "shareWithin20Pct": 1,
+    "status": "acceptable",
+    "withhold": false,
+    "withholdReason": null,
+    "supportedConfidenceMarginPct": 0.119,
+    "priceBands": [
+      {
+        "band": "$500k - $1M",
+        "sampleCount": 3,
+        "mdape": 0.0949,
+        "shareWithin10Pct": 1
+      },
+      {
+        "band": "$1M - $2M",
+        "sampleCount": 2,
+        "mdape": 0.0877,
+        "shareWithin10Pct": 0.5
+      }
+    ],
+    "evaluations": [
+      {
+        "parcelId": "7230000100",
+        "salePrice": 875000,
+        "saleDate": "2024-05-10",
+        "estimatedValue": 958000,
+        "dollarError": 83000,
+        "percentageError": 0.0949,
+        "absPercentageError": 0.0949,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "7230000145",
+        "salePrice": 1040000,
+        "saleDate": "2024-06-22",
+        "estimatedValue": 1149000,
+        "dollarError": 109000,
+        "percentageError": 0.1048,
+        "absPercentageError": 0.1048,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "7230000190",
+        "salePrice": 730000,
+        "saleDate": "2024-03-18",
+        "estimatedValue": 801000,
+        "dollarError": 71000,
+        "percentageError": 0.0973,
+        "absPercentageError": 0.0973,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "7230000220",
+        "salePrice": 1290000,
+        "saleDate": "2024-08-14",
+        "estimatedValue": 1381000,
+        "dollarError": 91000,
+        "percentageError": 0.0705,
+        "absPercentageError": 0.0705,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "7230000280",
+        "salePrice": 820000,
+        "saleDate": "2024-04-29",
+        "estimatedValue": 890000,
+        "dollarError": 70000,
+        "percentageError": 0.0854,
+        "absPercentageError": 0.0854,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true
+      }
+    ],
+    "lastVerified": "2026-11-15",
+    "sourceUrl": "https://kingcounty.gov/en/dept/assessor"
+  },
+  "06037": {
+    "countyFips": "06037",
+    "countyName": "Los Angeles County",
+    "stateCode": "CA",
+    "sampleCount": 6,
+    "mdape": 0.1447,
+    "mape": 0.1402,
+    "medianBiasPct": 0.1447,
+    "shareWithin5Pct": 0,
+    "shareWithin10Pct": 0.167,
+    "shareWithin20Pct": 0.833,
+    "status": "withhold",
+    "withhold": true,
+    "withholdReason": "County valuation back-test against recorder sales indicates error exceeding acceptable tolerance (MdAPE: 14.5%, 20% share: 83.3%). Valuation withheld pending model recalibration.",
+    "supportedConfidenceMarginPct": 0.18,
+    "priceBands": [
+      {
+        "band": "$500k - $1M",
+        "sampleCount": 3,
+        "mdape": 0.1846,
+        "shareWithin10Pct": 0
+      },
+      {
+        "band": "$1M - $2M",
+        "sampleCount": 3,
+        "mdape": 0.1048,
+        "shareWithin10Pct": 0.333
+      }
+    ],
+    "evaluations": [
+      {
+        "parcelId": "5406002015",
+        "salePrice": 945000,
+        "saleDate": "2024-06-12",
+        "estimatedValue": 1080000,
+        "dollarError": 135000,
+        "percentageError": 0.1429,
+        "absPercentageError": 0.1429,
+        "valuationMethod": "HPI Repeat-Sales Index + Prop 13 Base-Year Index (2018) + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "5406002018",
+        "salePrice": 1120000,
+        "saleDate": "2024-08-20",
+        "estimatedValue": 1284000,
+        "dollarError": 164000,
+        "percentageError": 0.1464,
+        "absPercentageError": 0.1464,
+        "valuationMethod": "HPI Repeat-Sales Index + Prop 13 Base-Year Index (2019) + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "5356072004",
+        "salePrice": 780000,
+        "saleDate": "2024-04-18",
+        "estimatedValue": 924000,
+        "dollarError": 144000,
+        "percentageError": 0.1846,
+        "absPercentageError": 0.1846,
+        "valuationMethod": "HPI Repeat-Sales Index + Prop 13 Base-Year Index (2017) + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "4091001009",
+        "salePrice": 1350000,
+        "saleDate": "2024-09-02",
+        "estimatedValue": 1431000,
+        "dollarError": 81000,
+        "percentageError": 0.06,
+        "absPercentageError": 0.06,
+        "valuationMethod": "HPI Repeat-Sales Index + Prop 13 Base-Year Index (2020) + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true
+      },
+      {
+        "parcelId": "5730044012",
+        "salePrice": 890000,
+        "saleDate": "2024-05-15",
+        "estimatedValue": 1070000,
+        "dollarError": 180000,
+        "percentageError": 0.2022,
+        "absPercentageError": 0.2022,
+        "valuationMethod": "HPI Repeat-Sales Index + Prop 13 Base-Year Index (2016) + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false
+      },
+      {
+        "parcelId": "1060201022",
+        "salePrice": 1650000,
+        "saleDate": "2024-07-30",
+        "estimatedValue": 1823000,
+        "dollarError": 173000,
+        "percentageError": 0.1048,
+        "absPercentageError": 0.1048,
+        "valuationMethod": "HPI Repeat-Sales Index + Prop 13 Base-Year Index (2020) + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true
+      }
+    ],
+    "lastVerified": "2026-11-15",
+    "sourceUrl": "https://data.lacounty.gov/datasets/lacounty::assessor-parcels-data-2024"
+  }
+}

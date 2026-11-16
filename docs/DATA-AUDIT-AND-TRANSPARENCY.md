@@ -34,14 +34,14 @@ The table below indicates the current verification status of every major data su
 | Subsystem | Underlying Files | Current Status | % Verified | Primary Public Source | Known Gaps / Limitations |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Research Study Library** | `app/data/research.json` | **VERIFIED** | 100% (52/52) | Peer-reviewed journals, NBER, TRB, USDA | Limited to 52 studies; expanding to 200+ ongoing. |
-| **State Housing Laws** | `app/data/statutes.json` | **VERIFIED** | 100% (9/9) | State legislature legislative portals | Covers CA, TX, FL, WA, OR, AZ; other states in development. |
+| **State Housing Laws** | `app/data/statutes.json` | **VERIFIED** | 100% (11/11) | State legislature legislative portals | Covers CA, TX (including Austin HOME), FL, WA, OR, AZ; other states in development. |
 | **Municipal Funding Programs** | `app/data/funding_programs.json` | **VERIFIED** | 100% (4/4) | LA County SCW, LA City Prop K, CalEPA, CAL FIRE | Currently covers CA jurisdictions; expanding nationally. |
 | **State Finance Profiles** | `app/data/state_finance_profiles.json` | **VERIFIED** | 100% (52/52) | State Revenue Codes, Statutes, Constitutions | General state rules; county-specific millage requires local lookups. |
 | **Construction Unit Costs** | `app/data/unit_costs.json` | **PARTIAL** | 75% confirmed | State DOT monthly estimate reports, bid tabulations | Standardized per-mile bike lane & bioswale unit contracts still unconfirmed. |
+| **HUD Fair Market Rents (FMR)** | `app/data/hud_fair_market_rents.json` | **VERIFIED** | 100% (10 metros) | HUD User FY2026 SAFMR Dataset | Official FY2026 1BR/2BR benchmarks; unrecorded metros state 'Not on file'. |
 | **FTA Transit Corridors** | `app/data/transit_pipelines.json` | **VERIFIED** | 100% of kept | FTA CIG Profiles, Regional Transit Authorities | Unadopted financing metrics strictly omitted (`null`). |
-| **Parcel Boundaries (Lot Lines)** | ArcGIS REST endpoints | **VERIFIED** | ~85% of parcels | County Assessor & State GIS Parcel Services | Texas, NH, and PA require CAMA tabular joins for tax values. |
-| **Assessor Valuations** | County Assessor Rolls | **VERIFIED** | ~90% where live | 2024–2026 County Secured Tax Rolls | Lag varies by county (annual vs triennial revaluations). |
-| **Automated Valuation Model (AVM)** | `propertyValuationEngine.ts` | **ESTIMATED** | Heuristic model | Assessor ratio + HPI roll-forward | Screening estimate only; back-testing against recorder sales in progress. |
+| **Underused Land Inventory** | `app/data/underused_sites.json` | **VERIFIED** | 100% (90 sites) | County Assessor & SCAG GIS Parcels | Curated golf courses, parking lots, and vacant parcels with verified acreage, transit distance, and zoning. |
+| **Automated Valuation Model (AVM)** | `propertyValuationEngine.ts`, `valuationBacktestEngine.ts` | **BACK-TESTED** | Benchmark validated | County recorder sales (LA, King, Cook, Harris, Hillsborough) | Screened against arm's-length recorder sales; strictly withheld when MdAPE exceeds 14.0%. |
 | **Hedonic ROI Spreads** | `app/app.js`, county bundles | **ESTIMATED** | Statistical model | Academic literature effect sizes | Bands use statistical standard errors; local validation in progress. |
 | **Crime Statistics** | County bundle feeds | **PARTIAL** | 60% of counties | FBI CDE, Open Data Portals | 17 states lack statewide geocoded non-fatal crash/crime feeds. |
 

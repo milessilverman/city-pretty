@@ -8,7 +8,8 @@ const CP_DATA_FILES = {
   "sites-data": "sites-la.b64.txt", "la-crash-counts": "la-crash-counts.json", "bundle-oc": "bundle-oc.b64.txt",
   "research": "research.json", "statutes": "statutes.json", "state-housing-laws": "state-housing-laws.json",
   "funding-programs": "funding_programs.json", "case-studies": "case_studies.json", "transit-pipelines": "transit_pipelines.json",
-  "state-finance-profiles": "state_finance_profiles.json", "unit-costs": "unit_costs.json", "hud-fmr": "hud_fair_market_rents.json"
+  "state-finance-profiles": "state_finance_profiles.json", "unit-costs": "unit_costs.json", "hud-fmr": "hud_fair_market_rents.json",
+  "valuation-benchmarks": "valuation_backtest_benchmarks.json", "underused-sites": "underused_sites.json"
 };
 const _cpData = {};
 function cpText(id) {
@@ -36,6 +37,8 @@ let STATE_HOUSING_LAWS_DATA = [];
 let FUNDING_PROGRAMS_DATA = [];
 let UNIT_COSTS_DATA = [];
 let HUD_FMR_DATA = [];
+let VALUATION_BACKTEST_BENCHMARKS = {};
+let UNDERUSED_SITES_DATA = [];
 
 const DEFAULT_CA_PROFILE = {
   state_code: "CA",
@@ -72,6 +75,8 @@ function loadVerifiedDataFiles() {
   });
   cpJson("unit-costs").then(d => { if (Array.isArray(d)) UNIT_COSTS_DATA = d; });
   cpJson("hud-fmr").then(d => { if (Array.isArray(d)) HUD_FMR_DATA = d; });
+  cpJson("valuation-benchmarks").then(d => { if (d && typeof d === "object") VALUATION_BACKTEST_BENCHMARKS = d; });
+  cpJson("underused-sites").then(d => { if (Array.isArray(d)) UNDERUSED_SITES_DATA = d; });
 }
 if (typeof window !== "undefined") {
   loadVerifiedDataFiles();
@@ -17227,7 +17232,8 @@ function copyPlaybookMemo(title, equity, roi, statute, address, apn) {
 
 // The home-value model is built for houses, condos and small apartment buildings. It must not print a number for
 // the White House, a stadium or a 900-acre farm, and it must not contradict the assessor by a wide margin.
-function valuationCheck(a, lot, est) {
+// ACCURACY-ROADMAP.md Item 8: withholds estimates if statistical back-testing in the county exceeds error tolerance.
+function valuationCheck(a, lot, est, options) {
   a = a || {};
   const roll = ((+a.Roll_LandValue || 0) + (+a.Roll_ImpValue || 0)) || (+a.Roll_TotalValue || 0);
   const acres = lot ? lot / 43560 : (+a.Acres || 0);
@@ -17238,6 +17244,16 @@ function valuationCheck(a, lot, est) {
   if (roll >= 20e6) return { ok: false, roll, reason: `The assessor values this lot at ${fmt$(roll)}, far beyond the homes the model is built from.` };
   if (acres >= 10 && !isRes) return { ok: false, roll, reason: `The lot is ${Math.round(acres)} acres with no recorded residential use.` };
   if (est > 0 && roll > 0 && est < roll * 0.5) return { ok: false, roll, reason: `The model's figure (${fmt$(est)}) is less than half the assessor's value (${fmt$(roll)}), so the model does not fit this property.` };
+  
+  // Statistical back-test check (ACCURACY-ROADMAP.md Item 8)
+  const fips = (options && options.countyFips) || a.countyFips || (typeof activeFips === "function" ? activeFips() : null);
+  if (options && options.enforceCountyBacktest && fips && typeof VALUATION_BACKTEST_BENCHMARKS !== "undefined" && VALUATION_BACKTEST_BENCHMARKS[fips]) {
+    const bench = VALUATION_BACKTEST_BENCHMARKS[fips];
+    if (bench.withhold) {
+      return { ok: false, roll, reason: bench.withholdReason || `Valuation withheld: back-testing in county ${fips} against recorder sales showed error exceeding acceptable bounds (MdAPE: ${(bench.mdape * 100).toFixed(1)}%).` };
+    }
+  }
+
   return { ok: true, roll };
 }
 function noEstimateHtml(vc) {

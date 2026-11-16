@@ -1,6 +1,6 @@
 /**
  * Property Valuation Engine (AVM - Automated Valuation Model)
- * Zillow Zestimate-Grade Econometric Valuation Architecture
+ * Econometric Valuation Architecture
  */
 
 export interface PropertyValuationInput {
@@ -430,20 +430,20 @@ export function estimatePropertyMarketValue(params: PropertyValuationInput): Pro
   const finalVpsf = isVacantLand ? Math.round(estimatedValue / Math.max(lotSqft, 1)) : Math.round(estimatedValue / Math.max(livingSqft, 1));
 
   let confMarginPct = 0.065;
-  let confidenceRating = isVacantLand ? "⭐⭐⭐ High Confidence (Vacant Land Appraisal Model)" : "⭐⭐⭐ Good Precision (Hedonic & Assessment Grounded)";
+  let confidenceRating = isVacantLand ? "High Confidence (Vacant Land Appraisal Model)" : "Good Precision (Hedonic & Assessment Grounded)";
 
   if (saleCompEst && assessorMarketEst) {
     const divergence = Math.abs(saleCompEst - assessorMarketEst) / Math.max(saleCompEst, assessorMarketEst);
     if (divergence <= 0.08) {
       confMarginPct = 0.038;
-      confidenceRating = "⭐⭐⭐⭐ High Precision (Dual-Source Sales & Assessor Agreement)";
+      confidenceRating = "High Precision (Dual-Source Sales & Assessor Agreement)";
     } else {
       confMarginPct = 0.050;
-      confidenceRating = "⭐⭐⭐ High Confidence (Multi-Model Synthesis)";
+      confidenceRating = "High Confidence (Multi-Model Synthesis)";
     }
   } else if (!saleCompEst && !assessorMarketEst) {
     confMarginPct = 0.078;
-    confidenceRating = isVacantLand ? "⭐⭐⭐ High Confidence (Vacant Infill Land Appraisal)" : "⭐⭐ Preliminary Screening (Census Block-Group Grounded)";
+    confidenceRating = isVacantLand ? "High Confidence (Vacant Infill Land Appraisal)" : "Preliminary Screening (Census Block-Group Grounded)";
   }
 
   const valueLow = Math.round((estimatedValue * (1 - confMarginPct)) / 1000) * 1000;
