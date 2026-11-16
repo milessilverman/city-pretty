@@ -1,5 +1,10 @@
 # City Pretty Ecosystem: Grand Vision & Technical Architecture
 
+> **Correction, 16 Nov 2026:** the vision below stands, but this document's status claims and vendor prices were not
+> checked. Phases marked "✅ COMPLETED" were not complete, the paid-data prices were not from the vendors, and the
+> EverySpace income ranges had no source. For the current plan, real status and vendor prices checked on the vendors'
+> own pages, see [`GAME-PLAN.md`](GAME-PLAN.md). For data status, see [`DATA-AUDIT-AND-TRANSPARENCY.md`](DATA-AUDIT-AND-TRANSPARENCY.md).
+
 **Platform Vision:** The definitive real-world intelligence engine for real estate investors and civic builders who acquire land, build housing, and transform communities while generating high-conviction financial returns.
 
 ---

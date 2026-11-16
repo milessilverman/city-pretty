@@ -1,0 +1,585 @@
+{
+ "statutes": [
+  {
+   "id": "ca_sb79_tier1",
+   "status": "verified",
+   "corrections": [
+    "statute_citation 65913.16 -> 65912.155–65912.162",
+    "removed 06013 Contra Costa",
+    "max_units_by_right 120 -> null (density floor 120 du/ac)",
+    "affordability 10% -> one of 7% ELI / 10% VLI / 13% LI, not for ≤10 units",
+    "summary rewritten",
+    "exclusions: removed unverified coastal/floodway, added sea-level/historic per § 65912.161"
+   ]
+  },
+  {
+   "id": "ca_sb79_tier2",
+   "status": "verified",
+   "corrections": [
+    "relabelled: is Tier 1 outer ring, not Tier 2",
+    "added city_population_min 35000",
+    "same citation/affordability fixes as tier1"
+   ]
+  },
+  {
+   "id": "ca_sb79_tier2_light_rail_quarter",
+   "status": "verified",
+   "corrections": [
+    "ADDED from official statute text"
+   ]
+  },
+  {
+   "id": "ca_sb79_tier2_light_rail_half",
+   "status": "verified",
+   "corrections": [
+    "ADDED from official statute text"
+   ]
+  },
+  {
+   "id": "ca_sb9_lot_split",
+   "status": "partially_verified",
+   "corrections": [
+    "max_height_ft 25 -> null (not in statute)",
+    "min_parking 0 -> null + corrected note",
+    "short_name fixed"
+   ]
+  },
+  {
+   "id": "ca_ab2097",
+   "status": "verified",
+   "corrections": [
+    "summary: added findings exception"
+   ]
+  },
+  {
+   "id": "fl_live_local",
+   "status": "verified",
+   "corrections": [
+    "exemption citation 196.1979 -> 196.1978(3)",
+    "min_parking 0.5 -> null (not in statute)",
+    "max_units 999 -> null",
+    "added FAR 150% rule"
+   ]
+  },
+  {
+   "id": "tx_sb840",
+   "status": "verified",
+   "corrections": [
+    "session 88R -> 89R; effective 2023-09-01 -> 2025-09-01",
+    "citation 214.908 -> ch. 218",
+    "scope widened from office-only to commercial/retail/warehouse/mixed-use zones",
+    "parking: is a cap of 1, not a minimum of 1"
+   ]
+  },
+  {
+   "id": "wa_hb1110",
+   "status": "verified",
+   "corrections": [
+    "max_height_ft 35 -> null",
+    "added UGA condition to small-city rule",
+    "parking corrected"
+   ]
+  },
+  {
+   "id": "or_hb2001",
+   "status": "verified",
+   "corrections": [
+    "citation 197.758 -> 197A.420",
+    "duplex threshold 10,000 -> 2,500",
+    "min_parking 0 -> null"
+   ]
+  },
+  {
+   "id": "az_hb2720_2721",
+   "status": "verified",
+   "corrections": [
+    "citation 9-467.04/05 (nonexistent) -> 9-461.18 + Laws 2024 ch. 197",
+    "max_height_ft 30 -> null",
+    "parking reframed as cap of 1"
+   ]
+  },
+  {
+   "id": "tx_austin_home",
+   "status": "verified",
+   "corrections": [
+    "ordinance 20240516-004 -> 20240516-006",
+    "min lot 1,500 -> 1,800 sq ft",
+    "parking 0 -> null (unchecked)"
+   ]
+  },
+  {
+   "id": "tx_adu_statute",
+   "status": "removed",
+   "corrections": [
+    "REMOVED: bill failed in 2023; not law"
+   ]
+  },
+  {
+   "id": "co_hb24_1313",
+   "status": "verified",
+   "corrections": [
+    "summary rewritten: capacity goal, not by-right",
+    "removed parking-elimination claim",
+    "removed '31 municipalities'"
+   ]
+  },
+  {
+   "id": "co_hb24_1152",
+   "status": "partially_verified",
+   "corrections": [
+    "parking 0 -> null (unchecked)",
+    "summary rewritten to bill summary"
+   ]
+  },
+  {
+   "id": "mn_minneapolis_2040",
+   "status": "could_not_check",
+   "corrections": [
+    "parking 0 -> null (unchecked)"
+   ]
+  },
+  {
+   "id": "mt_sb323",
+   "status": "partially_verified",
+   "corrections": [
+    "statute_url replaced (old URL 404)"
+   ]
+  },
+  {
+   "id": "me_ld2003",
+   "status": "verified",
+   "corrections": [
+    "2 -> 3 units outside growth areas (current law)",
+    "statute_url fixed (old URL returned 'no information')",
+    "parking 0 -> null"
+   ]
+  },
+  {
+   "id": "vt_act47",
+   "status": "verified",
+   "corrections": [
+    "citation (1)(E) -> (1)(D), (12), § 4414"
+   ]
+  },
+  {
+   "id": "ma_mbta_communities",
+   "status": "verified",
+   "corrections": [
+    "summary: removed '177' count",
+    "parking 0 -> null"
+   ]
+  },
+  {
+   "id": "nc_raleigh_missing_middle",
+   "status": "could_not_check",
+   "corrections": []
+  },
+  {
+   "id": "ut_hb82_iadu",
+   "status": "partially_verified",
+   "corrections": [
+    "id ut_sb174 -> ut_hb82_iadu",
+    "bill SB 174 (driver licenses) -> HB 82 (2021)",
+    "removed unconfirmed HB 465 / § 10-9a-403 / rail claims"
+   ],
+   "previous_id": "ut_sb174"
+  }
+ ],
+ "state_finance_profiles": [
+  {
+   "state": "AL",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "AK",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "AZ",
+   "status": "verified",
+   "source_url_http": "200",
+   "corrections": [
+    "comm_assessment_ratio 0.165 -> 0.155 (TY2026)"
+   ]
+  },
+  {
+   "state": "AR",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "CA",
+   "status": "partially_verified",
+   "source_url_http": "403",
+   "corrections": []
+  },
+  {
+   "state": "CO",
+   "status": "partially_verified",
+   "source_url_http": "406",
+   "corrections": [
+    "comm_assessment_ratio 0.279 -> 0.25 (TY2026)",
+    "citation updated"
+   ]
+  },
+  {
+   "state": "CT",
+   "status": "unverified",
+   "source_url_http": "000",
+   "corrections": []
+  },
+  {
+   "state": "DE",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "DC",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "FL",
+   "status": "partially_verified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "GA",
+   "status": "could_not_check",
+   "source_url_http": "403",
+   "corrections": []
+  },
+  {
+   "state": "HI",
+   "status": "unverified",
+   "source_url_http": "403",
+   "corrections": []
+  },
+  {
+   "state": "ID",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "IL",
+   "status": "could_not_check",
+   "source_url_http": "000",
+   "corrections": []
+  },
+  {
+   "state": "IN",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "IA",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "KS",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "KY",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "LA",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "ME",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "MD",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "MA",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "MI",
+   "status": "unverified",
+   "source_url_http": "404",
+   "corrections": []
+  },
+  {
+   "state": "MN",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "MS",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "MO",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "MT",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "NE",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "NV",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "NH",
+   "status": "unverified",
+   "source_url_http": "000",
+   "corrections": []
+  },
+  {
+   "state": "NJ",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "NM",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "NY",
+   "status": "unverified",
+   "source_url_http": "403",
+   "corrections": []
+  },
+  {
+   "state": "NC",
+   "status": "partially_verified",
+   "source_url_http": "200",
+   "corrections": [
+    "reassessment_cycle_years 4 -> 8 (statutory maximum)"
+   ]
+  },
+  {
+   "state": "ND",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "OH",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "OK",
+   "status": "unverified",
+   "source_url_http": "404",
+   "corrections": []
+  },
+  {
+   "state": "OR",
+   "status": "partially_verified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "PA",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "RI",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "SC",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "SD",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "TN",
+   "status": "unverified",
+   "source_url_http": "404",
+   "corrections": []
+  },
+  {
+   "state": "TX",
+   "status": "partially_verified",
+   "source_url_http": "200",
+   "corrections": [
+    "annual_assessment_cap null -> 0.10 (residence homestead, § 23.23)"
+   ]
+  },
+  {
+   "state": "UT",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "VT",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "VA",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "WA",
+   "status": "partially_verified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "WV",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "WI",
+   "status": "unverified",
+   "source_url_http": "000",
+   "corrections": []
+  },
+  {
+   "state": "WY",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  },
+  {
+   "state": "PR",
+   "status": "unverified",
+   "source_url_http": "200",
+   "corrections": []
+  }
+ ],
+ "funding_programs": [
+  {
+   "id": "la_measure_w",
+   "status": "could_not_check",
+   "corrections": []
+  },
+  {
+   "id": "la_prop_k",
+   "status": "could_not_check",
+   "corrections": []
+  },
+  {
+   "id": "ca_urban_greening",
+   "status": "could_not_check",
+   "corrections": [
+    "statutory_citation PRC § 75114 (nonexistent) -> null"
+   ]
+  },
+  {
+   "id": "calfire_urban_forestry",
+   "status": "partially_verified",
+   "corrections": [
+    "funding share corrected to statutory 25–90%, waivable for DAC"
+   ]
+  },
+  {
+   "id": "tx_tirz_ch311",
+   "status": "partially_verified",
+   "corrections": [
+    "funding_share_pct 1 -> null; description corrected to § 311.013"
+   ]
+  },
+  {
+   "id": "fl_cra_ch163",
+   "status": "verified",
+   "corrections": [
+    "description: added 50% floor"
+   ]
+  },
+  {
+   "id": "fl_live_local_tax_exemption",
+   "status": "partially_verified",
+   "corrections": [
+    "citation 196.1979 -> 196.1978(3)",
+    "form DR-504AF -> DR-504AFH"
+   ]
+  },
+  {
+   "id": "co_ura_tif",
+   "status": "could_not_check",
+   "corrections": []
+  },
+  {
+   "id": "il_transit_tif",
+   "status": "could_not_check",
+   "corrections": []
+  },
+  {
+   "id": "az_gplet",
+   "status": "partially_verified",
+   "corrections": []
+  },
+  {
+   "id": "federal_fra_intercity_grant",
+   "status": "verified",
+   "corrections": []
+  }
+ ],
+ "removed": [
+  {
+   "id": "tx_adu_statute",
+   "reason": "88(R) SB 1412 'Relating to regulation of accessory dwelling units by political subdivisions' — Last Action '05/22/2023 H Failed to pass to 3rd reading' (capitol.texas.gov). It never became law; the cited Tex. Loc. Gov't Code § 214.909 could not be confirmed."
+  }
+ ]
+}

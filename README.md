@@ -1,14 +1,14 @@
 # City Pretty
 
 > [!WARNING]
-> ### Data Verification & Accuracy Notice
-> **Transparency Statement (Audit Review, 15 Nov 2026):**
-> An independent review of earlier project versions revealed that significant portions of previous research citations, corridor financing splits, and calculation fallbacks were synthetic or hallucinated (including 488 generated study titles, hardcoded valuation stand-ins such as `|| 900000`, and default single-family zoning assumptions for unrecorded parcels).
-> 
-> **Current Status:**
-> - **Purged & Verified:** All 488 generated filler studies have been removed. 52 empirical peer-reviewed studies with confirmed DOIs/URLs have been verified. 52 state property assessment statutes, 9 state middle housing laws, 4 municipal funding programs, and 32 DOT bid item unit costs are now verified against primary government sources. All ~52 hardcoded fallback numbers have been replaced with `null` ("Not on file").
-> - **Still Unverified / Estimated:** County-level hedonic ROI spreads, preliminary transit corridors without adopted agency capital budgets, and parcels in jurisdictions lacking live GIS zoning feeds are unverified estimates or incomplete.
-> - **Operational Guidance:** Do NOT deploy investment capital or make legal zoning commitments based on unverified screening metrics. See [`docs/DATA-AUDIT-AND-TRANSPARENCY.md`](docs/DATA-AUDIT-AND-TRANSPARENCY.md) for full component-by-component audit scores and [`docs/GRAND-VISION-AND-ECOSYSTEM.md`](docs/GRAND-VISION-AND-ECOSYSTEM.md) for the ecosystem architecture (City Pretty + StreetForge + EverySpace).
+> ### Data accuracy (16 Nov 2026)
+> A line-by-line audit found that most data previously labeled "verified" was not, including data added by the
+> session that claimed to fix it. For example, only 7 of 52 cited studies hold up, the HUD rents and the valuation
+> "back-test" were invented, and several state housing laws cited the wrong bills. Fabricated content was removed or
+> replaced with pulls from official sources, and every record now carries its verification status.
+> **Do not make investment, legal or zoning decisions from this site unless the record is marked verified and you
+> have opened its source.** Details: [`docs/DATA-AUDIT-AND-TRANSPARENCY.md`](docs/DATA-AUDIT-AND-TRANSPARENCY.md).
+> Plan: [`docs/GAME-PLAN.md`](docs/GAME-PLAN.md).
 
 A civic data map of **639 US counties** (48 contiguous states, DC and Puerto Rico; 269 million people), plus 67 more
 where only live property lines are shown so far. For each block group it scores what a city could build or fix there

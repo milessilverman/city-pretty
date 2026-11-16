@@ -1,0 +1,1730 @@
+{
+ "audit": "costs-transit",
+ "checked_on": "2026-11-16",
+ "standard": "verified only if the source was fetched this session and shows the specific value; secondary sources (Wikipedia) labelled as such; unreachable sources = could_not_check",
+ "unit_costs": {
+  "records": [
+   {
+    "index": 0,
+    "item": "sidewalk",
+    "region": "Grayson County, US 75",
+    "state": "TX",
+    "unit_price": 92,
+    "unit": "SY",
+    "source_url": "https://ftp.txdot.gov/pub/txdot-info/cmd/cserve/distinfo/cisrpts/004713033.pdf",
+    "verification": {
+     "status": "could_not_check",
+     "method": "curl via session egress proxy",
+     "checked_on": "2026-11-16",
+     "evidence": "ftp.txdot.gov fails TLS verification through the egress proxy (curl error 60); Wayback availability API returns no snapshot.",
+     "unverified_fields": [
+      "unit_price",
+      "quote",
+      "contract"
+     ],
+     "notes": "Prior status \"confirmed\" downgraded to \"unchecked\" until the PDF can be fetched."
+    }
+   },
+   {
+    "index": 1,
+    "item": "curb_ramp",
+    "region": "Grayson County, US 75",
+    "state": "TX",
+    "unit_price": 2994,
+    "unit": "EA",
+    "source_url": "https://ftp.txdot.gov/pub/txdot-info/cmd/cserve/distinfo/cisrpts/004713033.pdf",
+    "verification": {
+     "status": "could_not_check",
+     "method": "curl via session egress proxy",
+     "checked_on": "2026-11-16",
+     "evidence": "ftp.txdot.gov fails TLS verification through the egress proxy (curl error 60); Wayback availability API returns no snapshot.",
+     "unverified_fields": [
+      "unit_price",
+      "quote",
+      "contract"
+     ],
+     "notes": "Prior status \"confirmed\" downgraded to \"unchecked\" until the PDF can be fetched."
+    }
+   },
+   {
+    "index": 2,
+    "item": "led_streetlight",
+    "region": "Grayson County, US 75",
+    "state": "TX",
+    "unit_price": 5500,
+    "unit": "EA",
+    "source_url": "https://ftp.txdot.gov/pub/txdot-info/cmd/cserve/distinfo/cisrpts/004713033.pdf",
+    "verification": {
+     "status": "could_not_check",
+     "method": "curl via session egress proxy",
+     "checked_on": "2026-11-16",
+     "evidence": "ftp.txdot.gov fails TLS verification through the egress proxy (curl error 60); Wayback availability API returns no snapshot.",
+     "unverified_fields": [
+      "unit_price",
+      "quote",
+      "contract"
+     ],
+     "notes": "Prior status \"confirmed\" downgraded to \"unchecked\" until the PDF can be fetched."
+    }
+   },
+   {
+    "index": 3,
+    "item": "sidewalk",
+    "region": "Statewide",
+    "state": "FL",
+    "unit_price": 67.54,
+    "unit": "SY",
+    "source_url": "https://fdotwww.blob.core.windows.net/sitefinity/docs/default-source/fpo/fpc/reports/historicalitemaveragecost/moving/statewide/pdf/historical-item-averages-statewide-12-months.pdf?sfvrsn=32501f5b_16",
+    "verification": {
+     "status": "verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "0522 1 ... $67.54 ... 154,926.000 SY ... CONCRETE SIDEWALK AND DRIVEWAYS, 4\" THICK",
+     "unverified_fields": [],
+     "notes": ""
+    }
+   },
+   {
+    "index": 4,
+    "item": "rrfb",
+    "region": "Statewide",
+    "state": "FL",
+    "unit_price": 14288.83,
+    "unit": "AS",
+    "source_url": "https://fdotwww.blob.core.windows.net/sitefinity/docs/default-source/fpo/fpc/reports/historicalitemaveragecost/moving/statewide/pdf/historical-item-averages-statewide-12-months.pdf?sfvrsn=32501f5b_16",
+    "verification": {
+     "status": "verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "0654 2 21 ... $14,288.83 ... 10.000 AS ... MIDBLOCK CROSSWALK: RECTANGULAR RAPID FLASHING BEACON",
+     "unverified_fields": [],
+     "notes": ""
+    }
+   },
+   {
+    "index": 5,
+    "item": "sound_wall",
+    "region": "Statewide",
+    "state": "FL",
+    "unit_price": 909.87,
+    "unit": "LF",
+    "source_url": "https://fdotwww.blob.core.windows.net/sitefinity/docs/default-source/fpo/fpc/reports/historicalitemaveragecost/moving/statewide/pdf/historical-item-averages-statewide-12-months.pdf?sfvrsn=32501f5b_16",
+    "verification": {
+     "status": "verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "0521 72 27 ... $909.87 ... 5,866.000 LF ... SHOULDER CONCRETE BARRIER WALL, 14' NOISE WALL",
+     "unverified_fields": [],
+     "notes": ""
+    }
+   },
+   {
+    "index": 6,
+    "item": "sidewalk",
+    "region": "Gwinnett County",
+    "state": "GA",
+    "unit_price": 45,
+    "unit": "SY",
+    "source_url": "https://www.gwinnettcounty.com/static/upload/bid/802542/BL129-26%20Award%20Tab.pdf",
+    "verification": {
+     "status": "verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "Award Notice: \"the bid has been awarded to The Dickerson Group, Inc. in the amount of $1,248,247.84\"; Dickerson column (page 2, col 4): 155 CONC SIDEWALK, 4 IN 4,398 SY $45.00 $197,910.00",
+     "unverified_fields": [],
+     "notes": "DISPROVED prior value $42: $42.00 appears only in page-1 columns of other bidders (totals $1,257,949.99 / $1,469,779.26), not the awardee."
+    }
+   },
+   {
+    "index": 7,
+    "item": "sidewalk",
+    "region": "Micro, Johnston County",
+    "state": "NC",
+    "unit_price": 64,
+    "unit": "SY",
+    "source_url": "https://connect.ncdot.gov/letting/Division%204%20Letting/09-22-2026/DD00528_Bid_Tabs.pdf",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "0031 2591000000-E 848 4\" CONCRETE SIDEWALK 650 SY 64.00 (ALLEN GRADING COMPANY, INC., rank 1, $860,737.00)",
+     "unverified_fields": [
+      "award"
+     ],
+     "notes": "Price is the rank-1 low bid in \"BIDDERS IN ORDER\"; Notice of Award not in the fetched document."
+    }
+   },
+   {
+    "index": 8,
+    "item": "curb_ramp",
+    "region": "Micro, Johnston County",
+    "state": "NC",
+    "unit_price": 1550,
+    "unit": "EA",
+    "source_url": "https://connect.ncdot.gov/letting/Division%204%20Letting/09-22-2026/DD00528_Bid_Tabs.pdf",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "0032 2605000000-N 848 CONCRETE CURB RAMPS 3 EA 1,550.00 (ALLEN GRADING COMPANY, INC., rank 1)",
+     "unverified_fields": [
+      "award"
+     ],
+     "notes": "Price is the rank-1 low bid in \"BIDDERS IN ORDER\"; Notice of Award not in the fetched document."
+    }
+   },
+   {
+    "index": 9,
+    "item": "sidewalk",
+    "region": "Piqua",
+    "state": "OH",
+    "unit_price": 14,
+    "unit": "SF",
+    "source_url": "https://piquaoh.gov/AgendaCenter/ViewFile/Agenda/_05212024-246",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "Exhibit A bid tab: 608 - CONCRETE WALK (6\" NON-REINFORCED QC1) - SF 2,895.00 $14.00 (Grissom Construction, LLC; A to Z also $14.00); resolution \"awarding a contract to Grissom Construction, LLC ... as the lowest, responsible bidder\"",
+     "unverified_fields": [
+      "resolution adoption"
+     ],
+     "notes": "Agenda packet contains the draft resolution with blank PASSED line; adoption of R-74-24 not confirmed in this document."
+    }
+   },
+   {
+    "index": 10,
+    "item": "sidewalk",
+    "region": "Perkasie",
+    "state": "PA",
+    "unit_price": 24,
+    "unit": "SF",
+    "source_url": "https://perkasieborough.org/media/3444/2025_06_02-public-council-packet.pdf",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "6 Concrete Sidewalk (4\") - Install 982 SF $24.00 (NJS Concrete LLC); engineer: \"recommend that Council award ... to NJS Concrete LLC in the amount of $108,122.00\"",
+     "unverified_fields": [
+      "council award vote"
+     ],
+     "notes": "Packet precedes the vote; June 2 minutes not fetched."
+    }
+   },
+   {
+    "index": 11,
+    "item": "sidewalk",
+    "region": "Villa Park",
+    "state": "IL",
+    "unit_price": 8.5,
+    "unit": "SF",
+    "source_url": "https://www.invillapark.com/DocumentCenter/View/12557/Bid-Tabulation---2025-Sidewalk-Improvements-",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "14 PORTLAND CEMENT CONCRETE SIDEWALK, 5\" SQFT 11000 $8.50 (Davis Concrete Construction Co., lowest total $288,352.00)",
+     "unverified_fields": [
+      "award"
+     ],
+     "notes": "Award page not fetched."
+    }
+   },
+   {
+    "index": 12,
+    "item": "sidewalk",
+    "region": "Kalamazoo, Westnedge Avenue",
+    "state": "MI",
+    "unit_price": 12.64,
+    "unit": "SF",
+    "source_url": "https://www.kalamazoocity.org/files/assets/public/v/1/purchasing/bid-documents/2025/91396-022.0/91396-022.0-bid-tabulation.pdf",
+    "verification": {
+     "status": "could_not_check",
+     "method": "curl via session egress proxy",
+     "checked_on": "2026-11-16",
+     "evidence": "HTTP 403 from www.kalamazoocity.org; no Wayback snapshot (availability API).",
+     "unverified_fields": [
+      "unit_price",
+      "quote"
+     ],
+     "notes": ""
+    }
+   },
+   {
+    "index": 13,
+    "item": "sidewalk",
+    "region": "Mesa, Val Vista Drive",
+    "state": "AZ",
+    "unit_price": 34,
+    "unit": "SF",
+    "source_url": "https://www.mesaaz.gov/files/assets/public/v/2/business-development/engineering/constructionbid/cp0062cap-cp0062wtr-cp0062gas-cp0956sr18_results.pdf",
+    "verification": {
+     "status": "could_not_check",
+     "method": "curl via session egress proxy",
+     "checked_on": "2026-11-16",
+     "evidence": "HTTP 403 from www.mesaaz.gov; Wayback snapshot 20250902151052 exists but web.archive.org connections were reset by the egress proxy.",
+     "unverified_fields": [
+      "unit_price",
+      "quote"
+     ],
+     "notes": ""
+    }
+   },
+   {
+    "index": 14,
+    "item": "curb_ramp",
+    "region": "Mesa, Val Vista Drive",
+    "state": "AZ",
+    "unit_price": 8500,
+    "unit": "EA",
+    "source_url": "https://www.mesaaz.gov/files/assets/public/v/2/business-development/engineering/constructionbid/cp0062cap-cp0062wtr-cp0062gas-cp0956sr18_results.pdf",
+    "verification": {
+     "status": "could_not_check",
+     "method": "curl via session egress proxy",
+     "checked_on": "2026-11-16",
+     "evidence": "HTTP 403 from www.mesaaz.gov; Wayback snapshot 20250902151052 exists but web.archive.org connections were reset by the egress proxy.",
+     "unverified_fields": [
+      "unit_price",
+      "quote"
+     ],
+     "notes": ""
+    }
+   },
+   {
+    "index": 15,
+    "item": "sidewalk",
+    "region": "Walsenburg, I-25C",
+    "state": "CO",
+    "unit_price": 110,
+    "unit": "SY",
+    "source_url": "https://www.codot.gov/business/eema/assets/2025-cost-data-book.pdf",
+    "verification": {
+     "status": "could_not_check",
+     "method": "curl via session egress proxy",
+     "checked_on": "2026-11-16",
+     "evidence": "source_url returns HTTP 404 (dead link); Wayback snapshot 20260401170122 exists but web.archive.org connections were reset.",
+     "unverified_fields": [
+      "unit_price",
+      "quote",
+      "source_url"
+     ],
+     "notes": "Source URL is dead at codot.gov."
+    }
+   },
+   {
+    "index": 16,
+    "item": "sidewalk",
+    "region": "Clark County, NE 152nd Avenue",
+    "state": "WA",
+    "unit_price": 138,
+    "unit": "SY",
+    "source_url": "https://clark.wa.gov/sites/default/files/2025-09/0000586-301022-bid-tabulation-with-unilateral-adjustment.pdf",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "70 8-14 CEMENT CONC. SIDEWALK S.Y. 3170 ... $138.00 $437,460.00 (Bidder #1 Thompson Bros. Excavating, Inc.; TOTAL BID $7,406,494.50, lowest of 5 bidders)",
+     "unverified_fields": [
+      "award"
+     ],
+     "notes": "Engineer's estimate $100.00/SY; document titled \"Bid Tabulation with Unilateral Adjustment\"."
+    }
+   },
+   {
+    "index": 17,
+    "item": "sidewalk",
+    "region": "Gardner",
+    "state": "MA",
+    "unit_price": 80,
+    "unit": "SY",
+    "source_url": "https://gardner-ma.gov/DocumentCenter/View/11549/2025-942-DPW---Paving-BId-Tab",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "701 Concrete Sidewalk (Monolithic) SY 800 $80.00 (Massachusetts Broken Stone Company, lowest TOTAL $1,592,920.00)",
+     "unverified_fields": [
+      "award register"
+     ],
+     "notes": "Contract is road resurfacing (2025-942); sidewalk/ramps are incidental items."
+    }
+   },
+   {
+    "index": 18,
+    "item": "curb_ramp",
+    "region": "Gardner",
+    "state": "MA",
+    "unit_price": 2000,
+    "unit": "EA",
+    "source_url": "https://gardner-ma.gov/DocumentCenter/View/11549/2025-942-DPW---Paving-BId-Tab",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "701.2 Concrete Handicap Ramps Each 8 $2,000.00 (Massachusetts Broken Stone Company, lowest TOTAL)",
+     "unverified_fields": [
+      "award register"
+     ],
+     "notes": "Contract is road resurfacing (2025-942); sidewalk/ramps are incidental items."
+    }
+   },
+   {
+    "index": 19,
+    "item": "sidewalk",
+    "region": "New Rochelle",
+    "state": "NY",
+    "unit_price": 245,
+    "unit": "SY",
+    "source_url": "https://www.newrochelleny.gov/DocumentCenter/View/20837/5785-Bid-Tabulation?bidId=",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "Bidder totals: Peduto $266,557.00; AM Restoration $286,560.00; Maple Leaf $459,510.00; Lindi $422,904.10; Paladino $523,850.00; Peter J Landi $286,040.00; MFD Quality $251,060.00. Item 1 unit prices range $237.01-$585.00.",
+     "unverified_fields": [
+      "award"
+     ],
+     "notes": "DISPROVED prior value $237.01: it is Peduto Construction's price, and Peduto was not the low bidder. Corrected to the apparent low bidder's $245.00; award not confirmed."
+    }
+   },
+   {
+    "index": 20,
+    "item": "sidewalk",
+    "region": "Statewide, trunk highways",
+    "state": "MN",
+    "unit_price": 8.28,
+    "unit": "SF",
+    "source_url": "https://edocs-public.dot.state.mn.us/edocs_public/DMResultSet/download?docId=39047462",
+    "verification": {
+     "status": "verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "2521 2521518/00040 4\" CONCRETE WALK SF 231,359.00 $1,915.65 $8.28 21",
+     "unverified_fields": [],
+     "notes": ""
+    }
+   },
+   {
+    "index": 21,
+    "item": "sidewalk",
+    "region": "Des Peres",
+    "state": "MO",
+    "unit_price": 11.25,
+    "unit": "SF",
+    "source_url": "https://www.desperesmo.org/DocumentCenter/View/26018/R25-3905--Contract-with-SIC-Concrete-for-Concrete-Sidewalk-Replacements-BOA",
+    "verification": {
+     "status": "verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "SIC Concrete $11.25 ... resolution: \"award of a unit price contract to SIC Concrete\" value $78,960",
+     "unverified_fields": [],
+     "notes": ""
+    }
+   },
+   {
+    "index": 22,
+    "item": "sidewalk",
+    "region": "Statewide",
+    "state": "TN",
+    "unit_price": 8.21,
+    "unit": "SF",
+    "source_url": "https://www.tn.gov/content/dam/tn/tdot/construction/previous_lettings/Const_aup2025.pdf",
+    "verification": {
+     "status": "verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "Header: \"Average Unit Prices - 01JAN2025 thru 31DEC2025 - Awarded Contracts\"; 701-01.01 CONCRETE SIDEWALK (4 \") ... STATE $8.21",
+     "unverified_fields": [],
+     "notes": "Prior value $7.19 (Jan-Jun 2025) could not be reproduced: the file at this URL now covers all of 2025 and no line shows $7.19 for this item. Updated to the full-year statewide average."
+    }
+   },
+   {
+    "index": 23,
+    "item": "speed_hump",
+    "region": "New Haven rail yard",
+    "state": "CT",
+    "unit_price": 6000,
+    "unit": "EA",
+    "source_url": "https://portal.ct.gov/dot/-/media/dot/contracts/0000---2025-3-low-bid/0301-0130.pdf?hash=BDDE2CE8489332E3A5E45B8F571DCD4D&rev=568e00a742474522a6c95008a8a22a60",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "0947253 SPEED HUMP ea. 3.000 6,000.00000 (Yonkers Contracting Co Inc, rank 1, $159,611,625.00)",
+     "unverified_fields": [
+      "contract execution"
+     ],
+     "notes": "Context: $160M rail car/diesel shop rehabilitation in a rail yard; not representative of residential traffic calming."
+    }
+   },
+   {
+    "index": 24,
+    "item": "playground",
+    "region": "Chatham County",
+    "state": "GA",
+    "unit_price": 207666,
+    "unit": "replacement project",
+    "source_url": "https://cms.chathamcountyga.gov/api/assets/purchasing-website/9498b5cc-fa39-442c-ad32-e5031cf5dc0a?download=0",
+    "verification": {
+     "status": "verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "BID NUMBER 25-0092-2 GREENBRIAR PLAYGROUND REPLACEMENT AWARDED TO KOMPAN, INC. AMOUNT AWARDED $207,666 COMMISSION APPROVAL DATE DECEMBER 18, 2025",
+     "unverified_fields": [],
+     "notes": ""
+    }
+   },
+   {
+    "index": 25,
+    "item": "bus_shelter",
+    "region": "Sarasota Bradenton International Airport",
+    "state": "FL",
+    "unit_price": 31555.62,
+    "unit": "EA",
+    "source_url": "https://flysrq.com/sites/default/files/2023-01/01-30-23%20Agenda%20FINAL.pdf",
+    "verification": {
+     "status": "could_not_check",
+     "method": "curl via session egress proxy",
+     "checked_on": "2026-11-16",
+     "evidence": "HTTP 403 from flysrq.com; Wayback snapshot 20230803203847 exists but web.archive.org connections were reset.",
+     "unverified_fields": [
+      "unit_price",
+      "quote"
+     ],
+     "notes": "Airport parking-lot shelter, not a transit agency bus stop."
+    }
+   },
+   {
+    "index": 26,
+    "item": "street_tree",
+    "region": "Stillwater",
+    "state": "MN",
+    "unit_price": null,
+    "unit": "EA",
+    "source_url": "https://cityofstillwater.granicus.com/MetaViewer.php?clip_id=1809&meta_id=139536&view_id=3",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "Staff report: lowest bid Hoffman & McNamara $120,533.00 to replace 175 ash trees; maintenance $106.33 per tree per year ($18,608.33/yr)",
+     "unverified_fields": [
+      "unit_price"
+     ],
+     "notes": "unit_price left null (no itemized per-tree price). Derived, not stated: $120,533 / 175 = $688.76 per tree installed; scope of the lump bid not itemized."
+    }
+   },
+   {
+    "index": 27,
+    "item": "crosswalk",
+    "region": "Ogden",
+    "state": "UT",
+    "unit_price": 218,
+    "unit": "EA",
+    "source_url": "https://events.ogdencity.com/DocumentCenter/View/28487/2024-Citywide-Striping-Bid-Tab",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "Ogden City Bid Opening 2024 Citywide Striping Bid Tab 3/11/2024: All Star Striping ... 7 HIGH VISIBILITY CROSSWALK EA 130 $ 218.00",
+     "unverified_fields": [
+      "award"
+     ],
+     "notes": "Prior record said not_found although the price is in the cited document; filled from the source. Only one bidder appears on the tab."
+    }
+   },
+   {
+    "index": 28,
+    "item": "protected_bike_lane",
+    "region": "National / various",
+    "state": "US",
+    "unit_price": null,
+    "unit": "mile",
+    "source_url": null,
+    "verification": {
+     "status": "unverified",
+     "method": "none (no source on record)",
+     "checked_on": "2026-11-16",
+     "evidence": "No source document on record; unit_price is null.",
+     "unverified_fields": [
+      "unit_price"
+     ],
+     "notes": "Nothing to verify. Note: src/engines/transitCorridorOpportunityEngine.ts uses $220,000/mile for protected bike lanes citing \"verified DOT unit costs\" - no such value exists in this file."
+    }
+   },
+   {
+    "index": 29,
+    "item": "red_bus_lane",
+    "region": "National / various",
+    "state": "US",
+    "unit_price": null,
+    "unit": "lane-mile",
+    "source_url": null,
+    "verification": {
+     "status": "unverified",
+     "method": "none (no source on record)",
+     "checked_on": "2026-11-16",
+     "evidence": "No source document on record; unit_price is null.",
+     "unverified_fields": [
+      "unit_price"
+     ],
+     "notes": "Nothing to verify. Note: src/engines/transitCorridorOpportunityEngine.ts uses $220,000/mile for protected bike lanes citing \"verified DOT unit costs\" - no such value exists in this file."
+    }
+   },
+   {
+    "index": 30,
+    "item": "bioswale_extension",
+    "region": "National / various",
+    "state": "US",
+    "unit_price": null,
+    "unit": "EA",
+    "source_url": null,
+    "verification": {
+     "status": "unverified",
+     "method": "none (no source on record)",
+     "checked_on": "2026-11-16",
+     "evidence": "No source document on record; unit_price is null.",
+     "unverified_fields": [
+      "unit_price"
+     ],
+     "notes": "Nothing to verify. Note: src/engines/transitCorridorOpportunityEngine.ts uses $220,000/mile for protected bike lanes citing \"verified DOT unit costs\" - no such value exists in this file."
+    }
+   },
+   {
+    "index": 31,
+    "item": "undergrounding",
+    "region": "National / various",
+    "state": "US",
+    "unit_price": null,
+    "unit": "mile",
+    "source_url": null,
+    "verification": {
+     "status": "unverified",
+     "method": "none (no source on record)",
+     "checked_on": "2026-11-16",
+     "evidence": "No source document on record; unit_price is null.",
+     "unverified_fields": [
+      "unit_price"
+     ],
+     "notes": "Nothing to verify. Note: src/engines/transitCorridorOpportunityEngine.ts uses $220,000/mile for protected bike lanes citing \"verified DOT unit costs\" - no such value exists in this file."
+    }
+   }
+  ],
+  "changes": [
+   {
+    "index": 0,
+    "item": "sidewalk",
+    "region": "Grayson County, US 75",
+    "state": "TX",
+    "verification": {
+     "status": "could_not_check",
+     "method": "curl via session egress proxy",
+     "checked_on": "2026-11-16",
+     "evidence": "ftp.txdot.gov fails TLS verification through the egress proxy (curl error 60); Wayback availability API returns no snapshot.",
+     "unverified_fields": [
+      "unit_price",
+      "quote",
+      "contract"
+     ],
+     "notes": "Prior status \"confirmed\" downgraded to \"unchecked\" until the PDF can be fetched."
+    },
+    "change": "status confirmed -> unchecked"
+   },
+   {
+    "index": 1,
+    "item": "curb_ramp",
+    "region": "Grayson County, US 75",
+    "state": "TX",
+    "verification": {
+     "status": "could_not_check",
+     "method": "curl via session egress proxy",
+     "checked_on": "2026-11-16",
+     "evidence": "ftp.txdot.gov fails TLS verification through the egress proxy (curl error 60); Wayback availability API returns no snapshot.",
+     "unverified_fields": [
+      "unit_price",
+      "quote",
+      "contract"
+     ],
+     "notes": "Prior status \"confirmed\" downgraded to \"unchecked\" until the PDF can be fetched."
+    },
+    "change": "status confirmed -> unchecked"
+   },
+   {
+    "index": 2,
+    "item": "led_streetlight",
+    "region": "Grayson County, US 75",
+    "state": "TX",
+    "verification": {
+     "status": "could_not_check",
+     "method": "curl via session egress proxy",
+     "checked_on": "2026-11-16",
+     "evidence": "ftp.txdot.gov fails TLS verification through the egress proxy (curl error 60); Wayback availability API returns no snapshot.",
+     "unverified_fields": [
+      "unit_price",
+      "quote",
+      "contract"
+     ],
+     "notes": "Prior status \"confirmed\" downgraded to \"unchecked\" until the PDF can be fetched."
+    },
+    "change": "status confirmed -> unchecked"
+   },
+   {
+    "index": 6,
+    "item": "sidewalk",
+    "region": "Gwinnett County",
+    "state": "GA",
+    "verification": {
+     "status": "verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "Award Notice: \"the bid has been awarded to The Dickerson Group, Inc. in the amount of $1,248,247.84\"; Dickerson column (page 2, col 4): 155 CONC SIDEWALK, 4 IN 4,398 SY $45.00 $197,910.00",
+     "unverified_fields": [],
+     "notes": "DISPROVED prior value $42: $42.00 appears only in page-1 columns of other bidders (totals $1,257,949.99 / $1,469,779.26), not the awardee."
+    },
+    "change": "unit_price 42 -> 45"
+   },
+   {
+    "index": 12,
+    "item": "sidewalk",
+    "region": "Kalamazoo, Westnedge Avenue",
+    "state": "MI",
+    "verification": {
+     "status": "could_not_check",
+     "method": "curl via session egress proxy",
+     "checked_on": "2026-11-16",
+     "evidence": "HTTP 403 from www.kalamazoocity.org; no Wayback snapshot (availability API).",
+     "unverified_fields": [
+      "unit_price",
+      "quote"
+     ],
+     "notes": ""
+    },
+    "change": "status confirmed -> unchecked"
+   },
+   {
+    "index": 13,
+    "item": "sidewalk",
+    "region": "Mesa, Val Vista Drive",
+    "state": "AZ",
+    "verification": {
+     "status": "could_not_check",
+     "method": "curl via session egress proxy",
+     "checked_on": "2026-11-16",
+     "evidence": "HTTP 403 from www.mesaaz.gov; Wayback snapshot 20250902151052 exists but web.archive.org connections were reset by the egress proxy.",
+     "unverified_fields": [
+      "unit_price",
+      "quote"
+     ],
+     "notes": ""
+    },
+    "change": "status confirmed -> unchecked"
+   },
+   {
+    "index": 14,
+    "item": "curb_ramp",
+    "region": "Mesa, Val Vista Drive",
+    "state": "AZ",
+    "verification": {
+     "status": "could_not_check",
+     "method": "curl via session egress proxy",
+     "checked_on": "2026-11-16",
+     "evidence": "HTTP 403 from www.mesaaz.gov; Wayback snapshot 20250902151052 exists but web.archive.org connections were reset by the egress proxy.",
+     "unverified_fields": [
+      "unit_price",
+      "quote"
+     ],
+     "notes": ""
+    },
+    "change": "status confirmed -> unchecked"
+   },
+   {
+    "index": 15,
+    "item": "sidewalk",
+    "region": "Walsenburg, I-25C",
+    "state": "CO",
+    "verification": {
+     "status": "could_not_check",
+     "method": "curl via session egress proxy",
+     "checked_on": "2026-11-16",
+     "evidence": "source_url returns HTTP 404 (dead link); Wayback snapshot 20260401170122 exists but web.archive.org connections were reset.",
+     "unverified_fields": [
+      "unit_price",
+      "quote",
+      "source_url"
+     ],
+     "notes": "Source URL is dead at codot.gov."
+    },
+    "change": "status confirmed -> unchecked"
+   },
+   {
+    "index": 19,
+    "item": "sidewalk",
+    "region": "New Rochelle",
+    "state": "NY",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "Bidder totals: Peduto $266,557.00; AM Restoration $286,560.00; Maple Leaf $459,510.00; Lindi $422,904.10; Paladino $523,850.00; Peter J Landi $286,040.00; MFD Quality $251,060.00. Item 1 unit prices range $237.01-$585.00.",
+     "unverified_fields": [
+      "award"
+     ],
+     "notes": "DISPROVED prior value $237.01: it is Peduto Construction's price, and Peduto was not the low bidder. Corrected to the apparent low bidder's $245.00; award not confirmed."
+    },
+    "change": "unit_price 237.01 -> 245"
+   },
+   {
+    "index": 22,
+    "item": "sidewalk",
+    "region": "Statewide",
+    "state": "TN",
+    "verification": {
+     "status": "verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "Header: \"Average Unit Prices - 01JAN2025 thru 31DEC2025 - Awarded Contracts\"; 701-01.01 CONCRETE SIDEWALK (4 \") ... STATE $8.21",
+     "unverified_fields": [],
+     "notes": "Prior value $7.19 (Jan-Jun 2025) could not be reproduced: the file at this URL now covers all of 2025 and no line shows $7.19 for this item. Updated to the full-year statewide average."
+    },
+    "change": "unit_price 7.19 -> 8.21"
+   },
+   {
+    "index": 25,
+    "item": "bus_shelter",
+    "region": "Sarasota Bradenton International Airport",
+    "state": "FL",
+    "verification": {
+     "status": "could_not_check",
+     "method": "curl via session egress proxy",
+     "checked_on": "2026-11-16",
+     "evidence": "HTTP 403 from flysrq.com; Wayback snapshot 20230803203847 exists but web.archive.org connections were reset.",
+     "unverified_fields": [
+      "unit_price",
+      "quote"
+     ],
+     "notes": "Airport parking-lot shelter, not a transit agency bus stop."
+    },
+    "change": "status confirmed -> unchecked"
+   },
+   {
+    "index": 27,
+    "item": "crosswalk",
+    "region": "Ogden",
+    "state": "UT",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+     "checked_on": "2026-11-16",
+     "evidence": "Ogden City Bid Opening 2024 Citywide Striping Bid Tab 3/11/2024: All Star Striping ... 7 HIGH VISIBILITY CROSSWALK EA 130 $ 218.00",
+     "unverified_fields": [
+      "award"
+     ],
+     "notes": "Prior record said not_found although the price is in the cited document; filled from the source. Only one bidder appears on the tab."
+    },
+    "change": "unit_price None -> 218; status not_found -> confirmed"
+   }
+  ]
+ },
+ "transit_pipelines": {
+  "records": [
+   {
+    "fips": "48453",
+    "title": "Project Connect Light Rail (Phase 1) & Riverside/South Congress TOD Corridor",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched https://www.atptx.org/light-rail/ (HTTP 200); Wikipedia 'Project Connect' extract as secondary; Nominatim (OSM) for coordinates.",
+     "checked_on": "2026-11-16",
+     "evidence": "ATP: \"The Line 15 Stops at Key Locations ... UT, Downtown, the Hike-and-Bike Trail, East Riverside and South Congress\"; \"direct street-level access\". Wikipedia: \"a 9.8 mile system\"; \"On January 16, 2026, the FTA released a Record of Decision\"; voters approved Nov 3, 2020.",
+     "unverified_fields": [
+      "stations (names and coordinates)",
+      "hubName",
+      "hubLat",
+      "hubLng",
+      "corridorRings",
+      "p3Type",
+      "adopted_year"
+     ],
+     "notes": "The 6 stations on file are not the agency's 15-stop list; 'Downtown / Congress' uses 30.2672,-97.7431 (generic Austin city geocode). Prior station descriptions invented amenities ('16 DC fast EV stalls', '3.4-mi rail-with-trail cycleway') and were removed. Prior corridorDesc wrongly said 'grade-separated'. Prior status said 'NEPA Environmental Review' (outdated: ROD issued). units/affordPct/retailSqft (460/35/28000) had no source and were set to null."
+    }
+   },
+   {
+    "fips": "06037",
+    "title": "Metro D Line (Purple Line) Subway Extension & Station Joint Development",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched https://www.metro.net/projects/westside/ (HTTP 200); Nominatim (OSM) station coordinates.",
+     "checked_on": "2026-11-16",
+     "evidence": "Metro: \"Section 1 is OPEN! This includes the new stations at La Brea, Fairfax, and La Cienega\"; \"Opened on May 8, 2026\"; \"expands the existing subway west from Wilshire/Western nearly nine miles along Wilshire Bl to Westwood\"; Section 3 \"work at the UCLA and VA Hospital stations\". OSM distances: Western 70 m, La Brea 33 m, Fairfax 24 m, La Cienega 240 m, Century City 157 m, Westwood/UCLA 285 m.",
+     "unverified_fields": [
+      "FTA CIG grant amount",
+      "p3Type",
+      "adopted_year",
+      "hubName amenities"
+     ],
+     "notes": "Prior status 'Phases 1-3 Under Construction' was outdated. Prior '$3.6B in FTA CIG grants' not confirmed and removed. Prior station descriptions invented amenities ('24 fast EV charging bays') and were replaced. Missing Section 3 terminus Westwood/VA Hospital added; a Section 2 Beverly Hills station is not on file (name/coords not confirmed this audit). units/affordPct/retailSqft (520/35/32000) unsourced -> null."
+    }
+   },
+   {
+    "fips": "06059",
+    "title": "OC Streetcar Santa Ana–Garden Grove Corridor & SARTC Regional Transit Center",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched OCTA project page (HTTP 200 at corrected URL; original rtp_document_url returned 404); Wikipedia 'OC Streetcar' as secondary; Nominatim.",
+     "checked_on": "2026-11-16",
+     "evidence": "OCTA: \"4.15 MILES\", \"16 STOPS\", \"Service starting early 2027\", \"from the Santa Ana Regional Transportation Center to the Harbor Corridor\". SARTC coordinate 134 m from OSM.",
+     "unverified_fields": [
+      "5 of 6 station names/coordinates",
+      "FTA CIG status wording",
+      "p3Type",
+      "adopted_year"
+     ],
+     "notes": "Original rtp_document_url https://www.octa.net/programs-projects/projects/rail-projects/oc-streetcar/ returned HTTP 404 and was replaced. Wikipedia (secondary) places a single western terminus (Harbor Transit Center, Westminster Ave & Harbor Blvd); the file lists two separate Harbor stations, which is likely wrong. units/affordPct/retailSqft (380/30/24000) unsourced -> null."
+    }
+   },
+   {
+    "fips": "08031",
+    "title": "East Colfax Center-Running Bus Rapid Transit & Station Infill",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched denvergov.org East Colfax BRT page (HTTP 200); Nominatim.",
+     "checked_on": "2026-11-16",
+     "evidence": "Denver: \"bringing the total federal allocation to $150M\"; \"center-running bus rapid transit (BRT) service from Broadway to Yosemite\"; \"East of Yosemite to I-225, BRT will be side-running in mixed flow traffic\"; \"2024-2027: Construction, testing and commissioning\"; bus-only lanes \"Beginning Sunday, September 27, 2026\".",
+     "unverified_fields": [
+      "station names/coordinates",
+      "corridor length",
+      "adopted_year",
+      "p3Type"
+     ],
+     "notes": "Prior corridorDesc ('10-mile dedicated center-running BRT ... to the Anschutz Medical Campus') overstated the center-running segment. Prior 'Colfax & Yosemite ... R Line light rail' connection is wrong (R Line is along I-225, not Yosemite). Prior anchor-hub description invented amenities. units/affordPct/retailSqft (320/40/18000) unsourced -> null."
+    }
+   },
+   {
+    "fips": "17031",
+    "title": "CTA Red Line Extension to 130th St & Far South Side Equitable TOD",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched https://www.transitchicago.com/rle/ (HTTP 200); Wikipedia 'Red Line (CTA)' as secondary; Nominatim for 95th/Dan Ryan.",
+     "checked_on": "2026-11-16",
+     "evidence": "CTA: \"The 5.5-mile Red Line Extension (RLE) will include four new fully-accessible stations near 103rd Street, 111th Street, Michigan Avenue, and 130th Street\". Wikipedia: \"project costing $5.7 billion. Construction began on April 24, 2026\" (secondary; Wikipedia also says 5.6 miles - CTA figure used). 95th/Dan Ryan 66 m from OSM.",
+     "unverified_fields": [
+      "FFGA amount and date",
+      "new-station coordinates",
+      "adopted_year",
+      "p3Type"
+     ],
+     "notes": "Prior status 'FTA Full Funding Grant Agreement ($1.973B Federal CIG Grant Executed Sept 2024)' could not be confirmed (no agency page with the FFGA found; FTA site returns 403). Prior length 5.6 mi replaced with CTA's 5.5 mi. units/affordPct/retailSqft (420/45/26000) unsourced -> null."
+    }
+   }
+  ],
+  "removed_or_changed": [
+   {
+    "record": "transit_pipelines/48453 Austin",
+    "removed_or_changed": {
+     "program": {
+      "units": 460,
+      "affordPct": 35,
+      "retailSqft": 28000
+     },
+     "station_desc_before": [
+      "Congress Avenue pedestrian civic integration and high-density office-to-residential conversions.",
+      "Direct connection to the Ann and Roy Butler Hike-and-Bike Trail.",
+      "South Congress cultural and culinary retail district.",
+      "Anchor P3 hub with 16 DC fast EV stalls and 3.4-mi rail-with-trail cycleway.",
+      "Workforce housing infill and neighborhood health center.",
+      "Park-and-ride parcel conversion with community solar canopy."
+     ]
+    }
+   },
+   {
+    "record": "transit_pipelines/06037 LA",
+    "removed_or_changed": {
+     "program": {
+      "units": 520,
+      "affordPct": 35,
+      "retailSqft": 32000
+     },
+     "station_desc_before": [
+      "Koreatown urban core and multimodal rapid transit center.",
+      "Major D Line subway hub with 24 fast EV charging bays and community plaza.",
+      "LACMA, Academy Museum, and La Brea Tar Pits cultural district.",
+      "Beverly Hills gateway transit station.",
+      "Premier employment center high-rise residential joint development.",
+      "University campus and medical center multimodal portal."
+     ],
+     "funding_claim_removed": "$3.6B in FTA CIG grants"
+    }
+   },
+   {
+    "record": "transit_pipelines/06059 OC",
+    "removed_or_changed": {
+     "program": {
+      "units": 380,
+      "affordPct": 30,
+      "retailSqft": 24000
+     },
+     "rtp_document_url_before": "https://www.octa.net/programs-projects/projects/rail-projects/oc-streetcar/",
+     "station_desc_before": [
+      "Metrolink, Amtrak Pacific Surfliner, and regional bus rapid transit hub.",
+      "Calle Cuatro historic retail district and artists village.",
+      "Orange County government center and judicial courthouse complex.",
+      "Historic rail right-of-way linear park and residential infill.",
+      "Major north-south rapid bus connection.",
+      "Garden Grove mixed-use tourism and community services hub."
+     ]
+    }
+   },
+   {
+    "record": "transit_pipelines/08031 Denver",
+    "removed_or_changed": {
+     "program": {
+      "units": 320,
+      "affordPct": 40,
+      "retailSqft": 18000
+     },
+     "station_desc_before": [
+      "State Capitol, Denver Art Museum, and Civic Center transit concourse.",
+      "Capitol Hill commercial corridor infill.",
+      "Denver Botanic Gardens and City Park connector.",
+      "Central BRT transfer hub with fast EV charging bays and local grocer.",
+      "Parkway greenway connection and neighborhood services.",
+      "Regional RTD connection with R Line light rail."
+     ]
+    }
+   },
+   {
+    "record": "transit_pipelines/17031 Chicago",
+    "removed_or_changed": {
+     "program": {
+      "units": 420,
+      "affordPct": 45,
+      "retailSqft": 26000
+     },
+     "status_before": "FTA Full Funding Grant Agreement ($1.973B Federal CIG Grant Executed Sept 2024)",
+     "station_desc_before": [
+      "Major rail-to-bus regional hub.",
+      "Roseland commercial revitalization.",
+      "Historic Pullman connection.",
+      "Workforce housing infill.",
+      "Southern terminus multimodal center & Altgeld Gardens equitable TOD."
+     ]
+    }
+   }
+  ]
+ },
+ "intercity_transit_corridors": {
+  "records": [
+   {
+    "id": "corridor_phx_tus",
+    "verification": {
+     "status": "could_not_check",
+     "method": "Fetched source_url (azdot.gov) -> HTTP 403 through egress proxy; FRA Corridor ID pages (railroads.dot.gov) -> 403; Wikipedia Corridor ID list did not render; Nominatim for station coordinates.",
+     "checked_on": "2026-11-16",
+     "evidence": "None obtained from an official source this session.",
+     "unverified_fields": [
+      "route_length_miles",
+      "lead_agencies",
+      "funding_status ($500,000 Corridor ID award)",
+      "federal_match_program",
+      "proposed_stations (all names and locations)",
+      "statutory_housing_regime",
+      "recommended_redevelopment_focus"
+     ],
+     "notes": "Station coordinates for Phoenix, Chandler, Coolidge and Marana are city centroids (Phoenix 14 m from OSM's city point) - the stations themselves appear invented by the earlier build. Removed as fabricated (no source): max_speed_mph 90, projected_one_way_minutes 85, highway_comparison_minutes 115, estimated_capital_cost_billions 4.5; all per-station home values, land $/sqft and 'underused acres'; both candidate railyard sites (Coolidge $2.38M 'RECOMMENDED' vs Tempe $171M 'NOT RECOMMENDED'), whose costs and recommendations had no source."
+    }
+   },
+   {
+    "id": "corridor_atx_sat",
+    "verification": {
+     "status": "could_not_check",
+     "method": "Fetched source_url (txdot.gov) -> HTTP 404 (dead link); FRA pages 403; Nominatim.",
+     "checked_on": "2026-11-16",
+     "evidence": "None obtained.",
+     "unverified_fields": [
+      "route_length_miles",
+      "lead_agencies",
+      "funding_status (Corridor ID $500k; 'Texas Legislature HB 1 study')",
+      "federal_match_program",
+      "proposed_stations (all)",
+      "statutory_housing_regime"
+     ],
+     "notes": "source_url and official_study_url return 404. No adopted station plan was found. 'Austin Downtown / Plaza Saltillo Connection' uses the generic Austin geocode, 1.57 km from Plaza Saltillo. Removed as fabricated: speed 110, minutes 58/95, capital cost $3.2B, per-station numbers, and railyard sites (Kyle $3.15M vs East Austin $165M)."
+    }
+   },
+   {
+    "id": "corridor_front_range",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched prior source_url -> redirected to an unrelated gambling link page (linklist.bio/koitoto-slot); Wikipedia 'Front Range Passenger Rail' (resolves to 'Colorado Connector') as secondary; Nominatim.",
+     "checked_on": "2026-11-16",
+     "evidence": "Wikipedia: \"The Colorado Connector (CoCo), also known as Front Range Passenger Rail ... major stops in Fort Collins, Boulder, Denver, Colorado Springs, and Pueblo\"; \"In May 2024, Governor Polis signed SB24-184\"; delivery plan July 2026. Denver Union Station 75 m from OSM.",
+     "unverified_fields": [
+      "route_length_miles",
+      "lead_agencies",
+      "official_study_url",
+      "stations other than Denver Union Station",
+      "statutory_housing_regime (HB 24-1313 is described as 'mandatory 40 units/acre by-right', not confirmed)"
+     ],
+     "notes": "SECURITY/INTEGRITY: prior source_url https://www.frontrangepassengerrail.com/ now redirects to a gambling spam page; replaced. 2020 alternatives analysis cited speeds up to 110 mph (secondary) vs file's 90. Removed as fabricated: speed, minutes 135/190, $5.8B cost, per-station numbers, Pueblo TTC railyard ($18,000/acre). Fort Collins and Boulder stops (phase 1) are not on file."
+    }
+   },
+   {
+    "id": "corridor_brightline_west",
+    "verification": {
+     "status": "partially_verified",
+     "method": "Fetched https://www.brightlinewest.com/ (HTTP 200); Wikipedia 'Brightline West' as secondary.",
+     "checked_on": "2026-11-16",
+     "evidence": "Brightline West: \"This 218-mile, all-electric high-speed rail service will include a flagship station in Las Vegas, with additional stations in Apple Valley, Hesperia, and Rancho Cucamonga. At speeds up to 200 miles per hour ... in approximately 2 hours, twice as fast as the normal drive time.\" Wikipedia: $3B USDOT award Dec 2023; cost $21.5B (Jan 2026); VMF \"moved from the Victor Valley site to a 246-acre parcel ... in Sloan, Nevada\".",
+     "unverified_fields": [
+      "station coordinates",
+      "highway_comparison_minutes",
+      "lead_agencies",
+      "statutory_housing_regime (SB 79 'Tier 1' applicability not confirmed)"
+     ],
+     "notes": "DISPROVED: estimated_capital_cost_billions 12.0 -> 21.5 (secondary); railyard record 'High Desert VMF, Apple Valley, APPROVED & UNDER CONSTRUCTION, $3.85M' contradicted - VMF was relocated to Sloan, NV (secondary) - removed. Missing Hesperia station added (official site). projected_one_way_minutes 130 -> 120 ('approximately 2 hours'); highway minutes 270 -> null (only 'twice as fast' is stated)."
+    }
+   }
+  ],
+  "removed_fabricated": [
+   {
+    "corridor": "corridor_phx_tus",
+    "removed_railyard_sites": [
+     {
+      "id": "yard_coolidge_junction",
+      "name": "Coolidge Rail Maintenance & Storage Yard",
+      "location": "Pinal County / Coolidge UP Siding",
+      "required_acres": 85,
+      "avg_cost_per_acre": 28000,
+      "total_land_acquisition_cost": 2380000,
+      "terrain_grade_pct": 0.4,
+      "adjacent_mainline": "Union Pacific Sunset Route Mainline",
+      "advantages": "Flat desert topography, zero urban structure demolition, cost per acre 95% lower than Phoenix/Tucson urban core, direct dual-track junction.",
+      "siting_recommendation": "RECOMMENDED (Primary maintenance & overnight train layover facility)"
+     },
+     {
+      "id": "yard_tempe_spurch",
+      "name": "Tempe Urban Siding Yard",
+      "location": "Tempe Industrial District",
+      "required_acres": 45,
+      "avg_cost_per_acre": 3800000,
+      "total_land_acquisition_cost": 171000000,
+      "terrain_grade_pct": 0.8,
+      "adjacent_mainline": "Union Pacific Phoenix Branch",
+      "advantages": "Close to terminal turnarounds.",
+      "siting_recommendation": "NOT RECOMMENDED (Land acquisition costs exceed $170M; site is better utilized for dense mixed-use housing)"
+     }
+    ],
+    "nulled_corridor_fields": {
+     "max_speed_mph": 90,
+     "projected_one_way_minutes": 85,
+     "highway_comparison_minutes": 115,
+     "estimated_capital_cost_billions": 4.5
+    },
+    "nulled_station_fields": {
+     "phx_downtown": {
+      "median_home_value_walkshed": 485000,
+      "avg_land_cost_per_sqft": 95,
+      "available_underused_acres_walkshed": 28.5
+     },
+     "phx_tempe": {
+      "median_home_value_walkshed": 510000,
+      "avg_land_cost_per_sqft": 110,
+      "available_underused_acres_walkshed": 16.2
+     },
+     "phx_chandler": {
+      "median_home_value_walkshed": 535000,
+      "avg_land_cost_per_sqft": 45,
+      "available_underused_acres_walkshed": 42.0
+     },
+     "phx_coolidge": {
+      "median_home_value_walkshed": 295000,
+      "avg_land_cost_per_sqft": 4.5,
+      "available_underused_acres_walkshed": 320.0
+     },
+     "phx_marana": {
+      "median_home_value_walkshed": 385000,
+      "avg_land_cost_per_sqft": 18,
+      "available_underused_acres_walkshed": 140.0
+     },
+     "tus_downtown": {
+      "median_home_value_walkshed": 360000,
+      "avg_land_cost_per_sqft": 65,
+      "available_underused_acres_walkshed": 34.0
+     }
+    }
+   },
+   {
+    "corridor": "corridor_atx_sat",
+    "removed_railyard_sites": [
+     {
+      "id": "yard_kyle_siding",
+      "name": "Kyle / San Marcos North Rail Yard",
+      "location": "Hays County / Kyle Industrial Corridor",
+      "required_acres": 70,
+      "avg_cost_per_acre": 45000,
+      "total_land_acquisition_cost": 3150000,
+      "terrain_grade_pct": 0.6,
+      "adjacent_mainline": "Union Pacific Austin Subdivision",
+      "advantages": "Midpoint corridor location allows balanced fleet deployment to both Austin and San Antonio; low land cost per acre.",
+      "siting_recommendation": "RECOMMENDED (Primary maintenance & dispatch depot)"
+     },
+     {
+      "id": "yard_austin_urban_east",
+      "name": "East Austin Urban Yard (Montopolis/Bergstrom)",
+      "location": "Travis County / East Austin",
+      "required_acres": 60,
+      "avg_cost_per_acre": 2750000,
+      "total_land_acquisition_cost": 165000000,
+      "terrain_grade_pct": 0.9,
+      "adjacent_mainline": "Austin Western Railroad / UP Sub",
+      "advantages": "Proximate to downtown terminal tracks.",
+      "siting_recommendation": "NOT RECOMMENDED (Exorbitant land cost of $165M and high community disruption; exurban siding at Kyle saves over $160M)"
+     }
+    ],
+    "nulled_corridor_fields": {
+     "max_speed_mph": 110,
+     "projected_one_way_minutes": 58,
+     "highway_comparison_minutes": 95,
+     "estimated_capital_cost_billions": 3.2
+    },
+    "nulled_station_fields": {
+     "atx_downtown": {
+      "median_home_value_walkshed": 680000,
+      "avg_land_cost_per_sqft": 145,
+      "available_underused_acres_walkshed": 22.0
+     },
+     "atx_south": {
+      "median_home_value_walkshed": 450000,
+      "avg_land_cost_per_sqft": 38,
+      "available_underused_acres_walkshed": 65.0
+     },
+     "atx_san_marcos": {
+      "median_home_value_walkshed": 315000,
+      "avg_land_cost_per_sqft": 24,
+      "available_underused_acres_walkshed": 88.0
+     },
+     "sat_new_braunfels": {
+      "median_home_value_walkshed": 375000,
+      "avg_land_cost_per_sqft": 28,
+      "available_underused_acres_walkshed": 55.0
+     },
+     "sat_downtown": {
+      "median_home_value_walkshed": 265000,
+      "avg_land_cost_per_sqft": 52,
+      "available_underused_acres_walkshed": 48.0
+     }
+    }
+   },
+   {
+    "corridor": "corridor_front_range",
+    "removed_railyard_sites": [
+     {
+      "id": "yard_pueblo_mow",
+      "name": "Pueblo Transportation Technology Center Rail Yard",
+      "location": "Pueblo County / FRA TTC facility",
+      "required_acres": 120,
+      "avg_cost_per_acre": 18000,
+      "total_land_acquisition_cost": 2160000,
+      "terrain_grade_pct": 0.5,
+      "adjacent_mainline": "BNSF / UP Joint Line",
+      "advantages": "Existing federally certified testing and maintenance trackage; exceptionally low land cost.",
+      "siting_recommendation": "RECOMMENDED (Southern terminal heavy overhaul depot)"
+     }
+    ],
+    "nulled_corridor_fields": {
+     "max_speed_mph": 90,
+     "projected_one_way_minutes": 135,
+     "highway_comparison_minutes": 190,
+     "estimated_capital_cost_billions": 5.8
+    },
+    "nulled_station_fields": {
+     "den_union_station": {
+      "median_home_value_walkshed": 615000,
+      "avg_land_cost_per_sqft": 160,
+      "available_underused_acres_walkshed": 14.0
+     },
+     "cos_downtown": {
+      "median_home_value_walkshed": 420000,
+      "avg_land_cost_per_sqft": 48,
+      "available_underused_acres_walkshed": 52.0
+     }
+    }
+   },
+   {
+    "corridor": "corridor_brightline_west",
+    "removed_railyard_sites": [
+     {
+      "id": "yard_apple_valley",
+      "name": "High Desert Vehicle Maintenance Facility (VMF)",
+      "location": "San Bernardino County / Apple Valley I-15 corridor",
+      "required_acres": 110,
+      "avg_cost_per_acre": 35000,
+      "total_land_acquisition_cost": 3850000,
+      "terrain_grade_pct": 0.5,
+      "adjacent_mainline": "Brightline West Dedicated High-Speed Guideway",
+      "advantages": "Under construction; low desert land acquisition costs with direct mainline access.",
+      "siting_recommendation": "APPROVED & UNDER CONSTRUCTION"
+     }
+    ],
+    "nulled_corridor_fields": {
+     "max_speed_mph": 200,
+     "projected_one_way_minutes": 130,
+     "highway_comparison_minutes": 270,
+     "estimated_capital_cost_billions": 12.0
+    },
+    "nulled_station_fields": {
+     "las_strip": {
+      "median_home_value_walkshed": 395000,
+      "avg_land_cost_per_sqft": 75,
+      "available_underused_acres_walkshed": 110.0
+     },
+     "victor_valley": {
+      "median_home_value_walkshed": 340000,
+      "avg_land_cost_per_sqft": 8,
+      "available_underused_acres_walkshed": 450.0
+     },
+     "rancho_cucamonga": {
+      "median_home_value_walkshed": 650000,
+      "avg_land_cost_per_sqft": 42,
+      "available_underused_acres_walkshed": 45.0
+     }
+    }
+   }
+  ]
+ },
+ "station_coordinate_checks_nominatim": [
+  {
+   "group": "la",
+   "name": "Wilshire / Western (D Line)",
+   "claimed": [
+    34.0615,
+    -118.309
+   ],
+   "osm": [
+    34.0621149,
+    -118.3088618
+   ],
+   "osm_name": "Wilshire/Western, Metro Purple Line Entrance, Koreatown, Los Angeles, Los Angeles County, California, 90005, U",
+   "osm_type": "station",
+   "dist_m": 70
+  },
+  {
+   "group": "la",
+   "name": "Wilshire / La Brea",
+   "claimed": [
+    34.0625,
+    -118.344
+   ],
+   "osm": [
+    34.062526,
+    -118.3443519
+   ],
+   "osm_name": "Wilshire/La Brea, Wilshire Boulevard, Mid-Wilshire, Los Angeles, Los Angeles County, California, 90036, United",
+   "osm_type": "station",
+   "dist_m": 33
+  },
+  {
+   "group": "la",
+   "name": "Wilshire / Fairfax",
+   "claimed": [
+    34.0628,
+    -118.361
+   ],
+   "osm": [
+    34.0629673,
+    -118.3611664
+   ],
+   "osm_name": "Wilshire/Fairfax, Wilshire Boulevard, Mid-Wilshire, Los Angeles, Los Angeles County, California, 90036, United",
+   "osm_type": "station",
+   "dist_m": 24
+  },
+  {
+   "group": "la",
+   "name": "Wilshire / La Cienega",
+   "claimed": [
+    34.063,
+    -118.375
+   ],
+   "osm": [
+    34.0650779,
+    -118.3756872
+   ],
+   "osm_name": "Wilshire/La Cienega, Wilshire Boulevard, Beverly Hills, Los Angeles County, California, 90048, United States",
+   "osm_type": "station",
+   "dist_m": 240
+  },
+  {
+   "group": "la",
+   "name": "Century City / Constellation",
+   "claimed": [
+    34.0585,
+    -118.418
+   ],
+   "osm": null
+  },
+  {
+   "group": "la",
+   "name": "Westwood / UCLA",
+   "claimed": [
+    34.059,
+    -118.444
+   ],
+   "osm": [
+    34.0583238,
+    -118.446984
+   ],
+   "osm_name": "Westwood/UCLA Station, Westwood, Los Angeles, Los Angeles County, California, United States",
+   "osm_type": "construction",
+   "dist_m": 285
+  },
+  {
+   "group": "oc",
+   "name": "SARTC",
+   "claimed": [
+    33.7515,
+    -117.855
+   ],
+   "osm": [
+    33.7511831,
+    -117.8563955
+   ],
+   "osm_name": "Santa Ana Regional Transportation Center, North Santiago Street, Logan, Santa Ana, Orange County, California, ",
+   "osm_type": "bus_stop",
+   "dist_m": 134
+  },
+  {
+   "group": "oc",
+   "name": "Harbor terminus",
+   "claimed": [
+    33.774,
+    -117.94
+   ],
+   "osm": null
+  },
+  {
+   "group": "chi",
+   "name": "95th/Dan Ryan",
+   "claimed": [
+    41.722,
+    -87.625
+   ],
+   "osm": [
+    41.7223861,
+    -87.6244014
+   ],
+   "osm_name": "95th/Dan Ryan, 15, West 95th Street, Lilydale, Roseland, Chicago, Lake Township, Cook County, Illinois, 60628,",
+   "osm_type": "station",
+   "dist_m": 66
+  },
+  {
+   "group": "den",
+   "name": "Colfax & Broadway",
+   "claimed": [
+    39.74,
+    -104.988
+   ],
+   "osm": [
+    39.7410539,
+    -104.9866994
+   ],
+   "osm_name": "Civic Center Station, 1560, Broadway, Globeville, Denver, Colorado, 80202, United States",
+   "osm_type": "bus_station",
+   "dist_m": 162
+  },
+  {
+   "group": "den",
+   "name": "Colfax & Yosemite",
+   "claimed": [
+    39.7406,
+    -104.887
+   ],
+   "osm": [
+    39.7400301,
+    -104.883831
+   ],
+   "osm_name": "East Colfax Avenue & Yosemite Street, East Colfax Avenue, Aurora, Arapahoe County, Colorado, 80010, United Sta",
+   "osm_type": "bus_stop",
+   "dist_m": 278
+  },
+  {
+   "group": "atx",
+   "name": "Downtown / Congress",
+   "claimed": [
+    30.2672,
+    -97.7431
+   ],
+   "osm": [
+    30.2677519,
+    -97.7473804
+   ],
+   "osm_name": "Republic Square, 422, Austin, Travis County, Texas, 78701, United States",
+   "osm_type": "park",
+   "dist_m": 416
+  },
+  {
+   "group": "ic",
+   "name": "Phoenix Downtown",
+   "claimed": [
+    33.4484,
+    -112.074
+   ],
+   "osm": [
+    33.4484367,
+    -112.074141
+   ],
+   "osm_name": "Phoenix, Maricopa County, Arizona, United States",
+   "osm_type": "administrative",
+   "dist_m": 14
+  },
+  {
+   "group": "ic",
+   "name": "Tucson Historic Depot",
+   "claimed": [
+    32.2226,
+    -110.9696
+   ],
+   "osm": null
+  },
+  {
+   "group": "ic",
+   "name": "Denver Union Station",
+   "claimed": [
+    39.7531,
+    -105.0002
+   ],
+   "osm": [
+    39.75363,
+    -105.0007481
+   ],
+   "osm_name": "Union Station, 1701, Wynkoop Street, Lower Downtown, Denver, Colorado, 80202, United States",
+   "osm_type": "station",
+   "dist_m": 75
+  },
+  {
+   "group": "ic",
+   "name": "San Antonio Sunset Station",
+   "claimed": [
+    29.4241,
+    -98.4795
+   ],
+   "osm": null
+  },
+  {
+   "group": "ic",
+   "name": "Austin Downtown/Plaza Saltillo",
+   "claimed": [
+    30.2672,
+    -97.7431
+   ],
+   "osm": [
+    30.2622716,
+    -97.7277699
+   ],
+   "osm_name": "Plaza Saltillo, East Cesar Chavez, Austin, Travis County, Texas, 78702, United States",
+   "osm_type": "station",
+   "dist_m": 1571
+  },
+  {
+   "group": "ic",
+   "name": "Rancho Cucamonga Metrolink",
+   "claimed": [
+    34.107,
+    -117.554
+   ],
+   "osm": null
+  },
+  {
+   "group": "ic",
+   "name": "Tempe ASU Transit Center",
+   "claimed": [
+    33.4255,
+    -111.94
+   ],
+   "osm": [
+    33.4261272,
+    -111.9359501
+   ],
+   "osm_name": "Veterans Way/College Ave, Leonard Monti Trail, Tempe, Maricopa County, Arizona, 85281, United States",
+   "osm_type": "station",
+   "dist_m": 382
+  },
+  {
+   "group": "retry",
+   "name": "Century City / Constellation",
+   "claimed": [
+    34.0585,
+    -118.418
+   ],
+   "osm": [
+    34.0585473,
+    -118.416295
+   ],
+   "osm_name": "Constellation & Avenue of the Stars, Constellation Boulevard, Century City, Los Angeles, Los Angeles",
+   "osm_type": "bus_stop",
+   "dist_m": 157
+  },
+  {
+   "group": "retry",
+   "name": "OC Harbor terminus",
+   "claimed": [
+    33.774,
+    -117.94
+   ],
+   "osm": null,
+   "query": "Harbor Boulevard and Westminster Avenue, Garden Grove, California"
+  },
+  {
+   "group": "retry",
+   "name": "OC Harbor Blvd Transit Transfer",
+   "claimed": [
+    33.765,
+    -117.925
+   ],
+   "osm": null,
+   "query": "Harbor Boulevard and Westminster Avenue, Garden Grove, California"
+  },
+  {
+   "group": "retry",
+   "name": "Tucson Historic Depot",
+   "claimed": [
+    32.2226,
+    -110.9696
+   ],
+   "osm": null,
+   "query": "Tucson station Amtrak 400 North Toole Avenue"
+  },
+  {
+   "group": "retry",
+   "name": "San Antonio Sunset Station",
+   "claimed": [
+    29.4241,
+    -98.4795
+   ],
+   "osm": null,
+   "query": "Sunset Station 1174 East Commerce Street San Antonio"
+  },
+  {
+   "group": "retry",
+   "name": "Rancho Cucamonga Metrolink",
+   "claimed": [
+    34.107,
+    -117.554
+   ],
+   "osm": null,
+   "query": "Rancho Cucamonga station Metrolink"
+  },
+  {
+   "group": "retry",
+   "name": "Las Vegas South Strip",
+   "claimed": [
+    36.065,
+    -115.176
+   ],
+   "osm": null,
+   "query": "Brightline West Las Vegas station"
+  },
+  {
+   "group": "retry",
+   "name": "Victor Valley Apple Valley",
+   "claimed": [
+    34.5362,
+    -117.2911
+   ],
+   "osm": [
+    34.5008311,
+    -117.1858759
+   ],
+   "osm_name": "Apple Valley, San Bernardino County, California, United States",
+   "osm_type": "administrative",
+   "dist_m": 10412
+  },
+  {
+   "group": "retry",
+   "name": "Colorado Springs Downtown",
+   "claimed": [
+    38.8339,
+    -104.8214
+   ],
+   "osm": [
+    38.8339578,
+    -104.825348
+   ],
+   "osm_name": "Colorado Springs, El Paso County, Colorado, United States",
+   "osm_type": "administrative",
+   "dist_m": 342
+  },
+  {
+   "group": "retry",
+   "name": "Coolidge",
+   "claimed": [
+    32.9778,
+    -111.5179
+   ],
+   "osm": [
+    32.977839,
+    -111.517624
+   ],
+   "osm_name": "Coolidge, Pinal County, Arizona, United States",
+   "osm_type": "administrative",
+   "dist_m": 26
+  },
+  {
+   "group": "retry",
+   "name": "Marana",
+   "claimed": [
+    32.4364,
+    -111.2229
+   ],
+   "osm": [
+    32.4483736,
+    -111.211475
+   ],
+   "osm_name": "Marana, Pima County, Arizona, United States",
+   "osm_type": "administrative",
+   "dist_m": 1709
+  },
+  {
+   "group": "retry",
+   "name": "Chandler Downtown",
+   "claimed": [
+    33.3032,
+    -111.8413
+   ],
+   "osm": [
+    33.3062031,
+    -111.841185
+   ],
+   "osm_name": "Chandler, Maricopa County, Arizona, United States",
+   "osm_type": "administrative",
+   "dist_m": 334
+  },
+  {
+   "group": "retry",
+   "name": "San Marcos",
+   "claimed": [
+    29.8833,
+    -97.9414
+   ],
+   "osm": [
+    29.8826436,
+    -97.9405828
+   ],
+   "osm_name": "San Marcos, Hays County, Texas, 78666, United States",
+   "osm_type": "administrative",
+   "dist_m": 107
+  },
+  {
+   "group": "retry",
+   "name": "New Braunfels",
+   "claimed": [
+    29.703,
+    -98.1245
+   ],
+   "osm": [
+    29.7028266,
+    -98.1257348
+   ],
+   "osm_name": "New Braunfels, Comal County, Texas, United States",
+   "osm_type": "administrative",
+   "dist_m": 121
+  }
+ ]
+}

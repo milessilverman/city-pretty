@@ -3,8 +3,9 @@ main = "workers/api-proxy.ts"
 compatibility_date = "2026-11-08"
 
 # Secrets (never in this file):
-#   wrangler secret put ANTHROPIC_API_KEY   # the AI advisor (finish askAdvisorModel in workers/api-proxy.ts first)
+#   wrangler secret put ANTHROPIC_API_KEY   # the AI advisor (Claude with sourced fact-lookup tools)
 #   wrangler secret put GOOGLE_MAPS_KEY     # Street View photos
+#   wrangler secret put CENSUS_API_KEY      # free key from api.census.gov/data/key_signup.html; turns on ACS lookups
 # After deploying, put the Worker's URL in app/config.js (workerUrl).
 
 [vars]

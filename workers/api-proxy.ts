@@ -5,11 +5,15 @@
 //   GET  /api/health      what is configured (the page shows "Connected" only when ai_advisor_ready is true)
 //   POST /api/ai          { question, context, history } -> { ok: true, text } or { ok: false, error }
 //   GET  /api/streetview  ?lat=&lng=&heading= -> a Street View photo
+//   GET  /api/facts       ?lat=&lng= -> sourced public facts for a point (Census, HUD, USGS, FEMA), each with its URL
 //
 // Safety: only the site's own origins may call it, every route is rate limited, the model and the instructions are
 // fixed here (a caller sends a question and page data, never a prompt or a model name), and input sizes are capped.
 
+import Anthropic from "@anthropic-ai/sdk";
 import { ADVISOR_SYSTEM_PROMPT, buildAdvisorUserMessage, sanitizeAdvisorContext } from "../src/ai/advisorGroundingContract";
+import { runAdvisor, type AdvisorAnswer } from "./advisorAgent.ts";
+import { siteFacts } from "./sources.ts";
 
 interface RateLimiter {
   limit(options: { key: string }): Promise<{ success: boolean }>;
@@ -18,28 +22,22 @@ interface RateLimiter {
 export interface Env {
   ANTHROPIC_API_KEY?: string; // `wrangler secret put ANTHROPIC_API_KEY`
   GOOGLE_MAPS_KEY?: string; // `wrangler secret put GOOGLE_MAPS_KEY`
+  CENSUS_API_KEY?: string; // `wrangler secret put CENSUS_API_KEY` (free: api.census.gov/data/key_signup.html); enables ACS lookups
   AI_RATE_LIMITER?: RateLimiter; // [[ratelimits]] in wrangler.toml
   STREETVIEW_RATE_LIMITER?: RateLimiter;
 }
 
 // ---------------------------------------------------------------------------------------------------------------
-// The model call. This is the one place to finish when the advisor is wired to Claude: send `system` and `messages`
-// to the Claude Messages API with env.ANTHROPIC_API_KEY, return the reply's text, then set MODEL_CALL_IMPLEMENTED to
-// true so /api/health reports the advisor as ready and the page shows "Connected".
-//
-//   system:   ADVISOR_SYSTEM_PROMPT (stable text, suitable for prompt caching)
-//   messages: [{ role: "user" | "assistant", content: string }, ...], starting with "user" and ending with the
-//             user's question plus the page data (buildAdvisorUserMessage)
+// The model call: Claude with fact-lookup tools (workers/advisorAgent.ts). The model may only state facts from the
+// page data or from a tool result; each tool queries an official public source and returns the URL it used.
 // ---------------------------------------------------------------------------------------------------------------
-const MODEL_CALL_IMPLEMENTED = false;
-const ADVISOR_MODEL = "claude-opus-5-5";
+const MODEL_CALL_IMPLEMENTED = true;
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
-type ModelResult = { ok: true; text: string } | { ok: false; status: number; error: string };
 
-async function askAdvisorModel(env: Env, system: string, messages: ChatMessage[]): Promise<ModelResult> {
-  void env; void system; void messages; void ADVISOR_MODEL;
-  return { ok: false, status: 501, error: "The AI advisor is not connected to a model yet" };
+async function askAdvisorModel(env: Env, system: string, messages: ChatMessage[]): Promise<AdvisorAnswer> {
+  const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 2 });
+  return runAdvisor(client, system, messages, { censusApiKey: env.CENSUS_API_KEY });
 }
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -109,7 +107,21 @@ async function handleAdvisor(request: Request, env: Env, origin: string | null):
   const messages: ChatMessage[] = [...cleanHistory(body.history), { role: "user", content: buildAdvisorUserMessage(question, context) }];
   const result = await askAdvisorModel(env, ADVISOR_SYSTEM_PROMPT, messages);
   if (!result.ok) return json({ ok: false, error: result.error }, result.status, origin);
-  return json({ ok: true, text: result.text }, 200, origin);
+  return json({ ok: true, text: result.text, sources: result.sources, stopped_early: result.stopped_early || null }, 200, origin);
+}
+
+async function handleFacts(request: Request, env: Env, origin: string | null): Promise<Response> {
+  if (await rateLimited(env.STREETVIEW_RATE_LIMITER, request)) return json({ ok: false, error: "Too many requests" }, 429, origin);
+  const url = new URL(request.url);
+  const lat = Number(url.searchParams.get("lat"));
+  const lng = Number(url.searchParams.get("lng"));
+  if (!Number.isFinite(lat) || !Number.isFinite(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180) {
+    return json({ ok: false, error: "lat and lng must be numbers" }, 400, origin);
+  }
+  const facts = await siteFacts(lat, lng, { censusApiKey: env.CENSUS_API_KEY });
+  return new Response(JSON.stringify({ ok: true, facts }), {
+    headers: { "Content-Type": "application/json", "Cache-Control": "public, max-age=86400", ...cors(origin) },
+  });
 }
 
 async function handleStreetView(request: Request, env: Env, origin: string | null): Promise<Response> {
@@ -141,6 +153,8 @@ export default {
         status: "ok",
         ai_advisor_ready: Boolean(env.ANTHROPIC_API_KEY) && MODEL_CALL_IMPLEMENTED,
         streetview_ready: Boolean(env.GOOGLE_MAPS_KEY),
+        facts_ready: true,
+        census_acs_ready: Boolean(env.CENSUS_API_KEY),
         rate_limited: Boolean(env.AI_RATE_LIMITER && env.STREETVIEW_RATE_LIMITER),
       }, 200, origin);
     }
@@ -151,6 +165,7 @@ export default {
     try {
       if (pathname === "/api/ai") return await handleAdvisor(request, env, origin);
       if (pathname === "/api/streetview") return await handleStreetView(request, env, origin);
+      if (pathname === "/api/facts") return await handleFacts(request, env, origin);
     } catch (err) {
       console.error("worker error", err);
       return json({ ok: false, error: "Server error" }, 500, origin);

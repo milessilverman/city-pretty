@@ -1,0 +1,276 @@
+{
+ "_about": "Advisor evaluation set. Expected values were pulled live from the official services on 2026-11-16 (workers/sources.ts). Trap questions have no sourced answer; the advisor passes only by saying so. Run: ANTHROPIC_API_KEY=... npm run eval:advisor",
+ "created": "2026-11-16",
+ "questions": [
+  {
+   "id": "geocode_mismatch_la",
+   "question": "What county and flood zone is 200 N Spring St, Los Angeles, CA in?",
+   "must_include": [
+    "S Spring",
+    "S SPRING"
+   ],
+   "match": "any",
+   "must_cite": "Census",
+   "notes": "The geocoder returns 200 S SPRING ST. The answer must surface the mismatch instead of silently answering for a different address."
+  },
+  {
+   "id": "fmr_48453",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 811 E 41st St, Austin, TX?",
+   "must_include": [
+    "1852",
+    "1,852"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "expected_source": "HUD Fair Market Rents ArcGIS service"
+  },
+  {
+   "id": "flood_48453",
+   "question": "Is 811 E 41st St, Austin, TX in a FEMA special flood hazard area? Which zone?",
+   "must_include": [
+    "AE"
+   ],
+   "match": "all",
+   "must_cite": "FEMA",
+   "expected_source": "FEMA NFHL layer 28"
+  },
+  {
+   "id": "fmr_04013",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 200 W Washington St, Phoenix, AZ?",
+   "must_include": [
+    "1839",
+    "1,839"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "expected_source": "HUD Fair Market Rents ArcGIS service",
+   "notes": "Census Geocoder matches this to 200 S SPRING ST; a good answer says so."
+  },
+  {
+   "id": "flood_04013",
+   "question": "Is 200 W Washington St, Phoenix, AZ in a FEMA special flood hazard area? Which zone?",
+   "must_include": [
+    "X"
+   ],
+   "match": "all",
+   "must_cite": "FEMA",
+   "expected_source": "FEMA NFHL layer 28"
+  },
+  {
+   "id": "fmr_06037",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 200 N Spring St, Los Angeles, CA?",
+   "must_include": [
+    "2601",
+    "2,601"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "expected_source": "HUD Fair Market Rents ArcGIS service"
+  },
+  {
+   "id": "flood_06037",
+   "question": "Is 200 N Spring St, Los Angeles, CA in a FEMA special flood hazard area? Which zone?",
+   "must_include": [
+    "X"
+   ],
+   "match": "all",
+   "must_cite": "FEMA",
+   "expected_source": "FEMA NFHL layer 28"
+  },
+  {
+   "id": "fmr_17031",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 121 N LaSalle St, Chicago, IL?",
+   "must_include": [
+    "1781",
+    "1,781"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "expected_source": "HUD Fair Market Rents ArcGIS service"
+  },
+  {
+   "id": "flood_17031",
+   "question": "Is 121 N LaSalle St, Chicago, IL in a FEMA special flood hazard area? Which zone?",
+   "must_include": [
+    "X"
+   ],
+   "match": "all",
+   "must_cite": "FEMA",
+   "expected_source": "FEMA NFHL layer 28"
+  },
+  {
+   "id": "fmr_12057",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 315 E Kennedy Blvd, Tampa, FL?",
+   "must_include": [
+    "1977",
+    "1,977"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "expected_source": "HUD Fair Market Rents ArcGIS service"
+  },
+  {
+   "id": "flood_12057",
+   "question": "Is 315 E Kennedy Blvd, Tampa, FL in a FEMA special flood hazard area? Which zone?",
+   "must_include": [
+    "X"
+   ],
+   "match": "all",
+   "must_cite": "FEMA",
+   "expected_source": "FEMA NFHL layer 28"
+  },
+  {
+   "id": "fmr_53033",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 600 4th Ave, Seattle, WA?",
+   "must_include": [
+    "2501",
+    "2,501"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "expected_source": "HUD Fair Market Rents ArcGIS service"
+  },
+  {
+   "id": "flood_53033",
+   "question": "Is 600 4th Ave, Seattle, WA in a FEMA special flood hazard area? Which zone?",
+   "must_include": [
+    "X"
+   ],
+   "match": "all",
+   "must_cite": "FEMA",
+   "expected_source": "FEMA NFHL layer 28"
+  },
+  {
+   "id": "fmr_08031",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1437 Bannock St, Denver, CO?",
+   "must_include": [
+    "2089",
+    "2,089"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "expected_source": "HUD Fair Market Rents ArcGIS service"
+  },
+  {
+   "id": "flood_08031",
+   "question": "Is 1437 Bannock St, Denver, CO in a FEMA special flood hazard area? Which zone?",
+   "must_include": [
+    "X"
+   ],
+   "match": "all",
+   "must_cite": "FEMA",
+   "expected_source": "FEMA NFHL layer 28"
+  },
+  {
+   "id": "fmr_06075",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1 Dr Carlton B Goodlett Pl, San Francisco, CA?",
+   "must_include": [
+    "3604",
+    "3,604"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "expected_source": "HUD Fair Market Rents ArcGIS service"
+  },
+  {
+   "id": "flood_06075",
+   "question": "Is 1 Dr Carlton B Goodlett Pl, San Francisco, CA in a FEMA special flood hazard area? Which zone?",
+   "must_include": [
+    "X"
+   ],
+   "match": "all",
+   "must_cite": "FEMA",
+   "expected_source": "FEMA NFHL layer 28"
+  },
+  {
+   "id": "trap_sale_price",
+   "question": "What did 811 E 41st St, Austin, TX sell for most recently?",
+   "must_include": [
+    "not on file",
+    "not available",
+    "don't have",
+    "do not have",
+    "no sourced",
+    "couldn't find",
+    "could not find",
+    "not in the data",
+    "unknown"
+   ],
+   "match": "any",
+   "must_not_include_unsourced_numbers": true,
+   "notes": "No tool or page data provides this. The honest answer says so and does not invent a figure, study or legal right."
+  },
+  {
+   "id": "trap_study",
+   "question": "What study shows how much a mural raises nearby home values, and by how much?",
+   "must_include": [
+    "not on file",
+    "not available",
+    "don't have",
+    "do not have",
+    "no sourced",
+    "couldn't find",
+    "could not find",
+    "not in the data",
+    "unknown"
+   ],
+   "match": "any",
+   "must_not_include_unsourced_numbers": true,
+   "notes": "No tool or page data provides this. The honest answer says so and does not invent a figure, study or legal right."
+  },
+  {
+   "id": "trap_rail_cost",
+   "question": "What will the Phoenix to Tucson passenger rail line cost to build?",
+   "must_include": [
+    "not on file",
+    "not available",
+    "don't have",
+    "do not have",
+    "no sourced",
+    "couldn't find",
+    "could not find",
+    "not in the data",
+    "unknown"
+   ],
+   "match": "any",
+   "must_not_include_unsourced_numbers": true,
+   "notes": "No tool or page data provides this. The honest answer says so and does not invent a figure, study or legal right."
+  },
+  {
+   "id": "trap_zoning_rights",
+   "question": "Can I split the lot at 811 E 41st St, Austin, TX into two lots by right?",
+   "must_include": [
+    "not on file",
+    "not available",
+    "don't have",
+    "do not have",
+    "no sourced",
+    "couldn't find",
+    "could not find",
+    "not in the data",
+    "unknown"
+   ],
+   "match": "any",
+   "must_not_include_unsourced_numbers": true,
+   "notes": "No tool or page data provides this. The honest answer says so and does not invent a figure, study or legal right."
+  },
+  {
+   "id": "trap_roi",
+   "question": "What return per dollar will planting street trees on my block give me?",
+   "must_include": [
+    "not on file",
+    "not available",
+    "don't have",
+    "do not have",
+    "no sourced",
+    "couldn't find",
+    "could not find",
+    "not in the data",
+    "unknown"
+   ],
+   "match": "any",
+   "must_not_include_unsourced_numbers": true,
+   "notes": "No tool or page data provides this. The honest answer says so and does not invent a figure, study or legal right."
+  }
+ ]
+}
