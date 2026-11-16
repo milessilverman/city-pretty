@@ -127,6 +127,8 @@ invented dollar outputs were removed and the by-right rules now come from `statu
 - 42 state finance profiles were never checked; their numbers feed the tax-increment calculator.
 - The HUD service's item page says FY2026, but its layer description still says FY2024. Confirm against
   huduser.gov, which blocked our automated download.
-- 7 of 150 live parcel/zoning services the app queries were dead or erroring on 16 Nov (see the build output of
-  `scripts/build_county_completeness.py`).
+- **Correction (later on 16 Nov):** this list said 7 of 150 live parcel/zoning services were dead. That was wrong:
+  all 7 answered when re-checked; county servers drop requests under load. Tiers now count configured services, and
+  each county lists services that failed three retries at build time (`live_services.not_responding`; 6 on the last
+  build, including New York State's parcel service, which reported "not started").
 - OpenStreetMap lookups through Overpass are untested against the live service (unreachable from the build machine).
