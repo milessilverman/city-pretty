@@ -3968,7 +3968,7 @@
    ]
   },
   {
-   "url": "https://services1.arcgis.com/7HDiw78fcUiM2BWn/arcgis/rest/services/AK_Parcels/FeatureServer/0",
+   "url": "https://services2.arcgis.com/Ce3DhLRthdwbHlfF/arcgis/rest/services/PropertyInformation_Hosted/FeatureServer/0",
    "states": [
     "02",
     "AK"
@@ -3976,23 +3976,47 @@
    "counties": [
     "02020"
    ],
-   "name": "State of Alaska Statewide Cadastral Parcels",
-   "terms": "https://gis.data.alaska.gov",
-   "addr": "parcel_id",
-   "apn": "parcel_id",
+   "name": "Municipality of Anchorage Property Information",
+   "terms": "https://www.arcgis.com/home/item.html?id=57d6ff611f444d75a1bf2b4a1d340163",
+   "addr": "Parcel_Address",
+   "apn": "Parcel_ID",
    "max": 2000,
    "fields": [
     [
-     "parcel_id",
+     "Parcel_ID",
      "Parcel ID"
     ],
     [
-     "property_type",
+     "Parcel_Address",
+     "Address"
+    ],
+    [
+     "Zoning_District",
+     "Zoning"
+    ],
+    [
+     "Land_Use",
+     "Land Use"
+    ],
+    [
+     "Property_Type",
      "Property Type"
     ],
     [
-     "property_use",
-     "Property Use"
+     "Lot_Size",
+     "Lot Size (sq ft)"
+    ],
+    [
+     "Total_Living_Units",
+     "Living Units"
+    ],
+    [
+     "Appraisal_Year",
+     "Appraisal Year"
+    ],
+    [
+     "Appraised_Total_Value",
+     "Appraised Total Value"
     ]
    ]
   },

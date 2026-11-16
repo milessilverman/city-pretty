@@ -418,6 +418,35 @@ without a recent sale has not yet been seen showing an estimate live. Independen
 A registry check of all 123 parcel services the page uses found 9 failing outside these counties (listed in
 `data/backtests/parcel_registry_check_2026-11-16.json`).
 
+Re-run by me at 21:20 on 16 Nov, after merging the fixes: 117, then 121 of 123 answered. Two failures were real and
+persistent: **Alaska's statewide parcel layer (used for Anchorage) now refuses requests without a login token**
+(it answered at 19:41; three retries all got "Token Required"), so Anchorage now uses the Municipality of Anchorage's
+own public `PropertyInformation_Hosted` layer (checked: a point at 646 F St returns that parcel, appraisal year 2026,
+data edited 16 Nov). **Hinds County MS's server returns HTTP 500 on every request, including its root**; the two
+alternatives found (the county's own server, a regional planning server) also failed, so Hinds is unchanged and
+clicks there show "couldn't get this lot". Tennessee's state parcel server answers some requests with 403 and the
+next with 200 (likely rate limiting; the four TN counties are queried back to back by the check).
+
+### Live check of every other panel, 20 counties (16 Nov)
+
+`scripts/live_check_panels.mjs` opens 60 real parcels (2 counties per Census division, plus LA and Orange CA) through
+the page's own click path and checks each panel against its source, fetched separately: Census TIGERweb, the HUD
+FY2027 file, FEMA flood zones, USGS elevation, crash counts, state law records, the county data files and Tree Equity.
+**No wrong number was shown.** I re-ran it for Travis TX and Jefferson AL: all checks passed except one FEMA
+"Not available (failed to fetch)", which is FEMA dropping a request, not a wrong value. Details:
+`audit/live-panels-check.md`.
+
+**Correction: the house checks stated housing rights that weren't sourced, in every state but California.** Since
+before this audit, the "what can I build" checks printed hardcoded legal claims outside California: "Austin HOME
+Initiative authorizes" applied to all of Texas, "WA HB 1110 allows", "HB 2001 permits", Florida Live Local
+"internal apartment conversions", a "municipal infill schedule", "Fannie Mae / FHA" financing, California's 4-ft ADU
+setback applied everywhere, and Austin's lot-split sale rule applied to all of Texas. None were tied to a checked
+record or to the conditions each law requires. They now name only the state's records in `statutes.json`, as
+applying only where all their conditions are met, and grant eligibility is stated as conditional. The provenance
+audit missed this because the claims were text in `app.js`, not data records. Also fixed: a lot whose use the parcel
+service doesn't record was called non-residential (all 51 sampled houses outside LA); median rent was rounded to
+thousands ("$2k/mo" for $2,356); the records panel now retries once when FEMA drops a connection.
+
 ### Correction: three "shown" estimates were not shown (found and fixed 16 Nov)
 
 The 16 Nov report said Queens, Staten Island and Hillsborough estimates were shown on the page. They were not: the

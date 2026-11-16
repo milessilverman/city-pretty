@@ -1,8 +1,9 @@
 {
- "ran_on": "2026-11-16T19:41:23.584Z",
+ "ran_on": "2026-11-16T21:23:37.679Z",
  "script": "scripts/check_parcel_registry.mjs",
  "counts": {
-  "ok": 123
+  "ok": 120,
+  "unreachable": 3
  },
  "services": [
   {
@@ -223,10 +224,8 @@
    "states": [
     "TN"
    ],
-   "layer_name": "Hamilton",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
+   "status": "unreachable",
+   "detail": "HTTP 403"
   },
   {
    "url": "https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/3",
@@ -237,10 +236,8 @@
    "states": [
     "TN"
    ],
-   "layer_name": "Knox",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
+   "status": "unreachable",
+   "detail": "HTTP 403"
   },
   {
    "url": "https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/6",
@@ -661,9 +658,9 @@
   },
   {
    "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
-   "name": "Rockingham County GIS Parcels",
+   "name": "Hillsborough County GIS Parcels",
    "counties": [
-    "33015"
+    "33011"
    ],
    "states": [
     "NH"
@@ -675,9 +672,9 @@
   },
   {
    "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
-   "name": "Hillsborough County GIS Parcels",
+   "name": "Rockingham County GIS Parcels",
    "counties": [
-    "33011"
+    "33015"
    ],
    "states": [
     "NH"
@@ -1012,10 +1009,8 @@
    "states": [
     "MS"
    ],
-   "layer_name": "HINDS_PARCELS",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
+   "status": "unreachable",
+   "detail": "HTTP 500"
   },
   {
    "url": "https://pappgispub1.co.washington.or.us/server/rest/services/baselayers/Taxlots_SP/MapServer/0",
@@ -1235,21 +1230,6 @@
    "status": "ok"
   },
   {
-   "url": "https://services1.arcgis.com/7HDiw78fcUiM2BWn/arcgis/rest/services/AK_Parcels/FeatureServer/0",
-   "name": "State of Alaska Statewide Cadastral Parcels",
-   "counties": [
-    "02020"
-   ],
-   "states": [
-    "02",
-    "AK"
-   ],
-   "layer_name": "AK_Parcels",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
-  },
-  {
    "url": "https://services1.arcgis.com/99lidPhWCzftIe9K/arcgis/rest/services/UtahStatewideParcels/FeatureServer/0",
    "name": "UGRC Utah Statewide Parcels + county LIR (Land Information Records) parcels",
    "counties": [],
@@ -1345,6 +1325,21 @@
     "23"
    ],
    "layer_name": "Maine_Parcels_Organized_Towns",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services2.arcgis.com/Ce3DhLRthdwbHlfF/arcgis/rest/services/PropertyInformation_Hosted/FeatureServer/0",
+   "name": "Municipality of Anchorage Property Information",
+   "counties": [
+    "02020"
+   ],
+   "states": [
+    "02",
+    "AK"
+   ],
+   "layer_name": "PropertyInformation",
    "geometry": "esriGeometryPolygon",
    "missing_fields": [],
    "status": "ok"
