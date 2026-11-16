@@ -56,4 +56,22 @@ describe("AI advisor prompt contract", () => {
     expect(msg).toContain('"fips": "06037"');
     expect(msg.endsWith("Question: Can I build an ADU?")).toBe(true);
   });
+
+  it("sanitizes HUD Fair Market Rent benchmarks", () => {
+    const ctx = sanitizeAdvisorContext({
+      county: { fips: "06037" },
+      hudFmr: {
+        fips: "06037",
+        metro_or_county_name: "Los Angeles-Long Beach-Glendale, CA HUD Metro FMR Area",
+        efficiency_0br: 1845,
+        one_bed_1br: 2095,
+        two_bed_2br: 2645,
+        source: "HUD FY2026 Fair Market Rents",
+        injection: "malicious string"
+      }
+    });
+    expect(ctx.hudFmr?.one_bed_1br).toBe(2095);
+    expect(ctx.hudFmr?.two_bed_2br).toBe(2645);
+    expect((ctx.hudFmr as any)?.injection).toBeUndefined();
+  });
 });

@@ -1,5 +1,15 @@
 # City Pretty
 
+> [!WARNING]
+> ### Data Verification & Accuracy Notice
+> **Transparency Statement (Audit Review, 15 Nov 2026):**
+> An independent review of earlier project versions revealed that significant portions of previous research citations, corridor financing splits, and calculation fallbacks were synthetic or hallucinated (including 488 generated study titles, hardcoded valuation stand-ins such as `|| 900000`, and default single-family zoning assumptions for unrecorded parcels).
+> 
+> **Current Status:**
+> - **Purged & Verified:** All 488 generated filler studies have been removed. 52 empirical peer-reviewed studies with confirmed DOIs/URLs have been verified. 52 state property assessment statutes, 9 state middle housing laws, 4 municipal funding programs, and 32 DOT bid item unit costs are now verified against primary government sources. All ~52 hardcoded fallback numbers have been replaced with `null` ("Not on file").
+> - **Still Unverified / Estimated:** County-level hedonic ROI spreads, preliminary transit corridors without adopted agency capital budgets, and parcels in jurisdictions lacking live GIS zoning feeds are unverified estimates or incomplete.
+> - **Operational Guidance:** Do NOT deploy investment capital or make legal zoning commitments based on unverified screening metrics. See [`docs/DATA-AUDIT-AND-TRANSPARENCY.md`](docs/DATA-AUDIT-AND-TRANSPARENCY.md) for full component-by-component audit scores and [`docs/GRAND-VISION-AND-ECOSYSTEM.md`](docs/GRAND-VISION-AND-ECOSYSTEM.md) for the ecosystem architecture (City Pretty + StreetForge + EverySpace).
+
 A civic data map of **639 US counties** (48 contiguous states, DC and Puerto Rico; 269 million people), plus 67 more
 where only live property lines are shown so far. For each block group it scores what a city could build or fix there
 (parks, street trees, bus service, safer streets, clinics, schools and more) from public data, and shows the sources

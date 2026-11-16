@@ -49,11 +49,23 @@ export interface AdvisorParcel {
   lotSplitEligibility: boolean | null;
 }
 
+export interface AdvisorHudFmr {
+  fips: string | null;
+  metro_or_county_name: string | null;
+  efficiency_0br: number | null;
+  one_bed_1br: number | null;
+  two_bed_2br: number | null;
+  three_bed_3br: number | null;
+  four_bed_4br: number | null;
+  source: string | null;
+}
+
 export interface AdvisorContext {
   county: AdvisorCounty;
   roiMode: string | null;
   blockGroup?: AdvisorBlockGroup;
   parcel?: AdvisorParcel;
+  hudFmr?: AdvisorHudFmr | null;
 }
 
 // Stable text: keep it free of per-request values so it can be prompt-cached.
@@ -128,6 +140,19 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       lotSplitEligibility: bool(p.lotSplitEligibility),
     };
     if (ctx.parcel.valueEstimateWithheld) ctx.parcel.valueEstimate = null;
+  }
+  if (r.hudFmr) {
+    const f = obj(r.hudFmr);
+    ctx.hudFmr = {
+      fips: str(f.fips, 5),
+      metro_or_county_name: str(f.metro_or_county_name, 100),
+      efficiency_0br: num(f.efficiency_0br),
+      one_bed_1br: num(f.one_bed_1br),
+      two_bed_2br: num(f.two_bed_2br),
+      three_bed_3br: num(f.three_bed_3br),
+      four_bed_4br: num(f.four_bed_4br),
+      source: str(f.source, 120),
+    };
   }
   return ctx;
 }

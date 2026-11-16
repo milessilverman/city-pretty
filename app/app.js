@@ -8,7 +8,7 @@ const CP_DATA_FILES = {
   "sites-data": "sites-la.b64.txt", "la-crash-counts": "la-crash-counts.json", "bundle-oc": "bundle-oc.b64.txt",
   "research": "research.json", "statutes": "statutes.json", "state-housing-laws": "state-housing-laws.json",
   "funding-programs": "funding_programs.json", "case-studies": "case_studies.json", "transit-pipelines": "transit_pipelines.json",
-  "state-finance-profiles": "state_finance_profiles.json", "unit-costs": "unit_costs.json"
+  "state-finance-profiles": "state_finance_profiles.json", "unit-costs": "unit_costs.json", "hud-fmr": "hud_fair_market_rents.json"
 };
 const _cpData = {};
 function cpText(id) {
@@ -35,6 +35,7 @@ let TRANSIT_PIPELINES_DATA = [];
 let STATE_HOUSING_LAWS_DATA = [];
 let FUNDING_PROGRAMS_DATA = [];
 let UNIT_COSTS_DATA = [];
+let HUD_FMR_DATA = [];
 
 const DEFAULT_CA_PROFILE = {
   state_code: "CA",
@@ -70,9 +71,16 @@ function loadVerifiedDataFiles() {
     }
   });
   cpJson("unit-costs").then(d => { if (Array.isArray(d)) UNIT_COSTS_DATA = d; });
+  cpJson("hud-fmr").then(d => { if (Array.isArray(d)) HUD_FMR_DATA = d; });
 }
 if (typeof window !== "undefined") {
   loadVerifiedDataFiles();
+}
+
+function getHudFmr(fips) {
+  if (!fips || !Array.isArray(HUD_FMR_DATA) || !HUD_FMR_DATA.length) return null;
+  const target = String(fips).padStart(5, "0");
+  return HUD_FMR_DATA.find(r => r.fips === target) || null;
 }
 
 // ============================================================================
@@ -17102,10 +17110,11 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
     const isCa = (ll && ll.lat >= 32.5 && ll.lat <= 42.0 && ll.lng >= -124.5 && ll.lng <= -114.1);
     const aduSqft = lotSqft >= 7000 ? 800 : 600;
     const aduCost = Math.round(aduSqft * 260);
-    const moRent = Math.round(aduSqft * 3.4);
+    const fmrRec = (typeof getHudFmr === "function") ? getHudFmr(countyFips) : null;
+    const moRent = fmrRec ? (aduSqft >= 750 ? fmrRec.two_bed_2br : fmrRec.one_bed_1br) : ((F && F.rent) ? F.rent : null);
     const resValue = Math.round(aduCost * 1.65);
     const netEquity = resValue - aduCost;
-    const payback = (aduCost / (moRent * 12)).toFixed(1);
+    const payback = moRent ? (aduCost / (moRent * 12)).toFixed(1) : "not on file";
     const parkingSavings = inWalkshed ? 45000 : 0;
     
     strategies.push({
@@ -17115,12 +17124,13 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
       equity: netEquity + parkingSavings,
       roi: +( (resValue + parkingSavings) / aduCost ).toFixed(2),
       cost: aduCost,
-      annualCashflow: moRent * 12,
+      rent: moRent,
+      annualCashflow: moRent ? moRent * 12 : null,
       paybackYrs: payback,
       statute: inWalkshed ? 
         (isCa ? "CA Gov. Code § 65863.2 (AB 2097) — 100% Zero Minimum Parking Mandate + Gov Code § 66314 (Ministerial ADU)" : "Station Transit Walkshed Statutory Parking Exemption (Saves ~$45,000 in garage replacement)") :
         (isCa ? "CA Gov. Code § 66314 / § 66311.5 — Statewide By-Right ADU, Impact Fee Exemption under 750 sf" : "Statewide Missing-Middle & Accessory Dwelling Unit Infill Rights"),
-      rationale: `Located ${inWalkshed ? `${(nearestStn.distMi * 5280).toFixed(0)} ft from ${nearestStn.name} station (qualifying for complete parking elimination)` : `on a spacious ${lotSqft.toLocaleString()} sq ft parcel`}. Building a ${aduSqft} sq ft accessory home creates ~$${netEquity.toLocaleString()} in instant net equity and ~$${(moRent).toLocaleString()}/month in passive rental cash flow.`,
+      rationale: `Located ${inWalkshed ? `${(nearestStn.distMi * 5280).toFixed(0)} ft from ${nearestStn.name} station (qualifying for complete parking elimination)` : `on a spacious ${lotSqft.toLocaleString()} sq ft parcel`}. Building a ${aduSqft} sq ft accessory home creates ~$${netEquity.toLocaleString()} in net equity${moRent ? ` and ~$${moRent.toLocaleString()}/month in passive rental cash flow (HUD FY2026 Fair Market Rent)` : ` (local HUD rental benchmark not on file)`}.`,
       steps: [
         "Select a pre-approved architectural plan from the municipal building department catalog to fast-track plan check (skipping discretionary hearings).",
         "Confirm zero-parking exemption under transit walkshed statutes to save ~$45k in garage construction costs.",
@@ -21001,6 +21011,7 @@ function serializeLiveAdvisorContext() {
       zoning_source: comp ? comp.zoning_source || null : null,
     },
     roiMode: typeof getRoiMode === "function" ? getRoiMode() : null,
+    hudFmr: (typeof getHudFmr === "function") ? getHudFmr(fips) : null,
   };
   if (selected && byId.get(selected)) {
     const p = byId.get(selected).properties || {};
@@ -23087,11 +23098,11 @@ function exportExecutiveProspectus() {
 
   const strat = playbook ? playbook.optimal : null;
   const stratTitle = strat ? strat.title : "Transit-Oriented By-Right Infill ADU";
-  const cost = strat ? strat.cost : 140000;
-  const rent = strat ? strat.rent : 2400;
-  const netEq = strat ? strat.equity : 210000;
-  const vpd = strat ? strat.vpd : 2.50;
-  const roi = strat ? strat.roi : "17.4% Unlevered Cap Rate";
+  const cost = strat && strat.cost != null ? strat.cost : null;
+  const rent = strat && strat.rent != null ? strat.rent : (strat && strat.annualCashflow ? Math.round(strat.annualCashflow / 12) : null);
+  const netEq = strat && strat.equity != null ? strat.equity : null;
+  const vpd = strat && typeof strat.roi === "number" ? strat.roi : 2.50;
+  const roi = strat && strat.roi ? (typeof strat.roi === "number" ? `${strat.roi.toFixed(2)}x Return` : strat.roi) : "Modeled return";
 
   const valObj = (typeof currentHouse !== "undefined" && currentHouse && currentHouse.valuation) || (typeof activeHouse !== "undefined" && activeHouse && activeHouse.valuation) || null;
   const houseHv = (typeof activeHouse !== "undefined" && activeHouse && activeHouse.houseHv) || (valObj ? valObj.estimatedValue : null);
@@ -23175,32 +23186,32 @@ function exportExecutiveProspectus() {
             <tr style="border-bottom:1px solid #f1f5f9;">
               <td style="padding:8px 12px;font-weight:600;">Gross Capitalized Real Estate Valuation</td>
               <td style="padding:8px 12px;text-align:right;">${vcP.ok ? fmtP(aPrice) : "–"}</td>
-              <td style="padding:8px 12px;text-align:right;">${vcP.ok ? fmtP(aPrice + cost + netEq) : "–"}</td>
-              <td style="padding:8px 12px;text-align:right;font-weight:700;color:#059669;">+${fmtP(cost + netEq)}</td>
+              <td style="padding:8px 12px;text-align:right;">${(vcP.ok && cost != null && netEq != null) ? fmtP(aPrice + cost + netEq) : "–"}</td>
+              <td style="padding:8px 12px;text-align:right;font-weight:700;color:#059669;">${(cost != null && netEq != null) ? `+${fmtP(cost + netEq)}` : "–"}</td>
             </tr>
             <tr style="border-bottom:1px solid #f1f5f9;">
               <td style="padding:8px 12px;font-weight:600;">Turnkey Construction Capital Required</td>
               <td style="padding:8px 12px;text-align:right;">$0</td>
-              <td style="padding:8px 12px;text-align:right;">${fmtP(cost)}</td>
-              <td style="padding:8px 12px;text-align:right;color:#64748b;">-${fmtP(cost)}</td>
+              <td style="padding:8px 12px;text-align:right;">${cost != null ? fmtP(cost) : "Not on file"}</td>
+              <td style="padding:8px 12px;text-align:right;color:#64748b;">${cost != null ? `-${fmtP(cost)}` : "–"}</td>
             </tr>
             <tr style="border-bottom:1px solid #f1f5f9;">
               <td style="padding:8px 12px;font-weight:600;">Immediate Net Equity Uplift Created</td>
               <td style="padding:8px 12px;text-align:right;">$0</td>
-              <td style="padding:8px 12px;text-align:right;font-weight:700;color:#059669;">+${fmtP(netEq)}</td>
-              <td style="padding:8px 12px;text-align:right;font-weight:700;color:#059669;">+${fmtP(netEq)}</td>
+              <td style="padding:8px 12px;text-align:right;font-weight:700;color:#059669;">${netEq != null ? `+${fmtP(netEq)}` : "Not on file"}</td>
+              <td style="padding:8px 12px;text-align:right;font-weight:700;color:#059669;">${netEq != null ? `+${fmtP(netEq)}` : "–"}</td>
             </tr>
             <tr style="border-bottom:1px solid #f1f5f9;">
               <td style="padding:8px 12px;font-weight:600;">Projected Gross Monthly Rental Income</td>
               <td style="padding:8px 12px;text-align:right;">$0</td>
-              <td style="padding:8px 12px;text-align:right;font-weight:700;color:#0284c7;">$${fmtN(rent)} / mo</td>
-              <td style="padding:8px 12px;text-align:right;font-weight:700;color:#0284c7;">+$${fmtN(rent * 12)} / yr</td>
+              <td style="padding:8px 12px;text-align:right;font-weight:700;color:#0284c7;">${rent != null ? `$${fmtN(rent)} / mo` : "Not on file"}</td>
+              <td style="padding:8px 12px;text-align:right;font-weight:700;color:#0284c7;">${rent != null ? `+$${fmtN(rent * 12)} / yr` : "Not on file"}</td>
             </tr>
             <tr>
               <td style="padding:8px 12px;font-weight:700;color:#0f172a;">Return per Invested Dollar (ROI)</td>
               <td style="padding:8px 12px;text-align:right;color:#64748b;">--</td>
-              <td style="padding:8px 12px;text-align:right;font-weight:800;color:#059669;">$${vpd.toFixed(2)} per $1.00</td>
-              <td style="padding:8px 12px;text-align:right;font-weight:800;color:#059669;">${roi}</td>
+              <td style="padding:8px 12px;text-align:right;font-weight:800;color:#059669;">${vpd != null ? `$${vpd.toFixed(2)} per $1.00` : "–"}</td>
+              <td style="padding:8px 12px;text-align:right;font-weight:800;color:#059669;">${roi || "–"}</td>
             </tr>
           </tbody>
         </table>
@@ -23210,7 +23221,7 @@ function exportExecutiveProspectus() {
       </div>
     </div>
 
-    <!-- Section 3: Empirical Academic Grounding (540 Studies) -->
+    <!-- Section 3: Empirical Academic Grounding (Verified Studies) -->
     <div style="margin-bottom:24px;">
       <div style="font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;color:#0f172a;border-bottom:1px solid #cbd5e1;padding-bottom:4px;margin-bottom:10px;">
         3. Empirical Academic &amp; Precedent Grounding

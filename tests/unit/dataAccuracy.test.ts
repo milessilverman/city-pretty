@@ -189,4 +189,22 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
       expect(item.unit_price).toBeNull();
     }
   });
+
+  it("10. hud_fair_market_rents.json contains verified FY2026 Fair Market Rents", () => {
+    const filePath = path.join(rootDir, "app/data/hud_fair_market_rents.json");
+    expect(fs.existsSync(filePath)).toBe(true);
+
+    const rents = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+    expect(Array.isArray(rents)).toBe(true);
+    expect(rents.length).toBeGreaterThanOrEqual(10);
+
+    for (const r of rents) {
+      expect(r.fips).toMatch(/^\d{5}$/);
+      expect(r.metro_or_county_name).toBeTruthy();
+      expect(r.one_bed_1br).toBeGreaterThan(500);
+      expect(r.two_bed_2br).toBeGreaterThan(r.one_bed_1br);
+      expect(r.source_url).toMatch(/^https?:\/\//);
+      expect(r.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    }
+  });
 });
