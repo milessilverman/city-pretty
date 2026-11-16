@@ -1,0 +1,78 @@
+{
+ "_source": {
+  "description": "Parcel-use code tables, from each publisher's own documentation, used to tell whether a parcel is a home.",
+  "built_by": "scripts/build_zoning_standards.py",
+  "built_on": "2026-11-16"
+ },
+ "systems": [
+  {
+   "id": "nyc_pluto_landuse",
+   "counties": [
+    "36005",
+    "36047",
+    "36061",
+    "36081",
+    "36085"
+   ],
+   "field": "LandUse",
+   "codes": {
+    "01": {
+     "label": "One & Two Family Buildings",
+     "type": "residential"
+    },
+    "02": {
+     "label": "Multi-Family Walk-Up Buildings",
+     "type": "residential"
+    },
+    "03": {
+     "label": "Multi-Family Elevator Buildings",
+     "type": "residential"
+    },
+    "04": {
+     "label": "Mixed Residential & Commercial Buildings",
+     "type": "mixed"
+    },
+    "05": {
+     "label": "Commercial & Office Buildings",
+     "type": "non-residential"
+    },
+    "06": {
+     "label": "Industrial & Manufacturing",
+     "type": "non-residential"
+    },
+    "07": {
+     "label": "Transportation & Utility",
+     "type": "non-residential"
+    },
+    "08": {
+     "label": "Public Facilities & Institutions",
+     "type": "non-residential"
+    },
+    "09": {
+     "label": "Open Space & Outdoor Recreation",
+     "type": "non-residential"
+    },
+    "10": {
+     "label": "Parking Facilities",
+     "type": "non-residential"
+    },
+    "11": {
+     "label": "Vacant Land",
+     "type": "vacant"
+    }
+   },
+   "source": {
+    "name": "PLUTO Data Dictionary, August 2026 (26v2), LAND USE CATEGORY (LandUse)",
+    "url": "https://s-media.nyc.gov/agencies/dcp/assets/files/pdf/data-tools/bytes/pluto_datadictionary.pdf"
+   },
+   "type_rule": "The label is the agency's; the type is read from it: one- and two-family and multi-family buildings are residential, mixed residential & commercial is mixed, vacant land is vacant, all others non-residential.",
+   "verification": {
+    "status": "verified",
+    "checked_on": "2026-11-16",
+    "method": "Parsed from the PDF by scripts/build_zoning_standards.py",
+    "evidence": "11 codes",
+    "unverified_fields": []
+   }
+  }
+ ]
+}

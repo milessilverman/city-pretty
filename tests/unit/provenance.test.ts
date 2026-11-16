@@ -27,6 +27,8 @@ const RECORD_FILES: Record<string, (d: any) => any[]> = {
   "app/data/hud_fair_market_rents.json": (d) => d.records,
   "app/data/county_completeness.json": (d) => Object.values(d),
   "app/data/ca_counties_registry.json": (d) => Object.values(d),
+  "app/data/zoning_standards.json": (d) => d.jurisdictions,
+  "app/data/parcel_use_codes.json": (d) => d.systems,
 };
 
 describe("provenance: every record says how it was checked", () => {

@@ -1,0 +1,291 @@
+{
+ "ran_on": "2026-11-16T21:47:22.953Z",
+ "script": "scripts/live_check_lot_fit.mjs",
+ "nyc": [
+  {
+   "county": "36081",
+   "area": "Queens (Hollis Hills / Bayside)",
+   "lat": 40.743406,
+   "lng": -73.763878,
+   "pluto": {
+    "BBL": 4076120032,
+    "Address": "64-54 212 STREET",
+    "LandUse": "01",
+    "ZoneDist1": "R1-2A",
+    "LotArea": 6000,
+    "LotFront": 60,
+    "BldgArea": 2174,
+    "UnitsRes": 1
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "64-54 212 STREET · AIN/APN Lot Parcel · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t35 ft\n• Zoning district R1-2A (New York City Zoning Resolution) — Housing types: limited to single-family detached residences (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). Minimum lot for a detached or zero-lot-line home: 4,750 sq ft and 50 ft wide (ZR 23-11). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — Up to 4,500 sq ft of floor area on this 6,000 sq ft lot (FAR 0.75, ZR 23-21); on a lot of 4,000 sq ft or more no single home may exceed 3,600 sq ft (FAR 0.60). The city records 2,174 sq ft of gross floor area here, so about 2,326 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✗ Second home (two-family or more) — R1-2A is limited to single-family detached residences (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). An ancillary dwelling unit is"
+  },
+  {
+   "county": "36081",
+   "area": "Queens (Hollis Hills / Bayside)",
+   "lat": 40.744814,
+   "lng": -73.759756,
+   "pluto": {
+    "BBL": 4076170049,
+    "Address": "64-45 BELL BOULEVARD",
+    "LandUse": "01",
+    "ZoneDist1": "R4-1",
+    "LotArea": 2600,
+    "LotFront": 26,
+    "BldgArea": 1188,
+    "UnitsRes": 1
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "64-45 BELL BOULEVARD · AIN/APN Lot Parcel · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t35 ft\n• Zoning district R4-1 (New York City Zoning Resolution) — Housing types: limited to single- or two-family residences, detached or semi-detached, or single- or two-family zero lot line buildings (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). Minimum lot for a detached or zero-lot-line home: 2,375 sq ft and 25 ft wide (ZR 23-11). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — Up to 2,600 sq ft of floor area on this 2,600 sq ft lot (FAR 1.00, ZR 23-21). The city records 1,188 sq ft of gross floor area here, so about 1,412 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✓ Second home (two-family or more) — A two-family home is an allowed type here: single- or two-family residences, detached or semi-detached, or single- or two-family zero lot line buildings (ZR 22-122), within the floor area above.\n? Ancillary dwelling unit (ADU, up to 800 sq ft) — ZR 12-10 allows one ancillary dwelling unit of up to 800 sq ft per sing"
+  },
+  {
+   "county": "36085",
+   "area": "Staten Island (Westerleigh / Todt Hill)",
+   "lat": 40.618996,
+   "lng": -74.122471,
+   "pluto": {
+    "BBL": 5003320192,
+    "Address": "185 DRAKE AVENUE",
+    "LandUse": "01",
+    "ZoneDist1": "R2",
+    "LotArea": 2072,
+    "LotFront": 28,
+    "BldgArea": 1012,
+    "UnitsRes": 1
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "185 DRAKE AVENUE · AIN/APN Lot Parcel · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t35 ft\n• Zoning district R2 (New York City Zoning Resolution) — Housing types: limited to single-family detached residences (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11); this lot (2,072 sq ft) is smaller, which may mean it predates the minimum (not checked here). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — Up to 1,554 sq ft of floor area on this 2,072 sq ft lot (FAR 0.75, ZR 23-21). The city records 1,012 sq ft of gross floor area here, so about 542 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✗ Second home (two-family or more) — R2 is limited to single-family detached residences (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). An ancillary dwelling uni"
+  },
+  {
+   "county": "36085",
+   "area": "Staten Island (Westerleigh / Todt Hill)",
+   "lat": 40.619351,
+   "lng": -74.101414,
+   "pluto": {
+    "BBL": 5002430068,
+    "Address": "47 WALDRON AVENUE",
+    "LandUse": "01",
+    "ZoneDist1": "R3X",
+    "LotArea": 4800,
+    "LotFront": 48,
+    "BldgArea": 1040,
+    "UnitsRes": 1
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "47 WALDRON AVENUE · AIN/APN Lot Parcel · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t35 ft\n• Zoning district R3X (New York City Zoning Resolution) — Housing types: limited to single- or two-family detached residences (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — Up to 3,600 sq ft of floor area on this 4,800 sq ft lot (FAR 0.75, ZR 23-21); on a lot of 4,000 sq ft or more no single home may exceed 2,880 sq ft (FAR 0.60). The city records 1,040 sq ft of gross floor area here, so about 2,560 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✓ Second home (two-family or more) — A two-family home is an allowed type here: single- or two-family detached residences (ZR 22-122), within the floor area above.\n? Ancillary dwelling unit (ADU, up to 800 sq ft) — ZR 12-10 allows one ancillary dwelling unit of up to 800 sq ft per single- or two-family home; an owner must live on the lot when"
+  },
+  {
+   "county": "36047",
+   "area": "Brooklyn (Marine Park / Midwood)",
+   "lat": 40.609402,
+   "lng": -73.942666,
+   "pluto": {
+    "BBL": 3068150017,
+    "Address": "1744 STUART STREET",
+    "LandUse": "01",
+    "ZoneDist1": "R3-2",
+    "LotArea": 2500,
+    "LotFront": 25,
+    "BldgArea": 1376,
+    "UnitsRes": 1
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "1744 STUART STREET · AIN/APN Lot Parcel · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t35 ft\n• Zoning district R3-2 (New York City Zoning Resolution) — Housing types: no limit on the type of residence (ZR 22-121, 22-122). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11); this lot (2,500 sq ft) is smaller, which may mean it predates the minimum (not checked here). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — Up to 1,875 sq ft of floor area on this 2,500 sq ft lot (FAR 0.75, ZR 23-21). The city records 1,376 sq ft of gross floor area here, so about 499 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✓ Second home (two-family or more) — R3-2 sets no limit on the type of residence (ZR 22-121, 22-122), within the floor area above.\n? Ancillary dwelling unit (ADU, up to 800 sq ft) — ZR 12-10 allows one ancillary dwelling unit of up to 800 sq ft per single- or two-family home; an owner must live on the lot when it is first occupied. A backyard ADU is not allowed in Historic Districts or in DEP's mapped flood-risk areas; none of these is checked here. About 666 sq ft of open yard (estimated)."
+  },
+  {
+   "county": "36047",
+   "area": "Brooklyn (Marine Park / Midwood)",
+   "lat": 40.605837,
+   "lng": -73.942222,
+   "pluto": {
+    "BBL": 3068360036,
+    "Address": "1870 HARING STREET",
+    "LandUse": "01",
+    "ZoneDist1": "R4",
+    "LotArea": 1890,
+    "LotFront": 18,
+    "BldgArea": 1890,
+    "UnitsRes": 2
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "1870 HARING STREET · AIN/APN Lot Parcel · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t35 ft\n• Zoning district R4 (New York City Zoning Resolution) — Housing types: no limit on the type of residence (ZR 22-121, 22-122). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11); this lot (1,890 sq ft) is smaller, which may mean it predates the minimum (not checked here). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✗ Floor area allowed by zoning — Up to 1,890 sq ft of floor area on this 1,890 sq ft lot (FAR 1.00, ZR 23-21). The city records 1,890 sq ft of gross floor area here, so about 0 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✓ Second home (two-family or more) — R4 sets no limit on the type of residence (ZR 22-121, 22-122), within the floor area above.\n? Ancillary dwelling unit (ADU, up to 800 sq ft) — ZR 12-10 allows one ancillary dwelling unit of up to 800 sq ft per single- or two-family home; an owner must live on the lot when it is first occupied. A backyard ADU is not allowed in Historic Districts or in DEP's mapped flood-risk areas; none of these is checked here. About 354 sq ft of open yard (estimated)."
+  },
+  {
+   "county": "36005",
+   "area": "Bronx (Riverdale / Throggs Neck)",
+   "lat": 40.896873,
+   "lng": -73.898767,
+   "pluto": {
+    "BBL": 2058261669,
+    "Address": "5149 POST ROAD",
+    "LandUse": "01",
+    "ZoneDist1": "R4",
+    "LotArea": 2000,
+    "LotFront": 20,
+    "BldgArea": 1480,
+    "UnitsRes": 1
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "5149 POST ROAD · AIN/APN Lot Parcel · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t35 ft\n• Zoning district R4 (New York City Zoning Resolution) — Housing types: no limit on the type of residence (ZR 22-121, 22-122). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11); this lot (2,000 sq ft) is smaller, which may mean it predates the minimum (not checked here). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — Up to 2,000 sq ft of floor area on this 2,000 sq ft lot (FAR 1.00, ZR 23-21). The city records 1,480 sq ft of gross floor area here, so about 520 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✓ Second home (two-family or more) — R4 sets no limit on the type of residence (ZR 22-121, 22-122), within the floor area above.\n? Ancillary dwelling unit (ADU, up to 800 sq ft) — ZR 12-10 allows one ancillary dwelling unit of up to 800 sq ft per single- or two-family home; an owner must live on the lot when it is first occupied. A backyard ADU is not allowed in Historic Districts or in DEP's mapped flood-risk areas; none of these is checked here. About 415 sq ft of open yard (estimated)."
+  },
+  {
+   "county": "36005",
+   "area": "Bronx (Riverdale / Throggs Neck)",
+   "lat": 40.895533,
+   "lng": -73.902525,
+   "pluto": {
+    "BBL": 2058192242,
+    "Address": "415 INDIAN ROAD",
+    "LandUse": "01",
+    "ZoneDist1": "R1-2",
+    "LotArea": 17934,
+    "LotFront": 135,
+    "BldgArea": 4382,
+    "UnitsRes": 1
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "415 INDIAN ROAD · AIN/APN Lot Parcel · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t35 ft\n• Zoning district R1-2 (New York City Zoning Resolution) — Housing types: limited to single-family detached residences (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). Minimum lot for a detached or zero-lot-line home: 4,750 sq ft and 50 ft wide (ZR 23-11). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — Up to 13,451 sq ft of floor area on this 17,934 sq ft lot (FAR 0.75, ZR 23-21); on a lot of 4,000 sq ft or more no single home may exceed 10,760 sq ft (FAR 0.60). The city records 4,382 sq ft of gross floor area here, so about 9,069 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✗ Second home (two-family or more) — R1-2 is limited to single-family detached residences (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). An ancillary dwelling unit is"
+  }
+ ],
+ "other": [
+  {
+   "county": "48453",
+   "area": "Travis TX, 809 Park Blvd (Austin: code on Municode, withheld)",
+   "lat": 30.301426,
+   "lng": -97.722411,
+   "shows_not_on_file": true,
+   "unknown_use": true,
+   "excerpt": "Selling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Local zoning standards — Not on file: No local zoning standards are on file here. Austin: Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.\n• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+  },
+  {
+   "county": "01073",
+   "area": "Jefferson AL (no standards read)",
+   "lat": 33.4877,
+   "lng": -86.7697,
+   "shows_not_on_file": true,
+   "unknown_use": true,
+   "excerpt": "Selling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.\n• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+  }
+ ],
+ "quotes": [
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122",
+   "what": "R1-1 housing types",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11",
+   "what": "R1-1 min lot",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21",
+   "what": "R1-1 FAR",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421",
+   "what": "R1-1 height",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11",
+   "what": "R1-2 min lot",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11",
+   "what": "R2 min lot",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21",
+   "what": "R2X FAR",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122",
+   "what": "R3-1 housing types",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122",
+   "what": "R3A housing types",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11",
+   "what": "R3A min lot",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122",
+   "what": "R3X housing types",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21",
+   "what": "R4 FAR",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122",
+   "what": "R4-1 housing types",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122",
+   "what": "R4B housing types",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-422",
+   "what": "R4B height",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21",
+   "what": "R5 FAR",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-422",
+   "what": "R5 height",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-422",
+   "what": "R5B height",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21",
+   "what": "R5D FAR",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-422",
+   "what": "R5D height",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-i/chapter-2/12-10",
+   "what": "ADU definition",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-i/chapter-2/12-10",
+   "what": "qualifying residential site",
+   "found": true
+  }
+ ],
+ "page_errors": []
+}

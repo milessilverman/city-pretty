@@ -1,0 +1,1117 @@
+{
+ "_source": {
+  "description": "Local zoning standards used by the page's 'what fits on this lot' checks. Every rule is parsed from the code's own text at build time and keeps the verbatim text and section URL it came from.",
+  "built_by": "scripts/build_zoning_standards.py",
+  "built_on": "2026-11-16",
+  "rule": "A jurisdiction not listed here shows 'zoning standards not on file' with the reason; nothing is filled in."
+ },
+ "jurisdictions": [
+  {
+   "id": "nyc",
+   "name": "New York City",
+   "counties": [
+    "36005",
+    "36047",
+    "36061",
+    "36081",
+    "36085"
+   ],
+   "zone_source": {
+    "kind": "parcel_field",
+    "field": "ZoneDist1",
+    "lot_area_field": "LotArea",
+    "lot_width_field": "LotFront",
+    "floor_area_field": "BldgArea",
+    "note": "MapPLUTO ZoneDist1 is the district covering the largest share of the tax lot (PLUTO data dictionary)."
+   },
+   "code": "New York City Zoning Resolution",
+   "cite_prefix": "ZR",
+   "code_url": "https://zr.planning.nyc.gov",
+   "as_amended": "sections amended 12/5/2024 (City of Yes for Housing Opportunity), as published on 2026-11-16",
+   "districts_covered": [
+    "R1-1",
+    "R1-2",
+    "R1-2A",
+    "R2",
+    "R2A",
+    "R2X",
+    "R3-1",
+    "R3-2",
+    "R3A",
+    "R3X",
+    "R4",
+    "R4-1",
+    "R4A",
+    "R4B",
+    "R5",
+    "R5A",
+    "R5B",
+    "R5D"
+   ],
+   "not_covered": "R6-R12, commercial (C), manufacturing (M) and special-purpose district standards are not encoded here.",
+   "caveats": [
+    {
+     "text": "The use provisions of this Chapter may be modified or superseded by special rules for certain areas in Article I (General Provisions), Article VI (Special Regulations Applicable to Certain Areas), and through Special Purpose Districts.",
+     "section": "22-00",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-00"
+    },
+    {
+     "text": "A zoning lot can be made of more than one tax lot, and MapPLUTO's floor area is the city's recorded gross floor area, not zoning floor area; both are screening inputs only.",
+     "section": "PLUTO data dictionary (LotArea, BldgArea)",
+     "url": "https://s-media.nyc.gov/agencies/dcp/assets/files/pdf/data-tools/bytes/pluto_datadictionary.pdf"
+    }
+   ],
+   "adu": {
+    "max_sqft": 800,
+    "no_backyard_outside_greater_transit_zone": [
+     "R1-2A",
+     "R2A",
+     "R3A"
+    ],
+    "quote": "An “ancillary dwelling unit” is an additional dwelling unit, permitted on the same zoning lot as a single- or two-family residence that does not exceed eight hundred square feet of floor area. Only one ancillary dwelling unit shall be permitted per every single- or two-family residence on a zoning lot. Ancillary dwelling units shall be subject to the following limitations: in the high-risk flood zone, as defined in Section 64-11, no ancillary dwelling unit shall be permitted below the flood-resistant construction elevation; in the areas included in maps promulgated by the Department of Environmental Protection (DEP) designating the “10-year rainfall flood risk area” based on 2050 sea level rise projections by the New York City Panel on Climate Change (NPCC), and the “coastal flood risk area” where there is a 1 percent chance of flooding in any year based on 2080 sea level rise projections by the NPCC, including as such maps and baseline reference dates are updated by subsequent rulemaking by DEP: no ancillary dwelling units shall be permitted in a basement or cellar; and no backyard ancillary dwelling units shall be permitted; in R1-2A, R2A and R3A Districts, or portions thereof, located beyond the Greater Transit Zone, no backyard ancillary dwelling units shall be permitted; in Historic Districts designated by the Landmarks Preservation Commission, no backyard ancillary dwelling units shall be permitted; backyard ancillary dwelling units shall be accessible directly from a side yard or open area along a side lot line with a minimum width of five feet; and at the time of initial occupancy for an ancillary dwelling unit, the zoning lot on which the ancillary dwelling unit is located must be the primary residence of an owner of such zoning lot.",
+    "section": "12-10 (ancillary dwelling unit)",
+    "url": "https://zr.planning.nyc.gov/article-i/chapter-2/12-10"
+   },
+   "qualifying_residential_site": {
+    "quote": "A “qualifying residential site” is a zoning lot, or portion thereof: in an R1 through R5 District, that: meets the following criteria: has a minimum lot area of at least 5,000 square feet; is located within the Greater Transit Zone. For the purposes of this definition, the geography of the Outer Transit Zone shall only include those areas within a specified distance of mass transit stations, as defined in Section 66-11 (Definitions), existing on December 5, 2024; has frontage along a wide street or along the short dimension of a block; and is not located within an R1 or R2 District;",
+    "section": "12-10 (qualifying residential site)",
+    "url": "https://zr.planning.nyc.gov/article-i/chapter-2/12-10"
+   },
+   "districts": {
+    "R1-1": {
+     "housing_types": {
+      "limited_to": "single-family detached residences",
+      "quote": "in R1 and R2 Districts, residential uses shall be limited to single-family detached residences",
+      "applies": "zoning lots that are not qualifying residential sites",
+      "section": "22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 7125,
+      "width_ft": 75,
+      "row": "R1-1 | 7,125 | 75",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 0.75,
+      "qualifying_residential_site": 1.0,
+      "per_unit_cap": {
+       "far": 0.6,
+       "min_lot_sqft": 4000,
+       "quote": "For standard zoning lots with a lot area of 4,000 square feet or more, the maximum residential floor area associated with any single dwelling unit shall not exceed an equivalent floor area ratio of 0.60."
+      },
+      "row": "R1-2A R1-1 R1-2 R2A R2 R3A R3X R3-1 R3-2 | 0.75 1 | 1.00",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 35,
+      "perimeter_wall_ft": 25,
+      "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+      "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+      "section": "23-421",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421",
+      "all_rules": [
+       {
+        "max_height_ft": 35,
+        "perimeter_wall_ft": 25,
+        "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+        "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+        "section": "23-421"
+       }
+      ]
+     }
+    },
+    "R1-2": {
+     "housing_types": {
+      "limited_to": "single-family detached residences",
+      "quote": "in R1 and R2 Districts, residential uses shall be limited to single-family detached residences",
+      "applies": "zoning lots that are not qualifying residential sites",
+      "section": "22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 4750,
+      "width_ft": 50,
+      "row": "R1-2 R1-2A | 4,750 | 50",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 0.75,
+      "qualifying_residential_site": 1.0,
+      "per_unit_cap": {
+       "far": 0.6,
+       "min_lot_sqft": 4000,
+       "quote": "For standard zoning lots with a lot area of 4,000 square feet or more, the maximum residential floor area associated with any single dwelling unit shall not exceed an equivalent floor area ratio of 0.60."
+      },
+      "row": "R1-2A R1-1 R1-2 R2A R2 R3A R3X R3-1 R3-2 | 0.75 1 | 1.00",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 35,
+      "perimeter_wall_ft": 25,
+      "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+      "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+      "section": "23-421",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421",
+      "all_rules": [
+       {
+        "max_height_ft": 35,
+        "perimeter_wall_ft": 25,
+        "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+        "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+        "section": "23-421"
+       }
+      ]
+     }
+    },
+    "R1-2A": {
+     "housing_types": {
+      "limited_to": "single-family detached residences",
+      "quote": "in R1 and R2 Districts, residential uses shall be limited to single-family detached residences",
+      "applies": "zoning lots that are not qualifying residential sites",
+      "section": "22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 4750,
+      "width_ft": 50,
+      "row": "R1-2 R1-2A | 4,750 | 50",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 0.75,
+      "qualifying_residential_site": 1.0,
+      "per_unit_cap": {
+       "far": 0.6,
+       "min_lot_sqft": 4000,
+       "quote": "For standard zoning lots with a lot area of 4,000 square feet or more, the maximum residential floor area associated with any single dwelling unit shall not exceed an equivalent floor area ratio of 0.60."
+      },
+      "row": "R1-2A R1-1 R1-2 R2A R2 R3A R3X R3-1 R3-2 | 0.75 1 | 1.00",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 35,
+      "perimeter_wall_ft": 25,
+      "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+      "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+      "section": "23-421",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421",
+      "all_rules": [
+       {
+        "max_height_ft": 35,
+        "perimeter_wall_ft": 25,
+        "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+        "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+        "section": "23-421"
+       }
+      ]
+     }
+    },
+    "R2": {
+     "housing_types": {
+      "limited_to": "single-family detached residences",
+      "quote": "in R1 and R2 Districts, residential uses shall be limited to single-family detached residences",
+      "applies": "zoning lots that are not qualifying residential sites",
+      "section": "22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 2850,
+      "width_ft": 30,
+      "row": "R2 R2A R2X R3X R3-1 R3-2 R4 R5 | 2,850 | 30",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 0.75,
+      "qualifying_residential_site": 1.0,
+      "per_unit_cap": {
+       "far": 0.6,
+       "min_lot_sqft": 4000,
+       "quote": "For standard zoning lots with a lot area of 4,000 square feet or more, the maximum residential floor area associated with any single dwelling unit shall not exceed an equivalent floor area ratio of 0.60."
+      },
+      "row": "R1-2A R1-1 R1-2 R2A R2 R3A R3X R3-1 R3-2 | 0.75 1 | 1.00",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 35,
+      "perimeter_wall_ft": 25,
+      "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+      "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+      "section": "23-421",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421",
+      "all_rules": [
+       {
+        "max_height_ft": 35,
+        "perimeter_wall_ft": 25,
+        "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+        "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+        "section": "23-421"
+       }
+      ]
+     }
+    },
+    "R2A": {
+     "housing_types": {
+      "limited_to": "single-family detached residences",
+      "quote": "in R1 and R2 Districts, residential uses shall be limited to single-family detached residences",
+      "applies": "zoning lots that are not qualifying residential sites",
+      "section": "22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 2850,
+      "width_ft": 30,
+      "row": "R2 R2A R2X R3X R3-1 R3-2 R4 R5 | 2,850 | 30",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 0.75,
+      "qualifying_residential_site": 1.0,
+      "per_unit_cap": {
+       "far": 0.6,
+       "min_lot_sqft": 4000,
+       "quote": "For standard zoning lots with a lot area of 4,000 square feet or more, the maximum residential floor area associated with any single dwelling unit shall not exceed an equivalent floor area ratio of 0.60."
+      },
+      "row": "R1-2A R1-1 R1-2 R2A R2 R3A R3X R3-1 R3-2 | 0.75 1 | 1.00",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 35,
+      "perimeter_wall_ft": 25,
+      "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+      "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+      "section": "23-421",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421",
+      "all_rules": [
+       {
+        "max_height_ft": 35,
+        "perimeter_wall_ft": 25,
+        "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+        "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+        "section": "23-421"
+       }
+      ]
+     }
+    },
+    "R2X": {
+     "housing_types": {
+      "limited_to": "single-family detached residences",
+      "quote": "in R1 and R2 Districts, residential uses shall be limited to single-family detached residences",
+      "applies": "zoning lots that are not qualifying residential sites",
+      "section": "22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 2850,
+      "width_ft": 30,
+      "row": "R2 R2A R2X R3X R3-1 R3-2 R4 R5 | 2,850 | 30",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 1.0,
+      "qualifying_residential_site": 1.0,
+      "per_unit_cap": null,
+      "row": "R2X | 1.00 | 1.00",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 35,
+      "perimeter_wall_ft": 25,
+      "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+      "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+      "section": "23-421",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421",
+      "all_rules": [
+       {
+        "max_height_ft": 35,
+        "perimeter_wall_ft": 25,
+        "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+        "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+        "section": "23-421"
+       }
+      ]
+     }
+    },
+    "R3-1": {
+     "housing_types": {
+      "limited_to": "single- or two-family residences, detached or semi-detached",
+      "quote": "in R3-1 Districts, residential uses shall be limited to single- or two-family residences, detached or semi-detached",
+      "applies": "zoning lots that are not qualifying residential sites",
+      "section": "22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 2850,
+      "width_ft": 30,
+      "row": "R2 R2A R2X R3X R3-1 R3-2 R4 R5 | 2,850 | 30",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 0.75,
+      "qualifying_residential_site": 1.0,
+      "per_unit_cap": {
+       "far": 0.6,
+       "min_lot_sqft": 4000,
+       "quote": "For standard zoning lots with a lot area of 4,000 square feet or more, the maximum residential floor area associated with any single dwelling unit shall not exceed an equivalent floor area ratio of 0.60."
+      },
+      "row": "R1-2A R1-1 R1-2 R2A R2 R3A R3X R3-1 R3-2 | 0.75 1 | 1.00",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 35,
+      "perimeter_wall_ft": 25,
+      "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+      "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+      "section": "23-421",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421",
+      "all_rules": [
+       {
+        "max_height_ft": 35,
+        "perimeter_wall_ft": 25,
+        "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+        "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+        "section": "23-421"
+       }
+      ]
+     }
+    },
+    "R3-2": {
+     "housing_types": {
+      "limited_to": null,
+      "quote": "No limitation for this district is listed in ZR 22-122; Use Group II residences of any type are permitted (ZR 22-121 table)",
+      "section": "22-121, 22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 2850,
+      "width_ft": 30,
+      "row": "R2 R2A R2X R3X R3-1 R3-2 R4 R5 | 2,850 | 30",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 0.75,
+      "qualifying_residential_site": 1.0,
+      "per_unit_cap": {
+       "far": 0.6,
+       "min_lot_sqft": 4000,
+       "quote": "For standard zoning lots with a lot area of 4,000 square feet or more, the maximum residential floor area associated with any single dwelling unit shall not exceed an equivalent floor area ratio of 0.60."
+      },
+      "row": "R1-2A R1-1 R1-2 R2A R2 R3A R3X R3-1 R3-2 | 0.75 1 | 1.00",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 35,
+      "perimeter_wall_ft": 25,
+      "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+      "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+      "section": "23-421",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421",
+      "all_rules": [
+       {
+        "max_height_ft": 35,
+        "perimeter_wall_ft": 25,
+        "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+        "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+        "section": "23-421"
+       },
+       {
+        "max_height_ft": 35,
+        "max_base_height_ft": null,
+        "quote": "In the districts indicated, for residences not subject to the provisions of Section 23-421, the maximum building height shall be 35 feet.",
+        "section": "23-422"
+       }
+      ]
+     }
+    },
+    "R3A": {
+     "housing_types": {
+      "limited_to": "single- or two-family detached residences and single- or two-family zero lot line buildings",
+      "quote": "in R3A Districts, residential uses shall be limited to single- or two-family detached residences and single- or two-family zero lot line buildings",
+      "applies": "zoning lots that are not qualifying residential sites",
+      "section": "22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "R3A R4-1 R4A R4B R5A R5B R5D | 2,375 | 25",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 0.75,
+      "qualifying_residential_site": 1.0,
+      "per_unit_cap": {
+       "far": 0.6,
+       "min_lot_sqft": 4000,
+       "quote": "For standard zoning lots with a lot area of 4,000 square feet or more, the maximum residential floor area associated with any single dwelling unit shall not exceed an equivalent floor area ratio of 0.60."
+      },
+      "row": "R1-2A R1-1 R1-2 R2A R2 R3A R3X R3-1 R3-2 | 0.75 1 | 1.00",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 35,
+      "perimeter_wall_ft": 25,
+      "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+      "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+      "section": "23-421",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421",
+      "all_rules": [
+       {
+        "max_height_ft": 35,
+        "perimeter_wall_ft": 25,
+        "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+        "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+        "section": "23-421"
+       }
+      ]
+     }
+    },
+    "R3X": {
+     "housing_types": {
+      "limited_to": "single- or two-family detached residences",
+      "quote": "in R3X, R4A and R5A Districts, residential uses shall be limited to single- or two-family detached residences",
+      "applies": "zoning lots that are not qualifying residential sites",
+      "section": "22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 2850,
+      "width_ft": 30,
+      "row": "R2 R2A R2X R3X R3-1 R3-2 R4 R5 | 2,850 | 30",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 0.75,
+      "qualifying_residential_site": 1.0,
+      "per_unit_cap": {
+       "far": 0.6,
+       "min_lot_sqft": 4000,
+       "quote": "For standard zoning lots with a lot area of 4,000 square feet or more, the maximum residential floor area associated with any single dwelling unit shall not exceed an equivalent floor area ratio of 0.60."
+      },
+      "row": "R1-2A R1-1 R1-2 R2A R2 R3A R3X R3-1 R3-2 | 0.75 1 | 1.00",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 35,
+      "perimeter_wall_ft": 25,
+      "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+      "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+      "section": "23-421",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421",
+      "all_rules": [
+       {
+        "max_height_ft": 35,
+        "perimeter_wall_ft": 25,
+        "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+        "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+        "section": "23-421"
+       }
+      ]
+     }
+    },
+    "R4": {
+     "housing_types": {
+      "limited_to": null,
+      "quote": "No limitation for this district is listed in ZR 22-122; Use Group II residences of any type are permitted (ZR 22-121 table)",
+      "section": "22-121, 22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 2850,
+      "width_ft": 30,
+      "row": "R2 R2A R2X R3X R3-1 R3-2 R4 R5 | 2,850 | 30",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 1.0,
+      "qualifying_residential_site": 1.5,
+      "per_unit_cap": null,
+      "row": "R4A R4B R4 R4-1 | 1.00 | 1.50",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 35,
+      "perimeter_wall_ft": 25,
+      "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+      "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+      "section": "23-421",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421",
+      "all_rules": [
+       {
+        "max_height_ft": 35,
+        "perimeter_wall_ft": 25,
+        "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+        "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+        "section": "23-421"
+       },
+       {
+        "max_height_ft": 35,
+        "max_base_height_ft": null,
+        "quote": "In the districts indicated, for residences not subject to the provisions of Section 23-421, the maximum building height shall be 35 feet.",
+        "section": "23-422"
+       }
+      ]
+     }
+    },
+    "R4-1": {
+     "housing_types": {
+      "limited_to": "single- or two-family residences, detached or semi-detached, or single- or two-family zero lot line buildings",
+      "quote": "in R4-1 Districts, residential uses shall be limited to single- or two-family residences, detached or semi-detached, or single- or two-family zero lot line buildings",
+      "applies": "zoning lots that are not qualifying residential sites",
+      "section": "22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "R3A R4-1 R4A R4B R5A R5B R5D | 2,375 | 25",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 1.0,
+      "qualifying_residential_site": 1.5,
+      "per_unit_cap": null,
+      "row": "R4A R4B R4 R4-1 | 1.00 | 1.50",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 35,
+      "perimeter_wall_ft": 25,
+      "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+      "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+      "section": "23-421",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421",
+      "all_rules": [
+       {
+        "max_height_ft": 35,
+        "perimeter_wall_ft": 25,
+        "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+        "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+        "section": "23-421"
+       },
+       {
+        "max_height_ft": 35,
+        "max_base_height_ft": null,
+        "quote": "In the districts indicated, for residences not subject to the provisions of Section 23-421, the maximum building height shall be 35 feet.",
+        "section": "23-422"
+       }
+      ]
+     }
+    },
+    "R4A": {
+     "housing_types": {
+      "limited_to": "single- or two-family detached residences",
+      "quote": "in R3X, R4A and R5A Districts, residential uses shall be limited to single- or two-family detached residences",
+      "applies": "zoning lots that are not qualifying residential sites",
+      "section": "22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "R3A R4-1 R4A R4B R5A R5B R5D | 2,375 | 25",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 1.0,
+      "qualifying_residential_site": 1.5,
+      "per_unit_cap": null,
+      "row": "R4A R4B R4 R4-1 | 1.00 | 1.50",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 35,
+      "perimeter_wall_ft": 25,
+      "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+      "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+      "section": "23-421",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421",
+      "all_rules": [
+       {
+        "max_height_ft": 35,
+        "perimeter_wall_ft": 25,
+        "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+        "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+        "section": "23-421"
+       },
+       {
+        "max_height_ft": 35,
+        "max_base_height_ft": null,
+        "quote": "In the districts indicated, for residences not subject to the provisions of Section 23-421, the maximum building height shall be 35 feet.",
+        "section": "23-422"
+       }
+      ]
+     }
+    },
+    "R4B": {
+     "housing_types": {
+      "limited_to": "single- or two-family residences in detached, semi-detached, attached, or zero lot line buildings",
+      "quote": "in R4B Districts, residential uses shall be limited to single- or two-family residences in detached, semi-detached, attached, or zero lot line buildings",
+      "applies": "zoning lots that are not qualifying residential sites",
+      "section": "22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "R3A R4-1 R4A R4B R5A R5B R5D | 2,375 | 25",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 1.0,
+      "qualifying_residential_site": 1.5,
+      "per_unit_cap": null,
+      "row": "R4A R4B R4 R4-1 | 1.00 | 1.50",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 25,
+      "max_base_height_ft": null,
+      "quote": "In the district indicated, the maximum building height shall be 25 feet.",
+      "section": "23-422",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-422",
+      "all_rules": [
+       {
+        "max_height_ft": 35,
+        "perimeter_wall_ft": 25,
+        "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+        "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+        "section": "23-421"
+       },
+       {
+        "max_height_ft": 25,
+        "max_base_height_ft": null,
+        "quote": "In the district indicated, the maximum building height shall be 25 feet.",
+        "section": "23-422"
+       }
+      ]
+     }
+    },
+    "R5": {
+     "housing_types": {
+      "limited_to": null,
+      "quote": "No limitation for this district is listed in ZR 22-122; Use Group II residences of any type are permitted (ZR 22-121 table)",
+      "section": "22-121, 22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 2850,
+      "width_ft": 30,
+      "row": "R2 R2A R2X R3X R3-1 R3-2 R4 R5 | 2,850 | 30",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 1.5,
+      "qualifying_residential_site": 2.0,
+      "per_unit_cap": null,
+      "row": "R5A R5B R5 | 1.50 | 2.00",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 45,
+      "max_base_height_ft": 35,
+      "quote": "In the district indicated, except R5 Districts with a letter suffix, the maximum base height shall be 35 feet, and the maximum building height shall be 45 feet.",
+      "section": "23-422",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-422",
+      "all_rules": [
+       {
+        "max_height_ft": 45,
+        "max_base_height_ft": 35,
+        "quote": "In the district indicated, except R5 Districts with a letter suffix, the maximum base height shall be 35 feet, and the maximum building height shall be 45 feet.",
+        "section": "23-422"
+       }
+      ]
+     }
+    },
+    "R5A": {
+     "housing_types": {
+      "limited_to": "single- or two-family detached residences",
+      "quote": "in R3X, R4A and R5A Districts, residential uses shall be limited to single- or two-family detached residences",
+      "applies": "zoning lots that are not qualifying residential sites",
+      "section": "22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "R3A R4-1 R4A R4B R5A R5B R5D | 2,375 | 25",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 1.5,
+      "qualifying_residential_site": 2.0,
+      "per_unit_cap": null,
+      "row": "R5A R5B R5 | 1.50 | 2.00",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 35,
+      "perimeter_wall_ft": 25,
+      "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+      "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+      "section": "23-421",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421",
+      "all_rules": [
+       {
+        "max_height_ft": 35,
+        "perimeter_wall_ft": 25,
+        "applies_to": "single- or two-family detached, semi-detached or zero lot line buildings",
+        "quote": "Perimeter walls are subject to setback regulations at a maximum height above the base plane of 25 feet. … These planes start at the maximum permitted height of the perimeter walls and meet at a ridge line of 35 feet above the base plane.",
+        "section": "23-421"
+       }
+      ]
+     }
+    },
+    "R5B": {
+     "housing_types": {
+      "limited_to": null,
+      "quote": "No limitation for this district is listed in ZR 22-122; Use Group II residences of any type are permitted (ZR 22-121 table)",
+      "section": "22-121, 22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "R3A R4-1 R4A R4B R5A R5B R5D | 2,375 | 25",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 1.5,
+      "qualifying_residential_site": 2.0,
+      "per_unit_cap": null,
+      "row": "R5A R5B R5 | 1.50 | 2.00",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 35,
+      "max_base_height_ft": null,
+      "quote": "In the district indicated, the maximum building height shall be 35 feet.",
+      "section": "23-422",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-422",
+      "all_rules": [
+       {
+        "max_height_ft": 35,
+        "max_base_height_ft": null,
+        "quote": "In the district indicated, the maximum building height shall be 35 feet.",
+        "section": "23-422"
+       }
+      ]
+     }
+    },
+    "R5D": {
+     "housing_types": {
+      "limited_to": null,
+      "quote": "No limitation for this district is listed in ZR 22-122; Use Group II residences of any type are permitted (ZR 22-121 table)",
+      "section": "22-121, 22-122",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached, or zero lot line, where permitted",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "R3A R4-1 R4A R4B R5A R5B R5D | 2,375 | 25",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "min_lot_other_residences": {
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "R1 – R5 | 1,700 | 18",
+      "applies_to": "other residences, where permitted",
+      "section": "23-11",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11"
+     },
+     "far": {
+      "standard": 2.0,
+      "qualifying_residential_site": 2.0,
+      "per_unit_cap": null,
+      "row": "R5D | 2.00 | 2.00",
+      "section": "23-21",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21"
+     },
+     "height": {
+      "max_height_ft": 45,
+      "max_base_height_ft": null,
+      "quote": "In the district indicated, the maximum building height shall be 45 feet.",
+      "section": "23-422",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-422",
+      "all_rules": [
+       {
+        "max_height_ft": 45,
+        "max_base_height_ft": null,
+        "quote": "In the district indicated, the maximum building height shall be 45 feet.",
+        "section": "23-422"
+       }
+      ]
+     }
+    }
+   },
+   "verification": {
+    "status": "verified",
+    "checked_on": "2026-11-16",
+    "method": "Fetched the Zoning Resolution chapters from zr.planning.nyc.gov and parsed the tables and sentences with scripts/build_zoning_standards.py; each rule keeps the verbatim text it came from.",
+    "evidence": "Article I Ch. 2 (12-10), Article II Ch. 2 (22-00, 22-121, 22-122), Article II Ch. 3 (23-11, 23-21, 23-421, 23-422)",
+    "unverified_fields": []
+   }
+  }
+ ],
+ "withheld": [
+  {
+   "jurisdiction": "Austin",
+   "counties": [
+    "48453"
+   ],
+   "reason": "Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.",
+   "tried": [
+    {
+     "url": "https://library.municode.com/tx/austin/codes/land_development_code",
+     "result": "HTTP 403 (bot check)",
+     "on": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "jurisdiction": "Phoenix",
+   "counties": [
+    "04013"
+   ],
+   "reason": "Phoenix's Zoning Ordinance is published on municipal.codes, which answered the build machine with HTTP 403 on 16 Nov 2026.",
+   "tried": [
+    {
+     "url": "https://phoenix.municipal.codes/ZO",
+     "result": "HTTP 403",
+     "on": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "jurisdiction": "Seattle",
+   "counties": [
+    "53033"
+   ],
+   "reason": "Seattle's Land Use Code is published on municipal.codes, which answered the build machine with HTTP 403 on 16 Nov 2026.",
+   "tried": [
+    {
+     "url": "https://seattle.municipal.codes/SMC/23.44.010",
+     "result": "HTTP 403",
+     "on": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "jurisdiction": "Chicago",
+   "counties": [
+    "17031"
+   ],
+   "reason": "Chicago's Zoning Ordinance is published on American Legal Publishing, which answered the build machine with HTTP 403 on 16 Nov 2026.",
+   "tried": [
+    {
+     "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2627958",
+     "result": "HTTP 403",
+     "on": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "jurisdiction": "Philadelphia",
+   "counties": [
+    "42101"
+   ],
+   "reason": "Philadelphia's Zoning Code is published on American Legal Publishing, which answered the build machine with HTTP 403 on 16 Nov 2026.",
+   "tried": [
+    {
+     "url": "https://codelibrary.amlegal.com/codes/philadelphia/latest/philadelphia_pa/0-0-0-1",
+     "result": "HTTP 403",
+     "on": "2026-11-16"
+    }
+   ]
+  }
+ ]
+}
