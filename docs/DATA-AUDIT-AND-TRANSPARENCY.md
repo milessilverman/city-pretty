@@ -393,6 +393,14 @@ more than 10 points; 2,169 traffic-calming rows were dropped (no pedestrian/cycl
 never dropped. San Francisco's comparison is now recomputed from its DataSF counts, within the county (not pooled with LA's CCRS counts). The pipeline now uses the same
 10 m boundary rule.
 
+### State housing laws, round 3 (16 Nov): independent check of the new quotes
+
+Virginia § 15.2-2209.4 re-fetched from law.lis.virginia.gov: quote matches. Connecticut § 8-2o: the cited CGA search
+page renders by JavaScript and the CGA statute site returns nothing to the audit machine, so the quote was confirmed
+only in the copy the research track fetched (it matches in full context), not re-fetched independently. Still
+blocked: NY and IN (free API keys needed), IL and WI (sites don't answer the build machine), NH, NJ, NM, GA, AL, AR,
+MS, TN (need a normal browser). For those, "none found" is unverified.
+
 ### Correction: three "shown" estimates were not shown (found and fixed 16 Nov)
 
 The 16 Nov report said Queens, Staten Island and Hillsborough estimates were shown on the page. They were not: the
