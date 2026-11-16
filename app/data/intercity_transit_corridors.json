@@ -1,7 +1,7 @@
 [
   {
     "id": "corridor_phx_tus",
-    "name": "Phoenix–Tucson Passenger Rail Corridor",
+    "name": "Phoenix\u2013Tucson Passenger Rail Corridor",
     "states": [
       "AZ"
     ],
@@ -144,7 +144,7 @@
   },
   {
     "id": "corridor_atx_sat",
-    "name": "Austin–San Antonio Passenger Rail (Lone Star Corridor)",
+    "name": "Austin\u2013San Antonio Passenger Rail (Lone Star Corridor)",
     "states": [
       "TX"
     ],
@@ -253,7 +253,7 @@
     ],
     "candidate_railyard_sites": [],
     "verification": {
-      "status": "could_not_check",
+      "status": "unverified",
       "method": "Fetched source_url (txdot.gov) -> HTTP 404 (dead link); FRA pages 403; Nominatim.",
       "checked_on": "2026-11-16",
       "evidence": "None obtained.",
@@ -265,7 +265,7 @@
         "proposed_stations (all)",
         "statutory_housing_regime"
       ],
-      "notes": "source_url and official_study_url return 404. No adopted station plan was found. 'Austin Downtown / Plaza Saltillo Connection' uses the generic Austin geocode, 1.57 km from Plaza Saltillo. Removed as fabricated: speed 110, minutes 58/95, capital cost $3.2B, per-station numbers, and railyard sites (Kyle $3.15M vs East Austin $165M)."
+      "notes": "source_url and official_study_url return 404. No adopted station plan was found. 'Austin Downtown / Plaza Saltillo Connection' uses the generic Austin geocode, 1.57 km from Plaza Saltillo. Removed as fabricated: speed 110, minutes 58/95, capital cost $3.2B, per-station numbers, and railyard sites (Kyle $3.15M vs East Austin $165M). source link broken as of 2026-11-16: https://www.txdot.gov/projects/hearings-meetings/intercity-passenger-rail-study.html returns 404; no new address found."
     }
   },
   {
@@ -343,7 +343,7 @@
   },
   {
     "id": "corridor_brightline_west",
-    "name": "Brightline West High-Speed Rail (Las Vegas–Rancho Cucamonga)",
+    "name": "Brightline West High-Speed Rail (Las Vegas\u2013Rancho Cucamonga)",
     "states": [
       "NV",
       "CA"

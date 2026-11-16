@@ -113,3 +113,26 @@ All 8 are kept, because the projects are real places the map uses, but every fin
 - `app/app.js` case-study map tooltip divides `proj.publicCost/1e6`, so null displays as "$0.0M".
 - `tests/unit/dataAccuracy.test.ts` tests 1 and 4 assert ">= 50 studies" and a `last_verified` date on every record. They will fail, and they encode the false claim that these records were verified. They should be rewritten to enforce `verification.status`.
 - Re-run when rate limits reset. OpenAlex and Wikipedia can supply abstracts and secondary checks, and the could_not_check URLs can be retried from a browser or a network that is not blocked.
+
+## Round 3 (16 Nov 2026, later)
+
+Script: `scripts/apply_records_round3.py`, `scripts/apply_broken_links_round3.py`. The Internet Archive and the
+OpenAlex / Semantic Scholar APIs were blocked or rate-limited from the build machine during this round.
+
+- **hist_010 / healthline_cle (Cleveland HealthLine): corrected and verified.** ITDP's report (Hook, Lotshaw &
+  Weinstock 2013, "More Development For Your Transit Dollar", fetched PDF): "Cleveland managed to transform a modest
+  $50 million investment in bus rapid transit into $5.8 billion in new transit-oriented development"; "Over $200
+  million in overall public funds were invested ... only $50 million of which were for the transit system". The
+  earlier record claimed $9.5B private investment and a 47.5:1 ratio. Investment along a corridor is not value caused
+  by the line; the record says so.
+- **hist_003 / cultural_trail_indy: partially verified.** The Trail's release of the IU Public Policy Institute
+  report: "property assessments within approximately one block of the eight mile Trail have increased 148% since
+  2008, an increase of $1 billion in assessed property value" (before-after, not causal). The earlier "+1,600% ROI",
+  "11,000+ jobs" and "48% foot traffic" claims are not in the source.
+- **park_002: partially verified** (TPL page: title, publisher, "Published: April 2nd, 2009"; a method with seven
+  attributes, no single effect size).
+- **beltline_atl, highline_nyc, falls_park_greenville: partially verified** (existence and basic facts from the
+  projects' own pages; no money figures there).
+- **Source link broken as of 2026-11-16 (downgraded to unverified):** art_008, bike_001, bike_004, hist_006,
+  hist_008, hist_009, transit_002, okc_maps, waller_creek_austin.
+- Still could_not_check (host blocks automated access): tree_006, hist_001, hist_004, union_station_denver.

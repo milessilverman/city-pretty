@@ -845,7 +845,7 @@
     },
     "tif_vehicle_name": "MI Brownfield / DDA / CIA TIF",
     "statutory_citation": "Mich. Const. art. IX, \u00a7 3 (Proposal A / Headlee), MCL 211.27a & PA 57 (TIF)",
-    "source_url": "https://www.legislature.mi.gov/statutes/mcl-211-27a",
+    "source_url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-211-27a",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
@@ -858,7 +858,7 @@
         "reassessment_cycle_years",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 3: old legislature.mi.gov/statutes/ URL returns 404; replaced with the MCL page the field evidence was read from."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -1404,7 +1404,7 @@
         "reassessment_cycle_years",
         "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). source link broken as of 2026-11-16: https://oksenate.gov/about/constitution/article-x/section-8b returns 404; no new address found."
     }
   },
   "OR": {
@@ -1615,7 +1615,7 @@
     },
     "tif_vehicle_name": "TN TIF / IDB PILOT",
     "statutory_citation": "Tenn. Code Ann. \u00a7 67-5-801 (25% Res Ratio) & \u00a7 13-20-205 (Housing & Redevelopment TIF)",
-    "source_url": "https://www.tn.gov/comptroller/divisions/property-assessments/assessment.html",
+    "source_url": "https://comptroller.tn.gov/office-functions/pa.html",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
@@ -1631,7 +1631,7 @@
         "reassessment_cycle_years",
         "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 3: https://www.tn.gov/comptroller/divisions/property-assessments/assessment.html returns 404; replaced with the Comptroller's Property Assessments page (a landing page; no TN value is confirmed from it)."
     }
   },
   "TX": {

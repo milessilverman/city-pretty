@@ -43,15 +43,15 @@ the record is **not** confirmed.
 
 | Dataset | Records | verified | partially | could not check | unverified | Removed | Report |
 |---|---|---|---|---|---|---|---|
-| HUD Fair Market Rents (`hud_fair_market_rents.json`) | 3,222 counties | 3,222 (machine pull from HUD) | | | | 46 hand-typed rows replaced | `scripts/fetch_hud_fmr.py` |
-| Research studies (`research.json`) | 39 | 7 | 19 | 13 | | 13 nonexistent studies; all "$ per $1" figures | `audit/research-audit.md` |
-| Case studies (`case_studies.json`) | 8 | | | 8 | | all money figures nulled | `audit/research-audit.md` |
-| State housing laws (`statutes.json`) | 21 | 13 | 4 | 2 | | 1 (a bill that never passed); 18 corrected | `audit/laws-finance-audit.md` |
-| State finance profiles (`state_finance_profiles.json`) | 52 | 0 complete | 29 (33 fields in 21 states quote-checked) | 1 | 22 | 4 unsourced fields removed; errors corrected in UT, OH, MD, NV, SC, IA, MN (round 2) | `audit/laws-finance-audit.md` |
-| Funding programs (`funding_programs.json`) | 11 | 2 | 4 | 5 | | 5 corrected | `audit/laws-finance-audit.md` |
-| Construction unit costs (`unit_costs.json`) | 32 | 8 | 12 | 8 | 4 (no source) | 3 wrong bid prices corrected | `audit/costs-transit-audit.md` |
+| HUD Fair Market Rents (`hud_fair_market_rents.json`) | 3,222 counties | 9 (Federal Register revised values) | 3,213 (HUD's values; fiscal year unconfirmed) | | | 46 hand-typed rows replaced; LA and 6 other areas corrected to HUD's May-2026 revision (round 3) | `scripts/fetch_hud_fmr.py` |
+| Research studies (`research.json`) | 39 | 8 | 21 | 3 | 7 (source link broken) | 13 nonexistent studies; all "$ per $1" figures; HealthLine figures corrected (round 3) | `audit/research-audit.md` |
+| Case studies (`case_studies.json`) | 8 | | 5 | 1 | 2 (source link broken) | all unsourced money figures nulled; HealthLine and Cultural Trail figures re-sourced (round 3) | `audit/research-audit.md` |
+| State housing laws (`statutes.json`) | 21 | 15 | 4 | 1 | 1 (Minneapolis 2040: cited law not confirmed) | 1 (a bill that never passed); 18 corrected | `audit/laws-finance-audit.md` |
+| State finance profiles (`state_finance_profiles.json`) | 52 | 4 (TX, AZ, WA, CA; FL has all 5 calculator fields too) | 25 | 1 | 22 | round 3: TX homestead $100,000 -> $140,000, TX reappraisal 1 -> 3 years, CO homestead 'none' -> unknown | `audit/laws-finance-audit.md` |
+| Funding programs (`funding_programs.json`) | 11 | 2 | 6 | 2 | 1 (source link broken) | round 3: CA Urban Greening funding source, cycle and portal corrected | `audit/laws-finance-audit.md` |
+| Construction unit costs (`unit_costs.json`) | 32 | 9 | 12 | 7 | 4 (no source) | 3 wrong bid prices corrected; CDOT Walsenburg price confirmed at its new address (round 3) | `audit/costs-transit-audit.md` |
 | Transit projects (`transit_pipelines.json`) | 5 | | 5 | | | invented housing/EV details nulled | `audit/costs-transit-audit.md` |
-| Intercity rail corridors (`intercity_transit_corridors.json`) | 4 | | 2 | 2 | | fabricated railyard recommendations; unsourced costs/times nulled | `audit/costs-transit-audit.md` |
+| Intercity rail corridors (`intercity_transit_corridors.json`) | 4 | | 2 | 1 | 1 (source link broken) | fabricated railyard recommendations; unsourced costs/times nulled | `audit/costs-transit-audit.md` |
 | Underused land (`underused_sites.json`) | 90 | | 90 (assessor fields real; model outputs not) | | | 9 hand-typed sites | `audit/engines-sites-audit.md` |
 | Valuation back-test (`valuation_backtest_benchmarks.json`) | LA County: 50,720 recent transfers | 1 run (LA) | | | other counties: none | all fabricated rows | `scripts/backtest_la_valuation.mjs`, section 2a |
 | County data tiers (`county_completeness.json`) | 706 | 639 computed from data files + service pings | | | 67 (no data file) | hand-assigned tiers | `scripts/build_county_completeness.py` |
@@ -128,6 +128,18 @@ withheld (it was modeled home-value gain, not profit). See `audit/bundle-catalog
 97 hardcoded numbers or claims were found in `app/app.js` (`audit/appjs-constants-audit.md`), 63 with no source. The
 invented dollar outputs were removed and the by-right rules now come from `statutes.json` (`audit/appjs-fixes.md`).
 
+### Round 3 (later on 16 Nov): links and could-not-check records
+
+- `scripts/check_sources.py` found 17 cited URLs returning 404. After round 3: 10. Seven were replaced with the
+  document's new address and re-checked (BeltLine, ITDP's HealthLine report, CDOT's cost data book, Michigan's MCL
+  211.27a, Arizona's GPLET statute, the FRA grant statute, Tennessee's comptroller). The 10 still broken are marked
+  "source link broken as of 2026-11-16" in each record, and records that rested only on that link are now
+  `unverified`. The Internet Archive was blocked from the build machine, so archived copies weren't available.
+- Re-checked records: ITDP's report shows the earlier HealthLine claims were wrong ($9.5B / 47.5:1 claimed; the
+  report says $5.8B of TOD investment, $200M+ public funds of which $50M was transit). California's Urban Greening
+  program is funded by Proposition 4, not Cap-and-Trade, and its next round is late 2027 or early 2028.
+  Minneapolis 2040's "triplex by right" record is now unverified: the 2024 law it cites doesn't amend the statute named.
+
 ## 3. What was built to keep it accurate
 
 - **Machine pulls instead of typing:** `scripts/fetch_hud_fmr.py` (HUD rents for every county) and
@@ -160,8 +172,12 @@ invented dollar outputs were removed and the by-right rules now come from `statu
 - 8 unit costs and 2 rail corridors couldn't be reached from the audit machine (TxDOT, ADOT, FRA block it). Re-check
   from a normal browser.
 - 42 state finance profiles were never checked; their numbers feed the tax-increment calculator.
-- The HUD service's item page says FY2026, but its layer description still says FY2024. Confirm against
-  huduser.gov, which blocked our automated download.
+- **HUD Fair Market Rents are not current (round 3).** FY2027 rents took effect 1 Oct 2026 (Federal Register
+  2026-17891) and HUD's map service doesn't have them; the file holds FY2026. Checked against the Federal Register,
+  the service's values match no earlier year's published revisions and are consistent with FY2026 as first
+  published, but the service never applied HUD's own May-2026 revision for seven areas (2026-07741): Los Angeles'
+  2-bedroom FMR is $2,903 in the notice and $2,601 in the service. Those seven areas now use the notice's values.
+  Next: pull FY2027 from huduser.gov (blocked from the build machine) or the HUD API (free token).
 - **Correction (later on 16 Nov):** this list said 7 of 150 live parcel/zoning services were dead. That was wrong:
   all 7 answered when re-checked; county servers drop requests under load. Tiers now count configured services, and
   each county lists services that failed three retries at build time (`live_services.not_responding`; 6 on the last
