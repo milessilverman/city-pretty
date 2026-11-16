@@ -51,15 +51,23 @@ export const FEATURE_SETS = {
   regression_with_assessor: ["intercept", "log neighborhood $/sqft", "log neighborhood median", "log living sqft", "log lot sqft", "age/100", "bedrooms", "bathrooms", "tract fallback", "log assessor market value"],
   // For places whose parcel layer has building area, lot area, year built and unit count but no rooms (NYC PLUTO).
   regression_pluto: ["intercept", "log neighborhood $/sqft", "log neighborhood median", "log building sqft", "log lot sqft", "age/100", "two-family", "tract fallback"],
+  // Same inputs for other places whose records have no rooms (Florida's tax roll), alone and with the assessor's value.
+  regression_no_rooms: ["intercept", "log neighborhood $/sqft", "log neighborhood median", "log building sqft", "log lot sqft", "age/100", "two-family", "tract fallback"],
+  regression_no_rooms_with_assessor: ["intercept", "log neighborhood $/sqft", "log neighborhood median", "log building sqft", "log lot sqft", "age/100", "two-family", "tract fallback", "log assessor market value"],
 };
 
 export function features(spec, stats, r, { allowAvAnyDate = false } = {}) {
   const n = neighborhoodFor(stats, r);
   if (!n) return null;
-  if (spec === "regression_pluto") {
+  if (spec === "regression_pluto" || spec === "regression_no_rooms" || spec === "regression_no_rooms_with_assessor") {
     if (!(r.sqft >= 400) || !(r.lot > 0) || !(r.yb > 1700) || !(r.units === 1 || r.units === 2)) return null;
-    return [1, Math.log(n.ppsf), Math.log(n.median), Math.log(r.sqft), Math.log(Math.min(Math.max(r.lot, 500), 200000)),
+    const x = [1, Math.log(n.ppsf), Math.log(n.median), Math.log(r.sqft), Math.log(Math.min(Math.max(r.lot, 500), 200000)),
       (CURRENT_YEAR - r.yb) / 100, r.units === 2 ? 1 : 0, n.level === "tract" ? 1 : 0];
+    if (spec === "regression_no_rooms_with_assessor") {
+      if (!(r.av > 0) || (!allowAvAnyDate && !avUsable(r))) return null;
+      x.push(Math.log(r.av));
+    }
+    return x;
   }
   if (!(r.sqft >= 400) || !(r.lot > 0) || !(r.yb > 1700) || !(r.beds >= 0) || !(r.baths >= 0)) return null;
   const x = [1, Math.log(n.ppsf), Math.log(n.median), Math.log(r.sqft), Math.log(Math.min(Math.max(r.lot, 500), 200000)),

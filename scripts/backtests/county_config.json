@@ -25,6 +25,34 @@
    }
   }
  },
+ "12057": {
+  "sales_file": "data/backtests/sales_12057_2026-11-16.json.gz",
+  "fit": [
+   "2025-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-03-31"
+  ],
+  "test": [
+   "2026-04-01",
+   "2026-08-31"
+  ],
+  "note": "Florida DOR 2026 Final SDF + NAL (scripts/backtests/pull_florida_dor.py). Sales dated to the 1st of their month. Assessor value: just value as of 1 Jan 2026 (predates every test sale). September 2026 excluded (303 qualified sales recorded so far). Windows set before any model was run.",
+  "locked": {
+   "spec": "regression_no_rooms_with_assessor",
+   "locked_on": "2026-11-16",
+   "why": "Best development median error: regression with the 1 Jan 2026 just value 7.7% (2606 sales) vs just value x sales ratio 8.0%, regression without it 10.8%, neighborhood median 17.8%. Caveat: the just value is as of 1 January (s. 192.042, F.S.) but certified later in 2026; the test starts in April to keep later sales out of the appraiser reach, and the regression without it is recorded alongside.",
+   "dev_mdape": {
+    "neighborhood_median": 0.1779,
+    "neighborhood_ppsf_x_sqft": 0.1135,
+    "assessor_ratio": 0.0797,
+    "regression_no_rooms": 0.1078,
+    "regression_no_rooms_with_assessor": 0.0772
+   }
+  }
+ },
  "17031": {
   "sales_file": "data/backtests/sales_17031_2026-11-16.json.gz",
   "fit": [

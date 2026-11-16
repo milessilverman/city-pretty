@@ -38,8 +38,13 @@ function fitAll(fitRows) {
       regression: fitRegression("regression", fitRows),
       regression_with_assessor: fitRegression("regression_with_assessor", fitRows, { allowAvAnyDate: true }),
     } : {}),
-    // Only where the rows carry a unit count (NYC: PLUTO has no bedrooms or bathrooms).
-    ...(fitRows.some((r) => r.units != null) ? { regression_pluto: fitRegression("regression_pluto", fitRows) } : {}),
+    // Only where the rows carry a unit count and no rooms. NYC (PLUTO, no assessor value): regression_pluto.
+    // Elsewhere (Florida's roll): the same inputs as regression_no_rooms, alone and with the assessor's value.
+    ...(fitRows.some((r) => r.units != null) && !fitRows.some((r) => r.av > 0) ? { regression_pluto: fitRegression("regression_pluto", fitRows) } : {}),
+    ...(fitRows.some((r) => r.units != null) && fitRows.some((r) => r.av > 0) ? {
+      regression_no_rooms: fitRegression("regression_no_rooms", fitRows),
+      regression_no_rooms_with_assessor: fitRegression("regression_no_rooms_with_assessor", fitRows, { allowAvAnyDate: true }),
+    } : {}),
   };
 }
 function score(models, stats, evalRows) {
