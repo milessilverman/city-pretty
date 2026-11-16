@@ -645,3 +645,41 @@ test("King County passed but is withheld because the page's parcel layer lacks t
   expect(al.withheldReason).toContain("16.3%");
   expect(errors).toEqual([]);
 });
+
+test("San Francisco crash text uses DataSF's counts: injury crashes, measured located share, lower-bound note", async ({ page }) => {
+  const fs = require("fs"), path = require("path");
+  const sf = JSON.parse(fs.readFileSync(path.join(__dirname, "../../app/data/crash_counts/06075.json"), "utf8"));
+  const bg = Object.keys(sf).find((k) => k !== "_meta" && sf[k][2] > 0) as string;
+  const errors = await openPage(page);
+  const out = await page.evaluate(([data, id]: any) => {
+    const ev = (s: string) => (0, eval)(s);
+    ev("CRASH_COUNTS")["06075"] = data;
+    return ev("crashTextFor")("06075", id);
+  }, [sf, bg]);
+  expect(out).toContain(`${sf[bg][2]} injury or fatal crashes recorded inside this block group or on its boundary streets`);
+  expect(out).toContain("only the 96% of this source's crashes that have a location can be placed");
+  expect(out).toContain("lower bound");
+  expect(errors).toEqual([]);
+});
+
+test("current Tree Equity canopy gap replaces the 2021 value, is labelled with its release, and withholds the old comparison", async ({ page }) => {
+  const fs = require("fs"), path = require("path");
+  const te = JSON.parse(fs.readFileSync(path.join(__dirname, "../../app/data/tree_equity_2025/48453.json"), "utf8"));
+  const bg = Object.keys(te).find((k) => k !== "_meta" && te[k][0] != null) as string;
+  const errors = await openPage(page);
+  const r = await page.evaluate(([data, id]: any) => {
+    const ev = (s: string) => (0, eval)(s);
+    const det: any = { [id]: { m: { tg: 0, ht: 1.5, gp: { g: [], s: [["canopy", "0 pts below goal", "21 pts below goal"]] } }, r: [] } };
+    ev("applyTreeEquity")(det, data);
+    const m = det[id].m;
+    return { m, html: ev("gapSection")({ n: "x", c: "y" }, m) };
+  }, [te, bg]);
+  expect(r.m.tg).toBe(te[bg][0]);
+  expect(r.m.tg_2021).toBe(0);
+  expect(r.m.ht).toBe(1.5); // heat untouched
+  expect(r.m.tg_src).toMatch(/^Tree Equity Score 20(25|26) release \(file dated 20(25|26)-\d{2}-\d{2}\), 2020 block groups$/);
+  expect(r.m.gp.s).toEqual([]);
+  expect(r.html).toContain("data-canopy-withheld");
+  expect(r.html).not.toContain("0 pts below goal");
+  expect(errors).toEqual([]);
+});

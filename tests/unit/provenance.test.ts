@@ -115,12 +115,18 @@ describe("county readiness is computed from evidence", () => {
 describe("crash counts are rebuilt per county with a stated boundary rule", () => {
   const dir = path.join(root, "app/data/crash_counts");
   const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => /^\d{5}\.json$/.test(f)) : [];
-  it("every California county has a file, LA included, except San Francisco", () => {
-    // San Francisco: only 34% of its CCRS crashes have coordinates; its data file uses DataSF's injury-crash records
-    // instead, which this rebuild does not cover yet (docs/DATA-AUDIT-AND-TRANSPARENCY.md).
+  it("every California county has a file; San Francisco's comes from DataSF, the rest from CCRS", () => {
+    // San Francisco: only 34% of its CCRS crashes have coordinates, so it uses DataSF's injury-crash records (95.6% placed).
     expect(files).toContain("06037.json");
-    expect(files).not.toContain("06075.json");
-    expect(files.filter((f) => f.startsWith("06")).length).toBe(57);
+    expect(files.filter((f) => f.startsWith("06")).length).toBe(58);
+    const sf = JSON.parse(fs.readFileSync(path.join(dir, "06075.json"), "utf8"))._meta;
+    expect(sf.source).toBe("San Francisco injury crashes (DataSF)");
+    expect(sf.fields[2]).toBe("injury or fatal crashes");
+    expect(sf.pedbike_lower_bound).toBe(true);
+    expect(sf.located_share).toBeGreaterThan(0.9);
+    expect(sf.field_descriptions.mviw).toBe("motor vehicle involved with");
+    const gaps = JSON.parse(fs.readFileSync(path.join(root, "app/data/crash_gaps/06075.json"), "utf8"))._meta;
+    expect(gaps.peers).toMatch(/within this county/); // not pooled with LA's CCRS counts
   });
   it("each file records its source, rule, script and coordinate coverage; subsets never exceed the total", () => {
     for (const f of files) {
@@ -140,6 +146,31 @@ describe("crash counts are rebuilt per county with a stated boundary rule", () =
   });
   it("the old LA-only file is gone (one source of crash counts)", () => {
     expect(fs.existsSync(path.join(root, "app/data/la-crash-counts.json"))).toBe(false);
+  });
+});
+
+describe("Tree Equity Score current release (2020 block groups), per county", () => {
+  const dir = path.join(root, "app/data/tree_equity_2025");
+  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => /^\d{5}\.json$/.test(f)) : [];
+  it("covers every county with a data file, from American Forests' published state files", () => {
+    expect(files.length).toBe(639);
+    for (const f of files) {
+      const m = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"))._meta;
+      expect(m.url).toMatch(/^https:\/\/tes-app-data-share\.s3\.amazonaws\.com\/[a-z]{2}\/[a-z]{2}_csv\.zip$/);
+      expect(m.zip_member_date).toMatch(/^20(25|26)-\d{2}-\d{2}$/);
+      expect(m.script).toBe("scripts/build_tree_equity_2025.py");
+      expect(m.not_used).toMatch(/temp_diff/); // heat is a different measure and is not swapped
+    }
+  });
+  it("values are percentages in range, canopy gap = goal minus canopy (to rounding)", () => {
+    const d = JSON.parse(fs.readFileSync(path.join(dir, "48453.json"), "utf8"));
+    for (const [g, v] of Object.entries(d)) {
+      if (g === "_meta") continue;
+      const [gap, canopy, goal] = v as (number | null)[];
+      if (gap == null || canopy == null || goal == null) continue;
+      expect(gap).toBeGreaterThanOrEqual(0);
+      expect(Math.abs(gap - Math.max(0, goal - canopy))).toBeLessThanOrEqual(0.15);
+    }
   });
 });
 

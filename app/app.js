@@ -2165,6 +2165,7 @@ async function ivScanLA() {
     const s = atob(b), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i);
     const obj = JSON.parse(fflate.strFromU8(fflate.gunzipSync(u)));
     applyCrashGaps(obj, CRASH_GAPS["06037"]);
+    applyTreeEquity(obj, TREE_EQUITY["06037"]);
     for (const id in obj) { const f = byId.get(id); if (f) f.properties._iv = ivCompactRows(obj[id].r, obj[id].m); }
     if (++n % 8 === 0) await new Promise(r => setTimeout(r, 0));
   }
@@ -2253,6 +2254,7 @@ function lazyDetails(src) {
         v = JSON.parse(fflate.strFromU8(fflate.gunzipSync(u))); }
       applyLaNeighborhoodValues(v);
       applyCrashGaps(v, CRASH_GAPS["06037"]);
+      applyTreeEquity(v, TREE_EQUITY["06037"]);
       open.set(k, v);
     }
     return open.get(k);
@@ -2308,7 +2310,7 @@ function localOverlays(ll) {
   return out;
 }
 async function unpack() {
-  const [bundleText, detailsText] = await Promise.all([cpText("bundle"), cpText("details-chunks"), loadCrashGaps("06037")]);
+  const [bundleText, detailsText] = await Promise.all([cpText("bundle"), cpText("details-chunks"), loadCrashGaps("06037"), loadTreeEquity("06037")]);
   if (!bundleText) throw new Error("Could not download the Los Angeles County data (app/data/" + CP_DATA_FILES.bundle + ")");
   const bin = await b64Bytes(bundleText); cpRelease("bundle");
   const d = JSON.parse(await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream("gzip"))).text());
@@ -3718,11 +3720,49 @@ function crashTextFor(fips, bg) {
     if (placed !== null && placed < 100) caveats.push(`only the ${placed}% of this county's crashes that have coordinates can be placed, so true counts are higher`);
   } else {
     // A map service never returns crashes stored without a location, so their share is unknown (build_state_crash_counts).
-    caveats.push("crashes the state recorded without a location are not counted, and their share is unknown");
+    if (typeof mt.located_share === "number" && mt.located_share < 1) caveats.push(`only the ${Math.round(100 * mt.located_share)}% of this source's crashes that have a location can be placed, so true counts are higher`);
+    else caveats.push("crashes the state recorded without a location are not counted, and their share is unknown");
   }
   if (/first harmful event/i.test(mt.notes || "")) caveats.push("pedestrian/cyclist count is a lower bound (only the first thing struck is recorded)");
+  else if (mt.pedbike_lower_bound) caveats.push("pedestrian/cyclist count is a lower bound (one recorded collision partner per crash)");
   return `${c[2]} ${noun} recorded inside this block group or on its boundary streets (${src} ${yrs}): ${c[0]} involving a pedestrian or cyclist, ${c[1]} with someone killed or seriously injured` +
     (caveats.length ? "; " + caveats.join("; ") : "");
+}
+// Tree canopy gap from American Forests' current Tree Equity Score release on 2020 block groups
+// (scripts/build_tree_equity_2025.py -> app/data/tree_equity_2025/<fips>.json). It replaces the county data files' 2021
+// value (2010 block groups, area-weighted) wherever the current release has one; same definition (goal minus canopy).
+// Heat is not replaced: the current release's heat field is a different measure.
+const TREE_EQUITY = {};
+async function loadTreeEquity(fips) {
+  if (!fips) return null;
+  if (!(fips in TREE_EQUITY)) {
+    try { const r = await fetch(`app/data/tree_equity_2025/${fips}.json`); TREE_EQUITY[fips] = r.ok ? await r.json() : null; }
+    catch (e) { TREE_EQUITY[fips] = null; }
+  }
+  return TREE_EQUITY[fips];
+}
+function treeEquityLabel(te) {
+  const d = te && te._meta && te._meta.zip_member_date;
+  return `Tree Equity Score ${d ? d.slice(0, 4) : "current"} release${d ? " (file dated " + d + ")" : ""}, 2020 block groups`;
+}
+function applyTreeEquity(details, te) {
+  if (!details || !te) return;
+  const label = treeEquityLabel(te);
+  for (const id of Object.keys(details)) {
+    const d = details[id], v = te[id];
+    if (!d || d.__teAdj || !Array.isArray(v) || v[0] == null) continue;
+    const m = d.m || d;
+    m.tg_2021 = m.tg; m.tg = v[0]; m.tc_now = v[1]; m.tg_src = label;
+    // The neighbourhood comparison ("what this area is missing") ranked the 2021 value against similar areas; it is
+    // withheld rather than shown against a canopy figure it no longer matches.
+    const gp = m.gp;
+    if (gp && ((gp.g || []).some(e => e[0] === "canopy") || (gp.s || []).some(e => e[0] === "canopy"))) {
+      gp.g = (gp.g || []).filter(e => e[0] !== "canopy");
+      gp.s = (gp.s || []).filter(e => e[0] !== "canopy");
+      gp.canopy_withheld = true;
+    }
+    d.__teAdj = true;
+  }
 }
 // Crash-based neighbourhood comparisons and crash-dependent improvement rows, recomputed from the rebuilt crash
 // counts (scripts/recompute_crash_gaps.py, docs/audit/crash-rankings.md). Applied to a county's block-group records
@@ -3808,6 +3848,7 @@ function gapSection(p, m) {
   if (G.g.length) h += `<ul class="small" style="margin:4px 0 0 18px;padding:0">${G.g.map(([k, x, med, sev, fix, why, cost]) =>
       `<li style="margin-bottom:4px">${esc(why)} <span class="muted">${sev >= 0.995 ? "Worse than every similar area." : "Worse than " + Math.round(sev * 100) + "% of similar areas."}</span> <b>Fix:</b> ${esc(fixName(fix))}${cost && ivAllows(fix, m) ? ` (~${fmt$(cost)})` : ivAllows(fix, m) ? "" : " (effect not sourced yet)"}.</li>`).join("")}</ul>`;
   else h += `<p class="small">Nothing stands out: this block group is at or above similar areas on parks, shade, shops, schools, services, transit, safety and street safety.</p>`;
+  if (G.canopy_withheld) h += `<p class="small muted" data-canopy-withheld>Tree canopy: ${esc(String(m.tg != null ? Math.round(m.tg) : "–"))} pts below goal (${esc(m.tg_src || "Tree Equity Score current release")}). The comparison with similar areas used the 2021 release and isn't recomputed yet, so it isn't shown.</p>`;
   if (G.pedbike_withheld) h += `<p class="small muted" data-crash-withheld>Street safety (crashes involving pedestrians and cyclists): comparison not recomputed yet with the corrected crash counts, so it isn't shown.</p>`;
   if (G.s.length) h += `<p class="small"><b>Already strong:</b> ${G.s.map(([k, x, med]) => `${esc((k === "dining" ? "restaurants and cafés within 400 m" : (D.gap_labels || {})[k]) || k)} (${esc(x)}; similar areas ${esc(med)})`).join("; ")}.</p>`;
   h += `<p class="small muted">Compared with the 50 block groups ${typeof activeCounty !== "undefined" && activeCounty === "oc" && typeof countyOf === "function" ? "in Los Angeles County and " + esc((c => c === "District of Columbia" ? "the " + c : c)(countyOf(m))) : "county-wide"} most like this one in income, density, home values, housing age, ${typeof activeCounty !== "undefined" && activeCounty === "oc" ? "" : "children, "}car ownership and single-family share.</p>`;
@@ -7402,7 +7443,7 @@ function select(id, fly) {
   add("Population", m.pop, fmtN); add("Median household income", m.inc, fmt$); add("Median rent", m.rent, v => fmt$(v) + "/mo"); add("Median year built", m.yb, v => Math.round(v));
   add("Single-family share", m.sf, v => Math.round(v) + "%"); add("Households without a car", m.nocar, v => Math.round(v) + "%");
   if (!oc) { add("Street trees (city survey)", m.st, fmtN); add("Open tree sites", m.ts, fmtN); }
-  add("Canopy gap to goal (Tree Equity Score 2021, 2010 block groups)", m.tg, v => (+v).toFixed(0) + " pts");
+  add("Canopy gap to goal (" + (m.tg_src || "Tree Equity Score 2021, 2010 block groups") + ")", m.tg, v => (+v).toFixed(0) + " pts");
   add("Property crimes, 12 mo", m.pcr, fmtN); { const cc = crashCountsFor(activeFips()); const row = cc && typeof selected !== "undefined" ? cc[selected] : null;
     if (Array.isArray(row)) add("Crashes with someone killed or seriously injured, inside or on boundary streets", row[1], fmtN);
     else add("Fatal/severe crashes recorded (older count, boundary crashes on one side only)", m.ksi, fmtN); }
@@ -9473,6 +9514,7 @@ async function openCounty(fips, wantBgId) {
     await applyBundleCorrections(B);
     if (B && B.details) {
       applyCrashGaps(B.details, await loadCrashGaps(fips));
+      applyTreeEquity(B.details, await loadTreeEquity(fips));
       if (typeof INTERVENTION_VERIFICATION !== "undefined" && INTERVENTION_VERIFICATION && B.features) ivTagFeatures(B.features, B.details);
     }
     if (D_OC !== B) {
@@ -9640,6 +9682,10 @@ async function initOrangeCounty() {
   try {
     D_OC = qualifyNearestNames(await unpackGzipB64(b64Text)); cpRelease("bundle-oc");
     if (D_OC.meta && !D_OC.meta.fips) D_OC.meta.fips = ORANGE_FIPS;
+    if (D_OC.details) {
+      applyCrashGaps(D_OC.details, await loadCrashGaps(ORANGE_FIPS));   // same as every other county (was skipped here)
+      applyTreeEquity(D_OC.details, await loadTreeEquity(ORANGE_FIPS));
+    }
     COUNTY_BUNDLES[ORANGE_FIPS] = D_OC;
     if (typeof window !== "undefined") window.D_OC = D_OC;
     

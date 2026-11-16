@@ -1,0 +1,13 @@
+{
+ "block_groups_compared": 159935,
+ "median_abs_diff_pts": 4.6,
+ "moved_gt_5_pts": 75183,
+ "share_moved_gt_5_pts": 0.47,
+ "current_only": 9179,
+ "old_only_no_current_value": 5381,
+ "county_files_by_release_date": {
+  "2025-07-01": 578,
+  "2026-03-13": 56,
+  "2026-03-20": 5
+ }
+}
