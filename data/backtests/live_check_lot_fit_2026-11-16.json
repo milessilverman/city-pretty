@@ -1,5 +1,5 @@
 {
- "ran_on": "2026-11-16T22:09:01.735Z",
+ "ran_on": "2026-11-16T22:45:03.890Z",
  "script": "scripts/live_check_lot_fit.mjs",
  "nyc": [
   {
@@ -285,6 +285,264 @@
    "url": "https://zr.planning.nyc.gov/article-i/chapter-2/12-10",
    "what": "qualifying residential site",
    "found": true
+  }
+ ],
+ "dc_quotes": [
+  {
+   "section": "Subtitle D § 101",
+   "what": "R-1A purpose",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 201",
+   "what": "R-1A dwelling units",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 202",
+   "what": "R-1A min lot",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 203",
+   "what": "R-1A height",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 210",
+   "what": "R-1A lot occupancy",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 210",
+   "what": "R-1A lot occupancy",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 210",
+   "what": "R-1A lot occupancy",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 101",
+   "what": "R-1B purpose",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 202",
+   "what": "R-1B min lot",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 101",
+   "what": "R-2 purpose",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 202",
+   "what": "R-2 min lot",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 202",
+   "what": "R-2 min lot",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 203",
+   "what": "R-2 height",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 101",
+   "what": "R-3 purpose",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 202",
+   "what": "R-3 min lot",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 203",
+   "what": "R-3 height",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 210",
+   "what": "R-3 lot occupancy",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment by_right",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment owner",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment persons",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment share",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment entrance",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment access",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment license",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment min GFA R-1A",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment min GFA R-2",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 100",
+   "what": "overlay rule",
+   "found": true
+  }
+ ],
+ "dc": [
+  {
+   "county": "11001",
+   "area": "Chevy Chase DC",
+   "lat": 38.962354,
+   "lng": -77.076405,
+   "zone": "R-2",
+   "parcel": {
+    "SSL": "1858    0053",
+    "PREMISEADD": "3825 LEGATION ST NW WASHINGTON DC 20015",
+    "USECODE": "013",
+    "LANDAREA": 6245,
+    "GBA": 1800
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "3825 LEGATION ST NW WASHINGTON DC 20015 · AIN/APN 1858 0053 · Residential-Semi-Detached-Single-Family (DC Office of Tax and Revenue USECODE Table, USECODE 013)\nHeight limit\t40 ft\n• Zoning district R-2 (DC Zoning Regulations of 2016 (11 DCMR)) — The R-2 zone is intended to provide for areas predominantly developed with semi-detached houses on moderately sized lots that also contain some detached houses. (11 DCMR Subtitle D § 101). One principal dwelling unit and one accessory apartment are allowed per lot of record (11 DCMR Subtitle D § 201). Minimum lot to create a new lot of record: semi-detached: 3,000 sq ft and 30 ft wide; all other structures: 4,000 sq ft and 40 ft wide (11 DCMR Subtitle D § 202, Table D § 202.1). Height: up to 40 ft and 3 stories, not counting a penthouse or rooftop structure (11 DCMR Subtitle D § 203). Other parts of the regulations and any Board of Zoning Adjustment relief can change these; they aren't checked here.\n• Lot coverage allowed by zoning — Up to 40% lot occupancy for all other structures (11 DCMR Subtitle D § 210, Table D § 210.1): about 2,498 sq ft of building footprint on this 6,245 sq ft lot. The building's footprint isn't known from outlines here, so what's left isn't computed.\n✗ Second home (two-family or more) — 11 DCMR Subtitle D § 201: \"In all R zones, one (1) principal dwelling unit and one (1) accessory apartment shall be permitted per lot of record, subject to Subtitle U, Use Permissions.\" A second principal home (a flat) isn't allowed in R-2; the accessory apartment (below) is the second home allowed.\n? Split into two lots (by area only) — At 6,245 sq ft the lot has at least twice the minimum area for semi-detached (11 DCMR Subtitle D § 202). Each new lot must also meet the minimum width (30 ft / 40 ft), which the parcel re"
+  },
+  {
+   "county": "11001",
+   "area": "Chevy Chase DC",
+   "lat": 38.967277,
+   "lng": -77.074426,
+   "zone": "R-1B",
+   "parcel": {
+    "SSL": "1864    0068",
+    "PREMISEADD": "5820 CHEVY CHASE PKWY NW WASHINGTON DC 20015",
+    "USECODE": "012",
+    "LANDAREA": 4777,
+    "GBA": 2010
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "5820 CHEVY CHASE PKWY NW WASHINGTON DC 20015 · AIN/APN 1864 0068 · Residential-Detached-Single-Family (DC Office of Tax and Revenue USECODE Table, USECODE 012)\nHeight limit\t40 ft\n• Zoning district R-1B (DC Zoning Regulations of 2016 (11 DCMR)) — The R-1B zone is intended to provide for areas predominantly developed with detached houses on moderately sized lots. (11 DCMR Subtitle D § 101). One principal dwelling unit and one accessory apartment are allowed per lot of record (11 DCMR Subtitle D § 201). Minimum lot to create a new lot of record: 5,000 sq ft and 50 ft wide (11 DCMR Subtitle D § 202, Table D § 202.1); this lot (4,777 sq ft) is smaller, and those minimums apply to creating a new lot of record (11 DCMR Subtitle D § 202.1). Height: up to 40 ft and 3 stories, not counting a penthouse or rooftop structure (11 DCMR Subtitle D § 203). Other parts of the regulations and any Board of Zoning Adjustment relief can change these; they aren't checked here.\n• Lot coverage allowed by zoning — Up to 40% lot occupancy for all other structures (11 DCMR Subtitle D § 210, Table D § 210.1): about 1,911 sq ft of building footprint on this 4,777 sq ft lot. The building's footprint isn't known from outlines here, so what's left isn't computed.\n✗ Second home (two-family or more) — 11 DCMR Subtitle D § 201: \"In all R zones, one (1) principal dwelling unit and one (1) accessory apartment shall be permitted per lot of record, subject to Subtitle U, Use Permissions.\" A second principal home (a flat) isn't allowed in R-1B; the accessory apartment (below) is the second home allowed.\n✗ Split into two lots (by area only) — Two lots would each need at least 5,000 sq ft (11 DCMR Subtitle D § 202); this lot has 4,777 sq ft.\n? Accessory apartment (ADU) — 11 DCMR Subtitle U § 253 allows one acces"
+  },
+  {
+   "county": "11001",
+   "area": "Spring Valley",
+   "lat": 38.938508,
+   "lng": -77.098999,
+   "zone": "R-1A",
+   "parcel": {
+    "SSL": "1475    0052",
+    "PREMISEADD": "3717 FORDHAM RD NW WASHINGTON DC 20016",
+    "USECODE": "012",
+    "LANDAREA": 15950,
+    "GBA": 2246
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "3717 FORDHAM RD NW WASHINGTON DC 20016 · AIN/APN 1475 0052 · Residential-Detached-Single-Family (DC Office of Tax and Revenue USECODE Table, USECODE 012)\nHeight limit\t40 ft\n• Zoning district R-1A (DC Zoning Regulations of 2016 (11 DCMR)) — The R-1A zone is intended to provide for areas predominantly developed with detached houses on large lots. (11 DCMR Subtitle D § 101). One principal dwelling unit and one accessory apartment are allowed per lot of record (11 DCMR Subtitle D § 201). Minimum lot to create a new lot of record: 7,500 sq ft and 75 ft wide (11 DCMR Subtitle D § 202, Table D § 202.1). Height: up to 40 ft and 3 stories, not counting a penthouse or rooftop structure (11 DCMR Subtitle D § 203). Other parts of the regulations and any Board of Zoning Adjustment relief can change these; they aren't checked here.\n• Lot coverage allowed by zoning — Up to 40% lot occupancy for all other structures (11 DCMR Subtitle D § 210, Table D § 210.1): about 6,380 sq ft of building footprint on this 15,950 sq ft lot. The building's footprint isn't known from outlines here, so what's left isn't computed.\n✗ Second home (two-family or more) — 11 DCMR Subtitle D § 201: \"In all R zones, one (1) principal dwelling unit and one (1) accessory apartment shall be permitted per lot of record, subject to Subtitle U, Use Permissions.\" A second principal home (a flat) isn't allowed in R-1A; the accessory apartment (below) is the second home allowed.\n? Split into two lots (by area only) — At 15,950 sq ft the lot has at least twice the minimum area for all structures (11 DCMR Subtitle D § 202). Each new lot must also meet the minimum width (75 ft), which the parcel record doesn't give, and the subdivision rules; neither is checked here.\n? Accessory apartment (ADU) — 11 DCMR Subtitle U § 253 al"
+  },
+  {
+   "county": "11001",
+   "area": "Burleith",
+   "lat": 38.915976,
+   "lng": -77.074511,
+   "zone": "R-3/GT",
+   "parcel": {
+    "SSL": "1310    0032",
+    "PREMISEADD": "1918 38TH ST NW WASHINGTON DC 20007",
+    "USECODE": "011",
+    "LANDAREA": 1637,
+    "GBA": 1548
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "1918 38TH ST NW WASHINGTON DC 20007 · AIN/APN 1310 0032 · Residential-Row-Single-Family (DC Office of Tax and Revenue USECODE Table, USECODE 011)\n• Local zoning standards — Not on file: This lot is in R-3/GT, a geographically modified version of R-3 (11 DCMR Subtitle D § 100): its own rules change the base zone's and aren't encoded here, so no standards are shown."
+  },
+  {
+   "county": "11001",
+   "area": "Chevy Chase DC, Connecticut Ave row houses",
+   "lat": 38.960823,
+   "lng": -77.073499,
+   "zone": "R-3",
+   "parcel": {
+    "SSL": "1872    0049",
+    "PREMISEADD": "5330 CONNECTICUT AVE NW WASHINGTON DC 20015",
+    "USECODE": "011",
+    "LANDAREA": 1453,
+    "GBA": 2349
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "5330 CONNECTICUT AVE NW WASHINGTON DC 20015 · AIN/APN 1872 0049 · Residential-Row-Single-Family (DC Office of Tax and Revenue USECODE Table, USECODE 011)\nHeight limit\t40 ft\n• Zoning district R-3 (DC Zoning Regulations of 2016 (11 DCMR)) — The R-3 zone is intended to permit attached row houses on small lots. (11 DCMR Subtitle D § 101). One principal dwelling unit and one accessory apartment are allowed per lot of record (11 DCMR Subtitle D § 201). Minimum lot to create a new lot of record: row: 2,000 sq ft and 20 ft wide; semi-detached: 3,000 sq ft and 30 ft wide; all other structures: 4,000 sq ft and 40 ft wide (11 DCMR Subtitle D § 202, Table D § 202.1); this lot (1,453 sq ft) is smaller, and those minimums apply to creating a new lot of record (11 DCMR Subtitle D § 202.1). Height: up to 40 ft and 3 stories, not counting a penthouse or rooftop structure (11 DCMR Subtitle D § 203). Other parts of the regulations and any Board of Zoning Adjustment relief can change these; they aren't checked here.\n• Lot coverage allowed by zoning — Up to 60% lot occupancy for single household row building (11 DCMR Subtitle D § 210, Table D § 210.1): about 872 sq ft of building footprint on this 1,453 sq ft lot. The building's footprint isn't known from outlines here, so what's left isn't computed.\n✗ Second home (two-family or more) — 11 DCMR Subtitle D § 201: \"In all R zones, one (1) principal dwelling unit and one (1) accessory apartment shall be permitted per lot of record, subject to Subtitle U, Use Permissions.\" A second principal home (a flat) isn't allowed in R-3; the accessory apartment (below) is the second home allowed.\n✗ Split into two lots (by area only) — Two lots would each need at least 2,000 sq ft (11 DCMR Subtitle D § 202); this lot has 1,453 sq ft.\n? Accessory apartment "
+  }
+ ],
+ "nashville": [
+  {
+   "county": "47037",
+   "lat": 36.138108,
+   "lng": -86.793214,
+   "parcel": {
+    "ParID": 155490,
+    "PropAddr": "1619 VILLA PL",
+    "LUDesc": "SINGLE FAMILY",
+    "Zoning": "RS5"
+   },
+   "use_decoded": true,
+   "shows_reason": true,
+   "home_checks_run": true,
+   "ok": true,
+   "excerpt": "1619 VILLA PL · AIN/APN 155490 · SINGLE FAMILY (Metro Nashville Parcels (Parcels_view))\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Local zoning standards — Not on file: No local zoning standards are on file here. Nashville / Davidson County: Metro Nashville's Zoning Code (Title 17) is published on Municode, which answered the build machine with HTTP 403 on 16 Nov 2026, so no standard could be read from the code itself. The parcel record does give the Assessor's land use (LUDesc), so home checks run there, without local standards."
+  },
+  {
+   "county": "47037",
+   "lat": 36.138693,
+   "lng": -86.7931,
+   "parcel": {
+    "ParID": 155583,
+    "PropAddr": "1603 VILLA PL",
+    "LUDesc": "SINGLE FAMILY",
+    "Zoning": "RS5"
+   },
+   "use_decoded": true,
+   "shows_reason": true,
+   "home_checks_run": true,
+   "ok": true,
+   "excerpt": "1603 VILLA PL · AIN/APN 155583 · SINGLE FAMILY (Metro Nashville Parcels (Parcels_view))\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Local zoning standards — Not on file: No local zoning standards are on file here. Nashville / Davidson County: Metro Nashville's Zoning Code (Title 17) is published on Municode, which answered the build machine with HTTP 403 on 16 Nov 2026, so no standard could be read from the code itself. The parcel record does give the Assessor's land use (LUDesc), so home checks run there, without local standards."
   }
  ],
  "page_errors": []

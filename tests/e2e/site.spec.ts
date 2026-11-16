@@ -1238,3 +1238,97 @@ test("neighborhood panel lists no unchecked funding programs and states the EIFD
   expect(t).toContain("25–50% sends it to an election");
   expect(errors).toEqual([]);
 });
+
+// DC (11 DCMR Subtitle D and U, read from dcregs.dc.gov) and Nashville (the Assessor's LUDesc). DC's parcel layer has
+// no zone field: the page reads the zone from DC's zoning map at the clicked point. Before 16 Nov 2026 DC and Nashville
+// lots showed "doesn't record this lot's use" and no zoning standard.
+test("what fits on this lot reads DC's zone at the point and applies 11 DCMR; DC and Nashville uses come from the publishers' tables (live click path)", async ({ page }) => {
+  test.setTimeout(300_000);   // eight lots through the full click path
+  const ring = (lat: number, lng: number) => [[lng - 0.0002, lat - 0.0001], [lng + 0.0002, lat - 0.0001], [lng + 0.0002, lat + 0.0001], [lng - 0.0002, lat + 0.0001], [lng - 0.0002, lat - 0.0001]];
+  const json = (route: any, body: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: JSON.stringify(body) });
+  let dcParcel: any = {}, dcZone = "R-1B", gba: number | null = 2400, zoneCalls = 0;
+  await page.route(/Property_and_Land_WebMercator\/MapServer\/40\/query/, (route: any) => json(route, { features: [{ attributes: dcParcel, geometry: { rings: [ring(38.9655, -77.0705)] } }] }));
+  await page.route(/Property_and_Land_WebMercator\/MapServer\/25\/query/, (route: any) => json(route, { features: gba == null ? [] : [{ attributes: { SSL: dcParcel.SSL, GBA: gba, LANDAREA: dcParcel.LANDAREA, AYB: 1930, BEDRM: 3, BATHRM: 2, HF_BATHRM: 0, NUM_UNITS: 1 } }] }));
+  await page.route(/Planning_Landuse_and_Zoning_WebMercator\/MapServer\/32\/query/, (route: any) => {
+    const u = new URL(route.request().url());
+    if (u.searchParams.get("geometryType") === "esriGeometryPoint" && u.searchParams.get("outFields") === "ZONING") zoneCalls++;
+    return json(route, { features: [{ attributes: { ZONING: dcZone, ZONE_DESCRIPTION: "test" }, geometry: { rings: [ring(38.9655, -77.0705)] } }] });
+  });
+  let nash: any = {};
+  await page.route(/Parcels_view\/FeatureServer\/0\/query/, (route: any) => json(route, { features: [{ attributes: nash, geometry: { rings: [ring(36.13, -86.79)] } }] }));
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { try { return !!(0, eval)("ZONING_STANDARDS") && !!(0, eval)("PARCEL_USE_CODES"); } catch { return false; } }, null, { timeout: 30_000 });
+  const houseText = async (fips: string, ll: { lat: number; lng: number }) => {
+    await page.evaluate((f) => (0, eval)("openCounty")(f), fips);
+    await page.waitForFunction((f) => (window as any).D_OC?.meta?.fips === f, fips, { timeout: 60_000 });
+    await page.evaluate(() => { try { (0, eval)("houseCache").clear(); } catch (e) {} });
+    await page.evaluate((p) => (0, eval)("houseAt")(p), ll);
+    await page.waitForFunction(() => { const b = document.querySelector("#house"); return !!b && !b.querySelector(".house-loading") && /Zoning district|Local zoning standards|Home upgrades/.test(b.innerText); }, null, { timeout: 30_000 });
+    return page.evaluate(() => (document.querySelector("#house") as HTMLElement).innerText);
+  };
+  const dcAt = { lat: 38.9655, lng: -77.0705 };
+
+  // A detached house in R-1B on a 6,000 sq ft lot with 2,400 sq ft of floor area.
+  dcParcel = { SSL: "1999    0071", PREMISEADD: "1 TEST AVE NW WASHINGTON DC 20015", USECODE: "012", PROPTYPE: "Residential-Single Family (Det", LANDAREA: 6000, NEWLAND: 600000, NEWIMPR: 900000, NEWTOTAL: 1500000 };
+  const r1b = await houseText("11001", dcAt);
+  expect(zoneCalls).toBeGreaterThan(0);
+  expect(r1b).toContain("Residential-Detached-Single-Family (DC Office of Tax and Revenue USECODE Table");
+  expect(r1b).not.toContain("doesn't record this lot's use");
+  expect(r1b).toContain("Zoning district R-1B (DC Zoning Regulations of 2016 (11 DCMR))");
+  expect(r1b).toContain("The R-1B zone is intended to provide for areas predominantly developed with detached houses on moderately sized lots.");
+  expect(r1b).toContain("5,000 sq ft and 50 ft wide (11 DCMR Subtitle D § 202, Table D § 202.1)");
+  expect(r1b).toContain("Height: up to 40 ft and 3 stories, not counting a penthouse or rooftop structure (11 DCMR Subtitle D § 203)");
+  expect(r1b).toContain("Up to 40% lot occupancy for all other structures (11 DCMR Subtitle D § 210, Table D § 210.1): about 2,400 sq ft of building footprint on this 6,000 sq ft lot");
+  expect(r1b).toMatch(/Second home \(two-family or more\)\s*—\s*11 DCMR Subtitle D § 201/);
+  expect(r1b).toContain("Two lots would each need at least 5,000 sq ft");
+  expect(r1b).toContain("the house needs at least 2,000 sq ft of gross floor area (Table U § 253.7(a)); OTR records 2,400 sq ft");
+  expect(r1b).toContain("(about 840 sq ft)");   // 35% of 2,400
+  expect(r1b).not.toContain("Detached ADU (backyard home)");   // DC's accessory-apartment rule replaces the generic rows
+  expect(r1b).not.toContain("Duplex, middle housing or lot split");
+  expect(r1b).not.toContain("Local zoning standards");
+
+  // A row house in R-3 on a small lot: 60% lot occupancy for a single household row building; R-3 has no minimum
+  // house size for an accessory apartment.
+  dcZone = "R-3"; gba = 1500;
+  dcParcel = { ...dcParcel, USECODE: "011", LANDAREA: 1500 };
+  const r3 = await houseText("11001", dcAt);
+  expect(r3).toContain("Residential-Row-Single-Family");
+  expect(r3).toContain("Up to 60% lot occupancy for single household row building");
+  expect(r3).toContain("row: 2,000 sq ft and 20 ft wide");
+  expect(r3).toContain("this lot (1,500 sq ft) is smaller, and those minimums apply to creating a new lot of record");
+  expect(r3).toContain("no minimum house size is listed for this zone");
+
+  // A geographically modified zone (R-3/GT) has its own rules: nothing is applied.
+  dcZone = "R-3/GT";
+  const gt = await houseText("11001", dcAt);
+  expect(gt).toMatch(/Local zoning standards\s*—\s*Not on file: This lot is in R-3\/GT, a geographically modified version of R-3/);
+  expect(gt).not.toContain("Zoning district R-3/GT");
+
+  // A condominium unit is residential but not a house on its own lot: no lot checks.
+  dcZone = "R-1B";
+  dcParcel = { ...dcParcel, USECODE: "016", LANDAREA: 0 };
+  const condo = await houseText("11001", dcAt);
+  expect(condo).toContain("a unit in a condominium or cooperative");
+  expect(condo).not.toContain("Accessory apartment (ADU)");
+  expect(condo).not.toContain("Swimming pool");
+
+  // A church (OTR 081) gets no home checks.
+  dcParcel = { ...dcParcel, USECODE: "081", LANDAREA: 20000 };
+  const church = await houseText("11001", dcAt);
+  expect(church).toContain("This parcel is Religious (DC Office of Tax and Revenue USECODE Table, USECODE 081), so residential homeowner checks do not apply");
+
+  // Nashville: the Assessor's LUDesc decides the use; the code couldn't be read (Municode 403) and the panel says so.
+  nash = { ParID: 1, PropAddr: "1 TEST AVE", Zoning: "RS7.5", LUDesc: "SINGLE FAMILY", Acres: 0.2, TotlAppr: 400000 };
+  const n1 = await houseText("47037", { lat: 36.13, lng: -86.79 });
+  expect(n1).toContain("SINGLE FAMILY (Metro Nashville Parcels (Parcels_view))");
+  expect(n1).not.toContain("doesn't record this lot's use");
+  expect(n1).toMatch(/Local zoning standards\s*—\s*Not on file: No local zoning standards are on file here\. Nashville \/ Davidson County: .*Municode/);
+  nash = { ...nash, LUDesc: "DUPLEX" };
+  const n2 = await houseText("47037", { lat: 36.13, lng: -86.79 });
+  expect(n2).toContain("DUPLEX (Metro Nashville Parcels (Parcels_view))");
+  expect(n2).not.toContain("Interior accessory suite");   // a duplex is not a single-family house
+  nash = { ...nash, LUDesc: "CHURCH" };
+  const n3 = await houseText("47037", { lat: 36.13, lng: -86.79 });
+  expect(n3).toContain("This parcel is CHURCH (Metro Nashville Parcels (Parcels_view)), so residential homeowner checks do not apply");
+  expect(errors).toEqual([]);
+});
