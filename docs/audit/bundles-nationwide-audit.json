@@ -1,0 +1,8387 @@
+{
+ "acs": {
+  "seed": 20261116,
+  "per_state": 3,
+  "per_county": 10,
+  "n_block_groups": 1410,
+  "counties": [
+   "bundle_01069.json.gz",
+   "bundle_01101.json.gz",
+   "bundle_01125.json.gz",
+   "bundle_04003.json.gz",
+   "bundle_04015.json.gz",
+   "bundle_04025.json.gz",
+   "bundle_05031.json.gz",
+   "bundle_05131.json.gz",
+   "bundle_05143.json.gz",
+   "bundle_06051.json.gz",
+   "bundle_06057.json.gz",
+   "bundle_06097.json.gz",
+   "bundle_08005.json.gz",
+   "bundle_08041.json.gz",
+   "bundle_08123.json.gz",
+   "bundle_09110.json.gz",
+   "bundle_09140.json.gz",
+   "bundle_09170.json.gz",
+   "bundle_10001.json.gz",
+   "bundle_10003.json.gz",
+   "bundle_10005.json.gz",
+   "bundle_11001.json.gz",
+   "bundle_12021.json.gz",
+   "bundle_12083.json.gz",
+   "bundle_12117.json.gz",
+   "bundle_13121.json.gz",
+   "bundle_13153.json.gz",
+   "bundle_13217.json.gz",
+   "bundle_16001.json.gz",
+   "bundle_16027.json.gz",
+   "bundle_16055.json.gz",
+   "bundle_17091.json.gz",
+   "bundle_17099.json.gz",
+   "bundle_17163.json.gz",
+   "bundle_18003.json.gz",
+   "bundle_18063.json.gz",
+   "bundle_18097.json.gz",
+   "bundle_19013.json.gz",
+   "bundle_19049.json.gz",
+   "bundle_19103.json.gz",
+   "bundle_20091.json.gz",
+   "bundle_20177.json.gz",
+   "bundle_20209.json.gz",
+   "bundle_21093.json.gz",
+   "bundle_21117.json.gz",
+   "bundle_21227.json.gz",
+   "bundle_22019.json.gz",
+   "bundle_22073.json.gz",
+   "bundle_22109.json.gz",
+   "bundle_23005.json.gz",
+   "bundle_23019.json.gz",
+   "bundle_23031.json.gz",
+   "bundle_24003.json.gz",
+   "bundle_24013.json.gz",
+   "bundle_24510.json.gz",
+   "bundle_25009.json.gz",
+   "bundle_25017.json.gz",
+   "bundle_25023.json.gz",
+   "bundle_26025.json.gz",
+   "bundle_26147.json.gz",
+   "bundle_26161.json.gz",
+   "bundle_27037.json.gz",
+   "bundle_27163.json.gz",
+   "bundle_27171.json.gz",
+   "bundle_28033.json.gz",
+   "bundle_28049.json.gz",
+   "bundle_28059.json.gz",
+   "bundle_29019.json.gz",
+   "bundle_29037.json.gz",
+   "bundle_29510.json.gz",
+   "bundle_30029.json.gz",
+   "bundle_30063.json.gz",
+   "bundle_30111.json.gz",
+   "bundle_31055.json.gz",
+   "bundle_31109.json.gz",
+   "bundle_31153.json.gz",
+   "bundle_32003.json.gz",
+   "bundle_32031.json.gz",
+   "bundle_33011.json.gz",
+   "bundle_33013.json.gz",
+   "bundle_33017.json.gz",
+   "bundle_34013.json.gz",
+   "bundle_34017.json.gz",
+   "bundle_34037.json.gz",
+   "bundle_35001.json.gz",
+   "bundle_35013.json.gz",
+   "bundle_35043.json.gz",
+   "bundle_36063.json.gz",
+   "bundle_36069.json.gz",
+   "bundle_36109.json.gz",
+   "bundle_37045.json.gz",
+   "bundle_37089.json.gz",
+   "bundle_37119.json.gz",
+   "bundle_38015.json.gz",
+   "bundle_38017.json.gz",
+   "bundle_39099.json.gz",
+   "bundle_39113.json.gz",
+   "bundle_39153.json.gz",
+   "bundle_40027.json.gz",
+   "bundle_40031.json.gz",
+   "bundle_40143.json.gz",
+   "bundle_41005.json.gz",
+   "bundle_41047.json.gz",
+   "bundle_41067.json.gz",
+   "bundle_42011.json.gz",
+   "bundle_42019.json.gz",
+   "bundle_42125.json.gz",
+   "bundle_44003.json.gz",
+   "bundle_44007.json.gz",
+   "bundle_44009.json.gz",
+   "bundle_45003.json.gz",
+   "bundle_45051.json.gz",
+   "bundle_45091.json.gz",
+   "bundle_46099.json.gz",
+   "bundle_46103.json.gz",
+   "bundle_47093.json.gz",
+   "bundle_47119.json.gz",
+   "bundle_47157.json.gz",
+   "bundle_48091.json.gz",
+   "bundle_48439.json.gz",
+   "bundle_48479.json.gz",
+   "bundle_49005.json.gz",
+   "bundle_49011.json.gz",
+   "bundle_49053.json.gz",
+   "bundle_50007.json.gz",
+   "bundle_51059.json.gz",
+   "bundle_51510.json.gz",
+   "bundle_51810.json.gz",
+   "bundle_53005.json.gz",
+   "bundle_53053.json.gz",
+   "bundle_53063.json.gz",
+   "bundle_54003.json.gz",
+   "bundle_54039.json.gz",
+   "bundle_54061.json.gz",
+   "bundle_55059.json.gz",
+   "bundle_55073.json.gz",
+   "bundle_55117.json.gz",
+   "bundle_56021.json.gz",
+   "bundle_72025.json.gz",
+   "bundle_72031.json.gz",
+   "bundle_72127.json.gz"
+  ],
+  "bundle_acs_vintages": [
+   "2020-2024 ACS 5-year"
+  ],
+  "source_files": {
+   "b01003": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat",
+   "b19013": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b19013.dat",
+   "b25001": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25001.dat",
+   "b25003": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25003.dat",
+   "b25024": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25024.dat",
+   "b25035": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25035.dat",
+   "b25044": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25044.dat",
+   "b25064": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25064.dat",
+   "b25077": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25077.dat"
+  },
+  "block_groups_not_in_census_file": 0,
+  "fields": {
+   "hv": {
+    "compared": 1381,
+    "exact": 1377,
+    "mismatch": 4,
+    "bundle_null_census_has": 4,
+    "bundle_has_census_null": 0
+   },
+   "homes": {
+    "compared": 1410,
+    "exact": 1410,
+    "mismatch": 0,
+    "bundle_null_census_has": 0,
+    "bundle_has_census_null": 0
+   },
+   "own": {
+    "compared": 1403,
+    "exact": 1403,
+    "mismatch": 0,
+    "bundle_null_census_has": 0,
+    "bundle_has_census_null": 0
+   },
+   "pop": {
+    "compared": 1410,
+    "exact": 1410,
+    "mismatch": 0,
+    "bundle_null_census_has": 0,
+    "bundle_has_census_null": 0
+   },
+   "inc": {
+    "compared": 1330,
+    "exact": 1330,
+    "mismatch": 0,
+    "bundle_null_census_has": 0,
+    "bundle_has_census_null": 0
+   },
+   "rent": {
+    "compared": 1342,
+    "exact": 1329,
+    "mismatch": 13,
+    "bundle_null_census_has": 13,
+    "bundle_has_census_null": 0
+   },
+   "yb": {
+    "compared": 1394,
+    "exact": 1394,
+    "mismatch": 0,
+    "bundle_null_census_has": 0,
+    "bundle_has_census_null": 0
+   },
+   "sf": {
+    "compared": 1404,
+    "exact": 1404,
+    "mismatch": 0,
+    "bundle_null_census_has": 0,
+    "bundle_has_census_null": 0
+   },
+   "nocar": {
+    "compared": 1403,
+    "exact": 1403,
+    "mismatch": 0,
+    "bundle_null_census_has": 0,
+    "bundle_has_census_null": 0
+   }
+  },
+  "examples": {
+   "rent": [
+    {
+     "gid": "060510001011",
+     "county": "Mono County",
+     "bundle": null,
+     "census": 804.0
+    },
+    {
+     "gid": "060510001012",
+     "county": "Mono County",
+     "bundle": null,
+     "census": 804.0
+    },
+    {
+     "gid": "060510001014",
+     "county": "Mono County",
+     "bundle": null,
+     "census": 804.0
+    },
+    {
+     "gid": "060510002013",
+     "county": "Mono County",
+     "bundle": null,
+     "census": 1663.0
+    },
+    {
+     "gid": "060510002021",
+     "county": "Mono County",
+     "bundle": null,
+     "census": 1608.0
+    },
+    {
+     "gid": "060510002023",
+     "county": "Mono County",
+     "bundle": null,
+     "census": 1608.0
+    },
+    {
+     "gid": "060570001072",
+     "county": "Nevada County",
+     "bundle": null,
+     "census": 2076.0
+    },
+    {
+     "gid": "060570001073",
+     "county": "Nevada County",
+     "bundle": null,
+     "census": 2076.0
+    }
+   ],
+   "hv": [
+    {
+     "gid": "060510001012",
+     "county": "Mono County",
+     "bundle": null,
+     "census": 567700.0
+    },
+    {
+     "gid": "060510001021",
+     "county": "Mono County",
+     "bundle": null,
+     "census": 365500.0
+    },
+    {
+     "gid": "060510002021",
+     "county": "Mono County",
+     "bundle": null,
+     "census": 709500.0
+    },
+    {
+     "gid": "060510002024",
+     "county": "Mono County",
+     "bundle": null,
+     "census": 709500.0
+    }
+   ]
+  },
+  "home_value_labels": {
+   "hv_tract_fallback": 110,
+   "hv_tract_label_ok": 106,
+   "hv_bg": 1271,
+   "hv_bg_label_ok": 1271,
+   "hv_none": 29,
+   "hv_none_label_ok": 29
+  },
+  "sample": [
+   {
+    "file": "bundle_01069.json.gz",
+    "gid": "010690401001"
+   },
+   {
+    "file": "bundle_01069.json.gz",
+    "gid": "010690401002"
+   },
+   {
+    "file": "bundle_01069.json.gz",
+    "gid": "010690406002"
+   },
+   {
+    "file": "bundle_01069.json.gz",
+    "gid": "010690412001"
+   },
+   {
+    "file": "bundle_01069.json.gz",
+    "gid": "010690414001"
+   },
+   {
+    "file": "bundle_01069.json.gz",
+    "gid": "010690415001"
+   },
+   {
+    "file": "bundle_01069.json.gz",
+    "gid": "010690416001"
+   },
+   {
+    "file": "bundle_01069.json.gz",
+    "gid": "010690419024"
+   },
+   {
+    "file": "bundle_01069.json.gz",
+    "gid": "010690420003"
+   },
+   {
+    "file": "bundle_01069.json.gz",
+    "gid": "010690421002"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "gid": "011010021002"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "gid": "011010022012"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "gid": "011010029011"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "gid": "011010033014"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "gid": "011010054023"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "gid": "011010054071"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "gid": "011010054111"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "gid": "011010054112"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "gid": "011010054121"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "gid": "011010056131"
+   },
+   {
+    "file": "bundle_01125.json.gz",
+    "gid": "011250101053"
+   },
+   {
+    "file": "bundle_01125.json.gz",
+    "gid": "011250103052"
+   },
+   {
+    "file": "bundle_01125.json.gz",
+    "gid": "011250106011"
+   },
+   {
+    "file": "bundle_01125.json.gz",
+    "gid": "011250106032"
+   },
+   {
+    "file": "bundle_01125.json.gz",
+    "gid": "011250106044"
+   },
+   {
+    "file": "bundle_01125.json.gz",
+    "gid": "011250119014"
+   },
+   {
+    "file": "bundle_01125.json.gz",
+    "gid": "011250121012"
+   },
+   {
+    "file": "bundle_01125.json.gz",
+    "gid": "011250123043"
+   },
+   {
+    "file": "bundle_01125.json.gz",
+    "gid": "011250123052"
+   },
+   {
+    "file": "bundle_01125.json.gz",
+    "gid": "011250127002"
+   },
+   {
+    "file": "bundle_04003.json.gz",
+    "gid": "040030003033"
+   },
+   {
+    "file": "bundle_04003.json.gz",
+    "gid": "040030003051"
+   },
+   {
+    "file": "bundle_04003.json.gz",
+    "gid": "040030004002"
+   },
+   {
+    "file": "bundle_04003.json.gz",
+    "gid": "040030005021"
+   },
+   {
+    "file": "bundle_04003.json.gz",
+    "gid": "040030007001"
+   },
+   {
+    "file": "bundle_04003.json.gz",
+    "gid": "040030011003"
+   },
+   {
+    "file": "bundle_04003.json.gz",
+    "gid": "040030014021"
+   },
+   {
+    "file": "bundle_04003.json.gz",
+    "gid": "040030019002"
+   },
+   {
+    "file": "bundle_04003.json.gz",
+    "gid": "040030019003"
+   },
+   {
+    "file": "bundle_04003.json.gz",
+    "gid": "040030019004"
+   },
+   {
+    "file": "bundle_04015.json.gz",
+    "gid": "040159506011"
+   },
+   {
+    "file": "bundle_04015.json.gz",
+    "gid": "040159507052"
+   },
+   {
+    "file": "bundle_04015.json.gz",
+    "gid": "040159514031"
+   },
+   {
+    "file": "bundle_04015.json.gz",
+    "gid": "040159515041"
+   },
+   {
+    "file": "bundle_04015.json.gz",
+    "gid": "040159516024"
+   },
+   {
+    "file": "bundle_04015.json.gz",
+    "gid": "040159527021"
+   },
+   {
+    "file": "bundle_04015.json.gz",
+    "gid": "040159531001"
+   },
+   {
+    "file": "bundle_04015.json.gz",
+    "gid": "040159536031"
+   },
+   {
+    "file": "bundle_04015.json.gz",
+    "gid": "040159536043"
+   },
+   {
+    "file": "bundle_04015.json.gz",
+    "gid": "040159548011"
+   },
+   {
+    "file": "bundle_04025.json.gz",
+    "gid": "040250002051"
+   },
+   {
+    "file": "bundle_04025.json.gz",
+    "gid": "040250005011"
+   },
+   {
+    "file": "bundle_04025.json.gz",
+    "gid": "040250006133"
+   },
+   {
+    "file": "bundle_04025.json.gz",
+    "gid": "040250006154"
+   },
+   {
+    "file": "bundle_04025.json.gz",
+    "gid": "040250008043"
+   },
+   {
+    "file": "bundle_04025.json.gz",
+    "gid": "040250010023"
+   },
+   {
+    "file": "bundle_04025.json.gz",
+    "gid": "040250014023"
+   },
+   {
+    "file": "bundle_04025.json.gz",
+    "gid": "040250017011"
+   },
+   {
+    "file": "bundle_04025.json.gz",
+    "gid": "040250020013"
+   },
+   {
+    "file": "bundle_04025.json.gz",
+    "gid": "040250020014"
+   },
+   {
+    "file": "bundle_05031.json.gz",
+    "gid": "050310003005"
+   },
+   {
+    "file": "bundle_05031.json.gz",
+    "gid": "050310003006"
+   },
+   {
+    "file": "bundle_05031.json.gz",
+    "gid": "050310006013"
+   },
+   {
+    "file": "bundle_05031.json.gz",
+    "gid": "050310007023"
+   },
+   {
+    "file": "bundle_05031.json.gz",
+    "gid": "050310008032"
+   },
+   {
+    "file": "bundle_05031.json.gz",
+    "gid": "050310008062"
+   },
+   {
+    "file": "bundle_05031.json.gz",
+    "gid": "050310010004"
+   },
+   {
+    "file": "bundle_05031.json.gz",
+    "gid": "050310011021"
+   },
+   {
+    "file": "bundle_05031.json.gz",
+    "gid": "050310012003"
+   },
+   {
+    "file": "bundle_05031.json.gz",
+    "gid": "050310012004"
+   },
+   {
+    "file": "bundle_05131.json.gz",
+    "gid": "051310001002"
+   },
+   {
+    "file": "bundle_05131.json.gz",
+    "gid": "051310001004"
+   },
+   {
+    "file": "bundle_05131.json.gz",
+    "gid": "051310002002"
+   },
+   {
+    "file": "bundle_05131.json.gz",
+    "gid": "051310002003"
+   },
+   {
+    "file": "bundle_05131.json.gz",
+    "gid": "051310005023"
+   },
+   {
+    "file": "bundle_05131.json.gz",
+    "gid": "051310007002"
+   },
+   {
+    "file": "bundle_05131.json.gz",
+    "gid": "051310007003"
+   },
+   {
+    "file": "bundle_05131.json.gz",
+    "gid": "051310011022"
+   },
+   {
+    "file": "bundle_05131.json.gz",
+    "gid": "051310013051"
+   },
+   {
+    "file": "bundle_05131.json.gz",
+    "gid": "051310102022"
+   },
+   {
+    "file": "bundle_05143.json.gz",
+    "gid": "051430101073"
+   },
+   {
+    "file": "bundle_05143.json.gz",
+    "gid": "051430101101"
+   },
+   {
+    "file": "bundle_05143.json.gz",
+    "gid": "051430104021"
+   },
+   {
+    "file": "bundle_05143.json.gz",
+    "gid": "051430105013"
+   },
+   {
+    "file": "bundle_05143.json.gz",
+    "gid": "051430105133"
+   },
+   {
+    "file": "bundle_05143.json.gz",
+    "gid": "051430105143"
+   },
+   {
+    "file": "bundle_05143.json.gz",
+    "gid": "051430105152"
+   },
+   {
+    "file": "bundle_05143.json.gz",
+    "gid": "051430105202"
+   },
+   {
+    "file": "bundle_05143.json.gz",
+    "gid": "051430106023"
+   },
+   {
+    "file": "bundle_05143.json.gz",
+    "gid": "051430113022"
+   },
+   {
+    "file": "bundle_06051.json.gz",
+    "gid": "060510001011"
+   },
+   {
+    "file": "bundle_06051.json.gz",
+    "gid": "060510001012"
+   },
+   {
+    "file": "bundle_06051.json.gz",
+    "gid": "060510001014"
+   },
+   {
+    "file": "bundle_06051.json.gz",
+    "gid": "060510001021"
+   },
+   {
+    "file": "bundle_06051.json.gz",
+    "gid": "060510002011"
+   },
+   {
+    "file": "bundle_06051.json.gz",
+    "gid": "060510002012"
+   },
+   {
+    "file": "bundle_06051.json.gz",
+    "gid": "060510002013"
+   },
+   {
+    "file": "bundle_06051.json.gz",
+    "gid": "060510002021"
+   },
+   {
+    "file": "bundle_06051.json.gz",
+    "gid": "060510002023"
+   },
+   {
+    "file": "bundle_06051.json.gz",
+    "gid": "060510002024"
+   },
+   {
+    "file": "bundle_06057.json.gz",
+    "gid": "060570001021"
+   },
+   {
+    "file": "bundle_06057.json.gz",
+    "gid": "060570001061"
+   },
+   {
+    "file": "bundle_06057.json.gz",
+    "gid": "060570001072"
+   },
+   {
+    "file": "bundle_06057.json.gz",
+    "gid": "060570001073"
+   },
+   {
+    "file": "bundle_06057.json.gz",
+    "gid": "060570007016"
+   },
+   {
+    "file": "bundle_06057.json.gz",
+    "gid": "060570008012"
+   },
+   {
+    "file": "bundle_06057.json.gz",
+    "gid": "060570008013"
+   },
+   {
+    "file": "bundle_06057.json.gz",
+    "gid": "060570012051"
+   },
+   {
+    "file": "bundle_06057.json.gz",
+    "gid": "060570012081"
+   },
+   {
+    "file": "bundle_06057.json.gz",
+    "gid": "060570012092"
+   },
+   {
+    "file": "bundle_06097.json.gz",
+    "gid": "060971513102"
+   },
+   {
+    "file": "bundle_06097.json.gz",
+    "gid": "060971517021"
+   },
+   {
+    "file": "bundle_06097.json.gz",
+    "gid": "060971529043"
+   },
+   {
+    "file": "bundle_06097.json.gz",
+    "gid": "060971530052"
+   },
+   {
+    "file": "bundle_06097.json.gz",
+    "gid": "060971537053"
+   },
+   {
+    "file": "bundle_06097.json.gz",
+    "gid": "060971537091"
+   },
+   {
+    "file": "bundle_06097.json.gz",
+    "gid": "060971538082"
+   },
+   {
+    "file": "bundle_06097.json.gz",
+    "gid": "060971538092"
+   },
+   {
+    "file": "bundle_06097.json.gz",
+    "gid": "060971541002"
+   },
+   {
+    "file": "bundle_06097.json.gz",
+    "gid": "060971542011"
+   },
+   {
+    "file": "bundle_08005.json.gz",
+    "gid": "080050056141"
+   },
+   {
+    "file": "bundle_08005.json.gz",
+    "gid": "080050056194"
+   },
+   {
+    "file": "bundle_08005.json.gz",
+    "gid": "080050056303"
+   },
+   {
+    "file": "bundle_08005.json.gz",
+    "gid": "080050066014"
+   },
+   {
+    "file": "bundle_08005.json.gz",
+    "gid": "080050067122"
+   },
+   {
+    "file": "bundle_08005.json.gz",
+    "gid": "080050073021"
+   },
+   {
+    "file": "bundle_08005.json.gz",
+    "gid": "080050831003"
+   },
+   {
+    "file": "bundle_08005.json.gz",
+    "gid": "080050834003"
+   },
+   {
+    "file": "bundle_08005.json.gz",
+    "gid": "080050855003"
+   },
+   {
+    "file": "bundle_08005.json.gz",
+    "gid": "080050873011"
+   },
+   {
+    "file": "bundle_08041.json.gz",
+    "gid": "080410004003"
+   },
+   {
+    "file": "bundle_08041.json.gz",
+    "gid": "080410021012"
+   },
+   {
+    "file": "bundle_08041.json.gz",
+    "gid": "080410029011"
+   },
+   {
+    "file": "bundle_08041.json.gz",
+    "gid": "080410031003"
+   },
+   {
+    "file": "bundle_08041.json.gz",
+    "gid": "080410039122"
+   },
+   {
+    "file": "bundle_08041.json.gz",
+    "gid": "080410045173"
+   },
+   {
+    "file": "bundle_08041.json.gz",
+    "gid": "080410047012"
+   },
+   {
+    "file": "bundle_08041.json.gz",
+    "gid": "080410054004"
+   },
+   {
+    "file": "bundle_08041.json.gz",
+    "gid": "080410057002"
+   },
+   {
+    "file": "bundle_08041.json.gz",
+    "gid": "080410076033"
+   },
+   {
+    "file": "bundle_08123.json.gz",
+    "gid": "081230007032"
+   },
+   {
+    "file": "bundle_08123.json.gz",
+    "gid": "081230014042"
+   },
+   {
+    "file": "bundle_08123.json.gz",
+    "gid": "081230014052"
+   },
+   {
+    "file": "bundle_08123.json.gz",
+    "gid": "081230014064"
+   },
+   {
+    "file": "bundle_08123.json.gz",
+    "gid": "081230019052"
+   },
+   {
+    "file": "bundle_08123.json.gz",
+    "gid": "081230020082"
+   },
+   {
+    "file": "bundle_08123.json.gz",
+    "gid": "081230020132"
+   },
+   {
+    "file": "bundle_08123.json.gz",
+    "gid": "081230020201"
+   },
+   {
+    "file": "bundle_08123.json.gz",
+    "gid": "081230022071"
+   },
+   {
+    "file": "bundle_08123.json.gz",
+    "gid": "081230023001"
+   },
+   {
+    "file": "bundle_09110.json.gz",
+    "gid": "091104003001"
+   },
+   {
+    "file": "bundle_09110.json.gz",
+    "gid": "091104172001"
+   },
+   {
+    "file": "bundle_09110.json.gz",
+    "gid": "091104945004"
+   },
+   {
+    "file": "bundle_09110.json.gz",
+    "gid": "091104963003"
+   },
+   {
+    "file": "bundle_09110.json.gz",
+    "gid": "091104969001"
+   },
+   {
+    "file": "bundle_09110.json.gz",
+    "gid": "091105107004"
+   },
+   {
+    "file": "bundle_09110.json.gz",
+    "gid": "091105261013"
+   },
+   {
+    "file": "bundle_09110.json.gz",
+    "gid": "091105261023"
+   },
+   {
+    "file": "bundle_09110.json.gz",
+    "gid": "091105302004"
+   },
+   {
+    "file": "bundle_09110.json.gz",
+    "gid": "091105304001"
+   },
+   {
+    "file": "bundle_09140.json.gz",
+    "gid": "091401104002"
+   },
+   {
+    "file": "bundle_09140.json.gz",
+    "gid": "091401201004"
+   },
+   {
+    "file": "bundle_09140.json.gz",
+    "gid": "091401302022"
+   },
+   {
+    "file": "bundle_09140.json.gz",
+    "gid": "091403434003"
+   },
+   {
+    "file": "bundle_09140.json.gz",
+    "gid": "091403441002"
+   },
+   {
+    "file": "bundle_09140.json.gz",
+    "gid": "091403503001"
+   },
+   {
+    "file": "bundle_09140.json.gz",
+    "gid": "091403505001"
+   },
+   {
+    "file": "bundle_09140.json.gz",
+    "gid": "091403520003"
+   },
+   {
+    "file": "bundle_09140.json.gz",
+    "gid": "091403601005"
+   },
+   {
+    "file": "bundle_09140.json.gz",
+    "gid": "091403621024"
+   },
+   {
+    "file": "bundle_09170.json.gz",
+    "gid": "091701410003"
+   },
+   {
+    "file": "bundle_09170.json.gz",
+    "gid": "091701506004"
+   },
+   {
+    "file": "bundle_09170.json.gz",
+    "gid": "091701509001"
+   },
+   {
+    "file": "bundle_09170.json.gz",
+    "gid": "091701550002"
+   },
+   {
+    "file": "bundle_09170.json.gz",
+    "gid": "091701611001"
+   },
+   {
+    "file": "bundle_09170.json.gz",
+    "gid": "091701651002"
+   },
+   {
+    "file": "bundle_09170.json.gz",
+    "gid": "091701708005"
+   },
+   {
+    "file": "bundle_09170.json.gz",
+    "gid": "091701805002"
+   },
+   {
+    "file": "bundle_09170.json.gz",
+    "gid": "091701842001"
+   },
+   {
+    "file": "bundle_09170.json.gz",
+    "gid": "091701843001"
+   },
+   {
+    "file": "bundle_10001.json.gz",
+    "gid": "100010405011"
+   },
+   {
+    "file": "bundle_10001.json.gz",
+    "gid": "100010410002"
+   },
+   {
+    "file": "bundle_10001.json.gz",
+    "gid": "100010413002"
+   },
+   {
+    "file": "bundle_10001.json.gz",
+    "gid": "100010417013"
+   },
+   {
+    "file": "bundle_10001.json.gz",
+    "gid": "100010418022"
+   },
+   {
+    "file": "bundle_10001.json.gz",
+    "gid": "100010421002"
+   },
+   {
+    "file": "bundle_10001.json.gz",
+    "gid": "100010429001"
+   },
+   {
+    "file": "bundle_10001.json.gz",
+    "gid": "100010432023"
+   },
+   {
+    "file": "bundle_10001.json.gz",
+    "gid": "100010433003"
+   },
+   {
+    "file": "bundle_10001.json.gz",
+    "gid": "100019800001"
+   },
+   {
+    "file": "bundle_10003.json.gz",
+    "gid": "100030012001"
+   },
+   {
+    "file": "bundle_10003.json.gz",
+    "gid": "100030107043"
+   },
+   {
+    "file": "bundle_10003.json.gz",
+    "gid": "100030113001"
+   },
+   {
+    "file": "bundle_10003.json.gz",
+    "gid": "100030125006"
+   },
+   {
+    "file": "bundle_10003.json.gz",
+    "gid": "100030132001"
+   },
+   {
+    "file": "bundle_10003.json.gz",
+    "gid": "100030132003"
+   },
+   {
+    "file": "bundle_10003.json.gz",
+    "gid": "100030136142"
+   },
+   {
+    "file": "bundle_10003.json.gz",
+    "gid": "100030147033"
+   },
+   {
+    "file": "bundle_10003.json.gz",
+    "gid": "100030162001"
+   },
+   {
+    "file": "bundle_10003.json.gz",
+    "gid": "100030166103"
+   },
+   {
+    "file": "bundle_10005.json.gz",
+    "gid": "100050501032"
+   },
+   {
+    "file": "bundle_10005.json.gz",
+    "gid": "100050501034"
+   },
+   {
+    "file": "bundle_10005.json.gz",
+    "gid": "100050506043"
+   },
+   {
+    "file": "bundle_10005.json.gz",
+    "gid": "100050507012"
+   },
+   {
+    "file": "bundle_10005.json.gz",
+    "gid": "100050507102"
+   },
+   {
+    "file": "bundle_10005.json.gz",
+    "gid": "100050508011"
+   },
+   {
+    "file": "bundle_10005.json.gz",
+    "gid": "100050509041"
+   },
+   {
+    "file": "bundle_10005.json.gz",
+    "gid": "100050510111"
+   },
+   {
+    "file": "bundle_10005.json.gz",
+    "gid": "100050512022"
+   },
+   {
+    "file": "bundle_10005.json.gz",
+    "gid": "100050515022"
+   },
+   {
+    "file": "bundle_11001.json.gz",
+    "gid": "110010002021"
+   },
+   {
+    "file": "bundle_11001.json.gz",
+    "gid": "110010007021"
+   },
+   {
+    "file": "bundle_11001.json.gz",
+    "gid": "110010012004"
+   },
+   {
+    "file": "bundle_11001.json.gz",
+    "gid": "110010032004"
+   },
+   {
+    "file": "bundle_11001.json.gz",
+    "gid": "110010040022"
+   },
+   {
+    "file": "bundle_11001.json.gz",
+    "gid": "110010058021"
+   },
+   {
+    "file": "bundle_11001.json.gz",
+    "gid": "110010072012"
+   },
+   {
+    "file": "bundle_11001.json.gz",
+    "gid": "110010076015"
+   },
+   {
+    "file": "bundle_11001.json.gz",
+    "gid": "110010088032"
+   },
+   {
+    "file": "bundle_11001.json.gz",
+    "gid": "110010095052"
+   },
+   {
+    "file": "bundle_12021.json.gz",
+    "gid": "120210101091"
+   },
+   {
+    "file": "bundle_12021.json.gz",
+    "gid": "120210101092"
+   },
+   {
+    "file": "bundle_12021.json.gz",
+    "gid": "120210102162"
+   },
+   {
+    "file": "bundle_12021.json.gz",
+    "gid": "120210104162"
+   },
+   {
+    "file": "bundle_12021.json.gz",
+    "gid": "120210104311"
+   },
+   {
+    "file": "bundle_12021.json.gz",
+    "gid": "120210104381"
+   },
+   {
+    "file": "bundle_12021.json.gz",
+    "gid": "120210105151"
+   },
+   {
+    "file": "bundle_12021.json.gz",
+    "gid": "120210111071"
+   },
+   {
+    "file": "bundle_12021.json.gz",
+    "gid": "120210112082"
+   },
+   {
+    "file": "bundle_12021.json.gz",
+    "gid": "120210112121"
+   },
+   {
+    "file": "bundle_12083.json.gz",
+    "gid": "120830002023"
+   },
+   {
+    "file": "bundle_12083.json.gz",
+    "gid": "120830006051"
+   },
+   {
+    "file": "bundle_12083.json.gz",
+    "gid": "120830009012"
+   },
+   {
+    "file": "bundle_12083.json.gz",
+    "gid": "120830010051"
+   },
+   {
+    "file": "bundle_12083.json.gz",
+    "gid": "120830011022"
+   },
+   {
+    "file": "bundle_12083.json.gz",
+    "gid": "120830011061"
+   },
+   {
+    "file": "bundle_12083.json.gz",
+    "gid": "120830012091"
+   },
+   {
+    "file": "bundle_12083.json.gz",
+    "gid": "120830018001"
+   },
+   {
+    "file": "bundle_12083.json.gz",
+    "gid": "120830026023"
+   },
+   {
+    "file": "bundle_12083.json.gz",
+    "gid": "120830026101"
+   },
+   {
+    "file": "bundle_12117.json.gz",
+    "gid": "121170205003"
+   },
+   {
+    "file": "bundle_12117.json.gz",
+    "gid": "121170208053"
+   },
+   {
+    "file": "bundle_12117.json.gz",
+    "gid": "121170213073"
+   },
+   {
+    "file": "bundle_12117.json.gz",
+    "gid": "121170213132"
+   },
+   {
+    "file": "bundle_12117.json.gz",
+    "gid": "121170213153"
+   },
+   {
+    "file": "bundle_12117.json.gz",
+    "gid": "121170213181"
+   },
+   {
+    "file": "bundle_12117.json.gz",
+    "gid": "121170219012"
+   },
+   {
+    "file": "bundle_12117.json.gz",
+    "gid": "121170219014"
+   },
+   {
+    "file": "bundle_12117.json.gz",
+    "gid": "121170220071"
+   },
+   {
+    "file": "bundle_12117.json.gz",
+    "gid": "121170221064"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "gid": "131210001003"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "gid": "131210004002"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "gid": "131210041003"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "gid": "131210101211"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "gid": "131210101272"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "gid": "131210103052"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "gid": "131210105331"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "gid": "131210114191"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "gid": "131210114323"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "gid": "131210116273"
+   },
+   {
+    "file": "bundle_13153.json.gz",
+    "gid": "131530201123"
+   },
+   {
+    "file": "bundle_13153.json.gz",
+    "gid": "131530203022"
+   },
+   {
+    "file": "bundle_13153.json.gz",
+    "gid": "131530203024"
+   },
+   {
+    "file": "bundle_13153.json.gz",
+    "gid": "131530204001"
+   },
+   {
+    "file": "bundle_13153.json.gz",
+    "gid": "131530209002"
+   },
+   {
+    "file": "bundle_13153.json.gz",
+    "gid": "131530210011"
+   },
+   {
+    "file": "bundle_13153.json.gz",
+    "gid": "131530211191"
+   },
+   {
+    "file": "bundle_13153.json.gz",
+    "gid": "131530211231"
+   },
+   {
+    "file": "bundle_13153.json.gz",
+    "gid": "131530212043"
+   },
+   {
+    "file": "bundle_13153.json.gz",
+    "gid": "131530215023"
+   },
+   {
+    "file": "bundle_13217.json.gz",
+    "gid": "132171001023"
+   },
+   {
+    "file": "bundle_13217.json.gz",
+    "gid": "132171003013"
+   },
+   {
+    "file": "bundle_13217.json.gz",
+    "gid": "132171004002"
+   },
+   {
+    "file": "bundle_13217.json.gz",
+    "gid": "132171005032"
+   },
+   {
+    "file": "bundle_13217.json.gz",
+    "gid": "132171005041"
+   },
+   {
+    "file": "bundle_13217.json.gz",
+    "gid": "132171006001"
+   },
+   {
+    "file": "bundle_13217.json.gz",
+    "gid": "132171007022"
+   },
+   {
+    "file": "bundle_13217.json.gz",
+    "gid": "132171008012"
+   },
+   {
+    "file": "bundle_13217.json.gz",
+    "gid": "132171009042"
+   },
+   {
+    "file": "bundle_13217.json.gz",
+    "gid": "132171009052"
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "gid": "160010005021"
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "gid": "160010016003"
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "gid": "160010017022"
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "gid": "160010023142"
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "gid": "160010024141"
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "gid": "160010024191"
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "gid": "160010102242"
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "gid": "160010102343"
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "gid": "160010103532"
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "gid": "160010104102"
+   },
+   {
+    "file": "bundle_16027.json.gz",
+    "gid": "160270203002"
+   },
+   {
+    "file": "bundle_16027.json.gz",
+    "gid": "160270204051"
+   },
+   {
+    "file": "bundle_16027.json.gz",
+    "gid": "160270204061"
+   },
+   {
+    "file": "bundle_16027.json.gz",
+    "gid": "160270205051"
+   },
+   {
+    "file": "bundle_16027.json.gz",
+    "gid": "160270209041"
+   },
+   {
+    "file": "bundle_16027.json.gz",
+    "gid": "160270210081"
+   },
+   {
+    "file": "bundle_16027.json.gz",
+    "gid": "160270215001"
+   },
+   {
+    "file": "bundle_16027.json.gz",
+    "gid": "160270217012"
+   },
+   {
+    "file": "bundle_16027.json.gz",
+    "gid": "160270217022"
+   },
+   {
+    "file": "bundle_16027.json.gz",
+    "gid": "160270221003"
+   },
+   {
+    "file": "bundle_16055.json.gz",
+    "gid": "160550004014"
+   },
+   {
+    "file": "bundle_16055.json.gz",
+    "gid": "160550004021"
+   },
+   {
+    "file": "bundle_16055.json.gz",
+    "gid": "160550005013"
+   },
+   {
+    "file": "bundle_16055.json.gz",
+    "gid": "160550005021"
+   },
+   {
+    "file": "bundle_16055.json.gz",
+    "gid": "160550005022"
+   },
+   {
+    "file": "bundle_16055.json.gz",
+    "gid": "160550007022"
+   },
+   {
+    "file": "bundle_16055.json.gz",
+    "gid": "160550007042"
+   },
+   {
+    "file": "bundle_16055.json.gz",
+    "gid": "160550010031"
+   },
+   {
+    "file": "bundle_16055.json.gz",
+    "gid": "160550012012"
+   },
+   {
+    "file": "bundle_16055.json.gz",
+    "gid": "160550020001"
+   },
+   {
+    "file": "bundle_17091.json.gz",
+    "gid": "170910102033"
+   },
+   {
+    "file": "bundle_17091.json.gz",
+    "gid": "170910102041"
+   },
+   {
+    "file": "bundle_17091.json.gz",
+    "gid": "170910103003"
+   },
+   {
+    "file": "bundle_17091.json.gz",
+    "gid": "170910104002"
+   },
+   {
+    "file": "bundle_17091.json.gz",
+    "gid": "170910106013"
+   },
+   {
+    "file": "bundle_17091.json.gz",
+    "gid": "170910109002"
+   },
+   {
+    "file": "bundle_17091.json.gz",
+    "gid": "170910110001"
+   },
+   {
+    "file": "bundle_17091.json.gz",
+    "gid": "170910118001"
+   },
+   {
+    "file": "bundle_17091.json.gz",
+    "gid": "170910119001"
+   },
+   {
+    "file": "bundle_17091.json.gz",
+    "gid": "170910121001"
+   },
+   {
+    "file": "bundle_17099.json.gz",
+    "gid": "170999617014"
+   },
+   {
+    "file": "bundle_17099.json.gz",
+    "gid": "170999618004"
+   },
+   {
+    "file": "bundle_17099.json.gz",
+    "gid": "170999621002"
+   },
+   {
+    "file": "bundle_17099.json.gz",
+    "gid": "170999621005"
+   },
+   {
+    "file": "bundle_17099.json.gz",
+    "gid": "170999625001"
+   },
+   {
+    "file": "bundle_17099.json.gz",
+    "gid": "170999629001"
+   },
+   {
+    "file": "bundle_17099.json.gz",
+    "gid": "170999629002"
+   },
+   {
+    "file": "bundle_17099.json.gz",
+    "gid": "170999634004"
+   },
+   {
+    "file": "bundle_17099.json.gz",
+    "gid": "170999643002"
+   },
+   {
+    "file": "bundle_17099.json.gz",
+    "gid": "170999643003"
+   },
+   {
+    "file": "bundle_17163.json.gz",
+    "gid": "171635012002"
+   },
+   {
+    "file": "bundle_17163.json.gz",
+    "gid": "171635014002"
+   },
+   {
+    "file": "bundle_17163.json.gz",
+    "gid": "171635016023"
+   },
+   {
+    "file": "bundle_17163.json.gz",
+    "gid": "171635017002"
+   },
+   {
+    "file": "bundle_17163.json.gz",
+    "gid": "171635026033"
+   },
+   {
+    "file": "bundle_17163.json.gz",
+    "gid": "171635028002"
+   },
+   {
+    "file": "bundle_17163.json.gz",
+    "gid": "171635034042"
+   },
+   {
+    "file": "bundle_17163.json.gz",
+    "gid": "171635034134"
+   },
+   {
+    "file": "bundle_17163.json.gz",
+    "gid": "171635039082"
+   },
+   {
+    "file": "bundle_17163.json.gz",
+    "gid": "171635043591"
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "gid": "180030007041"
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "gid": "180030011001"
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "gid": "180030016002"
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "gid": "180030034001"
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "gid": "180030041033"
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "gid": "180030106022"
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "gid": "180030108191"
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "gid": "180030112051"
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "gid": "180030118013"
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "gid": "180039800021"
+   },
+   {
+    "file": "bundle_18063.json.gz",
+    "gid": "180632101053"
+   },
+   {
+    "file": "bundle_18063.json.gz",
+    "gid": "180632101061"
+   },
+   {
+    "file": "bundle_18063.json.gz",
+    "gid": "180632102032"
+   },
+   {
+    "file": "bundle_18063.json.gz",
+    "gid": "180632103001"
+   },
+   {
+    "file": "bundle_18063.json.gz",
+    "gid": "180632106073"
+   },
+   {
+    "file": "bundle_18063.json.gz",
+    "gid": "180632106082"
+   },
+   {
+    "file": "bundle_18063.json.gz",
+    "gid": "180632106101"
+   },
+   {
+    "file": "bundle_18063.json.gz",
+    "gid": "180632107022"
+   },
+   {
+    "file": "bundle_18063.json.gz",
+    "gid": "180632108013"
+   },
+   {
+    "file": "bundle_18063.json.gz",
+    "gid": "180632111001"
+   },
+   {
+    "file": "bundle_18097.json.gz",
+    "gid": "180973201051"
+   },
+   {
+    "file": "bundle_18097.json.gz",
+    "gid": "180973206001"
+   },
+   {
+    "file": "bundle_18097.json.gz",
+    "gid": "180973212004"
+   },
+   {
+    "file": "bundle_18097.json.gz",
+    "gid": "180973301065"
+   },
+   {
+    "file": "bundle_18097.json.gz",
+    "gid": "180973506003"
+   },
+   {
+    "file": "bundle_18097.json.gz",
+    "gid": "180973510001"
+   },
+   {
+    "file": "bundle_18097.json.gz",
+    "gid": "180973516003"
+   },
+   {
+    "file": "bundle_18097.json.gz",
+    "gid": "180973554002"
+   },
+   {
+    "file": "bundle_18097.json.gz",
+    "gid": "180973556001"
+   },
+   {
+    "file": "bundle_18097.json.gz",
+    "gid": "180973804032"
+   },
+   {
+    "file": "bundle_19013.json.gz",
+    "gid": "190130003001"
+   },
+   {
+    "file": "bundle_19013.json.gz",
+    "gid": "190130017022"
+   },
+   {
+    "file": "bundle_19013.json.gz",
+    "gid": "190130019002"
+   },
+   {
+    "file": "bundle_19013.json.gz",
+    "gid": "190130020002"
+   },
+   {
+    "file": "bundle_19013.json.gz",
+    "gid": "190130023033"
+   },
+   {
+    "file": "bundle_19013.json.gz",
+    "gid": "190130026061"
+   },
+   {
+    "file": "bundle_19013.json.gz",
+    "gid": "190130026062"
+   },
+   {
+    "file": "bundle_19013.json.gz",
+    "gid": "190130027002"
+   },
+   {
+    "file": "bundle_19013.json.gz",
+    "gid": "190130028003"
+   },
+   {
+    "file": "bundle_19013.json.gz",
+    "gid": "190130030022"
+   },
+   {
+    "file": "bundle_19049.json.gz",
+    "gid": "190490502002"
+   },
+   {
+    "file": "bundle_19049.json.gz",
+    "gid": "190490503001"
+   },
+   {
+    "file": "bundle_19049.json.gz",
+    "gid": "190490504002"
+   },
+   {
+    "file": "bundle_19049.json.gz",
+    "gid": "190490506001"
+   },
+   {
+    "file": "bundle_19049.json.gz",
+    "gid": "190490506002"
+   },
+   {
+    "file": "bundle_19049.json.gz",
+    "gid": "190490507002"
+   },
+   {
+    "file": "bundle_19049.json.gz",
+    "gid": "190490508121"
+   },
+   {
+    "file": "bundle_19049.json.gz",
+    "gid": "190490508122"
+   },
+   {
+    "file": "bundle_19049.json.gz",
+    "gid": "190490509011"
+   },
+   {
+    "file": "bundle_19049.json.gz",
+    "gid": "190490509023"
+   },
+   {
+    "file": "bundle_19103.json.gz",
+    "gid": "191030003051"
+   },
+   {
+    "file": "bundle_19103.json.gz",
+    "gid": "191030003073"
+   },
+   {
+    "file": "bundle_19103.json.gz",
+    "gid": "191030005022"
+   },
+   {
+    "file": "bundle_19103.json.gz",
+    "gid": "191030011002"
+   },
+   {
+    "file": "bundle_19103.json.gz",
+    "gid": "191030014001"
+   },
+   {
+    "file": "bundle_19103.json.gz",
+    "gid": "191030016011"
+   },
+   {
+    "file": "bundle_19103.json.gz",
+    "gid": "191030016021"
+   },
+   {
+    "file": "bundle_19103.json.gz",
+    "gid": "191030018011"
+   },
+   {
+    "file": "bundle_19103.json.gz",
+    "gid": "191030023002"
+   },
+   {
+    "file": "bundle_19103.json.gz",
+    "gid": "191030103041"
+   },
+   {
+    "file": "bundle_20091.json.gz",
+    "gid": "200910500006"
+   },
+   {
+    "file": "bundle_20091.json.gz",
+    "gid": "200910518013"
+   },
+   {
+    "file": "bundle_20091.json.gz",
+    "gid": "200910523041"
+   },
+   {
+    "file": "bundle_20091.json.gz",
+    "gid": "200910524182"
+   },
+   {
+    "file": "bundle_20091.json.gz",
+    "gid": "200910524233"
+   },
+   {
+    "file": "bundle_20091.json.gz",
+    "gid": "200910528072"
+   },
+   {
+    "file": "bundle_20091.json.gz",
+    "gid": "200910531054"
+   },
+   {
+    "file": "bundle_20091.json.gz",
+    "gid": "200910533023"
+   },
+   {
+    "file": "bundle_20091.json.gz",
+    "gid": "200910534111"
+   },
+   {
+    "file": "bundle_20091.json.gz",
+    "gid": "200910534132"
+   },
+   {
+    "file": "bundle_20177.json.gz",
+    "gid": "201770006003"
+   },
+   {
+    "file": "bundle_20177.json.gz",
+    "gid": "201770015003"
+   },
+   {
+    "file": "bundle_20177.json.gz",
+    "gid": "201770018002"
+   },
+   {
+    "file": "bundle_20177.json.gz",
+    "gid": "201770028001"
+   },
+   {
+    "file": "bundle_20177.json.gz",
+    "gid": "201770029002"
+   },
+   {
+    "file": "bundle_20177.json.gz",
+    "gid": "201770031002"
+   },
+   {
+    "file": "bundle_20177.json.gz",
+    "gid": "201770033011"
+   },
+   {
+    "file": "bundle_20177.json.gz",
+    "gid": "201770033022"
+   },
+   {
+    "file": "bundle_20177.json.gz",
+    "gid": "201770036061"
+   },
+   {
+    "file": "bundle_20177.json.gz",
+    "gid": "201770041004"
+   },
+   {
+    "file": "bundle_20209.json.gz",
+    "gid": "202090414003"
+   },
+   {
+    "file": "bundle_20209.json.gz",
+    "gid": "202090424002"
+   },
+   {
+    "file": "bundle_20209.json.gz",
+    "gid": "202090430001"
+   },
+   {
+    "file": "bundle_20209.json.gz",
+    "gid": "202090430003"
+   },
+   {
+    "file": "bundle_20209.json.gz",
+    "gid": "202090435001"
+   },
+   {
+    "file": "bundle_20209.json.gz",
+    "gid": "202090439032"
+   },
+   {
+    "file": "bundle_20209.json.gz",
+    "gid": "202090440024"
+   },
+   {
+    "file": "bundle_20209.json.gz",
+    "gid": "202090447042"
+   },
+   {
+    "file": "bundle_20209.json.gz",
+    "gid": "202090448034"
+   },
+   {
+    "file": "bundle_20209.json.gz",
+    "gid": "202090448041"
+   },
+   {
+    "file": "bundle_21093.json.gz",
+    "gid": "210930002012"
+   },
+   {
+    "file": "bundle_21093.json.gz",
+    "gid": "210930002022"
+   },
+   {
+    "file": "bundle_21093.json.gz",
+    "gid": "210930003001"
+   },
+   {
+    "file": "bundle_21093.json.gz",
+    "gid": "210930004002"
+   },
+   {
+    "file": "bundle_21093.json.gz",
+    "gid": "210930009021"
+   },
+   {
+    "file": "bundle_21093.json.gz",
+    "gid": "210930009023"
+   },
+   {
+    "file": "bundle_21093.json.gz",
+    "gid": "210930011003"
+   },
+   {
+    "file": "bundle_21093.json.gz",
+    "gid": "210930012003"
+   },
+   {
+    "file": "bundle_21093.json.gz",
+    "gid": "210930013001"
+   },
+   {
+    "file": "bundle_21093.json.gz",
+    "gid": "210930017011"
+   },
+   {
+    "file": "bundle_21117.json.gz",
+    "gid": "211170609002"
+   },
+   {
+    "file": "bundle_21117.json.gz",
+    "gid": "211170611001"
+   },
+   {
+    "file": "bundle_21117.json.gz",
+    "gid": "211170636102"
+   },
+   {
+    "file": "bundle_21117.json.gz",
+    "gid": "211170646001"
+   },
+   {
+    "file": "bundle_21117.json.gz",
+    "gid": "211170648001"
+   },
+   {
+    "file": "bundle_21117.json.gz",
+    "gid": "211170649002"
+   },
+   {
+    "file": "bundle_21117.json.gz",
+    "gid": "211170656001"
+   },
+   {
+    "file": "bundle_21117.json.gz",
+    "gid": "211170656003"
+   },
+   {
+    "file": "bundle_21117.json.gz",
+    "gid": "211170657001"
+   },
+   {
+    "file": "bundle_21117.json.gz",
+    "gid": "211170668021"
+   },
+   {
+    "file": "bundle_21227.json.gz",
+    "gid": "212270101002"
+   },
+   {
+    "file": "bundle_21227.json.gz",
+    "gid": "212270102002"
+   },
+   {
+    "file": "bundle_21227.json.gz",
+    "gid": "212270108021"
+   },
+   {
+    "file": "bundle_21227.json.gz",
+    "gid": "212270108022"
+   },
+   {
+    "file": "bundle_21227.json.gz",
+    "gid": "212270110011"
+   },
+   {
+    "file": "bundle_21227.json.gz",
+    "gid": "212270111001"
+   },
+   {
+    "file": "bundle_21227.json.gz",
+    "gid": "212270111002"
+   },
+   {
+    "file": "bundle_21227.json.gz",
+    "gid": "212270112002"
+   },
+   {
+    "file": "bundle_21227.json.gz",
+    "gid": "212270119001"
+   },
+   {
+    "file": "bundle_21227.json.gz",
+    "gid": "212270119002"
+   },
+   {
+    "file": "bundle_22019.json.gz",
+    "gid": "220190003002"
+   },
+   {
+    "file": "bundle_22019.json.gz",
+    "gid": "220190005002"
+   },
+   {
+    "file": "bundle_22019.json.gz",
+    "gid": "220190006013"
+   },
+   {
+    "file": "bundle_22019.json.gz",
+    "gid": "220190019061"
+   },
+   {
+    "file": "bundle_22019.json.gz",
+    "gid": "220190022062"
+   },
+   {
+    "file": "bundle_22019.json.gz",
+    "gid": "220190024021"
+   },
+   {
+    "file": "bundle_22019.json.gz",
+    "gid": "220190030002"
+   },
+   {
+    "file": "bundle_22019.json.gz",
+    "gid": "220190033004"
+   },
+   {
+    "file": "bundle_22019.json.gz",
+    "gid": "220190036011"
+   },
+   {
+    "file": "bundle_22019.json.gz",
+    "gid": "220199801001"
+   },
+   {
+    "file": "bundle_22073.json.gz",
+    "gid": "220730052012"
+   },
+   {
+    "file": "bundle_22073.json.gz",
+    "gid": "220730052013"
+   },
+   {
+    "file": "bundle_22073.json.gz",
+    "gid": "220730101012"
+   },
+   {
+    "file": "bundle_22073.json.gz",
+    "gid": "220730101032"
+   },
+   {
+    "file": "bundle_22073.json.gz",
+    "gid": "220730102021"
+   },
+   {
+    "file": "bundle_22073.json.gz",
+    "gid": "220730102024"
+   },
+   {
+    "file": "bundle_22073.json.gz",
+    "gid": "220730102032"
+   },
+   {
+    "file": "bundle_22073.json.gz",
+    "gid": "220730103023"
+   },
+   {
+    "file": "bundle_22073.json.gz",
+    "gid": "220730108002"
+   },
+   {
+    "file": "bundle_22073.json.gz",
+    "gid": "220730110003"
+   },
+   {
+    "file": "bundle_22109.json.gz",
+    "gid": "221090002011"
+   },
+   {
+    "file": "bundle_22109.json.gz",
+    "gid": "221090002033"
+   },
+   {
+    "file": "bundle_22109.json.gz",
+    "gid": "221090002041"
+   },
+   {
+    "file": "bundle_22109.json.gz",
+    "gid": "221090006021"
+   },
+   {
+    "file": "bundle_22109.json.gz",
+    "gid": "221090010023"
+   },
+   {
+    "file": "bundle_22109.json.gz",
+    "gid": "221090011004"
+   },
+   {
+    "file": "bundle_22109.json.gz",
+    "gid": "221090015011"
+   },
+   {
+    "file": "bundle_22109.json.gz",
+    "gid": "221090015012"
+   },
+   {
+    "file": "bundle_22109.json.gz",
+    "gid": "221090015021"
+   },
+   {
+    "file": "bundle_22109.json.gz",
+    "gid": "221090015022"
+   },
+   {
+    "file": "bundle_23005.json.gz",
+    "gid": "230050013002"
+   },
+   {
+    "file": "bundle_23005.json.gz",
+    "gid": "230050021012"
+   },
+   {
+    "file": "bundle_23005.json.gz",
+    "gid": "230050026002"
+   },
+   {
+    "file": "bundle_23005.json.gz",
+    "gid": "230050030021"
+   },
+   {
+    "file": "bundle_23005.json.gz",
+    "gid": "230050037023"
+   },
+   {
+    "file": "bundle_23005.json.gz",
+    "gid": "230050044013"
+   },
+   {
+    "file": "bundle_23005.json.gz",
+    "gid": "230050044024"
+   },
+   {
+    "file": "bundle_23005.json.gz",
+    "gid": "230050048042"
+   },
+   {
+    "file": "bundle_23005.json.gz",
+    "gid": "230050130022"
+   },
+   {
+    "file": "bundle_23005.json.gz",
+    "gid": "230050173033"
+   },
+   {
+    "file": "bundle_23019.json.gz",
+    "gid": "230190006001"
+   },
+   {
+    "file": "bundle_23019.json.gz",
+    "gid": "230190009003"
+   },
+   {
+    "file": "bundle_23019.json.gz",
+    "gid": "230190062003"
+   },
+   {
+    "file": "bundle_23019.json.gz",
+    "gid": "230190072001"
+   },
+   {
+    "file": "bundle_23019.json.gz",
+    "gid": "230190110001"
+   },
+   {
+    "file": "bundle_23019.json.gz",
+    "gid": "230190150003"
+   },
+   {
+    "file": "bundle_23019.json.gz",
+    "gid": "230190205001"
+   },
+   {
+    "file": "bundle_23019.json.gz",
+    "gid": "230190245001"
+   },
+   {
+    "file": "bundle_23019.json.gz",
+    "gid": "230190290002"
+   },
+   {
+    "file": "bundle_23019.json.gz",
+    "gid": "230190313001"
+   },
+   {
+    "file": "bundle_23031.json.gz",
+    "gid": "230310053021"
+   },
+   {
+    "file": "bundle_23031.json.gz",
+    "gid": "230310252052"
+   },
+   {
+    "file": "bundle_23031.json.gz",
+    "gid": "230310252053"
+   },
+   {
+    "file": "bundle_23031.json.gz",
+    "gid": "230310252062"
+   },
+   {
+    "file": "bundle_23031.json.gz",
+    "gid": "230310253002"
+   },
+   {
+    "file": "bundle_23031.json.gz",
+    "gid": "230310280031"
+   },
+   {
+    "file": "bundle_23031.json.gz",
+    "gid": "230310280043"
+   },
+   {
+    "file": "bundle_23031.json.gz",
+    "gid": "230310302011"
+   },
+   {
+    "file": "bundle_23031.json.gz",
+    "gid": "230310340032"
+   },
+   {
+    "file": "bundle_23031.json.gz",
+    "gid": "230310380023"
+   },
+   {
+    "file": "bundle_24003.json.gz",
+    "gid": "240037026012"
+   },
+   {
+    "file": "bundle_24003.json.gz",
+    "gid": "240037027032"
+   },
+   {
+    "file": "bundle_24003.json.gz",
+    "gid": "240037064032"
+   },
+   {
+    "file": "bundle_24003.json.gz",
+    "gid": "240037066004"
+   },
+   {
+    "file": "bundle_24003.json.gz",
+    "gid": "240037307012"
+   },
+   {
+    "file": "bundle_24003.json.gz",
+    "gid": "240037313082"
+   },
+   {
+    "file": "bundle_24003.json.gz",
+    "gid": "240037401071"
+   },
+   {
+    "file": "bundle_24003.json.gz",
+    "gid": "240037404001"
+   },
+   {
+    "file": "bundle_24003.json.gz",
+    "gid": "240037508034"
+   },
+   {
+    "file": "bundle_24003.json.gz",
+    "gid": "240037511031"
+   },
+   {
+    "file": "bundle_24013.json.gz",
+    "gid": "240135010023"
+   },
+   {
+    "file": "bundle_24013.json.gz",
+    "gid": "240135030003"
+   },
+   {
+    "file": "bundle_24013.json.gz",
+    "gid": "240135051011"
+   },
+   {
+    "file": "bundle_24013.json.gz",
+    "gid": "240135052083"
+   },
+   {
+    "file": "bundle_24013.json.gz",
+    "gid": "240135062002"
+   },
+   {
+    "file": "bundle_24013.json.gz",
+    "gid": "240135076021"
+   },
+   {
+    "file": "bundle_24013.json.gz",
+    "gid": "240135082003"
+   },
+   {
+    "file": "bundle_24013.json.gz",
+    "gid": "240135100001"
+   },
+   {
+    "file": "bundle_24013.json.gz",
+    "gid": "240135110001"
+   },
+   {
+    "file": "bundle_24013.json.gz",
+    "gid": "240135142013"
+   },
+   {
+    "file": "bundle_24510.json.gz",
+    "gid": "245100903002"
+   },
+   {
+    "file": "bundle_24510.json.gz",
+    "gid": "245100905001"
+   },
+   {
+    "file": "bundle_24510.json.gz",
+    "gid": "245101902002"
+   },
+   {
+    "file": "bundle_24510.json.gz",
+    "gid": "245102005001"
+   },
+   {
+    "file": "bundle_24510.json.gz",
+    "gid": "245102006003"
+   },
+   {
+    "file": "bundle_24510.json.gz",
+    "gid": "245102607001"
+   },
+   {
+    "file": "bundle_24510.json.gz",
+    "gid": "245102708043"
+   },
+   {
+    "file": "bundle_24510.json.gz",
+    "gid": "245102709023"
+   },
+   {
+    "file": "bundle_24510.json.gz",
+    "gid": "245102716005"
+   },
+   {
+    "file": "bundle_24510.json.gz",
+    "gid": "245102804014"
+   },
+   {
+    "file": "bundle_25009.json.gz",
+    "gid": "250092046005"
+   },
+   {
+    "file": "bundle_25009.json.gz",
+    "gid": "250092069002"
+   },
+   {
+    "file": "bundle_25009.json.gz",
+    "gid": "250092081014"
+   },
+   {
+    "file": "bundle_25009.json.gz",
+    "gid": "250092092002"
+   },
+   {
+    "file": "bundle_25009.json.gz",
+    "gid": "250092109001"
+   },
+   {
+    "file": "bundle_25009.json.gz",
+    "gid": "250092121011"
+   },
+   {
+    "file": "bundle_25009.json.gz",
+    "gid": "250092131003"
+   },
+   {
+    "file": "bundle_25009.json.gz",
+    "gid": "250092683002"
+   },
+   {
+    "file": "bundle_25009.json.gz",
+    "gid": "250092691003"
+   },
+   {
+    "file": "bundle_25009.json.gz",
+    "gid": "250099901000"
+   },
+   {
+    "file": "bundle_25017.json.gz",
+    "gid": "250173119002"
+   },
+   {
+    "file": "bundle_25017.json.gz",
+    "gid": "250173164005"
+   },
+   {
+    "file": "bundle_25017.json.gz",
+    "gid": "250173413021"
+   },
+   {
+    "file": "bundle_25017.json.gz",
+    "gid": "250173422013"
+   },
+   {
+    "file": "bundle_25017.json.gz",
+    "gid": "250173521012"
+   },
+   {
+    "file": "bundle_25017.json.gz",
+    "gid": "250173523003"
+   },
+   {
+    "file": "bundle_25017.json.gz",
+    "gid": "250173603001"
+   },
+   {
+    "file": "bundle_25017.json.gz",
+    "gid": "250173746002"
+   },
+   {
+    "file": "bundle_25017.json.gz",
+    "gid": "250173839022"
+   },
+   {
+    "file": "bundle_25017.json.gz",
+    "gid": "250173840033"
+   },
+   {
+    "file": "bundle_25023.json.gz",
+    "gid": "250235001031"
+   },
+   {
+    "file": "bundle_25023.json.gz",
+    "gid": "250235001043"
+   },
+   {
+    "file": "bundle_25023.json.gz",
+    "gid": "250235021011"
+   },
+   {
+    "file": "bundle_25023.json.gz",
+    "gid": "250235104003"
+   },
+   {
+    "file": "bundle_25023.json.gz",
+    "gid": "250235112003"
+   },
+   {
+    "file": "bundle_25023.json.gz",
+    "gid": "250235201004"
+   },
+   {
+    "file": "bundle_25023.json.gz",
+    "gid": "250235232012"
+   },
+   {
+    "file": "bundle_25023.json.gz",
+    "gid": "250235411001"
+   },
+   {
+    "file": "bundle_25023.json.gz",
+    "gid": "250235423022"
+   },
+   {
+    "file": "bundle_25023.json.gz",
+    "gid": "250235442003"
+   },
+   {
+    "file": "bundle_26025.json.gz",
+    "gid": "260250006002"
+   },
+   {
+    "file": "bundle_26025.json.gz",
+    "gid": "260250007002"
+   },
+   {
+    "file": "bundle_26025.json.gz",
+    "gid": "260250008002"
+   },
+   {
+    "file": "bundle_26025.json.gz",
+    "gid": "260250013002"
+   },
+   {
+    "file": "bundle_26025.json.gz",
+    "gid": "260250022001"
+   },
+   {
+    "file": "bundle_26025.json.gz",
+    "gid": "260250027003"
+   },
+   {
+    "file": "bundle_26025.json.gz",
+    "gid": "260250027004"
+   },
+   {
+    "file": "bundle_26025.json.gz",
+    "gid": "260250028003"
+   },
+   {
+    "file": "bundle_26025.json.gz",
+    "gid": "260250029002"
+   },
+   {
+    "file": "bundle_26025.json.gz",
+    "gid": "260250038003"
+   },
+   {
+    "file": "bundle_26147.json.gz",
+    "gid": "261476210002"
+   },
+   {
+    "file": "bundle_26147.json.gz",
+    "gid": "261476304001"
+   },
+   {
+    "file": "bundle_26147.json.gz",
+    "gid": "261476332001"
+   },
+   {
+    "file": "bundle_26147.json.gz",
+    "gid": "261476371003"
+   },
+   {
+    "file": "bundle_26147.json.gz",
+    "gid": "261476373001"
+   },
+   {
+    "file": "bundle_26147.json.gz",
+    "gid": "261476401002"
+   },
+   {
+    "file": "bundle_26147.json.gz",
+    "gid": "261476402002"
+   },
+   {
+    "file": "bundle_26147.json.gz",
+    "gid": "261476450003"
+   },
+   {
+    "file": "bundle_26147.json.gz",
+    "gid": "261476511001"
+   },
+   {
+    "file": "bundle_26147.json.gz",
+    "gid": "261476585002"
+   },
+   {
+    "file": "bundle_26161.json.gz",
+    "gid": "261614006006"
+   },
+   {
+    "file": "bundle_26161.json.gz",
+    "gid": "261614008001"
+   },
+   {
+    "file": "bundle_26161.json.gz",
+    "gid": "261614021003"
+   },
+   {
+    "file": "bundle_26161.json.gz",
+    "gid": "261614038002"
+   },
+   {
+    "file": "bundle_26161.json.gz",
+    "gid": "261614041001"
+   },
+   {
+    "file": "bundle_26161.json.gz",
+    "gid": "261614105002"
+   },
+   {
+    "file": "bundle_26161.json.gz",
+    "gid": "261614120001"
+   },
+   {
+    "file": "bundle_26161.json.gz",
+    "gid": "261614120003"
+   },
+   {
+    "file": "bundle_26161.json.gz",
+    "gid": "261614234002"
+   },
+   {
+    "file": "bundle_26161.json.gz",
+    "gid": "261614260021"
+   },
+   {
+    "file": "bundle_27037.json.gz",
+    "gid": "270370601031"
+   },
+   {
+    "file": "bundle_27037.json.gz",
+    "gid": "270370601051"
+   },
+   {
+    "file": "bundle_27037.json.gz",
+    "gid": "270370605052"
+   },
+   {
+    "file": "bundle_27037.json.gz",
+    "gid": "270370605083"
+   },
+   {
+    "file": "bundle_27037.json.gz",
+    "gid": "270370607102"
+   },
+   {
+    "file": "bundle_27037.json.gz",
+    "gid": "270370607262"
+   },
+   {
+    "file": "bundle_27037.json.gz",
+    "gid": "270370608112"
+   },
+   {
+    "file": "bundle_27037.json.gz",
+    "gid": "270370608231"
+   },
+   {
+    "file": "bundle_27037.json.gz",
+    "gid": "270370608283"
+   },
+   {
+    "file": "bundle_27037.json.gz",
+    "gid": "270370609051"
+   },
+   {
+    "file": "bundle_27163.json.gz",
+    "gid": "271630701072"
+   },
+   {
+    "file": "bundle_27163.json.gz",
+    "gid": "271630702062"
+   },
+   {
+    "file": "bundle_27163.json.gz",
+    "gid": "271630702071"
+   },
+   {
+    "file": "bundle_27163.json.gz",
+    "gid": "271630703031"
+   },
+   {
+    "file": "bundle_27163.json.gz",
+    "gid": "271630710101"
+   },
+   {
+    "file": "bundle_27163.json.gz",
+    "gid": "271630710141"
+   },
+   {
+    "file": "bundle_27163.json.gz",
+    "gid": "271630710195"
+   },
+   {
+    "file": "bundle_27163.json.gz",
+    "gid": "271630710241"
+   },
+   {
+    "file": "bundle_27163.json.gz",
+    "gid": "271630710253"
+   },
+   {
+    "file": "bundle_27163.json.gz",
+    "gid": "271630712104"
+   },
+   {
+    "file": "bundle_27171.json.gz",
+    "gid": "271711004011"
+   },
+   {
+    "file": "bundle_27171.json.gz",
+    "gid": "271711004023"
+   },
+   {
+    "file": "bundle_27171.json.gz",
+    "gid": "271711005002"
+   },
+   {
+    "file": "bundle_27171.json.gz",
+    "gid": "271711005004"
+   },
+   {
+    "file": "bundle_27171.json.gz",
+    "gid": "271711007013"
+   },
+   {
+    "file": "bundle_27171.json.gz",
+    "gid": "271711007014"
+   },
+   {
+    "file": "bundle_27171.json.gz",
+    "gid": "271711007071"
+   },
+   {
+    "file": "bundle_27171.json.gz",
+    "gid": "271711008041"
+   },
+   {
+    "file": "bundle_27171.json.gz",
+    "gid": "271711008052"
+   },
+   {
+    "file": "bundle_27171.json.gz",
+    "gid": "271711013004"
+   },
+   {
+    "file": "bundle_28033.json.gz",
+    "gid": "280330701021"
+   },
+   {
+    "file": "bundle_28033.json.gz",
+    "gid": "280330703101"
+   },
+   {
+    "file": "bundle_28033.json.gz",
+    "gid": "280330704123"
+   },
+   {
+    "file": "bundle_28033.json.gz",
+    "gid": "280330708222"
+   },
+   {
+    "file": "bundle_28033.json.gz",
+    "gid": "280330708301"
+   },
+   {
+    "file": "bundle_28033.json.gz",
+    "gid": "280330708303"
+   },
+   {
+    "file": "bundle_28033.json.gz",
+    "gid": "280330711211"
+   },
+   {
+    "file": "bundle_28033.json.gz",
+    "gid": "280330711232"
+   },
+   {
+    "file": "bundle_28033.json.gz",
+    "gid": "280330712001"
+   },
+   {
+    "file": "bundle_28033.json.gz",
+    "gid": "280330712002"
+   },
+   {
+    "file": "bundle_28049.json.gz",
+    "gid": "280490005001"
+   },
+   {
+    "file": "bundle_28049.json.gz",
+    "gid": "280490007004"
+   },
+   {
+    "file": "bundle_28049.json.gz",
+    "gid": "280490013001"
+   },
+   {
+    "file": "bundle_28049.json.gz",
+    "gid": "280490016001"
+   },
+   {
+    "file": "bundle_28049.json.gz",
+    "gid": "280490033001"
+   },
+   {
+    "file": "bundle_28049.json.gz",
+    "gid": "280490033004"
+   },
+   {
+    "file": "bundle_28049.json.gz",
+    "gid": "280490103041"
+   },
+   {
+    "file": "bundle_28049.json.gz",
+    "gid": "280490106003"
+   },
+   {
+    "file": "bundle_28049.json.gz",
+    "gid": "280490108072"
+   },
+   {
+    "file": "bundle_28049.json.gz",
+    "gid": "280490110011"
+   },
+   {
+    "file": "bundle_28059.json.gz",
+    "gid": "280590403012"
+   },
+   {
+    "file": "bundle_28059.json.gz",
+    "gid": "280590403014"
+   },
+   {
+    "file": "bundle_28059.json.gz",
+    "gid": "280590404011"
+   },
+   {
+    "file": "bundle_28059.json.gz",
+    "gid": "280590405002"
+   },
+   {
+    "file": "bundle_28059.json.gz",
+    "gid": "280590405003"
+   },
+   {
+    "file": "bundle_28059.json.gz",
+    "gid": "280590408011"
+   },
+   {
+    "file": "bundle_28059.json.gz",
+    "gid": "280590410011"
+   },
+   {
+    "file": "bundle_28059.json.gz",
+    "gid": "280590417002"
+   },
+   {
+    "file": "bundle_28059.json.gz",
+    "gid": "280590419001"
+   },
+   {
+    "file": "bundle_28059.json.gz",
+    "gid": "280590425002"
+   },
+   {
+    "file": "bundle_29019.json.gz",
+    "gid": "290190003003"
+   },
+   {
+    "file": "bundle_29019.json.gz",
+    "gid": "290190006001"
+   },
+   {
+    "file": "bundle_29019.json.gz",
+    "gid": "290190006002"
+   },
+   {
+    "file": "bundle_29019.json.gz",
+    "gid": "290190007002"
+   },
+   {
+    "file": "bundle_29019.json.gz",
+    "gid": "290190010043"
+   },
+   {
+    "file": "bundle_29019.json.gz",
+    "gid": "290190011083"
+   },
+   {
+    "file": "bundle_29019.json.gz",
+    "gid": "290190011093"
+   },
+   {
+    "file": "bundle_29019.json.gz",
+    "gid": "290190018031"
+   },
+   {
+    "file": "bundle_29019.json.gz",
+    "gid": "290190019031"
+   },
+   {
+    "file": "bundle_29019.json.gz",
+    "gid": "290190022002"
+   },
+   {
+    "file": "bundle_29037.json.gz",
+    "gid": "290370600043"
+   },
+   {
+    "file": "bundle_29037.json.gz",
+    "gid": "290370601001"
+   },
+   {
+    "file": "bundle_29037.json.gz",
+    "gid": "290370602021"
+   },
+   {
+    "file": "bundle_29037.json.gz",
+    "gid": "290370603081"
+   },
+   {
+    "file": "bundle_29037.json.gz",
+    "gid": "290370605001"
+   },
+   {
+    "file": "bundle_29037.json.gz",
+    "gid": "290370608003"
+   },
+   {
+    "file": "bundle_29037.json.gz",
+    "gid": "290370611003"
+   },
+   {
+    "file": "bundle_29037.json.gz",
+    "gid": "290370613001"
+   },
+   {
+    "file": "bundle_29037.json.gz",
+    "gid": "290370613003"
+   },
+   {
+    "file": "bundle_29037.json.gz",
+    "gid": "290370613004"
+   },
+   {
+    "file": "bundle_29510.json.gz",
+    "gid": "295101065002"
+   },
+   {
+    "file": "bundle_29510.json.gz",
+    "gid": "295101067001"
+   },
+   {
+    "file": "bundle_29510.json.gz",
+    "gid": "295101102003"
+   },
+   {
+    "file": "bundle_29510.json.gz",
+    "gid": "295101111002"
+   },
+   {
+    "file": "bundle_29510.json.gz",
+    "gid": "295101155006"
+   },
+   {
+    "file": "bundle_29510.json.gz",
+    "gid": "295101164006"
+   },
+   {
+    "file": "bundle_29510.json.gz",
+    "gid": "295101172001"
+   },
+   {
+    "file": "bundle_29510.json.gz",
+    "gid": "295101186001"
+   },
+   {
+    "file": "bundle_29510.json.gz",
+    "gid": "295101193003"
+   },
+   {
+    "file": "bundle_29510.json.gz",
+    "gid": "295101268001"
+   },
+   {
+    "file": "bundle_30029.json.gz",
+    "gid": "300290003012"
+   },
+   {
+    "file": "bundle_30029.json.gz",
+    "gid": "300290004042"
+   },
+   {
+    "file": "bundle_30029.json.gz",
+    "gid": "300290010001"
+   },
+   {
+    "file": "bundle_30029.json.gz",
+    "gid": "300290011021"
+   },
+   {
+    "file": "bundle_30029.json.gz",
+    "gid": "300290011024"
+   },
+   {
+    "file": "bundle_30029.json.gz",
+    "gid": "300290013052"
+   },
+   {
+    "file": "bundle_30029.json.gz",
+    "gid": "300290014012"
+   },
+   {
+    "file": "bundle_30029.json.gz",
+    "gid": "300290017011"
+   },
+   {
+    "file": "bundle_30029.json.gz",
+    "gid": "300290017032"
+   },
+   {
+    "file": "bundle_30029.json.gz",
+    "gid": "300290017033"
+   },
+   {
+    "file": "bundle_30063.json.gz",
+    "gid": "300630002032"
+   },
+   {
+    "file": "bundle_30063.json.gz",
+    "gid": "300630002053"
+   },
+   {
+    "file": "bundle_30063.json.gz",
+    "gid": "300630002064"
+   },
+   {
+    "file": "bundle_30063.json.gz",
+    "gid": "300630008013"
+   },
+   {
+    "file": "bundle_30063.json.gz",
+    "gid": "300630009021"
+   },
+   {
+    "file": "bundle_30063.json.gz",
+    "gid": "300630011003"
+   },
+   {
+    "file": "bundle_30063.json.gz",
+    "gid": "300630013042"
+   },
+   {
+    "file": "bundle_30063.json.gz",
+    "gid": "300630013044"
+   },
+   {
+    "file": "bundle_30063.json.gz",
+    "gid": "300630015011"
+   },
+   {
+    "file": "bundle_30063.json.gz",
+    "gid": "300630018022"
+   },
+   {
+    "file": "bundle_30111.json.gz",
+    "gid": "301110004022"
+   },
+   {
+    "file": "bundle_30111.json.gz",
+    "gid": "301110004023"
+   },
+   {
+    "file": "bundle_30111.json.gz",
+    "gid": "301110006002"
+   },
+   {
+    "file": "bundle_30111.json.gz",
+    "gid": "301110006003"
+   },
+   {
+    "file": "bundle_30111.json.gz",
+    "gid": "301110009013"
+   },
+   {
+    "file": "bundle_30111.json.gz",
+    "gid": "301110010003"
+   },
+   {
+    "file": "bundle_30111.json.gz",
+    "gid": "301110012001"
+   },
+   {
+    "file": "bundle_30111.json.gz",
+    "gid": "301110014024"
+   },
+   {
+    "file": "bundle_30111.json.gz",
+    "gid": "301110017032"
+   },
+   {
+    "file": "bundle_30111.json.gz",
+    "gid": "301110019014"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "gid": "310550006001"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "gid": "310550032002"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "gid": "310550036001"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "gid": "310550043002"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "gid": "310550068031"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "gid": "310550069052"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "gid": "310550074241"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "gid": "310550075041"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "gid": "310550075201"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "gid": "310550075202"
+   },
+   {
+    "file": "bundle_31109.json.gz",
+    "gid": "311090019002"
+   },
+   {
+    "file": "bundle_31109.json.gz",
+    "gid": "311090021001"
+   },
+   {
+    "file": "bundle_31109.json.gz",
+    "gid": "311090025003"
+   },
+   {
+    "file": "bundle_31109.json.gz",
+    "gid": "311090030052"
+   },
+   {
+    "file": "bundle_31109.json.gz",
+    "gid": "311090031032"
+   },
+   {
+    "file": "bundle_31109.json.gz",
+    "gid": "311090033022"
+   },
+   {
+    "file": "bundle_31109.json.gz",
+    "gid": "311090037141"
+   },
+   {
+    "file": "bundle_31109.json.gz",
+    "gid": "311090037193"
+   },
+   {
+    "file": "bundle_31109.json.gz",
+    "gid": "311090102023"
+   },
+   {
+    "file": "bundle_31109.json.gz",
+    "gid": "311099832001"
+   },
+   {
+    "file": "bundle_31153.json.gz",
+    "gid": "311530101083"
+   },
+   {
+    "file": "bundle_31153.json.gz",
+    "gid": "311530102032"
+   },
+   {
+    "file": "bundle_31153.json.gz",
+    "gid": "311530103021"
+   },
+   {
+    "file": "bundle_31153.json.gz",
+    "gid": "311530106142"
+   },
+   {
+    "file": "bundle_31153.json.gz",
+    "gid": "311530106171"
+   },
+   {
+    "file": "bundle_31153.json.gz",
+    "gid": "311530106323"
+   },
+   {
+    "file": "bundle_31153.json.gz",
+    "gid": "311530106324"
+   },
+   {
+    "file": "bundle_31153.json.gz",
+    "gid": "311530106351"
+   },
+   {
+    "file": "bundle_31153.json.gz",
+    "gid": "311530106361"
+   },
+   {
+    "file": "bundle_31153.json.gz",
+    "gid": "311530106372"
+   },
+   {
+    "file": "bundle_32003.json.gz",
+    "gid": "320030001093"
+   },
+   {
+    "file": "bundle_32003.json.gz",
+    "gid": "320030003023"
+   },
+   {
+    "file": "bundle_32003.json.gz",
+    "gid": "320030026052"
+   },
+   {
+    "file": "bundle_32003.json.gz",
+    "gid": "320030028331"
+   },
+   {
+    "file": "bundle_32003.json.gz",
+    "gid": "320030028421"
+   },
+   {
+    "file": "bundle_32003.json.gz",
+    "gid": "320030029542"
+   },
+   {
+    "file": "bundle_32003.json.gz",
+    "gid": "320030030033"
+   },
+   {
+    "file": "bundle_32003.json.gz",
+    "gid": "320030047122"
+   },
+   {
+    "file": "bundle_32003.json.gz",
+    "gid": "320030052003"
+   },
+   {
+    "file": "bundle_32003.json.gz",
+    "gid": "320030058063"
+   },
+   {
+    "file": "bundle_32031.json.gz",
+    "gid": "320310002012"
+   },
+   {
+    "file": "bundle_32031.json.gz",
+    "gid": "320310010151"
+   },
+   {
+    "file": "bundle_32031.json.gz",
+    "gid": "320310011042"
+   },
+   {
+    "file": "bundle_32031.json.gz",
+    "gid": "320310015031"
+   },
+   {
+    "file": "bundle_32031.json.gz",
+    "gid": "320310017011"
+   },
+   {
+    "file": "bundle_32031.json.gz",
+    "gid": "320310022102"
+   },
+   {
+    "file": "bundle_32031.json.gz",
+    "gid": "320310022161"
+   },
+   {
+    "file": "bundle_32031.json.gz",
+    "gid": "320310026161"
+   },
+   {
+    "file": "bundle_32031.json.gz",
+    "gid": "320310026211"
+   },
+   {
+    "file": "bundle_32031.json.gz",
+    "gid": "320310026231"
+   },
+   {
+    "file": "bundle_33011.json.gz",
+    "gid": "330110025004"
+   },
+   {
+    "file": "bundle_33011.json.gz",
+    "gid": "330110101001"
+   },
+   {
+    "file": "bundle_33011.json.gz",
+    "gid": "330110111013"
+   },
+   {
+    "file": "bundle_33011.json.gz",
+    "gid": "330110123011"
+   },
+   {
+    "file": "bundle_33011.json.gz",
+    "gid": "330110143021"
+   },
+   {
+    "file": "bundle_33011.json.gz",
+    "gid": "330110152002"
+   },
+   {
+    "file": "bundle_33011.json.gz",
+    "gid": "330110171011"
+   },
+   {
+    "file": "bundle_33011.json.gz",
+    "gid": "330110210022"
+   },
+   {
+    "file": "bundle_33011.json.gz",
+    "gid": "330110255021"
+   },
+   {
+    "file": "bundle_33011.json.gz",
+    "gid": "330112004002"
+   },
+   {
+    "file": "bundle_33013.json.gz",
+    "gid": "330130324003"
+   },
+   {
+    "file": "bundle_33013.json.gz",
+    "gid": "330130328002"
+   },
+   {
+    "file": "bundle_33013.json.gz",
+    "gid": "330130340003"
+   },
+   {
+    "file": "bundle_33013.json.gz",
+    "gid": "330130350002"
+   },
+   {
+    "file": "bundle_33013.json.gz",
+    "gid": "330130390001"
+   },
+   {
+    "file": "bundle_33013.json.gz",
+    "gid": "330130425002"
+   },
+   {
+    "file": "bundle_33013.json.gz",
+    "gid": "330130430022"
+   },
+   {
+    "file": "bundle_33013.json.gz",
+    "gid": "330130430023"
+   },
+   {
+    "file": "bundle_33013.json.gz",
+    "gid": "330130443001"
+   },
+   {
+    "file": "bundle_33013.json.gz",
+    "gid": "330130443003"
+   },
+   {
+    "file": "bundle_33017.json.gz",
+    "gid": "330170801002"
+   },
+   {
+    "file": "bundle_33017.json.gz",
+    "gid": "330170802031"
+   },
+   {
+    "file": "bundle_33017.json.gz",
+    "gid": "330170811012"
+   },
+   {
+    "file": "bundle_33017.json.gz",
+    "gid": "330170813001"
+   },
+   {
+    "file": "bundle_33017.json.gz",
+    "gid": "330170816004"
+   },
+   {
+    "file": "bundle_33017.json.gz",
+    "gid": "330170843013"
+   },
+   {
+    "file": "bundle_33017.json.gz",
+    "gid": "330170843022"
+   },
+   {
+    "file": "bundle_33017.json.gz",
+    "gid": "330170850011"
+   },
+   {
+    "file": "bundle_33017.json.gz",
+    "gid": "330170850022"
+   },
+   {
+    "file": "bundle_33017.json.gz",
+    "gid": "330170870013"
+   },
+   {
+    "file": "bundle_34013.json.gz",
+    "gid": "340130014001"
+   },
+   {
+    "file": "bundle_34013.json.gz",
+    "gid": "340130020001"
+   },
+   {
+    "file": "bundle_34013.json.gz",
+    "gid": "340130094003"
+   },
+   {
+    "file": "bundle_34013.json.gz",
+    "gid": "340130156003"
+   },
+   {
+    "file": "bundle_34013.json.gz",
+    "gid": "340130160003"
+   },
+   {
+    "file": "bundle_34013.json.gz",
+    "gid": "340130165004"
+   },
+   {
+    "file": "bundle_34013.json.gz",
+    "gid": "340130173025"
+   },
+   {
+    "file": "bundle_34013.json.gz",
+    "gid": "340130196004"
+   },
+   {
+    "file": "bundle_34013.json.gz",
+    "gid": "340130208001"
+   },
+   {
+    "file": "bundle_34013.json.gz",
+    "gid": "340130212001"
+   },
+   {
+    "file": "bundle_34017.json.gz",
+    "gid": "340170011002"
+   },
+   {
+    "file": "bundle_34017.json.gz",
+    "gid": "340170041021"
+   },
+   {
+    "file": "bundle_34017.json.gz",
+    "gid": "340170042001"
+   },
+   {
+    "file": "bundle_34017.json.gz",
+    "gid": "340170061011"
+   },
+   {
+    "file": "bundle_34017.json.gz",
+    "gid": "340170075002"
+   },
+   {
+    "file": "bundle_34017.json.gz",
+    "gid": "340170102001"
+   },
+   {
+    "file": "bundle_34017.json.gz",
+    "gid": "340170135003"
+   },
+   {
+    "file": "bundle_34017.json.gz",
+    "gid": "340170160001"
+   },
+   {
+    "file": "bundle_34017.json.gz",
+    "gid": "340170179002"
+   },
+   {
+    "file": "bundle_34017.json.gz",
+    "gid": "340170200001"
+   },
+   {
+    "file": "bundle_34037.json.gz",
+    "gid": "340373710001"
+   },
+   {
+    "file": "bundle_34037.json.gz",
+    "gid": "340373710002"
+   },
+   {
+    "file": "bundle_34037.json.gz",
+    "gid": "340373712002"
+   },
+   {
+    "file": "bundle_34037.json.gz",
+    "gid": "340373713001"
+   },
+   {
+    "file": "bundle_34037.json.gz",
+    "gid": "340373723003"
+   },
+   {
+    "file": "bundle_34037.json.gz",
+    "gid": "340373729003"
+   },
+   {
+    "file": "bundle_34037.json.gz",
+    "gid": "340373731002"
+   },
+   {
+    "file": "bundle_34037.json.gz",
+    "gid": "340373744001"
+   },
+   {
+    "file": "bundle_34037.json.gz",
+    "gid": "340373747001"
+   },
+   {
+    "file": "bundle_34037.json.gz",
+    "gid": "340373748004"
+   },
+   {
+    "file": "bundle_35001.json.gz",
+    "gid": "350010001142"
+   },
+   {
+    "file": "bundle_35001.json.gz",
+    "gid": "350010023012"
+   },
+   {
+    "file": "bundle_35001.json.gz",
+    "gid": "350010024011"
+   },
+   {
+    "file": "bundle_35001.json.gz",
+    "gid": "350010024041"
+   },
+   {
+    "file": "bundle_35001.json.gz",
+    "gid": "350010038041"
+   },
+   {
+    "file": "bundle_35001.json.gz",
+    "gid": "350010040014"
+   },
+   {
+    "file": "bundle_35001.json.gz",
+    "gid": "350010047342"
+   },
+   {
+    "file": "bundle_35001.json.gz",
+    "gid": "350010047492"
+   },
+   {
+    "file": "bundle_35001.json.gz",
+    "gid": "350010047572"
+   },
+   {
+    "file": "bundle_35001.json.gz",
+    "gid": "350019406021"
+   },
+   {
+    "file": "bundle_35013.json.gz",
+    "gid": "350130008002"
+   },
+   {
+    "file": "bundle_35013.json.gz",
+    "gid": "350130010001"
+   },
+   {
+    "file": "bundle_35013.json.gz",
+    "gid": "350130011051"
+   },
+   {
+    "file": "bundle_35013.json.gz",
+    "gid": "350130012071"
+   },
+   {
+    "file": "bundle_35013.json.gz",
+    "gid": "350130013101"
+   },
+   {
+    "file": "bundle_35013.json.gz",
+    "gid": "350130013131"
+   },
+   {
+    "file": "bundle_35013.json.gz",
+    "gid": "350130015011"
+   },
+   {
+    "file": "bundle_35013.json.gz",
+    "gid": "350130018101"
+   },
+   {
+    "file": "bundle_35013.json.gz",
+    "gid": "350130018102"
+   },
+   {
+    "file": "bundle_35013.json.gz",
+    "gid": "350130018112"
+   },
+   {
+    "file": "bundle_35043.json.gz",
+    "gid": "350430105031"
+   },
+   {
+    "file": "bundle_35043.json.gz",
+    "gid": "350430106021"
+   },
+   {
+    "file": "bundle_35043.json.gz",
+    "gid": "350430107051"
+   },
+   {
+    "file": "bundle_35043.json.gz",
+    "gid": "350430107121"
+   },
+   {
+    "file": "bundle_35043.json.gz",
+    "gid": "350430107131"
+   },
+   {
+    "file": "bundle_35043.json.gz",
+    "gid": "350430107221"
+   },
+   {
+    "file": "bundle_35043.json.gz",
+    "gid": "350430107251"
+   },
+   {
+    "file": "bundle_35043.json.gz",
+    "gid": "350430107314"
+   },
+   {
+    "file": "bundle_35043.json.gz",
+    "gid": "350430107323"
+   },
+   {
+    "file": "bundle_35043.json.gz",
+    "gid": "350430112001"
+   },
+   {
+    "file": "bundle_36063.json.gz",
+    "gid": "360630225003"
+   },
+   {
+    "file": "bundle_36063.json.gz",
+    "gid": "360630226011"
+   },
+   {
+    "file": "bundle_36063.json.gz",
+    "gid": "360630227142"
+   },
+   {
+    "file": "bundle_36063.json.gz",
+    "gid": "360630227143"
+   },
+   {
+    "file": "bundle_36063.json.gz",
+    "gid": "360630227171"
+   },
+   {
+    "file": "bundle_36063.json.gz",
+    "gid": "360630232002"
+   },
+   {
+    "file": "bundle_36063.json.gz",
+    "gid": "360630235001"
+   },
+   {
+    "file": "bundle_36063.json.gz",
+    "gid": "360630242014"
+   },
+   {
+    "file": "bundle_36063.json.gz",
+    "gid": "360630244012"
+   },
+   {
+    "file": "bundle_36063.json.gz",
+    "gid": "360630244051"
+   },
+   {
+    "file": "bundle_36069.json.gz",
+    "gid": "360690501043"
+   },
+   {
+    "file": "bundle_36069.json.gz",
+    "gid": "360690501061"
+   },
+   {
+    "file": "bundle_36069.json.gz",
+    "gid": "360690502041"
+   },
+   {
+    "file": "bundle_36069.json.gz",
+    "gid": "360690503032"
+   },
+   {
+    "file": "bundle_36069.json.gz",
+    "gid": "360690504022"
+   },
+   {
+    "file": "bundle_36069.json.gz",
+    "gid": "360690506011"
+   },
+   {
+    "file": "bundle_36069.json.gz",
+    "gid": "360690506041"
+   },
+   {
+    "file": "bundle_36069.json.gz",
+    "gid": "360690510011"
+   },
+   {
+    "file": "bundle_36069.json.gz",
+    "gid": "360690520012"
+   },
+   {
+    "file": "bundle_36069.json.gz",
+    "gid": "360690521022"
+   },
+   {
+    "file": "bundle_36109.json.gz",
+    "gid": "361090001001"
+   },
+   {
+    "file": "bundle_36109.json.gz",
+    "gid": "361090002021"
+   },
+   {
+    "file": "bundle_36109.json.gz",
+    "gid": "361090007002"
+   },
+   {
+    "file": "bundle_36109.json.gz",
+    "gid": "361090007003"
+   },
+   {
+    "file": "bundle_36109.json.gz",
+    "gid": "361090008001"
+   },
+   {
+    "file": "bundle_36109.json.gz",
+    "gid": "361090016001"
+   },
+   {
+    "file": "bundle_36109.json.gz",
+    "gid": "361090018002"
+   },
+   {
+    "file": "bundle_36109.json.gz",
+    "gid": "361090019022"
+   },
+   {
+    "file": "bundle_36109.json.gz",
+    "gid": "361090020002"
+   },
+   {
+    "file": "bundle_36109.json.gz",
+    "gid": "361090021003"
+   },
+   {
+    "file": "bundle_37045.json.gz",
+    "gid": "370459501021"
+   },
+   {
+    "file": "bundle_37045.json.gz",
+    "gid": "370459503011"
+   },
+   {
+    "file": "bundle_37045.json.gz",
+    "gid": "370459503021"
+   },
+   {
+    "file": "bundle_37045.json.gz",
+    "gid": "370459506011"
+   },
+   {
+    "file": "bundle_37045.json.gz",
+    "gid": "370459509002"
+   },
+   {
+    "file": "bundle_37045.json.gz",
+    "gid": "370459510003"
+   },
+   {
+    "file": "bundle_37045.json.gz",
+    "gid": "370459511002"
+   },
+   {
+    "file": "bundle_37045.json.gz",
+    "gid": "370459511003"
+   },
+   {
+    "file": "bundle_37045.json.gz",
+    "gid": "370459514003"
+   },
+   {
+    "file": "bundle_37045.json.gz",
+    "gid": "370459516024"
+   },
+   {
+    "file": "bundle_37089.json.gz",
+    "gid": "370899301001"
+   },
+   {
+    "file": "bundle_37089.json.gz",
+    "gid": "370899304012"
+   },
+   {
+    "file": "bundle_37089.json.gz",
+    "gid": "370899309001"
+   },
+   {
+    "file": "bundle_37089.json.gz",
+    "gid": "370899312002"
+   },
+   {
+    "file": "bundle_37089.json.gz",
+    "gid": "370899316002"
+   },
+   {
+    "file": "bundle_37089.json.gz",
+    "gid": "370899316003"
+   },
+   {
+    "file": "bundle_37089.json.gz",
+    "gid": "370899316004"
+   },
+   {
+    "file": "bundle_37089.json.gz",
+    "gid": "370899318021"
+   },
+   {
+    "file": "bundle_37089.json.gz",
+    "gid": "370899318022"
+   },
+   {
+    "file": "bundle_37089.json.gz",
+    "gid": "370899320002"
+   },
+   {
+    "file": "bundle_37119.json.gz",
+    "gid": "371190001011"
+   },
+   {
+    "file": "bundle_37119.json.gz",
+    "gid": "371190001031"
+   },
+   {
+    "file": "bundle_37119.json.gz",
+    "gid": "371190016081"
+   },
+   {
+    "file": "bundle_37119.json.gz",
+    "gid": "371190030131"
+   },
+   {
+    "file": "bundle_37119.json.gz",
+    "gid": "371190035002"
+   },
+   {
+    "file": "bundle_37119.json.gz",
+    "gid": "371190041022"
+   },
+   {
+    "file": "bundle_37119.json.gz",
+    "gid": "371190056092"
+   },
+   {
+    "file": "bundle_37119.json.gz",
+    "gid": "371190057101"
+   },
+   {
+    "file": "bundle_37119.json.gz",
+    "gid": "371190057232"
+   },
+   {
+    "file": "bundle_37119.json.gz",
+    "gid": "371190063112"
+   },
+   {
+    "file": "bundle_38015.json.gz",
+    "gid": "380150101001"
+   },
+   {
+    "file": "bundle_38015.json.gz",
+    "gid": "380150101004"
+   },
+   {
+    "file": "bundle_38015.json.gz",
+    "gid": "380150102001"
+   },
+   {
+    "file": "bundle_38015.json.gz",
+    "gid": "380150102003"
+   },
+   {
+    "file": "bundle_38015.json.gz",
+    "gid": "380150103004"
+   },
+   {
+    "file": "bundle_38015.json.gz",
+    "gid": "380150104003"
+   },
+   {
+    "file": "bundle_38015.json.gz",
+    "gid": "380150106002"
+   },
+   {
+    "file": "bundle_38015.json.gz",
+    "gid": "380150110023"
+   },
+   {
+    "file": "bundle_38015.json.gz",
+    "gid": "380150110024"
+   },
+   {
+    "file": "bundle_38015.json.gz",
+    "gid": "380150111011"
+   },
+   {
+    "file": "bundle_38017.json.gz",
+    "gid": "380170002032"
+   },
+   {
+    "file": "bundle_38017.json.gz",
+    "gid": "380170002042"
+   },
+   {
+    "file": "bundle_38017.json.gz",
+    "gid": "380170005024"
+   },
+   {
+    "file": "bundle_38017.json.gz",
+    "gid": "380170008021"
+   },
+   {
+    "file": "bundle_38017.json.gz",
+    "gid": "380170009013"
+   },
+   {
+    "file": "bundle_38017.json.gz",
+    "gid": "380170102062"
+   },
+   {
+    "file": "bundle_38017.json.gz",
+    "gid": "380170405012"
+   },
+   {
+    "file": "bundle_38017.json.gz",
+    "gid": "380170405032"
+   },
+   {
+    "file": "bundle_38017.json.gz",
+    "gid": "380170405043"
+   },
+   {
+    "file": "bundle_38017.json.gz",
+    "gid": "380170407001"
+   },
+   {
+    "file": "bundle_39099.json.gz",
+    "gid": "390998023001"
+   },
+   {
+    "file": "bundle_39099.json.gz",
+    "gid": "390998028002"
+   },
+   {
+    "file": "bundle_39099.json.gz",
+    "gid": "390998029002"
+   },
+   {
+    "file": "bundle_39099.json.gz",
+    "gid": "390998042001"
+   },
+   {
+    "file": "bundle_39099.json.gz",
+    "gid": "390998119022"
+   },
+   {
+    "file": "bundle_39099.json.gz",
+    "gid": "390998121011"
+   },
+   {
+    "file": "bundle_39099.json.gz",
+    "gid": "390998125001"
+   },
+   {
+    "file": "bundle_39099.json.gz",
+    "gid": "390998126011"
+   },
+   {
+    "file": "bundle_39099.json.gz",
+    "gid": "390998127001"
+   },
+   {
+    "file": "bundle_39099.json.gz",
+    "gid": "390998134002"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "gid": "391130025001"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "gid": "391130042003"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "gid": "391130203003"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "gid": "391130206011"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "gid": "391130213013"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "gid": "391131101001"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "gid": "391131102012"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "gid": "391131102013"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "gid": "391131201031"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "gid": "391131201032"
+   },
+   {
+    "file": "bundle_39153.json.gz",
+    "gid": "391535027001"
+   },
+   {
+    "file": "bundle_39153.json.gz",
+    "gid": "391535064003"
+   },
+   {
+    "file": "bundle_39153.json.gz",
+    "gid": "391535073003"
+   },
+   {
+    "file": "bundle_39153.json.gz",
+    "gid": "391535105002"
+   },
+   {
+    "file": "bundle_39153.json.gz",
+    "gid": "391535105004"
+   },
+   {
+    "file": "bundle_39153.json.gz",
+    "gid": "391535201061"
+   },
+   {
+    "file": "bundle_39153.json.gz",
+    "gid": "391535320033"
+   },
+   {
+    "file": "bundle_39153.json.gz",
+    "gid": "391535323022"
+   },
+   {
+    "file": "bundle_39153.json.gz",
+    "gid": "391535330001"
+   },
+   {
+    "file": "bundle_39153.json.gz",
+    "gid": "391535332002"
+   },
+   {
+    "file": "bundle_40027.json.gz",
+    "gid": "400272005002"
+   },
+   {
+    "file": "bundle_40027.json.gz",
+    "gid": "400272006021"
+   },
+   {
+    "file": "bundle_40027.json.gz",
+    "gid": "400272006043"
+   },
+   {
+    "file": "bundle_40027.json.gz",
+    "gid": "400272011022"
+   },
+   {
+    "file": "bundle_40027.json.gz",
+    "gid": "400272011033"
+   },
+   {
+    "file": "bundle_40027.json.gz",
+    "gid": "400272013021"
+   },
+   {
+    "file": "bundle_40027.json.gz",
+    "gid": "400272015131"
+   },
+   {
+    "file": "bundle_40027.json.gz",
+    "gid": "400272016032"
+   },
+   {
+    "file": "bundle_40027.json.gz",
+    "gid": "400272016103"
+   },
+   {
+    "file": "bundle_40027.json.gz",
+    "gid": "400272016111"
+   },
+   {
+    "file": "bundle_40031.json.gz",
+    "gid": "400310002001"
+   },
+   {
+    "file": "bundle_40031.json.gz",
+    "gid": "400310004031"
+   },
+   {
+    "file": "bundle_40031.json.gz",
+    "gid": "400310004043"
+   },
+   {
+    "file": "bundle_40031.json.gz",
+    "gid": "400310007003"
+   },
+   {
+    "file": "bundle_40031.json.gz",
+    "gid": "400310009002"
+   },
+   {
+    "file": "bundle_40031.json.gz",
+    "gid": "400310017002"
+   },
+   {
+    "file": "bundle_40031.json.gz",
+    "gid": "400310021012"
+   },
+   {
+    "file": "bundle_40031.json.gz",
+    "gid": "400310023014"
+   },
+   {
+    "file": "bundle_40031.json.gz",
+    "gid": "400310023022"
+   },
+   {
+    "file": "bundle_40031.json.gz",
+    "gid": "400310024051"
+   },
+   {
+    "file": "bundle_40143.json.gz",
+    "gid": "401430003002"
+   },
+   {
+    "file": "bundle_40143.json.gz",
+    "gid": "401430021003"
+   },
+   {
+    "file": "bundle_40143.json.gz",
+    "gid": "401430025001"
+   },
+   {
+    "file": "bundle_40143.json.gz",
+    "gid": "401430069034"
+   },
+   {
+    "file": "bundle_40143.json.gz",
+    "gid": "401430073123"
+   },
+   {
+    "file": "bundle_40143.json.gz",
+    "gid": "401430073124"
+   },
+   {
+    "file": "bundle_40143.json.gz",
+    "gid": "401430076311"
+   },
+   {
+    "file": "bundle_40143.json.gz",
+    "gid": "401430076452"
+   },
+   {
+    "file": "bundle_40143.json.gz",
+    "gid": "401430076481"
+   },
+   {
+    "file": "bundle_40143.json.gz",
+    "gid": "401430113001"
+   },
+   {
+    "file": "bundle_41005.json.gz",
+    "gid": "410050204041"
+   },
+   {
+    "file": "bundle_41005.json.gz",
+    "gid": "410050204042"
+   },
+   {
+    "file": "bundle_41005.json.gz",
+    "gid": "410050208003"
+   },
+   {
+    "file": "bundle_41005.json.gz",
+    "gid": "410050223023"
+   },
+   {
+    "file": "bundle_41005.json.gz",
+    "gid": "410050224004"
+   },
+   {
+    "file": "bundle_41005.json.gz",
+    "gid": "410050229071"
+   },
+   {
+    "file": "bundle_41005.json.gz",
+    "gid": "410050234011"
+   },
+   {
+    "file": "bundle_41005.json.gz",
+    "gid": "410050240001"
+   },
+   {
+    "file": "bundle_41005.json.gz",
+    "gid": "410050242001"
+   },
+   {
+    "file": "bundle_41005.json.gz",
+    "gid": "410050243032"
+   },
+   {
+    "file": "bundle_41047.json.gz",
+    "gid": "410470009001"
+   },
+   {
+    "file": "bundle_41047.json.gz",
+    "gid": "410470017011"
+   },
+   {
+    "file": "bundle_41047.json.gz",
+    "gid": "410470018011"
+   },
+   {
+    "file": "bundle_41047.json.gz",
+    "gid": "410470018022"
+   },
+   {
+    "file": "bundle_41047.json.gz",
+    "gid": "410470023041"
+   },
+   {
+    "file": "bundle_41047.json.gz",
+    "gid": "410470103092"
+   },
+   {
+    "file": "bundle_41047.json.gz",
+    "gid": "410470104001"
+   },
+   {
+    "file": "bundle_41047.json.gz",
+    "gid": "410470105014"
+   },
+   {
+    "file": "bundle_41047.json.gz",
+    "gid": "410470107021"
+   },
+   {
+    "file": "bundle_41047.json.gz",
+    "gid": "410470108014"
+   },
+   {
+    "file": "bundle_41067.json.gz",
+    "gid": "410670301061"
+   },
+   {
+    "file": "bundle_41067.json.gz",
+    "gid": "410670304013"
+   },
+   {
+    "file": "bundle_41067.json.gz",
+    "gid": "410670305023"
+   },
+   {
+    "file": "bundle_41067.json.gz",
+    "gid": "410670315061"
+   },
+   {
+    "file": "bundle_41067.json.gz",
+    "gid": "410670315062"
+   },
+   {
+    "file": "bundle_41067.json.gz",
+    "gid": "410670318071"
+   },
+   {
+    "file": "bundle_41067.json.gz",
+    "gid": "410670319093"
+   },
+   {
+    "file": "bundle_41067.json.gz",
+    "gid": "410670319111"
+   },
+   {
+    "file": "bundle_41067.json.gz",
+    "gid": "410670319161"
+   },
+   {
+    "file": "bundle_41067.json.gz",
+    "gid": "410670323023"
+   },
+   {
+    "file": "bundle_42011.json.gz",
+    "gid": "420110004003"
+   },
+   {
+    "file": "bundle_42011.json.gz",
+    "gid": "420110014004"
+   },
+   {
+    "file": "bundle_42011.json.gz",
+    "gid": "420110111024"
+   },
+   {
+    "file": "bundle_42011.json.gz",
+    "gid": "420110112002"
+   },
+   {
+    "file": "bundle_42011.json.gz",
+    "gid": "420110117032"
+   },
+   {
+    "file": "bundle_42011.json.gz",
+    "gid": "420110119052"
+   },
+   {
+    "file": "bundle_42011.json.gz",
+    "gid": "420110127013"
+   },
+   {
+    "file": "bundle_42011.json.gz",
+    "gid": "420110130002"
+   },
+   {
+    "file": "bundle_42011.json.gz",
+    "gid": "420110136001"
+   },
+   {
+    "file": "bundle_42011.json.gz",
+    "gid": "420110140003"
+   },
+   {
+    "file": "bundle_42019.json.gz",
+    "gid": "420199025001"
+   },
+   {
+    "file": "bundle_42019.json.gz",
+    "gid": "420199103012"
+   },
+   {
+    "file": "bundle_42019.json.gz",
+    "gid": "420199106001"
+   },
+   {
+    "file": "bundle_42019.json.gz",
+    "gid": "420199115021"
+   },
+   {
+    "file": "bundle_42019.json.gz",
+    "gid": "420199117002"
+   },
+   {
+    "file": "bundle_42019.json.gz",
+    "gid": "420199118003"
+   },
+   {
+    "file": "bundle_42019.json.gz",
+    "gid": "420199118005"
+   },
+   {
+    "file": "bundle_42019.json.gz",
+    "gid": "420199123012"
+   },
+   {
+    "file": "bundle_42019.json.gz",
+    "gid": "420199124032"
+   },
+   {
+    "file": "bundle_42019.json.gz",
+    "gid": "420199124043"
+   },
+   {
+    "file": "bundle_42125.json.gz",
+    "gid": "421257041001"
+   },
+   {
+    "file": "bundle_42125.json.gz",
+    "gid": "421257041002"
+   },
+   {
+    "file": "bundle_42125.json.gz",
+    "gid": "421257210002"
+   },
+   {
+    "file": "bundle_42125.json.gz",
+    "gid": "421257320003"
+   },
+   {
+    "file": "bundle_42125.json.gz",
+    "gid": "421257437001"
+   },
+   {
+    "file": "bundle_42125.json.gz",
+    "gid": "421257512001"
+   },
+   {
+    "file": "bundle_42125.json.gz",
+    "gid": "421257512002"
+   },
+   {
+    "file": "bundle_42125.json.gz",
+    "gid": "421257551003"
+   },
+   {
+    "file": "bundle_42125.json.gz",
+    "gid": "421257827001"
+   },
+   {
+    "file": "bundle_42125.json.gz",
+    "gid": "421257958001"
+   },
+   {
+    "file": "bundle_44003.json.gz",
+    "gid": "440030206021"
+   },
+   {
+    "file": "bundle_44003.json.gz",
+    "gid": "440030206031"
+   },
+   {
+    "file": "bundle_44003.json.gz",
+    "gid": "440030209033"
+   },
+   {
+    "file": "bundle_44003.json.gz",
+    "gid": "440030209041"
+   },
+   {
+    "file": "bundle_44003.json.gz",
+    "gid": "440030211001"
+   },
+   {
+    "file": "bundle_44003.json.gz",
+    "gid": "440030211003"
+   },
+   {
+    "file": "bundle_44003.json.gz",
+    "gid": "440030213003"
+   },
+   {
+    "file": "bundle_44003.json.gz",
+    "gid": "440030215012"
+   },
+   {
+    "file": "bundle_44003.json.gz",
+    "gid": "440030219032"
+   },
+   {
+    "file": "bundle_44003.json.gz",
+    "gid": "440030220001"
+   },
+   {
+    "file": "bundle_44007.json.gz",
+    "gid": "440070002004"
+   },
+   {
+    "file": "bundle_44007.json.gz",
+    "gid": "440070003022"
+   },
+   {
+    "file": "bundle_44007.json.gz",
+    "gid": "440070017002"
+   },
+   {
+    "file": "bundle_44007.json.gz",
+    "gid": "440070105021"
+   },
+   {
+    "file": "bundle_44007.json.gz",
+    "gid": "440070108002"
+   },
+   {
+    "file": "bundle_44007.json.gz",
+    "gid": "440070117022"
+   },
+   {
+    "file": "bundle_44007.json.gz",
+    "gid": "440070153002"
+   },
+   {
+    "file": "bundle_44007.json.gz",
+    "gid": "440070161001"
+   },
+   {
+    "file": "bundle_44007.json.gz",
+    "gid": "440070164004"
+   },
+   {
+    "file": "bundle_44007.json.gz",
+    "gid": "440070178001"
+   },
+   {
+    "file": "bundle_44009.json.gz",
+    "gid": "440090503021"
+   },
+   {
+    "file": "bundle_44009.json.gz",
+    "gid": "440090504011"
+   },
+   {
+    "file": "bundle_44009.json.gz",
+    "gid": "440090506002"
+   },
+   {
+    "file": "bundle_44009.json.gz",
+    "gid": "440090506004"
+   },
+   {
+    "file": "bundle_44009.json.gz",
+    "gid": "440090508013"
+   },
+   {
+    "file": "bundle_44009.json.gz",
+    "gid": "440090509021"
+   },
+   {
+    "file": "bundle_44009.json.gz",
+    "gid": "440090511012"
+   },
+   {
+    "file": "bundle_44009.json.gz",
+    "gid": "440090512011"
+   },
+   {
+    "file": "bundle_44009.json.gz",
+    "gid": "440090513062"
+   },
+   {
+    "file": "bundle_44009.json.gz",
+    "gid": "440090515031"
+   },
+   {
+    "file": "bundle_45003.json.gz",
+    "gid": "450030203032"
+   },
+   {
+    "file": "bundle_45003.json.gz",
+    "gid": "450030206041"
+   },
+   {
+    "file": "bundle_45003.json.gz",
+    "gid": "450030209012"
+   },
+   {
+    "file": "bundle_45003.json.gz",
+    "gid": "450030209042"
+   },
+   {
+    "file": "bundle_45003.json.gz",
+    "gid": "450030210031"
+   },
+   {
+    "file": "bundle_45003.json.gz",
+    "gid": "450030210041"
+   },
+   {
+    "file": "bundle_45003.json.gz",
+    "gid": "450030211011"
+   },
+   {
+    "file": "bundle_45003.json.gz",
+    "gid": "450030212021"
+   },
+   {
+    "file": "bundle_45003.json.gz",
+    "gid": "450030212051"
+   },
+   {
+    "file": "bundle_45003.json.gz",
+    "gid": "450030216013"
+   },
+   {
+    "file": "bundle_45051.json.gz",
+    "gid": "450510202011"
+   },
+   {
+    "file": "bundle_45051.json.gz",
+    "gid": "450510203021"
+   },
+   {
+    "file": "bundle_45051.json.gz",
+    "gid": "450510401013"
+   },
+   {
+    "file": "bundle_45051.json.gz",
+    "gid": "450510404002"
+   },
+   {
+    "file": "bundle_45051.json.gz",
+    "gid": "450510405002"
+   },
+   {
+    "file": "bundle_45051.json.gz",
+    "gid": "450510509012"
+   },
+   {
+    "file": "bundle_45051.json.gz",
+    "gid": "450510512012"
+   },
+   {
+    "file": "bundle_45051.json.gz",
+    "gid": "450510514062"
+   },
+   {
+    "file": "bundle_45051.json.gz",
+    "gid": "450510516071"
+   },
+   {
+    "file": "bundle_45051.json.gz",
+    "gid": "450510516072"
+   },
+   {
+    "file": "bundle_45091.json.gz",
+    "gid": "450910609013"
+   },
+   {
+    "file": "bundle_45091.json.gz",
+    "gid": "450910609093"
+   },
+   {
+    "file": "bundle_45091.json.gz",
+    "gid": "450910610061"
+   },
+   {
+    "file": "bundle_45091.json.gz",
+    "gid": "450910610062"
+   },
+   {
+    "file": "bundle_45091.json.gz",
+    "gid": "450910610072"
+   },
+   {
+    "file": "bundle_45091.json.gz",
+    "gid": "450910611041"
+   },
+   {
+    "file": "bundle_45091.json.gz",
+    "gid": "450910612033"
+   },
+   {
+    "file": "bundle_45091.json.gz",
+    "gid": "450910612052"
+   },
+   {
+    "file": "bundle_45091.json.gz",
+    "gid": "450910613022"
+   },
+   {
+    "file": "bundle_45091.json.gz",
+    "gid": "450910614011"
+   },
+   {
+    "file": "bundle_46099.json.gz",
+    "gid": "460990001001"
+   },
+   {
+    "file": "bundle_46099.json.gz",
+    "gid": "460990002011"
+   },
+   {
+    "file": "bundle_46099.json.gz",
+    "gid": "460990002022"
+   },
+   {
+    "file": "bundle_46099.json.gz",
+    "gid": "460990004071"
+   },
+   {
+    "file": "bundle_46099.json.gz",
+    "gid": "460990007022"
+   },
+   {
+    "file": "bundle_46099.json.gz",
+    "gid": "460990009002"
+   },
+   {
+    "file": "bundle_46099.json.gz",
+    "gid": "460990015013"
+   },
+   {
+    "file": "bundle_46099.json.gz",
+    "gid": "460990018041"
+   },
+   {
+    "file": "bundle_46099.json.gz",
+    "gid": "460990104013"
+   },
+   {
+    "file": "bundle_46099.json.gz",
+    "gid": "460990105021"
+   },
+   {
+    "file": "bundle_46103.json.gz",
+    "gid": "461030102021"
+   },
+   {
+    "file": "bundle_46103.json.gz",
+    "gid": "461030104003"
+   },
+   {
+    "file": "bundle_46103.json.gz",
+    "gid": "461030105003"
+   },
+   {
+    "file": "bundle_46103.json.gz",
+    "gid": "461030109042"
+   },
+   {
+    "file": "bundle_46103.json.gz",
+    "gid": "461030109052"
+   },
+   {
+    "file": "bundle_46103.json.gz",
+    "gid": "461030109081"
+   },
+   {
+    "file": "bundle_46103.json.gz",
+    "gid": "461030113002"
+   },
+   {
+    "file": "bundle_46103.json.gz",
+    "gid": "461030113004"
+   },
+   {
+    "file": "bundle_46103.json.gz",
+    "gid": "461030114004"
+   },
+   {
+    "file": "bundle_46103.json.gz",
+    "gid": "461030118002"
+   },
+   {
+    "file": "bundle_47093.json.gz",
+    "gid": "470930016002"
+   },
+   {
+    "file": "bundle_47093.json.gz",
+    "gid": "470930021001"
+   },
+   {
+    "file": "bundle_47093.json.gz",
+    "gid": "470930035012"
+   },
+   {
+    "file": "bundle_47093.json.gz",
+    "gid": "470930039012"
+   },
+   {
+    "file": "bundle_47093.json.gz",
+    "gid": "470930048001"
+   },
+   {
+    "file": "bundle_47093.json.gz",
+    "gid": "470930054022"
+   },
+   {
+    "file": "bundle_47093.json.gz",
+    "gid": "470930057011"
+   },
+   {
+    "file": "bundle_47093.json.gz",
+    "gid": "470930057112"
+   },
+   {
+    "file": "bundle_47093.json.gz",
+    "gid": "470930059092"
+   },
+   {
+    "file": "bundle_47093.json.gz",
+    "gid": "470930060011"
+   },
+   {
+    "file": "bundle_47119.json.gz",
+    "gid": "471190101001"
+   },
+   {
+    "file": "bundle_47119.json.gz",
+    "gid": "471190102011"
+   },
+   {
+    "file": "bundle_47119.json.gz",
+    "gid": "471190102014"
+   },
+   {
+    "file": "bundle_47119.json.gz",
+    "gid": "471190102031"
+   },
+   {
+    "file": "bundle_47119.json.gz",
+    "gid": "471190103013"
+   },
+   {
+    "file": "bundle_47119.json.gz",
+    "gid": "471190105001"
+   },
+   {
+    "file": "bundle_47119.json.gz",
+    "gid": "471190108011"
+   },
+   {
+    "file": "bundle_47119.json.gz",
+    "gid": "471190109001"
+   },
+   {
+    "file": "bundle_47119.json.gz",
+    "gid": "471190111011"
+   },
+   {
+    "file": "bundle_47119.json.gz",
+    "gid": "471190111022"
+   },
+   {
+    "file": "bundle_47157.json.gz",
+    "gid": "471570053003"
+   },
+   {
+    "file": "bundle_47157.json.gz",
+    "gid": "471570079002"
+   },
+   {
+    "file": "bundle_47157.json.gz",
+    "gid": "471570107202"
+   },
+   {
+    "file": "bundle_47157.json.gz",
+    "gid": "471570113002"
+   },
+   {
+    "file": "bundle_47157.json.gz",
+    "gid": "471570203022"
+   },
+   {
+    "file": "bundle_47157.json.gz",
+    "gid": "471570206101"
+   },
+   {
+    "file": "bundle_47157.json.gz",
+    "gid": "471570206571"
+   },
+   {
+    "file": "bundle_47157.json.gz",
+    "gid": "471570210202"
+   },
+   {
+    "file": "bundle_47157.json.gz",
+    "gid": "471570213522"
+   },
+   {
+    "file": "bundle_47157.json.gz",
+    "gid": "471570216114"
+   },
+   {
+    "file": "bundle_48091.json.gz",
+    "gid": "480913104011"
+   },
+   {
+    "file": "bundle_48091.json.gz",
+    "gid": "480913104016"
+   },
+   {
+    "file": "bundle_48091.json.gz",
+    "gid": "480913105033"
+   },
+   {
+    "file": "bundle_48091.json.gz",
+    "gid": "480913106031"
+   },
+   {
+    "file": "bundle_48091.json.gz",
+    "gid": "480913106032"
+   },
+   {
+    "file": "bundle_48091.json.gz",
+    "gid": "480913107032"
+   },
+   {
+    "file": "bundle_48091.json.gz",
+    "gid": "480913107062"
+   },
+   {
+    "file": "bundle_48091.json.gz",
+    "gid": "480913108013"
+   },
+   {
+    "file": "bundle_48091.json.gz",
+    "gid": "480913109031"
+   },
+   {
+    "file": "bundle_48091.json.gz",
+    "gid": "480913109033"
+   },
+   {
+    "file": "bundle_48439.json.gz",
+    "gid": "484391022023"
+   },
+   {
+    "file": "bundle_48439.json.gz",
+    "gid": "484391050082"
+   },
+   {
+    "file": "bundle_48439.json.gz",
+    "gid": "484391058001"
+   },
+   {
+    "file": "bundle_48439.json.gz",
+    "gid": "484391115571"
+   },
+   {
+    "file": "bundle_48439.json.gz",
+    "gid": "484391131023"
+   },
+   {
+    "file": "bundle_48439.json.gz",
+    "gid": "484391132072"
+   },
+   {
+    "file": "bundle_48439.json.gz",
+    "gid": "484391132143"
+   },
+   {
+    "file": "bundle_48439.json.gz",
+    "gid": "484391135132"
+   },
+   {
+    "file": "bundle_48439.json.gz",
+    "gid": "484391136303"
+   },
+   {
+    "file": "bundle_48439.json.gz",
+    "gid": "484391136394"
+   },
+   {
+    "file": "bundle_48479.json.gz",
+    "gid": "484790008002"
+   },
+   {
+    "file": "bundle_48479.json.gz",
+    "gid": "484790012011"
+   },
+   {
+    "file": "bundle_48479.json.gz",
+    "gid": "484790017112"
+   },
+   {
+    "file": "bundle_48479.json.gz",
+    "gid": "484790017113"
+   },
+   {
+    "file": "bundle_48479.json.gz",
+    "gid": "484790017191"
+   },
+   {
+    "file": "bundle_48479.json.gz",
+    "gid": "484790017201"
+   },
+   {
+    "file": "bundle_48479.json.gz",
+    "gid": "484790017231"
+   },
+   {
+    "file": "bundle_48479.json.gz",
+    "gid": "484790017261"
+   },
+   {
+    "file": "bundle_48479.json.gz",
+    "gid": "484790018192"
+   },
+   {
+    "file": "bundle_48479.json.gz",
+    "gid": "484790018233"
+   },
+   {
+    "file": "bundle_49005.json.gz",
+    "gid": "490050002021"
+   },
+   {
+    "file": "bundle_49005.json.gz",
+    "gid": "490050002024"
+   },
+   {
+    "file": "bundle_49005.json.gz",
+    "gid": "490050003012"
+   },
+   {
+    "file": "bundle_49005.json.gz",
+    "gid": "490050006012"
+   },
+   {
+    "file": "bundle_49005.json.gz",
+    "gid": "490050010011"
+   },
+   {
+    "file": "bundle_49005.json.gz",
+    "gid": "490050011023"
+   },
+   {
+    "file": "bundle_49005.json.gz",
+    "gid": "490050012012"
+   },
+   {
+    "file": "bundle_49005.json.gz",
+    "gid": "490050012022"
+   },
+   {
+    "file": "bundle_49005.json.gz",
+    "gid": "490050014021"
+   },
+   {
+    "file": "bundle_49005.json.gz",
+    "gid": "490050014023"
+   },
+   {
+    "file": "bundle_49011.json.gz",
+    "gid": "490111253011"
+   },
+   {
+    "file": "bundle_49011.json.gz",
+    "gid": "490111253062"
+   },
+   {
+    "file": "bundle_49011.json.gz",
+    "gid": "490111256001"
+   },
+   {
+    "file": "bundle_49011.json.gz",
+    "gid": "490111258015"
+   },
+   {
+    "file": "bundle_49011.json.gz",
+    "gid": "490111259054"
+   },
+   {
+    "file": "bundle_49011.json.gz",
+    "gid": "490111262043"
+   },
+   {
+    "file": "bundle_49011.json.gz",
+    "gid": "490111262062"
+   },
+   {
+    "file": "bundle_49011.json.gz",
+    "gid": "490111263033"
+   },
+   {
+    "file": "bundle_49011.json.gz",
+    "gid": "490111269013"
+   },
+   {
+    "file": "bundle_49011.json.gz",
+    "gid": "490111270024"
+   },
+   {
+    "file": "bundle_49053.json.gz",
+    "gid": "490532701022"
+   },
+   {
+    "file": "bundle_49053.json.gz",
+    "gid": "490532703021"
+   },
+   {
+    "file": "bundle_49053.json.gz",
+    "gid": "490532706013"
+   },
+   {
+    "file": "bundle_49053.json.gz",
+    "gid": "490532709042"
+   },
+   {
+    "file": "bundle_49053.json.gz",
+    "gid": "490532709053"
+   },
+   {
+    "file": "bundle_49053.json.gz",
+    "gid": "490532713003"
+   },
+   {
+    "file": "bundle_49053.json.gz",
+    "gid": "490532715011"
+   },
+   {
+    "file": "bundle_49053.json.gz",
+    "gid": "490532715013"
+   },
+   {
+    "file": "bundle_49053.json.gz",
+    "gid": "490532715021"
+   },
+   {
+    "file": "bundle_49053.json.gz",
+    "gid": "490532717031"
+   },
+   {
+    "file": "bundle_50007.json.gz",
+    "gid": "500070010001"
+   },
+   {
+    "file": "bundle_50007.json.gz",
+    "gid": "500070010002"
+   },
+   {
+    "file": "bundle_50007.json.gz",
+    "gid": "500070023042"
+   },
+   {
+    "file": "bundle_50007.json.gz",
+    "gid": "500070024001"
+   },
+   {
+    "file": "bundle_50007.json.gz",
+    "gid": "500070026012"
+   },
+   {
+    "file": "bundle_50007.json.gz",
+    "gid": "500070026014"
+   },
+   {
+    "file": "bundle_50007.json.gz",
+    "gid": "500070028002"
+   },
+   {
+    "file": "bundle_50007.json.gz",
+    "gid": "500070031011"
+   },
+   {
+    "file": "bundle_50007.json.gz",
+    "gid": "500070031021"
+   },
+   {
+    "file": "bundle_50007.json.gz",
+    "gid": "500070034022"
+   },
+   {
+    "file": "bundle_51059.json.gz",
+    "gid": "510594153002"
+   },
+   {
+    "file": "bundle_51059.json.gz",
+    "gid": "510594154012"
+   },
+   {
+    "file": "bundle_51059.json.gz",
+    "gid": "510594202031"
+   },
+   {
+    "file": "bundle_51059.json.gz",
+    "gid": "510594221013"
+   },
+   {
+    "file": "bundle_51059.json.gz",
+    "gid": "510594307002"
+   },
+   {
+    "file": "bundle_51059.json.gz",
+    "gid": "510594313002"
+   },
+   {
+    "file": "bundle_51059.json.gz",
+    "gid": "510594617003"
+   },
+   {
+    "file": "bundle_51059.json.gz",
+    "gid": "510594803012"
+   },
+   {
+    "file": "bundle_51059.json.gz",
+    "gid": "510594822042"
+   },
+   {
+    "file": "bundle_51059.json.gz",
+    "gid": "510594901053"
+   },
+   {
+    "file": "bundle_51510.json.gz",
+    "gid": "515102002021"
+   },
+   {
+    "file": "bundle_51510.json.gz",
+    "gid": "515102003051"
+   },
+   {
+    "file": "bundle_51510.json.gz",
+    "gid": "515102004072"
+   },
+   {
+    "file": "bundle_51510.json.gz",
+    "gid": "515102007053"
+   },
+   {
+    "file": "bundle_51510.json.gz",
+    "gid": "515102010001"
+   },
+   {
+    "file": "bundle_51510.json.gz",
+    "gid": "515102012052"
+   },
+   {
+    "file": "bundle_51510.json.gz",
+    "gid": "515102013004"
+   },
+   {
+    "file": "bundle_51510.json.gz",
+    "gid": "515102016023"
+   },
+   {
+    "file": "bundle_51510.json.gz",
+    "gid": "515102018041"
+   },
+   {
+    "file": "bundle_51510.json.gz",
+    "gid": "515102018052"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "gid": "518100408024"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "gid": "518100424001"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "gid": "518100428011"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "gid": "518100454302"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "gid": "518100462073"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "gid": "518100462112"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "gid": "518100462113"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "gid": "518100462163"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "gid": "518100462202"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "gid": "518100462223"
+   },
+   {
+    "file": "bundle_53005.json.gz",
+    "gid": "530050105001"
+   },
+   {
+    "file": "bundle_53005.json.gz",
+    "gid": "530050107033"
+   },
+   {
+    "file": "bundle_53005.json.gz",
+    "gid": "530050108111"
+   },
+   {
+    "file": "bundle_53005.json.gz",
+    "gid": "530050108152"
+   },
+   {
+    "file": "bundle_53005.json.gz",
+    "gid": "530050112014"
+   },
+   {
+    "file": "bundle_53005.json.gz",
+    "gid": "530050114021"
+   },
+   {
+    "file": "bundle_53005.json.gz",
+    "gid": "530050114024"
+   },
+   {
+    "file": "bundle_53005.json.gz",
+    "gid": "530050115011"
+   },
+   {
+    "file": "bundle_53005.json.gz",
+    "gid": "530050118012"
+   },
+   {
+    "file": "bundle_53005.json.gz",
+    "gid": "530050118021"
+   },
+   {
+    "file": "bundle_53053.json.gz",
+    "gid": "530530610013"
+   },
+   {
+    "file": "bundle_53053.json.gz",
+    "gid": "530530634022"
+   },
+   {
+    "file": "bundle_53053.json.gz",
+    "gid": "530530703113"
+   },
+   {
+    "file": "bundle_53053.json.gz",
+    "gid": "530530703142"
+   },
+   {
+    "file": "bundle_53053.json.gz",
+    "gid": "530530704042"
+   },
+   {
+    "file": "bundle_53053.json.gz",
+    "gid": "530530716014"
+   },
+   {
+    "file": "bundle_53053.json.gz",
+    "gid": "530530725031"
+   },
+   {
+    "file": "bundle_53053.json.gz",
+    "gid": "530530729091"
+   },
+   {
+    "file": "bundle_53053.json.gz",
+    "gid": "530539400052"
+   },
+   {
+    "file": "bundle_53053.json.gz",
+    "gid": "530539400113"
+   },
+   {
+    "file": "bundle_53063.json.gz",
+    "gid": "530630004003"
+   },
+   {
+    "file": "bundle_53063.json.gz",
+    "gid": "530630011002"
+   },
+   {
+    "file": "bundle_53063.json.gz",
+    "gid": "530630012001"
+   },
+   {
+    "file": "bundle_53063.json.gz",
+    "gid": "530630025031"
+   },
+   {
+    "file": "bundle_53063.json.gz",
+    "gid": "530630041002"
+   },
+   {
+    "file": "bundle_53063.json.gz",
+    "gid": "530630103013"
+   },
+   {
+    "file": "bundle_53063.json.gz",
+    "gid": "530630104031"
+   },
+   {
+    "file": "bundle_53063.json.gz",
+    "gid": "530630121003"
+   },
+   {
+    "file": "bundle_53063.json.gz",
+    "gid": "530630131013"
+   },
+   {
+    "file": "bundle_53063.json.gz",
+    "gid": "530630132043"
+   },
+   {
+    "file": "bundle_54003.json.gz",
+    "gid": "540039711012"
+   },
+   {
+    "file": "bundle_54003.json.gz",
+    "gid": "540039711014"
+   },
+   {
+    "file": "bundle_54003.json.gz",
+    "gid": "540039711031"
+   },
+   {
+    "file": "bundle_54003.json.gz",
+    "gid": "540039712052"
+   },
+   {
+    "file": "bundle_54003.json.gz",
+    "gid": "540039712061"
+   },
+   {
+    "file": "bundle_54003.json.gz",
+    "gid": "540039712062"
+   },
+   {
+    "file": "bundle_54003.json.gz",
+    "gid": "540039717005"
+   },
+   {
+    "file": "bundle_54003.json.gz",
+    "gid": "540039717006"
+   },
+   {
+    "file": "bundle_54003.json.gz",
+    "gid": "540039718023"
+   },
+   {
+    "file": "bundle_54003.json.gz",
+    "gid": "540039719012"
+   },
+   {
+    "file": "bundle_54039.json.gz",
+    "gid": "540390002002"
+   },
+   {
+    "file": "bundle_54039.json.gz",
+    "gid": "540390017002"
+   },
+   {
+    "file": "bundle_54039.json.gz",
+    "gid": "540390102003"
+   },
+   {
+    "file": "bundle_54039.json.gz",
+    "gid": "540390105002"
+   },
+   {
+    "file": "bundle_54039.json.gz",
+    "gid": "540390108041"
+   },
+   {
+    "file": "bundle_54039.json.gz",
+    "gid": "540390118005"
+   },
+   {
+    "file": "bundle_54039.json.gz",
+    "gid": "540390132002"
+   },
+   {
+    "file": "bundle_54039.json.gz",
+    "gid": "540390133002"
+   },
+   {
+    "file": "bundle_54039.json.gz",
+    "gid": "540390134001"
+   },
+   {
+    "file": "bundle_54039.json.gz",
+    "gid": "540390137011"
+   },
+   {
+    "file": "bundle_54061.json.gz",
+    "gid": "540610101041"
+   },
+   {
+    "file": "bundle_54061.json.gz",
+    "gid": "540610104005"
+   },
+   {
+    "file": "bundle_54061.json.gz",
+    "gid": "540610107005"
+   },
+   {
+    "file": "bundle_54061.json.gz",
+    "gid": "540610108004"
+   },
+   {
+    "file": "bundle_54061.json.gz",
+    "gid": "540610111001"
+   },
+   {
+    "file": "bundle_54061.json.gz",
+    "gid": "540610112002"
+   },
+   {
+    "file": "bundle_54061.json.gz",
+    "gid": "540610113001"
+   },
+   {
+    "file": "bundle_54061.json.gz",
+    "gid": "540610117004"
+   },
+   {
+    "file": "bundle_54061.json.gz",
+    "gid": "540610118031"
+   },
+   {
+    "file": "bundle_54061.json.gz",
+    "gid": "540610118043"
+   },
+   {
+    "file": "bundle_55059.json.gz",
+    "gid": "550590001022"
+   },
+   {
+    "file": "bundle_55059.json.gz",
+    "gid": "550590009004"
+   },
+   {
+    "file": "bundle_55059.json.gz",
+    "gid": "550590010002"
+   },
+   {
+    "file": "bundle_55059.json.gz",
+    "gid": "550590013001"
+   },
+   {
+    "file": "bundle_55059.json.gz",
+    "gid": "550590014023"
+   },
+   {
+    "file": "bundle_55059.json.gz",
+    "gid": "550590017002"
+   },
+   {
+    "file": "bundle_55059.json.gz",
+    "gid": "550590028022"
+   },
+   {
+    "file": "bundle_55059.json.gz",
+    "gid": "550590029031"
+   },
+   {
+    "file": "bundle_55059.json.gz",
+    "gid": "550590029042"
+   },
+   {
+    "file": "bundle_55059.json.gz",
+    "gid": "550590030011"
+   },
+   {
+    "file": "bundle_55073.json.gz",
+    "gid": "550730007001"
+   },
+   {
+    "file": "bundle_55073.json.gz",
+    "gid": "550730007003"
+   },
+   {
+    "file": "bundle_55073.json.gz",
+    "gid": "550730011032"
+   },
+   {
+    "file": "bundle_55073.json.gz",
+    "gid": "550730011034"
+   },
+   {
+    "file": "bundle_55073.json.gz",
+    "gid": "550730012021"
+   },
+   {
+    "file": "bundle_55073.json.gz",
+    "gid": "550730012022"
+   },
+   {
+    "file": "bundle_55073.json.gz",
+    "gid": "550730012041"
+   },
+   {
+    "file": "bundle_55073.json.gz",
+    "gid": "550730016004"
+   },
+   {
+    "file": "bundle_55073.json.gz",
+    "gid": "550730017003"
+   },
+   {
+    "file": "bundle_55073.json.gz",
+    "gid": "550730022001"
+   },
+   {
+    "file": "bundle_55117.json.gz",
+    "gid": "551170004002"
+   },
+   {
+    "file": "bundle_55117.json.gz",
+    "gid": "551170103003"
+   },
+   {
+    "file": "bundle_55117.json.gz",
+    "gid": "551170104001"
+   },
+   {
+    "file": "bundle_55117.json.gz",
+    "gid": "551170104002"
+   },
+   {
+    "file": "bundle_55117.json.gz",
+    "gid": "551170106012"
+   },
+   {
+    "file": "bundle_55117.json.gz",
+    "gid": "551170106021"
+   },
+   {
+    "file": "bundle_55117.json.gz",
+    "gid": "551170111001"
+   },
+   {
+    "file": "bundle_55117.json.gz",
+    "gid": "551170111002"
+   },
+   {
+    "file": "bundle_55117.json.gz",
+    "gid": "551170112003"
+   },
+   {
+    "file": "bundle_55117.json.gz",
+    "gid": "551170113022"
+   },
+   {
+    "file": "bundle_56021.json.gz",
+    "gid": "560210002002"
+   },
+   {
+    "file": "bundle_56021.json.gz",
+    "gid": "560210004013"
+   },
+   {
+    "file": "bundle_56021.json.gz",
+    "gid": "560210005034"
+   },
+   {
+    "file": "bundle_56021.json.gz",
+    "gid": "560210006011"
+   },
+   {
+    "file": "bundle_56021.json.gz",
+    "gid": "560210006012"
+   },
+   {
+    "file": "bundle_56021.json.gz",
+    "gid": "560210010001"
+   },
+   {
+    "file": "bundle_56021.json.gz",
+    "gid": "560210010002"
+   },
+   {
+    "file": "bundle_56021.json.gz",
+    "gid": "560210015024"
+   },
+   {
+    "file": "bundle_56021.json.gz",
+    "gid": "560210019022"
+   },
+   {
+    "file": "bundle_56021.json.gz",
+    "gid": "560210020022"
+   },
+   {
+    "file": "bundle_72025.json.gz",
+    "gid": "720252001004"
+   },
+   {
+    "file": "bundle_72025.json.gz",
+    "gid": "720252003022"
+   },
+   {
+    "file": "bundle_72025.json.gz",
+    "gid": "720252005003"
+   },
+   {
+    "file": "bundle_72025.json.gz",
+    "gid": "720252005005"
+   },
+   {
+    "file": "bundle_72025.json.gz",
+    "gid": "720252014001"
+   },
+   {
+    "file": "bundle_72025.json.gz",
+    "gid": "720252016002"
+   },
+   {
+    "file": "bundle_72025.json.gz",
+    "gid": "720252020002"
+   },
+   {
+    "file": "bundle_72025.json.gz",
+    "gid": "720252021001"
+   },
+   {
+    "file": "bundle_72025.json.gz",
+    "gid": "720252026021"
+   },
+   {
+    "file": "bundle_72025.json.gz",
+    "gid": "720252027013"
+   },
+   {
+    "file": "bundle_72031.json.gz",
+    "gid": "720310501051"
+   },
+   {
+    "file": "bundle_72031.json.gz",
+    "gid": "720310501062"
+   },
+   {
+    "file": "bundle_72031.json.gz",
+    "gid": "720310502323"
+   },
+   {
+    "file": "bundle_72031.json.gz",
+    "gid": "720310503022"
+   },
+   {
+    "file": "bundle_72031.json.gz",
+    "gid": "720310503111"
+   },
+   {
+    "file": "bundle_72031.json.gz",
+    "gid": "720310504034"
+   },
+   {
+    "file": "bundle_72031.json.gz",
+    "gid": "720310506001"
+   },
+   {
+    "file": "bundle_72031.json.gz",
+    "gid": "720310510011"
+   },
+   {
+    "file": "bundle_72031.json.gz",
+    "gid": "720310510012"
+   },
+   {
+    "file": "bundle_72031.json.gz",
+    "gid": "720310510013"
+   },
+   {
+    "file": "bundle_72127.json.gz",
+    "gid": "721270013022"
+   },
+   {
+    "file": "bundle_72127.json.gz",
+    "gid": "721270034001"
+   },
+   {
+    "file": "bundle_72127.json.gz",
+    "gid": "721270036001"
+   },
+   {
+    "file": "bundle_72127.json.gz",
+    "gid": "721270047003"
+   },
+   {
+    "file": "bundle_72127.json.gz",
+    "gid": "721270051012"
+   },
+   {
+    "file": "bundle_72127.json.gz",
+    "gid": "721270058004"
+   },
+   {
+    "file": "bundle_72127.json.gz",
+    "gid": "721270067012"
+   },
+   {
+    "file": "bundle_72127.json.gz",
+    "gid": "721270084002"
+   },
+   {
+    "file": "bundle_72127.json.gz",
+    "gid": "721270094002"
+   },
+   {
+    "file": "bundle_72127.json.gz",
+    "gid": "721270102001"
+   }
+  ]
+ },
+ "tract_fallback_scan": {
+  "block_groups_with_homes_and_null_value": 14479,
+  "tract_value_available_but_not_applied": 4299,
+  "by_county": {
+   "06001 Alameda County": {
+    "hv": 72,
+    "rent": 192
+   },
+   "06005 Amador County": {
+    "hv": 1,
+    "rent": 11
+   },
+   "06007 Butte County": {
+    "hv": 32,
+    "rent": 61
+   },
+   "06009 Calaveras County": {
+    "hv": 1,
+    "rent": 20
+   },
+   "06011 Colusa County": {
+    "hv": 4,
+    "rent": 4
+   },
+   "06013 Contra Costa County": {
+    "hv": 37,
+    "rent": 169
+   },
+   "06015 Del Norte County": {
+    "hv": 0,
+    "rent": 9
+   },
+   "06017 El Dorado County": {
+    "hv": 5,
+    "rent": 55
+   },
+   "06019 Fresno County": {
+    "hv": 77,
+    "rent": 87
+   },
+   "06021 Glenn County": {
+    "hv": 2,
+    "rent": 4
+   },
+   "06023 Humboldt County": {
+    "hv": 5,
+    "rent": 12
+   },
+   "06025 Imperial County": {
+    "hv": 22,
+    "rent": 20
+   },
+   "06027 Inyo County": {
+    "hv": 2,
+    "rent": 1
+   },
+   "06029 Kern County": {
+    "hv": 48,
+    "rent": 123
+   },
+   "06031 Kings County": {
+    "hv": 6,
+    "rent": 7
+   },
+   "06033 Lake County": {
+    "hv": 4,
+    "rent": 15
+   },
+   "06035 Lassen County": {
+    "hv": 2,
+    "rent": 4
+   },
+   "06039 Madera County": {
+    "hv": 14,
+    "rent": 29
+   },
+   "06041 Marin County": {
+    "hv": 9,
+    "rent": 35
+   },
+   "06043 Mariposa County": {
+    "hv": 3,
+    "rent": 6
+   },
+   "06045 Mendocino County": {
+    "hv": 12,
+    "rent": 20
+   },
+   "06047 Merced County": {
+    "hv": 11,
+    "rent": 13
+   },
+   "06049 Modoc County": {
+    "hv": 0,
+    "rent": 5
+   },
+   "06051 Mono County": {
+    "hv": 5,
+    "rent": 10
+   },
+   "06053 Monterey County": {
+    "hv": 31,
+    "rent": 34
+   },
+   "06055 Napa County": {
+    "hv": 5,
+    "rent": 13
+   },
+   "06057 Nevada County": {
+    "hv": 5,
+    "rent": 28
+   },
+   "06061 Placer County": {
+    "hv": 11,
+    "rent": 76
+   },
+   "06063 Plumas County": {
+    "hv": 0,
+    "rent": 6
+   },
+   "06065 Riverside County": {
+    "hv": 85,
+    "rent": 319
+   },
+   "06067 Sacramento County": {
+    "hv": 74,
+    "rent": 148
+   },
+   "06069 San Benito County": {
+    "hv": 3,
+    "rent": 14
+   },
+   "06071 San Bernardino County": {
+    "hv": 96,
+    "rent": 273
+   },
+   "06073 San Diego County": {
+    "hv": 173,
+    "rent": 352
+   },
+   "06075 San Francisco County": {
+    "hv": 64,
+    "rent": 74
+   },
+   "06077 San Joaquin County": {
+    "hv": 31,
+    "rent": 83
+   },
+   "06079 San Luis Obispo County": {
+    "hv": 6,
+    "rent": 34
+   },
+   "06081 San Mateo County": {
+    "hv": 20,
+    "rent": 78
+   },
+   "06083 Santa Barbara County": {
+    "hv": 24,
+    "rent": 48
+   },
+   "06085 Santa Clara County": {
+    "hv": 65,
+    "rent": 165
+   },
+   "06087 Santa Cruz County": {
+    "hv": 5,
+    "rent": 12
+   },
+   "06089 Shasta County": {
+    "hv": 3,
+    "rent": 27
+   },
+   "06093 Siskiyou County": {
+    "hv": 0,
+    "rent": 5
+   },
+   "06095 Solano County": {
+    "hv": 13,
+    "rent": 49
+   },
+   "06097 Sonoma County": {
+    "hv": 16,
+    "rent": 85
+   },
+   "06099 Stanislaus County": {
+    "hv": 24,
+    "rent": 57
+   },
+   "06101 Sutter County": {
+    "hv": 6,
+    "rent": 17
+   },
+   "06103 Tehama County": {
+    "hv": 1,
+    "rent": 8
+   },
+   "06105 Trinity County": {
+    "hv": 0,
+    "rent": 5
+   },
+   "06107 Tulare County": {
+    "hv": 25,
+    "rent": 41
+   },
+   "06109 Tuolumne County": {
+    "hv": 4,
+    "rent": 20
+   },
+   "06111 Ventura County": {
+    "hv": 21,
+    "rent": 82
+   },
+   "06113 Yolo County": {
+    "hv": 11,
+    "rent": 19
+   },
+   "06115 Yuba County": {
+    "hv": 6,
+    "rent": 13
+   }
+  },
+  "examples": [
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014418004",
+    "field": "rent",
+    "tract_value": 3160.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014515012",
+    "field": "rent",
+    "tract_value": 2561.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014087001",
+    "field": "rent",
+    "tract_value": 1650.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014087003",
+    "field": "rent",
+    "tract_value": 1650.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014087004",
+    "field": "rent",
+    "tract_value": 1650.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014087005",
+    "field": "hv",
+    "tract_value": 699900.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014224001",
+    "field": "hv",
+    "tract_value": 1184100.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014224002",
+    "field": "hv",
+    "tract_value": 1184100.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014507412",
+    "field": "rent",
+    "tract_value": 1766.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014507422",
+    "field": "rent",
+    "tract_value": 3449.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014381002",
+    "field": "rent",
+    "tract_value": 3501.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014381004",
+    "field": "rent",
+    "tract_value": 3501.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014381006",
+    "field": "hv",
+    "tract_value": 962700.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014381006",
+    "field": "rent",
+    "tract_value": 3501.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014050001",
+    "field": "rent",
+    "tract_value": 2088.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014060003",
+    "field": "hv",
+    "tract_value": 697100.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014060003",
+    "field": "rent",
+    "tract_value": 1600.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014279004",
+    "field": "hv",
+    "tract_value": 1380200.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014280001",
+    "field": "hv",
+    "tract_value": 750000.0
+   },
+   {
+    "file": "bundle_06001.json.gz",
+    "county": "Alameda County",
+    "gid": "060014281002",
+    "field": "rent",
+    "tract_value": 2092.0
+   }
+  ]
+ },
+ "gtfs": {
+  "counties": [
+   "bundle_01101.json.gz",
+   "bundle_16001.json.gz",
+   "bundle_18003.json.gz",
+   "bundle_31055.json.gz",
+   "bundle_39113.json.gz",
+   "bundle_51810.json.gz"
+  ],
+  "block_groups": 60,
+  "compared": 60,
+  "exact": 60,
+  "within_1_bus_per_hour": 60,
+  "bundle_unknown_bt": 0,
+  "method_note": "Re-check applies the pipeline's rule to the current MobilityData feed; untimed stop times are skipped (the pipeline interpolates them) and the stop centre is the Census polygon centroid (the pipeline uses the land-clipped centroid), so small differences mix schedule drift with method.",
+  "rows": [
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "feed": "338",
+    "feed_last_modified": "Fri, 09 Jan 2026 01:35:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "011010021002",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "feed": "338",
+    "feed_last_modified": "Fri, 09 Jan 2026 01:35:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "011010022012",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "feed": "338",
+    "feed_last_modified": "Fri, 09 Jan 2026 01:35:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "011010029011",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "feed": "338",
+    "feed_last_modified": "Fri, 09 Jan 2026 01:35:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "011010033014",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "feed": "338",
+    "feed_last_modified": "Fri, 09 Jan 2026 01:35:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "011010054023",
+    "bundle_bt": 0.5,
+    "recheck_bt": 0.5
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "feed": "338",
+    "feed_last_modified": "Fri, 09 Jan 2026 01:35:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "011010054071",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "feed": "338",
+    "feed_last_modified": "Fri, 09 Jan 2026 01:35:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "011010054111",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "feed": "338",
+    "feed_last_modified": "Fri, 09 Jan 2026 01:35:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "011010054112",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "feed": "338",
+    "feed_last_modified": "Fri, 09 Jan 2026 01:35:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "011010054121",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "feed": "338",
+    "feed_last_modified": "Fri, 09 Jan 2026 01:35:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "011010056131",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "county": "Ada County",
+    "feed": "142",
+    "feed_last_modified": "Thu, 15 Oct 2026 01:38:46 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "160010005021",
+    "bundle_bt": 4.0,
+    "recheck_bt": 4.0
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "county": "Ada County",
+    "feed": "142",
+    "feed_last_modified": "Thu, 15 Oct 2026 01:38:46 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "160010016003",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "county": "Ada County",
+    "feed": "142",
+    "feed_last_modified": "Thu, 15 Oct 2026 01:38:46 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "160010017022",
+    "bundle_bt": 4.0,
+    "recheck_bt": 4.0
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "county": "Ada County",
+    "feed": "142",
+    "feed_last_modified": "Thu, 15 Oct 2026 01:38:46 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "160010023142",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "county": "Ada County",
+    "feed": "142",
+    "feed_last_modified": "Thu, 15 Oct 2026 01:38:46 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "160010024141",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "county": "Ada County",
+    "feed": "142",
+    "feed_last_modified": "Thu, 15 Oct 2026 01:38:46 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "160010024191",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "county": "Ada County",
+    "feed": "142",
+    "feed_last_modified": "Thu, 15 Oct 2026 01:38:46 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "160010102242",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "county": "Ada County",
+    "feed": "142",
+    "feed_last_modified": "Thu, 15 Oct 2026 01:38:46 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "160010102343",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "county": "Ada County",
+    "feed": "142",
+    "feed_last_modified": "Thu, 15 Oct 2026 01:38:46 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "160010103532",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_16001.json.gz",
+    "county": "Ada County",
+    "feed": "142",
+    "feed_last_modified": "Thu, 15 Oct 2026 01:38:46 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "160010104102",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "county": "Allen County",
+    "feed": "2266",
+    "feed_last_modified": "Wed, 02 Sep 2026 01:26:22 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "180030007041",
+    "bundle_bt": 1.0,
+    "recheck_bt": 1.0
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "county": "Allen County",
+    "feed": "2266",
+    "feed_last_modified": "Wed, 02 Sep 2026 01:26:22 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "180030011001",
+    "bundle_bt": 1.0,
+    "recheck_bt": 1.0
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "county": "Allen County",
+    "feed": "2266",
+    "feed_last_modified": "Wed, 02 Sep 2026 01:26:22 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "180030016002",
+    "bundle_bt": 2.0,
+    "recheck_bt": 2.0
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "county": "Allen County",
+    "feed": "2266",
+    "feed_last_modified": "Wed, 02 Sep 2026 01:26:22 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "180030034001",
+    "bundle_bt": 1.0,
+    "recheck_bt": 1.0
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "county": "Allen County",
+    "feed": "2266",
+    "feed_last_modified": "Wed, 02 Sep 2026 01:26:22 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "180030041033",
+    "bundle_bt": 1.0,
+    "recheck_bt": 1.0
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "county": "Allen County",
+    "feed": "2266",
+    "feed_last_modified": "Wed, 02 Sep 2026 01:26:22 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "180030106022",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "county": "Allen County",
+    "feed": "2266",
+    "feed_last_modified": "Wed, 02 Sep 2026 01:26:22 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "180030108191",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "county": "Allen County",
+    "feed": "2266",
+    "feed_last_modified": "Wed, 02 Sep 2026 01:26:22 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "180030112051",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "county": "Allen County",
+    "feed": "2266",
+    "feed_last_modified": "Wed, 02 Sep 2026 01:26:22 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "180030118013",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_18003.json.gz",
+    "county": "Allen County",
+    "feed": "2266",
+    "feed_last_modified": "Wed, 02 Sep 2026 01:26:22 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "180039800021",
+    "bundle_bt": 1.0,
+    "recheck_bt": 1.0
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "feed": "2261",
+    "feed_last_modified": "Thu, 22 Oct 2026 01:00:03 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "310550006001",
+    "bundle_bt": 9.0,
+    "recheck_bt": 9.0
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "feed": "2261",
+    "feed_last_modified": "Thu, 22 Oct 2026 01:00:03 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "310550032002",
+    "bundle_bt": 4.0,
+    "recheck_bt": 4.0
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "feed": "2261",
+    "feed_last_modified": "Thu, 22 Oct 2026 01:00:03 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "310550036001",
+    "bundle_bt": 2.0,
+    "recheck_bt": 2.0
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "feed": "2261",
+    "feed_last_modified": "Thu, 22 Oct 2026 01:00:03 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "310550043002",
+    "bundle_bt": 2.0,
+    "recheck_bt": 2.0
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "feed": "2261",
+    "feed_last_modified": "Thu, 22 Oct 2026 01:00:03 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "310550068031",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "feed": "2261",
+    "feed_last_modified": "Thu, 22 Oct 2026 01:00:03 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "310550069052",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "feed": "2261",
+    "feed_last_modified": "Thu, 22 Oct 2026 01:00:03 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "310550074241",
+    "bundle_bt": 4.0,
+    "recheck_bt": 4.0
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "feed": "2261",
+    "feed_last_modified": "Thu, 22 Oct 2026 01:00:03 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "310550075041",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "feed": "2261",
+    "feed_last_modified": "Thu, 22 Oct 2026 01:00:03 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "310550075201",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "feed": "2261",
+    "feed_last_modified": "Thu, 22 Oct 2026 01:00:03 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "310550075202",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "feed": "403",
+    "feed_last_modified": "Thu, 12 Nov 2026 00:32:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-18",
+    "gid": "391130025001",
+    "bundle_bt": 1.5,
+    "recheck_bt": 1.5
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "feed": "403",
+    "feed_last_modified": "Thu, 12 Nov 2026 00:32:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-18",
+    "gid": "391130042003",
+    "bundle_bt": 2.0,
+    "recheck_bt": 2.0
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "feed": "403",
+    "feed_last_modified": "Thu, 12 Nov 2026 00:32:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-18",
+    "gid": "391130203003",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "feed": "403",
+    "feed_last_modified": "Thu, 12 Nov 2026 00:32:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-18",
+    "gid": "391130206011",
+    "bundle_bt": 1.0,
+    "recheck_bt": 1.0
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "feed": "403",
+    "feed_last_modified": "Thu, 12 Nov 2026 00:32:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-18",
+    "gid": "391130213013",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "feed": "403",
+    "feed_last_modified": "Thu, 12 Nov 2026 00:32:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-18",
+    "gid": "391131101001",
+    "bundle_bt": 2.0,
+    "recheck_bt": 2.0
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "feed": "403",
+    "feed_last_modified": "Thu, 12 Nov 2026 00:32:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-18",
+    "gid": "391131102012",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "feed": "403",
+    "feed_last_modified": "Thu, 12 Nov 2026 00:32:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-18",
+    "gid": "391131102013",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "feed": "403",
+    "feed_last_modified": "Thu, 12 Nov 2026 00:32:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-18",
+    "gid": "391131201031",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "feed": "403",
+    "feed_last_modified": "Thu, 12 Nov 2026 00:32:02 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-18",
+    "gid": "391131201032",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "feed": "473",
+    "feed_last_modified": "Wed, 28 Oct 2026 00:39:29 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "518100408024",
+    "bundle_bt": 1.0,
+    "recheck_bt": 1.0
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "feed": "473",
+    "feed_last_modified": "Wed, 28 Oct 2026 00:39:29 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "518100424001",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "feed": "473",
+    "feed_last_modified": "Wed, 28 Oct 2026 00:39:29 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "518100428011",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "feed": "473",
+    "feed_last_modified": "Wed, 28 Oct 2026 00:39:29 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "518100454302",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "feed": "473",
+    "feed_last_modified": "Wed, 28 Oct 2026 00:39:29 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "518100462073",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "feed": "473",
+    "feed_last_modified": "Wed, 28 Oct 2026 00:39:29 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "518100462112",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "feed": "473",
+    "feed_last_modified": "Wed, 28 Oct 2026 00:39:29 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "518100462113",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "feed": "473",
+    "feed_last_modified": "Wed, 28 Oct 2026 00:39:29 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "518100462163",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "feed": "473",
+    "feed_last_modified": "Wed, 28 Oct 2026 00:39:29 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "518100462202",
+    "bundle_bt": 1.0,
+    "recheck_bt": 1.0
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "feed": "473",
+    "feed_last_modified": "Wed, 28 Oct 2026 00:39:29 GMT",
+    "bundle_weekday": "2026-11-04",
+    "recheck_weekday": "2026-11-04",
+    "gid": "518100462223",
+    "bundle_bt": 0,
+    "recheck_bt": 0.0
+   }
+  ]
+ },
+ "facilities": {
+  "counties": [
+   "bundle_01101.json.gz",
+   "bundle_04019.json.gz",
+   "bundle_13121.json.gz",
+   "bundle_17031.json.gz",
+   "bundle_26163.json.gz",
+   "bundle_31055.json.gz",
+   "bundle_36061.json.gz",
+   "bundle_39113.json.gz",
+   "bundle_41051.json.gz",
+   "bundle_48453.json.gz",
+   "bundle_51810.json.gz",
+   "bundle_53033.json.gz"
+  ],
+  "block_groups": 120,
+  "school": {
+   "compared": 120,
+   "within_25m": 116,
+   "within_100m": 116,
+   "bundle_farther_by_100m_plus": 2,
+   "bundle_nearer_by_100m_plus": 2,
+   "bundle_null": 0,
+   "now_null": 0
+  },
+  "ev_dc_fast": {
+   "compared": 120,
+   "within_25m": 111,
+   "within_100m": 116,
+   "bundle_farther_by_100m_plus": 2,
+   "bundle_nearer_by_100m_plus": 2,
+   "bundle_null": 0,
+   "now_null": 0
+  },
+  "note": "Reference point is the Census polygon's representative point (the pipeline's rule, without its water clipping). A charger opened since the build makes the bundle farther; one closed or delisted makes it nearer.",
+  "rows": [
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "gid": "011010021002",
+    "school_bundle_m": 1658.1,
+    "school_now_m": 1664.9,
+    "school_now": "Johnson Elementary School",
+    "ev_bundle_m": 5000,
+    "ev_now_m": 4987,
+    "ev_now": "Stivers Ford of Montgomery"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "gid": "011010022012",
+    "school_bundle_m": 1234.5,
+    "school_now_m": 1233.0,
+    "school_now": "Davis Elementary School",
+    "ev_bundle_m": 5225,
+    "ev_now_m": 5225,
+    "ev_now": "Montgomery, AL - Mobile Hwy - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "gid": "011010029011",
+    "school_bundle_m": 1001.3,
+    "school_now_m": 1006.4,
+    "school_now": "Montgomery Preparatory Academy for Career Technologies",
+    "ev_bundle_m": 995,
+    "ev_now_m": 998,
+    "ev_now": "Stivers Ford of Montgomery"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "gid": "011010033014",
+    "school_bundle_m": 858.8,
+    "school_now_m": 858.0,
+    "school_now": "Dannelly Elementary School",
+    "ev_bundle_m": 2406,
+    "ev_now_m": 2414,
+    "ev_now": "Stivers Ford of Montgomery"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "gid": "011010054023",
+    "school_bundle_m": 1283.2,
+    "school_now_m": 1288.1,
+    "school_now": "Dozier Elementary School",
+    "ev_bundle_m": 1232,
+    "ev_now_m": 1238,
+    "ev_now": "Jack Ingram Motors"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "gid": "011010054071",
+    "school_bundle_m": 1961.0,
+    "school_now_m": 1971.6,
+    "school_now": "Halcyon Elementary School",
+    "ev_bundle_m": 1009,
+    "ev_now_m": 1014,
+    "ev_now": "Montgomery, AL - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "gid": "011010054111",
+    "school_bundle_m": 1394.5,
+    "school_now_m": 1392.8,
+    "school_now": "Halcyon Elementary School",
+    "ev_bundle_m": 1846,
+    "ev_now_m": 1852,
+    "ev_now": "Montgomery, AL - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "gid": "011010054112",
+    "school_bundle_m": 1967.8,
+    "school_now_m": 1962.3,
+    "school_now": "Halcyon Elementary School",
+    "ev_bundle_m": 2023,
+    "ev_now_m": 2022,
+    "ev_now": "Montgomery, AL - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "gid": "011010054121",
+    "school_bundle_m": 1775.1,
+    "school_now_m": 1770.7,
+    "school_now": "Halcyon Elementary School",
+    "ev_bundle_m": 1882,
+    "ev_now_m": 1888,
+    "ev_now": "Shell Montgomery Gas Station"
+   },
+   {
+    "file": "bundle_01101.json.gz",
+    "county": "Montgomery County",
+    "gid": "011010056131",
+    "school_bundle_m": 1966.2,
+    "school_now_m": 1966.4,
+    "school_now": "Fitzpatrick Elementary School",
+    "ev_bundle_m": 4237,
+    "ev_now_m": 4256,
+    "ev_now": "Stivers Ford of Montgomery"
+   },
+   {
+    "file": "bundle_04019.json.gz",
+    "county": "Pima County",
+    "gid": "040190016002",
+    "school_bundle_m": 511.0,
+    "school_now_m": 509.8,
+    "school_now": "Southern Arizona Community Academy",
+    "ev_bundle_m": 4773,
+    "ev_now_m": 4780,
+    "ev_now": "ADOA TUCSON FC"
+   },
+   {
+    "file": "bundle_04019.json.gz",
+    "county": "Pima County",
+    "gid": "040190022012",
+    "school_bundle_m": 820.5,
+    "school_now_m": 822.2,
+    "school_now": "PPEP TEC - Celestino Fernandez Learning Center",
+    "ev_bundle_m": 1045,
+    "ev_now_m": 1044,
+    "ev_now": "Rudy's Country Store & BBQ - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_04019.json.gz",
+    "county": "Pima County",
+    "gid": "040190025081",
+    "school_bundle_m": 690.4,
+    "school_now_m": 689.8,
+    "school_now": "PCJTED - Aztec Middle College Desert Vista",
+    "ev_bundle_m": 1530,
+    "ev_now_m": 1530,
+    "ev_now": "FasCharge 4614 Fast Market Valero Tucson Drexel Rd"
+   },
+   {
+    "file": "bundle_04019.json.gz",
+    "county": "Pima County",
+    "gid": "040190031031",
+    "school_bundle_m": 734.1,
+    "school_now_m": 732.4,
+    "school_now": "Desert Sky Community School",
+    "ev_bundle_m": 2334,
+    "ev_now_m": 2341,
+    "ev_now": "5151 E Broadway"
+   },
+   {
+    "file": "bundle_04019.json.gz",
+    "county": "Pima County",
+    "gid": "040190040751",
+    "school_bundle_m": 526.3,
+    "school_now_m": 529.4,
+    "school_now": "Arizona Online Charter School",
+    "ev_bundle_m": 3003,
+    "ev_now_m": 3000,
+    "ev_now": "GPM INVESTMENTS 4615 DC2"
+   },
+   {
+    "file": "bundle_04019.json.gz",
+    "county": "Pima County",
+    "gid": "040190041262",
+    "school_bundle_m": 778.9,
+    "school_now_m": 779.8,
+    "school_now": "Sycamore Elementary School",
+    "ev_bundle_m": 14707,
+    "ev_now_m": 14788,
+    "ev_now": "Tucson, AZ - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_04019.json.gz",
+    "county": "Pima County",
+    "gid": "040190043131",
+    "school_bundle_m": 2586.6,
+    "school_now_m": 2590.3,
+    "school_now": "Altar Valley Middle School",
+    "ev_bundle_m": 27959,
+    "ev_now_m": 27956,
+    "ev_now": "FasCharge 4614 Fast Market Valero Tucson Drexel Rd"
+   },
+   {
+    "file": "bundle_04019.json.gz",
+    "county": "Pima County",
+    "gid": "040190045143",
+    "school_bundle_m": 509.0,
+    "school_now_m": 509.8,
+    "school_now": "Academy of Math and Science",
+    "ev_bundle_m": 487,
+    "ev_now_m": 490,
+    "ev_now": "FasCharge 4611 Fast Market Valero Tucson Prince Rd"
+   },
+   {
+    "file": "bundle_04019.json.gz",
+    "county": "Pima County",
+    "gid": "040190046321",
+    "school_bundle_m": 2040.2,
+    "school_now_m": 2034.7,
+    "school_now": "Ironwood Elementary School",
+    "ev_bundle_m": 4757,
+    "ev_now_m": 6030,
+    "ev_now": "Target Tucson #T0854"
+   },
+   {
+    "file": "bundle_04019.json.gz",
+    "county": "Pima County",
+    "gid": "040190047152",
+    "school_bundle_m": 2045.5,
+    "school_now_m": 2044.7,
+    "school_now": "Coronado K-8 School",
+    "ev_bundle_m": 1659,
+    "ev_now_m": 1653,
+    "ev_now": "GPM INVESTMENTS 4613 DC2"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "county": "Fulton County",
+    "gid": "131210001003",
+    "school_bundle_m": 245.0,
+    "school_now_m": 246.2,
+    "school_now": "Morningside Elementary School",
+    "ev_bundle_m": 1858,
+    "ev_now_m": 1858,
+    "ev_now": "Kroger 298 (Atlanta, GA)"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "county": "Fulton County",
+    "gid": "131210004002",
+    "school_bundle_m": 969.5,
+    "school_now_m": 973.3,
+    "school_now": "Midtown High School",
+    "ev_bundle_m": 1530,
+    "ev_now_m": 1538,
+    "ev_now": "Kroger 298 (Atlanta, GA)"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "county": "Fulton County",
+    "gid": "131210041003",
+    "school_bundle_m": 730.6,
+    "school_now_m": 731.8,
+    "school_now": "Herman J. Russell West End Academy",
+    "ev_bundle_m": 4566,
+    "ev_now_m": 4569,
+    "ev_now": "GEORGIA STATE CPE250 2"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "county": "Fulton County",
+    "gid": "131210101211",
+    "school_bundle_m": 1917.8,
+    "school_now_m": 1923.2,
+    "school_now": "Lake Forest Elementary",
+    "ev_bundle_m": 2908,
+    "ev_now_m": 2900,
+    "ev_now": "Target Atlanta #T2036"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "county": "Fulton County",
+    "gid": "131210101272",
+    "school_bundle_m": 959.4,
+    "school_now_m": 965.0,
+    "school_now": "North Springs High School",
+    "ev_bundle_m": 1414,
+    "ev_now_m": 1423,
+    "ev_now": "FPC Trowbridge-Trowbridge Crossing (Sandy Springs, GA)"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "county": "Fulton County",
+    "gid": "131210103052",
+    "school_bundle_m": 1432.2,
+    "school_now_m": 1438.1,
+    "school_now": "Sandtown Middle School",
+    "ev_bundle_m": 5776,
+    "ev_now_m": 5791,
+    "ev_now": "East Point, GA - North Commerce Dr - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "county": "Fulton County",
+    "gid": "131210105331",
+    "school_bundle_m": 224.1,
+    "school_now_m": 225.1,
+    "school_now": "Oakley Elementary School",
+    "ev_bundle_m": 797,
+    "ev_now_m": 798,
+    "ev_now": "Jaguar LandRover South Atlanta"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "county": "Fulton County",
+    "gid": "131210114191",
+    "school_bundle_m": 873.0,
+    "school_now_m": 877.4,
+    "school_now": "Vickery Mill Elementary",
+    "ev_bundle_m": 2947,
+    "ev_now_m": 2063,
+    "ev_now": "Walmart EV Charging"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "county": "Fulton County",
+    "gid": "131210114323",
+    "school_bundle_m": 822.6,
+    "school_now_m": 821.5,
+    "school_now": "Holcomb Bridge Middle School",
+    "ev_bundle_m": 1031,
+    "ev_now_m": 1037,
+    "ev_now": "Alpharetta, GA - Holcomb Bridge Road - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_13121.json.gz",
+    "county": "Fulton County",
+    "gid": "131210116273",
+    "school_bundle_m": 1355.6,
+    "school_now_m": 1085.6,
+    "school_now": "New Life Academy of Excellence",
+    "ev_bundle_m": 2102,
+    "ev_now_m": 2108,
+    "ev_now": "Duluth, GA - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_17031.json.gz",
+    "county": "Cook County",
+    "gid": "170310501001",
+    "school_bundle_m": 436.8,
+    "school_now_m": 437.1,
+    "school_now": "Ravenswood Elem School",
+    "ev_bundle_m": 2055,
+    "ev_now_m": 2062,
+    "ev_now": "Jewel-Osco"
+   },
+   {
+    "file": "bundle_17031.json.gz",
+    "county": "Cook County",
+    "gid": "170310633032",
+    "school_bundle_m": 1296.0,
+    "school_now_m": 1295.7,
+    "school_now": "Alcott Elem School",
+    "ev_bundle_m": 1114,
+    "ev_now_m": 1112,
+    "ev_now": "Chicago, IL - North Broadway - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_17031.json.gz",
+    "county": "Cook County",
+    "gid": "170310813005",
+    "school_bundle_m": 669.7,
+    "school_now_m": 668.8,
+    "school_now": "Ogden Elem School",
+    "ev_bundle_m": 712,
+    "ev_now_m": 713,
+    "ev_now": "Whole Foods Chicago & State"
+   },
+   {
+    "file": "bundle_17031.json.gz",
+    "county": "Cook County",
+    "gid": "170311610001",
+    "school_bundle_m": 151.7,
+    "school_now_m": 152.5,
+    "school_now": "Disney II Elem School",
+    "ev_bundle_m": 2030,
+    "ev_now_m": 2033,
+    "ev_now": "Shell N Kimball Ave"
+   },
+   {
+    "file": "bundle_17031.json.gz",
+    "county": "Cook County",
+    "gid": "170314911002",
+    "school_bundle_m": 487.4,
+    "school_now_m": 489.4,
+    "school_now": "Dunne Technology Acad Elem Sch",
+    "ev_bundle_m": 2834,
+    "ev_now_m": 2844,
+    "ev_now": "Marshfield Plaza (Chicago, IL)"
+   },
+   {
+    "file": "bundle_17031.json.gz",
+    "county": "Cook County",
+    "gid": "170316606005",
+    "school_bundle_m": 414.7,
+    "school_now_m": 416.2,
+    "school_now": "Marquette Elem School",
+    "ev_bundle_m": 3485,
+    "ev_now_m": 3492,
+    "ev_now": "Little Miss Lightning - 4532 W 55th St, Chicago, IL"
+   },
+   {
+    "file": "bundle_17031.json.gz",
+    "county": "Cook County",
+    "gid": "170318041051",
+    "school_bundle_m": 1123.8,
+    "school_now_m": 1128.6,
+    "school_now": "Thomas Jefferson Elem School",
+    "ev_bundle_m": 5195,
+    "ev_now_m": 5201,
+    "ev_now": "SCHAUMBURG FORD CL2 PL2"
+   },
+   {
+    "file": "bundle_17031.json.gz",
+    "county": "Cook County",
+    "gid": "170318105015",
+    "school_bundle_m": 736.2,
+    "school_now_m": 734.9,
+    "school_now": "J Giles Elem School",
+    "ev_bundle_m": 1517,
+    "ev_now_m": 1513,
+    "ev_now": "Chase Bank - 4223 N Harlem Ave"
+   },
+   {
+    "file": "bundle_17031.json.gz",
+    "county": "Cook County",
+    "gid": "170318241074",
+    "school_bundle_m": 438.4,
+    "school_now_m": 440.9,
+    "school_now": "Arnold W Kruse Ed Center",
+    "ev_bundle_m": 1266,
+    "ev_now_m": 1271,
+    "ev_now": "FAMILY HYUNDAI STATION 2"
+   },
+   {
+    "file": "bundle_17031.json.gz",
+    "county": "Cook County",
+    "gid": "170318382001",
+    "school_bundle_m": 306.8,
+    "school_now_m": 306.6,
+    "school_now": "Irving Elem School",
+    "ev_bundle_m": 1188,
+    "ev_now_m": 1189,
+    "ev_now": "Ashland & Roosevelt"
+   },
+   {
+    "file": "bundle_26163.json.gz",
+    "county": "Wayne County",
+    "gid": "261635058003",
+    "school_bundle_m": 966.2,
+    "school_now_m": 965.7,
+    "school_now": "Oakland International Academy  K1",
+    "ev_bundle_m": 3552,
+    "ev_now_m": 3563,
+    "ev_now": "MCorp M22 Detroit BP"
+   },
+   {
+    "file": "bundle_26163.json.gz",
+    "county": "Wayne County",
+    "gid": "261635114001",
+    "school_bundle_m": 966.1,
+    "school_now_m": 971.6,
+    "school_now": "Frederick Douglass Academy for Young Men",
+    "ev_bundle_m": 3381,
+    "ev_now_m": 3397,
+    "ev_now": "MC3"
+   },
+   {
+    "file": "bundle_26163.json.gz",
+    "county": "Wayne County",
+    "gid": "261635167002",
+    "school_bundle_m": 334.7,
+    "school_now_m": 334.5,
+    "school_now": "University Preparatory Science and Math  Elementary",
+    "ev_bundle_m": 389,
+    "ev_now_m": 391,
+    "ev_now": "Coleman A. Young Recreat"
+   },
+   {
+    "file": "bundle_26163.json.gz",
+    "county": "Wayne County",
+    "gid": "261635264002",
+    "school_bundle_m": 533.5,
+    "school_now_m": 536.5,
+    "school_now": "Munger ElementaryMiddle School",
+    "ev_bundle_m": 882,
+    "ev_now_m": 883,
+    "ev_now": "Marathon Livernois"
+   },
+   {
+    "file": "bundle_26163.json.gz",
+    "county": "Wayne County",
+    "gid": "261635523002",
+    "school_bundle_m": 86.2,
+    "school_now_m": 86.5,
+    "school_now": "Dickinson East Elementary School",
+    "ev_bundle_m": 4105,
+    "ev_now_m": 4129,
+    "ev_now": "MCorp M22 Detroit BP"
+   },
+   {
+    "file": "bundle_26163.json.gz",
+    "county": "Wayne County",
+    "gid": "261635580002",
+    "school_bundle_m": 511.5,
+    "school_now_m": 510.1,
+    "school_now": "Kennedy Elementary School",
+    "ev_bundle_m": 2006,
+    "ev_now_m": 2017,
+    "ev_now": "Bill Brown Ford Livonia"
+   },
+   {
+    "file": "bundle_26163.json.gz",
+    "county": "Wayne County",
+    "gid": "261635616002",
+    "school_bundle_m": 303.5,
+    "school_now_m": 302.7,
+    "school_now": "Farrand Elementary School",
+    "ev_bundle_m": 2043,
+    "ev_now_m": 2055,
+    "ev_now": "Blackwell Ford Inc"
+   },
+   {
+    "file": "bundle_26163.json.gz",
+    "county": "Wayne County",
+    "gid": "261635741001",
+    "school_bundle_m": 444.4,
+    "school_now_m": 445.5,
+    "school_now": "Geer Park Elementary School",
+    "ev_bundle_m": 317,
+    "ev_now_m": 317,
+    "ev_now": "Bint Jebail Cultural Center"
+   },
+   {
+    "file": "bundle_26163.json.gz",
+    "county": "Wayne County",
+    "gid": "261635791002",
+    "school_bundle_m": 234.1,
+    "school_now_m": 235.0,
+    "school_now": "River Rouge Stem Academy at Dunn",
+    "ev_bundle_m": 5476,
+    "ev_now_m": 5495,
+    "ev_now": "I 75 and Clark St Sunoco"
+   },
+   {
+    "file": "bundle_26163.json.gz",
+    "county": "Wayne County",
+    "gid": "261635880011",
+    "school_bundle_m": 2101.9,
+    "school_now_m": 2104.2,
+    "school_now": "Tyler Road Elementary School",
+    "ev_bundle_m": 949,
+    "ev_now_m": 950,
+    "ev_now": "Corner Shop Mobil"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "gid": "310550006001",
+    "school_bundle_m": 339.4,
+    "school_now_m": 340.8,
+    "school_now": "INTEGRATED LEARNING PROGRAM AT SARATOGA",
+    "ev_bundle_m": 3748,
+    "ev_now_m": 3743,
+    "ev_now": "Walmart EV Charging"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "gid": "310550032002",
+    "school_bundle_m": 259.7,
+    "school_now_m": 260.2,
+    "school_now": "SOUTH HIGH SCHOOL",
+    "ev_bundle_m": 820,
+    "ev_now_m": 822,
+    "ev_now": "MCC SOC AUTO BLDG"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "gid": "310550036001",
+    "school_bundle_m": 705.3,
+    "school_now_m": 705.3,
+    "school_now": "BEALS ELEMENTARY SCHOOL",
+    "ev_bundle_m": 4499,
+    "ev_now_m": 4517,
+    "ev_now": "DEFIANCE H-D DCFAST HOG"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "gid": "310550043002",
+    "school_bundle_m": 730.7,
+    "school_now_m": 731.0,
+    "school_now": "TRANSITION PROGRAM AT UNMC NEBRASKA MEDICINE",
+    "ev_bundle_m": 2782,
+    "ev_now_m": 2783,
+    "ev_now": "OMAHA OMAHA ILOT 3-1"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "gid": "310550068031",
+    "school_bundle_m": 822.9,
+    "school_now_m": 823.3,
+    "school_now": "BEVERIDGE MAGNET MIDDLE SCHOOL",
+    "ev_bundle_m": 1611,
+    "ev_now_m": 1617,
+    "ev_now": "Westwood Plaza"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "gid": "310550069052",
+    "school_bundle_m": 199.8,
+    "school_now_m": 199.9,
+    "school_now": "PADDOCK ROAD ELEMENTARY SCHOOL",
+    "ev_bundle_m": 870,
+    "ev_now_m": 875,
+    "ev_now": "Omaha, NE - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "gid": "310550074241",
+    "school_bundle_m": 357.1,
+    "school_now_m": 359.0,
+    "school_now": "EDISON ELEMENTARY SCHOOL",
+    "ev_bundle_m": 3407,
+    "ev_now_m": 3406,
+    "ev_now": "Woodhouse Ford of North Omaha"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "gid": "310550075041",
+    "school_bundle_m": 1980.1,
+    "school_now_m": 1979.4,
+    "school_now": "DOUGLAS CO WEST HIGH SCHOOL",
+    "ev_bundle_m": 14085,
+    "ev_now_m": 14081,
+    "ev_now": "Baxter Ford West Dodge"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "gid": "310550075201",
+    "school_bundle_m": 503.4,
+    "school_now_m": 506.3,
+    "school_now": "MANCHESTER ELEMENTARY SCHOOL",
+    "ev_bundle_m": 901,
+    "ev_now_m": 904,
+    "ev_now": "Walmart EV Charging"
+   },
+   {
+    "file": "bundle_31055.json.gz",
+    "county": "Douglas County",
+    "gid": "310550075202",
+    "school_bundle_m": 108.3,
+    "school_now_m": 108.7,
+    "school_now": "MANCHESTER ELEMENTARY SCHOOL",
+    "ev_bundle_m": 1411,
+    "ev_now_m": 1418,
+    "ev_now": "Walmart EV Charging"
+   },
+   {
+    "file": "bundle_36061.json.gz",
+    "county": "New York County",
+    "gid": "360610022021",
+    "school_bundle_m": 245.4,
+    "school_now_m": 245.4,
+    "school_now": "PS 15 ROBERTO CLEMENTE",
+    "ev_bundle_m": 598,
+    "ev_now_m": 598,
+    "ev_now": "DES - Delancey and Essex Municipal Parking Garage"
+   },
+   {
+    "file": "bundle_36061.json.gz",
+    "county": "New York County",
+    "gid": "360610029011",
+    "school_bundle_m": 282.8,
+    "school_now_m": 284.4,
+    "school_now": "URBAN ASSEMBLY-EARLY COLL HS EMER MD",
+    "ev_bundle_m": 616,
+    "ev_now_m": 618,
+    "ev_now": "New York, NY - Mott Street - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_36061.json.gz",
+    "county": "New York County",
+    "gid": "360610034004",
+    "school_bundle_m": 120.8,
+    "school_now_m": 121.4,
+    "school_now": "EAST SIDE COMMUNITY SCHOOL",
+    "ev_bundle_m": 1317,
+    "ev_now_m": 1323,
+    "ev_now": "DES - Delancey and Essex Municipal Parking Garage"
+   },
+   {
+    "file": "bundle_36061.json.gz",
+    "county": "New York County",
+    "gid": "360610044003",
+    "school_bundle_m": 270.2,
+    "school_now_m": 271.2,
+    "school_now": "CHILDREN'S WORKSHOP SCHOOL (THE)",
+    "ev_bundle_m": 1511,
+    "ev_now_m": 1516,
+    "ev_now": "DES - Delancey and Essex Municipal Parking Garage"
+   },
+   {
+    "file": "bundle_36061.json.gz",
+    "county": "New York County",
+    "gid": "360610072005",
+    "school_bundle_m": 184.5,
+    "school_now_m": 184.5,
+    "school_now": "PS 116 MARY LINDLEY MURRAY",
+    "ev_bundle_m": 1166,
+    "ev_now_m": 1170,
+    "ev_now": "New York, NY - E 47th Street - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_36061.json.gz",
+    "county": "New York County",
+    "gid": "360610144026",
+    "school_bundle_m": 245.1,
+    "school_now_m": 245.1,
+    "school_now": "YORKVILLE COMMUNITY SCHOOL",
+    "ev_bundle_m": 2392,
+    "ev_now_m": 2398,
+    "ev_now": "NYC FLEET DPR_ICAHN_1_L3"
+   },
+   {
+    "file": "bundle_36061.json.gz",
+    "county": "New York County",
+    "gid": "360610156021",
+    "school_bundle_m": 170.1,
+    "school_now_m": 170.7,
+    "school_now": "JUDITH S KAYE SCHOOL (THE)",
+    "ev_bundle_m": 1988,
+    "ev_now_m": 1988,
+    "ev_now": "NYC FLEET DPR_ICAHN_1_L3"
+   },
+   {
+    "file": "bundle_36061.json.gz",
+    "county": "New York County",
+    "gid": "360610166004",
+    "school_bundle_m": 200.7,
+    "school_now_m": 201.2,
+    "school_now": "LEXINGTON ACADEMY (THE)",
+    "ev_bundle_m": 2059,
+    "ev_now_m": 2057,
+    "ev_now": "NYC FLEET DPR_ICAHN_2_L3"
+   },
+   {
+    "file": "bundle_36061.json.gz",
+    "county": "New York County",
+    "gid": "360610233000",
+    "school_bundle_m": 947.7,
+    "school_now_m": 948.0,
+    "school_now": "WILLIAM LYNCH SCHOOL (THE)",
+    "ev_bundle_m": 2314,
+    "ev_now_m": 2325,
+    "ev_now": "BOA Fort Lee Main NJ6-180 (Fort Lee, NJ)"
+   },
+   {
+    "file": "bundle_36061.json.gz",
+    "county": "New York County",
+    "gid": "360610263002",
+    "school_bundle_m": 129.4,
+    "school_now_m": 129.5,
+    "school_now": "PS 115 ALEXANDER HUMBOLDT",
+    "ev_bundle_m": 2706,
+    "ev_now_m": 2701,
+    "ev_now": "BOA Fort Lee Main NJ6-180 (Fort Lee, NJ)"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "gid": "391130025001",
+    "school_bundle_m": 987.8,
+    "school_now_m": 993.3,
+    "school_now": "Kemp Elementary School",
+    "ev_bundle_m": 5225,
+    "ev_now_m": 5221,
+    "ev_now": "Beavercreek, OH - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "gid": "391130042003",
+    "school_bundle_m": 654.6,
+    "school_now_m": 657.8,
+    "school_now": "Wogaman Middle School",
+    "ev_bundle_m": 2682,
+    "ev_now_m": 2683,
+    "ev_now": "QuikTrip 7096 Dayton OH"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "gid": "391130203003",
+    "school_bundle_m": 1229.5,
+    "school_now_m": 1232.2,
+    "school_now": "Julian & Marjorie Lange School Elementary School",
+    "ev_bundle_m": 4399,
+    "ev_now_m": 4412,
+    "ev_now": "Dayton, OH - North Springboro Pike - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "gid": "391130206011",
+    "school_bundle_m": 389.8,
+    "school_now_m": 390.0,
+    "school_now": "Oakview Elementary School",
+    "ev_bundle_m": 4228,
+    "ev_now_m": 4253,
+    "ev_now": "ACURA OF DAYTON AD EXPRESS 250"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "gid": "391130213013",
+    "school_bundle_m": 851.3,
+    "school_now_m": 853.0,
+    "school_now": "Dayton Regional STEM School",
+    "ev_bundle_m": 6853,
+    "ev_now_m": 6883,
+    "ev_now": "Beavercreek, OH - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "gid": "391131101001",
+    "school_bundle_m": 2708.8,
+    "school_now_m": 2716.0,
+    "school_now": "Morton Middle School",
+    "ev_bundle_m": 2574,
+    "ev_now_m": 2566,
+    "ev_now": "Beau Townsend DCFC"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "gid": "391131102012",
+    "school_bundle_m": 1041.0,
+    "school_now_m": 1041.2,
+    "school_now": "Smith Intermediate School",
+    "ev_bundle_m": 3948,
+    "ev_now_m": 3971,
+    "ev_now": "Beau Townsend DCFC"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "gid": "391131102013",
+    "school_bundle_m": 2382.4,
+    "school_now_m": 2387.6,
+    "school_now": "Morton Middle School",
+    "ev_bundle_m": 2616,
+    "ev_now_m": 2609,
+    "ev_now": "Dayton, OH - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "gid": "391131201031",
+    "school_bundle_m": 1027.5,
+    "school_now_m": 1028.1,
+    "school_now": "Northwood Elementary School",
+    "ev_bundle_m": 2159,
+    "ev_now_m": 2169,
+    "ev_now": "Dayton, OH - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_39113.json.gz",
+    "county": "Montgomery County",
+    "gid": "391131201032",
+    "school_bundle_m": 1812.3,
+    "school_now_m": 1812.5,
+    "school_now": "Northwood Elementary School",
+    "ev_bundle_m": 2226,
+    "ev_now_m": 2230,
+    "ev_now": "Dayton, OH - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_41051.json.gz",
+    "county": "Multnomah County",
+    "gid": "410510007021",
+    "school_bundle_m": 794.4,
+    "school_now_m": 799.0,
+    "school_now": "Marysville Elementary School",
+    "ev_bundle_m": 347,
+    "ev_now_m": 347,
+    "ev_now": "PGE EEA DCFC 3"
+   },
+   {
+    "file": "bundle_41051.json.gz",
+    "county": "Multnomah County",
+    "gid": "410510008023",
+    "school_bundle_m": 405.3,
+    "school_now_m": 407.6,
+    "school_now": "Creston Elementary School",
+    "ev_bundle_m": 770,
+    "ev_now_m": 774,
+    "ev_now": "Natural Grocers"
+   },
+   {
+    "file": "bundle_41051.json.gz",
+    "county": "Multnomah County",
+    "gid": "410510011012",
+    "school_bundle_m": 587.6,
+    "school_now_m": 590.6,
+    "school_now": "Buckman Elementary School",
+    "ev_bundle_m": 1825,
+    "ev_now_m": 1824,
+    "ev_now": "PGE - Electric Avenue  - DCFC"
+   },
+   {
+    "file": "bundle_41051.json.gz",
+    "county": "Multnomah County",
+    "gid": "410510015001",
+    "school_bundle_m": 614.5,
+    "school_now_m": 618.1,
+    "school_now": "Atkinson Elementary School",
+    "ev_bundle_m": 1067,
+    "ev_now_m": 1069,
+    "ev_now": "Portland, OR - Southeast Belmont Street - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_41051.json.gz",
+    "county": "Multnomah County",
+    "gid": "410510025013",
+    "school_bundle_m": 502.5,
+    "school_now_m": 504.5,
+    "school_now": "Beverly Cleary School",
+    "ev_bundle_m": 686,
+    "ev_now_m": 690,
+    "ev_now": "New Seasons"
+   },
+   {
+    "file": "bundle_41051.json.gz",
+    "county": "Multnomah County",
+    "gid": "410510059011",
+    "school_bundle_m": 757.5,
+    "school_now_m": 759.4,
+    "school_now": "Portland Village School",
+    "ev_bundle_m": 1804,
+    "ev_now_m": 1812,
+    "ev_now": "Fred Meyer 40 (Portland, OR)"
+   },
+   {
+    "file": "bundle_41051.json.gz",
+    "county": "Multnomah County",
+    "gid": "410510067022",
+    "school_bundle_m": 771.5,
+    "school_now_m": 771.7,
+    "school_now": "Hayhurst Elementary School",
+    "ev_bundle_m": 600,
+    "ev_now_m": 602,
+    "ev_now": "Portland, OR - Southwest Beaverton Hillsdale Highway - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_41051.json.gz",
+    "county": "Multnomah County",
+    "gid": "410510078002",
+    "school_bundle_m": 892.4,
+    "school_now_m": 895.2,
+    "school_now": "Lee Elementary School",
+    "ev_bundle_m": 1389,
+    "ev_now_m": 1397,
+    "ev_now": "WinCo Foods - Portland, 102nd #13"
+   },
+   {
+    "file": "bundle_41051.json.gz",
+    "county": "Multnomah County",
+    "gid": "410510099031",
+    "school_bundle_m": 827.1,
+    "school_now_m": 830.9,
+    "school_now": "Butler Creek Elementary School",
+    "ev_bundle_m": 3767,
+    "ev_now_m": 3772,
+    "ev_now": "Gresham Ford"
+   },
+   {
+    "file": "bundle_41051.json.gz",
+    "county": "Multnomah County",
+    "gid": "410510102003",
+    "school_bundle_m": 1892.6,
+    "school_now_m": 2530.5,
+    "school_now": "Fishers Landing Elementary School",
+    "ev_bundle_m": 1921,
+    "ev_now_m": 2043,
+    "ev_now": "PGE IBEW 48"
+   },
+   {
+    "file": "bundle_48453.json.gz",
+    "county": "Travis County",
+    "gid": "484530006062",
+    "school_bundle_m": 1334.1,
+    "school_now_m": 1342.1,
+    "school_now": "UNIVERSITY OF TEXAS AT AUSTIN H S",
+    "ev_bundle_m": 2249,
+    "ev_now_m": 2262,
+    "ev_now": "PIE AE TRAVIS CO DC 1"
+   },
+   {
+    "file": "bundle_48453.json.gz",
+    "county": "Travis County",
+    "gid": "484530010002",
+    "school_bundle_m": 458.4,
+    "school_now_m": 460.5,
+    "school_now": "MARTIN MIDDLE",
+    "ev_bundle_m": 1020,
+    "ev_now_m": 1023,
+    "ev_now": "PIE AE SALTILLO DCFC 4"
+   },
+   {
+    "file": "bundle_48453.json.gz",
+    "county": "Travis County",
+    "gid": "484530013073",
+    "school_bundle_m": 626.9,
+    "school_now_m": 628.7,
+    "school_now": "DAWSON EL",
+    "ev_bundle_m": 1971,
+    "ev_now_m": 1972,
+    "ev_now": "Austin, TX - South Congress Avenue - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_48453.json.gz",
+    "county": "Travis County",
+    "gid": "484530019111",
+    "school_bundle_m": 1619.6,
+    "school_now_m": 1618.4,
+    "school_now": "BARTON HILLS EL",
+    "ev_bundle_m": 2015,
+    "ev_now_m": 2025,
+    "ev_now": "Austin, TX - South Lamar Boulevard - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_48453.json.gz",
+    "county": "Travis County",
+    "gid": "484530024361",
+    "school_bundle_m": 4730.3,
+    "school_now_m": 4743.6,
+    "school_now": "NEWTON COLLINS EL",
+    "ev_bundle_m": 7091,
+    "ev_now_m": 7115,
+    "ev_now": "Del Valle, TX - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_48453.json.gz",
+    "county": "Travis County",
+    "gid": "484530025003",
+    "school_bundle_m": 1463.6,
+    "school_now_m": 1461.1,
+    "school_now": "DAVIS EL",
+    "ev_bundle_m": 858,
+    "ev_now_m": 856,
+    "ev_now": "11514 Research Blvd"
+   },
+   {
+    "file": "bundle_48453.json.gz",
+    "county": "Travis County",
+    "gid": "484530307003",
+    "school_bundle_m": 1849.9,
+    "school_now_m": 1847.9,
+    "school_now": "BRIDGE POINT EL",
+    "ev_bundle_m": 6657,
+    "ev_now_m": 6676,
+    "ev_now": "Target Austin #T2409"
+   },
+   {
+    "file": "bundle_48453.json.gz",
+    "county": "Travis County",
+    "gid": "484530359001",
+    "school_bundle_m": 9298.0,
+    "school_now_m": 5665.4,
+    "school_now": "DONALD LEWIS HISLE",
+    "ev_bundle_m": 8057,
+    "ev_now_m": 8023,
+    "ev_now": "KOHLS L3 KOHLS LEANDER 1"
+   },
+   {
+    "file": "bundle_48453.json.gz",
+    "county": "Travis County",
+    "gid": "484530402002",
+    "school_bundle_m": 185.3,
+    "school_now_m": 185.8,
+    "school_now": "AUSTIN ACHIEVE NORTHEAST EL",
+    "ev_bundle_m": 1941,
+    "ev_now_m": 1946,
+    "ev_now": "Norwood Plaza"
+   },
+   {
+    "file": "bundle_48453.json.gz",
+    "county": "Travis County",
+    "gid": "484530426001",
+    "school_bundle_m": 920.4,
+    "school_now_m": 918.7,
+    "school_now": "TIMMERMAN EL",
+    "ev_bundle_m": 2617,
+    "ev_now_m": 2609,
+    "ev_now": "15900 N Interstate 35"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "gid": "518100408024",
+    "school_bundle_m": 682.0,
+    "school_now_m": 683.6,
+    "school_now": "Diamond Springs Elementary",
+    "ev_bundle_m": 1247,
+    "ev_now_m": 1254,
+    "ev_now": "SOUTHSIDE H-D DCFAST HOG"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "gid": "518100424001",
+    "school_bundle_m": 621.6,
+    "school_now_m": 624.3,
+    "school_now": "Malibu Elementary",
+    "ev_bundle_m": 1572,
+    "ev_now_m": 1579,
+    "ev_now": "Hall Nissan - Virginia Beach"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "gid": "518100428011",
+    "school_bundle_m": 678.1,
+    "school_now_m": 676.9,
+    "school_now": "Lynnhaven Elementary",
+    "ev_bundle_m": 610,
+    "ev_now_m": 609,
+    "ev_now": "CHECKERED FLAG GUEST PARKING"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "gid": "518100454302",
+    "school_bundle_m": 1378.0,
+    "school_now_m": 1378.5,
+    "school_now": "Holland Elementary",
+    "ev_bundle_m": 2482,
+    "ev_now_m": 2479,
+    "ev_now": "Virginia Beach, VA - Lynnhaven Parkway - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "gid": "518100462073",
+    "school_bundle_m": 834.5,
+    "school_now_m": 837.3,
+    "school_now": "Brandon Middle",
+    "ev_bundle_m": 2581,
+    "ev_now_m": 2578,
+    "ev_now": "SOUTHERN VW VW SERVICE"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "gid": "518100462112",
+    "school_bundle_m": 786.4,
+    "school_now_m": 788.3,
+    "school_now": "Providence Elementary",
+    "ev_bundle_m": 4801,
+    "ev_now_m": 4829,
+    "ev_now": "Checkered Flag Audi"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "gid": "518100462113",
+    "school_bundle_m": 1727.6,
+    "school_now_m": 1731.3,
+    "school_now": "Providence Elementary",
+    "ev_bundle_m": 5145,
+    "ev_now_m": 5138,
+    "ev_now": "SOUTHERN VW VW SERVICE"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "gid": "518100462163",
+    "school_bundle_m": 425.4,
+    "school_now_m": 425.1,
+    "school_now": "Glenwood Elementary",
+    "ev_bundle_m": 4528,
+    "ev_now_m": 4533,
+    "ev_now": "Virginia Beach, VA - Lynnhaven Parkway - Tesla Supercharger"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "gid": "518100462202",
+    "school_bundle_m": 171.0,
+    "school_now_m": 171.8,
+    "school_now": "College Park Elementary",
+    "ev_bundle_m": 1297,
+    "ev_now_m": 1296,
+    "ev_now": "SOUTHERN VW VW SERVICE"
+   },
+   {
+    "file": "bundle_51810.json.gz",
+    "county": "Virginia Beach city",
+    "gid": "518100462223",
+    "school_bundle_m": 1243.6,
+    "school_now_m": 1242.3,
+    "school_now": "Tallwood High",
+    "ev_bundle_m": 5637,
+    "ev_now_m": 5636,
+    "ev_now": "SOUTHERN VW VW SERVICE"
+   },
+   {
+    "file": "bundle_53033.json.gz",
+    "county": "King County",
+    "gid": "530330028002",
+    "school_bundle_m": 670.2,
+    "school_now_m": 669.1,
+    "school_now": "Daniel Bagley Elementary School",
+    "ev_bundle_m": 2129,
+    "ev_now_m": 2148,
+    "ev_now": "EVROADWAY WA-N-COLLEGE01"
+   },
+   {
+    "file": "bundle_53033.json.gz",
+    "county": "King County",
+    "gid": "530330041023",
+    "school_bundle_m": 474.6,
+    "school_now_m": 475.4,
+    "school_now": "Sand Point Elementary",
+    "ev_bundle_m": 2422,
+    "ev_now_m": 2416,
+    "ev_now": "QFC 807 (Seattle, WA)"
+   },
+   {
+    "file": "bundle_53033.json.gz",
+    "county": "King County",
+    "gid": "530330050003",
+    "school_bundle_m": 299.7,
+    "school_now_m": 298.5,
+    "school_now": "Lincoln High School",
+    "ev_bundle_m": 1920,
+    "ev_now_m": 1912,
+    "ev_now": "FRED MEYER 608 (Ballard, WA)"
+   },
+   {
+    "file": "bundle_53033.json.gz",
+    "county": "King County",
+    "gid": "530330073032",
+    "school_bundle_m": 1252.8,
+    "school_now_m": 1248.5,
+    "school_now": "The Center School",
+    "ev_bundle_m": 362,
+    "ev_now_m": 361,
+    "ev_now": "Whole Foods Seattle (Westlake)"
+   },
+   {
+    "file": "bundle_53033.json.gz",
+    "county": "King County",
+    "gid": "530330223002",
+    "school_bundle_m": 1357.5,
+    "school_now_m": 1979.2,
+    "school_now": "Carl Sandburg Elementary",
+    "ev_bundle_m": 4041,
+    "ev_now_m": 3785,
+    "ev_now": "DC CORRIDOR SEATTLE MINI"
+   },
+   {
+    "file": "bundle_53033.json.gz",
+    "county": "King County",
+    "gid": "530330236013",
+    "school_bundle_m": 541.1,
+    "school_now_m": 540.8,
+    "school_now": "International School",
+    "ev_bundle_m": 2004,
+    "ev_now_m": 2006,
+    "ev_now": "Whole Foods Bellevue (BLV)"
+   },
+   {
+    "file": "bundle_53033.json.gz",
+    "county": "King County",
+    "gid": "530330247011",
+    "school_bundle_m": 778.9,
+    "school_now_m": 781.5,
+    "school_now": "Newport Senior High School",
+    "ev_bundle_m": 2708,
+    "ev_now_m": 2702,
+    "ev_now": "Bellevue Nissan"
+   },
+   {
+    "file": "bundle_53033.json.gz",
+    "county": "King County",
+    "gid": "530330295052",
+    "school_bundle_m": 481.1,
+    "school_now_m": 483.6,
+    "school_now": "Kent-Meridian High School",
+    "ev_bundle_m": 964,
+    "ev_now_m": 969,
+    "ev_now": "Kent, WA Rechargery Relay - 104th Ave SE"
+   },
+   {
+    "file": "bundle_53033.json.gz",
+    "county": "King County",
+    "gid": "530330303104",
+    "school_bundle_m": 147.8,
+    "school_now_m": 148.3,
+    "school_now": "Enterprise Elementary School",
+    "ev_bundle_m": 2329,
+    "ev_now_m": 2335,
+    "ev_now": "Walmart 3794 (Federal Way, WA)"
+   },
+   {
+    "file": "bundle_53033.json.gz",
+    "county": "King County",
+    "gid": "530330319062",
+    "school_bundle_m": 1382.0,
+    "school_now_m": 1381.9,
+    "school_now": "Northwood Middle School",
+    "ev_bundle_m": 8583,
+    "ev_now_m": 8633,
+    "ev_now": "Walmart 5073 (Covington, WA)"
+   }
+  ],
+  "findings": {
+   "school_county_edge": "Schools are read with CNTY = the county FIPS (pipeline/fetch_oc.py ~1348), so a nearer school across the county line is ignored: Travis 484530359001 bundle 9,298 m; in-county nearest 9,333 m (Lago Vista Middle); true nearest 5,665 m (Donald Lewis Hisle, Williamson County 48491).",
+   "water_clipping": "Multnomah 410510102003 and King 530330223002 sit on water; the pipeline moves the point onto land, the re-check does not.",
+   "ev_drift": "Pima 040190046321 farther now (a charger delisted), Fulton 131210114191 nearer now (a charger opened)."
+  }
+ },
+ "tree_equity": {
+  "current_release": {
+   "url": "https://tes-app-data-share.s3.amazonaws.com/ne/ne_csv.zip",
+   "zip_member_dates": "2025-07-01",
+   "geography": "2020 Census block groups",
+   "demographics": "ACS 2017-2021"
+  },
+  "bundle_release": {
+   "url": "https://national-tes-data-share.s3.amazonaws.com/national_tes_share/ne.zip.zip",
+   "zip_member_dates": "2021-07-22",
+   "geography": "2010 block groups, area-weighted onto 2020 by the pipeline"
+  },
+  "heat_definition": {
+   "bundle": "2021 avg_temp (average temperature of the block group on a hot summer day) minus the mean avg_temp of the same county's block groups in its urbanized area (pipeline/sources_oc.py tes_by_bg)",
+   "current": "temp_diff: difference between the block group's average heat extremity and the urban-area average (units not stated in the data dictionary)"
+  },
+  "sample": "Douglas County, NE (31055): 487 of 489 block groups present in both",
+  "heat_median_abs_diff": 1.83,
+  "heat_share_diff_gt_1": 0.75,
+  "canopy_gap_median_abs_diff_pts": 1.8,
+  "canopy_gap_share_diff_gt_5pts": 0.23,
+  "note": "Heat compares two different measures, so the difference is not all staleness; canopy gap has the same definition in both releases."
+ }
+}
