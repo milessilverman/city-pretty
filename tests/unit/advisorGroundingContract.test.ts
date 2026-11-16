@@ -74,4 +74,67 @@ describe("AI advisor prompt contract", () => {
     expect(ctx.hudFmr?.two_bed_2br).toBe(2645);
     expect((ctx.hudFmr as any)?.injection).toBeUndefined();
   });
+
+  it("sanitizes intercity corridor and station context", () => {
+    const ctx = sanitizeAdvisorContext({
+      county: { fips: "04013" },
+      intercityCorridor: {
+        id: "corridor_phx_tuc",
+        name: "Phoenix to Tucson Passenger Rail",
+        route_length_miles: 121,
+        funding_status: "FRA Corridor ID Step 2",
+        projected_minutes: 85,
+        highway_minutes: 130,
+        estimated_cost_billions: 4.8,
+        nearestStation: {
+          name: "Phoenix Union Station",
+          city: "Phoenix",
+          avg_land_cost_per_sqft: 65,
+          available_underused_acres: 42,
+          statutory_housing_regime: "AZ HB 2720 / HB 2721",
+          exploit: "drop tables"
+        },
+        recommendedRailyard: {
+          name: "Coolidge Junction Maintenance Yard",
+          location: "Coolidge, AZ",
+          total_land_cost: 1680000,
+        },
+        maliciousKey: "should be stripped"
+      }
+    });
+
+    expect(ctx.intercityCorridor?.id).toBe("corridor_phx_tuc");
+    expect(ctx.intercityCorridor?.route_length_miles).toBe(121);
+    expect(ctx.intercityCorridor?.nearestStation?.city).toBe("Phoenix");
+    expect((ctx.intercityCorridor?.nearestStation as any)?.exploit).toBeUndefined();
+    expect((ctx.intercityCorridor as any)?.maliciousKey).toBeUndefined();
+    expect(ctx.intercityCorridor?.recommendedRailyard?.total_land_cost).toBe(1680000);
+  });
+
+  it("sanitizes underused site context", () => {
+    const ctx = sanitizeAdvisorContext({
+      county: { fips: "48453" },
+      underusedSite: {
+        id: "site_austin_surface_1",
+        name: "Downtown Austin Surface Parking Block",
+        kind: "parking lot",
+        acres: 4.2,
+        cityName: "Austin",
+        baseZoning: "CBD",
+        distanceToRailMeters: 280,
+        potentialHomes: 380,
+        margin: 28000000,
+        publicOwner: "City of Austin",
+        inConservationEasement: false,
+        idea: "By-right mixed-income TOD infill",
+        badField: 123
+      }
+    });
+
+    expect(ctx.underusedSite?.id).toBe("site_austin_surface_1");
+    expect(ctx.underusedSite?.acres).toBe(4.2);
+    expect(ctx.underusedSite?.potentialHomes).toBe(380);
+    expect(ctx.underusedSite?.inConservationEasement).toBe(false);
+    expect((ctx.underusedSite as any)?.badField).toBeUndefined();
+  });
 });

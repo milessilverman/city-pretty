@@ -60,12 +60,51 @@ export interface AdvisorHudFmr {
   source: string | null;
 }
 
+export interface AdvisorIntercityCorridor {
+  id: string | null;
+  name: string | null;
+  route_length_miles: number | null;
+  funding_status: string | null;
+  projected_minutes: number | null;
+  highway_minutes: number | null;
+  estimated_cost_billions: number | null;
+  nearestStation?: {
+    name: string | null;
+    city: string | null;
+    avg_land_cost_per_sqft: number | null;
+    available_underused_acres: number | null;
+    statutory_housing_regime: string | null;
+  } | null;
+  recommendedRailyard?: {
+    name: string | null;
+    location: string | null;
+    total_land_cost: number | null;
+  } | null;
+}
+
+export interface AdvisorUnderusedSite {
+  id: string | null;
+  name: string | null;
+  kind: string | null;
+  acres: number | null;
+  cityName: string | null;
+  baseZoning: string | null;
+  distanceToRailMeters: number | null;
+  potentialHomes: number | null;
+  margin: number | null;
+  publicOwner: string | null;
+  inConservationEasement: boolean | null;
+  idea: string | null;
+}
+
 export interface AdvisorContext {
   county: AdvisorCounty;
   roiMode: string | null;
   blockGroup?: AdvisorBlockGroup;
   parcel?: AdvisorParcel;
   hudFmr?: AdvisorHudFmr | null;
+  intercityCorridor?: AdvisorIntercityCorridor | null;
+  underusedSite?: AdvisorUnderusedSite | null;
 }
 
 // Stable text: keep it free of per-request values so it can be prompt-cached.
@@ -152,6 +191,49 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       three_bed_3br: num(f.three_bed_3br),
       four_bed_4br: num(f.four_bed_4br),
       source: str(f.source, 120),
+    };
+  }
+  if (r.intercityCorridor) {
+    const ic = obj(r.intercityCorridor);
+    const stn = ic.nearestStation ? obj(ic.nearestStation) : null;
+    const yd = ic.recommendedRailyard ? obj(ic.recommendedRailyard) : null;
+    ctx.intercityCorridor = {
+      id: str(ic.id, 40),
+      name: str(ic.name, 100),
+      route_length_miles: num(ic.route_length_miles),
+      funding_status: str(ic.funding_status, 200),
+      projected_minutes: num(ic.projected_minutes),
+      highway_minutes: num(ic.highway_minutes),
+      estimated_cost_billions: num(ic.estimated_cost_billions),
+      nearestStation: stn ? {
+        name: str(stn.name, 80),
+        city: str(stn.city, 60),
+        avg_land_cost_per_sqft: num(stn.avg_land_cost_per_sqft),
+        available_underused_acres: num(stn.available_underused_acres),
+        statutory_housing_regime: str(stn.statutory_housing_regime, 120),
+      } : null,
+      recommendedRailyard: yd ? {
+        name: str(yd.name, 80),
+        location: str(yd.location, 80),
+        total_land_cost: num(yd.total_land_cost),
+      } : null,
+    };
+  }
+  if (r.underusedSite) {
+    const us = obj(r.underusedSite);
+    ctx.underusedSite = {
+      id: str(us.id, 40),
+      name: str(us.name, 100),
+      kind: str(us.kind, 40),
+      acres: num(us.acres),
+      cityName: str(us.cityName, 60),
+      baseZoning: str(us.baseZoning, 40),
+      distanceToRailMeters: num(us.distanceToRailMeters),
+      potentialHomes: num(us.potentialHomes),
+      margin: num(us.margin),
+      publicOwner: str(us.publicOwner, 100),
+      inConservationEasement: bool(us.inConservationEasement),
+      idea: str(us.idea, 300),
     };
   }
   return ctx;

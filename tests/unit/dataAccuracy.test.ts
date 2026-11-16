@@ -414,4 +414,229 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
     expect(txAdu.state_code).toBe("TX");
     expect(txAdu.statute_url).toMatch(/^https?:\/\//);
   });
+
+  it("16. intercity_transit_corridors.json contains verified rail corridors with official FRA/DOT study sources", () => {
+    const filePath = path.join(rootDir, "app/data/intercity_transit_corridors.json");
+    expect(fs.existsSync(filePath)).toBe(true);
+
+    const corridors = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+    expect(Array.isArray(corridors)).toBe(true);
+    expect(corridors.length).toBeGreaterThanOrEqual(4);
+
+    const corridorIds = corridors.map((c: any) => c.id);
+    expect(corridorIds).toContain("corridor_phx_tus");
+    expect(corridorIds).toContain("corridor_atx_sat");
+    expect(corridorIds).toContain("corridor_front_range");
+    expect(corridorIds).toContain("corridor_brightline_west");
+
+    for (const c of corridors) {
+      expect(c.id).toBeTruthy();
+      expect(c.name).toBeTruthy();
+      expect(Array.isArray(c.states)).toBe(true);
+      expect(c.states.length).toBeGreaterThan(0);
+      expect(c.route_length_miles).toBeGreaterThan(0);
+      expect(c.official_study_url).toMatch(/^https?:\/\//);
+      expect(c.source_url).toMatch(/^https?:\/\//);
+      expect(c.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(c.projected_one_way_minutes).toBeGreaterThan(0);
+      expect(c.highway_comparison_minutes).toBeGreaterThan(0);
+      expect(Array.isArray(c.proposed_stations)).toBe(true);
+      expect(c.proposed_stations.length).toBeGreaterThan(0);
+      expect(Array.isArray(c.candidate_railyard_sites)).toBe(true);
+      expect(c.candidate_railyard_sites.length).toBeGreaterThan(0);
+
+      for (const stn of c.proposed_stations) {
+        expect(stn.id).toBeTruthy();
+        expect(stn.name).toBeTruthy();
+        expect(stn.city).toBeTruthy();
+        expect(stn.fips).toMatch(/^\d{5}$/);
+        expect(stn.lat).toBeGreaterThan(20);
+        expect(stn.lng).toBeLessThan(-60);
+        expect(stn.statutory_housing_regime).toBeTruthy();
+      }
+
+      for (const yard of c.candidate_railyard_sites) {
+        expect(yard.id).toBeTruthy();
+        expect(yard.name).toBeTruthy();
+        expect(yard.required_acres).toBeGreaterThan(0);
+        expect(yard.total_land_acquisition_cost).toBeGreaterThan(0);
+        expect(yard.adjacent_mainline).toBeTruthy();
+        expect(yard.siting_recommendation).toBeTruthy();
+      }
+    }
+  });
+
+  it("17. transitCorridorOpportunityEngine evaluates macro corridor viability, station TOD, and railyard economics", async () => {
+    const { evaluateCorridorFeasibility, evaluateStationTODPotential, generateStationInvestmentPlan } = await import("../../src/engines/transitCorridorOpportunityEngine");
+    const filePath = path.join(rootDir, "app/data/intercity_transit_corridors.json");
+    const corridors = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+
+    const phxTuc = corridors.find((c: any) => c.id === "corridor_phx_tus");
+    expect(phxTuc).toBeDefined();
+
+    const evalPhx = evaluateCorridorFeasibility(phxTuc);
+    expect(evalPhx.isViable).toBe(true);
+    expect(evalPhx.travelTimeSavedMinutes).toBe(30); // 115 min hwy vs 85 min rail
+    expect(evalPhx.speedCompetitivenessRatio).toBeGreaterThan(1.2);
+    expect(evalPhx.railyardCostSavingsUsd).toBeGreaterThan(150_000_000); // Coolidge ($1.68M) vs Tempe ($175M)
+    expect(evalPhx.recommendedRailyardSite?.id).toBe("yard_coolidge_junction");
+
+    const austinSa = corridors.find((c: any) => c.id === "corridor_atx_sat");
+    expect(austinSa).toBeDefined();
+    const evalAtx = evaluateCorridorFeasibility(austinSa);
+    expect(evalAtx.isViable).toBe(true);
+    expect(evalAtx.railyardCostSavingsUsd).toBeGreaterThan(150_000_000); // Kyle ($2.7M) vs Austin ($160M)
+
+    // Test Station TOD evaluation
+    const phxStation = phxTuc.proposed_stations.find((s: any) => s.id === "phx_downtown");
+    expect(phxStation).toBeDefined();
+    const todEval = evaluateStationTODPotential(phxStation);
+    expect(todEval.walkshedAcquisitionCostPerAcre).toBe(95 * 43560);
+    expect(todEval.feasibleHousingUnits).toBeGreaterThan(1000);
+    expect(todEval.projectedLandValueUpliftPct).toBe(0.32);
+    expect(todEval.recommendedBikeNetworkMiles).toBeGreaterThan(0);
+    expect(todEval.estimatedBikeNetworkCost).toBeGreaterThan(500_000);
+
+    // Test Capital Allocation Plans
+    // Tier 1: $150k homeowner
+    const plan150k = generateStationInvestmentPlan(phxTuc, phxStation, 150_000);
+    expect(plan150k.tier).toBe("homeowner_single_lot");
+    expect(plan150k.pillars.length).toBeGreaterThanOrEqual(3);
+    expect(plan150k.everySpaceMonetizationStrategy).toContain("EverySpace");
+    expect(plan150k.statutoryPreemptionLeveraged).toContain("AZ HB 2720");
+
+    // Tier 2: $5M syndication
+    const plan5M = generateStationInvestmentPlan(phxTuc, phxStation, 5_000_000);
+    expect(plan5M.tier).toBe("private_syndication");
+    expect(plan5M.budget).toBe(5_000_000);
+    expect(plan5M.pillars.some(p => p.pillar.includes("Bike Spur") || p.pillar.includes("Micro-Mobility"))).toBe(true);
+
+    // Tier 3: $50M institutional P3
+    const plan50M = generateStationInvestmentPlan(phxTuc, phxStation, 50_000_000);
+    expect(plan50M.tier).toBe("institutional_p3_fund");
+    expect(plan50M.budget).toBe(50_000_000);
+    expect(plan50M.pillars.some(p => p.pillar.includes("Transit-Oriented Development") || p.pillar.includes("TOD"))).toBe(true);
+  });
+
+  it("18. funding_programs.json contains verified municipal & state funding programs nationwide", () => {
+    const fundingPath = path.join(rootDir, "app/data/funding_programs.json");
+    const programs = JSON.parse(fs.readFileSync(fundingPath, "utf-8"));
+    expect(programs.length).toBeGreaterThanOrEqual(11);
+
+    const ids = programs.map((p: any) => p.id);
+    expect(ids).toContain("tx_tirz_ch311");
+    expect(ids).toContain("fl_cra_ch163");
+    expect(ids).toContain("co_ura_tif");
+    expect(ids).toContain("il_transit_tif");
+    expect(ids).toContain("az_gplet");
+    expect(ids).toContain("federal_fra_intercity_grant");
+
+    for (const prog of programs) {
+      expect(prog.id).toBeTruthy();
+      expect(prog.program_name).toBeTruthy();
+      expect(prog.administering_agency).toBeTruthy();
+      expect(prog.statutory_citation).toBeTruthy();
+      expect(prog.source_url).toMatch(/^https?:\/\//);
+      expect(prog.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(prog.eligible_improvements.length).toBeGreaterThan(0);
+    }
+  });
+
+  it("19. hud_fair_market_rents.json contains 46 verified major metropolitan markets with FY2026 FMR values", () => {
+    const fmrPath = path.join(rootDir, "app/data/hud_fair_market_rents.json");
+    expect(fs.existsSync(fmrPath)).toBe(true);
+
+    const fmrList = JSON.parse(fs.readFileSync(fmrPath, "utf-8"));
+    expect(Array.isArray(fmrList)).toBe(true);
+    expect(fmrList.length).toBeGreaterThanOrEqual(46);
+
+    const fipsList = fmrList.map((f: any) => f.fips);
+    expect(fipsList).toContain("04013"); // Maricopa AZ (Phoenix)
+    expect(fipsList).toContain("48453"); // Travis TX (Austin)
+    expect(fipsList).toContain("17031"); // Cook IL (Chicago)
+    expect(fipsList).toContain("53033"); // King WA (Seattle)
+    expect(fipsList).toContain("08031"); // Denver CO
+    expect(fipsList).toContain("12086"); // Miami-Dade FL
+    expect(fipsList).toContain("13121"); // Fulton GA (Atlanta)
+    expect(fipsList).toContain("36061"); // New York NY (Manhattan)
+
+    for (const f of fmrList) {
+      expect(f.fips).toMatch(/^\d{5}$/);
+      expect(f.metro_or_county_name).toBeTruthy();
+      expect(f.state_code).toMatch(/^[A-Z]{2}$/);
+      expect(f.zero_bed_eff).toBeGreaterThan(400);
+      expect(f.one_bed_1br).toBeGreaterThan(400);
+      expect(f.two_bed_2br).toBeGreaterThan(f.one_bed_1br);
+      expect(f.three_bed_3br).toBeGreaterThan(f.two_bed_2br);
+      expect(f.four_bed_4br).toBeGreaterThan(f.three_bed_3br);
+      expect(f.source_url).toMatch(/^https?:\/\//);
+      expect(f.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    }
+  });
+
+  it("20. state-housing-laws.json and statutes.json cover nationwide statutory zoning preemptions across 14 states", () => {
+    const statutesPath = path.join(rootDir, "app/data/statutes.json");
+    const stateHousingPath = path.join(rootDir, "app/data/state-housing-laws.json");
+
+    const statutes = JSON.parse(fs.readFileSync(statutesPath, "utf-8"));
+    const stateLaws = JSON.parse(fs.readFileSync(stateHousingPath, "utf-8"));
+
+    expect(statutes.length).toBeGreaterThanOrEqual(20);
+    expect(stateLaws.length).toBeGreaterThanOrEqual(20);
+
+    const statesCovered = new Set(statutes.map((s: any) => s.state_code));
+    expect(statesCovered.has("AZ")).toBe(true);
+    expect(statesCovered.has("CO")).toBe(true);
+    expect(statesCovered.has("MN")).toBe(true);
+    expect(statesCovered.has("MT")).toBe(true);
+    expect(statesCovered.has("UT")).toBe(true);
+    expect(statesCovered.has("WA")).toBe(true);
+    expect(statesCovered.has("OR")).toBe(true);
+    expect(statesCovered.has("CA")).toBe(true);
+    expect(statesCovered.has("TX")).toBe(true);
+    expect(statesCovered.has("FL")).toBe(true);
+
+    const azStarter = statutes.find((s: any) => s.id === "az_hb2720_2721");
+    expect(azStarter).toBeDefined();
+    expect(azStarter.statute_citation).toContain("9-467.04");
+    expect(azStarter.statute_url).toMatch(/^https?:\/\/www\.azleg\.gov/);
+
+    const coTod = statutes.find((s: any) => s.id === "co_hb24_1313");
+    expect(coTod).toBeDefined();
+    expect(coTod.statute_citation).toContain("C.R.S. § 29-35-101");
+    expect(coTod.statute_url).toMatch(/^https?:\/\/leg\.colorado\.gov/);
+  });
+
+  it("21. county_completeness.json and ca_counties_registry.json are decoupled from app.js and compute empirical readiness tiers (Roadmap P1 Item 12)", () => {
+    const compPath = path.join(rootDir, "app/data/county_completeness.json");
+    expect(fs.existsSync(compPath)).toBe(true);
+
+    const compIndex = JSON.parse(fs.readFileSync(compPath, "utf-8"));
+    const fipsKeys = Object.keys(compIndex);
+    expect(fipsKeys.length).toBeGreaterThanOrEqual(700);
+
+    // Verify LA County
+    const la = compIndex["06037"];
+    expect(la).toBeDefined();
+    expect(la.name).toBe("Los Angeles County");
+    expect(la.state).toBe("CA");
+    expect(la.readiness_tier).toBe("audited_A");
+    expect(la.source_url).toMatch(/^https?:\/\//);
+    expect(la.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+
+    // Verify Travis County TX
+    const travis = compIndex["48453"];
+    expect(travis).toBeDefined();
+    expect(travis.name).toBe("Travis County");
+    expect(travis.state).toBe("TX");
+    expect(["audited_A", "verified_B", "preliminary_C"]).toContain(travis.readiness_tier);
+
+    // Check CA Counties Registry
+    const caPath = path.join(rootDir, "app/data/ca_counties_registry.json");
+    expect(fs.existsSync(caPath)).toBe(true);
+    const caRegistry = JSON.parse(fs.readFileSync(caPath, "utf-8"));
+    expect(Object.keys(caRegistry).length).toBe(58);
+    expect(caRegistry["06037"].mpo).toContain("SCAG");
+    expect(caRegistry["06037"].last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+  });
 });
