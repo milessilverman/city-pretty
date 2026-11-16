@@ -147,7 +147,18 @@ describe("fabricated content that was removed stays removed", () => {
   it("valuation back-tests: only counties with a reproducible run are listed; everything else is 'no_backtest_run'", () => {
     const d = load("app/data/valuation_backtest_benchmarks.json");
     expect(d._status).toBe("no_backtest_run"); // default for every county not listed
-    expect(Object.keys(d.counties)).toEqual(["06037"]);
+    expect(Object.keys(d.counties)).toContain("06037");
+    // Every other listed county is a recorded-sales back-test with a committed sales file and result file, and its
+    // publish decision follows the same rule (tests/unit/countyValuation.test.ts re-runs each one).
+    for (const [fips, c] of Object.entries(d.counties) as [string, any][]) {
+      if (fips === "06037") continue;
+      expect(c._status).toBe("backtest_run");
+      expect(c.model_name).toMatch(/^county_sales_/);
+      for (const f of [c.sample_file, c.result_file]) expect(fs.existsSync(path.join(root, f))).toBe(true);
+      expect(c.leakage.test_homes_in_their_own_statistics).toBe(0);
+      const ok = c.model.n >= 200 && c.model.mdape <= 0.15 && c.model.mdape < c.baseline_neighborhood_median.mdape;
+      expect(c.gate.pass).toBe(ok);
+    }
     expect(fs.existsSync(path.join(root, "scripts/run_valuation_backtests.mjs"))).toBe(false); // the fake-sales script
 
     const la = d.counties["06037"];

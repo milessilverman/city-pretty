@@ -1,0 +1,82 @@
+{
+ "42101": {
+  "sales_file": "data/backtests/sales_42101_2026-11-16.json.gz",
+  "fit": [
+   "2023-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-04-30"
+  ],
+  "test": [
+   "2026-05-01",
+   "2026-07-31"
+  ],
+  "note": "Test window starts after the OPA market values were set (assessment_date 2026-04-29) and ends where transfer-tax recording thins out (Aug 2026: 6 matched sales).",
+  "locked": {
+   "spec": "regression_with_assessor",
+   "locked_on": "2026-11-16",
+   "why": "Best development median error (16.6%) but on only 78 sales whose assessor value predates the sale; next best without the assessor value: regression 20.2% (3,264 sales). Neighborhood median 24.8%.",
+   "dev_mdape": {
+    "neighborhood_median": 0.2482,
+    "neighborhood_ppsf_x_sqft": 0.2109,
+    "assessor_ratio": 0.1709,
+    "regression": 0.202,
+    "regression_with_assessor": 0.1662
+   }
+  }
+ },
+ "17031": {
+  "sales_file": "data/backtests/sales_17031_2026-11-16.json.gz",
+  "fit": [
+   "2023-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-03-31"
+  ],
+  "test": [
+   "2026-04-01",
+   "2026-08-31"
+  ],
+  "note": "No assessor value used. Test window ends where sales recording thins out (Sep 2026: 143).",
+  "locked": {
+   "spec": "regression",
+   "locked_on": "2026-11-16",
+   "why": "Best development median error: regression 18.9% (5,746 sales) vs neighborhood $/sqft x size 21.6% and neighborhood median 22.4%. No assessor value available.",
+   "dev_mdape": {
+    "neighborhood_median": 0.2239,
+    "neighborhood_ppsf_x_sqft": 0.2163,
+    "regression": 0.1888
+   }
+  }
+ },
+ "11001": {
+  "sales_file": "data/backtests/sales_11001_2026-11-16.json.gz",
+  "fit": [
+   "2023-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-04-30"
+  ],
+  "test": [
+   "2026-05-01",
+   "2026-10-31"
+  ],
+  "note": "No assessor value used (its tax year is not recorded).",
+  "locked": {
+   "spec": "regression",
+   "locked_on": "2026-11-16",
+   "why": "Best development median error: regression 9.9% (705 sales) vs neighborhood $/sqft x size 13.3% and neighborhood median 16.2%. No assessor value used.",
+   "dev_mdape": {
+    "neighborhood_median": 0.1623,
+    "neighborhood_ppsf_x_sqft": 0.1334,
+    "regression": 0.0993
+   }
+  }
+ }
+}

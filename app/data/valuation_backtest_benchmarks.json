@@ -1,791 +1,1296 @@
 {
-  "_status": "no_backtest_run",
-  "_note": "Counties not listed under `counties` have no back-test. The 15 Nov 2026 benchmarks were computed on hand-typed, unverified sales and were removed on 16 Nov 2026.",
-  "counties": {
-    "06037": {
-      "_status": "backtest_run",
-      "countyFips": "06037",
-      "countyName": "Los Angeles County",
-      "model_name": "la_assessor_resets_regression",
-      "run_on": "2026-11-16",
-      "script": "scripts/la_valuation_models.mjs final",
-      "sample_file": "data/backtests/la_sample_2026-11-16.json.gz",
-      "training_file": "data/backtests/la_resets_2022-2024_2026-11-16.json.gz",
-      "result_file": "data/backtests/la_model_test_2026-11-16.json",
-      "target": "Prop 13 base-year value of single-family parcels whose land and improvement base years are both 2025 or 2026 (proxy for the transfer price).",
-      "legal_basis": {
-        "text": "Cal. Rev. & Tax. Code §110.1(a)-(b): the base year value is the fair market value on the date a purchase or change in ownership occurs (or new construction is completed). §110(b): on a purchase, full cash value is the purchase price paid, rebuttably presumed so for an arm's-length transaction.",
-        "sources": [
-          "https://california.public.law/codes/revenue_and_taxation_code_section_110.1",
-          "https://california.public.law/codes/revenue_and_taxation_code_section_110"
-        ],
-        "checked_on": "2026-11-16",
-        "note": "Read from california.public.law (a reproduction of the code); leginfo.legislature.ca.gov blocked automated access."
-      },
-      "split": {
-        "training": "Base-year 2022-24 resets (neighborhood statistics and model fit; cross-fitted so no home is in its own statistics).",
-        "development": "Model chosen on 2024 resets using statistics from 2022-23, then locked (commit 290ce39).",
-        "test": "Run once on 50723 base-year 2025-26 resets, with statistics from 2022-24 only. Test homes in training data: 0; test homes inside their own statistics: 0."
-      },
-      "what_is_tested": "The LA model the page uses (coefficients in app/data/la_neighborhood_values.json), applied to homes that had not changed hands in the statistics window.",
-      "model": {
-        "n": 50323,
-        "excluded": 400,
-        "mdape": 0.1042,
-        "mape": 0.2055,
-        "median_signed_error": -0.018,
-        "share_within_10pct": 0.484,
-        "share_within_20pct": 0.7624,
-        "p80_abs_error": 0.226
-      },
-      "baseline_neighborhood_median": {
-        "n": 50381,
-        "excluded": 342,
-        "mdape": 0.1267,
-        "mape": 0.2392,
-        "median_signed_error": -0.0165,
-        "share_within_10pct": 0.4135,
-        "share_within_20pct": 0.6789,
-        "p80_abs_error": 0.2896
-      },
-      "beats_baseline": true,
-      "gate": {
-        "mdape_cap": 0.15,
-        "pass": true,
-        "reason": null
-      },
-      "by_price_band": {
-        "$500k-$1M": {
-          "n": 26450,
-          "excluded": 194,
-          "mdape": 0.0868,
-          "mape": 0.1335,
-          "median_signed_error": -0.012,
-          "share_within_10pct": 0.5598,
-          "share_within_20pct": 0.8432,
-          "p80_abs_error": 0.1753
-        },
-        "$1M-$2M": {
-          "n": 14432,
-          "excluded": 122,
-          "mdape": 0.1172,
-          "mape": 0.1482,
-          "median_signed_error": -0.0516,
-          "share_within_10pct": 0.4313,
-          "share_within_20pct": 0.7588,
-          "p80_abs_error": 0.219
-        },
-        "under $500k": {
-          "n": 5017,
-          "excluded": 32,
-          "mdape": 0.1774,
-          "mape": 0.7453,
-          "median_signed_error": 0.1751,
-          "share_within_10pct": 0.3976,
-          "share_within_20pct": 0.519,
-          "p80_abs_error": 1.0919
-        },
-        "$2M and up": {
-          "n": 4424,
-          "excluded": 52,
-          "mdape": 0.1724,
-          "mape": 0.2113,
-          "median_signed_error": -0.1389,
-          "share_within_10pct": 0.3004,
-          "share_within_20pct": 0.5671,
-          "p80_abs_error": 0.3249
-        }
-      },
-      "candidates": [
-        {
-          "name": "neighborhood_median",
-          "overall": {
-            "n": 50381,
-            "excluded": 342,
-            "mdape": 0.1267,
-            "mape": 0.2392,
-            "median_signed_error": -0.0165,
-            "share_within_10pct": 0.4135,
-            "share_within_20pct": 0.6789,
-            "p80_abs_error": 0.2896
-          },
-          "by_price_band": {
-            "$500k-$1M": {
-              "n": 26465,
-              "excluded": 179,
-              "mdape": 0.0966,
-              "mape": 0.1517,
-              "median_signed_error": -0.0035,
-              "share_within_10pct": 0.5141,
-              "share_within_20pct": 0.7958,
-              "p80_abs_error": 0.2028
-            },
-            "$1M-$2M": {
-              "n": 14441,
-              "excluded": 113,
-              "mdape": 0.1585,
-              "mape": 0.1944,
-              "median_signed_error": -0.0699,
-              "share_within_10pct": 0.316,
-              "share_within_20pct": 0.6154,
-              "p80_abs_error": 0.2913
-            },
-            "under $500k": {
-              "n": 5028,
-              "excluded": 21,
-              "mdape": 0.2117,
-              "mape": 0.7941,
-              "median_signed_error": 0.2042,
-              "share_within_10pct": 0.3516,
-              "share_within_20pct": 0.4918,
-              "p80_abs_error": 1.1227
-            },
-            "$2M and up": {
-              "n": 4447,
-              "excluded": 29,
-              "mdape": 0.2504,
-              "mape": 0.2781,
-              "median_signed_error": -0.2137,
-              "share_within_10pct": 0.2019,
-              "share_within_20pct": 0.4009,
-              "p80_abs_error": 0.4389
-            }
-          },
-          "gate": {
-            "pass": true,
-            "reason": null
-          }
-        },
-        {
-          "name": "neighborhood_ppsf_x_sqft",
-          "overall": {
-            "n": 50381,
-            "excluded": 342,
-            "mdape": 0.1627,
-            "mape": 0.2702,
-            "median_signed_error": -0.0201,
-            "share_within_10pct": 0.3202,
-            "share_within_20pct": 0.5914,
-            "p80_abs_error": 0.3273
-          },
-          "by_price_band": {
-            "$500k-$1M": {
-              "n": 26465,
-              "excluded": 179,
-              "mdape": 0.1551,
-              "mape": 0.2123,
-              "median_signed_error": -0.0312,
-              "share_within_10pct": 0.3314,
-              "share_within_20pct": 0.6159,
-              "p80_abs_error": 0.2989
-            },
-            "$1M-$2M": {
-              "n": 14441,
-              "excluded": 113,
-              "mdape": 0.1555,
-              "mape": 0.2074,
-              "median_signed_error": -0.0224,
-              "share_within_10pct": 0.3331,
-              "share_within_20pct": 0.6137,
-              "p80_abs_error": 0.3072
-            },
-            "under $500k": {
-              "n": 5028,
-              "excluded": 21,
-              "mdape": 0.2289,
-              "mape": 0.7756,
-              "median_signed_error": 0.1159,
-              "share_within_10pct": 0.2546,
-              "share_within_20pct": 0.4564,
-              "p80_abs_error": 1.1016
-            },
-            "$2M and up": {
-              "n": 4447,
-              "excluded": 29,
-              "mdape": 0.1895,
-              "mape": 0.2473,
-              "median_signed_error": -0.0459,
-              "share_within_10pct": 0.286,
-              "share_within_20pct": 0.5257,
-              "p80_abs_error": 0.3899
-            }
-          },
-          "gate": {
-            "pass": false,
-            "reason": "median error 16.3% is above the 15% limit"
-          }
-        },
-        {
-          "name": "regression",
-          "overall": {
-            "n": 50323,
-            "excluded": 400,
-            "mdape": 0.1042,
-            "mape": 0.2055,
-            "median_signed_error": -0.018,
-            "share_within_10pct": 0.484,
-            "share_within_20pct": 0.7624,
-            "p80_abs_error": 0.226
-          },
-          "by_price_band": {
-            "$500k-$1M": {
-              "n": 26450,
-              "excluded": 194,
-              "mdape": 0.0868,
-              "mape": 0.1335,
-              "median_signed_error": -0.012,
-              "share_within_10pct": 0.5598,
-              "share_within_20pct": 0.8432,
-              "p80_abs_error": 0.1753
-            },
-            "$1M-$2M": {
-              "n": 14432,
-              "excluded": 122,
-              "mdape": 0.1172,
-              "mape": 0.1482,
-              "median_signed_error": -0.0516,
-              "share_within_10pct": 0.4313,
-              "share_within_20pct": 0.7588,
-              "p80_abs_error": 0.219
-            },
-            "under $500k": {
-              "n": 5017,
-              "excluded": 32,
-              "mdape": 0.1774,
-              "mape": 0.7453,
-              "median_signed_error": 0.1751,
-              "share_within_10pct": 0.3976,
-              "share_within_20pct": 0.519,
-              "p80_abs_error": 1.0919
-            },
-            "$2M and up": {
-              "n": 4424,
-              "excluded": 52,
-              "mdape": 0.1724,
-              "mape": 0.2113,
-              "median_signed_error": -0.1389,
-              "share_within_10pct": 0.3004,
-              "share_within_20pct": 0.5671,
-              "p80_abs_error": 0.3249
-            }
-          },
-          "gate": {
-            "pass": true,
-            "reason": null
-          }
-        },
-        {
-          "name": "old_bundle_typical_value (untraceable m.hv, for reference)",
-          "overall": {
-            "n": 50720,
-            "excluded": 3,
-            "mdape": 0.1495,
-            "mape": 0.2604,
-            "median_signed_error": -0.0571,
-            "share_within_10pct": 0.3536,
-            "share_within_20pct": 0.6176,
-            "p80_abs_error": 0.3326
-          },
-          "by_price_band": {
-            "$500k-$1M": {
-              "n": 26644,
-              "excluded": 0,
-              "mdape": 0.1147,
-              "mape": 0.167,
-              "median_signed_error": -0.0449,
-              "share_within_10pct": 0.4419,
-              "share_within_20pct": 0.7475,
-              "p80_abs_error": 0.2287
-            },
-            "$1M-$2M": {
-              "n": 14552,
-              "excluded": 2,
-              "mdape": 0.1943,
-              "mape": 0.2358,
-              "median_signed_error": -0.1187,
-              "share_within_10pct": 0.2592,
-              "share_within_20pct": 0.5126,
-              "p80_abs_error": 0.3525
-            },
-            "under $500k": {
-              "n": 5049,
-              "excluded": 0,
-              "mdape": 0.2021,
-              "mape": 0.7523,
-              "median_signed_error": 0.1738,
-              "share_within_10pct": 0.3288,
-              "share_within_20pct": 0.4985,
-              "p80_abs_error": 1.055
-            },
-            "$2M and up": {
-              "n": 4475,
-              "excluded": 1,
-              "mdape": 0.3072,
-              "mape": 0.3418,
-              "median_signed_error": -0.2513,
-              "share_within_10pct": 0.1625,
-              "share_within_20pct": 0.3204,
-              "p80_abs_error": 0.5235
-            }
-          },
-          "gate": {
-            "pass": false,
-            "reason": "does not beat the neighborhood median alone (14.9% vs 12.7%)"
-          }
-        }
-      ],
-      "previous_page_model": {
-        "_status": "backtest_run",
-        "countyFips": "06037",
-        "countyName": "Los Angeles County",
-        "run_on": "2026-11-16",
-        "script": "scripts/backtest_la_valuation.mjs",
-        "sample_file": "data/backtests/la_sample_2026-11-16.json.gz",
-        "target": "Prop 13 base-year value (Roll_LandValue + Roll_ImpValue) of single-family parcels whose land and improvement base years are both 2025 or 2026, on the 2026 roll: a proxy for the 2025/2026 transfer price.",
-        "legal_basis": {
-          "text": "Cal. Rev. & Tax. Code §110.1(a)-(b): the base year value is the fair market value on the date a purchase or change in ownership occurs (or new construction is completed). §110(b): on a purchase, full cash value is the purchase price paid, rebuttably presumed so for an arm's-length transaction.",
-          "sources": [
-            "https://california.public.law/codes/revenue_and_taxation_code_section_110.1",
-            "https://california.public.law/codes/revenue_and_taxation_code_section_110"
-          ],
-          "checked_on": "2026-11-16",
-          "note": "Read from california.public.law (a reproduction of the code); leginfo.legislature.ca.gov blocked automated access."
-        },
-        "what_is_tested": "The page's estimatePropertyMarketValue() from app/app.js, run verbatim with the parcel's roll values and base years withheld (the estimate shown for a home that has not recently sold). No pool/garage facts from OpenStreetMap or permits were supplied.",
-        "baseline": "The block group's typical home value alone (details m.hv).",
-        "caveats": [
-          "Base-year resets are a proxy for sales: some are non-sale transfers reassessed at the assessor's appraisal (e.g. under Prop 19).",
-          "2025 base-year values on the 2026 roll include one annual inflation factor (at most 2%).",
-          "The block-group typical values were built from 2022-24 data by code that is not in this repository; no price index brings them to 2025-26, so some under-estimation is expected and is part of the measured error.",
-          "Only single-family use code 0100 was tested; condos, multi-unit and vacant land are not covered.",
-          "The page withholds its estimate when the neighborhood value is $2M or more (a guard written for the Census ACS top-code). In LA the neighborhood value comes from recorded sales, not ACS, so this guard withholds most $2M+ homes; those rows are counted as 'excluded' in the model metrics."
-        ],
-        "sample": {
-          "pulled_records": 53958,
-          "tested": 50720,
-          "excluded": {
-            "land under $50k or improvements under $20k (odd or partial value)": 1419,
-            "built 2024 or later, or year built missing (could be new construction)": 526,
-            "not exactly one unit": 1230,
-            "living area missing or under 400 sq ft": 23,
-            "effective year 2024 or later (major remodel or rebuild)": 10,
-            "value over $20M": 17,
-            "block group has no typical value on file": 3,
-            "outside every LA block group in the bundle": 10
-          },
-          "queries": [
-            {
-              "base_year": "2025",
-              "where": "Roll_LandBaseYear='2025' AND Roll_ImpBaseYear='2025' AND UseCode='0100'",
-              "count": 34776,
-              "url_pattern": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=Roll_LandBaseYear%3D'2025'%20AND%20Roll_ImpBaseYear%3D'2025'%20AND%20UseCode%3D'0100'&outFields=...&orderByFields=OBJECTID&resultOffset=<0,1000,...>&resultRecordCount=1000&f=json"
-            },
-            {
-              "base_year": "2026",
-              "where": "Roll_LandBaseYear='2026' AND Roll_ImpBaseYear='2026' AND UseCode='0100'",
-              "count": 19182,
-              "url_pattern": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=Roll_LandBaseYear%3D'2026'%20AND%20Roll_ImpBaseYear%3D'2026'%20AND%20UseCode%3D'0100'&outFields=...&orderByFields=OBJECTID&resultOffset=<0,1000,...>&resultRecordCount=1000&f=json"
-            }
-          ],
-          "pulled_at": "2026-11-16T10:33:54.005Z"
-        },
-        "model": {
-          "n": 47172,
-          "excluded": 3548,
-          "mdape": 0.188,
-          "mape": 0.2591,
-          "median_signed_error": -0.1314,
-          "share_within_10pct": 0.2532,
-          "share_within_20pct": 0.534,
-          "p80_abs_error": 0.3212
-        },
-        "baseline_neighborhood_median": {
-          "n": 50720,
-          "excluded": 0,
-          "mdape": 0.1495,
-          "mape": 0.2604,
-          "median_signed_error": -0.0571,
-          "share_within_10pct": 0.3536,
-          "share_within_20pct": 0.6176,
-          "p80_abs_error": 0.3326
-        },
-        "beats_baseline": false,
-        "gate": {
-          "mdape_cap": 0.15,
-          "pass": false,
-          "reason": "median error 18.8% is above the 15% limit"
-        },
-        "by_price_band": {
-          "groups": {
-            "$500k-$1M": {
-              "n": 26557,
-              "excluded": 87,
-              "mdape": 0.1818,
-              "mape": 0.2049,
-              "median_signed_error": -0.1461,
-              "share_within_10pct": 0.2508,
-              "share_within_20pct": 0.5605,
-              "p80_abs_error": 0.2866
-            },
-            "$1M-$2M": {
-              "n": 13525,
-              "excluded": 1027,
-              "mdape": 0.1936,
-              "mape": 0.2192,
-              "median_signed_error": -0.1393,
-              "share_within_10pct": 0.2539,
-              "share_within_20pct": 0.5162,
-              "p80_abs_error": 0.3354
-            },
-            "under $500k": {
-              "n": 5035,
-              "excluded": 14,
-              "mdape": 0.1806,
-              "mape": 0.6222,
-              "median_signed_error": 0.0786,
-              "share_within_10pct": 0.3098,
-              "share_within_20pct": 0.536,
-              "p80_abs_error": 0.8061
-            },
-            "$2M and up": {
-              "n": 2055,
-              "excluded": 2420,
-              "mdape": 0.3111,
-              "mape": 0.3328,
-              "median_signed_error": -0.3056,
-              "share_within_10pct": 0.1416,
-              "share_within_20pct": 0.3036,
-              "p80_abs_error": 0.5199
-            }
-          },
-          "rows_in_small_groups": 0,
-          "min_group_size": 30
-        },
-        "by_price_band_baseline": {
-          "groups": {
-            "$500k-$1M": {
-              "n": 26644,
-              "excluded": 0,
-              "mdape": 0.1147,
-              "mape": 0.167,
-              "median_signed_error": -0.0449,
-              "share_within_10pct": 0.4419,
-              "share_within_20pct": 0.7475,
-              "p80_abs_error": 0.2287
-            },
-            "$1M-$2M": {
-              "n": 14552,
-              "excluded": 0,
-              "mdape": 0.1943,
-              "mape": 0.2358,
-              "median_signed_error": -0.1187,
-              "share_within_10pct": 0.2592,
-              "share_within_20pct": 0.5126,
-              "p80_abs_error": 0.3525
-            },
-            "under $500k": {
-              "n": 5049,
-              "excluded": 0,
-              "mdape": 0.2021,
-              "mape": 0.7523,
-              "median_signed_error": 0.1738,
-              "share_within_10pct": 0.3288,
-              "share_within_20pct": 0.4985,
-              "p80_abs_error": 1.055
-            },
-            "$2M and up": {
-              "n": 4475,
-              "excluded": 0,
-              "mdape": 0.3072,
-              "mape": 0.3418,
-              "median_signed_error": -0.2513,
-              "share_within_10pct": 0.1625,
-              "share_within_20pct": 0.3204,
-              "p80_abs_error": 0.5235
-            }
-          },
-          "rows_in_small_groups": 0,
-          "min_group_size": 30
-        },
-        "by_base_year": {
-          "groups": {
-            "2025": {
-              "n": 30168,
-              "excluded": 2261,
-              "mdape": 0.1942,
-              "mape": 0.2741,
-              "median_signed_error": -0.1406,
-              "share_within_10pct": 0.2381,
-              "share_within_20pct": 0.5158,
-              "p80_abs_error": 0.3277
-            },
-            "2026": {
-              "n": 17004,
-              "excluded": 1287,
-              "mdape": 0.1767,
-              "mape": 0.2325,
-              "median_signed_error": -0.1141,
-              "share_within_10pct": 0.2801,
-              "share_within_20pct": 0.5663,
-              "p80_abs_error": 0.3098
-            }
-          },
-          "rows_in_small_groups": 0,
-          "min_group_size": 30
-        },
-        "by_neighborhood_value_source": {
-          "groups": {
-            "typical value from recorded sales in the block group": {
-              "n": 44770,
-              "excluded": 3516,
-              "mdape": 0.1857,
-              "mape": 0.2575,
-              "median_signed_error": -0.1282,
-              "share_within_10pct": 0.2573,
-              "share_within_20pct": 0.5409,
-              "p80_abs_error": 0.317
-            },
-            "typical value estimated from surrounding neighborhood": {
-              "n": 2402,
-              "excluded": 32,
-              "mdape": 0.239,
-              "mape": 0.289,
-              "median_signed_error": -0.194,
-              "share_within_10pct": 0.1774,
-              "share_within_20pct": 0.4042,
-              "p80_abs_error": 0.3841
-            }
-          },
-          "rows_in_small_groups": 0,
-          "min_group_size": 30
-        },
-        "by_city_top20": {
-          "groups": {
-            "LOS ANGELES": {
-              "n": 15925,
-              "excluded": 1878,
-              "mdape": 0.1946,
-              "mape": 0.2735,
-              "median_signed_error": -0.1315,
-              "share_within_10pct": 0.2527,
-              "share_within_20pct": 0.5125,
-              "p80_abs_error": 0.3474
-            },
-            "LANCASTER": {
-              "n": 2309,
-              "excluded": 0,
-              "mdape": 0.1138,
-              "mape": 0.1576,
-              "median_signed_error": -0.0086,
-              "share_within_10pct": 0.45,
-              "share_within_20pct": 0.7614,
-              "p80_abs_error": 0.2187
-            },
-            "LONG BEACH": {
-              "n": 2255,
-              "excluded": 33,
-              "mdape": 0.2329,
-              "mape": 0.2954,
-              "median_signed_error": -0.2173,
-              "share_within_10pct": 0.1446,
-              "share_within_20pct": 0.3973,
-              "p80_abs_error": 0.3511
-            },
-            "PALMDALE": {
-              "n": 1827,
-              "excluded": 0,
-              "mdape": 0.1273,
-              "mape": 0.1803,
-              "median_signed_error": 0.0221,
-              "share_within_10pct": 0.4023,
-              "share_within_20pct": 0.7039,
-              "p80_abs_error": 0.2558
-            },
-            "WHITTIER": {
-              "n": 1259,
-              "excluded": 0,
-              "mdape": 0.1863,
-              "mape": 0.2223,
-              "median_signed_error": -0.1695,
-              "share_within_10pct": 0.2121,
-              "share_within_20pct": 0.5488,
-              "p80_abs_error": 0.2704
-            },
-            "TORRANCE": {
-              "n": 1145,
-              "excluded": 42,
-              "mdape": 0.1921,
-              "mape": 0.3583,
-              "median_signed_error": -0.1533,
-              "share_within_10pct": 0.2245,
-              "share_within_20pct": 0.5179,
-              "p80_abs_error": 0.3376
-            },
-            "SANTA CLARITA": {
-              "n": 1129,
-              "excluded": 0,
-              "mdape": 0.1337,
-              "mape": 0.2177,
-              "median_signed_error": 0.012,
-              "share_within_10pct": 0.3676,
-              "share_within_20pct": 0.6652,
-              "p80_abs_error": 0.2975
-            },
-            "PASADENA": {
-              "n": 784,
-              "excluded": 117,
-              "mdape": 0.2166,
-              "mape": 0.2934,
-              "median_signed_error": -0.159,
-              "share_within_10pct": 0.2513,
-              "share_within_20pct": 0.4668,
-              "p80_abs_error": 0.3658
-            },
-            "COMPTON": {
-              "n": 868,
-              "excluded": 0,
-              "mdape": 0.24,
-              "mape": 0.2477,
-              "median_signed_error": -0.227,
-              "share_within_10pct": 0.1452,
-              "share_within_20pct": 0.3652,
-              "p80_abs_error": 0.3213
-            },
-            "LAKEWOOD": {
-              "n": 814,
-              "excluded": 0,
-              "mdape": 0.2099,
-              "mape": 0.2419,
-              "median_signed_error": -0.2022,
-              "share_within_10pct": 0.1155,
-              "share_within_20pct": 0.4459,
-              "p80_abs_error": 0.2764
-            },
-            "GLENDALE": {
-              "n": 766,
-              "excluded": 5,
-              "mdape": 0.1859,
-              "mape": 0.2763,
-              "median_signed_error": -0.0915,
-              "share_within_10pct": 0.2898,
-              "share_within_20pct": 0.5274,
-              "p80_abs_error": 0.3819
-            },
-            "NORWALK": {
-              "n": 733,
-              "excluded": 0,
-              "mdape": 0.2311,
-              "mape": 0.2567,
-              "median_signed_error": -0.2224,
-              "share_within_10pct": 0.0696,
-              "share_within_20pct": 0.3383,
-              "p80_abs_error": 0.3007
-            },
-            "POMONA": {
-              "n": 713,
-              "excluded": 0,
-              "mdape": 0.1925,
-              "mape": 0.2286,
-              "median_signed_error": -0.1762,
-              "share_within_10pct": 0.2076,
-              "share_within_20pct": 0.5302,
-              "p80_abs_error": 0.2949
-            },
-            "LA PUENTE": {
-              "n": 672,
-              "excluded": 0,
-              "mdape": 0.1918,
-              "mape": 0.2198,
-              "median_signed_error": -0.171,
-              "share_within_10pct": 0.2068,
-              "share_within_20pct": 0.5387,
-              "p80_abs_error": 0.2671
-            },
-            "BURBANK": {
-              "n": 639,
-              "excluded": 0,
-              "mdape": 0.1737,
-              "mape": 0.2943,
-              "median_signed_error": -0.1335,
-              "share_within_10pct": 0.2598,
-              "share_within_20pct": 0.5775,
-              "p80_abs_error": 0.3317
-            },
-            "CARSON": {
-              "n": 606,
-              "excluded": 0,
-              "mdape": 0.1567,
-              "mape": 0.2036,
-              "median_signed_error": -0.1371,
-              "share_within_10pct": 0.2805,
-              "share_within_20pct": 0.6469,
-              "p80_abs_error": 0.253
-            },
-            "WEST COVINA": {
-              "n": 508,
-              "excluded": 0,
-              "mdape": 0.1366,
-              "mape": 0.1834,
-              "median_signed_error": -0.1066,
-              "share_within_10pct": 0.3484,
-              "share_within_20pct": 0.6969,
-              "p80_abs_error": 0.2405
-            },
-            "DOWNEY": {
-              "n": 487,
-              "excluded": 0,
-              "mdape": 0.1874,
-              "mape": 0.2533,
-              "median_signed_error": -0.1541,
-              "share_within_10pct": 0.193,
-              "share_within_20pct": 0.5647,
-              "p80_abs_error": 0.2709
-            },
-            "COVINA": {
-              "n": 457,
-              "excluded": 0,
-              "mdape": 0.1931,
-              "mape": 0.2302,
-              "median_signed_error": -0.1722,
-              "share_within_10pct": 0.2057,
-              "share_within_20pct": 0.5317,
-              "p80_abs_error": 0.2902
-            },
-            "GLENDORA": {
-              "n": 410,
-              "excluded": 0,
-              "mdape": 0.1579,
-              "mape": 0.2151,
-              "median_signed_error": -0.1094,
-              "share_within_10pct": 0.3073,
-              "share_within_20pct": 0.6732,
-              "p80_abs_error": 0.2499
-            }
-          },
-          "rows_in_small_groups": 2410,
-          "min_group_size": 100
-        },
-        "verification": {
-          "status": "verified",
-          "method": "Machine-run back-test: every tested record and every query is in the sample file; re-run the script to reproduce.",
-          "checked_on": "2026-11-16",
-          "evidence": "50720 parcels; model MdAPE 0.188; baseline MdAPE 0.1495",
-          "notes": "Verified means the metrics are computed from the public records as stated; it does not make the proxy a recorded sale."
-        }
-      },
-      "caveats": [
-        "Base-year resets are a proxy for sales: some are non-sale transfers reassessed at the Assessor's appraisal (e.g. under Prop 19).",
-        "Only single-family use code 0100 was tested; condos, multi-unit and vacant land are not covered.",
-        "The page uses statistics from 2022-26 resets, one year fresher than the tested 2022-24 configuration.",
-        "Error is larger for homes under $500k and $2M and up (see by_price_band); the page says so for those homes."
-      ],
-      "verification": {
-        "status": "verified",
-        "method": "Machine-run back-test on saved public records; the result file and both pulls are in data/backtests/.",
-        "checked_on": "2026-11-16",
-        "evidence": "regression MdAPE 0.1042 on 50323 homes; neighborhood median 0.1267",
-        "notes": "Verified means the metrics are computed from the public records as stated; it does not make the proxy a recorded sale."
-      }
+ "_status": "no_backtest_run",
+ "_note": "Counties not listed under `counties` have no back-test. The 15 Nov 2026 benchmarks were computed on hand-typed, unverified sales and were removed on 16 Nov 2026.",
+ "counties": {
+  "11001": {
+   "_status": "backtest_run",
+   "countyFips": "11001",
+   "countyName": "District of Columbia",
+   "model_name": "county_sales_regression",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_11001_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_11001.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": {
+    "residential_cama": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Property_and_Land_WebMercator/MapServer/25",
+    "owner_polygons": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Property_and_Land_WebMercator/MapServer/40",
+    "block_groups": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/10/query"
+   },
+   "filters": "* QUALIFIED = 'Q' (the District's sale-qualification flag; its definition is not given in the layer metadata, so\n    the screens below are applied as well)\n  * NUM_UNITS = 1 and BLDG_NUM = 1 (one dwelling on the lot)\n  * PRICE >= $25,000 and GBA (gross building area) >= 400 sq ft\nAssessed values are NOT used: the owner layer's \"Proposed Total Value\" has no effective tax year recorded, so it\ncannot be shown to predate a sale.",
+   "split": {
+    "fit": [
+     "2023-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-04-30"
+    ],
+    "test": [
+     "2026-05-01",
+     "2026-10-31"
+    ]
+   },
+   "locked": {
+    "spec": "regression",
+    "locked_on": "2026-11-16",
+    "why": "Best development median error: regression 9.9% (705 sales) vs neighborhood $/sqft x size 13.3% and neighborhood median 16.2%. No assessor value used.",
+    "dev_mdape": {
+     "neighborhood_median": 0.1623,
+     "neighborhood_ppsf_x_sqft": 0.1334,
+     "regression": 0.0993
     }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 1523,
+    "excluded": 11,
+    "mdape": 0.1067,
+    "mape": 0.1608,
+    "median_signed_error": 0.0079,
+    "share_within_10pct": 0.4741,
+    "share_within_20pct": 0.759,
+    "p80_abs_error": 0.2257
+   },
+   "baseline_neighborhood_median": {
+    "n": 1524,
+    "excluded": 10,
+    "mdape": 0.179,
+    "mape": 0.2583,
+    "median_signed_error": 0.0178,
+    "share_within_10pct": 0.3117,
+    "share_within_20pct": 0.54,
+    "p80_abs_error": 0.3777
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": true,
+    "reason": null
+   },
+   "by_price_band": {
+    "$500k-$1M": {
+     "n": 573,
+     "excluded": 0,
+     "mdape": 0.0908,
+     "mape": 0.1277,
+     "median_signed_error": 0.0353,
+     "share_within_10pct": 0.5428,
+     "share_within_20pct": 0.8325,
+     "p80_abs_error": 0.186
+    },
+    "$1M-$2M": {
+     "n": 518,
+     "excluded": 0,
+     "mdape": 0.1026,
+     "mape": 0.1261,
+     "median_signed_error": -0.019,
+     "share_within_10pct": 0.4923,
+     "share_within_20pct": 0.7973,
+     "p80_abs_error": 0.201
+    },
+    "under $500k": {
+     "n": 219,
+     "excluded": 0,
+     "mdape": 0.1393,
+     "mape": 0.314,
+     "median_signed_error": 0.1225,
+     "share_within_10pct": 0.3699,
+     "share_within_20pct": 0.589,
+     "p80_abs_error": 0.5097
+    },
+    "$2M and up": {
+     "n": 213,
+     "excluded": 0,
+     "mdape": 0.1416,
+     "mape": 0.1768,
+     "median_signed_error": -0.1136,
+     "share_within_10pct": 0.3521,
+     "share_within_20pct": 0.6432,
+     "p80_abs_error": 0.273
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 1524,
+     "excluded": 10,
+     "mdape": 0.179,
+     "mape": 0.2583,
+     "median_signed_error": 0.0178,
+     "share_within_10pct": 0.3117,
+     "share_within_20pct": 0.54,
+     "p80_abs_error": 0.3777
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 1524,
+     "excluded": 10,
+     "mdape": 0.1288,
+     "mape": 0.1972,
+     "median_signed_error": 0.0008,
+     "share_within_10pct": 0.4075,
+     "share_within_20pct": 0.687,
+     "p80_abs_error": 0.2902
+    },
+    "assessor_ratio": {
+     "n": 0,
+     "excluded": 1534,
+     "mdape": null,
+     "mape": null,
+     "median_signed_error": null,
+     "share_within_10pct": null,
+     "share_within_20pct": null,
+     "p80_abs_error": null
+    },
+    "regression": {
+     "n": 1523,
+     "excluded": 11,
+     "mdape": 0.1067,
+     "mape": 0.1608,
+     "median_signed_error": 0.0079,
+     "share_within_10pct": 0.4741,
+     "share_within_20pct": 0.759,
+     "p80_abs_error": 0.2257
+    },
+    "regression_with_assessor": {
+     "n": 0,
+     "excluded": 1534,
+     "mdape": null,
+     "mape": null,
+     "median_signed_error": null,
+     "share_within_10pct": null,
+     "share_within_20pct": null,
+     "p80_abs_error": null
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 0
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_11001.json"
+   }
+  },
+  "17031": {
+   "_status": "backtest_run",
+   "countyFips": "17031",
+   "countyName": "Cook County",
+   "model_name": "county_sales_regression",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_17031_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_17031.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": {
+    "wvhk-k5uv": "https://datacatalog.cookcountyil.gov/resource/wvhk-k5uv.json",
+    "x54s-btds": "https://datacatalog.cookcountyil.gov/resource/x54s-btds.json",
+    "pabr-t5kh": "https://datacatalog.cookcountyil.gov/resource/pabr-t5kh.json"
+   },
+   "filters": "* sale_filter_same_sale_within_365 = false  (\"Remove sale with the same value (for the same PIN) within 365 days\")\n  * sale_filter_less_than_10k = false         (\"Indicator for whether sale is less than $10K FMW\")\n  * sale_filter_deed_type = false             (\"Indicator for quit claim, executor, beneficiary and missing deed types\")\n  * is_multisale = false                      (sold on its own, not as part of a group of PINs)\n  * sale_price >= $25,000\n  * the PIN's improvement record says char_use = 'Single-Family' (the Assessor's own use field)\nCharacteristics: the record for the sale year, or the latest earlier year on file.\nAssessor values are NOT used for Cook (a reassessment's market value may postdate and reflect the sale).",
+   "split": {
+    "fit": [
+     "2023-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-03-31"
+    ],
+    "test": [
+     "2026-04-01",
+     "2026-08-31"
+    ]
+   },
+   "locked": {
+    "spec": "regression",
+    "locked_on": "2026-11-16",
+    "why": "Best development median error: regression 18.9% (5,746 sales) vs neighborhood $/sqft x size 21.6% and neighborhood median 22.4%. No assessor value available.",
+    "dev_mdape": {
+     "neighborhood_median": 0.2239,
+     "neighborhood_ppsf_x_sqft": 0.2163,
+     "regression": 0.1888
+    }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 7878,
+    "excluded": 31,
+    "mdape": 0.1861,
+    "mape": 0.2578,
+    "median_signed_error": -0.1126,
+    "share_within_10pct": 0.2755,
+    "share_within_20pct": 0.531,
+    "p80_abs_error": 0.3528
+   },
+   "baseline_neighborhood_median": {
+    "n": 7879,
+    "excluded": 30,
+    "mdape": 0.22,
+    "mape": 0.3082,
+    "median_signed_error": -0.1176,
+    "share_within_10pct": 0.233,
+    "share_within_20pct": 0.4593,
+    "p80_abs_error": 0.4304
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": false,
+    "reason": "median error 18.6% is above the 15% limit"
+   },
+   "by_price_band": {
+    "under $500k": {
+     "n": 5160,
+     "excluded": 0,
+     "mdape": 0.1812,
+     "mape": 0.2811,
+     "median_signed_error": -0.0676,
+     "share_within_10pct": 0.2907,
+     "share_within_20pct": 0.5413,
+     "p80_abs_error": 0.3756
+    },
+    "$500k-$1M": {
+     "n": 1911,
+     "excluded": 0,
+     "mdape": 0.1738,
+     "mape": 0.1943,
+     "median_signed_error": -0.1525,
+     "share_within_10pct": 0.2841,
+     "share_within_20pct": 0.5678,
+     "p80_abs_error": 0.3008
+    },
+    "$1M-$2M": {
+     "n": 617,
+     "excluded": 0,
+     "mdape": 0.2465,
+     "mape": 0.2541,
+     "median_signed_error": -0.2324,
+     "share_within_10pct": 0.1588,
+     "share_within_20pct": 0.3809,
+     "p80_abs_error": 0.3703
+    },
+    "$2M and up": {
+     "n": 190,
+     "excluded": 0,
+     "mdape": 0.2673,
+     "mape": 0.2769,
+     "median_signed_error": -0.2554,
+     "share_within_10pct": 0.1526,
+     "share_within_20pct": 0.3684,
+     "p80_abs_error": 0.4261
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 7879,
+     "excluded": 30,
+     "mdape": 0.22,
+     "mape": 0.3082,
+     "median_signed_error": -0.1176,
+     "share_within_10pct": 0.233,
+     "share_within_20pct": 0.4593,
+     "p80_abs_error": 0.4304
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 7879,
+     "excluded": 30,
+     "mdape": 0.2022,
+     "mape": 0.2778,
+     "median_signed_error": -0.1086,
+     "share_within_10pct": 0.2569,
+     "share_within_20pct": 0.4942,
+     "p80_abs_error": 0.3794
+    },
+    "assessor_ratio": {
+     "n": 0,
+     "excluded": 7909,
+     "mdape": null,
+     "mape": null,
+     "median_signed_error": null,
+     "share_within_10pct": null,
+     "share_within_20pct": null,
+     "p80_abs_error": null
+    },
+    "regression": {
+     "n": 7878,
+     "excluded": 31,
+     "mdape": 0.1861,
+     "mape": 0.2578,
+     "median_signed_error": -0.1126,
+     "share_within_10pct": 0.2755,
+     "share_within_20pct": 0.531,
+     "p80_abs_error": 0.3528
+    },
+    "regression_with_assessor": {
+     "n": 0,
+     "excluded": 7909,
+     "mdape": null,
+     "mape": null,
+     "median_signed_error": null,
+     "share_within_10pct": null,
+     "share_within_20pct": null,
+     "p80_abs_error": null
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 0
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_17031.json"
+   }
+  },
+  "42101": {
+   "_status": "backtest_run",
+   "countyFips": "42101",
+   "countyName": "Philadelphia County",
+   "model_name": "county_sales_regression_with_assessor",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_42101_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_42101.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": {
+    "opa_properties_public": "https://phl.carto.com/api/v2/sql (table opa_properties_public)",
+    "rtt_summary": "https://phl.carto.com/api/v2/sql (table rtt_summary)",
+    "block_groups": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/10/query"
+   },
+   "filters": "* OPA category_code '1' (single family)\n  * a matching transfer-tax record: same OPA account, document_type exactly 'DEED' (excludes SHERIFF'S DEED,\n    MISCELLANEOUS DEED and others), property_count = 1, recorded within 45 days of the OPA sale date, and total\n    consideration within 1% of the OPA sale price\n  * sale price >= $25,000 and living area >= 400 sq ft\n  * grantor and grantee lists share no surname (a common family-transfer screen)",
+   "split": {
+    "fit": [
+     "2023-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-04-30"
+    ],
+    "test": [
+     "2026-05-01",
+     "2026-07-31"
+    ]
+   },
+   "locked": {
+    "spec": "regression_with_assessor",
+    "locked_on": "2026-11-16",
+    "why": "Best development median error (16.6%) but on only 78 sales whose assessor value predates the sale; next best without the assessor value: regression 20.2% (3,264 sales). Neighborhood median 24.8%.",
+    "dev_mdape": {
+     "neighborhood_median": 0.2482,
+     "neighborhood_ppsf_x_sqft": 0.2109,
+     "assessor_ratio": 0.1709,
+     "regression": 0.202,
+     "regression_with_assessor": 0.1662
+    }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 2677,
+    "excluded": 134,
+    "mdape": 0.1868,
+    "mape": 0.2718,
+    "median_signed_error": -0.0714,
+    "share_within_10pct": 0.2884,
+    "share_within_20pct": 0.5331,
+    "p80_abs_error": 0.3885
+   },
+   "baseline_neighborhood_median": {
+    "n": 2810,
+    "excluded": 1,
+    "mdape": 0.2319,
+    "mape": 0.3659,
+    "median_signed_error": -0.0396,
+    "share_within_10pct": 0.2402,
+    "share_within_20pct": 0.4473,
+    "p80_abs_error": 0.494
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": false,
+    "reason": "median error 18.7% is above the 15% limit"
+   },
+   "by_price_band": {
+    "under $500k": {
+     "n": 2279,
+     "excluded": 0,
+     "mdape": 0.1944,
+     "mape": 0.2871,
+     "median_signed_error": -0.0628,
+     "share_within_10pct": 0.2747,
+     "share_within_20pct": 0.5138,
+     "p80_abs_error": 0.4096
+    },
+    "$500k-$1M": {
+     "n": 339,
+     "excluded": 0,
+     "mdape": 0.151,
+     "mape": 0.1784,
+     "median_signed_error": -0.1052,
+     "share_within_10pct": 0.3835,
+     "share_within_20pct": 0.6578,
+     "p80_abs_error": 0.2641
+    },
+    "$1M-$2M": {
+     "n": 48,
+     "excluded": 0,
+     "mdape": 0.1624,
+     "mape": 0.2066,
+     "median_signed_error": -0.1465,
+     "share_within_10pct": 0.2917,
+     "share_within_20pct": 0.6042,
+     "p80_abs_error": 0.2842
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 2810,
+     "excluded": 1,
+     "mdape": 0.2319,
+     "mape": 0.3659,
+     "median_signed_error": -0.0396,
+     "share_within_10pct": 0.2402,
+     "share_within_20pct": 0.4473,
+     "p80_abs_error": 0.494
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 2810,
+     "excluded": 1,
+     "mdape": 0.1995,
+     "mape": 0.3267,
+     "median_signed_error": -0.0499,
+     "share_within_10pct": 0.2644,
+     "share_within_20pct": 0.5011,
+     "p80_abs_error": 0.435
+    },
+    "assessor_ratio": {
+     "n": 2678,
+     "excluded": 133,
+     "mdape": 0.181,
+     "mape": 0.2895,
+     "median_signed_error": -0.0663,
+     "share_within_10pct": 0.2909,
+     "share_within_20pct": 0.5392,
+     "p80_abs_error": 0.408
+    },
+    "regression": {
+     "n": 2810,
+     "excluded": 1,
+     "mdape": 0.2057,
+     "mape": 0.3121,
+     "median_signed_error": -0.0708,
+     "share_within_10pct": 0.258,
+     "share_within_20pct": 0.489,
+     "p80_abs_error": 0.4206
+    },
+    "regression_with_assessor": {
+     "n": 2677,
+     "excluded": 134,
+     "mdape": 0.1868,
+     "mape": 0.2718,
+     "median_signed_error": -0.0714,
+     "share_within_10pct": 0.2884,
+     "share_within_20pct": 0.5331,
+     "p80_abs_error": 0.3885
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 133
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_42101.json"
+   }
+  },
+  "06037": {
+   "_status": "backtest_run",
+   "countyFips": "06037",
+   "countyName": "Los Angeles County",
+   "model_name": "la_assessor_resets_regression",
+   "run_on": "2026-11-16",
+   "script": "scripts/la_valuation_models.mjs final",
+   "sample_file": "data/backtests/la_sample_2026-11-16.json.gz",
+   "training_file": "data/backtests/la_resets_2022-2024_2026-11-16.json.gz",
+   "result_file": "data/backtests/la_model_test_2026-11-16.json",
+   "target": "Prop 13 base-year value of single-family parcels whose land and improvement base years are both 2025 or 2026 (proxy for the transfer price).",
+   "legal_basis": {
+    "text": "Cal. Rev. & Tax. Code §110.1(a)-(b): the base year value is the fair market value on the date a purchase or change in ownership occurs (or new construction is completed). §110(b): on a purchase, full cash value is the purchase price paid, rebuttably presumed so for an arm's-length transaction.",
+    "sources": [
+     "https://california.public.law/codes/revenue_and_taxation_code_section_110.1",
+     "https://california.public.law/codes/revenue_and_taxation_code_section_110"
+    ],
+    "checked_on": "2026-11-16",
+    "note": "Read from california.public.law (a reproduction of the code); leginfo.legislature.ca.gov blocked automated access."
+   },
+   "split": {
+    "training": "Base-year 2022-24 resets (neighborhood statistics and model fit; cross-fitted so no home is in its own statistics).",
+    "development": "Model chosen on 2024 resets using statistics from 2022-23, then locked (commit 290ce39).",
+    "test": "Run once on 50723 base-year 2025-26 resets, with statistics from 2022-24 only. Test homes in training data: 0; test homes inside their own statistics: 0."
+   },
+   "what_is_tested": "The LA model the page uses (coefficients in app/data/la_neighborhood_values.json), applied to homes that had not changed hands in the statistics window.",
+   "model": {
+    "n": 50323,
+    "excluded": 400,
+    "mdape": 0.1042,
+    "mape": 0.2055,
+    "median_signed_error": -0.018,
+    "share_within_10pct": 0.484,
+    "share_within_20pct": 0.7624,
+    "p80_abs_error": 0.226
+   },
+   "baseline_neighborhood_median": {
+    "n": 50381,
+    "excluded": 342,
+    "mdape": 0.1267,
+    "mape": 0.2392,
+    "median_signed_error": -0.0165,
+    "share_within_10pct": 0.4135,
+    "share_within_20pct": 0.6789,
+    "p80_abs_error": 0.2896
+   },
+   "beats_baseline": true,
+   "gate": {
+    "mdape_cap": 0.15,
+    "pass": true,
+    "reason": null
+   },
+   "by_price_band": {
+    "$500k-$1M": {
+     "n": 26450,
+     "excluded": 194,
+     "mdape": 0.0868,
+     "mape": 0.1335,
+     "median_signed_error": -0.012,
+     "share_within_10pct": 0.5598,
+     "share_within_20pct": 0.8432,
+     "p80_abs_error": 0.1753
+    },
+    "$1M-$2M": {
+     "n": 14432,
+     "excluded": 122,
+     "mdape": 0.1172,
+     "mape": 0.1482,
+     "median_signed_error": -0.0516,
+     "share_within_10pct": 0.4313,
+     "share_within_20pct": 0.7588,
+     "p80_abs_error": 0.219
+    },
+    "under $500k": {
+     "n": 5017,
+     "excluded": 32,
+     "mdape": 0.1774,
+     "mape": 0.7453,
+     "median_signed_error": 0.1751,
+     "share_within_10pct": 0.3976,
+     "share_within_20pct": 0.519,
+     "p80_abs_error": 1.0919
+    },
+    "$2M and up": {
+     "n": 4424,
+     "excluded": 52,
+     "mdape": 0.1724,
+     "mape": 0.2113,
+     "median_signed_error": -0.1389,
+     "share_within_10pct": 0.3004,
+     "share_within_20pct": 0.5671,
+     "p80_abs_error": 0.3249
+    }
+   },
+   "candidates": [
+    {
+     "name": "neighborhood_median",
+     "overall": {
+      "n": 50381,
+      "excluded": 342,
+      "mdape": 0.1267,
+      "mape": 0.2392,
+      "median_signed_error": -0.0165,
+      "share_within_10pct": 0.4135,
+      "share_within_20pct": 0.6789,
+      "p80_abs_error": 0.2896
+     },
+     "by_price_band": {
+      "$500k-$1M": {
+       "n": 26465,
+       "excluded": 179,
+       "mdape": 0.0966,
+       "mape": 0.1517,
+       "median_signed_error": -0.0035,
+       "share_within_10pct": 0.5141,
+       "share_within_20pct": 0.7958,
+       "p80_abs_error": 0.2028
+      },
+      "$1M-$2M": {
+       "n": 14441,
+       "excluded": 113,
+       "mdape": 0.1585,
+       "mape": 0.1944,
+       "median_signed_error": -0.0699,
+       "share_within_10pct": 0.316,
+       "share_within_20pct": 0.6154,
+       "p80_abs_error": 0.2913
+      },
+      "under $500k": {
+       "n": 5028,
+       "excluded": 21,
+       "mdape": 0.2117,
+       "mape": 0.7941,
+       "median_signed_error": 0.2042,
+       "share_within_10pct": 0.3516,
+       "share_within_20pct": 0.4918,
+       "p80_abs_error": 1.1227
+      },
+      "$2M and up": {
+       "n": 4447,
+       "excluded": 29,
+       "mdape": 0.2504,
+       "mape": 0.2781,
+       "median_signed_error": -0.2137,
+       "share_within_10pct": 0.2019,
+       "share_within_20pct": 0.4009,
+       "p80_abs_error": 0.4389
+      }
+     },
+     "gate": {
+      "pass": true,
+      "reason": null
+     }
+    },
+    {
+     "name": "neighborhood_ppsf_x_sqft",
+     "overall": {
+      "n": 50381,
+      "excluded": 342,
+      "mdape": 0.1627,
+      "mape": 0.2702,
+      "median_signed_error": -0.0201,
+      "share_within_10pct": 0.3202,
+      "share_within_20pct": 0.5914,
+      "p80_abs_error": 0.3273
+     },
+     "by_price_band": {
+      "$500k-$1M": {
+       "n": 26465,
+       "excluded": 179,
+       "mdape": 0.1551,
+       "mape": 0.2123,
+       "median_signed_error": -0.0312,
+       "share_within_10pct": 0.3314,
+       "share_within_20pct": 0.6159,
+       "p80_abs_error": 0.2989
+      },
+      "$1M-$2M": {
+       "n": 14441,
+       "excluded": 113,
+       "mdape": 0.1555,
+       "mape": 0.2074,
+       "median_signed_error": -0.0224,
+       "share_within_10pct": 0.3331,
+       "share_within_20pct": 0.6137,
+       "p80_abs_error": 0.3072
+      },
+      "under $500k": {
+       "n": 5028,
+       "excluded": 21,
+       "mdape": 0.2289,
+       "mape": 0.7756,
+       "median_signed_error": 0.1159,
+       "share_within_10pct": 0.2546,
+       "share_within_20pct": 0.4564,
+       "p80_abs_error": 1.1016
+      },
+      "$2M and up": {
+       "n": 4447,
+       "excluded": 29,
+       "mdape": 0.1895,
+       "mape": 0.2473,
+       "median_signed_error": -0.0459,
+       "share_within_10pct": 0.286,
+       "share_within_20pct": 0.5257,
+       "p80_abs_error": 0.3899
+      }
+     },
+     "gate": {
+      "pass": false,
+      "reason": "median error 16.3% is above the 15% limit"
+     }
+    },
+    {
+     "name": "regression",
+     "overall": {
+      "n": 50323,
+      "excluded": 400,
+      "mdape": 0.1042,
+      "mape": 0.2055,
+      "median_signed_error": -0.018,
+      "share_within_10pct": 0.484,
+      "share_within_20pct": 0.7624,
+      "p80_abs_error": 0.226
+     },
+     "by_price_band": {
+      "$500k-$1M": {
+       "n": 26450,
+       "excluded": 194,
+       "mdape": 0.0868,
+       "mape": 0.1335,
+       "median_signed_error": -0.012,
+       "share_within_10pct": 0.5598,
+       "share_within_20pct": 0.8432,
+       "p80_abs_error": 0.1753
+      },
+      "$1M-$2M": {
+       "n": 14432,
+       "excluded": 122,
+       "mdape": 0.1172,
+       "mape": 0.1482,
+       "median_signed_error": -0.0516,
+       "share_within_10pct": 0.4313,
+       "share_within_20pct": 0.7588,
+       "p80_abs_error": 0.219
+      },
+      "under $500k": {
+       "n": 5017,
+       "excluded": 32,
+       "mdape": 0.1774,
+       "mape": 0.7453,
+       "median_signed_error": 0.1751,
+       "share_within_10pct": 0.3976,
+       "share_within_20pct": 0.519,
+       "p80_abs_error": 1.0919
+      },
+      "$2M and up": {
+       "n": 4424,
+       "excluded": 52,
+       "mdape": 0.1724,
+       "mape": 0.2113,
+       "median_signed_error": -0.1389,
+       "share_within_10pct": 0.3004,
+       "share_within_20pct": 0.5671,
+       "p80_abs_error": 0.3249
+      }
+     },
+     "gate": {
+      "pass": true,
+      "reason": null
+     }
+    },
+    {
+     "name": "old_bundle_typical_value (untraceable m.hv, for reference)",
+     "overall": {
+      "n": 50720,
+      "excluded": 3,
+      "mdape": 0.1495,
+      "mape": 0.2604,
+      "median_signed_error": -0.0571,
+      "share_within_10pct": 0.3536,
+      "share_within_20pct": 0.6176,
+      "p80_abs_error": 0.3326
+     },
+     "by_price_band": {
+      "$500k-$1M": {
+       "n": 26644,
+       "excluded": 0,
+       "mdape": 0.1147,
+       "mape": 0.167,
+       "median_signed_error": -0.0449,
+       "share_within_10pct": 0.4419,
+       "share_within_20pct": 0.7475,
+       "p80_abs_error": 0.2287
+      },
+      "$1M-$2M": {
+       "n": 14552,
+       "excluded": 2,
+       "mdape": 0.1943,
+       "mape": 0.2358,
+       "median_signed_error": -0.1187,
+       "share_within_10pct": 0.2592,
+       "share_within_20pct": 0.5126,
+       "p80_abs_error": 0.3525
+      },
+      "under $500k": {
+       "n": 5049,
+       "excluded": 0,
+       "mdape": 0.2021,
+       "mape": 0.7523,
+       "median_signed_error": 0.1738,
+       "share_within_10pct": 0.3288,
+       "share_within_20pct": 0.4985,
+       "p80_abs_error": 1.055
+      },
+      "$2M and up": {
+       "n": 4475,
+       "excluded": 1,
+       "mdape": 0.3072,
+       "mape": 0.3418,
+       "median_signed_error": -0.2513,
+       "share_within_10pct": 0.1625,
+       "share_within_20pct": 0.3204,
+       "p80_abs_error": 0.5235
+      }
+     },
+     "gate": {
+      "pass": false,
+      "reason": "does not beat the neighborhood median alone (14.9% vs 12.7%)"
+     }
+    }
+   ],
+   "previous_page_model": {
+    "_status": "backtest_run",
+    "countyFips": "06037",
+    "countyName": "Los Angeles County",
+    "run_on": "2026-11-16",
+    "script": "scripts/backtest_la_valuation.mjs",
+    "sample_file": "data/backtests/la_sample_2026-11-16.json.gz",
+    "target": "Prop 13 base-year value (Roll_LandValue + Roll_ImpValue) of single-family parcels whose land and improvement base years are both 2025 or 2026, on the 2026 roll: a proxy for the 2025/2026 transfer price.",
+    "legal_basis": {
+     "text": "Cal. Rev. & Tax. Code §110.1(a)-(b): the base year value is the fair market value on the date a purchase or change in ownership occurs (or new construction is completed). §110(b): on a purchase, full cash value is the purchase price paid, rebuttably presumed so for an arm's-length transaction.",
+     "sources": [
+      "https://california.public.law/codes/revenue_and_taxation_code_section_110.1",
+      "https://california.public.law/codes/revenue_and_taxation_code_section_110"
+     ],
+     "checked_on": "2026-11-16",
+     "note": "Read from california.public.law (a reproduction of the code); leginfo.legislature.ca.gov blocked automated access."
+    },
+    "what_is_tested": "The page's estimatePropertyMarketValue() from app/app.js, run verbatim with the parcel's roll values and base years withheld (the estimate shown for a home that has not recently sold). No pool/garage facts from OpenStreetMap or permits were supplied.",
+    "baseline": "The block group's typical home value alone (details m.hv).",
+    "caveats": [
+     "Base-year resets are a proxy for sales: some are non-sale transfers reassessed at the assessor's appraisal (e.g. under Prop 19).",
+     "2025 base-year values on the 2026 roll include one annual inflation factor (at most 2%).",
+     "The block-group typical values were built from 2022-24 data by code that is not in this repository; no price index brings them to 2025-26, so some under-estimation is expected and is part of the measured error.",
+     "Only single-family use code 0100 was tested; condos, multi-unit and vacant land are not covered.",
+     "The page withholds its estimate when the neighborhood value is $2M or more (a guard written for the Census ACS top-code). In LA the neighborhood value comes from recorded sales, not ACS, so this guard withholds most $2M+ homes; those rows are counted as 'excluded' in the model metrics."
+    ],
+    "sample": {
+     "pulled_records": 53958,
+     "tested": 50720,
+     "excluded": {
+      "land under $50k or improvements under $20k (odd or partial value)": 1419,
+      "built 2024 or later, or year built missing (could be new construction)": 526,
+      "not exactly one unit": 1230,
+      "living area missing or under 400 sq ft": 23,
+      "effective year 2024 or later (major remodel or rebuild)": 10,
+      "value over $20M": 17,
+      "block group has no typical value on file": 3,
+      "outside every LA block group in the bundle": 10
+     },
+     "queries": [
+      {
+       "base_year": "2025",
+       "where": "Roll_LandBaseYear='2025' AND Roll_ImpBaseYear='2025' AND UseCode='0100'",
+       "count": 34776,
+       "url_pattern": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=Roll_LandBaseYear%3D'2025'%20AND%20Roll_ImpBaseYear%3D'2025'%20AND%20UseCode%3D'0100'&outFields=...&orderByFields=OBJECTID&resultOffset=<0,1000,...>&resultRecordCount=1000&f=json"
+      },
+      {
+       "base_year": "2026",
+       "where": "Roll_LandBaseYear='2026' AND Roll_ImpBaseYear='2026' AND UseCode='0100'",
+       "count": 19182,
+       "url_pattern": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=Roll_LandBaseYear%3D'2026'%20AND%20Roll_ImpBaseYear%3D'2026'%20AND%20UseCode%3D'0100'&outFields=...&orderByFields=OBJECTID&resultOffset=<0,1000,...>&resultRecordCount=1000&f=json"
+      }
+     ],
+     "pulled_at": "2026-11-16T10:33:54.005Z"
+    },
+    "model": {
+     "n": 47172,
+     "excluded": 3548,
+     "mdape": 0.188,
+     "mape": 0.2591,
+     "median_signed_error": -0.1314,
+     "share_within_10pct": 0.2532,
+     "share_within_20pct": 0.534,
+     "p80_abs_error": 0.3212
+    },
+    "baseline_neighborhood_median": {
+     "n": 50720,
+     "excluded": 0,
+     "mdape": 0.1495,
+     "mape": 0.2604,
+     "median_signed_error": -0.0571,
+     "share_within_10pct": 0.3536,
+     "share_within_20pct": 0.6176,
+     "p80_abs_error": 0.3326
+    },
+    "beats_baseline": false,
+    "gate": {
+     "mdape_cap": 0.15,
+     "pass": false,
+     "reason": "median error 18.8% is above the 15% limit"
+    },
+    "by_price_band": {
+     "groups": {
+      "$500k-$1M": {
+       "n": 26557,
+       "excluded": 87,
+       "mdape": 0.1818,
+       "mape": 0.2049,
+       "median_signed_error": -0.1461,
+       "share_within_10pct": 0.2508,
+       "share_within_20pct": 0.5605,
+       "p80_abs_error": 0.2866
+      },
+      "$1M-$2M": {
+       "n": 13525,
+       "excluded": 1027,
+       "mdape": 0.1936,
+       "mape": 0.2192,
+       "median_signed_error": -0.1393,
+       "share_within_10pct": 0.2539,
+       "share_within_20pct": 0.5162,
+       "p80_abs_error": 0.3354
+      },
+      "under $500k": {
+       "n": 5035,
+       "excluded": 14,
+       "mdape": 0.1806,
+       "mape": 0.6222,
+       "median_signed_error": 0.0786,
+       "share_within_10pct": 0.3098,
+       "share_within_20pct": 0.536,
+       "p80_abs_error": 0.8061
+      },
+      "$2M and up": {
+       "n": 2055,
+       "excluded": 2420,
+       "mdape": 0.3111,
+       "mape": 0.3328,
+       "median_signed_error": -0.3056,
+       "share_within_10pct": 0.1416,
+       "share_within_20pct": 0.3036,
+       "p80_abs_error": 0.5199
+      }
+     },
+     "rows_in_small_groups": 0,
+     "min_group_size": 30
+    },
+    "by_price_band_baseline": {
+     "groups": {
+      "$500k-$1M": {
+       "n": 26644,
+       "excluded": 0,
+       "mdape": 0.1147,
+       "mape": 0.167,
+       "median_signed_error": -0.0449,
+       "share_within_10pct": 0.4419,
+       "share_within_20pct": 0.7475,
+       "p80_abs_error": 0.2287
+      },
+      "$1M-$2M": {
+       "n": 14552,
+       "excluded": 0,
+       "mdape": 0.1943,
+       "mape": 0.2358,
+       "median_signed_error": -0.1187,
+       "share_within_10pct": 0.2592,
+       "share_within_20pct": 0.5126,
+       "p80_abs_error": 0.3525
+      },
+      "under $500k": {
+       "n": 5049,
+       "excluded": 0,
+       "mdape": 0.2021,
+       "mape": 0.7523,
+       "median_signed_error": 0.1738,
+       "share_within_10pct": 0.3288,
+       "share_within_20pct": 0.4985,
+       "p80_abs_error": 1.055
+      },
+      "$2M and up": {
+       "n": 4475,
+       "excluded": 0,
+       "mdape": 0.3072,
+       "mape": 0.3418,
+       "median_signed_error": -0.2513,
+       "share_within_10pct": 0.1625,
+       "share_within_20pct": 0.3204,
+       "p80_abs_error": 0.5235
+      }
+     },
+     "rows_in_small_groups": 0,
+     "min_group_size": 30
+    },
+    "by_base_year": {
+     "groups": {
+      "2025": {
+       "n": 30168,
+       "excluded": 2261,
+       "mdape": 0.1942,
+       "mape": 0.2741,
+       "median_signed_error": -0.1406,
+       "share_within_10pct": 0.2381,
+       "share_within_20pct": 0.5158,
+       "p80_abs_error": 0.3277
+      },
+      "2026": {
+       "n": 17004,
+       "excluded": 1287,
+       "mdape": 0.1767,
+       "mape": 0.2325,
+       "median_signed_error": -0.1141,
+       "share_within_10pct": 0.2801,
+       "share_within_20pct": 0.5663,
+       "p80_abs_error": 0.3098
+      }
+     },
+     "rows_in_small_groups": 0,
+     "min_group_size": 30
+    },
+    "by_neighborhood_value_source": {
+     "groups": {
+      "typical value from recorded sales in the block group": {
+       "n": 44770,
+       "excluded": 3516,
+       "mdape": 0.1857,
+       "mape": 0.2575,
+       "median_signed_error": -0.1282,
+       "share_within_10pct": 0.2573,
+       "share_within_20pct": 0.5409,
+       "p80_abs_error": 0.317
+      },
+      "typical value estimated from surrounding neighborhood": {
+       "n": 2402,
+       "excluded": 32,
+       "mdape": 0.239,
+       "mape": 0.289,
+       "median_signed_error": -0.194,
+       "share_within_10pct": 0.1774,
+       "share_within_20pct": 0.4042,
+       "p80_abs_error": 0.3841
+      }
+     },
+     "rows_in_small_groups": 0,
+     "min_group_size": 30
+    },
+    "by_city_top20": {
+     "groups": {
+      "LOS ANGELES": {
+       "n": 15925,
+       "excluded": 1878,
+       "mdape": 0.1946,
+       "mape": 0.2735,
+       "median_signed_error": -0.1315,
+       "share_within_10pct": 0.2527,
+       "share_within_20pct": 0.5125,
+       "p80_abs_error": 0.3474
+      },
+      "LANCASTER": {
+       "n": 2309,
+       "excluded": 0,
+       "mdape": 0.1138,
+       "mape": 0.1576,
+       "median_signed_error": -0.0086,
+       "share_within_10pct": 0.45,
+       "share_within_20pct": 0.7614,
+       "p80_abs_error": 0.2187
+      },
+      "LONG BEACH": {
+       "n": 2255,
+       "excluded": 33,
+       "mdape": 0.2329,
+       "mape": 0.2954,
+       "median_signed_error": -0.2173,
+       "share_within_10pct": 0.1446,
+       "share_within_20pct": 0.3973,
+       "p80_abs_error": 0.3511
+      },
+      "PALMDALE": {
+       "n": 1827,
+       "excluded": 0,
+       "mdape": 0.1273,
+       "mape": 0.1803,
+       "median_signed_error": 0.0221,
+       "share_within_10pct": 0.4023,
+       "share_within_20pct": 0.7039,
+       "p80_abs_error": 0.2558
+      },
+      "WHITTIER": {
+       "n": 1259,
+       "excluded": 0,
+       "mdape": 0.1863,
+       "mape": 0.2223,
+       "median_signed_error": -0.1695,
+       "share_within_10pct": 0.2121,
+       "share_within_20pct": 0.5488,
+       "p80_abs_error": 0.2704
+      },
+      "TORRANCE": {
+       "n": 1145,
+       "excluded": 42,
+       "mdape": 0.1921,
+       "mape": 0.3583,
+       "median_signed_error": -0.1533,
+       "share_within_10pct": 0.2245,
+       "share_within_20pct": 0.5179,
+       "p80_abs_error": 0.3376
+      },
+      "SANTA CLARITA": {
+       "n": 1129,
+       "excluded": 0,
+       "mdape": 0.1337,
+       "mape": 0.2177,
+       "median_signed_error": 0.012,
+       "share_within_10pct": 0.3676,
+       "share_within_20pct": 0.6652,
+       "p80_abs_error": 0.2975
+      },
+      "PASADENA": {
+       "n": 784,
+       "excluded": 117,
+       "mdape": 0.2166,
+       "mape": 0.2934,
+       "median_signed_error": -0.159,
+       "share_within_10pct": 0.2513,
+       "share_within_20pct": 0.4668,
+       "p80_abs_error": 0.3658
+      },
+      "COMPTON": {
+       "n": 868,
+       "excluded": 0,
+       "mdape": 0.24,
+       "mape": 0.2477,
+       "median_signed_error": -0.227,
+       "share_within_10pct": 0.1452,
+       "share_within_20pct": 0.3652,
+       "p80_abs_error": 0.3213
+      },
+      "LAKEWOOD": {
+       "n": 814,
+       "excluded": 0,
+       "mdape": 0.2099,
+       "mape": 0.2419,
+       "median_signed_error": -0.2022,
+       "share_within_10pct": 0.1155,
+       "share_within_20pct": 0.4459,
+       "p80_abs_error": 0.2764
+      },
+      "GLENDALE": {
+       "n": 766,
+       "excluded": 5,
+       "mdape": 0.1859,
+       "mape": 0.2763,
+       "median_signed_error": -0.0915,
+       "share_within_10pct": 0.2898,
+       "share_within_20pct": 0.5274,
+       "p80_abs_error": 0.3819
+      },
+      "NORWALK": {
+       "n": 733,
+       "excluded": 0,
+       "mdape": 0.2311,
+       "mape": 0.2567,
+       "median_signed_error": -0.2224,
+       "share_within_10pct": 0.0696,
+       "share_within_20pct": 0.3383,
+       "p80_abs_error": 0.3007
+      },
+      "POMONA": {
+       "n": 713,
+       "excluded": 0,
+       "mdape": 0.1925,
+       "mape": 0.2286,
+       "median_signed_error": -0.1762,
+       "share_within_10pct": 0.2076,
+       "share_within_20pct": 0.5302,
+       "p80_abs_error": 0.2949
+      },
+      "LA PUENTE": {
+       "n": 672,
+       "excluded": 0,
+       "mdape": 0.1918,
+       "mape": 0.2198,
+       "median_signed_error": -0.171,
+       "share_within_10pct": 0.2068,
+       "share_within_20pct": 0.5387,
+       "p80_abs_error": 0.2671
+      },
+      "BURBANK": {
+       "n": 639,
+       "excluded": 0,
+       "mdape": 0.1737,
+       "mape": 0.2943,
+       "median_signed_error": -0.1335,
+       "share_within_10pct": 0.2598,
+       "share_within_20pct": 0.5775,
+       "p80_abs_error": 0.3317
+      },
+      "CARSON": {
+       "n": 606,
+       "excluded": 0,
+       "mdape": 0.1567,
+       "mape": 0.2036,
+       "median_signed_error": -0.1371,
+       "share_within_10pct": 0.2805,
+       "share_within_20pct": 0.6469,
+       "p80_abs_error": 0.253
+      },
+      "WEST COVINA": {
+       "n": 508,
+       "excluded": 0,
+       "mdape": 0.1366,
+       "mape": 0.1834,
+       "median_signed_error": -0.1066,
+       "share_within_10pct": 0.3484,
+       "share_within_20pct": 0.6969,
+       "p80_abs_error": 0.2405
+      },
+      "DOWNEY": {
+       "n": 487,
+       "excluded": 0,
+       "mdape": 0.1874,
+       "mape": 0.2533,
+       "median_signed_error": -0.1541,
+       "share_within_10pct": 0.193,
+       "share_within_20pct": 0.5647,
+       "p80_abs_error": 0.2709
+      },
+      "COVINA": {
+       "n": 457,
+       "excluded": 0,
+       "mdape": 0.1931,
+       "mape": 0.2302,
+       "median_signed_error": -0.1722,
+       "share_within_10pct": 0.2057,
+       "share_within_20pct": 0.5317,
+       "p80_abs_error": 0.2902
+      },
+      "GLENDORA": {
+       "n": 410,
+       "excluded": 0,
+       "mdape": 0.1579,
+       "mape": 0.2151,
+       "median_signed_error": -0.1094,
+       "share_within_10pct": 0.3073,
+       "share_within_20pct": 0.6732,
+       "p80_abs_error": 0.2499
+      }
+     },
+     "rows_in_small_groups": 2410,
+     "min_group_size": 100
+    },
+    "verification": {
+     "status": "verified",
+     "method": "Machine-run back-test: every tested record and every query is in the sample file; re-run the script to reproduce.",
+     "checked_on": "2026-11-16",
+     "evidence": "50720 parcels; model MdAPE 0.188; baseline MdAPE 0.1495",
+     "notes": "Verified means the metrics are computed from the public records as stated; it does not make the proxy a recorded sale."
+    }
+   },
+   "caveats": [
+    "Base-year resets are a proxy for sales: some are non-sale transfers reassessed at the Assessor's appraisal (e.g. under Prop 19).",
+    "Only single-family use code 0100 was tested; condos, multi-unit and vacant land are not covered.",
+    "The page uses statistics from 2022-26 resets, one year fresher than the tested 2022-24 configuration.",
+    "Error is larger for homes under $500k and $2M and up (see by_price_band); the page says so for those homes."
+   ],
+   "verification": {
+    "status": "verified",
+    "method": "Machine-run back-test on saved public records; the result file and both pulls are in data/backtests/.",
+    "checked_on": "2026-11-16",
+    "evidence": "regression MdAPE 0.1042 on 50323 homes; neighborhood median 0.1267",
+    "notes": "Verified means the metrics are computed from the public records as stated; it does not make the proxy a recorded sale."
+   }
   }
+ }
 }
