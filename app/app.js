@@ -618,17 +618,35 @@ function publishLaValuation(v, bt, ctx) {
 }
 
 // ---- Counties whose model passed a recorded-sales back-test (scripts/county_valuation_models.mjs). Must match
-// features("regression", ...) in scripts/lib/countyValuationModels.mjs exactly (tests/unit/countyValuation.test.ts).
+// features("regression", ...) / features("regression_pluto", ...) in scripts/lib/countyValuationModels.mjs exactly
+// (tests/unit/countyValuation.test.ts, tests/e2e/site.spec.ts).
 function countyModelEstimate(fips, a, bg) {
   const C = COUNTY_VALUATION_MODELS && COUNTY_VALUATION_MODELS.counties && COUNTY_VALUATION_MODELS.counties[fips];
   if (!C) return { value: null, reason: "The tested model's data has not loaded." };
   const M = C.input_map || {};
   a = a || {};
   const g = (k) => (M[k] && a[M[k]] != null && a[M[k]] !== "" ? +a[M[k]] : null);
-  const sqft = g("sqft"), lot = g("lot"), yb = g("yb"), beds = g("beds");
-  const baths = g("baths") == null ? null : g("baths") + 0.5 * (g("half_baths") || 0);
   // (null >= 0 is true in JavaScript, so each input is checked for null explicitly)
   const ok = (x, test) => x != null && Number.isFinite(x) && test(x);
+  const nbhd = () => {
+    const b = bg && C.stats.bg[bg], t = bg && C.stats.tract[String(bg).slice(0, 11)];
+    return b && b[0] >= 5 ? { level: "block group", n: b[0], median: b[1], ppsf: b[2], d0: b[3], d1: b[4] } : t && t[0] >= 5 ? { level: "tract", n: t[0], median: t[1], ppsf: t[2], d0: t[3], d1: t[4] } : null;
+  };
+  if (C.model.spec === "regression_pluto") {
+    // NYC: PLUTO's building area, lot area, year built and residential units (no rooms in PLUTO).
+    const sq = g("sqft"), lt = g("lot"), y = g("yb"), u = g("units");
+    const miss = [!ok(sq, (x) => x >= 400) && "building area", !ok(lt, (x) => x > 0) && "lot area", !ok(y, (x) => x > 1700) && "year built",
+      !ok(u, (x) => x === 1 || x === 2) && "a one- or two-family unit count"].filter(Boolean);
+    if (miss.length) return { value: null, reason: `The tested model needs the ${miss.join(", ")}, which ${miss.length > 1 ? "are" : "is"} not on file for this parcel (it was tested on one- and two-family homes only).` };
+    const n = nbhd();
+    if (!n) return { value: null, reason: "Too few recorded sales nearby to anchor the tested model." };
+    if (!Array.isArray(C.model.coef) || C.model.coef.length !== 8) return { value: null, reason: "The tested model's coefficients don't match its inputs." };
+    const x = [1, Math.log(n.ppsf), Math.log(n.median), Math.log(sq), Math.log(Math.min(Math.max(lt, 500), 200000)), (2026 - y) / 100, u === 2 ? 1 : 0, n.level === "tract" ? 1 : 0];
+    const v = Math.exp(x.reduce((s2, xi, i) => s2 + xi * C.model.coef[i], 0));
+    return { value: Math.round(v / 1000) * 1000, raw: v, neighborhood: n, tested: C.tested };
+  }
+  const sqft = g("sqft"), lot = g("lot"), yb = g("yb"), beds = g("beds");
+  const baths = g("baths") == null ? null : g("baths") + 0.5 * (g("half_baths") || 0);
   const missing = [!ok(sqft, (x) => x >= 400) && "living area", !ok(lot, (x) => x > 0) && "land area", !ok(yb, (x) => x > 1700) && "year built",
     !ok(beds, (x) => x >= 0) && "bedrooms", !ok(baths, (x) => x >= 0) && "bathrooms"].filter(Boolean);
   if (missing.length) return { value: null, reason: `The tested model needs the ${missing.join(", ")}, which ${missing.length > 1 ? "are" : "is"} not on file for this parcel.` };

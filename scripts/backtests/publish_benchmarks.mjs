@@ -16,6 +16,12 @@ const INPUT_MAPS = {
   "11001": { sqft: "CAMA_GBA", lot: "CAMA_LANDAREA", yb: "CAMA_AYB", beds: "CAMA_BEDRM", baths: "CAMA_BATHRM", half_baths: "CAMA_HF_BATHRM",
              source: "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Property_and_Land_WebMercator/MapServer/25 (RESIDENTIAL (CAMA)), by SSL" },
 };
+// NYC boroughs: the page's parcel layer is MapPLUTO (26v2, same release and values as the PLUTO the back-test joined;
+// checked 16 Nov on BBL 4099020104). Same four fields the test used (scripts/backtests/pull_nyc.py).
+for (const f of ["36005", "36047", "36061", "36081", "36085"]) {
+  INPUT_MAPS[f] = { sqft: "BldgArea", lot: "LotArea", yb: "YearBuilt", units: "UnitsRes",
+    source: "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/MAPPLUTO/FeatureServer/0 (NYC MapPLUTO 26v2)" };
+}
 const bench = JSON.parse(fs.readFileSync(BENCH, "utf8"));
 const models = fs.existsSync(MODELS) ? JSON.parse(fs.readFileSync(MODELS, "utf8")) : { _source: "scripts/backtests/publish_benchmarks.mjs; one entry per county whose model passed its back-test", counties: {} };
 
