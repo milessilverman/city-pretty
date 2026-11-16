@@ -97,9 +97,11 @@ What "which house should I buy" needs, with the cheapest honest source for each:
 
 **First real back-test (LA, 16 Nov):** using Prop 13 base-year resets as a sale-price proxy (50,720 homes that changed
 hands in 2025–26), the page's home-value model had an 18.8% median error and did **worse than the neighborhood
-typical value alone (15.0%)**. LA estimates are now withheld with those numbers shown. Next: (1) rebuild the LA
-neighborhood values from the assessor's own base-year resets with the code committed (today's values can't be
-traced); (2) replace the model with one that beats that baseline in the back-test before showing any estimate.
+typical value alone (15.0%)**. **Both follow-ups are done (round 2):** LA neighborhood values were rebuilt from
+150,596 Assessor transfers (traceable, script and raw data committed), and a simple regression, locked before testing
+and tested once on 50,723 2025–26 transfers, reached a **10.4% median error** (neighborhood median: 12.7%), so LA shows
+it with its tested error. Next: recompute the LA improvement estimates from the rebuilt values; extend the same
+method to other California counties (Prop 13 applies statewide; each needs its Assessor's parcel data).
 
 **Recommendation:** start with free sources plus RentCast at $74/month. It gives sales comps for back-tests outside
 California (the Prop 13 proxy only works in California). Add Regrid when you need more counties

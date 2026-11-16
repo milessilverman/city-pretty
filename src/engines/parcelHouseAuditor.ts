@@ -104,6 +104,7 @@ export function auditSingleHouseParcel(input: HouseParcelAuditInput) {
   // 1. Value screening estimate (unvalidated; see estimatePropertyMarketValue)
   const saleYear = input.lastSaleDate ? +String(input.lastSaleDate).replace(/\D/g, "").slice(0, 4) || null : null;
   const baseAvm = _estVal({
+    countyFips: input.countyFips ?? null,
     attributes: {
       Roll_LandValue: input.rollLandValue,
       Roll_ImpValue: input.rollImpValue,

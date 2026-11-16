@@ -76,6 +76,36 @@ a proxy (some are non-sale reassessments); 2025 values include up to a 2% inflat
 (written for the Census ACS top-code) withholds most $2M+ homes in LA. Full results, by price band, base year and city:
 `app/data/valuation_backtest_benchmarks.json`; every record tested: `data/backtests/la_sample_2026-11-16.json.gz`.
 
+**Round 2 (later on 16 Nov): traceable neighborhood values and a model that passed.**
+
+*Neighborhood values.* The old LA block-group values ("median of N recorded home sales") could not be traced. They
+were rebuilt from the Assessor's public parcel layer: 150,596 single-family homes whose Prop 13 base year was reset in
+2022–2026, grouped by 2020 block group (tract fallback below 5 homes). Script `scripts/build_la_neighborhood_values.mjs`,
+output `app/data/la_neighborhood_values.json`, raw pulls with every query in `data/backtests/`. Compared with the old
+values (`docs/audit/la-neighborhood-values-comparison.json`): 6,029 block groups have both; the new values are a
+median 5.4% higher, half agree within 8.6%, 55% within 10%, 75% within 20%, and 588 (10%) differ by more than 50%.
+530 block groups that had an old value have no traceable one (too few single-family transfers) and now show none.
+
+*Model.* Protocol, fixed before the test: candidates developed only on 2022–24 resets (chosen on 2024 using
+statistics from 2022–23; model locked in commit 290ce39), then tested **once** on the 50,723 homes with 2025–26 resets,
+using neighborhood statistics from 2022–24 only. No test home is in the training data or in its own statistics.
+
+| Candidate (test: 2025–26 resets) | Median error | Within 10% | Within 20% | Median bias |
+|---|---|---|---|---|
+| Regression on log value (neighborhood $/sq ft and median, size, lot, age, beds, baths, quality class) | **10.4%** | 48% | 76% | −1.8% |
+| Neighborhood median (rebuilt, traceable) | 12.7% | 41% | 68% | −1.7% |
+| Neighborhood $/sq ft × living area | 16.3% | 32% | 59% | −2.0% |
+| Old bundle typical value (untraceable) | 15.0% | 35% | 62% | −5.7% |
+| The page's earlier generic estimate (first test) | 18.8% | 25% | 53% | −13% |
+
+The regression passes the rule (median error ≤ 15% and better than the neighborhood median), so **LA now shows its
+estimate with the tested error**, and says so when the home is in a price band where the test error was larger (under
+$500k: 17.7%; $2M and up: 17.2%). Homes with a 2025–26 recorded sale or Prop 13 base year show that figure instead.
+Homes missing an input the model needs (living area, lot, quality class, beds, baths, year built) get no estimate.
+Caveats: base-year resets remain a proxy for sales; only single-family homes were tested; the page uses statistics
+from 2022–26, one year fresher than the tested configuration. Not fixed yet: the LA improvement estimates in the county
+data file were computed from the old typical values and have not been recomputed.
+
 ### The improvement catalog (what the map recommends)
 
 Audited 16 Nov (`audit/bundle-catalog-audit.md`). The catalog of 81 improvements inside the county data files drives
@@ -106,7 +136,7 @@ return shown had been overstated about 2.5x.** Now 2 verified, 28 partly verifie
 returns are now withheld, rows are listed by name. Unchecked ADU claims shown for every house ("Exempt (0 spaces)",
 "Ministerial (60 Days)") were removed.
 
-**Open gap: LA neighborhood home values.** 4,348 LA block groups say their typical value is the "median of N
+**Closed later on 16 Nov (see 2a, round 2): LA neighborhood home values were rebuilt from Assessor records.** Original note: 4,348 LA block groups say their typical value is the "median of N
 recorded home sales (County Assessor)", and 1,127 more cite tract-level sales. LA County publishes no sale prices in
 its public parcel layer and the code that built these values is not in the repo, so they can't be traced. They are
 the base of every LA dollar figure (and the baseline in the LA back-test). They are now labeled unverified;

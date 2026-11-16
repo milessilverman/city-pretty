@@ -139,18 +139,27 @@ describe("fabricated content that was removed stays removed", () => {
 
     const la = d.counties["06037"];
     expect(la._status).toBe("backtest_run");
-    expect(la.script).toBe("scripts/backtest_la_valuation.mjs");
-    expect(fs.existsSync(path.join(root, la.script))).toBe(true);
-    // The sample behind the numbers is in the repo and matches what the result says was pulled.
+    expect(la.model_name).toBe("la_assessor_resets_regression");
+    for (const f of [la.sample_file, la.training_file, la.result_file]) expect(fs.existsSync(path.join(root, f))).toBe(true);
+    // The one final test: no test home in the training data or in its own neighborhood statistics.
+    const result = JSON.parse(fs.readFileSync(path.join(root, la.result_file), "utf8"));
+    expect(result.mode).toBe("final");
+    expect(result.test_ains_also_in_training).toBe(0);
+    expect(result.leakage_test_homes_in_their_own_statistics).toBe(0);
+    expect(la.model).toEqual(result.candidates.find((c: any) => c.label === "regression").overall);
+    // The sample behind the numbers is the public layer's.
     const sample = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root, la.sample_file))).toString("utf8"));
     expect(sample.source).toContain("public.gis.lacounty.gov");
-    expect(sample.records.length).toBe(la.sample.pulled_records);
-    const excluded = Object.values(la.sample.excluded as Record<string, number>).reduce((x, y) => x + y, 0);
-    expect(la.sample.tested + excluded).toBe(la.sample.pulled_records);
     // The publish/withhold decision follows the stated rule.
     const shouldPass = la.model.n >= 200 && la.model.mdape <= la.gate.mdape_cap && la.model.mdape < la.baseline_neighborhood_median.mdape;
     expect(la.gate.pass).toBe(shouldPass);
     expect(la.caveats.join(" ")).toMatch(/proxy/i);
+    // The earlier generic estimate's failed test is kept as history, not deleted.
+    expect(la.previous_page_model.script).toBe("scripts/backtest_la_valuation.mjs");
+    expect(la.previous_page_model.gate.pass).toBe(false);
+    // The page ships exactly the tested coefficients.
+    const nv = JSON.parse(fs.readFileSync(path.join(root, "app/data/la_neighborhood_values.json"), "utf8"));
+    expect(nv.model.coef).toEqual(result.regression.coef);
   });
 
   it("the nine hand-typed nationwide 'underused sites' are gone", () => {

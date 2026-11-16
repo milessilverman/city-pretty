@@ -11,7 +11,8 @@ const CP_DATA_FILES = {
   "state-finance-profiles": "state_finance_profiles.json", "unit-costs": "unit_costs.json", "hud-fmr": "hud_fair_market_rents.json",
   "valuation-benchmarks": "valuation_backtest_benchmarks.json", "underused-sites": "underused_sites.json",
   "intercity-corridors": "intercity_transit_corridors.json", "county-completeness": "county_completeness.json",
-  "ca-counties-registry": "ca_counties_registry.json", "intervention-verification": "intervention_verification.json", "upgrade-verification": "upgrade_verification.json"
+  "ca-counties-registry": "ca_counties_registry.json", "intervention-verification": "intervention_verification.json", "upgrade-verification": "upgrade_verification.json",
+  "la-neighborhood-values": "la_neighborhood_values.json"
 };
 const _cpData = {};
 function cpText(id) {
@@ -41,6 +42,8 @@ let UNIT_COSTS_DATA = [];
 let HUD_FMR_DATA = [];
 let HUD_FMR_SOURCE = null;
 let VALUATION_BACKTEST_BENCHMARKS = {};
+// Traceable LA block-group values and the tested LA home-value model (scripts/build_la_neighborhood_values.mjs).
+let LA_NEIGHBORHOOD_VALUES = null;
 let UNDERUSED_SITES_DATA = [];
 let INTERCITY_CORRIDORS_DATA = [];
 
@@ -80,6 +83,9 @@ function loadVerifiedDataFiles() {
     if (d && Array.isArray(d.records)) { HUD_FMR_DATA = d.records; HUD_FMR_SOURCE = d._source || null; }
   });
   cpJson("valuation-benchmarks").then(d => { if (d && typeof d === "object") VALUATION_BACKTEST_BENCHMARKS = d; });
+  cpJson("la-neighborhood-values").then(d => {
+    if (d && d.bg && d.model) { LA_NEIGHBORHOOD_VALUES = d; if (typeof applyLaNeighborhoodValuesToOpenChunks === "function") applyLaNeighborhoodValuesToOpenChunks(); }
+  });
   cpJson("underused-sites").then(d => { if (Array.isArray(d)) UNDERUSED_SITES_DATA = d; });
   cpJson("intercity-corridors").then(d => { if (Array.isArray(d)) INTERCITY_CORRIDORS_DATA = d; });
   cpJson("county-completeness").then(d => {
@@ -543,6 +549,65 @@ function backtestSummary(bt) {
     (base && base.mdape != null ? `; the neighborhood's typical value alone was off by ${backtestPct(base.mdape)}.` : ".");
 }
 
+// ---- Los Angeles County: the back-tested model (scripts/la_valuation_models.mjs; coefficients and test results in
+// app/data/la_neighborhood_values.json). Must match features() in scripts/lib/laValuationModels.mjs exactly
+// (tests/unit/laValuation.test.ts checks this).
+function laParseQuality(q) {
+  const mm = String(q || "").trim().match(/^([A-Z])(\d)(\d)?([A-Z])?/);
+  return mm ? (mm[3] ? +`${mm[2]}.${mm[3]}` : +mm[2]) : null;
+}
+function laModelEstimate(a, lot, bg) {
+  const N = LA_NEIGHBORHOOD_VALUES;
+  if (!N || !N.model) return { value: null, reason: "The LA model's data has not loaded." };
+  const n = laNeighborhoodValue(bg);
+  if (!n) return { value: null, reason: "Too few single-family homes changed hands near here in 2022–2026 to anchor the tested model." };
+  a = a || {};
+  const sqft = +a.SQFTmain1 || 0;
+  const lotSq = Math.round(+a["Shape.STArea()"] || 0) || Math.round(+lot || 0);
+  const yb = +a.YearBuilt1 || 0, eff = +a.EffectiveYear1 || 0;
+  const beds = a.Bedrooms1 == null ? null : +a.Bedrooms1, baths = a.Bathrooms1 == null ? null : +a.Bathrooms1;
+  const quality = laParseQuality(a.QualityClass1);
+  const missing = [!(sqft >= 400) && "living area", !(lotSq > 0) && "lot size", !(quality > 0) && "quality class",
+    !(beds >= 0) && "bedrooms", !(baths >= 0) && "bathrooms", !(yb > 1850) && "year built"].filter(Boolean);
+  if (missing.length) return { value: null, reason: `The tested model needs the Assessor's ${missing.join(", ")}, which ${missing.length > 1 ? "are" : "is"} not on file for this parcel.` };
+  const x = [1, Math.log(n.ppsf), Math.log(n.median), Math.log(sqft), Math.log(Math.min(Math.max(lotSq, 1000), 200000)),
+    (2026 - yb) / 100, (2026 - (eff > yb ? eff : yb)) / 100, Math.min(beds, 8), Math.min(baths, 8), quality, n.level === "tract" ? 1 : 0];
+  const c = N.model.coef;
+  if (!Array.isArray(c) || c.length !== x.length) return { value: null, reason: "The LA model's coefficients don't match its inputs." };
+  const v = Math.exp(x.reduce((s, xi, i) => s + xi * c[i], 0));
+  return { value: Math.round(v / 1000) * 1000, neighborhood: n };
+}
+function laPriceBand(v) { return v < 500000 ? "under $500k" : v < 1000000 ? "$500k-$1M" : v < 2000000 ? "$1M-$2M" : "$2M and up"; }
+function publishLaValuation(v, bt, ctx) {
+  ctx = ctx || {};
+  const T = (LA_NEIGHBORHOOD_VALUES && LA_NEIGHBORHOOD_VALUES.model && LA_NEIGHBORHOOD_VALUES.model.tested) || null;
+  const info = { summary: backtestSummary(bt), mdape: bt.model.mdape, n: bt.model.n, pass: true, run_on: bt.run_on, sample_file: bt.sample_file };
+  const by = +ctx.rollBaseYear || 0;
+  const saleYear = ctx.sale && ctx.sale.price > 0 ? +String(ctx.sale.date || "").replace(/\D/g, "").slice(0, 4) || 0 : 0;
+  const base = Object.assign({}, v, { backtest: info, valueLow: null, valueHigh: null, confidenceMarginPct: null });
+  const per = (val) => (val && v && v.livingSqft ? Math.round(val / v.livingSqft) : null);
+  if (saleYear >= VALUATION_CURRENT_YEAR - 1) {
+    return Object.assign(base, { estimatedValue: Math.round(ctx.sale.price), vpsf: per(ctx.sale.price), valuationMethod: `Recorded sale (${saleYear})`,
+      confidenceRating: `Recorded sale price, ${saleYear}`, withheldReason: null });
+  }
+  if (by >= VALUATION_CURRENT_YEAR - 1 && ctx.rollTotal > 0) {
+    return Object.assign(base, { estimatedValue: Math.round(ctx.rollTotal), vpsf: per(ctx.rollTotal),
+      valuationMethod: `Assessed value set in ${by} (Prop 13 base year)`,
+      confidenceRating: `Assessed value set at its ${by} change of ownership or new construction (Prop 13); the price paid is not published`, withheldReason: null });
+  }
+  if (!ctx.attributes) return Object.assign(base, { estimatedValue: null, vpsf: null, confidenceRating: "Withheld — parcel records not supplied", withheldReason: "The tested LA model needs the parcel's Assessor records." });
+  const e = laModelEstimate(ctx.attributes, ctx.lot, ctx.bg);
+  if (!e.value) return Object.assign(base, { estimatedValue: null, vpsf: null, confidenceRating: "Withheld — not enough on file for the tested model", withheldReason: `No estimate: ${e.reason}` });
+  const band = laPriceBand(e.value), bm = T && T.by_price_band && T.by_price_band[band];
+  const bandNote = bm && bm.mdape != null && bm.mdape > bt.model.mdape + 0.02 ? ` For homes ${band === "under $500k" ? "under $500k" : band === "$2M and up" ? "of $2M and up" : "in the " + band + " range"} the test error was larger: ${backtestPct(bm.mdape)}.` : "";
+  return Object.assign(base, {
+    estimatedValue: e.value, vpsf: per(e.value),
+    valuationMethod: `LA model on ${e.neighborhood.level} transfers ${e.neighborhood.y0}–${e.neighborhood.y1} (back-tested)`,
+    confidenceRating: `Back-tested estimate: off by a median of ${backtestPct(bt.model.mdape)} on ${bt.model.n.toLocaleString("en-US")} LA homes that changed hands in 2025–26 (${backtestPct(bt.model.share_within_20pct)} within 20%).${bandNote} Not an appraisal.`,
+    withheldReason: null,
+  });
+}
+
 // Publishing rule (ACCURACY-ROADMAP item 8): where a county has been back-tested, the estimate is shown only if it
 // passed (median error within the cap and better than the neighborhood value alone). Otherwise it is withheld with the
 // test's own numbers. Where no back-test exists, the estimate keeps its "unvalidated" label.
@@ -550,6 +615,12 @@ function publishValuation(v, fips, context) {
   if (!v) return v;
   const bt = valuationBacktestFor(fips);
   if (!bt) return Object.assign({}, v, { backtest: null });
+  if (bt.model_name === "la_assessor_resets_regression") {
+    // The pass belongs to the LA model, not to the generic estimate in `v`; never show `v` under it.
+    if (bt.gate && bt.gate.pass && LA_NEIGHBORHOOD_VALUES) return publishLaValuation(v, bt, context);
+    return Object.assign({}, v, { estimatedValue: null, vpsf: null, backtest: null, confidenceRating: "Withheld — the tested LA model is still loading",
+      withheldReason: "No estimate yet: the tested Los Angeles model's data is still loading." });
+  }
   const summary = backtestSummary(bt);
   const info = { summary, mdape: bt.model.mdape, n: bt.model.n, pass: !!(bt.gate && bt.gate.pass), run_on: bt.run_on, sample_file: bt.sample_file };
   if (info.pass) {
@@ -1061,6 +1132,8 @@ function auditSingleHouseParcel(input) {
     baseAvm = publishValuation(baseAvm, input.countyFips, {
       neighborhoodHv: input.neighborhoodMedianHv, rollBaseYear: input.rollBaseYear,
       rollTotal: (+input.rollLandValue || 0) + (+input.rollImpValue || 0),
+      sale: input.lastSalePrice ? { price: input.lastSalePrice, date: input.lastSaleDate || "" } : null,
+      attributes: input.assessorAttributes || null, lot: input.lotSqft || null, bg: input.blockGroupId || null,
     });
   }
 
@@ -1986,15 +2059,45 @@ async function b64Bytes(text) {
   try { return new Uint8Array(await (await fetch("data:application/octet-stream;base64," + text)).arrayBuffer()); }
   catch { const s = atob(text), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i); return u; }
 }
+// LA block-group typical values: the bundle's old m.hv ("median of N recorded home sales") could not be traced, so it
+// is replaced by the value rebuilt from the Assessor's public base-year resets (app/data/la_neighborhood_values.json).
+// Where no traceable value exists the old one is removed, not kept. The old figure stays in m.hv_bundle for audit.
+function laNeighborhoodValue(bg) {
+  const N = LA_NEIGHBORHOOD_VALUES;
+  if (!N || !bg) return null;
+  const b = N.bg[bg];
+  if (b && b[0] >= N.min_bg) return { level: "block group", n: b[0], median: b[1], ppsf: b[2], y0: b[3], y1: b[4] };
+  const t = N.tract[String(bg).slice(0, 11)];
+  if (t && t[0] >= N.min_tract) return { level: "tract", n: t[0], median: t[1], ppsf: t[2], y0: t[3], y1: t[4] };
+  return null;
+}
+function applyLaNeighborhoodValues(chunkObj) {
+  if (!LA_NEIGHBORHOOD_VALUES || !chunkObj) return;
+  for (const [bg, rec] of Object.entries(chunkObj)) {
+    const m = rec && rec.m;
+    if (!m || m.hv_rebuilt) continue;
+    m.hv_bundle = m.hv == null ? null : m.hv;
+    const nv = laNeighborhoodValue(bg);
+    m.hv = nv ? nv.median : null;
+    m.hvs = nv
+      ? `median of ${nv.n.toLocaleString("en-US")} homes that changed hands in ${nv.y0}–${nv.y1}${nv.level === "tract" ? " in the surrounding census tract" : ""} (assessed value at sale, LA County Assessor)`
+      : "no traceable value: too few single-family homes changed hands here in 2022–2026";
+    m.hv_rebuilt = true;
+  }
+}
+let LAZY_DETAILS_OPEN = null;
+function applyLaNeighborhoodValuesToOpenChunks() { if (LAZY_DETAILS_OPEN) for (const v of LAZY_DETAILS_OPEN.values()) applyLaNeighborhoodValues(v); }
 function lazyDetails(src) {
   if (!src || src.startsWith("/*")) return {};
   const { key, chunks } = JSON.parse(src), open = new Map(), extra = {};   // extra: records added after load (Orange County)
   LAZY_DETAILS_SRC = { key, chunks };   // read once by ivScanLA() for the verification-gated map ranking
+  LAZY_DETAILS_OPEN = open;
   const chunk = k => {
     if (!open.has(k)) {
       const b = chunks[k]; let v = {};
       if (b) { const s = atob(b), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i);
         v = JSON.parse(fflate.strFromU8(fflate.gunzipSync(u))); }
+      applyLaNeighborhoodValues(v);
       open.set(k, v);
     }
     return open.get(k);
@@ -4759,7 +4862,7 @@ function renderHouse(box, a, lot, ll, st) {
     stateCode: typeof activeState === "function" ? activeState() : null,
     facts: F,
     salesInfo: sale
-  }), typeof activeFips === "function" ? activeFips() : null, { neighborhoodHv: +baseNeighborhoodHv || null, rollBaseYear: rollBaseYear, rollTotal: totalRoll, sale }) : null;
+  }), typeof activeFips === "function" ? activeFips() : null, { neighborhoodHv: +baseNeighborhoodHv || null, rollBaseYear: rollBaseYear, rollTotal: totalRoll, sale, attributes: a, lot, bg: selected }) : null;
 
   const houseHv = valuation ? valuation.estimatedValue : null;
   const houseVpsf = valuation ? valuation.vpsf : (houseHv && livingSqft ? Math.round(houseHv / livingSqft) : null);
@@ -4822,6 +4925,8 @@ function renderHouse(box, a, lot, ll, st) {
         lastSalePrice: sale ? sale.price : null,
         lastSaleDate: sale ? sale.date : null,
         neighborhoodMedianHv: baseNeighborhoodHv,
+        assessorAttributes: a,
+        blockGroupId: selected,
         stateCode: typeof activeState === "function" ? activeState() : null,
         countyFips: typeof activeFips === "function" ? activeFips() : null,
         recentPermits: permitsList,
