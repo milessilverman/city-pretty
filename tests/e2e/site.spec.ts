@@ -175,9 +175,12 @@ test("Explore mode explains ideas and neighborhoods without the map, and hands o
   const cards = page.locator(".ex-grid .ex-card");
   expect(await cards.count()).toBeGreaterThan(20);
   expect(await page.locator(".ex-grid .ex-card-plain:empty").count()).toBe(0);
-  // one idea, explained
-  await page.click("[data-ex-idea=street_trees]");
-  await expect(page.locator(".ex-detail h2")).toHaveText("Plant street trees on open sites");
+  // ideas whose effect could not be sourced (e.g. street trees: its LA regression cannot be reproduced) are not offered
+  await expect(page.locator(".ex-grid [data-ex-idea=street_trees]")).toHaveCount(0);
+  // one idea, explained (traffic calming: effect and cost both verified in the 16 Nov 2026 audit)
+  await page.click(".ex-grid [data-ex-idea=traffic_calming]");
+  await expect(page.locator(".ex-detail h2")).toHaveText("Speed humps and traffic calming");
+  await expect(page.locator(".ex-detail")).toContainText("Sourced inputs");
   await expect(page.locator(".ex-detail")).toContainText("Who decides");
   await expect(page.locator(".ex-rank li").first()).toBeVisible();
   // a neighborhood's story, then the same place on the map
@@ -221,4 +224,64 @@ test("parcel and neighborhood panels render without invented figures", async ({ 
     expect(html).not.toContain(bad);
   }
   expect(errors).toEqual([]);
+});
+
+// Verification gate (docs/audit/bundle-catalog-audit.md, app/data/intervention_verification.json): unverified
+// interventions never show a dollar or $-per-$1 figure and are never the best bet.
+test("block-group panel shows no numbers for unverified interventions and never picks one as best bet", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { try { return !!(eval("INTERVENTION_VERIFICATION")); } catch (e) { return false; } }, null, { timeout: 30_000 });
+  const res = await page.evaluate(() => {
+    const w = window as any;
+    const ev = (s: string) => (0, eval)(s);
+    const D = ev("D"), ivStatus = ev("ivStatus"), ivAllows = ev("ivAllows"), select = ev("select");
+    // a block group whose rows include an unverified value item with a return of at least $1 per $1 before the gate
+    const f = D.bgs.features.find((x: any) => {
+      const d = D.details[x.properties.id]; if (!d || !d.r) return false;
+      return d.r.some((a: any) => ivStatus(a[0]) === "unverified" && a[8] >= 1 && D.catalog[a[0]] && D.catalog[a[0]].kind === "value");
+    });
+    const id = f.properties.id, d = D.details[id], m = d.m || {};
+    select(id, false);
+    const panel = document.querySelector("#panel") as HTMLElement;
+    const unverifiedNames = d.r.filter((a: any) => !ivAllows(a[0], m)).map((a: any) => D.catalog[a[0]] && D.catalog[a[0]].name).filter(Boolean);
+    const cards = [...panel.querySelectorAll(".rec")].map((c) => ({ name: (c.querySelector(".nm") as HTMLElement)?.textContent || "", text: (c as HTMLElement).innerText }));
+    const best = panel.querySelector("[data-best-bet]")?.getAttribute("data-best-bet") || "";
+    const other = [...panel.querySelectorAll("[data-other-ideas] li")].map((li) => li.textContent || "");
+    return {
+      id, best, bestStatus: best ? ivStatus(best) : null,
+      leaked: cards.filter((c) => unverifiedNames.includes(c.name)).map((c) => c.name),
+      otherHasNumbers: other.some((t) => /\$\s?\d/.test(t)),
+      otherListsUnverified: unverifiedNames.some((n: string) => other.some((t) => t.startsWith(n))),
+      profitShown: /Profit potential:/.test(panel.innerText),
+      mapBestUnverified: D.bgs.features.filter((x: any) => x.properties.t && ivStatus(x.properties.t) === "unverified").length,
+    };
+  });
+  expect(res.leaked).toEqual([]);
+  expect(res.bestStatus === null || res.bestStatus !== "unverified").toBe(true);
+  expect(res.otherListsUnverified).toBe(true);
+  expect(res.otherHasNumbers).toBe(false);
+  expect(res.profitShown).toBe(false);
+  expect(res.mapBestUnverified).toBe(0);
+  expect(errors).toEqual([]);
+});
+
+test("a non-LA county's best bets and panels are verification-gated (Travis County, TX)", async ({ page }) => {
+  await openPage(page);
+  await page.click("#county-pick-btn");
+  await page.fill("#county-q", "travis");
+  await page.keyboard.press("Enter");
+  await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "48453", null, { timeout: 60_000 });
+  const res = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s);
+    const D_OC = ev("D_OC"), ivStatus = ev("ivStatus"), select = ev("select");
+    const feats = D_OC.features;
+    const badMap = feats.filter((f: any) => f.properties.t && ivStatus(f.properties.t) === "unverified").length;
+    const id = feats[0].properties.id;
+    select(id, false);
+    const t = (document.querySelector("#panel") as HTMLElement).innerText;
+    return { badMap, localSales: /local sales estimate/.test(t), gradeChipAlone: /\bevidence [A-DU]\b/.test(t) };
+  });
+  expect(res.badMap).toBe(0);
+  expect(res.localSales).toBe(false);
+  expect(res.gradeChipAlone).toBe(false);
 });

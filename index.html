@@ -103,7 +103,6 @@
       <option value="park">Park acres within ½ mile</option>
       <option value="bus">Buses per hour at busiest stop</option>
       <option value="sites">Open street-tree sites</option>
-      <option value="profit">Experimental: Profit potential (unverified)</option>
     </select></label>
       <details class="more-layers menu" id="map-options">
         <summary class="tool-btn" title="Return estimates, evidence and map layers"><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg><span>Layers</span></summary>
@@ -113,15 +112,13 @@
       <option value="base" selected>Base Hedonic Study ROI</option>
       <option value="adj">Locally Context-Adjusted ROI</option>
     </select></div>
-        <div class="opt-group"><label for="evid">Evidence shown</label>
+        <div class="opt-group"><label for="evid">Catalog grade (sourced estimates only)</label>
           <select id="evid">
-      <option value="D" selected>All estimates (grades A–D)</option>
-      <option value="U">Also show unverified leads (round 6)</option>
-      <option value="C">Skip assumptions (A–C)</option>
-      <option value="B">Studied effects only (A–B)</option>
-      <option value="A">Measured in local metro only (A)</option>
+      <option value="D" selected>All verified or partly verified (any grade)</option>
+      <option value="C">Hide catalog grade D (A–C)</option>
+      <option value="B">Catalog grades A–B only</option>
+      <option value="A">Catalog grade A only</option>
     </select></div>
-        <button type="button" id="btn-toggle-experimental" class="link-btn" onclick="toggleExperimentalModes()" title="Show speculative research modes (grade U leads and the profit metric)">Show experimental modes</button>
         <div class="opt-head">Map layers</div>
       <label><input type="checkbox" id="l-roads" checked> Streets &amp; names</label>
       <label><input type="checkbox" id="l-transit" checked> Rail &amp; frequent buses</label>
@@ -433,8 +430,8 @@
     <h2>Methodology &amp; Dataset Vintages</h2>
     <p class="small" id="methods-modal-scope"><b>City Pretty</b> estimates how much home value and quality of life each public improvement would add in every Census block group of Los Angeles County, and what it would cost.</p>
     
-    <h3>Return per $1, Econometric Confidence Intervals &amp; Dynamic Local Context</h3>
-    <p class="small">Each project's return is the capitalized real estate value it adds to the surrounding homes, divided by its full lifecycle cost (procurement, site engineering, construction, and ten years of discounted maintenance). Rather than subjective judgment percentages, margins of error are empirical 95% Confidence Intervals (1.96 × SE) derived directly from published quasi-experimental and hedonic literature: SE = 0.041 × v for Grade A (direct LA County sales regressions; ±8.0% margin), SE = 0.063 × v for Grade B (peer metro hedonic studies; ±12.3% margin), SE = 0.087 × v for Grade C (benefit transfers and spatial meta-regressions; ±17.1% margin), and SE = 0.125 × v for Grade D/U (structural planning estimates; ±24.5% margin).</p>
+    <h3>Return per $1 and which estimates are shown</h3>
+    <p class="small">Each project's return is the home value it is modeled to add to nearby homes, divided by its lifecycle cost (construction plus ten years of discounted upkeep). A dollar figure is shown only for projects whose effect size or cost was checked against its source in the 16 November 2026 data audit (labelled <b>Verified</b> or <b>Partly verified</b>, with the unchecked side named). Every other project is listed under "Other ideas (effect not sourced yet)" with no numbers. The range shown around an estimate is a judgment band by the catalog's own evidence grade (about ±8% to ±25%); it is not a statistical confidence interval. Neighborhood "value created" totals are not modeled yet.</p>
     <p class="small"><b>Dynamic ROI Mode:</b> Users can toggle between <i>Base Hedonic Study ROI</i> and <i>Locally Context-Adjusted ROI</i>. The locally adjusted model evaluates micro-climate heat anomalies, tree canopy deficits, peak bus frequency, restaurant/dining walkability, freeway buffer zones (under 300 m), and a diminishing marginal returns saturation curve (200 / [n + 100]) to dynamically re-rank investments and re-color the map in real time. Street-tree capital cost is benchmarked to the City of LA in-lieu fee of $1,945 per Public Works tree (LAMC § 62.177, Ord. 185,573) plus long-term watering and canopy upkeep.</p>
 
     <div id="methods-financing-section">

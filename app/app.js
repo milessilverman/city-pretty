@@ -11,7 +11,7 @@ const CP_DATA_FILES = {
   "state-finance-profiles": "state_finance_profiles.json", "unit-costs": "unit_costs.json", "hud-fmr": "hud_fair_market_rents.json",
   "valuation-benchmarks": "valuation_backtest_benchmarks.json", "underused-sites": "underused_sites.json",
   "intercity-corridors": "intercity_transit_corridors.json", "county-completeness": "county_completeness.json",
-  "ca-counties-registry": "ca_counties_registry.json"
+  "ca-counties-registry": "ca_counties_registry.json", "intervention-verification": "intervention_verification.json"
 };
 const _cpData = {};
 function cpText(id) {
@@ -89,6 +89,9 @@ function loadVerifiedDataFiles() {
         syncHeaderDomToCounty(activeFips());
       }
     }
+  });
+  cpJson("intervention-verification").then(d => {
+    if (d && typeof d === "object" && !INTERVENTION_VERIFICATION) { INTERVENTION_VERIFICATION = d; if (typeof ivOnLoaded === "function") ivOnLoaded(); }
   });
   cpJson("ca-counties-registry").then(d => {
     if (d && typeof d === "object") {
@@ -1692,7 +1695,7 @@ function patchTopBarControlsDom() {
   if (evidSel) {
     const optA = evidSel.querySelector('option[value="A"]');
     if (optA) {
-      optA.textContent = "Measured in local metro only (A)";
+      optA.textContent = "Catalog grade A only";
     }
   }
 
@@ -1890,7 +1893,7 @@ function calibrateVpd(v, grade, id, m) {
     low: f(low), high: f(high), point: v, adj, factor, notes,
     provenance, isAssumed,
     band: ciMargin, se: f(v * seRate), ciMarginPct: Math.round(ciMargin * 100) + "%",
-    badge: g !== "NONE" ? "Grade " + g : "",
+    badge: (id ? (ivStatus(id) === "verified" ? "Sourced inputs" : ivStatus(id) === "partially_verified" ? "Partly verified" : "Unverified") : "") + (g !== "NONE" && id ? " · grade " + g : ""),
     str: "$" + f(low) + " – $" + f(high) + " / $1 " + rangeLabel,
     estStr: `~$${f(v)} / $1`,
     adjStr: Math.abs(factor - 1) < 0.005 ? "" : `~$${f(adj)} / $1 (locally adjusted ×${factor.toFixed(2)})`
@@ -1903,7 +1906,87 @@ const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;
 const fmt$ = v => v == null || isNaN(v) ? "–" : v >= 1e9 ? "$" + (v/1e9).toFixed(1) + "B" : v >= 1e6 ? "$" + (v/1e6).toFixed(v >= 1e7 ? 0 : 1) + "M" : v >= 1e3 ? "$" + Math.round(v/1e3) + "k" : "$" + Math.round(v);
 const fmtN = v => v == null || isNaN(v) ? "–" : Math.round(v).toLocaleString();
 const GRADE_TXT = { A: "A · measured on LA sales", B: "B · studied elsewhere", C: "C · transferred from a related study", D: "D · assumption", U: "U · unverified research lead (round 6)" };
-const allowed = id => { const g = (D.catalog[id] && D.catalog[id].grade) || "C"; return g === "none" || g <= $("#evid").value; };
+// ---------------- Intervention verification gate ----------------
+// docs/audit/bundle-catalog-audit.md (16 Nov 2026) checked each catalog item's effect size and cost against its sources.
+// app/data/intervention_verification.json holds the result. Only "verified" and "partially_verified" items may show a
+// dollar or $-per-$1 figure, be ranked as a best bet, or count in any total; "unverified" items are listed by name only.
+// Until the file loads, everything counts as unverified (nothing is shown rather than something unchecked).
+let INTERVENTION_VERIFICATION = null;
+const ivRec = id => (INTERVENTION_VERIFICATION && INTERVENTION_VERIFICATION[id]) || null;
+const ivStatus = id => { const r = ivRec(id); return r && r.status ? r.status : "unverified"; };
+// May this intervention show numbers for a block group with metrics m? (m is needed for conditions such as the
+// affordable-housing study's income threshold; without m a conditional item is not allowed.)
+function ivAllows(id, m) {
+  const r = ivRec(id);
+  if (!r || (r.status !== "verified" && r.status !== "partially_verified")) return false;
+  const cond = r.applies_if;
+  if (cond && cond.median_household_income_below != null) {
+    const inc = m && m.inc != null ? +m.inc : NaN;
+    if (!(inc < cond.median_household_income_below)) return false;
+  }
+  return true;
+}
+function ivLabel(id) {
+  const r = ivRec(id), st = ivStatus(id);
+  if (st === "verified") return "Sourced inputs (model not validated)";
+  if (st !== "partially_verified") return "Effect not sourced yet";
+  const kind = (r && r.kind) || ((typeof D !== "undefined" && D && D.catalog && D.catalog[id]) || {}).kind;
+  if (kind === "qol") return "Partly verified: cost cited but not re-checked; no value effect estimated";
+  const eff = r.effect === "checked", cost = r.cost === "checked";
+  if (!eff && !cost) return "Partly verified: effect and cost not re-checked";
+  return "Partly verified: " + (!eff ? (r.effect === "misapplied" ? "effect misapplied" : "effect not confirmed") : "cost not re-checked");
+}
+// Verification chip; the catalog's own evidence grade is shown only next to it, never alone.
+function ivChip(id) {
+  const st = ivStatus(id), c = (D && D.catalog && D.catalog[id]) || {}, r = ivRec(id) || {};
+  const g = c.grade && c.grade !== "none" ? ` · catalog grade ${esc(c.grade)}` : "";
+  const tip = [r.evidence, r.notes].filter(Boolean).join(" ");
+  return `<span class="chip${st === "verified" ? " strong" : st === "partially_verified" ? "" : " reg"}" data-iv="${esc(st)}" title="${esc(tip)}">${esc(ivLabel(id))}${g}</span>`;
+}
+// Split a block group's rows (raw arrays or REC_KEYS objects) into rows that may show numbers and the names of the rest.
+function gateRecs(recs, m) {
+  const ok = [], other = [];
+  (recs || []).forEach(r => { const id = Array.isArray(r) ? r[0] : r.id; if (!D.catalog[id]) return; (ivAllows(id, m) ? ok : other).push(r); });
+  return { recs: ok, other };
+}
+const recsOf = d => ((d && d.r) || []).map(a => Object.fromEntries(REC_KEYS.map((k, i) => [k, a[i]])));
+// "Other ideas" list: names only, no numbers.
+function otherIdeasHtml(other) {
+  const ids = [...new Set(other.map(r => Array.isArray(r) ? r[0] : r.id))].filter(id => D.catalog[id]);
+  if (!ids.length) return "";
+  return `<details class="panel-sec" data-other-ideas><summary><b>Other ideas (effect not sourced yet) (${ids.length})</b></summary><div class="sec-content"><p class="small muted">These were suggested by the model, but their effect size or cost could not be confirmed against a source (see the data audit), so no dollar figures are shown.</p><ul class="small" style="margin:4px 0 0 18px;padding:0">${ids.map(id => `<li>${esc(D.catalog[id].name)} <span class="muted">(${esc(D.catalog[id].category || "")})</span></li>`).join("")}</ul></div></details>`;
+}
+// Compact gated value rows for the map: [id, vpd, cost] for value items allowed here.
+function ivCompactRows(rows, m) {
+  const out = [];
+  for (const a of rows || []) { const c = D.catalog[a[0]]; if (c && c.kind === "value" && ivAllows(a[0], m)) out.push([a[0], a[8], a[3]]); }
+  return out;
+}
+function ivTagFeatures(features, details) {
+  if (!INTERVENTION_VERIFICATION || !features || !details) return;
+  for (const f of features) { const d = details[f.properties.id]; if (d && d.r) f.properties._iv = ivCompactRows(d.r, d.m); }
+}
+// LA details are packed in lazily decoded chunks; tag LA block groups in the background without keeping the chunks open.
+let LAZY_DETAILS_SRC = null, IV_LA_SCANNED = false;
+async function ivScanLA() {
+  if (IV_LA_SCANNED || !LAZY_DETAILS_SRC || !INTERVENTION_VERIFICATION || typeof byId === "undefined") return;
+  const { chunks } = LAZY_DETAILS_SRC; let n = 0;
+  for (const k in chunks) {
+    const b = chunks[k]; if (!b) continue;
+    const s = atob(b), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i);
+    const obj = JSON.parse(fflate.strFromU8(fflate.gunzipSync(u)));
+    for (const id in obj) { const f = byId.get(id); if (f) f.properties._iv = ivCompactRows(obj[id].r, obj[id].m); }
+    if (++n % 8 === 0) await new Promise(r => setTimeout(r, 0));
+  }
+  IV_LA_SCANNED = true; LAZY_DETAILS_SRC = null;
+  if (typeof retop === "function") { retop(); if (typeof restyle === "function") restyle(); if (typeof legend === "function") legend(); }
+}
+function ivOnLoaded() {
+  if (typeof COUNTY_BUNDLES !== "undefined") for (const k in COUNTY_BUNDLES) { const B = COUNTY_BUNDLES[k]; if (B && B.features && B.details) ivTagFeatures(B.features, B.details); }
+  if (typeof D_OC !== "undefined" && D_OC && D_OC.features && D_OC.details) ivTagFeatures(D_OC.features, D_OC.details);
+  if (typeof D !== "undefined" && D && D.bgs) ivScanLA();
+}
+const allowed = id => { if (ivStatus(id) === "unverified") return false; const g = (D.catalog[id] && D.catalog[id].grade) || "C"; return g === "none" || g <= $("#evid").value; };
 const fvpd = v => "$" + (v < 1 ? v.toFixed(2) : v < 10 ? v.toFixed(1) : Math.round(v));
 const CATS = ["Greening", "Parks & recreation", "Transit", "Streets & safety", "Clean streets", "Housing", "Energy", "Environment", "Schools & services", "Amenities & economy", "Zoning"];
 const CAT_COLOR = { "Greening": "--cat-3", "Parks & recreation": "--park-line", "Transit": "--cat-1", "Streets & safety": "--school", "Clean streets": "--warn-ink", "Housing": "--cat-2", "Energy": "--fw-casing", "Environment": "--water-line", "Schools & services": "--seq-5", "Amenities & economy": "--heat-4", "Zoning": "--ink-3" };
@@ -1929,7 +2012,8 @@ const METRICS = {
     ramp: "heat",
     none: "No rent data"
   },
-  profit: { label: "Experimental: Profit potential (unverified)", f: p => p.pp > 0 ? p.pp * 100 : null, unit: v => v.toFixed(1) + "%", ramp: "seq", none: "No paying projects or sites" },
+  // Withheld (audit 16 Nov 2026): modeled owner home-value gain, not profit, and partly from unsourced estimates.
+  profit: { label: "Neighborhood value created: not modeled yet", f: p => null, unit: v => "", ramp: "seq", none: "Not modeled yet" },
 };
 var D, map, bgs, layers = { _lazy: {} }, selected = null, selLayer = null, breaks = [], tiles = null, byId = new Map();
 
@@ -1942,6 +2026,7 @@ async function b64Bytes(text) {
 function lazyDetails(src) {
   if (!src || src.startsWith("/*")) return {};
   const { key, chunks } = JSON.parse(src), open = new Map(), extra = {};   // extra: records added after load (Orange County)
+  LAZY_DETAILS_SRC = { key, chunks };   // read once by ivScanLA() for the verification-gated map ranking
   const chunk = k => {
     if (!open.has(k)) {
       const b = chunks[k]; let v = {};
@@ -3005,24 +3090,25 @@ async function locateMe(btn) {
   }, () => { btn.textContent = "Location blocked"; }, { enableHighAccuracy: true, timeout: 10000 });
 }
 function retop() {
-  const ti = "ABCDU".indexOf($("#evid").value);
+  // Best project per area, among interventions the verification gate allows (see ivAllows). Uses each area's compact
+  // gated rows (p._iv). Until LA's background tagging finishes, LA areas fall back to the build's per-tier bests,
+  // keeping only allowed items; an unverified item is never shown as the best bet.
   const feats = (activeCounty === "oc" && D_OC) ? D_OC.features : ((typeof D !== "undefined" && D && D.bgs && D.bgs.features) ? D.bgs.features : []);
   feats.forEach(f => {
     const p = f.properties;
-    if (p.tp && ti >= 0 && ti < p.tp.length) { [p.t, p.v, p.pc] = p.tp[ti]; return; }
-    const r = (D.details[p.id] || {}).r || [];
+    let rows = p._iv;
+    if (!rows) {
+      const d = (activeCounty === "oc" && D_OC && D_OC.details) ? D_OC.details[p.id] : null;
+      rows = d && d.r ? ivCompactRows(d.r, d.m)
+        : (p.tp || []).filter(x => x && x[0] && D.catalog[x[0]] && D.catalog[x[0]].kind === "value" && ivAllows(x[0], null)).map(x => [x[0], x[1], null]);
+    }
     let best = null, pc = 0;
-    r.forEach(a => {
-      const c = D.catalog[a[0]];
-      if (!c || c.kind !== "value" || !allowed(a[0])) return;
-      // Balance durable capital infrastructure against recurring weekly event programming
-      const isEvent = a[0] === "farmers_market" || a[0] === "night_market";
-      const score = isEvent ? a[8] * 0.4 : a[8];
-      const bestScore = best ? (best[0] === "farmers_market" || best[0] === "night_market" ? best[8] * 0.4 : best[8]) : -1;
-      if (!best || score > bestScore) best = a;
-      if (a[8] >= 1) pc += a[3];
+    rows.forEach(a => {
+      if (!allowed(a[0])) return;
+      if (!best || a[1] > best[1]) best = a;
+      if (a[1] >= 1 && a[2]) pc += a[2];
     });
-    p.t = best && best[8] >= 1 ? best[0] : null; p.v = best ? best[8] : null; p.pc = pc || null;
+    p.t = best && best[1] >= 1 ? best[0] : null; p.v = best ? best[1] : null; p.pc = pc || null;
   });
 }
 function restyle() {
@@ -3335,7 +3421,7 @@ function recCard(r, i, mode) {
   return `<div class="rec${i === 0 && mode === "value" ? " top" : ""}${mode === "qol" ? " qolrec" : ""}">
     <div class="cat">${esc(c.category)}</div>
     <div class="row1"><span class="nm">${esc(isCAActive() ? c.name : String(c.name).replace(" (SB 79 / TOC zoning)", " (transit-oriented zoning)"))}</span>${head}</div>
-    <div class="meta">${esc(r.project)} · <b>total ~${fmt$(r.cost)}</b>${r.value > 0 ? (c.kind === "owner" ? ` · adds ~${fmt$(r.value)} to that home's value` : ` · adds ~${fmt$(r.value)} across ~${fmtN(r.homes)} home${Math.round(+r.homes) === 1 ? "" : "s"}`) : ""}${c.grade !== "none" ? `<span class="chip${c.grade === "A" || c.grade === "B" ? " strong" : c.grade === "D" || c.grade === "U" ? " reg" : ""}" title="${esc(GRADE_TXT[c.grade])}">evidence ${c.grade}</span>` : `<span class="chip">${esc(ev.split(" (")[0])}</span>`}${c.kind === "regional" ? '<span class="chip reg">regional project</span>' : ""}</div>
+    <div class="meta">${esc(r.project)} · <b>total ~${fmt$(r.cost)}</b>${r.value > 0 ? (c.kind === "owner" ? ` · adds ~${fmt$(r.value)} to that home's value` : ` · adds ~${fmt$(r.value)} across ~${fmtN(r.homes)} home${Math.round(+r.homes) === 1 ? "" : "s"}`) : ""}${ivChip(r.id)}${c.kind === "regional" ? '<span class="chip reg">regional project</span>' : ""}</div>
     ${whereLine(r.id)}
     ${Object.values(SITE_P).includes(r.id) ? `<p class="small where-site" data-where="${r.id}" hidden></p>` : ""}
     ${agencyHtml}
@@ -3343,9 +3429,9 @@ function recCard(r, i, mode) {
     <details><summary>Why here, cost and sources</summary>
       <p class="small"><b>Why:</b> ${esc(whyFix(r.why))}</p>
       <div class="costline">total = ${costs}${r.om ? " (10 yrs, present value)" : ""}</div>
-      ${c.benefit && mode === "qol" ? `<p class="small"><b>Public benefit (unverified estimate):</b> about ${fmt$(c.benefit[0])} a year from ${esc(c.benefit[1].toLowerCase())}, roughly <b>${fvpd(c.benefit[0] * 8.53 / Math.max(r.cost, 1))}</b> of benefit per $1 over 10 years. From the round-6 research, not yet checked against its sources.${c.benefit[2] ? " " + esc(c.benefit[2]) : ""}</p>` : ""}
-      ${r.pct > 0 ? `<p class="small"><b>Price effect used:</b> +${r.pct}% for homes reached${c.years ? `, full effect after ~${c.years} yr (discounted)` : ""}. Model estimate: <b>${rng.estStr}</b>; judgment band of ±${Math.round(rng.band * 100)}% for evidence grade ${esc(c.grade)}: ${rng.str}.${rng.adjStr ? ` <span class="muted">Experimental local adjustment (${esc(rng.notes.join(", "))}): ${rng.adjStr}; shown for context, not used in the ranking.</span>` : ""}</p>` : `<p class="small"><b>Home-value effect:</b> not measured in the research, so it is ranked by how much this area needs it, not by value per $1.</p>`}
-      ${c.grade !== "none" ? `<p class="small"><b>Evidence grade ${c.grade}:</b> ${esc(GRADE_TXT[c.grade].slice(4))}.${c.caveat ? " " + esc(agencyFor(c.caveat, m)) : ""}</p>` : c.caveat ? `<p class="small">${esc(agencyFor(c.caveat, m))}</p>` : ""}
+      
+      ${r.pct > 0 ? `<p class="small"><b>Price effect used:</b> +${r.pct}% for homes reached${c.years ? `, full effect after ~${c.years} yr (discounted)` : ""}. Model estimate: <b>${rng.estStr}</b>; judgment band of ±${Math.round(rng.band * 100)}% (catalog grade ${esc(c.grade)}; ${esc(ivLabel(r.id))}): ${rng.str}.${rng.adjStr ? ` <span class="muted">Experimental local adjustment (${esc(rng.notes.join(", "))}): ${rng.adjStr}; shown for context, not used in the ranking.</span>` : ""}</p>` : `<p class="small"><b>Home-value effect:</b> not measured in the research, so it is ranked by how much this area needs it, not by value per $1.</p>`}
+      <p class="small"><b>Verification:</b> ${esc(ivLabel(r.id))}${c.grade && c.grade !== "none" ? ` (catalog grade ${esc(c.grade)}, the build's own rating)` : ""}. ${esc((ivRec(r.id) || {}).evidence || "")}${c.caveat ? " " + esc(agencyFor(c.caveat, m)) : ""}</p>
       ${mode === "value" || mode === "qol" ? fundHtml(r, selected) : ""}
       ${isOCArea(m) ? ocFundingHtml(r.id, m) : (c.funding || []).length && !(mode === "value" || mode === "qol") ? `<p class="small"><b>Who pays:</b> ${c.funding.map(k => { const f = D.funding[k]; return f ? `${f[2] ? `<a href="${esc(f[2])}" target="_blank" rel="noopener">${esc(f[0])}</a>` : esc(f[0])} (${esc(f[1])})` : ""; }).filter(Boolean).join("; ")}</p>` : ""}
       <p class="src muted">${isOCArea(m) ? `<b>Evidence and cost examples (mostly from LA County projects, used here for scale):</b><br>` : ""}${c.sources.map(esc).join("<br>")}</p>
@@ -3380,6 +3466,9 @@ function rebateFor(t) {   // the upgrade table's rebate notes name LA programmes
     .replace(/^(CalHFA ADU program: check whether funding is open|SGIP: check remaining funds|TECH Clean California.*|Earthquake Brace \+ Bolt grant up to \$3,000)$/, m => isCAActive() ? m : "California program; check local programs");
 }
 function whyFix(t) {
+  // The street-tree "local sales estimate" came from an LA-only regression that could not be reproduced (audit 16 Nov 2026);
+  // never call it local, and outside LA say where it came from.
+  if (t) t = String(t).replace(/\(local sales estimate, low end\)/g, "(from an LA sales regression that could not be reproduced)").replace(/local sales estimate/g, "LA sales estimate (not reproducible)");
   if (t && typeof activeCounty !== "undefined" && activeCounty === "oc" && D_OC && D_OC.meta) {
     t = String(t).replace("no utility line map outside LADWP's area; local utility lines not mapped", "local utility lines are not mapped");
     const afdcRow = (D_OC.meta.sources || []).find(r => r && /^AFDC EV stations/.test(r[0] || ""));
@@ -3416,20 +3505,21 @@ function gapSection(p, m) {
   const fixName = id => D.catalog[id] ? D.catalog[id].name : id;
   let h = `<div class="section"><h3>What this area is missing</h3>`;
   if (G.g.length) h += `<ul class="small" style="margin:4px 0 0 18px;padding:0">${G.g.map(([k, x, med, sev, fix, why, cost]) =>
-      `<li style="margin-bottom:4px">${esc(why)} <span class="muted">${sev >= 0.995 ? "Worse than every similar area." : "Worse than " + Math.round(sev * 100) + "% of similar areas."}</span> <b>Fix:</b> ${esc(fixName(fix))}${cost ? ` (~${fmt$(cost)})` : ""}.</li>`).join("")}</ul>`;
+      `<li style="margin-bottom:4px">${esc(why)} <span class="muted">${sev >= 0.995 ? "Worse than every similar area." : "Worse than " + Math.round(sev * 100) + "% of similar areas."}</span> <b>Fix:</b> ${esc(fixName(fix))}${cost && ivAllows(fix, m) ? ` (~${fmt$(cost)})` : ivAllows(fix, m) ? "" : " (effect not sourced yet)"}.</li>`).join("")}</ul>`;
   else h += `<p class="small">Nothing stands out: this block group is at or above similar areas on parks, shade, shops, schools, services, transit, safety and street safety.</p>`;
   if (G.s.length) h += `<p class="small"><b>Already strong:</b> ${G.s.map(([k, x, med]) => `${esc((k === "dining" ? "restaurants and cafés within 400 m" : (D.gap_labels || {})[k]) || k)} (${esc(x)}; similar areas ${esc(med)})`).join("; ")}.</p>`;
   h += `<p class="small muted">Compared with the 50 block groups ${typeof activeCounty !== "undefined" && activeCounty === "oc" && typeof countyOf === "function" ? "in Los Angeles County and " + esc((c => c === "District of Columbia" ? "the " + c : c)(countyOf(m))) : "county-wide"} most like this one in income, density, home values, housing age, ${typeof activeCounty !== "undefined" && activeCounty === "oc" ? "" : "children, "}car ownership and single-family share.</p>`;
   if (plan) {
     const steps = plan.steps || [];
+    // A step shows cost / return only if its fix passes the verification gate for the block group it was sized for.
+    const stepOk = st => ivAllows(st.fix, ((D.details[st.bg] || {}).m) || m);
     h += `<div class="pkg" style="display:block;margin-top:10px"><div class="small" style="font-weight:600;margin-bottom:6px">A plan for ${esc(p.n)} (${plan.bgs} block group${plan.bgs > 1 ? "s" : ""}, ${fmtN(plan.homes)} homes)</div>`;
-    if (steps.length) h += `<ol class="small" style="margin:0 0 0 18px;padding:0">${steps.map((st, i) => `<li style="margin-bottom:6px"><b>${i === 0 && steps.length > 1 && st.cost != null ? "Quick win: " : ""}${esc(st.name)}</b>${st.project ? ` (${esc(st.project)}${st.near ? ", " + esc(st.near) : ""})` : ""}${stepWhere(st)}. ${esc(st.why)} This gap shows up in ${st.parts} of ${plan.bgs} parts of the neighborhood.${st.cost ? ` About ${fmt$(st.cost)}` : " Not costed here yet"}${st.vpd ? `, returning ${fvpd(st.vpd)} of home value per $1` : ""}${stepFunding(st, m)}.</li>`).join("")}</ol>`;
+    if (steps.length) h += `<ol class="small" style="margin:0 0 0 18px;padding:0">${steps.map((st, i) => `<li style="margin-bottom:6px"><b>${i === 0 && steps.length > 1 && st.cost != null && stepOk(st) ? "Quick win: " : ""}${esc(st.name)}</b>${st.project ? ` (${esc(st.project)}${st.near ? ", " + esc(st.near) : ""})` : ""}${stepWhere(st)}. ${esc(st.why)} This gap shows up in ${st.parts} of ${plan.bgs} parts of the neighborhood.${stepOk(st) ? `${st.cost ? ` About ${fmt$(st.cost)}` : " Not costed here yet"}${st.vpd ? `, returning ${fvpd(st.vpd)} of home value per $1` : ""} ${ivChip(st.fix)}` : " No sourced estimate yet (effect or cost not confirmed), so no figures are shown"}${stepFunding(st, m)}.</li>`).join("")}</ol>`;
     else h += `<p class="small">No neighborhood-wide gaps compared with similar areas. The best value-per-dollar projects are ranked below.</p>`;
     const pf = ((D.under && D.under.profit) || {})[p.n + "|" + p.c];
-    if (pf && pf.total > 0) {
-      const all = (D.under && D.under.profit ? Object.values(D.under.profit).map(x => x.total).sort((a, b) => b - a) : []), rank = all.indexOf(pf.total) + 1;
-      h += `<p class="small"><b>Profit potential:</b> about <b>${fmt$(pf.total)}</b> of value created (${pf.pct != null ? (pf.pct * 100).toFixed(1) + "% of the neighborhood's home value, ~" + fmt$(pf.per_home) + " per home" : "few homes here, so it's shown as a total only"})${all.length > 1 ? `, #${rank} of ${all.length} neighborhoods by total` : ""}. ${fmt$(pf.proj)} from projects that pay back, net of cost${pf.land ? `, and ${fmt$(pf.land)} from developing ${pf.sites} underused site${pf.sites > 1 ? "s" : ""} (~${fmtN(pf.site_homes)} home${Math.round(+pf.site_homes) === 1 ? "" : "s"})` : ""}.${pf.soon && pf.soon.length ? ` Already under way: rail stations under construction nearby (${pf.soon.map(esc).join(", ")}), which usually lift nearby values.` : ""}</p>`;
-    }
+    // Neighborhood "profit potential" is withheld (audit 16 Nov 2026): it summed modeled home-value gains to existing
+    // owners (not anyone's profit), and about half of it came from interventions whose effect could not be sourced.
+    if (pf) h += `<p class="small" data-profit="withheld"><b>Neighborhood value created:</b> Not modeled yet. The earlier figure added up modeled home-value gains for existing owners (not profit), much of it from estimates that could not be checked against a source.</p>`;
     const W = (pf && pf.way) || {}, wl = [];
     const wu = k => W[k] ? W[k][1] || W[k][0] : 0;
     if (wu("housing completed")) wl.push(`${fmtN(wu("housing completed"))} ${Math.round(+wu("housing completed")) === 1 ? "home" : "homes"} completed`);
@@ -6800,7 +6890,8 @@ function select(id, fly) {
   const f = byId.get(id); if (!f) return;
   if (fly) map.fitBounds(L.geoJSON(f).getBounds(), { maxZoom: 15, padding: [60, 60] });
   const p = f.properties, d = D.details[id] || {}, m = d.m || {};
-  const recs = (d.r || []).map(a => Object.fromEntries(REC_KEYS.map((k, i) => [k, a[i]])));
+  // Verification gate: only verified / partly verified interventions carry numbers below; the rest are listed by name.
+  const { recs, other: otherIdeas } = gateRecs(recsOf(d), m);
   const kind = r => (D.catalog[r.id] && D.catalog[r.id].kind) || "value";
   const valAll = recs.filter(r => kind(r) === "value" || kind(r) === "regional");
   // Support dynamic Local Context Adjusted ROI vs Base Study ROI
@@ -6844,8 +6935,9 @@ function select(id, fly) {
     </div>`;
   if (oc && !(D_OC && D_OC.meta && D_OC.meta.schema >= 2)) h += `<div class="prelim-banner warn"><span class="prelim-icon"><svg class=ic aria-hidden=true><use href=#i-alert /></svg></span><span><b>Orange County coverage is preliminary.</b> Home values, rents, crime, heat and project sizing here are neighborhood-level estimates assembled from public sources. They have not been checked against Census, Assessor, police or transit-schedule records the way LA County's block groups have. Read them as a sketch, not a measurement.</span></div>`;
 
-  h += (top && top.vpd >= 1 && D.catalog[top.id] && topRng) ? `<p class="verdict">Best bet: <b>${esc(D.catalog[top.id].name.replace(/^([A-Z])(?=[a-z])/, c => c.toLowerCase()))}</b>${/\d/.test(top.project) ? ` (${esc(top.project)})` : ""}. Expected return: <b>${topRng.estStr}</b> of home value per $1 (band ${topRng.str}, evidence ${esc(D.catalog[top.id]?.grade || "evaluated")}).</p>`
-    : `<p class="verdict">Nothing here returns $1 of home value per $1 spent. The quality-of-life projects below are still worth a look.</p>`;
+  h += (top && top.vpd >= 1 && D.catalog[top.id] && topRng) ? `<p class="verdict" data-best-bet="${esc(top.id)}">Best bet: <b>${esc(D.catalog[top.id].name.replace(/^([A-Z])(?=[a-z])/, c => c.toLowerCase()))}</b>${/\d/.test(top.project) ? ` (${esc(top.project)})` : ""}. Expected return: <b>${topRng.estStr}</b> of home value per $1 (band ${topRng.str}). ${ivChip(top.id)}</p>`
+    : top ? `<p class="verdict" data-best-bet="">None of the projects with a sourced effect returns $1 of home value per $1 here. The quality-of-life projects below are still worth a look.</p>`
+    : `<p class="verdict" data-best-bet="">No sourced estimate is available here yet: none of the projects whose effect and cost could be checked applies to this area.${otherIdeas.length ? " Other ideas are listed below without numbers." : ""}</p>`;
 
   // Gentrification & Tenant Displacement Sensitivity Indicator
   const renterShare = Math.max(0, 100 - (m.sf != null ? +m.sf : 50));
@@ -6918,10 +7010,11 @@ function select(id, fly) {
     const subVal = subPkg.jointValueAddedUsd || pkg.reduce((s, r) => s + r.value, 0);
 
     h += `<div class="pkg" style="margin-bottom:12px">
-      ${tile("Paying projects", pkg.length, "≥ $1 per $1 (Sub-additive)")}
+      ${tile("Paying projects", pkg.length, "≥ $1 per $1; verified or partly verified only")}
       ${tile("Total cost", fmt$(subCost), "build + land + 10-yr upkeep")}
-      ${tile("Joint Value Created", fmt$(subVal), "Capped at " + (isUrbanCore ? "30%" : "22%") + " max neighborhood lift")}
-    </div>`;
+      ${tile("Joint Value Created", fmt$(subVal), "modeled owner home-value gain; capped at " + (isUrbanCore ? "30%" : "22%") + " neighborhood lift")}
+    </div>
+    <p class="small muted" style="margin:-6px 0 10px">Counts only projects whose effect or cost was checked against a source; ${pkg.some(r => ivStatus(r.id) !== "verified") ? "some are only partly verified (see each project's label)" : "all are verified"}.</p>`;
 
     if (renterViewOn || subPkg.displacementRiskScore > 40) {
       h += `<div style="background:#fff7ed;border:1px solid #fdba74;border-radius:6px;padding:7px 10px;margin-bottom:10px;font-size:11.5px;color:#9a3412;">
@@ -6948,10 +7041,11 @@ function select(id, fly) {
   h += `<details class="panel-sec"><summary><b>All Ranked Value Projects (${val.length})</b></summary><div class="sec-content">
     <div class="cat-tabs" role="group" aria-label="Filter by category">${cats.map((c, i) => `<button type="button" data-cat="${esc(c)}" aria-pressed="${i === 0}">${esc(c)}</button>`).join("")}</div>
     <div class="recs" id="valrecs"></div>
-    ${hidden ? `<p class="small muted">${hidden} lower-graded estimate${hidden > 1 ? "s" : ""} hidden by the evidence filter above.</p>` : ""}
+    ${hidden ? `<p class="small muted">${hidden} estimate${hidden > 1 ? "s" : ""} hidden by the catalog-grade filter above.</p>` : ""}
     <p class="small muted">Value counts nearby homes reached. Cost includes physical construction plus 10 years of ongoing operations/maintenance.</p>
   </div></details>`;
 
+  h += otherIdeasHtml(otherIdeas);
   if (qol.length) h += `<details class="panel-sec"><summary><b>Quality-of-Life Projects (${qol.length})</b></summary><div class="sec-content"><p class="small muted">Sorted by neighborhood need compared with county medians.</p><div class="recs">${qol.map((r, i) => recCard(r, i, "qol")).join("")}</div></div></details>`;
 
   if (pol.length) h += `<details class="panel-sec"><summary><b>Zoning &amp; Policy Reforms</b></summary><div class="sec-content"><div class="recs">${pol.map((r, i) => recCard(r, i, "policy")).join("")}</div></div></details>`;
@@ -6996,8 +7090,23 @@ function select(id, fly) {
 
 // The build log leaves "<dataset-id> error: ;" fragments for feeds that failed; they are noise to a reader.
 const cleanBuild = x => String(x ?? "").replace(/\b[a-z0-9]{4}-[a-z0-9]{4}\s*error:\s*;?\s*/gi, "").replace(/;\s*;/g, ";").replace(/^\s*;\s*/, "").trim();
+// Report sections whose dollar figures were computed before the 16 Nov 2026 verification audit and include
+// interventions whose effect could not be sourced: shown as withheld rather than with unchecked numbers.
+const REPORT_WITHHELD = new Set(["Your neighborhoods", "Most profitable neighborhoods", "What comes out on top, county-wide", "By city"]);
 function report() {
-  const R = D.report || {};
+  const R0 = D.report || {};
+  const nameToId = Object.fromEntries(Object.entries(D.catalog || {}).map(([k, c]) => [c.name, k]));
+  const R = Object.assign({}, R0, { sections: (R0.sections || []).map(s => {
+    if (REPORT_WITHHELD.has(s.title)) return { title: s.title, paragraphs: ["Withheld. These figures were computed before the 16 November 2026 data audit and include projects whose effect size or cost could not be checked against a source; neighborhood \"value created\" is not modeled yet. Click any area for its verified and partly verified estimates."] };
+    if (s.title === "The improvement library" && s.table) {
+      const gi = s.table.head.indexOf("Grade");
+      return Object.assign({}, s, { paragraphs: (s.paragraphs || []).concat(["The Verification column is from the 16 November 2026 data audit (docs/audit/bundle-catalog-audit.md); the catalog grade is the build's own rating and is shown only next to it."]),
+        table: Object.assign({}, s.table, { head: s.table.head.map((x, i) => i === gi ? "Verification (catalog grade)" : x),
+          rows: s.table.rows.map(r => r.map((x, i) => i === gi ? esc(ivLabel(nameToId[r[0]])) + (x && x !== "\u2013" ? " (" + x + ")" : "") : x)) }) });
+    }
+    if (s.title === "Evidence grades") return { title: "Verification and catalog grades", paragraphs: ["Each improvement is labelled Verified, Partly verified (naming the side not re-checked) or Effect not sourced yet, from the 16 November 2026 data audit. Only the first two show dollar figures. The catalog's A-D grades were assigned by the build itself; the grade-A street-tree estimate could not be reproduced (its regression code and sales data are not in the repository), so it is treated as not sourced."] };
+    return s;
+  }) });
   let h = `<section><h2>${esc(R.title || "")}</h2>${(R.paragraphs || []).map(p => `<p>${cleanBuild(p)}</p>`).join("")}</section>`;
   (R.sections || []).forEach(s => {
     h += `<section><h2>${esc(s.title)}</h2>${(s.paragraphs || []).map(p => `<p>${cleanBuild(p)}</p>`).join("")}`;
@@ -7249,15 +7358,20 @@ function exportNeighborhoodBrief(id, format) {
   const f = byId.get(id);
   if (!f) return;
   const p = f.properties, d = D.details[id] || {}, m = d.m || {};
-  const recs = (d.r || []).map(a => Object.fromEntries(REC_KEYS.map((k, i) => [k, a[i]])));
+  const { recs, other } = gateRecs(recsOf(d), m);
 
   if (format === 'csv') {
-    let csv = "Project_ID,Project_Name,Category,Evidence_Grade,Base_ROI_Per_Dollar,Locally_Adjusted_ROI,Cost_Dollars,Nearby_Homes_Reached\n";
+    // Only verified / partly verified projects carry numbers; the rest are listed with empty number columns.
+    let csv = "Project_ID,Project_Name,Category,Verification,Catalog_Grade,Base_ROI_Per_Dollar,Locally_Adjusted_ROI,Cost_Dollars,Nearby_Homes_Reached\n";
     recs.forEach(r => {
       const c = D.catalog[r.id] || {};
       const cal = calibrateVpd(r.vpd, c.grade, r.id, m);
       const adjVpd = cal.adj != null ? cal.adj.toFixed(2) : r.vpd.toFixed(2);
-      csv += `\"${r.id}\",\"${c.name || r.id}\",\"${c.category || 'Urban'}\",\"${c.grade || 'C'}\",${r.vpd.toFixed(2)},${adjVpd},${Math.round(r.cost)},${Math.round(r.homes)}\n`;
+      csv += `\"${r.id}\",\"${c.name || r.id}\",\"${c.category || ''}\",\"${ivLabel(r.id)}\",\"${c.grade || ''}\",${r.vpd.toFixed(2)},${adjVpd},${Math.round(r.cost)},${Math.round(r.homes)}\n`;
+    });
+    [...new Set(other.map(r => r.id))].forEach(oid => {
+      const c = D.catalog[oid] || {};
+      csv += `\"${oid}\",\"${c.name || oid}\",\"${c.category || ''}\",\"Effect not sourced yet\",\"${c.grade || ''}\",,,,\n`;
     });
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
@@ -7287,17 +7401,17 @@ function copyShareLink() {
 function copyAreaSummary(id) {
   const f = byId.get(id); if (!f) return;
   const p = f.properties, d = D.details[id] || {}, m = d.m || {};
-  const recs = (d.r || []).map(a => Object.fromEntries(REC_KEYS.map((k, i) => [k, a[i]])));
+  const { recs } = gateRecs(recsOf(d), m);
   const val = recs.filter(r => allowed(r.id) && D.catalog[r.id].kind === "value").sort((a, b) => b.vpd - a.vpd);
   const top3 = val.slice(0, 3);
   
   let txt = `City Pretty Brief: ${p.n} (${p.c})\n`;
   txt += `Block Group ID: ${id} | Typical Home Value: ${fmt$(m.hv)} | Homes: ${fmtN(m.homes)}\n\n`;
-  txt += `Top 3 Recommended Projects:\n`;
+  txt += top3.length ? `Top 3 projects with a sourced estimate:\n` : `No sourced estimate is available here yet.\n`;
   top3.forEach((r, i) => {
     const c = D.catalog[r.id], rng = formatVpdRange(r.vpd, c.grade, r.id, m);
     txt += `${i+1}. ${c.name} (${r.project})\n`;
-    txt += `   - Return: ${rng.estStr} of home value per $1 (band ${rng.str}, ${rng.badge})\n`;
+    txt += `   - Return: ${rng.estStr} of home value per $1 (band ${rng.str}; ${ivLabel(r.id)})\n`;
     txt += `   - Cost: ${fmt$(r.cost)} (Build + Upkeep)\n`;
     txt += `   - Who decides: ${c.lead_agency || "City Council"}\n`;
     txt += `   - Next step: ${c.process || "CIP budget inclusion"}\n`;
@@ -7844,7 +7958,15 @@ function serializeLiveAdvisorContext() {
     payload.blockGroup = {
       geoid: selected, name: p.n || null, nameSource: m.ns || null, city: p.c || null,
       medianHomeValue: num(m.hv != null ? m.hv : p.hv), medianRent: num(m.rent), population: num(m.pop), acres: num(m.acres),
-      topProjects: Array.isArray(p.tp) ? p.tp.slice(0, 3) : null,
+      // Verification-gated (docs/audit/bundle-catalog-audit.md): only projects whose effect or cost was checked carry numbers.
+      topProjects: (() => {
+        const g = gateRecs(recsOf((bundle && bundle.details && bundle.details[selected]) || D.details[selected] || {}), m);
+        const top = g.recs.filter(r => D.catalog[r.id] && D.catalog[r.id].kind === "value").sort((a, b) => b.vpd - a.vpd).slice(0, 3)
+          .map(r => ({ id: r.id, name: D.catalog[r.id].name, returnPerDollar: +(+r.vpd).toFixed(2), costUsd: Math.round(r.cost), verification: ivLabel(r.id) }));
+        const unsourced = [...new Set(g.other.map(r => r.id))].slice(0, 8);
+        // the Worker keeps the first 3 entries, so leave room for the list of unsourced ideas
+        return unsourced.length ? top.slice(0, 2).concat([{ otherIdeasEffectNotSourced: unsourced }]) : top;
+      })(),
     };
   }
   const ah = typeof activeHouse !== "undefined" ? activeHouse : null;
@@ -8574,7 +8696,7 @@ function renderCompareDrawer() {
   box.innerHTML = compareList.map(id => {
     const f = byId.get(id); if (!f) return "";
     const p = f.properties, d = D.details[id] || {}, m = d.m || {};
-    const recs = (d.r || []).map(a => Object.fromEntries(REC_KEYS.map((k, i) => [k, a[i]])));
+    const { recs } = gateRecs(recsOf(d), m);
     const val = recs.filter(r => allowed(r.id) && D.catalog[r.id].kind === "value").sort((a, b) => b.vpd - a.vpd);
     const top = val[0];
     const topC = top ? D.catalog[top.id] : null;
@@ -8589,8 +8711,8 @@ function renderCompareDrawer() {
         <div class="c-row"><span class="k">Typical Home Value</span><span class="v">${fmt$(m.hv)}</span></div>
         <div class="c-row"><span class="k">Median Rent</span><span class="v">${m.rent ? fmt$(m.rent) + "/mo" : "–"}</span></div>
         <div class="c-row"><span class="k">Homes / Owner-Occ</span><span class="v">${fmtN(m.homes)} (${m.own != null ? Math.round(m.own) + "%" : "–"})</span></div>
-        <div class="c-row"><span class="k">Best Bet</span><span class="v">${topC ? esc(topC.name) : "–"}</span></div>
-        <div class="c-row"><span class="k">Expected Return</span><span class="v">${topRng ? topRng.estStr + " (" + topRng.str + ")" : "–"}</span></div>
+        <div class="c-row"><span class="k">Best Bet</span><span class="v">${topC && top.vpd >= 1 ? esc(topC.name) : "No sourced estimate yet"}</span></div>
+        <div class="c-row"><span class="k">Expected Return</span><span class="v">${topRng && top.vpd >= 1 ? topRng.estStr + " (" + topRng.str + "; " + esc(ivLabel(top.id)) + ")" : "–"}</span></div>
         <div class="c-row"><span class="k">Ecoregion Norm</span><span class="v">${(typeof getEcoregionNorm === "function") ? getEcoregionNorm(p, m).ecoregionCode : "EPA IV Base"}</span></div>
         <div class="c-row"><span class="k">Heat vs Eco-Norm</span><span class="v">${m.ht != null ? (m.ht > 0 ? "+" : "") + (+m.ht).toFixed(1) + "°F" : "–"}</span></div>
         <div class="c-row"><span class="k">Tree Canopy Deficit</span><span class="v">${m.tg != null ? m.tg + "% to " + ((typeof getEcoregionNorm === "function") ? getEcoregionNorm(p, m).targetCanopyPct : 35) + "% goal" : "–"}</span></div>
@@ -9386,7 +9508,9 @@ async function init() {
   map = L.map("map", { preferCanvas: true, zoomSnap: 0.5, minZoom: 9, maxZoom: 19 });
   map.attributionControl.setPrefix(false).addAttribution("© OpenStreetMap contributors · US Census · LA County Assessor, Auditor-Controller and Parks · LAPD · LASD · MyLA311 · CHP · LA Metro · city tree surveys · Tree Equity Score");
   D.bgs.features.forEach(f => byId.set(f.properties.id, f));
+  if (!INTERVENTION_VERIFICATION) { const iv = await cpJson("intervention-verification"); if (iv && typeof iv === "object") INTERVENTION_VERIFICATION = iv; }
   retop(); performance.mark("init:retop");
+  setTimeout(() => ivScanLA(), 0);   // tag LA block groups with verification-gated rows; the map re-ranks when done
   breaks = computeBreaks();
   bgs = L.geoJSON(D.bgs, { style: styleBg, onEachFeature: (f, l) => {
     const p = f.properties;

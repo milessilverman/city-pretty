@@ -439,8 +439,7 @@ def main():
         raise FileNotFoundError(f"Neither {p} nor {pgz} found")
     la_det = _load_la("details"); la_b = _load_la("bundle")
     cat = la_b["catalog"]
-    cat.update(engine.CATALOG_EXTENSIONS)
-    la_b.setdefault("funding", {}).update(engine.FUNDING_EXTENSIONS)
+    # (engine.CATALOG_EXTENSIONS / FUNDING_EXTENSIONS were deleted 16 Nov 2026; see docs/audit/bundle-catalog-audit.md)
     # ---- percentile pools across LA + OC ----
     KEYS = ["ht", "vc", "pcr", "pa", "pn", "bt", "gro", "din", "ten", "dog", "pool", "ev", "fw", "tg", "nocar", "inc", "yb", "pop"]
     pool_lists = {k: [v["m"][k] for v in la_det.values() if v["m"].get(k) is not None] + [m[k] for m in metrics.values() if m.get(k) is not None] for k in KEYS}

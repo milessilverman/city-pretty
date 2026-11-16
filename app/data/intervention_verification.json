@@ -1,0 +1,754 @@
+{
+ "_about": {
+  "what": "Verification status of each intervention in the county-bundle catalog (D.catalog). The page shows a dollar or $-per-$1 figure only for verified and partially_verified items; unverified items are listed by name only.",
+  "audit": "docs/audit/bundle-catalog-audit.md (2026-11-16)",
+  "status": {
+   "verified": "effect size and cost both confirmed against a source fetched in the audit",
+   "partially_verified": "one side confirmed (or, for items with no dollar effect, the cost cites a named public document that was not re-fetched)",
+   "unverified": "neither confirmed, source not found, not reproducible, or labelled an unchecked AI research pass in the catalog"
+  },
+  "effect": {
+   "checked": "the effect size used was found in the cited source's text",
+   "unchecked": "the study exists or is named, but the number used was not confirmed (or the item estimates no dollar effect)",
+   "misapplied": "the number is real but applied outside the conditions the study measured",
+   "not_found": "the cited study or its data could not be found"
+  },
+  "cost": {
+   "checked": "the unit cost was found in a fetched document",
+   "unchecked": "the cost cites a document that was not re-fetched, or has no source"
+  },
+  "checked_on": "2026-11-16"
+ },
+ "street_trees": {
+  "status": "unverified",
+  "effect": "not_found",
+  "cost": "unchecked",
+  "evidence": "City Pretty local hedonic (3,386 Westside sales): no regression code or sales data in repo or git history; irreproducible. Shipped to 637 non-LA counties as \"local sales estimate\".",
+  "notes": "Unverified: the catalog's grade-A effect comes from a 'City Pretty local hedonic' regression (3,386 Westside sales, 2022-24) whose code and sales data are not in the repository or its git history, so it cannot be reproduced. Confirmed street-tree studies exist in research/effects.csv (Donovan & Butry 2010; Sander, Polasky & Haight 2010) but the model does not use them yet. The same 0.24% was shipped to 637 non-LA counties labelled 'local sales estimate'. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "A",
+  "kind": "value"
+ },
+ "schoolyard_green": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "catalog caveat: +1% borrowed from passive parks",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "D",
+  "kind": "value"
+ },
+ "vacant_lot_green": {
+  "status": "partially_verified",
+  "effect": "checked",
+  "cost": "unchecked",
+  "evidence": "Lin, Jensen & Wachter (Real Estate Econ., 10.1111/1540-6229.12401): effects.csv records +4.3% quote; publisher 403 today",
+  "notes": "Effect quote recorded as found in research/effects.csv on 2026-11-11; the publisher returned 403 when re-checked on 2026-11-16. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "B",
+  "kind": "value"
+ },
+ "community_garden": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "Voicu & Been 2008 exists (REE); +1.5 pts not in abstract",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "B",
+  "kind": "value"
+ },
+ "green_alley": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "cool_pavement": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "pocket_park": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "borrowed passive-park premium (catalog caveat)",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "C",
+  "kind": "value"
+ },
+ "park_upgrade": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "catalog: \"No matched renovation coefficient\"; 0.5% is an assumption",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "C",
+  "kind": "value"
+ },
+ "pickleball": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "tennis": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "basketball": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "dog_park": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "catalog: +0.25% is an assumption; cited study coefficient not recovered",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "D",
+  "kind": "value"
+ },
+ "pool": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "splash_pad": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "skate_park": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "sports_field": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "rec_center": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "restroom": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "bus_lane": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "scaled down from BRT (catalog caveat)",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "D",
+  "kind": "value"
+ },
+ "brt": {
+  "status": "partially_verified",
+  "effect": "checked",
+  "cost": "unchecked",
+  "evidence": "Beaudoin & Tyndall +5-7%: quote re-found in UHERO working paper (effects.csv row 15); engine uses 5.0",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "B",
+  "kind": "value"
+ },
+ "rail_station": {
+  "status": "partially_verified",
+  "effect": "checked",
+  "cost": "unchecked",
+  "evidence": "Debrezion, Pels & Rietveld 2007 abstract: \"about 4.2% for the average residence\" (OpenAlex)",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "C",
+  "kind": "regional"
+ },
+ "bus_shelters": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "traffic_calming": {
+  "status": "verified",
+  "effect": "checked",
+  "cost": "checked",
+  "evidence": "Polloni abstract: \"decreasing traffic by 16% raise home values on treated streets by 1%\" (Crossref)",
+  "notes": "",
+  "catalog_grade": "C",
+  "kind": "value"
+ },
+ "crosswalks": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "road_diet": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "sidewalks": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "street_lighting": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "chains Chalfin crime RCT (exists) with Schwartz-Susin-Voicu coefficient the catalog itself says is unverified",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "C",
+  "kind": "value"
+ },
+ "cameras": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "foot_patrol": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "Ratcliffe RCT confirmed (crime); price link via unverified Schwartz coefficient",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "C",
+  "kind": "value"
+ },
+ "violence_interruption": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "Brantingham et al. exists (2023 on Crossref); price link via unverified coefficient",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "C",
+  "kind": "value"
+ },
+ "bid": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "MacDonald et al. exists; price link via unverified coefficient",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "C",
+  "kind": "value"
+ },
+ "litter": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "graffiti": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "encampment": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "Bhandari 2024 exists (Crossref); -1.41% unchecked",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "C",
+  "kind": "value"
+ },
+ "blight_rehab": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "Ganduri & Maturana exists (2021 working paper on Crossref); +2.3 pts unchecked",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "B",
+  "kind": "value"
+ },
+ "affordable_housing": {
+  "status": "partially_verified",
+  "effect": "checked",
+  "cost": "unchecked",
+  "evidence": "Diamond & McQuade abstract confirms +6.5%/-2.5% (OpenAlex). MISAPPLIED: study +6.5% is for tracts with median income under ~$26k; engine applies it below LA median $93,240",
+  "notes": "Diamond & McQuade's +6.5% (confirmed in their abstract) is for low-income neighborhoods; the catalog's citation gives the cut-off as median income under ~$26k (the abstract does not state the figure), and -2.5% in higher-income areas. The original build applied +6.5% wherever income was below LA's median ($93,240): misapplied. The page now shows this estimate only where the block group's median household income is below $26,000. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "B",
+  "kind": "value",
+  "applies_if": {
+   "median_household_income_below": 26000
+  }
+ },
+ "adu": {
+  "status": "unverified",
+  "effect": "not_found",
+  "cost": "unchecked",
+  "evidence": "Brueckner & Thomaz 2024 not found in Crossref; catalog admits 9.2% not verified",
+  "notes": "'Brueckner & Thomaz 2024' (ADU raises host parcel value ~9.2%) was not found in Crossref, and the catalog itself says the 9.2% was not verified against the paper.",
+  "catalog_grade": "B",
+  "kind": "owner"
+ },
+ "solar": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "LBNL \"Selling into the Sun\" exists (research-audit kept it); $4/W unchecked",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "B",
+  "kind": "owner"
+ },
+ "undergrounding": {
+  "status": "partially_verified",
+  "effect": "checked",
+  "cost": "unchecked",
+  "evidence": "McNair & Abelson abstract: \"increase house prices by 2.9 per cent\" (Canberra; transferred)",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "B",
+  "kind": "value"
+ },
+ "ev_hub": {
+  "status": "unverified",
+  "effect": "not_found",
+  "cost": "unchecked",
+  "evidence": "\"Liang et al. 2023 (14M California sales)\" not found; Crossref hit is an unrelated preprint; 1% is a self-declared discount",
+  "notes": "'Liang et al. 2023 (14M California sales) +3.3%' could not be found (the closest Crossref match is an unrelated preprint about EV sales); the 1% used is a self-declared discount of that unfound number. The CARB 8-port site cost is also unverified in the catalog.",
+  "catalog_grade": "C",
+  "kind": "value"
+ },
+ "microgrid": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "noise_wall": {
+  "status": "partially_verified",
+  "effect": "checked",
+  "cost": "unchecked",
+  "evidence": "Moretti & Wheeler 6.8% quote re-found in eml.berkeley.edu PDF (effects.csv row 21)",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "B",
+  "kind": "value"
+ },
+ "freeway_cap": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "borrowed passive-park premium",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "C",
+  "kind": "regional"
+ },
+ "school_filters": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "school_bond": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "Cellini, Ferreira & Rothstein abstract confirms \"$1.50 or more for each $1\"; catalog says +6% used but engine uses pct 3.0 \u2014 inconsistent",
+  "notes": "Cellini, Ferreira & Rothstein's '$1.50 or more for each $1 of capital spending' is confirmed in their abstract, but the model uses a +3% price effect while the catalog text says +6% is used; the two disagree and neither was confirmed as applied, so no dollar figure is shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "B",
+  "kind": "value"
+ },
+ "library": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "clinic": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "grocery": {
+  "status": "partially_verified",
+  "effect": "checked",
+  "cost": "unchecked",
+  "evidence": "Worcester DiD (Cerrato Caceres et al.) +7%/+4% quote re-found (effects.csv row 22); engine uses 4.0",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "B",
+  "kind": "value"
+ },
+ "main_street": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "Ghorbani & Meltzer not found in Crossref; catalog: association, not a measured effect",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "D",
+  "kind": "value"
+ },
+ "outdoor_dining": {
+  "status": "partially_verified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "farmers_market": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "\"Maryland 2020; Edmonton 2024\" \u2014 no authors/titles; catalog: association, not this effect; 0.25% assumed",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "D",
+  "kind": "value"
+ },
+ "upzone_transit": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "Kuhlmann 2021 exists (Crossref); +3-5% unchecked",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "catalog_grade": "C",
+  "kind": "policy"
+ },
+ "protected_bike": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "corridor_trail": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "transit_priority": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "speed_cameras": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "roundabout": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "ped_signals": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "school_street": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "murals": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "tiny_forest": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "fiber_5g": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "no $ value effect used",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "none",
+  "kind": "qol"
+ },
+ "green_street": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "stormwater_park": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "corner_store": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "food_hall": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "park_cafe": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "new_school": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "plaza": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "slow_streets": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "transit_shade": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "bike_share": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "ebike_library": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "microtransit": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "alley_gating": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "cooling_center": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "wayfinding": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "box_art": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "vending_zone": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "night_market": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ },
+ "clt": {
+  "status": "unverified",
+  "effect": "unchecked",
+  "cost": "unchecked",
+  "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "catalog_grade": "U",
+  "kind": "value"
+ }
+}
