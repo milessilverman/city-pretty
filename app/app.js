@@ -6929,11 +6929,11 @@ function select(id, fly) {
     </div>`;
   }
 
-  // Municipal Crime Reporting Feed Gap Flag
-  const missingCrimeFeeds = ["Beverly Hills", "Burbank", "Glendale", "Pasadena", "Santa Monica", "Torrance", "Inglewood", "Culver City", "San Fernando", "South Pasadena"];
-  if (missingCrimeFeeds.includes(p.c)) {
+  // Crime coverage note, from the data itself: LA crime figures come only from LAPD and LASD open data, so an area
+  // patrolled by neither has none. (Replaces a hand-typed list of ten cities with unchecked claims about dispatch feeds.)
+  if (typeof activeFips === "function" && activeFips() === "06037" && m && m.vc == null) {
     h += `<div class="prelim-banner" style="background:#fef2f2;border:1px solid #fecaca;padding:8px 12px;border-radius:6px;margin:8px 0 12px;font-size:11.5px;color:#991b1b;line-height:1.4;">
-      <span></span> <b>Municipal Crime Reporting Gap:</b> ${esc(p.c)} operates an independent municipal police department that does not transmit daily automated incident feeds to the regional LAPD/LASD CAD dispatch feed. Crime statistics displayed here reflect regional Sheriff and CHP baseline reporting; local misdemeanor and property crime may be undercounted.
+      <b>No crime data here:</b> City Pretty's Los Angeles County crime figures come only from LAPD and LASD open data, and neither reports for this area. Crime is not shown, and nothing here is scored on it.
     </div>`;
   }
 
