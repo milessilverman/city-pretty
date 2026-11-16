@@ -363,3 +363,22 @@ test("tax-increment section: California computes from the roll; Texas says which
   expect(tx).not.toMatch(/Bond capacity\s*\$/);
   expect(errors).toEqual([]);
 });
+
+test("a sourced-effect override rescales the value and shows its citation (street lighting, LA)", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { try { return !!(0, eval)("INTERVENTION_VERIFICATION"); } catch { return false; } }, null, { timeout: 30_000 });
+  const res = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s);
+    const id = "060371242041";   // its street_lighting row was built with +1.358%
+    ev("select")(id, false);
+    const panel = document.querySelector("#panel") as HTMLElement;
+    const row = (ev("D").details[id].r || []).find((a: any) => a[0] === "street_lighting");
+    return { html: panel.innerHTML, raw: row, adj: ev("ivRow")(row) };
+  });
+  expect(res.raw[9]).toBe(1.358);
+  expect(res.adj[9]).toBe(0.6);
+  expect(res.adj[7]).toBe(Math.round((res.raw[7] * 0.6) / 1.358));
+  expect(res.html).toContain('data-sourced-effect="street_lighting"');
+  expect(res.html).toContain("Pope &amp; Pope");
+  expect(errors).toEqual([]);
+});

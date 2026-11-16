@@ -26,7 +26,7 @@
   "effect": "not_found",
   "cost": "unchecked",
   "evidence": "City Pretty local hedonic (3,386 Westside sales): no regression code or sales data in repo or git history; irreproducible. Shipped to 637 non-LA counties as \"local sales estimate\".",
-  "notes": "Unverified: the catalog's grade-A effect comes from a 'City Pretty local hedonic' regression (3,386 Westside sales, 2022-24) whose code and sales data are not in the repository or its git history, so it cannot be reproduced. Confirmed street-tree studies exist in research/effects.csv (Donovan & Butry 2010; Sander, Polasky & Haight 2010) but the model does not use them yet. The same 0.24% was shipped to 637 non-LA counties labelled 'local sales estimate'. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine). | 2026-11-16 re-check: Donovan & Butry 2010 measured the bundle of existing street trees fronting a house (+3.0% of median price), not newly planted trees within 50 m, so it does not confirm the engine's 0.24% per new tree.",
+  "notes": "Unverified: the catalog's grade-A effect comes from a 'City Pretty local hedonic' regression (3,386 Westside sales, 2022-24) whose code and sales data are not in the repository or its git history, so it cannot be reproduced. Confirmed street-tree studies exist in research/effects.csv (Donovan & Butry 2010; Sander, Polasky & Haight 2010) but the model does not use them yet. The same 0.24% was shipped to 637 non-LA counties labelled 'local sales estimate'. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine). | 2026-11-16 re-check: Donovan & Butry 2010 measured the bundle of existing street trees fronting a house (+3.0% of median price), not newly planted trees within 50 m, so it does not confirm the engine's 0.24% per new tree. Round 3 (16 Nov): the closest study of new plantings, Wachter & Wong (2008), What Is a Tree Worth? Green-City Strategies, Signaling and Housing Prices, Real Estate Economics, doi:10.1111/j.1540-6229.2008.00212.x, found: \"A 7 to 11% price differential is identified within 4,000 feet of the Fairmount tree plantings. ... Any positive changes brought by the PHS tree plantings were not detected with sufficient statistical power.\" It is correlational, not a per-tree estimate, and the community block-planting program (the kind City Pretty would recommend) showed no detectable effect, so it does not support a dollar figure.",
   "catalog_grade": "A",
   "kind": "value"
  },
@@ -43,10 +43,23 @@
   "status": "partially_verified",
   "effect": "checked",
   "cost": "unchecked",
-  "evidence": "Lin, Jensen & Wachter (Real Estate Econ., 10.1111/1540-6229.12401): effects.csv records +4.3% quote; publisher 403 today",
-  "notes": "Effect quote recorded as found in research/effects.csv on 2026-11-11; the publisher returned 403 when re-checked on 2026-11-16. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "evidence": "Lin, Jensen & Wachter (2021), The Price Effects of Greening Vacant Lots: How Neighborhood Attributes Matter, SSRN 3899624, doi:10.2139/ssrn.3899624 (abstract fetched from Crossref 2026-11-16): \"we find that prices for houses within 1,000 feet of a greened vacant lot rise by about 4%\".",
+  "notes": "The bundle used +4.3% ('after year 1', from a later version not re-fetched); the fetched abstract says about 4% within 1,000 ft, so 4.0% is used. Philadelphia program; LA site control and land costs are not included. Cost (Philadelphia LandCare $1,500 initial / $300 a year, 2008 dollars) not re-fetched.",
   "catalog_grade": "B",
-  "kind": "value"
+  "kind": "value",
+  "sourced_effect": {
+   "pct": 4.0,
+   "replaces_pct": 4.3,
+   "basis": "Homes within 1,000 ft of a greened vacant lot rose about 4% (Philadelphia).",
+   "citations": [
+    {
+     "cite": "Lin, Jensen & Wachter (2021), The Price Effects of Greening Vacant Lots: How Neighborhood Attributes Matter, SSRN 3899624, doi:10.2139/ssrn.3899624",
+     "url": "https://doi.org/10.2139/ssrn.3899624",
+     "quote": "we find that prices for houses within 1,000 feet of a greened vacant lot rise by about 4%"
+    }
+   ],
+   "checked_on": "2026-11-16"
+  }
  },
  "community_garden": {
   "status": "unverified",
@@ -89,7 +102,7 @@
   "effect": "unchecked",
   "cost": "unchecked",
   "evidence": "catalog: \"No matched renovation coefficient\"; 0.5% is an assumption",
-  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine). Round 3: Livy & Klaiber (2016, Land Economics, doi:10.3368/le.92.1.96) exists, but its abstract states no effect size and the paper is closed access (no open copy found), so +0.5% remains unconfirmed.",
   "catalog_grade": "C",
   "kind": "value"
  },
@@ -188,7 +201,7 @@
   "effect": "unchecked",
   "cost": "unchecked",
   "evidence": "scaled down from BRT (catalog caveat)",
-  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine). Round 3: no study isolating bus-only lanes was found; stays unverified.",
   "catalog_grade": "D",
   "kind": "value"
  },
@@ -257,13 +270,31 @@
   "kind": "qol"
  },
  "street_lighting": {
-  "status": "unverified",
-  "effect": "unchecked",
+  "status": "partially_verified",
+  "effect": "checked",
   "cost": "unchecked",
-  "evidence": "chains Chalfin crime RCT (exists) with Schwartz-Susin-Voicu coefficient the catalog itself says is unverified | 2026-11-16: the Schwartz, Susin & Voicu 2003 paper exists (Journal of Housing Research, doi 10.1080/26911337.2003.12519486) but its abstract (OpenAlex) states only that falling crime explains 'about a third of the post-1994 boom'; the 0.116 elasticity the engine uses was not found, so the crime-to-price step stays unverified.",
-  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "evidence": "Effect, re-derived from two fetched sources: (1) Chalfin, Hansen, Lerner & Parker (2019), NBER Working Paper 25798, doi:10.3386/w25798: \"Accounting conservatively for potential spillovers, lighting reduces outdoor nighttime index crimes by approximately 36 percent and reduces overall index crimes by approximately 4 percent in affected communities.\" (2) Pope & Pope (2012), Crime and property values: Evidence from the 1990s crime drop, Regional Science and Urban Economics, doi:10.1016/j.regsciurbeco.2011.08.008: \"The estimated elasticities of property values with respect to crime range from -0.15 to -0.35.\" Using the low end: 4% fewer index crimes x 0.15 = +0.6% home value.",
+  "notes": "The bundle used +1.358% (36% x an assumed 32.5% nighttime-outdoor share x an unverified 0.116 elasticity). Chalfin et al. state the share directly: \"On NYC's public housing campuses, approximately 11 percent of index crimes occur outdoors and during nighttime hours.\" and give the overall effect (4%), so +0.6% replaces it. Limits: the trial was on NYC public-housing campuses; Pope & Pope is zip-code level (1990s) and mostly correlational; the engine applies the effect to 30% of the block group's homes (a model choice, not from either study). Cost (~$5,000 per 50-ft lot, LA Bureau of Street Lighting) not re-fetched.",
   "catalog_grade": "C",
-  "kind": "value"
+  "kind": "value",
+  "sourced_effect": {
+   "pct": 0.6,
+   "replaces_pct": 1.358,
+   "basis": "4% fewer index crimes (Chalfin et al. 2019, NYC lighting RCT) x the low-end crime elasticity of home values, 0.15 (Pope & Pope 2012).",
+   "citations": [
+    {
+     "cite": "Chalfin, Hansen, Lerner & Parker (2019), NBER Working Paper 25798, doi:10.3386/w25798",
+     "url": "https://www.nber.org/system/files/working_papers/w25798/w25798.pdf",
+     "quote": "Accounting conservatively for potential spillovers, lighting reduces outdoor nighttime index crimes by approximately 36 percent and reduces overall index crimes by approximately 4 percent in affected communities"
+    },
+    {
+     "cite": "Pope & Pope (2012), Crime and property values: Evidence from the 1990s crime drop, Regional Science and Urban Economics, doi:10.1016/j.regsciurbeco.2011.08.008",
+     "url": "https://repository.upenn.edu/bitstreams/438c8723-dc56-4664-a888-d00956186681/download",
+     "quote": "The estimated elasticities of property values with respect to crime range from -0.15 to -0.35."
+    }
+   ],
+   "checked_on": "2026-11-16"
+  }
  },
  "cameras": {
   "status": "partially_verified",
@@ -350,13 +381,26 @@
   }
  },
  "adu": {
-  "status": "unverified",
-  "effect": "not_found",
+  "status": "partially_verified",
+  "effect": "checked",
   "cost": "unchecked",
-  "evidence": "Brueckner & Thomaz 2024 not found in Crossref; catalog admits 9.2% not verified",
-  "notes": "'Brueckner & Thomaz 2024' (ADU raises host parcel value ~9.2%) was not found in Crossref, and the catalog itself says the 9.2% was not verified against the paper.",
+  "evidence": "Brueckner & Thomaz (2024), ADUs in Los Angeles: Where are they located and by how much do they raise property value?, Real Estate Economics, doi:10.1111/1540-6229.12471 (abstract fetched from Crossref 2026-11-16): \"The assessed-value regressions show that ADU presence raises a parcel's assessed value and selling price by 7%-9%\". The low end (7%) is used.",
+  "notes": "Correction: the 16 Nov catalog audit said this study was not found in Crossref. It is in Crossref (Real Estate Economics, 2024); the earlier search missed it. The bundle used 9.2%, above the study's 7-9% range; 7% replaces it. Measured in Los Angeles. ADU cost ($130,000 in the bundle) not re-checked.",
   "catalog_grade": "B",
-  "kind": "owner"
+  "kind": "owner",
+  "sourced_effect": {
+   "pct": 7.0,
+   "replaces_pct": 9.2,
+   "basis": "ADU presence raises the host parcel's selling price 7-9% in Los Angeles; the low end is used.",
+   "citations": [
+    {
+     "cite": "Brueckner & Thomaz (2024), ADUs in Los Angeles: Where are they located and by how much do they raise property value?, Real Estate Economics, doi:10.1111/1540-6229.12471",
+     "url": "https://doi.org/10.1111/1540-6229.12471",
+     "quote": "The assessed-value regressions show that ADU presence raises a parcel's assessed value and selling price by 7%-9%"
+    }
+   ],
+   "checked_on": "2026-11-16"
+  }
  },
  "solar": {
   "status": "unverified",
@@ -425,7 +469,7 @@
   "status": "unverified",
   "effect": "unchecked",
   "cost": "unchecked",
-  "evidence": "Cellini, Ferreira & Rothstein abstract confirms \"$1.50 or more for each $1\"; catalog says +6% used but engine uses pct 3.0 \u2014 inconsistent",
+  "evidence": "Cellini, Ferreira & Rothstein abstract confirms \"$1.50 or more for each $1\"; catalog says +6% used but engine uses pct 3.0 — inconsistent",
   "notes": "Cellini, Ferreira & Rothstein's '$1.50 or more for each $1 of capital spending' is confirmed in their abstract, but the model uses a +3% price effect while the catalog text says +6% is used; the two disagree and neither was confirmed as applied, so no dollar figure is shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
   "catalog_grade": "B",
   "kind": "value"
@@ -479,7 +523,7 @@
   "status": "unverified",
   "effect": "unchecked",
   "cost": "unchecked",
-  "evidence": "\"Maryland 2020; Edmonton 2024\" \u2014 no authors/titles; catalog: association, not this effect; 0.25% assumed",
+  "evidence": "\"Maryland 2020; Edmonton 2024\" — no authors/titles; catalog: association, not this effect; 0.25% assumed",
   "notes": "Cost has no source (or comes from an unchecked AI research pass).",
   "catalog_grade": "D",
   "kind": "value"
@@ -498,7 +542,7 @@
   "effect": "unchecked",
   "cost": "unchecked",
   "evidence": "no $ value effect used",
-  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost has no source (or comes from an unchecked AI research pass).",
+  "notes": "No dollar value effect is estimated for this item; only its cost and the neighborhood need are shown. Cost has no source (or comes from an unchecked AI research pass). Round 3: the property-value studies found (Conrow, Mooney & Wentz 2020, Urban Studies; Connolly, Livy, Qiu & Klaiber 2019, Landscape and Urban Planning) report associations without a usable effect size; no dollar value is estimated.",
   "catalog_grade": "none",
   "kind": "qol"
  },

@@ -1912,7 +1912,22 @@ function gateRecs(recs, m) {
   (recs || []).forEach(r => { const id = Array.isArray(r) ? r[0] : r.id; if (!D.catalog[id]) return; (ivAllows(id, m) ? ok : other).push(r); });
   return { recs: ok, other };
 }
-const recsOf = d => ((d && d.r) || []).map(a => Object.fromEntries(REC_KEYS.map((k, i) => [k, a[i]])));
+// Sourced-effect overrides (docs/audit/catalog-coverage-round3.md). Where a fetched study gives a different effect
+// than the bundle row was built with, the row's value is rescaled to the sourced effect. Value is linear in the
+// effect in the engine (homes x price x pct x discount x scale; pipeline/engine.py add()), so this uses the same
+// formula, and $ per $1 is value / total cost as before. Rows without an override are returned unchanged.
+function ivRow(a) {
+  if (!Array.isArray(a)) return a;
+  const r = ivRec(a[0]), o = r && r.sourced_effect;
+  if (!o || !(+o.pct > 0) || !(+a[9] > 0) || +a[9] === +o.pct) return a;
+  const b = a.slice(), f = +o.pct / +a[9];
+  b[7] = Math.round(+a[7] * f);
+  b[8] = +a[3] ? Math.round((b[7] / +a[3]) * 1000) / 1000 : 0;
+  b[9] = +o.pct;
+  b._sourced = o;
+  return b;
+}
+const recsOf = d => ((d && d.r) || []).map(ivRow).map(a => Object.assign(Object.fromEntries(REC_KEYS.map((k, i) => [k, a[i]])), a._sourced ? { sourced: a._sourced } : {}));
 // "Other ideas" list: names only, no numbers.
 function otherIdeasHtml(other) {
   const ids = [...new Set(other.map(r => Array.isArray(r) ? r[0] : r.id))].filter(id => D.catalog[id]);
@@ -1922,7 +1937,7 @@ function otherIdeasHtml(other) {
 // Compact gated value rows for the map: [id, vpd, cost] for value items allowed here.
 function ivCompactRows(rows, m) {
   const out = [];
-  for (const a of rows || []) { const c = D.catalog[a[0]]; if (c && c.kind === "value" && ivAllows(a[0], m)) out.push([a[0], a[8], a[3]]); }
+  for (const a0 of rows || []) { const a = ivRow(a0), c = D.catalog[a[0]]; if (c && c.kind === "value" && ivAllows(a[0], m)) out.push([a[0], a[8], a[3]]); }
   return out;
 }
 function ivTagFeatures(features, details) {
@@ -3395,6 +3410,7 @@ function recCard(r, i, mode) {
       <div class="costline">total = ${costs}${r.om ? " (10 yrs, present value)" : ""}</div>
       
       ${r.pct > 0 ? `<p class="small"><b>Price effect used:</b> +${r.pct}% for homes reached${c.years ? `, full effect after ~${c.years} yr (discounted)` : ""}. Model estimate: <b>${rng.estStr}</b>; judgment band of ±${Math.round(rng.band * 100)}% (catalog grade ${esc(c.grade)}; ${esc(ivLabel(r.id))}): ${rng.str}.${rng.adjStr ? ` <span class="muted">Experimental local adjustment (${esc(rng.notes.join(", "))}): ${rng.adjStr}; shown for context, not used in the ranking.</span>` : ""}</p>` : `<p class="small"><b>Home-value effect:</b> not measured in the research, so it is ranked by how much this area needs it, not by value per $1.</p>`}
+      ${r.sourced ? `<p class="small" data-sourced-effect="${esc(r.id)}"><b>Sourced effect:</b> +${esc(r.sourced.pct)}% (the bundle was built with +${esc(r.sourced.replaces_pct)}%). ${esc(r.sourced.basis)} <span class="muted">${(r.sourced.citations || []).map(c => esc(c.cite)).join("; ")}</span></p>` : ""}
       <p class="small"><b>Verification:</b> ${esc(ivLabel(r.id))}${c.grade && c.grade !== "none" ? ` (catalog grade ${esc(c.grade)}, the build's own rating)` : ""}. ${esc((ivRec(r.id) || {}).evidence || "")}${c.caveat ? " " + esc(agencyFor(c.caveat, m)) : ""}</p>
       ${mode === "value" || mode === "qol" ? fundHtml(r, selected) : ""}
       ${isOCArea(m) ? ocFundingHtml(r.id, m) : (c.funding || []).length && !(mode === "value" || mode === "qol") ? `<p class="small"><b>Who pays:</b> ${c.funding.map(k => { const f = D.funding[k]; return f ? `${f[2] ? `<a href="${esc(f[2])}" target="_blank" rel="noopener">${esc(f[0])}</a>` : esc(f[0])} (${esc(f[1])})` : ""; }).filter(Boolean).join("; ")}</p>` : ""}

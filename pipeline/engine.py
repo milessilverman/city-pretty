@@ -261,8 +261,11 @@ def run(m, pools, county="Orange County", state="CA"):
         add("sidewalks", f"~{sqft:,} sq ft of broken sidewalk (10% of walks)", H, sqft * 59, 0, 0, 0, ("LA's sidewalks are ~40% damaged citywide; local survey not loaded" if county == "la" else "assumes 10% of sidewalks need repair (the rule used for Los Angeles, where about 40% are damaged citywide); no sidewalk survey is available for " + county), pools.pct("yb", yb, False) if yb else 0.5, 0, kind="qol")
     if vc is not None and vc >= 10.4 and crashes >= 3 and m.get("acres"):
         km = round(0.01697 * m["acres"], 1)
-        add("street_lighting", f"~{km} km of streets relit", int(round(0.3 * H)), int(655600 * km), 0, int(12000 * km), 1.358,
-            f"violent crime {vc / LA_MED['vc']:.1f}x LA County's median; lighting cut nighttime outdoor crime 36% in a New York trial (no LA trial found)", pools.pct("vc", vc), 0)
+        # +0.6%: lighting cut overall index crime ~4% (Chalfin et al. 2019, NBER w25798) x the low-end crime elasticity
+        # of home values, 0.15 (Pope & Pope 2012). Was 1.358 (an assumed 32.5% nighttime-outdoor share x an unverified
+        # 0.116 coefficient); see docs/audit/catalog-coverage-round3.md.
+        add("street_lighting", f"~{km} km of streets relit", int(round(0.3 * H)), int(655600 * km), 0, int(12000 * km), 0.6,
+            f"violent crime {vc / LA_MED['vc']:.1f}x LA County's median; lighting cut nighttime outdoor crime 36% and overall index crime about 4% in a New York trial (no LA trial found)", pools.pct("vc", vc), 0)
     if vc is not None and vc >= 14:
         add("cameras", "10 cameras at hot spots", int(round(0.25 * H)), 81500, 0, 87000, 0, f"violent crime {vc / LA_MED['vc']:.1f}x LA County's median; CCTV cuts crime ~13% in view", pools.pct("vc", vc), 0, kind="qol")
     if vc is not None and vc >= 17.1:
@@ -273,7 +276,9 @@ def run(m, pools, county="Orange County", state="CA"):
 
     # ---------------- Housing ----------------
     if sf >= 40 and hv:
-        add("adu", "1 ADU on a typical lot", 1, 130000, 0, 0, 9.2, f"single-family area; typical home {_money(hv)}", 0, 1, kind="owner", value=sig(hv * 0.092))
+        # 7%: low end of "raises a parcel's assessed value and selling price by 7%-9%" (Brueckner & Thomaz 2024, Real
+        # Estate Economics, Los Angeles). Was 9.2%, above the study's range; see docs/audit/catalog-coverage-round3.md.
+        add("adu", "1 ADU on a typical lot", 1, 130000, 0, 0, 7.0, f"single-family area; typical home {_money(hv)}", 0, 1, kind="owner", value=sig(hv * 0.07))
         add("solar", "6 kW system", 1, 17700, 0, 0, round(24000 / hv * 100, 3), "owned solar sells for ~$4/W more", 0, 0, kind="owner", value=24000)
     vac = x.get("other_vacant") or 0
     if vac >= 20 and hv:
