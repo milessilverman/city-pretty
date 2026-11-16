@@ -57,15 +57,41 @@ the record is **not** confirmed.
 | County data tiers (`county_completeness.json`) | 706 | 639 computed from data files + service pings | | | 67 (no data file) | hand-assigned tiers | `scripts/build_county_completeness.py` |
 | California county registry (`ca_counties_registry.json`) | 58 | | | | 58 | false Census TIGER stamps | this document |
 
+### The improvement catalog (what the map recommends)
+
+Audited 16 Nov (`audit/bundle-catalog-audit.md`). The catalog of 81 improvements inside the county data files drives
+the "best bet", the top-3 cards, the totals and the map colors. Findings:
+
+- **1 of 81 is fully sourced** (traffic calming: effect from Polloni's study, cost from an LADOT report in the repo).
+  30 are partly sourced (effect or cost, not both). **50 have no checkable source.**
+- **Street trees, the only "grade A" item, can't be reproduced.** It cites "City Pretty local hedonic, 3,386 Westside
+  sales", but no regression code or sales data exists in the repo or its history. It was labeled a "local sales
+  estimate" in 637 counties where it was never measured, and was the best project in 98.7% of block groups where it
+  applied.
+- **The default map was driven by an assumption:** a grade-D farmers-market effect (+0.25%, sources not checkable)
+  was the best project in 60% of non-LA block groups.
+- About half of all modeled value ($513B of ~$1.03T) came from items whose source note says "one AI research pass".
+- Misapplied or missing sources: the affordable-housing effect (Diamond & McQuade) holds for neighborhoods with very
+  low incomes but was applied up to $93k; the ADU and EV-hub studies could not be found; the school-bond figure used
+  differs from the one cited.
+- `research/effects.csv`: of 31 rows marked confirmed, 22 quotes were re-found word for word, 9 sources were
+  unreachable, none contradicted. The engine didn't use this file.
+
+**Fix:** a verification gate in the app (`app/data/intervention_verification.json`): unsourced items show no dollar
+figures, can't be the best bet and don't count in totals; partly sourced items are labeled; neighborhood "profit" is
+withheld (it was modeled home-value gain, not profit). See `audit/bundle-catalog-fixes.md`.
+
 ### Not yet audited (treat as unverified)
 
-- The county data files themselves (`counties/bundle_*.json.gz`, `app/data/bundle-*.b64.txt`): they were built by the
-  pipeline from public sources (Census, OSM, GTFS and others, listed in each file), but the improvement catalog inside
-  them (effect sizes, costs, "evidence grades", neighborhood "profit") is being audited now (`audit/bundle-catalog-audit.md`
-  when finished).
-- `details-la.json`, `overlays-la.json`, `la-crash-counts.json`.
-- Code in `app/app.js`: 97 hardcoded numbers or claims were found (`audit/appjs-constants-audit.md`), 63 with no source.
-  The invented dollar outputs are being removed (`audit/appjs-fixes.md`).
+- `details-la.json` (LA's per-block-group recommendation rows), `overlays-la.json`, `la-crash-counts.json`.
+- Most cost documents behind the catalog (LA agency sites block automated access).
+- The rest of each county file (Census, OSM, GTFS layers) was built by the pipeline from the public sources listed in
+  the file; it was not re-checked value by value.
+
+### App code
+
+97 hardcoded numbers or claims were found in `app/app.js` (`audit/appjs-constants-audit.md`), 63 with no source. The
+invented dollar outputs were removed and the by-right rules now come from `statutes.json` (`audit/appjs-fixes.md`).
 
 ## 3. What was built to keep it accurate
 

@@ -104,6 +104,11 @@ real error is shown. Where the error is too high, the estimate is withheld.
 
 ### Phase 3: what improvements are worth (house and neighborhood scale)
 
+- **The improvement catalog is the biggest gap.** 1 of 81 improvements is fully sourced; 50 have no checkable source
+  (see the audit). Priority order: (1) re-run the street-tree hedonic regression on real sales with the code committed,
+  so it can be reproduced; (2) source the effect and cost for the ~10 improvements people ask about most (trees, bike
+  lanes, parks, transit stations, ADUs, lighting, sidewalks); (3) make the pipeline read only confirmed rows of
+  `research/effects.csv`, with a test.
 - Rebuild the research library from **real** studies only (Crossref-verified DOIs), with the effect size copied word
   for word from the paper and the page number. Today most studies in the library fail this (see audit).
 - Homeowner renovation check: upload a quote; the advisor compares each line to sourced costs (RSMeans or local bid

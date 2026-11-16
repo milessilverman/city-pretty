@@ -1,0 +1,2502 @@
+{
+ "summary": {
+  "audited_on": "2026-11-16",
+  "scope": "Intervention catalog (81 items, app/data/bundle-la.b64.txt -> catalog; shared by all bundles), recommendation rows in 639 county bundles (OC + 637 national + LA catalog), plans/profit, research/*.csv, pipeline/engine.py",
+  "class_counts": {
+   "U": 50,
+   "P": 30,
+   "V": 1
+  },
+  "class_counts_value_items": {
+   "U": 40,
+   "P": 7,
+   "V": 1
+  },
+  "class_definition": {
+   "V": "effect and cost both confirmed against a fetched source",
+   "P": "one of effect/cost confirmed (or, for no-$-effect items, cost cited to a named public document)",
+   "U": "neither confirmed, source not found, irreproducible, or self-labelled unverified"
+  },
+  "net_modeled_value_nonLA_usd_by_grade": {
+   "A": 15800000000.0,
+   "B": 224000000000.0,
+   "C": 170700000000.0,
+   "D": 103900000000.0,
+   "U": 513100000000.0
+  },
+  "profit_total_nonLA_usd": 1027435577900,
+  "default_view_best_project_share_tierD": {
+   "farmers_market": 0.599,
+   "street_trees": 0.105,
+   "traffic_calming": 0.066,
+   "park_upgrade": 0.05,
+   "blight_rehab": 0.049,
+   "community_garden": 0.046
+  },
+  "tierA_best_project_share": {
+   "street_trees": 0.987
+  },
+  "tierU_best_project_share": {
+   "corner_store": 0.571,
+   "farmers_market": 0.157
+  },
+  "block_groups_nonLA": 177527,
+  "effects_csv_quote_recheck": {
+   "quote_found": 19,
+   "fetch_failed": 9,
+   "near_match": 3
+  },
+  "local_hedonic": {
+   "claim": "City Pretty local hedonic: 3,386 Westside sales 2022-24, block fixed effects; each street tree within 50 m +0.51% (95% CI 0.24-0.79)",
+   "code_in_repo": false,
+   "sales_data_in_repo": false,
+   "in_git_history": false,
+   "reproducible": false,
+   "note": "pipeline/engine.py says its numbers were reverse-engineered from the LA build; the LA build code is not in the repository. The 0.24% low end is applied in all 637 national bundles with the text \"local sales estimate\"."
+  },
+  "engine_extensions_not_shipped": [
+   "safe_school_corridor",
+   "park_trees",
+   "park_seating",
+   "park_mural",
+   "park_lighting",
+   "beach_nourishment",
+   "beach_volleyball",
+   "mountain_bike_trails"
+  ]
+ },
+ "interventions": [
+  {
+   "id": "street_trees",
+   "name": "Plant street trees on open sites",
+   "kind": "value",
+   "grade": "A",
+   "evidence_label": "strong (local)",
+   "engine": {
+    "capex": "ts * 1945",
+    "land": "0",
+    "om_per_yr": "ts * 65",
+    "pct": "0.24"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.24
+   ],
+   "effect_status": "X",
+   "effect_note": "City Pretty local hedonic (3,386 Westside sales): no regression code or sales data in repo or git history; irreproducible. Shipped to 637 non-LA counties as \"local sales estimate\".",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 175304,
+   "net_value_nonLA_usd": 15807882700,
+   "sources": [
+    "City Pretty local hedonic: 3,386 Westside sales 2022-24, block fixed effects; each street tree within 50 m +0.51% (95% CI 0.24-0.79)",
+    "LAMC 62.177 in-lieu fee: $1,945 per public-works tree incl. planting and 3-yr establishment",
+    "USFS / California street-tree costing: $52-79 per tree-year upkeep"
+   ]
+  },
+  {
+   "id": "schoolyard_green",
+   "name": "Green a schoolyard (asphalt to trees and grass)",
+   "kind": "value",
+   "grade": "D",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "11200000",
+    "land": "0",
+    "om_per_yr": "15000",
+    "pct": "1.0"
+   },
+   "effect_pct_in_shipped_rows": [
+    1.0
+   ],
+   "effect_status": "A",
+   "effect_note": "catalog caveat: +1% borrowed from passive parks",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 11079,
+   "net_value_nonLA_usd": 300800000,
+   "sources": [
+    "LAUSD 2023: $78.2M for seven campus exterior/greening packages (~$11.2M each, includes paving, fencing, ADA); LAUSD Greening Index 2022 (% green space by campus)",
+    "Crompton & Nicholls 2020 review: +8-10% adjacent to passive parks; small-park effect within ~100 m (Laszkiewicz 2022)"
+   ]
+  },
+  {
+   "id": "vacant_lot_green",
+   "name": "Clean and green vacant lots",
+   "kind": "value",
+   "grade": "B",
+   "evidence_label": "strong",
+   "effect_pct_in_shipped_rows": null,
+   "effect_status": "R",
+   "effect_note": "Lin, Jensen & Wachter (Real Estate Econ., 10.1111/1540-6229.12401): effects.csv records +4.3% quote; publisher 403 today",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 0,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Lin, Jensen & Wachter 2023 (Philadelphia): +4.3% nearby after year 1",
+    "Philadelphia LandCare: $1,500 initial / $300 a year per lot (2008$)",
+    "Branas et al. 2018 RCT: gun violence -29% in poor neighborhoods"
+   ]
+  },
+  {
+   "id": "community_garden",
+   "name": "Community garden",
+   "kind": "value",
+   "grade": "B",
+   "evidence_label": "moderate",
+   "engine": {
+    "capex": "int(round(1.36 * H)))",
+    "land": "400000",
+    "om_per_yr": "int(max(100000",
+    "pct": "0.934 * hv + 54466 * d - 302375))"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.5,
+    1.5
+   ],
+   "effect_status": "C",
+   "effect_note": "Voicu & Been 2008 exists (REE); +1.5 pts not in abstract",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 22467,
+   "net_value_nonLA_usd": 53377897000,
+   "sources": [
+    "Voicu & Been 2008 (NYC): +1.5 pts at 1,000 ft, larger in poorer areas",
+    "Pasadena Parks Needs Assessment 2016: community garden $300k; LA RAP Hollywood rec center Phase II $16.5M + $2M contingency (2025)"
+   ]
+  },
+  {
+   "id": "green_alley",
+   "name": "Green alley (permeable paving, trees)",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "2400000",
+    "land": "0",
+    "om_per_yr": "10000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 10121,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Avalon Green Alley North phase II (2015): $1.83M"
+   ]
+  },
+  {
+   "id": "cool_pavement",
+   "name": "Cool pavement coating on hot streets",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "250000",
+    "land": "0",
+    "om_per_yr": "0",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 10121,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Pacoima / Covina cool-pavement studies: surface -5 C, air -0.2 to -1.9 C; Middel 2020: midday radiant heat +4 C for pedestrians"
+   ]
+  },
+  {
+   "id": "pocket_park",
+   "name": "Pocket park on a new lot",
+   "kind": "value",
+   "grade": "C",
+   "evidence_label": "strong",
+   "engine": {
+    "capex": "850000",
+    "land": "int(1.872 * hv + 325000)",
+    "om_per_yr": "25000",
+    "pct": "2.1 if hi_crime else 3.0"
+   },
+   "effect_pct_in_shipped_rows": [
+    2.1,
+    3.0
+   ],
+   "effect_status": "A",
+   "effect_note": "borrowed passive-park premium (catalog caveat)",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 3484,
+   "net_value_nonLA_usd": 1958610000,
+   "sources": [
+    "Crompton & Nicholls 2020 review: +8-10% adjacent to passive parks; small-park effect within ~100 m (Laszkiewicz 2022)",
+    "LA 50 Parks Initiative: 5,000-20,000 sq ft parks $250k-700k to develop, land extra (not checked). Checked example: LA County's 0.5-acre Walnut Park pocket park (playground, splash pad, restroom/staff building) budgeted at $4,622,842 including $3,330,000 construction, land bought separately for $1,265,000 (state funds), about $385,000 a year to run (Board letter, 17 May 2022)",
+    "Albouy, Christensen & Sarmiento-Barbieri: park value falls where homicide risk is high"
+   ]
+  },
+  {
+   "id": "park_upgrade",
+   "name": "Renovate the nearby park (new playground, paths)",
+   "kind": "value",
+   "grade": "C",
+   "evidence_label": "moderate",
+   "engine": {
+    "capex": "760000",
+    "land": "0",
+    "om_per_yr": "0",
+    "pct": "0.5"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.5
+   ],
+   "effect_status": "A",
+   "effect_note": "catalog: \"No matched renovation coefficient\"; 0.5% is an assumption",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 97285,
+   "net_value_nonLA_usd": 92296766000,
+   "sources": [
+    "Livy & Klaiber 2016: playground replacement among the most capitalized park upgrades; Brasington 2023: park-maintenance levy renewal +11.6%",
+    "Culver City, Culver West Alexander playground, Nov 2025: $759,353"
+   ]
+  },
+  {
+   "id": "pickleball",
+   "name": "Convert a tennis court to 4 pickleball courts",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "110000",
+    "land": "0",
+    "om_per_yr": "2000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 62669,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Redondo Beach Alta Vista 2026: tennis resurfacing + 1 court to 4 pickleball $107,408; Cerritos 2 pickleball courts $134k",
+    "Minneapolis 2014 park-facility study: passive features add value; some active/skate facilities lower nearby values"
+   ]
+  },
+  {
+   "id": "tennis",
+   "name": "Build 2 public tennis courts",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "260000",
+    "land": "0",
+    "om_per_yr": "4000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 9668,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Redondo Beach Alta Vista 2026: tennis resurfacing + 1 court to 4 pickleball $107,408; Cerritos 2 pickleball courts $134k",
+    "Minneapolis 2014 park-facility study: passive features add value; some active/skate facilities lower nearby values"
+   ]
+  },
+  {
+   "id": "basketball",
+   "name": "Build a public basketball court",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "580000",
+    "land": "0",
+    "om_per_yr": "3000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 39008,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "LA County PNA 2016: one full basketball court $436,250",
+    "Minneapolis 2014 park-facility study: passive features add value; some active/skate facilities lower nearby values"
+   ]
+  },
+  {
+   "id": "dog_park",
+   "name": "Dog park",
+   "kind": "value",
+   "grade": "D",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "580000",
+    "land": "0",
+    "om_per_yr": "15000",
+    "pct": "0.25"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.25
+   ],
+   "effect_status": "A",
+   "effect_note": "catalog: +0.25% is an assumption; cited study coefficient not recovered",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 6939,
+   "net_value_nonLA_usd": 2490776000,
+   "sources": [
+    "Castillo-Castillo et al. 2025 (Twin Cities): dog parks positively associated with nearby values (coefficient not recovered); Beverly Hills 2015 estimate $400-450k for a basic dog park"
+   ]
+  },
+  {
+   "id": "pool",
+   "name": "Public swimming pool",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "36560000",
+    "land": "0",
+    "om_per_yr": "1000000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 159,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "LA County Hilda L. Solis Aquatic Center: $36.56M revised budget (Oct 2026); LA CAO 2022: $2.08M yearly O&M for the pool program (full per-pool O&M not recovered)"
+   ]
+  },
+  {
+   "id": "splash_pad",
+   "name": "Splash pad",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "850000",
+    "land": "0",
+    "om_per_yr": "40000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 34778,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "LA RAP Juntos Park splash pad: $642,021 (2017)"
+   ]
+  },
+  {
+   "id": "skate_park",
+   "name": "Skate park",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "limited",
+   "effect_pct_in_shipped_rows": null,
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 0,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "LA County George Lane skate park (Quartz Hill): $2.1M for ~10,000 sq ft (2016); O&M not recovered",
+    "Minneapolis 2014 park-facility study: passive features add value; some active/skate facilities lower nearby values"
+   ]
+  },
+  {
+   "id": "sports_field",
+   "name": "Natural-grass sports field",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "550000",
+    "land": "0",
+    "om_per_yr": "25000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 35645,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Sunnyvale 2023: natural-grass field $516,150 vs synthetic $2.03M; Culver City PNA field replacement $2.8M"
+   ]
+  },
+  {
+   "id": "rec_center",
+   "name": "Recreation center",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "18500000",
+    "land": "0",
+    "om_per_yr": "400000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 38671,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Pasadena Parks Needs Assessment 2016: community garden $300k; LA RAP Hollywood rec center Phase II $16.5M + $2M contingency (2025)"
+   ]
+  },
+  {
+   "id": "restroom",
+   "name": "Park restroom and drinking fountains",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "990000",
+    "land": "0",
+    "om_per_yr": "60000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 100829,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "LA County Measure A: South LA replacement restroom building $990,000"
+   ]
+  },
+  {
+   "id": "bus_lane",
+   "name": "Paint red bus-only lanes on the busy corridor",
+   "kind": "value",
+   "grade": "D",
+   "evidence_label": "modeled (from BRT studies)",
+   "engine": {
+    "capex": "220000",
+    "land": "0",
+    "om_per_yr": "18000",
+    "pct": "0.5"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.5
+   ],
+   "effect_status": "A",
+   "effect_note": "scaled down from BRT (catalog caveat)",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 3320,
+   "net_value_nonLA_usd": 5439491000,
+   "sources": [
+    "Metro Wilshire bus lanes: $31.5M for 9.9 miles (2013); Culver City Robertson bus/bike lanes $1.22M (2025)",
+    "Metro Flower St bus lane: buses up to 30% faster",
+    "Beaudoin & Tyndall 2024 (Vancouver WA BRT): +5-7% home prices; Metro NoHo-Pasadena BRT $429M / 19 mi = $22.6M per mile; Vermont BRT $33.4M per mile"
+   ]
+  },
+  {
+   "id": "brt",
+   "name": "Bus rapid transit (stations, lanes, signal priority)",
+   "kind": "value",
+   "grade": "B",
+   "evidence_label": "moderate",
+   "engine": {
+    "capex": "11300000",
+    "land": "0",
+    "om_per_yr": "100000",
+    "pct": "5.0"
+   },
+   "effect_pct_in_shipped_rows": [
+    5.0
+   ],
+   "effect_status": "V",
+   "effect_note": "Beaudoin & Tyndall +5-7%: quote re-found in UHERO working paper (effects.csv row 15); engine uses 5.0",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 446,
+   "net_value_nonLA_usd": 3708900000,
+   "sources": [
+    "Beaudoin & Tyndall 2024 (Vancouver WA BRT): +5-7% home prices; Metro NoHo-Pasadena BRT $429M / 19 mi = $22.6M per mile; Vermont BRT $33.4M per mile"
+   ]
+  },
+  {
+   "id": "rail_station",
+   "name": "New light rail line and station (regional project, local share)",
+   "kind": "regional",
+   "grade": "C",
+   "evidence_label": "strong",
+   "engine": {
+    "capex": "76000000",
+    "land": "0",
+    "om_per_yr": "300000",
+    "pct": "4.2"
+   },
+   "effect_pct_in_shipped_rows": [
+    4.2
+   ],
+   "effect_status": "V",
+   "effect_note": "Debrezion, Pels & Rietveld 2007 abstract: \"about 4.2% for the average residence\" (OpenAlex)",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 75,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Debrezion, Pels & Rietveld 2007 meta-analysis: +4.2% residential within station area; Keeler & Stephens 2023 (LA Gold/Expo)"
+   ]
+  },
+  {
+   "id": "bus_shelters",
+   "name": "Bus shelters with shade at busy stops",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "723000",
+    "land": "0",
+    "om_per_yr": "10000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 7780,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "LA Sidewalk & Transit Amenities Program: the Bureau of Street Services estimates $180,842 to procure and install each shelter in 2025-26 (CAO Memo No. 74, 7 May 2025; a budget estimate, not an audited average); LAist (May 2025) reports about $35,000 per shelter before sidewalk and electrical work"
+   ]
+  },
+  {
+   "id": "traffic_calming",
+   "name": "Speed humps and traffic calming",
+   "kind": "value",
+   "grade": "C",
+   "evidence_label": "moderate",
+   "engine": {
+    "capex": "humps * 5958",
+    "land": "0",
+    "om_per_yr": "0",
+    "pct": "1.0"
+   },
+   "effect_pct_in_shipped_rows": [
+    1.0
+   ],
+   "effect_status": "V",
+   "effect_note": "Polloni abstract: \"decreasing traffic by 16% raise home values on treated streets by 1%\" (Crossref)",
+   "cost_status": "V",
+   "cost_note": "$5,958/hump in LADOT 2025 speed hump report saved at w5/research/t_hump25.txt line 77",
+   "class": "V",
+   "shipped_rows_nonLA": 34052,
+   "net_value_nonLA_usd": 3585223300,
+   "sources": [
+    "LADOT 2025: $5,958 per speed hump, up to 25-year life",
+    "Polloni 2019 (Portland): traffic calming that cuts flow 16% raises treated-street values ~1%"
+   ]
+  },
+  {
+   "id": "crosswalks",
+   "name": "Safer crossings (bulb-outs, ramps, refuges)",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "strong",
+   "engine": {
+    "capex": "nint * 48)",
+    "land": "nint * 58000",
+    "om_per_yr": "0",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 34052,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Santa Monica Blvd Safety Study 2026: ADA ramp $9,000; bulb-out $11,000-18,000 (not checked against the study). LA City's own engineering unit prices (2022, with escalation and contingency) are far higher for concrete work: high-visibility continental crosswalk $3,950; ADA curb ramp $38,122; curb extension $158,016 (half corner) to $260,726 (full corner at a signal); pedestrian refuge island $110,611. The $58,000 per intersection used here covers crosswalks and ramps, not curb extensions",
+    "FHWA: refuge islands -46% pedestrian crashes; road diets -29% crashes"
+   ]
+  },
+  {
+   "id": "road_diet",
+   "name": "Road diet with protected bike lanes",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "moderate",
+   "effect_pct_in_shipped_rows": null,
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 0,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Metro Wilshire bus lanes: $31.5M for 9.9 miles (2013); Culver City Robertson bus/bike lanes $1.22M (2025)",
+    "FHWA: refuge islands -46% pedestrian crashes; road diets -29% crashes"
+   ]
+  },
+  {
+   "id": "sidewalks",
+   "name": "Repair broken sidewalks",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "sqft * 59",
+    "land": "0",
+    "om_per_yr": "0",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 175316,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "LA Controller 2021 sidewalk audit: $51 per sq ft incl. soft costs"
+   ]
+  },
+  {
+   "id": "street_lighting",
+   "name": "Brighter pedestrian street lighting",
+   "kind": "value",
+   "grade": "C",
+   "evidence_label": "strong (crime) / modeled (value)",
+   "engine": {
+    "capex": "int(655600 * km)",
+    "land": "0",
+    "om_per_yr": "int(12000 * km)",
+    "pct": "1.358"
+   },
+   "effect_pct_in_shipped_rows": [
+    1.358
+   ],
+   "effect_status": "A",
+   "effect_note": "chains Chalfin crime RCT (exists) with Schwartz-Susin-Voicu coefficient the catalog itself says is unverified",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 298,
+   "net_value_nonLA_usd": 10916000,
+   "sources": [
+    "Chalfin et al. (NYC RCT): street lighting -36% nighttime outdoor index crime",
+    "LA Bureau of Street Lighting: ~$5,000 per 50-ft residential lot to build; ~$90 a year upkeep assessment",
+    "Schwartz, Susin & Voicu 2003 (NYC): each 1% less violent crime -> about +0.1% home prices (the 0.116 coefficient was not verified; secondary sources cite ~0.15)"
+   ]
+  },
+  {
+   "id": "cameras",
+   "name": "Security cameras at hot spots",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "none in LA evaluations",
+   "engine": {
+    "capex": "81500",
+    "land": "0",
+    "om_per_yr": "87000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 527,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Cameron et al. 2008 (Hollywood and Jordan Downs cameras): no significant crime effect in LA; Piza et al. 2019 meta-analysis -13% elsewhere; LA Civic Center 2024 quote ~$8,148 per camera"
+   ]
+  },
+  {
+   "id": "foot_patrol",
+   "name": "Foot patrols on hot-spot blocks",
+   "kind": "value",
+   "grade": "C",
+   "evidence_label": "strong (crime) / modeled (value)",
+   "engine": {
+    "capex": "0",
+    "land": "0",
+    "om_per_yr": "400000",
+    "pct": "2.668"
+   },
+   "effect_pct_in_shipped_rows": [
+    2.668
+   ],
+   "effect_status": "A",
+   "effect_note": "Ratcliffe RCT confirmed (crime); price link via unverified Schwartz coefficient",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 155,
+   "net_value_nonLA_usd": 497170000,
+   "sources": [
+    "Ratcliffe et al. 2011 (Philadelphia RCT): foot patrol -23% violent crime; LAPD officer salary + fringe ~$159k/yr (CAO 2025)",
+    "Schwartz, Susin & Voicu 2003 (NYC): 1% less violent crime -> about +0.12% home prices (coefficient as cited; not yet checked against the paper's table here)"
+   ]
+  },
+  {
+   "id": "violence_interruption",
+   "name": "Violence interruption (GRYD-style)",
+   "kind": "value",
+   "grade": "C",
+   "evidence_label": "moderate (LA)",
+   "engine": {
+    "capex": "0",
+    "land": "0",
+    "om_per_yr": "70000",
+    "pct": "0.406"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.406
+   ],
+   "effect_status": "A",
+   "effect_note": "Brantingham et al. exists (2023 on Crossref); price link via unverified coefficient",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 155,
+   "net_value_nonLA_usd": 64811000,
+   "sources": [
+    "Brantingham, Tita & Herz 2021 (LA GRYD): violent crime ~-18% per reporting district (95% CI -3.5% to -33%; 625 districts); GRYD budget $41M/yr",
+    "Schwartz, Susin & Voicu 2003 (NYC): 1% less violent crime -> about +0.12% home prices (coefficient as cited; not yet checked against the paper's table here)"
+   ]
+  },
+  {
+   "id": "bid",
+   "name": "Business improvement district (cleaning, ambassadors)",
+   "kind": "value",
+   "grade": "C",
+   "evidence_label": "moderate (crime) / modeled (value)",
+   "engine": {
+    "capex": "0",
+    "land": "0",
+    "om_per_yr": "250000",
+    "pct": "0.418"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.418
+   ],
+   "effect_status": "A",
+   "effect_note": "MacDonald et al. exists; price link via unverified coefficient",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 6004,
+   "net_value_nonLA_usd": 6069310000,
+   "sources": [
+    "MacDonald et al. 2010 (30 LA BIDs): robbery -12%",
+    "Schwartz, Susin & Voicu 2003 (NYC): 1% less violent crime -> about +0.12% home prices (coefficient as cited; not yet checked against the paper's table here)"
+   ]
+  },
+  {
+   "id": "litter",
+   "name": "Weekly litter and illegal-dumping cleanup",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "moderate (litter) / not measured (value)",
+   "effect_pct_in_shipped_rows": null,
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 0,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "MacDonald et al. 2026 street-cleaning RCT: litter -16%; LA CARE cleanup team ~$1.4M a year"
+   ]
+  },
+  {
+   "id": "graffiti",
+   "name": "Fast graffiti removal",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "not measured (value)",
+   "effect_pct_in_shipped_rows": null,
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 0,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "No causal price effect of graffiti removal found (sourcebook round 3); Gibbons 2004 links criminal damage to prices; LA graffiti crews $11.7M / 95 crews"
+   ]
+  },
+  {
+   "id": "encampment",
+   "name": "Housing-first outreach for encampments",
+   "kind": "value",
+   "grade": "C",
+   "evidence_label": "limited",
+   "effect_pct_in_shipped_rows": null,
+   "effect_status": "C",
+   "effect_note": "Bhandari 2024 exists (Crossref); -1.41% unchecked",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 0,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Bhandari 2024 (LA): encampments within 0.2 mi -> -1.41% sale prices; RAND Housing for Health: $30,458 per participant-year incl. county services"
+   ]
+  },
+  {
+   "id": "blight_rehab",
+   "name": "Rehab or replace blighted homes",
+   "kind": "value",
+   "grade": "B",
+   "evidence_label": "strong",
+   "engine": {
+    "capex": "n * 110000",
+    "land": "0",
+    "om_per_yr": "0",
+    "pct": "2.3"
+   },
+   "effect_pct_in_shipped_rows": [
+    2.3
+   ],
+   "effect_status": "C",
+   "effect_note": "Ganduri & Maturana exists (2021 working paper on Crossref); +2.3 pts unchecked",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 53837,
+   "net_value_nonLA_usd": 36379644000,
+   "sources": [
+    "Ganduri & Maturana 2024: neighbors +2.3 pts after REO rehab; Rossi-Hansberg, Sarte & Owens 2010: $2-6 land value per $1"
+   ]
+  },
+  {
+   "id": "affordable_housing",
+   "name": "Affordable housing on underused land",
+   "kind": "value",
+   "grade": "B",
+   "evidence_label": "moderate",
+   "engine": {
+    "capex": "39100000",
+    "land": "0",
+    "om_per_yr": "0",
+    "pct": "6.5"
+   },
+   "effect_pct_in_shipped_rows": [
+    6.5
+   ],
+   "effect_status": "V",
+   "effect_note": "Diamond & McQuade abstract confirms +6.5%/-2.5% (OpenAlex). MISAPPLIED: study +6.5% is for tracts with median income under ~$26k; engine applies it below LA median $93,240",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 85507,
+   "net_value_nonLA_usd": 34200000,
+   "sources": [
+    "Diamond & McQuade 2019: LIHTC +6.5% within 0.1 mi in low-income areas (median income under ~$26k), -2.5% in high-income (over ~$54k); per-unit cost: LAHD's March 2026 report puts 2025 total development cost above $782,000 per unit in 2024 dollars (projects dated by LAHD financing year, not completion); the city's Measure JJJ study puts 2020-23 affordable projects at $629,926 per unit (different cohort)"
+   ]
+  },
+  {
+   "id": "adu",
+   "name": "Add a backyard home (ADU), owner-level",
+   "kind": "owner",
+   "grade": "B",
+   "evidence_label": "strong",
+   "engine": {
+    "capex": "130000",
+    "land": "0",
+    "om_per_yr": "0",
+    "pct": "9.2"
+   },
+   "effect_pct_in_shipped_rows": [
+    9.2
+   ],
+   "effect_status": "X",
+   "effect_note": "Brueckner & Thomaz 2024 not found in Crossref; catalog admits 9.2% not verified",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 137379,
+   "net_value_nonLA_usd": 104920000,
+   "sources": [
+    "Brueckner & Thomaz 2024 (LA): an ADU raises the host parcel's value about 7-9% (the 9.2% point estimate and its CI used here were not verified against the paper); Tanrisever 2025: neighbors -3% per +0.5 pt ADU density within 300 m (confirmed); LA County median ADU cost $100k (2020)"
+   ]
+  },
+  {
+   "id": "solar",
+   "name": "Rooftop solar, owner-level",
+   "kind": "owner",
+   "grade": "B",
+   "evidence_label": "moderate",
+   "engine": {
+    "capex": "17700",
+    "land": "0",
+    "om_per_yr": "0",
+    "pct": "round(24000 / hv * 100"
+   },
+   "effect_pct_in_shipped_rows": {
+    "min": 1.2,
+    "max": 240.024,
+    "distinct_values": 8318,
+    "note": "solar: 24000 / home value"
+   },
+   "effect_status": "C",
+   "effect_note": "LBNL \"Selling into the Sun\" exists (research-audit kept it); $4/W unchecked",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 137379,
+   "net_value_nonLA_usd": 865487700,
+   "sources": [
+    "Berkeley Lab 2015: ~$4/W premium for owned solar; DOE 2025 benchmark $2.95/W installed"
+   ]
+  },
+  {
+   "id": "undergrounding",
+   "name": "Underground the overhead power lines",
+   "kind": "value",
+   "grade": "B",
+   "evidence_label": "moderate",
+   "engine": {
+    "capex": "int(3440000 * miles)",
+    "land": "0",
+    "om_per_yr": "0",
+    "pct": "2.9"
+   },
+   "effect_pct_in_shipped_rows": [
+    2.9
+   ],
+   "effect_status": "V",
+   "effect_note": "McNair & Abelson abstract: \"increase house prices by 2.9 per cent\" (Canberra; transferred)",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 70729,
+   "net_value_nonLA_usd": 9458872000,
+   "sources": [
+    "Undergrounding cost: the $3.4M per mile figure is PG&E's lower bound in the CPUC table, not an LADWP number (LADWP's general manager has cited $1-14M per mile); CPUC: SCE $351-990 per foot ($1.85-5.23M per mile) and an average of $3.8M per circuit-mile across the three utilities, in 2019 dollars, covering trenching through pole removal; LADWP overhead/underground line maps (NavigateLA); CAL FIRE hazard zones",
+    "McNair & Abelson 2010 (Canberra): underground power +2.9% house prices"
+   ]
+  },
+  {
+   "id": "ev_hub",
+   "name": "EV fast-charging hub",
+   "kind": "value",
+   "grade": "C",
+   "evidence_label": "moderate (possibly overstated)",
+   "engine": {
+    "capex": "800000",
+    "land": "0",
+    "om_per_yr": "20000",
+    "pct": "1.0"
+   },
+   "effect_pct_in_shipped_rows": [
+    1.0
+   ],
+   "effect_status": "X",
+   "effect_note": "\"Liang et al. 2023 (14M California sales)\" not found; Crossref hit is an unrelated preprint; 1% is a self-declared discount",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 18837,
+   "net_value_nonLA_usd": 64905337000,
+   "sources": [
+    "Liang et al. 2023 (14M California sales): +3.3% within 1 km of EV chargers (confirmed); 8-port DC fast site $800,473 attributed to CARB 2025 (not found in a primary source; unverified). Traceable benchmarks: CARB reports $103,238 total cost per DC fast charger, private funding included, for completed CALeVIP projects reported through 30 Sep 2021 (per charger, not per site); a planned 8-charger site in Santa Barbara (West Cabrillo Pavilion lot) is budgeted at $1,777,000 total project cost in its November 2025 project report (planned, includes design and site work; https://catc.ca.gov/-/media/ctc-media/documents/programs/baseline-agreements/2026-01/5-sbcag-ba-sb-us-101.pdf); AFDC: maintenance up to $400-800 per charger-year (electricity, network extra); federal AFDC station data"
+   ]
+  },
+  {
+   "id": "microgrid",
+   "name": "Solar + battery resilience hub",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "3940000",
+    "land": "0",
+    "om_per_yr": "30000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 32977,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "LA County CPUC filing 2021: community microgrids $3.25-3.6M each"
+   ]
+  },
+  {
+   "id": "noise_wall",
+   "name": "Freeway sound wall",
+   "kind": "value",
+   "grade": "B",
+   "evidence_label": "strong",
+   "engine": {
+    "capex": "0.22 * H)))",
+    "land": "L * 2485",
+    "om_per_yr": "0",
+    "pct": "5000"
+   },
+   "effect_pct_in_shipped_rows": [
+    6.8
+   ],
+   "effect_status": "V",
+   "effect_note": "Moretti & Wheeler 6.8% quote re-found in eml.berkeley.edu PDF (effects.csv row 21)",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 28491,
+   "net_value_nonLA_usd": 5650857900,
+   "sources": [
+    "Moretti & Wheeler 2025: new noise barrier +6.8% within 100 m (confirmed); cost covers design, right-of-way and construction including roadway/structure work (Metro's Feb 2019 soundwall report: about $10M per mile on freeway shoulders and $20M per mile on structures; not a 2026 bid). Eligibility: homes built before the freeway or its widening, hourly noise above 67 dB (Leq), at least a 5 dB reduction, and no more than $92,000 per home in 2017 dollars"
+   ]
+  },
+  {
+   "id": "freeway_cap",
+   "name": "Freeway cap park (regional project, local share)",
+   "kind": "regional",
+   "grade": "C",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "50000000",
+    "land": "0",
+    "om_per_yr": "200000",
+    "pct": "5.0"
+   },
+   "effect_pct_in_shipped_rows": [
+    5.0
+   ],
+   "effect_status": "A",
+   "effect_note": "borrowed passive-park premium",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 103,
+   "net_value_nonLA_usd": 1262600000,
+   "sources": [
+    "Klyde Warren Park cap $110M for 5 acres (2012); Hollywood Central Park proposal $250M + $780k a year",
+    "Crompton & Nicholls 2020 review: +8-10% adjacent to passive parks; small-park effect within ~100 m (Laszkiewicz 2022)"
+   ]
+  },
+  {
+   "id": "school_filters",
+   "name": "Air filters in classrooms near freeways",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "moderate",
+   "engine": {
+    "capex": "30000",
+    "land": "0",
+    "om_per_yr": "6000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 10283,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Gilraine 2020 (LA, Porter Ranch): classroom air filters raised test scores"
+   ]
+  },
+  {
+   "id": "school_bond",
+   "name": "School modernization (bond-funded)",
+   "kind": "value",
+   "grade": "B",
+   "evidence_label": "strong",
+   "effect_pct_in_shipped_rows": [
+    3.0
+   ],
+   "effect_status": "C",
+   "effect_note": "Cellini, Ferreira & Rothstein abstract confirms \"$1.50 or more for each $1\"; catalog says +6% used but engine uses pct 3.0 \u2014 inconsistent",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 51031,
+   "net_value_nonLA_usd": 98265080000,
+   "sources": [
+    "Cellini, Ferreira & Rothstein 2010 (California school bonds): about $1.50 of home value per $1 of school capital (confirmed); six years after passage the paper's Table V gives +6.7% (one-step treatment-on-the-treated, SE 0.034), +4.7% intent-to-treat and +10.1% recursive TOT, so the +6% used here sits inside the paper's range; the first-year effect is about 3%"
+   ]
+  },
+  {
+   "id": "library",
+   "name": "Library upgrade and longer hours",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "moderate (use) / none (value)",
+   "engine": {
+    "capex": "5500000",
+    "land": "0",
+    "om_per_yr": "250000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 2570,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Gilpin, Karger & Nencka: library capital spending +21% visits; no detectable home-price change; LA Benjamin Franklin branch renovation $5.5M"
+   ]
+  },
+  {
+   "id": "clinic",
+   "name": "Community health clinic",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "moderate",
+   "engine": {
+    "capex": "38800000",
+    "land": "0",
+    "om_per_yr": "0",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 30226,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Bailey & Goodman-Bacon 2015: community health centers -2% mortality 50+; Via Care East LA clinic $38.8M (25,000 sq ft)"
+   ]
+  },
+  {
+   "id": "grocery",
+   "name": "Attract a full grocery store",
+   "kind": "value",
+   "grade": "B",
+   "evidence_label": "moderate",
+   "engine": {
+    "capex": "2000000",
+    "land": "0",
+    "om_per_yr": "0",
+    "pct": "4.0"
+   },
+   "effect_pct_in_shipped_rows": [
+    4.0
+   ],
+   "effect_status": "V",
+   "effect_note": "Worcester DiD (Cerrato Caceres et al.) +7%/+4% quote re-found (effects.csv row 22); engine uses 4.0",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 1191,
+   "net_value_nonLA_usd": 17156660000,
+   "sources": [
+    "Worcester DiD: +7% within 400 m, +4% at 400-800 m after a grocery opens; Saengchote 2020: Whole Foods +6.7%"
+   ]
+  },
+  {
+   "id": "main_street",
+   "name": "Main-street revival (facade grants, small-business help)",
+   "kind": "value",
+   "grade": "D",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "750000",
+    "land": "0",
+    "om_per_yr": "150000",
+    "pct": "1.0"
+   },
+   "effect_pct_in_shipped_rows": [
+    1.0
+   ],
+   "effect_status": "A",
+   "effect_note": "Ghorbani & Meltzer not found in Crossref; catalog: association, not a measured effect",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 24665,
+   "net_value_nonLA_usd": 6078070000,
+   "sources": [
+    "Ghorbani & Meltzer 2024 (NYC): more nearby retail raises 1-4 family values, lowers condo values; Teh 2007 (LA): liquor stores raise nearby crime",
+    "MacDonald et al. 2010 (30 LA BIDs): robbery -12%"
+   ]
+  },
+  {
+   "id": "outdoor_dining",
+   "name": "Outdoor dining and parklets",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "moderate (business) / not measured (value)",
+   "engine": {
+    "capex": "125000",
+    "land": "0",
+    "om_per_yr": "5000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "P",
+   "shipped_rows_nonLA": 7193,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "SF Controller: parklet businesses +29% revenue; LA Al Fresco corridors +$12M sales"
+   ]
+  },
+  {
+   "id": "farmers_market",
+   "name": "Weekly farmers market",
+   "kind": "value",
+   "grade": "D",
+   "evidence_label": "limited",
+   "engine": {
+    "capex": "18000",
+    "land": "0",
+    "om_per_yr": "40000",
+    "pct": "0.25"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.25
+   ],
+   "effect_status": "A",
+   "effect_note": "\"Maryland 2020; Edmonton 2024\" \u2014 no authors/titles; catalog: association, not this effect; 0.25% assumed",
+   "cost_status": "X",
+   "cost_note": "$18,000 + $40,000/yr: no cost source in catalog",
+   "class": "U",
+   "shipped_rows_nonLA": 139557,
+   "net_value_nonLA_usd": 89546223000,
+   "sources": [
+    "Farmers-market studies (Maryland 2020; Edmonton 2024): positive, inverted-U with distance"
+   ]
+  },
+  {
+   "id": "upzone_transit",
+   "name": "Allow more homes near transit (SB 79 / TOC zoning)",
+   "kind": "policy",
+   "grade": "C",
+   "evidence_label": "moderate",
+   "engine": {
+    "capex": "300000",
+    "land": "0",
+    "om_per_yr": "0",
+    "pct": "3.0"
+   },
+   "effect_pct_in_shipped_rows": [
+    3.0
+   ],
+   "effect_status": "C",
+   "effect_note": "Kuhlmann 2021 exists (Crossref); +3-5% unchecked",
+   "cost_status": "S",
+   "cost_note": "cited to named public document; not re-fetched (LA/agency sites return 403 here)",
+   "class": "U",
+   "shipped_rows_nonLA": 3823,
+   "net_value_nonLA_usd": 20730237000,
+   "sources": [
+    "Kuhlmann 2021 (Minneapolis): +3-5% affected single-family prices; Kestelman 2025 (LA TOC); HCD SB 79 (eff. July 2026)"
+   ]
+  },
+  {
+   "id": "protected_bike",
+   "name": "Protected bike lanes (concrete curbs)",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "safety studied / price not measured",
+   "engine": {
+    "capex": "925000",
+    "land": "0",
+    "om_per_yr": "17000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "X",
+   "cost_note": "\"Cost from a Gemini research pass, unverified\" (catalog)",
+   "class": "U",
+   "shipped_rows_nonLA": 13592,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Cost from a Gemini research pass, unverified (re-audit kept the figure but quoted no source); $1.85M per mile with concrete curbs and bike signals. LA City unit prices for the 7th Street protected bike lane (2022, with escalation and contingency): $297 per linear foot with landscaping, plus $66 signing and $175 signal modifications per foot, about $2.8M per mile combined; Class II bike lanes $15 per foot; MyFigueroa $20.5M / 4 mi (2018). FHWA: protected lanes cut crashes; no price study"
+   ]
+  },
+  {
+   "id": "corridor_trail",
+   "name": "Trail on a power-line, rail or creek corridor",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "association only (BeltLine, trails)",
+   "engine": {
+    "capex": "1200000",
+    "land": "0",
+    "om_per_yr": "19000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "X",
+   "cost_note": "\"Cost from a Gemini research pass, unverified\" (catalog)",
+   "class": "U",
+   "shipped_rows_nonLA": 39312,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Cost from a Gemini research pass, unverified (re-audit kept the figure but quoted no source); $2.4M per mile (power-line ROW) to $4.5M (river). Checked benchmarks: Coyote Creek flood-channel trail (OC Loop P-Q), $5,699,000 state ATP allocation for 1.6 miles (~$3.6M/mi, CTC March 2025); Puente Creek Bikeway, $3.7M programmed for 1.86 miles of channel path (~$2.0M/mi; withdrawn from ATP June 2025); OC Loop Segment A rail-to-trail, $46.0M for 3.1 miles (~$14.8M/mi, OCTA 2024 RTIP); Immergluck 2009 (Atlanta BeltLine) found rising nearby prices, varying by area"
+   ]
+  },
+  {
+   "id": "transit_priority",
+   "name": "Transit signal priority and bus bulbs",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "speed studied / price not measured",
+   "engine": {
+    "capex": "398000",
+    "land": "0",
+    "om_per_yr": "12000",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "X",
+   "cost_note": "\"Cost from a Gemini research pass, unverified\" (catalog)",
+   "class": "U",
+   "shipped_rows_nonLA": 10891,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Cost from a Gemini research pass, unverified (re-audit kept the figure but quoted no source); $42,000 per signal for priority, $115,000 per bus bulb; LADOT: bus delay at signals cut ~33%"
+   ]
+  },
+  {
+   "id": "speed_cameras",
+   "name": "Speed safety cameras (AB 645 pilot cities)",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "safety studied / price not measured",
+   "effect_pct_in_shipped_rows": null,
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "X",
+   "cost_note": "\"Cost from a Gemini research pass, unverified\" (catalog)",
+   "class": "U",
+   "shipped_rows_nonLA": 0,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Cost from a Gemini research pass, unverified (re-audit kept the figure but quoted no source); $65,000 per site + $28,000/yr; FHWA / Cochrane review: large crash reductions; AB 645 pilots in LA, Long Beach, Glendale"
+   ]
+  },
+  {
+   "id": "roundabout",
+   "name": "Neighborhood roundabout",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "safety studied / price not measured",
+   "effect_pct_in_shipped_rows": null,
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "X",
+   "cost_note": "\"Cost from a Gemini research pass, unverified\" (catalog)",
+   "class": "U",
+   "shipped_rows_nonLA": 0,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Cost from a Gemini research pass, unverified (re-audit kept the figure but quoted no source); $550,000 per intersection; Retting et al. 2001: injury crashes -78% at converted intersections"
+   ]
+  },
+  {
+   "id": "ped_signals",
+   "name": "Leading pedestrian signals and corner daylighting",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "safety studied / price not measured",
+   "engine": {
+    "capex": "52000",
+    "land": "0",
+    "om_per_yr": "4800",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "X",
+   "cost_note": "\"Cost from a Gemini research pass, unverified\" (catalog)",
+   "class": "U",
+   "shipped_rows_nonLA": 34052,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Cost from a Gemini research pass, unverified (re-audit kept the figure but quoted no source); $8,500 per signal retiming, $1,800 per daylit corner (AB 413). LA City unit prices (2022, with escalation and contingency): leading pedestrian interval $34,034 each; accessible pedestrian signal $20,542; rapid rectangular flashing beacon $118,512; pedestrian HAWK beacon $158,016-237,024; Fayish & Gross 2012: pedestrian crashes reduced"
+   ]
+  },
+  {
+   "id": "school_street",
+   "name": "School street (car-free at drop-off)",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "safety studied / price not measured",
+   "effect_pct_in_shipped_rows": null,
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "X",
+   "cost_note": "\"Cost from a Gemini research pass, unverified\" (catalog)",
+   "class": "U",
+   "shipped_rows_nonLA": 0,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Cost from a Gemini research pass, unverified (re-audit kept the figure but quoted no source); $85,000 per block + $4,800/yr; London school streets: traffic and NO2 down near schools"
+   ]
+  },
+  {
+   "id": "murals",
+   "name": "Public murals and art",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "association only",
+   "effect_pct_in_shipped_rows": null,
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "X",
+   "cost_note": "\"Cost from a Gemini research pass, unverified\" (catalog)",
+   "class": "U",
+   "shipped_rows_nonLA": 0,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Cost from a Gemini research pass, unverified (re-audit kept the figure but quoted no source); $35,000 per 1,000 sq ft mural; LA Mural Ordinance registry; no causal price study"
+   ]
+  },
+  {
+   "id": "tiny_forest",
+   "name": "Miyawaki tiny forest",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "ecology studied / price not measured",
+   "engine": {
+    "capex": "int(round(1.08 * H)))",
+    "land": "130000",
+    "om_per_yr": "0",
+    "pct": "17000"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "X",
+   "cost_note": "\"Cost from a Gemini research pass, unverified\" (catalog)",
+   "class": "U",
+   "shipped_rows_nonLA": 15181,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Cost from a Gemini research pass, unverified (re-audit kept the figure but quoted no source); $65,000 per 0.1-acre site + $8,500/yr; no price study"
+   ]
+  },
+  {
+   "id": "fiber_5g",
+   "name": "Fiber to the home and 5G small cells",
+   "kind": "qol",
+   "grade": "none",
+   "evidence_label": "price not measured",
+   "engine": {
+    "capex": "3200 * H",
+    "land": "0",
+    "om_per_yr": "int(88.5 * H)",
+    "pct": "0"
+   },
+   "effect_pct_in_shipped_rows": [
+    0
+   ],
+   "effect_status": "NA",
+   "effect_note": "no $ value effect used",
+   "cost_status": "X",
+   "cost_note": "\"Cost from a Gemini research pass, unverified\" (catalog)",
+   "class": "U",
+   "shipped_rows_nonLA": 11138,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "Cost from a Gemini research pass, unverified (re-audit kept the figure but quoted no source); $3,200 per home passed (fiber); no causal price study for small cells (earlier cited study was fabricated)"
+   ]
+  },
+  {
+   "id": "green_street",
+   "name": "Green street: bioswales and rain-garden curb extensions",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "engine": {
+    "capex": "740000",
+    "land": "0",
+    "om_per_yr": "18000",
+    "pct": "1.2"
+   },
+   "effect_pct_in_shipped_rows": [
+    1.2
+   ],
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 70543,
+   "net_value_nonLA_usd": 330120000,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies",
+    "Round 6: LA County Safe Clean Water Program project costs (Elmer Ave green street, Magic Johnson Park stormwater)"
+   ]
+  },
+  {
+   "id": "stormwater_park",
+   "name": "Stormwater-capture park (underground basin, rebuilt fields)",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "effect_pct_in_shipped_rows": [
+    2.8
+   ],
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 19327,
+   "net_value_nonLA_usd": 152638950000,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies",
+    "Round 6: LA County Safe Clean Water Program project costs (Elmer Ave green street, Magic Johnson Park stormwater)"
+   ]
+  },
+  {
+   "id": "corner_store",
+   "name": "Legalize corner stores and caf\u00e9s (grants + zoning change)",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "engine": {
+    "capex": "90000",
+    "land": "0",
+    "om_per_yr": "3000",
+    "pct": "1.9"
+   },
+   "effect_pct_in_shipped_rows": [
+    1.9
+   ],
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 101977,
+   "net_value_nonLA_usd": 205902578000,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies",
+    "Round 6: Portland / Minneapolis corner-store and Mercado La Paloma food-hall examples; LA EWDD grants"
+   ]
+  },
+  {
+   "id": "food_hall",
+   "name": "Community food hall / small-business incubator",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "engine": {
+    "capex": "2800000",
+    "land": "0",
+    "om_per_yr": "85000",
+    "pct": "1.6"
+   },
+   "effect_pct_in_shipped_rows": [
+    1.6
+   ],
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 2725,
+   "net_value_nonLA_usd": 8829670000,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies",
+    "Round 6: Portland / Minneapolis corner-store and Mercado La Paloma food-hall examples; LA EWDD grants"
+   ]
+  },
+  {
+   "id": "park_cafe",
+   "name": "Caf\u00e9 kiosk in the park",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "engine": {
+    "capex": "180 + 0.2 * H)))",
+    "land": "185000",
+    "om_per_yr": "0",
+    "pct": "8500"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.6
+   ],
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 10738,
+   "net_value_nonLA_usd": 7611352000,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies"
+   ]
+  },
+  {
+   "id": "new_school",
+   "name": "Build a new public elementary school",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified (cf. New Haven study)",
+   "effect_pct_in_shipped_rows": null,
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 0,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies",
+    "Neilson & Zimmerman 2014 (New Haven school construction): home prices near rebuilt schools rose ~10%"
+   ]
+  },
+  {
+   "id": "plaza",
+   "name": "Turn a quiet commercial block into a plaza",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "engine": {
+    "capex": "650000",
+    "land": "0",
+    "om_per_yr": "22000",
+    "pct": "2.9"
+   },
+   "effect_pct_in_shipped_rows": [
+    2.9
+   ],
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 4361,
+   "net_value_nonLA_usd": 82628819000,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies",
+    "Round 6: LADOT People St plazas, slow streets, Metro Bike Share and STAP shelter contract costs"
+   ]
+  },
+  {
+   "id": "slow_streets",
+   "name": "Slow streets and bike boulevards",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "engine": {
+    "capex": "int(120000 * miles)",
+    "land": "0",
+    "om_per_yr": "int(6500 * miles)",
+    "pct": "1.1"
+   },
+   "effect_pct_in_shipped_rows": [
+    1.1
+   ],
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 26538,
+   "net_value_nonLA_usd": 6303029400,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies",
+    "Round 6: LADOT People St plazas, slow streets, Metro Bike Share and STAP shelter contract costs"
+   ]
+  },
+  {
+   "id": "transit_shade",
+   "name": "Solar shade canopies at busy bus stops",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "engine": {
+    "capex": "168000",
+    "land": "0",
+    "om_per_yr": "9600",
+    "pct": "0.5"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.5
+   ],
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 5117,
+   "net_value_nonLA_usd": 631517000,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies",
+    "Round 6: LADOT People St plazas, slow streets, Metro Bike Share and STAP shelter contract costs"
+   ]
+  },
+  {
+   "id": "bike_share",
+   "name": "Bike-share station (e-bikes)",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "engine": {
+    "capex": "65000",
+    "land": "0",
+    "om_per_yr": "14000",
+    "pct": "0.4"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.4
+   ],
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 4671,
+   "net_value_nonLA_usd": 5167962000,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies",
+    "Round 6: LADOT People St plazas, slow streets, Metro Bike Share and STAP shelter contract costs"
+   ]
+  },
+  {
+   "id": "ebike_library",
+   "name": "E-bike lending library",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "engine": {
+    "capex": "int(round(0.65 * H)))",
+    "land": "220000",
+    "om_per_yr": "0",
+    "pct": "35000"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.2
+   ],
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 21950,
+   "net_value_nonLA_usd": 316885000,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies"
+   ]
+  },
+  {
+   "id": "microtransit",
+   "name": "Neighborhood electric microtransit shuttle",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "engine": {
+    "capex": "950000",
+    "land": "0",
+    "om_per_yr": "320000",
+    "pct": "0.9"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.9
+   ],
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 10347,
+   "net_value_nonLA_usd": 1537800000,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies",
+    "Round 6: LADOT People St plazas, slow streets, Metro Bike Share and STAP shelter contract costs"
+   ]
+  },
+  {
+   "id": "alley_gating",
+   "name": "Gate, pave and light problem alleys",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "effect_pct_in_shipped_rows": null,
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 0,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies"
+   ]
+  },
+  {
+   "id": "cooling_center",
+   "name": "Cooling-center retrofit of a library or rec center",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "engine": {
+    "capex": "int(round(1.13 * H)))",
+    "land": "450000",
+    "om_per_yr": "0",
+    "pct": "18000"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.4
+   ],
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 27005,
+   "net_value_nonLA_usd": 12606902000,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies"
+   ]
+  },
+  {
+   "id": "wayfinding",
+   "name": "Neighborhood wayfinding and landmark signs",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "engine": {
+    "capex": "35000",
+    "land": "0",
+    "om_per_yr": "1800",
+    "pct": "0.2"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.2
+   ],
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 12182,
+   "net_value_nonLA_usd": 2364401600,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies",
+    "Round 6: LADOT People St plazas, slow streets, Metro Bike Share and STAP shelter contract costs"
+   ]
+  },
+  {
+   "id": "box_art",
+   "name": "Art wraps on traffic-signal boxes",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "effect_pct_in_shipped_rows": null,
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 0,
+   "net_value_nonLA_usd": 0,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies"
+   ]
+  },
+  {
+   "id": "vending_zone",
+   "name": "Sidewalk vending zone (power, water, shade)",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "engine": {
+    "capex": "185000",
+    "land": "0",
+    "om_per_yr": "16000",
+    "pct": "0.3"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.3
+   ],
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 1572,
+   "net_value_nonLA_usd": 667725000,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies"
+   ]
+  },
+  {
+   "id": "night_market",
+   "name": "Weekend night market kit",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "engine": {
+    "capex": "int(round(1.38 * H)))",
+    "land": "120000",
+    "om_per_yr": "0",
+    "pct": "24000"
+   },
+   "effect_pct_in_shipped_rows": [
+    0.6
+   ],
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 6115,
+   "net_value_nonLA_usd": 19898010000,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies"
+   ]
+  },
+  {
+   "id": "clt",
+   "name": "Community land trust buys a small apartment building",
+   "kind": "value",
+   "grade": "U",
+   "evidence_label": "claimed, unverified",
+   "engine": {
+    "capex": "3500000",
+    "land": "0",
+    "om_per_yr": "45000",
+    "pct": "1.4"
+   },
+   "effect_pct_in_shipped_rows": [
+    1.4
+   ],
+   "effect_status": "X",
+   "effect_note": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
+   "cost_status": "X",
+   "cost_note": "round-6 AI research pass",
+   "class": "U",
+   "shipped_rows_nonLA": 2546,
+   "net_value_nonLA_usd": 5653760000,
+   "sources": [
+    "City Pretty round-6 research (Nov 2026, one AI research pass): cost and effect claims not yet checked against the cited studies",
+    "Round 6: LA County Community Land Trust partnership pilot (LACDA)"
+   ]
+  }
+ ],
+ "effects_csv_quote_recheck": [
+  {
+   "i": 0,
+   "project_type": "street_trees",
+   "authors": "Geoffrey H. Donovan and David T. Butry",
+   "url": "https://www.fs.usda.gov/pnw/pubs/journals/pnw_2010_donovan001.pdf",
+   "quote": "\u2026added $8870 to the price of a house, which represents 3.0% of median sales price.",
+   "fetched": true,
+   "bytes": 1989376,
+   "pdf": true,
+   "frags": 1,
+   "frags_found": 0,
+   "result": "not_found",
+   "word_hit_rate": 1.0,
+   "result2": "quote_found",
+   "best_ratio": 0.94
+  },
+  {
+   "i": 1,
+   "project_type": "street_trees",
+   "authors": "Geoffrey H. Donovan and David T. Butry",
+   "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=907993",
+   "quote": "\u2026a tree in the public right of way increased rent by $21.00.",
+   "fetched": true,
+   "bytes": 337609,
+   "pdf": true,
+   "frags": 1,
+   "frags_found": 1,
+   "result": "quote_found"
+  },
+  {
+   "i": 2,
+   "project_type": "street_trees",
+   "authors": "Heather Sander, Stephen Polasky and Robert G. Haight",
+   "url": "https://research.fs.usda.gov/download/treesearch/36073.pdf",
+   "quote": "A 10% increase in tree cover within 100 m increases average home sale price by $1371 (0.48%)",
+   "fetched": true,
+   "bytes": 259400,
+   "pdf": true,
+   "frags": 1,
+   "frags_found": 1,
+   "result": "quote_found"
+  },
+  {
+   "i": 3,
+   "project_type": "park_upgrade",
+   "authors": "Michael Levere (December 20, 2014), The High Line Park and T",
+   "url": "https://completegeorge.org/wp-content/uploads/2020/12/the-high-line-park-and-timing-of-capitalization-of-public-goods.pdf",
+   "quote": "Home values within one-third of a mile of the park increased 10% immediately following its opening.",
+   "fetched": true,
+   "bytes": 1560347,
+   "pdf": true,
+   "frags": 1,
+   "frags_found": 1,
+   "result": "quote_found"
+  },
+  {
+   "i": 4,
+   "project_type": "park_upgrade",
+   "authors": "Duane Ebesu (April 16, 2026), Do Urban Parks Pay for Themsel",
+   "url": "https://www.mdpi.com/3042-5689/1/2/8",
+   "quote": "\u2026assessed values rise by 5.4%\u2026assessed values rise by 4.5%\u2026assessed values rise by 6.0%.",
+   "fetched": false,
+   "result": "fetch_failed",
+   "error": "HTTP Error 403: Forbidden"
+  },
+  {
+   "i": 5,
+   "project_type": "park_upgrade",
+   "authors": "Mitchell Livy and H. Allen Klaiber",
+   "url": "https://ageconsearch.umn.edu/nanna/record/150634/files/Renovating%20Parks.pdf?registerDownload=1&amp;version=1&amp;withMetadata=0&amp;withWatermark=0",
+   "quote": "\u2026willingness to pay of $10,427.58\u2026within a mile of the renovation, and within four years of the renovation completion date.",
+   "fetched": true,
+   "bytes": 971941,
+   "pdf": true,
+   "frags": 2,
+   "frags_found": 2,
+   "result": "quote_found"
+  },
+  {
+   "i": 6,
+   "project_type": "park_upgrade",
+   "authors": "David M. Brasington (June 6, 2023), The effect of open space",
+   "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/jors.12655",
+   "quote": "\u2026a drop in house prices of 11% in year 3, 13% in year 4, and 16% in year 5 after the vote.",
+   "fetched": false,
+   "result": "fetch_failed",
+   "error": "HTTP Error 403: Forbidden"
+  },
+  {
+   "i": 7,
+   "project_type": "pocket_park",
+   "authors": "Sherry Russell and Byoung-Suk Kweon (February 26, 2025), The",
+   "url": "https://www.mdpi.com/2073-445X/14/3/483",
+   "quote": "\u2026CMOS of up to an 1/8 of a mile was 8.69%\u2026",
+   "fetched": false,
+   "result": "fetch_failed",
+   "error": "HTTP Error 403: Forbidden"
+  },
+  {
+   "i": 8,
+   "project_type": "vacant_lot_green",
+   "authors": "Desen Lin, Shane T. Jensen and Susan M. Wachter (2023; onlin",
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/1540-6229.12401",
+   "quote": "\u2026(within 1,000 feet), with a 4.3% rise in value after the first year, and 13% after 6 years (which then attenuates).",
+   "fetched": false,
+   "result": "fetch_failed",
+   "error": "HTTP Error 403: Forbidden"
+  },
+  {
+   "i": 9,
+   "project_type": "blight_demolition",
+   "authors": "Camila Alvayay Torrej\u00f3n, Dusan Paredes and Mark Skidmore (Ju",
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/jors.12654",
+   "quote": "On average, blight removal through the demolition program does not appear to have been capitalized into the residential property prices.",
+   "fetched": false,
+   "result": "fetch_failed",
+   "error": "HTTP Error 403: Forbidden"
+  },
+  {
+   "i": 10,
+   "project_type": "blight_rehab",
+   "authors": "Esteban Rossi-Hansberg, Pierre-Daniel Sarte and Raymond Owen",
+   "url": "https://www.princeton.edu/~erossi/NiB.pdf",
+   "quote": "\u2026land prices in neighborhoods targeted for revitalization rose by 2\u20135 percent at an annual rate above those in a control neighborhood.",
+   "fetched": true,
+   "bytes": 1270135,
+   "pdf": true,
+   "frags": 1,
+   "frags_found": 1,
+   "result": "quote_found"
+  },
+  {
+   "i": 11,
+   "project_type": "sidewalks",
+   "authors": "Wei Li, Kenneth Joh, Chanam Lee, Jun-Hyun Kim, Han Park and ",
+   "url": "https://journals.sagepub.com/doi/10.1177/0739456X15591055",
+   "quote": "\u2026adding sidewalks in these neighborhoods leads to a minimal increase in property values.",
+   "fetched": false,
+   "result": "fetch_failed",
+   "error": "HTTP Error 403: Forbidden"
+  },
+  {
+   "i": 13,
+   "project_type": "protected_bike",
+   "authors": "Abdirashid Dahir and Huyen T. K. Le (February 13, 2025 onlin",
+   "url": "https://abdirashiddahir.github.io/files/hedonic_paper.pdf",
+   "quote": "\u2026single-family property appreciation only in Minneapolis (5.1%), depreciation in Columbus (4%), Eugene (7%), Philadelphia (10%), and Tucson (1%).",
+   "fetched": true,
+   "bytes": 3788693,
+   "pdf": true,
+   "frags": 1,
+   "frags_found": 0,
+   "result": "not_found",
+   "word_hit_rate": 1.0,
+   "result2": "quote_found",
+   "best_ratio": 0.92
+  },
+  {
+   "i": 14,
+   "project_type": "bike_share",
+   "authors": "Konstantinos Pelechrinis, Christos Zacharias, Marios Kokkodi",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5578620/",
+   "quote": "This means that the additional increase in the rent price due to the presence of the shared bike system is $26.5.",
+   "fetched": true,
+   "bytes": 214416,
+   "pdf": false,
+   "frags": 1,
+   "frags_found": 1,
+   "result": "quote_found"
+  },
+  {
+   "i": 15,
+   "project_type": "brt",
+   "authors": "Justin Beaudoin and Justin Tyndall (August 19, 2023), The Ef",
+   "url": "https://uhero.hawaii.edu/wp-content/uploads/2024/01/UHEROwp2303.pdf",
+   "quote": "We estimate a 5-7% price premium for homes located within a 20 minute walk of a BRT station.",
+   "fetched": true,
+   "bytes": 5622648,
+   "pdf": true,
+   "frags": 1,
+   "frags_found": 1,
+   "result": "quote_found"
+  },
+  {
+   "i": 16,
+   "project_type": "bus_lane",
+   "authors": "Blake Acton, Huyen T. K. Le and Harvey J. Miller (March 11, ",
+   "url": "https://static1.squarespace.com/static/607736abaed7201d8e3f9987/t/64298c161b161a4d56440c0b/1680444439264/OSU%2BStudy%2B-%2BImpacts%2Bof%2Bbus%2Brapid%2Btransit%2B%28BRT%29%2Bon%2Bresidential%2Bproperty%2Bvalues.pdf",
+   "quote": "\u2026with MFR properties appreciating 41.5% while SFR exhibits no significant change.",
+   "fetched": true,
+   "bytes": 2815248,
+   "pdf": true,
+   "frags": 1,
+   "frags_found": 0,
+   "result": "not_found",
+   "word_hit_rate": 1.0,
+   "result2": "near_match",
+   "best_ratio": 0.94
+  },
+  {
+   "i": 17,
+   "project_type": "brt",
+   "authors": "Acton, Le and Miller",
+   "url": "https://static1.squarespace.com/static/607736abaed7201d8e3f9987/t/64298c161b161a4d56440c0b/1680444439264/OSU%2BStudy%2B-%2BImpacts%2Bof%2Bbus%2Brapid%2Btransit%2B%28BRT%29%2Bon%2Bresidential%2Bproperty%2Bvalues.pdf",
+   "quote": "\u2026both exhibit declines of 2.5% and 11.4% in value respectively\u2026",
+   "fetched": true,
+   "bytes": 2815248,
+   "pdf": true,
+   "frags": 1,
+   "frags_found": 0,
+   "result": "not_found",
+   "word_hit_rate": 1.0,
+   "result2": "quote_found",
+   "best_ratio": 1.0
+  },
+  {
+   "i": 18,
+   "project_type": "brt",
+   "authors": "Jack Lyle Benson and Jason Cao (August 2020), Did the A Line",
+   "url": "https://findingspress.org/article/16628-did-the-a-line-arterial-bus-rapid-transit-affect-housing-values-in-ramsey-county-mn",
+   "quote": "However, neither effect is statistically significant. The A Line encouraged ridership but had no effect on housing values.",
+   "fetched": true,
+   "bytes": 311430,
+   "pdf": false,
+   "frags": 1,
+   "frags_found": 1,
+   "result": "quote_found"
+  },
+  {
+   "i": 19,
+   "project_type": "rail_station",
+   "authors": "Xinyu (Jason) Cao and Shengnan Lou (online May 2, 2017; Dece",
+   "url": "https://journals.sagepub.com/doi/10.1177/0739456X17707811",
+   "quote": "\u2026its announcement increased housing values by $9.2/sq ft and its commencement increased sales prices by $13.7/sq ft.",
+   "fetched": false,
+   "result": "fetch_failed",
+   "error": "HTTP Error 403: Forbidden"
+  },
+  {
+   "i": 20,
+   "project_type": "rail_station",
+   "authors": "Daniel Baldwin Hess and Tangerine Maria Almeida",
+   "url": "https://journals.sagepub.com/doi/10.1080/00420980701256005",
+   "quote": "\u2026a premium of $1300-3000, or 2-5 per cent of the city&#x27;s median home value.",
+   "fetched": false,
+   "result": "fetch_failed",
+   "error": "HTTP Error 403: Forbidden"
+  },
+  {
+   "i": 21,
+   "project_type": "noise_wall",
+   "authors": "Enrico Moretti and Harrison Wheeler (September 2025), The Tr",
+   "url": "https://eml.berkeley.edu/~moretti/noise.pdf",
+   "quote": "Following construction, we observe an immediate and largely permanent 6.8% increase in prices within 100 meters, with smaller gains at greater distances.",
+   "fetched": true,
+   "bytes": 3778560,
+   "pdf": true,
+   "frags": 1,
+   "frags_found": 0,
+   "result": "not_found",
+   "word_hit_rate": 1.0,
+   "result2": "near_match",
+   "best_ratio": 0.96
+  },
+  {
+   "i": 22,
+   "project_type": "grocery",
+   "authors": "Belkis Cerrato Caceres and Jacqueline Geoghegan (April 28, 2",
+   "url": "https://www.cambridge.org/core/journals/agricultural-and-resource-economics-review/article/effects-of-new-grocery-store-development-on-innercity-neighborhood-residential-prices/8B9211DFDBF757D7F938CB1122AC1657",
+   "quote": "\u2026a 7 percent increase in price after the store opened\u2026approximately a 4 percent increase in value.",
+   "fetched": true,
+   "bytes": 1262052,
+   "pdf": false,
+   "frags": 2,
+   "frags_found": 2,
+   "result": "quote_found"
+  },
+  {
+   "i": 23,
+   "project_type": "main_street",
+   "authors": "Andrew J. Van Leuven (February 2022 working version), Levera",
+   "url": "https://andrewvanleuven.com/files/papers/wp_msp2022.pdf",
+   "quote": "However, the hedonic estimates do not comprise a causal relationship\u2026",
+   "fetched": true,
+   "bytes": 9133398,
+   "pdf": true,
+   "frags": 1,
+   "frags_found": 1,
+   "result": "quote_found"
+  },
+  {
+   "i": 24,
+   "project_type": "bid",
+   "authors": "Ingrid Gould Ellen, Amy Ellen Schwartz and Ioan Voicu (May 2",
+   "url": "https://www.furmancenter.org/wp-content/uploads/2007/05/ImpactofBIDcombined_000_1_1.pdf",
+   "quote": "\u2026just prior to BID formation (29.6 percentage points per year)\u2026Prices fall back significantly after the BID is formed\u2026",
+   "fetched": true,
+   "bytes": 2252137,
+   "pdf": true,
+   "frags": 2,
+   "frags_found": 2,
+   "result": "quote_found"
+  },
+  {
+   "i": 25,
+   "project_type": "affordable_housing",
+   "authors": "Ingrid Gould Ellen, Michael H. Schill, Amy Ellen Schwartz an",
+   "url": "https://www.furmancenter.org/wp-content/uploads/2007/03/Does_Federally_Subsidiezed_Rental_Housing_1.pdf",
+   "quote": "\u2026this gap grows by 5.3 percentage points, to reach seven percent.",
+   "fetched": true,
+   "bytes": 256159,
+   "pdf": true,
+   "frags": 1,
+   "frags_found": 1,
+   "result": "quote_found"
+  },
+  {
+   "i": 26,
+   "project_type": "affordable_housing",
+   "authors": "Ellen et al.",
+   "url": "https://www.furmancenter.org/wp-content/uploads/2007/03/Does_Federally_Subsidiezed_Rental_Housing_1.pdf",
+   "quote": "\u2026grows by 2.8 percentage points\u2026",
+   "fetched": true,
+   "bytes": 256159,
+   "pdf": true,
+   "frags": 1,
+   "frags_found": 1,
+   "result": "quote_found"
+  },
+  {
+   "i": 27,
+   "project_type": "clt",
+   "authors": "Katharine Nelson, James DeFilippis, Richard Kruger, Olivia W",
+   "url": "https://burlingtonassociates.com/wp-content/uploads/2024/08/Commodity-effects.pdf",
+   "quote": "\u2026the introduction of CLT properties was associated with an increase of 10.9% in nearby sales prices within 500 feet in North Minneapolis.",
+   "fetched": false,
+   "result": "fetch_failed",
+   "error": "HTTP Error 403: Forbidden"
+  },
+  {
+   "i": 28,
+   "project_type": "school_bond",
+   "authors": "Christopher A. Neilson and Seth D. Zimmerman (August 25, 201",
+   "url": "https://www.christopher-neilson.com/work/documents/NZ_JPubE_2014.pdf",
+   "quote": "Elementary and middle school construction raised home values by 10.3%\u2026",
+   "fetched": true,
+   "bytes": 430729,
+   "pdf": true,
+   "frags": 1,
+   "frags_found": 0,
+   "result": "not_found",
+   "word_hit_rate": 1.0,
+   "result2": "quote_found",
+   "best_ratio": 0.89
+  },
+  {
+   "i": 29,
+   "project_type": "foot_patrol",
+   "authors": "David M. Brasington (April 16, 2025 online; 2026 issue), The",
+   "url": "https://link.springer.com/article/10.1007/s11146-025-10012-z",
+   "quote": "However, increasing spending causes 13% higher housing prices in low-income cities and at least a 14% decrease in house prices in high-income cities.",
+   "fetched": true,
+   "bytes": 451734,
+   "pdf": false,
+   "frags": 1,
+   "frags_found": 1,
+   "result": "quote_found"
+  },
+  {
+   "i": 38,
+   "project_type": "protected_bike",
+   "authors": "Brian Doucet, Dawn Parker, Emma McDougall, Yu Huang and Devi",
+   "url": "https://uwaterloo.ca/urban-growth-change/sites/default/files/uploads/documents/cycling-infrastructure-and-its-relationship-to-residential-property-prices-report.pdf",
+   "quote": "However, separated bike lanes are associated with lower condo prices: 9.7% less within 100 metres\u2026\u201cspurious correlation.\u201d",
+   "fetched": true,
+   "bytes": 2482947,
+   "pdf": true,
+   "frags": 2,
+   "frags_found": 2,
+   "result": "quote_found"
+  },
+  {
+   "i": 39,
+   "project_type": "undergrounding",
+   "authors": "Tina Rambonilaza, Jean Dub\u00e9 and Jean-Sauveur Ay (2024 public",
+   "url": "https://jsay.github.io/website/doc/HVTOL-FILE.pdf",
+   "quote": "\u2026a rise of about 40% in the price of treated houses (located within 200 m of old pylons).",
+   "fetched": true,
+   "bytes": 705081,
+   "pdf": true,
+   "frags": 1,
+   "frags_found": 0,
+   "result": "not_found",
+   "word_hit_rate": 1.0,
+   "result2": "near_match",
+   "best_ratio": 0.92
+  }
+ ]
+}
