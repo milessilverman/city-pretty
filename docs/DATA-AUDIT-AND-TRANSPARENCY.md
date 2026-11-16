@@ -449,6 +449,21 @@ audit missed this because the claims were text in `app.js`, not data records. Al
 service doesn't record was called non-residential (all 51 sampled houses outside LA); median rent was rounded to
 thousands ("$2k/mo" for $2,356); the records panel now retries once when FEMA drops a connection.
 
+### "What fits on this lot" beyond LA and Florida (16 Nov)
+
+The lot checks ran only in LA and Florida (the only places whose use codes the page could read), and no zoning
+standards existed outside LA. Now: **New York City, districts R1-R5**, from the Zoning Resolution's own text
+(zr.planning.nyc.gov; `scripts/build_zoning_standards.py`, each rule with its verbatim quote and section): housing
+types (22-122), minimum lot (23-11), floor area (23-21), height (23-421/422), ancillary units up to 800 sq ft (12-10).
+NYC parcel use is decoded from the PLUTO data dictionary. Everywhere else the page says "zoning standards not on
+file" with the reason (Austin, Phoenix, Seattle, Chicago, Philadelphia: their code sites returned 403 to the build
+machine). I re-fetched ZR 23-11 and 23-21 myself: the minimum lot sizes for seven districts and the floor area ratios
+(including the 0.60 per-home cap on lots of 4,000 sq ft or more) match the published tables. I re-ran the live check:
+8/8 NYC lots across four boroughs match MapPLUTO on the real page, 22/22 quotes found again in the live code, and
+Travis TX and Jefferson AL show the reason (`data/backtests/live_check_lot_fit_2026-11-16.json`, `audit/lot-fit-expansion.md`).
+**Bug fixed:** a lot counted as a home if its use matched "resid", which also matches "non-residential", so
+commercial, church and school lots with a worded use got ADU and second-story checks (LA and Florida unaffected).
+
 ### Correction: three "shown" estimates were not shown (found and fixed 16 Nov)
 
 The 16 Nov report said Queens, Staten Island and Hillsborough estimates were shown on the page. They were not: the
