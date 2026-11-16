@@ -464,6 +464,29 @@ Travis TX and Jefferson AL show the reason (`data/backtests/live_check_lot_fit_2
 **Bug fixed:** a lot counted as a home if its use matched "resid", which also matches "non-residential", so
 commercial, church and school lots with a worded use got ADU and second-story checks (LA and Florida unaffected).
 
+### Correction: more invented figures in the page's own text (round 2, found and fixed 16 Nov)
+
+A second sweep of claims written into the page code (not data files) found more invented or overstated figures,
+all from before this audit (details, quotes and URLs: `audit/hardcoded-claims-round2.md`):
+- **Tree economics box:** per-state home-value gains (+$5,400 / +$8,200 / +$6,200) and $95-$220/yr energy savings
+  credited to the USDA Forest Service were invented. It now quotes the two studies as written; I fetched both myself:
+  Donovan & Butry 2010, "This tree adds $7130 to the price of the house it fronts" (a tree of the sample's average
+  canopy), and McPherson & Simpson 2003, "$71/tree planted" over 15 years.
+- **Ecoregion table:** EPA/CEC codes, per-state canopy targets (15-42%) and a heat label "vs. EPA Level IV
+  ecoregion median" had no source. The canopy gap now uses each block group's own Tree Equity goal.
+- **Financing text** per state (coverage ratios, bond terms, a claim that bond models run outside California) was
+  hand-written; it now comes from the checked finance-profile and funding-program records. Nine unchecked
+  "Non-Private Funding" lists were removed. The EIFD text said no vote is needed and a plan fails only on a 50%
+  protest; Gov. Code § 53398.66 says a 25-50% protest forces an election and over 50% ends it.
+- **ADU fees:** Washington, Florida, Texas and other states' fee rules were invented and are removed; California is
+  kept (Gov. Code § 66311.5 and the State Allocation Board's 2026 residential Level I rate, $5.38/sq ft, which I
+  read in the board's own document). Fee tiles no longer say "$0 (exempt)" where the fee is unknown.
+- **SB 9** was "yes, up to 4 total units"; it is now "maybe", with the conditions of Gov. Code § 66411.7 that the page
+  can't see. A "recoups 58%" bathroom figure (an LA-only survey) shown nationwide was removed; the Brace + Bolt grant
+  is no longer subtracted as if awarded.
+Still unverified and marked so: LA County Policy 3.106, the Orange County EIFD cap, the plain-language zone
+summaries, Tennessee's and Cook County's assessment ratios (only used where estimates are withheld).
+
 ### Correction: three "shown" estimates were not shown (found and fixed 16 Nov)
 
 The 16 Nov report said Queens, Staten Island and Hillsborough estimates were shown on the page. They were not: the

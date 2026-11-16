@@ -1836,20 +1836,11 @@ function patchCanopyCardDom(stateCode, countyName) {
 
   if (!cardEl) return;
 
-  const HEATING_STATES = new Set([
-    "AK", "ME", "NH", "VT", "MA", "NY", "MN", "WI", "MI", "ND", "SD", "MT", "WY", "ID", "IA", "IL"
-  ]);
-  const ARID_STATES = new Set(["AZ", "NV", "NM", "UT"]);
-
-  if (HEATING_STATES.has(st)) {
-    cardEl.innerHTML = `<b>Economic Impact (${st}):</b> Mature street tree canopy adds <b>+$5,400</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$95/yr</b> in winter windbreak heating load.`;
-  } else if (ARID_STATES.has(st)) {
-    cardEl.innerHTML = `<b>Economic Impact (${st}):</b> Mature street tree canopy adds <b>+$8,200</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$220/yr</b> in peak summer cooling load (with xeriscape drip irrigation).`;
-  } else if (st === "CA") {
-    cardEl.innerHTML = `<b>Economic Impact (CA):</b> Mature street tree canopy adds <b>+$7,130</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$140/yr</b> in AC cooling load.`;
-  } else {
-    cardEl.innerHTML = `<b>Economic Impact (${st}):</b> Mature street tree canopy adds <b>+$6,200</b> in capitalized home value (USDA Forest Service) &amp; saves <b>$115/yr</b> in balanced seasonal heating &amp; cooling efficiency.`;
-  }
+  // One text for every state: what the two studies found, where. The per-state figures that used to be here
+  // (+$5,400 / +$8,200 / +$6,200 home value and $95 / $115 / $140 / $220 a year, all credited to "USDA Forest Service")
+  // are in neither study and had no source. Checked 16 Nov 2026 against the papers on USDA Forest Service Treesearch.
+  const html = `<b>What studies found:</b> In Portland, OR, one street tree with the sample's average canopy added $7,130 to the sale price of the house it fronted (Donovan &amp; Butry 2010, <a href="https://research.fs.usda.gov/treesearch/36186" target="_blank" rel="noopener" style="color:#a7f3d0">USDA Forest Service</a>). In California, shading east and west walls with 50 million new trees was projected to cut cooling energy by a present wholesale value of $71 per tree planted over 15 years (McPherson &amp; Simpson 2003, <a href="https://research.fs.usda.gov/treesearch/48730" target="_blank" rel="noopener" style="color:#a7f3d0">USDA Forest Service</a>). Neither was measured here.`;
+  cardEl.innerHTML = html;
 }
 
 function patchTopBarControlsDom() {
@@ -1869,7 +1860,7 @@ function patchTopBarControlsDom() {
   if (metricSel) {
     const optHeat = metricSel.querySelector('option[value="heat"]');
     if (optHeat) {
-      optHeat.textContent = "Heat vs. EPA Level IV ecoregion median";
+      optHeat.textContent = HEAT_LABEL;
     }
 
     let optDisp = metricSel.querySelector('option[value="displacement"]');
@@ -1997,27 +1988,6 @@ const VPD_WALK = ["bus_shelters", "transit_shade", "protected_bike", "crosswalks
 // Grade D/U (structural planning assumptions): SE = 0.125 * v, 95% CI margin = 1.96 * SE = 24.5%
 const HEDONIC_SE = { A: 0.041, B: 0.063, C: 0.087, D: 0.125, U: 0.125 };
 
-
-// EPA Level IV Ecoregions Microclimate Normalization Table
-const ECOREGIONS_TABLE = {
-  mediterranean_coastal: { name: "SoCal Coastal Plain", targetCanopy: 24, coolingFactor: 1.0 },
-  mediterranean_interior: { name: "Interior Valleys / Inland Empire", targetCanopy: 20, coolingFactor: 1.25 },
-  desert_arid: { name: "Mojave & Sonoran Desert Basin", targetCanopy: 12, coolingFactor: 1.45 },
-  eastern_temperate: { name: "Eastern Temperate / Great Lakes", targetCanopy: 36, coolingFactor: 1.10 },
-  pacific_northwest: { name: "Puget Lowland & Willamette Valley", targetCanopy: 38, coolingFactor: 0.90 },
-  gulf_subtropical: { name: "Gulf Coastal Plain & South Florida", targetCanopy: 32, coolingFactor: 1.30 }
-};
-
-function resolveEcoregion(lat, lng) {
-  if (lat == null || lng == null) return ECOREGIONS_TABLE.eastern_temperate;
-  if (lat >= 32.5 && lat <= 35.5 && lng >= -120.5 && lng <= -116.5) {
-    return lng < -118.0 ? ECOREGIONS_TABLE.mediterranean_coastal : ECOREGIONS_TABLE.mediterranean_interior;
-  }
-  if (lat >= 31.0 && lat <= 37.0 && lng >= -117.0 && lng <= -111.0) return ECOREGIONS_TABLE.desert_arid;
-  if (lat >= 42.0 && lat <= 49.0 && lng >= -125.0 && lng <= -120.0) return ECOREGIONS_TABLE.pacific_northwest;
-  if (lat >= 24.5 && lat <= 32.0 && lng >= -98.0 && lng <= -80.0) return ECOREGIONS_TABLE.gulf_subtropical;
-  return ECOREGIONS_TABLE.eastern_temperate;
-}
 
 function calibrateVpd(v, grade, id, m) {
   const f = x => x >= 10 ? String(Math.round(x)) : x >= 1 ? x.toFixed(1) : x.toFixed(2);
@@ -2212,7 +2182,7 @@ const METRICS = {
   top_vpd: { label: "Best value per $1 (where ≥ $1)", f: p => p.v >= 1 ? p.v : null, unit: fvpd, ramp: "seq", none: "Nothing returns $1 per $1" },
   pkg_cost: { label: "Cost of every project returning ≥ $1 per $1", f: p => p.pc || null, unit: fmt$, ramp: "seq" },
   value: { label: "Typical home value", f: p => p.hv, unit: fmt$, ramp: "seq" },
-  heat: { label: "Heat vs. EPA Level IV ecoregion median", f: p => p.ht, unit: v => (v > 0 ? "+" : "") + v.toFixed(1) + "°F", ramp: "heat" },
+  heat: { label: "Heat vs. its urban area's average (Tree Equity Score 2021)", f: p => p.ht, unit: v => (v > 0 ? "+" : "") + v.toFixed(1) + "°F", ramp: "heat" },
   crime: { label: "Violent crimes per 1,000 residents, 12 mo", f: p => p.vc, unit: v => v.toFixed(1), ramp: "heat" },
   park: { label: "Park acres within ½ mile", f: p => p.pa, unit: v => v.toFixed(1) + " ac", ramp: "seq" },
   bus: { label: "Buses per hour, busiest stop within 400 m (7–9am)", f: p => p.bt, unit: v => Math.round(v) + "/hr", ramp: "seq" },
@@ -2349,7 +2319,8 @@ async function unpack() {
     }
   }
   if (d && d.funding && d.funding["W"]) {
-    d.funding["W"] = ["Measure W (Safe Clean Water)", "Regional 50% through Watershed Area Steering Committees (110-point scoring, 60 to qualify, benefits to disadvantaged communities at least 110% of their population share); Municipal 40% straight to cities for local stormwater, green-street and tree projects; District 10% for administration, education and workforce", "https://safecleanwaterla.org"];
+    // Checked against Public Works' 17 July 2018 Board letter (ordinance and program elements as proposed for the ballot).
+    d.funding["W"] = ["Measure W (Safe Clean Water)", "Regional 50% programmed by Watershed Area Steering Committees (projects scored out of 110 points, initial threshold 60; funding for projects benefiting disadvantaged communities at least 110% of their population share); Municipal 40% to cities and unincorporated areas in proportion to what each pays; District 10% for administration and programs (as proposed in 2018; later amendments not checked)", "https://file.lacounty.gov/SDSInter/bos/supdocs/124293.pdf"];
   }
   return d;
 }
@@ -3652,7 +3623,7 @@ function fundHtml(r, gid) {
       <span>Left to raise</span><span><b>${fmt$(f.rest)}</b>${f.om ? ` (incl. ${fmt$(f.om)}/yr upkeep, which bonds can't pay)` : ""}</span>
       ${f.others.length ? `<span>Best fits for the rest</span><span>${f.others.map((o, i) => `${o[2] ? `<a href="${esc(o[2])}" target="_blank" rel="noopener">${esc(o[0])}</a>` : esc(o[0])}${i === 0 ? "" : ""} <span class="muted">(${esc(o[1])})</span>`).join("; ")}</span>` : `<span>Rest</span><span>city general fund or capital budget</span>`}</div>
     ${cityMoney(f)}${f.ex ? `<p style="margin:6px 0 0"><b>Real example${activeCounty === "oc" ? " (LA County)" : ""}:</b> ${esc(f.ex.p)} (${esc(f.ex.c)}${f.ex.s ? ", " + esc(f.ex.s.split(";")[0]) : ""}): ${fmt$(f.ex.t)} — ${f.ex.src.map(([n, a]) => `${esc(n)} ${fmt$(a)} (${Math.round(100 * a / f.ex.t)}%)`).join("; ")}.</p>` : ""}
-    <p class="muted" style="margin:4px 0 0">How: the city (and the County, if it joins) forms an EIFD, pledges its share of the property-tax growth this project creates, and issues bonds against it; ${lead ? esc(lead[0]) : "grants and the city's budget"} would cover most of the rest. Assumes ${pct(FUND_ASSUME.turnover)} of homes resell each year (Prop 13 reassesses only on sale), the city pledges 75% of its share and the County 49% (Artesia's 2026 district; County shares elsewhere run 11–50%)${f.uninc ? "; in unincorporated areas the County alone, assumed 50%" : ""}, ${(FUND_ASSUME.rate * 100).toFixed(2)}% 30-year bonds at ${FUND_ASSUME.dscr}x coverage${f.cntyK > 0 ? ", 20% of County-backed bonds held for housing" : ""}. A district over the whole area (calculator below) also captures ordinary growth and raises far more. Since AB 116 (2019) EIFD bonds need no public vote.</p></div>`;
+    <p class="muted" style="margin:4px 0 0">How: the city (and the County, if it joins) forms an EIFD, pledges its share of the property-tax growth this project creates, and issues bonds against it; ${lead ? esc(lead[0]) : "grants and the city's budget"} would cover most of the rest. Assumes ${pct(FUND_ASSUME.turnover)} of homes resell each year (Prop 13 reassesses only on sale), the city pledges 75% of its share and the County 49% (Artesia's 2026 district; County shares elsewhere run 11–50%; not re-checked)${f.uninc ? "; in unincorporated areas the County alone, assumed 50%" : ""}, ${(FUND_ASSUME.rate * 100).toFixed(2)}% 30-year bonds at ${FUND_ASSUME.dscr}x coverage${f.cntyK > 0 ? ", 20% of County-backed bonds held for housing" : ""}. A district over the whole area (calculator below) also captures ordinary growth and raises far more. EIFD bonds are issued by majority vote of the district's authority (Gov. Code § 53398.77); the plan itself goes to an election if 25–50% of landowners and adult residents protest (§ 53398.66).</p></div>`;
 }
 function ocFunding(id) {
   const F = (typeof D_OC !== "undefined" && D_OC && D_OC.oc_funding) || null;
@@ -3823,7 +3794,7 @@ function applyTreeEquity(details, te) {
     const d = details[id], v = te[id];
     if (!d || d.__teAdj || !Array.isArray(v) || v[0] == null) continue;
     const m = d.m || d;
-    m.tg_2021 = m.tg; m.tg = v[0]; m.tc_now = v[1]; m.tg_src = label;
+    m.tg_2021 = m.tg; m.tg = v[0]; m.tc_now = v[1]; m.tc_goal = v[2] != null ? v[2] : null; m.tg_src = label;
     // The neighbourhood comparison ("what this area is missing") ranked the 2021 value against similar areas; it is
     // withheld rather than shown against a canopy figure it no longer matches.
     const gp = m.gp;
@@ -4622,13 +4593,13 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
       ? `${cp} 12-10 allows an ancillary dwelling unit only with a single- or two-family home; the city records ${units} homes on this lot.`
       : `${cp} 12-10 allows one ancillary dwelling unit of up to ${fmtN(ad.max_sqft)} sq ft per single- or two-family home; an owner must live on the lot when it is first occupied. A backyard ADU is not allowed in Historic Districts or in DEP's mapped flood-risk areas${gtz ? `, and in ${esc(zs.district)} only inside the Greater Transit Zone` : ""}; none of these is checked here.${yard > 0 ? ` About ${fmtN(yard)} sq ft of open yard (estimated).` : ""}`);
   } else {
-  if (yard >= 800) add("Detached ADU (backyard home)", "yes", `${F.dec && F.dec.adu ? `One ${F.dec.adu} is already recorded; room for another. ` : ""}About ${fmtN(yard)} sq ft of open yard after setbacks; ${st === "CA" ? "easily fits a 600–800 sq ft detached ADU with the 4-ft rear/side setbacks state law allows (Gov. Code § 66314(d)(7))." : "room for a 600–800 sq ft detached unit by size; whether one is allowed, and its setbacks, depend on local code" + houseLawNote(st, "adu") + "."}`);
+  if (yard >= 800) add("Detached ADU (backyard home)", "yes", `${F.dec && F.dec.adu ? `One ${F.dec.adu} is already recorded; room for another. ` : ""}About ${fmtN(yard)} sq ft of open yard after setbacks; ${st === "CA" ? "room for a 600–800 sq ft detached ADU by area; for a new detached ADU the city can require side and rear setbacks of no more than 4 ft (Gov. Code § 66314(d)(7))." : "room for a 600–800 sq ft detached unit by size; whether one is allowed, and its setbacks, depend on local code" + houseLawNote(st, "adu") + "."}`);
   else if (yard >= 400) add("Detached ADU", "maybe", `Only ~${fmtN(yard)} sq ft of open yard: a 400 sq ft studio ADU or garage conversion is more viable.`);
   else add("Detached ADU", "no", `Limited open yard (~${fmtN(yard)} sq ft); a garage conversion or Junior ADU is recommended.`);
   
   if (sf && bldg >= 1000) {
     if (st === "CA") {
-      add("Junior ADU (inside the house, up to 500 sq ft)", "yes", `${fmtN(bldg)} sq ft single-family home: state law (Gov. Code §§ 66313 and 66333) allows converting up to 500 sq ft of interior livable space; since 1 Jan 2026 (AB 1154) owner-occupancy is required only if the JADU shares bathroom facilities with the main home, and rentals must be longer than 30 days.`);
+      add("Junior ADU (inside the house, up to 500 sq ft)", "yes", `${fmtN(bldg)} sq ft single-family home: state law (Gov. Code §§ 66313 and 66333) allows converting up to 500 sq ft of interior livable space; under the current text of § 66333, owner-occupancy can be required only if the JADU shares sanitation facilities with the house, and rentals must be longer than 30 days.`);
     } else {
       // Outside California no state interior-unit rule is encoded; say what is on file and leave the answer to local code.
       add("Interior accessory suite", "maybe", `${fmtN(bldg)} sq ft single-family home: room for an interior unit by size; whether one is allowed depends on local code${houseLawNote(st, "adu")}.`);
@@ -4642,11 +4613,15 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
   // is decided with its conditions in the by-right check, never assumed.
   if (st === "CA") {
     const splitName = "SB 9 lot split / second home";
-    if (sf && hist) add(splitName, "no", `SB 9 does not apply in designated historic districts or on landmarks.`);
-    else if (sf && lot >= 2400 && !fire && !slide && !fault) add(splitName, "yes", `${fmtN(lot)} sq ft single-family parcel: SB 9 allows a split into two ~${fmtN(Math.round(lot/2))} sq ft lots and up to 4 total units.`);
-    else if (sf && lot >= 2400 && fire) add(splitName, "no", `Located in a very high fire hazard severity zone: SB 9 excludes these sites unless they meet the state\'s fire-hazard mitigation measures (Gov. Code § 65913.4(a)(6)(D)).`);
-    else if (sf && lot >= 2400 && (slide || fault)) add(splitName, "no", `Located in a fault or landslide hazard zone; restricted unless geotechnical clearance is certified.`);
-    else if (sf) add(splitName, "no", `Lot size is ${fmtN(lot)} sq ft; SB 9 requires each new lot to be at least 1,200 sq ft.`);
+    // Checked against Gov. Code § 66411.7 (california.public.law copy of the current text, 16 Nov 2026). The law has
+    // conditions this page can't see (tenant history, rent control, deed restrictions, the § 65913.4 site list), so a
+    // lot that passes the size test is "maybe", never "yes".
+    const sb9 = "Gov. Code § 66411.7";
+    const sb9Other = "if the lot meets the law's other conditions, which aren't checked here (among them: the split can't require demolishing or altering housing occupied by a tenant in the last three years or under rent control or an affordability covenant, and the parcel must meet the site conditions of Gov. Code § 65913.4(a)(6)(B)–(K) as it read on 16 Sep 2021)";
+    if (sf && hist) add(splitName, "maybe", `In a historic district or on a landmark: SB 9 bars a split on a designated city, county or state landmark, and a split can't require demolishing or altering a contributing structure in a designated historic district (${sb9}(a)(3)(E)–(F)).`);
+    else if (sf && lot >= 2400 && !fire && !slide && !fault) add(splitName, "maybe", `${fmtN(lot)} sq ft parcel: in a single-family zone, SB 9 allows a split into two lots of roughly equal area, each at least 1,200 sq ft and at least 40% of the original (about ${fmtN(Math.round(lot/2))} sq ft each here), ${sb9Other}. A city doesn't have to allow more than two units on each new lot (${sb9}(j)).`);
+    else if (sf && lot >= 2400 && (fire || slide || fault)) add(splitName, "maybe", `In a ${fire ? "very high fire hazard severity zone" : "fault or landslide hazard zone"}: SB 9 requires the parcel to meet the site conditions of Gov. Code § 65913.4(a)(6)(B)–(K) as it read on 16 Sep 2021; whether this lot does wasn't checked here.`);
+    else if (sf) add(splitName, "no", `Lot size is ${fmtN(lot)} sq ft; SB 9 requires each new lot to be at least 1,200 sq ft unless the city has adopted a smaller minimum (${sb9}(a)(2)).`);
   } else if (sf && !Z) {   // with local standards on file, the two rows above (second home, lot split) say it from the code
     add("Duplex, middle housing or lot split", "maybe", `${fmtN(lot)} sq ft parcel${hist ? " in a historic district or on a landmark (preservation review applies)" : ""}: allowed only where local zoning or a state law permits it${houseLawNote(st, "middle")}.`);
   }
@@ -4680,7 +4655,7 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
     }
   }
   if (yb && yb < 1975) add("Whole-house repiping", "maybe", `Built in ${yb}: galvanized steel supply piping common in pre-1975 homes.`);
-  if (beds >= 3 && baths && baths < beds - 1) add("Add a bathroom", "yes", `${beds} bedrooms but only ${baths} bath${baths > 1 ? "s" : ""}: fixes the bedroom-to-bath imbalance, though an addition recoups only about 58% of its cost at resale (JLC/Zonda Cost vs Value 2025: $63,595 cost, $36,603 value).`);
+  if (beds >= 3 && baths && baths < beds - 1) add("Add a bathroom", "yes", `${beds} bedrooms but only ${baths} bath${baths > 1 ? "s" : ""}: would fix the bedroom-to-bath imbalance. What an added bathroom is worth at resale is not on file (the survey figure used before could not be checked, and it was for Los Angeles only).`);
   if (F.dec && F.dec.heat && !F.dec.ac) add("Heat-pump heating and cooling", "yes", `Existing heating is ${F.dec.heat} with no central AC: heat pump provides both.`);
   if (fire) add("Wildfire hardening", "yes", st === "CA" ? "Very High fire zone: ember-resistant vents, boxed eaves and a 5-ft ember-resistant (Zone 0) perimeter under CAL FIRE standards." : "High wildfire risk zone: ember-resistant vents, boxed eaves and defensible space perimeter under NFPA 1144 standards.");
   
@@ -4698,7 +4673,7 @@ function getHouseUpgradeCostDetails(u, h, m) {
   const locRent = medRent ? Math.min(Math.max((m.rent || medRent) / medRent, 0.7), 1.6) : 1.0;
   const houseVpsf = h.houseVpsf || (hv && bldg ? Math.min(Math.max(hv / bldg, 250), 1400) : (hv ? Math.min(Math.max(hv / 1600, 250), 1400) : null));
 
-  let sqft = 0, timelineMonths = "6–9", baseCost = 0, breakdown = [], siteAdjustments = [], totalCost = 0, resaleValue = 0, impactFees = 0, schoolFee = 0;
+  let sqft = 0, timelineMonths = "6–9", baseCost = 0, breakdown = [], siteAdjustments = [], totalCost = 0, resaleValue = 0, impactFees = 0, schoolFee = 0, impactFeeUnknown = false, feesOnFile = false;
 
   if (/^Detached ADU/.test(u.n || u.name)) {
     const defaultSqft = yard >= 1500 ? 800 : yard >= 800 ? 600 : 400;
@@ -4734,20 +4709,21 @@ function getHouseUpgradeCostDetails(u, h, m) {
     const plans = Math.round(soft * 0.60);
     const permits = soft - plans;
 
-    // Statutory developer fees:
+    // Statutory developer fees. Only California's ADU fee rules are on file, checked 16 Nov 2026: Gov. Code § 66311.5(c)
+    // (no impact fee at 750 sq ft or less; above that, fees "charged proportionately in relation to the square footage of
+    // the primary dwelling unit", amount set locally and not on file here) and Educ. Code § 17620 with § 66311.5(c)(3)
+    // (school fee only on 500 sq ft or more), at the State Allocation Board's 2026 maximum Level I rate of $5.38/sq ft
+    // (DGS/OPSC, 28 Jan 2026 index adjustment). Other states' figures that were here ("WA HB 1337 prohibits ... impact
+    // fees", a "Live Local Act abatement" in FL, an "Austin HOME infill schedule" for all of TX, flat rates elsewhere) had
+    // no source and are removed; outside California fees are not included.
     const activeSt = (typeof activeState === "function" ? activeState() : null) || "CA";
+    feesOnFile = activeSt === "CA";
     if (activeSt === "CA") {
       schoolFee = sqft >= 500 ? Math.round(sqft * 5.38) : 0;
-      impactFees = sqft <= 750 ? 0 : Math.round(8000 + (sqft - 750) * 18.0);
-    } else if (activeSt === "WA") {
-      schoolFee = 0; impactFees = 0; // WA HB 1337 prohibits discriminatory ADU impact fees
-    } else if (activeSt === "FL") {
-      schoolFee = 0; impactFees = sqft <= 800 ? 0 : Math.round(3500 + (sqft - 800) * 8.0); // FL Live Local Act abatement
-    } else if (activeSt === "TX") {
-      schoolFee = 0; impactFees = sqft <= 750 ? 0 : Math.round(4000 + (sqft - 750) * 10.0); // Austin HOME infill schedule
+      impactFees = 0;
+      impactFeeUnknown = sqft > 750;
     } else {
-      schoolFee = sqft >= 600 ? Math.round(sqft * 2.50) : 0;
-      impactFees = sqft <= 750 ? 0 : Math.round(5000 + (sqft - 750) * 12.0);
+      schoolFee = 0; impactFees = 0;
     }
 
     breakdown = [
@@ -4761,16 +4737,22 @@ function getHouseUpgradeCostDetails(u, h, m) {
 
     if (schoolFee > 0) {
       breakdown.push({
-        cat: `School District Developer Fee (${activeSt === "CA" ? "Gov. Code § 66311.5" : "Local district requirement"})`,
+        cat: "School District Developer Fee (Educ. Code § 17620)",
         amount: schoolFee,
-        desc: activeSt === "CA" ? "Modeled at SAB Level 1 cap ($5.38/sq ft, Jan 2026); under 500 sq ft exempt" : `Standard school facility impact fee for new residential space over threshold in ${activeSt}`
+        desc: "At the State Allocation Board's 2026 maximum Level I rate ($5.38/sq ft, DGS/OPSC); districts may charge less. ADUs under 500 sq ft are exempt (Gov. Code § 66311.5(c)(3))"
       });
     }
-    if (impactFees > 0) {
+    if (impactFeeUnknown) {
       breakdown.push({
-        cat: `Development Impact Fees (${activeSt === "CA" ? "over 750 sq ft, Gov. Code § 66311.5" : "municipal impact fees"})`,
-        amount: impactFees,
-        desc: activeSt === "CA" ? "Proportional parks, traffic and utility fees (ADUs of 750 sq ft or less are exempt, Gov. Code § 66311.5)" : `Proportional municipal infrastructure fees (${activeSt} infill schedule)`
+        cat: "Development Impact Fees (over 750 sq ft, Gov. Code § 66311.5(c))",
+        amount: null,
+        desc: "Charged in proportion to the main house's square footage; the local fee schedule is not on file, so this is not in the total"
+      });
+    } else if (activeSt !== "CA") {
+      breakdown.push({
+        cat: "Local impact and school fees",
+        amount: null,
+        desc: `${activeSt} fee rules are not on file; check your city and school district. Not in the total`
       });
     }
 
@@ -4871,6 +4853,8 @@ function getHouseUpgradeCostDetails(u, h, m) {
     timelineMonths,
     schoolFee,
     impactFees,
+    impactFeeUnknown,
+    feesOnFile,
     totalCost,
     costPerSqFt: (totalCost != null && sqft > 0) ? totalCost / sqft : null,
     breakdown,
@@ -4889,7 +4873,7 @@ function renderCostAnalysisSchedule(u, h, m) {
       <div><b>Specific Cost Analysis: ${esc(u.n)}</b> <span class="muted">(${ca.sqft ? fmtN(ca.sqft) + " sq ft · " : ""}${ca.timelineMonths ? ca.timelineMonths + " mos timeline" : ""})</span></div>
       <div><b>Total All-In Cost: ${fmt$(u.c)}</b> ${ca.costPerSqFt ? `<span class="muted">(~$${Math.round(ca.costPerSqFt)}/sq ft)</span>` : ""}</div>
     </div>
-    <p class="small muted" style="margin:4px 0 6px">Construction costs are this page's model estimate (unit costs per sq ft), not contractor quotes; the cost schedule they were first calibrated to could not be found, so treat them as unverified. Fees follow the cited state rules.</p>
+    <p class="small muted" style="margin:4px 0 6px">Construction costs are this page's model estimate (unit costs per sq ft), not contractor quotes; the cost schedule they were first calibrated to could not be found, so treat them as unverified. Fees: only California's ADU fee rules are on file (cited in each row); a fee shown as – is not in the total.</p>
     <table class="cs-table">
       <thead><tr><th>Component / Budget Category</th><th style="text-align:right">Estimated Cost</th><th>Scope &amp; Parcel Specifics</th></tr></thead>
       <tbody>`;
@@ -4980,7 +4964,7 @@ function houseUpgrades(h, m, R) {
       note = `400 sq ft at ~$${Math.round(c/400)}/sq ft; new space valued at ~${fmt$(houseVpsf * 0.85)}/sq ft`;
     } else if (/^Detached ADU/.test(u.name)) {
       const rentMo = ca.u && ca.u.monthlyRent ? ca.u.monthlyRent : Math.round(rent1 * (ca.sqft >= 750 ? 1.3 : ca.sqft >= 500 ? 1.05 : 0.82));
-      const feeText = ca.impactFees === 0 ? "exempt from impact fees (750 sf or less)" : `~${fmt$(ca.impactFees)} impact fees (over 750 sf)`;
+      const feeText = !ca.feesOnFile ? "local fees not on file" : ca.impactFeeUnknown ? "impact fees over 750 sf set locally, not included" : "exempt from impact fees (750 sf or less)";
       note = `${ca.sqft} sq ft (${ca.sqft >= 750 ? "2-bed" : ca.sqft >= 500 ? "1-bed" : "studio"}); appraised separately from the main home's living area; ~$${fmtN(rentMo)}/mo rent; ${feeText}`;
     } else if (/^Junior ADU/.test(u.name)) {
       if (!(h.sf && h.bldg >= 1000)) continue;
@@ -5001,7 +4985,7 @@ function houseUpgrades(h, m, R) {
     } else if (/^Garage to living space/.test(u.name)) {
       v = Math.round(360 * houseVpsf * 0.65); note = "~360 sq ft conversion; loses parking";
     } else if (/^Seismic/.test(u.name)) {
-      c = Math.max(c - 3000, 3500); note = "after $3,000 California Earthquake Brace + Bolt grant";
+      note = "before any grant: California Earthquake Brace + Bolt offers up to $3,000 to qualifying houses when registration is open (crmp.org, checked 16 Nov 2026)";
     } else if (/^Legalize|^Staging|^Kitchen|^Bathroom remodel|^Home gym|^Kids/.test(u.name)) continue;
 
     if (!upSourced(u.name)) {
@@ -5654,7 +5638,7 @@ function renderHouse(box, a, lot, ll, st) {
       ${fact("Open yard (est.)", `${fmtN(Math.round(F.yard))} sq ft`, "lot minus buildings, less ~20% for setbacks")}
       ${fact("Zoning", z ? `${esc(z.zone)}` : zs && zs.district ? esc(zs.district) : (m.z ? esc(m.z.top) : null), z ? `parcel zoning layer (${esc(z.juris || "city")})` : zs && zs.district ? `parcel record (${esc(zs.juris.zone_source.field)})` : isOCArea(m) ? "neighborhood summary (preliminary)" : "block-group summary")}
       ${fact("Height limit", hMax ? `${hMax} ft` : null, rule ? `${esc(rule.code_section)} (round-6 research, not yet checked against the code)` : ocH ? "city code summary (preliminary)" : zsH ? `${esc(zs.juris.cite_prefix || zs.juris.code)} ${esc(zsH.section)}` : null)}
-      ${fact("Selling an ADU separately", (m.c || p.c || "").toLowerCase().trim() === "santa monica" ? "<span style='color:var(--ok-ink);font-weight:600'>Santa Monica has an AB 1033 opt-in ordinance (SMMC § 9.31.026), so an ADU can be sold as a condominium</span>" : (activeState() === "CA" ? "<span style='color:var(--ink-2)'>Not allowed here: an ADU can be rented but not sold apart from the main home (Gov. Code § 66314) unless the city opts in to AB 1033</span>" : "<span style='color:var(--ink-2)'>Not on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules</span>"), activeState() === "CA" ? "California Gov. Code § 66314 / AB 1033" : "local code (no state rule on file)")}
+      ${fact("Selling an ADU separately", (m.c || p.c || "").toLowerCase().trim() === "santa monica" ? "<span style='color:var(--ok-ink);font-weight:600'>Santa Monica allows an ADU to be sold separately as a condominium under SMMC § 9.31.026 (city ADU guide, Nov 2025)</span>" : (activeState() === "CA" ? "<span style='color:var(--ink-2)'>Only if the city has adopted an ADU condominium ordinance (Gov. Code § 66342, AB 1033) or a qualified nonprofit built the unit (§ 66341); otherwise an ADU can be rented but not sold apart from the main home (§ 66314(d)(1)). Whether this city has such an ordinance is not on file</span>" : "<span style='color:var(--ink-2)'>Not on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules</span>"), activeState() === "CA" ? "California Gov. Code §§ 66314, 66341–66342" : "local code (no state rule on file)")}
       ${fact("Fire zone", rOff ? ((m.fire || 0) >= 0.5 ? "Very High Fire Hazard Zone (area map)" : "Not in Very High zone") : !R ? "checking…" : (R.fire && R.fire.vh ? "Very High Fire Hazard Severity Zone" : ((m.fire || 0) >= 0.5 ? "Very High Fire Hazard Severity Zone" : "Not in Very High zone")), activeState() === "CA" ? "CAL FIRE Fire Hazard Severity Zones (SRA 2024 / LRA 2025)" : "USFS Wildfire Risk to Communities")}
       ${fact("Historic status", rOff ? "lot-level check offline" : !R ? "checking…" : (histText(R) || "None on record"), activeState() === "CA" && R && R.hpoz && R.hpoz.ok ? "LA City / County historic resources" : "National Register & Municipal Historic Survey")}
       ${fact("Hillside area", rOff ? "lot-level check offline" : !R ? "checking…" : (R.hill && R.hill.ok && R.hill.v.length ? "In designated Hillside Area" : "Not in Hillside Area"), activeState() === "CA" && R && R.hill && R.hill.ok ? "LA City Hillside Area map" : "Local Topographic & Slope Ordinance")}
@@ -5997,8 +5981,8 @@ function renderHouse(box, a, lot, ll, st) {
         </div>
         <div class="adu-metrics-strip">
           <div class="adu-m-tile"><div class="m-k">All-In Cost</div><div class="m-v">${fmt$(aduUp.c)}</div><div class="m-s">~$${Math.round(aduUp.c/st.aduSqft)}/sq ft</div></div>
-          <div class="adu-m-tile"><div class="m-k">Impact Fees</div><div class="m-v" style="color:${aduCa.impactFees === 0 ? 'var(--ok-ink)' : 'var(--warn-ink)'}">${aduCa.impactFees === 0 ? '$0 (exempt)' : '~' + fmt$(aduCa.impactFees)}</div><div class="m-s">${st.aduSqft <= 750 ? 'Gov. Code § 66311.5' : 'proportional fees'}</div></div>
-          <div class="adu-m-tile"><div class="m-k">School Fee</div><div class="m-v" style="color:${(aduCa.schoolFee || 0) === 0 ? 'var(--ok-ink)' : 'var(--warn-ink)'}">${(aduCa.schoolFee || 0) === 0 ? '$0 (under 500 sf)' : fmt$(aduCa.schoolFee)}</div><div class="m-s">${st.aduSqft < 500 ? 'exempt under 500 sf' : 'modeled at SAB Level 1 cap'}</div></div>
+          <div class="adu-m-tile"><div class="m-k">Impact Fees</div><div class="m-v" style="color:${!aduCa.feesOnFile || aduCa.impactFeeUnknown ? 'var(--warn-ink)' : 'var(--ok-ink)'}">${!aduCa.feesOnFile ? 'Not on file' : aduCa.impactFeeUnknown ? 'Set locally' : '$0 (exempt)'}</div><div class="m-s">${!aduCa.feesOnFile ? 'check your city' : aduCa.impactFeeUnknown ? 'proportional, Gov. Code § 66311.5(c)' : 'Gov. Code § 66311.5(c), 750 sq ft or less'}</div></div>
+          <div class="adu-m-tile"><div class="m-k">School Fee</div><div class="m-v" style="color:${!aduCa.feesOnFile ? 'var(--warn-ink)' : (aduCa.schoolFee || 0) === 0 ? 'var(--ok-ink)' : 'var(--warn-ink)'}">${!aduCa.feesOnFile ? 'Not on file' : (aduCa.schoolFee || 0) === 0 ? '$0 (under 500 sf)' : fmt$(aduCa.schoolFee)}</div><div class="m-s">${!aduCa.feesOnFile ? 'check your school district' : (aduCa.schoolFee || 0) === 0 ? 'exempt under 500 sf' : 'SAB 2026 maximum Level I rate'}</div></div>
           <div class="adu-m-tile"><div class="m-k">Est. Rent</div><div class="m-v">${aduUp.monthlyRent ? '~' + fmt$(aduUp.monthlyRent) + '/mo' : 'Not on file'}</div><div class="m-s">calibrated local rent</div></div>
           <div class="adu-m-tile"><div class="m-k">Resale Uplift</div><div class="m-v">${fmt$(aduUp.v)}</div><div class="m-s">appraisal + income cap</div></div>
           <div class="adu-m-tile"><div class="m-k">Net Profit</div><div class="m-v" style="color:var(--ok-ink)">${aduUp.net >= 0 ? '+' + fmt$(aduUp.net) : '−' + fmt$(-aduUp.net)}</div><div class="m-s">equity created</div></div>
@@ -7085,7 +7069,7 @@ function eifdSection(p, m) {
   }
   const fld = (id, label, val, step, note) => `<label class="small" style="display:grid;grid-template-columns:1fr 110px;gap:8px;align-items:center;margin:4px 0"><span>${label}${note ? ` <span class="muted" id="${id}-n">${note}</span>` : ""}</span><input id="${id}" type="number" step="${step}" value="${val}" style="font:500 13px var(--mono);padding:4px 6px;border:1px solid var(--rule-strong);border-radius:6px;background:var(--ground);color:var(--ink)"></label>`;
   return `<div class="section"><h3>EIFD calculator: tax-increment financing for this area</h3>
-    <p class="small muted">An Enhanced Infrastructure Financing District pledges part of the future growth in the 1% property tax to pay for projects. No vote is needed to form one; since AB 116 (2019) bonds need 3 hearings and fail only on a 50% protest. Schools can't take part. State law has no housing set-aside, but ${activeCounty === "oc" && !isOrangeActive() ? `${esc(countyOf())}'s participation rules (not verified for this county yet) apply when the County joins` : activeCounty === "oc" ? "the County of Orange's EIFD Participation Policy (approved by the Board of Supervisors 4 Jun 2019) sets conditions when the County joins: the city must put in at least as much as the County, the County gives at most 50% of its share for at most 20 years, and the Board must approve (see below)" : "LA County Board Policy 3.106 (revised and approved by the County Audit Committee on 16 Jul 2025, next review 1 Aug 2029; amendments for disaster-recovery districts were directed in October 2025, adoption not verified) sets conditions when the County joins (see below)"}.</p>
+    <p class="small muted">An Enhanced Infrastructure Financing District pledges part of the future growth in the 1% property tax to pay for projects. Its financing plan is considered at two public hearings: a protest by over 50% of landowners and adult residents ends it, 25–50% sends it to an election, and under 25% lets the authority adopt it, subject to referendum (Gov. Code § 53398.66); bonds are then issued by majority vote of the authority (§ 53398.77). School districts, community colleges and county offices of education are not taxing entities that can take part (§ 53398.51(a)). Separately, ${activeCounty === "oc" && !isOrangeActive() ? `${esc(countyOf())}'s participation rules (not verified for this county yet) apply when the County joins` : activeCounty === "oc" ? "the County of Orange's EIFD Participation Policy (approved by the Board of Supervisors 4 Jun 2019; not re-checked here) sets conditions when the County joins: the city must put in at least as much as the County, the County gives at most 50% of its share for at most 20 years, and the Board must approve (see below)" : "LA County Board Policy 3.106 (revised 16 Jul 2025 per the policy page; not re-checked here) sets conditions when the County joins (see below)"}.</p>
     <div class="cat-tabs" role="group" aria-label="EIFD area"><button type="button" data-scope="bg" aria-pressed="true">This block group</button><button type="button" data-scope="hood" aria-pressed="false">All of ${esc(p.n)}</button></div>
     ${fld("e-av", "Base assessed value ($M)", "", 0.1, "")}
     ${fld("e-g", "Yearly value growth (%)", 3.0, 0.1, "assumption: 2% Prop 13 cap plus resales; edit")}
@@ -7217,7 +7201,7 @@ function parkImprovementsSection(m) {
   return `
     <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;line-height:1.45;color:#0f172a">
       <p class="small" style="margin-top:0;color:#475569">
-        Park amenities and what they do. Effects on home values are not shown: none of the per-amenity percentages that used to be here had a checked source.
+        Park amenities and what they do. Effects on home values are not shown: none of the per-amenity percentages that used to be here had a checked source. Funding programs are not listed: the program names that used to be here had not been checked for current status or eligibility; checked records are in the methods panel.
       </p>
 
       <div style="border:1px solid #e2e8f0;border-radius:6px;overflow:hidden;margin-bottom:8px">
@@ -7226,7 +7210,6 @@ function parkImprovementsSection(m) {
         </div>
         <div style="padding:8px 10px">
           <div><b>Quality-of-Life:</b> Tree shade cools pavement and nearby air on hot days.</div>
-          <div style="font-size:11px;color:#64748b"><b>Non-Private Funding:</b> Inflation Reduction Act Urban Forestry Grants · State Park Bonds · Municipal / Stormwater Funds (Measure W in LA County)</div>
         </div>
       </div>
 
@@ -7236,7 +7219,6 @@ function parkImprovementsSection(m) {
         </div>
         <div style="padding:8px 10px">
           <div><b>Quality-of-Life:</b> Creates intergenerational gathering space and accessible resting spots for seniors and parents.</div>
-          <div style="font-size:11px;color:#64748b"><b>Non-Private Funding:</b> Quimby Act Park In-Lieu Fees · Municipal Capital Improvement Fund</div>
         </div>
       </div>
 
@@ -7246,7 +7228,6 @@ function parkImprovementsSection(m) {
         </div>
         <div style="padding:8px 10px">
           <div><b>Quality-of-Life:</b> Builds neighborhood identity.</div>
-          <div style="font-size:11px;color:#64748b"><b>Non-Private Funding:</b> National Endowment for the Arts (NEA) · Civic Arts Trust · CDBG</div>
         </div>
       </div>
 
@@ -7256,7 +7237,6 @@ function parkImprovementsSection(m) {
         </div>
         <div style="padding:8px 10px">
           <div><b>Quality-of-Life:</b> A randomized trial of added street lighting at New York City public housing (Chalfin et al.) found less nighttime outdoor crime; the size of the effect has not been re-checked here.</div>
-          <div style="font-size:11px;color:#64748b"><b>Non-Private Funding:</b> USDOT Safe Streets &amp; Roads for All (SS4A) · Clean Energy State Grants</div>
         </div>
       </div>
     </div>
@@ -7268,7 +7248,7 @@ function geographicImprovementsSection(p, m) {
   return `
     <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;line-height:1.45;color:#0f172a">
       <p class="small" style="margin-top:0;color:#475569">
-        Improvement types that fit ${esc(p.c || "this area")}'s geography. Home-value effects are not shown: no checked local estimate is on file.
+        Improvement types that fit ${esc(p.c || "this area")}'s geography. Home-value effects are not shown: no checked local estimate is on file. Funding programs are not listed (none was checked for current status or eligibility).
       </p>
 
       ${geoEnv === "delta_bayou" ? `
@@ -7276,7 +7256,6 @@ function geographicImprovementsSection(p, m) {
         <div style="font-weight:700;color:#0f766e;margin-bottom:4px">Delta &amp; Bayou Stormwater Resilience Infrastructure</div>
         <div style="margin-bottom:4px"><b>Green Stormwater Bioswales &amp; Urban Water Basins:</b> Modeled after the Gentilly Resilience District and Mirabeau Water Garden (designed to hold stormwater and reduce street flooding).</div>
         <div><b>Bayou &amp; Levee Waterfront Promenade:</b> Grade-separated active transportation path with native shade trees along bayou banks.</div>
-        <div style="font-size:11px;color:#0d9488;margin-top:4px"><b>Non-Private Funding:</b> HUD National Disaster Resilience (CDBG-NDR) · FEMA Building Resilient Infrastructure and Communities (BRIC) · EPA Clean Water SRF · Sewerage &amp; Water Board</div>
       </div>
       ` : ""}
 
@@ -7285,7 +7264,6 @@ function geographicImprovementsSection(p, m) {
         <div style="font-weight:700;color:#b45309;margin-bottom:4px">Desert Arid &amp; Extreme Heat Resilience Infrastructure</div>
         <div style="margin-bottom:4px"><b>Desert Cool Corridor &amp; Canalscape Active Transit:</b> Shade along canal banks and cool pavement, similar to Phoenix's cool-pavement program (continuous shade for people walking).</div>
         <div><b>Xeriscape Pocket Park &amp; Native Shade Grove:</b> Low-water native mesquite and palo verde canopy with permeable desert paving and shade pavilions.</div>
-        <div style="font-size:11px;color:#d97706;margin-top:4px"><b>Non-Private Funding:</b> US Bureau of Reclamation WaterSMART · EPA Environmental Justice Thriving Communities · Arizona DWR Water Conservation · State Parks Land &amp; Water Conservation Fund</div>
       </div>
       ` : ""}
 
@@ -7294,7 +7272,6 @@ function geographicImprovementsSection(p, m) {
         <div style="font-weight:700;color:#0369a1;margin-bottom:4px">Coastal &amp; Beach Infrastructure</div>
         <div style="margin-bottom:4px"><b>Beach Nourishment &amp; Dune Restoration:</b> Extends sandy shoreline and builds storm surge erosion buffers.</div>
         <div><b>Public Beach Volleyball Courts:</b> Lighted sand courts and spectator seating.</div>
-        <div style="font-size:11px;color:#0284c7;margin-top:4px"><b>Non-Private Funding:</b> US Army Corps of Engineers (USACE) Storm Risk Grants · State Coastal Conservancy · Transient Occupancy Tax (TOT)</div>
       </div>
       ` : ""}
 
@@ -7303,7 +7280,6 @@ function geographicImprovementsSection(p, m) {
         <div style="font-weight:700;color:#15803d;margin-bottom:4px">Foothill Singletrack Trail Infrastructure</div>
         <div style="margin-bottom:4px"><b>Mountain Bike Singletrack Trails &amp; Trailhead Kiosk:</b> Similar to the Santa Clarita Trek Bike Park.</div>
         <div><b>Amenities:</b> Bike maintenance kiosk, shaded picnic rest stop, wayfinding maps, and grade-separated singletrack paths.</div>
-        <div style="font-size:11px;color:#16a34a;margin-top:4px"><b>Non-Private Funding:</b> Federal Recreational Trails Program (RTP) · Land &amp; Water Conservation Fund (LWCF) · Regional Open Space District</div>
       </div>
       ` : ""}
 
@@ -7312,7 +7288,6 @@ function geographicImprovementsSection(p, m) {
         <div style="font-weight:700;color:#15803d;margin-bottom:4px">Urban Linear Rail-Trail &amp; Greenways</div>
         <div style="margin-bottom:4px"><b>Linear Rail-Trail &amp; Tree Canopy Spine:</b> Similar to The 606 (Chicago) and the Atlanta BeltLine.</div>
         <div><b>Amenities:</b> Multi-use paved trail, landscaped tree canopy buffers, pedestrian lighting, and neighborhood pocket parks.</div>
-        <div style="font-size:11px;color:#16a34a;margin-top:4px"><b>Non-Private Funding:</b> USDOT RAISE · Safe Streets and Roads for All (SS4A) · EPA Brownfields · State Parks Bond</div>
       </div>
       ` : ""}
     </div>
@@ -8890,76 +8865,26 @@ function exportAccuracyReport() {
 }
 window.exportAccuracyReport = exportAccuracyReport;
 
-function getEcoregionNorm(p, m) {
-  const f = typeof activeFips === "function" ? activeFips() : "06037";
-  const st = typeof activeState === "function" ? activeState() : "CA";
-  const c = (p && p.c) ? String(p.c) : "";
-  const n = (p && p.n) ? String(p.n) : "";
-
-  let ecoregionCode = "EPA IV: 85g / CEC Zone 9";
-  let ecoregionName = "Southern California Interior Valleys";
-  let baselineSummerTemp = 85.0;
-  let targetCanopyPct = 30;
-
-  if (st === "CA") {
-    const coastalCities = ["Santa Monica", "Long Beach", "El Segundo", "Manhattan Beach", "Hermosa Beach", "Redondo Beach", "Torrance", "Palos Verdes", "Rancho Palos Verdes", "Huntington Beach", "Newport Beach", "Seal Beach", "Costa Mesa", "Laguna Beach", "Dana Point", "San Clemente"];
-    const coastalHoods = ["Venice", "Pacific Palisades", "Playa del Rey", "Marina del Rey", "San Pedro", "Wilmington"];
-    const desertCities = ["Lancaster", "Palmdale", "Santa Clarita", "Victorville"];
-
-    if (coastalCities.some(x => c.includes(x)) || coastalHoods.some(x => n.includes(x))) {
-      ecoregionCode = "EPA IV: 85f / CEC Zone 6";
-      ecoregionName = "Southern California Coastal Plain";
-      baselineSummerTemp = 72.0;
-      targetCanopyPct = 25;
-    } else if (desertCities.some(x => c.includes(x))) {
-      ecoregionCode = "EPA IV: 81 / CEC Zone 14";
-      ecoregionName = "Mojave Basins & High Desert";
-      baselineSummerTemp = 96.0;
-      targetCanopyPct = 15;
-    } else {
-      ecoregionCode = "EPA IV: 85g / CEC Zone 9";
-      ecoregionName = "Interior Valleys & Foothills";
-      baselineSummerTemp = 85.0;
-      targetCanopyPct = 30;
-    }
-  } else if (st === "TX") {
-    ecoregionCode = "EPA III: 83 Western Gulf Coastal";
-    ecoregionName = "Western Gulf Coastal Plain";
-    baselineSummerTemp = 93.0;
-    targetCanopyPct = 32;
-  } else if (st === "FL") {
-    ecoregionCode = "EPA III: 75 Southern Coastal";
-    ecoregionName = "Florida Coastal Plain & Everglades";
-    baselineSummerTemp = 89.0;
-    targetCanopyPct = 35;
-  } else if (st === "WA") {
-    ecoregionCode = "EPA III: 2 Puget Lowland";
-    ecoregionName = "Puget Lowland Temperate";
-    baselineSummerTemp = 74.0;
-    targetCanopyPct = 42;
-  } else if (st === "MI" || st === "IL" || st === "OH") {
-    ecoregionCode = "EPA III: 55 Great Lakes / Corn Belt";
-    ecoregionName = "Great Lakes Temperate Basin";
-    baselineSummerTemp = 79.0;
-    targetCanopyPct = 38;
-  } else {
-    ecoregionCode = "EPA Conterminous US Base";
-    ecoregionName = "Regional Climate Division Baseline";
-    baselineSummerTemp = 82.0;
-    targetCanopyPct = 30;
+// Canopy and heat for a block group, from its own Tree Equity Score figures only. The canopy goal is American Forests'
+// goal for that block group (current release, `tc_goal`), read from app/data/tree_equity_2025/<fips>.json; where the
+// county only has the 2021 release no goal figure is on file, so none is shown. Heat is the 2021 release's block-group
+// temperature minus its urban area's average (county data file source list; treeequityscore.org/methodology:
+// "TEMPdiff = TEMPbg,ave - TEMPua,ave"). These replace a hand-typed "ecoregion" table (codes such as "EPA IV: 85g /
+// CEC Zone 9", summer baselines and canopy targets by state) that had no source.
+const HEAT_LABEL = "Heat vs. its urban area's average (Tree Equity Score 2021)";
+function canopyHeatFacts(p, m) {
+  const x = m || p || {};
+  const tg = x.tg != null && !isNaN(+x.tg) ? +x.tg : null;
+  const goal = x.tc_goal != null && !isNaN(+x.tc_goal) ? +x.tc_goal : null;
+  const now = x.tc_now != null && !isNaN(+x.tc_now) ? +x.tc_now : null;
+  const ht = x.ht != null && !isNaN(+x.ht) ? +x.ht : null;
+  const src = x.tg_src || "Tree Equity Score 2021 release";
+  let gapText = "–";
+  if (tg != null) {
+    if (tg <= 0) gapText = goal != null ? `At or above its ${goal}% goal` : "No gap to its goal";
+    else gapText = goal != null ? `${tg} pts below its ${goal}% goal` : `${tg} pts below its goal`;
   }
-
-  const rawHt = (m && m.ht != null) ? +m.ht : (p && p.ht != null ? +p.ht : 0);
-  const rawTg = (m && m.tg != null) ? +m.tg : (p && p.tg != null ? +p.tg : 20);
-
-  return {
-    ecoregionCode,
-    ecoregionName,
-    baselineSummerTemp,
-    targetCanopyPct,
-    heatAnomalyDeg: rawHt,
-    canopyGapPct: Math.max(0, rawTg)
-  };
+  return { heat: ht, heatText: ht != null ? (ht > 0 ? "+" : "") + ht.toFixed(1) + "°F vs. urban area" : "–", gap: tg, goal, now, gapText, src };
 }
 
 function syncMethodsModalToCounty(fips) {
@@ -8977,94 +8902,62 @@ function syncMethodsModalToCounty(fips) {
   const finEl = document.getElementById("methods-financing-section");
   const waterEl = document.getElementById("methods-water-section");
 
-  if (finEl) {
-    if (f === "06037") {
-      finEl.innerHTML = `
-        <h3>EIFD Tax-Increment Financing (Gov. Code § 53398.50)</h3>
-        <p class="small">Enhanced Infrastructure Financing Districts (Gov. Code § 53398.50 and following) pledge part of the growth in the 1% property tax. The calculator's base is the net taxable value on the 2026 Assessor roll for every parcel in the area, and the city and County shares come from the Auditor-Controller's FY 2026-27 Modified ATI ratios (AF49 report) for the area's actual tax-rate areas, weighted by value: 13,392 tax-rate areas, 99.99% of net taxable value matched. School and ERAF shares (about 47% of the 1% levy county-wide, value-weighted) cannot be pledged. Project-level funding plans model Prop 13 statutory reassessments upon deed transfer (with interactive turnover presets from 2.0% mortgage lock-in up to 4.5% high-velocity), a 2.0% statutory annual roll inflation cap, interactive 30-year municipal bond yields (4.25% AAA muni to 6.25% unrated), and a 1.35× debt-service coverage ratio, with city pledges up to 75% and County pledges up to 49% (benchmarked to the certified City of Artesia EIFD Infrastructure Financing Plan).</p>
-      `;
-    } else if (st === "CA") {
-      const caMeta = (typeof CA_COUNTIES_REGISTRY !== "undefined" && CA_COUNTIES_REGISTRY[f]) ? CA_COUNTIES_REGISTRY[f] : null;
-      const unv = " (hand-entered, unverified)";
-      const localMeasure = caMeta && caMeta.funding ? caMeta.funding + unv : "not on file";
-      const transitList = caMeta && Array.isArray(caMeta.gtfs) ? caMeta.gtfs.join(", ") + unv : "not on file";
-      const hazardDesc = caMeta && caMeta.hazard ? caMeta.hazard + unv : "not on file";
-      finEl.innerHTML = `
-        <h3>California EIFD &amp; Local Transportation Measures (${esc(countyName)})</h3>
-        <p class="small">Enhanced Infrastructure Financing Districts (Gov. Code § 53398.50) operate under California statutory rules, utilizing county-specific ATI allocation shares and local voter-approved sales-tax matching funds: <strong>${esc(localMeasure)}</strong> (LA County Measure W excluded / non-applicable outside 06037). Regional MPO: <strong>${esc(caMeta ? caMeta.mpo : "Regional MPO")}</strong>. GTFS transit agencies: <strong>${esc(transitList)}</strong>. Environmental hazard overlays: <strong>${esc(hazardDesc)}</strong>. Assessed value models Proposition 13 base-year acquisition roll-forwards, statutory 2% maximum annual roll escalation, and 1.35× debt-service coverage ratio bonding.</p>
-      `;
-    } else if (st === "TX") {
-      finEl.innerHTML = `
-        <h3>Texas Tax Increment Reinvestment Zones (TIRZ, Tex. Tax Code Ch. 311)</h3>
-        <p class="small">Infrastructure capital is modeled under Texas Tax Increment Financing (TIF) statutes (Tex. Tax Code § 311). Participating cities and counties pledge incremental ad valorem property tax revenues above the base-year equalized valuation into a dedicated Tax Increment Fund. Models incorporate Texas Senate Bill 2 (3.5% voter-approval property tax rate caps) and Chapter 372 Public Improvement District (PID) assessment overlays, structuring 25-to-30-year tax-increment bonds at a 1.30× debt-service coverage ratio.</p>
-      `;
-    } else if (st === "FL") {
-      finEl.innerHTML = `
-        <h3>Florida Community Redevelopment Agencies (CRA, Fla. Stat. § 163 Part III)</h3>
-        <p class="small">Tax increment financing operates under the Florida Community Redevelopment Act (Fla. Stat. § 163.387), directing 95% of annual incremental ad valorem property taxes generated within the redevelopment trust fund toward capital infrastructure. Base assessments account for the constitutional Save Our Homes (Fla. Const. Art. VII) 3% annual assessment growth cap on homestead properties, modeling 30-year municipal redevelopment revenue bonds at a 1.35× coverage ratio.</p>
-      `;
-    } else if (st === "WA") {
-      finEl.innerHTML = `
-        <h3>Washington State Tax Increment Financing (RCW 39.114 / HB 1189)</h3>
-        <p class="small">Washington's statutory Tax Increment Financing program (RCW 39.114) allows local governments to designate increment areas for up to 25 years, capturing regular property tax revenue growth from private infill development to amortize public infrastructure revenue bonds without raising voter-approved levy lids.</p>
-      `;
-    } else if (st === "IL") {
-      finEl.innerHTML = `
-        <h3>Illinois Tax Increment Allocation Redevelopment Act (65 ILCS 5/11-74.4)</h3>
-        <p class="small">Tax increment financing operates under the Illinois TIF Act, establishing 23-year special tax allocation funds based on Equalized Assessed Valuation (EAV) baselines. Cook County Class 2 residential assessments (10% statutory assessment ratio) and municipal Special Service Area (SSA) bond debt-service reserves are factored into public capital projections.</p>
-      `;
-    } else {
-      finEl.innerHTML = `
-        <h3>Municipal Tax-Increment Financing (TIF) &amp; Capital Improvement Program (${esc(st)})</h3>
-        <p class="small">Public infrastructure financing models statutory municipal Tax Increment Financing (TIF) and local Capital Improvement Programs (CIP). Incremental real estate valuation generated by public interventions is captured through municipal tax allocation bonds amortized over 25–30 years with a standard 1.30× debt-service coverage ratio.</p>
-      `;
-    }
-    finEl.insertAdjacentHTML("beforeend", `<p class="small muted" style="margin-top:4px"><i>This summary was written by hand and has not been checked against the statute or program rules. Verified program records are in app/data/funding_programs.json.</i></p>`);
-  }
-
-  if (waterEl) {
-    if (f === "06037") {
-      waterEl.innerHTML = `
-        <h3>Measure W Safe Clean Water Program</h3>
-        <p class="small">Stormwater and green-infrastructure co-funding follows the LA County Flood Control District's Safe Clean Water Program: 50% Regional Program (projects scored by Watershed Area Steering Committees on a 110-point scale, 60 points to qualify, with benefits to disadvantaged communities at least 110% of their share of the population), 40% Municipal Program paid directly to cities, 10% District Program. Isolated strictly to Los Angeles County (FIPS 06037).</p>
-      `;
-    } else if (st === "CA") {
-      const caMeta = (typeof CA_COUNTIES_REGISTRY !== "undefined" && CA_COUNTIES_REGISTRY[f]) ? CA_COUNTIES_REGISTRY[f] : null;
-      const localFunding = caMeta && caMeta.funding ? caMeta.funding + " (hand-entered, unverified)" : "not on file";
-      waterEl.innerHTML = `
-        <h3>Regional Clean Water &amp; Stormwater Quality Programs (${esc(countyName)})</h3>
-        <p class="small">LA County Measure W excluded (applicable only in 06037). Local stormwater infrastructure and urban greening co-funding are modeled through regional municipal separate storm sewer system (MS4) compliance programs, local voter-approved matching funds (<strong>${esc(localFunding)}</strong>), California Proposition 1/Proposition 4 stormwater capital grants, and local watershed management area steering committee co-investments.</p>
-      `;
-    } else if (st === "TX") {
-      waterEl.innerHTML = `
-        <h3>Texas Water Development Board (TWDB) &amp; Regional Flood Control</h3>
-        <p class="small">Stormwater and flood mitigation funding is benchmarked to the Texas Water Development Board (TWDB) Flood Infrastructure Fund (FIF) and Regional Flood Planning Groups, supplemented by county-specific flood control district tax levies (e.g., Harris County Flood Control District ad valorem funding).</p>
-      `;
-    } else if (st === "FL") {
-      waterEl.innerHTML = `
-        <h3>Florida Water Management Districts &amp; Resilient Florida (Fla. Stat. § 380.093)</h3>
-        <p class="small">Stormwater management and sea-level rise resilience co-funding are modeled through Florida's five regional Water Management Districts (SFWMD, SWFWMD, SJRWMD, SRWMD, NWFWMD) alongside matching grants under the Florida Department of Environmental Protection (FDEP) Resilient Florida Grant Program.</p>
-      `;
-    } else if (st === "WA") {
-      waterEl.innerHTML = `
-        <h3>Washington Department of Ecology Stormwater Financial Assistance (SFAP)</h3>
-        <p class="small">Water quality and stormwater infrastructure grants are funded through the Washington Department of Ecology Stormwater Financial Assistance Program (SFAP) and local county flood control zone districts.</p>
-      `;
-    } else if (st === "IL") {
-      waterEl.innerHTML = `
-        <h3>Metropolitan Water Reclamation District (MWRD) Stormwater Management</h3>
-        <p class="small">Green infrastructure and urban flood prevention funding is modeled through the Metropolitan Water Reclamation District of Greater Chicago (MWRD) Green Infrastructure Program and Cook County Stormwater Management Plan.</p>
-      `;
-    } else {
-      waterEl.innerHTML = `
-        <h3>EPA Clean Water State Revolving Fund (CWSRF) &amp; Stormwater Utilities</h3>
-        <p class="small">Stormwater retention and climate resilience improvements are co-funded via EPA Clean Water State Revolving Fund (CWSRF) low-interest loans, FEMA Building Resilient Infrastructure and Communities (BRIC) grants, and municipal stormwater enterprise fund allocations.</p>
-      `;
-    }
-    waterEl.insertAdjacentHTML("beforeend", `<p class="small muted" style="margin-top:4px"><i>This summary was written by hand and has not been checked against the statute or program rules. Verified program records are in app/data/funding_programs.json.</i></p>`);
-  }
+  if (finEl) finEl.innerHTML = methodsFinancingHtml(f, st, countyName);
+  if (waterEl) waterEl.innerHTML = methodsWaterHtml(f, st, countyName);
 }
 window.syncMethodsModalToCounty = syncMethodsModalToCounty;
+
+// Methods modal: financing and stormwater sections, built only from sourced records: the state's finance profile
+// (app/data/state_finance_profiles.json), the funding program records (app/data/funding_programs.json) and, for LA
+// County, the calculator's own inputs (the LA data file's Auditor-Controller metadata and FUND_ASSUME). This replaces
+// hand-written prose per state that named statutes, caps, durations and coverage ratios no one had checked, and
+// described bond models the page does not run outside California.
+const FUNDING_PROGRAM_STATE = { tx: "TX", fl: "FL", co: "CO", il: "IL", az: "AZ", ca: "CA", calfire: "CA", la: "CA" };
+function fundingProgramsFor(fips, st) {
+  return (Array.isArray(FUNDING_PROGRAMS_DATA) ? FUNDING_PROGRAMS_DATA : []).filter(r => {
+    if (!r || !r.id) return false;
+    if (r.jurisdiction_fips) return r.jurisdiction_fips === fips;
+    const pre = String(r.id).split("_")[0];
+    if (pre === "federal") return true;
+    return FUNDING_PROGRAM_STATE[pre] === st;
+  });
+}
+function fundingProgramLine(r) {
+  const v = verificationLabel(r);
+  const uf = (r.verification && r.verification.unverified_fields) || [];
+  return `<li><b>${esc(r.program_name || r.id)}</b>${r.statutory_citation ? ` (${esc(r.statutory_citation)})` : ""}` +
+    ` <span style="color:${v.color}">${v.text}</span>${uf.length ? `; not confirmed: ${esc(uf.join(", "))}` : ""}` +
+    `${r.source_url ? ` · <a href="${esc(r.source_url)}" target="_blank" rel="noopener">source</a>` : ""}</li>`;
+}
+function methodsFinancingHtml(f, st, countyName) {
+  const pf = (typeof STATE_FINANCE_PROFILES !== "undefined" && STATE_FINANCE_PROFILES[st]) || null;
+  const vl = pf ? verificationLabel(pf) : null;
+  let h = `<h3>Tax-increment financing (${esc(st)})</h3>`;
+  h += pf
+    ? `<p class="small">On file for ${esc(st)}: <b>${esc(pf.tif_vehicle_name || "tax-increment financing")}</b>${pf.statutory_citation ? `, ${esc(pf.statutory_citation)}` : ""} <span style="color:${vl.color}">(${vl.text})</span>${pf.source_url ? ` · <a href="${esc(pf.source_url)}" target="_blank" rel="noopener">source</a>` : ""}.</p>`
+    : `<p class="small muted">No finance profile on file for ${esc(st)}.</p>`;
+  if (f === "06037") {
+    const E = (typeof D !== "undefined" && D && D.eifd && D.eifd.tras) ? D.eifd : null;
+    const A = typeof FUND_ASSUME !== "undefined" ? FUND_ASSUME : null;
+    h += `<p class="small">The EIFD calculator's base is the net taxable value on the ${E && E.roll_year ? esc(E.roll_year) + " " : ""}Assessor roll for every parcel in the area. The city and County shares of the 1% tax come from the ${E ? `${esc(E.source || "Auditor-Controller")} (${esc(E.factor_year || "")}, prepared ${esc(E.prepared || "")}): ${fmtN(E.tras)} tax-rate areas, ${(100 * (E.roll_value_matched_share || 0)).toFixed(2)}% of net taxable value matched` : "Auditor-Controller's tax-rate-area factors"}. School and ERAF shares are not counted as pledgeable.</p>`;
+    if (A) h += `<p class="small">Everything else is an assumption you can edit, not a sourced figure: yearly value growth (default 3%), city pledge (default ${Math.round(A.cityPledge * 100)}%) and County pledge (default ${Math.round(A.countyPledge * 100)}%), both examples from the Artesia EIFD that were not re-checked; bond rate ${(A.rate * 100).toFixed(2)}%; debt-service coverage ${A.dscr}×; ${A.years}-year bonds. Project funding plans also assume ${(A.turnover * 100).toFixed(1)}% of homes resell each year.</p>`;
+  } else if (st === "CA") {
+    h += `<p class="small">The EIFD calculator runs on the county's assessor roll and tax-rate-area factors where they are loaded; its pledge, rate and coverage inputs are editable assumptions.</p>`;
+  } else {
+    h += `<p class="small">No tax-increment amount is computed for ${esc(st)}: local tax rates and pledge shares are not on file from a source.</p>`;
+  }
+  const progs = fundingProgramsFor(f, st).filter(r => !/measure_w/.test(r.id));
+  if (progs.length) h += `<p class="small" style="margin-bottom:2px">Funding program records on file:</p><ul class="small" style="margin-top:0">${progs.map(fundingProgramLine).join("")}</ul>`;
+  return h;
+}
+function methodsWaterHtml(f, st, countyName) {
+  if (f === "06037") {
+    return `<h3>Measure W (Safe, Clean Water Program)</h3>
+      <p class="small">LA County Flood Control District Code Chapter 16 as proposed for the November 2018 ballot: 50% to the Regional Program (projects programmed by Watershed Area Steering Committees; funding for projects that benefit disadvantaged communities at least 110% of their share of each watershed area's population), 40% to cities and the County's unincorporated areas in proportion to what each pays, and 10% to the District (administration and programs such as education and workforce). Projects are scored out of 110 points; the initial threshold to qualify was 60. Source: Public Works' 17 July 2018 Board letter with the ordinance and program elements (<a href="https://file.lacounty.gov/SDSInter/bos/supdocs/124293.pdf" target="_blank" rel="noopener">file.lacounty.gov</a>, checked 16 Nov 2026). Amendments since 2018 were not checked.</p>`;
+  }
+  return `<h3>Stormwater funding (${esc(countyName)})</h3><p class="small muted">No checked stormwater funding record is on file for this county.</p>`;
+}
+
 
 function renderCountyReadinessMatrix(targetFips) {
   const container = document.getElementById("county-readiness-matrix-container");
@@ -9321,10 +9214,9 @@ function renderCompareDrawer() {
         <div class="c-row"><span class="k">Homes / Owner-Occ</span><span class="v">${fmtN(m.homes)} (${m.own != null ? Math.round(m.own) + "%" : "–"})</span></div>
         <div class="c-row"><span class="k">Best Bet</span><span class="v">${topC && top.vpd >= 1 ? esc(topC.name) : "No sourced estimate yet"}</span></div>
         <div class="c-row"><span class="k">Expected Return</span><span class="v">${topRng && top.vpd >= 1 ? topRng.estStr + " (" + topRng.str + "; " + esc(ivLabel(top.id)) + ")" : "–"}</span></div>
-        <div class="c-row"><span class="k">Ecoregion Norm</span><span class="v">${(typeof getEcoregionNorm === "function") ? getEcoregionNorm(p, m).ecoregionCode : "EPA IV Base"}</span></div>
-        <div class="c-row"><span class="k">Heat vs Eco-Norm</span><span class="v">${m.ht != null ? (m.ht > 0 ? "+" : "") + (+m.ht).toFixed(1) + "°F" : "–"}</span></div>
-        <div class="c-row"><span class="k">Tree Canopy Deficit</span><span class="v">${m.tg != null ? m.tg + "% to " + ((typeof getEcoregionNorm === "function") ? getEcoregionNorm(p, m).targetCanopyPct : 35) + "% goal" : "–"}</span></div>
-        <div class="c-row"><span class="k">Renter Displacement</span><span class="v">${m.own != null && m.own < 45 ? '<span style="color:#b45309;font-weight:700">Elevated (' + Math.round(100 - m.own) + '% Renters)</span>' : '<span style="color:#15803d">Low Risk (' + (m.own != null ? Math.round(m.own) : '–') + '% Owners)</span>'}</span></div>
+        <div class="c-row"><span class="k">Heat vs. urban area</span><span class="v">${canopyHeatFacts(p, m).heatText}</span></div>
+        <div class="c-row"><span class="k">Tree canopy gap</span><span class="v">${canopyHeatFacts(p, m).gapText}</span></div>
+        <div class="c-row"><span class="k">Renter households</span><span class="v">${m.own != null ? Math.round(100 - m.own) + "%" : "–"}</span></div>
         <div class="c-row"><span class="k">Violent Crime / 1k</span><span class="v">${m.vc != null ? (+m.vc).toFixed(1) : "–"}</span></div>
         <div class="c-row"><span class="k">Bus Frequency</span><span class="v">${m.bt != null ? Math.round(m.bt) + "/hr" : "–"}</span></div>
       </div>
@@ -10540,18 +10432,20 @@ function updateCanopyHud(p = null) {
   if (!hoodEl || !heatEl || !gapEl) return;
 
   if (p) {
-    const eco = (typeof getEcoregionNorm === "function") ? getEcoregionNorm(p, p) : { ecoregionCode: "EPA IV", targetCanopyPct: 30, heatAnomalyDeg: +p.ht || 0, canopyGapPct: +p.tg || 18 };
-    hoodEl.textContent = p.n ? `${p.n} (${p.c || countyOf()}) · ${eco.ecoregionCode}` : `${countyOf()} · ${eco.ecoregionCode}`;
-    const ht = eco.heatAnomalyDeg;
-    heatEl.textContent = (ht > 0 ? "+" : "") + ht.toFixed(1) + "°F vs Eco-Norm";
-    heatEl.style.color = ht > 2 ? "#ef4444" : ht < 0 ? "#10b981" : "#f59e0b";
-    const tg = eco.canopyGapPct;
-    gapEl.textContent = tg > 0 ? `${tg}% to ${eco.targetCanopyPct}% Goal` : "Optimal Canopy";
-    gapEl.style.color = tg > 15 ? "#f59e0b" : "#38bdf8";
+    // The block group's details record carries the current Tree Equity figures (applyTreeEquity); the map feature's
+    // properties only have the 2021 values.
+    const det = (typeof D !== "undefined" && D && D.details && p.id && D.details[p.id]) || null;
+    const f = canopyHeatFacts(p, (det && det.m) || p);
+    hoodEl.textContent = p.n ? `${p.n} (${p.c || countyOf()})` : `${countyOf()}`;
+    heatEl.textContent = f.heatText;
+    heatEl.style.color = f.heat == null ? "" : f.heat > 2 ? "#ef4444" : f.heat < 0 ? "#10b981" : "#f59e0b";
+    gapEl.textContent = f.gapText;
+    gapEl.style.color = f.gap != null && f.gap > 15 ? "#f59e0b" : "#38bdf8";
   } else {
-    hoodEl.textContent = countyOf() ? `${countyOf().toUpperCase()} REGION` : "Active County";
-    heatEl.textContent = "+1.8°F vs Eco-Norm";
-    gapEl.textContent = "16% to Regional Goal";
+    // No block group selected: no county-wide figure is on file, so nothing is shown.
+    hoodEl.textContent = countyOf() ? countyOf() : "Active County";
+    heatEl.textContent = "Select a neighborhood";
+    gapEl.textContent = "–";
   }
 }
 

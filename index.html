@@ -26,16 +26,16 @@
   <div id="canopy-hud-hood" style="font-size:13px;font-weight:700;color:#f8fafc;margin-bottom:4px;">Los Angeles County</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;">
     <div style="background:rgba(255,255,255,0.06);padding:6px;border-radius:6px;">
-      <div style="font-size:10px;color:#94a3b8;">Heat Anomaly</div>
-      <div id="canopy-hud-heat" style="font-size:13px;font-weight:700;color:#f87171;">+0.0°F</div>
+      <div style="font-size:10px;color:#94a3b8;">Heat vs. urban area</div>
+      <div id="canopy-hud-heat" style="font-size:13px;font-weight:700;color:#f87171;">–</div>
     </div>
     <div style="background:rgba(255,255,255,0.06);padding:6px;border-radius:6px;">
-      <div style="font-size:10px;color:#94a3b8;">Canopy Deficit</div>
-      <div id="canopy-hud-gap" style="font-size:13px;font-weight:700;color:#38bdf8;">15% to Goal</div>
+      <div style="font-size:10px;color:#94a3b8;">Canopy gap to goal</div>
+      <div id="canopy-hud-gap" style="font-size:13px;font-weight:700;color:#38bdf8;">–</div>
     </div>
   </div>
   <div id="canopy-hud-economic" style="font-size:11px;color:#cbd5e1;line-height:1.4;margin-bottom:8px;">
-    <b>Economic Impact:</b> Published hedonic studies (Donovan &amp; Butry 2010; McPherson &amp; Simpson 2003) measured <b>+$7,130</b> home value in Portland, OR and <b>$65–$140/yr</b> in AC cooling savings in Southern California.
+    <b>What studies found:</b> In Portland, OR, one street tree with the sample's average canopy added $7,130 to the sale price of the house it fronted (Donovan &amp; Butry 2010, <a href="https://research.fs.usda.gov/treesearch/36186" target="_blank" rel="noopener" style="color:#a7f3d0">USDA Forest Service</a>). In California, shading east and west walls with 50 million new trees was projected to cut cooling energy by a present wholesale value of $71 per tree planted over 15 years (McPherson &amp; Simpson 2003, <a href="https://research.fs.usda.gov/treesearch/48730" target="_blank" rel="noopener" style="color:#a7f3d0">USDA Forest Service</a>). Neither was measured here.
   </div>
   <button type="button" onclick="openResearchModal('Urban Tree Canopy &amp; Heat Mitigation')" style="width:100%;background:#059669;color:#fff;border:none;padding:6px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;">
     View Tree Canopy &amp; Heat Studies →
@@ -97,7 +97,7 @@
       <option value="top">Best improvement type</option>
       <option value="pkg_cost">Cost of every project that pays back</option>
       <option value="value">Typical home value</option>
-      <option value="heat">Heat vs. EPA Level IV ecoregion median</option>
+      <option value="heat">Heat vs. its urban area's average (Tree Equity Score 2021)</option>
       <option value="displacement">Renter displacement sensitivity (0–100)</option>
       <option value="crime">Violent crime per 1,000 residents</option>
       <option value="park">Park acres within ½ mile</option>
@@ -435,13 +435,11 @@
     <p class="small"><b>Dynamic ROI Mode:</b> Users can toggle between <i>Base Hedonic Study ROI</i> and <i>Locally Context-Adjusted ROI</i>. The locally adjusted model evaluates micro-climate heat anomalies, tree canopy deficits, peak bus frequency, restaurant/dining walkability, freeway buffer zones (under 300 m), and a diminishing marginal returns saturation curve (200 / [n + 100]) to dynamically re-rank investments and re-color the map in real time. Street-tree capital cost is benchmarked to the City of LA in-lieu fee of $1,945 per Public Works tree (LAMC § 62.177, Ord. 185,573) plus long-term watering and canopy upkeep.</p>
 
     <div id="methods-financing-section">
-      <h3>EIFD Tax-Increment Financing (Gov. Code § 53398.50)</h3>
-      <p class="small">Enhanced Infrastructure Financing Districts (Gov. Code § 53398.50 and following) pledge part of the growth in the 1% property tax. The calculator's base is the net taxable value on the 2026 Assessor roll for every parcel in the area, and the city and County shares come from the Auditor-Controller's FY 2026-27 Modified ATI ratios (AF49 report) for the area's actual tax-rate areas, weighted by value: 13,392 tax-rate areas, 99.99% of net taxable value matched. School and ERAF shares (about 47% of the 1% levy county-wide, value-weighted) cannot be pledged. Project-level funding plans model Prop 13 statutory reassessments upon deed transfer (with interactive turnover presets from 2.0% mortgage lock-in up to 4.5% high-velocity), a 2.0% statutory annual roll inflation cap, interactive 30-year municipal bond yields (4.25% AAA muni to 6.25% unrated), and a 1.35× debt-service coverage ratio, with city pledges up to 75% and County pledges up to 49% (benchmarked to the certified City of Artesia EIFD Infrastructure Financing Plan).</p>
+      <p class="small muted">Loads for the selected county.</p>
     </div>
 
     <div id="methods-water-section">
-      <h3>Measure W (Safe Clean Water Program)</h3>
-      <p class="small">Stormwater and green-infrastructure co-funding follows the LA County Flood Control District's Safe Clean Water Program: 50% Regional Program (projects scored by Watershed Area Steering Committees on a 110-point scale, 60 points to qualify, with benefits to disadvantaged communities at least 110% of their share of the population), 40% Municipal Program paid directly to cities, 10% District Program.</p>
+      <p class="small muted">Loads for the selected county.</p>
     </div>
 
     <h3>Aerial imagery</h3>

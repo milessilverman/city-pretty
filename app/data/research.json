@@ -173,8 +173,8 @@
   "journal": "Landscape and Urban Planning",
   "doi": "10.1016/j.landurbplan.2009.07.019",
   "source_url": "https://doi.org/10.1016/j.landurbplan.2009.07.019",
-  "impact": null,
-  "geography": null,
+  "impact": "On average, street trees added $8,870 to sales price and cut time on market by 1.7 days; one street tree with the sample's average canopy (312 sq ft) added $7,130 to the price of the house it fronts",
+  "geography": "Portland, OR",
   "vpd": null,
   "takeaway": null,
   "citation": "Geoffrey H. Donovan, David T. Butry (2010). Trees in the city: Valuing street trees in Portland, Oregon. Landscape and Urban Planning. https://doi.org/10.1016/j.landurbplan.2009.07.019",
@@ -182,12 +182,10 @@
    "status": "partially_verified",
    "method": "crossref_doi_lookup",
    "checked_on": "2026-11-16",
-   "evidence": "Crossref /works/10.1016/j.landurbplan.2009.07.019: title, authors, year, container confirmed.",
+   "evidence": "Crossref /works/10.1016/j.landurbplan.2009.07.019: title, authors, year, container confirmed. Impact and geography confirmed from the paper's text on USDA Forest Service Treesearch (2026-11-16; see field_evidence).",
    "unverified_fields": [
     "vpd",
-    "takeaway",
-    "impact",
-    "geography"
+    "takeaway"
    ],
    "notes": "claimed DOI 10.1016/j.landurbplan.2009.08.007 does not exist (Crossref 404); corrected DOI found by Crossref title search. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims).",
    "removed_unverified_claims": {
@@ -202,6 +200,21 @@
     "year": 2010,
     "journal": "Landscape and Urban Planning",
     "doi": "10.1016/j.landurbplan.2009.08.007"
+   },
+   "field_evidence": {
+    "impact": {
+     "status": "confirmed",
+     "source_url": "https://research.fs.usda.gov/download/treesearch/36186.pdf",
+     "quote": "On average. street trees add $8870 to sales price and reduce TOM by 1.7 days ... Let us consider a tree with a canopy cover of 312 ft2 (29m2) (the average for our sample). This tree adds $7130 to the price of the house it fronts.",
+     "checked_on": "2026-11-16",
+     "note": "The author copy on USDA Forest Service Treesearch (record 36186). The earlier removed claim gave $7,130 'per home with street trees'; the paper gives it per tree, for the house it fronts."
+    },
+    "geography": {
+     "status": "confirmed",
+     "source_url": "https://research.fs.usda.gov/treesearch/36186",
+     "quote": "We use a hedonic price model to simultaneously estimate the effects of street trees on the sales price and the time-on-market (TOM) of houses in Portland. Oregon.",
+     "checked_on": "2026-11-16"
+    }
    }
   },
   "last_verified": "2026-11-16"
@@ -340,8 +353,8 @@
   "journal": "Urban Forestry & Urban Greening",
   "doi": "10.1078/1618-8667-00025",
   "source_url": "https://doi.org/10.1078/1618-8667-00025",
-  "impact": null,
-  "geography": null,
+  "impact": "Planting 50 million trees to shade east and west walls of homes was projected to cut cooling by 1.1% and peak load by 4.5% over 15 years; present wholesale value of the cooling reductions $3.6 billion ($71 per tree planted)",
+  "geography": "California (statewide model)",
   "vpd": null,
   "takeaway": null,
   "citation": "E. Gregory McPherson, James R. Simpson (2003). Potential energy savings in buildings by an urban tree planting programme in California. Urban Forestry & Urban Greening. https://doi.org/10.1078/1618-8667-00025",
@@ -349,12 +362,10 @@
    "status": "partially_verified",
    "method": "crossref_doi_lookup",
    "checked_on": "2026-11-16",
-   "evidence": "Crossref /works/10.1078/1618-8667-00025: title, authors, year, container confirmed.",
+   "evidence": "Crossref /works/10.1078/1618-8667-00025: title, authors, year, container confirmed. Impact and geography confirmed from the paper's text on USDA Forest Service Treesearch (2026-11-16; see field_evidence).",
    "unverified_fields": [
     "vpd",
-    "takeaway",
-    "impact",
-    "geography"
+    "takeaway"
    ],
    "notes": "claimed journal (Energy and Buildings), title and treesearch URL were wrong (URL resolves to an unrelated wildfire-haze paper); same authors/year work found by Crossref search. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims).",
    "removed_unverified_claims": {
@@ -369,6 +380,21 @@
     "year": 2003,
     "journal": "Energy and Buildings",
     "doi": null
+   },
+   "field_evidence": {
+    "impact": {
+     "status": "confirmed",
+     "source_url": "https://research.fs.usda.gov/download/treesearch/48730.pdf",
+     "quote": "Planting 50 million trees to shade east and west walls of residential buildings is projected to reduce cooling by 1.1% and peak load demand by 4.5% over a 15-year period. The present wholesale value of annual cooling reductions for the 15-year period is $ 3.6 billion ($ 71/tree planted).",
+     "checked_on": "2026-11-16",
+     "note": "A simulation (aerial-photo canopy data and building energy models), not measured bills. The page's earlier '$65-$140/yr in AC cooling savings' is not in the paper."
+    },
+    "geography": {
+     "status": "confirmed",
+     "source_url": "https://research.fs.usda.gov/download/treesearch/48730.pdf",
+     "quote": "Tree canopy cover data from aerial photographs and building energy simulations were applied to estimate energy savings from existing trees and new plantings in California.",
+     "checked_on": "2026-11-16"
+    }
    }
   },
   "last_verified": "2026-11-16"

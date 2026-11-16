@@ -1114,3 +1114,127 @@ test("what fits on this lot uses the NYC Zoning Resolution read from the code, a
   expect(txOffice).not.toContain("Detached ADU");
   expect(errors).toEqual([]);
 });
+
+// Round-2 hand-written claims (docs/audit/hardcoded-claims-round2.md). The canopy HUD and the comparison drawer used a
+// hand-typed "ecoregion" table (codes like "EPA IV: 85g / CEC Zone 9", per-state canopy targets) and called the 2021
+// Tree Equity heat figure "vs. EPA Level IV ecoregion median". They now show the block group's own Tree Equity goal.
+test("canopy HUD and comparison drawer show the block group's own Tree Equity goal and heat label, never an invented target (select path, Travis TX)", async ({ page }) => {
+  const fs = require("fs"), path = require("path");
+  const te = JSON.parse(fs.readFileSync(path.join(__dirname, "../../app/data/tree_equity_2025/48453.json"), "utf8"));
+  const errors = await openPage(page);
+  const hud0 = await page.evaluate(() => ({ econ: (document.querySelector("#canopy-hud-economic") as HTMLElement).textContent || "",
+    heatOpt: (document.querySelector('#metric option[value="heat"]') as HTMLElement).textContent || "" }));
+  expect(hud0.econ).toContain("$7,130");
+  expect(hud0.econ).toContain("$71 per tree planted");
+  expect(hud0.econ).not.toContain("$65–$140");
+  expect(hud0.heatOpt).toContain("urban area");
+  expect(hud0.heatOpt).not.toContain("EPA");
+
+  await page.evaluate(() => (0, eval)("openCounty")("48453"));
+  await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "48453", null, { timeout: 60_000 });
+  const ids: string[] = await page.evaluate(() => (0, eval)("D_OC").features.map((f: any) => f.properties.id));
+  const bg = ids.find((id) => te[id] && te[id][0] > 0 && te[id][2] != null) as string;
+  expect(bg).toBeTruthy();
+  const r = await page.evaluate((id) => {
+    const ev = (s: string) => (0, eval)(s);
+    ev("select")(id, false);
+    const hud = { hood: document.querySelector("#canopy-hud-hood")!.textContent || "", heat: document.querySelector("#canopy-hud-heat")!.textContent || "",
+      gap: document.querySelector("#canopy-hud-gap")!.textContent || "" };
+    ev("toggleCompare")(id); ev("renderCompareDrawer")();
+    return { hud, drawer: (document.querySelector("#compare-content") as HTMLElement).textContent || "" };
+  }, bg);
+  // The HUD can be updated before the current Tree Equity file arrives; wait for the select after it has.
+  if (!r.hud.gap.includes("goal")) await page.waitForTimeout(1500);
+  const again = await page.evaluate((id) => { (0, eval)("select")(id, false); return document.querySelector("#canopy-hud-gap")!.textContent || ""; }, bg);
+  expect(again).toBe(`${te[bg][0]} pts below its ${te[bg][2]}% goal`);
+  for (const t of [r.hud.hood, r.hud.heat, again, r.drawer]) expect(t).not.toMatch(/EPA|Eco-Norm|CEC Zone|Ecoregion/);
+  expect(r.drawer).toContain("Tree canopy gap");
+  expect(r.drawer).not.toMatch(/Low Risk|Elevated \(/);
+  expect(errors).toEqual([]);
+});
+
+test("methods panel financing and stormwater text come from sourced records (LA and Travis TX)", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { const P = (0, eval)("STATE_FINANCE_PROFILES"); return P && P.TX && P.TX.verification; });
+  await page.waitForFunction(() => ((0, eval)("FUNDING_PROGRAMS_DATA") || []).length > 0);
+  const la = await page.evaluate(() => { (0, eval)("openMethodsModal")();
+    return { fin: document.querySelector("#methods-financing-section")!.textContent || "", water: document.querySelector("#methods-water-section")!.textContent || "" }; });
+  expect(la.fin).toMatch(/13,392 tax-rate areas, 99\.99% of net taxable value matched/);
+  expect(la.fin).toContain("not re-checked");
+  for (const bad of ["AAA muni", "turnover presets", "mortgage lock-in", "about 47%", "certified City of Artesia"]) expect(la.fin).not.toContain(bad);
+  expect(la.water).toContain("Chapter 16");
+  expect(la.water).toContain("110 points");
+  expect(await page.locator('#methods-water-section a[href="https://file.lacounty.gov/SDSInter/bos/supdocs/124293.pdf"]').count()).toBe(1);
+
+  await page.evaluate(() => (0, eval)("closeMethodsModal")());
+  await page.evaluate(() => (0, eval)("openCounty")("48453"));
+  await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "48453", null, { timeout: 60_000 });
+  const tx = await page.evaluate(() => { (0, eval)("openMethodsModal")();
+    return { fin: document.querySelector("#methods-financing-section")!.textContent || "", water: document.querySelector("#methods-water-section")!.textContent || "" }; });
+  expect(tx.fin).toContain("TX TIRZ / PID / MUD");
+  expect(tx.fin).toContain("No tax-increment amount is computed for TX");
+  expect(tx.fin).toContain("Texas Tax Increment Reinvestment Zone");   // the funding program record, with its status
+  for (const bad of ["1.30×", "Senate Bill 2", "25-to-30-year", "written by hand"]) expect(tx.fin).not.toContain(bad);
+  expect(tx.water).toContain("No checked stormwater funding record");
+  expect(tx.water).not.toMatch(/TWDB|BRIC/);
+  expect(errors).toEqual([]);
+});
+
+test("California house checks state SB 9, ADU sale and fee rules only as the statutes say (live click path, LA)", async ({ page }) => {
+  let ll = { lat: 0, lng: 0 }, ring: number[][] = [];
+  await page.route(/LACounty_Parcel\/MapServer\/0\/query/, (route: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
+    body: JSON.stringify({ features: [{ attributes: { AIN: "5000000001", SitusFullAddress: "1 TEST ST LOS ANGELES CA", UseCode: "0100", UseType: "Residential", UseDescription: "Single Family Residence",
+      Roll_LandValue: 400000, Roll_ImpValue: 150000, Roll_LandBaseYear: "2012", YearBuilt1: "1952", SQFTmain1: 1500, Bedrooms1: 4, Bathrooms1: 1, Units1: 1 }, geometry: { rings: [ring] } }] }) }));
+  const errors = await openPage(page);
+  // A point inside a real single-family (R1-1) zoning polygon from the page's own LA zoning layer, so SB 9 is screened.
+  const found = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s), Z = ev("D").layers.zoning, zCell = ev("zCell"), zoneAt = ev("zoneAt");
+    for (const k of Object.keys(Z.cells)) for (const z of zCell(k)) {
+      if (z.zone !== "R1-1" || !z.rings || !z.rings[0]) continue;
+      const r = z.rings[0], c = { lat: r.reduce((s: number, q: number[]) => s + q[0], 0) / r.length, lng: r.reduce((s: number, q: number[]) => s + q[1], 0) / r.length };
+      const hit = zoneAt(c);
+      if (hit && hit.zone === "R1-1" && c.lat > 33.9 && c.lat < 34.2 && c.lng > -118.5 && c.lng < -118.2) return c;
+    }
+    return null;
+  });
+  expect(found).toBeTruthy();
+  ll = found as { lat: number; lng: number };
+  ring = [[ll.lng - 0.0002, ll.lat - 0.00012], [ll.lng + 0.0002, ll.lat - 0.00012], [ll.lng + 0.0002, ll.lat + 0.00012], [ll.lng - 0.0002, ll.lat + 0.00012], [ll.lng - 0.0002, ll.lat - 0.00012]];
+  await page.evaluate((p) => (0, eval)("houseAt")(p), ll);
+  await page.waitForFunction(() => { const b = document.querySelector("#house"); return !!b && !b.querySelector(".house-loading") && /SB 9/.test(b.textContent || ""); }, null, { timeout: 60_000 });
+  const t = await page.evaluate(() => (document.querySelector("#house") as HTMLElement).innerText);
+  expect(t).not.toContain("up to 4 total units");
+  expect(t).not.toContain("SB 9 does not apply in designated historic districts");
+  expect(t).toMatch(/SB 9 (allows a split into two lots of roughly equal area, each at least 1,200 sq ft and at least 40%|requires the parcel to meet the site conditions|bars a split on a designated)/);
+  expect(t).not.toContain("recoups only about 58%");
+  expect(t).not.toContain("Not allowed here: an ADU can be rented");
+  expect(t).not.toContain("(AB 1154)");
+  // The ADU fee rules (shown only where the ADU row is sourced; checked here on the function itself): California
+  // cites Gov. Code § 66311.5 and the SAB 2026 rate; other states have no fee rules on file and get no invented fee.
+  const fees = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s), fn = ev("getHouseUpgradeCostDetails");
+    const ca = fn({ name: "Detached ADU (800 sq ft)", n: "Detached ADU (800 sq ft)", customSqft: 800 }, { yard: 2000, yb: 1960 }, {});
+    return { ca: { school: ca.schoolFee, impact: ca.impactFees, unknown: ca.impactFeeUnknown, onFile: ca.feesOnFile, rows: ca.breakdown.map((b: any) => b.cat + " | " + b.desc).join("\n") } };
+  });
+  expect(fees.ca.school).toBe(Math.round(800 * 5.38));
+  expect(fees.ca.impact).toBe(0);
+  expect(fees.ca.unknown).toBe(true);
+  expect(fees.ca.onFile).toBe(true);
+  expect(fees.ca.rows).toContain("Gov. Code § 66311.5(c)");
+  expect(fees.ca.rows).not.toMatch(/HB 1337|Live Local Act abatement|Austin HOME infill schedule/);
+  expect(errors).toEqual([]);
+});
+
+test("neighborhood panel lists no unchecked funding programs and states the EIFD protest rule from the statute (LA select path)", async ({ page }) => {
+  const errors = await openPage(page);
+  const t = await page.evaluate(() => {
+    const w = window as any;
+    const id = w.D.bgs.features.find((f: any) => ((w.D.details[f.properties.id] || {}).m || {}).e)?.properties.id || w.D.bgs.features[0].properties.id;
+    w.select(id, false);
+    return (document.querySelector("#panel") as HTMLElement).textContent || "";
+  });
+  expect(t).not.toContain("Non-Private Funding");
+  expect(t).not.toMatch(/No vote is needed to form one|fail only on a 50% protest|Since AB 116 \(2019\) EIFD bonds need no public vote/);
+  expect(t).toContain("25–50% sends it to an election");
+  expect(errors).toEqual([]);
+});
