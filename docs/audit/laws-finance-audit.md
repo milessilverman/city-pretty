@@ -95,3 +95,75 @@ Every kept record now has a `verification` block:
   - #2, #3, #8 and #18 require a `last_verified` date on every record, including unverified ones.
 
   These tests encode fabrications and need rewriting. They were not edited under this audit's scope.
+
+---
+
+## Round 2 (16 Nov 2026): state finance profiles and the tax-increment calculator
+
+Script: `scripts/apply_finance_round2.py` (idempotent; every value it sets carries the quote it was read in, under each
+profile's `field_evidence`). Sources were the state code sites that answered from the audit machine, or the state
+revenue department where the legislature's site did not (marked in the note).
+
+### What the app uses from these profiles
+
+- **Shown on the page (non-California states):** `annual_assessment_cap` and `res_assessment_ratio` (only when
+  confirmed), `statutory_citation`, `tif_vehicle_name`, and now `reassessment_increase_cap` / `tax_bill_growth_cap`
+  where sourced.
+- **Tax-increment model** (`src/engines/municipalFinanceEngine.ts`): `res_assessment_ratio`, `annual_assessment_cap`,
+  `uncaps_on_sale`, `reassessment_cycle_years`, `homestead_exemption_rule`. The page did not call this model (an
+  unused copy in `app/app.js` was deleted).
+- **Removed everywhere:** `non_pledgeable_share`, `rsmeans_cost_multiplier`, `tree_capital_cost_usd`,
+  `climate_energy_regime` had no source in any state. `src/engines/residualProfitEngine.*`, the only user of
+  `rsmeans_cost_multiplier` (with an unsourced $265/sq ft base cost), was deleted. The non-pledgeable share is now a
+  caller input that must come from a sourced tax-rate-area split.
+
+### Fields checked: 33 checks in 21 states
+
+| State | Confirmed | Corrected (old → new) |
+|---|---|---|
+| GA | residential ratio 40% (Dept. of Revenue quoting O.C.G.A. 48-5-7) | |
+| ID | market value; annual assessment; homestead exemption $125,000 (lesser of that or 50%, not modeled) | |
+| IA | | residential ratio 0.5 → null (set yearly by formula, Iowa Code 441.21) |
+| KS | residential 11.5% | |
+| MD | 3-year cycle | cap null → 10% (homestead credit, Tax-Prop. 9-105); homestead "5% exemption" → none (the credit is the relief) |
+| MA | full and fair cash value | |
+| MI | 50%; cap lesser of 5% or inflation; uncaps on transfer | |
+| MN | | ratio 1 → null (net tax capacity class rates 1% / 1.25%) |
+| MO | residential 19%; odd-year (2-year) reassessment | |
+| MT | revalued every 2 years | |
+| NE | actual value | |
+| NV | 35% | cap 3% → null: NRS 361.4723 caps the *tax bill* of owner-occupied homes (now `tax_bill_growth_cap`) |
+| ND | 9% of 50% = 4.5% | |
+| OH | ratio at most 35% | cycle 3 → 6 (R.C. 5713.01 "at least once in each six-year period"; triennial update not confirmed) |
+| RI | update every 3 years (revaluation every 9) | |
+| SC | 4% legal residence; reappraisal every fifth year | the 15% cap is per five-year reassessment, not annual (now `reassessment_increase_cap`) |
+| SD | equalized to 85% (Dept. of Revenue) | |
+| UT | 45% residential exemption | ratio 0.55 → 1: the record also carried the 45% exemption, so the calculator applied it twice |
+| VA | 100% fair market value | |
+| WV | 60% | |
+| WY | 9.5% | |
+
+Not reachable from the audit machine (left unverified): New York (nysenate.gov and Justia 403), Illinois (ilga.gov
+certificate error), Pennsylvania, New Jersey, Tennessee, Oklahoma, Indiana, Kentucky, Louisiana, Alabama, Mississippi,
+Arkansas, Connecticut, New Hampshire, Wisconsin, Hawaii, Alaska, Maine, DC, Vermont, Delaware, New Mexico (pages
+rendered without text or returned 403/404). The Lincoln Institute's Significant Features database was reachable but
+only through an interactive report builder, so it was not used.
+
+Result: the residential ratio is confirmed for 21 states (was 5: AZ, CA, FL, TX, WA). **No state has all five calculator fields confirmed.**
+
+### Calculator behavior now
+
+- **Outside California:** the section shows only confirmed facts and "Not computed: <state> tax rules not verified
+  yet (<fields>)". The engine itself returns `computed: false` with `missingFields` for any profile that isn't fully
+  confirmed (`financeProfileGate`); a confirmed null assessment cap counts as "no cap".
+- **California EIFD calculator** (runs on the Assessor roll and the Auditor's apportionment factors):
+  - removed the 55%-of-market-value stand-in base and the 20% / 24% stand-in city/County shares; with no roll or no
+    factors the inputs stay blank and the calculator says "Not computed";
+  - removed the same 20% / 24% stand-in in the per-project funding plan (`fundPlan`), which now returns nothing;
+  - removed the turnover buttons, which overwrote the growth input with an invented conversion
+    (`2 + (rate − 2) × 0.65`), and the bond-yield buttons labeled "AAA Muni / Benchmark / High-Rate" (no source);
+  - growth, interest rate, coverage and the 3% admin are labeled assumptions; the Artesia pledge defaults are labeled
+    examples "not re-checked".
+
+Tests: `tests/unit/financeProfiles.test.ts`, test 4 in `tests/unit/audit.test.ts`, and the browser test
+"tax-increment section…" in `tests/e2e/site.spec.ts`.

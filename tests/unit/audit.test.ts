@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { calculateTaxIncrementCapacity } from "../../src/engines/municipalFinanceEngine";
+import { calculateTaxIncrementCapacity, financeProfileGate } from "../../src/engines/municipalFinanceEngine";
 import { evaluateByRightHousing, ParcelContext } from "../../src/engines/statutoryZoningEngine";
 import { computeSubAdditivePackage } from "../../src/engines/hedonicCapitalizationEngine";
 import { calculateSolarMicrogridRoi } from "../../src/engines/solarMicrogridEngine";
@@ -121,84 +121,33 @@ describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
     expect(noZoning.applicable_statutes).toEqual([]);
   });
 
-  it("4. Produces distinct, legally valid bond capacities across CA Prop 13, OR Measure 50, LA Homestead, and TX TIRZ", () => {
-    const makeProfile = (overrides: Partial<StateFinanceProfile>): StateFinanceProfile => ({
-      state_code: "CA",
-      res_assessment_ratio: 1.0,
-      comm_assessment_ratio: 1.0,
-      annual_assessment_cap: 0.02,
-      uncaps_on_sale: true,
-      reassessment_cycle_years: 1,
-      homestead_exemption_rule: { type: "none", amount_or_pct: 0 },
-      tif_vehicle_name: "CA EIFD",
-      non_pledgeable_share: 0.47,
-      rsmeans_cost_multiplier: 1.24,
-      tree_capital_cost_usd: 1945,
-      climate_energy_regime: "mixed_temperate",
-      ...overrides,
-    });
+  it("4. Tax-increment model refuses to compute on unconfirmed state rules, and applies confirmed ones", () => {
+    const PROFILES = JSON.parse(fs.readFileSync(path.join(__dirname, "../../app/data/state_finance_profiles.json"), "utf-8"));
+    const base = {
+      baselineMarketValueUsd: 100_000_000, effectiveMillageRate: 0.01, annualMarketAppreciation: 0.035,
+      historicalTurnoverRate: 0.035, newConstructionAnnualUsd: 0, affordableExemptUnitsShare: 0, affordableExemptionPct: 0,
+      localPledgeShare: 0.65, nonPledgeableShare: 0.47, bondTermYears: 30, bondInterestRate: 0.0525, dscr: 1.35,
+    };
+    // Real file: Utah's ratio was corrected, but its cap / sale rule / cycle are not confirmed, so nothing is computed.
+    const ut = calculateTaxIncrementCapacity({ ...base, profile: PROFILES.UT });
+    expect(ut.computed).toBe(false);
+    expect(ut.maxBondCapacityUsd).toBeNull();
+    expect(ut.missingFields).toEqual(expect.arrayContaining(["annual_assessment_cap", "uncaps_on_sale", "reassessment_cycle_years"]));
+    expect(financeProfileGate(PROFILES.NY)).toHaveLength(5);
 
-    const caOut = calculateTaxIncrementCapacity({
-      profile: makeProfile({}),
-      baselineMarketValueUsd: 100_000_000,
-      effectiveMillageRate: 0.01,
-      annualMarketAppreciation: 0.035,
-      historicalTurnoverRate: 0.035,
-      newConstructionAnnualUsd: 0,
-      affordableExemptUnitsShare: 0,
-      affordableExemptionPct: 0,
-      localPledgeShare: 0.65,
-      bondTermYears: 30,
-      bondInterestRate: 0.0525,
-      dscr: 1.35,
+    // A profile whose rules are all confirmed computes; a 2% cap yields less capacity than an uncapped annual market.
+    const confirmed = (o: Partial<StateFinanceProfile>): StateFinanceProfile => ({
+      state_code: "XX", res_assessment_ratio: 1, comm_assessment_ratio: 1, annual_assessment_cap: null, uncaps_on_sale: true,
+      reassessment_cycle_years: 1, homestead_exemption_rule: { type: "none", amount_or_pct: 0 }, tif_vehicle_name: "test",
+      verification: { status: "verified", unverified_fields: [] }, ...o,
     });
-
-    const orOut = calculateTaxIncrementCapacity({
-      profile: makeProfile({
-        state_code: "OR",
-        res_assessment_ratio: 0.65,
-        annual_assessment_cap: 0.03,
-        uncaps_on_sale: false,
-        tif_vehicle_name: "OR Urban Renewal TIF",
-        non_pledgeable_share: 0.0,
-      }),
-      baselineMarketValueUsd: 100_000_000,
-      effectiveMillageRate: 0.015,
-      annualMarketAppreciation: 0.035,
-      historicalTurnoverRate: 0.05,
-      newConstructionAnnualUsd: 0,
-      affordableExemptUnitsShare: 0,
-      affordableExemptionPct: 0,
-      localPledgeShare: 0.75,
-      bondTermYears: 30,
-      bondInterestRate: 0.05,
-      dscr: 1.35,
-    });
-
-    const txOut = calculateTaxIncrementCapacity({
-      profile: makeProfile({
-        state_code: "TX",
-        annual_assessment_cap: null,
-        uncaps_on_sale: true,
-        tif_vehicle_name: "TX TIRZ",
-        non_pledgeable_share: 0.0,
-      }),
-      baselineMarketValueUsd: 100_000_000,
-      effectiveMillageRate: 0.018,
-      annualMarketAppreciation: 0.035,
-      historicalTurnoverRate: 0.06,
-      newConstructionAnnualUsd: 0,
-      affordableExemptUnitsShare: 0,
-      affordableExemptionPct: 0,
-      localPledgeShare: 0.75,
-      bondTermYears: 30,
-      bondInterestRate: 0.05,
-      dscr: 1.35,
-    });
-
-    expect(caOut.maxBondCapacityUsd).toBeGreaterThan(0);
-    expect(orOut.maxBondCapacityUsd).toBeGreaterThan(caOut.maxBondCapacityUsd);
-    expect(txOut.maxBondCapacityUsd).toBeGreaterThan(orOut.maxBondCapacityUsd);
+    const capped = calculateTaxIncrementCapacity({ ...base, profile: confirmed({ annual_assessment_cap: 0.02 }) });
+    const open = calculateTaxIncrementCapacity({ ...base, profile: confirmed({}) });
+    expect(capped.computed && open.computed).toBe(true);
+    expect(open.maxBondCapacityUsd).toBeGreaterThan(capped.maxBondCapacityUsd);
+    // The non-pledgeable share is a caller input now (it had no source as a state-wide profile field).
+    const allPledgeable = calculateTaxIncrementCapacity({ ...base, nonPledgeableShare: 0, profile: confirmed({}) });
+    expect(allPledgeable.maxBondCapacityUsd).toBeGreaterThan(open.maxBondCapacityUsd);
   });
 
   it("5. Prevents linear stacking double-counting via the 22% suburban capitalization ceiling", () => {
