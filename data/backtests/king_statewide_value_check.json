@@ -1,0 +1,33 @@
+{
+ "checked_on": "2026-11-16",
+ "layer": "https://services.arcgis.com/jsIt88o09Q0r1j8h/arcgis/rest/services/Current_Parcels/FeatureServer/0",
+ "compared": "VALUE_LAND + VALUE_BLDG vs the Assessor's tax-year-2026 appraised land + improvements value in the back-test sales file",
+ "sales_file": "data/backtests/sales_53033_2026-11-16.json.gz",
+ "sampled": 500,
+ "found_in_layer": 500,
+ "matched": 496,
+ "match_rate": 0.992,
+ "rule": "the page computes King estimates only while match_rate >= 0.98 and the check is at most 120 days old",
+ "mismatch_examples": [
+  {
+   "pin": "4054720020",
+   "assessor_2026": 1243000.0,
+   "statewide_layer": 1325000
+  },
+  {
+   "pin": "3824100162",
+   "assessor_2026": 930000.0,
+   "statewide_layer": 988000
+  },
+  {
+   "pin": "2281190180",
+   "assessor_2026": 385000.0,
+   "statewide_layer": 0
+  },
+  {
+   "pin": "9144100047",
+   "assessor_2026": 760200.0,
+   "statewide_layer": 819000
+  }
+ ]
+}
