@@ -623,7 +623,9 @@ function publishLaValuation(v, bt, ctx) {
 function countyModelEstimate(fips, a, bg) {
   const C = COUNTY_VALUATION_MODELS && COUNTY_VALUATION_MODELS.counties && COUNTY_VALUATION_MODELS.counties[fips];
   if (!C) return { value: null, reason: "The tested model's data has not loaded." };
-  const M = C.input_map || {};
+  // Passed its back-test, but this page's parcel layer for the county doesn't carry the model's inputs.
+  if (!C.input_map) return { value: null, unavailable: true, reason: C.page_inputs_missing || "This page's parcel layer for the county doesn't carry the tested model's inputs." };
+  const M = C.input_map;
   a = a || {};
   const g = (k) => (M[k] && a[M[k]] != null && a[M[k]] !== "" ? +a[M[k]] : null);
   // (null >= 0 is true in JavaScript, so each input is checked for null explicitly)
@@ -678,6 +680,8 @@ function publishCountyValuation(v, bt, ctx, fips) {
       confidenceRating: `Recorded sale price, ${saleYear}`, withheldReason: null });
   }
   const e = countyModelEstimate(fips, ctx.attributes, ctx.bg);
+  if (!e.value && e.unavailable) return Object.assign(base, { estimatedValue: null, vpsf: null, confidenceRating: "Withheld — the tested model's inputs aren't available on this page",
+    withheldReason: `No estimate: a model passed its back-test here (off by a median of ${backtestPct(bt.model.mdape)} on ${bt.model.n.toLocaleString("en-US")} ${bt.countyName} sales), but ${e.reason}` });
   if (!e.value) return Object.assign(base, { estimatedValue: null, vpsf: null, confidenceRating: "Withheld — not enough on file for the tested model", withheldReason: `No estimate: ${e.reason}` });
   const band = priceBandOf(e.value), bm = bt.by_price_band && bt.by_price_band[band];
   const bandNote = bm && bm.mdape != null && bm.mdape > bt.model.mdape + 0.02 ? ` For homes ${band === "under $500k" ? "under $500k" : band === "$2M and up" ? "of $2M and up" : "in the " + band + " range"} the test error was larger: ${backtestPct(bm.mdape)}.` : "";

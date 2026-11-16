@@ -38,7 +38,8 @@ describe("page models for passing counties", () => {
   for (const [fips, C] of Object.entries(models.counties) as [string, any][]) {
     it(`${fips}: only a passing county has a page model, and the page's rounded neighborhood figures barely move the estimate`, () => {
       expect(bench.counties[fips].gate.pass).toBe(true);
-      expect(C.input_map).toBeTruthy();
+      // either the page can supply the inputs, or it withholds with a stated reason
+      if (!C.input_map) expect(String(C.page_inputs_missing || "")).toMatch(/\S{20,}|.{40,}/);
       const c = cfg[fips];
       const data = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root, c.sales_file))).toString());
       const inWin = (r: any, [a, b]: string[]) => r.date >= a && r.date <= b;

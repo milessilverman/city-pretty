@@ -1632,6 +1632,220 @@
     "evidence": "data/backtests/county_model_test_42101.json"
    }
   },
+  "53033": {
+   "_status": "backtest_run",
+   "countyFips": "53033",
+   "countyName": "King County",
+   "model_name": "county_sales_regression_assessor_only",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_53033_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_53033.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": [
+    "https://aqua.kingcounty.gov/extranet/assessor/ (Real Property Sales, Residential Building, Parcel, Real Property Account, Lookup; files dated 14 Nov 2026)",
+    "https://services.arcgis.com/jsIt88o09Q0r1j8h/arcgis/rest/services/Current_Parcels/FeatureServer/0 (Washington State Current Parcels: parcel centroids)",
+    "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Tracts_Blocks/MapServer/11 (Census 2020 block groups)"
+   ],
+   "filters": [
+    "PrincipalUse 6 RESIDENTIAL, PropertyClass 8 Res-Improved property, PropertyType 11 Household, single family units",
+    "SaleInstrument 2 Warranty Deed or 3 Statutory Warranty Deed",
+    "SaleReason 1 None",
+    "no Assessor SaleWarning",
+    "price >= $25,000",
+    "excise affidavit for one parcel only",
+    "one residential building, 1 living unit, living area >= 400 sq ft, year built not after the sale, bedroom and full-bath counts present"
+   ],
+   "split": {
+    "fit": [
+     "2023-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-04-30"
+    ],
+    "test": [
+     "2026-05-01",
+     "2026-10-31"
+    ]
+   },
+   "locked": {
+    "spec": "regression_assessor_only",
+    "locked_on": "2026-11-16",
+    "why": "Best development median error among models whose inputs a King parcel layer carries (the WA statewide layer: tax-year-2026 land + building value only): regression on the neighborhood median and that value 8.0% (3818 sales) vs value x sales ratio 8.05%. Best overall needs rooms and size, which no King page layer has: regression with the assessor value 7.5%; without it 9.6%; $/sqft x size 12.6%; neighborhood median 16.3%. Even if it passes, the page cannot run it today: its King parcel service is the county zoning layer (PIN and zoning only).",
+    "dev_mdape": {
+     "neighborhood_median": 0.163,
+     "neighborhood_ppsf_x_sqft": 0.1262,
+     "assessor_ratio": 0.0805,
+     "regression": 0.0963,
+     "regression_with_assessor": 0.0751,
+     "regression_no_rooms": 0.0972,
+     "regression_no_rooms_with_assessor": 0.0752,
+     "regression_assessor_only": 0.0798
+    }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 7261,
+    "excluded": 80,
+    "mdape": 0.0877,
+    "mape": 0.1219,
+    "median_signed_error": 0.0002,
+    "share_within_10pct": 0.5545,
+    "share_within_20pct": 0.8262,
+    "p80_abs_error": 0.1854
+   },
+   "baseline_neighborhood_median": {
+    "n": 7341,
+    "excluded": 0,
+    "mdape": 0.1724,
+    "mape": 0.233,
+    "median_signed_error": 0.0153,
+    "share_within_10pct": 0.3174,
+    "share_within_20pct": 0.5586,
+    "p80_abs_error": 0.3692
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": true,
+    "reason": null
+   },
+   "by_price_band": {
+    "$500k-$1M": {
+     "n": 3371,
+     "excluded": 0,
+     "mdape": 0.0718,
+     "mape": 0.103,
+     "median_signed_error": 0.0148,
+     "share_within_10pct": 0.6307,
+     "share_within_20pct": 0.8727,
+     "p80_abs_error": 0.1545
+    },
+    "$1M-$2M": {
+     "n": 2717,
+     "excluded": 0,
+     "mdape": 0.1003,
+     "mape": 0.1274,
+     "median_signed_error": -0.0113,
+     "share_within_10pct": 0.4987,
+     "share_within_20pct": 0.8119,
+     "p80_abs_error": 0.1945
+    },
+    "$2M and up": {
+     "n": 917,
+     "excluded": 0,
+     "mdape": 0.1122,
+     "mape": 0.1575,
+     "median_signed_error": -0.0678,
+     "share_within_10pct": 0.4635,
+     "share_within_20pct": 0.7339,
+     "p80_abs_error": 0.2399
+    },
+    "under $500k": {
+     "n": 256,
+     "excluded": 0,
+     "mdape": 0.1094,
+     "mape": 0.1839,
+     "median_signed_error": 0.0822,
+     "share_within_10pct": 0.4688,
+     "share_within_20pct": 0.6953,
+     "p80_abs_error": 0.3323
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 7341,
+     "excluded": 0,
+     "mdape": 0.1724,
+     "mape": 0.233,
+     "median_signed_error": 0.0153,
+     "share_within_10pct": 0.3174,
+     "share_within_20pct": 0.5586,
+     "p80_abs_error": 0.3692
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 7341,
+     "excluded": 0,
+     "mdape": 0.1343,
+     "mape": 0.1739,
+     "median_signed_error": 0.0161,
+     "share_within_10pct": 0.3873,
+     "share_within_20pct": 0.6675,
+     "p80_abs_error": 0.2723
+    },
+    "assessor_ratio": {
+     "n": 7261,
+     "excluded": 80,
+     "mdape": 0.0878,
+     "mape": 0.1229,
+     "median_signed_error": 0.0004,
+     "share_within_10pct": 0.5519,
+     "share_within_20pct": 0.8247,
+     "p80_abs_error": 0.1865
+    },
+    "regression": {
+     "n": 7341,
+     "excluded": 0,
+     "mdape": 0.1069,
+     "mape": 0.1428,
+     "median_signed_error": 0.0112,
+     "share_within_10pct": 0.4762,
+     "share_within_20pct": 0.765,
+     "p80_abs_error": 0.2207
+    },
+    "regression_with_assessor": {
+     "n": 7261,
+     "excluded": 80,
+     "mdape": 0.0832,
+     "mape": 0.117,
+     "median_signed_error": 0.0001,
+     "share_within_10pct": 0.5735,
+     "share_within_20pct": 0.8398,
+     "p80_abs_error": 0.1771
+    },
+    "regression_no_rooms": {
+     "n": 7341,
+     "excluded": 0,
+     "mdape": 0.1083,
+     "mape": 0.1461,
+     "median_signed_error": 0.0139,
+     "share_within_10pct": 0.4648,
+     "share_within_20pct": 0.7519,
+     "p80_abs_error": 0.2271
+    },
+    "regression_no_rooms_with_assessor": {
+     "n": 7261,
+     "excluded": 80,
+     "mdape": 0.0849,
+     "mape": 0.1179,
+     "median_signed_error": 0.0004,
+     "share_within_10pct": 0.5673,
+     "share_within_20pct": 0.8379,
+     "p80_abs_error": 0.1786
+    },
+    "regression_assessor_only": {
+     "n": 7261,
+     "excluded": 80,
+     "mdape": 0.0877,
+     "mape": 0.1219,
+     "median_signed_error": 0.0002,
+     "share_within_10pct": 0.5545,
+     "share_within_20pct": 0.8262,
+     "p80_abs_error": 0.1854
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 67
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_53033.json"
+   }
+  },
   "06037": {
    "_status": "backtest_run",
    "countyFips": "06037",

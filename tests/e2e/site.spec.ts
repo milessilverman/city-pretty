@@ -608,3 +608,16 @@ test("Hillsborough FL: the page computes exactly the back-tested model from the 
   expect(condo.reason).toMatch(/use code 001/);
   expect(errors).toEqual([]);
 });
+
+test("King County passed but is withheld because the page's parcel layer lacks the input; Allegheny failed and is withheld", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { try { return !!(0, eval)("COUNTY_VALUATION_MODELS") && !!(0, eval)("VALUATION_BACKTEST_BENCHMARKS"); } catch { return false; } }, null, { timeout: 30_000 });
+  const king = await page.evaluate(() => (window as any).publishValuation({ estimatedValue: 900000, livingSqft: 2000 }, "53033", { attributes: { PIN: "8682250170", ZONING: "R6" }, bg: "530330001001" }));
+  expect(king.estimatedValue).toBeNull();
+  expect(king.withheldReason).toContain("8.8%");
+  expect(king.withheldReason).toMatch(/zoning layer/);
+  const al = await page.evaluate(() => (window as any).publishValuation({ estimatedValue: 300000 }, "42003", {}));
+  expect(al.estimatedValue).toBeNull();
+  expect(al.withheldReason).toContain("16.3%");
+  expect(errors).toEqual([]);
+});

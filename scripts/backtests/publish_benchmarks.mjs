@@ -28,6 +28,10 @@ for (const f of ["36005", "36047", "36061", "36081", "36085"]) {
 INPUT_MAPS["12057"] = { sqft: "TOT_LVG_AR", lot: "LND_SQFOOT", yb: "ACT_YR_BLT", units: "NO_RES_UNT", av: "JV", av_year: "ASMNT_YR", av_vintage: 2026,
   require: { DOR_UC: "001" }, require_label: "single-family homes (Florida DOR use code 001)",
   source: "https://services9.arcgis.com/Gh9awoU677aKree0/arcgis/rest/services/Florida_Statewide_Cadastral/FeatureServer/0 (Florida statewide parcels, 2026 roll)" };
+// Counties whose model passed but whose page parcel layer lacks an input: the page withholds with this reason.
+const PAGE_INPUTS_MISSING = {
+  "53033": "this page's King County parcel layer (the county zoning layer) has only the parcel number and zoning, not the tax-year-2026 assessed value the model needs. The Washington statewide parcel layer has that value but no roll-year field, so the page couldn't confirm it is the tested roll.",
+};
 const bench = JSON.parse(fs.readFileSync(BENCH, "utf8"));
 const models = fs.existsSync(MODELS) ? JSON.parse(fs.readFileSync(MODELS, "utf8")) : { _source: "scripts/backtests/publish_benchmarks.mjs; one entry per county whose model passed its back-test", counties: {} };
 
@@ -58,7 +62,8 @@ for (const fips of process.argv.slice(2)) {
     leakage: { test_homes_in_their_own_statistics: t.test_homes_in_their_own_statistics, test_rows_with_assessor_value_set_after_sale_excluded: t.test_rows_with_assessor_value_set_after_sale },
     verification: { status: "verified", method: "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.", checked_on: t.run_on.slice(0, 10), evidence: file },
   };
-  if (t.gate && t.gate.pass) models.counties[fips] = { county_name: t.county_name, tested: { mdape: t.model.mdape, n: t.model.n, share_within_20pct: t.model.share_within_20pct, by_price_band: t.by_price_band, run_on: t.run_on.slice(0, 10) }, model: t.page_model, stats: t.page_stats, input_map: INPUT_MAPS[fips] || null };
+  if (t.gate && t.gate.pass) models.counties[fips] = { county_name: t.county_name, tested: { mdape: t.model.mdape, n: t.model.n, share_within_20pct: t.model.share_within_20pct, by_price_band: t.by_price_band, run_on: t.run_on.slice(0, 10) }, model: t.page_model, stats: t.page_stats, input_map: INPUT_MAPS[fips] || null,
+    ...(INPUT_MAPS[fips] ? {} : { page_inputs_missing: PAGE_INPUTS_MISSING[fips] || null }) };
   else delete models.counties[fips];
   if (t.gate && t.gate.pass && !INPUT_MAPS[fips]) console.log(`  ${fips}: passed, but the page has no input map, so it will still withhold (inputs not available on the page)`);
   console.log(`${fips} ${t.county_name}: ${t.gate.pass ? "PASS" : "FAIL"} (${(t.model.mdape * 100).toFixed(1)}%)`);
