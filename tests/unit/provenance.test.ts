@@ -99,21 +99,34 @@ describe("county readiness is computed from evidence", () => {
   });
 });
 
-describe("LA crash counts are rebuilt from CCRS with a stated boundary rule", () => {
-  const d = load("app/data/la-crash-counts.json");
-  it("records its source, rule, script and coordinate coverage", () => {
-    expect(d._meta.script).toBe("scripts/build_la_crash_counts.py");
-    expect(d._meta.rule).toMatch(/within 10 m of its boundary/);
-    expect(d._meta.with_coordinates).toBeLessThanOrEqual(d._meta.crashes);
+describe("crash counts are rebuilt per county with a stated boundary rule", () => {
+  const dir = path.join(root, "app/data/crash_counts");
+  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => /^\d{5}\.json$/.test(f)) : [];
+  it("every California county has a file, LA included, except San Francisco", () => {
+    // San Francisco: only 34% of its CCRS crashes have coordinates; its data file uses DataSF's injury-crash records
+    // instead, which this rebuild does not cover yet (docs/DATA-AUDIT-AND-TRANSPARENCY.md).
+    expect(files).toContain("06037.json");
+    expect(files).not.toContain("06075.json");
+    expect(files.filter((f) => f.startsWith("06")).length).toBe(57);
   });
-  it("covers every LA block group with [ped/bike, KSI, all], subsets never exceeding the total", () => {
-    const rows = Object.entries(d).filter(([k]) => k !== "_meta") as [string, number[]][];
-    expect(rows.length).toBeGreaterThanOrEqual(6500);
-    for (const [g, v] of rows) {
-      expect(g).toMatch(/^06037\d{7}$/);
-      expect(v[0]).toBeLessThanOrEqual(v[2]);
-      expect(v[1]).toBeLessThanOrEqual(v[2]);
+  it("each file records its source, rule, script and coordinate coverage; subsets never exceed the total", () => {
+    for (const f of files) {
+      const d = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"));
+      const fips = f.slice(0, 5);
+      expect(d._meta.rule).toMatch(/within 10 m of its boundary/);
+      expect(d._meta.script).toMatch(/^scripts\/build_(crash_counts_ca|state_crash_counts)\.py$/);
+      expect(d._meta.with_coordinates).toBeLessThanOrEqual(d._meta.crashes);
+      for (const [g, v] of Object.entries(d)) {
+        if (g === "_meta") continue;
+        expect(g.startsWith(fips)).toBe(true);
+        const [ped, ksi, all] = v as number[];
+        expect(ped).toBeLessThanOrEqual(all);
+        expect(ksi).toBeLessThanOrEqual(all);
+      }
     }
+  });
+  it("the old LA-only file is gone (one source of crash counts)", () => {
+    expect(fs.existsSync(path.join(root, "app/data/la-crash-counts.json"))).toBe(false);
   });
 });
 

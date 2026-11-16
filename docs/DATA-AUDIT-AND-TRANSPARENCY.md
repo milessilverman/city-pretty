@@ -116,7 +116,14 @@ re-basing them on Census ACS is the next fix.
 figures, can't be the best bet and don't count in totals; partly sourced items are labeled; neighborhood "profit" is
 withheld (it was modeled home-value gain, not profit). See `audit/bundle-catalog-fixes.md`.
 
-### LA crash counts (`la-crash-counts.json`, rebuilt 16 Nov)
+### Crash counts (rebuilt 16 Nov: `app/data/crash_counts/<county>.json`)
+
+California: all counties except San Francisco rebuilt from CCRS with the boundary rule below
+(`scripts/build_crash_counts_ca.py`). The share of crashes with coordinates ranges from 51% (Sutter) to 100%, 74% in
+LA. San Francisco's CCRS crashes are only 34% geocoded, so it keeps its DataSF injury-crash source for now (not yet
+rebuilt with the boundary rule). Other states with public crash services are in progress.
+
+### LA crash counts (detail)
 
 A re-count from CHP's crash database (CCRS) found most crashes are geocoded onto street centerlines, which are usually
 block-group boundaries: in one block group 14 crashes were clearly inside and 46 within 10 m of its edge, half on each
@@ -141,6 +148,13 @@ bundle is rebuilt.
 
 97 hardcoded numbers or claims were found in `app/app.js` (`audit/appjs-constants-audit.md`), 63 with no source. The
 invented dollar outputs were removed and the by-right rules now come from `statutes.json` (`audit/appjs-fixes.md`).
+
+### Source links (`scripts/check_sources.py`, monthly in CI)
+
+First run, 16 Nov: of 172 distinct source URLs in `app/data`, 118 worked, 24 refuse automated requests (not evidence
+they're gone), 13 timed out, and **17 return 404**: moved or removed documents, including the Michigan and Tennessee
+assessment statutes, the Atlanta BeltLine and Waterloo Greenway evaluations, Chicago's transit TIF page and NYC DOT's
+"Measuring the Street". They are being re-located or downgraded. The monthly run fails when a working link breaks.
 
 ## 3. What was built to keep it accurate
 

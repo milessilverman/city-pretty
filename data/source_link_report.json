@@ -1,0 +1,1279 @@
+{
+ "checked": "2026-11-16",
+ "counts": {
+  "ok": 118,
+  "blocked": 24,
+  "broken": 17,
+  "error": 13
+ },
+ "urls": {
+  "https://alison.legislature.state.al.us/code-of-alabama": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.AL.source_url"
+   ]
+  },
+  "https://app.leg.wa.gov/billsummary?BillNumber=1110&Year=2023": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[8].statute_url",
+    "statutes.json[8].statute_url"
+   ]
+  },
+  "https://app.leg.wa.gov/rcw/default.aspx?cite=84.55.010": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.WA.source_url"
+   ]
+  },
+  "https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=51664": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.KY.source_url"
+   ]
+  },
+  "https://azdot.gov/planning/transportation-studies/arizona-passenger-rail-study-phoenix-tucson": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "intercity_transit_corridors.json[0].official_study_url",
+    "intercity_transit_corridors.json[0].source_url"
+   ]
+  },
+  "https://beltline.org/about/the-atlanta-beltline-project/": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "case_studies.json[1].evaluation_url"
+   ]
+  },
+  "https://california.public.law/codes/revenue_and_taxation_code_section_110": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "valuation_backtest_benchmarks.json.counties.06037.legal_basis.sources[1]"
+   ]
+  },
+  "https://california.public.law/codes/revenue_and_taxation_code_section_110.1": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "valuation_backtest_benchmarks.json.counties.06037.legal_basis.sources[0]"
+   ]
+  },
+  "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB840": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[7].statute_url",
+    "statutes.json[7].statute_url"
+   ]
+  },
+  "https://cityofstillwater.granicus.com/MetaViewer.php?clip_id=1809&meta_id=139536&view_id=3": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[26].source_url"
+   ]
+  },
+  "https://clark.wa.gov/sites/default/files/2025-09/0000586-301022-bid-tabulation-with-unilateral-adjustment.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[16].source_url"
+   ]
+  },
+  "https://cms.chathamcountyga.gov/api/assets/purchasing-website/9498b5cc-fa39-442c-ad32-e5031cf5dc0a?download=0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[24].source_url"
+   ]
+  },
+  "https://code.dccouncil.gov/us/dc/council/code/sections/47-820": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.DC.source_url"
+   ]
+  },
+  "https://code.wvlegislature.gov/11-3-1/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.WV.source_url",
+    "state_finance_profiles.json.WV.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://codes.ohio.gov/ohio-revised-code/section-5713.01": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.OH.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://codes.ohio.gov/ohio-revised-code/section-5713.03": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.OH.source_url"
+   ]
+  },
+  "https://codes.ohio.gov/ohio-revised-code/section-5715.01": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.OH.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://coloradoworks.org/urban-renewal/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "funding_programs.json[7].source_url"
+   ]
+  },
+  "https://comptroller.texas.gov/economy/local/ch311/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "funding_programs.json[4].source_url"
+   ]
+  },
+  "https://connect.ncdot.gov/letting/Division%204%20Letting/09-22-2026/DD00528_Bid_Tabs.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[7].source_url",
+    "unit_costs.json[8].source_url"
+   ]
+  },
+  "https://data.lacounty.gov/datasets/lacounty::assessor-parcels-data-2024": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "underused_sites.json[0].sourceUrl",
+    "underused_sites.json[1].sourceUrl",
+    "underused_sites.json[2].sourceUrl",
+    "underused_sites.json[3].sourceUrl",
+    "underused_sites.json[4].sourceUrl"
+   ]
+  },
+  "https://delcode.delaware.gov/title9/c083/sc01/index.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.DE.source_url"
+   ]
+  },
+  "https://docs.legis.wisconsin.gov/statutes/statutes/66/xi/1105": {
+   "status": "error",
+   "detail": "[Errno 104] Connection reset by peer",
+   "used_in": [
+    "state_finance_profiles.json.WI.source_url"
+   ]
+  },
+  "https://doi.org/10.1007/s11146-007-9089-8": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[22].source_url"
+   ]
+  },
+  "https://doi.org/10.1016/j.ecolecon.2010.03.011": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[5].source_url"
+   ]
+  },
+  "https://doi.org/10.1016/j.landurbplan.2009.07.019": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[4].source_url"
+   ]
+  },
+  "https://doi.org/10.1016/j.regsciurbeco.2011.03.013": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[26].source_url"
+   ]
+  },
+  "https://doi.org/10.1073/pnas.1718503115": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[35].source_url"
+   ]
+  },
+  "https://doi.org/10.1078/1618-8667-00025": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[8].source_url"
+   ]
+  },
+  "https://doi.org/10.1080/00222216.2001.11949928": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[19].source_url"
+   ]
+  },
+  "https://doi.org/10.1080/00222216.2005.11950056": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[21].source_url"
+   ]
+  },
+  "https://doi.org/10.1080/02723638.2017.1360041": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[11].source_url"
+   ]
+  },
+  "https://doi.org/10.1111/j.1540-6229.2010.00296.x": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[29].source_url"
+   ]
+  },
+  "https://doi.org/10.1136/jech.2007.071894": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[9].source_url"
+   ]
+  },
+  "https://doi.org/10.1162/003355399556070": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[32].source_url"
+   ]
+  },
+  "https://doi.org/10.1162/qjec.2010.125.1.215": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[31].source_url"
+   ]
+  },
+  "https://doi.org/10.1177/0739456x09354380": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[0].source_url"
+   ]
+  },
+  "https://doi.org/10.1177/0739456x09358555": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[2].source_url"
+   ]
+  },
+  "https://doi.org/10.1257/0002828041464489": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[33].source_url"
+   ]
+  },
+  "https://doi.org/10.1353/urb.2007.0004": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[37].source_url"
+   ]
+  },
+  "https://doi.org/10.2172/1172644": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[34].source_url"
+   ]
+  },
+  "https://doi.org/10.3141/1805-02": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[24].source_url"
+   ]
+  },
+  "https://doi.org/10.3386/w25798": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[36].source_url"
+   ]
+  },
+  "https://doi.org/10.4324/9781351179782": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[27].source_url"
+   ]
+  },
+  "https://dor.georgia.gov/property-tax-valuation": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.GA.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://dor.sd.gov/individuals/taxes/property-tax/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.SD.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://edocs-public.dot.state.mn.us/edocs_public/DMResultSet/download?docId=39047462": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[20].source_url"
+   ]
+  },
+  "https://en.wikipedia.org/wiki/Front_Range_Passenger_Rail": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "intercity_transit_corridors.json[2].source_url"
+   ]
+  },
+  "https://eng.lacity.gov/prop-k": {
+   "status": "error",
+   "detail": "Tunnel connection failed: 502 Bad Gateway",
+   "used_in": [
+    "funding_programs.json[1].source_url"
+   ]
+  },
+  "https://events.ogdencity.com/DocumentCenter/View/28487/2024-Citywide-Striping-Bid-Tab": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[27].source_url"
+   ]
+  },
+  "https://fdotwww.blob.core.windows.net/sitefinity/docs/default-source/fpo/fpc/reports/historicalitemaveragecost/moving/statewide/pdf/historical-item-averages-statewide-12-months.pdf?sfvrsn=32501f5b_16": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[3].source_url",
+    "unit_costs.json[4].source_url",
+    "unit_costs.json[5].source_url"
+   ]
+  },
+  "https://floridacra.org/": {
+   "status": "error",
+   "detail": "Tunnel connection failed: 502 Bad Gateway",
+   "used_in": [
+    "funding_programs.json[5].source_url"
+   ]
+  },
+  "https://floridarevenue.com/property/Pages/Taxpayers_Exemptions.aspx": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "funding_programs.json[6].source_url"
+   ]
+  },
+  "https://flysrq.com/sites/default/files/2023-01/01-30-23%20Agenda%20FINAL.pdf": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "unit_costs.json[25].source_url"
+   ]
+  },
+  "https://ftp.txdot.gov/pub/txdot-info/cmd/cserve/distinfo/cisrpts/004713033.pdf": {
+   "status": "error",
+   "detail": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local ",
+   "used_in": [
+    "unit_costs.json[0].source_url",
+    "unit_costs.json[1].source_url",
+    "unit_costs.json[2].source_url"
+   ]
+  },
+  "https://gardner-ma.gov/DocumentCenter/View/11549/2025-942-DPW---Paving-BId-Tab": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[17].source_url",
+    "unit_costs.json[18].source_url"
+   ]
+  },
+  "https://iga.in.gov/laws/current/ic/title/6/article/1.1/chapter/20.6/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.IN.source_url"
+   ]
+  },
+  "https://indyculturaltrail.org/economic-impact/": {
+   "status": "error",
+   "detail": "Remote end closed connection without response",
+   "used_in": [
+    "case_studies.json[2].evaluation_url",
+    "research.json[12].source_url"
+   ]
+  },
+  "https://ksrevisor.gov/statutes/chapters/ch79/079_014_0039.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.KS.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://law.justia.com/codes/georgia/title-48/chapter-5/article-1/section-48-5-7/": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state_finance_profiles.json.GA.source_url"
+   ]
+  },
+  "https://law.lis.virginia.gov/vacode/title58.1/chapter32/section58.1-3201/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.VA.source_url",
+    "state_finance_profiles.json.VA.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://laws.nmonesource.com/w/nmos/Chapter-7-NMSA-1978#!fragment/zoupio-_Toc140502128": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.NM.source_url"
+   ]
+  },
+  "https://le.utah.gov/xcode/Title59/Chapter2/59-2-S103.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.UT.source_url"
+   ]
+  },
+  "https://le.utah.gov/xcode/Title59/Chapter2/C59-2-S103_2024050120240501.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.UT.field_evidence.res_assessment_ratio.source_url",
+    "state_finance_profiles.json.UT.field_evidence.homestead_exemption_rule.source_url"
+   ]
+  },
+  "https://le.utah.gov/~2021/bills/static/HB0082.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[20].statute_url",
+    "statutes.json[20].statute_url"
+   ]
+  },
+  "https://leg.colorado.gov/bills/hb24-1152": {
+   "status": "error",
+   "detail": "406",
+   "used_in": [
+    "state-housing-laws.json[13].statute_url",
+    "statutes.json[13].statute_url"
+   ]
+  },
+  "https://leg.colorado.gov/bills/hb24-1313": {
+   "status": "error",
+   "detail": "406",
+   "used_in": [
+    "state-housing-laws.json[12].statute_url",
+    "statutes.json[12].statute_url"
+   ]
+  },
+  "https://leg.colorado.gov/bills/sb24-233": {
+   "status": "error",
+   "detail": "406",
+   "used_in": [
+    "state_finance_profiles.json.CO.source_url"
+   ]
+  },
+  "https://leg.mt.gov/bills/mca/title_0150/chapter_0070/part_0010/section_0110/0150-0070-0010-0110.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.MT.source_url",
+    "state_finance_profiles.json.MT.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[15].statute_url",
+    "statutes.json[15].statute_url"
+   ]
+  },
+  "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202120220AB2097": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state-housing-laws.json[5].statute_url",
+    "statutes.json[5].statute_url"
+   ]
+  },
+  "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202120220SB9": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state-housing-laws.json[4].statute_url",
+    "statutes.json[4].statute_url"
+   ]
+  },
+  "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB79": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state-housing-laws.json[0].statute_url",
+    "state-housing-laws.json[1].statute_url",
+    "state-housing-laws.json[2].statute_url",
+    "state-housing-laws.json[3].statute_url",
+    "statutes.json[0].statute_url"
+   ]
+  },
+  "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=51.&lawCode=RTC": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state_finance_profiles.json.CA.source_url"
+   ]
+  },
+  "https://legis.la.gov/legis/Law.aspx?d=206538": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.LA.source_url"
+   ]
+  },
+  "https://legislature.idaho.gov/statutesrules/idstat/Title63/T63CH2/SECT63-205/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.ID.field_evidence.res_assessment_ratio.source_url",
+    "state_finance_profiles.json.ID.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://legislature.idaho.gov/statutesrules/idstat/Title63/T63CH6/SECT63-602G/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.ID.field_evidence.homestead_exemption_rule.source_url"
+   ]
+  },
+  "https://legislature.idaho.gov/statutesrules/idstat/title63/t63ch6/sect63-602g/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.ID.source_url"
+   ]
+  },
+  "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[16].statute_url",
+    "statutes.json[16].statute_url"
+   ]
+  },
+  "https://legislature.maine.gov/statutes/36/title36sec708.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.ME.source_url"
+   ]
+  },
+  "https://legislature.vermont.gov/statutes/section/24/117/04412": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[17].statute_url",
+    "statutes.json[17].statute_url"
+   ]
+  },
+  "https://legislature.vermont.gov/statutes/section/32/121/03481": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.VT.source_url"
+   ]
+  },
+  "https://lis.njleg.state.nj.us/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.NJ.source_url"
+   ]
+  },
+  "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIX/Chapter59/Section2A": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.MA.source_url",
+    "state_finance_profiles.json.MA.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3A": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[18].statute_url",
+    "statutes.json[18].statute_url"
+   ]
+  },
+  "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtp&section=8-103": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.MD.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtp&section=9-105": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.MD.source_url",
+    "state_finance_profiles.json.MD.field_evidence.annual_assessment_cap.source_url",
+    "state_finance_profiles.json.MD.field_evidence.homestead_exemption_rule.source_url"
+   ]
+  },
+  "https://minneapolis2040.com/topics/housing/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[14].statute_url",
+    "statutes.json[14].statute_url"
+   ]
+  },
+  "https://nebraskalegislature.gov/laws/statutes.php?statute=77-201": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.NE.source_url",
+    "state_finance_profiles.json.NE.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://oksenate.gov/about/constitution/article-x/section-8b": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "state_finance_profiles.json.OK.source_url"
+   ]
+  },
+  "https://perkasieborough.org/media/3444/2025_06_02-public-council-packet.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[10].source_url"
+   ]
+  },
+  "https://piquaoh.gov/AgendaCenter/ViewFile/Agenda/_05212024-246": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[9].source_url"
+   ]
+  },
+  "https://portal.crimpr.net/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.PR.source_url"
+   ]
+  },
+  "https://portal.ct.gov/dot/-/media/dot/contracts/0000---2025-3-low-bid/0301-0130.pdf?hash=BDDE2CE8489332E3A5E45B8F571DCD4D&rev=568e00a742474522a6c95008a8a22a60": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[23].source_url"
+   ]
+  },
+  "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=Roll_LandBaseYear%3D'2025'%20AND%20Roll_ImpBaseYear%3D'2025'%20AND%20UseCode%3D'0100'&outFields=...&orderByFields=OBJECTID&resultOffset=<0,1000,...>&resultRecordCount=1000&f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "valuation_backtest_benchmarks.json.counties.06037.sample.queries[0].url_pattern"
+   ]
+  },
+  "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=Roll_LandBaseYear%3D'2026'%20AND%20Roll_ImpBaseYear%3D'2026'%20AND%20UseCode%3D'0100'&outFields=...&orderByFields=OBJECTID&resultOffset=<0,1000,...>&resultRecordCount=1000&f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "valuation_backtest_benchmarks.json.counties.06037.sample.queries[1].url_pattern"
+   ]
+  },
+  "https://railroads.dot.gov/grants-loans/competitive-discretionary-grant-programs/federal-state-partnership-intercity-passenger-rail": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "funding_programs.json[10].source_url"
+   ]
+  },
+  "https://raleighnc.gov/planning-and-building/services/missing-middle-housing": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state-housing-laws.json[19].statute_url",
+    "statutes.json[19].statute_url"
+   ]
+  },
+  "https://resources.ca.gov/grants/urban-greening/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "funding_programs.json[2].source_url"
+   ]
+  },
+  "https://revisor.mo.gov/main/OneSection.aspx?section=137.115": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.MO.source_url",
+    "state_finance_profiles.json.MO.field_evidence.res_assessment_ratio.source_url",
+    "state_finance_profiles.json.MO.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://safecleanwaterla.org/": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "funding_programs.json[0].source_url"
+   ]
+  },
+  "https://sdlegislature.gov/Statutes/10-6-104": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.SD.source_url"
+   ]
+  },
+  "https://smartgrowthamerica.org/resources/safer-streets-stronger-economies/": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "research.json[30].source_url"
+   ]
+  },
+  "https://statutes.capitol.texas.gov/Docs/TX/htm/TX.23.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.TX.source_url"
+   ]
+  },
+  "https://treeequityscore.org/methodology/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[6].verification.original_claimed_citation.source_url"
+   ]
+  },
+  "https://uli.org/case-studies/the-high-line/": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "case_studies.json[0].evaluation_url",
+    "research.json[10].source_url"
+   ]
+  },
+  "https://waterloogreenway.org/about/waterloo-greenway-economic-impact/": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "case_studies.json[7].evaluation_url",
+    "research.json[16].source_url"
+   ]
+  },
+  "https://webserver.rilegislature.gov/Statutes/TITLE44/44-5/44-5-11.6.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.RI.source_url",
+    "state_finance_profiles.json.RI.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://www.akleg.gov/basis/statutes.asp#29.45.110": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.AK.source_url"
+   ]
+  },
+  "https://www.americansforthearts.org/by-program/reports-and-data/research-studies-publications/arts-economic-prosperity-6": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[1].source_url",
+    "research.json[1].verification.original_claimed_citation.source_url"
+   ]
+  },
+  "https://www.atptx.org/light-rail/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "transit_pipelines.json[0].rtp_document_url"
+   ]
+  },
+  "https://www.austintexas.gov/development-services/home-amendments": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[11].statute_url",
+    "statutes.json[11].statute_url"
+   ]
+  },
+  "https://www.azleg.gov/ars/42/13301.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.AZ.source_url"
+   ]
+  },
+  "https://www.azleg.gov/legtext/56leg/2R/laws/0197.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[10].statute_url",
+    "statutes.json[10].statute_url"
+   ]
+  },
+  "https://www.brightlinewest.com/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "intercity_transit_corridors.json[3].official_study_url",
+    "intercity_transit_corridors.json[3].source_url"
+   ]
+  },
+  "https://www.capitol.hawaii.gov/hrscurrent/Vol04_Ch0201-0257/HRS0246/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.HI.source_url"
+   ]
+  },
+  "https://www.cga.ct.gov/current/pub/chap_203.htm#sec_12-62a": {
+   "status": "error",
+   "detail": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local ",
+   "used_in": [
+    "state_finance_profiles.json.CT.source_url"
+   ]
+  },
+  "https://www.chicago.gov/city/en/depts/dcd/provdrs/tif/svcs/transit_tif.html": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "funding_programs.json[8].source_url"
+   ]
+  },
+  "https://www.cnt.org/publications/the-value-of-green-infrastructure-a-guide-to-recognizing-its-economic-environmental-and-social-benefits": {
+   "status": "error",
+   "detail": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, c",
+   "used_in": [
+    "research.json[7].source_url"
+   ]
+  },
+  "https://www.codot.gov/business/eema/assets/2025-cost-data-book.pdf": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "unit_costs.json[15].source_url"
+   ]
+  },
+  "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Department-of-Transportation-and-Infrastructure/Programs-Services/Projects/Colfax-BRT": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "transit_pipelines.json[3].rtp_document_url"
+   ]
+  },
+  "https://www.desperesmo.org/DocumentCenter/View/26018/R25-3905--Contract-with-SIC-Concrete-for-Concrete-Sidewalk-Replacements-BOA": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[21].source_url"
+   ]
+  },
+  "https://www.dfa.arkansas.gov/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.AR.source_url"
+   ]
+  },
+  "https://www.dor.ms.gov/property": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.MS.source_url"
+   ]
+  },
+  "https://www.dura-denver.org/redevelopment-projects/denver-union-station/": {
+   "status": "error",
+   "detail": "Tunnel connection failed: 502 Bad Gateway",
+   "used_in": [
+    "case_studies.json[3].evaluation_url",
+    "research.json[13].source_url"
+   ]
+  },
+  "https://www.fire.ca.gov/what-we-do/natural-resource-management/urban-community-forestry": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "funding_programs.json[3].source_url"
+   ]
+  },
+  "https://www.flsenate.gov/Laws/Statutes/2026/163.387": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.FL.source_url"
+   ]
+  },
+  "https://www.flsenate.gov/Session/Bill/2024/328": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[6].statute_url",
+    "statutes.json[6].statute_url"
+   ]
+  },
+  "https://www.frbsf.org/community-development/publications/community-development-investment-review/2015/december/creative-placemaking-arts-community-economic-development/": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "research.json[3].source_url"
+   ]
+  },
+  "https://www.gencourt.state.nh.us/rsa/html/V/75/75-1.htm": {
+   "status": "error",
+   "detail": "Remote end closed connection without response",
+   "used_in": [
+    "state_finance_profiles.json.NH.source_url"
+   ]
+  },
+  "https://www.greenvillesc.gov/167/Falls-Park": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "case_studies.json[6].evaluation_url"
+   ]
+  },
+  "https://www.gwinnettcounty.com/static/upload/bid/802542/BL129-26%20Award%20Tab.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[6].source_url"
+   ]
+  },
+  "https://www.housingstudies.org/releases/measuring-impact-606/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[15].source_url",
+    "research.json[15].verification.original_claimed_citation.source_url"
+   ]
+  },
+  "https://www.ilga.gov/legislation/ilcs/ilcs4.asp?DocName=006500050HArt.+11+Div.+74.4": {
+   "status": "error",
+   "detail": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local ",
+   "used_in": [
+    "state_finance_profiles.json.IL.source_url"
+   ]
+  },
+  "https://www.invillapark.com/DocumentCenter/View/12557/Bid-Tabulation---2025-Sidewalk-Improvements-": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[11].source_url"
+   ]
+  },
+  "https://www.itdp.org/publication/cleveland-healthline-brt/": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "case_studies.json[5].evaluation_url",
+    "research.json[18].source_url"
+   ]
+  },
+  "https://www.kalamazoocity.org/files/assets/public/v/1/purchasing/bid-documents/2025/91396-022.0/91396-022.0-bid-tabulation.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[12].source_url"
+   ]
+  },
+  "https://www.ksrevisor.org/statutes/chapters/ch79/079_014_0039.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.KS.source_url"
+   ]
+  },
+  "https://www.leg.state.nv.us/NRS/NRS-361.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.NV.field_evidence.res_assessment_ratio.source_url",
+    "state_finance_profiles.json.NV.field_evidence.annual_assessment_cap.source_url"
+   ]
+  },
+  "https://www.leg.state.nv.us/nrs/nrs-361.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.NV.source_url"
+   ]
+  },
+  "https://www.legis.iowa.gov/docs/code/441.21.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.IA.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://www.legis.iowa.gov/docs/ico/chapter/441.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.IA.source_url"
+   ]
+  },
+  "https://www.legis.state.pa.us/cfdocs/legis/LI/consCheck.cfm?txtType=HTM&ttl=53": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.PA.source_url"
+   ]
+  },
+  "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-211-27a": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.MI.field_evidence.res_assessment_ratio.source_url",
+    "state_finance_profiles.json.MI.field_evidence.annual_assessment_cap.source_url",
+    "state_finance_profiles.json.MI.field_evidence.uncaps_on_sale.source_url"
+   ]
+  },
+  "https://www.legislature.mi.gov/statutes/mcl-211-27a": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "state_finance_profiles.json.MI.source_url"
+   ]
+  },
+  "https://www.mesaaz.gov/files/assets/public/v/2/business-development/engineering/constructionbid/cp0062cap-cp0062wtr-cp0062gas-cp0956sr18_results.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[13].source_url",
+    "unit_costs.json[14].source_url"
+   ]
+  },
+  "https://www.metro.net/projects/westside/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "transit_pipelines.json[1].rtp_document_url"
+   ]
+  },
+  "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_105/GS_105-286.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.NC.source_url"
+   ]
+  },
+  "https://www.ndlegis.gov/cencode/t57c02.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.ND.source_url",
+    "state_finance_profiles.json.ND.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://www.newrochelleny.gov/DocumentCenter/View/20837/5785-Bid-Tabulation?bidId=": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[19].source_url"
+   ]
+  },
+  "https://www.nyc.gov/html/dot/downloads/pdf/2012-10-measuring-the-street.pdf": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "research.json[28].source_url"
+   ]
+  },
+  "https://www.nysenate.gov/legislation/laws/RPT/1805": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state_finance_profiles.json.NY.source_url"
+   ]
+  },
+  "https://www.octa.net/projects-and-programs/all-projects/rail-projects/oc-streetcar/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "transit_pipelines.json[2].rtp_document_url"
+   ]
+  },
+  "https://www.okc.gov/government/maps-3/maps-history": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "case_studies.json[4].evaluation_url",
+    "research.json[17].source_url"
+   ]
+  },
+  "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[9].statute_url",
+    "statutes.json[9].statute_url"
+   ]
+  },
+  "https://www.oregonlegislature.gov/bills_laws/ors/ors308.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.OR.source_url"
+   ]
+  },
+  "https://www.phoenix.gov/econdev/gplet": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "funding_programs.json[9].source_url"
+   ]
+  },
+  "https://www.placeeconomics.com/resources/twenty-four-reasons-historic-preservation-is-good-for-your-community/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[38].source_url",
+    "research.json[38].verification.original_claimed_citation.source_url"
+   ]
+  },
+  "https://www.portland.gov/bps/planning/central-city/south-waterfront": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "research.json[14].source_url"
+   ]
+  },
+  "https://www.railstotrails.org/resource-library/resources/active-transportation-transforms-america-report/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[23].source_url"
+   ]
+  },
+  "https://www.railstotrails.org/resource-library/resources/active-transportation-transforms-america/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[23].verification.original_claimed_citation.source_url"
+   ]
+  },
+  "https://www.revisor.mn.gov/statutes/cite/273.13": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.MN.source_url",
+    "state_finance_profiles.json.MN.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://www.scstatehouse.gov/code/t12c037.php": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.SC.field_evidence.annual_assessment_cap.source_url"
+   ]
+  },
+  "https://www.scstatehouse.gov/code/t12c043.php": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.SC.source_url",
+    "state_finance_profiles.json.SC.field_evidence.res_assessment_ratio.source_url",
+    "state_finance_profiles.json.SC.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://www.tn.gov/comptroller/divisions/property-assessments/assessment.html": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "state_finance_profiles.json.TN.source_url"
+   ]
+  },
+  "https://www.tn.gov/content/dam/tn/tdot/construction/previous_lettings/Const_aup2025.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[22].source_url"
+   ]
+  },
+  "https://www.tpl.org/measuring-economic-value-city-park-system": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[20].source_url"
+   ]
+  },
+  "https://www.transit.dot.gov/research-innovation/capturing-value-transit-complete-report": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "research.json[25].source_url"
+   ]
+  },
+  "https://www.transitchicago.com/rle/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "transit_pipelines.json[4].rtp_document_url"
+   ]
+  },
+  "https://www.treeequityscore.org/methodology": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[6].source_url"
+   ]
+  },
+  "https://www.txdot.gov/projects/hearings-meetings/intercity-passenger-rail-study.html": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "intercity_transit_corridors.json[1].official_study_url",
+    "intercity_transit_corridors.json[1].source_url"
+   ]
+  },
+  "https://wyoleg.gov/statutes/compress/title39.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.WY.source_url",
+    "state_finance_profiles.json.WY.field_evidence.res_assessment_ratio.source_url"
+   ]
+  }
+ }
+}

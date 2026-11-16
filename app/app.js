@@ -5,7 +5,7 @@ const $ = s => document.querySelector(s);
 // fetched when needed. cpText(id) returns a promise of the file's text (cached); cpTextNow(id) returns it only if loaded.
 const CP_DATA_FILES = {
   "bundle": "bundle-la.b64.txt", "details-chunks": "details-la.json", "overlay-chunks": "overlays-la.json",
-  "sites-data": "sites-la.b64.txt", "la-crash-counts": "la-crash-counts.json", "bundle-oc": "bundle-oc.b64.txt",
+  "sites-data": "sites-la.b64.txt", "bundle-oc": "bundle-oc.b64.txt",
   "research": "research.json", "statutes": "statutes.json", "state-housing-laws": "state-housing-laws.json",
   "funding-programs": "funding_programs.json", "case-studies": "case_studies.json", "transit-pipelines": "transit_pipelines.json",
   "state-finance-profiles": "state_finance_profiles.json", "unit-costs": "unit_costs.json", "hud-fmr": "hud_fair_market_rents.json",
@@ -3429,6 +3429,32 @@ function rebateFor(t) {   // the upgrade table's rebate notes name LA programmes
     .replace("LADWP or SCE charger rebate: check current amount", "Utility charger rebate: check current amount")
     .replace(/^(CalHFA ADU program: check whether funding is open|SGIP: check remaining funds|TECH Clean California.*|Earthquake Brace \+ Bolt grant up to \$3,000)$/, m => isCAActive() ? m : "California program; check local programs");
 }
+// Crash counts rebuilt per county with a stated boundary rule (scripts/build_crash_counts_ca.py,
+// scripts/build_state_crash_counts.py): a crash counts for a block group if it is inside it or within 10 m of its
+// boundary. The county data files' own counts gave each boundary-street crash to one side. Loaded on demand; the text
+// updates on the next render once the file arrives.
+const CRASH_COUNTS = {};
+function crashCountsFor(fips) {
+  if (!fips) return null;
+  if (!(fips in CRASH_COUNTS)) {
+    CRASH_COUNTS[fips] = undefined;
+    try {
+      fetch(`app/data/crash_counts/${fips}.json`).then(r => (r.ok ? r.json() : null)).then(d => { CRASH_COUNTS[fips] = d || null; }, () => { CRASH_COUNTS[fips] = null; });
+    } catch (e) { CRASH_COUNTS[fips] = null; }
+  }
+  return CRASH_COUNTS[fips];
+}
+function crashTextFor(fips, bg) {
+  const d = crashCountsFor(fips);
+  const c = d && Array.isArray(d[bg]) ? d[bg] : null;
+  if (!c) return null;
+  const mt = d._meta || {};
+  const yrs = mt.years ? (Array.isArray(mt.years) ? `${mt.years[0]}–${mt.years[mt.years.length - 1]}` : String(mt.years)) : "2023–2025";
+  const src = /CCRS/.test(mt.source || "") ? "CHP CCRS" : (mt.source_short || mt.source || "state crash records");
+  const placed = mt.crashes ? Math.round(100 * mt.with_coordinates / mt.crashes) : null;
+  return `${c[2]} crashes recorded inside this block group or on its boundary streets (${src} ${yrs}): ${c[0]} involving a pedestrian or cyclist, ${c[1]} with someone killed or seriously injured` +
+    (placed !== null && placed < 100 ? `; only the ${placed}% of this county's crashes that have coordinates can be placed, so true counts are higher` : "");
+}
 function whyFix(t) {
   // The street-tree "local sales estimate" came from an LA-only regression that could not be reproduced (audit 16 Nov 2026);
   // never call it local, and outside LA say where it came from.
@@ -3443,22 +3469,13 @@ function whyFix(t) {
     const cy = ((((typeof SITES !== "undefined" && SITES) || {}).meta || {})[activeFips()] || {}).crash_years;
     // round 8.6: the fatal/severe count covers crashes of every kind (metrics_oc: ksi over all crash points), the second count only
     // pedestrian/bike ones; both get the county's crash years where known
-    t = String(t).replace(/\b(\d+) fatal\/severe and (\d+) pedestrian\/bike (crash(?:es)?) recorded\b/g, (_, a, b, c) => `${a} fatal or severe-injury ${a === "1" ? "crash" : "crashes"} of any kind and ${b} pedestrian/bike ${c} recorded` + (cy && cy.length === 2 ? ` ${cy[0]}–${cy[1]}` : ""));
+    const rebuilt = typeof selected !== "undefined" && selected ? crashTextFor(activeFips(), selected) : null;
+    t = String(t).replace(/\b(\d+) fatal\/severe and (\d+) pedestrian\/bike (crash(?:es)?) recorded\b/g, (_, a, b, c) => rebuilt || (`${a} fatal or severe-injury ${a === "1" ? "crash" : "crashes"} of any kind and ${b} pedestrian/bike ${c} recorded` + (cy && cy.length === 2 ? ` ${cy[0]}–${cy[1]}` : "") + " (older count that gave each boundary-street crash to one side)"));
   }
   if (!t || !String(typeof selected !== "undefined" && selected || "").startsWith("06037")) return t;
   // The LA bundle's text counts every crash as "pedestrian/bike" (checked 7 Nov 2026 against CCRS). Show the rebuilt counts instead.
-  if (window.__LAC === undefined) {
-    const t = cpTextNow("la-crash-counts");
-    if (t === null) cpText("la-crash-counts");   // still downloading; counts show on the next render
-    else { try { window.__LAC = JSON.parse(t || "null"); } catch (e) { window.__LAC = null; } cpRelease("la-crash-counts"); }
-  }
-  const c = window.__LAC && Array.isArray(window.__LAC[selected]) ? window.__LAC[selected] : null;
-  // Rebuilt counts (scripts/build_la_crash_counts.py): crashes inside the block group or within 10 m of its boundary.
-  // Most crashes sit on boundary streets, so these count for both neighbors; the older build gave each to one side.
-  const lm = window.__LAC && window.__LAC._meta;
-  const placed = lm && lm.crashes ? Math.round(100 * lm.with_coordinates / lm.crashes) : null;
-  const real = c ? `${c[2]} crashes recorded inside this block group or on its boundary streets (CHP CCRS 2023–2025): ${c[0]} involving a pedestrian or cyclist, ${c[1]} with someone killed or seriously injured${placed ? `; only the ${placed}% of LA County crashes that have coordinates can be placed, so true counts are higher` : ""}` : null;
-  const old = n => `${n} crashes of all kinds recorded (CCRS 2023–2026, older count that assigned each boundary-street crash to one side)`;
+  const real = crashTextFor("06037", selected);
+  const old = n => `${n} crashes of all kinds recorded (CCRS 2023–2026, older count that gave each boundary-street crash to one side)`;
   return String(t).replace(/\b0 fatal\/severe and (\d+) pedestrian\/bike crashes recorded/g, (_, n) => real || old(n))
     .replace(/\b(\d+) pedestrian or bike crashes recorded/g, (_, n) => real || old(n))
     .replace(/\b(\d+) pedestrian\/bike crashes\b(?! recorded)/g, (_, n) => real || old(n));
@@ -7037,7 +7054,9 @@ function select(id, fly) {
   add("Single-family share", m.sf, v => Math.round(v) + "%"); add("Households without a car", m.nocar, v => Math.round(v) + "%");
   if (!oc) { add("Street trees (city survey)", m.st, fmtN); add("Open tree sites", m.ts, fmtN); }
   add("Canopy gap to goal (Tree Equity)", m.tg, v => (+v).toFixed(0) + " pts");
-  add("Property crimes, 12 mo", m.pcr, fmtN); add("Fatal/severe crashes recorded", m.ksi, fmtN);
+  add("Property crimes, 12 mo", m.pcr, fmtN); { const cc = crashCountsFor(activeFips()); const row = cc && typeof selected !== "undefined" ? cc[selected] : null;
+    if (Array.isArray(row)) add("Crashes with someone killed or seriously injured, inside or on boundary streets", row[1], fmtN);
+    else add("Fatal/severe crashes recorded (older count, boundary crashes on one side only)", m.ksi, fmtN); }
   if (!oc) { add("Dumping/litter reports, 12 mo (311)", m.dump, fmtN); add("Graffiti reports, 12 mo (311)", m.graf, fmtN); }
   if (oc && m.nearest_transit && m.nearest_transit.station) add("Nearest rail station", `${esc(m.nearest_transit.station)}${m.nearest_transit.lines ? " (" + esc(m.nearest_transit.lines) + ")" : ""}${m.nearest_transit.distance_mi != null ? ", " + m.nearest_transit.distance_mi + " mi" : ""}`);
   add("Freeway distance", m.fw, v => fmtN(v) + " m"); add("Nearest supermarket", m.gro, v => (v / 1609).toFixed(1) + " mi"); add("Restaurants & cafés within 400 m", m.din, fmtN);
@@ -9647,7 +9666,7 @@ async function init() {
   performance.mark("init:wired"); map.fitBounds(L.geoJSON(D.bgs).getBounds(), { animate: false }); performance.mark("init:fit");
   drawContext(); performance.mark("init:context");
   initCountyPicker();
-  cpText("la-crash-counts"); setTimeout(() => cpText("overlay-chunks"), 800);   // small/background downloads after first paint
+  setTimeout(() => cpText("overlay-chunks"), 800);   // small/background downloads after first paint
   setTimeout(() => loadSites().then(() => { if (selected) { const f = byId.get(selected); if (f) fillSites(f.properties); } }), 1200);
   const start = D.meta.default_bg && byId.has(D.meta.default_bg) ? D.meta.default_bg : D.bgs.features[0].properties.id;
   const initHash = window.location.hash.match(/#bg=([0-9]+)/);

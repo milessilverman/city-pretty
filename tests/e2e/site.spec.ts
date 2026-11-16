@@ -371,12 +371,12 @@ test("LA crash text uses the rebuilt counts, states the boundary rule and the co
     const w = window as any;
     const id = w.D.bgs.features[0].properties.id;
     w.select(id, false);
-    w.__LAC = { [id]: [4, 2, 37], _meta: { crashes: 100, with_coordinates: 74 } };
+    ev("CRASH_COUNTS")["06037"] = { [id]: [4, 2, 37], _meta: { crashes: 100, with_coordinates: 74, source: "CHP California Crash Reporting System (CCRS)", years: [2023, 2025] } };
     return ev("whyFix")("12 pedestrian or bike crashes recorded");
   });
   expect(out).toContain("37 crashes recorded inside this block group or on its boundary streets");
   expect(out).toContain("4 involving a pedestrian or cyclist");
-  expect(out).toContain("only the 74% of LA County crashes that have coordinates");
+  expect(out).toContain("only the 74% of this county's crashes that have coordinates");
   expect(out).not.toContain("12 ");
   expect(errors).toEqual([]);
 });
