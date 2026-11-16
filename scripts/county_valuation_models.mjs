@@ -13,7 +13,7 @@ import path from "node:path";
 import zlib from "node:zlib";
 import { fileURLToPath } from "node:url";
 import { errorMetrics, groupedMetrics, priceBand, passesGate } from "./lib/backtestMetrics.mjs";
-import { neighborhoodStats, fitRegression, fitAssessorRatio, predictor, leakageCount, statsForPage, FEATURE_SETS } from "./lib/countyValuationModels.mjs";
+import { neighborhoodStats, fitRegression, fitAssessorRatio, predictor, leakageCount, statsForPage, FEATURE_SETS, setLegacyNullRooms } from "./lib/countyValuationModels.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CONFIG = path.join(ROOT, "scripts/backtests/county_config.json");
@@ -21,6 +21,7 @@ const [fips, mode] = process.argv.slice(2);
 const cfgAll = JSON.parse(fs.readFileSync(CONFIG, "utf8"));
 const cfg = cfgAll[fips];
 if (!cfg || !["dev", "final"].includes(mode)) { console.error("usage: <fips> dev|final (fips must be in county_config.json)"); process.exit(2); }
+setLegacyNullRooms(cfg.legacy_null_rooms);
 
 const data = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(ROOT, cfg.sales_file))).toString());
 const inWin = (r, [a, b]) => r.date >= a && r.date <= b;

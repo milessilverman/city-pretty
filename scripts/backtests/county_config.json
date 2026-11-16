@@ -23,7 +23,9 @@
     "neighborhood_ppsf_x_sqft": 0.1334,
     "regression": 0.0993
    }
-  }
+  },
+  "legacy_null_rooms": true,
+  "legacy_null_rooms_note": "Final ran 16 Nov before the missing-rooms fix: a missing bedroom/bathroom count was read as 0 (DC 2 rows, Cook 8, Philadelphia 81 bed / 1,280 bath). Kept so the one-time result reproduces; re-test on a new window."
  },
  "12057": {
   "sales_file": "data/backtests/sales_12057_2026-11-16.json.gz",
@@ -77,7 +79,9 @@
     "neighborhood_ppsf_x_sqft": 0.2163,
     "regression": 0.1888
    }
-  }
+  },
+  "legacy_null_rooms": true,
+  "legacy_null_rooms_note": "Final ran 16 Nov before the missing-rooms fix: a missing bedroom/bathroom count was read as 0 (DC 2 rows, Cook 8, Philadelphia 81 bed / 1,280 bath). Kept so the one-time result reproduces; re-test on a new window."
  },
  "53033": {
   "sales_file": "data/backtests/sales_53033_2026-11-16.json.gz",
@@ -293,6 +297,8 @@
     "regression": 0.202,
     "regression_with_assessor": 0.1662
    }
-  }
+  },
+  "legacy_null_rooms": true,
+  "legacy_null_rooms_note": "Final ran 16 Nov before the missing-rooms fix: a missing bedroom/bathroom count was read as 0 (DC 2 rows, Cook 8, Philadelphia 81 bed / 1,280 bath). Kept so the one-time result reproduces; re-test on a new window."
  }
 }

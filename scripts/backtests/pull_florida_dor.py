@@ -24,7 +24,7 @@ Assessor value: JV, Florida's just value as of 1 January 2026 (s. 192.042, F.S.)
 every 2026 sale, so it may be used for sales in the test window. (Caveat recorded with the results: values are set
 as of 1 January but certified later in the year.)
 
-Usage: python3 scripts/backtests/pull_florida_dor.py <county number> <county fips> "<county name>"
+Usage: python3 scripts/backtests/pull_florida_dor.py <county number> <county fips> "<DOR file name>" ["<display name>"]
        e.g. 39 12057 "Hillsborough"
 Output: data/backtests/sales_<fips>_<date>.json.gz (shared schema; scripts/lib/countyValuationModels.mjs)
 """
@@ -57,6 +57,7 @@ def fetch_zip(kind, name):
 
 def main():
     co, fips, cname = sys.argv[1], sys.argv[2], sys.argv[3]
+    display = sys.argv[4] if len(sys.argv) > 4 else cname   # DOR files Miami-Dade as "Dade"
     today = date.today().isoformat()
     label = f"{cname} {co} Final"
     sdf_url, sdf = fetch_zip("SDF", label)
@@ -99,7 +100,7 @@ def main():
                      "sqft": sq, "lot": lot, "yb": int(yb), "eff": None, "beds": None, "baths": None, "units": 1,
                      "av": jv, "av_date": "2026-01-01"})
 
-    out = {"county_fips": fips, "county_name": f"{cname} County", "pulled": today,
+    out = {"county_fips": fips, "county_name": f"{display} County", "pulled": today,
            "sources": [f"{sdf_url} (Florida DOR SDF, 2026 Final roll: sales 2025-2026, QUAL_CD)", f"{nal_url} (Florida DOR NAL, 2026 Final roll: characteristics and just value as of 1 Jan 2026)",
                        "https://floridarevenue.com/property/dataportal/Documents/PTO Data Portal/User Guides/2026 Users guide and quick reference/2026_NAL_SDF_NAP_Users_Guide.pdf (QUAL_CD definitions)"],
            "filters": ["QUAL_CD 01 or 02 (DOR: qualified as arm's length, included in sales ratio analysis)", "not a multi-parcel sale", "price >= $25,000",
