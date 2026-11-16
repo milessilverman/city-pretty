@@ -20,7 +20,21 @@ const TIGER = "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tig
 const pointQuery = (lat, lng, outFields) =>
   new URLSearchParams({ geometry: `${lng},${lat}`, geometryType: "esriGeometryPoint", inSR: "4326", spatialRel: "esriSpatialRelIntersects", outFields, returnGeometry: "false", f: "json" });
 
+// One retry, after a short pause, when a request fails at the network level (no HTTP answer at all). FEMA's NFHL drops
+// some connections when several queries arrive together (seen in the live panel check, 16 Nov 2026), which the browser
+// reports as "Failed to fetch"; a second try usually answers. Timeouts and HTTP or service errors are not retried.
+const RETRY_PAUSE_MS = 900;
 async function getJson(url, fetcher) {
+  try {
+    return await getJsonOnce(url, fetcher);
+  } catch (e) {
+    if (!(e && e.name === "TypeError")) throw e;
+    await new Promise((r) => setTimeout(r, RETRY_PAUSE_MS));
+    return getJsonOnce(url, fetcher);
+  }
+}
+
+async function getJsonOnce(url, fetcher) {
   const ctl = typeof AbortController !== "undefined" ? new AbortController() : null;
   const t = ctl ? setTimeout(() => ctl.abort(), TIMEOUT_MS) : null;
   try {

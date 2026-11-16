@@ -2063,6 +2063,8 @@ const css = (n, fb) => getComputedStyle(document.documentElement).getPropertyVal
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmt$ = v => v == null || isNaN(v) ? "–" : v >= 1e9 ? "$" + (v/1e9).toFixed(1) + "B" : v >= 1e6 ? "$" + (v/1e6).toFixed(v >= 1e7 ? 0 : 1) + "M" : v >= 1e3 ? "$" + Math.round(v/1e3) + "k" : "$" + Math.round(v);
 const fmtN = v => v == null || isNaN(v) ? "–" : Math.round(v).toLocaleString();
+// Rent to the dollar: fmt$ rounds to thousands, which showed a $2,356 median rent as "$2k" (found by the live panel check).
+const fmtRent = v => v == null || isNaN(v) || !v ? "–" : "$" + Math.round(v).toLocaleString("en-US") + "/mo";
 const GRADE_TXT = { A: "A · claimed LA sales estimate (not reproducible)", B: "B · studied elsewhere", C: "C · transferred from a related study", D: "D · assumption", U: "U · unverified research lead (round 6)" };
 // ---------------- Intervention verification gate ----------------
 // docs/audit/bundle-catalog-audit.md (16 Nov 2026) checked each catalog item's effect size and cost against its sources.
@@ -4499,6 +4501,16 @@ function houseFacts(a, lot, osm, PF, st) {
   return F;
 }
 
+// Names the state's housing-law records on file that could bear on an ADU ("adu") or on more homes on a lot ("middle"),
+// without claiming any applies: each law's conditions are checked against the parcel in the by-right section.
+function houseLawNote(st, kind) {
+  const recs = statuteRecordsForState(st).filter(r => r.parcel_level !== false && !r.commercial_or_industrial_only && r.applies_to_zone !== "commercial" && !STATUTE_NOT_PARCEL_LEVEL.has(r.id));
+  const isAdu = r => /\badu\b|accessory/i.test((r.id || "") + " " + (r.short_name || ""));
+  const pick = recs.filter(r => kind === "adu" ? isAdu(r) : !isAdu(r));
+  if (!pick.length) return `; no state ${kind === "adu" ? "ADU" : "middle-housing or lot-split"} law for ${st} is on file here`;
+  return `; state law on file: ${pick.map(r => esc(r.short_name || r.bill_number || r.id) + " (" + statuteStatusLabel(r) + ")").join("; ")}, which applies only where all of its conditions are met (see Housing laws & rights)`;
+}
+
 function houseChecks(a, lot, m, z, hMax, F, R) {
   const res = /^0/.test(String(a.UseCode || "")) || /resid/i.test(a.UseType || "");
   const { bldg, beds, baths, units, yb, foot, yard } = F;
@@ -4523,38 +4535,38 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
   }
   if (F.dec && F.dec.adu) add("Recorded ADU", "note", `The Assessor records ${/^[AEIOU]/.test(F.dec.adu) ? "an" : "a"} ${F.dec.adu} on this lot.`);
   if (F.dec && F.dec.mills) add("Historic tax incentive (Mills Act / Landmark)", "note", "This property has a historic preservation tax incentive contract.");
+  // A use the parcel service doesn't record (or records only as a bare code) is unknown, not non-residential.
+  if (!res && a.UseType === "unknown") { add("Home upgrades", "note", `The parcel service doesn't record this lot's use${a.UseDescription && !/ parcel$/.test(a.UseDescription) ? ` (it gives "${esc(a.UseDescription)}")` : ""}, so the residential checks aren't run.`); return out(); }
   if (!res) { add("Home upgrades", "no", `This parcel is ${esc(a.UseDescription || "not residential")}, so residential homeowner checks do not apply.`); return out(); }
   if (F.second) add("Second building on the lot", "note", F.slots.length > 1 ? `The Assessor lists ${F.slots.length} structures (${F.slots.map(x => fmtN(x.sqft) + " sq ft").join(", ")}): an existing ADU or guest house may already be present.` : "Second structure (garage or studio) detected on building footprint outlines.");
   
-  if (yard >= 800) add("Detached ADU (backyard home)", "yes", `${F.dec && F.dec.adu ? `One ${F.dec.adu} is already recorded; room for another. ` : ""}About ${fmtN(yard)} sq ft of open yard after setbacks; easily fits a 600–800 sq ft detached ADU with 4-ft rear/side setbacks.`);
+  if (yard >= 800) add("Detached ADU (backyard home)", "yes", `${F.dec && F.dec.adu ? `One ${F.dec.adu} is already recorded; room for another. ` : ""}About ${fmtN(yard)} sq ft of open yard after setbacks; ${st === "CA" ? "easily fits a 600–800 sq ft detached ADU with the 4-ft rear/side setbacks state law allows (Gov. Code § 66314(d)(7))." : "room for a 600–800 sq ft detached unit by size; whether one is allowed, and its setbacks, depend on local code" + houseLawNote(st, "adu") + "."}`);
   else if (yard >= 400) add("Detached ADU", "maybe", `Only ~${fmtN(yard)} sq ft of open yard: a 400 sq ft studio ADU or garage conversion is more viable.`);
   else add("Detached ADU", "no", `Limited open yard (~${fmtN(yard)} sq ft); a garage conversion or Junior ADU is recommended.`);
   
   if (sf && bldg >= 1000) {
     if (st === "CA") {
       add("Junior ADU (inside the house, up to 500 sq ft)", "yes", `${fmtN(bldg)} sq ft single-family home: state law (Gov. Code §§ 66313 and 66333) allows converting up to 500 sq ft of interior livable space; since 1 Jan 2026 (AB 1154) owner-occupancy is required only if the JADU shares bathroom facilities with the main home, and rentals must be longer than 30 days.`);
-    } else if (st === "WA") {
-      add("Internal ADU suite (up to 500 sq ft)", "yes", `${fmtN(bldg)} sq ft single-family home: WA HB 1337 allows up to two accessory units per lot including internal conversions by right with zero owner-occupancy mandates.`);
-    } else if (st === "FL") {
-      add("Internal ADU suite (up to 500 sq ft)", "yes", `${fmtN(bldg)} sq ft home: Florida Live Local Act & local infill standards allow internal apartment conversions with utility submetering.`);
     } else {
-      add("Junior ADU / interior suite (up to 500 sq ft)", "yes", `${fmtN(bldg)} sq ft single-family home: internal accessory conversion generates rental income under federal Fannie Mae / FHA accessory housing standards.`);
+      // Outside California no state interior-unit rule is encoded; say what is on file and leave the answer to local code.
+      add("Interior accessory suite", "maybe", `${fmtN(bldg)} sq ft single-family home: room for an interior unit by size; whether one is allowed depends on local code${houseLawNote(st, "adu")}.`);
     }
   }
   if (units >= 2 && sf) add("Existing second unit", "note", `Assessor roll shows ${units} units here.`);
   
-  // State-specific lot split / missing-middle housing rights
-  const splitName = st === "CA" ? "SB 9 lot split / second home" : st === "WA" ? "WA HB 1110 Middle Housing split" : st === "TX" ? "Austin HOME 3-unit infill split" : st === "OR" ? "HB 2001 Middle Housing split" : "Missing-middle duplex / lot split";
-  if (sf && hist) add(splitName, "no", `Lot split deregulation does not apply in designated historic districts or on landmarks.`);
-  else if (sf && lot >= 2400 && !fire && !slide && !fault) {
-    if (st === "CA") add(splitName, "yes", `${fmtN(lot)} sq ft single-family parcel: SB 9 allows a split into two ~${fmtN(Math.round(lot/2))} sq ft lots and up to 4 total units.`);
-    else if (st === "WA") add(splitName, "yes", `${fmtN(lot)} sq ft parcel: WA HB 1110 allows up to 2–4 middle housing units by right with zero parking minimums near transit.`);
-    else if (st === "TX") add(splitName, "yes", `${fmtN(lot)} sq ft parcel: Austin HOME Initiative authorizes up to 3 units on single-family lots down to 2,000 sq ft.`);
-    else if (st === "OR") add(splitName, "yes", `${fmtN(lot)} sq ft parcel: Oregon HB 2001 permits duplexes and cottage clusters by right on residential lots.`);
-    else add(splitName, "yes", `${fmtN(lot)} sq ft parcel: eligible for duplex conversion or accessory dwelling infill under municipal infill schedule.`);
-  } else if (sf && lot >= 2400 && fire) add(splitName, "no", `Located in a high wildfire hazard zone, subject to statutory environmental/safety exclusions.`);
-  else if (sf && lot >= 2400 && (slide || fault)) add(splitName, "no", `Located in a fault or landslide hazard zone; restricted unless geotechnical clearance is certified.`);
-  else if (sf) add(splitName, "no", `Lot size is ${fmtN(lot)} sq ft; requires larger parcel envelope to create two legal lots.`);
+  // Lot split / missing-middle housing. Only California's SB 9 is evaluated here (its conditions are the ones checked
+  // above). Elsewhere no law is asserted for the parcel: the state's records on file are named, and whether each applies
+  // is decided with its conditions in the by-right check, never assumed.
+  if (st === "CA") {
+    const splitName = "SB 9 lot split / second home";
+    if (sf && hist) add(splitName, "no", `SB 9 does not apply in designated historic districts or on landmarks.`);
+    else if (sf && lot >= 2400 && !fire && !slide && !fault) add(splitName, "yes", `${fmtN(lot)} sq ft single-family parcel: SB 9 allows a split into two ~${fmtN(Math.round(lot/2))} sq ft lots and up to 4 total units.`);
+    else if (sf && lot >= 2400 && fire) add(splitName, "no", `Located in a very high fire hazard severity zone: SB 9 excludes these sites unless they meet the state\'s fire-hazard mitigation measures (Gov. Code § 65913.4(a)(6)(D)).`);
+    else if (sf && lot >= 2400 && (slide || fault)) add(splitName, "no", `Located in a fault or landslide hazard zone; restricted unless geotechnical clearance is certified.`);
+    else if (sf) add(splitName, "no", `Lot size is ${fmtN(lot)} sq ft; SB 9 requires each new lot to be at least 1,200 sq ft.`);
+  } else if (sf) {
+    add("Duplex, middle housing or lot split", "maybe", `${fmtN(lot)} sq ft parcel${hist ? " in a historic district or on a landmark (preservation review applies)" : ""}: allowed only where local zoning or a state law permits it${houseLawNote(st, "middle")}.`);
+  }
   
   if (F.pool) add("Swimming pool", "note", `There is already a ${F.dec && F.dec.pool ? F.dec.pool : "pool"} on this lot (${F.src.pool}).`);
   else if (yard >= 1200) add("Swimming pool", "yes", `~${fmtN(yard)} sq ft of open yard.`);
@@ -4573,9 +4585,10 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
   
   if (yb && yb < 1980 && sf) {
     if (st === "CA" || st === "WA" || st === "OR") {
-      add("Seismic bolting and bracing", "yes", `Built in ${yb}: raised foundation qualifies for ${st === "CA" ? "California Earthquake Brace + Bolt grant (up to $3,000)" : "state seismic retrofit standards"}.`);
+      // Eligibility for these programs depends on facts not on file here (foundation type, ZIP code, open funding rounds).
+      add("Seismic bolting and bracing", "maybe", `Built in ${yb}, before modern bolting was standard; if the house sits on a raised foundation, ${st === "CA" ? "it may be eligible for a California Earthquake Brace + Bolt grant (up to $3,000; only in eligible ZIP codes)" : "a bolting and bracing retrofit is worth an inspection"}.`);
     } else if (st === "FL" || st === "TX" || st === "LA" || st === "SC" || st === "NC") {
-      add("Hurricane & storm hardening (roof clips & impact glass)", "yes", `Built in ${yb}: pre-1990 roof-to-wall connections qualify for ${st === "FL" ? "My Safe Florida Home grant (up to $10,000)" : "windstorm insurance mitigation discounts"}.`);
+      add("Hurricane & storm hardening (roof clips & impact glass)", "maybe", `Built in ${yb}: older roof-to-wall connections are worth a wind-mitigation inspection; ${st === "FL" ? "the My Safe Florida Home program offers grants when its application rounds are open" : "some insurers discount premiums for documented wind mitigation"}.`);
     } else {
       add("Foundation & thermal envelope modernization", "yes", `Built in ${yb}: continuous sill plate anchoring and air-barrier insulation sealing.`);
     }
@@ -5551,7 +5564,7 @@ function renderHouse(box, a, lot, ll, st) {
       ${fact("Open yard (est.)", `${fmtN(Math.round(F.yard))} sq ft`, "lot minus buildings, less ~20% for setbacks")}
       ${fact("Zoning", z ? `${esc(z.zone)}` : (m.z ? esc(m.z.top) : null), z ? `parcel zoning layer (${esc(z.juris || "city")})` : isOCArea(m) ? "neighborhood summary (preliminary)" : "block-group summary")}
       ${fact("Height limit", hMax ? `${hMax} ft` : null, rule ? `${esc(rule.code_section)} (round-6 research, not yet checked against the code)` : ocH ? "city code summary (preliminary)" : null)}
-      ${fact("Selling an ADU separately", (m.c || p.c || "").toLowerCase().trim() === "santa monica" ? "<span style='color:var(--ok-ink);font-weight:600'>Santa Monica has an AB 1033 opt-in ordinance (SMMC § 9.31.026), so an ADU can be sold as a condominium</span>" : (activeState() === "CA" ? "<span style='color:var(--ink-2)'>Not allowed here: an ADU can be rented but not sold apart from the main home (Gov. Code § 66314) unless the city opts in to AB 1033</span>" : activeState() === "WA" ? "<span style='color:var(--ok-ink);font-weight:600'>Unit subdivision authorized under WA HB 1337 if local code permits condo conveyance</span>" : activeState() === "TX" ? "<span style='color:var(--ok-ink);font-weight:600'>Fee-simple lot split allowed down to 2,000 sq ft lots under Austin HOME Phase 2</span>" : "<span style='color:var(--ink-2)'>Rental allowed; separate sale subject to municipal subdivision approval</span>"), activeState() === "CA" ? "California Gov. Code § 66314 / AB 1033" : `${activeState()} accessory housing statutes`)}
+      ${fact("Selling an ADU separately", (m.c || p.c || "").toLowerCase().trim() === "santa monica" ? "<span style='color:var(--ok-ink);font-weight:600'>Santa Monica has an AB 1033 opt-in ordinance (SMMC § 9.31.026), so an ADU can be sold as a condominium</span>" : (activeState() === "CA" ? "<span style='color:var(--ink-2)'>Not allowed here: an ADU can be rented but not sold apart from the main home (Gov. Code § 66314) unless the city opts in to AB 1033</span>" : "<span style='color:var(--ink-2)'>Not on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules</span>"), activeState() === "CA" ? "California Gov. Code § 66314 / AB 1033" : "local code (no state rule on file)")}
       ${fact("Fire zone", rOff ? ((m.fire || 0) >= 0.5 ? "Very High Fire Hazard Zone (area map)" : "Not in Very High zone") : !R ? "checking…" : (R.fire && R.fire.vh ? "Very High Fire Hazard Severity Zone" : ((m.fire || 0) >= 0.5 ? "Very High Fire Hazard Severity Zone" : "Not in Very High zone")), activeState() === "CA" ? "CAL FIRE Fire Hazard Severity Zones (SRA 2024 / LRA 2025)" : "USFS Wildfire Risk to Communities")}
       ${fact("Historic status", rOff ? "lot-level check offline" : !R ? "checking…" : (histText(R) || "None on record"), activeState() === "CA" && R && R.hpoz && R.hpoz.ok ? "LA City / County historic resources" : "National Register & Municipal Historic Survey")}
       ${fact("Hillside area", rOff ? "lot-level check offline" : !R ? "checking…" : (R.hill && R.hill.ok && R.hill.v.length ? "In designated Hillside Area" : "Not in Hillside Area"), activeState() === "CA" && R && R.hill && R.hill.ok ? "LA City Hillside Area map" : "Local Topographic & Slope Ordinance")}
@@ -7503,7 +7516,7 @@ function select(id, fly) {
   // Core Vitals Tiles
   h += `<div class="section"><div class="tiles">
     ${tile("Typical home value", fmt$(m.hv), esc(oc && !ocReal ? "neighborhood estimate (preliminary)" : hvSourceText(m.hvs)))}
-    ${tile("Median rent", m.rent ? fmt$(m.rent) + "/mo" : "–", oc && !ocReal ? "estimate (preliminary)" : ocReal ? "Census ACS 2020–24" : "Census ACS 5-Year")}
+    ${tile("Median rent", fmtRent(m.rent), oc && !ocReal ? "estimate (preliminary)" : ocReal ? "Census ACS 2020–24" : "Census ACS 5-Year")}
     ${tile("Homes", fmtN(m.homes), `${m.own != null ? Math.round(m.own) + "% owner-occupied" : ""}`)}
     ${tile("Heat vs median", m.ht != null ? (m.ht > 0 ? "+" : "") + (+m.ht).toFixed(1) + "°F" : "–", oc && !ocReal ? "estimate (preliminary)" : ocReal ? "Tree Equity Score 2021 vs urbanized-area mean" : "Tree Equity Score 2021 (2010 block groups)")}
     ${tile("Violent crime", m.vc != null ? (+m.vc).toFixed(1) + " per 1k" : "no data", m.vc != null ? `12 mo · ${esc(m.ag || "")}` : (activeFips() === "06037" ? "independent police" : isCAActive() ? "agency not in CA DOJ data" : "no crime source outside California"))}
@@ -7585,7 +7598,7 @@ function select(id, fly) {
   h += `<details class="panel-sec"><summary><b>${isCAActive() ? "EIFD Tax-Increment Financing Calculator" : "Tax-Increment Financing"}</b></summary><div class="sec-content">${fundSummary(pkg, id)}${eifdSection(p, m)}</div></details>`;
 
   const kv = [], add = (k, v, f = x => x) => { if (v != null && v !== "" && !(typeof v === "number" && isNaN(v))) kv.push(`<span>${k}</span><span>${f(v)}</span>`); };
-  add("Population", m.pop, fmtN); add("Median household income", m.inc, fmt$); add("Median rent", m.rent, v => fmt$(v) + "/mo"); add("Median year built", m.yb, v => Math.round(v));
+  add("Population", m.pop, fmtN); add("Median household income", m.inc, fmt$); add("Median rent", m.rent, fmtRent); add("Median year built", m.yb, v => Math.round(v));
   add("Single-family share", m.sf, v => Math.round(v) + "%"); add("Households without a car", m.nocar, v => Math.round(v) + "%");
   if (!oc) { add("Street trees (city survey)", m.st, fmtN); add("Open tree sites", m.ts, fmtN); }
   add("Canopy gap to goal (" + (m.tg_src || "Tree Equity Score 2021, 2010 block groups") + ")", m.tg, v => (+v).toFixed(0) + " pts");
@@ -9214,7 +9227,7 @@ function renderCompareDrawer() {
         </div>
         <div class="c-row"><span class="k">City</span><span class="v">${esc(p.c)}</span></div>
         <div class="c-row"><span class="k">Typical Home Value</span><span class="v">${fmt$(m.hv)}</span></div>
-        <div class="c-row"><span class="k">Median Rent</span><span class="v">${m.rent ? fmt$(m.rent) + "/mo" : "–"}</span></div>
+        <div class="c-row"><span class="k">Median Rent</span><span class="v">${fmtRent(m.rent)}</span></div>
         <div class="c-row"><span class="k">Homes / Owner-Occ</span><span class="v">${fmtN(m.homes)} (${m.own != null ? Math.round(m.own) + "%" : "–"})</span></div>
         <div class="c-row"><span class="k">Best Bet</span><span class="v">${topC && top.vpd >= 1 ? esc(topC.name) : "No sourced estimate yet"}</span></div>
         <div class="c-row"><span class="k">Expected Return</span><span class="v">${topRng && top.vpd >= 1 ? topRng.estStr + " (" + topRng.str + "; " + esc(ivLabel(top.id)) + ")" : "–"}</span></div>

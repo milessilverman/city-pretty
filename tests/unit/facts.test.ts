@@ -44,6 +44,28 @@ describe("app/facts.js live public records", () => {
     expect(dead.every((r: any) => !r.ok && /offline/.test(r.reason))).toBe(true);
   });
 
+  it("a dropped connection is tried once more; a second failure says not available", async () => {
+    // FEMA's NFHL drops some concurrent connections (browser: "TypeError: Failed to fetch"); one retry recovers it.
+    let femaTries = 0;
+    const flaky = async (url: string) => {
+      if (/NFHL/.test(url) && ++femaTries === 1) throw new TypeError("Failed to fetch");
+      return fake(url);
+    };
+    const rows = await liveSiteFacts(30.3005, -97.724, { fetcher: flaky, hudLookup });
+    expect(femaTries).toBe(2);
+    expect(rows.find((r: any) => r.label === "FEMA flood zone").value).toContain("Zone AE");
+    let tries = 0;
+    const down = async (url: string) => {
+      if (/NFHL/.test(url)) { tries++; throw new TypeError("Failed to fetch"); }
+      return fake(url);
+    };
+    const rows2 = await liveSiteFacts(30.3005, -97.724, { fetcher: down, hudLookup });
+    expect(tries).toBe(2);
+    const f = rows2.find((r: any) => r.label === "FEMA flood zone");
+    expect(f.ok).toBe(false);
+    expect(f.value).toBeNull();
+  });
+
   it("the Worker's /api/facts payload renders the same rows", async () => {
     const f = await siteFacts(30.3005, -97.724, { fetcher: fake as any });
     const rows = fromWorker(JSON.parse(JSON.stringify(f)));
