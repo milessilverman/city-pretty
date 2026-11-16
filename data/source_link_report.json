@@ -1,9 +1,9 @@
 {
  "checked": "2026-11-16",
  "counts": {
-  "ok": 118,
-  "blocked": 24,
-  "broken": 17,
+  "ok": 143,
+  "blocked": 28,
+  "broken": 10,
   "error": 13
  },
  "urls": {
@@ -20,6 +20,13 @@
    "used_in": [
     "state-housing-laws.json[8].statute_url",
     "statutes.json[8].statute_url"
+   ]
+  },
+  "https://app.leg.wa.gov/rcw/default.aspx?cite=84.41.030": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.WA.field_evidence.reassessment_cycle_years.source_url"
    ]
   },
   "https://app.leg.wa.gov/rcw/default.aspx?cite=84.55.010": {
@@ -44,9 +51,9 @@
     "intercity_transit_corridors.json[0].source_url"
    ]
   },
-  "https://beltline.org/about/the-atlanta-beltline-project/": {
-   "status": "broken",
-   "detail": "404",
+  "https://beltline.org/the-project/": {
+   "status": "ok",
+   "detail": "200",
    "used_in": [
     "case_studies.json[1].evaluation_url"
    ]
@@ -55,14 +62,26 @@
    "status": "ok",
    "detail": "200",
    "used_in": [
-    "valuation_backtest_benchmarks.json.counties.06037.legal_basis.sources[1]"
+    "la_neighborhood_values.json._source.legal_basis.sources[1]",
+    "valuation_backtest_benchmarks.json.counties.06037.legal_basis.sources[1]",
+    "valuation_backtest_benchmarks.json.counties.06037.previous_page_model.legal_basis.sources[1]"
    ]
   },
   "https://california.public.law/codes/revenue_and_taxation_code_section_110.1": {
    "status": "ok",
    "detail": "200",
    "used_in": [
-    "valuation_backtest_benchmarks.json.counties.06037.legal_basis.sources[0]"
+    "la_neighborhood_values.json._source.legal_basis.sources[0]",
+    "state_finance_profiles.json.CA.field_evidence.uncaps_on_sale.source_url",
+    "valuation_backtest_benchmarks.json.counties.06037.legal_basis.sources[0]",
+    "valuation_backtest_benchmarks.json.counties.06037.previous_page_model.legal_basis.sources[0]"
+   ]
+  },
+  "https://california.public.law/codes/revenue_and_taxation_code_section_401.3": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.CA.field_evidence.reassessment_cycle_years.source_url"
    ]
   },
   "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB840": {
@@ -130,11 +149,19 @@
     "state_finance_profiles.json.OH.field_evidence.res_assessment_ratio.source_url"
    ]
   },
-  "https://coloradoworks.org/urban-renewal/": {
+  "https://colorado.public.law/statutes/crs_31-25-107": {
    "status": "ok",
    "detail": "200",
    "used_in": [
     "funding_programs.json[7].source_url"
+   ]
+  },
+  "https://colorado.public.law/statutes/crs_39-1-104": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.CO.field_evidence.reassessment_cycle_years.source_url",
+    "state_finance_profiles.json.CO.field_evidence.uncaps_on_sale.source_url"
    ]
   },
   "https://comptroller.texas.gov/economy/local/ch311/": {
@@ -142,6 +169,20 @@
    "detail": "200",
    "used_in": [
     "funding_programs.json[4].source_url"
+   ]
+  },
+  "https://comptroller.texas.gov/taxes/property-tax/exemptions/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.TX.field_evidence.homestead_exemption_rule.source_url"
+   ]
+  },
+  "https://comptroller.tn.gov/office-functions/pa.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.TN.source_url"
    ]
   },
   "https://connect.ncdot.gov/letting/Division%204%20Letting/09-22-2026/DD00528_Bid_Tabs.pdf": {
@@ -240,6 +281,21 @@
     "research.json[11].source_url"
    ]
   },
+  "https://doi.org/10.1111/1540-6229.12471": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "intervention_verification.json.adu.sourced_effect.citations[0].url",
+    "research.json[40].source_url"
+   ]
+  },
+  "https://doi.org/10.1111/j.1540-6229.2008.00212.x": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[42].source_url"
+   ]
+  },
   "https://doi.org/10.1111/j.1540-6229.2010.00296.x": {
    "status": "blocked",
    "detail": "403",
@@ -296,6 +352,14 @@
     "research.json[37].source_url"
    ]
   },
+  "https://doi.org/10.2139/ssrn.3899624": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "intervention_verification.json.vacant_lot_green.sourced_effect.citations[0].url",
+    "research.json[41].source_url"
+   ]
+  },
   "https://doi.org/10.2172/1172644": {
    "status": "ok",
    "detail": "200",
@@ -308,13 +372,6 @@
    "detail": "403",
    "used_in": [
     "research.json[24].source_url"
-   ]
-  },
-  "https://doi.org/10.3386/w25798": {
-   "status": "ok",
-   "detail": "200",
-   "used_in": [
-    "research.json[36].source_url"
    ]
   },
   "https://doi.org/10.4324/9781351179782": {
@@ -336,6 +393,13 @@
    "detail": "200",
    "used_in": [
     "state_finance_profiles.json.SD.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://dor.wa.gov/taxes-rates/property-tax/property-tax-exemptions-and-deferrals": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.WA.field_evidence.homestead_exemption_rule.source_url"
    ]
   },
   "https://edocs-public.dot.state.mn.us/edocs_public/DMResultSet/download?docId=39047462": {
@@ -503,6 +567,14 @@
     "state_finance_profiles.json.CO.source_url"
    ]
   },
+  "https://leg.colorado.gov/sites/default/files/documents/2024B/bills/2024b_1001_enr.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.CO.field_evidence.res_assessment_ratio.source_url",
+    "state_finance_profiles.json.CO.field_evidence.homestead_exemption_rule.source_url"
+   ]
+  },
   "https://leg.mt.gov/bills/mca/title_0150/chapter_0070/part_0010/section_0110/0150-0070-0010-0110.html": {
    "status": "ok",
    "detail": "200",
@@ -667,6 +739,13 @@
     "state_finance_profiles.json.NE.field_evidence.res_assessment_ratio.source_url"
    ]
   },
+  "https://oitco.hylandcloud.com/cdotrmpop/docpop/docpop.aspx?docid=58703563": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[15].source_url"
+   ]
+  },
   "https://oksenate.gov/about/constitution/article-x/section-8b": {
    "status": "broken",
    "detail": "404",
@@ -702,25 +781,48 @@
     "unit_costs.json[23].source_url"
    ]
   },
+  "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "la_neighborhood_values.json._source.service"
+   ]
+  },
+  "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=Roll_LandBaseYear%3D'2022'%20AND%20Roll_ImpBaseYear%3D'2022'%20AND%20UseCode%3D'0100'&outFields=...&orderByFields=OBJECTID&resultOffset=<0,1000,...>&resultRecordCount=1000&f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "la_neighborhood_values.json._source.pulls[0].queries[0].url_pattern"
+   ]
+  },
+  "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=Roll_LandBaseYear%3D'2023'%20AND%20Roll_ImpBaseYear%3D'2023'%20AND%20UseCode%3D'0100'&outFields=...&orderByFields=OBJECTID&resultOffset=<0,1000,...>&resultRecordCount=1000&f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "la_neighborhood_values.json._source.pulls[0].queries[1].url_pattern"
+   ]
+  },
+  "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=Roll_LandBaseYear%3D'2024'%20AND%20Roll_ImpBaseYear%3D'2024'%20AND%20UseCode%3D'0100'&outFields=...&orderByFields=OBJECTID&resultOffset=<0,1000,...>&resultRecordCount=1000&f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "la_neighborhood_values.json._source.pulls[0].queries[2].url_pattern"
+   ]
+  },
   "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=Roll_LandBaseYear%3D'2025'%20AND%20Roll_ImpBaseYear%3D'2025'%20AND%20UseCode%3D'0100'&outFields=...&orderByFields=OBJECTID&resultOffset=<0,1000,...>&resultRecordCount=1000&f=json": {
    "status": "ok",
    "detail": "200",
    "used_in": [
-    "valuation_backtest_benchmarks.json.counties.06037.sample.queries[0].url_pattern"
+    "la_neighborhood_values.json._source.pulls[1].queries[0].url_pattern",
+    "valuation_backtest_benchmarks.json.counties.06037.previous_page_model.sample.queries[0].url_pattern"
    ]
   },
   "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=Roll_LandBaseYear%3D'2026'%20AND%20Roll_ImpBaseYear%3D'2026'%20AND%20UseCode%3D'0100'&outFields=...&orderByFields=OBJECTID&resultOffset=<0,1000,...>&resultRecordCount=1000&f=json": {
    "status": "ok",
    "detail": "200",
    "used_in": [
-    "valuation_backtest_benchmarks.json.counties.06037.sample.queries[1].url_pattern"
-   ]
-  },
-  "https://railroads.dot.gov/grants-loans/competitive-discretionary-grant-programs/federal-state-partnership-intercity-passenger-rail": {
-   "status": "broken",
-   "detail": "404",
-   "used_in": [
-    "funding_programs.json[10].source_url"
+    "la_neighborhood_values.json._source.pulls[1].queries[1].url_pattern",
+    "valuation_backtest_benchmarks.json.counties.06037.previous_page_model.sample.queries[1].url_pattern"
    ]
   },
   "https://raleighnc.gov/planning-and-building/services/missing-middle-housing": {
@@ -729,6 +831,14 @@
    "used_in": [
     "state-housing-laws.json[19].statute_url",
     "statutes.json[19].statute_url"
+   ]
+  },
+  "https://repository.upenn.edu/bitstreams/438c8723-dc56-4664-a888-d00956186681/download": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "intervention_verification.json.street_lighting.sourced_effect.citations[1].url",
+    "research.json[39].source_url"
    ]
   },
   "https://resources.ca.gov/grants/urban-greening/": {
@@ -775,6 +885,20 @@
     "state_finance_profiles.json.TX.source_url"
    ]
   },
+  "https://texas.public.law/statutes/tex._tax_code_section_23.23": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.TX.field_evidence.uncaps_on_sale.source_url"
+   ]
+  },
+  "https://texas.public.law/statutes/tex._tax_code_section_25.18": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.TX.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
   "https://treeequityscore.org/methodology/": {
    "status": "ok",
    "detail": "200",
@@ -786,7 +910,6 @@
    "status": "blocked",
    "detail": "403",
    "used_in": [
-    "case_studies.json[0].evaluation_url",
     "research.json[10].source_url"
    ]
   },
@@ -836,11 +959,32 @@
     "statutes.json[11].statute_url"
    ]
   },
+  "https://www.azleg.gov/ars/15/00972.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.AZ.field_evidence.homestead_exemption_rule.source_url"
+   ]
+  },
+  "https://www.azleg.gov/ars/42/06209.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "funding_programs.json[9].source_url"
+   ]
+  },
   "https://www.azleg.gov/ars/42/13301.htm": {
    "status": "ok",
    "detail": "200",
    "used_in": [
     "state_finance_profiles.json.AZ.source_url"
+   ]
+  },
+  "https://www.azleg.gov/ars/42/13302.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.AZ.field_evidence.uncaps_on_sale.source_url"
    ]
   },
   "https://www.azleg.gov/legtext/56leg/2R/laws/0197.pdf": {
@@ -885,13 +1029,6 @@
    "detail": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, c",
    "used_in": [
     "research.json[7].source_url"
-   ]
-  },
-  "https://www.codot.gov/business/eema/assets/2025-cost-data-book.pdf": {
-   "status": "broken",
-   "detail": "404",
-   "used_in": [
-    "unit_costs.json[15].source_url"
    ]
   },
   "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Department-of-Transportation-and-Infrastructure/Programs-Services/Projects/Colfax-BRT": {
@@ -944,6 +1081,20 @@
     "state_finance_profiles.json.FL.source_url"
    ]
   },
+  "https://www.flsenate.gov/Laws/Statutes/2026/192.042": {
+   "status": "blocked",
+   "detail": "429",
+   "used_in": [
+    "state_finance_profiles.json.FL.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://www.flsenate.gov/Laws/Statutes/2026/193.155": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.FL.field_evidence.uncaps_on_sale.source_url"
+   ]
+  },
   "https://www.flsenate.gov/Session/Bill/2024/328": {
    "status": "ok",
    "detail": "200",
@@ -964,6 +1115,20 @@
    "detail": "Remote end closed connection without response",
    "used_in": [
     "state_finance_profiles.json.NH.source_url"
+   ]
+  },
+  "https://www.govinfo.gov/content/pkg/FR-2026-04-21/html/2026-07741.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "hud_fmr_revisions.json._source.url"
+   ]
+  },
+  "https://www.govinfo.gov/content/pkg/FR-2026-09-01/html/2026-17891.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "hud_fmr_revisions.json.superseded.url"
    ]
   },
   "https://www.greenvillesc.gov/167/Falls-Park": {
@@ -1002,9 +1167,9 @@
     "unit_costs.json[11].source_url"
    ]
   },
-  "https://www.itdp.org/publication/cleveland-healthline-brt/": {
-   "status": "broken",
-   "detail": "404",
+  "https://www.itdp.org/wp-content/uploads/2013/11/More-Development-For-Your-Transit-Dollar_ITDP.pdf": {
+   "status": "ok",
+   "detail": "200",
    "used_in": [
     "case_studies.json[5].evaluation_url",
     "research.json[18].source_url"
@@ -1022,6 +1187,13 @@
    "detail": "200",
    "used_in": [
     "state_finance_profiles.json.KS.source_url"
+   ]
+  },
+  "https://www.law.cornell.edu/uscode/text/49/24911": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "funding_programs.json[10].source_url"
    ]
   },
   "https://www.leg.state.nv.us/NRS/NRS-361.html": {
@@ -1064,16 +1236,10 @@
    "status": "ok",
    "detail": "200",
    "used_in": [
+    "state_finance_profiles.json.MI.source_url",
     "state_finance_profiles.json.MI.field_evidence.res_assessment_ratio.source_url",
     "state_finance_profiles.json.MI.field_evidence.annual_assessment_cap.source_url",
     "state_finance_profiles.json.MI.field_evidence.uncaps_on_sale.source_url"
-   ]
-  },
-  "https://www.legislature.mi.gov/statutes/mcl-211-27a": {
-   "status": "broken",
-   "detail": "404",
-   "used_in": [
-    "state_finance_profiles.json.MI.source_url"
    ]
   },
   "https://www.mesaaz.gov/files/assets/public/v/2/business-development/engineering/constructionbid/cp0062cap-cp0062wtr-cp0062gas-cp0956sr18_results.pdf": {
@@ -1089,6 +1255,14 @@
    "detail": "200",
    "used_in": [
     "transit_pipelines.json[1].rtp_document_url"
+   ]
+  },
+  "https://www.nber.org/system/files/working_papers/w25798/w25798.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "intervention_verification.json.street_lighting.sourced_effect.citations[0].url",
+    "research.json[36].source_url"
    ]
   },
   "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_105/GS_105-286.html": {
@@ -1157,13 +1331,6 @@
     "state_finance_profiles.json.OR.source_url"
    ]
   },
-  "https://www.phoenix.gov/econdev/gplet": {
-   "status": "broken",
-   "detail": "404",
-   "used_in": [
-    "funding_programs.json[9].source_url"
-   ]
-  },
   "https://www.placeeconomics.com/resources/twenty-four-reasons-historic-preservation-is-good-for-your-community/": {
    "status": "ok",
    "detail": "200",
@@ -1217,11 +1384,11 @@
     "state_finance_profiles.json.SC.field_evidence.reassessment_cycle_years.source_url"
    ]
   },
-  "https://www.tn.gov/comptroller/divisions/property-assessments/assessment.html": {
-   "status": "broken",
-   "detail": "404",
+  "https://www.thehighline.org/about/": {
+   "status": "ok",
+   "detail": "200",
    "used_in": [
-    "state_finance_profiles.json.TN.source_url"
+    "case_studies.json[0].evaluation_url"
    ]
   },
   "https://www.tn.gov/content/dam/tn/tdot/construction/previous_lettings/Const_aup2025.pdf": {
