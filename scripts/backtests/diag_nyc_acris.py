@@ -102,6 +102,7 @@ def main():
 
     stats = defaultdict(Counter)
     examples = defaultdict(list)
+    row_marks = []  # every sale in the window: its markers, or "no_matching_deed" (read by screen_nyc_sales.py)
     for bbl, rs in by_bbl.items():
         for r in rs:
             b = band(r["price"])
@@ -119,6 +120,7 @@ def main():
                     cands.append(m)
             if not cands:
                 st["no_matching_deed"] += 1
+                row_marks.append({"id": bbl, "date": r["date"], "price": r["price"], "deed": None, "markers": ["no_matching_deed"]})
                 continue
             m = cands[0]
             st["matched"] += 1
@@ -137,6 +139,7 @@ def main():
                 marks.append("estate_grantor")
             if any(re.search(r"\bTRUST", n.upper()) for n in g + e):
                 marks.append("trust_party")
+            row_marks.append({"id": bbl, "date": r["date"], "price": r["price"], "deed": m["document_id"], "markers": marks})
             for k in marks:
                 st[k] += 1
             if not marks:
@@ -154,6 +157,7 @@ def main():
         "sources": [f"{SOC}/8h5j-fqxa.json", f"{SOC}/bnx9-e6tj.json", f"{SOC}/636b-3b5g.json"],
         "by_band": {b: dict(c) for b, c in stats.items()},
         "examples_under_500k": examples["under $500k"],
+        "row_markers": row_marks,
     }
     p = os.path.join(ROOT, f"data/backtests/acris_diag_36081_{t0}_{t1}.json")
     json.dump(out, open(p, "w"), indent=1)
