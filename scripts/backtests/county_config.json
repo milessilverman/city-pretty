@@ -384,5 +384,89 @@
     "regression_no_rooms_with_assessor": 0.0803
    }
   }
+ },
+ "12095": {
+  "sales_file": "data/backtests/sales_12095_2026-11-16.json.gz",
+  "fit": [
+   "2025-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-03-31"
+  ],
+  "test": [
+   "2026-04-01",
+   "2026-08-31"
+  ],
+  "note": "Florida DOR 2026 Final SDF + NAL (scripts/backtests/pull_florida_dor.py), same filters as Hillsborough (QUAL_CD 01/02 per DOR's 2026 User's Guide). Sales dated to the 1st of their month. Assessor value: just value as of 1 Jan 2026. Windows copied from Hillsborough and set before any model was run; September 2026 excluded as incomplete.",
+  "locked": {
+   "spec": "regression_no_rooms_with_assessor",
+   "locked_on": "2026-11-16",
+   "why": "Development median error: regression with the 1 Jan 2026 just value 8.10% (2178 sales); assessor ratio 8.10%; regression without the just value 11.68%; $/sqft x size 12.20%; neighborhood median 19.27%. Best was assessor_ratio by 0.00 points, within 0.1 points, so the page-runnable spec (same as Hillsborough; the page has no assessor-ratio code) is locked. Rule fixed before locking: best development error; a tie within 0.1 points goes to the spec the page can run.",
+   "dev_mdape": {
+    "neighborhood_median": 0.1927,
+    "neighborhood_ppsf_x_sqft": 0.122,
+    "assessor_ratio": 0.081,
+    "regression_no_rooms": 0.1168,
+    "regression_no_rooms_with_assessor": 0.081
+   }
+  }
+ },
+ "12099": {
+  "sales_file": "data/backtests/sales_12099_2026-11-16.json.gz",
+  "fit": [
+   "2025-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-03-31"
+  ],
+  "test": [
+   "2026-04-01",
+   "2026-08-31"
+  ],
+  "note": "Florida DOR 2026 Final SDF + NAL (scripts/backtests/pull_florida_dor.py), same filters as Hillsborough (QUAL_CD 01/02 per DOR's 2026 User's Guide). Sales dated to the 1st of their month. Assessor value: just value as of 1 Jan 2026. Windows copied from Hillsborough and set before any model was run; September 2026 excluded as incomplete.",
+  "locked": {
+   "spec": "regression_no_rooms_with_assessor",
+   "locked_on": "2026-11-16",
+   "why": "Development median error: regression with the 1 Jan 2026 just value 8.43% (2899 sales); assessor ratio 8.46%; regression without the just value 14.29%; $/sqft x size 14.72%; neighborhood median 20.83%. Rule fixed before locking: best development error; a tie within 0.1 points goes to the spec the page can run.",
+   "dev_mdape": {
+    "neighborhood_median": 0.2083,
+    "neighborhood_ppsf_x_sqft": 0.1472,
+    "assessor_ratio": 0.0846,
+    "regression_no_rooms": 0.1429,
+    "regression_no_rooms_with_assessor": 0.0843
+   }
+  }
+ },
+ "12103": {
+  "sales_file": "data/backtests/sales_12103_2026-11-16.json.gz",
+  "fit": [
+   "2025-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-03-31"
+  ],
+  "test": [
+   "2026-04-01",
+   "2026-08-31"
+  ],
+  "note": "Florida DOR 2026 Final SDF + NAL (scripts/backtests/pull_florida_dor.py), same filters as Hillsborough (QUAL_CD 01/02 per DOR's 2026 User's Guide). Sales dated to the 1st of their month. Assessor value: just value as of 1 Jan 2026. Windows copied from Hillsborough and set before any model was run; September 2026 excluded as incomplete.",
+  "locked": {
+   "spec": "regression_no_rooms_with_assessor",
+   "locked_on": "2026-11-16",
+   "why": "Development median error: regression with the 1 Jan 2026 just value 7.55% (1666 sales); assessor ratio 7.53%; regression without the just value 14.86%; $/sqft x size 14.56%; neighborhood median 21.89%. Best was assessor_ratio by 0.02 points, within 0.1 points, so the page-runnable spec (same as Hillsborough; the page has no assessor-ratio code) is locked. Rule fixed before locking: best development error; a tie within 0.1 points goes to the spec the page can run.",
+   "dev_mdape": {
+    "neighborhood_median": 0.2189,
+    "neighborhood_ppsf_x_sqft": 0.1456,
+    "assessor_ratio": 0.0753,
+    "regression_no_rooms": 0.1486,
+    "regression_no_rooms_with_assessor": 0.0755
+   }
+  }
  }
 }
