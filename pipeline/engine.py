@@ -299,7 +299,9 @@ def run(m, pools, county="Orange County", state="CA"):
         add("undergrounding", f"{miles} miles of overhead lines undergrounded", H, int(3440000 * miles), 0, 0, 2.9,
             f"homes built ~{int(yb)}, so overhead lines are likely " + ("(no utility line map outside LADWP's area)" if county == "la" else "(no utility line map is loaded for this county)") + "; $3.4M per circuit-mile in 2024 dollars", pools.pct("yb", yb, False), 2, scale=0.7)
     if d >= 8.18 and ev is not None and ev >= 801:
-        add("ev_hub", "8-port fast-charging hub", H15, 800000, 0, 20000, 1.0, ("no public DC fast charger within 800 m (federal AFDC data)" if county == "la" else "no public charging station mapped within 800 m (OpenStreetMap; the federal AFDC list needs an API key and was not loaded)") + "; 1% assumed (the study's +3.3% is likely partly where chargers get built)", pools.pct("ev", ev), 1)
+        # Round 4 (16 Nov 2026): +3.3% within 1 km (Liang et al. 2023, Nature Sustainability; hedonic association) and
+        # $1,777,000 for an 8-port DC fast site (CTC/SBCAG Santa Barbara project report, Nov 2025). Was 1.0% and $800,000.
+        add("ev_hub", "8-port fast-charging hub", H15, 1777000, 0, 20000, 3.3,("no public DC fast charger within 800 m (federal AFDC data)" if county == "la" else "no public charging station mapped within 800 m (OpenStreetMap; the federal AFDC list needs an API key and was not loaded)") + "; 1% assumed (the study's +3.3% is likely partly where chargers get built)", pools.pct("ev", ev), 1)
     if ht is not None and ht >= 1.1 and inc is not None and inc <= 93400:
         add("microgrid", "1 resilience hub (solar + battery)", H15, 3940000, 0, 30000, 0, f"{_warmer(ht)}; cooling center during outages", pools.pct("ht", ht), 0, kind="qol")
     if d >= 15.9 and H:
@@ -321,8 +323,12 @@ def run(m, pools, county="Orange County", state="CA"):
     # ---------------- Schools & services ----------------
     if yb and yb <= 1970 and x.get("school_m", 9e9) <= 872 and H:
         share = H / 4000 * 100
+        # Cellini, Ferreira & Rothstein (2010, QJE): marginal homebuyers' willingness to pay is "$1.50 or more for each $1
+        # of capital spending" (California school bond referenda). Value = 1.5 x this area's spending share; was +3% on
+        # every home, inconsistent with the catalog's "+6%". See docs/audit/catalog-coverage-round4.md.
         add("school_bond", (f"modernize the nearby school (this area's {share:.0f}% share of ~$40M)" if share >= 0.5 else "modernize the nearby school (this area's share of ~$40M is under 1%)"), H, 10000 * H, 0, 0, 3.0,
-            "older area served by a nearby public school; California bond passage raised prices ~6% (half used here, for one campus)", 0.5, 3)
+            "older area served by a nearby public school; California school-bond studies find home values rise $1.50 or more per $1 of capital spending", 0.5, 3,
+            value=sig(1.5 * 10000 * H))
     if x.get("library_m") is not None and x["library_m"] >= 1960 and d >= 8.2:
         add("library", "branch renovation + Sunday hours, 10 years", H15, 5500000, 0, 250000, 0, "no library within 2 km", 0.5, 0, kind="qol")
     if x.get("clinic_m") is not None and x["clinic_m"] >= 2570 and below_med_inc:

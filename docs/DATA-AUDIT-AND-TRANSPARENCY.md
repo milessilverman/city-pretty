@@ -286,6 +286,18 @@ law in IA, MI, MN, ND, OH, SC, WY; North Carolina's parking-minimum ban takes ef
 be searched** (official code sites blocked or returned no text): AL, AK, AR, DE, GA, IL, IN, KS, KY, LA, MS, MO, NE,
 NJ, NM, NY, OK, PA, SD, TN, VA, WV, WI; plus NH, CT, DC and Maryland HB 538. For those, "none found" is unverified.
 
+### Improvement catalog, round 4 (16 Nov, `audit/catalog-coverage-round4.md`)
+
+EV hubs (Liang et al. 2023, *Nature Sustainability*: +3.3% within 1 km, an association; cost from a public $1,777,000
+8-port project budget, so the engine's $800,000 had overstated returns ~2.2x), school bonds (Cellini, Ferreira &
+Rothstein 2010: $1.50 of home value per $1 of capital spending) and blight rehab (Ganduri & Maturana 2024: +2.3 to
+4.0 points) now have sourced effects. EV hubs and school bonds apply **only in California**, where their studies were
+measured. **Correction:** round 1 said the EV study could not be found; it exists. California's pedestrian/cyclist
+crash counts now also use CCRS's Parties and injured-persons tables (+10% statewide) and are no longer treated as a
+lower bound; 15,417 crash-dependent California rows that no longer qualify are dropped. Block groups with a sourced
+best project: 18.5% → 33.3% nationwide (LA 61.7% → 88.6%); with both effect and cost sourced: 16.3% → 15.7%.
+Farmers markets, community gardens, corner stores, slow streets, wayfinding and night markets stay unverified.
+
 ### Safety comparisons recomputed (16 Nov, `audit/crash-rankings.md`)
 
 The "worse than X% of similar areas" comparisons and crash-dependent recommendations (traffic calming, crosswalks,

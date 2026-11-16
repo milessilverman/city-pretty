@@ -2045,6 +2045,11 @@ function ivAllows(id, m) {
     const inc = m && m.inc != null ? +m.inc : NaN;
     if (!(inc < cond.median_household_income_below)) return false;
   }
+  // A study measured in one state (e.g. California-only samples) is not applied in other states.
+  if (cond && Array.isArray(cond.state_fips_in)) {
+    const f = String((typeof activeFips === "function" && activeFips()) || "");
+    if (!cond.state_fips_in.includes(f.slice(0, 2))) return false;
+  }
   return true;
 }
 function ivLabel(id) {
@@ -2055,6 +2060,7 @@ function ivLabel(id) {
   if (kind === "qol") return "Partly verified: cost cited but not re-checked; no value effect estimated";
   const eff = r.effect === "checked", cost = r.cost === "checked";
   if (!eff && !cost) return "Partly verified: effect and cost not re-checked";
+  if (eff && cost) return "Partly verified: " + (r.partial_reason || "see the evidence notes");
   return "Partly verified: " + (!eff ? (r.effect === "misapplied" ? "effect misapplied" : "effect not confirmed") : "cost not re-checked");
 }
 // Verification chip; the catalog's own evidence grade is shown only next to it, never alone.
@@ -2077,10 +2083,26 @@ function gateRecs(recs, m) {
 function ivRow(a) {
   if (!Array.isArray(a)) return a;
   const r = ivRec(a[0]), o = r && r.sourced_effect;
-  if (!o || !(+o.pct > 0) || !(+a[9] > 0) || +a[9] === +o.pct) return a;
+  // A study that states value per dollar spent (e.g. school bonds: "$1.50 or more for each $1 of capital spending")
+  // sets the value from the row's own cost; the cost side keeps its own verification status.
+  if (o && +o.value_per_dollar > 0 && +a[3] > 0) {
+    const b = a.slice();
+    b[7] = Math.round(+a[3] * +o.value_per_dollar);
+    b[8] = +o.value_per_dollar;
+    b._sourced = o;
+    return b;
+  }
+  if (!o || !(+o.pct > 0) || !(+a[9] > 0)) return a;
+  const capexSwap = +o.capex > 0 && +o.replaces_capex > 0;   // a sourced construction cost replaces the bundle's
+  if (+a[9] === +o.pct && !capexSwap) return a;
   const b = a.slice(), f = +o.pct / +a[9];
   b[7] = Math.round(+a[7] * f);
-  b[8] = +a[3] ? Math.round((b[7] / +a[3]) * 1000) / 1000 : 0;
+  if (capexSwap) {   // row cost = capex (a[4]) + land (a[5]) + 10-yr upkeep; swap only the capex
+    const oldCapex = +a[4] > 0 ? +a[4] : +o.replaces_capex;
+    b[3] = Math.max(0, Math.round(+a[3] - oldCapex + +o.capex));
+    b[4] = +o.capex;
+  }
+  b[8] = +b[3] ? Math.round((b[7] / +b[3]) * 1000) / 1000 : 0;
   b[9] = +o.pct;
   b._sourced = o;
   return b;
@@ -3600,8 +3622,8 @@ function recCard(r, i, mode) {
       <div class="costline">total = ${costs}${r.om ? " (10 yrs, present value)" : ""}</div>
       
       ${r.pct > 0 ? `<p class="small"><b>Price effect used:</b> +${r.pct}% for homes reached${c.years ? `, full effect after ~${c.years} yr (discounted)` : ""}. Model estimate: <b>${rng.estStr}</b>; judgment band of ±${Math.round(rng.band * 100)}% (catalog grade ${esc(c.grade)}; ${esc(ivLabel(r.id))}): ${rng.str}.${rng.adjStr ? ` <span class="muted">Experimental local adjustment (${esc(rng.notes.join(", "))}): ${rng.adjStr}; shown for context, not used in the ranking.</span>` : ""}</p>` : `<p class="small"><b>Home-value effect:</b> not measured in the research, so it is ranked by how much this area needs it, not by value per $1.</p>`}
-      ${r.sourced ? `<p class="small" data-sourced-effect="${esc(r.id)}"><b>Sourced effect:</b> +${esc(r.sourced.pct)}% (the bundle was built with +${esc(r.sourced.replaces_pct)}%). ${esc(r.sourced.basis)} <span class="muted">${(r.sourced.citations || []).map(c => esc(c.cite)).join("; ")}</span></p>` : ""}
-      <p class="small"><b>Verification:</b> ${esc(ivLabel(r.id))}${c.grade && c.grade !== "none" ? ` (catalog grade ${esc(c.grade)}, the build's own rating)` : ""}. ${esc((ivRec(r.id) || {}).evidence || "")}${c.caveat ? " " + esc(agencyFor(c.caveat, m)) : ""}</p>
+      ${r.sourced ? `<p class="small" data-sourced-effect="${esc(r.id)}"><b>Sourced effect:</b> ${r.sourced.value_per_dollar ? `$${esc(r.sourced.value_per_dollar)} of home value per $1 spent (the bundle was built with +${esc(r.sourced.replaces_pct)}% on every home)` : `+${esc(r.sourced.pct)}% (the bundle was built with +${esc(r.sourced.replaces_pct)}%)`}. ${esc(r.sourced.basis)} <span class="muted">${(r.sourced.citations || []).map(c => esc(c.cite)).join("; ")}</span></p>` : ""}
+      <p class="small"><b>Verification:</b> ${esc(ivLabel(r.id))}${c.grade && c.grade !== "none" ? ` (catalog grade ${esc(c.grade)}, the build's own rating)` : ""}. ${esc((ivRec(r.id) || {}).evidence || "")}${(ivRec(r.id) || {}).caveat_override ? " " + esc(ivRec(r.id).caveat_override) : c.caveat ? " " + esc(agencyFor(c.caveat, m)) : ""}</p>
       ${mode === "value" || mode === "qol" ? fundHtml(r, selected) : ""}
       ${isOCArea(m) ? ocFundingHtml(r.id, m) : (c.funding || []).length && !(mode === "value" || mode === "qol") ? `<p class="small"><b>Who pays:</b> ${c.funding.map(k => { const f = D.funding[k]; return f ? `${f[2] ? `<a href="${esc(f[2])}" target="_blank" rel="noopener">${esc(f[0])}</a>` : esc(f[0])} (${esc(f[1])})` : ""; }).filter(Boolean).join("; ")}</p>` : ""}
       <p class="src muted">${isOCArea(m) ? `<b>Evidence and cost examples (mostly from LA County projects, used here for scale):</b><br>` : ""}${c.sources.map(esc).join("<br>")}</p>

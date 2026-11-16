@@ -18,8 +18,9 @@ Method (pipeline/build_oc.py main(), with one deliberate change to the peer pool
     median, as a strength at <= 20% with the same margin (thresholds unchanged).
   * crash-dependent rows (traffic calming, crosswalks, pedestrian signals, slow streets, protected bike lanes, street
     lighting): eligibility re-run through pipeline/engine.py with the rebuilt pedestrian/cyclist and KSI counts.
-    Where the source's pedestrian/cyclist count is a lower bound (California: the rebuilt CCRS count uses only the
-    "motor vehicle involved with" field, not the injured-persons table; Illinois: first harmful event only), a count
+    Where the source's pedestrian/cyclist count is a lower bound (Illinois: first harmful event only; California files
+    built before round 4 used only CCRS's "motor vehicle involved with" field; since round 4 they also use the
+    Parties and injured-persons tables and are complete), a count
     can prove a block group qualifies but not that it doesn't: rows are added or sized up, never dropped or sized
     down. Elsewhere rows that no longer qualify are dropped and crosswalk rows re-sized where the 10-crash threshold
     flips. LA's rows were built by an LA build whose code is not in this repository, so LA rows are never added.
@@ -95,7 +96,10 @@ def build(fips, la_det, la_counts, today):
         det = B["details"]
     county_m = {g: dict(v.get("m") or {}) for g, v in det.items()}
     ca = fips.startswith("06")
-    lower_bound = ca or fips.startswith("17")   # CA: CCRS 'involved with' field only; IL: first harmful event only
+    # IL: first harmful event only. CA: complete once the count also uses CCRS's Parties and injured-persons tables
+    # (round 4, 16 Nov 2026; the file's _meta.pedbike_rule says so); a CA file without that rule is still a lower bound.
+    cc_meta = cc.get("_meta") or {}
+    lower_bound = fips.startswith("17") or (ca and "Parties" not in str(cc_meta.get("pedbike_rule", "")))
     peers = list(county_m.items()) if (is_la or not ca) else [(g, dict(v["m"])) for g, v in la_det.items()] + list(county_m.items())
     X = np.array([vec(m) for _, m in peers], float)
     mu, sd = X.mean(0), X.std(0) + 1e-9

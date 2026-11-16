@@ -22,7 +22,8 @@ describe("recomputed crash comparisons", () => {
       expect(mt.crash_counts).toBe(`app/data/crash_counts/${fips}.json`);
       // California compares within CCRS (LA + county); other counties within their own state source
       expect(mt.peers).toMatch(fips.startsWith("06") ? /LA County/ : /within this county/);
-      expect(mt.pedbike_count_is_lower_bound).toBe(fips.startsWith("06") || fips.startsWith("17"));
+      // Illinois counts only the first thing struck; California's counts are complete since round 4 (Parties table).
+      expect(mt.pedbike_count_is_lower_bound).toBe(fips.startsWith("17"));
       for (const [g, a] of Object.entries(d.bg) as [string, any][]) {
         expect(g.startsWith(fips)).toBe(true);
         if (a.p) {

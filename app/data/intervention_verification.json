@@ -66,7 +66,7 @@
   "effect": "unchecked",
   "cost": "unchecked",
   "evidence": "Voicu & Been 2008 exists (REE); +1.5 pts not in abstract",
-  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine). | Round 4 (16 Nov): Voicu & Been (2008), Real Estate Economics, doi:10.1111/j.1540-6229.2008.00213.x: abstract confirms 'significant positive effects, especially in the poorest neighborhoods' but states no number; the paper body (SSRN 889113/913356, NELLCO) was unreachable. The engine's +1.5% / +0.5% stays unconfirmed.",
   "catalog_grade": "B",
   "kind": "value"
  },
@@ -360,11 +360,11 @@
   "kind": "value"
  },
  "blight_rehab": {
-  "status": "unverified",
-  "effect": "unchecked",
+  "status": "partially_verified",
+  "effect": "checked",
   "cost": "unchecked",
-  "evidence": "Ganduri & Maturana exists (2021 working paper on Crossref); +2.3 pts unchecked",
-  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "evidence": "Ganduri & Maturana (2024), Journal of Urban Economics, doi:10.1016/j.jue.2024.103694 (SSRN 3794796; abstract fetched via Semantic Scholar 2026-11-16): \"We find that house prices around a rehabilitated property increase between 2.3 and 4.0 percentage points following the rehabilitation.\" Engine uses 2.3% (the low end).",
+  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine). | Round 4 (16 Nov): Effect magnitude matches the low end of Ganduri & Maturana (2.3-4.0 points); the distance band of 'around' is in the paper body, not checked. The same abstract estimates an aggregate welfare benefit 3.8 times the amount invested. Cost ($110,000 per rehab) not checked.",
   "catalog_grade": "B",
   "kind": "value"
  },
@@ -421,13 +421,40 @@
   "kind": "value"
  },
  "ev_hub": {
-  "status": "unverified",
-  "effect": "not_found",
-  "cost": "unchecked",
-  "evidence": "\"Liang et al. 2023 (14M California sales)\" not found; Crossref hit is an unrelated preprint; 1% is a self-declared discount",
-  "notes": "'Liang et al. 2023 (14M California sales) +3.3%' could not be found (the closest Crossref match is an unrelated preprint about EV sales); the 1% used is a self-declared discount of that unfound number. The CARB 8-port site cost is also unverified in the catalog.",
+  "status": "partially_verified",
+  "effect": "checked",
+  "cost": "checked",
+  "evidence": "Effect: Liang, Qiu, Liu, He & Mauzerall (2023), Nature Sustainability, doi:10.1038/s41893-022-01058-5 (abstract on nature.com fetched 2026-11-16): \"The average price premium for houses with EVCSs within 1 km is about 3.3% (or US$17,212) compared with homes without proximate EVCSs.\" Cost: California Transportation Commission baseline agreement, SBCAG / City of Santa Barbara ZEV Charging Infrastructure project report (Nov 2025), p. 171: \"Eight DC Fast Chargers (DCFC) will be installed at this location. ... Total Project Cost $1,777,000 Outputs 8 DC charging ports\" (https://catc.ca.gov/-/media/ctc-media/documents/programs/baseline-agreements/2026-01/5-sbcag-ba-sb-us-101.pdf).",
+  "notes": "'Liang et al. 2023 (14M California sales) +3.3%' could not be found (the closest Crossref match is an unrelated preprint about EV sales); the 1% used is a self-declared discount of that unfound number. The CARB 8-port site cost is also unverified in the catalog. | Round 4 (16 Nov): Correction to the round-1 audit, which said 'Liang et al. 2023' could not be found: it is Liang et al., Nature Sustainability (2023), and its abstract states the +3.3% within 1 km the catalog cited. The engine used 1.0% and $800,000 for an 8-port site; a public project report budgets $1,777,000, so returns were overstated about 2.2x on cost. Both are replaced by the sourced figures. Remains partly verified: the effect is an association, and the cost is one planned project. Applied only in California: the study's sample is California-only (applies_if.state_fips_in); elsewhere no dollar figure is shown.",
   "catalog_grade": "C",
-  "kind": "value"
+  "kind": "value",
+  "sourced_effect": {
+   "pct": 3.3,
+   "replaces_pct": 1.0,
+   "capex": 1777000,
+   "replaces_capex": 800000,
+   "basis": "Homes with a public EV charging station within 1 km sold for about 3.3% more (hedonic association, 14 million California sales, 1993-2021; not a causal estimate). Cost: one planned 8-port DC fast site, Santa Barbara, $1,777,000 total project cost (Nov 2025 report; includes design and site work).",
+   "citations": [
+    {
+     "cite": "Liang, Qiu, Liu, He & Mauzerall (2023), Effects of expanding electric vehicle charging stations in California on the housing market, Nature Sustainability, doi:10.1038/s41893-022-01058-5",
+     "url": "https://www.nature.com/articles/s41893-022-01058-5",
+     "quote": "The average price premium for houses with EVCSs within 1 km is about 3.3% (or US$17,212) compared with homes without proximate EVCSs."
+    },
+    {
+     "cite": "California Transportation Commission, SB1 Cycle 4 baseline agreement: Santa Barbara ZEV Charging Infrastructure (PPNO 3273), project report Nov 2025, p. 171",
+     "url": "https://catc.ca.gov/-/media/ctc-media/documents/programs/baseline-agreements/2026-01/5-sbcag-ba-sb-us-101.pdf",
+     "quote": "Eight DC Fast Chargers (DCFC) will be installed at this location. ... Total Project Cost $1,777,000 Outputs 8 DC charging ports"
+    }
+   ],
+   "checked_on": "2026-11-16"
+  },
+  "applies_if": {
+   "state_fips_in": [
+    "06"
+   ]
+  },
+  "partial_reason": "effect is an association, cost is one planned project",
+  "caveat_override": "Association, not a causal estimate: California homes with a public charging station within 1 km sold for about 3.3% more (Liang et al. 2023); the cost is one planned 8-port site in Santa Barbara."
  },
  "microgrid": {
   "status": "partially_verified",
@@ -466,13 +493,31 @@
   "kind": "qol"
  },
  "school_bond": {
-  "status": "unverified",
-  "effect": "unchecked",
+  "status": "partially_verified",
+  "effect": "checked",
   "cost": "unchecked",
-  "evidence": "Cellini, Ferreira & Rothstein abstract confirms \"$1.50 or more for each $1\"; catalog says +6% used but engine uses pct 3.0 — inconsistent",
-  "notes": "Cellini, Ferreira & Rothstein's '$1.50 or more for each $1 of capital spending' is confirmed in their abstract, but the model uses a +3% price effect while the catalog text says +6% is used; the two disagree and neither was confirmed as applied, so no dollar figure is shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "evidence": "Cellini, Ferreira & Rothstein (2010), QJE 125(1):215, doi:10.1162/qjec.2010.125.1.215 (Crossref abstract fetched 2026-11-16): \"...implying a willingness to pay on the part of marginal homebuyers of $1.50 or more for each $1 of capital spending\".",
+  "notes": "Cellini, Ferreira & Rothstein's '$1.50 or more for each $1 of capital spending' is confirmed in their abstract, but the model uses a +3% price effect while the catalog text says +6% is used; the two disagree and neither was confirmed as applied, so no dollar figure is shown. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine). | Round 4 (16 Nov): The engine's +3% on every home (and the catalog's '+6%') is replaced by the study's own measure: $1.50 of home value per $1 of capital spending, so the return is $1.50 per $1. The cost (this area's share of ~$40M) is not checked, so the dollar amount inherits that. Applied only in California: the study's sample is California-only (applies_if.state_fips_in); elsewhere no dollar figure is shown.",
   "catalog_grade": "B",
-  "kind": "value"
+  "kind": "value",
+  "sourced_effect": {
+   "value_per_dollar": 1.5,
+   "replaces_pct": 3.0,
+   "basis": "Home values rise $1.50 or more per $1 of school capital spending (California bond referenda, regression discontinuity); the low end is used. Measured in California; applied elsewhere as an assumption.",
+   "citations": [
+    {
+     "cite": "Cellini, Ferreira & Rothstein (2010), The Value of School Facility Investments, QJE, doi:10.1162/qjec.2010.125.1.215",
+     "url": "https://doi.org/10.1162/qjec.2010.125.1.215",
+     "quote": "implying a willingness to pay on the part of marginal homebuyers of $1.50 or more for each $1 of capital spending"
+    }
+   ],
+   "checked_on": "2026-11-16"
+  },
+  "applies_if": {
+   "state_fips_in": [
+    "06"
+   ]
+  }
  },
  "library": {
   "status": "partially_verified",
@@ -524,7 +569,7 @@
   "effect": "unchecked",
   "cost": "unchecked",
   "evidence": "\"Maryland 2020; Edmonton 2024\" — no authors/titles; catalog: association, not this effect; 0.25% assumed",
-  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass). | Round 4 (16 Nov): Collins (2020), Applied Geography, doi:10.1016/j.apgeog.2020.102272 (abstract fetched via Semantic Scholar): an 'inverse association between housing prices and distance to the closest farmers' market' in five Central Maryland counties, stronger in poor food environments, but no effect size in the abstract; full text not reachable. Effect stays unconfirmed.",
   "catalog_grade": "D",
   "kind": "value"
  },
@@ -650,7 +695,7 @@
   "effect": "unchecked",
   "cost": "unchecked",
   "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
-  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass). | Round 4 (16 Nov): Crossref searches (property values with corner stores / mixed-use retail, bike boulevards and slow streets, wayfinding signage, night markets) found no study with a property-value effect; OpenAlex was rate-limited. Effect stays unconfirmed.",
   "catalog_grade": "U",
   "kind": "value"
  },
@@ -695,7 +740,7 @@
   "effect": "unchecked",
   "cost": "unchecked",
   "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
-  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass). | Round 4 (16 Nov): Crossref searches (property values with corner stores / mixed-use retail, bike boulevards and slow streets, wayfinding signage, night markets) found no study with a property-value effect; OpenAlex was rate-limited. Effect stays unconfirmed.",
   "catalog_grade": "U",
   "kind": "value"
  },
@@ -758,7 +803,7 @@
   "effect": "unchecked",
   "cost": "unchecked",
   "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
-  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass). | Round 4 (16 Nov): Crossref searches (property values with corner stores / mixed-use retail, bike boulevards and slow streets, wayfinding signage, night markets) found no study with a property-value effect; OpenAlex was rate-limited. Effect stays unconfirmed.",
   "catalog_grade": "U",
   "kind": "value"
  },
@@ -785,7 +830,7 @@
   "effect": "unchecked",
   "cost": "unchecked",
   "evidence": "grade U: \"one AI research pass\", cost and effect claims not checked (catalog self-label)",
-  "notes": "Cost has no source (or comes from an unchecked AI research pass).",
+  "notes": "Cost has no source (or comes from an unchecked AI research pass). | Round 4 (16 Nov): Crossref searches (property values with corner stores / mixed-use retail, bike boulevards and slow streets, wayfinding signage, night markets) found no study with a property-value effect; OpenAlex was rate-limited. Effect stays unconfirmed.",
   "catalog_grade": "U",
   "kind": "value"
  },

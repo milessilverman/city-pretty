@@ -38,6 +38,7 @@ OUT_DIR = os.path.join(ROOT, "app", "data", "crash_counts")
 UA = {"User-Agent": "city-pretty-data-pipeline/1.0"}
 CRASHES = {2023: "436642c0-cd04-4a4c-b45e-564b66437476", 2024: "f775df59-b89b-4f82-bd3d-8807fa3a22a0", 2025: "9f4fc839-122d-4595-a146-43bc4ed16f46"}
 INJURED = {2023: "1dfc36fa-a5dd-4616-b9b0-ff55699e299a", 2024: "a36a0078-d7e1-4244-8337-0a59433c9b84", 2025: "10184ea3-7411-42d8-87a6-17039b58f04b"}
+PARTIES = {2023: "84376be5-548b-44e3-8ebc-73e8a2ca9945", 2024: "93892d36-017b-4a2a-bc0b-f1f385060b96", 2025: "07701a08-4f29-418f-9066-34f19d913ca7"}
 SQL = "https://data.ca.gov/api/3/action/datastore_search_sql?"
 TIGER = "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/10/query?"
 BOUNDARY_M = 10.0
@@ -93,6 +94,18 @@ def block_groups(county3):
     return {g: transform(to_m, p).buffer(0) for g, p in raw.items()}, to_m
 
 
+def pedbike_collisions():
+    """Crashes with a pedestrian or bicyclist party (Parties table) or a pedestrian/bicyclist injured person.
+    The crash table's MotorVehicleInvolvedWithDesc names only the first thing struck, so it misses crashes where a
+    pedestrian or cyclist was involved later in the sequence (round 4, 16 Nov 2026)."""
+    ids = set()
+    for y in CRASHES:
+        for rid, col, field in ((PARTIES[y], "CollisionId", "PartyType"), (INJURED[y], "CollisionId", "InjuredPersonType")):
+            rows = sql(f'SELECT DISTINCT "{col}" FROM "{rid}" WHERE "{field}" IN (\'Pedestrian\',\'Bicyclist\')')
+            ids |= {int(r[col]) for r in rows if r[col] is not None}
+    return ids
+
+
 def ksi_collisions():
     ids = set()
     for y, rid in INJURED.items():
@@ -113,7 +126,7 @@ def county_crashes(code):
             yield from rows
 
 
-def build_county(code, ksi_ids, today):
+def build_county(code, ksi_ids, today, pb_ids=frozenset()):
     fips = "06" + str(2 * code - 1).zfill(3)
     bgs, to_m = block_groups(fips[2:])
     if not bgs:
@@ -141,8 +154,8 @@ def build_county(code, ksi_ids, today):
         if len(hits) > 1:
             stats["on_boundary"] += 1
         w = (r["MotorVehicleInvolvedWithDesc"] or "").upper()
-        ped = "PEDESTRIAN" in w or "BICYCLE" in w
-        ksi = (r["NumberKilled"] or 0) > 0 or int(r["Collision Id"]) in ksi_ids
+        ped = "PEDESTRIAN" in w or "BICYCLE" in w or int(r["Collision Id"]) in pb_ids
+        ksi =(r["NumberKilled"] or 0) > 0 or int(r["Collision Id"]) in ksi_ids
         for i in hits:
             c = out[gids[i]]
             c[2] += 1
@@ -153,6 +166,8 @@ def build_county(code, ksi_ids, today):
         "source": f"CHP California Crash Reporting System (CCRS), data.ca.gov: Crashes and InjuredWitnessPassengers 2023-2025, County Code {code}",
         "geography": "Census TIGERweb 2020 block groups",
         "rule": f"A crash counts for a block group if it is inside it or within {BOUNDARY_M:g} m of its boundary; crashes on boundary streets count for each bordering block group.",
+        "years": [2023, 2025],
+        "pedbike_rule": "first object struck is a pedestrian or bicycle, or any party (Parties table) or injured person is a Pedestrian or Bicyclist",
         "fields": ["pedestrian or bicycle crashes", "killed or seriously injured crashes (any person Fatal, SuspectSerious or SevereInactive, or NumberKilled > 0)", "all crashes"],
         "built": today,
         "script": "scripts/build_crash_counts_ca.py",
@@ -170,11 +185,15 @@ def main():
     want = {a for a in sys.argv[1:] if a.isdigit()}
     ksi_ids = ksi_collisions()
     print(f"{len(ksi_ids)} statewide crashes with a killed or seriously injured person", file=sys.stderr)
+    pb_ids = pedbike_collisions()
+    print(f"{len(pb_ids)} statewide crashes with a pedestrian or bicyclist party or injured person", file=sys.stderr)
     for code in range(1, 59):
         fips = "06" + str(2 * code - 1).zfill(3)
         if want and fips not in want:
             continue
-        build_county(code, ksi_ids, today)
+        if fips == "06075":  # San Francisco: only 34% of its CCRS crashes are geocoded; kept on DataSF (see audit doc)
+            continue
+        build_county(code, ksi_ids, today, pb_ids)
 
 
 if __name__ == "__main__":

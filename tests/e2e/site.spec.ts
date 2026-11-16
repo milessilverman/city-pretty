@@ -413,7 +413,9 @@ test("a sourced-effect override rescales the value and shows its citation (stree
   await page.waitForFunction(() => { try { return !!(0, eval)("INTERVENTION_VERIFICATION"); } catch { return false; } }, null, { timeout: 30_000 });
   const res = await page.evaluate(() => {
     const ev = (s: string) => (0, eval)(s);
-    const id = "060371242041";   // its street_lighting row was built with +1.358%
+    // its street_lighting row was built with +1.358% and survives the crash recompute (060371242041's row is now dropped:
+    // with complete CCRS counts it no longer has the 3 pedestrian/cyclist crashes the row requires)
+    const id = "060374013113";
     ev("select")(id, false);
     const panel = document.querySelector("#panel") as HTMLElement;
     const row = (ev("D").details[id].r || []).find((a: any) => a[0] === "street_lighting");
@@ -424,6 +426,27 @@ test("a sourced-effect override rescales the value and shows its citation (stree
   expect(res.adj[7]).toBe(Math.round((res.raw[7] * 0.6) / 1.358));
   expect(res.html).toContain('data-sourced-effect="street_lighting"');
   expect(res.html).toContain("Pope &amp; Pope");
+  expect(errors).toEqual([]);
+});
+
+test("round-4 overrides: EV hub effect and construction cost, and school bonds at $1.50 per $1 (LA rows)", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { try { return !!(0, eval)("INTERVENTION_VERIFICATION"); } catch { return false; } }, null, { timeout: 30_000 });
+  const res = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s);
+    const id = "060372044201";   // has an ev_hub row (+1.0%, $800,000 capex) and a school_bond row (+3.0%)
+    ev("select")(id, false);
+    const rows = ev("D").details[id].r || [];
+    const evr = rows.find((a: any) => a[0] === "ev_hub"), sb = rows.find((a: any) => a[0] === "school_bond");
+    return { evr, evAdj: ev("ivRow")(evr), sb, sbAdj: ev("ivRow")(sb) };
+  });
+  // EV: value scaled 3.3/1.0; cost swaps the $800,000 capex for the sourced $1,777,000 (upkeep and land kept)
+  expect(res.evAdj[7]).toBe(Math.round(res.evr[7] * 3.3 / res.evr[9]));
+  expect(res.evAdj[3]).toBe(res.evr[3] - res.evr[4] + 1777000);
+  expect(res.evAdj[8]).toBeCloseTo(res.evAdj[7] / res.evAdj[3], 3);
+  // School bond: value = $1.50 per $1 of its own cost
+  expect(res.sbAdj[7]).toBe(Math.round(res.sb[3] * 1.5));
+  expect(res.sbAdj[8]).toBe(1.5);
   expect(errors).toEqual([]);
 });
 
@@ -444,14 +467,15 @@ test("California blanks are filled with the Census tract value, labelled as such
 
 test("crash comparisons use the rebuilt counts in a California and a Pennsylvania county, never the old ranking", async ({ page }) => {
   const errors = await openPage(page);
-  // Los Angeles (CCRS, lower-bound pedestrian/cyclist count): 060372046001's old text said 134 such crashes.
+  // Los Angeles (CCRS; complete pedestrian/cyclist count since round 4, from the Parties and injured-persons tables):
+  // 060372046001's old text said 134 such crashes.
   const la = await page.evaluate(() => {
     const ev = (s: string) => (0, eval)(s);
     ev("select")("060372046001", false);
     return (document.querySelector("#panel") as HTMLElement).textContent || "";   // the gap list can sit in a closed section
   });
   expect(la).toContain("inside this block group or on its boundary streets (CHP CCRS 2023–2025");
-  expect(la).toContain("undercounts pedestrian and cyclist crashes");
+  expect(la).not.toContain("undercounts pedestrian and cyclist crashes");   // no longer a lower bound
   expect(la).not.toContain("crashes that injured someone walking or biking on record here");
 
   // Allegheny County, PA: 420035153001's old text said 12 crashes over 2017-2023.

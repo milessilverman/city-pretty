@@ -35,7 +35,7 @@ audit doc the same day.
 | N2 | **Home-value back-tests outside California**. Done 16 Nov: estimates are withheld in every county without a passing back-test. DC passed (10.7%) and is shown; Philadelphia (18.7%) and Cook (18.6%) failed and are withheld with their numbers. Still to do: Florida (the statewide service stalls; qualification codes not yet pinned down), New York City, King County, Allegheny County | R3 (same valuation code) | Each county has real results; estimates show only where the model passed |
 | ✓ N3 | **State housing laws for all 50 states** (done 16 Nov: 13 laws added; NH, CT, DC still to check; "none found" states need code-text searches) (ADUs, lot splits, middle housing, parking): primary-source text for each state that has such a law | R5 (same law file) | Every state either has verified records or is marked "no law found as of date" with the search recorded |
 | ✓ N4 | **Rebuild the county data files' internal rankings** (done 16 Nov in the page; SF pending) ("worse than X% of similar areas") from the rebuilt crash counts | R1, R2 | Safety rankings use the boundary rule |
-| N5 | **Improvement catalog, round 4**: the next ten improvements after R4 | R4 | Same standard |
+| ✓ N5 | **Improvement catalog, round 4** (done 16 Nov: EV hubs, school bonds, blight rehab sourced; EV and school bonds California-only; CA pedestrian/cyclist crash counts made complete; see `audit/catalog-coverage-round4.md`) | R4 | Same standard |
 
 ## What can't be made complete, and how it's handled
 

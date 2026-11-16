@@ -45,11 +45,20 @@ describe("intervention verification file", () => {
   it("records the audit's decisions", () => {
     expect(IV.street_trees.status).toBe("unverified");
     expect(IV.street_trees.notes).toMatch(/cannot be reproduced/);
-    expect(IV.ev_hub.status).toBe("unverified");
+    // Round 4: the EV study was found after all (Liang et al. 2023, Nature Sustainability), and a public project report
+    // gives the cost; partly verified because the effect is an association and the cost is one planned project.
+    expect(IV.ev_hub.status).toBe("partially_verified");
+    expect(IV.ev_hub.notes).toMatch(/Correction to the round-1 audit/);
     // Round 3: the ADU study was found after all (Brueckner & Thomaz 2024); effect checked, cost not.
     expect(IV.adu.status).toBe("partially_verified");
     expect(IV.adu.notes).toMatch(/Correction: the 16 Nov catalog audit said this study was not found/);
-    expect(IV.school_bond.status).toBe("unverified");
+    // Round 4: school bonds use the study's own $1.50 per $1; blight rehab's 2.3% matches the study's low end.
+    expect(IV.school_bond.status).toBe("partially_verified");
+    expect(IV.school_bond.sourced_effect.value_per_dollar).toBe(1.5);
+    expect(IV.blight_rehab.status).toBe("partially_verified");
+    // Both studies sample California only, so their overrides apply only in California.
+    expect(IV.ev_hub.applies_if).toEqual({ state_fips_in: ["06"] });
+    expect(IV.school_bond.applies_if).toEqual({ state_fips_in: ["06"] });
     expect(IV.farmers_market.status).toBe("unverified");
     expect(IV.affordable_housing.applies_if).toEqual({ median_household_income_below: 26000 });
     expect(IV.traffic_calming.status).toBe("verified");

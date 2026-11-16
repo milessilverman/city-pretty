@@ -1253,20 +1253,19 @@
   "journal": "Quarterly Journal of Economics",
   "doi": "10.1162/qjec.2010.125.1.215",
   "source_url": "https://doi.org/10.1162/qjec.2010.125.1.215",
-  "impact": null,
+  "impact": "Passing a referendum causes immediate, sizable increases in home prices, implying a willingness to pay on the part of marginal homebuyers of $1.50 or more for each $1 of capital spending.",
   "geography": null,
   "vpd": null,
   "takeaway": null,
   "citation": "Stephanie Riegg Cellini, Fernando Ferreira, Jesse Rothstein (2010). The Value of School Facility Investments: Evidence from a Dynamic Regression Discontinuity Design*. Quarterly Journal of Economics. https://doi.org/10.1162/qjec.2010.125.1.215",
   "verification": {
-   "status": "partially_verified",
-   "method": "crossref_doi_lookup",
+   "status": "verified",
+   "method": "Crossref metadata and abstract fetched 2026-11-16",
    "checked_on": "2026-11-16",
-   "evidence": "Crossref /works/10.1162/qjec.2010.125.1.215: title, authors, year, container confirmed.",
+   "evidence": "implying a willingness to pay on the part of marginal homebuyers of $1.50 or more for each $1 of capital spending",
    "unverified_fields": [
     "vpd",
     "takeaway",
-    "impact",
     "geography"
    ],
    "notes": "claimed DOI (AER) not found; correct journal is QJE. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims).",
@@ -1660,6 +1659,60 @@
    "evidence": "A 7 to 11% price differential is identified within 4,000 feet of the Fairmount tree plantings. ... Any positive changes brought by the PHS tree plantings were not detected with sufficient statistical power.",
    "unverified_fields": [],
    "notes": "Added in catalog round 3 (docs/audit/catalog-coverage-round3.md)."
+  }
+ },
+ {
+  "id": "ev_liang_2023",
+  "category": "Energy & EV Infrastructure",
+  "title": "Effects of expanding electric vehicle charging stations in California on the housing market",
+  "authors": "Jing Liang, Yueming Qiu, Pengfei Liu, Pan He, Denise L. Mauzerall",
+  "year": 2023,
+  "journal": "Nature Sustainability",
+  "geography": "California (about 14 million transactions, 1993-2021)",
+  "impact": "The average price premium for houses with EVCSs within 1 km is about 3.3% (or US$17,212) compared with homes without proximate EVCSs.",
+  "vpd": null,
+  "takeaway": null,
+  "citation": "Liang, J., Qiu, Y., Liu, P., He, P. & Mauzerall, D. L. (2023). Effects of expanding electric vehicle charging stations in California on the housing market. Nature Sustainability.",
+  "doi": "10.1038/s41893-022-01058-5",
+  "source_url": "https://www.nature.com/articles/s41893-022-01058-5",
+  "last_verified": "2026-11-16",
+  "verification": {
+   "status": "verified",
+   "method": "Crossref metadata; abstract read on nature.com 2026-11-16",
+   "checked_on": "2026-11-16",
+   "evidence": "The average price premium for houses with EVCSs within 1 km is about 3.3% (or US$17,212) compared with homes without proximate EVCSs.",
+   "unverified_fields": [
+    "vpd",
+    "takeaway"
+   ],
+   "notes": "Hedonic association, not a causal design. Added in catalog round 4."
+  }
+ },
+ {
+  "id": "rehab_ganduri_maturana_2024",
+  "category": "Housing & Blight",
+  "title": "Do property rehabs affect neighboring property prices?",
+  "authors": "Rohan Ganduri, Gonzalo Maturana",
+  "year": 2024,
+  "journal": "Journal of Urban Economics",
+  "geography": "United States",
+  "impact": "We find that house prices around a rehabilitated property increase between 2.3 and 4.0 percentage points following the rehabilitation.",
+  "vpd": null,
+  "takeaway": null,
+  "citation": "Ganduri, R. & Maturana, G. (2024). Do property rehabs affect neighboring property prices? Journal of Urban Economics.",
+  "doi": "10.1016/j.jue.2024.103694",
+  "source_url": "https://doi.org/10.1016/j.jue.2024.103694",
+  "last_verified": "2026-11-16",
+  "verification": {
+   "status": "verified",
+   "method": "Crossref metadata (JUE and SSRN 3794796 versions); abstract via Semantic Scholar 2026-11-16",
+   "checked_on": "2026-11-16",
+   "evidence": "We find that house prices around a rehabilitated property increase between 2.3 and 4.0 percentage points following the rehabilitation.",
+   "unverified_fields": [
+    "vpd",
+    "takeaway"
+   ],
+   "notes": "Added in catalog round 4."
   }
  }
 ]

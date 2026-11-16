@@ -7,6 +7,9 @@ la_bundle = json.loads(gzip.decompress(base64.b64decode(open("app/data/bundle-la
 CAT = la_bundle["catalog"]
 
 
+FIPS = ""   # county being tallied (set by tally); the page uses activeFips()
+
+
 def allows(id_, m):
     r = iv.get(id_)
     if not r or r.get("status") not in ("verified", "partially_verified"):
@@ -16,16 +19,30 @@ def allows(id_, m):
         inc = (m or {}).get("inc")
         if inc is None or not (float(inc) < c["median_household_income_below"]):
             return False
+    if c.get("state_fips_in") is not None and FIPS[:2] not in c["state_fips_in"]:
+        return False
     return True
 
 
 def row(a):
     o = (iv.get(a[0]) or {}).get("sourced_effect")
-    if not o or not a[9] or float(a[9]) == float(o["pct"]):
+    if o and o.get("value_per_dollar") and a[3]:
+        b = list(a)
+        b[7] = round(a[3] * o["value_per_dollar"])
+        b[8] = o["value_per_dollar"]
+        return b
+    if not o or not o.get("pct") or not a[9]:
+        return a
+    swap = o.get("capex") and o.get("replaces_capex")
+    if float(a[9]) == float(o["pct"]) and not swap:
         return a
     b = list(a)
     b[7] = round(a[7] * o["pct"] / a[9])
-    b[8] = round(b[7] / a[3], 3) if a[3] else 0
+    if swap:
+        old_capex = a[4] if a[4] and a[4] > 0 else o["replaces_capex"]
+        b[3] = max(0, round(a[3] - old_capex + o["capex"]))
+        b[4] = o["capex"]
+    b[8] = round(b[7] / b[3], 3) if b[3] else 0
     return b
 
 
@@ -74,17 +91,20 @@ def bundle_items(path):
 
 
 out = {}
+FIPS = "06037"
 n, ok, both, dist = tally(la_items(), CAT)
 out["LA County"] = (n, ok, both, dist.most_common(8))
 N = OK = BOTH = 0
 DIST = collections.Counter()
 trav = None
 for p in sorted(glob.glob("counties/bundle_*.json.gz")):
+    FIPS = p.split("bundle_")[1][:5]
     n, ok, both, dist = tally(bundle_items(p), CAT)
     N += n; OK += ok; BOTH += both; DIST.update(dist)
     if p.endswith("48453.json.gz"):
         trav = (n, ok, both, dist.most_common(6))
 out["all non-LA bundles"] = (N, OK, BOTH, DIST.most_common(8))
 out["Travis County, TX"] = trav
+out["nationwide (LA + all bundles)"] = (out["LA County"][0] + N, out["LA County"][1] + OK, out["LA County"][2] + BOTH, (DIST + collections.Counter(dict(out["LA County"][3]))).most_common(8))
 for k, (n, ok, both, top) in out.items():
     print(f"{k}: {n} block groups; sourced best bet {ok} ({100*ok/n:.1f}%); both sides sourced {both} ({100*both/n:.1f}%); top: {top}")
