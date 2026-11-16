@@ -26,12 +26,18 @@ unknown zoning, flood and fire checks say "not checked" instead of defaulting to
 after a neighborhood label outside them read "Near …". The AI advisor says plainly that it is not connected yet instead of
 showing canned answers. Phones get a compact layout.
 
+**Explore mode, 16 Nov 2026:** a Map / Explore switch in the header. Explore shows the same county without a map: cards for
+every improvement idea, each explained in plain words (what it is, how sure the estimate is, what it means for renters, who
+decides, who could pay, and where in the county it pays off most), a searchable list of neighborhoods with a short story for
+each, and a step-by-step "How it works". "See it on the map" opens the same neighborhood in map mode.
+
 ## What is here
 
 | Path | What it is |
 |---|---|
 | `index.html` | the page's markup (map, county picker, panels) |
 | `app/app.js`, `app/app.css` | the page's code and styles (edit these directly; there is no build step) |
+| `app/explore.js` | Explore mode: idea cards, neighborhood stories and the plain-language explanations of each idea |
 | `app/config.js` | site settings: `workerUrl`, the AI advisor's and Street View's server (see below) |
 | `app/data/` | LA County and Orange County data, fetched when needed |
 | `app/vendor/` | Leaflet 1.9.4 and fflate |

@@ -165,3 +165,32 @@ test("header is one slim row on a laptop screen", async ({ page }) => {
   const h = await page.evaluate(() => document.querySelector("header.top")!.getBoundingClientRect().height);
   expect(h).toBeLessThan(70);
 });
+
+test("Explore mode explains ideas and neighborhoods without the map, and hands off to the map", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.click("#view-switch [data-view=explore]");
+  await expect(page.locator("#map")).toBeHidden();
+  await expect(page.locator(".ex-title")).toHaveText("What could make Los Angeles County better?");
+  // every idea card has a plain explanation
+  const cards = page.locator(".ex-grid .ex-card");
+  expect(await cards.count()).toBeGreaterThan(20);
+  expect(await page.locator(".ex-grid .ex-card-plain:empty").count()).toBe(0);
+  // one idea, explained
+  await page.click("[data-ex-idea=street_trees]");
+  await expect(page.locator(".ex-detail h2")).toHaveText("Plant street trees on open sites");
+  await expect(page.locator(".ex-detail")).toContainText("Who decides");
+  await expect(page.locator(".ex-rank li").first()).toBeVisible();
+  // a neighborhood's story, then the same place on the map
+  await page.click(".ex-rank [data-ex-area] >> nth=0");
+  await expect(page.locator(".ex-short")).toContainText("every $1 spent adds about");
+  const id = await page.locator(".ex-short [data-ex-map]").getAttribute("data-ex-map");
+  await page.click(".ex-short [data-ex-map]");
+  await expect(page.locator("#map")).toBeVisible();
+  await page.waitForFunction((want) => (window as any).location.hash.includes("bg=" + want), id, { timeout: 20_000 });
+  await expect(page.locator("#panel")).toContainText(id!);
+  // the choice is remembered on the next visit
+  await page.click("#view-switch [data-view=explore]");
+  await page.reload();
+  await expect(page.locator(".ex-title")).toBeVisible({ timeout: 60_000 });
+  expect(errors).toEqual([]);
+});
