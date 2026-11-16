@@ -101,3 +101,42 @@ describe("50-state review: the engine applies the new laws only where every cond
     expect(pending(r)).toContain("or_commercial_197a460");
   });
 });
+
+describe("round 2 (16 Nov): laws found by searching state code text", () => {
+  it("Idaho: ADUs as of right in cities over 10,000, not in smaller ones; starter-home subdivisions are never a single-lot right", () => {
+    const big = evaluateByRightHousing(sfr({ state_code: "ID", municipality_pop: 50000 }), LAWS);
+    expect(ids(big)).toContain("id_adu_67_6541");
+    expect(ids(big)).not.toContain("id_starter_home_67_6542");
+    expect(ids(evaluateByRightHousing(sfr({ state_code: "ID", municipality_pop: 10000 }), LAWS))).not.toContain("id_adu_67_6541");
+  });
+
+  it("Nevada: the ADU-ordinance mandate is reported as unconfirmed for a parcel, never as by-right", () => {
+    const r = evaluateByRightHousing(sfr({ state_code: "NV", municipality_pop: 300000 }), LAWS);
+    expect(ids(r)).not.toContain("nv_adu_ordinance_278_257");
+    expect(pending(r)).toContain("nv_adu_ordinance_278_257");
+  });
+
+  it("Colorado HB 24-1152 needs its MPO coverage condition and no longer applies to every Colorado parcel", () => {
+    const r = evaluateByRightHousing(sfr({ state_code: "CO", municipality_pop: 800 }), LAWS);
+    expect(ids(r)).not.toContain("co_hb24_1152");
+    expect(byId["co_hb24_1152"].statute_citation).toMatch(/29-35-103/);
+    expect(byId["co_hb24_1152"].verification.status).toBe("verified");
+  });
+
+  it("California AB 2011: commercial sites only, with its affordability and site conditions reported, not assumed", () => {
+    const c = evaluateByRightHousing(commercial({ state_code: "CA" }), LAWS);
+    expect(ids(c)).not.toContain("ca_ab2011_affordable");
+    expect(pending(c)).toContain("ca_ab2011_affordable");
+    expect(pending(evaluateByRightHousing(sfr({ state_code: "CA" }), LAWS))).not.toContain("ca_ab2011_affordable");
+    expect(byId["ca_ab2011_affordable"].verification.evidence).toMatch(/use by right/);
+  });
+
+  it("every 'none found' state says what was actually searched in round 2", () => {
+    for (const [st, s] of Object.entries(AUDIT.states) as [string, any][]) {
+      if (s.status !== "none_found") continue;
+      expect(s.round2_search, st).toBeDefined();
+      expect(s.notes, st).toMatch(/Round 2 (full-text searched|could not full-text search)/);
+    }
+    expect(AUDIT.states.NC.notes).toMatch(/Effective January 1, 2027/);
+  });
+});

@@ -43,3 +43,36 @@ parcel record can't express, reported as "not on file" rather than assumed).
 AL, AK, AR, DE, GA, ID, IL, IN, IA, KS, KY, LA, MI, MN, MS, MO, NE, NV, NJ, NM, NY, NC, ND, OH, OK, PA, SC, SD, TN, VA,
 WV, WI, WY (statewide). Candidate discovery used secondary pages and a known-reform list, with code searches only for
 IA, MN and VA, so "none found" is not proof that no such law exists.
+
+## Round 2 (16 Nov 2026): searching the code text itself
+
+`scripts/search_zoning_chapters.py` fetched each "none found" state's zoning-enabling chapter(s) from the state's own
+code site and searched the text for ADU, duplex/two-family/middle-housing, lot-split, parking-minimum and
+commercial-residential terms. A page counts as searched only if it holds statute text (8,000+ characters and at least
+10 occurrences of "shall"); tables of contents and bot checks don't count. `scripts/add_state_laws_n3b.py` added what
+was found, with every quote cut from fetched text, and wrote each state's search log into `state-laws-50.json`
+(`round2_search`).
+
+**Added (5) and corrected (1):**
+
+| Record | Law | What it does | Status |
+|---|---|---|---|
+| `id_adu_67_6541` | Idaho Code § 67-6541 (2026 ch. 265, S 1354aa, effective 2026-07-01) | Cities over 10,000 may not ban ADUs in residential zones; ADUs meeting local requirements are approved administratively as of right; by 1 Feb 2027, one ADU per single-family lot with parking, size and owner-occupancy limits | verified |
+| `id_starter_home_67_6542` | Idaho Code § 67-6542 (2026 ch. 264, S 1352aa, effective 2026-07-01) | Starter-home subdivisions (4+ acres, lots up to 1,500 sq ft) may not be banned in cities over 10,000; lot and setback limits due by 1 Feb 2027. A subdivision rule, not a single-lot right | verified |
+| `nv_adu_ordinance_278_257` | NRS 278.257 (added 2025) | Counties of 100,000+ and cities of 60,000+ must adopt an ordinance allowing ADUs (no kitchen bans, at most one extra parking space, no rental bans). Approval is not made ministerial, so the engine reports it as unconfirmed | partially verified (effective date and bill not identified) |
+| `ca_ab2011_affordable` | Cal. Gov. Code §§ 65912.110-.114 (AB 2011, Stats. 2022 ch. 647; amended 2024) | 100%-affordable multifamily housing by right, ministerial, on sites zoned for office, retail or parking, with urbanized-area, perimeter and industrial-adjacency conditions; repealed 1 Jan 2033. Read from the Legislative Counsel bulk database (`scripts/ca_pubinfo_section.py`) | verified |
+| `co_hb24_1304_parking` | C.R.S. § 29-36-103 (HB 24-1304) | From 30 June 2025, no parking minimums for multifamily or residential adaptive re-use inside an MPO and a mapped transit service area | verified |
+| `co_hb24_1152` (corrected) | C.R.S. § 29-35-103 (HB 24-1152) | Citation and no-new-parking rule confirmed from the signed act. **It had no coverage condition, so the engine applied it to every Colorado single-family parcel;** it now requires a municipality of 1,000+ inside an MPO | verified |
+
+**Searched, nothing qualifying:**
+- **Full text searched:** IA (ch. 414, 335), MI (Zoning Enabling Act), MN (§ 462.357), ND (ch. 40-47), OH (ch. 713, 519), SC (ch. 6-29), WY (title 15).
+- **North Carolina:** G.S. 160D-702(c)(2a) bars minimum parking requirements, but is marked "(Effective January 1, 2027)", so it's passed but not yet in effect.
+- **Texas:** SB 673 (2025 ADUs) was not enacted; its last action was being placed on the House calendar on 26 May 2025. HB 2789, which I checked as a possible ADU bill, is a child-welfare bill.
+- **California:** AB 2011's Article 2 (mixed-income commercial corridors, §§ 65912.120 ff.) is not added yet.
+
+**Could not search the code text** (the state's site returned only a table of contents, a bot check or an error):
+AL, AK, AR, DE, GA, IL, IN, KS, KY, LA, MS, MO, NE, NJ, NM, NY, OK, PA, SD, TN, VA, WV, WI. For these states "none
+found" still rests on round 1's candidate search only. NH, CT, DC and MD stay could-not-check or not-checked, because
+their official sites don't connect from the audit machine and Justia and FindLaw block it. Search engines (LegiScan,
+Justia search, DuckDuckGo, Brave, Mojeek) blocked automated queries. Bing's results were not used, because its terms
+forbid it.
