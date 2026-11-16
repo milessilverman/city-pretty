@@ -173,6 +173,185 @@
     "evidence": "data/backtests/county_model_test_11001.json"
    }
   },
+  "12057": {
+   "_status": "backtest_run",
+   "countyFips": "12057",
+   "countyName": "Hillsborough County",
+   "model_name": "county_sales_regression_no_rooms_with_assessor",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_12057_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_12057.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": [
+    "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/SDF/2026F/Hillsborough%2039%20Final%20SDF%202026.zip (Florida DOR SDF, 2026 Final roll: sales 2025-2026, QUAL_CD)",
+    "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAL/2026F/Hillsborough%2039%20Final%20NAL%202026.zip (Florida DOR NAL, 2026 Final roll: characteristics and just value as of 1 Jan 2026)",
+    "https://floridarevenue.com/property/dataportal/Documents/PTO Data Portal/User Guides/2026 Users guide and quick reference/2026_NAL_SDF_NAP_Users_Guide.pdf (QUAL_CD definitions)"
+   ],
+   "filters": [
+    "QUAL_CD 01 or 02 (DOR: qualified as arm's length, included in sales ratio analysis)",
+    "not a multi-parcel sale",
+    "price >= $25,000",
+    "DOR use code 001, one residential unit, living area >= 400 sq ft, year built not after the sale year",
+    "sale dated to the 1st of its month (SDF has year and month only)"
+   ],
+   "split": {
+    "fit": [
+     "2025-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-03-31"
+    ],
+    "test": [
+     "2026-04-01",
+     "2026-08-31"
+    ]
+   },
+   "locked": {
+    "spec": "regression_no_rooms_with_assessor",
+    "locked_on": "2026-11-16",
+    "why": "Best development median error: regression with the 1 Jan 2026 just value 7.7% (2606 sales) vs just value x sales ratio 8.0%, regression without it 10.8%, neighborhood median 17.8%. Caveat: the just value is as of 1 January (s. 192.042, F.S.) but certified later in 2026; the test starts in April to keep later sales out of the appraiser reach, and the regression without it is recorded alongside.",
+    "dev_mdape": {
+     "neighborhood_median": 0.1779,
+     "neighborhood_ppsf_x_sqft": 0.1135,
+     "assessor_ratio": 0.0797,
+     "regression_no_rooms": 0.1078,
+     "regression_no_rooms_with_assessor": 0.0772
+    }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 7637,
+    "excluded": 17,
+    "mdape": 0.097,
+    "mape": 0.1519,
+    "median_signed_error": 0.0036,
+    "share_within_10pct": 0.5108,
+    "share_within_20pct": 0.7832,
+    "p80_abs_error": 0.2096
+   },
+   "baseline_neighborhood_median": {
+    "n": 7637,
+    "excluded": 17,
+    "mdape": 0.201,
+    "mape": 0.3146,
+    "median_signed_error": 0.025,
+    "share_within_10pct": 0.2824,
+    "share_within_20pct": 0.4976,
+    "p80_abs_error": 0.45
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": true,
+    "reason": null
+   },
+   "by_price_band": {
+    "under $500k": {
+     "n": 5180,
+     "excluded": 0,
+     "mdape": 0.1019,
+     "mape": 0.169,
+     "median_signed_error": 0.0293,
+     "share_within_10pct": 0.4929,
+     "share_within_20pct": 0.7587,
+     "p80_abs_error": 0.2292
+    },
+    "$500k-$1M": {
+     "n": 1916,
+     "excluded": 0,
+     "mdape": 0.0816,
+     "mape": 0.1063,
+     "median_signed_error": -0.0338,
+     "share_within_10pct": 0.5882,
+     "share_within_20pct": 0.8664,
+     "p80_abs_error": 0.1643
+    },
+    "$1M-$2M": {
+     "n": 419,
+     "excluded": 0,
+     "mdape": 0.121,
+     "mape": 0.1468,
+     "median_signed_error": -0.1071,
+     "share_within_10pct": 0.42,
+     "share_within_20pct": 0.7422,
+     "p80_abs_error": 0.2261
+    },
+    "$2M and up": {
+     "n": 122,
+     "excluded": 0,
+     "mdape": 0.1336,
+     "mape": 0.1628,
+     "median_signed_error": -0.1274,
+     "share_within_10pct": 0.3689,
+     "share_within_20pct": 0.6557,
+     "p80_abs_error": 0.2477
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 7637,
+     "excluded": 17,
+     "mdape": 0.201,
+     "mape": 0.3146,
+     "median_signed_error": 0.025,
+     "share_within_10pct": 0.2824,
+     "share_within_20pct": 0.4976,
+     "p80_abs_error": 0.45
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 7637,
+     "excluded": 17,
+     "mdape": 0.1277,
+     "mape": 0.2059,
+     "median_signed_error": 0.0263,
+     "share_within_10pct": 0.4109,
+     "share_within_20pct": 0.6823,
+     "p80_abs_error": 0.2783
+    },
+    "assessor_ratio": {
+     "n": 7654,
+     "excluded": 0,
+     "mdape": 0.1012,
+     "mape": 0.1548,
+     "median_signed_error": 0.0037,
+     "share_within_10pct": 0.4952,
+     "share_within_20pct": 0.7757,
+     "p80_abs_error": 0.2161
+    },
+    "regression_no_rooms": {
+     "n": 7637,
+     "excluded": 17,
+     "mdape": 0.1208,
+     "mape": 0.1964,
+     "median_signed_error": 0.0248,
+     "share_within_10pct": 0.4291,
+     "share_within_20pct": 0.7033,
+     "p80_abs_error": 0.2662
+    },
+    "regression_no_rooms_with_assessor": {
+     "n": 7637,
+     "excluded": 17,
+     "mdape": 0.097,
+     "mape": 0.1519,
+     "median_signed_error": 0.0036,
+     "share_within_10pct": 0.5108,
+     "share_within_20pct": 0.7832,
+     "p80_abs_error": 0.2096
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 0
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_12057.json"
+   }
+  },
   "17031": {
    "_status": "backtest_run",
    "countyFips": "17031",

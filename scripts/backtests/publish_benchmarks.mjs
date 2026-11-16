@@ -22,6 +22,12 @@ for (const f of ["36005", "36047", "36061", "36081", "36085"]) {
   INPUT_MAPS[f] = { sqft: "BldgArea", lot: "LotArea", yb: "YearBuilt", units: "UnitsRes",
     source: "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/MAPPLUTO/FeatureServer/0 (NYC MapPLUTO 26v2)" };
 }
+// Florida: the page's parcel layer is the statewide cadastral service built from DOR's tax roll; it held the 2026
+// roll on 16 Nov (ASMNT_YR 2026), the same roll as the NAL file the test used. Field names are the service's
+// (truncated: TOT_LVG_AR = NAL TOT_LVG_AREA, NO_RES_UNT = NO_RES_UNTS). The just value is used only from the tested roll.
+INPUT_MAPS["12057"] = { sqft: "TOT_LVG_AR", lot: "LND_SQFOOT", yb: "ACT_YR_BLT", units: "NO_RES_UNT", av: "JV", av_year: "ASMNT_YR", av_vintage: 2026,
+  require: { DOR_UC: "001" }, require_label: "single-family homes (Florida DOR use code 001)",
+  source: "https://services9.arcgis.com/Gh9awoU677aKree0/arcgis/rest/services/Florida_Statewide_Cadastral/FeatureServer/0 (Florida statewide parcels, 2026 roll)" };
 const bench = JSON.parse(fs.readFileSync(BENCH, "utf8"));
 const models = fs.existsSync(MODELS) ? JSON.parse(fs.readFileSync(MODELS, "utf8")) : { _source: "scripts/backtests/publish_benchmarks.mjs; one entry per county whose model passed its back-test", counties: {} };
 

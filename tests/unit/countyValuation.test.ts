@@ -72,7 +72,7 @@ describe("published county back-tests reproduce from their committed sales files
       const stats = neighborhoodStats(prior);
       const spec = c.locked.spec;
       const m = spec === "assessor_ratio" ? fitAssessorRatio(prior, { allowAvAnyDate: true })
-        : spec.startsWith("regression") ? fitRegression(spec, prior, { allowAvAnyDate: spec === "regression_with_assessor" }) : { spec };
+        : spec.startsWith("regression") ? fitRegression(spec, prior, { allowAvAnyDate: spec.endsWith("_with_assessor") }) : { spec };
       const p = predictor(m, stats);
       const res = errorMetrics(test.map((r: any) => ({ est: p(r), target: r.price })));
       expect(res.n).toBe(t.model.n);
