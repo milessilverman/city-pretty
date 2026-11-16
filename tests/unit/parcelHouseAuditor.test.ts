@@ -31,14 +31,20 @@ describe("Parcel house auditor", () => {
     expect(withPermits.valuation.estimatedValue).toBe(without.valuation.estimatedValue);
   });
 
-  it("2. Gives no accuracy range and labels the estimate unvalidated", () => {
-    const a = auditSingleHouseParcel({ ...BASE, parcelId: "p2", lotSqft: 6000, livingSqft: 1600, neighborhoodMedianHv: 800000 });
+  it("2. Gives no accuracy range and labels the estimate unvalidated (a county without a back-test)", () => {
+    const a = auditSingleHouseParcel({ ...BASE, countyFips: "06059", parcelId: "p2", lotSqft: 6000, livingSqft: 1600, neighborhoodMedianHv: 800000 });
     expect(a.valuation.estimatedValue).toBeGreaterThan(0);
     expect(a.valuation.valueLow).toBeNull();
     expect(a.valuation.valueHigh).toBeNull();
     expect(a.valuation.confidenceMarginPct).toBeNull();
     expect(a.valuation.confidenceRating).toMatch(/Unvalidated/);
     expect(a.valuation.confidenceRating).not.toMatch(/precision|institutional|high confidence/i);
+  });
+
+  it("2b. LA: the generic estimate failed its back-test, so this engine withholds it and says why", () => {
+    const a = auditSingleHouseParcel({ ...BASE, parcelId: "p2b", lotSqft: 6000, livingSqft: 1600, neighborhoodMedianHv: 800000 });
+    expect(a.valuation.estimatedValue).toBeNull();
+    expect(a.valuation.withheldReason).toMatch(/failed its back-test/);
   });
 
   it("3. Withholds the value when nothing usable is on file instead of using a state default", () => {

@@ -1,0 +1,301 @@
+{
+ "mode": "final",
+ "run_on": "2026-11-16T11:02:00.347Z",
+ "train_rows": 99845,
+ "train_excluded": {
+  "land under $50k or improvements under $20k (odd or partial value)": 3191,
+  "not exactly one unit": 1103,
+  "built 2021 or later, or year built missing (could be new construction)": 1128,
+  "effective year 2021 or later (major remodel or rebuild)": 32,
+  "roll year is not 2026": 2,
+  "living area missing or under 400 sq ft": 66,
+  "value over $20M": 30,
+  "outside every LA block group": 14,
+  "built 2022 or later, or year built missing (could be new construction)": 766,
+  "effective year 2022 or later (major remodel or rebuild)": 28,
+  "effective year 2023 or later (major remodel or rebuild)": 15,
+  "built 2023 or later, or year built missing (could be new construction)": 700
+ },
+ "test_rows": 50723,
+ "test_excluded": {
+  "land under $50k or improvements under $20k (odd or partial value)": 1419,
+  "built 2024 or later, or year built missing (could be new construction)": 526,
+  "not exactly one unit": 1230,
+  "living area missing or under 400 sq ft": 23,
+  "effective year 2024 or later (major remodel or rebuild)": 10,
+  "value over $20M": 17,
+  "outside every LA block group": 10
+ },
+ "test_ains_also_in_training": 0,
+ "min_bg": 5,
+ "min_tract": 5,
+ "leakage_test_homes_in_their_own_statistics": 0,
+ "regression": {
+  "features": [
+   "intercept",
+   "log neighborhood $/sqft",
+   "log neighborhood median value",
+   "log living sqft",
+   "log lot sqft",
+   "age/100",
+   "effective age/100",
+   "bedrooms",
+   "bathrooms",
+   "quality class number",
+   "tract fallback"
+  ],
+  "coef": [
+   0.38753,
+   0.38646,
+   0.59094,
+   0.33396,
+   0.04149,
+   0.09022,
+   -0.161,
+   -0.01217,
+   0.04762,
+   -0.01187,
+   0.00165
+  ],
+  "fit_rows": 98822,
+  "residual_sd_log": 0.3197
+ },
+ "candidates": [
+  {
+   "label": "neighborhood_median",
+   "overall": {
+    "n": 50381,
+    "excluded": 342,
+    "mdape": 0.1267,
+    "mape": 0.2392,
+    "median_signed_error": -0.0165,
+    "share_within_10pct": 0.4135,
+    "share_within_20pct": 0.6789,
+    "p80_abs_error": 0.2896
+   },
+   "by_price_band": {
+    "$500k-$1M": {
+     "n": 26465,
+     "excluded": 179,
+     "mdape": 0.0966,
+     "mape": 0.1517,
+     "median_signed_error": -0.0035,
+     "share_within_10pct": 0.5141,
+     "share_within_20pct": 0.7958,
+     "p80_abs_error": 0.2028
+    },
+    "$1M-$2M": {
+     "n": 14441,
+     "excluded": 113,
+     "mdape": 0.1585,
+     "mape": 0.1944,
+     "median_signed_error": -0.0699,
+     "share_within_10pct": 0.316,
+     "share_within_20pct": 0.6154,
+     "p80_abs_error": 0.2913
+    },
+    "under $500k": {
+     "n": 5028,
+     "excluded": 21,
+     "mdape": 0.2117,
+     "mape": 0.7941,
+     "median_signed_error": 0.2042,
+     "share_within_10pct": 0.3516,
+     "share_within_20pct": 0.4918,
+     "p80_abs_error": 1.1227
+    },
+    "$2M and up": {
+     "n": 4447,
+     "excluded": 29,
+     "mdape": 0.2504,
+     "mape": 0.2781,
+     "median_signed_error": -0.2137,
+     "share_within_10pct": 0.2019,
+     "share_within_20pct": 0.4009,
+     "p80_abs_error": 0.4389
+    }
+   },
+   "gate": {
+    "pass": true,
+    "reason": null
+   }
+  },
+  {
+   "label": "neighborhood_ppsf_x_sqft",
+   "overall": {
+    "n": 50381,
+    "excluded": 342,
+    "mdape": 0.1627,
+    "mape": 0.2702,
+    "median_signed_error": -0.0201,
+    "share_within_10pct": 0.3202,
+    "share_within_20pct": 0.5914,
+    "p80_abs_error": 0.3273
+   },
+   "by_price_band": {
+    "$500k-$1M": {
+     "n": 26465,
+     "excluded": 179,
+     "mdape": 0.1551,
+     "mape": 0.2123,
+     "median_signed_error": -0.0312,
+     "share_within_10pct": 0.3314,
+     "share_within_20pct": 0.6159,
+     "p80_abs_error": 0.2989
+    },
+    "$1M-$2M": {
+     "n": 14441,
+     "excluded": 113,
+     "mdape": 0.1555,
+     "mape": 0.2074,
+     "median_signed_error": -0.0224,
+     "share_within_10pct": 0.3331,
+     "share_within_20pct": 0.6137,
+     "p80_abs_error": 0.3072
+    },
+    "under $500k": {
+     "n": 5028,
+     "excluded": 21,
+     "mdape": 0.2289,
+     "mape": 0.7756,
+     "median_signed_error": 0.1159,
+     "share_within_10pct": 0.2546,
+     "share_within_20pct": 0.4564,
+     "p80_abs_error": 1.1016
+    },
+    "$2M and up": {
+     "n": 4447,
+     "excluded": 29,
+     "mdape": 0.1895,
+     "mape": 0.2473,
+     "median_signed_error": -0.0459,
+     "share_within_10pct": 0.286,
+     "share_within_20pct": 0.5257,
+     "p80_abs_error": 0.3899
+    }
+   },
+   "gate": {
+    "pass": false,
+    "reason": "median error 16.3% is above the 15% limit"
+   }
+  },
+  {
+   "label": "regression",
+   "overall": {
+    "n": 50323,
+    "excluded": 400,
+    "mdape": 0.1042,
+    "mape": 0.2055,
+    "median_signed_error": -0.018,
+    "share_within_10pct": 0.484,
+    "share_within_20pct": 0.7624,
+    "p80_abs_error": 0.226
+   },
+   "by_price_band": {
+    "$500k-$1M": {
+     "n": 26450,
+     "excluded": 194,
+     "mdape": 0.0868,
+     "mape": 0.1335,
+     "median_signed_error": -0.012,
+     "share_within_10pct": 0.5598,
+     "share_within_20pct": 0.8432,
+     "p80_abs_error": 0.1753
+    },
+    "$1M-$2M": {
+     "n": 14432,
+     "excluded": 122,
+     "mdape": 0.1172,
+     "mape": 0.1482,
+     "median_signed_error": -0.0516,
+     "share_within_10pct": 0.4313,
+     "share_within_20pct": 0.7588,
+     "p80_abs_error": 0.219
+    },
+    "under $500k": {
+     "n": 5017,
+     "excluded": 32,
+     "mdape": 0.1774,
+     "mape": 0.7453,
+     "median_signed_error": 0.1751,
+     "share_within_10pct": 0.3976,
+     "share_within_20pct": 0.519,
+     "p80_abs_error": 1.0919
+    },
+    "$2M and up": {
+     "n": 4424,
+     "excluded": 52,
+     "mdape": 0.1724,
+     "mape": 0.2113,
+     "median_signed_error": -0.1389,
+     "share_within_10pct": 0.3004,
+     "share_within_20pct": 0.5671,
+     "p80_abs_error": 0.3249
+    }
+   },
+   "gate": {
+    "pass": true,
+    "reason": null
+   }
+  },
+  {
+   "label": "old_bundle_typical_value (untraceable m.hv, for reference)",
+   "overall": {
+    "n": 50720,
+    "excluded": 3,
+    "mdape": 0.1495,
+    "mape": 0.2604,
+    "median_signed_error": -0.0571,
+    "share_within_10pct": 0.3536,
+    "share_within_20pct": 0.6176,
+    "p80_abs_error": 0.3326
+   },
+   "by_price_band": {
+    "$500k-$1M": {
+     "n": 26644,
+     "excluded": 0,
+     "mdape": 0.1147,
+     "mape": 0.167,
+     "median_signed_error": -0.0449,
+     "share_within_10pct": 0.4419,
+     "share_within_20pct": 0.7475,
+     "p80_abs_error": 0.2287
+    },
+    "$1M-$2M": {
+     "n": 14552,
+     "excluded": 2,
+     "mdape": 0.1943,
+     "mape": 0.2358,
+     "median_signed_error": -0.1187,
+     "share_within_10pct": 0.2592,
+     "share_within_20pct": 0.5126,
+     "p80_abs_error": 0.3525
+    },
+    "under $500k": {
+     "n": 5049,
+     "excluded": 0,
+     "mdape": 0.2021,
+     "mape": 0.7523,
+     "median_signed_error": 0.1738,
+     "share_within_10pct": 0.3288,
+     "share_within_20pct": 0.4985,
+     "p80_abs_error": 1.055
+    },
+    "$2M and up": {
+     "n": 4475,
+     "excluded": 1,
+     "mdape": 0.3072,
+     "mape": 0.3418,
+     "median_signed_error": -0.2513,
+     "share_within_10pct": 0.1625,
+     "share_within_20pct": 0.3204,
+     "p80_abs_error": 0.5235
+    }
+   },
+   "gate": {
+    "pass": false,
+    "reason": "does not beat the neighborhood median alone (14.9% vs 12.7%)"
+   }
+  }
+ ]
+}

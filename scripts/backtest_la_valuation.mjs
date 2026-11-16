@@ -1,5 +1,7 @@
 #!/usr/bin/env node
-// Back-test of the page's home-value estimate for Los Angeles County, against recent Prop 13 base-year resets.
+// Back-test of the page's GENERIC home-value estimate for Los Angeles County, against recent Prop 13 base-year resets.
+// History: this estimate failed (16 Nov 2026) and LA now uses a separately tested model (scripts/la_valuation_models.mjs).
+// This script still measures the generic estimate and records it as counties["06037"].previous_page_model.
 //
 // Why this target: LA County's public parcel layer has no sale prices. Under Prop 13 (Cal. Rev. & Tax. Code §110.1),
 // a change in ownership resets a property's base-year value to its full cash value, normally the purchase price, and
@@ -234,11 +236,17 @@ async function main() {
     },
   };
 
-  const payload = {
+  // Since the LA model (scripts/la_valuation_models.mjs) replaced the generic estimate for LA, this script's result
+  // is kept as history under previous_page_model; the LA entry itself is written by build_la_neighborhood_values.mjs.
+  const payload = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, "utf8")) : {
     _status: "no_backtest_run",
     _note: "Counties not listed under `counties` have no back-test. The 15 Nov 2026 benchmarks were computed on hand-typed, unverified sales and were removed on 16 Nov 2026.",
-    counties: { "06037": result },
+    counties: {},
   };
+  payload.counties = payload.counties || {};
+  const la = payload.counties["06037"];
+  if (la && la.model_name) la.previous_page_model = result;
+  else payload.counties["06037"] = result;
   fs.writeFileSync(OUT, JSON.stringify(payload, null, 2) + "\n");
   console.log(JSON.stringify({ tested: rows.length, excluded, model: overall, baseline, gate, by_price_band: result.by_price_band.groups, by_base_year: result.by_base_year.groups, by_hv_source: result.by_neighborhood_value_source.groups, page_code_chars: page.sourceChars }, null, 1));
 }

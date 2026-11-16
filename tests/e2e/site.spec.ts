@@ -221,15 +221,26 @@ test("parcel and neighborhood panels render without invented figures", async ({ 
     w.renderHouse(box, a, 6000, ll, st);
     return box.innerText;
   });
-  // LA's model failed its back-test (worse than the neighborhood value alone), so the estimate is withheld with the
-  // test's numbers and a pointer to the recorded sale.
-  const bt = await page.evaluate(() => (window as any).valuationBacktestFor("06037"));
-  if (bt.gate.pass) {
-    expect(html).toContain("In a test on");
-  } else {
-    expect(html).toContain("No estimate: In a test on");
-    expect(html).toContain("recorded sale ($1,050,000, 2026)");
-  }
+  // LA: a recorded 2026 sale is shown as the figure, labelled as a recorded sale.
+  expect(html).toContain("Recorded sale price, 2026");
+  // LA: a home without a recent transfer gets the back-tested model's estimate with its tested error; a home missing
+  // an input the model needs gets no estimate and the reason.
+  await page.waitForFunction(() => (0, eval)("typeof LA_NEIGHBORHOOD_VALUES !== 'undefined' && LA_NEIGHBORHOOD_VALUES !== null"));
+  const la = await page.evaluate(() => {
+    const w = window as any, ev = (s: string) => (0, eval)(s);
+    const N = ev("LA_NEIGHBORHOOD_VALUES");
+    const bg = Object.keys(N.bg).find((k) => N.bg[k][0] >= 20)!;
+    const a = { AIN: "0000000001", UseType: "Residential", UseDescription: "Single Family Residence", Roll_LandValue: 90000, Roll_ImpValue: 60000,
+      Roll_LandBaseYear: "1998", Roll_ImpBaseYear: "1998", YearBuilt1: "1952", EffectiveYear1: "1960", SQFTmain1: 1400, Bedrooms1: 3, Bathrooms1: 2, QualityClass1: "D6B", "Shape.STArea()": 6000 };
+    const ok = w.publishValuation({ estimatedValue: 1, livingSqft: 1400 }, "06037", { rollBaseYear: 1998, rollTotal: 150000, attributes: a, lot: 6000, bg });
+    const miss = w.publishValuation({ estimatedValue: 1 }, "06037", { rollBaseYear: 1998, rollTotal: 150000, attributes: { ...a, QualityClass1: "" }, lot: 6000, bg });
+    return { ok, miss, nbr: N.bg[bg] };
+  });
+  expect(la.ok.estimatedValue).toBeGreaterThan(100000);
+  expect(la.ok.estimatedValue).not.toBe(1); // never the generic estimate passed in
+  expect(la.ok.confidenceRating).toMatch(/^Back-tested estimate: off by a median of 10\.4% on [\d,]+ LA homes that changed hands in 2025–26/);
+  expect(la.miss.estimatedValue).toBeNull();
+  expect(la.miss.withheldReason).toContain("quality class");
   // A county with no back-test keeps the "unvalidated" label.
   const other = await page.evaluate(() => (window as any).publishValuation({ estimatedValue: 500000, confidenceRating: "Unvalidated estimate — no back-test against sales yet" }, "48453", {}));
   expect(other.estimatedValue).toBe(500000);

@@ -30,7 +30,17 @@ const VALUATION_ASSUMPTIONS = {
   acsTopCode: 2000000,    // ACS median home value is top-coded near $2,000,001 (Census table B25077)
 };
 
+const LA_WITHHELD_REASON = "Los Angeles County: this generic estimate failed its back-test (median error 18.8%, worse than the neighborhood median). LA estimates come only from the back-tested LA model in app/app.js (scripts/la_valuation_models.mjs).";
+
 function estimatePropertyMarketValue(params) {
+  if (params && String(params.countyFips || "").padStart(5, "0") === "06037") {
+    return {
+      estimatedValue: null, valueLow: null, valueHigh: null, vpsf: null, livingSqft: null, lotSqft: params.lotSqft ?? null,
+      isVacantLand: false, confidenceMarginPct: null, confidenceRating: "Withheld — failed its back-test",
+      valuationMethod: null, withheldReason: LA_WITHHELD_REASON, notes: [LA_WITHHELD_REASON],
+      hedonicEst: null, assessorMarketEst: null, saleCompEst: null, siteValue: null, structVal: null,
+    };
+  }
   const { attributes: a = {}, lotSqft = null, neighborhood: m = {}, stateCode = "", facts: F = {}, salesInfo = null } = params || {};
   const state = String(stateCode || "").toUpperCase();
   const A = VALUATION_ASSUMPTIONS;
