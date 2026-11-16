@@ -3446,19 +3446,22 @@ function whyFix(t) {
     t = String(t).replace(/\b(\d+) fatal\/severe and (\d+) pedestrian\/bike (crash(?:es)?) recorded\b/g, (_, a, b, c) => `${a} fatal or severe-injury ${a === "1" ? "crash" : "crashes"} of any kind and ${b} pedestrian/bike ${c} recorded` + (cy && cy.length === 2 ? ` ${cy[0]}–${cy[1]}` : ""));
   }
   if (!t || !String(typeof selected !== "undefined" && selected || "").startsWith("06037")) return t;
-  // checked 7 Nov 2026 against CCRS: across 400 LA block groups this count correlates 0.995 with ALL crashes inside the block group
-  // (2023-2026) and 0.32 with pedestrian/bicycle crashes, so it is labelled as what it is
-  // real counts for this block group (CCRS 2023-2025, la_crash_counts.py): [pedestrian/bicycle, killed or seriously injured, all]
+  // The LA bundle's text counts every crash as "pedestrian/bike" (checked 7 Nov 2026 against CCRS). Show the rebuilt counts instead.
   if (window.__LAC === undefined) {
     const t = cpTextNow("la-crash-counts");
     if (t === null) cpText("la-crash-counts");   // still downloading; counts show on the next render
     else { try { window.__LAC = JSON.parse(t || "null"); } catch (e) { window.__LAC = null; } cpRelease("la-crash-counts"); }
   }
-  const c = window.__LAC && window.__LAC[selected];
-  const real = c ? `; CCRS 2023–2025 for this block group: ${c[0]} involving a pedestrian or cyclist, ${c[1]} killed or seriously injured` : "";
-  return String(t).replace(/\b0 fatal\/severe and (\d+) pedestrian\/bike crashes recorded/g, `$1 crashes of all kinds recorded here (CCRS 2023–2026; the LA build counted every crash, not only pedestrian/bike ones${real || ", and has no fatal/severe count"})`)
-    .replace(/\b(\d+) pedestrian or bike crashes recorded/g, `$1 crashes of all kinds recorded (CCRS 2023–2026${c ? `; ${c[0]} of the 2023–2025 crashes involved a pedestrian or cyclist` : "; not only pedestrian/bike"})`)
-    .replace(/\b(\d+) pedestrian\/bike crashes\b(?! recorded)/g, `$1 crashes of all kinds (CCRS 2023–2026${c ? `; ${c[0]} pedestrian/bike in 2023–2025` : ""})`);
+  const c = window.__LAC && Array.isArray(window.__LAC[selected]) ? window.__LAC[selected] : null;
+  // Rebuilt counts (scripts/build_la_crash_counts.py): crashes inside the block group or within 10 m of its boundary.
+  // Most crashes sit on boundary streets, so these count for both neighbors; the older build gave each to one side.
+  const lm = window.__LAC && window.__LAC._meta;
+  const placed = lm && lm.crashes ? Math.round(100 * lm.with_coordinates / lm.crashes) : null;
+  const real = c ? `${c[2]} crashes recorded inside this block group or on its boundary streets (CHP CCRS 2023–2025): ${c[0]} involving a pedestrian or cyclist, ${c[1]} with someone killed or seriously injured${placed ? `; only the ${placed}% of LA County crashes that have coordinates can be placed, so true counts are higher` : ""}` : null;
+  const old = n => `${n} crashes of all kinds recorded (CCRS 2023–2026, older count that assigned each boundary-street crash to one side)`;
+  return String(t).replace(/\b0 fatal\/severe and (\d+) pedestrian\/bike crashes recorded/g, (_, n) => real || old(n))
+    .replace(/\b(\d+) pedestrian or bike crashes recorded/g, (_, n) => real || old(n))
+    .replace(/\b(\d+) pedestrian\/bike crashes\b(?! recorded)/g, (_, n) => real || old(n));
 }
 function busUnknown(m) {   // a county on MobilityData feeds: bt is empty only where the OSM/gap-stop check found a missing operator (or no feed is counted)
   if (!isOCArea(m) || isOrangeArea(m) || !D_OC || !D_OC.meta) return false;

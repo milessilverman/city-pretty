@@ -116,9 +116,20 @@ re-basing them on Census ACS is the next fix.
 figures, can't be the best bet and don't count in totals; partly sourced items are labeled; neighborhood "profit" is
 withheld (it was modeled home-value gain, not profit). See `audit/bundle-catalog-fixes.md`.
 
+### LA crash counts (`la-crash-counts.json`, rebuilt 16 Nov)
+
+A re-count from CHP's crash database (CCRS) found most crashes are geocoded onto street centerlines, which are usually
+block-group boundaries: in one block group 14 crashes were clearly inside and 46 within 10 m of its edge, half on each
+side. The old file gave each boundary crash to one side by tie-break, so counts could swing by half. Rebuilt with a
+stated rule (`scripts/build_la_crash_counts.py`): a crash counts for a block group if it is inside it or within 10 m
+of its boundary. Also found: **only 74% of LA County crashes in CCRS (233,034 of 316,685, 2023–2025) have
+coordinates**, so every placed count understates the true count; the page says so. The neighborhood comparisons
+inside the LA data file ("worse than X% of similar areas" on street safety) still use the old counts until the
+bundle is rebuilt.
+
 ### Not yet audited (treat as unverified)
 
-- `details-la.json` (LA's per-block-group recommendation rows), `overlays-la.json`, `la-crash-counts.json`.
+- `details-la.json` (LA's per-block-group recommendation rows; audited for money fields, round 2), `overlays-la.json`.
 - Most cost documents behind the catalog (LA agency sites block automated access).
 - The rest of each county file (Census, OSM, GTFS layers) was built by the pipeline from the public sources listed in
   the file; it was not re-checked value by value.

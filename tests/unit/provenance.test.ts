@@ -99,6 +99,24 @@ describe("county readiness is computed from evidence", () => {
   });
 });
 
+describe("LA crash counts are rebuilt from CCRS with a stated boundary rule", () => {
+  const d = load("app/data/la-crash-counts.json");
+  it("records its source, rule, script and coordinate coverage", () => {
+    expect(d._meta.script).toBe("scripts/build_la_crash_counts.py");
+    expect(d._meta.rule).toMatch(/within 10 m of its boundary/);
+    expect(d._meta.with_coordinates).toBeLessThanOrEqual(d._meta.crashes);
+  });
+  it("covers every LA block group with [ped/bike, KSI, all], subsets never exceeding the total", () => {
+    const rows = Object.entries(d).filter(([k]) => k !== "_meta") as [string, number[]][];
+    expect(rows.length).toBeGreaterThanOrEqual(6500);
+    for (const [g, v] of rows) {
+      expect(g).toMatch(/^06037\d{7}$/);
+      expect(v[0]).toBeLessThanOrEqual(v[2]);
+      expect(v[1]).toBeLessThanOrEqual(v[2]);
+    }
+  });
+});
+
 describe("fabricated content that was removed stays removed", () => {
   it("valuation back-tests: only counties with a reproducible run are listed; everything else is 'no_backtest_run'", () => {
     const d = load("app/data/valuation_backtest_benchmarks.json");
