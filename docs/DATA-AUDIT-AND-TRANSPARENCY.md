@@ -47,7 +47,7 @@ the record is **not** confirmed.
 | Research studies (`research.json`) | 39 | 7 | 19 | 13 | | 13 nonexistent studies; all "$ per $1" figures | `audit/research-audit.md` |
 | Case studies (`case_studies.json`) | 8 | | | 8 | | all money figures nulled | `audit/research-audit.md` |
 | State housing laws (`statutes.json`) | 21 | 13 | 4 | 2 | | 1 (a bill that never passed); 18 corrected | `audit/laws-finance-audit.md` |
-| State finance profiles (`state_finance_profiles.json`) | 52 | 1 | 7 | 2 | 42 | 4 values corrected | `audit/laws-finance-audit.md` |
+| State finance profiles (`state_finance_profiles.json`) | 52 | 0 complete | 29 (33 fields in 21 states quote-checked) | 1 | 22 | 4 unsourced fields removed; errors corrected in UT, OH, MD, NV, SC, IA, MN (round 2) | `audit/laws-finance-audit.md` |
 | Funding programs (`funding_programs.json`) | 11 | 2 | 4 | 5 | | 5 corrected | `audit/laws-finance-audit.md` |
 | Construction unit costs (`unit_costs.json`) | 32 | 8 | 12 | 8 | 4 (no source) | 3 wrong bid prices corrected | `audit/costs-transit-audit.md` |
 | Transit projects (`transit_pipelines.json`) | 5 | | 5 | | | invented housing/EV details nulled | `audit/costs-transit-audit.md` |
@@ -95,6 +95,22 @@ the "best bet", the top-3 cards, the totals and the map colors. Findings:
   differs from the one cited.
 - `research/effects.csv`: of 31 rows marked confirmed, 22 quotes were re-found word for word, 9 sources were
   unreachable, none contradicted. The engine didn't use this file.
+
+**Round 2 (later on 16 Nov, `audit/catalog-coverage-round2.md`):** bus rapid transit upgraded to verified (effect:
+Beaudoin & Tyndall's Vancouver, WA study, "a 5-7% price premium"; cost: LA Metro's $428,988,535 budget for the
+19-mile North Hollywood–Pasadena line), with a caution that other studies find no effect. **Sound walls downgraded
+to unverified: the engine used about 40% of the cost in Metro's own document ($10M per mile), so every sound-wall
+return shown had been overstated about 2.5x.** Now 2 verified, 28 partly verified, 51 unverified.
+
+**Homeowner upgrade table (46 rows):** every row is a self-graded estimate with no checkable source; costs, values and
+returns are now withheld, rows are listed by name. Unchecked ADU claims shown for every house ("Exempt (0 spaces)",
+"Ministerial (60 Days)") were removed.
+
+**Open gap: LA neighborhood home values.** 4,348 LA block groups say their typical value is the "median of N
+recorded home sales (County Assessor)", and 1,127 more cite tract-level sales. LA County publishes no sale prices in
+its public parcel layer and the code that built these values is not in the repo, so they can't be traced. They are
+the base of every LA dollar figure (and the baseline in the LA back-test). They are now labeled unverified;
+re-basing them on Census ACS is the next fix.
 
 **Fix:** a verification gate in the app (`app/data/intervention_verification.json`): unsourced items show no dollar
 figures, can't be the best bet and don't count in totals; partly sourced items are labeled; neighborhood "profit" is

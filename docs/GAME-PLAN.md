@@ -39,8 +39,8 @@ Each phase has a finish line you can check. Nothing is marked done until its che
 | Audit every data file and the app's hardcoded numbers | **Done**, evidence in `docs/audit/` | Every file has a per-record `verification` status |
 | Replace hand-typed HUD rents with HUD's own data | **Done**: 3,222 counties via script | Test checks the file came from the script and spot-checks values |
 | Remove fabricated valuation back-test, sites, railyard picks, invented studies | **Done** (see audit doc) | Nothing fabricated remains in `app/data` |
-| Remove invented dollar outputs from the app (strategy cards, simulator, P3 numbers, prospectus) | In progress | Page shows "not modeled yet" instead of invented numbers |
-| Provenance test in CI | In progress | `npm test` fails on any `verified` record without evidence |
+| Remove invented dollar outputs from the app (strategy cards, simulator, P3 numbers, prospectus) | **Done**; improvement catalog and upgrade table gated on verification | Page shows "not modeled yet" instead of invented numbers |
+| Provenance test in CI | **Done** | `npm test` fails on any `verified` record without evidence |
 | Re-check the 8 unit costs and 2 rail corridors we couldn't reach from the build machine | **Open** | Fetched from a machine that can reach TxDOT/ADOT/FRA |
 
 ### Phase 1: sourced facts and a connected AI advisor (started)
@@ -69,12 +69,16 @@ can't reach it. ACS needs a free key. The AI has not answered a real question ye
 1. `wrangler secret put ANTHROPIC_API_KEY`, then `wrangler deploy`, then put the Worker URL in `app/config.js`.
 2. A free Census key from https://api.census.gov/data/key_signup.html, then `wrangler secret put CENSUS_API_KEY`.
 
+Also done (16 Nov, round 2):
+- **The parcel panel shows live public records** (HUD rent, FEMA flood zone, USGS elevation, Census area), each
+  linked to its exact query, straight from the agencies. This works before the Worker is deployed (`app/facts.js`).
+- **The advisor reads City Pretty's audited tables** (`workers/localData.ts`): state housing laws, funding programs,
+  research, unit costs, transit projects, county data coverage, improvement evidence. Each record reaches the model
+  with its verification status; fields found fabricated are stripped. The eval set has 26 questions.
+
 Next in Phase 1:
-- The page calls `/api/facts` when a parcel opens and shows the sourced facts with their links.
-- Run the evaluation set once the key is in; it must pass 22/22 before advisor changes ship. Grow it to 100+
-  questions as tools are added.
-- More tools: county parcel lookup (the LA/OC bundles already have assessor data), state housing laws and funding
-  programs (once their audit is finished), unit costs.
+- Run the evaluation set once the key is in; it must pass 26/26 before advisor changes ship. Grow it to 100+.
+- A county parcel tool for the advisor (LA's assessor service is live and public).
 
 ### Phase 2: parcel-level truth nationwide
 
@@ -91,8 +95,14 @@ What "which house should I buy" needs, with the cheapest honest source for each:
 | Construction costs | State DOT bid tabs (some verified in `unit_costs.json`) | RSMeans: from $408 / $1,049 / $5,973 per year |
 | Commercial comps, vacancy | none good | CoStar: pricing page blocked; unknown |
 
-**Recommendation:** start with free sources plus RentCast at $74/month. It gives sales comps for a real valuation
-back-test, which is the single biggest accuracy gap (the old "back-test" was fake). Add Regrid when you need more counties
+**First real back-test (LA, 16 Nov):** using Prop 13 base-year resets as a sale-price proxy (50,720 homes that changed
+hands in 2025–26), the page's home-value model had an 18.8% median error and did **worse than the neighborhood
+typical value alone (15.0%)**. LA estimates are now withheld with those numbers shown. Next: (1) rebuild the LA
+neighborhood values from the assessor's own base-year resets with the code committed (today's values can't be
+traced); (2) replace the model with one that beats that baseline in the back-test before showing any estimate.
+
+**Recommendation:** start with free sources plus RentCast at $74/month. It gives sales comps for back-tests outside
+California (the Prop 13 proxy only works in California). Add Regrid when you need more counties
 than the free GIS portals cover.
 
 **On CoStar:** copying CoStar data into City Pretty would break its terms of use. CoStar has sued competitors over
