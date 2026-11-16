@@ -1,5 +1,5 @@
 {
- "ran_on": "2026-11-16T21:23:37.679Z",
+ "ran_on": "2026-11-16T22:58:10.601Z",
  "script": "scripts/check_parcel_registry.mjs",
  "counts": {
   "ok": 120,
@@ -197,20 +197,6 @@
     "HI"
    ],
    "layer_name": "Statewide TMKs",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
-  },
-  {
-   "url": "https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/1",
-   "name": "Davidson County GIS Parcels",
-   "counties": [
-    "47037"
-   ],
-   "states": [
-    "TN"
-   ],
-   "layer_name": "Davidson",
    "geometry": "esriGeometryPolygon",
    "missing_fields": [],
    "status": "ok"
@@ -686,9 +672,9 @@
   },
   {
    "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
-   "name": "Merrimack County GIS Parcels",
+   "name": "Grafton County GIS Parcels",
    "counties": [
-    "33013"
+    "33009"
    ],
    "states": [
     "NH"
@@ -700,9 +686,9 @@
   },
   {
    "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
-   "name": "Grafton County GIS Parcels",
+   "name": "Merrimack County GIS Parcels",
    "counties": [
-    "33009"
+    "33013"
    ],
    "states": [
     "NH"
@@ -1340,6 +1326,20 @@
     "AK"
    ],
    "layer_name": "PropertyInformation",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services2.arcgis.com/HdTo6HJqh92wn4D8/arcgis/rest/services/Parcels_view/FeatureServer/0",
+   "name": "Metro Nashville & Davidson County Parcels",
+   "counties": [
+    "47037"
+   ],
+   "states": [
+    "TN"
+   ],
+   "layer_name": "Parcels",
    "geometry": "esriGeometryPolygon",
    "missing_fields": [],
    "status": "ok"

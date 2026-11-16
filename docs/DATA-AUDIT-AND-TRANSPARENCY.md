@@ -464,6 +464,19 @@ Travis TX and Jefferson AL show the reason (`data/backtests/live_check_lot_fit_2
 **Bug fixed:** a lot counted as a home if its use matched "resid", which also matches "non-residential", so
 commercial, church and school lots with a worded use got ADU and second-story checks (LA and Florida unaffected).
 
+**Round 2 (16 Nov): Washington, DC zones R-1A, R-1B, R-2, R-3**, from the 2016 Zoning Regulations (11 DCMR, dcregs.dc.gov):
+minimum lot to create a new lot (Table D § 202.1), 40 ft and 3 stories (§ 203), lot occupancy (§ 210), one home plus
+one accessory apartment (§ 201.1) and the accessory-apartment rules (Subtitle U § 253). DC's parcel layer has no zone,
+so the page reads the zone from DC's official zoning map at the clicked point, and applies nothing if the map doesn't
+answer. Modified zones (e.g. R-3/GT) are withheld with the reason. I downloaded the Table D § 202.1 and Subtitle U
+§ 253 files myself: every lot width and area for the four zones, the 2,000 / 1,200 sq ft house minimums, the 35%
+cap and the three-person limit match. Use tables added for DC (the tax office's 109 use codes) and Nashville (the
+Assessor's land-use descriptions, read from the layer itself because its metadata lists none); condo units and
+apartment buildings no longer get ADU, pool or lot-split checks. Re-run live: NYC 8/8, DC 5/5, Nashville 2/2, quotes
+22/22 and 27/27. Withheld: Nashville's zoning code (Municode returned 403) and Denver (no current code text found; the
+statewide layer also truncates Denver's zone names). Correction: the first round's write-up said Denver publishes its
+code as a PDF; that was not confirmed and has been removed.
+
 ### Correction: more invented figures in the page's own text (round 2, found and fixed 16 Nov)
 
 A second sweep of claims written into the page code (not data files) found more invented or overstated figures,
