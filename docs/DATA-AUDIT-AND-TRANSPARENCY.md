@@ -230,6 +230,26 @@ revised value. LA's 2-bedroom is $2,964; the median county changed +4.2% from FY
 their towns' values (HUD sets FMRs by town there) and no single county figure; one Missouri city piece HUD puts in
 the St. Louis metro is attached to its county. The page, the live-records panel and the AI advisor all read this file.
 
+### State housing laws, all 50 states and DC (16 Nov, `audit/state-laws-50.md`)
+
+13 laws added from official statute or session-law text (WA ×3, OR ×2, MT ×2, MA, RI ×2, CA, AZ, TX), each with the
+operative text quoted; the table now covers 15 states. Two quotes spot-checked against the live statute pages (RI
+45-24-73, TX SB 15) match word for word. Not yet in effect: Hawaii SB 3202 (fallback starts after 31 Dec 2026).
+Couldn't check: NH, CT, DC. **"None found" for 32 states is not proof of absence:** candidates came from secondary
+pages, and the code text itself was searched only for IA, MN and VA. The zoning engine now refuses to treat a
+jurisdiction-wide parking cap as a parcel right, matches commercial-land laws only to commercial parcels, and reports
+conditions it can't check (e.g. inside an urban growth area) as "not on file".
+
+### Safety comparisons recomputed (16 Nov, `audit/crash-rankings.md`)
+
+The "worse than X% of similar areas" comparisons and crash-dependent recommendations (traffic calming, crosswalks,
+signals, slow streets, bike lanes, lighting) are recomputed for all 151 counties with rebuilt crash counts
+(`scripts/recompute_crash_gaps.py`), comparing only within one crash source. 49% of old pedestrian/cyclist gaps moved
+more than 10 points; 2,169 traffic-calming rows were dropped (no pedestrian/cyclist crash in the 3-year window) and
+1,594 added. In California and Illinois the pedestrian/cyclist count is a lower bound, so rows there are only added,
+never dropped. San Francisco's comparison is withheld until its counts are rebuilt. The pipeline now uses the same
+10 m boundary rule.
+
 ## 3. What was built to keep it accurate
 
 - **Machine pulls instead of typing:** `scripts/fetch_hud_fmr.py` (HUD rents for every county) and

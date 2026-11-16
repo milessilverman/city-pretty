@@ -33,8 +33,8 @@ audit doc the same day.
 |---|---|---|---|
 | N1 | Merge R1–R6, check each one's claims against its sources, re-run everything | each item | Tests pass on the merged code; spot checks recorded |
 | N2 | **Home-value back-tests outside California**: Cook County, King County, Philadelphia, Allegheny County, New York City, DC and Florida (statewide sales file). Withhold estimates in any county that hasn't passed a back-test | R3 (same valuation code) | Each county has real results; estimates show only where the model passed |
-| N3 | **State housing laws for all 50 states** (ADUs, lot splits, middle housing, parking): primary-source text for each state that has such a law | R5 (same law file) | Every state either has verified records or is marked "no law found as of date" with the search recorded |
-| N4 | **Rebuild the county data files' internal rankings** ("worse than X% of similar areas") from the rebuilt crash counts | R1, R2 | Safety rankings use the boundary rule |
+| ✓ N3 | **State housing laws for all 50 states** (done 16 Nov: 13 laws added; NH, CT, DC still to check; "none found" states need code-text searches) (ADUs, lot splits, middle housing, parking): primary-source text for each state that has such a law | R5 (same law file) | Every state either has verified records or is marked "no law found as of date" with the search recorded |
+| ✓ N4 | **Rebuild the county data files' internal rankings** (done 16 Nov in the page; SF pending) ("worse than X% of similar areas") from the rebuilt crash counts | R1, R2 | Safety rankings use the boundary rule |
 | N5 | **Improvement catalog, round 4**: the next ten improvements after R4 | R4 | Same standard |
 
 ## What can't be made complete, and how it's handled
