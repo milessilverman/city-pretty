@@ -190,7 +190,9 @@ def place_pop(rows_place=None):
 
 
 def fetch_acs():
-    if have("acs_bg.json") and have("acs_place.json"):
+    # acs_tract.json is required too: without it the tract fallback in metrics_oc.py silently does nothing, which left
+    # 4,178 California block groups blank (audit 16 Nov 2026, docs/audit/bundles-nationwide-audit.md).
+    if have("acs_bg.json") and have("acs_place.json") and have("acs_tract.json"):
         if region.STATE == "CA" and "_rule" not in json.load(open(os.path.join(DATA, "acs_place.json"))):
             place_pop()   # round 8.6: rewrite a file written before the incorporated-first rule (this file only)
         return
@@ -1341,11 +1343,14 @@ def fetch_gtfs():
 
 # ---------------- 7. Schools (CDE), fire zones (CAL FIRE), EV chargers (AFDC) ----------------
 def fetch_schools():
-    if region.STATE != "CA":   # NCES EDGE public school locations (current school year), this county only
+    if region.STATE != "CA":   # NCES EDGE public school locations (current school year), county plus a padded margin
         if have("nces_schools.geojson"):
             return
         url = "https://services1.arcgis.com/Ua5sjt3LWTPigjyD/arcgis/rest/services/Public_School_Locations_Current/FeatureServer/0"
-        feats = arcgis_query(url, where=f"CNTY='{region.FIPS}'", fields="NCESSCH,NAME,CITY,STATE,CNTY,LAT,LON,SCHOOLYEAR", use_bbox=False)
+        # Padded county box, not CNTY=<county>: the nearest school is often across the county line
+        # (audit 16 Nov 2026: a Travis County block group showed 9,298 m; the nearest school, in Williamson County, is 5,665 m).
+        w, so, e, n = county_bbox()   # county_bbox pads only 0.01 deg (~1 km); schools need ~10 km
+        feats = arcgis_query(url, where="1=1", fields="NCESSCH,NAME,CITY,STATE,CNTY,LAT,LON,SCHOOLYEAR", bbox=(w - 0.09, so - 0.09, e + 0.09, n + 0.09))
         json.dump({"type": "FeatureCollection", "features": feats, "source": url, "downloaded": time.strftime("%Y-%m-%d")}, open(os.path.join(DATA, "nces_schools.geojson"), "w"))
         log("saved nces_schools.geojson", len(feats)); manifest("nces_schools.geojson", url, len(feats), "NCES EDGE public school locations (current)")
         return

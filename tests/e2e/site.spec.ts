@@ -410,3 +410,18 @@ test("a sourced-effect override rescales the value and shows its citation (stree
   expect(res.html).toContain("Pope &amp; Pope");
   expect(errors).toEqual([]);
 });
+
+test("California blanks are filled with the Census tract value, labelled as such (bundle_corrections.json)", async ({ page }) => {
+  const errors = await openPage(page);
+  const r = await page.evaluate(async () => {
+    const ev = (s: string) => (0, eval)(s);
+    const B: any = { details: { "060014087005": { m: { hv: null, rent: 1500 } }, "060014041012": { m: { hv: 1286100, hvs: "block group" } } } };
+    await ev("applyBundleCorrections")(B);
+    return { filled: B.details["060014087005"].m, kept: B.details["060014041012"].m };
+  });
+  expect(r.filled.hv).toBe(699900);
+  expect(r.filled.hvs).toMatch(/surrounding Census tract/);
+  expect(r.filled.rent).toBe(1500);          // an existing value is never overwritten
+  expect(r.kept.hv).toBe(1286100);
+  expect(errors).toEqual([]);
+});

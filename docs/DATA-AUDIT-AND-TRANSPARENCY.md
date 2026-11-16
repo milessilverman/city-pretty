@@ -146,6 +146,22 @@ re-basing them on Census ACS is the next fix.
 figures, can't be the best bet and don't count in totals; partly sourced items are labeled; neighborhood "profit" is
 withheld (it was modeled home-value gain, not profit). See `audit/bundle-catalog-fixes.md`.
 
+### Nationwide check of the county data files (16 Nov, `audit/bundles-nationwide-audit.md`)
+
+Sampled 1,410 block groups in every state with data: the census fields (home value, rent, income, population, tenure
+and others) match the Census Bureau's 2020–24 ACS files exactly, and Census "not available" codes are blank, never
+numbers. Bus frequency matched in 60 of 60 block groups re-computed from current transit feeds; nearest school and
+DC fast charger within 25 m in 116 and 111 of 120. Problems found and fixed:
+- **4,178 California block groups** (outside LA and Orange) showed no home value or rent where the Census publishes a
+  tract value; a pipeline caching bug skipped the fallback. The page now fills them from the Census tract files,
+  labeled as tract values (`app/data/bundle_corrections.json`), and the pipeline bug is fixed for the next rebuild.
+- **School distances stopped at the county line** (e.g. 9.3 km shown in Travis County where the nearest school, in the
+  next county, is 5.7 km). Fixed in the pipeline; shipped files keep the old distances until rebuilt. Library and
+  clinic distances likely share the bug (not checked).
+- **Tree canopy** comes from the 2021 Tree Equity release on 2010 block groups but was labeled "current". Relabeled; a
+  2025 release exists.
+Not checked: parks (OpenStreetMap's query service is unreachable from the audit machine).
+
 ### Crash counts (rebuilt 16 Nov: `app/data/crash_counts/<county>.json`)
 
 California: all counties except San Francisco rebuilt from CCRS with the boundary rule below

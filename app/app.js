@@ -12,7 +12,7 @@ const CP_DATA_FILES = {
   "valuation-benchmarks": "valuation_backtest_benchmarks.json", "underused-sites": "underused_sites.json",
   "intercity-corridors": "intercity_transit_corridors.json", "county-completeness": "county_completeness.json",
   "ca-counties-registry": "ca_counties_registry.json", "intervention-verification": "intervention_verification.json", "upgrade-verification": "upgrade_verification.json",
-  "la-neighborhood-values": "la_neighborhood_values.json"
+  "la-neighborhood-values": "la_neighborhood_values.json", "bundle-corrections": "bundle_corrections.json"
 };
 const _cpData = {};
 function cpText(id) {
@@ -7091,7 +7091,7 @@ function select(id, fly) {
     ${tile("Typical home value", fmt$(m.hv), esc(oc && !ocReal ? "neighborhood estimate (preliminary)" : hvSourceText(m.hvs)))}
     ${tile("Median rent", m.rent ? fmt$(m.rent) + "/mo" : "–", oc && !ocReal ? "estimate (preliminary)" : ocReal ? "Census ACS 2020–24" : "Census ACS 5-Year")}
     ${tile("Homes", fmtN(m.homes), `${m.own != null ? Math.round(m.own) + "% owner-occupied" : ""}`)}
-    ${tile("Heat vs median", m.ht != null ? (m.ht > 0 ? "+" : "") + (+m.ht).toFixed(1) + "°F" : "–", oc && !ocReal ? "estimate (preliminary)" : ocReal ? "Tree Equity Score 2021 vs urbanized-area mean" : "Tree Equity Score")}
+    ${tile("Heat vs median", m.ht != null ? (m.ht > 0 ? "+" : "") + (+m.ht).toFixed(1) + "°F" : "–", oc && !ocReal ? "estimate (preliminary)" : ocReal ? "Tree Equity Score 2021 vs urbanized-area mean" : "Tree Equity Score 2021 (2010 block groups)")}
     ${tile("Violent crime", m.vc != null ? (+m.vc).toFixed(1) + " per 1k" : "no data", m.vc != null ? `12 mo · ${esc(m.ag || "")}` : (activeFips() === "06037" ? "independent police" : isCAActive() ? "agency not in CA DOJ data" : "no crime source outside California"))}
     ${tile("Bus service", m.bt != null ? Math.round(m.bt) + "/hr" : busUnknown(m) ? "unknown" : "–", m.rm != null ? `rail ${(m.rm / 1609).toFixed(1)} mi` : "")}
   </div></div>`;
@@ -7174,7 +7174,7 @@ function select(id, fly) {
   add("Population", m.pop, fmtN); add("Median household income", m.inc, fmt$); add("Median rent", m.rent, v => fmt$(v) + "/mo"); add("Median year built", m.yb, v => Math.round(v));
   add("Single-family share", m.sf, v => Math.round(v) + "%"); add("Households without a car", m.nocar, v => Math.round(v) + "%");
   if (!oc) { add("Street trees (city survey)", m.st, fmtN); add("Open tree sites", m.ts, fmtN); }
-  add("Canopy gap to goal (Tree Equity)", m.tg, v => (+v).toFixed(0) + " pts");
+  add("Canopy gap to goal (Tree Equity Score 2021, 2010 block groups)", m.tg, v => (+v).toFixed(0) + " pts");
   add("Property crimes, 12 mo", m.pcr, fmtN); { const cc = crashCountsFor(activeFips()); const row = cc && typeof selected !== "undefined" ? cc[selected] : null;
     if (Array.isArray(row)) add("Crashes with someone killed or seriously injured, inside or on boundary streets", row[1], fmtN);
     else add("Fatal/severe crashes recorded (older count, boundary crashes on one side only)", m.ksi, fmtN); }
@@ -8876,6 +8876,24 @@ function renderTechAppendix(ocReal) {
 
 
 // ---------------- Orange County Expansion Module ----------------
+// Census values the county data files left blank where the Census publishes a tract value (California counties outside
+// LA and Orange; found by scripts/audit_bundles_nationwide.py). Fills blanks only, never overwrites a block-group value.
+let BUNDLE_CORRECTIONS;
+async function applyBundleCorrections(B) {
+  if (!B || !B.details || B.__corrected) return;
+  if (BUNDLE_CORRECTIONS === undefined) { try { BUNDLE_CORRECTIONS = await cpJson("bundle-corrections"); } catch (e) { BUNDLE_CORRECTIONS = null; } }
+  const fix = BUNDLE_CORRECTIONS && BUNDLE_CORRECTIONS.block_groups;
+  if (!fix) return;
+  for (const id in fix) {
+    const d = B.details[id];
+    if (!d) continue;
+    const m = d.m || d, c = fix[id];
+    if (c.hv != null && m.hv == null) { m.hv = c.hv; m.hvs = c.hvs; }
+    if (c.rent != null && m.rent == null) { m.rent = c.rent; m.rent_s = c.rent_s; }
+  }
+  B.__corrected = true;
+}
+
 var D_OC = null;
 function activeBundle() {
   if (typeof activeCounty !== "undefined" && activeCounty === "oc" && D_OC) return D_OC;
@@ -9224,6 +9242,7 @@ async function openCounty(fips, wantBgId) {
     if (typeof setProgress === "function") setProgress(75);
     if (typeof setHud === "function") setHud("Unpacking " + cName + " block groups…");
     if (!B) throw new Error("County bundle not found for " + fips);
+    await applyBundleCorrections(B);
     if (D_OC !== B) {
       if (ocLayer && typeof map !== "undefined" && map && map.hasLayer(ocLayer)) map.removeLayer(ocLayer);
       ocLayer = null;
