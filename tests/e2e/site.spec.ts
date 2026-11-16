@@ -241,10 +241,17 @@ test("parcel and neighborhood panels render without invented figures", async ({ 
   expect(la.ok.confidenceRating).toMatch(/^Back-tested estimate: off by a median of 10\.4% on [\d,]+ LA homes that changed hands in 2025–26/);
   expect(la.miss.estimatedValue).toBeNull();
   expect(la.miss.withheldReason).toContain("quality class");
-  // A county with no back-test keeps the "unvalidated" label.
-  const other = await page.evaluate(() => (window as any).publishValuation({ estimatedValue: 500000, confidenceRating: "Unvalidated estimate — no back-test against sales yet" }, "48453", {}));
-  expect(other.estimatedValue).toBe(500000);
-  expect(other.confidenceRating).toContain("Unvalidated estimate");
+  // A county with no back-test shows no model estimate, only the closest sourced figure and the reason.
+  const other = await page.evaluate(() => (window as any).publishValuation({ estimatedValue: 500000, confidenceRating: "Unvalidated estimate — no back-test against sales yet" }, "48453", { neighborhoodHv: 412300 }));
+  expect(other.estimatedValue).toBeNull();
+  expect(other.withheldReason).toContain("no back-test against recorded sales in this county");
+  expect(other.withheldReason).toContain("$412,300");
+  expect(other.withheldReason).toMatch(/Census ACS/);
+  // A county whose back-test failed (Philadelphia: 18.7% median error, over the 15% cap) withholds with its numbers.
+  const phl = await page.evaluate(() => (window as any).publishValuation({ estimatedValue: 250000 }, "42101", { neighborhoodHv: 230000 }));
+  expect(phl.estimatedValue).toBeNull();
+  expect(phl.withheldReason).toContain("Philadelphia County");
+  expect(phl.withheldReason).toContain("18.7%");
   // Upgrade table rows are unsourced City Pretty estimates: listed by name, no cost/value/return/profit
   // (docs/audit/catalog-coverage-round2.md).
   expect(html).toContain("cost and value not sourced yet");

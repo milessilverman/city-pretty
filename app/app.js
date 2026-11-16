@@ -608,13 +608,36 @@ function publishLaValuation(v, bt, ctx) {
   });
 }
 
+// No back-test in this county: the generic estimate is never shown (in Los Angeles the same kind of model did worse
+// than the neighborhood value alone). The closest sourced figures are named instead: a recent recorded sale, a recent
+// Prop 13 base-year value, or the block group's Census ACS median home value (owner-reported, 5-year estimate).
+function acsVintageLabel() {
+  const m = (typeof D_OC !== "undefined" && D_OC && D_OC.meta) || null;
+  return (m && m.acs) ? `Census ACS ${m.acs}` : "Census ACS 5-year";
+}
+function withholdUntested(v, context) {
+  const ctx = context || {};
+  const by = +ctx.rollBaseYear || 0;
+  const saleYear = ctx.sale && ctx.sale.price > 0 ? +String(ctx.sale.date || "").replace(/\D/g, "").slice(0, 4) || 0 : 0;
+  const pointer = saleYear >= VALUATION_CURRENT_YEAR - 1
+    ? ` Its recorded sale (${backtestDollars(ctx.sale.price)}, ${saleYear}) is the closest sourced figure.`
+    : by >= VALUATION_CURRENT_YEAR - 1 && ctx.rollTotal > 0 && typeof isCAActive === "function" && isCAActive()
+    ? ` Its assessed value (${backtestDollars(ctx.rollTotal)}, Prop 13 base year ${by}) reflects its ${by} transfer and is the closest sourced figure.`
+    : (ctx.neighborhoodHv > 0 ? ` The block group's median home value is ${backtestDollars(ctx.neighborhoodHv)} (${acsVintageLabel()}, owner-reported).` : "");
+  return Object.assign({}, v, {
+    estimatedValue: null, vpsf: null, valueLow: null, valueHigh: null, confidenceMarginPct: null, backtest: null,
+    confidenceRating: "Withheld — no back-test in this county",
+    withheldReason: `No estimate: no back-test against recorded sales in this county.${pointer}`,
+  });
+}
+
 // Publishing rule (ACCURACY-ROADMAP item 8): where a county has been back-tested, the estimate is shown only if it
 // passed (median error within the cap and better than the neighborhood value alone). Otherwise it is withheld with the
-// test's own numbers. Where no back-test exists, the estimate keeps its "unvalidated" label.
+// test's own numbers. Where no back-test exists, no estimate is shown (withholdUntested).
 function publishValuation(v, fips, context) {
   if (!v) return v;
   const bt = valuationBacktestFor(fips);
-  if (!bt) return Object.assign({}, v, { backtest: null });
+  if (!bt) return withholdUntested(v, context);
   if (bt.model_name === "la_assessor_resets_regression") {
     // The pass belongs to the LA model, not to the generic estimate in `v`; never show `v` under it.
     if (bt.gate && bt.gate.pass && LA_NEIGHBORHOOD_VALUES) return publishLaValuation(v, bt, context);
@@ -10071,7 +10094,7 @@ function exportExecutiveProspectus() {
       <div>
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;">Estimated Value</div>
         <div style="font-size:14px;font-weight:800;color:${vcP.ok && aPrice ? "#b45309" : "#64748b"};">${vcP.ok && aPrice ? fmtP(aPrice) : "No estimate"}</div>
-        <div style="font-size:10px;color:#b45309;">${vcP.ok && aPrice ? "Unvalidated estimate — no back-test against sales yet" : ""}</div>
+        <div style="font-size:10px;color:#b45309;">${vcP.ok && aPrice ? esc((valObj && valObj.confidenceRating) || "") : ""}</div>
         <div style="font-size:11px;color:#64748b;">${!vcP.ok ? esc(vcP.reason) : valObj && valObj.isVacantLand ? `~$${Math.round(aPrice / Math.max(lotSqft, 1)).toLocaleString()}/sqft lot` : (sqft ? `~$${Math.round(aPrice / sqft).toLocaleString()}/sqft` : "")}</div>
       </div>
     </div>
