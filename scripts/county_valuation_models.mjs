@@ -32,8 +32,14 @@ function fitAll(fitRows) {
     neighborhood_median: { spec: "neighborhood_median" },
     neighborhood_ppsf_x_sqft: { spec: "neighborhood_ppsf_x_sqft" },
     assessor_ratio: fitAssessorRatio(fitRows, { allowAvAnyDate: true }),
-    regression: fitRegression("regression", fitRows),
-    regression_with_assessor: fitRegression("regression_with_assessor", fitRows, { allowAvAnyDate: true }),
+    // Room-based models only where the sales carry bedrooms (NYC's do not: PLUTO has no rooms). features() would
+    // otherwise read a missing bedroom count as 0, because null >= 0 is true in JavaScript.
+    ...(fitRows.some((r) => r.beds != null) ? {
+      regression: fitRegression("regression", fitRows),
+      regression_with_assessor: fitRegression("regression_with_assessor", fitRows, { allowAvAnyDate: true }),
+    } : {}),
+    // Only where the rows carry a unit count (NYC: PLUTO has no bedrooms or bathrooms).
+    ...(fitRows.some((r) => r.units != null) ? { regression_pluto: fitRegression("regression_pluto", fitRows) } : {}),
   };
 }
 function score(models, stats, evalRows) {

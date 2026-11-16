@@ -1,6 +1,6 @@
 {
- "42101": {
-  "sales_file": "data/backtests/sales_42101_2026-11-16.json.gz",
+ "11001": {
+  "sales_file": "data/backtests/sales_11001_2026-11-16.json.gz",
   "fit": [
    "2023-01-01",
    "2025-12-31"
@@ -11,19 +11,17 @@
   ],
   "test": [
    "2026-05-01",
-   "2026-07-31"
+   "2026-10-31"
   ],
-  "note": "Test window starts after the OPA market values were set (assessment_date 2026-04-29) and ends where transfer-tax recording thins out (Aug 2026: 6 matched sales).",
+  "note": "No assessor value used (its tax year is not recorded).",
   "locked": {
-   "spec": "regression_with_assessor",
+   "spec": "regression",
    "locked_on": "2026-11-16",
-   "why": "Best development median error (16.6%) but on only 78 sales whose assessor value predates the sale; next best without the assessor value: regression 20.2% (3,264 sales). Neighborhood median 24.8%.",
+   "why": "Best development median error: regression 9.9% (705 sales) vs neighborhood $/sqft x size 13.3% and neighborhood median 16.2%. No assessor value used.",
    "dev_mdape": {
-    "neighborhood_median": 0.2482,
-    "neighborhood_ppsf_x_sqft": 0.2109,
-    "assessor_ratio": 0.1709,
-    "regression": 0.202,
-    "regression_with_assessor": 0.1662
+    "neighborhood_median": 0.1623,
+    "neighborhood_ppsf_x_sqft": 0.1334,
+    "regression": 0.0993
    }
   }
  },
@@ -53,8 +51,8 @@
    }
   }
  },
- "11001": {
-  "sales_file": "data/backtests/sales_11001_2026-11-16.json.gz",
+ "36005": {
+  "sales_file": "data/backtests/sales_36005_2026-11-16.json.gz",
   "fit": [
    "2023-01-01",
    "2025-12-31"
@@ -65,17 +63,149 @@
   ],
   "test": [
    "2026-05-01",
-   "2026-10-31"
+   "2026-09-30"
   ],
-  "note": "No assessor value used (its tax year is not recorded).",
+  "note": "NYC DOF sales + PLUTO 26v2 characteristics (scripts/backtests/pull_nyc.py). No assessor value. Windows set before any model was run.",
   "locked": {
-   "spec": "regression",
+   "spec": "regression_pluto",
    "locked_on": "2026-11-16",
-   "why": "Best development median error: regression 9.9% (705 sales) vs neighborhood $/sqft x size 13.3% and neighborhood median 16.2%. No assessor value used.",
+   "why": "Best development median error: regression on PLUTO inputs 16.0% (484 sales) vs neighborhood median 18.4% and $/sqft x size 18.1%. Room-based models not offered: NYC PLUTO and DOF sales have no bedroom or bathroom counts, so the page could not supply them.",
    "dev_mdape": {
-    "neighborhood_median": 0.1623,
-    "neighborhood_ppsf_x_sqft": 0.1334,
-    "regression": 0.0993
+    "neighborhood_median": 0.1843,
+    "neighborhood_ppsf_x_sqft": 0.1806,
+    "regression_pluto": 0.1598
+   }
+  }
+ },
+ "36047": {
+  "sales_file": "data/backtests/sales_36047_2026-11-16.json.gz",
+  "fit": [
+   "2023-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-04-30"
+  ],
+  "test": [
+   "2026-05-01",
+   "2026-09-30"
+  ],
+  "note": "NYC DOF sales + PLUTO 26v2 characteristics (scripts/backtests/pull_nyc.py). No assessor value. Windows set before any model was run.",
+  "locked": {
+   "spec": "regression_pluto",
+   "locked_on": "2026-11-16",
+   "why": "Best development median error: regression on PLUTO inputs 17.4% (1394 sales) vs neighborhood median 20.8% and $/sqft x size 21.3%. Room-based models not offered: NYC PLUTO and DOF sales have no bedroom or bathroom counts, so the page could not supply them.",
+   "dev_mdape": {
+    "neighborhood_median": 0.2081,
+    "neighborhood_ppsf_x_sqft": 0.2125,
+    "regression_pluto": 0.1737
+   }
+  }
+ },
+ "36061": {
+  "sales_file": "data/backtests/sales_36061_2026-11-16.json.gz",
+  "fit": [
+   "2023-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-04-30"
+  ],
+  "test": [
+   "2026-05-01",
+   "2026-09-30"
+  ],
+  "note": "NYC DOF sales + PLUTO 26v2 characteristics (scripts/backtests/pull_nyc.py). No assessor value. Windows set before any model was run.",
+  "locked": {
+   "spec": "regression_pluto",
+   "locked_on": "2026-11-16",
+   "why": "Best development median error: regression on PLUTO inputs 23.8% (37 sales) vs neighborhood median 29.2% and $/sqft x size 27.7%. Room-based models not offered: NYC PLUTO and DOF sales have no bedroom or bathroom counts, so the page could not supply them.",
+   "dev_mdape": {
+    "neighborhood_median": 0.2919,
+    "neighborhood_ppsf_x_sqft": 0.2774,
+    "regression_pluto": 0.2382
+   }
+  }
+ },
+ "36081": {
+  "sales_file": "data/backtests/sales_36081_2026-11-16.json.gz",
+  "fit": [
+   "2023-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-04-30"
+  ],
+  "test": [
+   "2026-05-01",
+   "2026-09-30"
+  ],
+  "note": "NYC DOF sales + PLUTO 26v2 characteristics (scripts/backtests/pull_nyc.py). No assessor value. Windows set before any model was run.",
+  "locked": {
+   "spec": "regression_pluto",
+   "locked_on": "2026-11-16",
+   "why": "Best development median error: regression on PLUTO inputs 14.9% (2156 sales) vs neighborhood median 17.4% and $/sqft x size 18.3%. Room-based models not offered: NYC PLUTO and DOF sales have no bedroom or bathroom counts, so the page could not supply them.",
+   "dev_mdape": {
+    "neighborhood_median": 0.1742,
+    "neighborhood_ppsf_x_sqft": 0.1829,
+    "regression_pluto": 0.149
+   }
+  }
+ },
+ "36085": {
+  "sales_file": "data/backtests/sales_36085_2026-11-16.json.gz",
+  "fit": [
+   "2023-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-04-30"
+  ],
+  "test": [
+   "2026-05-01",
+   "2026-09-30"
+  ],
+  "note": "NYC DOF sales + PLUTO 26v2 characteristics (scripts/backtests/pull_nyc.py). No assessor value. Windows set before any model was run.",
+  "locked": {
+   "spec": "regression_pluto",
+   "locked_on": "2026-11-16",
+   "why": "Best development median error: regression on PLUTO inputs 12.6% (1083 sales) vs neighborhood median 17.4% and $/sqft x size 17.9%. Room-based models not offered: NYC PLUTO and DOF sales have no bedroom or bathroom counts, so the page could not supply them.",
+   "dev_mdape": {
+    "neighborhood_median": 0.1738,
+    "neighborhood_ppsf_x_sqft": 0.1787,
+    "regression_pluto": 0.1255
+   }
+  }
+ },
+ "42101": {
+  "sales_file": "data/backtests/sales_42101_2026-11-16.json.gz",
+  "fit": [
+   "2023-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-04-30"
+  ],
+  "test": [
+   "2026-05-01",
+   "2026-07-31"
+  ],
+  "note": "Test window starts after the OPA market values were set (assessment_date 2026-04-29) and ends where transfer-tax recording thins out (Aug 2026: 6 matched sales).",
+  "locked": {
+   "spec": "regression_with_assessor",
+   "locked_on": "2026-11-16",
+   "why": "Best development median error (16.6%) but on only 78 sales whose assessor value predates the sale; next best without the assessor value: regression 20.2% (3,264 sales). Neighborhood median 24.8%.",
+   "dev_mdape": {
+    "neighborhood_median": 0.2482,
+    "neighborhood_ppsf_x_sqft": 0.2109,
+    "assessor_ratio": 0.1709,
+    "regression": 0.202,
+    "regression_with_assessor": 0.1662
    }
   }
  }

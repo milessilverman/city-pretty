@@ -49,11 +49,18 @@ export const avUsable = (r) => r.av > 0 && !!r.av_date && r.av_date < r.date;
 export const FEATURE_SETS = {
   regression: ["intercept", "log neighborhood $/sqft", "log neighborhood median", "log living sqft", "log lot sqft", "age/100", "bedrooms", "bathrooms", "tract fallback"],
   regression_with_assessor: ["intercept", "log neighborhood $/sqft", "log neighborhood median", "log living sqft", "log lot sqft", "age/100", "bedrooms", "bathrooms", "tract fallback", "log assessor market value"],
+  // For places whose parcel layer has building area, lot area, year built and unit count but no rooms (NYC PLUTO).
+  regression_pluto: ["intercept", "log neighborhood $/sqft", "log neighborhood median", "log building sqft", "log lot sqft", "age/100", "two-family", "tract fallback"],
 };
 
 export function features(spec, stats, r, { allowAvAnyDate = false } = {}) {
   const n = neighborhoodFor(stats, r);
   if (!n) return null;
+  if (spec === "regression_pluto") {
+    if (!(r.sqft >= 400) || !(r.lot > 0) || !(r.yb > 1700) || !(r.units === 1 || r.units === 2)) return null;
+    return [1, Math.log(n.ppsf), Math.log(n.median), Math.log(r.sqft), Math.log(Math.min(Math.max(r.lot, 500), 200000)),
+      (CURRENT_YEAR - r.yb) / 100, r.units === 2 ? 1 : 0, n.level === "tract" ? 1 : 0];
+  }
   if (!(r.sqft >= 400) || !(r.lot > 0) || !(r.yb > 1700) || !(r.beds >= 0) || !(r.baths >= 0)) return null;
   const x = [1, Math.log(n.ppsf), Math.log(n.median), Math.log(r.sqft), Math.log(Math.min(Math.max(r.lot, 500), 200000)),
     (CURRENT_YEAR - r.yb) / 100, Math.min(r.beds, 8), Math.min(r.baths, 8), n.level === "tract" ? 1 : 0];
@@ -79,6 +86,7 @@ export function crossFit(spec, rows, opts, k = 5) {
 export function fitRegression(spec, rows, { lambda = 1e-3, ...opts } = {}) {
   const XY = crossFit(spec, rows, opts);
   const k = FEATURE_SETS[spec].length;
+  if (XY.length < 10 * k) return { spec, coef: null, n: XY.length, feature_names: FEATURE_SETS[spec] }; // inputs not in this county's data
   const A = Array.from({ length: k }, () => new Float64Array(k)), b = new Float64Array(k);
   for (const { x, y } of XY) for (let p = 0; p < k; p++) { b[p] += x[p] * y; for (let q = 0; q < k; q++) A[p][q] += x[p] * x[q]; }
   for (let p = 1; p < k; p++) A[p][p] += lambda * XY.length;
@@ -99,6 +107,7 @@ export function predictor(model, stats) {
   if (model.spec === "neighborhood_median") return (r) => { const n = neighborhoodFor(stats, r); return n ? n.median : null; };
   if (model.spec === "neighborhood_ppsf_x_sqft") return (r) => { const n = neighborhoodFor(stats, r); return n && r.sqft >= 400 ? n.ppsf * r.sqft : null; };
   if (model.spec === "assessor_ratio") return (r) => (avUsable(r) ? r.av * model.ratio : null);
+  if (!model.coef) return () => null;
   return (r) => { const f = features(model.spec, stats, r); return f ? Math.exp(dot(model.coef, f)) : null; };
 }
 
