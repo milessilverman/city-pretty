@@ -1,5 +1,5 @@
 {
- "_about": "Advisor evaluation set. Expected values were pulled live from the official services on 2026-11-16 (workers/sources.ts). Law and funding questions are answered from the audited tables (workers/localData.ts). Trap questions have no sourced answer; the advisor passes only by saying so. Run: ANTHROPIC_API_KEY=... npm run eval:advisor",
+ "_about": "Advisor evaluation set. Expected values were pulled live from the official services on 2026-11-16 (workers/sources.ts). Law and funding questions are answered from the audited tables (workers/localData.ts). Trap questions have no sourced answer; the advisor passes only by saying so. Capitol-address questions cover 44 states and DC (addresses validated by the Census Geocoder; 7 states dropped where the geocoder matched a different address or none). Run: ANTHROPIC_API_KEY=... npm run eval:advisor",
  "created": "2026-11-16",
  "questions": [
   {
@@ -317,6 +317,974 @@
    ],
    "match": "any",
    "must_cite": "City Pretty audited data"
+  },
+  {
+   "id": "fmr_al_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 600 DEXTER AVE, MONTGOMERY, AL, 36104?",
+   "must_include": [
+    "1016",
+    "1,016"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Montgomery County; HUD area Montgomery, AL MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_al_capitol",
+   "question": "What FEMA flood zone is 600 DEXTER AVE, MONTGOMERY, AL, 36104 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ak_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 120 4TH ST, JUNEAU, AK, 99801?",
+   "must_include": [
+    "1758",
+    "1,758"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Juneau City and Borough; HUD area Juneau City and Borough, AK; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_ak_capitol",
+   "question": "What FEMA flood zone is 120 4TH ST, JUNEAU, AK, 99801 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_az_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1700 W WASHINGTON ST, PHOENIX, AZ, 85007?",
+   "must_include": [
+    "1839",
+    "1,839"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Maricopa County; HUD area Phoenix-Mesa-Chandler, AZ MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_az_capitol",
+   "question": "What FEMA flood zone is 1700 W WASHINGTON ST, PHOENIX, AZ, 85007 in?",
+   "must_include": [
+    "zone ae",
+    "Zone AE"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ar_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 500 WOODLANE ST, LITTLE ROCK, AR, 72201?",
+   "must_include": [
+    "1147",
+    "1,147"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Pulaski County; HUD area Little Rock-North Little Rock-Conway, AR HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_ar_capitol",
+   "question": "What FEMA flood zone is 500 WOODLANE ST, LITTLE ROCK, AR, 72201 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ca_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1315 10TH ST, SACRAMENTO, CA, 95814?",
+   "must_include": [
+    "2255",
+    "2,255"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Sacramento County; HUD area Sacramento--Roseville--Arden-Arcade, CA HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_ca_capitol",
+   "question": "What FEMA flood zone is 1315 10TH ST, SACRAMENTO, CA, 95814 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_co_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 200 E COLFAX AVE, DENVER, CO, 80203?",
+   "must_include": [
+    "2089",
+    "2,089"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Denver County; HUD area Denver-Aurora-Centennial, CO MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_co_capitol",
+   "question": "What FEMA flood zone is 200 E COLFAX AVE, DENVER, CO, 80203 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ct_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 210 CAPITOL AVE, HARTFORD, CT, 06106?",
+   "must_include": [
+    "1865",
+    "1,865"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Capitol Planning Region; HUD area Hartford-West Hartford-East Hartford, CT MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_ct_capitol",
+   "question": "What FEMA flood zone is 210 CAPITOL AVE, HARTFORD, CT, 06106 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_de_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 411 LEGISLATIVE AVE, DOVER, DE, 19901?",
+   "must_include": [
+    "1470",
+    "1,470"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Kent County; HUD area Dover, DE MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_de_capitol",
+   "question": "What FEMA flood zone is 411 LEGISLATIVE AVE, DOVER, DE, 19901 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_dc_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1350 PENNSYLVANIA AVE NW, WASHINGTON, DC, 20004?",
+   "must_include": [
+    "2246",
+    "2,246"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "District of Columbia; HUD area Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_dc_capitol",
+   "question": "What FEMA flood zone is 1350 PENNSYLVANIA AVE NW, WASHINGTON, DC, 20004 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_fl_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 400 S MONROE ST, TALLAHASSEE, FL, 32399?",
+   "must_include": [
+    "1352",
+    "1,352"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Leon County; HUD area Tallahassee, FL HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_fl_capitol",
+   "question": "What FEMA flood zone is 400 S MONROE ST, TALLAHASSEE, FL, 32399 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ga_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 206 WASHINGTON ST SW, ATLANTA, GA, 30334?",
+   "must_include": [
+    "1820",
+    "1,820"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Fulton County; HUD area Atlanta-Sandy Springs-Roswell, GA HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_ga_capitol",
+   "question": "What FEMA flood zone is 206 WASHINGTON ST SW, ATLANTA, GA, 30334 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_hi_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 415 S BERETANIA ST, HONOLULU, HI, 96813?",
+   "must_include": [
+    "2642",
+    "2,642"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Honolulu County; HUD area Urban Honolulu, HI MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_hi_capitol",
+   "question": "What FEMA flood zone is 415 S BERETANIA ST, HONOLULU, HI, 96813 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_id_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 700 W JEFFERSON ST, BOISE, ID, 83720?",
+   "must_include": [
+    "1655",
+    "1,655"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Ada County; HUD area Boise City, ID HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_id_capitol",
+   "question": "What FEMA flood zone is 700 W JEFFERSON ST, BOISE, ID, 83720 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_il_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 401 S 2ND ST, SPRINGFIELD, IL, 62701?",
+   "must_include": [
+    "1203",
+    "1,203"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Sangamon County; HUD area Springfield, IL MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_il_capitol",
+   "question": "What FEMA flood zone is 401 S 2ND ST, SPRINGFIELD, IL, 62701 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_in_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 200 W WASHINGTON ST, INDIANAPOLIS, IN, 46204?",
+   "must_include": [
+    "1473",
+    "1,473"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Marion County; HUD area Indianapolis-Carmel, IN HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_in_capitol",
+   "question": "What FEMA flood zone is 200 W WASHINGTON ST, INDIANAPOLIS, IN, 46204 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ks_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 300 SW 10TH AVE, TOPEKA, KS, 66612?",
+   "must_include": [
+    "1057",
+    "1,057"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Shawnee County; HUD area Topeka, KS MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_ks_capitol",
+   "question": "What FEMA flood zone is 300 SW 10TH AVE, TOPEKA, KS, 66612 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ky_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 700 CAPITOL AVE, FRANKFORT, KY, 40601?",
+   "must_include": [
+    "1083",
+    "1,083"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Franklin County; HUD area Franklin County, KY; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_ky_capitol",
+   "question": "What FEMA flood zone is 700 CAPITOL AVE, FRANKFORT, KY, 40601 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_la_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 900 N 3RD ST, BATON ROUGE, LA, 70802?",
+   "must_include": [
+    "1204",
+    "1,204"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "East Baton Rouge Parish; HUD area Baton Rouge, LA HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_la_capitol",
+   "question": "What FEMA flood zone is 900 N 3RD ST, BATON ROUGE, LA, 70802 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_me_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 210 STATE ST, AUGUSTA, ME, 04330?",
+   "must_include": [
+    "1416",
+    "1,416"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Kennebec County; HUD area Kennebec County, ME; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_me_capitol",
+   "question": "What FEMA flood zone is 210 STATE ST, AUGUSTA, ME, 04330 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_md_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 100 STATE CIR, ANNAPOLIS, MD, 21401?",
+   "must_include": [
+    "1857",
+    "1,857"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Anne Arundel County; HUD area Baltimore-Columbia-Towson, MD MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_md_capitol",
+   "question": "What FEMA flood zone is 100 STATE CIR, ANNAPOLIS, MD, 21401 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ma_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 24 BEACON ST, BOSTON, MA, 02136?",
+   "must_include": [
+    "2941",
+    "2,941"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Suffolk County; HUD area Boston-Cambridge-Quincy, MA-NH HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_ma_capitol",
+   "question": "What FEMA flood zone is 24 BEACON ST, BOSTON, MA, 02136 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ms_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 400 HIGH ST, JACKSON, MS, 39201?",
+   "must_include": [
+    "1288",
+    "1,288"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Hinds County; HUD area Jackson, MS HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_ms_capitol",
+   "question": "What FEMA flood zone is 400 HIGH ST, JACKSON, MS, 39201 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_mo_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 201 W CAPITOL AVE, JEFFERSON CITY, MO, 65101?",
+   "must_include": [
+    "910",
+    "910"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Cole County; HUD area Jefferson City, MO HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_mo_capitol",
+   "question": "What FEMA flood zone is 201 W CAPITOL AVE, JEFFERSON CITY, MO, 65101 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_mt_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1301 E 6TH AVE, HELENA, MT, 59601?",
+   "must_include": [
+    "1647",
+    "1,647"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Lewis and Clark County; HUD area Lewis and Clark County, MT HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_mt_capitol",
+   "question": "What FEMA flood zone is 1301 E 6TH AVE, HELENA, MT, 59601 in?",
+   "must_include": [
+    "zone d",
+    "Zone D"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ne_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1445 K ST, LINCOLN, NE, 68508?",
+   "must_include": [
+    "1141",
+    "1,141"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Lancaster County; HUD area Lincoln, NE HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_ne_capitol",
+   "question": "What FEMA flood zone is 1445 K ST, LINCOLN, NE, 68508 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_nv_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 101 N CARSON ST, CARSON CITY, NV, 89701?",
+   "must_include": [
+    "1546",
+    "1,546"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Carson City; HUD area Carson City, NV MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_nv_capitol",
+   "question": "What FEMA flood zone is 101 N CARSON ST, CARSON CITY, NV, 89701 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_nh_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 107 N MAIN ST, CONCORD, NH, 03301?",
+   "must_include": [
+    "1974",
+    "1,974"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Merrimack County; HUD area Merrimack County, NH; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_nh_capitol",
+   "question": "What FEMA flood zone is 107 N MAIN ST, CONCORD, NH, 03301 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_nj_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 125 W STATE ST, TRENTON, NJ, 08608?",
+   "must_include": [
+    "1950",
+    "1,950"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Mercer County; HUD area Trenton-Princeton, NJ MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_nj_capitol",
+   "question": "What FEMA flood zone is 125 W STATE ST, TRENTON, NJ, 08608 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_nm_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 490 OLD SANTA FE TRL, SANTA FE, NM, 87501?",
+   "must_include": [
+    "1685",
+    "1,685"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Santa Fe County; HUD area Santa Fe, NM MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_nm_capitol",
+   "question": "What FEMA flood zone is 490 OLD SANTA FE TRL, SANTA FE, NM, 87501 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ny_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at STATE ST & WASHINGTON AVE, ALBANY, NY, 12207?",
+   "must_include": [
+    "1702",
+    "1,702"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Albany County; HUD area Albany-Schenectady-Troy, NY MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_ny_capitol",
+   "question": "What FEMA flood zone is STATE ST & WASHINGTON AVE, ALBANY, NY, 12207 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_nd_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 600 E BOULEVARD AVE, BISMARCK, ND, 58505?",
+   "must_include": [
+    "1175",
+    "1,175"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Burleigh County; HUD area Bismarck, ND MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_nd_capitol",
+   "question": "What FEMA flood zone is 600 E BOULEVARD AVE, BISMARCK, ND, 58505 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ok_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 2300 N LINCOLN BLVD, OKLAHOMA CITY, OK, 73105?",
+   "must_include": [
+    "1244",
+    "1,244"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Oklahoma County; HUD area Oklahoma City, OK HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_ok_capitol",
+   "question": "What FEMA flood zone is 2300 N LINCOLN BLVD, OKLAHOMA CITY, OK, 73105 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_or_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 900 COURT ST NE, SALEM, OR, 97301?",
+   "must_include": [
+    "1560",
+    "1,560"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Marion County; HUD area Salem, OR MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_or_capitol",
+   "question": "What FEMA flood zone is 900 COURT ST NE, SALEM, OR, 97301 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_pa_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 501 N 3RD ST, HARRISBURG, PA, 17113?",
+   "must_include": [
+    "1493",
+    "1,493"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Dauphin County; HUD area Harrisburg-Carlisle, PA MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_pa_capitol",
+   "question": "What FEMA flood zone is 501 N 3RD ST, HARRISBURG, PA, 17113 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ri_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 82 SMITH ST, PROVIDENCE, RI, 02903?",
+   "must_include": [
+    "1729",
+    "1,729"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Providence County; HUD area Providence-Fall River, RI-MA HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_ri_capitol",
+   "question": "What FEMA flood zone is 82 SMITH ST, PROVIDENCE, RI, 02903 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_sc_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1100 GERVAIS ST, COLUMBIA, SC, 29201?",
+   "must_include": [
+    "1276",
+    "1,276"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Richland County; HUD area Columbia, SC HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_sc_capitol",
+   "question": "What FEMA flood zone is 1100 GERVAIS ST, COLUMBIA, SC, 29201 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_sd_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 500 E CAPITOL AVE, PIERRE, SD, 57501?",
+   "must_include": [
+    "1034",
+    "1,034"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Hughes County; HUD area Hughes County, SD; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_sd_capitol",
+   "question": "What FEMA flood zone is 500 E CAPITOL AVE, PIERRE, SD, 57501 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_tx_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1100 CONGRESS AVE, AUSTIN, TX, 78701?",
+   "must_include": [
+    "1852",
+    "1,852"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Travis County; HUD area Austin-Round Rock-San Marcos, TX MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_tx_capitol",
+   "question": "What FEMA flood zone is 1100 CONGRESS AVE, AUSTIN, TX, 78701 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ut_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 350 N STATE ST, SALT LAKE CITY, UT, 84103?",
+   "must_include": [
+    "1747",
+    "1,747"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Salt Lake County; HUD area Salt Lake City, UT HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_ut_capitol",
+   "question": "What FEMA flood zone is 350 N STATE ST, SALT LAKE CITY, UT, 84103 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_vt_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 115 STATE ST, MONTPELIER, VT, 05602?",
+   "must_include": [
+    "1482",
+    "1,482"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Washington County; HUD area Washington County, VT; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_vt_capitol",
+   "question": "What FEMA flood zone is 115 STATE ST, MONTPELIER, VT, 05602 in?",
+   "must_include": [
+    "zone ae",
+    "Zone AE"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_va_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1000 BANK ST, RICHMOND, VA, 23219?",
+   "must_include": [
+    "1655",
+    "1,655"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Richmond city; HUD area Richmond, VA HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_va_capitol",
+   "question": "What FEMA flood zone is 1000 BANK ST, RICHMOND, VA, 23219 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_wv_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1900 KANAWHA BLVD E, CHARLESTON, WV, 25305?",
+   "must_include": [
+    "1036",
+    "1,036"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Kanawha County; HUD area Charleston, WV HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_wv_capitol",
+   "question": "What FEMA flood zone is 1900 KANAWHA BLVD E, CHARLESTON, WV, 25305 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_wi_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 2 E MAIN ST, MADISON, WI, 53703?",
+   "must_include": [
+    "1694",
+    "1,694"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Dane County; HUD area Madison, WI HUD Metro FMR Area; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_wi_capitol",
+   "question": "What FEMA flood zone is 2 E MAIN ST, MADISON, WI, 53703 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_wy_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 200 W 24TH ST, CHEYENNE, WY, 82001?",
+   "must_include": [
+    "1174",
+    "1,174"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Laramie County; HUD area Cheyenne, WY MSA; pulled live 2026-11-16."
+  },
+  {
+   "id": "flood_wy_capitol",
+   "question": "What FEMA flood zone is 200 W 24TH ST, CHEYENNE, WY, 82001 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
   }
  ]
 }
