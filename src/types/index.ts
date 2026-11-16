@@ -44,27 +44,41 @@ export interface StatutoryZoningResult {
   parcel_id: string;
   state_code: string;
   base_zoning_code: string | null;
+  // Laws from app/data/statutes.json that apply. Fields the laws audit could not confirm are null and listed in
+  // unconfirmed_fields.
   applicable_statutes: Array<{
-    citation: string;                   // e.g., "CA SB 79 (2026)", "TX SB 840", "FL Live Local 4.0", "WA HB 1110"
-    max_units_by_right: number;
+    id: string;
+    citation: string;
+    short_name: string;
+    statute_url: string | null;
+    summary: string | null;
+    verification_status: string;
+    max_units_by_right: number | null;
     max_height_ft: number | null;
     max_far: number | null;
-    min_parking_spaces_per_unit: number;
-    affordability_mandate_pct: number;
-    tax_exemption_pct: number;          // e.g., FL § 196.1979 (0.75 or 1.00)
+    min_allowed_density_du_per_acre: number | null;
+    min_parking_spaces_per_unit: number | null;
+    max_parking_requirement_per_unit: number | null;
+    affordability_mandate_pct: number | null;
+    tax_exemption_pct: number | null;
+    unconfirmed_fields: string[];
   }>;
+  // Laws for this state that could not be confirmed for this parcel, with the reason.
+  not_confirmed: Array<{ id: string; name: string; reason: string }>;
   statutory_exclusions: {
-    historic_district_hpoz: boolean;
-    coastal_commission_or_sma: boolean;
-    fema_100yr_floodway: boolean;
-    calfire_or_state_vhfhsz: boolean;
-    airport_noise_or_runway_zone: boolean;
-    williamson_or_ag_preserve: boolean;
-    public_or_tribal_land: boolean;
-    everglades_or_wekiva_or_trpa: boolean;
-    population_threshold_ineligible: boolean; // e.g., TX SB 840 / SB 15 outside cities >150k in counties >300k
+    historic_district_hpoz?: boolean;
+    coastal_commission_or_sma?: boolean;
+    fema_100yr_floodway?: boolean;
+    calfire_or_state_vhfhsz?: boolean;
+    airport_noise_or_runway_zone?: boolean;
+    williamson_or_ag_preserve?: boolean;
+    public_or_tribal_land?: boolean;
+    everglades_or_wekiva_or_trpa?: boolean;
+    population_threshold_ineligible?: boolean;
+    [k: string]: boolean | undefined;
   };
   net_by_right_feasible: boolean;
+  laws_loaded: boolean;
 }
 
 export interface SolarMicrogridCalculation {

@@ -194,3 +194,31 @@ test("Explore mode explains ideas and neighborhoods without the map, and hands o
   await expect(page.locator(".ex-title")).toBeVisible({ timeout: 60_000 });
   expect(errors).toEqual([]);
 });
+
+test("parcel and neighborhood panels render without invented figures", async ({ page }) => {
+  const errors = await openPage(page);
+  // A neighborhood (block group) panel: the first block group in the loaded county.
+  await page.evaluate(() => { const w = window as any; const id = w.D.bgs.features[0].properties.id; w.select(id, false); });
+  const panel = await page.locator("#panel").innerText();
+  for (const bad of ["Synergy Simulator", "15.6%", "$1.62M", "+54%", "Private Dev IRR"]) expect(panel).not.toContain(bad);
+
+  // A house panel from fixed records (no live services): zoning on file, a recent sale, no imagery dates.
+  const html = await page.evaluate(() => {
+    const w = window as any;
+    const box = document.createElement("div");
+    document.body.appendChild(box);
+    const a = { AIN: "0000000000", SitusFullAddress: "1 Test St", UseType: "Residential", UseDescription: "Single Family Residence", ZoneCode: "R1-1",
+      Roll_LandValue: 400000, Roll_ImpValue: 150000, Roll_LandBaseYear: 2012, YearBuilt1: 1955, SQFTmain1: 1500, Bedrooms1: 3, Bathrooms1: 2,
+      LastSalePrice: 1050000, LastSaleDate: "20260315" };
+    const ll = { lat: 34.05, lng: -118.30 };
+    const st = { osm: null, R: null, osmDone: true, rDone: true, manualStories: null };
+    w.activeHouse = { box, a, lot: 6000, ll, st, tok: 1 };
+    w.renderHouse(box, a, 6000, ll, st);
+    return box.innerText;
+  });
+  expect(html).toContain("Unvalidated estimate");
+  for (const bad of ["High Precision", "RSMeans", "Verified Current Imagery", "Return per $1", "Estimated Net Equity", "± ", "Saves $", "Projected 25-year"]) {
+    expect(html).not.toContain(bad);
+  }
+  expect(errors).toEqual([]);
+});

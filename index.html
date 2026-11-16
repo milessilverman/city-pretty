@@ -48,7 +48,7 @@
     <div class="sr-only" data-city-pretty-eyebrow>CITY PRETTY · LOS ANGELES COUNTY, CA</div>
     <div class="county-pick" id="county-pick">
       <button type="button" class="pick-btn" id="county-pick-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="county-pick-pop" title="Change county">
-        <svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span id="county-pick-label">Los Angeles County, CA</span><span id="county-readiness-pill" class="tier-dot" data-tier="audited_A"></span><svg class="ic chev" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span id="county-pick-label">Los Angeles County, CA</span><span id="county-readiness-pill" class="tier-dot" data-tier="none"></span><svg class="ic chev" aria-hidden="true"><use href="#i-chevron"/></svg>
       </button>
       <div class="pick-pop" id="county-pick-pop" hidden>
         <label for="county-q" class="sr-only">Search counties</label>
@@ -160,7 +160,7 @@
 
 <!-- City Pretty AI Urban & Property Advisor Modal -->
 
-<!-- EMPIRICAL URBAN RESEARCH & HISTORIC TRENDS LIBRARY MODAL (52 VERIFIED STUDIES) -->
+<!-- RESEARCH LIBRARY & CASE STUDIES MODAL (each record shows its verification status) -->
 
 <!-- HISTORICAL MUNICIPAL TAX REINVESTMENT & REAL ESTATE SURGE CASE STUDIES MODAL -->
 <div class="overlay-modal" id="trends-modal" hidden>
@@ -208,7 +208,7 @@
         <span style="font-size:26px;"></span>
         <div>
           <div style="font-size:17px;font-weight:800;letter-spacing:0.3px;">Empirical Urban Economics &amp; Historical Research Library</div>
-          <div style="font-size:11.5px;color:#94a3b8;">52 Peer-Reviewed Studies &middot; Measured Real Estate Impacts &middot; Historical Municipal Tax &amp; Capital Trends</div>
+          <div style="font-size:11.5px;color:#94a3b8;">Research studies and case studies, each labeled with how far it has been checked</div>
         </div>
       </div>
       <button type="button" onclick="closeResearchModal()" style="background:rgba(255,255,255,0.15);border:none;color:#fff;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;">✕</button>
@@ -235,7 +235,7 @@
 
     <!-- Research List Container -->
     <div id="research-list" role="region" aria-label="Empirical research study results" aria-live="polite" style="flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:12px;background:#fff;">
-      <div style="padding:24px;text-align:center;color:#64748b;font-size:13px;">Loading peer-reviewed research papers and empirical econometric findings…</div>
+      <div style="padding:24px;text-align:center;color:#64748b;font-size:13px;">Loading the research library…</div>
     </div>
   </div>
 </div>
@@ -340,133 +340,71 @@
 
     <!-- TAB 2: Econometric Model Provenance & AI Backbone -->
     <div id="accuracy-tab-provenance" style="display:none;">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
-        <span style="font-size:24px;"></span>
-        <div>
-          <h2 style="margin:0;font-size:19px;font-weight:800;color:var(--ink)">Econometric Hedonic Model Provenance &amp; Open Data Framework</h2>
-        <div style="font-size:12px;color:#64748b;">A Peer-Reviewed, Open-Source Methodology for Public Capital Allocation &amp; By-Right Infill Feasibility</div>
-      </div>
-    </div>
-    <p class="small muted" style="margin-bottom:16px;line-height:1.5;">
-      City Pretty evaluates urban infrastructure investments and private infill capacity by combining authoritative municipal cadastral GIS with peer-reviewed hedonic price equations. Rather than relying on proprietary, opaque broker estimates, every coefficient and statutory citation is derived from official public records and published econometric literature.
-    </p>
-
-    <!-- Subsystem Accuracy Grid -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));gap:12px;margin-bottom:20px;">
-      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-          <b style="font-size:13px;color:#0f172a;">Cadastral &amp; Parcel Boundaries</b>
-          <span style="background:#dcfce7;color:#166534;font-weight:800;font-size:12px;padding:2px 8px;border-radius:12px;">~96% Accuracy</span>
-        </div>
-        <p class="small" style="margin:0;color:#475569;line-height:1.4;">
-          Direct queries to authoritative county assessor and surveyor ArcGIS Server REST endpoints across the counties that publish them. Lot polygons, APNs, and deeded acreage.
-        </p>
-      </div>
-
-      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-          <b style="font-size:13px;color:#0f172a;">State Housing Rights &amp; By-Right Zoning</b>
-          <span style="background:#dcfce7;color:#166534;font-weight:800;font-size:12px;padding:2px 8px;border-radius:12px;">~98% Accuracy</span>
-        </div>
-        <p class="small" style="margin:0;color:#475569;line-height:1.4;">
-          Deterministic statutory engines codifying enacted state laws (CA AB 2097 zero parking, SB 9 lot splits, Gov Code § 66314 ADUs, TX HB 2720, FL Live Local Act). 100% auditable code citations.
-        </p>
-      </div>
-
-      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-          <b style="font-size:13px;color:#0f172a;">FEMA Flood &amp; Wildfire Hazard</b>
-          <span style="background:#dcfce7;color:#166534;font-weight:800;font-size:12px;padding:2px 8px;border-radius:12px;">~95% Accuracy</span>
-        </div>
-        <p class="small" style="margin:0;color:#475569;line-height:1.4;">
-          Integrated FEMA National Flood Hazard Layer (NFHL) 100-yr/500-yr floodways and CAL FIRE / state forestry high fire hazard severity zones.
-        </p>
-      </div>
-
-      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-          <b style="font-size:13px;color:#0f172a;">Building Outlines &amp; Stories</b>
-          <span style="background:#fef3c7;color:#92400e;font-weight:800;font-size:12px;padding:2px 8px;border-radius:12px;">~88%–92% Accuracy</span>
-        </div>
-        <p class="small" style="margin:0;color:#475569;line-height:1.4;">
-          OpenStreetMap &amp; USGS LiDAR building footprints paired with inline 4-angle Google Street View facade inspection and manual story calibration presets.
-        </p>
-      </div>
-
-      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-          <b style="font-size:13px;color:#0f172a;">Transit Corridors &amp; P3 Stations</b>
-          <span style="background:#dcfce7;color:#166534;font-weight:800;font-size:12px;padding:2px 8px;border-radius:12px;">~99% Accuracy</span>
-        </div>
-        <p class="small" style="margin:0;color:#475569;line-height:1.4;">
-          Surveyed geodetic station coordinates and exact 0.25-mi, 0.5-mi, and 0.75-mi walkshed isochrones across 86 transit stations in 16 major US metropolitan areas.
-        </p>
-      </div>
-
-      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-          <b style="font-size:13px;color:#0f172a;">Automated Valuation (AVM) Screening</b>
-          <span style="background:#fef3c7;color:#92400e;font-weight:800;font-size:12px;padding:2px 8px;border-radius:12px;">~85%–90% (±6.5% Band)</span>
-        </div>
-        <p class="small" style="margin:0;color:#475569;line-height:1.4;">
-          Preliminary hedonic market valuation cross-referencing county tax rolls against active neighborhood sales comps and direct Zillow benchmark links.
-        </p>
-      </div>
-    </div>
-
-    <!-- Comparative Table: CoStar vs City Pretty -->
-    <div style="margin-bottom:20px;">
-      <h3 style="font-size:14px;font-weight:800;color:var(--ink);margin-bottom:8px;">Methodological Comparison: Civic Open Data vs. Proprietary Commercial Platforms</h3>
-      <table style="width:100%;border-collapse:collapse;font-size:12px;text-align:left;border:1px solid #e2e8f0;border-radius:6px;overflow:hidden;">
-        <thead>
-          <tr style="background:#f1f5f9;color:#0f172a;font-weight:700;">
-            <th style="padding:8px 10px;border-bottom:1px solid #cbd5e1;">Capability</th>
-            <th style="padding:8px 10px;border-bottom:1px solid #cbd5e1;">CoStar / Commercial Tools</th>
-            <th style="padding:8px 10px;border-bottom:1px solid #cbd5e1;background:#ecfdf5;color:#065f46;">City Pretty</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;font-weight:600;">Pricing &amp; Access</td>
-            <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;color:#64748b;">$20,000–$50,000 / year behind closed broker walls</td>
-            <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;background:#f0fdf4;font-weight:700;color:#15803d;">100% Open Access &amp; Community Verified</td>
-          </tr>
-          <tr>
-            <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;font-weight:600;">Public Investment ROI</td>
-            <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;color:#64748b;">None (purely private listing and sales records)</td>
-            <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;background:#f0fdf4;font-weight:700;color:#15803d;">Rigorous Return-per-$1 for parks, schools, bike spines &amp; P3s</td>
-          </tr>
-          <tr>
-            <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;font-weight:600;">Statutory By-Right Housing Rights</td>
-            <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;color:#64748b;">Static local zoning labels without legislative overrides</td>
-            <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;background:#f0fdf4;font-weight:700;color:#15803d;">Evaluates 2026 statutory enactments (CA SB 79 rail tiers, TX SB 840/15 population-gated, FL Live Local 4.0 § 196.1979 exemptions, WA HB 1110, OR HB 2001, AZ HB 2720) with deterministic boolean exclusion masks (HPOZ, Coastal Commission, FEMA floodways, CAL FIRE VHFHSZ)</td>
-          </tr>
-          <tr>
-            <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;font-weight:600;">Clean Energy &amp; Microgrid ROI</td>
-            <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;color:#64748b;">Not analyzed</td>
-            <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;background:#f0fdf4;font-weight:700;color:#15803d;">Rooftop solar DC kW sizing, 2026 statutory compliance (0% IRC § 25D cash/loan, 30% § 48E PPA/TPO), and CA NEM 3.0 battery storage</td>
-          </tr>
-          <tr>
-            <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;font-weight:600;">Actionable Best Bet</td>
-            <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;color:#64748b;">Broker contacts only</td>
-            <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;background:#f0fdf4;font-weight:700;color:#15803d;">Owner &amp; Investor Playbook: Tells you the single best move to make</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- AI Architecture Section -->
-    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:14px;margin-bottom:16px;">
-      <h3 style="margin:0 0 6px 0;font-size:14px;font-weight:800;color:#1e40af;">Why City Pretty is the Ideal Backbone for Autonomous AI Urban Agents</h3>
-      <p class="small" style="margin:0 0 8px 0;color:#1e3a8a;line-height:1.45;">
-        Large Language Models (LLMs) cannot reliably generate real estate or urban planning advice on their own because they hallucinate lot lines, property taxes, setbacks, and local zoning bylaws. City Pretty solves this by providing the deterministic, verified ground-truth layer:
+      <h2 style="margin:0 0 4px;font-size:19px;font-weight:800;color:var(--ink)">How accurate is this? What has and has not been checked</h2>
+      <p class="small muted" style="margin-bottom:16px;line-height:1.5;">
+        No accuracy percentage is shown for any part of City Pretty, because none has been measured. Below is what each part is built from and how far it has been checked (audit of 16 Nov 2026; details in docs/audit/ in the repository).
       </p>
-      <ul class="small" style="margin:0;padding-left:18px;color:#1e3a8a;line-height:1.45;">
-        <li><b>Zero-Hallucination Geospatial Grounding:</b> Every parcel boundary comes from official municipal and county ArcGIS geodatabases, not model guesses.</li>
-        <li><b>Deterministic Statutory Engines:</b> State and municipal codes are parsed mathematically with verifiable legal citations.</li>
-        <li><b>Structured Multi-Modal Context:</b> Street View facades, LiDAR heights, transit walkshed buffers, and assessor rolls are synthesized into standardized JSON schemas ready for agentic LLM reasoning.</li>
-      </ul>
-    </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));gap:12px;margin-bottom:20px;">
+      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;gap:8px;">
+          <b style="font-size:13px;color:#0f172a;">Parcel lines</b>
+          <span style="background:#f1f5f9;color:#334155;font-weight:700;font-size:11px;padding:2px 8px;border-radius:12px;">From county services</span>
+        </div>
+        <p class="small" style="margin:0;color:#475569;line-height:1.4;">Lot polygons and parcel numbers come live from county assessor or GIS services where a county publishes them. Not independently re-surveyed.</p>
+      </div>
+      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;gap:8px;">
+          <b style="font-size:13px;color:#0f172a;">State housing laws</b>
+          <span style="background:#f1f5f9;color:#334155;font-weight:700;font-size:11px;padding:2px 8px;border-radius:12px;">Text checked for most</span>
+        </div>
+        <p class="small" style="margin:0;color:#475569;line-height:1.4;">Read from app/data/statutes.json. Each law shows whether its text was checked; fields that could not be confirmed are left out. Screening only: confirm with the planning department.</p>
+      </div>
+      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;gap:8px;">
+          <b style="font-size:13px;color:#0f172a;">Flood zones</b>
+          <span style="background:#f1f5f9;color:#334155;font-weight:700;font-size:11px;padding:2px 8px;border-radius:12px;">From FEMA</span>
+        </div>
+        <p class="small" style="margin:0;color:#475569;line-height:1.4;">FEMA's National Flood Hazard Layer, queried live. No polygon means FEMA has no effective map there, not that there is no risk.</p>
+      </div>
+      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;gap:8px;">
+          <b style="font-size:13px;color:#0f172a;">Building outlines and stories</b>
+          <span style="background:#f1f5f9;color:#334155;font-weight:700;font-size:11px;padding:2px 8px;border-radius:12px;">Not measured</span>
+        </div>
+        <p class="small" style="margin:0;color:#475569;line-height:1.4;">OpenStreetMap outlines where mapped; story count from records or set by hand. Imagery capture dates are not on file.</p>
+      </div>
+      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;gap:8px;">
+          <b style="font-size:13px;color:#0f172a;">Transit corridors</b>
+          <span style="background:#f1f5f9;color:#334155;font-weight:700;font-size:11px;padding:2px 8px;border-radius:12px;">Partly checked</span>
+        </div>
+        <p class="small" style="margin:0;color:#475569;line-height:1.4;">A few planned corridors with agency links. Some station locations are illustrative and are labeled unverified.</p>
+      </div>
+      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;gap:8px;">
+          <b style="font-size:13px;color:#0f172a;">Home value estimate</b>
+          <span style="background:#f1f5f9;color:#334155;font-weight:700;font-size:11px;padding:2px 8px;border-radius:12px;">Not tested</span>
+        </div>
+        <p class="small" style="margin:0;color:#475569;line-height:1.4;">Built from a recent sale, the assessor's value and the Census median. It has never been tested against recorded sales, so no accuracy range is given.</p>
+      </div>
+      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;gap:8px;">
+          <b style="font-size:13px;color:#0f172a;">Rents</b>
+          <span style="background:#f1f5f9;color:#334155;font-weight:700;font-size:11px;padding:2px 8px;border-radius:12px;">From HUD</span>
+        </div>
+        <p class="small" style="margin:0;color:#475569;line-height:1.4;">HUD Fair Market Rents for every county, pulled from HUD's published service. These are voucher payment benchmarks, not market asking rents.</p>
+      </div>
+      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;gap:8px;">
+          <b style="font-size:13px;color:#0f172a;">Research studies</b>
+          <span style="background:#f1f5f9;color:#334155;font-weight:700;font-size:11px;padding:2px 8px;border-radius:12px;">Citations checked</span>
+        </div>
+        <p class="small" style="margin:0;color:#475569;line-height:1.4;">Each study shows whether its citation was confirmed (Crossref or the publisher). Effect sizes are shown only where confirmed in the source.</p>
+      </div>
+      </div>
+      <p class="small muted" style="line-height:1.5;">
+        Costs, returns, cash flow and development margins are not modeled in most places yet: where no sourced cost data exists, the page says "Not modeled yet" instead of showing a number.
+      </p>
     </div><!-- End #accuracy-tab-provenance -->
 
     <div style="display:flex;justify-content:flex-end;margin-top:16px;">

@@ -1,54 +1,17 @@
-import {
-  estimatePropertyMarketValue,
-  PropertyValuationInput,
-  PropertyValuationResult,
-} from "./propertyValuationEngine";
-import {
-  validateParcelImageryVintage,
-  ImageryVintageCheck,
-} from "./lidarStreetViewValidator";
-import {
-  evaluateByRightHousing,
-  ParcelContext,
-  StatutoryZoningResult,
-} from "./statutoryZoningEngine";
-import {
-  calculateSolarMicrogridRoi,
-  SolarInput,
-  SolarMicrogridCalculation,
-} from "./solarMicrogridEngine";
-import {
-  estimateAccurateRoofArea,
-  AccurateRoofCalculation,
-} from "./roofAreaEngine";
-import {
-  evaluateEverySpaceMonetization,
-  EverySpacePortfolioSummary,
-} from "./everySpaceEngine";
-import {
-  evaluateRenovationQuote,
-  RenovationQuoteEvaluation,
-} from "./renovationQuoteEngine";
+// Mirror of auditSingleHouseParcel in app/app.js (the shipped copy). Keep the two in step.
+// Type-checked loosely: the JS mirror (parcelHouseAuditor.js) is what the unit tests run.
+// @ts-nocheck
+import { estimatePropertyMarketValue as _estVal } from "./propertyValuationEngine";
+import { validateParcelImageryVintage as _valVintage } from "./lidarStreetViewValidator";
+import { evaluateByRightHousing as _evalHousing } from "./statutoryZoningEngine";
+import { estimateAccurateRoofArea as _estRoof } from "./roofAreaEngine";
 
 export interface BuildingPermitRecord {
   permit_id?: string;
-  issue_date: string; // ISO "YYYY-MM-DD" or "YYYY-MM"
+  issue_date: string | null;
   permit_type: "addition" | "remodel" | "adu" | "seismic" | "solar" | "other";
   valuation_usd: number;
   description: string;
-}
-
-export interface ParcelLegalExclusions {
-  historic_district_hpoz?: boolean;
-  coastal_commission_or_sma?: boolean;
-  fema_100yr_floodway?: boolean;
-  calfire_or_state_vhfhsz?: boolean;
-  airport_noise_or_runway_zone?: boolean;
-  williamson_or_ag_preserve?: boolean;
-  private_hoa_ccr_restrictions?: boolean;
-  population_threshold_ineligible?: boolean;
-  everglades_or_wekiva_or_trpa?: boolean;
-  public_or_tribal_land?: boolean;
 }
 
 export interface HouseParcelAuditInput {
@@ -56,201 +19,98 @@ export interface HouseParcelAuditInput {
   address?: string;
   lat: number;
   lng: number;
-  lotSqft: number;
-  livingSqft?: number;
+  lotSqft: number | null;
+  livingSqft?: number | null;
   yearBuilt?: number | null;
   effectiveYearBuilt?: number | null;
-  bedrooms?: number;
-  bathrooms?: number;
+  bedrooms?: number | null;
+  bathrooms?: number | null;
   stories?: number;
   hasPool?: boolean;
   hasGarage?: boolean;
   isVacantLand?: boolean;
   units?: number;
-  zoningCode?: string;
+  zoningCode?: string | null;
   useDescription?: string;
   rollLandValue?: number;
   rollImpValue?: number;
   rollBaseYear?: number | null;
   lastSalePrice?: number | null;
   lastSaleDate?: string | null;
-  neighborhoodMedianHv: number;
-  stateCode: string;
-  countyFips: string;
-  municipalityPop?: number;
-  countyPop?: number;
+  neighborhoodMedianHv: number | null;
+  stateCode: string | null;
+  countyFips: string | null;
+  municipalityPop?: number | null;
+  countyPop?: number | null;
   distToHeavyRailMi?: number | null;
   distToFrequentBusMi?: number | null;
   recentPermits?: BuildingPermitRecord[];
-  imageryInfo?: {
-    lidarYear?: number;
-    streetViewDate?: string | null;
-    hasStreetView?: boolean;
-  };
-  exclusions?: ParcelLegalExclusions;
+  imageryInfo?: { lidarYear?: number | null; streetViewDate?: string | null; hasStreetView?: boolean };
+  exclusions?: Record<string, boolean>;
   isUrbanCore?: boolean;
+  statuteLaws?: any[];
 }
 
-export interface CalibratedTreeEconomics {
-  stateCode: string;
-  climateRegime: "cooling_dominant" | "heating_dominant" | "mixed_temperate" | "arid_irrigation_limited";
-  capitalizedValueLiftUsd: number;
-  annualUtilitySavingsUsd: number;
-  annualIrrigationCostUsd: number;
-  netAnnualSavingsUsd: number;
-  utilityBenefitDescription: string;
-}
+export type HouseParcelAuditResult = ReturnType<typeof auditSingleHouseParcel>;
 
-export interface HouseParcelAuditResult {
-  parcelId: string;
-  stateCode: string;
-  countyFips: string;
-  valuation: {
-    estimatedValue: number;
-    valueLow: number;
-    valueHigh: number;
-    vpsf: number;
-    confidenceMarginPct: number;
-    confidenceRating: string;
-    valuationMethod: string;
-    isVacantLand: boolean;
-    siteValue: number;
-    structVal: number;
-    permitCapitalizationAdded: number;
-    luxuryDampeningApplied: boolean;
-    luxurySaturationMultiplier: number;
-    multiUnitBonusPct: number;
-  };
-  imagery: ImageryVintageCheck & {
-    proxyRoutingNotice: string;
-    storyCalibrationSource: string;
-  };
-  statutoryZoning: StatutoryZoningResult & {
-    privateCovenantsDisclaimer: string;
-    lotSplitFeasible: boolean;
-    aduFeasible: boolean;
-    statutoryNotes: string;
-  };
-  roofCadastre: AccurateRoofCalculation;
-  solarMicrogrid: SolarMicrogridCalculation & {
-    dcKwCapacity: number;
-    unshadedRoofSqft: number;
-    grossSystemCostUsd: number;
-    netSystemCostCashUsd: number;
-    netSystemCostLeaseUsd: number;
-    annualYieldKwh: number;
-    paybackYearsCash: number;
-    paybackYearsLease: number;
-    nemTariffNotice: string;
-  };
-  treeEconomics: CalibratedTreeEconomics;
-  subAdditiveStacking: {
-    maxStackingCeilingPct: number;
-    jointCapitalizationFormula: string;
-    displacementSensitivityScore: number;
-  };
-  everySpace?: EverySpacePortfolioSummary;
-  renovationOptions?: RenovationQuoteEvaluation[];
-  legalEngineeringDisclaimers: string[];
-}
+function _defaultStatuteLaws(): any[] { return []; }
 
-export function getHighValueSaturationMultiplier(marketVal: number): number {
-  if (!marketVal || marketVal <= 2500000) return 1.0;
-  return Math.pow(2500000 / marketVal, 0.45);
-}
-
-export function calculatePermitCapitalization(permits: BuildingPermitRecord[] = []): number {
+// Sum of the construction valuations recorded on permits (a recorded fact). Nothing is added to the home value:
+// no sourced rate exists for how much of permitted work shows up in sale prices.
+export function calculatePermitCapitalization(permits) {
   if (!permits || !permits.length) return 0;
-  let totalCapitalized = 0;
+  let total = 0;
   for (const p of permits) {
     const val = +p.valuation_usd || 0;
-    if (val <= 0) continue;
-    if (p.permit_type === "seismic") {
-      totalCapitalized += Math.min(val, 15000);
-    } else {
-      if (val <= 250000) {
-        totalCapitalized += Math.round(val * 0.85);
-      } else {
-        totalCapitalized += Math.round(250000 * 0.85 + (val - 250000) * 0.60);
-      }
-    }
+    if (val > 0) total += val;
   }
-  return totalCapitalized;
+  return total;
 }
 
-export function calculateCalibratedTreeEconomics(
-  stateCode: string,
-  houseVal: number,
-  rsmeansCostMultiplier = 1.0
-): CalibratedTreeEconomics {
-  const st = (stateCode || "CA").toUpperCase();
-
-  const HEATING_STATES = new Set([
-    "AK", "ME", "NH", "VT", "MA", "NY", "MN", "WI", "MI", "ND", "SD", "MT", "WY", "ID", "IA", "IL"
-  ]);
+// Climate regime and what a shade tree does there. Dollar figures were removed 2026-11-16: the per-regime
+// values had no source (the one cited study's DOI did not resolve), so none are shown.
+export function calculateCalibratedTreeEconomics(stateCode) {
+  const st = String(stateCode || "").toUpperCase();
+  const HEATING_STATES = new Set(["AK", "ME", "NH", "VT", "MA", "NY", "MN", "WI", "MI", "ND", "SD", "MT", "WY", "ID", "IA", "IL"]);
   const ARID_STATES = new Set(["AZ", "NV", "NM", "UT"]);
-
-  let regime: CalibratedTreeEconomics["climateRegime"] = "mixed_temperate";
+  let regime = "mixed_temperate";
   if (HEATING_STATES.has(st)) regime = "heating_dominant";
   else if (ARID_STATES.has(st)) regime = "arid_irrigation_limited";
   else if (["CA", "FL", "TX", "GA", "SC", "LA", "HI"].includes(st)) regime = "cooling_dominant";
-
-  let baseVal = 7130;
-  let annualSavings = 140;
-  let irrigation = 20;
-  let desc = "Saves in summer AC air conditioning cooling load.";
-
-  if (regime === "heating_dominant") {
-    baseVal = 5400;
-    annualSavings = 95;
-    irrigation = 0;
-    desc = "Winter windbreak lowers convective air infiltration and heating fuel usage.";
-  } else if (regime === "arid_irrigation_limited") {
-    baseVal = 8200;
-    annualSavings = 220;
-    irrigation = 45;
-    desc = "Peak urban heat island mitigation; requires deep drip xeriscape irrigation.";
-  } else if (regime === "cooling_dominant") {
-    baseVal = 7130;
-    annualSavings = 140;
-    irrigation = 20;
-    desc = "Mature shade canopy lowers attic solar gain and AC cooling bills.";
-  } else {
-    baseVal = 6200;
-    annualSavings = 115;
-    irrigation = 10;
-    desc = "Balanced summer cooling shade and seasonal deciduous solar permeability.";
-  }
-
-  const capitalizedValueLiftUsd = Math.round(baseVal * rsmeansCostMultiplier);
-  const netAnnualSavingsUsd = annualSavings - irrigation;
-
+  const desc = {
+    heating_dominant: "Evergreen windbreaks can cut winter heat loss; summer shade matters less here.",
+    arid_irrigation_limited: "Shade cools pavement and roofs, but trees need drip irrigation in this climate.",
+    cooling_dominant: "Shade on west and south walls lowers summer cooling load.",
+    mixed_temperate: "Deciduous shade cools in summer and lets winter sun through.",
+  }[regime];
   return {
     stateCode: st,
     climateRegime: regime,
-    capitalizedValueLiftUsd,
-    annualUtilitySavingsUsd: annualSavings,
-    annualIrrigationCostUsd: irrigation,
-    netAnnualSavingsUsd,
+    capitalizedValueLiftUsd: null,
+    annualUtilitySavingsUsd: null,
+    annualIrrigationCostUsd: null,
+    netAnnualSavingsUsd: null,
     utilityBenefitDescription: desc,
+    dollarStatus: "Not modeled yet — no sourced tree value or utility savings data",
   };
 }
 
-export function auditSingleHouseParcel(input: HouseParcelAuditInput): HouseParcelAuditResult {
-  const stCode = (input.stateCode || "CA").toUpperCase();
+export function auditSingleHouseParcel(input: HouseParcelAuditInput) {
+  const stCode = String(input.stateCode || "").toUpperCase();
   const lotSqft = input.lotSqft ?? null;
   const livingSqft = input.isVacantLand ? 0 : (input.livingSqft ?? null);
   const isVacant = !!input.isVacantLand;
 
-  // 1. Ingest AVM Valuation with 2026 Deed Transfers & Permit Capitalization
-  const baseAvm = estimatePropertyMarketValue({
+  // 1. Value screening estimate (unvalidated; see estimatePropertyMarketValue)
+  const saleYear = input.lastSaleDate ? +String(input.lastSaleDate).replace(/\D/g, "").slice(0, 4) || null : null;
+  const baseAvm = _estVal({
     attributes: {
       Roll_LandValue: input.rollLandValue,
       Roll_ImpValue: input.rollImpValue,
       Roll_LandBaseYear: input.rollBaseYear,
       Roll_ImpBaseYear: input.rollBaseYear,
       UseCode: isVacant ? "010V" : undefined,
-      UseDescription: input.useDescription || (isVacant ? "Vacant Residential" : "Single Family"),
+      UseDescription: input.useDescription || (isVacant ? "Vacant Residential" : ""),
       ZoneCode: input.zoningCode ? input.zoningCode : undefined,
       Bedrooms1: input.bedrooms,
       Bathrooms1: input.bathrooms,
@@ -258,11 +118,8 @@ export function auditSingleHouseParcel(input: HouseParcelAuditInput): HouseParce
       EffectiveYear1: input.effectiveYearBuilt,
       YearBuilt1: input.yearBuilt,
     },
-    lotSqft: lotSqft || undefined,
-    neighborhood: {
-      hv: input.neighborhoodMedianHv,
-      c: input.address || "Metro Area",
-    },
+    lotSqft: lotSqft || null,
+    neighborhood: { hv: input.neighborhoodMedianHv, c: input.address || "" },
     stateCode: stCode,
     facts: {
       bldg: isVacant ? 0 : livingSqft,
@@ -276,57 +133,39 @@ export function auditSingleHouseParcel(input: HouseParcelAuditInput): HouseParce
       garage: !!input.hasGarage,
       units: input.units || 1,
     },
-    salesInfo: input.lastSalePrice
-      ? {
-          price: input.lastSalePrice,
-          date: input.lastSaleDate || "",
-          year: input.lastSaleDate ? +input.lastSaleDate.replace(/\D/g, "").slice(0, 4) : 2023,
-        }
-      : null,
+    salesInfo: input.lastSalePrice && saleYear ? { price: input.lastSalePrice, date: input.lastSaleDate || "", year: saleYear } : null,
   });
 
-  const permitCapAdded = calculatePermitCapitalization(input.recentPermits);
-  const rawAdjustedVal = baseAvm.estimatedValue + permitCapAdded;
-  const saturationMult = getHighValueSaturationMultiplier(rawAdjustedVal);
+  const permitValuationTotal = calculatePermitCapitalization(input.recentPermits);
+  const finalEstimatedValue = baseAvm.estimatedValue;
+  const finalVpsf = baseAvm.vpsf;
 
-  const finalEstimatedValue = Math.round(rawAdjustedVal / 1000) * 1000;
-  const finalValueLow = Math.round((finalEstimatedValue * (1 - baseAvm.confidenceMarginPct)) / 1000) * 1000;
-  const finalValueHigh = Math.round((finalEstimatedValue * (1 + baseAvm.confidenceMarginPct)) / 1000) * 1000;
-  const finalVpsf = isVacant
-    ? Math.round(finalEstimatedValue / Math.max(lotSqft, 1))
-    : Math.round(finalEstimatedValue / Math.max(livingSqft, 1));
-
-  // 2. Imagery & LiDAR Verification
+  // 2. Imagery dates: only real capture dates are checked. Unknown dates stay unknown.
   const imagery = input.imageryInfo || {};
-  const latestPermit = (input.recentPermits || []).sort((a, b) => b.issue_date.localeCompare(a.issue_date))[0];
+  const latestPermit = (input.recentPermits || []).filter(p => p && p.issue_date).slice().sort((a, b) => String(b.issue_date).localeCompare(String(a.issue_date)))[0];
   const hasStreetView = imagery.hasStreetView !== false && !!imagery.streetViewDate;
-
-  const imageryCheck = validateParcelImageryVintage({
+  const lidarYear = imagery.lidarYear || null;
+  const datesKnown = !!(lidarYear || hasStreetView);
+  const imageryCheck = datesKnown ? _valVintage({
     parcelId: input.parcelId,
-    lidarAcquisitionYear: imagery.lidarYear || 2020,
-    streetViewCaptureDate: hasStreetView ? (imagery.streetViewDate || "2021-06") : null,
+    lidarAcquisitionYear: lidarYear,
+    streetViewCaptureDate: hasStreetView ? imagery.streetViewDate : null,
     latestPostConstructionPermitDate: latestPermit ? latestPermit.issue_date : null,
     permitScopeDescription: latestPermit ? latestPermit.description : null,
     referenceYear: 2026,
-  });
+  }) : { isLidarStale: null, isStreetViewStale: null, confidenceBadge: "imagery_dates_unknown", warningMessage: "Imagery capture dates are not on file, so whether photos and LiDAR predate recent work is unknown." };
+  const confidenceBadge = datesKnown ? imageryCheck.confidenceBadge : "imagery_dates_unknown";
+  const warningMessage = imageryCheck.warningMessage;
 
-  const confidenceBadge = !hasStreetView
-    ? "no_street_view_fallback"
-    : imageryCheck.confidenceBadge;
-
-  const warningMessage = !hasStreetView
-    ? "Google Street View coverage is unavailable (rural, gated community, cul-de-sac, or flag lot). Story count and facade condition calibrated from USGS 3DEP LiDAR and county assessor records."
-    : imageryCheck.warningMessage;
-
-  // 3. Statutory By-Right Housing Rights & Exclusion Engine
+  // 3. By-right housing rights (statute engine; zoning must be on file)
   const exclusions = input.exclusions || {};
-  const hasZoning = !!(input.zoningCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(input.zoningCode.trim()));
-  const rawZone = hasZoning ? input.zoningCode!.trim() : null;
+  const hasZoning = !!(input.zoningCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(input.zoningCode).trim()));
+  const rawZone = hasZoning ? String(input.zoningCode).trim() : null;
   const zoneOrUse = String(rawZone || "") + " " + String(input.useDescription || "");
   const isComm = hasZoning && /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-  const isSfr = hasZoning && !isComm && (/r-|r1|sfr|single|res/i.test(zoneOrUse) || (!input.useDescription && !isComm));
+  const isSfr = hasZoning && !isComm && /r-|r1|sfr|single|res/i.test(zoneOrUse);
 
-  const parcelCtx: ParcelContext = {
+  const parcelCtx = {
     parcel_id: input.parcelId,
     state_code: stCode,
     county_fips: input.countyFips,
@@ -349,150 +188,40 @@ export function auditSingleHouseParcel(input: HouseParcelAuditInput): HouseParce
       population_threshold_ineligible: !!exclusions.population_threshold_ineligible,
     },
   };
-
-  const statutoryZoning = evaluateByRightHousing(parcelCtx);
-  const lotSplitFeasible = hasZoning && (lotSqft != null && lotSqft >= 4800) && !exclusions.fema_100yr_floodway && !exclusions.historic_district_hpoz;
-  const aduFeasible = hasZoning && (!exclusions.historic_district_hpoz || stCode === "CA");
+  const statutoryZoning = _evalHousing(parcelCtx, input.statuteLaws || _defaultStatuteLaws());
+  // A lot split is only flagged where a statute the engine applies actually covers this parcel. (CA SB 9 requires
+  // single-family zoning and a resulting lot of at least 1,200 sq ft; 2,400 sq ft is the smallest lot that splits.)
+  const splitStatute = (statutoryZoning.applicable_statutes || []).find(s => s.id === "ca_sb9_lot_split");
+  const lotSplitFeasible = !!(hasZoning && isSfr && splitStatute && lotSqft != null && lotSqft >= 2400 && !exclusions.fema_100yr_floodway && !exclusions.historic_district_hpoz);
+  const aduFeasible = !!(hasZoning && (isSfr || isComm) && !exclusions.historic_district_hpoz);
 
   let statutoryNotes = "";
   if (!hasZoning) {
-    statutoryNotes = "Zoning is not on file for this parcel; by-right housing rights and ministerial lot splits cannot be determined without verified local zoning.";
-  } else if (stCode === "CA") {
-    statutoryNotes = "California: SB 9 ministerial lot split (≥4,800 sq ft) and SB 684/SB 79 transit housing eligibility. HPOZ and floodway restrictions apply deterministically.";
-  } else if (stCode === "TX") {
-    statutoryNotes = statutoryZoning.statutory_exclusions.population_threshold_ineligible
-      ? "Texas SB 840 & SB 15 gated: Municipality <150k or County <300k population requires discretionary municipal approval."
-      : "Texas SB 840 / SB 15 active: By-right commercial conversion and small-lot subdivisions eligible.";
-  } else if (stCode === "FL") {
-    statutoryNotes = "Florida Live Local Act 4.0: Preempts local height/density on commercial sites; mandatory 75%–100% property tax exemption under Fla. Stat. § 196.1979.";
+    statutoryNotes = "Zoning is not on file for this parcel; by-right housing rights and lot splits cannot be determined without recorded local zoning.";
+  } else if ((statutoryZoning.applicable_statutes || []).length) {
+    statutoryNotes = "State laws the screening engine applies here: " + statutoryZoning.applicable_statutes.map(s => s.short_name || s.citation).filter(Boolean).join(", ") + ". Unverified screening — confirm with the planning department.";
   } else {
-    statutoryNotes = "Governed by statewide middle housing statutes (e.g. WA HB 1110, OR HB 2001, AZ HB 2720, CO HB 24-1152) and local zoning codes.";
+    statutoryNotes = "No state housing law in the screening engine applies to this parcel as recorded. Local zoning governs.";
   }
 
-  // 4. Accurate Roof Cadastre & 2026 Solar Microgrid Calculator
-  const roofCalc = estimateAccurateRoofArea({
+  // 4. Roof area (geometry model; see roof engine assumptions) and solar system size. No dollar outputs: install
+  //    cost, utility rates and export credits are not on file from a source, so savings and payback are not shown.
+  const roofCalc = (_estRoof && livingSqft) ? _estRoof({
     livingSqft,
     stories: input.stories || 1,
     hasGarage: input.hasGarage,
     garageAttached: true,
     yearBuilt: input.yearBuilt,
     stateCode: stCode,
-  });
+  }) : null;
+  // Solar size is not reported: the roof model's usable share (64%, or 88% if flat) is an assumption and roof
+  // orientation and shading are not on file, so any kW figure would be invented.
+  const unshadedRoofSqft = null;
+  const dcKw = null;
+  const taxYear = 2026;
 
-  const grossRoofSqft = roofCalc.grossRoofSqft;
-  const unshadedFraction = roofCalc.grossRoofSqft > 0 ? (roofCalc.usableSolarSqft / roofCalc.grossRoofSqft) : 0.55;
-  const unshadedRoofSqft = roofCalc.usableSolarSqft;
-  const dcKw = roofCalc.solarDcKw;
-
-  const solarCash = calculateSolarMicrogridRoi({
-    taxYear: 2026,
-    stateCode: stCode,
-    ownershipModel: "cash_or_loan",
-    grossRoofSqft,
-    lidarUnshadedUsableFraction: unshadedFraction,
-    localInstallCostPerWattUsd: stCode === "CA" ? 3.15 : 2.85,
-    annualYieldKwhPerKw: stCode === "CA" ? 1620 : stCode === "AZ" ? 1780 : 1250,
-    retailImportRateUsdKwh: stCode === "CA" ? 0.38 : 0.16,
-    exportRateUsdKwh: stCode === "CA" ? 0.055 : 0.14,
-    selfConsumptionFraction: stCode === "CA" ? 0.78 : 0.50,
-    hasBatteryStorage: stCode === "CA",
-    batteryCostUsd: stCode === "CA" ? 11500 : 0,
-    meets2026FeocAndPrevailingWage: false,
-  });
-
-  const solarLease = calculateSolarMicrogridRoi({
-    taxYear: 2026,
-    stateCode: stCode,
-    ownershipModel: "third_party_lease_or_ppa",
-    grossRoofSqft,
-    lidarUnshadedUsableFraction: unshadedFraction,
-    localInstallCostPerWattUsd: stCode === "CA" ? 3.15 : 2.85,
-    annualYieldKwhPerKw: stCode === "CA" ? 1620 : stCode === "AZ" ? 1780 : 1250,
-    retailImportRateUsdKwh: stCode === "CA" ? 0.38 : 0.16,
-    exportRateUsdKwh: stCode === "CA" ? 0.055 : 0.14,
-    selfConsumptionFraction: stCode === "CA" ? 0.78 : 0.50,
-    hasBatteryStorage: stCode === "CA",
-    batteryCostUsd: stCode === "CA" ? 11500 : 0,
-    meets2026FeocAndPrevailingWage: true,
-  });
-
-  const grossSystemCostUsd = Math.round(dcKw * 1000 * (stCode === "CA" ? 3.15 : 2.85) + (stCode === "CA" ? 11500 : 0));
-  const netSystemCostCashUsd = grossSystemCostUsd - solarCash.state_tax_credit_usd;
-  const netSystemCostLeaseUsd = Math.round(grossSystemCostUsd * (1 - solarLease.federal_itc_pct) - solarLease.state_tax_credit_usd);
-  const annualYieldKwh = Math.round(dcKw * (stCode === "CA" ? 1620 : stCode === "AZ" ? 1780 : 1250));
-  const annualSavingsUsd = Math.round(annualYieldKwh * (stCode === "CA" ? 0.28 : 0.15));
-  const paybackYearsCash = annualSavingsUsd > 0 ? Number((netSystemCostCashUsd / annualSavingsUsd).toFixed(1)) : 15.0;
-  const paybackYearsLease = annualSavingsUsd > 0 ? Number((netSystemCostLeaseUsd / annualSavingsUsd).toFixed(1)) : 8.5;
-
-  // 5. Tree Economics
-  const treeEconomics = calculateCalibratedTreeEconomics(stCode, finalEstimatedValue, stCode === "CA" ? 1.24 : 1.0);
-
-  // 6. Sub-Additive Stacking Saturation Ceiling
-  const isUrbanCore = !!input.isUrbanCore;
-  const maxStackingCeilingPct = isUrbanCore ? 0.30 : 0.22;
-  const displacementSensitivityScore = Math.round(
-    Math.max(10, Math.min(95, 48 + (isUrbanCore ? 15 : -8)))
-  );
-
-  // 7. EverySpace Property Space Monetization Engine
-  const everySpace = evaluateEverySpaceMonetization({
-    propertyAddress: input.address || `Parcel ${input.parcelId}`,
-    city: input.address ? (input.address.split(",")[1]?.trim() || "Local City") : "Local City",
-    stateCode: stCode,
-    countyFips: input.countyFips,
-    bedrooms: input.bedrooms || 3,
-    bathrooms: input.bathrooms || 2,
-    lotSqft: lotSqft || 6000,
-    livingSqft: livingSqft || 1500,
-    monthlyDebtServiceMortgageUsd: Math.round(finalEstimatedValue * 0.0055),
-    monthlyPropertyTaxAndInsuranceUsd: Math.round(finalEstimatedValue * 0.0012),
-    plannedHoldingMonths: 18,
-    features: {
-      hasDriveway: input.hasGarage !== false,
-      drivewaySpacesCount: 2,
-      hasAtticOrBasementStorage: (livingSqft || 1500) > 1200,
-      storageSqft: Math.round((livingSqft || 1500) * 0.15),
-      hasPool: !!input.hasPool,
-      hasAvailableRoofSqftForSolar: unshadedRoofSqft > 250,
-      availableRoofSqft: unshadedRoofSqft,
-      hasExistingGarageForConversion: !!input.hasGarage,
-      hasExistingCasitaOrAdu: (input.units || 1) > 1,
-    },
-  });
-
-  // 8. Homeowner Renovation & Contractor Quote Evaluator
-  const renovationOptions: RenovationQuoteEvaluation[] = [
-    evaluateRenovationQuote({
-      propertyAddress: input.address,
-      stateCode: stCode,
-      currentPropertyValue: finalEstimatedValue,
-      currentLivingSqft: livingSqft || 1500,
-      lotSqft: lotSqft || 6000,
-      zoningCode: input.zoningCode,
-      improvementType: "garage_conversion_adu",
-      quotedTotalCost: 65_000,
-      projectedSqft: 400,
-    }),
-    evaluateRenovationQuote({
-      propertyAddress: input.address,
-      stateCode: stCode,
-      currentPropertyValue: finalEstimatedValue,
-      currentLivingSqft: livingSqft || 1500,
-      lotSqft: lotSqft || 6000,
-      zoningCode: input.zoningCode,
-      improvementType: "detached_adu",
-      quotedTotalCost: 185_000,
-      projectedSqft: 750,
-    }),
-    evaluateRenovationQuote({
-      propertyAddress: input.address,
-      stateCode: stCode,
-      currentPropertyValue: finalEstimatedValue,
-      currentLivingSqft: livingSqft || 1500,
-      improvementType: "kitchen_remodel_minor",
-      quotedTotalCost: 26_000,
-    }),
-  ];
+  // 5. Trees: regime only
+  const treeEconomics = calculateCalibratedTreeEconomics(stCode);
 
   return {
     parcelId: input.parcelId,
@@ -500,69 +229,71 @@ export function auditSingleHouseParcel(input: HouseParcelAuditInput): HouseParce
     countyFips: input.countyFips,
     valuation: {
       estimatedValue: finalEstimatedValue,
-      valueLow: finalValueLow,
-      valueHigh: finalValueHigh,
+      valueLow: null,
+      valueHigh: null,
       vpsf: finalVpsf,
-      confidenceMarginPct: baseAvm.confidenceMarginPct,
+      confidenceMarginPct: null,
       confidenceRating: baseAvm.confidenceRating,
-      valuationMethod: baseAvm.valuationMethod + (permitCapAdded > 0 ? " + Permit Capitalization" : ""),
+      valuationMethod: baseAvm.valuationMethod,
+      withheldReason: baseAvm.withheldReason,
+      notes: baseAvm.notes,
       isVacantLand: isVacant,
       siteValue: baseAvm.siteValue,
       structVal: baseAvm.structVal,
-      permitCapitalizationAdded: permitCapAdded,
-      luxuryDampeningApplied: rawAdjustedVal > 2500000,
-      luxurySaturationMultiplier: Number(saturationMult.toFixed(3)),
+      permitValuationTotal,
+      permitCapitalizationAdded: 0,
       multiUnitBonusPct: (!isVacant && (input.units || 1) > 1) ? Math.min(24, ((input.units || 1) - 1) * 8) : 0,
     },
     imagery: {
       parcelId: input.parcelId,
-      lidarAcquisitionYear: imagery.lidarYear || 2020,
-      streetViewCaptureDate: hasStreetView ? (imagery.streetViewDate || "2021-06") : null,
+      lidarAcquisitionYear: lidarYear,
+      streetViewCaptureDate: hasStreetView ? imagery.streetViewDate : null,
       latestPostConstructionPermitDate: latestPermit ? latestPermit.issue_date : null,
       permitScopeDescription: latestPermit ? latestPermit.description : null,
       isLidarStale: imageryCheck.isLidarStale,
       isStreetViewStale: imageryCheck.isStreetViewStale,
       confidenceBadge,
       warningMessage,
-      proxyRoutingNotice: "Requests routed via origin-locked edge proxy (workers/api-proxy.ts) ensuring client-side API keys are protected and origin-validated.",
-      storyCalibrationSource: hasStreetView ? "Google Street View 4-angle facade & USGS 3DEP LiDAR" : "USGS 3DEP LiDAR DSM & County Assessor GLA Fallback",
+      storyCalibrationSource: hasStreetView ? "Street View photo and assessor records" : "Assessor records",
     },
     statutoryZoning: {
-      ...statutoryZoning,
-      privateCovenantsDisclaimer: "NOTICE ON PRIVATE COVENANTS: State zoning preemptions (e.g., CA SB 9, TX SB 15, WA HB 1110) override municipal zoning but may not automatically extinguish recorded private Homeowners Association (HOA) covenants or CC&Rs running with the land. Check title report for private encumbrances.",
+      parcel_id: statutoryZoning.parcel_id,
+      state_code: statutoryZoning.state_code,
+      base_zoning_code: statutoryZoning.base_zoning_code,
+      applicable_statutes: statutoryZoning.applicable_statutes,
+      statutory_exclusions: statutoryZoning.statutory_exclusions,
+      net_by_right_feasible: statutoryZoning.net_by_right_feasible,
+      privateCovenantsDisclaimer: "Private covenants: state housing laws override city zoning but may not cancel recorded HOA covenants or CC&Rs. Check the title report.",
       lotSplitFeasible,
       aduFeasible,
       statutoryNotes,
     },
     roofCadastre: roofCalc,
     solarMicrogrid: {
-      ...solarCash,
-      battery_storage_required_for_roi: stCode === "CA" || solarCash.battery_storage_required_for_roi,
+      tax_year: taxYear,
+      federal_itc_pct_owner: 0, // IRC § 25D ended for expenditures after Dec 31, 2025 (P.L. 119-21 § 70506)
       dcKwCapacity: dcKw,
       unshadedRoofSqft,
-      grossSystemCostUsd,
-      netSystemCostCashUsd,
-      netSystemCostLeaseUsd,
-      annualYieldKwh,
-      paybackYearsCash,
-      paybackYearsLease,
-      nemTariffNotice: stCode === "CA"
-        ? "CA NEM 3.0 / Net Billing Tariff: Mid-day solar export rates are credited at avoided cost (~$0.055/kWh). Paired 10–13.5 kWh battery storage is required for positive 25-yr NPV."
-        : "Standard net metering or net billing applies. Battery optional for resilience.",
+      grossSystemCostUsd: null,
+      netSystemCostCashUsd: null,
+      netSystemCostLeaseUsd: null,
+      annualYieldKwh: null,
+      paybackYearsCash: null,
+      paybackYearsLease: null,
+      dollarStatus: "Not modeled yet — roof orientation and shading, install cost, solar yield and utility rates are not on file",
+      federalCreditNotice: "The 30% federal credit for homeowner-owned solar (IRC § 25D) ended for systems paid for after Dec 31, 2025.",
     },
     treeEconomics,
     subAdditiveStacking: {
-      maxStackingCeilingPct,
+      maxStackingCeilingPct: input.isUrbanCore ? 0.30 : 0.22, // modeling assumption, not measured
       jointCapitalizationFormula: "ΔP_joint = P_max * [1 - Π(1 - Δp_i / P_max)]",
-      displacementSensitivityScore,
+      displacementSensitivityScore: null,
     },
-    everySpace,
-    renovationOptions,
     legalEngineeringDisclaimers: [
-      "LEGAL & ENGINEERING NON-RELIANCE NOTICE: Preliminary screening only based on public municipal GIS, tax rolls, and statutory feeds as of November 2026.",
-      "AVM valuations do not constitute formal appraisals under USPAP standards. Verify actual condition, unrecorded improvements, and neighborhood comps with a licensed appraiser.",
-      "Statutory housing rights and lot split feasibility must be verified with local municipal planning and building departments prior to architectural design, capital allocation, or contractor commitments.",
-      "Federal Clean Energy Credits: IRC § 25D residential credit expired Dec 31, 2025 (0% cash/loan). Commercial/TPO lease credit (IRC § 48E) subject to prevailing wage and non-FEOC supply-chain compliance.",
+      "Screening only, from public records as of November 2026. Not an appraisal, legal opinion or engineering review.",
+      "The value figure is an unvalidated estimate: it has not been tested against recorded sales. Use a licensed appraiser for decisions.",
+      "Housing-law eligibility must be confirmed with the local planning department before design or spending.",
+      "Federal homeowner solar credit (IRC § 25D) ended for expenditures after Dec 31, 2025.",
     ],
   };
 }
