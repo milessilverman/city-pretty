@@ -1208,5 +1208,155 @@
       "notes": ""
     },
     "last_verified": "2026-11-16"
+  },
+  {
+    "id": "va_parking_2209_4",
+    "state_code": "VA",
+    "bill_number": "2026 Acts ch. 1075",
+    "session": "2026 Regular Session",
+    "short_name": "VA: parking minimums capped within 1/2 mile of transit stations",
+    "statute_citation": "Va. Code § 15.2-2209.4 (2026, c. 1075)",
+    "effective_date": "2026-07-01",
+    "statute_url": "https://law.lis.virginia.gov/vacode/title15.2/chapter22/section15.2-2209.4/",
+    "parcel_level": false,
+    "distance_to_transit_max_mi": 0.5,
+    "max_parking_requirement_per_unit": 0.5,
+    "unmapped_condition": "parcel within one-half mile of the entrance to a mass transit or public transportation station or facility (a building or enhanced structure where the public boards; school buses, microtransit and charter service excluded); localities over 600,000 people may exceed the caps near locality-managed bus stops if they offer the required administrative reduction",
+    "summary": "A locality may not require, as a condition of zoning approval, more than 0.5 off-street parking space per unit for multifamily or mixed-use residential development, or more than 1 per unit for one- and two-family homes and townhouses, on parcels within half a mile of a transit station entrance. Localities over 20,000 must also offer an administrative parking reduction of at least 20% elsewhere.",
+    "verification": {
+      "status": "verified",
+      "method": "Code of Virginia, official site (law.lis.virginia.gov), section page dated 11/16/2026",
+      "checked_on": "2026-11-16",
+      "evidence": "B. Any locality that has adopted a zoning ordinance pursuant to this chapter shall not require, as a condition of zoning approval, minimum off-street parking for residential, multifamily, or mixed-use development located within a designated area in amounts exceeding the following: 1. One-half of one parking space per dwelling unit for multifamily or mixed-use residential development; and 2. One parking space per dwelling unit || \"Designated area\" means any parcel located within one-half mile of the entrance to a mass transit or public transportation station || 2026, c. 1075",
+      "unverified_fields": [
+        "effective_date (Virginia acts take effect 1 July unless they say otherwise; the act itself was not fetched. The Code page, dated 11/16/2026, shows this section as current with no future-effective label, unlike § 15.2-2292.4, which is labelled 'Effective July 1, 2027')"
+      ],
+      "notes": "A jurisdiction-wide cap on what a locality may require, not a parcel right; the engine never applies it to a single parcel."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "va_small_lot_2286_2",
+    "state_code": "VA",
+    "bill_number": "2026 Acts ch. 751",
+    "session": "2026 Regular Session",
+    "short_name": "VA: localities of 50,000+ must have a 3,000 sq ft single-family lot district",
+    "statute_citation": "Va. Code § 15.2-2286.2 (2026, c. 751)",
+    "effective_date": "2026-07-01",
+    "statute_url": "https://law.lis.virginia.gov/vacode/title15.2/chapter22/section15.2-2286.2/",
+    "parcel_level": false,
+    "municipality_pop_min": 50000,
+    "unmapped_condition": "land the locality has placed in a zoning district meeting § 15.2-2286.2 (the law requires at least one such district, not small lots everywhere); not in a historic district under § 15.2-2306",
+    "summary": "Every locality of 50,000 or more must adopt, keep and apply to land at least one zoning district that allows a single-family home on a lot of no more than 3,000 sq ft, with no minimum lot width over 30 ft and no setback, coverage or density rule that would prevent such homes on conforming lots. Historic districts are excluded.",
+    "verification": {
+      "status": "verified",
+      "method": "Code of Virginia, official site (law.lis.virginia.gov), section page dated 11/16/2026",
+      "checked_on": "2026-11-16",
+      "evidence": "A. Any locality with a population of 50,000 or more shall adopt, maintain, and apply to land within its boundaries at least one zoning district classification that permits a single-family dwelling on a lot with a minimum lot area not exceeding 3,000 square feet. B. Such zoning district classifications shall not impose minimum lot widths exceeding 30 feet or setback, lot coverage, or density requirements that would pr || D. This section shall not apply to areas within a historic district established pursuant to § 15.2-2306 . 2026",
+      "unverified_fields": [
+        "effective_date (Virginia acts take effect 1 July unless they say otherwise; the act itself was not fetched. The Code page, dated 11/16/2026, shows this section as current with no future-effective label, unlike § 15.2-2292.4, which is labelled 'Effective July 1, 2027')"
+      ],
+      "notes": "A duty to zone some land for small lots; which land is up to the locality, so it is never a right on a given parcel."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "dc_adu_accessory_apartment_u253",
+    "state_code": "DC",
+    "bill_number": "Zoning Regulations of 2016, 11-U DCMR § 253",
+    "session": "DC Zoning Commission final rulemaking, 63 DCR 2447 (2016); amended 70 DCR 011297 (2023) and 73 DCR 013245 (2026)",
+    "short_name": "DC: one accessory apartment as a matter of right in most R zones",
+    "statute_citation": "11-U DCMR § 253",
+    "effective_date": null,
+    "statute_url": "https://dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-U253",
+    "adus_by_right": 1,
+    "unmapped_condition": "an R zone other than R-1B/GT or R-3/GT (DC zone names are not on the parcel record); the principal dwelling or the apartment owner-occupied; in the house, the zone's minimum gross floor area (Table U 253.7(a)) with the apartment at most 35% of it; in an accessory building, permanent access as set out in § U-253.8",
+    "summary": "One accessory apartment is allowed as a matter of right in a house or accessory building in DC's R zones, except R-1B/GT and R-3/GT (special exception there). Conditions: owner occupancy of one unit, at most 3 occupants in the apartment, a minimum house size and a 35% cap for apartments in the house, and permanent street or alley access for apartments in accessory buildings. A rental business license is needed before renting.",
+    "verification": {
+      "status": "verified",
+      "method": "DC Municipal Regulations, official text file of 11-U DCMR § 253 downloaded from dcregs.dc.gov",
+      "checked_on": "2026-11-16",
+      "evidence": "An accessory apartment shall be permitted in a principal dwelling or an accessory building as a matter of right in the R zones, except the R-1B/GT or R 3/GT zone, subject to the provisions of this section. An a || Either the principal dwelling or accessory apartment unit shall be owner-occupied for the duration of the acce || SOURCE: Final Rulemaking published at 63 DCR 2447, 3338 (March 4, 2016 Part 2); as amended by Final Rulemaking published at 70 DCR 011297 (August 25, 2023); as amended by Final Rulemaking published at 73 DCR 013245 (October 16, 2026). Distr",
+      "unverified_fields": [
+        "effective_date (the text lists final rulemakings published in 2016, 2023 and 16 Oct 2026; the date each took effect was not fetched)"
+      ],
+      "notes": "Text file: https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={8E59471E-8C75-40F3-858C-FEB57CD5BA4B}. DC is a single jurisdiction, so this is its own zoning code rather than a state preemption law."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "ct_adu_8_2o",
+    "state_code": "CT",
+    "bill_number": "Public Act 21-29",
+    "session": "2021 Regular Session",
+    "short_name": "CT: one ADU as of right on single-family lots (towns could opt out before 2023)",
+    "statute_citation": "Conn. Gen. Stat. § 8-2o",
+    "effective_date": "2023-01-01",
+    "statute_url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99440&Index=I%3a%5czindex%5csurs&HitCount=2&hits=470+471+&hc=2&req=%28number+contains+8%2D2o%2A%29&Item=0",
+    "adus_by_right": 1,
+    "max_parking_requirement_per_unit": 1,
+    "unmapped_condition": "the town did not complete an opt-out under § 8-2o(f) before 1 January 2023 (Connecticut's list of opted-out towns is not on file); in an opted-out town the right still applies to an owner of 3+ years inside a transit-oriented district (§ 8-13hh)",
+    "summary": "Zoning must allow at least one accessory dwelling unit, attached or detached, as of right on each lot with a single-family home, with a decision within 65 days; towns may not require more than one parking space, owner-occupant relationships, age limits, a passageway or separate utility connections. Rules not amended by 1 Jan 2023 became void. Towns could opt out by two-thirds votes, but not on or after 1 Jan 2023.",
+    "verification": {
+      "status": "verified",
+      "method": "Connecticut General Statutes, official statute search (search.cga.state.ct.us), section text",
+      "checked_on": "2026-11-16",
+      "evidence": "(1) Designate locations or zoning districts within the municipality in which accessory dwelling units are allowed, provided at least one accessory dwelling unit shall be allowed as of right on each lot that contains a single-family dwelling and no such accessory dwelling unit shall be required to be an affordable accessory dwell || (C) any more than one parking space for any such accessory d || (e) If a municipality fails to adopt new regulations or amend existing regulations by January 1, 2023, for the purpose of complying with the provisions of subsections (a) to (d), inclusive, of this section, and unless such municipality opts out of the provisions of said subsections in accordance wit || except that, on and after January 1, 2023, no municipality may opt out of the provisions of said subsections. (g) Notwit",
+      "unverified_fields": [
+        "bill_number (from round-1 secondary sources; the section's history line was not fetched)"
+      ],
+      "notes": "Effective date taken from the statute's own 1 Jan 2023 compliance date in subsection (e)."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "ct_parking_8_3n",
+    "state_code": "CT",
+    "bill_number": "Nov. Sp. Sess. P.A. 25-1, § 18 (amending § 8-2(d)(9))",
+    "session": "2025 November Special Session",
+    "short_name": "CT: no residential parking minimums except for 17+ units (capped) and small districts",
+    "statute_citation": "Conn. Gen. Stat. §§ 8-2(d)(9), 8-3n",
+    "effective_date": null,
+    "statute_url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99443&Index=I%3a%5czindex%5csurs&HitCount=2&hits=2ba+2bb+&hc=2&req=%28number+contains+8%2D3n%2A%29&Item=0",
+    "parcel_level": false,
+    "max_parking_requirement_per_unit": 2,
+    "unmapped_condition": "16 or fewer units, and outside the town's conservation and traffic mitigation districts (at most two, together no more than 4% of land area); 17+ units may be required up to 1 space per studio or one-bedroom and 2 per larger unit, or the parking-needs-assessment number if lower",
+    "summary": "Zoning may not require a minimum number of off-street parking spaces for any residential development except as § 8-3n allows: towns may set minimums for developments over 16 units (and, in up to two small districts, for smaller ones), but if the developer submits a parking needs assessment the requirement cannot exceed 1 space per studio or one-bedroom and 2 per unit with two or more bedrooms, or the assessment's number if lower.",
+    "verification": {
+      "status": "verified",
+      "method": "Connecticut General Statutes, official statute search (search.cga.state.ct.us), section text of §§ 8-2 and 8-3n",
+      "checked_on": "2026-11-16",
+      "evidence": "(d) Zoning regulations adopted pursuant to subsection (a) of this section shall not: || (9) Require a minimum number of off-street motor vehicle parking spaces for any residential development except as provided in section 8-3n; || Nov. Sp. Sess. P.A. 25-1, S. 18.) || (b) A municipality may require a minimum number of off-street motor vehicle parking spaces for a residential development that contains more than sixteen dwelling units, as defined in section 47a-1, provided any such municipality shall allow the proposed developer of such development to submit to the zoning enforcement officer, planning commission, zoning commission or combined planning and zoning commission a parking needs assessment that conforms with the requirements of subsection (c) of this section. Such officer or commission shall condition the approval of such development on the construction of off-street parking spaces not exceeding: (1) One such space for each studio or one-bedroom d",
+      "unverified_fields": [
+        "effective_date (the amending act, Nov. Sp. Sess. P.A. 25-1, was not fetched)"
+      ],
+      "notes": "§ 8-2 text: https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=4648&Index=I%3a%5czindex%5csurs&HitCount=2&hits=6e+6f+&hc=530&req=%28number+contains+8%2D2%2A%29&Item=7. A jurisdiction-wide limit, not a parcel right."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "ct_middle_housing_8_2s",
+    "state_code": "CT",
+    "bill_number": null,
+    "session": "2025",
+    "short_name": "CT: transit community middle housing or mixed use on commercial lots, summary review (from 1 July 2026)",
+    "statute_citation": "Conn. Gen. Stat. § 8-2s",
+    "effective_date": "2026-07-01",
+    "statute_url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99441&Index=I%3a%5czindex%5csurs&HitCount=2&hits=14b+14c+&hc=2&req=%28number+contains+8%2D2s%2A%29&Item=0",
+    "applies_to_zone": "commercial",
+    "unmapped_condition": "the project meets the definition of a transit community middle housing development (§ 8-13hh) or a mixed-use development (definitions not fetched); review is summary review under § 8-2r",
+    "summary": "From 1 July 2026, zoning must allow a transit community middle housing development or a mixed-use development on any lot zoned for commercial or mixed-use development, subject only to summary review; towns may also allow it on residential lots and earn housing points for doing so.",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Connecticut General Statutes, official statute search (search.cga.state.ct.us), section text",
+      "checked_on": "2026-11-16",
+      "evidence": "(a) On and after July 1, 2026, any zoning regulations adopted or amended pursuant to section 8-2 (1) shall allow for the development of a transit community middle housing development, as defined in section 8-13hh, or a mixed-use development, on any lot that is zoned for commercial or mixed-use development, subject only to summary review, as defined in section 8-2r, and (2) may allow for the development of a transit community middle housing development on any lot that allows for residential use subject only to such",
+      "unverified_fields": [
+        "bill_number (the enacting act was not fetched)",
+        "definitions of transit community middle housing development and mixed-use development (§ 8-13hh, not fetched)"
+      ],
+      "notes": "Effective date from the section's own 'On and after July 1, 2026'."
+    },
+    "last_verified": "2026-11-16"
   }
 ]

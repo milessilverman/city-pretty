@@ -359,9 +359,17 @@ Round 2 (later on 16 Nov): **Colorado's ADU law (HB 24-1152) had been applied to
 Colorado**; it covers only municipalities of 1,000+ inside a metropolitan planning organization. Fixed and verified
 from the signed act. Added Idaho §§ 67-6541 (ADUs) and 67-6542 (starter-home subdivisions), Nevada NRS 278.257,
 California AB 2011 and Colorado's parking law near transit (HB 24-1304). Statute text was searched with no qualifying
-law in IA, MI, MN, ND, OH, SC, WY; North Carolina's parking-minimum ban takes effect 1 Jan 2027. **23 states could not
-be searched** (official code sites blocked or returned no text): AL, AK, AR, DE, GA, IL, IN, KS, KY, LA, MS, MO, NE,
-NJ, NM, NY, OK, PA, SD, TN, VA, WV, WI; plus NH, CT, DC and Maryland HB 538. For those, "none found" is unverified.
+law in IA, MI, MN, ND, OH, SC, WY; North Carolina's parking-minimum ban takes effect 1 Jan 2027. 23 states could not
+be searched in round 2 (official code sites blocked or returned no text), plus NH, CT, DC and Maryland HB 538.
+
+Round 3 (later on 16 Nov) found other official routes for 15 of those 27. **Added 6 laws:** Virginia's parking caps
+near transit (§ 15.2-2209.4) and small-lot district duty (§ 15.2-2286.2), both 2026; DC's accessory apartment as a
+matter of right (11-U DCMR § 253); Connecticut's ADU as of right (§ 8-2o), residential parking limits (§§ 8-2(d)(9),
+8-3n) and middle housing on commercial lots from 1 July 2026 (§ 8-2s). Code text searched with nothing qualifying:
+AK, DE, KS, KY, LA, MO, NE, OK, PA, SD, WV, and Maryland HB 538 (density bonuses only). Virginia's ADU law
+(§ 15.2-2292.4) takes effect 1 July 2027. **Still blocked (12): AL, AR, GA, IL, IN, MS, NH, NJ, NM, NY, TN, WI.** For
+those, "none found" is unverified. NY and IN need free API keys; IL, WI and NH don't answer the build machine; the
+others need a normal browser. Details: `audit/state-laws-50.md`, round 3.
 
 ### Improvement catalog, round 4 (16 Nov, `audit/catalog-coverage-round4.md`)
 

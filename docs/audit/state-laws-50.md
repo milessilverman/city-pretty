@@ -31,9 +31,9 @@ parcel record can't express, reported as "not on file" rather than assumed).
 
 - **Hawaii** SB 3202 (2024): counties must allow two ADUs by ordinance; the self-executing fallback starts only after
   2026-12-31. Not yet a parcel right.
-- **Could not check** (sites unreachable from the audit machine): New Hampshire (RSA 674:71-73), Connecticut
-  (C.G.S. § 8-2o, with local opt-out), DC (11 DCMR ADU rules).
-- **Not checked**: Maryland HB 538 (2024; density bonuses, not by-right rules).
+- **Could not check** (sites unreachable from the audit machine): New Hampshire (RSA 674:71-73). Connecticut and DC
+  were checked in round 3 (below).
+- **Maryland HB 538** (2024): read in round 3; density bonuses, not by-right rules.
 - **Known gaps**: California AB 2011 (eligibility section blocked), Colorado HB 24-1304 parking (text not fetched),
   Texas 2025 ADU bills, Montana court challenge outcome.
 - **Local option only**: Florida ADUs (§ 163.31771: "may adopt").
@@ -76,3 +76,61 @@ found" still rests on round 1's candidate search only. NH, CT, DC and MD stay co
 their official sites don't connect from the audit machine and Justia and FindLaw block it. Search engines (LegiScan,
 Justia search, DuckDuckGo, Brave, Mojeek) blocked automated queries. Bing's results were not used, because its terms
 forbid it.
+
+## Round 3 (16 Nov 2026): the 23 blocked states, plus NH, CT, DC and Maryland HB 538
+
+Alternate official routes were tried for each one: section-by-section fetches (`scripts/law_search_chapters.py`),
+complete-title downloads, Louisiana's own statute text search (`scripts/law_search_la.py`), and direct reads of
+official section pages and session-law PDFs. The same five topic searches as round 2 were run on the fetched text.
+`scripts/add_state_laws_round3.py` cut every quote from fetched text and wrote each jurisdiction's log
+(`round3_search`: route, URLs, terms, sections searched, outcome, or the routes tried and what would unblock them).
+
+**Added (6):**
+
+| Record | Law | What it does | Status |
+|---|---|---|---|
+| `va_parking_2209_4` | Va. Code § 15.2-2209.4 (2026 c. 1075) | Within ½ mile of a transit station entrance, no locality may require more than 0.5 parking space per multifamily or mixed-use unit, or 1 per one- or two-family home or townhouse | verified (effective date presumed 1 July 2026; jurisdiction-wide, not a parcel right) |
+| `va_small_lot_2286_2` | Va. Code § 15.2-2286.2 (2026 c. 751) | Localities of 50,000+ must keep at least one district allowing a single-family home on a lot of ≤ 3,000 sq ft (≤ 30 ft wide); historic districts excluded | verified (effective date presumed; a duty to zone some land, not a parcel right) |
+| `dc_adu_accessory_apartment_u253` | 11-U DCMR § 253 | One accessory apartment as a matter of right in R zones except R-1B/GT and R-3/GT, with owner occupancy, minimum house size and access conditions | verified (effective date of the 2026 amendment not fetched) |
+| `ct_adu_8_2o` | Conn. Gen. Stat. § 8-2o | At least one ADU as of right on each single-family lot, ≤ 1 parking space, decision within 65 days; non-compliant rules void from 1 Jan 2023; towns could opt out only before then | verified (bill number from secondary sources) |
+| `ct_parking_8_3n` | Conn. Gen. Stat. §§ 8-2(d)(9), 8-3n (amended Nov. Sp. Sess. P.A. 25-1 § 18) | No residential parking minimums except for 17+ units (capped at 1 per studio/1-bed and 2 per larger unit, or a parking study's number) and in up to two small districts | verified (effective date not fetched; jurisdiction-wide) |
+| `ct_middle_housing_8_2s` | Conn. Gen. Stat. § 8-2s | From 1 July 2026, transit community middle housing or mixed-use development on any lot zoned commercial or mixed-use, with summary review only | partially verified (definitions in § 8-13hh not fetched) |
+
+The engine reports the CT ADU, CT § 8-2s and DC records as "not on file for this parcel" with their conditions (opt-out
+list, zone name, owner occupancy, the § 8-13hh definition), never as a confirmed right. The VA and CT parking/zoning
+duties are `parcel_level: false`.
+
+**Searched the code text, nothing qualifying:**
+
+| State | Route that worked | Searched | Found, not qualifying |
+|---|---|---|---|
+| AK | akleg.gov statutes print view | AS 29.40.010-.200 (20 sections) | — |
+| DE | delcode.delaware.gov subchapter pages | 22 Del. C. ch. 3; 9 Del. C. chs. 26, 49, 68 | — |
+| KS | ksrevisor.gov section pages | K.S.A. 12-741 ff. (65 of 72 sections) | K.S.A. 12-764 (vesting; lists duplexes) |
+| KY | apps.legislature.ky.gov section pages | KRS ch. 100 (282 of 293 sections) | KRS 100.2101 (2025): restricts multifamily in Louisville single-family zones |
+| LA | legis.la.gov LawSearch (the legislature's text search) | All Revised Statutes, 9 phrases | — |
+| MO | revisor.mo.gov section pages | RSMo ch. 89 (45 of 45) | — |
+| NE | nebraskalegislature.gov section pages | chs. 14-17, 19, 23 (sections chosen by title) | §§ 19-5501 to -5506 (LB 866, 2020): reports and action plans only |
+| OK | oklegislature.gov complete-title PDFs (include 2026 laws) | Titles 11 and 19 | — |
+| PA | palegis.us MPC PDF | Municipalities Planning Code, full text | — |
+| SD | sdlegislature.gov API | SDCL 11-2, 11-4, 11-6 (183 of 185 sections) | — |
+| WV | code.wvlegislature.gov | W. Va. Code 8A-4, 8A-5, 8A-7 (all sections) | — |
+| MD | mgaleg.maryland.gov chapter PDF | 2024 ch. 122 (HB 538), full text | Density bonuses for affordable "qualified projects", with no by-right or administrative approval; effective date in the text is struck from 1 Oct 2024 to 1 Jan 2025 |
+| VA | law.lis.virginia.gov section pages | ch. 15.2-22 sections chosen from the 192-section table of contents | § 15.2-2292.4 (ADUs) **effective 1 July 2027**, not yet in effect; §§ 15.2-2288.1, 15.2-2292.3 create no new right |
+| CT | search.cga.state.ct.us | §§ 8-2, 8-2o, 8-2s, 8-2t, 8-3n | § 8-2t (office/retail conversions): local option |
+
+**Still blocked (12)**, so "none found" there rests on round 1's candidate search only:
+
+| State | What was tried | What would unblock it |
+|---|---|---|
+| NY | Open Legislation API: HTTP 401 without a key; nysenate.gov: 403 | A free Open Legislation API key (legislation.nysenate.gov) saved as a network credential |
+| IN | iga.in.gov is a JavaScript shell; its API needs a key | A free Indiana General Assembly API key, or a normal browser |
+| IL | ilga.gov ILCS pages and FTP: no response | Running `scripts/law_search_chapters.py` from a normal computer |
+| WI | docs.legis.wisconsin.gov: no response | Same |
+| NH | gc.nh.gov: no response (gencourt redirects there) | A normal browser on RSA 674:71-73 |
+| NJ | pub.njleg: 403; lis.njleg Folio search is frame/JavaScript-driven | A normal browser on N.J.S.A. 40:55D |
+| NM | nmonesource.com section paths: 404 | A normal browser on NMSA 3-21 |
+| GA | legis.ga.gov JavaScript shell; law.resource.org has only 2013 letters | A normal browser (Lexis-hosted O.C.G.A.) |
+| AL, AR, MS, TN | Codes hosted on Lexis JavaScript sites; TN public-chapter PDFs have no index | A normal browser on each code |
+
+LegiScan and Justia returned 403 (Cloudflare) for every state. No search engine was used.
