@@ -54,11 +54,17 @@ export const FEATURE_SETS = {
   // Same inputs for other places whose records have no rooms (Florida's tax roll), alone and with the assessor's value.
   regression_no_rooms: ["intercept", "log neighborhood $/sqft", "log neighborhood median", "log building sqft", "log lot sqft", "age/100", "two-family", "tract fallback"],
   regression_no_rooms_with_assessor: ["intercept", "log neighborhood $/sqft", "log neighborhood median", "log building sqft", "log lot sqft", "age/100", "two-family", "tract fallback", "log assessor market value"],
+  // For places whose page parcel layer carries only the assessor's value (King County, via the WA state layer).
+  regression_assessor_only: ["intercept", "log neighborhood median", "log assessor market value", "tract fallback"],
 };
 
 export function features(spec, stats, r, { allowAvAnyDate = false } = {}) {
   const n = neighborhoodFor(stats, r);
   if (!n) return null;
+  if (spec === "regression_assessor_only") {
+    if (!(r.av > 0) || (!allowAvAnyDate && !avUsable(r))) return null;
+    return [1, Math.log(n.median), Math.log(r.av), n.level === "tract" ? 1 : 0];
+  }
   if (spec === "regression_pluto" || spec === "regression_no_rooms" || spec === "regression_no_rooms_with_assessor") {
     if (!(r.sqft >= 400) || !(r.lot > 0) || !(r.yb > 1700) || !(r.units === 1 || r.units === 2)) return null;
     const x = [1, Math.log(n.ppsf), Math.log(n.median), Math.log(r.sqft), Math.log(Math.min(Math.max(r.lot, 500), 200000)),

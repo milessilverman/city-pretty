@@ -79,6 +79,38 @@
    }
   }
  },
+ "53033": {
+  "sales_file": "data/backtests/sales_53033_2026-11-16.json.gz",
+  "fit": [
+   "2023-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-04-30"
+  ],
+  "test": [
+   "2026-05-01",
+   "2026-10-31"
+  ],
+  "assessor_only_candidate": true,
+  "note": "King County Assessor sales (screened with the Assessor's own codes), building and parcel files, tax-year-2026 appraised values (scripts/backtests/pull_king.py). The page's King parcel layer (WA statewide) has only the tax-year-2026 land + building value, so a model on the neighborhood median and that value alone is also a candidate. November 2026 excluded (166 sales so far). Windows set before any model was run.",
+  "locked": {
+   "spec": "regression_assessor_only",
+   "locked_on": "2026-11-16",
+   "why": "Best development median error among models whose inputs a King parcel layer carries (the WA statewide layer: tax-year-2026 land + building value only): regression on the neighborhood median and that value 8.0% (3818 sales) vs value x sales ratio 8.05%. Best overall needs rooms and size, which no King page layer has: regression with the assessor value 7.5%; without it 9.6%; $/sqft x size 12.6%; neighborhood median 16.3%. Even if it passes, the page cannot run it today: its King parcel service is the county zoning layer (PIN and zoning only).",
+   "dev_mdape": {
+    "neighborhood_median": 0.163,
+    "neighborhood_ppsf_x_sqft": 0.1262,
+    "assessor_ratio": 0.0805,
+    "regression": 0.0963,
+    "regression_with_assessor": 0.0751,
+    "regression_no_rooms": 0.0972,
+    "regression_no_rooms_with_assessor": 0.0752,
+    "regression_assessor_only": 0.0798
+   }
+  }
+ },
  "36005": {
   "sales_file": "data/backtests/sales_36005_2026-11-16.json.gz",
   "fit": [

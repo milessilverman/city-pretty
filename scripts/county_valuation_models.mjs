@@ -45,6 +45,8 @@ function fitAll(fitRows) {
       regression_no_rooms: fitRegression("regression_no_rooms", fitRows),
       regression_no_rooms_with_assessor: fitRegression("regression_no_rooms_with_assessor", fitRows, { allowAvAnyDate: true }),
     } : {}),
+    // Only where the config asks for it: a county whose page layer has the assessor's value but no characteristics.
+    ...(cfg.assessor_only_candidate ? { regression_assessor_only: fitRegression("regression_assessor_only", fitRows, { allowAvAnyDate: true }) } : {}),
   };
 }
 function score(models, stats, evalRows) {
