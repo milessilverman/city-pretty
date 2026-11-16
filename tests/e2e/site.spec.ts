@@ -434,3 +434,49 @@ test("California blanks are filled with the Census tract value, labelled as such
   expect(r.kept.hv).toBe(1286100);
   expect(errors).toEqual([]);
 });
+
+test("crash comparisons use the rebuilt counts in a California and a Pennsylvania county, never the old ranking", async ({ page }) => {
+  const errors = await openPage(page);
+  // Los Angeles (CCRS, lower-bound pedestrian/cyclist count): 060372046001's old text said 134 such crashes.
+  const la = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s);
+    ev("select")("060372046001", false);
+    return (document.querySelector("#panel") as HTMLElement).textContent || "";   // the gap list can sit in a closed section
+  });
+  expect(la).toContain("inside this block group or on its boundary streets (CHP CCRS 2023–2025");
+  expect(la).toContain("undercounts pedestrian and cyclist crashes");
+  expect(la).not.toContain("crashes that injured someone walking or biking on record here");
+
+  // Allegheny County, PA: 420035153001's old text said 12 crashes over 2017-2023.
+  await page.click("#county-pick-btn");
+  await page.fill("#county-q", "allegheny");
+  await page.keyboard.press("Enter");
+  await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "42003", null, { timeout: 60_000 });
+  const pa = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s);
+    ev("select")("420035153001", false);
+    const d = ev("D_OC").details;
+    return {
+      text: (document.querySelector("#panel") as HTMLElement).textContent || "",
+      // a block group whose rebuilt 2021-2023 count no longer qualifies for traffic calming
+      dropped: (d["420035162002"].r || []).some((r: any) => r[0] === "traffic_calming"),
+    };
+  });
+  expect(pa.text).toContain("4 crashes involving a pedestrian or cyclist inside this block group or on its boundary streets");
+  expect(pa.text).not.toContain("crashes injured people walking or biking here");
+  expect(pa.dropped).toBe(false);
+  expect(errors).toEqual([]);
+});
+
+test("a county with crash data but no recomputed comparison shows a withheld note, not the old ranking", async ({ page }) => {
+  const errors = await openPage(page);
+  const r = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s);
+    const det: any = { a: { m: { gp: { g: [["pedbike", "9", "2", 0.9, "protected_bike", "9 crashes injured people walking or biking here (similar neighborhoods: 2).", 1]], s: [] } }, r: [] } };
+    ev("applyCrashGaps")(det, null);
+    return det.a.m.gp;
+  });
+  expect(r.g).toEqual([]);
+  expect(r.pedbike_withheld).toBe(true);
+  expect(errors).toEqual([]);
+});

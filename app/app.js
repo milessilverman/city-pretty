@@ -2028,6 +2028,7 @@ async function ivScanLA() {
     const b = chunks[k]; if (!b) continue;
     const s = atob(b), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i);
     const obj = JSON.parse(fflate.strFromU8(fflate.gunzipSync(u)));
+    applyCrashGaps(obj, CRASH_GAPS["06037"]);
     for (const id in obj) { const f = byId.get(id); if (f) f.properties._iv = ivCompactRows(obj[id].r, obj[id].m); }
     if (++n % 8 === 0) await new Promise(r => setTimeout(r, 0));
   }
@@ -2115,6 +2116,7 @@ function lazyDetails(src) {
       if (b) { const s = atob(b), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i);
         v = JSON.parse(fflate.strFromU8(fflate.gunzipSync(u))); }
       applyLaNeighborhoodValues(v);
+      applyCrashGaps(v, CRASH_GAPS["06037"]);
       open.set(k, v);
     }
     return open.get(k);
@@ -2170,7 +2172,7 @@ function localOverlays(ll) {
   return out;
 }
 async function unpack() {
-  const [bundleText, detailsText] = await Promise.all([cpText("bundle"), cpText("details-chunks")]);
+  const [bundleText, detailsText] = await Promise.all([cpText("bundle"), cpText("details-chunks"), loadCrashGaps("06037")]);
   if (!bundleText) throw new Error("Could not download the Los Angeles County data (app/data/" + CP_DATA_FILES.bundle + ")");
   const bin = await b64Bytes(bundleText); cpRelease("bundle");
   const d = JSON.parse(await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream("gzip"))).text());
@@ -3586,6 +3588,54 @@ function crashTextFor(fips, bg) {
   return `${c[2]} ${noun} recorded inside this block group or on its boundary streets (${src} ${yrs}): ${c[0]} involving a pedestrian or cyclist, ${c[1]} with someone killed or seriously injured` +
     (caveats.length ? "; " + caveats.join("; ") : "");
 }
+// Crash-based neighbourhood comparisons and crash-dependent improvement rows, recomputed from the rebuilt crash
+// counts (scripts/recompute_crash_gaps.py, docs/audit/crash-rankings.md). Applied to a county's block-group records
+// once, as they load, so every view (gap list, cards, map ranking, Explore, exports) sees the same thing. A county
+// with crash data but no recomputed file keeps no crash comparison: the old one rested on counts that gave each
+// boundary-street crash to one side, over different years.
+const CRASH_GAPS = {};
+async function loadCrashGaps(fips) {
+  if (!fips) return null;
+  if (!(fips in CRASH_GAPS)) {
+    try { const r = await fetch(`app/data/crash_gaps/${fips}.json`); CRASH_GAPS[fips] = r.ok ? await r.json() : null; }
+    catch (e) { CRASH_GAPS[fips] = null; }
+  }
+  return CRASH_GAPS[fips];
+}
+function crashGapWhy(x, med, mt) {
+  const yrs = mt && Array.isArray(mt.crash_years) ? `${mt.crash_years[0]}–${mt.crash_years[mt.crash_years.length - 1]}` : "3 years";
+  const src = mt && /CCRS/.test(mt.crash_source || "") ? "CHP CCRS" : ((mt && mt.crash_source) || "state crash records");
+  return `${x} ${x === 1 ? "crash" : "crashes"} involving a pedestrian or cyclist inside this block group or on its boundary streets (${src} ${yrs}; similar neighborhoods: ${+med})` +
+    (mt && mt.pedbike_count_is_lower_bound ? ". This source undercounts pedestrian and cyclist crashes, so the true count may be higher." : ".");
+}
+// details: an object of block-group records ({m, r}); cg: the county's recomputed file or null.
+function applyCrashGaps(details, cg) {
+  if (!details) return;
+  const bg = (cg && cg.bg) || {}, mt = cg && cg._meta;
+  for (const id of Object.keys(details)) {
+    const d = details[id];
+    if (!d || d.__crashAdj) continue;
+    const m = d.m || {}, gp = m.gp;
+    if (gp) {
+      const had = (gp.g || []).some(e => e[0] === "pedbike") || (gp.s || []).some(e => e[0] === "pedbike");
+      gp.g = (gp.g || []).filter(e => e[0] !== "pedbike");
+      gp.s = (gp.s || []).filter(e => e[0] !== "pedbike");
+      if (!cg && had) gp.pedbike_withheld = true;
+    }
+    const a = bg[id];
+    if (a && Array.isArray(d.r)) {
+      const drop = new Set(a.drop || []), repl = new Map((a.repl || []).map(r => [r[0], r]));
+      d.r = d.r.filter(r => !drop.has(r[0])).map(r => repl.get(r[0]) || r).concat(a.add || []);
+    }
+    if (a && a.p && gp) {
+      const [x, med, worse, cls] = a.p;
+      const pb = (d.r || []).find(r => r[0] === "protected_bike");
+      if (cls === "g") gp.g.push(["pedbike", String(x), String(+med), worse, "protected_bike", crashGapWhy(x, med, mt), pb ? pb[3] : null]);
+      else gp.s.push(["pedbike", String(x), String(+med)]);
+    }
+    d.__crashAdj = true;
+  }
+}
 function whyFix(t) {
   // The street-tree "local sales estimate" came from an LA-only regression that could not be reproduced (audit 16 Nov 2026);
   // never call it local, and outside LA say where it came from.
@@ -3622,10 +3672,12 @@ function gapSection(p, m) {
   if (G.g.length) h += `<ul class="small" style="margin:4px 0 0 18px;padding:0">${G.g.map(([k, x, med, sev, fix, why, cost]) =>
       `<li style="margin-bottom:4px">${esc(why)} <span class="muted">${sev >= 0.995 ? "Worse than every similar area." : "Worse than " + Math.round(sev * 100) + "% of similar areas."}</span> <b>Fix:</b> ${esc(fixName(fix))}${cost && ivAllows(fix, m) ? ` (~${fmt$(cost)})` : ivAllows(fix, m) ? "" : " (effect not sourced yet)"}.</li>`).join("")}</ul>`;
   else h += `<p class="small">Nothing stands out: this block group is at or above similar areas on parks, shade, shops, schools, services, transit, safety and street safety.</p>`;
+  if (G.pedbike_withheld) h += `<p class="small muted" data-crash-withheld>Street safety (crashes involving pedestrians and cyclists): comparison not recomputed yet with the corrected crash counts, so it isn't shown.</p>`;
   if (G.s.length) h += `<p class="small"><b>Already strong:</b> ${G.s.map(([k, x, med]) => `${esc((k === "dining" ? "restaurants and cafés within 400 m" : (D.gap_labels || {})[k]) || k)} (${esc(x)}; similar areas ${esc(med)})`).join("; ")}.</p>`;
   h += `<p class="small muted">Compared with the 50 block groups ${typeof activeCounty !== "undefined" && activeCounty === "oc" && typeof countyOf === "function" ? "in Los Angeles County and " + esc((c => c === "District of Columbia" ? "the " + c : c)(countyOf(m))) : "county-wide"} most like this one in income, density, home values, housing age, ${typeof activeCounty !== "undefined" && activeCounty === "oc" ? "" : "children, "}car ownership and single-family share.</p>`;
   if (plan) {
-    const steps = plan.steps || [];
+    // Plan steps built on the old crash comparison are left out until plans are rebuilt (docs/audit/crash-rankings.md).
+    const steps = (plan.steps || []).filter(st => st.gap !== "pedbike");
     // A step shows cost / return only if its fix passes the verification gate for the block group it was sized for.
     const stepOk = st => ivAllows(st.fix, ((D.details[st.bg] || {}).m) || m);
     h += `<div class="pkg" style="display:block;margin-top:10px"><div class="small" style="font-weight:600;margin-bottom:6px">A plan for ${esc(p.n)} (${plan.bgs} block group${plan.bgs > 1 ? "s" : ""}, ${fmtN(plan.homes)} homes)</div>`;
@@ -9255,6 +9307,10 @@ async function openCounty(fips, wantBgId) {
     if (typeof setHud === "function") setHud("Unpacking " + cName + " block groups…");
     if (!B) throw new Error("County bundle not found for " + fips);
     await applyBundleCorrections(B);
+    if (B && B.details) {
+      applyCrashGaps(B.details, await loadCrashGaps(fips));
+      if (typeof INTERVENTION_VERIFICATION !== "undefined" && INTERVENTION_VERIFICATION && B.features) ivTagFeatures(B.features, B.details);
+    }
     if (D_OC !== B) {
       if (ocLayer && typeof map !== "undefined" && map && map.hasLayer(ocLayer)) map.removeLayer(ocLayer);
       ocLayer = null;
