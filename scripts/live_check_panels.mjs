@@ -144,12 +144,18 @@ function hudExpected(fips) {
   return r.two_bed_2br;
 }
 
-function serve() { return spawn(process.execPath, [path.join(root, "scripts/serve.mjs"), String(PORT)], { cwd: root, stdio: "ignore" }); }
+// Refuse a port something else already answers on: a server left by another checkout would be tested instead of this
+// one (happened 16 Nov 2026: a run on a busy port checked an older app.js).
+async function serve() {
+  const busy = await fetch(`http://127.0.0.1:${PORT}/`, { signal: AbortSignal.timeout(1500) }).then(() => true, () => false);
+  if (busy) throw new Error(`port ${PORT} is already in use; set LIVE_PORT to a free port`);
+  return spawn(process.execPath, [path.join(root, "scripts/serve.mjs"), String(PORT)], { cwd: root, stdio: "ignore" });
+}
 
 async function main() {
   const want = process.argv.slice(2).filter((a) => /^\d{5}$/.test(a));
   const list = want.length ? want : Object.keys(COUNTIES);
-  const srv = serve();
+  const srv = await serve();
   await new Promise((r) => setTimeout(r, 1500));
   const browser = await chromium.launch();
   const out = {};
@@ -223,6 +229,13 @@ async function main() {
         const canopyM = panel.match(/Canopy gap to goal \(([^)]*?(?:\([^)]*\))?[^)]*)\)\s*(-?\d+) pts/);
         if (teV != null) ok("canopy", !!canopyM && +canopyM[2] === teV && /release/.test(canopyM[1]), `expected ${teV} pts (current release); page: ${canopyM ? canopyM[2] + " pts, " + canopyM[1] : "row not found"}`);
         else ok("canopy", !canopyM || /2021/.test(canopyM[1]), `no current-release value; page: ${canopyM ? canopyM[2] + " pts, " + canopyM[1] : "row not shown"}`);
+        // canopy box over the map: the block group's own Tree Equity goal (tc_goal), never a hand-typed target
+        const hud = await page.evaluate(() => ({ gap: (document.querySelector("#canopy-hud-gap") || {}).textContent || "", heat: (document.querySelector("#canopy-hud-heat") || {}).textContent || "",
+          hood: (document.querySelector("#canopy-hud-hood") || {}).textContent || "" }));
+        const teRow = te && Array.isArray(te[bg]) ? te[bg] : null;
+        const expHud = teRow && teRow[0] != null && teRow[2] != null ? (teRow[0] > 0 ? `${teRow[0]} pts below its ${teRow[2]}% goal` : `At or above its ${teRow[2]}% goal`) : null;
+        const noInvented = !/EPA|Eco-Norm|CEC Zone|Ecoregion/.test(hud.gap + hud.heat + hud.hood);
+        ok("canopy_hud", noInvented && (expHud ? hud.gap === expHud : !/% goal/.test(hud.gap)), `expected ${expHud || "no goal figure"}; box: "${hud.gap}" / "${hud.heat}"`);
         // crash comparison
         const a = cg && cg.bg ? cg.bg[bg] : null;
         if (cc) {
@@ -300,7 +313,7 @@ async function main() {
         console.error(`${fips} ${bg} [${P.house_status}] ` + Object.entries(C).map(([k, v]) => `${k}:${v.pass === null ? "n/a" : v.pass ? "ok" : "FAIL"}`).join(" "));
         for (const [k, v] of Object.entries(C)) if (v.pass === false) console.error(`    ${k}: ${v.detail}`);
       }
-      const keys = ["census_area", "hud", "fema", "usgs", "crash", "laws", "neighborhood", "canopy"];
+      const keys = ["census_area", "hud", "fema", "usgs", "crash", "laws", "neighborhood", "canopy", "canopy_hud"];
       for (const k of keys) {
         const v = rec.points.map((p) => p.checks[k] && p.checks[k].pass);
         rec.checks[k] = v.some((x) => x === false) ? "fail" : v.some((x) => x === true) ? "pass" : "n/a";
@@ -321,7 +334,7 @@ async function main() {
 // available" (FEMA timed out or dropped the connection while several browsers ran in parallel), and compare again.
 // The first result is kept under fema_first.
 async function recheckFema(files) {
-  const srv = serve();
+  const srv = await serve();
   await new Promise((r) => setTimeout(r, 1500));
   const browser = await chromium.launch();
   try {
