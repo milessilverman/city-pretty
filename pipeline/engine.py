@@ -303,7 +303,10 @@ def run(m, pools, county="Orange County", state="CA"):
     # ---------------- Environment ----------------
     if fw is not None and fw <= 493 and x.get("fwy_unwalled_m"):
         L = int(round(x["fwy_unwalled_m"]))
-        add("noise_wall", f"{L:,} m of sound wall", int(round(x.get("homes_100m_fwy", 0.22 * H))), L * 2485, 0, 5000, 6.8,
+        # Cost: LA Metro soundwall presentation, Feb 2019 (Legistar file 2018-0787): "$10 Million/mile if placed adjacent to
+        # the freeway shoulder" (design and construction) = $6,214 per metre. The previous $2,485/m was 40% of that figure
+        # (docs/audit/catalog-coverage-round2.md). Walls on structures cost $20M/mile; not modeled.
+        add("noise_wall", f"{L:,} m of sound wall", int(round(x.get("homes_100m_fwy", 0.22 * H))), L * 6214, 0, 5000, 6.8,
             f"~{L:,} m of freeway within 150 m with no wall in OpenStreetMap; walls add ~6.8% within 100 m. OpenStreetMap misses many walls (it maps only a few dozen in Los Angeles), so check " + ("Caltrans" if state == "CA" else "the state DOT") + " before acting (counted at half weight)", pools.pct("fw", fw, False), 0, scale=0.5)
     if fw is not None and fw <= 500 and x.get("school_m", 9e9) <= 500:
         add("school_filters", "30 classrooms", H15, 30000, 0, 6000, 0, "school within 500 m of a freeway", pools.pct("fw", fw, False), 0, kind="qol")

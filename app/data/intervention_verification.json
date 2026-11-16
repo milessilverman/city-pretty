@@ -15,16 +15,18 @@
   },
   "cost": {
    "checked": "the unit cost was found in a fetched document",
-   "unchecked": "the cost cites a document that was not re-fetched, or has no source"
+   "unchecked": "the cost cites a document that was not re-fetched, or has no source",
+   "contradicted": "the cost used differs materially from the document it cites"
   },
-  "checked_on": "2026-11-16"
+  "checked_on": "2026-11-16",
+  "round2": "docs/audit/catalog-coverage-round2.md (2026-11-16)"
  },
  "street_trees": {
   "status": "unverified",
   "effect": "not_found",
   "cost": "unchecked",
   "evidence": "City Pretty local hedonic (3,386 Westside sales): no regression code or sales data in repo or git history; irreproducible. Shipped to 637 non-LA counties as \"local sales estimate\".",
-  "notes": "Unverified: the catalog's grade-A effect comes from a 'City Pretty local hedonic' regression (3,386 Westside sales, 2022-24) whose code and sales data are not in the repository or its git history, so it cannot be reproduced. Confirmed street-tree studies exist in research/effects.csv (Donovan & Butry 2010; Sander, Polasky & Haight 2010) but the model does not use them yet. The same 0.24% was shipped to 637 non-LA counties labelled 'local sales estimate'. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "notes": "Unverified: the catalog's grade-A effect comes from a 'City Pretty local hedonic' regression (3,386 Westside sales, 2022-24) whose code and sales data are not in the repository or its git history, so it cannot be reproduced. Confirmed street-tree studies exist in research/effects.csv (Donovan & Butry 2010; Sander, Polasky & Haight 2010) but the model does not use them yet. The same 0.24% was shipped to 637 non-LA counties labelled 'local sales estimate'. Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine). | 2026-11-16 re-check: Donovan & Butry 2010 measured the bundle of existing street trees fronting a house (+3.0% of median price), not newly planted trees within 50 m, so it does not confirm the engine's 0.24% per new tree.",
   "catalog_grade": "A",
   "kind": "value"
  },
@@ -191,13 +193,14 @@
   "kind": "value"
  },
  "brt": {
-  "status": "partially_verified",
+  "status": "verified",
   "effect": "checked",
-  "cost": "unchecked",
-  "evidence": "Beaudoin & Tyndall +5-7%: quote re-found in UHERO working paper (effects.csv row 15); engine uses 5.0",
-  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "cost": "checked",
+  "evidence": "Effect: Beaudoin & Tyndall, UHERO WP 2023-03 (re-fetched 2026-11-16, uhero.hawaii.edu/wp-content/uploads/2024/01/UHEROwp2303.pdf): \"We estimate a 5-7% price premium for homes located within a 20 minute walk of a BRT station.\" Engine uses 5.0%. Cost: LA Metro Board file 2026-0295 (Legistar matter 12412, approved by the Board 2026-05-28): \"ESTABLISHING a Life-of-Project (LOP) budget for the North Hollywood to Pasadena Bus Rapid Transit (BRT) Project in the amount of $428,988,535\"; metro.net project page: 19 miles. $428,988,535 / 19 mi = $22.58M per mile; engine uses $11.3M for 0.5 mile.",
+  "notes": "Model choices not validated: the engine applies the effect to 1.5x the block group's homes (the study's catchment is a 20-minute walk of a station) and uses one LA project's cost per mile everywhere. Other studies in research/effects.csv find no significant effect (Benson & Cao, Twin Cities A Line) or declines for single-family homes (Acton, Le & Miller 2022: Miami -2.5%, Pittsburgh -11.4%).",
   "catalog_grade": "B",
-  "kind": "value"
+  "kind": "value",
+  "caution": "other BRT studies find no effect or declines"
  },
  "rail_station": {
   "status": "partially_verified",
@@ -257,7 +260,7 @@
   "status": "unverified",
   "effect": "unchecked",
   "cost": "unchecked",
-  "evidence": "chains Chalfin crime RCT (exists) with Schwartz-Susin-Voicu coefficient the catalog itself says is unverified",
+  "evidence": "chains Chalfin crime RCT (exists) with Schwartz-Susin-Voicu coefficient the catalog itself says is unverified | 2026-11-16: the Schwartz, Susin & Voicu 2003 paper exists (Journal of Housing Research, doi 10.1080/26911337.2003.12519486) but its abstract (OpenAlex) states only that falling crime explains 'about a third of the post-1994 boom'; the 0.116 elasticity the engine uses was not found, so the crime-to-price step stays unverified.",
   "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
   "catalog_grade": "C",
   "kind": "value"
@@ -275,7 +278,7 @@
   "status": "unverified",
   "effect": "unchecked",
   "cost": "unchecked",
-  "evidence": "Ratcliffe RCT confirmed (crime); price link via unverified Schwartz coefficient",
+  "evidence": "Ratcliffe RCT confirmed (crime); price link via unverified Schwartz coefficient | 2026-11-16: the Schwartz, Susin & Voicu 2003 paper exists (Journal of Housing Research, doi 10.1080/26911337.2003.12519486) but its abstract (OpenAlex) states only that falling crime explains 'about a third of the post-1994 boom'; the 0.116 elasticity the engine uses was not found, so the crime-to-price step stays unverified.",
   "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
   "catalog_grade": "C",
   "kind": "value"
@@ -284,7 +287,7 @@
   "status": "unverified",
   "effect": "unchecked",
   "cost": "unchecked",
-  "evidence": "Brantingham et al. exists (2023 on Crossref); price link via unverified coefficient",
+  "evidence": "Brantingham et al. exists (2023 on Crossref); price link via unverified coefficient | 2026-11-16: the Schwartz, Susin & Voicu 2003 paper exists (Journal of Housing Research, doi 10.1080/26911337.2003.12519486) but its abstract (OpenAlex) states only that falling crime explains 'about a third of the post-1994 boom'; the 0.116 elasticity the engine uses was not found, so the crime-to-price step stays unverified.",
   "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
   "catalog_grade": "C",
   "kind": "value"
@@ -293,7 +296,7 @@
   "status": "unverified",
   "effect": "unchecked",
   "cost": "unchecked",
-  "evidence": "MacDonald et al. exists; price link via unverified coefficient",
+  "evidence": "MacDonald et al. exists; price link via unverified coefficient | 2026-11-16: the Schwartz, Susin & Voicu 2003 paper exists (Journal of Housing Research, doi 10.1080/26911337.2003.12519486) but its abstract (OpenAlex) states only that falling crime explains 'about a third of the post-1994 boom'; the 0.116 elasticity the engine uses was not found, so the crime-to-price step stays unverified.",
   "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
   "catalog_grade": "C",
   "kind": "value"
@@ -369,7 +372,7 @@
   "effect": "checked",
   "cost": "unchecked",
   "evidence": "McNair & Abelson abstract: \"increase house prices by 2.9 per cent\" (Canberra; transferred)",
-  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "notes": "Cost cites the CPUC undergrounding cost table (cpuc.ca.gov is unreachable from the audit machine, so not re-fetched). The catalog calls the $3.4M/circuit-mile figure 2019 dollars while the engine's text says 2024 dollars; unresolved. Outside LADWP's area the engine assumes lines are overhead from the homes' age (no utility line map).",
   "catalog_grade": "B",
   "kind": "value"
  },
@@ -392,11 +395,11 @@
   "kind": "qol"
  },
  "noise_wall": {
-  "status": "partially_verified",
+  "status": "unverified",
   "effect": "checked",
-  "cost": "unchecked",
-  "evidence": "Moretti & Wheeler 6.8% quote re-found in eml.berkeley.edu PDF (effects.csv row 21)",
-  "notes": "Cost cites a named public document that was not re-fetched (most LA agency sites return 403 from the audit machine).",
+  "cost": "contradicted",
+  "evidence": "Effect: Moretti & Wheeler 6.8% within 100 m, quote re-found (effects.csv row 21). Cost: the catalog cites Metro's February 2019 soundwall report; that presentation (LA Metro Legistar file 2018-0787, attachment 'Presentation', fetched 2026-11-16) says \"$10 Million/mile if placed adjacent to the freeway shoulder\" and \"$20 Million/mile if on bridge structures or retaining walls\" (design and construction). The engine uses $2,485 per metre = $4.0M per mile, 40% of the cited shoulder figure.",
+  "notes": "Downgraded 2026-11-16: the shipped cost understates the cited source about 2.5x, so the shipped return per $1 is overstated by the same factor. pipeline/engine.py now uses $6,214/m (the cited $10M/mile); shipped bundles keep the old figure until they are rebuilt, so no dollar figure is shown.",
   "catalog_grade": "B",
   "kind": "value"
  },

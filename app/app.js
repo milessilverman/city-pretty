@@ -11,7 +11,7 @@ const CP_DATA_FILES = {
   "state-finance-profiles": "state_finance_profiles.json", "unit-costs": "unit_costs.json", "hud-fmr": "hud_fair_market_rents.json",
   "valuation-benchmarks": "valuation_backtest_benchmarks.json", "underused-sites": "underused_sites.json",
   "intercity-corridors": "intercity_transit_corridors.json", "county-completeness": "county_completeness.json",
-  "ca-counties-registry": "ca_counties_registry.json", "intervention-verification": "intervention_verification.json"
+  "ca-counties-registry": "ca_counties_registry.json", "intervention-verification": "intervention_verification.json", "upgrade-verification": "upgrade_verification.json"
 };
 const _cpData = {};
 function cpText(id) {
@@ -93,6 +93,7 @@ function loadVerifiedDataFiles() {
   cpJson("intervention-verification").then(d => {
     if (d && typeof d === "object" && !INTERVENTION_VERIFICATION) { INTERVENTION_VERIFICATION = d; if (typeof ivOnLoaded === "function") ivOnLoaded(); }
   });
+  cpJson("upgrade-verification").then(d => { if (d && d.rows && typeof d.rows === "object") UPGRADE_VERIFICATION = d.rows; });
   cpJson("ca-counties-registry").then(d => {
     if (d && typeof d === "object") {
       Object.assign(CA_COUNTIES_REGISTRY, d);
@@ -1855,13 +1856,25 @@ const css = (n, fb) => getComputedStyle(document.documentElement).getPropertyVal
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmt$ = v => v == null || isNaN(v) ? "–" : v >= 1e9 ? "$" + (v/1e9).toFixed(1) + "B" : v >= 1e6 ? "$" + (v/1e6).toFixed(v >= 1e7 ? 0 : 1) + "M" : v >= 1e3 ? "$" + Math.round(v/1e3) + "k" : "$" + Math.round(v);
 const fmtN = v => v == null || isNaN(v) ? "–" : Math.round(v).toLocaleString();
-const GRADE_TXT = { A: "A · measured on LA sales", B: "B · studied elsewhere", C: "C · transferred from a related study", D: "D · assumption", U: "U · unverified research lead (round 6)" };
+const GRADE_TXT = { A: "A · claimed LA sales estimate (not reproducible)", B: "B · studied elsewhere", C: "C · transferred from a related study", D: "D · assumption", U: "U · unverified research lead (round 6)" };
 // ---------------- Intervention verification gate ----------------
 // docs/audit/bundle-catalog-audit.md (16 Nov 2026) checked each catalog item's effect size and cost against its sources.
 // app/data/intervention_verification.json holds the result. Only "verified" and "partially_verified" items may show a
 // dollar or $-per-$1 figure, be ranked as a best bet, or count in any total; "unverified" items are listed by name only.
 // Until the file loads, everything counts as unverified (nothing is shown rather than something unchecked).
 let INTERVENTION_VERIFICATION = null;
+// Same gate for the homeowner upgrade table (D.upgrades) and the per-house figures derived from it
+// (app/data/upgrade_verification.json; docs/audit/catalog-coverage-round2.md). Every row was a self-graded
+// "City Pretty estimate" with no source, so until a row is sourced it shows no cost, value, return or profit.
+let UPGRADE_VERIFICATION = null;
+const upStatus = name => { const r = UPGRADE_VERIFICATION && UPGRADE_VERIFICATION[name]; return r && r.status ? r.status : "unverified"; };
+const upSourced = name => { const s = upStatus(name); return s === "verified" || s === "partially_verified"; };
+// LA block-group home values labelled "median of N recorded home sales (County Assessor)" come from an LA build whose
+// code and sales data are not in the repository; LA County's public parcel layer carries no sale prices, and most of
+// these medians end in ...005-010 or ...505-510 rather than the round figures real sale prices cluster on
+// (docs/audit/catalog-coverage-round2.md). Say so wherever the label is shown.
+const hvSourceText = s => /recorded home sales/.test(String(s || "")) ? `${s}; unverified: the sales data behind it is not in the repository` : String(s || "");
+const UP_UNSOURCED_NOTE = "Cost and resale value not sourced yet: the upgrade table's figures are City Pretty estimates that were never checked against bids or sales, so no dollar figures are shown.";
 const ivRec = id => (INTERVENTION_VERIFICATION && INTERVENTION_VERIFICATION[id]) || null;
 const ivStatus = id => { const r = ivRec(id); return r && r.status ? r.status : "unverified"; };
 // May this intervention show numbers for a block group with metrics m? (m is needed for conditions such as the
@@ -1878,7 +1891,7 @@ function ivAllows(id, m) {
 }
 function ivLabel(id) {
   const r = ivRec(id), st = ivStatus(id);
-  if (st === "verified") return "Sourced inputs (model not validated)";
+  if (st === "verified") return "Sourced inputs (model not validated)" + (r && r.caution ? "; " + r.caution : "");
   if (st !== "partially_verified") return "Effect not sourced yet";
   const kind = (r && r.kind) || ((typeof D !== "undefined" && D && D.catalog && D.catalog[id]) || {}).kind;
   if (kind === "qol") return "Partly verified: cost cited but not re-checked; no value effect estimated";
@@ -4373,6 +4386,11 @@ function houseUpgrades(h, m, R) {
       c = Math.max(c - 3000, 3500); note = "after $3,000 California Earthquake Brace + Bolt grant";
     } else if (/^Legalize|^Staging|^Kitchen|^Bathroom remodel|^Home gym|^Kids/.test(u.name)) continue;
 
+    if (!upSourced(u.name)) {
+      // Unsourced row: keep the name (and a note only if it carries no figures); no cost, value, return or profit.
+      rows.push({ n: u.name, c: null, v: null, net: null, per: null, note: /[$%]|\d/.test(note) ? "" : note, sav: null, cost_analysis: null, unsourced: true });
+      continue;
+    }
     rows.push({
       n: u.name,
       c: Math.round(c),
@@ -4827,8 +4845,11 @@ function renderHouse(box, a, lot, ll, st) {
     activeHouse.sale = sale;
   }
 
-  let ups = h.res ? houseUpgrades(h, m, R) : [];
-  
+  const upsAll = h.res ? houseUpgrades(h, m, R) : [];
+  // Only sourced rows carry figures (see the upgrade verification gate); the rest are listed by name.
+  let ups = upsAll.filter(u => !u.unsourced);
+  const upsUnsourced = upsAll.filter(u => u.unsourced);
+
   ups.sort((x, y) => {
     let vx = x[st.sortCol], vy = y[st.sortCol];
     if (typeof vx === "string") return st.sortDir === "asc" ? vx.localeCompare(vy) : vy.localeCompare(vx);
@@ -5250,7 +5271,7 @@ function renderHouse(box, a, lot, ll, st) {
       </div>`;
     })()}
 
-    ${bestH ? `<p class="verdict" style="margin-top:8px">Best bet for this home: <b>${esc(bestH.n)}</b>. Expected return: <b>${fvpd(bestH.per)} / $1</b> (adds ~${fmt$(bestH.v)} on ~${fmt$(bestH.c)} investment).</p>` : h.res ? `<p class="verdict" style="margin-top:8px">No upgrade here returns $1 of value per $1 spent; the list below shows the closest.</p>` : ""}
+    ${bestH ? `<p class="verdict" style="margin-top:8px">Best bet for this home: <b>${esc(bestH.n)}</b>. Expected return: <b>${fvpd(bestH.per)} / $1</b> (adds ~${fmt$(bestH.v)} on ~${fmt$(bestH.c)} investment).</p>` : h.res && !ups.length && upsUnsourced.length ? `<p class="verdict" style="margin-top:8px">No sourced upgrade estimate for this home yet. ${esc(UP_UNSOURCED_NOTE)}</p>` : h.res ? `<p class="verdict" style="margin-top:8px">No upgrade here returns $1 of value per $1 spent; the list below shows the closest.</p>` : ""}
     ${pkgH.length ? `<div class="pkg">${tile("Upgrades that pay back", pkgH.length, "≥ $1 of value per $1; either/or options counted once")}${tile("Total cost", fmt$(pkgH.reduce((t, u) => t + u.c, 0)), "2025–2026 market estimates")}${tile("Value added", fmt$(pkgH.reduce((t, u) => t + u.v, 0)), "to this home")}</div>` : ""}
     
     <ul class="small" style="margin:8px 0 0 0;padding:0;list-style:none">${h.C.map(c => `<li style="margin:3px 0"><b style="color:${col[c.v]}">${tag[c.v]} ${esc(c.name)}</b> — ${c.why}</li>`).join("")}</ul>
@@ -5293,10 +5314,8 @@ function renderHouse(box, a, lot, ll, st) {
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11.5px;color:#334155;background:#f8fafc;padding:8px 10px;border-radius:6px;border:1px solid #e2e8f0;">
-          <div>• <b>Side/Rear Setback:</b> <span style="color:#059669;font-weight:700">4.0 ft (Compliant)</span></div>
-          <div>• <b>Lot Coverage:</b> ${(F.foot && lot) ? `~${Math.min(48, Math.round((F.foot + 750) / lot * 100))}% (By-right allowable)` : "Not recorded"}</div>
-          <div>• <b>Parking Replacement:</b> <span style="color:#0284c7;font-weight:700">Exempt (0 spaces)</span></div>
-          <div>• <b>Permit Review:</b> <span style="color:#16a34a;font-weight:700">Ministerial (60 Days)</span></div>
+          <div>• <b>Lot coverage with a ~750 sq ft ADU:</b> ${(F.foot && lot) ? `~${Math.round((F.foot + 750) / lot * 100)}% of the lot (mapped footprint plus 750 sq ft)` : "Not recorded"}</div>
+          <div>• <b>Setbacks, parking and review time:</b> not checked for this lot; confirm with the city's building department.</div>
         </div>
       </div>
     </details>
@@ -5383,7 +5402,11 @@ function renderHouse(box, a, lot, ll, st) {
         </tbody>
       </table>
       ${ups.length > 14 ? `<p class="small muted">${ups.length - 14} more fit this lot but return less.</p>` : ""}` : ""}
-    <p class="small muted" style="margin-top:8px">Facts compiled from County Assessor records, city permits, state hazard maps and mapped building footprints. Values use this area's price per sq ft and rents scaled from the county median; construction costs are City Pretty's 2025–2026 estimates, not bids.</p>`;
+    ${upsUnsourced.length ? `
+      <h4 style="margin:12px 0 4px;font-size:12.5px;color:var(--ink)">Upgrades that may fit this house (cost and value not sourced yet)</h4>
+      <ul class="small" style="margin:0;padding-left:18px">${upsUnsourced.map(u => `<li><b>${esc(u.n)}</b>${u.note ? ` <span class="muted">${esc(u.note)}</span>` : ""}</li>`).join("")}</ul>
+      <p class="small muted">${esc(UP_UNSOURCED_NOTE)}</p>` : ""}
+    <p class="small muted" style="margin-top:8px">Facts compiled from County Assessor records, city permits, state hazard maps and mapped building footprints. Upgrade costs and resale values are shown only where a source has been checked (none yet); the earlier figures were City Pretty estimates, not bids or measured sales.</p>`;
   // Live public records (HUD rent, FEMA flood zone, USGS elevation, Census area), each linked to its exact query.
   if (typeof window !== "undefined" && window.CityPrettyFacts && ll && isFinite(ll.lat) && isFinite(ll.lng)) window.CityPrettyFacts.attachLiveFacts(box, ll.lat, ll.lng);
 }
@@ -6336,12 +6359,17 @@ function upgradeTable(m) {
   const U = (D.upgrades || []).filter(u => !(u.applies_if === "pre1975" && m.yb >= 1975) && !(u.applies_if === "pre1980" && m.yb >= 1980) && !(u.applies_if === "fire" && !fire)
     && !(!isCAActive() && /^Seismic bolting/.test(u.name || "")));
   if (!U.length) return "";
-  const rows = U.map(u => ({ ...u, net: u.resale_value_added - u.cost_2025, per: u.resale_value_added / Math.max(u.cost_2025, 1) })).sort((a, b) => b.per - a.per);
-  return `<details class="more"><summary>${rows.length} home upgrades: cost, value added and return per $1</summary>
+  // Figures only for rows that passed the upgrade verification gate; none have yet, so the table lists what each
+  // upgrade involves (permits, property tax, rebates to check) without cost, value or return.
+  const rows = U.map(u => upSourced(u.name) ? ({ ...u, sourced: true, net: u.resale_value_added - u.cost_2025, per: u.resale_value_added / Math.max(u.cost_2025, 1) }) : ({ ...u, sourced: false }))
+    .sort((a, b) => (b.sourced - a.sourced) || ((b.per || 0) - (a.per || 0)) || String(a.name).localeCompare(String(b.name)));
+  const anySourced = rows.some(u => u.sourced);
+  const money = u => u.sourced ? `<td style="text-align:right">${fmt$(u.cost_2025)}</td><td style="text-align:right">${fmt$(u.resale_value_added)}</td><td style="text-align:right;font-weight:600">${fvpd(u.per)}</td><td style="text-align:right">${u.annual_savings > 0 ? fmt$(u.annual_savings) : u.annual_savings < 0 ? "−" + fmt$(-u.annual_savings) + " cost" : "–"}</td>` : (anySourced ? `<td colspan="4" class="muted">not sourced yet</td>` : "");
+  return `<details class="more"><summary>${rows.length} home upgrades: ${anySourced ? "cost, value added and return per $1" : "permits, property tax and rebates (cost and value not sourced yet)"}</summary>
     <div><table class="small sticky-head" style="width:100%;border-collapse:collapse;margin-top:6px">
-      <thead><tr style="text-align:left"><th>Upgrade</th><th style="text-align:right">Cost</th><th style="text-align:right">Adds to resale</th><th style="text-align:right">Per $1</th><th style="text-align:right">Saves / yr</th><th>Rebates (Nov 2026)</th><th>Property tax</th><th>Permits</th></tr></thead>
-      <tbody>${rows.map(u => `<tr style="border-top:1px solid var(--rule)"><td>${esc(u.name)}</td><td style="text-align:right">${fmt$(u.cost_2025)}</td><td style="text-align:right">${fmt$(u.resale_value_added)}</td><td style="text-align:right;font-weight:600">${fvpd(u.per)}</td><td style="text-align:right">${u.annual_savings > 0 ? fmt$(u.annual_savings) : u.annual_savings < 0 ? "−" + fmt$(-u.annual_savings) + " cost" : "–"}</td><td>${esc(rebateFor(u.rebates_nov_2026))}</td><td>${esc(isCAActive() ? u.property_tax : "Check local assessment rules")}</td><td>${esc(u.permits)}</td></tr>`).join("")}</tbody></table></div>
-    <p class="small muted">Typical 2025 LA costs and resale values (City Pretty estimates; second stories and additions run about $450–$700 per sq ft all-in). They're being checked against round-8 research. ${(typeof activeCounty !== "undefined" && activeCounty === "oc" && typeof isOrangeActive === "function" && !isOrangeActive()) ? "These are LA-wide averages, not adjusted to this county: costs and resale values here can differ." : "These are LA-wide averages: zoom in and click a home for numbers sized to that house and its yard."} Federal credits: 25D (solar, batteries) ended for expenditures made after 31 Dec 2025; 25C (heat pumps, insulation) for property placed in service after 31 Dec 2025.</p></details>`;
+      <thead><tr style="text-align:left"><th>Upgrade</th>${anySourced ? `<th style="text-align:right">Cost</th><th style="text-align:right">Adds to resale</th><th style="text-align:right">Per $1</th><th style="text-align:right">Saves / yr</th>` : ""}<th>Rebates to check (Nov 2026)</th><th>Property tax</th><th>Permits</th></tr></thead>
+      <tbody>${rows.map(u => `<tr style="border-top:1px solid var(--rule)"><td>${esc(u.name)}</td>${money(u)}<td>${esc(rebateFor(u.rebates_nov_2026))}</td><td>${esc(isCAActive() ? u.property_tax : "Check local assessment rules")}</td><td>${esc(u.permits)}</td></tr>`).join("")}</tbody></table></div>
+    <p class="small muted">${esc(UP_UNSOURCED_NOTE)} Federal credits: 25D (solar, batteries) ended for expenditures made after 31 Dec 2025; 25C (heat pumps, insulation) for property placed in service after 31 Dec 2025.</p></details>`;
 }
 
 // ---------------- EIFD calculator (Gov. Code 53398.50 et seq.)
@@ -6919,7 +6947,7 @@ function select(id, fly) {
 
   // Core Vitals Tiles
   h += `<div class="section"><div class="tiles">
-    ${tile("Typical home value", fmt$(m.hv), esc(oc && !ocReal ? "neighborhood estimate (preliminary)" : (m.hvs || "")))}
+    ${tile("Typical home value", fmt$(m.hv), esc(oc && !ocReal ? "neighborhood estimate (preliminary)" : hvSourceText(m.hvs)))}
     ${tile("Median rent", m.rent ? fmt$(m.rent) + "/mo" : "–", oc && !ocReal ? "estimate (preliminary)" : ocReal ? "Census ACS 2020–24" : "Census ACS 5-Year")}
     ${tile("Homes", fmtN(m.homes), `${m.own != null ? Math.round(m.own) + "% owner-occupied" : ""}`)}
     ${tile("Heat vs median", m.ht != null ? (m.ht > 0 ? "+" : "") + (+m.ht).toFixed(1) + "°F" : "–", oc && !ocReal ? "estimate (preliminary)" : ocReal ? "Tree Equity Score 2021 vs urbanized-area mean" : "Tree Equity Score")}

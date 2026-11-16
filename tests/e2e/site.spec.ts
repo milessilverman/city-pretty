@@ -234,6 +234,12 @@ test("parcel and neighborhood panels render without invented figures", async ({ 
   const other = await page.evaluate(() => (window as any).publishValuation({ estimatedValue: 500000, confidenceRating: "Unvalidated estimate — no back-test against sales yet" }, "48453", {}));
   expect(other.estimatedValue).toBe(500000);
   expect(other.confidenceRating).toContain("Unvalidated estimate");
+  // Upgrade table rows are unsourced City Pretty estimates: listed by name, no cost/value/return/profit
+  // (docs/audit/catalog-coverage-round2.md).
+  expect(html).toContain("cost and value not sourced yet");
+  for (const bad of ["Net Profit", "Return / $1", "All-In Cost", "Upgrades that pay back", "Best bet for this home", "(Compliant)", "Exempt (0 spaces)"]) {
+    expect(html).not.toContain(bad);
+  }
   for (const bad of ["High Precision", "RSMeans", "Verified Current Imagery", "Return per $1", "Estimated Net Equity", "± ", "Saves $", "Projected 25-year"]) {
     expect(html).not.toContain(bad);
   }

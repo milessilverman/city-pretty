@@ -131,7 +131,11 @@ const ideaName = c => isCAActive() ? c.name : String(c.name).replace(" (SB 79 / 
 const gradeOf = c => {
   const st = typeof ivStatus === "function" ? ivStatus(c.id) : "unverified";
   const gr = c.grade && c.grade !== "none" ? ` Catalog grade ${c.grade} (the build's own rating).` : "";
-  if (st === "verified") return ["Sourced inputs", "The effect size and the cost were both found in their cited sources. The dollar return applies them to this place with a model that has not been checked against real outcomes." + gr, 4];
+  if (st === "verified") {
+    const r = typeof ivRec === "function" ? ivRec(c.id) : null;
+    const caution = r && r.caution ? ` Caution: ${r.caution}.` : "";
+    return ["Sourced inputs", "The effect size and the cost were both found in their cited sources. The dollar return applies them to this place with a model that has not been checked against real outcomes." + caution + gr, 4];
+  }
   if (st === "partially_verified") return ["Partly verified", ivLabel(c.id).replace(/^Partly verified: /, "Checked one side; ") + "." + gr, 2];
   return ["Effect not sourced yet", "Its effect size or cost could not be confirmed against a source, so no dollar figures are shown." + gr, 0];
 };
@@ -386,7 +390,7 @@ function hoodPage(key, areaId) {
       <div class="ex-detail-head">
         <span class="ex-card-cat">${esc(g.c || countyShort())}</span>
         <h2 class="ex-title">${esc(g.n)}</h2>
-        <p class="ex-sub">${homes ? `About ${plural(homes, "home")}` : ""}${hv ? ` · typical home value ${fmt$(hv)}${m.hvs ? ` <span class="ex-muted">(${esc(m.hvs)})</span>` : ""}` : ""}${m.pop ? ` · ${fmtN(m.pop)} residents` : ""}</p>
+        <p class="ex-sub">${homes ? `About ${plural(homes, "home")}` : ""}${hv ? ` · typical home value ${fmt$(hv)}${m.hvs ? ` <span class="ex-muted">(${esc(typeof hvSourceText === "function" ? hvSourceText(m.hvs) : m.hvs)})</span>` : ""}` : ""}${m.pop ? ` · ${fmtN(m.pop)} residents` : ""}</p>
         ${areas.length > 1 ? `<div class="ex-areas"><span>${esc(g.n)} is ${areas.length} small areas. Showing:</span>${areas.slice(0, 12).map((a, i) => `<button type="button" class="ex-chip${a.id === p.id ? " active" : ""}" data-ex-area="${esc(a.id)}" aria-pressed="${a.id === p.id}">Area ${i + 1}${a.v >= 1 ? ` · ${fvpd(a.v)}` : ""}</button>`).join("")}${areas.length > 12 ? `<span class="ex-muted">+${areas.length - 12} more on the map</span>` : ""}</div>` : ""}
       </div>
       <section class="ex-sec ex-short"><h3>The short version</h3><p>${story}</p>
