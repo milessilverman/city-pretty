@@ -3724,26 +3724,42 @@
    ]
   },
   {
-   "url": "https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/1",
+   "url": "https://services2.arcgis.com/HdTo6HJqh92wn4D8/arcgis/rest/services/Parcels_view/FeatureServer/0",
    "states": [
     "TN"
    ],
    "counties": [
     "47037"
    ],
-   "name": "Davidson County GIS Parcels",
-   "terms": "Service-specific reuse license: not found. Comptroller website disallows bulk/recurring automated downloads; scope of that policy for this county service is unresolved. Q-TN-DOWNLOAD",
+   "name": "Metro Nashville & Davidson County Parcels",
+   "terms": "https://www.nashville.gov/departments/metro-clerk/legal-resources/executive-orders/mayor-freddie-oconnell/fo018",
    "addr": "PropAddr",
-   "apn": "APN",
-   "max": 1000,
+   "apn": "ParID",
+   "max": 2000,
    "fields": [
     [
-     "APN",
+     "ParID",
      "Parcel ID"
     ],
     [
      "PropAddr",
      "Site Address"
+    ],
+    [
+     "Zoning",
+     "Zoning"
+    ],
+    [
+     "LUDesc",
+     "Land Use"
+    ],
+    [
+     "Acres",
+     "Acres"
+    ],
+    [
+     "TotlAppr",
+     "Total Appraised Value"
     ]
    ]
   },

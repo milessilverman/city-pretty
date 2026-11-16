@@ -425,7 +425,9 @@ own public `PropertyInformation_Hosted` layer (checked: a point at 646 F St retu
 data edited 16 Nov). **Hinds County MS's server returns HTTP 500 on every request, including its root**; the two
 alternatives found (the county's own server, a regional planning server) also failed, so Hinds is unchanged and
 clicks there show "couldn't get this lot". Tennessee's state parcel server answers some requests with 403 and the
-next with 200 (likely rate limiting; the four TN counties are queried back to back by the check).
+next with 200 (likely rate limiting; the four TN counties are queried back to back by the check). Davidson's
+entry, which browsers couldn't use at all (blocked cross-origin), now points at Metro Nashville's own public parcel
+layer; the live panel check passed on 3 Nashville parcels through it.
 
 ### Live check of every other panel, 20 counties (16 Nov)
 
