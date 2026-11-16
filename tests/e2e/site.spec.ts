@@ -348,7 +348,7 @@ test("house panel shows live public records with links, from the agencies (respo
   expect(errors).toEqual([]);
 });
 
-test("tax-increment section: California computes from the roll; Texas says which rules are unverified", async ({ page }) => {
+test("tax-increment section: California computes from the roll; Texas shows no dollar figure without local rates", async ({ page }) => {
   const errors = await openPage(page);
   const la = await page.evaluate(() => {
     const w = window as any;
@@ -370,7 +370,9 @@ test("tax-increment section: California computes from the roll; Texas says which
     ev("select")(ev("D_OC").features[0].properties.id, false);
     return (document.querySelector("#panel") as HTMLElement).textContent || "";
   });
-  expect(tx).toMatch(/Not computed: Texas tax rules not verified yet \(/);
+  // Texas's five state rules were confirmed in round 3 (docs/audit/laws-finance-audit.md); local rates and pledge
+  // shares are still not on file, so there is still no dollar figure.
+  expect(tx).toMatch(/Not computed: Texas's state rules are confirmed, but local tax rates and pledge shares are not on file/);
   expect(tx).not.toMatch(/Bond capacity\s*\$/);
   expect(errors).toEqual([]);
 });

@@ -95,6 +95,9 @@ def fmr_for_point(lat, lon, envelope=None):
     return [f["attributes"] for f in get_json(HUD_LAYER + "/query", params).get("features", [])]
 
 
+REVISIONS = json.load(open(os.path.join(ROOT, "app", "data", "hud_fmr_revisions.json")))
+
+
 def main():
     today = date.today().isoformat()
     item = get_json(HUD_ITEM)
@@ -140,7 +143,17 @@ def main():
         if c["STATE"] in NEW_ENGLAND:
             notes.append("New England FMR areas are defined by town; this county may span several FMR areas. Value is for the area containing the county's interior point.")
         # Shared method/date live in the file header (_source.verification_method); per-county only what differs.
-        rec["verification"] = {"status": "verified" if hits else "could_not_check"}
+        rev = REVISIONS["revisions"].get(rec["metro_or_county_name"] or "")
+        if rev:
+            # HUD's map service never applied the May 2026 revision; use the Federal Register's published values.
+            rec["service_values_before_revision"] = {k: rec[k] for k in ("zero_bed_eff", "one_bed_1br", "two_bed_2br", "three_bed_3br", "four_bed_4br")}
+            rec.update(zero_bed_eff=rev["rent_0br"], one_bed_1br=rev["rent_1br"], two_bed_2br=rev["rent_2br"], three_bed_3br=rev["rent_3br"], four_bed_4br=rev["rent_4br"])
+            rec["verification"] = {"status": "verified", "method": "Values from the Federal Register's revised FY2026 FMR notice.",
+                                   "evidence": f"{REVISIONS['_source']['document']}: {rev['notice_name']} 2BR ${rev['rent_2br']:,}", "checked_on": today}
+        elif hits:
+            rec["verification"] = {"status": "partially_verified", "unverified_fields": ["fiscal_year"]}
+        else:
+            rec["verification"] = {"status": "could_not_check"}
         if notes:
             rec["verification"]["notes"] = " ".join(notes)
         return rec
@@ -166,18 +179,27 @@ def main():
             "item_modified": item.get("modified"),
             "item_date_of_coverage": clean(item_cov),
             "layer_date_of_coverage": clean(layer_cov),
-            "coverage_caveat": "HUD's item page says FY2026; the layer's own description still says FY2024. Treat fiscal_year=2026 as HUD's item-level statement, not independently confirmed against huduser.gov (which blocks automated download from our build environment).",
+            "coverage_caveat": (
+                "Values are HUD's own, copied from HUD's map service. Year: HUD's item page says FY2026 (its layer text still says FY2024). "
+                "Checked 2026-11-16 against the Federal Register: the service matches none of the revised values HUD published for FY2023 "
+                "(2023-05630), FY2024 (2024-02666) or FY2025 (2025-05345), and runs above FY2025 (e.g. Missoula 2BR $1,655 vs $1,604), "
+                "consistent with FY2026 as first published; it had NOT applied the seven May-2026 FY2026 revisions (2026-07741), which are "
+                "applied here from the notice. Not current: FY2027 FMRs took effect 2026-10-01 (2026-17891) and are not in HUD's map service."),
+            "revisions_applied": REVISIONS["_source"],
+            "superseded": REVISIONS["superseded"],
             "retrieved": today,
             "script": "scripts/fetch_hud_fmr.py",
-            "verification_method": "Machine pull: each county's Census TIGERweb interior point matched point-in-polygon against HUD's published Fair Market Rents feature service. Values are copied, never edited.",
+            "verification_method": "Machine pull: each county's Census TIGERweb interior point matched point-in-polygon against HUD's published Fair Market Rents feature service. Values are copied, never edited, except the seven areas HUD revised in the Federal Register (2026-07741), which use the notice's values. partially_verified = HUD's values, but the fiscal year is HUD's own label, not confirmed against a published FY2026 table.",
             "source_agency": "U.S. Department of Housing and Urban Development (HUD), Office of Policy Development and Research",
         },
         "records": sorted(recs, key=lambda r: r["fips"]),
     }
     with open(OUT, "w") as f:
         json.dump(payload, f, separators=(",", ":"))
-    ok = sum(1 for r in recs if r["verification"]["status"] == "verified")
-    print(f"wrote {OUT}: {len(recs)} counties, {ok} matched to a HUD FMR area", file=sys.stderr)
+    from collections import Counter
+    st = Counter(r["verification"]["status"] for r in recs)
+    print(f"wrote {OUT}: {len(recs)} counties; {st['verified']} with Federal Register revised values, "
+          f"{st['partially_verified']} with HUD map-service values (fiscal year unconfirmed), {st['could_not_check']} unmatched", file=sys.stderr)
 
 
 if __name__ == "__main__":

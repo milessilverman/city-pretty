@@ -167,3 +167,40 @@ Result: the residential ratio is confirmed for 21 states (was 5: AZ, CA, FL, TX,
 
 Tests: `tests/unit/financeProfiles.test.ts`, test 4 in `tests/unit/audit.test.ts`, and the browser test
 "tax-increment section…" in `tests/e2e/site.spec.ts`.
+
+## Round 3 (16 Nov 2026, later)
+
+Script: `scripts/apply_finance_round3.py` (finance), `scripts/apply_records_round3.py` and
+`scripts/apply_broken_links_round3.py` (funding, statutes). Every quote is in the record's `field_evidence` or
+`verification.evidence`.
+
+**State finance profiles: all five tax-increment fields now confirmed in TX, FL, AZ, WA, CA.**
+
+| State | Field | Result | Source (quote) |
+|---|---|---|---|
+| TX | homestead_exemption_rule | **corrected $100,000 -> $140,000** (school district taxes) | Comptroller: "Tax Code Section 11.13(b) requires school districts to provide a $140,000 exemption" (the texas.public.law mirror still shows $100,000) |
+| TX | reassessment_cycle_years | **corrected 1 -> 3** | Tax Code 25.18(b): "at least once every three years" |
+| TX | uncaps_on_sale | confirmed | Tax Code 23.23(c): the limitation "expires on January 1 of the first tax year that neither the owner ... qualifies" |
+| FL | uncaps_on_sale | confirmed | 193.155(3)(a): "assessed at just value as of January 1 of the year following a change of ownership" |
+| FL | reassessment_cycle_years | confirmed (1) | 192.042: "Real property, on January 1 of each year" |
+| AZ | uncaps_on_sale | confirmed (false) | 42-13302(A) lists the cases that reset limited value; a sale is not one; "A change in the occupant ... is not a change in use" |
+| AZ | homestead_exemption_rule | confirmed (none) | 15-972: owner relief is "additional state aid for education", not a value exemption |
+| WA | reassessment_cycle_years | confirmed (1) | RCW 84.41.030: "must be revalued annually" |
+| WA | homestead_exemption_rule | confirmed (none) | DOR lists only targeted programs (veterans' widows, seniors/disabled, limited-income deferral) |
+| CA | uncaps_on_sale, reassessment_cycle_years | confirmed | R&T 110.1 (base year at change in ownership); 401.3 and 2192 (annual lien date) |
+| CO | reassessment_cycle_years | confirmed (2) | 39-1-104(10.2)(b): "During the two years of each reassessment cycle ..." |
+| CO | res_assessment_ratio, homestead_exemption_rule | **not confirmed; homestead 'none' was wrong** | HB 24B-1001: from 2026, if the State Board of Equalization certifies statewide growth above 5%, local levies use 6.7% of actual value minus the lesser of 10% or $70,000; the certification was not fetched |
+
+The page still computes no tax-increment dollar figure outside California: local millage rates and pledge shares
+are not on file from a source. Known model limit (not fixed): the engine applies a homestead exemption once to an
+area's total value, as if the area were one home.
+
+**Funding programs.** CA Urban Greening corrected from its program page: funded by Proposition 4 (~$100M, two
+cycles, $46,125,000 in round 1), not Cap-and-Trade; applications through RAPTR, not SOAR; next round late 2027 or
+early 2028; grant share not stated (now null). CO URA TIF: C.R.S. 31-25-107 confirms property and/or municipal sales
+taxes may be divided "for a period not to exceed twenty-five years"; the "100% of increment" share and listed
+projects are not in the statute. FRA grant and AZ GPLET: dead program pages replaced with the statutes the records
+were verified against. IL Transit TIF: source link broken, downgraded to unverified.
+
+**Statutes.** Minneapolis 2040 downgraded to unverified: the city's housing page doesn't state the triplex or parking
+rule, Minn. Stat. 473.858 has no 2024 amendment, and the cited Laws 2024 c. 115 has no comprehensive-plan language.

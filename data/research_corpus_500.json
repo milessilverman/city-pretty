@@ -139,7 +139,7 @@
   "takeaway": null,
   "citation": "Schupbach, J. & Crane, L. (2015). Creative Placemaking: How the Arts Are Catalyzing Community and Economic Development. Federal Reserve Bank of San Francisco, 10(2), 21-36.",
   "verification": {
-   "status": "could_not_check",
+   "status": "unverified",
    "method": "publisher_page_fetch_failed",
    "checked_on": "2026-11-16",
    "evidence": "HTTP 404 (FRBSF page not found)",
@@ -154,7 +154,7 @@
     "takeaway",
     "geography"
    ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified.",
+   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: Cited URL returns 404; FRBSF alternate path also 404. source link broken as of 2026-11-16: https://www.frbsf.org/community-development/publications/community-development-investment-review/2015/december/creative-placemaking-arts-community-economic-development/ returns 404; no new address found.",
    "removed_unverified_claims": {
     "impact": "$1 of public arts funding catalyzed $7.20 in private real estate improvements and storefront rehabilitations",
     "vpd": 3.6,
@@ -321,7 +321,7 @@
     "takeaway",
     "geography"
    ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified.",
+   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: cnt.org: TLS hostname mismatch from the build machine (https and http).",
    "removed_unverified_claims": {
     "impact": "$1 spent on bioswales and street trees yields $2.83 in avoided stormwater infrastructure and local real estate appreciation",
     "vpd": 2.83,
@@ -443,7 +443,7 @@
     "takeaway",
     "geography"
    ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified.",
+   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: uli.org returns 403.",
    "removed_unverified_claims": {
     "impact": "$115M public investment catalyzed $2.2B in private development (+103% residential property valuation surge within 3 blocks)",
     "vpd": 4.8,
@@ -498,34 +498,27 @@
  {
   "id": "hist_003",
   "category": "Historical Capital Projects & Tax Reinvestment",
-  "title": "Indianapolis Cultural Trail: A Legacy of Gene & Marilyn Glick — Assessment of Economic Impact",
-  "authors": "IU Public Policy Institute (Drew Klacik et al.)",
+  "title": "Assessment of the Impact of the Indianapolis Cultural Trail: A Legacy of Gene and Marilyn Glick",
+  "authors": "Indiana University Public Policy Institute",
   "year": 2015,
-  "journal": "Indiana University Public Policy Institute Monograph",
+  "journal": "IU Public Policy Institute report",
   "doi": null,
   "source_url": "https://indyculturaltrail.org/economic-impact/",
-  "impact": null,
+  "impact": "Property assessments within approximately one block of the eight mile Trail have increased 148% since 2008, an increase of $1 billion in assessed property value (before-after change; not a causal estimate).",
   "geography": null,
   "vpd": null,
   "takeaway": null,
-  "citation": "Klacik, D., et al. (2015). Assessment of the Economic Impact of the Indianapolis Cultural Trail. IU Public Policy Institute, Issue 15-C03.",
+  "citation": "IU Public Policy Institute (2015). Assessment of the Impact of the Indianapolis Cultural Trail: A Legacy of Gene and Marilyn Glick.",
   "verification": {
-   "status": "could_not_check",
-   "method": "publisher_page_fetch_failed",
+   "status": "partially_verified",
+   "method": "Fetched the Indianapolis Cultural Trail's release announcing the report (23 Jul 2015).",
    "checked_on": "2026-11-16",
-   "evidence": "connection failed (indyculturaltrail.org)",
+   "evidence": "\"The report found that property assessments within approximately one block of the eight mile Trail have increased 148% since 2008, an increase of $1 billion in assessed property value.\"",
    "unverified_fields": [
-    "title",
-    "authors",
-    "year",
-    "journal",
-    "source_url",
-    "impact",
-    "vpd",
-    "takeaway",
-    "geography"
+    "authors (individual names)",
+    "impact (causal share)"
    ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified.",
+   "notes": "The report itself was not fetched; the figure is quoted from the publisher's announcement. It measures change near the trail, not the change caused by it. The earlier claims ('+1,600% ROI', '11,000+ jobs', '48% retail foot traffic growth') appear nowhere in the source and stay removed.",
    "removed_unverified_claims": {
     "impact": "$63M project generated a +$1.01B increase in assessed property values (+1,600% ROI), 11,000+ jobs, and 48% retail foot traffic growth",
     "vpd": 3.9,
@@ -565,7 +558,7 @@
     "takeaway",
     "geography"
    ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified.",
+   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: dura-denver.org: proxy 502.",
    "removed_unverified_claims": {
     "impact": "$500M public transit investment unlocked $3.8B in surrounding private transit-oriented development and $2.1B in new property tax base",
     "vpd": 4.4,
@@ -590,7 +583,7 @@
   "takeaway": null,
   "citation": "City of Portland (2019). Portland Streetcar: 20 Years of Economic Development and Transit Integration. PBOT Report, Portland, OR.",
   "verification": {
-   "status": "could_not_check",
+   "status": "unverified",
    "method": "publisher_page_fetch_failed",
    "checked_on": "2026-11-16",
    "evidence": "HTTP 404 (portland.gov)",
@@ -605,7 +598,7 @@
     "takeaway",
     "geography"
    ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified.",
+   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: Cited portland.gov URL returns 404; prosperportland.us alternate also 404. source link broken as of 2026-11-16: https://www.portland.gov/bps/planning/central-city/south-waterfront returns 404; no new address found.",
    "removed_unverified_claims": {
     "impact": "$103M municipal streetcar investment catalyzed $4.5B in real estate development along the alignment (43:1 private-to-public investment ratio)",
     "vpd": 4.3,
@@ -672,7 +665,7 @@
   "takeaway": null,
   "citation": "Downtown Austin Alliance (2021). The Economic Value of Waller Creek Tunnel and Parkland Transformation. Austin, TX.",
   "verification": {
-   "status": "could_not_check",
+   "status": "unverified",
    "method": "publisher_page_fetch_failed",
    "checked_on": "2026-11-16",
    "evidence": "HTTP 404 (waterloogreenway.org)",
@@ -687,7 +680,7 @@
     "takeaway",
     "geography"
    ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified.",
+   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: Cited URL returns 404; waterloogreenway.org home page reachable but shows no economic-impact figures. source link broken as of 2026-11-16: https://waterloogreenway.org/about/waterloo-greenway-economic-impact/ returns 404; no new address found.",
    "removed_unverified_claims": {
     "impact": "$174M flood tunnel removed 28 acres from the 100-year floodplain, unlocking $1.1B in new commercial/residential development and $48M/yr in tax revenue",
     "vpd": 3.5,
@@ -712,7 +705,7 @@
   "takeaway": null,
   "citation": "Greater OKC Chamber (2023). Thirty Years of MAPS: The Transformation of Oklahoma City. Economic Impact Study.",
   "verification": {
-   "status": "could_not_check",
+   "status": "unverified",
    "method": "publisher_page_fetch_failed",
    "checked_on": "2026-11-16",
    "evidence": "HTTP 403 Access Denied (okc.gov)",
@@ -727,7 +720,7 @@
     "takeaway",
     "geography"
    ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified.",
+   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: okc.gov returns 403 (cited and alternate paths). source link broken as of 2026-11-16: https://www.okc.gov/government/maps-3/maps-history returns 404; no new address found.",
    "removed_unverified_claims": {
     "impact": "$3.5B in debt-free 1-cent municipal sales tax investments generated $9.2B in private development and +280% county property tax roll growth",
     "vpd": 3.65,
@@ -740,34 +733,24 @@
  {
   "id": "hist_010",
   "category": "Historical Capital Projects & Tax Reinvestment",
-  "title": "Cleveland HealthLine Bus Rapid Transit: Capital Investment and Real Estate Multiplier",
-  "authors": "Walter Hook, Stephanie Lotshaw, & Annie Weinstock (ITDP)",
+  "title": "More Development For Your Transit Dollar: An Analysis of 21 North American Transit Corridors",
+  "authors": "Walter Hook, Stephanie Lotshaw, Annie Weinstock (ITDP)",
   "year": 2013,
-  "journal": "Institute for Transportation and Development Policy Report",
+  "journal": "Institute for Transportation and Development Policy",
   "doi": null,
-  "source_url": "https://www.itdp.org/publication/cleveland-healthline-brt/",
-  "impact": null,
+  "source_url": "https://www.itdp.org/wp-content/uploads/2013/11/More-Development-For-Your-Transit-Dollar_ITDP.pdf",
+  "impact": "Cleveland HealthLine: \"Cleveland managed to transform a modest $50 million investment in bus rapid transit into $5.8 billion in new transit-oriented development\"; \"Over $200 million in overall public funds were invested ... only $50 million of which were for the transit system.\" (Investment along the corridor, not development caused by the line.)",
   "geography": null,
   "vpd": null,
   "takeaway": null,
-  "citation": "ITDP (2013). More Development for the Dollar: How Transit-Oriented Development Drives Economic Growth. ITDP, New York, NY.",
+  "citation": "Hook, W., Lotshaw, S. & Weinstock, A. (2013). More Development For Your Transit Dollar: An Analysis of 21 North American Transit Corridors. ITDP, New York.",
   "verification": {
-   "status": "could_not_check",
-   "method": "publisher_page_fetch_failed",
+   "status": "verified",
+   "method": "Fetched and text-searched the report PDF (itdp.org).",
    "checked_on": "2026-11-16",
-   "evidence": "HTTP 404 (itdp.org)",
-   "unverified_fields": [
-    "title",
-    "authors",
-    "year",
-    "journal",
-    "source_url",
-    "impact",
-    "vpd",
-    "takeaway",
-    "geography"
-   ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified.",
+   "evidence": "\"Cleveland managed to leverage $114.54 dollars of new transit-oriented investment for every dollar it invested into the BRT system\"",
+   "unverified_fields": [],
+   "notes": "Corrected: the earlier record claimed $9.5B private investment, $200M capital cost and a 47.5:1 ratio; the report says $5.8B of TOD investment, $200M+ total public funds of which $50M was transit. The report attributes investment along the corridor; it does not isolate what the BRT caused.",
    "removed_unverified_claims": {
     "impact": "$200M capital investment generated $9.5B in private medical, commercial, and residential investment along Euclid Ave ($48 per $1 spent)",
     "vpd": 4.5,
@@ -825,31 +808,23 @@
   "title": "Measuring the Economic Value of a City Park System",
   "authors": "Peter Harnik, Ben Welle, et al. (Trust for Public Land)",
   "year": 2009,
-  "journal": "Trust for Public Land Center for City Park Excellence",
+  "journal": "The Trust for Public Land, Center for City Park Excellence",
   "doi": null,
   "source_url": "https://www.tpl.org/measuring-economic-value-city-park-system",
-  "impact": null,
+  "impact": "Method report: values a park system by seven attributes (property value, tourism, direct use, health, community cohesion, clean water, clean air); no single effect size.",
   "geography": null,
   "vpd": null,
   "takeaway": null,
   "citation": "Harnik, P. & Welle, B. (2009). Measuring the Economic Value of a City Park System. Trust for Public Land, Washington, DC.",
   "verification": {
-   "status": "could_not_check",
-   "method": "publisher_page_fetch_failed",
+   "status": "partially_verified",
+   "method": "Fetched the publisher's page (tpl.org).",
    "checked_on": "2026-11-16",
-   "evidence": "HTTP 403 Cloudflare (tpl.org). Related real work exists: Harnik & Crompton 2014, Managing Leisure, 10.1080/13606719.2014.885713 (not substituted: different authors/year/venue)",
+   "evidence": "\"Measuring the Economic Value of a City Park System Published: April 2nd, 2009 ... determining dollar value by way of seven attributes: Property value Tourism Direct use Health Community cohesion Clean water Clean air\"",
    "unverified_fields": [
-    "title",
-    "authors",
-    "year",
-    "journal",
-    "source_url",
-    "impact",
-    "vpd",
-    "takeaway",
-    "geography"
+    "authors"
    ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified.",
+   "notes": "Title, publisher and date confirmed; authors are not named on the page. It is a method, not a measured effect.",
    "removed_unverified_claims": {
     "impact": "Municipal park systems produce hundreds of millions in property tax premiums, direct tourist spending, and clean stormwater savings",
     "vpd": 3.1,
@@ -1041,7 +1016,7 @@
   "takeaway": null,
   "citation": "CTOD & FTA (2010). Capturing the Value of Transit. Federal Transit Administration Report, Washington DC.",
   "verification": {
-   "status": "could_not_check",
+   "status": "unverified",
    "method": "publisher_page_fetch_failed",
    "checked_on": "2026-11-16",
    "evidence": "HTTP 403 Access Denied (transit.dot.gov)",
@@ -1056,7 +1031,7 @@
     "takeaway",
     "geography"
    ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified.",
+   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: transit.dot.gov 403; ctod.org alternate 404; reconnectingamerica.org unreachable. source link broken as of 2026-11-16: https://www.transit.dot.gov/research-innovation/capturing-value-transit-complete-report returns 404; no new address found.",
    "removed_unverified_claims": {
     "impact": "Properties near rail transit outperformed regional non-transit peers by 41.6% in median sale price growth during market cycles",
     "vpd": 3.4,
@@ -1164,7 +1139,7 @@
   "takeaway": null,
   "citation": "NYC DOT (2012). Measuring the Street: New Metrics for 21st Century Streets. New York City Department of Transportation.",
   "verification": {
-   "status": "could_not_check",
+   "status": "unverified",
    "method": "publisher_page_fetch_failed",
    "checked_on": "2026-11-16",
    "evidence": "HTTP 404 (nyc.gov PDF)",
@@ -1179,7 +1154,7 @@
     "takeaway",
     "geography"
    ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified.",
+   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: Cited nyc.gov URL returns 404, as do /assets/ and www1 alternates. source link broken as of 2026-11-16: https://www.nyc.gov/html/dot/downloads/pdf/2012-10-measuring-the-street.pdf returns 404; no new address found.",
    "removed_unverified_claims": {
     "impact": "+49% increase in retail sales along corridors with protected bike lanes vs +3% borough-wide; 58% reduction in pedestrian injuries",
     "vpd": 3.8,
@@ -1244,7 +1219,7 @@
   "takeaway": null,
   "citation": "Smart Growth America (2015). Safer Streets, Stronger Economies: Evaluating the Economic Benefits of Complete Streets Projects.",
   "verification": {
-   "status": "could_not_check",
+   "status": "unverified",
    "method": "publisher_page_fetch_failed",
    "checked_on": "2026-11-16",
    "evidence": "HTTP 404 (smartgrowthamerica.org)",
@@ -1259,7 +1234,7 @@
     "takeaway",
     "geography"
    ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified.",
+   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: Cited smartgrowthamerica.org URL returns 404; alternate resource path 404. source link broken as of 2026-11-16: https://smartgrowthamerica.org/resources/safer-streets-stronger-economies/ returns 404; no new address found.",
    "removed_unverified_claims": {
     "impact": "Road diets reduced vehicular collisions by 38%, boosted pedestrian volumes by 45%, and increased sales tax revenue by 12% to 28%",
     "vpd": 3.1,

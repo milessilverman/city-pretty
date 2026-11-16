@@ -114,10 +114,16 @@ function getHudFmr(fips) {
   if (!fips || !Array.isArray(HUD_FMR_DATA) || !HUD_FMR_DATA.length) return null;
   const target = String(fips).padStart(5, "0");
   const r = HUD_FMR_DATA.find(x => x.fips === target);
-  if (!r || !r.verification || r.verification.status !== "verified") return null;
+  // verified = the Federal Register's revised FY2026 values; partially_verified = HUD's map-service values whose
+  // fiscal year is HUD's own label. Both are HUD's numbers; neither is the current FY2027 (effective 2026-10-01).
+  if (!r || !r.verification || !["verified", "partially_verified"].includes(r.verification.status)) return null;
+  const revised = r.verification.status === "verified";
   return Object.assign({}, r, {
     efficiency_0br: r.zero_bed_eff,
-    source: "HUD Fair Market Rents, " + ((HUD_FMR_SOURCE && HUD_FMR_SOURCE.item_date_of_coverage) || "FY2026") + " (HUD ArcGIS service, pulled " + ((HUD_FMR_SOURCE && HUD_FMR_SOURCE.retrieved) || "") + ")",
+    source: revised
+      ? "HUD Fair Market Rents, FY2026 as revised in the Federal Register (2026-07741, effective 2026-05-21)"
+      : "HUD Fair Market Rents, FY2026 per HUD's map service (pulled " + ((HUD_FMR_SOURCE && HUD_FMR_SOURCE.retrieved) || "") + "; year not independently confirmed)",
+    currency_note: "FY2027 Fair Market Rents took effect 2026-10-01 and are not in this file yet.",
   });
 }
 
@@ -4752,7 +4758,7 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
       unconfirmedFields: s.unconfirmed_fields || [],
       statute: cite,
       rent,
-      rentSource: rent ? "HUD Fair Market Rent, 1 bedroom (a voucher payment benchmark, not a market asking rent)" : null,
+      rentSource: rent ? `${fmrRec.source}, 1 bedroom (a voucher payment benchmark, not a market asking rent). ${fmrRec.currency_note}` : null,
       rationale: `The screening engine reads ${cite} as applying to this parcel's recorded zoning (${baseZone})${facts.length ? `: ${facts.join(", ")}` : ""}${isSplit && lotSqft ? `. Lot on file: ${Number(lotSqft).toLocaleString()} sq ft` : ""}. This is unverified screening; confirm eligibility with the planning department.`,
       steps: [
         "Confirm with the city or county planning department that this law applies to this parcel.",

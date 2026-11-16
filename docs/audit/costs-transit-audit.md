@@ -61,3 +61,14 @@ Every record now has a `verification` block.
   - Separately, `tests/unit/advisorGroundingContract.test.ts` expects route 121 and a $1.68M railyard. That data never matched the file.
 - **`src/engines/transitCorridorOpportunityEngine.ts`:** arithmetic on null fields will produce NaN, and the yard selection gets an empty list.
 - **`app/app.js` around line 8048:** renders `${pipe.units} mixed-income homes` without a null check, so it will display "null". The tooltip near line 2811 already showed "undefined", because stations never had `units`.
+
+## Round 3 (16 Nov 2026, later)
+
+- **CDOT sidewalk, Walsenburg (unit_costs): verified at its new address.** The 2025 Cost Data Book moved from
+  codot.gov to CDOT's OnBase viewer (linked from codot.gov/business/eema/costdatabook). Page 417 (book p. 404), item
+  608-00000 Conc Sidewalk: "STR025A-054 I-25C NORTH OUT OF WALSENBURG 09/18/25 220.00 115.29 111.22 110.00": awarded
+  bid $110.00 per SY, matching the record.
+- Still could_not_check: TxDOT x3 (TLS failure from the build machine), Kalamazoo and Mesa x2 (403), Sarasota airport
+  shelter (403).
+- Austin–San Antonio corridor: TxDOT study link is broken (404); downgraded to unverified. Phoenix–Tucson: ADOT still
+  returns 403.

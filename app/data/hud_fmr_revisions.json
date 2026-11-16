@@ -1,0 +1,26 @@
+{
+  "_source": {
+    "document": "Federal Register 2026-07741, 91 FR 21301-21304 (21 Apr 2026): Fair Market Rents ... Fiscal Year 2026; Revised",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-04-21/html/2026-07741.htm",
+    "effective": "2026-05-21",
+    "quote": "This notice updates the FY 2026 FMRs for seven areas based on new survey data. ... The revised FY 2026 FMRs are effective on May 21, 2026.",
+    "retrieved": "2026-11-16",
+    "note": "Keys are the area names as HUD's Fair_Market_Rents ArcGIS service spells them (the notice spells some differently: 'Asheville, NC HUD Metro FMR Area', 'Napa, CA Metropolitan Statistical Area (MSA)'). HUD's service had not applied these revisions when checked on 2026-11-16."
+  },
+  "revisions": {
+    "Los Angeles-Long Beach-Glendale, CA HUD Metro FMR Area": { "notice_name": "Los Angeles-Long Beach-Glendale, CA HUD Metro FMR Area", "rent_0br": 2079, "rent_1br": 2328, "rent_2br": 2903, "rent_3br": 3681, "rent_4br": 4098 },
+    "Napa, CA MSA": { "notice_name": "Napa, CA Metropolitan Statistical Area (MSA)", "rent_0br": 2286, "rent_1br": 2526, "rent_2br": 3315, "rent_3br": 4222, "rent_4br": 4942 },
+    "San Luis Obispo-Paso Robles, CA MSA": { "notice_name": "San Luis Obispo-Paso Robles, CA MSA", "rent_0br": 1842, "rent_1br": 2036, "rent_2br": 2671, "rent_3br": 3584, "rent_4br": 4105 },
+    "Asheville, NC MSA": { "notice_name": "Asheville, NC HUD Metro FMR Area", "rent_0br": 1436, "rent_1br": 1674, "rent_2br": 1835, "rent_3br": 2231, "rent_4br": 3078 },
+    "Transylvania County, NC": { "notice_name": "Transylvania County, NC", "rent_0br": 1032, "rent_1br": 1039, "rent_2br": 1363, "rent_3br": 1634, "rent_4br": 2048 },
+    "Albany, OR MSA": { "notice_name": "Albany, OR MSA", "rent_0br": 1169, "rent_1br": 1396, "rent_2br": 1695, "rent_3br": 2294, "rent_4br": 2662 },
+    "Corvallis, OR MSA": { "notice_name": "Corvallis, OR MSA", "rent_0br": 1350, "rent_1br": 1451, "rent_2br": 1824, "rent_3br": 2537, "rent_4br": 2862 }
+  },
+  "superseded": {
+    "by": "FY2027 FMRs, effective 2026-10-01",
+    "document": "Federal Register 2026-17891 (1 Sep 2026)",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-09-01/html/2026-17891.htm",
+    "quote": "HUD is issuing this notice to notify the public that FY 2027 FMRs are available at https://www.huduser.gov/portal/datasets/fmr.html and will become effective on October 1, 2026.",
+    "status": "FY2027 values are published only on huduser.gov, which blocks automated download from our build machine; HUD's ArcGIS service did not have them on 2026-11-16."
+  }
+}
