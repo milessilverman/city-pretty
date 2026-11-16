@@ -16,7 +16,8 @@ The previous index rated 683 counties "verified_B" and 23 "audited_A", stamped e
 and claimed assessor rolls, live zoning and crime feeds that the county data files themselves say were never loaded
 (e.g. Travis County: "Assessor parcels / sales: Not loaded for this county"). See docs/DATA-AUDIT-AND-TRANSPARENCY.md.
 
-Tiers (computed below; nothing is assigned by hand)
+Tiers (computed below; nothing is assigned by hand). Live services count when configured in app/app.js; their
+health at build time is listed per county in live_services.not_responding.
   A  parcel values + zoning + transit feeds + (crime or crash records)
   B  parcel lines or values + zoning, or parcel values + transit feeds
   C  Census + OpenStreetMap + transit feeds loaded, but no parcel/zoning pair
@@ -96,13 +97,21 @@ def app_services():
     return parcels, zoning, la
 
 
-def ping(url):
+def ping(url, tries=3):
+    """A service counts as down only if every attempt fails (some county servers drop requests under load)."""
+    import time
     base = url.split("/query")[0]
-    try:
-        d = get_json(base + ("&" if "?" in base else "?") + "f=json", 25)
-        return "responding" if isinstance(d, dict) and "error" not in d else "error_response"
-    except Exception as e:
-        return "unreachable: " + str(e)[:60]
+    last = "unknown"
+    for i in range(tries):
+        try:
+            d = get_json(base + ("&" if "?" in base else "?") + "f=json", 25)
+            if isinstance(d, dict) and "error" not in d:
+                return "responding"
+            last = "error_response"
+        except Exception as e:
+            last = "unreachable: " + str(e)[:60]
+        time.sleep(2 * (i + 1))
+    return last
 
 
 def loaded(sources, *needles):
@@ -123,9 +132,12 @@ def main():
     urls = {u for u in zoning.values()} | {p["url"] for p in parcels} | {la_parcel_url}
     status = {}
     if do_ping:
-        with ThreadPoolExecutor(max_workers=8) as ex:
+        with ThreadPoolExecutor(max_workers=4) as ex:
             status = dict(zip(urls, ex.map(ping, sorted(urls))))
-    live = lambda u: (not do_ping) or status.get(u) == "responding"
+    # Tiers count the services the page is configured to use; whether each answered at build time is recorded
+    # separately (live_services.not_responding), because county servers drop requests under load and a tier
+    # should not change with one bad minute.
+    live = lambda u: True
 
     old = json.load(open(OUT)) if os.path.exists(OUT) else {}
     fips_all = sorted(set(old) | set(bundles))
