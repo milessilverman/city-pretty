@@ -20,10 +20,10 @@ export function renderHouseAuditAside(audit: HouseParcelAuditResult): string {
 
   const badgeText =
     im.confidenceBadge === "verified_current"
-      ? "✓ Verified Current Imagery"
+      ? "Verified Current Imagery"
       : im.confidenceBadge === "stale_imagery_permit_override"
-      ? "⚠️ Stale Imagery (Post-Construction Permit Override)"
-      : "ℹ️ No Street View (Rural / Cul-de-sac / Gated)";
+      ? "Stale Imagery (Post-Construction Permit Override)"
+      : "No Street View (Rural / Cul-de-sac / Gated)";
 
   return `
   <div class="house-audit-panel" style="font-family:system-ui,-apple-system,sans-serif;line-height:1.45;color:#1e293b;padding:12px;background:#ffffff;border-radius:8px;border:1px solid #e2e8f0;margin-top:10px;">
@@ -90,7 +90,7 @@ export function renderHouseAuditAside(audit: HouseParcelAuditResult): string {
         • <b>ADU Feasibility:</b> ${z.aduFeasible ? "<span style='color:#15803d;font-weight:700;'>By-Right Feasible</span>" : "<span style='color:#b45309;'>Discretionary HPOZ review required</span>"}
       </div>
       <div style="font-size:10.5px;color:#64748b;background:#ffffff;padding:6px;border-radius:4px;border:1px solid #e2e8f0;">
-        ℹ️ ${z.privateCovenantsDisclaimer}
+        ${z.privateCovenantsDisclaimer}
       </div>
     </div>
 
@@ -98,7 +98,7 @@ export function renderHouseAuditAside(audit: HouseParcelAuditResult): string {
     ${audit.roofCadastre ? `
     <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
       <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;">
-        <span style="font-size:11.5px;font-weight:700;color:#334155;">📐 Accurate Roof Cadastre &amp; Pitch Engineering</span>
+        <span style="font-size:11.5px;font-weight:700;color:#334155;">Accurate Roof Cadastre &amp; Pitch Engineering</span>
         <span style="font-size:11px;color:#0284c7;font-weight:600;">${audit.roofCadastre.pitchRatio} Pitch (${audit.roofCadastre.slopeAngleDeg}°)</span>
       </div>
       <div style="font-size:11px;color:#475569;margin-top:4px;">
@@ -122,7 +122,7 @@ export function renderHouseAuditAside(audit: HouseParcelAuditResult): string {
         ${sol.state_tax_credit_usd > 0 ? `• <b>State Clean Energy Credit:</b> +${fmt$(sol.state_tax_credit_usd)} direct state tax credit.<br>` : ""}
       </div>
       <div style="font-size:10.5px;color:#0284c7;background:#ffffff;padding:6px;border-radius:4px;border:1px solid #e2e8f0;margin-top:4px;">
-        ⚡ ${sol.nemTariffNotice}
+        ${sol.nemTariffNotice}
       </div>
     </div>
 
@@ -162,7 +162,7 @@ export function renderHouseAuditAside(audit: HouseParcelAuditResult): string {
         • <b>Carrying Equity Preserved:</b> ${fmt$(audit.everySpace.netEquityPreservedOverHoldUsd)} in holding deficits eliminated.
       </div>
       <div style="font-size:10.5px;color:#0369a1;background:#f0f9ff;padding:6px;border-radius:4px;border:1px solid #bae6fd;margin-top:6px;">
-        ℹ️ ${audit.everySpace.holdingStrategyRecommendation}
+        ${audit.everySpace.holdingStrategyRecommendation}
       </div>
     </div>` : ""}
 

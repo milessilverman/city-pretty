@@ -2257,7 +2257,7 @@ function renderHouseAuditAside(audit) {
         • <b>Carrying Equity Preserved:</b> ${fmt$(audit.everySpace.netEquityPreservedOverHoldUsd)} in holding deficits eliminated.
       </div>
       <div style="font-size:10.5px;color:#0369a1;background:#f0f9ff;padding:6px;border-radius:4px;border:1px solid #bae6fd;margin-top:6px;">
-        ℹ️ ${audit.everySpace.holdingStrategyRecommendation}
+        ${audit.everySpace.holdingStrategyRecommendation}
       </div>
     </div>` : ""}
 
