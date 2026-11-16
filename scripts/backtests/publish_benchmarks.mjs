@@ -9,6 +9,13 @@ import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const BENCH = path.join(ROOT, "app/data/valuation_backtest_benchmarks.json");
 const MODELS = path.join(ROOT, "app/data/county_valuation_models.json");
+// Which parcel attributes the page supplies for each model input, per county (only counties whose model can run on
+// the page). DC: the page's parcel layer gives the SSL; app.js then reads the residential CAMA record by SSL and
+// attaches CAMA_* fields (enrichDcCama). Same fields the back-test used (scripts/backtests/pull_dc.py).
+const INPUT_MAPS = {
+  "11001": { sqft: "CAMA_GBA", lot: "CAMA_LANDAREA", yb: "CAMA_AYB", beds: "CAMA_BEDRM", baths: "CAMA_BATHRM", half_baths: "CAMA_HF_BATHRM",
+             source: "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Property_and_Land_WebMercator/MapServer/25 (RESIDENTIAL (CAMA)), by SSL" },
+};
 const bench = JSON.parse(fs.readFileSync(BENCH, "utf8"));
 const models = fs.existsSync(MODELS) ? JSON.parse(fs.readFileSync(MODELS, "utf8")) : { _source: "scripts/backtests/publish_benchmarks.mjs; one entry per county whose model passed its back-test", counties: {} };
 
@@ -39,8 +46,9 @@ for (const fips of process.argv.slice(2)) {
     leakage: { test_homes_in_their_own_statistics: t.test_homes_in_their_own_statistics, test_rows_with_assessor_value_set_after_sale_excluded: t.test_rows_with_assessor_value_set_after_sale },
     verification: { status: "verified", method: "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.", checked_on: t.run_on.slice(0, 10), evidence: file },
   };
-  if (t.gate && t.gate.pass) models.counties[fips] = { county_name: t.county_name, tested: { mdape: t.model.mdape, n: t.model.n, share_within_20pct: t.model.share_within_20pct, by_price_band: t.by_price_band, run_on: t.run_on.slice(0, 10) }, model: t.page_model, stats: t.page_stats, input_map: t.input_map || null };
+  if (t.gate && t.gate.pass) models.counties[fips] = { county_name: t.county_name, tested: { mdape: t.model.mdape, n: t.model.n, share_within_20pct: t.model.share_within_20pct, by_price_band: t.by_price_band, run_on: t.run_on.slice(0, 10) }, model: t.page_model, stats: t.page_stats, input_map: INPUT_MAPS[fips] || null };
   else delete models.counties[fips];
+  if (t.gate && t.gate.pass && !INPUT_MAPS[fips]) console.log(`  ${fips}: passed, but the page has no input map, so it will still withhold (inputs not available on the page)`);
   console.log(`${fips} ${t.county_name}: ${t.gate.pass ? "PASS" : "FAIL"} (${(t.model.mdape * 100).toFixed(1)}%)`);
 }
 fs.writeFileSync(BENCH, JSON.stringify(bench, null, 1));

@@ -12,7 +12,7 @@ const CP_DATA_FILES = {
   "valuation-benchmarks": "valuation_backtest_benchmarks.json", "underused-sites": "underused_sites.json",
   "intercity-corridors": "intercity_transit_corridors.json", "county-completeness": "county_completeness.json",
   "ca-counties-registry": "ca_counties_registry.json", "intervention-verification": "intervention_verification.json", "upgrade-verification": "upgrade_verification.json",
-  "la-neighborhood-values": "la_neighborhood_values.json"
+  "la-neighborhood-values": "la_neighborhood_values.json", "county-valuation-models": "county_valuation_models.json"
 };
 const _cpData = {};
 function cpText(id) {
@@ -44,6 +44,7 @@ let HUD_FMR_SOURCE = null;
 let VALUATION_BACKTEST_BENCHMARKS = {};
 // Traceable LA block-group values and the tested LA home-value model (scripts/build_la_neighborhood_values.mjs).
 let LA_NEIGHBORHOOD_VALUES = null;
+let COUNTY_VALUATION_MODELS = null;   // models that passed a recorded-sales back-test (scripts/backtests/publish_benchmarks.mjs)
 let UNDERUSED_SITES_DATA = [];
 let INTERCITY_CORRIDORS_DATA = [];
 
@@ -83,6 +84,7 @@ function loadVerifiedDataFiles() {
     if (d && Array.isArray(d.records)) { HUD_FMR_DATA = d.records; HUD_FMR_SOURCE = d._source || null; }
   });
   cpJson("valuation-benchmarks").then(d => { if (d && typeof d === "object") VALUATION_BACKTEST_BENCHMARKS = d; });
+  cpJson("county-valuation-models").then(d => { if (d && d.counties) COUNTY_VALUATION_MODELS = d; });
   cpJson("la-neighborhood-values").then(d => {
     if (d && d.bg && d.model) { LA_NEIGHBORHOOD_VALUES = d; if (typeof applyLaNeighborhoodValuesToOpenChunks === "function") applyLaNeighborhoodValuesToOpenChunks(); }
   });
@@ -545,7 +547,7 @@ function backtestPct(x) { return x == null ? "?" : (Math.round(x * 1000) / 10).t
 function backtestSummary(bt) {
   if (!bt || !bt.model || bt.model.mdape == null) return null;
   const base = bt.baseline_neighborhood_median;
-  return `In a test on ${bt.model.n.toLocaleString()} recent ${bt.countyName} home transfers (${bt.run_on}), the estimate was off by a median of ${backtestPct(bt.model.mdape)}` +
+  return `In a test on ${bt.model.n.toLocaleString()} recent ${bt.countyName} ${/^county_sales_/.test(bt.model_name || "") ? "recorded home sales" : "home transfers"} (${bt.run_on}), the estimate was off by a median of ${backtestPct(bt.model.mdape)}` +
     (base && base.mdape != null ? `; the neighborhood's typical value alone was off by ${backtestPct(base.mdape)}.` : ".");
 }
 
@@ -608,6 +610,52 @@ function publishLaValuation(v, bt, ctx) {
   });
 }
 
+// ---- Counties whose model passed a recorded-sales back-test (scripts/county_valuation_models.mjs). Must match
+// features("regression", ...) in scripts/lib/countyValuationModels.mjs exactly (tests/unit/countyValuation.test.ts).
+function countyModelEstimate(fips, a, bg) {
+  const C = COUNTY_VALUATION_MODELS && COUNTY_VALUATION_MODELS.counties && COUNTY_VALUATION_MODELS.counties[fips];
+  if (!C) return { value: null, reason: "The tested model's data has not loaded." };
+  const M = C.input_map || {};
+  a = a || {};
+  const g = (k) => (M[k] && a[M[k]] != null && a[M[k]] !== "" ? +a[M[k]] : null);
+  const sqft = g("sqft"), lot = g("lot"), yb = g("yb"), beds = g("beds");
+  const baths = g("baths") == null ? null : g("baths") + 0.5 * (g("half_baths") || 0);
+  // (null >= 0 is true in JavaScript, so each input is checked for null explicitly)
+  const ok = (x, test) => x != null && Number.isFinite(x) && test(x);
+  const missing = [!ok(sqft, (x) => x >= 400) && "living area", !ok(lot, (x) => x > 0) && "land area", !ok(yb, (x) => x > 1700) && "year built",
+    !ok(beds, (x) => x >= 0) && "bedrooms", !ok(baths, (x) => x >= 0) && "bathrooms"].filter(Boolean);
+  if (missing.length) return { value: null, reason: `The tested model needs the ${missing.join(", ")}, which ${missing.length > 1 ? "are" : "is"} not on file for this parcel.` };
+  const b = bg && C.stats.bg[bg], t = bg && C.stats.tract[String(bg).slice(0, 11)];
+  const n = b && b[0] >= 5 ? { level: "block group", n: b[0], median: b[1], ppsf: b[2], d0: b[3], d1: b[4] } : t && t[0] >= 5 ? { level: "tract", n: t[0], median: t[1], ppsf: t[2], d0: t[3], d1: t[4] } : null;
+  if (!n) return { value: null, reason: "Too few recorded sales nearby to anchor the tested model." };
+  if (C.model.spec !== "regression" || !Array.isArray(C.model.coef) || C.model.coef.length !== 9) return { value: null, reason: "The tested model's coefficients don't match its inputs." };
+  const x = [1, Math.log(n.ppsf), Math.log(n.median), Math.log(sqft), Math.log(Math.min(Math.max(lot, 500), 200000)), (2026 - yb) / 100, Math.min(beds, 8), Math.min(baths, 8), n.level === "tract" ? 1 : 0];
+  const v = Math.exp(x.reduce((s2, xi, i) => s2 + xi * C.model.coef[i], 0));
+  return { value: Math.round(v / 1000) * 1000, raw: v, neighborhood: n, tested: C.tested };
+}
+function publishCountyValuation(v, bt, ctx, fips) {
+  ctx = ctx || {};
+  const info = { summary: backtestSummary(bt), mdape: bt.model.mdape, n: bt.model.n, pass: true, run_on: bt.run_on, sample_file: bt.sample_file };
+  const base = Object.assign({}, v, { backtest: info, valueLow: null, valueHigh: null, confidenceMarginPct: null });
+  const per = (val) => (val && v && v.livingSqft ? Math.round(val / v.livingSqft) : null);
+  const saleYear = ctx.sale && ctx.sale.price > 0 ? +String(ctx.sale.date || "").replace(/\D/g, "").slice(0, 4) || 0 : 0;
+  if (saleYear >= VALUATION_CURRENT_YEAR - 1) {
+    return Object.assign(base, { estimatedValue: Math.round(ctx.sale.price), vpsf: per(ctx.sale.price), valuationMethod: `Recorded sale (${saleYear})`,
+      confidenceRating: `Recorded sale price, ${saleYear}`, withheldReason: null });
+  }
+  const e = countyModelEstimate(fips, ctx.attributes, ctx.bg);
+  if (!e.value) return Object.assign(base, { estimatedValue: null, vpsf: null, confidenceRating: "Withheld — not enough on file for the tested model", withheldReason: `No estimate: ${e.reason}` });
+  const band = priceBandOf(e.value), bm = bt.by_price_band && bt.by_price_band[band];
+  const bandNote = bm && bm.mdape != null && bm.mdape > bt.model.mdape + 0.02 ? ` For homes ${band === "under $500k" ? "under $500k" : band === "$2M and up" ? "of $2M and up" : "in the " + band + " range"} the test error was larger: ${backtestPct(bm.mdape)}.` : "";
+  return Object.assign(base, {
+    estimatedValue: e.value, vpsf: per(e.value),
+    valuationMethod: `${bt.countyName} model on ${e.neighborhood.level} sales ${String(e.neighborhood.d0).slice(0, 4)}–${String(e.neighborhood.d1).slice(0, 4)} (back-tested)`,
+    confidenceRating: `Back-tested estimate: off by a median of ${backtestPct(bt.model.mdape)} on ${bt.model.n.toLocaleString("en-US")} ${bt.countyName} sales (${bt.split.test[0]} to ${bt.split.test[1]}; ${backtestPct(bt.model.share_within_20pct)} within 20%).${bandNote} Not an appraisal.`,
+    withheldReason: null,
+  });
+}
+function priceBandOf(v) { return v < 500000 ? "under $500k" : v < 1000000 ? "$500k-$1M" : v < 2000000 ? "$1M-$2M" : "$2M and up"; }
+
 // No back-test in this county: the generic estimate is never shown (in Los Angeles the same kind of model did worse
 // than the neighborhood value alone). The closest sourced figures are named instead: a recent recorded sale, a recent
 // Prop 13 base-year value, or the block group's Census ACS median home value (owner-reported, 5-year estimate).
@@ -644,9 +692,16 @@ function publishValuation(v, fips, context) {
     return Object.assign({}, v, { estimatedValue: null, vpsf: null, backtest: null, confidenceRating: "Withheld — the tested LA model is still loading",
       withheldReason: "No estimate yet: the tested Los Angeles model's data is still loading." });
   }
+  if (/^county_sales_/.test(bt.model_name || "")) {
+    // The pass belongs to that county's tested model; the generic estimate in `v` is never shown under it.
+    if (bt.gate && bt.gate.pass && COUNTY_VALUATION_MODELS && COUNTY_VALUATION_MODELS.counties && COUNTY_VALUATION_MODELS.counties[String(fips).padStart(5, "0")])
+      return publishCountyValuation(v, bt, context, String(fips).padStart(5, "0"));
+    if (bt.gate && bt.gate.pass) return Object.assign({}, v, { estimatedValue: null, vpsf: null, backtest: null, confidenceRating: "Withheld — the tested model is still loading",
+      withheldReason: "No estimate yet: this county's tested model is still loading." });
+  }
   const summary = backtestSummary(bt);
   const info = { summary, mdape: bt.model.mdape, n: bt.model.n, pass: !!(bt.gate && bt.gate.pass), run_on: bt.run_on, sample_file: bt.sample_file };
-  if (info.pass) {
+  if (info.pass && !/^county_sales_/.test(bt.model_name || "")) {
     return Object.assign({}, v, { backtest: info, confidenceRating: v.estimatedValue ? `Back-tested: median error ${backtestPct(bt.model.mdape)} (${bt.model.n.toLocaleString()} transfers)` : v.confidenceRating });
   }
   if (!v.estimatedValue) return Object.assign({}, v, { backtest: info });
@@ -4006,15 +4061,41 @@ async function fetchParcel(ll) {
       f: "json"
     };
     try {
-      const d = await arcQuery(svc.url, params, 5000);
+      // Ask for the parcel that contains the point first. The envelope query below returns at most 5 parcels, and on
+      // a block of row houses the clicked one is often not among them (found 16 Nov 2026 in Washington, DC).
+      let d = await arcQuery(svc.url, Object.assign({}, params, { geometry: `${ll.lng.toFixed(7)},${ll.lat.toFixed(7)}`, geometryType: "esriGeometryPoint" }), 5000).catch(() => null);
+      if (!(d && d.features && d.features.some(f => f.geometry && f.geometry.rings && ringsContain(f.geometry.rings, ll)))) d = await arcQuery(svc.url, params, 5000);
       if (d && d.features && d.features.length) {
         const feat = d.features.find(f => f.geometry && f.geometry.rings && ringsContain(f.geometry.rings, ll));
-        if (feat) return normalizeParcelFeature(feat, ll, svc);
+        if (feat) {
+          const parcel = normalizeParcelFeature(feat, ll, svc);
+          if (parcel && fips === "11001") await enrichDcCama(parcel, feat.attributes && feat.attributes.SSL);
+          return parcel;
+        }
       }
     } catch(e) {}
   }
 
   return null;
+}
+
+// District of Columbia: the parcel layer gives the SSL; the back-tested DC model also needs the residential CAMA
+// record (living area, land area, year built, bedrooms, bathrooms). Read it by SSL from the same OTR service the
+// back-test used (scripts/backtests/pull_dc.py). If it can't be read, the inputs stay missing and no estimate is shown.
+async function enrichDcCama(parcel, ssl) {
+  if (!parcel || !parcel.attributes || !ssl) return;
+  try {
+    const d = await arcQuery("https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Property_and_Land_WebMercator/MapServer/25",
+      { where: `SSL='${String(ssl).replace(/'/g, "''")}' AND BLDG_NUM=1`, outFields: "SSL,GBA,LANDAREA,AYB,BEDRM,BATHRM,HF_BATHRM,NUM_UNITS,PRICE,SALEDATE,QUALIFIED", returnGeometry: "false", f: "json" }, 5000);
+    const r = d && d.features && d.features[0] && d.features[0].attributes;
+    if (!r) return;
+    Object.assign(parcel.attributes, { CAMA_GBA: r.GBA, CAMA_LANDAREA: r.LANDAREA, CAMA_AYB: r.AYB, CAMA_BEDRM: r.BEDRM, CAMA_BATHRM: r.BATHRM,
+      CAMA_HF_BATHRM: r.HF_BATHRM, CAMA_NUM_UNITS: r.NUM_UNITS, CAMA_SOURCE: "DC Office of Tax and Revenue CAMA (residential)" });
+    if (r.QUALIFIED === "Q" && r.PRICE > 0 && r.SALEDATE) {
+      const dt = new Date(r.SALEDATE);
+      Object.assign(parcel.attributes, { LastSalePrice: r.PRICE, LastSaleDate: `${dt.getUTCFullYear()}${String(dt.getUTCMonth() + 1).padStart(2, "0")}${String(dt.getUTCDate()).padStart(2, "0")}` });
+    }
+  } catch (e) { /* inputs stay missing; the estimate is withheld with the reason */ }
 }
 function ringAreaM2(ring) {
   // planar area after projecting lon/lat to meters around the ring (accurate at parcel scale)
@@ -4901,7 +4982,9 @@ function renderHouse(box, a, lot, ll, st) {
     stateCode: typeof activeState === "function" ? activeState() : null,
     facts: F,
     salesInfo: sale
-  }), typeof activeFips === "function" ? activeFips() : null, { neighborhoodHv: +baseNeighborhoodHv || null, rollBaseYear: rollBaseYear, rollTotal: totalRoll, sale, attributes: a, lot, bg: selected }) : null;
+  }), typeof activeFips === "function" ? activeFips() : null, { neighborhoodHv: +baseNeighborhoodHv || null, rollBaseYear: rollBaseYear, rollTotal: totalRoll, sale, attributes: a, lot,
+    // the block group containing the house itself (the selected one is only a fallback)
+    bg: (() => { try { const f = ll && allFeatures().find(f2 => pointInFeature(f2, ll.lng, ll.lat)); return (f && f.properties.id) || selected; } catch (e) { return selected; } })() }) : null;
 
   const houseHv = valuation ? valuation.estimatedValue : null;
   const houseVpsf = valuation ? valuation.vpsf : (houseHv && livingSqft ? Math.round(houseHv / livingSqft) : null);

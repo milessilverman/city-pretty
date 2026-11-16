@@ -33,6 +33,29 @@ describe("leakage rules", () => {
   });
 });
 
+describe("page models for passing counties", () => {
+  const models = JSON.parse(fs.readFileSync(path.join(root, "app/data/county_valuation_models.json"), "utf8"));
+  for (const [fips, C] of Object.entries(models.counties) as [string, any][]) {
+    it(`${fips}: only a passing county has a page model, and the page's rounded neighborhood figures barely move the estimate`, () => {
+      expect(bench.counties[fips].gate.pass).toBe(true);
+      expect(C.input_map).toBeTruthy();
+      const c = cfg[fips];
+      const data = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root, c.sales_file))).toString());
+      const inWin = (r: any, [a, b]: string[]) => r.date >= a && r.date <= b;
+      const test = data.rows.filter((r: any) => inWin(r, c.test));
+      const ids = new Set(test.map((r: any) => r.id));
+      const prior = data.rows.filter((r: any) => r.date < c.test[0] && (inWin(r, c.fit) || inWin(r, c.dev)) && !ids.has(r.id));
+      const exact = predictor(C.model, neighborhoodStats(prior));
+      const toMap = (o: any) => new Map(Object.entries(o).map(([k, v]: any) => [k, { n: v[0], median: v[1], ppsf: v[2], d0: v[3], d1: v[4], ids: new Set() }]));
+      const rounded = predictor(C.model, { bg: toMap(C.stats.bg), tract: toMap(C.stats.tract) });
+      let worst = 0, n = 0;
+      for (const r of test) { const a = exact(r), b = rounded(r); if (a && b) { worst = Math.max(worst, Math.abs(b / a - 1)); n++; } }
+      expect(n).toBeGreaterThan(500);
+      expect(worst).toBeLessThan(0.002);
+    });
+  }
+});
+
 describe("published county back-tests reproduce from their committed sales files", () => {
   for (const [fips, c] of Object.entries(cfg) as [string, any][]) {
     const resultFile = path.join(root, `data/backtests/county_model_test_${fips}.json`);

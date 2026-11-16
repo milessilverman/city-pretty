@@ -106,6 +106,44 @@ Caveats: base-year resets remain a proxy for sales; only single-family homes wer
 from 2022–26, one year fresher than the tested configuration. Not fixed yet: the LA improvement estimates in the county
 data file were computed from the old typical values and have not been recomputed.
 
+**Outside California (16 Nov): no estimate without a back-test, and three counties tested on recorded sales.**
+
+*Policy.* In every county without a passing back-test the page shows **no** model estimate. It says no back-test
+against recorded sales exists and names the closest sourced figure instead: a recent recorded sale, or the block
+group's Census ACS median home value (owner-reported, with its vintage). The reason: in LA the same kind of generic
+estimate did worse than the neighborhood value alone.
+
+*Protocol* (same as LA; `scripts/county_valuation_models.mjs`): candidates are developed on older sales and compared on
+a development window. The chosen model is locked in a commit, then scored **once** on the latest months; the script
+refuses to run the final test twice. No scored home is in its own neighborhood statistics (its own earlier sales are
+removed too). An assessor value is used for a scored sale only if it was set before the sale. Every sales file, result
+and lock is committed; `tests/unit/countyValuation.test.ts` re-runs each final test and checks it matches.
+
+| County | Sales (arm's-length screen) | Test window | Locked model | Test median error | Neighborhood median | Result |
+|---|---|---|---|---|---|---|
+| **District of Columbia** | 9,254 (OTR CAMA, `QUALIFIED = 'Q'`, one dwelling) | May–Oct 2026, 1,534 sales | regression | **10.7%** (76% within 20%, bias +0.8%) | 17.9% | **Pass: shown** |
+| Philadelphia | 38,011 (OPA sale + transfer-tax `DEED` record, one property, no shared surname) | May–Jul 2026, 2,811 | regression + city's 2026 market value | 18.7% | 23.2% | Fail: withheld |
+| Cook County, IL | 108,284 (Assessor's own sale screens; `char_use` Single-Family) | Apr–Aug 2026, 7,909 | regression | 18.6% (bias −11%) | 22.0% | Fail: withheld |
+
+DC's error by price band: $500k–$1M 9.1%, $1M–$2M 10.3%, under $500k 13.9%, $2M and up 14.2%. The DC page reads each
+parcel's residential CAMA record by SSL for the model's inputs, the same fields the test used. A browser test checks
+that the page computes exactly the tested model (to 1e-9 on 120 test sales). In Philadelphia the city's own market
+value scaled to sale prices was off by 18.1%.
+
+Caveats:
+- DC's `QUALIFIED` flag isn't defined in the layer metadata.
+- DC's and Cook's assessed values aren't used: their valuation date can't be shown to predate the sales.
+- Recording lags shorten the test windows.
+
+Not tested yet:
+- **Florida.** The statewide parcel service rejects queries after about 26,000 rows for one county, and the
+  qualification-code meaning couldn't be pinned down. Florida's rule (12D-8.011) lists "00. Sales which are qualified;
+  01. ... disqualified", while the state data file appears to use different codes.
+- **New York City, King County and Allegheny County.** Their sources are reachable but weren't pulled in this round.
+
+Also fixed: parcel lookup used a 5-result box search, so on blocks of row houses the clicked parcel was often missed.
+It now asks for the parcel containing the point first.
+
 ### The improvement catalog (what the map recommends)
 
 Audited 16 Nov (`audit/bundle-catalog-audit.md`). The catalog of 81 improvements inside the county data files drives

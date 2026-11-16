@@ -417,3 +417,41 @@ test("a sourced-effect override rescales the value and shows its citation (stree
   expect(res.html).toContain("Pope &amp; Pope");
   expect(errors).toEqual([]);
 });
+
+test("DC: the page computes exactly the back-tested model, and shows its tested error", async ({ page }) => {
+  const fs = require("fs"), path = require("path"), zlib = require("zlib");
+  const root = path.join(__dirname, "../..");
+  const cfg = JSON.parse(fs.readFileSync(path.join(root, "scripts/backtests/county_config.json"), "utf8"))["11001"];
+  const data = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root, cfg.sales_file))).toString());
+  const rows = data.rows.filter((r: any) => r.date >= cfg.test[0] && r.date <= cfg.test[1]).slice(0, 120);
+  // @ts-ignore plain ES module
+  const M = await import("../../scripts/lib/countyValuationModels.mjs");
+  const C = JSON.parse(fs.readFileSync(path.join(root, "app/data/county_valuation_models.json"), "utf8")).counties["11001"];
+  const toMap = (o: any) => new Map(Object.entries(o).map(([k, v]: any) => [k, { n: v[0], median: v[1], ppsf: v[2], d0: v[3], d1: v[4], ids: new Set() }]));
+  const p = M.predictor(C.model, { bg: toMap(C.stats.bg), tract: toMap(C.stats.tract) });
+  const expected = rows.map((r: any) => p(r));
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { try { return !!(0, eval)("COUNTY_VALUATION_MODELS") && !!(0, eval)("VALUATION_BACKTEST_BENCHMARKS"); } catch { return false; } }, null, { timeout: 30_000 });
+  const attrs = (r: any) => ({ CAMA_GBA: r.sqft, CAMA_LANDAREA: r.lot, CAMA_AYB: r.yb, CAMA_BEDRM: r.beds, CAMA_BATHRM: Math.floor(r.baths), CAMA_HF_BATHRM: (r.baths % 1) ? 1 : 0 });
+  const got = await page.evaluate((rs: any[]) => rs.map((x) => {
+    const e = (0, eval)("countyModelEstimate")("11001", x.a, x.bg);
+    return e.raw || null;
+  }), rows.map((r: any) => ({ a: attrs(r), bg: r.bg })));
+  let compared = 0;
+  rows.forEach((r: any, i: number) => {
+    if (expected[i] == null) { expect(got[i]).toBeNull(); return; }
+    expect(Math.abs(got[i] / expected[i] - 1)).toBeLessThan(1e-9);
+    compared++;
+  });
+  expect(compared).toBeGreaterThan(80);
+  // published wording: the estimate carries its tested error
+  const shown = await page.evaluate((x: any) => (window as any).publishValuation({ estimatedValue: 1, livingSqft: x.sqft }, "11001", { attributes: x.a, bg: x.bg }),
+    { a: attrs(rows[0]), bg: rows[0].bg, sqft: rows[0].sqft });
+  expect(shown.estimatedValue).toBeGreaterThan(10000);
+  expect(shown.confidenceRating).toMatch(/^Back-tested estimate: off by a median of 10\.7% on [\d,]+ District of Columbia sales/);
+  // Cook County failed its back-test: withheld with its numbers
+  const cook = await page.evaluate(() => (window as any).publishValuation({ estimatedValue: 300000 }, "17031", {}));
+  expect(cook.estimatedValue).toBeNull();
+  expect(cook.withheldReason).toContain("18.6%");
+  expect(errors).toEqual([]);
+});
