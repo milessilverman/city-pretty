@@ -66,16 +66,27 @@ def main():
         for x in get("8h5j-fqxa", {"$where": f"borough='{chunk[0][0]}' AND ({cond})", "$select": "document_id,block,lot", "$limit": 50000}):
             docs_for[f"{chunk[0][0]}{int(x['block']):05d}{int(x['lot']):04d}"].add(x["document_id"])
     all_docs = sorted({d for s in docs_for.values() for d in s})
-    print(f"{len(all_docs)} documents on these lots", file=sys.stderr)
+    all_set = set(all_docs)
+    print(f"{len(all_docs)} documents on these lots", file=sys.stderr, flush=True)
 
-    # 2. master, deeds only, recorded on or after a month before the window
+    # 2. master: every DEED-type document citywide (recorded_borough is where it was recorded, mostly 1, not the lot's borough) dated from 40 days before to 10 days after the window, paged
+    # (one pass over a few tens of thousands of rows, instead of per-document lookups), then kept if on one of our lots.
     master = {}
     lo = (datetime.fromisoformat(t0) - timedelta(days=40)).date().isoformat()
-    for i in range(0, len(all_docs), 150):
-        ids = ",".join(f"'{d}'" for d in all_docs[i:i + 150])
-        for m in get("bnx9-e6tj", {"$where": f"document_id in ({ids}) AND starts_with(doc_type,'DEED') AND document_date >= '{lo}'",
-                                   "$select": "document_id,doc_type,document_date,document_amt,percent_trans,recorded_datetime", "$limit": 50000}):
-            master[m["document_id"]] = m
+    hi = (datetime.fromisoformat(t1) + timedelta(days=10)).date().isoformat()
+    boro = bbls[0][0]
+    off = 0
+    while True:
+        page = get("bnx9-e6tj", {"$where": f"starts_with(doc_type,'DEED') AND document_date between '{lo}' and '{hi}'",
+                                 "$select": "document_id,doc_type,document_date,document_amt,percent_trans,recorded_datetime",
+                                 "$order": "document_id", "$limit": 50000, "$offset": off})
+        for m in page:
+            if m["document_id"] in all_set:
+                master[m["document_id"]] = m
+        print(f"  master page at {off}: {len(page)} rows, {len(master)} on our lots", file=sys.stderr, flush=True)
+        if len(page) < 50000:
+            break
+        off += 50000
 
     # 3. parties for matched deeds
     parties = defaultdict(lambda: {"1": [], "2": []})
