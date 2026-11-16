@@ -196,16 +196,21 @@ DC fast charger within 25 m in 116 and 111 of 120. Problems found and fixed:
 - **School distances stopped at the county line** (e.g. 9.3 km shown in Travis County where the nearest school, in the
   next county, is 5.7 km). Fixed in the pipeline; shipped files keep the old distances until rebuilt. Library and
   clinic distances likely share the bug (not checked).
-- **Tree canopy** comes from the 2021 Tree Equity release on 2010 block groups but was labeled "current". Relabeled; a
-  2025 release exists.
+- **Tree canopy** came from the 2021 Tree Equity release on 2010 block groups but was labeled "current". The page now
+  uses American Forests' current release on 2020 block groups for the canopy gap in all 639 counties with data files
+  (files dated 2025-07-01, or 2026-03 for TX, WA and a few others; `scripts/build_tree_equity_2025.py`). Of 159,935
+  block groups in both, the gap moved a median 4.6 points and more than 5 points in 47% (in Travis County most 2021
+  values were 0 against a current median of 12.2). The 2021 comparison with similar areas is withheld where the value
+  changed. Heat still shows the 2021 figure, labeled as such: the current release's heat field is a different measure.
+  No data license is stated on the reachable Tree Equity pages; reuse terms should be confirmed with American Forests.
 Not checked: parks (OpenStreetMap's query service is unreachable from the audit machine).
 
 ### Crash counts (rebuilt 16 Nov: `app/data/crash_counts/<county>.json`)
 
 California: all counties except San Francisco rebuilt from CCRS with the boundary rule below
 (`scripts/build_crash_counts_ca.py`). The share of crashes with coordinates ranges from 51% (Sutter) to 100%, 74% in
-LA. San Francisco's CCRS crashes are only 34% geocoded, so it keeps its DataSF injury-crash source for now (not yet
-rebuilt with the boundary rule). **Outside California: 94 counties** in Illinois (2023–25), Virginia (2023–25),
+LA. San Francisco's CCRS crashes are only 34% geocoded, so San Francisco is rebuilt from DataSF's injury-crash records instead
+(95.6% placed; injury and fatal crashes only; pedestrian/cyclist count is a lower bound, one collision partner per crash). **Outside California: 94 counties** in Illinois (2023–25), Virginia (2023–25),
 Pennsylvania (2021–23, the public table ends there), Tennessee (2022–24, injury and fatal crashes only), Utah, Maine
 (2023–25) and Denver (2023–25), from each state's crash service (`scripts/build_state_crash_counts.py`,
 `audit/crash-counts-nationwide.md`). 37–53% of crashes sit within 10 m of a block-group boundary. A map service
@@ -305,7 +310,7 @@ signals, slow streets, bike lanes, lighting) are recomputed for all 151 counties
 (`scripts/recompute_crash_gaps.py`), comparing only within one crash source. 49% of old pedestrian/cyclist gaps moved
 more than 10 points; 2,169 traffic-calming rows were dropped (no pedestrian/cyclist crash in the 3-year window) and
 1,594 added. In California and Illinois the pedestrian/cyclist count is a lower bound, so rows there are only added,
-never dropped. San Francisco's comparison is withheld until its counts are rebuilt. The pipeline now uses the same
+never dropped. San Francisco's comparison is now recomputed from its DataSF counts, within the county (not pooled with LA's CCRS counts). The pipeline now uses the same
 10 m boundary rule.
 
 ## 3. What was built to keep it accurate

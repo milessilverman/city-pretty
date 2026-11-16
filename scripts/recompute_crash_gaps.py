@@ -95,11 +95,15 @@ def build(fips, la_det, la_counts, today):
             return None
         det = B["details"]
     county_m = {g: dict(v.get("m") or {}) for g, v in det.items()}
-    ca = fips.startswith("06")
+    # Pool with LA only when this county's counts come from the same source as LA's (CHP CCRS). San Francisco's come
+    # from DataSF's injury-crash records, so it is compared within its own county.
+    cc_meta0 = cc.get("_meta") or {}
+    ca = fips.startswith("06") and "CCRS" in str(cc_meta0.get("source", ""))
     # IL: first harmful event only. CA: complete once the count also uses CCRS's Parties and injured-persons tables
     # (round 4, 16 Nov 2026; the file's _meta.pedbike_rule says so); a CA file without that rule is still a lower bound.
     cc_meta = cc.get("_meta") or {}
-    lower_bound = fips.startswith("17") or (ca and "Parties" not in str(cc_meta.get("pedbike_rule", "")))
+    lower_bound = (fips.startswith("17") or (ca and "Parties" not in str(cc_meta.get("pedbike_rule", "")))
+                   or bool(cc_meta.get("pedbike_lower_bound")))
     peers = list(county_m.items()) if (is_la or not ca) else [(g, dict(v["m"])) for g, v in la_det.items()] + list(county_m.items())
     X = np.array([vec(m) for _, m in peers], float)
     mu, sd = X.mean(0), X.std(0) + 1e-9

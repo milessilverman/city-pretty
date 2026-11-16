@@ -20,10 +20,11 @@ describe("recomputed crash comparisons", () => {
       const fips = f.slice(0, 5), mt = d._meta;
       expect(mt.script).toBe("scripts/recompute_crash_gaps.py");
       expect(mt.crash_counts).toBe(`app/data/crash_counts/${fips}.json`);
-      // California compares within CCRS (LA + county); other counties within their own state source
-      expect(mt.peers).toMatch(fips.startsWith("06") ? /LA County/ : /within this county/);
-      // Illinois counts only the first thing struck; California's counts are complete since round 4 (Parties table).
-      expect(mt.pedbike_count_is_lower_bound).toBe(fips.startsWith("17"));
+      // CCRS counties compare within CCRS (LA + county); others (incl. San Francisco on DataSF) within their own source
+      expect(mt.peers).toMatch(/CCRS/.test(mt.crash_source || "") ? /LA County/ : /within this county/);
+      // Illinois counts only the first thing struck; San Francisco (DataSF) records one collision partner per crash;
+      // California CCRS counts are complete since round 4 (Parties table).
+      expect(mt.pedbike_count_is_lower_bound).toBe(fips.startsWith("17") || fips === "06075");
       for (const [g, a] of Object.entries(d.bg) as [string, any][]) {
         expect(g.startsWith(fips)).toBe(true);
         if (a.p) {
