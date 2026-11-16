@@ -1,11 +1,8 @@
 {
- "ran_on": "2026-11-16T18:40:46.201Z",
+ "ran_on": "2026-11-16T19:41:23.584Z",
  "script": "scripts/check_parcel_registry.mjs",
  "counts": {
-  "ok": 114,
-  "fields missing": 5,
-  "unreachable": 3,
-  "not a polygon layer": 1
+  "ok": 123
  },
  "services": [
   {
@@ -148,30 +145,16 @@
    "status": "ok"
   },
   {
-   "url": "https://enterprise.gisdata.mn.gov/aghost/rest/services/us_mn_state_mngeo/plan_parcels_open/FeatureServer/1",
+   "url": "https://enterprise.gisdata.mn.gov/aghost/rest/services/us_mn_state_mngeo/plan_parcels_open/FeatureServer/0",
    "name": "Parcels, Compiled from Opt-In Open Data Counties, Minnesota (MnGeo)",
    "counties": [],
    "states": [
     "27"
    ],
-   "layer_name": "Open Parcels Metadata Layer",
+   "layer_name": "Open Parcels In Minnesota",
    "geometry": "esriGeometryPolygon",
-   "missing_fields": [
-    "county_pin",
-    "anumber",
-    "st_name",
-    "st_pos_typ",
-    "ctu_name",
-    "useclass1",
-    "emv_land",
-    "emv_bldg",
-    "emv_total",
-    "tax_year",
-    "mkt_year",
-    "acres_poly",
-    "co_name"
-   ],
-   "status": "fields missing"
+   "missing_fields": [],
+   "status": "ok"
   },
   {
    "url": "https://geo.co.harrison.ms.us/server/rest/services/AGO/HarrisonCounty_ApprovedParcels/MapServer/0",
@@ -363,13 +346,8 @@
    ],
    "layer_name": "Operational_Parcels",
    "geometry": "esriGeometryPolygon",
-   "missing_fields": [
-    "Parcel_ID",
-    "Location",
-    "Owner",
-    "Total_Assessed"
-   ],
-   "status": "fields missing"
+   "missing_fields": [],
+   "status": "ok"
   },
   {
    "url": "https://gis.desotocountyms.gov/arcgis/rest/services/BaseLayers/MapServer/1",
@@ -509,19 +487,18 @@
   },
   {
    "url": "https://gis.siouxfalls.gov/arcgis/rest/services/Data/Property/MapServer/1",
-   "name": "Lincoln County GIS Parcels",
+   "name": "City of Sioux Falls Parcels (Lincoln and Minnehaha counties, SD)",
    "counties": [
-    "46083"
+    "46083",
+    "46099"
    ],
    "states": [
     "SD"
    ],
    "layer_name": "Parcels",
    "geometry": "esriGeometryPolygon",
-   "missing_fields": [
-    "Parcel.PID"
-   ],
-   "status": "fields missing"
+   "missing_fields": [],
+   "status": "ok"
   },
   {
    "url": "https://gis.traviscountytx.gov/server1/rest/services/Boundaries_and_Jurisdictions/TCAD_public/MapServer/0",
@@ -655,16 +632,6 @@
    "status": "ok"
   },
   {
-   "url": "https://gisservices.its.ny.gov/arcgis/rest/services/NYS_Tax_Parcels_Public/MapServer/1",
-   "name": "NYS Tax Parcels Public (NYS ITS Geospatial Services + ORPTS)",
-   "counties": [],
-   "states": [
-    "36"
-   ],
-   "status": "unreachable",
-   "detail": "{\"code\":500,\"message\":\"Service NYS_Tax_Parcels_Public/MapServer not started \",\"details\":[]}"
-  },
-  {
    "url": "https://gistech.countyofkane.org/arcgis/rest/services/KanePINList/MapServer/0",
    "name": "Kane County GIS Parcels",
    "counties": [
@@ -686,6 +653,20 @@
    ],
    "states": [
     "KS"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
+   "name": "Rockingham County GIS Parcels",
+   "counties": [
+    "33015"
+   ],
+   "states": [
+    "NH"
    ],
    "layer_name": "Parcels",
    "geometry": "esriGeometryPolygon",
@@ -722,37 +703,23 @@
   },
   {
    "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
-   "name": "Strafford County GIS Parcels",
-   "counties": [
-    "33017"
-   ],
-   "states": [
-    "NH"
-   ],
-   "layer_name": "Parcels",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
-  },
-  {
-   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
-   "name": "Rockingham County GIS Parcels",
-   "counties": [
-    "33015"
-   ],
-   "states": [
-    "NH"
-   ],
-   "layer_name": "Parcels",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
-  },
-  {
-   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
    "name": "Grafton County GIS Parcels",
    "counties": [
     "33009"
+   ],
+   "states": [
+    "NH"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
+   "name": "Strafford County GIS Parcels",
+   "counties": [
+    "33017"
    ],
    "states": [
     "NH"
@@ -881,8 +848,10 @@
     "32003"
    ],
    "states": [],
-   "status": "unreachable",
-   "detail": "HTTP 500"
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
   },
   {
    "url": "https://maps.lakecountyil.gov/arcgis/rest/services/CCAO/TaxParcelViewerPro/MapServer/12",
@@ -1174,18 +1143,18 @@
    "status": "ok"
   },
   {
-   "url": "https://services.arcgis.com/fLeGjb7u4uXqeF9q/ArcGIS/rest/services/OPA_PROPERTIES_PUBLIC/FeatureServer/0",
-   "name": "Philadelphia County GIS Parcels",
+   "url": "https://services.arcgis.com/fLeGjb7u4uXqeF9q/ArcGIS/rest/services/PWD_PARCELS/FeatureServer/0",
+   "name": "Philadelphia Water Department parcels (City of Philadelphia)",
    "counties": [
     "42101"
    ],
    "states": [
     "PA"
    ],
-   "layer_name": "OPA_PROPERTIES_PUBLIC",
-   "geometry": "esriGeometryPoint",
+   "layer_name": "PWD_PARCELS",
+   "geometry": "esriGeometryPolygon",
    "missing_fields": [],
-   "status": "not a polygon layer"
+   "status": "ok"
   },
   {
    "url": "https://services.arcgis.com/jsIt88o09Q0r1j8h/arcgis/rest/services/Current_Parcels/FeatureServer/0",
@@ -1393,16 +1362,18 @@
    "status": "ok"
   },
   {
-   "url": "https://services2.arcgis.com/qvkbeam7WirpsIPC/arcgis/rest/services/City_of_Detroit_Parcels/FeatureServer/0",
-   "name": "Wayne County GIS Parcels",
+   "url": "https://services2.arcgis.com/qvkbeam7Wirps6zC/arcgis/rest/services/parcel_file_current/FeatureServer/0",
+   "name": "City of Detroit Parcels (Current), Office of the Assessor",
    "counties": [
     "26163"
    ],
    "states": [
     "MI"
    ],
-   "status": "unreachable",
-   "detail": "{\"code\":400,\"message\":\"Invalid URL\",\"details\":[\"Invalid URL\"]}"
+   "layer_name": "parcels_(current)",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
   },
   {
    "url": "https://services2.arcgis.com/w657bnjzrjguNyOy/ArcGIS/rest/services/STLCO_STC_Parcels_IND/FeatureServer/0",
@@ -1539,6 +1510,18 @@
    "status": "ok"
   },
   {
+   "url": "https://services6.arcgis.com/EbVsqZ18sv1kVJ3k/arcgis/rest/services/NYS_Tax_Parcels_Public/FeatureServer/1",
+   "name": "NYS Tax Parcels Public (NYS GIS Program Office; opt-in counties only)",
+   "counties": [],
+   "states": [
+    "36"
+   ],
+   "layer_name": "NYS_Tax_Parcels_Public",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
    "url": "https://services6.arcgis.com/K0qS4r8AEJxrE8em/ArcGIS/rest/services/Macomb_County_Parcel_Data/FeatureServer/10",
    "name": "Macomb County GIS Parcels",
    "counties": [
@@ -1563,12 +1546,8 @@
    ],
    "layer_name": "Parcels",
    "geometry": "esriGeometryPolygon",
-   "missing_fields": [
-    "PROP_ID",
-    "SITE_ADDR",
-    "TOTAL_VAL"
-   ],
-   "status": "fields missing"
+   "missing_fields": [],
+   "status": "ok"
   },
   {
    "url": "https://services7.arcgis.com/JMIoqakAkedEx0oU/arcgis/rest/services/DAC_Parcels/FeatureServer/0",
@@ -1596,10 +1575,8 @@
    ],
    "layer_name": "St_Charles_County_Parcels",
    "geometry": "esriGeometryPolygon",
-   "missing_fields": [
-    "SiteAddress"
-   ],
-   "status": "fields missing"
+   "missing_fields": [],
+   "status": "ok"
   },
   {
    "url": "https://services7.arcgis.com/p0Gk2nDbPs7KEqSZ/arcgis/rest/services/SFC_Parcels_20250415/FeatureServer/0",
