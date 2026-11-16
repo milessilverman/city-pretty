@@ -45,8 +45,12 @@ function score(models, stats, evalRows) {
   return out;
 }
 
+// A scored home's own earlier sales are removed from the rows behind the statistics and the fit (repeat sales would
+// otherwise put the home in its own neighborhood figure).
+const without = (rs, scored) => { const ids = new Set(scored.map((r) => r.id)); return rs.filter((r) => !ids.has(r.id)); };
+
 if (mode === "dev") {
-  const stats = neighborhoodStats(fit);
+  const stats = neighborhoodStats(without(fit, dev));
   const models = fitAll(fit);
   const res = score(models, stats, dev);
   console.log(JSON.stringify({ fips, mode, fit_rows: fit.length, dev_rows: dev.length, leakage: leakageCount(stats, dev), candidates: res }, null, 1));
@@ -54,7 +58,7 @@ if (mode === "dev") {
   const OUT = path.join(ROOT, `data/backtests/county_model_test_${fips}.json`);
   if (fs.existsSync(OUT)) { console.error(`${OUT} exists: the final test has already been run.`); process.exit(3); }
   if (!cfg.locked || !cfg.locked.spec) { console.error("lock a spec in county_config.json (and commit it) before the final test"); process.exit(4); }
-  const prior = rows.filter((r) => r.date < cfg.test[0] && (inWin(r, cfg.fit) || inWin(r, cfg.dev)));
+  const prior = without(rows.filter((r) => r.date < cfg.test[0] && (inWin(r, cfg.fit) || inWin(r, cfg.dev))), test);
   const stats = neighborhoodStats(prior);
   const models = fitAll(prior);
   const res = score(models, stats, test);

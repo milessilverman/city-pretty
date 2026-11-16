@@ -43,8 +43,9 @@ describe("published county back-tests reproduce from their committed sales files
       expect(t.test_homes_in_their_own_statistics).toBe(0);
       const data = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root, c.sales_file))).toString());
       const inWin = (r: any, [a, b]: string[]) => r.date >= a && r.date <= b;
-      const prior = data.rows.filter((r: any) => r.date < c.test[0] && (inWin(r, c.fit) || inWin(r, c.dev)));
       const test = data.rows.filter((r: any) => inWin(r, c.test));
+      const testIds = new Set(test.map((r: any) => r.id));
+      const prior = data.rows.filter((r: any) => r.date < c.test[0] && (inWin(r, c.fit) || inWin(r, c.dev)) && !testIds.has(r.id));
       const stats = neighborhoodStats(prior);
       const spec = c.locked.spec;
       const m = spec === "assessor_ratio" ? fitAssessorRatio(prior, { allowAvAnyDate: true })
