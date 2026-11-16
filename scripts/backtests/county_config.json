@@ -300,5 +300,89 @@
   },
   "legacy_null_rooms": true,
   "legacy_null_rooms_note": "Final ran 16 Nov before the missing-rooms fix: a missing bedroom/bathroom count was read as 0 (DC 2 rows, Cook 8, Philadelphia 81 bed / 1,280 bath). Kept so the one-time result reproduces; re-test on a new window."
+ },
+ "12086": {
+  "sales_file": "data/backtests/sales_12086_2026-11-16.json.gz",
+  "fit": [
+   "2025-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-03-31"
+  ],
+  "test": [
+   "2026-04-01",
+   "2026-08-31"
+  ],
+  "note": "Florida DOR 2026 Final SDF + NAL (scripts/backtests/pull_florida_dor.py), same filters as Hillsborough (QUAL_CD 01/02 per DOR's 2026 User's Guide). Sales dated to the 1st of their month. Assessor value: just value as of 1 Jan 2026. Windows copied from Hillsborough and set before any model was run; September 2026 excluded as incomplete.",
+  "locked": {
+   "spec": "regression_no_rooms_with_assessor",
+   "locked_on": "2026-11-16",
+   "why": "Development median error: regression with the 1 Jan 2026 just value 9.85% (2023 sales); assessor ratio 9.84%; regression without the just value 12.73%; $/sqft x size 14.39%; neighborhood median 15.23%. Best was assessor_ratio by 0.01 points, within 0.1 points, so the page-runnable spec (same as Hillsborough; the page has no assessor-ratio code) is locked. Rule fixed before locking: best development error; a tie within 0.1 points goes to the spec the page can run.",
+   "dev_mdape": {
+    "neighborhood_median": 0.1523,
+    "neighborhood_ppsf_x_sqft": 0.1439,
+    "assessor_ratio": 0.0984,
+    "regression_no_rooms": 0.1273,
+    "regression_no_rooms_with_assessor": 0.0985
+   }
+  }
+ },
+ "12011": {
+  "sales_file": "data/backtests/sales_12011_2026-11-16.json.gz",
+  "fit": [
+   "2025-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-03-31"
+  ],
+  "test": [
+   "2026-04-01",
+   "2026-08-31"
+  ],
+  "note": "Florida DOR 2026 Final SDF + NAL (scripts/backtests/pull_florida_dor.py), same filters as Hillsborough (QUAL_CD 01/02 per DOR's 2026 User's Guide). Sales dated to the 1st of their month. Assessor value: just value as of 1 Jan 2026. Windows copied from Hillsborough and set before any model was run; September 2026 excluded as incomplete.",
+  "locked": {
+   "spec": "regression_no_rooms_with_assessor",
+   "locked_on": "2026-11-16",
+   "why": "Development median error: regression with the 1 Jan 2026 just value 8.99% (2542 sales); assessor ratio 8.99%; regression without the just value 10.70%; $/sqft x size 12.08%; neighborhood median 15.04%. Best was assessor_ratio by 0.00 points, within 0.1 points, so the page-runnable spec (same as Hillsborough; the page has no assessor-ratio code) is locked. Rule fixed before locking: best development error; a tie within 0.1 points goes to the spec the page can run.",
+   "dev_mdape": {
+    "neighborhood_median": 0.1504,
+    "neighborhood_ppsf_x_sqft": 0.1208,
+    "assessor_ratio": 0.0899,
+    "regression_no_rooms": 0.107,
+    "regression_no_rooms_with_assessor": 0.0899
+   }
+  }
+ },
+ "12031": {
+  "sales_file": "data/backtests/sales_12031_2026-11-16.json.gz",
+  "fit": [
+   "2025-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-03-31"
+  ],
+  "test": [
+   "2026-04-01",
+   "2026-08-31"
+  ],
+  "note": "Florida DOR 2026 Final SDF + NAL (scripts/backtests/pull_florida_dor.py), same filters as Hillsborough (QUAL_CD 01/02 per DOR's 2026 User's Guide). Sales dated to the 1st of their month. Assessor value: just value as of 1 Jan 2026. Windows copied from Hillsborough and set before any model was run; September 2026 excluded as incomplete.",
+  "locked": {
+   "spec": "regression_no_rooms_with_assessor",
+   "locked_on": "2026-11-16",
+   "why": "Development median error: regression with the 1 Jan 2026 just value 8.03% (2274 sales); assessor ratio 8.09%; regression without the just value 11.91%; $/sqft x size 12.41%; neighborhood median 18.81%. Rule fixed before locking: best development error; a tie within 0.1 points goes to the spec the page can run.",
+   "dev_mdape": {
+    "neighborhood_median": 0.1881,
+    "neighborhood_ppsf_x_sqft": 0.1241,
+    "assessor_ratio": 0.0809,
+    "regression_no_rooms": 0.1191,
+    "regression_no_rooms_with_assessor": 0.0803
+   }
+  }
  }
 }
