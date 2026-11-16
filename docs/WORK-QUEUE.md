@@ -51,7 +51,7 @@ audit doc the same day.
 | Issue | Why it matters | Fix |
 |---|---|---|
 | **Queens sales under $500k show 99% error** (230 test sales; Staten Island 39%) | Likely below-market family transfers that pass the $25k screen, but unproven; Queens passes overall at 14.97%, just under the cap | Find NYC's own non-arm's-length markers (ACRIS document types, deed parties) and re-test on a new window; until then the page shows the band warning |
-| **Missing bedroom/bathroom counted as 0** in the shared model code | Affected published DC (2 rows), Cook (8) and Philadelphia (81 bed / 1,280 bath) results | Fixed for new pulls; re-test those counties on the next fresh window (the one-test rule forbids re-running the same final) |
-| **King County passed (8.8%) but isn't shown** | The page queries King's zoning layer, which has no assessed value | Query the Washington statewide parcel layer for King and check it still holds the tax-year-2026 roll |
-| **Florida beyond Hillsborough** | The DOR pull script takes any county | Run Miami-Dade, Orange, Duval, Pinellas with the same protocol |
+| **Missing bedroom/bathroom counted as 0** in the shared model code | Affected published DC (2 rows), Cook (8) and Philadelphia (81 bed / 1,280 bath) results | Fixed in the model code for new runs (16 Nov; legacy flag keeps the three published finals reproducible); re-test those counties on the next fresh window (the one-test rule forbids re-running the same final) |
+| ✓ **King County shown** (16 Nov) | Reads the WA statewide value by PIN; computes only while the value check is >= 98% (99.2% on 16 Nov) and <= 120 days old | Re-run scripts/backtests/check_king_statewide_values.py at least every 120 days |
+| ✓ **Florida beyond Hillsborough** (16 Nov) | Miami-Dade, Broward, Duval, Orange, Palm Beach, Pinellas all passed (8.7–11.2%) and are shown | Other Florida counties: same script (pull_florida_dor.py <DOR no> <fips> <file name>) |
 | **23 states' codes unsearchable from the build machine** | "No law found" is unverified there | Alternate routes, or a script run from the user's computer |

@@ -889,6 +889,543 @@
     "evidence": "data/backtests/county_model_test_12086.json"
    }
   },
+  "12095": {
+   "_status": "backtest_run",
+   "countyFips": "12095",
+   "countyName": "Orange County",
+   "model_name": "county_sales_regression_no_rooms_with_assessor",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_12095_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_12095.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": [
+    "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/SDF/2026F/Orange%2058%20Final%20SDF%202026.zip (Florida DOR SDF, 2026 Final roll: sales 2025-2026, QUAL_CD)",
+    "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAL/2026F/Orange%2058%20Final%20NAL%202026.zip (Florida DOR NAL, 2026 Final roll: characteristics and just value as of 1 Jan 2026)",
+    "https://floridarevenue.com/property/dataportal/Documents/PTO Data Portal/User Guides/2026 Users guide and quick reference/2026_NAL_SDF_NAP_Users_Guide.pdf (QUAL_CD definitions)"
+   ],
+   "filters": [
+    "QUAL_CD 01 or 02 (DOR: qualified as arm's length, included in sales ratio analysis)",
+    "not a multi-parcel sale",
+    "price >= $25,000",
+    "DOR use code 001, one residential unit, living area >= 400 sq ft, year built not after the sale year",
+    "sale dated to the 1st of its month (SDF has year and month only)"
+   ],
+   "split": {
+    "fit": [
+     "2025-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-03-31"
+    ],
+    "test": [
+     "2026-04-01",
+     "2026-08-31"
+    ]
+   },
+   "locked": {
+    "spec": "regression_no_rooms_with_assessor",
+    "locked_on": "2026-11-16",
+    "why": "Development median error: regression with the 1 Jan 2026 just value 8.10% (2178 sales); assessor ratio 8.10%; regression without the just value 11.68%; $/sqft x size 12.20%; neighborhood median 19.27%. Best was assessor_ratio by 0.00 points, within 0.1 points, so the page-runnable spec (same as Hillsborough; the page has no assessor-ratio code) is locked. Rule fixed before locking: best development error; a tie within 0.1 points goes to the spec the page can run.",
+    "dev_mdape": {
+     "neighborhood_median": 0.1927,
+     "neighborhood_ppsf_x_sqft": 0.122,
+     "assessor_ratio": 0.081,
+     "regression_no_rooms": 0.1168,
+     "regression_no_rooms_with_assessor": 0.081
+    }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 6187,
+    "excluded": 22,
+    "mdape": 0.0867,
+    "mape": 0.1393,
+    "median_signed_error": -0.0037,
+    "share_within_10pct": 0.5573,
+    "share_within_20pct": 0.8102,
+    "p80_abs_error": 0.1926
+   },
+   "baseline_neighborhood_median": {
+    "n": 6187,
+    "excluded": 22,
+    "mdape": 0.1863,
+    "mape": 0.2949,
+    "median_signed_error": 0.0141,
+    "share_within_10pct": 0.2966,
+    "share_within_20pct": 0.5282,
+    "p80_abs_error": 0.4286
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": true,
+    "reason": null
+   },
+   "by_price_band": {
+    "under $500k": {
+     "n": 3596,
+     "excluded": 0,
+     "mdape": 0.0937,
+     "mape": 0.1652,
+     "median_signed_error": 0.0175,
+     "share_within_10pct": 0.5284,
+     "share_within_20pct": 0.7709,
+     "p80_abs_error": 0.2219
+    },
+    "$500k-$1M": {
+     "n": 2034,
+     "excluded": 0,
+     "mdape": 0.0692,
+     "mape": 0.0918,
+     "median_signed_error": -0.0148,
+     "share_within_10pct": 0.645,
+     "share_within_20pct": 0.9002,
+     "p80_abs_error": 0.1441
+    },
+    "$1M-$2M": {
+     "n": 398,
+     "excluded": 0,
+     "mdape": 0.105,
+     "mape": 0.1269,
+     "median_signed_error": -0.0874,
+     "share_within_10pct": 0.4874,
+     "share_within_20pct": 0.7915,
+     "p80_abs_error": 0.206
+    },
+    "$2M and up": {
+     "n": 159,
+     "excluded": 0,
+     "mdape": 0.156,
+     "mape": 0.1931,
+     "median_signed_error": -0.1519,
+     "share_within_10pct": 0.2642,
+     "share_within_20pct": 0.5975,
+     "p80_abs_error": 0.2984
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 6187,
+     "excluded": 22,
+     "mdape": 0.1863,
+     "mape": 0.2949,
+     "median_signed_error": 0.0141,
+     "share_within_10pct": 0.2966,
+     "share_within_20pct": 0.5282,
+     "p80_abs_error": 0.4286
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 6187,
+     "excluded": 22,
+     "mdape": 0.1268,
+     "mape": 0.1967,
+     "median_signed_error": 0.0201,
+     "share_within_10pct": 0.4125,
+     "share_within_20pct": 0.6874,
+     "p80_abs_error": 0.2723
+    },
+    "assessor_ratio": {
+     "n": 6209,
+     "excluded": 0,
+     "mdape": 0.089,
+     "mape": 0.1423,
+     "median_signed_error": -0.0012,
+     "share_within_10pct": 0.5457,
+     "share_within_20pct": 0.8032,
+     "p80_abs_error": 0.1982
+    },
+    "regression_no_rooms": {
+     "n": 6187,
+     "excluded": 22,
+     "mdape": 0.1179,
+     "mape": 0.1834,
+     "median_signed_error": 0.0092,
+     "share_within_10pct": 0.4346,
+     "share_within_20pct": 0.7147,
+     "p80_abs_error": 0.2515
+    },
+    "regression_no_rooms_with_assessor": {
+     "n": 6187,
+     "excluded": 22,
+     "mdape": 0.0867,
+     "mape": 0.1393,
+     "median_signed_error": -0.0037,
+     "share_within_10pct": 0.5573,
+     "share_within_20pct": 0.8102,
+     "p80_abs_error": 0.1926
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 0
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_12095.json"
+   }
+  },
+  "12099": {
+   "_status": "backtest_run",
+   "countyFips": "12099",
+   "countyName": "Palm Beach County",
+   "model_name": "county_sales_regression_no_rooms_with_assessor",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_12099_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_12099.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": [
+    "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/SDF/2026F/Palm%20Beach%2060%20Final%20SDF%202026.zip (Florida DOR SDF, 2026 Final roll: sales 2025-2026, QUAL_CD)",
+    "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAL/2026F/Palm%20Beach%2060%20Final%20NAL%202026.zip (Florida DOR NAL, 2026 Final roll: characteristics and just value as of 1 Jan 2026)",
+    "https://floridarevenue.com/property/dataportal/Documents/PTO Data Portal/User Guides/2026 Users guide and quick reference/2026_NAL_SDF_NAP_Users_Guide.pdf (QUAL_CD definitions)"
+   ],
+   "filters": [
+    "QUAL_CD 01 or 02 (DOR: qualified as arm's length, included in sales ratio analysis)",
+    "not a multi-parcel sale",
+    "price >= $25,000",
+    "DOR use code 001, one residential unit, living area >= 400 sq ft, year built not after the sale year",
+    "sale dated to the 1st of its month (SDF has year and month only)"
+   ],
+   "split": {
+    "fit": [
+     "2025-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-03-31"
+    ],
+    "test": [
+     "2026-04-01",
+     "2026-08-31"
+    ]
+   },
+   "locked": {
+    "spec": "regression_no_rooms_with_assessor",
+    "locked_on": "2026-11-16",
+    "why": "Development median error: regression with the 1 Jan 2026 just value 8.43% (2899 sales); assessor ratio 8.46%; regression without the just value 14.29%; $/sqft x size 14.72%; neighborhood median 20.83%. Rule fixed before locking: best development error; a tie within 0.1 points goes to the spec the page can run.",
+    "dev_mdape": {
+     "neighborhood_median": 0.2083,
+     "neighborhood_ppsf_x_sqft": 0.1472,
+     "assessor_ratio": 0.0846,
+     "regression_no_rooms": 0.1429,
+     "regression_no_rooms_with_assessor": 0.0843
+    }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 7916,
+    "excluded": 16,
+    "mdape": 0.0909,
+    "mape": 0.1263,
+    "median_signed_error": -0.0346,
+    "share_within_10pct": 0.537,
+    "share_within_20pct": 0.8118,
+    "p80_abs_error": 0.1926
+   },
+   "baseline_neighborhood_median": {
+    "n": 7916,
+    "excluded": 16,
+    "mdape": 0.1954,
+    "mape": 0.2988,
+    "median_signed_error": -0.0061,
+    "share_within_10pct": 0.2864,
+    "share_within_20pct": 0.5096,
+    "p80_abs_error": 0.4458
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": true,
+    "reason": null
+   },
+   "by_price_band": {
+    "$500k-$1M": {
+     "n": 3277,
+     "excluded": 0,
+     "mdape": 0.0783,
+     "mape": 0.0993,
+     "median_signed_error": -0.0404,
+     "share_within_10pct": 0.6091,
+     "share_within_20pct": 0.888,
+     "p80_abs_error": 0.1553
+    },
+    "under $500k": {
+     "n": 2645,
+     "excluded": 0,
+     "mdape": 0.081,
+     "mape": 0.1251,
+     "median_signed_error": 0.0107,
+     "share_within_10pct": 0.5815,
+     "share_within_20pct": 0.8344,
+     "p80_abs_error": 0.1808
+    },
+    "$1M-$2M": {
+     "n": 1167,
+     "excluded": 0,
+     "mdape": 0.1301,
+     "mape": 0.1598,
+     "median_signed_error": -0.101,
+     "share_within_10pct": 0.395,
+     "share_within_20pct": 0.6855,
+     "p80_abs_error": 0.2567
+    },
+    "$2M and up": {
+     "n": 827,
+     "excluded": 0,
+     "mdape": 0.1628,
+     "mape": 0.1894,
+     "median_signed_error": -0.1195,
+     "share_within_10pct": 0.3096,
+     "share_within_20pct": 0.6155,
+     "p80_abs_error": 0.3067
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 7916,
+     "excluded": 16,
+     "mdape": 0.1954,
+     "mape": 0.2988,
+     "median_signed_error": -0.0061,
+     "share_within_10pct": 0.2864,
+     "share_within_20pct": 0.5096,
+     "p80_abs_error": 0.4458
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 7916,
+     "excluded": 16,
+     "mdape": 0.1419,
+     "mape": 0.2034,
+     "median_signed_error": -0.0101,
+     "share_within_10pct": 0.3739,
+     "share_within_20pct": 0.6329,
+     "p80_abs_error": 0.3106
+    },
+    "assessor_ratio": {
+     "n": 7932,
+     "excluded": 0,
+     "mdape": 0.0921,
+     "mape": 0.1281,
+     "median_signed_error": -0.0351,
+     "share_within_10pct": 0.5298,
+     "share_within_20pct": 0.8062,
+     "p80_abs_error": 0.1964
+    },
+    "regression_no_rooms": {
+     "n": 7916,
+     "excluded": 16,
+     "mdape": 0.1401,
+     "mape": 0.1965,
+     "median_signed_error": -0.016,
+     "share_within_10pct": 0.3754,
+     "share_within_20pct": 0.6411,
+     "p80_abs_error": 0.3005
+    },
+    "regression_no_rooms_with_assessor": {
+     "n": 7916,
+     "excluded": 16,
+     "mdape": 0.0909,
+     "mape": 0.1263,
+     "median_signed_error": -0.0346,
+     "share_within_10pct": 0.537,
+     "share_within_20pct": 0.8118,
+     "p80_abs_error": 0.1926
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 0
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_12099.json"
+   }
+  },
+  "12103": {
+   "_status": "backtest_run",
+   "countyFips": "12103",
+   "countyName": "Pinellas County",
+   "model_name": "county_sales_regression_no_rooms_with_assessor",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_12103_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_12103.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": [
+    "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/SDF/2026F/Pinellas%2062%20Final%20SDF%202026.zip (Florida DOR SDF, 2026 Final roll: sales 2025-2026, QUAL_CD)",
+    "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAL/2026F/Pinellas%2062%20Final%20NAL%202026.zip (Florida DOR NAL, 2026 Final roll: characteristics and just value as of 1 Jan 2026)",
+    "https://floridarevenue.com/property/dataportal/Documents/PTO Data Portal/User Guides/2026 Users guide and quick reference/2026_NAL_SDF_NAP_Users_Guide.pdf (QUAL_CD definitions)"
+   ],
+   "filters": [
+    "QUAL_CD 01 or 02 (DOR: qualified as arm's length, included in sales ratio analysis)",
+    "not a multi-parcel sale",
+    "price >= $25,000",
+    "DOR use code 001, one residential unit, living area >= 400 sq ft, year built not after the sale year",
+    "sale dated to the 1st of its month (SDF has year and month only)"
+   ],
+   "split": {
+    "fit": [
+     "2025-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-03-31"
+    ],
+    "test": [
+     "2026-04-01",
+     "2026-08-31"
+    ]
+   },
+   "locked": {
+    "spec": "regression_no_rooms_with_assessor",
+    "locked_on": "2026-11-16",
+    "why": "Development median error: regression with the 1 Jan 2026 just value 7.55% (1666 sales); assessor ratio 7.53%; regression without the just value 14.86%; $/sqft x size 14.56%; neighborhood median 21.89%. Best was assessor_ratio by 0.02 points, within 0.1 points, so the page-runnable spec (same as Hillsborough; the page has no assessor-ratio code) is locked. Rule fixed before locking: best development error; a tie within 0.1 points goes to the spec the page can run.",
+    "dev_mdape": {
+     "neighborhood_median": 0.2189,
+     "neighborhood_ppsf_x_sqft": 0.1456,
+     "assessor_ratio": 0.0753,
+     "regression_no_rooms": 0.1486,
+     "regression_no_rooms_with_assessor": 0.0755
+    }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 4956,
+    "excluded": 15,
+    "mdape": 0.112,
+    "mape": 0.1665,
+    "median_signed_error": -0.0111,
+    "share_within_10pct": 0.4645,
+    "share_within_20pct": 0.7224,
+    "p80_abs_error": 0.2496
+   },
+   "baseline_neighborhood_median": {
+    "n": 4956,
+    "excluded": 15,
+    "mdape": 0.2165,
+    "mape": 0.3285,
+    "median_signed_error": 0,
+    "share_within_10pct": 0.2482,
+    "share_within_20pct": 0.4713,
+    "p80_abs_error": 0.4844
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": true,
+    "reason": null
+   },
+   "by_price_band": {
+    "under $500k": {
+     "n": 2871,
+     "excluded": 0,
+     "mdape": 0.1163,
+     "mape": 0.1852,
+     "median_signed_error": 0.0105,
+     "share_within_10pct": 0.4514,
+     "share_within_20pct": 0.7036,
+     "p80_abs_error": 0.2635
+    },
+    "$500k-$1M": {
+     "n": 1575,
+     "excluded": 0,
+     "mdape": 0.0953,
+     "mape": 0.1327,
+     "median_signed_error": -0.0357,
+     "share_within_10pct": 0.5168,
+     "share_within_20pct": 0.7727,
+     "p80_abs_error": 0.2178
+    },
+    "$1M-$2M": {
+     "n": 393,
+     "excluded": 0,
+     "mdape": 0.1294,
+     "mape": 0.1574,
+     "median_signed_error": -0.0176,
+     "share_within_10pct": 0.402,
+     "share_within_20pct": 0.7074,
+     "p80_abs_error": 0.247
+    },
+    "$2M and up": {
+     "n": 117,
+     "excluded": 0,
+     "mdape": 0.1843,
+     "mape": 0.1931,
+     "median_signed_error": -0.1413,
+     "share_within_10pct": 0.2906,
+     "share_within_20pct": 0.5556,
+     "p80_abs_error": 0.288
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 4956,
+     "excluded": 15,
+     "mdape": 0.2165,
+     "mape": 0.3285,
+     "median_signed_error": 0,
+     "share_within_10pct": 0.2482,
+     "share_within_20pct": 0.4713,
+     "p80_abs_error": 0.4844
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 4956,
+     "excluded": 15,
+     "mdape": 0.1451,
+     "mape": 0.2265,
+     "median_signed_error": 0.0017,
+     "share_within_10pct": 0.3656,
+     "share_within_20pct": 0.6233,
+     "p80_abs_error": 0.3308
+    },
+    "assessor_ratio": {
+     "n": 4971,
+     "excluded": 0,
+     "mdape": 0.112,
+     "mape": 0.1683,
+     "median_signed_error": -0.0105,
+     "share_within_10pct": 0.4573,
+     "share_within_20pct": 0.719,
+     "p80_abs_error": 0.2519
+    },
+    "regression_no_rooms": {
+     "n": 4956,
+     "excluded": 15,
+     "mdape": 0.147,
+     "mape": 0.221,
+     "median_signed_error": 0.0009,
+     "share_within_10pct": 0.3664,
+     "share_within_20pct": 0.6241,
+     "p80_abs_error": 0.3244
+    },
+    "regression_no_rooms_with_assessor": {
+     "n": 4956,
+     "excluded": 15,
+     "mdape": 0.112,
+     "mape": 0.1665,
+     "median_signed_error": -0.0111,
+     "share_within_10pct": 0.4645,
+     "share_within_20pct": 0.7224,
+     "p80_abs_error": 0.2496
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 0
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_12103.json"
+   }
+  },
   "17031": {
    "_status": "backtest_run",
    "countyFips": "17031",

@@ -709,7 +709,7 @@ test("live parcel path: the service's own fields survive normalization, and an i
   expect(errors).toEqual([]);
 });
 
-for (const fips of ["12086", "12011", "12031"]) {
+for (const fips of ["12086", "12011", "12031", "12095", "12099", "12103"]) {
   test(`${fips}: the page computes exactly the back-tested Florida model`, async ({ page }) => {
     const fs = require("fs"), path = require("path"), zlib = require("zlib");
     const root = path.join(__dirname, "../..");
