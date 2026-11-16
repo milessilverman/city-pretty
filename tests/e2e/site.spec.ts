@@ -774,3 +774,208 @@ for (const fips of ["12086", "12011", "12031", "12095", "12099", "12103"]) {
     expect(errors).toEqual([]);
   });
 }
+
+test("house block group: a feature without geometry doesn't stop the search (every non-LA house used to get the selected block group)", async ({ page }) => {
+  const errors = await openPage(page);
+  const r = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s);
+    const w = window as any;
+    const f0 = w.D.bgs.features.find((f: any) => f.geometry && f.geometry.type === "Polygon");
+    const ring = f0.geometry.coordinates[0];
+    let pt: any = null;
+    const xs = ring.map((p: any) => p[0]), ys = ring.map((p: any) => p[1]);
+    const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+    for (let i = 1; i < 20 && !pt; i++) for (let j = 1; j < 20 && !pt; j++) {
+      const x = x0 + ((x1 - x0) * i) / 20, y = y0 + ((y1 - y0) * j) / 20;
+      if (ev("pointInFeature")(f0, x, y)) pt = { lng: x, lat: y };
+    }
+    w.D.bgs.features.unshift({ type: "Feature", properties: { id: "BAD" }, geometry: null });
+    const got = ev("houseBlockGroup")(pt);
+    w.D.bgs.features.shift();
+    return { want: f0.properties.id, got };
+  });
+  expect(r.got).toBe(r.want);
+  expect(errors).toEqual([]);
+});
+
+test("national parcel lookup survives a layer that rejects the model's fields (DC's parcel layer lacks the CAMA fields)", async ({ page }) => {
+  const errors = await openPage(page);
+  const ring = [[-77.0842, 38.9075], [-77.0838, 38.9075], [-77.0838, 38.9078], [-77.0842, 38.9078], [-77.0842, 38.9075]];
+  await page.route(/Property_and_Land_WebMercator\/MapServer\/40\/query/, (route: any) => {
+    const u = decodeURIComponent(route.request().url());
+    const body = /CAMA_/.test(u)
+      ? { error: { code: 400, message: "Failed to execute query.", details: [] } }
+      : { features: [{ attributes: { SSL: "1356    0035", PREMISEADD: "1 TEST ST NW" }, geometry: { rings: [ring] } }] };
+    route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(body), headers: { "access-control-allow-origin": "*" } });
+  });
+  await page.route(/Property_and_Land_WebMercator\/MapServer\/25\/query/, (route: any) =>
+    route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: JSON.stringify({ features: [] }) }));
+  await page.waitForFunction(() => { try { return !!(0, eval)("COUNTY_VALUATION_MODELS"); } catch { return false; } }, null, { timeout: 30_000 });
+  const r = await page.evaluate(async () => {
+    const ev = (s: string) => (0, eval)(s);
+    const w = window as any;
+    const realFips = w.activeFips;
+    w.activeFips = () => "11001";   // pretend DC is active without downloading its data file
+    try { const f = await ev("fetchParcel")({ lat: 38.90765, lng: -77.0840 }); return f ? f.attributes.SSL : null; }
+    finally { w.activeFips = realFips; }
+  });
+  expect(r).toBe("1356    0035");
+  expect(errors).toEqual([]);
+});
+
+test("Florida parcel lookup: no record cap (the statewide layer fails capped queries) and a cold answer slower than 5 s still counts", async ({ page }) => {
+  const errors = await openPage(page);
+  const ring = [[-80.2631, 26.3374], [-80.2626, 26.3374], [-80.2626, 26.3378], [-80.2631, 26.3378], [-80.2631, 26.3374]];
+  const seen: string[] = [];
+  await page.route(/Florida_Statewide_Cadastral\/FeatureServer\/0\/query/, async (route: any) => {
+    const u = decodeURIComponent(route.request().url());
+    seen.push(u);
+    // The real layer takes ~55 s and then answers "Invalid query parameters" when resultRecordCount is set.
+    const body = /resultRecordCount/.test(u)
+      ? { error: { code: 400, message: "Cannot perform query. Invalid query parameters.", details: [] } }
+      : { features: [{ attributes: { PARCEL_ID: "474128011420", DOR_UC: "001", JV: 900000, PHY_ADDR1: "1 TEST ST" }, geometry: { rings: [ring] } }] };
+    if (seen.length === 1) await new Promise((r) => setTimeout(r, 6500));   // a cold first query, as measured live (7-9 s)
+    await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(body), headers: { "access-control-allow-origin": "*" } });
+  });
+  await page.waitForFunction(() => { try { return !!(0, eval)("COUNTY_VALUATION_MODELS"); } catch { return false; } }, null, { timeout: 30_000 });
+  const r = await page.evaluate(async () => {
+    const ev = (s: string) => (0, eval)(s);
+    const w = window as any;
+    const realFips = w.activeFips;
+    w.activeFips = () => "12011";   // pretend Broward is active without downloading its data file
+    try { const f = await ev("fetchParcel")({ lat: 26.3376, lng: -80.26286 }); return f ? f.attributes.PARCEL_ID : null; }
+    finally { w.activeFips = realFips; }
+  });
+  expect(r).toBe("474128011420");
+  expect(seen.every((u) => !/resultRecordCount/.test(u))).toBe(true);
+  // the model's block group comes from the roll's CENSUS_BK, so the page must ask for it
+  expect(seen.some((u) => /outFields=[^&]*CENSUS_BK/.test(u))).toBe(true);
+  expect(errors).toEqual([]);
+});
+
+test("Florida estimates use the roll's CENSUS_BK block group (2010 vintage, as tested), never the map's 2020 one", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { try { return !!(0, eval)("COUNTY_VALUATION_MODELS"); } catch { return false; } }, null, { timeout: 30_000 });
+  const r = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s);
+    const mbg = ev("modelBlockGroup");
+    const C = ev("COUNTY_VALUATION_MODELS").counties;
+    // Miami-Dade home 3022060602410: 2010 block group 120860098083 (roll), 2020 block group 120860098122 (map)
+    return {
+      field: C["12086"].input_map.bg_field,
+      fromRoll: mbg("12086", { CENSUS_BK: "120860098083" }, { lat: 25.951574, lng: -80.182431 }),
+      missing: mbg("12086", {}, { lat: 25.951574, lng: -80.182431 }),
+      allFlorida: ["12011", "12031", "12057", "12086", "12095", "12099", "12103"].every((f) => C[f].input_map.bg_field === "CENSUS_BK"),
+      inStats: !!(C["12086"].stats.bg["120860098083"] || C["12086"].stats.tract["12086009808"]),
+      notFlorida: C["11001"].input_map.bg_field || null,
+    };
+  });
+  expect(r.field).toBe("CENSUS_BK");
+  expect(r.fromRoll).toBe("120860098083");
+  expect(r.missing).toBeNull();   // no silent fallback to the 2020 block group
+  expect(r.allFlorida).toBe(true);
+  expect(r.inStats).toBe(true);   // the 2010 key is the one the model has statistics for
+  expect(r.notFlorida).toBeNull();
+  expect(errors).toEqual([]);
+});
+
+test("King County parcel lookup uses the county's parcel layer (PIN) and reads the model's value from the state layer", async ({ page }) => {
+  const errors = await openPage(page);
+  const svcUrl = await page.evaluate(() => (0, eval)("parcelSvc")("53033").url);
+  expect(svcUrl).toMatch(/KingCo_Parcels\/MapServer\/0$/);   // it used to be a zoning layer with no parcel fields
+  const ring = [[-122.3023, 47.5922], [-122.3018, 47.5922], [-122.3018, 47.5925], [-122.3023, 47.5925], [-122.3023, 47.5922]];
+  await page.route(/KingCo_Parcels\/MapServer\/0\/query/, (route: any) =>
+    route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
+      body: JSON.stringify({ features: [{ attributes: { PIN: "7658600027", MAJOR: "765860", MINOR: "0027" }, geometry: { rings: [ring] } }] }) }));
+  let stateWhere = "";
+  await page.route(/Current_Parcels\/FeatureServer\/0\/query/, (route: any) => {
+    stateWhere = new URL(route.request().url()).searchParams.get("where") || "";
+    route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
+      body: JSON.stringify({ features: [{ attributes: { ORIG_PARCEL_ID: "7658600027", VALUE_LAND: 500000, VALUE_BLDG: 303000 } }] }) });
+  });
+  await page.waitForFunction(() => { try { return !!(0, eval)("COUNTY_VALUATION_MODELS"); } catch { return false; } }, null, { timeout: 30_000 });
+  const r = await page.evaluate(async () => {
+    const ev = (s: string) => (0, eval)(s);
+    const w = window as any;
+    const realFips = w.activeFips;
+    w.activeFips = () => "53033";
+    try { const f = await ev("fetchParcel")({ lat: 47.592353, lng: -122.302068 }); return f ? { pin: f.attributes.PIN, av: f.attributes.WA_AV } : null; }
+    finally { w.activeFips = realFips; }
+  });
+  expect(r).toEqual({ pin: "7658600027", av: 803000 });
+  expect(stateWhere).toContain("ORIG_PARCEL_ID='7658600027'");
+  expect(errors).toEqual([]);
+});
+
+test("a parcel service that fails is reported as such, not as a public right-of-way", async ({ page }) => {
+  const errors = await openPage(page);
+  // Florida's statewide layer fails some areas outright (Palm Beach, 16 Nov 2026); every query here fails.
+  await page.route(/Florida_Statewide_Cadastral\/FeatureServer\/0\/query/, (route: any) => route.abort("failed"));
+  await page.waitForFunction(() => { try { return !!(0, eval)("COUNTY_VALUATION_MODELS"); } catch { return false; } }, null, { timeout: 30_000 });
+  const r = await page.evaluate(async () => {
+    const ev = (s: string) => (0, eval)(s);
+    const w = window as any;
+    const realFips = w.activeFips;
+    w.activeFips = () => "12099";
+    try {
+      let thrown = "";
+      try { await ev("fetchParcel")({ lat: 26.472115, lng: -80.135857 }); } catch (e: any) { thrown = String(e.message); }
+      await ev("houseAt")({ lat: 26.472115, lng: -80.135857 });
+      return { thrown, text: (document.querySelector("#house") as HTMLElement).innerText };
+    } finally { w.activeFips = realFips; }
+  });
+  expect(r.thrown).toMatch(/no answer from Florida Statewide Parcels/);
+  expect(r.text).toContain("Couldn't get this lot from the parcel service");
+  expect(r.text).not.toMatch(/Right-of-Way/);
+  expect(errors).toEqual([]);
+});
+
+test("clicking a drawn lot in a county with a tested model reads the lot's full record (drawn lots carry few fields)", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { try { return !!(0, eval)("COUNTY_VALUATION_MODELS"); } catch { return false; } }, null, { timeout: 30_000 });
+  const r = await page.evaluate(async () => {
+    const ev = (s: string) => (0, eval)(s);
+    const w = window as any;
+    const realFips = w.activeFips, realFetch = w.fetchParcel;
+    const ring = [[-122.3023, 47.5922], [-122.3018, 47.5922], [-122.3018, 47.5925], [-122.3023, 47.5925], [-122.3023, 47.5922]];
+    const drawn = { attributes: { PIN: "7658600027" }, geometry: { rings: [ring] } };   // what a drawn lot carries
+    const calls: any[] = [];
+    const full = { attributes: { PIN: "7658600027", WA_AV: 803000 }, geometry: { rings: [ring] } };
+    Object.defineProperty(full, "_fullRecord", { value: true });
+    w.fetchParcel = async (ll: any) => { calls.push(ll); return full; };
+    try {
+      w.activeFips = () => "53033";
+      await ev("houseAt")({ lat: 47.59235, lng: -122.30205 }, drawn);
+      const king = calls.length;
+      // an address search lands on the street, outside the lot: the re-read uses a point inside the lot
+      calls.length = 0;
+      await ev("houseAt")({ lat: 47.5921, lng: -122.3020 }, drawn);
+      const inside = calls.length === 1 && ev("ringsContain")([ring], calls[0]);
+      // a county without a tested model keeps the drawn lot as it is
+      calls.length = 0;
+      w.activeFips = () => "48201";
+      await ev("houseAt")({ lat: 47.59235, lng: -122.30205 }, drawn);
+      return { king, inside, untested: calls.length };
+    } finally { w.activeFips = realFips; w.fetchParcel = realFetch; }
+  });
+  expect(r.king).toBe(1);
+  expect(r.inside).toBe(true);
+  expect(r.untested).toBe(0);
+  expect(errors).toEqual([]);
+});
+
+test("a JSONP answer that arrives after its timeout doesn't throw on the page", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.route(/late-jsonp-test/, async (route: any) => {
+    const cb = new URL(route.request().url()).searchParams.get("callback");
+    await new Promise((r) => setTimeout(r, 1200));
+    await route.fulfill({ status: 200, contentType: "application/javascript", body: `${cb}({"features":[]});` });
+  });
+  const r = await page.evaluate(async () => {
+    try { await (0, eval)("jsonp")("https://example.invalid/late-jsonp-test?f=json", 300); return "resolved"; }
+    catch (e: any) { return String(e.message); }
+  });
+  expect(r).toBe("JSONP timeout");
+  await page.waitForTimeout(2000);   // the late answer has run by now
+  expect(errors).toEqual([]);
+});

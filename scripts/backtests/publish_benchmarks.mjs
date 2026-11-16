@@ -27,17 +27,21 @@ for (const f of ["36005", "36047", "36061", "36081", "36085"]) {
 // (truncated: TOT_LVG_AR = NAL TOT_LVG_AREA, NO_RES_UNT = NO_RES_UNTS). The just value is used only from the tested roll.
 INPUT_MAPS["12057"] = { sqft: "TOT_LVG_AR", lot: "LND_SQFOOT", yb: "ACT_YR_BLT", units: "NO_RES_UNT", av: "JV", av_year: "ASMNT_YR", av_vintage: 2026,
   require: { DOR_UC: "001" }, require_label: "single-family homes (Florida DOR use code 001)",
+  // The neighborhood statistics are keyed by the roll's CENSUS_BK, which is the 2010 block group (not the 2020 one the
+  // page's map draws; they differ for 3 of 5 sampled Miami-Dade and Palm Beach homes, live check 16 Nov 2026). The page
+  // reads the house's block group from this same field (app.js modelBlockGroup).
+  bg_field: "CENSUS_BK",
   source: "https://services9.arcgis.com/Gh9awoU677aKree0/arcgis/rest/services/Florida_Statewide_Cadastral/FeatureServer/0 (Florida statewide parcels, 2026 roll)" };
-// Other Florida counties: same DOR roll, same statewide layer. Where the page's own parcel service for the county is
-// something else (Miami-Dade: a county zoning layer), the page reads the inputs from the statewide layer at the
-// parcel's point (input_layer; app.js enrichFromInputLayer).
+// Other Florida counties: same DOR roll, same statewide layer. Miami-Dade also reads the inputs at the parcel's point
+// (input_layer; app.js enrichFromInputLayer), from when its page service was a county zoning layer (replaced by the
+// statewide layer on 16 Nov 2026; the extra read is the same layer and harmless).
 const FL_STATEWIDE = "https://services9.arcgis.com/Gh9awoU677aKree0/arcgis/rest/services/Florida_Statewide_Cadastral/FeatureServer/0";
 for (const f of ["12086", "12011", "12031", "12095", "12099", "12103"]) {
   INPUT_MAPS[f] = Object.assign({}, INPUT_MAPS["12057"], f === "12086" ? {
-    input_layer: { url: FL_STATEWIDE, by: "point", fields: ["PARCEL_ID", "DOR_UC", "JV", "ASMNT_YR", "ACT_YR_BLT", "LND_SQFOOT", "NO_RES_UNT", "TOT_LVG_AR"] },
+    input_layer: { url: FL_STATEWIDE, by: "point", fields: ["PARCEL_ID", "DOR_UC", "JV", "ASMNT_YR", "ACT_YR_BLT", "LND_SQFOOT", "NO_RES_UNT", "TOT_LVG_AR", "CENSUS_BK"] },
   } : {});
 }
-// King County WA: the page's own King service is the county zoning layer (PIN and zoning only). The model needs the
+// King County WA: the page's King service is the county parcel layer (PIN only; until 16 Nov 2026 it was a zoning layer). The model needs the
 // tax-year-2026 appraised land + improvements value, which the Washington statewide parcel layer carries as
 // VALUE_LAND + VALUE_BLDG (no roll-year field). The page reads it by PIN and computes only while
 // scripts/backtests/check_king_statewide_values.py found it equal to the Assessor's tax-year-2026 value for >= 98% of a
