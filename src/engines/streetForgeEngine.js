@@ -173,3 +173,15 @@ export function evaluateEvChargerSiting(input) {
     sitingRecommendation: recommendation
   };
 }
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    evaluateRightOfWayReallocation,
+    evaluateEvChargerSiting,
+  };
+}
+
+if (typeof window !== "undefined") {
+  window.evaluateRightOfWayReallocation = evaluateRightOfWayReallocation;
+  window.evaluateEvChargerSiting = evaluateEvChargerSiting;
+}

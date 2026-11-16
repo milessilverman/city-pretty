@@ -146,6 +146,53 @@ function renderHouseAuditAside(audit) {
       </div>
     </div>
 
+    <!-- 6.5 EverySpace Holding Space Monetization Matrix -->
+    ${audit.everySpace ? `
+    <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;">
+        <span style="font-size:11.5px;font-weight:700;color:#334155;">EverySpace Holding Monetization</span>
+        <span style="font-size:11px;font-weight:700;color:${audit.everySpace.isCashFlowPositiveDuringHold ? '#15803d' : '#0284c7'};">
+          ${audit.everySpace.isCashFlowPositiveDuringHold ? '✓ Cash Flow Positive Hold' : `${audit.everySpace.monthlyHoldingDeficitReductionPct}% Deficit Offset`}
+        </span>
+      </div>
+      <div style="font-size:11px;color:#475569;margin-top:4px;">
+        • <b>Gross Holding Revenue:</b> <b>${fmt$(audit.everySpace.totalMonthlyEverySpaceGrossRevenueUsd)}/mo</b> (${fmt$(audit.everySpace.cumulativeEverySpaceEarningsOverHoldUsd)} over ${audit.everySpace.totalHoldingMonths}-mo pre-construction hold)<br>
+        • <b>Net Holding Cash Flow:</b> ${audit.everySpace.netMonthlyHoldingCashFlowUsd >= 0 ? '+' : ''}${fmt$(audit.everySpace.netMonthlyHoldingCashFlowUsd)}/mo (after debt service &amp; taxes)<br>
+        • <b>Monetized Channels:</b> ${audit.everySpace.channels.map(c => `<b>${c.name.split(' ')[0]}</b> (~${fmt$(c.monthlyRevenueExpectedUsd)}/mo)`).join(' &middot; ')}<br>
+        • <b>Carrying Equity Preserved:</b> ${fmt$(audit.everySpace.netEquityPreservedOverHoldUsd)} in holding deficits eliminated.
+      </div>
+      <div style="font-size:10.5px;color:#0369a1;background:#f0f9ff;padding:6px;border-radius:4px;border:1px solid #bae6fd;margin-top:6px;">
+        ℹ️ ${audit.everySpace.holdingStrategyRecommendation}
+      </div>
+    </div>` : ""}
+
+    <!-- 6.6 Homeowner Renovation & Contractor Quote Evaluator -->
+    ${audit.renovationOptions && audit.renovationOptions.length ? `
+    <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;">
+        <span style="font-size:11.5px;font-weight:700;color:#334155;">Homeowner Renovation &amp; Quote Evaluator</span>
+        <span style="font-size:10.5px;font-weight:700;color:#15803d;">Statutory By-Right Verified</span>
+      </div>
+      <div style="font-size:11px;color:#475569;margin-top:4px;">
+        ${audit.renovationOptions.map(r => `
+          <div style="background:#ffffff;padding:6px 8px;border-radius:4px;border:1px solid #cbd5e1;margin-top:4px;">
+            <div style="display:flex;justify-content:space-between;font-weight:700;color:#0f172a;">
+              <span>${r.improvementType.replace(/_/g, " ").toUpperCase()}</span>
+              <span style="color:${r.returnOnInvestmentPct >= 15 ? '#15803d' : '#64748b'};">${r.returnOnInvestmentPct >= 0 ? '+' : ''}${r.returnOnInvestmentPct}% ROI</span>
+            </div>
+            <div style="font-size:10.5px;color:#475569;">
+              Quote: ${fmt$(r.quotedCost)} (Benchmark: ${fmt$(r.benchmarkMarketCostLow)}–${fmt$(r.benchmarkMarketCostHigh)}) &middot; Value Add: <b>+${fmt$(r.estimatedEquityValueAdd)}</b><br>
+              ${r.everySpaceMonthlyYieldUsd > 0 ? `EverySpace Rent: <b>+${fmt$(r.everySpaceMonthlyYieldUsd)}/mo</b> (${r.paybackYears} yr payback) &middot; ` : ""}
+              Statute: <i>${r.statutoryEntitlementStatus.governingStatute}</i>
+            </div>
+            <div style="font-size:10px;color:#334155;margin-top:2px;">
+              <b>Verdict:</b> ${r.verdictSummary}
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    </div>` : ""}
+
     <!-- 7. Legal & Engineering Disclaimers -->
     <div style="border-top:1px solid #e2e8f0;padding-top:8px;font-size:10px;color:#64748b;line-height:1.4;">
       <b>Institutional Disclaimers:</b><br>

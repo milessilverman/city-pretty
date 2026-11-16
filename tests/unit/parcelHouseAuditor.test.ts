@@ -212,4 +212,40 @@ describe("Parcel House Auditor Unit Tests", () => {
     expect(auditValidZoning.statutoryZoning.net_by_right_feasible).toBe(true);
     expect(auditValidZoning.statutoryZoning.lotSplitFeasible).toBe(true);
   });
+
+  it("8. Generates EverySpace property space monetization and renovation quote options", () => {
+    const audit = auditSingleHouseParcel({
+      parcelId: "04013-PHX-101",
+      address: "2410 E Campbell Ave, Phoenix, AZ",
+      lat: 33.50,
+      lng: -112.03,
+      lotSqft: 8500,
+      livingSqft: 1950,
+      yearBuilt: 1978,
+      bedrooms: 3,
+      bathrooms: 2,
+      hasPool: true,
+      hasGarage: true,
+      zoningCode: "R-1",
+      neighborhoodMedianHv: 620000,
+      stateCode: "AZ",
+      countyFips: "04013",
+    });
+
+    // EverySpace monetization check
+    expect(audit.everySpace).toBeDefined();
+    expect(audit.everySpace?.channels.length).toBeGreaterThanOrEqual(3); // driveway, pool, solar, storage
+    expect(audit.everySpace?.totalMonthlyEverySpaceGrossRevenueUsd).toBeGreaterThan(1000);
+    expect(audit.everySpace?.monthlyHoldingDeficitReductionPct).toBeGreaterThan(0);
+    expect(audit.everySpace?.holdingStrategyRecommendation).toContain("EverySpace generates");
+
+    // Renovation options check
+    expect(audit.renovationOptions).toBeDefined();
+    expect(audit.renovationOptions?.length).toBe(3);
+    const garageConversion = audit.renovationOptions?.find(r => r.improvementType === "garage_conversion_adu");
+    expect(garageConversion).toBeDefined();
+    expect(garageConversion?.verdict).toBe("STRONG_BUY_RECOMMENDED");
+    expect(garageConversion?.returnOnInvestmentPct).toBeGreaterThan(20);
+    expect(garageConversion?.statutoryEntitlementStatus.governingStatute).toContain("HB 2720");
+  });
 });

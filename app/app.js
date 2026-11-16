@@ -1380,6 +1380,22 @@ const _calcSolar = (typeof calculateSolarMicrogridRoi !== "undefined")
   ? calculateSolarMicrogridRoi
   : ((typeof require !== "undefined") ? require("./solarMicrogridEngine").calculateSolarMicrogridRoi : null);
 
+const _evalEverySpace = (typeof evaluateEverySpaceMonetization !== "undefined")
+  ? evaluateEverySpaceMonetization
+  : ((typeof require !== "undefined") ? require("../src/engines/everySpaceEngine").evaluateEverySpaceMonetization : null);
+
+const _evalRenovation = (typeof evaluateRenovationQuote !== "undefined")
+  ? evaluateRenovationQuote
+  : ((typeof require !== "undefined") ? require("../src/engines/renovationQuoteEngine").evaluateRenovationQuote : null);
+
+const _evalStreetForgeRow = (typeof evaluateRightOfWayReallocation !== "undefined")
+  ? evaluateRightOfWayReallocation
+  : ((typeof require !== "undefined") ? require("../src/engines/streetForgeEngine").evaluateRightOfWayReallocation : null);
+
+const _evalStreetForgeEv = (typeof evaluateEvChargerSiting !== "undefined")
+  ? evaluateEvChargerSiting
+  : ((typeof require !== "undefined") ? require("../src/engines/streetForgeEngine").evaluateEvChargerSiting : null);
+
 function getHighValueSaturationMultiplier(marketVal) {
   if (!marketVal || marketVal <= 2500000) return 1.0;
   return Math.pow(2500000 / marketVal, 0.45);
@@ -1657,6 +1673,66 @@ function auditSingleHouseParcel(input) {
     Math.max(10, Math.min(95, 48 + (isUrbanCore ? 15 : -8)))
   );
 
+  // 7. EverySpace Property Space Monetization Engine
+  const everySpace = _evalEverySpace ? _evalEverySpace({
+    propertyAddress: input.address || `Parcel ${input.parcelId}`,
+    city: input.address ? (input.address.split(",")[1]?.trim() || "Local City") : "Local City",
+    stateCode: stCode,
+    countyFips: input.countyFips,
+    bedrooms: input.bedrooms || 3,
+    bathrooms: input.bathrooms || 2,
+    lotSqft: lotSqft || 6000,
+    livingSqft: livingSqft || 1500,
+    monthlyDebtServiceMortgageUsd: Math.round(finalEstimatedValue * 0.0055),
+    monthlyPropertyTaxAndInsuranceUsd: Math.round(finalEstimatedValue * 0.0012),
+    plannedHoldingMonths: 18,
+    features: {
+      hasDriveway: input.hasGarage !== false,
+      drivewaySpacesCount: 2,
+      hasAtticOrBasementStorage: (livingSqft || 1500) > 1200,
+      storageSqft: Math.round((livingSqft || 1500) * 0.15),
+      hasPool: !!input.hasPool,
+      hasAvailableRoofSqftForSolar: unshadedRoofSqft > 250,
+      availableRoofSqft: unshadedRoofSqft,
+      hasExistingGarageForConversion: !!input.hasGarage,
+      hasExistingCasitaOrAdu: (input.units || 1) > 1,
+    },
+  }) : null;
+
+  // 8. Homeowner Renovation & Contractor Quote Evaluator
+  const renovationOptions = _evalRenovation ? [
+    _evalRenovation({
+      propertyAddress: input.address,
+      stateCode: stCode,
+      currentPropertyValue: finalEstimatedValue,
+      currentLivingSqft: livingSqft || 1500,
+      lotSqft: lotSqft || 6000,
+      zoningCode: input.zoningCode,
+      improvementType: "garage_conversion_adu",
+      quotedTotalCost: 65_000,
+      projectedSqft: 400,
+    }),
+    _evalRenovation({
+      propertyAddress: input.address,
+      stateCode: stCode,
+      currentPropertyValue: finalEstimatedValue,
+      currentLivingSqft: livingSqft || 1500,
+      lotSqft: lotSqft || 6000,
+      zoningCode: input.zoningCode,
+      improvementType: "detached_adu",
+      quotedTotalCost: 185_000,
+      projectedSqft: 750,
+    }),
+    _evalRenovation({
+      propertyAddress: input.address,
+      stateCode: stCode,
+      currentPropertyValue: finalEstimatedValue,
+      currentLivingSqft: livingSqft || 1500,
+      improvementType: "kitchen_remodel_minor",
+      quotedTotalCost: 26_000,
+    }),
+  ] : null;
+
   return {
     parcelId: input.parcelId,
     stateCode: stCode,
@@ -1731,6 +1807,8 @@ function auditSingleHouseParcel(input) {
       jointCapitalizationFormula: "ΔP_joint = P_max * [1 - Π(1 - Δp_i / P_max)]",
       displacementSensitivityScore,
     },
+    everySpace,
+    renovationOptions,
     legalEngineeringDisclaimers: [
       "LEGAL & ENGINEERING NON-RELIANCE NOTICE: Preliminary screening only based on public municipal GIS, tax rolls, and statutory feeds as of November 2026.",
       "AVM valuations do not constitute formal appraisals under USPAP standards. Verify actual condition, unrecorded improvements, and neighborhood comps with a licensed appraiser.",
@@ -2162,6 +2240,53 @@ function renderHouseAuditAside(audit) {
         • <b>Renter Displacement Sensitivity Score:</b> <b>${st.displacementSensitivityScore} / 100</b>
       </div>
     </div>
+
+    <!-- 6.5 EverySpace Holding Space Monetization Matrix -->
+    ${audit.everySpace ? `
+    <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;">
+        <span style="font-size:11.5px;font-weight:700;color:#334155;">EverySpace Holding Monetization</span>
+        <span style="font-size:11px;font-weight:700;color:${audit.everySpace.isCashFlowPositiveDuringHold ? '#15803d' : '#0284c7'};">
+          ${audit.everySpace.isCashFlowPositiveDuringHold ? '✓ Cash Flow Positive Hold' : `${audit.everySpace.monthlyHoldingDeficitReductionPct}% Deficit Offset`}
+        </span>
+      </div>
+      <div style="font-size:11px;color:#475569;margin-top:4px;">
+        • <b>Gross Holding Revenue:</b> <b>${fmt$(audit.everySpace.totalMonthlyEverySpaceGrossRevenueUsd)}/mo</b> (${fmt$(audit.everySpace.cumulativeEverySpaceEarningsOverHoldUsd)} over ${audit.everySpace.totalHoldingMonths}-mo pre-construction hold)<br>
+        • <b>Net Holding Cash Flow:</b> ${audit.everySpace.netMonthlyHoldingCashFlowUsd >= 0 ? '+' : ''}${fmt$(audit.everySpace.netMonthlyHoldingCashFlowUsd)}/mo (after debt service &amp; taxes)<br>
+        • <b>Monetized Channels:</b> ${audit.everySpace.channels.map(c => `<b>${c.name.split(' ')[0]}</b> (~${fmt$(c.monthlyRevenueExpectedUsd)}/mo)`).join(' &middot; ')}<br>
+        • <b>Carrying Equity Preserved:</b> ${fmt$(audit.everySpace.netEquityPreservedOverHoldUsd)} in holding deficits eliminated.
+      </div>
+      <div style="font-size:10.5px;color:#0369a1;background:#f0f9ff;padding:6px;border-radius:4px;border:1px solid #bae6fd;margin-top:6px;">
+        ℹ️ ${audit.everySpace.holdingStrategyRecommendation}
+      </div>
+    </div>` : ""}
+
+    <!-- 6.6 Homeowner Renovation & Contractor Quote Evaluator -->
+    ${audit.renovationOptions && audit.renovationOptions.length ? `
+    <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;">
+        <span style="font-size:11.5px;font-weight:700;color:#334155;">Homeowner Renovation &amp; Quote Evaluator</span>
+        <span style="font-size:10.5px;font-weight:700;color:#15803d;">Statutory By-Right Verified</span>
+      </div>
+      <div style="font-size:11px;color:#475569;margin-top:4px;">
+        ${audit.renovationOptions.map(r => `
+          <div style="background:#ffffff;padding:6px 8px;border-radius:4px;border:1px solid #cbd5e1;margin-top:4px;">
+            <div style="display:flex;justify-content:space-between;font-weight:700;color:#0f172a;">
+              <span>${r.improvementType.replace(/_/g, " ").toUpperCase()}</span>
+              <span style="color:${r.returnOnInvestmentPct >= 15 ? '#15803d' : '#64748b'};">${r.returnOnInvestmentPct >= 0 ? '+' : ''}${r.returnOnInvestmentPct}% ROI</span>
+            </div>
+            <div style="font-size:10.5px;color:#475569;">
+              Quote: ${fmt$(r.quotedCost)} (Benchmark: ${fmt$(r.benchmarkMarketCostLow)}–${fmt$(r.benchmarkMarketCostHigh)}) &middot; Value Add: <b>+${fmt$(r.estimatedEquityValueAdd)}</b><br>
+              ${r.everySpaceMonthlyYieldUsd > 0 ? `EverySpace Rent: <b>+${fmt$(r.everySpaceMonthlyYieldUsd)}/mo</b> (${r.paybackYears} yr payback) &middot; ` : ""}
+              Statute: <i>${r.statutoryEntitlementStatus.governingStatute}</i>
+            </div>
+            <div style="font-size:10px;color:#334155;margin-top:2px;">
+              <b>Verdict:</b> ${r.verdictSummary}
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    </div>` : ""}
 
     <!-- 7. Legal & Engineering Disclaimers -->
     <div style="border-top:1px solid #e2e8f0;padding-top:8px;font-size:10px;color:#64748b;line-height:1.4;">
@@ -9266,6 +9391,61 @@ function serializeLiveAdvisorContext() {
     }
   }
 
+  // EverySpace property monetization facts if house is active
+  if (ah && ah.audit && ah.audit.everySpace) {
+    const es = ah.audit.everySpace;
+    payload.everySpace = {
+      totalMonthlyGrossRevenueUsd: num(es.totalMonthlyEverySpaceGrossRevenueUsd),
+      netMonthlyHoldingCashFlowUsd: num(es.netMonthlyHoldingCashFlowUsd),
+      monthlyHoldingDeficitReductionPct: num(es.monthlyHoldingDeficitReductionPct),
+      isCashFlowPositiveDuringHold: !!es.isCashFlowPositiveDuringHold,
+      holdingStrategyRecommendation: es.holdingStrategyRecommendation || null,
+    };
+  }
+
+  // Renovation quote evaluation facts if house is active
+  if (ah && ah.audit && Array.isArray(ah.audit.renovationOptions) && ah.audit.renovationOptions.length) {
+    const rq = ah.audit.renovationOptions[0];
+    payload.renovationQuote = {
+      improvementType: rq.improvementType || null,
+      quotedCost: num(rq.quotedCost),
+      benchmarkMarketCostLow: num(rq.benchmarkMarketCostLow),
+      benchmarkMarketCostHigh: num(rq.benchmarkMarketCostHigh),
+      costFairnessRating: rq.costFairnessRating || null,
+      estimatedEquityValueAdd: num(rq.estimatedEquityValueAdd),
+      netEquityGainUsd: num(rq.netEquityGainUsd),
+      returnOnInvestmentPct: num(rq.returnOnInvestmentPct),
+      everySpaceMonthlyYieldUsd: num(rq.everySpaceMonthlyYieldUsd),
+      governingStatute: (rq.statutoryEntitlementStatus && rq.statutoryEntitlementStatus.governingStatute) || null,
+      verdict: rq.verdict || null,
+      verdictSummary: rq.verdictSummary || null,
+    };
+  }
+
+  // StreetForge civil opportunity facts for selected block group or corridor
+  if (selected && typeof _evalStreetForgeRow === "function") {
+    try {
+      const p = (byId.get(selected) && byId.get(selected).properties) || {};
+      const sf = _evalStreetForgeRow({
+        corridorName: p.n ? `${p.n} Arterial Corridor` : "Neighborhood Arterial",
+        city: p.c || "Local Jurisdiction",
+        stateCode: typeof activeState === "function" ? activeState() : "CA",
+        lengthMiles: 1.5,
+        currentDriveLanes: 4,
+        currentAadt: 14000,
+        reallocationType: "protected_bike_lane"
+      });
+      payload.streetForge = {
+        reallocationType: sf.reallocationType || null,
+        lengthMiles: num(sf.lengthMiles),
+        netMunicipalCostUsd: num(sf.netMunicipalCostUsd),
+        annualCo2TonsAvoided: num(sf.pollutionAndEmissions ? sf.pollutionAndEmissions.co2TonsAvoidedAnnual : null),
+        crashReductionPct: num(sf.safetyAndWalkability ? sf.safetyAndWalkability.crashReductionPct : null),
+        benefitCostRatio: num(sf.benefitCostRatio),
+      };
+    } catch (e) {}
+  }
+
   return payload;
 }
 window.serializeLiveAdvisorContext = serializeLiveAdvisorContext;
@@ -11474,5 +11654,12 @@ function closeProspectusModal() {
     document.body.classList.remove("prospectus-printing");
     document.body.style.overflow = "";
   }
+}
+
+if (typeof window !== "undefined") {
+  if (typeof _evalEverySpace === "function") window.evaluateEverySpaceMonetization = _evalEverySpace;
+  if (typeof _evalRenovation === "function") window.evaluateRenovationQuote = _evalRenovation;
+  if (typeof _evalStreetForgeRow === "function") window.evaluateRightOfWayReallocation = _evalStreetForgeRow;
+  if (typeof _evalStreetForgeEv === "function") window.evaluateEvChargerSiting = _evalStreetForgeEv;
 }
 

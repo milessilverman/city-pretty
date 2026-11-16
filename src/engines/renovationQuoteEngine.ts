@@ -303,3 +303,5 @@ export function evaluateHomeownerRenovationQuote(input: RenovationQuoteInput): R
     alternativeHigherRoiOptions
   };
 }
+
+export const evaluateRenovationQuote = evaluateHomeownerRenovationQuote;

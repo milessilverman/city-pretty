@@ -196,3 +196,17 @@ export function evaluateHomeownerRenovationQuote(input) {
     alternativeHigherRoiOptions
   };
 }
+
+export const evaluateRenovationQuote = evaluateHomeownerRenovationQuote;
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    evaluateHomeownerRenovationQuote,
+    evaluateRenovationQuote,
+  };
+}
+
+if (typeof window !== "undefined") {
+  window.evaluateHomeownerRenovationQuote = evaluateHomeownerRenovationQuote;
+  window.evaluateRenovationQuote = evaluateRenovationQuote;
+}

@@ -20,6 +20,14 @@ const _estRoof = (typeof estimateAccurateRoofArea !== "undefined")
   ? estimateAccurateRoofArea
   : ((typeof require !== "undefined") ? require("./roofAreaEngine").estimateAccurateRoofArea : null);
 
+const _evalEverySpace = (typeof evaluateEverySpaceMonetization !== "undefined")
+  ? evaluateEverySpaceMonetization
+  : ((typeof require !== "undefined") ? require("./everySpaceEngine").evaluateEverySpaceMonetization : null);
+
+const _evalRenovation = (typeof evaluateRenovationQuote !== "undefined")
+  ? evaluateRenovationQuote
+  : ((typeof require !== "undefined") ? require("./renovationQuoteEngine").evaluateRenovationQuote : null);
+
 function getHighValueSaturationMultiplier(marketVal) {
   if (!marketVal || marketVal <= 2500000) return 1.0;
   return Math.pow(2500000 / marketVal, 0.45);
@@ -297,6 +305,66 @@ function auditSingleHouseParcel(input) {
     Math.max(10, Math.min(95, 48 + (isUrbanCore ? 15 : -8)))
   );
 
+  // 7. EverySpace Property Space Monetization Engine
+  const everySpace = _evalEverySpace ? _evalEverySpace({
+    propertyAddress: input.address || `Parcel ${input.parcelId}`,
+    city: input.address ? (input.address.split(",")[1]?.trim() || "Local City") : "Local City",
+    stateCode: stCode,
+    countyFips: input.countyFips,
+    bedrooms: input.bedrooms || 3,
+    bathrooms: input.bathrooms || 2,
+    lotSqft: lotSqft || 6000,
+    livingSqft: livingSqft || 1500,
+    monthlyDebtServiceMortgageUsd: Math.round(finalEstimatedValue * 0.0055),
+    monthlyPropertyTaxAndInsuranceUsd: Math.round(finalEstimatedValue * 0.0012),
+    plannedHoldingMonths: 18,
+    features: {
+      hasDriveway: input.hasGarage !== false,
+      drivewaySpacesCount: 2,
+      hasAtticOrBasementStorage: (livingSqft || 1500) > 1200,
+      storageSqft: Math.round((livingSqft || 1500) * 0.15),
+      hasPool: !!input.hasPool,
+      hasAvailableRoofSqftForSolar: unshadedRoofSqft > 250,
+      availableRoofSqft: unshadedRoofSqft,
+      hasExistingGarageForConversion: !!input.hasGarage,
+      hasExistingCasitaOrAdu: (input.units || 1) > 1,
+    },
+  }) : null;
+
+  // 8. Homeowner Renovation & Contractor Quote Evaluator
+  const renovationOptions = _evalRenovation ? [
+    _evalRenovation({
+      propertyAddress: input.address,
+      stateCode: stCode,
+      currentPropertyValue: finalEstimatedValue,
+      currentLivingSqft: livingSqft || 1500,
+      lotSqft: lotSqft || 6000,
+      zoningCode: input.zoningCode,
+      improvementType: "garage_conversion_adu",
+      quotedTotalCost: 65_000,
+      projectedSqft: 400,
+    }),
+    _evalRenovation({
+      propertyAddress: input.address,
+      stateCode: stCode,
+      currentPropertyValue: finalEstimatedValue,
+      currentLivingSqft: livingSqft || 1500,
+      lotSqft: lotSqft || 6000,
+      zoningCode: input.zoningCode,
+      improvementType: "detached_adu",
+      quotedTotalCost: 185_000,
+      projectedSqft: 750,
+    }),
+    _evalRenovation({
+      propertyAddress: input.address,
+      stateCode: stCode,
+      currentPropertyValue: finalEstimatedValue,
+      currentLivingSqft: livingSqft || 1500,
+      improvementType: "kitchen_remodel_minor",
+      quotedTotalCost: 26_000,
+    }),
+  ] : null;
+
   return {
     parcelId: input.parcelId,
     stateCode: stCode,
@@ -371,6 +439,8 @@ function auditSingleHouseParcel(input) {
       jointCapitalizationFormula: "ΔP_joint = P_max * [1 - Π(1 - Δp_i / P_max)]",
       displacementSensitivityScore,
     },
+    everySpace,
+    renovationOptions,
     legalEngineeringDisclaimers: [
       "LEGAL & ENGINEERING NON-RELIANCE NOTICE: Preliminary screening only based on public municipal GIS, tax rolls, and statutory feeds as of November 2026.",
       "AVM valuations do not constitute formal appraisals under USPAP standards. Verify actual condition, unrecorded improvements, and neighborhood comps with a licensed appraiser.",

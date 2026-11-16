@@ -121,3 +121,13 @@ export function evaluateEverySpaceMonetization(input) {
     holdingStrategyRecommendation: recommendation
   };
 }
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    evaluateEverySpaceMonetization,
+  };
+}
+
+if (typeof window !== "undefined") {
+  window.evaluateEverySpaceMonetization = evaluateEverySpaceMonetization;
+}
