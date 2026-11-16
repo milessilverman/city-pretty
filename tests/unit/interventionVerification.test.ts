@@ -46,7 +46,9 @@ describe("intervention verification file", () => {
     expect(IV.street_trees.status).toBe("unverified");
     expect(IV.street_trees.notes).toMatch(/cannot be reproduced/);
     expect(IV.ev_hub.status).toBe("unverified");
-    expect(IV.adu.status).toBe("unverified");
+    // Round 3: the ADU study was found after all (Brueckner & Thomaz 2024); effect checked, cost not.
+    expect(IV.adu.status).toBe("partially_verified");
+    expect(IV.adu.notes).toMatch(/Correction: the 16 Nov catalog audit said this study was not found/);
     expect(IV.school_bond.status).toBe("unverified");
     expect(IV.farmers_market.status).toBe("unverified");
     expect(IV.affordable_housing.applies_if).toEqual({ median_household_income_below: 26000 });
@@ -74,7 +76,14 @@ describe("round 2 (docs/audit/catalog-coverage-round2.md)", () => {
   });
 
   it("the crime-to-price chain stays unverified (coefficient not in the abstract)", () => {
-    for (const id of ["street_lighting", "foot_patrol", "violence_interruption", "bid"]) expect(IV[id].status).toBe("unverified");
+    for (const id of ["foot_patrol", "violence_interruption", "bid"]) expect(IV[id].status).toBe("unverified");
+  });
+
+  it("round 3: street lighting no longer uses that coefficient; its effect is re-derived from two fetched sources", () => {
+    expect(IV.street_lighting.status).toBe("partially_verified");
+    expect(IV.street_lighting.cost).toBe("unchecked");
+    expect(IV.street_lighting.sourced_effect.pct).toBe(0.6);
+    expect(IV.street_lighting.evidence).toMatch(/Pope & Pope/);
   });
 });
 

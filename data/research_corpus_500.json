@@ -1483,24 +1483,22 @@
   "year": 2019,
   "journal": "NBER Working Paper 25798",
   "doi": "10.3386/w25798",
-  "source_url": "https://doi.org/10.3386/w25798",
-  "impact": null,
-  "geography": null,
+  "source_url": "https://www.nber.org/system/files/working_papers/w25798/w25798.pdf",
+  "impact": "Accounting conservatively for potential spillovers, lighting reduces outdoor nighttime index crimes by approximately 36 percent and reduces overall index crimes by approximately 4 percent in affected communities.",
+  "geography": "New York City public housing developments",
   "vpd": null,
   "takeaway": null,
   "citation": "Aaron Chalfin, Benjamin Hansen, Jason Lerner, Lucie Parker (2019). Reducing Crime Through Environmental Design: Evidence from a Randomized Experiment of Street Lighting in New York City. NBER Working Paper 25798. https://doi.org/10.3386/w25798",
   "verification": {
-   "status": "partially_verified",
-   "method": "crossref_doi_lookup",
+   "status": "verified",
+   "method": "crossref_doi_lookup + full text (NBER PDF) fetched 2026-11-16",
    "checked_on": "2026-11-16",
-   "evidence": "Crossref /works/10.3386/w25798: title, authors, year, container confirmed.",
+   "evidence": "Crossref /works/10.3386/w25798 metadata confirmed; NBER PDF text: \"Accounting conservatively for potential spillovers, lighting reduces outdoor nighttime index crimes by approximately 36 percent and reduces overall index crimes by approximately 4 percent in affected communities\". Also: \"On NYC's public housing campuses, approximately 11 percent of index crimes occur outdoors and during nighttime hours.\"",
    "unverified_fields": [
     "vpd",
-    "takeaway",
-    "impact",
-    "geography"
+    "takeaway"
    ],
-   "notes": "citation matched; title completed from Crossref record. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims).",
+   "notes": "citation matched; title completed from Crossref record. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). Round 3 (16 Nov): impact and geography confirmed from the full text; the removed $/$1 and takeaway stay removed.",
    "removed_unverified_claims": {
     "impact": "Adding temporary high-intensity LED lighting towers led to a 36% reduction in nighttime outdoor index crimes",
     "vpd": 3.2,
@@ -1600,5 +1598,93 @@
    }
   },
   "last_verified": "2026-11-16"
+ },
+ {
+  "id": "crime_pope_pope",
+  "category": "Streets & safety",
+  "title": "Crime and property values: Evidence from the 1990s crime drop",
+  "authors": "Devin G. Pope & Jaren C. Pope",
+  "year": 2012,
+  "journal": "Regional Science and Urban Economics",
+  "geography": null,
+  "impact": "The estimated elasticities of property values with respect to crime range from -0.15 to -0.35.",
+  "citation": "Devin G. Pope & Jaren C. Pope (2012). Crime and property values: Evidence from the 1990s crime drop. Regional Science and Urban Economics.",
+  "doi": "10.1016/j.regsciurbeco.2011.08.008",
+  "source_url": "https://repository.upenn.edu/bitstreams/438c8723-dc56-4664-a888-d00956186681/download",
+  "last_verified": "2026-11-16",
+  "verification": {
+   "status": "verified",
+   "method": "Open copy (UPenn repository) fetched 2026-11-16; metadata confirmed via Crossref.",
+   "checked_on": "2026-11-16",
+   "evidence": "The estimated elasticities of property values with respect to crime range from -0.15 to -0.35.",
+   "unverified_fields": [],
+   "notes": "Added in catalog round 3 (docs/audit/catalog-coverage-round3.md)."
+  }
+ },
+ {
+  "id": "adu_brueckner_thomaz",
+  "category": "Housing",
+  "title": "ADUs in Los Angeles: Where are they located and by how much do they raise property value?",
+  "authors": "Jan K. Brueckner & Sarah Thomaz",
+  "year": 2024,
+  "journal": "Real Estate Economics",
+  "geography": null,
+  "impact": "The assessed-value regressions show that ADU presence raises a parcel's assessed value and selling price by 7%-9%.",
+  "citation": "Jan K. Brueckner & Sarah Thomaz (2024). ADUs in Los Angeles: Where are they located and by how much do they raise property value?. Real Estate Economics.",
+  "doi": "10.1111/1540-6229.12471",
+  "source_url": "https://doi.org/10.1111/1540-6229.12471",
+  "last_verified": "2026-11-16",
+  "verification": {
+   "status": "verified",
+   "method": "Crossref metadata and abstract fetched 2026-11-16.",
+   "checked_on": "2026-11-16",
+   "evidence": "The assessed-value regressions show that ADU presence raises a parcel's assessed value and selling price by 7%-9%.",
+   "unverified_fields": [],
+   "notes": "Added in catalog round 3 (docs/audit/catalog-coverage-round3.md)."
+  }
+ },
+ {
+  "id": "vacant_lin_jensen_wachter",
+  "category": "Greening",
+  "title": "The Price Effects of Greening Vacant Lots: How Neighborhood Attributes Matter",
+  "authors": "Desen Lin, Shane Jensen & Susan M. Wachter",
+  "year": 2021,
+  "journal": "SSRN Working Paper",
+  "geography": null,
+  "impact": "we find that prices for houses within 1,000 feet of a greened vacant lot rise by about 4%.",
+  "citation": "Desen Lin, Shane Jensen & Susan M. Wachter (2021). The Price Effects of Greening Vacant Lots: How Neighborhood Attributes Matter. SSRN Working Paper.",
+  "doi": "10.2139/ssrn.3899624",
+  "source_url": "https://doi.org/10.2139/ssrn.3899624",
+  "last_verified": "2026-11-16",
+  "verification": {
+   "status": "verified",
+   "method": "Crossref metadata and abstract fetched 2026-11-16.",
+   "checked_on": "2026-11-16",
+   "evidence": "we find that prices for houses within 1,000 feet of a greened vacant lot rise by about 4%.",
+   "unverified_fields": [],
+   "notes": "Added in catalog round 3 (docs/audit/catalog-coverage-round3.md)."
+  }
+ },
+ {
+  "id": "tree_wachter_wong",
+  "category": "Urban Forestry & Tree Canopy",
+  "title": "What Is a Tree Worth? Green‐City Strategies, Signaling and Housing Prices",
+  "authors": "Susan M. Wachter & Grace Wong",
+  "year": 2008,
+  "journal": "Real Estate Economics",
+  "geography": null,
+  "impact": "A 7 to 11% price differential is identified within 4,000 feet of the Fairmount tree plantings. ... Any positive changes brought by the PHS tree plantings were not detected with sufficient statistical power.",
+  "citation": "Susan M. Wachter & Grace Wong (2008). What Is a Tree Worth? Green‐City Strategies, Signaling and Housing Prices. Real Estate Economics.",
+  "doi": "10.1111/j.1540-6229.2008.00212.x",
+  "source_url": "https://doi.org/10.1111/j.1540-6229.2008.00212.x",
+  "last_verified": "2026-11-16",
+  "verification": {
+   "status": "verified",
+   "method": "Crossref metadata and abstract fetched 2026-11-16. Correlational.",
+   "checked_on": "2026-11-16",
+   "evidence": "A 7 to 11% price differential is identified within 4,000 feet of the Fairmount tree plantings. ... Any positive changes brought by the PHS tree plantings were not detected with sufficient statistical power.",
+   "unverified_fields": [],
+   "notes": "Added in catalog round 3 (docs/audit/catalog-coverage-round3.md)."
+  }
  }
 ]
