@@ -774,5 +774,321 @@
       ],
       "notes": "SEVERE: original record cited Utah SB 174 (2021), which is 'Driver License Document Requirements' \u2014 unrelated. Also cited 'HB 465' and \u00a7 10-9a-403 and a commuter-rail incentive, none of which were confirmed; removed."
     }
+  },
+  {
+    "id": "wa_hb1337_adu",
+    "state_code": "WA",
+    "bill_number": "HB 1337 (2023)",
+    "session": "2023 Regular Session",
+    "short_name": "WA HB 1337: two ADUs on single-family lots in urban growth areas",
+    "statute_citation": "RCW 36.70A.681 (2023 c 334 s 4)",
+    "effective_date": "2023-07-23",
+    "statute_url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681",
+    "max_units_by_right": null,
+    "adus_by_right": 2,
+    "max_parking_requirement_per_unit": 2,
+    "unmapped_condition": "lot inside an urban growth area of a city or county planning under RCW 36.70A.040 (and past its local compliance deadline)",
+    "statutory_exclusions": [
+      "critical_areas_or_buffers (RCW 36.70A.060)",
+      "impaired_reservoir_watershed"
+    ],
+    "summary": "Cities and counties planning under the Growth Management Act must allow at least two accessory dwelling units on every lot in zones within an urban growth area that allow single-family homes; no owner-occupancy rule; ADU floor-area cap no smaller than 1,000 sq ft; no off-street parking within 1/2 mile walk of a major transit stop, at most one space per ADU on lots under 6,000 sq ft and two on larger lots (exceptions by approved study).",
+    "verification": {
+      "status": "verified",
+      "method": "Official RCW text (app.leg.wa.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "(c) The city or county must allow at least two accessory dwelling units on all lots that are located in all zoning districts within an urban growth area that allow for single-family homes in the following configurations: (i) One attached accessory dwelling unit and one detached accessory dwelling unit; (ii) Two attached accessory dwelling units; or (iii) Two detached accessory dwelling units, which may be comprised of either one or two detached structures; (d) The city or county must permit accessory dwelling units in structures detached from the principal unit; (e) The city or county must allow an accessory dwelling unit on any lot that meets the minimum lot size required for the principal",
+      "unverified_fields": [
+        "local compliance deadline (set in RCW 36.70A.680, not fetched)"
+      ],
+      "notes": "Effective date is the session law's (the section's exclusion clause refers to 'as of July 23, 2023'); each jurisdiction's obligation begins six months after its periodic plan update under RCW 36.70A.680, which was not fetched."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "wa_sb5184_parking",
+    "state_code": "WA",
+    "bill_number": "ESSB 5184 (2025)",
+    "session": "2025 Regular Session",
+    "short_name": "WA SB 5184: statewide caps on minimum parking",
+    "statute_citation": "Laws of 2025, ch. 204 (new sections in RCW 35.21, 35A.21, 36.01)",
+    "effective_date": "2025-07-27",
+    "statute_url": "https://lawfilesext.leg.wa.gov/biennium/2025-26/Pdf/Bills/Session%20Laws/Senate/5184-S.SL.pdf",
+    "parcel_level": false,
+    "municipality_pop_min": 30001,
+    "max_parking_requirement_per_unit": 0.5,
+    "summary": "Cities and counties over 30,000 people may not require more than 0.5 parking space per multifamily unit or 1 per single-family home, or 2 per 1,000 sq ft of commercial space, and may require none for homes under 1,200 sq ft, affordable or senior housing, small commercial spaces and changes of use to residential. Cities of 50,000+ must comply within 18 months of the effective date, 30,000-50,000 within three years; exceptions by approved empirical study.",
+    "verification": {
+      "status": "verified",
+      "method": "Session law PDF (lawfilesext.leg.wa.gov) and bill status page (app.leg.wa.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "(1) A city may not require more than 0.5 parking space per 18 multifamily dwelling unit or more than one parking space per single-19 family home. 20 ENGROSSED SUBSTITUTE SENATE BILL 5184 AS AMENDED BY THE HOUSE Passed Legislature - 2025 Regular Session State of Washington 69th Legislature 2025 Regular Session By Senate Housing (originally sponsored by Senators Bateman, Trudeau, Frame, Krishnadasan, Liias, Nobles, Pedersen, Salomon, Shewmake, and Stanford) READ FIRST TIME 02/07/25. p. 1 ESSB 5184.SL (2) A city may not require more than two parking spaces per 1,000 1 square feet of commercial space. 2 (3) A city may not require any minimum parking requirements for:3 (a) Residences under 1,200 || May 7 Governor signed. Chapter 204, 2025 Laws. (View session law) Effective date 7/27/2025. Close View all roll calls Cl",
+      "unverified_fields": [],
+      "notes": "Jurisdiction-wide parking caps, not a parcel-level housing right (parcel_level false). Compliance deadlines: about 2027-01-27 (50,000+) and 2028-07-27 (30,000-50,000), computed from the effective date."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "wa_hb1042_existing_buildings",
+    "state_code": "WA",
+    "bill_number": "ESHB 1042 (2023)",
+    "session": "2023 Regular Session",
+    "short_name": "WA HB 1042: +50% homes inside existing commercial and mixed-use buildings",
+    "statute_citation": "Laws of 2023, ch. 285 (new sections in RCW 35.21 and 35A.21)",
+    "effective_date": "2023-07-23",
+    "statute_url": "https://lawfilesext.leg.wa.gov/biennium/2023-24/Pdf/Bills/Session%20Laws/House/1042-S.SL.pdf",
+    "applies_to_zone": "commercial",
+    "unmapped_condition": "an existing building in a zone that permits multifamily housing, in a city past its compliance deadline (six months after its next periodic plan update)",
+    "summary": "In buildings zoned commercial or mixed use, cities may not stop new homes inside an existing building envelope at up to 50% more density than the zone allows, may not require parking for the added units, and may not impose permitting beyond what applies to other residential development. Self-executing in cities that miss the deadline.",
+    "verification": {
+      "status": "verified",
+      "method": "Session law PDF (lawfilesext.leg.wa.gov) and bill status page",
+      "checked_on": "2026-11-16",
+      "evidence": "(1)(a) Code cities must adopt or amend by ordinance, and 8 incorporate into their development regulations, zoning regulations, 9 and other official controls the requirements of subsection (2) of 10 this section for buildings that are zoned for commercial or mixed use 11 no later than six months after its next periodic comprehensive plan 12 update required under RCW 36.70A.130. 13 (b) The requirements of subsection (2) of this section apply and 14 take effect in any code city that has not adopted or amended 15 ordinances, regulations, or other official controls as required under 16 this section by the timeline in (a) of this subsection and supersede, 17 preempt, and invalidate any conflicting || (a) Impose a restriction on housing unit density that prevents 4 the addition of housing units at a density up to 50 percent more than 5 what is allowed in the underlying zone if constructed entirely within 6 an existing building envelope in a building located within a zone 7 that permits multifamily housing, provided that generally applicable 8 health and safety standards, including but not limited to building 9 code standards and fire and life safety standards, can be met within 10 the buildin || Effective date 7/23/2023. Close View all",
+      "unverified_fields": [],
+      "notes": ""
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "or_adu_197a425",
+    "state_code": "OR",
+    "bill_number": "SB 1051 (2017)",
+    "session": "2017 Regular Session",
+    "short_name": "OR ADU law: one ADU per detached home inside urban growth boundaries",
+    "statute_citation": "ORS 197A.425 (formerly ORS 197.312(5); Oregon Laws 2017, ch. 745)",
+    "effective_date": "2018-07-01",
+    "statute_url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197a.html",
+    "adus_by_right": 1,
+    "municipality_pop_min": 2501,
+    "max_parking_requirement_per_unit": 0,
+    "unmapped_condition": "inside an urban growth boundary, in an area zoned for detached single-unit dwellings (counties over 15,000 people are also covered; unincorporated areas are not modeled)",
+    "summary": "Cities over 2,500 people and counties over 15,000 must allow at least one accessory dwelling unit per detached single-unit home inside the urban growth boundary, subject to reasonable siting and design rules, which may not include owner-occupancy or additional off-street parking requirements.",
+    "verification": {
+      "status": "verified",
+      "method": "Official ORS chapter 197A (oregonlegislature.gov) and Oregon Laws 2017 ch. 745",
+      "checked_on": "2026-11-16",
+      "evidence": "197A.425 Accessory dwelling units. (1)(a) A city with a population greater than 2,500 or a county with a population greater than 15,000 shall allow in areas within the urban growth boundary that are zoned for detached single-unit dwellings the development of at least one accessory dwelling unit for each detached single-unit dwelling, subject to reasonable local regulations relating to siting and design. (b) As used in this subsection: (A) Accessory dwelling unit means an interior, attached or detached residential structure that is used in connection with or that is accessory to a single-unit dwelling. (B) Reasonable local regulations relating to siting and design does not include owner-occupancy requirements of either the primary or accessory structure or requirements to construct additional off-street parking. (2) Subsection (1) of this section does not prohibit local governments from r || SECTION 12. The amendments to ORS 197.312, 215.416 and 227.175 by sections 2, 3 and 6 of this 2017 Act become operative on July 1, 2018. SECTION 13. (1) Section 1 of this 2017 Act and the amendments t",
+      "unverified_fields": [],
+      "notes": ""
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "or_commercial_197a460",
+    "state_code": "OR",
+    "bill_number": "HB 3395 (2023)",
+    "session": "2023 Regular Session",
+    "short_name": "OR: affordable housing allowed on commercial-only land",
+    "statute_citation": "ORS 197A.460 (Oregon Laws 2023, ch. 223, s. 2)",
+    "effective_date": "2024-01-01",
+    "statute_url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197a.html",
+    "applies_to_zone": "commercial",
+    "affordability_mandate_pct": null,
+    "unmapped_condition": "affordable-housing covenant (each unit at or below 60% of area median income, or mixed use for moderate income), inside an urban growth boundary, land not vacant and not added to the boundary in the last 15 years, no slope of 25%+ or 100-year floodplain",
+    "summary": "Inside urban growth boundaries, local governments must allow covenant-restricted affordable housing (60% AMI) or mixed-use buildings with ground-floor commercial and moderate-income homes on land zoned only for commercial (not industrial) use, under the standards of the most comparable residential zone.",
+    "verification": {
+      "status": "verified",
+      "method": "Official ORS chapter 197A and Oregon Laws 2023 ch. 223",
+      "checked_on": "2026-11-16",
+      "evidence": "197A.460 Residential use of commercial lands for affordable housing. (1) Notwithstanding an acknowledged comprehensive plan or land use regulations, within an urban growth boundary a local government shall allow, on lands zoned to allow only commercial uses and not industrial uses, the siting and development of: (a) Residential structures subject to an affordable housing covenant as provided in ORS 456.270 to 456.295 making each unit affordable to a household with income less than or equal to 60 percent of the area median income as defined in ORS 456.270; or (b) Mixed use structures with ground floor commercial units and residential units subject to an affordable housing covenant as provided in ORS 456.270 to 456.295 making the properties affordable to moderate income households, as defined in ORS 456.270. (2) The local government may only apply those approval standards, conditions and p || Sections 2, 17, 29 and 30 of this 2023 Act and the amendments to ORS 92.090, 94.550, 100.015, 100.022, 100.105, 100.110, 100.115, 197.303, 197.830, 215.427 and",
+      "unverified_fields": [
+        "bill_number HB 3395 (the chapter text was fetched; the bill number was not read from it)"
+      ],
+      "notes": ""
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "mt_adu_76_2_345",
+    "state_code": "MT",
+    "bill_number": "SB 528 (2023)",
+    "session": "68th Legislature (2023)",
+    "short_name": "MT: one ADU by right on single-family lots",
+    "statute_citation": "Mont. Code Ann. \u00a7 76-2-345 (Ch. 502, L. 2023)",
+    "effective_date": null,
+    "statute_url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0450/0760-0020-0030-0450.html",
+    "adus_by_right": 1,
+    "max_parking_requirement_per_unit": 0,
+    "summary": "Municipalities must allow at least one accessory dwelling unit by right on a lot with a single-family dwelling (attached, detached or internal; detached/attached at most 75% of the house or 1,000 sq ft), with no added parking, design-matching or owner-occupancy requirement.",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Montana Code Annotated 2025 (leg.mt.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "(1) (a) A municipality shall adopt regulations under this chapter that allow a minimum of one accessory dwelling unit by right on a lot or parcel that contains a single-family dwelling. (b) An accessory dwelling unit may be attached, detached, or internal to the single-family dwelling on a lot or parcel. (c) If the accessory dwelling unit is detached from or attached to the single-family dwelling, it may not be more than 75% of the gross floor area of the single-family dwelling or 1,000 square feet, whichever is less. (2) A municipality may not: (a) require that a lot or parcel have additional parking to accommodate an accessory dwelling unit or require fees in lieu of additional parking; (b",
+      "unverified_fields": [
+        "bill_number SB 528 (code history says Ch. 502, L. 2023; bill number not read from a fetched source)",
+        "effective_date (session law not reachable)",
+        "in_effect (a 2023 court challenge to Montana's housing laws was reported; outcome not confirmed from a court source)"
+      ],
+      "notes": ""
+    },
+    "last_verified": null
+  },
+  {
+    "id": "mt_commercial_76_2_304_4",
+    "state_code": "MT",
+    "bill_number": "SB 245 (2023)",
+    "session": "68th Legislature (2023)",
+    "short_name": "MT: multifamily allowed in commercial zones; parking caps",
+    "statute_citation": "Mont. Code Ann. \u00a7 76-2-304(4)-(5)",
+    "effective_date": null,
+    "statute_url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html",
+    "applies_to_zone": "commercial",
+    "municipality_pop_min": 5001,
+    "max_parking_requirement_per_unit": 1,
+    "unmapped_condition": "municipality designated an urban area by the Census Bureau, and a will-serve letter from both the municipal water and sewer systems",
+    "summary": "In Census-designated urban municipalities over 5,000 people, multiple-unit dwellings and mixed-use developments with them are a permitted use in commercial zones when municipal water and sewer will serve the lot; zoning may not require more than one parking space per unit (or the shared-parking equivalent), or set height limits under 60 ft in downtown commercial, heavy commercial or industrial zones.",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Montana Code Annotated 2025 (leg.mt.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "(4) (a) In a municipality that is designated as an urban area by the United States census bureau with a population over 5,000 as of the most recent census, the city council or other legislative body of the municipality shall allow as a permitted use multiple-unit dwellings and mixed-use developments that include multiple-unit dwellings on a parcel or lot that: (i) has a will-serve letter from both a municipal water system and a municipal sewer system; and (ii) is located in a commercial zone. (b) Zoning regulations in municipalities meeting the requirements of subsection (4)(a) may not include a requirement to provide more than: (i) one off-street parking space for each unit and accessible parking spaces as required by the Americans With Disabilities Act of 1990, 42 U.S.C. 12101, et seq.; or (ii) an equivalent number of spaces required under subsection (4)(b)(i) provided through a shared",
+      "unverified_fields": [
+        "bill_number SB 245 (not read from a fetched source)",
+        "effective_date (session law not reachable)",
+        "current version (the code page shows two versions of subsection (4), likely a contingent amendment from Ch. 591 or 68, L. 2025)"
+      ],
+      "notes": ""
+    },
+    "last_verified": null
+  },
+  {
+    "id": "ma_adu_40a3",
+    "state_code": "MA",
+    "bill_number": "Affordable Homes Act (St. 2024, c. 150, s. 8)",
+    "session": "2023-2024 (193rd General Court)",
+    "short_name": "MA: one ADU by right in single-family zones",
+    "statute_citation": "M.G.L. c. 40A, \u00a7 3 (added by St. 2024, c. 150, \u00a7 8)",
+    "effective_date": "2025-02-02",
+    "statute_url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3",
+    "adus_by_right": 1,
+    "max_parking_requirement_per_unit": 1,
+    "summary": "No zoning ordinance or bylaw may prohibit, unreasonably restrict or require a special permit for a single accessory dwelling unit (or its rental) in a single-family residential zoning district; reasonable regulations allowed; no owner-occupancy requirement; at most one added parking space, none within 0.5 mile of a commuter rail, subway, ferry or bus station.",
+    "verification": {
+      "status": "verified",
+      "method": "General Laws c. 40A \u00a7 3 and Session Laws 2024 c. 150 (malegislature.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "No zoning ordinance or by-law shall prohibit, unreasonably restrict or require a special permit or other discretionary zoning approval for the use of land or structures for a single accessory dwelling unit, or the rental thereof, in a single-family residential zoning district; provided, that the use of land or structures for such accessory dwelling unit under this paragraph may be subject to reasonable regulations, including, but not limited to, 310 CMR 15.000 et seq., if applicable, site plan review, regulations concerning dimensional setbacks and the bulk and height of structures and may be subject to restrictions and prohibitions on short-term rental, as defined in section 1 of chapter 64 || SECTION 143. Sections 8, 46, 48 and 49 shall take effect 180 days after the effective date of this act. SECTION 144. Sec || therefore it is hereby declared to be an emergency law, necessary for the immediate preservation of the public convenien || Approved, August 6, 2024. Go D",
+      "unverified_fields": [],
+      "notes": "Effective date computed: the act is an emergency law approved 2024-08-06, and section 8 takes effect 180 days after the act's effective date."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "ri_adu_large_lot",
+    "state_code": "RI",
+    "bill_number": "P.L. 2024, ch. 284/285",
+    "session": "2024",
+    "short_name": "RI: one ADU by right on residential lots of 20,000 sq ft or more",
+    "statute_citation": "R.I. Gen. Laws \u00a7\u00a7 45-24-37(e), 45-24-73(a)(2)",
+    "effective_date": "2024-06-25",
+    "statute_url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm",
+    "adus_by_right": 1,
+    "min_lot_size_sqft": 20000,
+    "summary": "One accessory dwelling unit per lot is allowed by right, through an administrative building permit, on lots of 20,000 sq ft or more whose primary use is residential, if it meets the design standards of \u00a7\u00a7 45-24-31 and 45-24-73.",
+    "verification": {
+      "status": "verified",
+      "method": "Rhode Island General Laws (webserver.rilegislature.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "(a) Pursuant to \u00a7 45-24-37, one accessory dwelling unit (ADU) per lot shall be allowed by right under the following circumstances: (1) On an owner-occupied property as a reasonable accommodation for family members with disabilities; or (2) On a lot with a total lot area of twenty thousand square feet (20,000 sq. ft.) or more for which the primary use is residential; or (3) Where the proposed ADU is located within the existing footprint of the primary structure or existing accessory attached or detached structure and does not expand the footprint of the structure. (b) Uniform standards. (1) A m || (e) Notwithstanding any other provision of this chapter, an accessory dwelling unit (\u201cADU\u201d) that meets the requirements of \u00a7\u00a7 45-24-31 and 45-24-73(a) shall be a permitted use in all residential zoning districts. An ADU that meets the requirements of \u00a7\u00a7 45-24-31 and 45-24-73(a) shall be permitted through an administrative building permit process only. (f) Wh || P.L. 2024, ch. 284, \u00a7 1, effective June 25, 2024;",
+      "unverified_fields": [],
+      "notes": ""
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "ri_adu_existing_footprint",
+    "state_code": "RI",
+    "bill_number": "P.L. 2024, ch. 284/285",
+    "session": "2024",
+    "short_name": "RI: one ADU by right inside an existing structure's footprint",
+    "statute_citation": "R.I. Gen. Laws \u00a7 45-24-73(a)(3)",
+    "effective_date": "2024-06-25",
+    "statute_url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm",
+    "adus_by_right": 1,
+    "unmapped_condition": "the ADU fits within the existing footprint of the primary structure or an existing accessory structure",
+    "summary": "One accessory dwelling unit per lot is allowed by right where it is located within the existing footprint of the primary structure or an existing attached or detached accessory structure and does not expand it.",
+    "verification": {
+      "status": "verified",
+      "method": "Rhode Island General Laws (webserver.rilegislature.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "(3) Where the proposed ADU is located within the existing footprint of the primary structure or existing accessory attached or detached structure and does not expand the footprint of the structure. (b) Uniform standards.",
+      "unverified_fields": [],
+      "notes": ""
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "ca_adu_66323",
+    "state_code": "CA",
+    "bill_number": "ADU law (Gov. Code \u00a7\u00a7 66314-66342)",
+    "session": "recodified 2024",
+    "short_name": "CA: ADU and junior ADU approved ministerially on single-family lots",
+    "statute_citation": "Cal. Gov. Code \u00a7\u00a7 66317(a)(1), 66323(a)",
+    "effective_date": null,
+    "statute_url": "https://codes.findlaw.com/ca/government-code/gov-sect-66323/",
+    "adus_by_right": 2,
+    "summary": "A local agency must ministerially approve, in residential or mixed-use zones, one ADU and one junior ADU per lot with a proposed or existing single-family dwelling (among other combinations in \u00a7 66323); ADU permit applications are approved ministerially without discretionary review or a hearing (\u00a7 66317).",
+    "verification": {
+      "status": "partially_verified",
+      "method": "FindLaw copy of the California Government Code, 'current as of January 01, 2026' (leginfo.legislature.ca.gov blocks the audit machine)",
+      "checked_on": "2026-11-16",
+      "evidence": "(a) Notwithstanding Sections 66314 to 66322 , inclusive, a local agency shall ministerially approve an application for a building permit within a residential or mixed-use zone to create any of the following units, or any combination of the following units : (1) One accessory dwelling unit and one junior accessory dwelling unit per lot with a proposed or existing single-family dwelling if all of the following apply: ( || (a) (1) A permit application for an accessory dwelling unit shall be considered and approved ministerially without discretionary review or a hearing, notwithstanding Section 65901 or 65906 or any local ordinance regulating the issuance of variances or special use permits. (2)(A) A permitting agency",
+      "unverified_fields": [
+        "effective_date (section history not on the fetched page; the ADU statute was renumbered into \u00a7\u00a7 66314 et seq. in 2024)",
+        "adus_by_right (other unit combinations in \u00a7 66323 not modeled)"
+      ],
+      "notes": "Secondary copy (FindLaw) of the official code; re-check against leginfo when reachable."
+    },
+    "last_verified": null
+  },
+  {
+    "id": "az_adaptive_reuse_9_462_10",
+    "state_code": "AZ",
+    "bill_number": "A.R.S. \u00a7 9-462.10 (as amended)",
+    "session": "unconfirmed",
+    "short_name": "AZ: multifamily / adaptive reuse on commercial, office and mixed-use parcels in cities of 150,000+",
+    "statute_citation": "A.R.S. \u00a7 9-462.10",
+    "effective_date": null,
+    "statute_url": "https://www.azleg.gov/ars/9/00462-10.htm",
+    "applies_to_zone": "commercial",
+    "municipality_pop_min": 150000,
+    "unmapped_condition": "parcel not inside a city-designated commercial or employment hub (cities may exclude up to 10% of such parcels), and within the share of parcels the city must open (at least 10%)",
+    "summary": "Cities of 150,000+ must set objective standards allowing multifamily residential development or adaptive reuse of existing commercial, office or mixed-use parcels without a conditional use permit, PUD, rezoning or any hearing, on at least 10% of such parcels; they may exclude designated commercial/employment hubs (up to 10%) and may not exclude parcels averaging under 65 dB.",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Arizona Revised Statutes (azleg.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "A. Within ninety days after the effective date of this amendment to this section, the governing body of a municipality with a population of one hundred fifty thousand or more persons shall establish objective standards to allow multifamily residential development or adaptive reuse of existing commercial, office or mixed use parcels within the municipality without requiring a conditional use permit, a planned unit development or rezoning application or any other application that would require a public hearing. The governing body of the municipality shall: 1. Allow for multifamily residential development or adaptive reuse of at least ten percent of the existing commercial, office or mixed use parcels. For the purposes of determining the minimum percentage of parcels eligible for multifamily residential development or adaptive reuse, the governing body of the municipality may analyze the co",
+      "unverified_fields": [
+        "effective_date (the azleg page has no history note; the amending act was not identified)",
+        "bill_number"
+      ],
+      "notes": ""
+    },
+    "last_verified": null
+  },
+  {
+    "id": "tx_sb15_small_lots",
+    "state_code": "TX",
+    "bill_number": "SB 15 (2025)",
+    "session": "89th Legislature, Regular Session",
+    "short_name": "TX SB 15: 3,000 sq ft lots allowed in new subdivisions of large cities",
+    "statute_citation": "Tex. Local Gov't Code \u00a7\u00a7 211.051-211.058 (added by SB 15, 89th Leg.)",
+    "effective_date": "2025-09-01",
+    "statute_url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00015F.htm",
+    "municipality_pop_min": 150001,
+    "unmapped_condition": "an unplatted tract of 5 acres or more in a single-family zone, in a city wholly or partly in a county of more than 300,000 people",
+    "summary": "In cities over 150,000 people in counties over 300,000, on unplatted tracts of 5+ acres zoned single-family, a city may not require residential lots larger than 3,000 sq ft, wider than 30 ft or deeper than 75 ft, nor density rules that block a house on a 3,000 sq ft lot; small lots (\u22644,000 sq ft) get setback, cover and parking limits.",
+    "verification": {
+      "status": "verified",
+      "method": "Enrolled bill text and bill history (capitol.texas.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "Sec. 211.054. CERTAIN DWELLING UNIT LOT SIZE REQUIREMENTS PROHIBITED. A municipality may not adopt or enforce an ordinance, rule, or other measure that requires: (1) a residential lot to be: (A) larger than 3,000 square feet; (B) wider than 30 feet; or (C) deeper than 75 feet; or (2) if regulating the density of dwelling units in a residential development, a ratio of dwelling units per acre that prevents a single-family home from being built on a residential lot that is at least 3,000 square fee || Sec. 211.052. APPLICABILITY. (a) This subchapter applies only to: (1) a municipality that: (A) has a population of more than 150,000; and (B) is wholly or partly located in a county with a population of more than 300,000; and (2) a tract of land located in a municipality described by Subdivision (1) that: (A) will be platted and located in an area zoned for single-family homes; (B) is five acres or more; and (C) has || E Effective on 9/1/25 06/20/2025 E Signed by the Governor 06/20/2025 3",
+      "unverified_fields": [],
+      "notes": "A lot-size preemption for new subdivisions, not a right to added units on existing lots."
+    },
+    "last_verified": "2026-11-16"
   }
 ]
