@@ -17,7 +17,7 @@ Output: data/backtests/acris_diag_36081_<date>.json
 """
 import gzip, json, os, re, sys, time, urllib.parse, urllib.request
 from collections import Counter, defaultdict
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SOC = "https://data.cityofnewyork.us/resource"
@@ -147,7 +147,7 @@ def main():
                 examples[b].append({"bbl": bbl, "date": r["date"], "price": r["price"], "doc": m["document_id"], "doc_type": m["doc_type"],
                                     "percent_trans": pt, "grantors": g[:3], "grantees": e[:3], "markers": marks})
     out = {
-        "ran_on": datetime.utcnow().isoformat() + "Z",
+        "ran_on": datetime.now(timezone.utc).isoformat(),
         "script": "scripts/backtests/diag_nyc_acris.py",
         "sales_file": os.path.relpath(sales_file, ROOT),
         "test_window": [t0, t1],
@@ -155,7 +155,7 @@ def main():
         "by_band": {b: dict(c) for b, c in stats.items()},
         "examples_under_500k": examples["under $500k"],
     }
-    p = os.path.join(ROOT, f"data/backtests/acris_diag_36081_{date.today().isoformat()}.json")
+    p = os.path.join(ROOT, f"data/backtests/acris_diag_36081_{t0}_{t1}.json")
     json.dump(out, open(p, "w"), indent=1)
     print(json.dumps(out["by_band"], indent=1))
     print("wrote", p, file=sys.stderr)

@@ -1,0 +1,767 @@
+{
+ "ran_on": "2026-11-16T22:21:53.475326Z",
+ "script": "scripts/backtests/diag_nyc_acris.py",
+ "sales_file": "data/backtests/sales_36081_2026-11-16.json.gz",
+ "test_window": [
+  "2026-05-01",
+  "2026-09-30"
+ ],
+ "sources": [
+  "https://data.cityofnewyork.us/resource/8h5j-fqxa.json",
+  "https://data.cityofnewyork.us/resource/bnx9-e6tj.json",
+  "https://data.cityofnewyork.us/resource/636b-3b5g.json"
+ ],
+ "by_band": {
+  "$1M-$2M": {
+   "sales": 974,
+   "matched": 974,
+   "no_marker": 728,
+   "estate_grantor": 71,
+   "any_marker": 246,
+   "trust_party": 164,
+   "referee_grantor": 9,
+   "shared_surname": 8,
+   "partial_interest": 1
+  },
+  "$500k-$1M": {
+   "sales": 1633,
+   "matched": 1631,
+   "referee_grantor": 61,
+   "any_marker": 488,
+   "no_marker": 1143,
+   "estate_grantor": 169,
+   "trust_party": 241,
+   "shared_surname": 39,
+   "no_matching_deed": 2,
+   "partial_interest": 3,
+   "doc_type_DEED_RC": 2
+  },
+  "under $500k": {
+   "sales": 231,
+   "matched": 226,
+   "partial_interest": 14,
+   "shared_surname": 63,
+   "any_marker": 147,
+   "estate_grantor": 48,
+   "no_marker": 79,
+   "trust_party": 27,
+   "referee_grantor": 15,
+   "no_matching_deed": 5
+  },
+  "$2M and up": {
+   "sales": 63,
+   "matched": 63,
+   "no_marker": 51,
+   "trust_party": 9,
+   "any_marker": 12,
+   "shared_surname": 2,
+   "estate_grantor": 1
+  }
+ },
+ "examples_under_500k": [
+  {
+   "bbl": "4024190055",
+   "date": "2026-05-01",
+   "price": 170000.0,
+   "doc": "2026050100240001",
+   "doc_type": "DEED",
+   "percent_trans": 50.0,
+   "grantors": [
+    "JIN, ZHONG YI",
+    "ZHAO, CAI YUE"
+   ],
+   "grantees": [
+    "ZHAO, CAIYUE"
+   ],
+   "markers": [
+    "partial_interest",
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4069540039",
+   "date": "2026-05-01",
+   "price": 438844.0,
+   "doc": "2026050400252001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "YU, LIHUI"
+   ],
+   "grantees": [
+    "YU, FRANCISCO",
+    "YU, LIHUI"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4127170061",
+   "date": "2026-05-01",
+   "price": 400000.0,
+   "doc": "2026052200313001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "THE ESTATE OF EARLENE WEBSTER",
+    "VALERIE ANNETTE SMITH, AS EXECUTRIX"
+   ],
+   "grantees": [
+    "18704 WILLIAMSON AVENUE LLC"
+   ],
+   "markers": [
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4162040035",
+   "date": "2026-05-01",
+   "price": 367500.0,
+   "doc": "2026043001012001",
+   "doc_type": "DEED",
+   "percent_trans": 50.0,
+   "grantors": [
+    "CARERI, SAVERIO"
+   ],
+   "grantees": [
+    "DELLEGRAZIE, ANTHONY"
+   ],
+   "markers": [
+    "partial_interest"
+   ]
+  },
+  {
+   "bbl": "4110190135",
+   "date": "2026-05-04",
+   "price": 355000.0,
+   "doc": "2026051800406001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "BERRY, MICHAEL J",
+    "BERRY, LINDA"
+   ],
+   "grantees": [
+    "RBI DEVELOPMENT LLC"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4117670048",
+   "date": "2026-05-04",
+   "price": 400000.0,
+   "doc": "2026053000045001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "KAUR, SARAVJIT",
+    "KAUR, DALJIT",
+    "SINGH, DARSHAN"
+   ],
+   "grantees": [
+    "KAUR, DALJIT"
+   ],
+   "markers": [
+    "shared_surname",
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4029910039",
+   "date": "2026-05-05",
+   "price": 350000.0,
+   "doc": "2026051300761001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "MINAIE, ALEXANDRA",
+    "MINAIE, SAM"
+   ],
+   "grantees": [
+    "MINAIE, SAM"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4035950018",
+   "date": "2026-05-05",
+   "price": 321230.0,
+   "doc": "2026050501101001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "LI, CHAO",
+    "LI, BAOSHENG",
+    "ZHANG, AILING"
+   ],
+   "grantees": [
+    "LI, CHAO"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4036330036",
+   "date": "2026-05-05",
+   "price": 58400.0,
+   "doc": "2026051300199001",
+   "doc_type": "DEED",
+   "percent_trans": 8.0,
+   "grantors": [
+    "ROBERT A. HOFMANN, EXECUTOR",
+    "ESTATE OF DOLORES VANDEWATER"
+   ],
+   "grantees": [
+    "ESTATE OF EDWIN J. VANDEWATER",
+    "FRANCES GRUBER, ADMINISTRATOR CTA",
+    "ESTATE OF EDWIN J. VAN DE WATER"
+   ],
+   "markers": [
+    "partial_interest",
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4036460020",
+   "date": "2026-05-05",
+   "price": 361000.0,
+   "doc": "2026051300202001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "DIMARIO, EXECUTOR, CARMELA",
+    "ESTATE OF ROSEMARIE NAUMANN,DECEASED"
+   ],
+   "grantees": [
+    "MOEIN LLC"
+   ],
+   "markers": [
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4142311290",
+   "date": "2026-05-06",
+   "price": 400000.0,
+   "doc": "2026051900217001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "PROPFLIP LLC"
+   ],
+   "grantees": [
+    "CUMBO, JENA",
+    "ILMONIEMI, JOHN"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4027490003",
+   "date": "2026-05-07",
+   "price": 228816.0,
+   "doc": "2026060400764001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "TZOUMAS, NIKOLETA",
+    "TZOUMAS, PETER"
+   ],
+   "grantees": [
+    "TZOUMAS GENDUSA, APHRODITE",
+    "TZOUMAS, ANTONIO"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4019040010",
+   "date": "2026-05-09",
+   "price": 236362.0,
+   "doc": "2026043001042001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "CHIQUITO, STELLA"
+   ],
+   "grantees": [
+    "STELLA CHIQUITO LIVING TRUST"
+   ],
+   "markers": [
+    "trust_party"
+   ]
+  },
+  {
+   "bbl": "4007710049",
+   "date": "2026-05-11",
+   "price": 475000.0,
+   "doc": "2026071300500001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "MASCOLO, MARISSA",
+    "LEDUC, GUILLAUME"
+   ],
+   "grantees": [
+    "MASCOLO, MARISSA"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4102660079",
+   "date": "2026-05-12",
+   "price": 390000.0,
+   "doc": "2026052000966001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "PATTON, PEGGY"
+   ],
+   "grantees": [
+    "QUEENS HOMEBUYERS LLC"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4117740538",
+   "date": "2026-05-12",
+   "price": 290000.0,
+   "doc": "2026051800220001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "BUTLER, ARTURE",
+    "BUTLER, CYNTHIA"
+   ],
+   "grantees": [
+    "2717 MORGAN AVE. CORP."
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4122090134",
+   "date": "2026-05-12",
+   "price": 260000.0,
+   "doc": "2026052000916001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "JOSEPH N. MISK, REFEREE"
+   ],
+   "grantees": [
+    "ARVERNE BEACH PROPERTIES LLC",
+    "HILLSIDE BUYERS LLC"
+   ],
+   "markers": [
+    "referee_grantor"
+   ]
+  },
+  {
+   "bbl": "4103780016",
+   "date": "2026-05-13",
+   "price": 490000.0,
+   "doc": "2026061101096001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "KATSORHIS, ESQ., REFEREE, NICOLE D"
+   ],
+   "grantees": [
+    "189 STREET 2026 LLC"
+   ],
+   "markers": [
+    "referee_grantor"
+   ]
+  },
+  {
+   "bbl": "4121090036",
+   "date": "2026-05-13",
+   "price": 380000.0,
+   "doc": "2026053100019001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "THE ESTATE OF ALIETHA EVA GORDON",
+    "RANDY CHARTER, EXECUTOR"
+   ],
+   "grantees": [
+    "152 BOYD AVENUE LLC"
+   ],
+   "markers": [
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4054450044",
+   "date": "2026-05-14",
+   "price": 499500.0,
+   "doc": "2026051600047001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "ESTATE OF GERARD W. VIRTES",
+    "ESTATE OF GERARD WILLIAM VIRTES",
+    "SUSAN M. VIRTES, AS EXECUTOR"
+   ],
+   "grantees": [
+    "VIRTES, JOHN JOSEPH",
+    "VIRTES, JOHN J."
+   ],
+   "markers": [
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4098750029",
+   "date": "2026-05-14",
+   "price": 475000.0,
+   "doc": "2026060300449001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "CERRATO, PAOLA",
+    "CERRATO, DECEASED, AUGUSTO",
+    "CERRATO, PAULA"
+   ],
+   "grantees": [
+    "SERRANO, EDWIN"
+   ],
+   "markers": [
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4120380019",
+   "date": "2026-05-15",
+   "price": 475000.0,
+   "doc": "2026061000139001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "MATTHEWS, PATINA",
+    "BRUNSON, LARRY",
+    "BRUNSON, RITA"
+   ],
+   "grantees": [
+    "122ND AVE LLC"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4122020011",
+   "date": "2026-05-15",
+   "price": 425000.0,
+   "doc": "2026052100577001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "FLEITCHMAN, STEVE"
+   ],
+   "grantees": [
+    "JOHN, PATSY",
+    "FLEITCHMAN, ALICIA"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4113120045",
+   "date": "2026-05-18",
+   "price": 380000.0,
+   "doc": "2026052700368002",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "BARIL, MICHAEL"
+   ],
+   "grantees": [
+    "NEGRON, JENNIFER"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4122040262",
+   "date": "2026-05-18",
+   "price": 300000.0,
+   "doc": "2026052200806001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "OLIVO, CARMEN I",
+    "DARNLEY JR., EDWARD D"
+   ],
+   "grantees": [
+    "613 HAV LLC"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4129040046",
+   "date": "2026-05-18",
+   "price": 237500.0,
+   "doc": "2026052800173001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "ESTATE OF DELANO TAYLOR",
+    "LOWE, SURVIVING HEIR, KISHA",
+    "TAYLOR, SURVIVING HEIR, RAJIV FRANCIS"
+   ],
+   "grantees": [
+    "227TH STREET DONO LLC"
+   ],
+   "markers": [
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4040230024",
+   "date": "2026-05-19",
+   "price": 400000.0,
+   "doc": "2026052200776001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "SEA, CHIN HUI",
+    "TAY, SHY MING"
+   ],
+   "grantees": [
+    "RENDON OSPINA, PRISCILA",
+    "CAMPOS, NELSON E"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4056130072",
+   "date": "2026-05-19",
+   "price": 149331.0,
+   "doc": "2026051900507001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "WEI, LI MIN",
+    "ZHUANG, YAN LIN",
+    "ZHUANG, YANLIN"
+   ],
+   "grantees": [
+    "ZHUANG, YAN LIN",
+    "WEI, KENT"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4108900014",
+   "date": "2026-05-19",
+   "price": 420000.0,
+   "doc": "2026061600129001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "FISHER, LINDA R"
+   ],
+   "grantees": [
+    "194-21 HOLLIS AVE LLC"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4016970015",
+   "date": "2026-05-20",
+   "price": 300000.0,
+   "doc": "2026062900924001",
+   "doc_type": "DEED",
+   "percent_trans": 50.0,
+   "grantors": [
+    "ZUMBA LITUMA, WASHINGTON",
+    "VINTIMILLA TENEZACA, MATILDE"
+   ],
+   "grantees": [
+    "VINTIMILLA, MATILDE",
+    "BRITO, DANNY"
+   ],
+   "markers": [
+    "partial_interest"
+   ]
+  },
+  {
+   "bbl": "4070450001",
+   "date": "2026-05-20",
+   "price": 300000.0,
+   "doc": "2026052900214001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "CORONADO, MONICA B",
+    "LEGASPI, MARILYN B",
+    "PORRAS, MARLON P"
+   ],
+   "grantees": [
+    "CORONADO, MONICA B",
+    "PORRAS, MARLON P"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4036030001",
+   "date": "2026-05-21",
+   "price": 250000.0,
+   "doc": "2026060200257001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "JANIS FIDELMAN, EXECUTOR",
+    "ESTATE OF NORMAN FIDELMAN"
+   ],
+   "grantees": [
+    "65-47 ADMIRAL AVE LLC"
+   ],
+   "markers": [
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4062490002",
+   "date": "2026-05-21",
+   "price": 275000.0,
+   "doc": "2026052800737001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "MONICA, LUISA",
+    "MONICA, THOMAS"
+   ],
+   "grantees": [
+    "MONICA, LUISA",
+    "MELILLO, NICHOLAS S",
+    "O'ROURKE, EILEEN"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4113180043",
+   "date": "2026-05-21",
+   "price": 379000.0,
+   "doc": "2026060100967001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "ROULETTE, ELMARIE"
+   ],
+   "grantees": [
+    "VALENCIA VENTURES CH LLC"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4122090118",
+   "date": "2026-05-21",
+   "price": 350000.0,
+   "doc": "2026061900655001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "LEWIS, VERONICA A"
+   ],
+   "grantees": [
+    "1625 OVERING LLC"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4125170013",
+   "date": "2026-05-21",
+   "price": 247000.0,
+   "doc": "2026061800163003",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "ESTATE OF EMMA RANDOLPH",
+    "ESTATE OF EMMIE PEEK",
+    "ESTATE OF EMMIE PEEK RANDOLPH"
+   ],
+   "grantees": [
+    "116 AVE QN LLC"
+   ],
+   "markers": [
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4061670004",
+   "date": "2026-05-22",
+   "price": 450000.0,
+   "doc": "2026060200755001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "JENNINGS, MICHAEL P",
+    "MA, YIPING",
+    "MA, MYRA"
+   ],
+   "grantees": [
+    "JENNINGS, MICHAEL P"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4118950057",
+   "date": "2026-05-22",
+   "price": 494000.0,
+   "doc": "2026060100315001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "ALI, ABID"
+   ],
+   "grantees": [
+    "BALDEO, ARTHUR"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4131960117",
+   "date": "2026-05-22",
+   "price": 490000.0,
+   "doc": "2026060100609001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "SPRINGER, KAREN"
+   ],
+   "grantees": [
+    "OLMO DEVELOPMENT LLC"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4121850014",
+   "date": "2026-05-23",
+   "price": 212000.0,
+   "doc": "2026052800286001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "ALI, AZIMAN"
+   ],
+   "grantees": [
+    "SINGH, REHANA SULTANA"
+   ],
+   "markers": []
+  }
+ ]
+}

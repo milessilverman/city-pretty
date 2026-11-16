@@ -1,0 +1,760 @@
+{
+ "ran_on": "2026-11-16T22:27:09.397215+00:00",
+ "script": "scripts/backtests/diag_nyc_acris.py",
+ "sales_file": "data/backtests/sales_36081_2026-11-16.json.gz",
+ "test_window": [
+  "2026-01-01",
+  "2026-04-30"
+ ],
+ "sources": [
+  "https://data.cityofnewyork.us/resource/8h5j-fqxa.json",
+  "https://data.cityofnewyork.us/resource/bnx9-e6tj.json",
+  "https://data.cityofnewyork.us/resource/636b-3b5g.json"
+ ],
+ "by_band": {
+  "$500k-$1M": {
+   "sales": 1229,
+   "matched": 1228,
+   "no_marker": 850,
+   "estate_grantor": 143,
+   "any_marker": 378,
+   "trust_party": 153,
+   "referee_grantor": 55,
+   "shared_surname": 41,
+   "no_matching_deed": 1,
+   "partial_interest": 3,
+   "doc_type_DEEDO": 1
+  },
+  "$2M and up": {
+   "sales": 41,
+   "matched": 41,
+   "no_marker": 35,
+   "estate_grantor": 2,
+   "any_marker": 6,
+   "trust_party": 3,
+   "shared_surname": 1
+  },
+  "$1M-$2M": {
+   "sales": 702,
+   "matched": 702,
+   "no_marker": 550,
+   "estate_grantor": 40,
+   "any_marker": 152,
+   "trust_party": 103,
+   "referee_grantor": 10,
+   "shared_surname": 4,
+   "partial_interest": 1
+  },
+  "under $500k": {
+   "sales": 214,
+   "matched": 214,
+   "shared_surname": 58,
+   "any_marker": 143,
+   "partial_interest": 5,
+   "no_marker": 71,
+   "estate_grantor": 42,
+   "referee_grantor": 22,
+   "trust_party": 27
+  }
+ },
+ "examples_under_500k": [
+  {
+   "bbl": "4011640014",
+   "date": "2026-01-05",
+   "price": 460701.0,
+   "doc": "2026020501104001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "AHMED, IFJAL",
+    "MIZAN, IFTAKHAR A"
+   ],
+   "grantees": [
+    "AHMED, IFJAL"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4040460102",
+   "date": "2026-01-05",
+   "price": 400000.0,
+   "doc": "2026011500358001",
+   "doc_type": "DEED",
+   "percent_trans": 50.0,
+   "grantors": [
+    "CAO, LI FA",
+    "XU, JU XIANG"
+   ],
+   "grantees": [
+    "CAO, SHENGJIN"
+   ],
+   "markers": [
+    "partial_interest",
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4042490075",
+   "date": "2026-01-05",
+   "price": 426928.0,
+   "doc": "2026010500289001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "LAM, FAI",
+    "LAM, PING TAI"
+   ],
+   "grantees": [
+    "LAM, FAI"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4127060010",
+   "date": "2026-01-06",
+   "price": 300000.0,
+   "doc": "2026011500243002",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "HUNT, NANCY E",
+    "OGBURN, DAVID A"
+   ],
+   "grantees": [
+    "IDF DEVELOPMENT LLC"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4104340039",
+   "date": "2026-01-07",
+   "price": 247000.0,
+   "doc": "2026011201302003",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "THOMAS HOLMES, ALLAN",
+    "THOMAS HOLMES, ALLAN C JR",
+    "ESTATE OF ALLAN HOLMES, SR."
+   ],
+   "grantees": [
+    "109 RYE LLC"
+   ],
+   "markers": [
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4116050030",
+   "date": "2026-01-07",
+   "price": 465000.0,
+   "doc": "2026012800267001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "EICHLER, ESQ., REFEREE, HELEN P"
+   ],
+   "grantees": [
+    "U.S. BANK TRUST NATIONAL ASSOCIATION"
+   ],
+   "markers": [
+    "referee_grantor",
+    "trust_party"
+   ]
+  },
+  {
+   "bbl": "4008520026",
+   "date": "2026-01-08",
+   "price": 400000.0,
+   "doc": "2026013000110001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "ING CIOLLI, SWAN"
+   ],
+   "grantees": [
+    "CIOLLI, KRISTINA"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4035860043",
+   "date": "2026-01-08",
+   "price": 390000.0,
+   "doc": "2026012200279001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "JASON A. TENANT AS TRUSTEE",
+    "ALICEA, SUSAN",
+    "THE JASON A TENNANT REVOCABLE TRUST"
+   ],
+   "grantees": [
+    "JASON A TENNANT AS TRUSTEE",
+    "THE JASON A TENNANT REVOCABLE TRUST"
+   ],
+   "markers": [
+    "trust_party"
+   ]
+  },
+  {
+   "bbl": "4101860014",
+   "date": "2026-01-08",
+   "price": 400000.0,
+   "doc": "2026011400467001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "NICOLE ADAMS, AS HEIR TO DAVETTA WOOLING",
+    "NICOLE ADAMS, ADMIN OF THE ESTATE OF DAVID WOOLING",
+    "LORI S. NAPIER, AS HEIR TO DAVETTA WOOLING"
+   ],
+   "grantees": [
+    "10902 169PL LLC"
+   ],
+   "markers": [
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4106890029",
+   "date": "2026-01-08",
+   "price": 330000.0,
+   "doc": "2026011700037001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "CHEN, LI YING",
+    "CHEN, LIMEI J"
+   ],
+   "grantees": [
+    "CHEN, LIMEI J"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4112800051",
+   "date": "2026-01-08",
+   "price": 494900.0,
+   "doc": "2026012300310001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "U.S. BANK TRUST NATIONAL ASSOCIATION, AS TRUSTEE",
+    "OF THE CABANA SERIES IV TRUST"
+   ],
+   "grantees": [
+    "EASTMOND, WENDY"
+   ],
+   "markers": [
+    "trust_party"
+   ]
+  },
+  {
+   "bbl": "4120500220",
+   "date": "2026-01-08",
+   "price": 400000.0,
+   "doc": "2026011900018001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "GRAHAM, CLINTON"
+   ],
+   "grantees": [
+    "CONTINENTAL PROPERTY GROUP LLC"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4127190012",
+   "date": "2026-01-08",
+   "price": 466440.0,
+   "doc": "2026011201295001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "NKWO, NESTOR"
+   ],
+   "grantees": [
+    "ONUORAH, ANTHONY"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4127940136",
+   "date": "2026-01-08",
+   "price": 332500.0,
+   "doc": "2026011201309003",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "ESTATE OF EARLINE HINKSON",
+    "WHITE, REGINA"
+   ],
+   "grantees": [
+    "119 234 QUEENS LLC"
+   ],
+   "markers": [
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4128620068",
+   "date": "2026-01-08",
+   "price": 475000.0,
+   "doc": "2026011400849001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "FRANCKLIN, FARIDE"
+   ],
+   "grantees": [
+    "FRANCKLIN, SKYLAR"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4023380031",
+   "date": "2026-01-12",
+   "price": 450000.0,
+   "doc": "2026011201211001",
+   "doc_type": "DEED",
+   "percent_trans": 50.0,
+   "grantors": [
+    "ZHAO, WANG",
+    "NI, SHENG TAO",
+    "NI, WEN JUAN"
+   ],
+   "grantees": [
+    "ZHAO, WANG",
+    "NI, WEN JUAN"
+   ],
+   "markers": [
+    "partial_interest",
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4093590037",
+   "date": "2026-01-12",
+   "price": 451000.0,
+   "doc": "2026012400025002",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "MORGAN STANLEY ABS CAPITAL I INC",
+    "DEUTSCHE BANK NATIONAL TRUST COMPANY, AS TRUSTEE"
+   ],
+   "grantees": [
+    "QUEENS HOUSING FLIP INC"
+   ],
+   "markers": [
+    "trust_party"
+   ]
+  },
+  {
+   "bbl": "4132150017",
+   "date": "2026-01-12",
+   "price": 290745.0,
+   "doc": "2026012200806001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "DONALDSON, GARFIELD",
+    "AUDREY WINSOME DONALDSON, TRUSTEE",
+    "DONALDSON, AUDREY"
+   ],
+   "grantees": [
+    "DONALDSON, AUDREY WINSOME"
+   ],
+   "markers": [
+    "shared_surname",
+    "trust_party"
+   ]
+  },
+  {
+   "bbl": "4095950031",
+   "date": "2026-01-13",
+   "price": 305000.0,
+   "doc": "2026012100745001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "STACEY WILLIAMS JOHNSON, HEIR OF STANLEY JOHNSON"
+   ],
+   "grantees": [
+    "105-68 VWE MANAGEMENT, LLC"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4121110011",
+   "date": "2026-01-14",
+   "price": 440000.0,
+   "doc": "2026012300625001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "BROWN, PAUL"
+   ],
+   "grantees": [
+    "257 HOLDING H LLC"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4127470170",
+   "date": "2026-01-15",
+   "price": 495000.0,
+   "doc": "2026012800732001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "ZOSE, JOAN",
+    "WINHEIM, ELIZABETH G"
+   ],
+   "grantees": [
+    "BSD FARMERS LLC"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4131170066",
+   "date": "2026-01-15",
+   "price": 490000.0,
+   "doc": "2026012900375001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "LOGAN, SHAHID"
+   ],
+   "grantees": [
+    "NIKA, MOJSE"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4112800033",
+   "date": "2026-01-16",
+   "price": 450000.0,
+   "doc": "2026012901059001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "LEWIS, NORMAN O"
+   ],
+   "grantees": [
+    "TNL LLC"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4123700037",
+   "date": "2026-01-16",
+   "price": 475000.0,
+   "doc": "2026020100068001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "SABRINA MARS IRREVOCABLE LIVING TRUST",
+    "ANDRE K. MARS, JR., TRUSTEE",
+    "ANDRE K. MARS & MARLENE MARS JOINT IRREVOCABLE LIV"
+   ],
+   "grantees": [
+    "XOXI PROPERTIES LLC"
+   ],
+   "markers": [
+    "trust_party"
+   ]
+  },
+  {
+   "bbl": "4094930027",
+   "date": "2026-01-20",
+   "price": 420000.0,
+   "doc": "2026020300178001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "BINDRA, NAVTEJ"
+   ],
+   "grantees": [
+    "SHARMA, PANKAJ",
+    "BHASIN, PAYAL"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4099660042",
+   "date": "2026-01-20",
+   "price": 383096.0,
+   "doc": "2026020500206001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "ROGERS, ALEXANDER"
+   ],
+   "grantees": [
+    "ROGERS, ARMANI V"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4117940044",
+   "date": "2026-01-20",
+   "price": 310000.0,
+   "doc": "2026013000744001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "ESTATE OF PATRICIA MARIE BOOS",
+    "EDWARD BOOS AS ADMINISTRATOR",
+    "ESTATE OF PATRICIA BOOS"
+   ],
+   "grantees": [
+    "OMAR, NAZIM",
+    "OMAR, WASIM",
+    "KHODAI, ALEX P"
+   ],
+   "markers": [
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4125360001",
+   "date": "2026-01-20",
+   "price": 300000.0,
+   "doc": "2026012300708001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "NOBBEE, ILZAM"
+   ],
+   "grantees": [
+    "ROSS, TAMARA"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4117750209",
+   "date": "2026-01-21",
+   "price": 370500.0,
+   "doc": "2026020200744001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "SANDRA D. MCLAURIN, ADMINISTRATOR",
+    "ESTATE OF JAMES S MCLAURIN"
+   ],
+   "grantees": [
+    "12917 135 BAHM LLC"
+   ],
+   "markers": [
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4119960126",
+   "date": "2026-01-21",
+   "price": 140000.0,
+   "doc": "2026021400028001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "WILBURG FOLDS, AS HEIR, CAROL",
+    "WILBURG, AS HEIR, TERRENCE",
+    "WILBURG, AS HEIR, LYNDON"
+   ],
+   "grantees": [
+    "DANIELITO LLC"
+   ],
+   "markers": [
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4022970029",
+   "date": "2026-01-22",
+   "price": 40000.0,
+   "doc": "2026011900321001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "PULGARIN, GUSTAVO N"
+   ],
+   "grantees": [
+    "PULGARIN, TOMAS E"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4056050038",
+   "date": "2026-01-23",
+   "price": 350000.0,
+   "doc": "2026020500671001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "KOHN, JOANN R",
+    "KOHN, JOANNE",
+    "KOHN, ELIZABETH"
+   ],
+   "grantees": [
+    "KOHN, JOANN R"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4097300028",
+   "date": "2026-01-23",
+   "price": 408500.0,
+   "doc": "2026020500389001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "KINSELLA, AS ADMINISTRATOR, MATEE INDIRA",
+    "ESTATE OF MEEWAH SARWAN"
+   ],
+   "grantees": [
+    "8553 149 STREET LLC"
+   ],
+   "markers": [
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4105690031",
+   "date": "2026-01-23",
+   "price": 265000.0,
+   "doc": "2026013100020001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "DEOLALL, SUMINTRA"
+   ],
+   "grantees": [
+    "CLARKS WORK LLC"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4111390076",
+   "date": "2026-01-23",
+   "price": 499000.0,
+   "doc": "2026012800374001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "11147 WITTHOFF ST LLC"
+   ],
+   "grantees": [
+    "BH WITTHOFF LLC"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4123890307",
+   "date": "2026-01-23",
+   "price": 230000.0,
+   "doc": "2026022500867001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "DEBESU, LISAM",
+    "DEBESU, HAILE"
+   ],
+   "grantees": [
+    "DEBESU, LISAM"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4104060084",
+   "date": "2026-01-27",
+   "price": 392306.0,
+   "doc": "2026013000359001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "BURTON, BLOSSOM",
+    "BURTON, MAUREEN"
+   ],
+   "grantees": [
+    "HALL, MICHAEL"
+   ],
+   "markers": []
+  },
+  {
+   "bbl": "4106040008",
+   "date": "2026-01-27",
+   "price": 475000.0,
+   "doc": "2026021100374002",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "SEEGOBIN, JAMES",
+    "SEEGOBIN, HEERAWATTIE"
+   ],
+   "grantees": [
+    "LALL, CHERIL TEJESHWRIE",
+    "SEEGOBIN, DAVE ANTHONY"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  },
+  {
+   "bbl": "4135390047",
+   "date": "2026-01-27",
+   "price": 418000.0,
+   "doc": "2026021001097001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "SAMARRA LYNCH, ADMINISTRATRIX",
+    "ESTATE OF ANGELA LYNCH"
+   ],
+   "grantees": [
+    "ROSEDALE NY 147TH LLC"
+   ],
+   "markers": [
+    "estate_grantor"
+   ]
+  },
+  {
+   "bbl": "4029430081",
+   "date": "2026-01-29",
+   "price": 283333.0,
+   "doc": "2026022300256001",
+   "doc_type": "DEED",
+   "percent_trans": 100.0,
+   "grantors": [
+    "KIEFER, GREGORY",
+    "KIEFER, LLOYD",
+    "KIEFER, CHRISTINA"
+   ],
+   "grantees": [
+    "KIEFER, LLOYD",
+    "KIEFER, CHRISTINA"
+   ],
+   "markers": [
+    "shared_surname"
+   ]
+  }
+ ]
+}

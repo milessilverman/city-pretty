@@ -487,6 +487,19 @@ all from before this audit (details, quotes and URLs: `audit/hardcoded-claims-ro
 Still unverified and marked so: LA County Policy 3.106, the Orange County EIFD cap, the plain-language zone
 summaries, Tennessee's and Cook County's assessment ratios (only used where estimates are withheld).
 
+### Queens low-price sales: what NYC's deed records show (16 Nov, diagnostic)
+
+Queens passed its back-test (14.97%), but its 230 test sales under $500k were estimated at about twice their recorded
+price. `scripts/backtests/diag_nyc_acris.py` matched each sale to its deed in ACRIS (same lot, dated within 3 days,
+same amount; 226 of 231 matched). The deeds themselves mark many as non-market. In the development window (Jan-Apr
+2026), among sales under $500k vs $500k-$1M vs $1M-$2M: grantor and grantee share a surname 27% / 3.3% / 0.6%; a
+partial share conveyed 2.3% / 0.2% / 0.1%; a referee (foreclosure) as seller 10% / 4.5% / 1.4%. The test window shows
+the same. Those three screens are locked from the development window (`scripts/backtests/nyc_sale_screens_locked.json`)
+for the next fresh test window; the published Queens result is not re-run, and the page keeps its warning on the
+under-$500k band. My first run filtered deeds by ACRIS's `recorded_borough`, which is the recording office (mostly
+Manhattan), not the property's borough; it would have missed most Queens deeds. It was caught before any result was
+produced.
+
 ### Correction: three "shown" estimates were not shown (found and fixed 16 Nov)
 
 The 16 Nov report said Queens, Staten Island and Hillsborough estimates were shown on the page. They were not: the
