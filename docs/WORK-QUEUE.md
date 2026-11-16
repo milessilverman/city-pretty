@@ -45,3 +45,13 @@ audit doc the same day.
 - **Zoning**: only where a city or county publishes it. Elsewhere by-right claims are withheld.
 - **Sites that block automated access** from the build machine (several .gov hosts): listed as "couldn't check" until
   checked from a normal browser.
+
+## Open issues found 16 Nov (to fix next)
+
+| Issue | Why it matters | Fix |
+|---|---|---|
+| **Queens sales under $500k show 99% error** (230 test sales; Staten Island 39%) | Likely below-market family transfers that pass the $25k screen, but unproven; Queens passes overall at 14.97%, just under the cap | Find NYC's own non-arm's-length markers (ACRIS document types, deed parties) and re-test on a new window; until then the page shows the band warning |
+| **Missing bedroom/bathroom counted as 0** in the shared model code | Affected published DC (2 rows), Cook (8) and Philadelphia (81 bed / 1,280 bath) results | Fixed for new pulls; re-test those counties on the next fresh window (the one-test rule forbids re-running the same final) |
+| **King County passed (8.8%) but isn't shown** | The page queries King's zoning layer, which has no assessed value | Query the Washington statewide parcel layer for King and check it still holds the tax-year-2026 roll |
+| **Florida beyond Hillsborough** | The DOR pull script takes any county | Run Miami-Dade, Orange, Duval, Pinellas with the same protocol |
+| **23 states' codes unsearchable from the build machine** | "No law found" is unverified there | Alternate routes, or a script run from the user's computer |
