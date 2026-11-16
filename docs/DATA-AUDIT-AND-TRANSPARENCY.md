@@ -124,6 +124,47 @@ and lock is committed; `tests/unit/countyValuation.test.ts` re-runs each final t
 | **District of Columbia** | 9,254 (OTR CAMA, `QUALIFIED = 'Q'`, one dwelling) | May–Oct 2026, 1,534 sales | regression | **10.7%** (76% within 20%, bias +0.8%) | 17.9% | **Pass: shown** |
 | Philadelphia | 38,011 (OPA sale + transfer-tax `DEED` record, one property, no shared surname) | May–Jul 2026, 2,811 | regression + city's 2026 market value | 18.7% | 23.2% | Fail: withheld |
 | Cook County, IL | 108,284 (Assessor's own sale screens; `char_use` Single-Family) | Apr–Aug 2026, 7,909 | regression | 18.6% (bias −11%) | 22.0% | Fail: withheld |
+| **Queens (NYC)** | 25,903 (DOF sales, class 01/02, ≥ $25k, no same-block package sales; PLUTO 26v2, 1–2 units) | May–Sep 2026, 2,863 | regression on PLUTO inputs | **14.97%** (page shows "15.0%"; 63% within 20%, bias −7.0%) | 17.4% | **Pass: shown** |
+| **Staten Island (NYC)** | 12,803 (same) | May–Sep 2026, 1,173 | regression on PLUTO inputs | **13.1%** (71% within 20%, bias −9.2%) | 16.8% | **Pass: shown** |
+| Brooklyn (NYC) | 16,295 (same) | May–Sep 2026, 1,783 | regression on PLUTO inputs | 18.1% | 20.9% | Fail: withheld |
+| Bronx (NYC) | 5,925 (same) | May–Sep 2026, 668 | regression on PLUTO inputs | 17.85% (page shows "17.9%") | 20.0% | Fail: withheld |
+| Manhattan (NYC) | 671 (same) | May–Sep 2026, 56 | regression on PLUTO inputs | 22.4% | 34.0% | Fail (fewer than 200 test sales): withheld |
+| **Hillsborough County, FL** | 29,052 (DOR 2026 SDF/NAL: `QUAL_CD` 01/02, not multi-parcel, use code 001, 1 unit) | Apr–Aug 2026, 7,637 | regression without rooms + 1 Jan 2026 just value | **9.7%** (78% within 20%, bias +0.4%) | 20.1% | **Pass: shown** |
+| Allegheny County, PA | 17,360 (WPRDC: county code `SALECODE` 0 = VALID SALE, deed, single family) | May–Sep 2026, 2,232 | regression | 16.3% (bias −9.4%) | 21.7% | Fail: withheld |
+| King County, WA | 50,191 (Assessor's codes: residential improved single-family, warranty deed, reason None, no sale warning) | May–Oct 2026, 7,261 | regression on neighborhood median + tax-year-2026 assessed value | **8.8%** (83% within 20%, bias 0.0%) | 17.2% | Pass, but withheld: page lacks the input |
+
+Every candidate's test error (the locked one is the only one that decides; the others are recorded in each result file):
+- Queens: $/sq ft × size 18.9%. Staten Island 18.5%. Brooklyn 22.1%. Bronx 22.0%. Manhattan 22.2%. NYC has no bedroom or bathroom counts in PLUTO or the DOF sales, so room-based models weren't offered.
+- Hillsborough: assessor just value × sales ratio 10.1%; regression without the just value 12.1%; $/sq ft × size 12.8%.
+- Allegheny: $/sq ft × size 17.1%. No assessor value used (appeals often reset values to a recent price).
+- King: regression with rooms + assessed value 8.3% (the page can't supply rooms or size for King); no rooms + assessed value 8.5%; assessed value × sales ratio 8.8%; rooms regression without assessed value 10.7%; $/sq ft × size 13.4%.
+
+Price bands (by sale price):
+- Queens: $500k–$1M 12.2%, $1M–$2M 16.2%, under $500k **99.2%** (230 sales), $2M+ 35.1% (60).
+- Staten Island: $500k–$1M 11.1%, $1M–$2M 19.1%, under $500k 38.8% (109).
+- Hillsborough: under $500k 10.2%, $500k–$1M 8.2%, $1M–$2M 12.1%, $2M+ 13.4% (122).
+- King: $500k–$1M 7.2%, $1M–$2M 10.0%, $2M+ 11.2%, under $500k 10.9%.
+
+The page adds a note when the estimate's band had a larger error. Queens and Staten Island sales under $500k are badly
+over-estimated, probably transfers below market that pass the $25,000 screen. Not fixed.
+
+How the page gets the inputs:
+- **NYC:** the page's parcel layer is MapPLUTO 26v2, the same release the test joined (`BldgArea`, `LotArea`, `YearBuilt`, `UnitsRes`).
+- **Hillsborough:** the Florida statewide parcel layer holds the same 2026 roll (`ASMNT_YR` 2026). The page uses its just value only when `ASMNT_YR` is 2026, and only for DOR use code 001.
+- **Parity:** browser tests check that the page computes exactly the tested model (to 1e-9) for Queens, Staten Island and Hillsborough.
+- **King:** its passing model can't run. The page's King parcel service is the county zoning layer (PIN and zoning only). The WA statewide layer does carry the tax-year-2026 value (on 16 Nov, 410 of 413 sampled records matched it), but the page doesn't query that layer for King. That layer also has no roll-year field, so the page couldn't confirm it still holds the tested roll. The page says a model passed and names the missing input.
+- **Allegheny:** its parcel layer has only the PIN and acreage. It failed anyway.
+
+Code meanings, each from the source's own published list:
+- **Florida:** `QUAL_CD` 01 and 02 mean "qualified as arm's length" (DOR 2026 NAL/SDF User's Guide, field 55). This replaces the earlier reading of rule 12D-8.011.
+- **King:** the Assessor's `EXTR_LookUp` table. Since 2023 most sales are recorded as instrument 2 (Warranty Deed), not 3 (Statutory Warranty Deed), so both are accepted.
+- **Allegheny:** `SALEDESC` "VALID SALE".
+
+More caveats:
+- **Florida's just value** is as of 1 January (s. 192.042, F.S.) but certified later in 2026.
+- **King's assessed value:** each value's own change date is used, and 67 test sales whose value changed after the sale are excluded from the assessor models.
+- **Characteristics** (NYC, Florida, King, Allegheny) are the current records, not as of the sale.
+- **Missing room counts (bug, not fixed):** the shared model code reads a missing bedroom or bathroom count as 0 (`null >= 0` is true in JavaScript). That affected the already-published DC (2 rows), Cook (8) and Philadelphia (81 beds, 1,280 baths) results. Those finals weren't re-run, because a second run would break the one-test rule. New pulls drop such rows.
 
 DC's error by price band: $500k–$1M 9.1%, $1M–$2M 10.3%, under $500k 13.9%, $2M and up 14.2%. The DC page reads each
 parcel's residential CAMA record by SSL for the model's inputs, the same fields the test used. A browser test checks
@@ -135,11 +176,10 @@ Caveats:
 - DC's and Cook's assessed values aren't used: their valuation date can't be shown to predate the sales.
 - Recording lags shorten the test windows.
 
-Not tested yet:
-- **Florida.** The statewide parcel service rejects queries after about 26,000 rows for one county, and the
-  qualification-code meaning couldn't be pinned down. Florida's rule (12D-8.011) lists "00. Sales which are qualified;
-  01. ... disqualified", while the state data file appears to use different codes.
-- **New York City, King County and Allegheny County.** Their sources are reachable but weren't pulled in this round.
+Not tested yet: other Florida counties (`scripts/backtests/pull_florida_dor.py` takes any county; only Hillsborough
+was run), and every other county outside those listed.
+Locks and results are separate commits (NYC 794aa77 / b942628; Hillsborough 3caa591 / 3dfa644; Allegheny
+16c129d / f4c4276; King 986cfbf / 7a042e1).
 
 Also fixed: parcel lookup used a 5-result box search, so on blocks of row houses the clicked parcel was often missed.
 It now asks for the parcel containing the point first.
