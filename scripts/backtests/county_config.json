@@ -209,6 +209,32 @@
    }
   }
  },
+ "42003": {
+  "sales_file": "data/backtests/sales_42003_2026-11-16.json.gz",
+  "fit": [
+   "2023-01-01",
+   "2025-12-31"
+  ],
+  "dev": [
+   "2026-01-01",
+   "2026-04-30"
+  ],
+  "test": [
+   "2026-05-01",
+   "2026-09-30"
+  ],
+  "note": "WPRDC sales with the county's validity code (SALECODE 0 = VALID SALE) + assessment characteristics (scripts/backtests/pull_allegheny.py). No assessor value (appeals reset values to recent prices). October 2026 excluded (1 sale recorded so far). Windows set before any model was run.",
+  "locked": {
+   "spec": "regression",
+   "locked_on": "2026-11-16",
+   "why": "Best development median error: regression 15.4% (1163 sales) vs neighborhood $/sqft x size 16.9% and neighborhood median 20.0%. No assessor value used. Even if it passes, the page cannot run it: its Allegheny parcel layer has only the parcel ID and acreage, and WPRDC's API sends no cross-origin header.",
+   "dev_mdape": {
+    "neighborhood_median": 0.2003,
+    "neighborhood_ppsf_x_sqft": 0.1685,
+    "regression": 0.154
+   }
+  }
+ },
  "42101": {
   "sales_file": "data/backtests/sales_42101_2026-11-16.json.gz",
   "fit": [
