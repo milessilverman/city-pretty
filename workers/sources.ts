@@ -213,6 +213,9 @@ export async function acs5(
 // HUD Fair Market Rents
 // ---------------------------------------------------------------------------------------------------------------
 
+// Federal Register revisions HUD published but never loaded into its map service, and the notice that superseded FY2026.
+import HUD_FMR_REVISIONS from "../app/data/hud_fmr_revisions.json" with { type: "json" };
+
 export const HUD_FMR_LAYER = "https://services.arcgis.com/VTyQ9soqVukalItT/arcgis/rest/services/Fair_Market_Rents/FeatureServer/0";
 
 export type HudFmr = {
@@ -242,8 +245,8 @@ export async function hudFairMarketRent(lat: number, lng: number, fetcher: Fetch
     publisher: "U.S. Department of Housing and Urban Development (PD&R)",
     url,
     retrieved_at: now(),
-    // HUD's item page states FY2026 coverage; the layer description still says FY2024. Reported as-is.
-    vintage: "FY2026 per HUD item page (layer metadata says FY2024)",
+    // Checked 2026-11-16 against the Federal Register: FY2026 as first published (see app/data/hud_fmr_revisions.json).
+    vintage: "FY2026 (HUD map service; FY2027 took effect 2026-10-01 and is not in the service)",
   };
   if (!validLatLng(lat, lng)) return fail(source, "Invalid coordinates");
   try {
@@ -251,6 +254,20 @@ export async function hudFairMarketRent(lat: number, lng: number, fetcher: Fetch
     if (d?.error) return fail(source, d.error.message || "ArcGIS error");
     const f = d?.features?.[0]?.attributes;
     if (!f) return fail(source, "Point is not inside any HUD FMR area");
+    const notes = [
+      "FMRs are HUD's 40th-percentile gross rent (rent + utilities) for voucher payment standards; they are not market asking rents.",
+      `Not current: ${HUD_FMR_REVISIONS.superseded.by} (${HUD_FMR_REVISIONS.superseded.document}); HUD's map service still serves FY2026.`,
+    ];
+    const rev = (HUD_FMR_REVISIONS.revisions as Record<string, Record<string, number | string>>)[f.FMR_AREANAME];
+    if (rev) {
+      notes.push(`HUD revised this area's FY2026 FMRs in the Federal Register (${HUD_FMR_REVISIONS._source.document}, effective ${HUD_FMR_REVISIONS._source.effective}); the notice's values are used. The map service still shows 2BR $${f.FMR_2BDR}.`);
+      return {
+        ok: true,
+        source: { ...source, name: "HUD Fair Market Rents (FY2026 revised, Federal Register)", url: HUD_FMR_REVISIONS._source.url },
+        value: { fmr_area_code: f.FMR_CODE, fmr_area_name: f.FMR_AREANAME, rent_0br: num(rev.rent_0br), rent_1br: num(rev.rent_1br), rent_2br: num(rev.rent_2br), rent_3br: num(rev.rent_3br), rent_4br: num(rev.rent_4br) },
+        notes,
+      };
+    }
     return {
       ok: true,
       source,
@@ -263,7 +280,7 @@ export async function hudFairMarketRent(lat: number, lng: number, fetcher: Fetch
         rent_3br: num(f.FMR_3BDR),
         rent_4br: num(f.FMR_4BDR),
       },
-      notes: ["FMRs are HUD's 40th-percentile gross rent (rent + utilities) for voucher payment standards; they are not market asking rents."],
+      notes,
     };
   } catch (e) {
     return fail(source, e);

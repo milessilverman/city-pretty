@@ -60,12 +60,13 @@
    "id": "fmr_06037",
    "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 200 N Spring St, Los Angeles, CA?",
    "must_include": [
-    "2601",
-    "2,601"
+    "2903",
+    "2,903"
    ],
    "match": "any",
    "must_cite": "HUD",
-   "expected_source": "HUD Fair Market Rents ArcGIS service"
+   "expected_source": "HUD Fair Market Rents ArcGIS service",
+   "notes": "HUD revised LA FY2026 FMRs in the Federal Register (2026-07741): 2BR $2,903; the map service still shows $2,601. A good answer gives $2,903 and notes FY2027 is now current."
   },
   {
    "id": "flood_06037",

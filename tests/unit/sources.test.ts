@@ -63,6 +63,18 @@ describe("official-source connectors (real captured responses)", () => {
     expect(addressMismatch("815 E 41st St", "811 E 41ST ST")).toMatch(/house number/);
   });
 
+  it("HUD FMR: an area HUD revised in the Federal Register uses the notice's values, and says FY2027 is current", async () => {
+    // HUD's map service response for LA as seen 2026-11-16 (2BR $2,601); notice 2026-07741 revised it to $2,903.
+    const la = JSON.stringify({ features: [{ attributes: { FMR_CODE: "METRO31080MM4480", FMR_AREANAME: "Los Angeles-Long Beach-Glendale, CA HUD Metro FMR Area", FMR_0BDR: 1863, FMR_1BDR: 2085, FMR_2BDR: 2601, FMR_3BDR: 3298, FMR_4BDR: 3672 } }] });
+    const r = await hudFairMarketRent(34.05, -118.25, fakeFetch([[/Fair_Market_Rents/, la]]));
+    expect(r.ok && r.value.rent_2br).toBe(2903);
+    expect(r.source.url).toContain("2026-07741");
+    expect(r.ok && r.notes?.join(" ")).toMatch(/FY2027/);
+    const austin = await hudFairMarketRent(30.3005, -97.724, AUSTIN);
+    expect(austin.ok && austin.value.rent_2br).toBe(1852);
+    expect(austin.ok && austin.notes?.join(" ")).toMatch(/Not current/);
+  });
+
   it("HUD FMR: values are HUD's, area name is HUD's current name", async () => {
     const r = await hudFairMarketRent(30.3005, -97.724, AUSTIN);
     expect(r.ok).toBe(true);
