@@ -916,13 +916,13 @@
    ]
   },
   {
-   "url": "https://gisservices.its.ny.gov/arcgis/rest/services/NYS_Tax_Parcels_Public/MapServer/1",
+   "url": "https://services6.arcgis.com/EbVsqZ18sv1kVJ3k/arcgis/rest/services/NYS_Tax_Parcels_Public/FeatureServer/1",
    "states": [
     "36"
    ],
    "counties": [],
-   "name": "NYS Tax Parcels Public (NYS ITS Geospatial Services + ORPTS)",
-   "terms": "https://gisservices.its.ny.gov/arcgis/rest/services/NYS_Tax_Parcels_Public/MapServer/1?f=json",
+   "name": "NYS Tax Parcels Public (NYS GIS Program Office; opt-in counties only)",
+   "terms": "https://services6.arcgis.com/EbVsqZ18sv1kVJ3k/arcgis/rest/services/NYS_Tax_Parcels_Public/FeatureServer/1?f=json",
    "addr": "PARCEL_ADDR",
    "max": 50000,
    "fields": [
@@ -1067,7 +1067,7 @@
    ]
   },
   {
-   "url": "https://enterprise.gisdata.mn.gov/aghost/rest/services/us_mn_state_mngeo/plan_parcels_open/FeatureServer/1",
+   "url": "https://enterprise.gisdata.mn.gov/aghost/rest/services/us_mn_state_mngeo/plan_parcels_open/FeatureServer/0",
    "states": [
     "27"
    ],
@@ -1986,26 +1986,39 @@
    ],
    "name": "CRCOG Capitol Region CT Parcels (Hartford Metro)",
    "terms": "https://gis.crcog.org",
-   "addr": "Location",
+   "addr": "PropertyAddress",
    "max": 2000,
    "fields": [
     [
-     "Parcel_ID",
+     "GISID",
      "Parcel ID"
     ],
     [
-     "Location",
+     "PropertyAddress",
      "Site Address"
     ],
     [
-     "Owner",
+     "Municipality",
+     "Town"
+    ],
+    [
+     "OwnerName",
      "Owner"
     ],
     [
-     "Total_Assessed",
+     "TotalAssessment",
      "Assessed Value"
+    ],
+    [
+     "LandArea",
+     "Land Area"
+    ],
+    [
+     "LUDesc",
+     "Land Use"
     ]
-   ]
+   ],
+   "apn": "GISID"
   },
   {
    "url": "https://services6.arcgis.com/UwEXjTguDDovBVaQ/ArcGIS/rest/services/Parcels/FeatureServer/0",
@@ -2017,20 +2030,20 @@
    ],
    "name": "WestCOG Western CT Parcels (Stamford / Bridgeport Metro)",
    "terms": "https://westcog.org",
-   "addr": "SITE_ADDR",
+   "addr": "",
    "max": 2000,
    "fields": [
     [
-     "PROP_ID",
-     "Property ID"
+     "FieldID",
+     "Parcel ID"
     ],
     [
-     "SITE_ADDR",
-     "Site Address"
+     "TOWN",
+     "Town"
     ],
     [
-     "TOTAL_VAL",
-     "Total Value"
+     "Acreage",
+     "Acres"
     ]
    ]
   },
@@ -2805,26 +2818,46 @@
    ]
   },
   {
-   "url": "https://services2.arcgis.com/qvkbeam7WirpsIPC/arcgis/rest/services/City_of_Detroit_Parcels/FeatureServer/0",
+   "url": "https://services2.arcgis.com/qvkbeam7Wirps6zC/arcgis/rest/services/parcel_file_current/FeatureServer/0",
    "states": [
     "MI"
    ],
    "counties": [
     "26163"
    ],
-   "name": "Wayne County GIS Parcels",
-   "terms": "https://services2.arcgis.com/qvkbeam7WirpsIPC/arcgis/rest/services/City_of_Detroit_Parcels/FeatureServer/0",
-   "addr": "fullAddres",
-   "apn": "packedParc",
+   "name": "City of Detroit Parcels (Current), Office of the Assessor",
+   "terms": "https://www.arcgis.com/home/item.html?id=3c784c118e5c4083b37038e9b38573df",
+   "addr": "address",
+   "apn": "parcel_id",
    "max": 2000,
    "fields": [
     [
-     "packedParc",
+     "parcel_id",
      "Parcel ID"
     ],
     [
-     "fullAddres",
+     "address",
      "Site Address"
+    ],
+    [
+     "property_class_description",
+     "Property Class"
+    ],
+    [
+     "amt_assessed_value",
+     "Assessed Value"
+    ],
+    [
+     "amt_sale_price",
+     "Last Sale Price"
+    ],
+    [
+     "sale_date",
+     "Last Sale Date"
+    ],
+    [
+     "total_acreage",
+     "Acres"
     ]
    ]
   },
@@ -2967,17 +3000,29 @@
    ],
    "name": "St. Charles County GIS Parcels",
    "terms": "https://services7.arcgis.com/n2n27A5sWjEWTpfF/arcgis/rest/services/St_Charles_County_Parcels/FeatureServer/0",
-   "addr": "SiteAddress",
-   "apn": "Account",
+   "addr": "SiteAddres",
+   "apn": "Parcel_ID",
    "max": 1000,
    "fields": [
     [
-     "Account",
+     "Parcel_ID",
      "Parcel ID"
     ],
     [
-     "SiteAddress",
+     "Account",
+     "Account"
+    ],
+    [
+     "SiteAddres",
      "Site Address"
+    ],
+    [
+     "YearBuilt",
+     "Year Built"
+    ],
+    [
+     "TotalMarke",
+     "Total Market Value"
     ]
    ]
   },
@@ -3434,26 +3479,38 @@
    ]
   },
   {
-   "url": "https://services.arcgis.com/fLeGjb7u4uXqeF9q/ArcGIS/rest/services/OPA_PROPERTIES_PUBLIC/FeatureServer/0",
+   "url": "https://services.arcgis.com/fLeGjb7u4uXqeF9q/ArcGIS/rest/services/PWD_PARCELS/FeatureServer/0",
    "states": [
     "PA"
    ],
    "counties": [
     "42101"
    ],
-   "name": "Philadelphia County GIS Parcels",
-   "terms": "https://services.arcgis.com/fLeGjb7u4uXqeF9q/ArcGIS/rest/services/OPA_PROPERTIES_PUBLIC/FeatureServer/0",
-   "addr": "location",
-   "apn": "parcel_number",
+   "name": "Philadelphia Water Department parcels (City of Philadelphia)",
+   "terms": "https://services.arcgis.com/fLeGjb7u4uXqeF9q/ArcGIS/rest/services/PWD_PARCELS/FeatureServer/0",
+   "addr": "address",
+   "apn": "parcelid",
    "max": 2000,
    "fields": [
     [
-     "parcel_number",
+     "parcelid",
      "Parcel ID"
     ],
     [
-     "location",
+     "address",
      "Site Address"
+    ],
+    [
+     "brt_id",
+     "OPA Account"
+    ],
+    [
+     "bldg_desc",
+     "Building"
+    ],
+    [
+     "gross_area",
+     "Lot Area"
     ]
    ]
   },
@@ -3615,21 +3672,34 @@
     "SD"
    ],
    "counties": [
-    "46083"
+    "46083",
+    "46099"
    ],
-   "name": "Lincoln County GIS Parcels",
+   "name": "City of Sioux Falls Parcels (Lincoln and Minnehaha counties, SD)",
    "terms": "https://gis.siouxfalls.gov/arcgis/rest/services/Data/Property/MapServer/1",
-   "addr": "Parcel.Address",
-   "apn": "Parcel.PID",
+   "addr": "ADDRESS",
+   "apn": "TAG",
    "max": 2000,
    "fields": [
     [
-     "Parcel.PID",
+     "TAG",
      "Parcel ID"
     ],
     [
-     "Parcel.Address",
+     "ADDRESS",
      "Site Address"
+    ],
+    [
+     "COUNTY",
+     "County"
+    ],
+    [
+     "ACREAGE",
+     "Acres"
+    ],
+    [
+     "LANDUSE",
+     "Land Use"
     ]
    ]
   },

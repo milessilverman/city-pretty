@@ -5,7 +5,8 @@
 // Why: Queens, Staten Island and Hillsborough were reported "shown" while the live page always withheld them, because
 // the tests fed fields straight to the model and skipped the live parcel lookup.
 //
-// Usage: NODE_USE_ENV_PROXY=1 node scripts/live_check_valuations.mjs [fips ...]   (writes data/backtests/live_check_<date>.json)
+// Usage: NODE_USE_ENV_PROXY=1 node scripts/live_check_valuations.mjs [fips ...] [--old-sale]   (writes data/backtests/live_check_<date>.json;
+//        --old-sale: Florida homes whose last sale is before 2025, written to live_check_<date>_old_sale.json)
 // Homes come from each county's saved back-test sales (fit window, i.e. older sales, so the model path is exercised);
 // a point inside each parcel comes from the county's parcel service geometry.
 import fs from "node:fs";
@@ -35,10 +36,10 @@ const COUNTIES = {
 };
 const LA_LAYER = "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0";
 
-async function getJson(url) {
+async function getJson(url, timeoutMs = 60000) {
   for (let i = 0; i < 4; i++) {
     try {
-      const r = await fetch(url, { headers: UA, signal: AbortSignal.timeout(60000) });
+      const r = await fetch(url, { headers: UA, signal: AbortSignal.timeout(timeoutMs) });
       if (r.ok) return await r.json();
     } catch {}
     await new Promise((res) => setTimeout(res, 2000 * (i + 1)));
@@ -77,7 +78,43 @@ function rowsFor(fips) {
   return d.rows.filter((r) => r.sqft && r.yb).map((r) => ({ id: r.id, date: r.date, bg: r.bg || null }));
 }
 
+// Florida homes whose last sale is before 2025 (so the page shows the model estimate, not a recorded sale), picked
+// straight from the statewide layer: single-family (DOR_UC 001), living area and year built present, and no sale on
+// the roll. On this layer (2026 roll) SALE_YR1 is only ever 0, 2025 or 2026 (checked on 1,000 Broward rows, 16 Nov),
+// so SALE_YR1=0 means no sale since 1 Jan 2025. Any WHERE on SALE_YR1 is refused by the service (HTTP 400), and small
+// resultRecordCount values hang, so pages of 1,000 rows are fetched and filtered here.
+const FL_DOR_CO = { "12011": 16, "12095": 58, "12057": 39, "12086": 23, "12031": 26, "12099": 60, "12103": 62 };
+const FL_BOXES = {
+  "12011": [[-80.21, 26.01, "Hollywood"], [-80.25, 26.10, "Plantation"], [-80.27, 26.26, "Coral Springs"], [-80.31, 26.00, "Pembroke Pines"], [-80.13, 26.23, "Pompano Beach"]],
+  "12095": [[-81.40, 28.52, "Orlando"], [-81.35, 28.59, "Winter Park"], [-81.51, 28.67, "Apopka"], [-81.55, 28.56, "Ocoee"], [-81.27, 28.55, "east Orange"]],
+};
+async function oldSalePointsFor(fips) {
+  const co = FL_DOR_CO[fips];
+  if (!co) throw new Error(`--old-sale: no DOR county number for ${fips}`);
+  // One home from each of several small boxes spread across the county (city centers picked by hand; every pick is still
+  // checked to be in the county with the Census county layer). County-wide paged queries (resultOffset) time out on
+  // this layer for Broward; a box with a spatial filter returns in ~15 s.
+  const boxes = FL_BOXES[fips];
+  if (!boxes) throw new Error(`--old-sale: no sample boxes for ${fips}`);
+  const out = [];
+  for (const [bx, by, label] of boxes.slice(0, N)) {
+    const q = { where: `CO_NO=${co} AND DOR_UC='001'`, geometry: `${bx},${by},${bx + 0.01},${by + 0.01}`, geometryType: "esriGeometryEnvelope", inSR: "4326", spatialRel: "esriSpatialRelIntersects", outFields: "PARCEL_ID,SALE_YR1,SALE_YR2,TOT_LVG_AR,ACT_YR_BLT", returnGeometry: "true", outSR: "4326", resultRecordCount: "1000", f: "json" };
+    const d = await getJson(`${COUNTIES[fips].layer}/query?` + new URLSearchParams(q), 180000);
+    const rows = (d && d.features) || [];
+    const feats = rows.filter((f) => f.geometry && f.geometry.rings && !f.attributes.SALE_YR1 && !f.attributes.SALE_YR2 && f.attributes.TOT_LVG_AR > 0 && f.attributes.ACT_YR_BLT > 0);
+    console.error(`   ${fips} ${label}: ${feats.length} of ${rows.length} single-family rows have no sale since 2025`);
+    for (const f of feats.slice(0, 20)) {
+      const p = interiorPoint(f.geometry.rings);
+      if (!p || (await countyAt(p[1], p[0])) !== fips) continue;
+      out.push({ id: f.attributes.PARCEL_ID, lat: p[1], lng: p[0], sales_file_bg: null, last_sale_year: "before 2025 (no sale on the 2026 roll)" });
+      break;
+    }
+  }
+  return out;
+}
+
 async function pointsFor(fips) {
+  if (process.argv.includes("--old-sale")) return oldSalePointsFor(fips);
   const c = COUNTIES[fips];
   const rows = rowsFor(fips).sort((a, b) => String(a.date).localeCompare(String(b.date)));
   // spread picks across the oldest third (fit window), deterministic
@@ -210,7 +247,7 @@ async function main() {
     await browser.close();
     srv.kill();
   }
-  const out = path.join(root, `data/backtests/live_check_${new Date().toISOString().slice(0, 10)}.json`);
+  const out = path.join(root, `data/backtests/live_check_${new Date().toISOString().slice(0, 10)}${process.argv.includes("--old-sale") ? "_old_sale" : ""}.json`);
   fs.writeFileSync(out, JSON.stringify({ ran_on: new Date().toISOString(), script: "scripts/live_check_valuations.mjs", results }, null, 1));
   console.error("wrote", out);
 }

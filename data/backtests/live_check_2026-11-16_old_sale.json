@@ -1,0 +1,681 @@
+{
+ "what": "Florida homes with no sale since 1 Jan 2025 (SALE_YR1=0 and SALE_YR2=0 on the 2026 statewide roll), clicked on the live page by point and by drawn lot. Run 1: Broward and Orange. Run 2: Broward again, because one Coral Springs click in run 1 got no answer from the statewide parcel layer (the same point query took 23.6 s by curl right after; the page waits 12 s, then 15 s by JSONP).",
+ "command": "LIVE_PORT=8835 NODE_USE_ENV_PROXY=1 node scripts/live_check_valuations.mjs --old-sale 12011 12095",
+ "runs": [
+  {
+   "ran_on": "2026-11-16T21:06:32.572Z",
+   "script": "scripts/live_check_valuations.mjs",
+   "results": {
+    "12011": {
+     "county": "Broward",
+     "points": 5,
+     "homes": [
+      {
+       "id": "514112050920",
+       "mode": "point",
+       "lat": 26.02022,
+       "lng": -80.209433,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 476000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 476000,
+        "reason": null
+       },
+       "page_bg": "120110911004",
+       "page_bgs_all_calls": [
+        "120110911004"
+       ],
+       "valuation_calls": 6,
+       "address": null
+      },
+      {
+       "id": "504110170510",
+       "mode": "point",
+       "lat": 26.110268,
+       "lng": -80.242486,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 626000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 626000,
+        "reason": null
+       },
+       "page_bg": "120110610013",
+       "page_bgs_all_calls": [
+        "120110610013"
+       ],
+       "valuation_calls": 6,
+       "address": null
+      },
+      {
+       "id": "484120010870",
+       "mode": "point",
+       "lat": 26.270545,
+       "lng": -80.268532,
+       "sales_file_bg": null,
+       "result": "parcel service did not answer",
+       "value": null,
+       "method": null,
+       "rating": null,
+       "withheld_reason": null,
+       "model_estimate_same_inputs": null,
+       "page_bg": null,
+       "page_bgs_all_calls": [],
+       "valuation_calls": 0,
+       "address": null
+      },
+      {
+       "id": "514013170061",
+       "mode": "point",
+       "lat": 26.005299,
+       "lng": -80.308385,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 451000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 451000,
+        "reason": null
+       },
+       "page_bg": "120111103521",
+       "page_bgs_all_calls": [
+        "120111103521"
+       ],
+       "valuation_calls": 6,
+       "address": null
+      },
+      {
+       "id": "484235150160",
+       "mode": "point",
+       "lat": 26.240356,
+       "lng": -80.126783,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 306000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 306000,
+        "reason": null
+       },
+       "page_bg": "120110304023",
+       "page_bgs_all_calls": [
+        "120110304023"
+       ],
+       "valuation_calls": 6,
+       "address": null
+      },
+      {
+       "id": "514112050920",
+       "mode": "drawn lot",
+       "lat": 26.02022,
+       "lng": -80.209433,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 476000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 476000,
+        "reason": null
+       },
+       "page_bg": "120110911004",
+       "page_bgs_all_calls": [
+        "120110911004"
+       ],
+       "valuation_calls": 2,
+       "address": null
+      },
+      {
+       "id": "504110170510",
+       "mode": "drawn lot",
+       "lat": 26.110268,
+       "lng": -80.242486,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 626000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 626000,
+        "reason": null
+       },
+       "page_bg": "120110610013",
+       "page_bgs_all_calls": [
+        "120110610013"
+       ],
+       "valuation_calls": 2,
+       "address": null
+      },
+      {
+       "id": "484120010870",
+       "mode": "drawn lot",
+       "lat": 26.270545,
+       "lng": -80.268532,
+       "sales_file_bg": null,
+       "result": "parcel service did not answer (drawing the lot)",
+       "error": "parcel service did not answer (drawing the lot)"
+      },
+      {
+       "id": "514013170061",
+       "mode": "drawn lot",
+       "lat": 26.005299,
+       "lng": -80.308385,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 451000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 451000,
+        "reason": null
+       },
+       "page_bg": "120111103521",
+       "page_bgs_all_calls": [
+        "120111103521"
+       ],
+       "valuation_calls": 2,
+       "address": null
+      },
+      {
+       "id": "484235150160",
+       "mode": "drawn lot",
+       "lat": 26.240356,
+       "lng": -80.126783,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 306000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 306000,
+        "reason": null
+       },
+       "page_bg": "120110304023",
+       "page_bgs_all_calls": [
+        "120110304023"
+       ],
+       "valuation_calls": 2,
+       "address": null
+      }
+     ],
+     "page_errors": []
+    },
+    "12095": {
+     "county": "Orange FL",
+     "points": 5,
+     "homes": [
+      {
+       "id": "032329140202450",
+       "mode": "point",
+       "lat": 28.522873,
+       "lng": -81.399461,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 137000,
+       "method": "Orange County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.7% on 6,187 Orange County sales (2026-04-01 to 2026-08-31; 81.0% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 137000,
+        "reason": null
+       },
+       "page_bg": "120950116001",
+       "page_bgs_all_calls": [
+        "120950116001"
+       ],
+       "valuation_calls": 6,
+       "address": null
+      },
+      {
+       "id": "082230645601072",
+       "mode": "point",
+       "lat": 28.597268,
+       "lng": -81.344636,
+       "sales_file_bg": null,
+       "result": "withheld",
+       "value": null,
+       "method": "Neighborhood model on ACS median (uncalibrated)",
+       "rating": "Withheld \u2014 not enough on file for the tested model",
+       "withheld_reason": "No estimate: Too few recorded sales nearby to anchor the tested model.",
+       "model_estimate_same_inputs": {
+        "value": null,
+        "reason": "Too few recorded sales nearby to anchor the tested model."
+       },
+       "page_bg": "120950160011",
+       "page_bgs_all_calls": [
+        "120950160011"
+       ],
+       "valuation_calls": 6,
+       "address": null
+      },
+      {
+       "id": "102128892201620",
+       "mode": "point",
+       "lat": 28.679675,
+       "lng": -81.500168,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 343000,
+       "method": "Orange County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.7% on 6,187 Orange County sales (2026-04-01 to 2026-08-31; 81.0% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 343000,
+        "reason": null
+       },
+       "page_bg": "120950177031",
+       "page_bgs_all_calls": [
+        "120950177031"
+       ],
+       "valuation_calls": 6,
+       "address": null
+      },
+      {
+       "id": "202228000000008",
+       "mode": "point",
+       "lat": 28.562202,
+       "lng": -81.540822,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 425000,
+       "method": "Orange County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.7% on 6,187 Orange County sales (2026-04-01 to 2026-08-31; 81.0% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 425000,
+        "reason": null
+       },
+       "page_bg": "120950149063",
+       "page_bgs_all_calls": [
+        "120950149063"
+       ],
+       "valuation_calls": 6,
+       "address": null
+      },
+      {
+       "id": "252230000000017",
+       "mode": "point",
+       "lat": 28.553262,
+       "lng": -81.262664,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 414000,
+       "method": "Orange County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.7% on 6,187 Orange County sales (2026-04-01 to 2026-08-31; 81.0% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 414000,
+        "reason": null
+       },
+       "page_bg": "120950167133",
+       "page_bgs_all_calls": [
+        "120950167133"
+       ],
+       "valuation_calls": 6,
+       "address": null
+      },
+      {
+       "id": "032329140202450",
+       "mode": "drawn lot",
+       "lat": 28.522873,
+       "lng": -81.399461,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 137000,
+       "method": "Orange County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.7% on 6,187 Orange County sales (2026-04-01 to 2026-08-31; 81.0% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 137000,
+        "reason": null
+       },
+       "page_bg": "120950116001",
+       "page_bgs_all_calls": [
+        "120950116001"
+       ],
+       "valuation_calls": 2,
+       "address": null
+      },
+      {
+       "id": "082230645601072",
+       "mode": "drawn lot",
+       "lat": 28.597268,
+       "lng": -81.344636,
+       "sales_file_bg": null,
+       "result": "withheld",
+       "value": null,
+       "method": "Neighborhood model on ACS median (uncalibrated)",
+       "rating": "Withheld \u2014 not enough on file for the tested model",
+       "withheld_reason": "No estimate: Too few recorded sales nearby to anchor the tested model.",
+       "model_estimate_same_inputs": {
+        "value": null,
+        "reason": "Too few recorded sales nearby to anchor the tested model."
+       },
+       "page_bg": "120950160011",
+       "page_bgs_all_calls": [
+        "120950160011"
+       ],
+       "valuation_calls": 2,
+       "address": null
+      },
+      {
+       "id": "102128892201620",
+       "mode": "drawn lot",
+       "lat": 28.679675,
+       "lng": -81.500168,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 343000,
+       "method": "Orange County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.7% on 6,187 Orange County sales (2026-04-01 to 2026-08-31; 81.0% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 343000,
+        "reason": null
+       },
+       "page_bg": "120950177031",
+       "page_bgs_all_calls": [
+        "120950177031"
+       ],
+       "valuation_calls": 2,
+       "address": null
+      },
+      {
+       "id": "202228000000008",
+       "mode": "drawn lot",
+       "lat": 28.562202,
+       "lng": -81.540822,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 425000,
+       "method": "Orange County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.7% on 6,187 Orange County sales (2026-04-01 to 2026-08-31; 81.0% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 425000,
+        "reason": null
+       },
+       "page_bg": "120950149063",
+       "page_bgs_all_calls": [
+        "120950149063"
+       ],
+       "valuation_calls": 2,
+       "address": null
+      },
+      {
+       "id": "252230000000017",
+       "mode": "drawn lot",
+       "lat": 28.553262,
+       "lng": -81.262664,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 414000,
+       "method": "Orange County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.7% on 6,187 Orange County sales (2026-04-01 to 2026-08-31; 81.0% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 414000,
+        "reason": null
+       },
+       "page_bg": "120950167133",
+       "page_bgs_all_calls": [
+        "120950167133"
+       ],
+       "valuation_calls": 2,
+       "address": null
+      }
+     ],
+     "page_errors": []
+    }
+   }
+  },
+  {
+   "ran_on": "2026-11-16T21:11:17.856Z",
+   "script": "scripts/live_check_valuations.mjs",
+   "results": {
+    "12011": {
+     "county": "Broward",
+     "points": 5,
+     "homes": [
+      {
+       "id": "514112050920",
+       "mode": "point",
+       "lat": 26.02022,
+       "lng": -80.209433,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 476000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 476000,
+        "reason": null
+       },
+       "page_bg": "120110911004",
+       "page_bgs_all_calls": [
+        "120110911004"
+       ],
+       "valuation_calls": 6,
+       "address": null
+      },
+      {
+       "id": "504110170510",
+       "mode": "point",
+       "lat": 26.110268,
+       "lng": -80.242486,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 626000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 626000,
+        "reason": null
+       },
+       "page_bg": "120110610013",
+       "page_bgs_all_calls": [
+        "120110610013"
+       ],
+       "valuation_calls": 6,
+       "address": null
+      },
+      {
+       "id": "484120010870",
+       "mode": "point",
+       "lat": 26.270545,
+       "lng": -80.268532,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 759000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 759000,
+        "reason": null
+       },
+       "page_bg": "120110203131",
+       "page_bgs_all_calls": [
+        "120110203131"
+       ],
+       "valuation_calls": 6,
+       "address": null
+      },
+      {
+       "id": "514013170061",
+       "mode": "point",
+       "lat": 26.005299,
+       "lng": -80.308385,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 451000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 451000,
+        "reason": null
+       },
+       "page_bg": "120111103521",
+       "page_bgs_all_calls": [
+        "120111103521"
+       ],
+       "valuation_calls": 6,
+       "address": null
+      },
+      {
+       "id": "484235150160",
+       "mode": "point",
+       "lat": 26.240356,
+       "lng": -80.126783,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 306000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 306000,
+        "reason": null
+       },
+       "page_bg": "120110304023",
+       "page_bgs_all_calls": [
+        "120110304023"
+       ],
+       "valuation_calls": 6,
+       "address": null
+      },
+      {
+       "id": "514112050920",
+       "mode": "drawn lot",
+       "lat": 26.02022,
+       "lng": -80.209433,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 476000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 476000,
+        "reason": null
+       },
+       "page_bg": "120110911004",
+       "page_bgs_all_calls": [
+        "120110911004"
+       ],
+       "valuation_calls": 2,
+       "address": null
+      },
+      {
+       "id": "504110170510",
+       "mode": "drawn lot",
+       "lat": 26.110268,
+       "lng": -80.242486,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 626000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 626000,
+        "reason": null
+       },
+       "page_bg": "120110610013",
+       "page_bgs_all_calls": [
+        "120110610013"
+       ],
+       "valuation_calls": 2,
+       "address": null
+      },
+      {
+       "id": "484120010870",
+       "mode": "drawn lot",
+       "lat": 26.270545,
+       "lng": -80.268532,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 759000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 759000,
+        "reason": null
+       },
+       "page_bg": "120110203131",
+       "page_bgs_all_calls": [
+        "120110203131"
+       ],
+       "valuation_calls": 2,
+       "address": null
+      },
+      {
+       "id": "514013170061",
+       "mode": "drawn lot",
+       "lat": 26.005299,
+       "lng": -80.308385,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 451000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 451000,
+        "reason": null
+       },
+       "page_bg": "120111103521",
+       "page_bgs_all_calls": [
+        "120111103521"
+       ],
+       "valuation_calls": 2,
+       "address": null
+      },
+      {
+       "id": "484235150160",
+       "mode": "drawn lot",
+       "lat": 26.240356,
+       "lng": -80.126783,
+       "sales_file_bg": null,
+       "result": "model estimate shown",
+       "value": 306000,
+       "method": "Broward County model on block group sales 2025\u20132026 (back-tested)",
+       "rating": "Back-tested estimate: off by a median of 8.9% on 7,232 Broward County sales (2026-04-01 to 2026-08-31; 82.2% within 20%). Not an appraisal.",
+       "withheld_reason": null,
+       "model_estimate_same_inputs": {
+        "value": 306000,
+        "reason": null
+       },
+       "page_bg": "120110304023",
+       "page_bgs_all_calls": [
+        "120110304023"
+       ],
+       "valuation_calls": 2,
+       "address": null
+      }
+     ],
+     "page_errors": []
+    }
+   }
+  }
+ ]
+}
