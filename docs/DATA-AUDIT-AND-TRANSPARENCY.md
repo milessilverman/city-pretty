@@ -53,9 +53,28 @@ the record is **not** confirmed.
 | Transit projects (`transit_pipelines.json`) | 5 | | 5 | | | invented housing/EV details nulled | `audit/costs-transit-audit.md` |
 | Intercity rail corridors (`intercity_transit_corridors.json`) | 4 | | 2 | 2 | | fabricated railyard recommendations; unsourced costs/times nulled | `audit/costs-transit-audit.md` |
 | Underused land (`underused_sites.json`) | 90 | | 90 (assessor fields real; model outputs not) | | | 9 hand-typed sites | `audit/engines-sites-audit.md` |
-| Valuation back-test (`valuation_backtest_benchmarks.json`) | 0 | | | | | all (fabricated) | `audit/engines-sites-audit.md` |
+| Valuation back-test (`valuation_backtest_benchmarks.json`) | LA County: 50,720 recent transfers | 1 run (LA) | | | other counties: none | all fabricated rows | `scripts/backtest_la_valuation.mjs`, section 2a |
 | County data tiers (`county_completeness.json`) | 706 | 639 computed from data files + service pings | | | 67 (no data file) | hand-assigned tiers | `scripts/build_county_completeness.py` |
 | California county registry (`ca_counties_registry.json`) | 58 | | | | 58 | false Census TIGER stamps | this document |
+
+### 2a. Home-value estimate: first real back-test (Los Angeles County, 16 Nov 2026)
+
+LA County's public parcel layer has no sale prices, so the test uses a legal proxy: under Cal. Rev. & Tax. Code §110.1
+and §110(b), a purchase resets a home's Prop 13 base-year value to the purchase price. Single-family homes whose land
+and building base years are both 2025 or 2026 (53,958 pulled; 50,720 after filtering out new construction, multi-unit
+and odd values) were valued by the page's own code with their roll values hidden, as for a home that has not sold.
+
+| | Median error | Within 10% | Within 20% | Median bias |
+|---|---|---|---|---|
+| The page's estimate (47,172 valued) | **18.8%** | 25% | 53% | −13% (under-estimates) |
+| The neighborhood's typical value alone | **15.0%** | 35% | 62% | −6% |
+
+**The model is worse than using the neighborhood value alone, so in LA the page now withholds it**, shows the test's
+numbers, and points to the closest sourced figure (a recent recorded sale or a recent base-year value). Other counties
+have no back-test and keep the "unvalidated" label. Error is largest at $2M and up (31%). Caveats: base-year resets are
+a proxy (some are non-sale reassessments); 2025 values include up to a 2% inflation factor; the page's $2M guard
+(written for the Census ACS top-code) withholds most $2M+ homes in LA. Full results, by price band, base year and city:
+`app/data/valuation_backtest_benchmarks.json`; every record tested: `data/backtests/la_sample_2026-11-16.json.gz`.
 
 ### The improvement catalog (what the map recommends)
 
