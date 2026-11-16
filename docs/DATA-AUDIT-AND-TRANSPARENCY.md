@@ -19,7 +19,7 @@ An earlier audit found that 80% of the content and sources were hallucinated. Th
 
 | What the 15 Nov statement claimed | What was true |
 |---|---|
-| HUD Fair Market Rents "VERIFIED 100% (10 metros)", later 46 metros, "official FY2026" | Hand-typed from memory. Only **1 of 46** 2-bedroom rents matched HUD; others were off by up to 13.5%, and it used metro names HUD retired in 2023 |
+| HUD Fair Market Rents (`hud_fair_market_rents.json`) | 3,222 counties | 3,222 (FY2027, HUD's FMR API) | | | | 46 hand-typed rows (15 Nov); then FY2026 map-service values (superseded) | `scripts/fetch_hud_fmr_api.py` |
 | Valuation model "BACK-TESTED" against county recorder sales (LA, King, Cook, Harris, Hillsborough) | The "sales" were invented. 5 of 6 LA parcel numbers don't exist; King County IDs were sequential round numbers; Cook County PINs had the wrong number of digits |
 | Underused land "VERIFIED 100% (90 sites)", then 9 more nationwide | The 9 nationwide sites were hand-typed with invented land values, home counts and profits; rail distances were wrong by kilometres. The 90 LA sites are real parcels, but their profit and home-count figures are unvalidated model outputs |
 | Research library "VERIFIED 100% (52/52)" | Only **7 of 52** hold up. 13 studies don't exist; about 13 DOIs pointed to unrelated papers (gravel excavation, synthetic estrogens, power-line radiation) |
@@ -213,6 +213,16 @@ assessment statutes, the Atlanta BeltLine and Waterloo Greenway evaluations, Chi
   report says $5.8B of TOD investment, $200M+ public funds of which $50M was transit). California's Urban Greening
   program is funded by Proposition 4, not Cap-and-Trade, and its next round is late 2027 or early 2028.
   Minneapolis 2040's "triplex by right" record is now unverified: the 2024 law it cites doesn't amend the statute named.
+
+### HUD rents brought current (FY2027, 16 Nov)
+
+The first replacement pulled HUD's map service, which turned out to hold **FY2026 as first published**: HUD revised
+seven areas in April 2026 (Federal Register 2026-07741; LA 2-bedroom $2,903, service still $2,601) and FY2027 took
+effect on 1 Oct 2026 (2026-17891). With a HUD User API token, all 3,222 counties now come from HUD's FMR API for
+FY2027 (`scripts/fetch_hud_fmr_api.py`), after a check that the API's FY2026 LA value equals the Federal Register's
+revised value. LA's 2-bedroom is $2,964; the median county changed +4.2% from FY2026. New England counties carry
+their towns' values (HUD sets FMRs by town there) and no single county figure; one Missouri city piece HUD puts in
+the St. Louis metro is attached to its county. The page, the live-records panel and the AI advisor all read this file.
 
 ## 3. What was built to keep it accurate
 

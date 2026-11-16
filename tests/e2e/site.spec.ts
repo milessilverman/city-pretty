@@ -322,7 +322,6 @@ test("house panel shows live public records with links, from the agencies (respo
   const serve = (body: string) => (route: any) => route.fulfill({ status: 200, contentType: "application/json", body, headers: { "access-control-allow-origin": "*" } });
   await page.route(/tigerweb\.geo\.census\.gov\/.*MapServer\/10\/query/, serve(fx("tiger_bg_austin.json")));
   await page.route(/tigerweb\.geo\.census\.gov\/.*MapServer\/82\/query/, serve(fx("tiger_county_austin.json")));
-  await page.route(/Fair_Market_Rents\/FeatureServer\/0\/query/, serve(fx("hud_fmr_austin.json")));
   await page.route(/hazards\.fema\.gov\/.*NFHL\/MapServer\/28\/query/, serve(fx("fema_flood_austin.json")));
   await page.route(/epqs\.nationalmap\.gov/, serve(fx("usgs_elev_austin.json")));
   const errors = await openPage(page);
@@ -342,7 +341,7 @@ test("house panel shows live public records with links, from the agencies (respo
   });
   expect(text).not.toBeNull();
   expect(text!.text).toContain("Travis County");
-  expect(text!.text).toContain("2 bed $1,852");
+  expect(text!.text).toContain("2 bed $1,817");   // HUD FY2027, from the page's county file
   expect(text!.text).toContain("Zone AE");
   expect(text!.links.some((l) => l.includes("hazards.fema.gov"))).toBe(true);
   expect(errors).toEqual([]);

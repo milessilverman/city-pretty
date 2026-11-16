@@ -10,7 +10,7 @@ import {
   censusGeographies,
   femaFloodZone,
   geocodeAddress,
-  hudFairMarketRent,
+  hudFairMarketRentForCounty,
   siteFacts,
   usgsElevation,
 } from "../../workers/sources";
@@ -34,7 +34,6 @@ function fakeFetch(routes: Array<[RegExp, string | number]>) {
 const AUSTIN = fakeFetch([
   [/geocoder\/geographies\/coordinates/, fx("census_geographies_austin.json")],
   [/geocoder\/locations\/onelineaddress/, fx("census_address_austin.json")],
-  [/Fair_Market_Rents/, fx("hud_fmr_austin.json")],
   [/epqs\.nationalmap\.gov/, fx("usgs_elev_austin.json")],
   [/NFHL\/MapServer\/28/, fx("fema_flood_austin.json")],
 ]);
@@ -63,25 +62,23 @@ describe("official-source connectors (real captured responses)", () => {
     expect(addressMismatch("815 E 41st St", "811 E 41ST ST")).toMatch(/house number/);
   });
 
-  it("HUD FMR: an area HUD revised in the Federal Register uses the notice's values, and says FY2027 is current", async () => {
-    // HUD's map service response for LA as seen 2026-11-16 (2BR $2,601); notice 2026-07741 revised it to $2,903.
-    const la = JSON.stringify({ features: [{ attributes: { FMR_CODE: "METRO31080MM4480", FMR_AREANAME: "Los Angeles-Long Beach-Glendale, CA HUD Metro FMR Area", FMR_0BDR: 1863, FMR_1BDR: 2085, FMR_2BDR: 2601, FMR_3BDR: 3298, FMR_4BDR: 3672 } }] });
-    const r = await hudFairMarketRent(34.05, -118.25, fakeFetch([[/Fair_Market_Rents/, la]]));
-    expect(r.ok && r.value.rent_2br).toBe(2903);
-    expect(r.source.url).toContain("2026-07741");
-    expect(r.ok && r.notes?.join(" ")).toMatch(/FY2027/);
-    const austin = await hudFairMarketRent(30.3005, -97.724, AUSTIN);
-    expect(austin.ok && austin.value.rent_2br).toBe(1852);
-    expect(austin.ok && austin.notes?.join(" ")).toMatch(/Not current/);
+  it("HUD FMR: FY2027 county values from HUD's API file, with HUD's own caveat", () => {
+    const tx = hudFairMarketRentForCounty("48453");
+    expect(tx.ok && tx.value.fiscal_year).toBe(2027);
+    expect(tx.ok && tx.value.rent_2br).toBe(1817);
+    expect(tx.ok && tx.value.fmr_area_name).toBe("Austin-Round Rock-San Marcos, TX MSA");
+    expect(tx.ok && tx.notes?.join(" ")).toMatch(/not market asking rents/);
+    const la = hudFairMarketRentForCounty("06037");
+    expect(la.ok && la.value.rent_2br).toBe(2964);
   });
 
-  it("HUD FMR: values are HUD's, area name is HUD's current name", async () => {
-    const r = await hudFairMarketRent(30.3005, -97.724, AUSTIN);
-    expect(r.ok).toBe(true);
-    if (!r.ok) return;
-    expect(r.value.fmr_area_name).toBe("Austin-Round Rock-San Marcos, TX MSA");
-    expect(r.value.rent_2br).toBe(1852);
-    expect(r.notes?.join(" ")).toMatch(/not market asking rents/);
+  it("HUD FMR: New England gives the town range, never a county figure; unknown county gives ok:false", () => {
+    const ct = hudFairMarketRentForCounty("09110");
+    expect(ct.ok && ct.value.rent_2br).toBeNull();
+    expect(ct.ok && ct.value.rent_2br_range_by_town?.length).toBe(2);
+    const none = hudFairMarketRentForCounty("99999");
+    expect(none.ok).toBe(false);
+    expect(none.value).toBeNull();
   });
 
   it("USGS elevation, and a no-data point is null with a reason (never a default)", async () => {
@@ -120,7 +117,7 @@ describe("official-source connectors (real captured responses)", () => {
 
   it("network failure and HTTP errors give ok:false with a reason, never a number", async () => {
     const dead = fakeFetch([]);
-    for (const r of [await hudFairMarketRent(30, -97, dead), await usgsElevation(30, -97, dead), await censusGeographies(30, -97, fakeFetch([[/census/, 503]]))]) {
+    for (const r of [await usgsElevation(30, -97, dead), await censusGeographies(30, -97, fakeFetch([[/census/, 503]]))]) {
       expect(r.ok).toBe(false);
       expect(r.value).toBeNull();
     }
@@ -131,7 +128,7 @@ describe("official-source connectors (real captured responses)", () => {
     for (const k of ["geographies", "hud_fair_market_rent", "elevation", "flood_zone"] as const) {
       expect(f[k].ok).toBe(true);
       expect(f[k].source.url).toMatch(/^https:\/\//);
-      expect(f[k].source.retrieved_at).toMatch(/^\d{4}-\d{2}-\d{2}T/);
+      expect(f[k].source.retrieved_at).toMatch(/^\d{4}-\d{2}-\d{2}/); // HUD: the date the bundled file was pulled from HUD
     }
     expect(f.acs_tract && f.acs_tract.ok).toBe(false); // no key in tests
   });

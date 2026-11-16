@@ -58,55 +58,42 @@ describe("provenance: every record says how it was checked", () => {
   });
 });
 
-describe("HUD Fair Market Rents come from HUD's service, by script", () => {
+describe("HUD Fair Market Rents: current fiscal year, from HUD's FMR API, by script", () => {
   const d = load("app/data/hud_fair_market_rents.json");
+  const by: Record<string, any> = Object.fromEntries(d.records.map((r: any) => [r.fips, r]));
 
-  it("is the scripted pull, with its source and coverage caveat recorded", () => {
-    expect(d._source.script).toBe("scripts/fetch_hud_fmr.py");
-    expect(d._source.service).toContain("services.arcgis.com/VTyQ9soqVukalItT");
-    expect(d._source.coverage_caveat).toMatch(/FY2024/);
+  it("is the scripted API pull, FY2027, with the Federal Register sanity check recorded", () => {
+    expect(d._source.script).toBe("scripts/fetch_hud_fmr_api.py");
+    expect(d._source.fiscal_year).toBe(2027);
+    expect(d._source.federal_register).toMatch(/2026-17891/);
+    expect(d._source.sanity_check).toMatch(/\$2,903/);
+    expect(d.records.every((r: any) => r.fiscal_year === 2027)).toBe(true);
+    expect(fs.existsSync(path.join(root, "scripts/fetch_hud_fmr.py"))).toBe(false); // the stale map-service pull is gone
   });
 
-  it("covers every county once", () => {
+  it("covers exactly the Census county set, once each, with no pseudo-counties", () => {
     const fips = d.records.map((r: any) => r.fips);
-    expect(fips.length).toBeGreaterThanOrEqual(3200);
+    const census = Object.keys(load("app/data/county_completeness.json"));
+    expect(fips.length).toBe(3222);
     expect(new Set(fips).size).toBe(fips.length);
-    expect(fips.every((f: string) => /^\d{5}$/.test(f))).toBe(true);
+    expect(fips).not.toContain("29056"); // HUD's "Sullivan city part of Crawford County", attached to Crawford (29055)
+    for (const f of census) expect(by[f]).toBeDefined();
   });
 
-  it("spot checks against HUD values observed on 2026-11-16", () => {
-    const by = Object.fromEntries(d.records.map((r: any) => [r.fips, r]));
-    // Values read from HUD's service while writing this test (also in tests/fixtures/sources/hud_fmr_austin.json).
-    expect(by["48453"].metro_or_county_name).toBe("Austin-Round Rock-San Marcos, TX MSA");
-    expect(by["48453"].two_bed_2br).toBe(1852);
-    expect(by["04013"].metro_or_county_name).toBe("Phoenix-Mesa-Chandler, AZ MSA");
-    // Map-service values: HUD's numbers, but the fiscal year is HUD's own label, so only partially verified.
-    expect(by["48453"].verification.status).toBe("partially_verified");
-    expect(by["48453"].verification.unverified_fields).toEqual(["fiscal_year"]);
+  it("spot checks against HUD's API on 2026-11-16", () => {
+    expect(by["06037"].two_bed_2br).toBe(2964);
+    expect(by["48453"].two_bed_2br).toBe(1817);
+    expect(by["29055"].sub_areas[0].fmr_area).toMatch(/St\. Louis/);
   });
 
-  it("applies the Federal Register's FY2026 revisions HUD never loaded into its map service", () => {
-    const rev = load("app/data/hud_fmr_revisions.json");
-    const by = Object.fromEntries(d.records.map((r: any) => [r.fips, r]));
-    // LA: notice 2026-07741 says 2BR $2,903; HUD's service still showed $2,601 on 2026-11-16.
-    expect(by["06037"].two_bed_2br).toBe(2903);
-    expect(by["06037"].service_values_before_revision.two_bed_2br).toBe(2601);
-    expect(by["06037"].verification.status).toBe("verified");
-    expect(by["06037"].verification.evidence).toMatch(/2026-07741/);
-    // Every county in a revised area carries the notice's values; nothing else is marked verified.
-    const verified = d.records.filter((r: any) => r.verification.status === "verified");
-    expect(verified.length).toBeGreaterThanOrEqual(7);
-    for (const r of verified) expect(rev.revisions[r.metro_or_county_name].rent_2br).toBe(r.two_bed_2br);
-    expect(d._source.superseded.by).toMatch(/FY2027/);
-    expect(d._source.coverage_caveat).toMatch(/Not current/);
-  });
-
-  it("the page's inline revision table equals the data file", async () => {
-    // @ts-ignore plain ES module
-    const facts = await import("../../app/facts.js");
-    const rev = load("app/data/hud_fmr_revisions.json").revisions;
-    const strip = (o: any) => Object.fromEntries(Object.entries(o).map(([k, v]: any) => [k, { rent_0br: v.rent_0br, rent_1br: v.rent_1br, rent_2br: v.rent_2br, rent_3br: v.rent_3br, rent_4br: v.rent_4br }]));
-    expect(facts.HUD_FMR_REVISIONS).toEqual(strip(rev));
+  it("New England counties carry town values and no invented county figure", () => {
+    const ne = d.records.filter((r: any) => ["CT", "ME", "MA", "NH", "RI", "VT"].includes(r.state_code));
+    expect(ne.length).toBeGreaterThan(0);
+    for (const r of ne) {
+      expect(r.two_bed_2br).toBeNull();
+      expect(Array.isArray(r.towns) && r.towns.length > 0).toBe(true);
+      expect(r.two_bed_range[0]).toBeLessThanOrEqual(r.two_bed_range[1]);
+    }
   });
 });
 

@@ -7,7 +7,7 @@
     "test:e2e": "playwright test --trace off",
     "typecheck": "tsc --noEmit --strict --target es2022 --module esnext --moduleResolution bundler --lib es2022,dom,dom.iterable --skipLibCheck --allowImportingTsExtensions --resolveJsonModule workers/api-proxy.ts workers/sources.ts workers/advisorAgent.ts workers/localData.ts",
     "check": "npm test && npm run typecheck && npm run test:e2e",
-    "fetch:hud-fmr": "python3 scripts/fetch_hud_fmr.py",
+    "fetch:hud-fmr": "python3 scripts/fetch_hud_fmr_api.py",
     "smoke:sources": "NODE_USE_ENV_PROXY=1 node --no-warnings --experimental-strip-types scripts/smoke_sources.mts",
     "eval:advisor": "NODE_USE_ENV_PROXY=1 node --no-warnings --experimental-strip-types scripts/run_advisor_eval.mts"
   },

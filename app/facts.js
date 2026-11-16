@@ -3,25 +3,16 @@
 // Same rule as workers/sources.ts: a value comes from the named public service in this request, or the row says
 // it's not available and why. Nothing is filled in. When a Worker is configured (app/config.js workerUrl) the page
 // asks its /api/facts route; otherwise it calls the services directly (each allows cross-origin requests:
-// HUD's ArcGIS service, FEMA NFHL, USGS EPQS and Census TIGERweb).
+// FEMA NFHL, USGS EPQS and Census TIGERweb). HUD rents come from the page's FY2027 county file.
 //
 // Remote values are inserted as text, never as HTML.
 
 const TIMEOUT_MS = 15000;
 
-// FY2026 FMRs HUD revised in the Federal Register (2026-07741, effective 2026-05-21) but never loaded into its map
-// service. Must equal app/data/hud_fmr_revisions.json (a unit test checks).
-export const HUD_FMR_REVISION_URL = "https://www.govinfo.gov/content/pkg/FR-2026-04-21/html/2026-07741.htm";
-export const HUD_FMR_REVISIONS = {
-  "Los Angeles-Long Beach-Glendale, CA HUD Metro FMR Area": { rent_0br: 2079, rent_1br: 2328, rent_2br: 2903, rent_3br: 3681, rent_4br: 4098 },
-  "Napa, CA MSA": { rent_0br: 2286, rent_1br: 2526, rent_2br: 3315, rent_3br: 4222, rent_4br: 4942 },
-  "San Luis Obispo-Paso Robles, CA MSA": { rent_0br: 1842, rent_1br: 2036, rent_2br: 2671, rent_3br: 3584, rent_4br: 4105 },
-  "Asheville, NC MSA": { rent_0br: 1436, rent_1br: 1674, rent_2br: 1835, rent_3br: 2231, rent_4br: 3078 },
-  "Transylvania County, NC": { rent_0br: 1032, rent_1br: 1039, rent_2br: 1363, rent_3br: 1634, rent_4br: 2048 },
-  "Albany, OR MSA": { rent_0br: 1169, rent_1br: 1396, rent_2br: 1695, rent_3br: 2294, rent_4br: 2662 },
-  "Corvallis, OR MSA": { rent_0br: 1350, rent_1br: 1451, rent_2br: 1824, rent_3br: 2537, rent_4br: 2862 },
-};
-const HUD = "https://services.arcgis.com/VTyQ9soqVukalItT/arcgis/rest/services/Fair_Market_Rents/FeatureServer/0/query";
+// HUD rents come from the page's own FY2027 county file (app/data/hud_fair_market_rents.json, pulled from HUD's FMR API
+// by scripts/fetch_hud_fmr_api.py), looked up by the county TIGERweb returns. HUD's map service, used earlier, still
+// holds FY2026 as first published.
+export const HUD_FMR_INFO_URL = "https://www.huduser.gov/portal/datasets/fmr.html";
 const FEMA = "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query";
 const USGS = "https://epqs.nationalmap.gov/v1/json";
 const TIGER = "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer";
@@ -54,11 +45,11 @@ export async function liveSiteFacts(lat, lng, opts = {}) {
 
   const geoUrl = `${TIGER}/10/query?${pointQuery(lat, lng, "GEOID")}`;
   const cntyUrl = `${TIGER}/82/query?${pointQuery(lat, lng, "GEOID,NAME")}`;
-  const hudUrl = `${HUD}?${pointQuery(lat, lng, "FMR_AREANAME,FMR_1BDR,FMR_2BDR,FMR_3BDR")}`;
   const femaUrl = `${FEMA}?${pointQuery(lat, lng, "FLD_ZONE,ZONE_SUBTY,SFHA_TF")}`;
   const usgsUrl = `${USGS}?${new URLSearchParams({ x: String(lng), y: String(lat), units: "Feet", wkid: "4326" })}`;
 
-  const [bg, cnty, hud, fema, usgs] = await Promise.allSettled([geoUrl, cntyUrl, hudUrl, femaUrl, usgsUrl].map((u) => getJson(u, fetcher)));
+  const [bg, cnty, fema, usgs] = await Promise.allSettled([geoUrl, cntyUrl, femaUrl, usgsUrl].map((u) => getJson(u, fetcher)));
+  const hudLookup = opts.hudLookup || ((f) => (typeof window !== "undefined" && typeof window.getHudFmr === "function" ? window.getHudFmr(f) : null));
   const err = (s) => (s.reason && s.reason.message) || "request failed";
 
   // Census area
@@ -68,18 +59,10 @@ export async function liveSiteFacts(lat, lng, opts = {}) {
     rows.push(ok("Census area", `${c.NAME}${g ? " · block group " + g : ""}`, "U.S. Census Bureau TIGERweb", g ? geoUrl : cntyUrl));
   } else rows.push(no("Census area", cnty.status === "rejected" ? err(cnty) : "Not inside a U.S. county", "U.S. Census Bureau TIGERweb", cntyUrl));
 
-  // HUD Fair Market Rent
-  if (hud.status === "fulfilled" && hud.value.features && hud.value.features[0]) {
-    const h = hud.value.features[0].attributes;
-    const rev = HUD_FMR_REVISIONS[h.FMR_AREANAME];
-    const v1 = rev ? rev.rent_1br : h.FMR_1BDR, v2 = rev ? rev.rent_2br : h.FMR_2BDR, v3 = rev ? rev.rent_3br : h.FMR_3BDR;
-    const parts = [["1 bed", v1], ["2 bed", v2], ["3 bed", v3]].filter(([, v]) => money(v)).map(([k, v]) => `${k} ${money(v)}`);
-    rows.push(ok(rev ? "HUD Fair Market Rent (FY2026, revised)" : "HUD Fair Market Rent (FY2026)", parts.join(" · ") + "/mo",
-      rev ? "Federal Register 2026-07741" : "U.S. Department of Housing and Urban Development", rev ? HUD_FMR_REVISION_URL : hudUrl,
-      `${h.FMR_AREANAME}. HUD's voucher benchmark (rent plus utilities), not a market asking rent. ` +
-      (rev ? `HUD revised this area in the Federal Register (effective 2026-05-21); its map service still shows 2 bed ${money(h.FMR_2BDR)}. ` : "") +
-      `Not current: FY2027 rents took effect Oct 1, 2026 and HUD's map service doesn't have them yet.`));
-  } else rows.push(no("HUD Fair Market Rent", hud.status === "rejected" ? err(hud) : "No HUD rent area covers this point", "U.S. Department of Housing and Urban Development", hudUrl));
+  // HUD Fair Market Rent, by county
+  const countyFips = cnty.status === "fulfilled" && cnty.value.features && cnty.value.features[0] ? cnty.value.features[0].attributes.GEOID : null;
+  if (countyFips) rows.push(hudRow(hudLookup(countyFips)));
+  else rows.push(no("HUD Fair Market Rent", cnty.status === "rejected" ? err(cnty) : "County unknown", "U.S. Department of Housing and Urban Development", HUD_FMR_INFO_URL));
 
   // FEMA flood zone
   if (fema.status === "fulfilled" && fema.value.features && fema.value.features[0]) {
@@ -95,6 +78,21 @@ export async function liveSiteFacts(lat, lng, opts = {}) {
   else rows.push(no("Ground elevation", usgs.status === "rejected" ? err(usgs) : "No elevation data at this point", "U.S. Geological Survey 3DEP", usgsUrl));
 
   return rows;
+}
+
+// One display row from a HUD county record (page file) or null.
+export function hudRow(h) {
+  if (!h) return no("HUD Fair Market Rent", "No HUD rent on file for this county", "U.S. Department of Housing and Urban Development", HUD_FMR_INFO_URL);
+  const fy = h.fiscal_year || "";
+  const notes = ["HUD's voucher benchmark (rent plus utilities), not a market asking rent."];
+  if (h.verification && h.verification.notes) notes.push(h.verification.notes);
+  if (Array.isArray(h.two_bed_range) && h.two_bed_2br == null) {
+    const [lo, hi] = h.two_bed_range;
+    return ok(`HUD Fair Market Rent (FY${fy})`, lo === hi ? `2 bed ${money(lo)}/mo` : `varies by town: 2 bed ${money(lo)}–${money(hi)}/mo`, "U.S. Department of Housing and Urban Development", HUD_FMR_INFO_URL, notes.join(" "));
+  }
+  const parts = [["1 bed", h.one_bed_1br], ["2 bed", h.two_bed_2br], ["3 bed", h.three_bed_3br]].filter(([, v]) => money(v)).map(([k, v]) => `${k} ${money(v)}`);
+  return ok(`HUD Fair Market Rent (FY${fy})`, parts.join(" · ") + "/mo", "U.S. Department of Housing and Urban Development", HUD_FMR_INFO_URL,
+    (h.metro_or_county_name ? h.metro_or_county_name + ". " : "") + notes.join(" "));
 }
 
 // Renders rows into a container using text nodes only.
@@ -173,10 +171,10 @@ export function fromWorker(f) {
   const rows = [];
   const g = f.geographies, h = f.hud_fair_market_rent, fl = f.flood_zone, e = f.elevation;
   rows.push(g && g.ok ? ok("Census area", `${g.value.county_name}${g.value.block_group_geoid ? " · block group " + g.value.block_group_geoid : ""}`, g.source.publisher, g.source.url) : no("Census area", (g && g.error) || "unavailable", "U.S. Census Bureau", g && g.source ? g.source.url : ""));
-  rows.push(h && h.ok ? ok("HUD Fair Market Rent (FY2026)", [["1 bed", h.value.rent_1br], ["2 bed", h.value.rent_2br], ["3 bed", h.value.rent_3br]].filter(([, v]) => money(v)).map(([k, v]) => `${k} ${money(v)}`).join(" · ") + "/mo", h.source.publisher, h.source.url, `${h.value.fmr_area_name}. ${(h.notes || []).join(" ")}`) : no("HUD Fair Market Rent", (h && h.error) || "unavailable", "HUD", h && h.source ? h.source.url : ""));
+  rows.push(h && h.ok ? hudRow({ fiscal_year: h.value.fiscal_year, metro_or_county_name: h.value.fmr_area_name, one_bed_1br: h.value.rent_1br, two_bed_2br: h.value.rent_2br, three_bed_3br: h.value.rent_3br, two_bed_range: h.value.rent_2br_range_by_town, verification: { notes: (h.notes || []).slice(1).join(" ") } }) : no("HUD Fair Market Rent", (h && h.error) || "unavailable", "HUD", HUD_FMR_INFO_URL));
   rows.push(fl && fl.ok ? ok("FEMA flood zone", `Zone ${fl.value.zone}${fl.value.zone_subtype ? " (" + String(fl.value.zone_subtype).toLowerCase() + ")" : ""}${fl.value.special_flood_hazard_area ? " · special flood hazard area" : ""}`, fl.source.publisher, fl.source.url) : no("FEMA flood zone", (fl && fl.error) || "unavailable", "FEMA", fl && fl.source ? fl.source.url : ""));
   rows.push(e && e.ok ? ok("Ground elevation", `${Math.round(e.value.elevation_ft).toLocaleString("en-US")} ft`, e.source.publisher, e.source.url) : no("Ground elevation", (e && e.error) || "unavailable", "USGS", e && e.source ? e.source.url : ""));
   return rows;
 }
 
-if (typeof window !== "undefined") window.CityPrettyFacts = { liveSiteFacts, renderFacts, attachLiveFacts, fromWorker };
+if (typeof window !== "undefined") window.CityPrettyFacts = { liveSiteFacts, renderFacts, attachLiveFacts, fromWorker, hudRow };

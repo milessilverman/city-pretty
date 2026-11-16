@@ -114,16 +114,12 @@ function getHudFmr(fips) {
   if (!fips || !Array.isArray(HUD_FMR_DATA) || !HUD_FMR_DATA.length) return null;
   const target = String(fips).padStart(5, "0");
   const r = HUD_FMR_DATA.find(x => x.fips === target);
-  // verified = the Federal Register's revised FY2026 values; partially_verified = HUD's map-service values whose
-  // fiscal year is HUD's own label. Both are HUD's numbers; neither is the current FY2027 (effective 2026-10-01).
-  if (!r || !r.verification || !["verified", "partially_verified"].includes(r.verification.status)) return null;
-  const revised = r.verification.status === "verified";
+  if (!r || !r.verification || r.verification.status !== "verified") return null;
+  // HUD's FMR API, current fiscal year (scripts/fetch_hud_fmr_api.py). New England counties carry town values
+  // (two_bed_range) and no single county figure.
   return Object.assign({}, r, {
     efficiency_0br: r.zero_bed_eff,
-    source: revised
-      ? "HUD Fair Market Rents, FY2026 as revised in the Federal Register (2026-07741, effective 2026-05-21)"
-      : "HUD Fair Market Rents, FY2026 per HUD's map service (pulled " + ((HUD_FMR_SOURCE && HUD_FMR_SOURCE.retrieved) || "") + "; year not independently confirmed)",
-    currency_note: "FY2027 Fair Market Rents took effect 2026-10-01 and are not in this file yet.",
+    source: "HUD Fair Market Rents FY" + r.fiscal_year + " (HUD FMR API, pulled " + ((HUD_FMR_SOURCE && HUD_FMR_SOURCE.retrieved) || "") + ")",
   });
 }
 

@@ -7,7 +7,7 @@
 // Sources (all free; only Census ACS needs a key, which is free at api.census.gov/data/key_signup.html):
 //   Census Geocoder ........ address -> lat/lng; lat/lng -> state, county, tract, block group
 //   Census ACS 5-year ...... median home value, median rent, income, tenure, etc. (needs CENSUS_API_KEY)
-//   HUD Fair Market Rents .. HUD's published FMR polygons (ArcGIS service run by HUD PD&R)
+//   HUD Fair Market Rents .. current FY, per county, from HUD's FMR API (bundled file, refreshed by script)
 //   USGS 3DEP (EPQS) ....... ground elevation at a point
 //   FEMA NFHL .............. flood hazard zone at a point
 //   OpenStreetMap Overpass . buildings (height / levels tags), parking lots, rail stations, etc. near a point
@@ -213,78 +213,54 @@ export async function acs5(
 // HUD Fair Market Rents
 // ---------------------------------------------------------------------------------------------------------------
 
-// Federal Register revisions HUD published but never loaded into its map service, and the notice that superseded FY2026.
-import HUD_FMR_REVISIONS from "../app/data/hud_fmr_revisions.json" with { type: "json" };
+// HUD's current Fair Market Rents per county, pulled from HUD's FMR API (scripts/fetch_hud_fmr_api.py) and bundled
+// with the Worker. HUD's map service, used earlier, still holds FY2026 as first published (audit 16 Nov 2026).
+import HUD_FMR from "../app/data/hud_fair_market_rents.json" with { type: "json" };
 
-export const HUD_FMR_LAYER = "https://services.arcgis.com/VTyQ9soqVukalItT/arcgis/rest/services/Fair_Market_Rents/FeatureServer/0";
+type HudRecord = {
+  fips: string; county_name: string; state_code: string; fiscal_year: number; metro_or_county_name: string | null;
+  zero_bed_eff: number | null; one_bed_1br: number | null; two_bed_2br: number | null; three_bed_3br: number | null; four_bed_4br: number | null;
+  two_bed_range?: number[]; towns?: unknown[]; sub_areas?: { area: string; fmr_area: string; two_bed_2br: number }[];
+  small_area_fmr_metro?: boolean; verification: { status: string; notes?: string };
+};
+const HUD_BY_FIPS = new Map<string, HudRecord>((HUD_FMR as unknown as { records: HudRecord[] }).records.map((r) => [r.fips, r]));
+const HUD_SRC = (HUD_FMR as unknown as { _source: { fiscal_year: number; retrieved: string; federal_register?: string } })._source;
+export const HUD_FMR_INFO_URL = "https://www.huduser.gov/portal/datasets/fmr.html";
 
 export type HudFmr = {
-  fmr_area_code: string;
-  fmr_area_name: string;
+  fiscal_year: number;
+  fmr_area_name: string | null;
   rent_0br: number | null;
   rent_1br: number | null;
   rent_2br: number | null;
   rent_3br: number | null;
   rent_4br: number | null;
+  rent_2br_range_by_town: number[] | null; // New England, where HUD sets FMRs by town
 };
 
-export async function hudFairMarketRent(lat: number, lng: number, fetcher: FetchLike = fetch): Promise<Sourced<HudFmr>> {
-  const url =
-    `${HUD_FMR_LAYER}/query?` +
-    new URLSearchParams({
-      geometry: `${lng},${lat}`,
-      geometryType: "esriGeometryPoint",
-      inSR: "4326",
-      spatialRel: "esriSpatialRelIntersects",
-      outFields: "FMR_CODE,FMR_AREANAME,FMR_0BDR,FMR_1BDR,FMR_2BDR,FMR_3BDR,FMR_4BDR",
-      returnGeometry: "false",
-      f: "json",
-    });
+export function hudFairMarketRentForCounty(countyFips: string): Sourced<HudFmr> {
   const source: SourceRef = {
-    name: "HUD Fair Market Rents",
-    publisher: "U.S. Department of Housing and Urban Development (PD&R)",
-    url,
-    retrieved_at: now(),
-    // Checked 2026-11-16 against the Federal Register: FY2026 as first published (see app/data/hud_fmr_revisions.json).
-    vintage: "FY2026 (HUD map service; FY2027 took effect 2026-10-01 and is not in the service)",
+    name: `HUD Fair Market Rents FY${HUD_SRC.fiscal_year}`,
+    publisher: "U.S. Department of Housing and Urban Development (PD&R), FMR API",
+    url: HUD_FMR_INFO_URL,
+    retrieved_at: HUD_SRC.retrieved,
+    vintage: `FY${HUD_SRC.fiscal_year}${HUD_SRC.federal_register ? " (Federal Register " + HUD_SRC.federal_register + ")" : ""}`,
   };
-  if (!validLatLng(lat, lng)) return fail(source, "Invalid coordinates");
-  try {
-    const d = (await getJson(fetcher, url)) as any;
-    if (d?.error) return fail(source, d.error.message || "ArcGIS error");
-    const f = d?.features?.[0]?.attributes;
-    if (!f) return fail(source, "Point is not inside any HUD FMR area");
-    const notes = [
-      "FMRs are HUD's 40th-percentile gross rent (rent + utilities) for voucher payment standards; they are not market asking rents.",
-      `Not current: ${HUD_FMR_REVISIONS.superseded.by} (${HUD_FMR_REVISIONS.superseded.document}); HUD's map service still serves FY2026.`,
-    ];
-    const rev = (HUD_FMR_REVISIONS.revisions as Record<string, Record<string, number | string>>)[f.FMR_AREANAME];
-    if (rev) {
-      notes.push(`HUD revised this area's FY2026 FMRs in the Federal Register (${HUD_FMR_REVISIONS._source.document}, effective ${HUD_FMR_REVISIONS._source.effective}); the notice's values are used. The map service still shows 2BR $${f.FMR_2BDR}.`);
-      return {
-        ok: true,
-        source: { ...source, name: "HUD Fair Market Rents (FY2026 revised, Federal Register)", url: HUD_FMR_REVISIONS._source.url },
-        value: { fmr_area_code: f.FMR_CODE, fmr_area_name: f.FMR_AREANAME, rent_0br: num(rev.rent_0br), rent_1br: num(rev.rent_1br), rent_2br: num(rev.rent_2br), rent_3br: num(rev.rent_3br), rent_4br: num(rev.rent_4br) },
-        notes,
-      };
-    }
-    return {
-      ok: true,
-      source,
-      value: {
-        fmr_area_code: f.FMR_CODE,
-        fmr_area_name: f.FMR_AREANAME,
-        rent_0br: num(f.FMR_0BDR),
-        rent_1br: num(f.FMR_1BDR),
-        rent_2br: num(f.FMR_2BDR),
-        rent_3br: num(f.FMR_3BDR),
-        rent_4br: num(f.FMR_4BDR),
-      },
-      notes,
-    };
-  } catch (e) {
-    return fail(source, e);
-  }
+  const r = HUD_BY_FIPS.get(String(countyFips || "").padStart(5, "0"));
+  if (!r || r.verification.status !== "verified") return fail(source, "No HUD Fair Market Rent on file for this county");
+  const notes = ["FMRs are HUD's 40th-percentile gross rent (rent + utilities) for voucher payment standards; they are not market asking rents."];
+  if (r.verification.notes) notes.push(r.verification.notes);
+  return {
+    ok: true,
+    source,
+    value: {
+      fiscal_year: r.fiscal_year,
+      fmr_area_name: r.metro_or_county_name,
+      rent_0br: r.zero_bed_eff, rent_1br: r.one_bed_1br, rent_2br: r.two_bed_2br, rent_3br: r.three_bed_3br, rent_4br: r.four_bed_4br,
+      rent_2br_range_by_town: r.two_bed_range || null,
+    },
+    notes,
+  };
 }
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -433,12 +409,10 @@ export async function osmNearby(
 
 export async function siteFacts(lat: number, lng: number, opts: { censusApiKey?: string; acsYear?: number; fetcher?: FetchLike } = {}) {
   const f = opts.fetcher || fetch;
-  const [geo, fmr, elev, flood] = await Promise.all([
-    censusGeographies(lat, lng, f),
-    hudFairMarketRent(lat, lng, f),
-    usgsElevation(lat, lng, f),
-    femaFloodZone(lat, lng, f),
-  ]);
+  const [geo, elev, flood] = await Promise.all([censusGeographies(lat, lng, f), usgsElevation(lat, lng, f), femaFloodZone(lat, lng, f)]);
+  const fmr: Sourced<HudFmr> = geo.ok
+    ? hudFairMarketRentForCounty(geo.value.county_fips)
+    : fail({ name: "HUD Fair Market Rents", publisher: "HUD", url: HUD_FMR_INFO_URL, retrieved_at: now() }, "County unknown (Census lookup failed)");
   let acs: Sourced<AcsResult> | null = null;
   if (geo.ok && geo.value.tract_geoid) {
     acs = await acs5(
