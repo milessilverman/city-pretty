@@ -29,7 +29,7 @@ describe("intervention verification file", () => {
     for (const id of ids) {
       expect(["verified", "partially_verified", "unverified"]).toContain(IV[id].status);
       expect(["checked", "unchecked", "misapplied", "not_found"]).toContain(IV[id].effect);
-      expect(["checked", "unchecked"]).toContain(IV[id].cost);
+      expect(["checked", "unchecked", "contradicted"]).toContain(IV[id].cost);
       expect(typeof IV[id].evidence).toBe("string");
     }
   });
@@ -53,6 +53,52 @@ describe("intervention verification file", () => {
     expect(IV.traffic_calming.status).toBe("verified");
     // every grade-U ("one AI research pass") item stays unverified
     for (const [id, c] of Object.entries<any>(laBundle.catalog)) if (c.grade === "U") expect(IV[id].status).toBe("unverified");
+  });
+});
+
+describe("round 2 (docs/audit/catalog-coverage-round2.md)", () => {
+  it("BRT is verified on a re-fetched effect quote and Metro's adopted budget, with the contrary studies noted", () => {
+    expect(IV.brt.status).toBe("verified");
+    expect(IV.brt.evidence).toMatch(/5-7% price premium/);
+    expect(IV.brt.evidence).toMatch(/\$428,988,535/);
+    expect(IV.brt.caution).toMatch(/no effect or declines/);
+  });
+
+  it("sound walls are downgraded: the shipped cost contradicts its own cited source", () => {
+    expect(IV.noise_wall.status).toBe("unverified");
+    expect(IV.noise_wall.cost).toBe("contradicted");
+    expect(IV.noise_wall.evidence).toMatch(/\$10 Million\/mile/);
+    const engine = read("pipeline/engine.py").toString("utf8");
+    expect(engine).toMatch(/L \* 6214/);
+    expect(engine).not.toMatch(/L \* 2485/);
+  });
+
+  it("the crime-to-price chain stays unverified (coefficient not in the abstract)", () => {
+    for (const id of ["street_lighting", "foot_patrol", "violence_interruption", "bid"]) expect(IV[id].status).toBe("unverified");
+  });
+});
+
+describe("homeowner upgrade gate", () => {
+  const UV = JSON.parse(read("app/data/upgrade_verification.json").toString("utf8"));
+  it("covers every row of the upgrade table", () => {
+    const names = (laBundle.upgrades as any[]).map((u) => u.name);
+    expect(names.length).toBeGreaterThan(0);
+    expect(names.filter((n) => !UV.rows[n])).toEqual([]);
+  });
+  it("no row shows figures without evidence of a checked source", () => {
+    for (const r of Object.values<any>(UV.rows)) {
+      expect(["verified", "partially_verified", "could_not_check", "unverified"]).toContain(r.status);
+      if (r.status === "verified") expect([r.cost, r.value]).toEqual(["checked", "checked"]);
+      if (r.status === "partially_verified") expect(r.cost === "checked" || r.value === "checked").toBe(true);
+    }
+  });
+  it("the page gates house-level upgrade figures and labels the LA 'recorded sales' home values", () => {
+    const js = read("app/app.js").toString("utf8");
+    expect(js).toMatch(/cpJson\("upgrade-verification"\)/);
+    expect(js).toMatch(/if \(!upSourced\(u\.name\)\)/);
+    expect(js).toMatch(/const hvSourceText/);
+    expect(js).not.toMatch(/4\.0 ft \(Compliant\)/);
+    expect(js).not.toMatch(/Exempt \(0 spaces\)/);
   });
 });
 
