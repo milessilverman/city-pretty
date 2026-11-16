@@ -278,6 +278,14 @@ pages, and the code text itself was searched only for IA, MN and VA. The zoning 
 jurisdiction-wide parking cap as a parcel right, matches commercial-land laws only to commercial parcels, and reports
 conditions it can't check (e.g. inside an urban growth area) as "not on file".
 
+Round 2 (later on 16 Nov): **Colorado's ADU law (HB 24-1152) had been applied to every single-family parcel in
+Colorado**; it covers only municipalities of 1,000+ inside a metropolitan planning organization. Fixed and verified
+from the signed act. Added Idaho §§ 67-6541 (ADUs) and 67-6542 (starter-home subdivisions), Nevada NRS 278.257,
+California AB 2011 and Colorado's parking law near transit (HB 24-1304). Statute text was searched with no qualifying
+law in IA, MI, MN, ND, OH, SC, WY; North Carolina's parking-minimum ban takes effect 1 Jan 2027. **23 states could not
+be searched** (official code sites blocked or returned no text): AL, AK, AR, DE, GA, IL, IN, KS, KY, LA, MS, MO, NE,
+NJ, NM, NY, OK, PA, SD, TN, VA, WV, WI; plus NH, CT, DC and Maryland HB 538. For those, "none found" is unverified.
+
 ### Safety comparisons recomputed (16 Nov, `audit/crash-rankings.md`)
 
 The "worse than X% of similar areas" comparisons and crash-dependent recommendations (traffic calming, crosswalks,
