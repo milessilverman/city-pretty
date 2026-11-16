@@ -134,9 +134,86 @@ describe("round 2 (16 Nov): laws found by searching state code text", () => {
   it("every 'none found' state says what was actually searched in round 2", () => {
     for (const [st, s] of Object.entries(AUDIT.states) as [string, any][]) {
       if (s.status !== "none_found") continue;
-      expect(s.round2_search, st).toBeDefined();
-      expect(s.notes, st).toMatch(/Round 2 (full-text searched|could not full-text search)/);
+      expect(s.round2_search || s.round3_search, st).toBeDefined();
+      expect(s.notes, st).toMatch(/Round [23] (\(2026-11-16\) )?(full-text searched|could not full-text search)/);
     }
     expect(AUDIT.states.NC.notes).toMatch(/Effective January 1, 2027/);
+  });
+});
+
+describe("round 3 (16 Nov): the 23 blocked states plus NH, CT, DC and Maryland HB 538", () => {
+  const ROUND3 = "AL AK AR DE GA IL IN KS KY LA MS MO NE NJ NM NY OK PA SD TN VA WV WI NH CT DC MD".split(" ");
+  const R3_IDS = ["va_parking_2209_4", "va_small_lot_2286_2", "dc_adu_accessory_apartment_u253", "ct_adu_8_2o", "ct_parking_8_3n", "ct_middle_housing_8_2s"];
+
+  it("every one of the 27 jurisdictions has a round-3 log: the route that worked, or the routes tried and what would unblock it", () => {
+    for (const st of ROUND3) {
+      const r = AUDIT.states[st].round3_search;
+      expect(r, st).toBeDefined();
+      expect(r.date).toBe("2026-11-16");
+      expect(r.terms).toEqual(["adu", "middle_housing", "lot_split", "parking", "commercial_residential"]);
+      if (r.route_worked) expect(r.outcome, st).toBeTruthy();
+      else {
+        expect(r.routes.length, st).toBeGreaterThan(0);
+        expect(r.unblock, st).toBeTruthy();
+        expect(AUDIT.states[st].notes, st).toMatch(/Round 3 \(2026-11-16\) could not full-text search/);
+      }
+    }
+    expect(AUDIT.states.NY.round3_search.unblock).toMatch(/API key/);
+    expect(AUDIT.states.MD.status).toBe("none_found");
+    expect(AUDIT.states.NH.status).toBe("could_not_check");
+  });
+
+  it("the six new records are listed in the audit, quote their official text, and say what is unconfirmed", () => {
+    for (const id of R3_IDS) {
+      const r = byId[id];
+      expect(r, id).toBeDefined();
+      expect(AUDIT.states[r.state_code].added_records, id).toContain(id);
+      expect(AUDIT.states[r.state_code].status).toBe("laws_on_file");
+    }
+    expect(byId.va_parking_2209_4.verification.evidence).toMatch(/One-half of one parking space per dwelling unit/);
+    expect(byId.va_small_lot_2286_2.verification.evidence).toMatch(/minimum lot area not exceeding 3,000 square feet/);
+    expect(byId.dc_adu_accessory_apartment_u253.verification.evidence).toMatch(/as a matter of right in the R zones, except the R-1B\/GT or R 3\/GT zone/);
+    expect(byId.ct_adu_8_2o.verification.evidence).toMatch(/at least one accessory dwelling unit shall be allowed as of right on each lot that contains a single-family dwelling/);
+    expect(byId.ct_parking_8_3n.verification.evidence).toMatch(/Require a minimum number of off-street motor vehicle parking spaces for any residential development except as provided in section 8-3n/);
+    expect(byId.ct_middle_housing_8_2s.verification.evidence).toMatch(/On and after July 1, 2026/);
+    // Virginia's July 2027 ADU law is passed but not in effect, so it has no record.
+    expect(LAWS.some((r: any) => /2292\.4/.test(r.statute_citation || ""))).toBe(false);
+    expect(AUDIT.states.VA.notes).toMatch(/2292\.4.*not yet in effect/);
+  });
+
+  it("Connecticut: ADU is reported with its opt-out condition, never assumed; the parking limit is jurisdiction-wide", () => {
+    const r = evaluateByRightHousing(sfr({ state_code: "CT" }), LAWS);
+    expect(ids(r)).not.toContain("ct_adu_8_2o");
+    expect(pending(r)).toContain("ct_adu_8_2o");
+    expect(r.not_confirmed.find((x: any) => x.id === "ct_adu_8_2o").reason).toMatch(/opt-out/);
+    expect(pending(r)).not.toContain("ct_parking_8_3n");
+    expect(ids(r)).not.toContain("ct_parking_8_3n");
+    expect(pending(r)).not.toContain("ct_middle_housing_8_2s"); // commercial-land law, single-family lot
+  });
+
+  it("Connecticut § 8-2s: commercial lots only, with the definition condition reported", () => {
+    const c = evaluateByRightHousing(commercial({ state_code: "CT" }), LAWS);
+    expect(ids(c)).not.toContain("ct_middle_housing_8_2s");
+    expect(pending(c)).toContain("ct_middle_housing_8_2s");
+    expect(pending(c)).not.toContain("ct_adu_8_2o");
+  });
+
+  it("DC: accessory apartment is reported with its zone and owner-occupancy conditions; not on commercial land", () => {
+    const r = evaluateByRightHousing(sfr({ state_code: "DC" }), LAWS);
+    expect(ids(r)).not.toContain("dc_adu_accessory_apartment_u253");
+    expect(r.not_confirmed.find((x: any) => x.id === "dc_adu_accessory_apartment_u253").reason).toMatch(/R-1B\/GT.*owner-occupied/);
+    expect(pending(evaluateByRightHousing(commercial({ state_code: "DC" }), LAWS))).not.toContain("dc_adu_accessory_apartment_u253");
+  });
+
+  it("Virginia: both laws are jurisdiction-wide and never show up as a parcel right or a pending one", () => {
+    for (const pop of [30000, 500000]) {
+      const r = evaluateByRightHousing(sfr({ state_code: "VA", municipality_pop: pop, dist_to_frequent_bus_or_brt_mi: 0.1 }), LAWS);
+      expect(ids(r)).toEqual([]);
+      expect(pending(r)).toEqual([]);
+    }
+    expect(byId.va_parking_2209_4.parcel_level).toBe(false);
+    expect(byId.va_small_lot_2286_2.municipality_pop_min).toBe(50000);
+    // the effective date is presumed (1 July), so the engine must not show it as fact
+    expect(byId.va_parking_2209_4.verification.unverified_fields[0]).toMatch(/^effective_date/);
   });
 });
