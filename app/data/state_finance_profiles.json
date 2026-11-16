@@ -10,12 +10,8 @@
       "type": "flat_assessed",
       "amount_or_pct": 4000
     },
-    "tif_vehicle_name": "AL TIF (Ala. Code § 11-99)",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.88,
-    "tree_capital_cost_usd": 1380,
-    "climate_energy_regime": "cooling_dominant",
-    "statutory_citation": "Ala. Code § 40-8-1 & § 11-99 (TIF Act)",
+    "tif_vehicle_name": "AL TIF (Ala. Code \u00a7 11-99)",
+    "statutory_citation": "Ala. Code \u00a7 40-8-1 & \u00a7 11-99 (TIF Act)",
     "source_url": "https://alison.legislature.state.al.us/code-of-alabama",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -26,13 +22,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "AK": {
@@ -47,11 +43,7 @@
       "amount_or_pct": 50000
     },
     "tif_vehicle_name": "Municipal TIF / GO Bonds",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.65,
-    "tree_capital_cost_usd": 2590,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Alaska Stat. § 29.45.110 (Full and True Value)",
+    "statutory_citation": "Alaska Stat. \u00a7 29.45.110 (Full and True Value)",
     "source_url": "https://www.akleg.gov/basis/statutes.asp#29.45.110",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -62,13 +54,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "AZ": {
@@ -83,29 +75,21 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "AZ GPLET / CFD",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.94,
-    "tree_capital_cost_usd": 1720,
-    "climate_energy_regime": "arid_irrigation_limited",
-    "statutory_citation": "Ariz. Rev. Stat. § 42-13301 (5% LPV Cap) & § 42-6201 (GPLET)",
+    "statutory_citation": "Ariz. Rev. Stat. \u00a7 42-13301 (5% LPV Cap) & \u00a7 42-6201 (GPLET)",
     "source_url": "https://www.azleg.gov/ars/42/13301.htm",
     "retrieved": "2026-11-15",
     "last_verified": "2026-11-16",
     "verified_by": "state_statute_database",
     "verification": {
-      "status": "verified",
-      "method": "Arizona Revised Statutes §§ 42-13301, 42-15001, 42-15003 (azleg.gov)",
+      "status": "partially_verified",
+      "method": "Arizona Revised Statutes \u00a7\u00a7 42-13301, 42-15001, 42-15003 (azleg.gov)",
       "checked_on": "2026-11-16",
-      "evidence": "§ 42-13301: LPV is prior LPV 'plus five per cent'; § 42-15003: class three 'ten per cent'; § 42-15001(16): class one 'Fifteen and one-half percent beginning from and after December 31, 2025 through December 31, 2026'",
+      "evidence": "\u00a7 42-13301: LPV is prior LPV 'plus five per cent'; \u00a7 42-15003: class three 'ten per cent'; \u00a7 42-15001(16): class one 'Fifteen and one-half percent beginning from and after December 31, 2025 through December 31, 2026'",
       "unverified_fields": [
-        "uncaps_on_sale false",
-        "homestead_exemption_rule",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "uncaps_on_sale",
+        "homestead_exemption_rule"
       ],
-      "notes": "comm_assessment_ratio corrected 0.165 -> 0.155 for tax year 2026 (0.165 was the 2024 rate; 2025 was 0.16)."
+      "notes": "comm_assessment_ratio corrected 0.165 -> 0.155 for tax year 2026 (0.165 was the 2024 rate; 2025 was 0.16). Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "AR": {
@@ -120,11 +104,7 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "AR TIF / Improvement District",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.86,
-    "tree_capital_cost_usd": 1350,
-    "climate_energy_regime": "cooling_dominant",
-    "statutory_citation": "Ark. Code Ann. § 26-26-1201 & Amend. 79 (5% Cap)",
+    "statutory_citation": "Ark. Code Ann. \u00a7 26-26-1201 & Amend. 79 (5% Cap)",
     "source_url": "https://www.dfa.arkansas.gov/",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -135,13 +115,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "CA": {
@@ -155,30 +135,22 @@
       "type": "flat_market",
       "amount_or_pct": 7000
     },
-    "tif_vehicle_name": "CA EIFD (Gov. Code § 53398.50)",
-    "non_pledgeable_share": 0.47,
-    "rsmeans_cost_multiplier": 1.24,
-    "tree_capital_cost_usd": 1945,
-    "climate_energy_regime": "mixed_temperate",
-    "statutory_citation": "Cal. Const. art. XIII A (Prop 13), RTC § 51 & Gov. Code § 53398.50 (EIFD)",
+    "tif_vehicle_name": "CA EIFD (Gov. Code \u00a7 53398.50)",
+    "statutory_citation": "Cal. Const. art. XIII A (Prop 13), RTC \u00a7 51 & Gov. Code \u00a7 53398.50 (EIFD)",
     "source_url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=51.&lawCode=RTC",
     "retrieved": "2026-11-15",
     "last_verified": "2026-11-16",
     "verified_by": "state_statute_database",
     "verification": {
       "status": "partially_verified",
-      "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container); Rev. & Tax. Code §§ 51, 218, 401; Gov. Code § 53398.50",
+      "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container); Rev. & Tax. Code \u00a7\u00a7 51, 218, 401; Gov. Code \u00a7 53398.50",
       "checked_on": "2026-11-16",
-      "evidence": "RTC § 51: 'In no event shall the percentage increase ... exceed 2 percent of the prior year's value'; RTC § 218: 'seven thousand dollars ($7,000)'; RTC § 401: 'assess all property ... at its full value'",
+      "evidence": "RTC \u00a7 51: 'In no event shall the percentage increase ... exceed 2 percent of the prior year's value'; RTC \u00a7 218: 'seven thousand dollars ($7,000)'; RTC \u00a7 401: 'assess all property ... at its full value'",
       "unverified_fields": [
-        "uncaps_on_sale (RTC § 110.1 change-of-ownership not read)",
-        "reassessment_cycle_years",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "uncaps_on_sale",
+        "reassessment_cycle_years"
       ],
-      "notes": ""
+      "notes": "Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "CO": {
@@ -193,11 +165,7 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "CO URA TIF / Title 32 Metro District",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.04,
-    "tree_capital_cost_usd": 1630,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Colo. Const. art. X, § 3; SB 24-233 and HB 24B-1001 (2024) assessment-rate changes",
+    "statutory_citation": "Colo. Const. art. X, \u00a7 3; SB 24-233 and HB 24B-1001 (2024) assessment-rate changes",
     "source_url": "https://leg.colorado.gov/bills/sb24-233",
     "retrieved": "2026-11-15",
     "last_verified": "2026-11-16",
@@ -208,15 +176,11 @@
       "checked_on": "2026-11-16",
       "evidence": "HB 24B-1001: 'For the property tax year commencing on January 1, 2026, the valuation for commercial property and agricultural property is 25%'; residential local-levy rate from 2026: '6.7% of the amount equal to the actual value ... minus the lesser of 10% ... $70,000'; school levies 6.95%",
       "unverified_fields": [
-        "res_assessment_ratio 0.067 is the local-government rate after a value deduction; school-district levies use 6.95% — model uses one number",
-        "reassessment_cycle_years 2",
+        "res_assessment_ratio",
         "uncaps_on_sale",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "reassessment_cycle_years"
       ],
-      "notes": "comm_assessment_ratio corrected 0.279 -> 0.25 (2026). SB 24-233 is a property-tax relief bill, not the source of biennial reassessment as the old citation implied."
+      "notes": "comm_assessment_ratio corrected 0.279 -> 0.25 (2026). SB 24-233 is a property-tax relief bill, not the source of biennial reassessment as the old citation implied. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "CT": {
@@ -230,12 +194,8 @@
       "type": "none",
       "amount_or_pct": 0
     },
-    "tif_vehicle_name": "CT Municipal TIF (CGS § 7-339cc)",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.18,
-    "tree_capital_cost_usd": 1850,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Conn. Gen. Stat. § 12-62a (70% Uniform Ratio) & § 8-124 (TIF)",
+    "tif_vehicle_name": "CT Municipal TIF (CGS \u00a7 7-339cc)",
+    "statutory_citation": "Conn. Gen. Stat. \u00a7 12-62a (70% Uniform Ratio) & \u00a7 8-124 (TIF)",
     "source_url": "https://www.cga.ct.gov/current/pub/chap_203.htm#sec_12-62a",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -246,13 +206,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "DE": {
@@ -267,11 +227,7 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "DE TIF / Special Dev. Dist.",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.05,
-    "tree_capital_cost_usd": 1645,
-    "climate_energy_regime": "mixed_temperate",
-    "statutory_citation": "Del. Code Ann. tit. 9, § 8301 & tit. 22, § 1701 (TIF)",
+    "statutory_citation": "Del. Code Ann. tit. 9, \u00a7 8301 & tit. 22, \u00a7 1701 (TIF)",
     "source_url": "https://delcode.delaware.gov/title9/c083/sc01/index.html",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -282,13 +238,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "DC": {
@@ -303,11 +259,7 @@
       "amount_or_pct": 87500
     },
     "tif_vehicle_name": "DC TIF / PILOT / SRC Credits",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.14,
-    "tree_capital_cost_usd": 1790,
-    "climate_energy_regime": "mixed_temperate",
-    "statutory_citation": "D.C. Code § 47-820 (100% Market Value) & § 2-1217.01 (TIF)",
+    "statutory_citation": "D.C. Code \u00a7 47-820 (100% Market Value) & \u00a7 2-1217.01 (TIF)",
     "source_url": "https://code.dccouncil.gov/us/dc/council/code/sections/47-820",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -318,13 +270,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "FL": {
@@ -338,31 +290,23 @@
       "type": "flat_market",
       "amount_or_pct": 50000
     },
-    "tif_vehicle_name": "FL CRA / CDD / Live Local § 196.1979",
-    "non_pledgeable_share": 0.05,
-    "rsmeans_cost_multiplier": 0.93,
-    "tree_capital_cost_usd": 1460,
-    "climate_energy_regime": "cooling_dominant",
-    "statutory_citation": "Fla. Const. art. VII, § 4(d) (SOH 3% Cap), Fla. Stat. § 163 (CRA) & § 196.1979",
+    "tif_vehicle_name": "FL CRA / CDD / Live Local \u00a7 196.1979",
+    "statutory_citation": "Fla. Const. art. VII, \u00a7 4(d) (SOH 3% Cap), Fla. Stat. \u00a7 163 (CRA) & \u00a7 196.1979",
     "source_url": "https://www.flsenate.gov/Laws/Statutes/2026/163.387",
     "retrieved": "2026-11-15",
     "last_verified": "2026-11-16",
     "verified_by": "state_statute_database",
     "verification": {
       "status": "partially_verified",
-      "method": "Official Florida Statutes §§ 193.155, 196.031, 163.387 (leg.state.fl.us)",
+      "method": "Official Florida Statutes \u00a7\u00a7 193.155, 196.031, 163.387 (leg.state.fl.us)",
       "checked_on": "2026-11-16",
-      "evidence": "§ 193.155: change 'shall not exceed the lower of ... Three percent ... or ... Consumer Price Index'; § 196.031: $25,000 exemption plus 'additional exemption of up to $25,000 on the assessed valuation greater than $50,000 for all levies other than school district levies'",
+      "evidence": "\u00a7 193.155: change 'shall not exceed the lower of ... Three percent ... or ... Consumer Price Index'; \u00a7 196.031: $25,000 exemption plus 'additional exemption of up to $25,000 on the assessed valuation greater than $50,000 for all levies other than school district levies'",
       "unverified_fields": [
-        "homestead $50,000 applies in full only to non-school levies",
-        "reassessment_cycle_years",
         "uncaps_on_sale",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "reassessment_cycle_years",
+        "homestead $50,000 applies in full only to non-school levies"
       ],
-      "notes": "Cap is the lower of 3% or CPI."
+      "notes": "Cap is the lower of 3% or CPI. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "GA": {
@@ -377,28 +321,32 @@
       "amount_or_pct": 10000
     },
     "tif_vehicle_name": "GA TAD (Tax Allocation District)",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.9,
-    "tree_capital_cost_usd": 1410,
-    "climate_energy_regime": "cooling_dominant",
-    "statutory_citation": "O.C.G.A. § 48-5-7 (40% Ratio) & § 36-44 (TAD / Redevelopment Powers)",
+    "statutory_citation": "O.C.G.A. \u00a7 48-5-7 (40% Ratio) & \u00a7 36-44 (TAD / Redevelopment Powers)",
     "source_url": "https://law.justia.com/codes/georgia/title-48/chapter-5/article-1/section-48-5-7/",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "could_not_check",
-      "method": "law.justia.com returned 403; no alternate official Georgia code source reached",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'In Georgia property is required to be assessed at 40% of the fair market value unless othe'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": ""
+      "notes": "Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "confirmed",
+        "source_url": "https://dor.georgia.gov/property-tax-valuation",
+        "quote": "In Georgia property is required to be assessed at 40% of the fair market value unless otherwise specified by law. (O.C.G.A. 48-5-7)",
+        "checked_on": "2026-11-16",
+        "note": "Source is the Georgia Department of Revenue page quoting the statute (the legislature's site was not reachable)."
+      }
     }
   },
   "HI": {
@@ -413,11 +361,7 @@
       "amount_or_pct": 120000
     },
     "tif_vehicle_name": "HI TIF / Community Facilities District",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.68,
-    "tree_capital_cost_usd": 2635,
-    "climate_energy_regime": "cooling_dominant",
-    "statutory_citation": "Haw. Rev. Stat. § 246 (Real Property Tax) & § 46-101 (TIF)",
+    "statutory_citation": "Haw. Rev. Stat. \u00a7 246 (Real Property Tax) & \u00a7 46-101 (TIF)",
     "source_url": "https://www.capitol.hawaii.gov/hrscurrent/Vol04_Ch0201-0257/HRS0246/",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -428,13 +372,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "ID": {
@@ -449,28 +393,44 @@
       "amount_or_pct": 125000
     },
     "tif_vehicle_name": "ID URA Revenue Allocation (TIF)",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.95,
-    "tree_capital_cost_usd": 1490,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Idaho Code § 63-205 (Market Value) & § 50-2901 (Urban Renewal / TIF)",
+    "statutory_citation": "Idaho Code \u00a7 63-205 (Market Value) & \u00a7 50-2901 (Urban Renewal / TIF)",
     "source_url": "https://legislature.idaho.gov/statutesrules/idstat/title63/t63ch6/sect63-602g/",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'must be assessed annually at market value for assessment purposes'; reassessment_cycle_years: 'must be assessed annually at market value'; homestead_exemption_rule: 'the first one hundred twenty-five thousand dollars ($125,000) of the market value ... or f'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "annual_assessment_cap",
+        "uncaps_on_sale"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "confirmed",
+        "source_url": "https://legislature.idaho.gov/statutesrules/idstat/Title63/T63CH2/SECT63-205/",
+        "quote": "must be assessed annually at market value for assessment purposes",
+        "checked_on": "2026-11-16",
+        "note": ""
+      },
+      "reassessment_cycle_years": {
+        "status": "confirmed",
+        "source_url": "https://legislature.idaho.gov/statutesrules/idstat/Title63/T63CH2/SECT63-205/",
+        "quote": "must be assessed annually at market value",
+        "checked_on": "2026-11-16",
+        "note": ""
+      },
+      "homestead_exemption_rule": {
+        "status": "confirmed",
+        "source_url": "https://legislature.idaho.gov/statutesrules/idstat/Title63/T63CH6/SECT63-602G/",
+        "quote": "the first one hundred twenty-five thousand dollars ($125,000) of the market value ... or fifty percent (50%) of the market value ... whichever is the lesser, shall be exempt",
+        "checked_on": "2026-11-16",
+        "note": "The 50%-of-value limit is not modeled; the exemption is the lesser of $125,000 and half the home's value."
+      }
     }
   },
   "IL": {
@@ -485,10 +445,6 @@
       "amount_or_pct": 10000
     },
     "tif_vehicle_name": "IL TIF (65 ILCS 5/11-74.4) / SSA",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.19,
-    "tree_capital_cost_usd": 1865,
-    "climate_energy_regime": "heating_dominant",
     "statutory_citation": "35 ILCS 200/ (Cook Triennial Ratio) & 65 ILCS 5/11-74.4 (TIF Act)",
     "source_url": "https://www.ilga.gov/legislation/ilcs/ilcs4.asp?DocName=006500050HArt.+11+Div.+74.4",
     "retrieved": "2026-11-15",
@@ -500,13 +456,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": ""
+      "notes": "Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "IN": {
@@ -521,11 +477,7 @@
       "amount_or_pct": 0.01
     },
     "tif_vehicle_name": "IN Redevelopment TIF",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.96,
-    "tree_capital_cost_usd": 1505,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Ind. Code § 6-1.1-20.6 (1% Circuit Breaker) & § 36-7-14 (TIF)",
+    "statutory_citation": "Ind. Code \u00a7 6-1.1-20.6 (1% Circuit Breaker) & \u00a7 36-7-14 (TIF)",
     "source_url": "https://iga.in.gov/laws/current/ic/title/6/article/1.1/chapter/20.6/",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -536,18 +488,18 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "IA": {
     "state_code": "IA",
-    "res_assessment_ratio": 0.5,
+    "res_assessment_ratio": null,
     "comm_assessment_ratio": 0.9,
     "annual_assessment_cap": null,
     "uncaps_on_sale": false,
@@ -557,28 +509,33 @@
       "amount_or_pct": 4850
     },
     "tif_vehicle_name": "IA Urban Renewal TIF",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.94,
-    "tree_capital_cost_usd": 1475,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Iowa Code § 441.21 (Rollback Assessment) & § 403 (Urban Renewal / TIF)",
+    "statutory_citation": "Iowa Code \u00a7 441.21 (Rollback Assessment) & \u00a7 403 (Urban Renewal / TIF)",
     "source_url": "https://www.legis.iowa.gov/docs/ico/chapter/441.pdf",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'the percentage of actual value at which agricultural and residential property shall be ass'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "corrected",
+        "source_url": "https://www.legis.iowa.gov/docs/code/441.21.pdf",
+        "quote": "the percentage of actual value at which agricultural and residential property shall be assessed shall be calculated in accordance with the methods provided",
+        "checked_on": "2026-11-16",
+        "note": "Corrected from 0.5: Iowa's residential assessment percentage is recalculated each year by formula; no single number is correct."
+      }
     }
   },
   "KS": {
@@ -593,28 +550,32 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "KS TIF / CID / STAR Bonds",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.92,
-    "tree_capital_cost_usd": 1440,
-    "climate_energy_regime": "mixed_temperate",
-    "statutory_citation": "Kan. Stat. Ann. § 79-1439 (11.5% Res Ratio) & § 12-1770 (TIF)",
+    "statutory_citation": "Kan. Stat. Ann. \u00a7 79-1439 (11.5% Res Ratio) & \u00a7 12-1770 (TIF)",
     "source_url": "https://www.ksrevisor.org/statutes/chapters/ch79/079_014_0039.html",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'real property used for residential purposes ... at 11.5%'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "confirmed",
+        "source_url": "https://ksrevisor.gov/statutes/chapters/ch79/079_014_0039.html",
+        "quote": "real property used for residential purposes ... at 11.5%",
+        "checked_on": "2026-11-16",
+        "note": ""
+      }
     }
   },
   "KY": {
@@ -629,11 +590,7 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "KY TIF (KRS 65.7041)",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.91,
-    "tree_capital_cost_usd": 1425,
-    "climate_energy_regime": "mixed_temperate",
-    "statutory_citation": "Ky. Rev. Stat. § 132.191 (Fair Cash Value) & § 65.7041 (TIF)",
+    "statutory_citation": "Ky. Rev. Stat. \u00a7 132.191 (Fair Cash Value) & \u00a7 65.7041 (TIF)",
     "source_url": "https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=51664",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -644,13 +601,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "LA": {
@@ -665,11 +622,7 @@
       "amount_or_pct": 75000
     },
     "tif_vehicle_name": "LA EDD TIF / Industrial Tax Exempt",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.9,
-    "tree_capital_cost_usd": 1410,
-    "climate_energy_regime": "cooling_dominant",
-    "statutory_citation": "La. Const. art. VII, § 18 (10% Res Ratio) & La. R.S. § 33:9038.31 (TIF)",
+    "statutory_citation": "La. Const. art. VII, \u00a7 18 (10% Res Ratio) & La. R.S. \u00a7 33:9038.31 (TIF)",
     "source_url": "https://legis.la.gov/legis/Law.aspx?d=206538",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -680,13 +633,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "ME": {
@@ -700,12 +653,8 @@
       "type": "flat_assessed",
       "amount_or_pct": 25000
     },
-    "tif_vehicle_name": "ME Municipal TIF (30-A MRS § 5221)",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.02,
-    "tree_capital_cost_usd": 1600,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Me. Rev. Stat. tit. 36, § 708 & tit. 30-A, § 5221 (Municipal TIF)",
+    "tif_vehicle_name": "ME Municipal TIF (30-A MRS \u00a7 5221)",
+    "statutory_citation": "Me. Rev. Stat. tit. 36, \u00a7 708 & tit. 30-A, \u00a7 5221 (Municipal TIF)",
     "source_url": "https://legislature.maine.gov/statutes/36/title36sec708.html",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -716,49 +665,65 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "MD": {
     "state_code": "MD",
     "res_assessment_ratio": 1,
     "comm_assessment_ratio": 1,
-    "annual_assessment_cap": null,
+    "annual_assessment_cap": 0.1,
     "uncaps_on_sale": true,
     "reassessment_cycle_years": 3,
     "homestead_exemption_rule": {
-      "type": "percent_market",
-      "amount_or_pct": 0.05
+      "type": "none",
+      "amount_or_pct": 0
     },
     "tif_vehicle_name": "MD TIF / RISE Zones",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.04,
-    "tree_capital_cost_usd": 1630,
-    "climate_energy_regime": "mixed_temperate",
-    "statutory_citation": "Md. Code Ann., Tax-Prop. § 8-103 (Triennial Cycle) & Econ. Dev. § 12-201 (TIF)",
+    "statutory_citation": "Md. Code Ann., Tax-Prop. \u00a7 8-103 (Triennial Cycle) & Econ. Dev. \u00a7 12-201 (TIF)",
     "source_url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtp&section=9-105",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "reassessment_cycle_years: 'for the 1st, 2nd, or 3rd year of a 3-year cycle'; annual_assessment_cap: 'for the State property tax ... 110% ... The homestead credit percentage for any county or '; homestead_exemption_rule: 'the property tax credit under this section is calculated by: (i) multiplying the prior yea'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "uncaps_on_sale"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "reassessment_cycle_years": {
+        "status": "confirmed",
+        "source_url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtp&section=8-103",
+        "quote": "for the 1st, 2nd, or 3rd year of a 3-year cycle",
+        "checked_on": "2026-11-16",
+        "note": ""
+      },
+      "annual_assessment_cap": {
+        "status": "corrected",
+        "source_url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtp&section=9-105",
+        "quote": "for the State property tax ... 110% ... The homestead credit percentage for any county or municipal corporation property tax: (i) may not be less than 100% or exceed 110%",
+        "checked_on": "2026-11-16",
+        "note": "Corrected from null: the homestead credit limits taxable assessment growth on owner-occupied homes to 10% a year for the State tax; counties may set 0-10%."
+      },
+      "homestead_exemption_rule": {
+        "status": "corrected",
+        "source_url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtp&section=9-105",
+        "quote": "the property tax credit under this section is calculated by: (i) multiplying the prior year's taxable assessment by the homestead credit percentage",
+        "checked_on": "2026-11-16",
+        "note": "Corrected: Maryland's homestead relief is the assessment-growth credit above, not a 5% exemption of market value."
+      }
     }
   },
   "MA": {
@@ -773,28 +738,32 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "MA DIF / HDIP",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.26,
-    "tree_capital_cost_usd": 1975,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Mass. Gen. Laws ch. 59, § 2A (Prop 2½) & ch. 40Q (DIF)",
+    "statutory_citation": "Mass. Gen. Laws ch. 59, \u00a7 2A (Prop 2\u00bd) & ch. 40Q (DIF)",
     "source_url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIX/Chapter59/Section2A",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'the assessments on the real property that they propose to make are at full and fair cash v'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "confirmed",
+        "source_url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIX/Chapter59/Section2A",
+        "quote": "the assessments on the real property that they propose to make are at full and fair cash valuation as required by section thirty-eight",
+        "checked_on": "2026-11-16",
+        "note": ""
+      }
     }
   },
   "MI": {
@@ -809,33 +778,49 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "MI Brownfield / DDA / CIA TIF",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.03,
-    "tree_capital_cost_usd": 1615,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Mich. Const. art. IX, § 3 (Proposal A / Headlee), MCL 211.27a & PA 57 (TIF)",
+    "statutory_citation": "Mich. Const. art. IX, \u00a7 3 (Proposal A / Headlee), MCL 211.27a & PA 57 (TIF)",
     "source_url": "https://www.legislature.mi.gov/statutes/mcl-211-27a",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 404)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'property shall be assessed at 50%'; annual_assessment_cap: 'multiplied by the lesser of 1.05 or the inflation rate'; uncaps_on_sale: 'Upon a transfer of ownership of property after 1994, the property's taxable value for the '",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "confirmed",
+        "source_url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-211-27a",
+        "quote": "property shall be assessed at 50%",
+        "checked_on": "2026-11-16",
+        "note": ""
+      },
+      "annual_assessment_cap": {
+        "status": "confirmed",
+        "source_url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-211-27a",
+        "quote": "multiplied by the lesser of 1.05 or the inflation rate",
+        "checked_on": "2026-11-16",
+        "note": "0.05 is the ceiling; the actual cap is the lesser of 5% and inflation."
+      },
+      "uncaps_on_sale": {
+        "status": "confirmed",
+        "source_url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-211-27a",
+        "quote": "Upon a transfer of ownership of property after 1994, the property's taxable value for the calendar year following the year of the transfer is the property's state equalized valuation",
+        "checked_on": "2026-11-16",
+        "note": ""
+      }
     }
   },
   "MN": {
     "state_code": "MN",
-    "res_assessment_ratio": 1,
+    "res_assessment_ratio": null,
     "comm_assessment_ratio": 1,
     "annual_assessment_cap": null,
     "uncaps_on_sale": true,
@@ -844,29 +829,34 @@
       "type": "none",
       "amount_or_pct": 0
     },
-    "tif_vehicle_name": "MN TIF (Minn. Stat. § 469.174)",
-    "non_pledgeable_share": 0.4,
-    "rsmeans_cost_multiplier": 1.12,
-    "tree_capital_cost_usd": 1755,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Minn. Stat. § 273.13 (Class 1a Classification) & § 469.174 (TIF)",
+    "tif_vehicle_name": "MN TIF (Minn. Stat. \u00a7 469.174)",
+    "statutory_citation": "Minn. Stat. \u00a7 273.13 (Class 1a Classification) & \u00a7 469.174 (TIF)",
     "source_url": "https://www.revisor.mn.gov/statutes/cite/273.13",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'The first $500,000 of market value of class 1a property has a net classification rate of o'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "corrected",
+        "source_url": "https://www.revisor.mn.gov/statutes/cite/273.13",
+        "quote": "The first $500,000 of market value of class 1a property has a net classification rate of one percent of its market value; and the market value of class 1a property that exceeds $500,000 has a classification rate of 1.25 percent",
+        "checked_on": "2026-11-16",
+        "note": "Corrected from 1: Minnesota taxes net tax capacity (class rates of 1% and 1.25% for homesteads), so an assessment ratio comparable with other states does not exist."
+      }
     }
   },
   "MS": {
@@ -880,12 +870,8 @@
       "type": "none",
       "amount_or_pct": 0
     },
-    "tif_vehicle_name": "MS TIF (Miss. Code § 21-45-1)",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.85,
-    "tree_capital_cost_usd": 1330,
-    "climate_energy_regime": "cooling_dominant",
-    "statutory_citation": "Miss. Code Ann. § 27-35-4 (Class I 10% Ratio) & § 21-45-1 (TIF)",
+    "tif_vehicle_name": "MS TIF (Miss. Code \u00a7 21-45-1)",
+    "statutory_citation": "Miss. Code Ann. \u00a7 27-35-4 (Class I 10% Ratio) & \u00a7 21-45-1 (TIF)",
     "source_url": "https://www.dor.ms.gov/property",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -896,13 +882,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "MO": {
@@ -917,28 +903,38 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "MO TIF / Ch. 353 Abatement",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.02,
-    "tree_capital_cost_usd": 1600,
-    "climate_energy_regime": "mixed_temperate",
-    "statutory_citation": "Mo. Rev. Stat. § 137.115 (19% Res Ratio) & § 99.800 (Real Property TIF)",
+    "statutory_citation": "Mo. Rev. Stat. \u00a7 137.115 (19% Res Ratio) & \u00a7 99.800 (Real Property TIF)",
     "source_url": "https://revisor.mo.gov/main/OneSection.aspx?section=137.115",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'assessed at the following percentages of true value: (a) For real property in subclass (1)'; reassessment_cycle_years: 'new assessed values shall be determined as of January first of each odd-numbered year'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "confirmed",
+        "source_url": "https://revisor.mo.gov/main/OneSection.aspx?section=137.115",
+        "quote": "assessed at the following percentages of true value: (a) For real property in subclass (1), nineteen percent",
+        "checked_on": "2026-11-16",
+        "note": ""
+      },
+      "reassessment_cycle_years": {
+        "status": "confirmed",
+        "source_url": "https://revisor.mo.gov/main/OneSection.aspx?section=137.115",
+        "quote": "new assessed values shall be determined as of January first of each odd-numbered year",
+        "checked_on": "2026-11-16",
+        "note": ""
+      }
     }
   },
   "MT": {
@@ -953,28 +949,32 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "MT Urban Renewal TIF / TEDD",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.97,
-    "tree_capital_cost_usd": 1520,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Mont. Code Ann. § 15-7-111 (Biennial Market Appraisal) & § 7-15-4282 (TEDD/TIF)",
+    "statutory_citation": "Mont. Code Ann. \u00a7 15-7-111 (Biennial Market Appraisal) & \u00a7 7-15-4282 (TEDD/TIF)",
     "source_url": "https://leg.mt.gov/bills/mca/title_0150/chapter_0070/part_0010/section_0110/0150-0070-0010-0110.html",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "reassessment_cycle_years: 'all real property and all property within class three, class four, and class ten must be r'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "reassessment_cycle_years": {
+        "status": "confirmed",
+        "source_url": "https://leg.mt.gov/bills/mca/title_0150/chapter_0070/part_0010/section_0110/0150-0070-0010-0110.html",
+        "quote": "all real property and all property within class three, class four, and class ten must be revalued every 2 years",
+        "checked_on": "2026-11-16",
+        "note": ""
+      }
     }
   },
   "NE": {
@@ -988,36 +988,40 @@
       "type": "none",
       "amount_or_pct": 0
     },
-    "tif_vehicle_name": "NE TIF (15–20 yr) / SID",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.93,
-    "tree_capital_cost_usd": 1460,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Neb. Rev. Stat. § 77-201 (100% Market Value) & § 18-2101 (Community Development TIF)",
+    "tif_vehicle_name": "NE TIF (15\u201320 yr) / SID",
+    "statutory_citation": "Neb. Rev. Stat. \u00a7 77-201 (100% Market Value) & \u00a7 18-2101 (Community Development TIF)",
     "source_url": "https://nebraskalegislature.gov/laws/statutes.php?statute=77-201",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'all real property in this state, not expressly exempt therefrom, shall be subject to taxat'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "confirmed",
+        "source_url": "https://nebraskalegislature.gov/laws/statutes.php?statute=77-201",
+        "quote": "all real property in this state, not expressly exempt therefrom, shall be subject to taxation and shall be valued at its actual value",
+        "checked_on": "2026-11-16",
+        "note": ""
+      }
     }
   },
   "NV": {
     "state_code": "NV",
     "res_assessment_ratio": 0.35,
     "comm_assessment_ratio": 0.35,
-    "annual_assessment_cap": 0.03,
+    "annual_assessment_cap": null,
     "uncaps_on_sale": false,
     "reassessment_cycle_years": 1,
     "homestead_exemption_rule": {
@@ -1025,28 +1029,40 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "NV RDA TIF",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.08,
-    "tree_capital_cost_usd": 1695,
-    "climate_energy_regime": "arid_irrigation_limited",
-    "statutory_citation": "Nev. Rev. Stat. § 361.225 (35% Taxable Ratio), § 361.4723 (3% Abatement) & § 278C (TIF)",
+    "statutory_citation": "Nev. Rev. Stat. \u00a7 361.225 (35% Taxable Ratio), \u00a7 361.4723 (3% Abatement) & \u00a7 278C (TIF)",
     "source_url": "https://www.leg.state.nv.us/nrs/nrs-361.html",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'NRS 361.225 Rate of assessment. All property subject to taxation must be assessed at 35 pe'; annual_assessment_cap: 'an increase in the tax bill of the owner of a home by more than 3 percent over the tax bil'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "tax_bill_growth_cap": 0.03,
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "confirmed",
+        "source_url": "https://www.leg.state.nv.us/NRS/NRS-361.html",
+        "quote": "NRS 361.225 Rate of assessment. All property subject to taxation must be assessed at 35 percent of its taxable value.",
+        "checked_on": "2026-11-16",
+        "note": ""
+      },
+      "annual_assessment_cap": {
+        "status": "corrected",
+        "source_url": "https://www.leg.state.nv.us/NRS/NRS-361.html",
+        "quote": "an increase in the tax bill of the owner of a home by more than 3 percent over the tax bill of that homeowner for the previous year constitutes a severe economic hardship",
+        "checked_on": "2026-11-16",
+        "note": "Corrected from 0.03: NRS 361.4723 limits growth in the tax bill of an owner-occupied single-family home, not the assessed value; stored as tax_bill_growth_cap."
+      }
     }
   },
   "NH": {
@@ -1061,11 +1077,7 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "NH Municipal TIF (RSA 162-K)",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.04,
-    "tree_capital_cost_usd": 1630,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "N.H. Rev. Stat. Ann. § 75:1 (100% Full and True Value) & § 162-K (TIF)",
+    "statutory_citation": "N.H. Rev. Stat. Ann. \u00a7 75:1 (100% Full and True Value) & \u00a7 162-K (TIF)",
     "source_url": "https://www.gencourt.state.nh.us/rsa/html/V/75/75-1.htm",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -1076,13 +1088,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "NJ": {
@@ -1097,11 +1109,7 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "NJ Redevelopment PILOT / RAB",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.25,
-    "tree_capital_cost_usd": 1960,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "N.J. Stat. Ann. § 54:4-23 (True Value) & § 52:27D-489 (ERB / TIF)",
+    "statutory_citation": "N.J. Stat. Ann. \u00a7 54:4-23 (True Value) & \u00a7 52:27D-489 (ERB / TIF)",
     "source_url": "https://lis.njleg.state.nj.us/",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -1112,13 +1120,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "NM": {
@@ -1133,11 +1141,7 @@
       "amount_or_pct": 2000
     },
     "tif_vehicle_name": "NM TIDD / MRA",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.93,
-    "tree_capital_cost_usd": 1460,
-    "climate_energy_regime": "arid_irrigation_limited",
-    "statutory_citation": "N.M. Stat. Ann. § 7-36-21.2 (3% Cap) & § 5-15-1 (TIDD Act)",
+    "statutory_citation": "N.M. Stat. Ann. \u00a7 7-36-21.2 (3% Cap) & \u00a7 5-15-1 (TIDD Act)",
     "source_url": "https://laws.nmonesource.com/w/nmos/Chapter-7-NMSA-1978#!fragment/zoupio-_Toc140502128",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -1148,13 +1152,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "NY": {
@@ -1169,11 +1173,7 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "NY NYC 485-x / IDA PILOT",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.38,
-    "tree_capital_cost_usd": 2165,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "N.Y. Real Prop. Tax Law § 1805 (Assessment Caps) & Gen. Mun. Law § 970-a (TIF)",
+    "statutory_citation": "N.Y. Real Prop. Tax Law \u00a7 1805 (Assessment Caps) & Gen. Mun. Law \u00a7 970-a (TIF)",
     "source_url": "https://www.nysenate.gov/legislation/laws/RPT/1805",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -1184,13 +1184,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "NC": {
@@ -1205,30 +1205,22 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "NC Synthetic TIF / PDF",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.89,
-    "tree_capital_cost_usd": 1395,
-    "climate_energy_regime": "cooling_dominant",
-    "statutory_citation": "N.C. Gen. Stat. § 105-286 (Octennial Cycle) & § 159-101 (Project Development Financing)",
+    "statutory_citation": "N.C. Gen. Stat. \u00a7 105-286 (Octennial Cycle) & \u00a7 159-101 (Project Development Financing)",
     "source_url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_105/GS_105-286.html",
     "retrieved": "2026-11-15",
     "last_verified": "2026-11-16",
     "verified_by": "state_statute_database",
     "verification": {
       "status": "partially_verified",
-      "method": "N.C. Gen. Stat. § 105-286 (ncleg.gov)",
+      "method": "N.C. Gen. Stat. \u00a7 105-286 (ncleg.gov)",
       "checked_on": "2026-11-16",
-      "evidence": "§ 105-286(a): reappraisal in the scheduled year 'and every eighth year thereafter, unless the county is required to advance the date ... or chooses to advance the date'",
+      "evidence": "\u00a7 105-286(a): reappraisal in the scheduled year 'and every eighth year thereafter, unless the county is required to advance the date ... or chooses to advance the date'",
       "unverified_fields": [
-        "res/comm ratio 1.0",
+        "res_assessment_ratio",
         "uncaps_on_sale",
-        "homestead_exemption_rule",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "homestead_exemption_rule"
       ],
-      "notes": "reassessment_cycle_years corrected 4 -> 8 (statutory default; many counties advance to shorter cycles). The record's own citation said 'Octennial'."
+      "notes": "reassessment_cycle_years corrected 4 -> 8 (statutory default; many counties advance to shorter cycles). The record's own citation said 'Octennial'. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "ND": {
@@ -1243,28 +1235,32 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "ND TIF (NDCC ch. 40-58)",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.95,
-    "tree_capital_cost_usd": 1490,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "N.D. Cent. Code § 57-02-27 (50% True Value) & § 40-58 (Urban Renewal / TIF)",
+    "statutory_citation": "N.D. Cent. Code \u00a7 57-02-27 (50% True Value) & \u00a7 40-58 (Urban Renewal / TIF)",
     "source_url": "https://www.ndlegis.gov/cencode/t57c02.pdf",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'All primary residential property and nonprimary residential property to be valued at nine '",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "confirmed",
+        "source_url": "https://www.ndlegis.gov/cencode/t57c02.pdf",
+        "quote": "All primary residential property and nonprimary residential property to be valued at nine percent of assessed value ... \"Assessed valuation\" means fifty percent of the true and full value of property",
+        "checked_on": "2026-11-16",
+        "note": "0.045 = 9% of 50%."
+      }
     }
   },
   "OH": {
@@ -1273,34 +1269,44 @@
     "comm_assessment_ratio": 0.35,
     "annual_assessment_cap": null,
     "uncaps_on_sale": false,
-    "reassessment_cycle_years": 3,
+    "reassessment_cycle_years": 6,
     "homestead_exemption_rule": {
       "type": "flat_assessed",
       "amount_or_pct": 25000
     },
-    "tif_vehicle_name": "OH TIF (ORC § 5709.40) / NCA",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.99,
-    "tree_capital_cost_usd": 1550,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Ohio Rev. Code § 5713.03 (35% Taxable Value), HB 920 & § 5709.40 (TIF)",
+    "tif_vehicle_name": "OH TIF (ORC \u00a7 5709.40) / NCA",
+    "statutory_citation": "Ohio Rev. Code \u00a7 5713.03 (35% Taxable Value), HB 920 & \u00a7 5709.40 (TIF)",
     "source_url": "https://codes.ohio.gov/ohio-revised-code/section-5713.03",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'that per cent of true value in money ... the commissioner by rule establishes, but it shal'; reassessment_cycle_years: 'at least once in each six-year period'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "confirmed",
+        "source_url": "https://codes.ohio.gov/ohio-revised-code/section-5715.01",
+        "quote": "that per cent of true value in money ... the commissioner by rule establishes, but it shall not exceed thirty-five per cent",
+        "checked_on": "2026-11-16",
+        "note": "35% is the statutory maximum; the rule that sets it was not read."
+      },
+      "reassessment_cycle_years": {
+        "status": "corrected",
+        "source_url": "https://codes.ohio.gov/ohio-revised-code/section-5713.01",
+        "quote": "at least once in each six-year period",
+        "checked_on": "2026-11-16",
+        "note": "Corrected from 3. Interim (triennial) updates under R.C. 5715.33 were not confirmed."
+      }
     }
   },
   "OK": {
@@ -1315,11 +1321,7 @@
       "amount_or_pct": 1000
     },
     "tif_vehicle_name": "OK Local Dev. Act TIF",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.88,
-    "tree_capital_cost_usd": 1380,
-    "climate_energy_regime": "cooling_dominant",
-    "statutory_citation": "Okla. Const. art. X, § 8B (5% Cap) & 62 O.S. § 850 (Local Development Act / TIF)",
+    "statutory_citation": "Okla. Const. art. X, \u00a7 8B (5% Cap) & 62 O.S. \u00a7 850 (Local Development Act / TIF)",
     "source_url": "https://oksenate.gov/about/constitution/article-x/section-8b",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -1330,13 +1332,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "OR": {
@@ -1351,11 +1353,7 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "OR Urban Renewal TIF",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.11,
-    "tree_capital_cost_usd": 1740,
-    "climate_energy_regime": "mixed_temperate",
-    "statutory_citation": "Or. Const. art. XI, § 11 (Measure 50); ORS 308.146 (3% MAV growth); ORS ch. 457 (urban renewal)",
+    "statutory_citation": "Or. Const. art. XI, \u00a7 11 (Measure 50); ORS 308.146 (3% MAV growth); ORS ch. 457 (urban renewal)",
     "source_url": "https://www.oregonlegislature.gov/bills_laws/ors/ors308.html",
     "retrieved": "2026-11-15",
     "last_verified": "2026-11-16",
@@ -1366,14 +1364,10 @@
       "checked_on": "2026-11-16",
       "evidence": "ORS 308.146(1): 'The maximum assessed value of property equals 103 percent of the property's assessed value from the prior year'",
       "unverified_fields": [
-        "res_assessment_ratio / comm_assessment_ratio 0.65 (no source; Measure 50 uses MAV vs. RMV, not a fixed ratio)",
-        "uncaps_on_sale",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "uncaps_on_sale"
       ],
-      "notes": ""
+      "notes": "Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "PA": {
@@ -1388,11 +1382,7 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "PA TIF / LERTA / Phila. Abate",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.13,
-    "tree_capital_cost_usd": 1770,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "53 Pa. Cons. Stat. § 8811 (Common Level Ratio) & 53 P.S. § 6930 (TIF Act)",
+    "statutory_citation": "53 Pa. Cons. Stat. \u00a7 8811 (Common Level Ratio) & 53 P.S. \u00a7 6930 (TIF Act)",
     "source_url": "https://www.legis.state.pa.us/cfdocs/legis/LI/consCheck.cfm?txtType=HTM&ttl=53",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -1403,13 +1393,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "RI": {
@@ -1423,29 +1413,33 @@
       "type": "none",
       "amount_or_pct": 0
     },
-    "tif_vehicle_name": "RI TIF (RIGL § 45-33.2)",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.15,
-    "tree_capital_cost_usd": 1800,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "R.I. Gen. Laws § 44-5-11.6 (Cyclical Revaluation) & § 45-33.2 (TIF)",
+    "tif_vehicle_name": "RI TIF (RIGL \u00a7 45-33.2)",
+    "statutory_citation": "R.I. Gen. Laws \u00a7 44-5-11.6 (Cyclical Revaluation) & \u00a7 45-33.2 (TIF)",
     "source_url": "https://webserver.rilegislature.gov/Statutes/TITLE44/44-5/44-5-11.6.htm",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "reassessment_cycle_years: 'shall conduct a revaluation within nine (9) years of the date of the prior revaluation and'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "reassessment_cycle_years": {
+        "status": "confirmed",
+        "source_url": "https://webserver.rilegislature.gov/Statutes/TITLE44/44-5/44-5-11.6.htm",
+        "quote": "shall conduct a revaluation within nine (9) years of the date of the prior revaluation and shall conduct an update of real property every three (3) years",
+        "checked_on": "2026-11-16",
+        "note": "3 = statistical update interval; full revaluation every 9 years."
+      }
     }
   },
   "SC": {
@@ -1459,29 +1453,47 @@
       "type": "none",
       "amount_or_pct": 0
     },
-    "tif_vehicle_name": "SC TIF (SC Code § 31-6-10)",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.88,
-    "tree_capital_cost_usd": 1380,
-    "climate_energy_regime": "cooling_dominant",
-    "statutory_citation": "S.C. Code Ann. § 12-43-220 (4% Res Ratio, 15% 5-Yr Cap) & § 31-6 (TIF Act)",
+    "tif_vehicle_name": "SC TIF (SC Code \u00a7 31-6-10)",
+    "statutory_citation": "S.C. Code Ann. \u00a7 12-43-220 (4% Res Ratio, 15% 5-Yr Cap) & \u00a7 31-6 (TIF Act)",
     "source_url": "https://www.scstatehouse.gov/code/t12c043.php",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'taxed on an assessment equal to four percent of the fair market value of the property'; reassessment_cycle_years: 'once every fifth year each county or the State shall appraise and equalize those propertie'; annual_assessment_cap: 'The fifteen percent cap in Section 12-37-3140'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "reassessment_increase_cap": 0.15,
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "confirmed",
+        "source_url": "https://www.scstatehouse.gov/code/t12c043.php",
+        "quote": "taxed on an assessment equal to four percent of the fair market value of the property",
+        "checked_on": "2026-11-16",
+        "note": "4% applies to an owner-occupied legal residence; other residential property is assessed at a higher ratio (not stored)."
+      },
+      "reassessment_cycle_years": {
+        "status": "confirmed",
+        "source_url": "https://www.scstatehouse.gov/code/t12c043.php",
+        "quote": "once every fifth year each county or the State shall appraise and equalize those properties",
+        "checked_on": "2026-11-16",
+        "note": ""
+      },
+      "annual_assessment_cap": {
+        "status": "corrected",
+        "source_url": "https://www.scstatehouse.gov/code/t12c037.php",
+        "quote": "The fifteen percent cap in Section 12-37-3140",
+        "checked_on": "2026-11-16",
+        "note": "South Carolina's cap is 15% per five-year reassessment, not a yearly cap; stored as reassessment_increase_cap."
+      }
     }
   },
   "SD": {
@@ -1496,28 +1508,32 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "SD TIF (SDCL ch. 11-9)",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.9,
-    "tree_capital_cost_usd": 1410,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "S.D. Codified Laws § 10-6-104 (85% Factor) & § 11-9 (TID / TIF)",
+    "statutory_citation": "S.D. Codified Laws \u00a7 10-6-104 (85% Factor) & \u00a7 11-9 (TID / TIF)",
     "source_url": "https://sdlegislature.gov/Statutes/10-6-104",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'All property is to be assessed at full and true value. Then the property is equalized to 8'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "confirmed",
+        "source_url": "https://dor.sd.gov/individuals/taxes/property-tax/",
+        "quote": "All property is to be assessed at full and true value. Then the property is equalized to 85% for property tax purposes.",
+        "checked_on": "2026-11-16",
+        "note": "Source is the South Dakota Department of Revenue (the statute page renders without text here)."
+      }
     }
   },
   "TN": {
@@ -1532,11 +1548,7 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "TN TIF / IDB PILOT",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.9,
-    "tree_capital_cost_usd": 1410,
-    "climate_energy_regime": "cooling_dominant",
-    "statutory_citation": "Tenn. Code Ann. § 67-5-801 (25% Res Ratio) & § 13-20-205 (Housing & Redevelopment TIF)",
+    "statutory_citation": "Tenn. Code Ann. \u00a7 67-5-801 (25% Res Ratio) & \u00a7 13-20-205 (Housing & Redevelopment TIF)",
     "source_url": "https://www.tn.gov/comptroller/divisions/property-assessments/assessment.html",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -1547,13 +1559,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "TX": {
@@ -1568,35 +1580,27 @@
       "amount_or_pct": 100000
     },
     "tif_vehicle_name": "TX TIRZ / PID / MUD",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.91,
-    "tree_capital_cost_usd": 1425,
-    "climate_energy_regime": "cooling_dominant",
-    "statutory_citation": "Tex. Tax Code § 23.23 (10% Cap), § 311 (TIRZ) & Tex. Const. art. VIII, § 1-b",
+    "statutory_citation": "Tex. Tax Code \u00a7 23.23 (10% Cap), \u00a7 311 (TIRZ) & Tex. Const. art. VIII, \u00a7 1-b",
     "source_url": "https://statutes.capitol.texas.gov/Docs/TX/htm/TX.23.htm",
     "retrieved": "2026-11-15",
     "last_verified": "2026-11-16",
     "verified_by": "state_statute_database",
     "verification": {
       "status": "partially_verified",
-      "method": "Texas Tax Code §§ 23.23, 23.231, 11.13 via texas.public.law mirror; 89(R) SB 4 enrolled text and history (capitol.texas.gov)",
+      "method": "Texas Tax Code \u00a7\u00a7 23.23, 23.231, 11.13 via texas.public.law mirror; 89(R) SB 4 enrolled text and history (capitol.texas.gov)",
       "checked_on": "2026-11-16",
-      "evidence": "§ 23.23: appraised value of a residence homestead limited to prior value plus '10 percent'; § 23.231: 20% circuit breaker for other property, 'This section expires December 31, 2026'",
+      "evidence": "\u00a7 23.23: appraised value of a residence homestead limited to prior value plus '10 percent'; \u00a7 23.231: 20% circuit breaker for other property, 'This section expires December 31, 2026'",
       "unverified_fields": [
-        "homestead_exemption_rule amount: § 11.13(b) mirror shows $100,000; 89(R) SB 4 raises it to $140,000 only if SJR 2 was approved by voters (Nov 2025) — approval not confirmed in this audit",
         "uncaps_on_sale",
         "reassessment_cycle_years",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "homestead_exemption_rule"
       ],
-      "notes": "annual_assessment_cap corrected from null to 0.10: the record's own citation names the § 23.23 10% homestead cap but stored 'no cap'. The cap applies to residence homesteads only."
+      "notes": "annual_assessment_cap corrected from null to 0.10: the record's own citation names the \u00a7 23.23 10% homestead cap but stored 'no cap'. The cap applies to residence homesteads only. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "UT": {
     "state_code": "UT",
-    "res_assessment_ratio": 0.55,
+    "res_assessment_ratio": 1,
     "comm_assessment_ratio": 1,
     "annual_assessment_cap": null,
     "uncaps_on_sale": true,
@@ -1606,28 +1610,38 @@
       "amount_or_pct": 0.45
     },
     "tif_vehicle_name": "UT HTRZ / CRA TIF",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.97,
-    "tree_capital_cost_usd": 1520,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Utah Code § 59-2-103 (45% Primary Res Exemption) & § 17C (CRA / TIF)",
+    "statutory_citation": "Utah Code \u00a7 59-2-103 (45% Primary Res Exemption) & \u00a7 17C (CRA / TIF)",
     "source_url": "https://le.utah.gov/xcode/Title59/Chapter2/59-2-S103.html",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'the fair market value of residential property located within the state is allowed a reside'; homestead_exemption_rule: 'allowed a residential exemption equal to a 45% reduction in the value of the property'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "corrected",
+        "source_url": "https://le.utah.gov/xcode/Title59/Chapter2/C59-2-S103_2024050120240501.pdf",
+        "quote": "the fair market value of residential property located within the state is allowed a residential exemption equal to a 45% reduction in the value of the property",
+        "checked_on": "2026-11-16",
+        "note": "Corrected from 0.55: the record also carried the 45% exemption, so the calculator applied it twice. Ratio is fair market value; the 45% is the exemption."
+      },
+      "homestead_exemption_rule": {
+        "status": "confirmed",
+        "source_url": "https://le.utah.gov/xcode/Title59/Chapter2/C59-2-S103_2024050120240501.pdf",
+        "quote": "allowed a residential exemption equal to a 45% reduction in the value of the property",
+        "checked_on": "2026-11-16",
+        "note": ""
+      }
     }
   },
   "VT": {
@@ -1641,12 +1655,8 @@
       "type": "none",
       "amount_or_pct": 0
     },
-    "tif_vehicle_name": "VT TIF (24 VSA § 1891)",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.03,
-    "tree_capital_cost_usd": 1615,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Vt. Stat. Ann. tit. 32, § 3481 (100% FMV / 1% Grand List) & tit. 24, § 1891 (TIF)",
+    "tif_vehicle_name": "VT TIF (24 VSA \u00a7 1891)",
+    "statutory_citation": "Vt. Stat. Ann. tit. 32, \u00a7 3481 (100% FMV / 1% Grand List) & tit. 24, \u00a7 1891 (TIF)",
     "source_url": "https://legislature.vermont.gov/statutes/section/32/121/03481",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -1657,13 +1667,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "VA": {
@@ -1678,28 +1688,32 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "VA TIF / CDA",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.98,
-    "tree_capital_cost_usd": 1535,
-    "climate_energy_regime": "mixed_temperate",
-    "statutory_citation": "Va. Code Ann. § 58.1-3201 (100% FMV) & § 58.1-3245 (TIF)",
+    "statutory_citation": "Va. Code Ann. \u00a7 58.1-3201 (100% FMV) & \u00a7 58.1-3245 (TIF)",
     "source_url": "https://law.lis.virginia.gov/vacode/title58.1/chapter32/section58.1-3201/",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'shall be made at 100 percent fair market value'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "confirmed",
+        "source_url": "https://law.lis.virginia.gov/vacode/title58.1/chapter32/section58.1-3201/",
+        "quote": "shall be made at 100 percent fair market value",
+        "checked_on": "2026-11-16",
+        "note": ""
+      }
     }
   },
   "WA": {
@@ -1714,11 +1728,7 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "WA TIF (RCW 39.114) / MFTE",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.16,
-    "tree_capital_cost_usd": 1820,
-    "climate_energy_regime": "mixed_temperate",
-    "statutory_citation": "Wash. Rev. Code § 84.41.030 (Annual Revaluation), § 84.55.010 & § 39.114 (TIF)",
+    "statutory_citation": "Wash. Rev. Code \u00a7 84.41.030 (Annual Revaluation), \u00a7 84.55.010 & \u00a7 39.114 (TIF)",
     "source_url": "https://app.leg.wa.gov/rcw/default.aspx?cite=84.55.010",
     "retrieved": "2026-11-15",
     "last_verified": "2026-11-16",
@@ -1727,16 +1737,12 @@
       "status": "partially_verified",
       "method": "RCW 84.55.010 (app.leg.wa.gov) read; RCW 84.41.030 page returned only site chrome",
       "checked_on": "2026-11-16",
-      "evidence": "RCW 84.55 is a levy (revenue) limit, not an assessed-value cap — consistent with annual_assessment_cap = null",
+      "evidence": "RCW 84.55 is a levy (revenue) limit, not an assessed-value cap \u2014 consistent with annual_assessment_cap = null",
       "unverified_fields": [
-        "reassessment_cycle_years (RCW 84.41.030 text not retrieved)",
-        "homestead_exemption_rule 'none' (senior/disabled exemptions exist but were not checked)",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": ""
+      "notes": "Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "WV": {
@@ -1750,29 +1756,33 @@
       "type": "none",
       "amount_or_pct": 0
     },
-    "tif_vehicle_name": "WV TIF (W. Va. Code § 7-11B-1)",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.96,
-    "tree_capital_cost_usd": 1505,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "W. Va. Code § 11-3-1 (60% Assessment Ratio) & § 7-11B (Property TIF Act)",
+    "tif_vehicle_name": "WV TIF (W. Va. Code \u00a7 7-11B-1)",
+    "statutory_citation": "W. Va. Code \u00a7 11-3-1 (60% Assessment Ratio) & \u00a7 7-11B (Property TIF Act)",
     "source_url": "https://code.wvlegislature.gov/11-3-1/",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'shall be assessed annually as of July 1 at sixty percent of its true and actual value'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "confirmed",
+        "source_url": "https://code.wvlegislature.gov/11-3-1/",
+        "quote": "shall be assessed annually as of July 1 at sixty percent of its true and actual value",
+        "checked_on": "2026-11-16",
+        "note": ""
+      }
     }
   },
   "WI": {
@@ -1786,12 +1796,8 @@
       "type": "none",
       "amount_or_pct": 0
     },
-    "tif_vehicle_name": "WI TID (Wis. Stat. § 66.1105)",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.04,
-    "tree_capital_cost_usd": 1630,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Wis. Stat. § 70.05 (100% Full Market Value) & § 66.1105 (TID / TIF Law)",
+    "tif_vehicle_name": "WI TID (Wis. Stat. \u00a7 66.1105)",
+    "statutory_citation": "Wis. Stat. \u00a7 70.05 (100% Full Market Value) & \u00a7 66.1105 (TID / TIF Law)",
     "source_url": "https://docs.legis.wisconsin.gov/statutes/statutes/66/xi/1105",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -1802,13 +1808,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   },
   "WY": {
@@ -1823,28 +1829,32 @@
       "amount_or_pct": 0
     },
     "tif_vehicle_name": "WY Urban Renewal TIF",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 0.95,
-    "tree_capital_cost_usd": 1490,
-    "climate_energy_regime": "heating_dominant",
-    "statutory_citation": "Wyo. Stat. Ann. § 39-13-103 (9.5% Res Ratio, 2024 HB 45 4% Cap) & § 15-9 (TIF)",
+    "statutory_citation": "Wyo. Stat. Ann. \u00a7 39-13-103 (9.5% Res Ratio, 2024 HB 45 4% Cap) & \u00a7 15-9 (TIF)",
     "source_url": "https://wyoleg.gov/statutes/compress/title39.pdf",
     "retrieved": "2026-11-15",
     "last_verified": null,
     "verified_by": null,
     "verification": {
-      "status": "unverified",
-      "method": "Not checked in this audit beyond a reachability test of source_url (HTTP 200)",
+      "status": "partially_verified",
+      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
       "checked_on": "2026-11-16",
-      "evidence": "",
+      "evidence": "res_assessment_ratio: 'All other property, real and personal ... nine and one-half percent (9.5%)'",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+    },
+    "field_evidence": {
+      "res_assessment_ratio": {
+        "status": "confirmed",
+        "source_url": "https://wyoleg.gov/statutes/compress/title39.pdf",
+        "quote": "All other property, real and personal ... nine and one-half percent (9.5%)",
+        "checked_on": "2026-11-16",
+        "note": ""
+      }
     }
   },
   "PR": {
@@ -1859,11 +1869,7 @@
       "amount_or_pct": 15000
     },
     "tif_vehicle_name": "PR CRIM / Opportunity Zones",
-    "non_pledgeable_share": 0,
-    "rsmeans_cost_multiplier": 1.08,
-    "tree_capital_cost_usd": 1695,
-    "climate_energy_regime": "cooling_dominant",
-    "statutory_citation": "21 L.P.R.A. § 5001 (CRIM Municipal Revenue Collection Center)",
+    "statutory_citation": "21 L.P.R.A. \u00a7 5001 (CRIM Municipal Revenue Collection Center)",
     "source_url": "https://portal.crimpr.net/",
     "retrieved": "2026-11-15",
     "last_verified": null,
@@ -1874,13 +1880,13 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all statutory fields",
-        "rsmeans_cost_multiplier (RSMeans is a proprietary index; no source given; value unverified)",
-        "tree_capital_cost_usd (no source given)",
-        "climate_energy_regime (no source given)",
-        "non_pledgeable_share (no source given)"
+        "res_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule"
       ],
-      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified."
+      "notes": "Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
     }
   }
 }

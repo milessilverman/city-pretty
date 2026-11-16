@@ -24,7 +24,7 @@ export interface CountyDataCompleteness {
 
 export interface StateFinanceProfile {
   state_code: string;
-  res_assessment_ratio: number;         // e.g., 1.00 (CA/TX), 0.10 (AL/LA), 0.35 (NV/OH), 0.40 (GA)
+  res_assessment_ratio: number | null;  // e.g., 1.00 (CA/TX), 0.40 (GA); null where no single ratio exists (IA, MN)
   comm_assessment_ratio: number;
   annual_assessment_cap: number | null; // e.g., 0.02 (CA Prop 13), 0.03 (FL SOH / OR M50), 0.10 (TX), null (annual market)
   uncaps_on_sale: boolean;              // true in CA/MI/FL/NM; false in OR (Measure 50)
@@ -34,10 +34,12 @@ export interface StateFinanceProfile {
     amount_or_pct: number;              // e.g., 7500 (LA assessed = $75k market), 0.45 (UT), 0.01 (IN circuit breaker)
   };
   tif_vehicle_name: string;             // e.g., "CA EIFD", "TX TIRZ", "FL CRA", "IL TIF", "OH TIF (HB 920)"
-  non_pledgeable_share: number;         // e.g., 0.47 (CA schools/ERAF), 0.40 (MN Fiscal Disparities C/I), 0.0
-  rsmeans_cost_multiplier: number;      // Relative to national 1.00 baseline (LA = 1.24, SF = 1.62, TX = 0.91)
-  tree_capital_cost_usd: number;        // Regional procurement + planting + 3-yr establishment
-  climate_energy_regime: "cooling_dominant" | "heating_dominant" | "mixed_temperate" | "arid_irrigation_limited";
+  // non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd and climate_energy_regime were removed on
+  // 2026-11-16: no state had a source for them (docs/audit/laws-finance-audit.md, round 2).
+  reassessment_increase_cap?: number | null; // e.g., SC 15% per five-year reassessment
+  tax_bill_growth_cap?: number | null;       // e.g., NV 3% on owner-occupied single-family tax bills
+  verification?: { status: string; unverified_fields?: string[]; [k: string]: unknown };
+  field_evidence?: Record<string, { status: string; source_url: string; quote: string; checked_on: string; note?: string }>;
 }
 
 export interface StatutoryZoningResult {

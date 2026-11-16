@@ -328,5 +328,30 @@ test("house panel shows live public records with links, from the agencies (respo
   expect(text!.text).toContain("2 bed $1,852");
   expect(text!.text).toContain("Zone AE");
   expect(text!.links.some((l) => l.includes("hazards.fema.gov"))).toBe(true);
+
+test("tax-increment section: California computes from the roll; Texas says which rules are unverified", async ({ page }) => {
+  const errors = await openPage(page);
+  const la = await page.evaluate(() => {
+    const w = window as any;
+    const id = w.D.bgs.features.find((f: any) => ((w.D.details[f.properties.id] || {}).m || {}).e)?.properties.id || w.D.bgs.features[0].properties.id;
+    w.select(id, false);
+    const t = (document.querySelector("#panel") as HTMLElement).textContent || "";   // the calculator sits in a closed <details>
+    return { t, out: (document.querySelector("#e-out") as HTMLElement | null)?.textContent || "" };
+  });
+  expect(la.t).toContain("EIFD calculator");
+  expect(la.out).toMatch(/Bond capacity|Not computed/);
+  for (const bad of ["AAA Muni", "High Velocity", "Rate Lock-in", "estimated as 55% of market value", "Tax shares are placeholders"]) expect(la.t).not.toContain(bad);
+
+  await page.click("#county-pick-btn");
+  await page.fill("#county-q", "travis");
+  await page.keyboard.press("Enter");
+  await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "48453", null, { timeout: 60_000 });
+  const tx = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s);
+    ev("select")(ev("D_OC").features[0].properties.id, false);
+    return (document.querySelector("#panel") as HTMLElement).textContent || "";
+  });
+  expect(tx).toMatch(/Not computed: Texas tax rules not verified yet \(/);
+  expect(tx).not.toMatch(/Bond capacity\s*\$/);
   expect(errors).toEqual([]);
 });

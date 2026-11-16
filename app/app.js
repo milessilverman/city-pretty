@@ -58,7 +58,7 @@ const DEFAULT_CA_PROFILE = {
   retrieved: "2026-11-15",
   last_verified: "2026-11-15",
   // Placeholder until app/data/state_finance_profiles.json loads; the file's record (with verification) replaces it.
-  verification: { status: "partially_verified", unverified_fields: ["non_pledgeable_share", "rsmeans_cost_multiplier", "tree_capital_cost_usd", "climate_energy_regime"] }
+  verification: { status: "partially_verified", unverified_fields: ["uncaps_on_sale", "reassessment_cycle_years"] }
 };
 
 let STATE_FINANCE_PROFILES = { CA: DEFAULT_CA_PROFILE };
@@ -127,107 +127,9 @@ const COUNTY_COMPLETENESS_INDEX = {};
 // Filled from app/data/ca_counties_registry.json. Its rows are hand-entered and marked verification.status "unverified".
 const CA_COUNTIES_REGISTRY = {};
 
-/**
- * Municipal Finance Engine (ES6 / Browser & Node compatible)
- * Generalized multi-state TIF/EIFD/TIRZ/CRA bonding capacity and tax-increment model.
- */
-function calculateTaxIncrementCapacity(input) {
-  const {
-    profile,
-    baselineMarketValueUsd,
-    effectiveMillageRate,
-    annualMarketAppreciation,
-    historicalTurnoverRate,
-    newConstructionAnnualUsd,
-    affordableExemptUnitsShare,
-    affordableExemptionPct,
-    localPledgeShare,
-    bondTermYears,
-    bondInterestRate,
-    dscr,
-  } = input;
-
-  const notes = [];
-
-  // 1. Apply state residential/commercial assessment ratio
-  let initialTaxable = baselineMarketValueUsd * profile.res_assessment_ratio;
-
-  // 2. Apply homestead or primary residence exemptions
-  const hs = profile.homestead_exemption_rule;
-  if (hs.type === "flat_assessed") {
-    initialTaxable = Math.max(0, initialTaxable - hs.amount_or_pct);
-    notes.push(`Applied flat assessed exemption of $${hs.amount_or_pct.toLocaleString()}`);
-  } else if (hs.type === "flat_market") {
-    initialTaxable = Math.max(0, (baselineMarketValueUsd - hs.amount_or_pct) * profile.res_assessment_ratio);
-  } else if (hs.type === "percent_market") {
-    initialTaxable = initialTaxable * (1 - hs.amount_or_pct);
-    notes.push(`Applied ${(hs.amount_or_pct * 100).toFixed(0)}% primary-residence exemption`);
-  }
-
-  let currentTaxable = initialTaxable;
-  let totalPvNetIncrement = 0;
-  let year10AnnualIncrementUsd = 0;
-
-  const effectiveTurnover = profile.uncaps_on_sale ? historicalTurnoverRate : 0;
-
-  for (let year = 1; year <= bondTermYears; year++) {
-    const isReassessmentYear = year % profile.reassessment_cycle_years === 0;
-
-    if (profile.annual_assessment_cap === null) {
-      // Uncapped states (e.g., TX commercial, CO, WA, NE): steps up on reassessment cycle
-      if (isReassessmentYear) {
-        const cycleGrowth = Math.pow(1 + annualMarketAppreciation, profile.reassessment_cycle_years) - 1;
-        currentTaxable = currentTaxable * (1 + cycleGrowth);
-      }
-    } else {
-      // Capped states (CA Prop 13 2%, FL SOH 3%, OR M50 3%, TX 10% HS, MI Proposal A)
-      const cappedGrowth = Math.min(annualMarketAppreciation, profile.annual_assessment_cap);
-      const retainedPool = currentTaxable * (1 - effectiveTurnover) * (1 + cappedGrowth);
-      const uncappedPool = currentTaxable * effectiveTurnover * (1 + annualMarketAppreciation);
-      currentTaxable = retainedPool + uncappedPool;
-    }
-
-    // Add new construction assessed value
-    currentTaxable += newConstructionAnnualUsd * profile.res_assessment_ratio;
-
-    // Deduct statutory affordable housing tax exemptions (e.g., FL Live Local § 196.1979)
-    const statutoryExemptDeduction =
-      currentTaxable * affordableExemptUnitsShare * affordableExemptionPct;
-    const netTaxable = Math.max(0, currentTaxable - statutoryExemptDeduction);
-
-    const taxableIncrement = Math.max(0, netTaxable - initialTaxable);
-    let grossTaxIncrement = taxableIncrement * effectiveMillageRate;
-
-    // Indiana Constitutional Circuit Breaker adjustment
-    if (hs.type === "circuit_breaker" && effectiveMillageRate > hs.amount_or_pct) {
-      const compressionRatio = hs.amount_or_pct / effectiveMillageRate;
-      grossTaxIncrement *= compressionRatio;
-      if (year === 1) notes.push("Compressed by statutory property-tax circuit breaker cap");
-    }
-
-    const pledgeableIncrement =
-      grossTaxIncrement * (1 - profile.non_pledgeable_share) * localPledgeShare;
-
-    if (year === 10) {
-      year10AnnualIncrementUsd = pledgeableIncrement;
-    }
-
-    const debtServiceAvailable = pledgeableIncrement / dscr;
-    totalPvNetIncrement += debtServiceAvailable / Math.pow(1 + bondInterestRate, year);
-  }
-
-  return {
-    vehicleName: profile.tif_vehicle_name,
-    initialTaxableValueUsd: Math.round(initialTaxable),
-    year10AnnualIncrementUsd: Math.round(year10AnnualIncrementUsd),
-    maxBondCapacityUsd: Math.round(totalPvNetIncrement),
-    notes,
-  };
-}
-
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = { calculateTaxIncrementCapacity };
-}
+// The generic multi-state tax-increment model lives in src/engines/municipalFinanceEngine.ts. It refuses to compute
+// unless every state rule it uses is confirmed (financeProfileGate). The page computes bond capacity only for
+// California EIFDs, from the Assessor roll and the Auditor's apportionment factors.
 
 
 /**
@@ -3376,7 +3278,8 @@ function fundPlan(r, gid) {
   if (!isCAActive()) return null;   // the plan is built on a California EIFD; not modelled for other states
   const m = (D.details[gid] || {}).m || {}, p = (byId.get(gid) || { properties: {} }).properties;
   const uninc = /^Unincorporated/i.test(p.c || "") || / \(unincorporated\)$/.test(p.c || "") || p.c === "Los Angeles County";
-  const sh = m.e && m.e.sh ? m.e.sh : [uninc ? 0 : 0.20, 0.24];
+  if (!(m.e && m.e.sh)) return null;   // no Auditor apportionment factors here: no funding plan (no stand-in shares)
+  const sh = m.e.sh;
   const A = FUND_ASSUME, cityK = sh[0] * A.cityPledge, cntyK = sh[1] * (uninc ? A.countyPledgeUninc : A.countyPledge);
   const ann = (1 - Math.pow(1 + A.rate, -A.years)) / A.rate;
   let y10 = 0, tot = 0, cityTot = 0, cntyTot = 0;
@@ -6460,6 +6363,14 @@ function eifdArea(p, scope) {
   const sh = shav > 0 ? shw.map(x => x / shav) : null;
   return { n: fs.length, withRoll: n, mv, homes, av, avr, avc, np, ry, sh, tras: [...tras].sort((a, b) => b[1] - a[1]), ex: [...ex] };
 }
+// Which of the state rules the tax-increment model uses are not confirmed in app/data/state_finance_profiles.json.
+const FINANCE_CALC_FIELDS = ["res_assessment_ratio", "annual_assessment_cap", "uncaps_on_sale", "reassessment_cycle_years", "homestead_exemption_rule"];
+function financeGateMissing(pf) {
+  if (!pf || !pf.verification) return FINANCE_CALC_FIELDS.slice();
+  const uf = pf.verification.unverified_fields || [];
+  // A confirmed null assessment cap means "no cap"; any other null or a listed field means "not confirmed".
+  return FINANCE_CALC_FIELDS.filter(f => uf.some(u => String(u).split(/[\s(]/)[0] === f) || pf[f] === undefined || (pf[f] === null && f !== "annual_assessment_cap"));
+}
 function eifdSection(p, m) {
   const stCode = (typeof activeState === "function" ? activeState() : "CA");
   const profile = STATE_FINANCE_PROFILES[stCode] || STATE_FINANCE_PROFILES["CA"];
@@ -6476,10 +6387,14 @@ function eifdSection(p, m) {
       ${pf ? `<p class="small">
         ${confirmed("annual_assessment_cap") ? `Annual assessment cap: <b>${(pf.annual_assessment_cap * 100).toFixed(0)}%</b>. ` : ""}
         ${confirmed("res_assessment_ratio") ? `Residential assessment ratio: <b>${(pf.res_assessment_ratio * 100).toFixed(1)}%</b>. ` : ""}
+        ${pf.reassessment_increase_cap != null ? `Assessment increases capped at <b>${(pf.reassessment_increase_cap * 100).toFixed(0)}%</b> per reassessment. ` : ""}
+        ${pf.tax_bill_growth_cap != null ? `Owner-occupied home tax bills capped at <b>${(pf.tax_bill_growth_cap * 100).toFixed(0)}%</b> growth a year. ` : ""}
         ${pf.statutory_citation ? `Law: ${esc(pf.statutory_citation)}. ` : ""}
         <span style="color:${vlab.color}">(${vlab.text})</span>
       </p>` : `<p class="small muted">No finance profile on file for this state.</p>`}
-      <p class="small muted">Bond capacity is not modeled for this state yet: local tax rates, pledge shares and growth assumptions are not on file from a source.</p>
+      <p class="small muted">${(() => { const miss = financeGateMissing(pf); return miss.length
+        ? `Not computed: ${esc(activeStateName())} tax rules not verified yet (${miss.map(f => esc(f.replace(/_/g, " "))).join(", ")}).`
+        : `Not computed: ${esc(activeStateName())}'s state rules are confirmed, but local tax rates and pledge shares are not on file from a source.`; })()}</p>
     </div>`;
   }
   const fld = (id, label, val, step, note) => `<label class="small" style="display:grid;grid-template-columns:1fr 110px;gap:8px;align-items:center;margin:4px 0"><span>${label}${note ? ` <span class="muted" id="${id}-n">${note}</span>` : ""}</span><input id="${id}" type="number" step="${step}" value="${val}" style="font:500 13px var(--mono);padding:4px 6px;border:1px solid var(--rule-strong);border-radius:6px;background:var(--ground);color:var(--ink)"></label>`;
@@ -6487,37 +6402,14 @@ function eifdSection(p, m) {
     <p class="small muted">An Enhanced Infrastructure Financing District pledges part of the future growth in the 1% property tax to pay for projects. No vote is needed to form one; since AB 116 (2019) bonds need 3 hearings and fail only on a 50% protest. Schools can't take part. State law has no housing set-aside, but ${activeCounty === "oc" && !isOrangeActive() ? `${esc(countyOf())}'s participation rules (not verified for this county yet) apply when the County joins` : activeCounty === "oc" ? "the County of Orange's EIFD Participation Policy (approved by the Board of Supervisors 4 Jun 2019) sets conditions when the County joins: the city must put in at least as much as the County, the County gives at most 50% of its share for at most 20 years, and the Board must approve (see below)" : "LA County Board Policy 3.106 (revised and approved by the County Audit Committee on 16 Jul 2025, next review 1 Aug 2029; amendments for disaster-recovery districts were directed in October 2025, adoption not verified) sets conditions when the County joins (see below)"}.</p>
     <div class="cat-tabs" role="group" aria-label="EIFD area"><button type="button" data-scope="bg" aria-pressed="true">This block group</button><button type="button" data-scope="hood" aria-pressed="false">All of ${esc(p.n)}</button></div>
     ${fld("e-av", "Base assessed value ($M)", "", 0.1, "")}
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:6px 10px;margin:6px 0;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
-        <span style="font-weight:700;font-size:11px;color:#475569;">Prop 13 Annual Turnover Rate:</span>
-        <span style="font-size:10px;color:#64748b;">(Deed Transfer Frequency)</span>
-      </div>
-      <div style="display:flex;gap:3px;flex-wrap:wrap;">
-        <button type="button" class="story-btn eifd-turnover-btn" data-rate="2.0" onclick="setEifdTurnover(2.0)">2.0% (Rate Lock-in)</button>
-        <button type="button" class="story-btn eifd-turnover-btn" data-rate="3.0" onclick="setEifdTurnover(3.0)">3.0% (Moderate)</button>
-        <button type="button" class="story-btn eifd-turnover-btn active" data-rate="3.5" onclick="setEifdTurnover(3.5)">3.5% (Baseline)</button>
-        <button type="button" class="story-btn eifd-turnover-btn" data-rate="4.5" onclick="setEifdTurnover(4.5)">4.5% (High Velocity)</button>
-      </div>
-    </div>
-    ${fld("e-g", "Yearly value growth (%)", 3.0, 0.1, "2% Prop 13 cap + resales")}
+    ${fld("e-g", "Yearly value growth (%)", 3.0, 0.1, "assumption: 2% Prop 13 cap plus resales; edit")}
     ${fld("e-new", "New development, year 3 ($M)", 0, 1, "")}
     ${fld("e-city", "City share of the 1% tax (%)", "", 0.01, "")}
-    ${fld("e-cp", "City pledge (%)", 75, 5, "Artesia 2026: 75%")}
+    ${fld("e-cp", "City pledge (%)", 75, 5, "example: Artesia 2026, 75% (not re-checked)")}
     ${fld("e-county", "County General share of the 1% tax (%)", "", 0.01, "")}
-    ${fld("e-kp", "County pledge (%)", 49, 1, isOrangeActive() ? "Artesia 49%; OC policy cap 50%" : "Artesia 49%; range 11–50%")}
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:6px 10px;margin:6px 0;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
-        <span style="font-weight:700;font-size:11px;color:#475569;">30-Year Municipal Bond Yield:</span>
-        <span style="font-size:10px;color:#64748b;">(Capital Market Environment)</span>
-      </div>
-      <div style="display:flex;gap:3px;flex-wrap:wrap;">
-        <button type="button" class="story-btn eifd-rate-btn" data-rate="4.25" onclick="setEifdBondYield(4.25)">4.25% (AAA Muni)</button>
-        <button type="button" class="story-btn eifd-rate-btn active" data-rate="5.25" onclick="setEifdBondYield(5.25)">5.25% (Benchmark)</button>
-        <button type="button" class="story-btn eifd-rate-btn" data-rate="6.25" onclick="setEifdBondYield(6.25)">6.25% (High-Rate / Unrated)</button>
-      </div>
-    </div>
-    ${fld("e-rate", "Bond interest rate (%)", 5.25, 0.05, "")}
-    ${fld("e-dscr", "Debt-service coverage (x)", 1.35, 0.05, "")}
+    ${fld("e-kp", "County pledge (%)", 49, 1, isOrangeActive() ? "example: Artesia 49% (not re-checked); OC policy cap 50%" : "example: Artesia 49%; range 11–50% (not re-checked)")}
+    ${fld("e-rate", "Bond interest rate (%)", 5.25, 0.05, "assumption, not a market quote; edit")}
+    ${fld("e-dscr", "Debt-service coverage (x)", 1.35, 0.05, "assumption; edit")}
     <div class="pkg" id="e-out" style="margin-top:10px"></div>
     <div id="e-split"></div>
     <p class="small muted" id="e-note"></p><p class="small" id="e-warn"></p>${isOrangeActive() ? ocEifdNote() : ""}${eifdRegister()}</div>`;
@@ -6543,27 +6435,28 @@ function eifdWire(p) {
   const setAV = () => {
     const a = eifdArea(p, scope), unincorp = /^Unincorporated/i.test(p.c) || / \(unincorporated\)$/.test(p.c || "") || p.c === "Los Angeles County";
     const real = a.withRoll > 0 && a.av > 0;
-    $("#e-av").value = ((real ? a.av : a.mv * 0.55) / 1e6).toFixed(1);
+    $("#e-av").value = real ? (a.av / 1e6).toFixed(1) : "";   // no roll value: left blank for the user, never estimated
     $("#e-av-n") && ($("#e-av-n").textContent = "");
     if (a.sh) { $("#e-city").value = (a.sh[0] * 100).toFixed(2); $("#e-county").value = (a.sh[1] * 100).toFixed(2); }
-    else { $("#e-city").value = unincorp ? 0 : 20; $("#e-county").value = 24; }
+    else { $("#e-city").value = ""; $("#e-county").value = ""; }   // no apportionment factors matched: no stand-in shares
     const split = a.sh ? `<div class="kv small" style="margin-top:8px"><span>City${unincorp ? " (none: unincorporated)" : ""}</span><span>${pct(a.sh[0])}</span><span>County General Fund</span><span>${pct(a.sh[1])}</span><span>Other districts (fire, flood, water, library, parks...)</span><span>${pct(a.sh[2])}</span><span>Schools, colleges and ERAF (can't join an EIFD)</span><span>${pct(a.sh[3])}</span></div>
       ${isOrangeActive() ? `<p class="small muted">Where each $1 of growth in the 1% tax goes here: ${a.tras.length > 1 ? `the main tax-rate areas of ${a.n > 1 ? `these ${a.n} block groups` : "this block group"} (largest: ${a.tras.slice(0, 3).map(([t]) => `TRA ${esc(t)}`).join("; ")}), weighted by market value` : `tax-rate area ${esc((a.tras[0] || [""])[0])}, weighted by land area inside this block group`}. Source: Orange County Auditor-Controller Section 99 factor report by tax-rate area, FY 2026-27 (printed 28 Aug 2026), joined to the State Board of Equalization's 2026 tax-rate-area map. The city share is the city's general fund only; its lighting, sewer and similar funds count under other districts. Special districts can also join; their shares are shown but not pledged in this screen.</p>` : `<p class="small muted">Where each $1 of the 1% tax goes here, weighted by assessed value across ${a.tras.length} tax-rate area${a.tras.length > 1 ? "s" : ""} (largest: ${a.tras.filter(t => t[1] > 0).slice(0, 3).map(([t, x]) => `TRA ${esc(t)}, ${fmt$(x)}`).join("; ")}). Source: LA County Auditor-Controller ${esc((D.eifd || {}).factor_year || "")} Modified ATI ratios (AF49 report), the shares the Auditor uses to split tax increment. Special districts can also join; their shares are shown but not pledged in this screen.</p>`}` : "";
     $("#e-split").innerHTML = split + (a.ex.length ? `<p class="small"><b>Already in a district:</b> part of this area is in the ${a.ex.map(esc).join(" and ")}, so its increment is already pledged there. A new district here would need to avoid or amend it.</p>` : "");
     $("#e-note").textContent = real
       ? `Base value is the net taxable value on the ${a.ry || ""} Assessor roll (land + improvements + fixtures, less exemptions) for ${a.np.toLocaleString()} parcels in ${a.n} block group${a.n > 1 ? "s" : ""}: ${fmt$(a.avr)} residential, ${fmt$(a.avc)} commercial/industrial, the rest other uses. A real district's base is the roll in its formation year. All figures are a screening estimate, not a financing plan.`
-      : `${isOrangeActive() ? "The Orange County Assessor roll is not in this build (the Assessor sells roll data in person only), so the base" : "No Assessor roll value matched this area, so the base"} is estimated as 55% of market value (${a.homes.toLocaleString()} homes). ${a.sh ? "" : "Tax shares are placeholders: no apportionment factors matched. "}All figures are a screening estimate, not a financing plan.`;
+      : `${isOrangeActive() ? "The Orange County Assessor roll is not in this build (the Assessor sells roll data in person only)" : "No Assessor roll value matched this area"}, so no base value is filled in; enter one from the roll to run the calculator. ${a.sh ? "" : "No apportionment factors matched, so the city and County shares are blank too. "}All figures are a screening estimate, not a financing plan.`;
   };
   const run = () => {
     const base = v("e-av") * 1e6, gr = v("e-g") / 100, nd = v("e-new") * 1e6, r = v("e-rate") / 100, dscr = Math.max(v("e-dscr"), 1);
     const cityC = v("e-city") / 100 * v("e-cp") / 100, cntyC = v("e-county") / 100 * v("e-kp") / 100;
     const county = cntyC > 0, capture = cityC + cntyC;
-    const housing = county ? 0.20 : 0, admin = 0.03;
+    if (!(base > 0) || !(capture > 0)) { $("#e-out").innerHTML = `<p class="small muted">Not computed: enter a base assessed value and the city/County shares of the 1% tax (from the Assessor roll and the Auditor's apportionment factors).</p>`; $("#e-warn").innerHTML = ""; return; }
+    const housing = county ? 0.20 : 0, admin = 0.03;   // 20%: County housing condition (Policy 3.106 as summarized above); 3% admin: assumption
     let av = base, tot = 0, y10 = 0;
     for (let t = 1; t <= 30; t++) { av = av * (1 + gr) + (t === 3 ? nd : 0);
       const net = Math.max(0, av - base) * 0.01 * capture * (1 - admin); tot += net; if (t === 10) y10 = net; }
     const bond = r > 0 ? y10 * (1 - housing) / dscr * (1 - Math.pow(1 + r, -30)) / r : y10 * (1 - housing) / dscr * 30;
-    $("#e-out").innerHTML = `${tile("Year-10 increment", fmt$(y10), "per year, after 3% admin")}${tile("30-year total", fmt$(tot), county ? "before the County's housing condition" : "")}${tile("Bond capacity", fmt$(bond), county ? "30-yr, sized on year 10, 20% held for housing" : "30-yr bonds sized on year 10")}`;
+    $("#e-out").innerHTML = `${tile("Year-10 increment", fmt$(y10), "per year, after an assumed 3% admin")}${tile("30-year total", fmt$(tot), county ? "before the County's housing condition" : "")}${tile("Bond capacity", fmt$(bond), county ? "30-yr, sized on year 10, 20% held for housing" : "30-yr bonds sized on year 10")}`;
     const w = [];
     const uninc = v("e-city") === 0;
     if (activeCounty === "oc" && !isOrangeActive()) {
@@ -7313,30 +7206,7 @@ function setRoiMode(mode) {
   showToast(`Valuation Mode: ${mode === "adj" ? "Locally Context-Adjusted ROI" : "Base Hedonic Study ROI"}`);
 }
 
-function setEifdTurnover(rate) {
-  const el = document.getElementById("e-g");
-  if (el) {
-    // 2.0% statutory Prop 13 baseline + (rate - 2.0%) * market appreciation delta
-    el.value = (2.0 + (rate - 2.0) * 0.65).toFixed(2);
-    el.dispatchEvent(new Event("input"));
-  }
-  document.querySelectorAll(".eifd-turnover-btn").forEach(b => {
-    b.classList.toggle("active", parseFloat(b.dataset.rate) === rate);
-  });
-  showToast(`EIFD Turnover: ${rate}% / yr`);
-}
 
-function setEifdBondYield(rate) {
-  const el = document.getElementById("e-rate");
-  if (el) {
-    el.value = rate.toFixed(2);
-    el.dispatchEvent(new Event("input"));
-  }
-  document.querySelectorAll(".eifd-rate-btn").forEach(b => {
-    b.classList.toggle("active", parseFloat(b.dataset.rate) === rate);
-  });
-  showToast(`Muni Bond Yield: ${rate}%`);
-}
 
 function syncHash(id) {
   const params = new URLSearchParams();
