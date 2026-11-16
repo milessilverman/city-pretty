@@ -1044,3 +1044,73 @@ test("a JSONP answer that arrives after its timeout doesn't throw on the page", 
   await page.waitForTimeout(2000);   // the late answer has run by now
   expect(errors).toEqual([]);
 });
+
+test("what fits on this lot uses the NYC Zoning Resolution read from the code, and says 'not on file' elsewhere (live click path)", async ({ page }) => {
+  // app/data/zoning_standards.json (scripts/build_zoning_standards.py): NYC R1-R5 standards parsed from
+  // zr.planning.nyc.gov; MapPLUTO's LandUse decoded from the PLUTO data dictionary. Before 16 Nov 2026 every NYC lot
+  // showed "doesn't record this lot's use" and no zoning standard; outside LA no standard was on file anywhere.
+  const ring = (lat: number, lng: number) => [[lng - 0.0002, lat - 0.0001], [lng + 0.0002, lat - 0.0001], [lng + 0.0002, lat + 0.0001], [lng - 0.0002, lat + 0.0001], [lng - 0.0002, lat - 0.0001]];
+  let pluto: any = {};
+  await page.route(/MAPPLUTO\/FeatureServer\/0\/query/, (route: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
+    body: JSON.stringify({ features: [{ attributes: pluto, geometry: { rings: [ring(40.738, -73.762)] } }] }) }));
+  let travis: any = { PROP_ID: 1, situs_address: "1 TEST ST" };
+  await page.route(/TCAD_public\/MapServer\/0\/query/, (route: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
+    body: JSON.stringify({ features: [{ attributes: travis, geometry: { rings: [ring(30.3014, -97.7224)] } }] }) }));
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { try { return !!(0, eval)("ZONING_STANDARDS") && !!(0, eval)("PARCEL_USE_CODES"); } catch { return false; } }, null, { timeout: 30_000 });
+  const houseText = async (fips: string, ll: { lat: number; lng: number }) => {
+    await page.evaluate((f) => (0, eval)("openCounty")(f), fips);
+    await page.waitForFunction((f) => (window as any).D_OC?.meta?.fips === f, fips, { timeout: 60_000 });
+    await page.evaluate((p) => (0, eval)("houseAt")(p), ll);
+    await page.waitForFunction(() => { const b = document.querySelector("#house"); return !!b && !b.querySelector(".house-loading") && /Zoning district|Local zoning standards|Home upgrades/.test(b.innerText); }, null, { timeout: 30_000 });
+    return page.evaluate(() => (document.querySelector("#house") as HTMLElement).innerText);
+  };
+
+  // A one-family house in R2A on a 6,000 sq ft lot (Queens).
+  pluto = { BBL: 4000010001, Borough: "QN", Block: 1, Lot: 1, Address: "1 TEST STREET", LandUse: "01", BldgClass: "A1", ZoneDist1: "R2A", LotArea: 6000, LotFront: 60, BldgArea: 2000, UnitsRes: 1, NumFloors: 1, YearBuilt: 1950 };
+  const q = await houseText("36081", { lat: 40.738, lng: -73.762 });
+  expect(q).toContain("One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)");
+  expect(q).not.toContain("doesn't record this lot's use");
+  expect(q).toContain("Zoning district R2A (New York City Zoning Resolution)");
+  expect(q).toContain("limited to single-family detached residences (ZR 22-122)");
+  expect(q).toContain("2,850 sq ft and 30 ft wide (ZR 23-11)");
+  expect(q).toContain("Up to 4,500 sq ft of floor area on this 6,000 sq ft lot (FAR 0.75, ZR 23-21)");
+  expect(q).toContain("no single home may exceed 3,600 sq ft (FAR 0.60)");
+  expect(q).toContain("about 2,500 sq ft remain");
+  expect(q).toMatch(/Second home \(two-family or more\)\s*—\s*R2A is limited to single-family detached residences/);
+  expect(q).toContain("Ancillary dwelling unit (ADU, up to 800 sq ft)");
+  expect(q).toContain("and in R2A only inside the Greater Transit Zone");
+  expect(q).toContain("At 6,000 sq ft and 60 ft of frontage the lot is at least twice the minimum");
+  expect(q).toContain("Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421)");
+  expect(q).not.toContain("Duplex, middle housing or lot split");
+  expect(q).not.toContain("Local zoning standards");
+
+  // A two-family house in R4B on a small lot (Brooklyn): two-family allowed, 25 ft height, lot too small to split.
+  pluto = { BBL: 3000010001, Borough: "BK", Block: 1, Lot: 1, Address: "2 TEST STREET", LandUse: "01", BldgClass: "B1", ZoneDist1: "R4B", LotArea: 2000, LotFront: 20, BldgArea: 1800, UnitsRes: 2, NumFloors: 2, YearBuilt: 1930 };
+  const b = await houseText("36047", { lat: 40.738, lng: -73.762 });
+  expect(b).toContain("Zoning district R4B");
+  expect(b).toContain("A two-family home is an allowed type here");
+  expect(b).toContain("Height: up to 25 ft (ZR 23-422)");
+  expect(b).toContain("is smaller, which may mean it predates the minimum");
+  expect(b).toContain("Two lots would each need at least 2,375 sq ft and 25 ft of width");
+
+  // A district not encoded (R6) says so; a commercial lot (LandUse 05) gets no home checks.
+  pluto = { ...pluto, ZoneDist1: "R6", LandUse: "02", UnitsRes: 6 };
+  const r6 = await houseText("36047", { lat: 40.738, lng: -73.762 });
+  expect(r6).toMatch(/Local zoning standards\s*—\s*Not on file: New York City's standards are on file only for R1-1/);
+  expect(r6).toContain("this lot is R6");
+  pluto = { ...pluto, ZoneDist1: "C4-4", LandUse: "05" };
+  const c = await houseText("36047", { lat: 40.738, lng: -73.762 });
+  expect(c).toContain("This parcel is Commercial & Office Buildings (PLUTO Data Dictionary, LandUse 05)");
+  expect(c).not.toContain("Detached ADU");   // "non-residential" used to match /resid/ and get the home checks
+
+  // Outside NYC: Austin's code could not be read (Municode bot check), and the panel says so.
+  const tx = await houseText("48453", { lat: 30.3014, lng: -97.7224 });
+  expect(tx).toMatch(/Local zoning standards\s*—\s*Not on file: No local zoning standards are on file here\. Austin: .*Municode/);
+  // A worded non-residential use from the service is not given home checks either.
+  travis = { PROP_ID: 2, situs_address: "2 TEST ST", LAND_USE: "OFFICE BUILDING" };
+  const txOffice = await houseText("48453", { lat: 30.3014, lng: -97.7224 });
+  expect(txOffice).toContain("This parcel is OFFICE BUILDING, so residential homeowner checks do not apply");
+  expect(txOffice).not.toContain("Detached ADU");
+  expect(errors).toEqual([]);
+});
