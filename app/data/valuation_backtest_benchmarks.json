@@ -1303,6 +1303,172 @@
     "evidence": "data/backtests/county_model_test_36085.json"
    }
   },
+  "42003": {
+   "_status": "backtest_run",
+   "countyFips": "42003",
+   "countyName": "Allegheny County",
+   "model_name": "county_sales_regression",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_42003_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_42003.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": [
+    "WPRDC 5bbe6c55-bce6-4edb-9d04-68edeb6bf7b1 (Property Sale Transactions)",
+    "WPRDC 65855e14-549e-4992-b5be-d629afc676fa (Property Assessments)",
+    "WPRDC 3fab7152-3f11-4788-8372-4c33f86ea813 (Parcel Centroids March 2025)"
+   ],
+   "filters": [
+    "SALECODE '0' = 'VALID SALE' (county validity code)",
+    "instrument DEED",
+    "price >= $25,000",
+    "assessment: CLASS R, USEDESC SINGLE FAMILY, one card, living area >= 400 sq ft, year built not after the sale, bedroom and full-bath counts present"
+   ],
+   "split": {
+    "fit": [
+     "2023-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-04-30"
+    ],
+    "test": [
+     "2026-05-01",
+     "2026-09-30"
+    ]
+   },
+   "locked": {
+    "spec": "regression",
+    "locked_on": "2026-11-16",
+    "why": "Best development median error: regression 15.4% (1163 sales) vs neighborhood $/sqft x size 16.9% and neighborhood median 20.0%. No assessor value used. Even if it passes, the page cannot run it: its Allegheny parcel layer has only the parcel ID and acreage, and WPRDC's API sends no cross-origin header.",
+    "dev_mdape": {
+     "neighborhood_median": 0.2003,
+     "neighborhood_ppsf_x_sqft": 0.1685,
+     "regression": 0.154
+    }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 2232,
+    "excluded": 3,
+    "mdape": 0.1627,
+    "mape": 0.2079,
+    "median_signed_error": -0.0944,
+    "share_within_10pct": 0.3168,
+    "share_within_20pct": 0.6057,
+    "p80_abs_error": 0.2954
+   },
+   "baseline_neighborhood_median": {
+    "n": 2232,
+    "excluded": 3,
+    "mdape": 0.2171,
+    "mape": 0.2869,
+    "median_signed_error": -0.0936,
+    "share_within_10pct": 0.2563,
+    "share_within_20pct": 0.4745,
+    "p80_abs_error": 0.412
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": false,
+    "reason": "median error 16.3% is above the 15% limit"
+   },
+   "by_price_band": {
+    "under $500k": {
+     "n": 1786,
+     "excluded": 0,
+     "mdape": 0.1628,
+     "mape": 0.2108,
+     "median_signed_error": -0.0797,
+     "share_within_10pct": 0.3208,
+     "share_within_20pct": 0.6137,
+     "p80_abs_error": 0.2901
+    },
+    "$500k-$1M": {
+     "n": 370,
+     "excluded": 0,
+     "mdape": 0.1489,
+     "mape": 0.1795,
+     "median_signed_error": -0.1246,
+     "share_within_10pct": 0.3216,
+     "share_within_20pct": 0.6297,
+     "p80_abs_error": 0.2937
+    },
+    "$1M-$2M": {
+     "n": 64,
+     "excluded": 0,
+     "mdape": 0.2463,
+     "mape": 0.2406,
+     "median_signed_error": -0.2434,
+     "share_within_10pct": 0.2344,
+     "share_within_20pct": 0.3438,
+     "p80_abs_error": 0.3829
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 2232,
+     "excluded": 3,
+     "mdape": 0.2171,
+     "mape": 0.2869,
+     "median_signed_error": -0.0936,
+     "share_within_10pct": 0.2563,
+     "share_within_20pct": 0.4745,
+     "p80_abs_error": 0.412
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 2232,
+     "excluded": 3,
+     "mdape": 0.1706,
+     "mape": 0.2341,
+     "median_signed_error": -0.0899,
+     "share_within_10pct": 0.2953,
+     "share_within_20pct": 0.5677,
+     "p80_abs_error": 0.3171
+    },
+    "assessor_ratio": {
+     "n": 0,
+     "excluded": 2235,
+     "mdape": null,
+     "mape": null,
+     "median_signed_error": null,
+     "share_within_10pct": null,
+     "share_within_20pct": null,
+     "p80_abs_error": null
+    },
+    "regression": {
+     "n": 2232,
+     "excluded": 3,
+     "mdape": 0.1627,
+     "mape": 0.2079,
+     "median_signed_error": -0.0944,
+     "share_within_10pct": 0.3168,
+     "share_within_20pct": 0.6057,
+     "p80_abs_error": 0.2954
+    },
+    "regression_with_assessor": {
+     "n": 0,
+     "excluded": 2235,
+     "mdape": null,
+     "mape": null,
+     "median_signed_error": null,
+     "share_within_10pct": null,
+     "share_within_20pct": null,
+     "p80_abs_error": null
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 0
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_42003.json"
+   }
+  },
   "42101": {
    "_status": "backtest_run",
    "countyFips": "42101",
