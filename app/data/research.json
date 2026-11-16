@@ -1701,18 +1701,18 @@
   "takeaway": null,
   "citation": "Ganduri, R. & Maturana, G. (2024). Do property rehabs affect neighboring property prices? Journal of Urban Economics.",
   "doi": "10.1016/j.jue.2024.103694",
-  "source_url": "https://doi.org/10.1016/j.jue.2024.103694",
+  "source_url": "https://doi.org/10.2139/ssrn.3794796",
   "last_verified": "2026-11-16",
   "verification": {
    "status": "verified",
    "method": "Crossref metadata (JUE and SSRN 3794796 versions); abstract via Semantic Scholar 2026-11-16",
    "checked_on": "2026-11-16",
-   "evidence": "We find that house prices around a rehabilitated property increase between 2.3 and 4.0 percentage points following the rehabilitation.",
+   "evidence": "SSRN working-paper version (doi 10.2139/ssrn.3794796), abstract via Semantic Scholar API (api.semanticscholar.org/graph/v1/paper/DOI:10.2139/ssrn.3794796), re-checked 2026-11-16: \"We find that house prices around a rehabilitated property increase between 2.3 and 4.0 percentage points following the rehabilitation.\"",
    "unverified_fields": [
     "vpd",
     "takeaway"
    ],
-   "notes": "Added in catalog round 4."
+   "notes": "Added in catalog round 4. The published Journal of Urban Economics version (doi 10.1016/j.jue.2024.103694) was not readable from the audit machine; its wording was not checked."
   }
  }
 ]
