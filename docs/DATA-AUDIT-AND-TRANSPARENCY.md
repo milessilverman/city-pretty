@@ -385,6 +385,14 @@ more than 10 points; 2,169 traffic-calming rows were dropped (no pedestrian/cycl
 never dropped. San Francisco's comparison is now recomputed from its DataSF counts, within the county (not pooled with LA's CCRS counts). The pipeline now uses the same
 10 m boundary rule.
 
+### Correction: three "shown" estimates were not shown (found and fixed 16 Nov)
+
+The 16 Nov report said Queens, Staten Island and Hillsborough estimates were shown on the page. They were not: the
+page's parcel lookup dropped the service's own field names and requested only the first 8 fields, so the live page
+always withheld them for "missing inputs". Their parity tests fed raw fields straight to the model and never went
+through the live lookup, so nothing caught it. Fixed, with a browser test of the real lookup path. The earlier claim
+was made from a test that didn't cover the live page.
+
 ## 3. What was built to keep it accurate
 
 - **Machine pulls instead of typing:** `scripts/fetch_hud_fmr.py` (HUD rents for every county) and
