@@ -549,3 +549,99 @@ test("DC: the page computes exactly the back-tested model, and shows its tested 
   expect(cook.withheldReason).toContain("18.6%");
   expect(errors).toEqual([]);
 });
+
+test("NYC: Queens and Staten Island compute exactly the back-tested PLUTO model; Brooklyn, Bronx and Manhattan are withheld", async ({ page }) => {
+  const fs = require("fs"), path = require("path"), zlib = require("zlib");
+  const root = path.join(__dirname, "../..");
+  // @ts-ignore plain ES module
+  const M = await import("../../scripts/lib/countyValuationModels.mjs");
+  const allModels = JSON.parse(fs.readFileSync(path.join(root, "app/data/county_valuation_models.json"), "utf8")).counties;
+  const toMap = (o: any) => new Map(Object.entries(o).map(([k, v]: any) => [k, { n: v[0], median: v[1], ppsf: v[2], d0: v[3], d1: v[4], ids: new Set() }]));
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { try { return !!(0, eval)("COUNTY_VALUATION_MODELS") && !!(0, eval)("VALUATION_BACKTEST_BENCHMARKS"); } catch { return false; } }, null, { timeout: 30_000 });
+  for (const fips of ["36081", "36085"]) {
+    const cfg = JSON.parse(fs.readFileSync(path.join(root, "scripts/backtests/county_config.json"), "utf8"))[fips];
+    const data = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root, cfg.sales_file))).toString());
+    const rows = data.rows.filter((r: any) => r.date >= cfg.test[0] && r.date <= cfg.test[1]).slice(0, 150);
+    const C = allModels[fips];
+    const p = M.predictor(C.model, { bg: toMap(C.stats.bg), tract: toMap(C.stats.tract) });
+    const expected = rows.map((r: any) => p(r));
+    // MapPLUTO field names, exactly as the page's parcel layer returns them
+    const attrs = (r: any) => ({ BldgArea: r.sqft, LotArea: r.lot, YearBuilt: r.yb, UnitsRes: r.units });
+    const got = await page.evaluate(([f, rs]: any) => rs.map((x: any) => (0, eval)("countyModelEstimate")(f, x.a, x.bg).raw || null), [fips, rows.map((r: any) => ({ a: attrs(r), bg: r.bg }))]);
+    let compared = 0;
+    rows.forEach((r: any, i: number) => {
+      if (expected[i] == null) { expect(got[i]).toBeNull(); return; }
+      expect(Math.abs(got[i] / expected[i] - 1)).toBeLessThan(1e-9);
+      compared++;
+    });
+    expect(compared).toBeGreaterThan(100);
+  }
+  const si = await page.evaluate(() => (window as any).publishValuation({ estimatedValue: 1, livingSqft: 1500 }, "36085", { attributes: { BldgArea: 1500, LotArea: 4000, YearBuilt: 1975, UnitsRes: 1 }, bg: Object.keys((0, eval)("COUNTY_VALUATION_MODELS").counties["36085"].stats.bg)[0] }));
+  expect(si.estimatedValue).toBeGreaterThan(10000);
+  expect(si.confidenceRating).toMatch(/^Back-tested estimate: off by a median of 13\.1% on [\d,]+ Richmond County/);
+  // A three-family lot is outside what was tested: withheld with the reason
+  const three = await page.evaluate(() => (window as any).countyModelEstimate("36085", { BldgArea: 2500, LotArea: 3000, YearBuilt: 1960, UnitsRes: 3 }, null));
+  expect(three.value).toBeNull();
+  expect(three.reason).toMatch(/one- or two-family/);
+  for (const [f, pct] of [["36047", "18.1%"], ["36005", "17.9%"]]) {   // Bronx 0.1785: the page rounds half up
+    const w = await page.evaluate((x: string) => (window as any).publishValuation({ estimatedValue: 500000 }, x, {}), f);
+    expect(w.estimatedValue).toBeNull();
+    expect(w.withheldReason).toContain(pct);
+  }
+  const mn = await page.evaluate(() => (window as any).publishValuation({ estimatedValue: 500000 }, "36061", {}));
+  expect(mn.estimatedValue).toBeNull();
+  expect(errors).toEqual([]);
+});
+
+test("Hillsborough FL: the page computes exactly the back-tested model from the statewide parcel fields, only on the 2026 roll and use code 001", async ({ page }) => {
+  const fs = require("fs"), path = require("path"), zlib = require("zlib");
+  const root = path.join(__dirname, "../..");
+  // @ts-ignore plain ES module
+  const M = await import("../../scripts/lib/countyValuationModels.mjs");
+  const C = JSON.parse(fs.readFileSync(path.join(root, "app/data/county_valuation_models.json"), "utf8")).counties["12057"];
+  const toMap = (o: any) => new Map(Object.entries(o).map(([k, v]: any) => [k, { n: v[0], median: v[1], ppsf: v[2], d0: v[3], d1: v[4], ids: new Set() }]));
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { try { return !!(0, eval)("COUNTY_VALUATION_MODELS") && !!(0, eval)("VALUATION_BACKTEST_BENCHMARKS"); } catch { return false; } }, null, { timeout: 30_000 });
+  const cfg = JSON.parse(fs.readFileSync(path.join(root, "scripts/backtests/county_config.json"), "utf8"))["12057"];
+  const data = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root, cfg.sales_file))).toString());
+  const rows = data.rows.filter((r: any) => r.date >= cfg.test[0] && r.date <= cfg.test[1]).slice(0, 200);
+  const p = M.predictor(C.model, { bg: toMap(C.stats.bg), tract: toMap(C.stats.tract) });
+  const expected = rows.map((r: any) => p(r));
+  // Florida statewide cadastral field names, exactly as the page's parcel layer returns them
+  const attrs = (r: any) => ({ TOT_LVG_AR: r.sqft, LND_SQFOOT: r.lot, ACT_YR_BLT: r.yb, NO_RES_UNT: r.units, JV: r.av, ASMNT_YR: 2026, DOR_UC: "001" });
+  const got = await page.evaluate((rs: any) => rs.map((x: any) => (0, eval)("countyModelEstimate")("12057", x.a, x.bg).raw || null), rows.map((r: any) => ({ a: attrs(r), bg: r.bg })));
+  let compared = 0;
+  rows.forEach((r: any, i: number) => {
+    if (expected[i] == null) { expect(got[i]).toBeNull(); return; }
+    expect(Math.abs(got[i] / expected[i] - 1)).toBeLessThan(1e-9);
+    compared++;
+  });
+  expect(compared).toBeGreaterThan(150);
+  const bg = Object.keys(C.stats.bg)[0];
+  const base = { TOT_LVG_AR: 1800, LND_SQFOOT: 7500, ACT_YR_BLT: 1995, NO_RES_UNT: 1, JV: 350000, ASMNT_YR: 2026, DOR_UC: "001" };
+  const v = await page.evaluate(([a, b]: any) => (window as any).publishValuation({ estimatedValue: 1, livingSqft: 1800 }, "12057", { attributes: a, bg: b }), [base, bg]);
+  expect(v.estimatedValue).toBeGreaterThan(10000);
+  expect(v.confidenceRating).toMatch(/^Back-tested estimate: off by a median of 9\.7% on [\d,]+ Hillsborough County/);
+  // A just value from another roll, or a parcel that isn't a single-family home, is outside what was tested
+  const oldRoll = await page.evaluate(([a, b]: any) => (window as any).countyModelEstimate("12057", { ...a, ASMNT_YR: 2025 }, b), [base, bg]);
+  expect(oldRoll.value).toBeNull();
+  expect(oldRoll.reason).toMatch(/2026 roll/);
+  const condo = await page.evaluate(([a, b]: any) => (window as any).countyModelEstimate("12057", { ...a, DOR_UC: "004" }, b), [base, bg]);
+  expect(condo.value).toBeNull();
+  expect(condo.reason).toMatch(/use code 001/);
+  expect(errors).toEqual([]);
+});
+
+test("King County passed but is withheld because the page's parcel layer lacks the input; Allegheny failed and is withheld", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { try { return !!(0, eval)("COUNTY_VALUATION_MODELS") && !!(0, eval)("VALUATION_BACKTEST_BENCHMARKS"); } catch { return false; } }, null, { timeout: 30_000 });
+  const king = await page.evaluate(() => (window as any).publishValuation({ estimatedValue: 900000, livingSqft: 2000 }, "53033", { attributes: { PIN: "8682250170", ZONING: "R6" }, bg: "530330001001" }));
+  expect(king.estimatedValue).toBeNull();
+  expect(king.withheldReason).toContain("8.8%");
+  expect(king.withheldReason).toMatch(/zoning layer/);
+  const al = await page.evaluate(() => (window as any).publishValuation({ estimatedValue: 300000 }, "42003", {}));
+  expect(al.estimatedValue).toBeNull();
+  expect(al.withheldReason).toContain("16.3%");
+  expect(errors).toEqual([]);
+});

@@ -173,6 +173,185 @@
     "evidence": "data/backtests/county_model_test_11001.json"
    }
   },
+  "12057": {
+   "_status": "backtest_run",
+   "countyFips": "12057",
+   "countyName": "Hillsborough County",
+   "model_name": "county_sales_regression_no_rooms_with_assessor",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_12057_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_12057.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": [
+    "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/SDF/2026F/Hillsborough%2039%20Final%20SDF%202026.zip (Florida DOR SDF, 2026 Final roll: sales 2025-2026, QUAL_CD)",
+    "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAL/2026F/Hillsborough%2039%20Final%20NAL%202026.zip (Florida DOR NAL, 2026 Final roll: characteristics and just value as of 1 Jan 2026)",
+    "https://floridarevenue.com/property/dataportal/Documents/PTO Data Portal/User Guides/2026 Users guide and quick reference/2026_NAL_SDF_NAP_Users_Guide.pdf (QUAL_CD definitions)"
+   ],
+   "filters": [
+    "QUAL_CD 01 or 02 (DOR: qualified as arm's length, included in sales ratio analysis)",
+    "not a multi-parcel sale",
+    "price >= $25,000",
+    "DOR use code 001, one residential unit, living area >= 400 sq ft, year built not after the sale year",
+    "sale dated to the 1st of its month (SDF has year and month only)"
+   ],
+   "split": {
+    "fit": [
+     "2025-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-03-31"
+    ],
+    "test": [
+     "2026-04-01",
+     "2026-08-31"
+    ]
+   },
+   "locked": {
+    "spec": "regression_no_rooms_with_assessor",
+    "locked_on": "2026-11-16",
+    "why": "Best development median error: regression with the 1 Jan 2026 just value 7.7% (2606 sales) vs just value x sales ratio 8.0%, regression without it 10.8%, neighborhood median 17.8%. Caveat: the just value is as of 1 January (s. 192.042, F.S.) but certified later in 2026; the test starts in April to keep later sales out of the appraiser reach, and the regression without it is recorded alongside.",
+    "dev_mdape": {
+     "neighborhood_median": 0.1779,
+     "neighborhood_ppsf_x_sqft": 0.1135,
+     "assessor_ratio": 0.0797,
+     "regression_no_rooms": 0.1078,
+     "regression_no_rooms_with_assessor": 0.0772
+    }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 7637,
+    "excluded": 17,
+    "mdape": 0.097,
+    "mape": 0.1519,
+    "median_signed_error": 0.0036,
+    "share_within_10pct": 0.5108,
+    "share_within_20pct": 0.7832,
+    "p80_abs_error": 0.2096
+   },
+   "baseline_neighborhood_median": {
+    "n": 7637,
+    "excluded": 17,
+    "mdape": 0.201,
+    "mape": 0.3146,
+    "median_signed_error": 0.025,
+    "share_within_10pct": 0.2824,
+    "share_within_20pct": 0.4976,
+    "p80_abs_error": 0.45
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": true,
+    "reason": null
+   },
+   "by_price_band": {
+    "under $500k": {
+     "n": 5180,
+     "excluded": 0,
+     "mdape": 0.1019,
+     "mape": 0.169,
+     "median_signed_error": 0.0293,
+     "share_within_10pct": 0.4929,
+     "share_within_20pct": 0.7587,
+     "p80_abs_error": 0.2292
+    },
+    "$500k-$1M": {
+     "n": 1916,
+     "excluded": 0,
+     "mdape": 0.0816,
+     "mape": 0.1063,
+     "median_signed_error": -0.0338,
+     "share_within_10pct": 0.5882,
+     "share_within_20pct": 0.8664,
+     "p80_abs_error": 0.1643
+    },
+    "$1M-$2M": {
+     "n": 419,
+     "excluded": 0,
+     "mdape": 0.121,
+     "mape": 0.1468,
+     "median_signed_error": -0.1071,
+     "share_within_10pct": 0.42,
+     "share_within_20pct": 0.7422,
+     "p80_abs_error": 0.2261
+    },
+    "$2M and up": {
+     "n": 122,
+     "excluded": 0,
+     "mdape": 0.1336,
+     "mape": 0.1628,
+     "median_signed_error": -0.1274,
+     "share_within_10pct": 0.3689,
+     "share_within_20pct": 0.6557,
+     "p80_abs_error": 0.2477
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 7637,
+     "excluded": 17,
+     "mdape": 0.201,
+     "mape": 0.3146,
+     "median_signed_error": 0.025,
+     "share_within_10pct": 0.2824,
+     "share_within_20pct": 0.4976,
+     "p80_abs_error": 0.45
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 7637,
+     "excluded": 17,
+     "mdape": 0.1277,
+     "mape": 0.2059,
+     "median_signed_error": 0.0263,
+     "share_within_10pct": 0.4109,
+     "share_within_20pct": 0.6823,
+     "p80_abs_error": 0.2783
+    },
+    "assessor_ratio": {
+     "n": 7654,
+     "excluded": 0,
+     "mdape": 0.1012,
+     "mape": 0.1548,
+     "median_signed_error": 0.0037,
+     "share_within_10pct": 0.4952,
+     "share_within_20pct": 0.7757,
+     "p80_abs_error": 0.2161
+    },
+    "regression_no_rooms": {
+     "n": 7637,
+     "excluded": 17,
+     "mdape": 0.1208,
+     "mape": 0.1964,
+     "median_signed_error": 0.0248,
+     "share_within_10pct": 0.4291,
+     "share_within_20pct": 0.7033,
+     "p80_abs_error": 0.2662
+    },
+    "regression_no_rooms_with_assessor": {
+     "n": 7637,
+     "excluded": 17,
+     "mdape": 0.097,
+     "mape": 0.1519,
+     "median_signed_error": 0.0036,
+     "share_within_10pct": 0.5108,
+     "share_within_20pct": 0.7832,
+     "p80_abs_error": 0.2096
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 0
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_12057.json"
+   }
+  },
   "17031": {
    "_status": "backtest_run",
    "countyFips": "17031",
@@ -344,6 +523,952 @@
     "evidence": "data/backtests/county_model_test_17031.json"
    }
   },
+  "36005": {
+   "_status": "backtest_run",
+   "countyFips": "36005",
+   "countyName": "Bronx County",
+   "model_name": "county_sales_regression_pluto",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_36005_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_36005.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": [
+    "https://data.cityofnewyork.us/resource/w2pb-icbu (NYC DOF Annualized Calendar Sales, 2023-2025)",
+    "https://data.cityofnewyork.us/resource/usep-8jbt (NYC DOF Rolling Sales, 2026)",
+    "https://data.cityofnewyork.us/resource/64uk-42ks (NYC DCP PLUTO 26v2: bldgarea, lotarea, yearbuilt, unitsres, bctcb2020)"
+   ],
+   "filters": [
+    "building class category 01 or 02 at sale",
+    "sale price >= $25,000 (DOF glossary: a $0 sale is a transfer without cash consideration)",
+    "same date and price on more than one lot in the same tax block dropped (package sales)",
+    "PLUTO: 1-2 residential units, building area >= 400 sq ft, year built not after the sale year"
+   ],
+   "split": {
+    "fit": [
+     "2023-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-04-30"
+    ],
+    "test": [
+     "2026-05-01",
+     "2026-09-30"
+    ]
+   },
+   "locked": {
+    "spec": "regression_pluto",
+    "locked_on": "2026-11-16",
+    "why": "Best development median error: regression on PLUTO inputs 16.0% (484 sales) vs neighborhood median 18.4% and $/sqft x size 18.1%. Room-based models not offered: NYC PLUTO and DOF sales have no bedroom or bathroom counts, so the page could not supply them.",
+    "dev_mdape": {
+     "neighborhood_median": 0.1843,
+     "neighborhood_ppsf_x_sqft": 0.1806,
+     "regression_pluto": 0.1598
+    }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 668,
+    "excluded": 35,
+    "mdape": 0.1785,
+    "mape": 0.3025,
+    "median_signed_error": -0.0722,
+    "share_within_10pct": 0.2904,
+    "share_within_20pct": 0.5689,
+    "p80_abs_error": 0.3133
+   },
+   "baseline_neighborhood_median": {
+    "n": 668,
+    "excluded": 35,
+    "mdape": 0.2,
+    "mape": 0.3294,
+    "median_signed_error": -0.0679,
+    "share_within_10pct": 0.2844,
+    "share_within_20pct": 0.503,
+    "p80_abs_error": 0.3953
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": false,
+    "reason": "median error 17.8% is above the 15% limit"
+   },
+   "by_price_band": {
+    "$500k-$1M": {
+     "n": 494,
+     "excluded": 0,
+     "mdape": 0.1425,
+     "mape": 0.1546,
+     "median_signed_error": -0.0775,
+     "share_within_10pct": 0.3623,
+     "share_within_20pct": 0.7024,
+     "p80_abs_error": 0.2294
+    },
+    "$1M-$2M": {
+     "n": 86,
+     "excluded": 0,
+     "mdape": 0.2503,
+     "mape": 0.2671,
+     "median_signed_error": -0.2503,
+     "share_within_10pct": 0.093,
+     "share_within_20pct": 0.2558,
+     "p80_abs_error": 0.3608
+    },
+    "under $500k": {
+     "n": 80,
+     "excluded": 0,
+     "mdape": 0.5942,
+     "mape": 1.2538,
+     "median_signed_error": 0.5942,
+     "share_within_10pct": 0.0625,
+     "share_within_20pct": 0.1,
+     "p80_abs_error": 1.4923
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 668,
+     "excluded": 35,
+     "mdape": 0.2,
+     "mape": 0.3294,
+     "median_signed_error": -0.0679,
+     "share_within_10pct": 0.2844,
+     "share_within_20pct": 0.503,
+     "p80_abs_error": 0.3953
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 668,
+     "excluded": 35,
+     "mdape": 0.2203,
+     "mape": 0.3516,
+     "median_signed_error": -0.0691,
+     "share_within_10pct": 0.2455,
+     "share_within_20pct": 0.4551,
+     "p80_abs_error": 0.3948
+    },
+    "assessor_ratio": {
+     "n": 0,
+     "excluded": 703,
+     "mdape": null,
+     "mape": null,
+     "median_signed_error": null,
+     "share_within_10pct": null,
+     "share_within_20pct": null,
+     "p80_abs_error": null
+    },
+    "regression_pluto": {
+     "n": 668,
+     "excluded": 35,
+     "mdape": 0.1785,
+     "mape": 0.3025,
+     "median_signed_error": -0.0722,
+     "share_within_10pct": 0.2904,
+     "share_within_20pct": 0.5689,
+     "p80_abs_error": 0.3133
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 0
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_36005.json"
+   }
+  },
+  "36047": {
+   "_status": "backtest_run",
+   "countyFips": "36047",
+   "countyName": "Kings County (Brooklyn)",
+   "model_name": "county_sales_regression_pluto",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_36047_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_36047.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": [
+    "https://data.cityofnewyork.us/resource/w2pb-icbu (NYC DOF Annualized Calendar Sales, 2023-2025)",
+    "https://data.cityofnewyork.us/resource/usep-8jbt (NYC DOF Rolling Sales, 2026)",
+    "https://data.cityofnewyork.us/resource/64uk-42ks (NYC DCP PLUTO 26v2: bldgarea, lotarea, yearbuilt, unitsres, bctcb2020)"
+   ],
+   "filters": [
+    "building class category 01 or 02 at sale",
+    "sale price >= $25,000 (DOF glossary: a $0 sale is a transfer without cash consideration)",
+    "same date and price on more than one lot in the same tax block dropped (package sales)",
+    "PLUTO: 1-2 residential units, building area >= 400 sq ft, year built not after the sale year"
+   ],
+   "split": {
+    "fit": [
+     "2023-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-04-30"
+    ],
+    "test": [
+     "2026-05-01",
+     "2026-09-30"
+    ]
+   },
+   "locked": {
+    "spec": "regression_pluto",
+    "locked_on": "2026-11-16",
+    "why": "Best development median error: regression on PLUTO inputs 17.4% (1394 sales) vs neighborhood median 20.8% and $/sqft x size 21.3%. Room-based models not offered: NYC PLUTO and DOF sales have no bedroom or bathroom counts, so the page could not supply them.",
+    "dev_mdape": {
+     "neighborhood_median": 0.2081,
+     "neighborhood_ppsf_x_sqft": 0.2125,
+     "regression_pluto": 0.1737
+    }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 1783,
+    "excluded": 39,
+    "mdape": 0.1813,
+    "mape": 0.3946,
+    "median_signed_error": -0.0854,
+    "share_within_10pct": 0.2838,
+    "share_within_20pct": 0.5491,
+    "p80_abs_error": 0.3737
+   },
+   "baseline_neighborhood_median": {
+    "n": 1783,
+    "excluded": 39,
+    "mdape": 0.2087,
+    "mape": 0.436,
+    "median_signed_error": -0.0769,
+    "share_within_10pct": 0.2619,
+    "share_within_20pct": 0.4857,
+    "p80_abs_error": 0.4173
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": false,
+    "reason": "median error 18.1% is above the 15% limit"
+   },
+   "by_price_band": {
+    "$500k-$1M": {
+     "n": 665,
+     "excluded": 0,
+     "mdape": 0.1285,
+     "mape": 0.2234,
+     "median_signed_error": -0.0146,
+     "share_within_10pct": 0.4015,
+     "share_within_20pct": 0.6917,
+     "p80_abs_error": 0.273
+    },
+    "$1M-$2M": {
+     "n": 626,
+     "excluded": 0,
+     "mdape": 0.1622,
+     "mape": 0.1865,
+     "median_signed_error": -0.1098,
+     "share_within_10pct": 0.2923,
+     "share_within_20pct": 0.631,
+     "p80_abs_error": 0.2793
+    },
+    "$2M and up": {
+     "n": 401,
+     "excluded": 0,
+     "mdape": 0.2885,
+     "mape": 0.3008,
+     "median_signed_error": -0.2776,
+     "share_within_10pct": 0.1322,
+     "share_within_20pct": 0.2993,
+     "p80_abs_error": 0.439
+    },
+    "under $500k": {
+     "n": 91,
+     "excluded": 0,
+     "mdape": 1.3123,
+     "mape": 3.4897,
+     "median_signed_error": 1.3123,
+     "share_within_10pct": 0.033,
+     "share_within_20pct": 0.044,
+     "p80_abs_error": 4.3553
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 1783,
+     "excluded": 39,
+     "mdape": 0.2087,
+     "mape": 0.436,
+     "median_signed_error": -0.0769,
+     "share_within_10pct": 0.2619,
+     "share_within_20pct": 0.4857,
+     "p80_abs_error": 0.4173
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 1783,
+     "excluded": 39,
+     "mdape": 0.2209,
+     "mape": 0.4291,
+     "median_signed_error": -0.0776,
+     "share_within_10pct": 0.2417,
+     "share_within_20pct": 0.4616,
+     "p80_abs_error": 0.4248
+    },
+    "assessor_ratio": {
+     "n": 0,
+     "excluded": 1822,
+     "mdape": null,
+     "mape": null,
+     "median_signed_error": null,
+     "share_within_10pct": null,
+     "share_within_20pct": null,
+     "p80_abs_error": null
+    },
+    "regression_pluto": {
+     "n": 1783,
+     "excluded": 39,
+     "mdape": 0.1813,
+     "mape": 0.3946,
+     "median_signed_error": -0.0854,
+     "share_within_10pct": 0.2838,
+     "share_within_20pct": 0.5491,
+     "p80_abs_error": 0.3737
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 0
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_36047.json"
+   }
+  },
+  "36061": {
+   "_status": "backtest_run",
+   "countyFips": "36061",
+   "countyName": "New York County (Manhattan)",
+   "model_name": "county_sales_regression_pluto",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_36061_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_36061.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": [
+    "https://data.cityofnewyork.us/resource/w2pb-icbu (NYC DOF Annualized Calendar Sales, 2023-2025)",
+    "https://data.cityofnewyork.us/resource/usep-8jbt (NYC DOF Rolling Sales, 2026)",
+    "https://data.cityofnewyork.us/resource/64uk-42ks (NYC DCP PLUTO 26v2: bldgarea, lotarea, yearbuilt, unitsres, bctcb2020)"
+   ],
+   "filters": [
+    "building class category 01 or 02 at sale",
+    "sale price >= $25,000 (DOF glossary: a $0 sale is a transfer without cash consideration)",
+    "same date and price on more than one lot in the same tax block dropped (package sales)",
+    "PLUTO: 1-2 residential units, building area >= 400 sq ft, year built not after the sale year"
+   ],
+   "split": {
+    "fit": [
+     "2023-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-04-30"
+    ],
+    "test": [
+     "2026-05-01",
+     "2026-09-30"
+    ]
+   },
+   "locked": {
+    "spec": "regression_pluto",
+    "locked_on": "2026-11-16",
+    "why": "Best development median error: regression on PLUTO inputs 23.8% (37 sales) vs neighborhood median 29.2% and $/sqft x size 27.7%. Room-based models not offered: NYC PLUTO and DOF sales have no bedroom or bathroom counts, so the page could not supply them.",
+    "dev_mdape": {
+     "neighborhood_median": 0.2919,
+     "neighborhood_ppsf_x_sqft": 0.2774,
+     "regression_pluto": 0.2382
+    }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 56,
+    "excluded": 34,
+    "mdape": 0.2244,
+    "mape": 0.3816,
+    "median_signed_error": 0.0795,
+    "share_within_10pct": 0.1786,
+    "share_within_20pct": 0.4286,
+    "p80_abs_error": 0.4644
+   },
+   "baseline_neighborhood_median": {
+    "n": 56,
+    "excluded": 34,
+    "mdape": 0.3403,
+    "mape": 0.5677,
+    "median_signed_error": 0.1496,
+    "share_within_10pct": 0.0714,
+    "share_within_20pct": 0.3036,
+    "p80_abs_error": 0.6986
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": false,
+    "reason": "fewer than 200 test sales"
+   },
+   "by_price_band": {
+    "$2M and up": {
+     "n": 48,
+     "excluded": 0,
+     "mdape": 0.2173,
+     "mape": 0.352,
+     "median_signed_error": 0.0795,
+     "share_within_10pct": 0.1458,
+     "share_within_20pct": 0.4375,
+     "p80_abs_error": 0.4644
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 56,
+     "excluded": 34,
+     "mdape": 0.3403,
+     "mape": 0.5677,
+     "median_signed_error": 0.1496,
+     "share_within_10pct": 0.0714,
+     "share_within_20pct": 0.3036,
+     "p80_abs_error": 0.6986
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 56,
+     "excluded": 34,
+     "mdape": 0.2221,
+     "mape": 0.4183,
+     "median_signed_error": 0.0289,
+     "share_within_10pct": 0.2321,
+     "share_within_20pct": 0.4643,
+     "p80_abs_error": 0.5639
+    },
+    "assessor_ratio": {
+     "n": 0,
+     "excluded": 90,
+     "mdape": null,
+     "mape": null,
+     "median_signed_error": null,
+     "share_within_10pct": null,
+     "share_within_20pct": null,
+     "p80_abs_error": null
+    },
+    "regression_pluto": {
+     "n": 56,
+     "excluded": 34,
+     "mdape": 0.2244,
+     "mape": 0.3816,
+     "median_signed_error": 0.0795,
+     "share_within_10pct": 0.1786,
+     "share_within_20pct": 0.4286,
+     "p80_abs_error": 0.4644
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 0
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_36061.json"
+   }
+  },
+  "36081": {
+   "_status": "backtest_run",
+   "countyFips": "36081",
+   "countyName": "Queens County",
+   "model_name": "county_sales_regression_pluto",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_36081_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_36081.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": [
+    "https://data.cityofnewyork.us/resource/w2pb-icbu (NYC DOF Annualized Calendar Sales, 2023-2025)",
+    "https://data.cityofnewyork.us/resource/usep-8jbt (NYC DOF Rolling Sales, 2026)",
+    "https://data.cityofnewyork.us/resource/64uk-42ks (NYC DCP PLUTO 26v2: bldgarea, lotarea, yearbuilt, unitsres, bctcb2020)"
+   ],
+   "filters": [
+    "building class category 01 or 02 at sale",
+    "sale price >= $25,000 (DOF glossary: a $0 sale is a transfer without cash consideration)",
+    "same date and price on more than one lot in the same tax block dropped (package sales)",
+    "PLUTO: 1-2 residential units, building area >= 400 sq ft, year built not after the sale year"
+   ],
+   "split": {
+    "fit": [
+     "2023-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-04-30"
+    ],
+    "test": [
+     "2026-05-01",
+     "2026-09-30"
+    ]
+   },
+   "locked": {
+    "spec": "regression_pluto",
+    "locked_on": "2026-11-16",
+    "why": "Best development median error: regression on PLUTO inputs 14.9% (2156 sales) vs neighborhood median 17.4% and $/sqft x size 18.3%. Room-based models not offered: NYC PLUTO and DOF sales have no bedroom or bathroom counts, so the page could not supply them.",
+    "dev_mdape": {
+     "neighborhood_median": 0.1742,
+     "neighborhood_ppsf_x_sqft": 0.1829,
+     "regression_pluto": 0.149
+    }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 2863,
+    "excluded": 38,
+    "mdape": 0.1497,
+    "mape": 0.3146,
+    "median_signed_error": -0.0704,
+    "share_within_10pct": 0.3458,
+    "share_within_20pct": 0.6312,
+    "p80_abs_error": 0.2898
+   },
+   "baseline_neighborhood_median": {
+    "n": 2863,
+    "excluded": 38,
+    "mdape": 0.1739,
+    "mape": 0.3405,
+    "median_signed_error": -0.0667,
+    "share_within_10pct": 0.2934,
+    "share_within_20pct": 0.5557,
+    "p80_abs_error": 0.3638
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": true,
+    "reason": null
+   },
+   "by_price_band": {
+    "$500k-$1M": {
+     "n": 1623,
+     "excluded": 0,
+     "mdape": 0.1222,
+     "mape": 0.1555,
+     "median_signed_error": -0.0366,
+     "share_within_10pct": 0.4245,
+     "share_within_20pct": 0.7425,
+     "p80_abs_error": 0.2307
+    },
+    "$1M-$2M": {
+     "n": 950,
+     "excluded": 0,
+     "mdape": 0.162,
+     "mape": 0.1721,
+     "median_signed_error": -0.1557,
+     "share_within_10pct": 0.3074,
+     "share_within_20pct": 0.6095,
+     "p80_abs_error": 0.2635
+    },
+    "under $500k": {
+     "n": 230,
+     "excluded": 0,
+     "mdape": 0.992,
+     "mape": 2.0154,
+     "median_signed_error": 0.992,
+     "share_within_10pct": 0.0348,
+     "share_within_20pct": 0.0609,
+     "p80_abs_error": 2.5532
+    },
+    "$2M and up": {
+     "n": 60,
+     "excluded": 0,
+     "mdape": 0.351,
+     "mape": 0.354,
+     "median_signed_error": -0.351,
+     "share_within_10pct": 0.0167,
+     "share_within_20pct": 0.15,
+     "p80_abs_error": 0.4974
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 2863,
+     "excluded": 38,
+     "mdape": 0.1739,
+     "mape": 0.3405,
+     "median_signed_error": -0.0667,
+     "share_within_10pct": 0.2934,
+     "share_within_20pct": 0.5557,
+     "p80_abs_error": 0.3638
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 2863,
+     "excluded": 38,
+     "mdape": 0.1895,
+     "mape": 0.3591,
+     "median_signed_error": -0.0715,
+     "share_within_10pct": 0.2766,
+     "share_within_20pct": 0.5246,
+     "p80_abs_error": 0.3625
+    },
+    "assessor_ratio": {
+     "n": 0,
+     "excluded": 2901,
+     "mdape": null,
+     "mape": null,
+     "median_signed_error": null,
+     "share_within_10pct": null,
+     "share_within_20pct": null,
+     "p80_abs_error": null
+    },
+    "regression_pluto": {
+     "n": 2863,
+     "excluded": 38,
+     "mdape": 0.1497,
+     "mape": 0.3146,
+     "median_signed_error": -0.0704,
+     "share_within_10pct": 0.3458,
+     "share_within_20pct": 0.6312,
+     "p80_abs_error": 0.2898
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 0
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_36081.json"
+   }
+  },
+  "36085": {
+   "_status": "backtest_run",
+   "countyFips": "36085",
+   "countyName": "Richmond County (Staten Island)",
+   "model_name": "county_sales_regression_pluto",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_36085_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_36085.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": [
+    "https://data.cityofnewyork.us/resource/w2pb-icbu (NYC DOF Annualized Calendar Sales, 2023-2025)",
+    "https://data.cityofnewyork.us/resource/usep-8jbt (NYC DOF Rolling Sales, 2026)",
+    "https://data.cityofnewyork.us/resource/64uk-42ks (NYC DCP PLUTO 26v2: bldgarea, lotarea, yearbuilt, unitsres, bctcb2020)"
+   ],
+   "filters": [
+    "building class category 01 or 02 at sale",
+    "sale price >= $25,000 (DOF glossary: a $0 sale is a transfer without cash consideration)",
+    "same date and price on more than one lot in the same tax block dropped (package sales)",
+    "PLUTO: 1-2 residential units, building area >= 400 sq ft, year built not after the sale year"
+   ],
+   "split": {
+    "fit": [
+     "2023-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-04-30"
+    ],
+    "test": [
+     "2026-05-01",
+     "2026-09-30"
+    ]
+   },
+   "locked": {
+    "spec": "regression_pluto",
+    "locked_on": "2026-11-16",
+    "why": "Best development median error: regression on PLUTO inputs 12.6% (1083 sales) vs neighborhood median 17.4% and $/sqft x size 17.9%. Room-based models not offered: NYC PLUTO and DOF sales have no bedroom or bathroom counts, so the page could not supply them.",
+    "dev_mdape": {
+     "neighborhood_median": 0.1738,
+     "neighborhood_ppsf_x_sqft": 0.1787,
+     "regression_pluto": 0.1255
+    }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 1173,
+    "excluded": 1,
+    "mdape": 0.131,
+    "mape": 0.2455,
+    "median_signed_error": -0.0922,
+    "share_within_10pct": 0.3717,
+    "share_within_20pct": 0.711,
+    "p80_abs_error": 0.242
+   },
+   "baseline_neighborhood_median": {
+    "n": 1173,
+    "excluded": 1,
+    "mdape": 0.1679,
+    "mape": 0.3052,
+    "median_signed_error": -0.0744,
+    "share_within_10pct": 0.3078,
+    "share_within_20pct": 0.5772,
+    "p80_abs_error": 0.3484
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": true,
+    "reason": null
+   },
+   "by_price_band": {
+    "$500k-$1M": {
+     "n": 833,
+     "excluded": 0,
+     "mdape": 0.1107,
+     "mape": 0.1288,
+     "median_signed_error": -0.0858,
+     "share_within_10pct": 0.449,
+     "share_within_20pct": 0.8151,
+     "p80_abs_error": 0.1933
+    },
+    "$1M-$2M": {
+     "n": 219,
+     "excluded": 0,
+     "mdape": 0.1915,
+     "mape": 0.1943,
+     "median_signed_error": -0.1878,
+     "share_within_10pct": 0.1963,
+     "share_within_20pct": 0.5297,
+     "p80_abs_error": 0.2739
+    },
+    "under $500k": {
+     "n": 109,
+     "excluded": 0,
+     "mdape": 0.3882,
+     "mape": 1.2258,
+     "median_signed_error": 0.3882,
+     "share_within_10pct": 0.1743,
+     "share_within_20pct": 0.3394,
+     "p80_abs_error": 1.5951
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 1173,
+     "excluded": 1,
+     "mdape": 0.1679,
+     "mape": 0.3052,
+     "median_signed_error": -0.0744,
+     "share_within_10pct": 0.3078,
+     "share_within_20pct": 0.5772,
+     "p80_abs_error": 0.3484
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 1173,
+     "excluded": 1,
+     "mdape": 0.1854,
+     "mape": 0.3035,
+     "median_signed_error": -0.0924,
+     "share_within_10pct": 0.2779,
+     "share_within_20pct": 0.5337,
+     "p80_abs_error": 0.3544
+    },
+    "assessor_ratio": {
+     "n": 0,
+     "excluded": 1174,
+     "mdape": null,
+     "mape": null,
+     "median_signed_error": null,
+     "share_within_10pct": null,
+     "share_within_20pct": null,
+     "p80_abs_error": null
+    },
+    "regression_pluto": {
+     "n": 1173,
+     "excluded": 1,
+     "mdape": 0.131,
+     "mape": 0.2455,
+     "median_signed_error": -0.0922,
+     "share_within_10pct": 0.3717,
+     "share_within_20pct": 0.711,
+     "p80_abs_error": 0.242
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 0
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_36085.json"
+   }
+  },
+  "42003": {
+   "_status": "backtest_run",
+   "countyFips": "42003",
+   "countyName": "Allegheny County",
+   "model_name": "county_sales_regression",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_42003_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_42003.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": [
+    "WPRDC 5bbe6c55-bce6-4edb-9d04-68edeb6bf7b1 (Property Sale Transactions)",
+    "WPRDC 65855e14-549e-4992-b5be-d629afc676fa (Property Assessments)",
+    "WPRDC 3fab7152-3f11-4788-8372-4c33f86ea813 (Parcel Centroids March 2025)"
+   ],
+   "filters": [
+    "SALECODE '0' = 'VALID SALE' (county validity code)",
+    "instrument DEED",
+    "price >= $25,000",
+    "assessment: CLASS R, USEDESC SINGLE FAMILY, one card, living area >= 400 sq ft, year built not after the sale, bedroom and full-bath counts present"
+   ],
+   "split": {
+    "fit": [
+     "2023-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-04-30"
+    ],
+    "test": [
+     "2026-05-01",
+     "2026-09-30"
+    ]
+   },
+   "locked": {
+    "spec": "regression",
+    "locked_on": "2026-11-16",
+    "why": "Best development median error: regression 15.4% (1163 sales) vs neighborhood $/sqft x size 16.9% and neighborhood median 20.0%. No assessor value used. Even if it passes, the page cannot run it: its Allegheny parcel layer has only the parcel ID and acreage, and WPRDC's API sends no cross-origin header.",
+    "dev_mdape": {
+     "neighborhood_median": 0.2003,
+     "neighborhood_ppsf_x_sqft": 0.1685,
+     "regression": 0.154
+    }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 2232,
+    "excluded": 3,
+    "mdape": 0.1627,
+    "mape": 0.2079,
+    "median_signed_error": -0.0944,
+    "share_within_10pct": 0.3168,
+    "share_within_20pct": 0.6057,
+    "p80_abs_error": 0.2954
+   },
+   "baseline_neighborhood_median": {
+    "n": 2232,
+    "excluded": 3,
+    "mdape": 0.2171,
+    "mape": 0.2869,
+    "median_signed_error": -0.0936,
+    "share_within_10pct": 0.2563,
+    "share_within_20pct": 0.4745,
+    "p80_abs_error": 0.412
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": false,
+    "reason": "median error 16.3% is above the 15% limit"
+   },
+   "by_price_band": {
+    "under $500k": {
+     "n": 1786,
+     "excluded": 0,
+     "mdape": 0.1628,
+     "mape": 0.2108,
+     "median_signed_error": -0.0797,
+     "share_within_10pct": 0.3208,
+     "share_within_20pct": 0.6137,
+     "p80_abs_error": 0.2901
+    },
+    "$500k-$1M": {
+     "n": 370,
+     "excluded": 0,
+     "mdape": 0.1489,
+     "mape": 0.1795,
+     "median_signed_error": -0.1246,
+     "share_within_10pct": 0.3216,
+     "share_within_20pct": 0.6297,
+     "p80_abs_error": 0.2937
+    },
+    "$1M-$2M": {
+     "n": 64,
+     "excluded": 0,
+     "mdape": 0.2463,
+     "mape": 0.2406,
+     "median_signed_error": -0.2434,
+     "share_within_10pct": 0.2344,
+     "share_within_20pct": 0.3438,
+     "p80_abs_error": 0.3829
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 2232,
+     "excluded": 3,
+     "mdape": 0.2171,
+     "mape": 0.2869,
+     "median_signed_error": -0.0936,
+     "share_within_10pct": 0.2563,
+     "share_within_20pct": 0.4745,
+     "p80_abs_error": 0.412
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 2232,
+     "excluded": 3,
+     "mdape": 0.1706,
+     "mape": 0.2341,
+     "median_signed_error": -0.0899,
+     "share_within_10pct": 0.2953,
+     "share_within_20pct": 0.5677,
+     "p80_abs_error": 0.3171
+    },
+    "assessor_ratio": {
+     "n": 0,
+     "excluded": 2235,
+     "mdape": null,
+     "mape": null,
+     "median_signed_error": null,
+     "share_within_10pct": null,
+     "share_within_20pct": null,
+     "p80_abs_error": null
+    },
+    "regression": {
+     "n": 2232,
+     "excluded": 3,
+     "mdape": 0.1627,
+     "mape": 0.2079,
+     "median_signed_error": -0.0944,
+     "share_within_10pct": 0.3168,
+     "share_within_20pct": 0.6057,
+     "p80_abs_error": 0.2954
+    },
+    "regression_with_assessor": {
+     "n": 0,
+     "excluded": 2235,
+     "mdape": null,
+     "mape": null,
+     "median_signed_error": null,
+     "share_within_10pct": null,
+     "share_within_20pct": null,
+     "p80_abs_error": null
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 0
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_42003.json"
+   }
+  },
   "42101": {
    "_status": "backtest_run",
    "countyFips": "42101",
@@ -505,6 +1630,220 @@
     "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
     "checked_on": "2026-11-16",
     "evidence": "data/backtests/county_model_test_42101.json"
+   }
+  },
+  "53033": {
+   "_status": "backtest_run",
+   "countyFips": "53033",
+   "countyName": "King County",
+   "model_name": "county_sales_regression_assessor_only",
+   "run_on": "2026-11-16",
+   "script": "scripts/county_valuation_models.mjs",
+   "sample_file": "data/backtests/sales_53033_2026-11-16.json.gz",
+   "result_file": "data/backtests/county_model_test_53033.json",
+   "target": "Recorded arm's-length sale price",
+   "sources": [
+    "https://aqua.kingcounty.gov/extranet/assessor/ (Real Property Sales, Residential Building, Parcel, Real Property Account, Lookup; files dated 14 Nov 2026)",
+    "https://services.arcgis.com/jsIt88o09Q0r1j8h/arcgis/rest/services/Current_Parcels/FeatureServer/0 (Washington State Current Parcels: parcel centroids)",
+    "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Tracts_Blocks/MapServer/11 (Census 2020 block groups)"
+   ],
+   "filters": [
+    "PrincipalUse 6 RESIDENTIAL, PropertyClass 8 Res-Improved property, PropertyType 11 Household, single family units",
+    "SaleInstrument 2 Warranty Deed or 3 Statutory Warranty Deed",
+    "SaleReason 1 None",
+    "no Assessor SaleWarning",
+    "price >= $25,000",
+    "excise affidavit for one parcel only",
+    "one residential building, 1 living unit, living area >= 400 sq ft, year built not after the sale, bedroom and full-bath counts present"
+   ],
+   "split": {
+    "fit": [
+     "2023-01-01",
+     "2025-12-31"
+    ],
+    "dev": [
+     "2026-01-01",
+     "2026-04-30"
+    ],
+    "test": [
+     "2026-05-01",
+     "2026-10-31"
+    ]
+   },
+   "locked": {
+    "spec": "regression_assessor_only",
+    "locked_on": "2026-11-16",
+    "why": "Best development median error among models whose inputs a King parcel layer carries (the WA statewide layer: tax-year-2026 land + building value only): regression on the neighborhood median and that value 8.0% (3818 sales) vs value x sales ratio 8.05%. Best overall needs rooms and size, which no King page layer has: regression with the assessor value 7.5%; without it 9.6%; $/sqft x size 12.6%; neighborhood median 16.3%. Even if it passes, the page cannot run it today: its King parcel service is the county zoning layer (PIN and zoning only).",
+    "dev_mdape": {
+     "neighborhood_median": 0.163,
+     "neighborhood_ppsf_x_sqft": 0.1262,
+     "assessor_ratio": 0.0805,
+     "regression": 0.0963,
+     "regression_with_assessor": 0.0751,
+     "regression_no_rooms": 0.0972,
+     "regression_no_rooms_with_assessor": 0.0752,
+     "regression_assessor_only": 0.0798
+    }
+   },
+   "what_is_tested": "The locked model, refit on sales before the test window, scored once on later sales. No test sale is in its own neighborhood statistics; an assessor value is used only where it was set before the sale.",
+   "model": {
+    "n": 7261,
+    "excluded": 80,
+    "mdape": 0.0877,
+    "mape": 0.1219,
+    "median_signed_error": 0.0002,
+    "share_within_10pct": 0.5545,
+    "share_within_20pct": 0.8262,
+    "p80_abs_error": 0.1854
+   },
+   "baseline_neighborhood_median": {
+    "n": 7341,
+    "excluded": 0,
+    "mdape": 0.1724,
+    "mape": 0.233,
+    "median_signed_error": 0.0153,
+    "share_within_10pct": 0.3174,
+    "share_within_20pct": 0.5586,
+    "p80_abs_error": 0.3692
+   },
+   "beats_baseline": true,
+   "gate": {
+    "pass": true,
+    "reason": null
+   },
+   "by_price_band": {
+    "$500k-$1M": {
+     "n": 3371,
+     "excluded": 0,
+     "mdape": 0.0718,
+     "mape": 0.103,
+     "median_signed_error": 0.0148,
+     "share_within_10pct": 0.6307,
+     "share_within_20pct": 0.8727,
+     "p80_abs_error": 0.1545
+    },
+    "$1M-$2M": {
+     "n": 2717,
+     "excluded": 0,
+     "mdape": 0.1003,
+     "mape": 0.1274,
+     "median_signed_error": -0.0113,
+     "share_within_10pct": 0.4987,
+     "share_within_20pct": 0.8119,
+     "p80_abs_error": 0.1945
+    },
+    "$2M and up": {
+     "n": 917,
+     "excluded": 0,
+     "mdape": 0.1122,
+     "mape": 0.1575,
+     "median_signed_error": -0.0678,
+     "share_within_10pct": 0.4635,
+     "share_within_20pct": 0.7339,
+     "p80_abs_error": 0.2399
+    },
+    "under $500k": {
+     "n": 256,
+     "excluded": 0,
+     "mdape": 0.1094,
+     "mape": 0.1839,
+     "median_signed_error": 0.0822,
+     "share_within_10pct": 0.4688,
+     "share_within_20pct": 0.6953,
+     "p80_abs_error": 0.3323
+    }
+   },
+   "candidates": {
+    "neighborhood_median": {
+     "n": 7341,
+     "excluded": 0,
+     "mdape": 0.1724,
+     "mape": 0.233,
+     "median_signed_error": 0.0153,
+     "share_within_10pct": 0.3174,
+     "share_within_20pct": 0.5586,
+     "p80_abs_error": 0.3692
+    },
+    "neighborhood_ppsf_x_sqft": {
+     "n": 7341,
+     "excluded": 0,
+     "mdape": 0.1343,
+     "mape": 0.1739,
+     "median_signed_error": 0.0161,
+     "share_within_10pct": 0.3873,
+     "share_within_20pct": 0.6675,
+     "p80_abs_error": 0.2723
+    },
+    "assessor_ratio": {
+     "n": 7261,
+     "excluded": 80,
+     "mdape": 0.0878,
+     "mape": 0.1229,
+     "median_signed_error": 0.0004,
+     "share_within_10pct": 0.5519,
+     "share_within_20pct": 0.8247,
+     "p80_abs_error": 0.1865
+    },
+    "regression": {
+     "n": 7341,
+     "excluded": 0,
+     "mdape": 0.1069,
+     "mape": 0.1428,
+     "median_signed_error": 0.0112,
+     "share_within_10pct": 0.4762,
+     "share_within_20pct": 0.765,
+     "p80_abs_error": 0.2207
+    },
+    "regression_with_assessor": {
+     "n": 7261,
+     "excluded": 80,
+     "mdape": 0.0832,
+     "mape": 0.117,
+     "median_signed_error": 0.0001,
+     "share_within_10pct": 0.5735,
+     "share_within_20pct": 0.8398,
+     "p80_abs_error": 0.1771
+    },
+    "regression_no_rooms": {
+     "n": 7341,
+     "excluded": 0,
+     "mdape": 0.1083,
+     "mape": 0.1461,
+     "median_signed_error": 0.0139,
+     "share_within_10pct": 0.4648,
+     "share_within_20pct": 0.7519,
+     "p80_abs_error": 0.2271
+    },
+    "regression_no_rooms_with_assessor": {
+     "n": 7261,
+     "excluded": 80,
+     "mdape": 0.0849,
+     "mape": 0.1179,
+     "median_signed_error": 0.0004,
+     "share_within_10pct": 0.5673,
+     "share_within_20pct": 0.8379,
+     "p80_abs_error": 0.1786
+    },
+    "regression_assessor_only": {
+     "n": 7261,
+     "excluded": 80,
+     "mdape": 0.0877,
+     "mape": 0.1219,
+     "median_signed_error": 0.0002,
+     "share_within_10pct": 0.5545,
+     "share_within_20pct": 0.8262,
+     "p80_abs_error": 0.1854
+    }
+   },
+   "leakage": {
+    "test_homes_in_their_own_statistics": 0,
+    "test_rows_with_assessor_value_set_after_sale_excluded": 67
+   },
+   "verification": {
+    "status": "verified",
+    "method": "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.",
+    "checked_on": "2026-11-16",
+    "evidence": "data/backtests/county_model_test_53033.json"
    }
   },
   "06037": {

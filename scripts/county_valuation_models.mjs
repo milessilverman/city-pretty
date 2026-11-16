@@ -32,8 +32,21 @@ function fitAll(fitRows) {
     neighborhood_median: { spec: "neighborhood_median" },
     neighborhood_ppsf_x_sqft: { spec: "neighborhood_ppsf_x_sqft" },
     assessor_ratio: fitAssessorRatio(fitRows, { allowAvAnyDate: true }),
-    regression: fitRegression("regression", fitRows),
-    regression_with_assessor: fitRegression("regression_with_assessor", fitRows, { allowAvAnyDate: true }),
+    // Room-based models only where the sales carry bedrooms (NYC's do not: PLUTO has no rooms). features() would
+    // otherwise read a missing bedroom count as 0, because null >= 0 is true in JavaScript.
+    ...(fitRows.some((r) => r.beds != null) ? {
+      regression: fitRegression("regression", fitRows),
+      regression_with_assessor: fitRegression("regression_with_assessor", fitRows, { allowAvAnyDate: true }),
+    } : {}),
+    // Only where the rows carry a unit count and no rooms. NYC (PLUTO, no assessor value): regression_pluto.
+    // Elsewhere (Florida's roll): the same inputs as regression_no_rooms, alone and with the assessor's value.
+    ...(fitRows.some((r) => r.units != null) && !fitRows.some((r) => r.av > 0) ? { regression_pluto: fitRegression("regression_pluto", fitRows) } : {}),
+    ...(fitRows.some((r) => r.units != null) && fitRows.some((r) => r.av > 0) ? {
+      regression_no_rooms: fitRegression("regression_no_rooms", fitRows),
+      regression_no_rooms_with_assessor: fitRegression("regression_no_rooms_with_assessor", fitRows, { allowAvAnyDate: true }),
+    } : {}),
+    // Only where the config asks for it: a county whose page layer has the assessor's value but no characteristics.
+    ...(cfg.assessor_only_candidate ? { regression_assessor_only: fitRegression("regression_assessor_only", fitRows, { allowAvAnyDate: true }) } : {}),
   };
 }
 function score(models, stats, evalRows) {
