@@ -22,7 +22,10 @@ describe("state finance profiles", () => {
   it("every confirmed or corrected field carries the source it was read in", () => {
     for (const [st, r] of Object.entries(P) as [string, any][]) {
       for (const [f, e] of Object.entries(r.field_evidence || {}) as [string, any][]) {
-        expect(["confirmed", "corrected"], `${st}.${f}`).toContain(e.status);
+        // not_confirmed / corrected_to_unknown: the source was read but doesn't settle the value (e.g. CO's 2026 rate
+        // depends on a board certification); such a field must stay listed as unverified.
+        expect(["confirmed", "corrected", "not_confirmed", "corrected_to_unknown"], `${st}.${f}`).toContain(e.status);
+        if (!["confirmed", "corrected"].includes(e.status)) expect(r.verification.unverified_fields, `${st}.${f}`).toContain(f);
         expect(e.source_url, `${st}.${f}`).toMatch(/^https:\/\//);
         expect(String(e.quote).length, `${st}.${f} quote`).toBeGreaterThan(20);
         expect(e.checked_on).toMatch(/^\d{4}-\d{2}-\d{2}$/);
@@ -57,5 +60,13 @@ describe("state finance profiles", () => {
     expect(app).not.toMatch(/a\.mv \* 0\.55/);
     expect(app).not.toMatch(/\[uninc \? 0 : 0\.20, 0\.24\]/);
     expect(app).not.toContain("function setEifdTurnover");
+  });
+
+  it("round 3: TX, FL, AZ, WA and CA have every tax-increment field confirmed; CO does not", () => {
+    for (const st of ["TX", "FL", "AZ", "WA", "CA"]) expect(financeProfileGate(P[st]), st).toEqual([]);
+    expect(financeProfileGate(P.CO)).toEqual(expect.arrayContaining(["res_assessment_ratio", "homestead_exemption_rule"]));
+    // Texas: 2025 law raised the school homestead exemption to $140,000 (Comptroller); reappraisal is at least every 3 years.
+    expect(P.TX.homestead_exemption_rule.amount_or_pct).toBe(140000);
+    expect(P.TX.reassessment_cycle_years).toBe(3);
   });
 });

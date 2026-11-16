@@ -81,15 +81,28 @@
     "last_verified": "2026-11-16",
     "verified_by": "state_statute_database",
     "verification": {
-      "status": "partially_verified",
+      "status": "verified",
       "method": "Arizona Revised Statutes \u00a7\u00a7 42-13301, 42-15001, 42-15003 (azleg.gov)",
       "checked_on": "2026-11-16",
       "evidence": "\u00a7 42-13301: LPV is prior LPV 'plus five per cent'; \u00a7 42-15003: class three 'ten per cent'; \u00a7 42-15001(16): class one 'Fifteen and one-half percent beginning from and after December 31, 2025 through December 31, 2026'",
-      "unverified_fields": [
-        "uncaps_on_sale",
-        "homestead_exemption_rule"
-      ],
-      "notes": "comm_assessment_ratio corrected 0.165 -> 0.155 for tax year 2026 (0.165 was the 2024 rate; 2025 was 0.16). Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "unverified_fields": [],
+      "notes": "comm_assessment_ratio corrected 0.165 -> 0.155 for tax year 2026 (0.165 was the 2024 rate; 2025 was 0.16). Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 3 (2026-11-16): field_evidence added for homestead_exemption_rule, uncaps_on_sale. All five tax-increment fields confirmed."
+    },
+    "field_evidence": {
+      "uncaps_on_sale": {
+        "status": "confirmed",
+        "source_url": "https://www.azleg.gov/ars/42/13302.htm",
+        "quote": "In the following circumstances the limited property value shall be established at a level or percentage of full cash value that is comparable to that of other properties ... A change in the occupant or classification of a single-family residence is not a change in use, in and of itself.",
+        "checked_on": "2026-11-16",
+        "note": "The listed circumstances (omitted property, change in use, modification of 15% or more, splits) do not include a sale, so the 5% limited-value cap carries over to a buyer."
+      },
+      "homestead_exemption_rule": {
+        "status": "confirmed",
+        "source_url": "https://www.azleg.gov/ars/15/00972.htm",
+        "quote": "there shall be additional state aid for education computed for school districts",
+        "checked_on": "2026-11-16",
+        "note": "Arizona's owner-occupied relief (A.R.S. 15-972) is state aid that reduces school primary taxes, not an exemption of assessed value, so the taxable base has no homestead deduction."
+      }
     }
   },
   "AR": {
@@ -142,15 +155,28 @@
     "last_verified": "2026-11-16",
     "verified_by": "state_statute_database",
     "verification": {
-      "status": "partially_verified",
+      "status": "verified",
       "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container); Rev. & Tax. Code \u00a7\u00a7 51, 218, 401; Gov. Code \u00a7 53398.50",
       "checked_on": "2026-11-16",
       "evidence": "RTC \u00a7 51: 'In no event shall the percentage increase ... exceed 2 percent of the prior year's value'; RTC \u00a7 218: 'seven thousand dollars ($7,000)'; RTC \u00a7 401: 'assess all property ... at its full value'",
-      "unverified_fields": [
-        "uncaps_on_sale",
-        "reassessment_cycle_years"
-      ],
-      "notes": "Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "unverified_fields": [],
+      "notes": "Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 3 (2026-11-16): field_evidence added for reassessment_cycle_years, uncaps_on_sale. All five tax-increment fields confirmed."
+    },
+    "field_evidence": {
+      "uncaps_on_sale": {
+        "status": "confirmed",
+        "source_url": "https://california.public.law/codes/revenue_and_taxation_code_section_110.1",
+        "quote": "For property which is purchased, is newly constructed, or changes ownership after the 1975 lien date, either of the following: (A) The date on which a purchase or change in ownership occurs.",
+        "checked_on": "2026-11-16",
+        "note": ""
+      },
+      "reassessment_cycle_years": {
+        "status": "confirmed",
+        "source_url": "https://california.public.law/codes/revenue_and_taxation_code_section_401.3",
+        "quote": "The assessor shall assess all property subject to general property taxation on the lien date",
+        "checked_on": "2026-11-16",
+        "note": "With R&T 2192: 'all tax liens attach annually as of 12:01 a.m. on the first day of January'."
+      }
     }
   },
   "CO": {
@@ -160,10 +186,7 @@
     "annual_assessment_cap": null,
     "uncaps_on_sale": true,
     "reassessment_cycle_years": 2,
-    "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
-    },
+    "homestead_exemption_rule": null,
     "tif_vehicle_name": "CO URA TIF / Title 32 Metro District",
     "statutory_citation": "Colo. Const. art. X, \u00a7 3; SB 24-233 and HB 24B-1001 (2024) assessment-rate changes",
     "source_url": "https://leg.colorado.gov/bills/sb24-233",
@@ -177,10 +200,39 @@
       "evidence": "HB 24B-1001: 'For the property tax year commencing on January 1, 2026, the valuation for commercial property and agricultural property is 25%'; residential local-levy rate from 2026: '6.7% of the amount equal to the actual value ... minus the lesser of 10% ... $70,000'; school levies 6.95%",
       "unverified_fields": [
         "res_assessment_ratio",
-        "uncaps_on_sale",
-        "reassessment_cycle_years"
+        "homestead_exemption_rule"
       ],
-      "notes": "comm_assessment_ratio corrected 0.279 -> 0.25 (2026). SB 24-233 is a property-tax relief bill, not the source of biennial reassessment as the old citation implied. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "notes": "comm_assessment_ratio corrected 0.279 -> 0.25 (2026). SB 24-233 is a property-tax relief bill, not the source of biennial reassessment as the old citation implied. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 3 (2026-11-16): field_evidence added for homestead_exemption_rule, reassessment_cycle_years, res_assessment_ratio, uncaps_on_sale. Calculator fields still unconfirmed: res_assessment_ratio, homestead_exemption_rule."
+    },
+    "field_evidence": {
+      "reassessment_cycle_years": {
+        "status": "confirmed",
+        "source_url": "https://colorado.public.law/statutes/crs_39-1-104",
+        "quote": "During the two years of each reassessment cycle, in preparation for implementation in the succeeding reassessment cycle, the respective assessors shall conduct revaluations of all taxable real property",
+        "checked_on": "2026-11-16",
+        "note": ""
+      },
+      "uncaps_on_sale": {
+        "status": "confirmed",
+        "source_url": "https://colorado.public.law/statutes/crs_39-1-104",
+        "quote": "the respective assessors shall conduct revaluations of all taxable real property",
+        "checked_on": "2026-11-16",
+        "note": "Colorado has no assessed-value cap; every property is revalued each two-year cycle whether or not it sold, so there is no cap for a sale to lift. The model only uses this field when a cap exists."
+      },
+      "res_assessment_ratio": {
+        "status": "not_confirmed",
+        "source_url": "https://leg.colorado.gov/sites/default/files/documents/2024B/bills/2024b_1001_enr.pdf",
+        "quote": "FOR PROPERTY TAX YEARS COMMENCING ON OR AFTER JANUARY 1, 2026, IF THE STATE BOARD OF EQUALIZATION DETERMINES THAT THE STATEWIDE ACTUAL VALUE GROWTH IS GREATER THAN FIVE PERCENT ... 6.7 PERCENT OF THE AMOUNT EQUAL TO THE ACTUAL VALUE OF THE PROPERTY MINUS THE LESSER OF TEN PERCENT OF THE ACTUAL VALUE OF THE PROPERTY, SEVENTY THOUSAND DOLLARS AS INCREASED FOR INFLATION",
+        "checked_on": "2026-11-16",
+        "note": "The 2026 rate depends on the State Board of Equalization's certification of statewide value growth, which was not fetched; under the >5% branch the rate is 6.7% for local levies and 6.95% for school levies after a per-home reduction."
+      },
+      "homestead_exemption_rule": {
+        "status": "corrected_to_unknown",
+        "source_url": "https://leg.colorado.gov/sites/default/files/documents/2024B/bills/2024b_1001_enr.pdf",
+        "quote": "MINUS THE LESSER OF TEN PERCENT OF THE ACTUAL VALUE OF THE PROPERTY, SEVENTY THOUSAND DOLLARS AS INCREASED FOR INFLATION",
+        "checked_on": "2026-11-16",
+        "note": "The previous value 'none' was wrong under the >5% branch, which deducts the lesser of 10% or $70,000 (inflation-adjusted) from each home's value. Set to null until the applicable branch is confirmed; the model also cannot apply a per-home deduction to an area total."
+      }
     }
   },
   "CT": {
@@ -302,11 +354,25 @@
       "checked_on": "2026-11-16",
       "evidence": "\u00a7 193.155: change 'shall not exceed the lower of ... Three percent ... or ... Consumer Price Index'; \u00a7 196.031: $25,000 exemption plus 'additional exemption of up to $25,000 on the assessed valuation greater than $50,000 for all levies other than school district levies'",
       "unverified_fields": [
-        "uncaps_on_sale",
-        "reassessment_cycle_years",
         "homestead $50,000 applies in full only to non-school levies"
       ],
-      "notes": "Cap is the lower of 3% or CPI. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "notes": "Cap is the lower of 3% or CPI. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 3 (2026-11-16): field_evidence added for reassessment_cycle_years, uncaps_on_sale. All five tax-increment fields confirmed."
+    },
+    "field_evidence": {
+      "uncaps_on_sale": {
+        "status": "confirmed",
+        "source_url": "https://www.flsenate.gov/Laws/Statutes/2026/193.155",
+        "quote": "property assessed under this section shall be assessed at just value as of January 1 of the year following a change of ownership",
+        "checked_on": "2026-11-16",
+        "note": ""
+      },
+      "reassessment_cycle_years": {
+        "status": "confirmed",
+        "source_url": "https://www.flsenate.gov/Laws/Statutes/2026/192.042",
+        "quote": "All property shall be assessed according to its just value as follows: (1) Real property, on January 1 of each year.",
+        "checked_on": "2026-11-16",
+        "note": ""
+      }
     }
   },
   "GA": {
@@ -1574,10 +1640,11 @@
     "comm_assessment_ratio": 1,
     "annual_assessment_cap": 0.1,
     "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
+    "reassessment_cycle_years": 3,
     "homestead_exemption_rule": {
       "type": "flat_market",
-      "amount_or_pct": 100000
+      "amount_or_pct": 140000,
+      "applies_to": "school district taxes"
     },
     "tif_vehicle_name": "TX TIRZ / PID / MUD",
     "statutory_citation": "Tex. Tax Code \u00a7 23.23 (10% Cap), \u00a7 311 (TIRZ) & Tex. Const. art. VIII, \u00a7 1-b",
@@ -1586,16 +1653,35 @@
     "last_verified": "2026-11-16",
     "verified_by": "state_statute_database",
     "verification": {
-      "status": "partially_verified",
+      "status": "verified",
       "method": "Texas Tax Code \u00a7\u00a7 23.23, 23.231, 11.13 via texas.public.law mirror; 89(R) SB 4 enrolled text and history (capitol.texas.gov)",
       "checked_on": "2026-11-16",
       "evidence": "\u00a7 23.23: appraised value of a residence homestead limited to prior value plus '10 percent'; \u00a7 23.231: 20% circuit breaker for other property, 'This section expires December 31, 2026'",
-      "unverified_fields": [
-        "uncaps_on_sale",
-        "reassessment_cycle_years",
-        "homestead_exemption_rule"
-      ],
-      "notes": "annual_assessment_cap corrected from null to 0.10: the record's own citation names the \u00a7 23.23 10% homestead cap but stored 'no cap'. The cap applies to residence homesteads only. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "unverified_fields": [],
+      "notes": "annual_assessment_cap corrected from null to 0.10: the record's own citation names the \u00a7 23.23 10% homestead cap but stored 'no cap'. The cap applies to residence homesteads only. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 3 (2026-11-16): field_evidence added for homestead_exemption_rule, reassessment_cycle_years, uncaps_on_sale. All five tax-increment fields confirmed."
+    },
+    "field_evidence": {
+      "uncaps_on_sale": {
+        "status": "confirmed",
+        "source_url": "https://texas.public.law/statutes/tex._tax_code_section_23.23",
+        "quote": "The limitation expires on January 1 of the first tax year that neither the owner of the property when the limitation took effect nor the owner's spouse or surviving spouse qualifies for an exemption under Section 11.13",
+        "checked_on": "2026-11-16",
+        "note": "The 10% homestead cap ends when the owner changes, so a sale returns the home to appraised value."
+      },
+      "reassessment_cycle_years": {
+        "status": "corrected",
+        "source_url": "https://texas.public.law/statutes/tex._tax_code_section_25.18",
+        "quote": "The plan shall provide for the following reappraisal activities for all real and personal property in the district at least once every three years",
+        "checked_on": "2026-11-16",
+        "note": "Corrected from 1: the statute requires reappraisal at least every three years; a district may reappraise more often."
+      },
+      "homestead_exemption_rule": {
+        "status": "corrected",
+        "source_url": "https://comptroller.texas.gov/taxes/property-tax/exemptions/",
+        "quote": "Tax Code Section 11.13(b) requires school districts to provide a $140,000 exemption on a residence homestead",
+        "checked_on": "2026-11-16",
+        "note": "Corrected from $100,000 (the texas.public.law mirror still shows the pre-2025 amount; the Comptroller, the state agency, states $140,000). Applies to school district taxes only; counties with farm-to-market or flood-control taxes must give $3,000 (11.13(a)) and any unit may add up to 20% (11.13(n))."
+      }
     }
   },
   "UT": {
@@ -1734,15 +1820,28 @@
     "last_verified": "2026-11-16",
     "verified_by": "state_statute_database",
     "verification": {
-      "status": "partially_verified",
+      "status": "verified",
       "method": "RCW 84.55.010 (app.leg.wa.gov) read; RCW 84.41.030 page returned only site chrome",
       "checked_on": "2026-11-16",
       "evidence": "RCW 84.55 is a levy (revenue) limit, not an assessed-value cap \u2014 consistent with annual_assessment_cap = null",
-      "unverified_fields": [
-        "reassessment_cycle_years",
-        "homestead_exemption_rule"
-      ],
-      "notes": "Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "unverified_fields": [],
+      "notes": "Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 3 (2026-11-16): field_evidence added for homestead_exemption_rule, reassessment_cycle_years. All five tax-increment fields confirmed."
+    },
+    "field_evidence": {
+      "reassessment_cycle_years": {
+        "status": "confirmed",
+        "source_url": "https://app.leg.wa.gov/rcw/default.aspx?cite=84.41.030",
+        "quote": "All taxable real property within a county must be revalued annually",
+        "checked_on": "2026-11-16",
+        "note": ""
+      },
+      "homestead_exemption_rule": {
+        "status": "confirmed",
+        "source_url": "https://dor.wa.gov/taxes-rates/property-tax/property-tax-exemptions-and-deferrals",
+        "quote": "Property tax assistance program for widows or widowers of veterans ... Property tax deferral program for homeowners with limited income Available To: Homeowners with combined disposable income of $57,000 or less",
+        "checked_on": "2026-11-16",
+        "note": "The Department of Revenue lists only targeted programs (veterans' widows, seniors and people with disabilities, limited-income deferral); there is no general homestead exemption."
+      }
     }
   },
   "WV": {
