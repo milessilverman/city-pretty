@@ -184,6 +184,38 @@ Locks and results are separate commits (NYC 794aa77 / b942628; Hillsborough 3caa
 Also fixed: parcel lookup used a 5-result box search, so on blocks of row houses the clicked parcel was often missed.
 It now asks for the parcel containing the point first.
 
+#### Florida (six more counties) and King County shown (16 Nov, later)
+
+Same protocol (develop on 2025 and Jan–Mar 2026 sales, lock in a commit, one final test on Apr–Aug 2026; Florida DOR
+2026 Final SDF/NAL with QUAL_CD 01/02, which DOR's 2026 User's Guide defines as qualified arm's-length transfers):
+
+| County | Test sales | Locked model (regression + 1 Jan 2026 just value) | Neighborhood median | Result |
+|---|---|---|---|---|
+| Miami-Dade | 4,088 | 10.6% | 15.6% | Pass, shown (inputs read from the Florida statewide layer; the page's own Miami-Dade layer is a zoning layer) |
+| Broward | 7,232 | 8.9% | 15.0% | Pass, shown |
+| Duval | 5,311 | 10.0% | 19.1% | Pass, shown |
+| Orange | 6,187 | 8.7% | 18.6% | Pass, shown |
+| Palm Beach | 7,916 | 9.1% | 19.5% | Pass, shown |
+| Pinellas | 4,956 | 11.2% | 21.7% | Pass, shown |
+
+Where the assessor-ratio candidate tied the locked regression on development data (within 0.1 points), the spec the
+page can run was locked; that rule was written into each lock before the final test. Errors are larger for homes of
+$2M and up (15–18%); the page adds that band's error to the estimate.
+
+**King County** is now shown. The page reads the tax-year-2026 appraised value from the Washington statewide parcel
+layer by PIN (VALUE_LAND + VALUE_BLDG). That layer has no roll-year field, so `scripts/backtests/check_king_statewide_values.py`
+compares it with the Assessor's tax-year-2026 values used in the test: 496 of 500 sampled parcels matched exactly
+(99.2%) on 16 Nov. The page computes King estimates only while that check is at least 98% and at most 120 days old.
+
+**Bug found and fixed:** on the live page, the parcel record dropped the service's own field names and the parcel
+query asked for only its first 8 fields. So NYC (Queens, Staten Island) and Hillsborough estimates were withheld for
+"missing inputs" despite passing; their parity tests had fed the model raw fields directly and didn't catch it. Raw
+fields are now kept, every field the county's model needs is requested, and a browser test covers that path.
+
+**Missing bedroom/bathroom counts** are now treated as missing (not 0) in new runs. DC, Cook and Philadelphia ran
+before the fix; they keep the old reading only so their one-time results reproduce, and should be re-tested on a new
+window. The page already treats missing rooms as missing for them (it withholds rather than assuming 0).
+
 ### The improvement catalog (what the map recommends)
 
 Audited 16 Nov (`audit/bundle-catalog-audit.md`). The catalog of 81 improvements inside the county data files drives

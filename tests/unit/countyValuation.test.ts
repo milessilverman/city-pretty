@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
 // @ts-ignore plain ES modules
-import { avUsable, features, neighborhoodStats, neighborhoodFor, fitAssessorRatio, fitRegression, predictor, leakageCount } from "../../scripts/lib/countyValuationModels.mjs";
+import { avUsable, features, neighborhoodStats, neighborhoodFor, fitAssessorRatio, fitRegression, predictor, leakageCount, setLegacyNullRooms } from "../../scripts/lib/countyValuationModels.mjs";
 // @ts-ignore
 import { errorMetrics } from "../../scripts/lib/backtestMetrics.mjs";
 
@@ -57,6 +57,21 @@ describe("page models for passing counties", () => {
   }
 });
 
+describe("missing rooms are missing, not zero (new runs)", () => {
+  it("a row without a bedroom or bathroom count gets no rooms-model features", () => {
+    setLegacyNullRooms(false);
+    const rows = Array.from({ length: 12 }, (_, i) => ({ id: "p" + i, price: 500000 + i * 1000, date: "2025-03-01", bg: "530330001001", tract: "53033000100", sqft: 1500, lot: 5000, yb: 1980, beds: 3, baths: 2, units: 1 }));
+    const stats = neighborhoodStats(rows);
+    const r = { ...rows[0], id: "x" };
+    expect(features("regression", stats, r)).not.toBeNull();
+    expect(features("regression", stats, { ...r, beds: null })).toBeNull();
+    expect(features("regression", stats, { ...r, baths: undefined })).toBeNull();
+    setLegacyNullRooms(true);
+    expect(features("regression", stats, { ...r, beds: null })).not.toBeNull(); // legacy reading, for the DC/Cook/Philadelphia finals only
+    setLegacyNullRooms(false);
+  });
+});
+
 describe("published county back-tests reproduce from their committed sales files", () => {
   for (const [fips, c] of Object.entries(cfg) as [string, any][]) {
     const resultFile = path.join(root, `data/backtests/county_model_test_${fips}.json`);
@@ -70,6 +85,7 @@ describe("published county back-tests reproduce from their committed sales files
       const test = data.rows.filter((r: any) => inWin(r, c.test));
       const testIds = new Set(test.map((r: any) => r.id));
       const prior = data.rows.filter((r: any) => r.date < c.test[0] && (inWin(r, c.fit) || inWin(r, c.dev)) && !testIds.has(r.id));
+      setLegacyNullRooms(c.legacy_null_rooms);
       const stats = neighborhoodStats(prior);
       const spec = c.locked.spec;
       const m = spec === "assessor_ratio" ? fitAssessorRatio(prior, { allowAvAnyDate: true })
@@ -81,6 +97,7 @@ describe("published county back-tests reproduce from their committed sales files
       // and the page's benchmarks file publishes exactly this result
       expect(bench.counties[fips].model.mdape).toBe(t.model.mdape);
       expect(bench.counties[fips].gate.pass).toBe(t.gate.pass);
+      setLegacyNullRooms(false);
     });
   }
 });

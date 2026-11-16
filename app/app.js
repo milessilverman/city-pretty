@@ -635,6 +635,24 @@ function countyModelEstimate(fips, a, bg) {
     return b && b[0] >= 5 ? { level: "block group", n: b[0], median: b[1], ppsf: b[2], d0: b[3], d1: b[4] } : t && t[0] >= 5 ? { level: "tract", n: t[0], median: t[1], ppsf: t[2], d0: t[3], d1: t[4] } : null;
   };
   const spec = C.model.spec;
+  // An input read from another agency's layer is used only while a recent check shows it matches what was tested
+  // (King: the WA statewide value vs the Assessor's tax-year-2026 value; scripts/backtests/check_king_statewide_values.py).
+  if (C.input_check) {
+    const k = C.input_check, ageDays = (Date.now() - Date.parse(k.checked_on + "T00:00:00Z")) / 86400000;
+    if (!(k.match_rate >= k.min_rate)) return { value: null, reason: `the input layer matched the tested values for only ${(100 * k.match_rate).toFixed(1)}% of sampled parcels (${k.checked_on}); at least ${(100 * k.min_rate).toFixed(0)}% is required.` };
+    if (!(ageDays <= k.max_age_days)) return { value: null, reason: `the check that the input layer still holds the tested values is from ${k.checked_on}, more than ${k.max_age_days} days ago; re-run ${k.script}.` };
+  }
+  if (spec === "regression_assessor_only") {
+    // King County: neighborhood median and the tax-year-2026 appraised value (WA statewide layer, VALUE_LAND + VALUE_BLDG).
+    const av = g("av");
+    if (!ok(av, (x) => x > 0)) return { value: null, reason: "The tested model needs the parcel's tax-year-2026 appraised value, which is not on file for this parcel." };
+    const n = nbhd();
+    if (!n) return { value: null, reason: "Too few recorded sales nearby to anchor the tested model." };
+    if (!Array.isArray(C.model.coef) || C.model.coef.length !== 4) return { value: null, reason: "The tested model's coefficients don't match its inputs." };
+    const x = [1, Math.log(n.median), Math.log(av), n.level === "tract" ? 1 : 0];
+    const v = Math.exp(x.reduce((s2, xi, i) => s2 + xi * C.model.coef[i], 0));
+    return { value: Math.round(v / 1000) * 1000, raw: v, neighborhood: n, tested: C.tested };
+  }
   if (spec === "regression_pluto" || spec === "regression_no_rooms" || spec === "regression_no_rooms_with_assessor") {
     // No-rooms models: building area, lot area, year built and residential units (NYC PLUTO; Florida's tax roll),
     // in Florida with the just value as of 1 January of the tested roll year.
@@ -4121,6 +4139,10 @@ function normalizeParcelFeature(feat, ll, svc) {
 
   return {
     attributes: {
+      // The service's own fields are kept under their own names (normalized names below take precedence): the
+      // back-tested county models read them exactly as the test did (input_map in county_valuation_models.json).
+      // Before 16 Nov 2026 they were dropped here, so NYC and Florida estimates were withheld on the live page.
+      ...a,
       AIN: apnVal || `Lot ${a.OBJECTID || a.FID || 'Parcel'}`,
       SitusFullAddress: cleanAddr ? (cleanAddr + (a.PHY_CITY ? ", " + a.PHY_CITY : (a.PSTLCITY ? ", " + a.PSTLCITY : ""))) : ("Parcel " + (apnVal || "Record")),
       SitusHouseNo: houseNo,
@@ -4211,7 +4233,13 @@ async function fetchParcel(ll) {
   const svc = (typeof parcelSvc === "function" && fips && fips !== "06037" && fips !== "06059") ? parcelSvc(fips) : (typeof getParcelService === "function" ? getParcelService(ll) : null);
   if (svc && svc.url) {
     const pad = 0.00035;
-    const reqFields = (svc.fields || []).slice(0, 8).map(f => f[0]).join(",") || "*";
+    // Every field the service lists, plus any the county's back-tested model reads from this service (it used to ask
+    // for the first 8 only, which left out Florida's living area, lot, year built, units and roll year).
+    const cm = COUNTY_VALUATION_MODELS && COUNTY_VALUATION_MODELS.counties && fips && COUNTY_VALUATION_MODELS.counties[fips];
+    const modelFields = cm && cm.input_map && !cm.input_map.input_layer
+      ? Object.entries(cm.input_map).filter(([k, v]) => typeof v === "string" && !["source", "require_label"].includes(k)).map(([, v]) => v).concat(Object.keys(cm.input_map.require || {}))
+      : [];
+    const reqFields = [...new Set((svc.fields || []).map(f => f[0]).concat(modelFields))].filter(f => !/\(\)$/.test(f)).join(",") || "*";
     const params = {
       geometry: `${(ll.lng - pad).toFixed(6)},${(ll.lat - pad).toFixed(6)},${(ll.lng + pad).toFixed(6)},${(ll.lat + pad).toFixed(6)}`,
       geometryType: "esriGeometryEnvelope",
@@ -4233,6 +4261,7 @@ async function fetchParcel(ll) {
         if (feat) {
           const parcel = normalizeParcelFeature(feat, ll, svc);
           if (parcel && fips === "11001") await enrichDcCama(parcel, feat.attributes && feat.attributes.SSL);
+          if (parcel) await enrichFromInputLayer(parcel, ll, fips);
           return parcel;
         }
       }
@@ -4258,6 +4287,35 @@ async function enrichDcCama(parcel, ssl) {
       const dt = new Date(r.SALEDATE);
       Object.assign(parcel.attributes, { LastSalePrice: r.PRICE, LastSaleDate: `${dt.getUTCFullYear()}${String(dt.getUTCMonth() + 1).padStart(2, "0")}${String(dt.getUTCDate()).padStart(2, "0")}` });
     }
+  } catch (e) { /* inputs stay missing; the estimate is withheld with the reason */ }
+}
+// Counties whose back-tested model reads its inputs from a different layer than the page's own parcel service
+// (input_map.input_layer in county_valuation_models.json): Miami-Dade (Florida statewide layer, at the point) and King
+// County (Washington statewide layer, by PIN). The fields are merged into the parcel under their own names; derived
+// fields (King's WA_AV = VALUE_LAND + VALUE_BLDG) are added. If the layer can't be read, the inputs stay missing.
+async function enrichFromInputLayer(parcel, ll, fips) {
+  const C = COUNTY_VALUATION_MODELS && COUNTY_VALUATION_MODELS.counties && fips && COUNTY_VALUATION_MODELS.counties[fips];
+  const L = C && C.input_map && C.input_map.input_layer;
+  if (!L || !parcel || !parcel.attributes) return;
+  try {
+    let params;
+    if (L.by === "field") {
+      const key = parcel.attributes[L.key_from];
+      if (key == null || key === "") return;
+      params = { where: `${L.key_to}='${String(key).replace(/'/g, "''")}'${L.where_extra ? " AND " + L.where_extra : ""}`, outFields: L.fields.join(","), returnGeometry: "false", f: "json" };
+    } else {
+      if (!ll || ll.lat == null) return;
+      params = { geometry: `${(+ll.lng).toFixed(7)},${(+ll.lat).toFixed(7)}`, geometryType: "esriGeometryPoint", inSR: "4326", spatialRel: "esriSpatialRelIntersects", outFields: L.fields.join(","), returnGeometry: "false", f: "json" };
+    }
+    const d = await arcQuery(L.url, params, 5000);
+    const r = d && d.features && d.features.length === 1 && d.features[0].attributes;   // exactly one record, or nothing
+    if (!r) return;
+    for (const f of L.fields) if (r[f] !== undefined) parcel.attributes[f] = r[f];
+    for (const [out, parts] of Object.entries(L.derive || {})) {
+      const vals = parts.map(p => r[p]);
+      parcel.attributes[out] = vals.every(v => v != null && Number.isFinite(+v)) ? vals.reduce((s, v) => s + +v, 0) : null;
+    }
+    parcel.attributes.INPUT_LAYER_SOURCE = L.url;
   } catch (e) { /* inputs stay missing; the estimate is withheld with the reason */ }
 }
 function ringAreaM2(ring) {

@@ -58,6 +58,13 @@ export const FEATURE_SETS = {
   regression_assessor_only: ["intercept", "log neighborhood median", "log assessor market value", "tract fallback"],
 };
 
+// A missing bedroom or bathroom count is missing, not zero (null >= 0 is true in JavaScript). The counties whose finals
+// ran before this fix (DC, Cook, Philadelphia: county_config.json "legacy_null_rooms") keep the old reading so their
+// one-time results still reproduce; their page code already treats missing rooms as missing (stricter).
+let LEGACY_NULL_ROOMS = false;
+export function setLegacyNullRooms(v) { LEGACY_NULL_ROOMS = !!v; }
+const roomOk = (v) => (LEGACY_NULL_ROOMS ? v >= 0 : v != null && Number.isFinite(+v) && v >= 0);
+
 export function features(spec, stats, r, { allowAvAnyDate = false } = {}) {
   const n = neighborhoodFor(stats, r);
   if (!n) return null;
@@ -75,7 +82,7 @@ export function features(spec, stats, r, { allowAvAnyDate = false } = {}) {
     }
     return x;
   }
-  if (!(r.sqft >= 400) || !(r.lot > 0) || !(r.yb > 1700) || !(r.beds >= 0) || !(r.baths >= 0)) return null;
+  if (!(r.sqft >= 400) || !(r.lot > 0) || !(r.yb > 1700) || !roomOk(r.beds) || !roomOk(r.baths)) return null;
   const x = [1, Math.log(n.ppsf), Math.log(n.median), Math.log(r.sqft), Math.log(Math.min(Math.max(r.lot, 500), 200000)),
     (CURRENT_YEAR - r.yb) / 100, Math.min(r.beds, 8), Math.min(r.baths, 8), n.level === "tract" ? 1 : 0];
   if (spec === "regression_with_assessor") {

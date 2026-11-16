@@ -28,6 +28,34 @@ for (const f of ["36005", "36047", "36061", "36081", "36085"]) {
 INPUT_MAPS["12057"] = { sqft: "TOT_LVG_AR", lot: "LND_SQFOOT", yb: "ACT_YR_BLT", units: "NO_RES_UNT", av: "JV", av_year: "ASMNT_YR", av_vintage: 2026,
   require: { DOR_UC: "001" }, require_label: "single-family homes (Florida DOR use code 001)",
   source: "https://services9.arcgis.com/Gh9awoU677aKree0/arcgis/rest/services/Florida_Statewide_Cadastral/FeatureServer/0 (Florida statewide parcels, 2026 roll)" };
+// Other Florida counties: same DOR roll, same statewide layer. Where the page's own parcel service for the county is
+// something else (Miami-Dade: a county zoning layer), the page reads the inputs from the statewide layer at the
+// parcel's point (input_layer; app.js enrichFromInputLayer).
+const FL_STATEWIDE = "https://services9.arcgis.com/Gh9awoU677aKree0/arcgis/rest/services/Florida_Statewide_Cadastral/FeatureServer/0";
+for (const f of ["12086", "12011", "12031", "12095", "12099", "12103"]) {
+  INPUT_MAPS[f] = Object.assign({}, INPUT_MAPS["12057"], f === "12086" ? {
+    input_layer: { url: FL_STATEWIDE, by: "point", fields: ["PARCEL_ID", "DOR_UC", "JV", "ASMNT_YR", "ACT_YR_BLT", "LND_SQFOOT", "NO_RES_UNT", "TOT_LVG_AR"] },
+  } : {});
+}
+// King County WA: the page's own King service is the county zoning layer (PIN and zoning only). The model needs the
+// tax-year-2026 appraised land + improvements value, which the Washington statewide parcel layer carries as
+// VALUE_LAND + VALUE_BLDG (no roll-year field). The page reads it by PIN and computes only while
+// scripts/backtests/check_king_statewide_values.py found it equal to the Assessor's tax-year-2026 value for >= 98% of a
+// sample, within the last 120 days (input_check below, copied from data/backtests/king_statewide_value_check.json).
+INPUT_MAPS["53033"] = {
+  av: "WA_AV",
+  input_layer: { url: "https://services.arcgis.com/jsIt88o09Q0r1j8h/arcgis/rest/services/Current_Parcels/FeatureServer/0", by: "field",
+    key_from: "PIN", key_to: "ORIG_PARCEL_ID", where_extra: "FIPS_NR='033'", fields: ["ORIG_PARCEL_ID", "VALUE_LAND", "VALUE_BLDG"],
+    derive: { WA_AV: ["VALUE_LAND", "VALUE_BLDG"] } },
+  source: "https://services.arcgis.com/jsIt88o09Q0r1j8h/arcgis/rest/services/Current_Parcels/FeatureServer/0 (Washington statewide parcels; VALUE_LAND + VALUE_BLDG, checked against the King Assessor's tax-year-2026 values)",
+};
+const INPUT_CHECKS = {};
+const kingCheckFile = path.join(ROOT, "data/backtests/king_statewide_value_check.json");
+if (fs.existsSync(kingCheckFile)) {
+  const k = JSON.parse(fs.readFileSync(kingCheckFile, "utf8"));
+  INPUT_CHECKS["53033"] = { checked_on: k.checked_on, sampled: k.sampled, matched: k.matched, match_rate: k.match_rate, min_rate: 0.98, max_age_days: 120,
+    script: "scripts/backtests/check_king_statewide_values.py", file: "data/backtests/king_statewide_value_check.json" };
+}
 // Counties whose model passed but whose page parcel layer lacks an input: the page withholds with this reason.
 const PAGE_INPUTS_MISSING = {
   "53033": "this page's King County parcel layer (the county zoning layer) has only the parcel number and zoning, not the tax-year-2026 assessed value the model needs. The Washington statewide parcel layer has that value but no roll-year field, so the page couldn't confirm it is the tested roll.",
@@ -63,6 +91,7 @@ for (const fips of process.argv.slice(2)) {
     verification: { status: "verified", method: "Machine back-test on public recorded sales; result reproducible from the committed sales file with scripts/county_valuation_models.mjs.", checked_on: t.run_on.slice(0, 10), evidence: file },
   };
   if (t.gate && t.gate.pass) models.counties[fips] = { county_name: t.county_name, tested: { mdape: t.model.mdape, n: t.model.n, share_within_20pct: t.model.share_within_20pct, by_price_band: t.by_price_band, run_on: t.run_on.slice(0, 10) }, model: t.page_model, stats: t.page_stats, input_map: INPUT_MAPS[fips] || null,
+    ...(INPUT_CHECKS[fips] ? { input_check: INPUT_CHECKS[fips] } : {}),
     ...(INPUT_MAPS[fips] ? {} : { page_inputs_missing: PAGE_INPUTS_MISSING[fips] || null }) };
   else delete models.counties[fips];
   if (t.gate && t.gate.pass && !INPUT_MAPS[fips]) console.log(`  ${fips}: passed, but the page has no input map, so it will still withhold (inputs not available on the page)`);
