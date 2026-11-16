@@ -1310,7 +1310,8 @@
      "NBHDNAME",
      "Neighborhood Assessment Name"
     ]
-   ]
+   ],
+   "apn": "SSL"
   },
   {
    "url": "https://services1.arcgis.com/RbMX0mRVOFNTdLzd/arcgis/rest/services/Maine_Parcels_Organized_Towns/FeatureServer/10",
@@ -1619,6 +1620,10 @@
    "max": 2000,
    "fields": [
     [
+     "BBL",
+     "BBL (borough-block-lot)"
+    ],
+    [
      "Borough",
      "Borough"
     ],
@@ -1674,7 +1679,8 @@
      "YearBuilt",
      "YearBuilt"
     ]
-   ]
+   ],
+   "apn": "BBL"
   },
   {
    "url": "https://gis.mcassessor.maricopa.gov/arcgis/rest/services/Parcels/MapServer/0",

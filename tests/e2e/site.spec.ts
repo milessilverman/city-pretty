@@ -1332,3 +1332,28 @@ test("what fits on this lot reads DC's zone at the point and applies 11 DCMR; DC
   expect(n3).toContain("This parcel is CHURCH (Metro Nashville Parcels (Parcels_view)), so residential homeowner checks do not apply");
   expect(errors).toEqual([]);
 });
+
+// NC OneMap's `saledate` is an ArcGIS date (epoch milliseconds). Before 17 Nov 2026 the normalizer read it as the sale
+// price (1727326800000 -> "$1.7 trillion") and as a digit-string date ("1727..." -> year 1727). NYC and DC parcel IDs
+// fell back to "Lot Parcel" because their registry entries named no parcel-ID field.
+test("parcel normalizer: an ArcGIS date is a date, never a price; NYC and DC show their own parcel IDs", async ({ page }) => {
+  const errors = await openPage(page);
+  const r = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s);
+    const norm = ev("normalizeParcelFeature");
+    const nc = norm({ attributes: { parno: "5032-41-4749", saledate: 1727326800000, parval: 155637 }, geometry: null }, { lat: 35.78, lng: -78.64 },
+      { name: "NC OneMap", apn: undefined, fields: [] }).attributes;
+    const svcs = ev("PARCELS87");
+    const nycSvc = svcs.find((s: any) => /MAPPLUTO/.test(s.url));
+    const dcSvc = svcs.find((s: any) => /Property_and_Land_WebMercator\/MapServer\/40/.test(s.url));
+    const ny = norm({ attributes: { BBL: 4036760029, Address: "64-54 212 STREET" }, geometry: null }, { lat: 40.74, lng: -73.77 }, nycSvc).attributes;
+    const dc = norm({ attributes: { SSL: "1858    0012", PREMISEADD: "3825 LEGATION ST NW" }, geometry: null }, { lat: 38.96, lng: -77.07 }, dcSvc).attributes;
+    return { ncPrice: nc.LastSalePrice, ncDate: nc.LastSaleDate, ncAin: nc.AIN, nyAin: String(ny.AIN), dcAin: dc.AIN };
+  });
+  expect(r.ncPrice).toBe(0);
+  expect(r.ncDate).toBe("20240926");
+  expect(r.ncAin).toBe("5032-41-4749");
+  expect(r.nyAin).toBe("4036760029");
+  expect(r.dcAin).toBe("1858    0012");
+  expect(errors).toEqual([]);
+});
