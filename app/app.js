@@ -247,13 +247,17 @@ function statuteAppliesTo(rec, parcel) {
       return { applies: true, missing, rule };
     }
     default: {
-      // Generic residential law: state match, residential zoning, optional population floor and lot-size floor.
-      if (!sfr) return { applies: false, missing };
+      // Generic law: state match; residential zoning, or commercial zoning when applies_to_zone is "commercial";
+      // optional population and lot-size floors; any condition the parcel record can't express (unmapped_condition) is
+      // reported as missing, never assumed.
+      if (rec.applies_to_zone === "commercial") { if (!comm) return { applies: false, missing }; }
+      else if (!sfr) return { applies: false, missing };
       if (!popAtLeast(rec.municipality_pop_min)) return { applies: false, missing };
       if (rec.min_lot_size_sqft != null) {
         if (parcel.lot_sqft == null) { missing.push("lot size"); return { applies: false, missing }; }
         if (parcel.lot_sqft < rec.min_lot_size_sqft) return { applies: false, missing };
       }
+      if (rec.unmapped_condition) { missing.push(String(rec.unmapped_condition)); return { applies: false, missing }; }
       return { applies: true, missing };
     }
   }
@@ -286,6 +290,7 @@ function evaluateByRightHousing(parcel, laws) {
   for (const rec of lawList) {
     if (!rec || rec.state_code !== parcel.state_code) continue;
     if (STATUTE_NOT_PARCEL_LEVEL.has(rec.id)) continue;
+    if (rec.parcel_level === false) continue;   // jurisdiction-wide rule (e.g. a parking cap), not a parcel right
     const status = rec.verification && rec.verification.status;
     const label = rec.short_name || rec.bill_number || rec.id;
     if (!STATUTE_USABLE_STATUSES.has(status)) {
