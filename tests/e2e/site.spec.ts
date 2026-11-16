@@ -206,6 +206,8 @@ test("parcel and neighborhood panels render without invented figures", async ({ 
   for (const bad of ["Synergy Simulator", "15.6%", "$1.62M", "+54%", "Private Dev IRR"]) expect(panel).not.toContain(bad);
 
   // A house panel from fixed records (no live services): zoning on file, a recent sale, no imagery dates.
+  // LA has a real back-test (app/data/valuation_backtest_benchmarks.json); wait for it to load.
+  await page.waitForFunction(() => (window as any).valuationBacktestFor && (window as any).valuationBacktestFor("06037"));
   const html = await page.evaluate(() => {
     const w = window as any;
     const box = document.createElement("div");
@@ -219,7 +221,19 @@ test("parcel and neighborhood panels render without invented figures", async ({ 
     w.renderHouse(box, a, 6000, ll, st);
     return box.innerText;
   });
-  expect(html).toContain("Unvalidated estimate");
+  // LA's model failed its back-test (worse than the neighborhood value alone), so the estimate is withheld with the
+  // test's numbers and a pointer to the recorded sale.
+  const bt = await page.evaluate(() => (window as any).valuationBacktestFor("06037"));
+  if (bt.gate.pass) {
+    expect(html).toContain("In a test on");
+  } else {
+    expect(html).toContain("No estimate: In a test on");
+    expect(html).toContain("recorded sale ($1,050,000, 2026)");
+  }
+  // A county with no back-test keeps the "unvalidated" label.
+  const other = await page.evaluate(() => (window as any).publishValuation({ estimatedValue: 500000, confidenceRating: "Unvalidated estimate — no back-test against sales yet" }, "48453", {}));
+  expect(other.estimatedValue).toBe(500000);
+  expect(other.confidenceRating).toContain("Unvalidated estimate");
   for (const bad of ["High Precision", "RSMeans", "Verified Current Imagery", "Return per $1", "Estimated Net Equity", "± ", "Saves $", "Projected 25-year"]) {
     expect(html).not.toContain(bad);
   }

@@ -7,6 +7,7 @@
 import { describe, expect, it } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
+import zlib from "node:zlib";
 
 const root = path.resolve(__dirname, "../..");
 const load = (rel: string) => JSON.parse(fs.readFileSync(path.join(root, rel), "utf8"));
@@ -99,10 +100,26 @@ describe("county readiness is computed from evidence", () => {
 });
 
 describe("fabricated content that was removed stays removed", () => {
-  it("no valuation back-test is claimed until one is run on real recorded sales", () => {
+  it("valuation back-tests: only counties with a reproducible run are listed; everything else is 'no_backtest_run'", () => {
     const d = load("app/data/valuation_backtest_benchmarks.json");
-    expect(d._status).toBe("no_backtest_run");
-    expect(fs.existsSync(path.join(root, "scripts/run_valuation_backtests.mjs"))).toBe(false);
+    expect(d._status).toBe("no_backtest_run"); // default for every county not listed
+    expect(Object.keys(d.counties)).toEqual(["06037"]);
+    expect(fs.existsSync(path.join(root, "scripts/run_valuation_backtests.mjs"))).toBe(false); // the fake-sales script
+
+    const la = d.counties["06037"];
+    expect(la._status).toBe("backtest_run");
+    expect(la.script).toBe("scripts/backtest_la_valuation.mjs");
+    expect(fs.existsSync(path.join(root, la.script))).toBe(true);
+    // The sample behind the numbers is in the repo and matches what the result says was pulled.
+    const sample = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root, la.sample_file))).toString("utf8"));
+    expect(sample.source).toContain("public.gis.lacounty.gov");
+    expect(sample.records.length).toBe(la.sample.pulled_records);
+    const excluded = Object.values(la.sample.excluded as Record<string, number>).reduce((x, y) => x + y, 0);
+    expect(la.sample.tested + excluded).toBe(la.sample.pulled_records);
+    // The publish/withhold decision follows the stated rule.
+    const shouldPass = la.model.n >= 200 && la.model.mdape <= la.gate.mdape_cap && la.model.mdape < la.baseline_neighborhood_median.mdape;
+    expect(la.gate.pass).toBe(shouldPass);
+    expect(la.caveats.join(" ")).toMatch(/proxy/i);
   });
 
   it("the nine hand-typed nationwide 'underused sites' are gone", () => {

@@ -107,7 +107,7 @@ function estimatePropertyMarketValue(params) {
     hedonicEst = isVacantLand ? Math.round(siteValue + lotAdj) :
       Math.round((siteValue + structVal + lotAdj + bedBathAdj + ageAdj + qualityAdj + poolBonus + garageBonus + viewBonus + basementBonus + multiUnitBonus) * condoFactor);
   } else if (acsHv >= A.acsTopCode) {
-    notes.push("The block group's ACS median home value is top-coded (about $2M+), so the neighborhood model cannot anchor on it.");
+    notes.push("The block group's typical home value is $2M or more (where the Census ACS median is top-coded), so the neighborhood model is not used.");
   } else {
     notes.push("No Census ACS median home value on file for this block group.");
   }

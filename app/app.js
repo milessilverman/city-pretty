@@ -528,7 +528,7 @@ function estimatePropertyMarketValue(params) {
     hedonicEst = isVacantLand ? Math.round(siteValue + lotAdj) :
       Math.round((siteValue + structVal + lotAdj + bedBathAdj + ageAdj + qualityAdj + poolBonus + garageBonus + viewBonus + basementBonus + multiUnitBonus) * condoFactor);
   } else if (acsHv >= A.acsTopCode) {
-    notes.push("The block group's ACS median home value is top-coded (about $2M+), so the neighborhood model cannot anchor on it.");
+    notes.push("The block group's typical home value is $2M or more (where the Census ACS median is top-coded), so the neighborhood model is not used.");
   } else {
     notes.push("No Census ACS median home value on file for this block group.");
   }
@@ -624,6 +624,48 @@ function estimatePropertyMarketValue(params) {
     siteValue: siteValue == null ? null : Math.round(siteValue),
     structVal: structVal == null ? null : Math.round(structVal),
   };
+}
+
+// Back-test results by county (app/data/valuation_backtest_benchmarks.json, written by scripts/backtest_la_valuation.mjs).
+function valuationBacktestFor(fips) {
+  const c = VALUATION_BACKTEST_BENCHMARKS && VALUATION_BACKTEST_BENCHMARKS.counties;
+  return (c && fips && c[String(fips).padStart(5, "0")]) || null;
+}
+function backtestDollars(x) { return "$" + Math.round(+x).toLocaleString("en-US"); } // sourced figures are shown exactly, not rounded
+function backtestPct(x) { return x == null ? "?" : (Math.round(x * 1000) / 10).toFixed(1) + "%"; }
+function backtestSummary(bt) {
+  if (!bt || !bt.model || bt.model.mdape == null) return null;
+  const base = bt.baseline_neighborhood_median;
+  return `In a test on ${bt.model.n.toLocaleString()} recent ${bt.countyName} home transfers (${bt.run_on}), the estimate was off by a median of ${backtestPct(bt.model.mdape)}` +
+    (base && base.mdape != null ? `; the neighborhood's typical value alone was off by ${backtestPct(base.mdape)}.` : ".");
+}
+
+// Publishing rule (ACCURACY-ROADMAP item 8): where a county has been back-tested, the estimate is shown only if it
+// passed (median error within the cap and better than the neighborhood value alone). Otherwise it is withheld with the
+// test's own numbers. Where no back-test exists, the estimate keeps its "unvalidated" label.
+function publishValuation(v, fips, context) {
+  if (!v) return v;
+  const bt = valuationBacktestFor(fips);
+  if (!bt) return Object.assign({}, v, { backtest: null });
+  const summary = backtestSummary(bt);
+  const info = { summary, mdape: bt.model.mdape, n: bt.model.n, pass: !!(bt.gate && bt.gate.pass), run_on: bt.run_on, sample_file: bt.sample_file };
+  if (info.pass) {
+    return Object.assign({}, v, { backtest: info, confidenceRating: v.estimatedValue ? `Back-tested: median error ${backtestPct(bt.model.mdape)} (${bt.model.n.toLocaleString()} transfers)` : v.confidenceRating });
+  }
+  if (!v.estimatedValue) return Object.assign({}, v, { backtest: info });
+  const ctx = context || {};
+  const by = +ctx.rollBaseYear || 0;
+  const saleYear = ctx.sale && ctx.sale.price > 0 ? +String(ctx.sale.date || "").replace(/\D/g, "").slice(0, 4) || 0 : 0;
+  const pointer = saleYear >= VALUATION_CURRENT_YEAR - 1
+    ? ` Its recorded sale (${backtestDollars(ctx.sale.price)}, ${saleYear}) is the closest sourced figure.`
+    : by >= VALUATION_CURRENT_YEAR - 1 && ctx.rollTotal > 0
+    ? ` Its assessed value (${backtestDollars(ctx.rollTotal)}, Prop 13 base year ${by}) reflects its ${by} transfer and is the closest sourced figure.`
+    : (ctx.neighborhoodHv > 0 ? ` The neighborhood's typical home value is ${backtestDollars(ctx.neighborhoodHv)}.` : "");
+  return Object.assign({}, v, {
+    estimatedValue: null, vpsf: null, backtest: info,
+    confidenceRating: "Withheld — failed its back-test",
+    withheldReason: `No estimate: ${summary}${pointer}`,
+  });
 }
 
 
@@ -1080,7 +1122,7 @@ function auditSingleHouseParcel(input) {
 
   // 1. Value screening estimate (unvalidated; see estimatePropertyMarketValue)
   const saleYear = input.lastSaleDate ? +String(input.lastSaleDate).replace(/\D/g, "").slice(0, 4) || null : null;
-  const baseAvm = _estVal({
+  let baseAvm = _estVal({
     attributes: {
       Roll_LandValue: input.rollLandValue,
       Roll_ImpValue: input.rollImpValue,
@@ -1112,6 +1154,12 @@ function auditSingleHouseParcel(input) {
     },
     salesInfo: input.lastSalePrice && saleYear ? { price: input.lastSalePrice, date: input.lastSaleDate || "", year: saleYear } : null,
   });
+  if (typeof publishValuation === "function") {
+    baseAvm = publishValuation(baseAvm, input.countyFips, {
+      neighborhoodHv: input.neighborhoodMedianHv, rollBaseYear: input.rollBaseYear,
+      rollTotal: (+input.rollLandValue || 0) + (+input.rollImpValue || 0),
+    });
+  }
 
   const permitValuationTotal = calculatePermitCapitalization(input.recentPermits);
   const finalEstimatedValue = baseAvm.estimatedValue;
@@ -1268,7 +1316,7 @@ function auditSingleHouseParcel(input) {
     },
     legalEngineeringDisclaimers: [
       "Screening only, from public records as of November 2026. Not an appraisal, legal opinion or engineering review.",
-      "The value figure is an unvalidated estimate: it has not been tested against recorded sales. Use a licensed appraiser for decisions.",
+      "Unless a back-test result is shown with it, the value figure is an unvalidated estimate that has not been tested against recorded sales. Use a licensed appraiser for decisions.",
       "Housing-law eligibility must be confirmed with the local planning department before design or spending.",
       "Federal homeowner solar credit (IRC § 25D) ended for expenditures after Dec 31, 2025.",
     ],
@@ -1540,7 +1588,7 @@ function renderHouseAuditAside(audit) {
       <div style="font-size:11.5px;color:#475569;margin-bottom:6px;">
         ${v.vpsf ? `~${fmt$(v.vpsf)}/sq ft ${v.isVacantLand ? "of lot" : "of living area"} &middot; ` : ""}Built from: <b>${v.valuationMethod}</b>
       </div>
-      <div style="font-size:10.5px;color:#64748b;">No accuracy range is shown: the estimate has not been tested against recorded sales.</div>` :
+      <div style="font-size:10.5px;color:#64748b;">${v.backtest && v.backtest.pass && v.backtest.summary ? v.backtest.summary : "No accuracy range is shown: the estimate has not been tested against recorded sales."}</div>` :
       notModeled(v.withheldReason || "Withheld — not enough on file to estimate.")}
       ${v.notes && v.notes.length ? `<div style="font-size:10.5px;color:#64748b;margin-top:4px;">${v.notes.join(" ")}</div>` : ""}
       ${v.permitValuationTotal > 0 ? `<div style="font-size:11px;color:#475569;margin-top:4px;">• <b>Recorded permit valuations:</b> ${fmt$(v.permitValuationTotal)} (not added to the estimate)</div>` : ""}
@@ -4701,8 +4749,8 @@ function copyPlaybookMemo(title, statute, address, apn) {
 
 // The home-value model is built for houses, condos and small apartment buildings. It must not print a number for
 // the White House, a stadium or a 900-acre farm, and it must not contradict the assessor by a wide margin.
-// No county back-test exists yet (app/data/valuation_backtest_benchmarks.json is a 'no_backtest_run' stub), so every
-// estimate is labeled unvalidated; see VALUATION_STATUS_LABEL.
+// Back-tests live in app/data/valuation_backtest_benchmarks.json (scripts/backtest_la_valuation.mjs); publishValuation()
+// withholds the estimate where a county's back-test failed and labels it unvalidated where none was run.
 function valuationCheck(a, lot, est, options) {
   a = a || {};
   const roll = ((+a.Roll_LandValue || 0) + (+a.Roll_ImpValue || 0)) || (+a.Roll_TotalValue || 0);
@@ -4763,14 +4811,14 @@ function renderHouse(box, a, lot, ll, st) {
   const lotBonus = (lot && baseNeighborhoodHv) ? Math.max(-0.08, Math.min(0.12, ((lot - 5500) / 5500) * 0.10)) * baseNeighborhoodHv : 0;
 
   // Screening home-value estimate (not an appraisal)
-  const valuation = (typeof estimatePropertyMarketValue === "function") ? estimatePropertyMarketValue({
+  const valuation = (typeof estimatePropertyMarketValue === "function") ? publishValuation(estimatePropertyMarketValue({
     attributes: a,
     lotSqft: lot || a.LotSqft || undefined,
     neighborhood: m,
     stateCode: typeof activeState === "function" ? activeState() : null,
     facts: F,
     salesInfo: sale
-  }) : null;
+  }), typeof activeFips === "function" ? activeFips() : null, { neighborhoodHv: +baseNeighborhoodHv || null, rollBaseYear: rollBaseYear, rollTotal: totalRoll, sale }) : null;
 
   const houseHv = valuation ? valuation.estimatedValue : null;
   const houseVpsf = valuation ? valuation.vpsf : (houseHv && livingSqft ? Math.round(houseHv / livingSqft) : null);
@@ -4963,7 +5011,7 @@ function renderHouse(box, a, lot, ll, st) {
       ${!valCheck.ok ? fact("Estimated market value", noEstimateHtml(valCheck), "") : ""}
       ${valCheck.ok ? fact("Estimated market value", `<div>
         <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;">
-          <b>${fmt$(houseHv)}</b> <span class="vpd-range" style="font-size:12px;color:var(--ink-2)">(no accuracy range: not yet tested against recorded sales)</span>
+          <b>${fmt$(houseHv)}</b> <span class="vpd-range" style="font-size:12px;color:var(--ink-2)">${valuation && valuation.backtest && valuation.backtest.pass && valuation.backtest.summary ? esc(valuation.backtest.summary) : "(no accuracy range: not yet tested against recorded sales)"}</span>
         </div>
         ${valuation && valuation.confidenceRating ? `<div style="font-size:11px;font-weight:600;color:#b45309;margin-top:2px;">${esc(valuation.confidenceRating)}</div>` : ""}
         <div style="font-size:11px;color:#64748b;margin-top:2px;">
@@ -7992,7 +8040,7 @@ function serializeLiveAdvisorContext() {
       stories: num(F.stories), units: num(a.Units),
       assessorValue: num(((+a.Roll_LandValue || 0) + (+a.Roll_ImpValue || 0)) || a.Roll_TotalValue),
       lastSale: ah.sale ? { price: ah.sale.price, date: ah.sale.date } : null,
-      valueEstimate: vc.ok && val && val.estimatedValue ? { value: val.estimatedValue, low: null, high: null, method: val.valuationMethod, status: VALUATION_STATUS_LABEL } : null,
+      valueEstimate: vc.ok && val && val.estimatedValue ? { value: val.estimatedValue, low: null, high: null, method: val.valuationMethod, status: val.confidenceRating || VALUATION_STATUS_LABEL } : null,
       valueEstimateWithheld: vc.ok ? null : vc.reason,
       flood: floodVal,
       fire: fireVal,
@@ -10022,7 +10070,7 @@ function exportExecutiveProspectus() {
         3. Limits of this report
       </div>
       <div style="font-size:11.5px;line-height:1.5;color:#475569;">
-        Built from public records and City Pretty's screening rules. The value figure has not been tested against recorded sales. Housing-law eligibility is a screening read of the statute and must be confirmed with the planning department. Recorded HOA covenants and title encumbrances are not checked.
+        Built from public records and City Pretty's screening rules. Unless a back-test result is shown with it, the value figure has not been tested against recorded sales. Housing-law eligibility is a screening read of the statute and must be confirmed with the planning department. Recorded HOA covenants and title encumbrances are not checked.
       </div>
     </div>
 

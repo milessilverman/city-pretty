@@ -102,6 +102,12 @@ lawyer). The legal route is a license, or building the same picture from public 
 Finish line: for a test county, the valuation estimate is back-tested against at least 200 real recorded sales and its
 real error is shown. Where the error is too high, the estimate is withheld.
 
+**Status (16 Nov 2026):** done for LA County with a public-record proxy (Prop 13 base-year resets, 50,720 homes;
+`scripts/backtest_la_valuation.mjs`). Result: the model's median error is 18.8%, worse than the neighborhood's typical
+value alone (15.0%), so LA estimates are now withheld. Next: refit the model on this sample, with a holdout set it
+never sees, and re-test; it only goes back on the page if it beats the neighborhood value. Repeat for counties whose
+assessors publish sale prices or market values.
+
 ### Phase 3: what improvements are worth (house and neighborhood scale)
 
 - **The improvement catalog is the biggest gap.** 1 of 81 improvements is fully sourced; 50 have no checkable source
