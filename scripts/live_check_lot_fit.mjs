@@ -37,6 +37,22 @@ const OTHER = [
   { fips: "01073", name: "Jefferson AL (no standards read)", lat: 33.4877, lng: -86.7697 },
 ];
 
+// Washington, DC: the zone is read from DC's zoning map at the point, the lot area and use from OTR's parcel layer,
+// the house's gross floor area from OTR's residential CAMA. Boxes in neighborhoods with R-1A, R-1B, R-2, R-3 and a
+// geographically modified zone (R-3/GT in Burleith), single-family use codes only.
+const DC = ZS.jurisdictions.find((j) => j.id === "dc");
+const DC_PARCELS = "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Property_and_Land_WebMercator/MapServer/40";
+const DC_CAMA = "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Property_and_Land_WebMercator/MapServer/25";
+const DC_BOXES = [
+  { name: "Chevy Chase DC", box: [-77.08, 38.96, -77.06, 38.97] },
+  { name: "Spring Valley", box: [-77.10, 38.935, -77.09, 38.942] },
+  { name: "Burleith", box: [-77.078, 38.912, -77.070, 38.916] },
+  { name: "Chevy Chase DC, Connecticut Ave row houses", box: [-77.0745, 38.9600, -77.0725, 38.9615] },
+];
+// Nashville: the use is the Assessor's LUDesc; no local standards are read (Municode 403), so the reason is shown.
+const NASH = "https://services2.arcgis.com/HdTo6HJqh92wn4D8/arcgis/rest/services/Parcels_view/FeatureServer/0";
+const USES = JSON.parse(fs.readFileSync(path.join(root, "app/data/parcel_use_codes.json"), "utf8"));
+
 async function getJson(url, tries = 4) {
   for (let i = 0; i < tries; i++) {
     try { const r = await fetch(url, { headers: UA, signal: AbortSignal.timeout(60000) }); if (r.ok) return await r.json(); } catch {}
@@ -108,6 +124,92 @@ function expectedNyc(P, lot) {
   return exp;
 }
 
+const centroid = (f) => { const r = f.geometry.rings[0], n = r.length - 1; return { lat: r.slice(0, n).reduce((s, p) => s + p[1], 0) / n, lng: r.slice(0, n).reduce((s, p) => s + p[0], 0) / n }; };
+async function dcZoneAt(lat, lng) {
+  const d = await getJson(`${DC.zone_source.url}/query?` + new URLSearchParams({ geometry: `${lng},${lat}`, geometryType: "esriGeometryPoint", inSR: "4326", spatialRel: "esriSpatialRelIntersects", outFields: "ZONING", returnGeometry: "false", f: "json" }));
+  return d && d.features && d.features[0] ? d.features[0].attributes.ZONING : null;
+}
+async function dcSample(b, seen) {
+  const d = await getJson(`${DC_PARCELS}/query?` + new URLSearchParams({ where: "USECODE IN ('011','012','013')", geometry: b.box.join(","), geometryType: "esriGeometryEnvelope", inSR: "4326",
+    spatialRel: "esriSpatialRelIntersects", outFields: "SSL,PREMISEADD,USECODE,LANDAREA", returnGeometry: "true", outSR: "4326", resultRecordCount: "40", f: "json" }));
+  const out = [];
+  for (const f of (d && d.features) || []) {
+    if (out.length >= 2) break;
+    const c = centroid(f), zone = await dcZoneAt(c.lat, c.lng);
+    if (!zone || seen.has(zone)) continue;
+    const base = zone.split("/")[0];
+    if (!DC.districts[base]) continue;
+    seen.add(zone);
+    out.push({ ...c, zone, parcel: f.attributes });
+  }
+  return out;
+}
+async function dcParcelAt(lat, lng) {
+  const d = await getJson(`${DC_PARCELS}/query?` + new URLSearchParams({ geometry: `${lng},${lat}`, geometryType: "esriGeometryPoint", inSR: "4326", spatialRel: "esriSpatialRelIntersects", outFields: "SSL,PREMISEADD,USECODE,LANDAREA", returnGeometry: "false", f: "json" }));
+  const p = d && d.features && d.features[0] ? d.features[0].attributes : null;
+  if (!p) return null;
+  const c = await getJson(`${DC_CAMA}/query?` + new URLSearchParams({ where: `SSL='${p.SSL.replace(/'/g, "''")}' AND BLDG_NUM=1`, outFields: "GBA", returnGeometry: "false", f: "json" }));
+  p.GBA = c && c.features && c.features[0] ? c.features[0].attributes.GBA : null;
+  return p;
+}
+function expectedDc(zone, p) {
+  const sys = USES.systems.find((s) => s.id === "dc_otr_usecode"), use = sys.codes[p.USECODE];
+  if (zone.includes("/")) return [`a geographically modified version of ${zone.split("/")[0]}`, use.label];
+  const r = DC.districts[zone], exp = [`Zoning district ${zone} (${DC.code})`, use.label, r.purpose.quote,
+    `Height: up to ${r.height.max_height_ft} ft and ${r.height.max_stories} stories`,
+    "One principal dwelling unit and one accessory apartment are allowed per lot of record",
+    ...r.min_lot.map((m) => `${fmtN(m.area_sqft)} sq ft and ${m.width_ft} ft wide`), "Accessory apartment (ADU)"];
+  const rowHouse = /\bRow\b/.test(use.label);
+  const occ = (rowHouse && r.lot_occupancy.find((x) => /Row Building/.test(x.structure))) || r.lot_occupancy.find((x) => /All Other/.test(x.structure));
+  if (p.LANDAREA > 0) exp.push(`Up to ${occ.max_pct}% lot occupancy`, `about ${fmtN(occ.max_pct / 100 * p.LANDAREA)} sq ft of building footprint on this ${fmtN(p.LANDAREA)} sq ft lot`);
+  const g = DC.accessory_apartment.min_gfa[zone];
+  if (g && p.GBA > 0) exp.push(`${fmtN(g.sqft)} sq ft of gross floor area`, `OTR records ${fmtN(p.GBA)} sq ft`);
+  return exp;
+}
+
+// DC sections are Word files: re-download each cited file and confirm each quote / table row is still in it.
+async function verifyDcQuotes() {
+  const { execFileSync } = await import("node:child_process");
+  const os = await import("node:os");
+  const files = {}, out = [];
+  const textOf = async (url) => {
+    if (url in files) return files[url];
+    let t = null;
+    for (let i = 0; i < 3 && t == null; i++) {
+      try {
+        const r = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 (city-pretty live check)" }, signal: AbortSignal.timeout(90000) });
+        if (!r.ok) continue;
+        const dir = fs.mkdtempSync(path.join(os.tmpdir(), "dcmr-")), p = path.join(dir, "s.doc");
+        fs.writeFileSync(p, Buffer.from(await r.arrayBuffer()));
+        execFileSync("soffice", ["--headless", "--convert-to", "txt:Text (encoded):UTF8", "--outdir", dir, p], { stdio: "ignore", timeout: 240000 });
+        t = fs.readFileSync(path.join(dir, "s.txt"), "utf8").replace(/^﻿/, "").replace(/\s+/g, " ");
+        fs.rmSync(dir, { recursive: true, force: true });
+      } catch { await new Promise((res) => setTimeout(res, 2000)); }
+    }
+    return (files[url] = t);
+  };
+  const need = (x, what, text) => out.push({ file: x.text_file, section: x.section, what, text });
+  for (const [z, r] of Object.entries(DC.districts)) {
+    need(r.purpose, `${z} purpose`, r.purpose.quote);
+    need(r.dwelling_units, `${z} dwelling units`, r.dwelling_units.quote);
+    // a table row's zone cell can sit on an earlier line (rows that share it), so the structure and numbers are checked
+    for (const m of r.min_lot) need(m, `${z} min lot`, `${m.structure} ${m.width_ft} ${fmtN(m.area_sqft)}`);
+    need(r.height, `${z} height`, `${r.height.row.split(" | ").slice(-3).join(" ")}`);
+    for (const o of r.lot_occupancy) need(o, `${z} lot occupancy`, `${o.structure} ${o.max_pct}`);
+  }
+  for (const [k, q] of Object.entries(DC.accessory_apartment.quotes)) need(DC.accessory_apartment, `accessory apartment ${k}`, q);
+  for (const [z, g] of Object.entries(DC.accessory_apartment.min_gfa)) need(DC.accessory_apartment, `accessory apartment min GFA ${z}`, g.row.replace(" | ", " "));
+  need(DC.overlay_rule, "overlay rule", DC.overlay_rule.quote);
+  const seen = new Map();
+  for (const o of out) {
+    const key = `${o.file}||${o.text}`;
+    if (seen.has(key)) continue;
+    const t = await textOf(o.file);
+    seen.set(key, { section: o.section, what: o.what, found: t == null ? null : t.includes(o.text.replace(/\s+/g, " ")) });
+  }
+  return [...seen.values()];
+}
+
 function serve() { return spawn(process.execPath, [path.join(root, "scripts/serve.mjs"), String(PORT)], { cwd: root, stdio: "ignore" }); }
 
 async function openHouse(page, fips, ll) {
@@ -145,6 +247,39 @@ async function main() {
         console.log(b.fips, lot.ZoneDist1, lot.Address, row.ok ? "OK" : "MISSING " + JSON.stringify(row.missing));
       }
     }
+    results.dc_quotes = await verifyDcQuotes();
+    results.dc = [];
+    const seenZ = new Set();
+    for (const b of DC_BOXES) {
+      for (const P of await dcSample(b, seenZ)) {
+        const zone = await dcZoneAt(P.lat, P.lng), p = await dcParcelAt(P.lat, P.lng);
+        const row = { county: "11001", area: b.name, lat: +P.lat.toFixed(6), lng: +P.lng.toFixed(6), zone, parcel: p };
+        if (!zone || !p) { row.skipped = "zone or parcel not found when re-queried"; results.dc.push(row); continue; }
+        const text = await openHouse(page, "11001", { lat: P.lat, lng: P.lng });
+        const exp = expectedDc(zone, p);
+        row.missing = exp.filter((e) => !text.includes(e));
+        row.ok = row.missing.length === 0;
+        row.panel_excerpt = text.split("\n").filter((l) => /Zoning district|Lot coverage|Second home|Split into two|Accessory apartment|Height limit|Residential-|geographically modified|Local zoning/.test(l)).join("\n").slice(0, 1800);
+        results.dc.push(row);
+        console.log("11001", zone, p.PREMISEADD, row.ok ? "OK" : "MISSING " + JSON.stringify(row.missing));
+      }
+    }
+    // Nashville: a single-family lot from Metro's own layer.
+    results.nashville = [];
+    {
+      const d = await getJson(`${NASH}/query?` + new URLSearchParams({ where: "LUDesc='SINGLE FAMILY'", geometry: "-86.80,36.12,-86.78,36.14", geometryType: "esriGeometryEnvelope", inSR: "4326", spatialRel: "esriSpatialRelIntersects", outFields: "ParID,PropAddr,LUDesc,Zoning", returnGeometry: "true", outSR: "4326", resultRecordCount: "5", f: "json" }));
+      for (const f of ((d && d.features) || []).slice(0, 2)) {
+        const c = centroid(f), text = await openHouse(page, "47037", c);
+        const row = { county: "47037", lat: +c.lat.toFixed(6), lng: +c.lng.toFixed(6), parcel: f.attributes };
+        row.use_decoded = text.includes("SINGLE FAMILY (Metro Nashville Parcels");
+        row.shows_reason = /Nashville \/ Davidson County: Metro Nashville's Zoning Code \(Title 17\) is published on Municode/.test(text);
+        row.home_checks_run = !/doesn't record this lot's use/.test(text) && /Detached ADU|Interior accessory suite|Swimming pool/.test(text);
+        row.ok = row.use_decoded && row.shows_reason && row.home_checks_run;
+        row.excerpt = text.split("\n").filter((l) => /Local zoning|Not on file|SINGLE FAMILY|Home upgrades/.test(l)).join("\n").slice(0, 800);
+        results.nashville.push(row);
+        console.log("47037", f.attributes.PropAddr, row.ok ? "OK" : JSON.stringify({ use: row.use_decoded, reason: row.shows_reason, checks: row.home_checks_run }));
+      }
+    }
     for (const o of OTHER) {
       const text = await openHouse(page, o.fips, { lat: o.lat, lng: o.lng });
       const row = { county: o.fips, area: o.name, lat: o.lat, lng: o.lng };
@@ -164,6 +299,8 @@ async function main() {
   const out = path.join(root, `data/backtests/live_check_lot_fit_${day}.json`);
   fs.writeFileSync(out, JSON.stringify(results, null, 1));
   const q = results.quotes;
-  console.log(`quotes found ${q.filter((x) => x.found).length}/${q.length}; nyc ok ${results.nyc.filter((r) => r.ok).length}/${results.nyc.filter((r) => !r.skipped).length}; wrote ${out}`);
+  console.log(`quotes found ${q.filter((x) => x.found).length}/${q.length}; nyc ok ${results.nyc.filter((r) => r.ok).length}/${results.nyc.filter((r) => !r.skipped).length}; ` +
+    `dc quotes ${results.dc_quotes.filter((x) => x.found).length}/${results.dc_quotes.length}; dc ok ${results.dc.filter((r) => r.ok).length}/${results.dc.filter((r) => !r.skipped).length}; ` +
+    `nashville ok ${results.nashville.filter((r) => r.ok).length}/${results.nashville.length}; wrote ${out}`);
 }
 main();

@@ -1040,6 +1040,436 @@
     "evidence": "Article I Ch. 2 (12-10), Article II Ch. 2 (22-00, 22-121, 22-122), Article II Ch. 3 (23-11, 23-21, 23-421, 23-422)",
     "unverified_fields": []
    }
+  },
+  {
+   "id": "dc",
+   "name": "Washington, DC",
+   "counties": [
+    "11001"
+   ],
+   "zone_source": {
+    "kind": "point_layer",
+    "url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Planning_Landuse_and_Zoning_WebMercator/MapServer/32",
+    "field": "ZONING",
+    "attr": "ZoningDC",
+    "lot_area_field": "LANDAREA",
+    "floor_area_field": "CAMA_GBA",
+    "note": "DC Office of Zoning's map of the Zoning Regulations of 2016 (DC GIS), queried at the clicked point; a lot crossed by a zone line takes the zone at the point. Lot area is OTR's LANDAREA; gross floor area is OTR's residential CAMA GBA."
+   },
+   "code": "DC Zoning Regulations of 2016 (11 DCMR)",
+   "cite_prefix": "11 DCMR",
+   "code_url": "https://dcregs.dc.gov",
+   "as_amended": "sections as published on dcregs.dc.gov on 2026-11-16",
+   "districts_covered": [
+    "R-1A",
+    "R-1B",
+    "R-2",
+    "R-3"
+   ],
+   "not_covered": "Only the four base R zones are encoded. Geographically modified zones (letters after the base name, such as R-1B/GT or R-3/FB) have their own rules in Subtitle D and are not encoded, nor are the RF, RA, MU and other zones.",
+   "overlay_rule": {
+    "section": "Subtitle D § 100",
+    "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D100",
+    "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={ED322EB8-4818-42D6-911A-C558B383E243}",
+    "quote": "Geographically modified zones are indicated by letters following the base zone name, such as R-1A/TS/NO or R-3/FB."
+   },
+   "r1_family": {
+    "section": "Subtitle D § 101",
+    "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D101",
+    "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={E9232560-ED36-403B-BF2E-6D96713D84B5}",
+    "quote": "The purposes of the R-1A and R-1B zones are to:"
+   },
+   "principal_use": {
+    "section": "Subtitle U § 201",
+    "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-U201",
+    "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={693E6414-46E4-47BD-818F-BADFC36CA96B}",
+    "quote": "The following uses in this section shall be permitted as a matter of right subject to any applicable conditions: (a) A principal dwelling unit;"
+   },
+   "accessory_apartment": {
+    "max_share_pct": 35,
+    "max_persons": 3,
+    "min_gfa": {
+     "R-1A": {
+      "sqft": 2000,
+      "row": "R-1 | 2,000 sq. ft.",
+      "table": "Table U § 253.7(a)"
+     },
+     "R-1B": {
+      "sqft": 2000,
+      "row": "R-1 | 2,000 sq. ft.",
+      "table": "Table U § 253.7(a)"
+     },
+     "R-2": {
+      "sqft": 1200,
+      "row": "R-2 | 1,200 sq. ft.",
+      "table": "Table U § 253.7(a)"
+     }
+    },
+    "quotes": {
+     "by_right": "An accessory apartment shall be permitted in a principal dwelling or an accessory building as a matter of right in the R zones, except the R-1B/GT or R 3/GT zone, subject to the provisions of this section.",
+     "owner": "Either the principal dwelling or accessory apartment unit shall be owner-occupied for the duration of the accessory apartment use.",
+     "persons": "The total number of persons that may occupy the accessory apartment shall not exceed three (3)",
+     "share": "The accessory apartment unit may not occupy more than thirty-five percent (35%) of the gross floor area of the house;",
+     "entrance": "Except as provided in Subtitle U § 253.7(d), if an additional entrance is created to a house it shall not be located on a wall of the house that faces a street;",
+     "access": "An accessory apartment in an accessory building in an R zone, except the R-1B/GT or R-3/GT zone, shall be permitted as a matter of right subject to the following conditions: (a) There shall be permanent access to the accessory building apartment;",
+     "license": "Prior to renting an accessory apartment in any zone, the property owner shall obtain a Residential Rental Business License from the Department of Buildings and the property shall be inspected for relevant housing code compliance."
+    },
+    "section": "Subtitle U § 253",
+    "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-U253",
+    "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={8E59471E-8C75-40F3-858C-FEB57CD5BA4B}"
+   },
+   "districts": {
+    "R-1A": {
+     "purpose": {
+      "section": "Subtitle D § 101",
+      "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D101",
+      "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={E9232560-ED36-403B-BF2E-6D96713D84B5}",
+      "quote": "The R-1A zone is intended to provide for areas predominantly developed with detached houses on large lots."
+     },
+     "dwelling_units": {
+      "principal": 1,
+      "accessory_apartment": 1,
+      "quote": "In all R zones, one (1) principal dwelling unit and one (1) accessory apartment shall be permitted per lot of record, subject to Subtitle U, Use Permissions.",
+      "section": "Subtitle D § 201",
+      "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D201",
+      "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={57E99C60-31E7-428B-8B0D-AB385A49B9F6}"
+     },
+     "min_lot": [
+      {
+       "structure": "All Structures",
+       "width_ft": 75,
+       "area_sqft": 7500,
+       "row": "R-1A | All Structures | 75 | 7,500",
+       "table": "Table D § 202.1",
+       "section": "Subtitle D § 202",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D202",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={F3BD4053-A2FF-4999-8194-22B021840800}"
+      }
+     ],
+     "min_lot_inclusionary": [],
+     "lot_occupancy": [
+      {
+       "structure": "Public Recreation and Community Center",
+       "max_pct": 20,
+       "row": "R-1 | R-2 | Public Recreation and Community Center | 20",
+       "table": "Table D § 210.1",
+       "section": "Subtitle D § 210",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D210",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={C4E3B8DA-E206-480F-A473-576D45BC8879}"
+      },
+      {
+       "structure": "Places of Worship",
+       "max_pct": 60,
+       "row": "R-1 | R-2 | Places of Worship | 60",
+       "table": "Table D § 210.1",
+       "section": "Subtitle D § 210",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D210",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={C4E3B8DA-E206-480F-A473-576D45BC8879}"
+      },
+      {
+       "structure": "All Other Structures",
+       "max_pct": 40,
+       "row": "R-1 | R-2 | All Other Structures | 40",
+       "table": "Table D § 210.1",
+       "section": "Subtitle D § 210",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D210",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={C4E3B8DA-E206-480F-A473-576D45BC8879}"
+      }
+     ],
+     "height": {
+      "max_height_ft": 40,
+      "max_stories": 3,
+      "row": "R-1 | 40 | 3",
+      "table": "Table D § 203.2",
+      "applies_to": "buildings, not including a penthouse or rooftop structure",
+      "section": "Subtitle D § 203",
+      "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D203",
+      "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={979A0B36-54DB-48FA-B8B5-67231BA95A15}"
+     }
+    },
+    "R-1B": {
+     "purpose": {
+      "section": "Subtitle D § 101",
+      "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D101",
+      "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={E9232560-ED36-403B-BF2E-6D96713D84B5}",
+      "quote": "The R-1B zone is intended to provide for areas predominantly developed with detached houses on moderately sized lots."
+     },
+     "dwelling_units": {
+      "principal": 1,
+      "accessory_apartment": 1,
+      "quote": "In all R zones, one (1) principal dwelling unit and one (1) accessory apartment shall be permitted per lot of record, subject to Subtitle U, Use Permissions.",
+      "section": "Subtitle D § 201",
+      "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D201",
+      "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={57E99C60-31E7-428B-8B0D-AB385A49B9F6}"
+     },
+     "min_lot": [
+      {
+       "structure": "All Structures",
+       "width_ft": 50,
+       "area_sqft": 5000,
+       "row": "R-1B | All Structures | 50 | 5,000",
+       "table": "Table D § 202.1",
+       "section": "Subtitle D § 202",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D202",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={F3BD4053-A2FF-4999-8194-22B021840800}"
+      }
+     ],
+     "min_lot_inclusionary": [],
+     "lot_occupancy": [
+      {
+       "structure": "Public Recreation and Community Center",
+       "max_pct": 20,
+       "row": "R-1 | R-2 | Public Recreation and Community Center | 20",
+       "table": "Table D § 210.1",
+       "section": "Subtitle D § 210",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D210",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={C4E3B8DA-E206-480F-A473-576D45BC8879}"
+      },
+      {
+       "structure": "Places of Worship",
+       "max_pct": 60,
+       "row": "R-1 | R-2 | Places of Worship | 60",
+       "table": "Table D § 210.1",
+       "section": "Subtitle D § 210",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D210",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={C4E3B8DA-E206-480F-A473-576D45BC8879}"
+      },
+      {
+       "structure": "All Other Structures",
+       "max_pct": 40,
+       "row": "R-1 | R-2 | All Other Structures | 40",
+       "table": "Table D § 210.1",
+       "section": "Subtitle D § 210",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D210",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={C4E3B8DA-E206-480F-A473-576D45BC8879}"
+      }
+     ],
+     "height": {
+      "max_height_ft": 40,
+      "max_stories": 3,
+      "row": "R-1 | 40 | 3",
+      "table": "Table D § 203.2",
+      "applies_to": "buildings, not including a penthouse or rooftop structure",
+      "section": "Subtitle D § 203",
+      "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D203",
+      "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={979A0B36-54DB-48FA-B8B5-67231BA95A15}"
+     }
+    },
+    "R-2": {
+     "purpose": {
+      "section": "Subtitle D § 101",
+      "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D101",
+      "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={E9232560-ED36-403B-BF2E-6D96713D84B5}",
+      "quote": "The R-2 zone is intended to provide for areas predominantly developed with semi-detached houses on moderately sized lots that also contain some detached houses."
+     },
+     "dwelling_units": {
+      "principal": 1,
+      "accessory_apartment": 1,
+      "quote": "In all R zones, one (1) principal dwelling unit and one (1) accessory apartment shall be permitted per lot of record, subject to Subtitle U, Use Permissions.",
+      "section": "Subtitle D § 201",
+      "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D201",
+      "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={57E99C60-31E7-428B-8B0D-AB385A49B9F6}"
+     },
+     "min_lot": [
+      {
+       "structure": "Semi-detached",
+       "width_ft": 30,
+       "area_sqft": 3000,
+       "row": "R-2 | Semi-detached | 30 | 3,000",
+       "table": "Table D § 202.1",
+       "section": "Subtitle D § 202",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D202",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={F3BD4053-A2FF-4999-8194-22B021840800}"
+      },
+      {
+       "structure": "All Other Structures",
+       "width_ft": 40,
+       "area_sqft": 4000,
+       "row": "R-2 | All Other Structures | 40 | 4,000",
+       "table": "Table D § 202.1",
+       "section": "Subtitle D § 202",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D202",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={F3BD4053-A2FF-4999-8194-22B021840800}"
+      }
+     ],
+     "min_lot_inclusionary": [
+      {
+       "structure": "Semi-detached",
+       "width_ft": 25,
+       "area_sqft": 2500,
+       "row": "R-2 | Semi-detached | 25 | 2,500",
+       "table": "Table D § 202.2 (Inclusionary Developments)",
+       "section": "Subtitle D § 202",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D202",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={F3BD4053-A2FF-4999-8194-22B021840800}"
+      },
+      {
+       "structure": "Detached",
+       "width_ft": 32,
+       "area_sqft": 3200,
+       "row": "R-2 | Detached | 32 | 3,200",
+       "table": "Table D § 202.2 (Inclusionary Developments)",
+       "section": "Subtitle D § 202",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D202",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={F3BD4053-A2FF-4999-8194-22B021840800}"
+      }
+     ],
+     "lot_occupancy": [
+      {
+       "structure": "Public Recreation and Community Center",
+       "max_pct": 20,
+       "row": "R-1 | R-2 | Public Recreation and Community Center | 20",
+       "table": "Table D § 210.1",
+       "section": "Subtitle D § 210",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D210",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={C4E3B8DA-E206-480F-A473-576D45BC8879}"
+      },
+      {
+       "structure": "Places of Worship",
+       "max_pct": 60,
+       "row": "R-1 | R-2 | Places of Worship | 60",
+       "table": "Table D § 210.1",
+       "section": "Subtitle D § 210",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D210",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={C4E3B8DA-E206-480F-A473-576D45BC8879}"
+      },
+      {
+       "structure": "All Other Structures",
+       "max_pct": 40,
+       "row": "R-1 | R-2 | All Other Structures | 40",
+       "table": "Table D § 210.1",
+       "section": "Subtitle D § 210",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D210",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={C4E3B8DA-E206-480F-A473-576D45BC8879}"
+      }
+     ],
+     "height": {
+      "max_height_ft": 40,
+      "max_stories": 3,
+      "row": "R-2 | 40 | 3",
+      "table": "Table D § 203.2",
+      "applies_to": "buildings, not including a penthouse or rooftop structure",
+      "section": "Subtitle D § 203",
+      "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D203",
+      "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={979A0B36-54DB-48FA-B8B5-67231BA95A15}"
+     }
+    },
+    "R-3": {
+     "purpose": {
+      "section": "Subtitle D § 101",
+      "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D101",
+      "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={E9232560-ED36-403B-BF2E-6D96713D84B5}",
+      "quote": "The R-3 zone is intended to permit attached row houses on small lots."
+     },
+     "dwelling_units": {
+      "principal": 1,
+      "accessory_apartment": 1,
+      "quote": "In all R zones, one (1) principal dwelling unit and one (1) accessory apartment shall be permitted per lot of record, subject to Subtitle U, Use Permissions.",
+      "section": "Subtitle D § 201",
+      "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D201",
+      "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={57E99C60-31E7-428B-8B0D-AB385A49B9F6}"
+     },
+     "min_lot": [
+      {
+       "structure": "Row",
+       "width_ft": 20,
+       "area_sqft": 2000,
+       "row": "R-3 | Row | 20 | 2,000",
+       "table": "Table D § 202.1",
+       "section": "Subtitle D § 202",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D202",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={F3BD4053-A2FF-4999-8194-22B021840800}"
+      },
+      {
+       "structure": "Semi-detached",
+       "width_ft": 30,
+       "area_sqft": 3000,
+       "row": "R-3 | Semi-detached | 30 | 3,000",
+       "table": "Table D § 202.1",
+       "section": "Subtitle D § 202",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D202",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={F3BD4053-A2FF-4999-8194-22B021840800}"
+      },
+      {
+       "structure": "All Other Structures",
+       "width_ft": 40,
+       "area_sqft": 4000,
+       "row": "R-3 | All Other Structures | 40 | 4,000",
+       "table": "Table D § 202.1",
+       "section": "Subtitle D § 202",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D202",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={F3BD4053-A2FF-4999-8194-22B021840800}"
+      }
+     ],
+     "min_lot_inclusionary": [
+      {
+       "structure": "All Structures",
+       "width_ft": 16,
+       "area_sqft": 1600,
+       "row": "R-3 | All Structures | 16 | 1,600",
+       "table": "Table D § 202.2 (Inclusionary Developments)",
+       "section": "Subtitle D § 202",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D202",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={F3BD4053-A2FF-4999-8194-22B021840800}"
+      }
+     ],
+     "lot_occupancy": [
+      {
+       "structure": "Public Recreation and Community Center",
+       "max_pct": 20,
+       "row": "R-3 | Public Recreation and Community Center | 20",
+       "table": "Table D § 210.1",
+       "section": "Subtitle D § 210",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D210",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={C4E3B8DA-E206-480F-A473-576D45BC8879}"
+      },
+      {
+       "structure": "Places of Worship",
+       "max_pct": 60,
+       "row": "R-3 | Places of Worship | 60",
+       "table": "Table D § 210.1",
+       "section": "Subtitle D § 210",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D210",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={C4E3B8DA-E206-480F-A473-576D45BC8879}"
+      },
+      {
+       "structure": "Single Household Row Building",
+       "max_pct": 60,
+       "row": "R-3 | Single Household Row Building | 60",
+       "table": "Table D § 210.1",
+       "section": "Subtitle D § 210",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D210",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={C4E3B8DA-E206-480F-A473-576D45BC8879}"
+      },
+      {
+       "structure": "All Other Structures",
+       "max_pct": 40,
+       "row": "R-3 | All Other Structures | 40",
+       "table": "Table D § 210.1",
+       "section": "Subtitle D § 210",
+       "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D210",
+       "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={C4E3B8DA-E206-480F-A473-576D45BC8879}"
+      }
+     ],
+     "height": {
+      "max_height_ft": 40,
+      "max_stories": 3,
+      "row": "R-3 | 40 | 3",
+      "table": "Table D § 203.2",
+      "applies_to": "buildings, not including a penthouse or rooftop structure",
+      "section": "Subtitle D § 203",
+      "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D203",
+      "text_file": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={979A0B36-54DB-48FA-B8B5-67231BA95A15}"
+     }
+    }
+   },
+   "verification": {
+    "status": "verified",
+    "checked_on": "2026-11-16",
+    "method": "Read each section's Word file from the chapter lists on dcregs.dc.gov (converted to text with LibreOffice) and parsed the tables and sentences with scripts/build_zoning_standards.py; each rule keeps the verbatim text or table row it came from.",
+    "evidence": "11 DCMR Subtitle D §§ 100, 101, 201, 202, 203, 210; Subtitle U §§ 200, 201, 253",
+    "unverified_fields": []
+   }
   }
  ],
  "withheld": [
@@ -1108,6 +1538,44 @@
    "tried": [
     {
      "url": "https://codelibrary.amlegal.com/codes/philadelphia/latest/philadelphia_pa/0-0-0-1",
+     "result": "HTTP 403",
+     "on": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "jurisdiction": "Denver",
+   "counties": [
+    "08031"
+   ],
+   "reason": "The current Denver Zoning Code's text wasn't found as a document the build machine could read: the city's Denver Zoning Code page (answered 16 Nov 2026) links code interpretations and the former Chapter 59, not the current articles. Denver's house standards are building-form tables keyed to the zone district's lot-size letter, so they are not encoded until that text is read. Colorado's statewide parcel layer gives Denver zones only in shortened form (SSU, ESU), without that letter.",
+   "tried": [
+    {
+     "url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Community-Planning-and-Development/Denver-Zoning-Code",
+     "result": "HTTP 200; no current-code article documents linked",
+     "on": "2026-11-16"
+    },
+    {
+     "url": "https://www.denvergov.org/files/assets/public/v/3/community-planning-and-development/documents/zoning/denver-zoning-code/denver_zoning_code_article4_edge.pdf",
+     "result": "HTTP 404 (guessed path)",
+     "on": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "jurisdiction": "Nashville / Davidson County",
+   "counties": [
+    "47037"
+   ],
+   "reason": "Metro Nashville's Zoning Code (Title 17) is published on Municode, which answered the build machine with HTTP 403 on 16 Nov 2026, so no standard could be read from the code itself. The parcel record does give the Assessor's land use (LUDesc), so home checks run there, without local standards.",
+   "tried": [
+    {
+     "url": "https://library.municode.com/tn/metro_government_of_nashville_and_davidson_county/codes/code_of_ordinances?nodeId=CD_TIT17ZO",
+     "result": "HTTP 403",
+     "on": "2026-11-16"
+    },
+    {
+     "url": "https://api.municode.com/codes/tn/metro_government_of_nashville_and_davidson_county",
      "result": "HTTP 403",
      "on": "2026-11-16"
     }

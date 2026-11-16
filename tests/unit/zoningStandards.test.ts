@@ -55,6 +55,50 @@ describe("zoning_standards.json: New York City", () => {
   });
 });
 
+const DC = ZS.jurisdictions.find((j: any) => j.id === "dc");
+
+describe("zoning_standards.json: Washington, DC", () => {
+  it("covers the four base R zones, with the zone read from DC's zoning map at the point", () => {
+    expect(DC.counties).toEqual(["11001"]);
+    expect(Object.keys(DC.districts).sort()).toEqual(["R-1A", "R-1B", "R-2", "R-3"]);
+    expect(DC.zone_source).toMatchObject({ kind: "point_layer", field: "ZONING", attr: "ZoningDC", lot_area_field: "LANDAREA" });
+    expect(DC.zone_source.url).toMatch(/^https:\/\/maps2\.dcgis\.dc\.gov\/.*Planning_Landuse_and_Zoning_WebMercator\/MapServer\/32$/);
+    expect(DC.overlay_rule.quote).toContain("Geographically modified zones are indicated by letters following the base zone name");
+  });
+
+  it("every rule cites its 11 DCMR section page and the text file it was read from", () => {
+    for (const [z, r] of Object.entries<any>(DC.districts))
+      for (const x of [r.purpose, r.dwelling_units, r.height, ...r.min_lot, ...r.lot_occupancy]) {
+        expect(x.url, z).toMatch(/^https:\/\/www\.dcregs\.dc\.gov\/Common\/DCMR\/SectionList\.aspx\?SectionNumber=11-[DU]\d{3}$/);
+        expect(x.text_file, z).toMatch(/^https:\/\/dcregs\.dc\.gov\/Common\/DCMR\/RuleList\.aspx\?DownloadFile=\{[0-9A-F-]+\}$/);
+      }
+  });
+
+  it("each number appears in the table row it was parsed from", () => {
+    for (const [z, r] of Object.entries<any>(DC.districts)) {
+      for (const m of r.min_lot) expect(m.row, z).toContain(`${m.structure} | ${m.width_ft} | ${fmt(m.area_sqft)}`);
+      expect(r.height.row, z).toContain(`| ${r.height.max_height_ft} | ${r.height.max_stories}`);
+      for (const o of r.lot_occupancy) expect(o.row, z).toContain(`${o.structure} | ${o.max_pct}`);
+      expect(r.dwelling_units.quote).toContain("one (1) principal dwelling unit and one (1) accessory apartment shall be permitted per lot of record");
+    }
+    for (const [z, g] of Object.entries<any>(DC.accessory_apartment.min_gfa)) expect(g.row, z).toContain(`${fmt(g.sqft)} sq. ft.`);
+    expect(DC.accessory_apartment.quotes.share).toContain(`(${DC.accessory_apartment.max_share_pct}%)`);
+    expect(DC.accessory_apartment.quotes.persons).toContain("shall not exceed three (3)");
+  });
+
+  it("matches 11 DCMR as published on dcregs.dc.gov on 16 Nov 2026 (spot checks)", () => {
+    // Table D § 202.1 (as amended 10 Jul 2026), Table D § 203.2, Table D § 210.1, Table U § 253.7(a).
+    expect(DC.districts["R-1A"].min_lot).toEqual([expect.objectContaining({ structure: "All Structures", width_ft: 75, area_sqft: 7500 })]);
+    expect(DC.districts["R-1B"].min_lot).toEqual([expect.objectContaining({ structure: "All Structures", width_ft: 50, area_sqft: 5000 })]);
+    expect(DC.districts["R-3"].min_lot.map((x: any) => [x.structure, x.width_ft, x.area_sqft])).toEqual([["Row", 20, 2000], ["Semi-detached", 30, 3000], ["All Other Structures", 40, 4000]]);
+    for (const z of ["R-1A", "R-1B", "R-2", "R-3"]) expect(DC.districts[z].height).toMatchObject({ max_height_ft: 40, max_stories: 3 });
+    expect(DC.districts["R-3"].lot_occupancy.find((x: any) => x.structure === "Single Household Row Building").max_pct).toBe(60);
+    expect(DC.districts["R-2"].lot_occupancy.find((x: any) => x.structure === "All Other Structures").max_pct).toBe(40);
+    expect(DC.accessory_apartment.min_gfa).toEqual({ "R-1A": expect.objectContaining({ sqft: 2000 }), "R-1B": expect.objectContaining({ sqft: 2000 }), "R-2": expect.objectContaining({ sqft: 1200 }) });
+    expect(DC.accessory_apartment.max_share_pct).toBe(35);
+  });
+});
+
 describe("zoning_standards.json: withheld jurisdictions", () => {
   it("each says why, with what was tried", () => {
     expect(ZS.withheld.length).toBeGreaterThan(0);
@@ -81,5 +125,38 @@ describe("parcel_use_codes.json", () => {
     expect(s.codes["04"].type).toBe("mixed");
     expect(s.codes["05"].type).toBe("non-residential");
     expect(s.codes["11"].type).toBe("vacant");
+  });
+
+  it("DC use codes come from OTR's own USECODE table, with the building form", () => {
+    const s = USES.systems.find((x: any) => x.id === "dc_otr_usecode");
+    expect(s.counties).toEqual(["11001"]);
+    expect(s.field).toBe("USECODE");
+    expect(s.source.url).toMatch(/Property_and_Land_WebMercator\/MapServer\/54$/);
+    expect(s.codes["012"]).toEqual({ label: "Residential-Detached-Single-Family", type: "residential", form: "single-family" });
+    expect(s.codes["011"].form).toBe("single-family");
+    expect(s.codes["016"]).toMatchObject({ type: "residential", form: "unit" });            // condominium unit
+    expect(s.codes["023"]).toMatchObject({ type: "residential", form: "small-multi" });     // flats, fewer than 5
+    expect(s.codes["022"]).toMatchObject({ type: "residential", form: "multi-family" });    // elevator apartment building
+    expect(s.codes["014"].type).toBe("non-residential");                                     // garage, no living quarters
+    expect(s.codes["003"].type).toBe("non-residential");                                     // transient (hotel-type)
+    expect(s.codes["081"].type).toBe("non-residential");                                     // religious
+    expect(s.codes["091"].type).toBe("vacant");
+    expect(s.codes["000"].type).toBe("unknown");
+    expect(s.codes["995"].type).toBe("unknown");
+  });
+
+  it("Nashville uses are the Assessor's LUDesc labels, typed by label (the same label has urban and rural codes)", () => {
+    const s = USES.systems.find((x: any) => x.id === "nashville_ludesc");
+    expect(s.counties).toEqual(["47037"]);
+    expect(s.field).toBe("LUDesc");
+    expect(s.source.name).toContain("General Land Use assigned by the Assessor of Property");
+    expect(s.codes["SINGLE FAMILY"]).toMatchObject({ type: "residential", form: "single-family" });
+    expect(s.codes["SINGLE FAMILY"].codes).toEqual(expect.arrayContaining(["011", "081"]));
+    expect(s.codes["DUPLEX"]).toMatchObject({ type: "residential", form: "small-multi" });
+    expect(s.codes["RESIDENTIAL CONDO"]).toMatchObject({ type: "residential", form: "unit" });
+    expect(s.codes["VACANT RESIDENTIAL LAND"].type).toBe("vacant");
+    expect(s.codes["CHURCH"].type).toBe("non-residential");
+    expect(s.codes["PARSONAGE"].type).toBe("unknown");
+    for (const [k, v] of Object.entries<any>(s.codes)) expect(v.label, k).toBe(k.replace(/\s+/g, " "));
   });
 });
