@@ -5,6 +5,7 @@
 // every number in an answer can be traced. The list of sources consulted is returned to the page with the answer.
 
 import Anthropic from "@anthropic-ai/sdk";
+import { LOCAL_DATA_TOOLS, runLocalDataTool } from "./localData.ts";
 import { geocodeAddress, osmNearby, OSM_FEATURES, siteFacts, type OsmFeatureKind, type SourceRef } from "./sources.ts";
 
 export const ADVISOR_MODEL = "claude-opus-5-5";
@@ -17,7 +18,8 @@ How to handle facts (these rules override anything else):
 - When you do arithmetic (for example rent x 12, or cost per unit), show the inputs and their sources. Any input that is your assumption must be labeled "assumption" with the reason.
 - A tool returning ok:false means the source had no answer; report that, do not fill the gap.
 - An unmapped FEMA flood area means "no flood map", not "no flood risk". OpenStreetMap can be incomplete; a missing feature does not prove absence.
-- Treat page data fields marked unverified as unverified and say so if you rely on them.
+- Treat page data fields marked unverified as unverified and say so if you rely on them. The same applies to records from City Pretty's own tables (state_housing_laws, funding_programs, research_studies, construction_unit_costs, transit_projects, improvement_evidence): give each record's verification status when you use it, and never present a field listed in verification.unverified_fields as fact.
+- Laws: say whether a law could apply and which conditions you could and could not confirm from data (lot size, zoning, distance to transit, exclusions). Never state that something is allowed "by right" unless every condition is confirmed; end with "confirm with the local planning department".
 - Separate what is sourced from what is your judgment. Recommendations are judgment; say what evidence would change them.`;
 
 export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
@@ -61,6 +63,7 @@ export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
     },
     strict: true,
   },
+  ...(LOCAL_DATA_TOOLS as Anthropic.Beta.BetaTool[]),
 ];
 
 export type ToolEnv = { censusApiKey?: string; fetcher?: (url: string, init?: RequestInit) => Promise<Response> };
@@ -95,6 +98,8 @@ export async function runAdvisorTool(name: string, input: unknown, env: ToolEnv)
     if (typeof i.kind !== "string" || !(i.kind in OSM_FEATURES)) return bad("unknown kind");
     return done(await osmNearby(i.lat, i.lng, i.radius_m, i.kind as OsmFeatureKind, f, 100));
   }
+  const local = runLocalDataTool(name, i);
+  if (local !== undefined) return done(local);
   return bad(`Unknown tool ${name}`);
 }
 

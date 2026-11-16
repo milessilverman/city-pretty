@@ -1,0 +1,164 @@
+// Live public records for a point, shown in the parcel panel with a link to each exact query.
+//
+// Same rule as workers/sources.ts: a value comes from the named public service in this request, or the row says
+// it's not available and why. Nothing is filled in. When a Worker is configured (app/config.js workerUrl) the page
+// asks its /api/facts route; otherwise it calls the services directly (each allows cross-origin requests:
+// HUD's ArcGIS service, FEMA NFHL, USGS EPQS and Census TIGERweb).
+//
+// Remote values are inserted as text, never as HTML.
+
+const TIMEOUT_MS = 15000;
+const HUD = "https://services.arcgis.com/VTyQ9soqVukalItT/arcgis/rest/services/Fair_Market_Rents/FeatureServer/0/query";
+const FEMA = "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query";
+const USGS = "https://epqs.nationalmap.gov/v1/json";
+const TIGER = "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer";
+
+const pointQuery = (lat, lng, outFields) =>
+  new URLSearchParams({ geometry: `${lng},${lat}`, geometryType: "esriGeometryPoint", inSR: "4326", spatialRel: "esriSpatialRelIntersects", outFields, returnGeometry: "false", f: "json" });
+
+async function getJson(url, fetcher) {
+  const ctl = typeof AbortController !== "undefined" ? new AbortController() : null;
+  const t = ctl ? setTimeout(() => ctl.abort(), TIMEOUT_MS) : null;
+  try {
+    const r = await fetcher(url, ctl ? { signal: ctl.signal } : undefined);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const d = await r.json();
+    if (d && d.error) throw new Error(d.error.message || "service error");
+    return d;
+  } finally {
+    if (t) clearTimeout(t);
+  }
+}
+
+const ok = (label, value, source, url, note) => ({ ok: true, label, value, source, url, note: note || null, at: new Date().toISOString() });
+const no = (label, reason, source, url) => ({ ok: false, label, value: null, reason, source, url, at: new Date().toISOString() });
+const money = (n) => (typeof n === "number" && isFinite(n) ? "$" + n.toLocaleString("en-US") : null);
+
+export async function liveSiteFacts(lat, lng, opts = {}) {
+  const fetcher = opts.fetcher || ((u, i) => fetch(u, i));
+  if (!(isFinite(lat) && isFinite(lng) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180)) return [no("Location", "No valid coordinates for this parcel", "", "")];
+  const rows = [];
+
+  const geoUrl = `${TIGER}/10/query?${pointQuery(lat, lng, "GEOID")}`;
+  const cntyUrl = `${TIGER}/82/query?${pointQuery(lat, lng, "GEOID,NAME")}`;
+  const hudUrl = `${HUD}?${pointQuery(lat, lng, "FMR_AREANAME,FMR_1BDR,FMR_2BDR,FMR_3BDR")}`;
+  const femaUrl = `${FEMA}?${pointQuery(lat, lng, "FLD_ZONE,ZONE_SUBTY,SFHA_TF")}`;
+  const usgsUrl = `${USGS}?${new URLSearchParams({ x: String(lng), y: String(lat), units: "Feet", wkid: "4326" })}`;
+
+  const [bg, cnty, hud, fema, usgs] = await Promise.allSettled([geoUrl, cntyUrl, hudUrl, femaUrl, usgsUrl].map((u) => getJson(u, fetcher)));
+  const err = (s) => (s.reason && s.reason.message) || "request failed";
+
+  // Census area
+  if (cnty.status === "fulfilled" && cnty.value.features && cnty.value.features[0]) {
+    const c = cnty.value.features[0].attributes;
+    const g = bg.status === "fulfilled" && bg.value.features && bg.value.features[0] ? bg.value.features[0].attributes.GEOID : null;
+    rows.push(ok("Census area", `${c.NAME}${g ? " · block group " + g : ""}`, "U.S. Census Bureau TIGERweb", g ? geoUrl : cntyUrl));
+  } else rows.push(no("Census area", cnty.status === "rejected" ? err(cnty) : "Not inside a U.S. county", "U.S. Census Bureau TIGERweb", cntyUrl));
+
+  // HUD Fair Market Rent
+  if (hud.status === "fulfilled" && hud.value.features && hud.value.features[0]) {
+    const h = hud.value.features[0].attributes;
+    const parts = [["1 bed", h.FMR_1BDR], ["2 bed", h.FMR_2BDR], ["3 bed", h.FMR_3BDR]].filter(([, v]) => money(v)).map(([k, v]) => `${k} ${money(v)}`);
+    rows.push(ok("HUD Fair Market Rent (FY2026)", parts.join(" · ") + "/mo", "U.S. Department of Housing and Urban Development", hudUrl,
+      `${h.FMR_AREANAME}. HUD's voucher benchmark (rent plus utilities), not a market asking rent.`));
+  } else rows.push(no("HUD Fair Market Rent", hud.status === "rejected" ? err(hud) : "No HUD rent area covers this point", "U.S. Department of Housing and Urban Development", hudUrl));
+
+  // FEMA flood zone
+  if (fema.status === "fulfilled" && fema.value.features && fema.value.features[0]) {
+    const f = fema.value.features[0].attributes;
+    const sfha = f.SFHA_TF === "T";
+    rows.push(ok("FEMA flood zone", `Zone ${f.FLD_ZONE}${f.ZONE_SUBTY ? " (" + String(f.ZONE_SUBTY).toLowerCase() + ")" : ""}${sfha ? " · special flood hazard area" : ""}`, "FEMA National Flood Hazard Layer", femaUrl,
+      sfha ? "Federally backed mortgages here require flood insurance." : null));
+  } else rows.push(no("FEMA flood zone", fema.status === "rejected" ? err(fema) : "No effective FEMA flood map here (unmapped, not 'no risk')", "FEMA National Flood Hazard Layer", femaUrl));
+
+  // USGS ground elevation
+  const ev = usgs.status === "fulfilled" ? Number(usgs.value.value) : NaN;
+  if (isFinite(ev) && ev > -100000) rows.push(ok("Ground elevation", `${Math.round(ev).toLocaleString("en-US")} ft`, "U.S. Geological Survey 3DEP", usgsUrl));
+  else rows.push(no("Ground elevation", usgs.status === "rejected" ? err(usgs) : "No elevation data at this point", "U.S. Geological Survey 3DEP", usgsUrl));
+
+  return rows;
+}
+
+// Renders rows into a container using text nodes only.
+export function renderFacts(container, rows, doc = document) {
+  const wrap = doc.createElement("div");
+  wrap.className = "live-facts";
+  wrap.setAttribute("data-live-facts", "");
+  wrap.style.cssText = "margin-top:12px;padding-top:10px;border-top:1px solid rgba(127,127,127,.25)";
+  const h = doc.createElement("div");
+  h.style.cssText = "font-weight:700;margin-bottom:4px";
+  h.textContent = "Live public records for this spot";
+  wrap.appendChild(h);
+  const sub = doc.createElement("div");
+  sub.style.cssText = "font-size:11px;opacity:.75;margin-bottom:6px";
+  sub.textContent = "Fetched just now from each agency. Open a link to see the exact query.";
+  wrap.appendChild(sub);
+  for (const r of rows) {
+    const row = doc.createElement("div");
+    row.style.cssText = "font-size:12px;margin:4px 0";
+    const b = doc.createElement("b");
+    b.textContent = r.label + ": ";
+    row.appendChild(b);
+    row.appendChild(doc.createTextNode(r.ok ? r.value : "Not available (" + r.reason + ")"));
+    if (r.note) {
+      const n = doc.createElement("div");
+      n.style.cssText = "font-size:11px;opacity:.75";
+      n.textContent = r.note;
+      row.appendChild(n);
+    }
+    if (r.url) {
+      const a = doc.createElement("a");
+      a.href = r.url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.style.cssText = "font-size:11px;margin-left:4px";
+      a.textContent = r.source ? `(${r.source})` : "(source)";
+      row.appendChild(a);
+    }
+    wrap.appendChild(row);
+  }
+  container.appendChild(wrap);
+  return wrap;
+}
+
+// Called by the parcel panel, which re-renders as its own data loads. Results are cached per location so the
+// agencies are queried once; a stale result for a different parcel is never drawn.
+const cache = new Map();
+let current = null;
+export async function attachLiveFacts(container, lat, lng) {
+  if (!container) return;
+  const key = `${(+lat).toFixed(6)},${(+lng).toFixed(6)}`;
+  current = key;
+  const old = container.querySelector("[data-live-facts]");
+  if (old) old.remove();
+  if (!cache.has(key)) cache.set(key, loadRows(lat, lng));
+  const rows = await cache.get(key);
+  if (current !== key || !container.isConnected || container.querySelector("[data-live-facts]")) return;
+  renderFacts(container, rows);
+}
+
+async function loadRows(lat, lng) {
+  const cfg = (typeof window !== "undefined" && window.CITY_PRETTY_CONFIG) || {};
+  if (cfg.workerUrl) {
+    try {
+      const d = await getJson(`${cfg.workerUrl}/api/facts?lat=${lat}&lng=${lng}`, (u, i) => fetch(u, i));
+      const rows = d && d.ok ? fromWorker(d.facts) : null;
+      if (rows) return rows;
+    } catch { /* fall through to direct calls */ }
+  }
+  return liveSiteFacts(lat, lng);
+}
+
+// Maps the Worker's /api/facts payload (workers/sources.ts siteFacts) to display rows.
+export function fromWorker(f) {
+  if (!f) return null;
+  const rows = [];
+  const g = f.geographies, h = f.hud_fair_market_rent, fl = f.flood_zone, e = f.elevation;
+  rows.push(g && g.ok ? ok("Census area", `${g.value.county_name}${g.value.block_group_geoid ? " · block group " + g.value.block_group_geoid : ""}`, g.source.publisher, g.source.url) : no("Census area", (g && g.error) || "unavailable", "U.S. Census Bureau", g && g.source ? g.source.url : ""));
+  rows.push(h && h.ok ? ok("HUD Fair Market Rent (FY2026)", [["1 bed", h.value.rent_1br], ["2 bed", h.value.rent_2br], ["3 bed", h.value.rent_3br]].filter(([, v]) => money(v)).map(([k, v]) => `${k} ${money(v)}`).join(" · ") + "/mo", h.source.publisher, h.source.url, `${h.value.fmr_area_name}. HUD's voucher benchmark (rent plus utilities), not a market asking rent.`) : no("HUD Fair Market Rent", (h && h.error) || "unavailable", "HUD", h && h.source ? h.source.url : ""));
+  rows.push(fl && fl.ok ? ok("FEMA flood zone", `Zone ${fl.value.zone}${fl.value.zone_subtype ? " (" + String(fl.value.zone_subtype).toLowerCase() + ")" : ""}${fl.value.special_flood_hazard_area ? " · special flood hazard area" : ""}`, fl.source.publisher, fl.source.url) : no("FEMA flood zone", (fl && fl.error) || "unavailable", "FEMA", fl && fl.source ? fl.source.url : ""));
+  rows.push(e && e.ok ? ok("Ground elevation", `${Math.round(e.value.elevation_ft).toLocaleString("en-US")} ft`, e.source.publisher, e.source.url) : no("Ground elevation", (e && e.error) || "unavailable", "USGS", e && e.source ? e.source.url : ""));
+  return rows;
+}
+
+if (typeof window !== "undefined") window.CityPrettyFacts = { liveSiteFacts, renderFacts, attachLiveFacts, fromWorker };

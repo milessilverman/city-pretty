@@ -285,3 +285,34 @@ test("a non-LA county's best bets and panels are verification-gated (Travis Coun
   expect(res.localSales).toBe(false);
   expect(res.gradeChipAlone).toBe(false);
 });
+
+test("house panel shows live public records with links, from the agencies (responses mocked from real captures)", async ({ page }) => {
+  const fx = (n: string) => require("fs").readFileSync(require("path").join(__dirname, "../fixtures/sources", n), "utf8");
+  const serve = (body: string) => (route: any) => route.fulfill({ status: 200, contentType: "application/json", body, headers: { "access-control-allow-origin": "*" } });
+  await page.route(/tigerweb\.geo\.census\.gov\/.*MapServer\/10\/query/, serve(fx("tiger_bg_austin.json")));
+  await page.route(/tigerweb\.geo\.census\.gov\/.*MapServer\/82\/query/, serve(fx("tiger_county_austin.json")));
+  await page.route(/Fair_Market_Rents\/FeatureServer\/0\/query/, serve(fx("hud_fmr_austin.json")));
+  await page.route(/hazards\.fema\.gov\/.*NFHL\/MapServer\/28\/query/, serve(fx("fema_flood_austin.json")));
+  await page.route(/epqs\.nationalmap\.gov/, serve(fx("usgs_elev_austin.json")));
+  const errors = await openPage(page);
+  await page.waitForFunction(() => !!(window as any).CityPrettyFacts);
+  const text = await page.evaluate(async () => {
+    const w = window as any;
+    const box = document.createElement("div");
+    document.body.appendChild(box);
+    const a = { AIN: "0000000000", SitusFullAddress: "811 E 41st St", UseType: "Residential", UseDescription: "Single Family Residence", Roll_LandValue: 400000, Roll_ImpValue: 150000, Roll_LandBaseYear: 2012, YearBuilt1: 1955, SQFTmain1: 1500 };
+    const ll = { lat: 30.3005, lng: -97.724 };
+    const st = { osm: null, R: null, osmDone: true, rDone: true, manualStories: null };
+    w.activeHouse = { box, a, lot: 6000, ll, st, tok: 1 };
+    w.renderHouse(box, a, 6000, ll, st);
+    for (let i = 0; i < 50 && !box.querySelector("[data-live-facts]"); i++) await new Promise((r) => setTimeout(r, 100));
+    const el = box.querySelector("[data-live-facts]") as HTMLElement | null;
+    return el ? { text: el.innerText, links: [...el.querySelectorAll("a")].map((x) => (x as HTMLAnchorElement).href) } : null;
+  });
+  expect(text).not.toBeNull();
+  expect(text!.text).toContain("Travis County");
+  expect(text!.text).toContain("2 bed $1,852");
+  expect(text!.text).toContain("Zone AE");
+  expect(text!.links.some((l) => l.includes("hazards.fema.gov"))).toBe(true);
+  expect(errors).toEqual([]);
+});

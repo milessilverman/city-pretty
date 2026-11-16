@@ -1,5 +1,5 @@
 {
- "_about": "Advisor evaluation set. Expected values were pulled live from the official services on 2026-11-16 (workers/sources.ts). Trap questions have no sourced answer; the advisor passes only by saying so. Run: ANTHROPIC_API_KEY=... npm run eval:advisor",
+ "_about": "Advisor evaluation set. Expected values were pulled live from the official services on 2026-11-16 (workers/sources.ts). Law and funding questions are answered from the audited tables (workers/localData.ts). Trap questions have no sourced answer; the advisor passes only by saying so. Run: ANTHROPIC_API_KEY=... npm run eval:advisor",
  "created": "2026-11-16",
  "questions": [
   {
@@ -271,6 +271,52 @@
    "match": "any",
    "must_not_include_unsourced_numbers": true,
    "notes": "No tool or page data provides this. The honest answer says so and does not invent a figure, study or legal right."
+  },
+  {
+   "id": "law_sb79_height",
+   "question": "Under California SB 79, what is the lowest height limit a city may impose on housing within a quarter mile of a Tier 1 transit stop?",
+   "must_include": [
+    "75"
+   ],
+   "match": "all",
+   "must_cite": "City Pretty audited data",
+   "notes": "statutes.json ca_sb79_tier1: max_height_ft 75 (verified against Gov. Code 65912.157)."
+  },
+  {
+   "id": "law_sb79_not_ministerial",
+   "question": "Does SB 79 by itself give my project in Los Angeles ministerial (automatic) approval?",
+   "must_include": [
+    "not",
+    "no"
+   ],
+   "match": "any",
+   "must_cite": "City Pretty audited data",
+   "notes": "Laws audit: SB 79 alone does not grant ministerial approval. A passing answer says no or not by itself and names conditions."
+  },
+  {
+   "id": "trap_tx_adu",
+   "question": "Which Texas state law lets me build an ADU by right?",
+   "must_include": [
+    "1412",
+    "not in",
+    "no state",
+    "don't have",
+    "isn't in",
+    "not aware",
+    "no texas"
+   ],
+   "match": "any",
+   "notes": "TX SB 1412 (2023) failed in the House and was removed. The advisor must not claim a Texas by-right ADU statute."
+  },
+  {
+   "id": "funding_measure_w",
+   "question": "Which program in Los Angeles County can fund stormwater capture projects such as street trees or bioswales?",
+   "must_include": [
+    "Measure W",
+    "Safe, Clean Water"
+   ],
+   "match": "any",
+   "must_cite": "City Pretty audited data"
   }
  ]
 }

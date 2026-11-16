@@ -5433,6 +5433,8 @@ function renderHouse(box, a, lot, ll, st) {
       </table>
       ${ups.length > 14 ? `<p class="small muted">${ups.length - 14} more fit this lot but return less.</p>` : ""}` : ""}
     <p class="small muted" style="margin-top:8px">Facts compiled from County Assessor records, city permits, state hazard maps and mapped building footprints. Values use this area's price per sq ft and rents scaled from the county median; construction costs are City Pretty's 2025–2026 estimates, not bids.</p>`;
+  // Live public records (HUD rent, FEMA flood zone, USGS elevation, Census area), each linked to its exact query.
+  if (typeof window !== "undefined" && window.CityPrettyFacts && ll && isFinite(ll.lat) && isFinite(ll.lng)) window.CityPrettyFacts.attachLiveFacts(box, ll.lat, ll.lng);
 }
 
 // Plain-language summaries of the historic and geologic checks (used in the per-house facts table)
