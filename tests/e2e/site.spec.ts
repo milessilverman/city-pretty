@@ -383,13 +383,21 @@ test("LA crash text uses the rebuilt counts, states the boundary rule and the co
     const w = window as any;
     const id = w.D.bgs.features[0].properties.id;
     w.select(id, false);
-    ev("CRASH_COUNTS")["06037"] = { [id]: [4, 2, 37], _meta: { crashes: 100, with_coordinates: 74, source: "CHP California Crash Reporting System (CCRS)", years: [2023, 2025] } };
+    ev("CRASH_COUNTS")["06037"] = { [id]: [4, 2, 37], _meta: { crashes: 100, with_coordinates: 74, source: "CHP California Crash Reporting System (CCRS)", years: [2023, 2025], script: "scripts/build_crash_counts_ca.py" } };
     return ev("whyFix")("12 pedestrian or bike crashes recorded");
   });
   expect(out).toContain("37 crashes recorded inside this block group or on its boundary streets");
   expect(out).toContain("4 involving a pedestrian or cyclist");
   expect(out).toContain("only the 74% of this county's crashes that have coordinates");
   expect(out).not.toContain("12 ");
+  // A state map-service source (Tennessee): its own noun, and the unlocated-crash caveat even though every returned row has a location.
+  const tn = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s);
+    ev("CRASH_COUNTS")["47037"] = { "470370101001": [1, 2, 9], _meta: { crashes: 50, with_coordinates: 50, source: "Tennessee TITAN injury crash records", years: [2022, 2024], fields: ["pedestrian or bicycle crashes", "killed or seriously injured crashes", "injury or fatal crashes"], script: "scripts/build_state_crash_counts.py" } };
+    return ev("crashTextFor")("47037", "470370101001");
+  });
+  expect(tn).toContain("9 injury or fatal crashes recorded");
+  expect(tn).toContain("without a location are not counted");
   expect(errors).toEqual([]);
 });
 

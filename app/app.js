@@ -3572,9 +3572,19 @@ function crashTextFor(fips, bg) {
   const mt = d._meta || {};
   const yrs = mt.years ? (Array.isArray(mt.years) ? `${mt.years[0]}–${mt.years[mt.years.length - 1]}` : String(mt.years)) : "2023–2025";
   const src = /CCRS/.test(mt.source || "") ? "CHP CCRS" : (mt.source_short || mt.source || "state crash records");
-  const placed = mt.crashes ? Math.round(100 * mt.with_coordinates / mt.crashes) : null;
-  return `${c[2]} crashes recorded inside this block group or on its boundary streets (${src} ${yrs}): ${c[0]} involving a pedestrian or cyclist, ${c[1]} with someone killed or seriously injured` +
-    (placed !== null && placed < 100 ? `; only the ${placed}% of this county's crashes that have coordinates can be placed, so true counts are higher` : "");
+  // The third count's own label: "all crashes" for most sources, "injury or fatal crashes" for Tennessee's TITAN.
+  const noun = Array.isArray(mt.fields) && mt.fields[2] && !/^all crashes$/i.test(mt.fields[2]) ? mt.fields[2] : "crashes";
+  const caveats = [];
+  if (/build_crash_counts_ca/.test(mt.script || "")) {
+    const placed = mt.crashes ? Math.round(100 * mt.with_coordinates / mt.crashes) : null;
+    if (placed !== null && placed < 100) caveats.push(`only the ${placed}% of this county's crashes that have coordinates can be placed, so true counts are higher`);
+  } else {
+    // A map service never returns crashes stored without a location, so their share is unknown (build_state_crash_counts).
+    caveats.push("crashes the state recorded without a location are not counted, and their share is unknown");
+  }
+  if (/first harmful event/i.test(mt.notes || "")) caveats.push("pedestrian/cyclist count is a lower bound (only the first thing struck is recorded)");
+  return `${c[2]} ${noun} recorded inside this block group or on its boundary streets (${src} ${yrs}): ${c[0]} involving a pedestrian or cyclist, ${c[1]} with someone killed or seriously injured` +
+    (caveats.length ? "; " + caveats.join("; ") : "");
 }
 function whyFix(t) {
   // The street-tree "local sales estimate" came from an LA-only regression that could not be reproduced (audit 16 Nov 2026);

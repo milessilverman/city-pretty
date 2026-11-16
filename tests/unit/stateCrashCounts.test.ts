@@ -4,7 +4,8 @@ import fs from "node:fs";
 import path from "node:path";
 
 const dir = path.resolve(__dirname, "../../app/data/crash_counts");
-const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => /^\d{5}\.json$/.test(f)) : [];
+// California's files come from scripts/build_crash_counts_ca.py and are checked in provenance.test.ts.
+const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => /^\d{5}\.json$/.test(f) && !f.startsWith("06")) : [];
 
 describe("rebuilt state crash counts", () => {
   it("exist for counties outside California", () => {

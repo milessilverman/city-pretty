@@ -167,7 +167,13 @@ Not checked: parks (OpenStreetMap's query service is unreachable from the audit 
 California: all counties except San Francisco rebuilt from CCRS with the boundary rule below
 (`scripts/build_crash_counts_ca.py`). The share of crashes with coordinates ranges from 51% (Sutter) to 100%, 74% in
 LA. San Francisco's CCRS crashes are only 34% geocoded, so it keeps its DataSF injury-crash source for now (not yet
-rebuilt with the boundary rule). Other states with public crash services are in progress.
+rebuilt with the boundary rule). **Outside California: 94 counties** in Illinois (2023–25), Virginia (2023–25),
+Pennsylvania (2021–23, the public table ends there), Tennessee (2022–24, injury and fatal crashes only), Utah, Maine
+(2023–25) and Denver (2023–25), from each state's crash service (`scripts/build_state_crash_counts.py`,
+`audit/crash-counts-nationwide.md`). 37–53% of crashes sit within 10 m of a block-group boundary. A map service
+never returns crashes stored without a location, so those counts can't say how many are missing; the page says so.
+Illinois records only the first thing struck, so its pedestrian/cyclist counts are a lower bound. Counties in the
+other ~490 data files have no public geocoded crash source on file.
 
 ### LA crash counts (detail)
 
