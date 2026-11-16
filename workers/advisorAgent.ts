@@ -6,7 +6,8 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 import { LOCAL_DATA_TOOLS, runLocalDataTool } from "./localData.ts";
-import { geocodeAddress, osmNearby, OSM_FEATURES, siteFacts, type OsmFeatureKind, type SourceRef } from "./sources.ts";
+import { parcelAt } from "./parcels.ts";
+import { censusGeographies, geocodeAddress, osmNearby, OSM_FEATURES, siteFacts, type OsmFeatureKind, type SourceRef } from "./sources.ts";
 
 export const ADVISOR_MODEL = "claude-opus-5-5";
 const MAX_TOOL_ROUNDS = 6;
@@ -63,6 +64,18 @@ export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
     },
     strict: true,
   },
+  {
+    name: "lookup_parcel",
+    description:
+      "Look up the property record at a point from the county's or state's public parcel service (the same services the City Pretty page uses): parcel ID, address, land use, and where the agency publishes them, assessed values, year built, size, bedrooms. Returns the agency's own fields with the service URL, or why none is available.",
+    input_schema: {
+      type: "object",
+      properties: { lat: { type: "number" }, lng: { type: "number" } },
+      required: ["lat", "lng"],
+      additionalProperties: false,
+    },
+    strict: true,
+  },
   ...(LOCAL_DATA_TOOLS as Anthropic.Beta.BetaTool[]),
 ];
 
@@ -97,6 +110,12 @@ export async function runAdvisorTool(name: string, input: unknown, env: ToolEnv)
     if (!isNum(i.lat) || !isNum(i.lng) || !isNum(i.radius_m)) return bad("lat, lng, radius_m must be numbers");
     if (typeof i.kind !== "string" || !(i.kind in OSM_FEATURES)) return bad("unknown kind");
     return done(await osmNearby(i.lat, i.lng, i.radius_m, i.kind as OsmFeatureKind, f, 100));
+  }
+  if (name === "lookup_parcel") {
+    if (!isNum(i.lat) || !isNum(i.lng)) return bad("lat and lng must be numbers");
+    const geo = await censusGeographies(i.lat, i.lng, f);
+    if (!geo.ok) return done(geo);
+    return done(await parcelAt(i.lat, i.lng, geo.value.county_fips, f));
   }
   const local = runLocalDataTool(name, i);
   if (local !== undefined) return done(local);
