@@ -401,6 +401,23 @@ only in the copy the research track fetched (it matches in full context), not re
 blocked: NY and IN (free API keys needed), IL and WI (sites don't answer the build machine), NH, NJ, NM, GA, AL, AR,
 MS, TN (need a normal browser). For those, "none found" is unverified.
 
+### Live check of every county reported as showing estimates (16 Nov)
+
+`scripts/live_check_valuations.mjs` opens the real page with live data and clicks 5 real homes per county, by map
+point and by drawn lot. **8 of the 12 counties reported as "shown" were broken on the live page**, now fixed (each
+with a browser test through the page's own lookup). The worst: **every house outside LA was matched to whichever
+block group happened to be selected**, not its own (a map feature without a shape broke the lookup), which skewed
+estimates and every neighborhood figure shown for a house; a Queens home that sold for $2,125,000 had been estimated
+at $1,059k and is now $2,007k. Also fixed: DC's parcel query asked for fields the layer doesn't have (no DC estimate
+ever showed); every Florida click failed (the statewide layer errors on small result limits, and the page gave up
+after 5 s); Florida neighborhood values were keyed to 2010 block groups; King and Miami-Dade pointed at zoning
+layers; clicking a drawn lot dropped the model's inputs; a failed lookup was shown as "public right-of-way".
+After the fixes: LA, DC, Queens, Staten Island and King show estimates for 5/5 homes; the 7 Florida counties show
+the home's 2025 recorded sale (every sampled home had one) and the model computes for all of them, but a Florida home
+without a recent sale has not yet been seen showing an estimate live. Independently re-run for Queens and DC: 20/20.
+A registry check of all 123 parcel services the page uses found 9 failing outside these counties (listed in
+`data/backtests/parcel_registry_check_2026-11-16.json`).
+
 ### Correction: three "shown" estimates were not shown (found and fixed 16 Nov)
 
 The 16 Nov report said Queens, Staten Island and Hillsborough estimates were shown on the page. They were not: the
