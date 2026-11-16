@@ -328,6 +328,8 @@ test("house panel shows live public records with links, from the agencies (respo
   expect(text!.text).toContain("2 bed $1,852");
   expect(text!.text).toContain("Zone AE");
   expect(text!.links.some((l) => l.includes("hazards.fema.gov"))).toBe(true);
+  expect(errors).toEqual([]);
+});
 
 test("tax-increment section: California computes from the roll; Texas says which rules are unverified", async ({ page }) => {
   const errors = await openPage(page);
