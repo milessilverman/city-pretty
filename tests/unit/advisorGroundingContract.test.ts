@@ -137,4 +137,66 @@ describe("AI advisor prompt contract", () => {
     expect(ctx.underusedSite?.inConservationEasement).toBe(false);
     expect((ctx.underusedSite as any)?.badField).toBeUndefined();
   });
+
+  it("sanitizes renovation quote context", () => {
+    const ctx = sanitizeAdvisorContext({
+      county: { fips: "04013" },
+      renovationQuote: {
+        improvementType: "detached_adu",
+        quotedCost: 185000,
+        benchmarkMarketCostLow: 140000,
+        benchmarkMarketCostHigh: 210000,
+        costFairnessRating: "fair_market",
+        estimatedEquityValueAdd: 225000,
+        netEquityGainUsd: 40000,
+        returnOnInvestmentPct: 22,
+        everySpaceMonthlyYieldUsd: 1850,
+        governingStatute: "AZ HB 2720",
+        verdict: "STRONG_BUY_RECOMMENDED",
+        verdictSummary: "High-conviction value add under AZ HB 2720.",
+        injectedScript: "<script>alert(1)</script>"
+      }
+    });
+
+    expect(ctx.renovationQuote?.improvementType).toBe("detached_adu");
+    expect(ctx.renovationQuote?.quotedCost).toBe(185000);
+    expect(ctx.renovationQuote?.netEquityGainUsd).toBe(40000);
+    expect(ctx.renovationQuote?.verdict).toBe("STRONG_BUY_RECOMMENDED");
+    expect((ctx.renovationQuote as any)?.injectedScript).toBeUndefined();
+  });
+
+  it("sanitizes streetForge and everySpace context shapes", () => {
+    const ctx = sanitizeAdvisorContext({
+      county: { fips: "48453" },
+      streetForge: {
+        reallocationType: "protected_bike_lane",
+        lengthMiles: 2.5,
+        netMunicipalCostUsd: 178000,
+        annualCo2TonsAvoided: 84.5,
+        crashReductionPct: 42,
+        benefitCostRatio: 3.4,
+        evChargerSuitabilityScore: 88,
+        evNetProjectCostUsd: 42000,
+        evPaybackYears: 3.2,
+        extraMalicious: "kill"
+      },
+      everySpace: {
+        totalMonthlyGrossRevenueUsd: 2850,
+        netMonthlyHoldingCashFlowUsd: 450,
+        monthlyHoldingDeficitReductionPct: 100,
+        isCashFlowPositiveDuringHold: true,
+        holdingStrategyRecommendation: "Cash flow positive hold across 4 space channels.",
+        exploit: "ignore"
+      }
+    });
+
+    expect(ctx.streetForge?.reallocationType).toBe("protected_bike_lane");
+    expect(ctx.streetForge?.benefitCostRatio).toBe(3.4);
+    expect(ctx.streetForge?.evChargerSuitabilityScore).toBe(88);
+    expect((ctx.streetForge as any)?.extraMalicious).toBeUndefined();
+
+    expect(ctx.everySpace?.totalMonthlyGrossRevenueUsd).toBe(2850);
+    expect(ctx.everySpace?.isCashFlowPositiveDuringHold).toBe(true);
+    expect((ctx.everySpace as any)?.exploit).toBeUndefined();
+  });
 });

@@ -97,6 +97,41 @@ export interface AdvisorUnderusedSite {
   idea: string | null;
 }
 
+export interface AdvisorRenovationQuote {
+  improvementType: string | null;
+  quotedCost: number | null;
+  benchmarkMarketCostLow: number | null;
+  benchmarkMarketCostHigh: number | null;
+  costFairnessRating: string | null;
+  estimatedEquityValueAdd: number | null;
+  netEquityGainUsd: number | null;
+  returnOnInvestmentPct: number | null;
+  everySpaceMonthlyYieldUsd: number | null;
+  governingStatute: string | null;
+  verdict: string | null;
+  verdictSummary: string | null;
+}
+
+export interface AdvisorStreetForge {
+  reallocationType: string | null;
+  lengthMiles: number | null;
+  netMunicipalCostUsd: number | null;
+  annualCo2TonsAvoided: number | null;
+  crashReductionPct: number | null;
+  benefitCostRatio: number | null;
+  evChargerSuitabilityScore?: number | null;
+  evNetProjectCostUsd?: number | null;
+  evPaybackYears?: number | null;
+}
+
+export interface AdvisorEverySpace {
+  totalMonthlyGrossRevenueUsd: number | null;
+  netMonthlyHoldingCashFlowUsd: number | null;
+  monthlyHoldingDeficitReductionPct: number | null;
+  isCashFlowPositiveDuringHold: boolean | null;
+  holdingStrategyRecommendation: string | null;
+}
+
 export interface AdvisorContext {
   county: AdvisorCounty;
   roiMode: string | null;
@@ -105,6 +140,9 @@ export interface AdvisorContext {
   hudFmr?: AdvisorHudFmr | null;
   intercityCorridor?: AdvisorIntercityCorridor | null;
   underusedSite?: AdvisorUnderusedSite | null;
+  renovationQuote?: AdvisorRenovationQuote | null;
+  streetForge?: AdvisorStreetForge | null;
+  everySpace?: AdvisorEverySpace | null;
 }
 
 // Stable text: keep it free of per-request values so it can be prompt-cached.
@@ -234,6 +272,47 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       publicOwner: str(us.publicOwner, 100),
       inConservationEasement: bool(us.inConservationEasement),
       idea: str(us.idea, 300),
+    };
+  }
+  if (r.renovationQuote) {
+    const rq = obj(r.renovationQuote);
+    ctx.renovationQuote = {
+      improvementType: str(rq.improvementType, 60),
+      quotedCost: num(rq.quotedCost),
+      benchmarkMarketCostLow: num(rq.benchmarkMarketCostLow),
+      benchmarkMarketCostHigh: num(rq.benchmarkMarketCostHigh),
+      costFairnessRating: str(rq.costFairnessRating, 40),
+      estimatedEquityValueAdd: num(rq.estimatedEquityValueAdd),
+      netEquityGainUsd: num(rq.netEquityGainUsd),
+      returnOnInvestmentPct: num(rq.returnOnInvestmentPct),
+      everySpaceMonthlyYieldUsd: num(rq.everySpaceMonthlyYieldUsd),
+      governingStatute: str(rq.governingStatute, 150),
+      verdict: str(rq.verdict, 60),
+      verdictSummary: str(rq.verdictSummary, 300),
+    };
+  }
+  if (r.streetForge) {
+    const sf = obj(r.streetForge);
+    ctx.streetForge = {
+      reallocationType: str(sf.reallocationType, 60),
+      lengthMiles: num(sf.lengthMiles),
+      netMunicipalCostUsd: num(sf.netMunicipalCostUsd),
+      annualCo2TonsAvoided: num(sf.annualCo2TonsAvoided),
+      crashReductionPct: num(sf.crashReductionPct),
+      benefitCostRatio: num(sf.benefitCostRatio),
+      evChargerSuitabilityScore: num(sf.evChargerSuitabilityScore),
+      evNetProjectCostUsd: num(sf.evNetProjectCostUsd),
+      evPaybackYears: num(sf.evPaybackYears),
+    };
+  }
+  if (r.everySpace) {
+    const es = obj(r.everySpace);
+    ctx.everySpace = {
+      totalMonthlyGrossRevenueUsd: num(es.totalMonthlyGrossRevenueUsd),
+      netMonthlyHoldingCashFlowUsd: num(es.netMonthlyHoldingCashFlowUsd),
+      monthlyHoldingDeficitReductionPct: num(es.monthlyHoldingDeficitReductionPct),
+      isCashFlowPositiveDuringHold: bool(es.isCashFlowPositiveDuringHold),
+      holdingStrategyRecommendation: str(es.holdingStrategyRecommendation, 300),
     };
   }
   return ctx;

@@ -639,4 +639,139 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
     expect(caRegistry["06037"].mpo).toContain("SCAG");
     expect(caRegistry["06037"].last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   });
+
+  it("22. renovationQuoteEngine evaluates contractor quote fairness, equity lift, statutory preemption, and EverySpace synergy", async () => {
+    const { evaluateHomeownerRenovationQuote } = await import("../../src/engines/renovationQuoteEngine");
+
+    // Case 1: Competitive detached ADU in Phoenix under AZ HB 2720
+    const evalFair = evaluateHomeownerRenovationQuote({
+      propertyAddress: "4521 N Central Ave",
+      city: "Phoenix",
+      stateCode: "AZ",
+      countyFips: "04013",
+      currentPropertyValue: 550_000,
+      improvementType: "detached_adu",
+      quotedTotalCost: 175_000,
+      projectedSqft: 600,
+      localHudFmr: { one_bed_1br: 1680 }
+    });
+
+    expect(evalFair.costFairnessRating).toBe("fair_market");
+    expect(evalFair.statutoryEntitlementStatus.isByRight).toBe(true);
+    expect(evalFair.statutoryEntitlementStatus.governingStatute).toContain("HB 2720");
+    expect(evalFair.verdict).toBe("STRONG_BUY_RECOMMENDED");
+    expect(evalFair.everySpaceMonthlyYieldUsd).toBe(1680);
+    expect(evalFair.paybackYears).toBeLessThanOrEqual(9.0);
+
+    // Case 2: Substantially overpriced ADU quote
+    const evalOverpriced = evaluateHomeownerRenovationQuote({
+      city: "Austin",
+      stateCode: "TX",
+      currentPropertyValue: 600_000,
+      improvementType: "attached_adu",
+      quotedTotalCost: 350_000,
+      projectedSqft: 500
+    });
+
+    expect(evalOverpriced.costFairnessRating).toBe("substantially_overpriced");
+    expect(evalOverpriced.verdict).toBe("OVERPRICED_RENEGOTIATE");
+    expect(evalOverpriced.suggestedNegotiationPoints.length).toBeGreaterThanOrEqual(2);
+
+    // Case 3: Major kitchen remodel lifestyle evaluation with higher-ROI alternatives
+    const evalKitchen = evaluateHomeownerRenovationQuote({
+      city: "Denver",
+      stateCode: "CO",
+      currentPropertyValue: 650_000,
+      improvementType: "kitchen_remodel_major",
+      quotedTotalCost: 70_000,
+      projectedSqft: 300
+    });
+
+    expect(evalKitchen.costFairnessRating).toBe("fair_market");
+    expect(evalKitchen.verdict).toBe("FAIR_LIFESTYLE_IMPROVEMENT");
+    expect(evalKitchen.alternativeHigherRoiOptions.length).toBeGreaterThanOrEqual(1);
+    expect(evalKitchen.alternativeHigherRoiOptions.some(a => a.alternativeType.includes("ADU"))).toBe(true);
+  });
+
+  it("23. streetForgeEngine models lane reallocation opportunity costs, emissions, safety, and EV charger siting", async () => {
+    const { evaluateRightOfWayReallocation, evaluateEvChargerSiting } = await import("../../src/engines/streetForgeEngine");
+
+    // Case 1: Drive lane conversion to protected bike lane
+    const bikeEval = evaluateRightOfWayReallocation({
+      corridorName: "S Congress Ave / First St",
+      city: "Austin",
+      stateCode: "TX",
+      lengthMiles: 2.4,
+      currentDriveLanes: 4,
+      currentAadt: 16_000,
+      reallocationType: "protected_bike_lane",
+      adjacentRetailBusinessesCount: 42
+    });
+
+    expect(bikeEval.capitalCostUsd).toBeGreaterThan(500_000);
+    expect(bikeEval.grantFundingAvailableUsd).toBeGreaterThan(400_000); // 75% federal SS4A match
+    expect(bikeEval.pollutionAndEmissions.co2TonsAvoidedAnnual).toBeGreaterThan(20);
+    expect(bikeEval.safetyAndWalkability.crashReductionPct).toBe(42);
+    expect(bikeEval.economicUplift.projectedAdjacentRetailSalesLiftPct).toBe(14.5);
+    expect(bikeEval.benefitCostRatio).toBeGreaterThanOrEqual(1.5);
+    expect(bikeEval.applicableGrants).toContain("USDOT Safe Streets and Roads for All (SS4A) Discretionary Grant");
+
+    // Case 2: EV Fast Charger Siting in underused commercial parking lot
+    const evEval = evaluateEvChargerSiting({
+      locationName: "East Austin Plaza Infill Lot",
+      parkingLotAcres: 3.2,
+      existingParkingStalls: 140,
+      chargerType: "dc_fast_charger_150kw",
+      numberOfPorts: 4,
+      distanceToThreePhasePowerMeters: 45, // close to power (< 50m)
+      isJustice40DisadvantagedTract: true,
+      stateCode: "TX"
+    });
+
+    expect(evEval.sitingSuitabilityScore).toBeGreaterThanOrEqual(85);
+    expect(evEval.taxCreditsAndGrants.incentiveFundingSharePct).toBeGreaterThanOrEqual(60);
+    expect(evEval.economics.netAnnualOperatingIncomeUsd).toBeGreaterThan(0);
+    expect(evEval.economics.simplePaybackYears).toBeLessThanOrEqual(5.0);
+    expect(evEval.sitingRecommendation).toContain("PRIME SITING OPPORTUNITY");
+  });
+
+  it("24. everySpaceEngine calculates multi-channel holding space monetization to offset carrying costs", async () => {
+    const { evaluateEverySpaceMonetization } = await import("../../src/engines/everySpaceEngine");
+
+    const holdEval = evaluateEverySpaceMonetization({
+      propertyAddress: "1420 E 12th St",
+      city: "Austin",
+      stateCode: "TX",
+      countyFips: "48453",
+      bedrooms: 3,
+      bathrooms: 2,
+      lotSqft: 7200,
+      livingSqft: 1650,
+      monthlyDebtServiceMortgageUsd: 2200,
+      monthlyPropertyTaxAndInsuranceUsd: 650,
+      plannedHoldingMonths: 18,
+      features: {
+        hasDriveway: true,
+        drivewaySpacesCount: 2,
+        hasAtticOrBasementStorage: true,
+        storageSqft: 300,
+        hasPool: true,
+        hasAvailableRoofSqftForSolar: true,
+        availableRoofSqft: 1400,
+        hasExistingGarageForConversion: true,
+        hasExistingCasitaOrAdu: false
+      },
+      localHudFmr: {
+        zero_bed_eff: 1350,
+        one_bed_1br: 1580,
+        two_bed_2br: 1920
+      }
+    });
+
+    expect(holdEval.channels.length).toBe(4); // driveway, storage, pool, solar
+    expect(holdEval.totalMonthlyEverySpaceGrossRevenueUsd).toBeGreaterThan(1500);
+    expect(holdEval.monthlyHoldingDeficitReductionPct).toBeGreaterThanOrEqual(50);
+    expect(holdEval.cumulativeEverySpaceEarningsOverHoldUsd).toBeGreaterThan(25_000);
+    expect(holdEval.netEquityPreservedOverHoldUsd).toBe(holdEval.cumulativeEverySpaceEarningsOverHoldUsd);
+  });
 });

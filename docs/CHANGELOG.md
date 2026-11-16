@@ -140,6 +140,29 @@ All notable changes to the data pipelines, empirical estimates, statutory engine
   - Plainly labels unmeasured planning assumptions (Grade D/U) as `(assumed ±X%)` rather than presenting them as econometric confidence bounds.
 
 ### 20. AI Advisor Grounding Contract & Runtime Pipeline
-- Expanded `AdvisorContext` with verified intercity corridor facts (`intercityCorridor`) and underused sites (`underusedSite`).
-- Added strict sanitization rules ensuring only validated fields reach the LLM reasoning context.
-- Unit test suite expanded to 43 passing tests; full Playwright e2e test suite passing 100%.
+- Expanded `AdvisorContext` with verified intercity corridor facts (`intercityCorridor`), underused sites (`underusedSite`), contractor quotes (`renovationQuote`), civil opportunity costs (`streetForge`), and holding space monetization (`everySpace`).
+- Added strict sanitization rules ensuring only validated fields reach the LLM reasoning context without speculative prompt injection.
+- Unit test suite expanded to 48 passing tests; full Playwright e2e test suite passing 100%.
+
+### 21. Homeowner Renovation Quote Evaluator (`src/engines/renovationQuoteEngine.ts`)
+- Implemented personalized homeowner quote evaluation:
+  - Compares contractor quote against verified public agency bid tabs and localized construction unit costs ($/sqft).
+  - Evaluates property equity value-add (hedonic lift) vs contractor cost to compute net equity gain and ROI.
+  - Links to EverySpace rental cash-flow yield (e.g. ADU rents benchmarked to local HUD Fair Market Rent) to calculate simple payback years.
+  - Checks state statutory by-right zoning preemption (CA Gov. Code § 65852.2, AZ HB 2720, TX Austin HOME, WA HB 1337, CO HB 24-1152).
+  - Emits actionable verdict (`STRONG_BUY_RECOMMENDED`, `FAIR_LIFESTYLE_IMPROVEMENT`, `OVERPRICED_RENEGOTIATE`, `NOT_RECOMMENDED_NEGATIVE_ROI`), negotiation points, and higher-ROI alternative recommendations (e.g. converting an existing garage for half the cost of ground-up construction).
+
+### 22. StreetForge Civil Engineering & Opportunity Cost Engine (`src/engines/streetForgeEngine.ts`)
+- Implemented StreetForge tripartite integration modeling civil infrastructure opportunity costs:
+  - **Right-of-Way Reallocation (Drive Lane to Bike Lane):** Models capital costs, federal Safe Streets and Roads for All (SS4A: 75% match) and Carbon Reduction Program funding, traffic delay and diversion, tons of CO2/NOx emissions avoided, crash reductions (FHWA Crash Modification Factors), corridor retail sales lift (+14.5%), and 10-year benefit-cost ratios.
+  - **EV Fast Charger Siting:** Evaluates Level 2 and DC Fast Charger siting (150kW/350kW) in commercial and transit parking lots, checking electrical grid distance to 3-phase power, calculating federal NEVI grants (up to 80%) and IRA Section 30C alternative fuel tax credits (30% up to $100k), net capital cost, annual charging session revenue, and payback years.
+
+### 23. EverySpace Property Space Monetization Engine (`src/engines/everySpaceEngine.ts`)
+- Implemented EverySpace tripartite integration modeling multi-channel holding asset cash flow:
+  - Monetizes underutilized property volume during the 12–24 month design, zoning verification, and entitlement window:
+    - Driveway commuter & RV / fleet parking
+    - Enclosed attic or basement storage depot
+    - Private pool hourly rental
+    - Rooftop solar generation and community microgrid leasing
+    - Secondary unit / casita tenant rental benchmarked to HUD FMR
+  - Calculates gross EverySpace monthly income, debt service carrying cost offset (typically reducing holding deficits by 50% to 100%+), and cumulative equity preserved over the holding phase.
