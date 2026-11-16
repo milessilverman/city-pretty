@@ -338,6 +338,7 @@
    "terms": "https://www.arcgis.com/sharing/rest/content/items/efa909d6b1c841d298b0a649e7f71cf2?f=json",
    "addr": "PHY_ADDR1",
    "max": 2000,
+   "no_record_cap": true,
    "fields": [
     [
      "PARCEL_ID",
@@ -2034,16 +2035,16 @@
    ]
   },
   {
-   "url": "https://gismaps.kingcounty.gov/ArcGIS/rest/services/Planning/KingCo_Zoning/MapServer/1",
+   "url": "https://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_Parcels/MapServer/0",
    "states": [
     "53"
    ],
    "counties": [
     "53033"
    ],
-   "name": "King County WA Native Zoning Layer",
+   "name": "King County Parcels (King County Assessor / GIS Center)",
    "terms": "https://gismaps.kingcounty.gov",
-   "addr": "SITUS_ADDRESS",
+   "apn": "PIN",
    "max": 2000,
    "fields": [
     [
@@ -2051,39 +2052,12 @@
      "PIN"
     ],
     [
-     "ZONING",
-     "Zoning Code"
+     "MAJOR",
+     "Major"
     ],
     [
-     "ZONING_DESC",
-     "Zoning Description"
-    ]
-   ]
-  },
-  {
-   "url": "https://gisweb.miamidade.gov/arcgis/rest/services/MD_MDCZoning/MapServer/6",
-   "states": [
-    "12"
-   ],
-   "counties": [
-    "12086"
-   ],
-   "name": "Miami-Dade County Unincorporated Zoning Layer",
-   "terms": "https://gisweb.miamidade.gov",
-   "addr": "ADDRESS",
-   "max": 2000,
-   "fields": [
-    [
-     "FOLIO",
-     "Folio ID"
-    ],
-    [
-     "ZONING",
-     "Zoning Code"
-    ],
-    [
-     "ZONE_DESC",
-     "Zone Description"
+     "MINOR",
+     "Minor"
     ]
    ]
   },

@@ -5,7 +5,8 @@ Source: Florida Statewide Cadastral (Florida Geographic Information Office copy 
 property roll), https://services9.arcgis.com/Gh9awoU677aKree0/arcgis/rest/services/Florida_Statewide_Cadastral/FeatureServer/0
 One row per parcel: the most recent sale (SALE_PRC1, SALE_YR1, SALE_MO1, QUAL_CD1, VI_CD1), characteristics
 (TOT_LVG_AR, ACT_YR_BLT, EFF_YR_BLT, LND_SQFOOT), the 2026 just value (JV, as of 1 January 2026; ASMNT_YR 2026),
-and CENSUS_BK (the 2020 block group, 12 digits).
+and CENSUS_BK (12 digits). CENSUS_BK is the 2010 block group, not the 2020 one: checked 16 Nov 2026 against TIGERweb
+Census2010 and Census2020 block groups at parcel points (Miami-Dade, Palm Beach). The page reads the same field.
 
 Filters, stated and applied here:
   * DOR_UC = '001' (single family) and VI_CD1 = 'I' (improved at sale)

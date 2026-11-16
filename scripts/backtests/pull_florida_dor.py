@@ -7,7 +7,7 @@ Sources (Florida Department of Revenue, Property Tax Oversight data portal; publ
   SDF (sale data file), 2026 Final roll:  every sale recorded on the roll with the property appraiser's
       qualification code (QUAL_CD), sale year/month and price. It covers sales in 2025 and 2026.
   NAL (name-address-legal), 2026 Final roll: characteristics and values as of 1 January 2026: DOR_UC, JV (just
-      value), TOT_LVG_AREA, LND_SQFOOT, ACT_YR_BLT, NO_RES_UNT, CENSUS_BK (2020 block group).
+      value), TOT_LVG_AREA, LND_SQFOOT, ACT_YR_BLT, NO_RES_UNT, CENSUS_BK (the 2010 block group; see pull_florida.py).
   Code meanings: DOR's 2026 NAL/SDF/NAP User's Guide, Field 55 (QUAL_CD):
       "01 Transfers qualified as arm's length because of examination of the deed or other instrument transferring
        ownership of real property"
@@ -93,7 +93,7 @@ def main():
             continue
         bg = str(p.get("CENSUS_BK") or "")
         if len(bg) < 12 or not bg.startswith(fips):
-            drop["no 2020 block group on the roll"] += 1
+            drop["no block group on the roll"] += 1
             continue
         bg = bg[:12]
         rows.append({"id": s["PARCEL_ID"], "price": price, "date": f"{yr}-{mo:02d}-01", "bg": bg, "tract": bg[:11],
