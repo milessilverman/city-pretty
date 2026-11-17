@@ -10,7 +10,7 @@ const CP_DATA_FILES = {
   "funding-programs": "funding_programs.json", "case-studies": "case_studies.json", "transit-pipelines": "transit_pipelines.json",
   "state-finance-profiles": "state_finance_profiles.json", "unit-costs": "unit_costs.json", "hud-fmr": "hud_fair_market_rents.json",
   "valuation-benchmarks": "valuation_backtest_benchmarks.json", "underused-sites": "underused_sites.json",
-  "intercity-corridors": "intercity_transit_corridors.json", "county-completeness": "county_completeness.json",
+  "intercity-corridors": "intercity_transit_corridors.json", "county-completeness": "county_completeness.json", "county-hosts": "county_hosts.json",
   "ca-counties-registry": "ca_counties_registry.json", "intervention-verification": "intervention_verification.json", "upgrade-verification": "upgrade_verification.json",
   "la-neighborhood-values": "la_neighborhood_values.json", "bundle-corrections": "bundle_corrections.json", "county-valuation-models": "county_valuation_models.json",
   "zoning-standards": "zoning_standards.json", "parcel-use-codes": "parcel_use_codes.json", "acs-fallback-flags": "acs_fallback_flags.json"
@@ -9854,6 +9854,22 @@ function qualifyNearestNames(B) {
 // very large layers (an Alaska census area with 273,964 water lines crashed the page this way, 17 Nov 2026).
 function pushAll(dst, src) { for (const x of src) dst.push(x); return dst; }
 
+// Where a county's data file is served from (app/data/county_hosts.json). GitHub Pages caps a site at 1 GB, so county files
+// live on regional Pages sites; a region is tried first only when enabled, and this site's counties/ path is the fallback.
+const COUNTY_HOSTS_READY = cpJson("county-hosts").then(d => (d && d.regions ? d : null)).catch(() => null);
+async function countyBundleSources(el) {
+  const local = el && el.dataset.src;
+  if (!local) return [];
+  const H = await COUNTY_HOSTS_READY, st = String(el.dataset.fips || "").slice(0, 2), out = [];
+  if (H && !/^(?:https?:)?\/\//i.test(local)) {
+    for (const r of Object.values(H.regions)) {
+      if (r && r.enabled && r.base && (r.states || []).includes(st)) out.push(r.base.replace(/\/?$/, "/") + local.replace(/^\/+/, ""));
+    }
+  }
+  out.push(local);
+  return out;
+}
+
 async function loadCountyBundle(fips) {
   if (!fips) return null;
   fips = String(fips).padStart(5, "0");
@@ -9863,10 +9879,11 @@ async function loadCountyBundle(fips) {
     const el = (typeof countyBundleEls === "function") ? countyBundleEls().find(e => e.dataset.fips === fips) : null;
     // Browser cache, checked against the file's ETag so a rebuilt county replaces the stored copy
     let tag = null;
-    if (el && el.dataset.src) {
+    const srcs = await countyBundleSources(el);
+    for (const u of srcs) {
       try {
-        const h = await fetch(resolveRepoAssetUrl(el.dataset.src), { method: "HEAD", cache: "no-cache" });
-        if (h.ok) tag = h.headers.get("etag") || h.headers.get("last-modified");
+        const h = await fetch(resolveRepoAssetUrl(u), { method: "HEAD", cache: "no-cache" });
+        if (h.ok) { tag = h.headers.get("etag") || h.headers.get("last-modified"); break; }
       } catch (e) {}
     }
     try {
@@ -9879,7 +9896,11 @@ async function loadCountyBundle(fips) {
     let B = null;
     if (el) {
       try {
-        B = el.dataset.src ? await fetchJSON(el.dataset.src) : el.textContent.trim() ? await unpackGzipB64(el.textContent.trim()) : null;
+        if (srcs.length) {
+          for (const u of srcs) {
+            try { B = await fetchJSON(u); if (B && B.features) break; } catch (e) { console.warn("County file not available from " + u, e); B = null; }
+          }
+        } else B = el.textContent.trim() ? await unpackGzipB64(el.textContent.trim()) : null;
       } catch (err) {
         console.warn("Could not fetch remote bundle for " + fips, err);
       }

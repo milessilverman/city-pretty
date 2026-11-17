@@ -1895,3 +1895,30 @@ test("a click in Sevier County TN asks no other state's service and makes no rig
   expect(t).not.toMatch(/Right-of-Way|right-of-way/);
   expect(errors).toEqual([]);
 });
+
+// County files can come from a regional Pages site (app/data/county_hosts.json). An enabled region is tried first; if it
+// fails, the page falls back to this site's counties/ path (17 Nov 2026).
+test("a county file loads from its enabled regional site, and falls back to the local path when that site fails", async ({ page }) => {
+  const fs = require("fs"), path = require("path");
+  const hosts = JSON.parse(fs.readFileSync(path.join(__dirname, "../../app/data/county_hosts.json"), "utf8"));
+  hosts.regions.south.enabled = true; hosts.regions.south.checked_on = "2026-11-17";
+  await page.route(/county_hosts\.json/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(hosts) }));
+  const regional: string[] = [];
+  const local = fs.readFileSync(path.join(__dirname, "../../counties/bundle_47155.json.gz"));
+  await page.route(/city-pretty-data-south\/counties\/bundle_47155\.json\.gz/, (route) => {
+    regional.push(route.request().method());
+    route.fulfill({ status: 200, contentType: "application/gzip", headers: { "access-control-allow-origin": "*", etag: "\"r1\"" }, body: route.request().method() === "HEAD" ? "" : local });
+  });
+  await page.route(/city-pretty-data-south\/counties\/bundle_47009\.json\.gz/, (route) => route.fulfill({ status: 503, body: "down" }));
+  const errors = await openPage(page);
+  const r = await page.evaluate(async () => {
+    const ev = (s: string) => (0, eval)(s);
+    const a = await ev("loadCountyBundle")("47155");
+    const b = await ev("loadCountyBundle")("47009");
+    return { a: !!(a && a.features && a.features.length), b: !!(b && b.features && b.features.length) };
+  });
+  expect(regional).toContain("GET");
+  expect(r.a).toBe(true);
+  expect(r.b).toBe(true);   // Blount County: the regional site answered 503, the local file loaded
+  expect(errors.filter((e: string) => !/County file not available/.test(e))).toEqual([]);
+});
