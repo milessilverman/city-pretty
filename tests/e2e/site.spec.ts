@@ -1506,3 +1506,50 @@ test("value-per-$1 bands are labeled judgment bands, and no unsourced local adju
   expect(r.methods).toBe(0);
   expect(errors).toEqual([]);
 });
+
+// Round 3 of the page-constants audit (docs/audit/appjs-constants-round3.md, 17 Nov 2026):
+// - the "renter displacement sensitivity" map metric gave every block group the same 42/100 from typed fallbacks;
+// - the neighborhood package showed a "Joint Value Created" dollar total under a typed 30%/22% cap and a displacement
+//   index built from a typed 28% rent burden and 65%/15% rent-control coverage;
+// - the house panel's "How is this estimated?" split the value into a site land value (assumed land share or 50% of
+//   the median) and age, bed/bath, lot and pool "premiums" from typed rates, "calibrated against county assessor rolls".
+test("no typed displacement score, package value or valuation decomposition reaches the page (select and house click paths)", async ({ page }) => {
+  const ring = (lat: number, lng: number) => [[lng - 0.0002, lat - 0.0001], [lng + 0.0002, lat - 0.0001], [lng + 0.0002, lat + 0.0001], [lng - 0.0002, lat + 0.0001], [lng - 0.0002, lat - 0.0001]];
+  await page.route(/MAPPLUTO\/FeatureServer\/0\/query/, (route: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
+    body: JSON.stringify({ features: [{ attributes: { BBL: 4000010001, Borough: "QN", Block: 1, Lot: 1, Address: "1 TEST STREET", LandUse: "01", BldgClass: "A1", ZoneDist1: "R2A", LotArea: 6000, LotFront: 60, BldgArea: 2000, UnitsRes: 1, NumFloors: 2, YearBuilt: 1950 }, geometry: { rings: [ring(40.738, -73.762)] } }] }) }));
+  const errors = await openPage(page);
+  // Map metric: no option, and no score without a sourced input.
+  const metric = await page.evaluate(() => {
+    const M = (0, eval)("METRICS");
+    return { option: !!document.querySelector('#metric option[value="displacement"]'), score: M.displacement.f({ rent: 1500, hv: 500000 }), sourced: M.displacement.f({ dr: 37 }) };
+  });
+  expect(metric.option).toBe(false);
+  expect(metric.score).toBeNull();
+  expect(metric.sourced).toBe(37);
+  // Neighborhood panel (LA): select block groups until one shows the paying-projects tiles.
+  const nb = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s), D = ev("D");
+    for (const f of D.bgs.features) {
+      ev("select")(f.properties.id, false);
+      const t = (document.querySelector("#panel") as HTMLElement).innerText;
+      if (/Paying projects/.test(t)) return t + "\n" + (document.querySelector("#panel") as HTMLElement).innerHTML;
+    }
+    return "";
+  });
+  expect(nb).toContain("Paying projects");
+  // The per-project EIFD plan names every assumption it uses, including administration and yearly growth.
+  if (/Who pays — a possible funding plan/.test(nb)) expect(nb).toContain("of the increment to administration and reassessed values growing 2% a year (all assumptions, not sourced figures)");
+  expect(nb).toContain("Home value created together");
+  expect(nb).not.toMatch(/Joint Value Created|Renter Displacement Sensitivity Index|neighborhood lift/);
+  // House panel (Queens, a back-tested county): no decomposition from typed rates.
+  await page.evaluate(() => (0, eval)("openCounty")("36081"));
+  await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "36081", null, { timeout: 60_000 });
+  await page.evaluate(() => (0, eval)("houseAt")({ lat: 40.738, lng: -73.762 }));
+  await page.waitForFunction(() => { const b = document.querySelector("#house"); return !!b && !b.querySelector(".house-loading") && /Estimated market value/.test(b.innerText); }, null, { timeout: 30_000 });
+  const house = await page.evaluate(() => (document.querySelector("#house") as HTMLElement).innerHTML);
+  expect(house).not.toMatch(/Site Land Value|Calibrated against county assessor|Lot Premium|Pool Premium|Age Factor|which we index to 2026/);
+  if (/data-valuation-inputs/.test(house)) expect(house).toContain("Recorded facts for this lot");
+  const src = await page.evaluate(() => String((0, eval)("renderHouse")));
+  expect(src).not.toMatch(/Site Land Value|baseNeighborhoodHv \* 0\.5|Calibrated against county assessor/);
+  expect(errors).toEqual([]);
+});
