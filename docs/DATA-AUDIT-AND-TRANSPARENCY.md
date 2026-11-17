@@ -488,6 +488,22 @@ its condition and says which applies isn't checked; it never shows one unconditi
 codes 02, 03) get the district's standards but no house-only checks. A missing single height would have been read as
 0 ft (and the second-story check would have said no); fixed before merge.
 
+**Round 4 (17 Nov): NYC R11, R11A, R12 and 58 commercial districts where homes are allowed.** A commercial lot takes the
+residence district ZR 34-112's equivalents table assigns it; I fetched 34-112 myself and checked C3 to R3-2, C4-1 to R5,
+C4-4 and C1-6 to R7-2, C4-5D to R7D, C6-3A to R9A, C2-8 / C6-4 / C5-3 to R10 and C1-9A to R10A, with their floor area
+ratios matching the residence tables. Values are shown with their conditions (residential-only buildings, 34-01; no
+plaza bonuses). C7 and C8 say residences aren't permitted; ten special designations the table doesn't list are withheld
+with the reason; C3 and C4-1 heights are withheld because how ZR 35-62 applies to an equivalent district isn't clear
+from the text. Lots under a C1/C2 overlay keep their residence standards plus a row on what the overlay changes; lots
+in a special purpose district say its rules aren't checked. No residential lot in the city is mapped R11 or R12 or
+an equivalent, so those are checked against the live tables and a browser test only.
+
+**Correction: NYC lot-width and lot-split checks never ran on the live page (found 17 Nov).** The registry's MapPLUTO
+request never included the lot-frontage field, so in rounds 1-3 the NYC lot-width and "big enough to split" checks were
+skipped on every real click. The browser tests passed because their mocks return every field; my live checks compared
+district standards and didn't catch the missing row. The page now reads `LotFront`, overlays and special districts from
+the same layer by BBL, so R1-R5 lots now show those checks.
+
 **Travis County's parcel service went offline overnight (found 17 Nov by my re-run of the live check).** The county's
 `TCAD_public` service (and its two other TCAD services) now list no layers, so every Travis click said "couldn't get
 this lot". The page said so and showed nothing, so no wrong value was shown. Travis now uses the City of Austin's
