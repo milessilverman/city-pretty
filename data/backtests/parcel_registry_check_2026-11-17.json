@@ -1,0 +1,1676 @@
+{
+ "ran_on": "2026-11-17T01:31:20.658Z",
+ "script": "scripts/check_parcel_registry.mjs",
+ "counts": {
+  "ok": 122,
+  "unreachable": 1
+ },
+ "services": [
+  {
+   "url": "https://arcgis.water.nv.gov/arcgis/rest/services/BaseLayers/County_Parcels_in_Nevada/MapServer/0",
+   "name": "Elko County GIS Parcels",
+   "counties": [
+    "32007"
+   ],
+   "states": [
+    "NV"
+   ],
+   "layer_name": "County Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://azwatermaps.azwater.gov/arcgis/rest/services/General/Parcels/MapServer/10",
+   "name": "Pima County GIS Parcels",
+   "counties": [
+    "04019"
+   ],
+   "states": [
+    "AZ"
+   ],
+   "layer_name": "Pima",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://azwatermaps.azwater.gov/arcgis/rest/services/General/Parcels/MapServer/11",
+   "name": "Pinal County GIS Parcels",
+   "counties": [
+    "04021"
+   ],
+   "states": [
+    "AZ"
+   ],
+   "layer_name": "Pinal",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://azwatermaps.azwater.gov/arcgis/rest/services/General/Parcels/MapServer/13",
+   "name": "Yavapai County GIS Parcels",
+   "counties": [
+    "04025"
+   ],
+   "states": [
+    "AZ"
+   ],
+   "layer_name": "Yavapai",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://azwatermaps.azwater.gov/arcgis/rest/services/General/Parcels/MapServer/14",
+   "name": "Yuma County GIS Parcels",
+   "counties": [
+    "04027"
+   ],
+   "states": [
+    "AZ"
+   ],
+   "layer_name": "Yuma",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://citygis.greenvillesc.gov/arcgis/rest/services/AddressSearch/Property/MapServer/3",
+   "name": "Greenville County GIS Parcels",
+   "counties": [
+    "45045"
+   ],
+   "states": [
+    "SC"
+   ],
+   "layer_name": "Parcels with Ownership",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://coageo.cabq.gov/cabqgeo/rest/services/agis/AGIS_Platted_Parcels/FeatureServer/0",
+   "name": "City of Albuquerque & Bernalillo County Platted Parcels",
+   "counties": [
+    "35001"
+   ],
+   "states": [
+    "35",
+    "NM"
+   ],
+   "layer_name": "AGIS Platted Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://dcgis.dekalbcountyga.gov/hosted/rest/services/PropertyAppraisal/Parcels_IASWorld/MapServer/0",
+   "name": "DeKalb County GIS Parcels",
+   "counties": [
+    "13089"
+   ],
+   "states": [
+    "GA"
+   ],
+   "layer_name": "Parcels_IASWorld",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://egis.dallascityhall.com/arcgis/rest/services/Basemap/DallasTaxParcels/MapServer/0",
+   "name": "Dallas County GIS Parcels",
+   "counties": [
+    "48113"
+   ],
+   "states": [
+    "TX"
+   ],
+   "layer_name": "Tax Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://enterprise.firstmap.delaware.gov/arcgis/rest/services/PlanningCadastre/DE_StateParcels/MapServer/0",
+   "name": "Delaware State Parcels (FirstMap)",
+   "counties": [],
+   "states": [
+    "10"
+   ],
+   "layer_name": "State Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://enterprise.gisdata.mn.gov/aghost/rest/services/us_mn_state_mngeo/plan_parcels_open/FeatureServer/0",
+   "name": "Parcels, Compiled from Opt-In Open Data Counties, Minnesota (MnGeo)",
+   "counties": [],
+   "states": [
+    "27"
+   ],
+   "layer_name": "Open Parcels In Minnesota",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://geo.co.harrison.ms.us/server/rest/services/AGO/HarrisonCounty_ApprovedParcels/MapServer/0",
+   "name": "Harrison County GIS Parcels",
+   "counties": [
+    "28047"
+   ],
+   "states": [
+    "MS"
+   ],
+   "layer_name": "Approved Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://geo.sandag.org/server/rest/services/Hosted/Parcels/FeatureServer/0",
+   "name": "SanGIS Parcels (hosted by SANDAG)",
+   "counties": [
+    "06073"
+   ],
+   "states": [],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://geodata.hawaii.gov/arcgis/rest/services/ParcelsZoning/MapServer/25",
+   "name": "State of Hawaii Statewide Parcels (TMKs)",
+   "counties": [
+    "15001",
+    "15003",
+    "15007",
+    "15009"
+   ],
+   "states": [
+    "15",
+    "HI"
+   ],
+   "layer_name": "Statewide TMKs",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/2",
+   "name": "Hamilton County GIS Parcels",
+   "counties": [
+    "47065"
+   ],
+   "states": [
+    "TN"
+   ],
+   "layer_name": "Hamilton",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/3",
+   "name": "Knox County GIS Parcels",
+   "counties": [
+    "47093"
+   ],
+   "states": [
+    "TN"
+   ],
+   "layer_name": "Knox",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/6",
+   "name": "Shelby County GIS Parcels",
+   "counties": [
+    "47157"
+   ],
+   "states": [
+    "TN"
+   ],
+   "layer_name": "Shelby",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.arkansas.gov/arcgis/rest/services/FEATURESERVICES/Planning_Cadastre/FeatureServer/6",
+   "name": "Arkansas Parcel Polygons - County Assessor Mapping Program (AGISO)",
+   "counties": [],
+   "states": [
+    "05"
+   ],
+   "layer_name": "PARCEL_POLYGON_CAMP",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.bakersfieldcity.us/webmaps/rest/services/General/Cadastre/MapServer/1",
+   "name": "City of Bakersfield & Kern County Cadastre Parcels",
+   "counties": [
+    "06029"
+   ],
+   "states": [
+    "06",
+    "CA"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.co.marion.or.us/arcgis/rest/services/Public/Parcels/MapServer/0",
+   "name": "Marion County GIS Parcels",
+   "counties": [
+    "41047"
+   ],
+   "states": [
+    "OR"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.colorado.gov/public/rest/services/Address_and_Parcel/Colorado_Public_Parcels/FeatureServer/0",
+   "name": "Colorado Public Parcels (Governor's Office of Information Technology)",
+   "counties": [],
+   "states": [
+    "08"
+   ],
+   "layer_name": "Colorado_Public_Parcel_Composite",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.cookcountyil.gov/traditional/rest/services/cookVwrDynmc/MapServer/44",
+   "name": "Cook County GIS - Current Parcel (cookVwrDynmc layer 44)",
+   "counties": [
+    "17031"
+   ],
+   "states": [],
+   "layer_name": "Current Parcel",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.countyofriverside.us/arcgis_mapping/rest/services/OpenData/Assessor/MapServer/50",
+   "name": "Riverside County GIS Parcels",
+   "counties": [
+    "06065"
+   ],
+   "states": [
+    "CA"
+   ],
+   "layer_name": "PARCELS_CREST",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.crcog.org/arcgis/rest/services/RegionalParcelViewer/Parcels/MapServer/0",
+   "name": "CRCOG Capitol Region CT Parcels (Hartford Metro)",
+   "counties": [
+    "09003"
+   ],
+   "states": [
+    "09"
+   ],
+   "layer_name": "Operational_Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.desotocountyms.gov/arcgis/rest/services/BaseLayers/MapServer/1",
+   "name": "DeSoto County GIS Parcels",
+   "counties": [
+    "28033"
+   ],
+   "states": [
+    "MS"
+   ],
+   "layer_name": "Tax Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.dgcoks.gov/server/rest/services/Tax_Parcel/MapServer/0",
+   "name": "Douglas County GIS Parcels",
+   "counties": [
+    "20045"
+   ],
+   "states": [
+    "KS"
+   ],
+   "layer_name": "Tax Parcel",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.dupageco.org/arcgis/rest/services/DuPage_County_IL/ParcelsWithRealEstateCC/MapServer/0",
+   "name": "DuPage County GIS Parcels",
+   "counties": [
+    "17043"
+   ],
+   "states": [
+    "IL"
+   ],
+   "layer_name": "ParcelsRealEstate",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.franklincountyohio.gov/hosting/rest/services/ParcelFeatures/Parcel_Features/MapServer/0",
+   "name": "Franklin County Auditor Tax Parcel (Parcel_Features)",
+   "counties": [
+    "39049"
+   ],
+   "states": [],
+   "layer_name": "Tax Parcel",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.johnsoncountyiowa.gov/arcgis/rest/services/LandRecords/Land_Records/MapServer/9",
+   "name": "Johnson County GIS Parcels",
+   "counties": [
+    "19103"
+   ],
+   "states": [
+    "IA"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.linncountyiowa.gov/ags/rest/services/Planning/mapBSAPermitting/MapServer/6",
+   "name": "Linn County GIS Parcels",
+   "counties": [
+    "19113"
+   ],
+   "states": [
+    "IA"
+   ],
+   "layer_name": "Parcel",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.lojic.org/maps/rest/services/LojicApps/MsdCsoSsoLocations/MapServer/4",
+   "name": "Jefferson County GIS Parcels",
+   "counties": [
+    "21111"
+   ],
+   "states": [
+    "KY"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.lyon-county.org/server/rest/services/Landbase/Parcels/MapServer/1",
+   "name": "Lyon County GIS Parcels",
+   "counties": [
+    "32019"
+   ],
+   "states": [
+    "NV"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.mcassessor.maricopa.gov/arcgis/rest/services/Parcels/MapServer/0",
+   "name": "Maricopa County Assessor Parcels",
+   "counties": [
+    "04013"
+   ],
+   "states": [],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.rcgov.org/server/rest/services/OpenData/TaxParcels/MapServer/0",
+   "name": "Pennington County GIS Parcels",
+   "counties": [
+    "46103"
+   ],
+   "states": [
+    "SD"
+   ],
+   "layer_name": "TaxParcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gis.siouxfalls.gov/arcgis/rest/services/Data/Property/MapServer/1",
+   "name": "City of Sioux Falls Parcels (Lincoln and Minnehaha counties, SD)",
+   "counties": [
+    "46083",
+    "46099"
+   ],
+   "states": [
+    "SD"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://giscat.ne.gov/enterprise/rest/services/StatewideParcelsExternal/MapServer/0",
+   "name": "Nebraska StatewideParcelsExternal (OCIO, county CAMA)",
+   "counties": [],
+   "states": [
+    "31"
+   ],
+   "layer_name": "StatewideParcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gisdata.alleghenycounty.us/arcgis/rest/services/OPENDATA/Parcels/MapServer/0",
+   "name": "Allegheny County OPENDATA Parcels (geometry)",
+   "counties": [
+    "42003"
+   ],
+   "states": [],
+   "layer_name": "Parcel",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gisdata.in.gov/server/rest/services/Hosted/Parcel_Boundaries_of_Indiana_Current/FeatureServer/0",
+   "name": "Parcel Boundaries of Indiana Current (IGIO Data Harvest)",
+   "counties": [],
+   "states": [
+    "18"
+   ],
+   "layer_name": "Parcel Boundaries of Indiana Current",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gisenterprise.washoecounty.gov/server/rest/services/WashoeGIS/Parcels/MapServer/0",
+   "name": "Washoe County GIS Parcels",
+   "counties": [
+    "32031"
+   ],
+   "states": [
+    "NV"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gismaps.fultoncountyga.gov/arcgispub/rest/services/OpenData/Tax_Parcels/MapServer/0",
+   "name": "Fulton County OpenData Tax_Parcels",
+   "counties": [
+    "13121"
+   ],
+   "states": [],
+   "layer_name": "Tax Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_Parcels/MapServer/0",
+   "name": "King County Parcels (King County Assessor / GIS Center)",
+   "counties": [
+    "53033"
+   ],
+   "states": [
+    "53"
+   ],
+   "layer_name": "King County parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gisportal.horrycounty.org/server/rest/services/Hosted/Energov_iGapps_WFL1/FeatureServer/6",
+   "name": "Horry County GIS Parcels",
+   "counties": [
+    "45051"
+   ],
+   "states": [
+    "SC"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gisportalgr.grcity.us/arcgis/rest/services/Core_Data/Parcels/MapServer/1",
+   "name": "Kent County & Grand Rapids GIS Parcels",
+   "counties": [
+    "26081"
+   ],
+   "states": [
+    "MI",
+    "26"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gisservice.mt.gov/ArcGIS/rest/services/msdi_cadastral_map_v1/MapServer/1",
+   "name": "Montana Cadastral Framework (Montana State Library / Dept. of Revenue ORION)",
+   "counties": [],
+   "states": [
+    "30"
+   ],
+   "layer_name": "Montana Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gistech.countyofkane.org/arcgis/rest/services/KanePINList/MapServer/0",
+   "name": "Kane County GIS Parcels",
+   "counties": [
+    "17089"
+   ],
+   "states": [
+    "IL"
+   ],
+   "layer_name": "Kane.DBO.Parcels_v2025",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://gisweb.wycokck.org/arcgis/rest/services/GISPUB/UGMAPS_4_V02/MapServer/0",
+   "name": "Wyandotte County GIS Parcels",
+   "counties": [
+    "20209"
+   ],
+   "states": [
+    "KS"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
+   "name": "Hillsborough County GIS Parcels",
+   "counties": [
+    "33011"
+   ],
+   "states": [
+    "NH"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
+   "name": "Merrimack County GIS Parcels",
+   "counties": [
+    "33013"
+   ],
+   "states": [
+    "NH"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
+   "name": "Rockingham County GIS Parcels",
+   "counties": [
+    "33015"
+   ],
+   "states": [
+    "NH"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
+   "name": "Grafton County GIS Parcels",
+   "counties": [
+    "33009"
+   ],
+   "states": [
+    "NH"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
+   "name": "Strafford County GIS Parcels",
+   "counties": [
+    "33017"
+   ],
+   "states": [
+    "NH"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://greenecountyassessor.org/arcgis/rest/services/TopoCountyParcels/MapServer/0",
+   "name": "Greene County GIS Parcels",
+   "counties": [
+    "29077"
+   ],
+   "states": [
+    "MO"
+   ],
+   "layer_name": "Greene County Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://jccgis.jccal.org/server/rest/services/Basemap/Parcels/MapServer/0",
+   "name": "Jefferson County GIS Parcels",
+   "counties": [
+    "01073"
+   ],
+   "states": [
+    "AL"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://jcgis.jacksongov.org/arcgis/rest/services/Cadastral/PastYearParcels/FeatureServer/0",
+   "name": "Jackson County GIS Parcels",
+   "counties": [
+    "29095"
+   ],
+   "states": [
+    "MO"
+   ],
+   "layer_name": "Parcels 2021",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://jpgis.jeffparish.net/server/rest/services/Parcels/FeatureServer/0",
+   "name": "Jefferson County GIS Parcels",
+   "counties": [
+    "22051"
+   ],
+   "states": [
+    "LA"
+   ],
+   "layer_name": "PARCELS",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://lcmaps.lanecounty.org/arcgis/rest/services/CommishSearch/AddressParcelNew/FeatureServer/1",
+   "name": "Lane County GIS Parcels",
+   "counties": [
+    "41039"
+   ],
+   "states": [
+    "OR"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://map11.incog.org/arcgis11wa/rest/services/Parcels_TulsaCo/FeatureServer/0",
+   "name": "Tulsa County GIS Parcels",
+   "counties": [
+    "40143"
+   ],
+   "states": [
+    "OK"
+   ],
+   "layer_name": "Parcels_TulsaCo",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0",
+   "name": "Tarrant County GIS Parcels",
+   "counties": [
+    "48439"
+   ],
+   "states": [
+    "TX"
+   ],
+   "layer_name": "Parcel",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://maps.bexar.org/arcgis/rest/services/Parcels/MapServer/0",
+   "name": "Bexar County GIS Parcels",
+   "counties": [
+    "48029"
+   ],
+   "states": [
+    "TX"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://maps.clarkcountynv.gov/arcgis/rest/services/Assessor/Layers/MapServer/1",
+   "name": "Clark County Assessor Parcels (Assessor/Layers)",
+   "counties": [
+    "32003"
+   ],
+   "states": [],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://maps.lakecountyil.gov/arcgis/rest/services/CCAO/TaxParcelViewerPro/MapServer/12",
+   "name": "Lake County GIS Parcels",
+   "counties": [
+    "17097"
+   ],
+   "states": [
+    "IL"
+   ],
+   "layer_name": "Tax Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://maps.linkgis.org/server/rest/services/Web_Scene_Map_Parcels/MapServer/13",
+   "name": "Kenton County GIS Parcels",
+   "counties": [
+    "21117"
+   ],
+   "states": [
+    "KY"
+   ],
+   "layer_name": "Kenton Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://maps.shelbyal.com/gisserver/rest/services/LegacyServices/Cadastral_2026/MapServer/91",
+   "name": "Shelby County GIS Parcels",
+   "counties": [
+    "01117"
+   ],
+   "states": [
+    "AL"
+   ],
+   "layer_name": "Parcel Boundary",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://maps.spartanburgcounty.org/server/rest/services/GIS/CAMA_Parcels/MapServer/0",
+   "name": "Spartanburg County GIS Parcels",
+   "counties": [
+    "45083"
+   ],
+   "states": [
+    "SC"
+   ],
+   "layer_name": "CAMA Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://maps.stpgov.org/server/rest/services/Referenced_Layers/2025_Parcels/MapServer/0",
+   "name": "St. Tammany County GIS Parcels",
+   "counties": [
+    "22103"
+   ],
+   "states": [
+    "LA"
+   ],
+   "layer_name": "2025 Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Property_and_Land_WebMercator/MapServer/40",
+   "name": "DC Owner Polygons (Common Ownership Layer) + ITSPE / CAMA sales",
+   "counties": [],
+   "states": [
+    "11"
+   ],
+   "layer_name": "Owner Polygons (Common Ownership Layer)",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://maps8.stlouis-mo.gov/arcgis/rest/services/PDA/PARCELS_PUBLIC/MapServer/0",
+   "name": "St. Louis city County GIS Parcels",
+   "counties": [
+    "29510"
+   ],
+   "states": [
+    "MO"
+   ],
+   "layer_name": "PARCELS",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://mapservices.pasda.psu.edu/server/rest/services/pasda/BucksCounty/MapServer/17",
+   "name": "Bucks County GIS Parcels",
+   "counties": [
+    "42017"
+   ],
+   "states": [
+    "PA"
+   ],
+   "layer_name": "Bucks County - Parcels 202605",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://mapservices.pasda.psu.edu/server/rest/services/pasda/MontgomeryCounty/MapServer/14",
+   "name": "Montgomery County GIS Parcels",
+   "counties": [
+    "42091"
+   ],
+   "states": [
+    "PA"
+   ],
+   "layer_name": "Montgomery County - Parcels 202512",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://mdgeodata.md.gov/imap/rest/services/PlanningCadastre/MD_ParcelBoundaries/MapServer/0",
+   "name": "Maryland Parcel Boundaries (MD iMAP / MDP / SDAT)",
+   "counties": [],
+   "states": [
+    "24"
+   ],
+   "layer_name": "Parcel Boundaries",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://ocgis.com/arcpub/rest/services/Map_Layers/Parcels/MapServer/0",
+   "name": "Orange County GIS Parcels",
+   "counties": [
+    "06059"
+   ],
+   "states": [
+    "CA"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://opcgis.deq.state.ms.us/opcgis/rest/services/Government/HINDS_PARCELS/MapServer/0",
+   "name": "Hinds County GIS Parcels",
+   "counties": [
+    "28049"
+   ],
+   "states": [
+    "MS"
+   ],
+   "status": "unreachable",
+   "detail": "HTTP 500"
+  },
+  {
+   "url": "https://pappgispub1.co.washington.or.us/server/rest/services/baselayers/Taxlots_SP/MapServer/0",
+   "name": "Washington County GIS Parcels",
+   "counties": [
+    "41067"
+   ],
+   "states": [
+    "OR"
+   ],
+   "layer_name": "Taxlots",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://portal.carsoncity.gov/server/rest/services/CarsonCity/CarsonCityNV_OpenData/MapServer/36",
+   "name": "Carson City County GIS Parcels",
+   "counties": [
+    "32510"
+   ],
+   "states": [
+    "NV"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://pub.sagis.org/arcgis/rest/services/OpenData/Parcels/MapServer/27",
+   "name": "Chatham County GIS Parcels",
+   "counties": [
+    "13051"
+   ],
+   "states": [
+    "GA"
+   ],
+   "layer_name": "Parcel Digest 2025",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
+   "name": "Los Angeles County Assessor parcels (LA County GIS)",
+   "counties": [
+    "06037"
+   ],
+   "states": [
+    "06",
+    "CA"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
+   "name": "Los Angeles County GIS Parcels",
+   "counties": [
+    "06037"
+   ],
+   "states": [
+    "CA"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://qagisservices.oakgov.com/arcgisds/rest/services/Hosted/Tax_Parcel_2024/FeatureServer/32",
+   "name": "Oakland County GIS Parcels",
+   "counties": [
+    "26125"
+   ],
+   "states": [
+    "MI"
+   ],
+   "layer_name": "Tax Parcel 2024",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://risegis.ri.gov/hosting/rest/services/RIDEM/Tax_Parcels/MapServer/0",
+   "name": "Rhode Island Tax Parcels (RIDEM / RIGIS, 37 towns)",
+   "counties": [],
+   "states": [
+    "44"
+   ],
+   "layer_name": "Tax Parcels (Zoom in to view)",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://secure.boonecountygis.com/server/rest/services/ParcelLayers/MapServer/0",
+   "name": "Boone County GIS Parcels",
+   "counties": [
+    "21015"
+   ],
+   "states": [
+    "KY"
+   ],
+   "layer_name": "Tax Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services.arcgis.com/0L95CJ0VTaxqcmED/arcgis/rest/services/EXTERNAL_tcad_parcel/FeatureServer/0",
+   "name": "Travis Central Appraisal District parcels (City of Austin copy)",
+   "counties": [
+    "48453"
+   ],
+   "states": [
+    "TX"
+   ],
+   "layer_name": "TCAD Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services.arcgis.com/aA3snZwJfFkVyDuP/arcgis/rest/services/San_Bernardino_County_Parcel_Dataset/FeatureServer/0",
+   "name": "San Bernardino County GIS Parcels",
+   "counties": [
+    "06071"
+   ],
+   "states": [
+    "CA"
+   ],
+   "layer_name": "SBCounty Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services.arcgis.com/fLeGjb7u4uXqeF9q/ArcGIS/rest/services/PWD_PARCELS/FeatureServer/0",
+   "name": "Philadelphia Water Department parcels (City of Philadelphia)",
+   "counties": [
+    "42101"
+   ],
+   "states": [
+    "PA"
+   ],
+   "layer_name": "PWD_PARCELS",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services.arcgis.com/jsIt88o09Q0r1j8h/arcgis/rest/services/Current_Parcels/FeatureServer/0",
+   "name": "Washington State Current Parcels (WaTech / WA Geoportal)",
+   "counties": [],
+   "states": [
+    "53"
+   ],
+   "layer_name": "Parcels_2026",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services.arcgis.com/KaARkuoKF9vrGr3P/arcgis/rest/services/New_Orleans_Parcels/FeatureServer/0",
+   "name": "New Orleans Cadastral Parcels GIS",
+   "counties": [
+    "22071"
+   ],
+   "states": [
+    "22"
+   ],
+   "layer_name": "geo_export_c4201dfc-1f7b-4505-bbd6-73789bcc1464",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services.arcgis.com/KYvXadMcgf0K1EzK/ArcGIS/rest/services/Tax_Parcels_2026/FeatureServer/0",
+   "name": "East Baton Rouge County GIS Parcels",
+   "counties": [
+    "22033"
+   ],
+   "states": [
+    "LA"
+   ],
+   "layer_name": "Tax Parcel",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services.arcgis.com/ovln19YRWV44nBqV/ArcGIS/rest/services/Cadastral/FeatureServer/3",
+   "name": "Scott County GIS Parcels",
+   "counties": [
+    "19163"
+   ],
+   "states": [
+    "IA"
+   ],
+   "layer_name": "Parcel",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services.nconemap.gov/secure/rest/services/NC1Map_Parcels/FeatureServer/1",
+   "name": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+   "counties": [],
+   "states": [
+    "37"
+   ],
+   "layer_name": "Parcels (polys)",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services.wvgis.wvu.edu/arcgis/rest/services/Planning_Cadastre/WV_Parcels/MapServer/0",
+   "name": "WV Parcels (WVGIS Technical Center / WV Property Tax Division)",
+   "counties": [],
+   "states": [
+    "54"
+   ],
+   "layer_name": "WVParcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services1.arcgis.com/99lidPhWCzftIe9K/arcgis/rest/services/UtahStatewideParcels/FeatureServer/0",
+   "name": "UGRC Utah Statewide Parcels + county LIR (Land Information Records) parcels",
+   "counties": [],
+   "states": [
+    "49"
+   ],
+   "layer_name": "StateWideParcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/FS_VCGI_OPENDATA_Cadastral_VTPARCELS_poly_standardized_parcels_SP_v1/FeatureServer/0",
+   "name": "VCGI Statewide Standardized Parcel Data (VTPARCELS, Grand List joined)",
+   "counties": [],
+   "states": [
+    "50"
+   ],
+   "layer_name": "FS_VCGI_OPENDATA_Cadastral_VTPARCELS_poly_standardized_parcels_SP_v1",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services1.arcgis.com/CNPdEkvnGl65jCX8/arcgis/rest/services/Public_Idaho_Parcels_/FeatureServer/7",
+   "name": "Public Idaho Parcels (Idaho ITS, Idaho Parcel Data Exchange Standard)",
+   "counties": [],
+   "states": [
+    "16"
+   ],
+   "layer_name": "Parcels Public",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services1.arcgis.com/Ezk9fcjSUkeadg6u/ArcGIS/rest/services/Minnehaha_Map_WFL1/FeatureServer/6",
+   "name": "Minnehaha County GIS Parcels",
+   "counties": [
+    "46099"
+   ],
+   "states": [
+    "SD"
+   ],
+   "layer_name": "Open_Data_Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services1.arcgis.com/GOcSXpzwBHyk2nog/arcgis/rest/services/NDGISHUB_Parcels/FeatureServer/0",
+   "name": "NDGISHUB Parcels + Parcels_TaxRoll (North Dakota State Parcel Program)",
+   "counties": [],
+   "states": [
+    "38"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/Massachusetts_Property_Tax_Parcels/FeatureServer/0",
+   "name": "MassGIS Massachusetts Property Tax Parcels (Level 3 + assessor extract)",
+   "counties": [],
+   "states": [
+    "25"
+   ],
+   "layer_name": "Massachusetts Property Tax Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services1.arcgis.com/Mg7DLdfYcSWIaDnu/arcgis/rest/services/Parcel/FeatureServer/0",
+   "name": "Fayette County GIS Parcels",
+   "counties": [
+    "21067"
+   ],
+   "states": [
+    "KY"
+   ],
+   "layer_name": "Parcel",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services1.arcgis.com/RbMX0mRVOFNTdLzd/arcgis/rest/services/Maine_Parcels_Organized_Towns/FeatureServer/10",
+   "name": "Maine Parcels Organized Towns (Maine GeoLibrary / MEGIS)",
+   "counties": [],
+   "states": [
+    "23"
+   ],
+   "layer_name": "Maine_Parcels_Organized_Towns",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services2.arcgis.com/Ce3DhLRthdwbHlfF/arcgis/rest/services/PropertyInformation_Hosted/FeatureServer/0",
+   "name": "Municipality of Anchorage Property Information",
+   "counties": [
+    "02020"
+   ],
+   "states": [
+    "02",
+    "AK"
+   ],
+   "layer_name": "PropertyInformation",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services2.arcgis.com/HdTo6HJqh92wn4D8/arcgis/rest/services/Parcels_view/FeatureServer/0",
+   "name": "Metro Nashville & Davidson County Parcels",
+   "counties": [
+    "47037"
+   ],
+   "states": [
+    "TN"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services2.arcgis.com/MlJ0G8iWUyC7jAmu/arcgis/rest/services/OhioStatewidePacels_full_view/FeatureServer/0",
+   "name": "Ohio Statewide Parcels Public View (OGRIP)",
+   "counties": [],
+   "states": [
+    "39"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services2.arcgis.com/qvkbeam7Wirps6zC/arcgis/rest/services/parcel_file_current/FeatureServer/0",
+   "name": "City of Detroit Parcels (Current), Office of the Assessor",
+   "counties": [
+    "26163"
+   ],
+   "states": [
+    "MI"
+   ],
+   "layer_name": "parcels_(current)",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services2.arcgis.com/w657bnjzrjguNyOy/ArcGIS/rest/services/STLCO_STC_Parcels_IND/FeatureServer/0",
+   "name": "St. Louis County County GIS Parcels",
+   "counties": [
+    "29189"
+   ],
+   "states": [
+    "MO"
+   ],
+   "layer_name": "STLCO_STC_Parcels_Rev2",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/arcgis/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0",
+   "name": "Parcels and MOD-IV Composite of NJ, Web Mercator (NJOGIS)",
+   "counties": [],
+   "states": [
+    "34"
+   ],
+   "layer_name": "Cad_parcel_mod4",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services3.arcgis.com/3FL1kr7L4LvwA2Kb/arcgis/rest/services/Connecticut_CAMA_and_Parcel_Layer/FeatureServer/0",
+   "name": "Connecticut CAMA and Parcel Layer (CT GIS Office / OPM)",
+   "counties": [],
+   "states": [
+    "09"
+   ],
+   "layer_name": "Connecticut_CAMA_and_Parcel_Layer",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services3.arcgis.com/I2eWXOndpF9m8oKC/ArcGIS/rest/services/Taxlots_CMap/FeatureServer/0",
+   "name": "Clackamas County GIS Parcels",
+   "counties": [
+    "41005"
+   ],
+   "states": [
+    "OR"
+   ],
+   "layer_name": "tax_taxlot_cmap",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services3.arcgis.com/n6uYoouQZW75n5WI/arcgis/rest/services/Wisconsin_Statewide_Parcels_DB/FeatureServer/0",
+   "name": "Wisconsin Statewide Parcels V12 (Statewide Parcel Map Initiative)",
+   "counties": [],
+   "states": [
+    "55"
+   ],
+   "layer_name": "V1200_WisconsinParcels_2026",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services3.arcgis.com/r0iJ85SKZ4zAzz3P/arcgis/rest/services/Wyoming_Parcels_for_2026/FeatureServer/0",
+   "name": "Wyoming Parcels for 2026 (Wyoming Statewide Parcel Viewer, Dept. of Revenue)",
+   "counties": [],
+   "states": [
+    "56"
+   ],
+   "layer_name": "Wyoming_Parcels_for_2026",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services3.arcgis.com/RfpmnkSAQleRbndX/ArcGIS/rest/services/Property_and_Tax/FeatureServer/0",
+   "name": "Gwinnett County GIS Parcels",
+   "counties": [
+    "13135"
+   ],
+   "states": [
+    "GA"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services5.arcgis.com/A5C0MR9xfkxVRwat/ArcGIS/rest/services/Parcel_Data/FeatureServer/1",
+   "name": "Rutherford County GIS Parcels",
+   "counties": [
+    "47149"
+   ],
+   "states": [
+    "TN"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/MAPPLUTO/FeatureServer/0",
+   "name": "NYC MapPLUTO (NYC Department of City Planning)",
+   "counties": [
+    "36005",
+    "36047",
+    "36061",
+    "36081",
+    "36085"
+   ],
+   "states": [],
+   "layer_name": "MAPPLUTO",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services5.arcgis.com/ya62ECiavqTkK0wv/ArcGIS/rest/services/ParcelFabricPublished_gdb/FeatureServer/15",
+   "name": "Black Hawk County GIS Parcels",
+   "counties": [
+    "19013"
+   ],
+   "states": [
+    "IA"
+   ],
+   "layer_name": "Pclwattr",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services6.arcgis.com/EbVsqZ18sv1kVJ3k/arcgis/rest/services/NYS_Tax_Parcels_Public/FeatureServer/1",
+   "name": "NYS Tax Parcels Public (NYS GIS Program Office; opt-in counties only)",
+   "counties": [],
+   "states": [
+    "36"
+   ],
+   "layer_name": "NYS_Tax_Parcels_Public",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services6.arcgis.com/K0qS4r8AEJxrE8em/ArcGIS/rest/services/Macomb_County_Parcel_Data/FeatureServer/10",
+   "name": "Macomb County GIS Parcels",
+   "counties": [
+    "26099"
+   ],
+   "states": [
+    "MI"
+   ],
+   "layer_name": "Macomb County Tax Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services6.arcgis.com/UwEXjTguDDovBVaQ/ArcGIS/rest/services/Parcels/FeatureServer/0",
+   "name": "WestCOG Western CT Parcels (Stamford / Bridgeport Metro)",
+   "counties": [
+    "09001"
+   ],
+   "states": [
+    "09"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services7.arcgis.com/JMIoqakAkedEx0oU/arcgis/rest/services/DAC_Parcels/FeatureServer/0",
+   "name": "Doña Ana County Assessed Parcels (Las Cruces)",
+   "counties": [
+    "35013"
+   ],
+   "states": [
+    "35",
+    "NM"
+   ],
+   "layer_name": "Parcel",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services7.arcgis.com/n2n27A5sWjEWTpfF/arcgis/rest/services/St_Charles_County_Parcels/FeatureServer/0",
+   "name": "St. Charles County GIS Parcels",
+   "counties": [
+    "29183"
+   ],
+   "states": [
+    "MO"
+   ],
+   "layer_name": "St_Charles_County_Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services7.arcgis.com/p0Gk2nDbPs7KEqSZ/arcgis/rest/services/SFC_Parcels_20250415/FeatureServer/0",
+   "name": "Santa Fe County Land Parcels",
+   "counties": [
+    "35049"
+   ],
+   "states": [
+    "35",
+    "NM"
+   ],
+   "layer_name": "SFC_Land_Parcels_20250415",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services8.arcgis.com/HND1NcQt6vgOGn1z/ArcGIS/rest/services/MCRC_Public_Parcels/FeatureServer/1",
+   "name": "Mobile County GIS Parcels",
+   "counties": [
+    "01097"
+   ],
+   "states": [
+    "AL"
+   ],
+   "layer_name": "MCRC_Public_Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services9.arcgis.com/Gh9awoU677aKree0/arcgis/rest/services/Florida_Statewide_Cadastral/FeatureServer/0",
+   "name": "Florida Statewide Parcels (FGIO / Dept. of Revenue Property Tax Oversight)",
+   "counties": [],
+   "states": [
+    "12"
+   ],
+   "layer_name": "CADASTRAL_DOR",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://vginmaps.vdem.virginia.gov/arcgis/rest/services/VA_Base_Layers/VA_Parcels/MapServer/0",
+   "name": "Virginia Parcels (VGIN, VA_Base_Layers/VA_Parcels)",
+   "counties": [],
+   "states": [
+    "51"
+   ],
+   "layer_name": "Virginia Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://webgis.bgky.org/server/rest/services/WARCO/Parcel_Reference/FeatureServer/0",
+   "name": "Warren County GIS Parcels",
+   "counties": [
+    "21227"
+   ],
+   "states": [
+    "KY"
+   ],
+   "layer_name": "Parcel_Reference",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://www.gis.hctx.net/arcgis/rest/services/HCAD/Parcels/MapServer/0",
+   "name": "Harris County GIS Parcels",
+   "counties": [
+    "48201"
+   ],
+   "states": [
+    "TX"
+   ],
+   "layer_name": "HCAD Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://www3.multco.us/gisagspublic/rest/services/DART/Taxlots_Orion_Public/MapServer/0",
+   "name": "Multnomah County GIS Parcels",
+   "counties": [
+    "41051"
+   ],
+   "states": [
+    "OR"
+   ],
+   "layer_name": "Taxlots",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  }
+ ]
+}

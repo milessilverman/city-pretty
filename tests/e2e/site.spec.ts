@@ -953,7 +953,7 @@ test("house checks name only the state's law records on file, assert no unchecke
   // and a lot whose use the parcel service doesn't record was called non-residential.
   const ring = (lat: number, lng: number) => [[lng - 0.0003, lat - 0.0002], [lng + 0.0003, lat - 0.0002], [lng + 0.0003, lat + 0.0002], [lng - 0.0003, lat + 0.0002], [lng - 0.0003, lat - 0.0002]];
   let travisAttrs: any = {};
-  await page.route(/TCAD_public\/MapServer\/0\/query/, (route: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
+  await page.route(/EXTERNAL_tcad_parcel\/FeatureServer\/0\/query/, (route: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
     body: JSON.stringify({ features: [{ attributes: travisAttrs, geometry: { rings: [ring(30.3005, -97.724)] } }] }) }));
   await page.route(/jccgis\.jccal\.org\/.*Parcels\/MapServer\/0\/query/, (route: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
     body: JSON.stringify({ features: [{ attributes: { PARCELID: "2200001", ADDR_PSPR: "100 TEST AVE", LAND_USE: "SINGLE FAMILY", LIVING_AREA: 1600, LOT_SQFT: 8000 }, geometry: { rings: [ring(33.52, -86.8)] } }] }) }));
@@ -1054,7 +1054,7 @@ test("what fits on this lot uses the NYC Zoning Resolution read from the code, a
   await page.route(/MAPPLUTO\/FeatureServer\/0\/query/, (route: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
     body: JSON.stringify({ features: [{ attributes: pluto, geometry: { rings: [ring(40.738, -73.762)] } }] }) }));
   let travis: any = { PROP_ID: 1, situs_address: "1 TEST ST" };
-  await page.route(/TCAD_public\/MapServer\/0\/query/, (route: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
+  await page.route(/EXTERNAL_tcad_parcel\/FeatureServer\/0\/query/, (route: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
     body: JSON.stringify({ features: [{ attributes: travis, geometry: { rings: [ring(30.3014, -97.7224)] } }] }) }));
   const errors = await openPage(page);
   await page.waitForFunction(() => { try { return !!(0, eval)("ZONING_STANDARDS") && !!(0, eval)("PARCEL_USE_CODES"); } catch { return false; } }, null, { timeout: 30_000 });

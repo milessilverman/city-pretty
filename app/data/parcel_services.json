@@ -3934,26 +3934,33 @@
    ]
   },
   {
-   "url": "https://gis.traviscountytx.gov/server1/rest/services/Boundaries_and_Jurisdictions/TCAD_public/MapServer/0",
+   "url": "https://services.arcgis.com/0L95CJ0VTaxqcmED/arcgis/rest/services/EXTERNAL_tcad_parcel/FeatureServer/0",
    "states": [
     "TX"
    ],
    "counties": [
     "48453"
    ],
-   "name": "Travis County GIS Parcels",
-   "terms": "https://gis.traviscountytx.gov/server1/rest/services/Boundaries_and_Jurisdictions/TCAD_public/MapServer/0",
-   "addr": "situs_address",
+   "name": "Travis Central Appraisal District parcels (City of Austin copy)",
+   "terms": "https://www.arcgis.com/home/item.html?id=6f5f919cf5c948cfaa3b3c326af3fba3",
    "apn": "PROP_ID",
    "max": 2000,
    "fields": [
     [
      "PROP_ID",
-     "Parcel ID"
+     "TCAD Property ID"
     ],
     [
-     "situs_address",
-     "Site Address"
+     "PID_10",
+     "Parcel ID (10-digit)"
+    ],
+    [
+     "SITUS",
+     "Situs house number"
+    ],
+    [
+     "LOTS",
+     "Lot"
     ]
    ]
   },

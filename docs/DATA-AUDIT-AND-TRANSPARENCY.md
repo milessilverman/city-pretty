@@ -477,6 +477,24 @@ apartment buildings no longer get ADU, pool or lot-split checks. Re-run live: NY
 statewide layer also truncates Denver's zone names). Correction: the first round's write-up said Denver publishes its
 code as a PDF; that was not confirmed and has been removed.
 
+**Round 3 (17 Nov): New York City R6-R10** (25 districts, exactly those the ZR 23-22 and 23-432 tables name), from
+ZR 22-121 (all residence types permitted), 23-12 (minimum lot), 23-22 (floor area) and 23-432 (base and building
+heights). Where the code's footnotes make a value depend on something the page can't see (within 100 ft of a wide
+street, Mandatory Inclusionary Housing areas, qualifying affordable or senior housing), the page shows each value with
+its condition and says which applies isn't checked; it never shows one unconditioned figure. I fetched 23-22 and
+23-432 myself: R6 (3.00 within 100 ft of a wide street / 2.20 otherwise; 3.90 qualifying), R8 (6.02 / 7.20; heights
+115 or 135 ft by street) and R10 (10.00 / 12.00; 185 or 215 ft) match the tables. I re-ran the live check twice:
+12/12 R6-R10 lots in four boroughs match MapPLUTO and 40/40 table rows were found again. Apartment buildings (NYC
+codes 02, 03) get the district's standards but no house-only checks. A missing single height would have been read as
+0 ft (and the second-story check would have said no); fixed before merge.
+
+**Travis County's parcel service went offline overnight (found 17 Nov by my re-run of the live check).** The county's
+`TCAD_public` service (and its two other TCAD services) now list no layers, so every Travis click said "couldn't get
+this lot". The page said so and showed nothing, so no wrong value was shown. Travis now uses the City of Austin's
+public copy of the appraisal district's parcels (`EXTERNAL_tcad_parcel`, 386,682 parcels, edited 2 Nov 2026, browser
+requests allowed; its address field holds only the house number, so it isn't used as the address). Live: Travis
+panels 3/3 and the "not on file" reason shown. Registry check: 122 of 123 answer; Hinds MS still returns HTTP 500.
+
 ### Correction: more invented figures in the page's own text (round 2, found and fixed 16 Nov)
 
 A second sweep of claims written into the page code (not data files) found more invented or overstated figures,
