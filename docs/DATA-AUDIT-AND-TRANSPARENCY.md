@@ -531,6 +531,26 @@ under-$500k band. My first run filtered deeds by ACRIS's `recorded_borough`, whi
 Manhattan), not the property's borough; it would have missed most Queens deeds. It was caught before any result was
 produced.
 
+### Correction: four more hand-typed figures still reached users (round 3, fixed 17 Nov)
+
+A row-by-row re-check of the 97-entry constants audit (`audit/appjs-constants-round3.md`) found these still live, all
+from before this audit; I confirmed each on the code before the fix:
+- **Renter displacement map metric and index:** computed from a typed 28% severe rent burden and 65% (California) / 15%
+  (elsewhere) rent-control coverage; no county file has those inputs, so every block group got the same score (42/100
+  in the samples checked). The metric is removed from the map menu and the index from the project tiles; renter view
+  shows the Census renter share only.
+- **"Joint Value Created" tile:** a dollar total under a typed 30% / 22% neighborhood cap, with a typed 2.5% lift for
+  projects without a sourced effect. Now "not modeled"; "Total cost" is the plain sum of the shown projects' own costs.
+- **House panel "How is this estimated?"** (back-tested counties only) split the value into land, age, bed/bath, lot
+  and pool premiums from typed rates and said it was "calibrated against county assessor rolls, deed recordings, and
+  Census ACS microdata" — false, and not the model that produced the shown estimate. It now shows the actual tested
+  method and the recorded facts only.
+- **EIFD per-project plan:** now names its 3% administration share and 2%-a-year growth as assumptions.
+LA County Policy 3.106 warnings are marked "policy text not re-checked" (Municode 403, County link 404). Still in the
+code but not reaching users: the solar credit table, a residual-land-value function and the generic estimator's rates
+(never called, or withheld by the back-test gate). My live re-check (LA and Brooklyn): none of the removed figures
+shown, panels 6/6 apart from USGS timeouts shown as "Not available".
+
 ### Correction: return bands were called a "model range", and an unsourced "locally adjusted" mode could re-rank projects (fixed 17 Nov)
 
 From before this audit. The ± band on every project's value-per-$1 return was labeled "(model range)" for catalog
