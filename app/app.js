@@ -577,6 +577,7 @@ function estimatePropertyMarketValue(params) {
     notes,
     hedonicEst,
     assessorMarketEst,
+    assessorMethodName,
     saleCompEst,
     siteValue: siteValue == null ? null : Math.round(siteValue),
     structVal: structVal == null ? null : Math.round(structVal),
@@ -1898,13 +1899,9 @@ function patchTopBarControlsDom() {
       optHeat.textContent = HEAT_LABEL;
     }
 
-    let optDisp = metricSel.querySelector('option[value="displacement"]');
-    if (!optDisp) {
-      optDisp = document.createElement("option");
-      optDisp.value = "displacement";
-      optDisp.textContent = "Renter displacement sensitivity (0–100)";
-      metricSel.appendChild(optDisp);
-    }
+    // The renter displacement metric has no sourced input in any county file; its option is not offered.
+    const optDisp = metricSel.querySelector('option[value="displacement"]');
+    if (optDisp) optDisp.remove();
   }
 
   // 3. Quarantine unverified/experimental modes behind toggle
@@ -2205,16 +2202,12 @@ const METRICS = {
   sites: { label: "Open street-tree sites", f: p => p.ts, unit: v => fmtN(v), ramp: "heat" },
   displacement: {
     label: "Renter displacement sensitivity (0–100)",
-    f: p => {
-      if (p.dr != null) return p.dr;
-      const rShare = p.renter_share ?? p.rs ?? (p.rent ? 0.48 : 0.40);
-      const burden = p.severe_burden_share ?? p.rb ?? 0.28;
-      const rentCtrl = p.rent_control_share ?? p.rc ?? 0.15;
-      return Math.round(Math.max(0, Math.min(100, (rShare * 0.45 + burden * 0.40 + (1 - rentCtrl) * 0.15) * 100)));
-    },
+    // Only a sourced score (p.dr) is shown. The fallback that was here filled in typed renter, rent-burden and
+    // rent-control shares with typed weights, so every block group got the same invented 42/100 (removed 17 Nov 2026).
+    f: p => (p.dr != null ? p.dr : null),
     unit: v => Math.round(v) + " / 100",
     ramp: "heat",
-    none: "No rent data"
+    none: "Not on file"
   },
   // Withheld (audit 16 Nov 2026): modeled owner home-value gain, not profit, and partly from unsourced estimates.
   profit: { label: "Neighborhood value created: not modeled yet", f: p => null, unit: v => "", ramp: "seq", none: "Not modeled yet" },
@@ -3646,7 +3639,7 @@ function fundHtml(r, gid) {
       <span>Left to raise</span><span><b>${fmt$(f.rest)}</b>${f.om ? ` (incl. ${fmt$(f.om)}/yr upkeep, which bonds can't pay)` : ""}</span>
       ${f.others.length ? `<span>Best fits for the rest</span><span>${f.others.map((o, i) => `${o[2] ? `<a href="${esc(o[2])}" target="_blank" rel="noopener">${esc(o[0])}</a>` : esc(o[0])}${i === 0 ? "" : ""} <span class="muted">(${esc(o[1])})</span>`).join("; ")}</span>` : `<span>Rest</span><span>city general fund or capital budget</span>`}</div>
     ${cityMoney(f)}${f.ex ? `<p style="margin:6px 0 0"><b>Real example${activeCounty === "oc" ? " (LA County)" : ""}:</b> ${esc(f.ex.p)} (${esc(f.ex.c)}${f.ex.s ? ", " + esc(f.ex.s.split(";")[0]) : ""}): ${fmt$(f.ex.t)} — ${f.ex.src.map(([n, a]) => `${esc(n)} ${fmt$(a)} (${Math.round(100 * a / f.ex.t)}%)`).join("; ")}.</p>` : ""}
-    <p class="muted" style="margin:4px 0 0">How: the city (and the County, if it joins) forms an EIFD, pledges its share of the property-tax growth this project creates, and issues bonds against it; ${lead ? esc(lead[0]) : "grants and the city's budget"} would cover most of the rest. Assumes ${pct(FUND_ASSUME.turnover)} of homes resell each year (Prop 13 reassesses only on sale), the city pledges 75% of its share and the County 49% (Artesia's 2026 district; County shares elsewhere run 11–50%; not re-checked)${f.uninc ? "; in unincorporated areas the County alone, assumed 50%" : ""}, ${(FUND_ASSUME.rate * 100).toFixed(2)}% 30-year bonds at ${FUND_ASSUME.dscr}x coverage${f.cntyK > 0 ? ", 20% of County-backed bonds held for housing" : ""}. A district over the whole area (calculator below) also captures ordinary growth and raises far more. EIFD bonds are issued by majority vote of the district's authority (Gov. Code § 53398.77); the plan itself goes to an election if 25–50% of landowners and adult residents protest (§ 53398.66).</p></div>`;
+    <p class="muted" style="margin:4px 0 0">How: the city (and the County, if it joins) forms an EIFD, pledges its share of the property-tax growth this project creates, and issues bonds against it; ${lead ? esc(lead[0]) : "grants and the city's budget"} would cover most of the rest. Assumes ${pct(FUND_ASSUME.turnover)} of homes resell each year (Prop 13 reassesses only on sale), the city pledges 75% of its share and the County 49% (Artesia's 2026 district; County shares elsewhere run 11–50%; not re-checked)${f.uninc ? "; in unincorporated areas the County alone, assumed 50%" : ""}, ${(FUND_ASSUME.rate * 100).toFixed(2)}% 30-year bonds at ${FUND_ASSUME.dscr}x coverage${f.cntyK > 0 ? ", 20% of County-backed bonds held for housing" : ""}, ${pct(FUND_ASSUME.admin)} of the increment to administration and reassessed values growing 2% a year (all assumptions, not sourced figures). A district over the whole area (calculator below) also captures ordinary growth and raises far more. EIFD bonds are issued by majority vote of the district's authority (Gov. Code § 53398.77); the plan itself goes to an election if 25–50% of landowners and adult residents protest (§ 53398.66).</p></div>`;
 }
 function ocFunding(id) {
   const F = (typeof D_OC !== "undefined" && D_OC && D_OC.oc_funding) || null;
@@ -5515,10 +5508,6 @@ function renderHouse(box, a, lot, ll, st) {
   const baseNeighborhoodHv = m.hv || p.hv || null;
   const livingSqft = F.bldg || (F.foot && F.stories ? Math.round(F.foot * F.stories) : null);
 
-  const ageFactor = F.yb ? Math.max(0.75, Math.min(1.25, 1 + (F.yb - 1980) * 0.0035)) : 1.0;
-  const bedBathFactor = (F.beds && F.baths) ? 1.0 + Math.max(-0.15, Math.min(0.20, (F.beds - 3) * 0.04 + (F.baths - 2) * 0.03)) : 1.0;
-  const poolBonus = (F.pool && baseNeighborhoodHv) ? baseNeighborhoodHv * 0.045 : 0;
-  const lotBonus = (lot && baseNeighborhoodHv) ? Math.max(-0.08, Math.min(0.12, ((lot - 5500) / 5500) * 0.10)) * baseNeighborhoodHv : 0;
 
   // Screening home-value estimate (not an appraisal)
   const valuation = (typeof estimatePropertyMarketValue === "function") ? publishValuation(estimatePropertyMarketValue({
@@ -5749,26 +5738,25 @@ function renderHouse(box, a, lot, ll, st) {
             Google Comps ↗
           </a>
         </div>
-        <details style="margin-top:6px;border:1px solid #e2e8f0;border-radius:6px;padding:6px 9px;background:#f8fafc;font-size:11.5px;">
-          <summary style="font-weight:700;cursor:pointer;color:#0284c7;">How is this estimated? (Valuation Comps &amp; Methodology)</summary>
+        <details style="margin-top:6px;border:1px solid #e2e8f0;border-radius:6px;padding:6px 9px;background:#f8fafc;font-size:11.5px;" data-valuation-inputs>
+          <summary style="font-weight:700;cursor:pointer;color:#0284c7;">How is this estimated?</summary>
           <div style="margin-top:6px;padding-top:6px;border-top:1px solid #e2e8f0;line-height:1.45;">
-            <div><b>Appraisal Model Decomposition (Site Land vs Finished Living Structure):</b> Calibrated against county assessor rolls, deed recordings, and Census ACS microdata.</div>
+            <div><b>Method:</b> ${esc((valuation && valuation.valuationMethod) || valMethod || "–")}${valuation && valuation.backtest && valuation.backtest.summary ? ` &middot; ${esc(valuation.backtest.summary)}` : ""}</div>
+            <div style="margin-top:4px;"><b>Recorded facts for this lot</b> (from the parcel service; the page adds no premiums or factors of its own):</div>
             <div style="margin-top:4px;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
-              <div>• <b>Site Land Value:</b> ${valuation && valuation.siteValue ? fmt$(valuation.siteValue) : (baseNeighborhoodHv ? fmt$(Math.round(baseNeighborhoodHv * 0.5)) : "Not on file")} <span class="muted">(underlying lot equity)</span></div>
-              ${valuation && valuation.isVacantLand ? `<div>• <b>Finished Structure (GLA):</b> $0 <span class="muted">(unimproved raw land / development site)</span></div>` : `<div>• <b>Finished Structure (GLA):</b> ${livingSqft ? fmtN(livingSqft) + " sq ft" : "Not recorded"} ${houseVpsf ? `@ ~$${houseVpsf}/sq ft` : ""} ${valuation && valuation.structVal ? `(${fmt$(valuation.structVal)})` : ''}</div>`}
-              <div>• <b>Age Factor:</b> ${F.yb ? `${F.yb} (${ageFactor >= 1 ? '+' : ''}${((ageFactor - 1) * 100).toFixed(1)}%)` : 'Baseline'}</div>
-              <div>• <b>Beds/Baths:</b> ${F.beds ? `${F.beds} bd` : "Not recorded"} / ${F.baths ? `${F.baths} ba` : "Not recorded"}${bedBathFactor !== 1 ? ` (${bedBathFactor >= 1 ? '+' : ''}${((bedBathFactor - 1) * 100).toFixed(1)}%)` : ''}</div>
-              <div>• <b>Lot Premium:</b> ${lot ? `${fmtN(lot)} sq ft (${lotBonus >= 0 ? '+' : ''}${fmt$(lotBonus)})` : "Not recorded"}</div>
-              ${F.pool ? `<div>• <b>Pool Premium:</b> +${fmt$(poolBonus)}</div>` : ''}
-              ${sale ? `<div>• <b>Last Recorded Sale:</b> ${fmt$(sale.price)} (${sale.date.slice(0, 4)})</div>` : ''}
-              ${valuation && valuation.assessorMarketEst ? `<div>• <b>Assessor Market Grounding:</b> ${fmt$(valuation.assessorMarketEst)}</div>` : ''}
+              <div>&bull; <b>Living area:</b> ${livingSqft ? fmtN(livingSqft) + " sq ft" : "Not recorded"}</div>
+              <div>&bull; <b>Year built:</b> ${F.yb ? F.yb : "Not recorded"}</div>
+              <div>&bull; <b>Beds/Baths:</b> ${F.beds ? `${F.beds} bd` : "Not recorded"} / ${F.baths ? `${F.baths} ba` : "Not recorded"}</div>
+              <div>&bull; <b>Lot:</b> ${lot ? `${fmtN(lot)} sq ft` : "Not recorded"}</div>
+              ${sale ? `<div>&bull; <b>Last Recorded Sale:</b> ${fmt$(sale.price)} (${sale.date.slice(0, 4)})</div>` : ''}
+              ${valuation && valuation.assessorMarketEst ? `<div>&bull; <b>Assessor-based value:</b> ${fmt$(valuation.assessorMarketEst)}${valuation.assessorMethodName ? ` <span class="muted">(${esc(valuation.assessorMethodName)})</span>` : ""}</div>` : ''}
             </div>
             <div style="margin-top:5px;font-size:11px;color:#64748b;">
-              <b>Assessor Roll vs Market Value:</b> Outside California, assessors (e.g. Florida Just Value, Michigan 2x SEV, Wisconsin Fair Market Value, Texas Market Value) conduct annual market audits. In California, tax rolls reflect Prop 13 acquisition caps, which we index to 2026. Cross-check live with the Zillow, Redfin, and Google buttons above.
+              <b>Assessor Roll vs Market Value:</b> Outside California, assessors (e.g. Florida Just Value, Michigan 2x SEV, Wisconsin Fair Market Value, Texas Market Value) conduct annual market audits. In California, tax rolls reflect Prop 13 acquisition caps, so a roll value is not a market value. Cross-check live with the Zillow, Redfin, and Google buttons above.
             </div>
           </div>
         </details>
-      </div>`, `screening estimate: ${fmtN(livingSqft)} sq ft at ~$${houseVpsf}/sq ft from this area's typical price per sq ft, adjusted for age, bedrooms, baths, lot size, pool${sale ? " and the last recorded sale" : ""}; cross-check with live Zillow/Redfin valuation comps`) : ""}
+      </div>`, `${esc((valuation && valuation.valuationMethod) || "screening estimate")}; cross-check with live Zillow/Redfin valuation comps`) : ""}
       ${totalRoll > 0 ? fact("Assessor Roll Value", `<span>${fmt$(totalRoll)} <span class="muted">(Land ${fmt$(rollLand)} + Imp ${fmt$(rollImp)}${rollBaseYear ? `, base year ${rollBaseYear}` : ""})</span></span>`, "County Assessor Assessment Roll") : ""}
       ${sale ? fact("Last recorded sale", `<span>${fmt$(sale.price)} <span class="muted">(${sale.date.length === 8 ? sale.date.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3") : "date not recorded"})</span></span>`, "County PAIS recorded deed transfer") : ""}
       ${fact("Stories", `<div>
@@ -7297,8 +7285,8 @@ function eifdWire(p) {
       if (county && v("e-kp") > 50 + 1e-9) w.push("The County's policy caps its contribution at 50% of its share of the increment, for no longer than 20 years.");
       if (uninc) w.push("No city share here (unincorporated); an EIFD would rest on the County alone, which its policy does not contemplate (it expects a city applicant).");
     } else {
-    if (county && !uninc && cntyC > cityC + 1e-9) w.push(`The County would put in more than the city (${(cntyC * 100).toFixed(2)}¢ vs ${(cityC * 100).toFixed(2)}¢ of each $1 of increment). Board Policy 3.106 requires the city's contribution to at least equal the County General Fund's plus any special districts'.`);
-    if (county && !uninc && capture > 0 && cityC / capture < 0.15 - 1e-9) w.push("Policy 3.106 also expects at least 15¢ of each captured $1 from the city, with limited exceptions.");
+    if (county && !uninc && cntyC > cityC + 1e-9) w.push(`The County would put in more than the city (${(cntyC * 100).toFixed(2)}¢ vs ${(cityC * 100).toFixed(2)}¢ of each $1 of increment). Board Policy 3.106 requires the city's contribution to at least equal the County General Fund's plus any special districts' (policy text not re-checked here).`);
+    if (county && !uninc && capture > 0 && cityC / capture < 0.15 - 1e-9) w.push("Policy 3.106 also expects at least 15¢ of each captured $1 from the city, with limited exceptions (policy text not re-checked here).");
     if (uninc) w.push("No city share here (unincorporated), so the County would form and run the district itself, as it did for West Carson.");
     }
     $("#e-warn").innerHTML = w.length ? (uninc ? "<b>Note:</b> " : "<b>County policy check:</b> ") + w.map(esc).join(" ") : "";
@@ -7744,40 +7732,20 @@ function select(id, fly) {
   </div></div>`;
 
   if (pkg.length) {
-    const isUrbanCore = (m.acres != null && m.homes != null && (m.homes / Math.max(0.1, m.acres)) > 15);
-    const candidateObjs = pkg.map(r => ({
-      id: r.id,
-      name: (D.catalog[r.id] && D.catalog[r.id].name) || r.id,
-      evidenceGrade: ((D.catalog[r.id] && D.catalog[r.id].grade) || "C"),
-      rawPriceLiftPct: (r.pct ? r.pct / 100 : 0.025),
-      studyStandardErrorPct: HEDONIC_SE[(D.catalog[r.id] && D.catalog[r.id].grade) || "C"] || 0.08,
-      lifecycleCostUsd: r.cost || 0,
-      localContextMultiplier: 1.0
-    }));
-    const subPkg = computeSubAdditivePackage({
-      blockGroupGeoid: id,
-      ecoregionId: "us_general",
-      medianHomeValueUsd: m.hv || (p && p.hv) || null,
-      reachedHomesCount: m.homes || (p && p.homes) || m.h || null,
-      isUrbanCore,
-      renterShare: (m.own != null ? (100 - m.own) / 100 : 0.45),
-      severeRentBurdenShare: 0.28,
-      rentControlCoverage: isCAActive() ? 0.65 : 0.15
-    }, candidateObjs, false);
 
-    const subCost = subPkg.totalPaybackPackageCostUsd || pkg.reduce((s, r) => s + r.cost, 0);
-    const subVal = subPkg.jointValueAddedUsd || pkg.reduce((s, r) => s + r.value, 0);
+
+    const subCost = pkg.reduce((s, r) => s + (r.cost || 0), 0);   // the projects' own sourced costs, summed
 
     h += `<div class="pkg" style="margin-bottom:12px">
       ${tile("Paying projects", pkg.length, "≥ $1 per $1; verified or partly verified only")}
       ${tile("Total cost", fmt$(subCost), "build + land + 10-yr upkeep")}
-      ${tile("Joint Value Created", fmt$(subVal), "modeled owner home-value gain; capped at " + (isUrbanCore ? "30%" : "22%") + " neighborhood lift")}
+      ${tile("Home value created together", "not modeled", "how these effects combine has no sourced model")}
     </div>
     <p class="small muted" style="margin:-6px 0 10px">Counts only projects whose effect or cost was checked against a source; ${pkg.some(r => ivStatus(r.id) !== "verified") ? "some are only partly verified (see each project's label)" : "all are verified"}.</p>`;
 
-    if (renterViewOn || subPkg.displacementRiskScore > 40) {
+    if (renterViewOn) {
       h += `<div style="background:#fff7ed;border:1px solid #fdba74;border-radius:6px;padding:7px 10px;margin-bottom:10px;font-size:11.5px;color:#9a3412;">
-        <b>Renter Displacement Sensitivity Index: ${subPkg.displacementRiskScore}/100</b> · Public capital investment of this scale may trigger market rent escalation in non-rent-stabilized parcels. Pair with local tenant protections.
+        <b>Renters here:</b> ${m.own != null ? Math.round(100 - m.own) + "% of homes are renter-occupied (Census ACS)" : "renter share not on file"}. Projects that raise home values can raise rents; pair them with tenant protections. No displacement score is shown: rent burden and rent-control coverage are not on file.
       </div>`;
     }
   }
@@ -9620,6 +9588,10 @@ function qualifyNearestNames(B) {
   }
   return B;
 }
+// Append without spreading: push(...arr) passes every element as an argument and overflows the call stack for
+// very large layers (an Alaska census area with 273,964 water lines crashed the page this way, 17 Nov 2026).
+function pushAll(dst, src) { for (const x of src) dst.push(x); return dst; }
+
 async function loadCountyBundle(fips) {
   if (!fips) return null;
   fips = String(fips).padStart(5, "0");
@@ -9706,18 +9678,18 @@ async function loadCountyBundle(fips) {
     const bl = B.layers || {};
     ["freeways", "arterials", "parks", "water", "rail", "stations", "walls", "amenities", "stops"].forEach(k => {
       if (bl[k] && bl[k].features && D.layers[k] && D.layers[k].features) {
-        D.layers[k].features.push(...bl[k].features);
+        pushAll(D.layers[k].features, bl[k].features);
       } else if (bl[k] && !D.layers[k]) {
         D.layers[k] = bl[k];
       }
     });
     if (Array.isArray(bl.facilities)) {
       if (!Array.isArray(D.layers.facilities)) D.layers.facilities = [];
-      D.layers.facilities.push(...bl.facilities);
+      pushAll(D.layers.facilities, bl.facilities);
     }
     if (Array.isArray(bl.projects)) {
       if (!Array.isArray(D.layers.projects)) D.layers.projects = [];
-      D.layers.projects.push(...bl.projects);
+      pushAll(D.layers.projects, bl.projects);
     }
     if (bl.streets && D.layers.streets) {
       const names = D.layers.streets.names || (D.layers.streets.names = []), idx = new Map(names.map((n, i) => [n, i])), map_ = new Map();
@@ -9726,22 +9698,22 @@ async function loadCountyBundle(fips) {
         if (j === undefined) { j = names.length; names.push(n); idx.set(n, j); }
         map_.set(i, j);
       });
-      if (bl.streets.fwy && D.layers.streets.fwy) D.layers.streets.fwy.push(...bl.streets.fwy.map(([c, n, e]) => [c, map_.get(n) ?? n, e]));
+      if (bl.streets.fwy && D.layers.streets.fwy) pushAll(D.layers.streets.fwy, bl.streets.fwy.map(([c, n, e]) => [c, map_.get(n) ?? n, e]));
       if (bl.streets.cells) {
         if (!D.layers.streets.cells) D.layers.streets.cells = {};
         for (const [k, lines] of Object.entries(bl.streets.cells)) {
           const L2 = lines.map(([c, n, p]) => [c, map_.get(n) ?? n, p]);
-          if (D.layers.streets.cells[k]) D.layers.streets.cells[k].push(...L2);
+          if (D.layers.streets.cells[k]) pushAll(D.layers.streets.cells[k], L2);
           else D.layers.streets.cells[k] = L2;
         }
       }
     }
-    if (B.cities && B.cities.features && D.cities) D.cities.features.push(...B.cities.features);
-    if (B.city_labels && D.city_labels) D.city_labels.push(...B.city_labels);
-    if (B.hoods && B.hoods.features && D.hoods) D.hoods.features.push(...B.hoods.features);
-    if (B.hood_labels && D.hood_labels) D.hood_labels.push(...B.hood_labels);
+    if (B.cities && B.cities.features && D.cities) pushAll(D.cities.features, B.cities.features);
+    if (B.city_labels && D.city_labels) pushAll(D.city_labels, B.city_labels);
+    if (B.hoods && B.hoods.features && D.hoods) pushAll(D.hoods.features, B.hoods.features);
+    if (B.hood_labels && D.hood_labels) pushAll(D.hood_labels, B.hood_labels);
     if (bl.park_labels && D.layers.park_labels) {
-      D.layers.park_labels.push(...bl.park_labels);
+      pushAll(D.layers.park_labels, bl.park_labels);
       D.layers.park_labels.sort((a, b) => b[3] - a[3]);
     }
     if (bl.fac_areas && D.layers.fac_areas && D.layers.fac_areas.cells) Object.assign(D.layers.fac_areas.cells, bl.fac_areas.cells || {});
