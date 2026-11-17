@@ -30,7 +30,7 @@ describe("zoning_standards.json: New York City", () => {
 
   it("each number appears in the table row or sentence it was parsed from", () => {
     for (const [d, r] of Object.entries<any>(NYC.districts)) {
-      if (r.tier === "R6-R10") continue;   // checked in the R6-R10 block below
+      if (r.tier === "R6-R12" || r.commercial) continue;   // checked in the R6-R12 and commercial blocks below
       expect(r.min_lot.row, d).toContain(`| ${fmt(r.min_lot.area_sqft)} | ${r.min_lot.width_ft}`);
       expect(r.far.row, d).toContain(r.far.standard.toFixed(2));
       expect(r.far.row, d).toContain(r.far.qualifying_residential_site.toFixed(2));
@@ -56,14 +56,14 @@ describe("zoning_standards.json: New York City", () => {
   });
 });
 
-describe("zoning_standards.json: New York City R6-R10", () => {
-  const HIGH = Object.entries<any>(NYC.districts).filter(([, r]) => r.tier === "R6-R10");
+describe("zoning_standards.json: New York City R6-R12", () => {
+  const HIGH = Object.entries<any>(NYC.districts).filter(([, r]) => r.tier === "R6-R12" && !r.commercial);
   const val = (row: string) => row.split(" | ");
 
-  it("covers every R6-R10 district the ZR 23-22 and 23-432 tables list, and nothing else in that range", () => {
-    expect(HIGH.map(([d]) => d).sort()).toEqual(["R10", "R10A", "R10X", "R6", "R6-1", "R6-2", "R6A", "R6B", "R6D", "R7-1", "R7-2", "R7-3", "R7A", "R7B", "R7D", "R7X",
+  it("covers every R6-R12 district the ZR 23-22 and 23-432 tables list, and nothing else in that range", () => {
+    expect(HIGH.map(([d]) => d).sort()).toEqual(["R10", "R10A", "R10X", "R11", "R11A", "R12", "R6", "R6-1", "R6-2", "R6A", "R6B", "R6D", "R7-1", "R7-2", "R7-3", "R7A", "R7B", "R7D", "R7X",
       "R8", "R8A", "R8B", "R8X", "R9", "R9-1", "R9A", "R9D", "R9X"].sort());
-    expect(NYC.not_covered).toMatch(/^R11, R12, commercial/);
+    expect(NYC.not_covered).toMatch(/^Manufacturing \(M\), mixed-use \(MX\) and special purpose district/);
     for (const [d] of HIGH) expect(NYC.districts_covered, d).toContain(d);
   });
 
@@ -107,6 +107,101 @@ describe("zoning_standards.json: New York City R6-R10", () => {
     expect(R8.height.options.standard.map((o: any) => o.max_height_ft)).toEqual([115, 135]);
     expect(R8.height.options.qualifying.map((o: any) => o.max_height_ft)).toEqual([145, 145, 175]);
     expect(R10A.height.options.standard.map((o: any) => [o.min_base_ft, o.max_height_ft])).toEqual([[125, 215], [60, 185]]);
+    // R11 and R12 (23-22: 12.00 / 15.00 and 15.00 / 18.00; 23-432: R11 60/155/255, R12 60/155/325).
+    const R11 = NYC.districts["R11"], R11A = NYC.districts["R11A"], R12 = NYC.districts["R12"];
+    expect(R11.far.options.standard.map((o: any) => o.far)).toEqual([12.0]);
+    expect(R11.far.options.qualifying.map((o: any) => o.far)).toEqual([15.0]);
+    expect(R12.far.options.standard.map((o: any) => o.far)).toEqual([15.0]);
+    expect(R12.height.options.standard.map((o: any) => [o.min_base_ft, o.max_base_ft, o.max_height_ft])).toEqual([[60, 155, 325]]);
+    expect(R11.height.options.standard.map((o: any) => [o.min_base_ft, o.max_base_ft, o.max_height_ft])).toEqual([[60, 155, 255]]);
+    // 23-22 lists R11 only; R11A takes R11's row under ZR 11-25, and says so.
+    expect(R11A.far.options.standard[0].row).toBe("R11 | 12.00 | 15.00");
+    expect(R11A.far.options.standard[0].via_11_25).toMatch(/ZR 23-22 lists R11 and not R11A; ZR 11-25/);
+    expect(R11A.height.options.standard.map((o: any) => o.min_base_ft)).toEqual([125, 60]);
+  });
+});
+
+describe("zoning_standards.json: New York City commercial districts", () => {
+  const COMM = Object.entries<any>(NYC.districts).filter(([, r]) => r.commercial);
+
+  it("each district's residential equivalent is the one ZR 34-112's row names (or 34-03 for C3A), and its bulk is that district's", () => {
+    expect(COMM.length).toBeGreaterThan(50);
+    for (const [d, r] of COMM) {
+      const C = r.commercial, eq = NYC.districts[C.equivalent];
+      expect(C.district, d).toBe(d);
+      expect(eq && !eq.commercial, d).toBe(true);
+      if (d === "C3A") {
+        expect(C.equivalent).toBe("R3A");
+        expect(C.how.quote).toContain("In C3A Districts, the bulk regulations of this Chapter shall not apply. In lieu thereof, the bulk regulations for R3A Districts");
+      } else {
+        const row = C.how.quote.split("table: ")[1];
+        const [cells, eqCell] = row.split(" (")[0].split(" | ");
+        expect(eqCell, d).toBe(C.equivalent);
+        const listed = cells.split(" ");
+        if (C.how.section === "34-112") expect(listed, d).toContain(d);
+        else {
+          expect(C.how.section, d).toBe("34-112, 11-25");
+          expect(listed.some((t: string) => d.startsWith(t) && /^-\d$/.test(d.slice(t.length))), d).toBe(true);
+        }
+      }
+      expect(r.min_lot, d).toEqual(eq.min_lot);
+      expect(r.far, d).toEqual(eq.far);
+      if (r.height.withheld) expect(r.height.section, d).toBe("35-62");
+      else expect({ ...r.height, commercial_note: undefined }, d).toEqual({ ...eq.height, commercial_note: undefined });
+      expect(C.residential_only.quote).toMatch(/^The bulk regulations of this Chapter apply to any zoning lot containing only residential buildings/);
+      expect(r.housing_types.url, d).toMatch(/\/article-iii\/chapter-2\/32-12[12]$/);
+    }
+  });
+
+  it("matches ZR 34-112, 32-121 and 35-62 for spot-checked districts (as published 17 Nov 2026)", () => {
+    const eqOf = (d: string) => NYC.districts[d].commercial.equivalent;
+    expect(eqOf("C3")).toBe("R3-2");
+    expect(eqOf("C4-1")).toBe("R5");
+    expect(eqOf("C4-4")).toBe("R7-2");
+    expect(eqOf("C4-4D")).toBe("R8A");
+    expect(eqOf("C6-2A")).toBe("R8A");
+    expect(eqOf("C1-8X")).toBe("R9X");
+    expect(eqOf("C6-4X")).toBe("R10X");
+    expect(eqOf("C6-11")).toBe("R11");
+    expect(eqOf("C6-12")).toBe("R12");
+    // "C5" in the R10 row covers C5-3 (ZR 11-25); C5-1A and C5-2A have their own R10A row.
+    expect(eqOf("C5-3")).toBe("R10");
+    expect(NYC.districts["C5-3"].commercial.how.section).toBe("34-112, 11-25");
+    expect(eqOf("C5-2A")).toBe("R10A");
+    // R1-R5 equivalents: 35-62 changes heights for non-qualifying sites, so none is shown; C3A uses R3A's (34-03).
+    expect(NYC.districts["C3"].height.withheld).toBe(true);
+    expect(NYC.districts["C4-1"].height.quote).toContain("located within R3 and R4 Districts, the height and setback regulations for R4 Districts without a letter or number suffix shall apply");
+    expect(NYC.districts["C3A"].height.max_height_ft).toBe(NYC.districts["R3A"].height.max_height_ft);
+    // 32-121: every residence type in C1, C2, C4, C5, C6; C3A only detached or zero lot line (32-122); C4-1's Staten Island condition (32-123).
+    expect(NYC.districts["C6-2"].housing_types.limited_to).toBeNull();
+    expect(NYC.districts["C6-2"].housing_types.quote).toContain("C6 column: Single-family residence Detached: ●");
+    expect(NYC.districts["C3A"].housing_types.limited_to).toBe("single- or two-family detached or zero lot line residences");
+    expect(NYC.districts["C4-1"].housing_types.condition).toMatch(/^In C4 Districts, all residential uses shall be permitted except that in lower density growth management areas within the Borough of Staten Island/);
+  });
+
+  it("C7 and C8 have no residences; designations 34-112 doesn't name are withheld with the reason", () => {
+    for (const z of ["C7", "C8-1", "C8-4"]) {
+      expect(NYC.no_residences[z].section, z).toBe("32-121");
+      expect(NYC.no_residences[z].quote, z).toMatch(new RegExp(`${z.slice(0, 2)} column: Single-family residence Detached: –`));
+      expect(NYC.districts[z], z).toBeUndefined();
+    }
+    for (const z of ["C6-4.5", "C6-1G", "C6-2M", "C5-P", "C6-7T"]) {
+      expect(NYC.commercial_withheld[z], z).toMatch(/^ZR 34-112's table doesn't list/);
+      expect(NYC.districts[z], z).toBeUndefined();
+    }
+  });
+
+  it("C1/C2 overlays: R1 and R2 lots take R3-2's bulk within the overlay (34-111); R3/R4 non-qualifying sites take R4 heights (35-62)", () => {
+    const O = NYC.commercial_overlay;
+    expect(O.districts).toEqual(["C1-1", "C1-2", "C1-3", "C1-4", "C1-5", "C2-1", "C2-2", "C2-3", "C2-4", "C2-5"]);
+    expect(O.quote).toContain("on non-qualifying residential sites, where such districts are mapped within R1 or R2 Districts, the bulk regulations for R3-2 Districts shall apply");
+    expect(O.within["R2"].bulk_from).toBe("R3-2");
+    expect(O.within["R1-2A"].bulk_from).toBe("R3-2");
+    expect(O.within["R4B"]).toMatchObject({ bulk_from: "R4B", height_from_non_qrs: "R4" });
+    expect(O.within["R5B"]).toMatchObject({ bulk_from: "R5B", height_from_non_qrs: "R5" });
+    expect(O.within["R6A"]).toMatchObject({ bulk_from: "R6A" });
+    expect(O.within["R6A"].height_from_non_qrs).toBeUndefined();
+    expect(NYC.zone_source.extra_fields.fields).toEqual(["Overlay1", "Overlay2", "SPDist1", "SPDist2", "LotFront"]);
   });
 });
 

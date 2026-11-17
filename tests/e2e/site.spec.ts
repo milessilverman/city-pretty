@@ -1046,6 +1046,7 @@ test("a JSONP answer that arrives after its timeout doesn't throw on the page", 
 });
 
 test("what fits on this lot uses the NYC Zoning Resolution read from the code, and says 'not on file' elsewhere (live click path)", async ({ page }) => {
+  test.setTimeout(300_000);   // fourteen lots through the click path
   // app/data/zoning_standards.json (scripts/build_zoning_standards.py): NYC R1-R5 standards parsed from
   // zr.planning.nyc.gov; MapPLUTO's LandUse decoded from the PLUTO data dictionary. Before 16 Nov 2026 every NYC lot
   // showed "doesn't record this lot's use" and no zoning standard; outside LA no standard was on file anywhere.
@@ -1114,11 +1115,51 @@ test("what fits on this lot uses the NYC Zoning Resolution read from the code, a
   expect(r71).toMatch(/Second home \(two-family or more\)\s*—\s*R7-1 permits every type of residence \(ZR 22-121\)/);
   expect(r71).toContain("Split into two lots (by size only)");
   expect(r71).not.toContain("null ft");
-  // A district still not encoded (R11) says so; a commercial lot (LandUse 05) gets no home checks.
+  // R11 (added 17 Nov 2026, ZR 23-22 / 23-432): its own floor area and height.
   pluto = { ...pluto, ZoneDist1: "R11" };
   const r11 = await houseText("36061", { lat: 40.738, lng: -73.762 });
-  expect(r11).toMatch(/Local zoning standards\s*—\s*Not on file: New York City's standards are on file only for R1-1/);
-  expect(r11).toContain("this lot is R11");
+  expect(r11).toContain("Zoning district R11");
+  expect(r11).toContain("Floor area ratio, standard residences: 12.00; qualifying affordable or senior housing: 15.00 (ZR 23-22)");
+  expect(r11).toContain("base 60–155 ft, building up to 255 ft");
+  // A district still not encoded (M1-1) says so.
+  pluto = { ...pluto, ZoneDist1: "M1-1" };
+  const m1 = await houseText("36061", { lat: 40.738, lng: -73.762 });
+  expect(m1).toMatch(/Local zoning standards\s*—\s*Not on file: New York City's standards are on file only for R1-1/);
+  expect(m1).toContain("this lot is M1-1");
+  // Commercial districts (ZR 34-112): a house in C4-4 takes R7-2's residential rules, with the table row quoted.
+  pluto = { ...pluto, ZoneDist1: "C4-4", LandUse: "01", BldgClass: "A1" };
+  const c44 = await houseText("36047", { lat: 40.738, lng: -73.762 });
+  expect(c44).toContain("Zoning district C4-4");
+  expect(c44).toContain("every type of residence is permitted in C4-4 (ZR 32-121)");
+  expect(c44).toContain("C4-4 takes the residential rules of R7-2");
+  expect(c44).toContain("C1-6 C2-6 C4-4 C4-5 C6-1 | R7-2");
+  expect(c44).toContain("Floor area ratio, standard residences: 4.00 for zoning lots, or portions thereof, located within 100 feet of a wide street; 3.44 for other lots");
+  expect(c44).toContain("a mixed residential and commercial building isn't checked here");
+  expect(c44).toContain("where one is allowed in a commercial district such as C4-4 isn't checked here");
+  expect(c44).not.toContain("Ancillary dwelling unit (ADU, up to 800 sq ft)");
+  // C3 (R3-2 equivalent): 35-62 changes heights for non-qualifying sites, so no height is shown.
+  pluto = { ...pluto, ZoneDist1: "C3", LotArea: 4000, LotFront: 40 };
+  const c3 = await houseText("36085", { lat: 40.738, lng: -73.762 });
+  expect(c3).toContain("C3 takes the residential rules of R3-2");
+  expect(c3).toContain("Height: not shown. ZR 35-62 modifies");
+  expect(c3).not.toContain("null ft");
+  // C8: residences aren't permitted (ZR 32-121).
+  pluto = { ...pluto, ZoneDist1: "C8-1" };
+  const c8 = await houseText("36081", { lat: 40.738, lng: -73.762 });
+  expect(c8).toMatch(/Not on file: Residences aren't permitted in C8-1 \(ZR 32-121/);
+  // A C1-2 overlay on an R2 lot: within the overlay R3-2's bulk applies (ZR 34-111), and the panel says so.
+  pluto = { ...pluto, ZoneDist1: "R2", Overlay1: "C1-2", LotArea: 4000, LotFront: 40, UnitsRes: 1 };
+  const ov = await houseText("36081", { lat: 40.738, lng: -73.762 });
+  expect(ov).toContain("Commercial overlay C1-2");
+  expect(ov).toContain("within the overlay this R2 lot takes R3-2's floor area, lot and height rules");
+  expect(ov).toContain("at least 10% of the lot's area");
+  // A lot in a special purpose district: named, and its rules are said not to be checked.
+  pluto = { ...pluto, Overlay1: "", SPDist1: "BR" };
+  const sp = await houseText("36047", { lat: 40.738, lng: -73.762 });
+  expect(sp).toContain("MapPLUTO records special purpose district BR on this lot");
+  expect(sp).not.toContain("Commercial overlay C1-2");
+  pluto = { ...pluto, SPDist1: "" };
+  // A commercial lot (LandUse 05) gets no home checks.
   pluto = { ...pluto, ZoneDist1: "C4-4", LandUse: "05" };
   const c = await houseText("36047", { lat: 40.738, lng: -73.762 });
   expect(c).toContain("This parcel is Commercial & Office Buildings (PLUTO Data Dictionary, LandUse 05)");

@@ -41,7 +41,22 @@ const HIGH_BOXES = [
   { fips: "36081", name: "Queens (Jackson Heights / Elmhurst)", box: [-73.895, 40.745, -73.875, 40.76] },
   { fips: "36005", name: "Bronx (Grand Concourse)", box: [-73.925, 40.825, -73.91, 40.84] },
 ];
-const isHigh = (z) => !!(NYC.districts[z] && NYC.districts[z].tier === "R6-R10");
+const isHigh = (z) => !!(NYC.districts[z] && NYC.districts[z].tier === "R6-R12" && !NYC.districts[z].commercial);
+// Commercial districts (added 17 Nov 2026): residential lots (PLUTO LandUse 01-03) mapped in C districts, in boxes in
+// four boroughs, plus the only R11 / R12 equivalents mapped (C6-11, C6-12; MapPLUTO has no R11, R11A or R12 lots), and
+// lots with a C1 or C2 overlay on a residence district (MapPLUTO Overlay1).
+const COMM_BOXES = [
+  { fips: "36047", name: "Brooklyn (Flatbush / Fulton St)", box: [-73.965, 40.64, -73.945, 40.69] },
+  { fips: "36081", name: "Queens (Jamaica / Flushing)", box: [-73.84, 40.69, -73.79, 40.77] },
+  { fips: "36005", name: "Bronx (Fordham / Grand Concourse)", box: [-73.91, 40.84, -73.88, 40.87] },
+  { fips: "36085", name: "Staten Island (St. George / Port Richmond)", box: [-74.16, 40.60, -74.06, 40.65] },
+  { fips: "36061", name: "Manhattan (Upper West Side)", box: [-73.99, 40.77, -73.96, 40.80] },
+];
+const OVERLAY_BOXES = [
+  { fips: "36081", name: "Queens (Bayside / Fresh Meadows)", box: [-73.80, 40.72, -73.75, 40.77] },
+  { fips: "36085", name: "Staten Island (New Dorp / Great Kills)", box: [-74.16, 40.54, -74.10, 40.59] },
+];
+const isComm = (z) => !!(NYC.districts[z] && NYC.districts[z].commercial);
 const OTHER = [
   { fips: "48453", name: "Travis TX, 809 Park Blvd (Austin: code on Municode, withheld)", lat: 30.301426, lng: -97.722411 },
   { fips: "01073", name: "Jefferson AL (no standards read)", lat: 33.4877, lng: -86.7697 },
@@ -106,7 +121,7 @@ async function verifyQuotes() {
   const need = (url, what, text) => out.push({ url, what, text });
   const D = NYC.districts;
   for (const [dd, r] of Object.entries(D)) {
-    if (r.tier === "R6-R10") continue;   // verifyHighRows()
+    if (r.tier === "R6-R12" || r.commercial) continue;   // verifyHighRows(), verifyCommercial()
     if (r.housing_types.limited_to) need(r.housing_types.url, `${dd} housing types`, r.housing_types.quote);
     need(r.min_lot.url, `${dd} min lot`, r.min_lot.row.split(" | ")[0]);
     need(r.far.url, `${dd} FAR`, r.far.row.split(" | ")[0]);
@@ -130,14 +145,14 @@ async function verifyQuotes() {
 const supText = (h) => h.replace(/<sup[^>]*>(?:\s|<[^>]+>)*(\d)(?:\s|<[^>]+>)*<\/sup>/g, "^$1").replace(/<[^>]+>/g, " ").replace(/&nbsp;|\u00a0/g, " ")
   .replace(/&amp;/g, "&").replace(/\s+/g, " ").trim().replace(/\s*\^/g, "^").replace(/(R\d+)\s+-\s*(\d)/g, "$1-$2");
 const liveRows = (h) => (h.match(/<tr[\s\S]*?<\/tr>/g) || []).map((tr) => (tr.match(/<t[dh][^>]*>[\s\S]*?<\/t[dh]>/g) || []).map((c) => supText(c.replace(/^<t[dh][^>]*>|<\/t[dh]>$/g, ""))));
-// R6-R10: re-fetch 22-121, 23-12, 23-22 and 23-432 and confirm every row the data was parsed from is still a row of the
-// live table, and that 22-121 still marks every residence type "●" in the R6-R10 columns.
+// R6-R12: re-fetch 22-121, 23-12, 23-22 and 23-432 and confirm every row the data was parsed from is still a row of the
+// live table, and that 22-121 still marks every residence type "●" in the R6-R12 columns.
 async function verifyHighRows() {
   const out = [], pages = {};
   const rowsOf = async (url) => (url in pages ? pages[url] : (pages[url] = await getText(url).then((h) => h ? liveRows(h).map((r) => r.join(" | ")) : null)));
   const want = new Map();
   for (const [dd, r] of Object.entries(NYC.districts)) {
-    if (r.tier !== "R6-R10") continue;
+    if (r.tier !== "R6-R12" || r.commercial) continue;
     for (const x of [r.min_lot, r.min_lot_other_residences]) want.set(`${x.url}||${x.row}`, { url: x.url, what: `${dd} min lot`, row: x.row });
     for (const o of [...r.far.options.standard, ...r.far.options.qualifying]) want.set(`${r.far.url}||${o.row}`, { url: r.far.url, what: `${dd} FAR`, row: o.row });
     for (const o of [...r.height.options.standard, ...r.height.options.qualifying]) want.set(`${r.height.url}||${o.row}`, { url: r.height.url, what: `${dd} height`, row: o.row });
@@ -150,9 +165,99 @@ async function verifyHighRows() {
   if (h) {
     const rows = liveRows(h), head = rows.find((r) => r[0] === "Uses" && r[1] === "R1");
     const res = rows.filter((r) => r.length >= 13 && r.slice(-12).every((c) => /^[●♦○–SP ]+$/.test(c)));
-    out.push({ url: u, what: "22-121: every residence type ● in R6-R10", found: !!head && res.length === 5 && res.every((r) => r.slice(-12).slice(5, 10).every((c) => c === "●")) });
+    out.push({ url: u, what: "22-121: every residence type ● in R6-R12", found: !!head && res.length === 5 && res.every((r) => r.slice(-12).slice(5, 12).every((c) => c === "●")) });
   } else out.push({ url: u, what: "22-121", found: null });
   return out;
+}
+
+// Commercial districts: re-fetch 32-121, 32-122, 32-123, 34-01, 34-03, 34-111, 34-112, 34-221, 35-62 and 35-632 and confirm
+// every quote is still in the section's text and every 34-112 row used is still a row of the live table.
+const norm = (t) => t.replace(/non- /g, "non-").replace(/\s+/g, " ");
+async function verifyCommercial() {
+  const pages = {}, out = [];
+  const textOf = async (u) => (u in pages ? pages[u] : (pages[u] = await getText(u).then((h) => h ? { flat: norm(flat(h)), rows: liveRows(h).map((r) => r.join(" | ")) } : null)));
+  const want = new Map();
+  const q = (url, what, text) => want.set(`${url}||${text}`, { url, what, text });
+  for (const [z, r] of Object.entries(NYC.districts)) {
+    if (!r.commercial) continue;
+    const C = r.commercial;
+    if (C.how.section.startsWith("34-112")) {
+      const row = C.how.quote.split("table: ")[1].split(" (")[0];
+      want.set(`${C.how.url}||row||${row}`, { url: C.how.url, what: `${z} residential equivalent row`, row });
+      q(C.how.url, "34-112 sentence", C.how.quote.split(" table: ")[0] + " table:");
+    } else q(C.how.url, `${z} ${C.how.section}`, C.how.quote);
+    q(C.residential_only.url, "34-01", C.residential_only.quote);
+    q(C.bonus.url, "34-221", C.bonus.quote);
+    if (r.housing_types.section !== "32-121") q(r.housing_types.url, `${z} housing types`, r.housing_types.quote);
+    if (r.housing_types.condition) q(r.housing_types.url.replace("32-121", "32-123"), `${z} 32-123`, r.housing_types.condition);
+    if (r.height.withheld) q(r.height.url, `${z} 35-62`, r.height.quote);
+    if (r.height.commercial_note) q(r.height.commercial_note.url, `${z} ${r.height.commercial_note.section}`, r.height.commercial_note.quote);
+  }
+  const O = NYC.commercial_overlay;
+  q(O.url, "34-111", O.quote);
+  q(O.height_url, "35-62", O.height_quote);
+  for (const w of want.values()) {
+    const t = await textOf(w.url);
+    out.push({ url: w.url, what: w.what, found: t == null ? null : w.row ? t.rows.includes(w.row) : t.flat.includes(norm(w.text)) });
+  }
+  // 32-121: residence types by commercial district, as the data says (C1, C2, C5, C6 all ●; C4 ● P; C3 ●/♦; C7, C8 –).
+  const u = "https://zr.planning.nyc.gov/article-iii/chapter-2/32-121", h = await textOf(u);
+  if (h) {
+    const res = h.rows.map((r) => r.split(" | ")).filter((r) => r.length >= 9 && r.slice(-8).every((c) => /^[●♦○–SPU ]+$/.test(c))).map((r) => r.slice(-8));
+    const col = (i) => res.map((r) => r[i]);
+    out.push({ url: u, what: "32-121 residence types by commercial district", found: res.length === 5 && [0, 1, 4, 5].every((i) => col(i).every((c) => c === "●")) &&
+      col(3).every((c) => c === "● P") && col(6).concat(col(7)).every((c) => c === "–") && col(2).join(",") === "●,♦,●,♦,♦" });
+  } else out.push({ url: u, what: "32-121", found: null });
+  return out;
+}
+async function sampleComm(b, per = 3) {
+  const q = new URLSearchParams({ where: "LandUse IN ('01','02','03') AND ZoneDist1 LIKE 'C%'",
+    geometry: b.box.join(","), geometryType: "esriGeometryEnvelope", inSR: "4326", spatialRel: "esriSpatialRelIntersects",
+    outFields: "BBL,ZoneDist1", returnGeometry: "false", returnCentroid: "true", outSR: "4326", resultRecordCount: "1000", f: "json" });
+  const d = await getJson(`${PLUTO}/query?${q}`);
+  const feats = (d && d.features || []).filter((f) => f.centroid && isComm(f.attributes.ZoneDist1));
+  const byDist = {};
+  for (const f of feats) (byDist[f.attributes.ZoneDist1] ||= []).push(f);
+  // prefer one R1-R5-equivalent district (C3, C3A, C4-1) when the box has one, then the others
+  const keys = Object.keys(byDist).sort((a, b_) => (NYC.districts[a].tier === "R6-R12") - (NYC.districts[b_].tier === "R6-R12"));
+  return keys.slice(0, per).map((k) => { const f = byDist[k][Math.floor(byDist[k].length / 2)]; return { lat: f.centroid.y, lng: f.centroid.x }; });
+}
+async function sampleWhere(where, per, box) {
+  const q = new URLSearchParams({ where, outFields: "BBL,ZoneDist1,Overlay1", returnGeometry: "false", returnCentroid: "true", outSR: "4326", resultRecordCount: "200", f: "json",
+    ...(box ? { geometry: box.join(","), geometryType: "esriGeometryEnvelope", inSR: "4326", spatialRel: "esriSpatialRelIntersects" } : {}) });
+  const d = await getJson(`${PLUTO}/query?${q}`);
+  const feats = (d && d.features || []).filter((f) => f.centroid);
+  const byDist = {};
+  for (const f of feats) (byDist[`${f.attributes.ZoneDist1}/${f.attributes.Overlay1 || ""}`] ||= []).push(f);
+  return Object.values(byDist).slice(0, per).map((fs_) => { const f = fs_[Math.floor(fs_.length / 2)]; return { lat: f.centroid.y, lng: f.centroid.x }; });
+}
+async function plutoFull(lat, lng) {
+  const d = await getJson(`${PLUTO}/query?` + new URLSearchParams({ geometry: `${lng},${lat}`, geometryType: "esriGeometryPoint", inSR: "4326", spatialRel: "esriSpatialRelIntersects",
+    outFields: "BBL,Address,LandUse,ZoneDist1,Overlay1,Overlay2,SPDist1,SPDist2,LotArea,LotFront,BldgArea,UnitsRes", returnGeometry: "false", f: "json" }));
+  return d && d.features && d.features.length === 1 ? d.features[0].attributes : null;
+}
+function expectedNycComm(lot) {
+  const z = lot.ZoneDist1, r = NYC.districts[z], C = r.commercial;
+  const exp = [`Zoning district ${z} (New York City Zoning Resolution)`, `Commercial district ${z}`, `${z} takes the residential rules of ${C.equivalent}`,
+    "a mixed residential and commercial building isn't checked here"];
+  if (C.how.section.startsWith("34-112")) exp.push(C.how.quote.split("table: ")[1].split(" (")[0]);
+  if (r.tier === "R6-R12") {
+    exp.push(...expectedNycHigh(lot).filter((e) => !/^Zoning district|every type of residence|^Second home|an apartment building/.test(e)));
+    exp.push(`every type of residence is permitted in ${z} (ZR 32-121)`);
+  } else {
+    exp.push(`${fmtN(r.min_lot.area_sqft)} sq ft and ${r.min_lot.width_ft} ft wide (ZR 23-11)`);
+    exp.push(r.height.withheld ? "Height: not shown. ZR 35-62 modifies" : `Height: up to ${r.height.max_height_ft} ft`);
+    if (lot.LotArea > 0) exp.push(`Up to ${fmtN(r.far.standard * lot.LotArea)} sq ft of floor area on this ${fmtN(lot.LotArea)} sq ft lot (FAR ${r.far.standard.toFixed(2)}, ZR 23-21)`);
+  }
+  if (lot.SPDist1) exp.push(`MapPLUTO records special purpose district ${lot.SPDist1}`);
+  return exp;
+}
+function expectedOverlay(lot) {
+  const z = lot.ZoneDist1, w = NYC.commercial_overlay.within[z], ov = lot.Overlay1;
+  const exp = [`Commercial overlay ${ov}${lot.Overlay2 ? ", " + lot.Overlay2 : ""}`, `MapPLUTO records a ${ov}`];
+  exp.push(w.bulk_from !== z ? `within the overlay this ${z} lot takes ${w.bulk_from}'s floor area, lot and height rules`
+    : w.height_from_non_qrs ? `on a lot that isn't a qualifying residential site the height rules are ${w.height_from_non_qrs}'s` : `So within the overlay the ${z} rules shown here stand`);
+  return exp;
 }
 
 const USE_NYC = () => USES.systems.find((s) => s.id === "nyc_pluto_landuse");
@@ -328,6 +433,43 @@ async function main() {
         console.log(b.fips, lot.ZoneDist1, lot.LandUse, lot.Address, row.ok ? "OK" : "MISSING " + JSON.stringify({ missing: row.missing, house_rows: row.house_rows_on_apartment_building, null_height: row.null_height }));
       }
     }
+    results.commercial_quotes = await verifyCommercial();
+    results.nyc_commercial = [];
+    const commPoints = [];
+    for (const b of process.env.LIVE_ONLY_OTHER === "1" ? [] : COMM_BOXES) for (const P of await sampleComm(b)) commPoints.push({ ...P, fips: b.fips, area: b.name });
+    for (const P of await sampleWhere("ZoneDist1 IN ('C6-11','C6-12','C4-11','C4-11A','C4-12')", 3)) commPoints.push({ ...P, fips: "36061", area: "R11 / R12 equivalents (citywide)" });
+    for (const P of commPoints) {
+      const lot = await plutoFull(P.lat, P.lng);
+      const row = { county: P.fips, area: P.area, lat: +P.lat.toFixed(6), lng: +P.lng.toFixed(6), pluto: lot };
+      if (!lot || !isComm(lot.ZoneDist1)) { row.skipped = "point not inside a mapped commercial lot when re-queried"; results.nyc_commercial.push(row); continue; }
+      const fips = { 1: "36061", 2: "36005", 3: "36047", 4: "36081", 5: "36085" }[String(lot.BBL)[0]];
+      row.county = fips;
+      const text = await openHouse(page, fips, { lat: P.lat, lng: P.lng });
+      const res = ["01", "02", "03"].includes(lot.LandUse);
+      const exp = res ? expectedNycComm(lot) : [];
+      row.missing = exp.filter((e) => !text.includes(e));
+      row.null_value = /null ft|NaN|undefined/.test(text);
+      row.ok = res && row.missing.length === 0 && !row.null_value;
+      if (!res) row.skipped = `LandUse ${lot.LandUse} (not residential), so the home checks don't run`;
+      row.panel_excerpt = text.split("\n").filter((l) => /Zoning district|Commercial district|Floor area|Height|Second home|Special purpose|Commercial overlay|ADU/.test(l)).join("\n").slice(0, 2500);
+      results.nyc_commercial.push(row);
+      console.log(fips, lot.ZoneDist1, "->", NYC.districts[lot.ZoneDist1].commercial.equivalent, lot.LandUse, lot.Address, row.skipped ? "SKIP " + row.skipped : row.ok ? "OK" : "MISSING " + JSON.stringify({ missing: row.missing, null_value: row.null_value }));
+    }
+    results.nyc_overlay = [];
+    for (const b of process.env.LIVE_ONLY_OTHER === "1" ? [] : OVERLAY_BOXES) {
+      for (const P of await sampleWhere("LandUse='01' AND Overlay1 LIKE 'C%' AND (ZoneDist1 LIKE 'R2%' OR ZoneDist1 LIKE 'R3%' OR ZoneDist1 LIKE 'R4%' OR ZoneDist1 LIKE 'R5%' OR ZoneDist1 LIKE 'R6%')", 3, b.box)) {
+        const lot = await plutoFull(P.lat, P.lng);
+        const row = { county: b.fips, area: b.name, lat: +P.lat.toFixed(6), lng: +P.lng.toFixed(6), pluto: lot };
+        if (!lot || !lot.Overlay1 || !NYC.commercial_overlay.within[lot.ZoneDist1]) { row.skipped = "point not inside an overlay lot of a covered district when re-queried"; results.nyc_overlay.push(row); continue; }
+        const text = await openHouse(page, b.fips, { lat: P.lat, lng: P.lng });
+        const exp = [...expectedOverlay(lot), `Zoning district ${lot.ZoneDist1} (New York City Zoning Resolution)`];
+        row.missing = exp.filter((e) => !text.includes(e));
+        row.ok = row.missing.length === 0;
+        row.panel_excerpt = text.split("\n").filter((l) => /Zoning district|Commercial overlay|Special purpose/.test(l)).join("\n").slice(0, 2000);
+        results.nyc_overlay.push(row);
+        console.log(b.fips, lot.ZoneDist1, "+", lot.Overlay1, lot.Address, row.ok ? "OK" : "MISSING " + JSON.stringify(row.missing));
+      }
+    }
     results.dc_quotes = await verifyDcQuotes();
     results.dc = [];
     const seenZ = new Set();
@@ -380,9 +522,11 @@ async function main() {
   const out = path.join(root, `data/backtests/live_check_lot_fit_${day}.json`);
   fs.writeFileSync(out, JSON.stringify(results, null, 1));
   const q = results.quotes;
-  const hr = results.high_rows || [], nh = results.nyc_high || [];
+  const hr = results.high_rows || [], nh = results.nyc_high || [], cq = results.commercial_quotes || [], nc = results.nyc_commercial || [], no = results.nyc_overlay || [];
   console.log(`quotes found ${q.filter((x) => x.found).length}/${q.length}; nyc ok ${results.nyc.filter((r) => r.ok).length}/${results.nyc.filter((r) => !r.skipped).length}; ` +
-    `R6-R10 rows found ${hr.filter((x) => x.found).length}/${hr.length}; R6-R10 lots ok ${nh.filter((r) => r.ok).length}/${nh.filter((r) => !r.skipped).length} in ${new Set(nh.filter((r) => !r.skipped).map((r) => r.county)).size} boroughs; ` +
+    `R6-R12 rows found ${hr.filter((x) => x.found).length}/${hr.length}; R6-R12 lots ok ${nh.filter((r) => r.ok).length}/${nh.filter((r) => !r.skipped).length} in ${new Set(nh.filter((r) => !r.skipped).map((r) => r.county)).size} boroughs; ` +
+    `commercial quotes ${cq.filter((x) => x.found).length}/${cq.length}; commercial lots ok ${nc.filter((r) => r.ok).length}/${nc.filter((r) => !r.skipped).length} in ${new Set(nc.filter((r) => !r.skipped).map((r) => r.county)).size} boroughs; ` +
+    `overlay lots ok ${no.filter((r) => r.ok).length}/${no.filter((r) => !r.skipped).length}; ` +
     `dc quotes ${results.dc_quotes.filter((x) => x.found).length}/${results.dc_quotes.length}; dc ok ${results.dc.filter((r) => r.ok).length}/${results.dc.filter((r) => !r.skipped).length}; ` +
     `nashville ok ${results.nashville.filter((r) => r.ok).length}/${results.nashville.length}; wrote ${out}`);
 }
