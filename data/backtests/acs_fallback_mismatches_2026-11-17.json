@@ -3233,6 +3233,29 @@
    "hv_tract": 3,
    "rent_tract": 16
   },
+  "47001": {
+   "hv_own": 51,
+   "rent_own": 40,
+   "rent_tract": 13,
+   "hv_tract": 2
+  },
+  "47003": {
+   "hv_own": 25,
+   "rent_own": 20,
+   "rent_tract": 5,
+   "hv_tract": 2
+  },
+  "47005": {
+   "hv_own": 14,
+   "rent_own": 12,
+   "rent_tract": 3,
+   "hv_tract": 1
+  },
+  "47007": {
+   "hv_own": 9,
+   "rent_own": 4,
+   "rent_tract": 3
+  },
   "47009": {
    "hv_own": 81,
    "rent_own": 60,
@@ -3244,11 +3267,152 @@
    "hv_tract": 3,
    "rent_tract": 14
   },
+  "47013": {
+   "hv_own": 27,
+   "rent_tract": 7,
+   "rent_own": 25,
+   "hv_tract": 6
+  },
+  "47015": {
+   "hv_own": 10,
+   "rent_own": 7,
+   "rent_tract": 3
+  },
+  "47017": {
+   "hv_own": 21,
+   "rent_own": 18,
+   "rent_tract": 4,
+   "hv_tract": 1
+  },
+  "47019": {
+   "hv_own": 34,
+   "rent_own": 30,
+   "rent_tract": 7,
+   "hv_tract": 2
+  },
+  "47021": {
+   "hv_own": 21,
+   "rent_tract": 7,
+   "rent_own": 14
+  },
+  "47023": {
+   "hv_own": 13,
+   "rent_own": 7,
+   "rent_tract": 4
+  },
+  "47025": {
+   "hv_own": 21,
+   "rent_tract": 5,
+   "rent_own": 18,
+   "hv_tract": 2
+  },
+  "47027": {
+   "hv_own": 5,
+   "rent_own": 3,
+   "hv_tract": 1,
+   "rent_tract": 3
+  },
+  "47029": {
+   "hv_own": 24,
+   "rent_tract": 8,
+   "rent_own": 16
+  },
+  "47031": {
+   "hv_own": 37,
+   "rent_tract": 11,
+   "rent_own": 29,
+   "hv_tract": 3
+  },
+  "47033": {
+   "hv_own": 13,
+   "rent_own": 10,
+   "rent_tract": 3
+  },
+  "47035": {
+   "hv_own": 44,
+   "rent_own": 28,
+   "rent_tract": 14,
+   "hv_tract": 1
+  },
   "47037": {
    "hv_own": 445,
    "rent_tract": 87,
    "rent_own": 385,
    "hv_tract": 33
+  },
+  "47039": {
+   "hv_own": 12,
+   "rent_tract": 7,
+   "rent_own": 6,
+   "hv_tract": 1
+  },
+  "47041": {
+   "hv_own": 13,
+   "rent_own": 9,
+   "rent_tract": 4
+  },
+  "47043": {
+   "hv_own": 31,
+   "rent_own": 20,
+   "rent_tract": 11
+  },
+  "47045": {
+   "hv_tract": 3,
+   "rent_own": 23,
+   "hv_own": 24,
+   "rent_tract": 4
+  },
+  "47047": {
+   "hv_own": 30,
+   "rent_tract": 12,
+   "rent_own": 22,
+   "hv_tract": 4
+  },
+  "47049": {
+   "hv_own": 13,
+   "rent_own": 5,
+   "hv_tract": 3,
+   "rent_tract": 11
+  },
+  "47051": {
+   "hv_own": 29,
+   "rent_own": 19,
+   "rent_tract": 10
+  },
+  "47053": {
+   "hv_own": 39,
+   "rent_own": 28,
+   "rent_tract": 13,
+   "hv_tract": 2
+  },
+  "47055": {
+   "hv_own": 20,
+   "rent_tract": 5,
+   "rent_own": 14
+  },
+  "47057": {
+   "hv_own": 17,
+   "rent_tract": 9,
+   "rent_own": 9,
+   "hv_tract": 1
+  },
+  "47059": {
+   "hv_own": 47,
+   "rent_own": 37,
+   "rent_tract": 12,
+   "hv_tract": 2
+  },
+  "47061": {
+   "hv_tract": 1,
+   "rent_own": 8,
+   "hv_own": 10,
+   "rent_tract": 3
+  },
+  "47063": {
+   "hv_own": 40,
+   "rent_own": 30,
+   "rent_tract": 12,
+   "hv_tract": 2
   },
   "47065": {
    "hv_own": 254,
@@ -3256,11 +3420,150 @@
    "rent_tract": 67,
    "hv_tract": 17
   },
+  "47067": {
+   "hv_own": 6,
+   "rent_own": 4,
+   "rent_tract": 2
+  },
+  "47069": {
+   "hv_own": 17,
+   "rent_own": 13,
+   "hv_tract": 2,
+   "rent_tract": 6
+  },
+  "47071": {
+   "hv_own": 20,
+   "rent_own": 14,
+   "rent_tract": 6,
+   "hv_tract": 2
+  },
+  "47073": {
+   "hv_own": 38,
+   "rent_own": 27,
+   "rent_tract": 11
+  },
+  "47075": {
+   "hv_own": 14,
+   "rent_own": 12,
+   "rent_tract": 3,
+   "hv_tract": 1
+  },
+  "47077": {
+   "hv_own": 19,
+   "rent_tract": 5,
+   "rent_own": 16,
+   "hv_tract": 2
+  },
+  "47079": {
+   "hv_own": 30,
+   "rent_own": 23,
+   "rent_tract": 7
+  },
+  "47081": {
+   "hv_own": 14,
+   "rent_own": 11,
+   "hv_tract": 2,
+   "rent_tract": 5
+  },
+  "47083": {
+   "hv_own": 7,
+   "rent_own": 6,
+   "rent_tract": 1
+  },
+  "47085": {
+   "hv_own": 14,
+   "rent_tract": 5,
+   "rent_own": 8,
+   "hv_tract": 1
+  },
+  "47087": {
+   "hv_own": 10,
+   "rent_own": 5,
+   "rent_tract": 5
+  },
+  "47089": {
+   "hv_own": 31,
+   "rent_own": 28,
+   "rent_tract": 4,
+   "hv_tract": 1
+  },
+  "47091": {
+   "hv_own": 12,
+   "rent_own": 9,
+   "rent_tract": 3
+  },
   "47093": {
    "hv_own": 273,
    "rent_own": 229,
    "rent_tract": 62,
    "hv_tract": 19
+  },
+  "47095": {
+   "hv_own": 6,
+   "rent_tract": 1,
+   "rent_own": 5
+  },
+  "47097": {
+   "hv_own": 24,
+   "rent_own": 16,
+   "rent_tract": 9,
+   "hv_tract": 1
+  },
+  "47099": {
+   "hv_own": 30,
+   "rent_own": 22,
+   "rent_tract": 9,
+   "hv_tract": 1
+  },
+  "47101": {
+   "hv_own": 7,
+   "rent_own": 4,
+   "rent_tract": 3
+  },
+  "47103": {
+   "hv_own": 23,
+   "rent_tract": 7,
+   "rent_own": 18,
+   "hv_tract": 2
+  },
+  "47105": {
+   "hv_own": 36,
+   "rent_own": 25,
+   "rent_tract": 10,
+   "hv_tract": 1
+  },
+  "47107": {
+   "hv_own": 36,
+   "rent_own": 28,
+   "rent_tract": 10,
+   "hv_tract": 1
+  },
+  "47109": {
+   "hv_own": 19,
+   "rent_tract": 5,
+   "rent_own": 14
+  },
+  "47111": {
+   "hv_own": 16,
+   "rent_tract": 4,
+   "rent_own": 12
+  },
+  "47113": {
+   "hv_own": 59,
+   "rent_own": 50,
+   "hv_tract": 5,
+   "rent_tract": 14
+  },
+  "47115": {
+   "hv_own": 18,
+   "rent_tract": 8,
+   "rent_own": 12,
+   "hv_tract": 2
+  },
+  "47117": {
+   "hv_own": 20,
+   "rent_own": 14,
+   "rent_tract": 6
   },
   "47119": {
    "hv_own": 56,
@@ -3268,11 +3571,83 @@
    "rent_tract": 15,
    "hv_tract": 2
   },
+  "47121": {
+   "hv_own": 9,
+   "rent_own": 7,
+   "rent_tract": 2
+  },
+  "47123": {
+   "hv_own": 34,
+   "rent_own": 25,
+   "rent_tract": 9
+  },
   "47125": {
    "hv_own": 104,
    "rent_own": 91,
    "rent_tract": 19,
    "hv_tract": 4
+  },
+  "47127": {
+   "hv_tract": 1,
+   "rent_own": 4,
+   "hv_own": 4,
+   "rent_tract": 1
+  },
+  "47129": {
+   "hv_own": 14,
+   "rent_own": 9,
+   "rent_tract": 5
+  },
+  "47131": {
+   "hv_own": 28,
+   "rent_own": 26,
+   "rent_tract": 2
+  },
+  "47133": {
+   "hv_own": 14,
+   "rent_own": 10,
+   "hv_tract": 2,
+   "rent_tract": 2
+  },
+  "47135": {
+   "hv_own": 8,
+   "rent_own": 7,
+   "rent_tract": 1
+  },
+  "47137": {
+   "hv_own": 6,
+   "rent_tract": 3,
+   "rent_own": 2
+  },
+  "47139": {
+   "hv_own": 12,
+   "rent_own": 7,
+   "rent_tract": 6,
+   "hv_tract": 1
+  },
+  "47141": {
+   "hv_tract": 5,
+   "rent_own": 40,
+   "hv_own": 41,
+   "rent_tract": 6
+  },
+  "47143": {
+   "hv_own": 17,
+   "rent_own": 15,
+   "rent_tract": 4,
+   "hv_tract": 2
+  },
+  "47145": {
+   "hv_own": 35,
+   "rent_tract": 10,
+   "rent_own": 25,
+   "hv_tract": 1
+  },
+  "47147": {
+   "hv_own": 40,
+   "rent_own": 28,
+   "rent_tract": 13,
+   "hv_tract": 1
   },
   "47149": {
    "hv_own": 147,
@@ -3280,11 +3655,38 @@
    "rent_own": 120,
    "hv_tract": 13
   },
+  "47151": {
+   "hv_own": 13,
+   "rent_tract": 3,
+   "hv_tract": 3,
+   "rent_own": 13
+  },
+  "47153": {
+   "hv_own": 9,
+   "rent_tract": 3,
+   "rent_own": 6
+  },
+  "47155": {
+   "hv_own": 63,
+   "rent_own": 50,
+   "rent_tract": 18,
+   "hv_tract": 5
+  },
   "47157": {
    "hv_own": 561,
    "rent_own": 554,
    "rent_tract": 111,
    "hv_tract": 96
+  },
+  "47159": {
+   "hv_own": 13,
+   "rent_own": 11,
+   "rent_tract": 2
+  },
+  "47161": {
+   "hv_own": 10,
+   "rent_own": 8,
+   "rent_tract": 2
   },
   "47163": {
    "hv_own": 109,
@@ -3298,11 +3700,60 @@
    "rent_tract": 21,
    "hv_tract": 1
   },
+  "47167": {
+   "hv_own": 34,
+   "rent_own": 32,
+   "hv_tract": 3,
+   "rent_tract": 5
+  },
+  "47169": {
+   "hv_own": 5,
+   "rent_tract": 2,
+   "rent_own": 3
+  },
+  "47171": {
+   "hv_own": 13,
+   "rent_own": 8,
+   "rent_tract": 6,
+   "hv_tract": 1
+  },
+  "47173": {
+   "hv_own": 14,
+   "rent_own": 9,
+   "rent_tract": 5
+  },
+  "47175": {
+   "hv_own": 4,
+   "rent_tract": 1,
+   "rent_own": 3
+  },
+  "47177": {
+   "hv_own": 26,
+   "rent_own": 23,
+   "rent_tract": 4,
+   "hv_tract": 1
+  },
   "47179": {
    "hv_own": 86,
    "rent_own": 73,
    "hv_tract": 6,
    "rent_tract": 19
+  },
+  "47181": {
+   "hv_own": 10,
+   "rent_own": 7,
+   "hv_tract": 3,
+   "rent_tract": 3
+  },
+  "47183": {
+   "hv_own": 25,
+   "rent_own": 20,
+   "rent_tract": 6
+  },
+  "47185": {
+   "hv_own": 17,
+   "rent_own": 13,
+   "rent_tract": 4
   },
   "47187": {
    "hv_own": 108,

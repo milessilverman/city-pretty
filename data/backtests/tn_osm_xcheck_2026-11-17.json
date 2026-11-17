@@ -1,0 +1,83 @@
+{
+ "script": "scripts/check_osm_extract_vs_overpass.py",
+ "note": "Way 19650649 (Locke Bend Road, tiger:county Warren, TN) is in the Tennessee file; it only crosses the corner of White County box, so Overpass returns it and the extract (node in box) does not.",
+ "counties": {
+  "47155": {
+   "fips": "47155",
+   "box_s_w_n_e": "35.54192899971186,-83.81427500007605,36.063118999770786,-83.23152100013007",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-17T00:54:33Z",
+   "checked_at": "2026-11-17T14:07:34Z",
+   "roads": {
+    "direct": 10650,
+    "extract": 10650,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 133,
+    "extract": 133,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  },
+  "47185": {
+   "fips": "47185",
+   "box_s_w_n_e": "35.746927000145526,-85.70288599983732,36.10201199986495,-85.19311499992219",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-17T00:54:33Z",
+   "checked_at": "2026-11-17T13:55:12Z",
+   "roads": {
+    "direct": 2686,
+    "extract": 2685,
+    "missing_from_extract": [
+     19650649
+    ],
+    "extra_in_extract": [],
+    "n_missing": 1,
+    "n_extra": 0,
+    "match": false
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  },
+  "47137": {
+   "fips": "47137",
+   "box_s_w_n_e": "36.38561399998632,-85.30541300041293,36.64681600004575,-84.71183900038054",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-17T00:54:33Z",
+   "checked_at": "2026-11-17T13:40:29Z",
+   "roads": {
+    "direct": 1829,
+    "extract": 1829,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  }
+ }
+}
