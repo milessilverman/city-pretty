@@ -1813,7 +1813,7 @@ function renderHouseAuditAside(audit) {
         <span style="font-size:11px;color:#64748b;font-weight:600;">Assumed pitch ${audit.roofCadastre.pitchRatio}</span>
       </div>
       <div style="font-size:11px;color:#475569;margin-top:4px;">
-        • <b>Roof area:</b> ~${fmtN(audit.roofCadastre.grossRoofSqft)} sq ft (from living area, stories and an assumed pitch; not measured)
+        • <b>Roof area:</b> ~${fmtN(audit.roofCadastre.grossRoofSqft)} sq ft (from living area, stories and an assumed pitch; not measured. The default pitch is a rule of thumb by state and build era, with no source)
       </div>
       ${notModeled("Re-roofing cost: not modeled yet — no sourced cost data.")}
     </div>` : ""}
@@ -6217,7 +6217,7 @@ function renderHouse(box, a, lot, ll, st) {
               </div>
 
               <div style="border-top:1px solid #e2e8f0;padding-top:8px;font-size:11px;color:#64748b;font-style:italic;">
-                Roof area is a geometry estimate from living area, stories and an assumed pitch, not a measurement. Re-roofing cost: not modeled yet — no sourced cost data.
+                Roof area is a geometry estimate from living area, stories and an assumed pitch, not a measurement. The default pitch is a rule of thumb by state and build era with no source; pick the pitch that matches the house. Re-roofing cost: not modeled yet — no sourced cost data.
               </div>
             </div>
           </details>
