@@ -1484,3 +1484,25 @@ test("parcel services round 3: TN and Hinds entries point at working layers, and
   expect(r.hindsAin).toBe("179-1");
   expect(errors).toEqual([]);
 });
+
+// The value-per-$1 band is a judgment width by catalog grade, not a statistical interval, and the unsourced "locally
+// adjusted" return (hand-typed heat, canopy, bus, dining, freeway and price-tier multipliers) is gone (17 Nov 2026).
+test("value-per-$1 bands are labeled judgment bands, and no unsourced local adjustment can change or re-rank a return", async ({ page }) => {
+  const errors = await openPage(page);
+  const r = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s);
+    const cal = ev("calibrateVpd")(1.5, "A", "street_trees", { hv: 300000, tg: 40, ht: 5, ts: 300, fw: 100 });
+    ev("setRoiMode")("adj");
+    return { str: cal.str, adjStr: cal.adjStr, factor: cal.factor, adj: cal.adj, mode: ev("roiMode"), select: !!document.getElementById("roi-mode"),
+      methods: (document.body.innerHTML.match(/Dynamic ROI Mode|Locally Context-Adjusted ROI|model range/g) || []).length };
+  });
+  expect(r.str).toContain("judgment band ±8%, not a statistical interval");
+  expect(r.str).not.toContain("model range");
+  expect(r.adjStr).toBe("");
+  expect(r.factor).toBe(1);
+  expect(r.adj).toBe(1.5);
+  expect(r.mode).toBe("base");
+  expect(r.select).toBe(false);
+  expect(r.methods).toBe(0);
+  expect(errors).toEqual([]);
+});

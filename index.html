@@ -107,11 +107,6 @@
       <details class="more-layers menu" id="map-options">
         <summary class="tool-btn" title="Return estimates, evidence and map layers"><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg><span>Layers</span></summary>
         <div class="layers-dropdown">
-        <div class="opt-group"><label for="roi-mode">Return estimate</label>
-          <select id="roi-mode" onchange="setRoiMode(this.value)">
-      <option value="base" selected>Base Hedonic Study ROI</option>
-      <option value="adj">Locally Context-Adjusted ROI</option>
-    </select></div>
         <div class="opt-group"><label for="evid">Catalog grade (sourced estimates only)</label>
           <select id="evid">
       <option value="D" selected>All verified or partly verified (any grade)</option>
@@ -432,7 +427,7 @@
     
     <h3>Return per $1 and which estimates are shown</h3>
     <p class="small">Each project's return is the home value it is modeled to add to nearby homes, divided by its lifecycle cost (construction plus ten years of discounted upkeep). A dollar figure is shown only for projects whose effect size or cost was checked against its source in the 16 November 2026 data audit (labelled <b>Verified</b> or <b>Partly verified</b>, with the unchecked side named). Every other project is listed under "Other ideas (effect not sourced yet)" with no numbers. The range shown around an estimate is a judgment band by the catalog's own evidence grade (about ±8% to ±25%); it is not a statistical confidence interval. Neighborhood "value created" totals are not modeled yet.</p>
-    <p class="small"><b>Dynamic ROI Mode:</b> Users can toggle between <i>Base Hedonic Study ROI</i> and <i>Locally Context-Adjusted ROI</i>. The locally adjusted model evaluates micro-climate heat anomalies, tree canopy deficits, peak bus frequency, restaurant/dining walkability, freeway buffer zones (under 300 m), and a diminishing marginal returns saturation curve (200 / [n + 100]) to dynamically re-rank investments and re-color the map in real time. Street-tree capital cost is benchmarked to the City of LA in-lieu fee of $1,945 per Public Works tree (LAMC § 62.177, Ord. 185,573) plus long-term watering and canopy upkeep.</p>
+    <p class="small"><b>No local adjustment:</b> an earlier "locally context-adjusted" return re-ranked projects with hand-typed factors for heat, canopy, bus frequency, dining, freeway distance and a saturation curve. None had a source, so it was removed on 17 November 2026; every return shown is the catalog's own estimate with its judgment band.</p>
 
     <div id="methods-financing-section">
       <p class="small muted">Loads for the selected county.</p>

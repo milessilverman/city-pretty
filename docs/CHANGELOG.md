@@ -153,6 +153,8 @@ The entries below are kept for history. **Do not rely on their claims.**
   - Bootstraps lightweight initial records for instant synchronous page startup and dynamically populates via `cpJson("county-completeness")`.
 
 ### 19. Empirical Hedonic Range Labels & Model Provenance (`app/app.js`)
+> **Correction (17 Nov 2026):** the claims in this item were false. The band widths were never traced to any study's standard errors; they are judgment widths by catalog grade, and the page now says so. See `docs/DATA-AUDIT-AND-TRANSPARENCY.md`.
+
 - Implemented Roadmap P1 Item 9:
   - Traced model range spreads directly to published study standard errors (`HEDONIC_SE`).
   - Added explicit data provenance indicators (`measured locally`, `borrowed from peer study`, `planning assumption`).

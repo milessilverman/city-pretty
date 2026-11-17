@@ -2016,11 +2016,9 @@ var activeHouse = null; if (typeof window !== "undefined") window.activeHouse = 
 const VPD_GREEN = ["street_trees", "pocket_park", "cool_pavement", "community_garden", "tiny_forest", "green_street", "schoolyard_green", "vacant_lot_green"];
 const VPD_WALK = ["bus_shelters", "transit_shade", "protected_bike", "crosswalks", "street_lighting", "bike_share", "transit_priority", "bus_lane", "brt", "slow_streets", "ped_signals"];
 
-// Standard errors derived from published quasi-experimental & econometric hedonic literature:
-// Grade A (direct LA County sales hedonic regression): SE = 0.041 * v, 95% CI margin = 1.96 * SE = 8.0%
-// Grade B (published quasi-experimental peer metro regressions): SE = 0.063 * v, 95% CI margin = 1.96 * SE = 12.3%
-// Grade C (benefit transfer / spatial meta-regression): SE = 0.087 * v, 95% CI margin = 1.96 * SE = 17.1%
-// Grade D/U (structural planning assumptions): SE = 0.125 * v, 95% CI margin = 1.96 * SE = 24.5%
+// Judgment band widths by the catalog's own evidence grade. These are NOT standard errors from any study: an earlier
+// comment here (and the CHANGELOG) said they were "derived from published hedonic literature", which was never shown
+// (docs/audit/appjs-constants-audit.md). The page calls them a judgment band, never a confidence interval.
 const HEDONIC_SE = { A: 0.041, B: 0.063, C: 0.087, D: 0.125, U: 0.125 };
 
 
@@ -2030,43 +2028,26 @@ function calibrateVpd(v, grade, id, m) {
   const g = (grade || "C").toUpperCase(), m_ = m || {};
   let factor = 1; const notes = [];
 
-  // Nonlinear Saturation Curve: avoids unrealistic linear scaling when amenity volume is high
-  const count = m_.ts != null ? +m_.ts : 50;
-  const saturationMult = (VPD_GREEN.includes(id) && count > 100) ? Math.min(1.0, 200 / (count + 100)) : 1.0;
-
-  if (VPD_GREEN.includes(id)) {
-    const tg = m_.tg != null ? +m_.tg : 20, ht = m_.ht != null ? +m_.ht : 0;     // canopy gap to goal; heat vs county median
-    const heat = 1 + Math.min(Math.max(ht * 0.035 + (tg - 15) * 0.008, -0.20), 0.35);
-    const hv = m_.hv != null ? +m_.hv : 850000;
-    const wealth = Math.pow(850000 / Math.max(hv, 300000), 0.28);                  // damps percentage effects in the priciest areas
-    factor *= heat * wealth * saturationMult;
-    notes.push(`heat and canopy gap ×${heat.toFixed(2)}`, `price tier ×${wealth.toFixed(2)}`);
-    if (saturationMult < 0.98) notes.push(`saturation curve ×${saturationMult.toFixed(2)}`);
-  } else if (VPD_WALK.includes(id)) {
-    const bt = m_.bt != null ? +m_.bt : 4, din = m_.din != null ? +m_.din : 2;     // buses per hour; restaurants and cafés nearby
-    const walk = 1 + Math.min(Math.max((bt - 6) * 0.02 + Math.min(din, 15) * 0.015, -0.15), 0.30);
-    factor *= walk; notes.push(`bus frequency and dining density ×${walk.toFixed(2)}`);
-  }
-  if (m_.fw != null && m_.fw < 300) { factor *= 0.90; notes.push("within 300 m of a freeway ×0.90"); }
-
+  // No local adjustment. An earlier "locally adjusted" return multiplied the estimate by hand-typed factors for heat,
+  // canopy gap, bus frequency, dining, freeway distance, price tier and a saturation curve, none with a source, and
+  // could re-rank projects; removed 17 Nov 2026 (docs/DATA-AUDIT-AND-TRANSPARENCY.md).
   const seRate = HEDONIC_SE[g] ?? 0.087;
   const ciMargin = 1.96 * seRate;
   const low = Math.max(0.05, v * (1 - ciMargin));
   const high = v * (1 + ciMargin);
   const adj = v * factor;
 
-  const isAssumed = g === "D" || g === "U" || !HEDONIC_SE[g];
-  const provenance = g === "A" ? "measured locally" : (g === "B" || g === "C") ? "borrowed from peer study" : "planning assumption";
-  const rangeLabel = isAssumed ? `(assumed ±${Math.round(ciMargin * 100)}%)` : "(model range)";
+  const isAssumed = true;   // every band is a judgment width by grade, never a measured interval
+  const rangeLabel = `(judgment band ±${Math.round(ciMargin * 100)}%, not a statistical interval)`;
 
   return {
     low: f(low), high: f(high), point: v, adj, factor, notes,
-    provenance, isAssumed,
+    isAssumed,
     band: ciMargin, se: f(v * seRate), ciMarginPct: Math.round(ciMargin * 100) + "%",
     badge: (id ? (ivStatus(id) === "verified" ? "Sourced inputs" : ivStatus(id) === "partially_verified" ? "Partly verified" : "Unverified") : "") + (g !== "NONE" && id ? " · grade " + g : ""),
     str: "$" + f(low) + " – $" + f(high) + " / $1 " + rangeLabel,
     estStr: `~$${f(v)} / $1`,
-    adjStr: Math.abs(factor - 1) < 0.005 ? "" : `~$${f(adj)} / $1 (locally adjusted ×${factor.toFixed(2)})`
+    adjStr: ""
   };
 }
 function formatVpdRange(v, grade, id, m) { return calibrateVpd(v, grade, id, m); }
@@ -7679,13 +7660,7 @@ function select(id, fly) {
   const kind = r => (D.catalog[r.id] && D.catalog[r.id].kind) || "value";
   const valAll = recs.filter(r => kind(r) === "value" || kind(r) === "regional");
   // Support dynamic Local Context Adjusted ROI vs Base Study ROI
-  const getEffVpd = r => {
-    if (typeof roiMode !== "undefined" && roiMode === "adj") {
-      const cal = calibrateVpd(r.vpd, (D.catalog[r.id] && D.catalog[r.id].grade), r.id, m);
-      return cal.adj != null ? cal.adj : r.vpd;
-    }
-    return r.vpd;
-  };
+  const getEffVpd = r => r.vpd;   // the unsourced "locally adjusted" ranking was removed 17 Nov 2026
   const projScore = r => (r.id === "farmers_market" || r.id === "night_market") ? getEffVpd(r) * 0.4 : getEffVpd(r);
   const val = valAll.filter(r => allowed(r.id)).sort((a, b) => projScore(b) - projScore(a));
   const hidden = valAll.length - val.length;
@@ -8039,14 +8014,14 @@ function showToast(msg) {
 let roiMode = "base";
 
 function setRoiMode(mode) {
-  roiMode = mode;
+  roiMode = "base";   // the "locally adjusted" mode was removed (unsourced factors); any other value is ignored
   const sel = document.getElementById("roi-mode");
   if (sel) sel.value = mode;
   if (typeof retop === "function") retop();
   if (typeof restyle === "function") restyle();
   if (selected && typeof select === "function") select(selected, false);
   syncHash(selected);
-  showToast(`Valuation Mode: ${mode === "adj" ? "Locally Context-Adjusted ROI" : "Base Hedonic Study ROI"}`);
+
 }
 
 
@@ -8096,11 +8071,7 @@ function checkHash() {
 
   if (evid && $("#evid")) { $("#evid").value = evid; }
   if (metric && $("#metric")) { $("#metric").value = metric; }
-  if (roi && typeof setRoiMode === "function") {
-    roiMode = roi;
-    const sel = document.getElementById("roi-mode");
-    if (sel) sel.value = roi;
-  }
+  // ?roi= is ignored: the only return estimate is the catalog's (the "locally adjusted" mode was removed 17 Nov 2026).
   if (preset && typeof applyPreset === "function") {
     applyPreset(preset);
   }

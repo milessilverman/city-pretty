@@ -531,6 +531,21 @@ under-$500k band. My first run filtered deeds by ACRIS's `recorded_borough`, whi
 Manhattan), not the property's borough; it would have missed most Queens deeds. It was caught before any result was
 produced.
 
+### Correction: return bands were called a "model range", and an unsourced "locally adjusted" mode could re-rank projects (fixed 17 Nov)
+
+From before this audit. The ± band on every project's value-per-$1 return was labeled "(model range)" for catalog
+grades A-C, and the code (and the CHANGELOG, item 19) said the band widths were "derived from published
+quasi-experimental & econometric hedonic literature" / "traced directly to published study standard errors". They were
+never traced to any study (`audit/appjs-constants-audit.md` had flagged them). Every band is now labeled "judgment band
+±X%, not a statistical interval". A "Return estimate" control in the Layers menu offered a "Locally Context-Adjusted
+ROI" that multiplied returns by hand-typed factors for heat, canopy gap, bus frequency, dining, freeway distance, price
+tier and a saturation curve, and re-ranked projects and map colors; the methods page described it as a model. None of
+the factors had a source; the mode, its control and its URL setting are removed. The methods paragraph also stated a
+street-tree cost of "$1,945 per Public Works tree (LAMC § 62.177, Ord. 185,573)"; I could not reach the code or the fee
+schedule (American Legal and StreetsLA return 403; the Board of Public Works site doesn't resolve from the build
+machine), so that sentence is removed as unverified. Browser test added; live check: an LA block group shows 13
+"judgment band" labels and no "model range" or "locally adjusted" text.
+
 ### Tract medians shown as block-group figures, now labeled (17 Nov)
 
 Where the Census suppresses a block group's median home value or rent, the county files hold the tract's published
