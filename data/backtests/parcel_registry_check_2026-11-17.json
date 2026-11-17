@@ -1,9 +1,9 @@
 {
- "ran_on": "2026-11-17T05:05:22.517Z",
+ "ran_on": "2026-11-17T13:19:18.557Z",
  "script": "scripts/check_parcel_registry.mjs",
  "counts": {
-  "ok": 122,
-  "unreachable": 1
+  "ok": 118,
+  "unreachable": 5
  },
  "services": [
   {
@@ -210,8 +210,10 @@
    "states": [
     "TN"
    ],
-   "status": "unreachable",
-   "detail": "HTTP 403"
+   "layer_name": "Knox",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
   },
   {
    "url": "https://gis.arkansas.gov/arcgis/rest/services/FEATURESERVICES/Planning_Cadastre/FeatureServer/6",
@@ -611,52 +613,8 @@
    "states": [
     "NH"
    ],
-   "layer_name": "Parcels",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
-  },
-  {
-   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
-   "name": "Merrimack County GIS Parcels",
-   "counties": [
-    "33013"
-   ],
-   "states": [
-    "NH"
-   ],
-   "layer_name": "Parcels",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
-  },
-  {
-   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
-   "name": "Strafford County GIS Parcels",
-   "counties": [
-    "33017"
-   ],
-   "states": [
-    "NH"
-   ],
-   "layer_name": "Parcels",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
-  },
-  {
-   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
-   "name": "Grafton County GIS Parcels",
-   "counties": [
-    "33009"
-   ],
-   "states": [
-    "NH"
-   ],
-   "layer_name": "Parcels",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
+   "status": "unreachable",
+   "detail": "{\"code\":503,\"message\":\"User couldn't access this resource 'hosted/cad_parcelmosaic.mapserver'.\",\"details\":[]}"
   },
   {
    "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
@@ -667,10 +625,44 @@
    "states": [
     "NH"
    ],
-   "layer_name": "Parcels",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
+   "status": "unreachable",
+   "detail": "{\"code\":503,\"message\":\"User couldn't access this resource 'hosted/cad_parcelmosaic.mapserver'.\",\"details\":[]}"
+  },
+  {
+   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
+   "name": "Merrimack County GIS Parcels",
+   "counties": [
+    "33013"
+   ],
+   "states": [
+    "NH"
+   ],
+   "status": "unreachable",
+   "detail": "{\"code\":503,\"message\":\"User couldn't access this resource 'hosted/cad_parcelmosaic.mapserver'.\",\"details\":[]}"
+  },
+  {
+   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
+   "name": "Strafford County GIS Parcels",
+   "counties": [
+    "33017"
+   ],
+   "states": [
+    "NH"
+   ],
+   "status": "unreachable",
+   "detail": "{\"code\":503,\"message\":\"User couldn't access this resource 'hosted/cad_parcelmosaic.mapserver'.\",\"details\":[]}"
+  },
+  {
+   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
+   "name": "Grafton County GIS Parcels",
+   "counties": [
+    "33009"
+   ],
+   "states": [
+    "NH"
+   ],
+   "status": "unreachable",
+   "detail": "{\"code\":503,\"message\":\"User couldn't access this resource 'hosted/cad_parcelmosaic.mapserver'.\",\"details\":[]}"
   },
   {
    "url": "https://greenecountyassessor.org/arcgis/rest/services/TopoCountyParcels/MapServer/0",

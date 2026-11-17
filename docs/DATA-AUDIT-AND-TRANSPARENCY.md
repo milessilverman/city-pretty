@@ -653,6 +653,21 @@ Knox still uses the TN state server, whose firewall answers 403 intermittently. 
 with every panel matching its source except ground elevation: USGS took 16-30 s or timed out on 17 Nov, and the page
 said "Not available".
 
+### Alaska round 2: 29 of 30 county-equivalents now have data files (17 Nov)
+
+The remaining 24 boroughs and census areas were built with the same pipeline (OpenStreetMap through Overpass; each
+borough's roads and bus stops match a direct Overpass query of the same box, ID for ID). Aleutians West is left out:
+its block groups cross the 180th meridian, which the pipeline's box and the page's map don't handle; it stays "lot
+lines only". I checked 36 values (population, home value, rent, income) in nine block groups of Bethel, Kodiak and
+Yukon-Koyukuk against the Census Bureau's ACS 2020-24 table files: all match (two suppressed rents hold the tract's
+published median, labeled). My own Overpass query for Skagway finds 5 bus stops, as the file has. Live, after the
+merge: Bethel, Petersburg and North Slope 9/9 block groups, every panel matching its source; no new borough has a
+public parcel service, and clicks say so. Three files are larger than any before (Prince of Wales-Hyder 17.5 MB, Bethel
+14.8 MB, Hoonah-Angoon 11.7 MB, nearly all water lines); Bethel crashed the page until the county loader stopped using
+`push(...array)` (fixed on main, e7d3aa3). Some boroughs' download boxes overlap a neighbor (Hoonah-Angoon with
+Juneau, Yukon-Koyukuk with Fairbanks), so distances to bus stops can reach stops just across the line, which is real
+geography, not a double count. Details: `audit/alaska-bundles.md`.
+
 ### Alaska: five boroughs now have data files (17 Nov)
 
 Anchorage, Fairbanks North Star, Matanuska-Susitna, Kenai Peninsula and Juneau (about 80% of Alaska's population) now
