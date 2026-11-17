@@ -200,6 +200,28 @@
    "crash_years": null
   },
   {
+   "fips": "02130",
+   "name": "Ketchikan Gateway Borough",
+   "state": "AK",
+   "block_groups": 11,
+   "bundle_mb": 8.7,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T05:20:00Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02150",
+   "name": "Kodiak Island Borough",
+   "state": "AK",
+   "block_groups": 10,
+   "bundle_mb": 2.7,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T05:26:13Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
    "fips": "02170",
    "name": "Matanuska-Susitna Borough",
    "state": "AK",
@@ -207,6 +229,17 @@
    "bundle_mb": 3.5,
    "built": "2026-11-17",
    "osm": "2026-11-17T01:25:12Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02230",
+   "name": "Skagway Municipality",
+   "state": "AK",
+   "block_groups": 1,
+   "bundle_mb": 4.9,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T05:19:05Z",
    "crash_source": null,
    "crash_years": null
   },
