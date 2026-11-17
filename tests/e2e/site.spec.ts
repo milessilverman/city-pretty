@@ -1377,3 +1377,18 @@ test("parcel normalizer: an ArcGIS date is a date, never a price; NYC and DC sho
   expect(r.dcAin).toBe("1858    0012");
   expect(errors).toEqual([]);
 });
+
+// Found by the Alaska live check (17 Nov 2026): in a county with no parcel service on file, every click said "Public
+// Right-of-Way / Roadway: This point is located within the public street ...", which the page had no way of knowing.
+test("a click in a county with no parcel service says so, and doesn't call the point a right-of-way (Fresno, live click path)", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.evaluate(() => (0, eval)("openCounty")("06019"));
+  await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "06019", null, { timeout: 60_000 });
+  expect(await page.evaluate(() => (0, eval)("parcelSvc")("06019"))).toBeNull();
+  await page.evaluate(() => (0, eval)("houseAt")({ lat: 36.7468, lng: -119.7726 }));
+  await page.waitForFunction(() => /No public parcel service|Right-of-Way/.test((document.querySelector("#house") as HTMLElement)?.innerText || ""), null, { timeout: 30_000 });
+  const t = await page.evaluate(() => (document.querySelector("#house") as HTMLElement).innerText);
+  expect(t).toContain("No public parcel service is on file for this county");
+  expect(t).not.toMatch(/Right-of-Way/);
+  expect(errors).toEqual([]);
+});

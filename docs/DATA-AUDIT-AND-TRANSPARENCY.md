@@ -531,6 +531,20 @@ under-$500k band. My first run filtered deeds by ACRIS's `recorded_borough`, whi
 Manhattan), not the property's borough; it would have missed most Queens deeds. It was caught before any result was
 produced.
 
+### Correction: clicks in 250 counties queried another county's parcel service and called the point a road (found and fixed 17 Nov)
+
+Found by the Alaska data-file track's live check. When a county had no parcel service of its own, the page fell back
+to "the state's" service, but took any service that listed the state, and every county's own service lists its state.
+So a click in Fresno or Ventura queried Kern County's service (I reproduced it: on the old code `parcelSvc("06019")`
+returns Kern's), and the same in 250 of the 639 counties with data files. That service had no parcel at the point, and
+the page then said the point was a "Public Right-of-Way / Roadway", which it had no way of knowing. No other county's
+parcel was shown as the clicked lot: probing the old fallback services inside those counties found parcels only at 3
+border points out of 748 (`data/backtests/parcel_state_fallback_check_2026-11-17.json`). Now only statewide services
+(no county list) are a state's fallback, as the AI advisor's parcel tool already did, and a county with no service says
+"No public parcel service is on file for this county". e2e test through the click path (Fresno), confirmed to fail on
+the old code. My earlier live checks missed it because they sampled counties that have their own service or a real
+statewide one.
+
 ### Correction: three "shown" estimates were not shown (found and fixed 16 Nov)
 
 The 16 Nov report said Queens, Staten Island and Hillsborough estimates were shown on the page. They were not: the
