@@ -1,65 +1,65 @@
 {
- "ran_on": "2026-11-17T04:35:50.257Z",
+ "ran_on": "2026-11-17T05:04:43.549Z",
  "script": "scripts/live_check_acs_labels.mjs",
  "label": "tract median; the block group's is suppressed by the Census",
  "counties": {
-  "17031": {
+  "37183": {
    "rows": [
     {
-     "id": "170310106002",
+     "id": "371830516001",
      "kind": "tract",
      "census_bg": -666666666,
-     "census_value": 1556,
+     "census_value": 1743,
      "shown": true,
      "labeled": true,
      "any_label_in_panel": true,
      "ok": true
     },
     {
-     "id": "170318002005",
+     "id": "371830531141",
      "kind": "tract",
      "census_bg": -666666666,
-     "census_value": 2178,
+     "census_value": 1653,
      "shown": true,
      "labeled": true,
      "any_label_in_panel": true,
      "ok": true
     },
     {
-     "id": "170318153003",
+     "id": "371830537213",
      "kind": "tract",
      "census_bg": -666666666,
-     "census_value": 1313,
+     "census_value": 3501,
      "shown": true,
      "labeled": true,
      "any_label_in_panel": true,
      "ok": true
     },
     {
-     "id": "170318046093",
+     "id": "371830542042",
      "kind": "own",
-     "census_bg": 2279,
-     "census_value": 2279,
+     "census_bg": 1606,
+     "census_value": 1606,
      "shown": true,
      "labeled": false,
      "any_label_in_panel": false,
      "ok": true
     },
     {
-     "id": "170312434001",
+     "id": "371830534052",
      "kind": "own",
-     "census_bg": 1668,
-     "census_value": 1668,
+     "census_bg": 1745,
+     "census_value": 1745,
      "shown": true,
      "labeled": false,
      "any_label_in_panel": false,
      "ok": true
     },
     {
-     "id": "170310207024",
+     "id": "371830525093",
      "kind": "own",
-     "census_bg": 1625,
-     "census_value": 1625,
+     "census_bg": 1614,
+     "census_value": 1614,
      "shown": true,
      "labeled": false,
      "any_label_in_panel": false,
@@ -68,63 +68,43 @@
    ],
    "page_errors": []
   },
-  "02020": {
+  "06027": {
    "rows": [
     {
-     "id": "020200001011",
+     "id": "060270002002",
      "kind": "tract",
      "census_bg": -666666666,
-     "census_value": 1152,
+     "census_value": 1366,
      "shown": true,
      "labeled": true,
      "any_label_in_panel": true,
      "ok": true
     },
     {
-     "id": "020200013002",
-     "kind": "tract",
-     "census_bg": -666666666,
-     "census_value": 1762,
-     "shown": true,
-     "labeled": true,
-     "any_label_in_panel": true,
-     "ok": true
-    },
-    {
-     "id": "020200026022",
-     "kind": "tract",
-     "census_bg": -666666666,
-     "census_value": 1931,
-     "shown": true,
-     "labeled": true,
-     "any_label_in_panel": true,
-     "ok": true
-    },
-    {
-     "id": "020200026031",
+     "id": "060270004003",
      "kind": "own",
-     "census_bg": 2052,
-     "census_value": 2052,
+     "census_bg": 1331,
+     "census_value": 1331,
      "shown": true,
      "labeled": false,
      "any_label_in_panel": false,
      "ok": true
     },
     {
-     "id": "020200017314",
+     "id": "060270002001",
      "kind": "own",
-     "census_bg": 1405,
-     "census_value": 1405,
+     "census_bg": 1379,
+     "census_value": 1379,
      "shown": true,
      "labeled": false,
      "any_label_in_panel": false,
      "ok": true
     },
     {
-     "id": "020200009021",
+     "id": "060270004002",
      "kind": "own",
-     "census_bg": 1262,
-     "census_value": 1262,
+     "census_bg": 1510,
+     "census_value": 1510,
      "shown": true,
      "labeled": false,
      "any_label_in_panel": false,

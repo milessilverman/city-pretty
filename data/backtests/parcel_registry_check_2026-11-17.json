@@ -1,5 +1,5 @@
 {
- "ran_on": "2026-11-17T04:29:07.671Z",
+ "ran_on": "2026-11-17T05:05:22.517Z",
  "script": "scripts/check_parcel_registry.mjs",
  "counts": {
   "ok": 122,
@@ -618,34 +618,6 @@
   },
   {
    "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
-   "name": "Strafford County GIS Parcels",
-   "counties": [
-    "33017"
-   ],
-   "states": [
-    "NH"
-   ],
-   "layer_name": "Parcels",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
-  },
-  {
-   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
-   "name": "Rockingham County GIS Parcels",
-   "counties": [
-    "33015"
-   ],
-   "states": [
-    "NH"
-   ],
-   "layer_name": "Parcels",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
-  },
-  {
-   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
    "name": "Merrimack County GIS Parcels",
    "counties": [
     "33013"
@@ -660,9 +632,37 @@
   },
   {
    "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
+   "name": "Strafford County GIS Parcels",
+   "counties": [
+    "33017"
+   ],
+   "states": [
+    "NH"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
    "name": "Grafton County GIS Parcels",
    "counties": [
     "33009"
+   ],
+   "states": [
+    "NH"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
+   "name": "Rockingham County GIS Parcels",
+   "counties": [
+    "33015"
    ],
    "states": [
     "NH"

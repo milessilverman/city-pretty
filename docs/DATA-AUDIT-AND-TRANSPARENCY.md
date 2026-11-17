@@ -531,6 +531,30 @@ under-$500k band. My first run filtered deeds by ACRIS's `recorded_borough`, whi
 Manhattan), not the property's borough; it would have missed most Queens deeds. It was caught before any result was
 produced.
 
+### Tract medians shown as block-group figures, now labeled (17 Nov)
+
+Where the Census suppresses a block group's median home value or rent, the county files hold the tract's published
+median instead. Home values carried a per-block-group note; rents did not, so 43,901 block-group rents (of 174,392)
+were shown as the block group's own, disclosed only in the county-wide source note. `scripts/build_acs_fallback_flags.py`
+compared every value in all 642 county files (plus Orange, LA and the correction fills) with the Census Bureau's ACS
+2020-24 table files: every value is either the block group's own estimate or exactly its tract's; **no mismatches**
+(home value: 158,638 own, 13,724 tract; rent: 130,491 own, 43,901 tract). I re-checked 21 flagged values in four
+counties (Christian MO, Bibb GA, Catawba NC, Inyo CA) against the Census files myself: all match the tract figure, and
+the block group's own is suppressed. The page now labels each such value "tract median; the block group's is suppressed
+by the Census" (neighborhood panel, comparison drawer, printable brief, house panel). Live: Wake NC and Inyo CA, 10/10.
+A typed fallback (`hv: 850000, rent: 2200`) in the house map popup was never displayed; removed.
+
+### Parcel services round 3 (17 Nov)
+
+Shelby TN now reads the City of Memphis certified tax-parcel layer (2025 roll); Hamilton TN the Chattanooga-Hamilton
+County planning agency's August 2026 parcels; Hinds MS the county's parcel-viewer layer (edited 1 Oct 2026), so Jackson
+clicks work again. I queried each myself: browser requests allowed, and a point inside a known parcel returns that
+parcel (e.g. 1219 E Dallas Rd, Chattanooga). **Knox TN had never loaded a lot**: its field list asked for
+"LOC_HOUSE_NUMBER + LOC_STREET_NAME" as one field, and the server rejects that query (I reproduced the HTTP 400). Fixed;
+Knox still uses the TN state server, whose firewall answers 403 intermittently. Live: Shelby, Hamilton, Hinds 3/3 each
+with every panel matching its source except ground elevation: USGS took 16-30 s or timed out on 17 Nov, and the page
+said "Not available".
+
 ### Alaska: five boroughs now have data files (17 Nov)
 
 Anchorage, Fairbanks North Star, Matanuska-Susitna, Kenai Peninsula and Juneau (about 80% of Alaska's population) now

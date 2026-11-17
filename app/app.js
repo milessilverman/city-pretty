@@ -10477,7 +10477,7 @@ function stateReformHeadline(st, m) {
 
 function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R, valCheck, valLow, valHigh) {
   if (typeof map === "undefined" || !map) return;
-  const p = byId.get(selected) ? byId.get(selected).properties : { c: a.county || countyOf(), hv: 850000, rent: 2200 };
+  const p = byId.get(selected) ? byId.get(selected).properties : { c: a.county || countyOf() };
   const curB = (typeof activeBundle === "function" ? activeBundle() : null) || (typeof D !== "undefined" && D) || {};
   const m = ((curB.details && curB.details[selected]) || (D && D.details && D.details[selected]) || {}).m || p;
   const addr = a.SitusFullAddress || ("Parcel APN " + a.AIN);
