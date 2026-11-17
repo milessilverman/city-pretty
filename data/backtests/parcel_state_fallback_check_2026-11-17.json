@@ -1,0 +1,3500 @@
+[
+ {
+  "fips": "01003",
+  "county": "Baldwin County",
+  "state": "AL",
+  "old_service": "Jefferson County GIS Parcels",
+  "old_service_counties": [
+   "01073"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "01015",
+  "county": "Calhoun County",
+  "state": "AL",
+  "old_service": "Jefferson County GIS Parcels",
+  "old_service_counties": [
+   "01073"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "01055",
+  "county": "Etowah County",
+  "state": "AL",
+  "old_service": "Jefferson County GIS Parcels",
+  "old_service_counties": [
+   "01073"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "01069",
+  "county": "Houston County",
+  "state": "AL",
+  "old_service": "Jefferson County GIS Parcels",
+  "old_service_counties": [
+   "01073"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "01081",
+  "county": "Lee County",
+  "state": "AL",
+  "old_service": "Jefferson County GIS Parcels",
+  "old_service_counties": [
+   "01073"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "01083",
+  "county": "Limestone County",
+  "state": "AL",
+  "old_service": "Jefferson County GIS Parcels",
+  "old_service_counties": [
+   "01073"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "01089",
+  "county": "Madison County",
+  "state": "AL",
+  "old_service": "Jefferson County GIS Parcels",
+  "old_service_counties": [
+   "01073"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "01095",
+  "county": "Marshall County",
+  "state": "AL",
+  "old_service": "Jefferson County GIS Parcels",
+  "old_service_counties": [
+   "01073"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "01101",
+  "county": "Montgomery County",
+  "state": "AL",
+  "old_service": "Jefferson County GIS Parcels",
+  "old_service_counties": [
+   "01073"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "01103",
+  "county": "Morgan County",
+  "state": "AL",
+  "old_service": "Jefferson County GIS Parcels",
+  "old_service_counties": [
+   "01073"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "01125",
+  "county": "Tuscaloosa County",
+  "state": "AL",
+  "old_service": "Jefferson County GIS Parcels",
+  "old_service_counties": [
+   "01073"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "02090",
+  "county": "Fairbanks North Star Borough",
+  "state": "AK",
+  "old_service": "Municipality of Anchorage Property Information",
+  "old_service_counties": [
+   "02020"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "04003",
+  "county": "Cochise County",
+  "state": "AZ",
+  "old_service": "Pima County GIS Parcels",
+  "old_service_counties": [
+   "04019"
+  ],
+  "parcels_near_points": [
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden"
+  ]
+ },
+ {
+  "fips": "04005",
+  "county": "Coconino County",
+  "state": "AZ",
+  "old_service": "Pima County GIS Parcels",
+  "old_service_counties": [
+   "04019"
+  ],
+  "parcels_near_points": [
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden"
+  ]
+ },
+ {
+  "fips": "04015",
+  "county": "Mohave County",
+  "state": "AZ",
+  "old_service": "Pima County GIS Parcels",
+  "old_service_counties": [
+   "04019"
+  ],
+  "parcels_near_points": [
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden"
+  ]
+ },
+ {
+  "fips": "04017",
+  "county": "Navajo County",
+  "state": "AZ",
+  "old_service": "Pima County GIS Parcels",
+  "old_service_counties": [
+   "04019"
+  ],
+  "parcels_near_points": [
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden"
+  ]
+ },
+ {
+  "fips": "06001",
+  "county": "Alameda County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06003",
+  "county": "Alpine County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0
+  ]
+ },
+ {
+  "fips": "06005",
+  "county": "Amador County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06007",
+  "county": "Butte County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06009",
+  "county": "Calaveras County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06011",
+  "county": "Colusa County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06013",
+  "county": "Contra Costa County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06015",
+  "county": "Del Norte County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06017",
+  "county": "El Dorado County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06019",
+  "county": "Fresno County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06021",
+  "county": "Glenn County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06023",
+  "county": "Humboldt County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06025",
+  "county": "Imperial County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06027",
+  "county": "Inyo County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06031",
+  "county": "Kings County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06033",
+  "county": "Lake County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06035",
+  "county": "Lassen County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06039",
+  "county": "Madera County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06041",
+  "county": "Marin County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06043",
+  "county": "Mariposa County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06045",
+  "county": "Mendocino County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06047",
+  "county": "Merced County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06049",
+  "county": "Modoc County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06051",
+  "county": "Mono County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06053",
+  "county": "Monterey County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06055",
+  "county": "Napa County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06057",
+  "county": "Nevada County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06061",
+  "county": "Placer County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06063",
+  "county": "Plumas County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06067",
+  "county": "Sacramento County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06069",
+  "county": "San Benito County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06075",
+  "county": "San Francisco County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06077",
+  "county": "San Joaquin County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06079",
+  "county": "San Luis Obispo County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06081",
+  "county": "San Mateo County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06083",
+  "county": "Santa Barbara County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06085",
+  "county": "Santa Clara County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06087",
+  "county": "Santa Cruz County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06089",
+  "county": "Shasta County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06091",
+  "county": "Sierra County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06093",
+  "county": "Siskiyou County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06095",
+  "county": "Solano County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06097",
+  "county": "Sonoma County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06099",
+  "county": "Stanislaus County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06101",
+  "county": "Sutter County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06103",
+  "county": "Tehama County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06105",
+  "county": "Trinity County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06107",
+  "county": "Tulare County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06109",
+  "county": "Tuolumne County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06111",
+  "county": "Ventura County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06113",
+  "county": "Yolo County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "06115",
+  "county": "Yuba County",
+  "state": "CA",
+  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service_counties": [
+   "06037"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13015",
+  "county": "Bartow County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13021",
+  "county": "Bibb County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13045",
+  "county": "Carroll County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13057",
+  "county": "Cherokee County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13059",
+  "county": "Clarke County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13063",
+  "county": "Clayton County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13067",
+  "county": "Cobb County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13073",
+  "county": "Columbia County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13077",
+  "county": "Coweta County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13097",
+  "county": "Douglas County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13113",
+  "county": "Fayette County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13115",
+  "county": "Floyd County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13117",
+  "county": "Forsyth County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13139",
+  "county": "Hall County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13151",
+  "county": "Henry County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13153",
+  "county": "Houston County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13185",
+  "county": "Lowndes County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13215",
+  "county": "Muscogee County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13217",
+  "county": "Newton County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13223",
+  "county": "Paulding County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13245",
+  "county": "Richmond County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13297",
+  "county": "Walton County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   153,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "13313",
+  "county": "Whitfield County",
+  "state": "GA",
+  "old_service": "Gwinnett County GIS Parcels",
+  "old_service_counties": [
+   "13135"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "17019",
+  "county": "Champaign County",
+  "state": "IL",
+  "old_service": "DuPage County GIS Parcels",
+  "old_service_counties": [
+   "17043"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "17037",
+  "county": "DeKalb County",
+  "state": "IL",
+  "old_service": "DuPage County GIS Parcels",
+  "old_service_counties": [
+   "17043"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "17091",
+  "county": "Kankakee County",
+  "state": "IL",
+  "old_service": "DuPage County GIS Parcels",
+  "old_service_counties": [
+   "17043"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "17093",
+  "county": "Kendall County",
+  "state": "IL",
+  "old_service": "DuPage County GIS Parcels",
+  "old_service_counties": [
+   "17043"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "17099",
+  "county": "LaSalle County",
+  "state": "IL",
+  "old_service": "DuPage County GIS Parcels",
+  "old_service_counties": [
+   "17043"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "17111",
+  "county": "McHenry County",
+  "state": "IL",
+  "old_service": "DuPage County GIS Parcels",
+  "old_service_counties": [
+   "17043"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "17113",
+  "county": "McLean County",
+  "state": "IL",
+  "old_service": "DuPage County GIS Parcels",
+  "old_service_counties": [
+   "17043"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "17115",
+  "county": "Macon County",
+  "state": "IL",
+  "old_service": "DuPage County GIS Parcels",
+  "old_service_counties": [
+   "17043"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "17119",
+  "county": "Madison County",
+  "state": "IL",
+  "old_service": "DuPage County GIS Parcels",
+  "old_service_counties": [
+   "17043"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "17143",
+  "county": "Peoria County",
+  "state": "IL",
+  "old_service": "DuPage County GIS Parcels",
+  "old_service_counties": [
+   "17043"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "17161",
+  "county": "Rock Island County",
+  "state": "IL",
+  "old_service": "DuPage County GIS Parcels",
+  "old_service_counties": [
+   "17043"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "17163",
+  "county": "St. Clair County",
+  "state": "IL",
+  "old_service": "DuPage County GIS Parcels",
+  "old_service_counties": [
+   "17043"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "17167",
+  "county": "Sangamon County",
+  "state": "IL",
+  "old_service": "DuPage County GIS Parcels",
+  "old_service_counties": [
+   "17043"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "17179",
+  "county": "Tazewell County",
+  "state": "IL",
+  "old_service": "DuPage County GIS Parcels",
+  "old_service_counties": [
+   "17043"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "17197",
+  "county": "Will County",
+  "state": "IL",
+  "old_service": "DuPage County GIS Parcels",
+  "old_service_counties": [
+   "17043"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "17201",
+  "county": "Winnebago County",
+  "state": "IL",
+  "old_service": "DuPage County GIS Parcels",
+  "old_service_counties": [
+   "17043"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "19049",
+  "county": "Dallas County",
+  "state": "IA",
+  "old_service": "Linn County GIS Parcels",
+  "old_service_counties": [
+   "19113"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "19153",
+  "county": "Polk County",
+  "state": "IA",
+  "old_service": "Linn County GIS Parcels",
+  "old_service_counties": [
+   "19113"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "19169",
+  "county": "Story County",
+  "state": "IA",
+  "old_service": "Linn County GIS Parcels",
+  "old_service_counties": [
+   "19113"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "19193",
+  "county": "Woodbury County",
+  "state": "IA",
+  "old_service": "Linn County GIS Parcels",
+  "old_service_counties": [
+   "19113"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "20091",
+  "county": "Johnson County",
+  "state": "KS",
+  "old_service": "Wyandotte County GIS Parcels",
+  "old_service_counties": [
+   "20209"
+  ],
+  "parcels_near_points": [
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden"
+  ]
+ },
+ {
+  "fips": "20173",
+  "county": "Sedgwick County",
+  "state": "KS",
+  "old_service": "Wyandotte County GIS Parcels",
+  "old_service_counties": [
+   "20209"
+  ],
+  "parcels_near_points": [
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden"
+  ]
+ },
+ {
+  "fips": "20177",
+  "county": "Shawnee County",
+  "state": "KS",
+  "old_service": "Wyandotte County GIS Parcels",
+  "old_service_counties": [
+   "20209"
+  ],
+  "parcels_near_points": [
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden"
+  ]
+ },
+ {
+  "fips": "21059",
+  "county": "Daviess County",
+  "state": "KY",
+  "old_service": "Jefferson County GIS Parcels",
+  "old_service_counties": [
+   "21111"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "21093",
+  "county": "Hardin County",
+  "state": "KY",
+  "old_service": "Jefferson County GIS Parcels",
+  "old_service_counties": [
+   "21111"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "22005",
+  "county": "Ascension Parish",
+  "state": "LA",
+  "old_service": "New Orleans Cadastral Parcels GIS",
+  "old_service_counties": [
+   "22071"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "22015",
+  "county": "Bossier Parish",
+  "state": "LA",
+  "old_service": "New Orleans Cadastral Parcels GIS",
+  "old_service_counties": [
+   "22071"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "22017",
+  "county": "Caddo Parish",
+  "state": "LA",
+  "old_service": "New Orleans Cadastral Parcels GIS",
+  "old_service_counties": [
+   "22071"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "22019",
+  "county": "Calcasieu Parish",
+  "state": "LA",
+  "old_service": "New Orleans Cadastral Parcels GIS",
+  "old_service_counties": [
+   "22071"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "22055",
+  "county": "Lafayette Parish",
+  "state": "LA",
+  "old_service": "New Orleans Cadastral Parcels GIS",
+  "old_service_counties": [
+   "22071"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "22063",
+  "county": "Livingston Parish",
+  "state": "LA",
+  "old_service": "New Orleans Cadastral Parcels GIS",
+  "old_service_counties": [
+   "22071"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "22073",
+  "county": "Ouachita Parish",
+  "state": "LA",
+  "old_service": "New Orleans Cadastral Parcels GIS",
+  "old_service_counties": [
+   "22071"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "22079",
+  "county": "Rapides Parish",
+  "state": "LA",
+  "old_service": "New Orleans Cadastral Parcels GIS",
+  "old_service_counties": [
+   "22071"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "22105",
+  "county": "Tangipahoa Parish",
+  "state": "LA",
+  "old_service": "New Orleans Cadastral Parcels GIS",
+  "old_service_counties": [
+   "22071"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "22109",
+  "county": "Terrebonne Parish",
+  "state": "LA",
+  "old_service": "New Orleans Cadastral Parcels GIS",
+  "old_service_counties": [
+   "22071"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "26005",
+  "county": "Allegan County",
+  "state": "MI",
+  "old_service": "City of Detroit Parcels (Current), Office of the Assessor",
+  "old_service_counties": [
+   "26163"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "26017",
+  "county": "Bay County",
+  "state": "MI",
+  "old_service": "City of Detroit Parcels (Current), Office of the Assessor",
+  "old_service_counties": [
+   "26163"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "26021",
+  "county": "Berrien County",
+  "state": "MI",
+  "old_service": "City of Detroit Parcels (Current), Office of the Assessor",
+  "old_service_counties": [
+   "26163"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "26025",
+  "county": "Calhoun County",
+  "state": "MI",
+  "old_service": "City of Detroit Parcels (Current), Office of the Assessor",
+  "old_service_counties": [
+   "26163"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "26045",
+  "county": "Eaton County",
+  "state": "MI",
+  "old_service": "City of Detroit Parcels (Current), Office of the Assessor",
+  "old_service_counties": [
+   "26163"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "26049",
+  "county": "Genesee County",
+  "state": "MI",
+  "old_service": "City of Detroit Parcels (Current), Office of the Assessor",
+  "old_service_counties": [
+   "26163"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "26065",
+  "county": "Ingham County",
+  "state": "MI",
+  "old_service": "City of Detroit Parcels (Current), Office of the Assessor",
+  "old_service_counties": [
+   "26163"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "26075",
+  "county": "Jackson County",
+  "state": "MI",
+  "old_service": "City of Detroit Parcels (Current), Office of the Assessor",
+  "old_service_counties": [
+   "26163"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "26077",
+  "county": "Kalamazoo County",
+  "state": "MI",
+  "old_service": "City of Detroit Parcels (Current), Office of the Assessor",
+  "old_service_counties": [
+   "26163"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "26093",
+  "county": "Livingston County",
+  "state": "MI",
+  "old_service": "City of Detroit Parcels (Current), Office of the Assessor",
+  "old_service_counties": [
+   "26163"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "26115",
+  "county": "Monroe County",
+  "state": "MI",
+  "old_service": "City of Detroit Parcels (Current), Office of the Assessor",
+  "old_service_counties": [
+   "26163"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "26121",
+  "county": "Muskegon County",
+  "state": "MI",
+  "old_service": "City of Detroit Parcels (Current), Office of the Assessor",
+  "old_service_counties": [
+   "26163"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "26139",
+  "county": "Ottawa County",
+  "state": "MI",
+  "old_service": "City of Detroit Parcels (Current), Office of the Assessor",
+  "old_service_counties": [
+   "26163"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "26145",
+  "county": "Saginaw County",
+  "state": "MI",
+  "old_service": "City of Detroit Parcels (Current), Office of the Assessor",
+  "old_service_counties": [
+   "26163"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "26147",
+  "county": "St. Clair County",
+  "state": "MI",
+  "old_service": "City of Detroit Parcels (Current), Office of the Assessor",
+  "old_service_counties": [
+   "26163"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "26161",
+  "county": "Washtenaw County",
+  "state": "MI",
+  "old_service": "City of Detroit Parcels (Current), Office of the Assessor",
+  "old_service_counties": [
+   "26163"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "28059",
+  "county": "Jackson County",
+  "state": "MS",
+  "old_service": "Hinds County GIS Parcels",
+  "old_service_counties": [
+   "28049"
+  ],
+  "parcels_near_points": [
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden"
+  ]
+ },
+ {
+  "fips": "28089",
+  "county": "Madison County",
+  "state": "MS",
+  "old_service": "Hinds County GIS Parcels",
+  "old_service_counties": [
+   "28049"
+  ],
+  "parcels_near_points": [
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden"
+  ]
+ },
+ {
+  "fips": "28121",
+  "county": "Rankin County",
+  "state": "MS",
+  "old_service": "Hinds County GIS Parcels",
+  "old_service_counties": [
+   "28049"
+  ],
+  "parcels_near_points": [
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden"
+  ]
+ },
+ {
+  "fips": "29019",
+  "county": "Boone County",
+  "state": "MO",
+  "old_service": "St. Louis County County GIS Parcels",
+  "old_service_counties": [
+   "29189"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "29037",
+  "county": "Cass County",
+  "state": "MO",
+  "old_service": "St. Louis County County GIS Parcels",
+  "old_service_counties": [
+   "29189"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "29047",
+  "county": "Clay County",
+  "state": "MO",
+  "old_service": "St. Louis County County GIS Parcels",
+  "old_service_counties": [
+   "29189"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "29071",
+  "county": "Franklin County",
+  "state": "MO",
+  "old_service": "St. Louis County County GIS Parcels",
+  "old_service_counties": [
+   "29189"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "29097",
+  "county": "Jasper County",
+  "state": "MO",
+  "old_service": "St. Louis County County GIS Parcels",
+  "old_service_counties": [
+   "29189"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "29099",
+  "county": "Jefferson County",
+  "state": "MO",
+  "old_service": "St. Louis County County GIS Parcels",
+  "old_service_counties": [
+   "29189"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "29165",
+  "county": "Platte County",
+  "state": "MO",
+  "old_service": "St. Louis County County GIS Parcels",
+  "old_service_counties": [
+   "29189"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "35043",
+  "county": "Sandoval County",
+  "state": "NM",
+  "old_service": "City of Albuquerque & Bernalillo County Platted Parcels",
+  "old_service_counties": [
+   "35001"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "35045",
+  "county": "San Juan County",
+  "state": "NM",
+  "old_service": "City of Albuquerque & Bernalillo County Platted Parcels",
+  "old_service_counties": [
+   "35001"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "40017",
+  "county": "Canadian County",
+  "state": "OK",
+  "old_service": "Tulsa County GIS Parcels",
+  "old_service_counties": [
+   "40143"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "40027",
+  "county": "Cleveland County",
+  "state": "OK",
+  "old_service": "Tulsa County GIS Parcels",
+  "old_service_counties": [
+   "40143"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "40031",
+  "county": "Comanche County",
+  "state": "OK",
+  "old_service": "Tulsa County GIS Parcels",
+  "old_service_counties": [
+   "40143"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "40109",
+  "county": "Oklahoma County",
+  "state": "OK",
+  "old_service": "Tulsa County GIS Parcels",
+  "old_service_counties": [
+   "40143"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "41017",
+  "county": "Deschutes County",
+  "state": "OR",
+  "old_service": "Multnomah County GIS Parcels",
+  "old_service_counties": [
+   "41051"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "41019",
+  "county": "Douglas County",
+  "state": "OR",
+  "old_service": "Multnomah County GIS Parcels",
+  "old_service_counties": [
+   "41051"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "41029",
+  "county": "Jackson County",
+  "state": "OR",
+  "old_service": "Multnomah County GIS Parcels",
+  "old_service_counties": [
+   "41051"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "41043",
+  "county": "Linn County",
+  "state": "OR",
+  "old_service": "Multnomah County GIS Parcels",
+  "old_service_counties": [
+   "41051"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "41071",
+  "county": "Yamhill County",
+  "state": "OR",
+  "old_service": "Multnomah County GIS Parcels",
+  "old_service_counties": [
+   "41051"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42001",
+  "county": "Adams County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42007",
+  "county": "Beaver County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42011",
+  "county": "Berks County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42013",
+  "county": "Blair County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42019",
+  "county": "Butler County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42021",
+  "county": "Cambria County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42027",
+  "county": "Centre County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42029",
+  "county": "Chester County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42041",
+  "county": "Cumberland County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42043",
+  "county": "Dauphin County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42045",
+  "county": "Delaware County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42049",
+  "county": "Erie County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42051",
+  "county": "Fayette County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42055",
+  "county": "Franklin County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42069",
+  "county": "Lackawanna County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42071",
+  "county": "Lancaster County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42075",
+  "county": "Lebanon County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42077",
+  "county": "Lehigh County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42079",
+  "county": "Luzerne County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42081",
+  "county": "Lycoming County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42085",
+  "county": "Mercer County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42089",
+  "county": "Monroe County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42095",
+  "county": "Northampton County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42107",
+  "county": "Schuylkill County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42125",
+  "county": "Washington County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42129",
+  "county": "Westmoreland County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "42133",
+  "county": "York County",
+  "state": "PA",
+  "old_service": "Philadelphia Water Department parcels (City of Philadelphia)",
+  "old_service_counties": [
+   "42101"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "45003",
+  "county": "Aiken County",
+  "state": "SC",
+  "old_service": "Greenville County GIS Parcels",
+  "old_service_counties": [
+   "45045"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "45007",
+  "county": "Anderson County",
+  "state": "SC",
+  "old_service": "Greenville County GIS Parcels",
+  "old_service_counties": [
+   "45045"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "45013",
+  "county": "Beaufort County",
+  "state": "SC",
+  "old_service": "Greenville County GIS Parcels",
+  "old_service_counties": [
+   "45045"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "45015",
+  "county": "Berkeley County",
+  "state": "SC",
+  "old_service": "Greenville County GIS Parcels",
+  "old_service_counties": [
+   "45045"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "45019",
+  "county": "Charleston County",
+  "state": "SC",
+  "old_service": "Greenville County GIS Parcels",
+  "old_service_counties": [
+   "45045"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "45035",
+  "county": "Dorchester County",
+  "state": "SC",
+  "old_service": "Greenville County GIS Parcels",
+  "old_service_counties": [
+   "45045"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "45041",
+  "county": "Florence County",
+  "state": "SC",
+  "old_service": "Greenville County GIS Parcels",
+  "old_service_counties": [
+   "45045"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "45057",
+  "county": "Lancaster County",
+  "state": "SC",
+  "old_service": "Greenville County GIS Parcels",
+  "old_service_counties": [
+   "45045"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "45063",
+  "county": "Lexington County",
+  "state": "SC",
+  "old_service": "Greenville County GIS Parcels",
+  "old_service_counties": [
+   "45045"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "45077",
+  "county": "Pickens County",
+  "state": "SC",
+  "old_service": "Greenville County GIS Parcels",
+  "old_service_counties": [
+   "45045"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "45079",
+  "county": "Richland County",
+  "state": "SC",
+  "old_service": "Greenville County GIS Parcels",
+  "old_service_counties": [
+   "45045"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "45085",
+  "county": "Sumter County",
+  "state": "SC",
+  "old_service": "Greenville County GIS Parcels",
+  "old_service_counties": [
+   "45045"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "45091",
+  "county": "York County",
+  "state": "SC",
+  "old_service": "Greenville County GIS Parcels",
+  "old_service_counties": [
+   "45045"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "47009",
+  "county": "Blount County",
+  "state": "TN",
+  "old_service": "Shelby County GIS Parcels",
+  "old_service_counties": [
+   "47157"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   "err HTTP Error 403: Forbidden"
+  ]
+ },
+ {
+  "fips": "47011",
+  "county": "Bradley County",
+  "state": "TN",
+  "old_service": "Shelby County GIS Parcels",
+  "old_service_counties": [
+   "47157"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   "err HTTP Error 403: Forbidden"
+  ]
+ },
+ {
+  "fips": "47119",
+  "county": "Maury County",
+  "state": "TN",
+  "old_service": "Shelby County GIS Parcels",
+  "old_service_counties": [
+   "47157"
+  ],
+  "parcels_near_points": [
+   0,
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden"
+  ]
+ },
+ {
+  "fips": "47125",
+  "county": "Montgomery County",
+  "state": "TN",
+  "old_service": "Shelby County GIS Parcels",
+  "old_service_counties": [
+   "47157"
+  ],
+  "parcels_near_points": [
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden",
+   "err HTTP Error 403: Forbidden"
+  ]
+ },
+ {
+  "fips": "47163",
+  "county": "Sullivan County",
+  "state": "TN",
+  "old_service": "Shelby County GIS Parcels",
+  "old_service_counties": [
+   "47157"
+  ],
+  "parcels_near_points": [
+   0,
+   "err HTTP Error 403: Forbidden",
+   0
+  ]
+ },
+ {
+  "fips": "47165",
+  "county": "Sumner County",
+  "state": "TN",
+  "old_service": "Shelby County GIS Parcels",
+  "old_service_counties": [
+   "47157"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "47179",
+  "county": "Washington County",
+  "state": "TN",
+  "old_service": "Shelby County GIS Parcels",
+  "old_service_counties": [
+   "47157"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "47187",
+  "county": "Williamson County",
+  "state": "TN",
+  "old_service": "Shelby County GIS Parcels",
+  "old_service_counties": [
+   "47157"
+  ],
+  "parcels_near_points": [
+   "err HTTP Error 403: Forbidden",
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "47189",
+  "county": "Wilson County",
+  "state": "TN",
+  "old_service": "Shelby County GIS Parcels",
+  "old_service_counties": [
+   "47157"
+  ],
+  "parcels_near_points": [
+   "err HTTP Error 403: Forbidden",
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48021",
+  "county": "Bastrop County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48027",
+  "county": "Bell County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48039",
+  "county": "Brazoria County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   384,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48041",
+  "county": "Brazos County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48061",
+  "county": "Cameron County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48085",
+  "county": "Collin County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48091",
+  "county": "Comal County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48121",
+  "county": "Denton County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48135",
+  "county": "Ector County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48139",
+  "county": "Ellis County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48141",
+  "county": "El Paso County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48157",
+  "county": "Fort Bend County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   42
+  ]
+ },
+ {
+  "fips": "48167",
+  "county": "Galveston County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48181",
+  "county": "Grayson County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48183",
+  "county": "Gregg County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48187",
+  "county": "Guadalupe County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48209",
+  "county": "Hays County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48215",
+  "county": "Hidalgo County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48231",
+  "county": "Hunt County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48245",
+  "county": "Jefferson County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48251",
+  "county": "Johnson County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48257",
+  "county": "Kaufman County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48291",
+  "county": "Liberty County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48303",
+  "county": "Lubbock County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48309",
+  "county": "McLennan County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48329",
+  "county": "Midland County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48339",
+  "county": "Montgomery County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48355",
+  "county": "Nueces County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48367",
+  "county": "Parker County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48375",
+  "county": "Potter County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48381",
+  "county": "Randall County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48397",
+  "county": "Rockwall County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48423",
+  "county": "Smith County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48441",
+  "county": "Taylor County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48451",
+  "county": "Tom Green County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48479",
+  "county": "Webb County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48485",
+  "county": "Wichita County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "fips": "48491",
+  "county": "Williamson County",
+  "state": "TX",
+  "old_service": "Harris County GIS Parcels",
+  "old_service_counties": [
+   "48201"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ }
+]

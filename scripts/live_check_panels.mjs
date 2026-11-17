@@ -262,7 +262,7 @@ async function main() {
         await page.evaluate((ll) => (0, eval)("houseAt")(ll), { lat: P.lat, lng: P.lng });
         await page.waitForFunction(() => { const ah = (0, eval)("typeof activeHouse !== 'undefined' ? activeHouse : null"); const box = document.querySelector("#house");
           return box && !box.querySelector(".house-loading") && (!ah || (ah.st && ah.st.rDone && ah.st.osmDone)); }, null, { timeout: 45000 }).catch(() => {});
-        await page.waitForFunction(() => { const b = document.querySelector("#house"); return !b || !!b.querySelector("[data-live-facts]") || /Right-of-Way|did not answer|Couldn.t get this lot/i.test(b.textContent); }, null, { timeout: 40000 }).catch(() => {});
+        await page.waitForFunction(() => { const b = document.querySelector("#house"); return !b || !!b.querySelector("[data-live-facts]") || /Right-of-Way|did not answer|Couldn.t get this lot|No public parcel service/i.test(b.textContent); }, null, { timeout: 40000 }).catch(() => {});
         const grab = () => page.evaluate(() => {
           const b = document.querySelector("#house"), lf = b && b.querySelector("[data-live-facts]");
           return { house: b ? b.textContent.replace(/\s+/g, " ") : "", facts: lf ? [...lf.querySelectorAll(":scope > div")].map((d) => d.textContent.replace(/\s+/g, " ").trim()) : null,
@@ -278,7 +278,7 @@ async function main() {
           ({ house, facts, items } = await grab());
         }
         P.house_checks = items;
-        P.house_status = facts ? "house panel with live records" : /Right-of-Way/i.test(house) ? "no parcel at point (right-of-way)" : /did not answer|Couldn.t get this lot/i.test(house) ? "parcel service did not answer" : "no house panel";
+        P.house_status = facts ? "house panel with live records" : /No public parcel service/i.test(house) ? "no parcel service for this county" : /Right-of-Way/i.test(house) ? "no parcel at point (right-of-way)" : /did not answer|Couldn.t get this lot/i.test(house) ? "parcel service did not answer" : "no house panel";
         const hard = HARDCODED_LAW.filter((re) => re.test(house)).map(String);
         // the house checks may name only this state's records
         const houseOther = STATUTES.filter((r) => r.state_code !== st && house.includes(r.short_name)).map((r) => r.id);

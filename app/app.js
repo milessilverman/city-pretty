@@ -5164,6 +5164,14 @@ async function houseAt(ll, fOverride = null) {
     if (houseBldgs) { map.removeLayer(houseBldgs); houseBldgs = null; }
     if (houseMapPopup) { map.closePopup(houseMapPopup); houseMapPopup = null; }
     activeHouse = null;
+    // No parcel service covers this county or point (most Alaska boroughs, 17 Nov 2026): nothing was asked, so nothing is known about
+    // the point. It used to be called a "public right-of-way", which the page had no way of knowing.
+    const fipsNow = typeof activeFips === "function" ? activeFips() : null;
+    const ownLAorOC = fipsNow === "06037" || fipsNow === "06059" || (ll.lat >= 33.35 && ll.lat <= 34.85 && ll.lng >= -118.95 && ll.lng <= -117.40);
+    if (!ownLAorOC && !(fipsNow && parcelSvc(fipsNow)) && !getParcelService(ll)) {
+      box.innerHTML = `<h3>This home</h3><p class="small">No public parcel service is on file for this county, so this lot's record (address, size, use, value) can't be shown. Nothing is assumed about this point. The block group's figures above still apply.</p>`;
+      return;
+    }
     box.innerHTML = `<h3>This home</h3>
       <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:14px;margin:8px 0;line-height:1.5;">
         <div style="display:flex;align-items:center;gap:6px;font-weight:700;font-size:13px;color:#0f172a;margin-bottom:4px;">
@@ -6739,16 +6747,22 @@ function getParcelService(ll) {
   else if (lat >= 31.3 && lat <= 37.0 && lng >= -109.1 && lng <= -103.0) st = "35"; // NM
   if (st) {
     const stCode = FIPS_TO_STATE[st] || st;
-    return PARCELS87.find(s => s.states && (s.states.includes(st) || s.states.includes(stCode))) || null;
+    return PARCELS87.find(s => isStatewideSvc(s) && (s.states.includes(st) || s.states.includes(stCode))) || null;
   }
   return null;
 }
+
+// A service that covers a whole state: one with no county list. A county's own service also lists its state, and used to be taken as
+// the state's service, so a click in any county of that state without its own service queried another county's layer (found 17 Nov
+// 2026: 250 of 639 counties with data files, e.g. every Alaska borough asked Anchorage's layer), got no parcel and was shown as a
+// "public right-of-way". workers/parcels.ts already made this distinction.
+function isStatewideSvc(s) { return !!(s && s.states && !(s.counties && s.counties.length)); }
 
 function parcelSvc(fips) {   // round 8.7: the open parcel service for a county (a county's own service first, then its state's)
   if (!fips || fips === "06037" || fips === "06059") return null;
   const stNum = fips.slice(0, 2), stCode = FIPS_TO_STATE[stNum] || "";
   return PARCELS87.find(s => s.counties && s.counties.includes(fips)) ||
-         PARCELS87.find(s => s.states && (s.states.includes(stNum) || (stCode && s.states.includes(stCode)))) ||
+         PARCELS87.find(s => isStatewideSvc(s) && (s.states.includes(stNum) || (stCode && s.states.includes(stCode)))) ||
          null;
 }
 let natLots = null, natLotTimer = null, natLotSeq = 0;

@@ -167,6 +167,17 @@
    "crash_years": null
   },
   {
+   "fips": "02090",
+   "name": "Fairbanks North Star Borough",
+   "state": "AK",
+   "block_groups": 63,
+   "bundle_mb": 1.0,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00:53:34Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
    "fips": "04003",
    "name": "Cochise County",
    "state": "AZ",

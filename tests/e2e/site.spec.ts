@@ -1359,3 +1359,18 @@ test("Anchorage opens with its own data file; missing sources are named, and cra
   expect(r.heatZero).toBe(0);
   expect(errors).toEqual([]);
 });
+
+// Found by the Alaska live check (17 Nov 2026): in a county with no parcel service on file, every click said "Public
+// Right-of-Way / Roadway: This point is located within the public street ...", which the page had no way of knowing.
+test("a click in a county with no parcel service says so, and doesn't call the point a right-of-way (Fairbanks North Star, live click path)", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.evaluate(() => (0, eval)("openCounty")("02090"));
+  await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "02090", null, { timeout: 60_000 });
+  expect(await page.evaluate(() => (0, eval)("parcelSvc")("02090"))).toBeNull();
+  await page.evaluate(() => (0, eval)("houseAt")({ lat: 64.775285, lng: -147.496084 }));
+  await page.waitForFunction(() => /No public parcel service|Right-of-Way/.test((document.querySelector("#house") as HTMLElement)?.innerText || ""), null, { timeout: 30_000 });
+  const t = await page.evaluate(() => (document.querySelector("#house") as HTMLElement).innerText);
+  expect(t).toContain("No public parcel service is on file for this county");
+  expect(t).not.toMatch(/Right-of-Way/);
+  expect(errors).toEqual([]);
+});
