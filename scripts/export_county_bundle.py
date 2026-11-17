@@ -2,7 +2,8 @@
 """Publish one county bundle built by the pipeline (pipeline/build_oc.py) to the page.
 
 Writes counties/bundle_<fips>.json.gz exactly as w5/tools/export_county.py --gz does (compact JSON, gzip level 9, mtime 0),
-turns the county's "lots only" tag in index.html (data-coverage="lots", no data file) into a data tag (data-src), and adds or
+turns the county's "lots only" tag in index.html (data-coverage="lots", no data file) into a data tag (data-src), or adds a tag
+for a county the page doesn't list yet (in FIPS order), and adds or
 replaces its row in counties/manifest.json. No site-suggestions file is written: those need w5/tools/sites.py, which this
 environment can't run (it reads the old build machine's paths); the page handles a county without data-sites.
 
@@ -27,13 +28,22 @@ def main():
     p = os.path.join(ROOT, "index.html"); h = open(p, encoding="utf-8").read()
     pat = re.compile(r'<script type="application/json" class="county-bundle"[^>]*data-fips="' + fips + r'"[^>]*></script>')
     m = pat.search(h)
-    if not m:
-        sys.exit(f"no county-bundle tag for {fips} in index.html")
-    name = re.search(r'data-name="([^"]*)"', m.group(0)).group(1)
-    st = re.search(r'data-st="([^"]*)"', m.group(0)).group(1)
+    if m:
+        name = re.search(r'data-name="([^"]*)"', m.group(0)).group(1)
+        st = re.search(r'data-st="([^"]*)"', m.group(0)).group(1)
+    else:
+        # A county the page doesn't list yet (under 100,000 people): its name and state come from the registry (Census
+        # Gazetteer), and its tag goes in FIPS order among the existing ones.
+        name, st = reg["name"], reg["state"]
     tag = (f'<script type="application/json" class="county-bundle" data-fips="{fips}" data-name="{name}" data-st="{st}" '
            f'data-src="counties/bundle_{fips}.json.gz"></script>')
-    h = h[:m.start()] + tag + h[m.end():]
+    if m:
+        h = h[:m.start()] + tag + h[m.end():]
+    else:
+        tags = list(re.finditer(r'<script type="application/json" class="county-bundle"[^>]*data-fips="(\d{5})"[^>]*></script>', h))
+        after = [t for t in tags if t.group(1) > fips]
+        at = after[0].start() if after else tags[-1].end()
+        h = h[:at] + tag + ("\n" if after else "") + h[at:] if after else h[:at] + "\n" + tag + h[at:]
     open(p, "w", encoding="utf-8").write(h)
 
     # manifest row (same fields as w5/tools/build_site.py)
