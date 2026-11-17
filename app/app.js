@@ -5478,14 +5478,14 @@ async function houseAt(ll, fOverride = null) {
       box.innerHTML = `<h3>This home</h3><p class="small">No public parcel service is on file for this county, so this lot's record (address, size, use, value) can't be shown. Nothing is assumed about this point. The block group's figures above still apply.</p>`;
       return;
     }
+    // No parcel at this exact point in the service asked. The page can't tell why (a street, water, a gap in the layer, or
+    // a point the service doesn't cover), so it says only that; it used to call every such point a public right-of-way.
+    const svcAsked = (fipsNow && parcelSvc(fipsNow)) || getParcelService(ll);
+    const svcName = ownLAorOC ? "the county assessor's parcel layer" : (svcAsked && svcAsked.name) || "the parcel service";
     box.innerHTML = `<h3>This home</h3>
       <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:14px;margin:8px 0;line-height:1.5;">
-        <div style="display:flex;align-items:center;gap:6px;font-weight:700;font-size:13px;color:#0f172a;margin-bottom:4px;">
-          <span></span> <span>Public Right-of-Way / Roadway</span>
-        </div>
-        <div style="font-size:12px;color:#64748b;">
-          This point is located within the public street or transportation right-of-way (${ll.lat.toFixed(5)}°, ${ll.lng.toFixed(5)}°). Private zoning and single-family lot improvements only apply to deeded tax parcels. Click directly inside any lot boundary line to view property details.
-        </div>
+        <div style="font-weight:700;font-size:13px;color:#0f172a;margin-bottom:4px;">No parcel found at this point</div>
+        <div style="font-size:12px;color:#64748b;">${esc(svcName)} has no parcel at this exact point (${ll.lat.toFixed(5)}°, ${ll.lng.toFixed(5)}°). It may be a street, water or a gap in that layer; click inside a lot's boundary to see its record.</div>
       </div>`;
     return;
   }
@@ -6991,6 +6991,16 @@ const STATE_TO_FIPS = Object.fromEntries(Object.entries(FIPS_TO_STATE).map(([k, 
 function getParcelService(ll) {
   if (!ll || ll.lat == null || ll.lng == null) return null;
   const lat = ll.lat, lng = ll.lng;
+
+  // 0. The point's own county decides, when a loaded block group contains it. The boxes below are rough and overlap
+  // neighbors (North Carolina's box covers eastern Tennessee; Kern's reaches into LA County), so a click in Sevier
+  // County TN asked NC OneMap, found nothing, and was called a right-of-way (found 17 Nov 2026).
+  const bgHere = typeof houseBlockGroup === "function" ? houseBlockGroup(ll) : null;
+  if (bgHere && /^\d{12}/.test(String(bgHere))) {
+    const cf = String(bgHere).slice(0, 5);
+    if (cf === "06037" || cf === "06059") return null;   // LA and Orange use their own lookups
+    return parcelSvc(cf) || null;
+  }
 
   // 1. Major Metro County Bounding Boxes based on coordinate precision
   if (lat >= 40.49 && lat <= 40.92 && lng >= -74.26 && lng <= -73.70) return PARCELS87.find(s => s.counties && s.counties.includes("36061")) || null; // New York City (5 Boroughs MapPLUTO)

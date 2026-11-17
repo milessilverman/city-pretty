@@ -1879,3 +1879,19 @@ test("roof estimate: nothing recorded gives no estimate, and an unknown build ye
   expect(r.recalcNone).toBeNull();
   expect(errors).toEqual([]);
 });
+
+// The point's own county picks the parcel service (17 Nov 2026). Rough state boxes overlap: North Carolina's covers
+// eastern Tennessee, so a click in Sevier County TN asked NC OneMap, found nothing and was called a right-of-way.
+test("a click in Sevier County TN asks no other state's service and makes no right-of-way claim (live click path)", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.evaluate(() => (0, eval)("openCounty")("47155"));
+  await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "47155", null, { timeout: 60_000 });
+  const svc = await page.evaluate(() => { const s = (0, eval)("getParcelService")({ lat: 35.868, lng: -83.562 }); return s && s.name; });
+  expect(svc).toBeNull();
+  await page.evaluate(() => (0, eval)("houseAt")({ lat: 35.868, lng: -83.562 }));
+  await page.waitForFunction(() => /No public parcel service|Right-of-Way|No parcel found/.test((document.querySelector("#house") as HTMLElement)?.innerText || ""), null, { timeout: 30_000 });
+  const t = await page.evaluate(() => (document.querySelector("#house") as HTMLElement).innerText);
+  expect(t).toContain("No public parcel service is on file for this county");
+  expect(t).not.toMatch(/Right-of-Way|right-of-way/);
+  expect(errors).toEqual([]);
+});

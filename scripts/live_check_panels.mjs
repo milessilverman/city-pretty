@@ -279,7 +279,7 @@ async function main() {
           ({ house, facts, items } = await grab());
         }
         P.house_checks = items;
-        P.house_status = facts ? "house panel with live records" : /No public parcel service/i.test(house) ? "no parcel service for this county" : /Right-of-Way/i.test(house) ? "no parcel at point (right-of-way)" : /did not answer|Couldn.t get this lot/i.test(house) ? "parcel service did not answer" : "no house panel";
+        P.house_status = facts ? "house panel with live records" : /No public parcel service/i.test(house) ? "no parcel service for this county" : /No parcel found at this point|Right-of-Way/i.test(house) ? "no parcel at point" : /did not answer|Couldn.t get this lot/i.test(house) ? "parcel service did not answer" : "no house panel";
         const hard = HARDCODED_LAW.filter((re) => re.test(house)).map(String);
         // the house checks may name only this state's records
         const houseOther = STATUTES.filter((r) => r.state_code !== st && house.includes(r.short_name)).map((r) => r.id);

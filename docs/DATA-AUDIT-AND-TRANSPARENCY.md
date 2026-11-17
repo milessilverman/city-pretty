@@ -566,6 +566,17 @@ under-$500k band. My first run filtered deeds by ACRIS's `recorded_borough`, whi
 Manhattan), not the property's borough; it would have missed most Queens deeds. It was caught before any result was
 produced.
 
+### Correction: a point with no parcel was called a "public right-of-way", and border clicks asked another state's service (found and fixed 17 Nov)
+
+The page picks a parcel service for a click by rough latitude/longitude boxes before anything else, and the boxes
+overlap neighbors: North Carolina's covers eastern Tennessee, Kern County's reaches into northern LA County. A click in
+Sevier County TN (no parcel service) asked NC OneMap, which had no parcel there, and the page then said the point "is
+located within the public street or transportation right-of-way", something it can't know; it said the same for any
+point where the service it asked returned no parcel. Found in my live check of the new Tennessee counties (the check's
+own label had echoed the page's wording). Now the county whose block group contains the point decides first, and a
+point with no parcel says "No parcel found at this point", names the service asked, and says it may be a street, water
+or a gap in that layer. e2e test on Sevier County, confirmed to fail on the old code.
+
 ### Correction: the page's roof drawer used invented inputs the tested code had removed (found and fixed 17 Nov)
 
 The page runs its own copies of several engines inside `app/app.js`; the unit tests ran the copies in `src/engines`.
