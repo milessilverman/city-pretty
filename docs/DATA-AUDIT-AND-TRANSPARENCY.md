@@ -566,6 +566,18 @@ under-$500k band. My first run filtered deeds by ACRIS's `recorded_borough`, whi
 Manhattan), not the property's borough; it would have missed most Queens deeds. It was caught before any result was
 produced.
 
+### Correction: the page's roof drawer used invented inputs the tested code had removed (found and fixed 17 Nov)
+
+The page runs its own copies of several engines inside `app/app.js`; the unit tests ran the copies in `src/engines`.
+An earlier commit (ff6b849, "eliminate ... fallback numbers") removed an invented 1,600 sq ft living area and 1975 build
+year from the `src/` roof engine only, so the page kept them: the roof drawer, built on every house panel, showed a roof
+area, roofing squares and a pitch for houses with no recorded size, and houses with no recorded year got a 1945-78 ranch
+pitch. I confirmed both defaults in the page code before the fix. The page now runs the tested code: with nothing
+recorded it says "Living area not on file". The roof pitch values themselves are still unsourced assumptions (noted,
+not changed). The other differences found were the other way round (the page's valuation and house-auditor copies were
+right and the tested copies stale); `src/` now carries the page's code. A test fails if any shared engine function
+differs between the page and the tested files, and the 12 unused `.ts` copies are deleted (`audit/engine-copies.md`).
+
 ### Correction: city ordinances were applied as state law (found and fixed 17 Nov)
 
 The law table holds three city ordinances alongside the state laws: Austin's HOME initiative, Raleigh's missing-middle
