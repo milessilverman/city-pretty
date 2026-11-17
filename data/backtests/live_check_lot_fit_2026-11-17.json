@@ -1,5 +1,5 @@
 {
- "ran_on": "2026-11-17T08:35:30.372Z",
+ "ran_on": "2026-11-17T09:15:52.182Z",
  "script": "scripts/live_check_lot_fit.mjs",
  "browser_via_explicit_proxy": false,
  "nyc": [
@@ -2205,17 +2205,9 @@
     "xCentroid": -122.62014506878053,
     "yCentroid": 45.48905110922193
    },
-   "missing": [
-    "Zoning district R2.5 (Portland City Code, Title 33 (Planning and Zoning))",
-    "Housing types allowed in R2.5: House, Attached house, Accessory dwelling unit, Duplex, Triplex, Fourplex, Multi-dwelling structure, Cottage cluster",
-    "Height: up to 35 ft (PCC 33.110.215, Table 110-4)",
-    "Minimum setbacks: front 10 ft, side 5 ft, rear 5 ft, garage entrance 18 ft",
-    "Floor area allowed by zoning",
-    "Accessory dwelling unit (ADU)",
-    "1,500 sq ft"
-   ],
-   "ok": false,
-   "panel_excerpt": "4631 SE 41ST AVE · AIN/APN 1S1E13AA -02700 · Residential, Improved (Oregon property class (OAR 150-308-0310) on Multnomah County taxlots, PROPCLASS 101)\n• Local zoning standards — Not on file: City of Portland's zoning district couldn't be read here (the zoning map service didn't answer), so its standards can't be applied."
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "4631 SE 41ST AVE · AIN/APN 1S1E13AA -02700 · Residential, Improved (Oregon property class (OAR 150-308-0310) on Multnomah County taxlots, PROPCLASS 101)\n• Zoning district R2.5 (Portland City Code, Title 33 (Planning and Zoning)) — Housing types allowed in R2.5: House, Attached house, Accessory dwelling unit, Duplex, Triplex, Fourplex, Multi-dwelling structure, Cottage cluster (PCC 33.110.200, Table 110-2). Height: up to 35 ft (PCC 33.110.215, Table 110-4). Minimum setbacks: front 10 ft, side 5 ft, rear 5 ft, garage entrance 18 ft (PCC 33.110.220, Table 110-4). Required outdoor area: at least 200 sq ft (PCC 33.110.240, Table 110-4). Overlay zones, plan districts and historic or conservation designations change these standards; they aren't checked here.\n• Floor area allowed by zoning — On this ~5,653 sq ft lot (by its parcel outline) the maximum floor area depends on the total number of homes on the lot, ADUs included: 1 home: up to about 3,957 sq ft (FAR 0.7); 2 homes: up to about 4,522 sq ft (FAR 0.8), or 5,088 sq ft with a bonus option (FAR 0.9); 3 homes: up to about 5,088 sq ft (FAR 0.9), or 5,653 sq ft with a bonus option (FAR 1); 4 or more homes: up to about 5,653 sq ft (FAR 1), or 6,218 sq ft with a bonus option (FAR 1.1) (PCC 33.110.210, Table 110-4). \"Maximum FAR applies to all buildings on the lot, however the maximum allowed is based on the total number of dwelling units on the lot and whether a bonus option is chosen.\" \"Adjustments to the maximum FAR ratios, including bonus ratios, are prohibited.\" Which count and bonus apply depends on what is built, so no single figure is given; the table's note [3]: \"[3] Additional FAR and height may be allowed. See 33.110.265.F.\".\n✓ Second home (two-family or more) — R2.5 allows duplexes, triplexes and fourplexes (PCC 33.110.200, Table 110-2: \"Duplex No Yes Yes Yes Yes Yes\"; \"Triplex No Yes Yes Yes Yes Yes\"; \"Fourplex No Yes Yes Yes Yes Yes\"), within the floor area above; state law on file: OR HB 2001 (Oregon Housing Choice & Middle Housing) (text checked), which applies only where all of its conditions are met (see Housing laws & rights).\n? Accessory dwelling unit (ADU) — Allowed in R2.5 (PCC 33.110.200, Table 110-2: \"Accessory dwelling unit (See Chapter 33.205) Yes Yes Yes Yes Yes Yes\"). Its size, placement and number are set by Chapter 33.205, which isn't read here; state law on file: OR ADU law: one ADU per"
   }
  ],
  "pdx_outside": {
