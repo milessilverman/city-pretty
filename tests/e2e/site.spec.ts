@@ -1679,3 +1679,21 @@ test("what fits on this lot applies SDMC RS zones in the City of San Diego, and 
   expect(condo).not.toContain("Split into two lots");
   expect(errors).toEqual([]);
 });
+
+// SanGIS returns situs_address as the house number only; the street is in separate fields (17 Nov 2026).
+test("San Diego parcel address joins the house number and street fields; a 0 house number is left out", async ({ page }) => {
+  const errors = await openPage(page);
+  const r = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s);
+    const svc = ev("PARCELS87").find((s: any) => /geo\.sandag\.org/.test(s.url));
+    const norm = ev("normalizeParcelFeature");
+    const a1 = norm({ attributes: { apn: "4982604500", situs_address: 1590, situs_pre_dir: "E", situs_street: "CHASE", situs_suffix: "AVE", situs_post_dir: "" }, geometry: null }, { lat: 32.79, lng: -116.96 }, svc).attributes;
+    const a2 = norm({ attributes: { apn: "6782511200", situs_address: 0, situs_pre_dir: "W", situs_street: "BERNARDO", situs_suffix: "CT" }, geometry: null }, { lat: 33.02, lng: -117.08 }, svc).attributes;
+    return { a1: a1.SitusFullAddress, a2: a2.SitusFullAddress, fields: svc.fields.map((f: any) => f[0]) };
+  });
+  expect(r.a1).toContain("1590 E CHASE AVE");
+  expect(r.a2).toContain("W BERNARDO CT");
+  expect(r.a2).not.toMatch(/^0 /);
+  expect(r.fields).toEqual(expect.arrayContaining(["situs_street", "situs_suffix", "situs_pre_dir", "situs_post_dir"]));
+  expect(errors).toEqual([]);
+});

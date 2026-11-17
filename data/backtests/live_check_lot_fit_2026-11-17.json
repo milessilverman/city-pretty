@@ -1,5 +1,5 @@
 {
- "ran_on": "2026-11-17T07:04:24.281Z",
+ "ran_on": "2026-11-17T07:27:45.632Z",
  "script": "scripts/live_check_lot_fit.mjs",
  "nyc": [
   {

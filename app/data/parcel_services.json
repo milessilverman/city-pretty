@@ -1817,6 +1817,22 @@
      "SITUS_ADDRESS"
     ],
     [
+     "situs_pre_dir",
+     "SITUS_PRE_DIR"
+    ],
+    [
+     "situs_street",
+     "SITUS_STREET"
+    ],
+    [
+     "situs_suffix",
+     "SITUS_SUFFIX"
+    ],
+    [
+     "situs_post_dir",
+     "SITUS_POST_DIR"
+    ],
+    [
      "situs_community",
      "SITUS_COMMUNITY"
     ],
