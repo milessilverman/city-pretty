@@ -13,7 +13,7 @@ const CP_DATA_FILES = {
   "intercity-corridors": "intercity_transit_corridors.json", "county-completeness": "county_completeness.json",
   "ca-counties-registry": "ca_counties_registry.json", "intervention-verification": "intervention_verification.json", "upgrade-verification": "upgrade_verification.json",
   "la-neighborhood-values": "la_neighborhood_values.json", "bundle-corrections": "bundle_corrections.json", "county-valuation-models": "county_valuation_models.json",
-  "zoning-standards": "zoning_standards.json", "parcel-use-codes": "parcel_use_codes.json"
+  "zoning-standards": "zoning_standards.json", "parcel-use-codes": "parcel_use_codes.json", "acs-fallback-flags": "acs_fallback_flags.json"
 };
 const _cpData = {};
 function cpText(id) {
@@ -52,6 +52,32 @@ let INTERCITY_CORRIDORS_DATA = [];
 // tables from each publisher's documentation. Where a jurisdiction isn't in the file, the page says so with the reason.
 let ZONING_STANDARDS = null;
 let PARCEL_USE_CODES = null;
+// Block groups whose Census ACS median home value or rent is the surrounding tract's published median, because the
+// Census suppresses the block group's own (app/data/acs_fallback_flags.json, scripts/build_acs_fallback_flags.py: every
+// value checked against the Census Bureau's ACS summary files). Before 17 Nov 2026 a tract rent was shown as the block
+// group's own; the county-wide source note was the only disclosure.
+let ACS_FALLBACK_FLAGS = null;
+const _acsFlagSets = new Map();
+const ACS_TRACT_NOTE = "tract median; the block group's is suppressed by the Census";
+function acsLevel(bg, field) {
+  const id = String(bg || "");
+  if (id.length !== 12 || !ACS_FALLBACK_FLAGS || !ACS_FALLBACK_FLAGS.counties) return null;
+  const fips = id.slice(0, 5), c = ACS_FALLBACK_FLAGS.counties[fips];
+  if (!c) return null;
+  for (const kind of ["tract", "mismatch"]) {
+    const key = fips + "|" + field + "_" + kind;
+    if (!_acsFlagSets.has(key)) _acsFlagSets.set(key, new Set(c[field + "_" + kind] || []));
+    if (_acsFlagSets.get(key).has(id.slice(5))) return kind;
+  }
+  return null;
+}
+// The label to show beside a block group's home value or rent ("" when it is the block group's own figure). LA's home
+// values are rebuilt from assessor transfers on the page (hv_rebuilt), so the ACS flag does not apply to them.
+function acsNote(bg, field, m) {
+  if (field === "hv" && m && m.hv_rebuilt) return "";
+  const l = acsLevel(bg, field);
+  return l === "tract" ? ACS_TRACT_NOTE : l === "mismatch" ? "differs from the Census figure on file; not checked" : "";
+}
 
 const DEFAULT_CA_PROFILE = {
   state_code: "CA",
@@ -92,6 +118,12 @@ function loadVerifiedDataFiles() {
   cpJson("county-valuation-models").then(d => { if (d && d.counties) COUNTY_VALUATION_MODELS = d; });
   cpJson("zoning-standards").then(d => { if (d && Array.isArray(d.jurisdictions)) ZONING_STANDARDS = d; });
   cpJson("parcel-use-codes").then(d => { if (d && Array.isArray(d.systems)) PARCEL_USE_CODES = d; });
+  cpJson("acs-fallback-flags").then(d => {
+    if (!d || !d.counties) return;
+    ACS_FALLBACK_FLAGS = d; _acsFlagSets.clear();
+    // a block group already on screen is redrawn so its labels appear
+    try { if (typeof selected !== "undefined" && selected && (acsLevel(selected, "rent") || acsLevel(selected, "hv")) && typeof select === "function" && document.querySelector("#panel")) select(selected, false); } catch (e) {}
+  });
   cpJson("la-neighborhood-values").then(d => {
     if (d && d.bg && d.model) { LA_NEIGHBORHOOD_VALUES = d; if (typeof applyLaNeighborhoodValuesToOpenChunks === "function") applyLaNeighborhoodValuesToOpenChunks(); }
   });
@@ -724,7 +756,8 @@ function priceBandOf(v) { return v < 500000 ? "under $500k" : v < 1000000 ? "$50
 // Prop 13 base-year value, or the block group's Census ACS median home value (owner-reported, 5-year estimate).
 function acsVintageLabel() {
   const m = (typeof D_OC !== "undefined" && D_OC && D_OC.meta) || null;
-  return (m && m.acs) ? `Census ACS ${m.acs}` : "Census ACS 5-year";
+  // meta.acs reads "2020-2024 ACS 5-year"; it was printed as "Census ACS 2020-2024 ACS 5-year" before 17 Nov 2026
+  return (m && m.acs) ? (/\bACS\b/.test(m.acs) ? `Census ${m.acs}` : `Census ACS ${m.acs}`) : "Census ACS 5-year";
 }
 function withholdUntested(v, context) {
   const ctx = context || {};
@@ -734,7 +767,9 @@ function withholdUntested(v, context) {
     ? ` Its recorded sale (${backtestDollars(ctx.sale.price)}, ${saleYear}) is the closest sourced figure.`
     : by >= VALUATION_CURRENT_YEAR - 1 && ctx.rollTotal > 0 && typeof isCAActive === "function" && isCAActive()
     ? ` Its assessed value (${backtestDollars(ctx.rollTotal)}, Prop 13 base year ${by}) reflects its ${by} transfer and is the closest sourced figure.`
-    : (ctx.neighborhoodHv > 0 ? ` The block group's median home value is ${backtestDollars(ctx.neighborhoodHv)} (${acsVintageLabel()}, owner-reported).` : "");
+    : (ctx.neighborhoodHv > 0 ? (ctx.neighborhoodHvTract
+      ? ` The surrounding tract's median home value is ${backtestDollars(ctx.neighborhoodHv)} (${acsVintageLabel()}, owner-reported; the block group's is suppressed by the Census).`
+      : ` The block group's median home value is ${backtestDollars(ctx.neighborhoodHv)} (${acsVintageLabel()}, owner-reported).`) : "");
   return Object.assign({}, v, {
     estimatedValue: null, vpsf: null, valueLow: null, valueHigh: null, confidenceMarginPct: null, backtest: null,
     confidenceRating: "Withheld — no back-test in this county",
@@ -775,7 +810,7 @@ function publishValuation(v, fips, context) {
     ? ` Its recorded sale (${backtestDollars(ctx.sale.price)}, ${saleYear}) is the closest sourced figure.`
     : by >= VALUATION_CURRENT_YEAR - 1 && ctx.rollTotal > 0
     ? ` Its assessed value (${backtestDollars(ctx.rollTotal)}, Prop 13 base year ${by}) reflects its ${by} transfer and is the closest sourced figure.`
-    : (ctx.neighborhoodHv > 0 ? ` The neighborhood's typical home value is ${backtestDollars(ctx.neighborhoodHv)}.` : "");
+    : (ctx.neighborhoodHv > 0 ? ` The neighborhood's typical home value is ${backtestDollars(ctx.neighborhoodHv)}${ctx.neighborhoodHvTract ? ` (${ACS_TRACT_NOTE})` : ""}.` : "");
   return Object.assign({}, v, {
     estimatedValue: null, vpsf: null, backtest: info,
     confidenceRating: "Withheld — failed its back-test",
@@ -5510,7 +5545,7 @@ function renderHouse(box, a, lot, ll, st) {
     stateCode: typeof activeState === "function" ? activeState() : null,
     facts: F,
     salesInfo: sale
-  }), typeof activeFips === "function" ? activeFips() : null, { neighborhoodHv: +baseNeighborhoodHv || null, rollBaseYear: rollBaseYear, rollTotal: totalRoll, sale, attributes: a, lot,
+  }), typeof activeFips === "function" ? activeFips() : null, { neighborhoodHv: +baseNeighborhoodHv || null, neighborhoodHvTract: !!(m.hv && acsNote(selected, "hv", m) === ACS_TRACT_NOTE), rollBaseYear: rollBaseYear, rollTotal: totalRoll, sale, attributes: a, lot,
     // the house's own block group, in the vintage the county's model was tested with (the selected one is only a fallback)
     bg: modelBlockGroup(typeof activeFips === "function" ? activeFips() : null, a, ll) }) : null;
 
@@ -7723,8 +7758,8 @@ function select(id, fly) {
 
   // Core Vitals Tiles
   h += `<div class="section"><div class="tiles">
-    ${tile("Typical home value", fmt$(m.hv), esc(oc && !ocReal ? "neighborhood estimate (preliminary)" : hvSourceText(m.hvs)))}
-    ${tile("Median rent", fmtRent(m.rent), oc && !ocReal ? "estimate (preliminary)" : ocReal ? "Census ACS 2020–24" : "Census ACS 5-Year")}
+    ${tile("Typical home value", fmt$(m.hv), esc(oc && !ocReal ? "neighborhood estimate (preliminary)" : (() => { const t = hvSourceText(m.hvs), n = acsNote(id, "hv", m); return n && !/tract/.test(t) ? (t ? t + "; " : "") + n : t; })()))}
+    ${tile("Median rent", fmtRent(m.rent), oc && !ocReal ? "estimate (preliminary)" : (ocReal ? "Census ACS 2020–24" : "Census ACS 5-Year") + (m.rent != null && acsNote(id, "rent") ? ": " + acsNote(id, "rent") : ""))}
     ${tile("Homes", fmtN(m.homes), `${m.own != null ? Math.round(m.own) + "% owner-occupied" : ""}`)}
     ${tile("Heat vs median", m.ht != null ? (m.ht > 0 ? "+" : "") + (+m.ht).toFixed(1) + "°F" : "–", oc && !ocReal ? "estimate (preliminary)" : ocReal ? "Tree Equity Score 2021 vs urbanized-area mean" : "Tree Equity Score 2021 (2010 block groups)")}
     ${tile("Violent crime", m.vc != null ? (+m.vc).toFixed(1) + " per 1k" : "no data", m.vc != null ? `12 mo · ${esc(m.ag || "")}` : (activeFips() === "06037" ? "independent police" : isCAActive() ? "agency not in CA DOJ data" : "no crime source outside California"))}
@@ -7806,7 +7841,7 @@ function select(id, fly) {
   h += `<details class="panel-sec"><summary><b>${isCAActive() ? "EIFD Tax-Increment Financing Calculator" : "Tax-Increment Financing"}</b></summary><div class="sec-content">${fundSummary(pkg, id)}${eifdSection(p, m)}</div></details>`;
 
   const kv = [], add = (k, v, f = x => x) => { if (v != null && v !== "" && !(typeof v === "number" && isNaN(v))) kv.push(`<span>${k}</span><span>${f(v)}</span>`); };
-  add("Population", m.pop, fmtN); add("Median household income", m.inc, fmt$); add("Median rent", m.rent, fmtRent); add("Median year built", m.yb, v => Math.round(v));
+  add("Population", m.pop, fmtN); add("Median household income", m.inc, fmt$); add("Median rent", m.rent, v => fmtRent(v) + (acsNote(id, "rent") ? ` (${acsNote(id, "rent")})` : "")); add("Median year built", m.yb, v => Math.round(v));
   add("Single-family share", m.sf, v => Math.round(v) + "%"); add("Households without a car", m.nocar, v => Math.round(v) + "%");
   if (!oc) { add("Street trees (city survey)", m.st, fmtN); add("Open tree sites", m.ts, fmtN); }
   add("Canopy gap to goal (" + (m.tg_src || "Tree Equity Score 2021, 2010 block groups") + ")", m.tg, v => (+v).toFixed(0) + " pts");
@@ -8132,7 +8167,7 @@ function copyAreaSummary(id) {
   const top3 = val.slice(0, 3);
   
   let txt = `City Pretty Brief: ${p.n} (${p.c})\n`;
-  txt += `Block Group ID: ${id} | Typical Home Value: ${fmt$(m.hv)} | Homes: ${fmtN(m.homes)}\n\n`;
+  txt += `Block Group ID: ${id} | Typical Home Value: ${fmt$(m.hv)}${m.hv != null && acsNote(id, "hv", m) ? ` (${acsNote(id, "hv", m)})` : ""} | Homes: ${fmtN(m.homes)}\n\n`;
   txt += top3.length ? `Top 3 projects with a sourced estimate:\n` : `No sourced estimate is available here yet.\n`;
   top3.forEach((r, i) => {
     const c = D.catalog[r.id], rng = formatVpdRange(r.vpd, c.grade, r.id, m);
@@ -8684,6 +8719,9 @@ function serializeLiveAdvisorContext() {
     payload.blockGroup = {
       geoid: selected, name: p.n || null, nameSource: m.ns || null, city: p.c || null,
       medianHomeValue: num(m.hv != null ? m.hv : p.hv), medianRent: num(m.rent), population: num(m.pop), acres: num(m.acres),
+      // "tract": the figure is the surrounding tract's median (the block group's is suppressed by the Census)
+      medianHomeValueLevel: acsNote(selected, "hv", m) ? (acsLevel(selected, "hv") || "block group") : "block group",
+      medianRentLevel: acsLevel(selected, "rent") || "block group",
       // Verification-gated (docs/audit/bundle-catalog-audit.md): only projects whose effect or cost was checked carry numbers.
       topProjects: (() => {
         const g = gateRecs(recsOf((bundle && bundle.details && bundle.details[selected]) || D.details[selected] || {}), m);
@@ -9352,8 +9390,8 @@ function renderCompareDrawer() {
           <button type="button" class="small" style="background:none;border:none;cursor:pointer;color:var(--ink-3)" onclick="toggleCompare('${id}'); renderCompareDrawer();">✕</button>
         </div>
         <div class="c-row"><span class="k">City</span><span class="v">${esc(p.c)}</span></div>
-        <div class="c-row"><span class="k">Typical Home Value</span><span class="v">${fmt$(m.hv)}</span></div>
-        <div class="c-row"><span class="k">Median Rent</span><span class="v">${fmtRent(m.rent)}</span></div>
+        <div class="c-row"><span class="k">Typical Home Value</span><span class="v">${fmt$(m.hv)}${m.hv != null && acsNote(id, "hv", m) ? ` <span class="small muted">(${acsNote(id, "hv", m)})</span>` : ""}</span></div>
+        <div class="c-row"><span class="k">Median Rent</span><span class="v">${fmtRent(m.rent)}${m.rent != null && acsNote(id, "rent") ? ` <span class="small muted">(${acsNote(id, "rent")})</span>` : ""}</span></div>
         <div class="c-row"><span class="k">Homes / Owner-Occ</span><span class="v">${fmtN(m.homes)} (${m.own != null ? Math.round(m.own) + "%" : "–"})</span></div>
         <div class="c-row"><span class="k">Best Bet</span><span class="v">${topC && top.vpd >= 1 ? esc(topC.name) : "No sourced estimate yet"}</span></div>
         <div class="c-row"><span class="k">Expected Return</span><span class="v">${topRng && top.vpd >= 1 ? topRng.estStr + " (" + topRng.str + "; " + esc(ivLabel(top.id)) + ")" : "–"}</span></div>
