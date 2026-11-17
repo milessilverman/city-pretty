@@ -30,6 +30,7 @@ describe("zoning_standards.json: New York City", () => {
 
   it("each number appears in the table row or sentence it was parsed from", () => {
     for (const [d, r] of Object.entries<any>(NYC.districts)) {
+      if (r.tier === "R6-R10") continue;   // checked in the R6-R10 block below
       expect(r.min_lot.row, d).toContain(`| ${fmt(r.min_lot.area_sqft)} | ${r.min_lot.width_ft}`);
       expect(r.far.row, d).toContain(r.far.standard.toFixed(2));
       expect(r.far.row, d).toContain(r.far.qualifying_residential_site.toFixed(2));
@@ -52,6 +53,60 @@ describe("zoning_standards.json: New York City", () => {
     expect(NYC.adu.max_sqft).toBe(800);
     expect(NYC.adu.quote).toContain("does not exceed eight hundred square feet of floor area");
     expect(NYC.adu.no_backyard_outside_greater_transit_zone).toEqual(["R1-2A", "R2A", "R3A"]);
+  });
+});
+
+describe("zoning_standards.json: New York City R6-R10", () => {
+  const HIGH = Object.entries<any>(NYC.districts).filter(([, r]) => r.tier === "R6-R10");
+  const val = (row: string) => row.split(" | ");
+
+  it("covers every R6-R10 district the ZR 23-22 and 23-432 tables list, and nothing else in that range", () => {
+    expect(HIGH.map(([d]) => d).sort()).toEqual(["R10", "R10A", "R10X", "R6", "R6-1", "R6-2", "R6A", "R6B", "R6D", "R7-1", "R7-2", "R7-3", "R7A", "R7B", "R7D", "R7X",
+      "R8", "R8A", "R8B", "R8X", "R9", "R9-1", "R9A", "R9D", "R9X"].sort());
+    expect(NYC.not_covered).toMatch(/^R11, R12, commercial/);
+    for (const [d] of HIGH) expect(NYC.districts_covered, d).toContain(d);
+  });
+
+  it("each option's numbers appear in the table row they were parsed from, with section URLs", () => {
+    for (const [d, r] of HIGH) {
+      expect(r.housing_types.limited_to, d).toBeNull();
+      expect(r.housing_types.url, d).toBe("https://zr.planning.nyc.gov/article-ii/chapter-2/22-121");
+      expect(r.min_lot.row, d).toContain(`R6 - R12 | ${fmt(r.min_lot.area_sqft)} | ${r.min_lot.width_ft}`);
+      expect(r.far.url, d).toBe("https://zr.planning.nyc.gov/article-ii/chapter-3/23-22");
+      expect(r.height.url, d).toBe("https://zr.planning.nyc.gov/article-ii/chapter-3/23-432");
+      expect(r.far.standard, d).toBeNull();          // no single figure: the page must read the options
+      expect(r.height.max_height_ft, d).toBeNull();
+      for (const o of r.far.options.standard) expect(val(o.row)[1], d).toMatch(new RegExp(`^${o.far.toFixed(2)}(\\^\\d)?$`));
+      for (const o of r.far.options.qualifying) expect(val(o.row)[2], d).toMatch(new RegExp(`^${o.far.toFixed(2)}(\\^\\d)?$`));
+      for (const o of r.height.options.standard) expect(val(o.row).slice(1, 4), d).toEqual([String(o.min_base_ft), String(o.max_base_ft), String(o.max_height_ft)]);
+      for (const o of r.height.options.qualifying) expect([val(o.row)[1], ...val(o.row).slice(4)], d).toEqual([String(o.min_base_ft), String(o.max_base_ft), String(o.max_height_ft)]);
+      // A district whose value depends on a condition never has two unconditioned options.
+      for (const opts of [r.far.options.standard, r.far.options.qualifying, r.height.options.standard, r.height.options.qualifying])
+        expect(opts.filter((o: any) => !o.condition).length, d).toBeLessThanOrEqual(1);
+    }
+  });
+
+  it("matches the Zoning Resolution tables for spot-checked districts (as published 17 Nov 2026)", () => {
+    const R6 = NYC.districts["R6"], R71 = NYC.districts["R7-1"], R8 = NYC.districts["R8"], R10A = NYC.districts["R10A"], R6B = NYC.districts["R6B"];
+    expect(R6.min_lot).toMatchObject({ area_sqft: 2375, width_ft: 25 });
+    expect(R6.min_lot_other_residences).toMatchObject({ area_sqft: 1700, width_ft: 18 });
+    // 23-22: R6 3.00 within 100 ft of a wide street (footnote 1), 2.20 otherwise; 3.90 for qualifying housing either way.
+    expect(R6.far.options.standard.map((o: any) => [o.far, !!o.condition])).toEqual([[3.0, true], [2.2, false]]);
+    expect(R6.far.options.standard[0].condition).toMatch(/^For zoning lots, or portions thereof, located within 100 feet of a wide street/);
+    expect(R6.far.options.qualifying.map((o: any) => o.far)).toEqual([3.9, 3.9]);
+    expect(R71.far.options.standard.map((o: any) => o.far)).toEqual([4.0, 3.44]);
+    expect(R8.far.options.qualifying.map((o: any) => o.far)).toEqual([7.2, 8.64]);
+    expect(R8.far.options.qualifying[1].condition).toMatch(/^Outside of Mandatory Inclusionary Housing areas/);
+    expect(R6B.far.options.standard).toHaveLength(1);
+    expect(R6B.far.options.standard[0]).toMatchObject({ far: 2.0, condition: null });
+    // 23-432: R7-1 wide street 40/75/85 (qualifying 85/115), narrow street 40/65/75 (85/105).
+    expect(R71.height.options.standard.map((o: any) => [o.min_base_ft, o.max_base_ft, o.max_height_ft])).toEqual([[40, 75, 85], [40, 65, 75]]);
+    expect(R71.height.options.qualifying.map((o: any) => [o.max_base_ft, o.max_height_ft])).toEqual([[85, 115], [85, 105]]);
+    expect(R71.height.options.standard[1].condition).toMatch(/^For zoning lots or portions thereof on a narrow street/);
+    // R8's footnote-3 row (outside MIH areas, UAP or senior housing) adds a qualifying option only.
+    expect(R8.height.options.standard.map((o: any) => o.max_height_ft)).toEqual([115, 135]);
+    expect(R8.height.options.qualifying.map((o: any) => o.max_height_ft)).toEqual([145, 145, 175]);
+    expect(R10A.height.options.standard.map((o: any) => [o.min_base_ft, o.max_height_ft])).toEqual([[125, 215], [60, 185]]);
   });
 });
 

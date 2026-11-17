@@ -210,3 +210,77 @@ On the page, a DC house in a covered zone shows:
   an inference, not code text. It now says what § 202.1 says: the minimums apply to creating a new lot of record.
 - The first DC browser test hit Playwright's 90 s per-test limit, not a page failure. The limit is raised for that
   one eight-lot test.
+
+# Round 3 (17 Nov 2026): New York City R6-R10
+
+## What was added
+
+25 residence districts: R6, R6-1, R6-2, R6A, R6B, R6D, R7-1, R7-2, R7-3, R7A, R7B, R7D, R7X, R8, R8A, R8B, R8X, R9,
+R9-1, R9A, R9D, R9X, R10, R10A, R10X. These are exactly the R6-R10 districts named in the ZR 23-22 and 23-432 tables
+(the build asserts the two tables list the same set). R11 and R12, which share those tables, are not encoded; nor are
+commercial, manufacturing or special-purpose districts, or R10H and other districts that appear only in special
+district chapters.
+
+Each rule is parsed by `build_nyc_high()` in `scripts/build_zoning_standards.py` from zr.planning.nyc.gov:
+
+| Rule | Section | What the build reads |
+|---|---|---|
+| Housing types | 22-121 (Use Group II table) | The R6-R10 columns are "●" (Permitted) for every residence type, with no "P" (additional conditions); the build asserts each cell. 22-122's limitations name R1-R5 only. |
+| Minimum lot | 23-12 | "R6 - R12": 2,375 sq ft and 25 ft for a single- or two-family detached or zero lot line home; 1,700 sq ft and 18 ft for other residences |
+| Floor area ratio | 23-22 | Standard residences and qualifying affordable or senior housing, per row |
+| Base and building height | 23-432 | Minimum base, maximum base and maximum building height, for standard residences and for qualifying affordable or senior housing, per row |
+
+**Conditions are kept, never collapsed.** The 23-22 and 23-432 tables mark rows and values with footnotes (within
+100 feet of a wide street; a narrow street beyond 100 feet; outside Mandatory Inclusionary Housing areas for UAP or
+senior housing). The page can't see which applies to a lot, so every value is stored with the footnote's own words and
+shown that way. A district row without a footnote, where the same district also has a footnoted row, is shown as "for
+other lots" (R6: FAR 3.00 within 100 feet of a wide street, 2.20 for other lots). The floor-area line gives the lowest
+standard figure and the highest, each with its condition, and says which applies isn't checked. The "Height limit" fact
+shows the range for standard residences (e.g. R8: 115–135 ft, depending on the street), and the second-story check uses
+the lowest. Footnote-3 rows of 23-432 (R8, outside MIH areas, for lots containing UAP or senior housing) go to the
+qualifying column only; the build asserts their standard-residence values equal the footnote-1 row's, so nothing is
+lost.
+
+**Superscripts are read from the HTML.** In the flattened text "R6 1" and "R7 -1 1" are R6 and R7-1 with footnote 1.
+The build reads `<sup>` as `^n` (the digit can sit inside a `<span>`), and fails if any `<sup>` is left unread.
+
+Not checked here, and the panel says so: whether the lot is within 100 feet of a wide street, Mandatory Inclusionary
+Housing areas and UAP, transit zones, commercial overlays, special purpose districts and Article VI rules, towers, and
+the alternative rules of ZR 23-70 (predominantly built-up areas, Brooklyn Community District 12, sky exposure plane
+buildings).
+
+**Apartment buildings.** NYC's use table now records the building form from the PLUTO label: LandUse 02 "Multi-Family
+Walk-Up Buildings" and 03 "Multi-Family Elevator Buildings" are apartment buildings, so house-only rows (second home,
+lot split, ADU, pool) aren't run on them. In R6-R10 they still get the district's standards and floor area, since that
+is what matters for a building there. LandUse 01 "One & Two Family Buildings" is left to the record's unit count.
+
+## Bug avoided
+
+R6-R10 districts have no single height. The page read `max_height_ft` directly, so a missing single height would have
+become 0 ft and the "second story" check would have said no. It now uses the lowest standard-residence limit for the
+check and the range for the fact; a test asserts no "null ft" or "NaN" appears.
+
+## Verification (round 3)
+
+- **Build:** every number is parsed from the live table row; the build fails if a row's district list doesn't
+  re-assemble from its tokens, if a value or footnote is missing, or if the two tables disagree on the district set.
+- **Unit tests** (`tests/unit/zoningStandards.test.ts`): each option's numbers appear in the row it came from; no
+  district has two unconditioned options in one column; spot checks against the tables as published on 17 Nov 2026
+  (R6 3.00/2.20, R7-1 4.00/3.44 and heights 40/75/85 and 40/65/75, R8 qualifying 7.20/8.64, R8 heights 115/135 and
+  145/145/175, R10A minimum base 125 on a wide street).
+- **e2e** (`tests/e2e/site.spec.ts`, through `houseAt`): an R6 walk-up (floor area with both conditions, no house-only
+  rows), an R7-1 one-family house (heights by street, second home allowed, split check), and R11 still "not on file".
+- **Live check** (`scripts/live_check_lot_fit.mjs`, `data/backtests/live_check_lot_fit_2026-11-17.json`):
+  - 12 of 12 real R6-R10 lots matched MapPLUTO queried separately, in Brooklyn (R6B, R6A, R7A), Manhattan (R10A, R8B,
+    R7-2), Queens (R7-1, R7A, R6) and the Bronx (R8, R8A, R7-1), across one-family, walk-up and elevator buildings.
+  - 40 of 40 table rows the data was parsed from were found again in the live 23-12, 23-22 and 23-432 tables (read with
+    the same superscript handling), and 22-121 still marks every residence type "●" in R6-R10.
+  - Unchanged: NYC R1-R5 8/8 and 22/22 quotes, DC 5/5 and 27/27, Nashville 2/2, Travis and Jefferson "not on file".
+
+## My own mistakes this round
+
+- The worktree for this track was created from an unrelated old commit (`94a3f0b`, not on this branch). I reset it to
+  the branch head (`5ccd271`) before changing anything.
+- My first build read R7-1 and R7-2's 23-432 rows with no condition: their footnote digit sits inside a `<span>`
+  within `<sup>`, which my first regex missed. The printed output showed the empty condition; the regex now allows tags
+  inside `<sup>`, and the build fails if any `<sup>` is left unread.

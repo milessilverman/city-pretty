@@ -2,7 +2,7 @@
  "_source": {
   "description": "Local zoning standards used by the page's 'what fits on this lot' checks. Every rule is parsed from the code's own text at build time and keeps the verbatim text and section URL it came from.",
   "built_by": "scripts/build_zoning_standards.py",
-  "built_on": "2026-11-16",
+  "built_on": "2026-11-17",
   "rule": "A jurisdiction not listed here shows 'zoning standards not on file' with the reason; nothing is filled in."
  },
  "jurisdictions": [
@@ -27,7 +27,7 @@
    "code": "New York City Zoning Resolution",
    "cite_prefix": "ZR",
    "code_url": "https://zr.planning.nyc.gov",
-   "as_amended": "sections amended 12/5/2024 (City of Yes for Housing Opportunity), as published on 2026-11-16",
+   "as_amended": "sections amended 12/5/2024 (City of Yes for Housing Opportunity), as published on 2026-11-17",
    "districts_covered": [
     "R1-1",
     "R1-2",
@@ -46,9 +46,34 @@
     "R5",
     "R5A",
     "R5B",
-    "R5D"
+    "R5D",
+    "R6",
+    "R6-1",
+    "R6-2",
+    "R6A",
+    "R6B",
+    "R6D",
+    "R7-1",
+    "R7-2",
+    "R7-3",
+    "R7A",
+    "R7B",
+    "R7D",
+    "R7X",
+    "R8",
+    "R8A",
+    "R8B",
+    "R8X",
+    "R9",
+    "R9-1",
+    "R9A",
+    "R9D",
+    "R9X",
+    "R10",
+    "R10A",
+    "R10X"
    ],
-   "not_covered": "R6-R12, commercial (C), manufacturing (M) and special-purpose district standards are not encoded here.",
+   "not_covered": "R11, R12, commercial (C), manufacturing (M) and special-purpose district standards are not encoded here.",
    "caveats": [
     {
      "text": "The use provisions of this Chapter may be modified or superseded by special rules for certain areas in Article I (General Provisions), Article VI (Special Regulations Applicable to Certain Areas), and through Special Purpose Districts.",
@@ -1031,13 +1056,2025 @@
        }
       ]
      }
+    },
+    "R6": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 3.0,
+         "condition": "For zoning lots, or portions thereof, located within 100 feet of a wide street",
+         "row": "R6A R6^1 R6-1 R7B | 3.00 | 3.90"
+        },
+        {
+         "far": 2.2,
+         "condition": null,
+         "row": "R6 | 2.20 | 3.90"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 3.9,
+         "condition": "For zoning lots, or portions thereof, located within 100 feet of a wide street",
+         "row": "R6A R6^1 R6-1 R7B | 3.00 | 3.90"
+        },
+        {
+         "far": 3.9,
+         "condition": null,
+         "row": "R6 | 2.20 | 3.90"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 65,
+         "max_height_ft": 75,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R6A R6^1 R6-1 | 40 | 65 | 75 | 65 | 95"
+        },
+        {
+         "min_base_ft": 30,
+         "max_base_ft": 45,
+         "max_height_ft": 55,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R6^2 | 30 | 45 | 55 | 65 | 85"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 65,
+         "max_height_ft": 95,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R6A R6^1 R6-1 | 40 | 65 | 75 | 65 | 95"
+        },
+        {
+         "min_base_ft": 30,
+         "max_base_ft": 65,
+         "max_height_ft": 85,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R6^2 | 30 | 45 | 55 | 65 | 85"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R6-1": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 3.0,
+         "condition": null,
+         "row": "R6A R6^1 R6-1 R7B | 3.00 | 3.90"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 3.9,
+         "condition": null,
+         "row": "R6A R6^1 R6-1 R7B | 3.00 | 3.90"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 65,
+         "max_height_ft": 75,
+         "condition": null,
+         "row": "R6A R6^1 R6-1 | 40 | 65 | 75 | 65 | 95"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 65,
+         "max_height_ft": 95,
+         "condition": null,
+         "row": "R6A R6^1 R6-1 | 40 | 65 | 75 | 65 | 95"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R6-2": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 2.5,
+         "condition": null,
+         "row": "R6D R6-2 | 2.50 | 3.00"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 3.0,
+         "condition": null,
+         "row": "R6D R6-2 | 2.50 | 3.00"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 30,
+         "max_base_ft": 45,
+         "max_height_ft": 65,
+         "condition": null,
+         "row": "R6D R6-2 | 30 | 45 | 65 | 55 | 75"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 30,
+         "max_base_ft": 55,
+         "max_height_ft": 75,
+         "condition": null,
+         "row": "R6D R6-2 | 30 | 45 | 65 | 55 | 75"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R6A": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 3.0,
+         "condition": null,
+         "row": "R6A R6^1 R6-1 R7B | 3.00 | 3.90"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 3.9,
+         "condition": null,
+         "row": "R6A R6^1 R6-1 R7B | 3.00 | 3.90"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 65,
+         "max_height_ft": 75,
+         "condition": null,
+         "row": "R6A R6^1 R6-1 | 40 | 65 | 75 | 65 | 95"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 65,
+         "max_height_ft": 95,
+         "condition": null,
+         "row": "R6A R6^1 R6-1 | 40 | 65 | 75 | 65 | 95"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R6B": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 2.0,
+         "condition": null,
+         "row": "R6B | 2.00 | 2.40"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 2.4,
+         "condition": null,
+         "row": "R6B | 2.00 | 2.40"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 30,
+         "max_base_ft": 45,
+         "max_height_ft": 55,
+         "condition": null,
+         "row": "R6B | 30 | 45 | 55 | 45 | 65"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 30,
+         "max_base_ft": 45,
+         "max_height_ft": 65,
+         "condition": null,
+         "row": "R6B | 30 | 45 | 55 | 45 | 65"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R6D": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 2.5,
+         "condition": null,
+         "row": "R6D R6-2 | 2.50 | 3.00"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 3.0,
+         "condition": null,
+         "row": "R6D R6-2 | 2.50 | 3.00"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 30,
+         "max_base_ft": 45,
+         "max_height_ft": 65,
+         "condition": null,
+         "row": "R6D R6-2 | 30 | 45 | 65 | 55 | 75"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 30,
+         "max_base_ft": 55,
+         "max_height_ft": 75,
+         "condition": null,
+         "row": "R6D R6-2 | 30 | 45 | 65 | 55 | 75"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R7-1": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 4.0,
+         "condition": "For zoning lots, or portions thereof, located within 100 feet of a wide street",
+         "row": "R7A R7-1^1 R7-2^1 | 4.00 | 5.01"
+        },
+        {
+         "far": 3.44,
+         "condition": null,
+         "row": "R7-1 R7-2 | 3.44 | 5.01"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 5.01,
+         "condition": "For zoning lots, or portions thereof, located within 100 feet of a wide street",
+         "row": "R7A R7-1^1 R7-2^1 | 4.00 | 5.01"
+        },
+        {
+         "far": 5.01,
+         "condition": null,
+         "row": "R7-1 R7-2 | 3.44 | 5.01"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 75,
+         "max_height_ft": 85,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R7A R7-1^1 R7-2^1 | 40 | 75 | 85 | 85 | 115"
+        },
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 65,
+         "max_height_ft": 75,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R7-1^2 R7-2^2 | 40 | 65 | 75 | 85 | 105"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 85,
+         "max_height_ft": 115,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R7A R7-1^1 R7-2^1 | 40 | 75 | 85 | 85 | 115"
+        },
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 85,
+         "max_height_ft": 105,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R7-1^2 R7-2^2 | 40 | 65 | 75 | 85 | 105"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R7-2": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 4.0,
+         "condition": "For zoning lots, or portions thereof, located within 100 feet of a wide street",
+         "row": "R7A R7-1^1 R7-2^1 | 4.00 | 5.01"
+        },
+        {
+         "far": 3.44,
+         "condition": null,
+         "row": "R7-1 R7-2 | 3.44 | 5.01"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 5.01,
+         "condition": "For zoning lots, or portions thereof, located within 100 feet of a wide street",
+         "row": "R7A R7-1^1 R7-2^1 | 4.00 | 5.01"
+        },
+        {
+         "far": 5.01,
+         "condition": null,
+         "row": "R7-1 R7-2 | 3.44 | 5.01"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 75,
+         "max_height_ft": 85,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R7A R7-1^1 R7-2^1 | 40 | 75 | 85 | 85 | 115"
+        },
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 65,
+         "max_height_ft": 75,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R7-1^2 R7-2^2 | 40 | 65 | 75 | 85 | 105"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 85,
+         "max_height_ft": 115,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R7A R7-1^1 R7-2^1 | 40 | 75 | 85 | 85 | 115"
+        },
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 85,
+         "max_height_ft": 105,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R7-1^2 R7-2^2 | 40 | 65 | 75 | 85 | 105"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R7-3": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 5.0,
+         "condition": null,
+         "row": "R7X R7-3 | 5.00 | 6.00"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 6.0,
+         "condition": null,
+         "row": "R7X R7-3 | 5.00 | 6.00"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 95,
+         "max_height_ft": 125,
+         "condition": null,
+         "row": "R7X R7-3 | 60 | 95 | 125 | 105 | 145"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 105,
+         "max_height_ft": 145,
+         "condition": null,
+         "row": "R7X R7-3 | 60 | 95 | 125 | 105 | 145"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R7A": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 4.0,
+         "condition": null,
+         "row": "R7A R7-1^1 R7-2^1 | 4.00 | 5.01"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 5.01,
+         "condition": null,
+         "row": "R7A R7-1^1 R7-2^1 | 4.00 | 5.01"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 75,
+         "max_height_ft": 85,
+         "condition": null,
+         "row": "R7A R7-1^1 R7-2^1 | 40 | 75 | 85 | 85 | 115"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 85,
+         "max_height_ft": 115,
+         "condition": null,
+         "row": "R7A R7-1^1 R7-2^1 | 40 | 75 | 85 | 85 | 115"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R7B": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 3.0,
+         "condition": null,
+         "row": "R6A R6^1 R6-1 R7B | 3.00 | 3.90"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 3.9,
+         "condition": null,
+         "row": "R6A R6^1 R6-1 R7B | 3.00 | 3.90"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 65,
+         "max_height_ft": 75,
+         "condition": null,
+         "row": "R7B | 40 | 65 | 75 | 65 | 95"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 40,
+         "max_base_ft": 65,
+         "max_height_ft": 95,
+         "condition": null,
+         "row": "R7B | 40 | 65 | 75 | 65 | 95"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R7D": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 4.66,
+         "condition": null,
+         "row": "R7D | 4.66 | 5.60"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 5.6,
+         "condition": null,
+         "row": "R7D | 4.66 | 5.60"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 85,
+         "max_height_ft": 105,
+         "condition": null,
+         "row": "R7D | 60 | 85 | 105 | 95 | 125"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 95,
+         "max_height_ft": 125,
+         "condition": null,
+         "row": "R7D | 60 | 85 | 105 | 95 | 125"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R7X": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 5.0,
+         "condition": null,
+         "row": "R7X R7-3 | 5.00 | 6.00"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 6.0,
+         "condition": null,
+         "row": "R7X R7-3 | 5.00 | 6.00"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 95,
+         "max_height_ft": 125,
+         "condition": null,
+         "row": "R7X R7-3 | 60 | 95 | 125 | 105 | 145"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 105,
+         "max_height_ft": 145,
+         "condition": null,
+         "row": "R7X R7-3 | 60 | 95 | 125 | 105 | 145"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R8": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 6.02,
+         "condition": null,
+         "row": "R8A R8X R8 | 6.02 | 7.20"
+        },
+        {
+         "far": 7.2,
+         "condition": "For zoning lots, or portions thereof, located within 100 feet of a wide street",
+         "row": "R8 | 7.20^1 | 8.64^2"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 7.2,
+         "condition": null,
+         "row": "R8A R8X R8 | 6.02 | 7.20"
+        },
+        {
+         "far": 8.64,
+         "condition": "Outside of Mandatory Inclusionary Housing areas, for zoning lots, or portions thereof, located within 100 feet of a wide street, containing UAP developments or qualifying senior housing",
+         "row": "R8 | 7.20^1 | 8.64^2"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 85,
+         "max_height_ft": 115,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R8^2 | 60 | 85 | 115 | 105 | 145"
+        },
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 95,
+         "max_height_ft": 135,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R8^1 | 60 | 95 | 135 | 105 | 145"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 105,
+         "max_height_ft": 145,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R8^2 | 60 | 85 | 115 | 105 | 145"
+        },
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 105,
+         "max_height_ft": 145,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R8^1 | 60 | 95 | 135 | 105 | 145"
+        },
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 125,
+         "max_height_ft": 175,
+         "condition": "Outside of Mandatory Inclusionary Housing areas, for zoning lots, or portions thereof, located within 100 feet of a wide street, containing UAP developments or qualifying senior housing",
+         "row": "R8^3 | 60 | 95 | 135 | 125 | 175"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R8A": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 6.02,
+         "condition": null,
+         "row": "R8A R8X R8 | 6.02 | 7.20"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 7.2,
+         "condition": null,
+         "row": "R8A R8X R8 | 6.02 | 7.20"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 95,
+         "max_height_ft": 125,
+         "condition": null,
+         "row": "R8A | 60 | 95 | 125 | 105 | 145"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 105,
+         "max_height_ft": 145,
+         "condition": null,
+         "row": "R8A | 60 | 95 | 125 | 105 | 145"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R8B": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 4.0,
+         "condition": null,
+         "row": "R8B | 4.00 | 4.80"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 4.8,
+         "condition": null,
+         "row": "R8B | 4.00 | 4.80"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 55,
+         "max_base_ft": 65,
+         "max_height_ft": 75,
+         "condition": null,
+         "row": "R8B | 55 | 65 | 75 | 85 | 95"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 55,
+         "max_base_ft": 85,
+         "max_height_ft": 95,
+         "condition": null,
+         "row": "R8B | 55 | 65 | 75 | 85 | 95"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R8X": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 6.02,
+         "condition": null,
+         "row": "R8A R8X R8 | 6.02 | 7.20"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 7.2,
+         "condition": null,
+         "row": "R8A R8X R8 | 6.02 | 7.20"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 95,
+         "max_height_ft": 155,
+         "condition": null,
+         "row": "R8X | 60 | 95 | 155 | 105 | 175"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 105,
+         "max_height_ft": 175,
+         "condition": null,
+         "row": "R8X | 60 | 95 | 155 | 105 | 175"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R9": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 7.52,
+         "condition": null,
+         "row": "R9A R9 | 7.52 | 9.02"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 9.02,
+         "condition": null,
+         "row": "R9A R9 | 7.52 | 9.02"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 105,
+         "max_height_ft": 145,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R9A^1R9^1 | 60 | 105 | 145 | 135 | 185"
+        },
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 95,
+         "max_height_ft": 135,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R9A^2R9^2 | 60 | 95 | 135 | 135 | 185"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 135,
+         "max_height_ft": 185,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R9A^1R9^1 | 60 | 105 | 145 | 135 | 185"
+        },
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 135,
+         "max_height_ft": 185,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R9A^2R9^2 | 60 | 95 | 135 | 135 | 185"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R9-1": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 9.0,
+         "condition": null,
+         "row": "R9D R9X R9-1 | 9.00 | 10.80"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 10.8,
+         "condition": null,
+         "row": "R9D R9X R9-1 | 9.00 | 10.80"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 125,
+         "max_height_ft": 175,
+         "condition": null,
+         "row": "R9D R9-1 | 60 | 125 | 175 | 155 | 215"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 155,
+         "max_height_ft": 215,
+         "condition": null,
+         "row": "R9D R9-1 | 60 | 125 | 175 | 155 | 215"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R9A": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 7.52,
+         "condition": null,
+         "row": "R9A R9 | 7.52 | 9.02"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 9.02,
+         "condition": null,
+         "row": "R9A R9 | 7.52 | 9.02"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 105,
+         "max_height_ft": 145,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R9A^1R9^1 | 60 | 105 | 145 | 135 | 185"
+        },
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 95,
+         "max_height_ft": 135,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R9A^2R9^2 | 60 | 95 | 135 | 135 | 185"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 135,
+         "max_height_ft": 185,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R9A^1R9^1 | 60 | 105 | 145 | 135 | 185"
+        },
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 135,
+         "max_height_ft": 185,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R9A^2R9^2 | 60 | 95 | 135 | 135 | 185"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R9D": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 9.0,
+         "condition": null,
+         "row": "R9D R9X R9-1 | 9.00 | 10.80"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 10.8,
+         "condition": null,
+         "row": "R9D R9X R9-1 | 9.00 | 10.80"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 125,
+         "max_height_ft": 175,
+         "condition": null,
+         "row": "R9D R9-1 | 60 | 125 | 175 | 155 | 215"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 155,
+         "max_height_ft": 215,
+         "condition": null,
+         "row": "R9D R9-1 | 60 | 125 | 175 | 155 | 215"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R9X": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 9.0,
+         "condition": null,
+         "row": "R9D R9X R9-1 | 9.00 | 10.80"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 10.8,
+         "condition": null,
+         "row": "R9D R9X R9-1 | 9.00 | 10.80"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 105,
+         "max_base_ft": 125,
+         "max_height_ft": 175,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R9X^1 | 105 | 125 | 175 | 155 | 215"
+        },
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 125,
+         "max_height_ft": 165,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R9X^2 | 60 | 125 | 165 | 155 | 215"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 105,
+         "max_base_ft": 155,
+         "max_height_ft": 215,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R9X^1 | 105 | 125 | 175 | 155 | 215"
+        },
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 155,
+         "max_height_ft": 215,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R9X^2 | 60 | 125 | 165 | 155 | 215"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R10": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 10.0,
+         "condition": null,
+         "row": "R10A R10X R10 | 10.00 | 12.00"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 12.0,
+         "condition": null,
+         "row": "R10A R10X R10 | 10.00 | 12.00"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 155,
+         "max_height_ft": 215,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R10X^1 R10^1 | 60 | 155 | 215 | 155 | 235"
+        },
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 125,
+         "max_height_ft": 185,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R10A^2 R10X^2 R10^2 | 60 | 125 | 185 | 155 | 235"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 155,
+         "max_height_ft": 235,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R10X^1 R10^1 | 60 | 155 | 215 | 155 | 235"
+        },
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 155,
+         "max_height_ft": 235,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R10A^2 R10X^2 R10^2 | 60 | 125 | 185 | 155 | 235"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R10A": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 10.0,
+         "condition": null,
+         "row": "R10A R10X R10 | 10.00 | 12.00"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 12.0,
+         "condition": null,
+         "row": "R10A R10X R10 | 10.00 | 12.00"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 125,
+         "max_base_ft": 155,
+         "max_height_ft": 215,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R10A^1 | 125 | 155 | 215 | 155 | 235"
+        },
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 125,
+         "max_height_ft": 185,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R10A^2 R10X^2 R10^2 | 60 | 125 | 185 | 155 | 235"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 125,
+         "max_base_ft": 155,
+         "max_height_ft": 235,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R10A^1 | 125 | 155 | 215 | 155 | 235"
+        },
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 155,
+         "max_height_ft": 235,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R10A^2 R10X^2 R10^2 | 60 | 125 | 185 | 155 | 235"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
+    },
+    "R10X": {
+     "tier": "R6-R10",
+     "housing_types": {
+      "limited_to": null,
+      "quote": "ZR 22-121 Use Group II table, R6-R10 columns: Single-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; Two-family residence Detached: ● ● ● ● ●; Other Types: ● ● ● ● ●; All other types of residences , including apartment hotels and affordable independent residences for seniors: ● ● ● ● ● (● = Permitted)",
+      "section": "22-121",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121"
+     },
+     "min_lot": {
+      "applies_to": "single- or two-family detached or zero lot line",
+      "area_sqft": 2375,
+      "width_ft": 25,
+      "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "min_lot_other_residences": {
+      "applies_to": "other residences",
+      "area_sqft": 1700,
+      "width_ft": 18,
+      "row": "Other residences | R6 - R12 | 1,700 | 18",
+      "section": "23-12",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12"
+     },
+     "far": {
+      "standard": null,
+      "options": {
+       "standard": [
+        {
+         "far": 10.0,
+         "condition": null,
+         "row": "R10A R10X R10 | 10.00 | 12.00"
+        }
+       ],
+       "qualifying": [
+        {
+         "far": 12.0,
+         "condition": null,
+         "row": "R10A R10X R10 | 10.00 | 12.00"
+        }
+       ]
+      },
+      "section": "23-22",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+      "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."
+     },
+     "height": {
+      "max_height_ft": null,
+      "options": {
+       "standard": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 155,
+         "max_height_ft": 215,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R10X^1 R10^1 | 60 | 155 | 215 | 155 | 235"
+        },
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 125,
+         "max_height_ft": 185,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R10A^2 R10X^2 R10^2 | 60 | 125 | 185 | 155 | 235"
+        }
+       ],
+       "qualifying": [
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 155,
+         "max_height_ft": 235,
+         "condition": "For zoning lots or portions thereof within 100 feet of a wide street",
+         "row": "R10X^1 R10^1 | 60 | 155 | 215 | 155 | 235"
+        },
+        {
+         "min_base_ft": 60,
+         "max_base_ft": 155,
+         "max_height_ft": 235,
+         "condition": "For zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line",
+         "row": "R10A^2 R10X^2 R10^2 | 60 | 125 | 185 | 155 | 235"
+        }
+       ]
+      },
+      "section": "23-432",
+      "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+      "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."
+     }
     }
    },
    "verification": {
     "status": "verified",
-    "checked_on": "2026-11-16",
+    "checked_on": "2026-11-17",
     "method": "Fetched the Zoning Resolution chapters from zr.planning.nyc.gov and parsed the tables and sentences with scripts/build_zoning_standards.py; each rule keeps the verbatim text it came from.",
-    "evidence": "Article I Ch. 2 (12-10), Article II Ch. 2 (22-00, 22-121, 22-122), Article II Ch. 3 (23-11, 23-21, 23-421, 23-422)",
+    "evidence": "Article I Ch. 2 (12-10), Article II Ch. 2 (22-00, 22-121, 22-122), Article II Ch. 3 (23-11, 23-12, 23-21, 23-22, 23-421, 23-422, 23-432)",
     "unverified_fields": []
    }
   },
@@ -1059,7 +3096,7 @@
    "code": "DC Zoning Regulations of 2016 (11 DCMR)",
    "cite_prefix": "11 DCMR",
    "code_url": "https://dcregs.dc.gov",
-   "as_amended": "sections as published on dcregs.dc.gov on 2026-11-16",
+   "as_amended": "sections as published on dcregs.dc.gov on 2026-11-17",
    "districts_covered": [
     "R-1A",
     "R-1B",
@@ -1465,7 +3502,7 @@
    },
    "verification": {
     "status": "verified",
-    "checked_on": "2026-11-16",
+    "checked_on": "2026-11-17",
     "method": "Read each section's Word file from the chapter lists on dcregs.dc.gov (converted to text with LibreOffice) and parsed the tables and sentences with scripts/build_zoning_standards.py; each rule keeps the verbatim text or table row it came from.",
     "evidence": "11 DCMR Subtitle D §§ 100, 101, 201, 202, 203, 210; Subtitle U §§ 200, 201, 253",
     "unverified_fields": []

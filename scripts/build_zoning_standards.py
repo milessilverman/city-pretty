@@ -7,7 +7,8 @@ doesn't find what it expects stops the build (assertions), so a changed code can
 
 Covered so far:
   - New York City: Zoning Resolution (zr.planning.nyc.gov), R1-R5 districts (the districts that hold one- and
-    two-family homes). Districts R6-R12, commercial and manufacturing districts are not encoded.
+    two-family homes) and R6-R10 (build_nyc_high: 22-121, 23-12, 23-22, 23-432, with each footnoted condition kept).
+    R11, R12, commercial and manufacturing districts are not encoded.
   - NYC parcel use: PLUTO data dictionary, LAND USE CATEGORY (LandUse) codes.
   - Washington, DC: see build_dc() (11 DCMR Subtitle D, residential house zones).
 
@@ -82,6 +83,156 @@ def nyc_expand(tokens, section):
         for v in NYC_DISTRICTS:
             if v != t and v.startswith(t) and not v[len(t)].isdigit() and v not in mentioned and v not in out:
                 out.append(v)
+    return out
+
+
+def section_html(page_html, sec, next_sec):
+    """HTML of ZR section `sec` in a chapter page: from the last link to it that is followed by `next_sec`'s link."""
+    starts = [m.start() for m in re.finditer(r"/" + re.escape(sec) + r"\b", page_html)]
+    cands = [s for s in starts if page_html.find("/" + next_sec, s + 5) > s]
+    assert cands, f"section not found: {sec}"
+    s = max(cands)
+    return page_html[s: page_html.find("/" + next_sec, s + 5)]
+
+
+def sup_text(fragment):
+    """Cell text with footnote superscripts kept as ^n ("R6<sup>1</sup>" -> "R6^1"), so a footnoted row stays distinct."""
+    s = re.sub(r"<sup[^>]*>(?:\s|<[^>]+>)*(\d)(?:\s|<[^>]+>)*</sup>", r"^\1", fragment)   # the digit can sit inside a <span>
+    assert not re.search(r"<sup", s), "a superscript wasn't read as a footnote marker"
+    s = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", s))).strip()
+    s = re.sub(r"\s*\^", "^", s)
+    return re.sub(r"(R\d+)\s+-\s*(\d)", r"\1-\2", s)
+
+
+def sup_rows(table_html):
+    return [[sup_text(c) for c in re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", tr, flags=re.S)] for tr in re.findall(r"<tr.*?</tr>", table_html, flags=re.S)]
+
+
+def sup_footnotes(after_table_html):
+    """{number: text} for the footnotes printed under a ZR table ("1 For zoning lots ... 2 Outside of ...")."""
+    t = sup_text(after_table_html)
+    t = re.sub(r"\s+([,.;])", r"\1", t)
+    parts = re.split(r"(?:^|\s|\^)([1-3])\s+(?=For |Outside )", t)
+    out = {}
+    for i in range(1, len(parts) - 1, 2):
+        out[parts[i]] = parts[i + 1].split(" <")[0].strip()
+    return out
+
+
+HIGH_TOKEN = r"(R\d+(?:-\d)?[A-Z]?)(?:\^(\d))?"
+HIGH_RANGE = range(6, 11)   # R6-R10; R11 and R12 are in the same tables but not encoded here
+
+
+def is_high(dist):
+    return int(re.match(r"R(\d+)", dist).group(1)) in HIGH_RANGE
+
+
+def build_nyc_high(ch22, ch23, url):
+    """R6-R10 (ZR 22-121, 23-12, 23-22, 23-432). The tables list every suffixed district on its own row, so each row
+    applies to exactly the districts it names (ZR 11-25's suffix rule adds none). Where a district's value depends on a
+    condition (a footnote: within 100 feet of a wide street, outside a Mandatory Inclusionary Housing area for UAP or
+    senior housing, a narrow street), every value is kept with the footnote's own words; a district row without the
+    footnote is the value for its other lots."""
+    out = {}
+
+    # 22-121: Use Group II table. R6-R12 columns are "●" (permitted) for every residence type, with no "P".
+    s121 = section_html(ch22, "22-121", "22-122")
+    rows = sup_rows(re.search(r"<table.*?</table>", s121, flags=re.S).group(0))
+    head = next(r for r in rows if r[:2] == ["Uses", "R1"])
+    cols = head[1:]
+    assert cols == [f"R{i}" for i in range(1, 13)], cols
+    res_rows = []
+    for r in rows:
+        if len(r) >= 13 and r[-12:] and all(c in ("●", "● P", "♦", "○", "–", "S", "P") or re.fullmatch(r"[●♦○–SP ]+", c) for c in r[-12:]):
+            label = " ".join(r[:-12])
+            res_rows.append((label, r[-12:]))
+    assert len(res_rows) == 5, res_rows   # single-family detached / other, two-family detached / other, all other types
+    for label, cells in res_rows:
+        for i in range(5, 10):   # R6..R10
+            assert cells[i] == "●", (label, cols[i], cells[i])
+    ht_quote = "ZR 22-121 Use Group II table, R6-R10 columns: " + "; ".join(f"{label}: " + " ".join(cells[5:10]) for label, cells in res_rows) + " (● = Permitted)"
+
+    # 23-12: minimum lot area and width for R6-R12.
+    s12 = section_html(ch23, "23-12", "23-20")
+    rows = sup_rows(re.search(r"<table.*?</table>", s12, flags=re.S).group(0))
+    assert rows[0] == ["Type of Residence", "District", "Minimum Lot Area (in sq. ft)", "Minimum Lot Width (in ft)"], rows[0]
+    assert len(rows) == 3 and rows[1][1] == rows[2][1] == "R6 - R12", rows
+    det = {"applies_to": "single- or two-family detached or zero lot line", "area_sqft": int(rows[1][2].replace(",", "")), "width_ft": int(rows[1][3]),
+           "row": " | ".join(rows[1]), "section": "23-12", "url": url("ii", 3, "23-12")}
+    oth = {"applies_to": "other residences", "area_sqft": int(rows[2][2].replace(",", "")), "width_ft": int(rows[2][3]),
+           "row": " | ".join(rows[2]), "section": "23-12", "url": url("ii", 3, "23-12")}
+    assert rows[1][0].startswith("Single- or two-family") and rows[2][0] == "Other residences"
+
+    # 23-22: maximum residential floor area ratio, standard residences vs qualifying affordable or senior housing.
+    s22 = section_html(ch23, "23-22", "23-23")
+    tb = re.search(r"<table.*?</table>", s22, flags=re.S)
+    rows = sup_rows(tb.group(0))
+    fn22 = sup_footnotes(s22[tb.end():])
+    assert rows[0] == ["District", "Standard residences", "Qualifying affordable housing or qualifying senior housing"], rows[0]
+    assert set(fn22) == {"1", "2"} and fn22["1"].startswith("For zoning lots, or portions thereof, located within 100 feet of a wide street") \
+        and fn22["2"].startswith("Outside of Mandatory Inclusionary Housing areas"), fn22
+    far = {}
+    for r in rows[1:]:
+        toks = re.findall(HIGH_TOKEN, r[0])
+        assert toks and " ".join(t + (f"^{n}" if n else "") for t, n in toks) == r[0], r
+        sv, qv = re.fullmatch(r"(\d+\.\d\d)(?:\^(\d))?", r[1]), re.fullmatch(r"(\d+\.\d\d)(?:\^(\d))?", r[2])
+        assert sv and qv, r
+        for dist, dfn in toks:
+            if not is_high(dist):
+                continue
+            assert not (dfn and (sv.group(2) or qv.group(2))), r
+            e = far.setdefault(dist, {"standard": [], "qualifying": []})
+            row = " | ".join(r)
+            e["standard"].append({"far": float(sv.group(1)), "condition": fn22.get(dfn or sv.group(2)), "row": row})
+            e["qualifying"].append({"far": float(qv.group(1)), "condition": fn22.get(dfn or qv.group(2)), "row": row})
+
+    # 23-432: minimum base height, maximum base height and maximum building height.
+    s432 = section_html(ch23, "23-432", "23-433")
+    tb = re.search(r"<table.*?</table>", s432, flags=re.S)
+    rows = sup_rows(tb.group(0))
+    fn432 = sup_footnotes(s432[tb.end():])
+    assert set(fn432) == {"1", "2", "3"} and fn432["1"].startswith("For zoning lots or portions thereof within 100 feet of a wide street") \
+        and fn432["2"].startswith("For zoning lots or portions thereof on a narrow street") and fn432["3"].startswith("Outside of Mandatory Inclusionary Housing areas"), fn432
+    assert rows[0][0] == "District" and rows[0][2:] == ["Standard residences", "Qualifying affordable housing or qualifying senior housing"], rows[0]
+    assert rows[1] == ["Maximum base height (in feet)", "Maximum height of buildings or other structures (in feet)"] * 2, rows[1]
+    hts = {}
+    for r in rows[2:]:
+        toks = re.findall(HIGH_TOKEN, r[0])
+        assert toks and len(r) == 6 and all(re.fullmatch(r"\d+", c) for c in r[1:]), r
+        mn, sb, sh, qb, qh = (int(c) for c in r[1:])
+        row = " | ".join(r)
+        for dist, dfn in toks:
+            if not is_high(dist):
+                continue
+            e = hts.setdefault(dist, {"standard": [], "qualifying": []})
+            cond = fn432.get(dfn)
+            # Footnote 3 rows are for lots containing UAP developments or qualifying senior housing: their values go to
+            # the qualifying column only (their standard-residence values repeat the footnote-1 row; checked below).
+            if dfn != "3":
+                e["standard"].append({"min_base_ft": mn, "max_base_ft": sb, "max_height_ft": sh, "condition": cond, "row": row})
+            e["qualifying"].append({"min_base_ft": mn, "max_base_ft": qb, "max_height_ft": qh, "condition": cond, "row": row,
+                                    "_std": (sb, sh)})
+    for dist, e in hts.items():
+        for q in e["qualifying"]:
+            if q["condition"] == fn432["3"]:
+                f1 = [s for s in e["standard"] if s["condition"] == fn432["1"]]
+                assert f1 and (f1[0]["max_base_ft"], f1[0]["max_height_ft"]) == q["_std"], (dist, q)
+        for q in e["qualifying"]:
+            q.pop("_std")
+
+    assert set(far) == set(hts), (sorted(set(far) ^ set(hts)))
+    for dist in sorted(far, key=lambda x: (int(re.match(r"R(\d+)", x).group(1)), x)):
+        f, h = far[dist], hts[dist]
+        assert f["standard"] and f["qualifying"] and h["standard"] and h["qualifying"], dist
+        out[dist] = {
+            "tier": "R6-R10",
+            "housing_types": {"limited_to": None, "quote": ht_quote, "section": "22-121", "url": url("ii", 2, "22-121")},
+            "min_lot": dict(det), "min_lot_other_residences": dict(oth),
+            "far": {"standard": None, "options": f, "section": "23-22", "url": url("ii", 3, "23-22"),
+                    "qualifying_note": "The higher column applies to zoning lots containing qualifying affordable housing or qualifying senior housing (ZR 12-10 definitions); whether a building qualifies isn't checked here."},
+            "height": {"max_height_ft": None, "options": h, "section": "23-432", "url": url("ii", 3, "23-432"),
+                       "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."},
+        }
     return out
 
 
@@ -187,13 +338,18 @@ def build_nyc():
     qrs = re.search(r"A “qualifying residential site” is a zoning lot, or portion thereof: in an R1 through R5 District, that: meets the following criteria: has a minimum lot area of at least 5,000 square feet; is located within the Greater Transit Zone\..*?is not located within an R1 or R2 District;", t12)
     assert qrs
 
+    high = build_nyc_high(ch22, ch23, url)
+    assert not set(high) & set(d), set(high) & set(d)
+    d.update(high)
+    covered = NYC_DISTRICTS + list(high)
+
     return {
         "id": "nyc", "name": "New York City", "counties": ["36005", "36047", "36061", "36081", "36085"],
         "zone_source": {"kind": "parcel_field", "field": "ZoneDist1", "lot_area_field": "LotArea", "lot_width_field": "LotFront", "floor_area_field": "BldgArea",
                         "note": "MapPLUTO ZoneDist1 is the district covering the largest share of the tax lot (PLUTO data dictionary)."},
         "code": "New York City Zoning Resolution", "cite_prefix": "ZR", "code_url": base, "as_amended": "sections amended 12/5/2024 (City of Yes for Housing Opportunity), as published on " + TODAY,
-        "districts_covered": NYC_DISTRICTS,
-        "not_covered": "R6-R12, commercial (C), manufacturing (M) and special-purpose district standards are not encoded here.",
+        "districts_covered": covered,
+        "not_covered": "R11, R12, commercial (C), manufacturing (M) and special-purpose district standards are not encoded here.",
         "caveats": [caveat,
                     {"text": "A zoning lot can be made of more than one tax lot, and MapPLUTO's floor area is the city's recorded gross floor area, not zoning floor area; both are screening inputs only.",
                      "section": "PLUTO data dictionary (LotArea, BldgArea)", "url": "https://s-media.nyc.gov/agencies/dcp/assets/files/pdf/data-tools/bytes/pluto_datadictionary.pdf"}],
@@ -202,7 +358,7 @@ def build_nyc():
         "districts": d,
         "verification": {"status": "verified", "checked_on": TODAY,
                          "method": "Fetched the Zoning Resolution chapters from zr.planning.nyc.gov and parsed the tables and sentences with scripts/build_zoning_standards.py; each rule keeps the verbatim text it came from.",
-                         "evidence": "Article I Ch. 2 (12-10), Article II Ch. 2 (22-00, 22-121, 22-122), Article II Ch. 3 (23-11, 23-21, 23-421, 23-422)",
+                         "evidence": "Article I Ch. 2 (12-10), Article II Ch. 2 (22-00, 22-121, 22-122), Article II Ch. 3 (23-11, 23-12, 23-21, 23-22, 23-421, 23-422, 23-432)",
                          "unverified_fields": []},
     }
 
@@ -220,9 +376,13 @@ def build_nyc_use_codes():
     codes = dict(re.findall(r"^\s+(0[1-9]|1[01])\s{2,}(\S.*?)\s*$", block, flags=re.M))
     assert len(codes) == 11 and codes["01"] == "One & Two Family Buildings", codes
     kind = {"01": "residential", "02": "residential", "03": "residential", "04": "mixed", "11": "vacant"}
+    # Building form from the label itself: "Multi-Family ... Buildings" are apartment buildings, so the page doesn't run
+    # house checks (ADU, pool, lot split) on them. "One & Two Family Buildings" is left to the record's unit count.
+    assert codes["02"].startswith("Multi-Family") and codes["03"].startswith("Multi-Family"), codes
+    form = {c: "multi-family" for c, lab in codes.items() if lab.startswith("Multi-Family")}
     return {
         "id": "nyc_pluto_landuse", "counties": ["36005", "36047", "36061", "36081", "36085"], "field": "LandUse",
-        "codes": {c: {"label": lab, "type": kind.get(c, "non-residential")} for c, lab in sorted(codes.items())},
+        "codes": {c: dict({"label": lab, "type": kind.get(c, "non-residential")}, **({"form": form[c]} if c in form else {})) for c, lab in sorted(codes.items())},
         "source": {"name": f"PLUTO Data Dictionary, {version}, LAND USE CATEGORY (LandUse)", "url": pdf_url},
         "type_rule": "The label is the agency's; the type is read from it: one- and two-family and multi-family buildings are residential, mixed residential & commercial is mixed, vacant land is vacant, all others non-residential.",
         "verification": {"status": "verified", "checked_on": TODAY, "method": "Parsed from the PDF by scripts/build_zoning_standards.py", "evidence": f"{len(codes)} codes", "unverified_fields": []},
@@ -481,6 +641,11 @@ def main():
     }
     json.dump(uses, open(os.path.join(ROOT, "app/data/parcel_use_codes.json"), "w"), indent=1, ensure_ascii=False)
     for dd, r in nyc["districts"].items():
+        if r.get("tier") == "R6-R10":
+            fo, ho = r["far"]["options"], r["height"]["options"]
+            print(dd, r["min_lot"]["area_sqft"], "FAR std", [(o["far"], (o["condition"] or "")[:25]) for o in fo["standard"]], "qual", [o["far"] for o in fo["qualifying"]],
+                  "HT std", [(o["max_base_ft"], o["max_height_ft"], (o["condition"] or "")[:25]) for o in ho["standard"]], "qual", [(o["max_base_ft"], o["max_height_ft"]) for o in ho["qualifying"]])
+            continue
         print(dd, r["housing_types"]["limited_to"], r["min_lot"]["area_sqft"], r["min_lot"]["width_ft"], r["far"]["standard"], r["height"]["max_height_ft"], r["height"].get("perimeter_wall_ft"))
     for z, r in dc["districts"].items():
         print(z, [(x["structure"], x["width_ft"], x["area_sqft"]) for x in r["min_lot"]], r["height"]["max_height_ft"], r["height"]["max_stories"], [(x["structure"], x["max_pct"]) for x in r["lot_occupancy"]])

@@ -2,7 +2,7 @@
  "_source": {
   "description": "Parcel-use code tables, from each publisher's own documentation, used to tell whether a parcel is a home.",
   "built_by": "scripts/build_zoning_standards.py",
-  "built_on": "2026-11-16"
+  "built_on": "2026-11-17"
  },
  "systems": [
   {
@@ -22,11 +22,13 @@
     },
     "02": {
      "label": "Multi-Family Walk-Up Buildings",
-     "type": "residential"
+     "type": "residential",
+     "form": "multi-family"
     },
     "03": {
      "label": "Multi-Family Elevator Buildings",
-     "type": "residential"
+     "type": "residential",
+     "form": "multi-family"
     },
     "04": {
      "label": "Mixed Residential & Commercial Buildings",
@@ -68,7 +70,7 @@
    "type_rule": "The label is the agency's; the type is read from it: one- and two-family and multi-family buildings are residential, mixed residential & commercial is mixed, vacant land is vacant, all others non-residential.",
    "verification": {
     "status": "verified",
-    "checked_on": "2026-11-16",
+    "checked_on": "2026-11-17",
     "method": "Parsed from the PDF by scripts/build_zoning_standards.py",
     "evidence": "11 codes",
     "unverified_fields": []
@@ -635,7 +637,7 @@
    "type_rule": "Labels are OTR's. Residential: labels starting 'Residential' (except garages and transient uses) and condominium units whose OTR description says single-family use. Mixed: 'Residential-Mixed Use'. Vacant: labels starting 'Vacant'. Codes 000 'Not assigned yet' and 995 'Condo Main' (a condominium's master record) are unknown. Everything else, including garages (no living quarters), parking units, hotels, dormitories, commercial and institutional codes, is non-residential. Form (residential and mixed only): condominium labels are a unit; cooperative, apartment, multi-family and 5-unit conversion labels are a multi-family building; 'Less than 5' flats and conversions are small multi-unit (2-4); the rest single-family.",
    "verification": {
     "status": "verified",
-    "checked_on": "2026-11-16",
+    "checked_on": "2026-11-17",
     "method": "Read from OTR's USECODE table by scripts/build_zoning_standards.py",
     "evidence": "109 codes",
     "unverified_fields": []
@@ -1374,7 +1376,7 @@
    "type_rule": "Labels are the Assessor's; the type is read from the label. Residential: SINGLE FAMILY, DUPLEX, TRIPLEX, QUADPLEX, RESIDENTIAL CONDO, ZERO LOT LINE, MOBILE HOME, RESIDENTIAL COMBO/MISC and the APARTMENT labels. Vacant: labels containing VACANT. Unknown (a home may or may not be there): RURAL COMBO, PARSONAGE, DORMITORY/BOARDING HOUSE. All others non-residential. Form: SINGLE FAMILY, ZERO LOT LINE and MOBILE HOME single-family; DUPLEX, TRIPLEX, QUADPLEX small multi-unit (2-4); RESIDENTIAL CONDO a unit; APARTMENT labels a multi-family building; RESIDENTIAL COMBO/MISC not stated.",
    "verification": {
     "status": "verified",
-    "checked_on": "2026-11-16",
+    "checked_on": "2026-11-17",
     "method": "Field definition read from the metadata PDF; the distinct LUCode/LUDesc pairs read from the layer by scripts/build_zoning_standards.py",
     "evidence": "89 labels",
     "unverified_fields": []

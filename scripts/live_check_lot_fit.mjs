@@ -32,6 +32,16 @@ const BOXES = [
   { fips: "36047", name: "Brooklyn (Marine Park / Midwood)", box: [-73.95, 40.605, -73.92, 40.625] },
   { fips: "36005", name: "Bronx (Riverdale / Throggs Neck)", box: [-73.915, 40.885, -73.895, 40.90] },
 ];
+// R6-R10 (added 17 Nov 2026): boxes in four boroughs with mid- and high-density residence districts. One- and
+// two-family houses and apartment buildings (PLUTO LandUse 01-03) are both sampled; apartment buildings get the
+// district's floor area but no house-only rows.
+const HIGH_BOXES = [
+  { fips: "36047", name: "Brooklyn (Park Slope / Prospect Heights)", box: [-73.985, 40.665, -73.965, 40.68] },
+  { fips: "36061", name: "Manhattan (Upper West Side)", box: [-73.985, 40.78, -73.965, 40.795] },
+  { fips: "36081", name: "Queens (Jackson Heights / Elmhurst)", box: [-73.895, 40.745, -73.875, 40.76] },
+  { fips: "36005", name: "Bronx (Grand Concourse)", box: [-73.925, 40.825, -73.91, 40.84] },
+];
+const isHigh = (z) => !!(NYC.districts[z] && NYC.districts[z].tier === "R6-R10");
 const OTHER = [
   { fips: "48453", name: "Travis TX, 809 Park Blvd (Austin: code on Municode, withheld)", lat: 30.301426, lng: -97.722411 },
   { fips: "01073", name: "Jefferson AL (no standards read)", lat: 33.4877, lng: -86.7697 },
@@ -69,15 +79,17 @@ async function getText(url) {
 }
 const flat = (h) => h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, " ").replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&#8217;|&rsquo;/g, "’").replace(/&ldquo;|&#8220;/g, "“").replace(/&rdquo;|&#8221;/g, "”").replace(/&#8211;|&ndash;/g, "–").replace(/\s+/g, " ").replace(/ ([,.;:)])/g, "$1");
 
-async function sampleLots(b) {
-  const q = new URLSearchParams({ where: "LandUse='01' AND (ZoneDist1 LIKE 'R1%' OR ZoneDist1 LIKE 'R2%' OR ZoneDist1 LIKE 'R3%' OR ZoneDist1 LIKE 'R4%' OR ZoneDist1 LIKE 'R5%')",
+const LOW_WHERE = "LandUse='01' AND (ZoneDist1 LIKE 'R1%' OR ZoneDist1 LIKE 'R2%' OR ZoneDist1 LIKE 'R3%' OR ZoneDist1 LIKE 'R4%' OR ZoneDist1 LIKE 'R5%')";
+const HIGH_WHERE = "LandUse IN ('01','02','03') AND (ZoneDist1 LIKE 'R6%' OR ZoneDist1 LIKE 'R7%' OR ZoneDist1 LIKE 'R8%' OR ZoneDist1 LIKE 'R9%' OR ZoneDist1 LIKE 'R10%')";
+async function sampleLots(b, where = LOW_WHERE, per = 2) {
+  const q = new URLSearchParams({ where,
     geometry: b.box.join(","), geometryType: "esriGeometryEnvelope", inSR: "4326", spatialRel: "esriSpatialRelIntersects",
-    outFields: "BBL,Address,ZoneDist1,LotArea,LotFront,BldgArea,UnitsRes", returnGeometry: "true", outSR: "4326", resultRecordCount: "200", f: "json" });
+    outFields: "BBL,Address,ZoneDist1,LotArea,LotFront,BldgArea,UnitsRes,LandUse", returnGeometry: "true", outSR: "4326", resultRecordCount: "400", f: "json" });
   const d = await getJson(`${PLUTO}/query?${q}`);
   const feats = (d && d.features || []).filter((f) => f.geometry && f.geometry.rings && NYC.districts[f.attributes.ZoneDist1]);
   const byDist = {};
   for (const f of feats) (byDist[f.attributes.ZoneDist1] ||= []).push(f);
-  const picks = Object.values(byDist).map((fs_) => fs_[Math.floor(fs_.length / 2)]).slice(0, 2);
+  const picks = Object.values(byDist).map((fs_) => fs_[Math.floor(fs_.length / 2)]).slice(0, per);
   return picks.map((f) => {
     const r = f.geometry.rings[0], n = r.length - 1;
     return { lat: r.slice(0, n).reduce((s, p) => s + p[1], 0) / n, lng: r.slice(0, n).reduce((s, p) => s + p[0], 0) / n, pluto_sample: f.attributes };
@@ -94,6 +106,7 @@ async function verifyQuotes() {
   const need = (url, what, text) => out.push({ url, what, text });
   const D = NYC.districts;
   for (const [dd, r] of Object.entries(D)) {
+    if (r.tier === "R6-R10") continue;   // verifyHighRows()
     if (r.housing_types.limited_to) need(r.housing_types.url, `${dd} housing types`, r.housing_types.quote);
     need(r.min_lot.url, `${dd} min lot`, r.min_lot.row.split(" | ")[0]);
     need(r.far.url, `${dd} FAR`, r.far.row.split(" | ")[0]);
@@ -111,6 +124,55 @@ async function verifyQuotes() {
     seen.set(key, { url: o.url, what: o.what, found: t == null ? null : o.text.split(" … ").every((part) => t.includes(part)) });
   }
   return [...seen.values()];
+}
+
+// The same superscript-aware cell text as scripts/build_zoning_standards.py (sup_text): "R6<sup>1</sup>" -> "R6^1".
+const supText = (h) => h.replace(/<sup[^>]*>(?:\s|<[^>]+>)*(\d)(?:\s|<[^>]+>)*<\/sup>/g, "^$1").replace(/<[^>]+>/g, " ").replace(/&nbsp;|\u00a0/g, " ")
+  .replace(/&amp;/g, "&").replace(/\s+/g, " ").trim().replace(/\s*\^/g, "^").replace(/(R\d+)\s+-\s*(\d)/g, "$1-$2");
+const liveRows = (h) => (h.match(/<tr[\s\S]*?<\/tr>/g) || []).map((tr) => (tr.match(/<t[dh][^>]*>[\s\S]*?<\/t[dh]>/g) || []).map((c) => supText(c.replace(/^<t[dh][^>]*>|<\/t[dh]>$/g, ""))));
+// R6-R10: re-fetch 22-121, 23-12, 23-22 and 23-432 and confirm every row the data was parsed from is still a row of the
+// live table, and that 22-121 still marks every residence type "●" in the R6-R10 columns.
+async function verifyHighRows() {
+  const out = [], pages = {};
+  const rowsOf = async (url) => (url in pages ? pages[url] : (pages[url] = await getText(url).then((h) => h ? liveRows(h).map((r) => r.join(" | ")) : null)));
+  const want = new Map();
+  for (const [dd, r] of Object.entries(NYC.districts)) {
+    if (r.tier !== "R6-R10") continue;
+    for (const x of [r.min_lot, r.min_lot_other_residences]) want.set(`${x.url}||${x.row}`, { url: x.url, what: `${dd} min lot`, row: x.row });
+    for (const o of [...r.far.options.standard, ...r.far.options.qualifying]) want.set(`${r.far.url}||${o.row}`, { url: r.far.url, what: `${dd} FAR`, row: o.row });
+    for (const o of [...r.height.options.standard, ...r.height.options.qualifying]) want.set(`${r.height.url}||${o.row}`, { url: r.height.url, what: `${dd} height`, row: o.row });
+  }
+  for (const w of want.values()) {
+    const rows = await rowsOf(w.url);
+    out.push({ url: w.url, what: w.what, row: w.row, found: rows == null ? null : rows.includes(w.row) });
+  }
+  const u = "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121", h = await getText(u);
+  if (h) {
+    const rows = liveRows(h), head = rows.find((r) => r[0] === "Uses" && r[1] === "R1");
+    const res = rows.filter((r) => r.length >= 13 && r.slice(-12).every((c) => /^[●♦○–SP ]+$/.test(c)));
+    out.push({ url: u, what: "22-121: every residence type ● in R6-R10", found: !!head && res.length === 5 && res.every((r) => r.slice(-12).slice(5, 10).every((c) => c === "●")) });
+  } else out.push({ url: u, what: "22-121", found: null });
+  return out;
+}
+
+const USE_NYC = () => USES.systems.find((s) => s.id === "nyc_pluto_landuse");
+function expectedNycHigh(lot) {
+  const z = lot.ZoneDist1, r = NYC.districts[z], so = r.far.options.standard, qo = r.far.options.qualifying, hs = r.height.options.standard, hq = r.height.options.qualifying;
+  const cond = (o, opts) => o.condition ? o.condition.replace(/^For /, "for ").replace(/^Outside /, "outside ") : (opts.some((x) => x.condition) ? "for other lots" : "");
+  const farTxt = (opts) => opts.map((o) => `${o.far.toFixed(2)}${cond(o, opts) ? ` ${cond(o, opts)}` : ""}`).join("; ");
+  const htTxt = (opts) => opts.map((o) => `base ${o.min_base_ft}–${o.max_base_ft} ft, building up to ${o.max_height_ft} ft${cond(o, opts) ? ` ${cond(o, opts)}` : ""}`).join("; ");
+  const use = USE_NYC().codes[lot.LandUse];
+  const exp = [`Zoning district ${z} (New York City Zoning Resolution)`, use.label, `every type of residence is permitted in ${z} (ZR 22-121)`,
+    `Minimum lot: ${fmtN(r.min_lot.area_sqft)} sq ft and ${r.min_lot.width_ft} ft wide for a detached or zero-lot-line one- or two-family home`,
+    `Height, standard residences: ${htTxt(hs)}; qualifying affordable or senior housing: ${htTxt(hq)} (ZR 23-432)`,
+    `Floor area ratio, standard residences: ${farTxt(so)}; qualifying affordable or senior housing: ${farTxt(qo)} (ZR 23-22)`];
+  if (lot.LotArea > 0) {
+    const fl = Math.min(...so.map((o) => o.far));
+    exp.push(`For standard residences, up to ${fmtN(fl * lot.LotArea)} sq ft of floor area on this ${fmtN(lot.LotArea)} sq ft lot (FAR ${fl.toFixed(2)}`);
+  }
+  if (use.form === "multi-family") exp.push("an apartment building");
+  else exp.push(`Second home (two-family or more)`);
+  return exp;
 }
 
 function expectedNyc(P, lot) {
@@ -228,6 +290,7 @@ async function main() {
   const results = { ran_on: new Date().toISOString(), script: "scripts/live_check_lot_fit.mjs", nyc: [], other: [], quotes: null };
   try {
     results.quotes = await verifyQuotes();
+    results.high_rows = await verifyHighRows();
     const page = await browser.newPage();
     const errors = [];
     page.on("pageerror", (e) => errors.push(String(e)));
@@ -245,6 +308,24 @@ async function main() {
         row.panel_excerpt = text.split("\n").filter((l) => /Zoning district|Floor area|Second home|Split into two|Ancillary|Height limit|One & Two/.test(l)).join("\n").slice(0, 1500);
         results.nyc.push(row);
         console.log(b.fips, lot.ZoneDist1, lot.Address, row.ok ? "OK" : "MISSING " + JSON.stringify(row.missing));
+      }
+    }
+    results.nyc_high = [];
+    for (const b of process.env.LIVE_ONLY_OTHER === "1" ? [] : HIGH_BOXES) {
+      for (const P of await sampleLots(b, HIGH_WHERE, 3)) {
+        const lot = await plutoAt(P.lat, P.lng);
+        const row = { county: b.fips, area: b.name, lat: +P.lat.toFixed(6), lng: +P.lng.toFixed(6), pluto: lot };
+        if (!lot || !isHigh(lot.ZoneDist1) || !["01", "02", "03"].includes(lot.LandUse)) { row.skipped = "point not inside an R6-R10 residential lot when re-queried"; results.nyc_high.push(row); continue; }
+        const text = await openHouse(page, b.fips, { lat: P.lat, lng: P.lng });
+        const exp = expectedNycHigh(lot);
+        row.missing = exp.filter((e) => !text.includes(e));
+        const mf = USE_NYC().codes[lot.LandUse].form === "multi-family";
+        row.house_rows_on_apartment_building = mf && /Second home \(two-family or more\)|Swimming pool|Detached ADU/.test(text);
+        row.null_height = /null ft|NaN/.test(text);
+        row.ok = row.missing.length === 0 && !row.house_rows_on_apartment_building && !row.null_height;
+        row.panel_excerpt = text.split("\n").filter((l) => /Zoning district|Floor area|Second home|Split into two|Height limit|apartment building|Family/.test(l)).join("\n").slice(0, 2000);
+        results.nyc_high.push(row);
+        console.log(b.fips, lot.ZoneDist1, lot.LandUse, lot.Address, row.ok ? "OK" : "MISSING " + JSON.stringify({ missing: row.missing, house_rows: row.house_rows_on_apartment_building, null_height: row.null_height }));
       }
     }
     results.dc_quotes = await verifyDcQuotes();
@@ -299,7 +380,9 @@ async function main() {
   const out = path.join(root, `data/backtests/live_check_lot_fit_${day}.json`);
   fs.writeFileSync(out, JSON.stringify(results, null, 1));
   const q = results.quotes;
+  const hr = results.high_rows || [], nh = results.nyc_high || [];
   console.log(`quotes found ${q.filter((x) => x.found).length}/${q.length}; nyc ok ${results.nyc.filter((r) => r.ok).length}/${results.nyc.filter((r) => !r.skipped).length}; ` +
+    `R6-R10 rows found ${hr.filter((x) => x.found).length}/${hr.length}; R6-R10 lots ok ${nh.filter((r) => r.ok).length}/${nh.filter((r) => !r.skipped).length} in ${new Set(nh.filter((r) => !r.skipped).map((r) => r.county)).size} boroughs; ` +
     `dc quotes ${results.dc_quotes.filter((x) => x.found).length}/${results.dc_quotes.length}; dc ok ${results.dc.filter((r) => r.ok).length}/${results.dc.filter((r) => !r.skipped).length}; ` +
     `nashville ok ${results.nashville.filter((r) => r.ok).length}/${results.nashville.length}; wrote ${out}`);
 }

@@ -1094,11 +1094,31 @@ test("what fits on this lot uses the NYC Zoning Resolution read from the code, a
   expect(b).toContain("is smaller, which may mean it predates the minimum");
   expect(b).toContain("Two lots would each need at least 2,375 sq ft and 25 ft of width");
 
-  // A district not encoded (R6) says so; a commercial lot (LandUse 05) gets no home checks.
+  // R6-R10 (ZR 23-22 / 23-432, added 17 Nov 2026): an apartment building in R6 gets the district's floor area with
+  // the code's own conditions (never one unconditioned figure), and no house-only rows.
   pluto = { ...pluto, ZoneDist1: "R6", LandUse: "02", UnitsRes: 6 };
   const r6 = await houseText("36047", { lat: 40.738, lng: -73.762 });
-  expect(r6).toMatch(/Local zoning standards\s*—\s*Not on file: New York City's standards are on file only for R1-1/);
-  expect(r6).toContain("this lot is R6");
+  expect(r6).toContain("Zoning district R6 (New York City Zoning Resolution)");
+  expect(r6).toContain("every type of residence is permitted in R6 (ZR 22-121)");
+  expect(r6).toContain("Floor area ratio, standard residences: 3.00 for zoning lots, or portions thereof, located within 100 feet of a wide street; 2.20 for other lots");
+  expect(r6).toContain("For standard residences, up to 4,400 sq ft of floor area on this 2,000 sq ft lot (FAR 2.20, for other lots), or up to 6,000 sq ft (FAR 3.00) for zoning lots, or portions thereof, located within 100 feet of a wide street (ZR 23-22); which applies isn't checked here");
+  expect(r6).toContain("Qualifying affordable or senior housing can reach FAR 3.90");
+  expect(r6).toContain("an apartment building");
+  expect(r6).not.toContain("Second home (two-family or more)");
+  expect(r6).not.toContain("Local zoning standards");
+  // A one-family house in R7-1: every type allowed; heights by street, from 23-432.
+  pluto = { ...pluto, ZoneDist1: "R7-1", LandUse: "01", BldgClass: "A1", UnitsRes: 1, LotArea: 4000, LotFront: 40, BldgArea: 1500, NumFloors: 2 };
+  const r71 = await houseText("36005", { lat: 40.738, lng: -73.762 });
+  expect(r71).toContain("Zoning district R7-1");
+  expect(r71).toContain("Height, standard residences: base 40–75 ft, building up to 85 ft for zoning lots or portions thereof within 100 feet of a wide street; base 40–65 ft, building up to 75 ft for zoning lots or portions thereof on a narrow street");
+  expect(r71).toMatch(/Second home \(two-family or more\)\s*—\s*R7-1 permits every type of residence \(ZR 22-121\)/);
+  expect(r71).toContain("Split into two lots (by size only)");
+  expect(r71).not.toContain("null ft");
+  // A district still not encoded (R11) says so; a commercial lot (LandUse 05) gets no home checks.
+  pluto = { ...pluto, ZoneDist1: "R11" };
+  const r11 = await houseText("36061", { lat: 40.738, lng: -73.762 });
+  expect(r11).toMatch(/Local zoning standards\s*—\s*Not on file: New York City's standards are on file only for R1-1/);
+  expect(r11).toContain("this lot is R11");
   pluto = { ...pluto, ZoneDist1: "C4-4", LandUse: "05" };
   const c = await houseText("36047", { lat: 40.738, lng: -73.762 });
   expect(c).toContain("This parcel is Commercial & Office Buildings (PLUTO Data Dictionary, LandUse 05)");

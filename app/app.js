@@ -4583,15 +4583,55 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
   // A use the parcel service doesn't record (or records only as a bare code) is unknown, not non-residential.
   if (!res && a.UseType === "unknown") { add("Home upgrades", "note", `The parcel service doesn't record this lot's use${a.UseDescription && !/ parcel$/.test(a.UseDescription) ? ` (it gives "${esc(a.UseDescription)}")` : ""}, so the residential checks aren't run.`); return out(); }
   if (!res) { add("Home upgrades", "no", `This parcel is ${esc(a.UseDescription || "not residential")}, so residential homeowner checks do not apply.`); return out(); }
-  // The checks below are written for a house on its own lot. A condominium or cooperative unit, or a whole apartment
-  // building, is recorded as residential but isn't that, so they aren't run there.
-  if (a.UseForm === "unit") { add("Home upgrades", "note", `This record is ${esc(a.UseDescription)}: a unit in a condominium or cooperative. ADU, lot-split, pool and addition checks are about a house on its own lot, so they aren't run; the association and the building's lot decide those.`); return out(); }
-  if (a.UseForm === "multi-family") { add("Home upgrades", "note", `This record is ${esc(a.UseDescription)}: an apartment building. The checks here are written for a house on its own lot, so they aren't run.`); return out(); }
-
   // Local zoning standards read from the code itself (localZoningStandards). Each statement names its section; what the
   // page can't check (special districts, transit zones, flood maps) is said, not assumed.
   const zs = F.zs || null, Z = zs && zs.std ? zs.std : null;
-  if (Z && zs.juris.id === "nyc") {
+  const nycHigh = (house) => {
+    // R6-R10 (ZR 22-121, 23-12, 23-22, 23-432). Floor area and height depend on conditions the page can't see (within
+    // 100 ft of a wide street, qualifying affordable or senior housing, Mandatory Inclusionary Housing areas): every
+    // value is shown with the code's own condition, never one unconditioned figure.
+    const J = zs.juris, cp = J.cite_prefix || J.code, zf = J.zone_source || {}, dist = zs.district;
+    const lotA = +a[zf.lot_area_field] || +lot || 0, lotW = +a[zf.lot_width_field] || 0, bArea = +a[zf.floor_area_field] || 0;
+    const ml = Z.min_lot, mo = Z.min_lot_other_residences, far = Z.far, hh = Z.height;
+    const cond = (o, opts) => o.condition ? o.condition.replace(/^For /, "for ").replace(/^Outside /, "outside ") : (opts.some(x => x.condition) ? "for other lots" : "");
+    const farTxt = (opts) => opts.map(o => `${o.far.toFixed(2)}${cond(o, opts) ? ` ${esc(cond(o, opts))}` : ""}`).join("; ");
+    const htTxt = (opts) => opts.map(o => `base ${o.min_base_ft}–${o.max_base_ft} ft, building up to ${o.max_height_ft} ft${cond(o, opts) ? ` ${esc(cond(o, opts))}` : ""}`).join("; ");
+    add(`Zoning district ${esc(dist)} (${esc(J.code)})`, "note",
+      `Housing types: every type of residence is permitted in ${esc(dist)} (${cp} ${esc(Z.housing_types.section)}). ` +
+      `Minimum lot: ${fmtN(ml.area_sqft)} sq ft and ${ml.width_ft} ft wide for a detached or zero-lot-line one- or two-family home, ${fmtN(mo.area_sqft)} sq ft and ${mo.width_ft} ft for other residences (${cp} ${ml.section}). ` +
+      `Height, standard residences: ${htTxt(hh.options.standard)}; qualifying affordable or senior housing: ${htTxt(hh.options.qualifying)} (${cp} ${esc(hh.section)}). ${esc(hh.setback_note)} ` +
+      `Floor area ratio, standard residences: ${farTxt(far.options.standard)}; qualifying affordable or senior housing: ${farTxt(far.options.qualifying)} (${cp} ${esc(far.section)}). ` +
+      `Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone, and the effect of any commercial overlay, aren't checked here. ` +
+      `${(J.caveats || [])[0] ? `Special Purpose Districts and Article VI rules can change these (${cp} ${esc(J.caveats[0].section)}); they aren't checked here.` : ""}`);
+    if (lotA > 0) {
+      const so = far.options.standard, fl = Math.min(...so.map(o => o.far)), fh = Math.max(...so.map(o => o.far));
+      const lo = Math.round(fl * lotA), hi = Math.round(fh * lotA), oh = so.find(o => o.far === fh);
+      const leftLo = bArea > 0 ? lo - bArea : null, leftHi = bArea > 0 ? hi - bArea : null;
+      add("Floor area allowed by zoning", leftLo == null ? "note" : leftLo >= 200 ? "yes" : leftHi >= 200 ? "maybe" : "no",
+        `For standard residences, up to ${fmtN(lo)} sq ft of floor area on this ${fmtN(lotA)} sq ft lot (FAR ${fl.toFixed(2)}${fh > fl ? `, ${esc(cond(so.find(o => o.far === fl), so))}` : ""})` +
+        `${fh > fl ? `, or up to ${fmtN(hi)} sq ft (FAR ${fh.toFixed(2)}) ${esc(cond(oh, so))}` : ""} (${cp} ${esc(far.section)}); which applies isn't checked here. ` +
+        `Qualifying affordable or senior housing can reach FAR ${Math.max(...far.options.qualifying.map(o => o.far)).toFixed(2)} under its conditions (${cp} ${esc(far.section)}). ` +
+        (leftLo == null ? "The city's record has no floor area for the building, so what's left isn't computed." :
+          `The city records ${fmtN(bArea)} sq ft of gross floor area here. `) +
+        (leftLo == null ? "" : "Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure."));
+    }
+    if (!house) return;
+    add("Second home (two-family or more)", "yes", `${esc(dist)} permits every type of residence (${cp} ${esc(Z.housing_types.section)}), within the floor area above.`);
+    if (lotA > 0 && lotW > 0) {
+      const two = lotA >= 2 * mo.area_sqft && lotW >= 2 * mo.width_ft;
+      add("Split into two lots (by size only)", two ? "maybe" : "no",
+        two ? `At ${fmtN(lotA)} sq ft and ${fmtN(lotW)} ft of frontage the lot is at least twice the minimum for a residence other than a detached home (${fmtN(mo.area_sqft)} sq ft, ${mo.width_ft} ft; ${cp} ${mo.section}); a detached home needs ${fmtN(ml.area_sqft)} sq ft and ${ml.width_ft} ft each. A subdivision must also meet yards, coverage and city filing rules, which aren't checked here.`
+          : `Two lots would each need at least ${fmtN(mo.area_sqft)} sq ft and ${mo.width_ft} ft of width (${cp} ${mo.section}); this lot has ${fmtN(lotA)} sq ft and ${fmtN(lotW)} ft of frontage.`);
+    }
+  };
+  // The checks below are written for a house on its own lot. A condominium or cooperative unit, or a whole apartment
+  // building, is recorded as residential but isn't that, so they aren't run there.
+  if (a.UseForm === "unit") { add("Home upgrades", "note", `This record is ${esc(a.UseDescription)}: a unit in a condominium or cooperative. ADU, lot-split, pool and addition checks are about a house on its own lot, so they aren't run; the association and the building's lot decide those.`); return out(); }
+  if (a.UseForm === "multi-family") { if (Z && zs.juris.id === "nyc" && Z.tier === "R6-R10") nycHigh(false); add("Home upgrades", "note", `This record is ${esc(a.UseDescription)}: an apartment building. The checks here are written for a house on its own lot, so they aren't run.`); return out(); }
+
+  if (Z && zs.juris.id === "nyc" && Z.tier === "R6-R10") {
+    nycHigh(true);
+  } else if (Z && zs.juris.id === "nyc") {
     const J = zs.juris, cp = J.cite_prefix || J.code, zf = J.zone_source || {}, dist = zs.district;
     const lotA = +a[zf.lot_area_field] || +lot || 0, lotW = +a[zf.lot_width_field] || 0, bArea = +a[zf.floor_area_field] || 0;
     const ht = Z.housing_types, ml = Z.min_lot, mo = Z.min_lot_other_residences, far = Z.far, hh = Z.height;
@@ -4716,7 +4756,7 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
   
   if (F.stories === 1 && Z) {
     // With the local code on file, state its limits rather than judge a second story from height alone.
-    add("Second story", "maybe", `One story (${F.src.stories}). The height limit here is ${Z.height.max_height_ft} ft (${esc(zs.juris.cite_prefix || zs.juris.code)} ${esc(Z.height.section)}); ${Z.height.max_stories ? `up to ${Z.height.max_stories} stories; ` : ""}the ${zs.juris.id === "dc" ? "lot occupancy" : "floor area"} allowed is above. Foundation inspection required to carry upper-floor loads.`);
+    add("Second story", "maybe", `One story (${F.src.stories}). The height limit here is ${Z.height.max_height_ft ? `${Z.height.max_height_ft} ft` : Z.height.options ? `${Math.min(...Z.height.options.standard.map(o => o.max_height_ft))}–${Math.max(...Z.height.options.standard.map(o => o.max_height_ft))} ft for standard residences, depending on the street` : "not on file"} (${esc(zs.juris.cite_prefix || zs.juris.code)} ${esc(Z.height.section)}); ${Z.height.max_stories ? `up to ${Z.height.max_stories} stories; ` : ""}the ${zs.juris.id === "dc" ? "lot occupancy" : "floor area"} allowed is above. Foundation inspection required to carry upper-floor loads.`);
   } else if (F.stories === 1) {
     add("Second story", hMax != null && hMax < 28 ? "no" : "yes",
       hMax != null && hMax < 28 ? `One story (${F.src.stories}), but local zoning height limit of ${hMax} ft restricts a full second story.` :
@@ -5425,7 +5465,11 @@ function renderHouse(box, a, lot, ll, st) {
   const zs = typeof activeFips === "function" && activeFips() !== "06037" ? localZoningStandards(a, activeFips()) : null;
   F.zs = zs;
   const zsH = zs && zs.std && zs.std.height ? zs.std.height : null;
-  const hMax = rule && +rule.max_height_ft ? +rule.max_height_ft : ocH ? +ocH[1] : zsH ? +zsH.max_height_ft : null;
+  // R6-R10 heights depend on the street (ZR 23-432 footnotes): the lowest standard-residence limit is the one used for
+  // checks, and the fact shows the range with its condition. (A missing single height must never read as 0 ft.)
+  const zsHOpts = zsH && zsH.options ? zsH.options.standard.map(o => +o.max_height_ft).filter(x => x > 0) : [];
+  const hMax = rule && +rule.max_height_ft ? +rule.max_height_ft : ocH ? +ocH[1] : zsH && +zsH.max_height_ft ? +zsH.max_height_ft : zsHOpts.length ? Math.min(...zsHOpts) : null;
+  const hTxt = zsHOpts.length > 1 && Math.max(...zsHOpts) > Math.min(...zsHOpts) ? `${Math.min(...zsHOpts)}–${Math.max(...zsHOpts)} ft, depending on the street (standard residences)` : hMax ? `${hMax} ft` : null;
 
   const rollLand = +a.Roll_LandValue || 0;
   const rollImp = +a.Roll_ImpValue || 0;
@@ -5722,7 +5766,7 @@ function renderHouse(box, a, lot, ll, st) {
       ${fact("Lot", lot ? `${fmtN(lot)} sq ft` : null, "parcel outline (County Assessor GIS)")}
       ${fact("Open yard (est.)", `${fmtN(Math.round(F.yard))} sq ft`, "lot minus buildings, less ~20% for setbacks")}
       ${fact("Zoning", z ? `${esc(z.zone)}` : zs && zs.district ? esc(zs.district) : (m.z ? esc(m.z.top) : null), z ? `parcel zoning layer (${esc(z.juris || "city")})` : zs && zs.district ? (zs.juris.zone_source.kind === "point_layer" ? `${esc(zs.juris.name)} zoning map at this point` : `parcel record (${esc(zs.juris.zone_source.field)})`) : isOCArea(m) ? "neighborhood summary (preliminary)" : "block-group summary")}
-      ${fact("Height limit", hMax ? `${hMax} ft` : null, rule ? `${esc(rule.code_section)} (round-6 research, not yet checked against the code)` : ocH ? "city code summary (preliminary)" : zsH ? `${esc(zs.juris.cite_prefix || zs.juris.code)} ${esc(zsH.section)}` : null)}
+      ${fact("Height limit", hTxt, rule ? `${esc(rule.code_section)} (round-6 research, not yet checked against the code)` : ocH ? "city code summary (preliminary)" : zsH ? `${esc(zs.juris.cite_prefix || zs.juris.code)} ${esc(zsH.section)}` : null)}
       ${fact("Selling an ADU separately", (m.c || p.c || "").toLowerCase().trim() === "santa monica" ? "<span style='color:var(--ok-ink);font-weight:600'>Santa Monica allows an ADU to be sold separately as a condominium under SMMC § 9.31.026 (city ADU guide, Nov 2025)</span>" : (activeState() === "CA" ? "<span style='color:var(--ink-2)'>Only if the city has adopted an ADU condominium ordinance (Gov. Code § 66342, AB 1033) or a qualified nonprofit built the unit (§ 66341); otherwise an ADU can be rented but not sold apart from the main home (§ 66314(d)(1)). Whether this city has such an ordinance is not on file</span>" : "<span style='color:var(--ink-2)'>Not on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules</span>"), activeState() === "CA" ? "California Gov. Code §§ 66314, 66341–66342" : "local code (no state rule on file)")}
       ${fact("Fire zone", rOff ? ((m.fire || 0) >= 0.5 ? "Very High Fire Hazard Zone (area map)" : "Not in Very High zone") : !R ? "checking…" : (R.fire && R.fire.vh ? "Very High Fire Hazard Severity Zone" : ((m.fire || 0) >= 0.5 ? "Very High Fire Hazard Severity Zone" : "Not in Very High zone")), activeState() === "CA" ? "CAL FIRE Fire Hazard Severity Zones (SRA 2024 / LRA 2025)" : "USFS Wildfire Risk to Communities")}
       ${fact("Historic status", rOff ? "lot-level check offline" : !R ? "checking…" : (histText(R) || "None on record"), activeState() === "CA" && R && R.hpoz && R.hpoz.ok ? "LA City / County historic resources" : "National Register & Municipal Historic Survey")}
