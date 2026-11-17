@@ -54,6 +54,12 @@ function statuteAppliesTo(rec, parcel) {
   };
   const excludedBy = (rec.statutory_exclusions || []).some(e => ex[String(e).split(/[\s(]/)[0]]);
   if (excludedBy) return { applies: false, missing };
+  // A city ordinance (local_jurisdiction) applies only inside that city. Before 17 Nov 2026 Raleigh's and Minneapolis's
+  // ordinances fell through to the generic state-wide rule below and were applied to residential lots across NC and MN.
+  if (rec.local_jurisdiction) {
+    if (!parcel.municipality_name) { missing.push("city name"); return { applies: false, missing }; }
+    if (!new RegExp(rec.local_jurisdiction.match, "i").test(String(parcel.municipality_name))) return { applies: false, missing };
+  }
 
   switch (rec.id) {
     case "ca_sb79_tier1":

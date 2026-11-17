@@ -236,6 +236,12 @@ function statuteAppliesTo(rec, parcel) {
   };
   const excludedBy = (rec.statutory_exclusions || []).some(e => ex[String(e).split(/[\s(]/)[0]]);
   if (excludedBy) return { applies: false, missing };
+  // A city ordinance (local_jurisdiction) applies only inside that city. Before 17 Nov 2026 Raleigh's and Minneapolis's
+  // ordinances fell through to the generic state-wide rule below and were applied to residential lots across NC and MN.
+  if (rec.local_jurisdiction) {
+    if (!parcel.municipality_name) { missing.push("city name"); return { applies: false, missing }; }
+    if (!new RegExp(rec.local_jurisdiction.match, "i").test(String(parcel.municipality_name))) return { applies: false, missing };
+  }
 
   switch (rec.id) {
     case "ca_sb79_tier1":
@@ -3289,13 +3295,14 @@ function statuteRecordsForState(st) {
   st = String(st || "").toUpperCase();
   return (Array.isArray(STATE_HOUSING_LAWS_DATA) ? STATE_HOUSING_LAWS_DATA : []).filter(r => r && r.state_code === st);
 }
+function localLawLabel(r) { return r && r.local_jurisdiction ? `${r.local_jurisdiction.name} ordinance; applies only in that city` : ""; }
 function statuteBulletsForState(st) {
   return statuteRecordsForState(st).map(r =>
-    `<b>${esc(r.short_name || r.bill_number || r.id)}</b> <span class="muted">(${statuteStatusLabel(r)})</span>: ${esc(r.summary || "")}${r.statute_url ? ` <a href="${esc(r.statute_url)}" target="_blank" rel="noopener">Source</a>` : ""}`);
+    `<b>${esc(r.short_name || r.bill_number || r.id)}</b> <span class="muted">(${r.local_jurisdiction ? esc(localLawLabel(r)) + ", " : ""}${statuteStatusLabel(r)})</span>: ${esc(r.summary || "")}${r.statute_url ? ` <a href="${esc(r.statute_url)}" target="_blank" rel="noopener">Source</a>` : ""}`);
 }
 function statuteListText(st) {
   const recs = statuteRecordsForState(st);
-  return recs.length ? recs.map(r => `${r.short_name || r.bill_number} (${statuteStatusLabel(r)})`).join(" · ") : "No statewide housing law on file for this state; local code governs.";
+  return recs.length ? recs.map(r => `${r.short_name || r.bill_number} (${r.local_jurisdiction ? localLawLabel(r) + ", " : ""}${statuteStatusLabel(r)})`).join(" · ") : "No statewide housing law on file for this state; local code governs.";
 }
 
 
@@ -4627,7 +4634,7 @@ function houseFacts(a, lot, osm, PF, st) {
 // Names the state's housing-law records on file that could bear on an ADU ("adu") or on more homes on a lot ("middle"),
 // without claiming any applies: each law's conditions are checked against the parcel in the by-right section.
 function houseLawNote(st, kind) {
-  const recs = statuteRecordsForState(st).filter(r => r.parcel_level !== false && !r.commercial_or_industrial_only && r.applies_to_zone !== "commercial" && !STATUTE_NOT_PARCEL_LEVEL.has(r.id));
+  const recs = statuteRecordsForState(st).filter(r => !r.local_jurisdiction && r.parcel_level !== false && !r.commercial_or_industrial_only && r.applies_to_zone !== "commercial" && !STATUTE_NOT_PARCEL_LEVEL.has(r.id));
   const isAdu = r => /\badu\b|accessory/i.test((r.id || "") + " " + (r.short_name || ""));
   const pick = recs.filter(r => kind === "adu" ? isAdu(r) : !isAdu(r));
   if (!pick.length) return `; no state ${kind === "adu" ? "ADU" : "middle-housing or lot-split"} law for ${st} is on file here`;
@@ -10628,7 +10635,7 @@ document.addEventListener("click", (e) => {
 // --- Interactive Leaflet Map Popup for Every House ---
 let houseMapPopup = null;
 function stateReformHeadline(st, m) {
-  const recs = statuteRecordsForState(st).filter(r => r.verification && (r.verification.status === "verified" || r.verification.status === "partially_verified"));
+  const recs = statuteRecordsForState(st).filter(r => !r.local_jurisdiction && r.verification && (r.verification.status === "verified" || r.verification.status === "partially_verified"));
   if (!recs.length) return "<b>ADUs and missing-middle housing:</b> no statewide rule on file for this state; the city's or county's code decides.";
   return recs.slice(0, 2).map(r => `<b>${esc(r.short_name || r.bill_number)}</b> (${statuteStatusLabel(r)})`).join(" · ") + " · screening only; confirm with the city";
 }

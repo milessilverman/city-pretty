@@ -498,6 +498,15 @@ from the text. Lots under a C1/C2 overlay keep their residence standards plus a 
 in a special purpose district say its rules aren't checked. No residential lot in the city is mapped R11 or R12 or
 an equivalent, so those are checked against the live tables and a browser test only.
 
+**Round 6 (17 Nov): Charlotte (N1-A to N1-F) and Portland (R20, R10, R7, R5, R2.5).** Charlotte's rules come from the
+City's UDO site (Article 4 tables, Article 15 use matrix and ADU rules); Portland's from the City's Title 33 PDFs
+(chapters 33.110 and 33.610). Each zone is read from the city's own zoning map at the clicked point; other towns say
+"outside". I re-read Portland's Table 610-2 (min lot area 12,000 / 6,000 / 4,200 / 3,000 / 1,500 sq ft, widths 60 / 50
+/ 40 / 36 / 25 ft, depths 60 / 60 / 55 / 50 / 40 ft) and Charlotte's Table 4-1 (lot area 10,000 to 3,000 sq ft, widths
+70 to 30 ft, heights 48 / 48 / 40 / 40 / 40 / 48 ft): all match. Miami is withheld: its code is published only in a
+JavaScript app with no readable text (round 5's table said it was reachable; corrected). Portland's zoning map server
+answered some browser requests with HTTP 502; the page then says the map didn't answer and applies nothing.
+
 **Round 5 (17 Nov): City of San Diego, single-family zones RS-1-1 to RS-1-14**, from the City's own PDF of SDMC
 Chapter 13, Article 1, Division 4 (edition 9-2026): minimum lot area, width, frontage and depth, setbacks (Table
 131-04D), height and floor area ratio (incl. Table 131-04J's bands by lot area). The zone is read from the City's
@@ -556,6 +565,19 @@ for the next fresh test window; the published Queens result is not re-run, and t
 under-$500k band. My first run filtered deeds by ACRIS's `recorded_borough`, which is the recording office (mostly
 Manhattan), not the property's borough; it would have missed most Queens deeds. It was caught before any result was
 produced.
+
+### Correction: city ordinances were applied as state law (found and fixed 17 Nov)
+
+The law table holds three city ordinances alongside the state laws: Austin's HOME initiative, Raleigh's missing-middle
+ordinance and Minneapolis 2040. The page's law engine checked Austin's against the city name, but Raleigh's and
+Minneapolis's fell through to the generic rule, which matches on the state only, so the "what can I build" check could
+apply Raleigh's ordinance (up to 4 units by right, no parking minimum; record marked "could not check") to any
+residential lot in North Carolina, and Minneapolis's to any in Minnesota. The house note also listed all three as
+"state law on file" anywhere in their state. Each is now tagged with its city (`local_jurisdiction` in
+`statutes.json`), applies only where the parcel's city matches (a lot with no city name says the city is missing),
+and is labeled "City of X ordinance; applies only in that city". Found by the Charlotte track. Also found: the unit
+tests run `src/engines/statutoryZoningEngine.js`, while the page runs its own copy inside `app/app.js` (and a third
+`.ts` copy has drifted); a test now fails if the page's copy and the tested copy differ.
 
 ### Correction: four more hand-typed figures still reached users (round 3, fixed 17 Nov)
 

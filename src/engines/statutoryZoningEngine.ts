@@ -78,6 +78,12 @@ export function statuteAppliesTo(rec: StatuteRecord, parcel: ParcelContext): { a
   };
   const excludedBy = (rec.statutory_exclusions || []).some((e: string) => ex[String(e).split(/[\s(]/)[0]]);
   if (excludedBy) return { applies: false, missing };
+  // A city ordinance (local_jurisdiction) applies only inside that city (Raleigh's and Minneapolis's used to fall through to
+  // the generic state-wide rule; fixed 17 Nov 2026).
+  if (rec.local_jurisdiction) {
+    if (!parcel.municipality_name) { missing.push("city name"); return { applies: false, missing }; }
+    if (!new RegExp(rec.local_jurisdiction.match, "i").test(String(parcel.municipality_name))) return { applies: false, missing };
+  }
 
   switch (rec.id) {
     case "ca_sb79_tier1":

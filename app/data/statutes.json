@@ -534,6 +534,10 @@
         "min_parking_spaces_per_unit (Austin's parking-minimum repeal is a separate action, not checked)"
       ],
       "notes": "Original had the wrong Phase 2 ordinance number (-004) and wrong minimum lot size (1,500 sq ft)."
+    },
+    "local_jurisdiction": {
+      "name": "City of Austin",
+      "match": "^austin\\b"
     }
   },
   {
@@ -614,6 +618,10 @@
         "effective_date"
       ],
       "notes": "The triplex-by-right and parking claims, and the cited 2024 law, could not be confirmed; the cited 2024 chapter does not appear to concern this plan. Do not present as by-right."
+    },
+    "local_jurisdiction": {
+      "name": "City of Minneapolis",
+      "match": "^minneapolis\\b"
     }
   },
   {
@@ -747,6 +755,10 @@
         "all fields"
       ],
       "notes": "Round 3: raleighnc.gov returns 403."
+    },
+    "local_jurisdiction": {
+      "name": "City of Raleigh",
+      "match": "^raleigh\\b"
     }
   },
   {

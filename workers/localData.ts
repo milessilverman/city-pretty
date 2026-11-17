@@ -56,7 +56,8 @@ const fips5 = (s: unknown) => (typeof s === "string" && /^\d{1,5}$/.test(s.trim(
 export function stateHousingLaws(state: string) {
   const st = upper(state);
   const recs = (statutes as Rec[]).filter((r) => r.state_code === st);
-  return result("statutes.json", `State housing laws (${st})`, recs, recs.length ? [] : [`No ${st} laws in the table yet.`]);
+  const local = recs.filter((r) => r.local_jurisdiction).map((r) => `${r.short_name || r.id}: ${(r.local_jurisdiction as { name: string }).name} ordinance, applies only in that city`);
+  return result("statutes.json", `State housing laws (${st})`, recs, [...(recs.length ? [] : [`No ${st} laws in the table yet.`]), ...local]);
 }
 
 const STATE_OF_FIPS: Record<string, string> = {

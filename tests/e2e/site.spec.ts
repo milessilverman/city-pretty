@@ -1829,3 +1829,30 @@ test("a zoning map that fails once is asked again before the page says it didn't
   expect(t).not.toContain("didn't answer");
   expect(errors).toEqual([]);
 });
+
+// City ordinances in the law table apply only in their city, and are labeled as city ordinances (17 Nov 2026). Before,
+// Raleigh's and Minneapolis's were applied state-wide by the page's law engine and named as "state law on file".
+test("a city ordinance applies only in its city and is never called state law (Raleigh, Minneapolis, Austin)", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { try { return (0, eval)("STATE_HOUSING_LAWS_DATA").length > 0; } catch { return false; } }, null, { timeout: 30_000 });
+  const r = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s);
+    const laws = ev("STATE_HOUSING_LAWS_DATA"), rec = (id: string) => laws.find((x: any) => x.id === id);
+    const lot = (st: string, city: string | null) => ({ state_code: st, municipality_name: city, municipality_pop: 500000, county_pop: 1000000, is_single_family_residential: true, is_commercial_or_mixed_use: false, lot_sqft: 8000, exclusions: {} });
+    const ap = ev("statuteAppliesTo");
+    return {
+      raleighInCharlotte: ap(rec("nc_raleigh_missing_middle"), lot("NC", "Charlotte")).applies,
+      mplsInDuluth: ap(rec("mn_minneapolis_2040"), lot("MN", "Duluth")).applies,
+      austinInHouston: ap(rec("tx_austin_home"), lot("TX", "Houston")).applies,
+      ncNote: ev("houseLawNote")("NC", "middle"), txNote: ev("houseLawNote")("TX", "middle"),
+      ncList: ev("statuteListText")("NC"),
+    };
+  });
+  expect(r.raleighInCharlotte).toBe(false);
+  expect(r.mplsInDuluth).toBe(false);
+  expect(r.austinInHouston).toBe(false);
+  expect(r.ncNote).not.toContain("Raleigh");
+  expect(r.txNote).not.toContain("Austin");
+  expect(r.ncList).toContain("City of Raleigh ordinance; applies only in that city");
+  expect(errors).toEqual([]);
+});
