@@ -2,7 +2,7 @@
 Pick the county with the environment variable CP_FIPS (5-digit county FIPS; default 06059 Orange County, the original build).
 Data goes to CP_DATA (default: ./data for Orange County, ./data_<FIPS> otherwise). Everything county-specific in the
 pipeline reads from here, so a new county is: add nothing, or add a COUNTY_OVERRIDES entry for county-only sources."""
-import os, json
+import os, json, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REG = json.load(open(os.path.join(HERE, "..", "data", "counties.json")))
@@ -19,11 +19,18 @@ UNINC = (NAME if STATE == "PR" else   # Puerto Rico: the municipio is the local 
 DATA = os.environ.get("CP_DATA") or os.path.join(HERE, "data" if FIPS == "06059" else f"data_{FIPS}")
 LAT0 = round(C["lat"], 2) if FIPS != "06059" else 33.70     # local projection latitude (Orange County keeps its original value)
 OSM = C["osm"]
-if not OSM.get("url"):
+if not OSM.get("url") and not OSM.get("overpass"):
     raise SystemExit(f"{FIPS}: no OpenStreetMap extract: {OSM.get('missing')}")
-# local file name in data_<fips>/osm: a state cut from a regional file (osm_split.py) is named after the state, otherwise the download's name
-OSM_FILE = OSM["split"].rsplit("/", 1)[1] + "-latest.osm.pbf" if OSM.get("split") else OSM["url"].rsplit("/", 1)[1]
-OSM_DESC = (f'{OSM["url"].rsplit("/", 1)[1]} from download.openstreetmap.fr, cut to {OSM["split"].rsplit("/", 1)[1].replace("-", " ").title()} (county boxes) with osmium'
+# local file name in data_<fips>/osm: a state cut from a regional file (osm_split.py) is named after the state, otherwise the download's name.
+# Where no extract can be downloaded (Alaska: openstreetmap.fr has none, Geofabrik is not reachable here) the registry names an Overpass API
+# endpoint ("overpass"): fetch_oc.py saves the county box, with only the tags osm_extract.py keeps, as OSM XML, which osm_extract.py reads
+# with the same osmium code as a .pbf file.
+OVERPASS_URL = OSM.get("overpass") if not OSM.get("url") else None
+OSM_FILE = (f"{FIPS}-overpass.osm" if OVERPASS_URL else
+            OSM["split"].rsplit("/", 1)[1] + "-latest.osm.pbf" if OSM.get("split") else OSM["url"].rsplit("/", 1)[1])
+OSM_STATE = re.sub(r"(-latest\.osm\.pbf|\.osm)$", ".state.txt", OSM_FILE)   # the extract's replication timestamp (Overpass: osm_base)
+OSM_DESC = (f'OpenStreetMap through the Overpass API ({OVERPASS_URL.split("/")[2]}), county box' if OVERPASS_URL else
+            f'{OSM["url"].rsplit("/", 1)[1]} from download.openstreetmap.fr, cut to {OSM["split"].rsplit("/", 1)[1].replace("-", " ").title()} (county boxes) with osmium'
             if OSM.get("split") else f'{OSM_FILE}, download.openstreetmap.fr')
 
 # California: CHP / SWITRS county codes are the 58 counties in alphabetical order (Alameda 01 ... Los Angeles 19, Orange 30, San Diego 37)

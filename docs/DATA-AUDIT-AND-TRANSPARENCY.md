@@ -531,6 +531,21 @@ under-$500k band. My first run filtered deeds by ACRIS's `recorded_borough`, whi
 Manhattan), not the property's borough; it would have missed most Queens deeds. It was caught before any result was
 produced.
 
+### Alaska: five boroughs now have data files (17 Nov)
+
+Anchorage, Fairbanks North Star, Matanuska-Susitna, Kenai Peninsula and Juneau (about 80% of Alaska's population) now
+open as data counties, built by the same county pipeline from the same official sources. No Alaska OpenStreetMap
+download is reachable from the build machine, so OpenStreetMap is read through the Overpass API (tiled, all-or-nothing);
+each borough's road and bus-stop counts match a direct Overpass count of the same box. I checked four Anchorage block
+groups against the Census Bureau's own ACS 2020-24 table files (downloaded separately; the Census API now needs a key):
+population, median home value, median rent and median income all match; where the block group's rent is suppressed the
+file holds the tract's published median ($1,517 for tract 28.22), as the county's source notes say. Anchorage's FY2027
+HUD rents come from the HUD file. Left empty and named as missing: state crash data (Alaska has no connected source),
+heat (American Forests' 2021 Alaska file returns 403), crime, rail distance (no Alaska Railroad stop in any GTFS feed
+found), bus frequency outside Anchorage, and site suggestions. My live re-check: Anchorage 3/3 parcels with all panels
+correct; Fairbanks 3/3 block groups correct with "no parcel service on file". The other 25 boroughs still show lot
+lines only. Details: `audit/alaska-bundles.md`.
+
 ### Correction: clicks in 250 counties queried another county's parcel service and called the point a road (found and fixed 17 Nov)
 
 Found by the Alaska data-file track's live check. When a county had no parcel service of its own, the page fell back

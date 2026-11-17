@@ -1378,6 +1378,33 @@ test("parcel normalizer: an ArcGIS date is a date, never a price; NYC and DC sho
   expect(errors).toEqual([]);
 });
 
+// Alaska (17 Nov 2026): Anchorage's data file, built by the county pipeline with OpenStreetMap read through the Overpass API (no
+// Alaska extract can be downloaded here). The page must load it as a data county, not the "lot lines only" placeholder, and its
+// sources list must say which sources are missing (state crashes, 2021 Tree Equity) rather than show those figures as zero.
+test("Anchorage opens with its own data file; missing sources are named, and crash and heat values are absent, not zero", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.evaluate(() => (0, eval)("openCounty")("02020"));
+  await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "02020", null, { timeout: 60_000 });
+  const r = await page.evaluate(() => {
+    const D = (window as any).D_OC;
+    const rows = D.meta.sources.map((s: any[]) => [s[0], s[2], s[3], s[1]]);
+    const ms = D.features.map((f: any) => (D.details[f.properties.id] || {}).m || {});
+    return { n: D.features.length, failed: !!D.meta.load_failed, rows,
+      crashZero: ms.filter((m: any) => m.pbcr === 0 || m.ksi === 0).length, heatZero: ms.filter((m: any) => m.ht === 0).length,
+      withHomes: ms.filter((m: any) => m.homes > 0).length };
+  });
+  expect(r.failed).toBe(false);
+  expect(r.n).toBe(200);
+  expect(r.withHomes).toBeGreaterThan(150);
+  expect(r.rows.find((s: any[]) => /^OpenStreetMap/.test(s[0]))?.[2]).toBe(true);
+  expect(JSON.stringify(r.rows)).toContain("Overpass API");
+  expect(r.rows.find((s: any[]) => s[0] === "State crash records")?.[2]).toBe(false);
+  expect(r.rows.find((s: any[]) => s[0] === "Tree Equity Score 2021")?.[2]).toBe(false);
+  expect(r.crashZero).toBe(0);
+  expect(r.heatZero).toBe(0);
+  expect(errors).toEqual([]);
+});
+
 // Found by the Alaska live check (17 Nov 2026): in a county with no parcel service on file, every click said "Public
 // Right-of-Way / Roadway: This point is located within the public street ...", which the page had no way of knowing.
 test("a click in a county with no parcel service says so, and doesn't call the point a right-of-way (Fresno, live click path)", async ({ page }) => {
@@ -1386,6 +1413,19 @@ test("a click in a county with no parcel service says so, and doesn't call the p
   await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "06019", null, { timeout: 60_000 });
   expect(await page.evaluate(() => (0, eval)("parcelSvc")("06019"))).toBeNull();
   await page.evaluate(() => (0, eval)("houseAt")({ lat: 36.7468, lng: -119.7726 }));
+  await page.waitForFunction(() => /No public parcel service|Right-of-Way/.test((document.querySelector("#house") as HTMLElement)?.innerText || ""), null, { timeout: 30_000 });
+  const t = await page.evaluate(() => (document.querySelector("#house") as HTMLElement).innerText);
+  expect(t).toContain("No public parcel service is on file for this county");
+  expect(t).not.toMatch(/Right-of-Way/);
+  expect(errors).toEqual([]);
+});
+
+test("a click in a county with no parcel service says so, and doesn't call the point a right-of-way (Fairbanks North Star, live click path)", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.evaluate(() => (0, eval)("openCounty")("02090"));
+  await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "02090", null, { timeout: 60_000 });
+  expect(await page.evaluate(() => (0, eval)("parcelSvc")("02090"))).toBeNull();
+  await page.evaluate(() => (0, eval)("houseAt")({ lat: 64.775285, lng: -147.496084 }));
   await page.waitForFunction(() => /No public parcel service|Right-of-Way/.test((document.querySelector("#house") as HTMLElement)?.innerText || ""), null, { timeout: 30_000 });
   const t = await page.evaluate(() => (document.querySelector("#house") as HTMLElement).innerText);
   expect(t).toContain("No public parcel service is on file for this county");

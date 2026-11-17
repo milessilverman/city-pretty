@@ -1712,9 +1712,100 @@ def fetch_doj():
     if os.path.exists(p) and os.path.getsize(p) > 1000: return
     os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, "wb").write(get(DOJ_URL, binary=True, timeout=900)); manifest("doj/Crimes_and_Clearances_with_Arson-1985-2025.csv", DOJ_URL, None, "CA DOJ agency-year crime")
+# Tags osm_extract.py keeps (its ROADS, RAIL_W, PARK_*, AMEN*, SHOP, SPORTS, PLACES, is_water, is_infra, bus stops). Used only where the
+# registry has no downloadable extract (region.OVERPASS_URL): Overpass returns the county box with these tags, plus every node and member way
+# they need (recurse down), as OSM XML; osm_extract.py then reads it exactly as it reads a .pbf. Anything else in an extract is dropped by
+# osm_extract.py's own filters, so its output is the same set of features.
+OVERPASS_SELECT = [
+    'nwr["highway"~"^(motorway|motorway_link|trunk|trunk_link|primary|secondary|tertiary|residential|living_street|unclassified|primary_link|secondary_link|tertiary_link|bus_stop)$"]',
+    'way["highway"="service"]["service"="alley"]',
+    'nwr["railway"~"^(station|halt|stop|rail|light_rail|subway|tram)$"]', 'nwr["public_transport"="station"]',
+    'nwr["leisure"~"^(park|garden|nature_reserve|dog_park|playground|recreation_ground|pitch|swimming_pool|sports_centre|fitness_station)$"]',
+    'nwr["landuse"~"^(recreation_ground|allotments|cemetery)$"]', 'nwr["natural"~"^(beach|water|coastline)$"]', 'nwr["boundary"="protected_area"]',
+    'nwr["waterway"~"^(river|stream|canal|drain)$"]',
+    'nwr["amenity"~"^(library|community_centre|townhall|fire_station|police|post_office|hospital|clinic|doctors|courthouse|school|college|university|kindergarten|marketplace|charging_station|social_facility|restaurant|cafe|fast_food|toilets)$"]',
+    'nwr["tourism"="museum"]', 'nwr["sport"~"pickleball|tennis|basketball|soccer|baseball|skateboard"]', 'nwr["shop"~"^(supermarket|greengrocer|grocery)$"]',
+    'node["place"~"^(neighbourhood|suburb|quarter|village|hamlet|town|city)$"]', 'way["barrier"="wall"]', 'way["noise_barrier"]', 'way["power"="line"]',
+]
+
+
+# Overpass query groups: (selectors, tiles per side). Roads and water are dense, so their box is cut into tiles; each query also returns
+# every node and member way its features need (recurse down), so a feature that crosses a tile line is complete in each tile it touches.
+OVERPASS_GROUPS = [(OVERPASS_SELECT[:2], 3), ([x for x in OVERPASS_SELECT if '"natural"' in x or '"waterway"' in x], 2),
+                   ([x for x in OVERPASS_SELECT[2:] if '"natural"' not in x and '"waterway"' not in x], 2)]
+
+
+def _overpass_xml(sel, box, depth=0):
+    """OSM XML for the selectors in one box (south, west, north, east). The public endpoint answers some requests with 504: each query is
+    retried with growing waits, and a box that still fails is cut in four (up to twice). Returns a list of XML strings (one per box)."""
+    s_, w, n, e = box
+    q = "[out:xml][timeout:900];(" + "".join(f"{x}({s_:.5f},{w:.5f},{n:.5f},{e:.5f});" for x in sel) + ");(._;>;);out body;"
+    for i in range(8):
+        try:
+            x = get(region.OVERPASS_URL, data=("data=" + urllib.parse.quote(q)).encode(), binary=True, timeout=1000, retries=1)
+            if b"</osm>" in x[-200:] and b"<remark>" not in x[-3000:]:
+                return [x]
+            log("  overpass incomplete answer", box, x[-300:].decode("utf-8", "replace"))
+        except Exception as ex:
+            log("  overpass", "try", i + 1, box, str(ex)[:80])
+        time.sleep(min(15 * (i + 1), 90))
+    if depth >= 2:
+        raise RuntimeError(f"Overpass: box {box} failed after retries and splits")
+    ms, mw = (s_ + n) / 2, (w + e) / 2
+    out = []
+    for sub in ((s_, w, ms, mw), (s_, mw, ms, e), (ms, w, n, mw), (ms, mw, n, e)):
+        out += _overpass_xml(sel, sub, depth + 1)
+    return out
+
+
+def fetch_osm_overpass(p):
+    """The county box from the Overpass API (region.OVERPASS_URL), only the tags osm_extract.py keeps, merged into one OSM XML file with
+    osmium (duplicate objects from overlapping tiles kept once). All or nothing: if any tile fails, nothing is saved, so a partial download
+    can never undercount the county's features."""
+    import osmium, re as _re, tempfile
+    # the box osm_extract.py clips an extract to (its county_box: block groups plus 0.02 degree), not county_bbox()'s 0.01: with the smaller
+    # box, 111 of Anchorage's 10,674 road ways in the clip box were never downloaded (found by comparing with an Overpass count, 16 Nov)
+    import osm_extract
+    w, s_, e, n = osm_extract.county_box()
+    parts, base = [], None
+    for sel, k in OVERPASS_GROUPS:
+        for i in range(k):
+            for j in range(k):
+                box = (s_ + (n - s_) * j / k, w + (e - w) * i / k, s_ + (n - s_) * (j + 1) / k, w + (e - w) * (i + 1) / k)
+                xs = _overpass_xml(sel, box)
+                parts += xs
+                log("  overpass ok", len(sel), "selectors", [round(v, 3) for v in box], sum(len(x) for x in xs) // 1000, "kB")
+    for x in parts:
+        m = _re.search(rb'<meta osm_base="([^"]+)"', x[:3000])
+        if m and (base is None or m.group(1).decode() < base):
+            base = m.group(1).decode()   # the oldest database state among the answers
+    tmp = tempfile.mkdtemp(dir=os.path.dirname(p))
+    mr = osmium.MergeInputReader()
+    for i, x in enumerate(parts):
+        q = os.path.join(tmp, f"part{i}.osm"); open(q, "wb").write(x); mr.add_file(q)
+    wr = osmium.SimpleWriter(p + ".tmp.osm", overwrite=True)
+    class H(osmium.SimpleHandler):
+        def node(self, o): wr.add_node(o)
+        def way(self, o): wr.add_way(o)
+        def relation(self, o): wr.add_relation(o)
+    mr.apply(H(), idx="")
+    wr.close()
+    for f in os.listdir(tmp):
+        os.remove(os.path.join(tmp, f))
+    os.rmdir(tmp)
+    os.replace(p + ".tmp.osm", p)
+    box = f"{s_:.4f},{w:.4f},{n:.4f},{e:.4f}"
+    open(os.path.join(os.path.dirname(p), region.OSM_STATE), "w").write(f"timestamp={base or ''}\nsource={region.OVERPASS_URL}\nbox={box}\nqueries={len(parts)}\n")
+    log("saved", p, f"{os.path.getsize(p) / 1e6:.0f} MB", "osm_base", base, "box", box, len(parts), "queries")
+
+
 def fetch_osm_extract():
     url = region.OSM["url"]; name = region.OSM_FILE; p = os.path.join(DATA, "osm", name)
     os.makedirs(os.path.dirname(p), exist_ok=True)
+    if region.OVERPASS_URL:
+        if not have(os.path.join("osm", name)):
+            fetch_osm_overpass(p)
+        return
     if not have(os.path.join("osm", name)) and region.OSM.get("split"):
         # a state cut once from the regional file by osm_split.py (cache/osm_states); shared by every county in the state
         sp = os.path.join(SHARED, "osm_states", region.OSM["split"].replace("/", "__"))

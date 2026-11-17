@@ -1,0 +1,103 @@
+# Alaska county data files (17 Nov 2026)
+
+## What was wrong
+Alaska's 30 boroughs and census areas were on the page as "lot lines only" placeholders (`data-coverage="lots"` in
+`index.html`, no data file): opening Anchorage showed property lines and nothing else, and the live panel check could not
+run there. The registry (`national/data/counties.json`) gave the reason: "openstreetmap.fr publishes no Alaska extract
+... and no other OSM download host is reachable here". Every other step of the county pipeline covers Alaska.
+
+## What was built
+The same county pipeline as every other county (`pipeline/fetch_oc.py`, `osm_extract.py`, `metrics_oc.py`, `layers_oc.py`,
+`build_oc.py`), with one change: where the registry has no downloadable extract it may name an Overpass API endpoint, and
+`fetch_oc.py` then downloads the county box from it.
+
+- **OpenStreetMap through Overpass.** The query asks for exactly the tags `osm_extract.py` keeps (roads, rail, parks,
+  water, amenities, places, noise walls, power lines, bus stops) plus every node and member way they need, as OSM XML.
+  `osm_extract.py` reads that file with the same osmium code it uses for a .pbf, so the output is the same set of features.
+  The box is the one `osm_extract.py` clips to (block groups plus 0.02 degree). The public endpoint (maps.mail.ru; the
+  only one reachable here with current data) answers many requests with 504, so the box is cut into tiles, each tile is
+  retried and split further if needed, and the tiles are merged with osmium (duplicates kept once). All or nothing: if a
+  tile fails, nothing is saved. The extract's database timestamp is recorded (Anchorage: 2026-11-16T23:46:04Z).
+- **Check:** Anchorage's 10,674 road ways, 382 bus stops and 13 libraries in the extract match an independent Overpass
+  count for the same box and tags, way for way (`osm_roads.json` ids against `out ids`).
+- **Everything else** comes from the same pulls as other counties: Census 2020 block groups (TIGERweb), ACS 2020-2024
+  (www2.census.gov table files), places, Esri USA Parks, MobilityData GTFS (Anchorage People Mover, 680 stops, weekday
+  18 Nov 2026), NCES schools, AFDC chargers. HUD FY2027 rents and the current Tree Equity release come from the page's
+  own files (`app/data/hud_fair_market_rents.json`, `app/data/tree_equity_2025/02020.json`, built by
+  `scripts/build_tree_equity_2025.py ak`: 197 of 200 block groups).
+- Published with `scripts/export_county_bundle.py` (same format as `w5/tools/export_county.py --gz`), which also turns the
+  borough's placeholder tag into a data tag and adds its `counties/manifest.json` row. `app/data/county_completeness.json`
+  rebuilt: Anchorage is tier C (Census, OpenStreetMap, transit; no parcel-and-zoning pair).
+
+## Empty fields, and why (shown as "not on file" / not scored, never 0)
+| Field | Why |
+|---|---|
+| Crash gaps (pedestrian/bicycle, killed-or-seriously-injured) | No Alaska state crash records source is connected; FARS fatal crashes are downloaded for reference only, as everywhere |
+| Heat (Tree Equity 2021) and the bundle's own canopy gap | American Forests' 2021 file for Alaska returns 403 (`national_tes_share/ak.zip.zip`), where California's and Washington's return 200; the release covered the contiguous states. The current release's canopy gap is shown from `tree_equity_2025/02020.json`; its heat measure is a different one and is not used |
+| Crime | Not connected outside California (as everywhere) |
+| Rail-station distance | OpenStreetMap has 5 Alaska Railroad stations in the box, but no GTFS feed read here has an Alaska Railroad stop, and the pipeline keeps a station only when a schedule confirms it, so none is kept |
+| Site suggestions (`sites_<fips>.json.gz`) | `w5/tools/sites.py` reads the old build machine's paths and OSM tags this download doesn't include; not built. The page handles a county without them |
+| Street-tree survey, 311, assessor sales, tax-rate areas | Not connected for Anchorage (as for most counties) |
+
+## Built so far
+| Borough | Block groups | OSM check (extract vs direct Overpass, same box) | Live panels (3 block groups) |
+|---|---|---|---|
+| Anchorage (02020) | 200 | roads 10,674 = 10,674; bus stops 382 = 382 | pass; parcel clicks 3/3 |
+| Fairbanks North Star (02090) | 63 | roads 5,907 = 5,907; bus stops 104 = 104 | pass (no parcel service: block-group panels only) |
+| Matanuska-Susitna (02170) | 61 | roads 17,204 = 17,204; bus stops 381 = 381 | pass (no parcel service) |
+| Juneau (02110) | 21 | roads 1,205 = 1,205; bus stops 59 = 59 | pass (no parcel service) |
+| Kenai Peninsula (02122) | 35 | roads 15,544 = 15,544; bus stops 400 = 400 | pass (no parcel service) |
+
+Kenai, like Mat-Su, has no feed with stops inside the borough (bus frequency unknown in all 35 block groups). Its and
+Mat-Su's boxes overlap Anchorage, so their bus-stop counts include Anchorage's.
+
+## Not built (25 boroughs and census areas)
+The other 25 Alaska county-equivalents still open as "lot lines only". Same pipeline, one command each (about 30-60 minutes
+per borough, almost all of it the public Overpass endpoint's retries; each run must stay under the 2-hour limit for one
+background job here):
+`CP_FIPS=<fips> CP_DATA=<build dir>/data_<fips> python3 fetch_oc.py` then `osm_extract.py`, `metrics_oc.py`, `layers_oc.py`,
+`build_oc.py inputs/page_dec`, run from a copy of `pipeline/` next to a copy of `national/data`, then
+`python3 scripts/export_county_bundle.py <build dir>/data_<fips> <fips>`, `python3 scripts/build_tree_equity_2025.py ak`,
+`python3 scripts/build_county_completeness.py`, and the live panel check.
+
+Juneau's file is 6.2 MB gzipped for 21 block groups: 24 MB of the uncompressed layers is park outlines (the Tongass
+National Forest and other protected areas drawn at full detail), within the range of existing files (Maricopa's is 9.8 MB).
+
+Mat-Su's transit row says the one feed read (Anchorage People Mover) has no stop with 7-9 am departures inside the borough, so
+bus frequency is unknown (not 0) in all 61 block groups; no MobilityData feed for the Valley's own service was found.
+
+## Page bug found and fixed: clicks routed to another county's parcel service (251 counties)
+`parcelSvc()` and `getParcelService()` fell back to the first registry service that listed the county's state. Every
+county service also lists its state, so in a county with no service of its own the click queried another county's layer:
+every Alaska borough asked Anchorage's; Fresno, Ventura and 50 other California counties asked Kern's; Fort Bend and
+Brazoria asked Harris's; 251 of the 640 counties with data files in all (counted after Mat-Su was added). That layer had no parcel at the point, and the
+page then said "Public Right-of-Way / Roadway: This point is located within the public street ...". Now only a statewide
+service (no county list) is a state fallback, as `workers/parcels.ts` already did, and a county with no service says
+"No public parcel service is on file for this county ... Nothing is assumed about this point." Checked before changing
+it (`data/backtests/parcel_state_fallback_check_2026-11-17.json`): for each of the 251 counties, the service the old code
+used was asked for parcels around three block-group points; 714 of 751 answers were 0, 34 failed, and the 3 non-zero
+answers were block groups on the border with the service's own county (Walton GA / Gwinnett, Brazoria and Fort Bend /
+Harris). So no county lost a working service. e2e: a Fairbanks click shows the new message and never "Right-of-Way".
+
+## Live checks on the real page
+- `scripts/live_check_panels.mjs 02020` (`data/backtests/live_check_panels_2026-11-17_alaska.json`): 3 parcels through
+  the page's click path; every panel matches its source (neighborhood ACS values, canopy gap and goal, HUD FY2027
+  2-bed $1,529, census area, FEMA, USGS, laws), and the crash panel shows no crash text.
+- `scripts/live_check_alaska_parcels.mjs` (`data/backtests/live_check_alaska_parcels_2026-11-17.json`): clicking 646 F St,
+  1200 W Dimond Blvd and 7431 E 36th Ave shows the parcel ID the Municipality's `PropertyInformation_Hosted` layer returns
+  for that point, queried separately (3/3). The only failed requests: the expected 404s for `crash_counts/02020.json` and
+  `crash_gaps/02020.json` (no crash source) and two 504s from the page's own Overpass lookups.
+- e2e: Anchorage opens as a data county (200 block groups), its sources name Overpass, and no block group carries a crash
+  or heat value of 0.
+
+## Mistakes (mine), caught before anything was published
+- The first Overpass download used `fetch_oc.py`'s county box (block groups plus 0.01 degree) while `osm_extract.py` clips
+  to 0.02 degree, so 111 of the 10,674 road ways in the clip box were never downloaded. Found by comparing with an Overpass
+  count; the download now uses the extract's own box, and the counts match.
+- The parent session's note said the page had no Alaska county to open; it had 30 "lot lines only" placeholders.
+- My first check of the old parcel fallback took the service order from `app/data/parcel_services.json`, which puts LA
+  County's assessor first; the page's own list (`PARCELS87`) starts with Kern's. So for the 52 California counties it probed
+  LA's service instead of the one the page used. Re-run in the page's order (the file now committed); the conclusion is the
+  same (all 52 asked Kern's; no parcels inside them).
+- In the panel check I first added a fallback point for counties with no parcel service; `parcelPointIn()` already had one,
+  so I reverted it.

@@ -8,7 +8,7 @@ import osmium.filter as F
 import region
 DATA = region.DATA
 PBF = os.path.join(DATA, "osm", region.OSM_FILE)
-STATE_TXT = PBF.replace("-latest.osm.pbf", ".state.txt")
+STATE_TXT = os.path.join(DATA, "osm", region.OSM_STATE)
 ROADS = {"motorway", "motorway_link", "trunk", "trunk_link", "primary", "secondary", "tertiary", "residential", "living_street", "unclassified", "primary_link", "secondary_link", "tertiary_link"}
 RAIL_W = {"rail", "light_rail", "subway", "tram"}
 PARK_LEISURE = {"park", "garden", "nature_reserve", "dog_park", "playground", "recreation_ground"}
@@ -148,7 +148,7 @@ def main():
     print("rail stations:", n_nodes, "nodes,", n_areas, "areas,", len(kept) - n_nodes - n_areas, "stop positions")
     for k, v in out.items():
         with open(os.path.join(DATA, f"osm_{k}.json"), "w", encoding="utf-8") as fh:
-            json.dump({"elements": v, "source": "OpenStreetMap, " + region.OSM["url"] + (" (cut to " + region.OSM["split"] + " by osm_split.py)" if region.OSM.get("split") else ""), "state": open(STATE_TXT).read().strip() if os.path.exists(STATE_TXT) else ""}, fh)
+            json.dump({"elements": v, "source": ("OpenStreetMap, Overpass API " + region.OVERPASS_URL) if region.OVERPASS_URL else ("OpenStreetMap, " + region.OSM["url"] + (" (cut to " + region.OSM["split"] + " by osm_split.py)" if region.OSM.get("split") else "")), "state": open(STATE_TXT).read().strip() if os.path.exists(STATE_TXT) else ""}, fh)
         print(k, len(v))
     print("objects", n, "secs", round(time.time() - t0))
 
