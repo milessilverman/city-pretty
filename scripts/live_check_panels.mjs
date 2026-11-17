@@ -189,7 +189,8 @@ async function main() {
         const ids = ((src && (src.bgs ? src.bgs.features : src.features)) || []).map((x) => x.properties.id).filter((id) => id && id.startsWith(f));
         const step = Math.max(1, Math.floor(ids.length / (n * 3 + 1)));
         const pick = [];
-        for (let i = step; i < ids.length && pick.length < n * 3; i += step) pick.push(ids[i]);
+        // start at the first block group when there are too few to skip one (a borough with 1-9 block groups)
+        for (let i = ids.length > n * 3 ? step : 0; i < ids.length && pick.length < n * 3; i += step) pick.push(ids[i]);
         return pick;
       }, [fips, PER]);
       const file = countyFile(fips);
