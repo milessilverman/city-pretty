@@ -9588,6 +9588,10 @@ function qualifyNearestNames(B) {
   }
   return B;
 }
+// Append without spreading: push(...arr) passes every element as an argument and overflows the call stack for
+// very large layers (an Alaska census area with 273,964 water lines crashed the page this way, 17 Nov 2026).
+function pushAll(dst, src) { for (const x of src) dst.push(x); return dst; }
+
 async function loadCountyBundle(fips) {
   if (!fips) return null;
   fips = String(fips).padStart(5, "0");
@@ -9674,18 +9678,18 @@ async function loadCountyBundle(fips) {
     const bl = B.layers || {};
     ["freeways", "arterials", "parks", "water", "rail", "stations", "walls", "amenities", "stops"].forEach(k => {
       if (bl[k] && bl[k].features && D.layers[k] && D.layers[k].features) {
-        D.layers[k].features.push(...bl[k].features);
+        pushAll(D.layers[k].features, bl[k].features);
       } else if (bl[k] && !D.layers[k]) {
         D.layers[k] = bl[k];
       }
     });
     if (Array.isArray(bl.facilities)) {
       if (!Array.isArray(D.layers.facilities)) D.layers.facilities = [];
-      D.layers.facilities.push(...bl.facilities);
+      pushAll(D.layers.facilities, bl.facilities);
     }
     if (Array.isArray(bl.projects)) {
       if (!Array.isArray(D.layers.projects)) D.layers.projects = [];
-      D.layers.projects.push(...bl.projects);
+      pushAll(D.layers.projects, bl.projects);
     }
     if (bl.streets && D.layers.streets) {
       const names = D.layers.streets.names || (D.layers.streets.names = []), idx = new Map(names.map((n, i) => [n, i])), map_ = new Map();
@@ -9694,22 +9698,22 @@ async function loadCountyBundle(fips) {
         if (j === undefined) { j = names.length; names.push(n); idx.set(n, j); }
         map_.set(i, j);
       });
-      if (bl.streets.fwy && D.layers.streets.fwy) D.layers.streets.fwy.push(...bl.streets.fwy.map(([c, n, e]) => [c, map_.get(n) ?? n, e]));
+      if (bl.streets.fwy && D.layers.streets.fwy) pushAll(D.layers.streets.fwy, bl.streets.fwy.map(([c, n, e]) => [c, map_.get(n) ?? n, e]));
       if (bl.streets.cells) {
         if (!D.layers.streets.cells) D.layers.streets.cells = {};
         for (const [k, lines] of Object.entries(bl.streets.cells)) {
           const L2 = lines.map(([c, n, p]) => [c, map_.get(n) ?? n, p]);
-          if (D.layers.streets.cells[k]) D.layers.streets.cells[k].push(...L2);
+          if (D.layers.streets.cells[k]) pushAll(D.layers.streets.cells[k], L2);
           else D.layers.streets.cells[k] = L2;
         }
       }
     }
-    if (B.cities && B.cities.features && D.cities) D.cities.features.push(...B.cities.features);
-    if (B.city_labels && D.city_labels) D.city_labels.push(...B.city_labels);
-    if (B.hoods && B.hoods.features && D.hoods) D.hoods.features.push(...B.hoods.features);
-    if (B.hood_labels && D.hood_labels) D.hood_labels.push(...B.hood_labels);
+    if (B.cities && B.cities.features && D.cities) pushAll(D.cities.features, B.cities.features);
+    if (B.city_labels && D.city_labels) pushAll(D.city_labels, B.city_labels);
+    if (B.hoods && B.hoods.features && D.hoods) pushAll(D.hoods.features, B.hoods.features);
+    if (B.hood_labels && D.hood_labels) pushAll(D.hood_labels, B.hood_labels);
     if (bl.park_labels && D.layers.park_labels) {
-      D.layers.park_labels.push(...bl.park_labels);
+      pushAll(D.layers.park_labels, bl.park_labels);
       D.layers.park_labels.sort((a, b) => b[3] - a[3]);
     }
     if (bl.fac_areas && D.layers.fac_areas && D.layers.fac_areas.cells) Object.assign(D.layers.fac_areas.cells, bl.fac_areas.cells || {});

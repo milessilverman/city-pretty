@@ -1553,3 +1553,21 @@ test("no typed displacement score, package value or valuation decomposition reac
   expect(src).not.toMatch(/Site Land Value|baseNeighborhoodHv \* 0\.5|Calibrated against county assessor/);
   expect(errors).toEqual([]);
 });
+
+// A county layer with hundreds of thousands of features (Bethel Census Area: 273,964 water lines) overflowed the call
+// stack when merged with push(...arr); loadCountyBundle now appends with a loop (17 Nov 2026).
+test("merging a very large county layer doesn't overflow the call stack", async ({ page }) => {
+  const errors = await openPage(page);
+  const r = await page.evaluate(() => {
+    const pushAll = (0, eval)("pushAll");
+    const big = Array.from({ length: 300000 }, (_, i) => i);
+    let spreadFailed = false;
+    try { [].push(...big); } catch (e) { spreadFailed = true; }
+    const dst = [1, 2];
+    pushAll(dst, big);
+    return { len: dst.length, last: dst[dst.length - 1], spreadFailed };
+  });
+  expect(r.len).toBe(300002);
+  expect(r.last).toBe(299999);
+  expect(errors).toEqual([]);
+});
