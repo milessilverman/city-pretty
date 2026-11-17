@@ -362,3 +362,142 @@ return every field. Width now comes from the BBL read.
   C3A, so it now takes R3A's own heights.
 - Drawn-lot clicks (Brooklyn, Bronx, Manhattan, which have no county model) skipped enrichment, so they would never have
   read the overlay fields; caught in review before the live run and fixed for both NYC and DC's zoning-map lookup.
+
+# Round 5 (17 Nov 2026): which big-city codes can be read from here, and the City of San Diego
+
+## Reachability of zoning code text (central cities of the largest metros with a page county file)
+
+Tested 17 Nov 2026 from the build machine (`curl`, browser user agent). "Reachable" means the code's own text (or the
+City's official PDF of it) answered; a city site that only links to a code publisher is listed under the publisher.
+
+| Metro (county) | Where the code text is | Result | URL tried |
+|---|---|---|---|
+| New York (36061…) | zr.planning.nyc.gov | reachable, **covered** (rounds 1-4) | https://zr.planning.nyc.gov |
+| Los Angeles (06037) | (LA rules on the page are "round-6 research, not yet checked") | not re-tested this round | — |
+| Chicago (17031) | American Legal | 403 | https://codelibrary.amlegal.com/codes/chicago/ (round 1) |
+| Dallas (48113) | American Legal | 403 | https://codelibrary.amlegal.com/codes/dallas/latest/dallas_tx/0-0-0-1 |
+| Houston (48201) | no zoning; Chapter 42 (lot rules) on Municode | 403 (Municode); the City's own page answered and links only to Municode | https://www.houstontx.gov/planning/DevelopRegs/ |
+| Washington DC (11001) | dcregs.dc.gov | reachable, **covered** (round 2) | https://dcregs.dc.gov |
+| Philadelphia (42101) | American Legal | 403 | round 1 |
+| Atlanta (13121) | Municode; City site | 403 (both) | https://www.atlantaga.gov/ |
+| Miami (12086) | miami21.org (Miami 21) | **reachable** (pages answer; PDFs not yet parsed) | https://www.miami21.org/zoning_code.asp |
+| Phoenix (04013) | municipal.codes | 403 | round 1 |
+| Boston (25025) | bostonplans.org links to the code | page reachable; code text location not found from it | https://www.bostonplans.org/planning-zoning/zoning-code |
+| Riverside (06065) | Municode | 403 (the City's /code/ page redirects to Municode) | https://riversideca.gov/code/ |
+| San Francisco (06075) | American Legal | 403 | — |
+| Detroit (26163) | City site | 403 | https://detroitmi.gov/departments/planning-and-development-department/zoning-innovation |
+| Seattle (53033) | municipal.codes | 403 | round 1 |
+| Minneapolis (27053) | Municode | not found from the City's site (404) | https://www.minneapolismn.gov/government/government-data/zoning-code/ |
+| **San Diego (06073)** | **docs.sandiego.gov (City PDFs of each Division)** | **reachable, covered this round** | https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division04.pdf |
+| Tampa (12057) | Municode | 403 | — |
+| Denver (08031) | denvergov.org | page reachable (it redirects to the CPD Denver Zoning Code page); code text not located (round 2: not found) | https://www.denvergov.org/My-Property/Remodeling-and-Construction/Denver-Zoning-Code |
+| Baltimore (24510) | codes.baltimorecity.gov | site answers (10 KB shell page); article text not reached | https://codes.baltimorecity.gov/ |
+| St. Louis (29510) | Municode (City index links there) | 403 | https://www.stlouis-mo.gov/government/city-laws/code/index.cfm |
+| Orlando (12095) | Municode | 403 | https://www.orlando.gov/Home |
+| Charlotte (37119) | charlotteudo.org (UDO articles as HTML, PDFs on admin.charlotteudo.org) | **reachable** | https://charlotteudo.org/articles |
+| San Antonio (48029) | sa.gov | 403 | https://www.sanantonio.gov/DSD/Resources/UDC |
+| Portland (41051) | portland.gov (Title 33 chapter PDFs) | **reachable** (e.g. /sites/default/files/code/110-sd-zone_3.pdf listed) | https://www.portland.gov/code/33/100s |
+| Sacramento (06067) | American Legal (qcode redirects there) | 403 | https://library.qcode.us/lib/sacramento_ca/pub/city_code |
+| Pittsburgh (42003) | City site | 403 | https://pittsburghpa.gov/ |
+| Austin (48453) | Municode | 403 | round 1 |
+| Las Vegas (32003) | City UDC page | page reachable; the UDC text file not located on it | https://www.lasvegasnevada.gov/Business/Planning-Zoning/Unified-Development-Code |
+| Cincinnati (39061) | City planning site | page reachable; code text not located (links to zoning administration only) | https://www.cincinnati-oh.gov/planning/ |
+| Kansas City (29095) | City site | 403 | https://www.kcmo.gov/ |
+| Columbus (39049) | City site | 403 | https://www.columbus.gov/ |
+| Indianapolis (18097) | City site | page reachable; code text not located | https://www.indy.gov/ |
+| Cleveland (39035) | American Legal (City links there) | 403 | https://codelibrary.amlegal.com/codes/cleveland/latest/cleveland_oh/0-0-0-5 |
+| San Jose (06085) | City site | 403 | https://www.sanjoseca.gov/ |
+| Nashville (47037) | Municode | 403 | round 2 |
+
+Also needed for "what fits": the district at the clicked lot. Only NYC (MapPLUTO), Phoenix (`CITY_ZONING`), Denver
+(`zoningDesc`, truncated), Baltimore (`ZONING`) and Nashville (`Zoning`) carry it on the parcel record; elsewhere it must
+come from the city's official zoning map queried at the point, as for DC and now San Diego.
+
+**Next candidates, by size:** Charlotte (UDO articles reachable; the City publishes zoning layers on ArcGIS, but the
+current UDO zoning map layer wasn't confirmed this round: the search found "Pre UDO Zoning" and a "UDO Zoning
+Translation" layer), Portland (Title 33 PDFs reachable; zoning map not yet located), Miami (Miami 21 reachable).
+
+## City of San Diego: RS zones (SDMC Chapter 13, Article 1, Division 4)
+
+`build_sd()` downloads the City's PDF of Division 4 (edition 9-2026), converts it with `pdftotext -layout`, and parses:
+
+| What | Section | Example (RS-1-7) |
+|---|---|---|
+| Purpose of the RS zones (quoted) | §131.0403(a) | |
+| Max density 1 dwelling unit per lot | §131.0431, Table 131-04D | 1 |
+| Minimum lot area, width, corner width, street frontage, depth | Table 131-04D | 5,000 sq ft; 50 ft; 55 ft; 50 ft; 95 ft |
+| Minimum front, side, street-side and rear setbacks (inline footnotes kept) | Table 131-04D | 15, 4, 5, 13 ft |
+| Max structure height | Table 131-04D; §131.0444(a), (c) quoted | "24/30" (RS-1-1..7), 35 (RS-1-8..14) |
+| Max floor area ratio | Table 131-04D; Table 131-04J by lot area for RS-1-2..7 (§131.0446(a)(1)) | varies: 0.70 (≤3,000 sq ft) to 0.45 (≥19,001) |
+| Steep-hillside FAR rule (quoted, not applied) and 400 sq ft garage exclusion for RS-1-8..14 | §131.0446(a)(2), (b) | |
+
+The build stops if a row isn't found, a row doesn't have seven cells, Table 131-04J's 18 bands aren't contiguous with
+falling ratios, or spot checks against the table as printed fail (RS-1-7 5,000 sq ft / 50 ft; RS-1-1 40,000 and FAR
+0.45; RS-1-14 35 ft and 0.60; RS-1-4 "24/30" and Table 131-04J). Table 131-04J prints "4.001 - 5,000" (a period for
+the comma); the bound is read as printed and checked by contiguity.
+
+**Height "24/30".** The table lists two numbers. §131.0444(a): "Maximum structure height shall not exceed the height
+of the angled building envelope plane, which connects the maximum structure height adjacent to the setback and the
+overall maximum structure height…". The page shows "listed as 24/30 ft … so no part above 30 ft" plus that sentence; it
+doesn't say which number applies where beyond what the code says.
+
+**Zone at the point.** The parcel layer has no official zone, so the page queries the City's Development Services
+"Official Zoning Map" (`webmaps.sandiego.gov/.../DSD/Zoning_Base/MapServer/0`, browser requests allowed) at the clicked
+point. Outside the City (other cities in the county, unincorporated land) the map has no district, and the page says
+"the point is outside the City of San Diego's Official Zoning Map … only the City of San Diego's code is on file".
+
+**Use.** The page's registry request for SanGIS parcels carries `asr_landuse`, whose values are two digits (10, 11, …)
+while the code list in its own metadata is three-digit; mapping one to the other would be a guess, so it isn't decoded.
+The Assessor's `NUCLEUS_USE_CD` (three digits) is listed in the field definition of the SanGIS Parcels metadata
+(235 codes with group headings). `build_sd_use_codes()` parses that list; the type is read from the Assessor's group
+(RESIDENTIAL single-family; MULTIPLE 120/130 small multi-unit, others multi-family; CONDOMINIUMS unit; etc.; see
+`type_rule`). The page reads `nucleus_use_cd` (plus `situs_juris`, `unitqty`) from the same layer by APN after the
+parcel loads (`zone_source.extra_fields`, the mechanism NYC uses for overlays) and decodes it then. The metadata warns
+the field is "irregularly maintained" and "should only be used as an approximate guide"; the source entry says so.
+
+**On the page** (City of San Diego, RS, single-family): the zone row (purpose, density, minimum lot, setbacks with the
+note that footnotes and §131.0443 adjust them and aren't checked, height), floor area allowed (ratio × lot area from the
+parcel outline, Table 131-04J's row named where it applies, garage exclusion and hillside rule noted, compared with the
+Assessor's living area as a screening figure), second home "no" under the base zone with state law named (the page's
+existing California ADU, JADU and SB 9 rows still run), and a split check by area only. Not checked: planned districts
+(CCPD, CUPD …), overlay zones (Coastal Overlay Zone etc.), RE/RX/RT/RM and non-residential zones ("on file only for
+RS-1-1 … RS-1-14").
+
+## Verification (round 5)
+
+- **Build:** the rebuilt `zoning_standards.json` and `parcel_use_codes.json` are identical to before for NYC, DC and
+  Nashville (compared field by field, ignoring dates); San Diego added.
+- **Unit tests** (`tests/unit/zoningStandards.test.ts`, 25 pass): every San Diego number equals the cell in its quoted
+  Table 131-04D row for its zone's column; Table 131-04J contiguous and falling; spot checks against the 9-2026 edition;
+  the use table's source URL, groups and key codes.
+- **e2e** (`tests/e2e/site.spec.ts`, through `houseAt`): an RS-1-7 house (decoded use, zone row, Table 131-04J row for
+  its outline area, living area), RS-1-14 (35 ft, FAR 0.60, garage exclusion), RM-1-1 ("on file only for RS…"), a point
+  with no City zone (outside reason), and a condominium unit (house checks not run).
+- **Live check** (`scripts/live_check_lot_fit.mjs`, LIVE_PORT 8873, `data/backtests/live_check_lot_fit_2026-11-17.json`):
+  - San Diego: 3 of 3 single-family lots, in RS-1-7 (APN 4162422900) and RS-1-4 (3587422000) from the "Pacific Beach /
+    Bay Park" sample box and RS-1-14 (3122323800) from the "Rancho Penasquitos" box, show the zone's standards, the
+    decoded use and the Assessor's living area, each matching the City's zoning map and the SanGIS record queried
+    separately. The sampler takes one lot per zone, so only three zones were seen; RS-1-1/-2/-3/-5/-6/-8..-13 are
+    covered by the unit tests and the table rows re-found live, not by a real lot.
+  - 43 of 43 quoted sentences and table rows re-found in a fresh download of the City's PDF.
+  - A Chula Vista single-family lot shows the "outside the City of San Diego's Official Zoning Map" reason.
+  - Unchanged: NYC R1-R5 8/8 and 22/22, R6-R12 12/12 and 45/45, commercial 14/14 and 29/29, overlays 6/6, DC 5/5 and
+    27/27, Nashville 2/2, Travis and Jefferson "not on file".
+
+## Not done / noticed (outside this round)
+
+- San Diego's registry entry (SanGIS) returns `situs_address` as the house number only, so the house header shows
+  "4924" for the address; the street fields (`situs_street`, `situs_suffix`, …) aren't requested. A registry change
+  (request and join them, as Knox's was) would fix it.
+- `acreage` is empty on many SanGIS parcels; the page measures lot area from the parcel outline anyway.
+- The "Owner playbook" line still says "Zoning is not on file for this parcel" where local standards are on file (as in
+  NYC and DC).
+
+## My own mistakes this round
+
+- The worktree was created from an unrelated old commit (`94a3f0b`); I reset it to `b4996e7` before changing anything.
+- My first wording said the lot area came "from the Assessor's acreage"; the page always measures the lot from the
+  parcel outline (the e2e test caught it: an outline of 8,906 sq ft with acreage 0.15). The text now says "by its parcel
+  outline".
+- My first unit-test helper for reading table cells assumed every row label ends in ")", which the FAR row's doesn't; the
+  test failed and was fixed (the data was right).

@@ -309,4 +309,77 @@ describe("parcel_use_codes.json", () => {
     expect(s.codes["PARSONAGE"].type).toBe("unknown");
     for (const [k, v] of Object.entries<any>(s.codes)) expect(v.label, k).toBe(k.replace(/\s+/g, " "));
   });
+
+  it("San Diego: the Assessor's NUCLEUS_USE_CD list is read from the SanGIS parcel metadata, typed by the Assessor's group heading", () => {
+    const s = USES.systems.find((x: any) => x.id === "sandiego_nucleus_use");
+    expect(s.counties).toEqual(["06073"]);
+    expect(s.field).toBe("nucleus_use_cd");
+    expect(s.source.url).toBe("https://geo.sandag.org/server/rest/services/Hosted/Parcels/FeatureServer/0/metadata");
+    expect(s.codes["111"]).toEqual({ label: "SINGLE FAMILY RESIDENCE", group: "RESIDENTIAL", type: "residential", form: "single-family" });
+    expect(s.codes["120"]).toMatchObject({ label: "DUPLEX - GENERIC", form: "small-multi" });
+    expect(s.codes["171"]).toMatchObject({ group: "CONDOMINIUMS", form: "unit" });
+    expect(s.codes["210"].type).toBe("non-residential");
+    expect(s.codes["000"].type).toBe("unknown");
+    expect(Object.keys(s.codes).length).toBeGreaterThanOrEqual(200);
+  });
+});
+
+const SD = ZS.jurisdictions.find((j: any) => j.id === "sd");
+describe("zoning_standards.json: City of San Diego (SDMC Chapter 13, RS zones)", () => {
+  it("covers RS-1-1 to RS-1-14 in San Diego County, read from the City's Official Zoning Map at the point", () => {
+    expect(SD.counties).toEqual(["06073"]);
+    expect(SD.zone_source.kind).toBe("point_layer");
+    expect(SD.zone_source.url).toBe("https://webmaps.sandiego.gov/arcgis/rest/services/DSD/Zoning_Base/MapServer/0");
+    expect(SD.zone_source.no_feature_reason).toMatch(/outside the City of San Diego's Official Zoning Map/);
+    expect(SD.districts_covered).toEqual(Array.from({ length: 14 }, (_, i) => `RS-1-${i + 1}`));
+    expect(Object.keys(SD.districts).sort()).toEqual([...SD.districts_covered].sort());
+  });
+
+  it("every number appears in the Table 131-04D row it was parsed from, in the zone's column", () => {
+    const col = (z: string) => { const n = +z.split("-")[2]; return n <= 7 ? n - 1 : n - 8; };
+    const cells = (row: string) => row.replace(/^\D*?(?=\d|varies)/, "").match(/\d[\d,]*(?:\.\d+)?(?:\/\d+)?(?:\(\d\))?|varies\s?\(\d\)/g) || [];
+    for (const [z, r] of Object.entries<any>(SD.districts)) {
+      const i = col(z);
+      const [area, width, frontage, corner, depth] = r.min_lot.rows.map((row: string) => cells(row)[i]);
+      expect(area.replace(/,/g, ""), `${z} area`).toBe(String(r.min_lot.area_sqft));
+      expect(width, `${z} width`).toBe(String(r.min_lot.width_ft));
+      expect(frontage, `${z} frontage`).toBe(String(r.min_lot.frontage_ft));
+      expect(corner, `${z} corner`).toBe(String(r.min_lot.corner_width_ft));
+      expect(depth, `${z} depth`).toBe(String(r.min_lot.depth_ft));
+      const sb = r.setbacks.rows.map((row: string) => Number(cells(row)[i].replace(/\(\d\)$/, "")));
+      expect(sb, `${z} setbacks`).toEqual([r.setbacks.front_ft, r.setbacks.side_ft, r.setbacks.street_side_ft, r.setbacks.rear_ft]);
+      expect(cells(r.density.row)[i], `${z} density`).toBe(String(r.density.du_per_lot));
+      const h = cells(r.height.row)[i];
+      expect(h, `${z} height`).toBe(r.height.listed || String(r.height.max_height_ft));
+      if (r.height.listed) expect(r.height.max_height_ft).toBe(Math.max(...r.height.listed.split("/").map(Number)));
+      const f = cells(r.far.row)[i].replace(/\s/g, "");
+      if (r.far.standard != null) expect(Number(f), `${z} FAR`).toBe(r.far.standard);
+      else expect(f, `${z} FAR`).toBe("varies(5)");
+      for (const k of ["purpose", "density", "min_lot", "setbacks", "height", "far"]) expect(r[k].url, `${z} ${k}`).toBe(SD.code_url);
+    }
+  });
+
+  it("Table 131-04J (FAR by lot area) has contiguous lot-area bands and falling ratios, each from its printed row", () => {
+    const J = SD.districts["RS-1-4"].far.by_lot_area;
+    expect(J.length).toBe(18);
+    for (let k = 1; k < J.length; k++) {
+      expect(J[k].min_sqft).toBe(J[k - 1].max_sqft + 1);
+      expect(J[k].far).toBeLessThan(J[k - 1].far);
+    }
+    for (const t of J) expect(t.row.endsWith(t.far.toFixed(2))).toBe(true);
+    expect(J[0]).toMatchObject({ min_sqft: 0, max_sqft: 3000, far: 0.7 });
+    expect(J[J.length - 1]).toMatchObject({ min_sqft: 19001, max_sqft: null, far: 0.45 });
+    for (const z of ["RS-1-2", "RS-1-3", "RS-1-4", "RS-1-5", "RS-1-6", "RS-1-7"]) expect(SD.districts[z].far.standard, z).toBeNull();
+    for (const z of ["RS-1-1", "RS-1-8"]) expect(SD.districts[z].far.standard, z).toBe(0.45);
+  });
+
+  it("matches the SDMC as published by the City (edition 9-2026) on 17 Nov 2026 (spot checks)", () => {
+    expect(SD.as_amended).toMatch(/edition 9-2026/);
+    expect(SD.districts["RS-1-7"].min_lot).toMatchObject({ area_sqft: 5000, width_ft: 50, frontage_ft: 50, corner_width_ft: 55, depth_ft: 95 });
+    expect(SD.districts["RS-1-7"].setbacks).toMatchObject({ front_ft: 15, side_ft: 4, street_side_ft: 5, rear_ft: 13 });
+    expect(SD.districts["RS-1-1"].min_lot.area_sqft).toBe(40000);
+    expect(SD.districts["RS-1-14"].height.max_height_ft).toBe(35);
+    expect(SD.districts["RS-1-14"].far.garage_excluded.sqft).toBe(400);
+    expect(SD.districts["RS-1-4"].height.envelope.quote).toMatch(/^Maximum structure height shall not exceed the height of the angled building envelope plane/);
+  });
 });

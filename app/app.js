@@ -4421,7 +4421,7 @@ async function enrichZoneFromLayer(parcel, ll, fips) {
       spatialRel: "esriSpatialRelIntersects", outFields: zsrc.field, returnGeometry: "false", f: "json" }, 8000);
     const r = d && d.features && d.features[0] && d.features[0].attributes;
     if (r && r[zsrc.field] != null && String(r[zsrc.field]).trim()) parcel.attributes[zsrc.attr] = String(r[zsrc.field]).trim();
-    else parcel.attributes[zsrc.attr + "_err"] = "the zoning map has no district at this point";
+    else parcel.attributes[zsrc.attr + "_err"] = zsrc.no_feature_reason || "the zoning map has no district at this point";
   } catch (e) { parcel.attributes[zsrc.attr + "_err"] = "the zoning map service didn't answer"; }
 }
 // NYC: the registry's MapPLUTO request has the zoning district but not the commercial overlay, special purpose district or
@@ -4431,15 +4431,22 @@ async function enrichZoneExtra(parcel, fips) {
   const J = ZONING_STANDARDS && fips ? ZONING_STANDARDS.jurisdictions.find(j => (j.counties || []).includes(fips)) : null;
   const X = J && J.zone_source && J.zone_source.extra_fields;
   if (!X || !parcel || !parcel.attributes) return;
-  const key = parcel.attributes[X.by];
-  if (key == null || key === "" || !/^\d+(\.0+)?$/.test(String(key))) { parcel.attributes._zone_extra_err = "the lot's BBL isn't in the record"; return; }
+  const key = parcel.attributes[X.by], str = X.key_type === "string";
+  const okKey = key != null && key !== "" && (str ? /^[A-Za-z0-9-]+$/.test(String(key)) : /^\d+(\.0+)?$/.test(String(key)));
+  if (!okKey) { parcel.attributes._zone_extra_err = X.no_key_err || "the lot's BBL isn't in the record"; return; }
   try {
-    const d = await arcQuery(X.url, { where: `${X.by}=${Math.round(+key)}`, outFields: X.fields.join(","), returnGeometry: "false", f: "json" }, 8000);
+    const where = str ? `${X.by}='${String(key)}'` : `${X.by}=${Math.round(+key)}`;
+    const d = await arcQuery(X.url, { where, outFields: X.fields.join(","), returnGeometry: "false", f: "json" }, 8000);
     const r = d && d.features && d.features.length === 1 && d.features[0].attributes;
-    if (!r) { parcel.attributes._zone_extra_err = "MapPLUTO returned no single record for this BBL"; return; }
+    if (!r) { parcel.attributes._zone_extra_err = X.no_record_err || "MapPLUTO returned no single record for this BBL"; return; }
     for (const f of X.fields) parcel.attributes[f] = r[f] == null ? "" : String(r[f]).trim();
     parcel.attributes._zone_extra_ok = true;
-  } catch (e) { parcel.attributes._zone_extra_err = "MapPLUTO didn't answer"; }
+    // San Diego: the Assessor's use code comes from this read, after the parcel was normalized, so decode it now.
+    if (X.decode_use) {
+      const u = decodeParcelUse(parcel.attributes, fips);
+      if (u) Object.assign(parcel.attributes, { UseDescription: u.label, UseCode: "", UseType: u.type, UseForm: u.form || null });
+    }
+  } catch (e) { parcel.attributes._zone_extra_err = X.no_answer_err || "MapPLUTO didn't answer"; }
 }
 async function enrichFromInputLayer(parcel, ll, fips) {
   const C = COUNTY_VALUATION_MODELS && COUNTY_VALUATION_MODELS.counties && fips && COUNTY_VALUATION_MODELS.counties[fips];
@@ -4772,6 +4779,43 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
       add("Split into two lots (by area only)", two.length ? "maybe" : "no",
         two.length ? `At ${fmtN(lotA)} sq ft the lot has at least twice the minimum area for ${two.map(x => esc(x.structure.toLowerCase())).join(" or ")} (${cp} ${esc(ml[0].section)}). Each new lot must also meet the minimum width (${ml.map(x => `${x.width_ft} ft`).join(" / ")}), which the parcel record doesn't give, and the subdivision rules; neither is checked here.`
           : `Two lots would each need at least ${fmtN(minA)} sq ft (${cp} ${esc(ml[0].section)}); this lot has ${fmtN(lotA)} sq ft.`);
+    }
+  }
+  if (Z && zs.juris.id === "sd") {
+    // San Diego Municipal Code Chapter 13, RS zones, read from the City's PDF (zoning_standards.json, build_sd).
+    const J = zs.juris, cp = J.cite_prefix, dist = zs.district, zf = J.zone_source || {};
+    const lotA = +lot || 0, gfa = +a[zf.floor_area_field] || 0;
+    const ml = Z.min_lot, sb = Z.setbacks, hh = Z.height, far = Z.far;
+    const notes = Object.entries(sb.footnotes || {}).map(([n, t]) => `note ${n}: ${esc(t)}`).join("; ");
+    add(`Zoning district ${esc(dist)} (${esc(J.code)})`, "note",
+      `${esc(Z.purpose.quote)} (${cp} ${esc(Z.purpose.section)}). ` +
+      `${esc(dist)} allows ${Z.density.du_per_lot} dwelling unit per lot (${cp} ${esc(Z.density.section)}, ${esc(Z.density.table)}). ` +
+      `Minimum lot: ${fmtN(ml.area_sqft)} sq ft, ${ml.width_ft} ft wide (${ml.corner_width_ft} ft on a corner), ${ml.frontage_ft} ft of street frontage and ${ml.depth_ft} ft deep (${cp} ${esc(ml.section)}, ${esc(ml.table)})` +
+      `${lotA > 0 && lotA < ml.area_sqft ? `; this lot (about ${fmtN(Math.round(lotA))} sq ft by its parcel outline) is smaller` : ""}. ` +
+      `Minimum setbacks: front ${sb.front_ft} ft, side ${sb.side_ft} ft, street side ${sb.street_side_ft} ft, rear ${sb.rear_ft} ft (${cp} ${esc(sb.section)}, ${esc(sb.table)}${notes ? `; ${notes}` : ""}); the table's footnotes and ${cp} §131.0443 adjust these in some cases, which aren't checked here. ` +
+      (hh.listed
+        ? `Height: listed as ${esc(hh.listed)} ft (${cp} ${esc(hh.section)}, ${esc(hh.table)}), so no part above ${hh.max_height_ft} ft, and "${esc(hh.envelope.quote)}" (${cp} ${esc(hh.envelope.section)}). `
+        : `Height: up to ${hh.max_height_ft} ft (${cp} ${esc(hh.section)}, ${esc(hh.table)}). `) +
+      `Planned districts, overlay zones (such as the Coastal Overlay Zone) and state law (ADUs, SB 9) can change these; overlay zones and planned districts aren't checked here.`);
+    if (lotA > 0) {
+      const tier = far.by_lot_area ? far.by_lot_area.find(t => lotA >= t.min_sqft && (t.max_sqft == null || lotA <= t.max_sqft)) : null;
+      const ratio = far.standard != null ? far.standard : tier ? tier.far : null;
+      if (ratio != null) {
+        const maxFA = Math.round(ratio * lotA);
+        add("Floor area allowed by zoning", gfa > 0 ? (maxFA - gfa >= 200 ? "maybe" : "no") : "note",
+          `Up to about ${fmtN(maxFA)} sq ft of gross floor area on this ~${fmtN(Math.round(lotA))} sq ft lot (FAR ${ratio.toFixed(2)}, ${cp} ${esc(far.section)}, ${esc(far.table)}${tier ? `, row "${esc(tier.row)}"` : ""}). ` +
+          `${far.garage_excluded ? `Up to ${far.garage_excluded.sqft} sq ft of garage area isn't counted (${cp} ${esc(far.garage_excluded.section)}). ` : ""}` +
+          `On a lot over the minimum area that is mostly steep hillside the ratio is figured differently (${cp} ${esc(far.hillside.section)}); slope isn't checked here. ` +
+          (gfa > 0 ? `The Assessor records ${fmtN(gfa)} sq ft of living area, so about ${fmtN(Math.abs(maxFA - gfa))} sq ft ${maxFA >= gfa ? "remain" : "more than that is already built"} by this measure; the Assessor's living area isn't gross floor area and is incomplete, so this is a screening figure.`
+            : "The Assessor's record has no living area for this lot, so what's left isn't computed."));
+      }
+    }
+    add("Second home (two-family or more)", "no", `${esc(dist)} allows ${Z.density.du_per_lot} dwelling unit per lot under the base zone (${cp} ${esc(Z.density.section)}, ${esc(Z.density.table)}). State law can allow more (an ADU, a junior ADU, or an SB 9 two-unit project); those are the rows below.`);
+    if (lotA > 0) {
+      const two = lotA >= 2 * ml.area_sqft;
+      add("Split into two lots (by area only)", two ? "maybe" : "no",
+        two ? `At about ${fmtN(Math.round(lotA))} sq ft the lot has at least twice the ${fmtN(ml.area_sqft)} sq ft minimum (${cp} ${esc(ml.section)}). Each lot must also meet the width (${ml.width_ft} ft), street frontage (${ml.frontage_ft} ft) and depth (${ml.depth_ft} ft) minimums, which the parcel record doesn't give, and a subdivision needs City approval.`
+          : `Two lots would each need at least ${fmtN(ml.area_sqft)} sq ft under ${esc(dist)} (${cp} ${esc(ml.section)}); this lot has about ${fmtN(Math.round(lotA))} sq ft. A state-law (SB 9) split has its own rules.`);
     }
   }
   if (F.second) add("Second building on the lot", "note", F.slots.length > 1 ? `The Assessor lists ${F.slots.length} structures (${F.slots.map(x => fmtN(x.sqft) + " sq ft").join(", ")}): an existing ADU or guest house may already be present.` : "Second structure (garage or studio) detected on building footprint outlines.");

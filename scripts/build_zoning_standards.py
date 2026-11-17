@@ -13,6 +13,8 @@ Covered so far:
     commercial designations the 34-112 table doesn't name are not encoded.
   - NYC parcel use: PLUTO data dictionary, LAND USE CATEGORY (LandUse) codes.
   - Washington, DC: see build_dc() (11 DCMR Subtitle D, residential house zones).
+  - City of San Diego: see build_sd() (Municipal Code Chapter 13, Article 1, Division 4, the RS zones) and
+    build_sd_use_codes() (the Assessor's NUCLEUS_USE_CD list from the SanGIS parcel metadata).
 
 Usage: python3 scripts/build_zoning_standards.py [--cache DIR]
 """
@@ -790,22 +792,265 @@ def build_davidson_use_codes():
     }
 
 
+# ---------------------------------------------------------------------------------------------------------------------
+# City of San Diego: Municipal Code Chapter 13, Article 1, Division 4 (Residential Base Zones), the RS zones.
+# The Division is published by the City as a PDF (docs.sandiego.gov); it is converted with pdftotext -layout and the
+# RS rows of Table 131-04D (§131.0431), Table 131-04J (§131.0446) and the sentences quoted below are parsed from it.
+
+SD_DIV04 = "https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division04.pdf"
+SD_ZONING_LAYER = "https://webmaps.sandiego.gov/arcgis/rest/services/DSD/Zoning_Base/MapServer/0"
+SD_PARCELS = "https://geo.sandag.org/server/rest/services/Hosted/Parcels/FeatureServer/0"
+SD_RS = [f"RS-1-{i}" for i in range(1, 15)]
+
+
+def sd_text():
+    pdf = fetch(SD_DIV04, binary=True)
+    with tempfile.TemporaryDirectory() as tmp:
+        p = os.path.join(tmp, "d.pdf")
+        open(p, "wb").write(pdf)
+        return subprocess.run(["pdftotext", "-layout", p, "-"], capture_output=True, text=True, check=True).stdout
+
+
+def sd_flat(t):
+    return re.sub(r"\s+", " ", t)
+
+
+def sd_rs_rows(txt):
+    """The two halves of Table 131-04D: RS-1-1..RS-1-7 and RS-1-8..RS-1-14. Returns {zone: {row label: (cell, row text)}}."""
+    a = txt.index("Development Regulations for RS Zones")
+    b = txt.index("Footnotes for Table 131-04D", a)
+    tbl = txt[a:b]
+    h2 = re.search(r"4th >>\s+8\s+9\s+10\s+11\s+12\s+13\s+14", tbl)
+    assert h2, "second half of Table 131-04D (RS-1-8 to RS-1-14) not found"
+    halves = [(SD_RS[:7], tbl[:h2.start()]), (SD_RS[7:], tbl[h2.start():])]
+    assert re.search(r"4th >>\s+1\s+2\s+3\s+4\s+5\s+6\s+7", halves[0][1]), "first half header not found"
+    labels = {
+        "density": r"Max permitted density \(DU per lot\)",
+        "area": r"Min lot area \(sf\)",
+        "width": r"Lot width \(ft\)",
+        "frontage": r"[Ss]treet frontage \(ft\)(?: \[See Section\s*)?",
+        "corner": r"Lot width \(corner\) \(ft\)",
+        "depth": r"Lot depth \(ft\)",
+        "front": r"Min Front setback \(ft\)",
+        "side": r"Min Side setback \(ft\)",
+        "street_side": r"Min Street side setback \(ft\)",
+        "rear": r"Min Rear setback \(ft\)",
+        "height": r"Max structure height \(ft\)",
+        "far": r"Max floor area ratio",
+    }
+    cell = r"(\d[\d,]*(?:\.\d+)?(?:/\d+)?(?:\s?\(\d\))?|varies\s?\(\d\))"
+    out = {z: {} for z in SD_RS}
+    for zones, part in halves:
+        for key, lab in labels.items():
+            m = re.search(r"^[ \t]*(" + lab + r")[ \t]+((?:" + cell + r"[ \t]+){6}" + cell + r")[ \t]*$", part, re.M)
+            assert m, (zones[0], key)
+            cells = re.findall(cell, m.group(2))
+            assert len(cells) == 7, (zones[0], key, cells)
+            row = re.sub(r"\s+", " ", m.group(0).strip())
+            for z, c in zip(zones, cells):
+                out[z][key] = (re.sub(r"\s+", "", c), row)
+    return out
+
+
+def sd_num(c):
+    return float(re.sub(r"\(\d\)$", "", c).replace(",", ""))
+
+
+def sd_note(c):
+    m = re.search(r"\((\d)\)$", c)
+    return int(m.group(1)) if m else None
+
+
+def build_sd():
+    txt = sd_text()
+    F = sd_flat(txt)
+    q = lambda rx: (re.search(rx, F) or (_ for _ in ()).throw(AssertionError(rx))).group(0)
+    edition = re.search(r"San Diego Municipal Code\s+Chapter 13: Zones\s+\((\d{1,2}-\d{4})\)", txt)
+    assert edition, "edition date not found"
+    purpose = q(r"The purpose of the RS zones is to provide appropriate regulations for the development of single dwelling units that accommodate a variety of lot sizes and residential dwelling types and which promote neighborhood quality, character, and livability\.")
+    envelope = q(r"Maximum structure height shall not exceed the height of the angled building envelope plane, which connects the maximum structure height adjacent to the setback and the overall maximum structure height as determined by the underlying base zone and the requirements below\.")
+    envelope_rs = q(r"The maximum structure height requirements for the RS-1-1, RS-1-2, RS-1-3, RS-1-4, RS-1-5, RS-1-6, RS-1-7, and RX zones are stated in Tables 131-04D and 131-04E\. The angled building envelope plane shall be required adjacent to required side yards\.")
+    far_j_intro = q(r"Floor Area Ratio for the RS-1-2, RS-1-3, RS-1-4, RS-1-5, RS-1-6, RS-1-7 Zones \(1\) The maximum permitted floor area ratio is based on the lot area in accordance with Table 131-04J:")
+    hillside = q(r"For lots that exceed the minimum lot area required by the applicable zone and where more than 50 percent of the lot area contains steep hillsides, the maximum permitted floor area ratio shall be based on the following:")
+    garage = q(r"In the RS-1-8, RS-1-9, RS-1-10, RS-1-11, RS-1-12, RS-1-13, and RS-1-14 zones, up to 400 square feet of garage area shall be excluded from the calculation of gross floor area\.")
+    # Footnotes of Table 131-04D, read as printed ("<n> <text>").
+    fa = txt.index("Footnotes for Table 131-04D")
+    fb = txt.index("(b)   RX Zones", fa) if "(b)   RX Zones" in txt[fa:fa + 3000] else txt.index("RX Zones", fa)
+    fn = {}
+    for n, body in re.findall(r"(?m)^\s+(\d)\s*\n\s+(.+?)(?=\n\s+\d\s*\n|\Z)", txt[fa:fb], re.S):
+        fn[int(n)] = re.sub(r"\s+", " ", body).strip()
+    assert set(fn) == {1, 2, 3, 4, 5, 6}, sorted(fn)
+    # Table 131-04J (lot area -> FAR) for RS-1-2 .. RS-1-7.
+    ja = txt.index("Maximum Floor Area Ratio in RS-1-2, RS-1-3, RS-1-4, RS-1-5, RS-1-6, RS-1-7 Zones")
+    jb = txt.index("19,001 and greater", ja)
+    jt = txt[ja:jb + 80]
+    tiers = []
+    for lo, hi, far in re.findall(r"(?m)^\s+([\d,.]+|3,000 and less)\s*(?:-\s*([\d,.]+))?\s+(0\.\d\d)\s*$", jt):
+        tiers.append((lo, hi, far))
+    last = re.search(r"19,001 and greater\s+(0\.\d\d)", jt)
+    assert last, "Table 131-04J last row"
+    rows_j = []
+    for lo, hi, far in tiers:
+        if lo == "3,000 and less":
+            rows_j.append({"min_sqft": 0, "max_sqft": 3000, "far": float(far), "row": f"3,000 and less | {far}"})
+        else:
+            # The published table prints "4.001 - 5,000" (a period for the comma); the bounds are read as printed and
+            # checked against their neighbours below.
+            lo_n = int(lo.replace(",", "").replace(".", ""))
+            rows_j.append({"min_sqft": lo_n, "max_sqft": int(hi.replace(",", "")), "far": float(far), "row": f"{lo} - {hi} | {far}"})
+    rows_j.append({"min_sqft": 19001, "max_sqft": None, "far": float(last.group(1)), "row": f"19,001 and greater | {last.group(1)}"})
+    assert len(rows_j) == 18, len(rows_j)
+    for x, y in zip(rows_j, rows_j[1:]):
+        assert y["min_sqft"] == x["max_sqft"] + 1, (x, y)   # contiguous bounds, so a misread number stops the build
+        assert y["far"] < x["far"], (x, y)
+
+    R = sd_rs_rows(txt)
+    sec = lambda s: {"section": s, "url": SD_DIV04}
+    d = {}
+    for z in SD_RS:
+        r = R[z]
+        dens = int(sd_num(r["density"][0]))
+        assert dens == 1, (z, r["density"])
+        hcell = r["height"][0]
+        if "/" in hcell:
+            lo_h, hi_h = (int(x) for x in re.sub(r"\(\d\)$", "", hcell).split("/"))
+            height = {"max_height_ft": hi_h, "listed": f"{lo_h}/{hi_h}", "row": r["height"][1], "table": "Table 131-04D",
+                      "envelope": {"quote": envelope, "rs_quote": envelope_rs, **sec("§131.0444(a), (c)")}, **sec("§131.0431")}
+        else:
+            height = {"max_height_ft": int(sd_num(hcell)), "row": r["height"][1], "table": "Table 131-04D", **sec("§131.0431")}
+        fcell = r["far"][0]
+        if fcell.startswith("varies"):
+            assert sd_note(fcell) == 5 and fn[5] == "See Section 131.0446(a).", (z, fcell, fn.get(5))
+            far = {"standard": None, "by_lot_area": rows_j, "intro": far_j_intro, "table": "Table 131-04J", "row": r["far"][1], **sec("§131.0446(a)(1)")}
+        else:
+            far = {"standard": float(fcell), "row": r["far"][1], "table": "Table 131-04D", **sec("§131.0431")}
+        far["hillside"] = {"quote": hillside, **sec("§131.0446(a)(2)")}
+        if z in SD_RS[7:]:
+            far["garage_excluded"] = {"quote": garage, "sqft": 400, **sec("§131.0446(b)")}
+        sb = {}
+        notes = set()
+        for k in ("front", "side", "street_side", "rear"):
+            sb[k + "_ft"] = int(sd_num(r[k][0]))
+            if sd_note(r[k][0]):
+                notes.add(sd_note(r[k][0]))
+        d[z] = {
+            "purpose": {"quote": purpose, **sec("§131.0403(a)")},
+            "density": {"du_per_lot": dens, "row": r["density"][1], "table": "Table 131-04D", **sec("§131.0431")},
+            "min_lot": {"area_sqft": int(sd_num(r["area"][0])), "width_ft": int(sd_num(r["width"][0])), "frontage_ft": int(sd_num(r["frontage"][0])),
+                        "corner_width_ft": int(sd_num(r["corner"][0])), "depth_ft": int(sd_num(r["depth"][0])),
+                        "rows": [r[k][1] for k in ("area", "width", "frontage", "corner", "depth")], "table": "Table 131-04D", **sec("§131.0431")},
+            "setbacks": {**sb, "rows": [r[k][1] for k in ("front", "side", "street_side", "rear")], "footnotes": {str(n): fn[n] for n in sorted(notes)},
+                         "table": "Table 131-04D", **sec("§131.0431")},
+            "height": height,
+            "far": far,
+        }
+    # Spot checks against the table as printed (17 Nov 2026), so a misaligned column stops the build.
+    assert d["RS-1-7"]["min_lot"]["area_sqft"] == 5000 and d["RS-1-7"]["min_lot"]["width_ft"] == 50, d["RS-1-7"]["min_lot"]
+    assert d["RS-1-1"]["min_lot"]["area_sqft"] == 40000 and d["RS-1-1"]["far"]["standard"] == 0.45
+    assert d["RS-1-14"]["height"]["max_height_ft"] == 35 and d["RS-1-14"]["far"]["standard"] == 0.60
+    assert d["RS-1-4"]["height"]["listed"] == "24/30" and d["RS-1-4"]["far"]["standard"] is None
+    return {
+        "id": "sd", "name": "City of San Diego", "counties": ["06073"],
+        "zone_source": {"kind": "point_layer", "url": SD_ZONING_LAYER, "field": "ZONE_NAME", "attr": "ZoningSD",
+                        "no_feature_reason": "the point is outside the City of San Diego's Official Zoning Map (another city in San Diego County, or unincorporated county land); only the City of San Diego's code is on file",
+                        "floor_area_field": "total_lvg_area",
+                        "note": "City of San Diego Development Services, Official Zoning Map (webmaps.sandiego.gov, DSD/Zoning_Base layer 0), queried at the clicked point. Lot area is the Assessor's acreage on the SanGIS parcel; floor area is the Assessor's total living area (SanGIS: includes residential and commercial structures but is incomplete).",
+                        "extra_fields": {"url": SD_PARCELS, "by": "apn", "key_type": "string", "fields": ["nucleus_use_cd", "situs_juris", "unitqty"], "decode_use": True,
+                                         "no_key_err": "the lot's APN isn't in the record", "no_record_err": "SanGIS returned no single record for this APN", "no_answer_err": "SanGIS didn't answer",
+                                         "note": "Read from the SanGIS parcel layer by APN: the Assessor's use code (NUCLEUS_USE_CD), jurisdiction and unit count. The page's registry request carries ASR_LANDUSE, whose two-digit values don't match the three-digit codes its metadata documents, so it isn't decoded."}},
+        "code": "San Diego Municipal Code, Chapter 13 (Zones)", "cite_prefix": "SDMC", "code_url": SD_DIV04,
+        "as_amended": f"Chapter 13, Article 1, Division 4 as published by the City (edition {edition.group(1)}), read on {TODAY}",
+        "districts_covered": SD_RS,
+        "not_covered": "Only the RS (Residential--Single Unit) zones are encoded. RE, RX, RT, RM, commercial, industrial and agricultural zones, the planned districts (such as CCPD, CUPD, CVPD) and overlay zones (such as the Coastal Overlay Zone) are not.",
+        "districts": d,
+        "verification": {"status": "verified", "checked_on": TODAY,
+                         "method": "Read Chapter 13, Article 1, Division 4 from the City's PDF (docs.sandiego.gov), converted with pdftotext -layout, and parsed Table 131-04D, Table 131-04J and the quoted sentences with scripts/build_zoning_standards.py; each rule keeps the verbatim row or sentence it came from.",
+                         "evidence": "SDMC §§131.0403, 131.0431 (Table 131-04D), 131.0444, 131.0446 (Table 131-04J)",
+                         "unverified_fields": []},
+    }
+
+
+def build_sd_use_codes():
+    """NUCLEUS_USE_CD, the San Diego County Assessor's use code on the SanGIS parcel layer. The code list is printed in the
+    field's definition in the layer's own metadata; labels are the Assessor's, and the type is read from the Assessor's
+    group heading the code sits under."""
+    meta_url = SD_PARCELS + "/metadata"
+    xml = fetch(meta_url)
+    blk = None
+    for m in re.finditer(r"<attr>(.*?)</attr>", xml, re.S):
+        lab = re.search(r"<attrlabl[^>]*>(.*?)</attrlabl>", m.group(1))
+        if lab and lab.group(1).strip().upper() == "NUCLEUS_USE_CD":
+            blk = m.group(1)
+    assert blk, "NUCLEUS_USE_CD not in the parcel metadata"
+    dfn = re.search(r"<attrdef[^>]*>(.*?)</attrdef>", blk, re.S).group(1)
+    dfn = html.unescape(re.sub(r"<[^>]+>", "\n", html.unescape(dfn)))
+    assert "Nucleus Use Code - Description of use of property." in dfn, dfn[:200]
+    group, codes = None, {}
+    for line in dfn.split("\n"):
+        line = line.strip()
+        if not line:
+            continue
+        m = re.match(r"^(\d{3});?\s+(.+)$", line)
+        if m:
+            c, lab = m.group(1), re.sub(r"\s+", " ", m.group(2)).strip()
+            codes.setdefault(c, {"label": lab, "group": group})
+        elif re.match(r"^[A-Z][A-Z /&-]+$", line):
+            group = line
+    def classify(c, lab, grp):
+        if c == "000" or grp == "INFO":
+            return "unknown", None
+        if "VACANT" in lab:
+            return "vacant", None
+        if grp == "RESIDENTIAL":
+            return "residential", "single-family"
+        if grp == "MULTIPLE":
+            return "residential", ("small-multi" if c in ("120", "130") else "multi-family")
+        if grp == "CONDOMINIUMS":
+            return "residential", ("multi-family" if c == "174" else "unit")
+        if grp == "CO-OP/MISC":
+            return ("residential", "unit") if c in ("180", "182") else ("non-residential", None)
+        if grp == "MANUFACTURED HOME":
+            if c == "098":
+                return "non-residential", None
+            return "residential", ("single-family" if c == "099" else "unit")
+        if c == "217":
+            return "mixed", None
+        return "non-residential", None
+    out = {}
+    for c, v in codes.items():
+        t, form = classify(c, v["label"], v["group"])
+        out[c] = {"label": v["label"], "group": v["group"], "type": t, "form": form}
+    assert out["111"] == {"label": "SINGLE FAMILY RESIDENCE", "group": "RESIDENTIAL", "type": "residential", "form": "single-family"}, out.get("111")
+    assert out["120"]["form"] == "small-multi" and out["171"]["form"] == "unit" and out["160"]["form"] == "multi-family"
+    assert out["210"]["type"] == "non-residential" and out["000"]["type"] == "unknown" and out["217"]["type"] == "mixed"
+    assert len(out) >= 200, len(out)
+    return {
+        "id": "sandiego_nucleus_use", "counties": ["06073"], "field": "nucleus_use_cd", "codes": dict(sorted(out.items())),
+        "source": {"name": "SanGIS Parcels, NUCLEUS_USE_CD (San Diego County Assessor use code; list printed in the field definition of the layer's metadata)", "url": meta_url,
+                   "caveat": "The metadata says the field is irregularly maintained by the Assessor's Office and land use and zoning fields should only be used as an approximate guide."},
+        "type_rule": "Labels and group headings are the Assessor's; the type is read from the group. RESIDENTIAL: a single-family house. MULTIPLE: 120 duplex and 130 2-4 units are small multi-unit, the rest a multi-family building. CONDOMINIUMS: a unit, except 174 (operated as a large apartment) a multi-family building. CO-OP/MISC: 180 and 182 co-op units; 190-193 slivers, common areas and access parcels non-residential. MANUFACTURED HOME: 099 (on private property, not a park) single-family; 098 accessories only non-residential; the rest a unit in a park or development. INFO and 000 UNKNOWN: unknown. Labels containing VACANT: vacant. 217 combination commercial/residential: mixed. Everything else non-residential.",
+        "verification": {"status": "verified", "checked_on": TODAY, "method": "Code list parsed from the NUCLEUS_USE_CD field definition in the SanGIS Parcels layer metadata by scripts/build_zoning_standards.py",
+                         "evidence": f"{len(out)} codes", "unverified_fields": []},
+    }
+
+
 def main():
     nyc = build_nyc()
     dc = build_dc()
+    sd = build_sd()
     out = {
         "_source": {
             "description": "Local zoning standards used by the page's 'what fits on this lot' checks. Every rule is parsed from the code's own text at build time and keeps the verbatim text and section URL it came from.",
             "built_by": "scripts/build_zoning_standards.py", "built_on": TODAY,
             "rule": "A jurisdiction not listed here shows 'zoning standards not on file' with the reason; nothing is filled in.",
         },
-        "jurisdictions": [nyc, dc],
+        "jurisdictions": [nyc, dc, sd],
         "withheld": json.load(open(os.path.join(ROOT, "scripts", "zoning_standards_withheld.json"))),
     }
     json.dump(out, open(os.path.join(ROOT, "app/data/zoning_standards.json"), "w"), indent=1, ensure_ascii=False)
     uses = {
         "_source": {"description": "Parcel-use code tables, from each publisher's own documentation, used to tell whether a parcel is a home.", "built_by": "scripts/build_zoning_standards.py", "built_on": TODAY},
-        "systems": [build_nyc_use_codes(), build_dc_use_codes(), build_davidson_use_codes()],
+        "systems": [build_nyc_use_codes(), build_dc_use_codes(), build_davidson_use_codes(), build_sd_use_codes()],
     }
     json.dump(uses, open(os.path.join(ROOT, "app/data/parcel_use_codes.json"), "w"), indent=1, ensure_ascii=False)
     for dd, r in nyc["districts"].items():
@@ -822,6 +1067,10 @@ def main():
     for z, r in dc["districts"].items():
         print(z, [(x["structure"], x["width_ft"], x["area_sqft"]) for x in r["min_lot"]], r["height"]["max_height_ft"], r["height"]["max_stories"], [(x["structure"], x["max_pct"]) for x in r["lot_occupancy"]])
     print("DC accessory apartment min GFA", dc["accessory_apartment"]["min_gfa"])
+    for z, r in sd["districts"].items():
+        ml, sb, h, f = r["min_lot"], r["setbacks"], r["height"], r["far"]
+        print(z, ml["area_sqft"], ml["width_ft"], ml["frontage_ft"], ml["depth_ft"], "setbacks", sb["front_ft"], sb["side_ft"], sb["street_side_ft"], sb["rear_ft"],
+              "height", h.get("listed") or h["max_height_ft"], "FAR", f["standard"] if f["standard"] is not None else "Table 131-04J")
 
 
 if __name__ == "__main__":

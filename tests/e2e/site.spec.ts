@@ -1612,3 +1612,70 @@ test("merging a very large county layer doesn't overflow the call stack", async 
   expect(r.last).toBe(299999);
   expect(errors).toEqual([]);
 });
+
+// City of San Diego (lot-fit round 5): the zone is read from the City's Official Zoning Map at the point, the use from
+// the Assessor's NUCLEUS_USE_CD (read from the SanGIS parcel layer by APN), and the RS standards from SDMC Chapter 13.
+test("what fits on this lot applies SDMC RS zones in the City of San Diego, and says why elsewhere in the county (live click path)", async ({ page }) => {
+  test.setTimeout(300_000);
+  const ring = (lat: number, lng: number) => [[lng - 0.0002, lat - 0.0001], [lng + 0.0002, lat - 0.0001], [lng + 0.0002, lat + 0.0001], [lng - 0.0002, lat + 0.0001], [lng - 0.0002, lat - 0.0001]];
+  const json = (route: any, body: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: JSON.stringify(body) });
+  const at = { lat: 32.808, lng: -117.2378 };
+  let parcel: any = {}, use = "111", zone: string | null = "RS-1-7", extraCalls = 0;
+  await page.route(/Hosted\/Parcels\/FeatureServer\/0\/query/, (route: any) => {
+    const u = new URL(route.request().url());
+    if (/^apn=/.test(u.searchParams.get("where") || "")) { extraCalls++; return json(route, { features: [{ attributes: { nucleus_use_cd: use, situs_juris: "SD", unitqty: 1 } }] }); }
+    return json(route, { features: [{ attributes: parcel, geometry: { rings: [ring(at.lat, at.lng)] } }] });
+  });
+  await page.route(/DSD\/Zoning_Base\/MapServer\/0\/query/, (route: any) => json(route, { features: zone ? [{ attributes: { ZONE_NAME: zone } }] : [] }));
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { try { return !!(0, eval)("ZONING_STANDARDS") && !!(0, eval)("PARCEL_USE_CODES"); } catch { return false; } }, null, { timeout: 30_000 });
+  const houseText = async () => {
+    await page.evaluate(() => (0, eval)("openCounty")("06073"));
+    await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "06073", null, { timeout: 60_000 });
+    await page.evaluate(() => { try { (0, eval)("houseCache").clear(); } catch (e) {} });
+    await page.evaluate((p) => (0, eval)("houseAt")(p), at);
+    await page.waitForFunction(() => { const b = document.querySelector("#house"); return !!b && !b.querySelector(".house-loading") && /Zoning district|Local zoning standards|Home upgrades/.test(b.innerText); }, null, { timeout: 30_000 });
+    return page.evaluate(() => (document.querySelector("#house") as HTMLElement).innerText);
+  };
+
+  // A single-family house in RS-1-7 with 2,000 sq ft of living area; the page measures the lot from its outline (the
+  // mocked ring is about 8,906 sq ft), so Table 131-04J's 8,001-9,000 sq ft row applies.
+  parcel = { apn: "4162422900", situs_address: "4924", asr_landuse: 11, total_lvg_area: 2000 };
+  const rs7 = await houseText();
+  expect(extraCalls).toBeGreaterThan(0);
+  expect(rs7).toContain("SINGLE FAMILY RESIDENCE (SanGIS Parcels, nucleus_use_cd 111)");
+  expect(rs7).toContain("Zoning district RS-1-7 (San Diego Municipal Code, Chapter 13 (Zones))");
+  expect(rs7).toContain("RS-1-7 allows 1 dwelling unit per lot (SDMC §131.0431, Table 131-04D)");
+  expect(rs7).toContain("Minimum lot: 5,000 sq ft, 50 ft wide (55 ft on a corner), 50 ft of street frontage and 95 ft deep");
+  expect(rs7).toContain("Minimum setbacks: front 15 ft, side 4 ft, street side 5 ft, rear 13 ft");
+  expect(rs7).toContain("Height: listed as 24/30 ft (SDMC §131.0431, Table 131-04D), so no part above 30 ft");
+  expect(rs7).toMatch(/Up to about 4,987 sq ft of gross floor area on this ~8,906 sq ft lot \(FAR 0\.56, SDMC §131\.0446\(a\)\(1\), Table 131-04J, row "8,001 - 9,000 \| 0\.56"\)/);
+  expect(rs7).toContain("The Assessor records 2,000 sq ft of living area");
+  expect(rs7).toMatch(/Second home \(two-family or more\)\s*—\s*RS-1-7 allows 1 dwelling unit per lot under the base zone/);
+  expect(rs7).toContain("Two lots would each need at least 5,000 sq ft under RS-1-7");
+  expect(rs7).not.toContain("Local zoning standards");
+
+  // RS-1-14: a flat 35 ft height and FAR 0.60, with up to 400 sq ft of garage not counted.
+  zone = "RS-1-14";
+  const rs14 = await houseText();
+  expect(rs14).toContain("Height: up to 35 ft (SDMC §131.0431, Table 131-04D)");
+  expect(rs14).toContain("FAR 0.60, SDMC §131.0431, Table 131-04D");
+  expect(rs14).toContain("Up to 400 sq ft of garage area isn't counted (SDMC §131.0446(b))");
+
+  // A zone that isn't encoded, and a point outside the City's map (another city in the county).
+  zone = "RM-1-1";
+  const rm = await houseText();
+  expect(rm).toMatch(/Local zoning standards\s*—\s*Not on file: City of San Diego's standards are on file only for RS-1-1/);
+  zone = null;
+  const out = await houseText();
+  expect(out).toContain("outside the City of San Diego's Official Zoning Map (another city in San Diego County, or unincorporated county land)");
+  expect(out).not.toContain("Zoning district RS");
+
+  // A condominium unit: the use is decoded, and the house checks aren't run.
+  zone = "RS-1-7"; use = "171";
+  const condo = await houseText();
+  expect(condo).toContain("CONDOS ATTACHED (SanGIS Parcels, nucleus_use_cd 171)");
+  expect(condo).toContain("a unit in a condominium or cooperative");
+  expect(condo).not.toContain("Split into two lots");
+  expect(errors).toEqual([]);
+});

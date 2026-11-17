@@ -1,5 +1,5 @@
 {
- "ran_on": "2026-11-17T06:44:20.722Z",
+ "ran_on": "2026-11-17T07:04:24.281Z",
  "script": "scripts/live_check_lot_fit.mjs",
  "nyc": [
   {
@@ -1745,5 +1745,244 @@
    "excerpt": "1603 VILLA PL · AIN/APN 155583 · SINGLE FAMILY (Metro Nashville Parcels (Parcels_view))\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Local zoning standards — Not on file: No local zoning standards are on file here. Nashville / Davidson County: Metro Nashville's Zoning Code (Title 17) is published on Municode, which answered the build machine with HTTP 403 on 16 Nov 2026, so no standard could be read from the code itself. The parcel record does give the Assessor's land use (LUDesc), so home checks run there, without local standards."
   }
  ],
+ "sd_quotes": [
+  {
+   "what": "RS-1-1 purpose",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 density row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 min lot row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 min lot row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 min lot row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 min lot row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 min lot row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 setback row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 setback row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 setback row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 setback row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 height row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 FAR row",
+   "found": true
+  },
+  {
+   "what": "height envelope (a)",
+   "found": true
+  },
+  {
+   "what": "height envelope (c)",
+   "found": true
+  },
+  {
+   "what": "hillside FAR",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J intro",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "RS-1-8 min lot row",
+   "found": true
+  },
+  {
+   "what": "RS-1-8 setback row",
+   "found": true
+  },
+  {
+   "what": "RS-1-8 setback row",
+   "found": true
+  },
+  {
+   "what": "RS-1-8 setback row",
+   "found": true
+  },
+  {
+   "what": "RS-1-8 setback row",
+   "found": true
+  },
+  {
+   "what": "RS-1-8 height row",
+   "found": true
+  },
+  {
+   "what": "RS-1-8 FAR row",
+   "found": true
+  },
+  {
+   "what": "garage exclusion",
+   "found": true
+  }
+ ],
+ "sd": [
+  {
+   "county": "06073",
+   "area": "Pacific Beach / Bay Park",
+   "lat": 32.808023,
+   "lng": -117.237862,
+   "zone": "RS-1-7",
+   "parcel": {
+    "nucleus_use_cd": "111",
+    "total_lvg_area": 2361,
+    "apn": "4162422900",
+    "situs_address": 4924
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "4924 · AIN/APN 4162422900 · SINGLE FAMILY RESIDENCE (SanGIS Parcels, nucleus_use_cd 111)\n• Zoning district RS-1-7 (San Diego Municipal Code, Chapter 13 (Zones)) — The purpose of the RS zones is to provide appropriate regulations for the development of single dwelling units that accommodate a variety of lot sizes and residential dwelling types and which promote neighborhood quality, character, and livability. (SDMC §131.0403(a)). RS-1-7 allows 1 dwelling unit per lot (SDMC §131.0431, Table 131-04D). Minimum lot: 5,000 sq ft, 50 ft wide (55 ft on a corner), 50 ft of street frontage and 95 ft deep (SDMC §131.0431, Table 131-04D). Minimum setbacks: front 15 ft, side 4 ft, street side 5 ft, rear 13 ft (SDMC §131.0431, Table 131-04D; note 2: See Section 131.0443(a)(4).); the table's footnotes and SDMC §131.0443 adjust these in some cases, which aren't checked here. Height: listed as 24/30 ft (SDMC §131.0431, Table 131-04D), so no part above 30 ft, and \"Maximum structure height shall not exceed the height of the angled building envelope plane, which connects the maximum structure height adjacent to the setback and the overall maximum structure height as determined by the underlying base zone and the requirements below.\" (SDMC §131.0444(a), (c)). Planned districts, overlay zones (such as the Coastal Overlay Zone) and state law (ADUs, SB 9) can change these; overlay zones and planned districts aren't checked here.\n? Floor area allowed by zoning — Up to about 3,728 sq ft of gross floor area on this ~6,427 sq ft lot (FAR 0.58, SDMC §131.0446(a)(1), Table 131-04J, row \"6,001 - 7,000 | 0.58\"). On a lot over the minimum area that is mostly steep hillside the ratio is figured differently (SDMC §131.0446(a)(2)); slope isn't checked here. The Assessor records 2,361 sq ft of living area, so about 1,367 sq ft remain by this measure; the Assessor's living area isn't gross floor area and is incomplete, so this is a screening figure.\n✗ Second home (two-family or more) — RS-1-7 allows 1 d"
+  },
+  {
+   "county": "06073",
+   "area": "Pacific Beach / Bay Park",
+   "lat": 32.817448,
+   "lng": -117.249723,
+   "zone": "RS-1-4",
+   "parcel": {
+    "nucleus_use_cd": "111",
+    "total_lvg_area": 2699,
+    "apn": "3587422000",
+    "situs_address": 1407
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "1407 · AIN/APN 3587422000 · SINGLE FAMILY RESIDENCE (SanGIS Parcels, nucleus_use_cd 111)\n• Zoning district RS-1-4 (San Diego Municipal Code, Chapter 13 (Zones)) — The purpose of the RS zones is to provide appropriate regulations for the development of single dwelling units that accommodate a variety of lot sizes and residential dwelling types and which promote neighborhood quality, character, and livability. (SDMC §131.0403(a)). RS-1-4 allows 1 dwelling unit per lot (SDMC §131.0431, Table 131-04D). Minimum lot: 10,000 sq ft, 65 ft wide (70 ft on a corner), 65 ft of street frontage and 100 ft deep (SDMC §131.0431, Table 131-04D); this lot (about 6,266 sq ft by its parcel outline) is smaller. Minimum setbacks: front 20 ft, side 6 ft, street side 6 ft, rear 20 ft (SDMC §131.0431, Table 131-04D; note 2: See Section 131.0443(a)(4).); the table's footnotes and SDMC §131.0443 adjust these in some cases, which aren't checked here. Height: listed as 24/30 ft (SDMC §131.0431, Table 131-04D), so no part above 30 ft, and \"Maximum structure height shall not exceed the height of the angled building envelope plane, which connects the maximum structure height adjacent to the setback and the overall maximum structure height as determined by the underlying base zone and the requirements below.\" (SDMC §131.0444(a), (c)). Planned districts, overlay zones (such as the Coastal Overlay Zone) and state law (ADUs, SB 9) can change these; overlay zones and planned districts aren't checked here.\n? Floor area allowed by zoning — Up to about 3,634 sq ft of gross floor area on this ~6,266 sq ft lot (FAR 0.58, SDMC §131.0446(a)(1), Table 131-04J, row \"6,001 - 7,000 | 0.58\"). On a lot over the minimum area that is mostly steep hillside the ratio is figured differently (SDMC §131.0446(a)(2)); slope isn't checked here. The Assessor records 2,699 sq ft of living area, so about 935 sq ft remain by this measure; the Assessor's living area isn't gross floor area and is incomplete, so this is a screening"
+  },
+  {
+   "county": "06073",
+   "area": "Rancho Penasquitos",
+   "lat": 32.97993,
+   "lng": -117.13061,
+   "zone": "RS-1-14",
+   "parcel": {
+    "nucleus_use_cd": "111",
+    "total_lvg_area": 1843,
+    "apn": "3122323800",
+    "situs_address": 14488
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "14488 · AIN/APN 3122323800 · SINGLE FAMILY RESIDENCE (SanGIS Parcels, nucleus_use_cd 111)\n• Zoning district RS-1-14 (San Diego Municipal Code, Chapter 13 (Zones)) — The purpose of the RS zones is to provide appropriate regulations for the development of single dwelling units that accommodate a variety of lot sizes and residential dwelling types and which promote neighborhood quality, character, and livability. (SDMC §131.0403(a)). RS-1-14 allows 1 dwelling unit per lot (SDMC §131.0431, Table 131-04D). Minimum lot: 5,000 sq ft, 50 ft wide (55 ft on a corner), 50 ft of street frontage and 95 ft deep (SDMC §131.0431, Table 131-04D). Minimum setbacks: front 15 ft, side 4 ft, street side 10 ft, rear 10 ft (SDMC §131.0431, Table 131-04D; note 1: For lots where at least one-half of the front 50 feet of the lot depth has a minimum slope gradient of 25 percent, the setback closest to the street frontage may be reduced to a minimum 6 feet.); the table's footnotes and SDMC §131.0443 adjust these in some cases, which aren't checked here. Height: up to 35 ft (SDMC §131.0431, Table 131-04D). Planned districts, overlay zones (such as the Coastal Overlay Zone) and state law (ADUs, SB 9) can change these; overlay zones and planned districts aren't checked here.\n? Floor area allowed by zoning — Up to about 3,595 sq ft of gross floor area on this ~5,992 sq ft lot (FAR 0.60, SDMC §131.0431, Table 131-04D). Up to 400 sq ft of garage area isn't counted (SDMC §131.0446(b)). On a lot over the minimum area that is mostly steep hillside the ratio is figured differently (SDMC §131.0446(a)(2)); slope isn't checked here. The Assessor records 1,843 sq ft of living area, so about 1,752 sq ft remain by this measure; the Assessor's living area isn't gross floor area and is incomplete, so this is a screening figure.\n✗ Second home (two-family or more) — RS-1-14 allows 1 dwelling unit per lot under the base zone (SDMC §131.0431, Table 131-04D). State law can allow more (an ADU, a junior ADU, or an SB "
+  }
+ ],
+ "sd_outside": {
+  "county": "06073",
+  "area": "Chula Vista",
+  "lat": 32.621857,
+  "lng": -117.059886,
+  "parcel": {
+   "nucleus_use_cd": "111",
+   "total_lvg_area": 1196,
+   "apn": "5752210500",
+   "situs_address": 27
+  },
+  "city_zone": null,
+  "ok": true,
+  "excerpt": "• Local zoning standards — Not on file: City of San Diego's zoning district couldn't be read here (the point is outside the City of San Diego's Official Zoning Map (another city in San Diego County, or unincorporated county land); only the City of San Diego's code is on file), so its standards can't be applied."
+ },
  "page_errors": []
 }

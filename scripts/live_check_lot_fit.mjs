@@ -377,6 +377,79 @@ async function verifyDcQuotes() {
   return [...seen.values()];
 }
 
+// City of San Diego (round 5): the zone from the City's Official Zoning Map at the point, the use and living area from the
+// SanGIS parcel layer, all queried here separately from the page. Single-family (NUCLEUS_USE_CD 111) lots in four
+// neighborhoods; one lot in Chula Vista (another city) must get the "outside the City's map" reason.
+const SD = ZS.jurisdictions.find((j) => j.id === "sd");
+const SD_PARCELS = "https://geo.sandag.org/server/rest/services/Hosted/Parcels/FeatureServer/0";
+const SD_BOXES = [
+  { name: "Pacific Beach / Bay Park", box: [-117.25, 32.80, -117.22, 32.83] },
+  { name: "Point Loma", box: [-117.24, 32.73, -117.21, 32.76] },
+  { name: "City Heights / Talmadge", box: [-117.08, 32.74, -117.05, 32.77] },
+  { name: "Rancho Penasquitos", box: [-117.17, 32.95, -117.13, 32.98] },
+  { name: "Tierrasanta", box: [-117.13, 32.83, -117.10, 32.86] },
+];
+const SD_OUTSIDE = { name: "Chula Vista", box: [-117.06, 32.62, -117.03, 32.65] };
+async function sdZoneAt(lat, lng) {
+  const d = await getJson(`${SD.zone_source.url}/query?` + new URLSearchParams({ geometry: `${lng},${lat}`, geometryType: "esriGeometryPoint", inSR: "4326", spatialRel: "esriSpatialRelIntersects", outFields: "ZONE_NAME", returnGeometry: "false", f: "json" }));
+  return d && d.features && d.features[0] ? d.features[0].attributes.ZONE_NAME : null;
+}
+async function sdSample(b, juris, per, seen) {
+  const d = await getJson(`${SD_PARCELS}/query?` + new URLSearchParams({ where: `situs_juris='${juris}' AND nucleus_use_cd='111'`, geometry: b.box.join(","), geometryType: "esriGeometryEnvelope", inSR: "4326",
+    spatialRel: "esriSpatialRelIntersects", outFields: "apn,situs_address,nucleus_use_cd,total_lvg_area", returnCentroid: "true", returnGeometry: "false", outSR: "4326", resultRecordCount: "30", f: "json" }));
+  const out = [];
+  for (const f of (d && d.features) || []) {
+    if (out.length >= per || !f.centroid) continue;
+    const lat = f.centroid.y, lng = f.centroid.x, zone = juris === "SD" ? await sdZoneAt(lat, lng) : null;
+    if (juris === "SD" && (!zone || !SD.districts[zone] || seen.has(zone))) continue;
+    if (zone) seen.add(zone);
+    out.push({ lat, lng, zone, parcel: f.attributes });
+  }
+  return out;
+}
+function expectedSd(zone, p) {
+  const r = SD.districts[zone], ml = r.min_lot, sb = r.setbacks, h = r.height;
+  const exp = [`Zoning district ${zone} (${SD.code})`, "SINGLE FAMILY RESIDENCE (SanGIS Parcels, nucleus_use_cd 111)", r.purpose.quote,
+    `${zone} allows 1 dwelling unit per lot`,
+    `Minimum lot: ${fmtN(ml.area_sqft)} sq ft, ${ml.width_ft} ft wide (${ml.corner_width_ft} ft on a corner), ${ml.frontage_ft} ft of street frontage and ${ml.depth_ft} ft deep`,
+    `Minimum setbacks: front ${sb.front_ft} ft, side ${sb.side_ft} ft, street side ${sb.street_side_ft} ft, rear ${sb.rear_ft} ft`,
+    h.listed ? `Height: listed as ${h.listed} ft` : `Height: up to ${h.max_height_ft} ft`,
+    "Floor area allowed by zoning", r.far.standard != null ? `FAR ${r.far.standard.toFixed(2)}` : "Table 131-04J, row \""];
+  if (p.total_lvg_area > 0) exp.push(`The Assessor records ${fmtN(p.total_lvg_area)} sq ft of living area`);
+  return exp;
+}
+// Re-download the City's PDF and confirm every quoted sentence and table row is still in it.
+async function verifySdQuotes() {
+  const { execFileSync } = await import("node:child_process");
+  const os = await import("node:os");
+  let t = null;
+  for (let i = 0; i < 3 && t == null; i++) {
+    try {
+      const r = await fetch(SD.code_url, { headers: { "User-Agent": "Mozilla/5.0 (city-pretty live check)" }, signal: AbortSignal.timeout(90000) });
+      if (!r.ok) continue;
+      const dir = fs.mkdtempSync(path.join(os.tmpdir(), "sdmc-")), p = path.join(dir, "d.pdf");
+      fs.writeFileSync(p, Buffer.from(await r.arrayBuffer()));
+      t = execFileSync("pdftotext", ["-layout", p, "-"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 }).replace(/\s+/g, " ");
+      fs.rmSync(dir, { recursive: true, force: true });
+    } catch { await new Promise((res) => setTimeout(res, 2000)); }
+  }
+  const out = [], seen = new Set();
+  const need = (what, text) => { const k = text.replace(/\s+/g, " "); if (seen.has(k)) return; seen.add(k); out.push({ what, found: t == null ? null : t.includes(k) }); };
+  for (const [z, r] of Object.entries(SD.districts)) {
+    need(`${z} purpose`, r.purpose.quote);
+    need(`${z} density row`, r.density.row);
+    for (const row of r.min_lot.rows) need(`${z} min lot row`, row);
+    for (const row of r.setbacks.rows) need(`${z} setback row`, row);
+    need(`${z} height row`, r.height.row);
+    need(`${z} FAR row`, r.far.row);
+    if (r.height.envelope) { need("height envelope (a)", r.height.envelope.quote); need("height envelope (c)", r.height.envelope.rs_quote); }
+    if (r.far.by_lot_area) { need("Table 131-04J intro", r.far.intro); for (const x of r.far.by_lot_area) need("Table 131-04J row", x.row.replace(" | ", " ")); }
+    need("hillside FAR", r.far.hillside.quote);
+    if (r.far.garage_excluded) need("garage exclusion", r.far.garage_excluded.quote);
+  }
+  return out;
+}
+
 function serve() { return spawn(process.execPath, [path.join(root, "scripts/serve.mjs"), String(PORT)], { cwd: root, stdio: "ignore" }); }
 
 async function openHouse(page, fips, ll) {
@@ -503,6 +576,31 @@ async function main() {
         console.log("47037", f.attributes.PropAddr, row.ok ? "OK" : JSON.stringify({ use: row.use_decoded, reason: row.shows_reason, checks: row.home_checks_run }));
       }
     }
+    // City of San Diego: RS lots, then one lot in Chula Vista.
+    results.sd_quotes = await verifySdQuotes();
+    results.sd = [];
+    const seenSd = new Set();
+    for (const b of SD_BOXES) {
+      for (const P of await sdSample(b, "SD", 2, seenSd)) {
+        const zone = await sdZoneAt(P.lat, P.lng);
+        const row = { county: "06073", area: b.name, lat: +P.lat.toFixed(6), lng: +P.lng.toFixed(6), zone, parcel: P.parcel };
+        if (!zone || !SD.districts[zone]) { row.skipped = "zone not found or not RS when re-queried"; results.sd.push(row); continue; }
+        const text = await openHouse(page, "06073", { lat: P.lat, lng: P.lng });
+        row.missing = expectedSd(zone, P.parcel).filter((e) => !text.includes(e));
+        row.ok = row.missing.length === 0;
+        row.panel_excerpt = text.split("\n").filter((l) => /Zoning district|Floor area allowed|Second home|Split into two|SINGLE FAMILY|Local zoning/.test(l)).join("\n").slice(0, 2000);
+        results.sd.push(row);
+        console.log("06073", zone, P.parcel.apn, row.ok ? "OK" : "MISSING " + JSON.stringify(row.missing));
+      }
+    }
+    for (const P of await sdSample(SD_OUTSIDE, "CV", 1, new Set())) {
+      const text = await openHouse(page, "06073", { lat: P.lat, lng: P.lng });
+      const row = { county: "06073", area: SD_OUTSIDE.name, lat: +P.lat.toFixed(6), lng: +P.lng.toFixed(6), parcel: P.parcel, city_zone: await sdZoneAt(P.lat, P.lng) };
+      row.ok = row.city_zone == null && text.includes("outside the City of San Diego's Official Zoning Map") && !/Zoning district RS/.test(text);
+      row.excerpt = text.split("\n").filter((l) => /Local zoning|Zoning district/.test(l)).join("\n").slice(0, 600);
+      results.sd_outside = row;
+      console.log("06073 Chula Vista", P.parcel.apn, row.ok ? "outside reason shown" : "NOT SHOWN " + row.excerpt);
+    }
     for (const o of OTHER) {
       const text = await openHouse(page, o.fips, { lat: o.lat, lng: o.lng });
       const row = { county: o.fips, area: o.name, lat: o.lat, lng: o.lng };
@@ -528,6 +626,8 @@ async function main() {
     `commercial quotes ${cq.filter((x) => x.found).length}/${cq.length}; commercial lots ok ${nc.filter((r) => r.ok).length}/${nc.filter((r) => !r.skipped).length} in ${new Set(nc.filter((r) => !r.skipped).map((r) => r.county)).size} boroughs; ` +
     `overlay lots ok ${no.filter((r) => r.ok).length}/${no.filter((r) => !r.skipped).length}; ` +
     `dc quotes ${results.dc_quotes.filter((x) => x.found).length}/${results.dc_quotes.length}; dc ok ${results.dc.filter((r) => r.ok).length}/${results.dc.filter((r) => !r.skipped).length}; ` +
-    `nashville ok ${results.nashville.filter((r) => r.ok).length}/${results.nashville.length}; wrote ${out}`);
+    `nashville ok ${results.nashville.filter((r) => r.ok).length}/${results.nashville.length}; ` +
+    `san diego quotes ${(results.sd_quotes || []).filter((x) => x.found).length}/${(results.sd_quotes || []).length}; san diego ok ${(results.sd || []).filter((r) => r.ok).length}/${(results.sd || []).filter((r) => !r.skipped).length} ` +
+    `(${[...new Set((results.sd || []).filter((r) => !r.skipped).map((r) => r.zone))].join(", ")}); chula vista ${results.sd_outside ? (results.sd_outside.ok ? "reason shown" : "NOT SHOWN") : "not sampled"}; wrote ${out}`);
 }
 main();
