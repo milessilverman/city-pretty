@@ -7,14 +7,16 @@ doesn't find what it expects stops the build (assertions), so a changed code can
 
 Covered so far:
   - New York City: Zoning Resolution (zr.planning.nyc.gov), R1-R5 districts (the districts that hold one- and
-    two-family homes) and R6-R10 (build_nyc_high: 22-121, 23-12, 23-22, 23-432, with each footnoted condition kept).
-    R11, R12, commercial and manufacturing districts are not encoded.
+    two-family homes), R6-R12 (build_nyc_high: 22-121, 23-12, 23-22, 23-432, with each footnoted condition kept), and
+    commercial districts where residences are permitted (build_nyc_commercial: 32-121 use table, 34-112 residential
+    equivalents, 34-03, 34-111 overlays, 35-62 / 35-632 heights). Manufacturing districts, special purpose districts and
+    commercial designations the 34-112 table doesn't name are not encoded.
   - NYC parcel use: PLUTO data dictionary, LAND USE CATEGORY (LandUse) codes.
   - Washington, DC: see build_dc() (11 DCMR Subtitle D, residential house zones).
 
 Usage: python3 scripts/build_zoning_standards.py [--cache DIR]
 """
-import datetime, html, json, os, re, subprocess, sys, tempfile, urllib.request
+import datetime, html, json, os, re, subprocess, sys, tempfile, urllib.parse, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TODAY = datetime.date.today().isoformat()
@@ -120,7 +122,7 @@ def sup_footnotes(after_table_html):
 
 
 HIGH_TOKEN = r"(R\d+(?:-\d)?[A-Z]?)(?:\^(\d))?"
-HIGH_RANGE = range(6, 11)   # R6-R10; R11 and R12 are in the same tables but not encoded here
+HIGH_RANGE = range(6, 13)   # R6-R12 (ZR 22-121, 23-12, 23-22, 23-432 cover all of them)
 
 
 def is_high(dist):
@@ -128,7 +130,7 @@ def is_high(dist):
 
 
 def build_nyc_high(ch22, ch23, url):
-    """R6-R10 (ZR 22-121, 23-12, 23-22, 23-432). The tables list every suffixed district on its own row, so each row
+    """R6-R12 (ZR 22-121, 23-12, 23-22, 23-432). The tables list every suffixed district on its own row, so each row
     applies to exactly the districts it names (ZR 11-25's suffix rule adds none). Where a district's value depends on a
     condition (a footnote: within 100 feet of a wide street, outside a Mandatory Inclusionary Housing area for UAP or
     senior housing, a narrow street), every value is kept with the footnote's own words; a district row without the
@@ -148,9 +150,9 @@ def build_nyc_high(ch22, ch23, url):
             res_rows.append((label, r[-12:]))
     assert len(res_rows) == 5, res_rows   # single-family detached / other, two-family detached / other, all other types
     for label, cells in res_rows:
-        for i in range(5, 10):   # R6..R10
+        for i in range(5, 12):   # R6..R12
             assert cells[i] == "●", (label, cols[i], cells[i])
-    ht_quote = "ZR 22-121 Use Group II table, R6-R10 columns: " + "; ".join(f"{label}: " + " ".join(cells[5:10]) for label, cells in res_rows) + " (● = Permitted)"
+    ht_quote = "ZR 22-121 Use Group II table, R6-R12 columns: " + "; ".join(f"{label}: " + " ".join(cells[5:12]) for label, cells in res_rows) + " (● = Permitted)"
 
     # 23-12: minimum lot area and width for R6-R12.
     s12 = section_html(ch23, "23-12", "23-20")
@@ -220,12 +222,21 @@ def build_nyc_high(ch22, ch23, url):
         for q in e["qualifying"]:
             q.pop("_std")
 
+    # ZR 11-25: "All regulations applicable to a district designation shall be applicable to such district designation
+    # appended with a suffix, except as otherwise set forth in express provisions". 23-432 lists R11A on its own row; 23-22
+    # lists only R11, so R11's floor area row applies to R11A. Only done where 23-22 never mentions the suffixed district.
+    t22 = text_of(s22)
+    for dist in sorted(set(hts) - set(far)):
+        base_d = re.match(r"R\d+(?:-\d)?", dist).group(0)
+        assert base_d in far and base_d != dist and not re.search(r"\b" + re.escape(dist) + r"\b", t22), (dist, base_d)
+        far[dist] = {k: [dict(o, via_11_25=f"ZR 23-22 lists {base_d} and not {dist}; ZR 11-25 applies a listed district's rules to its suffixed designations") for o in v]
+                     for k, v in far[base_d].items()}
     assert set(far) == set(hts), (sorted(set(far) ^ set(hts)))
     for dist in sorted(far, key=lambda x: (int(re.match(r"R(\d+)", x).group(1)), x)):
         f, h = far[dist], hts[dist]
         assert f["standard"] and f["qualifying"] and h["standard"] and h["qualifying"], dist
         out[dist] = {
-            "tier": "R6-R10",
+            "tier": "R6-R12",
             "housing_types": {"limited_to": None, "quote": ht_quote, "section": "22-121", "url": url("ii", 2, "22-121")},
             "min_lot": dict(det), "min_lot_other_residences": dict(oth),
             "far": {"standard": None, "options": f, "section": "23-22", "url": url("ii", 3, "23-22"),
@@ -234,6 +245,151 @@ def build_nyc_high(ch22, ch23, url):
                        "setback_note": "Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here."},
         }
     return out
+
+
+MAPPLUTO_URL = "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/MAPPLUTO/FeatureServer/0"
+C_TOKEN = r"C\d(?:-\d+)?[A-Z]?"
+
+
+def mappluto_commercial_districts():
+    """Commercial ZoneDist1 values actually mapped (MapPLUTO, queried at build time), so the 11-25 suffix rule below is
+    applied to real designations only."""
+    q = MAPPLUTO_URL + "/query?" + urllib.parse.urlencode({
+        "where": "ZoneDist1 LIKE 'C%'", "outFields": "ZoneDist1", "groupByFieldsForStatistics": "ZoneDist1",
+        "outStatistics": json.dumps([{"statisticType": "count", "onStatisticField": "OBJECTID", "outStatisticFieldName": "n"}]), "f": "json"})
+    d = json.loads(fetch(q))
+    vals = sorted({f["attributes"]["ZoneDist1"].strip().upper() for f in d["features"] if f["attributes"]["ZoneDist1"]})
+    assert len(vals) > 40 and "C4-4" in vals, vals
+    return vals
+
+
+def build_nyc_commercial(base, url, d):
+    """Commercial districts where residences are permitted. Use (ZR 32-121): which residence types each commercial
+    district permits. Bulk: ZR 34-112's table of residential equivalents (and 34-03 for C3A); a residential building in
+    the district takes the equivalent Residence District's floor area, minimum lot and (R6-R12 equivalents, 35-632)
+    height table. C1/C2 overlays mapped in Residence Districts (34-111) are returned separately; the page names them."""
+    ch32, ch34, ch35 = (fetch(f"{base}/article-iii/chapter-2"), fetch(f"{base}/article-iii/chapter-4"), fetch(f"{base}/article-iii/chapter-5"))
+    q = lambda sec, ch, nxt, pat: re.search(pat, text_of(section_html(ch, sec, nxt)).replace("non" + "- ", "non-"))
+
+    # 32-121: Use Group II by commercial district (columns C1..C8).
+    s121 = section_html(ch32, "32-121", "32-122")
+    rows = sup_rows(re.search(r"<table.*?</table>", s121, flags=re.S).group(0))
+    head = next(r for r in rows if r and r[0] == "Uses")
+    cols = head[1:]
+    assert cols == [f"C{i}" for i in range(1, 9)], cols
+    res_rows = [(" ".join(r[:-8]), r[-8:]) for r in rows if len(r) >= 9 and all(re.fullmatch(r"[●♦○–SPU ]+", c) for c in r[-8:])]
+    assert len(res_rows) == 5, res_rows
+    use = {}
+    for i, col in enumerate(cols):
+        cells = [c[i] for _, c in res_rows]
+        use[col] = cells
+    assert all(c == "–" for c in use["C7"] + use["C8"]), (use["C7"], use["C8"])
+    for col in ("C1", "C2", "C5", "C6"):
+        assert all(c == "●" for c in use[col]), (col, use[col])
+    assert all(c == "● P" for c in use["C4"]), use["C4"]
+    assert use["C3"][0] == "●" and use["C3"][2] == "●" and use["C3"][1] == use["C3"][3] == use["C3"][4] == "♦", use["C3"]
+    use_quote = lambda col: f"ZR 32-121 Use Group II table, {col} column: " + "; ".join(f"{label}: {cells[cols.index(col)]}" for label, cells in res_rows) + \
+        " (● = Permitted, ♦ = Permitted with limitations, P = Additional conditions, – = Not permitted)"
+    m122 = q("32-122", ch32, "32-123", r"In C3A Districts, only single- or two-family detached or zero lot line residences shall be permitted\.")
+    m123 = q("32-123", ch32, "32-13", r"In C4 Districts, all residential uses shall be permitted except that in lower density growth management areas within the Borough of Staten Island, no residences shall be allowed on the following zoning lots in C4-1 Districts where such zoning district occupies at least four acres within a block, except by special permit of the City Planning Commission in accordance with Section 74-121 \(Residential use in C4-1 Districts in Staten Island\)\.")
+    assert m122 and m123
+
+    # 34-112: residential equivalents; 34-03: C3A; 34-111: C1/C2 overlays.
+    s112 = section_html(ch34, "34-112", "34-113")
+    rows = sup_rows(re.search(r"<table.*?</table>", s112, flags=re.S).group(0))
+    assert rows[0] == ["Districts", "Applicable residential equivalent"], rows[0]
+    table = {}
+    for r in rows[1:]:
+        toks = re.findall(C_TOKEN, r[0])
+        assert toks and " ".join(toks) == r[0] and re.fullmatch(r"R\d+(?:-\d)?[A-Z]?", r[1]), r
+        for t in toks:
+            assert t not in table, t
+            table[t] = {"equivalent": r[1], "row": " | ".join(r)}
+    q112 = q("34-112", ch34, "34-113", r"In the districts indicated, the applicable bulk regulations are the bulk regulations for the residential equivalent of the Commercial District as set forth in the following table:")
+    m03 = q("34-03", ch34, "34-10", r"In C3A Districts, the bulk regulations of this Chapter shall not apply\. In lieu thereof, the bulk regulations for R3A Districts in Article II, Chapter 3 \(Residential Bulk Regulations in Residence Districts\), shall apply\.")
+    m01 = q("34-01", ch34, "34-02", r"The bulk regulations of this Chapter apply to any zoning lot containing only residential buildings in any Commercial District in which such buildings are permitted\. Where a residential building and one or more buildings containing non-residential uses are on a single zoning lot, the bulk regulations of Article III, Chapter 5, shall apply\.")
+    m221 = q("34-221", ch34, "34-222", r"In the districts indicated, the maximum floor area ratio on a zoning lot shall be the applicable maximum floor area ratio permitted pursuant to the provisions of Article II, Chapter 3, except as provided for in the following Sections: Section 34-223 \(Floor area bonus for a public plaza\) Section 34-224 \(Floor area bonus for an arcade\)")
+    m111 = q("34-111", ch34, "34-112", r"In the districts indicated, the bulk regulations for the Residence District within which such Commercial Districts are mapped apply, except that: on qualifying residential sites within the Greater Transit Zone, where such districts are mapped within R1 through R5 Districts, the bulk regulations for R5 Districts without a letter suffix shall apply; and on non-qualifying residential sites, where such districts are mapped within R1 or R2 Districts, the bulk regulations for R3-2 Districts shall apply\.")
+    m62 = q("35-62", ch35, "35-63", r"However, for non-qualifying residential sites: \(a\) located within R3 and R4 Districts, the height and setback regulations for R4 Districts without a letter or number suffix shall apply; and \(b\) located within R5A or R5B Districts, the height and setback regulations for R5 Districts without a letter suffix shall apply\.")
+    m632 = q("35-632", ch35, "35-633", r"The minimum base height, maximum base height and maximum building height shall be as set forth in the table in Section 23-432 for the applicable Residence District\.")
+    assert q112 and m03 and m01 and m221 and m111 and m62 and m632
+    clean = lambda m: m.group(0)
+
+    # The designations actually mapped. ZR 11-25 (quoted in build_nyc) applies a listed designation to the same
+    # designation appended with a suffix, unless the section lists the suffixed one separately: "C5" covers C5-1..C5-5.
+    # Designations with other suffixes (".5", G, M, P, T) are mapped with Special Purpose District rules; whether 11-25
+    # carries the residential equivalent over is not settled here, so they are withheld with that reason.
+    mapped = mappluto_commercial_districts()
+    out, withheld, no_res = {}, {}, {}
+    for z in mapped:
+        col = re.match(r"C(\d)", z).group(0)
+        if col in ("C7", "C8"):
+            no_res[z] = {"quote": use_quote(col), "section": "32-121", "url": url("iii", 2, "32-121")}
+            continue
+        if z == "C3A":
+            eq, how = "R3A", {"section": "34-03", "url": url("iii", 4, "34-03"), "quote": clean(m03)}
+        elif z in table:
+            eq, how = table[z]["equivalent"], {"section": "34-112", "url": url("iii", 4, "34-112"), "quote": clean(q112) + " " + table[z]["row"]}
+        else:
+            parents = [t for t in table if z.startswith(t) and z != t]
+            parent = max(parents, key=len) if parents else None
+            suffix = z[len(parent):] if parent else None
+            if parent and "-" not in parent and re.fullmatch(r"-\d", suffix):
+                eq = table[parent]["equivalent"]
+                how = {"section": "34-112, 11-25", "url": url("iii", 4, "34-112"),
+                       "quote": clean(q112) + " " + table[parent]["row"] + f" ({z}: ZR 11-25 applies {parent}'s listing to {z}, which the table doesn't list separately)"}
+            else:
+                withheld[z] = (f"ZR 34-112's table doesn't list {z}" + (f"; it is {parent} with the suffix \"{suffix}\", a designation mapped with Special Purpose District rules, so its residential equivalent isn't applied here" if parent else ""))
+                continue
+        assert eq in d, (z, eq)
+        e = json.loads(json.dumps(d[eq]))
+        col_cells = use[col]
+        if z == "C3A":
+            ht = {"limited_to": "single- or two-family detached or zero lot line residences", "quote": clean(m122), "section": "32-122", "url": url("iii", 2, "32-122")}
+        else:
+            ht = {"limited_to": None, "quote": use_quote(col), "section": "32-121", "url": url("iii", 2, "32-121")}
+            if z == "C4-1":
+                ht["condition"] = clean(m123)
+                ht["condition_section"] = "32-123"
+        e["housing_types"] = ht
+        e["commercial"] = {"district": z, "equivalent": eq, "how": how,
+                           "residential_only": {"quote": clean(m01), "section": "34-01", "url": url("iii", 4, "34-01")},
+                           "bonus": {"quote": clean(m221), "section": "34-221", "url": url("iii", 4, "34-221")}}
+        if e.get("tier") == "R6-R12":
+            e["height"]["commercial_note"] = {"quote": clean(m632), "section": "35-632", "url": url("iii", 5, "35-632")}
+        elif z == "C3A":
+            # 34-03: Chapter 34 (with its 34-24 height modifications) doesn't apply in C3A; R3A's Article II, Chapter 3 rules do.
+            e["height"]["commercial_note"] = {"quote": clean(m03), "section": "34-03", "url": url("iii", 4, "34-03")}
+        else:
+            # R1-R5 equivalents: 35-62 substitutes other districts' heights on non-qualifying sites in some cases; which
+            # case a C3 or C4-1 lot falls in isn't settled from the text, so no height is shown.
+            e["height"] = {"withheld": True, "quote": clean(m62), "section": "35-62", "url": url("iii", 5, "35-62"),
+                           "reason": f"ZR 35-62 modifies the residence district's height rules in commercial districts with an R1-R5 equivalent for non-qualifying residential sites; how it applies to {z} isn't settled here, so no height is shown."}
+        out[z] = e
+
+    # Overlays: C1-1..C1-5 and C2-1..C2-5 mapped within Residence Districts (MapPLUTO Overlay1 / Overlay2).
+    ov_d = re.search(r"/34-111 ((?:C\d-\d )+)In the districts indicated", re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", section_html(ch34, "34-111", "34-112")))))
+    assert ov_d, "34-111 district list"
+    overlay_districts = ov_d.group(1).split()
+    assert overlay_districts == [f"C{a}-{b}" for a in (1, 2) for b in range(1, 6)], overlay_districts
+    within = {}
+    for dist in list(d):
+        n = int(re.match(r"R(\d+)", dist).group(1))
+        if n in (1, 2):
+            within[dist] = {"bulk_from": "R3-2", "why": "34-111: non-qualifying sites in R1 or R2 take R3-2's bulk (an R1 or R2 lot can't be a qualifying residential site, ZR 12-10)"}
+        elif n in (3, 4):
+            within[dist] = {"bulk_from": dist, "height_from_non_qrs": "R4", "why": "35-62(a): non-qualifying sites within R3 and R4 take R4's height and setback rules"}
+        elif dist in ("R5A", "R5B"):
+            within[dist] = {"bulk_from": dist, "height_from_non_qrs": "R5", "why": "35-62(b): non-qualifying sites within R5A or R5B take R5's height and setback rules"}
+        elif n == 5:
+            within[dist] = {"bulk_from": dist, "why": "34-111: the residence district's own bulk"}
+        else:
+            within[dist] = {"bulk_from": dist, "why": "34-111: the residence district's own bulk; 35-632: heights from the 23-432 table for that district"}
+    overlay = {"districts": overlay_districts, "within": within,
+               "quote": clean(m111), "section": "34-111", "url": url("iii", 4, "34-111"),
+               "height_quote": clean(m62), "height_section": "35-62", "height_url": url("iii", 5, "35-62"),
+               "coverage_note": "MapPLUTO assigns a commercial overlay to a tax lot when it covers at least 10% of the lot's area or at least 50% of the overlay lies within the lot (PLUTO data dictionary, Overlay1), so part of the lot can lie outside it."}
+    return out, withheld, no_res, overlay
 
 
 def build_nyc():
@@ -341,15 +497,27 @@ def build_nyc():
     high = build_nyc_high(ch22, ch23, url)
     assert not set(high) & set(d), set(high) & set(d)
     d.update(high)
-    covered = NYC_DISTRICTS + list(high)
+    comm, comm_withheld, no_res, overlay = build_nyc_commercial(base, url, d)
+    assert not set(comm) & set(d)
+    d.update(comm)
+    covered = NYC_DISTRICTS + list(high) + list(comm)
+    # The registry's MapPLUTO request carries ZoneDist1 but not the overlay, special-district or frontage fields; the page
+    # reads those from the same layer by BBL (extra_fields). Same service as the registry entry, checked here.
+    reg = json.load(open(os.path.join(ROOT, "app/data/parcel_services.json")))
+    assert any(sv["url"] == MAPPLUTO_URL for sv in reg["services"]), "MapPLUTO URL differs from the registry"
 
     return {
         "id": "nyc", "name": "New York City", "counties": ["36005", "36047", "36061", "36081", "36085"],
         "zone_source": {"kind": "parcel_field", "field": "ZoneDist1", "lot_area_field": "LotArea", "lot_width_field": "LotFront", "floor_area_field": "BldgArea",
-                        "note": "MapPLUTO ZoneDist1 is the district covering the largest share of the tax lot (PLUTO data dictionary)."},
+                        "note": "MapPLUTO ZoneDist1 is the district covering the largest share of the tax lot (PLUTO data dictionary).",
+                        "extra_fields": {"url": MAPPLUTO_URL, "by": "BBL", "fields": ["Overlay1", "Overlay2", "SPDist1", "SPDist2", "LotFront"],
+                                         "note": "Read from MapPLUTO by the lot's BBL: commercial overlays (Overlay1/2), special purpose districts (SPDist1/2) and lot frontage (LotFront)."}},
         "code": "New York City Zoning Resolution", "cite_prefix": "ZR", "code_url": base, "as_amended": "sections amended 12/5/2024 (City of Yes for Housing Opportunity), as published on " + TODAY,
         "districts_covered": covered,
-        "not_covered": "R11, R12, commercial (C), manufacturing (M) and special-purpose district standards are not encoded here.",
+        "not_covered": "Manufacturing (M), mixed-use (MX) and special purpose district standards, and commercial designations ZR 34-112 doesn't list, are not encoded here.",
+        "commercial_withheld": comm_withheld,
+        "no_residences": no_res,
+        "commercial_overlay": overlay,
         "caveats": [caveat,
                     {"text": "A zoning lot can be made of more than one tax lot, and MapPLUTO's floor area is the city's recorded gross floor area, not zoning floor area; both are screening inputs only.",
                      "section": "PLUTO data dictionary (LotArea, BldgArea)", "url": "https://s-media.nyc.gov/agencies/dcp/assets/files/pdf/data-tools/bytes/pluto_datadictionary.pdf"}],
@@ -358,7 +526,7 @@ def build_nyc():
         "districts": d,
         "verification": {"status": "verified", "checked_on": TODAY,
                          "method": "Fetched the Zoning Resolution chapters from zr.planning.nyc.gov and parsed the tables and sentences with scripts/build_zoning_standards.py; each rule keeps the verbatim text it came from.",
-                         "evidence": "Article I Ch. 2 (12-10), Article II Ch. 2 (22-00, 22-121, 22-122), Article II Ch. 3 (23-11, 23-12, 23-21, 23-22, 23-421, 23-422, 23-432)",
+                         "evidence": "Article I Ch. 1 (11-25), Ch. 2 (12-10), Article II Ch. 2 (22-00, 22-121, 22-122), Article II Ch. 3 (23-11, 23-12, 23-21, 23-22, 23-421, 23-422, 23-432), Article III Ch. 2 (32-121, 32-122, 32-123), Ch. 4 (34-01, 34-03, 34-111, 34-112, 34-221), Ch. 5 (35-62, 35-632); commercial designations from MapPLUTO",
                          "unverified_fields": []},
     }
 
@@ -641,12 +809,16 @@ def main():
     }
     json.dump(uses, open(os.path.join(ROOT, "app/data/parcel_use_codes.json"), "w"), indent=1, ensure_ascii=False)
     for dd, r in nyc["districts"].items():
-        if r.get("tier") == "R6-R10":
+        if r.get("tier") == "R6-R12":
             fo, ho = r["far"]["options"], r["height"]["options"]
             print(dd, r["min_lot"]["area_sqft"], "FAR std", [(o["far"], (o["condition"] or "")[:25]) for o in fo["standard"]], "qual", [o["far"] for o in fo["qualifying"]],
                   "HT std", [(o["max_base_ft"], o["max_height_ft"], (o["condition"] or "")[:25]) for o in ho["standard"]], "qual", [(o["max_base_ft"], o["max_height_ft"]) for o in ho["qualifying"]])
             continue
-        print(dd, r["housing_types"]["limited_to"], r["min_lot"]["area_sqft"], r["min_lot"]["width_ft"], r["far"]["standard"], r["height"]["max_height_ft"], r["height"].get("perimeter_wall_ft"))
+        print(dd, r["housing_types"]["limited_to"], r["min_lot"]["area_sqft"], r["min_lot"]["width_ft"], r["far"]["standard"],
+              "height withheld" if r["height"].get("withheld") else (r["height"]["max_height_ft"], r["height"].get("perimeter_wall_ft")),
+              "via " + r["commercial"]["equivalent"] if r.get("commercial") else "")
+    print("commercial withheld:", nyc["commercial_withheld"])
+    print("no residences:", sorted(nyc["no_residences"]))
     for z, r in dc["districts"].items():
         print(z, [(x["structure"], x["width_ft"], x["area_sqft"]) for x in r["min_lot"]], r["height"]["max_height_ft"], r["height"]["max_stories"], [(x["structure"], x["max_pct"]) for x in r["lot_occupancy"]])
     print("DC accessory apartment min GFA", dc["accessory_apartment"]["min_gfa"])

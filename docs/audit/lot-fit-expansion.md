@@ -284,3 +284,81 @@ check and the range for the fact; a test asserts no "null ft" or "NaN" appears.
 - My first build read R7-1 and R7-2's 23-432 rows with no condition: their footnote digit sits inside a `<span>`
   within `<sup>`, which my first regex missed. The printed output showed the empty condition; the regex now allows tags
   inside `<sup>`, and the build fails if any `<sup>` is left unread.
+
+# Round 4 (17 Nov 2026): NYC R11, R12 and commercial districts
+
+## What was added
+
+**R11, R11A and R12** (same tables as R6-R10): ZR 22-121 marks every residence type "●" in the R11 and R12 columns;
+23-12 gives 2,375 sq ft / 25 ft and 1,700 sq ft / 18 ft for R6-R12; 23-22 gives R11 12.00 / 15.00 and R12 15.00 / 18.00;
+23-432 gives R11 60/155/255 ft (qualifying 155/325), R11A by street (125 or 60 minimum base), R12 60/155/325 (155/395).
+23-22 lists R11 but not R11A, so R11A takes R11's floor area row under ZR 11-25 ("All regulations applicable to a
+district designation shall be applicable to such district designation appended with a suffix, except as otherwise set
+forth in express provisions"); the build checks that 23-22 never mentions R11A, and the record says so (`via_11_25`).
+
+**Commercial districts where residences are permitted.** Read from the code, each with the section URL:
+
+| Rule | Section | What it decides |
+|---|---|---|
+| Use Group II by commercial district | 32-121 table | Residences permitted in C1, C2, C5, C6 (●), C4 (● P), C3 (detached ●, others ♦); not in C7 or C8 (–) |
+| C3A | 32-122 | "only single- or two-family detached or zero lot line residences shall be permitted" |
+| C4 condition | 32-123 | C4-1 lots of 4+ acres in Staten Island's lower density growth management areas need a special permit (named, not checked) |
+| Residential equivalent | 34-112 table | e.g. C4-4 → R7-2, C6-2A → R8A, C4-1 → R5, C3 → R3-2, C6-11 → R11, C6-12 → R12 |
+| C3A bulk | 34-03 | R3A's bulk "in lieu" of Chapter 34 |
+| Which lots | 34-01 | only zoning lots with residential buildings only; mixed buildings follow Article III Ch. 5 (said, not checked) |
+| Floor area | 34-221 | the equivalent's Article II floor area; plaza and arcade bonuses not counted |
+| Heights, R6-R12 equivalents | 35-632 | "as set forth in the table in Section 23-432 for the applicable Residence District" |
+| Heights, R1-R5 equivalents | 35-62 | non-qualifying sites within R3/R4 take R4's heights, within R5A/R5B take R5's. How that applies to a C3 or C4-1 lot (an *equivalent*, not mapped *within* R3/R4) isn't settled from the text, so **no height is shown** for C3 and C4-1 |
+| C1/C2 overlays | 34-111, 35-62 | within an overlay on R1 or R2, R3-2's bulk; on R3/R4 non-qualifying sites R4's heights; R5A/R5B → R5's heights |
+
+The commercial designations the page handles are the ones actually mapped (MapPLUTO's ZoneDist1 values, queried at
+build time). "C5" in the R10 row covers C5-1 to C5-5 under ZR 11-25. **Withheld, with the reason on the page:**
+designations the 34-112 table doesn't list and that carry other suffixes, which are mapped with Special Purpose
+District rules: C5-2.5, C5-P, C6-1G, C6-2G, C6-2M, C6-4.5, C6-4M, C6-5.5, C6-6.5, C6-7T. C7 and C8 lots say
+residences aren't permitted (32-121). M, MX and special-district-only districts stay "not on file".
+
+**Overlays and special districts on the page.** The registry's MapPLUTO request doesn't carry `Overlay1`, `Overlay2`,
+`SPDist1`, `SPDist2` or `LotFront`, so the page reads them from the same layer by BBL (`zone_source.extra_fields`; the
+build checks the URL is the registry's). A lot with a C1/C2 overlay keeps its residence district's standards (an overlay
+need only cover 10% of the lot, per the PLUTO data dictionary) and gets a row quoting 34-111 / 35-62 and saying what
+changes within the overlay. A lot in a special purpose district gets a row naming it and saying its rules aren't
+checked. If the BBL read fails, the page says overlays and special districts weren't checked.
+
+**Side effect, intended:** `LotFront` was never in the registry's request, so on the live page NYC lot-width checks
+(minimum width, "split into two lots") never ran before this round; the browser tests passed only because their mocks
+return every field. Width now comes from the BBL read.
+
+## Verification (round 4)
+
+- **Build** asserts every quoted sentence is found in its section, every 34-112 row's tokens rebuild the cell, the
+  32-121 cells are exactly as expected (C1/C2/C5/C6 ●, C4 ● P, C3 ●/♦, C7/C8 –), the 34-111 district list is
+  C1-1..C2-5, and each equivalent exists in the data.
+- **Unit tests** (`tests/unit/zoningStandards.test.ts`, 20 pass): each commercial district's equivalent is the one its
+  34-112 row names (or 11-25's parent), its floor area, lot and height equal the equivalent's; spot checks for R11, R11A,
+  R12 and 13 commercial districts; C7/C8 and withheld designations; overlay mapping.
+- **e2e** (`tests/e2e/site.spec.ts`, through `houseAt`): R11, M1-1 "not on file", a C4-4 house (R7-2's floor area with
+  both conditions, row quoted, ADU not evaluated), C3 (height withheld), C8-1 (no residences), an R2 lot with a C1-2
+  overlay (R3-2 within it), and a special purpose district lot.
+- **Live check** (`scripts/live_check_lot_fit.mjs`, `data/backtests/live_check_lot_fit_2026-11-17.json`, LIVE_PORT 8872):
+  - 14 of 14 residential commercial lots in all five boroughs matched MapPLUTO queried separately: C4-5D, C6-3A, C4-3A
+    (Brooklyn); C4-4, C4-2, C4-3 (Queens); C4-4D, C4-5X, C4-4A (Bronx); C4-1, C4-2 (Staten Island); C4-7, C4-6A, C1-8A
+    (Manhattan).
+  - 6 of 6 overlay lots (R3-2 / R3X with C1-1, C1-3, C2-1, C2-2 in Queens and Staten Island) show the overlay row with
+    35-62's R4 heights for non-qualifying sites. No R1/R2 overlay lot was sampled live; that path is covered by e2e only.
+  - 29 of 29 commercial quotes and 34-112 rows re-found in the live sections; 32-121 cells as expected.
+  - 45 of 45 R6-R12 table rows re-found (40 before, plus R11/R11A/R12 rows).
+  - **R11/R12 on a real lot: not possible.** MapPLUTO has no R11, R11A or R12 lots; the only R11/R12 equivalents
+    mapped are one C6-11 lot (vacant, LandUse 11) and one C6-12 lot (commercial, LandUse 05), where home checks don't
+    run. R11/R12 values are checked by the live table rows and e2e only.
+  - Unchanged: R1-R5 8/8 and 22/22 quotes, R6-R10 12/12, DC 5/5 and 27/27, Nashville 2/2, Travis and Jefferson "not on
+    file". No page errors.
+
+## My own mistakes this round
+
+- The worktree was created from an unrelated old commit (`94a3f0b`); I reset it to the branch head (`1366fed`) first.
+- My first quote patterns assumed spaces before punctuation; the build's text helper removes them, and a global edit I
+  made to fix "non- " also turned the normalizing line into a no-op. The build stopped on the missing quotes; fixed.
+- I first withheld C3A's height like C3's; 34-03 says Chapter 34 (with its 34-24 height modifications) doesn't apply in
+  C3A, so it now takes R3A's own heights.
+- Drawn-lot clicks (Brooklyn, Bronx, Manhattan, which have no county model) skipped enrichment, so they would never have
+  read the overlay fields; caught in review before the live run and fixed for both NYC and DC's zoning-map lookup.

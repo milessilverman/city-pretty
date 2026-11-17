@@ -3215,9 +3215,25 @@ function localZoningStandards(a, fips) {
     // their own rules, which aren't encoded, so nothing is applied there.
     if (J.overlay_rule && dist.includes("/") && (J.districts_covered || []).includes(dist.split("/")[0]))
       return { juris: J, district: dist, missing: `This lot is in ${dist}, a geographically modified version of ${dist.split("/")[0]} (${J.cite_prefix} ${J.overlay_rule.section}): its own rules change the base zone's and aren't encoded here, so no standards are shown.` };
+    if (J.no_residences && J.no_residences[dist]) {
+      const nr = J.no_residences[dist];
+      return { juris: J, district: dist, noResidences: true, missing: `Residences aren't permitted in ${dist} (${J.cite_prefix} ${nr.section}: ${nr.quote}).` };
+    }
+    if (J.commercial_withheld && J.commercial_withheld[dist]) return { juris: J, district: dist, missing: `${J.commercial_withheld[dist]} (${J.cite_prefix} 34-112, 11-25).` };
     const std = J.districts && J.districts[dist];
     if (!std) return { juris: J, district: dist, missing: `${J.name}'s standards are on file only for ${(J.districts_covered || []).join(", ")}; this lot is ${dist}. ${J.not_covered || ""}`.trim() };
-    return { juris: J, district: dist, std };
+    const out = { juris: J, district: dist, std };
+    const X = src.extra_fields;
+    if (X && a) {
+      if (a._zone_extra_ok) {
+        const OV = J.commercial_overlay;
+        const ov = OV ? [a.Overlay1, a.Overlay2].map(x => String(x || "").trim().toUpperCase()).filter(x => OV.districts.includes(x)) : [];
+        if (ov.length && OV.within[dist]) out.overlay = { districts: ov, within: OV.within[dist], rule: OV };
+        const sp = [a.SPDist1, a.SPDist2].map(x => String(x || "").trim()).filter(Boolean);
+        if (sp.length) out.special = sp;
+      } else out.extraErr = a._zone_extra_err || "they weren't read";
+    }
+    return out;
   }
   const W = fips ? (ZONING_STANDARDS.withheld || []).find(w => (w.counties || []).includes(fips)) : null;
   if (W) return { withheld: W, missing: `No local zoning standards are on file here. ${W.jurisdiction}: ${W.reason}` };
@@ -4245,7 +4261,13 @@ async function fetchParcel(ll) {
         cachedHit = poly._feat;
       }
     });
-    if (cachedHit) return normalizeParcelFeature(cachedHit, ll);
+    if (cachedHit) {
+      // Drawn lots carry only the first registry fields; the zoning map (DC) and NYC's overlay and special-district
+      // fields are read the same way as on a point query.
+      const p = normalizeParcelFeature(cachedHit, ll);
+      if (p) { await enrichZoneFromLayer(p, ll, cacheFips); await enrichZoneExtra(p, cacheFips); }
+      return p;
+    }
   }
 
   const isLA = (ll.lat >= 33.70 && ll.lat <= 34.85 && ll.lng >= -118.95 && ll.lng <= -117.65);
@@ -4349,6 +4371,7 @@ async function fetchParcel(ll) {
           if (parcel && fips === "11001") await enrichDcCama(parcel, feat.attributes && feat.attributes.SSL);
           if (parcel) await enrichFromInputLayer(parcel, ll, fips);
           if (parcel) await enrichZoneFromLayer(parcel, ll, fips);
+          if (parcel) await enrichZoneExtra(parcel, fips);
           if (parcel) Object.defineProperty(parcel, "_fullRecord", { value: true });   // every field the county's model reads
           return parcel;
         }
@@ -4400,6 +4423,23 @@ async function enrichZoneFromLayer(parcel, ll, fips) {
     if (r && r[zsrc.field] != null && String(r[zsrc.field]).trim()) parcel.attributes[zsrc.attr] = String(r[zsrc.field]).trim();
     else parcel.attributes[zsrc.attr + "_err"] = "the zoning map has no district at this point";
   } catch (e) { parcel.attributes[zsrc.attr + "_err"] = "the zoning map service didn't answer"; }
+}
+// NYC: the registry's MapPLUTO request has the zoning district but not the commercial overlay, special purpose district or
+// lot frontage. zone_source.extra_fields names them; they are read from the same layer by the lot's BBL (exactly one
+// record, or nothing). If the read fails, the reason is stored and the page says those weren't checked.
+async function enrichZoneExtra(parcel, fips) {
+  const J = ZONING_STANDARDS && fips ? ZONING_STANDARDS.jurisdictions.find(j => (j.counties || []).includes(fips)) : null;
+  const X = J && J.zone_source && J.zone_source.extra_fields;
+  if (!X || !parcel || !parcel.attributes) return;
+  const key = parcel.attributes[X.by];
+  if (key == null || key === "" || !/^\d+(\.0+)?$/.test(String(key))) { parcel.attributes._zone_extra_err = "the lot's BBL isn't in the record"; return; }
+  try {
+    const d = await arcQuery(X.url, { where: `${X.by}=${Math.round(+key)}`, outFields: X.fields.join(","), returnGeometry: "false", f: "json" }, 8000);
+    const r = d && d.features && d.features.length === 1 && d.features[0].attributes;
+    if (!r) { parcel.attributes._zone_extra_err = "MapPLUTO returned no single record for this BBL"; return; }
+    for (const f of X.fields) parcel.attributes[f] = r[f] == null ? "" : String(r[f]).trim();
+    parcel.attributes._zone_extra_ok = true;
+  } catch (e) { parcel.attributes._zone_extra_err = "MapPLUTO didn't answer"; }
 }
 async function enrichFromInputLayer(parcel, ll, fips) {
   const C = COUNTY_VALUATION_MODELS && COUNTY_VALUATION_MODELS.counties && fips && COUNTY_VALUATION_MODELS.counties[fips];
@@ -4597,8 +4637,32 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
   // Local zoning standards read from the code itself (localZoningStandards). Each statement names its section; what the
   // page can't check (special districts, transit zones, flood maps) is said, not assumed.
   const zs = F.zs || null, Z = zs && zs.std ? zs.std : null;
+  // NYC context rows shared by every district: how a commercial district gets residential rules (ZR 34-112 / 34-03),
+  // a C1 or C2 overlay on the lot (34-111, 35-62), and special purpose districts. Each is read from the code or from
+  // MapPLUTO's own fields; what can't be read is said.
+  const nycContext = () => {
+    const J = zs.juris, cp = J.cite_prefix || J.code, dist = zs.district, C = Z.commercial;
+    if (C) add(`Commercial district ${esc(dist)}`, "note",
+      `${esc(dist)} takes the residential rules of ${esc(C.equivalent)}: "${esc(C.how.quote)}" (${cp} ${esc(C.how.section)}). ` +
+      `They apply to a zoning lot with only residential buildings: "${esc(C.residential_only.quote)}" (${cp} ${esc(C.residential_only.section)}); a mixed residential and commercial building isn't checked here. ` +
+      `Floor area bonuses for a public plaza or arcade (${cp} ${esc(C.bonus.section)}) aren't counted.` +
+      `${Z.housing_types.condition ? ` ${cp} ${esc(Z.housing_types.condition_section)}: "${esc(Z.housing_types.condition)}" Whether this lot is in such an area isn't checked here.` : ""}`);
+    if (zs.overlay) {
+      const O = zs.overlay, R = O.rule, w = O.within;
+      add(`Commercial overlay ${O.districts.map(esc).join(", ")}`, "note",
+        `MapPLUTO records a ${O.districts.map(esc).join(" and ")} commercial overlay on this lot. ${esc(R.coverage_note)} ` +
+        `On the part within the overlay: "${esc(R.quote)}" (${cp} ${esc(R.section)})` +
+        `${w.height_from_non_qrs ? `; and "${esc(R.height_quote)}" (${cp} ${esc(R.height_section)})` : ""}. ` +
+        (w.bulk_from !== dist ? `So within the overlay this ${esc(dist)} lot takes ${esc(w.bulk_from)}'s floor area, lot and height rules, not the ${esc(dist)} figures shown here. `
+          : w.height_from_non_qrs ? `So within the overlay the ${esc(dist)} floor area and lot rules shown here stand, and on a lot that isn't a qualifying residential site the height rules are ${esc(w.height_from_non_qrs)}'s. `
+          : `So within the overlay the ${esc(dist)} rules shown here stand. `) +
+        `Residential use within a C1 or C2 district follows ${cp} 32-121, which permits every type of residence there.`);
+    }
+    if (zs.special) add("Special purpose district", "note", `MapPLUTO records special purpose district ${zs.special.map(esc).join(" and ")} on this lot. Special purpose district rules supplement and modify the underlying zoning (PLUTO data dictionary); they aren't checked here, so the standards shown may not be the ones that apply.`);
+    if (zs.extraErr) add("Commercial overlay and special districts", "note", `Not checked: ${esc(zs.extraErr)}, so a commercial overlay or special purpose district on this lot (which would change these standards) isn't known.`);
+  };
   const nycHigh = (house) => {
-    // R6-R10 (ZR 22-121, 23-12, 23-22, 23-432). Floor area and height depend on conditions the page can't see (within
+    // R6-R12 and commercial districts with an R6-R12 equivalent (ZR 22-121 or 32-121, 23-12, 23-22, 23-432). Floor area and height depend on conditions the page can't see (within
     // 100 ft of a wide street, qualifying affordable or senior housing, Mandatory Inclusionary Housing areas): every
     // value is shown with the code's own condition, never one unconditioned figure.
     const J = zs.juris, cp = J.cite_prefix || J.code, zf = J.zone_source || {}, dist = zs.district;
@@ -4612,8 +4676,9 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
       `Minimum lot: ${fmtN(ml.area_sqft)} sq ft and ${ml.width_ft} ft wide for a detached or zero-lot-line one- or two-family home, ${fmtN(mo.area_sqft)} sq ft and ${mo.width_ft} ft for other residences (${cp} ${ml.section}). ` +
       `Height, standard residences: ${htTxt(hh.options.standard)}; qualifying affordable or senior housing: ${htTxt(hh.options.qualifying)} (${cp} ${esc(hh.section)}). ${esc(hh.setback_note)} ` +
       `Floor area ratio, standard residences: ${farTxt(far.options.standard)}; qualifying affordable or senior housing: ${farTxt(far.options.qualifying)} (${cp} ${esc(far.section)}). ` +
-      `Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone, and the effect of any commercial overlay, aren't checked here. ` +
+      `Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. ` +
       `${(J.caveats || [])[0] ? `Special Purpose Districts and Article VI rules can change these (${cp} ${esc(J.caveats[0].section)}); they aren't checked here.` : ""}`);
+    nycContext();
     if (lotA > 0) {
       const so = far.options.standard, fl = Math.min(...so.map(o => o.far)), fh = Math.max(...so.map(o => o.far));
       const lo = Math.round(fl * lotA), hi = Math.round(fh * lotA), oh = so.find(o => o.far === fh);
@@ -4638,9 +4703,9 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
   // The checks below are written for a house on its own lot. A condominium or cooperative unit, or a whole apartment
   // building, is recorded as residential but isn't that, so they aren't run there.
   if (a.UseForm === "unit") { add("Home upgrades", "note", `This record is ${esc(a.UseDescription)}: a unit in a condominium or cooperative. ADU, lot-split, pool and addition checks are about a house on its own lot, so they aren't run; the association and the building's lot decide those.`); return out(); }
-  if (a.UseForm === "multi-family") { if (Z && zs.juris.id === "nyc" && Z.tier === "R6-R10") nycHigh(false); add("Home upgrades", "note", `This record is ${esc(a.UseDescription)}: an apartment building. The checks here are written for a house on its own lot, so they aren't run.`); return out(); }
+  if (a.UseForm === "multi-family") { if (Z && zs.juris.id === "nyc" && Z.tier === "R6-R12") nycHigh(false); add("Home upgrades", "note", `This record is ${esc(a.UseDescription)}: an apartment building. The checks here are written for a house on its own lot, so they aren't run.`); return out(); }
 
-  if (Z && zs.juris.id === "nyc" && Z.tier === "R6-R10") {
+  if (Z && zs.juris.id === "nyc" && Z.tier === "R6-R12") {
     nycHigh(true);
   } else if (Z && zs.juris.id === "nyc") {
     const J = zs.juris, cp = J.cite_prefix || J.code, zf = J.zone_source || {}, dist = zs.district;
@@ -4648,9 +4713,10 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
     const ht = Z.housing_types, ml = Z.min_lot, mo = Z.min_lot_other_residences, far = Z.far, hh = Z.height;
     const qrsNote = `unless the lot is a qualifying residential site (${cp} 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here)`;
     add(`Zoning district ${esc(dist)} (${esc(J.code)})`, "note",
-      `Housing types: ${ht.limited_to ? `limited to ${esc(ht.limited_to)} (${cp} ${esc(ht.section)}), ${qrsNote}` : `no limit on the type of residence (${cp} 22-121, 22-122)`}. ` +
+      `Housing types: ${ht.limited_to ? `limited to ${esc(ht.limited_to)} (${cp} ${esc(ht.section)})${Z.commercial ? "" : `, ${qrsNote}`}` : `no limit on the type of residence (${cp} ${Z.commercial ? esc(ht.section) : "22-121, 22-122"})`}. ` +
       `Minimum lot for a detached or zero-lot-line home: ${fmtN(ml.area_sqft)} sq ft and ${ml.width_ft} ft wide (${cp} ${ml.section})${lotA > 0 && (lotA < ml.area_sqft || (lotW > 0 && lotW < ml.width_ft)) ? `; this lot (${fmtN(lotA)} sq ft${lotW > 0 ? `, ${fmtN(lotW)} ft of frontage` : ""}) is smaller, which may mean it predates the minimum (not checked here)` : ""}. ` +
-      `Height: up to ${hh.max_height_ft} ft${hh.perimeter_wall_ft ? `, with perimeter walls up to ${hh.perimeter_wall_ft} ft` : ""}${hh.max_base_height_ft ? `, base up to ${hh.max_base_height_ft} ft` : ""} (${cp} ${esc(hh.section)}). ` +
+      (hh.withheld ? `Height: not shown. ${esc(hh.reason)} "${esc(hh.quote)}" (${cp} ${esc(hh.section)}). ` :
+      `Height: up to ${hh.max_height_ft} ft${hh.perimeter_wall_ft ? `, with perimeter walls up to ${hh.perimeter_wall_ft} ft` : ""}${hh.max_base_height_ft ? `, base up to ${hh.max_base_height_ft} ft` : ""} (${cp} ${esc(hh.section)})${hh.commercial_note ? `; for ${esc(dist)}, "${esc(hh.commercial_note.quote)}" (${cp} ${esc(hh.commercial_note.section)})` : ""}. `) +
       `${(J.caveats || [])[0] ? `Special Purpose Districts and Article VI rules can change these (${cp} ${esc(J.caveats[0].section)}); they aren't checked here.` : ""}`);
     if (lotA > 0) {
       const maxFA = Math.round(far.standard * lotA);
@@ -4662,9 +4728,10 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
           `The city records ${fmtN(bArea)} sq ft of gross floor area here, so about ${fmtN(Math.abs(left))} sq ft ${left >= 0 ? "remain" : "more than that is already built"} by this measure. `) +
         (left == null ? "" : "Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure."));
     }
+    nycContext();
     const sfOnly = ht.limited_to && !/two-family/.test(ht.limited_to);
     if (sfOnly) add("Second home (two-family or more)", "no", `${esc(dist)} is limited to ${esc(ht.limited_to)} (${cp} ${esc(ht.section)}), ${qrsNote}. An ancillary dwelling unit is the second home allowed (below).`);
-    else add("Second home (two-family or more)", "yes", ht.limited_to ? `A two-family home is an allowed type here: ${esc(ht.limited_to)} (${cp} ${esc(ht.section)}), within the floor area above.` : `${esc(dist)} sets no limit on the type of residence (${cp} 22-121, 22-122), within the floor area above.`);
+    else add("Second home (two-family or more)", "yes", ht.limited_to ? `A two-family home is an allowed type here: ${esc(ht.limited_to)} (${cp} ${esc(ht.section)}), within the floor area above.` : `${esc(dist)} sets no limit on the type of residence (${cp} ${Z.commercial ? esc(ht.section) : "22-121, 22-122"}), within the floor area above.`);
     if (lotA > 0 && lotW > 0) {
       const otherOk = !ht.limited_to || /semi-detached|attached/.test(ht.limited_to);
       const two = lotA >= 2 * ml.area_sqft && lotW >= 2 * ml.width_ft;
@@ -4722,6 +4789,8 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
         `In an accessory building: by right only with permanent access (an 8-ft passage open to the sky to a street, an improved 24-ft alley, or within 300 ft of a street by an improved 15-ft alley), which isn't checked here. ` +
         `Either home must be owner-occupied, the apartment may house at most ${aa.max_persons} people, and renting it needs a Residential Rental Business License (${cp} ${esc(aa.section)}).`);
     }
+  } else if (Z && zs.juris.adu && Z.commercial) {
+    add("Ancillary dwelling unit (ADU)", "note", `${esc(zs.juris.cite_prefix)} 12-10 defines an ancillary dwelling unit; where one is allowed in a commercial district such as ${esc(zs.district)} isn't checked here.`);
   } else if (Z && zs.juris.adu) {
     // The local code's own accessory-unit rule replaces the generic ADU rows below.
     const J = zs.juris, cp = J.cite_prefix || J.code, ad = J.adu, gtz = (ad.no_backyard_outside_greater_transit_zone || []).includes(zs.district);
@@ -5484,7 +5553,7 @@ function renderHouse(box, a, lot, ll, st) {
   const zs = typeof activeFips === "function" && activeFips() !== "06037" ? localZoningStandards(a, activeFips()) : null;
   F.zs = zs;
   const zsH = zs && zs.std && zs.std.height ? zs.std.height : null;
-  // R6-R10 heights depend on the street (ZR 23-432 footnotes): the lowest standard-residence limit is the one used for
+  // R6-R12 heights depend on the street (ZR 23-432 footnotes): the lowest standard-residence limit is the one used for
   // checks, and the fact shows the range with its condition. (A missing single height must never read as 0 ft.)
   const zsHOpts = zsH && zsH.options ? zsH.options.standard.map(o => +o.max_height_ft).filter(x => x > 0) : [];
   const hMax = rule && +rule.max_height_ft ? +rule.max_height_ft : ocH ? +ocH[1] : zsH && +zsH.max_height_ft ? +zsH.max_height_ft : zsHOpts.length ? Math.min(...zsHOpts) : null;
