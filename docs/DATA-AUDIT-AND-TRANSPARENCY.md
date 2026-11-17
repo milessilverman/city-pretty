@@ -498,6 +498,16 @@ from the text. Lots under a C1/C2 overlay keep their residence standards plus a 
 in a special purpose district say its rules aren't checked. No residential lot in the city is mapped R11 or R12 or
 an equivalent, so those are checked against the live tables and a browser test only.
 
+**Round 5 (17 Nov): City of San Diego, single-family zones RS-1-1 to RS-1-14**, from the City's own PDF of SDMC
+Chapter 13, Article 1, Division 4 (edition 9-2026): minimum lot area, width, frontage and depth, setbacks (Table
+131-04D), height and floor area ratio (incl. Table 131-04J's bands by lot area). The zone is read from the City's
+Official Zoning Map at the clicked point; outside the City (e.g. Chula Vista) the page says so. I downloaded the PDF
+myself: RS-1-1 (40,000 sq ft, 100 ft wide), RS-1-7 (5,000 sq ft, 50 ft, 24/30 ft height) and RS-1-14 (5,000 sq ft,
+50 ft, 35 ft, FAR 0.60) match the table. My live re-check: 3/3 RS lots, 43/43 quotes re-found, Chula Vista shows the
+reason. Of the 30 largest metros, 21 cities' codes answer 403 to the build machine (mostly on Municode and American
+Legal); Charlotte, Portland and Miami are reachable and not yet built (`audit/lot-fit-expansion.md`). Also fixed: San
+Diego's parcel address showed only the house number; the street fields are now joined (live: "1590 E CHASE AVE").
+
 **Correction: NYC lot-width and lot-split checks never ran on the live page (found 17 Nov).** The registry's MapPLUTO
 request never included the lot-frontage field, so in rounds 1-3 the NYC lot-width and "big enough to split" checks were
 skipped on every real click. The browser tests passed because their mocks return every field; my live checks compared
