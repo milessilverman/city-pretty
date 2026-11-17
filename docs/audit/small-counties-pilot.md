@@ -58,8 +58,8 @@ and Pickett (6) get none, and say so; Sevier has 14 gaps and 2 strengths.
 
 | | Full files (as built) | Light files (no drawn streets, water, parks) |
 |---|---|---|
-| Size | ~20.6 KB per block group (pilots pooled) -> ~1.1 GB for 54,113 block groups | ~3.5 KB per block group -> ~0.2 GB |
-| Build time | ~5 min per county, 3-4 at once -> ~1.3-1.7 min per county -> ~55-70 hours for 2,443 | same |
+| Size | ~20.6 KB per block group (pilots pooled) -> ~1.1 GB for 54,113 block groups; Tennessee's 81 came to 31.8 MB (0.39 MB a county) -> ~0.95 GB for 2,443 | ~3.5 KB per block group -> ~0.2 GB |
+| Build time | ~5 min per county; Tennessee's 78 ran at ~1 min per county with four at once -> ~40 hours for 2,443, plus checks | same |
 | OSM | 4 regional downloads (2-4.6 GB each) and ~45 state cuts (~3 min each) | same |
 
 The repository's `counties/` is 1.1 GB today, so full files would about double it. **Light-file test:** White County's
@@ -72,5 +72,37 @@ loses is the page's own street names and drawn parks for that county. Existing c
 too slow to run on every county (5-25 min each through the public mirror); run it on a sample per state, and run
 Census and live-page checks on a sample per state.
 
-## Tennessee: the rest of the state
-(results below)
+## Tennessee: the rest of the state (built)
+
+All 81 unlisted Tennessee counties now open as data counties (95 of 95). The 78 after the pilot ran as four workers of
+19-20 counties each: about one county a minute overall, no build failures. Page entries: 81 new tags (the page now lists
+787 counties) and 81 manifest rows. 81 new files, 31.8 MB in all (median 0.28 MB, largest 1.52 MB).
+
+- **Canopy:** `build_tree_equity_2025.py tn` (current release, 2025-07-01): files for all 95; the 14 existing counties'
+  files came out identical apart from the build date and were left unchanged.
+- **Crash counts and comparisons:** TITAN 2022-2024 with the boundary rule for all 81; `recompute_crash_gaps.py`:
+  181 gaps and 242 strengths across the 78, and 949 crash-based improvement rows dropped where the rebuilt counts no
+  longer qualify them (the same rule as every other county). Counties with fewer than 20 block groups get no "worse than
+  X%" comparison.
+- **Tract-median flags:** `build_acs_fallback_flags.py` rebuilt for all 749 county files: 0 mismatches.
+- **Completeness:** 81 new rows (20 tier C where a transit feed was found, 61 tier D); every existing row left exactly as
+  it was (a fresh run would also have rewritten four other counties' build-time "not responding" notes; not taken).
+- **Checks:** Census 96 more values in six counties equal the ACS table files (144 in all, 0 wrong). OpenStreetMap ID
+  for ID in five counties (`data/backtests/tn_osm_xcheck_2026-11-17.json`): Warren 2,626 = 2,626 roads, 1 = 1 bus stop;
+  Madison 5,100 of 5,101 roads, the one being way 19439975, Malone Road, tagged Crockett County (last edited 2012), in
+  the Tennessee file, the same box-edge case as White's. Two earlier tries for Madison and Warren got no answer from the
+  public Overpass mirror. Live on the real page: Madison, Anderson, Warren, Van Buren, Lake and Moore, 3 block groups
+  each (18/18), every panel matching its source, no page errors; plus the three pilots (9/9).
+- **Tests:** unit 656 (the crash-count and crash-gap tests run per county, so 81 counties add 162), typecheck clean,
+  e2e 68/68 (`PW_PORT=8836`).
+
+**Disk.** Each county's build directory held copies of the national ACS table files (about 150 MB a county), and the
+session's disk allowance ran out after ~20 counties; four builds stopped mid-way. Those four build directories were
+deleted and rebuilt from scratch (no shared cache file was written after the pilots, so none was affected), and each
+build now deletes its raw source files when it finishes (keeping only what export and the checks read). A full-US run
+needs the same cleanup.
+
+**Noted, not changed:** `scripts/live_check_panels.mjs` labels a sampled point in a county with no parcel service but no
+parcel near the point as "no parcel at point (right-of-way)" (Sevier, Anderson); that is the script's own label, not
+what the page says. Every county still carries the pipeline's street-tree estimate "from block-group area (the fit used
+for Los Angeles County)", which is LA-derived; it predates this pilot and applies to every county outside LA.
