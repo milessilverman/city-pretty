@@ -156,6 +156,17 @@
    "crash_years": null
   },
   {
+   "fips": "02020",
+   "name": "Anchorage Municipality",
+   "state": "AK",
+   "block_groups": 200,
+   "bundle_mb": 2.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-16T23:46:04Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
    "fips": "04003",
    "name": "Cochise County",
    "state": "AZ",

@@ -1332,3 +1332,30 @@ test("what fits on this lot reads DC's zone at the point and applies 11 DCMR; DC
   expect(n3).toContain("This parcel is CHURCH (Metro Nashville Parcels (Parcels_view)), so residential homeowner checks do not apply");
   expect(errors).toEqual([]);
 });
+
+// Alaska (17 Nov 2026): Anchorage's data file, built by the county pipeline with OpenStreetMap read through the Overpass API (no
+// Alaska extract can be downloaded here). The page must load it as a data county, not the "lot lines only" placeholder, and its
+// sources list must say which sources are missing (state crashes, 2021 Tree Equity) rather than show those figures as zero.
+test("Anchorage opens with its own data file; missing sources are named, and crash and heat values are absent, not zero", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.evaluate(() => (0, eval)("openCounty")("02020"));
+  await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "02020", null, { timeout: 60_000 });
+  const r = await page.evaluate(() => {
+    const D = (window as any).D_OC;
+    const rows = D.meta.sources.map((s: any[]) => [s[0], s[2], s[3], s[1]]);
+    const ms = D.features.map((f: any) => (D.details[f.properties.id] || {}).m || {});
+    return { n: D.features.length, failed: !!D.meta.load_failed, rows,
+      crashZero: ms.filter((m: any) => m.pbcr === 0 || m.ksi === 0).length, heatZero: ms.filter((m: any) => m.ht === 0).length,
+      withHomes: ms.filter((m: any) => m.homes > 0).length };
+  });
+  expect(r.failed).toBe(false);
+  expect(r.n).toBe(200);
+  expect(r.withHomes).toBeGreaterThan(150);
+  expect(r.rows.find((s: any[]) => /^OpenStreetMap/.test(s[0]))?.[2]).toBe(true);
+  expect(JSON.stringify(r.rows)).toContain("Overpass API");
+  expect(r.rows.find((s: any[]) => s[0] === "State crash records")?.[2]).toBe(false);
+  expect(r.rows.find((s: any[]) => s[0] === "Tree Equity Score 2021")?.[2]).toBe(false);
+  expect(r.crashZero).toBe(0);
+  expect(r.heatZero).toBe(0);
+  expect(errors).toEqual([]);
+});

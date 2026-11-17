@@ -155,7 +155,10 @@ describe("Tree Equity Score current release (2020 block groups), per county", ()
   const dir = path.join(root, "app/data/tree_equity_2025");
   const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => /^\d{5}\.json$/.test(f)) : [];
   it("covers every county with a data file, from American Forests' published state files", () => {
-    expect(files.length).toBe(639);
+    // one file per county data file (counties/bundle_<fips>.json.gz) plus LA and Orange, whose data files are embedded
+    const bundles = fs.readdirSync(path.join(root, "counties")).filter((f) => /^bundle_\d{5}\.json\.gz$/.test(f)).map((f) => f.slice(7, 12));
+    expect(files.length).toBe(bundles.length + 2);
+    for (const f of [...bundles, "06037", "06059"]) expect(files).toContain(`${f}.json`);
     for (const f of files) {
       const m = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"))._meta;
       expect(m.url).toMatch(/^https:\/\/tes-app-data-share\.s3\.amazonaws\.com\/[a-z]{2}\/[a-z]{2}_csv\.zip$/);
