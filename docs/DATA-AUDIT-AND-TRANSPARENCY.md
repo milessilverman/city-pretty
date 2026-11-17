@@ -653,6 +653,18 @@ Knox still uses the TN state server, whose firewall answers 403 intermittently. 
 with every panel matching its source except ground elevation: USGS took 16-30 s or timed out on 17 Nov, and the page
 said "Not available".
 
+### Small counties: Tennessee complete (17 Nov); the rest of the US needs a hosting decision
+
+The page listed only counties of 100,000+ people (80.5% of the US population); 2,443 smaller counties (63.6 million
+people) weren't on it. A pilot built all 81 unlisted Tennessee counties with the standard pipeline (OpenStreetMap cut
+from the US-South extract; Census, HUD, Tree Equity, state crash data as everywhere else), so all 95 Tennessee
+counties now open. I checked 32 values in eight block groups of four random new counties against the ACS table files:
+all match; no existing county's completeness row changed. The track's checks: 144 Census values in 9 counties, roads
+and bus stops ID-for-ID against live Overpass in 5 counties (two off by one road each, a neighbor county's road
+crossing the check box's corner), 27/27 block groups live. **Hosting limit found:** GitHub Pages publishes at most
+1 GB per site; `main` is already 1.07 GB and this branch is 1.30 GB, almost all county files, so merging into `main`
+as it is would likely exceed it. The rest of the US is paused until that's decided (`WORK-QUEUE.md`).
+
 ### Alaska round 2: 29 of 30 county-equivalents now have data files (17 Nov)
 
 The remaining 24 boroughs and census areas were built with the same pipeline (OpenStreetMap through Overpass; each
