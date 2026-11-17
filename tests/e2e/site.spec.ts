@@ -973,7 +973,9 @@ test("house checks name only the state's law records on file, assert no unchecke
   const tx = await houseText("48453", { lat: 30.3005, lng: -97.724 });
   expect(tx).not.toMatch(hardcoded);
   expect(tx).toContain("Duplex, middle housing or lot split");
-  expect(tx).toMatch(/state law on file: .*Austin HOME Initiative \(Phase 1 & 2\) \((text checked|partly checked|not confirmed)\)/);
+  // Only state laws are named as "state law on file"; Austin's HOME ordinance is a city ordinance (17 Nov 2026).
+  expect(tx).toMatch(/state law on file: .*TX SB 15/);
+  expect(tx).not.toMatch(/state law on file:[^\n]*Austin HOME/);
   expect(tx).toContain("applies only where all of its conditions are met");
   expect(tx).not.toContain("4-ft rear/side setbacks");
 
