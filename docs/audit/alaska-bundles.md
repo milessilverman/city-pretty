@@ -51,14 +51,76 @@ The same county pipeline as every other county (`pipeline/fetch_oc.py`, `osm_ext
 Kenai, like Mat-Su, has no feed with stops inside the borough (bus frequency unknown in all 35 block groups). Its and
 Mat-Su's boxes overlap Anchorage, so their bus-stop counts include Anchorage's.
 
-## Not built (25 boroughs and census areas)
-The other 25 Alaska county-equivalents still open as "lot lines only". Same pipeline, one command each (about 30-60 minutes
-per borough, almost all of it the public Overpass endpoint's retries; each run must stay under the 2-hour limit for one
-background job here):
-`CP_FIPS=<fips> CP_DATA=<build dir>/data_<fips> python3 fetch_oc.py` then `osm_extract.py`, `metrics_oc.py`, `layers_oc.py`,
-`build_oc.py inputs/page_dec`, run from a copy of `pipeline/` next to a copy of `national/data`, then
-`python3 scripts/export_county_bundle.py <build dir>/data_<fips> <fips>`, `python3 scripts/build_tree_equity_2025.py ak`,
-`python3 scripts/build_county_completeness.py`, and the live panel check.
+## Round 2 (17 Nov): 24 more boroughs and census areas built; Aleutians West left out
+29 of Alaska's 30 county-equivalents now open as data counties. Same pipeline and sources as above, one borough per
+background job (`ak_one.sh <fips>`: `fetch_oc.py`, then `osm_extract.py`, `metrics_oc.py`, `layers_oc.py`,
+`build_oc.py inputs/page_dec`), three at a time, then `scripts/export_county_bundle.py`, `scripts/build_tree_equity_2025.py ak`
+(29 county files), `scripts/build_acs_fallback_flags.py` (0 mismatches; the new boroughs add 114 home values and 115 rents,
+11 of the rents tract medians) and `scripts/build_county_completeness.py` (Alaska: 13 tier C, where a transit feed was
+found, 16 tier D, 1 none).
+
+Every borough's roads and bus stops were checked against a direct Overpass query of the same box, ID for ID
+(`data/backtests/alaska_overpass_xcheck_2026-11-17.json`; Juneau re-run as a check of the script):
+
+| Borough (FIPS) | Block groups | Road ways: direct = extract | Bus stops: direct = extract | File (gzip) |
+|---|---|---|---|---|
+| Aleutians East Borough (02013) | 3 | 259 = 259 | 0 = 0 | 2.8 MB |
+| Bethel Census Area (02050) | 10 | 2,056 = 2,056 | 2 = 2 | 14.8 MB |
+| Bristol Bay Borough (02060) | 1 | 267 = 267 | 0 = 0 | 0.3 MB |
+| Chugach Census Area (02063) | 7 | 719 = 719 | 1 = 1 | 2.9 MB |
+| Copper River Census Area (02066) | 2 | 1,157 = 1,157 | 0 = 0 | 2.9 MB |
+| Denali Borough (02068) | 2 | 606 = 606 | 11 = 11 | 0.8 MB |
+| Dillingham Census Area (02070) | 2 | 678 = 678 | 0 = 0 | 5.8 MB |
+| Haines Borough (02100) | 3 | 1,661 = 1,661 | 64 = 64 | 6.7 MB |
+| Hoonah-Angoon Census Area (02105) | 3 | 2,176 = 2,176 | 114 = 114 | 11.7 MB |
+| Juneau City and Borough (02110, round 1) | 21 | 1,205 = 1,205 | 59 = 59 | 6.2 MB |
+| Ketchikan Gateway Borough (02130) | 11 | 875 = 875 | 54 = 54 | 8.7 MB |
+| Kodiak Island Borough (02150) | 10 | 803 = 803 | 2 = 2 | 2.7 MB |
+| Kusilvak Census Area (02158) | 4 | 448 = 448 | 0 = 0 | 3.9 MB |
+| Lake and Peninsula Borough (02164) | 1 | 1,036 = 1,036 | 2 = 2 | 3.3 MB |
+| Nome Census Area (02180) | 5 | 887 = 887 | 2 = 2 | 3.2 MB |
+| North Slope Borough (02185) | 6 | 637 = 637 | 1 = 1 | 3.3 MB |
+| Northwest Arctic Borough (02188) | 9 | 320 = 320 | 0 = 0 | 2.6 MB |
+| Petersburg Borough (02195) | 4 | 356 = 356 | 0 = 0 | 6.2 MB |
+| Prince of Wales-Hyder Census Area (02198) | 10 | 1,883 = 1,883 | 54 = 54 | 17.5 MB |
+| Sitka City and Borough (02220) | 11 | 500 = 500 | 55 = 55 | 7.5 MB |
+| Skagway Municipality (02230) | 1 | 105 = 105 | 5 = 5 | 4.9 MB |
+| Southeast Fairbanks Census Area (02240) | 5 | 1,889 = 1,889 | 0 = 0 | 1.7 MB |
+| Wrangell City and Borough (02275) | 2 | 519 = 519 | 0 = 0 | 8.2 MB |
+| Yakutat City and Borough (02282) | 1 | 111 = 111 | 0 = 0 | 6.5 MB |
+| Yukon-Koyukuk Census Area (02290) | 8 | 9,847 = 9,847 | 115 = 115 | 7.7 MB |
+
+Boxes are rectangles around the block groups, so some take in a neighbor: Yukon-Koyukuk's box covers Fairbanks
+(most of its roads and bus stops), Hoonah-Angoon's covers Juneau. The page clips nothing out of a box; this is the same
+rule as every other county.
+
+**Small boroughs are built, not left out.** Ten have 1-3 block groups. Each block group's comparisons are against the 50
+most similar block groups across LA County and the borough (`build_oc.py` peer pool), so a one-block-group borough still
+gets them, and its Census, HUD and canopy figures are its own. No borough had zero OSM roads.
+
+**Left out: Aleutians West Census Area (02016).** Its block groups cross the 180th meridian (Attu and the Near Islands
+are at +172 to +180 longitude), so the pipeline's box (min to max longitude) would span the globe and the Overpass
+download would cover the whole band; the page's map and lot lookups also assume one longitude range. It stays "lot
+lines only". A build would need the box split at the meridian in `fetch_oc.py`, `osm_extract.py` and the page.
+
+**Large files.** Most of the size is OpenStreetMap water lines and park outlines at full detail: Prince of Wales-Hyder
+(17.5 MB; 182,728 water features), Bethel (14.8 MB; 273,964 water lines in the Yukon-Kuskokwim delta), Hoonah-Angoon
+(11.7 MB; 79,630). The previous largest file was Maricopa's 9.8 MB. Bethel at first did not load at all: the page's county
+loader appended each layer with `push(...features)`, which overflowed the call stack ("Maximum call stack size exceeded",
+app.js); the coordinator fixed that on main (e7d3aa3, loop-based append) and Bethel then loaded and passed. All three
+load and pass on the real page.
+
+**Petersburg** took two runs: the first was stopped at the 2-hour job limit while the public Overpass endpoint answered
+504 to most tiles (nothing was saved: the download is all or nothing); the second finished in 45 minutes.
+
+Live checks on the real page (`scripts/live_check_panels.mjs`; `data/backtests/live_check_panels_2026-11-17_ak3.json` to
+`_ak9.json`): Bethel, Kodiak, Ketchikan, Skagway, Petersburg, Prince of Wales-Hyder, Hoonah-Angoon, Sitka, Nome,
+Yukon-Koyukuk, Bristol Bay and Yakutat, 3 block groups each (1 where the borough has 1): every panel matches its source
+(neighborhood ACS values, canopy gap and goal, crash panel empty, state laws), no console errors. None of these boroughs
+has a public parcel service, so house-panel checks (HUD, FEMA, USGS) are n/a and clicks say so. Bethel, Kodiak, Ketchikan
+and Skagway were re-checked after their canopy files were built (`_ak9`). The panel check started at the second block
+group and so sampled nothing in a one-block-group borough; it now starts at the first when a borough has too few to skip
+one (`scripts/live_check_panels.mjs`).
 
 Juneau's file is 6.2 MB gzipped for 21 block groups: 24 MB of the uncompressed layers is park outlines (the Tongass
 National Forest and other protected areas drawn at full detail), within the range of existing files (Maricopa's is 9.8 MB).
@@ -101,3 +163,9 @@ Harris). So no county lost a working service. e2e: a Fairbanks click shows the n
   same (all 52 asked Kern's; no parcels inside them).
 - In the panel check I first added a fallback point for counties with no parcel service; `parcelPointIn()` already had one,
   so I reverted it.
+- Round 2: the worktree started on an unrelated old commit (94a3f0b); reset to the branch head (0429a9f) before any change.
+- Round 2: the build directory's registry link still pointed at round 1's deleted worktree; repointed before the first build.
+- Round 2: I first exported Bethel before seeing it fail to load on the page, then reverted the export; it was re-exported
+  only after main's loader fix, and passed.
+- Round 2: the first Skagway live check sampled no block group (the check skipped the first one); fixed in the script and
+  re-run.

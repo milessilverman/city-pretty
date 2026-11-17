@@ -84,17 +84,55 @@
    "hv_tract": 20,
    "rent_tract": 36
   },
+  "02013": {
+   "hv_own": 3,
+   "rent_own": 3
+  },
   "02020": {
    "hv_own": 176,
    "rent_tract": 52,
    "rent_own": 145,
    "hv_tract": 21
   },
+  "02050": {
+   "hv_own": 10,
+   "rent_own": 10
+  },
+  "02060": {
+   "hv_own": 1,
+   "rent_own": 1
+  },
+  "02063": {
+   "hv_own": 6,
+   "rent_own": 7,
+   "hv_tract": 1
+  },
+  "02066": {
+   "hv_own": 2,
+   "rent_own": 2
+  },
+  "02068": {
+   "hv_own": 2,
+   "rent_own": 2
+  },
+  "02070": {
+   "hv_own": 2,
+   "rent_own": 2
+  },
   "02090": {
    "hv_own": 55,
    "rent_own": 47,
    "hv_tract": 7,
    "rent_tract": 15
+  },
+  "02100": {
+   "hv_own": 3,
+   "rent_own": 2,
+   "rent_tract": 1
+  },
+  "02105": {
+   "hv_own": 3,
+   "rent_own": 3
   },
   "02110": {
    "hv_own": 20,
@@ -107,10 +145,78 @@
    "rent_own": 30,
    "rent_tract": 5
   },
+  "02130": {
+   "hv_own": 11,
+   "rent_own": 11
+  },
+  "02150": {
+   "hv_own": 9,
+   "rent_own": 8,
+   "rent_tract": 2
+  },
+  "02158": {
+   "hv_own": 4,
+   "rent_tract": 1,
+   "rent_own": 3
+  },
+  "02164": {
+   "hv_own": 1,
+   "rent_own": 1
+  },
   "02170": {
    "hv_own": 61,
    "rent_own": 52,
    "rent_tract": 8
+  },
+  "02180": {
+   "hv_own": 5,
+   "rent_own": 5
+  },
+  "02185": {
+   "hv_own": 5,
+   "rent_own": 5
+  },
+  "02188": {
+   "hv_own": 9,
+   "rent_own": 9
+  },
+  "02195": {
+   "hv_tract": 1,
+   "rent_own": 4,
+   "hv_own": 3
+  },
+  "02198": {
+   "hv_own": 9,
+   "rent_own": 9
+  },
+  "02220": {
+   "hv_own": 9,
+   "rent_tract": 3,
+   "rent_own": 8,
+   "hv_tract": 2
+  },
+  "02230": {
+   "hv_own": 1,
+   "rent_own": 1
+  },
+  "02240": {
+   "hv_own": 4,
+   "rent_own": 4,
+   "rent_tract": 1,
+   "hv_tract": 1
+  },
+  "02275": {
+   "hv_own": 2,
+   "rent_own": 2
+  },
+  "02282": {
+   "hv_own": 1,
+   "rent_own": 1
+  },
+  "02290": {
+   "hv_own": 8,
+   "rent_own": 5,
+   "rent_tract": 3
   },
   "04003": {
    "hv_own": 96,
