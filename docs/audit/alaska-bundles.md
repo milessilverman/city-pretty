@@ -45,6 +45,23 @@ The same county pipeline as every other county (`pipeline/fetch_oc.py`, `osm_ext
 | Anchorage (02020) | 200 | roads 10,674 = 10,674; bus stops 382 = 382 | pass; parcel clicks 3/3 |
 | Fairbanks North Star (02090) | 63 | roads 5,907 = 5,907; bus stops 104 = 104 | pass (no parcel service: block-group panels only) |
 | Matanuska-Susitna (02170) | 61 | roads 17,204 = 17,204; bus stops 381 = 381 | pass (no parcel service) |
+| Juneau (02110) | 21 | roads 1,205 = 1,205; bus stops 59 = 59 | pass (no parcel service) |
+| Kenai Peninsula (02122) | 35 | roads 15,544 = 15,544; bus stops 400 = 400 | pass (no parcel service) |
+
+Kenai, like Mat-Su, has no feed with stops inside the borough (bus frequency unknown in all 35 block groups). Its and
+Mat-Su's boxes overlap Anchorage, so their bus-stop counts include Anchorage's.
+
+## Not built (25 boroughs and census areas)
+The other 25 Alaska county-equivalents still open as "lot lines only". Same pipeline, one command each (about 30-60 minutes
+per borough, almost all of it the public Overpass endpoint's retries; each run must stay under the 2-hour limit for one
+background job here):
+`CP_FIPS=<fips> CP_DATA=<build dir>/data_<fips> python3 fetch_oc.py` then `osm_extract.py`, `metrics_oc.py`, `layers_oc.py`,
+`build_oc.py inputs/page_dec`, run from a copy of `pipeline/` next to a copy of `national/data`, then
+`python3 scripts/export_county_bundle.py <build dir>/data_<fips> <fips>`, `python3 scripts/build_tree_equity_2025.py ak`,
+`python3 scripts/build_county_completeness.py`, and the live panel check.
+
+Juneau's file is 6.2 MB gzipped for 21 block groups: 24 MB of the uncompressed layers is park outlines (the Tongass
+National Forest and other protected areas drawn at full detail), within the range of existing files (Maricopa's is 9.8 MB).
 
 Mat-Su's transit row says the one feed read (Anchorage People Mover) has no stop with 7-9 am departures inside the borough, so
 bus frequency is unknown (not 0) in all 61 block groups; no MobilityData feed for the Valley's own service was found.
