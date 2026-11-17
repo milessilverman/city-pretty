@@ -168,6 +168,20 @@
   ]
  },
  {
+  "fips": "02170",
+  "county": "Matanuska-Susitna Borough",
+  "state": "AK",
+  "old_service": "Municipality of Anchorage Property Information",
+  "old_service_counties": [
+   "02020"
+  ],
+  "parcels_near_points": [
+   0,
+   0,
+   0
+  ]
+ },
+ {
   "fips": "04003",
   "county": "Cochise County",
   "state": "AZ",
@@ -227,9 +241,9 @@
   "fips": "06001",
   "county": "Alameda County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -241,9 +255,9 @@
   "fips": "06003",
   "county": "Alpine County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0
@@ -253,9 +267,9 @@
   "fips": "06005",
   "county": "Amador County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -267,9 +281,9 @@
   "fips": "06007",
   "county": "Butte County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -281,9 +295,9 @@
   "fips": "06009",
   "county": "Calaveras County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -295,9 +309,9 @@
   "fips": "06011",
   "county": "Colusa County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -309,9 +323,9 @@
   "fips": "06013",
   "county": "Contra Costa County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -323,9 +337,9 @@
   "fips": "06015",
   "county": "Del Norte County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -337,9 +351,9 @@
   "fips": "06017",
   "county": "El Dorado County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -351,9 +365,9 @@
   "fips": "06019",
   "county": "Fresno County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -365,9 +379,9 @@
   "fips": "06021",
   "county": "Glenn County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -379,9 +393,9 @@
   "fips": "06023",
   "county": "Humboldt County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -393,9 +407,9 @@
   "fips": "06025",
   "county": "Imperial County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -407,9 +421,9 @@
   "fips": "06027",
   "county": "Inyo County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -421,9 +435,9 @@
   "fips": "06031",
   "county": "Kings County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -435,9 +449,9 @@
   "fips": "06033",
   "county": "Lake County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -449,9 +463,9 @@
   "fips": "06035",
   "county": "Lassen County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -463,9 +477,9 @@
   "fips": "06039",
   "county": "Madera County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -477,9 +491,9 @@
   "fips": "06041",
   "county": "Marin County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -491,9 +505,9 @@
   "fips": "06043",
   "county": "Mariposa County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -505,9 +519,9 @@
   "fips": "06045",
   "county": "Mendocino County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -519,9 +533,9 @@
   "fips": "06047",
   "county": "Merced County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -533,9 +547,9 @@
   "fips": "06049",
   "county": "Modoc County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -547,9 +561,9 @@
   "fips": "06051",
   "county": "Mono County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -561,9 +575,9 @@
   "fips": "06053",
   "county": "Monterey County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -575,9 +589,9 @@
   "fips": "06055",
   "county": "Napa County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -589,9 +603,9 @@
   "fips": "06057",
   "county": "Nevada County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -603,9 +617,9 @@
   "fips": "06061",
   "county": "Placer County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -617,9 +631,9 @@
   "fips": "06063",
   "county": "Plumas County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -631,9 +645,9 @@
   "fips": "06067",
   "county": "Sacramento County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -645,9 +659,9 @@
   "fips": "06069",
   "county": "San Benito County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -659,9 +673,9 @@
   "fips": "06075",
   "county": "San Francisco County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -673,9 +687,9 @@
   "fips": "06077",
   "county": "San Joaquin County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -687,9 +701,9 @@
   "fips": "06079",
   "county": "San Luis Obispo County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -701,9 +715,9 @@
   "fips": "06081",
   "county": "San Mateo County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -715,9 +729,9 @@
   "fips": "06083",
   "county": "Santa Barbara County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -729,9 +743,9 @@
   "fips": "06085",
   "county": "Santa Clara County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -743,9 +757,9 @@
   "fips": "06087",
   "county": "Santa Cruz County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -757,9 +771,9 @@
   "fips": "06089",
   "county": "Shasta County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -771,9 +785,9 @@
   "fips": "06091",
   "county": "Sierra County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -785,9 +799,9 @@
   "fips": "06093",
   "county": "Siskiyou County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -799,9 +813,9 @@
   "fips": "06095",
   "county": "Solano County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -813,9 +827,9 @@
   "fips": "06097",
   "county": "Sonoma County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -827,9 +841,9 @@
   "fips": "06099",
   "county": "Stanislaus County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -841,9 +855,9 @@
   "fips": "06101",
   "county": "Sutter County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -855,9 +869,9 @@
   "fips": "06103",
   "county": "Tehama County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -869,9 +883,9 @@
   "fips": "06105",
   "county": "Trinity County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -883,9 +897,9 @@
   "fips": "06107",
   "county": "Tulare County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -897,9 +911,9 @@
   "fips": "06109",
   "county": "Tuolumne County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -911,9 +925,9 @@
   "fips": "06111",
   "county": "Ventura County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -925,9 +939,9 @@
   "fips": "06113",
   "county": "Yolo County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -939,9 +953,9 @@
   "fips": "06115",
   "county": "Yuba County",
   "state": "CA",
-  "old_service": "Los Angeles County Assessor parcels (LA County GIS)",
+  "old_service": "City of Bakersfield & Kern County Cadastre Parcels",
   "old_service_counties": [
-   "06037"
+   "06029"
   ],
   "parcels_near_points": [
    0,
@@ -2850,7 +2864,7 @@
   "parcels_near_points": [
    0,
    0,
-   "err HTTP Error 403: Forbidden"
+   0
   ]
  },
  {
@@ -2862,7 +2876,7 @@
    "47157"
   ],
   "parcels_near_points": [
-   0,
+   "err HTTP Error 403: Forbidden",
    0,
    "err HTTP Error 403: Forbidden"
   ]
@@ -2877,8 +2891,8 @@
   ],
   "parcels_near_points": [
    0,
-   "err HTTP Error 403: Forbidden",
-   "err HTTP Error 403: Forbidden"
+   0,
+   0
   ]
  },
  {
@@ -2890,9 +2904,9 @@
    "47157"
   ],
   "parcels_near_points": [
-   "err HTTP Error 403: Forbidden",
-   "err HTTP Error 403: Forbidden",
-   "err HTTP Error 403: Forbidden"
+   0,
+   0,
+   0
   ]
  },
  {
@@ -2905,7 +2919,7 @@
   ],
   "parcels_near_points": [
    0,
-   "err HTTP Error 403: Forbidden",
+   0,
    0
   ]
  },
@@ -2946,9 +2960,9 @@
    "47157"
   ],
   "parcels_near_points": [
-   "err HTTP Error 403: Forbidden",
    0,
-   0
+   0,
+   "err HTTP Error 403: Forbidden"
   ]
  },
  {
@@ -2960,9 +2974,9 @@
    "47157"
   ],
   "parcels_near_points": [
-   "err HTTP Error 403: Forbidden",
    0,
-   0
+   0,
+   "err HTTP Error 403: Forbidden"
   ]
  },
  {

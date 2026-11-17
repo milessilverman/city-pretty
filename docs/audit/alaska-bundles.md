@@ -39,6 +39,29 @@ The same county pipeline as every other county (`pipeline/fetch_oc.py`, `osm_ext
 | Site suggestions (`sites_<fips>.json.gz`) | `w5/tools/sites.py` reads the old build machine's paths and OSM tags this download doesn't include; not built. The page handles a county without them |
 | Street-tree survey, 311, assessor sales, tax-rate areas | Not connected for Anchorage (as for most counties) |
 
+## Built so far
+| Borough | Block groups | OSM check (extract vs direct Overpass, same box) | Live panels (3 block groups) |
+|---|---|---|---|
+| Anchorage (02020) | 200 | roads 10,674 = 10,674; bus stops 382 = 382 | pass; parcel clicks 3/3 |
+| Fairbanks North Star (02090) | 63 | roads 5,907 = 5,907; bus stops 104 = 104 | pass (no parcel service: block-group panels only) |
+| Matanuska-Susitna (02170) | 61 | roads 17,204 = 17,204; bus stops 381 = 381 | pass (no parcel service) |
+
+Mat-Su's transit row says the one feed read (Anchorage People Mover) has no stop with 7-9 am departures inside the borough, so
+bus frequency is unknown (not 0) in all 61 block groups; no MobilityData feed for the Valley's own service was found.
+
+## Page bug found and fixed: clicks routed to another county's parcel service (251 counties)
+`parcelSvc()` and `getParcelService()` fell back to the first registry service that listed the county's state. Every
+county service also lists its state, so in a county with no service of its own the click queried another county's layer:
+every Alaska borough asked Anchorage's; Fresno, Ventura and 50 other California counties asked Kern's; Fort Bend and
+Brazoria asked Harris's; 251 of the 640 counties with data files in all (counted after Mat-Su was added). That layer had no parcel at the point, and the
+page then said "Public Right-of-Way / Roadway: This point is located within the public street ...". Now only a statewide
+service (no county list) is a state fallback, as `workers/parcels.ts` already did, and a county with no service says
+"No public parcel service is on file for this county ... Nothing is assumed about this point." Checked before changing
+it (`data/backtests/parcel_state_fallback_check_2026-11-17.json`): for each of the 251 counties, the service the old code
+used was asked for parcels around three block-group points; 714 of 751 answers were 0, 34 failed, and the 3 non-zero
+answers were block groups on the border with the service's own county (Walton GA / Gwinnett, Brazoria and Fort Bend /
+Harris). So no county lost a working service. e2e: a Fairbanks click shows the new message and never "Right-of-Way".
+
 ## Live checks on the real page
 - `scripts/live_check_panels.mjs 02020` (`data/backtests/live_check_panels_2026-11-17_alaska.json`): 3 parcels through
   the page's click path; every panel matches its source (neighborhood ACS values, canopy gap and goal, HUD FY2027
@@ -55,3 +78,9 @@ The same county pipeline as every other county (`pipeline/fetch_oc.py`, `osm_ext
   to 0.02 degree, so 111 of the 10,674 road ways in the clip box were never downloaded. Found by comparing with an Overpass
   count; the download now uses the extract's own box, and the counts match.
 - The parent session's note said the page had no Alaska county to open; it had 30 "lot lines only" placeholders.
+- My first check of the old parcel fallback took the service order from `app/data/parcel_services.json`, which puts LA
+  County's assessor first; the page's own list (`PARCELS87`) starts with Kern's. So for the 52 California counties it probed
+  LA's service instead of the one the page used. Re-run in the page's order (the file now committed); the conclusion is the
+  same (all 52 asked Kern's; no parcels inside them).
+- In the panel check I first added a fallback point for counties with no parcel service; `parcelPointIn()` already had one,
+  so I reverted it.
