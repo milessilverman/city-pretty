@@ -538,8 +538,11 @@ to "the state's" service, but took any service that listed the state, and every 
 So a click in Fresno or Ventura queried Kern County's service (I reproduced it: on the old code `parcelSvc("06019")`
 returns Kern's), and the same in 250 of the 639 counties with data files. That service had no parcel at the point, and
 the page then said the point was a "Public Right-of-Way / Roadway", which it had no way of knowing. No other county's
-parcel was shown as the clicked lot: probing the old fallback services inside those counties found parcels only at 3
-border points out of 748 (`data/backtests/parcel_state_fallback_check_2026-11-17.json`). Now only statewide services
+parcel was shown as the clicked lot: probing the old fallback service at 3 points in each affected county found
+parcels at only 3 of 751 points, all at county borders (Walton GA by Gwinnett's layer; Brazoria and Fort Bend TX by
+Harris's); 714 found none and 34 probes failed (`data/backtests/parcel_state_fallback_check_2026-11-17.json`, re-run in
+the page's own service order, in which all 52 affected California counties used Kern's service; the first version of
+that file had probed LA's service for them and was replaced; I recounted the corrected file). Now only statewide services
 (no county list) are a state's fallback, as the AI advisor's parcel tool already did, and a county with no service says
 "No public parcel service is on file for this county". e2e test through the click path (Fresno), confirmed to fail on
 the old code. My earlier live checks missed it because they sampled counties that have their own service or a real
