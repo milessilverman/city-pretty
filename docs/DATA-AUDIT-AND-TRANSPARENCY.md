@@ -577,7 +577,10 @@ residential lot in North Carolina, and Minneapolis's to any in Minnesota. The ho
 `statutes.json`), applies only where the parcel's city matches (a lot with no city name says the city is missing),
 and is labeled "City of X ordinance; applies only in that city". Found by the Charlotte track. Also found: the unit
 tests run `src/engines/statutoryZoningEngine.js`, while the page runs its own copy inside `app/app.js` (and a third
-`.ts` copy has drifted); a test now fails if the page's copy and the tested copy differ.
+`.ts` copy has drifted); a test now fails if the page's copy and the tested copy differ. My mistake in shipping it: I
+committed and pushed the fix (a70a49b) while the full browser suite was still running; one test still expected Austin
+to be named "state law on file" and failed. The test now asserts the corrected wording, and the full suite passes
+(67/67, 57279f8).
 
 ### Correction: four more hand-typed figures still reached users (round 3, fixed 17 Nov)
 
