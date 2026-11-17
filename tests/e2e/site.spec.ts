@@ -1697,3 +1697,135 @@ test("San Diego parcel address joins the house number and street fields; a 0 hou
   expect(r.fields).toEqual(expect.arrayContaining(["situs_street", "situs_suffix", "situs_pre_dir", "situs_post_dir"]));
   expect(errors).toEqual([]);
 });
+
+// Lot-fit round 6 (17 Nov 2026): Portland (Title 33, Chapters 33.110 and 33.610) and Charlotte (UDO Articles 4 and 15),
+// each read from the city's own code; the zone comes from the city's zoning map at the point, and the use from the
+// county's parcel layer (Multnomah taxlots by map tax lot; Mecklenburg parcel data by parcel number).
+test("what fits on this lot applies Portland's single-dwelling zones and Charlotte's N1 districts, and says why elsewhere (live click path)", async ({ page }) => {
+  test.setTimeout(300_000);
+  const ring = (lat: number, lng: number) => [[lng - 0.0002, lat - 0.0001], [lng + 0.0002, lat - 0.0001], [lng + 0.0002, lat + 0.0001], [lng - 0.0002, lat + 0.0001], [lng - 0.0002, lat - 0.0001]];
+  const json = (route: any, body: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: JSON.stringify(body) });
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { try { return !!(0, eval)("ZONING_STANDARDS") && !!(0, eval)("PARCEL_USE_CODES"); } catch { return false; } }, null, { timeout: 30_000 });
+  const houseText = async (fips: string, at: { lat: number; lng: number }) => {
+    await page.evaluate((f) => (0, eval)("openCounty")(f), fips);
+    await page.waitForFunction((f) => (window as any).D_OC?.meta?.fips === f, fips, { timeout: 60_000 });
+    await page.evaluate(() => { try { (0, eval)("houseCache").clear(); } catch (e) {} });
+    await page.evaluate((p) => (0, eval)("houseAt")(p), at);
+    await page.waitForFunction(() => { const b = document.querySelector("#house"); return !!b && !b.querySelector(".house-loading") && /Zoning district|Local zoning standards|Home upgrades/.test(b.innerText); }, null, { timeout: 30_000 });
+    return page.evaluate(() => (document.querySelector("#house") as HTMLElement).innerText);
+  };
+
+  // Portland. The registry's Multnomah taxlot layer is also the layer the use is read from (by MAPTAXLOT).
+  const pdx = { lat: 45.5560, lng: -122.6350 };
+  let propclass = "101", pzone: any = { ZONE: "R5", UNINC: "N", OVRLY_DESC: "Aircraft Landing", PLDIST_DESC: null, HIST_DESC: null, CONSV_DESC: null }, taxCalls = 0;
+  await page.route(/Taxlots_Orion_Public\/MapServer\/0\/query/, (route: any) => {
+    const u = new URL(route.request().url());
+    if (/^MAPTAXLOT=/.test(u.searchParams.get("where") || "")) { taxCalls++; return json(route, { features: [{ attributes: { PROPCLASS: propclass, PROPERTY_TYPE: "RP Residential", IMPTYPE: "SFR", UNITS: 1, SIZESQFT: "3920", ROLLYEAR: 2025 } }] }); }
+    return json(route, { features: [{ attributes: { MAPTAXLOT: "1N1E24BD  -26200", SITUSADDR: "4537 NE 30TH AVE" }, geometry: { rings: [ring(pdx.lat, pdx.lng)] } }] });
+  });
+  await page.route(/Public\/Zoning\/MapServer\/0\/query/, (route: any) => json(route, { features: pzone ? [{ attributes: pzone }] : [] }));
+  const r5 = await houseText("41051", pdx);
+  expect(taxCalls).toBeGreaterThan(0);
+  expect(r5).toContain("Residential, Improved (Oregon property class (OAR 150-308-0310) on Multnomah County taxlots, PROPCLASS 101)");
+  expect(r5).toContain("Zoning district R5 (Portland City Code, Title 33 (Planning and Zoning))");
+  expect(r5).toContain("Housing types allowed in R5: House, Attached house, Accessory dwelling unit, Duplex, Triplex, Fourplex, Multi-dwelling structure, Cottage cluster (PCC 33.110.200, Table 110-2)");
+  expect(r5).toContain("Height: up to 30 ft (PCC 33.110.215, Table 110-4)");
+  expect(r5).toContain("Minimum setbacks: front 10 ft, side 5 ft, rear 5 ft, garage entrance 18 ft (PCC 33.110.220, Table 110-4)");
+  expect(r5).toContain("The City's zoning map also puts this lot in: Aircraft Landing");
+  expect(r5).toMatch(/1 home: up to about [\d,]+ sq ft \(FAR 0\.5\); 2 homes: up to about [\d,]+ sq ft \(FAR 0\.6\), or [\d,]+ sq ft with a bonus option \(FAR 0\.7\)/);
+  expect(r5).toContain("so no single figure is given");
+  expect(r5).toMatch(/Second home \(two-family or more\)\s*—\s*R5 allows duplexes, triplexes and fourplexes/);
+  expect(r5).toContain("Its size, placement and number are set by Chapter 33.205, which isn't read here");
+  expect(r5).toMatch(/Split into two lots \(by area only\)\s*—\s*At about [\d,]+ sq ft the lot has at least twice the 3,000 sq ft minimum for a new lot in R5 \(PCC 33\.610\.200, Table 610-2/);
+  expect(r5).not.toContain("Local zoning standards");
+  // R20: no cottage clusters, a 12,000 sq ft minimum for a new lot.
+  pzone = { ...pzone, ZONE: "R20", OVRLY_DESC: null };
+  const r20 = await houseText("41051", pdx);
+  expect(r20).toContain("not allowed: Cottage cluster (PCC 33.110.200, Table 110-2)");
+  expect(r20).toContain("Two new lots would each need at least 12,000 sq ft in R20");
+  // The map's unincorporated pockets, a zone that isn't encoded, a point outside the map, and a condominium unit.
+  pzone = { ...pzone, ZONE: "R5", UNINC: "Y" };
+  expect(await houseText("41051", pdx)).toContain("The City's zoning map marks this area as unincorporated (UNINC = Y)");
+  pzone = { ...pzone, ZONE: "RM2", UNINC: "N" };
+  expect(await houseText("41051", pdx)).toMatch(/Local zoning standards\s*—\s*Not on file: City of Portland's standards are on file only for R20, R10, R7, R5, R2\.5; this lot is RM2/);
+  pzone = null;
+  expect(await houseText("41051", pdx)).toContain("outside the City of Portland's zoning map");
+  pzone = { ZONE: "R5", UNINC: "N" }; propclass = "102";
+  const condo = await houseText("41051", pdx);
+  expect(condo).toContain("Residential, Condominium");
+  expect(condo).toContain("a unit in a condominium or cooperative");
+  expect(condo).not.toContain("Split into two lots");
+
+  // Charlotte. The parcel comes from NC OneMap (statewide); the use from the City's copy of the county parcel data.
+  const clt = { lat: 35.1700, lng: -80.8500 };
+  let landuse = "SINGLE FAMILY RESIDENTIAL", czone: any = { ZoneDes: "N1-C", Overlay: "none", SPA: "no", ZoneClass: "NEIGHBORHOOD 1" }, cltCalls = 0;
+  await page.route(/NC1Map_Parcels\/FeatureServer\/1\/query/, (route: any) => json(route, { features: [{ attributes: { parno: "17509643", siteadd: "4110 SELWYN WALK CT", parusedesc: landuse }, geometry: { rings: [ring(clt.lat, clt.lng)] } }] }));
+  await page.route(/PLN\/AllParcelData\/MapServer\/0\/query/, (route: any) => {
+    const u = new URL(route.request().url());
+    expect(u.searchParams.get("where")).toBe("parcelid='17509643'");
+    cltCalls++;
+    return json(route, { features: [{ attributes: { landuse_description: landuse, num_heatedarea: 2000, total_living_units: 1, yearid: 2026 } }] });
+  });
+  await page.route(/PLN\/Zoning\/MapServer\/0\/query/, (route: any) => json(route, { features: czone ? [{ attributes: czone }] : [] }));
+  const n1c = await houseText("37119", clt);
+  expect(cltCalls).toBeGreaterThan(0);
+  expect(n1c).toContain("SINGLE FAMILY RESIDENTIAL (Mecklenburg County land use on Charlotte's All Parcel Data layer)");
+  expect(n1c).toContain("Zoning district N1-C (Charlotte Unified Development Ordinance)");
+  expect(n1c).toContain("Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed.");
+  expect(n1c).toContain("Minimum lot for a residential use: 6,000 sq ft and 50 ft wide (UDO 4.3.B, Table 4-1)");
+  expect(n1c).toContain("Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots");
+  expect(n1c).toContain("Minimum setbacks: front 17 ft and corner side 10 ft from the right-of-way, side 5 ft, rear 30 ft (UDO 4.3.C, Table 4-2)");
+  expect(n1c).toContain("Residential height: up to 40 ft (UDO 4.3.D, Table 4-3)");
+  expect(n1c).toContain("Quadraplex dwellings are permitted only on arterial streets");
+  expect(n1c).toContain("Whether the lot is on an arterial street isn't checked here.");
+  expect(n1c).toContain("by that rule an ADU in an accessory structure could have up to about 1,000 heated sq ft");
+  expect(n1c).not.toContain("Local zoning standards");
+  // N1-F: the quadraplex condition doesn't apply; a suffixed district, a point outside the map, and a townhouse.
+  czone = { ...czone, ZoneDes: "N1-F" };
+  const n1f = await houseText("37119", clt);
+  expect(n1f).toContain("a multi-family building with prescribed conditions");
+  expect(n1f).toContain("does not apply to the N1-F Zoning District");
+  expect(n1f).toContain("(50 ft for multi-family)");
+  czone = { ...czone, ZoneDes: "N1-B(CD)" };
+  expect(await houseText("37119", clt)).toContain("This lot's zoning is N1-B(CD): N1-B with a suffix on the City's map.");
+  czone = null;
+  expect(await houseText("37119", clt)).toContain("outside the City of Charlotte's zoning map");
+  czone = { ZoneDes: "N1-C", Overlay: "none", SPA: "no" }; landuse = "TOWN HOUSE  SFR";
+  const th = await houseText("37119", clt);
+  expect(th).toContain("the Assessor records it apart from a detached single-family house");
+  expect(th).not.toContain("Split into two lots");
+  expect(errors).toEqual([]);
+});
+
+// PortlandMaps answered some browser requests with a bare 502 and the next with the zone (17 Nov 2026): the zone read is
+// retried on an error, so one failed answer doesn't leave the lot without its standards.
+test("a zoning map that fails once is asked again before the page says it didn't answer (Portland, live click path)", async ({ page }) => {
+  test.setTimeout(180_000);
+  const ring = (lat: number, lng: number) => [[lng - 0.0002, lat - 0.0001], [lng + 0.0002, lat - 0.0001], [lng + 0.0002, lat + 0.0001], [lng - 0.0002, lat + 0.0001], [lng - 0.0002, lat - 0.0001]];
+  const json = (route: any, body: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: JSON.stringify(body) });
+  const pdx = { lat: 45.5560, lng: -122.6350 };
+  let zoneCalls = 0;
+  await page.route(/Taxlots_Orion_Public\/MapServer\/0\/query/, (route: any) => {
+    const u = new URL(route.request().url());
+    if (/^MAPTAXLOT=/.test(u.searchParams.get("where") || "")) return json(route, { features: [{ attributes: { PROPCLASS: "101", UNITS: 1 } }] });
+    return json(route, { features: [{ attributes: { MAPTAXLOT: "1N1E24BD  -26200", SITUSADDR: "4537 NE 30TH AVE" }, geometry: { rings: [ring(pdx.lat, pdx.lng)] } }] });
+  });
+  await page.route(/Public\/Zoning\/MapServer\/0\/query/, (route: any) => {
+    zoneCalls++;
+    // The first fetch and its JSONP fallback get a bare 502; the retry gets the zone.
+    if (zoneCalls <= 2) return route.fulfill({ status: 502, contentType: "text/plain", body: "502 Bad Gateway" });
+    return json(route, { features: [{ attributes: { ZONE: "R5", UNINC: "N" } }] });
+  });
+  const errors = await openPage(page);
+  await page.waitForFunction(() => { try { return !!(0, eval)("ZONING_STANDARDS") && !!(0, eval)("PARCEL_USE_CODES"); } catch { return false; } }, null, { timeout: 30_000 });
+  await page.evaluate(() => (0, eval)("openCounty")("41051"));
+  await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "41051", null, { timeout: 60_000 });
+  await page.evaluate((p) => (0, eval)("houseAt")(p), pdx);
+  await page.waitForFunction(() => { const b = document.querySelector("#house"); return !!b && !b.querySelector(".house-loading") && /Zoning district|Local zoning standards/.test(b.innerText); }, null, { timeout: 60_000 });
+  const t = await page.evaluate(() => (document.querySelector("#house") as HTMLElement).innerText);
+  expect(zoneCalls).toBeGreaterThanOrEqual(3);
+  expect(t).toContain("Zoning district R5 (Portland City Code, Title 33 (Planning and Zoning))");
+  expect(t).not.toContain("didn't answer");
+  expect(errors).toEqual([]);
+});

@@ -383,3 +383,119 @@ describe("zoning_standards.json: City of San Diego (SDMC Chapter 13, RS zones)",
     expect(SD.districts["RS-1-4"].height.envelope.quote).toMatch(/^Maximum structure height shall not exceed the height of the angled building envelope plane/);
   });
 });
+
+const PDX = ZS.jurisdictions.find((j: any) => j.id === "pdx");
+describe("zoning_standards.json: City of Portland (Title 33, single-dwelling zones)", () => {
+  const ZONES = ["R20", "R10", "R7", "R5", "R2.5"], COLS = ["RF", ...ZONES];
+  it("covers R20 to R2.5 in Multnomah County, read from the City's zoning map at the point; RF and other zones aren't encoded", () => {
+    expect(PDX.counties).toEqual(["41051"]);
+    expect(PDX.zone_source).toMatchObject({ kind: "point_layer", field: "ZONE", attr: "ZoningPDX" });
+    expect(PDX.zone_source.url).toMatch(/^https:\/\/www\.portlandmaps\.com\/arcgis\/rest\/services\/Public\/Zoning\/MapServer\/0$/);
+    expect(PDX.zone_source.extra_out).toEqual(expect.arrayContaining(["UNINC", "OVRLY_DESC", "PLDIST_DESC"]));
+    expect(PDX.zone_source.extra_fields).toMatchObject({ by: "MAPTAXLOT", key_type: "string", decode_use: true });
+    expect(new RegExp(PDX.zone_source.extra_fields.key_pattern).test("1N1E24BD  -26200")).toBe(true);
+    expect(Object.keys(PDX.districts).sort()).toEqual([...ZONES].sort());
+    expect(PDX.districts.RF).toBeUndefined();
+    expect(PDX.uninc_reason).toMatch(/UNINC = Y/);
+  });
+  it("every number appears in the table row it was parsed from, in the zone's column", () => {
+    const ftCells = (row: string) => (row.match(/\d+ ft\./g) || []).map((c) => Number(c.replace(" ft.", "")));
+    for (const z of ZONES) {
+      const r = PDX.districts[z], i = COLS.indexOf(z);
+      expect(ftCells(r.height.row)[i], `${z} height`).toBe(r.height.max_height_ft);
+      const sb = r.setbacks.rows.map((row: string) => ftCells(row)[i]);
+      expect(sb, `${z} setbacks`).toEqual([r.setbacks.front_ft, r.setbacks.side_ft, r.setbacks.rear_ft, r.setbacks.garage_entrance_ft]);
+      expect(r.min_lot.rows[0]).toMatch(/^All other lots /);
+      const area = r.min_lot.rows[0].replace(/^All other lots /, "").split(" ");
+      expect(area[i], `${z} area`).toBe(r.min_lot.area_sqft.toLocaleString("en-US"));
+      expect(ftCells(r.min_lot.rows[1])[i], `${z} width`).toBe(r.min_lot.width_ft);
+      expect(ftCells(r.min_lot.rows[2])[i], `${z} depth`).toBe(r.min_lot.depth_ft);
+      for (const x of r.far.by_units) {
+        const std = (x.row.match(/\d+(?:\.\d+)? to 1/g) || []).map((c: string) => Number(c.split(" ")[0]));
+        const bon = (x.bonus_row.match(/\d+(?:\.\d+)? to 1/g) || []).map((c: string) => Number(c.split(" ")[0]));
+        expect(std[ZONES.indexOf(z)], `${z} FAR ${x.units}`).toBe(x.far);
+        expect(bon[ZONES.indexOf(z)], `${z} bonus FAR ${x.units}`).toBe(x.bonus_far);
+      }
+      for (const [t, v] of Object.entries(r.housing_types) as [string, any][]) {
+        const yn = v.row.match(/\b(Yes|No)\b/g);
+        expect(yn.length, `${z} ${t}`).toBe(6);
+        expect(yn[i] === "Yes", `${z} ${t}`).toBe(v.allowed);
+      }
+    }
+  });
+  it("matches Title 33 as published by the City on 17 Nov 2026 (spot checks)", () => {
+    expect(PDX.as_amended).toMatch(/Chapter 33\.110 as published by the City \(edition 11\/1\/26\)/);
+    expect(PDX.districts.R5.min_lot).toMatchObject({ area_sqft: 3000, width_ft: 36, depth_ft: 50 });
+    expect(PDX.districts.R20.min_lot.area_sqft).toBe(12000);
+    expect(PDX.districts["R2.5"].height.max_height_ft).toBe(35);
+    expect(PDX.districts.R5.far.by_units.map((x: any) => x.far)).toEqual([0.5, 0.6, 0.7, 0.8]);
+    expect(PDX.districts.R10.far.applies_only_below_sqft).toBe(10000);
+    expect(PDX.districts.R5.far.applies_only_below_sqft).toBeUndefined();
+    expect(PDX.districts.R7.min_density).toMatchObject({ site_sqft: 14000 });
+    expect(PDX.districts.R20.housing_types["Cottage cluster"].allowed).toBe(false);
+    expect(PDX.districts.R20.min_density).toBeUndefined();
+  });
+});
+
+const CLT = ZS.jurisdictions.find((j: any) => j.id === "clt");
+describe("zoning_standards.json: City of Charlotte (UDO, Neighborhood 1 districts)", () => {
+  const N1 = ["N1-A", "N1-B", "N1-C", "N1-D", "N1-E", "N1-F"];
+  const cells = (row: string) => row.split(" | ");
+  it("covers N1-A to N1-F in Mecklenburg County, read from the City's zoning map; a suffixed district is withheld", () => {
+    expect(CLT.counties).toEqual(["37119"]);
+    expect(CLT.zone_source).toMatchObject({ kind: "point_layer", field: "ZoneDes", attr: "ZoningCLT" });
+    expect(CLT.zone_source.extra_fields).toMatchObject({ by: "parno", by_to: "parcelid", decode_use: true });
+    expect(Object.keys(CLT.districts)).toEqual(N1);
+    expect(CLT.suffix_rule.bases).toEqual(N1);
+  });
+  it("every number appears in the table row it was parsed from, in the district's column", () => {
+    for (const z of N1) {
+      const r = CLT.districts[z], i = N1.indexOf(z) + 2;
+      const n = (s: string) => Number(s.replace(/,/g, "").match(/[\d.]+/)![0]);
+      expect(n(cells(r.min_lot.rows[0])[i]), `${z} area`).toBe(r.min_lot.area_sqft);
+      expect(n(cells(r.min_lot.rows[1])[i]), `${z} width`).toBe(r.min_lot.width_ft);
+      const sb = r.setbacks.rows.map((row: string) => n(cells(row)[i]));
+      expect(sb, `${z} setbacks`).toEqual([r.setbacks.front_ft, r.setbacks.corner_side_ft, r.setbacks.side_ft, r.setbacks.rear_ft]);
+      expect(n(cells(r.height.row)[i]), `${z} height`).toBe(r.height.max_height_ft);
+      expect(r.coverage.row).toContain(`10,000 square feet and greater: ${r.coverage.pct_10000_plus}`);
+      expect(r.coverage.row).toContain(`Less than 10,000 square feet: ${r.coverage.pct_under_10000}`);
+      for (const [k, v] of Object.entries(r.uses) as [string, any][]) expect(cells(v.row)[N1.indexOf(z) + 1], `${z} ${k}`).toBe(v.cell);
+      for (const s of [`${r.adu.max_sqft_floor} heated square feet`, `${r.adu.max_share_pct}%`, `${r.adu.max_sqft_cap.toLocaleString("en-US")} heated square feet`]) expect(r.adu.size).toContain(s);
+    }
+  });
+  it("matches the UDO as published on charlotteudo.org on 17 Nov 2026 (spot checks)", () => {
+    expect(CLT.districts["N1-A"].min_lot).toMatchObject({ area_sqft: 10000, width_ft: 70 });
+    expect(CLT.districts["N1-F"].min_lot.mf_width_ft).toBe(50);
+    expect(CLT.districts["N1-C"].setbacks).toMatchObject({ front_ft: 17, corner_side_ft: 10, side_ft: 5, rear_ft: 30 });
+    expect(CLT.districts["N1-D"].height.max_height_ft).toBe(40);
+    expect(CLT.districts["N1-B"].uses["Single-Family"].cell).toBe("X");
+    expect(CLT.districts["N1-B"].uses["Quadraplex"].cell).toBe("PC");
+    expect(CLT.districts["N1-A"].uses["Multi-Family Attached Unit"].cell).toBe("Not allowed");
+    expect(CLT.districts["N1-F"].uses["Multi-Family Attached Unit"].cell).toBe("PC");
+    expect(CLT.districts["N1-F"].quadraplex_condition.applies).toBe(false);
+    expect(CLT.districts["N1-A"].quadraplex_condition.quote).toMatch(/This restriction does not apply to the N1-F Zoning District\.$/);
+  });
+});
+
+describe("parcel_use_codes.json: Portland and Charlotte", () => {
+  it("Multnomah PROPCLASS is decoded digit by digit with OAR 150-308-0310's basic property classes", () => {
+    const s = USES.systems.find((x: any) => x.id === "multnomah_propclass");
+    expect(s.counties).toEqual(["41051"]);
+    expect(s.source.url).toMatch(/secure\.sos\.state\.or\.us\/oard\/viewAttachment/);
+    expect(s.codes["101"]).toEqual({ label: "Residential, Improved", type: "residential", form: null });
+    expect(s.codes["102"]).toMatchObject({ type: "residential", form: "unit" });
+    expect(s.codes["100"].type).toBe("vacant");
+    expect(s.codes["201"].type).toBe("non-residential");
+    for (const [c, v] of Object.entries(s.codes) as [string, any][]) if (!/^\d{3}$/.test(c)) expect(v.type, c).toBe("unknown");
+  });
+  it("Mecklenburg land use descriptions are read from the City's parcel layer and typed by their own words", () => {
+    const s = USES.systems.find((x: any) => x.id === "mecklenburg_landuse");
+    expect(s.counties).toEqual(["37119"]);
+    expect(s.codes["SINGLE FAMILY RESIDENTIAL"]).toEqual({ label: "SINGLE FAMILY RESIDENTIAL", type: "residential", form: "single-family" });
+    expect(s.codes["CONDOMINIUM"].form).toBe("unit");
+    expect(s.codes["TOWN HOUSE  SFR"].form).toBe("attached");
+    expect(s.codes["MULTI FAMILY DUPLEX/TRIPLEX"].form).toBe("small-multi");
+    expect(s.codes["CHURCH"].type).toBe("non-residential");
+    expect(s.codes["SINGLE FAMILY RESIDENTIAL - COMMON"].type).toBe("non-residential");
+  });
+});

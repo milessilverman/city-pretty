@@ -3215,6 +3215,14 @@ function localZoningStandards(a, fips) {
     // their own rules, which aren't encoded, so nothing is applied there.
     if (J.overlay_rule && dist.includes("/") && (J.districts_covered || []).includes(dist.split("/")[0]))
       return { juris: J, district: dist, missing: `This lot is in ${dist}, a geographically modified version of ${dist.split("/")[0]} (${J.cite_prefix} ${J.overlay_rule.section}): its own rules change the base zone's and aren't encoded here, so no standards are shown.` };
+    // Portland's map also covers unincorporated pockets (UNINC = Y); Title 33 isn't assumed to apply there.
+    if (J.uninc_reason && layer && String(a[src.attr + "_UNINC"] || "").toUpperCase() === "Y") return { juris: J, district: dist, missing: J.uninc_reason };
+    // Charlotte maps a district with a suffix ("N1-B(CD)", "N1-E(HDO)"): a conditional plan or overlay changes the base
+    // district's rules, which aren't read, so nothing is applied.
+    if (J.suffix_rule && !(J.districts || {})[dist]) {
+      const base = (J.suffix_rule.bases || []).find(b => dist.startsWith(b) && dist.length > b.length && /[^A-Z0-9]/.test(dist[b.length]));
+      if (base) return { juris: J, district: dist, missing: J.suffix_rule.reason.replace("{dist}", dist).replace("{base}", base) };
+    }
     if (J.no_residences && J.no_residences[dist]) {
       const nr = J.no_residences[dist];
       return { juris: J, district: dist, noResidences: true, missing: `Residences aren't permitted in ${dist} (${J.cite_prefix} ${nr.section}: ${nr.quote}).` };
@@ -4420,10 +4428,22 @@ async function enrichZoneFromLayer(parcel, ll, fips) {
   const zsrc = J && J.zone_source;
   if (!zsrc || zsrc.kind !== "point_layer" || !parcel || !parcel.attributes || !ll) return;
   try {
-    const d = await arcQuery(zsrc.url, { geometry: `${ll.lng.toFixed(7)},${ll.lat.toFixed(7)}`, geometryType: "esriGeometryPoint", inSR: "4326",
-      spatialRel: "esriSpatialRelIntersects", outFields: zsrc.field, returnGeometry: "false", f: "json" }, 8000);
+    const outF = [zsrc.field].concat(zsrc.extra_out || []);
+    const params = { geometry: `${ll.lng.toFixed(7)},${ll.lat.toFixed(7)}`, geometryType: "esriGeometryPoint", inSR: "4326",
+      spatialRel: "esriSpatialRelIntersects", outFields: outF.join(","), returnGeometry: "false", f: "json" };
+    // Retried twice on an error (not on an empty answer): PortlandMaps answered some browser requests with a bare 502 and
+    // the next one with the zone (17 Nov 2026), and the page would otherwise say the map didn't answer.
+    let d = null, lastErr = null;
+    for (let attempt = 0; attempt < 3 && !d; attempt++) {
+      try { d = await arcQuery(zsrc.url, params, 8000); } catch (e) { lastErr = e; if (attempt < 2) await new Promise(r => setTimeout(r, 700 * (attempt + 1))); }
+    }
+    if (!d) throw lastErr || new Error("no answer");
     const r = d && d.features && d.features[0] && d.features[0].attributes;
-    if (r && r[zsrc.field] != null && String(r[zsrc.field]).trim()) parcel.attributes[zsrc.attr] = String(r[zsrc.field]).trim();
+    if (r && r[zsrc.field] != null && String(r[zsrc.field]).trim()) {
+      parcel.attributes[zsrc.attr] = String(r[zsrc.field]).trim();
+      // Other fields of the same map feature (Portland: overlay, plan district, unincorporated flag; Charlotte: overlay).
+      for (const f of zsrc.extra_out || []) parcel.attributes[`${zsrc.attr}_${f}`] = r[f] == null ? "" : String(r[f]).trim();
+    }
     else parcel.attributes[zsrc.attr + "_err"] = zsrc.no_feature_reason || "the zoning map has no district at this point";
   } catch (e) { parcel.attributes[zsrc.attr + "_err"] = "the zoning map service didn't answer"; }
 }
@@ -4434,11 +4454,13 @@ async function enrichZoneExtra(parcel, fips) {
   const J = ZONING_STANDARDS && fips ? ZONING_STANDARDS.jurisdictions.find(j => (j.counties || []).includes(fips)) : null;
   const X = J && J.zone_source && J.zone_source.extra_fields;
   if (!X || !parcel || !parcel.attributes) return;
-  const key = parcel.attributes[X.by], str = X.key_type === "string";
-  const okKey = key != null && key !== "" && (str ? /^[A-Za-z0-9-]+$/.test(String(key)) : /^\d+(\.0+)?$/.test(String(key)));
+  // X.by is the key's name on the parcel record; X.by_to its name on the other layer (Charlotte: parno -> parcelid).
+  const key = parcel.attributes[X.by], str = X.key_type === "string", keyRx = new RegExp(X.key_pattern || "^[A-Za-z0-9-]+$");
+  const okKey = key != null && key !== "" && (str ? keyRx.test(String(key)) && !/'/.test(String(key)) : /^\d+(\.0+)?$/.test(String(key)));
   if (!okKey) { parcel.attributes._zone_extra_err = X.no_key_err || "the lot's BBL isn't in the record"; return; }
   try {
-    const where = str ? `${X.by}='${String(key)}'` : `${X.by}=${Math.round(+key)}`;
+    const kf = X.by_to || X.by;
+    const where = str ? `${kf}='${String(key)}'` : `${kf}=${Math.round(+key)}`;
     const d = await arcQuery(X.url, { where, outFields: X.fields.join(","), returnGeometry: "false", f: "json" }, 8000);
     const r = d && d.features && d.features.length === 1 && d.features[0].attributes;
     if (!r) { parcel.attributes._zone_extra_err = X.no_record_err || "MapPLUTO returned no single record for this BBL"; return; }
@@ -4712,6 +4734,7 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
   };
   // The checks below are written for a house on its own lot. A condominium or cooperative unit, or a whole apartment
   // building, is recorded as residential but isn't that, so they aren't run there.
+  if (a.UseForm === "attached") { add("Home upgrades", "note", `This record is ${esc(a.UseDescription)}: the Assessor records it apart from a detached single-family house (a townhouse, patio home or home in a manufactured-home community). ADU, lot-split, pool and addition checks are written for a detached house on its own lot, so they aren't run; the community's plat and covenants also decide those.`); return out(); }
   if (a.UseForm === "unit") { add("Home upgrades", "note", `This record is ${esc(a.UseDescription)}: a unit in a condominium or cooperative. ADU, lot-split, pool and addition checks are about a house on its own lot, so they aren't run; the association and the building's lot decide those.`); return out(); }
   if (a.UseForm === "multi-family") { if (Z && zs.juris.id === "nyc" && Z.tier === "R6-R12") nycHigh(false); add("Home upgrades", "note", `This record is ${esc(a.UseDescription)}: an apartment building. The checks here are written for a house on its own lot, so they aren't run.`); return out(); }
 
@@ -4821,6 +4844,80 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
           : `Two lots would each need at least ${fmtN(ml.area_sqft)} sq ft under ${esc(dist)} (${cp} ${esc(ml.section)}); this lot has about ${fmtN(Math.round(lotA))} sq ft. A state-law (SB 9) split has its own rules.`);
     }
   }
+  if (Z && zs.juris.id === "pdx") {
+    // Portland City Code Title 33: Chapter 33.110 (Tables 110-2, 110-4) and 33.610 (Table 610-2), read from the City's PDFs.
+    const J = zs.juris, cp = J.cite_prefix, dist = zs.district, zsrc = J.zone_source || {};
+    const lotA = +lot || 0, ml = Z.min_lot, sb = Z.setbacks, hh = Z.height, far = Z.far, ht = Z.housing_types;
+    const mapNotes = ["OVRLY_DESC", "PLDIST_DESC", "HIST_DESC", "CONSV_DESC"].map(f => String(a[`${zsrc.attr}_${f}`] || "").trim()).filter(Boolean);
+    const yes = Object.entries(ht).filter(([, v]) => v.allowed).map(([k]) => k), no = Object.entries(ht).filter(([, v]) => !v.allowed).map(([k]) => k);
+    add(`Zoning district ${esc(dist)} (${esc(J.code)})`, "note",
+      `Housing types allowed in ${esc(dist)}: ${esc(yes.join(", "))}${no.length ? `; not allowed: ${esc(no.join(", "))}` : ""} (${cp} ${esc(Z.housing_section)}, ${esc(Z.housing_table)}). ` +
+      `Height: up to ${hh.max_height_ft} ft (${cp} ${esc(hh.section)}, ${esc(hh.table)})${hh.note3 ? `; the table's note [3]: "${esc(far.notes["3"])}"` : ""}. ` +
+      `Minimum setbacks: front ${sb.front_ft} ft, side ${sb.side_ft} ft, rear ${sb.rear_ft} ft, garage entrance ${sb.garage_entrance_ft} ft (${cp} ${esc(sb.section)}, ${esc(sb.table)}). ` +
+      `Required outdoor area: at least ${fmtN(Z.outdoor_area_sqft)} sq ft (${cp} 33.110.240, Table 110-4). ` +
+      (mapNotes.length ? `The City's zoning map also puts this lot in: ${esc(mapNotes.join("; "))}. ` : "") +
+      `Overlay zones, plan districts and historic or conservation designations change these standards; they aren't checked here.`);
+    if (lotA > 0) {
+      if (far.applies_only_below_sqft && lotA >= far.applies_only_below_sqft) {
+        add("Floor area allowed by zoning", "note", `"${esc(far.scope_quote)}" (${cp} ${esc(far.section)}). This lot is about ${fmtN(Math.round(lotA))} sq ft by its parcel outline, so Table 110-4's floor area ratios don't limit it.`);
+      } else {
+        const rows = far.by_units.map(x => `${x.units}${x.units === 4 ? " or more" : ""} home${x.units > 1 ? "s" : ""}: up to about ${fmtN(Math.round(x.far * lotA))} sq ft (FAR ${x.far})${x.bonus_far > x.far ? `, or ${fmtN(Math.round(x.bonus_far * lotA))} sq ft with a bonus option (FAR ${x.bonus_far})` : ""}`).join("; ");
+        add("Floor area allowed by zoning", "note",
+          `On this ~${fmtN(Math.round(lotA))} sq ft lot (by its parcel outline) the maximum floor area depends on the total number of homes on the lot, ADUs included: ${rows} (${cp} ${esc(far.section)}, ${esc(far.table)}). ` +
+          `"${esc(far.units_quote)}" "${esc(far.no_adjustments)}" Which count and bonus apply depends on what is built, so no single figure is given${far.by_units.some(x => x.note3) ? `; the table's note [3]: "${esc(far.notes["3"])}"` : ""}.`);
+      }
+      if (Z.min_density && lotA >= Z.min_density.site_sqft) add("Minimum number of homes", "note",
+        `"${esc(Z.min_density.quote)}" (${cp} ${esc(Z.min_density.section)}). This lot is about ${fmtN(Math.round(lotA))} sq ft by its parcel outline. "${esc(Z.min_density.exempt)}" Whether the lot is in that overlay isn't checked here.`);
+    }
+    const dup = ht.Duplex;
+    add("Second home (two-family or more)", dup && dup.allowed ? "yes" : "no", dup && dup.allowed
+      ? `${esc(dist)} allows duplexes, triplexes and fourplexes (${cp} ${esc(Z.housing_section)}, ${esc(Z.housing_table)}: "${esc(dup.row)}"; "${esc(ht.Triplex.row)}"; "${esc(ht.Fourplex.row)}"), within the floor area above${houseLawNote(st, "middle")}.`
+      : `${esc(dist)} doesn't allow a duplex (${cp} ${esc(Z.housing_section)}, ${esc(Z.housing_table)}: "${esc(dup ? dup.row : "")}")${houseLawNote(st, "middle")}.`);
+    const adu = ht["Accessory dwelling unit"];
+    add("Accessory dwelling unit (ADU)", adu && adu.allowed ? "maybe" : "no",
+      `${adu && adu.allowed ? "Allowed" : "Not allowed"} in ${esc(dist)} (${cp} ${esc(Z.housing_section)}, ${esc(Z.housing_table)}: "${esc(adu ? adu.row : "")}"). Its size, placement and number are set by Chapter 33.205, which isn't read here${houseLawNote(st, "adu")}.`);
+    if (lotA > 0) {
+      const two = lotA >= 2 * ml.area_sqft;
+      add("Split into two lots (by area only)", two ? "maybe" : "no", two
+        ? `At about ${fmtN(Math.round(lotA))} sq ft the lot has at least twice the ${fmtN(ml.area_sqft)} sq ft minimum for a new lot in ${esc(dist)} (${cp} ${esc(ml.section)}, ${esc(ml.table)}: "${esc(ml.rows[0])}"). Each new lot also needs ${ml.width_ft} ft of width and ${ml.depth_ft} ft of depth, which the parcel record doesn't give, and land division review decides.`
+        : `Two new lots would each need at least ${fmtN(ml.area_sqft)} sq ft in ${esc(dist)} (${cp} ${esc(ml.section)}, ${esc(ml.table)}); this lot has about ${fmtN(Math.round(lotA))} sq ft by its parcel outline.`);
+    }
+  }
+  if (Z && zs.juris.id === "clt") {
+    // Charlotte UDO Article 4 (Tables 4-1, 4-2, 4-3) and Article 15 (Table 15-1 use matrix, prescribed conditions).
+    const J = zs.juris, cp = J.cite_prefix, dist = zs.district, zsrc = J.zone_source || {};
+    const lotA = +lot || 0, ml = Z.min_lot, sb = Z.setbacks, hh = Z.height, cv = Z.coverage, u = Z.uses;
+    const ov = String(a[`${zsrc.attr}_Overlay`] || "").trim(), spa = String(a[`${zsrc.attr}_SPA`] || "").trim();
+    const how = k => !u[k] ? "not listed" : u[k].cell === "X" ? "by right" : u[k].cell === "PC" ? "with prescribed conditions" : "not allowed";
+    const covPct = lotA >= 10000 ? cv.pct_10000_plus : cv.pct_under_10000;
+    add(`Zoning district ${esc(dist)} (${esc(J.code)})`, "note",
+      `Uses (${cp} ${esc(Z.use_section)}, ${esc(Z.use_table)}): a single-family home ${how("Single-Family")}; a duplex ${how("Duplex")}, a triplex ${how("Triplex")}, a quadraplex ${how("Quadraplex")}, a multi-family building ${how("Multi-Family Attached Unit")}. "${esc(Z.use_legend.PC)}" ` +
+      `Minimum lot for a residential use: ${fmtN(ml.area_sqft)} sq ft and ${ml.width_ft} ft wide${ml.mf_width_ft ? ` (${ml.mf_width_ft} ft for multi-family)` : ""} (${cp} ${esc(ml.section)}, ${esc(ml.table)})` +
+      `${lotA > 0 && lotA < ml.area_sqft ? `; this lot (about ${fmtN(Math.round(lotA))} sq ft by its parcel outline) is smaller` : ""}; "${esc(ml.sublot_note)}" ` +
+      `Maximum building coverage: ${cv.pct_10000_plus}% on lots of 10,000 sq ft and greater, ${cv.pct_under_10000}% on smaller lots (${cp} ${esc(cv.section)}, ${esc(cv.table)})${lotA > 0 ? `; on this ~${fmtN(Math.round(lotA))} sq ft lot that is about ${fmtN(Math.round(lotA * covPct / 100))} sq ft of building coverage` : ""}. ` +
+      `Minimum setbacks: front ${sb.front_ft} ft and corner side ${sb.corner_side_ft} ft from the right-of-way, side ${sb.side_ft} ft, rear ${sb.rear_ft} ft (${cp} ${esc(sb.section)}, ${esc(sb.table)}); "${esc(sb.notes.plat)}" An alternative front setback for an established blockface (the table's note 2) isn't checked here. ` +
+      `Residential height: up to ${hh.max_height_ft} ft (${cp} ${esc(hh.section)}, ${esc(hh.table)}); "${esc(Z.sidewall.quote)}" (${cp} ${esc(Z.sidewall.section)}).` +
+      (ov && !/^none$/i.test(ov) ? ` The City's zoning map shows an overlay here (${esc(ov)}); its rules aren't checked.` : "") +
+      (spa && !/^no$/i.test(spa) ? ` The map marks a special plan area here (${esc(spa)}); it isn't checked.` : ""));
+    const quadTxt = Z.quadraplex_condition.applies
+      ? `A quadraplex is allowed in ${esc(dist)} only as ${cp} ${esc(Z.quadraplex_condition.section)} says: "${esc(Z.quadraplex_condition.quote)}" Whether the lot is on an arterial street isn't checked here.`
+      : `${cp} ${esc(Z.quadraplex_condition.section)}'s arterial-street and affordable-unit condition for a quadraplex "does not apply to the N1-F Zoning District".`;
+    add("Second home (two-family or more)", u.Duplex && u.Duplex.cell === "PC" ? "maybe" : "no",
+      `A duplex or triplex is allowed in ${esc(dist)} with prescribed conditions (${cp} ${esc(Z.use_table)}: "${esc(u.Duplex ? u.Duplex.row : "")}"), among them: "${esc(Z.common_wall.quote)}" (${cp} ${esc(Z.common_wall.section)}). ${quadTxt}`);
+    // No state-law note here: the only North Carolina record on file is Raleigh's city ordinance (state_code NC), which
+    // houseLawNote would present as state law in Charlotte.
+    const heated = +a.num_heatedarea || 0, A = Z.adu;
+    const aduMax = heated > 0 ? Math.min(A.max_sqft_cap, Math.max(A.max_sqft_floor, Math.round(heated * A.max_share_pct / 100))) : null;
+    add("Accessory dwelling unit (ADU)", u["Accessory Unit (ADU)"] && u["Accessory Unit (ADU)"].cell === "PC" ? "maybe" : "no",
+      `Allowed in ${esc(dist)} with prescribed conditions (${cp} ${esc(Z.use_table)}: "${esc(u["Accessory Unit (ADU)"] ? u["Accessory Unit (ADU)"].row : "")}"): "${esc(A.with_house)}" "${esc(A.one)}" "${esc(A.owner)}" In an accessory structure: "${esc(A.size)}" (${cp} ${esc(A.section)}).` +
+      (aduMax ? ` The Assessor records ${fmtN(heated)} heated sq ft here, so by that rule an ADU in an accessory structure could have up to about ${fmtN(aduMax)} heated sq ft.` : " The Assessor's heated area for this lot wasn't read, so that size isn't computed."));
+    if (lotA > 0) {
+      const two = lotA >= 2 * ml.area_sqft;
+      add("Split into two lots (by area only)", two ? "maybe" : "no", two
+        ? `At about ${fmtN(Math.round(lotA))} sq ft the lot has at least twice the ${fmtN(ml.area_sqft)} sq ft residential minimum in ${esc(dist)} (${cp} ${esc(ml.section)}, ${esc(ml.table)}). Each lot also needs ${ml.width_ft} ft of width, which the parcel record doesn't give, and subdivision review (${cp} Article 30) decides.`
+        : `Two lots would each need at least ${fmtN(ml.area_sqft)} sq ft in ${esc(dist)} (${cp} ${esc(ml.section)}, ${esc(ml.table)}); this lot has about ${fmtN(Math.round(lotA))} sq ft by its parcel outline.`);
+    }
+  }
   if (F.second) add("Second building on the lot", "note", F.slots.length > 1 ? `The Assessor lists ${F.slots.length} structures (${F.slots.map(x => fmtN(x.sqft) + " sq ft").join(", ")}): an existing ADU or guest house may already be present.` : "Second structure (garage or studio) detected on building footprint outlines.");
   
   if (Z && zs.juris.id === "dc") {
@@ -4836,6 +4933,8 @@ function houseChecks(a, lot, m, z, hMax, F, R) {
         `In an accessory building: by right only with permanent access (an 8-ft passage open to the sky to a street, an improved 24-ft alley, or within 300 ft of a street by an improved 15-ft alley), which isn't checked here. ` +
         `Either home must be owner-occupied, the apartment may house at most ${aa.max_persons} people, and renting it needs a Residential Rental Business License (${cp} ${esc(aa.section)}).`);
     }
+  } else if (Z && (zs.juris.id === "pdx" || zs.juris.id === "clt")) {
+    // Portland and Charlotte: the code's own ADU row is in the jurisdiction block above; the generic rows below don't apply.
   } else if (Z && zs.juris.adu && Z.commercial) {
     add("Ancillary dwelling unit (ADU)", "note", `${esc(zs.juris.cite_prefix)} 12-10 defines an ancillary dwelling unit; where one is allowed in a commercial district such as ${esc(zs.district)} isn't checked here.`);
   } else if (Z && zs.juris.adu) {

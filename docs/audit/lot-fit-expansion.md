@@ -380,7 +380,7 @@ City's official PDF of it) answered; a city site that only links to a code publi
 | Washington DC (11001) | dcregs.dc.gov | reachable, **covered** (round 2) | https://dcregs.dc.gov |
 | Philadelphia (42101) | American Legal | 403 | round 1 |
 | Atlanta (13121) | Municode; City site | 403 (both) | https://www.atlantaga.gov/ |
-| Miami (12086) | miami21.org (Miami 21) | **reachable** (pages answer; PDFs not yet parsed) | https://www.miami21.org/zoning_code.asp |
+| Miami (12086) | miami21.org (Miami 21) | **reachable** (pages answer; PDFs not yet parsed). *Corrected in round 6: the code text is on Gridics CodeHub and couldn't be read; Miami is withheld.* | https://www.miami21.org/zoning_code.asp |
 | Phoenix (04013) | municipal.codes | 403 | round 1 |
 | Boston (25025) | bostonplans.org links to the code | page reachable; code text location not found from it | https://www.bostonplans.org/planning-zoning/zoning-code |
 | Riverside (06065) | Municode | 403 (the City's /code/ page redirects to Municode) | https://riversideca.gov/code/ |
@@ -501,3 +501,179 @@ RS-1-1 … RS-1-14").
   outline".
 - My first unit-test helper for reading table cells assumed every row label ends in ")", which the FAR row's doesn't; the
   test failed and was fixed (the data was right).
+
+# Round 6 (17 Nov 2026): City of Portland and City of Charlotte; Miami withheld
+
+Round 5 listed Charlotte, Portland and Miami as "reachable, not yet built". Two are now covered; Miami is withheld.
+
+**Correction to round 5's table:** Miami was listed as "reachable (pages answer; PDFs not yet parsed)". The miami21.org
+pages answer, but the code itself isn't there: every article on `finalcode.asp` links to Gridics CodeHub
+(`codehub.gridics.com/us/fl/miami`), a JavaScript application whose page carries no code text, and the Article 5 PDF
+once on miami21.org (`final_code/ARTICLE5-SpecificToZones.pdf`) answers HTTP 404. So no Miami standard could be read
+from the code itself; Miami-Dade (12086) is now in the withheld list with that reason and the URLs tried.
+
+## City of Portland, Oregon: single-dwelling zones R20, R10, R7, R5, R2.5
+
+Source: Portland City Code Title 33, the City's own PDFs on portland.gov: Chapter 33.110 Single-Dwelling Zones
+(`/sites/default/files/code/110-sd-zone_3.pdf`, edition 11/1/26) and Chapter 33.610 Lots in RF Through R2.5 Zones
+(`/sites/default/files/code/610-rf-r2.5-lots.pdf`, edition 1/1/25). `build_pdx()` converts each with
+`pdftotext -layout` and parses:
+
+| What | Where | R5 example |
+|---|---|---|
+| Housing types allowed (House, Attached house, ADU, Duplex, Triplex, Fourplex, Multi-dwelling structure, Cottage cluster), each row kept | 33.110.200, Table 110-2 | all allowed |
+| Maximum FAR by total dwelling units on the lot (1, 2, 3, 4 or more), with and without a bonus option; notes [1]-[3] quoted | 33.110.210, Table 110-4 | 0.5 / 0.6 / 0.7 / 0.8 (bonus 0.5 / 0.7 / 0.8 / 0.9) |
+| R10 and R20: "the maximum FAR only applies to lots that are less than 10,000 square feet in area" | 33.110.210.B | |
+| Maximum height (note [3]: "Additional FAR and height may be allowed. See 33.110.265.F.") | 33.110.215, Table 110-4 | 30 ft |
+| Minimum setbacks: front, side, rear, garage entrance | 33.110.220, Table 110-4 | 10, 5, 5, 18 ft |
+| Required outdoor area | 33.110.240, Table 110-4 | 250 sq ft |
+| Minimum dwelling unit density (two units on large sites) and its Constrained Sites overlay exemption | 33.110.205.C | 10,000 sq ft and larger |
+| Minimum lot area, width and depth for a new lot ("All other lots") | 33.610.200, Table 610-2 | 3,000 sq ft, 36 ft, 50 ft |
+
+RF is not encoded: in Table 110-4 its FAR cells come out of the PDF's text layer blank except "no limit" / "NA", which
+can't be assigned to a column reliably. The build stops if a row isn't found, a row doesn't have the expected number
+of cells, or a spot check against the tables as printed fails (R5 3,000 sq ft / 36 ft / 50 ft; R20 12,000; R2.5 1,500
+and 35 ft; R5 FAR 0.5/0.6/0.7/0.8; R2.5 bonus FAR 0.7/0.9/1.0/1.1; R7 setbacks 15/5/5; R20 no cottage cluster).
+
+**Zone at the point.** Multnomah County's taxlot layer (the page's parcel service) carries a `ZONING` field, but the
+City's own map is used: PortlandMaps `Public/Zoning/MapServer/0` "Zoning Designations" (browser requests allowed; the
+latest polygon update is 26 Jun 2026), queried at the clicked point for the base zone, overlay zone, plan district,
+historic and conservation designations and `UNINC`. A point with no feature (Gresham and the other cities in the county)
+says "outside the City of Portland's zoning map". The map also covers 769 polygons flagged `UNINC = Y` (unincorporated
+pockets); there the page says Title 33's administration isn't checked and applies nothing.
+
+**Use.** The registry's Multnomah request carries only the map tax lot and address, so the page reads `PROPCLASS`,
+`IMPTYPE` and `UNITS` from the same taxlot layer by `MAPTAXLOT` after the parcel loads (`zone_source.extra_fields`;
+the key may contain spaces, so the key check takes a per-jurisdiction pattern). `PROPCLASS` is Oregon's property
+class, defined in the attachment to OAR 150-308-0310 ("Basic Property Classes", read from the Secretary of State's
+rule page): first digit 1 Residential, 7 Multi-family, 2 Commercial, 3 Industrial …; third digit 0 Vacant, 1 Improved,
+2 Condominium …. `build_pdx_use_codes()` reads the distinct values from the layer and decodes each digit by digit
+(101 "Residential, Improved"; 102 "Residential, Condominium" a unit; 7xx an apartment building; four-digit county
+codes unknown).
+
+**On the page** (Portland, single-dwelling zone, residential): the zone row (housing types allowed and not, height,
+setbacks, outdoor area, the City map's overlay / plan district / historic designations by name, and that overlays and
+plan districts change the standards and aren't checked); floor area allowed by number of homes on the lot, each with and
+without bonus, "so no single figure is given" (or, in R10/R20 on a lot of 10,000 sq ft or more, that Table 110-4 doesn't
+limit it); minimum number of homes where the lot is large enough; second home "yes" (duplex, triplex, fourplex allowed)
+with Oregon's state law records named; ADU allowed with Chapter 33.205's size and placement rules named as not read; a
+split check by area against Table 610-2. Lot area is measured from the parcel outline.
+
+## City of Charlotte, North Carolina: Neighborhood 1 districts N1-A to N1-F
+
+Source: the Charlotte Unified Development Ordinance on charlotteudo.org. The site renders each article in the browser,
+but every article page carries the article's HTML in its Next.js data payload (`self.__next_f.push(...)`);
+`build_clt()` decodes that payload and parses the HTML tables and sentences. Article 4 (Neighborhood 1) and
+Article 15 (Uses):
+
+| What | Where | N1-C example |
+|---|---|---|
+| Uses: single-family by right ("X"); duplex, triplex, quadraplex, ADU with prescribed conditions ("PC"); multi-family attached/stacked units only in N1-F | 15.2, Table 15-1 (legend quoted) | X / PC / PC / PC / PC; multi-family not allowed |
+| Quadraplex: "permitted only on arterial streets and a minimum of one unit … set aside for households earning 80% AMI or less … This restriction does not apply to the N1-F Zoning District." | 15.4.GG.3.a | applies |
+| Duplex/triplex common wall of at least 20 ft | 15.4.EE.1 | |
+| Minimum lot area and width (residential; N1-F 50 ft for multi-family); sublot note | 4.3.B, Table 4-1 | 6,000 sq ft, 50 ft |
+| Maximum building coverage: 40% (lots 10,000 sq ft and greater), 50% (smaller) | 4.3.B, Table 4-1 | |
+| Minimum setbacks: front and corner side from the right-of-way, side, rear; plat and blockface notes quoted | 4.3.C, Table 4-2 | 17, 10, 5, 30 ft |
+| Maximum residential height; FAA note; duplex/triplex sidewall 20 ft | 4.3.D, Table 4-3; 4.3.D.1 | 40 ft |
+| ADU: with a single-family dwelling, one per lot, same ownership; in an accessory structure "shall not exceed 600 heated square feet or 70% … whichever is greater … in no case … 1,000 heated square feet" | 15.6.F | |
+
+The build stops if a table's header isn't N1-A..N1-F, a row isn't found or doesn't have six cells (or one spanning
+cell), the use matrix doesn't show X for single-family and PC for duplex/triplex/quadraplex/ADU in every N1 column, or
+a spot check fails (N1-A 10,000 / 70; N1-D 3,500 / 40; N1-F 50 ft multi-family; N1-C setbacks 17 / 30; N1-A corner
+13.5; heights 48 / 40; coverage 40 / 50).
+
+**Zone at the point.** The City's zoning map, `gis.charlottenc.gov/.../PLN/Zoning/MapServer/0` (`ZoneDes`; browser
+requests allowed; latest rezoning date 19 Oct 2026). It has no features in the other Mecklenburg towns (checked at
+Matthews and Huntersville), so a point there says "outside the City of Charlotte's zoning map". Only a district mapped
+exactly N1-A..N1-F gets standards. The map also carries suffixed designations ("N1-B(CD)", "N1-E(HDO)", and even
+"N2-B(CD0"): a conditional-zoning plan or an overlay changes the base district's rules and isn't read, so a suffixed N1
+district is withheld with that reason. Legacy pre-UDO designations on the map (R-3, MUDD …) are "not on file".
+
+**Use.** Mecklenburg parcels come from NC OneMap (the statewide registry entry), whose `parusedesc` the page doesn't
+read. The City's copy of the county parcel data, `PLN/AllParcelData/MapServer/0` (browser requests allowed), carries
+`landuse_description`, `num_heatedarea` and `total_living_units`; the page reads them by parcel number (NC OneMap's
+`parno` = this layer's `parcelid`; the key mechanism now takes a different field name on each side). No code list is
+published with the layer, so `build_clt_use_codes()` reads the 162 distinct descriptions from the layer itself and
+types each by its own words (`type_rule`): SINGLE FAMILY RESIDENTIAL and its variants a house; MULTI FAMILY
+DUPLEX/TRIPLEX small multi-unit; other MULTI FAMILY an apartment building; CONDOMINIUM a unit; TOWN HOUSE, PATIO HOME
+and mobile-home park/subdivision descriptions "attached"; common areas and commercial condominiums non-residential.
+"Attached" is a new form: the page says the Assessor records the lot apart from a detached single-family house and
+doesn't run the detached-house checks (it previously had only "unit", whose message says "a unit in a condominium or
+cooperative", which would be wrong for a townhouse).
+
+**On the page** (Charlotte, N1 district, single-family): the zone row (uses with how each is allowed and the PC legend,
+minimum lot, coverage with the lot's figure, setbacks with the plat note, the blockface alternative named as not checked,
+height and the sidewall rule, and any overlay or special plan area the map shows, named as not checked); second home
+"maybe" (duplex/triplex with prescribed conditions, the common-wall rule quoted, the quadraplex condition quoted and
+the arterial street named as not checked, or that it doesn't apply in N1-F); ADU "maybe" with 15.6.F quoted and, where
+the Assessor's heated area was read, the accessory-structure size it allows; a split check by area. No state-law note is added to Charlotte's rows: the
+only North Carolina record on file is Raleigh's city ordinance, which the page's state-law helper would present as
+state law (see "Noticed" below).
+
+## Verification (round 6)
+
+- **Build:** the rebuilt `zoning_standards.json` and `parcel_use_codes.json` are identical to before for NYC, DC, San
+  Diego and the Nashville/DC/NYC/San Diego use tables (compared field by field, ignoring dates); Portland, Charlotte, the
+  two new use tables and the Miami withheld entry added.
+- **Unit tests** (`tests/unit/zoningStandards.test.ts`, 33 pass): every Portland number equals the cell in its quoted
+  Table 110-2 / 110-4 / 610-2 row for its zone's column (RF first); every Charlotte number equals its quoted Table 4-1 /
+  4-2 / 4-3 / 15-1 cell; spot checks against the published editions; the two use tables' rules and key codes.
+- **e2e** (`tests/e2e/site.spec.ts`, through `houseAt`): Portland R5 (decoded property class, zone row, map overlay
+  named, FAR by number of homes, second home, ADU, split), R20 (no cottage clusters, 12,000 sq ft), an unincorporated
+  pocket, RM2 ("on file only for …"), a point outside the map, a condominium (Oregon class 102); Charlotte N1-C (uses,
+  lot, coverage, setbacks, height, quadraplex condition, ADU size from heated area), N1-F (multi-family, quadraplex
+  condition doesn't apply), N1-B(CD) (suffix reason), a point outside the map, a townhouse ("attached"). A second test
+  makes Portland's map answer a bare 502 twice and checks the page asks again and shows the standards.
+- **Live check** (`scripts/live_check_lot_fit.mjs`, LIVE_PORT 8874, default browser path,
+  `data/backtests/live_check_lot_fit_2026-11-17.json`):
+  - Charlotte: 4 of 4 single-family lots, in N1-A (2726 Chilton Pl), N1-B (630 Poindexter Dr), N1-C (933 Woodside Av)
+    and N1-D (207 Walnut Av), each picked so the point returns the same parcel from NC OneMap (the page's service) as
+    from the City's parcel layer, show the decoded use, the zone's standards, the Assessor's heated area and the ADU size,
+    matching the City's zoning map queried separately. N1-E and N1-F weren't seen on a real lot (the sampler takes one
+    lot per district from six boxes); they are covered by the unit tests and the rows re-found live. 28 of 28 quoted
+    sentences and table rows re-found in a fresh download of Articles 4 and 15. A Matthews lot shows the "outside the
+    City of Charlotte's zoning map" reason.
+  - Portland: 2 of 3 single-family lots passed in the final run, R5 (6504 NE 26th Ave) and R20 (4960 SW Hewett Blvd).
+    The R2.5 lot (4631 SE 41st Ave) showed "the zoning map service didn't answer" and no standards: the City's map
+    answered the browser's request (and its retries) with a bare 502. The same lot passed in a run of the same page minutes
+    earlier (R2.5 standards shown). 38 of 38 quoted sentences and table rows re-found in fresh downloads of Chapters
+    33.110 and 33.610. A Gresham lot shows the "outside the City of Portland's zoning map" reason.
+  - Unchanged: NYC R1-R5 8/8 and 22/22, R6-R12 12/12 and 45/45, commercial 14/14 and 29/29, overlays 6/6, DC 5/5 and
+    27/27, Nashville 2/2, San Diego 3/3 and 43/43 with Chula Vista's reason, Travis and Jefferson "not on file".
+- **Portland's map from a browser.** In the build sandbox, requests to `www.portlandmaps.com` from the headless browser
+  were intermittently answered with a bare `502` (23 bytes of text, no CORS header, `Connection: close`) while the
+  same URLs from curl, with the browser's exact headers, always got 200 with `Access-Control-Allow-Origin` echoing the
+  origin, and JSONP got `application/javascript`. The 502 then failed the page's JSONP fallback too (Chrome blocks a
+  `text/plain` script: `ERR_BLOCKED_BY_ORB`). Whether that 502 comes from the sandbox's network path or from Portland's
+  servers isn't settled; launching the browser with the proxy set explicitly also failed 2 of 3 lots once. The zone read
+  is now retried twice on an error (an empty answer isn't retried), which fixed the standalone run (3 of 3) but not every
+  request in the full run. When it fails, the page says the map didn't answer and applies nothing.
+  `live_check_lot_fit.mjs` has an opt-in `LIVE_BROWSER_PROXY=1` (recorded in its output as
+  `browser_via_explicit_proxy`); the final run above did not use it.
+
+## Noticed (outside this round)
+
+- **North Carolina's only "state law" record is a city ordinance.** `statutes.json` has one NC record,
+  `nc_raleigh_missing_middle` (Raleigh's Missing Middle ordinance, `could_not_check`), with `state_code` "NC" and no
+  `eligible_counties`. `houseLawNote()` presents every record with the state's code as "state law on file", so the
+  generic "Duplex, middle housing or lot split" row on any North Carolina lot without local standards names Raleigh's
+  ordinance as state law. Charlotte's new rows leave the state-law note out for that reason. A fix would mark the
+  record as a city ordinance (or give it its county) and have the helper skip non-statewide records.
+- Charlotte's zoning map carries a malformed designation, "N2-B(CD0" (a typo for "(CD)" on the City's own map).
+- Multnomah's taxlot layer carries a `ZONING` field too; the City's map is used instead because it is the City's own and
+  carries overlays and the unincorporated flag.
+
+## My own mistakes this round
+
+- The worktree was created from an unrelated old commit (`94a3f0b`); I reset it to `841d8f8` before changing anything.
+- My first quote for Table 110-3 assumed its cell reads as one sentence; `pdftotext` interleaves the cell with its row
+  labels, so the build stopped. It now checks the "36 feet wide" piece and quotes 33.110.202.C.4.a instead.
+- My first Table 610-2 lot-area row was assembled from the cells plus " sq. ft." and couldn't be re-found verbatim in
+  the PDF; it is now the label line as printed (the live check re-finds it).
+- My first Charlotte use typing called townhouses and patio homes "unit", which the page describes as "a unit in a
+  condominium or cooperative"; a townhouse isn't that, so they are now "attached" with their own message.
+- My first source names had commas, which the page's use label cuts at ("Oregon property class code (OAR 150-308-0310"
+  would have shown); renamed before any test was written against them.
+- My first live check showed Portland's "zoning map service didn't answer" on every lot; I first suspected CORS caching
+  and an explicit-proxy browser launch (which then routed the local page through the proxy and timed out) before finding
+  the 502s and adding the retry.

@@ -1,9 +1,134 @@
 [
- {"jurisdiction": "Austin", "counties": ["48453"], "reason": "Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.", "tried": [{"url": "https://library.municode.com/tx/austin/codes/land_development_code", "result": "HTTP 403 (bot check)", "on": "2026-11-16"}]},
- {"jurisdiction": "Phoenix", "counties": ["04013"], "reason": "Phoenix's Zoning Ordinance is published on municipal.codes, which answered the build machine with HTTP 403 on 16 Nov 2026.", "tried": [{"url": "https://phoenix.municipal.codes/ZO", "result": "HTTP 403", "on": "2026-11-16"}]},
- {"jurisdiction": "Seattle", "counties": ["53033"], "reason": "Seattle's Land Use Code is published on municipal.codes, which answered the build machine with HTTP 403 on 16 Nov 2026.", "tried": [{"url": "https://seattle.municipal.codes/SMC/23.44.010", "result": "HTTP 403", "on": "2026-11-16"}]},
- {"jurisdiction": "Chicago", "counties": ["17031"], "reason": "Chicago's Zoning Ordinance is published on American Legal Publishing, which answered the build machine with HTTP 403 on 16 Nov 2026.", "tried": [{"url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2627958", "result": "HTTP 403", "on": "2026-11-16"}]},
- {"jurisdiction": "Philadelphia", "counties": ["42101"], "reason": "Philadelphia's Zoning Code is published on American Legal Publishing, which answered the build machine with HTTP 403 on 16 Nov 2026.", "tried": [{"url": "https://codelibrary.amlegal.com/codes/philadelphia/latest/philadelphia_pa/0-0-0-1", "result": "HTTP 403", "on": "2026-11-16"}]},
- {"jurisdiction": "Denver", "counties": ["08031"], "reason": "The current Denver Zoning Code's text wasn't found as a document the build machine could read: the city's Denver Zoning Code page (answered 16 Nov 2026) links code interpretations and the former Chapter 59, not the current articles. Denver's house standards are building-form tables keyed to the zone district's lot-size letter, so they are not encoded until that text is read. Colorado's statewide parcel layer gives Denver zones only in shortened form (SSU, ESU), without that letter.", "tried": [{"url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Community-Planning-and-Development/Denver-Zoning-Code", "result": "HTTP 200; no current-code article documents linked", "on": "2026-11-16"}, {"url": "https://www.denvergov.org/files/assets/public/v/3/community-planning-and-development/documents/zoning/denver-zoning-code/denver_zoning_code_article4_edge.pdf", "result": "HTTP 404 (guessed path)", "on": "2026-11-16"}]},
- {"jurisdiction": "Nashville / Davidson County", "counties": ["47037"], "reason": "Metro Nashville's Zoning Code (Title 17) is published on Municode, which answered the build machine with HTTP 403 on 16 Nov 2026, so no standard could be read from the code itself. The parcel record does give the Assessor's land use (LUDesc), so home checks run there, without local standards.", "tried": [{"url": "https://library.municode.com/tn/metro_government_of_nashville_and_davidson_county/codes/code_of_ordinances?nodeId=CD_TIT17ZO", "result": "HTTP 403", "on": "2026-11-16"}, {"url": "https://api.municode.com/codes/tn/metro_government_of_nashville_and_davidson_county", "result": "HTTP 403", "on": "2026-11-16"}]}
+ {
+  "jurisdiction": "Austin",
+  "counties": [
+   "48453"
+  ],
+  "reason": "Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.",
+  "tried": [
+   {
+    "url": "https://library.municode.com/tx/austin/codes/land_development_code",
+    "result": "HTTP 403 (bot check)",
+    "on": "2026-11-16"
+   }
+  ]
+ },
+ {
+  "jurisdiction": "Phoenix",
+  "counties": [
+   "04013"
+  ],
+  "reason": "Phoenix's Zoning Ordinance is published on municipal.codes, which answered the build machine with HTTP 403 on 16 Nov 2026.",
+  "tried": [
+   {
+    "url": "https://phoenix.municipal.codes/ZO",
+    "result": "HTTP 403",
+    "on": "2026-11-16"
+   }
+  ]
+ },
+ {
+  "jurisdiction": "Seattle",
+  "counties": [
+   "53033"
+  ],
+  "reason": "Seattle's Land Use Code is published on municipal.codes, which answered the build machine with HTTP 403 on 16 Nov 2026.",
+  "tried": [
+   {
+    "url": "https://seattle.municipal.codes/SMC/23.44.010",
+    "result": "HTTP 403",
+    "on": "2026-11-16"
+   }
+  ]
+ },
+ {
+  "jurisdiction": "Chicago",
+  "counties": [
+   "17031"
+  ],
+  "reason": "Chicago's Zoning Ordinance is published on American Legal Publishing, which answered the build machine with HTTP 403 on 16 Nov 2026.",
+  "tried": [
+   {
+    "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2627958",
+    "result": "HTTP 403",
+    "on": "2026-11-16"
+   }
+  ]
+ },
+ {
+  "jurisdiction": "Philadelphia",
+  "counties": [
+   "42101"
+  ],
+  "reason": "Philadelphia's Zoning Code is published on American Legal Publishing, which answered the build machine with HTTP 403 on 16 Nov 2026.",
+  "tried": [
+   {
+    "url": "https://codelibrary.amlegal.com/codes/philadelphia/latest/philadelphia_pa/0-0-0-1",
+    "result": "HTTP 403",
+    "on": "2026-11-16"
+   }
+  ]
+ },
+ {
+  "jurisdiction": "Denver",
+  "counties": [
+   "08031"
+  ],
+  "reason": "The current Denver Zoning Code's text wasn't found as a document the build machine could read: the city's Denver Zoning Code page (answered 16 Nov 2026) links code interpretations and the former Chapter 59, not the current articles. Denver's house standards are building-form tables keyed to the zone district's lot-size letter, so they are not encoded until that text is read. Colorado's statewide parcel layer gives Denver zones only in shortened form (SSU, ESU), without that letter.",
+  "tried": [
+   {
+    "url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Community-Planning-and-Development/Denver-Zoning-Code",
+    "result": "HTTP 200; no current-code article documents linked",
+    "on": "2026-11-16"
+   },
+   {
+    "url": "https://www.denvergov.org/files/assets/public/v/3/community-planning-and-development/documents/zoning/denver-zoning-code/denver_zoning_code_article4_edge.pdf",
+    "result": "HTTP 404 (guessed path)",
+    "on": "2026-11-16"
+   }
+  ]
+ },
+ {
+  "jurisdiction": "Nashville / Davidson County",
+  "counties": [
+   "47037"
+  ],
+  "reason": "Metro Nashville's Zoning Code (Title 17) is published on Municode, which answered the build machine with HTTP 403 on 16 Nov 2026, so no standard could be read from the code itself. The parcel record does give the Assessor's land use (LUDesc), so home checks run there, without local standards.",
+  "tried": [
+   {
+    "url": "https://library.municode.com/tn/metro_government_of_nashville_and_davidson_county/codes/code_of_ordinances?nodeId=CD_TIT17ZO",
+    "result": "HTTP 403",
+    "on": "2026-11-16"
+   },
+   {
+    "url": "https://api.municode.com/codes/tn/metro_government_of_nashville_and_davidson_county",
+    "result": "HTTP 403",
+    "on": "2026-11-16"
+   }
+  ]
+ },
+ {
+  "jurisdiction": "Miami",
+  "counties": [
+   "12086"
+  ],
+  "reason": "The City of Miami's zoning code (Miami 21) is published on Gridics CodeHub, a page that builds the code text in the browser; no copy of the text could be read from the build machine (the CodeHub page's HTML carries no code text, and the Article 5 PDF formerly on miami21.org answers HTTP 404), so no standard could be read from the code itself.",
+  "tried": [
+   {
+    "url": "https://www.miami21.org/finalcode.asp",
+    "result": "HTTP 200; each article links to codehub.gridics.com",
+    "on": "2026-11-17"
+   },
+   {
+    "url": "https://codehub.gridics.com/us/fl/miami",
+    "result": "HTTP 200, a JavaScript application shell with no code text",
+    "on": "2026-11-17"
+   },
+   {
+    "url": "https://www.miami21.org/final_code/ARTICLE5-SpecificToZones.pdf",
+    "result": "HTTP 404",
+    "on": "2026-11-17"
+   }
+  ]
+ }
 ]

@@ -15,6 +15,10 @@ Covered so far:
   - Washington, DC: see build_dc() (11 DCMR Subtitle D, residential house zones).
   - City of San Diego: see build_sd() (Municipal Code Chapter 13, Article 1, Division 4, the RS zones) and
     build_sd_use_codes() (the Assessor's NUCLEUS_USE_CD list from the SanGIS parcel metadata).
+  - City of Portland, OR: see build_pdx() (Title 33, Chapters 33.110 and 33.610: single-dwelling zones R20-R2.5) and
+    build_pdx_use_codes() (Oregon property class, OAR 150-308-0310, on Multnomah County's taxlots).
+  - City of Charlotte, NC: see build_clt() (UDO Articles 4 and 15: Neighborhood 1 districts N1-A to N1-F) and
+    build_clt_use_codes() (Mecklenburg land use descriptions read from the City's parcel layer).
 
 Usage: python3 scripts/build_zoning_standards.py [--cache DIR]
 """
@@ -1034,23 +1038,462 @@ def build_sd_use_codes():
     }
 
 
+# ---------------------------------------------------------------------------------------------------------------------
+# City of Portland, Oregon: Title 33 (Planning and Zoning), Chapter 33.110 (Single-Dwelling Zones) and Chapter 33.610
+# (Lots in RF Through R2.5 Zones). Both are published by the City as PDFs (portland.gov/code/33); they are converted with
+# pdftotext -layout and Tables 110-2 (housing types), 110-4 (development standards) and 610-2 (lot dimensions) are
+# parsed, with the sentences quoted below. RF is not encoded: its FAR cells in Table 110-4 are blank in the PDF's text
+# layer except "no limit" / "NA", which can't be read as a column reliably.
+
+PDX_110 = "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+PDX_610 = "https://www.portland.gov/sites/default/files/code/610-rf-r2.5-lots.pdf"
+PDX_ZONING_LAYER = "https://www.portlandmaps.com/arcgis/rest/services/Public/Zoning/MapServer/0"
+PDX_TAXLOTS = "https://www3.multco.us/gisagspublic/rest/services/DART/Taxlots_Orion_Public/MapServer/0"
+PDX_ZONES = ["R20", "R10", "R7", "R5", "R2.5"]          # the columns after RF in Tables 110-2, 110-4 and 610-2
+PDX_COLS = ["RF"] + PDX_ZONES
+
+
+def pdf_text(url):
+    pdf = fetch(url, binary=True)
+    with tempfile.TemporaryDirectory() as tmp:
+        p = os.path.join(tmp, "d.pdf")
+        open(p, "wb").write(pdf)
+        return subprocess.run(["pdftotext", "-layout", p, "-"], capture_output=True, text=True, check=True).stdout
+
+
+def pdx_row(block, label_rx, cell_rx, n, where):
+    """One table row: the label, then exactly n cells. Returns (cells, row text)."""
+    m = re.search(r"^[ \t]*(" + label_rx + r")[ \t]+((?:" + cell_rx + r")(?:[ \t]+(?:" + cell_rx + r")){" + str(n - 1) + r"})[ \t]*$", block, re.M)
+    assert m, (where, label_rx)
+    cells = re.findall(cell_rx, m.group(2))
+    assert len(cells) == n, (where, label_rx, cells)
+    return [re.sub(r"\s+", " ", c).strip() for c in cells], re.sub(r"\s+", " ", m.group(0).strip())
+
+
+def build_pdx():
+    t110, t610 = pdf_text(PDX_110), pdf_text(PDX_610)
+    F110 = re.sub(r"\s+", " ", t110)
+    q = lambda rx, F=F110: (re.search(rx, F) or (_ for _ in ()).throw(AssertionError(rx))).group(0)
+    ed110 = re.search(r"Chapter 33\.110\s+(\d{1,2}/\d{1,2}/\d{2})\s+Single-Dwelling Zones", t110)
+    ed610 = re.search(r"Chapter 33\.610\s+(\d{1,2}/\d{1,2}/\d{2})\s+Lots in RF Through R2\.5 Zones", t610)
+    assert ed110 and ed610, "edition dates not found"
+    sec110 = lambda s: {"section": s, "url": PDX_110}
+    sec610 = lambda s: {"section": s, "url": PDX_610}
+
+    # Table 110-2: housing types allowed. A row is a label and six Yes/No cells (RF, R20, R10, R7, R5, R2.5); a label
+    # whose reference "(See ...)" sits on its own line is read from the line above.
+    a = t110.index("Housing Types Allowed In The Single-Dwelling Zones")
+    b = t110.index("Yes = allowed; No = prohibited.", a)
+    t2 = t110[a:b]
+    yn = r"(?:Yes|No)"
+    types = {"House": r"House", "Attached house": r"Attached house", "Accessory dwelling unit": r"Accessory dwelling unit",
+             "Duplex": r"Duplex", "Triplex": r"Triplex", "Fourplex": r"Fourplex", "Multi-dwelling structure": r"Multi-dwelling Structure",
+             "Cottage cluster": r"Cottage Cluster"}
+    housing = {}
+    lines = t2.split("\n")
+    for name, lab in types.items():
+        hit = None
+        for i, ln in enumerate(lines):
+            if re.match(r"^\s*" + lab + r"\b", ln) and not re.match(r"^\s*" + lab + r"\s+(park|Development)", ln):
+                for j in (i, i + 1):
+                    cells = re.findall(r"\b(Yes|No)\b", lines[j]) if j < len(lines) else []
+                    if len(cells) == 6:
+                        hit = (cells, re.sub(r"\s+", " ", (ln.strip() + (" " + lines[j].strip() if j != i else ""))))
+                        break
+            if hit:
+                break
+        assert hit, ("Table 110-2", name)
+        housing[name] = {"cells": dict(zip(PDX_COLS, hit[0])), "row": hit[1]}
+    assert housing["House"]["cells"]["R5"] == "Yes" and housing["Duplex"]["cells"]["RF"] == "No" and housing["Cottage cluster"]["cells"]["R20"] == "No", housing
+    pd_only = q(r"Attached Duplex Only in Planned Developments, See Chapter 33\.270\.")
+
+    # Table 110-4: development standards. Columns RF..R2.5; RF's FAR cells are blank or "no limit"/"NA", so FAR rows
+    # are read as the five columns R20..R2.5 and the RF cell (if any) is checked to be "no limit".
+    a = t110.index("Summary of Development Standards In Single-Dwelling Zones")
+    b = t110.index("[1] Including any site with a congregate housing facility.", a)
+    t4 = t110[a:b]
+    fx = r"\d+(?:\.\d+)? to 1(?: \[\d\])?"
+    bonus_at = t4.index("Maximum FAR with Bonus")
+    far_std, far_bonus = {}, {}
+    for blk, dest in ((t4[:bonus_at], far_std), (t4[bonus_at:], far_bonus)):
+        for units, lab in ((1, r"- 1 total dwelling unit(?: \[1\])?"), (2, r"- 2 total dwelling units \[2\]"), (3, r"- 3 total dwelling units \[2\]"), (4, r"- 4 or more total dwelling(?:[ \t]+no limit)?")):
+            cells, row = pdx_row(blk, lab, fx, 5, ("Table 110-4", units, dest is far_bonus))
+            dest[units] = {"cells": dict(zip(PDX_ZONES, cells)), "row": row}
+    assert "no limit" in far_std[4]["row"], far_std[4]["row"]
+    ft = r"\d+ ft\.(?: \[\d\])?"
+    hcells, hrow = pdx_row(t4, r"Maximum Height", ft, 6, "Table 110-4 height")
+    sb = {}
+    for k, lab in (("front", r"- Front building"), ("side", r"- Side building"), ("rear", r"- Rear building"), ("garage_entrance", r"- Garage entrance")):
+        cells, row = pdx_row(t4, lab, ft, 6, ("Table 110-4", k))
+        sb[k] = {"cells": dict(zip(PDX_COLS, cells)), "row": row}
+    sq = r"\d+ sq\. ft\."
+    oa_cells, oa_row = pdx_row(t4, r"- Minimum area", sq, 6, "Table 110-4 outdoor area")
+    notes4 = {"1": q(r"\[1\] Including any site with a congregate housing facility\."), "2": q(r"\[2\] Including accessory dwelling units\."),
+              "3": q(r"\[3\] Additional FAR and height may be allowed\. See 33\.110\.265\.F\.")}
+    far_scope = q(r"In the R10 and R20 zones, the maximum FAR only applies to lots that are less than 10,000 square feet in area\.")
+    far_units = q(r"Maximum FAR applies to all buildings on the lot, however the maximum allowed is based on the total number of dwelling units on the lot and whether a bonus option is chosen\.")
+    no_adj = q(r"Adjustments to the maximum FAR ratios, including bonus ratios, are prohibited\.")
+    dens = {"R7": q(r"R7\. In the R7 zone, a minimum of two dwelling units are required on sites that are 14,000 square feet or larger in total site area\."),
+            "R5": q(r"R5\. In the R5 zone, a minimum of two dwelling units are required on sites that are 10,000 square feet or larger in total site area\."),
+            "R2.5": q(r"R2\.5\. In the R2\.5 zone, a minimum of two dwelling units are required on sites that are 5,000 square feet or larger in total site area\.")}
+    dens_sqft = {"R7": 14000, "R5": 10000, "R2.5": 5000}
+    for z, s in dens.items():
+        assert f"{dens_sqft[z]:,}" in s, (z, s)
+    dens_exempt = q(r"Sites in the Constrained Sites overlay zone are exempt from this standard\.")
+
+    # Table 610-2: lot dimension standards for new lots (land division). Rows read in order inside each heading.
+    a = t610.index("Lot Dimension Standards")
+    b = t610.index("Notes:", a)
+    t6 = t610[a:b]
+    def block(head, nxt):
+        i = t6.index(head)
+        j = t6.index(nxt, i) if nxt else len(t6)
+        return t6[i:j]
+    area_blk = block("Minimum Lot Area", "Maximum Lot Area")
+    num = r"NA|\d{1,3}(?:,\d{3})*"
+    # Area cells are split over two lines ("52,000 ... / sq. ft. ..."): read the numbers on the label line.
+    am = re.search(r"^[ \t]*All other lots[ \t]+((?:" + num + r")(?:[ \t]+(?:" + num + r")){5})[ \t]*$", area_blk, re.M)
+    assert am, "Table 610-2 minimum lot area"
+    area_cells = re.findall(num, am.group(1))
+    area_row = re.sub(r"\s+", " ", am.group(0).strip())   # the label line as printed; "sq. ft." is on the line below
+    w_cells, w_row = pdx_row(block("Minimum Lot Width", "Minimum Front Lot Line"), r"All other lots", r"NA|\d+ ft\.", 6, "Table 610-2 width")
+    d_cells, d_row = pdx_row(t6, r"Minimum Lot Depth", r"\d+ ft\.", 6, "Table 610-2 depth")
+    F610 = re.sub(r"\s+", " ", t610)
+    lot_use = q(r"Each lot must meet the minimum lot area standard stated in Table 610- ?2\.", F610)
+    # Table 110-3's cell is laid out beside its row labels (the flattened text interleaves them), so only its width is
+    # checked here and the governing sentence of 33.110.202.C.4.a is quoted.
+    q(r"36 feet wide and")
+    t110_3 = q(r"Meets the minimum lot size requirements stated in Table 110-3\.")
+
+    num_of = lambda c: float(re.sub(r"[^\d.]", "", c.split(" to ")[0].replace(",", "")))
+    d = {}
+    for z in PDX_ZONES:
+        i = PDX_COLS.index(z)
+        far = {"by_units": [{"units": u, "far": num_of(far_std[u]["cells"][z]), "bonus_far": num_of(far_bonus[u]["cells"][z]),
+                             "note3": "[3]" in far_std[u]["cells"][z], "row": far_std[u]["row"], "bonus_row": far_bonus[u]["row"]} for u in (1, 2, 3, 4)],
+               "units_quote": far_units, "no_adjustments": no_adj, "notes": notes4, "table": "Table 110-4", **sec110("33.110.210")}
+        if z in ("R20", "R10"):
+            far["applies_only_below_sqft"] = 10000
+            far["scope_quote"] = far_scope
+        hcell = hcells[i]
+        d[z] = {
+            "housing_types": {t: {"allowed": v["cells"][z] == "Yes", "row": v["row"]} for t, v in housing.items()},
+            "housing_table": "Table 110-2", "housing_section": "33.110.200", "housing_url": PDX_110, "planned_development_only": pd_only,
+            "far": far,
+            "height": {"max_height_ft": int(re.match(r"\d+", hcell).group(0)), "note3": "[3]" in hcell, "row": hrow, "table": "Table 110-4", **sec110("33.110.215")},
+            "setbacks": {**{k + "_ft": int(re.match(r"\d+", v["cells"][z]).group(0)) for k, v in sb.items()}, "rows": [v["row"] for v in sb.values()], "table": "Table 110-4", **sec110("33.110.220")},
+            "outdoor_area_sqft": int(re.match(r"\d+", oa_cells[i]).group(0)), "outdoor_area_row": oa_row,
+            "min_lot": {"area_sqft": int(area_cells[i].replace(",", "")), "width_ft": int(re.match(r"\d+", w_cells[i]).group(0)), "depth_ft": int(re.match(r"\d+", d_cells[i]).group(0)),
+                        "rows": [area_row, w_row, d_row], "applies": lot_use, "table": "Table 610-2", **sec610("33.610.200")},
+            "existing_lot": {"quote": t110_3, **sec110("33.110.202, Table 110-3")},
+        }
+        if z in dens:
+            d[z]["min_density"] = {"quote": dens[z], "site_sqft": dens_sqft[z], "exempt": dens_exempt, **sec110("33.110.205")}
+    # Spot checks against the tables as printed (17 Nov 2026), so a misaligned column stops the build.
+    assert d["R5"]["min_lot"]["area_sqft"] == 3000 and d["R5"]["min_lot"]["width_ft"] == 36 and d["R5"]["min_lot"]["depth_ft"] == 50, d["R5"]["min_lot"]
+    assert d["R20"]["min_lot"]["area_sqft"] == 12000 and d["R2.5"]["min_lot"]["area_sqft"] == 1500
+    assert [x["far"] for x in d["R5"]["far"]["by_units"]] == [0.5, 0.6, 0.7, 0.8], d["R5"]["far"]["by_units"]
+    assert [x["bonus_far"] for x in d["R2.5"]["far"]["by_units"]] == [0.7, 0.9, 1.0, 1.1]
+    assert d["R2.5"]["height"]["max_height_ft"] == 35 and d["R5"]["height"]["max_height_ft"] == 30
+    assert (d["R7"]["setbacks"]["front_ft"], d["R7"]["setbacks"]["side_ft"], d["R7"]["setbacks"]["rear_ft"]) == (15, 5, 5)
+    assert d["R20"]["housing_types"]["Cottage cluster"]["allowed"] is False and d["R10"]["housing_types"]["Fourplex"]["allowed"] is True
+    return {
+        "id": "pdx", "name": "City of Portland", "counties": ["41051"],
+        "zone_source": {"kind": "point_layer", "url": PDX_ZONING_LAYER, "field": "ZONE", "attr": "ZoningPDX",
+                        "extra_out": ["UNINC", "OVRLY_DESC", "PLDIST_DESC", "HIST_DESC", "CONSV_DESC"],
+                        "no_feature_reason": "the point is outside the City of Portland's zoning map (another city in Multnomah County, such as Gresham, or county land Portland doesn't zone); only Portland's code is on file",
+                        "note": "City of Portland zoning map (PortlandMaps, Public/Zoning layer 0, 'Zoning Designations'), queried at the clicked point: base zone, overlay zones, plan district and the map's unincorporated flag.",
+                        "extra_fields": {"url": PDX_TAXLOTS, "by": "MAPTAXLOT", "key_type": "string", "key_pattern": "^[A-Za-z0-9 -]+$",
+                                         "fields": ["PROPCLASS", "PROPERTY_TYPE", "IMPTYPE", "UNITS", "SIZESQFT", "ROLLYEAR"], "decode_use": True,
+                                         "no_key_err": "the lot's map tax lot number isn't in the record", "no_record_err": "Multnomah County's taxlot layer returned no single record for this map tax lot",
+                                         "no_answer_err": "Multnomah County's taxlot layer didn't answer",
+                                         "note": "Read from Multnomah County's taxlot layer by map tax lot number: the Assessor's property class (decoded with OAR 150-308-0310), improvement type and unit count. The page's registry request carries only the taxlot number and address."}},
+        "uninc_reason": "The City's zoning map marks this area as unincorporated (UNINC = Y): it shows a Portland zone, but whether Title 33 is administered here isn't checked, so no standards are applied.",
+        "code": "Portland City Code, Title 33 (Planning and Zoning)", "cite_prefix": "PCC", "code_url": "https://www.portland.gov/code/33",
+        "as_amended": f"Chapter 33.110 as published by the City (edition {ed110.group(1)}) and Chapter 33.610 (edition {ed610.group(1)}), read on {TODAY}",
+        "districts_covered": PDX_ZONES,
+        "not_covered": "Only the single-dwelling zones R20, R10, R7, R5 and R2.5 are encoded. RF (its FAR cells can't be read from the PDF's text layer), the multi-dwelling (RM1-RM4, RX, RMP), commercial, employment, industrial and open-space zones, plan districts and overlay zones are not.",
+        "districts": d,
+        "verification": {"status": "verified", "checked_on": TODAY,
+                         "method": "Read Chapters 33.110 and 33.610 from the City's PDFs (portland.gov), converted with pdftotext -layout, and parsed Tables 110-2, 110-4 and 610-2 and the quoted sentences with scripts/build_zoning_standards.py; each rule keeps the verbatim row or sentence it came from.",
+                         "evidence": "PCC 33.110.200 (Table 110-2), 33.110.202 (Table 110-3), 33.110.205, 33.110.210-.220 (Table 110-4), 33.610.200 (Table 610-2)",
+                         "unverified_fields": []},
+    }
+
+
+def build_pdx_use_codes():
+    """Multnomah County PROPCLASS: Oregon's property class code, defined in the attachment to OAR 150-308-0310 ('Basic
+    property classes': first digit the class, third digit the improvement). The distinct values are read from the
+    taxlot layer itself; each is decoded with that rule, and four-digit county codes are left unknown."""
+    att = "https://secure.sos.state.or.us/oard/viewAttachment.action?ruleVrsnRsn=252769"
+    q = urllib.parse.urlencode({"where": "1=1", "outFields": "PROPCLASS", "returnDistinctValues": "true", "returnGeometry": "false", "f": "json"})
+    vals = sorted({str(f["attributes"]["PROPCLASS"]).strip() for f in json.loads(fetch(PDX_TAXLOTS + "/query?" + q))["features"] if f["attributes"]["PROPCLASS"]})
+    assert "101" in vals and len(vals) > 50, vals[:10]
+    first = {"0": "Miscellaneous", "1": "Residential", "2": "Commercial", "3": "Industrial", "4": "Tract", "5": "Farm", "6": "Forest", "7": "Multi-family", "8": "Recreation", "9": "Exempt"}
+    third = {"0": "Vacant", "1": "Improved", "2": "Condominium", "3": "State responsibility", "4": "Partially exempt", "5": "Taxable leased", "6": "Waterfront", "7": "Mobile home parks", "9": "Manufactured Structure"}
+    codes = {}
+    for v in vals:
+        if not re.fullmatch(r"\d{3}", v):
+            codes[v] = {"label": f"county code {v} (not one of OAR 150-308-0310's three-digit classes)", "type": "unknown", "form": None}
+            continue
+        f1, f3 = v[0], v[2]
+        lab = f"{first[f1]}, {third.get(f3, 'third digit ' + f3)}"
+        if f1 == "1":
+            t, form = ("vacant", None) if f3 == "0" else ("residential", "unit") if f3 == "2" else ("residential", None) if f3 in ("1", "6", "9") else ("unknown", None)
+        elif f1 == "4":
+            t, form = ("vacant", None) if f3 == "0" else ("residential", None) if f3 == "1" else ("unknown", None)
+        elif f1 == "7":
+            t, form = ("vacant", None) if f3 == "0" else ("residential", "unit") if f3 == "2" else ("residential", "multi-family")
+        elif f1 in ("2", "3"):
+            t, form = ("vacant", None) if f3 == "0" else ("non-residential", None)
+        else:
+            t, form = "unknown", None
+        codes[v] = {"label": lab, "type": t, "form": form}
+    assert codes["101"] == {"label": "Residential, Improved", "type": "residential", "form": None}
+    assert codes["102"]["form"] == "unit" and codes["100"]["type"] == "vacant" and codes["201"]["type"] == "non-residential"
+    return {
+        "id": "multnomah_propclass", "counties": ["41051"], "field": "PROPCLASS", "codes": codes,
+        "source": {"name": "Oregon property class (OAR 150-308-0310) on Multnomah County taxlots", "attachment": "Basic Property Classes", "url": att,
+                   "values_read_from": PDX_TAXLOTS},
+        "type_rule": "Decoded digit by digit from the rule's table: first digit 1 Residential, 4 Tract (homesite), 7 Multi-family, 2 Commercial, 3 Industrial, others (miscellaneous, farm, forest, recreation, exempt) unknown here; third digit 0 Vacant, 1 Improved, 2 Condominium (a unit), 6 Waterfront, 9 Manufactured Structure. 1-x-1 / 1-x-6 / 1-x-9 / 4-x-1 are a residential lot whose form the class doesn't say; 7-x-x improved is an apartment building. Four-digit county codes are unknown.",
+        "verification": {"status": "verified", "checked_on": TODAY, "method": "Digit meanings from the OAR 150-308-0310 attachment (Oregon Secretary of State); distinct PROPCLASS values read from the taxlot layer by scripts/build_zoning_standards.py",
+                         "evidence": f"{len(codes)} values", "unverified_fields": []},
+    }
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# City of Charlotte, North Carolina: Unified Development Ordinance (charlotteudo.org). Article 4 (Neighborhood 1 zoning
+# districts N1-A..N1-F) and Article 15 (Table 15-1 use matrix, prescribed conditions). The site renders the articles in
+# the browser, but each page carries the article's HTML in its Next.js data payload; that HTML is decoded and its tables
+# and sentences are parsed.
+
+CLT_A4 = "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+CLT_A15 = "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+CLT_ZONING_LAYER = "https://gis.charlottenc.gov/arcgis/rest/services/PLN/Zoning/MapServer/0"
+CLT_PARCELS = "https://gis.charlottenc.gov/arcgis/rest/services/PLN/AllParcelData/MapServer/0"
+CLT_N1 = ["N1-A", "N1-B", "N1-C", "N1-D", "N1-E", "N1-F"]
+
+
+def udo_html(url):
+    raw = fetch(url)
+    chunks = re.findall(r'self\.__next_f\.push\(\[1,"(.*?)"\]\)', raw, flags=re.S)
+    assert chunks, url
+    out = []
+    for c in chunks:
+        out.append(json.loads('"' + c + '"'))
+    return "".join(out)
+
+
+def udo_table(h, marker):
+    i = h.index(marker)
+    a = h.index("<table", i)
+    b = h.index("</table>", a)
+    rows = []
+    for tr in re.findall(r"<tr[^>]*>(.*?)</tr>", h[a:b], re.S):
+        cells = []
+        for attrs, c in re.findall(r"<t[dh]([^>]*)>(.*?)</t[dh]>", tr, re.S):
+            span = re.search(r'colspan="(\d+)"', attrs)
+            c = re.sub(r"<sup>(.*?)</sup>", r"^\1", c)
+            c = re.sub(r"<br\s*/?>", " / ", c)
+            cells.append((int(span.group(1)) if span else 1, re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", c))).strip()))
+        rows.append(cells)
+    return rows, h[b:b + 6000]
+
+
+def udo_sentence(h, rx):
+    t = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", h)))
+    t = re.sub(r" ([,.;:)])", r"\1", t)
+    m = re.search(rx, t)
+    assert m, rx
+    return m.group(0)
+
+
+def build_clt():
+    h4, h15 = udo_html(CLT_A4), udo_html(CLT_A15)
+    sec4 = lambda s: {"section": s, "url": CLT_A4}
+    sec15 = lambda s: {"section": s, "url": CLT_A15}
+
+    def zone_rows(marker, labels):
+        rows, after = udo_table(h4, marker)
+        head = [c for _, c in rows[1]]
+        assert head[-6:] == CLT_N1, (marker, head)
+        out = {}
+        for key, lab in labels.items():
+            r = next((r for r in rows if len(r) >= 3 and re.match(lab, r[1][1])), None)
+            assert r, (marker, key)
+            text = " | ".join(c for _, c in r)
+            if r[2][0] == 6:   # one cell spanning all six districts
+                out[key] = {"all": r[2][1], "row": text}
+            else:
+                assert len(r) == 8, (marker, key, r)
+                out[key] = {"cells": dict(zip(CLT_N1, [c for _, c in r[2:]])), "row": text}
+        return out, after
+
+    lot, after1 = zone_rows("Table 4-1: Neighborhood 1 Zoning Districts Lot Standards", {
+        "area": r"Minimum Lot Area – Residential", "width": r"Minimum Lot Width – Residential", "coverage": r"Maximum Building Coverage"})
+    siting, after2 = zone_rows("Table 4-2: Neighborhood 1 Zoning Districts Building Siting Standards", {
+        "front": r"Min\. Front Setback from Street", "corner": r"Min\. Corner Side Setback", "side": r"Minimum Side Setback", "rear": r"Minimum Rear Setback"})
+    height, after3 = zone_rows("Table 4-3: Neighborhood 1 Zoning Districts Building Height Standards", {"res": r"Maximum Building Height – Residential"})
+    sublot = udo_sentence(after1, r"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot\(s\) is located\.")
+    plat = udo_sentence(after2, r"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks\.")
+    blockface = udo_sentence(after2, r"The following alternative setback standards may be used for an established blockface that is at least 25% developed or has at least four existing dwellings:")
+    faa = udo_sentence(after3, r"The height and location of structures may be restricted by the limitations set forth in the Code of Federal Regulations \(CFR\) Title 14 Part 77: Safe, Efficient Use, and Preservation of the Navigable Airspace\.")
+    sidewall = udo_sentence(h4, r"The sidewall height for all duplex and triplex buildings is limited to 20 feet\.")
+    cov = lot["coverage"]["all"]
+    cm = re.fullmatch(r"Lots 10,000 square feet and greater: (\d+) / Lots Less than 10,000 square feet: (\d+)", cov)
+    assert cm, cov
+
+    # Table 15-1 (use matrix): the dwelling rows for the N1 columns. "X" by right, "PC" with prescribed conditions.
+    legend_x = udo_sentence(h15, r"An “X” indicates that the use is permitted by-right in the zoning district\.")
+    legend_pc = udo_sentence(h15, r"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article \(Sections 15\.4 through 15\.6\)\.")
+    rows, _ = udo_table(h15, "Table 15-1: Use Matrix")
+    header = None
+    uses = {}
+    for r in rows:
+        cells = [c for _, c in r]
+        if cells[:1] == ["Uses"] or (len(cells) > 6 and cells[1:7] == CLT_N1) or (len(cells) > 7 and CLT_N1[0] in cells and header is None):
+            header = cells
+        lab = cells[0] if cells else ""
+        if lab in ("Dwelling – Single-Family", "Dwelling – Duplex", "Dwelling – Triplex", "Dwelling – Quadraplex", "Dwelling – Accessory Unit (ADU)", "Dwelling – Multi-Family Attached Unit", "Dwelling – Multi-Family Stacked Unit"):
+            if lab in uses:
+                continue
+            uses[lab] = {"cells": dict(zip(CLT_N1, cells[1:7])), "row": " | ".join(cells[:8])}
+    for k in ("Dwelling – Single-Family", "Dwelling – Duplex", "Dwelling – Triplex", "Dwelling – Quadraplex"):
+        assert k in uses, (k, list(uses))
+    adu_rows, _ = udo_table(h15, "Table 15-1: Use Matrix") if "Dwelling – Accessory Unit (ADU)" in uses else (None, None)
+    if "Dwelling – Accessory Unit (ADU)" not in uses:
+        # The ADU row is in the matrix's accessory-uses table (the second Table 15-1 block).
+        i2 = h15.index("Table 15-1: Use Matrix", h15.index("Table 15-1: Use Matrix") + 10)
+        rows2, _ = udo_table(h15[i2 - 10:], "Table 15-1: Use Matrix")
+        for r in rows2:
+            cells = [c for _, c in r]
+            if cells and cells[0] == "Dwelling – Accessory Unit (ADU)":
+                uses[cells[0]] = {"cells": dict(zip(CLT_N1, cells[1:7])), "row": " | ".join(cells[:8])}
+    assert "Dwelling – Accessory Unit (ADU)" in uses, list(uses)
+    assert all(uses["Dwelling – Single-Family"]["cells"][z] == "X" for z in CLT_N1), uses["Dwelling – Single-Family"]
+    assert all(uses[k]["cells"][z] == "PC" for k in ("Dwelling – Duplex", "Dwelling – Triplex", "Dwelling – Quadraplex", "Dwelling – Accessory Unit (ADU)") for z in CLT_N1)
+    quad = udo_sentence(h15, r"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual\. This restriction does not apply to the N1-F Zoning District\.")
+    common_wall = udo_sentence(h15, r"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages\.")
+    adu_with = udo_sentence(h15, r"In conjunction with a single-family dwelling in any zoning district in which a single-family dwelling is allowed and in accordance with the prescribed conditions of Section 15\.4\.HH\.")
+    adu_one = udo_sentence(h15, r"Only one ADU shall be permitted on the lot\.")
+    adu_owner = udo_sentence(h15, r"The ADU and its associated principal dwelling shall be under the same ownership\.")
+    adu_size = udo_sentence(h15, r"The heated floor area of the ADU shall not exceed 600 heated square feet or 70% of the total floor area of the principal residential use, whichever is greater\. However, in no case shall the ADU exceed 1,000 heated square feet\.")
+
+    num = lambda s: float(re.match(r"[\d,.]+", s).group(0).replace(",", ""))
+    d = {}
+    for z in CLT_N1:
+        wcell = lot["width"]["cells"][z]
+        mf = re.search(r"MF: (\d+)", wcell)
+        d[z] = {
+            "uses": {k.replace("Dwelling – ", ""): {"cell": v["cells"][z], "row": v["row"]} for k, v in uses.items()},
+            "use_legend": {"X": legend_x, "PC": legend_pc}, "use_table": "Table 15-1", **{"use_section": "15.2", "use_url": CLT_A15},
+            "quadraplex_condition": {"quote": quad, "applies": z != "N1-F", **sec15("15.4.GG.3")},
+            "common_wall": {"quote": common_wall, **sec15("15.4.EE.1")},
+            "sidewall": {"quote": sidewall, **sec4("4.3.D.1")},
+            "min_lot": {"area_sqft": int(num(lot["area"]["cells"][z])), "width_ft": int(num(wcell)), "mf_width_ft": int(mf.group(1)) if mf else None,
+                        "rows": [lot["area"]["row"], lot["width"]["row"]], "sublot_note": sublot, "table": "Table 4-1", **sec4("4.3.B")},
+            "coverage": {"pct_10000_plus": int(cm.group(1)), "pct_under_10000": int(cm.group(2)), "row": lot["coverage"]["row"], "table": "Table 4-1", **sec4("4.3.B")},
+            "setbacks": {"front_ft": num(siting["front"]["cells"][z]), "corner_side_ft": num(siting["corner"]["cells"][z]), "side_ft": num(siting["side"]["cells"][z]), "rear_ft": num(siting["rear"]["cells"][z]),
+                         "rows": [siting[k]["row"] for k in ("front", "corner", "side", "rear")], "notes": {"plat": plat, "blockface": blockface}, "table": "Table 4-2", **sec4("4.3.C")},
+            "height": {"max_height_ft": int(num(height["res"]["cells"][z])), "row": height["res"]["row"], "faa": faa, "table": "Table 4-3", **sec4("4.3.D")},
+            "adu": {"with_house": adu_with, "one": adu_one, "owner": adu_owner, "size": adu_size, "max_sqft_floor": 600, "max_share_pct": 70, "max_sqft_cap": 1000, **sec15("15.6.F")},
+        }
+    for s in ("600 heated square feet", "70%", "1,000 heated square feet"):
+        assert s in adu_size, s
+    # Spot checks against the tables as printed (17 Nov 2026).
+    assert (d["N1-A"]["min_lot"]["area_sqft"], d["N1-A"]["min_lot"]["width_ft"]) == (10000, 70), d["N1-A"]["min_lot"]
+    assert (d["N1-D"]["min_lot"]["area_sqft"], d["N1-D"]["min_lot"]["width_ft"]) == (3500, 40)
+    assert d["N1-F"]["min_lot"]["mf_width_ft"] == 50 and d["N1-E"]["min_lot"]["mf_width_ft"] is None
+    assert (d["N1-C"]["setbacks"]["front_ft"], d["N1-C"]["setbacks"]["rear_ft"]) == (17, 30) and d["N1-A"]["setbacks"]["corner_side_ft"] == 13.5
+    assert d["N1-B"]["height"]["max_height_ft"] == 48 and d["N1-D"]["height"]["max_height_ft"] == 40
+    assert (d["N1-A"]["coverage"]["pct_10000_plus"], d["N1-A"]["coverage"]["pct_under_10000"]) == (40, 50)
+    return {
+        "id": "clt", "name": "City of Charlotte", "counties": ["37119"],
+        "zone_source": {"kind": "point_layer", "url": CLT_ZONING_LAYER, "field": "ZoneDes", "attr": "ZoningCLT", "extra_out": ["Overlay", "SPA", "ZoneClass"],
+                        "no_feature_reason": "the point is outside the City of Charlotte's zoning map (another town in Mecklenburg County, such as Matthews or Huntersville); only Charlotte's UDO is on file",
+                        "note": "City of Charlotte Planning zoning map (gis.charlottenc.gov, PLN/Zoning layer 0), queried at the clicked point.",
+                        "extra_fields": {"url": CLT_PARCELS, "by": "parno", "by_to": "parcelid", "key_type": "string", "key_pattern": "^[A-Za-z0-9-]+$",
+                                         "fields": ["landuse_description", "num_heatedarea", "total_living_units", "yearid"], "decode_use": True,
+                                         "no_key_err": "the lot's parcel number isn't in the record", "no_record_err": "Mecklenburg County's parcel layer returned no single record for this parcel number",
+                                         "no_answer_err": "Mecklenburg County's parcel layer didn't answer",
+                                         "note": "Read from the City of Charlotte's copy of Mecklenburg County parcel data (PLN/AllParcelData) by parcel number: the Assessor's land use description, heated area and living units. NC OneMap's parcel record carries the land use too, but the page doesn't read it."}},
+        "suffix_rule": {"bases": CLT_N1, "reason": "This lot's zoning is {dist}: {base} with a suffix on the City's map. A conditional zoning \"(CD)\" plan, an overlay such as \"(HDO)\" historic district or other designations change the base district's standards, and those plans and overlays aren't read here, so nothing is applied."},
+        "code": "Charlotte Unified Development Ordinance", "cite_prefix": "UDO", "code_url": "https://charlotteudo.org/articles",
+        "as_amended": f"Articles 4 and 15 as published on charlotteudo.org, read on {TODAY}",
+        "districts_covered": CLT_N1,
+        "not_covered": "Only the Neighborhood 1 districts N1-A to N1-F, as mapped without a suffix, are encoded. N2, commercial, campus, manufacturing, centers, TOD and overlay districts, conditional (CD) districts, and legacy (pre-UDO) designations such as R-3 or MUDD are not.",
+        "districts": d,
+        "verification": {"status": "verified", "checked_on": TODAY,
+                         "method": "Read Articles 4 and 15 from charlotteudo.org (each page's HTML is decoded from its Next.js data payload), parsed Tables 4-1, 4-2, 4-3 and 15-1 and the quoted sentences with scripts/build_zoning_standards.py; each rule keeps the verbatim row or sentence it came from.",
+                         "evidence": "UDO 4.3 (Tables 4-1, 4-2, 4-3), 4.3.D.1, 15.2 (Table 15-1), 15.4.EE, 15.4.GG, 15.6.F",
+                         "unverified_fields": []},
+    }
+
+
+def build_clt_use_codes():
+    """Mecklenburg County land use descriptions, from the City of Charlotte's copy of the county's parcel data. No
+    code list is published with the layer, so the distinct values are read from the layer itself and each is typed by
+    its own words (the rule is stated in type_rule)."""
+    q = urllib.parse.urlencode({"where": "1=1", "outFields": "landuse_description", "returnDistinctValues": "true", "returnGeometry": "false", "f": "json"})
+    vals = sorted({str(f["attributes"]["landuse_description"]).strip() for f in json.loads(fetch(CLT_PARCELS + "/query?" + q))["features"] if f["attributes"]["landuse_description"]})
+    assert "SINGLE FAMILY RESIDENTIAL" in vals and len(vals) > 100, vals[:10]
+    def classify(v):
+        u = re.sub(r"\s+", " ", v.upper())
+        if re.search(r"COMMON AREA|- COMMON$|WATER ACCESS$", u):
+            return "non-residential", None
+        if re.search(r"^(COMMERCIAL|MEDICAL|OFFICE|WAREHOUSE) CONDOMINIUM", u):
+            return "non-residential", None
+        if re.search(r"CONDO", u):
+            return "residential", "unit"
+        if re.search(r"^TOWN ?HOUSE|^TOWNHOUSE|^PATIO HOME", u):
+            return "residential", "attached"
+        if u == "MULTI FAMILY DUPLEX/TRIPLEX":
+            return "residential", "small-multi"
+        if re.search(r"^MULTI FAMI?L?T?Y", u) or u == "MUNICIPAL HOUSING AUTHORITY":
+            return "residential", "multi-family"
+        if re.search(r"^SINGLE FAMILY RESIDENTIAL", u) or u in ("RURAL HOMESITE", "USE VALUE HOMESITE", "HABITAT FOR HUMANITY", "RESIDENTIAL AFFORDABLE HOUSING", "MOBILE HOME HS", "R101"):
+            return "residential", "single-family"
+        if re.search(r"MOBILE HOME (PARK|SUBDIVISION)", u):
+            return "residential", "attached"
+        if u in ("NEW PARCEL", "RESERVED PARCEL", "NONE", "COS NO AV10", "LESS MINERAL RIGHTS (TAXED ELSEWHERE)", "NO LAND INTEREST", "LEASEHOLD INTEREST", "AIR RIGHTS PARCEL"):
+            return "unknown", None
+        return "non-residential", None
+    codes = {}
+    for v in vals:
+        t, form = classify(v)
+        codes[v] = {"label": re.sub(r"\s+", " ", v), "type": t, "form": form}
+    assert codes["SINGLE FAMILY RESIDENTIAL"] == {"label": "SINGLE FAMILY RESIDENTIAL", "type": "residential", "form": "single-family"}
+    assert codes["CONDOMINIUM"]["form"] == "unit" and codes["MULTI FAMILY DUPLEX/TRIPLEX"]["form"] == "small-multi" and codes["CHURCH"]["type"] == "non-residential"
+    assert codes["TOWN HOUSE  SFR"]["form"] == "attached" and codes["SINGLE FAMILY RESIDENTIAL - COMMON"]["type"] == "non-residential"
+    return {
+        "id": "mecklenburg_landuse", "counties": ["37119"], "field": "landuse_description", "codes": codes,
+        "source": {"name": "Mecklenburg County land use on Charlotte's All Parcel Data layer", "url": CLT_PARCELS,
+                   "values_read_from": CLT_PARCELS + "/query (distinct landuse_description)", "caveat": "No code list is published with the layer; the values are the Assessor's own words read from the layer."},
+        "type_rule": "Typed by the description's own words: SINGLE FAMILY RESIDENTIAL (and its variants, RURAL HOMESITE, USE VALUE HOMESITE, HABITAT FOR HUMANITY, RESIDENTIAL AFFORDABLE HOUSING, MOBILE HOME HS, R101) a single-family house; MULTI FAMILY DUPLEX/TRIPLEX small multi-unit; other MULTI FAMILY descriptions and MUNICIPAL HOUSING AUTHORITY an apartment building; CONDOMINIUM descriptions a unit; TOWN HOUSE, TOWNHOUSE, PATIO HOME and mobile home park/subdivision descriptions 'attached' (recorded apart from a detached single-family house, so the detached-house checks aren't run); COMMON AREA, '- COMMON', WATER ACCESS and commercial/medical/office/warehouse condominiums non-residential; placeholder records (NEW PARCEL, RESERVED PARCEL, None, mineral/air/leasehold interests) unknown; everything else non-residential.",
+        "verification": {"status": "verified", "checked_on": TODAY, "method": "Distinct landuse_description values read from the layer by scripts/build_zoning_standards.py and typed by the stated rule",
+                         "evidence": f"{len(codes)} descriptions", "unverified_fields": []},
+    }
+
+
 def main():
     nyc = build_nyc()
     dc = build_dc()
     sd = build_sd()
+    pdx = build_pdx()
+    clt = build_clt()
     out = {
         "_source": {
             "description": "Local zoning standards used by the page's 'what fits on this lot' checks. Every rule is parsed from the code's own text at build time and keeps the verbatim text and section URL it came from.",
             "built_by": "scripts/build_zoning_standards.py", "built_on": TODAY,
             "rule": "A jurisdiction not listed here shows 'zoning standards not on file' with the reason; nothing is filled in.",
         },
-        "jurisdictions": [nyc, dc, sd],
+        "jurisdictions": [nyc, dc, sd, pdx, clt],
         "withheld": json.load(open(os.path.join(ROOT, "scripts", "zoning_standards_withheld.json"))),
     }
     json.dump(out, open(os.path.join(ROOT, "app/data/zoning_standards.json"), "w"), indent=1, ensure_ascii=False)
     uses = {
         "_source": {"description": "Parcel-use code tables, from each publisher's own documentation, used to tell whether a parcel is a home.", "built_by": "scripts/build_zoning_standards.py", "built_on": TODAY},
-        "systems": [build_nyc_use_codes(), build_dc_use_codes(), build_davidson_use_codes(), build_sd_use_codes()],
+        "systems": [build_nyc_use_codes(), build_dc_use_codes(), build_davidson_use_codes(), build_sd_use_codes(), build_pdx_use_codes(), build_clt_use_codes()],
     }
     json.dump(uses, open(os.path.join(ROOT, "app/data/parcel_use_codes.json"), "w"), indent=1, ensure_ascii=False)
     for dd, r in nyc["districts"].items():
@@ -1071,6 +1514,14 @@ def main():
         ml, sb, h, f = r["min_lot"], r["setbacks"], r["height"], r["far"]
         print(z, ml["area_sqft"], ml["width_ft"], ml["frontage_ft"], ml["depth_ft"], "setbacks", sb["front_ft"], sb["side_ft"], sb["street_side_ft"], sb["rear_ft"],
               "height", h.get("listed") or h["max_height_ft"], "FAR", f["standard"] if f["standard"] is not None else "Table 131-04J")
+    for z, r in pdx["districts"].items():
+        ml, sb, h = r["min_lot"], r["setbacks"], r["height"]
+        print(z, ml["area_sqft"], ml["width_ft"], ml["depth_ft"], "setbacks", sb["front_ft"], sb["side_ft"], sb["rear_ft"], "height", h["max_height_ft"],
+              "FAR", [(x["units"], x["far"], x["bonus_far"]) for x in r["far"]["by_units"]], "types", [k for k, v in r["housing_types"].items() if v["allowed"]])
+    for z, r in clt["districts"].items():
+        ml, sb, h = r["min_lot"], r["setbacks"], r["height"]
+        print(z, ml["area_sqft"], ml["width_ft"], ml["mf_width_ft"], "setbacks", sb["front_ft"], sb["corner_side_ft"], sb["side_ft"], sb["rear_ft"], "height", h["max_height_ft"],
+              "uses", {k: v["cell"] for k, v in r["uses"].items()})
 
 
 if __name__ == "__main__":

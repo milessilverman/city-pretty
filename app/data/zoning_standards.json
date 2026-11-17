@@ -12071,6 +12071,1499 @@
     "evidence": "SDMC §§131.0403, 131.0431 (Table 131-04D), 131.0444, 131.0446 (Table 131-04J)",
     "unverified_fields": []
    }
+  },
+  {
+   "id": "pdx",
+   "name": "City of Portland",
+   "counties": [
+    "41051"
+   ],
+   "zone_source": {
+    "kind": "point_layer",
+    "url": "https://www.portlandmaps.com/arcgis/rest/services/Public/Zoning/MapServer/0",
+    "field": "ZONE",
+    "attr": "ZoningPDX",
+    "extra_out": [
+     "UNINC",
+     "OVRLY_DESC",
+     "PLDIST_DESC",
+     "HIST_DESC",
+     "CONSV_DESC"
+    ],
+    "no_feature_reason": "the point is outside the City of Portland's zoning map (another city in Multnomah County, such as Gresham, or county land Portland doesn't zone); only Portland's code is on file",
+    "note": "City of Portland zoning map (PortlandMaps, Public/Zoning layer 0, 'Zoning Designations'), queried at the clicked point: base zone, overlay zones, plan district and the map's unincorporated flag.",
+    "extra_fields": {
+     "url": "https://www3.multco.us/gisagspublic/rest/services/DART/Taxlots_Orion_Public/MapServer/0",
+     "by": "MAPTAXLOT",
+     "key_type": "string",
+     "key_pattern": "^[A-Za-z0-9 -]+$",
+     "fields": [
+      "PROPCLASS",
+      "PROPERTY_TYPE",
+      "IMPTYPE",
+      "UNITS",
+      "SIZESQFT",
+      "ROLLYEAR"
+     ],
+     "decode_use": true,
+     "no_key_err": "the lot's map tax lot number isn't in the record",
+     "no_record_err": "Multnomah County's taxlot layer returned no single record for this map tax lot",
+     "no_answer_err": "Multnomah County's taxlot layer didn't answer",
+     "note": "Read from Multnomah County's taxlot layer by map tax lot number: the Assessor's property class (decoded with OAR 150-308-0310), improvement type and unit count. The page's registry request carries only the taxlot number and address."
+    }
+   },
+   "uninc_reason": "The City's zoning map marks this area as unincorporated (UNINC = Y): it shows a Portland zone, but whether Title 33 is administered here isn't checked, so no standards are applied.",
+   "code": "Portland City Code, Title 33 (Planning and Zoning)",
+   "cite_prefix": "PCC",
+   "code_url": "https://www.portland.gov/code/33",
+   "as_amended": "Chapter 33.110 as published by the City (edition 11/1/26) and Chapter 33.610 (edition 1/1/25), read on 2026-11-17",
+   "districts_covered": [
+    "R20",
+    "R10",
+    "R7",
+    "R5",
+    "R2.5"
+   ],
+   "not_covered": "Only the single-dwelling zones R20, R10, R7, R5 and R2.5 are encoded. RF (its FAR cells can't be read from the PDF's text layer), the multi-dwelling (RM1-RM4, RX, RMP), commercial, employment, industrial and open-space zones, plan districts and overlay zones are not.",
+   "districts": {
+    "R20": {
+     "housing_types": {
+      "House": {
+       "allowed": true,
+       "row": "House Yes Yes Yes Yes Yes Yes"
+      },
+      "Attached house": {
+       "allowed": true,
+       "row": "Attached house (See 33.110.260.C and No Yes Yes Yes Yes Yes"
+      },
+      "Accessory dwelling unit": {
+       "allowed": true,
+       "row": "Accessory dwelling unit (See Chapter 33.205) Yes Yes Yes Yes Yes Yes"
+      },
+      "Duplex": {
+       "allowed": true,
+       "row": "Duplex No Yes Yes Yes Yes Yes"
+      },
+      "Triplex": {
+       "allowed": true,
+       "row": "Triplex No Yes Yes Yes Yes Yes"
+      },
+      "Fourplex": {
+       "allowed": true,
+       "row": "Fourplex No Yes Yes Yes Yes Yes"
+      },
+      "Multi-dwelling structure": {
+       "allowed": true,
+       "row": "Multi-dwelling Structure No Yes Yes Yes Yes Yes"
+      },
+      "Cottage cluster": {
+       "allowed": false,
+       "row": "Cottage Cluster No No Yes Yes Yes Yes"
+      }
+     },
+     "housing_table": "Table 110-2",
+     "housing_section": "33.110.200",
+     "housing_url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf",
+     "planned_development_only": "Attached Duplex Only in Planned Developments, See Chapter 33.270.",
+     "far": {
+      "by_units": [
+       {
+        "units": 1,
+        "far": 0.4,
+        "bonus_far": 0.4,
+        "note3": false,
+        "row": "- 1 total dwelling unit [1] 0.4 to 1 0.4 to 1 0.4 to 1 0.5 to 1 0.7 to 1",
+        "bonus_row": "- 1 total dwelling unit 0.4 to 1 0.4 to 1 0.4 to 1 0.5 to 1 0.7 to 1"
+       },
+       {
+        "units": 2,
+        "far": 0.5,
+        "bonus_far": 0.6,
+        "note3": false,
+        "row": "- 2 total dwelling units [2] 0.5 to 1 0.5 to 1 0.5 to 1 0.6 to 1 0.8 to 1",
+        "bonus_row": "- 2 total dwelling units [2] 0.6 to 1 0.6 to 1 0.6 to 1 0.7 to 1 0.9 to 1"
+       },
+       {
+        "units": 3,
+        "far": 0.6,
+        "bonus_far": 0.7,
+        "note3": true,
+        "row": "- 3 total dwelling units [2] 0.6 to 1 [3] 0.6 to 1 [3] 0.6 to 1 [3] 0.7 to 1 [3] 0.9 to 1 [3]",
+        "bonus_row": "- 3 total dwelling units [2] 0.7 to 1 0.7 to 1 0.7 to 1 0.8 to 1 1 to 1"
+       },
+       {
+        "units": 4,
+        "far": 0.7,
+        "bonus_far": 0.8,
+        "note3": true,
+        "row": "- 4 or more total dwelling no limit 0.7 to 1 [3] 0.7 to 1 [3] 0.7 to 1 [3] 0.8 to 1 [3] 1 to 1 [3]",
+        "bonus_row": "- 4 or more total dwelling 0.8 to 1 [3] 0.8 to 1 [3] 0.8 to 1 [3] 0.9 to 1 [3] 1.1 to 1 [3]"
+       }
+      ],
+      "units_quote": "Maximum FAR applies to all buildings on the lot, however the maximum allowed is based on the total number of dwelling units on the lot and whether a bonus option is chosen.",
+      "no_adjustments": "Adjustments to the maximum FAR ratios, including bonus ratios, are prohibited.",
+      "notes": {
+       "1": "[1] Including any site with a congregate housing facility.",
+       "2": "[2] Including accessory dwelling units.",
+       "3": "[3] Additional FAR and height may be allowed. See 33.110.265.F."
+      },
+      "table": "Table 110-4",
+      "section": "33.110.210",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf",
+      "applies_only_below_sqft": 10000,
+      "scope_quote": "In the R10 and R20 zones, the maximum FAR only applies to lots that are less than 10,000 square feet in area."
+     },
+     "height": {
+      "max_height_ft": 30,
+      "note3": true,
+      "row": "Maximum Height 30 ft. 30 ft. [3] 30 ft. [3] 30 ft. [3] 30 ft. [3] 35 ft.",
+      "table": "Table 110-4",
+      "section": "33.110.215",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     },
+     "setbacks": {
+      "front_ft": 20,
+      "side_ft": 10,
+      "rear_ft": 10,
+      "garage_entrance_ft": 18,
+      "rows": [
+       "- Front building 20 ft. 20 ft. 20 ft. 15 ft. 10 ft. 10 ft.",
+       "- Side building 10 ft. 10 ft. 10 ft. 5 ft. 5 ft. 5 ft.",
+       "- Rear building 10 ft. 10 ft. 10 ft. 5 ft. 5 ft. 5 ft.",
+       "- Garage entrance 18 ft. 18 ft. 18 ft. 18 ft. 18 ft. 18 ft."
+      ],
+      "table": "Table 110-4",
+      "section": "33.110.220",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     },
+     "outdoor_area_sqft": 250,
+     "outdoor_area_row": "- Minimum area 250 sq. ft. 250 sq. ft. 250 sq. ft. 250 sq. ft. 250 sq. ft. 200 sq. ft.",
+     "min_lot": {
+      "area_sqft": 12000,
+      "width_ft": 60,
+      "depth_ft": 60,
+      "rows": [
+       "All other lots 52,000 12,000 6,000 4,200 3,000 1,500",
+       "All other lots 60 ft. 60 ft. 50 ft. 40 ft. 36 ft. 25 ft.",
+       "Minimum Lot Depth 60 ft. 60 ft. 60 ft. 55 ft. 50 ft. 40 ft."
+      ],
+      "applies": "Each lot must meet the minimum lot area standard stated in Table 610- 2.",
+      "table": "Table 610-2",
+      "section": "33.610.200",
+      "url": "https://www.portland.gov/sites/default/files/code/610-rf-r2.5-lots.pdf"
+     },
+     "existing_lot": {
+      "quote": "Meets the minimum lot size requirements stated in Table 110-3.",
+      "section": "33.110.202, Table 110-3",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     }
+    },
+    "R10": {
+     "housing_types": {
+      "House": {
+       "allowed": true,
+       "row": "House Yes Yes Yes Yes Yes Yes"
+      },
+      "Attached house": {
+       "allowed": true,
+       "row": "Attached house (See 33.110.260.C and No Yes Yes Yes Yes Yes"
+      },
+      "Accessory dwelling unit": {
+       "allowed": true,
+       "row": "Accessory dwelling unit (See Chapter 33.205) Yes Yes Yes Yes Yes Yes"
+      },
+      "Duplex": {
+       "allowed": true,
+       "row": "Duplex No Yes Yes Yes Yes Yes"
+      },
+      "Triplex": {
+       "allowed": true,
+       "row": "Triplex No Yes Yes Yes Yes Yes"
+      },
+      "Fourplex": {
+       "allowed": true,
+       "row": "Fourplex No Yes Yes Yes Yes Yes"
+      },
+      "Multi-dwelling structure": {
+       "allowed": true,
+       "row": "Multi-dwelling Structure No Yes Yes Yes Yes Yes"
+      },
+      "Cottage cluster": {
+       "allowed": true,
+       "row": "Cottage Cluster No No Yes Yes Yes Yes"
+      }
+     },
+     "housing_table": "Table 110-2",
+     "housing_section": "33.110.200",
+     "housing_url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf",
+     "planned_development_only": "Attached Duplex Only in Planned Developments, See Chapter 33.270.",
+     "far": {
+      "by_units": [
+       {
+        "units": 1,
+        "far": 0.4,
+        "bonus_far": 0.4,
+        "note3": false,
+        "row": "- 1 total dwelling unit [1] 0.4 to 1 0.4 to 1 0.4 to 1 0.5 to 1 0.7 to 1",
+        "bonus_row": "- 1 total dwelling unit 0.4 to 1 0.4 to 1 0.4 to 1 0.5 to 1 0.7 to 1"
+       },
+       {
+        "units": 2,
+        "far": 0.5,
+        "bonus_far": 0.6,
+        "note3": false,
+        "row": "- 2 total dwelling units [2] 0.5 to 1 0.5 to 1 0.5 to 1 0.6 to 1 0.8 to 1",
+        "bonus_row": "- 2 total dwelling units [2] 0.6 to 1 0.6 to 1 0.6 to 1 0.7 to 1 0.9 to 1"
+       },
+       {
+        "units": 3,
+        "far": 0.6,
+        "bonus_far": 0.7,
+        "note3": true,
+        "row": "- 3 total dwelling units [2] 0.6 to 1 [3] 0.6 to 1 [3] 0.6 to 1 [3] 0.7 to 1 [3] 0.9 to 1 [3]",
+        "bonus_row": "- 3 total dwelling units [2] 0.7 to 1 0.7 to 1 0.7 to 1 0.8 to 1 1 to 1"
+       },
+       {
+        "units": 4,
+        "far": 0.7,
+        "bonus_far": 0.8,
+        "note3": true,
+        "row": "- 4 or more total dwelling no limit 0.7 to 1 [3] 0.7 to 1 [3] 0.7 to 1 [3] 0.8 to 1 [3] 1 to 1 [3]",
+        "bonus_row": "- 4 or more total dwelling 0.8 to 1 [3] 0.8 to 1 [3] 0.8 to 1 [3] 0.9 to 1 [3] 1.1 to 1 [3]"
+       }
+      ],
+      "units_quote": "Maximum FAR applies to all buildings on the lot, however the maximum allowed is based on the total number of dwelling units on the lot and whether a bonus option is chosen.",
+      "no_adjustments": "Adjustments to the maximum FAR ratios, including bonus ratios, are prohibited.",
+      "notes": {
+       "1": "[1] Including any site with a congregate housing facility.",
+       "2": "[2] Including accessory dwelling units.",
+       "3": "[3] Additional FAR and height may be allowed. See 33.110.265.F."
+      },
+      "table": "Table 110-4",
+      "section": "33.110.210",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf",
+      "applies_only_below_sqft": 10000,
+      "scope_quote": "In the R10 and R20 zones, the maximum FAR only applies to lots that are less than 10,000 square feet in area."
+     },
+     "height": {
+      "max_height_ft": 30,
+      "note3": true,
+      "row": "Maximum Height 30 ft. 30 ft. [3] 30 ft. [3] 30 ft. [3] 30 ft. [3] 35 ft.",
+      "table": "Table 110-4",
+      "section": "33.110.215",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     },
+     "setbacks": {
+      "front_ft": 20,
+      "side_ft": 10,
+      "rear_ft": 10,
+      "garage_entrance_ft": 18,
+      "rows": [
+       "- Front building 20 ft. 20 ft. 20 ft. 15 ft. 10 ft. 10 ft.",
+       "- Side building 10 ft. 10 ft. 10 ft. 5 ft. 5 ft. 5 ft.",
+       "- Rear building 10 ft. 10 ft. 10 ft. 5 ft. 5 ft. 5 ft.",
+       "- Garage entrance 18 ft. 18 ft. 18 ft. 18 ft. 18 ft. 18 ft."
+      ],
+      "table": "Table 110-4",
+      "section": "33.110.220",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     },
+     "outdoor_area_sqft": 250,
+     "outdoor_area_row": "- Minimum area 250 sq. ft. 250 sq. ft. 250 sq. ft. 250 sq. ft. 250 sq. ft. 200 sq. ft.",
+     "min_lot": {
+      "area_sqft": 6000,
+      "width_ft": 50,
+      "depth_ft": 60,
+      "rows": [
+       "All other lots 52,000 12,000 6,000 4,200 3,000 1,500",
+       "All other lots 60 ft. 60 ft. 50 ft. 40 ft. 36 ft. 25 ft.",
+       "Minimum Lot Depth 60 ft. 60 ft. 60 ft. 55 ft. 50 ft. 40 ft."
+      ],
+      "applies": "Each lot must meet the minimum lot area standard stated in Table 610- 2.",
+      "table": "Table 610-2",
+      "section": "33.610.200",
+      "url": "https://www.portland.gov/sites/default/files/code/610-rf-r2.5-lots.pdf"
+     },
+     "existing_lot": {
+      "quote": "Meets the minimum lot size requirements stated in Table 110-3.",
+      "section": "33.110.202, Table 110-3",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     }
+    },
+    "R7": {
+     "housing_types": {
+      "House": {
+       "allowed": true,
+       "row": "House Yes Yes Yes Yes Yes Yes"
+      },
+      "Attached house": {
+       "allowed": true,
+       "row": "Attached house (See 33.110.260.C and No Yes Yes Yes Yes Yes"
+      },
+      "Accessory dwelling unit": {
+       "allowed": true,
+       "row": "Accessory dwelling unit (See Chapter 33.205) Yes Yes Yes Yes Yes Yes"
+      },
+      "Duplex": {
+       "allowed": true,
+       "row": "Duplex No Yes Yes Yes Yes Yes"
+      },
+      "Triplex": {
+       "allowed": true,
+       "row": "Triplex No Yes Yes Yes Yes Yes"
+      },
+      "Fourplex": {
+       "allowed": true,
+       "row": "Fourplex No Yes Yes Yes Yes Yes"
+      },
+      "Multi-dwelling structure": {
+       "allowed": true,
+       "row": "Multi-dwelling Structure No Yes Yes Yes Yes Yes"
+      },
+      "Cottage cluster": {
+       "allowed": true,
+       "row": "Cottage Cluster No No Yes Yes Yes Yes"
+      }
+     },
+     "housing_table": "Table 110-2",
+     "housing_section": "33.110.200",
+     "housing_url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf",
+     "planned_development_only": "Attached Duplex Only in Planned Developments, See Chapter 33.270.",
+     "far": {
+      "by_units": [
+       {
+        "units": 1,
+        "far": 0.4,
+        "bonus_far": 0.4,
+        "note3": false,
+        "row": "- 1 total dwelling unit [1] 0.4 to 1 0.4 to 1 0.4 to 1 0.5 to 1 0.7 to 1",
+        "bonus_row": "- 1 total dwelling unit 0.4 to 1 0.4 to 1 0.4 to 1 0.5 to 1 0.7 to 1"
+       },
+       {
+        "units": 2,
+        "far": 0.5,
+        "bonus_far": 0.6,
+        "note3": false,
+        "row": "- 2 total dwelling units [2] 0.5 to 1 0.5 to 1 0.5 to 1 0.6 to 1 0.8 to 1",
+        "bonus_row": "- 2 total dwelling units [2] 0.6 to 1 0.6 to 1 0.6 to 1 0.7 to 1 0.9 to 1"
+       },
+       {
+        "units": 3,
+        "far": 0.6,
+        "bonus_far": 0.7,
+        "note3": true,
+        "row": "- 3 total dwelling units [2] 0.6 to 1 [3] 0.6 to 1 [3] 0.6 to 1 [3] 0.7 to 1 [3] 0.9 to 1 [3]",
+        "bonus_row": "- 3 total dwelling units [2] 0.7 to 1 0.7 to 1 0.7 to 1 0.8 to 1 1 to 1"
+       },
+       {
+        "units": 4,
+        "far": 0.7,
+        "bonus_far": 0.8,
+        "note3": true,
+        "row": "- 4 or more total dwelling no limit 0.7 to 1 [3] 0.7 to 1 [3] 0.7 to 1 [3] 0.8 to 1 [3] 1 to 1 [3]",
+        "bonus_row": "- 4 or more total dwelling 0.8 to 1 [3] 0.8 to 1 [3] 0.8 to 1 [3] 0.9 to 1 [3] 1.1 to 1 [3]"
+       }
+      ],
+      "units_quote": "Maximum FAR applies to all buildings on the lot, however the maximum allowed is based on the total number of dwelling units on the lot and whether a bonus option is chosen.",
+      "no_adjustments": "Adjustments to the maximum FAR ratios, including bonus ratios, are prohibited.",
+      "notes": {
+       "1": "[1] Including any site with a congregate housing facility.",
+       "2": "[2] Including accessory dwelling units.",
+       "3": "[3] Additional FAR and height may be allowed. See 33.110.265.F."
+      },
+      "table": "Table 110-4",
+      "section": "33.110.210",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     },
+     "height": {
+      "max_height_ft": 30,
+      "note3": true,
+      "row": "Maximum Height 30 ft. 30 ft. [3] 30 ft. [3] 30 ft. [3] 30 ft. [3] 35 ft.",
+      "table": "Table 110-4",
+      "section": "33.110.215",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     },
+     "setbacks": {
+      "front_ft": 15,
+      "side_ft": 5,
+      "rear_ft": 5,
+      "garage_entrance_ft": 18,
+      "rows": [
+       "- Front building 20 ft. 20 ft. 20 ft. 15 ft. 10 ft. 10 ft.",
+       "- Side building 10 ft. 10 ft. 10 ft. 5 ft. 5 ft. 5 ft.",
+       "- Rear building 10 ft. 10 ft. 10 ft. 5 ft. 5 ft. 5 ft.",
+       "- Garage entrance 18 ft. 18 ft. 18 ft. 18 ft. 18 ft. 18 ft."
+      ],
+      "table": "Table 110-4",
+      "section": "33.110.220",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     },
+     "outdoor_area_sqft": 250,
+     "outdoor_area_row": "- Minimum area 250 sq. ft. 250 sq. ft. 250 sq. ft. 250 sq. ft. 250 sq. ft. 200 sq. ft.",
+     "min_lot": {
+      "area_sqft": 4200,
+      "width_ft": 40,
+      "depth_ft": 55,
+      "rows": [
+       "All other lots 52,000 12,000 6,000 4,200 3,000 1,500",
+       "All other lots 60 ft. 60 ft. 50 ft. 40 ft. 36 ft. 25 ft.",
+       "Minimum Lot Depth 60 ft. 60 ft. 60 ft. 55 ft. 50 ft. 40 ft."
+      ],
+      "applies": "Each lot must meet the minimum lot area standard stated in Table 610- 2.",
+      "table": "Table 610-2",
+      "section": "33.610.200",
+      "url": "https://www.portland.gov/sites/default/files/code/610-rf-r2.5-lots.pdf"
+     },
+     "existing_lot": {
+      "quote": "Meets the minimum lot size requirements stated in Table 110-3.",
+      "section": "33.110.202, Table 110-3",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     },
+     "min_density": {
+      "quote": "R7. In the R7 zone, a minimum of two dwelling units are required on sites that are 14,000 square feet or larger in total site area.",
+      "site_sqft": 14000,
+      "exempt": "Sites in the Constrained Sites overlay zone are exempt from this standard.",
+      "section": "33.110.205",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     }
+    },
+    "R5": {
+     "housing_types": {
+      "House": {
+       "allowed": true,
+       "row": "House Yes Yes Yes Yes Yes Yes"
+      },
+      "Attached house": {
+       "allowed": true,
+       "row": "Attached house (See 33.110.260.C and No Yes Yes Yes Yes Yes"
+      },
+      "Accessory dwelling unit": {
+       "allowed": true,
+       "row": "Accessory dwelling unit (See Chapter 33.205) Yes Yes Yes Yes Yes Yes"
+      },
+      "Duplex": {
+       "allowed": true,
+       "row": "Duplex No Yes Yes Yes Yes Yes"
+      },
+      "Triplex": {
+       "allowed": true,
+       "row": "Triplex No Yes Yes Yes Yes Yes"
+      },
+      "Fourplex": {
+       "allowed": true,
+       "row": "Fourplex No Yes Yes Yes Yes Yes"
+      },
+      "Multi-dwelling structure": {
+       "allowed": true,
+       "row": "Multi-dwelling Structure No Yes Yes Yes Yes Yes"
+      },
+      "Cottage cluster": {
+       "allowed": true,
+       "row": "Cottage Cluster No No Yes Yes Yes Yes"
+      }
+     },
+     "housing_table": "Table 110-2",
+     "housing_section": "33.110.200",
+     "housing_url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf",
+     "planned_development_only": "Attached Duplex Only in Planned Developments, See Chapter 33.270.",
+     "far": {
+      "by_units": [
+       {
+        "units": 1,
+        "far": 0.5,
+        "bonus_far": 0.5,
+        "note3": false,
+        "row": "- 1 total dwelling unit [1] 0.4 to 1 0.4 to 1 0.4 to 1 0.5 to 1 0.7 to 1",
+        "bonus_row": "- 1 total dwelling unit 0.4 to 1 0.4 to 1 0.4 to 1 0.5 to 1 0.7 to 1"
+       },
+       {
+        "units": 2,
+        "far": 0.6,
+        "bonus_far": 0.7,
+        "note3": false,
+        "row": "- 2 total dwelling units [2] 0.5 to 1 0.5 to 1 0.5 to 1 0.6 to 1 0.8 to 1",
+        "bonus_row": "- 2 total dwelling units [2] 0.6 to 1 0.6 to 1 0.6 to 1 0.7 to 1 0.9 to 1"
+       },
+       {
+        "units": 3,
+        "far": 0.7,
+        "bonus_far": 0.8,
+        "note3": true,
+        "row": "- 3 total dwelling units [2] 0.6 to 1 [3] 0.6 to 1 [3] 0.6 to 1 [3] 0.7 to 1 [3] 0.9 to 1 [3]",
+        "bonus_row": "- 3 total dwelling units [2] 0.7 to 1 0.7 to 1 0.7 to 1 0.8 to 1 1 to 1"
+       },
+       {
+        "units": 4,
+        "far": 0.8,
+        "bonus_far": 0.9,
+        "note3": true,
+        "row": "- 4 or more total dwelling no limit 0.7 to 1 [3] 0.7 to 1 [3] 0.7 to 1 [3] 0.8 to 1 [3] 1 to 1 [3]",
+        "bonus_row": "- 4 or more total dwelling 0.8 to 1 [3] 0.8 to 1 [3] 0.8 to 1 [3] 0.9 to 1 [3] 1.1 to 1 [3]"
+       }
+      ],
+      "units_quote": "Maximum FAR applies to all buildings on the lot, however the maximum allowed is based on the total number of dwelling units on the lot and whether a bonus option is chosen.",
+      "no_adjustments": "Adjustments to the maximum FAR ratios, including bonus ratios, are prohibited.",
+      "notes": {
+       "1": "[1] Including any site with a congregate housing facility.",
+       "2": "[2] Including accessory dwelling units.",
+       "3": "[3] Additional FAR and height may be allowed. See 33.110.265.F."
+      },
+      "table": "Table 110-4",
+      "section": "33.110.210",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     },
+     "height": {
+      "max_height_ft": 30,
+      "note3": true,
+      "row": "Maximum Height 30 ft. 30 ft. [3] 30 ft. [3] 30 ft. [3] 30 ft. [3] 35 ft.",
+      "table": "Table 110-4",
+      "section": "33.110.215",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     },
+     "setbacks": {
+      "front_ft": 10,
+      "side_ft": 5,
+      "rear_ft": 5,
+      "garage_entrance_ft": 18,
+      "rows": [
+       "- Front building 20 ft. 20 ft. 20 ft. 15 ft. 10 ft. 10 ft.",
+       "- Side building 10 ft. 10 ft. 10 ft. 5 ft. 5 ft. 5 ft.",
+       "- Rear building 10 ft. 10 ft. 10 ft. 5 ft. 5 ft. 5 ft.",
+       "- Garage entrance 18 ft. 18 ft. 18 ft. 18 ft. 18 ft. 18 ft."
+      ],
+      "table": "Table 110-4",
+      "section": "33.110.220",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     },
+     "outdoor_area_sqft": 250,
+     "outdoor_area_row": "- Minimum area 250 sq. ft. 250 sq. ft. 250 sq. ft. 250 sq. ft. 250 sq. ft. 200 sq. ft.",
+     "min_lot": {
+      "area_sqft": 3000,
+      "width_ft": 36,
+      "depth_ft": 50,
+      "rows": [
+       "All other lots 52,000 12,000 6,000 4,200 3,000 1,500",
+       "All other lots 60 ft. 60 ft. 50 ft. 40 ft. 36 ft. 25 ft.",
+       "Minimum Lot Depth 60 ft. 60 ft. 60 ft. 55 ft. 50 ft. 40 ft."
+      ],
+      "applies": "Each lot must meet the minimum lot area standard stated in Table 610- 2.",
+      "table": "Table 610-2",
+      "section": "33.610.200",
+      "url": "https://www.portland.gov/sites/default/files/code/610-rf-r2.5-lots.pdf"
+     },
+     "existing_lot": {
+      "quote": "Meets the minimum lot size requirements stated in Table 110-3.",
+      "section": "33.110.202, Table 110-3",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     },
+     "min_density": {
+      "quote": "R5. In the R5 zone, a minimum of two dwelling units are required on sites that are 10,000 square feet or larger in total site area.",
+      "site_sqft": 10000,
+      "exempt": "Sites in the Constrained Sites overlay zone are exempt from this standard.",
+      "section": "33.110.205",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     }
+    },
+    "R2.5": {
+     "housing_types": {
+      "House": {
+       "allowed": true,
+       "row": "House Yes Yes Yes Yes Yes Yes"
+      },
+      "Attached house": {
+       "allowed": true,
+       "row": "Attached house (See 33.110.260.C and No Yes Yes Yes Yes Yes"
+      },
+      "Accessory dwelling unit": {
+       "allowed": true,
+       "row": "Accessory dwelling unit (See Chapter 33.205) Yes Yes Yes Yes Yes Yes"
+      },
+      "Duplex": {
+       "allowed": true,
+       "row": "Duplex No Yes Yes Yes Yes Yes"
+      },
+      "Triplex": {
+       "allowed": true,
+       "row": "Triplex No Yes Yes Yes Yes Yes"
+      },
+      "Fourplex": {
+       "allowed": true,
+       "row": "Fourplex No Yes Yes Yes Yes Yes"
+      },
+      "Multi-dwelling structure": {
+       "allowed": true,
+       "row": "Multi-dwelling Structure No Yes Yes Yes Yes Yes"
+      },
+      "Cottage cluster": {
+       "allowed": true,
+       "row": "Cottage Cluster No No Yes Yes Yes Yes"
+      }
+     },
+     "housing_table": "Table 110-2",
+     "housing_section": "33.110.200",
+     "housing_url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf",
+     "planned_development_only": "Attached Duplex Only in Planned Developments, See Chapter 33.270.",
+     "far": {
+      "by_units": [
+       {
+        "units": 1,
+        "far": 0.7,
+        "bonus_far": 0.7,
+        "note3": false,
+        "row": "- 1 total dwelling unit [1] 0.4 to 1 0.4 to 1 0.4 to 1 0.5 to 1 0.7 to 1",
+        "bonus_row": "- 1 total dwelling unit 0.4 to 1 0.4 to 1 0.4 to 1 0.5 to 1 0.7 to 1"
+       },
+       {
+        "units": 2,
+        "far": 0.8,
+        "bonus_far": 0.9,
+        "note3": false,
+        "row": "- 2 total dwelling units [2] 0.5 to 1 0.5 to 1 0.5 to 1 0.6 to 1 0.8 to 1",
+        "bonus_row": "- 2 total dwelling units [2] 0.6 to 1 0.6 to 1 0.6 to 1 0.7 to 1 0.9 to 1"
+       },
+       {
+        "units": 3,
+        "far": 0.9,
+        "bonus_far": 1.0,
+        "note3": true,
+        "row": "- 3 total dwelling units [2] 0.6 to 1 [3] 0.6 to 1 [3] 0.6 to 1 [3] 0.7 to 1 [3] 0.9 to 1 [3]",
+        "bonus_row": "- 3 total dwelling units [2] 0.7 to 1 0.7 to 1 0.7 to 1 0.8 to 1 1 to 1"
+       },
+       {
+        "units": 4,
+        "far": 1.0,
+        "bonus_far": 1.1,
+        "note3": true,
+        "row": "- 4 or more total dwelling no limit 0.7 to 1 [3] 0.7 to 1 [3] 0.7 to 1 [3] 0.8 to 1 [3] 1 to 1 [3]",
+        "bonus_row": "- 4 or more total dwelling 0.8 to 1 [3] 0.8 to 1 [3] 0.8 to 1 [3] 0.9 to 1 [3] 1.1 to 1 [3]"
+       }
+      ],
+      "units_quote": "Maximum FAR applies to all buildings on the lot, however the maximum allowed is based on the total number of dwelling units on the lot and whether a bonus option is chosen.",
+      "no_adjustments": "Adjustments to the maximum FAR ratios, including bonus ratios, are prohibited.",
+      "notes": {
+       "1": "[1] Including any site with a congregate housing facility.",
+       "2": "[2] Including accessory dwelling units.",
+       "3": "[3] Additional FAR and height may be allowed. See 33.110.265.F."
+      },
+      "table": "Table 110-4",
+      "section": "33.110.210",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     },
+     "height": {
+      "max_height_ft": 35,
+      "note3": false,
+      "row": "Maximum Height 30 ft. 30 ft. [3] 30 ft. [3] 30 ft. [3] 30 ft. [3] 35 ft.",
+      "table": "Table 110-4",
+      "section": "33.110.215",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     },
+     "setbacks": {
+      "front_ft": 10,
+      "side_ft": 5,
+      "rear_ft": 5,
+      "garage_entrance_ft": 18,
+      "rows": [
+       "- Front building 20 ft. 20 ft. 20 ft. 15 ft. 10 ft. 10 ft.",
+       "- Side building 10 ft. 10 ft. 10 ft. 5 ft. 5 ft. 5 ft.",
+       "- Rear building 10 ft. 10 ft. 10 ft. 5 ft. 5 ft. 5 ft.",
+       "- Garage entrance 18 ft. 18 ft. 18 ft. 18 ft. 18 ft. 18 ft."
+      ],
+      "table": "Table 110-4",
+      "section": "33.110.220",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     },
+     "outdoor_area_sqft": 200,
+     "outdoor_area_row": "- Minimum area 250 sq. ft. 250 sq. ft. 250 sq. ft. 250 sq. ft. 250 sq. ft. 200 sq. ft.",
+     "min_lot": {
+      "area_sqft": 1500,
+      "width_ft": 25,
+      "depth_ft": 40,
+      "rows": [
+       "All other lots 52,000 12,000 6,000 4,200 3,000 1,500",
+       "All other lots 60 ft. 60 ft. 50 ft. 40 ft. 36 ft. 25 ft.",
+       "Minimum Lot Depth 60 ft. 60 ft. 60 ft. 55 ft. 50 ft. 40 ft."
+      ],
+      "applies": "Each lot must meet the minimum lot area standard stated in Table 610- 2.",
+      "table": "Table 610-2",
+      "section": "33.610.200",
+      "url": "https://www.portland.gov/sites/default/files/code/610-rf-r2.5-lots.pdf"
+     },
+     "existing_lot": {
+      "quote": "Meets the minimum lot size requirements stated in Table 110-3.",
+      "section": "33.110.202, Table 110-3",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     },
+     "min_density": {
+      "quote": "R2.5. In the R2.5 zone, a minimum of two dwelling units are required on sites that are 5,000 square feet or larger in total site area.",
+      "site_sqft": 5000,
+      "exempt": "Sites in the Constrained Sites overlay zone are exempt from this standard.",
+      "section": "33.110.205",
+      "url": "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf"
+     }
+    }
+   },
+   "verification": {
+    "status": "verified",
+    "checked_on": "2026-11-17",
+    "method": "Read Chapters 33.110 and 33.610 from the City's PDFs (portland.gov), converted with pdftotext -layout, and parsed Tables 110-2, 110-4 and 610-2 and the quoted sentences with scripts/build_zoning_standards.py; each rule keeps the verbatim row or sentence it came from.",
+    "evidence": "PCC 33.110.200 (Table 110-2), 33.110.202 (Table 110-3), 33.110.205, 33.110.210-.220 (Table 110-4), 33.610.200 (Table 610-2)",
+    "unverified_fields": []
+   }
+  },
+  {
+   "id": "clt",
+   "name": "City of Charlotte",
+   "counties": [
+    "37119"
+   ],
+   "zone_source": {
+    "kind": "point_layer",
+    "url": "https://gis.charlottenc.gov/arcgis/rest/services/PLN/Zoning/MapServer/0",
+    "field": "ZoneDes",
+    "attr": "ZoningCLT",
+    "extra_out": [
+     "Overlay",
+     "SPA",
+     "ZoneClass"
+    ],
+    "no_feature_reason": "the point is outside the City of Charlotte's zoning map (another town in Mecklenburg County, such as Matthews or Huntersville); only Charlotte's UDO is on file",
+    "note": "City of Charlotte Planning zoning map (gis.charlottenc.gov, PLN/Zoning layer 0), queried at the clicked point.",
+    "extra_fields": {
+     "url": "https://gis.charlottenc.gov/arcgis/rest/services/PLN/AllParcelData/MapServer/0",
+     "by": "parno",
+     "by_to": "parcelid",
+     "key_type": "string",
+     "key_pattern": "^[A-Za-z0-9-]+$",
+     "fields": [
+      "landuse_description",
+      "num_heatedarea",
+      "total_living_units",
+      "yearid"
+     ],
+     "decode_use": true,
+     "no_key_err": "the lot's parcel number isn't in the record",
+     "no_record_err": "Mecklenburg County's parcel layer returned no single record for this parcel number",
+     "no_answer_err": "Mecklenburg County's parcel layer didn't answer",
+     "note": "Read from the City of Charlotte's copy of Mecklenburg County parcel data (PLN/AllParcelData) by parcel number: the Assessor's land use description, heated area and living units. NC OneMap's parcel record carries the land use too, but the page doesn't read it."
+    }
+   },
+   "suffix_rule": {
+    "bases": [
+     "N1-A",
+     "N1-B",
+     "N1-C",
+     "N1-D",
+     "N1-E",
+     "N1-F"
+    ],
+    "reason": "This lot's zoning is {dist}: {base} with a suffix on the City's map. A conditional zoning \"(CD)\" plan, an overlay such as \"(HDO)\" historic district or other designations change the base district's standards, and those plans and overlays aren't read here, so nothing is applied."
+   },
+   "code": "Charlotte Unified Development Ordinance",
+   "cite_prefix": "UDO",
+   "code_url": "https://charlotteudo.org/articles",
+   "as_amended": "Articles 4 and 15 as published on charlotteudo.org, read on 2026-11-17",
+   "districts_covered": [
+    "N1-A",
+    "N1-B",
+    "N1-C",
+    "N1-D",
+    "N1-E",
+    "N1-F"
+   ],
+   "not_covered": "Only the Neighborhood 1 districts N1-A to N1-F, as mapped without a suffix, are encoded. N2, commercial, campus, manufacturing, centers, TOD and overlay districts, conditional (CD) districts, and legacy (pre-UDO) designations such as R-3 or MUDD are not.",
+   "districts": {
+    "N1-A": {
+     "uses": {
+      "Duplex": {
+       "cell": "PC",
+       "row": "Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Multi-Family Attached Unit": {
+       "cell": "Not allowed",
+       "row": "Dwelling – Multi-Family Attached Unit | Not allowed | Not allowed | Not allowed | Not allowed | Not allowed | PC | PC"
+      },
+      "Multi-Family Stacked Unit": {
+       "cell": "Not allowed",
+       "row": "Dwelling – Multi-Family Stacked Unit | Not allowed | Not allowed | Not allowed | Not allowed | Not allowed | PC | Not allowed"
+      },
+      "Quadraplex": {
+       "cell": "PC",
+       "row": "Dwelling – Quadraplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Single-Family": {
+       "cell": "X",
+       "row": "Dwelling – Single-Family | X | X | X | X | X | X | PC"
+      },
+      "Triplex": {
+       "cell": "PC",
+       "row": "Dwelling – Triplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Accessory Unit (ADU)": {
+       "cell": "PC",
+       "row": "Dwelling – Accessory Unit (ADU) | PC | PC | PC | PC | PC | PC | PC"
+      }
+     },
+     "use_legend": {
+      "X": "An “X” indicates that the use is permitted by-right in the zoning district.",
+      "PC": "A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6)."
+     },
+     "use_table": "Table 15-1",
+     "use_section": "15.2",
+     "use_url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses",
+     "quadraplex_condition": {
+      "quote": "Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.",
+      "applies": true,
+      "section": "15.4.GG.3",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     },
+     "common_wall": {
+      "quote": "When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.",
+      "section": "15.4.EE.1",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     },
+     "sidewall": {
+      "quote": "The sidewall height for all duplex and triplex buildings is limited to 20 feet.",
+      "section": "4.3.D.1",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "min_lot": {
+      "area_sqft": 10000,
+      "width_ft": 70,
+      "mf_width_ft": null,
+      "rows": [
+       "A | Minimum Lot Area – Residential / (square feet) | 10,000 | 8,000 | 6,000 | 3,500 | 3,000 | 3,000",
+       "C | Minimum Lot Width – Residential (feet) | 70 | 60 | 50 | 40 | 30 | 30 / MF: 50"
+      ],
+      "sublot_note": "Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.",
+      "table": "Table 4-1",
+      "section": "4.3.B",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "coverage": {
+      "pct_10000_plus": 40,
+      "pct_under_10000": 50,
+      "row": "E | Maximum Building Coverage (%) | Lots 10,000 square feet and greater: 40 / Lots Less than 10,000 square feet: 50",
+      "table": "Table 4-1",
+      "section": "4.3.B",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "setbacks": {
+      "front_ft": 27.0,
+      "corner_side_ft": 13.5,
+      "side_ft": 5.0,
+      "rear_ft": 40.0,
+      "rows": [
+       "A | Min. Front Setback from Street (Measured from Right-of-Way) (feet)^1,2,3,4^, 6^, 7 | 27 | 27 | 17 | 17 | 10 | 17",
+       "B | Min. Corner Side Setback from Street (Measured from Right-of-Way) (feet) / ^4^,^5^, 6^, 7 | 13.5 | 13.5 | 10 | 10 | 10 | 10",
+       "C | Minimum Side Setback (feet) | 5 | 5 | 5 | 5 | 5 | 5",
+       "D | Minimum Rear Setback (feet) | 40 | 35 | 30 | 25 | 20 | 20"
+      ],
+      "notes": {
+       "plat": "Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.",
+       "blockface": "The following alternative setback standards may be used for an established blockface that is at least 25% developed or has at least four existing dwellings:"
+      },
+      "table": "Table 4-2",
+      "section": "4.3.C",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "height": {
+      "max_height_ft": 48,
+      "row": "A | Maximum Building Height – Residential (feet)^1 | 48 | 48 | 40 | 40 | 40 | 48",
+      "faa": "The height and location of structures may be restricted by the limitations set forth in the Code of Federal Regulations (CFR) Title 14 Part 77: Safe, Efficient Use, and Preservation of the Navigable Airspace.",
+      "table": "Table 4-3",
+      "section": "4.3.D",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "adu": {
+      "with_house": "In conjunction with a single-family dwelling in any zoning district in which a single-family dwelling is allowed and in accordance with the prescribed conditions of Section 15.4.HH.",
+      "one": "Only one ADU shall be permitted on the lot.",
+      "owner": "The ADU and its associated principal dwelling shall be under the same ownership.",
+      "size": "The heated floor area of the ADU shall not exceed 600 heated square feet or 70% of the total floor area of the principal residential use, whichever is greater. However, in no case shall the ADU exceed 1,000 heated square feet.",
+      "max_sqft_floor": 600,
+      "max_share_pct": 70,
+      "max_sqft_cap": 1000,
+      "section": "15.6.F",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     }
+    },
+    "N1-B": {
+     "uses": {
+      "Duplex": {
+       "cell": "PC",
+       "row": "Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Multi-Family Attached Unit": {
+       "cell": "Not allowed",
+       "row": "Dwelling – Multi-Family Attached Unit | Not allowed | Not allowed | Not allowed | Not allowed | Not allowed | PC | PC"
+      },
+      "Multi-Family Stacked Unit": {
+       "cell": "Not allowed",
+       "row": "Dwelling – Multi-Family Stacked Unit | Not allowed | Not allowed | Not allowed | Not allowed | Not allowed | PC | Not allowed"
+      },
+      "Quadraplex": {
+       "cell": "PC",
+       "row": "Dwelling – Quadraplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Single-Family": {
+       "cell": "X",
+       "row": "Dwelling – Single-Family | X | X | X | X | X | X | PC"
+      },
+      "Triplex": {
+       "cell": "PC",
+       "row": "Dwelling – Triplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Accessory Unit (ADU)": {
+       "cell": "PC",
+       "row": "Dwelling – Accessory Unit (ADU) | PC | PC | PC | PC | PC | PC | PC"
+      }
+     },
+     "use_legend": {
+      "X": "An “X” indicates that the use is permitted by-right in the zoning district.",
+      "PC": "A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6)."
+     },
+     "use_table": "Table 15-1",
+     "use_section": "15.2",
+     "use_url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses",
+     "quadraplex_condition": {
+      "quote": "Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.",
+      "applies": true,
+      "section": "15.4.GG.3",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     },
+     "common_wall": {
+      "quote": "When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.",
+      "section": "15.4.EE.1",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     },
+     "sidewall": {
+      "quote": "The sidewall height for all duplex and triplex buildings is limited to 20 feet.",
+      "section": "4.3.D.1",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "min_lot": {
+      "area_sqft": 8000,
+      "width_ft": 60,
+      "mf_width_ft": null,
+      "rows": [
+       "A | Minimum Lot Area – Residential / (square feet) | 10,000 | 8,000 | 6,000 | 3,500 | 3,000 | 3,000",
+       "C | Minimum Lot Width – Residential (feet) | 70 | 60 | 50 | 40 | 30 | 30 / MF: 50"
+      ],
+      "sublot_note": "Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.",
+      "table": "Table 4-1",
+      "section": "4.3.B",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "coverage": {
+      "pct_10000_plus": 40,
+      "pct_under_10000": 50,
+      "row": "E | Maximum Building Coverage (%) | Lots 10,000 square feet and greater: 40 / Lots Less than 10,000 square feet: 50",
+      "table": "Table 4-1",
+      "section": "4.3.B",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "setbacks": {
+      "front_ft": 27.0,
+      "corner_side_ft": 13.5,
+      "side_ft": 5.0,
+      "rear_ft": 35.0,
+      "rows": [
+       "A | Min. Front Setback from Street (Measured from Right-of-Way) (feet)^1,2,3,4^, 6^, 7 | 27 | 27 | 17 | 17 | 10 | 17",
+       "B | Min. Corner Side Setback from Street (Measured from Right-of-Way) (feet) / ^4^,^5^, 6^, 7 | 13.5 | 13.5 | 10 | 10 | 10 | 10",
+       "C | Minimum Side Setback (feet) | 5 | 5 | 5 | 5 | 5 | 5",
+       "D | Minimum Rear Setback (feet) | 40 | 35 | 30 | 25 | 20 | 20"
+      ],
+      "notes": {
+       "plat": "Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.",
+       "blockface": "The following alternative setback standards may be used for an established blockface that is at least 25% developed or has at least four existing dwellings:"
+      },
+      "table": "Table 4-2",
+      "section": "4.3.C",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "height": {
+      "max_height_ft": 48,
+      "row": "A | Maximum Building Height – Residential (feet)^1 | 48 | 48 | 40 | 40 | 40 | 48",
+      "faa": "The height and location of structures may be restricted by the limitations set forth in the Code of Federal Regulations (CFR) Title 14 Part 77: Safe, Efficient Use, and Preservation of the Navigable Airspace.",
+      "table": "Table 4-3",
+      "section": "4.3.D",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "adu": {
+      "with_house": "In conjunction with a single-family dwelling in any zoning district in which a single-family dwelling is allowed and in accordance with the prescribed conditions of Section 15.4.HH.",
+      "one": "Only one ADU shall be permitted on the lot.",
+      "owner": "The ADU and its associated principal dwelling shall be under the same ownership.",
+      "size": "The heated floor area of the ADU shall not exceed 600 heated square feet or 70% of the total floor area of the principal residential use, whichever is greater. However, in no case shall the ADU exceed 1,000 heated square feet.",
+      "max_sqft_floor": 600,
+      "max_share_pct": 70,
+      "max_sqft_cap": 1000,
+      "section": "15.6.F",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     }
+    },
+    "N1-C": {
+     "uses": {
+      "Duplex": {
+       "cell": "PC",
+       "row": "Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Multi-Family Attached Unit": {
+       "cell": "Not allowed",
+       "row": "Dwelling – Multi-Family Attached Unit | Not allowed | Not allowed | Not allowed | Not allowed | Not allowed | PC | PC"
+      },
+      "Multi-Family Stacked Unit": {
+       "cell": "Not allowed",
+       "row": "Dwelling – Multi-Family Stacked Unit | Not allowed | Not allowed | Not allowed | Not allowed | Not allowed | PC | Not allowed"
+      },
+      "Quadraplex": {
+       "cell": "PC",
+       "row": "Dwelling – Quadraplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Single-Family": {
+       "cell": "X",
+       "row": "Dwelling – Single-Family | X | X | X | X | X | X | PC"
+      },
+      "Triplex": {
+       "cell": "PC",
+       "row": "Dwelling – Triplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Accessory Unit (ADU)": {
+       "cell": "PC",
+       "row": "Dwelling – Accessory Unit (ADU) | PC | PC | PC | PC | PC | PC | PC"
+      }
+     },
+     "use_legend": {
+      "X": "An “X” indicates that the use is permitted by-right in the zoning district.",
+      "PC": "A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6)."
+     },
+     "use_table": "Table 15-1",
+     "use_section": "15.2",
+     "use_url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses",
+     "quadraplex_condition": {
+      "quote": "Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.",
+      "applies": true,
+      "section": "15.4.GG.3",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     },
+     "common_wall": {
+      "quote": "When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.",
+      "section": "15.4.EE.1",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     },
+     "sidewall": {
+      "quote": "The sidewall height for all duplex and triplex buildings is limited to 20 feet.",
+      "section": "4.3.D.1",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "min_lot": {
+      "area_sqft": 6000,
+      "width_ft": 50,
+      "mf_width_ft": null,
+      "rows": [
+       "A | Minimum Lot Area – Residential / (square feet) | 10,000 | 8,000 | 6,000 | 3,500 | 3,000 | 3,000",
+       "C | Minimum Lot Width – Residential (feet) | 70 | 60 | 50 | 40 | 30 | 30 / MF: 50"
+      ],
+      "sublot_note": "Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.",
+      "table": "Table 4-1",
+      "section": "4.3.B",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "coverage": {
+      "pct_10000_plus": 40,
+      "pct_under_10000": 50,
+      "row": "E | Maximum Building Coverage (%) | Lots 10,000 square feet and greater: 40 / Lots Less than 10,000 square feet: 50",
+      "table": "Table 4-1",
+      "section": "4.3.B",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "setbacks": {
+      "front_ft": 17.0,
+      "corner_side_ft": 10.0,
+      "side_ft": 5.0,
+      "rear_ft": 30.0,
+      "rows": [
+       "A | Min. Front Setback from Street (Measured from Right-of-Way) (feet)^1,2,3,4^, 6^, 7 | 27 | 27 | 17 | 17 | 10 | 17",
+       "B | Min. Corner Side Setback from Street (Measured from Right-of-Way) (feet) / ^4^,^5^, 6^, 7 | 13.5 | 13.5 | 10 | 10 | 10 | 10",
+       "C | Minimum Side Setback (feet) | 5 | 5 | 5 | 5 | 5 | 5",
+       "D | Minimum Rear Setback (feet) | 40 | 35 | 30 | 25 | 20 | 20"
+      ],
+      "notes": {
+       "plat": "Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.",
+       "blockface": "The following alternative setback standards may be used for an established blockface that is at least 25% developed or has at least four existing dwellings:"
+      },
+      "table": "Table 4-2",
+      "section": "4.3.C",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "height": {
+      "max_height_ft": 40,
+      "row": "A | Maximum Building Height – Residential (feet)^1 | 48 | 48 | 40 | 40 | 40 | 48",
+      "faa": "The height and location of structures may be restricted by the limitations set forth in the Code of Federal Regulations (CFR) Title 14 Part 77: Safe, Efficient Use, and Preservation of the Navigable Airspace.",
+      "table": "Table 4-3",
+      "section": "4.3.D",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "adu": {
+      "with_house": "In conjunction with a single-family dwelling in any zoning district in which a single-family dwelling is allowed and in accordance with the prescribed conditions of Section 15.4.HH.",
+      "one": "Only one ADU shall be permitted on the lot.",
+      "owner": "The ADU and its associated principal dwelling shall be under the same ownership.",
+      "size": "The heated floor area of the ADU shall not exceed 600 heated square feet or 70% of the total floor area of the principal residential use, whichever is greater. However, in no case shall the ADU exceed 1,000 heated square feet.",
+      "max_sqft_floor": 600,
+      "max_share_pct": 70,
+      "max_sqft_cap": 1000,
+      "section": "15.6.F",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     }
+    },
+    "N1-D": {
+     "uses": {
+      "Duplex": {
+       "cell": "PC",
+       "row": "Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Multi-Family Attached Unit": {
+       "cell": "Not allowed",
+       "row": "Dwelling – Multi-Family Attached Unit | Not allowed | Not allowed | Not allowed | Not allowed | Not allowed | PC | PC"
+      },
+      "Multi-Family Stacked Unit": {
+       "cell": "Not allowed",
+       "row": "Dwelling – Multi-Family Stacked Unit | Not allowed | Not allowed | Not allowed | Not allowed | Not allowed | PC | Not allowed"
+      },
+      "Quadraplex": {
+       "cell": "PC",
+       "row": "Dwelling – Quadraplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Single-Family": {
+       "cell": "X",
+       "row": "Dwelling – Single-Family | X | X | X | X | X | X | PC"
+      },
+      "Triplex": {
+       "cell": "PC",
+       "row": "Dwelling – Triplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Accessory Unit (ADU)": {
+       "cell": "PC",
+       "row": "Dwelling – Accessory Unit (ADU) | PC | PC | PC | PC | PC | PC | PC"
+      }
+     },
+     "use_legend": {
+      "X": "An “X” indicates that the use is permitted by-right in the zoning district.",
+      "PC": "A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6)."
+     },
+     "use_table": "Table 15-1",
+     "use_section": "15.2",
+     "use_url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses",
+     "quadraplex_condition": {
+      "quote": "Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.",
+      "applies": true,
+      "section": "15.4.GG.3",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     },
+     "common_wall": {
+      "quote": "When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.",
+      "section": "15.4.EE.1",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     },
+     "sidewall": {
+      "quote": "The sidewall height for all duplex and triplex buildings is limited to 20 feet.",
+      "section": "4.3.D.1",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "min_lot": {
+      "area_sqft": 3500,
+      "width_ft": 40,
+      "mf_width_ft": null,
+      "rows": [
+       "A | Minimum Lot Area – Residential / (square feet) | 10,000 | 8,000 | 6,000 | 3,500 | 3,000 | 3,000",
+       "C | Minimum Lot Width – Residential (feet) | 70 | 60 | 50 | 40 | 30 | 30 / MF: 50"
+      ],
+      "sublot_note": "Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.",
+      "table": "Table 4-1",
+      "section": "4.3.B",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "coverage": {
+      "pct_10000_plus": 40,
+      "pct_under_10000": 50,
+      "row": "E | Maximum Building Coverage (%) | Lots 10,000 square feet and greater: 40 / Lots Less than 10,000 square feet: 50",
+      "table": "Table 4-1",
+      "section": "4.3.B",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "setbacks": {
+      "front_ft": 17.0,
+      "corner_side_ft": 10.0,
+      "side_ft": 5.0,
+      "rear_ft": 25.0,
+      "rows": [
+       "A | Min. Front Setback from Street (Measured from Right-of-Way) (feet)^1,2,3,4^, 6^, 7 | 27 | 27 | 17 | 17 | 10 | 17",
+       "B | Min. Corner Side Setback from Street (Measured from Right-of-Way) (feet) / ^4^,^5^, 6^, 7 | 13.5 | 13.5 | 10 | 10 | 10 | 10",
+       "C | Minimum Side Setback (feet) | 5 | 5 | 5 | 5 | 5 | 5",
+       "D | Minimum Rear Setback (feet) | 40 | 35 | 30 | 25 | 20 | 20"
+      ],
+      "notes": {
+       "plat": "Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.",
+       "blockface": "The following alternative setback standards may be used for an established blockface that is at least 25% developed or has at least four existing dwellings:"
+      },
+      "table": "Table 4-2",
+      "section": "4.3.C",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "height": {
+      "max_height_ft": 40,
+      "row": "A | Maximum Building Height – Residential (feet)^1 | 48 | 48 | 40 | 40 | 40 | 48",
+      "faa": "The height and location of structures may be restricted by the limitations set forth in the Code of Federal Regulations (CFR) Title 14 Part 77: Safe, Efficient Use, and Preservation of the Navigable Airspace.",
+      "table": "Table 4-3",
+      "section": "4.3.D",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "adu": {
+      "with_house": "In conjunction with a single-family dwelling in any zoning district in which a single-family dwelling is allowed and in accordance with the prescribed conditions of Section 15.4.HH.",
+      "one": "Only one ADU shall be permitted on the lot.",
+      "owner": "The ADU and its associated principal dwelling shall be under the same ownership.",
+      "size": "The heated floor area of the ADU shall not exceed 600 heated square feet or 70% of the total floor area of the principal residential use, whichever is greater. However, in no case shall the ADU exceed 1,000 heated square feet.",
+      "max_sqft_floor": 600,
+      "max_share_pct": 70,
+      "max_sqft_cap": 1000,
+      "section": "15.6.F",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     }
+    },
+    "N1-E": {
+     "uses": {
+      "Duplex": {
+       "cell": "PC",
+       "row": "Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Multi-Family Attached Unit": {
+       "cell": "Not allowed",
+       "row": "Dwelling – Multi-Family Attached Unit | Not allowed | Not allowed | Not allowed | Not allowed | Not allowed | PC | PC"
+      },
+      "Multi-Family Stacked Unit": {
+       "cell": "Not allowed",
+       "row": "Dwelling – Multi-Family Stacked Unit | Not allowed | Not allowed | Not allowed | Not allowed | Not allowed | PC | Not allowed"
+      },
+      "Quadraplex": {
+       "cell": "PC",
+       "row": "Dwelling – Quadraplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Single-Family": {
+       "cell": "X",
+       "row": "Dwelling – Single-Family | X | X | X | X | X | X | PC"
+      },
+      "Triplex": {
+       "cell": "PC",
+       "row": "Dwelling – Triplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Accessory Unit (ADU)": {
+       "cell": "PC",
+       "row": "Dwelling – Accessory Unit (ADU) | PC | PC | PC | PC | PC | PC | PC"
+      }
+     },
+     "use_legend": {
+      "X": "An “X” indicates that the use is permitted by-right in the zoning district.",
+      "PC": "A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6)."
+     },
+     "use_table": "Table 15-1",
+     "use_section": "15.2",
+     "use_url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses",
+     "quadraplex_condition": {
+      "quote": "Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.",
+      "applies": true,
+      "section": "15.4.GG.3",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     },
+     "common_wall": {
+      "quote": "When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.",
+      "section": "15.4.EE.1",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     },
+     "sidewall": {
+      "quote": "The sidewall height for all duplex and triplex buildings is limited to 20 feet.",
+      "section": "4.3.D.1",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "min_lot": {
+      "area_sqft": 3000,
+      "width_ft": 30,
+      "mf_width_ft": null,
+      "rows": [
+       "A | Minimum Lot Area – Residential / (square feet) | 10,000 | 8,000 | 6,000 | 3,500 | 3,000 | 3,000",
+       "C | Minimum Lot Width – Residential (feet) | 70 | 60 | 50 | 40 | 30 | 30 / MF: 50"
+      ],
+      "sublot_note": "Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.",
+      "table": "Table 4-1",
+      "section": "4.3.B",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "coverage": {
+      "pct_10000_plus": 40,
+      "pct_under_10000": 50,
+      "row": "E | Maximum Building Coverage (%) | Lots 10,000 square feet and greater: 40 / Lots Less than 10,000 square feet: 50",
+      "table": "Table 4-1",
+      "section": "4.3.B",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "setbacks": {
+      "front_ft": 10.0,
+      "corner_side_ft": 10.0,
+      "side_ft": 5.0,
+      "rear_ft": 20.0,
+      "rows": [
+       "A | Min. Front Setback from Street (Measured from Right-of-Way) (feet)^1,2,3,4^, 6^, 7 | 27 | 27 | 17 | 17 | 10 | 17",
+       "B | Min. Corner Side Setback from Street (Measured from Right-of-Way) (feet) / ^4^,^5^, 6^, 7 | 13.5 | 13.5 | 10 | 10 | 10 | 10",
+       "C | Minimum Side Setback (feet) | 5 | 5 | 5 | 5 | 5 | 5",
+       "D | Minimum Rear Setback (feet) | 40 | 35 | 30 | 25 | 20 | 20"
+      ],
+      "notes": {
+       "plat": "Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.",
+       "blockface": "The following alternative setback standards may be used for an established blockface that is at least 25% developed or has at least four existing dwellings:"
+      },
+      "table": "Table 4-2",
+      "section": "4.3.C",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "height": {
+      "max_height_ft": 40,
+      "row": "A | Maximum Building Height – Residential (feet)^1 | 48 | 48 | 40 | 40 | 40 | 48",
+      "faa": "The height and location of structures may be restricted by the limitations set forth in the Code of Federal Regulations (CFR) Title 14 Part 77: Safe, Efficient Use, and Preservation of the Navigable Airspace.",
+      "table": "Table 4-3",
+      "section": "4.3.D",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "adu": {
+      "with_house": "In conjunction with a single-family dwelling in any zoning district in which a single-family dwelling is allowed and in accordance with the prescribed conditions of Section 15.4.HH.",
+      "one": "Only one ADU shall be permitted on the lot.",
+      "owner": "The ADU and its associated principal dwelling shall be under the same ownership.",
+      "size": "The heated floor area of the ADU shall not exceed 600 heated square feet or 70% of the total floor area of the principal residential use, whichever is greater. However, in no case shall the ADU exceed 1,000 heated square feet.",
+      "max_sqft_floor": 600,
+      "max_share_pct": 70,
+      "max_sqft_cap": 1000,
+      "section": "15.6.F",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     }
+    },
+    "N1-F": {
+     "uses": {
+      "Duplex": {
+       "cell": "PC",
+       "row": "Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Multi-Family Attached Unit": {
+       "cell": "PC",
+       "row": "Dwelling – Multi-Family Attached Unit | Not allowed | Not allowed | Not allowed | Not allowed | Not allowed | PC | PC"
+      },
+      "Multi-Family Stacked Unit": {
+       "cell": "PC",
+       "row": "Dwelling – Multi-Family Stacked Unit | Not allowed | Not allowed | Not allowed | Not allowed | Not allowed | PC | Not allowed"
+      },
+      "Quadraplex": {
+       "cell": "PC",
+       "row": "Dwelling – Quadraplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Single-Family": {
+       "cell": "X",
+       "row": "Dwelling – Single-Family | X | X | X | X | X | X | PC"
+      },
+      "Triplex": {
+       "cell": "PC",
+       "row": "Dwelling – Triplex | PC | PC | PC | PC | PC | PC | PC"
+      },
+      "Accessory Unit (ADU)": {
+       "cell": "PC",
+       "row": "Dwelling – Accessory Unit (ADU) | PC | PC | PC | PC | PC | PC | PC"
+      }
+     },
+     "use_legend": {
+      "X": "An “X” indicates that the use is permitted by-right in the zoning district.",
+      "PC": "A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6)."
+     },
+     "use_table": "Table 15-1",
+     "use_section": "15.2",
+     "use_url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses",
+     "quadraplex_condition": {
+      "quote": "Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.",
+      "applies": false,
+      "section": "15.4.GG.3",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     },
+     "common_wall": {
+      "quote": "When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.",
+      "section": "15.4.EE.1",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     },
+     "sidewall": {
+      "quote": "The sidewall height for all duplex and triplex buildings is limited to 20 feet.",
+      "section": "4.3.D.1",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "min_lot": {
+      "area_sqft": 3000,
+      "width_ft": 30,
+      "mf_width_ft": 50,
+      "rows": [
+       "A | Minimum Lot Area – Residential / (square feet) | 10,000 | 8,000 | 6,000 | 3,500 | 3,000 | 3,000",
+       "C | Minimum Lot Width – Residential (feet) | 70 | 60 | 50 | 40 | 30 | 30 / MF: 50"
+      ],
+      "sublot_note": "Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.",
+      "table": "Table 4-1",
+      "section": "4.3.B",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "coverage": {
+      "pct_10000_plus": 40,
+      "pct_under_10000": 50,
+      "row": "E | Maximum Building Coverage (%) | Lots 10,000 square feet and greater: 40 / Lots Less than 10,000 square feet: 50",
+      "table": "Table 4-1",
+      "section": "4.3.B",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "setbacks": {
+      "front_ft": 17.0,
+      "corner_side_ft": 10.0,
+      "side_ft": 5.0,
+      "rear_ft": 20.0,
+      "rows": [
+       "A | Min. Front Setback from Street (Measured from Right-of-Way) (feet)^1,2,3,4^, 6^, 7 | 27 | 27 | 17 | 17 | 10 | 17",
+       "B | Min. Corner Side Setback from Street (Measured from Right-of-Way) (feet) / ^4^,^5^, 6^, 7 | 13.5 | 13.5 | 10 | 10 | 10 | 10",
+       "C | Minimum Side Setback (feet) | 5 | 5 | 5 | 5 | 5 | 5",
+       "D | Minimum Rear Setback (feet) | 40 | 35 | 30 | 25 | 20 | 20"
+      ],
+      "notes": {
+       "plat": "Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.",
+       "blockface": "The following alternative setback standards may be used for an established blockface that is at least 25% developed or has at least four existing dwellings:"
+      },
+      "table": "Table 4-2",
+      "section": "4.3.C",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "height": {
+      "max_height_ft": 48,
+      "row": "A | Maximum Building Height – Residential (feet)^1 | 48 | 48 | 40 | 40 | 40 | 48",
+      "faa": "The height and location of structures may be restricted by the limitations set forth in the Code of Federal Regulations (CFR) Title 14 Part 77: Safe, Efficient Use, and Preservation of the Navigable Airspace.",
+      "table": "Table 4-3",
+      "section": "4.3.D",
+      "url": "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts"
+     },
+     "adu": {
+      "with_house": "In conjunction with a single-family dwelling in any zoning district in which a single-family dwelling is allowed and in accordance with the prescribed conditions of Section 15.4.HH.",
+      "one": "Only one ADU shall be permitted on the lot.",
+      "owner": "The ADU and its associated principal dwelling shall be under the same ownership.",
+      "size": "The heated floor area of the ADU shall not exceed 600 heated square feet or 70% of the total floor area of the principal residential use, whichever is greater. However, in no case shall the ADU exceed 1,000 heated square feet.",
+      "max_sqft_floor": 600,
+      "max_share_pct": 70,
+      "max_sqft_cap": 1000,
+      "section": "15.6.F",
+      "url": "https://charlotteudo.org/articles/part-vii-uses/article-15-uses"
+     }
+    }
+   },
+   "verification": {
+    "status": "verified",
+    "checked_on": "2026-11-17",
+    "method": "Read Articles 4 and 15 from charlotteudo.org (each page's HTML is decoded from its Next.js data payload), parsed Tables 4-1, 4-2, 4-3 and 15-1 and the quoted sentences with scripts/build_zoning_standards.py; each rule keeps the verbatim row or sentence it came from.",
+    "evidence": "UDO 4.3 (Tables 4-1, 4-2, 4-3), 4.3.D.1, 15.2 (Table 15-1), 15.4.EE, 15.4.GG, 15.6.F",
+    "unverified_fields": []
+   }
   }
  ],
  "withheld": [
@@ -12179,6 +13672,30 @@
      "url": "https://api.municode.com/codes/tn/metro_government_of_nashville_and_davidson_county",
      "result": "HTTP 403",
      "on": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "jurisdiction": "Miami",
+   "counties": [
+    "12086"
+   ],
+   "reason": "The City of Miami's zoning code (Miami 21) is published on Gridics CodeHub, a page that builds the code text in the browser; no copy of the text could be read from the build machine (the CodeHub page's HTML carries no code text, and the Article 5 PDF formerly on miami21.org answers HTTP 404), so no standard could be read from the code itself.",
+   "tried": [
+    {
+     "url": "https://www.miami21.org/finalcode.asp",
+     "result": "HTTP 200; each article links to codehub.gridics.com",
+     "on": "2026-11-17"
+    },
+    {
+     "url": "https://codehub.gridics.com/us/fl/miami",
+     "result": "HTTP 200, a JavaScript application shell with no code text",
+     "on": "2026-11-17"
+    },
+    {
+     "url": "https://www.miami21.org/final_code/ARTICLE5-SpecificToZones.pdf",
+     "result": "HTTP 404",
+     "on": "2026-11-17"
     }
    ]
   }

@@ -1,6 +1,7 @@
 {
- "ran_on": "2026-11-17T07:27:45.632Z",
+ "ran_on": "2026-11-17T08:35:30.372Z",
  "script": "scripts/live_check_lot_fit.mjs",
+ "browser_via_explicit_proxy": false,
  "nyc": [
   {
    "county": "36081",
@@ -1934,7 +1935,7 @@
    },
    "missing": [],
    "ok": true,
-   "panel_excerpt": "4924 · AIN/APN 4162422900 · SINGLE FAMILY RESIDENCE (SanGIS Parcels, nucleus_use_cd 111)\n• Zoning district RS-1-7 (San Diego Municipal Code, Chapter 13 (Zones)) — The purpose of the RS zones is to provide appropriate regulations for the development of single dwelling units that accommodate a variety of lot sizes and residential dwelling types and which promote neighborhood quality, character, and livability. (SDMC §131.0403(a)). RS-1-7 allows 1 dwelling unit per lot (SDMC §131.0431, Table 131-04D). Minimum lot: 5,000 sq ft, 50 ft wide (55 ft on a corner), 50 ft of street frontage and 95 ft deep (SDMC §131.0431, Table 131-04D). Minimum setbacks: front 15 ft, side 4 ft, street side 5 ft, rear 13 ft (SDMC §131.0431, Table 131-04D; note 2: See Section 131.0443(a)(4).); the table's footnotes and SDMC §131.0443 adjust these in some cases, which aren't checked here. Height: listed as 24/30 ft (SDMC §131.0431, Table 131-04D), so no part above 30 ft, and \"Maximum structure height shall not exceed the height of the angled building envelope plane, which connects the maximum structure height adjacent to the setback and the overall maximum structure height as determined by the underlying base zone and the requirements below.\" (SDMC §131.0444(a), (c)). Planned districts, overlay zones (such as the Coastal Overlay Zone) and state law (ADUs, SB 9) can change these; overlay zones and planned districts aren't checked here.\n? Floor area allowed by zoning — Up to about 3,728 sq ft of gross floor area on this ~6,427 sq ft lot (FAR 0.58, SDMC §131.0446(a)(1), Table 131-04J, row \"6,001 - 7,000 | 0.58\"). On a lot over the minimum area that is mostly steep hillside the ratio is figured differently (SDMC §131.0446(a)(2)); slope isn't checked here. The Assessor records 2,361 sq ft of living area, so about 1,367 sq ft remain by this measure; the Assessor's living area isn't gross floor area and is incomplete, so this is a screening figure.\n✗ Second home (two-family or more) — RS-1-7 allows 1 d"
+   "panel_excerpt": "4924 LAMONT ST · AIN/APN 4162422900 · SINGLE FAMILY RESIDENCE (SanGIS Parcels, nucleus_use_cd 111)\n• Zoning district RS-1-7 (San Diego Municipal Code, Chapter 13 (Zones)) — The purpose of the RS zones is to provide appropriate regulations for the development of single dwelling units that accommodate a variety of lot sizes and residential dwelling types and which promote neighborhood quality, character, and livability. (SDMC §131.0403(a)). RS-1-7 allows 1 dwelling unit per lot (SDMC §131.0431, Table 131-04D). Minimum lot: 5,000 sq ft, 50 ft wide (55 ft on a corner), 50 ft of street frontage and 95 ft deep (SDMC §131.0431, Table 131-04D). Minimum setbacks: front 15 ft, side 4 ft, street side 5 ft, rear 13 ft (SDMC §131.0431, Table 131-04D; note 2: See Section 131.0443(a)(4).); the table's footnotes and SDMC §131.0443 adjust these in some cases, which aren't checked here. Height: listed as 24/30 ft (SDMC §131.0431, Table 131-04D), so no part above 30 ft, and \"Maximum structure height shall not exceed the height of the angled building envelope plane, which connects the maximum structure height adjacent to the setback and the overall maximum structure height as determined by the underlying base zone and the requirements below.\" (SDMC §131.0444(a), (c)). Planned districts, overlay zones (such as the Coastal Overlay Zone) and state law (ADUs, SB 9) can change these; overlay zones and planned districts aren't checked here.\n? Floor area allowed by zoning — Up to about 3,728 sq ft of gross floor area on this ~6,427 sq ft lot (FAR 0.58, SDMC §131.0446(a)(1), Table 131-04J, row \"6,001 - 7,000 | 0.58\"). On a lot over the minimum area that is mostly steep hillside the ratio is figured differently (SDMC §131.0446(a)(2)); slope isn't checked here. The Assessor records 2,361 sq ft of living area, so about 1,367 sq ft remain by this measure; the Assessor's living area isn't gross floor area and is incomplete, so this is a screening figure.\n✗ Second home (two-family or more) — RS-1-7 "
   },
   {
    "county": "06073",
@@ -1950,7 +1951,7 @@
    },
    "missing": [],
    "ok": true,
-   "panel_excerpt": "1407 · AIN/APN 3587422000 · SINGLE FAMILY RESIDENCE (SanGIS Parcels, nucleus_use_cd 111)\n• Zoning district RS-1-4 (San Diego Municipal Code, Chapter 13 (Zones)) — The purpose of the RS zones is to provide appropriate regulations for the development of single dwelling units that accommodate a variety of lot sizes and residential dwelling types and which promote neighborhood quality, character, and livability. (SDMC §131.0403(a)). RS-1-4 allows 1 dwelling unit per lot (SDMC §131.0431, Table 131-04D). Minimum lot: 10,000 sq ft, 65 ft wide (70 ft on a corner), 65 ft of street frontage and 100 ft deep (SDMC §131.0431, Table 131-04D); this lot (about 6,266 sq ft by its parcel outline) is smaller. Minimum setbacks: front 20 ft, side 6 ft, street side 6 ft, rear 20 ft (SDMC §131.0431, Table 131-04D; note 2: See Section 131.0443(a)(4).); the table's footnotes and SDMC §131.0443 adjust these in some cases, which aren't checked here. Height: listed as 24/30 ft (SDMC §131.0431, Table 131-04D), so no part above 30 ft, and \"Maximum structure height shall not exceed the height of the angled building envelope plane, which connects the maximum structure height adjacent to the setback and the overall maximum structure height as determined by the underlying base zone and the requirements below.\" (SDMC §131.0444(a), (c)). Planned districts, overlay zones (such as the Coastal Overlay Zone) and state law (ADUs, SB 9) can change these; overlay zones and planned districts aren't checked here.\n? Floor area allowed by zoning — Up to about 3,634 sq ft of gross floor area on this ~6,266 sq ft lot (FAR 0.58, SDMC §131.0446(a)(1), Table 131-04J, row \"6,001 - 7,000 | 0.58\"). On a lot over the minimum area that is mostly steep hillside the ratio is figured differently (SDMC §131.0446(a)(2)); slope isn't checked here. The Assessor records 2,699 sq ft of living area, so about 935 sq ft remain by this measure; the Assessor's living area isn't gross floor area and is incomplete, so this is a screening"
+   "panel_excerpt": "1407 CAMINITO BATEA · AIN/APN 3587422000 · SINGLE FAMILY RESIDENCE (SanGIS Parcels, nucleus_use_cd 111)\n• Zoning district RS-1-4 (San Diego Municipal Code, Chapter 13 (Zones)) — The purpose of the RS zones is to provide appropriate regulations for the development of single dwelling units that accommodate a variety of lot sizes and residential dwelling types and which promote neighborhood quality, character, and livability. (SDMC §131.0403(a)). RS-1-4 allows 1 dwelling unit per lot (SDMC §131.0431, Table 131-04D). Minimum lot: 10,000 sq ft, 65 ft wide (70 ft on a corner), 65 ft of street frontage and 100 ft deep (SDMC §131.0431, Table 131-04D); this lot (about 6,266 sq ft by its parcel outline) is smaller. Minimum setbacks: front 20 ft, side 6 ft, street side 6 ft, rear 20 ft (SDMC §131.0431, Table 131-04D; note 2: See Section 131.0443(a)(4).); the table's footnotes and SDMC §131.0443 adjust these in some cases, which aren't checked here. Height: listed as 24/30 ft (SDMC §131.0431, Table 131-04D), so no part above 30 ft, and \"Maximum structure height shall not exceed the height of the angled building envelope plane, which connects the maximum structure height adjacent to the setback and the overall maximum structure height as determined by the underlying base zone and the requirements below.\" (SDMC §131.0444(a), (c)). Planned districts, overlay zones (such as the Coastal Overlay Zone) and state law (ADUs, SB 9) can change these; overlay zones and planned districts aren't checked here.\n? Floor area allowed by zoning — Up to about 3,634 sq ft of gross floor area on this ~6,266 sq ft lot (FAR 0.58, SDMC §131.0446(a)(1), Table 131-04J, row \"6,001 - 7,000 | 0.58\"). On a lot over the minimum area that is mostly steep hillside the ratio is figured differently (SDMC §131.0446(a)(2)); slope isn't checked here. The Assessor records 2,699 sq ft of living area, so about 935 sq ft remain by this measure; the Assessor's living area isn't gross floor area and is incomplete, so this"
   },
   {
    "county": "06073",
@@ -1966,7 +1967,7 @@
    },
    "missing": [],
    "ok": true,
-   "panel_excerpt": "14488 · AIN/APN 3122323800 · SINGLE FAMILY RESIDENCE (SanGIS Parcels, nucleus_use_cd 111)\n• Zoning district RS-1-14 (San Diego Municipal Code, Chapter 13 (Zones)) — The purpose of the RS zones is to provide appropriate regulations for the development of single dwelling units that accommodate a variety of lot sizes and residential dwelling types and which promote neighborhood quality, character, and livability. (SDMC §131.0403(a)). RS-1-14 allows 1 dwelling unit per lot (SDMC §131.0431, Table 131-04D). Minimum lot: 5,000 sq ft, 50 ft wide (55 ft on a corner), 50 ft of street frontage and 95 ft deep (SDMC §131.0431, Table 131-04D). Minimum setbacks: front 15 ft, side 4 ft, street side 10 ft, rear 10 ft (SDMC §131.0431, Table 131-04D; note 1: For lots where at least one-half of the front 50 feet of the lot depth has a minimum slope gradient of 25 percent, the setback closest to the street frontage may be reduced to a minimum 6 feet.); the table's footnotes and SDMC §131.0443 adjust these in some cases, which aren't checked here. Height: up to 35 ft (SDMC §131.0431, Table 131-04D). Planned districts, overlay zones (such as the Coastal Overlay Zone) and state law (ADUs, SB 9) can change these; overlay zones and planned districts aren't checked here.\n? Floor area allowed by zoning — Up to about 3,595 sq ft of gross floor area on this ~5,992 sq ft lot (FAR 0.60, SDMC §131.0431, Table 131-04D). Up to 400 sq ft of garage area isn't counted (SDMC §131.0446(b)). On a lot over the minimum area that is mostly steep hillside the ratio is figured differently (SDMC §131.0446(a)(2)); slope isn't checked here. The Assessor records 1,843 sq ft of living area, so about 1,752 sq ft remain by this measure; the Assessor's living area isn't gross floor area and is incomplete, so this is a screening figure.\n✗ Second home (two-family or more) — RS-1-14 allows 1 dwelling unit per lot under the base zone (SDMC §131.0431, Table 131-04D). State law can allow more (an ADU, a junior ADU, or an SB "
+   "panel_excerpt": "14488 CORTE DE VERDAD · AIN/APN 3122323800 · SINGLE FAMILY RESIDENCE (SanGIS Parcels, nucleus_use_cd 111)\n• Zoning district RS-1-14 (San Diego Municipal Code, Chapter 13 (Zones)) — The purpose of the RS zones is to provide appropriate regulations for the development of single dwelling units that accommodate a variety of lot sizes and residential dwelling types and which promote neighborhood quality, character, and livability. (SDMC §131.0403(a)). RS-1-14 allows 1 dwelling unit per lot (SDMC §131.0431, Table 131-04D). Minimum lot: 5,000 sq ft, 50 ft wide (55 ft on a corner), 50 ft of street frontage and 95 ft deep (SDMC §131.0431, Table 131-04D). Minimum setbacks: front 15 ft, side 4 ft, street side 10 ft, rear 10 ft (SDMC §131.0431, Table 131-04D; note 1: For lots where at least one-half of the front 50 feet of the lot depth has a minimum slope gradient of 25 percent, the setback closest to the street frontage may be reduced to a minimum 6 feet.); the table's footnotes and SDMC §131.0443 adjust these in some cases, which aren't checked here. Height: up to 35 ft (SDMC §131.0431, Table 131-04D). Planned districts, overlay zones (such as the Coastal Overlay Zone) and state law (ADUs, SB 9) can change these; overlay zones and planned districts aren't checked here.\n? Floor area allowed by zoning — Up to about 3,595 sq ft of gross floor area on this ~5,992 sq ft lot (FAR 0.60, SDMC §131.0431, Table 131-04D). Up to 400 sq ft of garage area isn't counted (SDMC §131.0446(b)). On a lot over the minimum area that is mostly steep hillside the ratio is figured differently (SDMC §131.0446(a)(2)); slope isn't checked here. The Assessor records 1,843 sq ft of living area, so about 1,752 sq ft remain by this measure; the Assessor's living area isn't gross floor area and is incomplete, so this is a screening figure.\n✗ Second home (two-family or more) — RS-1-14 allows 1 dwelling unit per lot under the base zone (SDMC §131.0431, Table 131-04D). State law can allow more (an ADU, a junio"
   }
  ],
  "sd_outside": {
@@ -1983,6 +1984,461 @@
   "city_zone": null,
   "ok": true,
   "excerpt": "• Local zoning standards — Not on file: City of San Diego's zoning district couldn't be read here (the point is outside the City of San Diego's Official Zoning Map (another city in San Diego County, or unincorporated county land); only the City of San Diego's code is on file), so its standards can't be applied."
+ },
+ "pdx_quotes": [
+  {
+   "what": "R20 House row",
+   "found": true
+  },
+  {
+   "what": "R20 Attached house row",
+   "found": true
+  },
+  {
+   "what": "R20 Accessory dwelling unit row",
+   "found": true
+  },
+  {
+   "what": "R20 Duplex row",
+   "found": true
+  },
+  {
+   "what": "R20 Triplex row",
+   "found": true
+  },
+  {
+   "what": "R20 Fourplex row",
+   "found": true
+  },
+  {
+   "what": "R20 Multi-dwelling structure row",
+   "found": true
+  },
+  {
+   "what": "R20 Cottage cluster row",
+   "found": true
+  },
+  {
+   "what": "planned development only",
+   "found": true
+  },
+  {
+   "what": "FAR row",
+   "found": true
+  },
+  {
+   "what": "bonus FAR row",
+   "found": true
+  },
+  {
+   "what": "FAR row",
+   "found": true
+  },
+  {
+   "what": "bonus FAR row",
+   "found": true
+  },
+  {
+   "what": "FAR row",
+   "found": true
+  },
+  {
+   "what": "bonus FAR row",
+   "found": true
+  },
+  {
+   "what": "FAR row",
+   "found": true
+  },
+  {
+   "what": "bonus FAR row",
+   "found": true
+  },
+  {
+   "what": "FAR units",
+   "found": true
+  },
+  {
+   "what": "FAR adjustments",
+   "found": true
+  },
+  {
+   "what": "Table 110-4 note",
+   "found": true
+  },
+  {
+   "what": "Table 110-4 note",
+   "found": true
+  },
+  {
+   "what": "Table 110-4 note",
+   "found": true
+  },
+  {
+   "what": "FAR scope",
+   "found": true
+  },
+  {
+   "what": "height row",
+   "found": true
+  },
+  {
+   "what": "setback row",
+   "found": true
+  },
+  {
+   "what": "setback row",
+   "found": true
+  },
+  {
+   "what": "setback row",
+   "found": true
+  },
+  {
+   "what": "setback row",
+   "found": true
+  },
+  {
+   "what": "outdoor area row",
+   "found": true
+  },
+  {
+   "what": "existing lot",
+   "found": true
+  },
+  {
+   "what": "Table 610-2 row",
+   "found": true
+  },
+  {
+   "what": "Table 610-2 row",
+   "found": true
+  },
+  {
+   "what": "Table 610-2 row",
+   "found": true
+  },
+  {
+   "what": "lot area rule",
+   "found": true
+  },
+  {
+   "what": "R7 min density",
+   "found": true
+  },
+  {
+   "what": "min density exempt",
+   "found": true
+  },
+  {
+   "what": "R5 min density",
+   "found": true
+  },
+  {
+   "what": "R2.5 min density",
+   "found": true
+  }
+ ],
+ "pdx": [
+  {
+   "county": "41051",
+   "area": "NE Portland (Concordia / Vernon)",
+   "lat": 45.569959,
+   "lng": -122.638908,
+   "zone": "R5",
+   "map": {
+    "ZONE": "R5",
+    "UNINC": "N",
+    "OVRLY_DESC": "Aircraft Landing",
+    "PLDIST_DESC": null
+   },
+   "parcel": {
+    "MAPTAXLOT": "1N1E13BC  -08900",
+    "SITUSADDR": "6504 NE 26TH AVE ",
+    "PROPCLASS": "101",
+    "xCentroid": -122.63890823073568,
+    "yCentroid": 45.56995939557422
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "6504 NE 26TH AVE · AIN/APN 1N1E13BC -08900 · Residential, Improved (Oregon property class (OAR 150-308-0310) on Multnomah County taxlots, PROPCLASS 101)\n• Zoning district R5 (Portland City Code, Title 33 (Planning and Zoning)) — Housing types allowed in R5: House, Attached house, Accessory dwelling unit, Duplex, Triplex, Fourplex, Multi-dwelling structure, Cottage cluster (PCC 33.110.200, Table 110-2). Height: up to 30 ft (PCC 33.110.215, Table 110-4); the table's note [3]: \"[3] Additional FAR and height may be allowed. See 33.110.265.F.\". Minimum setbacks: front 10 ft, side 5 ft, rear 5 ft, garage entrance 18 ft (PCC 33.110.220, Table 110-4). Required outdoor area: at least 250 sq ft (PCC 33.110.240, Table 110-4). The City's zoning map also puts this lot in: Aircraft Landing. Overlay zones, plan districts and historic or conservation designations change these standards; they aren't checked here.\n• Floor area allowed by zoning — On this ~4,974 sq ft lot (by its parcel outline) the maximum floor area depends on the total number of homes on the lot, ADUs included: 1 home: up to about 2,487 sq ft (FAR 0.5); 2 homes: up to about 2,984 sq ft (FAR 0.6), or 3,482 sq ft with a bonus option (FAR 0.7); 3 homes: up to about 3,482 sq ft (FAR 0.7), or 3,979 sq ft with a bonus option (FAR 0.8); 4 or more homes: up to about 3,979 sq ft (FAR 0.8), or 4,477 sq ft with a bonus option (FAR 0.9) (PCC 33.110.210, Table 110-4). \"Maximum FAR applies to all buildings on the lot, however the maximum allowed is based on the total number of dwelling units on the lot and whether a bonus option is chosen.\" \"Adjustments to the maximum FAR ratios, including bonus ratios, are prohibited.\" Which count and bonus apply depends on what is built, so no single figure is given; the table's note [3]: \"[3] Additional FAR and height may be allowed. See 33.110.265.F.\".\n✓ Second home (two-family or more) — R5 allows duplexes, triplexes and fourplexes (PCC 33.110.200, Table 110-2: \"Duplex No Yes Yes Yes Yes Yes\"; \"Triplex No Yes Yes Yes Yes Yes\"; \"Fourplex No Yes Yes Yes Yes Yes\"), within the floor area above; state law on file: OR HB 2001 (Oregon Housing Choice & Middle Housing) (text checked), which applies only where all of its conditions are met (see Housing laws & rights).\n? Accessory dwelling unit (ADU) — Allowed in R5 (PCC 33.110.200, Table 110-2: \"Accessory dwelling unit (See Chapter 33.205) Ye"
+  },
+  {
+   "county": "41051",
+   "area": "SW Portland (Hillsdale / Bridlemile)",
+   "lat": 45.500632,
+   "lng": -122.727938,
+   "zone": "R20",
+   "map": {
+    "ZONE": "R20",
+    "UNINC": "N",
+    "OVRLY_DESC": "Environmental Conservation,Constrained Sites",
+    "PLDIST_DESC": null
+   },
+   "parcel": {
+    "MAPTAXLOT": "1S1E07AC  -00100",
+    "SITUSADDR": "4960 SW HEWETT BLVD ",
+    "PROPCLASS": "101",
+    "xCentroid": -122.72793820222667,
+    "yCentroid": 45.50063206749375
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "4960 SW HEWETT BLVD · AIN/APN 1S1E07AC -00100 · Residential, Improved (Oregon property class (OAR 150-308-0310) on Multnomah County taxlots, PROPCLASS 101)\n• Zoning district R20 (Portland City Code, Title 33 (Planning and Zoning)) — Housing types allowed in R20: House, Attached house, Accessory dwelling unit, Duplex, Triplex, Fourplex, Multi-dwelling structure; not allowed: Cottage cluster (PCC 33.110.200, Table 110-2). Height: up to 30 ft (PCC 33.110.215, Table 110-4); the table's note [3]: \"[3] Additional FAR and height may be allowed. See 33.110.265.F.\". Minimum setbacks: front 20 ft, side 10 ft, rear 10 ft, garage entrance 18 ft (PCC 33.110.220, Table 110-4). Required outdoor area: at least 250 sq ft (PCC 33.110.240, Table 110-4). The City's zoning map also puts this lot in: Environmental Conservation,Constrained Sites. Overlay zones, plan districts and historic or conservation designations change these standards; they aren't checked here.\n• Floor area allowed by zoning — \"In the R10 and R20 zones, the maximum FAR only applies to lots that are less than 10,000 square feet in area.\" (PCC 33.110.210). This lot is about 172,727 sq ft by its parcel outline, so Table 110-4's floor area ratios don't limit it.\n✓ Second home (two-family or more) — R20 allows duplexes, triplexes and fourplexes (PCC 33.110.200, Table 110-2: \"Duplex No Yes Yes Yes Yes Yes\"; \"Triplex No Yes Yes Yes Yes Yes\"; \"Fourplex No Yes Yes Yes Yes Yes\"), within the floor area above; state law on file: OR HB 2001 (Oregon Housing Choice & Middle Housing) (text checked), which applies only where all of its conditions are met (see Housing laws & rights).\n? Accessory dwelling unit (ADU) — Allowed in R20 (PCC 33.110.200, Table 110-2: \"Accessory dwelling unit (See Chapter 33.205) Yes Yes Yes Yes Yes Yes\"). Its size, placement and number are set by Chapter 33.205, which isn't read here; state law on file: OR ADU law: one ADU per detached home inside urban growth boundaries (text checked), which applies only where all of its conditions are met (see Housing laws & rights).\n? Split into two lots (by area only) — At about 172,727 sq ft the lot has at least twice the 12,000 sq ft minimum for a new lot in R20 (PCC 33.610.200, Table 610-2: \"All other lots 52,000 12,000 6,000 4,200 3,000 1,500\"). Each new lot also needs 60 ft of width and 60 ft of depth, which the parcel record doesn't give, and land division"
+  },
+  {
+   "county": "41051",
+   "area": "SE Portland (Woodstock / Brentwood)",
+   "lat": 45.489051,
+   "lng": -122.620145,
+   "zone": "R2.5",
+   "map": {
+    "ZONE": "R2.5",
+    "UNINC": "N",
+    "OVRLY_DESC": null,
+    "PLDIST_DESC": null
+   },
+   "parcel": {
+    "MAPTAXLOT": "1S1E13AA  -02700",
+    "SITUSADDR": "4631 SE 41ST AVE ",
+    "PROPCLASS": "101",
+    "xCentroid": -122.62014506878053,
+    "yCentroid": 45.48905110922193
+   },
+   "missing": [
+    "Zoning district R2.5 (Portland City Code, Title 33 (Planning and Zoning))",
+    "Housing types allowed in R2.5: House, Attached house, Accessory dwelling unit, Duplex, Triplex, Fourplex, Multi-dwelling structure, Cottage cluster",
+    "Height: up to 35 ft (PCC 33.110.215, Table 110-4)",
+    "Minimum setbacks: front 10 ft, side 5 ft, rear 5 ft, garage entrance 18 ft",
+    "Floor area allowed by zoning",
+    "Accessory dwelling unit (ADU)",
+    "1,500 sq ft"
+   ],
+   "ok": false,
+   "panel_excerpt": "4631 SE 41ST AVE · AIN/APN 1S1E13AA -02700 · Residential, Improved (Oregon property class (OAR 150-308-0310) on Multnomah County taxlots, PROPCLASS 101)\n• Local zoning standards — Not on file: City of Portland's zoning district couldn't be read here (the zoning map service didn't answer), so its standards can't be applied."
+  }
+ ],
+ "pdx_outside": {
+  "county": "41051",
+  "area": "Gresham",
+  "lat": 45.509943,
+  "lng": -122.426677,
+  "parcel": {
+   "MAPTAXLOT": "1S3E03CA  -09300",
+   "SITUSADDR": "1811 NE BEECH AVE ",
+   "PROPCLASS": "101",
+   "xCentroid": -122.42667687629354,
+   "yCentroid": 45.509942560067095
+  },
+  "city_zone": null,
+  "ok": true,
+  "excerpt": "• Local zoning standards — Not on file: City of Portland's zoning district couldn't be read here (the point is outside the City of Portland's zoning map (another city in Multnomah County, such as Gresham, or county land Portland doesn't zone); only Portland's code is on file), so its standards can't be applied."
+ },
+ "clt_quotes": [
+  {
+   "what": "N1-A table row",
+   "found": true
+  },
+  {
+   "what": "N1-A table row",
+   "found": true
+  },
+  {
+   "what": "N1-A table row",
+   "found": true
+  },
+  {
+   "what": "N1-A table row",
+   "found": true
+  },
+  {
+   "what": "N1-A table row",
+   "found": true
+  },
+  {
+   "what": "N1-A table row",
+   "found": true
+  },
+  {
+   "what": "N1-A table row",
+   "found": true
+  },
+  {
+   "what": "N1-A table row",
+   "found": true
+  },
+  {
+   "what": "use matrix row",
+   "found": true
+  },
+  {
+   "what": "use matrix row",
+   "found": true
+  },
+  {
+   "what": "use matrix row",
+   "found": true
+  },
+  {
+   "what": "use matrix row",
+   "found": true
+  },
+  {
+   "what": "use matrix row",
+   "found": true
+  },
+  {
+   "what": "use matrix row",
+   "found": true
+  },
+  {
+   "what": "use matrix row",
+   "found": true
+  },
+  {
+   "what": "sublot note",
+   "found": true
+  },
+  {
+   "what": "plat setback",
+   "found": true
+  },
+  {
+   "what": "blockface",
+   "found": true
+  },
+  {
+   "what": "FAA",
+   "found": true
+  },
+  {
+   "what": "sidewall",
+   "found": true
+  },
+  {
+   "what": "legend X",
+   "found": true
+  },
+  {
+   "what": "legend PC",
+   "found": true
+  },
+  {
+   "what": "quadraplex",
+   "found": true
+  },
+  {
+   "what": "common wall",
+   "found": true
+  },
+  {
+   "what": "ADU with_house",
+   "found": true
+  },
+  {
+   "what": "ADU one",
+   "found": true
+  },
+  {
+   "what": "ADU owner",
+   "found": true
+  },
+  {
+   "what": "ADU size",
+   "found": true
+  }
+ ],
+ "clt": [
+  {
+   "county": "37119",
+   "area": "Myers Park / Eastover",
+   "lat": 35.179927,
+   "lng": -80.829631,
+   "zone": "N1-A",
+   "map": {
+    "ZoneDes": "N1-A",
+    "Overlay": "none"
+   },
+   "parcel": {
+    "parcelid": "17502101",
+    "location_address": "2726 CHILTON PL CHARLOTTE NC",
+    "num_heatedarea": 0
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "2726 CHILTON PL CHARLOTTE NC · AIN/APN 17502101 · SINGLE FAMILY RESIDENTIAL (Mecklenburg County land use on Charlotte's All Parcel Data layer)\n• Zoning district N1-A (Charlotte Unified Development Ordinance) — Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed. \"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6).\" Minimum lot for a residential use: 10,000 sq ft and 70 ft wide (UDO 4.3.B, Table 4-1); \"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.\" Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots (UDO 4.3.B, Table 4-1); on this ~35,109 sq ft lot that is about 14,044 sq ft of building coverage. Minimum setbacks: front 27 ft and corner side 13.5 ft from the right-of-way, side 5 ft, rear 40 ft (UDO 4.3.C, Table 4-2); \"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.\" An alternative front setback for an established blockface (the table's note 2) isn't checked here. Residential height: up to 48 ft (UDO 4.3.D, Table 4-3); \"The sidewall height for all duplex and triplex buildings is limited to 20 feet.\" (UDO 4.3.D.1).\n? Second home (two-family or more) — A duplex or triplex is allowed in N1-A with prescribed conditions (UDO Table 15-1: \"Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC\"), among them: \"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.\" (UDO 15.4.EE.1). A quadraplex is allowed in N1-A only as UDO 15.4.GG.3 says: \"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.\" Whether the lot is on an arteria"
+  },
+  {
+   "county": "37119",
+   "area": "Dilworth / Sedgefield",
+   "lat": 35.196612,
+   "lng": -80.859545,
+   "zone": "N1-B",
+   "map": {
+    "ZoneDes": "N1-B",
+    "Overlay": "none"
+   },
+   "parcel": {
+    "parcelid": "14704132",
+    "location_address": "630 POINDEXTER DR CHARLOTTE NC",
+    "num_heatedarea": 1614
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "630 POINDEXTER DR CHARLOTTE NC · AIN/APN 14704132 · SINGLE FAMILY RESIDENTIAL (Mecklenburg County land use on Charlotte's All Parcel Data layer)\n• Zoning district N1-B (Charlotte Unified Development Ordinance) — Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed. \"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6).\" Minimum lot for a residential use: 8,000 sq ft and 60 ft wide (UDO 4.3.B, Table 4-1); \"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.\" Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots (UDO 4.3.B, Table 4-1); on this ~9,822 sq ft lot that is about 4,911 sq ft of building coverage. Minimum setbacks: front 27 ft and corner side 13.5 ft from the right-of-way, side 5 ft, rear 35 ft (UDO 4.3.C, Table 4-2); \"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.\" An alternative front setback for an established blockface (the table's note 2) isn't checked here. Residential height: up to 48 ft (UDO 4.3.D, Table 4-3); \"The sidewall height for all duplex and triplex buildings is limited to 20 feet.\" (UDO 4.3.D.1).\n? Second home (two-family or more) — A duplex or triplex is allowed in N1-B with prescribed conditions (UDO Table 15-1: \"Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC\"), among them: \"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.\" (UDO 15.4.EE.1). A quadraplex is allowed in N1-B only as UDO 15.4.GG.3 says: \"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.\" Whether the lot is on an arterial"
+  },
+  {
+   "county": "37119",
+   "area": "Plaza Midwood / NoDa",
+   "lat": 35.239496,
+   "lng": -80.80629,
+   "zone": "N1-C",
+   "map": {
+    "ZoneDes": "N1-C",
+    "Overlay": "none"
+   },
+   "parcel": {
+    "parcelid": "08311215",
+    "location_address": "933 WOODSIDE AV CHARLOTTE NC",
+    "num_heatedarea": 1534
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "933 WOODSIDE AV CHARLOTTE NC · AIN/APN 08311215 · SINGLE FAMILY RESIDENTIAL (Mecklenburg County land use on Charlotte's All Parcel Data layer)\n• Zoning district N1-C (Charlotte Unified Development Ordinance) — Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed. \"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6).\" Minimum lot for a residential use: 6,000 sq ft and 50 ft wide (UDO 4.3.B, Table 4-1); \"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.\" Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots (UDO 4.3.B, Table 4-1); on this ~9,801 sq ft lot that is about 4,901 sq ft of building coverage. Minimum setbacks: front 17 ft and corner side 10 ft from the right-of-way, side 5 ft, rear 30 ft (UDO 4.3.C, Table 4-2); \"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.\" An alternative front setback for an established blockface (the table's note 2) isn't checked here. Residential height: up to 40 ft (UDO 4.3.D, Table 4-3); \"The sidewall height for all duplex and triplex buildings is limited to 20 feet.\" (UDO 4.3.D.1).\n? Second home (two-family or more) — A duplex or triplex is allowed in N1-C with prescribed conditions (UDO Table 15-1: \"Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC\"), among them: \"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.\" (UDO 15.4.EE.1). A quadraplex is allowed in N1-C only as UDO 15.4.GG.3 says: \"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.\" Whether the lot is on an arterial str"
+  },
+  {
+   "county": "37119",
+   "area": "West Charlotte (Wesley Heights)",
+   "lat": 35.237789,
+   "lng": -80.86144,
+   "zone": "N1-D",
+   "map": {
+    "ZoneDes": "N1-D",
+    "Overlay": "none"
+   },
+   "parcel": {
+    "parcelid": "07101703",
+    "location_address": "207 WALNUT AV CHARLOTTE NC",
+    "num_heatedarea": 1776
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "207 WALNUT AV CHARLOTTE NC · AIN/APN 07101703 · SINGLE FAMILY RESIDENTIAL (Mecklenburg County land use on Charlotte's All Parcel Data layer)\n• Zoning district N1-D (Charlotte Unified Development Ordinance) — Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed. \"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6).\" Minimum lot for a residential use: 3,500 sq ft and 40 ft wide (UDO 4.3.B, Table 4-1); \"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.\" Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots (UDO 4.3.B, Table 4-1); on this ~9,224 sq ft lot that is about 4,612 sq ft of building coverage. Minimum setbacks: front 17 ft and corner side 10 ft from the right-of-way, side 5 ft, rear 25 ft (UDO 4.3.C, Table 4-2); \"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.\" An alternative front setback for an established blockface (the table's note 2) isn't checked here. Residential height: up to 40 ft (UDO 4.3.D, Table 4-3); \"The sidewall height for all duplex and triplex buildings is limited to 20 feet.\" (UDO 4.3.D.1).\n? Second home (two-family or more) — A duplex or triplex is allowed in N1-D with prescribed conditions (UDO Table 15-1: \"Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC\"), among them: \"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.\" (UDO 15.4.EE.1). A quadraplex is allowed in N1-D only as UDO 15.4.GG.3 says: \"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.\" Whether the lot is on an arterial stree"
+  }
+ ],
+ "clt_outside": {
+  "county": "37119",
+  "area": "Matthews",
+  "lat": 35.120406,
+  "lng": -80.72128,
+  "parcel": {
+   "parcelid": "19327102",
+   "location_address": "338 N AMES ST MATTHEWS NC",
+   "num_heatedarea": 1155
+  },
+  "city_zone": null,
+  "ok": true,
+  "excerpt": "• Local zoning standards — Not on file: City of Charlotte's zoning district couldn't be read here (the point is outside the City of Charlotte's zoning map (another town in Mecklenburg County, such as Matthews or Huntersville); only Charlotte's UDO is on file), so its standards can't be applied."
  },
  "page_errors": []
 }

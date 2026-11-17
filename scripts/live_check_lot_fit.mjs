@@ -10,7 +10,9 @@
 // Outside NYC it opens one lot per listed county and checks the panel says the standards are not on file, with the reason.
 //
 // Usage: NODE_USE_ENV_PROXY=1 node scripts/live_check_lot_fit.mjs   (writes data/backtests/live_check_lot_fit_<date>.json)
-// Env: LIVE_PORT (default 8899).
+// Env: LIVE_PORT (default 8899). LIVE_BROWSER_PROXY=1 launches the browser through $HTTPS_PROXY explicitly: in the build
+// sandbox the browser's default network path answered www.portlandmaps.com with intermittent 502s (17 Nov 2026) while
+// the same requests through the proxy, and from curl, got 200 with the CORS header; the setting is recorded in the output.
 import fs from "node:fs";
 import path from "node:path";
 import { spawn } from "node:child_process";
@@ -450,6 +452,162 @@ async function verifySdQuotes() {
   return out;
 }
 
+// Round 6: City of Portland (Title 33) and City of Charlotte (UDO). The zone is read here from each city's zoning map at
+// the point, and the parcel and use from the county layers, separately from the page. Quotes and table rows are
+// re-found in a fresh download of each code.
+const PDX = ZS.jurisdictions.find((j) => j.id === "pdx");
+const CLT = ZS.jurisdictions.find((j) => j.id === "clt");
+const PDX_TAXLOTS = PDX.zone_source.extra_fields.url;
+const PDX_BOXES = [
+  { name: "NE Portland (Concordia / Vernon)", box: [-122.66, 45.55, -122.63, 45.57] },
+  { name: "SW Portland (Hillsdale / Bridlemile)", box: [-122.73, 45.47, -122.70, 45.50] },
+  { name: "SE Portland (Woodstock / Brentwood)", box: [-122.62, 45.47, -122.59, 45.49] },
+  { name: "Outer East (Hazelwood / Powellhurst)", box: [-122.56, 45.49, -122.52, 45.52] },
+];
+const PDX_OUTSIDE = { name: "Gresham", box: [-122.44, 45.49, -122.42, 45.51] };
+async function pdxZoneAt(lat, lng) {
+  const d = await getJson(`${PDX.zone_source.url}/query?` + new URLSearchParams({ geometry: `${lng},${lat}`, geometryType: "esriGeometryPoint", inSR: "4326", spatialRel: "esriSpatialRelIntersects", outFields: "ZONE,UNINC,OVRLY_DESC,PLDIST_DESC", returnGeometry: "false", f: "json" }));
+  return d && d.features && d.features[0] ? d.features[0].attributes : null;
+}
+async function pdxSample(b, per, seen, wantZone = true) {
+  const d = await getJson(`${PDX_TAXLOTS}/query?` + new URLSearchParams({ where: "PROPCLASS='101'", geometry: b.box.join(","), geometryType: "esriGeometryEnvelope", inSR: "4326",
+    spatialRel: "esriSpatialRelIntersects", outFields: "MAPTAXLOT,SITUSADDR,PROPCLASS,xCentroid,yCentroid", returnGeometry: "false", resultRecordCount: "40", f: "json" }));
+  const out = [];
+  for (const f of (d && d.features) || []) {
+    if (out.length >= per) break;
+    const lat = f.attributes.yCentroid, lng = f.attributes.xCentroid;
+    if (lat == null || lng == null) continue;
+    const z = await pdxZoneAt(lat, lng);
+    if (wantZone && (!z || z.UNINC === "Y" || !PDX.districts[z.ZONE] || seen.has(z.ZONE))) continue;
+    if (!wantZone && z) continue;
+    if (z) seen.add(z.ZONE);
+    out.push({ lat, lng, zone: z, parcel: f.attributes });
+  }
+  return out;
+}
+function expectedPdx(z) {
+  const r = PDX.districts[z], sb = r.setbacks, yes = Object.entries(r.housing_types).filter(([, v]) => v.allowed).map(([k]) => k);
+  return ["Residential, Improved (Oregon property class (OAR 150-308-0310) on Multnomah County taxlots, PROPCLASS 101)", `Zoning district ${z} (${PDX.code})`,
+    `Housing types allowed in ${z}: ${yes.join(", ")}`, `Height: up to ${r.height.max_height_ft} ft (PCC 33.110.215, Table 110-4)`,
+    `Minimum setbacks: front ${sb.front_ft} ft, side ${sb.side_ft} ft, rear ${sb.rear_ft} ft, garage entrance ${sb.garage_entrance_ft} ft`, "Floor area allowed by zoning",
+    "Accessory dwelling unit (ADU)", `${fmtN(r.min_lot.area_sqft)} sq ft`];
+}
+async function fetchText(url, pdf) {
+  const { execFileSync } = await import("node:child_process");
+  const os = await import("node:os");
+  for (let i = 0; i < 3; i++) {
+    try {
+      const r = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 (city-pretty live check)" }, signal: AbortSignal.timeout(90000) });
+      if (!r.ok) continue;
+      if (!pdf) return await r.text();
+      const dir = fs.mkdtempSync(path.join(os.tmpdir(), "code-")), p = path.join(dir, "d.pdf");
+      fs.writeFileSync(p, Buffer.from(await r.arrayBuffer()));
+      const t = execFileSync("pdftotext", ["-layout", p, "-"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+      fs.rmSync(dir, { recursive: true, force: true });
+      return t;
+    } catch { await new Promise((res) => setTimeout(res, 2000)); }
+  }
+  return null;
+}
+async function verifyPdxQuotes() {
+  const t110 = await fetchText(PDX.districts.R5.far.url, true), t610 = await fetchText(PDX.districts.R5.min_lot.url, true);
+  const F = (t) => (t == null ? null : t.replace(/\s+/g, " "));
+  const f110 = F(t110), f610 = F(t610);
+  const out = [], seen = new Set();
+  const need = (what, text, hay) => { const k = text.replace(/\s+/g, " "); if (seen.has(k)) return; seen.add(k); out.push({ what, found: hay == null ? null : hay.includes(k) }); };
+  for (const [z, r] of Object.entries(PDX.districts)) {
+    for (const [t, v] of Object.entries(r.housing_types)) need(`${z} ${t} row`, v.row, f110);
+    need("planned development only", r.planned_development_only, f110);
+    for (const x of r.far.by_units) { need("FAR row", x.row, f110); need("bonus FAR row", x.bonus_row, f110); }
+    need("FAR units", r.far.units_quote, f110); need("FAR adjustments", r.far.no_adjustments, f110);
+    for (const n of Object.values(r.far.notes)) need("Table 110-4 note", n, f110);
+    if (r.far.scope_quote) need("FAR scope", r.far.scope_quote, f110);
+    need("height row", r.height.row, f110);
+    for (const row of r.setbacks.rows) need("setback row", row, f110);
+    need("outdoor area row", r.outdoor_area_row, f110);
+    need("existing lot", r.existing_lot.quote, f110);
+    if (r.min_density) { need(`${z} min density`, r.min_density.quote, f110); need("min density exempt", r.min_density.exempt, f110); }
+    for (const row of r.min_lot.rows) need("Table 610-2 row", row, f610);
+    need("lot area rule", r.min_lot.applies, f610);
+  }
+  return out;
+}
+const CLT_PARCELS = CLT.zone_source.extra_fields.url;
+const NC_PARCELS = "https://services.nconemap.gov/secure/rest/services/NC1Map_Parcels/FeatureServer/1";
+const CLT_BOXES = [
+  { name: "Myers Park / Eastover", box: [-80.83, 35.18, -80.81, 35.20] },
+  { name: "Dilworth / Sedgefield", box: [-80.86, 35.18, -80.84, 35.20] },
+  { name: "Plaza Midwood / NoDa", box: [-80.81, 35.22, -80.79, 35.24] },
+  { name: "West Charlotte (Wesley Heights)", box: [-80.87, 35.22, -80.85, 35.24] },
+  { name: "University City", box: [-80.76, 35.29, -80.73, 35.31] },
+  { name: "South Charlotte (Ballantyne)", box: [-80.86, 35.05, -80.83, 35.07] },
+];
+const CLT_OUTSIDE = { name: "Matthews", box: [-80.73, 35.11, -80.71, 35.13] };
+async function cltZoneAt(lat, lng) {
+  const d = await getJson(`${CLT.zone_source.url}/query?` + new URLSearchParams({ geometry: `${lng},${lat}`, geometryType: "esriGeometryPoint", inSR: "4326", spatialRel: "esriSpatialRelIntersects", outFields: "ZoneDes,Overlay", returnGeometry: "false", f: "json" }));
+  return d && d.features && d.features[0] ? d.features[0].attributes : null;
+}
+const ringCenter = (ring) => { let x = 0, y = 0; for (const [a, b] of ring) { x += a; y += b; } return { lng: x / ring.length, lat: y / ring.length }; };
+async function cltSample(b, per, seen, wantZone = true) {
+  const d = await getJson(`${CLT_PARCELS}/query?` + new URLSearchParams({ where: "landuse_description='SINGLE FAMILY RESIDENTIAL'", geometry: b.box.join(","), geometryType: "esriGeometryEnvelope", inSR: "4326",
+    spatialRel: "esriSpatialRelIntersects", outFields: "parcelid,location_address,num_heatedarea", returnGeometry: "true", outSR: "4326", resultRecordCount: "40", f: "json" }));
+  const out = [];
+  for (const f of (d && d.features) || []) {
+    if (out.length >= per || !f.geometry || !f.geometry.rings) continue;
+    const c = ringCenter(f.geometry.rings[0]);
+    // The page reads the parcel from NC OneMap at the point: it must be this same parcel.
+    const nc = await getJson(`${NC_PARCELS}/query?` + new URLSearchParams({ geometry: `${c.lng},${c.lat}`, geometryType: "esriGeometryPoint", inSR: "4326", spatialRel: "esriSpatialRelIntersects", outFields: "parno", returnGeometry: "false", f: "json" }));
+    const parno = nc && nc.features && nc.features[0] && nc.features[0].attributes.parno;
+    if (parno !== f.attributes.parcelid) continue;
+    const z = await cltZoneAt(c.lat, c.lng);
+    if (wantZone && (!z || !CLT.districts[z.ZoneDes] || seen.has(z.ZoneDes))) continue;
+    if (!wantZone && z) continue;
+    if (z) seen.add(z.ZoneDes);
+    out.push({ ...c, zone: z, parcel: f.attributes });
+  }
+  return out;
+}
+function expectedClt(z, p) {
+  const r = CLT.districts[z], ml = r.min_lot, sb = r.setbacks;
+  const exp = ["SINGLE FAMILY RESIDENTIAL (Mecklenburg County land use on Charlotte's All Parcel Data layer)", `Zoning district ${z} (${CLT.code})`,
+    "a single-family home by right", `Minimum lot for a residential use: ${fmtN(ml.area_sqft)} sq ft and ${ml.width_ft} ft wide`,
+    `Minimum setbacks: front ${sb.front_ft} ft and corner side ${sb.corner_side_ft} ft from the right-of-way, side ${sb.side_ft} ft, rear ${sb.rear_ft} ft`,
+    `Residential height: up to ${r.height.max_height_ft} ft`, "Accessory dwelling unit (ADU)"];
+  if (p.num_heatedarea > 0) exp.push(`The Assessor records ${fmtN(p.num_heatedarea)} heated sq ft here`);
+  return exp;
+}
+function udoRows(h, marker) {
+  const i = h.indexOf(marker); if (i < 0) return null;
+  const a = h.indexOf("<table", i), b = h.indexOf("</table>", a);
+  const un = (s) => s.replace(/&ndash;/g, "–").replace(/&amp;/g, "&").replace(/&nbsp;/g, " ").replace(/&ldquo;/g, "“").replace(/&rdquo;/g, "”").replace(/&#39;|&rsquo;/g, "’");
+  return [...h.slice(a, b).matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)].map((m) => [...m[1].matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/g)]
+    .map((c) => un(c[1].replace(/<sup>([\s\S]*?)<\/sup>/g, "^$1").replace(/<br\s*\/?>/g, " / ").replace(/<[^>]+>/g, "")).replace(/\s+/g, " ").trim()).join(" | "));
+}
+async function udoPayload(url) {
+  const raw = await fetchText(url, false);
+  if (raw == null) return null;
+  return [...raw.matchAll(/self\.__next_f\.push\(\[1,"([\s\S]*?)"\]\)/g)].map((m) => { try { return JSON.parse('"' + m[1] + '"'); } catch { return ""; } }).join("");
+}
+async function verifyCltQuotes() {
+  const h4 = await udoPayload(CLT.districts["N1-A"].min_lot.url), h15 = await udoPayload(CLT.districts["N1-A"].adu.url);
+  const plain = (h) => (h == null ? null : h.replace(/<[^>]+>/g, " ").replace(/&ldquo;/g, "“").replace(/&rdquo;/g, "”").replace(/&ndash;/g, "–").replace(/&amp;/g, "&").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").replace(/ ([,.;:)])/g, "$1"));
+  const p4 = plain(h4), p15 = plain(h15);
+  const rows4 = h4 ? ["Table 4-1: Neighborhood 1 Zoning Districts Lot Standards", "Table 4-2: Neighborhood 1 Zoning Districts Building Siting Standards", "Table 4-3: Neighborhood 1 Zoning Districts Building Height Standards"].flatMap((m) => udoRows(h4, m) || []) : null;
+  const rows15 = h15 ? (udoRows(h15, "Table 15-1: Use Matrix") || []).concat(udoRows(h15.slice(h15.indexOf("Table 15-1: Use Matrix") + 10), "Table 15-1: Use Matrix") || []) : null;
+  const out = [], seen = new Set();
+  const need = (what, text, hay) => { const k = text.replace(/\s+/g, " "); if (seen.has(k)) return; seen.add(k); out.push({ what, found: hay == null ? null : (Array.isArray(hay) ? hay.some((r) => r.startsWith(k)) : hay.includes(k)) }); };
+  for (const [z, r] of Object.entries(CLT.districts)) {
+    for (const row of [...r.min_lot.rows, r.coverage.row, ...r.setbacks.rows, r.height.row]) need(`${z} table row`, row, rows4);
+    for (const v of Object.values(r.uses)) need("use matrix row", v.row, rows15);
+    need("sublot note", r.min_lot.sublot_note, p4); need("plat setback", r.setbacks.notes.plat, p4); need("blockface", r.setbacks.notes.blockface, p4);
+    need("FAA", r.height.faa, p4); need("sidewall", r.sidewall.quote, p4);
+    for (const k of ["X", "PC"]) need(`legend ${k}`, r.use_legend[k], p15);
+    need("quadraplex", r.quadraplex_condition.quote, p15); need("common wall", r.common_wall.quote, p15);
+    for (const k of ["with_house", "one", "owner", "size"]) need(`ADU ${k}`, r.adu[k], p15);
+  }
+  return out;
+}
+
 function serve() { return spawn(process.execPath, [path.join(root, "scripts/serve.mjs"), String(PORT)], { cwd: root, stdio: "ignore" }); }
 
 async function openHouse(page, fips, ll) {
@@ -464,8 +622,9 @@ async function openHouse(page, fips, ll) {
 async function main() {
   const srv = serve();
   await new Promise((r) => setTimeout(r, 1500));
-  const browser = await chromium.launch();
-  const results = { ran_on: new Date().toISOString(), script: "scripts/live_check_lot_fit.mjs", nyc: [], other: [], quotes: null };
+  const viaProxy = !!process.env.LIVE_BROWSER_PROXY && !!(process.env.HTTPS_PROXY || process.env.https_proxy);
+  const browser = await chromium.launch(viaProxy ? { proxy: { server: process.env.HTTPS_PROXY || process.env.https_proxy, bypass: "127.0.0.1,localhost" } } : {});
+  const results = { ran_on: new Date().toISOString(), script: "scripts/live_check_lot_fit.mjs", browser_via_explicit_proxy: viaProxy, nyc: [], other: [], quotes: null };
   try {
     results.quotes = await verifyQuotes();
     results.high_rows = await verifyHighRows();
@@ -601,6 +760,54 @@ async function main() {
       results.sd_outside = row;
       console.log("06073 Chula Vista", P.parcel.apn, row.ok ? "outside reason shown" : "NOT SHOWN " + row.excerpt);
     }
+    // City of Portland: single-dwelling lots (PROPCLASS 101) in four parts of the city, then one lot in Gresham.
+    results.pdx_quotes = await verifyPdxQuotes();
+    results.pdx = [];
+    const seenPdx = new Set();
+    for (const b of PDX_BOXES) {
+      for (const P of await pdxSample(b, 1, seenPdx)) {
+        const z = P.zone.ZONE;
+        const row = { county: "41051", area: b.name, lat: +P.lat.toFixed(6), lng: +P.lng.toFixed(6), zone: z, map: P.zone, parcel: P.parcel };
+        const text = await openHouse(page, "41051", { lat: P.lat, lng: P.lng });
+        row.missing = expectedPdx(z).filter((e) => !text.includes(e));
+        row.ok = row.missing.length === 0;
+        row.panel_excerpt = text.split("\n").filter((l) => /Zoning district|Floor area allowed|Second home|Split into two|Residential, Improved|Local zoning|Accessory dwelling/.test(l)).join("\n").slice(0, 2400);
+        results.pdx.push(row);
+        console.log("41051", z, P.parcel.MAPTAXLOT, P.parcel.SITUSADDR, row.ok ? "OK" : "MISSING " + JSON.stringify(row.missing));
+      }
+    }
+    for (const P of await pdxSample(PDX_OUTSIDE, 1, new Set(), false)) {
+      const text = await openHouse(page, "41051", { lat: P.lat, lng: P.lng });
+      const row = { county: "41051", area: PDX_OUTSIDE.name, lat: +P.lat.toFixed(6), lng: +P.lng.toFixed(6), parcel: P.parcel, city_zone: P.zone };
+      row.ok = text.includes("outside the City of Portland's zoning map") && !/Zoning district R/.test(text);
+      row.excerpt = text.split("\n").filter((l) => /Local zoning|Zoning district/.test(l)).join("\n").slice(0, 600);
+      results.pdx_outside = row;
+      console.log("41051 Gresham", P.parcel.MAPTAXLOT, row.ok ? "outside reason shown" : "NOT SHOWN " + row.excerpt);
+    }
+    // City of Charlotte: single-family lots in N1 districts, then one lot in Matthews.
+    results.clt_quotes = await verifyCltQuotes();
+    results.clt = [];
+    const seenClt = new Set();
+    for (const b of CLT_BOXES) {
+      for (const P of await cltSample(b, 1, seenClt)) {
+        const z = P.zone.ZoneDes;
+        const row = { county: "37119", area: b.name, lat: +P.lat.toFixed(6), lng: +P.lng.toFixed(6), zone: z, map: P.zone, parcel: P.parcel };
+        const text = await openHouse(page, "37119", { lat: P.lat, lng: P.lng });
+        row.missing = expectedClt(z, P.parcel).filter((e) => !text.includes(e));
+        row.ok = row.missing.length === 0;
+        row.panel_excerpt = text.split("\n").filter((l) => /Zoning district|Second home|Split into two|SINGLE FAMILY|Local zoning|Accessory dwelling/.test(l)).join("\n").slice(0, 2400);
+        results.clt.push(row);
+        console.log("37119", z, P.parcel.parcelid, P.parcel.location_address, row.ok ? "OK" : "MISSING " + JSON.stringify(row.missing));
+      }
+    }
+    for (const P of await cltSample(CLT_OUTSIDE, 1, new Set(), false)) {
+      const text = await openHouse(page, "37119", { lat: P.lat, lng: P.lng });
+      const row = { county: "37119", area: CLT_OUTSIDE.name, lat: +P.lat.toFixed(6), lng: +P.lng.toFixed(6), parcel: P.parcel, city_zone: P.zone };
+      row.ok = text.includes("outside the City of Charlotte's zoning map") && !/Zoning district N1/.test(text);
+      row.excerpt = text.split("\n").filter((l) => /Local zoning|Zoning district/.test(l)).join("\n").slice(0, 600);
+      results.clt_outside = row;
+      console.log("37119 Matthews", P.parcel.parcelid, row.ok ? "outside reason shown" : "NOT SHOWN " + row.excerpt);
+    }
     for (const o of OTHER) {
       const text = await openHouse(page, o.fips, { lat: o.lat, lng: o.lng });
       const row = { county: o.fips, area: o.name, lat: o.lat, lng: o.lng };
@@ -621,6 +828,7 @@ async function main() {
   fs.writeFileSync(out, JSON.stringify(results, null, 1));
   const q = results.quotes;
   const hr = results.high_rows || [], nh = results.nyc_high || [], cq = results.commercial_quotes || [], nc = results.nyc_commercial || [], no = results.nyc_overlay || [];
+  const pq = results.pdx_quotes || [], cq6 = results.clt_quotes || [], pl = results.pdx || [], cl = results.clt || [];
   console.log(`quotes found ${q.filter((x) => x.found).length}/${q.length}; nyc ok ${results.nyc.filter((r) => r.ok).length}/${results.nyc.filter((r) => !r.skipped).length}; ` +
     `R6-R12 rows found ${hr.filter((x) => x.found).length}/${hr.length}; R6-R12 lots ok ${nh.filter((r) => r.ok).length}/${nh.filter((r) => !r.skipped).length} in ${new Set(nh.filter((r) => !r.skipped).map((r) => r.county)).size} boroughs; ` +
     `commercial quotes ${cq.filter((x) => x.found).length}/${cq.length}; commercial lots ok ${nc.filter((r) => r.ok).length}/${nc.filter((r) => !r.skipped).length} in ${new Set(nc.filter((r) => !r.skipped).map((r) => r.county)).size} boroughs; ` +
@@ -628,6 +836,8 @@ async function main() {
     `dc quotes ${results.dc_quotes.filter((x) => x.found).length}/${results.dc_quotes.length}; dc ok ${results.dc.filter((r) => r.ok).length}/${results.dc.filter((r) => !r.skipped).length}; ` +
     `nashville ok ${results.nashville.filter((r) => r.ok).length}/${results.nashville.length}; ` +
     `san diego quotes ${(results.sd_quotes || []).filter((x) => x.found).length}/${(results.sd_quotes || []).length}; san diego ok ${(results.sd || []).filter((r) => r.ok).length}/${(results.sd || []).filter((r) => !r.skipped).length} ` +
-    `(${[...new Set((results.sd || []).filter((r) => !r.skipped).map((r) => r.zone))].join(", ")}); chula vista ${results.sd_outside ? (results.sd_outside.ok ? "reason shown" : "NOT SHOWN") : "not sampled"}; wrote ${out}`);
+    `(${[...new Set((results.sd || []).filter((r) => !r.skipped).map((r) => r.zone))].join(", ")}); chula vista ${results.sd_outside ? (results.sd_outside.ok ? "reason shown" : "NOT SHOWN") : "not sampled"}; ` +
+    `portland quotes ${pq.filter((x) => x.found).length}/${pq.length}; portland ok ${pl.filter((r) => r.ok).length}/${pl.length} (${pl.map((r) => r.zone).join(", ")}); gresham ${results.pdx_outside ? (results.pdx_outside.ok ? "reason shown" : "NOT SHOWN") : "not sampled"}; ` +
+    `charlotte quotes ${cq6.filter((x) => x.found).length}/${cq6.length}; charlotte ok ${cl.filter((r) => r.ok).length}/${cl.length} (${cl.map((r) => r.zone).join(", ")}); matthews ${results.clt_outside ? (results.clt_outside.ok ? "reason shown" : "NOT SHOWN") : "not sampled"}; wrote ${out}`);
 }
 main();

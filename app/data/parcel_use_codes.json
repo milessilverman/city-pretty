@@ -2813,6 +2813,1222 @@
     "evidence": "235 codes",
     "unverified_fields": []
    }
+  },
+  {
+   "id": "multnomah_propclass",
+   "counties": [
+    "41051"
+   ],
+   "field": "PROPCLASS",
+   "codes": {
+    "013": {
+     "label": "Miscellaneous, State responsibility",
+     "type": "unknown",
+     "form": null
+    },
+    "021": {
+     "label": "Miscellaneous, Improved",
+     "type": "unknown",
+     "form": null
+    },
+    "023": {
+     "label": "Miscellaneous, State responsibility",
+     "type": "unknown",
+     "form": null
+    },
+    "033": {
+     "label": "Miscellaneous, State responsibility",
+     "type": "unknown",
+     "form": null
+    },
+    "043": {
+     "label": "Miscellaneous, State responsibility",
+     "type": "unknown",
+     "form": null
+    },
+    "053": {
+     "label": "Miscellaneous, State responsibility",
+     "type": "unknown",
+     "form": null
+    },
+    "073": {
+     "label": "Miscellaneous, State responsibility",
+     "type": "unknown",
+     "form": null
+    },
+    "083": {
+     "label": "Miscellaneous, State responsibility",
+     "type": "unknown",
+     "form": null
+    },
+    "100": {
+     "label": "Residential, Vacant",
+     "type": "vacant",
+     "form": null
+    },
+    "101": {
+     "label": "Residential, Improved",
+     "type": "residential",
+     "form": null
+    },
+    "102": {
+     "label": "Residential, Condominium",
+     "type": "residential",
+     "form": "unit"
+    },
+    "109": {
+     "label": "Residential, Manufactured Structure",
+     "type": "residential",
+     "form": null
+    },
+    "119": {
+     "label": "Residential, Manufactured Structure",
+     "type": "residential",
+     "form": null
+    },
+    "121": {
+     "label": "Residential, Improved",
+     "type": "residential",
+     "form": null
+    },
+    "122": {
+     "label": "Residential, Condominium",
+     "type": "residential",
+     "form": "unit"
+    },
+    "131": {
+     "label": "Residential, Improved",
+     "type": "residential",
+     "form": null
+    },
+    "132": {
+     "label": "Residential, Condominium",
+     "type": "residential",
+     "form": "unit"
+    },
+    "151": {
+     "label": "Residential, Improved",
+     "type": "residential",
+     "form": null
+    },
+    "171": {
+     "label": "Residential, Improved",
+     "type": "residential",
+     "form": null
+    },
+    "200": {
+     "label": "Commercial, Vacant",
+     "type": "vacant",
+     "form": null
+    },
+    "2003": {
+     "label": "county code 2003 (not one of OAR 150-308-0310's three-digit classes)",
+     "type": "unknown",
+     "form": null
+    },
+    "201": {
+     "label": "Commercial, Improved",
+     "type": "non-residential",
+     "form": null
+    },
+    "2013": {
+     "label": "county code 2013 (not one of OAR 150-308-0310's three-digit classes)",
+     "type": "unknown",
+     "form": null
+    },
+    "202": {
+     "label": "Commercial, Condominium",
+     "type": "non-residential",
+     "form": null
+    },
+    "2023": {
+     "label": "county code 2023 (not one of OAR 150-308-0310's three-digit classes)",
+     "type": "unknown",
+     "form": null
+    },
+    "211": {
+     "label": "Commercial, Improved",
+     "type": "non-residential",
+     "form": null
+    },
+    "2113": {
+     "label": "county code 2113 (not one of OAR 150-308-0310's three-digit classes)",
+     "type": "unknown",
+     "form": null
+    },
+    "212": {
+     "label": "Commercial, Condominium",
+     "type": "non-residential",
+     "form": null
+    },
+    "2213": {
+     "label": "county code 2213 (not one of OAR 150-308-0310's three-digit classes)",
+     "type": "unknown",
+     "form": null
+    },
+    "231": {
+     "label": "Commercial, Improved",
+     "type": "non-residential",
+     "form": null
+    },
+    "232": {
+     "label": "Commercial, Condominium",
+     "type": "non-residential",
+     "form": null
+    },
+    "2703": {
+     "label": "county code 2703 (not one of OAR 150-308-0310's three-digit classes)",
+     "type": "unknown",
+     "form": null
+    },
+    "271": {
+     "label": "Commercial, Improved",
+     "type": "non-residential",
+     "form": null
+    },
+    "300": {
+     "label": "Industrial, Vacant",
+     "type": "vacant",
+     "form": null
+    },
+    "303": {
+     "label": "Industrial, State responsibility",
+     "type": "non-residential",
+     "form": null
+    },
+    "311": {
+     "label": "Industrial, Improved",
+     "type": "non-residential",
+     "form": null
+    },
+    "313": {
+     "label": "Industrial, State responsibility",
+     "type": "non-residential",
+     "form": null
+    },
+    "321": {
+     "label": "Industrial, Improved",
+     "type": "non-residential",
+     "form": null
+    },
+    "323": {
+     "label": "Industrial, State responsibility",
+     "type": "non-residential",
+     "form": null
+    },
+    "400": {
+     "label": "Tract, Vacant",
+     "type": "vacant",
+     "form": null
+    },
+    "401": {
+     "label": "Tract, Improved",
+     "type": "residential",
+     "form": null
+    },
+    "450": {
+     "label": "Tract, Vacant",
+     "type": "vacant",
+     "form": null
+    },
+    "451": {
+     "label": "Tract, Improved",
+     "type": "residential",
+     "form": null
+    },
+    "500": {
+     "label": "Farm, Vacant",
+     "type": "unknown",
+     "form": null
+    },
+    "501": {
+     "label": "Farm, Improved",
+     "type": "unknown",
+     "form": null
+    },
+    "540": {
+     "label": "Farm, Vacant",
+     "type": "unknown",
+     "form": null
+    },
+    "541": {
+     "label": "Farm, Improved",
+     "type": "unknown",
+     "form": null
+    },
+    "550": {
+     "label": "Farm, Vacant",
+     "type": "unknown",
+     "form": null
+    },
+    "551": {
+     "label": "Farm, Improved",
+     "type": "unknown",
+     "form": null
+    },
+    "640": {
+     "label": "Forest, Vacant",
+     "type": "unknown",
+     "form": null
+    },
+    "641": {
+     "label": "Forest, Improved",
+     "type": "unknown",
+     "form": null
+    },
+    "660": {
+     "label": "Forest, Vacant",
+     "type": "unknown",
+     "form": null
+    },
+    "661": {
+     "label": "Forest, Improved",
+     "type": "unknown",
+     "form": null
+    },
+    "680": {
+     "label": "Forest, Vacant",
+     "type": "unknown",
+     "form": null
+    },
+    "681": {
+     "label": "Forest, Improved",
+     "type": "unknown",
+     "form": null
+    },
+    "700": {
+     "label": "Multi-family, Vacant",
+     "type": "vacant",
+     "form": null
+    },
+    "701": {
+     "label": "Multi-family, Improved",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "702": {
+     "label": "Multi-family, Condominium",
+     "type": "residential",
+     "form": "unit"
+    },
+    "707": {
+     "label": "Multi-family, Mobile home parks",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "711": {
+     "label": "Multi-family, Improved",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "717": {
+     "label": "Multi-family, Mobile home parks",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "721": {
+     "label": "Multi-family, Improved",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "722": {
+     "label": "Multi-family, Condominium",
+     "type": "residential",
+     "form": "unit"
+    },
+    "727": {
+     "label": "Multi-family, Mobile home parks",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "731": {
+     "label": "Multi-family, Improved",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "737": {
+     "label": "Multi-family, Mobile home parks",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "781": {
+     "label": "Multi-family, Improved",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "782": {
+     "label": "Multi-family, Condominium",
+     "type": "residential",
+     "form": "unit"
+    },
+    "800": {
+     "label": "Recreation, Vacant",
+     "type": "unknown",
+     "form": null
+    },
+    "801": {
+     "label": "Recreation, Improved",
+     "type": "unknown",
+     "form": null
+    },
+    "9013": {
+     "label": "county code 9013 (not one of OAR 150-308-0310's three-digit classes)",
+     "type": "unknown",
+     "form": null
+    },
+    "9033": {
+     "label": "county code 9033 (not one of OAR 150-308-0310's three-digit classes)",
+     "type": "unknown",
+     "form": null
+    },
+    "999": {
+     "label": "Exempt, Manufactured Structure",
+     "type": "unknown",
+     "form": null
+    }
+   },
+   "source": {
+    "name": "Oregon property class (OAR 150-308-0310) on Multnomah County taxlots",
+    "attachment": "Basic Property Classes",
+    "url": "https://secure.sos.state.or.us/oard/viewAttachment.action?ruleVrsnRsn=252769",
+    "values_read_from": "https://www3.multco.us/gisagspublic/rest/services/DART/Taxlots_Orion_Public/MapServer/0"
+   },
+   "type_rule": "Decoded digit by digit from the rule's table: first digit 1 Residential, 4 Tract (homesite), 7 Multi-family, 2 Commercial, 3 Industrial, others (miscellaneous, farm, forest, recreation, exempt) unknown here; third digit 0 Vacant, 1 Improved, 2 Condominium (a unit), 6 Waterfront, 9 Manufactured Structure. 1-x-1 / 1-x-6 / 1-x-9 / 4-x-1 are a residential lot whose form the class doesn't say; 7-x-x improved is an apartment building. Four-digit county codes are unknown.",
+   "verification": {
+    "status": "verified",
+    "checked_on": "2026-11-17",
+    "method": "Digit meanings from the OAR 150-308-0310 attachment (Oregon Secretary of State); distinct PROPCLASS values read from the taxlot layer by scripts/build_zoning_standards.py",
+    "evidence": "73 values",
+    "unverified_fields": []
+   }
+  },
+  {
+   "id": "mecklenburg_landuse",
+   "counties": [
+    "37119"
+   ],
+   "field": "landuse_description",
+   "codes": {
+    "100 YEAR FLOOD PLAIN - AC": {
+     "label": "100 YEAR FLOOD PLAIN - AC",
+     "type": "non-residential",
+     "form": null
+    },
+    "AGRICULTURAL - COMMERCIAL PRODUCTION": {
+     "label": "AGRICULTURAL - COMMERCIAL PRODUCTION",
+     "type": "non-residential",
+     "form": null
+    },
+    "AIR RIGHTS PARCEL": {
+     "label": "AIR RIGHTS PARCEL",
+     "type": "unknown",
+     "form": null
+    },
+    "AIRPORT": {
+     "label": "AIRPORT",
+     "type": "non-residential",
+     "form": null
+    },
+    "AUTO SALES AND SERVICE": {
+     "label": "AUTO SALES AND SERVICE",
+     "type": "non-residential",
+     "form": null
+    },
+    "BANK": {
+     "label": "BANK",
+     "type": "non-residential",
+     "form": null
+    },
+    "BILL BOARD": {
+     "label": "BILL BOARD",
+     "type": "non-residential",
+     "form": null
+    },
+    "BOWLING ALLEY, SKATING RINK": {
+     "label": "BOWLING ALLEY, SKATING RINK",
+     "type": "non-residential",
+     "form": null
+    },
+    "BREWERY, BOTTLER, CANNERY, WINERY": {
+     "label": "BREWERY, BOTTLER, CANNERY, WINERY",
+     "type": "non-residential",
+     "form": null
+    },
+    "BUFFER STRIP": {
+     "label": "BUFFER STRIP",
+     "type": "non-residential",
+     "form": null
+    },
+    "CAR WASH": {
+     "label": "CAR WASH",
+     "type": "non-residential",
+     "form": null
+    },
+    "CELL TOWER": {
+     "label": "CELL TOWER",
+     "type": "non-residential",
+     "form": null
+    },
+    "CHURCH": {
+     "label": "CHURCH",
+     "type": "non-residential",
+     "form": null
+    },
+    "CLUB, LODGES, UNION HALL, SWIM CLUB": {
+     "label": "CLUB, LODGES, UNION HALL, SWIM CLUB",
+     "type": "non-residential",
+     "form": null
+    },
+    "COLLEGE - PUBLIC": {
+     "label": "COLLEGE - PUBLIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "COMMERCIAL": {
+     "label": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "COMMERCIAL COMMON AREA": {
+     "label": "COMMERCIAL COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "COMMERCIAL CONDOMINIUM": {
+     "label": "COMMERCIAL CONDOMINIUM",
+     "type": "non-residential",
+     "form": null
+    },
+    "COMMERCIAL CONDOMINIUM COMMON AREA": {
+     "label": "COMMERCIAL CONDOMINIUM COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "COMMERCIAL LANDFIL": {
+     "label": "COMMERCIAL LANDFIL",
+     "type": "non-residential",
+     "form": null
+    },
+    "COMMERCIAL SERVICE(LAUNDRY,TV,RADIO,ETC)": {
+     "label": "COMMERCIAL SERVICE(LAUNDRY,TV,RADIO,ETC)",
+     "type": "non-residential",
+     "form": null
+    },
+    "COMMERCIAL WATER FRONTAGE": {
+     "label": "COMMERCIAL WATER FRONTAGE",
+     "type": "non-residential",
+     "form": null
+    },
+    "CONDO AFFORDABLE HOUSING": {
+     "label": "CONDO AFFORDABLE HOUSING",
+     "type": "residential",
+     "form": "unit"
+    },
+    "CONDOMINIUM": {
+     "label": "CONDOMINIUM",
+     "type": "residential",
+     "form": "unit"
+    },
+    "CONDOMINIUM COMMON AREA": {
+     "label": "CONDOMINIUM COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "CONDOMINIUM HIGH RISE": {
+     "label": "CONDOMINIUM HIGH RISE",
+     "type": "residential",
+     "form": "unit"
+    },
+    "CONDOMINIUM WATER FRONTAGE": {
+     "label": "CONDOMINIUM WATER FRONTAGE",
+     "type": "residential",
+     "form": "unit"
+    },
+    "CONSERVATION - AGRICULTURAL COMM": {
+     "label": "CONSERVATION - AGRICULTURAL COMM",
+     "type": "non-residential",
+     "form": null
+    },
+    "CONSERVATION - FORESTRY COMM": {
+     "label": "CONSERVATION - FORESTRY COMM",
+     "type": "non-residential",
+     "form": null
+    },
+    "CONSERVATION - HORTICULTURAL COMM": {
+     "label": "CONSERVATION - HORTICULTURAL COMM",
+     "type": "non-residential",
+     "form": null
+    },
+    "CONSERVATION - WILDLIFE": {
+     "label": "CONSERVATION - WILDLIFE",
+     "type": "non-residential",
+     "form": null
+    },
+    "CONSERVATION - WOODLAND EXCESS AC": {
+     "label": "CONSERVATION - WOODLAND EXCESS AC",
+     "type": "non-residential",
+     "form": null
+    },
+    "CONVENIENCE STORE": {
+     "label": "CONVENIENCE STORE",
+     "type": "non-residential",
+     "form": null
+    },
+    "CONVIENCE/FAST FOOD STORE": {
+     "label": "CONVIENCE/FAST FOOD STORE",
+     "type": "non-residential",
+     "form": null
+    },
+    "COS NO AV10": {
+     "label": "COS NO AV10",
+     "type": "unknown",
+     "form": null
+    },
+    "COUNTRY CLUB": {
+     "label": "COUNTRY CLUB",
+     "type": "non-residential",
+     "form": null
+    },
+    "DAY CARE CENTER": {
+     "label": "DAY CARE CENTER",
+     "type": "non-residential",
+     "form": null
+    },
+    "DEPARTMENT STORE": {
+     "label": "DEPARTMENT STORE",
+     "type": "non-residential",
+     "form": null
+    },
+    "DISPOSAL": {
+     "label": "DISPOSAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "ENVIRONMENTAL HAZARD": {
+     "label": "ENVIRONMENTAL HAZARD",
+     "type": "non-residential",
+     "form": null
+    },
+    "FAST FOOD": {
+     "label": "FAST FOOD",
+     "type": "non-residential",
+     "form": null
+    },
+    "FIRE DEPARTMENT": {
+     "label": "FIRE DEPARTMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "FLUM/SWIM FLOODWAY (NO BUILD ZONE)": {
+     "label": "FLUM/SWIM FLOODWAY (NO BUILD ZONE)",
+     "type": "non-residential",
+     "form": null
+    },
+    "FOREST - COMMERCIAL PRODUCTION": {
+     "label": "FOREST - COMMERCIAL PRODUCTION",
+     "type": "non-residential",
+     "form": null
+    },
+    "FUNERAL (MORTUARY, CEMETERY, CREMATORIUM, MAUS)": {
+     "label": "FUNERAL (MORTUARY, CEMETERY, CREMATORIUM, MAUS)",
+     "type": "non-residential",
+     "form": null
+    },
+    "FURNITURE STORE": {
+     "label": "FURNITURE STORE",
+     "type": "non-residential",
+     "form": null
+    },
+    "GOLF COURSE CLASS 1 - CHAMPIONSHIP": {
+     "label": "GOLF COURSE CLASS 1 - CHAMPIONSHIP",
+     "type": "non-residential",
+     "form": null
+    },
+    "GOLF COURSE CLASS 2 - PRIVATE CLUB": {
+     "label": "GOLF COURSE CLASS 2 - PRIVATE CLUB",
+     "type": "non-residential",
+     "form": null
+    },
+    "GOLF COURSE CLASS 3 - SEMI-PRIVATE & MUNICIPAL": {
+     "label": "GOLF COURSE CLASS 3 - SEMI-PRIVATE & MUNICIPAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "GOLF COURSE CLASS 4 - MINIMUM QUALITY": {
+     "label": "GOLF COURSE CLASS 4 - MINIMUM QUALITY",
+     "type": "non-residential",
+     "form": null
+    },
+    "GREENWAY TRAIL": {
+     "label": "GREENWAY TRAIL",
+     "type": "non-residential",
+     "form": null
+    },
+    "HABITAT FOR HUMANITY": {
+     "label": "HABITAT FOR HUMANITY",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "HEAVY MANUFACTURING": {
+     "label": "HEAVY MANUFACTURING",
+     "type": "non-residential",
+     "form": null
+    },
+    "HOME FOR THE AGED": {
+     "label": "HOME FOR THE AGED",
+     "type": "non-residential",
+     "form": null
+    },
+    "HORTICULTURAL - COMMERCIAL PRODUCTION": {
+     "label": "HORTICULTURAL - COMMERCIAL PRODUCTION",
+     "type": "non-residential",
+     "form": null
+    },
+    "HOSPITAL, PRIVATE": {
+     "label": "HOSPITAL, PRIVATE",
+     "type": "non-residential",
+     "form": null
+    },
+    "HOSPITALS - PUBLIC": {
+     "label": "HOSPITALS - PUBLIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "HOTEL/MOTEL < 7 FLOORS": {
+     "label": "HOTEL/MOTEL < 7 FLOORS",
+     "type": "non-residential",
+     "form": null
+    },
+    "HOTEL/MOTEL > 6 FLOORS": {
+     "label": "HOTEL/MOTEL > 6 FLOORS",
+     "type": "non-residential",
+     "form": null
+    },
+    "INDUSTRIAL": {
+     "label": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "INDUSTRIAL COMMON AREA": {
+     "label": "INDUSTRIAL COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "INDUSTRIAL PARK": {
+     "label": "INDUSTRIAL PARK",
+     "type": "non-residential",
+     "form": null
+    },
+    "INSTITUTIONAL": {
+     "label": "INSTITUTIONAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "ISLAND": {
+     "label": "ISLAND",
+     "type": "non-residential",
+     "form": null
+    },
+    "JAIL": {
+     "label": "JAIL",
+     "type": "non-residential",
+     "form": null
+    },
+    "LABORATORY / RESEARCH": {
+     "label": "LABORATORY / RESEARCH",
+     "type": "non-residential",
+     "form": null
+    },
+    "LEASEHOLD INTEREST": {
+     "label": "LEASEHOLD INTEREST",
+     "type": "unknown",
+     "form": null
+    },
+    "LESS MINERAL RIGHTS (TAXED ELSEWHERE)": {
+     "label": "LESS MINERAL RIGHTS (TAXED ELSEWHERE)",
+     "type": "unknown",
+     "form": null
+    },
+    "LIGHT MANUFACTURING": {
+     "label": "LIGHT MANUFACTURING",
+     "type": "non-residential",
+     "form": null
+    },
+    "LOUNGE, NIGHT CLUB, BAR": {
+     "label": "LOUNGE, NIGHT CLUB, BAR",
+     "type": "non-residential",
+     "form": null
+    },
+    "LUMBER YARD": {
+     "label": "LUMBER YARD",
+     "type": "non-residential",
+     "form": null
+    },
+    "MARINA LAND": {
+     "label": "MARINA LAND",
+     "type": "non-residential",
+     "form": null
+    },
+    "MEDICAL CONDOMINIUM": {
+     "label": "MEDICAL CONDOMINIUM",
+     "type": "non-residential",
+     "form": null
+    },
+    "MEDICAL CONDOMINIUM COMMON AREA": {
+     "label": "MEDICAL CONDOMINIUM COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "MEDICAL OFFICE": {
+     "label": "MEDICAL OFFICE",
+     "type": "non-residential",
+     "form": null
+    },
+    "MINI WAREHOUSE": {
+     "label": "MINI WAREHOUSE",
+     "type": "non-residential",
+     "form": null
+    },
+    "MINIATURE GOLF COURSES/DRIVING RANGE": {
+     "label": "MINIATURE GOLF COURSES/DRIVING RANGE",
+     "type": "non-residential",
+     "form": null
+    },
+    "MINING": {
+     "label": "MINING",
+     "type": "non-residential",
+     "form": null
+    },
+    "MOBILE HOME HS": {
+     "label": "MOBILE HOME HS",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "MOBILE HOME PARK": {
+     "label": "MOBILE HOME PARK",
+     "type": "residential",
+     "form": "attached"
+    },
+    "MOBILE HOME SUBDIVISION": {
+     "label": "MOBILE HOME SUBDIVISION",
+     "type": "residential",
+     "form": "attached"
+    },
+    "MULTI FAMILTY AFFORDABLE HOUSING": {
+     "label": "MULTI FAMILTY AFFORDABLE HOUSING",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "MULTI FAMILY": {
+     "label": "MULTI FAMILY",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "MULTI FAMILY COMMON AREA": {
+     "label": "MULTI FAMILY COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "MULTI FAMILY DUPLEX/TRIPLEX": {
+     "label": "MULTI FAMILY DUPLEX/TRIPLEX",
+     "type": "residential",
+     "form": "small-multi"
+    },
+    "MULTI FAMILY GARDEN": {
+     "label": "MULTI FAMILY GARDEN",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "MULTI FAMILY HIGH RISE": {
+     "label": "MULTI FAMILY HIGH RISE",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "MULTI FAMILY TOWNHOUSE": {
+     "label": "MULTI FAMILY TOWNHOUSE",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "MULTI FAMILY WATER ACCESS": {
+     "label": "MULTI FAMILY WATER ACCESS",
+     "type": "non-residential",
+     "form": null
+    },
+    "MUNICIPAL AIRPORT": {
+     "label": "MUNICIPAL AIRPORT",
+     "type": "non-residential",
+     "form": null
+    },
+    "MUNICIPAL EDUCATION": {
+     "label": "MUNICIPAL EDUCATION",
+     "type": "non-residential",
+     "form": null
+    },
+    "MUNICIPAL HOUSING AUTHORITY": {
+     "label": "MUNICIPAL HOUSING AUTHORITY",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "NEW PARCEL": {
+     "label": "NEW PARCEL",
+     "type": "unknown",
+     "form": null
+    },
+    "NO LAND INTEREST": {
+     "label": "NO LAND INTEREST",
+     "type": "unknown",
+     "form": null
+    },
+    "NURSING HOME": {
+     "label": "NURSING HOME",
+     "type": "non-residential",
+     "form": null
+    },
+    "OFFICE": {
+     "label": "OFFICE",
+     "type": "non-residential",
+     "form": null
+    },
+    "OFFICE CONDOMINIUM": {
+     "label": "OFFICE CONDOMINIUM",
+     "type": "non-residential",
+     "form": null
+    },
+    "OFFICE CONDOMINIUM COMMON AREA": {
+     "label": "OFFICE CONDOMINIUM COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "OFFICE HIGH RISE - > 6 STORIES": {
+     "label": "OFFICE HIGH RISE - > 6 STORIES",
+     "type": "non-residential",
+     "form": null
+    },
+    "OTHER COUNTY PROPERTY": {
+     "label": "OTHER COUNTY PROPERTY",
+     "type": "non-residential",
+     "form": null
+    },
+    "OTHER FEDERAL": {
+     "label": "OTHER FEDERAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "OTHER MUNICIPAL": {
+     "label": "OTHER MUNICIPAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "PACKING PLANT": {
+     "label": "PACKING PLANT",
+     "type": "non-residential",
+     "form": null
+    },
+    "PARKING": {
+     "label": "PARKING",
+     "type": "non-residential",
+     "form": null
+    },
+    "PATIO HOME": {
+     "label": "PATIO HOME",
+     "type": "residential",
+     "form": "attached"
+    },
+    "PATIO HOME - COMMON": {
+     "label": "PATIO HOME - COMMON",
+     "type": "non-residential",
+     "form": null
+    },
+    "PATIO HOME - WATERFRONT": {
+     "label": "PATIO HOME - WATERFRONT",
+     "type": "residential",
+     "form": "attached"
+    },
+    "PETROLEUM AND GAS": {
+     "label": "PETROLEUM AND GAS",
+     "type": "non-residential",
+     "form": null
+    },
+    "PVT Owned RR with Rail ROW": {
+     "label": "PVT Owned RR with Rail ROW",
+     "type": "non-residential",
+     "form": null
+    },
+    "R101": {
+     "label": "R101",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "REC AREA": {
+     "label": "REC AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "RECYCLING": {
+     "label": "RECYCLING",
+     "type": "non-residential",
+     "form": null
+    },
+    "RESERVED PARCEL": {
+     "label": "RESERVED PARCEL",
+     "type": "unknown",
+     "form": null
+    },
+    "RESIDENTIAL AFFORDABLE HOUSING": {
+     "label": "RESIDENTIAL AFFORDABLE HOUSING",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "RESTAURANT": {
+     "label": "RESTAURANT",
+     "type": "non-residential",
+     "form": null
+    },
+    "RETREATS": {
+     "label": "RETREATS",
+     "type": "non-residential",
+     "form": null
+    },
+    "RIGHT OF WAY": {
+     "label": "RIGHT OF WAY",
+     "type": "non-residential",
+     "form": null
+    },
+    "ROADWAY CORRIDOR": {
+     "label": "ROADWAY CORRIDOR",
+     "type": "non-residential",
+     "form": null
+    },
+    "RURAL HOMESITE": {
+     "label": "RURAL HOMESITE",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SCHOOL - PUBLIC": {
+     "label": "SCHOOL - PUBLIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "SCHOOL,COLLEGE, PRIVATE": {
+     "label": "SCHOOL,COLLEGE, PRIVATE",
+     "type": "non-residential",
+     "form": null
+    },
+    "SERVICE GARAGE": {
+     "label": "SERVICE GARAGE",
+     "type": "non-residential",
+     "form": null
+    },
+    "SERVICE STATION": {
+     "label": "SERVICE STATION",
+     "type": "non-residential",
+     "form": null
+    },
+    "SHOPPING CENTER - MALL": {
+     "label": "SHOPPING CENTER - MALL",
+     "type": "non-residential",
+     "form": null
+    },
+    "SHOPPING CENTER - STRIP": {
+     "label": "SHOPPING CENTER - STRIP",
+     "type": "non-residential",
+     "form": null
+    },
+    "SINGLE FAMILY RESIDENTIAL": {
+     "label": "SINGLE FAMILY RESIDENTIAL",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SINGLE FAMILY RESIDENTIAL - ACREAGE": {
+     "label": "SINGLE FAMILY RESIDENTIAL - ACREAGE",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SINGLE FAMILY RESIDENTIAL - COMMON": {
+     "label": "SINGLE FAMILY RESIDENTIAL - COMMON",
+     "type": "non-residential",
+     "form": null
+    },
+    "SINGLE FAMILY RESIDENTIAL - GOLF": {
+     "label": "SINGLE FAMILY RESIDENTIAL - GOLF",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SINGLE FAMILY RESIDENTIAL - RIVER": {
+     "label": "SINGLE FAMILY RESIDENTIAL - RIVER",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SINGLE FAMILY RESIDENTIAL - WATER VIEW": {
+     "label": "SINGLE FAMILY RESIDENTIAL - WATER VIEW",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SINGLE FAMILY RESIDENTIAL - WATERFRONT": {
+     "label": "SINGLE FAMILY RESIDENTIAL - WATERFRONT",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SINGLE FAMILY RESIDENTIAL GATED COMMUNITY": {
+     "label": "SINGLE FAMILY RESIDENTIAL GATED COMMUNITY",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SINGLE FAMILY RESIDENTIAL MINI FARM/ESTATE": {
+     "label": "SINGLE FAMILY RESIDENTIAL MINI FARM/ESTATE",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "STADIUM / ARENA": {
+     "label": "STADIUM / ARENA",
+     "type": "non-residential",
+     "form": null
+    },
+    "STATE PROP": {
+     "label": "STATE PROP",
+     "type": "non-residential",
+     "form": null
+    },
+    "SUBMERGED LAND, RIVERS AND LAKES": {
+     "label": "SUBMERGED LAND, RIVERS AND LAKES",
+     "type": "non-residential",
+     "form": null
+    },
+    "SUPERMARKET": {
+     "label": "SUPERMARKET",
+     "type": "non-residential",
+     "form": null
+    },
+    "THEATRE": {
+     "label": "THEATRE",
+     "type": "non-residential",
+     "form": null
+    },
+    "TOWN HOUSE  GOLF COURSE FRONTAGE": {
+     "label": "TOWN HOUSE GOLF COURSE FRONTAGE",
+     "type": "residential",
+     "form": "attached"
+    },
+    "TOWN HOUSE  SFR": {
+     "label": "TOWN HOUSE SFR",
+     "type": "residential",
+     "form": "attached"
+    },
+    "TOWN HOUSE  WATER ACCESS": {
+     "label": "TOWN HOUSE WATER ACCESS",
+     "type": "non-residential",
+     "form": null
+    },
+    "TOWN HOUSE  WATER FRONTAGE": {
+     "label": "TOWN HOUSE WATER FRONTAGE",
+     "type": "residential",
+     "form": "attached"
+    },
+    "TOWN HOUSE COMMON AREA": {
+     "label": "TOWN HOUSE COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "TOWNHOUSE AFFORDABLE HOUSING": {
+     "label": "TOWNHOUSE AFFORDABLE HOUSING",
+     "type": "residential",
+     "form": "attached"
+    },
+    "TRUCK TERMINAL": {
+     "label": "TRUCK TERMINAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "UNSUITABLE FOR SEPTIC": {
+     "label": "UNSUITABLE FOR SEPTIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "USE VALUE HOMESITE": {
+     "label": "USE VALUE HOMESITE",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "UTILITY (GAS, ELECTRIC, TELEPHONE, TELEGRAPH, RAIL": {
+     "label": "UTILITY (GAS, ELECTRIC, TELEPHONE, TELEGRAPH, RAIL",
+     "type": "non-residential",
+     "form": null
+    },
+    "UTILITY EASEMENT": {
+     "label": "UTILITY EASEMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "UTILITY/P": {
+     "label": "UTILITY/P",
+     "type": "non-residential",
+     "form": null
+    },
+    "WAREHOUSE CONDOMINIUM": {
+     "label": "WAREHOUSE CONDOMINIUM",
+     "type": "non-residential",
+     "form": null
+    },
+    "WAREHOUSE CONDOMINIUM COMMON AREA": {
+     "label": "WAREHOUSE CONDOMINIUM COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "WAREHOUSING": {
+     "label": "WAREHOUSING",
+     "type": "non-residential",
+     "form": null
+    },
+    "WASTELAND, SLIVERS, GULLIES, ROCK OUTCROP": {
+     "label": "WASTELAND, SLIVERS, GULLIES, ROCK OUTCROP",
+     "type": "non-residential",
+     "form": null
+    },
+    "WATER PLANT": {
+     "label": "WATER PLANT",
+     "type": "non-residential",
+     "form": null
+    },
+    "WATER RETENTION POND": {
+     "label": "WATER RETENTION POND",
+     "type": "non-residential",
+     "form": null
+    },
+    "WELL LOT": {
+     "label": "WELL LOT",
+     "type": "non-residential",
+     "form": null
+    },
+    "WETLAND": {
+     "label": "WETLAND",
+     "type": "non-residential",
+     "form": null
+    },
+    "WOODLAND - EXCESS ON AG PCL": {
+     "label": "WOODLAND - EXCESS ON AG PCL",
+     "type": "non-residential",
+     "form": null
+    },
+    "YACHT CLUB": {
+     "label": "YACHT CLUB",
+     "type": "non-residential",
+     "form": null
+    }
+   },
+   "source": {
+    "name": "Mecklenburg County land use on Charlotte's All Parcel Data layer",
+    "url": "https://gis.charlottenc.gov/arcgis/rest/services/PLN/AllParcelData/MapServer/0",
+    "values_read_from": "https://gis.charlottenc.gov/arcgis/rest/services/PLN/AllParcelData/MapServer/0/query (distinct landuse_description)",
+    "caveat": "No code list is published with the layer; the values are the Assessor's own words read from the layer."
+   },
+   "type_rule": "Typed by the description's own words: SINGLE FAMILY RESIDENTIAL (and its variants, RURAL HOMESITE, USE VALUE HOMESITE, HABITAT FOR HUMANITY, RESIDENTIAL AFFORDABLE HOUSING, MOBILE HOME HS, R101) a single-family house; MULTI FAMILY DUPLEX/TRIPLEX small multi-unit; other MULTI FAMILY descriptions and MUNICIPAL HOUSING AUTHORITY an apartment building; CONDOMINIUM descriptions a unit; TOWN HOUSE, TOWNHOUSE, PATIO HOME and mobile home park/subdivision descriptions 'attached' (recorded apart from a detached single-family house, so the detached-house checks aren't run); COMMON AREA, '- COMMON', WATER ACCESS and commercial/medical/office/warehouse condominiums non-residential; placeholder records (NEW PARCEL, RESERVED PARCEL, None, mineral/air/leasehold interests) unknown; everything else non-residential.",
+   "verification": {
+    "status": "verified",
+    "checked_on": "2026-11-17",
+    "method": "Distinct landuse_description values read from the layer by scripts/build_zoning_standards.py and typed by the stated rule",
+    "evidence": "161 descriptions",
+    "unverified_fields": []
+   }
   }
  ]
 }
