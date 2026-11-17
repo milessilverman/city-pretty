@@ -178,6 +178,17 @@
    "crash_years": null
   },
   {
+   "fips": "02110",
+   "name": "Juneau City and Borough",
+   "state": "AK",
+   "block_groups": 21,
+   "bundle_mb": 6.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T02:58:23Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
    "fips": "02170",
    "name": "Matanuska-Susitna Borough",
    "state": "AK",
