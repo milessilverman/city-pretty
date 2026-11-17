@@ -1,5 +1,5 @@
 {
- "ran_on": "2026-11-17T09:15:52.182Z",
+ "ran_on": "2026-11-17T10:02:03.916Z",
  "script": "scripts/live_check_lot_fit.mjs",
  "browser_via_explicit_proxy": false,
  "nyc": [
@@ -2363,59 +2363,59 @@
   {
    "county": "37119",
    "area": "Dilworth / Sedgefield",
-   "lat": 35.196612,
-   "lng": -80.859545,
-   "zone": "N1-B",
-   "map": {
-    "ZoneDes": "N1-B",
-    "Overlay": "none"
-   },
-   "parcel": {
-    "parcelid": "14704132",
-    "location_address": "630 POINDEXTER DR CHARLOTTE NC",
-    "num_heatedarea": 1614
-   },
-   "missing": [],
-   "ok": true,
-   "panel_excerpt": "630 POINDEXTER DR CHARLOTTE NC · AIN/APN 14704132 · SINGLE FAMILY RESIDENTIAL (Mecklenburg County land use on Charlotte's All Parcel Data layer)\n• Zoning district N1-B (Charlotte Unified Development Ordinance) — Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed. \"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6).\" Minimum lot for a residential use: 8,000 sq ft and 60 ft wide (UDO 4.3.B, Table 4-1); \"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.\" Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots (UDO 4.3.B, Table 4-1); on this ~9,822 sq ft lot that is about 4,911 sq ft of building coverage. Minimum setbacks: front 27 ft and corner side 13.5 ft from the right-of-way, side 5 ft, rear 35 ft (UDO 4.3.C, Table 4-2); \"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.\" An alternative front setback for an established blockface (the table's note 2) isn't checked here. Residential height: up to 48 ft (UDO 4.3.D, Table 4-3); \"The sidewall height for all duplex and triplex buildings is limited to 20 feet.\" (UDO 4.3.D.1).\n? Second home (two-family or more) — A duplex or triplex is allowed in N1-B with prescribed conditions (UDO Table 15-1: \"Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC\"), among them: \"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.\" (UDO 15.4.EE.1). A quadraplex is allowed in N1-B only as UDO 15.4.GG.3 says: \"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.\" Whether the lot is on an arterial"
-  },
-  {
-   "county": "37119",
-   "area": "Plaza Midwood / NoDa",
-   "lat": 35.239496,
-   "lng": -80.80629,
+   "lat": 35.199386,
+   "lng": -80.844917,
    "zone": "N1-C",
    "map": {
     "ZoneDes": "N1-C",
     "Overlay": "none"
    },
    "parcel": {
-    "parcelid": "08311215",
-    "location_address": "933 WOODSIDE AV CHARLOTTE NC",
-    "num_heatedarea": 1534
+    "parcelid": "15101519",
+    "location_address": "2002 FLORAL AV CHARLOTTE NC",
+    "num_heatedarea": 3984
    },
    "missing": [],
    "ok": true,
-   "panel_excerpt": "933 WOODSIDE AV CHARLOTTE NC · AIN/APN 08311215 · SINGLE FAMILY RESIDENTIAL (Mecklenburg County land use on Charlotte's All Parcel Data layer)\n• Zoning district N1-C (Charlotte Unified Development Ordinance) — Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed. \"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6).\" Minimum lot for a residential use: 6,000 sq ft and 50 ft wide (UDO 4.3.B, Table 4-1); \"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.\" Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots (UDO 4.3.B, Table 4-1); on this ~9,801 sq ft lot that is about 4,901 sq ft of building coverage. Minimum setbacks: front 17 ft and corner side 10 ft from the right-of-way, side 5 ft, rear 30 ft (UDO 4.3.C, Table 4-2); \"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.\" An alternative front setback for an established blockface (the table's note 2) isn't checked here. Residential height: up to 40 ft (UDO 4.3.D, Table 4-3); \"The sidewall height for all duplex and triplex buildings is limited to 20 feet.\" (UDO 4.3.D.1).\n? Second home (two-family or more) — A duplex or triplex is allowed in N1-C with prescribed conditions (UDO Table 15-1: \"Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC\"), among them: \"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.\" (UDO 15.4.EE.1). A quadraplex is allowed in N1-C only as UDO 15.4.GG.3 says: \"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.\" Whether the lot is on an arterial str"
+   "panel_excerpt": "2002 FLORAL AV CHARLOTTE NC · AIN/APN 15101519 · SINGLE FAMILY RESIDENTIAL (Mecklenburg County land use on Charlotte's All Parcel Data layer)\n• Zoning district N1-C (Charlotte Unified Development Ordinance) — Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed. \"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6).\" Minimum lot for a residential use: 6,000 sq ft and 50 ft wide (UDO 4.3.B, Table 4-1); \"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.\" Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots (UDO 4.3.B, Table 4-1); on this ~13,273 sq ft lot that is about 5,309 sq ft of building coverage. Minimum setbacks: front 17 ft and corner side 10 ft from the right-of-way, side 5 ft, rear 30 ft (UDO 4.3.C, Table 4-2); \"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.\" An alternative front setback for an established blockface (the table's note 2) isn't checked here. Residential height: up to 40 ft (UDO 4.3.D, Table 4-3); \"The sidewall height for all duplex and triplex buildings is limited to 20 feet.\" (UDO 4.3.D.1).\n? Second home (two-family or more) — A duplex or triplex is allowed in N1-C with prescribed conditions (UDO Table 15-1: \"Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC\"), among them: \"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.\" (UDO 15.4.EE.1). A quadraplex is allowed in N1-C only as UDO 15.4.GG.3 says: \"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.\" Whether the lot is on an arterial str"
+  },
+  {
+   "county": "37119",
+   "area": "Plaza Midwood / NoDa",
+   "lat": 35.221432,
+   "lng": -80.793545,
+   "zone": "N1-B",
+   "map": {
+    "ZoneDes": "N1-B",
+    "Overlay": "none"
+   },
+   "parcel": {
+    "parcelid": "09510274",
+    "location_address": " ARNOLD DR CHARLOTTE NC",
+    "num_heatedarea": 0
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "ARNOLD DR CHARLOTTE NC · AIN/APN 09510274 · SINGLE FAMILY RESIDENTIAL (Mecklenburg County land use on Charlotte's All Parcel Data layer)\n• Zoning district N1-B (Charlotte Unified Development Ordinance) — Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed. \"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6).\" Minimum lot for a residential use: 8,000 sq ft and 60 ft wide (UDO 4.3.B, Table 4-1); this lot (about 6,995 sq ft by its parcel outline) is smaller; \"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.\" Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots (UDO 4.3.B, Table 4-1); on this ~6,995 sq ft lot that is about 3,498 sq ft of building coverage. Minimum setbacks: front 27 ft and corner side 13.5 ft from the right-of-way, side 5 ft, rear 35 ft (UDO 4.3.C, Table 4-2); \"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.\" An alternative front setback for an established blockface (the table's note 2) isn't checked here. Residential height: up to 48 ft (UDO 4.3.D, Table 4-3); \"The sidewall height for all duplex and triplex buildings is limited to 20 feet.\" (UDO 4.3.D.1).\n? Second home (two-family or more) — A duplex or triplex is allowed in N1-B with prescribed conditions (UDO Table 15-1: \"Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC\"), among them: \"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.\" (UDO 15.4.EE.1). A quadraplex is allowed in N1-B only as UDO 15.4.GG.3 says: \"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N"
   },
   {
    "county": "37119",
    "area": "West Charlotte (Wesley Heights)",
-   "lat": 35.237789,
-   "lng": -80.86144,
+   "lat": 35.238835,
+   "lng": -80.860924,
    "zone": "N1-D",
    "map": {
     "ZoneDes": "N1-D",
     "Overlay": "none"
    },
    "parcel": {
-    "parcelid": "07101703",
-    "location_address": "207 WALNUT AV CHARLOTTE NC",
-    "num_heatedarea": 1776
+    "parcelid": "07101714",
+    "location_address": "229 AUTEN ST CHARLOTTE NC",
+    "num_heatedarea": 802
    },
    "missing": [],
    "ok": true,
-   "panel_excerpt": "207 WALNUT AV CHARLOTTE NC · AIN/APN 07101703 · SINGLE FAMILY RESIDENTIAL (Mecklenburg County land use on Charlotte's All Parcel Data layer)\n• Zoning district N1-D (Charlotte Unified Development Ordinance) — Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed. \"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6).\" Minimum lot for a residential use: 3,500 sq ft and 40 ft wide (UDO 4.3.B, Table 4-1); \"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.\" Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots (UDO 4.3.B, Table 4-1); on this ~9,224 sq ft lot that is about 4,612 sq ft of building coverage. Minimum setbacks: front 17 ft and corner side 10 ft from the right-of-way, side 5 ft, rear 25 ft (UDO 4.3.C, Table 4-2); \"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.\" An alternative front setback for an established blockface (the table's note 2) isn't checked here. Residential height: up to 40 ft (UDO 4.3.D, Table 4-3); \"The sidewall height for all duplex and triplex buildings is limited to 20 feet.\" (UDO 4.3.D.1).\n? Second home (two-family or more) — A duplex or triplex is allowed in N1-D with prescribed conditions (UDO Table 15-1: \"Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC\"), among them: \"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.\" (UDO 15.4.EE.1). A quadraplex is allowed in N1-D only as UDO 15.4.GG.3 says: \"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.\" Whether the lot is on an arterial stree"
+   "panel_excerpt": "229 AUTEN ST CHARLOTTE NC · AIN/APN 07101714 · SINGLE FAMILY RESIDENTIAL (Mecklenburg County land use on Charlotte's All Parcel Data layer)\n• Zoning district N1-D (Charlotte Unified Development Ordinance) — Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed. \"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6).\" Minimum lot for a residential use: 3,500 sq ft and 40 ft wide (UDO 4.3.B, Table 4-1); \"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.\" Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots (UDO 4.3.B, Table 4-1); on this ~4,968 sq ft lot that is about 2,484 sq ft of building coverage. Minimum setbacks: front 17 ft and corner side 10 ft from the right-of-way, side 5 ft, rear 25 ft (UDO 4.3.C, Table 4-2); \"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.\" An alternative front setback for an established blockface (the table's note 2) isn't checked here. Residential height: up to 40 ft (UDO 4.3.D, Table 4-3); \"The sidewall height for all duplex and triplex buildings is limited to 20 feet.\" (UDO 4.3.D.1).\n? Second home (two-family or more) — A duplex or triplex is allowed in N1-D with prescribed conditions (UDO Table 15-1: \"Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC\"), among them: \"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.\" (UDO 15.4.EE.1). A quadraplex is allowed in N1-D only as UDO 15.4.GG.3 says: \"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.\" Whether the lot is on an arterial street"
   }
  ],
  "clt_outside": {

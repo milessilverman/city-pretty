@@ -1858,3 +1858,24 @@ test("a city ordinance applies only in its city and is never called state law (R
   expect(r.ncList).toContain("City of Raleigh ordinance; applies only in that city");
   expect(errors).toEqual([]);
 });
+
+// The page's roof engine had kept two invented inputs that a 14 Nov fix removed from the tested copy only: a house with
+// no recorded living area or building outline was treated as 1,600 sq ft, and an unknown build year as 1975 (17 Nov 2026).
+test("roof estimate: nothing recorded gives no estimate, and an unknown build year is not assumed", async ({ page }) => {
+  const errors = await openPage(page);
+  const r = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s);
+    const roof = ev("estimateAccurateRoofArea"), pitch = ev("getDefaultPitchRise");
+    const none = roof({ stories: 1, stateCode: "TX" });
+    const withOutline = roof({ footprintSqft: 1800, stories: 1, stateCode: "TX" });
+    return { method: none.estimationMethod, gross: none.grossRoofSqft, outlineGross: withOutline.grossRoofSqft, pitchUnknown: pitch(null, "TX"), pitch1960: pitch(1960, "TX"),
+      recalcNone: (() => { (window as any)._currentRoofParams = { stories: 1, stateCode: "TX" }; return ev("recalculateRoofDrawer")(6, null, null); })() };
+  });
+  expect(r.method).toBe("not_recorded");
+  expect(r.gross).toBe(0);
+  expect(r.outlineGross).toBeGreaterThan(1800);
+  expect(r.pitchUnknown).toBe(5.5);   // not the 1945-78 ranch pitch (4.5) that the invented 1975 year selected
+  expect(r.pitch1960).toBe(4.5);
+  expect(r.recalcNone).toBeNull();
+  expect(errors).toEqual([]);
+});

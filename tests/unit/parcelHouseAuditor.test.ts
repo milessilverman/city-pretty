@@ -41,10 +41,19 @@ describe("Parcel house auditor", () => {
     expect(a.valuation.confidenceRating).not.toMatch(/precision|institutional|high confidence/i);
   });
 
-  it("2b. LA: the generic estimate failed its back-test, so this engine withholds it and says why", () => {
-    const a = auditSingleHouseParcel({ ...BASE, parcelId: "p2b", lotSqft: 6000, livingSqft: 1600, neighborhoodMedianHv: 800000 });
-    expect(a.valuation.estimatedValue).toBeNull();
-    expect(a.valuation.withheldReason).toMatch(/failed its back-test/);
+  // The page withholds the generic estimate through publishValuation (LA shows only its tested model; e2e covers it).
+  // This engine is the page's code (tests/unit/engineCopies.test.ts) and calls that gate whenever the page defines it.
+  // Before 17 Nov 2026 this test checked an LA early return that existed only in the tested copy, not on the page.
+  it("2b. The auditor passes its value through the page's publishValuation gate when one is defined", () => {
+    const g = globalThis as any;
+    g.publishValuation = (v: any, fips: string) => (fips === "06037" ? { ...v, estimatedValue: null, withheldReason: "failed its back-test (test gate)" } : v);
+    try {
+      const a = auditSingleHouseParcel({ ...BASE, parcelId: "p2b", lotSqft: 6000, livingSqft: 1600, neighborhoodMedianHv: 800000 });
+      expect(a.valuation.estimatedValue).toBeNull();
+      expect(a.valuation.withheldReason).toMatch(/failed its back-test/);
+    } finally {
+      delete g.publishValuation;
+    }
   });
 
   it("3. Withholds the value when nothing usable is on file instead of using a state default", () => {

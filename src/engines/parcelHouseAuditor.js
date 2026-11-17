@@ -1,14 +1,17 @@
 "use strict";
-// Mirror of auditSingleHouseParcel in app/app.js. Keep the two in step.
+// Same code as auditSingleHouseParcel in app/app.js (tests/unit/engineCopies.test.ts fails if they differ).
 
+// The same helper names the page defines, so auditSingleHouseParcel below is the page's text exactly (checked by
+// tests/unit/engineCopies.test.ts). In Node there is no publishValuation, so the auditor's value is the raw estimate.
 const _estVal = require("./propertyValuationEngine").estimatePropertyMarketValue;
 const _valVintage = require("./lidarStreetViewValidator").validateParcelImageryVintage;
-const _evalHousing = require("./statutoryZoningEngine").evaluateByRightHousing;
-const _estRoof = require("./roofAreaEngine").estimateAccurateRoofArea;
+const estimateAccurateRoofArea = require("./roofAreaEngine").estimateAccurateRoofArea;
 
 function _defaultStatuteLaws() {
   try { return require("../../app/data/statutes.json"); } catch (e) { return []; }
 }
+// The page's evaluateByRightHousing reads the law table the page loaded; in Node, read app/data/statutes.json.
+const _evalHousing = (parcel, laws) => require("./statutoryZoningEngine").evaluateByRightHousing(parcel, laws || _defaultStatuteLaws());
 
 // Sum of the construction valuations recorded on permits (a recorded fact). Nothing is added to the home value:
 // no sourced rate exists for how much of permitted work shows up in sale prices.
@@ -58,8 +61,7 @@ function auditSingleHouseParcel(input) {
 
   // 1. Value screening estimate (unvalidated; see estimatePropertyMarketValue)
   const saleYear = input.lastSaleDate ? +String(input.lastSaleDate).replace(/\D/g, "").slice(0, 4) || null : null;
-  const baseAvm = _estVal({
-    countyFips: input.countyFips ?? null,
+  let baseAvm = _estVal({
     attributes: {
       Roll_LandValue: input.rollLandValue,
       Roll_ImpValue: input.rollImpValue,
@@ -91,6 +93,14 @@ function auditSingleHouseParcel(input) {
     },
     salesInfo: input.lastSalePrice && saleYear ? { price: input.lastSalePrice, date: input.lastSaleDate || "", year: saleYear } : null,
   });
+  if (typeof publishValuation === "function") {
+    baseAvm = publishValuation(baseAvm, input.countyFips, {
+      neighborhoodHv: input.neighborhoodMedianHv, rollBaseYear: input.rollBaseYear,
+      rollTotal: (+input.rollLandValue || 0) + (+input.rollImpValue || 0),
+      sale: input.lastSalePrice ? { price: input.lastSalePrice, date: input.lastSaleDate || "" } : null,
+      attributes: input.assessorAttributes || null, lot: input.lotSqft || null, bg: input.blockGroupId || null,
+    });
+  }
 
   const permitValuationTotal = calculatePermitCapitalization(input.recentPermits);
   const finalEstimatedValue = baseAvm.estimatedValue;
@@ -144,7 +154,7 @@ function auditSingleHouseParcel(input) {
       population_threshold_ineligible: !!exclusions.population_threshold_ineligible,
     },
   };
-  const statutoryZoning = _evalHousing(parcelCtx, input.statuteLaws || _defaultStatuteLaws());
+  const statutoryZoning = _evalHousing(parcelCtx);
   // A lot split is only flagged where a statute the engine applies actually covers this parcel. (CA SB 9 requires
   // single-family zoning and a resulting lot of at least 1,200 sq ft; 2,400 sq ft is the smallest lot that splits.)
   const splitStatute = (statutoryZoning.applicable_statutes || []).find(s => s.id === "ca_sb9_lot_split");
@@ -162,7 +172,7 @@ function auditSingleHouseParcel(input) {
 
   // 4. Roof area (geometry model; see roof engine assumptions) and solar system size. No dollar outputs: install
   //    cost, utility rates and export credits are not on file from a source, so savings and payback are not shown.
-  const roofCalc = (_estRoof && livingSqft) ? _estRoof({
+  const roofCalc = (typeof estimateAccurateRoofArea === "function" && livingSqft) ? estimateAccurateRoofArea({
     livingSqft,
     stories: input.stories || 1,
     hasGarage: input.hasGarage,
@@ -247,7 +257,7 @@ function auditSingleHouseParcel(input) {
     },
     legalEngineeringDisclaimers: [
       "Screening only, from public records as of November 2026. Not an appraisal, legal opinion or engineering review.",
-      "The value figure is an unvalidated estimate: it has not been tested against recorded sales. Use a licensed appraiser for decisions.",
+      "Unless a back-test result is shown with it, the value figure is an unvalidated estimate that has not been tested against recorded sales. Use a licensed appraiser for decisions.",
       "Housing-law eligibility must be confirmed with the local planning department before design or spending.",
       "Federal homeowner solar credit (IRC § 25D) ended for expenditures after Dec 31, 2025.",
     ],

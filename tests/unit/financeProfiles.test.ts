@@ -12,7 +12,7 @@ const UNSOURCED = ["non_pledgeable_share", "rsmeans_cost_multiplier", "tree_capi
 describe("state finance profiles", () => {
   it("the four fields with no source in any state are gone (data, engine and page)", () => {
     for (const [st, r] of Object.entries(P) as [string, any][]) for (const f of UNSOURCED) expect(r[f], `${st}.${f}`).toBeUndefined();
-    for (const f of ["src/engines/municipalFinanceEngine.ts", "src/engines/municipalFinanceEngine.js", "src/types/index.ts", "app/app.js"]) {
+    for (const f of ["src/engines/municipalFinanceEngine.js", "src/types/index.ts", "app/app.js"]) {
       const code = fs.readFileSync(path.join(root, f), "utf8").replace(/\/\/.*$/gm, "");
       for (const k of UNSOURCED) expect(code.includes(`.${k}`) || code.includes(`${k}:`), `${f} uses ${k}`).toBe(false);
     }
