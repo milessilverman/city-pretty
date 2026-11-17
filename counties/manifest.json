@@ -178,6 +178,17 @@
    "crash_years": null
   },
   {
+   "fips": "02170",
+   "name": "Matanuska-Susitna Borough",
+   "state": "AK",
+   "block_groups": 61,
+   "bundle_mb": 3.5,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T01:25:12Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
    "fips": "04003",
    "name": "Cochise County",
    "state": "AZ",
