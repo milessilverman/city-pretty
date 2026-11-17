@@ -1405,6 +1405,28 @@ test("Anchorage opens with its own data file; missing sources are named, and cra
   expect(errors).toEqual([]);
 });
 
+// A suppressed block-group rent or home value holds the surrounding tract's published median (scripts/build_acs_fallback_flags.py
+// checked every value against the Census files). Before 17 Nov 2026 the page showed a tract rent as the block group's own.
+test("a block group whose Census rent is suppressed shows the tract's median labeled as the tract's (Anchorage, select path)", async ({ page }) => {
+  const errors = await openPage(page);
+  await page.evaluate(() => (0, eval)("openCounty")("02020"));
+  await page.waitForFunction(() => (window as any).D_OC?.meta?.fips === "02020", null, { timeout: 60_000 });
+  await page.waitForFunction(() => { try { return !!(0, eval)("ACS_FALLBACK_FLAGS"); } catch { return false; } }, null, { timeout: 30_000 });
+  const panelOf = async (id: string) => page.evaluate((id) => { (0, eval)("select")(id, false); return (document.querySelector("#panel") as HTMLElement).innerText; }, id);
+  // 020200028221: rent $1,517 is tract 02020002822's (the block group's is -666666666 in acsdt5y2024-b25064); its home value is its own
+  const t = await panelOf("020200028221");
+  expect(t).toMatch(/\$1,517[\s\S]{0,80}tract median; the block group's is suppressed by the Census/);
+  expect(t).not.toMatch(/\$544,700[\s\S]{0,60}tract median/);
+  // 020200002011: both are the block group's own; no tract label
+  const own = await panelOf("020200002011");
+  expect(own).toContain("$3,111");
+  expect(own).not.toContain("tract median; the block group's is suppressed by the Census");
+  // a tract home value is labeled in the valuation note too (the generic estimate is withheld here: no back-test)
+  const note = await page.evaluate(() => (0, eval)("withholdUntested")({}, { neighborhoodHv: 300000, neighborhoodHvTract: true }).withheldReason);
+  expect(note).toContain("The surrounding tract's median home value is $300,000 (Census 2020-2024 ACS 5-year, owner-reported; the block group's is suppressed by the Census)");
+  expect(errors).toEqual([]);
+});
+
 // Found by the Alaska live check (17 Nov 2026): in a county with no parcel service on file, every click said "Public
 // Right-of-Way / Roadway: This point is located within the public street ...", which the page had no way of knowing.
 test("a click in a county with no parcel service says so, and doesn't call the point a right-of-way (Fresno, live click path)", async ({ page }) => {
