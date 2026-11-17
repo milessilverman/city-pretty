@@ -3077,22 +3077,54 @@
    ]
   },
   {
-   "url": "https://opcgis.deq.state.ms.us/opcgis/rest/services/Government/HINDS_PARCELS/MapServer/0",
+   "url": "https://services3.arcgis.com/vv3YkTdKe8qzmf0Z/arcgis/rest/services/Hinds_Service/FeatureServer/1",
    "states": [
     "MS"
    ],
    "counties": [
     "28049"
    ],
-   "name": "Hinds County GIS Parcels",
-   "terms": "https://opcgis.deq.state.ms.us/opcgis/rest/services/Government/HINDS_PARCELS/MapServer/0",
-   "addr": "SITEADD",
-   "apn": "",
+   "name": "Hinds County parcels (county parcel viewer's layer, Atlas Geodata)",
+   "terms": "https://www.arcgis.com/home/item.html?id=d409b11173134140981e5394319f629d",
+   "addr": "",
+   "apn": "PARCEL_F",
    "max": 1000,
    "fields": [
     [
-     "SITEADD",
-     "Site Address"
+     "PARCEL_F",
+     "Parcel ID"
+    ],
+    [
+     "loc_num",
+     "House Number"
+    ],
+    [
+     "loc_ns",
+     "Direction"
+    ],
+    [
+     "loc_alpha",
+     "Street"
+    ],
+    [
+     "acres_gis",
+     "Acres (GIS)"
+    ],
+    [
+     "tv_land",
+     "True Value, Land"
+    ],
+    [
+     "tv_imp",
+     "True Value, Improvements"
+    ],
+    [
+     "lv_land_desc1",
+     "Land Type"
+    ],
+    [
+     "bm_year",
+     "Year Built"
     ]
    ]
   },
@@ -3710,22 +3742,46 @@
    ]
   },
   {
-   "url": "https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/6",
+   "url": "https://utility.arcgis.com/usrsvcs/servers/cc1241646f84404185571113c1233665/rest/services/Parcel/CERT_TAX_PARCELS/FeatureServer/0",
    "states": [
     "TN"
    ],
    "counties": [
     "47157"
    ],
-   "name": "Shelby County GIS Parcels",
-   "terms": "Service-specific reuse license: not found. Comptroller website disallows bulk/recurring automated downloads; scope of that policy for this county service is unresolved. Q-TN-DOWNLOAD",
-   "addr": "",
+   "name": "Shelby County certified tax parcels (City of Memphis GIS)",
+   "terms": "https://www.arcgis.com/home/item.html?id=cc1241646f84404185571113c1233665",
+   "addr": "PAR_ADDR1",
    "apn": "PARCELID",
-   "max": 1000,
+   "max": 2000,
    "fields": [
     [
      "PARCELID",
      "Parcel ID"
+    ],
+    [
+     "PAR_ADDR1",
+     "Site Address"
+    ],
+    [
+     "LANDUSE",
+     "Land Use"
+    ],
+    [
+     "ZONING",
+     "Zoning"
+    ],
+    [
+     "MUNI",
+     "Municipality"
+    ],
+    [
+     "LIVUNIT",
+     "Living Units"
+    ],
+    [
+     "TAXYR",
+     "Tax Year"
     ]
    ]
   },
@@ -3779,7 +3835,7 @@
    ],
    "name": "Knox County GIS Parcels",
    "terms": "Service-specific reuse license: not found. Comptroller website disallows bulk/recurring automated downloads; scope of that policy for this county service is unresolved. Q-TN-DOWNLOAD",
-   "addr": "LOC_HOUSE_NUMBER + LOC_STREET_NAME",
+   "addr": "",
    "apn": "PARCELID_1",
    "max": 1000,
    "fields": [
@@ -3788,28 +3844,56 @@
      "Parcel ID"
     ],
     [
-     "LOC_HOUSE_NUMBER + LOC_STREET_NAME",
-     "Site Address"
+     "LOC_HOUSE_NUMBER",
+     "House Number"
+    ],
+    [
+     "LOC_STREET_NAME",
+     "Street"
+    ],
+    [
+     "LANDUSE",
+     "Land Use"
     ]
    ]
   },
   {
-   "url": "https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/2",
+   "url": "https://services2.arcgis.com/cclAu9OKhOfjeUdr/arcgis/rest/services/Parcels_ZoneAugust2026/FeatureServer/0",
    "states": [
     "TN"
    ],
    "counties": [
     "47065"
    ],
-   "name": "Hamilton County GIS Parcels",
-   "terms": "Service-specific reuse license: not found. Comptroller website disallows bulk/recurring automated downloads; scope of that policy for this county service is unresolved. Q-TN-DOWNLOAD",
-   "addr": "",
+   "name": "Hamilton County parcels, August 2026 (Chattanooga-Hamilton County Regional Planning Agency)",
+   "terms": "https://www.arcgis.com/home/item.html?id=84204e58446e43e9a406fbd28c2ca95c",
+   "addr": "ADDRESS",
    "apn": "GISLINK",
-   "max": 1000,
+   "max": 2000,
    "fields": [
     [
      "GISLINK",
      "Parcel ID"
+    ],
+    [
+     "ADDRESS",
+     "Site Address"
+    ],
+    [
+     "LUCODE",
+     "Land Use Code"
+    ],
+    [
+     "PROPTYPE",
+     "Property Type Code"
+    ],
+    [
+     "APPVALUE",
+     "Appraised Value"
+    ],
+    [
+     "ZONE",
+     "Zoning (RPA join, Aug 2026)"
     ]
    ]
   },

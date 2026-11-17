@@ -1432,3 +1432,33 @@ test("a click in a county with no parcel service says so, and doesn't call the p
   expect(t).not.toMatch(/Right-of-Way/);
   expect(errors).toEqual([]);
 });
+
+// Parcel services round 3 (17 Nov 2026): Shelby and Hamilton moved off the TN Comptroller's server (rate-limited, 403) to
+// the City of Memphis certified tax parcels and the Regional Planning Agency's parcels; Hinds MS off MDEQ's dead server to
+// the layer behind the county's own parcel viewer. Knox stays on the state server, but its field list named one field as
+// "LOC_HOUSE_NUMBER + LOC_STREET_NAME", which made every Knox query fail; the address is now built from the two fields.
+test("parcel services round 3: TN and Hinds entries point at working layers, and split address fields are joined", async ({ page }) => {
+  const errors = await openPage(page);
+  const r = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s);
+    const svc = (f: string) => ev("parcelSvc")(f);
+    const norm = ev("normalizeParcelFeature");
+    const knoxSvc = svc("47093"), hindsSvc = svc("28049");
+    const knox = norm({ attributes: { PARCELID_1: "109AL006", LOC_HOUSE_NUMBER: 140.0, LOC_STREET_NAME: "HAWTHORNE AVE", LANDUSE: "364: REPAIR" }, geometry: null }, { lat: 35.9519, lng: -83.9166 }, knoxSvc).attributes;
+    const hinds = norm({ attributes: { PARCEL_F: "179-1", loc_num: "  815", loc_ns: null, loc_alpha: "IRBY DR                 " }, geometry: null }, { lat: 32.2898, lng: -90.1839 }, hindsSvc).attributes;
+    return {
+      shelby: svc("47157").url, hamilton: svc("47065").url, hinds: hindsSvc.url,
+      knoxFields: knoxSvc.fields.map((f: any) => f[0]), knoxAddr: knox.SitusFullAddress, knoxAin: knox.AIN,
+      hindsAddr: hinds.SitusFullAddress, hindsAin: hinds.AIN,
+    };
+  });
+  expect(r.shelby).toContain("CERT_TAX_PARCELS");
+  expect(r.hamilton).toContain("Parcels_ZoneAugust2026");
+  expect(r.hinds).toContain("Hinds_Service/FeatureServer/1");
+  expect(r.knoxFields.every((f: string) => /^[A-Z0-9_]+$/.test(f))).toBe(true);
+  expect(r.knoxAddr).toBe("140 HAWTHORNE AVE");
+  expect(r.knoxAin).toBe("109AL006");
+  expect(r.hindsAddr).toBe("815 IRBY DR");
+  expect(r.hindsAin).toBe("179-1");
+  expect(errors).toEqual([]);
+});

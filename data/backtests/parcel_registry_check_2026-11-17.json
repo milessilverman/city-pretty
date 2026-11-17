@@ -1,9 +1,9 @@
 {
- "ran_on": "2026-11-17T04:21:16.025Z",
+ "ran_on": "2026-11-17T04:29:07.671Z",
  "script": "scripts/check_parcel_registry.mjs",
  "counts": {
-  "ok": 121,
-  "unreachable": 2
+  "ok": 122,
+  "unreachable": 1
  },
  "services": [
   {
@@ -202,38 +202,10 @@
    "status": "ok"
   },
   {
-   "url": "https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/2",
-   "name": "Hamilton County GIS Parcels",
-   "counties": [
-    "47065"
-   ],
-   "states": [
-    "TN"
-   ],
-   "layer_name": "Hamilton",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
-  },
-  {
    "url": "https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/3",
    "name": "Knox County GIS Parcels",
    "counties": [
     "47093"
-   ],
-   "states": [
-    "TN"
-   ],
-   "layer_name": "Knox",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
-  },
-  {
-   "url": "https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/6",
-   "name": "Shelby County GIS Parcels",
-   "counties": [
-    "47157"
    ],
    "states": [
     "TN"
@@ -646,20 +618,6 @@
   },
   {
    "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
-   "name": "Grafton County GIS Parcels",
-   "counties": [
-    "33009"
-   ],
-   "states": [
-    "NH"
-   ],
-   "layer_name": "Parcels",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
-  },
-  {
-   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
    "name": "Strafford County GIS Parcels",
    "counties": [
     "33017"
@@ -691,6 +649,20 @@
    "name": "Merrimack County GIS Parcels",
    "counties": [
     "33013"
+   ],
+   "states": [
+    "NH"
+   ],
+   "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
+   "name": "Grafton County GIS Parcels",
+   "counties": [
+    "33009"
    ],
    "states": [
     "NH"
@@ -973,18 +945,6 @@
    "geometry": "esriGeometryPolygon",
    "missing_fields": [],
    "status": "ok"
-  },
-  {
-   "url": "https://opcgis.deq.state.ms.us/opcgis/rest/services/Government/HINDS_PARCELS/MapServer/0",
-   "name": "Hinds County GIS Parcels",
-   "counties": [
-    "28049"
-   ],
-   "states": [
-    "MS"
-   ],
-   "status": "unreachable",
-   "detail": "HTTP 500"
   },
   {
    "url": "https://pappgispub1.co.washington.or.us/server/rest/services/baselayers/Taxlots_SP/MapServer/0",
@@ -1318,6 +1278,20 @@
    "status": "ok"
   },
   {
+   "url": "https://services2.arcgis.com/cclAu9OKhOfjeUdr/arcgis/rest/services/Parcels_ZoneAugust2026/FeatureServer/0",
+   "name": "Hamilton County parcels, August 2026 (Chattanooga-Hamilton County Regional Planning Agency)",
+   "counties": [
+    "47065"
+   ],
+   "states": [
+    "TN"
+   ],
+   "layer_name": "ParcelsAugust2026_ZONE",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
    "url": "https://services2.arcgis.com/Ce3DhLRthdwbHlfF/arcgis/rest/services/PropertyInformation_Hosted/FeatureServer/0",
    "name": "Municipality of Anchorage Property Information",
    "counties": [
@@ -1458,6 +1432,20 @@
     "GA"
    ],
    "layer_name": "Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://services3.arcgis.com/vv3YkTdKe8qzmf0Z/arcgis/rest/services/Hinds_Service/FeatureServer/1",
+   "name": "Hinds County parcels (county parcel viewer's layer, Atlas Geodata)",
+   "counties": [
+    "28049"
+   ],
+   "states": [
+    "MS"
+   ],
+   "layer_name": "parcelpolys_current",
    "geometry": "esriGeometryPolygon",
    "missing_fields": [],
    "status": "ok"
@@ -1612,6 +1600,20 @@
     "12"
    ],
    "layer_name": "CADASTRAL_DOR",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
+  },
+  {
+   "url": "https://utility.arcgis.com/usrsvcs/servers/cc1241646f84404185571113c1233665/rest/services/Parcel/CERT_TAX_PARCELS/FeatureServer/0",
+   "name": "Shelby County certified tax parcels (City of Memphis GIS)",
+   "counties": [
+    "47157"
+   ],
+   "states": [
+    "TN"
+   ],
+   "layer_name": "CERT TAX PARCELS",
    "geometry": "esriGeometryPolygon",
    "missing_fields": [],
    "status": "ok"
