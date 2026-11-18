@@ -19,7 +19,7 @@ const BASE_EXCLUSIONS: ParcelContext["exclusions"] = {
 };
 
 describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
-  it("1. Enforces Texas SB 840 population-threshold gating (>150k city in >300k county)", () => {
+  it("1. Texas SB 840: population gate applies, and a partly checked law is 'not determined', never allowed", () => {
     const houstonCommercial: ParcelContext = {
       parcel_id: "48201-001",
       state_code: "TX",
@@ -46,13 +46,18 @@ describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
     const houstonRes = evaluateByRightHousing(houstonCommercial);
     const smallRes = evaluateByRightHousing(smallTxCityCommercial);
 
-    expect(houstonRes.net_by_right_feasible).toBe(true);
-    expect(houstonRes.applicable_statutes[0].citation).toContain("TX SB 840");
+    // tx_sb840 is "partly" in statutes.json, so it is reported as not determined, not as a right.
+    expect(houstonRes.net_by_right_feasible).toBe(false);
+    expect(houstonRes.applicable_statutes).toEqual([]);
+    expect(houstonRes.not_determined_statutes.map((s) => s.id)).toContain("tx_sb840");
+    expect(houstonRes.statutory_exclusions.population_threshold_ineligible).toBe(false);
+
     expect(smallRes.net_by_right_feasible).toBe(false);
     expect(smallRes.statutory_exclusions.population_threshold_ineligible).toBe(true);
+    expect(smallRes.not_determined_statutes.map((s) => s.id)).not.toContain("tx_sb840");
   });
 
-  it("2. Blocks Florida Live Local 4.0 preemption in Everglades/airport zones and applies § 196.1979 exemption", () => {
+  it("2. Florida Live Local: excluded in Everglades zones; elsewhere 'not determined' (record partly checked), no tax exemption asserted", () => {
     const evergladesParcel: ParcelContext = {
       parcel_id: "12086-001",
       state_code: "FL",
@@ -72,13 +77,19 @@ describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
       exclusions: { ...BASE_EXCLUSIONS },
     };
 
-    expect(evaluateByRightHousing(evergladesParcel).net_by_right_feasible).toBe(false);
+    const glades = evaluateByRightHousing(evergladesParcel);
+    expect(glades.net_by_right_feasible).toBe(false);
+    expect(glades.not_determined_statutes).toEqual([]);
+
     const miamiRes = evaluateByRightHousing(eligibleMiamiParcel);
-    expect(miamiRes.net_by_right_feasible).toBe(true);
-    expect(miamiRes.applicable_statutes[0].tax_exemption_pct).toBe(0.75);
+    expect(miamiRes.net_by_right_feasible).toBe(false);
+    expect(miamiRes.applicable_statutes).toEqual([]);
+    const fl = miamiRes.not_determined_statutes.find((s) => s.id === "fl_live_local");
+    expect(fl).toBeTruthy();
+    expect(fl!.citation).toContain("166.04151(7)");
   });
 
-  it("3. Applies California SB 79 (July 2026) rail tiers unless excluded by HPOZ or VHFHSZ", () => {
+  it("3. California SB 79 near rail is 'not determined' (partly checked); SB 9 (verified) applies to single-family zones unless HPOZ", () => {
     const laTransitParcel: ParcelContext = {
       parcel_id: "06037-5001",
       state_code: "CA",
@@ -94,15 +105,33 @@ describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
     };
 
     const res = evaluateByRightHousing(laTransitParcel);
-    expect(res.net_by_right_feasible).toBe(true);
-    expect(res.applicable_statutes[0].max_height_ft).toBe(75);
-    expect(res.applicable_statutes[0].max_units_by_right).toBe(120);
+    expect(res.net_by_right_feasible).toBe(false);
+    expect(res.applicable_statutes).toEqual([]);
+    expect(res.not_determined_statutes.map((s) => s.id)).toEqual(["ca_sb79_tier1"]);
+
+    const tier2 = evaluateByRightHousing({ ...laTransitParcel, dist_to_heavy_rail_mi: 0.4 });
+    expect(tier2.not_determined_statutes.map((s) => s.id)).toEqual(["ca_sb79_tier2"]);
 
     const hpozBlocked = evaluateByRightHousing({
       ...laTransitParcel,
       exclusions: { ...BASE_EXCLUSIONS, historic_district_hpoz: true },
     });
     expect(hpozBlocked.net_by_right_feasible).toBe(false);
+    expect(hpozBlocked.not_determined_statutes).toEqual([]);
+
+    const sfr = evaluateByRightHousing({
+      ...laTransitParcel,
+      base_zoning_code: "R1-1",
+      is_commercial_or_mixed_use: false,
+      is_single_family_residential: true,
+      dist_to_heavy_rail_mi: 2,
+      dist_to_frequent_bus_or_brt_mi: 2,
+    });
+    expect(sfr.net_by_right_feasible).toBe(true);
+    expect(sfr.applicable_statutes[0].citation).toContain("SB 9");
+    expect(sfr.applicable_statutes[0].max_units_by_right).toBe(4);
+    expect(sfr.applicable_statutes[0].max_height_ft).toBeNull();
+    expect(sfr.applicable_statutes[0].min_parking_spaces_per_unit).toBe(1);
   });
 
   it("4. Produces distinct, legally valid bond capacities across CA Prop 13, OR Measure 50, LA Homestead, and TX TIRZ", () => {

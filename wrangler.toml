@@ -3,12 +3,18 @@ main = "workers/api-proxy.ts"
 compatibility_date = "2026-11-08"
 
 # Secrets (never in this file):
-#   wrangler secret put ANTHROPIC_API_KEY   # the AI advisor (finish askAdvisorModel in workers/api-proxy.ts first)
+#   wrangler secret put ANTHROPIC_API_KEY   # the AI advisor (see docs/AI-ADVISOR-SETUP.md)
 #   wrangler secret put GOOGLE_MAPS_KEY     # Street View photos
 # After deploying, put the Worker's URL in app/config.js (workerUrl).
 
 [vars]
 ENVIRONMENT = "production"
+# The model the advisor uses. Leave unset for the default in workers/api-proxy.ts (claude-opus-5-5).
+# ADVISOR_MODEL = "claude-opus-5-5"
+# Reasoning depth: low | medium | high | xhigh | max (default medium).
+# ADVISOR_EFFORT = "medium"
+# Where the advisor's read-only tools fetch the site's data tables (static JSON, public).
+SITE_DATA_BASE = "https://milessilverman.github.io/city-pretty/app/data/"
 
 # Per-visitor limits. Approximate and counted per Cloudflare location; period must be 10 or 60 seconds.
 # namespace_id is any positive integer unique within your Cloudflare account.

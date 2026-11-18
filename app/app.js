@@ -11,7 +11,9 @@ const CP_DATA_FILES = {
   "state-finance-profiles": "state_finance_profiles.json", "unit-costs": "unit_costs.json", "hud-fmr": "hud_fair_market_rents.json",
   "valuation-benchmarks": "valuation_backtest_benchmarks.json", "underused-sites": "underused_sites.json",
   "intercity-corridors": "intercity_transit_corridors.json", "county-completeness": "county_completeness.json",
-  "ca-counties-registry": "ca_counties_registry.json"
+  "ca-counties-registry": "ca_counties_registry.json",
+  "neighborhood-score-backtest": "neighborhood_score_backtest.json", "transit-cost-benchmarks": "transit_cost_benchmarks.json",
+  "transit-value-effects": "transit_value_effects.json"
 };
 const _cpData = {};
 function cpText(id) {
@@ -269,31 +271,38 @@ if (typeof module !== "undefined" && module.exports) {
 
 
 /**
- * Statutory Zoning Engine (ES6 / Browser & Node compatible)
- * Multi-state statutory housing laws:
- * - California SB 79 (Effective July 1, 2026), AB 2097, SB 9, Gov. Code § 66314
- * - Texas SB 840 (Commercial/Office-to-Multifamily) & SB 15 population gating (>150k pop in >300k county)
- * - Florida Live Local Act 4.0 (July 2026 statutory exclusions + Fla. Stat. § 196.1979)
- * - Washington HB 1110 / HB 1337 / SB 5184
- * - Oregon HB 2001 (inside UGB)
- * - Arizona HB 2720 / HB 2721 (cities > 75k)
+ * Statutory Zoning Engine (inline copy of src/engines/statutoryZoningEngine.js).
+ * Behaviour is identical to the src engine; the only difference is that each law's verification.status is read
+ * from app/data/statutes.json (STATE_HOUSING_LAWS_DATA, loaded by loadVerifiedDataFiles) instead of a typed table.
+ * A law whose record is not "verified" (or not loaded yet) is never returned as allowed; it goes to
+ * not_determined_statutes. tests/unit/guards.test.ts runs this block and the src engine on the same inputs.
  */
-
-const CA_SB79_ELIGIBLE_COUNTIES = new Set([
-  "06037", // Los Angeles
-  "06059", // Orange
-  "06073", // San Diego
-  "06075", // San Francisco
-  "06001", // Alameda
-  "06013", // Contra Costa
-  "06081", // San Mateo
-  "06085", // Santa Clara
-  "06067", // Sacramento
-]);
-
+// BEGIN INLINE STATUTORY ENGINE
+function statuteRecord(id) {
+  return (Array.isArray(STATE_HOUSING_LAWS_DATA) ? STATE_HOUSING_LAWS_DATA : []).find(r => r && r.id === id) || null;
+}
+function statuteStatus(id) {
+  const r = statuteRecord(id);
+  return (r && r.verification && r.verification.status) || "unverified";
+}
 function evaluateByRightHousing(parcel) {
   const statutes = [];
+  const notDetermined = [];
   const ex = Object.assign({}, parcel.exclusions);
+
+  // Adds the statute only if its record is verified; otherwise reports "not determined".
+  const consider = (id, citation, payload, reason) => {
+    const status = statuteStatus(id);
+    if (status === "verified" && payload) {
+      statutes.push(payload);
+    } else {
+      notDetermined.push({
+        id,
+        citation,
+        reason: reason || `law record is "${status || "unverified"}" in statutes.json; not treated as allowed`,
+      });
+    }
+  };
 
   // Rule 1 & Item 10: Never infer by-right rights from a missing, unzoned, or unknown zoning code.
   if (!parcel.base_zoning_code || /^(unzoned|unknown|missing|none|n\/a)$/i.test(String(parcel.base_zoning_code).trim())) {
@@ -304,6 +313,7 @@ function evaluateByRightHousing(parcel) {
       applicable_statutes: [],
       statutory_exclusions: ex,
       net_by_right_feasible: false,
+      not_determined_statutes: [],
     };
   }
 
@@ -315,50 +325,33 @@ function evaluateByRightHousing(parcel) {
     ex.everglades_or_wekiva_or_trpa;
 
   if (!hasHardPhysicalExclusion) {
-    // CALIFORNIA (SB 79 [2026], AB 2097, SB 9, Gov. Code § 66314)
+    // CALIFORNIA
     if (parcel.state_code === "CA") {
-      if (
-        CA_SB79_ELIGIBLE_COUNTIES.has(parcel.county_fips) &&
-        parcel.dist_to_heavy_rail_mi !== null &&
-        parcel.dist_to_heavy_rail_mi <= 0.25 &&
-        !ex.historic_district_hpoz &&
-        !ex.coastal_commission_or_sma
-      ) {
-        statutes.push({
-          citation: "CA SB 79 (Effective July 1, 2026) — Tier 1 Heavy Rail",
-          max_units_by_right: 120,
-          max_height_ft: 75,
-          max_far: 3.5,
-          min_parking_spaces_per_unit: 0,
-          affordability_mandate_pct: 0.1,
-          tax_exemption_pct: 0,
-        });
-      } else if (
-        CA_SB79_ELIGIBLE_COUNTIES.has(parcel.county_fips) &&
-        parcel.dist_to_heavy_rail_mi !== null &&
-        parcel.dist_to_heavy_rail_mi <= 0.5 &&
-        !ex.historic_district_hpoz &&
-        !ex.coastal_commission_or_sma
-      ) {
-        statutes.push({
-          citation: "CA SB 79 (Effective July 1, 2026) — Tier 2 Heavy Rail",
-          max_units_by_right: 100,
-          max_height_ft: 65,
-          max_far: 3.0,
-          min_parking_spaces_per_unit: 0,
-          affordability_mandate_pct: 0.1,
-          tax_exemption_pct: 0,
-        });
+      // SB 79 (Gov. Code 65912.155 et seq., Stats. 2025 ch. 512). Eligibility is "urban transit county"
+      // (more than 15 passenger rail stations) + station tier, which this context cannot establish, so the
+      // record is "partly" and the result is "not determined". Thresholds are density/height FLOORS
+      // (units per acre), not a unit cap: Tier 1 within 1/4 mi = 75 ft / 120 du/ac / FAR 3.5; Tier 1 from
+      // 1/4 to 1/2 mi in cities of 35,000+ = 65 ft / 100 du/ac / FAR 3.0.
+      if (parcel.dist_to_heavy_rail_mi !== null && parcel.dist_to_heavy_rail_mi <= 0.5 && !ex.historic_district_hpoz) {
+        const tier1 = parcel.dist_to_heavy_rail_mi <= 0.25;
+        consider(
+          tier1 ? "ca_sb79_tier1" : "ca_sb79_tier2",
+          tier1 ? "CA SB 79 (Gov. Code 65912.157) - Tier 1 stop within 1/4 mile" : "CA SB 79 (Gov. Code 65912.157) - Tier 1 stop 1/4-1/2 mile",
+          null,
+          "SB 79 eligibility (urban transit county, stop tier, city size) cannot be determined from parcel context"
+        );
       }
 
+      // SB 9 (Gov. Code 65852.21, 66411.7): up to two units per parcel and an urban lot split => 4 units.
+      // No state height limit. Parking: up to 1 space per unit, none within 1/2 mi walking distance of
+      // a high-quality transit corridor / major transit stop (straight-line distance is only a proxy).
       if (parcel.is_single_family_residential && !ex.historic_district_hpoz) {
         const nearTransit =
-          (parcel.dist_to_heavy_rail_mi !== null && parcel.dist_to_heavy_rail_mi <= 0.5) ||
-          (parcel.dist_to_frequent_bus_or_brt_mi !== null && parcel.dist_to_frequent_bus_or_brt_mi <= 0.5);
-        statutes.push({
-          citation: "CA SB 9 + Gov. Code § 66314 (Lot Split + ADU/JADU)",
+          (parcel.dist_to_heavy_rail_mi == null ? 99 : parcel.dist_to_heavy_rail_mi) <= 0.5 || (parcel.dist_to_frequent_bus_or_brt_mi == null ? 99 : parcel.dist_to_frequent_bus_or_brt_mi) <= 0.5;
+        consider("ca_sb9_lot_split", "CA SB 9 (Gov. Code 65852.21 + 66411.7 lot split)", {
+          citation: "CA SB 9 (Gov. Code 65852.21 + 66411.7 lot split)",
           max_units_by_right: 4,
-          max_height_ft: 25,
+          max_height_ft: null,
           max_far: null,
           min_parking_spaces_per_unit: nearTransit ? 0 : 1,
           affordability_mandate_pct: 0,
@@ -367,90 +360,68 @@ function evaluateByRightHousing(parcel) {
       }
     }
 
-    // TEXAS (SB 840 Commercial-to-Residential + SB 15 Small-Lot Gating)
+    // TEXAS: SB 840 (Loc. Gov't Code ch. 218) and SB 15 (ch. 211 subch. D), both effective 2025-09-01.
     if (parcel.state_code === "TX") {
-      const meetsPopulationGate = parcel.municipality_pop > 150000 && parcel.county_pop > 300000;
-      if (meetsPopulationGate && parcel.is_commercial_or_mixed_use && !ex.airport_noise_or_runway_zone) {
-        statutes.push({
-          citation: "TX SB 840 (By-Right Commercial/Office-to-Multifamily)",
-          max_units_by_right: 999,
-          max_height_ft: null,
-          max_far: null,
-          min_parking_spaces_per_unit: 1.0,
-          affordability_mandate_pct: 0,
-          tax_exemption_pct: 0,
-        });
+      const meetsPopulationGate = (parcel.municipality_pop == null ? 0 : parcel.municipality_pop) > 150000 && (parcel.county_pop == null ? 0 : parcel.county_pop) > 300000;
+      if (meetsPopulationGate && parcel.is_commercial_or_mixed_use) {
+        consider("tx_sb840", "TX SB 840 (Loc. Gov't Code ch. 218)", null,
+          "SB 840 exclusions (heavy industrial within 1,000 ft, airport/military within 3,000 ft) and density floor (36 du/ac) are not computable from parcel context");
       } else if (!meetsPopulationGate) {
         ex.population_threshold_ineligible = true;
       }
     }
 
-    // FLORIDA (Live Local Act 4.0 — July 2026 Statutory Exclusions + § 196.1979)
-    if (parcel.state_code === "FL") {
-      if (
-        parcel.is_commercial_or_mixed_use &&
-        !ex.airport_noise_or_runway_zone &&
-        !ex.everglades_or_wekiva_or_trpa
-      ) {
-        const nearTransit = parcel.dist_to_heavy_rail_mi !== null && parcel.dist_to_heavy_rail_mi <= 0.5;
-        statutes.push({
-          citation: "FL Live Local Act 4.0 (Fla. Stat. § 166.04151 + § 196.1979)",
-          max_units_by_right: 999,
+    // FLORIDA: Live Local (Fla. Stat. 166.04151(7)); record is "partly".
+    if (parcel.state_code === "FL" && parcel.is_commercial_or_mixed_use) {
+      consider("fl_live_local", "FL Live Local Act (Fla. Stat. 166.04151(7))", null,
+        "Live Local eligibility depends on affordability commitment and local density/height floors not in parcel context");
+    }
+
+    // WASHINGTON: HB 1110 (RCW 36.70A.635). Cities under 25,000 only qualify inside the contiguous UGA of the
+    // largest city of a county over 275,000, which this context cannot establish.
+    if (parcel.state_code === "WA" && parcel.is_single_family_residential) {
+      const pop = parcel.municipality_pop;
+      const nearTransit =
+        (parcel.dist_to_heavy_rail_mi == null ? 99 : parcel.dist_to_heavy_rail_mi) <= 0.25 || (parcel.dist_to_frequent_bus_or_brt_mi == null ? 99 : parcel.dist_to_frequent_bus_or_brt_mi) <= 0.25;
+      if (pop == null || pop < 25000) {
+        consider("wa_hb1110", "WA HB 1110 (RCW 36.70A.635)", null,
+          "City under 25,000 (or unknown population): applies only within the contiguous UGA of the largest city in a county over 275,000");
+      } else {
+        const units = pop >= 75000 ? (nearTransit ? 6 : 4) : nearTransit ? 4 : 2;
+        consider("wa_hb1110", "WA HB 1110 (RCW 36.70A.635)", {
+          citation: "WA HB 1110 (RCW 36.70A.635; near-transit = 1/4 mile, straight-line proxy for walking distance)",
+          max_units_by_right: units,
           max_height_ft: null,
           max_far: null,
-          min_parking_spaces_per_unit: nearTransit ? 0.5 : 1.0,
-          affordability_mandate_pct: 0.4,
-          tax_exemption_pct: 0.75,
-        });
-      }
-    }
-
-    // WASHINGTON (HB 1110 Middle Housing + HB 1337 ADUs + SB 5184 Parking Cap)
-    if (parcel.state_code === "WA" && parcel.is_single_family_residential) {
-      const nearTransit =
-        (parcel.dist_to_heavy_rail_mi !== null && parcel.dist_to_heavy_rail_mi <= 0.25) ||
-        (parcel.dist_to_frequent_bus_or_brt_mi !== null && parcel.dist_to_frequent_bus_or_brt_mi <= 0.25);
-      const units =
-        parcel.municipality_pop > 75000 ? (nearTransit ? 6 : 4) :
-        parcel.municipality_pop >= 25000 ? (nearTransit ? 4 : 2) : 2;
-      statutes.push({
-        citation: "WA HB 1110 + HB 1337 + SB 5184 (2025 Parking Reform)",
-        max_units_by_right: units,
-        max_height_ft: 35,
-        max_far: null,
-        min_parking_spaces_per_unit: nearTransit ? 0 : 0.5,
-        affordability_mandate_pct: nearTransit && units === 6 ? 0.17 : 0,
-        tax_exemption_pct: 0,
-      });
-    }
-
-    // OREGON (HB 2001 Middle Housing inside Urban Growth Boundary)
-    if (parcel.state_code === "OR" && parcel.is_single_family_residential) {
-      const units = parcel.municipality_pop > 25000 ? 4 : parcel.municipality_pop > 10000 ? 2 : 1;
-      if (units > 1) {
-        statutes.push({
-          citation: "OR HB 2001 (Middle Housing inside UGB)",
-          max_units_by_right: units,
-          max_height_ft: 35,
-          max_far: null,
-          min_parking_spaces_per_unit: 0,
+          // No parking required within 1/2 mile walking of a major transit stop; otherwise capped at 1 (lots < 6,000 sq ft) or 2 per unit.
+          min_parking_spaces_per_unit: null,
           affordability_mandate_pct: 0,
           tax_exemption_pct: 0,
         });
       }
     }
 
-    // ARIZONA (HB 2720 ADUs + HB 2721 Middle Housing in cities > 75k)
-    if (parcel.state_code === "AZ" && parcel.municipality_pop > 75000 && parcel.is_single_family_residential) {
-      statutes.push({
-        citation: "AZ HB 2720 + HB 2721 (By-Right ADUs & 2-4 Unit Middle Housing)",
-        max_units_by_right: 4,
-        max_height_ft: 30,
-        max_far: null,
-        min_parking_spaces_per_unit: 1.0,
-        affordability_mandate_pct: 0,
-        tax_exemption_pct: 0,
-      });
+    // OREGON: HB 2001 as codified at ORS 197A.420 (cities 25,000+ all middle housing; non-Metro cities 2,500-25,000 duplex).
+    if (parcel.state_code === "OR" && parcel.is_single_family_residential) {
+      const pop = parcel.municipality_pop == null ? 0 : parcel.municipality_pop;
+      const units = pop >= 25000 ? 4 : pop >= 2500 ? 2 : 1;
+      if (units > 1) {
+        consider("or_hb2001", "OR HB 2001 (ORS 197A.420, inside UGB)", {
+          citation: "OR HB 2001 (ORS 197A.420, inside UGB)",
+          max_units_by_right: units,
+          max_height_ft: null,
+          max_far: null,
+          min_parking_spaces_per_unit: null,
+          affordability_mandate_pct: 0,
+          tax_exemption_pct: 0,
+        });
+      }
+    }
+
+    // ARIZONA: A.R.S. 9-461.18 (ADUs, municipalities over 75,000); record is "partly".
+    if (parcel.state_code === "AZ" && (parcel.municipality_pop == null ? 0 : parcel.municipality_pop) > 75000 && parcel.is_single_family_residential) {
+      consider("az_hb2720_2721", "AZ A.R.S. 9-461.18 (ADUs)", null,
+        "Enacting bill, effective date and airport-noise exclusions not confirmed");
     }
   }
 
@@ -461,11 +432,13 @@ function evaluateByRightHousing(parcel) {
     applicable_statutes: statutes,
     statutory_exclusions: ex,
     net_by_right_feasible: statutes.length > 0 && !hasHardPhysicalExclusion,
+    not_determined_statutes: notDetermined,
   };
 }
+// END INLINE STATUTORY ENGINE
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { evaluateByRightHousing, CA_SB79_ELIGIBLE_COUNTIES };
+  module.exports = { evaluateByRightHousing };
 }
 
 /**
@@ -1590,22 +1563,27 @@ function auditSingleHouseParcel(input) {
   };
 
   const statutoryZoning = _evalHousing(parcelCtx);
-  const lotSplitFeasible = hasZoning && (lotSqft != null && lotSqft >= 4800) && !exclusions.fema_100yr_floodway && !exclusions.historic_district_hpoz;
+  // SB 9 urban lot split (Gov. Code 66411.7, record ca_sb9_lot_split): each new parcel at least 1,200 sq ft and neither
+  // smaller than 40% of the original, so the original lot must be at least 2,400 sq ft (unless a local ordinance sets a
+  // smaller minimum). California only, single-family zones only. SB 9 bars the whole FEMA 100-year flood hazard area;
+  // the fema_100yr_floodway flag here is narrower, so a clear flag does not prove the lot is outside that area.
+  const SB9_MIN_RESULTING_LOT_SQFT = 1200;
+  const lotSplitFeasible = stCode === "CA" && hasZoning && isSfr && (lotSqft != null && lotSqft >= 2 * SB9_MIN_RESULTING_LOT_SQFT) && !exclusions.fema_100yr_floodway && !exclusions.historic_district_hpoz && !exclusions.calfire_or_state_vhfhsz;
   const aduFeasible = hasZoning && (!exclusions.historic_district_hpoz || stCode === "CA");
 
   let statutoryNotes = "";
   if (!hasZoning) {
     statutoryNotes = "Zoning is not on file for this parcel; by-right housing rights and ministerial lot splits cannot be determined without verified local zoning.";
   } else if (stCode === "CA") {
-    statutoryNotes = "California: SB 9 ministerial lot split (≥4,800 sq ft) and SB 684/SB 79 transit housing eligibility. HPOZ and floodway restrictions apply deterministically.";
+    statutoryNotes = "California: SB 9 (Gov. Code 65852.21, 66411.7) allows a ministerial urban lot split when each new lot is at least 1,200 sq ft and neither is under 40% of the original lot. SB 79 transit-area rules are not determined here (the law record is only partly checked). The flood check here uses the FEMA floodway flag, which is narrower than SB 9's bar on the whole 100-year flood hazard area: check the FEMA flood map before relying on a lot split.";
   } else if (stCode === "TX") {
     statutoryNotes = statutoryZoning.statutory_exclusions.population_threshold_ineligible
-      ? "Texas SB 840 & SB 15 gated: Municipality <150k or County <300k population requires discretionary municipal approval."
-      : "Texas SB 840 / SB 15 active: By-right commercial conversion and small-lot subdivisions eligible.";
+      ? "Texas SB 840 does not apply here: it needs a city over 150,000 people in a county over 300,000 (or the populations are not on file)."
+      : "Texas SB 840 (Loc. Gov't Code ch. 218) may allow housing on commercial or mixed-use zoning in this city; not determined (the law record is only partly checked). SB 15 small lots apply only to unplatted tracts of 5 acres or more, not to existing lots.";
   } else if (stCode === "FL") {
-    statutoryNotes = "Florida Live Local Act 4.0: Preempts local height/density on commercial sites; mandatory 75%–100% property tax exemption under Fla. Stat. § 196.1979.";
+    statutoryNotes = "Florida Live Local Act (Fla. Stat. 166.04151(7)) may allow multifamily on commercial, industrial or mixed-use zoning if at least 40% of rental units stay affordable for 30 years; not determined (the law record is only partly checked). The related property tax exemption is Fla. Stat. 196.1978(3).";
   } else {
-    statutoryNotes = "Governed by statewide middle housing statutes (e.g. WA HB 1110, OR HB 2001, AZ HB 2720, CO HB 24-1152) and local zoning codes.";
+    statutoryNotes = "State middle-housing laws (such as WA HB 1110 and OR HB 2001) are applied only where the law record has been checked against the statute; other state rules are not determined here. Local zoning governs.";
   }
 
   // 4. Accurate Roof Cadastre & 2026 Solar Microgrid Calculator
@@ -1773,6 +1751,7 @@ function auditSingleHouseParcel(input) {
       applicable_statutes: statutoryZoning.applicable_statutes,
       statutory_exclusions: statutoryZoning.statutory_exclusions,
       net_by_right_feasible: statutoryZoning.net_by_right_feasible,
+      not_determined_statutes: statutoryZoning.not_determined_statutes || [],
       privateCovenantsDisclaimer: "NOTICE ON PRIVATE COVENANTS: State zoning preemptions (e.g., CA SB 9, TX SB 15, WA HB 1110) override municipal zoning but may not automatically extinguish recorded private Homeowners Association (HOA) covenants or CC&Rs running with the land. Check title report for private encumbrances.",
       lotSplitFeasible,
       aduFeasible,
@@ -2115,7 +2094,7 @@ function renderHouseAuditAside(audit) {
 
   const badgeText =
     im.confidenceBadge === "verified_current"
-      ? "✓ Verified Current Imagery"
+      ? "✓ Imagery newer than the last permit"
       : im.confidenceBadge === "stale_imagery_permit_override"
       ? "Stale Imagery (Post-Construction Permit Override)"
       : "No Street View (Rural / Cul-de-sac / Gated)";
@@ -2173,15 +2152,16 @@ function renderHouseAuditAside(audit) {
       <div style="font-size:11.5px;font-weight:700;color:#334155;margin-bottom:4px;">Statutory By-Right Housing Rights &amp; Exclusions</div>
       <div style="font-size:11px;color:#475569;margin-bottom:6px;">
         ${z.applicable_statutes && z.applicable_statutes.length > 0 ? `
-          <div style="color:#15803d;font-weight:700;margin-bottom:4px;">✓ Statutory Preemption Active: ${z.applicable_statutes.map(s => s.citation).join(", ")}</div>
-          • <b>By-Right Density:</b> Up to ${z.applicable_statutes[0].max_units_by_right} units ministerially.<br>
+          <div style="color:#15803d;font-weight:700;margin-bottom:4px;">✓ State law that applies (checked against the statute): ${z.applicable_statutes.map(s => s.citation).join(", ")}</div>
+          • <b>By-Right Density:</b> ${z.applicable_statutes[0].max_units_by_right != null ? `Up to ${z.applicable_statutes[0].max_units_by_right} units ministerially.` : "Not on file."}<br>
           • <b>Height &amp; FAR:</b> ${z.applicable_statutes[0].max_height_ft ? `${z.applicable_statutes[0].max_height_ft} ft` : "Base zoning"} ${z.applicable_statutes[0].max_far ? `&middot; ${z.applicable_statutes[0].max_far} FAR` : ""}<br>
-          • <b>Mandatory Parking:</b> ${z.applicable_statutes[0].min_parking_spaces_per_unit} spaces/unit.<br>
-          ${z.applicable_statutes[0].tax_exemption_pct > 0 ? `• <b>Ad Valorem Exemption:</b> ${(z.applicable_statutes[0].tax_exemption_pct * 100).toFixed(0)}% under Fla. Stat. § 196.1979.<br>` : ""}
+          • <b>Parking:</b> ${z.applicable_statutes[0].min_parking_spaces_per_unit != null ? `at most ${z.applicable_statutes[0].min_parking_spaces_per_unit} spaces/unit may be required.` : "not set by this law (local rules apply)."}<br>
+          <div style="color:#334155;margin-top:4px;">${z.statutoryNotes}</div>
         ` : `
           <div style="color:#334155;">${z.statutoryNotes}</div>
         `}
-        • <b>Lot Split Feasibility:</b> ${z.lotSplitFeasible ? "<span style='color:#15803d;font-weight:700;'>Feasible (≥4,800 sq ft, unencumbered)</span>" : "<span style='color:#64748b;'>Ineligible (lot size or floodway/HPOZ exclusion)</span>"}<br>
+        ${(z.not_determined_statutes || []).length ? `<div style="color:#b45309;margin:4px 0;">• <b>Not determined:</b> ${z.not_determined_statutes.map(s => `${s.citation} (${s.reason})`).join("; ")}</div>` : ""}
+        • <b>Lot Split Feasibility:</b> ${z.lotSplitFeasible ? "<span style='color:#15803d;font-weight:700;'>Possible under SB 9 (lot of 2,400+ sq ft so each new lot is at least 1,200 sq ft; no HPOZ, fire-zone or floodway flag)</span>" : "<span style='color:#64748b;'>Not shown as possible (California SB 9 only; lot size, zoning or an HPOZ, fire-zone or floodway flag)</span>"}<br>
         • <b>ADU Feasibility:</b> ${z.aduFeasible ? "<span style='color:#15803d;font-weight:700;'>By-Right Feasible</span>" : "<span style='color:#b45309;'>Discretionary HPOZ review required</span>"}
       </div>
       <div style="font-size:10.5px;color:#64748b;background:#ffffff;padding:6px;border-radius:4px;border:1px solid #e2e8f0;">
@@ -2210,6 +2190,7 @@ function renderHouseAuditAside(audit) {
         <span style="font-size:11.5px;font-weight:700;color:#334155;">2026+ Rooftop Solar &amp; Battery Storage</span>
         <span style="font-size:10.5px;font-weight:700;color:#b45309;">Federal § 25D Credit: 0% (Expired Dec 2025)</span>
       </div>
+      <div style="font-size:10.5px;font-weight:700;color:#b45309;margin-top:2px;">Illustrative only: inputs are assumptions, not local data (install cost per watt, yield, power rates and battery cost are typed-in state defaults).</div>
       <div style="font-size:11px;color:#475569;margin-top:4px;">
         • <b>LiDAR Usable Roof:</b> ${fmtN(sol.unshadedRoofSqft)} sq ft unshaded DSM &middot; Sized at <b>${sol.dcKwCapacity} kW DC</b> (~${fmtN(sol.annualYieldKwh)} kWh/yr)<br>
         • <b>Cash/Loan Option:</b> ${fmt$(sol.netSystemCostCashUsd)} net cost &middot; Payback: ~${sol.paybackYearsCash} yrs &middot; 25-Yr Equity: ${fmt$(sol.net_25yr_npv_usd)}<br>
@@ -2245,7 +2226,7 @@ function renderHouseAuditAside(audit) {
     ${audit.everySpace ? `
     <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
       <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;">
-        <span style="font-size:11.5px;font-weight:700;color:#334155;">EverySpace Holding Monetization</span>
+        <span style="font-size:11.5px;font-weight:700;color:#334155;">EverySpace Holding Monetization <span style="font-weight:700;color:#b45309;">(Illustrative only: inputs are assumptions, not local data)</span></span>
         <span style="font-size:11px;font-weight:700;color:${audit.everySpace.isCashFlowPositiveDuringHold ? '#15803d' : '#0284c7'};">
           ${audit.everySpace.isCashFlowPositiveDuringHold ? '✓ Cash Flow Positive Hold' : `${audit.everySpace.monthlyHoldingDeficitReductionPct}% Deficit Offset`}
         </span>
@@ -2266,7 +2247,7 @@ function renderHouseAuditAside(audit) {
     <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
       <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;">
         <span style="font-size:11.5px;font-weight:700;color:#334155;">Homeowner Renovation &amp; Quote Evaluator</span>
-        <span style="font-size:10.5px;font-weight:700;color:#15803d;">Statutory By-Right Verified</span>
+        <span style="font-size:10.5px;font-weight:700;color:#b45309;">Illustrative only: inputs are assumptions, not local data</span>
       </div>
       <div style="font-size:11px;color:#475569;margin-top:4px;">
         ${audit.renovationOptions.map(r => `
@@ -2290,7 +2271,7 @@ function renderHouseAuditAside(audit) {
 
     <!-- 7. Legal & Engineering Disclaimers -->
     <div style="border-top:1px solid #e2e8f0;padding-top:8px;font-size:10px;color:#64748b;line-height:1.4;">
-      <b>Institutional Disclaimers:</b><br>
+      <b>Disclaimers:</b><br>
       ${audit.legalEngineeringDisclaimers.map(d => `• ${d}`).join("<br>")}
     </div>
   </div>
@@ -5197,6 +5178,7 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
   const countyFips = (typeof activeFips === "function" ? activeFips() : "06037");
 
   const strategies = [];
+  let playbookStatEval = null;
 
   // Multi-State Statutory By-Right Housing Evaluation (CA SB 79, TX SB 840/15, FL Live Local 4.0, WA HB 1110, OR HB 2001, AZ HB 2720)
   if (typeof evaluateByRightHousing === "function") {
@@ -5232,146 +5214,39 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
         }
       };
       const statEval = evaluateByRightHousing(parcelCtx);
-      if (statEval && statEval.applicable_statutes && statEval.applicable_statutes.length > 0) {
-        // California SB 79 (July 1, 2026) Heavy Rail Infill
-        const sb79 = statEval.applicable_statutes.find(s => s.citation.includes("CA SB 79"));
-        if (sb79) {
-          const isTier1 = sb79.citation.includes("Tier 1");
-          const netEq = Math.round(lotSqft * (isTier1 ? 210 : 165));
-          strategies.push({
-            id: "ca_sb79_transit",
-            badge: isTier1 ? "CA SB 79 TIER 1 HEAVY RAIL (JULY 2026)" : "CA SB 79 TIER 2 TRANSIT",
-            title: `CA SB 79 Transit By-Right Density (${sb79.max_height_ft} ft / ${sb79.max_units_by_right} Units)`,
-            equity: netEq,
-            roi: 3.85,
-            cost: 160000,
-            annualCashflow: Math.round(sb79.max_units_by_right * 1950 * 12 * 0.12),
-            paybackYrs: "Instant",
-            statute: sb79.citation + " — 0 Parking Mandate + 10% On-Site Affordability",
-            rationale: `Located within ${(nearestStn.distMi * 5280).toFixed(0)} ft of ${nearestStn.name} heavy rail in ${countyFips}. Qualifies by-right for ${sb79.max_height_ft} ft building height, ${sb79.max_units_by_right} units/acre, and complete parking elimination by right under CA SB 79 (effective July 1, 2026).`,
-            steps: [
-              "Commission an architectural feasibility study meeting California SB 79 statutory standards.",
-              "Deed-restrict 10% of total dwelling units as affordable housing to qualify for 0 parking requirement.",
-              "Submit ministerial building permit application under 60-day administrative review timeline (exempt from CEQA)."
-            ]
-          });
-        }
-
-        // Texas SB 840 Commercial Conversion
-        const txStat = statEval.applicable_statutes.find(s => s.citation.includes("TX SB 840"));
-        if (txStat) {
-          const netEq = Math.round(lotSqft * 95);
-          strategies.push({
-            id: "tx_sb840_commercial",
-            badge: "TX SB 840 COMMERCIAL CONVERSION",
-            title: "By-Right Commercial/Office-to-Multifamily Redevelopment",
-            equity: netEq,
-            roi: 2.95,
-            cost: 85000,
-            annualCashflow: Math.round(lotSqft * 9.5),
-            paybackYrs: "1.2",
-            statute: "TX SB 840 — Commercial-to-Multifamily Conversion By-Right (Cities >150k in Counties >300k)",
-            rationale: `Qualifies under Texas SB 840 population safe-harbor thresholds for ministerial adaptive-reuse conversion from commercial/office to multifamily residential without discretionary zoning commission approval.`,
-            steps: [
-              "Verify municipal population (>150,000) and county population (>300,000) statutory safe-harbor qualification.",
-              "File administrative adaptive-reuse architectural plans with municipal building department.",
-              "Commence interior multifamily conversion under standard commercial building code."
-            ]
-          });
-        }
-
-        // Florida Live Local Act 4.0 + 75% Tax Abatement
-        const flStat = statEval.applicable_statutes.find(s => s.citation.includes("FL Live Local Act"));
-        if (flStat) {
-          const netEq = Math.round(lotSqft * 115);
-          strategies.push({
-            id: "fl_live_local",
-            badge: "FL LIVE LOCAL ACT 4.0 + 75% TAX ABATEMENT",
-            title: "By-Right Multifamily Infill with Fla. Stat. § 196.1979 Exemption",
-            equity: netEq,
-            roi: 3.35,
-            cost: 95000,
-            annualCashflow: Math.round(lotSqft * 11.0),
-            paybackYrs: "Instant",
-            statute: "FL Live Local Act 4.0 (Fla. Stat. § 166.04151 + Fla. Stat. § 196.1979 75% Property Tax Exemption)",
-            rationale: `Qualifying Florida commercial/mixed parcel unlocks administrative by-right multifamily height matching the tallest commercial zone within 1 mile, with statutory 75% property tax abatement under Fla. Stat. § 196.1979.`,
-            steps: [
-              "Confirm parcel exclusions (outside airport noise contours, Everglades/Wekiva protection areas, and working waterfronts).",
-              "Prepare site plan matching the maximum permitted commercial height within 1 mile (subject to single-family step-downs).",
-              "Apply with county property appraiser for statutory 75% ad valorem property tax exemption under Fla. Stat. § 196.1979."
-            ]
-          });
-        }
-
-        // Washington HB 1110 Middle Housing
-        const waStat = statEval.applicable_statutes.find(s => s.citation.includes("WA HB 1110"));
-        if (waStat) {
-          const netEq = Math.round(lotSqft * 75);
-          strategies.push({
-            id: "wa_middle_housing",
-            badge: "WA HB 1110 MIDDLE HOUSING",
-            title: `By-Right ${waStat.max_units_by_right}-Unit Middle Housing & ADU Infill`,
-            equity: netEq,
-            roi: 2.65,
-            cost: 65000,
-            annualCashflow: Math.round(waStat.max_units_by_right * 1400 * 12 * 0.20),
-            paybackYrs: "Instant",
-            statute: "WA HB 1110 + HB 1337 + SB 5184 (2025-2026 Parking Mandate Caps)",
-            rationale: `Under Washington HB 1110, this residential lot permits up to ${waStat.max_units_by_right} units by-right with statutory parking minimum caps under SB 5184.`,
-            steps: [
-              "Select duplex, triplex, or courtyard apartment architectural design.",
-              "Submit ministerial building permit application under HB 1110 middle-housing standards.",
-              "Utilize SB 5184 parking exemptions to eliminate garage construction costs."
-            ]
-          });
-        }
-
-        // Oregon HB 2001 Middle Housing
-        const orStat = statEval.applicable_statutes.find(s => s.citation.includes("OR HB 2001"));
-        if (orStat) {
-          const netEq = Math.round(lotSqft * 68);
-          strategies.push({
-            id: "or_middle_housing",
-            badge: "OR HB 2001 MIDDLE HOUSING",
-            title: `By-Right ${orStat.max_units_by_right}-Unit Missing Middle Infill`,
-            equity: netEq,
-            roi: 2.50,
-            cost: 58000,
-            annualCashflow: Math.round(orStat.max_units_by_right * 1350 * 12 * 0.18),
-            paybackYrs: "Instant",
-            statute: "OR HB 2001 — Middle Housing Preemption inside Urban Growth Boundary",
-            rationale: `Qualifies under Oregon HB 2001 inside the Urban Growth Boundary for ministerial construction of up to ${orStat.max_units_by_right} residential units.`,
-            steps: [
-              "Confirm parcel is within designated Urban Growth Boundary (UGB).",
-              "Submit middle housing building plans meeting state model code.",
-              "Obtain ministerial building permits without discretionary zoning variances."
-            ]
-          });
-        }
-
-        // Arizona HB 2720/2721 Middle Housing
-        const azStat = statEval.applicable_statutes.find(s => s.citation.includes("AZ HB 2720"));
-        if (azStat) {
-          const netEq = Math.round(lotSqft * 58);
-          strategies.push({
-            id: "az_middle_housing",
-            badge: "AZ HB 2720/2721 ADU & DUPLEX",
-            title: "By-Right Backyard Casita (ADU) & Middle Housing Conversion",
-            equity: netEq,
-            roi: 2.35,
-            cost: 52000,
-            annualCashflow: Math.round(1500 * 12),
-            paybackYrs: "3.2",
-            statute: "AZ HB 2720 & HB 2721 — By-Right ADUs & Middle Housing in Cities >75,000",
-            rationale: `Qualifies under Arizona 2024–2026 enactments (HB 2720/2721) for administrative by-right accessory dwelling unit and duplex construction in qualifying municipalities.`,
-            steps: [
-              "Verify municipality population exceeds 75,000 safe-harbor threshold.",
-              "Submit standard plans for detached casita / secondary dwelling unit.",
-              "Obtain administrative permit without conditional use permit hearings."
-            ]
-          });
-        }
-      }
+      playbookStatEval = statEval;
+      // Only laws whose record in statutes.json is "verified" come back as applicable; the rest are listed as
+      // "not determined" (shown under the playbook card), never as a right. Dollar figures below rest on typed-in
+      // per-sq-ft and rent assumptions, so each strategy carries assumptions[] and illustrative: true.
+      (statEval && statEval.applicable_statutes || []).forEach(s => {
+        const isWa = s.citation.includes("WA HB 1110"), isOr = s.citation.includes("OR HB 2001");
+        if (!isWa && !isOr) return;   // SB 9 is handled by the lot-split strategy below
+        const perSqft = isWa ? 75 : 68, cost = isWa ? 65000 : 58000;
+        strategies.push({
+          id: isWa ? "wa_middle_housing" : "or_middle_housing",
+          badge: isWa ? "WA HB 1110 MIDDLE HOUSING" : "OR HB 2001 MIDDLE HOUSING",
+          title: `By-Right ${s.max_units_by_right}-Unit Middle Housing`,
+          equity: lotSqft ? Math.round(lotSqft * perSqft) : null,
+          roi: null,
+          cost,
+          annualCashflow: null,
+          paybackYrs: null,
+          statute: s.citation,
+          rationale: isWa
+            ? `Under Washington HB 1110 (RCW 36.70A.635, checked against the statute) a lot in a city of this size must allow at least ${s.max_units_by_right} units. Parking: none within 1/2 mile walking distance of a major transit stop, otherwise at most 1 per unit on lots under 6,000 sq ft and 2 on larger lots.`
+            : `Under Oregon HB 2001 (ORS 197A.420, checked against the statute) a residential lot inside the urban growth boundary of a city of this size must allow ${s.max_units_by_right >= 4 ? "all middle housing types (duplex to quadplex, cottage clusters, townhouses)" : "a duplex"}.`,
+          steps: [
+            isOr ? "Confirm the parcel is inside the urban growth boundary." : "Confirm the city's population and whether a major transit stop is within 1/4 mile walking distance.",
+            "Check the city's middle-housing code for setbacks, lot coverage and design standards.",
+            "Get two or three builder quotes before relying on the cost shown here."
+          ],
+          illustrative: true,
+          assumptions: [
+            { name: "added value per sq ft of lot", value: perSqft, assumed: true },
+            { name: "soft cost of plans and permits", value: cost, assumed: true }
+          ]
+        });
+      });
     } catch(errStat) {
       console.warn("Statutory housing playbook evaluation error:", errStat);
     }

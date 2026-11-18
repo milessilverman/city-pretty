@@ -60,6 +60,7 @@
     <div class="view-switch" id="view-switch" role="group" aria-label="How to explore">
       <button type="button" class="active" data-view="map" aria-pressed="true" title="Map: color-coded neighborhoods you can click"><svg class="ic" aria-hidden="true"><use href="#i-map"/></svg><span>Map</span></button>
       <button type="button" data-view="explore" aria-pressed="false" title="Explore: browse ideas and neighborhood stories, no map needed"><svg class="ic" aria-hidden="true"><use href="#i-compass"/></svg><span>Explore</span></button>
+      <button type="button" data-view="invest" aria-pressed="false" title="Invest: where to invest, what to build, which sites, transit, and how much the ranking can be trusted"><svg class="ic" aria-hidden="true"><use href="#i-trend"/></svg><span>Invest</span></button>
     </div>
     <div class="search">
       <label for="q" class="sr-only">Find a neighborhood, city or street address</label>
@@ -148,12 +149,14 @@
         <button type="button" class="tool-btn fun" onclick="hideWelcome(); surpriseMe()"><svg class="ic" aria-hidden="true"><use href="#i-dice"/></svg><span>Surprise me</span></button>
         <button type="button" class="tool-btn" onclick="hideWelcome()">Start with the map</button>
         <button type="button" class="tool-btn" data-view="explore" onclick="hideWelcome()"><svg class="ic" aria-hidden="true"><use href="#i-compass"/></svg><span>Not a map person? Explore</span></button>
+        <button type="button" class="tool-btn" data-view="invest" onclick="hideWelcome()"><svg class="ic" aria-hidden="true"><use href="#i-trend"/></svg><span>Looking to invest? Open the brief</span></button>
       </div>
     </div><div class="legend" id="legend"></div><div id="loading">Unpacking map data…</div>
     <div class="lots-note" id="lots-note" role="status" aria-live="polite" hidden><span class="spin"></span><div>Loading property lines from LA County… <button type="button" id="lots-hood">See the neighborhood meanwhile</button></div></div></div>
   <aside class="panel" id="panel" aria-live="polite"><p class="empty">Loading…</p></aside>
 </div>
 <section class="explore gutter" id="explore" aria-label="Explore ideas and neighborhoods"></section>
+<section class="invest gutter" id="invest" aria-label="Investment brief"></section>
 <main class="report gutter" id="report"></main>
 
 <!-- Platform Accuracy & AI Backbone Modal -->
@@ -1251,6 +1254,8 @@
 <script src="app/config.js"></script>
 <script src="app/app.js"></script>
 <script src="app/explore.js"></script>
+<script src="src/engines/investmentDecisionEngine.js"></script>
+<script src="app/invest.js"></script>
 
 <!-- EXECUTIVE PROPERTY & INVESTMENT PROSPECTUS MODAL -->
 <div class="overlay-modal" id="prospectus-modal" hidden>

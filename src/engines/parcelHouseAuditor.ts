@@ -351,22 +351,27 @@ export function auditSingleHouseParcel(input: HouseParcelAuditInput): HouseParce
   };
 
   const statutoryZoning = evaluateByRightHousing(parcelCtx);
-  const lotSplitFeasible = hasZoning && (lotSqft != null && lotSqft >= 4800) && !exclusions.fema_100yr_floodway && !exclusions.historic_district_hpoz;
+  // SB 9 urban lot split (Gov. Code 66411.7, record ca_sb9_lot_split): each new parcel at least 1,200 sq ft and neither
+  // smaller than 40% of the original, so the original lot must be at least 2,400 sq ft (unless a local ordinance sets a
+  // smaller minimum). California only, single-family zones only. SB 9 bars the whole FEMA 100-year flood hazard area;
+  // the fema_100yr_floodway flag here is narrower, so a clear flag does not prove the lot is outside that area.
+  const SB9_MIN_RESULTING_LOT_SQFT = 1200;
+  const lotSplitFeasible = stCode === "CA" && hasZoning && isSfr && (lotSqft != null && lotSqft >= 2 * SB9_MIN_RESULTING_LOT_SQFT) && !exclusions.fema_100yr_floodway && !exclusions.historic_district_hpoz && !exclusions.calfire_or_state_vhfhsz;
   const aduFeasible = hasZoning && (!exclusions.historic_district_hpoz || stCode === "CA");
 
   let statutoryNotes = "";
   if (!hasZoning) {
     statutoryNotes = "Zoning is not on file for this parcel; by-right housing rights and ministerial lot splits cannot be determined without verified local zoning.";
   } else if (stCode === "CA") {
-    statutoryNotes = "California: SB 9 ministerial lot split (≥4,800 sq ft) and SB 684/SB 79 transit housing eligibility. HPOZ and floodway restrictions apply deterministically.";
+    statutoryNotes = "California: SB 9 (Gov. Code 65852.21, 66411.7) allows a ministerial urban lot split when each new lot is at least 1,200 sq ft and neither is under 40% of the original lot. SB 79 transit-area rules are not determined here (the law record is only partly checked). The flood check here uses the FEMA floodway flag, which is narrower than SB 9's bar on the whole 100-year flood hazard area: check the FEMA flood map before relying on a lot split.";
   } else if (stCode === "TX") {
     statutoryNotes = statutoryZoning.statutory_exclusions.population_threshold_ineligible
-      ? "Texas SB 840 & SB 15 gated: Municipality <150k or County <300k population requires discretionary municipal approval."
-      : "Texas SB 840 / SB 15 active: By-right commercial conversion and small-lot subdivisions eligible.";
+      ? "Texas SB 840 does not apply here: it needs a city over 150,000 people in a county over 300,000 (or the populations are not on file)."
+      : "Texas SB 840 (Loc. Gov't Code ch. 218) may allow housing on commercial or mixed-use zoning in this city; not determined (the law record is only partly checked). SB 15 small lots apply only to unplatted tracts of 5 acres or more, not to existing lots.";
   } else if (stCode === "FL") {
-    statutoryNotes = "Florida Live Local Act 4.0: Preempts local height/density on commercial sites; mandatory 75%–100% property tax exemption under Fla. Stat. § 196.1979.";
+    statutoryNotes = "Florida Live Local Act (Fla. Stat. 166.04151(7)) may allow multifamily on commercial, industrial or mixed-use zoning if at least 40% of rental units stay affordable for 30 years; not determined (the law record is only partly checked). The related property tax exemption is Fla. Stat. 196.1978(3).";
   } else {
-    statutoryNotes = "Governed by statewide middle housing statutes (e.g. WA HB 1110, OR HB 2001, AZ HB 2720, CO HB 24-1152) and local zoning codes.";
+    statutoryNotes = "State middle-housing laws (such as WA HB 1110 and OR HB 2001) are applied only where the law record has been checked against the statute; other state rules are not determined here. Local zoning governs.";
   }
 
   // 4. Accurate Roof Cadastre & 2026 Solar Microgrid Calculator
