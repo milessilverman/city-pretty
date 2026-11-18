@@ -296,6 +296,8 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
     ctx.intercityCorridor = {
       id: str(ic.id, 40),
       name: str(ic.name, 100),
+      verification_status: str(ic.verification_status, 40),
+      corridor_confirmed: bool(ic.corridor_confirmed),
       route_length_miles: num(ic.route_length_miles),
       funding_status: str(ic.funding_status, 200),
       projected_minutes: num(ic.projected_minutes),
@@ -304,6 +306,7 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       nearestStation: stn ? {
         name: str(stn.name, 80),
         city: str(stn.city, 60),
+        station_basis: str(stn.station_basis, 60),
         avg_land_cost_per_sqft: num(stn.avg_land_cost_per_sqft),
         available_underused_acres: num(stn.available_underused_acres),
         statutory_housing_regime: str(stn.statutory_housing_regime, 120),
@@ -325,12 +328,23 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       cityName: str(us.cityName, 60),
       baseZoning: str(us.baseZoning, 40),
       distanceToRailMeters: num(us.distanceToRailMeters),
-      potentialHomes: num(us.potentialHomes),
-      margin: num(us.margin),
       publicOwner: str(us.publicOwner, 100),
       inConservationEasement: bool(us.inConservationEasement),
-      idea: str(us.idea, 300),
+      verification_status: str(us.verification_status, 30),
+      screening_estimate: null,
     };
+    // Model outputs only arrive inside screening_estimate; top-level potentialHomes/margin/idea are dropped.
+    if (us.screening_estimate) {
+      const se = obj(us.screening_estimate);
+      ctx.underusedSite.screening_estimate = {
+        potentialHomes: num(se.potentialHomes),
+        margin: num(se.margin),
+        marginBeforeLand: num(se.marginBeforeLand),
+        idea: str(se.idea, 300),
+        assumed_inputs: strList(se.assumed_inputs),
+        missing_inputs: strList(se.missing_inputs),
+      };
+    }
   }
   if (r.renovationQuote) {
     const rq = obj(r.renovationQuote);
@@ -347,6 +361,7 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       governingStatute: str(rq.governingStatute, 150),
       verdict: str(rq.verdict, 60),
       verdictSummary: str(rq.verdictSummary, 300),
+      basis: str(rq.basis, 40),
     };
   }
   if (r.streetForge) {
@@ -361,6 +376,7 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       evChargerSuitabilityScore: num(sf.evChargerSuitabilityScore),
       evNetProjectCostUsd: num(sf.evNetProjectCostUsd),
       evPaybackYears: num(sf.evPaybackYears),
+      basis: str(sf.basis, 40),
     };
   }
   if (r.everySpace) {
@@ -371,7 +387,33 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       monthlyHoldingDeficitReductionPct: num(es.monthlyHoldingDeficitReductionPct),
       isCashFlowPositiveDuringHold: bool(es.isCashFlowPositiveDuringHold),
       holdingStrategyRecommendation: str(es.holdingStrategyRecommendation, 300),
+      basis: str(es.basis, 40),
     };
+  }
+  if (Array.isArray(r.laws)) {
+    ctx.laws = r.laws.slice(0, 12).map((x) => {
+      const l = obj(x);
+      return {
+        id: str(l.id, 40),
+        name: str(l.name, 120),
+        citation: str(l.citation, 200),
+        summary: str(l.summary, 600),
+        verification_status: str(l.verification_status, 30),
+        checked: str(l.checked, 10),
+        fields_unconfirmed: strList(l.fields_unconfirmed, 10, 80),
+      };
+    });
+  }
+  if (r.decision_brief != null && typeof r.decision_brief === "object") {
+    // Plain JSON data only (functions and prototypes vanish in the round trip); dropped whole if too large.
+    let text: string | null = null;
+    try { text = JSON.stringify(r.decision_brief); } catch { text = null; }
+    if (text && text.length <= DECISION_BRIEF_MAX_CHARS) {
+      ctx.decision_brief = JSON.parse(text);
+    } else {
+      ctx.decision_brief = null;
+      ctx.decision_brief_omitted = text ? `decision brief too large (${text.length} characters; limit ${DECISION_BRIEF_MAX_CHARS})` : "decision brief could not be read";
+    }
   }
   return ctx;
 }

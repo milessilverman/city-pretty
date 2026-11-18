@@ -7857,39 +7857,10 @@ function getMetroPipeline(fips, city) {
     }
   }
 
+  // Only a project whose county FIPS matches is returned. There is no fallback to another county's project and no
+  // made-up default: with no match the page says no transit project is on file for this county.
   const list = Array.isArray(TRANSIT_PIPELINES_DATA) ? TRANSIT_PIPELINES_DATA : [];
-  let found = list.find(p => p.fips === fips);
-  if (!found && city) {
-    found = list.find(p => (p.metroName && p.metroName.toLowerCase().includes(city)) || (p.title && p.title.toLowerCase().includes(city)));
-  }
-  if (!found) {
-    found = list.find(p => p.fips === "06037") || null;
-  }
-  return found || {
-    fips,
-    metroName: "Regional Transit Authority",
-    title: "Regional Transit Infill & Housing Corridor",
-    agency: "Regional Transit Agency",
-    status: "Adopted Transit Plan",
-    hubName: "Transit Center",
-    hubLat: 34.05,
-    hubLng: -118.25,
-    corridorRings: [],
-    stations: [],
-    corridorDesc: "Adopted transit corridor with transit-oriented housing infill capacity.",
-    p3Type: "Public Ground Lease & Joint Development",
-    units: null,
-    affordPct: null,
-    retailSqft: null,
-    baseIRR: null,
-    baseGroundLease: null,
-    baseHomeLiftPct: null,
-    tdc: null,
-    seniorDebt: null,
-    tifiaLoan: null,
-    developerEquity: null,
-    last_verified: "2026-11-15"
-  };
+  return list.find(p => p && p.fips === fips) || null;
 }
 
 let _p3Term = 99;
@@ -8081,11 +8052,11 @@ function p3Section(p, m) {
 
 
 function copyP3TermSheet() {
-  const pipe = (typeof getMetroPipeline === "function") ? getMetroPipeline(activeFips(), (selected && byId.get(selected)) ? byId.get(selected).properties.c : "") : {};
-  const irr = $("#p3-irr") ? $("#p3-irr").textContent : "15.6%";
-  const rev = $("#p3-rev") ? $("#p3-rev").textContent : "$1.62M / yr";
-  const lift = $("#p3-lift") ? $("#p3-lift").textContent : "+12.5%";
-  const ridership = $("#p3-ridership") ? $("#p3-ridership").textContent : "+54%";
+  const pipe = ((typeof getMetroPipeline === "function") ? getMetroPipeline(activeFips(), (selected && byId.get(selected)) ? byId.get(selected).properties.c : "") : null) || {};
+  const irr = $("#p3-irr") ? $("#p3-irr").textContent : "Not on file";
+  const rev = $("#p3-rev") ? $("#p3-rev").textContent : "Not on file";
+  const lift = $("#p3-lift") ? $("#p3-lift").textContent : "Not on file";
+  const ridership = $("#p3-ridership") ? $("#p3-ridership").textContent : "Not on file";
 
   const memo = `=== CITY PRETTY P3 JOINT DEVELOPMENT TERM SHEET ===
 CORRIDOR: ${pipe.title || "Metropolitan Transit & Infill Spine"}
@@ -8094,15 +8065,16 @@ STATION HUB: ${pipe.hubName || "Central Station"} (${pipe.metroName || "Metro"})
 STATUS: ${pipe.status || "Active Pipeline"}
 
 1. FINANCIAL & RETURN METRICS
-- Private Developer Levered IRR: ${irr} (Target: 14.0%–16.5%)
+- Private Developer Levered IRR: ${irr}
 - Priority Public Agency Ground Lease Revenue: ${rev}
 - Corridor Real Estate Valuation Lift: ${lift}
 - Station Ridership Boost: ${ridership}
 
 2. JOINT DEVELOPMENT HOUSING & COMMERCIAL PROGRAM
-- Residential Units: ${pipe.units != null ? pipe.units + " mixed-income homes" : "Not on file"} (${_p3Afford || 35}% deed-restricted affordable)
+- Residential Units: ${pipe.units != null ? pipe.units + " mixed-income homes" : "Not on file"} (scenario: ${_p3Afford || 35}% deed-restricted affordable)
 - Ground-Floor Retail: ${pipe.retailSqft != null ? fmtN(pipe.retailSqft) + " sq ft active commercial space" : "Not on file"}
-- Ground Lease Concession: ${_p3Term || 99}-year public ground lease (zero municipal debt)
+- Ground Lease Concession: scenario ${_p3Term || 99}-year public ground lease
+- Note: scenario settings are illustrative; the project figures above come from the agency source only where shown.
 
 3. INTEGRATED AMENITIES & CORRIDOR INFRASTRUCTURE
 - Urban Tree Canopy: ${pipe.treeCount != null ? fmtN(pipe.treeCount) + " shade trees" : "Not on file"}
@@ -8126,6 +8098,7 @@ STATUS: ${pipe.status || "Active Pipeline"}
 
 function runP3Sim() {
   const pipe = getMetroPipeline(activeFips(), (selected && byId.get(selected)) ? byId.get(selected).properties.c : "");
+  if (!pipe) return;
   const tod = $("#p3-tod") ? $("#p3-tod").checked : true;
   const trail = $("#p3-trail") ? $("#p3-trail").checked : true;
   const trees = $("#p3-trees") ? $("#p3-trees").checked : true;
