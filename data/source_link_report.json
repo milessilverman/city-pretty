@@ -1,10 +1,10 @@
 {
  "checked": "2026-11-18",
  "counts": {
-  "ok": 392,
+  "ok": 396,
   "blocked": 46,
-  "broken": 16,
-  "error": 15
+  "broken": 15,
+  "error": 12
  },
  "urls": {
   "https://alison.legislature.state.al.us/code-of-alabama": {
@@ -477,6 +477,13 @@
    "detail": "200",
    "used_in": [
     "state_finance_profiles.json.DE.source_url"
+   ]
+  },
+  "https://denvergov.org/files/assets/public/community-planning-and-development/documents/zoning/denver-zoning-code/denver_zoning_code_article4_urban_edge.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.withheld[5].tried[1].url"
    ]
   },
   "https://docs.legis.wisconsin.gov/statutes/statutes/66/xi/1105": {
@@ -2038,24 +2045,24 @@
    ]
   },
   "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99440&Index=I%3a%5czindex%5csurs&HitCount=2&hits=470+471+&hc=2&req=%28number+contains+8%2D2o%2A%29&Item=0": {
-   "status": "error",
-   "detail": "The read operation timed out",
+   "status": "ok",
+   "detail": "200",
    "used_in": [
     "state-housing-laws.json[42].statute_url",
     "statutes.json[42].statute_url"
    ]
   },
   "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99441&Index=I%3a%5czindex%5csurs&HitCount=2&hits=14b+14c+&hc=2&req=%28number+contains+8%2D2s%2A%29&Item=0": {
-   "status": "error",
-   "detail": "The read operation timed out",
+   "status": "ok",
+   "detail": "200",
    "used_in": [
     "state-housing-laws.json[44].statute_url",
     "statutes.json[44].statute_url"
    ]
   },
   "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99443&Index=I%3a%5czindex%5csurs&HitCount=2&hits=2ba+2bb+&hc=2&req=%28number+contains+8%2D3n%2A%29&Item=0": {
-   "status": "error",
-   "detail": "The read operation timed out",
+   "status": "ok",
+   "detail": "200",
    "used_in": [
     "state-housing-laws.json[43].statute_url",
     "statutes.json[43].statute_url"
@@ -2864,13 +2871,6 @@
    "detail": "200",
    "used_in": [
     "transit_pipelines.json[3].rtp_document_url"
-   ]
-  },
-  "https://www.denvergov.org/files/assets/public/v/3/community-planning-and-development/documents/zoning/denver-zoning-code/denver_zoning_code_article4_edge.pdf": {
-   "status": "broken",
-   "detail": "404",
-   "used_in": [
-    "zoning_standards.json.withheld[5].tried[1].url"
    ]
   },
   "https://www.desperesmo.org/DocumentCenter/View/26018/R25-3905--Contract-with-SIC-Concrete-for-Concrete-Sidewalk-Replacements-BOA": {
