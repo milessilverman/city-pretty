@@ -81,44 +81,72 @@ def manifest(name, url, rows, note=""):
     log("  manifest", name, rows, "rows", url)
 
 
-def county_bbox():
-    """west, south, east, north of the county's block groups (plus 0.01 degree); Orange County keeps its original box"""
+def county_bboxes():
+    """west, south, east, north list of the county's block groups (plus 0.01 degree).
+    If coordinates cross the 180th meridian (e.g. Aleutians West 02016), splits into two boxes
+    at the antimeridian rather than spanning 358 degrees across the planet."""
     global BBOX
     if BBOX:
-        return BBOX
+        return [BBOX]
     j = json.load(open(os.path.join(DATA, "bg.geojson")))
     xs, ys = [], []
     def walk(c):
         if isinstance(c[0], (int, float)): xs.append(c[0]); ys.append(c[1])
         else: [walk(x) for x in c]
     for f in j["features"]: walk(f["geometry"]["coordinates"])
-    BBOX = (round(min(xs) - .01, 4), round(min(ys) - .01, 4), round(max(xs) + .01, 4), round(max(ys) + .01, 4))
-    return BBOX
+    min_x, max_x = min(xs), max(xs)
+    min_y, max_y = round(min(ys) - .01, 4), round(max(ys) + .01, 4)
+    if min_x < -160 and max_x > 160:
+        pos_xs = [x for x in xs if x > 0]
+        neg_xs = [x for x in xs if x < 0]
+        b1 = (round(min(pos_xs) - .01, 4), min_y, 180.0, max_y)
+        b2 = (-180.0, min_y, round(max(neg_xs) + .01, 4), max_y)
+        return [b1, b2]
+    BBOX = (round(min_x - .01, 4), min_y, round(max_x + .01, 4), max_y)
+    return [BBOX]
+
+
+def county_bbox():
+    """west, south, east, north of the county's block groups (plus 0.01 degree); Orange County keeps its original box"""
+    boxes = county_bboxes()
+    return boxes[0]
 
 
 def arcgis_query(url, where="1=1", fields="*", bbox=None, page=2000, extra=None, use_bbox=True):
-    """Page through an ArcGIS REST layer as GeoJSON features."""
-    feats, offset = [], 0
+    """Page through an ArcGIS REST layer as GeoJSON features. Seamlessly handles antimeridian split boxes."""
     if use_bbox and bbox is None:
-        bbox = county_bbox()
-    while True:
-        p = {"where": where, "outFields": fields, "returnGeometry": "true", "outSR": "4326", "f": "geojson", "resultOffset": offset, "resultRecordCount": page}
-        if use_bbox:
-            p.update({"geometry": ",".join(str(v) for v in bbox), "geometryType": "esriGeometryEnvelope", "inSR": "4326", "spatialRel": "esriSpatialRelIntersects"})
-        if extra:
-            p.update(extra)
-        j = json.loads(get(f"{url}/query", p, timeout=900))
-        if "error" in j:
-            raise RuntimeError(f"{url}: {j['error']}")
-        got = j.get("features", [])
-        feats += got
-        log("   ", url.split("/services/")[-1][:60], "offset", offset, "got", len(got))
-        if len(got) < page and not j.get("exceededTransferLimit"):
-            break
-        offset += len(got)
-        if not got:
-            break
-    return feats
+        boxes = county_bboxes()
+    elif use_bbox and bbox is not None:
+        boxes = [bbox]
+    else:
+        boxes = [None]
+    all_feats, seen_ids = [], set()
+    for b in boxes:
+        offset = 0
+        while True:
+            p = {"where": where, "outFields": fields, "returnGeometry": "true", "outSR": "4326", "f": "geojson", "resultOffset": offset, "resultRecordCount": page}
+            if b is not None:
+                p.update({"geometry": ",".join(str(v) for v in b), "geometryType": "esriGeometryEnvelope", "inSR": "4326", "spatialRel": "esriSpatialRelIntersects"})
+            if extra:
+                p.update(extra)
+            j = json.loads(get(f"{url}/query", p, timeout=900))
+            if "error" in j:
+                raise RuntimeError(f"{url}: {j['error']}")
+            got = j.get("features", [])
+            for feat in got:
+                fid = feat.get("id") or (feat.get("properties") and feat.get("properties").get("OBJECTID"))
+                if fid is not None:
+                    if fid in seen_ids:
+                        continue
+                    seen_ids.add(fid)
+                all_feats.append(feat)
+            log("   ", url.split("/services/")[-1][:60], "offset", offset, "got", len(got))
+            if len(got) < page and not j.get("exceededTransferLimit"):
+                break
+            offset += len(got)
+            if not got:
+                break
+    return all_feats
 
 
 def fetch_arcgis_geojson(name, url, **kw):
@@ -1766,15 +1794,16 @@ def fetch_osm_overpass(p):
     # the box osm_extract.py clips an extract to (its county_box: block groups plus 0.02 degree), not county_bbox()'s 0.01: with the smaller
     # box, 111 of Anchorage's 10,674 road ways in the clip box were never downloaded (found by comparing with an Overpass count, 16 Nov)
     import osm_extract
-    w, s_, e, n = osm_extract.county_box()
+    boxes = osm_extract.county_boxes() if hasattr(osm_extract, "county_boxes") else [osm_extract.county_box()]
     parts, base = [], None
-    for sel, k in OVERPASS_GROUPS:
-        for i in range(k):
-            for j in range(k):
-                box = (s_ + (n - s_) * j / k, w + (e - w) * i / k, s_ + (n - s_) * (j + 1) / k, w + (e - w) * (i + 1) / k)
-                xs = _overpass_xml(sel, box)
-                parts += xs
-                log("  overpass ok", len(sel), "selectors", [round(v, 3) for v in box], sum(len(x) for x in xs) // 1000, "kB")
+    for w, s_, e, n in boxes:
+        for sel, k in OVERPASS_GROUPS:
+            for i in range(k):
+                for j in range(k):
+                    box = (s_ + (n - s_) * j / k, w + (e - w) * i / k, s_ + (n - s_) * (j + 1) / k, w + (e - w) * (i + 1) / k)
+                    xs = _overpass_xml(sel, box)
+                    parts += xs
+                    log("  overpass ok", len(sel), "selectors", [round(v, 3) for v in box], sum(len(x) for x in xs) // 1000, "kB")
     for x in parts:
         m = _re.search(rb'<meta osm_base="([^"]+)"', x[:3000])
         if m and (base is None or m.group(1).decode() < base):

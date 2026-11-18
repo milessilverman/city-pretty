@@ -8181,7 +8181,13 @@ function p3Section(p, m) {
 function select(id, fly) {
   selected = id; highlight(); syncHash(id); updateCompareUI();
   const f = byId.get(id); if (!f) return;
-  if (fly) map.fitBounds(L.geoJSON(f).getBounds(), { maxZoom: 15, padding: [60, 60] });
+  if (fly) {
+    const b = L.geoJSON(f).getBounds();
+    if (b && b.isValid()) {
+      if (Math.abs(b.getEast() - b.getWest()) > 180) map.setView(b.getCenter(), 8);
+      else map.fitBounds(b, { maxZoom: 15, padding: [60, 60] });
+    }
+  }
   const p = f.properties, d = D.details[id] || {}, m = d.m || {};
   // Verification gate: only verified / partly verified interventions carry numbers below; the rest are listed by name.
   const { recs, other: otherIdeas } = gateRecs(recsOf(d), m);
@@ -10725,7 +10731,12 @@ function switchCounty(c, wantBgId) {
         } else {
           const bounds = (ocLayer && ocLayer.getBounds && ocLayer.getBounds().isValid()) ? ocLayer.getBounds() : (D_OC && D_OC.features && D_OC.features.length ? L.geoJSON(D_OC).getBounds() : null);
           if (bounds && bounds.isValid && bounds.isValid()) {
-            map.fitBounds(bounds, { maxZoom: 11.5, padding: [25, 25] });
+            if (Math.abs(bounds.getEast() - bounds.getWest()) > 180) {
+              const c = (D_OC && D_OC.features && D_OC.features[0]) ? L.geoJSON(D_OC.features[0]).getBounds().getCenter() : bounds.getCenter();
+              map.setView(c, 7);
+            } else {
+              map.fitBounds(bounds, { maxZoom: 11.5, padding: [25, 25] });
+            }
           }
         }
       }
