@@ -4051,17 +4051,34 @@ async function arcQuery(url, params, ms = 6000) {
     return d;
   } catch (e) {
     const isHttpOrArcError = (e && e.message && (/^HTTP\s+\d+/i.test(e.message) || /ArcGIS error/i.test(e.message)));
+    if (isHttpOrArcError) throw e;
     const urlObj = (() => { try { return new URL(cleanUrl); } catch { return null; } })();
     const isAllowedJsonpHost = urlObj && (
       urlObj.hostname.endsWith("lacounty.gov") ||
-      urlObj.hostname.endsWith("census.gov")
+      urlObj.hostname.endsWith("census.gov") ||
+      urlObj.hostname.endsWith("stlouis-mo.gov")
     );
-    if (!isHttpOrArcError && isAllowedJsonpHost) {
+    if (isAllowedJsonpHost) {
       try {
         const d = await jsonp(q, Math.max(ms, 15000));
         if (d && d.error) throw new Error(d.error.message || "ArcGIS error");
         return d;
       } catch (e2) {
+        throw e;
+      }
+    }
+    // Florida's slow statewide cadastral layer (and any slow CORS-enabled server) takes 7-9s cold.
+    // If the initial attempt timed out (or aborted) and was under 15s, retry once with a 15s timeout.
+    if (e && (e.name === "AbortError" || /timed?\s*out|aborted/i.test(e.message)) && ms < 15000) {
+      try {
+        const ctl2 = new AbortController(), t2 = setTimeout(() => ctl2.abort(), 15000);
+        const r2 = await fetch(q, { signal: ctl2.signal });
+        clearTimeout(t2);
+        if (!r2.ok) throw new Error("HTTP " + r2.status);
+        const d2 = await r2.json();
+        if (d2 && d2.error) throw new Error(d2.error.message || "ArcGIS error");
+        return d2;
+      } catch (e3) {
         throw e;
       }
     }
@@ -7224,6 +7241,7 @@ function getParcelService(ll) {
   if (lat >= 34.95 && lat <= 35.30 && lng >= -106.85 && lng <= -106.40) return PARCELS87.find(s => s.counties && s.counties.includes("35001")) || null; // Albuquerque / Bernalillo
   if (lat >= 61.05 && lat <= 61.35 && lng >= -150.15 && lng <= -149.60) return PARCELS87.find(s => s.counties && s.counties.includes("02020")) || null; // Anchorage MOA
   if (lat >= 21.20 && lat <= 21.75 && lng >= -158.30 && lng <= -157.60) return PARCELS87.find(s => s.counties && s.counties.includes("15003")) || null; // Honolulu
+  if (lat >= 38.53 && lat <= 38.78 && lng >= -90.35 && lng <= -90.17) return PARCELS87.find(s => s.counties && s.counties.includes("29510")) || null; // St. Louis City MO
   if (lat >= 38.79 && lat <= 39.00 && lng >= -77.15 && lng <= -76.90) return PARCELS87.find(s => isStatewideSvc(s) && (s.states.includes("11") || s.states.includes("DC"))) || null; // Washington, DC
 
   // 2. Active County Match if FIPS is set

@@ -869,6 +869,35 @@ test("Florida parcel lookup: no record cap (the statewide layer fails capped que
   expect(errors).toEqual([]);
 });
 
+test("St. Louis City parcel lookup succeeds through JSONP under the Content-Security-Policy", async ({ page }) => {
+  const errors = await openPage(page);
+  const r = await page.evaluate(async () => {
+    const ev = (s: string) => (0, eval)(s);
+    const w = window as any;
+    const realFips = w.activeFips;
+    w.activeFips = () => "29510";   // pretend St. Louis City is active without downloading its data file
+    try {
+      const f = await ev("fetchParcel")({ lat: 38.6270, lng: -90.1994 });
+      return f && f.attributes ? f.attributes.ColParcelId || f.attributes.AIN : null;
+    } finally {
+      w.activeFips = realFips;
+    }
+  });
+  expect(r).toBeTruthy();
+  expect(errors).toEqual([]);
+});
+
+test("b64Bytes fast data: decode shortcut runs without CSP violation", async ({ page }) => {
+  const errors = await openPage(page);
+  const res = await page.evaluate(async () => {
+    const ev = (s: string) => (0, eval)(s);
+    const u = await ev("b64Bytes")("SGVsbG8gV29ybGQ=");
+    return new TextDecoder().decode(u);
+  });
+  expect(res).toBe("Hello World");
+  expect(errors).toEqual([]);
+});
+
 test("Florida estimates use the roll's CENSUS_BK block group (2010 vintage, as tested), never the map's 2020 one", async ({ page }) => {
   const errors = await openPage(page);
   await page.waitForFunction(() => { try { return !!(0, eval)("COUNTY_VALUATION_MODELS"); } catch { return false; } }, null, { timeout: 30_000 });

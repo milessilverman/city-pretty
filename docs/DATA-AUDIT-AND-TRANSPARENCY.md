@@ -766,9 +766,36 @@ was made from a test that didn't cover the live page.
 - **HUD Fair Market Rents (resolved FY2027):** FY2027 rents took effect 1 Oct 2026 (Federal Register
   2026-17891). Replaced the map-service pull with a direct machine pull from HUD's official FMR API
   (`scripts/fetch_hud_fmr_api.py`) with per-record evidence URLs. All 3,222 counties are current FY2027 values
-  verified against Federal Register 2026-17891.
+  pulled directly from HUD's official API, with an automated sanity check confirming that the API's FY2026
+  Los Angeles value ($2,903) matches the revised Federal Register notice (2026-07741).
 - **Correction (later on 16 Nov):** this list said 7 of 150 live parcel/zoning services were dead. That was wrong:
   all 7 answered when re-checked; county servers drop requests under load. Tiers now count configured services, and
   each county lists services that failed three retries at build time (`live_services.not_responding`; 6 on the last
   build, including New York State's parcel service, which reported "not started").
 - OpenStreetMap lookups through Overpass are untested against the live service (unreachable from the build machine).
+
+### Corrections & Audit Fixes (18 Nov)
+
+- **Hazard checks reading incorrect response fields (`app/app.js`):** `lotChecks()` returns `R.fema.sfha`, `R.fire.vh`,
+  and `R.hpoz.ok && R.hpoz.v.length`. Earlier code read `R.flood.ok` and `R.fire.ok` (which were never set, evaluating
+  to false) and treated any successful HTTP query in `R.hpoz.ok` as an active historic designation (falsely excluding
+  every Los Angeles parcel from SB 9 / ADU screening). Fixed to evaluate actual exclusion fields, and rows report
+  "Not checked for this lot" when unqueried instead of asserting negative status.
+- **Underused-land popup speculative figures (`app/app.js`):** Removed speculative "development margin" ($250k–$800k)
+  and "net equity" estimates that were derived from unverified residual land value formulas. The popup now displays
+  only the County Assessor's official recorded land value.
+- **Roof area & footprint grounding (`app/app.js`, `src/engines/roofAreaEngine.js`):** When no building outline is found
+  in OpenStreetMap, the footprint is now explicitly set to `null` ("Footprint not on file") instead of inventing a
+  footprint from living area / 30% lot area. Traced building outlines use 0 overhang (as aerial polygons trace eaves).
+- **Address search state collisions (`app/app.js`):** Replaced substring matching (where "maryland" matched "AR") with
+  an exact 2-letter state code lookup table, fixing county search collisions across MD, NC, GA, MS, MO, RI, and WA.
+- **Zoning fallback & multi-family classification (`app/app.js`, `src/engines/parcelHouseAuditor.js`):** Removed
+  fallback from missing zoning codes to land use codes (`DOR_UC`/`LUCode`), and hardened single-family detection
+  to explicitly exclude multi-family designations (`R-3`, `R-4`, `RES-MF`).
+- **LiDAR attributions:** Removed false claims that building heights were "calibrated from USGS 3DEP LiDAR DSM".
+  Attributed building footprints and heights to OpenStreetMap contributors and County Assessor records.
+- **ACS top- and bottom-coded values:** Census top-coded values ($3,501 rent, $2.0M value) and bottom-codes are
+  formatted as "$3,500 or more", "$2,000,000 or more", and excluded from rent burden and sum calculations.
+- **CSP & JSONP allow-list:** Allowed `maps8.stlouis-mo.gov` so St. Louis City parcel queries succeed via JSONP;
+  added `connect-src data: blob:` to unblock the browser's fast base64 decoding shortcut (`b64Bytes`); and added
+  a 15-second fetch retry for slow CORS-enabled parcel services (such as Florida's statewide cadastral layer).
