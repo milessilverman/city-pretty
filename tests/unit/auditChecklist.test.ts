@@ -4,27 +4,37 @@ import { describe, expect, it } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
 import { parseOsmHeight } from "../../workers/sources";
+// @ts-ignore plain ES module
+import { hudRow } from "../../app/facts.js";
 
 const root = path.resolve(__dirname, "../..");
 const appJs = fs.readFileSync(path.join(root, "app/app.js"), "utf8");
 
 // Extract helper functions from app.js
+const hudFmrStart = appJs.indexOf("function getHudFmr(fips, zip)");
+const hudFmrBlock = appJs.slice(hudFmrStart, appJs.indexOf("\n// ====", hudFmrStart));
 const escStart = appJs.indexOf("const esc = s =>");
 const escBlock = appJs.slice(escStart, appJs.indexOf("const GRADE_TXT ="));
 const pbStart = appJs.indexOf("function priceBandOf(v)");
 const pbBlock = appJs.slice(pbStart, appJs.indexOf("\n", pbStart));
+const gridStart = appJs.indexOf("function gridCellIndicesX(w, e, cell)");
+const gridBlock = appJs.slice(gridStart, appJs.indexOf("function visibleCells"));
 
 const sandbox: any = {};
 new Function("window", "sandbox", `
+  ${hudFmrBlock}
   ${escBlock}
   ${pbBlock}
+  ${gridBlock}
+  sandbox.getHudFmr = getHudFmr;
   sandbox.esc = esc;
   sandbox.fmt$ = fmt$;
   sandbox.fmtRent = fmtRent;
   sandbox.priceBandOf = priceBandOf;
+  sandbox.gridCellIndicesX = gridCellIndicesX;
 `)(sandbox, sandbox);
 
-const { esc, fmt$, fmtRent, priceBandOf } = sandbox;
+const { getHudFmr, esc, fmt$, fmtRent, priceBandOf, gridCellIndicesX } = sandbox;
 
 describe("Audit checklist verification (Section 5)", () => {
   describe("P0-1 & P0-2: Hazard exclusions and verified field reads", () => {
@@ -248,6 +258,84 @@ describe("Audit checklist verification (Section 5)", () => {
       expect(fmt$(15000)).toBe("$15k");
       expect(fmt$(850000)).toBe("$850k");
       expect(fmt$(1400000)).toBe("$1.4M");
+    });
+  });
+
+  describe("Item 6: Antimeridian (180°) coordinate grid wrapping (Aleutians West, Alaska)", () => {
+    it("handles normal longitude spans within the same hemisphere", () => {
+      // Cell size 0.1 deg, west -118.5, east -118.3
+      const indices = gridCellIndicesX(-118.5, -118.3, 0.1);
+      expect(indices.length).toBeGreaterThan(0);
+      expect(indices).toEqual([615, 616, 617]);
+    });
+
+    it("wraps smoothly across the 180° meridian (e.g. Attu to Unalaska)", () => {
+      // Cell size 1.0 deg, west +178 (Attu Island side) to east -178 (Unalaska side) -> w > e
+      const max = Math.round(360 / 1.0); // 360 cells
+      const indices = gridCellIndicesX(178, -178, 1.0);
+      // West: floor(358) = 358; East: floor(2) = 2
+      // Should contain 358, 359, 0, 1, 2
+      expect(indices).toContain(358);
+      expect(indices).toContain(359);
+      expect(indices).toContain(0);
+      expect(indices).toContain(1);
+      expect(indices).toContain(2);
+      expect(indices.every((x: number) => x >= 0 && x < max)).toBe(true);
+    });
+  });
+
+  describe("HUD Fair Market Rents: Small Area FMR (SAFMR) resolution and presentation", () => {
+    it("getHudFmr resolves ZIP-level rents when zip_rents table is present", () => {
+      // Test the getHudFmr logic with mock HUD data
+      const mockHudData = [{
+        fips: "06037",
+        county_name: "Los Angeles County",
+        fiscal_year: "2027",
+        zero_bed_eff: 1800,
+        one_bed_1br: 2000,
+        two_bed_2br: 2500,
+        three_bed_3br: 3200,
+        four_bed_4br: 3600,
+        verification: { status: "verified" },
+        zip_rents: {
+          "90210": { zero_bed_eff: 2200, one_bed_1br: 2600, two_bed_2br: 3300, three_bed_3br: 4200, four_bed_4br: 4800 },
+        },
+      }];
+      const runner: any = {};
+      new Function("HUD_FMR_DATA", "HUD_FMR_SOURCE", "runner", `
+        ${hudFmrBlock}
+        runner.getHudFmr = getHudFmr;
+      `)(mockHudData, { retrieved: "2026-11-18" }, runner);
+
+      // County fallback when no ZIP or ZIP not in table
+      const countyFmr = runner.getHudFmr("06037");
+      expect(countyFmr.is_safmr).toBe(false);
+      expect(countyFmr.two_bed_2br).toBe(2500);
+
+      // ZIP-level SAFMR when ZIP is matched
+      const zipFmr = runner.getHudFmr("06037", "90210");
+      expect(zipFmr.is_safmr).toBe(true);
+      expect(zipFmr.zip_code).toBe("90210");
+      expect(zipFmr.two_bed_2br).toBe(3300);
+      expect(zipFmr.one_bed_1br).toBe(2600);
+      expect(zipFmr.source).toContain("ZIP 90210 Small Area FMR");
+    });
+
+    it("hudRow formats SAFMR records with ZIP code in title and explicit voucher note", () => {
+      const safmrRec = {
+        fiscal_year: "2027",
+        is_safmr: true,
+        zip_code: "90210",
+        one_bed_1br: 2600,
+        two_bed_2br: 3300,
+        three_bed_3br: 4200,
+        metro_or_county_name: "Los Angeles-Long Beach-Glendale, CA HUD Metro FMR Area",
+      };
+      const row = hudRow(safmrRec);
+      expect(row.ok).toBe(true);
+      expect(row.label).toBe("HUD Small Area FMR (FY2027, ZIP 90210)");
+      expect(row.value).toContain("2 bed $3,300");
+      expect(row.note).toContain("HUD voucher benchmark for this ZIP code");
     });
   });
 });

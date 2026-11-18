@@ -3150,7 +3150,7 @@
    ]
   },
   {
-   "url": "https://maps8.stlouis-mo.gov/arcgis/rest/services/PDA/PARCELS_PUBLIC/MapServer/0",
+   "url": "https://maps8.stlouis-mo.gov/arcgis/rest/services/ASSESSOR/Assessor_Public_Parcels/MapServer/11",
    "states": [
     "29",
     "MO"
@@ -3159,7 +3159,7 @@
     "29510"
    ],
    "name": "St. Louis City GIS Parcels",
-   "terms": "https://maps8.stlouis-mo.gov/arcgis/rest/services/PDA/PARCELS_PUBLIC/MapServer/0",
+   "terms": "https://maps8.stlouis-mo.gov/arcgis/rest/services/ASSESSOR/Assessor_Public_Parcels/MapServer/11",
    "addr": "SITEADDR",
    "apn": "ColParcelId",
    "max": 2000,
