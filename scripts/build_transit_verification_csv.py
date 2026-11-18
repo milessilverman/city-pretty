@@ -2,8 +2,10 @@
 """Generate research/transit_verification.csv: one row per checked item across the transit data files (2026-11-18)."""
 import json, csv, subprocess
 R = '/home/user/city-pretty/'
+# last commit before the 2026-11-18 re-verification (the checkpoint commit 81974cc already contains new data)
+BASE = {'app/data/intercity_transit_corridors.json': '9d00f3c', 'app/data/transit_pipelines.json': 'ff6b849'}
 def head(path):
-    return json.loads(subprocess.run(['git', '-C', R, 'show', 'HEAD:' + path], capture_output=True, text=True).stdout)
+    return json.loads(subprocess.run(['git', '-C', R, 'show', BASE[path] + ':' + path], capture_output=True, text=True).stdout)
 cols = ['file', 'record', 'field', 'old_value', 'new_value', 'status', 'source_url', 'evidence_quote', 'checked_on']
 rows = []
 def add(*a): rows.append(list(a) + ['2026-11-18'])
