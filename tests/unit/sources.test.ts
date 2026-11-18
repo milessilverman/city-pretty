@@ -11,6 +11,8 @@ import {
   femaFloodZone,
   geocodeAddress,
   hudFairMarketRentForCounty,
+  osmNearby,
+  parseOsmHeight,
   siteFacts,
   usgsElevation,
 } from "../../workers/sources";
@@ -137,6 +139,38 @@ describe("official-source connectors (real captured responses)", () => {
       expect(f[k].source.retrieved_at).toMatch(/^\d{4}-\d{2}-\d{2}/); // HUD: the date the bundled file was pulled from HUD
     }
     expect(f.acs_tract && f.acs_tract.ok).toBe(false); // no key in tests
+  });
+
+  it("parseOsmHeight converts feet/inches, feet, and meters correctly", () => {
+    expect(parseOsmHeight("12'6\"")).toBe(3.81);
+    expect(parseOsmHeight("10'")).toBe(3.05);
+    expect(parseOsmHeight("40 ft")).toBe(12.19);
+    expect(parseOsmHeight("40 feet")).toBe(12.19);
+    expect(parseOsmHeight("15.5 m")).toBe(15.5);
+    expect(parseOsmHeight("15.5 meters")).toBe(15.5);
+    expect(parseOsmHeight("12")).toBe(12);
+    expect(parseOsmHeight("")).toBeNull();
+    expect(parseOsmHeight(null)).toBeNull();
+    expect(parseOsmHeight("approx 3 stories")).toBeNull();
+  });
+
+  it("osmNearby parses building height with units accurately", async () => {
+    const fakeOverpass = fakeFetch([
+      [/overpass|interpreter/, JSON.stringify({
+        elements: [
+          { type: "way", id: 101, tags: { building: "yes", height: "40 ft", "building:levels": "3" }, center: { lat: 30.3, lon: -97.7 } },
+          { type: "way", id: 102, tags: { building: "yes", height: "12 m", "building:levels": "4" }, center: { lat: 30.301, lon: -97.701 } },
+        ]
+      })]
+    ]);
+    const res = await osmNearby(30.3, -97.7, 500, "buildings", fakeOverpass);
+    expect(res.ok).toBe(true);
+    if (!res.ok) return;
+    expect(res.value.elements.length).toBe(2);
+    expect(res.value.elements[0].height_m).toBe(12.19);
+    expect(res.value.elements[0].levels).toBe(3);
+    expect(res.value.elements[1].height_m).toBe(12);
+    expect(res.value.elements[1].levels).toBe(4);
   });
 });
 

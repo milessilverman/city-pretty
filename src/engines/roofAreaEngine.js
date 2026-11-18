@@ -71,7 +71,7 @@ function estimateAccurateRoofArea(input) {
     };
   }
 
-  const isTracedOutline = method === "osm_building_outline" || method === "cadastral_lidar_osm_polygon";
+  const isTracedOutline = method === "osm_building_outline" || method === "cadastral_outline";
 
   // 2. Attached Garage Addition (if not already counted in footprint)
   let garageAdditionSqft = 0;

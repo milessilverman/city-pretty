@@ -94,6 +94,10 @@ describe("HUD Fair Market Rents: current fiscal year, from HUD's FMR API, by scr
     }
   });
 
+  it("every HUD record has an uppercase 2-letter state code", () => {
+    expect(d.records.every((r: any) => typeof r.state_code === "string" && r.state_code === r.state_code.toUpperCase())).toBe(true);
+  });
+
   it("New England counties carry town values and no invented county figure", () => {
     const ne = d.records.filter((r: any) => ["CT", "ME", "MA", "NH", "RI", "VT"].includes(r.state_code));
     expect(ne.length).toBeGreaterThan(0);

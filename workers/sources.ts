@@ -369,6 +369,31 @@ export type OsmElement = {
   levels: number | null;
 };
 
+export function parseOsmHeight(val: string | null | undefined): number | null {
+  if (val == null) return null;
+  const s = String(val).trim();
+  if (!s) return null;
+  const ftInMatch = s.match(/^(\d+(?:\.\d+)?)\s*'\s*(?:(\d+(?:\.\d+)?)\s*"?)?$/);
+  if (ftInMatch) {
+    const feet = parseFloat(ftInMatch[1]);
+    const inches = ftInMatch[2] ? parseFloat(ftInMatch[2]) : 0;
+    const m = (feet * 0.3048) + (inches * 0.0254);
+    return Number.isFinite(m) && m > 0 ? Math.round(m * 100) / 100 : null;
+  }
+  const ftMatch = s.match(/^(\d+(?:\.\d+)?)\s*(?:ft|feet)\b/i);
+  if (ftMatch) {
+    const feet = parseFloat(ftMatch[1]);
+    const m = feet * 0.3048;
+    return Number.isFinite(m) && m > 0 ? Math.round(m * 100) / 100 : null;
+  }
+  const mMatch = s.match(/^(\d+(?:\.\d+)?)\s*(?:m|metres|meters)?$/i);
+  if (mMatch) {
+    const m = parseFloat(mMatch[1]);
+    return Number.isFinite(m) && m > 0 ? Math.round(m * 100) / 100 : null;
+  }
+  return null;
+}
+
 const OVERPASS_ENDPOINTS = [
   "https://overpass-api.de/api/interpreter",
   "https://overpass.kumi.systems/api/interpreter",
@@ -406,8 +431,6 @@ export async function osmNearby(
       const els: any[] = d?.elements || [];
       const elements: OsmElement[] = els.slice(0, n).map((e) => {
         const tags: Record<string, string> = e.tags || {};
-        const h = tags.height ? parseFloat(tags.height) : NaN; // OSM height is metres unless a unit is written
-        const unitOk = !tags.height || /^\s*[0-9.]+\s*(m)?\s*$/.test(tags.height);
         return {
           osm_type: e.type,
           osm_id: e.id,
@@ -415,7 +438,7 @@ export async function osmNearby(
           lng: num(e.lon ?? e.center?.lon),
           name: tags.name || null,
           tags,
-          height_m: unitOk && Number.isFinite(h) ? h : null,
+          height_m: parseOsmHeight(tags.height),
           levels: num(tags["building:levels"]),
         };
       });

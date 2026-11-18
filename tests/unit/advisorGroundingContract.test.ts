@@ -66,7 +66,7 @@ describe("AI advisor prompt contract", () => {
         efficiency_0br: 1845,
         one_bed_1br: 2095,
         two_bed_2br: 2645,
-        source: "HUD FY2026 Fair Market Rents",
+        source: "HUD FY2027 Fair Market Rents",
         injection: "malicious string"
       }
     });

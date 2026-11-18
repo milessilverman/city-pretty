@@ -1537,7 +1537,7 @@ function estimateAccurateRoofArea(input) {
     };
   }
 
-  const isTracedOutline = method === "osm_building_outline" || method === "cadastral_lidar_osm_polygon";
+  const isTracedOutline = method === "osm_building_outline" || method === "cadastral_outline";
 
   // 2. Attached Garage Addition (if not already counted in footprint)
   let garageAdditionSqft = 0;
@@ -3781,7 +3781,7 @@ function recCard(r, i, mode) {
       ${isOCArea(m) ? ocFundingHtml(r.id, m) : (c.funding || []).length && !(mode === "value" || mode === "qol") ? `<p class="small"><b>Who pays:</b> ${c.funding.map(k => { const f = D.funding[k]; return f ? `${f[2] ? `<a href="${esc(f[2])}" target="_blank" rel="noopener">${esc(f[0])}</a>` : esc(f[0])} (${esc(f[1])})` : ""; }).filter(Boolean).join("; ")}</p>` : ""}
       <p class="src muted">${isOCArea(m) ? `<b>Evidence and cost examples (mostly from LA County projects, used here for scale):</b><br>` : ""}${c.sources.map(esc).join("<br>")}</p>
       <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e2e8f0;">
-        <button type="button" class="story-btn" onclick="openResearchModal('${esc(c.category)}')" style="display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:4px 9px;background:#f0fdf4;color:#15803d;border:1px solid #86efac;border-radius:4px;font-weight:700;cursor:pointer;">
+        <button type="button" class="story-btn" onclick="openResearchModal(this.dataset.category)" data-category="${esc(c.category)}" style="display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:4px 9px;background:#f0fdf4;color:#15803d;border:1px solid #86efac;border-radius:4px;font-weight:700;cursor:pointer;">
           <span></span> <span>Explore the research library${Array.isArray(RESEARCH_CORPUS_500) && RESEARCH_CORPUS_500.length ? ` (${RESEARCH_CORPUS_500.length} studies)` : ""} for ${esc(c.category)} &rarr;</span>
         </button>
       </div>
@@ -6165,7 +6165,7 @@ function renderHouse(box, a, lot, ll, st) {
             <div style="display:flex;align-items:center;gap:6px;font-weight:700;font-size:12.5px;color:#1e40af;">
               <span></span> <span>Transit Walkshed: ~${minStationDistMi.toFixed(2)} mi to ${esc(nearestStation.name)}</span>
             </div>
-            <button type="button" onclick="focusP3Walkshed(${nearestStation.lat}, ${nearestStation.lng}, '${esc(nearestStation.name)}', 805)" style="background:#0284c7;color:#fff;border:none;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;">
+            <button type="button" onclick="focusP3Walkshed(+this.dataset.lat, +this.dataset.lng, this.dataset.name, 805)" data-lat="${nearestStation.lat}" data-lng="${nearestStation.lng}" data-name="${esc(nearestStation.name)}" style="background:#0284c7;color:#fff;border:none;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;">
               Focus Station Walkshed
             </button>
           </div>
@@ -6304,7 +6304,7 @@ function renderHouse(box, a, lot, ll, st) {
 
         ${(() => {
           // No living area and no building outline on file: no roof estimate (nothing is assumed).
-          const isTraced = F && (F.footSource === "osm_building_outline" || F.footSource === "cadastral_lidar_osm_polygon");
+          const isTraced = F && (F.footSource === "osm_building_outline" || F.footSource === "cadastral_outline");
           const roofCalc0 = (typeof estimateAccurateRoofArea === "function") ? estimateAccurateRoofArea({
             footprintSqft: (F && F.foot) || null,
             footprintSource: (F && F.footSource) || null,
@@ -6511,7 +6511,7 @@ function renderHouse(box, a, lot, ll, st) {
 
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
           <div style="display:flex;gap:6px;flex:1;max-width:380px;">
-            <button type="button" id="btn-copy-playbook" onclick="copyPlaybookMemo('${q(esc(b.title))}', '${q(esc(b.statute))}', '${q(cleanAddr)}', '${q(cleanApn)}')" style="flex:1;background:#fff;color:#0f172a;border:1px solid #94a3b8;border-radius:6px;padding:6px 10px;font-size:11px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+            <button type="button" id="btn-copy-playbook" onclick="copyPlaybookMemo(this.dataset.title, this.dataset.statute, this.dataset.addr, this.dataset.apn)" data-title="${esc(b.title)}" data-statute="${esc(b.statute)}" data-addr="${esc(cleanAddr)}" data-apn="${esc(cleanApn)}" style="flex:1;background:#fff;color:#0f172a;border:1px solid #94a3b8;border-radius:6px;padding:6px 10px;font-size:11px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
               Copy Memo
             </button>
             <button type="button" onclick="exportExecutiveProspectus()" style="flex:1;background:#0f172a;color:#fff;border:none;border-radius:6px;padding:6px 10px;font-size:11px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 1px 3px rgba(0,0,0,0.15);">
@@ -7986,9 +7986,9 @@ function focusP3Walkshed(lat, lng, name, radiusMeters = 805) {
         <b>Walkshed Radius:</b> ${(radiusMeters / 1609.34).toFixed(2)} mi (~${Math.round(radiusMeters / 80)} min walk at an assumed 3 mph)
       </div>
       <div style="display:flex;gap:4px;margin-bottom:6px;">
-        <button type="button" onclick="focusP3Walkshed(${lat}, ${lng}, '${esc(name)}', 402)" style="font-size:10px;padding:3px 6px;border:1px solid #cbd5e1;background:${radiusMeters <= 500 ? '#0284c7' : '#fff'};color:${radiusMeters <= 500 ? '#fff' : '#0f172a'};border-radius:4px;cursor:pointer;">5-Min (0.25 mi)</button>
-        <button type="button" onclick="focusP3Walkshed(${lat}, ${lng}, '${esc(name)}', 805)" style="font-size:10px;padding:3px 6px;border:1px solid #cbd5e1;background:${radiusMeters > 500 && radiusMeters <= 1000 ? '#0284c7' : '#fff'};color:${radiusMeters > 500 && radiusMeters <= 1000 ? '#fff' : '#0f172a'};border-radius:4px;cursor:pointer;">10-Min (0.5 mi)</button>
-        <button type="button" onclick="focusP3Walkshed(${lat}, ${lng}, '${esc(name)}', 1207)" style="font-size:10px;padding:3px 6px;border:1px solid #cbd5e1;background:${radiusMeters > 1000 ? '#0284c7' : '#fff'};color:${radiusMeters > 1000 ? '#fff' : '#0f172a'};border-radius:4px;cursor:pointer;">15-Min (0.75 mi)</button>
+        <button type="button" onclick="focusP3Walkshed(+this.dataset.lat, +this.dataset.lng, this.dataset.name, 402)" data-lat="${lat}" data-lng="${lng}" data-name="${esc(name || "Transit Station")}" style="font-size:10px;padding:3px 6px;border:1px solid #cbd5e1;background:${radiusMeters <= 500 ? '#0284c7' : '#fff'};color:${radiusMeters <= 500 ? '#fff' : '#0f172a'};border-radius:4px;cursor:pointer;">5-Min (0.25 mi)</button>
+        <button type="button" onclick="focusP3Walkshed(+this.dataset.lat, +this.dataset.lng, this.dataset.name, 805)" data-lat="${lat}" data-lng="${lng}" data-name="${esc(name || "Transit Station")}" style="font-size:10px;padding:3px 6px;border:1px solid #cbd5e1;background:${radiusMeters > 500 && radiusMeters <= 1000 ? '#0284c7' : '#fff'};color:${radiusMeters > 500 && radiusMeters <= 1000 ? '#fff' : '#0f172a'};border-radius:4px;cursor:pointer;">10-Min (0.5 mi)</button>
+        <button type="button" onclick="focusP3Walkshed(+this.dataset.lat, +this.dataset.lng, this.dataset.name, 1207)" data-lat="${lat}" data-lng="${lng}" data-name="${esc(name || "Transit Station")}" style="font-size:10px;padding:3px 6px;border:1px solid #cbd5e1;background:${radiusMeters > 1000 ? '#0284c7' : '#fff'};color:${radiusMeters > 1000 ? '#fff' : '#0f172a'};border-radius:4px;cursor:pointer;">15-Min (0.75 mi)</button>
       </div>
     </div>
   `);
@@ -8066,7 +8066,7 @@ function flyToP3Hub(fips, targetIdx = -1) {
             <div style="font-weight:800;font-size:13px;color:#0369a1;margin-bottom:3px">${isAnchor ? '' : ''} ${esc(stn.name)}</div>
             ${stn.verified === false ? `<div style="font-size:11px;font-weight:700;color:#b45309;margin-bottom:4px">Unverified location</div>` : ""}
             ${stn.desc ? `<div style="font-size:11px;color:#64748b;margin-bottom:6px;">${esc(stn.desc)}</div>` : ""}
-            <button type="button" onclick="flyToP3Station(${stn.lat}, ${stn.lng}, '${esc(stn.name)}')" style="background:#0284c7;color:#fff;border:none;padding:4px 8px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;">
+            <button type="button" onclick="flyToP3Station(+this.dataset.lat, +this.dataset.lng, this.dataset.name)" data-lat="${stn.lat}" data-lng="${stn.lng}" data-name="${esc(stn.name)}" style="background:#0284c7;color:#fff;border:none;padding:4px 8px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;">
               Focus 0.5-Mi Walkshed
             </button>
           </div>
@@ -8120,7 +8120,7 @@ function p3Section(p, m) {
         ${pipe.status ? `<div style="font-size:12px;color:#475569;margin-bottom:4px;"><b>Status:</b> ${esc(pipe.status)}</div>` : ""}
         ${pipe.corridorDesc ? `<div style="font-size:12px;color:#475569;margin-bottom:6px;">${esc(pipe.corridorDesc)}</div>` : ""}
         ${pipe.rtp_document_url ? `<div style="font-size:12px;margin-bottom:8px;"><a href="${esc(pipe.rtp_document_url)}" target="_blank" rel="noopener noreferrer" style="color:#0284c7;text-decoration:underline;">Agency page &rarr;</a></div>` : ""}
-        ${stations.length && Number.isFinite(pipe.hubLat) && Number.isFinite(pipe.hubLng) ? `<button type="button" onclick="flyToP3Hub('${esc(pipe.fips)}')" style="display:inline-flex;align-items:center;gap:6px;background:#0284c7;color:#fff;border:none;padding:7px 13px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;">
+        ${stations.length && Number.isFinite(pipe.hubLat) && Number.isFinite(pipe.hubLng) ? `<button type="button" onclick="flyToP3Hub(this.dataset.fips)" data-fips="${esc(pipe.fips)}" style="display:inline-flex;align-items:center;gap:6px;background:#0284c7;color:#fff;border:none;padding:7px 13px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;">
           Show stations on the map
         </button>` : ""}
       </div>
@@ -8130,7 +8130,7 @@ function p3Section(p, m) {
         <div style="font-size:12px;font-weight:700;color:#0f172a;margin-bottom:6px;">Stations${unverifiedStations ? ` (${unverifiedStations} of ${stations.length} locations unverified)` : ""}:</div>
         <div style="display:flex;flex-wrap:wrap;gap:4px;">
           ${stations.map((stn, idx) => `
-            <button type="button" class="story-btn" onclick="flyToP3Hub('${esc(pipe.fips)}', ${idx})" style="padding:4px 8px;font-size:11px;" title="${stn.verified === false ? "Unverified location" : "Focus"} ${esc(stn.name)}">
+            <button type="button" class="story-btn" onclick="flyToP3Hub(this.dataset.fips, +this.dataset.idx)" data-fips="${esc(pipe.fips)}" data-idx="${idx}" style="padding:4px 8px;font-size:11px;" title="${stn.verified === false ? "Unverified location" : "Focus"} ${esc(stn.name)}">
               ${esc(stn.name)}${stn.verified === false ? " (unverified)" : ""}
             </button>
           `).join('')}
@@ -8177,12 +8177,12 @@ function select(id, fly) {
     <p class="subname">Name from ${esc(m.ns || "")}${m.csa && m.csa !== p.n && !m.county ? " · County area: " + esc(m.csa) : ""}</p>
     <div class="action-bar">
       <button type="button" class="action-pill" onclick="copyShareLink()" title="Copy shareable link"><svg class=ic aria-hidden=true><use href=#i-link /></svg> Share</button>
-      <button type="button" class="action-pill" onclick="copyAreaSummary('${id}')" title="Copy markdown brief"><svg class=ic aria-hidden=true><use href=#i-copy /></svg> Copy summary</button>
+      <button type="button" class="action-pill" onclick="copyAreaSummary(this.dataset.geoid)" data-geoid="${esc(id)}" title="Copy markdown brief"><svg class=ic aria-hidden=true><use href=#i-copy /></svg> Copy summary</button>
       <button type="button" class="action-pill" onclick="document.body.classList.remove('prospectus-printing'); window.print();" title="Print 1-page dossier"><svg class=ic aria-hidden=true><use href=#i-print /></svg> Print</button>
-      <button type="button" class="action-pill${inC ? " active" : ""}" id="btn-compare-panel" onclick="toggleCompare('${id}')">${inC ? "✓ In comparison" : "<svg class=ic aria-hidden=true><use href=#i-compare /></svg> Compare"}</button>
+      <button type="button" class="action-pill${inC ? " active" : ""}" id="btn-compare-panel" onclick="toggleCompare(this.dataset.geoid)" data-geoid="${esc(id)}">${inC ? "✓ In comparison" : "<svg class=ic aria-hidden=true><use href=#i-compare /></svg> Compare"}</button>
       <button type="button" class="action-pill${renterViewOn ? " active" : ""}" id="btn-renter-panel" onclick="toggleRenterView()">${renterViewOn ? "<svg class=ic aria-hidden=true><use href=#i-users /></svg> Renter view (on)" : "<svg class=ic aria-hidden=true><use href=#i-users /></svg> Renter view"}</button>
-      <button type="button" class="action-pill" onclick="exportNeighborhoodBrief('${id}', 'csv')" title="Download CSV dataset for this block group"><svg class=ic aria-hidden=true><use href=#i-download /></svg> Export CSV</button>
-      <button type="button" class="action-pill" onclick="exportNeighborhoodBrief('${id}', 'pdf')" title="Export policy brief for residents and council"><svg class=ic aria-hidden=true><use href=#i-file /></svg> Export brief (PDF)</button>
+      <button type="button" class="action-pill" onclick="exportNeighborhoodBrief(this.dataset.geoid, 'csv')" data-geoid="${esc(id)}" title="Download CSV dataset for this block group"><svg class=ic aria-hidden=true><use href=#i-download /></svg> Export CSV</button>
+      <button type="button" class="action-pill" onclick="exportNeighborhoodBrief(this.dataset.geoid, 'pdf')" data-geoid="${esc(id)}" title="Export policy brief for residents and council"><svg class=ic aria-hidden=true><use href=#i-file /></svg> Export brief (PDF)</button>
       <button type="button" class="action-pill" onclick="openCorrection('${id}')"><svg class=ic aria-hidden=true><use href=#i-edit /></svg> Suggest correction</button>
     </div>`;
   if (oc && !(D_OC && D_OC.meta && D_OC.meta.schema >= 2)) h += `<div class="prelim-banner warn"><span class="prelim-icon"><svg class=ic aria-hidden=true><use href=#i-alert /></svg></span><span><b>Orange County coverage is preliminary.</b> Home values, rents, crime, heat and project sizing here are neighborhood-level estimates assembled from public sources. They have not been checked against Census, Assessor, police or transit-schedule records the way LA County's block groups have. Read them as a sketch, not a measurement.</span></div>`;
@@ -9840,7 +9840,7 @@ function renderCompareDrawer() {
       <div class="compare-col">
         <div style="display:flex;justify-content:space-between;align-items:baseline">
           <h4>${esc(p.n)}</h4>
-          <button type="button" class="small" style="background:none;border:none;cursor:pointer;color:var(--ink-3)" onclick="toggleCompare('${id}'); renderCompareDrawer();">✕</button>
+          <button type="button" class="small btn-remove-compare-hood" style="background:none;border:none;cursor:pointer;color:var(--ink-3);font-size:14px;font-weight:700;" onclick="toggleCompare(this.dataset.geoid); renderCompareDrawer();" data-geoid="${esc(id)}" title="Remove neighborhood">✕</button>
         </div>
         <div class="c-row"><span class="k">City</span><span class="v">${esc(p.c)}</span></div>
         <div class="c-row"><span class="k">Typical Home Value</span><span class="v">${fmt$(m.hv)}${m.hv != null && acsNote(id, "hv", m) ? ` <span class="small muted">(${acsNote(id, "hv", m)})</span>` : ""}</span></div>
