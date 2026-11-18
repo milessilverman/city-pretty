@@ -733,7 +733,7 @@ was made from a test that didn't cover the live page.
 
 ## 3. What was built to keep it accurate
 
-- **Machine pulls instead of typing:** `scripts/fetch_hud_fmr.py` (HUD rents for every county) and
+- **Machine pulls instead of typing:** `scripts/fetch_hud_fmr_api.py` (HUD rents for every county) and
   `scripts/build_county_completeness.py` (tiers from each county's own data file plus a ping of every live service).
 - **Live sourced lookups:** `workers/sources.ts` returns Census, HUD, USGS, FEMA, ACS and OpenStreetMap facts with
   the exact URL queried, or `null` with the reason. The AI advisor (`workers/advisorAgent.ts`) may only state facts

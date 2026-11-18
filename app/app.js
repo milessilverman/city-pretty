@@ -2060,7 +2060,9 @@ const esc = s => String(s ?? "").replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt
 const fmt$ = v => {
   if (v == null || isNaN(v)) return "–";
   if (v >= 2000000 && v <= 2000001) return "$2,000,000 or more";
-  if (v > 0 && v <= 10000) return "$10,000 or less";
+  if (v === 9999 || v === 10000) return "$10,000 or less";
+  if (v === 250001) return "$250,000 or more";
+  if (v === 2499 || v === 2500) return "$2,500 or less";
   return v >= 1e9 ? "$" + (v/1e9).toFixed(1) + "B" : v >= 1e6 ? "$" + (v/1e6).toFixed(v >= 1e7 ? 0 : 1) + "M" : v >= 1e3 ? "$" + Math.round(v/1e3) + "k" : "$" + Math.round(v);
 };
 const fmtN = v => v == null || isNaN(v) ? "–" : Math.round(v).toLocaleString();

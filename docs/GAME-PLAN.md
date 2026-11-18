@@ -12,7 +12,7 @@ record claims `verified` without evidence. When anyone (human or AI) finds a mis
 same day, even if the fix comes later.
 
 The second rule: **pull data from the source by script, don't type it.** Hand-typed numbers are where nearly all of the
-fabrication came from. `scripts/fetch_hud_fmr.py` is the pattern: it pulls HUD's rents for all 3,222 counties straight
+fabrication came from. `scripts/fetch_hud_fmr_api.py` is the pattern: it pulls HUD's rents for all 3,222 counties straight
 from HUD, and can be re-run any time.
 
 ## What the finished product does
