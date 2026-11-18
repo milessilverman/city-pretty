@@ -14,14 +14,15 @@ export interface ProposedStation {
   city: string;
   county: string;
   fips: string;
-  station_type: "urban_center" | "suburban_infill" | "rural_exurban_infill" | "university_intermodal" | "intermodal_hub" | "suburban_growth" | "suburban_heritage";
+  station_type: "city_center" | "urban_center" | "suburban_infill" | "rural_exurban_infill" | "university_intermodal" | "intermodal_hub" | "suburban_growth" | "suburban_heritage";
   lat: number;
   lng: number;
-  median_home_value_walkshed: number;
-  avg_land_cost_per_sqft: number;
-  available_underused_acres_walkshed: number;
-  statutory_housing_regime: string;
-  recommended_redevelopment_focus: string;
+  station_basis?: string;
+  median_home_value_walkshed: number | null;
+  avg_land_cost_per_sqft: number | null;
+  available_underused_acres_walkshed: number | null;
+  statutory_housing_regime: string | null;
+  recommended_redevelopment_focus: string | null;
 }
 
 export interface CandidateRailyardSite {
@@ -41,17 +42,17 @@ export interface IntercityCorridor {
   id: string;
   name: string;
   states: string[];
-  route_length_miles: number;
+  route_length_miles: number | null;
   lead_agencies: string[];
   funding_status: string;
   official_study_url: string;
   source_url: string;
   last_verified: string;
   corridor_type: string;
-  max_speed_mph: number;
-  projected_one_way_minutes: number;
-  highway_comparison_minutes: number;
-  estimated_capital_cost_billions: number;
+  max_speed_mph: number | null;
+  projected_one_way_minutes: number | null;
+  highway_comparison_minutes: number | null;
+  estimated_capital_cost_billions: number | null;
   federal_match_program?: string;
   proposed_stations: ProposedStation[];
   candidate_railyard_sites: CandidateRailyardSite[];
@@ -61,27 +62,27 @@ export interface StationTODAnalysis {
   stationId: string;
   stationName: string;
   city: string;
-  walkshedAcquisitionCostPerAcre: number;
-  totalUnderusedLandAcquisitionCost: number;
-  projectedLandValueUpliftPct: number;
-  feasibleHousingUnits: number;
-  estimatedFinishedDevelopmentValue: number;
+  walkshedAcquisitionCostPerAcre: number | null;
+  totalUnderusedLandAcquisitionCost: number | null;
+  projectedLandValueUpliftPct: number | null;
+  feasibleHousingUnits: number | null;
+  estimatedFinishedDevelopmentValue: number | null;
   applicableStatutoryPreemptions: string[];
-  recommendedBikeNetworkMiles: number;
-  estimatedBikeNetworkCost: number;
+  recommendedBikeNetworkMiles: number | null;
+  estimatedBikeNetworkCost: number | null;
   investmentStrategySummary: string;
 }
 
 export interface CorridorFeasibilityEvaluation {
   corridorId: string;
   corridorName: string;
-  isViable: boolean;
-  travelTimeSavedMinutes: number;
-  speedCompetitivenessRatio: number; // >1 means train is faster than highway
-  totalStationUnderusedAcres: number;
-  totalFeasibleHousingUnits: number;
+  isViable: boolean | null;
+  travelTimeSavedMinutes: number | null;
+  speedCompetitivenessRatio: number | null; // >1 means train is faster than highway; null = not on file
+  totalStationUnderusedAcres: number | null;
+  totalFeasibleHousingUnits: number | null;
   recommendedRailyardSite: CandidateRailyardSite | null;
-  railyardCostSavingsUsd: number;
+  railyardCostSavingsUsd: number | null;
   verdictSummary: string;
 }
 
@@ -104,27 +105,32 @@ export interface TargetedInvestmentPlan {
   recommendationNarrative: string;
 }
 
-/**
- * Evaluates the macro feasibility of an entire passenger rail corridor
- */
+// Null-safety: a missing (null/undefined/NaN) input yields a null output ("not on file"), never NaN.
+function num(x: unknown): number | null { return (typeof x === "number" && Number.isFinite(x)) ? x : null; }
+
 export function evaluateCorridorFeasibility(corridor: IntercityCorridor): CorridorFeasibilityEvaluation {
-  const timeSaved = corridor.highway_comparison_minutes - corridor.projected_one_way_minutes;
-  const speedRatio = Math.round((corridor.highway_comparison_minutes / corridor.projected_one_way_minutes) * 100) / 100;
-  const isViable = timeSaved >= 20 && speedRatio >= 1.15;
+  const hwy = num(corridor.highway_comparison_minutes);
+  const rail = num(corridor.projected_one_way_minutes);
+  const haveTimes = hwy !== null && rail !== null && rail > 0;
+  const timeSaved = haveTimes ? hwy - rail : null;
+  const speedRatio = haveTimes ? Math.round((hwy / rail) * 100) / 100 : null;
+  const isViable = haveTimes ? (timeSaved >= 20 && speedRatio >= 1.15) : null;
 
-  const totalAcres = corridor.proposed_stations.reduce((sum, s) => sum + s.available_underused_acres_walkshed, 0);
-  
-  // Units: 45 units/acre average in transit walksheds
-  const totalUnits = Math.round(totalAcres * 45);
+  const acresList = (corridor.proposed_stations || []).map((s: ProposedStation) => num(s.available_underused_acres_walkshed)).filter((v): v is number => v !== null);
+  const totalAcres = acresList.length ? acresList.reduce((a: number, v: number) => a + v, 0) : null;
+  const totalUnits = totalAcres !== null ? Math.round(totalAcres * 45) : null;
 
-  // Railyard analysis
-  const recommendedYard = corridor.candidate_railyard_sites.find(y => y.siting_recommendation.includes("RECOMMENDED")) || corridor.candidate_railyard_sites[0] || null;
-  const expensiveYard = corridor.candidate_railyard_sites.find(y => y.siting_recommendation.includes("NOT RECOMMENDED"));
-  const savings = (expensiveYard && recommendedYard) ? Math.max(0, expensiveYard.total_land_acquisition_cost - recommendedYard.total_land_acquisition_cost) : 0;
+  const yards = corridor.candidate_railyard_sites || [];
+  const recommendedYard = yards.find((y: CandidateRailyardSite) => (y.siting_recommendation || "").includes("RECOMMENDED")) || yards[0] || null;
+  const expensiveYard = yards.find((y: CandidateRailyardSite) => (y.siting_recommendation || "").includes("NOT RECOMMENDED"));
+  const yc: (number | null)[] | null = expensiveYard && recommendedYard ? [num(expensiveYard.total_land_acquisition_cost), num(recommendedYard.total_land_acquisition_cost)] : null;
+  const savings = yc && yc[0] !== null && yc[1] !== null ? Math.max(0, yc[0] - yc[1]) : null;
 
-  const verdict = isViable
-    ? `Strong intercity passenger corridor. Train saves ${timeSaved} minutes over highway congestion (${speedRatio}x faster). Station areas control ${totalAcres.toFixed(1)} underused acres capable of supporting ~${totalUnits.toLocaleString()} transit-oriented homes.`
-    : `Marginal time competitiveness (${timeSaved} minutes saved). Requires higher track speed or highway express lane bottlenecks to justify capital cost.`;
+  const verdict = isViable === null
+    ? "Not on file: this corridor has no published trip-time comparison in the data, so no viability verdict is given."
+    : isViable
+      ? `Train saves ${timeSaved} minutes over highway (${speedRatio}x faster).` + (totalAcres !== null ? ` Station areas control ${totalAcres.toFixed(1)} underused acres capable of supporting ~${totalUnits.toLocaleString()} transit-oriented homes.` : "")
+      : `Marginal time competitiveness (${timeSaved} minutes saved). Requires higher track speed or highway express lane bottlenecks to justify capital cost.`;
 
   return {
     corridorId: corridor.id,
@@ -132,7 +138,7 @@ export function evaluateCorridorFeasibility(corridor: IntercityCorridor): Corrid
     isViable,
     travelTimeSavedMinutes: timeSaved,
     speedCompetitivenessRatio: speedRatio,
-    totalStationUnderusedAcres: Math.round(totalAcres * 10) / 10,
+    totalStationUnderusedAcres: totalAcres !== null ? Math.round(totalAcres * 10) / 10 : null,
     totalFeasibleHousingUnits: totalUnits,
     recommendedRailyardSite: recommendedYard,
     railyardCostSavingsUsd: savings,
@@ -140,32 +146,28 @@ export function evaluateCorridorFeasibility(corridor: IntercityCorridor): Corrid
   };
 }
 
-/**
- * Evaluates station-area real estate and TOD opportunity
- */
-export function evaluateStationTODPotential(
-  station: ProposedStation
-): StationTODAnalysis {
-  const costPerAcre = Math.round(station.avg_land_cost_per_sqft * 43560);
-  const totalAcquisition = Math.round(costPerAcre * station.available_underused_acres_walkshed);
+export function evaluateStationTODPotential(station: ProposedStation): StationTODAnalysis {
+  const landSqft = num(station.avg_land_cost_per_sqft);
+  const acres = num(station.available_underused_acres_walkshed);
+  const homeValue = num(station.median_home_value_walkshed);
+  const nothingOnFile = landSqft === null && acres === null && homeValue === null;
 
-  // Empirical land value uplift within 0.5-1.0 mi (Okamoto & Sato 2018; Loumeau & Russo 2023)
-  const upliftPct = station.station_type === "urban_center" ? 0.32 : station.station_type === "suburban_infill" ? 0.24 : 0.18;
+  const costPerAcre = landSqft !== null ? Math.round(landSqft * 43560) : null;
+  const totalAcquisition = costPerAcre !== null && acres !== null ? Math.round(costPerAcre * acres) : null;
 
-  // Feasible units depend on station density type
+  const upliftPct = nothingOnFile ? null : station.station_type === "urban_center" ? 0.32 : station.station_type === "suburban_infill" ? 0.24 : 0.18;
   const densityMultiplier = station.station_type === "urban_center" ? 75 : station.station_type === "university_intermodal" ? 60 : 35;
-  const feasibleUnits = Math.round(station.available_underused_acres_walkshed * densityMultiplier);
+  const feasibleUnits = acres !== null ? Math.round(acres * densityMultiplier) : null;
 
-  // Finished value: ~85% of walkshed median home value per unit
-  const finishedUnitValue = Math.round(station.median_home_value_walkshed * 0.85);
-  const totalFinishedValue = feasibleUnits * finishedUnitValue;
+  const finishedUnitValue = homeValue !== null ? Math.round(homeValue * 0.85) : null;
+  const totalFinishedValue = feasibleUnits !== null && finishedUnitValue !== null ? feasibleUnits * finishedUnitValue : null;
 
-  // Active transportation feeder network: 3-5 miles of protected bike lanes
-  const bikeMiles = station.station_type === "rural_exurban_infill" ? 2.5 : 4.5;
-  // Cost: ~$220,000/mile for buffered/protected bike lane from verified DOT unit costs
-  const bikeCost = Math.round(bikeMiles * 220_000);
+  const bikeMiles = nothingOnFile ? null : station.station_type === "rural_exurban_infill" ? 2.5 : 4.5;
+  const bikeCost = bikeMiles !== null ? Math.round(bikeMiles * 220000) : null;
 
-  const strategy = `Acquire available underused land in the ${station.name} walkshed (~$${(costPerAcre / 1e6).toFixed(2)}M/acre). Deploy ${station.statutory_housing_regime} for ministerial by-right approval of ~${feasibleUnits.toLocaleString()} units, paired with ${bikeMiles} miles of protected bike paths ($${(bikeCost / 1e3).toFixed(0)}k) connecting adjacent residential neighborhoods.`;
+  const strategy = nothingOnFile
+    ? `Not on file: no walkshed land-cost, underused-acre or home-value data exists for ${station.name}.`
+    : `Acquire available underused land in the ${station.name} walkshed` + (costPerAcre !== null ? ` (~$${(costPerAcre / 1e6).toFixed(2)}M/acre)` : "") + `. Deploy ${station.statutory_housing_regime || "applicable state housing law (not on file)"}` + (feasibleUnits !== null ? ` for ministerial by-right approval of ~${feasibleUnits.toLocaleString()} units` : "") + (bikeMiles !== null ? `, paired with ${bikeMiles} miles of protected bike paths ($${(bikeCost / 1e3).toFixed(0)}k)` : "") + ".";
 
   return {
     stationId: station.id,
@@ -176,7 +178,7 @@ export function evaluateStationTODPotential(
     projectedLandValueUpliftPct: upliftPct,
     feasibleHousingUnits: feasibleUnits,
     estimatedFinishedDevelopmentValue: totalFinishedValue,
-    applicableStatutoryPreemptions: [station.statutory_housing_regime],
+    applicableStatutoryPreemptions: station.statutory_housing_regime ? [station.statutory_housing_regime] : [],
     recommendedBikeNetworkMiles: bikeMiles,
     estimatedBikeNetworkCost: bikeCost,
     investmentStrategySummary: strategy
@@ -191,6 +193,7 @@ export function generateStationInvestmentPlan(
   station: ProposedStation,
   capitalBudget: number
 ): TargetedInvestmentPlan {
+  station = { ...station, statutory_housing_regime: station.statutory_housing_regime || "applicable state housing law (not on file)" };
   const tod = evaluateStationTODPotential(station);
 
   if (capitalBudget <= 250_000) {
@@ -312,7 +315,7 @@ export function generateStationInvestmentPlan(
         sharePct: 15,
         actionItems: [
           `Pledge incremental tax yield into a dedicated TIF / TIRZ / EIFD district to issue infrastructure bonds.`,
-          `Fund complete ${tod.recommendedBikeNetworkMiles}-mile protected bicycle and trail network connecting the entire neighborhood.`
+          `${tod.recommendedBikeNetworkMiles !== null ? `Fund complete ${tod.recommendedBikeNetworkMiles}-mile protected bicycle and trail network connecting the entire neighborhood.` : "Active-transportation network length: not on file."}`
         ],
         projectedReturn: "Municipal bond financing repays 40–60% of public realm infrastructure costs."
       }
