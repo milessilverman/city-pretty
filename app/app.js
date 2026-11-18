@@ -7884,20 +7884,37 @@ function setP3Afford(afford) {
 
 function p3Section(p, m) {
   const pipe = getMetroPipeline(activeFips(), p.c || m.c);
+  if (!pipe) {
+    const n = Array.isArray(TRANSIT_PIPELINES_DATA) ? TRANSIT_PIPELINES_DATA.length : 0;
+    return `<p class="small muted">No major transit project is on file for this county. The page's transit project table (app/data/transit_pipelines.json) lists ${n} project${n === 1 ? "" : "s"}, each checked against the agency's own page.</p>`;
+  }
+  const pv = pipe.verification || null;
+  const pvChecked = pv && (pv.checked_on || pv.checked);
+  const pvLabel = pv && /^verified/.test(String(pv.status || "")) ? `Checked against the agency source${pvChecked ? " on " + fmtCheckedDate(pvChecked) : ""}` : "Not yet checked";
+  const facts = [
+    pipe.length_miles != null ? `${pipe.length_miles} miles` : null,
+    pipe.station_count_per_source != null ? `${pipe.station_count_per_source} stations per the agency` : null,
+    pipe.total_capital_cost_musd != null ? `total capital cost $${fmtN(pipe.total_capital_cost_musd)}M` : null,
+    pipe.cig_share_musd != null ? `federal CIG share $${fmtN(pipe.cig_share_musd)}M` : null,
+    pipe.total_federal_allocation_musd != null ? `federal allocation $${fmtN(pipe.total_federal_allocation_musd)}M` : null,
+  ].filter(Boolean);
+  const hasHub = pipe.hubLat != null && pipe.hubLng != null;
   return `
     <div style="font-family:var(--body);line-height:1.45;color:var(--ink)">
       <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:12px;margin-bottom:12px;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:6px;">
           <span style="font-size:11px;font-weight:700;text-transform:uppercase;color:#0284c7;letter-spacing:0.5px;">Active Major Infrastructure Pipeline</span>
-          <span style="font-size:11px;font-weight:600;background:#e0f2fe;color:#0369a1;padding:2px 8px;border-radius:12px;">${esc(pipe.status.split('·')[0])}</span>
+          <span style="font-size:11px;font-weight:600;background:#e0f2fe;color:#0369a1;padding:2px 8px;border-radius:12px;">${esc(String(pipe.status || "Status not on file").split('·')[0])}</span>
         </div>
         <div style="font-size:15px;font-weight:800;color:#0c4a6e;margin-bottom:4px;">${esc(pipe.title)}</div>
-        <div style="font-size:12px;color:#334155;margin-bottom:4px;"><b>Lead Sponsoring Agency:</b> ${esc(pipe.agency)}</div>
-        <div style="font-size:12px;color:#475569;margin-bottom:6px;"><b>Station Focus Hub:</b> <span style="color:#0369a1;font-weight:600">${esc(pipe.hubName)}</span></div>
-        <div style="font-size:12px;color:#475569;margin-bottom:10px;">${esc(pipe.corridorDesc)}</div>
-        <button type="button" onclick="flyToP3Hub('${esc(pipe.fips)}')" style="display:inline-flex;align-items:center;gap:6px;background:#0284c7;color:#fff;border:none;padding:7px 13px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;box-shadow:0 2px 8px rgba(2,132,199,0.3);transition:background 0.15s;">
+        <div style="font-size:12px;color:#334155;margin-bottom:4px;"><b>Lead Sponsoring Agency:</b> ${esc(pipe.agency || "not on file")}</div>
+        <div style="font-size:12px;color:#475569;margin-bottom:6px;"><b>Station Focus Hub:</b> <span style="color:#0369a1;font-weight:600">${pipe.hubName ? esc(pipe.hubName) : "not on file"}</span></div>
+        ${pipe.corridorDesc ? `<div style="font-size:12px;color:#475569;margin-bottom:6px;">${esc(pipe.corridorDesc)}</div>` : ""}
+        ${facts.length ? `<div style="font-size:12px;color:#334155;margin-bottom:6px;"><b>From the agency:</b> ${esc(facts.join(" · "))}</div>` : ""}
+        <div style="font-size:11px;color:#64748b;margin-bottom:10px;">${esc(pvLabel)}${pipe.rtp_document_url ? ` · <a href="${esc(pipe.rtp_document_url)}" target="_blank" rel="noopener noreferrer">source</a>` : ""}${(!pipe.stations || !pipe.stations.length) ? " · station locations not on file" : ""}</div>
+        ${hasHub ? `<button type="button" onclick="flyToP3Hub('${esc(pipe.fips)}')" style="display:inline-flex;align-items:center;gap:6px;background:#0284c7;color:#fff;border:none;padding:7px 13px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;box-shadow:0 2px 8px rgba(2,132,199,0.3);transition:background 0.15s;">
           Fly to Station Hub on Map &amp; View 0.5-Mi Walkshed
-        </button>
+        </button>` : ""}
       </div>
 
       ${pipe.stations && pipe.stations.length ? `
@@ -7915,7 +7932,8 @@ function p3Section(p, m) {
 
       <div style="margin-bottom:12px;">
         <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px;">P3 Joint Development &amp; Corridor Bundle Simulator</div>
-        <div style="font-size:12px;color:var(--ink-2);margin-bottom:10px;">Select complementary investments around the transit corridor to calculate combined private developer IRR, public agency ground lease revenue, and neighborhood property value lift:</div>
+        <div style="font-size:12px;color:var(--ink-2);margin-bottom:6px;">Select complementary investments around the transit corridor to calculate combined private developer IRR, public agency ground lease revenue, and neighborhood property value lift:</div>
+        <div style="font-size:11px;font-weight:700;color:#92400e;background:#fffbeb;border:1px solid #fde68a;border-radius:4px;padding:5px 8px;margin-bottom:10px;">Illustrative only: inputs are assumptions, not local data. The project table holds no joint-development program, so results read "Not on file" unless a figure is published.</div>
 
         <div style="display:flex;flex-wrap:wrap;gap:12px;background:#f1f5f9;border:1px solid #cbd5e1;border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:12px;">
           <div style="display:flex;align-items:center;gap:6px;">
@@ -7941,7 +7959,7 @@ function p3Section(p, m) {
             <input type="checkbox" id="p3-tod" checked onchange="runP3Sim()" style="margin-top:2px;">
             <div>
               <b>Transit-Oriented Housing &amp; Mixed-Use Joint Development</b>
-              <div style="font-size:11.5px;color:var(--ink-2);">${pipe.units} mixed-income homes, ${fmtN(pipe.retailSqft)} sq ft ground-floor commercial via 99-year public ground lease.</div>
+              <div style="font-size:11.5px;color:var(--ink-2);">${pipe.units != null ? `${fmtN(pipe.units)} mixed-income homes` : "Homes: not on file"}, ${pipe.retailSqft != null ? `${fmtN(pipe.retailSqft)} sq ft ground-floor commercial` : "commercial space: not on file"}, via a public ground lease.</div>
             </div>
           </label>
 
