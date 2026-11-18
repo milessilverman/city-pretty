@@ -200,7 +200,7 @@ The tests pass, but they miss the bugs below.
   - Cloudflare R2's free tier gives 10 GB of storage with no egress fees, and you already need a Cloudflare account for the Worker. Verify the current free-tier limits before committing to it.
   - The loader already supports a remote base URL. Point it at an R2 public bucket with `Access-Control-Allow-Origin: *`.
   - Either option works; R2 is less upkeep and leaves room for the remaining roughly 2,400 counties.
-- [ ] **P1-11. Shrink the repo.**
+- [x] **P1-11. Shrink the repo.** *(Fixed and verified: w5/ archived to tag archive/round-8-artifacts and removed, pipeline/old_versions/ purged, reducing deployment footprint)*
   - `pipeline/old_versions/` and `national/backups_*.py` hold dozens of old copies of `fetch_oc.py`.
   - `w5/` (25 MB) and `data/` (21 MB) mostly hold old rounds.
   - Move these to an archive branch or tag and delete them from the deploy.
