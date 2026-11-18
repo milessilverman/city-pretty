@@ -9481,7 +9481,19 @@ async function sendAiQuery(q, promptKey = null) {
     });
     clearTimeout(timer);
     const data = await res.json().catch(() => null);
-    if (res.ok && data && data.ok && data.text) { reply = { role: "assistant", raw: data.text, text: aiTextToHtml(data.text) }; setAiStatus("ok"); }
+    if (res.ok && data && data.ok && data.text) {
+      let html = aiTextToHtml(data.text);
+      const g = data.grounding || null;
+      if (g && g.ok === false) {
+        const figs = Array.isArray(g.unverified_figures) ? g.unverified_figures.map(x => esc(String(x))).slice(0, 12).join(", ") : "";
+        html += `<div style="margin-top:8px;padding:6px 8px;border:1px solid #fde68a;background:#fffbeb;color:#92400e;border-radius:6px;font-size:11.5px;">These figures could not be matched to the page data or the site's tables: ${figs || "(not listed)"}. Do not rely on them.</div>`;
+      }
+      const srcs = Array.isArray(data.sources) ? data.sources.filter(u => typeof u === "string" && /^https?:\/\//i.test(u)).slice(0, 10) : [];
+      if (srcs.length) {
+        html += `<div style="margin-top:6px;font-size:11px;color:#475569;"><b>Sources:</b> ${srcs.map(u => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(u.replace(/^https?:\/\//i, "").slice(0, 60))}</a>`).join(" &middot; ")}</div>`;
+      }
+      reply = { role: "assistant", raw: data.text, text: html }; setAiStatus("ok");
+    }
     else {
       const why = (data && data.error) || `HTTP ${res.status}`;
       reply = { role: "notice", text: `The AI advisor could not answer (${why}). No answer was generated.` };

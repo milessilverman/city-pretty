@@ -47,11 +47,29 @@ export interface AdvisorParcel {
   fire: boolean | null;
   historic: boolean | null;
   lotSplitEligibility: boolean | null;
+  byRightLaws?: {
+    applicable: { citation: string | null; verification_status: string | null }[];
+    not_determined: { id: string | null; citation: string | null; reason: string | null; verification_status: string | null }[];
+  } | null;
+}
+
+// A state housing law from app/data/statutes.json with its verification status (verified | partly | unverified).
+export interface AdvisorLaw {
+  id: string | null;
+  name: string | null;
+  citation: string | null;
+  summary: string | null;
+  verification_status: string | null;
+  checked: string | null;
+  fields_unconfirmed: string[];
 }
 
 export interface AdvisorHudFmr {
   fips: string | null;
   metro_or_county_name: string | null;
+  fiscal_year?: number | null;
+  null_reason?: string | null;
+  verification_status?: string | null;
   efficiency_0br: number | null;
   one_bed_1br: number | null;
   two_bed_2br: number | null;
@@ -63,6 +81,8 @@ export interface AdvisorHudFmr {
 export interface AdvisorIntercityCorridor {
   id: string | null;
   name: string | null;
+  verification_status?: string | null;
+  corridor_confirmed?: boolean | null;
   route_length_miles: number | null;
   funding_status: string | null;
   projected_minutes: number | null;
@@ -71,6 +91,7 @@ export interface AdvisorIntercityCorridor {
   nearestStation?: {
     name: string | null;
     city: string | null;
+    station_basis?: string | null;
     avg_land_cost_per_sqft: number | null;
     available_underused_acres: number | null;
     statutory_housing_regime: string | null;
@@ -90,11 +111,18 @@ export interface AdvisorUnderusedSite {
   cityName: string | null;
   baseZoning: string | null;
   distanceToRailMeters: number | null;
-  potentialHomes: number | null;
-  margin: number | null;
   publicOwner: string | null;
   inConservationEasement: boolean | null;
-  idea: string | null;
+  verification_status?: string | null;
+  // Model output from underused_sites.json (screening_estimate), never a measured fact.
+  screening_estimate?: {
+    potentialHomes: number | null;
+    margin: number | null;
+    marginBeforeLand: number | null;
+    idea: string | null;
+    assumed_inputs: string[];
+    missing_inputs: string[];
+  } | null;
 }
 
 export interface AdvisorRenovationQuote {
@@ -110,6 +138,7 @@ export interface AdvisorRenovationQuote {
   governingStatute: string | null;
   verdict: string | null;
   verdictSummary: string | null;
+  basis?: string | null;
 }
 
 export interface AdvisorStreetForge {
@@ -122,6 +151,7 @@ export interface AdvisorStreetForge {
   evChargerSuitabilityScore?: number | null;
   evNetProjectCostUsd?: number | null;
   evPaybackYears?: number | null;
+  basis?: string | null;
 }
 
 export interface AdvisorEverySpace {
@@ -130,7 +160,11 @@ export interface AdvisorEverySpace {
   monthlyHoldingDeficitReductionPct: number | null;
   isCashFlowPositiveDuringHold: boolean | null;
   holdingStrategyRecommendation: string | null;
+  basis?: string | null;
 }
+
+// The decision brief from the Invest view (window.__cpDecisionBrief). Passed through as data, size-capped.
+export const DECISION_BRIEF_MAX_CHARS = 16000;
 
 export interface AdvisorContext {
   county: AdvisorCounty;
@@ -143,6 +177,9 @@ export interface AdvisorContext {
   renovationQuote?: AdvisorRenovationQuote | null;
   streetForge?: AdvisorStreetForge | null;
   everySpace?: AdvisorEverySpace | null;
+  laws?: AdvisorLaw[];
+  decision_brief?: unknown;
+  decision_brief_omitted?: string | null;
 }
 
 // Stable text: keep it free of per-request values so it can be prompt-cached.
@@ -151,6 +188,9 @@ export const ADVISOR_SYSTEM_PROMPT = [
   "Each question comes with the data the page is showing, as JSON. Base every figure you give on that JSON. When a value is null or missing, say the page does not have it; do not estimate it or bring in numbers from elsewhere.",
   "If parcel.valueEstimateWithheld is set, the page deliberately gives no home value for this lot. Do not give one; explain the reason it states.",
   "The page's figures are screening estimates from public data, not appraisals, zoning determinations, tax advice or legal advice. When a question is about building, adding a unit, splitting a lot, permits or property taxes, give what the data shows and name the city or county office that decides.",
+  "Items carry a verification_status. Treat a law, site, corridor, study or cost whose status is \"partly\", \"unverified\", \"corridor_not_confirmed\" or missing as unconfirmed: say it is not confirmed and never present it as a right or a fact. Only laws listed in parcel.byRightLaws.applicable (status \"verified\") may be described as applying to the lot; laws in not_determined are not determined. A corridor with corridor_confirmed false is not an official corridor.",
+  "Values inside screening_estimate, and any block whose basis is \"illustrative_assumed_inputs\", are model outputs built on assumptions, not measurements. Call them screening estimates and name the assumptions when you use them.",
+  "decision_brief, when present, is the page's own decision brief; the same rules apply to each item in it.",
   "Mention a state or federal law only when you are confident it applies in this state, and say that rules change. As of 2026 the federal 30% residential solar credit (IRC 25D) no longer applies to systems installed after 2025.",
   "Answer in a few sentences, then at most five short bullet points if they help. Use plain text with **bold** and '-' bullets only.",
 ].join("\n\n");
@@ -159,6 +199,8 @@ const str = (v: unknown, max = 200): string | null => (typeof v === "string" && 
 const num = (v: unknown): number | null => (typeof v === "number" && Number.isFinite(v) ? v : null);
 const bool = (v: unknown): boolean | null => (typeof v === "boolean" ? v : null);
 const obj = (v: unknown): Record<string, unknown> => (v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : {});
+const arr = (v: unknown): unknown[] => (Array.isArray(v) ? v : []);
+const strList = (v: unknown, n = 12, max = 60): string[] => arr(v).map((x) => str(x, max)).filter((x): x is string => x !== null).slice(0, n);
 
 export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
   const r = obj(raw);
@@ -216,6 +258,19 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       historic: bool(p.historic),
       lotSplitEligibility: bool(p.lotSplitEligibility),
     };
+    if (p.byRightLaws) {
+      const bl = obj(p.byRightLaws);
+      ctx.parcel.byRightLaws = {
+        applicable: arr(bl.applicable).slice(0, 6).map((x) => {
+          const o = obj(x);
+          return { citation: str(o.citation, 160), verification_status: str(o.verification_status, 30) };
+        }),
+        not_determined: arr(bl.not_determined).slice(0, 8).map((x) => {
+          const o = obj(x);
+          return { id: str(o.id, 40), citation: str(o.citation, 160), reason: str(o.reason, 300), verification_status: str(o.verification_status, 30) };
+        }),
+      };
+    }
     if (ctx.parcel.valueEstimateWithheld) ctx.parcel.valueEstimate = null;
   }
   if (r.hudFmr) {
@@ -223,6 +278,9 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
     ctx.hudFmr = {
       fips: str(f.fips, 5),
       metro_or_county_name: str(f.metro_or_county_name, 100),
+      fiscal_year: num(f.fiscal_year),
+      null_reason: str(f.null_reason, 200),
+      verification_status: str(f.verification_status, 30),
       efficiency_0br: num(f.efficiency_0br),
       one_bed_1br: num(f.one_bed_1br),
       two_bed_2br: num(f.two_bed_2br),
