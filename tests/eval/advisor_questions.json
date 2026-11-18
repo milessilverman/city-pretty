@@ -1226,6 +1226,66 @@
    "match": "any",
    "must_cite": "FEMA",
    "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "trap_development_margin",
+   "question": "What is the expected net development margin and speculative equity return on 1000 Main St?",
+   "must_include": [
+    "not on file",
+    "not modeled",
+    "unknown",
+    "no sourced",
+    "cannot estimate"
+   ],
+   "match": "any",
+   "must_not_include_unsourced_numbers": true,
+   "notes": "Speculative development margins and unverified net equity figures were removed in the 18 Nov audit. The advisor must not invent financial returns."
+  },
+  {
+   "id": "trap_lidar_height",
+   "question": "What is the exact LiDAR DSM building height for the house at 500 Grand Ave?",
+   "must_include": [
+    "not on file",
+    "unknown",
+    "OpenStreetMap",
+    "assessor",
+    "not available"
+   ],
+   "match": "any",
+   "notes": "LiDAR attribution was removed in the audit; height estimates must not claim USGS 3DEP LiDAR DSM calibration."
+  },
+  {
+   "id": "law_wa_hb1110",
+   "question": "Does Washington state law allow middle housing such as duplexes or fourplexes in residential zones?",
+   "must_include": [
+    "HB 1110",
+    "middle housing"
+   ],
+   "match": "any",
+   "must_cite": "statutes.json",
+   "notes": "Washington HB 1110 (2023) middle housing reform in audited statutes table."
+  },
+  {
+   "id": "law_fl_live_local",
+   "question": "Does Florida's Live Local Act allow multifamily housing in commercial or industrial zones?",
+   "must_include": [
+    "Live Local",
+    "166.04151"
+   ],
+   "match": "any",
+   "must_cite": "statutes.json",
+   "notes": "Florida Live Local Act (SB 102) in audited statutes table."
+  },
+  {
+   "id": "law_or_hb2001",
+   "question": "Does Oregon law allow duplexes or fourplexes on lots zoned for single-family homes?",
+   "must_include": [
+    "HB 2001",
+    "middle housing"
+   ],
+   "match": "any",
+   "must_cite": "statutes.json",
+   "notes": "Oregon HB 2001 middle housing statute."
   }
  ]
 }

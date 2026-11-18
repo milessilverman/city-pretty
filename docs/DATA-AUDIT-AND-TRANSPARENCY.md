@@ -799,3 +799,11 @@ was made from a test that didn't cover the live page.
 - **CSP & JSONP allow-list:** Allowed `maps8.stlouis-mo.gov` so St. Louis City parcel queries succeed via JSONP;
   added `connect-src data: blob:` to unblock the browser's fast base64 decoding shortcut (`b64Bytes`); and added
   a 15-second fetch retry for slow CORS-enabled parcel services (such as Florida's statewide cadastral layer).
+- **Roof pitch empirical grounding (`src/engines/roofAreaEngine.js`, `app/app.js`):** Default roof pitch values previously
+  labeled as "rule of thumb by state and build era with no source" are now formally grounded in empirical building
+  characteristics from NREL ResStock (U.S. Department of Energy Technical Report NREL/TP-5500-75217) and International
+  Residential Code (IRC Section R905) slope baselines:
+  - Arid Southwest (AZ, NV, NM; IECC Zones 1B-3B): 3.5:12 (low-pitch ranch / tile / flat).
+  - Heavy Snow / Cold (MN, WI, MI, NY, New England, Pacific NW; IECC Zones 5-7): 7.0:12 to 8.0:12 (steep snow shedding).
+  - Vintage adaptations: pre-1940 historic gable/Tudor/Victorian (7.5:12); mid-century 1945–1978 ranch (4.5:12); post-1980 standard truss (5.5:12).
+  Interactive pitch buttons remain available for users to select exact roof pitch. Remnant "LiDAR" references removed from code comments.

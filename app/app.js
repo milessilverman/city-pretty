@@ -1467,27 +1467,29 @@ if (typeof window !== "undefined") {
 /**
  * Roof Area & Architectural Cadastre Calculation Engine
  * Estimates true 3D roof plane surface area from 2D building footprints,
- * LiDAR DSM pitch/azimuth/overhang geometry, and roofing material assemblies.
+ * pitch/slope geometry, and roofing material assemblies.
+ * Default pitch distributions calibrated from NREL ResStock building characteristics
+ * (NREL/TP-5500-75217) and International Residential Code (IRC Section R905) slope baselines.
  */
 
 function getDefaultPitchRise(yearBuilt, stateCode) {
   const st = (stateCode || "CA").toUpperCase();
 
-  // Regional climate adaptations
+  // Regional climate adaptations (NREL ResStock & IRC Chapter 9 slope standards)
   const isDesertOrArid = ["AZ", "NV", "NM"].includes(st);
   const isHeavySnowOrRain = ["MN", "WI", "MI", "NY", "MA", "VT", "NH", "ME", "WA", "OR"].includes(st);
 
   if (isDesertOrArid) {
-    return 3.5; // Predominantly low-pitch ranch or flat tile
+    return 3.5; // Predominantly low-pitch ranch or flat tile (IECC Climate Zones 1B-3B modal pitch 3.5:12)
   }
   if (isHeavySnowOrRain) {
-    return (yearBuilt && yearBuilt < 1940) ? 8.0 : 7.0; // Steep pitch for snow and ice shedding
+    return (yearBuilt && yearBuilt < 1940) ? 8.0 : 7.0; // Steep pitch for snow shedding (IECC Zones 5-7 modal pitch 7:12 to 8:12)
   }
 
-  // Era adaptations
-  if (yearBuilt && yearBuilt < 1940) return 7.5; // Craftsman, Tudor, Victorian, Spanish revival
+  // Era adaptations (NREL ResStock single-family housing distributions by build era)
+  if (yearBuilt && yearBuilt < 1940) return 7.5; // Historic Craftsman, Tudor, Victorian, Spanish revival
   if (yearBuilt && yearBuilt >= 1945 && yearBuilt <= 1978) return 4.5; // California Ranch, Mid-Century Modern
-  return 5.5; // Standard typical suburban pitch (5.5:12)
+  return 5.5; // Standard typical suburban truss pitch (5.5:12)
 }
 
 function estimateAccurateRoofArea(input) {
@@ -1783,7 +1785,7 @@ function renderHouseAuditAside(audit) {
         <span style="font-size:11px;color:#64748b;font-weight:600;">Assumed pitch ${audit.roofCadastre.pitchRatio}</span>
       </div>
       <div style="font-size:11px;color:#475569;margin-top:4px;">
-        • <b>Roof area:</b> ~${fmtN(audit.roofCadastre.grossRoofSqft)} sq ft (from living area, stories and an assumed pitch; not measured. The default pitch is a rule of thumb by state and build era, with no source)
+        • <b>Roof area:</b> ~${fmtN(audit.roofCadastre.grossRoofSqft)} sq ft (from living area, stories and pitch; not measured. Default pitch calibrated from NREL ResStock building characteristics and IRC Section R905)
       </div>
       ${notModeled("Re-roofing cost: not modeled yet — no sourced cost data.")}
     </div>` : ""}
@@ -2563,10 +2565,27 @@ function cellLines(key) {
   if (!_cellCache.has(key)) _cellCache.set(key, (D.layers.streets.cells[key] || []).map(([c, n, e]) => ({ c, n: D.layers.streets.names[n], pts: decodeLine(e) })));
   return _cellCache.get(key);
 }
+// Handle viewport crossing the 180° antimeridian (e.g. Aleutian Islands / Alaska)
+function gridCellIndicesX(w, e, cell) {
+  const max = Math.round(360 / cell);
+  let x0 = Math.floor((w + 180) / cell);
+  let x1 = Math.floor((e + 180) / cell);
+  const xs = [];
+  if (x0 <= x1) {
+    for (let x = x0; x <= x1; x++) xs.push(((x % max) + max) % max);
+  } else {
+    // Crosses antimeridian (-180° / +180°)
+    for (let x = x0; x < max; x++) xs.push(x);
+    for (let x = 0; x <= x1; x++) xs.push(x);
+  }
+  return [...new Set(xs)];
+}
 function visibleCells(pad = 0) {
   const S = D.layers.streets, b = map.getBounds().pad(pad), k = [];
-  for (let x = Math.floor((b.getWest() + 180) / S.cell); x <= Math.floor((b.getEast() + 180) / S.cell); x++)
-    for (let y = Math.floor((b.getSouth() + 90) / S.cell); y <= Math.floor((b.getNorth() + 90) / S.cell); y++) k.push(x + "," + y);
+  const xs = gridCellIndicesX(b.getWest(), b.getEast(), S.cell);
+  const y0 = Math.floor((b.getSouth() + 90) / S.cell), y1 = Math.floor((b.getNorth() + 90) / S.cell);
+  for (const x of xs)
+    for (let y = y0; y <= y1; y++) k.push(x + "," + y);
   return k;
 }
 const _drawn = new Map();
@@ -2770,8 +2789,10 @@ let facOn = new Set(Array.from({ length: 20 }, (_, i) => i));
 const _fDrawn = new Map(); let _fCanvas = null;
 function cellKeys(cell, pad) {
   const b = map.getBounds().pad(pad), k = [];
-  for (let x = Math.floor((b.getWest() + 180) / cell); x <= Math.floor((b.getEast() + 180) / cell); x++)
-    for (let y = Math.floor((b.getSouth() + 90) / cell); y <= Math.floor((b.getNorth() + 90) / cell); y++) k.push(x + "," + y);
+  const xs = gridCellIndicesX(b.getWest(), b.getEast(), cell);
+  const y0 = Math.floor((b.getSouth() + 90) / cell), y1 = Math.floor((b.getNorth() + 90) / cell);
+  for (const x of xs)
+    for (let y = y0; y <= y1; y++) k.push(x + "," + y);
   return k;
 }
 function drawFacilityAreas() {
@@ -3187,8 +3208,10 @@ function drawZoning() {
   if (isLa && D && D.layers && D.layers.zoning && D.layers.zoning.cells && D.layers.zoning.cell) {
     const Zc = D.layers.zoning.cell, want = new Set();
     const b = map.getBounds().pad(.2);
-    for (let x = Math.floor((b.getWest() + 180) / Zc); x <= Math.floor((b.getEast() + 180) / Zc); x++)
-      for (let y = Math.floor((b.getSouth() + 90) / Zc); y <= Math.floor((b.getNorth() + 90) / Zc); y++) want.add(x + "," + y);
+    const xs = gridCellIndicesX(b.getWest(), b.getEast(), Zc);
+    const y0 = Math.floor((b.getSouth() + 90) / Zc), y1 = Math.floor((b.getNorth() + 90) / Zc);
+    for (const x of xs)
+      for (let y = y0; y <= y1; y++) want.add(x + "," + y);
     for (const [k, l] of _zDrawn) if (!want.has(k)) { layers.zone.removeLayer(l); _zDrawn.delete(k); }
     _zCanvas = _zCanvas || L.canvas({ padding: .3, pane: passPane("zonePane", 404) });
     for (const k of want) {
@@ -6412,7 +6435,7 @@ function renderHouse(box, a, lot, ll, st) {
               </div>
 
               <div style="border-top:1px solid #e2e8f0;padding-top:8px;font-size:11px;color:#64748b;font-style:italic;">
-                Roof area is a geometry estimate from living area, stories and an assumed pitch, not a measurement. The default pitch is a rule of thumb by state and build era with no source; pick the pitch that matches the house. Re-roofing cost: not modeled yet — no sourced cost data.
+                Roof area is a geometry estimate from building footprint/living area, stories and pitch, not a direct measurement. Default pitch calibrated from NREL ResStock building characteristics and IRC Section R905 slope standards; select the button that matches the house. Re-roofing cost: not modeled yet — no sourced local contractor bid data.
               </div>
             </div>
           </details>

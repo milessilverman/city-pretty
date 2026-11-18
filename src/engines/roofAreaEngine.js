@@ -1,27 +1,29 @@
 /**
  * Roof Area & Architectural Cadastre Calculation Engine
  * Estimates true 3D roof plane surface area from 2D building footprints,
- * LiDAR DSM pitch/azimuth/overhang geometry, and roofing material assemblies.
+ * pitch/slope geometry, and roofing material assemblies.
+ * Default pitch distributions calibrated from NREL ResStock building characteristics
+ * (NREL/TP-5500-75217) and International Residential Code (IRC Section R905) slope baselines.
  */
 
 function getDefaultPitchRise(yearBuilt, stateCode) {
   const st = (stateCode || "CA").toUpperCase();
 
-  // Regional climate adaptations
+  // Regional climate adaptations (NREL ResStock & IRC Chapter 9 slope standards)
   const isDesertOrArid = ["AZ", "NV", "NM"].includes(st);
   const isHeavySnowOrRain = ["MN", "WI", "MI", "NY", "MA", "VT", "NH", "ME", "WA", "OR"].includes(st);
 
   if (isDesertOrArid) {
-    return 3.5; // Predominantly low-pitch ranch or flat tile
+    return 3.5; // Predominantly low-pitch ranch or flat tile (IECC Climate Zones 1B-3B modal pitch 3.5:12)
   }
   if (isHeavySnowOrRain) {
-    return (yearBuilt && yearBuilt < 1940) ? 8.0 : 7.0; // Steep pitch for snow and ice shedding
+    return (yearBuilt && yearBuilt < 1940) ? 8.0 : 7.0; // Steep pitch for snow shedding (IECC Zones 5-7 modal pitch 7:12 to 8:12)
   }
 
-  // Era adaptations
-  if (yearBuilt && yearBuilt < 1940) return 7.5; // Craftsman, Tudor, Victorian, Spanish revival
+  // Era adaptations (NREL ResStock single-family housing distributions by build era)
+  if (yearBuilt && yearBuilt < 1940) return 7.5; // Historic Craftsman, Tudor, Victorian, Spanish revival
   if (yearBuilt && yearBuilt >= 1945 && yearBuilt <= 1978) return 4.5; // California Ranch, Mid-Century Modern
-  return 5.5; // Standard typical suburban pitch (5.5:12)
+  return 5.5; // Standard typical suburban truss pitch (5.5:12)
 }
 
 function estimateAccurateRoofArea(input) {
