@@ -399,4 +399,19 @@ describe("Audit checklist verification (Section 5)", () => {
       expect(appJs).toMatch(/F\.footSource === "osm_building_outline" \|\| F\.footSource === "cadastral_outline"/);
     });
   });
+
+  describe("Audit 3.5 Hazards and Florida Valuation Integrity", () => {
+    it("Florida DOR pull script documents statutory Jan 1 date and roll certification caveats", () => {
+      const flScript = fs.readFileSync(path.join(__dirname, "../../scripts/backtests/pull_florida_dor.py"), "utf8");
+      expect(flScript).toMatch(/s\. 192\.042, F\.S\./);
+      expect(flScript).toMatch(/Value Adjustment Board/);
+      expect(flScript).toMatch(/Audit transparency note \(P1-6\)/);
+    });
+
+    it("app/facts.js formats live FEMA National Risk Index and USGS Seismic rows", () => {
+      const factsJs = fs.readFileSync(path.join(__dirname, "../../app/facts.js"), "utf8");
+      expect(factsJs).toMatch(/Natural hazard risk \(FEMA NRI\)/);
+      expect(factsJs).toMatch(/Earthquake design \(USGS ASCE 7-22\)/);
+    });
+  });
 });

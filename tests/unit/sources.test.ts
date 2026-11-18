@@ -9,6 +9,8 @@ import {
   addressMismatch,
   censusGeographies,
   femaFloodZone,
+  femaNationalRiskIndex,
+  usgsSeismicDesign,
   geocodeAddress,
   hudFairMarketRentForCounty,
   osmNearby,
@@ -39,6 +41,8 @@ const AUSTIN = fakeFetch([
   [/geocoder\/locations\/onelineaddress/, fx("census_address_austin.json")],
   [/epqs\.nationalmap\.gov/, fx("usgs_elev_austin.json")],
   [/NFHL\/MapServer\/28/, fx("fema_flood_austin.json")],
+  [/National_Risk_Index_Census_Tracts/, fx("fema_nri_austin.json")],
+  [/earthquake\.usgs\.gov\/ws\/designmaps/, fx("usgs_seismic_austin.json")],
 ]);
 
 describe("official-source connectors (real captured responses)", () => {
@@ -134,12 +138,42 @@ describe("official-source connectors (real captured responses)", () => {
 
   it("siteFacts bundles every source with its URL", async () => {
     const f = await siteFacts(30.3005, -97.724, { fetcher: AUSTIN });
-    for (const k of ["geographies", "hud_fair_market_rent", "elevation", "flood_zone"] as const) {
+    for (const k of ["geographies", "hud_fair_market_rent", "elevation", "flood_zone", "national_risk_index", "seismic_design"] as const) {
       expect(f[k].ok).toBe(true);
       expect(f[k].source.url).toMatch(/^https:\/\//);
       expect(f[k].source.retrieved_at).toMatch(/^\d{4}-\d{2}-\d{2}/); // HUD: the date the bundled file was pulled from HUD
     }
+    expect(f.national_risk_index.ok).toBe(true);
+    if (f.national_risk_index.ok) {
+      expect(f.national_risk_index.value.tract_fips).toBe("48453000302");
+      expect(f.national_risk_index.value.risk_rating).toBe("Relatively Low");
+    }
+    expect(f.seismic_design.ok).toBe(true);
+    if (f.seismic_design.ok) {
+      expect(f.seismic_design.value.seismic_design_category).toBe("A");
+    }
     expect(f.acs_tract && f.acs_tract.ok).toBe(false); // no key in tests
+  });
+
+  it("femaNationalRiskIndex returns composite risk and sub-scores from the Dec 2025 release", async () => {
+    const res = await femaNationalRiskIndex(30.3005, -97.724, AUSTIN);
+    expect(res.ok).toBe(true);
+    if (!res.ok) return;
+    expect(res.source.vintage).toContain("December 2025");
+    expect(res.value.tract_fips).toBe("48453000302");
+    expect(res.value.risk_rating).toBe("Relatively Low");
+    expect(res.value.risk_score).toBeCloseTo(28.1, 1);
+    expect(res.value.earthquake_rating).toBe("Very Low");
+  });
+
+  it("usgsSeismicDesign returns ASCE 7-22 parameters", async () => {
+    const res = await usgsSeismicDesign(30.3005, -97.724, AUSTIN);
+    expect(res.ok).toBe(true);
+    if (!res.ok) return;
+    expect(res.source.publisher).toContain("U.S. Geological Survey");
+    expect(res.value.seismic_design_category).toBe("A");
+    expect(res.value.pga_m).toBe(0.032);
+    expect(res.value.ss).toBe(0.064);
   });
 
   it("parseOsmHeight converts feet/inches, feet, and meters correctly", () => {

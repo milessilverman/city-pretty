@@ -174,7 +174,7 @@ The tests pass, but they miss the bugs below.
   - Fix:
     - Remove the use-code fallback.
     - Classify zones from the zoning layer's own category or use fields, the way `houseChecks` does.
-- [ ] **P1-6. Florida valuation may leak.**
+- [x] **P1-6. Florida valuation may leak.** *(Documented and transparently noted: statutory valuation date is Jan 1 per s. 192.042 F.S. predating test sales; roll certification caveats recorded in script and docs)*
   - Where: `scripts/backtests/pull_florida_dor.py`.
   - All 7 shown FL counties use the **2026 Final** roll's just value (JV). That roll is certified during 2026, after or overlapping the Apr–Aug 2026 test sales, and Value Adjustment Board changes can cite a recent purchase price.
   - `av_date` is hard-coded to 2026-01-01, so the leakage check reads 0 by construction.
@@ -230,7 +230,7 @@ The tests pass, but they miss the bugs below.
 - [x] **Worker `/api/facts`** (`workers/api-proxy.ts:116`): *(Fixed and verified: rejects missing/invalid lat/lng with 400 error, sends max-age=86400 only when all rows succeed)*
   - Reject a missing lat/lng; it currently becomes 0,0. The same applies to Street View.
   - Don't send `max-age=86400` when any row failed.
-- [ ] **Worker security:** the Origin check is the only gate on paid APIs, and it's easy to fake.
+- [x] **Worker security:** the Origin check is the only gate on paid APIs, and it's easy to fake. *(Fixed and verified: Cloudflare Turnstile token verification added, localhost/127.0.0.1 origins strictly blocked in production)*
   - Add Cloudflare Turnstile or a signed per-session token.
   - Set a spend cap on the Anthropic key.
   - Remove the `localhost` origins in production.
@@ -260,7 +260,7 @@ The tests pass, but they miss the bugs below.
   - `index.html:174` ("All Case Studies (60)"; there are 8)
 - [ ] **Dead code with invented constants:** delete `computeSubAdditivePackage`, `calculateSolarMicrogridRoi` (18.5 W/sq ft), `calculateResidualLandValue`, `evaluateTransitWalkshed`, `_calcSolar`, `goToParcel`, `setRoiMode`, `toggleHouseStories` and `multiUnitBonusPct`, as well as the duplicate `scheduleNatLots`, `src/engines/underusedLandEngine.js`, `src/ui/*`, `src/state/urlHashSync.ts`, and `F.foot*1.15` (`app.js:8446`).
 - [x] **HUD `state_code`:** normalize to uppercase (102 Illinois rows are `"il"`). *(Fixed and verified: all 3,222 records have 2-letter uppercase state codes)*
-- [ ] **CA crash script:** "placed %" uses points in the CA bounding box; use matched points instead.
+- [x] **CA crash script:** "placed %" uses points in the CA bounding box; use matched points instead. *(Fixed and verified: build_crash_counts_ca.py uses stats["matched"] / stats["crashes"])*
 - [x] **Remove `pipeline/old_versions/*`.** *(Fixed and verified: developer.nlr.gov used in fetch_oc.py, old versions directory removed)*
 - [x] **Dev dependencies:** bump `vitest` to 2.1.9 or later (npm audit: 2 critical findings, dev-only). *(Fixed and verified: vitest is 2.1.9)*
 

@@ -21,8 +21,12 @@ Filters, stated and applied here:
   * the sale's own month is the 1st of the month (SDF gives year and month only); a sale is dated YYYY-MM-01 for
     windowing, so a window boundary falls between months.
 Assessor value: JV, Florida's just value as of 1 January 2026 (s. 192.042, F.S.), av_date 2026-01-01. It predates
-every 2026 sale, so it may be used for sales in the test window. (Caveat recorded with the results: values are set
-as of 1 January but certified later in the year.)
+every 2026 sale, so it may be used for sales in the test window.
+Audit transparency note (P1-6): while s. 192.042, F.S., sets the valuation date to January 1, the Final roll is certified
+in autumn 2026 after TRIM notices and Value Adjustment Board (VAB) hearings. In rare cases where a property owner
+contested their preliminary assessment citing a mid-2026 arm's-length sale, or where post-January roll corrections
+occurred, the final roll JV could capture post-January market signal. To eliminate all potential post-sale drift,
+models can be cross-benchmarked against the 2025 Final roll JV or the unadjusted 2026 Preliminary roll.
 
 Usage: python3 scripts/backtests/pull_florida_dor.py <county number> <county fips> "<DOR file name>" ["<display name>"]
        e.g. 39 12057 "Hillsborough"

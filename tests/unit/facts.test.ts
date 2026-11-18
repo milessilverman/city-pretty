@@ -13,6 +13,8 @@ const routes: Array<[RegExp, string]> = [
   [/NFHL\/MapServer\/28/, fx("fema_flood_austin.json")],
   [/epqs\.nationalmap\.gov/, fx("usgs_elev_austin.json")],
   [/geocoder\/geographies/, fx("census_geographies_austin.json")],
+  [/National_Risk_Index_Census_Tracts/, fx("fema_nri_austin.json")],
+  [/earthquake\.usgs\.gov\/ws\/designmaps/, fx("usgs_seismic_austin.json")],
 ];
 // HUD rents come from the page's FY2027 county file; tests read the same file.
 const HUD = Object.fromEntries(JSON.parse(fs.readFileSync(path.join(__dirname, "../../app/data/hud_fair_market_rents.json"), "utf8")).records.map((r: any) => [r.fips, r]));
@@ -71,5 +73,7 @@ describe("app/facts.js live public records", () => {
     const rows = fromWorker(JSON.parse(JSON.stringify(f)));
     expect(rows.find((r: any) => r.label.startsWith("HUD")).value).toContain("$1,817");
     expect(rows.find((r: any) => r.label === "FEMA flood zone").value).toContain("Zone AE");
+    expect(rows.find((r: any) => r.label.includes("FEMA NRI")).value).toContain("Score 28/100");
+    expect(rows.find((r: any) => r.label.includes("Earthquake design")).value).toContain("Category A");
   });
 });

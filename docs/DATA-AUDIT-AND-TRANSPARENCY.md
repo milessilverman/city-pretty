@@ -161,7 +161,7 @@ Code meanings, each from the source's own published list:
 - **Allegheny:** `SALEDESC` "VALID SALE".
 
 More caveats:
-- **Florida's just value** is as of 1 January (s. 192.042, F.S.) but certified later in 2026.
+- **Florida's just value:** statutory valuation date is as of 1 January (s. 192.042, F.S.), predating 2026 test sales. However, county tax rolls are certified in autumn 2026 after TRIM notices and Value Adjustment Board hearings; any post-sale roll corrections or purchase-price-citing appeals could theoretically introduce post-January signal. Back-tests should monitor preliminary-to-final roll adjustments.
 - **King's assessed value:** each value's own change date is used, and 67 test sales whose value changed after the sale are excluded from the assessor models.
 - **Characteristics** (NYC, Florida, King, Allegheny) are the current records, not as of the sale.
 - **Missing room counts (bug, not fixed):** the shared model code reads a missing bedroom or bathroom count as 0 (`null >= 0` is true in JavaScript). That affected the already-published DC (2 rows), Cook (8) and Philadelphia (81 beds, 1,280 baths) results. Those finals weren't re-run, because a second run would break the one-test rule. New pulls drop such rows.

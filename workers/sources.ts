@@ -340,6 +340,115 @@ export async function femaFloodZone(lat: number, lng: number, fetcher: FetchLike
 }
 
 // ---------------------------------------------------------------------------------------------------------------
+// FEMA National Risk Index (NRI) Census Tracts
+// ---------------------------------------------------------------------------------------------------------------
+
+export type NationalRiskIndex = {
+  tract_fips: string;
+  risk_score: number | null;
+  risk_rating: string | null;
+  eal_score: number | null;
+  eal_rating: string | null;
+  social_vulnerability_rating: string | null;
+  community_resilience_rating: string | null;
+  earthquake_rating: string | null;
+  wildfire_rating: string | null;
+  flood_rating: string | null;
+  hurricane_rating: string | null;
+};
+
+export async function femaNationalRiskIndex(lat: number, lng: number, fetcher: FetchLike = fetch): Promise<Sourced<NationalRiskIndex>> {
+  const url =
+    "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/National_Risk_Index_Census_Tracts/FeatureServer/0/query?" +
+    new URLSearchParams({
+      geometry: `${lng},${lat}`,
+      geometryType: "esriGeometryPoint",
+      inSR: "4326",
+      spatialRel: "esriSpatialRelIntersects",
+      outFields: "TRACTFIPS,RISK_SCORE,RISK_RATNG,EAL_SCORE,EAL_RATNG,SOVI_RATNG,RESL_RATNG,WFIR_RISKR,ERQK_RISKR,HRCN_RISKR,IFLD_RISKR",
+      returnGeometry: "false",
+      f: "json",
+    });
+  const source: SourceRef = {
+    name: "FEMA National Risk Index (Census Tracts)",
+    publisher: "Federal Emergency Management Agency (FEMA)",
+    url,
+    retrieved_at: now(),
+    vintage: "December 2025 release",
+  };
+  if (!validLatLng(lat, lng)) return fail(source, "Invalid coordinates");
+  try {
+    const d = (await getJson(fetcher, url)) as any;
+    if (d?.error) return fail(source, d.error.message || "ArcGIS error");
+    const f = d?.features?.[0]?.attributes;
+    if (!f) return fail(source, "No FEMA National Risk Index record found for this location");
+    return {
+      ok: true,
+      source,
+      value: {
+        tract_fips: f.TRACTFIPS,
+        risk_score: num(f.RISK_SCORE),
+        risk_rating: f.RISK_RATNG || null,
+        eal_score: num(f.EAL_SCORE),
+        eal_rating: f.EAL_RATNG || null,
+        social_vulnerability_rating: f.SOVI_RATNG || null,
+        community_resilience_rating: f.RESL_RATNG || null,
+        earthquake_rating: f.ERQK_RISKR || null,
+        wildfire_rating: f.WFIR_RISKR || null,
+        flood_rating: f.IFLD_RISKR || null,
+        hurricane_rating: f.HRCN_RISKR || null,
+      },
+    };
+  } catch (e) {
+    return fail(source, e);
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// USGS ASCE 7-22 Seismic Design
+// ---------------------------------------------------------------------------------------------------------------
+
+export type SeismicDesign = {
+  seismic_design_category: string | null;
+  pga_m: number | null;
+  sds: number | null;
+  sd1: number | null;
+  ss: number | null;
+  s1: number | null;
+};
+
+export async function usgsSeismicDesign(lat: number, lng: number, fetcher: FetchLike = fetch): Promise<Sourced<SeismicDesign>> {
+  const url = `https://earthquake.usgs.gov/ws/designmaps/asce7-22.json?latitude=${lat}&longitude=${lng}&riskCategory=II&siteClass=D&title=CityPretty`;
+  const source: SourceRef = {
+    name: "USGS Seismic Design Maps (ASCE 7-22)",
+    publisher: "U.S. Geological Survey (USGS)",
+    url,
+    retrieved_at: now(),
+    vintage: "ASCE 7-22 standard",
+  };
+  if (!validLatLng(lat, lng)) return fail(source, "Invalid coordinates");
+  try {
+    const d = (await getJson(fetcher, url)) as any;
+    const data = d?.response?.data;
+    if (!data) return fail(source, "No seismic data returned by USGS for this coordinate");
+    return {
+      ok: true,
+      source,
+      value: {
+        seismic_design_category: data.sdc || null,
+        pga_m: num(data.pgam),
+        sds: num(data.sds),
+        sd1: num(data.sd1),
+        ss: num(data.ss),
+        s1: num(data.s1),
+      },
+    };
+  } catch (e) {
+    return fail(source, e);
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------
 // OpenStreetMap via Overpass
 // ---------------------------------------------------------------------------------------------------------------
 
@@ -469,7 +578,13 @@ const DEFAULT_ACS_YEAR = Math.max(2024, CURRENT_CALENDAR_YEAR - (new Date().getM
 
 export async function siteFacts(lat: number, lng: number, opts: { censusApiKey?: string; acsYear?: number; fetcher?: FetchLike } = {}) {
   const f = opts.fetcher || fetch;
-  const [geo, elev, flood] = await Promise.all([censusGeographies(lat, lng, f), usgsElevation(lat, lng, f), femaFloodZone(lat, lng, f)]);
+  const [geo, elev, flood, nri, seismic] = await Promise.all([
+    censusGeographies(lat, lng, f),
+    usgsElevation(lat, lng, f),
+    femaFloodZone(lat, lng, f),
+    femaNationalRiskIndex(lat, lng, f),
+    usgsSeismicDesign(lat, lng, f),
+  ]);
   const fmr: Sourced<HudFmr> = geo.ok
     ? hudFairMarketRentForCounty(geo.value.county_fips)
     : fail({ name: "HUD Fair Market Rents", publisher: "HUD", url: HUD_FMR_INFO_URL, retrieved_at: now() }, "County unknown (Census lookup failed)");
@@ -483,5 +598,5 @@ export async function siteFacts(lat: number, lng: number, opts: { censusApiKey?:
       f,
     );
   }
-  return { lat, lng, geographies: geo, hud_fair_market_rent: fmr, elevation: elev, flood_zone: flood, acs_tract: acs };
+  return { lat, lng, geographies: geo, hud_fair_market_rent: fmr, elevation: elev, flood_zone: flood, national_risk_index: nri, seismic_design: seismic, acs_tract: acs };
 }

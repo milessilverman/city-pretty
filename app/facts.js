@@ -250,6 +250,20 @@ export function fromWorker(f) {
     rows.push(no("FEMA flood zone", (fl && fl.error) || "unavailable", "FEMA", fl && fl.source ? fl.source.url : ""));
   }
   rows.push(e && e.ok ? ok("Ground elevation", `${Math.round(e.value.elevation_ft).toLocaleString("en-US")} ft`, e.source.publisher, e.source.url) : no("Ground elevation", (e && e.error) || "unavailable", "USGS", e && e.source ? e.source.url : ""));
+  const nri = f.national_risk_index;
+  if (nri && nri.ok && nri.value) {
+    const v = nri.value;
+    const scoreStr = v.risk_score != null ? `Score ${Math.round(v.risk_score)}/100 (${v.risk_rating || "Rated"})` : (v.risk_rating || "On file");
+    rows.push(ok("Natural hazard risk (FEMA NRI)", scoreStr, nri.source.publisher, nri.source.url,
+      `Tract ${v.tract_fips || ""} · Social vulnerability: ${v.social_vulnerability_rating || "N/A"}, Resilience: ${v.community_resilience_rating || "N/A"}`));
+  }
+  const seis = f.seismic_design;
+  if (seis && seis.ok && seis.value) {
+    const v = seis.value;
+    const label = v.seismic_design_category ? `Category ${v.seismic_design_category}${v.pga_m != null ? ` (PGA ${v.pga_m}g)` : ""}` : (v.pga_m != null ? `PGA ${v.pga_m}g` : "Mapped");
+    rows.push(ok("Earthquake design (USGS ASCE 7-22)", label, seis.source.publisher, seis.source.url,
+      `Mapped seismic design parameters from USGS.`));
+  }
   return rows;
 }
 
