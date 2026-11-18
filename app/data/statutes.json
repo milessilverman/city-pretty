@@ -89,10 +89,10 @@
     "id": "ca_sb9_lot_split",
     "state_code": "CA",
     "bill_number": "SB 9",
-    "session": "2021-2022 Regular Session",
+    "session": "2021-2022 Regular Session (Stats. 2021, ch. 162)",
     "short_name": "CA SB 9 (California Home Opportunity & Act)",
     "statute_citation": "Cal. Gov. Code §§ 65852.21, 66411.7",
-    "effective_date": null,
+    "effective_date": "2022-01-01",
     "statute_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202120220SB9",
     "max_units_by_right": 4,
     "max_height_ft": null,
@@ -119,11 +119,9 @@
     "verification": {
       "status": "verified",
       "checked": "2026-11-18",
-      "evidence_url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip (LAW_SECTION_TBL_36073.lob 65852.21; LAW_SECTION_TBL_36203.lob 66411.7)",
-      "evidence_quote": "\"both newly created parcels are no smaller than 1,200 square feet\"; \"one parcel shall not be smaller than 40 percent of the lot area\"; \"Offstreet parking of up to one space per unit, except ... within one-half mile walking distance of either a high-quality transit corridor ... or a major transit stop\"",
-      "fields_unconfirmed": [
-        "effective_date (2021 chapter not fetched in this pass)"
-      ]
+      "evidence_url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2021.zip and pubinfo_2025.zip (LAW_SECTION_TBL 65852.21, 66411.7)",
+      "evidence_quote": "\"Added by Stats. 2021, Ch. 162, Sec. 1. (SB 9) Effective January 1, 2022.\" (2021 data dump; SB 9 approved 2021-09-16); \"both newly created parcels are no smaller than 1,200 square feet\"; \"one parcel shall not be smaller than 40 percent of the lot area\"; \"Offstreet parking of up to one space per unit, except ... within one-half mile walking distance of either a high-quality transit corridor ... or a major transit stop\"",
+      "fields_unconfirmed": []
     }
   },
   {
@@ -384,7 +382,7 @@
     "statute_url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=88R&Bill=SB1412",
     "max_units_by_right": null,
     "summary": "Not enacted as described. SB 1412 (88th Legislature, relating to regulation of accessory dwelling units) shows \"Failed to pass to 3rd reading\" on 05/22/2023, and Tex. Loc. Gov't Code 214.908 is \"Reauthorization of Building Permit Fees\"; no section 214.909 found.",
-    "last_verified": "2026-11-18",
+    "last_verified": null,
     "enacted": false,
     "verification": {
       "status": "unverified",
@@ -461,7 +459,7 @@
     "max_units_by_right": null,
     "min_parking_spaces_per_unit": null,
     "summary": "Abolished single-family zoning citywide, permitting duplexes and triplexes by-right in all lower-density residential districts, while completely eliminating off-street motor vehicle parking minimums citywide.",
-    "last_verified": "2026-11-18",
+    "last_verified": null,
     "verification": {
       "status": "unverified",
       "checked": "2026-11-18",
@@ -509,7 +507,7 @@
     "rules": null,
     "min_parking_spaces_per_unit": null,
     "summary": "Maine statutes 30-A 4364-A (Residential areas; generally) and 4364-B (Accessory dwelling units) exist; the 4-units-by-right and growth-area conditions in the earlier record could not be confirmed (the 4364-A page was not retrievable).",
-    "last_verified": "2026-11-18",
+    "last_verified": null,
     "max_units_by_right": null,
     "verification": {
       "status": "unverified",
@@ -584,7 +582,7 @@
     "max_units_by_right": null,
     "min_parking_spaces_per_unit": null,
     "summary": "Authorizes duplexes, triplexes, fourplexes, townhouses, and cottage clusters by-right in all residential zoning districts (R-1 through R-10) across Raleigh, eliminating conventional public hearing zoning hurdles.",
-    "last_verified": "2026-11-18",
+    "last_verified": null,
     "verification": {
       "status": "unverified",
       "checked": "2026-11-18",
@@ -606,7 +604,7 @@
     "statute_url": "https://le.utah.gov/~2021/bills/static/SB0174.html",
     "max_units_by_right": null,
     "summary": "Prohibits municipalities statewide from barring internal accessory dwelling units (IADUs) on single-family lots, mandates expedited subdivision approvals, and incentivizes dense housing near commuter rail stations.",
-    "last_verified": "2026-11-18",
+    "last_verified": null,
     "verification": {
       "status": "unverified",
       "checked": "2026-11-18",

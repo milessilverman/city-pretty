@@ -45,10 +45,12 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
     for (const statute of statutes) {
       expect(statute.id).toBeTruthy();
       expect(statute.state_code).toBeTruthy();
-      expect(statute.bill_number).toBeTruthy();
+      // bill_number may be null when the enacting bill could not be confirmed (verification.status != verified)
+      if (statute.verification?.status === "verified") expect(statute.bill_number).toBeTruthy();
       expect(statute.statute_citation).toBeTruthy();
       expect(statute.statute_url).toMatch(/^https?:\/\//);
-      expect(statute.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      if (statute.verification?.status === "unverified") expect(statute.last_verified).toBeNull();
+      else expect(statute.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     }
   });
 
@@ -69,9 +71,10 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
     for (const prog of programs) {
       expect(prog.id).toBeTruthy();
       expect(prog.administering_agency).toBeTruthy();
-      expect(prog.statutory_citation).toBeTruthy();
+      if (prog.verification?.status !== "unverified") expect(prog.statutory_citation).toBeTruthy();
       expect(prog.source_url).toMatch(/^https?:\/\//);
-      expect(prog.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      if (prog.verification?.status === "unverified") expect(prog.last_verified).toBeNull();
+      else expect(prog.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
       expect(Array.isArray(prog.eligible_improvements)).toBe(true);
       expect(prog.eligible_improvements.length).toBeGreaterThan(0);
     }
@@ -156,8 +159,12 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
       expect(p.comm_assessment_ratio).toBeGreaterThan(0);
       expect(p.statutory_citation).toBeTruthy();
       expect(p.source_url).toMatch(/^https?:\/\//);
-      expect(p.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
-      expect(p.retrieved).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      if (p.verification?.status === "unverified") {
+        expect(p.last_verified).toBeNull();
+      } else {
+        expect(p.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+        expect(p.retrieved).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      }
     }
   });
 
@@ -408,7 +415,7 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
     const austinHome = laws.find((l: any) => l.id === "tx_austin_home");
     expect(austinHome).toBeDefined();
     expect(austinHome.state_code).toBe("TX");
-    expect(austinHome.min_lot_size_sqft).toBe(1500);
+    expect(austinHome.min_lot_size_sqft).toBe(1800); // city HOME Phase 2 page: 1,800 sq ft
     expect(austinHome.max_units_by_right).toBe(3);
     expect(austinHome.statute_url).toMatch(/^https?:\/\//);
     expect(austinHome.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
@@ -539,9 +546,10 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
       expect(prog.id).toBeTruthy();
       expect(prog.program_name).toBeTruthy();
       expect(prog.administering_agency).toBeTruthy();
-      expect(prog.statutory_citation).toBeTruthy();
+      if (prog.verification?.status !== "unverified") expect(prog.statutory_citation).toBeTruthy();
       expect(prog.source_url).toMatch(/^https?:\/\//);
-      expect(prog.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      if (prog.verification?.status === "unverified") expect(prog.last_verified).toBeNull();
+      else expect(prog.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
       expect(prog.eligible_improvements.length).toBeGreaterThan(0);
     }
   });
@@ -603,12 +611,12 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
 
     const azStarter = statutes.find((s: any) => s.id === "az_hb2720_2721");
     expect(azStarter).toBeDefined();
-    expect(azStarter.statute_citation).toContain("9-467.04");
+    expect(azStarter.statute_citation).toContain("9-461.18"); // 9-467.04 does not exist in A.R.S.
     expect(azStarter.statute_url).toMatch(/^https?:\/\/www\.azleg\.gov/);
 
     const coTod = statutes.find((s: any) => s.id === "co_hb24_1313");
     expect(coTod).toBeDefined();
-    expect(coTod.statute_citation).toContain("C.R.S. § 29-35-101");
+    expect(coTod.statute_citation).toContain("C.R.S. § 29-37-101"); // HB 24-1313 adds article 37; 29-35 is HB 24-1152
     expect(coTod.statute_url).toMatch(/^https?:\/\/leg\.colorado\.gov/);
   });
 

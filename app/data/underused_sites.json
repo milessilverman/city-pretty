@@ -1,6 +1,300 @@
 [
   {
-    "id": "site_la_1_4225",
+    "id": "site_la_1_4227",
+    "name": null,
+    "address": null,
+    "kind": "golf course",
+    "acres": 569.87,
+    "countyFips": "06037",
+    "blockGroupId": "060379800241",
+    "cityName": "Los Angeles",
+    "neighborhoodName": "Sepulveda Basin",
+    "lat": 34.17847,
+    "lng": -118.490046,
+    "assessedLandValue": null,
+    "marketLandValue": null,
+    "prop13BaseYear": null,
+    "baseZoning": "OS-1XL-RIO",
+    "zoningCategory": "open space / public",
+    "distanceToRailMeters": 5403,
+    "nearestRailStation": "Van Nuys",
+    "railStationStatus": "open",
+    "publicOwner": null,
+    "inConservationEasement": false,
+    "isHousingElementSite": false,
+    "alreadyBuilt": false,
+    "neighborhoodMedianHv": 1385013.5,
+    "potentialHomes": null,
+    "margin": null,
+    "idea": null,
+    "parcel": {
+      "ain": "2251007900",
+      "apn": "2251-007-900",
+      "useCode": "6600",
+      "useDescription": "Golf Courses",
+      "parcelAcres": 569.87,
+      "rollYear": null,
+      "rollLandValue": null,
+      "rollImprovementValue": null,
+      "match": "parcel"
+    },
+    "sourceUrl": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%272251007900%27&outFields=*&f=json",
+    "lastVerified": "2026-11-18",
+    "screening_estimate": {
+      "model": "underused-screening-v1",
+      "inputs": {
+        "acres": {
+          "value": 569.87,
+          "assumed": false,
+          "source": "site.acres (measured)"
+        },
+        "shareDeveloped": {
+          "value": 0.12,
+          "assumed": true,
+          "source": null,
+          "note": "Scenario: keep the course as open space and build on a 12% perimeter strip. Not measured."
+        },
+        "homesPerAcre": {
+          "value": 30,
+          "assumed": true,
+          "source": null,
+          "note": "base density; Scenario density, townhomes/garden apartments. Not from local zoning."
+        },
+        "medianHomeValue": {
+          "value": 1385013.5,
+          "assumed": false,
+          "source": "site.neighborhoodMedianHv (ACS B25077 for the block group)"
+        },
+        "finishedValueRatio": {
+          "value": 0.85,
+          "assumed": true,
+          "source": null,
+          "note": "New homes are assumed to sell for 85% of the block group's median home value. Not measured."
+        },
+        "costPerHome": {
+          "value": 340000,
+          "assumed": true,
+          "source": null,
+          "note": "Hard + soft construction cost per home in dollars. Not from a cited cost source."
+        },
+        "assessedLandValue": {
+          "value": null,
+          "assumed": false,
+          "source": "site.assessedLandValue (county assessor roll land value; not market value)"
+        }
+      },
+      "developedAcres": 68.38,
+      "potentialHomes": 2052,
+      "finishedValuePerHome": 1177261,
+      "landCostShare": null,
+      "marginBeforeLand": 1718059572,
+      "margin": null,
+      "marketLandValue": null,
+      "idea": "Scenario: keep the course as open space and build on 12% of it (~68.4 acres): about 2052 homes at 30 per acre (assumed).",
+      "formula": "developedAcres = acres x shareDeveloped; homes = round(developedAcres x homesPerAcre); margin = homes x (medianHomeValue x finishedValueRatio - costPerHome) - assessedLandValue x shareDeveloped",
+      "missing_inputs": [
+        "assessedLandValue"
+      ]
+    },
+    "verification": {
+      "status": "measured",
+      "checked": "2026-11-18",
+      "evidence_url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%272251007900%27&outFields=*&f=json",
+      "fields_measured": [
+        "kind",
+        "acres",
+        "lat",
+        "lng",
+        "parcel",
+        "blockGroupId",
+        "distanceToRailMeters",
+        "nearestRailStation",
+        "railStationStatus"
+      ],
+      "fields_from_bundle": [
+        "baseZoning",
+        "zoningCategory",
+        "cityName",
+        "neighborhoodName",
+        "neighborhoodMedianHv"
+      ],
+      "fields_null": [
+        "marketLandValue",
+        "potentialHomes",
+        "margin",
+        "idea",
+        "name",
+        "address",
+        "assessedLandValue",
+        "prop13BaseYear",
+        "publicOwner"
+      ],
+      "evidence": {
+        "live_service": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
+        "parcel_match": "live parcel AIN 2251007900 (Golf Courses, 569.87 ac) is within 10% of the bundle outline (567.41 ac) and agrees with kind \"golf course\"",
+        "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.49004565217392&y=34.17847043478261&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
+        "bundle_block_group": "060379800241",
+        "block_group_agrees_with_bundle": true,
+        "bundle_pipeline_values": {
+          "acres": 569.99,
+          "assessedLandValue": null,
+          "baseYear": 0,
+          "railMeters": 5515
+        },
+        "bundle": "app/data/bundle-la.b64.txt (built 2026-11-04)",
+        "notes": "baseZoning/zoningCategory/publicOwner/easement/housing-element flags are bundle pipeline outputs and were not re-checked against their original sources here."
+      }
+    }
+  },
+  {
+    "id": "site_la_2_4234",
+    "name": null,
+    "address": "1500 E WALNUT AVE BURBANK CA 91501",
+    "kind": "golf course",
+    "acres": 552.25,
+    "countyFips": "06037",
+    "blockGroupId": "060373101001",
+    "cityName": "Burbank",
+    "neighborhoodName": "Around Wildwood Canyon Park",
+    "lat": 34.205005,
+    "lng": -118.30075,
+    "assessedLandValue": null,
+    "marketLandValue": null,
+    "prop13BaseYear": null,
+    "baseZoning": null,
+    "zoningCategory": "open space / public",
+    "distanceToRailMeters": 3104,
+    "nearestRailStation": "Downtown Burbank",
+    "railStationStatus": "open",
+    "publicOwner": null,
+    "inConservationEasement": false,
+    "isHousingElementSite": false,
+    "alreadyBuilt": false,
+    "neighborhoodMedianHv": 1536265,
+    "potentialHomes": null,
+    "margin": null,
+    "idea": null,
+    "parcel": {
+      "ain": "2470003904",
+      "apn": "2470-003-904",
+      "useCode": "6600",
+      "useDescription": "Golf Courses",
+      "parcelAcres": 552.25,
+      "rollYear": null,
+      "rollLandValue": null,
+      "rollImprovementValue": null,
+      "match": "parcel"
+    },
+    "sourceUrl": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%272470003904%27&outFields=*&f=json",
+    "lastVerified": "2026-11-18",
+    "screening_estimate": {
+      "model": "underused-screening-v1",
+      "inputs": {
+        "acres": {
+          "value": 552.25,
+          "assumed": false,
+          "source": "site.acres (measured)"
+        },
+        "shareDeveloped": {
+          "value": 0.12,
+          "assumed": true,
+          "source": null,
+          "note": "Scenario: keep the course as open space and build on a 12% perimeter strip. Not measured."
+        },
+        "homesPerAcre": {
+          "value": 30,
+          "assumed": true,
+          "source": null,
+          "note": "base density; Scenario density, townhomes/garden apartments. Not from local zoning."
+        },
+        "medianHomeValue": {
+          "value": 1536265,
+          "assumed": false,
+          "source": "site.neighborhoodMedianHv (ACS B25077 for the block group)"
+        },
+        "finishedValueRatio": {
+          "value": 0.85,
+          "assumed": true,
+          "source": null,
+          "note": "New homes are assumed to sell for 85% of the block group's median home value. Not measured."
+        },
+        "costPerHome": {
+          "value": 340000,
+          "assumed": true,
+          "source": null,
+          "note": "Hard + soft construction cost per home in dollars. Not from a cited cost source."
+        },
+        "assessedLandValue": {
+          "value": null,
+          "assumed": false,
+          "source": "site.assessedLandValue (county assessor roll land value; not market value)"
+        }
+      },
+      "developedAcres": 66.27,
+      "potentialHomes": 1988,
+      "finishedValuePerHome": 1305825,
+      "landCostShare": null,
+      "marginBeforeLand": 1920060100,
+      "margin": null,
+      "marketLandValue": null,
+      "idea": "Scenario: keep the course as open space and build on 12% of it (~66.3 acres): about 1988 homes at 30 per acre (assumed).",
+      "formula": "developedAcres = acres x shareDeveloped; homes = round(developedAcres x homesPerAcre); margin = homes x (medianHomeValue x finishedValueRatio - costPerHome) - assessedLandValue x shareDeveloped",
+      "missing_inputs": [
+        "assessedLandValue"
+      ]
+    },
+    "verification": {
+      "status": "measured",
+      "checked": "2026-11-18",
+      "evidence_url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%272470003904%27&outFields=*&f=json",
+      "fields_measured": [
+        "kind",
+        "acres",
+        "lat",
+        "lng",
+        "parcel",
+        "blockGroupId",
+        "address",
+        "distanceToRailMeters",
+        "nearestRailStation",
+        "railStationStatus"
+      ],
+      "fields_from_bundle": [
+        "zoningCategory",
+        "cityName",
+        "neighborhoodName",
+        "neighborhoodMedianHv"
+      ],
+      "fields_null": [
+        "marketLandValue",
+        "potentialHomes",
+        "margin",
+        "idea",
+        "name",
+        "assessedLandValue",
+        "prop13BaseYear",
+        "baseZoning",
+        "publicOwner"
+      ],
+      "evidence": {
+        "live_service": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
+        "parcel_match": "live parcel AIN 2470003904 (Golf Courses, 552.25 ac) is within 10% of the bundle outline (550.09 ac) and agrees with kind \"golf course\"",
+        "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.30074953846155&y=34.20500523076924&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
+        "bundle_block_group": "060373101001",
+        "block_group_agrees_with_bundle": true,
+        "bundle_pipeline_values": {
+          "acres": 552.55,
+          "assessedLandValue": null,
+          "baseYear": 0,
+          "railMeters": 3407
+        },
+        "bundle": "app/data/bundle-la.b64.txt (built 2026-11-04)",
+        "notes": "baseZoning/zoningCategory/publicOwner/easement/housing-element flags are bundle pipeline outputs and were not re-checked against their original sources here."
+      }
+    }
+  },
+  {
+    "id": "site_la_3_4225",
     "name": null,
     "address": "6331 WOODLEY AVE LOS ANGELES CA 91406",
     "kind": "golf course",
@@ -131,7 +425,7 @@
       ],
       "evidence": {
         "live_service": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
-        "parcel_match": "live parcel AIN 2251001901 (Golf Courses, 237.37 ac) is within 10% of the bundle outline (226.32 ac) and agrees with kind \"golf course\"",
+        "parcel_match": "live parcel AIN 2251001901 (Golf Courses, 237.37 ac) is within 10% of the bundle outline (236.30 ac) and agrees with kind \"golf course\"",
         "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.49012578947368&y=34.18313315789474&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
         "bundle_block_group": "060379800241",
         "block_group_agrees_with_bundle": true,
@@ -147,7 +441,7 @@
     }
   },
   {
-    "id": "site_la_2_4167",
+    "id": "site_la_4_4167",
     "name": null,
     "address": "3301 VIA CAMPESINA PALOS VERDES ESTATES CA 90274",
     "kind": "golf course",
@@ -279,7 +573,7 @@
       ],
       "evidence": {
         "live_service": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
-        "parcel_match": "live parcel AIN 7538026902 (Golf Courses, 204.26 ac) is within 10% of the bundle outline (202.45 ac) and agrees with kind \"golf course\"",
+        "parcel_match": "live parcel AIN 7538026902 (Golf Courses, 204.26 ac) is within 10% of the bundle outline (203.95 ac) and agrees with kind \"golf course\"",
         "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.37841173076922&y=33.799056923076925&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
         "bundle_block_group": "060376703244",
         "block_group_agrees_with_bundle": true,
@@ -295,7 +589,7 @@
     }
   },
   {
-    "id": "site_la_3_4160",
+    "id": "site_la_5_4160",
     "name": null,
     "address": "16400 S PRARIE AVE LAWNDALE CA 90260",
     "kind": "golf course",
@@ -442,7 +736,7 @@
     }
   },
   {
-    "id": "site_la_4_4226",
+    "id": "site_la_6_4226",
     "name": null,
     "address": "16821 BURBANK BLVD LOS ANGELES CA 91436",
     "kind": "golf course",
@@ -589,7 +883,7 @@
     }
   },
   {
-    "id": "site_la_5_4344",
+    "id": "site_la_7_4344",
     "name": null,
     "address": "340 E 192ND ST CARSON CA 90746",
     "kind": "golf course",
@@ -736,7 +1030,7 @@
     }
   },
   {
-    "id": "site_la_6_4208",
+    "id": "site_la_8_4208",
     "name": null,
     "address": "7000 W LOS VERDES DR RANCHO PALOS VERDES CA 90275",
     "kind": "golf course",
@@ -883,7 +1177,7 @@
     }
   },
   {
-    "id": "site_la_7_4268",
+    "id": "site_la_9_4268",
     "name": null,
     "address": "13100 ELDRIDGE ST LOS ANGELES CA 91342",
     "kind": "golf course",
@@ -1030,7 +1324,7 @@
     }
   },
   {
-    "id": "site_la_8_4515",
+    "id": "site_la_10_4515",
     "name": null,
     "address": "32838 165TH ST E LLANO CA 93544",
     "kind": "golf course",
@@ -1176,7 +1470,7 @@
     }
   },
   {
-    "id": "site_la_9_4260",
+    "id": "site_la_11_4260",
     "name": null,
     "address": "12445 MOUNTAIN GATE DR LOS ANGELES CA 90049",
     "kind": "golf course",
@@ -1321,7 +1615,7 @@
     }
   },
   {
-    "id": "site_la_10_4239",
+    "id": "site_la_12_4239",
     "name": null,
     "address": "590 S BURLINGAME AVE LOS ANGELES CA 90049",
     "kind": "golf course",
@@ -1466,7 +1760,7 @@
     }
   },
   {
-    "id": "site_la_11_4304",
+    "id": "site_la_13_4304",
     "name": null,
     "address": "24700 TREVINO DR SANTA CLARITA CA 91355",
     "kind": "golf course",
@@ -1611,7 +1905,7 @@
     }
   },
   {
-    "id": "site_la_12_4159",
+    "id": "site_la_14_4159",
     "name": null,
     "address": "1930 W 120TH ST LOS ANGELES CA 90047",
     "kind": "golf course",
@@ -1758,7 +2052,7 @@
     }
   },
   {
-    "id": "site_la_13_4236",
+    "id": "site_la_15_4236",
     "name": null,
     "address": "10400 GLENOAKS BLVD PACOIMA CA 91331",
     "kind": "golf course",
@@ -1906,7 +2200,7 @@
     }
   },
   {
-    "id": "site_la_14_4263",
+    "id": "site_la_16_4263",
     "name": null,
     "address": "12445 MOUNTAIN GATE DR LOS ANGELES CA 90049",
     "kind": "golf course",
@@ -2052,7 +2346,7 @@
     }
   },
   {
-    "id": "site_la_15_4437",
+    "id": "site_la_17_4437",
     "name": null,
     "address": null,
     "kind": "golf course",
@@ -2198,7 +2492,7 @@
     }
   },
   {
-    "id": "site_la_16_4153",
+    "id": "site_la_18_4153",
     "name": null,
     "address": "4515 PARK ENTRADA CALABASAS CA 91302",
     "kind": "golf course",
@@ -2343,7 +2637,7 @@
     }
   },
   {
-    "id": "site_la_17_4386",
+    "id": "site_la_19_4386",
     "name": null,
     "address": null,
     "kind": "golf course",
@@ -2490,51 +2784,51 @@
     }
   },
   {
-    "id": "site_la_18_4393",
+    "id": "site_la_20_4393",
     "name": null,
-    "address": null,
+    "address": "3100 COUNTRY CLUB DR GLENDALE CA 91208",
     "kind": "golf course",
-    "acres": 0.08,
+    "acres": 102.25,
     "countyFips": "06037",
-    "blockGroupId": "060373007015",
+    "blockGroupId": "060373006023",
     "cityName": "Glendale",
-    "neighborhoodName": "Verdugo Mountains",
-    "lat": 34.194129,
-    "lng": -118.233559,
-    "assessedLandValue": 13926,
+    "neighborhoodName": "Sparr Heights",
+    "lat": 34.1969,
+    "lng": -118.231927,
+    "assessedLandValue": 12561832,
     "marketLandValue": null,
     "prop13BaseYear": 1991,
     "baseZoning": null,
     "zoningCategory": "other",
-    "distanceToRailMeters": 7398,
+    "distanceToRailMeters": 7620,
     "nearestRailStation": "Downtown Burbank",
     "railStationStatus": "open",
     "publicOwner": null,
     "inConservationEasement": false,
     "isHousingElementSite": false,
     "alreadyBuilt": false,
-    "neighborhoodMedianHv": 1650016,
+    "neighborhoodMedianHv": 1180011,
     "potentialHomes": null,
     "margin": null,
     "idea": null,
     "parcel": {
-      "ain": "5616006048",
-      "apn": "5616-006-048",
-      "useCode": "660V",
+      "ain": "5616002001",
+      "apn": "5616-002-001",
+      "useCode": "6600",
       "useDescription": "Golf Courses",
-      "parcelAcres": 0.08,
+      "parcelAcres": 102.25,
       "rollYear": "2026",
-      "rollLandValue": 13926,
-      "rollImprovementValue": 0,
+      "rollLandValue": 12561832,
+      "rollImprovementValue": 3404110,
       "match": "parcel"
     },
-    "sourceUrl": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%275616006048%27&outFields=*&f=json",
+    "sourceUrl": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%275616002001%27&outFields=*&f=json",
     "lastVerified": "2026-11-18",
     "screening_estimate": {
       "model": "underused-screening-v1",
       "inputs": {
         "acres": {
-          "value": 0.08,
+          "value": 102.25,
           "assumed": false,
           "source": "site.acres (measured)"
         },
@@ -2551,7 +2845,7 @@
           "note": "base density; Scenario density, townhomes/garden apartments. Not from local zoning."
         },
         "medianHomeValue": {
-          "value": 1650016,
+          "value": 1180011,
           "assumed": false,
           "source": "site.neighborhoodMedianHv (ACS B25077 for the block group)"
         },
@@ -2568,26 +2862,26 @@
           "note": "Hard + soft construction cost per home in dollars. Not from a cited cost source."
         },
         "assessedLandValue": {
-          "value": 13926,
+          "value": 12561832,
           "assumed": false,
           "source": "site.assessedLandValue (county assessor roll land value; not market value)"
         }
       },
-      "developedAcres": 0.01,
-      "potentialHomes": 0,
-      "finishedValuePerHome": 1402514,
-      "landCostShare": 1671,
-      "marginBeforeLand": 0,
-      "margin": -1671,
+      "developedAcres": 12.27,
+      "potentialHomes": 368,
+      "finishedValuePerHome": 1003009,
+      "landCostShare": 1507420,
+      "marginBeforeLand": 243987312,
+      "margin": 242479892,
       "marketLandValue": null,
-      "idea": "Scenario: keep the course as open space and build on 12% of it (~0 acres): about 0 homes at 30 per acre (assumed).",
+      "idea": "Scenario: keep the course as open space and build on 12% of it (~12.3 acres): about 368 homes at 30 per acre (assumed).",
       "formula": "developedAcres = acres x shareDeveloped; homes = round(developedAcres x homesPerAcre); margin = homes x (medianHomeValue x finishedValueRatio - costPerHome) - assessedLandValue x shareDeveloped",
       "missing_inputs": []
     },
     "verification": {
       "status": "measured",
       "checked": "2026-11-18",
-      "evidence_url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%275616006048%27&outFields=*&f=json",
+      "evidence_url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%275616002001%27&outFields=*&f=json",
       "fields_measured": [
         "kind",
         "acres",
@@ -2595,6 +2889,7 @@
         "lng",
         "parcel",
         "blockGroupId",
+        "address",
         "assessedLandValue",
         "prop13BaseYear",
         "distanceToRailMeters",
@@ -2613,316 +2908,20 @@
         "margin",
         "idea",
         "name",
-        "address",
         "baseZoning",
         "publicOwner"
       ],
       "evidence": {
         "live_service": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
-        "parcel_match": "live parcel AIN 5616006048 (Golf Courses, 0.08 ac) is within 10% of the bundle outline (-7.47 ac) and agrees with kind \"golf course\"",
-        "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.23355899999997&y=34.194129000000004&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
+        "parcel_match": "live parcel AIN 5616002001 (Golf Courses, 102.25 ac) is within 10% of the bundle outline (101.84 ac) and agrees with kind \"golf course\"",
+        "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.23192736842107&y=34.19690000000001&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
         "bundle_block_group": "060373007015",
-        "block_group_agrees_with_bundle": true,
+        "block_group_agrees_with_bundle": false,
         "bundle_pipeline_values": {
           "acres": 102.27,
           "assessedLandValue": 12561832,
           "baseYear": 1991,
           "railMeters": 7462
-        },
-        "bundle": "app/data/bundle-la.b64.txt (built 2026-11-04)",
-        "notes": "baseZoning/zoningCategory/publicOwner/easement/housing-element flags are bundle pipeline outputs and were not re-checked against their original sources here."
-      }
-    }
-  },
-  {
-    "id": "site_la_19_4508",
-    "name": null,
-    "address": "22751 GOLDEN SPRINGS DR DIAMOND BAR CA 91765",
-    "kind": "golf course",
-    "acres": 89.05,
-    "countyFips": "06037",
-    "blockGroupId": "060374033191",
-    "cityName": "Diamond Bar",
-    "neighborhoodName": "Around Sycamore Canyon Park",
-    "lat": 34.014031,
-    "lng": -117.816947,
-    "assessedLandValue": null,
-    "marketLandValue": null,
-    "prop13BaseYear": null,
-    "baseZoning": null,
-    "zoningCategory": "multifamily",
-    "distanceToRailMeters": 2710,
-    "nearestRailStation": "Industry",
-    "railStationStatus": "open",
-    "publicOwner": null,
-    "inConservationEasement": false,
-    "isHousingElementSite": false,
-    "alreadyBuilt": false,
-    "neighborhoodMedianHv": 844508,
-    "potentialHomes": null,
-    "margin": null,
-    "idea": null,
-    "parcel": {
-      "ain": "8717002911",
-      "apn": "8717-002-911",
-      "useCode": "6600",
-      "useDescription": "Golf Courses",
-      "parcelAcres": 89.05,
-      "rollYear": null,
-      "rollLandValue": null,
-      "rollImprovementValue": null,
-      "match": "parcel"
-    },
-    "sourceUrl": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%278717002911%27&outFields=*&f=json",
-    "lastVerified": "2026-11-18",
-    "screening_estimate": {
-      "model": "underused-screening-v1",
-      "inputs": {
-        "acres": {
-          "value": 89.05,
-          "assumed": false,
-          "source": "site.acres (measured)"
-        },
-        "shareDeveloped": {
-          "value": 0.12,
-          "assumed": true,
-          "source": null,
-          "note": "Scenario: keep the course as open space and build on a 12% perimeter strip. Not measured."
-        },
-        "homesPerAcre": {
-          "value": 30,
-          "assumed": true,
-          "source": null,
-          "note": "base density; Scenario density, townhomes/garden apartments. Not from local zoning."
-        },
-        "medianHomeValue": {
-          "value": 844508,
-          "assumed": false,
-          "source": "site.neighborhoodMedianHv (ACS B25077 for the block group)"
-        },
-        "finishedValueRatio": {
-          "value": 0.85,
-          "assumed": true,
-          "source": null,
-          "note": "New homes are assumed to sell for 85% of the block group's median home value. Not measured."
-        },
-        "costPerHome": {
-          "value": 340000,
-          "assumed": true,
-          "source": null,
-          "note": "Hard + soft construction cost per home in dollars. Not from a cited cost source."
-        },
-        "assessedLandValue": {
-          "value": null,
-          "assumed": false,
-          "source": "site.assessedLandValue (county assessor roll land value; not market value)"
-        }
-      },
-      "developedAcres": 10.69,
-      "potentialHomes": 321,
-      "finishedValuePerHome": 717832,
-      "landCostShare": null,
-      "marginBeforeLand": 121284072,
-      "margin": null,
-      "marketLandValue": null,
-      "idea": "Scenario: keep the course as open space and build on 12% of it (~10.7 acres): about 321 homes at 30 per acre (assumed).",
-      "formula": "developedAcres = acres x shareDeveloped; homes = round(developedAcres x homesPerAcre); margin = homes x (medianHomeValue x finishedValueRatio - costPerHome) - assessedLandValue x shareDeveloped",
-      "missing_inputs": [
-        "assessedLandValue"
-      ]
-    },
-    "verification": {
-      "status": "measured",
-      "checked": "2026-11-18",
-      "evidence_url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%278717002911%27&outFields=*&f=json",
-      "fields_measured": [
-        "kind",
-        "acres",
-        "lat",
-        "lng",
-        "parcel",
-        "blockGroupId",
-        "address",
-        "distanceToRailMeters",
-        "nearestRailStation",
-        "railStationStatus"
-      ],
-      "fields_from_bundle": [
-        "zoningCategory",
-        "cityName",
-        "neighborhoodName",
-        "neighborhoodMedianHv"
-      ],
-      "fields_null": [
-        "marketLandValue",
-        "potentialHomes",
-        "margin",
-        "idea",
-        "name",
-        "assessedLandValue",
-        "prop13BaseYear",
-        "baseZoning",
-        "publicOwner"
-      ],
-      "evidence": {
-        "live_service": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
-        "parcel_match": "live parcel AIN 8717002911 (Golf Courses, 89.05 ac) is within 10% of the bundle outline (88.73 ac) and agrees with kind \"golf course\"",
-        "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-117.816947&y=34.014030500000004&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
-        "bundle_block_group": "060374033191",
-        "block_group_agrees_with_bundle": true,
-        "bundle_pipeline_values": {
-          "acres": 89.13,
-          "assessedLandValue": null,
-          "baseYear": 0,
-          "railMeters": 2606
-        },
-        "bundle": "app/data/bundle-la.b64.txt (built 2026-11-04)",
-        "notes": "baseZoning/zoningCategory/publicOwner/easement/housing-element flags are bundle pipeline outputs and were not re-checked against their original sources here."
-      }
-    }
-  },
-  {
-    "id": "site_la_20_4338",
-    "name": null,
-    "address": "4800 E WARDLOW RD LONG BEACH CA 90808",
-    "kind": "golf course",
-    "acres": 86.32,
-    "countyFips": "06037",
-    "blockGroupId": "060379800181",
-    "cityName": "Long Beach",
-    "neighborhoodName": "Airport Area",
-    "lat": 33.813517,
-    "lng": -118.136465,
-    "assessedLandValue": null,
-    "marketLandValue": null,
-    "prop13BaseYear": null,
-    "baseZoning": null,
-    "zoningCategory": "industrial",
-    "distanceToRailMeters": 4974,
-    "nearestRailStation": "Willow Street",
-    "railStationStatus": "open",
-    "publicOwner": null,
-    "inConservationEasement": false,
-    "isHousingElementSite": false,
-    "alreadyBuilt": false,
-    "neighborhoodMedianHv": null,
-    "potentialHomes": null,
-    "margin": null,
-    "idea": null,
-    "parcel": {
-      "ain": "7149005903",
-      "apn": "7149-005-903",
-      "useCode": "6600",
-      "useDescription": "Golf Courses",
-      "parcelAcres": 86.32,
-      "rollYear": null,
-      "rollLandValue": null,
-      "rollImprovementValue": null,
-      "match": "parcel"
-    },
-    "sourceUrl": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%277149005903%27&outFields=*&f=json",
-    "lastVerified": "2026-11-18",
-    "screening_estimate": {
-      "model": "underused-screening-v1",
-      "inputs": {
-        "acres": {
-          "value": 86.32,
-          "assumed": false,
-          "source": "site.acres (measured)"
-        },
-        "shareDeveloped": {
-          "value": 0.12,
-          "assumed": true,
-          "source": null,
-          "note": "Scenario: keep the course as open space and build on a 12% perimeter strip. Not measured."
-        },
-        "homesPerAcre": {
-          "value": 30,
-          "assumed": true,
-          "source": null,
-          "note": "base density; Scenario density, townhomes/garden apartments. Not from local zoning."
-        },
-        "medianHomeValue": {
-          "value": null,
-          "assumed": false,
-          "source": "site.neighborhoodMedianHv (ACS B25077 for the block group)"
-        },
-        "finishedValueRatio": {
-          "value": 0.85,
-          "assumed": true,
-          "source": null,
-          "note": "New homes are assumed to sell for 85% of the block group's median home value. Not measured."
-        },
-        "costPerHome": {
-          "value": 340000,
-          "assumed": true,
-          "source": null,
-          "note": "Hard + soft construction cost per home in dollars. Not from a cited cost source."
-        },
-        "assessedLandValue": {
-          "value": null,
-          "assumed": false,
-          "source": "site.assessedLandValue (county assessor roll land value; not market value)"
-        }
-      },
-      "developedAcres": 10.36,
-      "potentialHomes": 311,
-      "finishedValuePerHome": null,
-      "landCostShare": null,
-      "marginBeforeLand": null,
-      "margin": null,
-      "marketLandValue": null,
-      "idea": "Scenario: keep the course as open space and build on 12% of it (~10.4 acres): about 311 homes at 30 per acre (assumed).",
-      "formula": "developedAcres = acres x shareDeveloped; homes = round(developedAcres x homesPerAcre); margin = homes x (medianHomeValue x finishedValueRatio - costPerHome) - assessedLandValue x shareDeveloped",
-      "missing_inputs": [
-        "medianHomeValue",
-        "assessedLandValue"
-      ]
-    },
-    "verification": {
-      "status": "measured",
-      "checked": "2026-11-18",
-      "evidence_url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%277149005903%27&outFields=*&f=json",
-      "fields_measured": [
-        "kind",
-        "acres",
-        "lat",
-        "lng",
-        "parcel",
-        "blockGroupId",
-        "address",
-        "distanceToRailMeters",
-        "nearestRailStation",
-        "railStationStatus"
-      ],
-      "fields_from_bundle": [
-        "zoningCategory",
-        "cityName",
-        "neighborhoodName"
-      ],
-      "fields_null": [
-        "marketLandValue",
-        "potentialHomes",
-        "margin",
-        "idea",
-        "name",
-        "assessedLandValue",
-        "prop13BaseYear",
-        "baseZoning",
-        "publicOwner",
-        "neighborhoodMedianHv"
-      ],
-      "evidence": {
-        "live_service": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
-        "parcel_match": "live parcel AIN 7149005903 (Golf Courses, 86.32 ac) is within 10% of the bundle outline (85.84 ac) and agrees with kind \"golf course\"",
-        "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.13646545454544&y=33.81351681818182&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
-        "bundle_block_group": "060379800181",
-        "block_group_agrees_with_bundle": true,
-        "bundle_pipeline_values": {
-          "acres": 86.19,
-          "assessedLandValue": null,
-          "baseYear": 0,
-          "railMeters": 5021
         },
         "bundle": "app/data/bundle-la.b64.txt (built 2026-11-04)",
         "notes": "baseZoning/zoningCategory/publicOwner/easement/housing-element flags are bundle pipeline outputs and were not re-checked against their original sources here."
@@ -4990,7 +4989,7 @@
     "name": null,
     "address": "301 SANTA MONICA PIER SANTA MONICA CA 90401",
     "kind": "parking lot",
-    "acres": 5.16,
+    "acres": 7.22,
     "countyFips": "06037",
     "blockGroupId": "060377019023",
     "cityName": "Santa Monica",
@@ -5030,7 +5029,7 @@
       "model": "underused-screening-v1",
       "inputs": {
         "acres": {
-          "value": 5.16,
+          "value": 7.22,
           "assumed": false,
           "source": "site.acres (measured)"
         },
@@ -5069,14 +5068,14 @@
           "source": "site.assessedLandValue (county assessor roll land value; not market value)"
         }
       },
-      "developedAcres": 5.16,
-      "potentialHomes": 310,
+      "developedAcres": 7.22,
+      "potentialHomes": 433,
       "finishedValuePerHome": 803258,
       "landCostShare": null,
-      "marginBeforeLand": 143609980,
+      "marginBeforeLand": 200590714,
       "margin": null,
       "marketLandValue": null,
-      "idea": "Scenario: redevelop 5.16 acres as about 310 homes at 60 per acre (assumed).",
+      "idea": "Scenario: redevelop 7.22 acres as about 433 homes at 60 per acre (assumed).",
       "formula": "developedAcres = acres x shareDeveloped; homes = round(developedAcres x homesPerAcre); margin = homes x (medianHomeValue x finishedValueRatio - costPerHome) - assessedLandValue x shareDeveloped",
       "missing_inputs": [
         "assessedLandValue"
@@ -5117,7 +5116,7 @@
       ],
       "evidence": {
         "live_service": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
-        "parcel_match": "lot outline from the bundle's OpenStreetMap extract (5.16 ac) lies inside live parcel AIN 4291030904 (Government Parcel, 9.48 ac); acres are the lot outline, assessed value is withheld because it belongs to the whole parcel",
+        "parcel_match": "lot outline from the bundle's OpenStreetMap extract (7.22 ac) lies inside live parcel AIN 4291030904 (Government Parcel, 9.48 ac); acres are the lot outline, assessed value is withheld because it belongs to the whole parcel",
         "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.4976425&y=34.01064937499999&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
         "bundle_block_group": "060377019023",
         "block_group_agrees_with_bundle": true,
@@ -5284,19 +5283,19 @@
     "name": "Metrolink",
     "address": null,
     "kind": "parking lot",
-    "acres": -4.02,
+    "acres": 6.06,
     "countyFips": "06037",
     "blockGroupId": "060379203142",
     "cityName": "Santa Clarita",
     "neighborhoodName": "Santa Clarita",
-    "lat": 34.414241,
-    "lng": -118.525506,
+    "lat": 34.414837,
+    "lng": -118.525199,
     "assessedLandValue": null,
     "marketLandValue": null,
     "prop13BaseYear": null,
     "baseZoning": "SP",
     "zoningCategory": "commercial / mixed use",
-    "distanceToRailMeters": 73,
+    "distanceToRailMeters": 125,
     "nearestRailStation": "Santa Clarita",
     "railStationStatus": "open",
     "publicOwner": null,
@@ -5324,7 +5323,7 @@
       "model": "underused-screening-v1",
       "inputs": {
         "acres": {
-          "value": -4.02,
+          "value": 6.06,
           "assumed": false,
           "source": "site.acres (measured)"
         },
@@ -5363,14 +5362,14 @@
           "source": "site.assessedLandValue (county assessor roll land value; not market value)"
         }
       },
-      "developedAcres": -4.02,
-      "potentialHomes": -241,
+      "developedAcres": 6.06,
+      "potentialHomes": 364,
       "finishedValuePerHome": 805383,
       "landCostShare": null,
-      "marginBeforeLand": -112157303,
+      "marginBeforeLand": 169399412,
       "margin": null,
       "marketLandValue": null,
-      "idea": "Scenario: redevelop -4.02 acres as about -241 homes at 60 per acre (assumed).",
+      "idea": "Scenario: redevelop 6.06 acres as about 364 homes at 60 per acre (assumed).",
       "formula": "developedAcres = acres x shareDeveloped; homes = round(developedAcres x homesPerAcre); margin = homes x (medianHomeValue x finishedValueRatio - costPerHome) - assessedLandValue x shareDeveloped",
       "missing_inputs": [
         "assessedLandValue"
@@ -5410,8 +5409,8 @@
       ],
       "evidence": {
         "live_service": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
-        "parcel_match": "lot outline from the bundle's OpenStreetMap extract (-4.02 ac) lies inside live parcel AIN 2836067902 (Heavy Manufacturing, 9.33 ac); acres are the lot outline, assessed value is withheld because it belongs to the whole parcel",
-        "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.5255057142857&y=34.41424142857143&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
+        "parcel_match": "lot outline from the bundle's OpenStreetMap extract (6.06 ac) lies inside live parcel AIN 2836067902 (Heavy Manufacturing, 9.33 ac); acres are the lot outline, assessed value is withheld because it belongs to the whole parcel",
+        "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.52519875&y=34.414836875&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
         "bundle_block_group": "060379203142",
         "block_group_agrees_with_bundle": true,
         "bundle_pipeline_values": {
@@ -8651,7 +8650,153 @@
     }
   },
   {
-    "id": "site_la_60_4782",
+    "id": "site_la_60_4788",
+    "name": null,
+    "address": null,
+    "kind": "vacant",
+    "acres": 9.04,
+    "countyFips": "06037",
+    "blockGroupId": "060379203431",
+    "cityName": "Santa Clarita",
+    "neighborhoodName": "Around Whitney Canyon Park",
+    "lat": 34.36907,
+    "lng": -118.505847,
+    "assessedLandValue": 40227,
+    "marketLandValue": null,
+    "prop13BaseYear": 1975,
+    "baseZoning": "MX-C",
+    "zoningCategory": "commercial / mixed use",
+    "distanceToRailMeters": 2245,
+    "nearestRailStation": "Newhall",
+    "railStationStatus": "open",
+    "publicOwner": null,
+    "inConservationEasement": false,
+    "isHousingElementSite": true,
+    "alreadyBuilt": false,
+    "neighborhoodMedianHv": 875008,
+    "potentialHomes": null,
+    "margin": null,
+    "idea": null,
+    "parcel": {
+      "ain": "2833015035",
+      "apn": "2833-015-035",
+      "useCode": "580V",
+      "useDescription": "Desert",
+      "parcelAcres": 9.04,
+      "rollYear": "2026",
+      "rollLandValue": 40227,
+      "rollImprovementValue": 0,
+      "match": "parcel"
+    },
+    "sourceUrl": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%272833015035%27&outFields=*&f=json",
+    "lastVerified": "2026-11-18",
+    "screening_estimate": {
+      "model": "underused-screening-v1",
+      "inputs": {
+        "acres": {
+          "value": 9.04,
+          "assumed": false,
+          "source": "site.acres (measured)"
+        },
+        "shareDeveloped": {
+          "value": 1,
+          "assumed": true,
+          "source": null,
+          "note": "Scenario: the whole parcel is redeveloped. Not measured."
+        },
+        "homesPerAcre": {
+          "value": 20,
+          "assumed": true,
+          "source": null,
+          "note": "base density; Scenario density. Not from local zoning."
+        },
+        "medianHomeValue": {
+          "value": 875008,
+          "assumed": false,
+          "source": "site.neighborhoodMedianHv (ACS B25077 for the block group)"
+        },
+        "finishedValueRatio": {
+          "value": 0.85,
+          "assumed": true,
+          "source": null,
+          "note": "New homes are assumed to sell for 85% of the block group's median home value. Not measured."
+        },
+        "costPerHome": {
+          "value": 340000,
+          "assumed": true,
+          "source": null,
+          "note": "Hard + soft construction cost per home in dollars. Not from a cited cost source."
+        },
+        "assessedLandValue": {
+          "value": 40227,
+          "assumed": false,
+          "source": "site.assessedLandValue (county assessor roll land value; not market value)"
+        }
+      },
+      "developedAcres": 9.04,
+      "potentialHomes": 181,
+      "finishedValuePerHome": 743757,
+      "landCostShare": 40227,
+      "marginBeforeLand": 73080017,
+      "margin": 73039790,
+      "marketLandValue": null,
+      "idea": "Scenario: redevelop 9.04 acres as about 181 homes at 20 per acre (assumed).",
+      "formula": "developedAcres = acres x shareDeveloped; homes = round(developedAcres x homesPerAcre); margin = homes x (medianHomeValue x finishedValueRatio - costPerHome) - assessedLandValue x shareDeveloped",
+      "missing_inputs": []
+    },
+    "verification": {
+      "status": "measured",
+      "checked": "2026-11-18",
+      "evidence_url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%272833015035%27&outFields=*&f=json",
+      "fields_measured": [
+        "kind",
+        "acres",
+        "lat",
+        "lng",
+        "parcel",
+        "blockGroupId",
+        "assessedLandValue",
+        "prop13BaseYear",
+        "distanceToRailMeters",
+        "nearestRailStation",
+        "railStationStatus"
+      ],
+      "fields_from_bundle": [
+        "baseZoning",
+        "zoningCategory",
+        "isHousingElementSite",
+        "cityName",
+        "neighborhoodName",
+        "neighborhoodMedianHv"
+      ],
+      "fields_null": [
+        "marketLandValue",
+        "potentialHomes",
+        "margin",
+        "idea",
+        "name",
+        "address",
+        "publicOwner"
+      ],
+      "evidence": {
+        "live_service": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
+        "parcel_match": "live parcel AIN 2833015035 (Desert, 9.04 ac) is within 10% of the bundle outline (8.96 ac) and agrees with kind \"vacant\"",
+        "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.5058475&y=34.369069999999994&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
+        "bundle_block_group": "060379203431",
+        "block_group_agrees_with_bundle": true,
+        "bundle_pipeline_values": {
+          "acres": 9.02,
+          "assessedLandValue": 40227,
+          "baseYear": 1975,
+          "railMeters": 2134
+        },
+        "bundle": "app/data/bundle-la.b64.txt (built 2026-11-04)",
+        "notes": "baseZoning/zoningCategory/publicOwner/easement/housing-element flags are bundle pipeline outputs and were not re-checked against their original sources here."
+      }
+    }
+  },
+  {
+    "id": "site_la_61_4782",
     "name": null,
     "address": null,
     "kind": "vacant",
@@ -8796,7 +8941,7 @@
     }
   },
   {
-    "id": "site_la_61_4861",
+    "id": "site_la_62_4861",
     "name": null,
     "address": null,
     "kind": "vacant",
@@ -8925,7 +9070,7 @@
       ],
       "evidence": {
         "live_service": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
-        "parcel_match": "live parcel AIN 7115027015 (Commercial, 8.73 ac) is within 10% of the bundle outline (8.12 ac) and agrees with kind \"vacant\"",
+        "parcel_match": "live parcel AIN 7115027015 (Commercial, 8.73 ac) is within 10% of the bundle outline (8.70 ac) and agrees with kind \"vacant\"",
         "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.19087666666668&y=33.87137444444445&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
         "bundle_block_group": "060375703051",
         "block_group_agrees_with_bundle": true,
@@ -8941,7 +9086,7 @@
     }
   },
   {
-    "id": "site_la_62_4581",
+    "id": "site_la_63_4581",
     "name": null,
     "address": null,
     "kind": "vacant",
@@ -9087,7 +9232,7 @@
     }
   },
   {
-    "id": "site_la_63_4922",
+    "id": "site_la_64_4922",
     "name": null,
     "address": null,
     "kind": "vacant",
@@ -9232,7 +9377,7 @@
     }
   },
   {
-    "id": "site_la_64_5185",
+    "id": "site_la_65_5185",
     "name": null,
     "address": null,
     "kind": "vacant",
@@ -9379,7 +9524,7 @@
     }
   },
   {
-    "id": "site_la_65_4569",
+    "id": "site_la_66_4569",
     "name": null,
     "address": null,
     "kind": "vacant",
@@ -9527,7 +9672,7 @@
     }
   },
   {
-    "id": "site_la_66_4921",
+    "id": "site_la_67_4921",
     "name": null,
     "address": "22424 CAROLDALE AVE CARSON CA 90745",
     "kind": "vacant",
@@ -9674,7 +9819,7 @@
     }
   },
   {
-    "id": "site_la_67_4838",
+    "id": "site_la_68_4838",
     "name": null,
     "address": null,
     "kind": "vacant",
@@ -9819,7 +9964,7 @@
     }
   },
   {
-    "id": "site_la_68_4796",
+    "id": "site_la_69_4796",
     "name": null,
     "address": null,
     "kind": "vacant",
@@ -9965,7 +10110,7 @@
     }
   },
   {
-    "id": "site_la_69_4772",
+    "id": "site_la_70_4772",
     "name": null,
     "address": "11819 KAGEL CANYON ST LOS ANGELES CA 91342",
     "kind": "vacant",
@@ -10104,153 +10249,6 @@
           "assessedLandValue": 1312896,
           "baseYear": 2014,
           "railMeters": 5800
-        },
-        "bundle": "app/data/bundle-la.b64.txt (built 2026-11-04)",
-        "notes": "baseZoning/zoningCategory/publicOwner/easement/housing-element flags are bundle pipeline outputs and were not re-checked against their original sources here."
-      }
-    }
-  },
-  {
-    "id": "site_la_70_4955",
-    "name": null,
-    "address": null,
-    "kind": "vacant",
-    "acres": 5.9,
-    "countyFips": "06037",
-    "blockGroupId": "060372289001",
-    "cityName": "Los Angeles",
-    "neighborhoodName": "Central-Alameda",
-    "lat": 33.99398,
-    "lng": -118.244663,
-    "assessedLandValue": null,
-    "marketLandValue": null,
-    "prop13BaseYear": null,
-    "baseZoning": "R2-1",
-    "zoningCategory": "multifamily",
-    "distanceToRailMeters": 549,
-    "nearestRailStation": "Slauson",
-    "railStationStatus": "open",
-    "publicOwner": null,
-    "inConservationEasement": false,
-    "isHousingElementSite": false,
-    "alreadyBuilt": false,
-    "neighborhoodMedianHv": 556000,
-    "potentialHomes": null,
-    "margin": null,
-    "idea": null,
-    "parcel": {
-      "ain": "5105005900",
-      "apn": "5105-005-900",
-      "useCode": "880V",
-      "useDescription": "Government Parcel",
-      "parcelAcres": 5.9,
-      "rollYear": null,
-      "rollLandValue": null,
-      "rollImprovementValue": null,
-      "match": "parcel"
-    },
-    "sourceUrl": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%275105005900%27&outFields=*&f=json",
-    "lastVerified": "2026-11-18",
-    "screening_estimate": {
-      "model": "underused-screening-v1",
-      "inputs": {
-        "acres": {
-          "value": 5.9,
-          "assumed": false,
-          "source": "site.acres (measured)"
-        },
-        "shareDeveloped": {
-          "value": 1,
-          "assumed": true,
-          "source": null,
-          "note": "Scenario: the whole parcel is redeveloped. Not measured."
-        },
-        "homesPerAcre": {
-          "value": 45,
-          "assumed": true,
-          "source": null,
-          "note": "near-rail density; Scenario density near rail. Not from local zoning or statute."
-        },
-        "medianHomeValue": {
-          "value": 556000,
-          "assumed": false,
-          "source": "site.neighborhoodMedianHv (ACS B25077 for the block group)"
-        },
-        "finishedValueRatio": {
-          "value": 0.85,
-          "assumed": true,
-          "source": null,
-          "note": "New homes are assumed to sell for 85% of the block group's median home value. Not measured."
-        },
-        "costPerHome": {
-          "value": 340000,
-          "assumed": true,
-          "source": null,
-          "note": "Hard + soft construction cost per home in dollars. Not from a cited cost source."
-        },
-        "assessedLandValue": {
-          "value": null,
-          "assumed": false,
-          "source": "site.assessedLandValue (county assessor roll land value; not market value)"
-        }
-      },
-      "developedAcres": 5.9,
-      "potentialHomes": 266,
-      "finishedValuePerHome": 472600,
-      "landCostShare": null,
-      "marginBeforeLand": 35271600,
-      "margin": null,
-      "marketLandValue": null,
-      "idea": "Scenario: redevelop 5.9 acres as about 266 homes at 45 per acre (assumed).",
-      "formula": "developedAcres = acres x shareDeveloped; homes = round(developedAcres x homesPerAcre); margin = homes x (medianHomeValue x finishedValueRatio - costPerHome) - assessedLandValue x shareDeveloped",
-      "missing_inputs": [
-        "assessedLandValue"
-      ]
-    },
-    "verification": {
-      "status": "measured",
-      "checked": "2026-11-18",
-      "evidence_url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%275105005900%27&outFields=*&f=json",
-      "fields_measured": [
-        "kind",
-        "acres",
-        "lat",
-        "lng",
-        "parcel",
-        "blockGroupId",
-        "distanceToRailMeters",
-        "nearestRailStation",
-        "railStationStatus"
-      ],
-      "fields_from_bundle": [
-        "baseZoning",
-        "zoningCategory",
-        "cityName",
-        "neighborhoodName",
-        "neighborhoodMedianHv"
-      ],
-      "fields_null": [
-        "marketLandValue",
-        "potentialHomes",
-        "margin",
-        "idea",
-        "name",
-        "address",
-        "assessedLandValue",
-        "prop13BaseYear",
-        "publicOwner"
-      ],
-      "evidence": {
-        "live_service": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
-        "parcel_match": "live parcel AIN 5105005900 (Government Parcel, 5.90 ac) is within 10% of the bundle outline (5.85 ac) and agrees with kind \"vacant\"",
-        "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.24466307692306&y=33.99398000000001&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
-        "bundle_block_group": "060372289001",
-        "block_group_agrees_with_bundle": true,
-        "bundle_pipeline_values": {
-          "acres": 5.87,
-          "assessedLandValue": null,
-          "baseYear": 0,
-          "railMeters": 524
         },
         "bundle": "app/data/bundle-la.b64.txt (built 2026-11-04)",
         "notes": "baseZoning/zoningCategory/publicOwner/easement/housing-element flags are bundle pipeline outputs and were not re-checked against their original sources here."
@@ -10841,18 +10839,18 @@
   {
     "id": "site_la_75_5941",
     "name": null,
-    "address": null,
+    "address": "107 W CAROB ST COMPTON CA 90220",
     "kind": "lightly built commercial",
-    "acres": 2.49,
+    "acres": 5.66,
     "countyFips": "06037",
     "blockGroupId": "060375432034",
     "cityName": "Compton",
     "neighborhoodName": "Compton",
     "lat": 33.880052,
     "lng": -118.224773,
-    "assessedLandValue": 477294,
+    "assessedLandValue": 7558948,
     "marketLandValue": null,
-    "prop13BaseYear": 2013,
+    "prop13BaseYear": 2012,
     "baseZoning": null,
     "zoningCategory": "other",
     "distanceToRailMeters": 447,
@@ -10867,23 +10865,23 @@
     "margin": null,
     "idea": null,
     "parcel": {
-      "ain": "7318001118",
-      "apn": "7318-001-118",
-      "useCode": "3800",
-      "useDescription": "Parking Lots (Industrial Use Properties)",
-      "parcelAcres": 2.49,
+      "ain": "7318001109",
+      "apn": "7318-001-109",
+      "useCode": "3900",
+      "useDescription": "Open Storage",
+      "parcelAcres": 5.66,
       "rollYear": "2026",
-      "rollLandValue": 477294,
-      "rollImprovementValue": 0,
+      "rollLandValue": 7558948,
+      "rollImprovementValue": 401646,
       "match": "parcel"
     },
-    "sourceUrl": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%277318001118%27&outFields=*&f=json",
+    "sourceUrl": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%277318001109%27&outFields=*&f=json",
     "lastVerified": "2026-11-18",
     "screening_estimate": {
       "model": "underused-screening-v1",
       "inputs": {
         "acres": {
-          "value": 2.49,
+          "value": 5.66,
           "assumed": false,
           "source": "site.acres (measured)"
         },
@@ -10917,26 +10915,26 @@
           "note": "Hard + soft construction cost per home in dollars. Not from a cited cost source."
         },
         "assessedLandValue": {
-          "value": 477294,
+          "value": 7558948,
           "assumed": false,
           "source": "site.assessedLandValue (county assessor roll land value; not market value)"
         }
       },
-      "developedAcres": 2.49,
-      "potentialHomes": 149,
+      "developedAcres": 5.66,
+      "potentialHomes": 340,
       "finishedValuePerHome": 539755,
-      "landCostShare": 477294,
-      "marginBeforeLand": 29763495,
-      "margin": 29286201,
+      "landCostShare": 7558948,
+      "marginBeforeLand": 67916700,
+      "margin": 60357752,
       "marketLandValue": null,
-      "idea": "Scenario: redevelop 2.49 acres as about 149 homes at 60 per acre (assumed).",
+      "idea": "Scenario: redevelop 5.66 acres as about 340 homes at 60 per acre (assumed).",
       "formula": "developedAcres = acres x shareDeveloped; homes = round(developedAcres x homesPerAcre); margin = homes x (medianHomeValue x finishedValueRatio - costPerHome) - assessedLandValue x shareDeveloped",
       "missing_inputs": []
     },
     "verification": {
       "status": "measured",
       "checked": "2026-11-18",
-      "evidence_url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%277318001118%27&outFields=*&f=json",
+      "evidence_url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%277318001109%27&outFields=*&f=json",
       "fields_measured": [
         "kind",
         "acres",
@@ -10944,6 +10942,7 @@
         "lng",
         "parcel",
         "blockGroupId",
+        "address",
         "assessedLandValue",
         "prop13BaseYear",
         "distanceToRailMeters",
@@ -10962,13 +10961,12 @@
         "margin",
         "idea",
         "name",
-        "address",
         "baseZoning",
         "publicOwner"
       ],
       "evidence": {
         "live_service": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
-        "parcel_match": "live parcel AIN 7318001118 (Parking Lots (Industrial Use Properties), 2.49 ac) is within 10% of the bundle outline (2.40 ac) and agrees with kind \"lightly built commercial\"",
+        "parcel_match": "live parcel AIN 7318001109 (Open Storage, 5.66 ac) is within 10% of the bundle outline (5.63 ac) and agrees with kind \"lightly built commercial\"",
         "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.22477272727275&y=33.88005181818181&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
         "bundle_block_group": "060375432034",
         "block_group_agrees_with_bundle": true,
@@ -12872,21 +12870,21 @@
   {
     "id": "site_la_89_5443",
     "name": null,
-    "address": "555 N 3RD ST BURBANK CA 91502",
+    "address": "(PRIV STREET AND YARD IMPS) BURBANK CA 91502",
     "kind": "lightly built commercial",
-    "acres": 0.27,
+    "acres": 3.88,
     "countyFips": "06037",
     "blockGroupId": "060373107011",
     "cityName": "Burbank",
     "neighborhoodName": "Burbank",
-    "lat": 34.18292,
-    "lng": -118.313447,
-    "assessedLandValue": null,
+    "lat": 34.184555,
+    "lng": -118.313536,
+    "assessedLandValue": 9,
     "marketLandValue": null,
-    "prop13BaseYear": null,
+    "prop13BaseYear": 2022,
     "baseZoning": null,
     "zoningCategory": "multifamily",
-    "distanceToRailMeters": 502,
+    "distanceToRailMeters": 680,
     "nearestRailStation": "Downtown Burbank",
     "railStationStatus": "open",
     "publicOwner": null,
@@ -12898,23 +12896,23 @@
     "margin": null,
     "idea": null,
     "parcel": {
-      "ain": "2460023996",
-      "apn": "2460-023-996",
-      "useCode": "6120",
-      "useDescription": "Theaters",
-      "parcelAcres": 0.27,
-      "rollYear": null,
-      "rollLandValue": null,
-      "rollImprovementValue": null,
+      "ain": "2460023064",
+      "apn": "2460-023-064",
+      "useCode": "1600",
+      "useDescription": "Shopping Centers (Regional)",
+      "parcelAcres": 3.88,
+      "rollYear": "2026",
+      "rollLandValue": 9,
+      "rollImprovementValue": 0,
       "match": "parcel"
     },
-    "sourceUrl": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%272460023996%27&outFields=*&f=json",
+    "sourceUrl": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%272460023064%27&outFields=*&f=json",
     "lastVerified": "2026-11-18",
     "screening_estimate": {
       "model": "underused-screening-v1",
       "inputs": {
         "acres": {
-          "value": 0.27,
+          "value": 3.88,
           "assumed": false,
           "source": "site.acres (measured)"
         },
@@ -12948,28 +12946,26 @@
           "note": "Hard + soft construction cost per home in dollars. Not from a cited cost source."
         },
         "assessedLandValue": {
-          "value": null,
+          "value": 9,
           "assumed": false,
           "source": "site.assessedLandValue (county assessor roll land value; not market value)"
         }
       },
-      "developedAcres": 0.27,
-      "potentialHomes": 16,
+      "developedAcres": 3.88,
+      "potentialHomes": 233,
       "finishedValuePerHome": 650256,
-      "landCostShare": null,
-      "marginBeforeLand": 4964096,
-      "margin": null,
+      "landCostShare": 9,
+      "marginBeforeLand": 72289648,
+      "margin": 72289639,
       "marketLandValue": null,
-      "idea": "Scenario: redevelop 0.27 acres as about 16 homes at 60 per acre (assumed).",
+      "idea": "Scenario: redevelop 3.88 acres as about 233 homes at 60 per acre (assumed).",
       "formula": "developedAcres = acres x shareDeveloped; homes = round(developedAcres x homesPerAcre); margin = homes x (medianHomeValue x finishedValueRatio - costPerHome) - assessedLandValue x shareDeveloped",
-      "missing_inputs": [
-        "assessedLandValue"
-      ]
+      "missing_inputs": []
     },
     "verification": {
       "status": "measured",
       "checked": "2026-11-18",
-      "evidence_url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%272460023996%27&outFields=*&f=json",
+      "evidence_url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=AIN%3D%272460023064%27&outFields=*&f=json",
       "fields_measured": [
         "kind",
         "acres",
@@ -12978,6 +12974,8 @@
         "parcel",
         "blockGroupId",
         "address",
+        "assessedLandValue",
+        "prop13BaseYear",
         "distanceToRailMeters",
         "nearestRailStation",
         "railStationStatus"
@@ -12995,15 +12993,13 @@
         "margin",
         "idea",
         "name",
-        "assessedLandValue",
-        "prop13BaseYear",
         "baseZoning",
         "publicOwner"
       ],
       "evidence": {
         "live_service": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
-        "parcel_match": "live parcel AIN 2460023996 (Theaters, 0.27 ac) is within 10% of the bundle outline (-2.57 ac) and agrees with kind \"lightly built commercial\"",
-        "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.31344666666666&y=34.18292&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
+        "parcel_match": "live parcel AIN 2460023064 (Shopping Centers (Regional), 3.88 ac) is within 10% of the bundle outline (3.89 ac) and agrees with kind \"lightly built commercial\"",
+        "census_geocoder_url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.31353625000003&y=34.1845546875&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
         "bundle_block_group": "060373107011",
         "block_group_agrees_with_bundle": true,
         "bundle_pipeline_values": {

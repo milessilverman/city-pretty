@@ -11,11 +11,24 @@
       "Infiltration basins, bio-retention swales, permeable pavers, and curbside rain gardens",
       "Multi-benefit green stormwater infrastructure"
     ],
-    "funding_share_pct": 1,
-    "funding_share_description": "Regional program funds up to 100% of approved capital costs; municipal program returns 40% of revenues to local cities",
+    "funding_share_pct": null,
+    "funding_share_description": null,
     "how_to_apply": "Annual Call for Projects via the Safe, Clean Water Portal; technical and community scoring by Watershed Area Steering Committees",
-    "cycle_dates": "Annual call opens spring; deadline July 31",
-    "last_verified": "2026-11-15"
+    "cycle_dates": null,
+    "last_verified": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": "source https://safecleanwaterla.org/ returned HTTP 403 to every fetch",
+      "fields_unconfirmed": [
+        "administering_agency",
+        "statutory_citation",
+        "funding_share_pct",
+        "funding_share_description",
+        "cycle_dates"
+      ]
+    }
   },
   {
     "id": "la_prop_k",
@@ -29,11 +42,24 @@
       "Urban tree canopy planting in parklands and public rights-of-way",
       "Recreation facilities and youth athletic field restoration"
     ],
-    "funding_share_pct": 0.8,
-    "funding_share_description": "Competitive grants up to $1,000,000+ per project with non-profit / community matching funds",
+    "funding_share_pct": null,
+    "funding_share_description": null,
     "how_to_apply": "Competitive request for proposals (RFP) administered through the Bureau of Engineering",
-    "cycle_dates": "Biennial competitive grant cycles",
-    "last_verified": "2026-11-15"
+    "cycle_dates": null,
+    "last_verified": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": "source https://eng.lacity.gov/prop-k unreachable (proxy 502)",
+      "fields_unconfirmed": [
+        "administering_agency",
+        "statutory_citation",
+        "funding_share_pct",
+        "funding_share_description",
+        "cycle_dates"
+      ]
+    }
   },
   {
     "id": "ca_urban_greening",
@@ -41,18 +67,31 @@
     "jurisdiction_fips": null,
     "state_code": "CA",
     "administering_agency": "California Natural Resources Agency (CNRA)",
-    "statutory_citation": "Cal. Pub. Res. Code § 75114 (SB 859)",
+    "statutory_citation": null,
     "source_url": "https://resources.ca.gov/grants/urban-greening/",
     "eligible_improvements": [
       "Street tree planting and urban forest establishment (minimum 20-year maintenance commitment)",
       "Green streets, active transportation greenways, and urban heat island mitigation corridors",
       "Community gardens and urban greening on public parcels"
     ],
-    "funding_share_pct": 1,
-    "funding_share_description": "Up to 100% state grant funding with statutory priority for disadvantaged communities (SB 535 DACs)",
+    "funding_share_pct": null,
+    "funding_share_description": null,
     "how_to_apply": "Annual statewide competitive grant application through CNRA System for Online Application Review (SOAR)",
-    "cycle_dates": "Annual application window",
-    "last_verified": "2026-11-15"
+    "cycle_dates": null,
+    "last_verified": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+      "evidence_quote": "Public Resources Code section 75114 does not exist in the Legislature's 2025-26 code data (LAW_SECTION_TBL.dat); source resources.ca.gov returned HTTP 403",
+      "fields_unconfirmed": [
+        "statutory_citation",
+        "administering_agency",
+        "funding_share_pct",
+        "funding_share_description",
+        "cycle_dates"
+      ]
+    }
   },
   {
     "id": "calfire_urban_forestry",
@@ -60,18 +99,33 @@
     "jurisdiction_fips": null,
     "state_code": "CA",
     "administering_agency": "California Department of Forestry and Fire Protection (CAL FIRE)",
-    "statutory_citation": "Cal. Pub. Res. Code §§ 4799.06–4799.12",
+    "statutory_citation": "Cal. Pub. Res. Code §§ 4799.06-4799.12 (California Urban Forestry Act of 1978; grants at § 4799.12)",
     "source_url": "https://www.fire.ca.gov/what-we-do/natural-resource-management/urban-community-forestry",
     "eligible_improvements": [
       "Urban tree planting, care, and canopy maintenance in urban areas",
       "Urban forest management plans and inventories",
       "Green schoolyards and canopy shade over playgrounds"
     ],
-    "funding_share_pct": 1,
-    "funding_share_description": "100% grant funding for disadvantaged communities; up to 75% for non-DAC areas",
+    "funding_share_pct": null,
+    "funding_share_description": "Grants of 25 to 90 percent of project costs; the cost share may be waived for projects in disadvantaged and low-income communities (Pub. Res. Code 4799.12). Previous record said 100% / 75%.",
     "how_to_apply": "Statewide solicitation via e-granting system",
-    "cycle_dates": "Annual grant cycles",
-    "last_verified": "2026-11-15"
+    "cycle_dates": null,
+    "last_verified": "2026-11-18",
+    "funding_share_range_pct": [
+      0.25,
+      0.9
+    ],
+    "verification": {
+      "status": "partly",
+      "checked": "2026-11-18",
+      "evidence_url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+      "evidence_quote": "Pub. Res. Code 4799.12: \"The director ... may make grants to provide assistance of 25 to 90 percent of costs ... The director may waive the cost sharing requirement for projects that are in disadvantaged and low-income communities.\"",
+      "fields_unconfirmed": [
+        "cycle_dates",
+        "how_to_apply",
+        "source_url (403)"
+      ]
+    }
   },
   {
     "id": "tx_tirz_ch311",
@@ -86,18 +140,30 @@
       "Protected bicycle lanes and multi-modal transit connector paths",
       "Stormwater detention ponds, green infrastructure, and public open space plazas"
     ],
-    "funding_share_pct": 1,
-    "funding_share_description": "Pledges 50% to 100% of incremental property tax growth in the designated zone over a 20-30 year term to service public infrastructure bonds",
+    "funding_share_pct": null,
+    "funding_share_description": "Share of tax increment dedicated to the zone is set by the reinvestment zone financing plan; a taxing unit other than the creating municipality contributes up to 15 percent unless a larger portion is provided (Tax Code 311.013).",
     "how_to_apply": "City council or commissioners court petition and ordinance designation pursuant to Tex. Tax Code § 311.005",
-    "cycle_dates": "Ongoing municipal designation",
-    "last_verified": "2026-11-15"
+    "cycle_dates": null,
+    "last_verified": "2026-11-18",
+    "verification": {
+      "status": "partly",
+      "checked": "2026-11-18",
+      "evidence_url": "https://texas.public.law/statutes/tex._tax_code_section_311.013",
+      "evidence_quote": "Tax Code 311.013: for \"a taxing unit other than the municipality that created the zone, a portion, not to exceed 15 percent, of the tax increment produced by the unit as provided by the reinvestment zone financing plan or a larger portion as provided by Subsection (f)\"",
+      "fields_unconfirmed": [
+        "funding_share_pct",
+        "20-30 year term",
+        "cycle_dates",
+        "source_url (comptroller page not read)"
+      ]
+    }
   },
   {
     "id": "fl_cra_ch163",
     "program_name": "Florida Community Redevelopment Agency (CRA Trust Fund)",
     "jurisdiction_fips": null,
     "state_code": "FL",
-    "administering_agency": "Local Municipal/County CRAs and Florida Department of Economic Opportunity",
+    "administering_agency": "Local community redevelopment agencies (Fla. Stat. ch. 163, part III)",
     "statutory_citation": "Fla. Stat. § 163.387",
     "source_url": "https://floridacra.org/",
     "eligible_improvements": [
@@ -108,25 +174,47 @@
     "funding_share_pct": 0.95,
     "funding_share_description": "Captures 95% of incremental ad valorem tax revenues from county and city taxing authorities into the CRA redevelopment trust fund",
     "how_to_apply": "Application through local municipal CRA office; projects must align with adopted Community Redevelopment Plan",
-    "cycle_dates": "Annual budgeting and grant application windows",
-    "last_verified": "2026-11-15"
+    "cycle_dates": null,
+    "last_verified": "2026-11-18",
+    "verification": {
+      "status": "partly",
+      "checked": "2026-11-18",
+      "evidence_url": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0163/Sections/0163.387.html",
+      "evidence_quote": "Fla. Stat. 163.387: increment \"shall be ... an amount equal to 95 percent of the difference between\" taxes levied each year and taxes levied in the base year",
+      "fields_unconfirmed": [
+        "administering_agency (Department of Economic Opportunity named in earlier record not confirmed)",
+        "cycle_dates",
+        "how_to_apply"
+      ]
+    }
   },
   {
     "id": "fl_live_local_tax_exemption",
     "program_name": "Florida Live Local Act 75% Property Tax Exemption",
     "jurisdiction_fips": null,
     "state_code": "FL",
-    "administering_agency": "Florida Department of Revenue and County Property Appraisers",
-    "statutory_citation": "Fla. Stat. § 196.1979",
+    "administering_agency": "County property appraisers (Fla. Stat. 196.1978)",
+    "statutory_citation": "Fla. Stat. § 196.1978(3)",
     "source_url": "https://floridarevenue.com/property/Pages/Taxpayers_Exemptions.aspx",
     "eligible_improvements": [
       "Newly constructed or substantially rehabilitated multifamily developments providing at least 40% affordable units (≤120% AMI) for 30 years"
     ],
     "funding_share_pct": 0.75,
-    "funding_share_description": "Provides up to 75% statutory exemption from county, municipal, and special district ad valorem property taxes",
-    "how_to_apply": "Annual Form DR-504AF filed with county property appraiser by March 1 with Florida Housing Finance Corporation certification",
-    "cycle_dates": "Annual deadline March 1",
-    "last_verified": "2026-11-15"
+    "funding_share_description": "75% of assessed value exempt for qualifying units at 80-120% of area median income; 100% exemption from ad valorem taxes for units at or below 80% (196.1978(3)(d)). Previous record cited 196.1979, which is a separate local-option exemption.",
+    "how_to_apply": null,
+    "cycle_dates": null,
+    "last_verified": "2026-11-18",
+    "verification": {
+      "status": "partly",
+      "checked": "2026-11-18",
+      "evidence_url": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0196/Sections/0196.1978.html",
+      "evidence_quote": "Fla. Stat. 196.1978(3)(d)1.a: \"The property appraiser shall exempt: a. Seventy-five percent of the assessed value of the units in multifamily projects ... greater than 80 percent but not more than 120 percent of the median annual adjusted gross income\"; units at or below 80 percent are exempt from ad valorem taxes",
+      "fields_unconfirmed": [
+        "administering_agency (Dept. of Revenue role)",
+        "how_to_apply (Form DR-504AF)",
+        "cycle_dates (March 1)"
+      ]
+    }
   },
   {
     "id": "co_ura_tif",
@@ -141,11 +229,22 @@
       "Utility capacity upgrades to support 40+ units/acre density near passenger rail under HB 24-1313",
       "Public plazas, street trees, and protected pedestrian paths"
     ],
-    "funding_share_pct": 1,
-    "funding_share_description": "Allocates 100% of property tax increment and optional sales tax increment generated over base assessment for up to 25 years",
+    "funding_share_pct": null,
+    "funding_share_description": "Property tax (and optionally municipal sales tax) increment within the urban renewal area may be allocated for up to 25 years under the plan (C.R.S. 31-25-107).",
     "how_to_apply": "Urban renewal plan adoption by city council with statutory blight/condition study and taxing entity agreements",
-    "cycle_dates": "Ongoing municipal plan adoption",
-    "last_verified": "2026-11-15"
+    "cycle_dates": null,
+    "last_verified": "2026-11-18",
+    "verification": {
+      "status": "partly",
+      "checked": "2026-11-18",
+      "evidence_url": "https://colorado.public.law/statutes/crs_31-25-107",
+      "evidence_quote": "C.R.S. 31-25-107: taxes in the urban renewal area \"must be divided for a period not to exceed twenty-five years after the effective date of adoption of such a provision\"",
+      "fields_unconfirmed": [
+        "funding_share_pct",
+        "cycle_dates",
+        "source_url (403)"
+      ]
+    }
   },
   {
     "id": "il_transit_tif",
@@ -159,11 +258,24 @@
       "Major passenger rail station modernization, track infrastructure, and Americans with Disabilities Act accessibility",
       "Direct station-adjacent transit-oriented public realm improvements"
     ],
-    "funding_share_pct": 1,
-    "funding_share_description": "Captures 100% of incremental property tax growth within a 0.5-mile corridor to fund local matching requirements for federal transit grants",
+    "funding_share_pct": null,
+    "funding_share_description": null,
     "how_to_apply": "Intergovernmental agreement between municipality and transit authority approved by city council",
-    "cycle_dates": "Dedicated 35-year transit district lifecycle",
-    "last_verified": "2026-11-15"
+    "cycle_dates": null,
+    "last_verified": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": "source URL returned HTTP 404; ilga.gov statute fetch failed (SSL error); no confirmation of 65 ILCS 5/11-74.4-3.1 or a \"Transit TIF\" 35-year/0.5-mile structure",
+      "fields_unconfirmed": [
+        "statutory_citation",
+        "administering_agency",
+        "funding_share_pct",
+        "funding_share_description",
+        "cycle_dates"
+      ]
+    }
   },
   {
     "id": "az_gplet",
@@ -172,15 +284,26 @@
     "state_code": "AZ",
     "administering_agency": "Arizona Municipalities (Phoenix, Tucson, Tempe, Mesa) and County Treasurers",
     "statutory_citation": "A.R.S. § 42-6201 et seq.",
-    "source_url": "https://www.phoenix.gov/econdev/gplet",
+    "source_url": "https://www.azleg.gov/ars/42/06209.htm",
     "eligible_improvements": [
       "High-density mixed-use redevelopment and transit-oriented housing in designated central business districts (CBDs) or redevelopment areas"
     ],
-    "funding_share_pct": 1,
-    "funding_share_description": "Provides up to 8 years of 100% property tax abatement by conveying fee title to city and leasing back property, followed by reduced excise tax rates",
+    "funding_share_pct": null,
+    "funding_share_description": "Cities and towns may abate the government property lease excise tax for up to eight years after the certificate of occupancy for qualifying government property improvements in a single central business district (A.R.S. 42-6209).",
     "how_to_apply": "Economic development agreement approved by city council following statutory economic impact analysis",
-    "cycle_dates": "Ad hoc developer proposals to municipal economic development departments",
-    "last_verified": "2026-11-15"
+    "cycle_dates": null,
+    "last_verified": "2026-11-18",
+    "verification": {
+      "status": "partly",
+      "checked": "2026-11-18",
+      "evidence_url": "https://www.azleg.gov/ars/42/06209.htm",
+      "evidence_quote": "A.R.S. 42-6209: a city or town \"may abate the tax provided for under this article for a limited period beginning when the certificate of occupancy is issued and ending eight years after\" in a single central business district",
+      "fields_unconfirmed": [
+        "funding_share_pct",
+        "cycle_dates",
+        "it abates the government property lease excise tax, not the ad valorem tax, per the text"
+      ]
+    }
   },
   {
     "id": "federal_fra_intercity_grant",
@@ -188,17 +311,29 @@
     "jurisdiction_fips": null,
     "state_code": "US",
     "administering_agency": "Federal Railroad Administration (FRA) / U.S. Department of Transportation",
-    "statutory_citation": "49 U.S.C. § 24911 (Infrastructure Investment and Jobs Act § 22307)",
-    "source_url": "https://railroads.dot.gov/grants-loans/competitive-discretionary-grant-programs/federal-state-partnership-intercity-passenger-rail",
+    "statutory_citation": "49 U.S.C. § 24911 (Federal-State partnership for intercity passenger rail)",
+    "source_url": "https://www.law.cornell.edu/uscode/text/49/24911",
     "eligible_improvements": [
       "Capital projects to establish new intercity passenger rail corridors (e.g. Phoenix-Tucson, Austin-San Antonio, Front Range)",
       "High-speed rail guideways, passenger stations, track electrification, and vehicle maintenance facilities (railyards)",
       "Intermodal facilities and station area safety/capacity upgrades"
     ],
     "funding_share_pct": 0.8,
-    "funding_share_description": "Provides up to 80% federal share of total capital project costs with 20% non-federal matching requirement",
+    "funding_share_description": "Federal share may not exceed 80 percent of total project costs, except as specified in paragraph (4) of 49 U.S.C. 24911(f).",
     "how_to_apply": "Competitive Notice of Funding Opportunity (NOFO) application submitted via Grants.gov by state DOTs, regional authorities, or multi-state compacts",
-    "cycle_dates": "Annual competitive NOFO solicitations",
-    "last_verified": "2026-11-15"
+    "cycle_dates": null,
+    "last_verified": "2026-11-18",
+    "verification": {
+      "status": "partly",
+      "checked": "2026-11-18",
+      "evidence_url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title49/html/USCODE-2023-title49-subtitleV-partC-chap249-sec24911.htm",
+      "evidence_quote": "49 U.S.C. 24911: \"The Federal share of total costs for a project under this section shall not exceed 80 percent, except as specified under paragraph (4).\"",
+      "fields_unconfirmed": [
+        "cycle_dates",
+        "administering_agency detail",
+        "IIJA section 22307 cross-reference",
+        "source_url (403)"
+      ]
+    }
   }
 ]
