@@ -516,9 +516,11 @@ function evaluateTransit(corridorOrArea, ctx) {
       if (a.currentBusesPerHour < topBus.buses_per_hour) why.push(`Current service is ${a.currentBusesPerHour} buses/hr, below the ${topBus.buses_per_hour}/hr this density supports: raise frequency first.`);
       else why.push(`Current service (${a.currentBusesPerHour} buses/hr) already meets what this density supports.`);
     }
-    const rank = mo => mo === "commuter_rail" ? (alsoSupported.includes("commuter_rail") ? 0 : 99) : MODE_ORDER.indexOf(mo);
-    if (mode0 && mode0 !== "hsr") proposedModeSupported = scale != null && rank(mode0) <= Math.max(MODE_ORDER.indexOf(scale), mode0 === "commuter_rail" ? 0 : -1);
-    if (mode0 === "hsr") proposedModeSupported = hsr ? hsr.inBand : null;
+    if (mode0 === "commuter_rail") proposedModeSupported = cr ? (cr.cbdOk == null ? null : cr.cbdOk) : false;
+    else if (mode0 && mode0 !== "hsr") {
+      const row = railRows.find(s => s.mode === mode0);
+      proposedModeSupported = (scale != null && MODE_ORDER.indexOf(mode0) <= MODE_ORDER.indexOf(scale)) ? true : (row && row.cbdOk == null ? null : false);
+    }
     if (mode0 && proposedModeSupported === false) why.push(`The proposed ${mode0.replace(/_/g, " ")} is larger than this density supports.`);
     if (ceRating) why.push(`Cost per trip $${cpt.toFixed(2)} rates ${ceRating} on FTA's 2025 breakpoints.`);
     const ceBad = ceRating === "Low" || ceRating === "Medium-Low";
