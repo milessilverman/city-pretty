@@ -1,9 +1,9 @@
 {
- "ran_on": "2026-11-18T08:58:46.649Z",
+ "ran_on": "2026-11-18T09:26:10.576Z",
  "script": "scripts/check_parcel_registry.mjs",
  "counts": {
-  "ok": 116,
-  "unreachable": 2
+  "ok": 117,
+  "unreachable": 1
  },
  "services": [
   {
@@ -826,8 +826,10 @@
     "21",
     "KY"
    ],
-   "status": "unreachable",
-   "detail": "{\"code\":404,\"message\":\"Service Web_Scene_Map_Parcels/MapServer not found \",\"details\":[]}"
+   "layer_name": "Kenton Parcels",
+   "geometry": "esriGeometryPolygon",
+   "missing_fields": [],
+   "status": "ok"
   },
   {
    "url": "https://maps.shelbyal.com/gisserver/rest/services/LegacyServices/Cadastral_2026/MapServer/91",
