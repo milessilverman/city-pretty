@@ -806,3 +806,26 @@ was made from a test that didn't cover the live page.
   only minimum slopes per roofing material (2:12 for asphalt shingles, per municipal guides quoting R905.2.2), not typical
   pitches by climate or era. The values remain unsourced rules of thumb, and the page says so again. Users can still pick
   the pitch that matches the house. Remnant "LiDAR" references were removed from code comments.
+- **HUD Small Area FMR (SAFMR) ZIP Integration:** Added ZIP-level Fair Market Rent resolution for designated Small Area FMR
+  metropolitan counties (336 counties) via `zip_rents` in `app/app.js` and `app/facts.js`. When a parcel carries a ZIP code,
+  it resolves the specific Small Area FMR, displaying the ZIP in the fact title and clarifying that it is a voucher
+  benchmark for that ZIP code rather than a market asking rent.
+- **St. Louis City Parcel Layer Modernization:** Migrated from stalled `PDA/PARCELS_PUBLIC/MapServer/0` (HTTP 499 Token Required)
+  to the active, public St. Louis City Assessor layer (`maps8.stlouis-mo.gov/arcgis/rest/services/ASSESSOR/Assessor_Public_Parcels/MapServer/11`)
+  which serves full parcel polygons, APNs, and addresses without requiring tokens or falling back to blocked JSONP.
+- **Antimeridian (180°) Grid Coordinate Wrapping:** Updated `gridCellIndicesX(w, e, cell)` in `app/app.js` to handle
+  bounding boxes crossing the 180th meridian (where west longitude > east longitude, such as Aleutians West, Alaska),
+  wrapping smoothly across the antimeridian instead of collapsing into an empty coordinate array.
+- **Valuation Backtest 95% Confidence Intervals:** Augmented model evaluation in `scripts/lib/backtestMetrics.mjs`,
+  `app/data/valuation_backtest_benchmarks.json`, and `app/app.js` with bootstrap 95% confidence intervals on the median
+  error (`mdape_ci_95`). Displays confidence intervals alongside MdAPE figures (e.g. Queens 14.97% [95% CI 14.36%–15.49%])
+  so sampling error is clearly stated.
+- **Discrete Parcel Registry Fields (Harris & Dallas TX):** Cleaned concatenation expressions (`site_str_num + ...`) in
+  `app/data/parcel_services.json` (entries 113–114) and `PARCELS87` into discrete query fields matching `^[A-Za-z0-9_.]+(\(\))?$`,
+  resolving HTTP 400 errors when querying parcel attributes in Harris (48201) and Dallas (48113) counties.
+- **OSM Building Height Parsing:** Added unit conversion in `parseOsmHeight` to parse feet (`40 ft`) and feet/inches (`12'6"`)
+  into meters, preventing building heights in imperial units from being multiplied into erroneous story estimates.
+- **XSS & Quote Sanitization:** Enhanced `esc()` in `app/app.js` to escape single quotes as `&#39;`, preventing quote breaking
+  in inline event attributes.
+- **Connecticut Tree Equity Coverage:** Verified all 8 Connecticut planning region files (`09110` through `09190`) contain
+  valid 2025 Tree Equity block groups crosswalked from historical county codes.
