@@ -25,6 +25,8 @@ export interface Env {
   CENSUS_API_KEY?: string; // `wrangler secret put CENSUS_API_KEY` (free: api.census.gov/data/key_signup.html); enables ACS lookups
   AI_RATE_LIMITER?: RateLimiter; // [[ratelimits]] in wrangler.toml
   STREETVIEW_RATE_LIMITER?: RateLimiter;
+  ENVIRONMENT?: string; // "production" or "development"
+  TURNSTILE_SECRET_KEY?: string; // `wrangler secret put TURNSTILE_SECRET_KEY`
 }
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -52,7 +54,28 @@ const MAX_QUESTION_CHARS = 1_500;
 const MAX_HISTORY_TURNS = 8;
 const MAX_TURN_CHARS = 4_000;
 
-const isAllowedOrigin = (origin: string | null) => !!origin && ALLOWED_ORIGINS.some((re) => re.test(origin));
+export function isAllowedOrigin(origin: string | null, env?: Env): boolean {
+  if (!origin) return false;
+  if (env?.ENVIRONMENT === "production" && (/^http:\/\/127\.0\.0\.1:\d+$/.test(origin) || /^http:\/\/localhost:\d+$/.test(origin))) {
+    return false;
+  }
+  return ALLOWED_ORIGINS.some((re) => re.test(origin));
+}
+
+async function verifyTurnstile(token: string | null, secret: string, ip?: string | null): Promise<boolean> {
+  if (!token) return false;
+  try {
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ secret, response: token, ...(ip ? { remoteip: ip } : {}) }),
+    });
+    const data = (await res.json()) as any;
+    return !!data?.success;
+  } catch {
+    return false;
+  }
+}
 
 function originOf(request: Request): string | null {
   // fetch() sends Origin; an <img> load sends only Referer
@@ -100,6 +123,13 @@ async function handleAdvisor(request: Request, env: Env, origin: string | null):
 
   const question = typeof body.question === "string" ? body.question.trim().slice(0, MAX_QUESTION_CHARS) : "";
   if (!question) return json({ ok: false, error: "No question" }, 400, origin);
+
+  if (env.TURNSTILE_SECRET_KEY) {
+    const token = request.headers.get("cf-turnstile-response") || (typeof body.turnstileToken === "string" ? body.turnstileToken : null);
+    const ip = request.headers.get("CF-Connecting-IP");
+    const verified = await verifyTurnstile(token, env.TURNSTILE_SECRET_KEY, ip);
+    if (!verified) return json({ ok: false, error: "Turnstile verification failed" }, 403, origin);
+  }
 
   if (!env.ANTHROPIC_API_KEY || !MODEL_CALL_IMPLEMENTED) return json({ ok: false, error: "The AI advisor is not connected to a model yet" }, 503, origin);
 
@@ -158,7 +188,7 @@ export default {
     const origin = originOf(request);
     const { pathname } = new URL(request.url);
 
-    if (request.method === "OPTIONS") return new Response(null, { status: isAllowedOrigin(origin) ? 204 : 403, headers: cors(origin) });
+    if (request.method === "OPTIONS") return new Response(null, { status: isAllowedOrigin(origin, env) ? 204 : 403, headers: cors(origin) });
 
     if (pathname === "/api/health") {
       return json({
@@ -172,7 +202,7 @@ export default {
     }
 
     // Everything else only for the site's own pages
-    if (!isAllowedOrigin(origin)) return json({ ok: false, error: "Forbidden origin" }, 403, origin);
+    if (!isAllowedOrigin(origin, env)) return json({ ok: false, error: "Forbidden origin" }, 403, origin);
 
     try {
       if (pathname === "/api/ai") return await handleAdvisor(request, env, origin);

@@ -17,6 +17,7 @@ import {
   usgsElevation,
 } from "../../workers/sources";
 import { runAdvisor, runAdvisorTool, SOURCING_RULES } from "../../workers/advisorAgent";
+import { isAllowedOrigin } from "../../workers/api-proxy";
 
 const fx = (name: string) => fs.readFileSync(path.join(__dirname, "../fixtures/sources", name), "utf8");
 
@@ -213,5 +214,30 @@ describe("advisor loop", () => {
     const client = { beta: { messages: { create: async () => ({ stop_reason: "refusal", content: [] }) } } };
     const out = await runAdvisor(client as any, "S", [{ role: "user", content: "q" }], {});
     expect(out.ok).toBe(false);
+  });
+
+  describe("Worker security and origin controls", () => {
+    it("allows the primary GitHub Pages production origin in all environments", () => {
+      expect(isAllowedOrigin("https://milessilverman.github.io")).toBe(true);
+      expect(isAllowedOrigin("https://milessilverman.github.io", { ENVIRONMENT: "production" })).toBe(true);
+      expect(isAllowedOrigin("https://milessilverman.github.io", { ENVIRONMENT: "development" })).toBe(true);
+    });
+
+    it("allows localhost origins during development, but strictly blocks them in production", () => {
+      expect(isAllowedOrigin("http://localhost:3000")).toBe(true);
+      expect(isAllowedOrigin("http://127.0.0.1:8080")).toBe(true);
+      expect(isAllowedOrigin("http://localhost:3000", { ENVIRONMENT: "development" })).toBe(true);
+
+      // Blocked in production
+      expect(isAllowedOrigin("http://localhost:3000", { ENVIRONMENT: "production" })).toBe(false);
+      expect(isAllowedOrigin("http://127.0.0.1:8080", { ENVIRONMENT: "production" })).toBe(false);
+    });
+
+    it("rejects unauthorized external origins and missing origins", () => {
+      expect(isAllowedOrigin(null)).toBe(false);
+      expect(isAllowedOrigin("")).toBe(false);
+      expect(isAllowedOrigin("https://evil-site.com")).toBe(false);
+      expect(isAllowedOrigin("https://not-city-pretty.org")).toBe(false);
+    });
   });
 });
