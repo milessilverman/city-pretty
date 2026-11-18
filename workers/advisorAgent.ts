@@ -15,6 +15,7 @@ import {
   geocodeAddress,
   ncesNearbySchools,
   noaaSeaLevelRise,
+  npsHistoricPlaces,
   osmNearby,
   OSM_FEATURES,
   pvwattsV8,
@@ -183,6 +184,21 @@ export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
     },
     strict: true,
   },
+  {
+    name: "check_historic_preservation",
+    description:
+      "Screen whether coordinates intersect a National Register of Historic Places (NRHP) district or National Historic Landmark polygon from the National Park Service.",
+    input_schema: {
+      type: "object",
+      properties: {
+        lat: { type: "number", description: "Latitude (WGS84)" },
+        lng: { type: "number", description: "Longitude (WGS84)" },
+      },
+      required: ["lat", "lng"],
+      additionalProperties: false,
+    },
+    strict: true,
+  },
   ...(LOCAL_DATA_TOOLS as Anthropic.Beta.BetaTool[]),
 ];
 
@@ -251,6 +267,10 @@ export async function runAdvisorTool(name: string, input: unknown, env: ToolEnv)
   if (name === "lookup_hpi_appreciation") {
     if (typeof i.tract_fips !== "string" || !i.tract_fips.trim()) return bad("11-digit tract_fips is required");
     return done(await fhfaTractHpi(i.tract_fips, f));
+  }
+  if (name === "check_historic_preservation") {
+    if (!isNum(i.lat) || !isNum(i.lng)) return bad("lat and lng must be numbers");
+    return done(await npsHistoricPlaces(i.lat, i.lng, f));
   }
   const local = runLocalDataTool(name, i);
   if (local !== undefined) return done(local);

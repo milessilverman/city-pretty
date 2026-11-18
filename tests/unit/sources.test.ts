@@ -17,6 +17,7 @@ import {
   googleSolarBuildingInsights,
   ncesNearbySchools,
   noaaSeaLevelRise,
+  npsHistoricPlaces,
   pvwattsV8,
   usgsSeismicDesign,
   geocodeAddress,
@@ -59,6 +60,7 @@ const AUSTIN = fakeFetch([
   [/solar\.googleapis\.com\/v1\/buildingInsights/, fx("google_solar_austin.json")],
   [/data\.transportation\.gov\/resource\/r94d-n4f9/, fx("fhwa_nhcci_latest.json")],
   [/fhfa\.gov\/hpi\/download\/annual\/hpi_at_tract/, fx("fhfa_hpi_austin.json")],
+  [/mapservices\.nps\.gov\/arcgis\/rest\/services\/cultural_resources\/nrhp_locations\/MapServer\/1/, fx("nps_historic_austin.json")],
 ]);
 
 describe("official-source connectors (real captured responses)", () => {
@@ -304,6 +306,38 @@ describe("official-source connectors (real captured responses)", () => {
     expect(coastal.value.layer_name).toBe("1ft SLR Low-lying Areas");
   });
 
+  it("npsHistoricPlaces screens National Register of Historic Places districts and landmarks", async () => {
+    // 1. Austin Perry Estate historic district
+    const res = await npsHistoricPlaces(30.3005, -97.724, AUSTIN);
+    expect(res.ok).toBe(true);
+    if (!res.ok) return;
+    expect(res.source.publisher).toContain("National Park Service");
+    expect(res.value.is_in_historic_district).toBe(true);
+    expect(res.value.resources.length).toBe(1);
+    expect(res.value.resources[0].name).toBe("Perry Estate--St. Mary's Academy");
+    expect(res.value.resources[0].ref_num).toBe("01000874");
+    expect(res.value.resources[0].resource_type).toBe("district");
+    expect(res.value.resources[0].is_national_historic_landmark).toBe(false);
+
+    // 2. Texas State Capitol (National Historic Landmark)
+    const capitolFetch = fakeFetch([[/nrhp_locations\/MapServer\/1/, fx("nps_historic_capitol.json")]]);
+    const capitol = await npsHistoricPlaces(30.2747, -97.7404, capitolFetch);
+    expect(capitol.ok).toBe(true);
+    if (!capitol.ok) return;
+    expect(capitol.value.is_in_historic_district).toBe(true);
+    expect(capitol.value.resources[0].name).toBe("Texas State Capitol");
+    expect(capitol.value.resources[0].ref_num).toBe("70000770");
+    expect(capitol.value.resources[0].is_national_historic_landmark).toBe(true);
+
+    // 3. Negative point outside any historic district
+    const negFetch = fakeFetch([[/nrhp_locations\/MapServer\/1/, fx("nps_historic_negative.json")]]);
+    const neg = await npsHistoricPlaces(30.2000, -97.7500, negFetch);
+    expect(neg.ok).toBe(true);
+    if (!neg.ok) return;
+    expect(neg.value.is_in_historic_district).toBe(false);
+    expect(neg.value.resources.length).toBe(0);
+  });
+
   it("parseOsmHeight converts feet/inches, feet, and meters correctly", () => {
     expect(parseOsmHeight("12'6\"")).toBe(3.81);
     expect(parseOsmHeight("10'")).toBe(3.05);
@@ -375,6 +409,11 @@ describe("advisor loop", () => {
     expect(hpiRes.sources.map((s) => s.publisher)).toContain("Federal Housing Finance Agency (FHFA)");
     expect(hpiRes.text).toContain("954.01");
     expect(hpiRes.text).toContain("87.8");
+
+    const histRes = await runAdvisorTool("check_historic_preservation", { lat: 30.3005, lng: -97.724 }, { fetcher: AUSTIN });
+    expect(histRes.isError).toBe(false);
+    expect(histRes.sources.map((s) => s.publisher)).toContain("National Park Service (NPS)");
+    expect(histRes.text).toContain("Perry Estate");
   });
 
   it("runs tools, returns all results in one user turn, and returns the final text with sources", async () => {

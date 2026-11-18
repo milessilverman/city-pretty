@@ -1018,6 +1018,85 @@ export async function noaaSeaLevelRise(
 }
 
 // ---------------------------------------------------------------------------------------------------------------
+// National Park Service (NPS) National Register of Historic Places (NRHP)
+// ---------------------------------------------------------------------------------------------------------------
+
+export type NpsHistoricResource = {
+  ref_num: string;
+  name: string;
+  resource_type: string;
+  address: string | null;
+  city: string | null;
+  county: string | null;
+  state: string | null;
+  is_national_historic_landmark: boolean;
+};
+
+export type NpsHistoricPlacesResult = {
+  is_in_historic_district: boolean;
+  resources: NpsHistoricResource[];
+};
+
+export async function npsHistoricPlaces(
+  lat: number,
+  lng: number,
+  fetcher: FetchLike = fetch,
+): Promise<Sourced<NpsHistoricPlacesResult>> {
+  const url =
+    "https://mapservices.nps.gov/arcgis/rest/services/cultural_resources/nrhp_locations/MapServer/1/query?" +
+    new URLSearchParams({
+      geometry: `${lng},${lat}`,
+      geometryType: "esriGeometryPoint",
+      inSR: "4326",
+      spatialRel: "esriSpatialRelIntersects",
+      outFields: "NRIS_Refnum,RESNAME,ResType,Address,City,County,State,Is_NHL",
+      returnGeometry: "false",
+      f: "json",
+    });
+  const source: SourceRef = {
+    name: "National Register of Historic Places (NRHP)",
+    publisher: "National Park Service (NPS)",
+    url,
+    retrieved_at: now(),
+    vintage: "NPS Cultural Resources GIS",
+  };
+  if (!validLatLng(lat, lng)) return fail(source, "Invalid coordinates");
+  try {
+    const d = (await getJson(fetcher, url)) as any;
+    const feats = Array.isArray(d?.features) ? d.features : [];
+    const resources: NpsHistoricResource[] = feats.map((f: any) => {
+      const a = f.attributes || {};
+      return {
+        ref_num: String(a.NRIS_Refnum || ""),
+        name: String(a.RESNAME || ""),
+        resource_type: String(a.ResType || ""),
+        address: a.Address || null,
+        city: a.City || null,
+        county: a.County || null,
+        state: a.State || null,
+        is_national_historic_landmark: a.Is_NHL === "X" || a.Is_NHL === "Y",
+      };
+    });
+    return {
+      ok: true,
+      source,
+      value: {
+        is_in_historic_district: resources.length > 0,
+        resources,
+      },
+      notes:
+        resources.length > 0
+          ? [
+              `Location intersects ${resources.length} National Register of Historic Places resource(s): ${resources.map((r) => `${r.name} (${r.resource_type}${r.is_national_historic_landmark ? ", National Historic Landmark" : ""})`).join("; ")}.`,
+            ]
+          : ["Location does not intersect a National Register of Historic Places historic district or landmark polygon."],
+    };
+  } catch (e) {
+    return fail(source, e);
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------
 // OpenStreetMap via Overpass
 // ---------------------------------------------------------------------------------------------------------------
 
