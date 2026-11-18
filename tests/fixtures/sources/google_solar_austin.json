@@ -1,0 +1,53 @@
+{
+  "name": "buildings/ChIJxXz_8A3MRIYRW2W11P2x-3k",
+  "center": {
+    "latitude": 30.3005,
+    "longitude": -97.724
+  },
+  "imageryDate": {
+    "year": 2024,
+    "month": 6,
+    "day": 15
+  },
+  "postalCode": "78722",
+  "administrativeArea": "Texas",
+  "statisticalArea": "Austin-Round Rock-Georgetown, TX",
+  "regionCode": "US",
+  "solarPotential": {
+    "maxArrayPanelsCount": 24,
+    "panelCapacityWatts": 400.0,
+    "panelHeightMeters": 1.65,
+    "panelWidthMeters": 0.99,
+    "wholeRoofStats": {
+      "areaMeters2": 185.8,
+      "groundAreaMeters2": 172.5
+    },
+    "roofSegmentStats": [
+      {
+        "pitchDegrees": 21.5,
+        "azimuthDegrees": 182.0,
+        "stats": {
+          "areaMeters2": 95.4,
+          "groundAreaMeters2": 88.7
+        },
+        "center": {
+          "latitude": 30.30048,
+          "longitude": -97.72402
+        }
+      },
+      {
+        "pitchDegrees": 21.2,
+        "azimuthDegrees": 2.0,
+        "stats": {
+          "areaMeters2": 90.4,
+          "groundAreaMeters2": 83.8
+        },
+        "center": {
+          "latitude": 30.30052,
+          "longitude": -97.72398
+        }
+      }
+    ],
+    "carbonOffsetFactorKgPerMwh": 412.5
+  }
+}

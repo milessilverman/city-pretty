@@ -15,6 +15,8 @@ const routes: Array<[RegExp, string]> = [
   [/geocoder\/geographies/, fx("census_geographies_austin.json")],
   [/National_Risk_Index_Census_Tracts/, fx("fema_nri_austin.json")],
   [/earthquake\.usgs\.gov\/ws\/designmaps/, fx("usgs_seismic_austin.json")],
+  [/chronicdata\.cdc\.gov\/resource\/cwsq-ngmh/, fx("cdc_places_austin.json")],
+  [/Public_School_Locations_Current/, fx("nces_schools_austin.json")],
 ];
 // HUD rents come from the page's FY2027 county file; tests read the same file.
 const HUD = Object.fromEntries(JSON.parse(fs.readFileSync(path.join(__dirname, "../../app/data/hud_fair_market_rents.json"), "utf8")).records.map((r: any) => [r.fips, r]));
@@ -75,5 +77,7 @@ describe("app/facts.js live public records", () => {
     expect(rows.find((r: any) => r.label === "FEMA flood zone").value).toContain("Zone AE");
     expect(rows.find((r: any) => r.label.includes("FEMA NRI")).value).toContain("Score 28/100");
     expect(rows.find((r: any) => r.label.includes("Earthquake design")).value).toContain("Category A");
+    expect(rows.find((r: any) => r.label.includes("CDC PLACES")).value).toContain("Obesity");
+    expect(rows.find((r: any) => r.label.includes("NCES EDGE")).value).toContain("LEE EL");
   });
 });

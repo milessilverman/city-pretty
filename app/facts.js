@@ -264,6 +264,30 @@ export function fromWorker(f) {
     rows.push(ok("Earthquake design (USGS ASCE 7-22)", label, seis.source.publisher, seis.source.url,
       `Mapped seismic design parameters from USGS.`));
   }
+  const hp = f.health_profile;
+  if (hp && hp.ok && hp.value) {
+    const v = hp.value;
+    const asthma = v.measures?.CASTHMA?.value_pct;
+    const ghlth = v.measures?.GHLTH?.value_pct;
+    const lpa = v.measures?.LPA?.value_pct;
+    const obesity = v.measures?.OBESITY?.value_pct;
+    const parts = [];
+    if (ghlth != null) parts.push(`Fair/poor health: ${ghlth}%`);
+    if (asthma != null) parts.push(`Asthma: ${asthma}%`);
+    if (obesity != null) parts.push(`Obesity: ${obesity}%`);
+    if (lpa != null) parts.push(`Inactivity: ${lpa}%`);
+    const label = parts.length ? parts.join(" · ") : "Tract profile on file";
+    rows.push(ok("Public health profile (CDC PLACES)", label, hp.source.publisher, hp.source.url,
+      `Tract ${v.tract_fips || ""} population ${v.population != null ? v.population.toLocaleString("en-US") : "N/A"}`));
+  }
+  const sch = f.nearby_schools;
+  if (sch && sch.ok && sch.value) {
+    const v = sch.value;
+    const closest = v.schools && v.schools[0];
+    const label = closest ? `${closest.name} (${closest.distance_m != null ? Math.round(closest.distance_m * 3.28084) + " ft" : "nearby"})` : `${v.count} schools within 2 km`;
+    rows.push(ok("Nearby public schools (NCES EDGE)", label, sch.source.publisher, sch.source.url,
+      `${v.count} public school(s) within 2 km.`));
+  }
   return rows;
 }
 

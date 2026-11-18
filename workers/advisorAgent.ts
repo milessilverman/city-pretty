@@ -7,7 +7,18 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { LOCAL_DATA_TOOLS, runLocalDataTool } from "./localData.ts";
 import { parcelAt } from "./parcels.ts";
-import { censusGeographies, geocodeAddress, osmNearby, OSM_FEATURES, pvwattsV8, siteFacts, type OsmFeatureKind, type SourceRef } from "./sources.ts";
+import {
+  cdcPlacesTractHealth,
+  censusGeographies,
+  geocodeAddress,
+  ncesNearbySchools,
+  osmNearby,
+  OSM_FEATURES,
+  pvwattsV8,
+  siteFacts,
+  type OsmFeatureKind,
+  type SourceRef,
+} from "./sources.ts";
 
 export const ADVISOR_MODEL = "claude-opus-5-5";
 const MAX_TOOL_ROUNDS = 6;
@@ -94,6 +105,36 @@ export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
     },
     strict: true,
   },
+  {
+    name: "lookup_health_profile",
+    description:
+      "Look up CDC PLACES local health data (prevalence of asthma, depression, physical inactivity, general health status, obesity) for a Census tract from the CDC PLACES 2025 release.",
+    input_schema: {
+      type: "object",
+      properties: {
+        tract_fips: { type: "string", description: "11-digit Census tract FIPS GEOID (e.g. '48453000302')" },
+      },
+      required: ["tract_fips"],
+      additionalProperties: false,
+    },
+    strict: true,
+  },
+  {
+    name: "find_nearby_schools",
+    description:
+      "Look up official public schools near coordinates using the National Center for Education Statistics (NCES EDGE) Public School Locations directory.",
+    input_schema: {
+      type: "object",
+      properties: {
+        lat: { type: "number", description: "Latitude (WGS84)" },
+        lng: { type: "number", description: "Longitude (WGS84)" },
+        radius_m: { type: "number", description: "Search radius in meters (default: 2000)" },
+      },
+      required: ["lat", "lng"],
+      additionalProperties: false,
+    },
+    strict: true,
+  },
   ...(LOCAL_DATA_TOOLS as Anthropic.Beta.BetaTool[]),
 ];
 
@@ -140,6 +181,15 @@ export async function runAdvisorTool(name: string, input: unknown, env: ToolEnv)
     const tilt = isNum(i.tilt_deg) ? i.tilt_deg : 20;
     const azimuth = isNum(i.azimuth_deg) ? i.azimuth_deg : 180;
     return done(await pvwattsV8(i.lat, i.lng, i.system_capacity_kw, { tiltDeg: tilt, azimuthDeg: azimuth, fetcher: f }));
+  }
+  if (name === "lookup_health_profile") {
+    if (typeof i.tract_fips !== "string" || !i.tract_fips.trim()) return bad("11-digit tract_fips is required");
+    return done(await cdcPlacesTractHealth(i.tract_fips, f));
+  }
+  if (name === "find_nearby_schools") {
+    if (!isNum(i.lat) || !isNum(i.lng)) return bad("lat and lng must be numbers");
+    const radius = isNum(i.radius_m) ? i.radius_m : 2000;
+    return done(await ncesNearbySchools(i.lat, i.lng, radius, f));
   }
   const local = runLocalDataTool(name, i);
   if (local !== undefined) return done(local);

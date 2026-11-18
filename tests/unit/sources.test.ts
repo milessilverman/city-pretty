@@ -7,9 +7,13 @@ import path from "node:path";
 import {
   acs5,
   addressMismatch,
+  cdcPlacesTractHealth,
   censusGeographies,
   femaFloodZone,
   femaNationalRiskIndex,
+  fhwaNhcci,
+  googleSolarBuildingInsights,
+  ncesNearbySchools,
   pvwattsV8,
   usgsSeismicDesign,
   geocodeAddress,
@@ -45,6 +49,10 @@ const AUSTIN = fakeFetch([
   [/National_Risk_Index_Census_Tracts/, fx("fema_nri_austin.json")],
   [/earthquake\.usgs\.gov\/ws\/designmaps/, fx("usgs_seismic_austin.json")],
   [/developer\.nlr\.gov\/api\/pvwatts\/v8/, fx("pvwatts_austin.json")],
+  [/chronicdata\.cdc\.gov\/resource\/cwsq-ngmh/, fx("cdc_places_austin.json")],
+  [/Public_School_Locations_Current/, fx("nces_schools_austin.json")],
+  [/solar\.googleapis\.com\/v1\/buildingInsights/, fx("google_solar_austin.json")],
+  [/data\.transportation\.gov\/resource\/r94d-n4f9/, fx("fhwa_nhcci_latest.json")],
 ]);
 
 describe("official-source connectors (real captured responses)", () => {
@@ -189,6 +197,51 @@ describe("official-source connectors (real captured responses)", () => {
     expect(res.value.system_capacity_kw).toBe(4.0);
   });
 
+  it("cdcPlacesTractHealth returns tract-level health metrics from CDC PLACES 2025", async () => {
+    const res = await cdcPlacesTractHealth("48453000302", AUSTIN);
+    expect(res.ok).toBe(true);
+    if (!res.ok) return;
+    expect(res.source.publisher).toContain("Centers for Disease Control and Prevention");
+    expect(res.source.vintage).toContain("PLACES 2025");
+    expect(res.value.tract_fips).toBe("48453000302");
+    expect(res.value.measures.OBESITY.value_pct).toBe(26.7);
+    expect(res.value.measures.LPA.value_pct).toBe(14.4);
+    expect(res.value.measures.GHLTH.value_pct).toBe(11.4);
+  });
+
+  it("ncesNearbySchools returns nearby public schools sorted by distance", async () => {
+    const res = await ncesNearbySchools(30.3005, -97.724, 2000, AUSTIN);
+    expect(res.ok).toBe(true);
+    if (!res.ok) return;
+    expect(res.source.publisher).toContain("National Center for Education Statistics");
+    expect(res.value.count).toBe(6);
+    expect(res.value.schools[0].name).toBe("LEE EL");
+    expect(res.value.schools[0].distance_m).toBeGreaterThan(0);
+    expect(res.value.schools[0].zip).toBe("78705");
+  });
+
+  it("googleSolarBuildingInsights returns roof segments and pitch from Google Solar API", async () => {
+    const res = await googleSolarBuildingInsights(30.3005, -97.724, "TEST_API_KEY", AUSTIN);
+    expect(res.ok).toBe(true);
+    if (!res.ok) return;
+    expect(res.source.publisher).toContain("Google Maps Platform");
+    expect(res.value.roof_area_m2).toBe(185.8);
+    expect(res.value.roof_segments.length).toBe(2);
+    expect(res.value.roof_segments[0].pitch_degrees).toBe(21.5);
+    expect(res.value.roof_segments[0].azimuth_degrees).toBe(182.0);
+    expect(res.value.max_panels_count).toBe(24);
+  });
+
+  it("fhwaNhcci returns latest highway construction cost index and 2024 adjustment factor", async () => {
+    const res = await fhwaNhcci(undefined, AUSTIN);
+    expect(res.ok).toBe(true);
+    if (!res.ok) return;
+    expect(res.source.publisher).toContain("Federal Highway Administration");
+    expect(res.value.quarter).toBe("2026 Q1");
+    expect(res.value.nhcci).toBeCloseTo(3.135, 3);
+    expect(res.value.base_year_2024_adjustment_factor).toBeCloseTo(0.9823, 3);
+  });
+
   it("parseOsmHeight converts feet/inches, feet, and meters correctly", () => {
     expect(parseOsmHeight("12'6\"")).toBe(3.81);
     expect(parseOsmHeight("10'")).toBe(3.05);
@@ -234,6 +287,16 @@ describe("advisor loop", () => {
     expect(solarRes.isError).toBe(false);
     expect(solarRes.sources.map((s) => s.publisher)).toContain("National Laboratory for Renewable Energy (NLR)");
     expect(solarRes.text).toContain("5932");
+
+    const healthRes = await runAdvisorTool("lookup_health_profile", { tract_fips: "48453000302" }, { fetcher: AUSTIN });
+    expect(healthRes.isError).toBe(false);
+    expect(healthRes.sources.map((s) => s.publisher)).toContain("Centers for Disease Control and Prevention (CDC)");
+    expect(healthRes.text).toContain("OBESITY");
+
+    const schoolRes = await runAdvisorTool("find_nearby_schools", { lat: 30.3005, lng: -97.724 }, { fetcher: AUSTIN });
+    expect(schoolRes.isError).toBe(false);
+    expect(schoolRes.sources.map((s) => s.publisher)).toContain("National Center for Education Statistics (NCES)");
+    expect(schoolRes.text).toContain("LEE EL");
   });
 
   it("runs tools, returns all results in one user turn, and returns the final text with sources", async () => {

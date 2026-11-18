@@ -511,6 +511,259 @@ export async function pvwattsV8(
 }
 
 // ---------------------------------------------------------------------------------------------------------------
+// Geodetic Distance Helper
+// ---------------------------------------------------------------------------------------------------------------
+
+export function haversineDistanceM(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 6371000;
+  const toRad = (deg: number) => (deg * Math.PI) / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// CDC PLACES (Local Data for Better Health: Census Tract Data)
+// ---------------------------------------------------------------------------------------------------------------
+
+export type CdcPlacesHealth = {
+  tract_fips: string;
+  population: number | null;
+  measures: Record<string, { label: string; value_pct: number; unit: string; confidence_interval?: [number, number] }>;
+};
+
+export async function cdcPlacesTractHealth(
+  tractFips: string,
+  fetcher: FetchLike = fetch
+): Promise<Sourced<CdcPlacesHealth>> {
+  const cleanFips = String(tractFips || "").replace(/\D/g, "");
+  const url = `https://chronicdata.cdc.gov/resource/cwsq-ngmh.json?locationid=${cleanFips}&$limit=50`;
+  const source: SourceRef = {
+    name: "CDC PLACES (Local Data for Better Health: Census Tract Data)",
+    publisher: "Centers for Disease Control and Prevention (CDC)",
+    url,
+    retrieved_at: now(),
+    vintage: "PLACES 2025 Release (BRFSS 2022-2023)",
+  };
+  if (cleanFips.length !== 11) return fail(source, `Invalid 11-digit Census tract FIPS: ${tractFips}`);
+  try {
+    const rows = (await getJson(fetcher, url)) as any[];
+    if (!Array.isArray(rows) || !rows.length) return fail(source, "No CDC PLACES health data found for this tract");
+    const measures: CdcPlacesHealth["measures"] = {};
+    let pop: number | null = null;
+    for (const r of rows) {
+      if (!r.measureid || r.data_value == null) continue;
+      if (pop == null && r.totalpopulation) pop = Number(r.totalpopulation);
+      measures[r.measureid] = {
+        label: r.short_question_text || r.measure || r.measureid,
+        value_pct: Number(r.data_value),
+        unit: r.data_value_unit || "%",
+        confidence_interval:
+          r.low_confidence_limit != null && r.high_confidence_limit != null
+            ? [Number(r.low_confidence_limit), Number(r.high_confidence_limit)]
+            : undefined,
+      };
+    }
+    return {
+      ok: true,
+      source,
+      value: {
+        tract_fips: cleanFips,
+        population: pop,
+        measures,
+      },
+    };
+  } catch (e) {
+    return fail(source, e);
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// NCES EDGE Public School Locations
+// ---------------------------------------------------------------------------------------------------------------
+
+export type NcesSchool = {
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  zip: string;
+  lat: number;
+  lng: number;
+  distance_m?: number;
+};
+
+export type NcesNearbySchoolsResult = {
+  count: number;
+  schools: NcesSchool[];
+};
+
+export async function ncesNearbySchools(
+  lat: number,
+  lng: number,
+  radiusM: number = 2000,
+  fetcher: FetchLike = fetch
+): Promise<Sourced<NcesNearbySchoolsResult>> {
+  const url = `https://services1.arcgis.com/Ua5sjt3LWTPigjyD/arcgis/rest/services/Public_School_Locations_Current/FeatureServer/0/query?geometry=${lng},${lat}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&distance=${radiusM}&units=esriSRUnit_Meter&outFields=NAME,STREET,CITY,STATE,ZIP,LAT,LON&returnGeometry=false&f=json`;
+  const source: SourceRef = {
+    name: "NCES EDGE Public School Locations",
+    publisher: "National Center for Education Statistics (NCES)",
+    url,
+    retrieved_at: now(),
+    vintage: "Current 2023-2024 School Year",
+  };
+  if (!validLatLng(lat, lng)) return fail(source, "Invalid coordinates");
+  try {
+    const d = (await getJson(fetcher, url)) as any;
+    const feats = Array.isArray(d?.features) ? d.features : [];
+    const schools: NcesSchool[] = [];
+    for (const f of feats) {
+      const a = f.attributes || {};
+      if (!a.NAME) continue;
+      const sLat = num(a.LAT);
+      const sLon = num(a.LON);
+      const dist = sLat != null && sLon != null ? Math.round(haversineDistanceM(lat, lng, sLat, sLon)) : undefined;
+      schools.push({
+        name: String(a.NAME).trim(),
+        address: String(a.STREET || "").trim(),
+        city: String(a.CITY || "").trim(),
+        state: String(a.STATE || "").trim(),
+        zip: String(a.ZIP || "").trim(),
+        lat: sLat ?? 0,
+        lng: sLon ?? 0,
+        distance_m: dist,
+      });
+    }
+    schools.sort((a, b) => (a.distance_m ?? 0) - (b.distance_m ?? 0));
+    return {
+      ok: true,
+      source,
+      value: {
+        count: schools.length,
+        schools,
+      },
+    };
+  } catch (e) {
+    return fail(source, e);
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// Google Solar API buildingInsights
+// ---------------------------------------------------------------------------------------------------------------
+
+export type GoogleSolarRoofSegment = {
+  pitch_degrees: number;
+  azimuth_degrees: number;
+  area_m2: number;
+  center?: { lat: number; lng: number };
+};
+
+export type GoogleSolarInsights = {
+  imagery_date: string | null;
+  roof_area_m2: number | null;
+  roof_segments: GoogleSolarRoofSegment[];
+  max_panels_count: number | null;
+  carbon_offset_factor_kg_per_mwh?: number | null;
+};
+
+export async function googleSolarBuildingInsights(
+  lat: number,
+  lng: number,
+  apiKey: string | undefined,
+  fetcher: FetchLike = fetch
+): Promise<Sourced<GoogleSolarInsights>> {
+  const publicUrl = `https://solar.googleapis.com/v1/buildingInsights:findClosest?location.latitude=${lat}&location.longitude=${lng}&requiredQuality=BASE`;
+  const source: SourceRef = {
+    name: "Google Solar API (buildingInsights)",
+    publisher: "Google Maps Platform",
+    url: publicUrl,
+    retrieved_at: now(),
+    vintage: "High-resolution 3D aerial modeling (terms: solar feasibility only, 30-day max cache)",
+  };
+  if (!validLatLng(lat, lng)) return fail(source, "Invalid coordinates");
+  if (!apiKey) return fail(source, "GOOGLE_SOLAR_API_KEY is not configured");
+  try {
+    const d = (await getJson(fetcher, `${publicUrl}&key=${encodeURIComponent(apiKey)}`)) as any;
+    if (d?.error) return fail(source, d.error.message || "Google Solar API returned an error");
+    const pot = d?.solarPotential;
+    if (!pot) return fail(source, "No solar potential data returned for this location");
+    const segments: GoogleSolarRoofSegment[] = (pot.roofSegmentStats || []).map((s: any) => ({
+      pitch_degrees: num(s.pitchDegrees) ?? 0,
+      azimuth_degrees: num(s.azimuthDegrees) ?? 0,
+      area_m2: num(s.stats?.areaMeters2) ?? 0,
+      center: s.center ? { lat: s.center.latitude, lng: s.center.longitude } : undefined,
+    }));
+    const imgDate = d.imageryDate ? `${d.imageryDate.year}-${String(d.imageryDate.month).padStart(2, "0")}-${String(d.imageryDate.day).padStart(2, "0")}` : null;
+    return {
+      ok: true,
+      source,
+      value: {
+        imagery_date: imgDate,
+        roof_area_m2: num(pot.wholeRoofStats?.areaMeters2),
+        roof_segments: segments,
+        max_panels_count: pot.maxArrayPanelsCount != null ? Number(pot.maxArrayPanelsCount) : null,
+        carbon_offset_factor_kg_per_mwh: num(pot.carbonOffsetFactorKgPerMwh),
+      },
+    };
+  } catch (e) {
+    return fail(source, e);
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// FHWA National Highway Construction Cost Index (NHCCI)
+// ---------------------------------------------------------------------------------------------------------------
+
+export type NhcciResult = {
+  quarter: string;
+  nhcci: number;
+  nhcci_seasonally_adjusted: number | null;
+  base_year_2024_adjustment_factor: number;
+};
+
+// Base 2024 Q1 index: 3.191321352
+const NHCCI_2024_Q1_BASE = 3.191321352;
+
+export async function fhwaNhcci(
+  quarter?: string,
+  fetcher: FetchLike = fetch
+): Promise<Sourced<NhcciResult>> {
+  const url = quarter
+    ? `https://data.transportation.gov/resource/r94d-n4f9.json?quarter=${encodeURIComponent(quarter)}`
+    : `https://data.transportation.gov/resource/r94d-n4f9.json?$limit=1&$order=quarter%20desc`;
+  const source: SourceRef = {
+    name: "FHWA National Highway Construction Cost Index (NHCCI)",
+    publisher: "Federal Highway Administration (FHWA)",
+    url,
+    retrieved_at: now(),
+    vintage: "data.transportation.gov dataset r94d-n4f9",
+  };
+  try {
+    const rows = (await getJson(fetcher, url)) as any[];
+    if (!Array.isArray(rows) || !rows.length) return fail(source, "No NHCCI index row returned");
+    const r = rows[0];
+    const val = num(r.nhcci);
+    if (val == null) return fail(source, "Missing numeric nhcci value");
+    return {
+      ok: true,
+      source,
+      value: {
+        quarter: String(r.quarter || ""),
+        nhcci: val,
+        nhcci_seasonally_adjusted: num(r.nhcci_seasonally_adjusted),
+        base_year_2024_adjustment_factor: Number((val / NHCCI_2024_Q1_BASE).toFixed(4)),
+      },
+    };
+  } catch (e) {
+    return fail(source, e);
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------
 // OpenStreetMap via Overpass
 // ---------------------------------------------------------------------------------------------------------------
 
@@ -635,30 +888,47 @@ export async function osmNearby(
 // ---------------------------------------------------------------------------------------------------------------
 
 // Dynamic default ACS vintage: ACS 5-year data releases around December each year (e.g. 2021-25 release in Dec 2026).
-const CURRENT_CALENDAR_YEAR = new Date().getFullYear();
-const DEFAULT_ACS_YEAR = Math.max(2024, CURRENT_CALENDAR_YEAR - (new Date().getMonth() >= 11 ? 1 : 2));
+export const CURRENT_CALENDAR_YEAR = new Date().getFullYear();
+export const DEFAULT_ACS_YEAR = Math.max(2024, CURRENT_CALENDAR_YEAR - (new Date().getMonth() >= 11 ? 1 : 2));
 
 export async function siteFacts(lat: number, lng: number, opts: { censusApiKey?: string; acsYear?: number; fetcher?: FetchLike } = {}) {
   const f = opts.fetcher || fetch;
-  const [geo, elev, flood, nri, seismic] = await Promise.all([
+  const [geo, elev, flood, nri, seismic, schools] = await Promise.all([
     censusGeographies(lat, lng, f),
     usgsElevation(lat, lng, f),
     femaFloodZone(lat, lng, f),
     femaNationalRiskIndex(lat, lng, f),
     usgsSeismicDesign(lat, lng, f),
+    ncesNearbySchools(lat, lng, 2000, f),
   ]);
   const fmr: Sourced<HudFmr> = geo.ok
     ? hudFairMarketRentForCounty(geo.value.county_fips)
     : fail({ name: "HUD Fair Market Rents", publisher: "HUD", url: HUD_FMR_INFO_URL, retrieved_at: now() }, "County unknown (Census lookup failed)");
   let acs: Sourced<AcsResult> | null = null;
+  let health: Sourced<CdcPlacesHealth> | null = null;
   if (geo.ok && geo.value.tract_geoid) {
-    acs = await acs5(
-      { state: geo.value.state_fips, county: geo.value.county_fips.slice(2), tract: geo.value.tract_geoid.slice(5) },
-      opts.acsYear || DEFAULT_ACS_YEAR,
-      opts.censusApiKey,
-      undefined,
-      f,
-    );
+    [acs, health] = await Promise.all([
+      acs5(
+        { state: geo.value.state_fips, county: geo.value.county_fips.slice(2), tract: geo.value.tract_geoid.slice(5) },
+        opts.acsYear || DEFAULT_ACS_YEAR,
+        opts.censusApiKey,
+        undefined,
+        f,
+      ),
+      cdcPlacesTractHealth(geo.value.tract_geoid, f),
+    ]);
   }
-  return { lat, lng, geographies: geo, hud_fair_market_rent: fmr, elevation: elev, flood_zone: flood, national_risk_index: nri, seismic_design: seismic, acs_tract: acs };
+  return {
+    lat,
+    lng,
+    geographies: geo,
+    hud_fair_market_rent: fmr,
+    elevation: elev,
+    flood_zone: flood,
+    national_risk_index: nri,
+    seismic_design: seismic,
+    nearby_schools: schools,
+    health_profile: health,
+    acs_tract: acs,
+  };
 }

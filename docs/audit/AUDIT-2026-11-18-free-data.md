@@ -244,7 +244,7 @@ The tests pass, but they miss the bugs below.
   - Give a plain reason for non-JSON replies.
   - Don't cache failed lookups for the whole session.
   - Translate FEMA zones "AREA NOT INCLUDED", "OPEN WATER" and "D" into plain words.
-- [ ] **ACS vintage:** pick the newest available year at runtime, or from config, instead of hard-coding 2024 (`sources.ts:420`). The 2021–25 release is due around Dec 2026.
+- [x] **ACS vintage:** pick the newest available year at runtime, or from config, instead of hard-coding 2024 (`sources.ts`). The 2021–25 release is due around Dec 2026. *(Fixed and verified: dynamic DEFAULT_ACS_YEAR calculation and acsYear option supported)*
 - [x] **Distances** (`app.js:10733`, `5937`): *(Fixed and verified: haversine used throughout, walk times labeled straight-line at assumed 3 mph)*
   - Replace LA's fixed miles-per-degree with haversine.
   - Label "~X min walk" as straight-line at an assumed speed.
