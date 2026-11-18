@@ -666,7 +666,8 @@ function evaluateCounty(meta, salesIn) {
   }
   const guard = VBE.applySaleFilters(post.kept, [
     { id: "pre_sale_roll", description: "A pre-sale assessment exists under the leakage rule: " + meta.roll_rule_text, test: s => !!s.roll },
-    { id: "located", description: "Parcel located inside one of the county bundle's block groups", test: s => !!s.bg }
+    { id: "located", description: "Parcel located inside one of the county bundle's block groups", test: s => !!s.bg },
+    { id: "price_25k", description: "Sale price >= $25,000 (the floor runCountyValuationBacktest scores; keeps engine and baselines on the same sales)", test: s => s.salePrice >= 25000 }
   ]);
   const usable = guard.kept;
   const cal = usable.filter(s => s.split === "calibration");

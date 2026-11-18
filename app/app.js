@@ -101,6 +101,22 @@ if (typeof window !== "undefined") {
   loadVerifiedDataFiles();
 }
 
+// "2026-11-18" -> "18 Nov 2026" (plain date for "Checked against ... on ..." labels).
+function fmtCheckedDate(iso) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || ""));
+  if (!m) return String(iso || "");
+  return `${+m[3]} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][+m[2] - 1]} ${m[1]}`;
+}
+// Plain label for a record's verification block (statutes, state finance profiles, corridors, sites, costs).
+function verificationLabel(rec, what) {
+  const v = rec && rec.verification;
+  const st = v && v.status;
+  const on = v && v.checked ? ` on ${fmtCheckedDate(v.checked)}` : "";
+  if (st === "verified") return `Checked against the ${what || "source"}${on}`;
+  if (st === "partly") return `Partly checked against the ${what || "source"}${on}; some details unconfirmed`;
+  return "Not yet checked";
+}
+
 function getHudFmr(fips) {
   if (!fips || !Array.isArray(HUD_FMR_DATA) || !HUD_FMR_DATA.length) return null;
   const target = String(fips).padStart(5, "0");
@@ -3161,14 +3177,14 @@ function siteHtml(s) {
   const A = D.under.assumptions || {};
   const BS = { built: "Already built", building: "Under construction", planned: "Project already approved" };
   return `<div class="small" style="max-width:300px">${s.bs ? `<div class="site-done">${BS[s.bs]}: not counted as underused</div>` : ""}<b>${esc(s.k[0].toUpperCase() + s.k.slice(1))}</b>${s.bs ? ' <span class="muted">(per the Assessor\'s use code, which can lag construction)</span>' : ""}${s.nm ? " · " + esc(s.nm) : ""}${s.ad ? "<br>" + esc(s.ad) : ""}
-    <br>${s.ac.toFixed(s.ac < 10 ? 2 : 0)} acres${s.use ? " · " + esc(s.use) : ""}
+    <br>${s.ac != null ? s.ac.toFixed(s.ac < 10 ? 2 : 0) + " acres" : "Acreage not on file"}${s.use ? " · " + esc(s.use) : ""}
     ${s.lav != null ? `<br>Assessed land value: <b>${fmt$(s.lav)}</b>${s.by ? ` (Prop 13 base from ${s.by})` : ""}` : ""}
-    ${s.mkt != null ? `<br>Estimated market land value: <b>~${fmt$(s.mkt)}</b>` : ""}
+    ${s.mkt != null ? `<br>Market land value (screening estimate): <b>~${fmt$(s.mkt)}</b>` : ""}
     <br>Zoning: ${esc(s.z || s.zc || "unknown")}${s.rail != null && s.rail < 805 ? ` · ${(s.rail / 1609).toFixed(2)} mi from ${esc(s.st || "rail")}${s.sts === "coming" ? " (station under construction)" : ""}` : ""}
     ${s.own ? `<br><b>Publicly owned:</b> ${esc(s.own)} (County public-agency parcels)` : ""}${s.known ? `<br><b>Known site:</b> ${esc(s.known)}` : ""}${s.ease ? `<br><b>Conservation easement:</b> recorded easement on this land (state CCED); building is generally not allowed.` : ""}
     ${s.he != null ? `<br><b>Already planned:</b> this site is in the city's Housing Element inventory${s.he ? ` for ~${fmtN(s.he)} home${Math.round(+s.he) === 1 ? "" : "s"}` : ""}.` : ""}
-    <br><b>${s.bs ? "Status" : "Could be"}:</b> ${esc(s.idea)}
-    ${s.margin != null && s.homes ? `<br>Rough development margin: <b>${s.margin >= 0 ? "~" + fmt$(s.margin) : "negative (" + fmt$(s.margin) + ")"}</b> (${fmtN(s.homes)} home${Math.round(+s.homes) === 1 ? "" : "s"})` : ""}
+    ${s.idea ? `<br><b>${s.bs ? "Status" : "Could be (screening estimate)"}:</b> ${esc(s.idea)}` : ""}
+    ${s.margin != null && s.homes ? `<br>Rough development margin (screening estimate): <b>${s.margin >= 0 ? "~" + fmt$(s.margin) : "negative (" + fmt$(s.margin) + ")"}</b> (${fmtN(s.homes)} home${Math.round(+s.homes) === 1 ? "" : "s"})` : ""}
     <br><span class="muted">Screening estimate: apartment value from LA rents and cap rates, build cost from LA case studies (round-7 research); land prices and fees are estimates.</span></div>`;
 }
 function drawUnder() {
@@ -3185,7 +3201,7 @@ function drawUnder() {
       return L.polygon(rings.map(decodeLine), done ? { color: "#868e96", weight: 1.2, fillColor: "#868e96", fillOpacity: .08, dashArray: "1 4" }
           : { color: col, weight: 1.4, fillColor: col, fillOpacity: .35, dashArray: s.k === "parking lot" ? "3 3" : null })
         .bindTooltip(done ? `${{ built: "already built", building: "under construction", planned: "project approved" }[s.bs]} (was listed as ${esc(s.k)}) · click for details`
-          : `${esc(s.k)} · ${s.ac.toFixed(1)} ac${s.mkt ? " · ~" + fmt$(s.mkt) + " land" : ""} (click for more)`, { sticky: true }).bindPopup(() => siteHtml(s), { maxWidth: 320 })
+          : `${esc(s.k)} · ${s.ac != null ? s.ac.toFixed(1) + " ac" : "acreage not on file"}${s.mkt ? " · ~" + fmt$(s.mkt) + " land (screening estimate)" : ""} (click for more)`, { sticky: true }).bindPopup(() => siteHtml(s), { maxWidth: 320 })
         .on("click", e => {
           if (selected !== s.gid) select(s.gid, false);
         }); }).filter(Boolean));
@@ -3636,7 +3652,7 @@ function zoningSection(m) {
 function underSection(p) {
   if (isOCArea((D.details[p.id] || {}).m)) return `<div class="section"><h3>Underused land here</h3><p class="small muted">The underused-land inventory (parking lots, golf courses, vacant and lightly built parcels) covers LA County only so far.</p></div>`;
   const all = ((D.under && D.under.sites) || []).filter(s => s.gid === p.id), S = all.filter(s => !s.bs).sort((a, b) => (b.mkt || 0) - (a.mkt || 0)), done = all.filter(s => s.bs);
-  if (!S.length) return done.length ? `<div class="section"><h3>Underused land here</h3><p class="small muted">None left: ${done.length} site${done.length > 1 ? "s" : ""} the Assessor still lists as parking or vacant ${done.length > 1 ? "are" : "is"} already built, under construction or approved (${done.map(s => esc(s.idea.split(";")[0])).slice(0, 2).join("; ")}).</p></div>` : "";
+  if (!S.length) return done.length ? `<div class="section"><h3>Underused land here</h3><p class="small muted">None left: ${done.length} site${done.length > 1 ? "s" : ""} the Assessor still lists as parking or vacant ${done.length > 1 ? "are" : "is"} already built, under construction or approved (${done.map(s => esc(String(s.idea || s.k || "").split(";")[0])).slice(0, 2).join("; ")}).</p></div>` : "";
   return `<div class="section"><h3>Underused land here</h3><p class="small muted">${S.length} site${S.length > 1 ? "s" : ""} in this block group: parking lots, golf courses, vacant parcels or lightly built commercial lots. Click one to zoom to it.${done.length ? ` ${done.length} more listed by the Assessor ${done.length > 1 ? "are" : "is"} already built or under way, so ${done.length > 1 ? "they're" : "it's"} left out.` : ""}</p>
     <div class="recs">${S.slice(0, 6).map(s => `<div class="rec qolrec" style="cursor:pointer" data-site="${s.i}"><div class="small">${siteHtml(s)}</div></div>`).join("")}</div></div>`;
 }
@@ -5997,7 +6013,7 @@ function renderHouse(box, a, lot, ll, st) {
             ${esc(b.badge)}
           </span>
           <span style="font-size:11px;font-weight:700;color:#059669;background:#ecfdf5;padding:2px 8px;border-radius:12px;border:1px solid #a7f3d0;">
-            Estimated Net Equity: +$${Math.round(b.equity).toLocaleString()}
+            Estimated Net Equity: ${b.equity != null && isFinite(b.equity) ? "+$" + Math.round(b.equity).toLocaleString() : "not on file"}${b.illustrative ? " (assumed)" : ""}
           </span>
         </div>
 
@@ -6009,19 +6025,19 @@ function renderHouse(box, a, lot, ll, st) {
         <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:6px;background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:8px;margin-bottom:10px;text-align:center;">
           <div>
             <div style="font-size:10px;color:#64748b;font-weight:600;text-transform:uppercase;">Return per $1</div>
-            <div style="font-size:14px;font-weight:800;color:#0284c7;">$${b.roi} / $1</div>
+            <div style="font-size:14px;font-weight:800;color:#0284c7;">${b.roi != null && isFinite(b.roi) ? "$" + b.roi + " / $1" : "not on file"}</div>
           </div>
           <div>
             <div style="font-size:10px;color:#64748b;font-weight:600;text-transform:uppercase;">Estimated Cost</div>
-            <div style="font-size:14px;font-weight:800;color:#334155;">~$${Math.round(b.cost).toLocaleString()}</div>
+            <div style="font-size:14px;font-weight:800;color:#334155;">${b.cost != null && isFinite(b.cost) ? "~$" + Math.round(b.cost).toLocaleString() : "not on file"}</div>
           </div>
           <div>
             <div style="font-size:10px;color:#64748b;font-weight:600;text-transform:uppercase;">Annual Flow</div>
-            <div style="font-size:14px;font-weight:800;color:#16a34a;">+$${Math.round(b.annualCashflow).toLocaleString()}/yr</div>
+            <div style="font-size:14px;font-weight:800;color:#16a34a;">${b.annualCashflow != null && isFinite(b.annualCashflow) ? "+$" + Math.round(b.annualCashflow).toLocaleString() + "/yr" : "not on file"}</div>
           </div>
           <div>
             <div style="font-size:10px;color:#64748b;font-weight:600;text-transform:uppercase;">Payback</div>
-            <div style="font-size:14px;font-weight:800;color:#7c3aed;">~${b.paybackYrs} yrs</div>
+            <div style="font-size:14px;font-weight:800;color:#7c3aed;">${b.paybackYrs != null && b.paybackYrs !== "" ? "~" + b.paybackYrs + " yrs" : "not on file"}</div>
           </div>
         </div>
 
@@ -6033,6 +6049,8 @@ function renderHouse(box, a, lot, ll, st) {
         <div style="font-size:12px;color:#334155;line-height:1.45;margin-bottom:10px;">
           ${b.rationale}
         </div>
+        ${b.illustrative ? `<div style="font-size:11px;color:#92400e;background:#fffbeb;border:1px solid #fde68a;border-radius:4px;padding:5px 8px;margin-bottom:8px;"><b>Illustrative only: inputs are assumptions, not local data.</b>${(b.assumptions || []).length ? " Assumed: " + b.assumptions.map(x => `${esc(x.name)} = ${esc(x.value)}`).join("; ") + "." : ""}</div>` : ""}
+        ${(pb.notDetermined || []).length ? `<div style="font-size:11px;color:#475569;background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;padding:5px 8px;margin-bottom:8px;"><b>Not determined:</b> ${pb.notDetermined.map(s => `${esc(s.citation)}: ${esc(s.reason)}`).join("; ")}</div>` : ""}
 
         <!-- Action Blueprint -->
         <details style="margin-bottom:10px;font-size:12px;background:#fff;border:1px solid #cbd5e1;border-radius:6px;padding:6px 10px;">
@@ -6049,7 +6067,7 @@ function renderHouse(box, a, lot, ll, st) {
 
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
           <div style="display:flex;gap:6px;flex:1;max-width:380px;">
-            <button type="button" id="btn-copy-playbook" onclick="copyPlaybookMemo('${esc(b.title)}', ${b.equity}, ${b.roi}, '${esc(b.statute)}', '${cleanAddr}', '${cleanApn}')" style="flex:1;background:#fff;color:#0f172a;border:1px solid #94a3b8;border-radius:6px;padding:6px 10px;font-size:11px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+            <button type="button" id="btn-copy-playbook" onclick="copyPlaybookMemo('${esc(b.title)}', ${b.equity != null && isFinite(b.equity) ? b.equity : "null"}, ${b.roi != null && isFinite(b.roi) ? b.roi : "null"}, '${esc(b.statute)}', '${cleanAddr}', '${cleanApn}')" style="flex:1;background:#fff;color:#0f172a;border:1px solid #94a3b8;border-radius:6px;padding:6px 10px;font-size:11px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
               Copy Memo
             </button>
             <button type="button" onclick="exportExecutiveProspectus()" style="flex:1;background:#0f172a;color:#fff;border:none;border-radius:6px;padding:6px 10px;font-size:11px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 1px 3px rgba(0,0,0,0.15);">
@@ -6057,7 +6075,7 @@ function renderHouse(box, a, lot, ll, st) {
             </button>
           </div>
           <span style="font-size:10.5px;color:#64748b;">
-            Deterministic &middot; AI Backbone Ready
+            Screening estimate
           </span>
         </div>
       </div>`;
@@ -8845,11 +8863,11 @@ function renderTrendsList() {
       <div>
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;">
           <span style="font-size:10px;font-weight:700;color:#0284c7;background:#e0f2fe;padding:2px 7px;border-radius:10px;text-transform:uppercase;">
-            ${esc(t.city)} &middot; ${t.year}
+            ${esc(t.city)}${t.year != null ? ` &middot; ${esc(t.year)}` : ""}
           </span>
-          <span style="font-size:11px;font-weight:800;color:#15803d;background:#dcfce7;padding:2px 8px;border-radius:12px;border:1px solid #bbf7d0;">
+          ${t.ratio != null && t.ratio !== "" ? `<span style="font-size:11px;font-weight:800;color:#15803d;background:#dcfce7;padding:2px 8px;border-radius:12px;border:1px solid #bbf7d0;">
             Ratio: ${esc(t.ratio)} Private Leverage
-          </span>
+          </span>` : ""}
         </div>
 
         <div style="font-size:15px;font-weight:800;color:#0f172a;margin-bottom:6px;line-height:1.35;">
@@ -8860,11 +8878,11 @@ function renderTrendsList() {
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:8px;margin-bottom:8px;text-align:center;">
           <div>
             <div style="font-size:9.5px;color:#64748b;font-weight:600;text-transform:uppercase;">Public Capital</div>
-            <div style="font-size:13px;font-weight:800;color:#334155;">$${t.publicCost != null ? (t.publicCost / 1e6).toFixed(1) + 'M' : 'Not recorded'}</div>
+            <div style="font-size:13px;font-weight:800;color:#334155;">${t.publicCost != null ? '$' + (t.publicCost / 1e6).toFixed(1) + 'M' : 'Not recorded'}</div>
           </div>
           <div>
             <div style="font-size:9.5px;color:#64748b;font-weight:600;text-transform:uppercase;">Private Real Estate</div>
-            <div style="font-size:13px;font-weight:800;color:#16a34a;">${t.privateCap != null ? (t.privateCap / 1e9 >= 1 ? (t.privateCap / 1e9).toFixed(1) + 'B' : (t.privateCap / 1e6).toFixed(0) + 'M') : 'Not recorded'}</div>
+            <div style="font-size:13px;font-weight:800;color:#16a34a;">${t.privateCap != null ? '$' + (t.privateCap / 1e9 >= 1 ? (t.privateCap / 1e9).toFixed(1) + 'B' : (t.privateCap / 1e6).toFixed(0) + 'M') : 'Not recorded'}</div>
           </div>
         </div>
 
@@ -8872,9 +8890,9 @@ function renderTrendsList() {
           <b>Local Tax Source:</b> ${esc(t.taxVehicle || 'Not recorded')}
         </div>
 
-        <div style="font-size:12px;color:#059669;font-weight:700;margin-bottom:6px;">
-          ${esc(t.valueUplift || '')}
-        </div>
+        ${t.valueUplift && (!t.verification || t.verification.finding === "supported") ? `<div style="font-size:12px;color:#059669;font-weight:700;margin-bottom:6px;">
+          ${esc(t.valueUplift)}
+        </div>` : `<div style="font-size:12px;color:#64748b;margin-bottom:6px;">Value effect: not confirmed in the source.</div>`}
 
         <!-- 4-Stage Appreciation Trajectory -->
         ${t.trajectory && t.trajectory.length ? `
@@ -8893,9 +8911,9 @@ function renderTrendsList() {
         ${t.evaluation_url ? `
         <div style="font-size:11px;margin-bottom:10px;">
           <a href="${esc(t.evaluation_url)}" target="_blank" rel="noopener noreferrer" style="color:#0284c7;text-decoration:underline;font-weight:600;">
-            Verified Source: ${esc(t.source || 'Evaluation Report')} ↗
+            Source: ${esc(t.source || 'Evaluation Report')} ↗
           </a>
-          ${t.last_verified ? `<span style="color:#64748b;font-size:10px;"> &middot; Verified ${esc(t.last_verified)}</span>` : ''}
+          ${t.verification && t.verification.checked ? `<span style="color:#64748b;font-size:10px;"> &middot; ${t.verification.finding === "supported" ? "Checked against the source" : "Source exists; figures not confirmed"} on ${esc(fmtCheckedDate(t.verification.checked))}</span>` : `<span style="color:#64748b;font-size:10px;"> &middot; Not yet checked</span>`}
         </div>
         ` : ''}
       </div>
@@ -8945,7 +8963,13 @@ function focusHistoricalProject(id, lat, lng, fips) {
       dashArray: proj.type === "transit" ? "8 5" : null
     }).addTo(trendCorridorLayer);
 
-    core.bindTooltip(`<b>${esc(proj.name)}</b><br><span style="color:#059669;font-weight:700">Public: $${(proj.publicCost/1e6).toFixed(1)}M → Private RE: $${(proj.privateCap/1e6).toFixed(1)}M (${proj.ratio})</span><br><span style="font-size:11px;color:#64748b">${esc(proj.valueUplift)}</span>`, { sticky: true });
+    const moneyLine = [
+      proj.publicCost != null ? `Public: $${(proj.publicCost / 1e6).toFixed(1)}M` : null,
+      proj.privateCap != null ? `Private RE: $${(proj.privateCap / 1e6).toFixed(1)}M` : null,
+      proj.ratio != null && proj.ratio !== "" ? `(${esc(proj.ratio)})` : null,
+    ].filter(Boolean).join(" → ");
+    const upliftOk = proj.valueUplift && (!proj.verification || proj.verification.finding === "supported");
+    core.bindTooltip(`<b>${esc(proj.name)}</b>${moneyLine ? `<br><span style="color:#059669;font-weight:700">${moneyLine}</span>` : ""}${upliftOk ? `<br><span style="font-size:11px;color:#64748b">${esc(proj.valueUplift)}</span>` : ""}`, { sticky: true });
 
     // 3. Milestone Stations / Nodes
     if (proj.stations && proj.stations.length) {
@@ -8957,7 +8981,7 @@ function focusHistoricalProject(id, lat, lng, fips) {
           fillColor: "#0284c7",
           fillOpacity: 1
         }).addTo(trendCorridorLayer);
-        marker.bindTooltip(`<b>${esc(stn.name)}</b><br><span style="font-size:11px;color:#475569">${esc(stn.desc)}</span>`);
+        marker.bindTooltip(`<b>${esc(stn.name)}</b>${stn.desc ? `<br><span style="font-size:11px;color:#475569">${esc(stn.desc)}</span>` : ""}`);
       });
     }
 
@@ -8972,7 +8996,7 @@ function focusHistoricalProject(id, lat, lng, fips) {
     map.flyTo([lat, lng], 15, { duration: 1.2 });
   }
 
-  showToast(`Active Corridor: ${proj.name} (${proj.ratio} Private Leverage)`);
+  showToast(`Active Corridor: ${proj.name}${proj.ratio != null && proj.ratio !== "" ? ` (${proj.ratio} Private Leverage)` : ""}`);
 }
 
 function openResearchModal(queryOrCat = null) {
@@ -9038,7 +9062,14 @@ function renderResearchCategories() {
     { id: "Public Safety, Street Lighting & CPTED", label: "Public Safety" },
     { id: "Commercial Facade Grants & Historic Preservation", label: "Facades & Historic" }
   ];
-  const cats = categoryDefs.map(c => {
+  // Pills come from the categories present in research.json (labels from the table above when known); a category
+  // with no records is not shown.
+  const present = [...new Set(RESEARCH_CORPUS_500.map(s => s.category).filter(Boolean))];
+  const known = new Map(categoryDefs.map(c => [c.id, c.label]));
+  const cats = [{ id: "All", label: "All Studies" }].concat(present.sort((x, y) => {
+    const ix = categoryDefs.findIndex(c => c.id === x), iy = categoryDefs.findIndex(c => c.id === y);
+    return (ix < 0 ? 99 : ix) - (iy < 0 ? 99 : iy);
+  }).map(id => ({ id, label: known.get(id) || id }))).map(c => {
     const count = c.id === "All" ? RESEARCH_CORPUS_500.length : RESEARCH_CORPUS_500.filter(s => s.category === c.id).length;
     return { id: c.id, label: `${c.label} (${count})` };
   });
@@ -9079,19 +9110,23 @@ function renderResearchList() {
     const matchCat = (activeResearchCat === "All" || s.category === activeResearchCat);
     if (!matchCat) return false;
     if (!activeResearchSearch) return true;
-    const haystack = (s.category + " " + s.title + " " + s.authors + " " + s.journal + " " + s.geography + " " + s.impact + " " + s.takeaway + " " + s.citation).toLowerCase();
+    const haystack = [s.category, s.title, s.authors, s.journal, s.geography, s.impact, s.takeaway, s.citation].filter(v => v != null).join(" ").toLowerCase();
     return haystack.includes(activeResearchSearch);
   });
+  // An effect figure is shown only when the study's verification.finding is "supported" (found in the source text).
+  const supported = s => !!(s && s.verification && s.verification.finding === "supported");
 
   if (countLabel) {
-    const avgVpd = filtered.length ? (filtered.reduce((t, x) => t + (x.vpd || 1.8), 0) / filtered.length).toFixed(2) : "0.00";
-    countLabel.innerHTML = `Showing <b>${filtered.length}</b> of ${RESEARCH_CORPUS_500.length} empirical research studies &middot; Average Measured Benefit: <b>$${avgVpd} / $1</b>`;
+    const nSup = filtered.filter(supported).length;
+    const withVpd = filtered.filter(x => supported(x) && x.vpd != null && isFinite(x.vpd));
+    const avgTxt = withVpd.length ? ` &middot; $ of value per $1 reported by ${withVpd.length} of them: average <b>$${(withVpd.reduce((t, x) => t + x.vpd, 0) / withVpd.length).toFixed(2)} / $1</b>` : "";
+    countLabel.innerHTML = `Showing <b>${filtered.length}</b> of ${RESEARCH_CORPUS_500.length} research studies &middot; effect confirmed in the source text for ${nSup}${avgTxt}`;
   }
 
   if (!filtered.length) {
     list.innerHTML = `<div style="text-align:center;padding:40px 20px;color:#64748b;">
       <div style="font-size:24px;margin-bottom:8px;"><svg class=ic style=width:28px;height:28px aria-hidden=true><use href=#i-search /></svg></div>
-      <div style="font-size:14px;font-weight:700;">No empirical studies matching "${esc(activeResearchSearch)}"</div>
+      <div style="font-size:14px;font-weight:700;">No studies matching "${esc(activeResearchSearch)}"</div>
       <div style="font-size:12px;margin-top:4px;">Try searching for keywords like "mural", "tree", "high line", "school", "transit", "roi", or clear filters.</div>
     </div>`;
     return;
@@ -9103,9 +9138,9 @@ function renderResearchList() {
         <span style="font-size:10.5px;font-weight:700;color:#0284c7;background:#e0f2fe;padding:2px 7px;border-radius:10px;text-transform:uppercase;">
           ${esc(s.category)}
         </span>
-        <span style="font-size:11.5px;font-weight:800;color:#15803d;background:#dcfce7;padding:2px 8px;border-radius:12px;border:1px solid #bbf7d0;">
+        ${supported(s) && s.vpd != null && isFinite(s.vpd) ? `<span style="font-size:11.5px;font-weight:800;color:#15803d;background:#dcfce7;padding:2px 8px;border-radius:12px;border:1px solid #bbf7d0;">
           Return: $${s.vpd} / $1
-        </span>
+        </span>` : ""}
       </div>
 
       <div style="font-size:14px;font-weight:800;color:#0f172a;margin-bottom:4px;line-height:1.35;">
@@ -9113,24 +9148,27 @@ function renderResearchList() {
       </div>
 
       <div style="font-size:11.5px;color:#475569;margin-bottom:8px;">
-        <b>Authors/Institution:</b> ${esc(s.authors)} &middot; <b>Year:</b> ${s.year} &middot; <i>${esc(s.journal)}</i> &middot; <b>Sample:</b> ${esc(s.geography)}
+        <b>Authors/Institution:</b> ${esc(s.authors || "not on file")} &middot; <b>Year:</b> ${s.year != null ? esc(s.year) : "not on file"}${s.journal ? ` &middot; <i>${esc(s.journal)}</i>` : ""}${s.geography ? ` &middot; <b>Sample:</b> ${esc(s.geography)}` : ""}
       </div>
 
-      <div style="background:#f0fdf4;border-left:3px solid #16a34a;padding:8px 10px;margin-bottom:8px;border-radius:0 4px 4px 0;font-size:12px;color:#14532d;line-height:1.4;">
+      ${supported(s) && s.impact ? `<div style="background:#f0fdf4;border-left:3px solid #16a34a;padding:8px 10px;margin-bottom:8px;border-radius:0 4px 4px 0;font-size:12px;color:#14532d;line-height:1.4;">
         <b>Measured Impact:</b> ${esc(s.impact)}
-      </div>
+      </div>` : `<div style="background:#f8fafc;border-left:3px solid #94a3b8;padding:8px 10px;margin-bottom:8px;border-radius:0 4px 4px 0;font-size:12px;color:#475569;line-height:1.4;">
+        <b>Measured Impact:</b> Not reported in the abstract (effect size not confirmed).
+      </div>`}
 
-      <div style="font-size:12px;color:#334155;line-height:1.45;margin-bottom:6px;">
+      ${s.takeaway ? `<div style="font-size:12px;color:#334155;line-height:1.45;margin-bottom:6px;">
         <b>Takeaway:</b> ${esc(s.takeaway)}
-      </div>
+      </div>` : ""}
 
       <div style="font-size:10.5px;color:#64748b;border-top:1px solid #f1f5f9;padding-top:6px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;">
-        <span style="font-style:italic;">${esc(s.citation)}</span>
+        <span style="font-style:italic;">${esc(s.citation || "")}</span>
         ${s.source_url ? `
           <a href="${esc(s.source_url)}" target="_blank" rel="noopener noreferrer" style="color:#0284c7;text-decoration:underline;font-weight:600;font-style:normal;">
-            Verified Source${s.doi ? ` (DOI: ${esc(s.doi)})` : ''} ↗
+            Source${s.doi ? ` (DOI: ${esc(s.doi)})` : ''} ↗
           </a>
         ` : ''}
+        ${s.verification && s.verification.checked ? `<span>${supported(s) ? "Effect checked against the source" : "Source exists; effect not confirmed"} on ${esc(fmtCheckedDate(s.verification.checked))}</span>` : `<span>Not yet checked</span>`}
       </div>
     </div>
   `).join("");
@@ -9201,7 +9239,29 @@ function serializeLiveAdvisorContext() {
       zoning_source: comp ? comp.zoning_source || null : null,
     },
     roiMode: typeof getRoiMode === "function" ? getRoiMode() : null,
-    hudFmr: (typeof getHudFmr === "function") ? getHudFmr(fips) : null,
+    hudFmr: (() => {
+      const f = (typeof getHudFmr === "function") ? getHudFmr(fips) : null;
+      if (!f) return null;
+      return {
+        fips: f.fips || null, metro_or_county_name: f.metro_or_county_name || null, fiscal_year: num(f.fiscal_year),
+        efficiency_0br: num(f.zero_bed_eff), one_bed_1br: num(f.one_bed_1br), two_bed_2br: num(f.two_bed_2br),
+        three_bed_3br: num(f.three_bed_3br), four_bed_4br: num(f.four_bed_4br),
+        source: f.source_url || f.source_agency || null, null_reason: f.null_reason || null,
+        verification_status: f.one_bed_1br != null ? "verified" : "unverified",
+      };
+    })(),
+    // State housing laws on file for this state, each with its verification status from statutes.json.
+    laws: (Array.isArray(STATE_HOUSING_LAWS_DATA) ? STATE_HOUSING_LAWS_DATA : [])
+      .filter(r => r && r.state_code && r.state_code === (typeof activeState === "function" ? activeState() : null))
+      .slice(0, 12)
+      .map(r => ({
+        id: r.id || null, name: r.short_name || null, citation: r.statute_citation || null, summary: r.summary || null,
+        verification_status: (r.verification && r.verification.status) || "unverified",
+        checked: (r.verification && r.verification.checked) || null,
+        fields_unconfirmed: (r.verification && Array.isArray(r.verification.fields_unconfirmed)) ? r.verification.fields_unconfirmed.slice(0, 10) : [],
+      })),
+    // Set by the Invest view (app/invest.js); null until that view has built a brief.
+    decision_brief: (typeof window !== "undefined" && window.__cpDecisionBrief) || null,
   };
   if (selected && byId.get(selected)) {
     const p = byId.get(selected).properties || {};
@@ -9240,6 +9300,11 @@ function serializeLiveAdvisorContext() {
       fire: fireVal,
       historic: historicVal,
       lotSplitEligibility: lotSplitVal,
+      // Laws the statutory engine applied (only records "verified" in statutes.json) and those it could not determine.
+      byRightLaws: (audit && audit.statutoryZoning) ? {
+        applicable: (audit.statutoryZoning.applicable_statutes || []).map(s => ({ citation: s.citation || null, verification_status: "verified" })),
+        not_determined: (audit.statutoryZoning.not_determined_statutes || []).map(s => ({ id: s.id || null, citation: s.citation || null, reason: s.reason || null, verification_status: typeof statuteStatus === "function" ? statuteStatus(s.id) : "unverified" })),
+      } : null,
     };
     if (ah.ll && typeof findNearestTransitStation === "function") {
       try { const s = findNearestTransitStation(ah.ll.lat, ah.ll.lng); if (s) payload.parcel.nearestRailOrBrt = { name: s.name || null, miles: s.distMi != null ? +(+s.distMi).toFixed(2) : null }; } catch (e) {}
@@ -9249,29 +9314,34 @@ function serializeLiveAdvisorContext() {
   // Intercity transit corridor facts if relevant to current state/county
   if (Array.isArray(INTERCITY_CORRIDORS_DATA) && INTERCITY_CORRIDORS_DATA.length) {
     const stCode = typeof activeState === "function" ? activeState() : null;
-    const matchCorridor = INTERCITY_CORRIDORS_DATA.find(c => (c.states && c.states.includes(stCode)) || (c.proposed_stations && c.proposed_stations.some(s => s.fips === fips)));
+    // Match on the corridor's station county FIPS only (a state match would tie every Arizona county to Phoenix-Tucson).
+    const matchCorridor = fips ? INTERCITY_CORRIDORS_DATA.find(c => Array.isArray(c.proposed_stations) && c.proposed_stations.some(s => s && s.fips === fips)) : null;
     if (matchCorridor) {
-      const matchStn = matchCorridor.proposed_stations ? (matchCorridor.proposed_stations.find(s => s.fips === fips) || matchCorridor.proposed_stations[0]) : null;
-      const recYard = matchCorridor.candidate_railyard_sites ? (matchCorridor.candidate_railyard_sites.find(y => y.siting_recommendation && y.siting_recommendation.includes("RECOMMENDED")) || matchCorridor.candidate_railyard_sites[0]) : null;
+      const matchStn = matchCorridor.proposed_stations.find(s => s.fips === fips) || null;
+      const recYard = Array.isArray(matchCorridor.candidate_railyard_sites) && matchCorridor.candidate_railyard_sites.length ? (matchCorridor.candidate_railyard_sites.find(y => y.siting_recommendation && y.siting_recommendation.includes("RECOMMENDED")) || null) : null;
+      const cStatus = (matchCorridor.verification && matchCorridor.verification.status) || "unverified";
       payload.intercityCorridor = {
         id: matchCorridor.id || null,
         name: matchCorridor.name || null,
-        route_length_miles: matchCorridor.route_length_miles || null,
+        verification_status: cStatus,
+        corridor_confirmed: cStatus !== "corridor_not_confirmed" && cStatus !== "unverified",
+        route_length_miles: num(matchCorridor.route_length_miles),
         funding_status: matchCorridor.funding_status || null,
-        projected_minutes: matchCorridor.projected_one_way_minutes || null,
-        highway_minutes: matchCorridor.highway_comparison_minutes || null,
-        estimated_cost_billions: matchCorridor.estimated_capital_cost_billions || null,
+        projected_minutes: num(matchCorridor.projected_one_way_minutes),
+        highway_minutes: num(matchCorridor.highway_comparison_minutes),
+        estimated_cost_billions: num(matchCorridor.estimated_capital_cost_billions),
         nearestStation: matchStn ? {
           name: matchStn.name || null,
           city: matchStn.city || null,
-          avg_land_cost_per_sqft: matchStn.avg_land_cost_per_sqft || null,
-          available_underused_acres: matchStn.available_underused_acres_walkshed || null,
+          station_basis: matchStn.station_basis || null,
+          avg_land_cost_per_sqft: num(matchStn.avg_land_cost_per_sqft),
+          available_underused_acres: num(matchStn.available_underused_acres_walkshed),
           statutory_housing_regime: matchStn.statutory_housing_regime || null,
         } : null,
         recommendedRailyard: recYard ? {
           name: recYard.name || null,
           location: recYard.location || null,
-          total_land_cost: recYard.total_land_acquisition_cost || null,
+          total_land_cost: num(recYard.total_land_acquisition_cost),
         } : null,
       };
     }
@@ -9279,21 +9349,30 @@ function serializeLiveAdvisorContext() {
 
   // Underused site facts if block group has an identified underused site
   if (selected && Array.isArray(UNDERUSED_SITES_DATA) && UNDERUSED_SITES_DATA.length) {
-    const matchedSite = UNDERUSED_SITES_DATA.find(s => s.blockGroupId === selected || (s.countyFips === fips && s.kind === "golf course"));
+    // Match the selected block group only (any golf course in the county is not "this" site).
+    const matchedSite = UNDERUSED_SITES_DATA.find(s => s && s.blockGroupId && s.blockGroupId === selected);
     if (matchedSite) {
+      const se = matchedSite.screening_estimate || null;
       payload.underusedSite = {
         id: matchedSite.id || null,
         name: matchedSite.name || null,
         kind: matchedSite.kind || null,
-        acres: matchedSite.acres || null,
+        acres: num(matchedSite.acres),
         cityName: matchedSite.cityName || null,
         baseZoning: matchedSite.baseZoning || null,
-        distanceToRailMeters: matchedSite.distanceToRailMeters || null,
-        potentialHomes: matchedSite.potentialHomes || null,
-        margin: matchedSite.margin || null,
+        distanceToRailMeters: num(matchedSite.distanceToRailMeters),
         publicOwner: matchedSite.publicOwner || null,
-        inConservationEasement: !!matchedSite.inConservationEasement,
-        idea: matchedSite.idea || null,
+        inConservationEasement: typeof matchedSite.inConservationEasement === "boolean" ? matchedSite.inConservationEasement : null,
+        verification_status: (matchedSite.verification && matchedSite.verification.status) || "unverified",
+        // Model output, not a measured fact: inputs flagged assumed and missing_inputs come from underused_sites.json.
+        screening_estimate: se ? {
+          potentialHomes: num(se.potentialHomes),
+          margin: num(se.margin),
+          marginBeforeLand: num(se.marginBeforeLand),
+          idea: se.idea || null,
+          assumed_inputs: se.inputs ? Object.keys(se.inputs).filter(k => se.inputs[k] && se.inputs[k].assumed) : [],
+          missing_inputs: Array.isArray(se.missing_inputs) ? se.missing_inputs : [],
+        } : null,
       };
     }
   }
@@ -9307,6 +9386,7 @@ function serializeLiveAdvisorContext() {
       monthlyHoldingDeficitReductionPct: num(es.monthlyHoldingDeficitReductionPct),
       isCashFlowPositiveDuringHold: !!es.isCashFlowPositiveDuringHold,
       holdingStrategyRecommendation: es.holdingStrategyRecommendation || null,
+      basis: "illustrative_assumed_inputs",
     };
   }
 
@@ -9326,6 +9406,7 @@ function serializeLiveAdvisorContext() {
       governingStatute: (rq.statutoryEntitlementStatus && rq.statutoryEntitlementStatus.governingStatute) || null,
       verdict: rq.verdict || null,
       verdictSummary: rq.verdictSummary || null,
+      basis: "illustrative_assumed_inputs",
     };
   }
 
@@ -9349,6 +9430,8 @@ function serializeLiveAdvisorContext() {
         annualCo2TonsAvoided: num(sf.pollutionAndEmissions ? sf.pollutionAndEmissions.co2TonsAvoidedAnnual : null),
         crashReductionPct: num(sf.safetyAndWalkability ? sf.safetyAndWalkability.crashReductionPct : null),
         benefitCostRatio: num(sf.benefitCostRatio),
+        // A hypothetical 1.5-mile, 4-lane corridor with assumed traffic, not a measured street.
+        basis: "illustrative_assumed_inputs",
       };
     } catch (e) {}
   }
@@ -10109,7 +10192,7 @@ function renderCompareDrawer() {
           <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:8px;margin-bottom:10px;">
             <div style="font-size:10px;font-weight:700;color:#166534;text-transform:uppercase;">Top Recommended Move:</div>
             <div style="font-size:12px;font-weight:800;color:#15803d;margin-top:2px;">${esc(b.title)}</div>
-            <div style="font-size:11px;font-weight:700;color:#047857;margin-top:2px;">+$${Math.round(b.equity).toLocaleString()} Net Equity (${b.roi} / $1)</div>
+            <div style="font-size:11px;font-weight:700;color:#047857;margin-top:2px;">${b.equity != null && isFinite(b.equity) ? "+$" + Math.round(b.equity).toLocaleString() + " Net Equity" : "Net equity not on file"}${b.roi != null && isFinite(b.roi) ? ` (${b.roi} / $1)` : ""}${b.illustrative ? " &middot; illustrative, assumed inputs" : ""}</div>
           </div>
 
           <div class="c-row"><span class="k">Lot Size</span><span class="v">${h.lotSqft != null ? h.lotSqft.toLocaleString() + " sq ft" : "Not recorded"}</span></div>
@@ -10117,8 +10200,8 @@ function renderCompareDrawer() {
           <div class="c-row"><span class="k">Est. Market Value</span><span class="v">${h.valuation != null ? '$' + Number(h.valuation).toLocaleString() : "Not on file"}</span></div>
           <div class="c-row"><span class="k">${h.isVacantLand ? 'Price / Lot Sq Ft' : 'Price / Sq Ft'}</span><span class="v">${(h.valuation != null && (h.isVacantLand ? h.lotSqft : h.bldgSqft)) ? `~$${Math.round(h.valuation / (h.isVacantLand ? h.lotSqft : h.bldgSqft)).toLocaleString()} / sq ft` : "Not on file"}</span></div>
           <div class="c-row"><span class="k">Solar DC Capacity</span><span class="v">${h.solarKw != null ? h.solarKw + " kW DC" : "Not on file"}</span></div>
-          <div class="c-row"><span class="k">Transit Walkshed</span><span class="v">${h.nearestStn ? (h.nearestStn.distMi <= 0.5 ? '<b style="color:#0284c7">0-Parking Exempt</b>' : h.nearestStn.distMi.toFixed(2) + ' mi') : '–'}</span></div>
-          <div class="c-row"><span class="k">Payback Horizon</span><span class="v">${b.paybackYrs} yrs</span></div>
+          <div class="c-row"><span class="k">Transit Walkshed</span><span class="v">${h.nearestStn ? (h.nearestStn.distMi <= 0.5 ? '<b style="color:#0284c7">Within 1/2 mile</b>' : h.nearestStn.distMi.toFixed(2) + ' mi') : '–'}</span></div>
+          <div class="c-row"><span class="k">Payback Horizon</span><span class="v">${b.paybackYrs != null && b.paybackYrs !== "" ? b.paybackYrs + " yrs" : "Not on file"}</span></div>
         </div>
       `;
     }).join("");

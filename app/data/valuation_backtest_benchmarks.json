@@ -1,510 +1,4938 @@
 {
-  "12057": {
-    "countyFips": "12057",
-    "countyName": "Hillsborough County",
-    "stateCode": "FL",
-    "sampleCount": 5,
-    "mdape": 0.1449,
-    "mape": 0.1348,
-    "medianBiasPct": 0.1449,
-    "shareWithin5Pct": 0,
-    "shareWithin10Pct": 0.2,
-    "shareWithin20Pct": 1,
-    "status": "withhold",
-    "withhold": true,
-    "withholdReason": "County valuation back-test against recorder sales indicates error exceeding acceptable tolerance (MdAPE: 14.5%, 20% share: 100.0%). Valuation withheld pending model recalibration.",
-    "supportedConfidenceMarginPct": 0.18,
-    "priceBands": [
-      {
-        "band": "< $500k",
-        "sampleCount": 3,
-        "mdape": 0.1256,
-        "shareWithin10Pct": 0.333
-      },
-      {
-        "band": "$500k - $1M",
-        "sampleCount": 2,
-        "mdape": 0.1523,
-        "shareWithin10Pct": 0
-      }
-    ],
-    "evaluations": [
-      {
-        "parcelId": "182901100010",
-        "salePrice": 425000,
-        "saleDate": "2024-06-08",
-        "estimatedValue": 467000,
-        "dollarError": 42000,
-        "percentageError": 0.0988,
-        "absPercentageError": 0.0988,
-        "valuationMethod": "HPI Repeat-Sales Index + Florida Statutory Just Value + Hedonic Micro-Model",
-        "within5Pct": false,
-        "within10Pct": true,
-        "within20Pct": true
-      },
-      {
-        "parcelId": "182901100040",
-        "salePrice": 530000,
-        "saleDate": "2024-07-25",
-        "estimatedValue": 612000,
-        "dollarError": 82000,
-        "percentageError": 0.1547,
-        "absPercentageError": 0.1547,
-        "valuationMethod": "HPI Repeat-Sales Index + Florida Statutory Just Value + Hedonic Micro-Model",
-        "within5Pct": false,
-        "within10Pct": false,
-        "within20Pct": true
-      },
-      {
-        "parcelId": "182901100075",
-        "salePrice": 345000,
-        "saleDate": "2024-04-03",
-        "estimatedValue": 395000,
-        "dollarError": 50000,
-        "percentageError": 0.1449,
-        "absPercentageError": 0.1449,
-        "valuationMethod": "HPI Repeat-Sales Index + Florida Statutory Just Value + Hedonic Micro-Model",
-        "within5Pct": false,
-        "within10Pct": false,
-        "within20Pct": true
-      },
-      {
-        "parcelId": "182901100110",
-        "salePrice": 620000,
-        "saleDate": "2024-08-19",
-        "estimatedValue": 713000,
-        "dollarError": 93000,
-        "percentageError": 0.15,
-        "absPercentageError": 0.15,
-        "valuationMethod": "HPI Repeat-Sales Index + Florida Statutory Just Value + Hedonic Micro-Model",
-        "within5Pct": false,
-        "within10Pct": false,
-        "within20Pct": true
-      },
-      {
-        "parcelId": "182901100145",
-        "salePrice": 390000,
-        "saleDate": "2024-05-17",
-        "estimatedValue": 439000,
-        "dollarError": 49000,
-        "percentageError": 0.1256,
-        "absPercentageError": 0.1256,
-        "valuationMethod": "HPI Repeat-Sales Index + Florida Statutory Just Value + Hedonic Micro-Model",
-        "within5Pct": false,
-        "within10Pct": false,
-        "within20Pct": true
-      }
-    ],
-    "lastVerified": "2026-11-15",
-    "sourceUrl": "https://downloads.hcpafl.org/"
-  },
   "17031": {
     "countyFips": "17031",
     "countyName": "Cook County",
     "stateCode": "IL",
-    "sampleCount": 5,
-    "mdape": 0.1508,
-    "mape": 0.147,
-    "medianBiasPct": 0.1508,
-    "shareWithin5Pct": 0,
-    "shareWithin10Pct": 0,
-    "shareWithin20Pct": 1,
+    "sampleCount": 4000,
+    "mdape": 0.1719,
+    "mape": 0.249,
+    "medianBiasPct": -0.0963,
+    "shareWithin5Pct": 0.15,
+    "shareWithin10Pct": 0.304,
+    "shareWithin20Pct": 0.566,
     "status": "withhold",
     "withhold": true,
-    "withholdReason": "County valuation back-test against recorder sales indicates error exceeding acceptable tolerance (MdAPE: 15.1%, 20% share: 100.0%). Valuation withheld pending model recalibration.",
-    "supportedConfidenceMarginPct": 0.18,
+    "withholdReason": "Valuation withheld: tested against 4000 recorded sales in this county, the model's typical error was 17.2% and only 57% of estimates were within 20% of the sale price.",
+    "supportedConfidenceMarginPct": 0.172,
     "priceBands": [
       {
-        "band": "< $500k",
-        "sampleCount": 3,
-        "mdape": 0.1333,
-        "shareWithin10Pct": 0
+        "band": "< $250k",
+        "sampleCount": 883,
+        "mdape": 0.2809,
+        "shareWithin10Pct": 0.216,
+        "medianBiasPct": -0.0048
+      },
+      {
+        "band": "$250k - $500k",
+        "sampleCount": 1929,
+        "mdape": 0.1554,
+        "shareWithin10Pct": 0.322,
+        "medianBiasPct": -0.1133
       },
       {
         "band": "$500k - $1M",
-        "sampleCount": 2,
-        "mdape": 0.1619,
-        "shareWithin10Pct": 0
+        "sampleCount": 880,
+        "mdape": 0.1512,
+        "shareWithin10Pct": 0.356,
+        "medianBiasPct": -0.0908
+      },
+      {
+        "band": "$1M - $2M",
+        "sampleCount": 235,
+        "mdape": 0.1586,
+        "shareWithin10Pct": 0.328,
+        "medianBiasPct": -0.127
+      },
+      {
+        "band": "> $2M",
+        "sampleCount": 73,
+        "mdape": 0.3193,
+        "shareWithin10Pct": 0.164,
+        "medianBiasPct": -0.2579
+      }
+    ],
+    "methods": [
+      {
+        "method": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "sampleCount": 2576,
+        "mdape": 0.1691,
+        "shareWithin10Pct": 0.314,
+        "medianBiasPct": -0.1018
+      },
+      {
+        "method": "Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "sampleCount": 1423,
+        "mdape": 0.176,
+        "shareWithin10Pct": 0.285,
+        "medianBiasPct": -0.0895
+      },
+      {
+        "method": "Hedonic Micro-Model",
+        "sampleCount": 1,
+        "mdape": 3.0857,
+        "shareWithin10Pct": 0,
+        "medianBiasPct": 3.0857
       }
     ],
     "evaluations": [
       {
-        "parcelId": "1420100010",
-        "salePrice": 410000,
-        "saleDate": "2024-06-15",
-        "estimatedValue": 458000,
-        "dollarError": 48000,
-        "percentageError": 0.1171,
-        "absPercentageError": 0.1171,
-        "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "parcelId": "10274070510000",
+        "salePrice": 610000,
+        "saleDate": "2026-07-22",
+        "estimatedValue": 578000,
+        "dollarError": -32000,
+        "percentageError": -0.0525,
+        "absPercentageError": 0.0525,
+        "valuationMethod": "Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
         "within5Pct": false,
-        "within10Pct": false,
-        "within20Pct": true
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 60000
+        },
+        "priorSale": null
       },
       {
-        "parcelId": "1420100045",
-        "salePrice": 520000,
-        "saleDate": "2024-07-29",
-        "estimatedValue": 610000,
-        "dollarError": 90000,
-        "percentageError": 0.1731,
-        "absPercentageError": 0.1731,
-        "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "parcelId": "18333230020000",
+        "salePrice": 300000,
+        "saleDate": "2025-04-16",
+        "estimatedValue": 335000,
+        "dollarError": 35000,
+        "percentageError": 0.1167,
+        "absPercentageError": 0.1167,
+        "valuationMethod": "Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
         "within5Pct": false,
         "within10Pct": false,
-        "within20Pct": true
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 30000
+        },
+        "priorSale": null
       },
       {
-        "parcelId": "1420100080",
-        "salePrice": 330000,
-        "saleDate": "2024-03-22",
-        "estimatedValue": 383000,
-        "dollarError": 53000,
-        "percentageError": 0.1606,
-        "absPercentageError": 0.1606,
+        "parcelId": "31132050550000",
+        "salePrice": 575000,
+        "saleDate": "2025-07-25",
+        "estimatedValue": 520000,
+        "dollarError": -55000,
+        "percentageError": -0.0957,
+        "absPercentageError": 0.0957,
         "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
         "within5Pct": false,
-        "within10Pct": false,
-        "within20Pct": true
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 45000
+        },
+        "priorSale": {
+          "price": 326250,
+          "date": "2019-07-29",
+          "year": 2019
+        }
       },
       {
-        "parcelId": "1420100115",
-        "salePrice": 650000,
-        "saleDate": "2024-08-30",
-        "estimatedValue": 748000,
-        "dollarError": 98000,
-        "percentageError": 0.1508,
-        "absPercentageError": 0.1508,
+        "parcelId": "03314080020000",
+        "salePrice": 434000,
+        "saleDate": "2026-03-31",
+        "estimatedValue": 611000,
+        "dollarError": 177000,
+        "percentageError": 0.4078,
+        "absPercentageError": 0.4078,
         "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
         "within5Pct": false,
         "within10Pct": false,
-        "within20Pct": true
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 48000
+        },
+        "priorSale": {
+          "price": 330000,
+          "date": "2003-12-01",
+          "year": 2003
+        }
       },
       {
-        "parcelId": "1420100150",
-        "salePrice": 375000,
-        "saleDate": "2024-05-08",
-        "estimatedValue": 425000,
-        "dollarError": 50000,
-        "percentageError": 0.1333,
-        "absPercentageError": 0.1333,
+        "parcelId": "19172020070000",
+        "salePrice": 600000,
+        "saleDate": "2025-10-06",
+        "estimatedValue": 521000,
+        "dollarError": -79000,
+        "percentageError": -0.1317,
+        "absPercentageError": 0.1317,
         "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
         "within5Pct": false,
         "within10Pct": false,
-        "within20Pct": true
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 38000
+        },
+        "priorSale": {
+          "price": 265000,
+          "date": "2002-04-01",
+          "year": 2002
+        }
+      },
+      {
+        "parcelId": "06294040260000",
+        "salePrice": 415000,
+        "saleDate": "2026-05-08",
+        "estimatedValue": 484000,
+        "dollarError": 69000,
+        "percentageError": 0.1663,
+        "absPercentageError": 0.1663,
+        "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 35000
+        },
+        "priorSale": {
+          "price": 241000,
+          "date": "2002-04-01",
+          "year": 2002
+        }
+      },
+      {
+        "parcelId": "18161080420000",
+        "salePrice": 515000,
+        "saleDate": "2026-02-03",
+        "estimatedValue": 411000,
+        "dollarError": -104000,
+        "percentageError": -0.2019,
+        "absPercentageError": 0.2019,
+        "valuationMethod": "Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 38000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "15083110150000",
+        "salePrice": 250000,
+        "saleDate": "2025-04-01",
+        "estimatedValue": 216000,
+        "dollarError": -34000,
+        "percentageError": -0.136,
+        "absPercentageError": 0.136,
+        "valuationMethod": "Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 22000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "19173300050000",
+        "salePrice": 282000,
+        "saleDate": "2025-02-25",
+        "estimatedValue": 301000,
+        "dollarError": 19000,
+        "percentageError": 0.0674,
+        "absPercentageError": 0.0674,
+        "valuationMethod": "Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 28000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "01124070840000",
+        "salePrice": 529900,
+        "saleDate": "2025-04-08",
+        "estimatedValue": 565000,
+        "dollarError": 35100,
+        "percentageError": 0.0662,
+        "absPercentageError": 0.0662,
+        "valuationMethod": "Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 37500
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "07164040180000",
+        "salePrice": 200000,
+        "saleDate": "2025-12-22",
+        "estimatedValue": 318000,
+        "dollarError": 118000,
+        "percentageError": 0.59,
+        "absPercentageError": 0.59,
+        "valuationMethod": "Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 29000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "16051270160000",
+        "salePrice": 399000,
+        "saleDate": "2025-10-20",
+        "estimatedValue": 350000,
+        "dollarError": -49000,
+        "percentageError": -0.1228,
+        "absPercentageError": 0.1228,
+        "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 28001
+        },
+        "priorSale": {
+          "price": 310000,
+          "date": "2021-04-07",
+          "year": 2021
+        }
+      },
+      {
+        "parcelId": "27141070070000",
+        "salePrice": 510000,
+        "saleDate": "2025-12-19",
+        "estimatedValue": 380000,
+        "dollarError": -130000,
+        "percentageError": -0.2549,
+        "absPercentageError": 0.2549,
+        "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 33000
+        },
+        "priorSale": {
+          "price": 355000,
+          "date": "2022-05-25",
+          "year": 2022
+        }
+      },
+      {
+        "parcelId": "08123120390000",
+        "salePrice": 450000,
+        "saleDate": "2026-01-21",
+        "estimatedValue": 511000,
+        "dollarError": 61000,
+        "percentageError": 0.1356,
+        "absPercentageError": 0.1356,
+        "valuationMethod": "Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 46000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "14074090330000",
+        "salePrice": 1635000,
+        "saleDate": "2026-04-13",
+        "estimatedValue": 1407000,
+        "dollarError": -228000,
+        "percentageError": -0.1394,
+        "absPercentageError": 0.1394,
+        "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 131250
+        },
+        "priorSale": {
+          "price": 1312500,
+          "date": "2021-11-04",
+          "year": 2021
+        }
+      },
+      {
+        "parcelId": "29222040130000",
+        "salePrice": 73200,
+        "saleDate": "2025-11-21",
+        "estimatedValue": 246000,
+        "dollarError": 172800,
+        "percentageError": 2.3607,
+        "absPercentageError": 2.3607,
+        "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 20000
+        },
+        "priorSale": {
+          "price": 143000,
+          "date": "2004-06-01",
+          "year": 2004
+        }
+      },
+      {
+        "parcelId": "29043010280000",
+        "salePrice": 160000,
+        "saleDate": "2025-07-23",
+        "estimatedValue": 105000,
+        "dollarError": -55000,
+        "percentageError": -0.3437,
+        "absPercentageError": 0.3438,
+        "valuationMethod": "Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 7800
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "24304200080000",
+        "salePrice": 550000,
+        "saleDate": "2026-06-15",
+        "estimatedValue": 392000,
+        "dollarError": -158000,
+        "percentageError": -0.2873,
+        "absPercentageError": 0.2873,
+        "valuationMethod": "Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 33000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "27034050150000",
+        "salePrice": 475000,
+        "saleDate": "2025-06-13",
+        "estimatedValue": 403000,
+        "dollarError": -72000,
+        "percentageError": -0.1516,
+        "absPercentageError": 0.1516,
+        "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 33000
+        },
+        "priorSale": {
+          "price": 285500,
+          "date": "2018-07-02",
+          "year": 2018
+        }
+      },
+      {
+        "parcelId": "02354040120000",
+        "salePrice": 485000,
+        "saleDate": "2025-04-30",
+        "estimatedValue": 379000,
+        "dollarError": -106000,
+        "percentageError": -0.2186,
+        "absPercentageError": 0.2186,
+        "valuationMethod": "HPI Repeat-Sales Index + Cook County 10% Assessment Ratio Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 32000
+        },
+        "priorSale": {
+          "price": 330000,
+          "date": "2021-03-03",
+          "year": 2021
+        }
       }
     ],
-    "lastVerified": "2026-11-15",
-    "sourceUrl": "https://datacatalog.cookcountyil.gov/Property-Taxation/Assessor-Parcel-Sales/77sq-953v"
+    "lastVerified": "2026-11-18",
+    "sourceUrl": "https://datacatalog.cookcountyil.gov/resource/wvhk-k5uv.json",
+    "methodPaths": [
+      {
+        "method": "prior sale + assessor + hedonic",
+        "sampleCount": 2576,
+        "mdape": 0.1691,
+        "shareWithin10Pct": 0.314,
+        "medianBiasPct": -0.1018
+      },
+      {
+        "method": "assessor + hedonic",
+        "sampleCount": 1423,
+        "mdape": 0.176,
+        "shareWithin10Pct": 0.285,
+        "medianBiasPct": -0.0895
+      },
+      {
+        "method": "hedonic",
+        "sampleCount": 1,
+        "mdape": 3.0857,
+        "shareWithin10Pct": 0,
+        "medianBiasPct": 3.0857
+      }
+    ],
+    "source_url": "https://datacatalog.cookcountyil.gov/resource/wvhk-k5uv.json",
+    "source_urls": [
+      "https://datacatalog.cookcountyil.gov/resource/wvhk-k5uv.json",
+      "https://datacatalog.cookcountyil.gov/resource/uzyt-m557.json",
+      "https://datacatalog.cookcountyil.gov/resource/x54s-btds.json",
+      "https://datacatalog.cookcountyil.gov/resource/pabr-t5kh.json"
+    ],
+    "source_dataset": "Cook County Assessor's Office open data: Parcel Sales (wvhk-k5uv), Assessed Values (uzyt-m557), Residential Single and Multi-Family Improvement Characteristics (x54s-btds), Parcel Universe (pabr-t5kh)",
+    "retrieved": "2026-11-18",
+    "sale_window": {
+      "start": "2025-01-01",
+      "end": "2026-09-30",
+      "first_sale": "2025-01-01",
+      "last_sale": "2026-09-11"
+    },
+    "leakage_rule": "Assessor 'mailed' (first-pass, pre-appeal) values of an assessment year strictly before the sale's calendar year. Cook's model for year Y is built from earlier sales, and the mailed value precedes any appeal that could cite the sale.",
+    "assessment_kind": "assessed value (Cook residential assessments are a fraction of market value; the engine multiplies)",
+    "neighborhood_data": "County bundle block-group record (2020-2024 ACS 5-year), located by point-in-polygon",
+    "filters": [
+      {
+        "id": "window",
+        "description": "Sale date 2025-01-01 to 2026-09-30",
+        "kept": 115166
+      },
+      {
+        "id": "class_single_family",
+        "description": "Assessor class 202-210, 234, 278 or 295 (classes whose improvement records are >= 99% 'Single-Family')",
+        "dropped": 64977
+      },
+      {
+        "id": "price_10k",
+        "description": "Sale price >= $10,000 and not flagged by the Assessor's sale_filter_less_than_10k",
+        "dropped": 250
+      },
+      {
+        "id": "deed_type",
+        "description": "Warranty or Trustee deed and not flagged by the Assessor's sale_filter_deed_type (drops quit-claim, executor, 'Other' and similar)",
+        "dropped": 5896
+      },
+      {
+        "id": "single_parcel",
+        "description": "Not a multi-parcel sale (is_multisale false, num_parcels_sale = 1)",
+        "dropped": 2962
+      },
+      {
+        "id": "not_resale_within_365",
+        "description": "Not flagged sale_filter_same_sale_within_365 (same parcel sold again within a year)",
+        "dropped": 66
+      },
+      {
+        "id": "deterministic_sample",
+        "description": "Duplicate records of one sale collapsed; if more than 8000 sales remain, the 8000 with the lowest FNV-1a hash of parcel+document are kept",
+        "dropped": 33015
+      },
+      {
+        "id": "single_family_record",
+        "description": "Improvement record for the roll year before the sale says char_use 'Single-Family' with exactly one building card",
+        "dropped": 119
+      },
+      {
+        "id": "pre_sale_roll",
+        "description": "A pre-sale assessment exists under the leakage rule: Assessor 'mailed' (first-pass, pre-appeal) values of an assessment year strictly before the sale's calendar year. Cook's model for year Y is built from earlier sales, and the mailed value precedes any appeal that could cite the sale.",
+        "dropped": 0
+      },
+      {
+        "id": "located",
+        "description": "Parcel located inside one of the county bundle's block groups",
+        "dropped": 2
+      },
+      {
+        "id": "price_25k",
+        "description": "Sale price >= $25,000 (the floor runCountyValuationBacktest scores; keeps engine and baselines on the same sales)",
+        "dropped": 12
+      }
+    ],
+    "sample": {
+      "usable": 7867,
+      "calibration": 3867,
+      "evaluation": 4000,
+      "split": "by parcel (FNV-1a hash of the parcel id); every metric below is on the evaluation half",
+      "with_prior_sale": 2620,
+      "with_neighborhood_hv": 3995
+    },
+    "baseline": {
+      "assessor_ratio": {
+        "description": "Pre-sale assessor value x median(sale price / pre-sale assessor value) of the calibration half",
+        "ratio": 13.0769,
+        "sampleCount": 4000,
+        "mdape": 0.1484,
+        "mape": 0.2431,
+        "medianBiasPct": 0.0015,
+        "shareWithin5Pct": 0.187,
+        "shareWithin10Pct": 0.363,
+        "shareWithin20Pct": 0.608,
+        "priceBands": [
+          {
+            "band": "< $250k",
+            "sampleCount": 883,
+            "mdape": 0.3078,
+            "shareWithin10Pct": 0.173,
+            "medianBiasPct": 0.1243
+          },
+          {
+            "band": "$250k - $500k",
+            "sampleCount": 1929,
+            "mdape": 0.1189,
+            "shareWithin10Pct": 0.437,
+            "medianBiasPct": -0.0049
+          },
+          {
+            "band": "$500k - $1M",
+            "sampleCount": 880,
+            "mdape": 0.1347,
+            "shareWithin10Pct": 0.393,
+            "medianBiasPct": -0.013
+          },
+          {
+            "band": "$1M - $2M",
+            "sampleCount": 235,
+            "mdape": 0.1173,
+            "shareWithin10Pct": 0.413,
+            "medianBiasPct": -0.0646
+          },
+          {
+            "band": "> $2M",
+            "sampleCount": 73,
+            "mdape": 0.2154,
+            "shareWithin10Pct": 0.192,
+            "medianBiasPct": -0.1155
+          }
+        ],
+        "methods": []
+      },
+      "prior_sale_hpi": {
+        "description": "Prior recorded sale x FHFA all-transactions HPI change for metro division 16984 (index at the prior sale's quarter -> latest quarter ended >= 90 days before the sale)",
+        "source_url": "https://www.fhfa.gov/hpi/download/quarterly_datasets/hpi_at_metro.csv",
+        "coverage": 0.655,
+        "sampleCount": 2620,
+        "mdape": 0.1913,
+        "mape": 0.2859,
+        "medianBiasPct": -0.0709,
+        "shareWithin5Pct": 0.166,
+        "shareWithin10Pct": 0.318,
+        "shareWithin20Pct": 0.518,
+        "priceBands": [
+          {
+            "band": "< $250k",
+            "sampleCount": 541,
+            "mdape": 0.407,
+            "shareWithin10Pct": 0.159,
+            "medianBiasPct": -0.1973
+          },
+          {
+            "band": "$250k - $500k",
+            "sampleCount": 1248,
+            "mdape": 0.1632,
+            "shareWithin10Pct": 0.361,
+            "medianBiasPct": -0.0773
+          },
+          {
+            "band": "$500k - $1M",
+            "sampleCount": 579,
+            "mdape": 0.148,
+            "shareWithin10Pct": 0.363,
+            "medianBiasPct": -0.0195
+          },
+          {
+            "band": "$1M - $2M",
+            "sampleCount": 191,
+            "mdape": 0.1315,
+            "shareWithin10Pct": 0.387,
+            "medianBiasPct": -0.0349
+          },
+          {
+            "band": "> $2M",
+            "sampleCount": 61,
+            "mdape": 0.4496,
+            "shareWithin10Pct": 0.213,
+            "medianBiasPct": -0.2056
+          }
+        ],
+        "methods": [],
+        "engine_on_same_sales": {
+          "sampleCount": 2620,
+          "mdape": 0.1711,
+          "shareWithin10Pct": 0.312,
+          "medianBiasPct": -0.1027
+        }
+      },
+      "engine_beats_assessor_ratio": false
+    },
+    "engine_calibrated": {
+      "description": "Same engine with the county calibration below passed in (calibration input): assessor value x county ratio, prior sale x FHFA metro HPI, hedonic x county scale, blended with weights from each component's calibration-half error. Fitted on the calibration half; measured on the evaluation half.",
+      "calibration": {
+        "assessorRatio": 13.0769,
+        "hedonicScale": 1.1294,
+        "weights": {
+          "assessor": 0.4344,
+          "priorSale": 0.3302,
+          "hedonic": 0.2354
+        },
+        "component_mdape_on_calibration_half": {
+          "assessor": 0.1582,
+          "priorSale": 0.1815,
+          "hedonic": 0.215
+        },
+        "fitted_on": "calibration half (3867 sales, disjoint parcels from the evaluation half)"
+      },
+      "sampleCount": 4000,
+      "mdape": 0.1521,
+      "mape": 0.246,
+      "medianBiasPct": -0.0042,
+      "shareWithin5Pct": 0.189,
+      "shareWithin10Pct": 0.357,
+      "shareWithin20Pct": 0.605,
+      "priceBands": [
+        {
+          "band": "< $250k",
+          "sampleCount": 883,
+          "mdape": 0.3027,
+          "shareWithin10Pct": 0.188,
+          "medianBiasPct": 0.1335
+        },
+        {
+          "band": "$250k - $500k",
+          "sampleCount": 1929,
+          "mdape": 0.129,
+          "shareWithin10Pct": 0.409,
+          "medianBiasPct": -0.0156
+        },
+        {
+          "band": "$500k - $1M",
+          "sampleCount": 880,
+          "mdape": 0.1325,
+          "shareWithin10Pct": 0.392,
+          "medianBiasPct": -0.0017
+        },
+        {
+          "band": "$1M - $2M",
+          "sampleCount": 235,
+          "mdape": 0.1234,
+          "shareWithin10Pct": 0.43,
+          "medianBiasPct": -0.0789
+        },
+        {
+          "band": "> $2M",
+          "sampleCount": 73,
+          "mdape": 0.2037,
+          "shareWithin10Pct": 0.356,
+          "medianBiasPct": -0.1321
+        }
+      ],
+      "methods": [
+        {
+          "method": "prior sale + assessor + hedonic",
+          "sampleCount": 2576,
+          "mdape": 0.1444,
+          "shareWithin10Pct": 0.366,
+          "medianBiasPct": -0.0522
+        },
+        {
+          "method": "assessor + hedonic",
+          "sampleCount": 1424,
+          "mdape": 0.1692,
+          "shareWithin10Pct": 0.338,
+          "medianBiasPct": 0.099
+        }
+      ],
+      "engine_calibrated_beats_assessor_ratio": false
+    },
+    "engine_with_county_scale": {
+      "description": "Shipped engine output x one county-wide scale factor fitted on the calibration half (median sale / estimate). Shows how much of the error is a level bias.",
+      "factor": 1.1075,
+      "sampleCount": 4000,
+      "mdape": 0.1634,
+      "mape": 0.2562,
+      "medianBiasPct": 0.0008,
+      "shareWithin5Pct": 0.181,
+      "shareWithin10Pct": 0.337,
+      "shareWithin20Pct": 0.577,
+      "priceBands": [
+        {
+          "band": "< $250k",
+          "sampleCount": 883,
+          "mdape": 0.3001,
+          "shareWithin10Pct": 0.2,
+          "medianBiasPct": 0.1023
+        },
+        {
+          "band": "$250k - $500k",
+          "sampleCount": 1929,
+          "mdape": 0.1386,
+          "shareWithin10Pct": 0.39,
+          "medianBiasPct": -0.018
+        },
+        {
+          "band": "$500k - $1M",
+          "sampleCount": 880,
+          "mdape": 0.147,
+          "shareWithin10Pct": 0.355,
+          "medianBiasPct": 0.007
+        },
+        {
+          "band": "$1M - $2M",
+          "sampleCount": 235,
+          "mdape": 0.1449,
+          "shareWithin10Pct": 0.366,
+          "medianBiasPct": -0.0331
+        },
+        {
+          "band": "> $2M",
+          "sampleCount": 73,
+          "mdape": 0.2653,
+          "shareWithin10Pct": 0.274,
+          "medianBiasPct": -0.1781
+        }
+      ],
+      "methods": [
+        {
+          "method": "prior sale + assessor + hedonic",
+          "sampleCount": 2576,
+          "mdape": 0.1637,
+          "shareWithin10Pct": 0.343,
+          "medianBiasPct": -0.0052
+        },
+        {
+          "method": "assessor + hedonic",
+          "sampleCount": 1423,
+          "mdape": 0.1629,
+          "shareWithin10Pct": 0.326,
+          "medianBiasPct": 0.0084
+        },
+        {
+          "method": "hedonic",
+          "sampleCount": 1,
+          "mdape": 3.525,
+          "shareWithin10Pct": 0,
+          "medianBiasPct": 3.525
+        }
+      ]
+    }
   },
-  "48201": {
-    "countyFips": "48201",
-    "countyName": "Harris County",
-    "stateCode": "TX",
-    "sampleCount": 5,
-    "mdape": 0.1257,
-    "mape": 0.1241,
-    "medianBiasPct": 0.1257,
-    "shareWithin5Pct": 0,
-    "shareWithin10Pct": 0.2,
-    "shareWithin20Pct": 1,
+  "36047": {
+    "countyFips": "36047",
+    "countyName": "Kings County",
+    "stateCode": "NY",
+    "sampleCount": 1478,
+    "mdape": 0.175,
+    "mape": 0.4159,
+    "medianBiasPct": -0.0492,
+    "shareWithin5Pct": 0.155,
+    "shareWithin10Pct": 0.311,
+    "shareWithin20Pct": 0.551,
+    "status": "withhold",
+    "withhold": true,
+    "withholdReason": "Valuation withheld: tested against 1478 recorded sales in this county, the model's typical error was 17.5% and only 55% of estimates were within 20% of the sale price.",
+    "supportedConfidenceMarginPct": 0.175,
+    "priceBands": [
+      {
+        "band": "< $250k",
+        "sampleCount": 31,
+        "mdape": 6.4667,
+        "shareWithin10Pct": 0,
+        "medianBiasPct": 6.4667
+      },
+      {
+        "band": "$250k - $500k",
+        "sampleCount": 94,
+        "mdape": 0.657,
+        "shareWithin10Pct": 0.043,
+        "medianBiasPct": 0.657
+      },
+      {
+        "band": "$500k - $1M",
+        "sampleCount": 721,
+        "mdape": 0.1212,
+        "shareWithin10Pct": 0.413,
+        "medianBiasPct": 0.0038
+      },
+      {
+        "band": "$1M - $2M",
+        "sampleCount": 390,
+        "mdape": 0.1628,
+        "shareWithin10Pct": 0.328,
+        "medianBiasPct": -0.1018
+      },
+      {
+        "band": "> $2M",
+        "sampleCount": 242,
+        "mdape": 0.3118,
+        "shareWithin10Pct": 0.12,
+        "medianBiasPct": -0.3011
+      }
+    ],
+    "methods": [
+      {
+        "method": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "sampleCount": 1069,
+        "mdape": 0.1711,
+        "shareWithin10Pct": 0.326,
+        "medianBiasPct": -0.0328
+      },
+      {
+        "method": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "sampleCount": 409,
+        "mdape": 0.1973,
+        "shareWithin10Pct": 0.271,
+        "medianBiasPct": -0.0889
+      }
+    ],
+    "evaluations": [
+      {
+        "parcelId": "3067320068",
+        "salePrice": 845000,
+        "saleDate": "2025-03-24",
+        "estimatedValue": 754000,
+        "dollarError": -91000,
+        "percentageError": -0.1077,
+        "absPercentageError": 0.1077,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 736000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "3059560074",
+        "salePrice": 1050000,
+        "saleDate": "2026-03-19",
+        "estimatedValue": 1097000,
+        "dollarError": 47000,
+        "percentageError": 0.0448,
+        "absPercentageError": 0.0448,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 1009000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "3088160010",
+        "salePrice": 785000,
+        "saleDate": "2026-03-23",
+        "estimatedValue": 818000,
+        "dollarError": 33000,
+        "percentageError": 0.042,
+        "absPercentageError": 0.042,
+        "valuationMethod": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 963000
+        },
+        "priorSale": {
+          "price": 390500,
+          "date": "2019-03-27",
+          "year": 2019
+        }
+      },
+      {
+        "parcelId": "3067870039",
+        "salePrice": 1300000,
+        "saleDate": "2025-08-13",
+        "estimatedValue": 986000,
+        "dollarError": -314000,
+        "percentageError": -0.2415,
+        "absPercentageError": 0.2415,
+        "valuationMethod": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 1243000
+        },
+        "priorSale": {
+          "price": 456300,
+          "date": "2020-08-27",
+          "year": 2020
+        }
+      },
+      {
+        "parcelId": "3065250033",
+        "salePrice": 1250000,
+        "saleDate": "2025-11-04",
+        "estimatedValue": 904000,
+        "dollarError": -346000,
+        "percentageError": -0.2768,
+        "absPercentageError": 0.2768,
+        "valuationMethod": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 852000
+        },
+        "priorSale": {
+          "price": 817000,
+          "date": "2023-03-30",
+          "year": 2023
+        }
+      },
+      {
+        "parcelId": "3055060066",
+        "salePrice": 4000000,
+        "saleDate": "2025-06-09",
+        "estimatedValue": 1830000,
+        "dollarError": -2170000,
+        "percentageError": -0.5425,
+        "absPercentageError": 0.5425,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 1930000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "3050110036",
+        "salePrice": 810000,
+        "saleDate": "2026-08-25",
+        "estimatedValue": 926000,
+        "dollarError": 116000,
+        "percentageError": 0.1432,
+        "absPercentageError": 0.1432,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 932000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "3062930033",
+        "salePrice": 1720000,
+        "saleDate": "2026-08-19",
+        "estimatedValue": 1651000,
+        "dollarError": -69000,
+        "percentageError": -0.0401,
+        "absPercentageError": 0.0401,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 1672000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "3084990028",
+        "salePrice": 739800,
+        "saleDate": "2025-05-22",
+        "estimatedValue": 784000,
+        "dollarError": 44200,
+        "percentageError": 0.0597,
+        "absPercentageError": 0.0597,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 821000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "3073810168",
+        "salePrice": 1100000,
+        "saleDate": "2025-12-24",
+        "estimatedValue": 1062000,
+        "dollarError": -38000,
+        "percentageError": -0.0345,
+        "absPercentageError": 0.0345,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 1155000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "3040380106",
+        "salePrice": 580000,
+        "saleDate": "2025-06-26",
+        "estimatedValue": 511000,
+        "dollarError": -69000,
+        "percentageError": -0.119,
+        "absPercentageError": 0.119,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 513000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "3086270003",
+        "salePrice": 1995000,
+        "saleDate": "2025-03-05",
+        "estimatedValue": 2046000,
+        "dollarError": 51000,
+        "percentageError": 0.0256,
+        "absPercentageError": 0.0256,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 1804000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "3013150057",
+        "salePrice": 1875000,
+        "saleDate": "2026-07-23",
+        "estimatedValue": 1695000,
+        "dollarError": -180000,
+        "percentageError": -0.096,
+        "absPercentageError": 0.096,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 1745000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "3073330060",
+        "salePrice": 900000,
+        "saleDate": "2025-11-21",
+        "estimatedValue": 918000,
+        "dollarError": 18000,
+        "percentageError": 0.02,
+        "absPercentageError": 0.02,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 957000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "3010770065",
+        "salePrice": 6200000,
+        "saleDate": "2025-10-01",
+        "estimatedValue": 4758000,
+        "dollarError": -1442000,
+        "percentageError": -0.2326,
+        "absPercentageError": 0.2326,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 6489000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "3060240033",
+        "salePrice": 2142860,
+        "saleDate": "2026-02-10",
+        "estimatedValue": 1901000,
+        "dollarError": -241860,
+        "percentageError": -0.1129,
+        "absPercentageError": 0.1129,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 2088000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "3069160075",
+        "salePrice": 530000,
+        "saleDate": "2026-03-05",
+        "estimatedValue": 844000,
+        "dollarError": 314000,
+        "percentageError": 0.5925,
+        "absPercentageError": 0.5925,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 898000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "3050110034",
+        "salePrice": 605000,
+        "saleDate": "2025-12-30",
+        "estimatedValue": 869000,
+        "dollarError": 264000,
+        "percentageError": 0.4364,
+        "absPercentageError": 0.4364,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 838000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "3050110034",
+        "salePrice": 995000,
+        "saleDate": "2026-07-13",
+        "estimatedValue": 777000,
+        "dollarError": -218000,
+        "percentageError": -0.2191,
+        "absPercentageError": 0.2191,
+        "valuationMethod": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 892000
+        },
+        "priorSale": {
+          "price": 605000,
+          "date": "2025-12-30",
+          "year": 2025
+        }
+      },
+      {
+        "parcelId": "3060620024",
+        "salePrice": 970000,
+        "saleDate": "2026-06-16",
+        "estimatedValue": 1085000,
+        "dollarError": 115000,
+        "percentageError": 0.1186,
+        "absPercentageError": 0.1186,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 1148000
+        },
+        "priorSale": null
+      }
+    ],
+    "lastVerified": "2026-11-18",
+    "sourceUrl": "https://data.cityofnewyork.us/resource/w2pb-icbu.json",
+    "methodPaths": [
+      {
+        "method": "assessor + hedonic",
+        "sampleCount": 1069,
+        "mdape": 0.1711,
+        "shareWithin10Pct": 0.326,
+        "medianBiasPct": -0.0328
+      },
+      {
+        "method": "prior sale + assessor + hedonic",
+        "sampleCount": 409,
+        "mdape": 0.1973,
+        "shareWithin10Pct": 0.271,
+        "medianBiasPct": -0.0889
+      }
+    ],
+    "source_url": "https://data.cityofnewyork.us/resource/w2pb-icbu.json",
+    "source_urls": [
+      "https://data.cityofnewyork.us/resource/w2pb-icbu.json",
+      "https://data.cityofnewyork.us/resource/usep-8jbt.json",
+      "https://data.cityofnewyork.us/resource/8y4t-faws.json",
+      "https://data.cityofnewyork.us/resource/64uk-42ks.json"
+    ],
+    "source_dataset": "NYC Department of Finance: Citywide Annualized Calendar Sales (w2pb-icbu) and Rolling Calendar Sales (usep-8jbt); Property Valuation and Assessment Data Tax Classes 1-4 (8y4t-faws); Department of City Planning PLUTO (64uk-42ks) for lot coordinates",
+    "retrieved": "2026-11-18",
+    "sale_window": {
+      "start": "2025-01-01",
+      "end": "2026-09-30",
+      "first_sale": "2025-01-02",
+      "last_sale": "2026-09-30"
+    },
+    "leakage_rule": "DOF final market value (FINMKTTOT) from a roll year label strictly before the sale's calendar year (the roll for the sale's own year is never used, whatever its publication date).",
+    "assessment_kind": "DOF market value",
+    "neighborhood_data": "County bundle block-group record (2020-2024 ACS 5-year), located by point-in-polygon",
+    "filters": [
+      {
+        "id": "window",
+        "description": "Sale date 2025-01-01 to 2026-09-30",
+        "kept": 40460
+      },
+      {
+        "id": "one_family",
+        "description": "Building class category '01 ONE FAMILY DWELLINGS' at time of sale",
+        "dropped": 34350
+      },
+      {
+        "id": "one_unit",
+        "description": "residential_units = 1 and commercial_units = 0",
+        "dropped": 273
+      },
+      {
+        "id": "price_10k",
+        "description": "Sale price >= $10,000 (DOF: $0 sales are transfers without cash consideration, e.g. between family members)",
+        "dropped": 2792
+      },
+      {
+        "id": "single_lot",
+        "description": "No other lot on the same block sold the same day for the same total price (multi-lot sale)",
+        "dropped": 46
+      },
+      {
+        "id": "deterministic_sample",
+        "description": "Duplicate records of one sale collapsed; if more than 8000 sales remain, the 8000 with the lowest FNV-1a hash of parcel+document are kept",
+        "dropped": 0
+      },
+      {
+        "id": "pre_sale_roll",
+        "description": "A pre-sale assessment exists under the leakage rule: DOF final market value (FINMKTTOT) from a roll year label strictly before the sale's calendar year (the roll for the sale's own year is never used, whatever its publication date).",
+        "dropped": 5
+      },
+      {
+        "id": "located",
+        "description": "Parcel located inside one of the county bundle's block groups",
+        "dropped": 3
+      },
+      {
+        "id": "price_25k",
+        "description": "Sale price >= $25,000 (the floor runCountyValuationBacktest scores; keeps engine and baselines on the same sales)",
+        "dropped": 0
+      }
+    ],
+    "sample": {
+      "usable": 2991,
+      "calibration": 1513,
+      "evaluation": 1478,
+      "split": "by parcel (FNV-1a hash of the parcel id); every metric below is on the evaluation half",
+      "with_prior_sale": 412,
+      "with_neighborhood_hv": 1468
+    },
+    "baseline": {
+      "assessor_ratio": {
+        "description": "Pre-sale assessor value x median(sale price / pre-sale assessor value) of the calibration half",
+        "ratio": 1.0474,
+        "sampleCount": 1478,
+        "mdape": 0.1669,
+        "mape": 0.4612,
+        "medianBiasPct": 0.0114,
+        "shareWithin5Pct": 0.183,
+        "shareWithin10Pct": 0.329,
+        "shareWithin20Pct": 0.562,
+        "priceBands": [
+          {
+            "band": "< $250k",
+            "sampleCount": 31,
+            "mdape": 6.8436,
+            "shareWithin10Pct": 0,
+            "medianBiasPct": 6.8436
+          },
+          {
+            "band": "$250k - $500k",
+            "sampleCount": 94,
+            "mdape": 0.7633,
+            "shareWithin10Pct": 0.043,
+            "medianBiasPct": 0.7633
+          },
+          {
+            "band": "$500k - $1M",
+            "sampleCount": 721,
+            "mdape": 0.1266,
+            "shareWithin10Pct": 0.42,
+            "medianBiasPct": 0.052
+          },
+          {
+            "band": "$1M - $2M",
+            "sampleCount": 390,
+            "mdape": 0.15,
+            "shareWithin10Pct": 0.344,
+            "medianBiasPct": -0.0347
+          },
+          {
+            "band": "> $2M",
+            "sampleCount": 242,
+            "mdape": 0.2352,
+            "shareWithin10Pct": 0.186,
+            "medianBiasPct": -0.211
+          }
+        ],
+        "methods": []
+      },
+      "prior_sale_hpi": {
+        "description": "Prior recorded sale x FHFA all-transactions HPI change for metro division 35614 (index at the prior sale's quarter -> latest quarter ended >= 90 days before the sale)",
+        "source_url": "https://www.fhfa.gov/hpi/download/quarterly_datasets/hpi_at_metro.csv",
+        "coverage": 0.279,
+        "sampleCount": 412,
+        "mdape": 0.2693,
+        "mape": 0.561,
+        "medianBiasPct": -0.0461,
+        "shareWithin5Pct": 0.092,
+        "shareWithin10Pct": 0.197,
+        "shareWithin20Pct": 0.391,
+        "priceBands": [
+          {
+            "band": "< $250k",
+            "sampleCount": 12,
+            "mdape": 4.7722,
+            "shareWithin10Pct": 0.167,
+            "medianBiasPct": 4.7722
+          },
+          {
+            "band": "$250k - $500k",
+            "sampleCount": 23,
+            "mdape": 0.4568,
+            "shareWithin10Pct": 0.087,
+            "medianBiasPct": 0.3755
+          },
+          {
+            "band": "$500k - $1M",
+            "sampleCount": 210,
+            "mdape": 0.2645,
+            "shareWithin10Pct": 0.205,
+            "medianBiasPct": -0.0421
+          },
+          {
+            "band": "$1M - $2M",
+            "sampleCount": 81,
+            "mdape": 0.1806,
+            "shareWithin10Pct": 0.222,
+            "medianBiasPct": -0.0674
+          },
+          {
+            "band": "> $2M",
+            "sampleCount": 86,
+            "mdape": 0.3108,
+            "shareWithin10Pct": 0.186,
+            "medianBiasPct": -0.1739
+          }
+        ],
+        "methods": [],
+        "engine_on_same_sales": {
+          "sampleCount": 412,
+          "mdape": 0.1954,
+          "shareWithin10Pct": 0.274,
+          "medianBiasPct": -0.0883
+        }
+      },
+      "engine_beats_assessor_ratio": false
+    },
+    "engine_calibrated": {
+      "description": "Same engine with the county calibration below passed in (calibration input): assessor value x county ratio, prior sale x FHFA metro HPI, hedonic x county scale, blended with weights from each component's calibration-half error. Fitted on the calibration half; measured on the evaluation half.",
+      "calibration": {
+        "assessorRatio": 1.0474,
+        "hedonicScale": 1.1731,
+        "weights": {
+          "assessor": 0.5172,
+          "priorSale": 0.1934,
+          "hedonic": 0.2894
+        },
+        "component_mdape_on_calibration_half": {
+          "assessor": 0.1693,
+          "priorSale": 0.2769,
+          "hedonic": 0.2264
+        },
+        "fitted_on": "calibration half (1513 sales, disjoint parcels from the evaluation half)"
+      },
+      "sampleCount": 1478,
+      "mdape": 0.171,
+      "mape": 0.4536,
+      "medianBiasPct": 0.0153,
+      "shareWithin5Pct": 0.166,
+      "shareWithin10Pct": 0.314,
+      "shareWithin20Pct": 0.56,
+      "priceBands": [
+        {
+          "band": "< $250k",
+          "sampleCount": 31,
+          "mdape": 6.8741,
+          "shareWithin10Pct": 0,
+          "medianBiasPct": 6.8741
+        },
+        {
+          "band": "$250k - $500k",
+          "sampleCount": 94,
+          "mdape": 0.7946,
+          "shareWithin10Pct": 0.043,
+          "medianBiasPct": 0.7946
+        },
+        {
+          "band": "$500k - $1M",
+          "sampleCount": 721,
+          "mdape": 0.1253,
+          "shareWithin10Pct": 0.402,
+          "medianBiasPct": 0.0734
+        },
+        {
+          "band": "$1M - $2M",
+          "sampleCount": 390,
+          "mdape": 0.1421,
+          "shareWithin10Pct": 0.341,
+          "medianBiasPct": -0.0589
+        },
+        {
+          "band": "> $2M",
+          "sampleCount": 242,
+          "mdape": 0.2868,
+          "shareWithin10Pct": 0.153,
+          "medianBiasPct": -0.2749
+        }
+      ],
+      "methods": [
+        {
+          "method": "assessor + hedonic",
+          "sampleCount": 1069,
+          "mdape": 0.1673,
+          "shareWithin10Pct": 0.32,
+          "medianBiasPct": 0.0472
+        },
+        {
+          "method": "prior sale + assessor + hedonic",
+          "sampleCount": 409,
+          "mdape": 0.1748,
+          "shareWithin10Pct": 0.298,
+          "medianBiasPct": -0.0813
+        }
+      ],
+      "engine_calibrated_beats_assessor_ratio": false
+    },
+    "engine_with_county_scale": {
+      "description": "Shipped engine output x one county-wide scale factor fitted on the calibration half (median sale / estimate). Shows how much of the error is a level bias.",
+      "factor": 1.0619,
+      "sampleCount": 1478,
+      "mdape": 0.1727,
+      "mape": 0.4379,
+      "medianBiasPct": 0.0096,
+      "shareWithin5Pct": 0.16,
+      "shareWithin10Pct": 0.322,
+      "shareWithin20Pct": 0.548,
+      "priceBands": [
+        {
+          "band": "< $250k",
+          "sampleCount": 31,
+          "mdape": 6.9286,
+          "shareWithin10Pct": 0,
+          "medianBiasPct": 6.9286
+        },
+        {
+          "band": "$250k - $500k",
+          "sampleCount": 94,
+          "mdape": 0.7595,
+          "shareWithin10Pct": 0.032,
+          "medianBiasPct": 0.7595
+        },
+        {
+          "band": "$500k - $1M",
+          "sampleCount": 721,
+          "mdape": 0.1313,
+          "shareWithin10Pct": 0.411,
+          "medianBiasPct": 0.0659
+        },
+        {
+          "band": "$1M - $2M",
+          "sampleCount": 390,
+          "mdape": 0.1404,
+          "shareWithin10Pct": 0.354,
+          "medianBiasPct": -0.0462
+        },
+        {
+          "band": "> $2M",
+          "sampleCount": 242,
+          "mdape": 0.2692,
+          "shareWithin10Pct": 0.161,
+          "medianBiasPct": -0.2578
+        }
+      ],
+      "methods": [
+        {
+          "method": "assessor + hedonic",
+          "sampleCount": 1069,
+          "mdape": 0.1635,
+          "shareWithin10Pct": 0.335,
+          "medianBiasPct": 0.027
+        },
+        {
+          "method": "prior sale + assessor + hedonic",
+          "sampleCount": 409,
+          "mdape": 0.1946,
+          "shareWithin10Pct": 0.289,
+          "medianBiasPct": -0.0325
+        }
+      ]
+    }
+  },
+  "36081": {
+    "countyFips": "36081",
+    "countyName": "Queens County",
+    "stateCode": "NY",
+    "sampleCount": 3842,
+    "mdape": 0.1443,
+    "mape": 0.3205,
+    "medianBiasPct": -0.0453,
+    "shareWithin5Pct": 0.193,
+    "shareWithin10Pct": 0.363,
+    "shareWithin20Pct": 0.644,
+    "status": "withhold",
+    "withhold": true,
+    "withholdReason": "Valuation withheld: tested against 3842 recorded sales in this county, the model's typical error was 14.4% and only 64% of estimates were within 20% of the sale price.",
+    "supportedConfidenceMarginPct": 0.144,
+    "priceBands": [
+      {
+        "band": "< $250k",
+        "sampleCount": 76,
+        "mdape": 3.3484,
+        "shareWithin10Pct": 0.013,
+        "medianBiasPct": 3.3484
+      },
+      {
+        "band": "$250k - $500k",
+        "sampleCount": 320,
+        "mdape": 0.521,
+        "shareWithin10Pct": 0.044,
+        "medianBiasPct": 0.521
+      },
+      {
+        "band": "$500k - $1M",
+        "sampleCount": 2462,
+        "mdape": 0.1209,
+        "shareWithin10Pct": 0.427,
+        "medianBiasPct": -0.0419
+      },
+      {
+        "band": "$1M - $2M",
+        "sampleCount": 906,
+        "mdape": 0.145,
+        "shareWithin10Pct": 0.34,
+        "medianBiasPct": -0.1297
+      },
+      {
+        "band": "> $2M",
+        "sampleCount": 78,
+        "mdape": 0.2752,
+        "shareWithin10Pct": 0.256,
+        "medianBiasPct": -0.2752
+      }
+    ],
+    "methods": [
+      {
+        "method": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "sampleCount": 2767,
+        "mdape": 0.1338,
+        "shareWithin10Pct": 0.389,
+        "medianBiasPct": -0.0316
+      },
+      {
+        "method": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "sampleCount": 1075,
+        "mdape": 0.1877,
+        "shareWithin10Pct": 0.296,
+        "medianBiasPct": -0.1042
+      }
+    ],
+    "evaluations": [
+      {
+        "parcelId": "4029390071",
+        "salePrice": 1058000,
+        "saleDate": "2026-06-11",
+        "estimatedValue": 842000,
+        "dollarError": -216000,
+        "percentageError": -0.2042,
+        "absPercentageError": 0.2042,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 838000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "4127660076",
+        "salePrice": 745000,
+        "saleDate": "2025-10-02",
+        "estimatedValue": 717000,
+        "dollarError": -28000,
+        "percentageError": -0.0376,
+        "absPercentageError": 0.0376,
+        "valuationMethod": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 654000
+        },
+        "priorSale": {
+          "price": 400000,
+          "date": "2016-10-31",
+          "year": 2016
+        }
+      },
+      {
+        "parcelId": "4087730044",
+        "salePrice": 960000,
+        "saleDate": "2025-01-15",
+        "estimatedValue": 800000,
+        "dollarError": -160000,
+        "percentageError": -0.1667,
+        "absPercentageError": 0.1667,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 755000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "4053400049",
+        "salePrice": 1230000,
+        "saleDate": "2025-11-14",
+        "estimatedValue": 841000,
+        "dollarError": -389000,
+        "percentageError": -0.3163,
+        "absPercentageError": 0.3163,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 1203000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "4116600012",
+        "salePrice": 575000,
+        "saleDate": "2026-03-27",
+        "estimatedValue": 623000,
+        "dollarError": 48000,
+        "percentageError": 0.0835,
+        "absPercentageError": 0.0835,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 648000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "4082330421",
+        "salePrice": 1150000,
+        "saleDate": "2026-06-25",
+        "estimatedValue": 929000,
+        "dollarError": -221000,
+        "percentageError": -0.1922,
+        "absPercentageError": 0.1922,
+        "valuationMethod": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 996000
+        },
+        "priorSale": {
+          "price": 675000,
+          "date": "2022-06-16",
+          "year": 2022
+        }
+      },
+      {
+        "parcelId": "4142490508",
+        "salePrice": 749000,
+        "saleDate": "2025-01-08",
+        "estimatedValue": 706000,
+        "dollarError": -43000,
+        "percentageError": -0.0574,
+        "absPercentageError": 0.0574,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 591000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "4072270001",
+        "salePrice": 1250000,
+        "saleDate": "2025-08-26",
+        "estimatedValue": 1179000,
+        "dollarError": -71000,
+        "percentageError": -0.0568,
+        "absPercentageError": 0.0568,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 1082000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "4129690039",
+        "salePrice": 740220,
+        "saleDate": "2025-09-26",
+        "estimatedValue": 631000,
+        "dollarError": -109220,
+        "percentageError": -0.1476,
+        "absPercentageError": 0.1476,
+        "valuationMethod": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 661000
+        },
+        "priorSale": {
+          "price": 394737,
+          "date": "2020-08-17",
+          "year": 2020
+        }
+      },
+      {
+        "parcelId": "4106400024",
+        "salePrice": 815299,
+        "saleDate": "2025-10-01",
+        "estimatedValue": 786000,
+        "dollarError": -29299,
+        "percentageError": -0.0359,
+        "absPercentageError": 0.0359,
+        "valuationMethod": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 716000
+        },
+        "priorSale": {
+          "price": 575000,
+          "date": "2019-03-01",
+          "year": 2019
+        }
+      },
+      {
+        "parcelId": "4136100035",
+        "salePrice": 650000,
+        "saleDate": "2025-07-29",
+        "estimatedValue": 817000,
+        "dollarError": 167000,
+        "percentageError": 0.2569,
+        "absPercentageError": 0.2569,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 802000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "4156950052",
+        "salePrice": 612000,
+        "saleDate": "2025-12-12",
+        "estimatedValue": 756000,
+        "dollarError": 144000,
+        "percentageError": 0.2353,
+        "absPercentageError": 0.2353,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 628000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "4060260056",
+        "salePrice": 618000,
+        "saleDate": "2025-09-03",
+        "estimatedValue": 751000,
+        "dollarError": 133000,
+        "percentageError": 0.2152,
+        "absPercentageError": 0.2152,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 780000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "4060260056",
+        "salePrice": 865000,
+        "saleDate": "2026-06-08",
+        "estimatedValue": 717000,
+        "dollarError": -148000,
+        "percentageError": -0.1711,
+        "absPercentageError": 0.1711,
+        "valuationMethod": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 798000
+        },
+        "priorSale": {
+          "price": 618000,
+          "date": "2025-09-03",
+          "year": 2025
+        }
+      },
+      {
+        "parcelId": "4073970047",
+        "salePrice": 1101500,
+        "saleDate": "2026-06-12",
+        "estimatedValue": 966000,
+        "dollarError": -135500,
+        "percentageError": -0.123,
+        "absPercentageError": 0.123,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 874000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "4067110059",
+        "salePrice": 815000,
+        "saleDate": "2025-08-12",
+        "estimatedValue": 826000,
+        "dollarError": 11000,
+        "percentageError": 0.0135,
+        "absPercentageError": 0.0135,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 822000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "4048500019",
+        "salePrice": 1102000,
+        "saleDate": "2026-04-20",
+        "estimatedValue": 948000,
+        "dollarError": -154000,
+        "percentageError": -0.1397,
+        "absPercentageError": 0.1397,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 950000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "4110980107",
+        "salePrice": 655000,
+        "saleDate": "2025-09-23",
+        "estimatedValue": 713000,
+        "dollarError": 58000,
+        "percentageError": 0.0885,
+        "absPercentageError": 0.0885,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 719000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "4129000070",
+        "salePrice": 708900,
+        "saleDate": "2025-09-04",
+        "estimatedValue": 568000,
+        "dollarError": -140900,
+        "percentageError": -0.1988,
+        "absPercentageError": 0.1988,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 555000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "4108850003",
+        "salePrice": 805000,
+        "saleDate": "2026-01-08",
+        "estimatedValue": 637000,
+        "dollarError": -168000,
+        "percentageError": -0.2087,
+        "absPercentageError": 0.2087,
+        "valuationMethod": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 583000
+        },
+        "priorSale": {
+          "price": 379634,
+          "date": "2017-03-24",
+          "year": 2017
+        }
+      }
+    ],
+    "lastVerified": "2026-11-18",
+    "sourceUrl": "https://data.cityofnewyork.us/resource/w2pb-icbu.json",
+    "methodPaths": [
+      {
+        "method": "assessor + hedonic",
+        "sampleCount": 2767,
+        "mdape": 0.1338,
+        "shareWithin10Pct": 0.389,
+        "medianBiasPct": -0.0316
+      },
+      {
+        "method": "prior sale + assessor + hedonic",
+        "sampleCount": 1075,
+        "mdape": 0.1877,
+        "shareWithin10Pct": 0.296,
+        "medianBiasPct": -0.1042
+      }
+    ],
+    "source_url": "https://data.cityofnewyork.us/resource/w2pb-icbu.json",
+    "source_urls": [
+      "https://data.cityofnewyork.us/resource/w2pb-icbu.json",
+      "https://data.cityofnewyork.us/resource/usep-8jbt.json",
+      "https://data.cityofnewyork.us/resource/8y4t-faws.json",
+      "https://data.cityofnewyork.us/resource/64uk-42ks.json"
+    ],
+    "source_dataset": "NYC Department of Finance: Citywide Annualized Calendar Sales (w2pb-icbu) and Rolling Calendar Sales (usep-8jbt); Property Valuation and Assessment Data Tax Classes 1-4 (8y4t-faws); Department of City Planning PLUTO (64uk-42ks) for lot coordinates",
+    "retrieved": "2026-11-18",
+    "sale_window": {
+      "start": "2025-01-01",
+      "end": "2026-09-30",
+      "first_sale": "2025-01-02",
+      "last_sale": "2026-09-30"
+    },
+    "leakage_rule": "DOF final market value (FINMKTTOT) from a roll year label strictly before the sale's calendar year (the roll for the sale's own year is never used, whatever its publication date).",
+    "assessment_kind": "DOF market value",
+    "neighborhood_data": "County bundle block-group record (2020-2024 ACS 5-year), located by point-in-polygon",
+    "filters": [
+      {
+        "id": "window",
+        "description": "Sale date 2025-01-01 to 2026-09-30",
+        "kept": 46754
+      },
+      {
+        "id": "one_family",
+        "description": "Building class category '01 ONE FAMILY DWELLINGS' at time of sale",
+        "dropped": 31498
+      },
+      {
+        "id": "one_unit",
+        "description": "residential_units = 1 and commercial_units = 0",
+        "dropped": 437
+      },
+      {
+        "id": "price_10k",
+        "description": "Sale price >= $10,000 (DOF: $0 sales are transfers without cash consideration, e.g. between family members)",
+        "dropped": 7128
+      },
+      {
+        "id": "single_lot",
+        "description": "No other lot on the same block sold the same day for the same total price (multi-lot sale)",
+        "dropped": 93
+      },
+      {
+        "id": "deterministic_sample",
+        "description": "Duplicate records of one sale collapsed; if more than 8000 sales remain, the 8000 with the lowest FNV-1a hash of parcel+document are kept",
+        "dropped": 0
+      },
+      {
+        "id": "pre_sale_roll",
+        "description": "A pre-sale assessment exists under the leakage rule: DOF final market value (FINMKTTOT) from a roll year label strictly before the sale's calendar year (the roll for the sale's own year is never used, whatever its publication date).",
+        "dropped": 3
+      },
+      {
+        "id": "located",
+        "description": "Parcel located inside one of the county bundle's block groups",
+        "dropped": 2
+      },
+      {
+        "id": "price_25k",
+        "description": "Sale price >= $25,000 (the floor runCountyValuationBacktest scores; keeps engine and baselines on the same sales)",
+        "dropped": 6
+      }
+    ],
+    "sample": {
+      "usable": 7587,
+      "calibration": 3745,
+      "evaluation": 3842,
+      "split": "by parcel (FNV-1a hash of the parcel id); every metric below is on the evaluation half",
+      "with_prior_sale": 1085,
+      "with_neighborhood_hv": 3830
+    },
+    "baseline": {
+      "assessor_ratio": {
+        "description": "Pre-sale assessor value x median(sale price / pre-sale assessor value) of the calibration half",
+        "ratio": 1.0691,
+        "sampleCount": 3842,
+        "mdape": 0.1338,
+        "mape": 0.3341,
+        "medianBiasPct": 0.0068,
+        "shareWithin5Pct": 0.204,
+        "shareWithin10Pct": 0.397,
+        "shareWithin20Pct": 0.656,
+        "priceBands": [
+          {
+            "band": "< $250k",
+            "sampleCount": 76,
+            "mdape": 3.7278,
+            "shareWithin10Pct": 0,
+            "medianBiasPct": 3.7278
+          },
+          {
+            "band": "$250k - $500k",
+            "sampleCount": 320,
+            "mdape": 0.6441,
+            "shareWithin10Pct": 0.013,
+            "medianBiasPct": 0.6441
+          },
+          {
+            "band": "$500k - $1M",
+            "sampleCount": 2462,
+            "mdape": 0.1104,
+            "shareWithin10Pct": 0.461,
+            "medianBiasPct": 0.0107
+          },
+          {
+            "band": "$1M - $2M",
+            "sampleCount": 906,
+            "mdape": 0.1258,
+            "shareWithin10Pct": 0.407,
+            "medianBiasPct": -0.0875
+          },
+          {
+            "band": "> $2M",
+            "sampleCount": 78,
+            "mdape": 0.2571,
+            "shareWithin10Pct": 0.231,
+            "medianBiasPct": -0.2051
+          }
+        ],
+        "methods": []
+      },
+      "prior_sale_hpi": {
+        "description": "Prior recorded sale x FHFA all-transactions HPI change for metro division 35614 (index at the prior sale's quarter -> latest quarter ended >= 90 days before the sale)",
+        "source_url": "https://www.fhfa.gov/hpi/download/quarterly_datasets/hpi_at_metro.csv",
+        "coverage": 0.282,
+        "sampleCount": 1085,
+        "mdape": 0.2771,
+        "mape": 0.4331,
+        "medianBiasPct": -0.0599,
+        "shareWithin5Pct": 0.119,
+        "shareWithin10Pct": 0.218,
+        "shareWithin20Pct": 0.38,
+        "priceBands": [
+          {
+            "band": "< $250k",
+            "sampleCount": 18,
+            "mdape": 4.2977,
+            "shareWithin10Pct": 0.056,
+            "medianBiasPct": 4.2977
+          },
+          {
+            "band": "$250k - $500k",
+            "sampleCount": 65,
+            "mdape": 0.5174,
+            "shareWithin10Pct": 0.092,
+            "medianBiasPct": 0.4078
+          },
+          {
+            "band": "$500k - $1M",
+            "sampleCount": 753,
+            "mdape": 0.2834,
+            "shareWithin10Pct": 0.22,
+            "medianBiasPct": -0.1549
+          },
+          {
+            "band": "$1M - $2M",
+            "sampleCount": 231,
+            "mdape": 0.1982,
+            "shareWithin10Pct": 0.26,
+            "medianBiasPct": -0.0337
+          },
+          {
+            "band": "> $2M",
+            "sampleCount": 18,
+            "mdape": 0.3183,
+            "shareWithin10Pct": 0.222,
+            "medianBiasPct": 0.0041
+          }
+        ],
+        "methods": [],
+        "engine_on_same_sales": {
+          "sampleCount": 1085,
+          "mdape": 0.1864,
+          "shareWithin10Pct": 0.295,
+          "medianBiasPct": -0.1042
+        }
+      },
+      "engine_beats_assessor_ratio": false
+    },
+    "engine_calibrated": {
+      "description": "Same engine with the county calibration below passed in (calibration input): assessor value x county ratio, prior sale x FHFA metro HPI, hedonic x county scale, blended with weights from each component's calibration-half error. Fitted on the calibration half; measured on the evaluation half.",
+      "calibration": {
+        "assessorRatio": 1.0691,
+        "hedonicScale": 1.0948,
+        "weights": {
+          "assessor": 0.5325,
+          "priorSale": 0.1231,
+          "hedonic": 0.3444
+        },
+        "component_mdape_on_calibration_half": {
+          "assessor": 0.1267,
+          "priorSale": 0.2635,
+          "hedonic": 0.1575
+        },
+        "fitted_on": "calibration half (3745 sales, disjoint parcels from the evaluation half)"
+      },
+      "sampleCount": 3842,
+      "mdape": 0.133,
+      "mape": 0.33,
+      "medianBiasPct": 0.0038,
+      "shareWithin5Pct": 0.213,
+      "shareWithin10Pct": 0.402,
+      "shareWithin20Pct": 0.658,
+      "priceBands": [
+        {
+          "band": "< $250k",
+          "sampleCount": 76,
+          "mdape": 3.53,
+          "shareWithin10Pct": 0.013,
+          "medianBiasPct": 3.53
+        },
+        {
+          "band": "$250k - $500k",
+          "sampleCount": 320,
+          "mdape": 0.6256,
+          "shareWithin10Pct": 0.019,
+          "medianBiasPct": 0.6256
+        },
+        {
+          "band": "$500k - $1M",
+          "sampleCount": 2462,
+          "mdape": 0.1123,
+          "shareWithin10Pct": 0.462,
+          "medianBiasPct": 0.0073
+        },
+        {
+          "band": "$1M - $2M",
+          "sampleCount": 906,
+          "mdape": 0.1227,
+          "shareWithin10Pct": 0.424,
+          "medianBiasPct": -0.0867
+        },
+        {
+          "band": "> $2M",
+          "sampleCount": 78,
+          "mdape": 0.2615,
+          "shareWithin10Pct": 0.218,
+          "medianBiasPct": -0.2596
+        }
+      ],
+      "methods": [
+        {
+          "method": "assessor + hedonic",
+          "sampleCount": 2767,
+          "mdape": 0.1224,
+          "shareWithin10Pct": 0.429,
+          "medianBiasPct": 0.0327
+        },
+        {
+          "method": "prior sale + assessor + hedonic",
+          "sampleCount": 1075,
+          "mdape": 0.16,
+          "shareWithin10Pct": 0.333,
+          "medianBiasPct": -0.0859
+        }
+      ],
+      "engine_calibrated_beats_assessor_ratio": true
+    },
+    "engine_with_county_scale": {
+      "description": "Shipped engine output x one county-wide scale factor fitted on the calibration half (median sale / estimate). Shows how much of the error is a level bias.",
+      "factor": 1.0542,
+      "sampleCount": 3842,
+      "mdape": 0.1356,
+      "mape": 0.3333,
+      "medianBiasPct": 0.0064,
+      "shareWithin5Pct": 0.203,
+      "shareWithin10Pct": 0.388,
+      "shareWithin20Pct": 0.634,
+      "priceBands": [
+        {
+          "band": "< $250k",
+          "sampleCount": 76,
+          "mdape": 3.5839,
+          "shareWithin10Pct": 0.013,
+          "medianBiasPct": 3.5839
+        },
+        {
+          "band": "$250k - $500k",
+          "sampleCount": 320,
+          "mdape": 0.6034,
+          "shareWithin10Pct": 0.034,
+          "medianBiasPct": 0.6034
+        },
+        {
+          "band": "$500k - $1M",
+          "sampleCount": 2462,
+          "mdape": 0.1173,
+          "shareWithin10Pct": 0.436,
+          "medianBiasPct": 0.01
+        },
+        {
+          "band": "$1M - $2M",
+          "sampleCount": 906,
+          "mdape": 0.1201,
+          "shareWithin10Pct": 0.427,
+          "medianBiasPct": -0.0825
+        },
+        {
+          "band": "> $2M",
+          "sampleCount": 78,
+          "mdape": 0.2443,
+          "shareWithin10Pct": 0.231,
+          "medianBiasPct": -0.236
+        }
+      ],
+      "methods": [
+        {
+          "method": "assessor + hedonic",
+          "sampleCount": 2767,
+          "mdape": 0.1227,
+          "shareWithin10Pct": 0.422,
+          "medianBiasPct": 0.0208
+        },
+        {
+          "method": "prior sale + assessor + hedonic",
+          "sampleCount": 1075,
+          "mdape": 0.1818,
+          "shareWithin10Pct": 0.3,
+          "medianBiasPct": -0.0556
+        }
+      ]
+    }
+  },
+  "36085": {
+    "countyFips": "36085",
+    "countyName": "Richmond County",
+    "stateCode": "NY",
+    "sampleCount": 1945,
+    "mdape": 0.1143,
+    "mape": 0.2771,
+    "medianBiasPct": -0.0248,
+    "shareWithin5Pct": 0.235,
+    "shareWithin10Pct": 0.448,
+    "shareWithin20Pct": 0.725,
     "status": "acceptable",
     "withhold": false,
     "withholdReason": null,
-    "supportedConfidenceMarginPct": 0.157,
+    "supportedConfidenceMarginPct": 0.114,
     "priceBands": [
       {
-        "band": "< $500k",
-        "sampleCount": 4,
-        "mdape": 0.1327,
-        "shareWithin10Pct": 0
+        "band": "< $250k",
+        "sampleCount": 28,
+        "mdape": 4.8179,
+        "shareWithin10Pct": 0,
+        "medianBiasPct": 4.8179
+      },
+      {
+        "band": "$250k - $500k",
+        "sampleCount": 215,
+        "mdape": 0.2464,
+        "shareWithin10Pct": 0.26,
+        "medianBiasPct": 0.2464
       },
       {
         "band": "$500k - $1M",
-        "sampleCount": 1,
-        "mdape": 0.0982,
-        "shareWithin10Pct": 1
+        "sampleCount": 1493,
+        "mdape": 0.0985,
+        "shareWithin10Pct": 0.511,
+        "medianBiasPct": -0.0354
+      },
+      {
+        "band": "$1M - $2M",
+        "sampleCount": 188,
+        "mdape": 0.1777,
+        "shareWithin10Pct": 0.271,
+        "medianBiasPct": -0.1345
+      },
+      {
+        "band": "> $2M",
+        "sampleCount": 21,
+        "mdape": 0.3383,
+        "shareWithin10Pct": 0.095,
+        "medianBiasPct": -0.3383
+      }
+    ],
+    "methods": [
+      {
+        "method": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "sampleCount": 1361,
+        "mdape": 0.1149,
+        "shareWithin10Pct": 0.442,
+        "medianBiasPct": -0.0206
+      },
+      {
+        "method": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "sampleCount": 584,
+        "mdape": 0.1103,
+        "shareWithin10Pct": 0.464,
+        "medianBiasPct": -0.0327
       }
     ],
     "evaluations": [
       {
-        "parcelId": "114500010010",
-        "salePrice": 385000,
-        "saleDate": "2024-05-12",
-        "estimatedValue": 424000,
-        "dollarError": 39000,
-        "percentageError": 0.1013,
-        "absPercentageError": 0.1013,
-        "valuationMethod": "HPI Repeat-Sales Index + Texas CAD Total Market Value + Hedonic Micro-Model",
+        "parcelId": "5031240200",
+        "salePrice": 491790,
+        "saleDate": "2025-12-18",
+        "estimatedValue": 746000,
+        "dollarError": 254210,
+        "percentageError": 0.5169,
+        "absPercentageError": 0.5169,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
         "within5Pct": false,
         "within10Pct": false,
-        "within20Pct": true
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 771000
+        },
+        "priorSale": null
       },
       {
-        "parcelId": "114500010045",
+        "parcelId": "5078530012",
+        "salePrice": 935000,
+        "saleDate": "2026-07-02",
+        "estimatedValue": 1089000,
+        "dollarError": 154000,
+        "percentageError": 0.1647,
+        "absPercentageError": 0.1647,
+        "valuationMethod": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 1176000
+        },
+        "priorSale": {
+          "price": 750000,
+          "date": "2022-10-03",
+          "year": 2022
+        }
+      },
+      {
+        "parcelId": "5007350120",
+        "salePrice": 500000,
+        "saleDate": "2025-10-30",
+        "estimatedValue": 679000,
+        "dollarError": 179000,
+        "percentageError": 0.358,
+        "absPercentageError": 0.358,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 666000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "5008120018",
+        "salePrice": 905000,
+        "saleDate": "2026-08-13",
+        "estimatedValue": 732000,
+        "dollarError": -173000,
+        "percentageError": -0.1912,
+        "absPercentageError": 0.1912,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 657000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "5028990082",
+        "salePrice": 344760,
+        "saleDate": "2025-09-26",
+        "estimatedValue": 498000,
+        "dollarError": 153240,
+        "percentageError": 0.4445,
+        "absPercentageError": 0.4445,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 497000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "5028990082",
+        "salePrice": 600000,
+        "saleDate": "2026-04-24",
+        "estimatedValue": 404000,
+        "dollarError": -196000,
+        "percentageError": -0.3267,
+        "absPercentageError": 0.3267,
+        "valuationMethod": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 420000
+        },
+        "priorSale": {
+          "price": 344760,
+          "date": "2025-09-26",
+          "year": 2025
+        }
+      },
+      {
+        "parcelId": "5052860018",
+        "salePrice": 815500,
+        "saleDate": "2025-10-23",
+        "estimatedValue": 776000,
+        "dollarError": -39500,
+        "percentageError": -0.0484,
+        "absPercentageError": 0.0484,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 743000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "5044780612",
+        "salePrice": 549999,
+        "saleDate": "2025-03-28",
+        "estimatedValue": 537000,
+        "dollarError": -12999,
+        "percentageError": -0.0236,
+        "absPercentageError": 0.0236,
+        "valuationMethod": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 488000
+        },
+        "priorSale": {
+          "price": 422500,
+          "date": "2021-03-19",
+          "year": 2021
+        }
+      },
+      {
+        "parcelId": "5002320056",
+        "salePrice": 727000,
+        "saleDate": "2025-04-25",
+        "estimatedValue": 552000,
+        "dollarError": -175000,
+        "percentageError": -0.2407,
+        "absPercentageError": 0.2407,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 544000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "5010400021",
         "salePrice": 475000,
-        "saleDate": "2024-07-18",
-        "estimatedValue": 549000,
-        "dollarError": 74000,
-        "percentageError": 0.1558,
-        "absPercentageError": 0.1558,
-        "valuationMethod": "HPI Repeat-Sales Index + Texas CAD Total Market Value + Hedonic Micro-Model",
+        "saleDate": "2026-02-20",
+        "estimatedValue": 529000,
+        "dollarError": 54000,
+        "percentageError": 0.1137,
+        "absPercentageError": 0.1137,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
         "within5Pct": false,
         "within10Pct": false,
-        "within20Pct": true
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 481000
+        },
+        "priorSale": null
       },
       {
-        "parcelId": "114500010080",
-        "salePrice": 315000,
-        "saleDate": "2024-03-25",
-        "estimatedValue": 359000,
-        "dollarError": 44000,
-        "percentageError": 0.1397,
-        "absPercentageError": 0.1397,
-        "valuationMethod": "HPI Repeat-Sales Index + Texas CAD Total Market Value + Hedonic Micro-Model",
+        "parcelId": "5037460026",
+        "salePrice": 508000,
+        "saleDate": "2026-01-15",
+        "estimatedValue": 436000,
+        "dollarError": -72000,
+        "percentageError": -0.1417,
+        "absPercentageError": 0.1417,
+        "valuationMethod": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
         "within5Pct": false,
         "within10Pct": false,
-        "within20Pct": true
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 275000
+        },
+        "priorSale": {
+          "price": 420000,
+          "date": "2021-12-22",
+          "year": 2021
+        }
       },
       {
-        "parcelId": "114500010115",
-        "salePrice": 560000,
-        "saleDate": "2024-09-05",
-        "estimatedValue": 615000,
-        "dollarError": 55000,
-        "percentageError": 0.0982,
-        "absPercentageError": 0.0982,
-        "valuationMethod": "HPI Repeat-Sales Index + Texas CAD Total Market Value + Hedonic Micro-Model",
+        "parcelId": "5007840010",
+        "salePrice": 780000,
+        "saleDate": "2025-11-17",
+        "estimatedValue": 703000,
+        "dollarError": -77000,
+        "percentageError": -0.0987,
+        "absPercentageError": 0.0987,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
         "within5Pct": false,
         "within10Pct": true,
-        "within20Pct": true
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 645000
+        },
+        "priorSale": null
       },
       {
-        "parcelId": "114500010150",
-        "salePrice": 350000,
-        "saleDate": "2024-04-14",
-        "estimatedValue": 394000,
-        "dollarError": 44000,
-        "percentageError": 0.1257,
-        "absPercentageError": 0.1257,
-        "valuationMethod": "HPI Repeat-Sales Index + Texas CAD Total Market Value + Hedonic Micro-Model",
+        "parcelId": "5075960249",
+        "salePrice": 900000,
+        "saleDate": "2025-12-23",
+        "estimatedValue": 910000,
+        "dollarError": 10000,
+        "percentageError": 0.0111,
+        "absPercentageError": 0.0111,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 830000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "5056530157",
+        "salePrice": 800000,
+        "saleDate": "2025-06-30",
+        "estimatedValue": 727000,
+        "dollarError": -73000,
+        "percentageError": -0.0912,
+        "absPercentageError": 0.0913,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 678000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "5015970004",
+        "salePrice": 745000,
+        "saleDate": "2026-03-04",
+        "estimatedValue": 706000,
+        "dollarError": -39000,
+        "percentageError": -0.0523,
+        "absPercentageError": 0.0523,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 655000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "5007030020",
+        "salePrice": 670000,
+        "saleDate": "2025-02-28",
+        "estimatedValue": 697000,
+        "dollarError": 27000,
+        "percentageError": 0.0403,
+        "absPercentageError": 0.0403,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 637000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "5033760014",
+        "salePrice": 745000,
+        "saleDate": "2026-03-09",
+        "estimatedValue": 664000,
+        "dollarError": -81000,
+        "percentageError": -0.1087,
+        "absPercentageError": 0.1087,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
         "within5Pct": false,
         "within10Pct": false,
-        "within20Pct": true
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 682000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "5066940252",
+        "salePrice": 760000,
+        "saleDate": "2025-05-06",
+        "estimatedValue": 790000,
+        "dollarError": 30000,
+        "percentageError": 0.0395,
+        "absPercentageError": 0.0395,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 728000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "5075500049",
+        "salePrice": 630000,
+        "saleDate": "2025-03-26",
+        "estimatedValue": 849000,
+        "dollarError": 219000,
+        "percentageError": 0.3476,
+        "absPercentageError": 0.3476,
+        "valuationMethod": "NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 776000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "5062490216",
+        "salePrice": 1080000,
+        "saleDate": "2026-04-30",
+        "estimatedValue": 1091000,
+        "dollarError": 11000,
+        "percentageError": 0.0102,
+        "absPercentageError": 0.0102,
+        "valuationMethod": "HPI Repeat-Sales Index + NYC MapPLUTO Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 827000
+        },
+        "priorSale": {
+          "price": 845000,
+          "date": "2018-07-26",
+          "year": 2018
+        }
       }
     ],
-    "lastVerified": "2026-11-15",
-    "sourceUrl": "https://hcad.org/pdata/pdata.html"
+    "lastVerified": "2026-11-18",
+    "sourceUrl": "https://data.cityofnewyork.us/resource/w2pb-icbu.json",
+    "methodPaths": [
+      {
+        "method": "assessor + hedonic",
+        "sampleCount": 1361,
+        "mdape": 0.1149,
+        "shareWithin10Pct": 0.442,
+        "medianBiasPct": -0.0206
+      },
+      {
+        "method": "prior sale + assessor + hedonic",
+        "sampleCount": 584,
+        "mdape": 0.1103,
+        "shareWithin10Pct": 0.464,
+        "medianBiasPct": -0.0327
+      }
+    ],
+    "source_url": "https://data.cityofnewyork.us/resource/w2pb-icbu.json",
+    "source_urls": [
+      "https://data.cityofnewyork.us/resource/w2pb-icbu.json",
+      "https://data.cityofnewyork.us/resource/usep-8jbt.json",
+      "https://data.cityofnewyork.us/resource/8y4t-faws.json",
+      "https://data.cityofnewyork.us/resource/64uk-42ks.json"
+    ],
+    "source_dataset": "NYC Department of Finance: Citywide Annualized Calendar Sales (w2pb-icbu) and Rolling Calendar Sales (usep-8jbt); Property Valuation and Assessment Data Tax Classes 1-4 (8y4t-faws); Department of City Planning PLUTO (64uk-42ks) for lot coordinates",
+    "retrieved": "2026-11-18",
+    "sale_window": {
+      "start": "2025-01-01",
+      "end": "2026-09-30",
+      "first_sale": "2025-01-02",
+      "last_sale": "2026-09-30"
+    },
+    "leakage_rule": "DOF final market value (FINMKTTOT) from a roll year label strictly before the sale's calendar year (the roll for the sale's own year is never used, whatever its publication date).",
+    "assessment_kind": "DOF market value",
+    "neighborhood_data": "County bundle block-group record (2020-2024 ACS 5-year), located by point-in-polygon",
+    "filters": [
+      {
+        "id": "window",
+        "description": "Sale date 2025-01-01 to 2026-09-30",
+        "kept": 12340
+      },
+      {
+        "id": "one_family",
+        "description": "Building class category '01 ONE FAMILY DWELLINGS' at time of sale",
+        "dropped": 5487
+      },
+      {
+        "id": "one_unit",
+        "description": "residential_units = 1 and commercial_units = 0",
+        "dropped": 93
+      },
+      {
+        "id": "price_10k",
+        "description": "Sale price >= $10,000 (DOF: $0 sales are transfers without cash consideration, e.g. between family members)",
+        "dropped": 2654
+      },
+      {
+        "id": "single_lot",
+        "description": "No other lot on the same block sold the same day for the same total price (multi-lot sale)",
+        "dropped": 70
+      },
+      {
+        "id": "deterministic_sample",
+        "description": "Duplicate records of one sale collapsed; if more than 8000 sales remain, the 8000 with the lowest FNV-1a hash of parcel+document are kept",
+        "dropped": 0
+      },
+      {
+        "id": "pre_sale_roll",
+        "description": "A pre-sale assessment exists under the leakage rule: DOF final market value (FINMKTTOT) from a roll year label strictly before the sale's calendar year (the roll for the sale's own year is never used, whatever its publication date).",
+        "dropped": 29
+      },
+      {
+        "id": "located",
+        "description": "Parcel located inside one of the county bundle's block groups",
+        "dropped": 0
+      },
+      {
+        "id": "price_25k",
+        "description": "Sale price >= $25,000 (the floor runCountyValuationBacktest scores; keeps engine and baselines on the same sales)",
+        "dropped": 5
+      }
+    ],
+    "sample": {
+      "usable": 4002,
+      "calibration": 2057,
+      "evaluation": 1945,
+      "split": "by parcel (FNV-1a hash of the parcel id); every metric below is on the evaluation half",
+      "with_prior_sale": 587,
+      "with_neighborhood_hv": 1945
+    },
+    "baseline": {
+      "assessor_ratio": {
+        "description": "Pre-sale assessor value x median(sale price / pre-sale assessor value) of the calibration half",
+        "ratio": 1.0921,
+        "sampleCount": 1945,
+        "mdape": 0.1099,
+        "mape": 0.2888,
+        "medianBiasPct": 0.0053,
+        "shareWithin5Pct": 0.246,
+        "shareWithin10Pct": 0.462,
+        "shareWithin20Pct": 0.729,
+        "priceBands": [
+          {
+            "band": "< $250k",
+            "sampleCount": 28,
+            "mdape": 5.6741,
+            "shareWithin10Pct": 0,
+            "medianBiasPct": 5.6741
+          },
+          {
+            "band": "$250k - $500k",
+            "sampleCount": 215,
+            "mdape": 0.3129,
+            "shareWithin10Pct": 0.233,
+            "medianBiasPct": 0.2949
+          },
+          {
+            "band": "$500k - $1M",
+            "sampleCount": 1493,
+            "mdape": 0.093,
+            "shareWithin10Pct": 0.528,
+            "medianBiasPct": -0.0013
+          },
+          {
+            "band": "$1M - $2M",
+            "sampleCount": 188,
+            "mdape": 0.1647,
+            "shareWithin10Pct": 0.314,
+            "medianBiasPct": -0.1263
+          },
+          {
+            "band": "> $2M",
+            "sampleCount": 21,
+            "mdape": 0.29,
+            "shareWithin10Pct": 0.095,
+            "medianBiasPct": -0.29
+          }
+        ],
+        "methods": []
+      },
+      "prior_sale_hpi": {
+        "description": "Prior recorded sale x FHFA all-transactions HPI change for metro division 35614 (index at the prior sale's quarter -> latest quarter ended >= 90 days before the sale)",
+        "source_url": "https://www.fhfa.gov/hpi/download/quarterly_datasets/hpi_at_metro.csv",
+        "coverage": 0.302,
+        "sampleCount": 587,
+        "mdape": 0.1612,
+        "mape": 0.3889,
+        "medianBiasPct": 0.0132,
+        "shareWithin5Pct": 0.169,
+        "shareWithin10Pct": 0.341,
+        "shareWithin20Pct": 0.588,
+        "priceBands": [
+          {
+            "band": "< $250k",
+            "sampleCount": 8,
+            "mdape": 12.0794,
+            "shareWithin10Pct": 0,
+            "medianBiasPct": 12.0794
+          },
+          {
+            "band": "$250k - $500k",
+            "sampleCount": 67,
+            "mdape": 0.1881,
+            "shareWithin10Pct": 0.328,
+            "medianBiasPct": 0.1227
+          },
+          {
+            "band": "$500k - $1M",
+            "sampleCount": 445,
+            "mdape": 0.1546,
+            "shareWithin10Pct": 0.36,
+            "medianBiasPct": 0.008
+          },
+          {
+            "band": "$1M - $2M",
+            "sampleCount": 60,
+            "mdape": 0.1861,
+            "shareWithin10Pct": 0.267,
+            "medianBiasPct": -0.0437
+          },
+          {
+            "band": "> $2M",
+            "sampleCount": 7,
+            "mdape": 0.527,
+            "shareWithin10Pct": 0.286,
+            "medianBiasPct": -0.527
+          }
+        ],
+        "methods": [],
+        "engine_on_same_sales": {
+          "sampleCount": 587,
+          "mdape": 0.1114,
+          "shareWithin10Pct": 0.462,
+          "medianBiasPct": -0.0325
+        }
+      },
+      "engine_beats_assessor_ratio": false
+    },
+    "engine_calibrated": {
+      "description": "Same engine with the county calibration below passed in (calibration input): assessor value x county ratio, prior sale x FHFA metro HPI, hedonic x county scale, blended with weights from each component's calibration-half error. Fitted on the calibration half; measured on the evaluation half.",
+      "calibration": {
+        "assessorRatio": 1.0921,
+        "hedonicScale": 1.0369,
+        "weights": {
+          "assessor": 0.4855,
+          "priorSale": 0.2443,
+          "hedonic": 0.2702
+        },
+        "component_mdape_on_calibration_half": {
+          "assessor": 0.1077,
+          "priorSale": 0.1518,
+          "hedonic": 0.1444
+        },
+        "fitted_on": "calibration half (2057 sales, disjoint parcels from the evaluation half)"
+      },
+      "sampleCount": 1945,
+      "mdape": 0.1098,
+      "mape": 0.2849,
+      "medianBiasPct": 0.0125,
+      "shareWithin5Pct": 0.245,
+      "shareWithin10Pct": 0.471,
+      "shareWithin20Pct": 0.733,
+      "priceBands": [
+        {
+          "band": "< $250k",
+          "sampleCount": 28,
+          "mdape": 5.0673,
+          "shareWithin10Pct": 0,
+          "medianBiasPct": 5.0673
+        },
+        {
+          "band": "$250k - $500k",
+          "sampleCount": 215,
+          "mdape": 0.3,
+          "shareWithin10Pct": 0.205,
+          "medianBiasPct": 0.3
+        },
+        {
+          "band": "$500k - $1M",
+          "sampleCount": 1493,
+          "mdape": 0.092,
+          "shareWithin10Pct": 0.539,
+          "medianBiasPct": 0.0027
+        },
+        {
+          "band": "$1M - $2M",
+          "sampleCount": 188,
+          "mdape": 0.1757,
+          "shareWithin10Pct": 0.362,
+          "medianBiasPct": -0.0958
+        },
+        {
+          "band": "> $2M",
+          "sampleCount": 21,
+          "mdape": 0.2929,
+          "shareWithin10Pct": 0.048,
+          "medianBiasPct": -0.2929
+        }
+      ],
+      "methods": [
+        {
+          "method": "assessor + hedonic",
+          "sampleCount": 1361,
+          "mdape": 0.1105,
+          "shareWithin10Pct": 0.472,
+          "medianBiasPct": 0.0316
+        },
+        {
+          "method": "prior sale + assessor + hedonic",
+          "sampleCount": 584,
+          "mdape": 0.107,
+          "shareWithin10Pct": 0.471,
+          "medianBiasPct": -0.0375
+        }
+      ],
+      "engine_calibrated_beats_assessor_ratio": true
+    },
+    "engine_with_county_scale": {
+      "description": "Shipped engine output x one county-wide scale factor fitted on the calibration half (median sale / estimate). Shows how much of the error is a level bias.",
+      "factor": 1.0355,
+      "sampleCount": 1945,
+      "mdape": 0.1113,
+      "mape": 0.2854,
+      "medianBiasPct": 0.0098,
+      "shareWithin5Pct": 0.235,
+      "shareWithin10Pct": 0.454,
+      "shareWithin20Pct": 0.726,
+      "priceBands": [
+        {
+          "band": "< $250k",
+          "sampleCount": 28,
+          "mdape": 5.0242,
+          "shareWithin10Pct": 0,
+          "medianBiasPct": 5.0242
+        },
+        {
+          "band": "$250k - $500k",
+          "sampleCount": 215,
+          "mdape": 0.2906,
+          "shareWithin10Pct": 0.242,
+          "medianBiasPct": 0.2906
+        },
+        {
+          "band": "$500k - $1M",
+          "sampleCount": 1493,
+          "mdape": 0.0967,
+          "shareWithin10Pct": 0.516,
+          "medianBiasPct": -0.0012
+        },
+        {
+          "band": "$1M - $2M",
+          "sampleCount": 188,
+          "mdape": 0.1745,
+          "shareWithin10Pct": 0.324,
+          "medianBiasPct": -0.1038
+        },
+        {
+          "band": "> $2M",
+          "sampleCount": 21,
+          "mdape": 0.3149,
+          "shareWithin10Pct": 0.048,
+          "medianBiasPct": -0.3149
+        }
+      ],
+      "methods": [
+        {
+          "method": "assessor + hedonic",
+          "sampleCount": 1361,
+          "mdape": 0.1092,
+          "shareWithin10Pct": 0.457,
+          "medianBiasPct": 0.0142
+        },
+        {
+          "method": "prior sale + assessor + hedonic",
+          "sampleCount": 584,
+          "mdape": 0.1134,
+          "shareWithin10Pct": 0.449,
+          "medianBiasPct": 0.0016
+        }
+      ]
+    }
+  },
+  "42101": {
+    "countyFips": "42101",
+    "countyName": "Philadelphia County",
+    "stateCode": "PA",
+    "sampleCount": 3957,
+    "mdape": 0.2129,
+    "mape": 0.3097,
+    "medianBiasPct": -0.0848,
+    "shareWithin5Pct": 0.137,
+    "shareWithin10Pct": 0.274,
+    "shareWithin20Pct": 0.482,
+    "status": "withhold",
+    "withhold": true,
+    "withholdReason": "Valuation withheld: tested against 3957 recorded sales in this county, the model's typical error was 21.3% and only 48% of estimates were within 20% of the sale price.",
+    "supportedConfidenceMarginPct": 0.213,
+    "priceBands": [
+      {
+        "band": "< $250k",
+        "sampleCount": 1962,
+        "mdape": 0.2758,
+        "shareWithin10Pct": 0.213,
+        "medianBiasPct": -0.0166
+      },
+      {
+        "band": "$250k - $500k",
+        "sampleCount": 1500,
+        "mdape": 0.1801,
+        "shareWithin10Pct": 0.312,
+        "medianBiasPct": -0.1377
+      },
+      {
+        "band": "$500k - $1M",
+        "sampleCount": 409,
+        "mdape": 0.1257,
+        "shareWithin10Pct": 0.416,
+        "medianBiasPct": -0.0637
+      },
+      {
+        "band": "$1M - $2M",
+        "sampleCount": 68,
+        "mdape": 0.1741,
+        "shareWithin10Pct": 0.309,
+        "medianBiasPct": -0.1461
+      },
+      {
+        "band": "> $2M",
+        "sampleCount": 18,
+        "mdape": 0.1013,
+        "shareWithin10Pct": 0.5,
+        "medianBiasPct": -0.0774
+      }
+    ],
+    "methods": [
+      {
+        "method": "HPI Repeat-Sales Index + Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "sampleCount": 2695,
+        "mdape": 0.1869,
+        "shareWithin10Pct": 0.306,
+        "medianBiasPct": -0.097
+      },
+      {
+        "method": "Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "sampleCount": 1255,
+        "mdape": 0.2545,
+        "shareWithin10Pct": 0.206,
+        "medianBiasPct": -0.0415
+      },
+      {
+        "method": "HPI Repeat-Sales Index + Hedonic Micro-Model",
+        "sampleCount": 6,
+        "mdape": 0.5406,
+        "shareWithin10Pct": 0.167,
+        "medianBiasPct": 0.0487
+      },
+      {
+        "method": "Hedonic Micro-Model",
+        "sampleCount": 1,
+        "mdape": 0.5679,
+        "shareWithin10Pct": 0,
+        "medianBiasPct": -0.5679
+      }
+    ],
+    "evaluations": [
+      {
+        "parcelId": "481365400",
+        "salePrice": 415000,
+        "saleDate": "2025-04-20",
+        "estimatedValue": 270000,
+        "dollarError": -145000,
+        "percentageError": -0.3494,
+        "absPercentageError": 0.3494,
+        "valuationMethod": "HPI Repeat-Sales Index + Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 215800
+        },
+        "priorSale": {
+          "price": 155000,
+          "date": "2009-08-31",
+          "year": 2009
+        }
+      },
+      {
+        "parcelId": "663265900",
+        "salePrice": 375000,
+        "saleDate": "2025-05-28",
+        "estimatedValue": 295000,
+        "dollarError": -80000,
+        "percentageError": -0.2133,
+        "absPercentageError": 0.2133,
+        "valuationMethod": "HPI Repeat-Sales Index + Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 235600
+        },
+        "priorSale": {
+          "price": 325000,
+          "date": "2024-07-11",
+          "year": 2024
+        }
+      },
+      {
+        "parcelId": "641189400",
+        "salePrice": 377000,
+        "saleDate": "2026-04-23",
+        "estimatedValue": 413000,
+        "dollarError": 36000,
+        "percentageError": 0.0955,
+        "absPercentageError": 0.0955,
+        "valuationMethod": "HPI Repeat-Sales Index + Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 407400
+        },
+        "priorSale": {
+          "price": 385000,
+          "date": "2024-06-25",
+          "year": 2024
+        }
+      },
+      {
+        "parcelId": "331039600",
+        "salePrice": 70000,
+        "saleDate": "2026-01-02",
+        "estimatedValue": 62000,
+        "dollarError": -8000,
+        "percentageError": -0.1143,
+        "absPercentageError": 0.1143,
+        "valuationMethod": "Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 69600
+        },
+        "priorSale": {
+          "price": 23000,
+          "date": "2002-12-23",
+          "year": 2002
+        }
+      },
+      {
+        "parcelId": "312041800",
+        "salePrice": 415000,
+        "saleDate": "2026-04-03",
+        "estimatedValue": 270000,
+        "dollarError": -145000,
+        "percentageError": -0.3494,
+        "absPercentageError": 0.3494,
+        "valuationMethod": "HPI Repeat-Sales Index + Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 281200
+        },
+        "priorSale": {
+          "price": 80000,
+          "date": "2013-10-11",
+          "year": 2013
+        }
+      },
+      {
+        "parcelId": "482231300",
+        "salePrice": 195000,
+        "saleDate": "2025-11-12",
+        "estimatedValue": 167000,
+        "dollarError": -28000,
+        "percentageError": -0.1436,
+        "absPercentageError": 0.1436,
+        "valuationMethod": "HPI Repeat-Sales Index + Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 139500
+        },
+        "priorSale": {
+          "price": 145000,
+          "date": "2022-04-28",
+          "year": 2022
+        }
+      },
+      {
+        "parcelId": "542358200",
+        "salePrice": 250000,
+        "saleDate": "2026-04-01",
+        "estimatedValue": 200000,
+        "dollarError": -50000,
+        "percentageError": -0.2,
+        "absPercentageError": 0.2,
+        "valuationMethod": "Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 223000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "172371800",
+        "salePrice": 215000,
+        "saleDate": "2025-08-20",
+        "estimatedValue": 154000,
+        "dollarError": -61000,
+        "percentageError": -0.2837,
+        "absPercentageError": 0.2837,
+        "valuationMethod": "HPI Repeat-Sales Index + Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 143800
+        },
+        "priorSale": {
+          "price": 87000,
+          "date": "2016-10-20",
+          "year": 2016
+        }
+      },
+      {
+        "parcelId": "212192000",
+        "salePrice": 400000,
+        "saleDate": "2025-08-29",
+        "estimatedValue": 276000,
+        "dollarError": -124000,
+        "percentageError": -0.31,
+        "absPercentageError": 0.31,
+        "valuationMethod": "HPI Repeat-Sales Index + Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 232800
+        },
+        "priorSale": {
+          "price": 161000,
+          "date": "2005-01-06",
+          "year": 2005
+        }
+      },
+      {
+        "parcelId": "513005500",
+        "salePrice": 270000,
+        "saleDate": "2025-07-21",
+        "estimatedValue": 79000,
+        "dollarError": -191000,
+        "percentageError": -0.7074,
+        "absPercentageError": 0.7074,
+        "valuationMethod": "HPI Repeat-Sales Index + Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 59800
+        },
+        "priorSale": {
+          "price": 80000,
+          "date": "2024-07-25",
+          "year": 2024
+        }
+      },
+      {
+        "parcelId": "131238500",
+        "salePrice": 100100,
+        "saleDate": "2025-12-30",
+        "estimatedValue": 139000,
+        "dollarError": 38900,
+        "percentageError": 0.3886,
+        "absPercentageError": 0.3886,
+        "valuationMethod": "Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 112300
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "451388800",
+        "salePrice": 215000,
+        "saleDate": "2026-02-04",
+        "estimatedValue": 183000,
+        "dollarError": -32000,
+        "percentageError": -0.1488,
+        "absPercentageError": 0.1488,
+        "valuationMethod": "HPI Repeat-Sales Index + Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 197900
+        },
+        "priorSale": {
+          "price": 65000,
+          "date": "2004-06-30",
+          "year": 2004
+        }
+      },
+      {
+        "parcelId": "663227100",
+        "salePrice": 325000,
+        "saleDate": "2025-03-07",
+        "estimatedValue": 331000,
+        "dollarError": 6000,
+        "percentageError": 0.0185,
+        "absPercentageError": 0.0185,
+        "valuationMethod": "HPI Repeat-Sales Index + Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 249200
+        },
+        "priorSale": {
+          "price": 299900,
+          "date": "2021-11-01",
+          "year": 2021
+        }
+      },
+      {
+        "parcelId": "513024510",
+        "salePrice": 180000,
+        "saleDate": "2026-03-31",
+        "estimatedValue": 112000,
+        "dollarError": -68000,
+        "percentageError": -0.3778,
+        "absPercentageError": 0.3778,
+        "valuationMethod": "Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 99300
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "406155800",
+        "salePrice": 57500,
+        "saleDate": "2025-05-27",
+        "estimatedValue": 120000,
+        "dollarError": 62500,
+        "percentageError": 1.087,
+        "absPercentageError": 1.087,
+        "valuationMethod": "Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 91900
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "603034700",
+        "salePrice": 179900,
+        "saleDate": "2026-05-28",
+        "estimatedValue": 124000,
+        "dollarError": -55900,
+        "percentageError": -0.3107,
+        "absPercentageError": 0.3107,
+        "valuationMethod": "Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 144500
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "411349300",
+        "salePrice": 90000,
+        "saleDate": "2025-02-11",
+        "estimatedValue": 120000,
+        "dollarError": 30000,
+        "percentageError": 0.3333,
+        "absPercentageError": 0.3333,
+        "valuationMethod": "HPI Repeat-Sales Index + Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 106700
+        },
+        "priorSale": {
+          "price": 70000,
+          "date": "2017-12-20",
+          "year": 2017
+        }
+      },
+      {
+        "parcelId": "181288700",
+        "salePrice": 1175000,
+        "saleDate": "2026-03-12",
+        "estimatedValue": 1000000,
+        "dollarError": -175000,
+        "percentageError": -0.1489,
+        "absPercentageError": 0.1489,
+        "valuationMethod": "HPI Repeat-Sales Index + Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 816000
+        },
+        "priorSale": {
+          "price": 1080000,
+          "date": "2024-12-12",
+          "year": 2024
+        }
+      },
+      {
+        "parcelId": "394039700",
+        "salePrice": 150000,
+        "saleDate": "2025-05-23",
+        "estimatedValue": 226000,
+        "dollarError": 76000,
+        "percentageError": 0.5067,
+        "absPercentageError": 0.5067,
+        "valuationMethod": "HPI Repeat-Sales Index + Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 186800
+        },
+        "priorSale": {
+          "price": 120000,
+          "date": "2013-06-21",
+          "year": 2013
+        }
+      },
+      {
+        "parcelId": "481064200",
+        "salePrice": 387000,
+        "saleDate": "2025-01-15",
+        "estimatedValue": 394000,
+        "dollarError": 7000,
+        "percentageError": 0.0181,
+        "absPercentageError": 0.0181,
+        "valuationMethod": "HPI Repeat-Sales Index + Pennsylvania Certified Market Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2024,
+          "value": 290900
+        },
+        "priorSale": {
+          "price": 352500,
+          "date": "2019-06-11",
+          "year": 2019
+        }
+      }
+    ],
+    "lastVerified": "2026-11-18",
+    "sourceUrl": "https://phl.carto.com/api/v2/sql?q=SELECT+*+FROM+rtt_summary+LIMIT+1",
+    "methodPaths": [
+      {
+        "method": "prior sale + assessor + hedonic",
+        "sampleCount": 2695,
+        "mdape": 0.1869,
+        "shareWithin10Pct": 0.306,
+        "medianBiasPct": -0.097
+      },
+      {
+        "method": "assessor + hedonic",
+        "sampleCount": 1255,
+        "mdape": 0.2545,
+        "shareWithin10Pct": 0.206,
+        "medianBiasPct": -0.0415
+      },
+      {
+        "method": "prior sale + hedonic",
+        "sampleCount": 6,
+        "mdape": 0.5406,
+        "shareWithin10Pct": 0.167,
+        "medianBiasPct": 0.0487
+      },
+      {
+        "method": "hedonic",
+        "sampleCount": 1,
+        "mdape": 0.5679,
+        "shareWithin10Pct": 0,
+        "medianBiasPct": -0.5679
+      }
+    ],
+    "source_url": "https://phl.carto.com/api/v2/sql?q=SELECT+*+FROM+rtt_summary+LIMIT+1",
+    "source_urls": [
+      "https://phl.carto.com/api/v2/sql (table rtt_summary)",
+      "https://phl.carto.com/api/v2/sql (table assessments)",
+      "https://phl.carto.com/api/v2/sql (table opa_properties_public)"
+    ],
+    "source_dataset": "City of Philadelphia open data (CARTO SQL API): Real Estate Transfers rtt_summary, OPA property assessments history (assessments), OPA properties (opa_properties_public)",
+    "retrieved": "2026-11-18",
+    "sale_window": {
+      "start": "2025-01-01",
+      "end": "2026-09-30",
+      "first_sale": "2025-01-01",
+      "last_sale": "2026-08-10"
+    },
+    "leakage_rule": "OPA certified market value for a tax year strictly before the sale's calendar year (no change dates are published, so the roll of the sale's own year is never used).",
+    "assessment_kind": "certified market value",
+    "neighborhood_data": "County bundle block-group record (2020-2024 ACS 5-year), located by point-in-polygon",
+    "filters": [
+      {
+        "id": "window",
+        "description": "Sale date 2025-01-01 to 2026-09-30",
+        "kept": 56760
+      },
+      {
+        "id": "deed_type",
+        "description": "Document type exactly 'DEED' (drops sheriff's deeds, land-bank deeds, 'MISCELLANEOUS DEED' and other deed types)",
+        "dropped": 4204
+      },
+      {
+        "id": "has_account",
+        "description": "Deed is matched to an OPA account",
+        "dropped": 9161
+      },
+      {
+        "id": "single_parcel",
+        "description": "property_count = 1 (one property on the deed)",
+        "dropped": 5210
+      },
+      {
+        "id": "price_10k",
+        "description": "Total consideration >= $10,000 (drops $1 / nominal transfers)",
+        "dropped": 10569
+      },
+      {
+        "id": "single_family",
+        "description": "OPA category_code 1 'SINGLE FAMILY'",
+        "dropped": 4327
+      },
+      {
+        "id": "parties",
+        "description": "Name screen: no government, sheriff, land bank, lender, trustee or estate party, and grantor/grantee do not share a first name-token (surname in OPA's LAST FIRST order) - a heuristic for family transfers",
+        "dropped": 3357
+      },
+      {
+        "id": "one_deed_that_day",
+        "description": "Only one deed recorded for the account on that date",
+        "dropped": 158
+      },
+      {
+        "id": "deterministic_sample",
+        "description": "Duplicate records of one sale collapsed; if more than 8000 sales remain, the 8000 with the lowest FNV-1a hash of parcel+document are kept",
+        "dropped": 11774
+      },
+      {
+        "id": "pre_sale_roll",
+        "description": "A pre-sale assessment exists under the leakage rule: OPA certified market value for a tax year strictly before the sale's calendar year (no change dates are published, so the roll of the sale's own year is never used).",
+        "dropped": 85
+      },
+      {
+        "id": "located",
+        "description": "Parcel located inside one of the county bundle's block groups",
+        "dropped": 0
+      },
+      {
+        "id": "price_25k",
+        "description": "Sale price >= $25,000 (the floor runCountyValuationBacktest scores; keeps engine and baselines on the same sales)",
+        "dropped": 62
+      }
+    ],
+    "sample": {
+      "usable": 7853,
+      "calibration": 3896,
+      "evaluation": 3957,
+      "split": "by parcel (FNV-1a hash of the parcel id); every metric below is on the evaluation half",
+      "with_prior_sale": 2882,
+      "with_neighborhood_hv": 3942
+    },
+    "baseline": {
+      "assessor_ratio": {
+        "description": "Pre-sale assessor value x median(sale price / pre-sale assessor value) of the calibration half",
+        "ratio": 1.2188,
+        "sampleCount": 3957,
+        "mdape": 0.2143,
+        "mape": 0.351,
+        "medianBiasPct": -0.0021,
+        "shareWithin5Pct": 0.125,
+        "shareWithin10Pct": 0.251,
+        "shareWithin20Pct": 0.47,
+        "priceBands": [
+          {
+            "band": "< $250k",
+            "sampleCount": 1962,
+            "mdape": 0.3131,
+            "shareWithin10Pct": 0.178,
+            "medianBiasPct": 0.117
+          },
+          {
+            "band": "$250k - $500k",
+            "sampleCount": 1500,
+            "mdape": 0.1703,
+            "shareWithin10Pct": 0.311,
+            "medianBiasPct": -0.0665
+          },
+          {
+            "band": "$500k - $1M",
+            "sampleCount": 409,
+            "mdape": 0.1494,
+            "shareWithin10Pct": 0.367,
+            "medianBiasPct": -0.0163
+          },
+          {
+            "band": "$1M - $2M",
+            "sampleCount": 68,
+            "mdape": 0.1961,
+            "shareWithin10Pct": 0.235,
+            "medianBiasPct": -0.149
+          },
+          {
+            "band": "> $2M",
+            "sampleCount": 18,
+            "mdape": 0.0963,
+            "shareWithin10Pct": 0.5,
+            "medianBiasPct": -0.0755
+          }
+        ],
+        "methods": []
+      },
+      "prior_sale_hpi": {
+        "description": "Prior recorded sale x FHFA all-transactions HPI change for metro division 37964 (index at the prior sale's quarter -> latest quarter ended >= 90 days before the sale)",
+        "source_url": "https://www.fhfa.gov/hpi/download/quarterly_datasets/hpi_at_metro.csv",
+        "coverage": 0.728,
+        "sampleCount": 2880,
+        "mdape": 0.2822,
+        "mape": 0.3504,
+        "medianBiasPct": -0.1047,
+        "shareWithin5Pct": 0.124,
+        "shareWithin10Pct": 0.225,
+        "shareWithin20Pct": 0.389,
+        "priceBands": [
+          {
+            "band": "< $250k",
+            "sampleCount": 1300,
+            "mdape": 0.3713,
+            "shareWithin10Pct": 0.158,
+            "medianBiasPct": -0.2144
+          },
+          {
+            "band": "$250k - $500k",
+            "sampleCount": 1173,
+            "mdape": 0.2344,
+            "shareWithin10Pct": 0.278,
+            "medianBiasPct": -0.0786
+          },
+          {
+            "band": "$500k - $1M",
+            "sampleCount": 345,
+            "mdape": 0.1877,
+            "shareWithin10Pct": 0.293,
+            "medianBiasPct": 0.0492
+          },
+          {
+            "band": "$1M - $2M",
+            "sampleCount": 48,
+            "mdape": 0.1866,
+            "shareWithin10Pct": 0.313,
+            "medianBiasPct": -0.0206
+          },
+          {
+            "band": "> $2M",
+            "sampleCount": 14,
+            "mdape": 0.3729,
+            "shareWithin10Pct": 0.071,
+            "medianBiasPct": 0.3729
+          }
+        ],
+        "methods": [],
+        "engine_on_same_sales": {
+          "sampleCount": 2880,
+          "mdape": 0.1924,
+          "shareWithin10Pct": 0.302,
+          "medianBiasPct": -0.093
+        }
+      },
+      "engine_beats_assessor_ratio": true
+    },
+    "engine_calibrated": {
+      "description": "Same engine with the county calibration below passed in (calibration input): assessor value x county ratio, prior sale x FHFA metro HPI, hedonic x county scale, blended with weights from each component's calibration-half error. Fitted on the calibration half; measured on the evaluation half.",
+      "calibration": {
+        "assessorRatio": 1.2188,
+        "hedonicScale": 1.1865,
+        "weights": {
+          "assessor": 0.43,
+          "priorSale": 0.2431,
+          "hedonic": 0.3269
+        },
+        "component_mdape_on_calibration_half": {
+          "assessor": 0.2188,
+          "priorSale": 0.291,
+          "hedonic": 0.251
+        },
+        "fitted_on": "calibration half (3896 sales, disjoint parcels from the evaluation half)"
+      },
+      "sampleCount": 3957,
+      "mdape": 0.208,
+      "mape": 0.3384,
+      "medianBiasPct": -0.0011,
+      "shareWithin5Pct": 0.15,
+      "shareWithin10Pct": 0.286,
+      "shareWithin20Pct": 0.489,
+      "priceBands": [
+        {
+          "band": "< $250k",
+          "sampleCount": 1962,
+          "mdape": 0.3096,
+          "shareWithin10Pct": 0.186,
+          "medianBiasPct": 0.1148
+        },
+        {
+          "band": "$250k - $500k",
+          "sampleCount": 1500,
+          "mdape": 0.144,
+          "shareWithin10Pct": 0.379,
+          "medianBiasPct": -0.0608
+        },
+        {
+          "band": "$500k - $1M",
+          "sampleCount": 409,
+          "mdape": 0.132,
+          "shareWithin10Pct": 0.416,
+          "medianBiasPct": 0.0088
+        },
+        {
+          "band": "$1M - $2M",
+          "sampleCount": 68,
+          "mdape": 0.1765,
+          "shareWithin10Pct": 0.353,
+          "medianBiasPct": -0.0958
+        },
+        {
+          "band": "> $2M",
+          "sampleCount": 18,
+          "mdape": 0.1334,
+          "shareWithin10Pct": 0.333,
+          "medianBiasPct": -0.052
+        }
+      ],
+      "methods": [
+        {
+          "method": "prior sale + assessor + hedonic",
+          "sampleCount": 2701,
+          "mdape": 0.1857,
+          "shareWithin10Pct": 0.312,
+          "medianBiasPct": -0.0425
+        },
+        {
+          "method": "assessor + hedonic",
+          "sampleCount": 1256,
+          "mdape": 0.2815,
+          "shareWithin10Pct": 0.229,
+          "medianBiasPct": 0.1448
+        }
+      ],
+      "engine_calibrated_beats_assessor_ratio": true
+    },
+    "engine_with_county_scale": {
+      "description": "Shipped engine output x one county-wide scale factor fitted on the calibration half (median sale / estimate). Shows how much of the error is a level bias.",
+      "factor": 1.0933,
+      "sampleCount": 3957,
+      "mdape": 0.2093,
+      "mape": 0.3266,
+      "medianBiasPct": 0.0005,
+      "shareWithin5Pct": 0.145,
+      "shareWithin10Pct": 0.269,
+      "shareWithin20Pct": 0.483,
+      "priceBands": [
+        {
+          "band": "< $250k",
+          "sampleCount": 1962,
+          "mdape": 0.2899,
+          "shareWithin10Pct": 0.206,
+          "medianBiasPct": 0.0752
+        },
+        {
+          "band": "$250k - $500k",
+          "sampleCount": 1500,
+          "mdape": 0.1714,
+          "shareWithin10Pct": 0.322,
+          "medianBiasPct": -0.0573
+        },
+        {
+          "band": "$500k - $1M",
+          "sampleCount": 409,
+          "mdape": 0.1493,
+          "shareWithin10Pct": 0.367,
+          "medianBiasPct": 0.0236
+        },
+        {
+          "band": "$1M - $2M",
+          "sampleCount": 68,
+          "mdape": 0.1569,
+          "shareWithin10Pct": 0.338,
+          "medianBiasPct": -0.0664
+        },
+        {
+          "band": "> $2M",
+          "sampleCount": 18,
+          "mdape": 0.119,
+          "shareWithin10Pct": 0.278,
+          "medianBiasPct": 0.0087
+        }
+      ],
+      "methods": [
+        {
+          "method": "prior sale + assessor + hedonic",
+          "sampleCount": 2695,
+          "mdape": 0.1944,
+          "shareWithin10Pct": 0.292,
+          "medianBiasPct": -0.0128
+        },
+        {
+          "method": "assessor + hedonic",
+          "sampleCount": 1255,
+          "mdape": 0.255,
+          "shareWithin10Pct": 0.22,
+          "medianBiasPct": 0.0479
+        },
+        {
+          "method": "prior sale + hedonic",
+          "sampleCount": 6,
+          "mdape": 0.591,
+          "shareWithin10Pct": 0.167,
+          "medianBiasPct": 0.1465
+        },
+        {
+          "method": "hedonic",
+          "sampleCount": 1,
+          "mdape": 0.5275,
+          "shareWithin10Pct": 0,
+          "medianBiasPct": -0.5275
+        }
+      ]
+    }
   },
   "53033": {
     "countyFips": "53033",
     "countyName": "King County",
     "stateCode": "WA",
-    "sampleCount": 5,
-    "mdape": 0.0949,
-    "mape": 0.0906,
-    "medianBiasPct": 0.0949,
-    "shareWithin5Pct": 0,
-    "shareWithin10Pct": 0.8,
-    "shareWithin20Pct": 1,
+    "sampleCount": 3409,
+    "mdape": 0.0979,
+    "mape": 0.1356,
+    "medianBiasPct": -0.0423,
+    "shareWithin5Pct": 0.276,
+    "shareWithin10Pct": 0.511,
+    "shareWithin20Pct": 0.781,
     "status": "acceptable",
     "withhold": false,
     "withholdReason": null,
-    "supportedConfidenceMarginPct": 0.119,
+    "supportedConfidenceMarginPct": 0.098,
     "priceBands": [
       {
+        "band": "$250k - $500k",
+        "sampleCount": 88,
+        "mdape": 0.1049,
+        "shareWithin10Pct": 0.489,
+        "medianBiasPct": 0.0078
+      },
+      {
         "band": "$500k - $1M",
-        "sampleCount": 3,
-        "mdape": 0.0949,
-        "shareWithin10Pct": 1
+        "sampleCount": 1504,
+        "mdape": 0.0788,
+        "shareWithin10Pct": 0.596,
+        "medianBiasPct": -0.0027
       },
       {
         "band": "$1M - $2M",
-        "sampleCount": 2,
-        "mdape": 0.0877,
-        "shareWithin10Pct": 0.5
+        "sampleCount": 1313,
+        "mdape": 0.1058,
+        "shareWithin10Pct": 0.472,
+        "medianBiasPct": -0.0658
+      },
+      {
+        "band": "> $2M",
+        "sampleCount": 504,
+        "mdape": 0.1421,
+        "shareWithin10Pct": 0.365,
+        "medianBiasPct": -0.1306
+      }
+    ],
+    "methods": [
+      {
+        "method": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "sampleCount": 2789,
+        "mdape": 0.0892,
+        "shareWithin10Pct": 0.543,
+        "medianBiasPct": -0.0419
+      },
+      {
+        "method": "Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "sampleCount": 620,
+        "mdape": 0.1415,
+        "shareWithin10Pct": 0.368,
+        "medianBiasPct": -0.0434
       }
     ],
     "evaluations": [
       {
-        "parcelId": "7230000100",
-        "salePrice": 875000,
-        "saleDate": "2024-05-10",
-        "estimatedValue": 958000,
-        "dollarError": 83000,
-        "percentageError": 0.0949,
-        "absPercentageError": 0.0949,
-        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
-        "within5Pct": false,
-        "within10Pct": true,
-        "within20Pct": true
-      },
-      {
-        "parcelId": "7230000145",
-        "salePrice": 1040000,
-        "saleDate": "2024-06-22",
-        "estimatedValue": 1149000,
-        "dollarError": 109000,
-        "percentageError": 0.1048,
-        "absPercentageError": 0.1048,
+        "parcelId": "5702380130",
+        "salePrice": 630000,
+        "saleDate": "2025-05-13",
+        "estimatedValue": 539000,
+        "dollarError": -91000,
+        "percentageError": -0.1444,
+        "absPercentageError": 0.1444,
         "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
         "within5Pct": false,
         "within10Pct": false,
-        "within20Pct": true
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 539000
+        },
+        "priorSale": {
+          "price": 196100,
+          "date": "2014-09-05",
+          "year": 2014
+        }
       },
       {
-        "parcelId": "7230000190",
-        "salePrice": 730000,
-        "saleDate": "2024-03-18",
-        "estimatedValue": 801000,
-        "dollarError": 71000,
-        "percentageError": 0.0973,
-        "absPercentageError": 0.0973,
+        "parcelId": "3649100330",
+        "salePrice": 1280000,
+        "saleDate": "2025-07-17",
+        "estimatedValue": 1304000,
+        "dollarError": 24000,
+        "percentageError": 0.0188,
+        "absPercentageError": 0.0188,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 1133000
+        },
+        "priorSale": {
+          "price": 1095000,
+          "date": "2021-05-08",
+          "year": 2021
+        }
+      },
+      {
+        "parcelId": "7588700129",
+        "salePrice": 1051000,
+        "saleDate": "2025-06-13",
+        "estimatedValue": 1054000,
+        "dollarError": 3000,
+        "percentageError": 0.0029,
+        "absPercentageError": 0.0029,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 973000
+        },
+        "priorSale": {
+          "price": 505000,
+          "date": "2009-04-14",
+          "year": 2009
+        }
+      },
+      {
+        "parcelId": "2767601662",
+        "salePrice": 1450000,
+        "saleDate": "2025-05-28",
+        "estimatedValue": 1289000,
+        "dollarError": -161000,
+        "percentageError": -0.111,
+        "absPercentageError": 0.111,
         "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
         "within5Pct": false,
-        "within10Pct": true,
-        "within20Pct": true
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 1169000
+        },
+        "priorSale": {
+          "price": 650000,
+          "date": "2013-07-23",
+          "year": 2013
+        }
       },
       {
-        "parcelId": "7230000220",
-        "salePrice": 1290000,
-        "saleDate": "2024-08-14",
-        "estimatedValue": 1381000,
-        "dollarError": 91000,
-        "percentageError": 0.0705,
-        "absPercentageError": 0.0705,
+        "parcelId": "2522059167",
+        "salePrice": 615000,
+        "saleDate": "2025-04-18",
+        "estimatedValue": 612000,
+        "dollarError": -3000,
+        "percentageError": -0.0049,
+        "absPercentageError": 0.0049,
         "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
-        "within5Pct": false,
+        "within5Pct": true,
         "within10Pct": true,
-        "within20Pct": true
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 517000
+        },
+        "priorSale": {
+          "price": 439450,
+          "date": "2020-01-09",
+          "year": 2020
+        }
       },
       {
-        "parcelId": "7230000280",
-        "salePrice": 820000,
-        "saleDate": "2024-04-29",
-        "estimatedValue": 890000,
-        "dollarError": 70000,
-        "percentageError": 0.0854,
-        "absPercentageError": 0.0854,
+        "parcelId": "6306100250",
+        "salePrice": 560000,
+        "saleDate": "2025-12-01",
+        "estimatedValue": 548000,
+        "dollarError": -12000,
+        "percentageError": -0.0214,
+        "absPercentageError": 0.0214,
         "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
-        "within5Pct": false,
+        "within5Pct": true,
         "within10Pct": true,
-        "within20Pct": true
-      }
-    ],
-    "lastVerified": "2026-11-15",
-    "sourceUrl": "https://kingcounty.gov/en/dept/assessor"
-  },
-  "06037": {
-    "countyFips": "06037",
-    "countyName": "Los Angeles County",
-    "stateCode": "CA",
-    "sampleCount": 6,
-    "mdape": 0.1447,
-    "mape": 0.1402,
-    "medianBiasPct": 0.1447,
-    "shareWithin5Pct": 0,
-    "shareWithin10Pct": 0.167,
-    "shareWithin20Pct": 0.833,
-    "status": "withhold",
-    "withhold": true,
-    "withholdReason": "County valuation back-test against recorder sales indicates error exceeding acceptable tolerance (MdAPE: 14.5%, 20% share: 83.3%). Valuation withheld pending model recalibration.",
-    "supportedConfidenceMarginPct": 0.18,
-    "priceBands": [
-      {
-        "band": "$500k - $1M",
-        "sampleCount": 3,
-        "mdape": 0.1846,
-        "shareWithin10Pct": 0
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 477000
+        },
+        "priorSale": {
+          "price": 533000,
+          "date": "2023-06-22",
+          "year": 2023
+        }
       },
       {
-        "band": "$1M - $2M",
-        "sampleCount": 3,
-        "mdape": 0.1048,
-        "shareWithin10Pct": 0.333
-      }
-    ],
-    "evaluations": [
-      {
-        "parcelId": "5406002015",
+        "parcelId": "2672300050",
         "salePrice": 945000,
-        "saleDate": "2024-06-12",
-        "estimatedValue": 1080000,
-        "dollarError": 135000,
-        "percentageError": 0.1429,
-        "absPercentageError": 0.1429,
-        "valuationMethod": "HPI Repeat-Sales Index + Prop 13 Base-Year Index (2018) + Hedonic Micro-Model",
-        "within5Pct": false,
-        "within10Pct": false,
-        "within20Pct": true
-      },
-      {
-        "parcelId": "5406002018",
-        "salePrice": 1120000,
-        "saleDate": "2024-08-20",
-        "estimatedValue": 1284000,
-        "dollarError": 164000,
-        "percentageError": 0.1464,
-        "absPercentageError": 0.1464,
-        "valuationMethod": "HPI Repeat-Sales Index + Prop 13 Base-Year Index (2019) + Hedonic Micro-Model",
-        "within5Pct": false,
-        "within10Pct": false,
-        "within20Pct": true
-      },
-      {
-        "parcelId": "5356072004",
-        "salePrice": 780000,
-        "saleDate": "2024-04-18",
-        "estimatedValue": 924000,
-        "dollarError": 144000,
-        "percentageError": 0.1846,
-        "absPercentageError": 0.1846,
-        "valuationMethod": "HPI Repeat-Sales Index + Prop 13 Base-Year Index (2017) + Hedonic Micro-Model",
-        "within5Pct": false,
-        "within10Pct": false,
-        "within20Pct": true
-      },
-      {
-        "parcelId": "4091001009",
-        "salePrice": 1350000,
-        "saleDate": "2024-09-02",
-        "estimatedValue": 1431000,
-        "dollarError": 81000,
-        "percentageError": 0.06,
-        "absPercentageError": 0.06,
-        "valuationMethod": "HPI Repeat-Sales Index + Prop 13 Base-Year Index (2020) + Hedonic Micro-Model",
+        "saleDate": "2026-03-13",
+        "estimatedValue": 857000,
+        "dollarError": -88000,
+        "percentageError": -0.0931,
+        "absPercentageError": 0.0931,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
         "within5Pct": false,
         "within10Pct": true,
-        "within20Pct": true
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2026,
+          "value": 789000
+        },
+        "priorSale": {
+          "price": 585000,
+          "date": "2019-11-14",
+          "year": 2019
+        }
       },
       {
-        "parcelId": "5730044012",
-        "salePrice": 890000,
-        "saleDate": "2024-05-15",
-        "estimatedValue": 1070000,
-        "dollarError": 180000,
-        "percentageError": 0.2022,
-        "absPercentageError": 0.2022,
-        "valuationMethod": "HPI Repeat-Sales Index + Prop 13 Base-Year Index (2016) + Hedonic Micro-Model",
+        "parcelId": "6414100654",
+        "salePrice": 865000,
+        "saleDate": "2025-05-09",
+        "estimatedValue": 948000,
+        "dollarError": 83000,
+        "percentageError": 0.096,
+        "absPercentageError": 0.096,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
         "within5Pct": false,
-        "within10Pct": false,
-        "within20Pct": false
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 791000
+        },
+        "priorSale": {
+          "price": 674950,
+          "date": "2019-06-04",
+          "year": 2019
+        }
       },
       {
-        "parcelId": "1060201022",
-        "salePrice": 1650000,
-        "saleDate": "2024-07-30",
-        "estimatedValue": 1823000,
-        "dollarError": 173000,
-        "percentageError": 0.1048,
-        "absPercentageError": 0.1048,
-        "valuationMethod": "HPI Repeat-Sales Index + Prop 13 Base-Year Index (2020) + Hedonic Micro-Model",
+        "parcelId": "3211240080",
+        "salePrice": 949950,
+        "saleDate": "2025-06-04",
+        "estimatedValue": 1022000,
+        "dollarError": 72050,
+        "percentageError": 0.0758,
+        "absPercentageError": 0.0758,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 853000
+        },
+        "priorSale": {
+          "price": 400000,
+          "date": "2012-08-31",
+          "year": 2012
+        }
+      },
+      {
+        "parcelId": "5499700045",
+        "salePrice": 1315000,
+        "saleDate": "2025-11-12",
+        "estimatedValue": 1263000,
+        "dollarError": -52000,
+        "percentageError": -0.0395,
+        "absPercentageError": 0.0395,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 1198000
+        },
+        "priorSale": {
+          "price": 679000,
+          "date": "2014-10-30",
+          "year": 2014
+        }
+      },
+      {
+        "parcelId": "1218000308",
+        "salePrice": 685000,
+        "saleDate": "2025-09-18",
+        "estimatedValue": 741000,
+        "dollarError": 56000,
+        "percentageError": 0.0818,
+        "absPercentageError": 0.0818,
+        "valuationMethod": "Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 705000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "2787300350",
+        "salePrice": 635000,
+        "saleDate": "2025-06-18",
+        "estimatedValue": 588000,
+        "dollarError": -47000,
+        "percentageError": -0.074,
+        "absPercentageError": 0.074,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 532000
+        },
+        "priorSale": {
+          "price": 289500,
+          "date": "2015-06-08",
+          "year": 2015
+        }
+      },
+      {
+        "parcelId": "1180002005",
+        "salePrice": 739880,
+        "saleDate": "2025-04-24",
+        "estimatedValue": 614000,
+        "dollarError": -125880,
+        "percentageError": -0.1701,
+        "absPercentageError": 0.1701,
+        "valuationMethod": "Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
         "within5Pct": false,
         "within10Pct": false,
-        "within20Pct": true
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 568000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "3691300070",
+        "salePrice": 719950,
+        "saleDate": "2026-04-15",
+        "estimatedValue": 434000,
+        "dollarError": -285950,
+        "percentageError": -0.3972,
+        "absPercentageError": 0.3972,
+        "valuationMethod": "Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2026,
+          "value": 262000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "7739100215",
+        "salePrice": 1438125,
+        "saleDate": "2025-10-05",
+        "estimatedValue": 1299000,
+        "dollarError": -139125,
+        "percentageError": -0.0967,
+        "absPercentageError": 0.0967,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 1256000
+        },
+        "priorSale": {
+          "price": 485000,
+          "date": "2003-09-09",
+          "year": 2003
+        }
+      },
+      {
+        "parcelId": "8813400485",
+        "salePrice": 975000,
+        "saleDate": "2025-06-19",
+        "estimatedValue": 773000,
+        "dollarError": -202000,
+        "percentageError": -0.2072,
+        "absPercentageError": 0.2072,
+        "valuationMethod": "Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 748000
+        },
+        "priorSale": null
+      },
+      {
+        "parcelId": "2591830210",
+        "salePrice": 990000,
+        "saleDate": "2025-02-26",
+        "estimatedValue": 966000,
+        "dollarError": -24000,
+        "percentageError": -0.0242,
+        "absPercentageError": 0.0242,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": true,
+        "within10Pct": true,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 935000
+        },
+        "priorSale": {
+          "price": 500000,
+          "date": "2017-03-14",
+          "year": 2017
+        }
+      },
+      {
+        "parcelId": "5113000250",
+        "salePrice": 610000,
+        "saleDate": "2025-01-07",
+        "estimatedValue": 505000,
+        "dollarError": -105000,
+        "percentageError": -0.1721,
+        "absPercentageError": 0.1721,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": true,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 468000
+        },
+        "priorSale": {
+          "price": 450000,
+          "date": "2024-07-18",
+          "year": 2024
+        }
+      },
+      {
+        "parcelId": "5634500080",
+        "salePrice": 1315000,
+        "saleDate": "2025-04-28",
+        "estimatedValue": 790000,
+        "dollarError": -525000,
+        "percentageError": -0.3992,
+        "absPercentageError": 0.3992,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 777000
+        },
+        "priorSale": {
+          "price": 650000,
+          "date": "2024-11-19",
+          "year": 2024
+        }
+      },
+      {
+        "parcelId": "0455000760",
+        "salePrice": 1095000,
+        "saleDate": "2025-09-09",
+        "estimatedValue": 1351000,
+        "dollarError": 256000,
+        "percentageError": 0.2338,
+        "absPercentageError": 0.2338,
+        "valuationMethod": "HPI Repeat-Sales Index + Washington King/WA 100% True & Fair Value + Hedonic Micro-Model",
+        "within5Pct": false,
+        "within10Pct": false,
+        "within20Pct": false,
+        "preSaleAssessment": {
+          "year": 2025,
+          "value": 1253000
+        },
+        "priorSale": {
+          "price": 685000,
+          "date": "2015-03-11",
+          "year": 2015
+        }
       }
     ],
-    "lastVerified": "2026-11-15",
-    "sourceUrl": "https://data.lacounty.gov/datasets/lacounty::assessor-parcels-data-2024"
+    "lastVerified": "2026-11-18",
+    "sourceUrl": "https://aqua.kingcounty.gov/extranet/assessor/Real%20Property%20Sales.zip",
+    "methodPaths": [
+      {
+        "method": "prior sale + assessor + hedonic",
+        "sampleCount": 2789,
+        "mdape": 0.0892,
+        "shareWithin10Pct": 0.543,
+        "medianBiasPct": -0.0419
+      },
+      {
+        "method": "assessor + hedonic",
+        "sampleCount": 620,
+        "mdape": 0.1415,
+        "shareWithin10Pct": 0.368,
+        "medianBiasPct": -0.0434
+      }
+    ],
+    "source_url": "https://aqua.kingcounty.gov/extranet/assessor/Real%20Property%20Sales.zip",
+    "source_urls": [
+      "https://aqua.kingcounty.gov/extranet/assessor/Real%20Property%20Sales.zip",
+      "https://aqua.kingcounty.gov/extranet/assessor/Value%20History.zip",
+      "https://aqua.kingcounty.gov/extranet/assessor/Residential%20Building.zip",
+      "https://aqua.kingcounty.gov/extranet/assessor/Parcel.zip",
+      "https://aqua.kingcounty.gov/extranet/assessor/Lookup.zip",
+      "https://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_Parcels/MapServer/0"
+    ],
+    "source_dataset": "King County Department of Assessments data download: Real Property Sales (EXTR_RPSale), Parcel (EXTR_Parcel), Residential Building (EXTR_ResBldg), Value History (EXTR_ValueHistory_V), Lookup (EXTR_LookUp); parcel shapes from gismaps.kingcounty.gov KingCo_Parcels",
+    "retrieved": "2026-11-18",
+    "sale_window": {
+      "start": "2025-01-01",
+      "end": "2026-09-30",
+      "first_sale": "2025-01-01",
+      "last_sale": "2026-09-30"
+    },
+    "leakage_rule": "Appraised land + improvement value from the value history, tax year no later than the sale year AND with a ChangeDate strictly before the sale date (the value had been set before the sale happened).",
+    "assessment_kind": "appraised market value",
+    "neighborhood_data": "County bundle block-group record (2020-2024 ACS 5-year), located by point-in-polygon",
+    "filters": [
+      {
+        "id": "window",
+        "description": "Sale date 2025-01-01 to 2026-09-30",
+        "kept": 85889
+      },
+      {
+        "id": "price_10k",
+        "description": "Sale price >= $10,000",
+        "dropped": 33722
+      },
+      {
+        "id": "principal_use_residential",
+        "description": "PrincipalUse = 6 'RESIDENTIAL' and PropertyClass = 8 'Res-Improved property'",
+        "dropped": 16349
+      },
+      {
+        "id": "deed_type",
+        "description": "SaleInstrument 2 'Warranty Deed' or 3 'Statutory Warranty Deed'",
+        "dropped": 1989
+      },
+      {
+        "id": "sale_reason_none",
+        "description": "SaleReason 1 'None' (drops trust, estate, divorce, foreclosure, quit-claim gift and other non-market reasons)",
+        "dropped": 402
+      },
+      {
+        "id": "no_sale_warning",
+        "description": "No SaleWarning code at all (the Assessor's own flags: related party, multi-parcel, non-representative, short sale, bank resale, etc.)",
+        "dropped": 5921
+      },
+      {
+        "id": "single_parcel",
+        "description": "Excise tax affidavit covers one parcel only",
+        "dropped": 17
+      },
+      {
+        "id": "deterministic_sample",
+        "description": "Duplicate records of one sale collapsed; if more than 8000 sales remain, the 8000 with the lowest FNV-1a hash of parcel+document are kept",
+        "dropped": 19489
+      },
+      {
+        "id": "present_use_single_family",
+        "description": "Parcel PresentUse = 2 'Single Family(Res Use/Zone)'",
+        "dropped": 1027
+      },
+      {
+        "id": "one_dwelling",
+        "description": "Exactly one residential building record with one living unit",
+        "dropped": 183
+      },
+      {
+        "id": "pre_sale_roll",
+        "description": "A pre-sale assessment exists under the leakage rule: Appraised land + improvement value from the value history, tax year no later than the sale year AND with a ChangeDate strictly before the sale date (the value had been set before the sale happened).",
+        "dropped": 39
+      },
+      {
+        "id": "located",
+        "description": "Parcel located inside one of the county bundle's block groups",
+        "dropped": 0
+      },
+      {
+        "id": "price_25k",
+        "description": "Sale price >= $25,000 (the floor runCountyValuationBacktest scores; keeps engine and baselines on the same sales)",
+        "dropped": 0
+      }
+    ],
+    "sample": {
+      "usable": 6751,
+      "calibration": 3342,
+      "evaluation": 3409,
+      "split": "by parcel (FNV-1a hash of the parcel id); every metric below is on the evaluation half",
+      "with_prior_sale": 2793,
+      "with_neighborhood_hv": 3408
+    },
+    "baseline": {
+      "assessor_ratio": {
+        "description": "Pre-sale assessor value x median(sale price / pre-sale assessor value) of the calibration half",
+        "ratio": 1.1306,
+        "sampleCount": 3409,
+        "mdape": 0.0949,
+        "mape": 0.1404,
+        "medianBiasPct": -0.0021,
+        "shareWithin5Pct": 0.28,
+        "shareWithin10Pct": 0.521,
+        "shareWithin20Pct": 0.805,
+        "priceBands": [
+          {
+            "band": "$250k - $500k",
+            "sampleCount": 88,
+            "mdape": 0.1028,
+            "shareWithin10Pct": 0.489,
+            "medianBiasPct": 0.0932
+          },
+          {
+            "band": "$500k - $1M",
+            "sampleCount": 1504,
+            "mdape": 0.0781,
+            "shareWithin10Pct": 0.608,
+            "medianBiasPct": 0.0251
+          },
+          {
+            "band": "$1M - $2M",
+            "sampleCount": 1313,
+            "mdape": 0.1068,
+            "shareWithin10Pct": 0.468,
+            "medianBiasPct": -0.032
+          },
+          {
+            "band": "> $2M",
+            "sampleCount": 504,
+            "mdape": 0.1361,
+            "shareWithin10Pct": 0.407,
+            "medianBiasPct": -0.0682
+          }
+        ],
+        "methods": []
+      },
+      "prior_sale_hpi": {
+        "description": "Prior recorded sale x FHFA all-transactions HPI change for metro division 42644 (index at the prior sale's quarter -> latest quarter ended >= 90 days before the sale)",
+        "source_url": "https://www.fhfa.gov/hpi/download/quarterly_datasets/hpi_at_metro.csv",
+        "coverage": 0.819,
+        "sampleCount": 2793,
+        "mdape": 0.1237,
+        "mape": 0.1806,
+        "medianBiasPct": -0.0402,
+        "shareWithin5Pct": 0.236,
+        "shareWithin10Pct": 0.42,
+        "shareWithin20Pct": 0.677,
+        "priceBands": [
+          {
+            "band": "$250k - $500k",
+            "sampleCount": 70,
+            "mdape": 0.1385,
+            "shareWithin10Pct": 0.4,
+            "medianBiasPct": -0.0113
+          },
+          {
+            "band": "$500k - $1M",
+            "sampleCount": 1203,
+            "mdape": 0.1064,
+            "shareWithin10Pct": 0.472,
+            "medianBiasPct": -0.004
+          },
+          {
+            "band": "$1M - $2M",
+            "sampleCount": 1087,
+            "mdape": 0.1329,
+            "shareWithin10Pct": 0.394,
+            "medianBiasPct": -0.0763
+          },
+          {
+            "band": "> $2M",
+            "sampleCount": 433,
+            "mdape": 0.1711,
+            "shareWithin10Pct": 0.344,
+            "medianBiasPct": -0.0849
+          }
+        ],
+        "methods": [],
+        "engine_on_same_sales": {
+          "sampleCount": 2793,
+          "mdape": 0.0892,
+          "shareWithin10Pct": 0.543,
+          "medianBiasPct": -0.0419
+        }
+      },
+      "engine_beats_assessor_ratio": false
+    },
+    "engine_calibrated": {
+      "description": "Same engine with the county calibration below passed in (calibration input): assessor value x county ratio, prior sale x FHFA metro HPI, hedonic x county scale, blended with weights from each component's calibration-half error. Fitted on the calibration half; measured on the evaluation half.",
+      "calibration": {
+        "assessorRatio": 1.1306,
+        "hedonicScale": 0.9412,
+        "weights": {
+          "assessor": 0.5082,
+          "priorSale": 0.3017,
+          "hedonic": 0.1901
+        },
+        "component_mdape_on_calibration_half": {
+          "assessor": 0.0966,
+          "priorSale": 0.1254,
+          "hedonic": 0.1579
+        },
+        "fitted_on": "calibration half (3342 sales, disjoint parcels from the evaluation half)"
+      },
+      "sampleCount": 3409,
+      "mdape": 0.0952,
+      "mape": 0.1337,
+      "medianBiasPct": -0.0085,
+      "shareWithin5Pct": 0.284,
+      "shareWithin10Pct": 0.517,
+      "shareWithin20Pct": 0.798,
+      "priceBands": [
+        {
+          "band": "$250k - $500k",
+          "sampleCount": 88,
+          "mdape": 0.1086,
+          "shareWithin10Pct": 0.477,
+          "medianBiasPct": 0.0506
+        },
+        {
+          "band": "$500k - $1M",
+          "sampleCount": 1504,
+          "mdape": 0.0846,
+          "shareWithin10Pct": 0.576,
+          "medianBiasPct": 0.0201
+        },
+        {
+          "band": "$1M - $2M",
+          "sampleCount": 1313,
+          "mdape": 0.103,
+          "shareWithin10Pct": 0.493,
+          "medianBiasPct": -0.033
+        },
+        {
+          "band": "> $2M",
+          "sampleCount": 504,
+          "mdape": 0.1249,
+          "shareWithin10Pct": 0.411,
+          "medianBiasPct": -0.0863
+        }
+      ],
+      "methods": [
+        {
+          "method": "prior sale + assessor + hedonic",
+          "sampleCount": 2789,
+          "mdape": 0.0892,
+          "shareWithin10Pct": 0.548,
+          "medianBiasPct": -0.0085
+        },
+        {
+          "method": "assessor + hedonic",
+          "sampleCount": 620,
+          "mdape": 0.1367,
+          "shareWithin10Pct": 0.377,
+          "medianBiasPct": -0.0087
+        }
+      ],
+      "engine_calibrated_beats_assessor_ratio": false
+    },
+    "engine_with_county_scale": {
+      "description": "Shipped engine output x one county-wide scale factor fitted on the calibration half (median sale / estimate). Shows how much of the error is a level bias.",
+      "factor": 1.0427,
+      "sampleCount": 3409,
+      "mdape": 0.1014,
+      "mape": 0.1359,
+      "medianBiasPct": -0.0014,
+      "shareWithin5Pct": 0.27,
+      "shareWithin10Pct": 0.495,
+      "shareWithin20Pct": 0.78,
+      "priceBands": [
+        {
+          "band": "$250k - $500k",
+          "sampleCount": 88,
+          "mdape": 0.1132,
+          "shareWithin10Pct": 0.432,
+          "medianBiasPct": 0.0508
+        },
+        {
+          "band": "$500k - $1M",
+          "sampleCount": 1504,
+          "mdape": 0.0952,
+          "shareWithin10Pct": 0.523,
+          "medianBiasPct": 0.0398
+        },
+        {
+          "band": "$1M - $2M",
+          "sampleCount": 1313,
+          "mdape": 0.101,
+          "shareWithin10Pct": 0.497,
+          "medianBiasPct": -0.0259
+        },
+        {
+          "band": "> $2M",
+          "sampleCount": 504,
+          "mdape": 0.1227,
+          "shareWithin10Pct": 0.417,
+          "medianBiasPct": -0.0935
+        }
+      ],
+      "methods": [
+        {
+          "method": "prior sale + assessor + hedonic",
+          "sampleCount": 2789,
+          "mdape": 0.0942,
+          "shareWithin10Pct": 0.526,
+          "medianBiasPct": -0.001
+        },
+        {
+          "method": "assessor + hedonic",
+          "sampleCount": 620,
+          "mdape": 0.1487,
+          "shareWithin10Pct": 0.356,
+          "medianBiasPct": -0.0026
+        }
+      ]
+    }
   }
 }

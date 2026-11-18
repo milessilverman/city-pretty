@@ -354,7 +354,10 @@ export function estimatePropertyMarketValue(params: PropertyValuationInput): Pro
     assessorMarketEst = Math.round((rollTot / 0.35) * 1.02);
     assessorWeight = 0.60;
     assessorMethodName = "Ohio 35% Assessment Ratio Fair Market Value";
-  } else if (state === "IL" && rollTot > 10000 && !mktVal) {
+  // Threshold on the assessed (10%-level) value: 2,500 ~ $25k market, the generic path's $25k floor. It was
+  // 10,000 (~$100k market), which silently dropped every Cook home under ~$100k to the hedonic/prior-sale paths
+  // (back-test 2026-11-18: those sales had a 40-48% median error vs 16-17% on the assessor path).
+  } else if (state === "IL" && rollTot > 2500 && !mktVal) {
     assessorMarketEst = Math.round(rollTot * 10.0 * 1.02);
     assessorWeight = 0.55;
     assessorMethodName = "Cook County 10% Assessment Ratio Market Value";
