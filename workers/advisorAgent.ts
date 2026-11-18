@@ -12,6 +12,7 @@ import {
   censusGeographies,
   epaWalkabilityIndex,
   fhfaTractHpi,
+  fhwaNhcci,
   geocodeAddress,
   ncesNearbySchools,
   noaaSeaLevelRise,
@@ -199,6 +200,18 @@ export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
     },
     strict: true,
   },
+  {
+    name: "lookup_construction_cost_index",
+    description:
+      "Look up the latest Federal Highway Administration (FHWA) National Highway Construction Cost Index (NHCCI) and adjustment factor to index 2024 unit bid prices to current quarter.",
+    input_schema: {
+      type: "object",
+      properties: {},
+      required: [],
+      additionalProperties: false,
+    },
+    strict: true,
+  },
   ...(LOCAL_DATA_TOOLS as Anthropic.Beta.BetaTool[]),
 ];
 
@@ -271,6 +284,9 @@ export async function runAdvisorTool(name: string, input: unknown, env: ToolEnv)
   if (name === "check_historic_preservation") {
     if (!isNum(i.lat) || !isNum(i.lng)) return bad("lat and lng must be numbers");
     return done(await npsHistoricPlaces(i.lat, i.lng, f));
+  }
+  if (name === "lookup_construction_cost_index") {
+    return done(await fhwaNhcci(f));
   }
   const local = runLocalDataTool(name, i);
   if (local !== undefined) return done(local);

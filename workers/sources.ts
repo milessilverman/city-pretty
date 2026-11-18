@@ -729,9 +729,11 @@ export type NhcciResult = {
 const NHCCI_2024_Q1_BASE = 3.191321352;
 
 export async function fhwaNhcci(
-  quarter?: string,
-  fetcher: FetchLike = fetch
+  quarterOrFetcher?: string | FetchLike,
+  fetcherArg?: FetchLike
 ): Promise<Sourced<NhcciResult>> {
+  const quarter = typeof quarterOrFetcher === "string" ? quarterOrFetcher : undefined;
+  const fetcher = typeof quarterOrFetcher === "function" ? quarterOrFetcher : (fetcherArg || fetch);
   const url = quarter
     ? `https://data.transportation.gov/resource/r94d-n4f9.json?quarter=${encodeURIComponent(quarter)}`
     : `https://data.transportation.gov/resource/r94d-n4f9.json?$limit=1&$order=quarter%20desc`;
@@ -1224,9 +1226,13 @@ export async function osmNearby(
 export const CURRENT_CALENDAR_YEAR = new Date().getFullYear();
 export const DEFAULT_ACS_YEAR = Math.max(2024, CURRENT_CALENDAR_YEAR - (new Date().getMonth() >= 11 ? 1 : 2));
 
-export async function siteFacts(lat: number, lng: number, opts: { censusApiKey?: string; acsYear?: number; fetcher?: FetchLike } = {}) {
+export async function siteFacts(
+  lat: number,
+  lng: number,
+  opts: { censusApiKey?: string; acsYear?: number; fetcher?: FetchLike; includeHpi?: boolean; hpiUrlOverride?: string } = {}
+) {
   const f = opts.fetcher || fetch;
-  const [geo, elev, flood, nri, seismic, schools, walkability, slr] = await Promise.all([
+  const [geo, elev, flood, nri, seismic, schools, walkability, slr, hist, nhcci] = await Promise.all([
     censusGeographies(lat, lng, f),
     usgsElevation(lat, lng, f),
     femaFloodZone(lat, lng, f),
@@ -1235,23 +1241,38 @@ export async function siteFacts(lat: number, lng: number, opts: { censusApiKey?:
     ncesNearbySchools(lat, lng, 2000, f),
     epaWalkabilityIndex(lat, lng, f),
     noaaSeaLevelRise(lat, lng, 1, f),
+    npsHistoricPlaces(lat, lng, f),
+    fhwaNhcci(f),
   ]);
   const fmr: Sourced<HudFmr> = geo.ok
     ? hudFairMarketRentForCounty(geo.value.county_fips)
     : fail({ name: "HUD Fair Market Rents", publisher: "HUD", url: HUD_FMR_INFO_URL, retrieved_at: now() }, "County unknown (Census lookup failed)");
   let acs: Sourced<AcsResult> | null = null;
   let health: Sourced<CdcPlacesHealth> | null = null;
+  let hpi: Sourced<FhfaTractHpiResult> | null = null;
   if (geo.ok && geo.value.tract_geoid) {
-    [acs, health] = await Promise.all([
-      acs5(
-        { state: geo.value.state_fips, county: geo.value.county_fips.slice(2), tract: geo.value.tract_geoid.slice(5) },
-        opts.acsYear || DEFAULT_ACS_YEAR,
-        opts.censusApiKey,
-        undefined,
-        f,
-      ),
-      cdcPlacesTractHealth(geo.value.tract_geoid, f),
-    ]);
+    const pAcs = acs5(
+      { state: geo.value.state_fips, county: geo.value.county_fips.slice(2), tract: geo.value.tract_geoid.slice(5) },
+      opts.acsYear || DEFAULT_ACS_YEAR,
+      opts.censusApiKey,
+      undefined,
+      f,
+    );
+    const pHealth = cdcPlacesTractHealth(geo.value.tract_geoid, f);
+    if (opts.includeHpi) {
+      const [acsRes, healthRes, hpiRes] = await Promise.all([
+        pAcs,
+        pHealth,
+        fhfaTractHpi(geo.value.tract_geoid, f, opts.hpiUrlOverride),
+      ]);
+      acs = acsRes;
+      health = healthRes;
+      hpi = hpiRes;
+    } else {
+      const [acsRes, healthRes] = await Promise.all([pAcs, pHealth]);
+      acs = acsRes;
+      health = healthRes;
+    }
   }
   return {
     lat,
@@ -1267,5 +1288,8 @@ export async function siteFacts(lat: number, lng: number, opts: { censusApiKey?:
     sea_level_rise: slr,
     health_profile: health,
     acs_tract: acs,
+    historic_preservation: hist,
+    fhwa_nhcci: nhcci,
+    fhfa_hpi: hpi,
   };
 }

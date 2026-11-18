@@ -19,6 +19,9 @@ const routes: Array<[RegExp, string]> = [
   [/Public_School_Locations_Current/, fx("nces_schools_austin.json")],
   [/WalkabilityIndex\/MapServer\/0/, fx("epa_walkability_austin.json")],
   [/dc_slr\/slr_1ft/, fx("noaa_slr_austin.json")],
+  [/data\.transportation\.gov\/resource\/r94d-n4f9/, fx("fhwa_nhcci_latest.json")],
+  [/cultural_resources\/nrhp_locations\/MapServer\/1/, fx("nps_historic_austin.json")],
+  [/fhfa\.gov\/hpi\/download\/annual\/hpi_at_tract/, fx("fhfa_hpi_austin.json")],
 ];
 // HUD rents come from the page's FY2027 county file; tests read the same file.
 const HUD = Object.fromEntries(JSON.parse(fs.readFileSync(path.join(__dirname, "../../app/data/hud_fair_market_rents.json"), "utf8")).records.map((r: any) => [r.fips, r]));
@@ -83,6 +86,8 @@ describe("app/facts.js live public records", () => {
     expect(rows.find((r: any) => r.label.includes("NCES EDGE")).value).toContain("LEE EL");
     expect(rows.find((r: any) => r.label.includes("Walkability")).value).toContain("18 / 20 (Most Walkable)");
     expect(rows.find((r: any) => r.label.includes("Sea level rise")).value).toContain("Above 1ft SLR");
+    expect(rows.find((r: any) => r.label.includes("Historic preservation")).value).toContain("1 NRHP resource(s)");
+    expect(rows.find((r: any) => r.label.includes("Construction cost index")).value).toContain("2026 Q1");
 
     const sampleWorkerPayload = {
       ...JSON.parse(JSON.stringify(f)),

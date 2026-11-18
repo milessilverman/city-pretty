@@ -171,6 +171,8 @@ describe("official-source connectors (real captured responses)", () => {
       expect(f.seismic_design.value.seismic_design_category).toBe("A");
     }
     expect(f.acs_tract && f.acs_tract.ok).toBe(false); // no key in tests
+    expect(f.historic_preservation && f.historic_preservation.ok).toBe(true);
+    expect(f.fhwa_nhcci && f.fhwa_nhcci.ok).toBe(true);
   });
 
   it("femaNationalRiskIndex returns composite risk and sub-scores from the Dec 2025 release", async () => {
@@ -414,6 +416,12 @@ describe("advisor loop", () => {
     expect(histRes.isError).toBe(false);
     expect(histRes.sources.map((s) => s.publisher)).toContain("National Park Service (NPS)");
     expect(histRes.text).toContain("Perry Estate");
+
+    const nhcciRes = await runAdvisorTool("lookup_construction_cost_index", {}, { fetcher: AUSTIN });
+    expect(nhcciRes.isError).toBe(false);
+    expect(nhcciRes.sources.map((s) => s.name)).toContain("FHWA National Highway Construction Cost Index (NHCCI)");
+    expect(nhcciRes.text).toContain("2026 Q1");
+    expect(nhcciRes.text).toContain("3.1348");
   });
 
   it("runs tools, returns all results in one user turn, and returns the final text with sources", async () => {

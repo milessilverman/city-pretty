@@ -320,6 +320,14 @@ export function fromWorker(f) {
     const note = `Tract ${v.tract_fips || ""} · ${v.latest_year} HPI: ${v.latest_hpi}${v.annual_change_pct != null ? ` (${v.annual_change_pct >= 0 ? "+" : ""}${v.annual_change_pct}% 1-yr)` : ""}`;
     rows.push(ok("Home price appreciation (FHFA HPI)", label, hpi.source.publisher, hpi.source.url, note));
   }
+  const nhcci = f.fhwa_nhcci;
+  if (nhcci && nhcci.ok && nhcci.value) {
+    const v = nhcci.value;
+    const label = `${v.quarter}: index ${v.nhcci}`;
+    const factorPct = (v.base_year_2024_adjustment_factor * 100).toFixed(1);
+    const note = `FHWA National Highway Construction Cost Index · ${factorPct}% of 2024 base · Used to index historical unit bid prices.`;
+    rows.push(ok("Construction cost index (FHWA NHCCI)", label, nhcci.source.publisher, nhcci.source.url, note));
+  }
   return rows;
 }
 
