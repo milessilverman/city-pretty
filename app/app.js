@@ -5253,100 +5253,132 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
   }
 
   // Strategy 1: Transit-Oriented Zero-Parking Infill / ADU
-  if (inWalkshed || inExtendedWalk || lotSqft >= 4500) {
+  // Rent is HUD's Fair Market Rent for the county (app/data/hud_fair_market_rents.json); build cost per sq ft, the
+  // resale multiple and the garage saving are typed-in assumptions, listed in assumptions[].
+  if (inWalkshed || inExtendedWalk || (lotSqft != null && lotSqft >= 4500)) {
     const isCa = (ll && ll.lat >= 32.5 && ll.lat <= 42.0 && ll.lng >= -124.5 && ll.lng <= -114.1);
     const aduSqft = lotSqft >= 7000 ? 800 : 600;
-    const aduCost = Math.round(aduSqft * 260);
+    const aduCostPerSqft = 260, resaleMultiple = 1.65, garageSaving = 45000;
+    const aduCost = Math.round(aduSqft * aduCostPerSqft);
     const fmrRec = (typeof getHudFmr === "function") ? getHudFmr(countyFips) : null;
-    const moRent = fmrRec ? (aduSqft >= 750 ? fmrRec.two_bed_2br : fmrRec.one_bed_1br) : ((F && F.rent) ? F.rent : null);
-    const resValue = Math.round(aduCost * 1.65);
+    const hudRent = fmrRec ? (aduSqft >= 750 ? fmrRec.two_bed_2br : fmrRec.one_bed_1br) : null;
+    const moRent = (hudRent != null && isFinite(hudRent)) ? hudRent : null;
+    const rentLabel = fmrRec && fmrRec.fiscal_year ? `HUD FY${fmrRec.fiscal_year} Fair Market Rent, ${aduSqft >= 750 ? "2-bedroom" : "1-bedroom"}` : "HUD Fair Market Rent";
+    const resValue = Math.round(aduCost * resaleMultiple);
     const netEquity = resValue - aduCost;
-    const payback = moRent ? (aduCost / (moRent * 12)).toFixed(1) : "not on file";
-    const parkingSavings = inWalkshed ? 45000 : 0;
-    
+    const payback = moRent ? (aduCost / (moRent * 12)).toFixed(1) : null;
+    // AB 2097 (Gov. Code 65863.2, record ca_ab2097 verified) is the only parking rule checked; other states: not determined.
+    const ab2097 = isCa && inWalkshed && typeof statuteStatus === "function" && statuteStatus("ca_ab2097") === "verified";
+    const parkingSavings = ab2097 ? garageSaving : 0;
+    const assumptions = [
+      { name: "ADU build cost per sq ft", value: aduCostPerSqft, assumed: true },
+      { name: "value added per $1 of build cost", value: resaleMultiple, assumed: true },
+    ];
+    if (parkingSavings) assumptions.push({ name: "garage replacement avoided", value: garageSaving, assumed: true });
+
     strategies.push({
       id: "transit_adu",
       badge: inWalkshed ? "#1 TRANSIT-ORIENTED OPPORTUNITY" : "#1 HIGHEST ROI INFILL",
-      title: inWalkshed ? "Statutory Zero-Parking Infill & Detached 2-BR ADU" : "By-Right Detached Backyard ADU (Rental Equity)",
+      title: ab2097 ? "Zero-Parking Infill & Detached ADU (AB 2097)" : "Detached Backyard ADU (Rental Equity)",
       equity: netEquity + parkingSavings,
-      roi: +( (resValue + parkingSavings) / aduCost ).toFixed(2),
+      roi: +((resValue + parkingSavings) / aduCost).toFixed(2),
       cost: aduCost,
       rent: moRent,
       annualCashflow: moRent ? moRent * 12 : null,
       paybackYrs: payback,
-      statute: inWalkshed ? 
-        (isCa ? "CA Gov. Code § 65863.2 (AB 2097) — 100% Zero Minimum Parking Mandate + Gov Code § 66314 (Ministerial ADU)" : "Station Transit Walkshed Statutory Parking Exemption (Saves ~$45,000 in garage replacement)") :
-        (isCa ? "CA Gov. Code § 66314 / § 66311.5 — Statewide By-Right ADU, Impact Fee Exemption under 750 sf" : "Statewide Missing-Middle & Accessory Dwelling Unit Infill Rights"),
-      rationale: `Located ${inWalkshed ? `${(nearestStn.distMi * 5280).toFixed(0)} ft from ${nearestStn.name} station (qualifying for complete parking elimination)` : `on a spacious ${lotSqft.toLocaleString()} sq ft parcel`}. Building a ${aduSqft} sq ft accessory home creates ~$${netEquity.toLocaleString()} in net equity${moRent ? ` and ~$${moRent.toLocaleString()}/month in passive rental cash flow (HUD FY2026 Fair Market Rent)` : ` (local HUD rental benchmark not on file)`}.`,
+      statute: ab2097
+        ? "CA Gov. Code § 65863.2 (AB 2097, checked against the statute): no minimum parking within 1/2 mile of public transit. ADU rules: Gov. Code § 66314 (not checked here)."
+        : (isCa ? "CA ADU law, Gov. Code § 66314 (not checked here)" : "State ADU law: not determined here; local ADU rules apply"),
+      rationale: `Located ${inWalkshed ? `${(nearestStn.distMi * 5280).toFixed(0)} ft (straight line) from ${esc(nearestStn.name)} station${ab2097 ? ", inside AB 2097's 1/2 mile" : ""}` : (lotSqft ? `on a ${lotSqft.toLocaleString()} sq ft parcel` : "near a station")}. Building a ${aduSqft} sq ft accessory home is estimated at ~$${netEquity.toLocaleString()} in net equity (assumed cost and resale multiple)${moRent ? ` and ~$${moRent.toLocaleString()}/month rent (${rentLabel})` : ` (HUD rent for this county is not on file)`}.`,
       steps: [
-        "Select a pre-approved architectural plan from the municipal building department catalog to fast-track plan check (skipping discretionary hearings).",
-        "Confirm zero-parking exemption under transit walkshed statutes to save ~$45k in garage construction costs.",
-        "Obtain ministerial permit within 60 days by right; coordinate contractor bids with clean energy solar tie-in."
-      ]
+        "Check the city's pre-approved ADU plans and ADU ordinance.",
+        ab2097 ? "Confirm the parcel is within 1/2 mile walking distance of a major transit stop (AB 2097) so no parking is required." : "Ask the planning department which parking rule applies to an ADU here.",
+        "Get two or three builder quotes before relying on the cost shown here."
+      ],
+      illustrative: true,
+      assumptions
     });
   }
 
-  // Strategy 2: Clean Energy Solar & Heat Pump Deep Modernization
-  {
+  // Strategy 2: Rooftop solar. Every input here (yield, power price, cost per kW, battery, lease discount) is typed in.
+  if (solarKw && usableSolarSqft) {
     strategies.push({
       id: "solar_clean_energy",
       badge: "2026+ CLEAN ENERGY EQUITY",
-      title: isCaPlaybook ? "2026+ Rooftop Solar & Paired Battery Microgrid (NEM 3.0)" : "2026+ Rooftop Solar & Clean Microgrid Optimization",
+      title: isCaPlaybook ? "2026+ Rooftop Solar & Paired Battery (NEM 3.0)" : "2026+ Rooftop Solar",
       equity: solar25YrEquity,
       roi: +((solarSavYr * 25) / Math.max(solarPpaNetCost, 1)).toFixed(2),
       cost: totalCapex,
       annualCashflow: solarSavYr,
       paybackYrs: (solarPpaNetCost / Math.max(solarSavYr, 500)).toFixed(1),
-      statute: "2026 Clean Energy Compliance — 0% Federal ITC for Cash/Loan (IRC § 25D Expired Dec 31, 2025) · 30% via Third-Party PPA (IRC § 48E)" + (isCaPlaybook ? " · CA NEM 3.0 Battery Pairing" : ""),
-      rationale: `The ${usableSolarSqft.toLocaleString()} sq ft usable roof plane supports an optimal ${solarKw.toFixed(1)} kW DC clean solar installation, generating ~${(solarKw * 1450).toFixed(0)} kWh annually and saving ~$${solarSavYr.toLocaleString()}/yr in electric utility bills. ${isCaPlaybook ? "Under California NEM 3.0 avoided-cost tariffs, pairing with 10–13.5 kWh battery storage (~$12,000 included above) maximizes energy equity." : "Can be monetized via third-party PPA/lease for full 30% § 48E tax benefits."}`,
+      statute: "0% federal credit for cash/loan purchases (IRC § 25D ended Dec 31, 2025); 30% via third-party lease / PPA (IRC § 48E)" + (isCaPlaybook ? " · CA NEM 3.0 battery pairing" : ""),
+      rationale: `About ${usableSolarSqft.toLocaleString()} sq ft of usable roof fits roughly ${solarKw.toFixed(1)} kW DC, about ${(solarKw * 1450).toFixed(0)} kWh a year and ~$${solarSavYr.toLocaleString()}/yr off the power bill at the assumed rates. ${isCaPlaybook ? "Under NEM 3.0 export credits, a 10–13.5 kWh battery (~$12,000 assumed, included above) is usually paired." : ""}`,
       steps: [
-        "Request a detailed shade/azimuth USGS 3DEP LiDAR solar report from an accredited NABCEP solar installer.",
-        isCaPlaybook ? "File utility interconnection under CA Net Billing Tariff (NEM 3.0) with paired 10–13.5 kWh battery storage." : "File utility interconnection agreement under local net metering / billing tariff.",
-        "Monetize via Third-Party PPA / Lease (IRC § 48E) for full 30% commercial tax credit (or cash/loan purchase with $0 IRC § 25D federal credit in 2026+)."
+        "Get a shade and roof-orientation report from a NABCEP-certified installer.",
+        isCaPlaybook ? "File utility interconnection under the CA Net Billing Tariff (NEM 3.0) with battery storage." : "File the utility interconnection agreement under the local net metering / billing tariff.",
+        "Compare a cash purchase with a third-party lease / PPA quote."
+      ],
+      illustrative: true,
+      assumptions: [
+        { name: "yearly yield, kWh per kW", value: 1450, assumed: true },
+        { name: "power price, $ per kWh", value: 0.23, assumed: true },
+        { name: "install cost, $ per kW", value: 2800, assumed: true },
+        { name: "battery cost", value: batteryCost, assumed: true },
+        { name: "lease / PPA net cost share", value: 0.70, assumed: true }
       ]
     });
   }
 
-  // Strategy 3: Lot Split / Missing Middle Duplex Conversion
-  if (lotSqft >= 4800) {
-    const isCa = (ll && ll.lat >= 32.5 && ll.lat <= 42.0 && ll.lng >= -124.5 && ll.lng <= -114.1);
+  // Strategy 3: SB 9 urban lot split (California only). Shown only when the statutory engine returned SB 9 as
+  // applicable (verified record, single-family zoning on file) and each new lot can be at least 1,200 sq ft.
+  const sb9 = playbookStatEval && (playbookStatEval.applicable_statutes || []).find(s => s.citation.includes("SB 9"));
+  if (sb9 && lotSqft != null && lotSqft >= 2400) {
     const addedLandValue = Math.round(lotSqft * 45);
     strategies.push({
       id: "lot_split_duplex",
       badge: "SUBDIVISION EQUITY",
-      title: isCa ? "Senate Bill 9 (SB 9) Urban Lot Split & Duplex Creation" : "Missing-Middle Two-Unit Subdivision & Infill",
+      title: "Senate Bill 9 (SB 9) Urban Lot Split & Duplex Creation",
       equity: addedLandValue,
-      roi: 2.45,
+      roi: null,
       cost: 35000,
-      annualCashflow: 0,
-      paybackYrs: "Instant",
-      statute: isCa ? "CA Gov. Code § 66411.7 (SB 9) — Ministerial 2-lot parcel split and up to 4 homes by-right, exempt from CEQA" : "Statewide Single-Family Lot Subdivision & Missing Middle Housing Statute",
-      rationale: `With ${lotSqft.toLocaleString()} sq ft of deeded area, this parcel qualifies for an administrative split into two separate deeded parcels, unlocking buildable equity of ~$${addedLandValue.toLocaleString()} without requiring planning commission votes.`,
+      annualCashflow: null,
+      paybackYrs: null,
+      statute: "CA Gov. Code §§ 65852.21, 66411.7 (SB 9, checked against the statute): ministerial split into two lots, each at least 1,200 sq ft and neither under 40% of the original; up to 4 homes",
+      rationale: `With ${lotSqft.toLocaleString()} sq ft on file, a split into two lots of at least 1,200 sq ft each is possible on size alone. SB 9 also bars the whole FEMA 100-year flood hazard area, fire hazard zones and historic districts; this page checks only some of those layers. The ~$${addedLandValue.toLocaleString()} figure is an assumption ($45 per sq ft of lot), not a local land sale.`,
       steps: [
-        "Commission a boundary and topographic land survey from a licensed professional surveyor (PLS).",
-        "Submit a tentative parcel map application under ministerial state subdivision guidelines.",
-        "Sell or build on the second deeded lot to capture immediate six-figure land equity."
+        "Commission a boundary and topographic survey from a licensed land surveyor.",
+        "Check the FEMA flood map and the city's SB 9 ordinance (owner-occupancy affidavit, setbacks).",
+        "Submit a parcel map application under the city's SB 9 procedure."
+      ],
+      illustrative: true,
+      assumptions: [
+        { name: "added land value per sq ft of lot", value: 45, assumed: true },
+        { name: "survey, map and permit cost", value: 35000, assumed: true }
       ]
     });
   }
 
-  strategies.sort((a, b) => b.equity - a.equity);
+  const eqKey = s => (s.equity != null && isFinite(s.equity)) ? s.equity : -Infinity;
+  strategies.sort((a, b) => (eqKey(b) === eqKey(a) ? 0 : eqKey(b) > eqKey(a) ? 1 : -1));
   return {
     best: strategies[0] || {
       id: "modernize",
       badge: "PROPERTY MODERNIZATION",
       title: "Energy & Interior Modernization Retrofit",
-      equity: 35000,
-      roi: 1.45,
-      cost: 24000,
-      annualCashflow: 1800,
-      paybackYrs: "4.5",
-      statute: "Local Residential Building Code Modernization",
-      rationale: "Upgrade building envelope, HVAC, and interior finishes to capture equity uplift.",
-      steps: ["Obtain building permits", "Perform upgrades", "Reassess equity"]
+      equity: null,
+      roi: null,
+      cost: null,
+      annualCashflow: null,
+      paybackYrs: null,
+      statute: "Local residential building code",
+      rationale: "No state housing law checked for this page applies here, and the lot or building facts needed for an estimate are not on file.",
+      steps: ["Obtain building permits", "Perform upgrades", "Reassess equity"],
+      illustrative: true,
+      assumptions: []
     },
     alternatives: strategies.slice(1),
-    all: strategies
+    all: strategies,
+    notDetermined: (playbookStatEval && playbookStatEval.not_determined_statutes) || []
   };
 }
 
@@ -5355,10 +5387,10 @@ function copyPlaybookMemo(title, equity, roi, statute, address, apn) {
     `Property: ${address}\n` +
     `APN: ${apn}\n` +
     `Recommended Strategy: ${title}\n` +
-    `Projected Net Equity Uplift: +$${Number(equity).toLocaleString()}\n` +
-    `Expected ROI: $${roi} / $1\n` +
+    `Projected Net Equity Uplift: ${equity != null && isFinite(equity) ? "+$" + Number(equity).toLocaleString() : "not on file"} (illustrative: inputs are assumptions)\n` +
+    `Expected ROI: ${roi != null && isFinite(roi) ? "$" + roi + " / $1" : "not on file"}\n` +
     `Statutory Track: ${statute}\n` +
-    `Verified via City Pretty Geospatial & Legislative Intelligence Engine\n` +
+    `Screening estimate from City Pretty; check the law and costs locally before acting\n` +
     `==========================================`;
   navigator.clipboard.writeText(text).then(() => {
     const btn = document.getElementById("btn-copy-playbook");
