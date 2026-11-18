@@ -129,8 +129,8 @@ function auditSingleHouseParcel(input) {
   const rawZone = hasZoning ? String(input.zoningCode).trim() : null;
   const zoneOrUse = String(rawZone || "") + " " + String(input.useDescription || "");
   const isComm = hasZoning && /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-  const isMulti = /r-?[2-9]|mf|multi|apartment|condo|duplex|triplex|fourplex/i.test(zoneOrUse);
-  const isSfr = hasZoning && !isComm && !isMulti && (/r-?1\b|single|sfr/i.test(zoneOrUse) || (/^r-?[a-z]?$/i.test(String(rawZone || "").trim()) && !isMulti));
+  const isMulti = hasZoning && (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(rawZone));
+  const isSfr = hasZoning && !isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(rawZone || "").trim()));
 
   const parcelCtx = {
     parcel_id: input.parcelId,

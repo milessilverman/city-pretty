@@ -8,15 +8,38 @@ const median = (xs) => {
   return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
 };
 
+export function bootstrapMedianCi(xs, reps = 500, alpha = 0.05) {
+  if (!xs || xs.length < 30) return null;
+  const n = xs.length;
+  const medians = new Float64Array(reps);
+  let seed = 42;
+  const rnd = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+  for (let r = 0; r < reps; r++) {
+    const sample = new Float64Array(n);
+    for (let i = 0; i < n; i++) {
+      sample[i] = xs[Math.floor(rnd() * n)];
+    }
+    sample.sort();
+    const m = n >> 1;
+    medians[r] = n % 2 ? sample[m] : (sample[m - 1] + sample[m]) / 2;
+  }
+  medians.sort();
+  const lowIdx = Math.floor(reps * (alpha / 2));
+  const highIdx = Math.min(reps - 1, Math.floor(reps * (1 - alpha / 2)));
+  return [Math.round(medians[lowIdx] * 10000) / 10000, Math.round(medians[highIdx] * 10000) / 10000];
+}
+
 export function errorMetrics(pairs) {
   const ok = pairs.filter((p) => Number.isFinite(p.est) && p.est > 0 && Number.isFinite(p.target) && p.target > 0);
   const signed = ok.map((p) => (p.est - p.target) / p.target);
   const abs = signed.map(Math.abs);
   const r = (x) => (x == null ? null : Math.round(x * 10000) / 10000);
+  const ci = abs.length >= 30 ? bootstrapMedianCi(abs) : null;
   return {
     n: ok.length,
     excluded: pairs.length - ok.length,
     mdape: r(median(abs)),
+    mdape_ci_95: ci,
     mape: r(abs.length ? abs.reduce((a, b) => a + b, 0) / abs.length : null),
     median_signed_error: r(median(signed)), // negative = model under-estimates
     share_within_10pct: r(abs.length ? abs.filter((x) => x <= 0.1).length / abs.length : null),

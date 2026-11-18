@@ -137,4 +137,18 @@ describe("Parcel house auditor", () => {
     expect(a.everySpace).toBeUndefined();
     expect(a.renovationOptions).toBeUndefined();
   });
+
+  it("12. Does not classify R-3, R-4, or RES-MF as single-family residential", () => {
+    const r3 = auditSingleHouseParcel({ ...BASE, parcelId: "p12_r3", lotSqft: 6500, livingSqft: 1800, zoningCode: "R-3", neighborhoodMedianHv: 850000 });
+    expect(r3.statutoryZoning.applicable_statutes.map((s: any) => s.id)).not.toContain("ca_sb9_lot_split");
+    expect(r3.statutoryZoning.lotSplitFeasible).toBe(false);
+
+    const r4 = auditSingleHouseParcel({ ...BASE, parcelId: "p12_r4", lotSqft: 6500, livingSqft: 1800, zoningCode: "R-4", neighborhoodMedianHv: 850000 });
+    expect(r4.statutoryZoning.applicable_statutes.map((s: any) => s.id)).not.toContain("ca_sb9_lot_split");
+    expect(r4.statutoryZoning.lotSplitFeasible).toBe(false);
+
+    const resMf = auditSingleHouseParcel({ ...BASE, parcelId: "p12_mf", lotSqft: 6500, livingSqft: 1800, zoningCode: "RES-MF", neighborhoodMedianHv: 850000 });
+    expect(resMf.statutoryZoning.applicable_statutes.map((s: any) => s.id)).not.toContain("ca_sb9_lot_split");
+    expect(resMf.statutoryZoning.lotSplitFeasible).toBe(false);
+  });
 });

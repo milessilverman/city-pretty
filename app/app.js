@@ -595,7 +595,13 @@ function valuationBacktestFor(fips) {
   const c = VALUATION_BACKTEST_BENCHMARKS && VALUATION_BACKTEST_BENCHMARKS.counties;
   return (c && fips && c[String(fips).padStart(5, "0")]) || null;
 }
-function backtestDollars(x) { return "$" + Math.round(+x).toLocaleString("en-US"); } // sourced figures are shown exactly, not rounded
+function backtestDollars(x) {
+  if (x == null || isNaN(x)) return "–";
+  const n = +x;
+  if (n >= 2000000 && n <= 2000001) return "$2,000,000 or more";
+  if (n > 0 && n <= 10000) return "$10,000 or less";
+  return "$" + Math.round(n).toLocaleString("en-US");
+}
 function backtestPct(x) { return x == null ? "?" : (Math.round(x * 1000) / 10).toFixed(1) + "%"; }
 function backtestSummary(bt) {
   if (!bt || !bt.model || bt.model.mdape == null) return null;
@@ -1347,8 +1353,8 @@ function auditSingleHouseParcel(input) {
   const rawZone = hasZoning ? String(input.zoningCode).trim() : null;
   const zoneOrUse = String(rawZone || "") + " " + String(input.useDescription || "");
   const isComm = hasZoning && /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-  const isMulti = /r-?[2-9]|mf|multi|apartment|condo|duplex|triplex|fourplex/i.test(zoneOrUse);
-  const isSfr = hasZoning && !isComm && !isMulti && (/r-?1\b|single|sfr/i.test(zoneOrUse) || (/^r-?[a-z]?$/i.test(String(rawZone || "").trim()) && !isMulti));
+  const isMulti = hasZoning && (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(rawZone));
+  const isSfr = hasZoning && !isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(rawZone || "").trim()));
 
   const parcelCtx = {
     parcel_id: input.parcelId,
@@ -2106,8 +2112,8 @@ const fmtN = v => v == null || isNaN(v) ? "–" : Math.round(v).toLocaleString()
 // Census ACS top-code for median gross rent is 3501 ("$3,500 or more"), bottom-code is 99/100 ("$100 or less").
 const fmtRent = v => {
   if (v == null || isNaN(v) || !v) return "–";
-  if (v >= 3500 && v <= 3501) return "$3,500 or more/mo";
-  if (v <= 100) return "$100 or less/mo";
+  if (v >= 3500) return "$3,500 or more/mo";
+  if (v > 0 && v <= 100) return "$100 or less/mo";
   return "$" + Math.round(v).toLocaleString("en-US") + "/mo";
 };
 const GRADE_TXT = { A: "A · claimed LA sales estimate (not reproducible)", B: "B · studied elsewhere", C: "C · transferred from a related study", D: "D · assumption", U: "U · unverified research lead (round 6)" };
@@ -3166,8 +3172,9 @@ function renderDynamicZoneFeatures(feats, z, svc) {
 
   feats.forEach(f => {
     const a = f.attributes || {};
-    const code = String(a[svc.zoneField] || a.ZONE || a.ZONING || a.ZoneID || a.ZONECLASS || a.DOR_UC || a.UseCode || a.parusecode || a.LUCode || "R-1").trim();
-    const desc = String(a[svc.descField] || a.DESCRIPTION || a.ZONE_DESC || a.ZoneDesc || a.ZONEDESC || a.USE_DESC || a.parusedesc || a.CLASSDSCRP || code).trim();
+    const code = String(a[svc.zoneField] || a.ZONE || a.ZONING || a.ZoneID || a.ZONECLASS || a.CITY_ZONING || "").trim();
+    if (!code) return;
+    const desc = String(a[svc.descField] || a.DESCRIPTION || a.ZONE_DESC || a.ZoneDesc || a.ZONEDESC || a.USE_DESC || a.CLASSDSCRP || code).trim();
     const juris = String(a[svc.jurisField] || svc.juris || countyOf() || "").trim();
     const cat = classifyZone(code, desc);
     const rings = f.geometry.rings.map(r => r.map(([x, y]) => [y, x]));
@@ -4114,15 +4121,45 @@ async function socrata(url, where, ms = 12000) {
 }
 const limit = (pr, ms = 1800) => Promise.race([pr, new Promise((_, rej) => setTimeout(() => rej(new Error("timed out")), ms))]);
 const settle = (pr) => limit(pr).then(v => ({ ok: true, v }), e => ({ ok: false, e: e.message || String(e) }));
+
+const _femaQueryCache = new Map();
+if (typeof window !== "undefined") window._femaQueryCache = _femaQueryCache;
+function sharedFemaNfhlQuery(lat, lng) {
+  if (lat == null || lng == null || isNaN(lat) || isNaN(lng)) return Promise.resolve({ ok: false, v: [] });
+  const key = `${(+lat).toFixed(4)},${(+lng).toFixed(4)}`;
+  if (_femaQueryCache.has(key)) return _femaQueryCache.get(key);
+  const p = (async () => {
+    const pt = {
+      geometry: `${(+lng).toFixed(6)},${(+lat).toFixed(6)}`,
+      geometryType: "esriGeometryPoint",
+      inSR: 4326,
+      spatialRel: "esriSpatialRelIntersects",
+      returnGeometry: false,
+      outFields: "FLD_ZONE,ZONE_SUBTY,SFHA_TF,STATIC_BFE",
+      resultRecordCount: 3,
+      f: "json"
+    };
+    const femaUrl = "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query";
+    try {
+      const d = await arcQuery(femaUrl, pt, 6000);
+      const v = (d && d.features) ? d.features.map(f => f.attributes) : [];
+      return { ok: true, v };
+    } catch (e) {
+      return { ok: false, v: [], e };
+    }
+  })();
+  _femaQueryCache.set(key, p);
+  return p;
+}
+
 async function lotChecks(ll, a) {
   const isCA = (ll.lat >= 32.5 && ll.lat <= 42.0 && ll.lng >= -124.5 && ll.lng <= -114.1);
   const isLA = isCA && (ll.lat >= 33.70 && ll.lat <= 34.85 && ll.lng >= -118.95 && ll.lng <= -117.64);
   const pt = { geometry: `${ll.lng},${ll.lat}`, geometryType: "esriGeometryPoint", inSR: 4326, spatialRel: "esriSpatialRelIntersects", returnGeometry: false };
   const hit = (url, fields) => arcQuery(url, { ...pt, outFields: fields || "*", resultRecordCount: 3 }).then(d => (d.features || []).map(f => f.attributes));
   
-  // Official nationwide FEMA NFHL MapServer query (Layer 28: Flood Hazard Zones)
-  const femaUrl = "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query";
-  const femaQuery = hit(femaUrl, "FLD_ZONE,ZONE_SUBTY,SFHA_TF,STATIC_BFE").catch(() => []);
+  // Official nationwide FEMA NFHL query shared with facts panel
+  const femaP = sharedFemaNfhlQuery(ll.lat, ll.lng);
 
   let hpoz = { ok: false, v: [] }, hcm = { ok: false, v: [] }, hc = { ok: false, v: [] };
   let hill = { ok: false, v: [] }, slide = { ok: false, v: [] }, liq = { ok: false, v: [] }, fault = { ok: false, v: [] };
@@ -4140,17 +4177,17 @@ async function lotChecks(ll, a) {
       settle(arcQuery(R9.sales, { where: `AIN='${ain}'`, outFields: "*", returnGeometry: false }).then(d => (d.features || []).map(f => f.attributes))),
       settle(socrata(R9.permits, `apn='${ain}'`)),
       settle(socrata(R9.permitsOld, `assessor_book='${ain.slice(0, 4)}' AND assessor_page='${ain.slice(4, 7)}' AND assessor_parcel='${ain.slice(7, 10)}'`)),
-      settle(femaQuery)
+      femaP
     ]);
   } else if (isCA) {
     [sra, lra, femaHits] = await Promise.all([
       settle(hit(R9.fireSRA, "*")),
       settle(hit(R9.fireLRA, "*")),
-      settle(femaQuery)
+      femaP
     ]);
   } else {
-    // Outside California: Only run nationwide FEMA query - returns in <120ms
-    femaHits = await settle(femaQuery);
+    // Outside California: Only run nationwide FEMA query
+    femaHits = await femaP;
   }
 
   const fireVals = [sra, lra].flatMap(x => x.ok ? x.v : []).map(r => String(r.FHSZ_Description || r.FHSZ || r.HAZ_CLASS || "")).filter(Boolean);
@@ -4389,12 +4426,17 @@ async function fetchParcel(ll) {
 
   // All other nationwide locations: find parcel service and query with envelope
   const fips = typeof activeFips === "function" ? activeFips() : null;
-  const svc = (typeof parcelSvc === "function" && fips && fips !== "06037" && fips !== "06059") ? parcelSvc(fips) : (typeof getParcelService === "function" ? getParcelService(ll) : null);
+  const pointBg = typeof houseBlockGroup === "function" ? houseBlockGroup(ll) : null;
+  const pointFips = (pointBg && /^\d{12}/.test(String(pointBg))) ? String(pointBg).slice(0, 5) : null;
+  const effectiveFips = pointFips || fips;
+  const svc = (typeof parcelSvc === "function" && effectiveFips && effectiveFips !== "06037" && effectiveFips !== "06059" && parcelSvc(effectiveFips)) ||
+              (typeof getParcelService === "function" ? getParcelService(ll) : null);
+  const countyF = (svc && svc.counties && svc.counties[0]) || effectiveFips || fips;
   if (svc && svc.url) {
     const pad = 0.00035;
     // Every field the service lists, plus any the county's back-tested model reads from this service (it used to ask
     // for the first 8 only, which left out Florida's living area, lot, year built, units and roll year).
-    const cm = COUNTY_VALUATION_MODELS && COUNTY_VALUATION_MODELS.counties && fips && COUNTY_VALUATION_MODELS.counties[fips];
+    const cm = COUNTY_VALUATION_MODELS && COUNTY_VALUATION_MODELS.counties && countyF && COUNTY_VALUATION_MODELS.counties[countyF];
     // Only when the model's inputs come from this same service: DC's come from its residential CAMA layer (read by
     // enrichDcCama), and asking DC's parcel layer for those fields made every query fail (live check, 16 Nov 2026).
     const sameService = cm && cm.input_map && typeof cm.input_map.source === "string" && cm.input_map.source.split(" ")[0].replace(/\/query$/, "") === String(svc.url).replace(/\/query$/, "");
@@ -4440,11 +4482,14 @@ async function fetchParcel(ll) {
         const feat = d.features.find(f => f.geometry && f.geometry.rings && ringsContain(f.geometry.rings, ll));
         if (feat) {
           const parcel = normalizeParcelFeature(feat, ll, svc);
-          if (parcel && fips === "11001") await enrichDcCama(parcel, feat.attributes && feat.attributes.SSL);
-          if (parcel) await enrichFromInputLayer(parcel, ll, fips);
-          if (parcel) await enrichZoneFromLayer(parcel, ll, fips);
-          if (parcel) await enrichZoneExtra(parcel, fips);
-          if (parcel) Object.defineProperty(parcel, "_fullRecord", { value: true });   // every field the county's model reads
+          if (parcel && (countyF === "11001" || fips === "11001")) await enrichDcCama(parcel, feat.attributes && feat.attributes.SSL);
+          if (parcel) await enrichFromInputLayer(parcel, ll, countyF);
+          if (parcel) await enrichZoneFromLayer(parcel, ll, countyF);
+          if (parcel) await enrichZoneExtra(parcel, countyF);
+          if (parcel) {
+            Object.defineProperty(parcel, "_fullRecord", { value: true });   // every field the county's model reads
+            if (svc && svc.url) Object.defineProperty(parcel, "_svcUrl", { value: svc.url });
+          }
           return parcel;
         }
       }
@@ -4614,11 +4659,26 @@ async function fetchOsmLot(rings) {
   const step = Math.max(1, Math.ceil(ring.length / 40));
   const poly = ring.filter((_, i) => i % step === 0).map(([x, y]) => `${y.toFixed(6)} ${x.toFixed(6)}`).join(" ");
   const q = `[out:json][timeout:12];(way["building"](poly:"${poly}");way["leisure"="swimming_pool"](poly:"${poly}"););out tags geom;`;
+  const groupAbort = new AbortController();
   const one = async (url, delay) => {
-      if (delay) await new Promise(r => setTimeout(r, delay));
-      const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 10000);
-      const r = await fetch(url, { method: "POST", body: "data=" + encodeURIComponent(q), signal: ctl.signal,
-        headers: { "Content-Type": "application/x-www-form-urlencoded" } });
+    if (groupAbort.signal.aborted) throw new Error("aborted");
+    if (delay) {
+      await new Promise((resolve, reject) => {
+        const tid = setTimeout(resolve, delay);
+        groupAbort.signal.addEventListener("abort", () => { clearTimeout(tid); reject(new Error("aborted")); }, { once: true });
+      });
+    }
+    const ctl = new AbortController();
+    const forwardAbort = () => ctl.abort();
+    groupAbort.signal.addEventListener("abort", forwardAbort, { once: true });
+    const t = setTimeout(() => ctl.abort(), 10000);
+    try {
+      const r = await fetch(url, {
+        method: "POST",
+        body: "data=" + encodeURIComponent(q),
+        signal: ctl.signal,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+      });
       clearTimeout(t);
       if (!r.ok) throw new Error("HTTP " + r.status);
       const d = await r.json();
@@ -4632,8 +4692,18 @@ async function fetchOsmLot(rings) {
       }).sort((a, b) => b.sqft - a.sqft);
       const pools = ways.filter(e => e.tags && e.tags.leisure === "swimming_pool").length;
       return { bl, pools };
+    } finally {
+      clearTimeout(t);
+      groupAbort.signal.removeEventListener("abort", forwardAbort);
+    }
   };
-  try { return await Promise.any(OVERPASS.map((u, k) => one(u, k * 2500))); } catch (e) { /* every mirror failed */ }
+  try {
+    const res = await Promise.any(OVERPASS.map((u, k) => one(u, k * 2500)));
+    groupAbort.abort();
+    return res;
+  } catch (e) {
+    groupAbort.abort();
+  }
   return null;
 }
 function houseFacts(a, lot, osm, PF, st) {
@@ -5117,7 +5187,8 @@ function getHouseUpgradeCostDetails(u, h, m) {
   const foot = h.foot || null;
   const bldg = h.bldg || null;
   const medRent = (typeof D !== "undefined" && D && D.meta && D.meta.rent_med) ? D.meta.rent_med : null;
-  const locRent = medRent ? Math.min(Math.max((m.rent || medRent) / medRent, 0.7), 1.6) : 1.0;
+  const rentVal = (m.rent && m.rent < 3500 && m.rent > 100) ? m.rent : medRent;
+  const locRent = medRent ? Math.min(Math.max((rentVal || medRent) / medRent, 0.7), 1.6) : 1.0;
   const houseVpsf = h.houseVpsf || (hv && bldg ? Math.min(Math.max(hv / bldg, 250), 1400) : (hv ? Math.min(Math.max(hv / 1600, 250), 1400) : null));
 
   let sqft = 0, timelineMonths = "6–9", baseCost = 0, breakdown = [], siteAdjustments = [], totalCost = 0, resaleValue = 0, impactFees = 0, schoolFee = 0, impactFeeUnknown = false, feesOnFile = false;
@@ -5371,9 +5442,9 @@ function setHouseStories(n) {
   if (!activeHouse || !activeHouse.box || !activeHouse.box.isConnected) return;
   const { box, a, lot, ll, st } = activeHouse;
   st.manualStories = Math.max(1, Math.min(4, +n || 1));
-  const apnKey = (a && (a.AIN || a.APN || a.PARCEL_ID || a.pin)) || null;
-  if (apnKey) {
-    try { localStorage.setItem("cp_story_" + apnKey, String(st.manualStories)); } catch(e) {}
+  const cKey = getHouseCacheKey(a, activeHouse.f);
+  if (cKey) {
+    try { localStorage.setItem("cp_story_" + cKey, String(st.manualStories)); } catch(e) {}
   }
   renderHouse(box, a, lot, ll, st);
   showToast(`House model set to ${st.manualStories} stor${st.manualStories > 1 ? "ies" : "y"}`);
@@ -5384,7 +5455,8 @@ function houseUpgrades(h, m, R) {
   const houseVpsf = h.houseVpsf || (houseHv && h.bldg ? Math.min(Math.max(houseHv / h.bldg, 250), 1400) : (houseHv ? Math.min(Math.max(houseHv / 1600, 250), 1400) : null));
   const scale = houseHv ? Math.sqrt(Math.min(Math.max(houseHv / (m.hv || houseHv), 0.6), 2.2)) : 1.0;
   const medRent = (typeof D !== "undefined" && D && D.meta && D.meta.rent_med) ? D.meta.rent_med : 2102;
-  const locRent = Math.min(Math.max((m.rent || medRent) / medRent, 0.7), 1.6);
+  const rentVal = (m.rent && m.rent < 3500 && m.rent > 100) ? m.rent : medRent;
+  const locRent = Math.min(Math.max((rentVal || medRent) / medRent, 0.7), 1.6);
   const rent1 = 2102 * locRent;
   const fits = { onestory: h.stories === 1, yard800: h.yard >= 800, yard400: h.yard >= 400,
     yard1200: h.yard >= 1200 && !h.pool, flatroof: true, roof350: h.foot >= 350, pre1980: !!h.yb && h.yb < 1980, pre1975: !!h.yb && h.yb < 1975,
@@ -5555,32 +5627,42 @@ async function houseAt(ll, fOverride = null) {
   showParcel(a, rings);
   const lot = rings.length ? Math.round(ringAreaM2(rings[0]) * 10.7639) : 0;
   
-  const hit_ = houseCache.get(a.AIN) || {};
-  const apnKey = (a && (a.AIN || a.APN || a.PARCEL_ID || a.pin)) || null;
+  const cKey = getHouseCacheKey(a, f);
+  const hit_ = cKey ? (houseCache.get(cKey) || {}) : {};
   let savedStories = null;
-  if (apnKey) {
-    try { const s = localStorage.getItem("cp_story_" + apnKey); if (s) savedStories = parseInt(s); } catch(e) {}
+  if (cKey) {
+    try { const s = localStorage.getItem("cp_story_" + cKey); if (s) savedStories = parseInt(s); } catch(e) {}
   }
   const st = { osm: hit_.osm, R: hit_.R, osmDone: "osm" in hit_ || !rings.length, rDone: "R" in hit_, manualStories: savedStories };
-  activeHouse = { box, a, lot, ll, st, tok };
+  activeHouse = { box, a, lot, ll, st, tok, f };
 
   const draw = () => { if (houseTok === tok && box.isConnected) renderHouse(box, a, lot, ll, st); };
   draw();
 
-  const keep = () => { if (st.osmDone && st.rDone) houseCache.set(a.AIN, { osm: st.osm, R: st.R }); };
-  const pend = housePending.get(a.AIN);
+  const keep = () => { if (cKey && st.osmDone && st.rDone) houseCache.set(cKey, { osm: st.osm, R: st.R }); };
+  const pend = cKey ? housePending.get(cKey) : null;
   if (!st.osmDone) (pend ? pend.osm : fetchOsmLot(rings)).then(v => { st.osm = v; }, () => { st.osm = null; }).finally(() => { st.osmDone = true; keep(); draw(); });
   if (!st.rDone) (pend ? pend.R : lotChecks(ll, a)).then(v => { st.R = v; }, () => { st.R = null; }).finally(() => { st.rDone = true; keep(); draw(); });
+}
+
+function getHouseCacheKey(a, f) {
+  if (!a) return null;
+  const rawId = String(a.AIN || a.APN || a.PARCEL_ID || a.pin || "").trim();
+  if (!rawId || /^Lot\s/i.test(rawId) || /^Parcel\s/i.test(rawId)) return null;
+  const svcUrl = (f && f._svcUrl) || a._svcUrl || "";
+  return (svcUrl ? svcUrl + "::" : "") + rawId;
 }
 
 let houseTok = null;
 const houseCache = new Map(), housePending = new Map();
 function prefetchHouse(f, ll) {
   const a = f && f.attributes, rings = (f && f.geometry && f.geometry.rings) || [];
-  if (!a || !a.AIN || houseCache.has(a.AIN) || housePending.has(a.AIN) || housePending.size >= 3) return;
-  const p = { osm: rings.length ? fetchOsmLot(rings).catch(() => null) : Promise.resolve(null), R: lotChecks(ll, a).catch(() => null) };
-  housePending.set(a.AIN, p);
-  Promise.all([p.osm, p.R]).then(([osm, R]) => { houseCache.set(a.AIN, { osm, R }); housePending.delete(a.AIN); });
+  const cKey = getHouseCacheKey(a, f);
+  if (!cKey || houseCache.has(cKey) || housePending.has(cKey) || housePending.size >= 3) return;
+  // Hover prefetch only prefetches OSM footprint geometry, not 13 remote LA assessor/hazard/permit queries
+  const p = { osm: rings.length ? fetchOsmLot(rings).catch(() => null) : Promise.resolve(null), R: Promise.resolve(null) };
+  housePending.set(cKey, p);
+  p.osm.then(osm => { if (osm) houseCache.set(cKey, { osm }); housePending.delete(cKey); });
 }
 function ringsContain(rings, ll) {
   if (!rings || !rings.length || !ll || ll.lat == null || ll.lng == null) return false;
@@ -5704,8 +5786,8 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
     try {
       const zoneOrUse = String(baseZone || "") + " " + String(a.UseDescription || "");
       const isComm = /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-      const isMulti = /r-?[2-9]|mf|multi|apartment|condo|duplex|triplex|fourplex/i.test(zoneOrUse);
-      const isSfr = !isComm && !isMulti && (/r-?1\b|single|sfr/i.test(zoneOrUse) || (/^r-?[a-z]?$/i.test(String(baseZone || "").trim()) && !isMulti));
+      const isMulti = (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(baseZone));
+      const isSfr = !isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(baseZone || "").trim()));
       const R = st && st.R;
       statEval = evaluateByRightHousing({
         parcel_id: String(a.AIN || a.APN || "PARCEL"),
@@ -5850,6 +5932,7 @@ function noEstimateHtml(vc) {
 }
 
 function renderHouse(box, a, lot, ll, st) {
+  const isLA = (typeof activeFips === "function" && activeFips() === "06037") || (typeof activeCounty !== "undefined" && activeCounty === "la") || (ll && ll.lat >= 33.70 && ll.lat <= 34.85 && ll.lng >= -118.95 && ll.lng <= -117.65);
   const osm = st.osmDone ? st.osm : null, R = st.rDone ? st.R : null, rOff = st.rDone && !st.R;   // rOff: the live checks could not be reached
   const PF = permitFacts(R);
   const F = houseFacts(a, lot, osm, PF, st);
@@ -6072,9 +6155,7 @@ function renderHouse(box, a, lot, ll, st) {
         // Only stations whose location was checked; an illustrative location must not drive a walking distance.
         const allStns = (typeof getAllMetroStations === "function" ? getAllMetroStations() : []).filter(s => s.verified);
         for (const s of allStns) {
-          const dLat = (s.lat - ll.lat) * 69.0;
-          const dLng = (s.lng - ll.lng) * 54.6;
-          const distMi = Math.hypot(dLat, dLng);
+          const distMi = haversineDistMi(ll.lat, ll.lng, s.lat, s.lng);
           if (distMi < minStationDistMi) {
             minStationDistMi = distMi;
             nearestStation = s;
@@ -6095,7 +6176,7 @@ function renderHouse(box, a, lot, ll, st) {
           </div>
           <div style="font-size:11.5px;color:#334155;">
             <div>• <b>Parking:</b> ${activeState() === "CA" ? "California AB 2097 bars most public parking minimums within half a mile of a major transit stop (screening; confirm with the city)." : "Parking rules near transit vary by state and city; check local code."}</div>
-            <div>• <b>Corridor:</b> ${esc(nearestStation.metroName)} · ~${Math.round(minStationDistMi * 18)} min walk</div>
+            <div>• <b>Corridor:</b> ${esc(nearestStation.metroName)} · ~${Math.round(minStationDistMi * 20)} min walk (straight-line at an assumed 3 mph / 20 min/mi)</div>
           </div>
         </div>`;
       }
@@ -6146,7 +6227,7 @@ function renderHouse(box, a, lot, ll, st) {
         </details>
       </div>`, `${esc((valuation && valuation.valuationMethod) || "screening estimate")}; cross-check with live Zillow/Redfin valuation comps`) : ""}
       ${totalRoll > 0 ? fact("Assessor Roll Value", `<span>${fmt$(totalRoll)} <span class="muted">(Land ${fmt$(rollLand)} + Imp ${fmt$(rollImp)}${rollBaseYear ? `, base year ${rollBaseYear}` : ""})</span></span>`, "County Assessor Assessment Roll") : ""}
-      ${sale ? fact("Last recorded sale", `<span>${fmt$(sale.price)} <span class="muted">(${sale.date.length === 8 ? sale.date.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3") : "date not recorded"})</span></span>`, "County PAIS recorded deed transfer") : ""}
+      ${sale ? fact("Last recorded sale", `<span>${fmt$(sale.price)} <span class="muted">(${sale.date.length === 8 ? sale.date.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3") : "date not recorded"})</span></span>`, isLA ? "LA County PAIS recorded deed transfer" : "County Assessor recorded deed transfer") : ""}
       ${fact("Stories", `<div>
         <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
           <b>${F.stories} stor${F.stories > 1 ? "ies" : "y"}</b>${F.conf === "estimated" ? " (estimate)" : ""}
@@ -6455,15 +6536,19 @@ function renderHouse(box, a, lot, ll, st) {
     <!-- PARCEL SCREENING PANEL -->
     ${houseAudit && typeof renderHouseAuditAside === "function" ? renderHouseAuditAside(houseAudit) : ""}
 
-    <!-- INTERACTIVE SITE PLAN & INFILL / ADU MASSING VISUALIZER -->
+    <!-- INTERACTIVE SITE PLAN & INFILL / ADU MASSING VISUALIZER (CA ONLY, TRACED OUTLINES ONLY) -->
+    ${(() => {
+      const isCa = ((typeof activeState === "function" ? activeState() : null) || "CA") === "CA";
+      if (!isCa || !F.foot) return "";
+      return `
     <details class="site-plan-drawer" style="margin:10px 0;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;overflow:hidden;">
       <summary style="padding:10px 12px;font-weight:700;font-size:12px;color:#1e293b;cursor:pointer;display:flex;align-items:center;justify-content:space-between">
-        <span>Interactive Site Plan &amp; Infill Setback Visualizer</span>
-        <span style="font-size:11px;background:#e2e8f0;color:#334155;padding:2px 7px;border-radius:4px;font-weight:600">4-Ft Setbacks &middot; By-Right Footprint</span>
+        <span>Interactive Site Plan &amp; Infill Setback Visualizer (CA Gov. Code § 66314)</span>
+        <span style="font-size:11px;background:#e2e8f0;color:#334155;padding:2px 7px;border-radius:4px;font-weight:600">4-Ft Setbacks &middot; Traced Footprint</span>
       </summary>
       <div style="padding:12px;background:#fff;border-top:1px solid #cbd5e1;font-size:12px;">
         <div style="margin-bottom:8px;color:#475569;line-height:1.4;">
-          Visualizes this parcel's deeded footprint with state statutory 4-ft side and rear setback buffers and the proposed accessory infill building massing.
+          Visualizes this parcel's traced footprint with California statutory 4-ft side and rear setback buffers (Gov. Code § 66314) and accessory infill building massing.
         </div>
 
         <div style="display:flex;justify-content:center;margin:10px 0;">
@@ -6474,12 +6559,12 @@ function renderHouse(box, a, lot, ll, st) {
             
             <!-- 4-ft Setback Buffer (Dashed Orange) -->
             <rect x="25" y="25" width="270" height="150" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4,3" />
-            <text x="200" y="38" font-size="8" fill="#d97706" font-weight="600">4-FT STATUTORY SETBACK</text>
+            <text x="200" y="38" font-size="8" fill="#d97706" font-weight="600">4-FT STATUTORY SETBACK (CA)</text>
 
             <!-- Main Residence (Slate Blue) -->
             <rect x="35" y="50" width="130" height="100" rx="3" fill="#3b82f6" fill-opacity="0.85" stroke="#1d4ed8" stroke-width="1.5" />
             <text x="45" y="95" font-size="10" font-weight="700" fill="#fff">PRIMARY HOME</text>
-            <text x="45" y="110" font-size="8.5" fill="#e0e7ff">${(F.foot || (F.bldg && lot ? Math.min(F.bldg, lot * 0.35) : F.bldg || null)) ? (F.foot || Math.min(F.bldg, lot * 0.35)).toLocaleString() + " sq ft" : "Footprint not recorded"}</text>
+            <text x="45" y="110" font-size="8.5" fill="#e0e7ff">${F.foot.toLocaleString()} sq ft (traced)</text>
 
             <!-- Rear Yard Proposed ADU (Emerald Green) -->
             <rect x="185" y="65" width="95" height="75" rx="3" fill="#10b981" fill-opacity="0.9" stroke="#047857" stroke-width="1.5" />
@@ -6489,11 +6574,12 @@ function renderHouse(box, a, lot, ll, st) {
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11.5px;color:#334155;background:#f8fafc;padding:8px 10px;border-radius:6px;border:1px solid #e2e8f0;">
-          <div>• <b>Lot coverage with a ~750 sq ft ADU:</b> ${(F.foot && lot) ? `~${Math.round((F.foot + 750) / lot * 100)}% of the lot (mapped footprint plus 750 sq ft)` : "Not recorded"}</div>
-          <div>• <b>Setbacks, parking and review time:</b> not checked for this lot; confirm with the city's building department.</div>
+          <div>• <b>Lot coverage with a ~750 sq ft ADU:</b> ${lot ? `~${Math.round((F.foot + 750) / lot * 100)}% of the lot (traced footprint plus 750 sq ft)` : "Not recorded"}</div>
+          <div>• <b>Setbacks, parking and review time:</b> California Gov. Code § 66314 establishes 4-ft side and rear setbacks for ADUs; confirm with the city's building department.</div>
         </div>
       </div>
-    </details>
+    </details>`;
+    })()}
 
     <!-- Interactive ADU Sizing & Return Modeler -->
     ${aduCa ? `
@@ -7192,6 +7278,7 @@ function getParcelService(ll) {
   if (lat >= 34.95 && lat <= 35.30 && lng >= -106.85 && lng <= -106.40) return PARCELS87.find(s => s.counties && s.counties.includes("35001")) || null; // Albuquerque / Bernalillo
   if (lat >= 61.05 && lat <= 61.35 && lng >= -150.15 && lng <= -149.60) return PARCELS87.find(s => s.counties && s.counties.includes("02020")) || null; // Anchorage MOA
   if (lat >= 21.20 && lat <= 21.75 && lng >= -158.30 && lng <= -157.60) return PARCELS87.find(s => s.counties && s.counties.includes("15003")) || null; // Honolulu
+  if (lat >= 38.79 && lat <= 39.00 && lng >= -77.15 && lng <= -76.90) return PARCELS87.find(s => isStatewideSvc(s) && (s.states.includes("11") || s.states.includes("DC"))) || null; // Washington, DC
 
   // 2. Active County Match if FIPS is set
   const fips = (typeof activeFips === "function" ? activeFips() : null);
@@ -7265,7 +7352,7 @@ function lotQuery(svc, w, s_, e_, n) {
 const lotLatLngs = f => f.geometry.rings.map(r => r.map(([x, y]) => [y, x]));
 const natLotCache = new Map();
 let natLotAbort = null;
-function scheduleNatLots(delay = 60) {
+function scheduleNatLots(delay = 150) {
   clearTimeout(natLotTimer);
   natLotTimer = setTimeout(drawNatLots, delay);
 }
@@ -7371,7 +7458,6 @@ async function drawNatLots() {
 
   renderNatLotFeatures(feats);
 }
-function scheduleNatLots() { clearTimeout(natLotTimer); natLotTimer = setTimeout(drawNatLots, 150); }
 let lotHit = null;
 function ringsHold(rings, x, y) {   // even-odd rule over all rings (holes included)
   let inside = false;
@@ -7605,7 +7691,7 @@ function eifdArea(p, scope) {
   let mv = 0, homes = 0, av = 0, avr = 0, avc = 0, np = 0, ry = null, shw = [0, 0, 0, 0], shav = 0, n = 0;
   const tras = new Map(), ex = new Set();
   fs.forEach(f => { const m = (D.details[f.properties.id] || {}).m || {};
-    if (m.hv && m.homes) { mv += m.hv * m.homes; homes += m.homes; }
+    if (m.hv && m.homes && m.hv < 2000000 && m.hv > 10000) { mv += m.hv * m.homes; homes += m.homes; }
     const e = m.e; if (!e) return; n++;
     av += e.av || 0; avr += e.avr || 0; avc += e.avc || 0; np += e.np || 0; ry = e.ry || ry;
     const wt = e.av || e.w || 0;   // Orange County has no roll value in the build; its shares are weighted by market value (w)
@@ -7910,7 +7996,7 @@ function focusP3Walkshed(lat, lng, name, radiusMeters = 805) {
       <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;color:#0284c7;letter-spacing:0.5px;">Transit station</div>
       <div style="font-size:14px;font-weight:800;color:#0f172a;margin:2px 0 4px;">${esc(name || "Transit Station")}</div>
       <div style="font-size:11.5px;color:#475569;margin-bottom:6px;">
-        <b>Walkshed Radius:</b> ${(radiusMeters / 1609.34).toFixed(2)} mi (~${Math.round(radiusMeters / 80)} min walk)
+        <b>Walkshed Radius:</b> ${(radiusMeters / 1609.34).toFixed(2)} mi (~${Math.round(radiusMeters / 80)} min walk at an assumed 3 mph)
       </div>
       <div style="display:flex;gap:4px;margin-bottom:6px;">
         <button type="button" onclick="focusP3Walkshed(${lat}, ${lng}, '${esc(name)}', 402)" style="font-size:10px;padding:3px 6px;border:1px solid #cbd5e1;background:${radiusMeters <= 500 ? '#0284c7' : '#fff'};color:${radiusMeters <= 500 ? '#fff' : '#0f172a'};border-radius:4px;cursor:pointer;">5-Min (0.25 mi)</button>
@@ -8121,7 +8207,7 @@ function select(id, fly) {
   // Gentrification & Tenant Displacement Sensitivity Indicator
   const renterShare = Math.max(0, 100 - (m.sf != null ? +m.sf : 50));
   const lowInc = (m.inc != null && m.inc < 58000);
-  const rentBurdened = (m.rent != null && m.inc != null && (m.rent * 12 / m.inc) > 0.32);
+  const rentBurdened = (m.rent != null && m.inc != null && m.rent < 3500 && m.rent > 100 && (m.rent * 12 / m.inc) > 0.32);
   const highLift = (top && top.vpd >= 2.0);
   if (renterShare >= 55 && (lowInc || rentBurdened) && highLift) {
     h += `<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:#92400e;line-height:1.45;">
@@ -10910,7 +10996,7 @@ function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R, valCheck, valLow, va
   if (facList.length > 0) {
     let minSch = 999, minPark = 999, minLib = 999;
     for (const [k, nm, flat, flng] of facList) {
-      const d = Math.sqrt(Math.pow((flat - ll.lat) * 69, 2) + Math.pow((flng - ll.lng) * 53, 2));
+      const d = haversineDistMi(ll.lat, ll.lng, flat, flng);
       if (k === 0 && d < minSch) minSch = d;
       if (k === 2 && d < minLib) minLib = d;
       if ((k === 9 || k === 10) && d < minPark) minPark = d;

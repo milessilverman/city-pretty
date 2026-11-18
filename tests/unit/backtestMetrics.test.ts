@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { errorMetrics, groupedMetrics, passesGate, priceBand } from "../../scripts/lib/backtestMetrics.mjs";
+import { errorMetrics, groupedMetrics, passesGate, priceBand, bootstrapMedianCi } from "../../scripts/lib/backtestMetrics.mjs";
 
 describe("back-test error metrics", () => {
   it("computes median and mean absolute error, signed bias and hit shares", () => {
@@ -15,6 +15,19 @@ describe("back-test error metrics", () => {
     expect(m.median_signed_error).toBeCloseTo(0.025, 6);
     expect(m.share_within_10pct).toBe(0.75);
     expect(m.share_within_20pct).toBe(1);
+    expect(m.mdape_ci_95).toBeNull(); // n < 30
+  });
+
+  it("computes bootstrap 95% confidence interval on median error when n >= 30", () => {
+    const pairs = [...Array(100)].map((_, i) => ({
+      est: 100 + (i % 20) - 10,
+      target: 100,
+    }));
+    const m = errorMetrics(pairs);
+    expect(m.mdape_ci_95).toBeDefined();
+    expect(Array.isArray(m.mdape_ci_95)).toBe(true);
+    expect(m.mdape_ci_95![0]).toBeLessThanOrEqual(m.mdape!);
+    expect(m.mdape_ci_95![1]).toBeGreaterThanOrEqual(m.mdape!);
   });
 
   it("excludes missing estimates instead of counting them as zero", () => {

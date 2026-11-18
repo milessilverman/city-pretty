@@ -172,7 +172,7 @@
     <!-- Filter Bar -->
     <div style="background:#f8fafc;border-bottom:1px solid #e2e8f0;padding:10px 20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;" role="group" aria-label="Filter case studies by type">
       <span style="font-size:11.5px;font-weight:700;color:#0f172a;">Filter by Case Study Type:</span>
-      <button type="button" class="story-btn active" id="btn-trend-all" onclick="filterTrends('all')" style="font-size:11px;padding:3px 9px;">All Case Studies (60)</button>
+      <button type="button" class="story-btn active" id="btn-trend-all" onclick="filterTrends('all')" style="font-size:11px;padding:3px 9px;">All Case Studies (8)</button>
       <button type="button" class="story-btn" id="btn-trend-trails" onclick="filterTrends('trails')" style="font-size:11px;padding:3px 9px;">Linear Parks &amp; Trails</button>
       <button type="button" class="story-btn" id="btn-trend-transit" onclick="filterTrends('transit')" style="font-size:11px;padding:3px 9px;">Transit &amp; Streetcars</button>
       <button type="button" class="story-btn" id="btn-trend-sales" onclick="filterTrends('sales')" style="font-size:11px;padding:3px 9px;">Dedicated Sales Tax / MAPS</button>
@@ -445,10 +445,10 @@
       <thead><tr><th>Dataset / layer</th><th>Primary source</th><th>Vintage in this build</th></tr></thead>
       <tbody>
         <tr><td>Block groups, population, income, rents, housing age</td><td>U.S. Census Bureau ACS 5-year</td><td>2020–2024 ACS, block groups (6,591 rows)</td></tr>
-        <tr><td>Home values</td><td>LA County Assessor recorded sales &amp; 2026 Secured Roll assessment roll-forward (plus tract/ACS fallbacks)</td><td>2022–2026 Secured Roll sales window (182,400+ transactions cross-referenced with 2026 Assessor roll and FHFA index)</td></tr>
+        <tr><td>Home values</td><td>Assessor recorded sales &amp; back-tested county valuation models (plus tract/ACS fallbacks)</td><td>Assessor rolls and back-tested sales models (documented in county_valuation_models.json)</td></tr>
         <tr><td>Assessor roll and tax-rate areas (EIFD)</td><td>LA County Assessor; Auditor-Controller AF49</td><td>2026 Secured Roll; FY 2026-27 ratios dated 09/17/2026</td></tr>
         <tr><td>Zoning</td><td>City of LA (live ZIMAS), LA County (live DRP), Santa Clarita official layers; California 6th Cycle Housing Element (2021–2029) statutory rezonings (Gov. Code § 65583.2) overlaying regional SCAG parcels</td><td>Official layers (live 2026); 6th Cycle Housing Element statutory rezonings &amp; AB 2097 parking exemptions applied</td></tr>
-        <tr><td>Heat and tree canopy</td><td>American Forests Tree Equity Score; city street-tree surveys; USDA Forest Service i-Tree</td><td>Tree Equity Score 2021 release, on 2010 block groups (a 2025 release on 2020 block groups exists and is not used yet); 2.07 million tree records</td></tr>
+        <tr><td>Heat and tree canopy</td><td>American Forests Tree Equity Score; city street-tree surveys; USDA Forest Service i-Tree</td><td>Tree Equity Score 2025 release on 2020 block groups (crosswalked to planning regions in CT); 2.07 million tree records</td></tr>
         <tr><td>Transit frequency and stops</td><td>GTFS transit schedules from regional transit authorities (LA Metro, OCTA, Metrolink, Muni, CapMetro, etc.)</td><td>Schedules active at 2026 build time</td></tr>
         <tr><td>Crime</td><td>LAPD, LASD, Long Beach PD open CAD feeds; independent municipal police departments flagged with reporting gap notices</td><td>Rolling 12 months to late Oct 2026 (Santa Monica feed ends May 2024; Beverly Hills, Burbank, Glendale, Pasadena flagged)</td></tr>
         <tr><td>Crashes</td><td>CHP Crash Records System (CCRS)</td><td>2023–2026 records</td></tr>

@@ -90,7 +90,18 @@ export async function liveSiteFacts(lat, lng, opts = {}) {
   const femaUrl = `${FEMA}?${pointQuery(lat, lng, "FLD_ZONE,ZONE_SUBTY,SFHA_TF")}`;
   const usgsUrl = `${USGS}?${new URLSearchParams({ x: String(lng), y: String(lat), units: "Feet", wkid: "4326" })}`;
 
-  const [bg, cnty, fema, usgs] = await Promise.allSettled([geoUrl, cntyUrl, femaUrl, usgsUrl].map((u) => getJson(u, fetcher)));
+  const femaKey = `${(+lat).toFixed(4)},${(+lng).toFixed(4)}`;
+  const sharedFema = (typeof window !== "undefined" && window._femaQueryCache && window._femaQueryCache.get(femaKey));
+  const femaPromise = sharedFema
+    ? sharedFema.then(res => ({ features: (res.v || []).map(attrs => ({ attributes: attrs })) }))
+    : getJson(femaUrl, fetcher);
+
+  const [bg, cnty, fema, usgs] = await Promise.allSettled([
+    getJson(geoUrl, fetcher),
+    getJson(cntyUrl, fetcher),
+    femaPromise,
+    getJson(usgsUrl, fetcher),
+  ]);
   const hudLookup = opts.hudLookup || ((f) => (typeof window !== "undefined" && typeof window.getHudFmr === "function" ? window.getHudFmr(f) : null));
   const err = (s) => (s.reason && s.reason.message) || "request failed";
 

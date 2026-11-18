@@ -415,6 +415,10 @@ export async function osmNearby(
 // One call for "everything we can source about this point"
 // ---------------------------------------------------------------------------------------------------------------
 
+// Dynamic default ACS vintage: ACS 5-year data releases around December each year (e.g. 2021-25 release in Dec 2026).
+const CURRENT_CALENDAR_YEAR = new Date().getFullYear();
+const DEFAULT_ACS_YEAR = Math.max(2024, CURRENT_CALENDAR_YEAR - (new Date().getMonth() >= 11 ? 1 : 2));
+
 export async function siteFacts(lat: number, lng: number, opts: { censusApiKey?: string; acsYear?: number; fetcher?: FetchLike } = {}) {
   const f = opts.fetcher || fetch;
   const [geo, elev, flood] = await Promise.all([censusGeographies(lat, lng, f), usgsElevation(lat, lng, f), femaFloodZone(lat, lng, f)]);
@@ -425,7 +429,7 @@ export async function siteFacts(lat: number, lng: number, opts: { censusApiKey?:
   if (geo.ok && geo.value.tract_geoid) {
     acs = await acs5(
       { state: geo.value.state_fips, county: geo.value.county_fips.slice(2), tract: geo.value.tract_geoid.slice(5) },
-      opts.acsYear || 2024,
+      opts.acsYear || DEFAULT_ACS_YEAR,
       opts.censusApiKey,
       undefined,
       f,
