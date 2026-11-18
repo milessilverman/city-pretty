@@ -1468,25 +1468,26 @@ if (typeof window !== "undefined") {
  * Roof Area & Architectural Cadastre Calculation Engine
  * Estimates true 3D roof plane surface area from 2D building footprints,
  * pitch/slope geometry, and roofing material assemblies.
- * Default pitch distributions calibrated from NREL ResStock building characteristics
- * (NREL/TP-5500-75217) and International Residential Code (IRC Section R905) slope baselines.
+ * Default pitches are a rule of thumb by state and build era, with no source. An 18 Nov 2026 edit credited them to
+ * "NREL ResStock (NREL/TP-5500-75217)" and "IRC Section R905"; no report with that number was found, and R905 sets only
+ * minimum slopes per roofing material (e.g. 2:12 for asphalt shingles), not typical pitches, so the credit was removed.
  */
 
 function getDefaultPitchRise(yearBuilt, stateCode) {
   const st = (stateCode || "CA").toUpperCase();
 
-  // Regional climate adaptations (NREL ResStock & IRC Chapter 9 slope standards)
+  // Regional adjustments (rule of thumb; no source)
   const isDesertOrArid = ["AZ", "NV", "NM"].includes(st);
   const isHeavySnowOrRain = ["MN", "WI", "MI", "NY", "MA", "VT", "NH", "ME", "WA", "OR"].includes(st);
 
   if (isDesertOrArid) {
-    return 3.5; // Predominantly low-pitch ranch or flat tile (IECC Climate Zones 1B-3B modal pitch 3.5:12)
+    return 3.5; // low-pitch ranch or flat tile (rule of thumb)
   }
   if (isHeavySnowOrRain) {
-    return (yearBuilt && yearBuilt < 1940) ? 8.0 : 7.0; // Steep pitch for snow shedding (IECC Zones 5-7 modal pitch 7:12 to 8:12)
+    return (yearBuilt && yearBuilt < 1940) ? 8.0 : 7.0; // steeper roofs for snow (rule of thumb)
   }
 
-  // Era adaptations (NREL ResStock single-family housing distributions by build era)
+  // Era adjustments (rule of thumb; no source)
   if (yearBuilt && yearBuilt < 1940) return 7.5; // Historic Craftsman, Tudor, Victorian, Spanish revival
   if (yearBuilt && yearBuilt >= 1945 && yearBuilt <= 1978) return 4.5; // California Ranch, Mid-Century Modern
   return 5.5; // Standard typical suburban truss pitch (5.5:12)
@@ -1785,7 +1786,7 @@ function renderHouseAuditAside(audit) {
         <span style="font-size:11px;color:#64748b;font-weight:600;">Assumed pitch ${audit.roofCadastre.pitchRatio}</span>
       </div>
       <div style="font-size:11px;color:#475569;margin-top:4px;">
-        • <b>Roof area:</b> ~${fmtN(audit.roofCadastre.grossRoofSqft)} sq ft (from living area, stories and pitch; not measured. Default pitch calibrated from NREL ResStock building characteristics and IRC Section R905)
+        • <b>Roof area:</b> ~${fmtN(audit.roofCadastre.grossRoofSqft)} sq ft (from living area, stories and pitch; not measured. The default pitch is a rule of thumb by state and build era, with no source)
       </div>
       ${notModeled("Re-roofing cost: not modeled yet — no sourced cost data.")}
     </div>` : ""}
@@ -6437,7 +6438,7 @@ function renderHouse(box, a, lot, ll, st) {
               </div>
 
               <div style="border-top:1px solid #e2e8f0;padding-top:8px;font-size:11px;color:#64748b;font-style:italic;">
-                Roof area is a geometry estimate from building footprint/living area, stories and pitch, not a direct measurement. Default pitch calibrated from NREL ResStock building characteristics and IRC Section R905 slope standards; select the button that matches the house. Re-roofing cost: not modeled yet — no sourced local contractor bid data.
+                Roof area is a geometry estimate from building footprint/living area, stories and pitch, not a direct measurement. The default pitch is a rule of thumb by state and build era, with no source; select the button that matches the house. Re-roofing cost: not modeled yet — no sourced local contractor bid data.
               </div>
             </div>
           </details>

@@ -870,6 +870,15 @@ test("Florida parcel lookup: no record cap (the statewide layer fails capped que
 });
 
 test("St. Louis City parcel lookup succeeds through JSONP under the Content-Security-Policy", async ({ page }) => {
+  // A recorded answer, not the live server: St. Louis's server sends no CORS header (so the page falls back to JSONP), and
+  // it was down on 18 Nov 2026 ("Token Required"), which made a live test fail for reasons outside the page.
+  const ring = [[-90.2000, 38.6265], [-90.1988, 38.6265], [-90.1988, 38.6275], [-90.2000, 38.6275], [-90.2000, 38.6265]];
+  const body = JSON.stringify({ features: [{ attributes: { ColParcelId: "TEST-1", SITEADDR: "1 TEST ST" }, geometry: { rings: [ring] } }] });
+  await page.route(/maps8\.stlouis-mo\.gov\/.*\/query/, (route) => {
+    const cb = new URL(route.request().url()).searchParams.get("callback");
+    if (cb) return route.fulfill({ status: 200, contentType: "application/javascript", body: `${cb}(${body});` });
+    return route.fulfill({ status: 200, contentType: "application/json", body });   // no CORS header: fetch() is refused
+  });
   const errors = await openPage(page);
   const r = await page.evaluate(async () => {
     const ev = (s: string) => (0, eval)(s);
