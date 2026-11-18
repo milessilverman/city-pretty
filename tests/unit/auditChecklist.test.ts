@@ -338,4 +338,65 @@ describe("Audit checklist verification (Section 5)", () => {
       expect(row.note).toContain("HUD voucher benchmark for this ZIP code");
     });
   });
+
+  describe("P0-9: Transit station lookup and statutes load gate", () => {
+    it("findNearestTransitStation resolves nearest station from GeoJSON and transit pipelines", () => {
+      const transitSnippet = appJs.slice(
+        appJs.indexOf("function haversineDistMi(lat1, lon1, lat2, lon2)"),
+        appJs.indexOf("\n// Property strategies.", appJs.indexOf("function findNearestTransitStation"))
+      );
+      const runner: any = {};
+      const mockPipelines = [
+        {
+          metroName: "Austin Metro",
+          stations: [
+            { name: "Downtown Station", lat: 30.267, lng: -97.743, verified: true, mode: "light_rail" },
+            { name: "Unverified Station", lat: 30.250, lng: -97.750, verified: false },
+          ],
+        },
+      ];
+      new Function("TRANSIT_PIPELINES_DATA", "activeBundle", "D", "runner", `
+        ${transitSnippet}
+        runner.findNearestTransitStation = findNearestTransitStation;
+      `)(mockPipelines, () => null, null, runner);
+
+      const stn = runner.findNearestTransitStation(30.268, -97.744);
+      expect(stn).not.toBeNull();
+      expect(stn.name).toBe("Downtown Station");
+      expect(stn.type).toBe("light_rail");
+      expect(stn.distMi).toBeLessThan(0.5);
+
+      // Invalid or out-of-range coordinates return null
+      expect(runner.findNearestTransitStation(null, -97.744)).toBeNull();
+      expect(runner.findNearestTransitStation(NaN, -97.744)).toBeNull();
+    });
+  });
+
+  describe("P0-12: Home-compare drawer guards and assessed value labeling", () => {
+    it("renders 'Not modeled' when equity, roi, or payback is unmodeled, and handles null playbook best", () => {
+      const compareStart = appJs.indexOf("function renderCompareDrawer()");
+      const compareSnippet = appJs.slice(
+        compareStart,
+        appJs.indexOf("// Otherwise Neighborhoods tab", compareStart)
+      );
+      // Verify code contains strictly positive check and 'Not modeled'
+      expect(compareSnippet).toMatch(/b\.equity > 0/);
+      expect(compareSnippet).toMatch(/b\.roi > 0/);
+      expect(compareSnippet).toMatch(/b\.paybackYrs > 0/);
+      expect(compareSnippet).toMatch(/"Not modeled"/);
+      expect(compareSnippet).toMatch(/"Assessed Value \(Prop 13\)"/);
+    });
+
+    it("persists state code and updates compare button innerHTML", () => {
+      expect(appJs).not.toMatch(/btn\.tnnerHTML/);
+      expect(appJs).toMatch(/st: activeHouse\.st \|\| \(typeof activeState === "function" \? activeState\(\) : null\)/);
+    });
+  });
+
+  describe("Site-plan drawer: state and outline gates", () => {
+    it("strictly requires activeState() === 'CA' and traced building footprint outline", () => {
+      expect(appJs).toMatch(/const isCa = curState === "CA";/);
+      expect(appJs).toMatch(/F\.footSource === "osm_building_outline" \|\| F\.footSource === "cadastral_outline"/);
+    });
+  });
 });

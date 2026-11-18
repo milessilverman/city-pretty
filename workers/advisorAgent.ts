@@ -169,7 +169,12 @@ export async function runAdvisor(
     }
 
     convo.push({ role: "assistant", content: res.content });
-    if (res.stop_reason === "pause_turn") continue;
+    if (res.stop_reason === "pause_turn") {
+      if (round === MAX_TOOL_ROUNDS) {
+        return { ok: true, text: text || "[Answer paused at the model limit. Ask a narrower question.]", sources: dedupe(sources), tool_rounds: round, stopped_early: "pause_turn" };
+      }
+      continue;
+    }
 
     const uses = res.content.filter((b): b is Anthropic.Beta.BetaToolUseBlock => b.type === "tool_use");
     if (!uses.length) return { ok: true, text, sources: dedupe(sources), tool_rounds: round };

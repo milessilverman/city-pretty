@@ -829,3 +829,23 @@ was made from a test that didn't cover the live page.
   in inline event attributes.
 - **Connecticut Tree Equity Coverage:** Verified all 8 Connecticut planning region files (`09110` through `09190`) contain
   valid 2025 Tree Equity block groups crosswalked from historical county codes.
+- **Transit Station Resolution (`findNearestTransitStation`):** Defined and hooked `findNearestTransitStation(lat, lng)`
+  to calculate network-distance haversine proximity to verified rail and BRT stations across GeoJSON layer features,
+  corridor pipeline stations, and verified regional stations in `app/data/transit_pipelines.json` (such as Austin Project Connect,
+  Denver FasTracks, Chicago CTA Red Line Extension, and OC Streetcar). When distance cannot be established, statutory screening
+  reports "not confirmed: transit distance unknown" rather than denying law applicability. In addition, when `statutes.json`
+  resolves after an initial parcel click, the active house dossier dynamically re-renders to reflect applicable housing laws.
+- **Home-Compare Drawer Safety & Assessed Valuation Labeling:** Fixed `btn.innerHTML` syntax error in comparison toggle,
+  guarded against unmodeled strategies by requiring strictly positive numeric equity, ROI, and payback values (falling back to "Not modeled"
+  instead of `+$0 Net Equity (null / $1)` or `null yrs`), guarded `b.title` with "None on file", persisted state code in compare items,
+  and appropriately labeled California assessed values as "Assessed Value (Prop 13)" and other jurisdictions as "Assessed Roll Value".
+- **Site-Plan Visualizer Constraints:** Gated the 4-ft statutory setback drawer on `activeState() === "CA"` and verified
+  a traced building polygon outline (`osm_building_outline` or `cadastral_outline`) is on file, preventing statutory California setback
+  rules from rendering in other states or over speculative footprints.
+- **Story-Inference Provenance Labeling:** Labeled height-based story inferences as estimates (`estimated: X stories (height Y m ÷ 3.2 m floor-to-floor, OpenStreetMap)`)
+  with `F.conf = "estimated"` rather than claiming them as measured.
+- **NLR (formerly NREL) Endpoint Migration:** Migrated alternative fuel stations API endpoint in `pipeline/fetch_oc.py` from
+  `developer.nrel.gov` to `developer.nlr.gov`, supporting both `NLR_API_KEY` and legacy `NREL_API_KEY`.
+- **AI Advisor Turn Limits & Grounding Transparency:** Handled `pause_turn` gracefully on the final model tool round in
+  `workers/advisorAgent.ts` to prevent unexpected loop termination, and surfaced `data.sources` as an expandable "Sources consulted"
+  list and `stopped_early` as a prominent pause notice in the chat UI.

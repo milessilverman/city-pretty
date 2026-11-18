@@ -1377,9 +1377,9 @@ def fetch_fire_ev():
         meta = json.loads(get(u, {"f": "json"}))
         save("afdc_dcfc.json", json.dumps({"source": u, "downloaded": time.strftime("%Y-%m-%d"), "dataLastEditDate": (meta.get("editingInfo") or {}).get("dataLastEditDate"), "fuel_stations": rows}))
         manifest("afdc_dcfc.json", u, len(rows), "public, available DC fast-charging stations (AFDC via USDOT/BTS NTAD)")
-    key = os.environ.get("NREL_API_KEY")
+    key = os.environ.get("NLR_API_KEY") or os.environ.get("NREL_API_KEY")
     if key and not have("afdc_dcfc.json"):
-        save("afdc_dcfc.json", get("https://developer.nrel.gov/api/alt-fuel-stations/v1.json", {"fuel_type": "ELEC", "state": "CA", "ev_charging_level": "dc_fast", "status": "E", "access": "public", "limit": "all", "api_key": key}))
+        save("afdc_dcfc.json", get("https://developer.nlr.gov/api/alt-fuel-stations/v1.json", {"fuel_type": "ELEC", "state": "CA", "ev_charging_level": "dc_fast", "status": "E", "access": "public", "limit": "all", "api_key": key}))
 
 
 # ---------------- 8. CCRS crashes (CHP via data.ca.gov datastore) ----------------

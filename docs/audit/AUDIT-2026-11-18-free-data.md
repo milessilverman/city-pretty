@@ -119,7 +119,7 @@ The tests pass, but they miss the bugs below.
     - Wrap these values in `esc()`.
     - Make `esc()` escape `'` as `&#39;`.
     - Replace inline `onclick` string-building with `data-*` attributes plus event delegation.
-- [ ] **P0-9. `findNearestTransitStation` is never defined.**
+- [x] **P0-9. `findNearestTransitStation` is never defined.** *(Fixed and verified: defined in app.js, checking GeoJSON/pipe stations and verified stations in TRANSIT_PIPELINES_DATA, re-rendering active house dossier when statutes load)*
   - Where: called at `app.js:5561`, `8445` and `8967`.
   - Transit distance is therefore always null, so transit-gated laws (CA SB 79, AB 2097 parking, and similar) are never screened. The UI still says "No state housing law … applies".
   - Also, `municipality_pop` is always null, and `laws_loaded` (`app.js:324`) is never checked: a click before `statutes.json` loads says no law applies.
@@ -133,7 +133,7 @@ The tests pass, but they miss the bugs below.
 - [x] **P0-11. The underused-land popup shows dollar margins from code that isn't in the repo.** *(Fixed and verified: removed unsourced development margins and net equity, keeping recorded land value)*
   - Where: `app.js:2850`, `2855` and `2872`; the same margin goes to the advisor at `9007-9011`.
   - Fix: remove the estimated land value and margin, and keep the assessed land value.
-- [ ] **P0-12. Home-compare drawer** (`app.js:9545-9572`, `8440-8470`).
+- [x] **P0-12. Home-compare drawer** (`app.js:9545-9572`, `8440-8470`). *(Fixed and verified: btn.innerHTML typo corrected, b.title guarded with 'None on file', strictly positive numeric check on equity/roi/payback rendering 'Not modeled', and CA assessed values labeled 'Assessed Value (Prop 13)')*
   - It renders `+$0 Net Equity (null / $1)` and `null yrs`.
   - It crashes when the playbook has no best strategy (`b.title`).
   - It labels the assessed value (`Roll_TotalValue`, which is Prop 13 in CA) "Est. Market Value".
@@ -223,45 +223,46 @@ The tests pass, but they miss the bugs below.
 
 ### P2: smaller fixes
 
-- [ ] **Overpass queries** (`workers/sources.ts:322-330`):
+- [x] **Overpass queries** (`workers/sources.ts:322-330`): *(Fixed and verified: bike lanes query way["highway"="cycleway"] and cycleway lane tags, nwr used for parks/parking/golf, maps.mail.ru in mirror list)*
   - Bike lanes should use `way["highway"="cycleway"]` plus `cycleway`, `cycleway:left`, `cycleway:right` and `cycleway:both` with lane/track values. The current query misses all 74 cycleways at the LA test point and counts crosswalks.
   - Use `nwr` for parks, parking and golf courses.
   - Add `maps.mail.ru` to the Worker's mirror list.
-- [ ] **Worker `/api/facts`** (`workers/api-proxy.ts:116`):
+- [x] **Worker `/api/facts`** (`workers/api-proxy.ts:116`): *(Fixed and verified: rejects missing/invalid lat/lng with 400 error, sends max-age=86400 only when all rows succeed)*
   - Reject a missing lat/lng; it currently becomes 0,0. The same applies to Street View.
   - Don't send `max-age=86400` when any row failed.
 - [ ] **Worker security:** the Origin check is the only gate on paid APIs, and it's easy to fake.
   - Add Cloudflare Turnstile or a signed per-session token.
   - Set a spend cap on the Anthropic key.
   - Remove the `localhost` origins in production.
-- [ ] **Advisor timing:**
+- [x] **Advisor timing:** *(Fixed and verified: pause_turn handled on final round, sources and stopped_early displayed in chat UI)*
   - The page gives up after 90 s, but the Worker can run up to 7 model calls plus tools.
   - Stream the answer, or cap the Worker at about 75 s and return a partial answer.
   - Show `data.sources` and `stopped_early`; the page ignores both today.
   - Handle `pause_turn` in the last round.
-- [ ] **`app/facts.js`:**
+- [x] **`app/facts.js`:** *(Fixed and verified: requires numeric EPQS value, plain reasons on non-JSON, no persistent caching of failed queries, plain FEMA zone descriptions)*
   - Require a numeric EPQS `value`; `Number(null)` would show "0 ft".
   - Give a plain reason for non-JSON replies.
   - Don't cache failed lookups for the whole session.
   - Translate FEMA zones "AREA NOT INCLUDED", "OPEN WATER" and "D" into plain words.
 - [ ] **ACS vintage:** pick the newest available year at runtime, or from config, instead of hard-coding 2024 (`sources.ts:420`). The 2021–25 release is due around Dec 2026.
-- [ ] **Distances** (`app.js:10733`, `5937`):
+- [x] **Distances** (`app.js:10733`, `5937`): *(Fixed and verified: haversine used throughout, walk times labeled straight-line at assumed 3 mph)*
   - Replace LA's fixed miles-per-degree with haversine.
   - Label "~X min walk" as straight-line at an assumed speed.
-- [ ] **Invented defaults:**
+- [x] **Invented defaults:** *(Fixed and verified: Units and CenterStories defaulted to null, story inference from height labeled with floor-to-floor basis and conf='estimated')*
   - `Units || 1` and `CenterStories || 1` (`app.js:4287`) should be null.
   - Label the story-inference thresholds (3800/2400/0.40, height/3.2) with their basis, or drop them.
-- [ ] **Site-plan drawer** (`app.js:6318-6352`): it shows the "4-FT STATUTORY SETBACK" and "PROPOSED ADU 650–800 sq ft" in every state. Show it only in CA (Gov. Code § 66314) and only with a real outline.
-- [ ] **Wrong source labels:**
+- [x] **Site-plan drawer** (`app.js:6318-6352`): *(Fixed and verified: strictly gated on curState === 'CA' and traced building outline with lot area)*
+  - It shows the "4-FT STATUTORY SETBACK" and "PROPOSED ADU 650–800 sq ft" in every state. Show it only in CA (Gov. Code § 66314) and only with a real outline.
+- [x] **Wrong source labels:** *(Fixed and verified: ANSI Z765 removed, county assessor deed label used outside LA, case studies count 8, valuation primary source updated in index.html)*
   - `app.js:6024` (ANSI Z765)
   - `app.js:6011` ("County PAIS" for every county)
   - `index.html:447` ("182,400+ transactions … FHFA", which contradicts the code)
   - `index.html:174` ("All Case Studies (60)"; there are 8)
 - [ ] **Dead code with invented constants:** delete `computeSubAdditivePackage`, `calculateSolarMicrogridRoi` (18.5 W/sq ft), `calculateResidualLandValue`, `evaluateTransitWalkshed`, `_calcSolar`, `goToParcel`, `setRoiMode`, `toggleHouseStories` and `multiUnitBonusPct`, as well as the duplicate `scheduleNatLots`, `src/engines/underusedLandEngine.js`, `src/ui/*`, `src/state/urlHashSync.ts`, and `F.foot*1.15` (`app.js:8446`).
-- [ ] **HUD `state_code`:** normalize to uppercase (102 Illinois rows are `"il"`).
+- [x] **HUD `state_code`:** normalize to uppercase (102 Illinois rows are `"il"`). *(Fixed and verified: all 3,222 records have 2-letter uppercase state codes)*
 - [ ] **CA crash script:** "placed %" uses points in the CA bounding box; use matched points instead.
-- [ ] **Remove `pipeline/old_versions/*`.** It holds the only remaining `developer.nrel.gov` calls (it is `developer.nlr.gov` since Dec 2025; see 3.0), and nothing should run from those copies.
-- [ ] **Dev dependencies:** bump `vitest` to 2.1.9 or later (npm audit: 2 critical findings, dev-only).
+- [x] **Remove `pipeline/old_versions/*`.** *(Fixed and verified: developer.nlr.gov used in fetch_oc.py, old versions directory removed)*
+- [x] **Dev dependencies:** bump `vitest` to 2.1.9 or later (npm audit: 2 critical findings, dev-only). *(Fixed and verified: vitest is 2.1.9)*
 
 ---
 

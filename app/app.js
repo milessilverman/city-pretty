@@ -5716,12 +5716,11 @@ function haversineDistMi(lat1, lon1, lat2, lon2) {
 function findNearestTransitStation(lat, lng) {
   if (lat == null || lng == null || isNaN(lat) || isNaN(lng)) return null;
   const bundle = (typeof activeBundle === "function" ? activeBundle() : null) || (typeof D !== "undefined" ? D : null);
-  if (!bundle) return null;
   let nearest = null;
   let minDist = Infinity;
 
-  // 1. Check GeoJSON stations layer in bundle
-  const stnLayer = (bundle.layers && bundle.layers.stations) || null;
+  // 1. Check GeoJSON stations layer in bundle (e.g. 176 LA stations)
+  const stnLayer = (bundle && bundle.layers && bundle.layers.stations) || null;
   const feats = (stnLayer && Array.isArray(stnLayer.features)) ? stnLayer.features : [];
   for (const f of feats) {
     if (!f || !f.geometry || !Array.isArray(f.geometry.coordinates)) continue;
@@ -5739,8 +5738,8 @@ function findNearestTransitStation(lat, lng) {
     }
   }
 
-  // 2. Check corridor / pipeline stations if available
-  const pStns = (bundle.pipe && Array.isArray(bundle.pipe.stations)) ? bundle.pipe.stations : [];
+  // 2. Check corridor / pipeline stations in bundle if available
+  const pStns = (bundle && bundle.pipe && Array.isArray(bundle.pipe.stations)) ? bundle.pipe.stations : [];
   for (const s of pStns) {
     if (!s || s.lat == null || s.lng == null || s.verified === false) continue;
     const d = haversineDistMi(lat, lng, s.lat, s.lng);
@@ -5751,6 +5750,25 @@ function findNearestTransitStation(lat, lng) {
         distMi: d,
         type: s.mode || "heavy_rail"
       };
+    }
+  }
+
+  // 3. Check verified stations in TRANSIT_PIPELINES_DATA (e.g. Chicago, Austin, Denver, OC)
+  if (typeof TRANSIT_PIPELINES_DATA !== "undefined" && Array.isArray(TRANSIT_PIPELINES_DATA)) {
+    for (const pipe of TRANSIT_PIPELINES_DATA) {
+      const pipeStns = Array.isArray(pipe.stations) ? pipe.stations : [];
+      for (const s of pipeStns) {
+        if (!s || s.lat == null || s.lng == null || s.verified === false) continue;
+        const d = haversineDistMi(lat, lng, s.lat, s.lng);
+        if (d < minDist) {
+          minDist = d;
+          nearest = {
+            name: s.name || "Transit Station",
+            distMi: d,
+            type: s.mode || "heavy_rail"
+          };
+        }
+      }
     }
   }
 
@@ -6545,8 +6563,10 @@ function renderHouse(box, a, lot, ll, st) {
 
     <!-- INTERACTIVE SITE PLAN & INFILL / ADU MASSING VISUALIZER (CA ONLY, TRACED OUTLINES ONLY) -->
     ${(() => {
-      const isCa = ((typeof activeState === "function" ? activeState() : null) || "CA") === "CA";
-      if (!isCa || !F.foot) return "";
+      const curState = typeof activeState === "function" ? activeState() : null;
+      const isCa = curState === "CA";
+      const isTraced = !!(F && F.foot && (F.footSource === "osm_building_outline" || F.footSource === "cadastral_outline"));
+      if (!isCa || !isTraced || !lot) return "";
       return `
     <details class="site-plan-drawer" style="margin:10px 0;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;overflow:hidden;">
       <summary style="padding:10px 12px;font-weight:700;font-size:12px;color:#1e293b;cursor:pointer;display:flex;align-items:center;justify-content:space-between">
@@ -8711,6 +8731,7 @@ function toggleHomeCompare() {
       ain: apn,
       address: a.SitusFullAddress || ("Parcel " + apn),
       county: a.county || countyOf(),
+      st: activeHouse.st || (typeof activeState === "function" ? activeState() : null),
       lotSqft: lotSqft,
       bldgSqft: bldgSqft,
       stories: isVacant ? 0 : (F.stories || 1),
@@ -8731,7 +8752,7 @@ function updateHomeCompareUI() {
   const btn = document.getElementById("btn-compare-home-dossier");
   if (btn && activeHouse && activeHouse.a) {
     const inC = homeCompareList.some(h => h.ain === activeHouse.a.AIN);
-    btn.tnnerHTML = inC ? "✓ In home comparison" : "<svg class=ic aria-hidden=true><use href=#i-compare /></svg> Compare this home";
+    btn.innerHTML = inC ? "✓ In home comparison" : "<svg class=ic aria-hidden=true><use href=#i-compare /></svg> Compare this home";
     btn.classList.toggle("active", inC);
   }
   const tabHomes = document.getElementById("tab-cmp-homes");
@@ -9319,8 +9340,16 @@ async function sendAiQuery(q, promptKey = null) {
     });
     clearTimeout(timer);
     const data = await res.json().catch(() => null);
-    if (res.ok && data && data.ok && data.text) { reply = { role: "assistant", raw: data.text, text: aiTextToHtml(data.text) }; setAiStatus("ok"); }
-    else {
+    if (res.ok && data && data.ok && data.text) {
+      reply = {
+        role: "assistant",
+        raw: data.text,
+        text: aiTextToHtml(data.text),
+        sources: Array.isArray(data.sources) ? data.sources : [],
+        stopped_early: data.stopped_early || null
+      };
+      setAiStatus("ok");
+    } else {
       const why = (data && data.error) || `HTTP ${res.status}`;
       reply = { role: "notice", text: `The AI advisor could not answer (${esc(why)}). No answer was generated.` };
       if (res.status >= 500 || res.status === 404) setAiStatus("down", why);
@@ -9424,9 +9453,22 @@ function renderAiChat() {
   box.innerHTML = aiHistory.map(msg => {
     if (msg.role === "user") return `<div style="align-self:flex-end;background:#4f46e5;color:#fff;padding:8px 12px;border-radius:12px 12px 0 12px;max-width:82%;box-shadow:0 1px 3px rgba(0,0,0,0.1);font-weight:500;">${esc(msg.text)}</div>`;
     const isAi = msg.role === "assistant";
+    const stoppedNotice = msg.stopped_early
+      ? `<div style="margin-top:6px;font-size:11px;color:#b45309;background:#fffbeb;padding:4px 8px;border-radius:4px;border:1px solid #fde68a;">[Answer paused: ${esc(msg.stopped_early === "tool_rounds" ? "reached tool round limit" : msg.stopped_early === "max_tokens" ? "cut off at length limit" : msg.stopped_early === "pause_turn" ? "paused at model turn limit" : msg.stopped_early)}]</div>`
+      : "";
+    const sourcesHtml = (isAi && Array.isArray(msg.sources) && msg.sources.length)
+      ? `<details style="margin-top:8px;font-size:11px;color:#64748b;border-top:1px solid #f1f5f9;padding-top:6px;">
+          <summary style="cursor:pointer;font-weight:600;">Sources consulted (${msg.sources.length})</summary>
+          <ul style="margin:4px 0 0 16px;padding:0;">
+            ${msg.sources.map(s => `<li>${esc(s.name || s.publisher || "Source")}${s.url ? ` · <a href="${esc(s.url)}" target="_blank" rel="noopener" style="color:#0284c7;">link</a>` : ""}</li>`).join("")}
+          </ul>
+        </details>`
+      : "";
     return `<div style="align-self:flex-start;background:${isAi ? "#fff" : "#f8fafc"};border:1px solid #e2e8f0;color:#0f172a;padding:12px 14px;border-radius:12px 12px 12px 0;max-width:92%;line-height:1.5;">
         <div style="font-size:11px;font-weight:700;color:${isAi ? "#7c3aed" : "#475569"};margin-bottom:4px;">${isAi ? "AI advisor (can be wrong)" : "City Pretty"}</div>
         ${msg.text}
+        ${stoppedNotice}
+        ${sourcesHtml}
       </div>`;
   }).join("");
   box.scrollTop = box.scrollHeight;
@@ -9799,10 +9841,11 @@ function renderCompareDrawer() {
     }
     box.innerHTML = homeCompareList.map(h => {
       const b = h.playbook && h.playbook.best;
-      const hasEquity = b && typeof b.equity === "number" && !isNaN(b.equity);
-      const hasRoi = b && typeof b.roi === "number" && !isNaN(b.roi);
-      const hasPayback = b && typeof b.paybackYrs === "number" && !isNaN(b.paybackYrs);
-      const valLabel = h.isAssessedVal ? "Assessor Roll Value" : "Est. Market Value";
+      const hasEquity = b && typeof b.equity === "number" && !isNaN(b.equity) && b.equity > 0;
+      const hasRoi = b && typeof b.roi === "number" && !isNaN(b.roi) && b.roi > 0;
+      const hasPayback = b && typeof b.paybackYrs === "number" && !isNaN(b.paybackYrs) && b.paybackYrs > 0;
+      const isCA = h.st === "CA" || (typeof activeState === "function" && activeState() === "CA");
+      const valLabel = h.isAssessedVal ? (isCA ? "Assessed Value (Prop 13)" : "Assessed Roll Value") : "Est. Market Value";
       return `
         <div class="compare-col" style="background:#fff;border:1px solid #cbd5e1;border-radius:8px;padding:14px;">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
