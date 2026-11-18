@@ -215,7 +215,6 @@ function auditSingleHouseParcel(input) {
       structVal: baseAvm.structVal,
       permitValuationTotal,
       permitCapitalizationAdded: 0,
-      multiUnitBonusPct: (!isVacant && (input.units || 1) > 1) ? Math.min(24, ((input.units || 1) - 1) * 8) : 0,
     },
     imagery: {
       parcelId: input.parcelId,

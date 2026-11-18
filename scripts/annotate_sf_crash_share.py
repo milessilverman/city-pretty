@@ -18,9 +18,9 @@ y0, y1 = m["years"]
 q = urllib.parse.urlencode({"where": f"accident_year >= {y0} AND accident_year <= {y1}", "returnCountOnly": "true", "f": "json"})
 n = json.load(urllib.request.urlopen(urllib.request.Request(f"{U}?{q}", headers={"User-Agent": "city-pretty/1.0"}), timeout=60))["count"]
 m["source_total_in_years"] = n
-m["located_share"] = round(m["with_coordinates"] / n, 3)
+m["located_share"] = round(m["matched"] / n, 3)
 m["counting_note"] = m["counting_note"].split(" For this source")[0] + (
-    f" For this source the dataset's own total for {y0}-{y1} is {n}, so {m['with_coordinates']} "
-    f"({round(100 * m['with_coordinates'] / n)}%) were placed; the rest have no location or lie outside the county box.")
+    f" For this source the dataset's own total for {y0}-{y1} is {n}, so {m['matched']} "
+    f"({round(100 * m['matched'] / n)}%) were placed; the rest have no location or lie outside the county box.")
 json.dump(d, open(P, "w"), separators=(",", ":"))
-print(n, m["with_coordinates"], m["located_share"])
+print(n, m["matched"], m["located_share"])

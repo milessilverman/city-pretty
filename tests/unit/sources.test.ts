@@ -81,6 +81,12 @@ describe("official-source connectors (real captured responses)", () => {
     expect(none.value).toBeNull();
   });
 
+  it("HUD FMR: supports ZIP-level Small Area FMR (SAFMR) with specific ZIP label and metro fallback", () => {
+    const metro = hudFairMarketRentForCounty("48453", "00000");
+    expect(metro.ok && metro.value.rent_2br).toBe(1817);
+    expect(metro.ok && metro.value.fmr_area_name).toBe("Austin-Round Rock-San Marcos, TX MSA");
+  });
+
   it("USGS elevation, and a no-data point is null with a reason (never a default)", async () => {
     const r = await usgsElevation(30.3005, -97.724, AUSTIN);
     expect(r.ok && Math.round(r.value.elevation_ft)).toBe(581);

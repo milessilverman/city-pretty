@@ -998,49 +998,7 @@ if (typeof module !== "undefined" && module.exports) {
  * Gross Development Value (GDV) - Total Hard/Soft Construction Costs - Required Developer Margin (15%) = Residual Land Value
  */
 
-function calculateResidualLandValue(input) {
-  const {
-    lotSqft,
-    unitsAllowed,
-    avgUnitSqft,
-    achievableMarketRentPerSqftMonthly,
-    exitCapRate,
-    hardCostPerSqftUsd,
-    softCostFraction,
-    requiredDeveloperMarginPct,
-    currentLandAssessedValueUsd,
-  } = input;
 
-  const totalBuildingSqft = unitsAllowed * avgUnitSqft;
-  const annualGrossRent = totalBuildingSqft * achievableMarketRentPerSqftMonthly * 12;
-  const stabilizedNoy = annualGrossRent * 0.70; // 30% operating expenses / vacancy
-  const grossDevelopmentValue = stabilizedNoy / exitCapRate;
-
-  const totalHardCosts = totalBuildingSqft * hardCostPerSqftUsd;
-  const totalSoftCosts = totalHardCosts * softCostFraction;
-  const totalConstructionCost = totalHardCosts + totalSoftCosts;
-
-  const developerMarginTargetUsd = grossDevelopmentValue * requiredDeveloperMarginPct;
-  const residualLandValue = grossDevelopmentValue - totalConstructionCost - developerMarginTargetUsd;
-
-  const profitOverBaselineLand = residualLandValue - currentLandAssessedValueUsd;
-  const isDevelopmentFeasible = residualLandValue > currentLandAssessedValueUsd;
-
-  return {
-    unitsAllowed,
-    totalBuildingSqft,
-    grossDevelopmentValue: Math.round(grossDevelopmentValue),
-    totalConstructionCost: Math.round(totalConstructionCost),
-    developerMarginTargetUsd: Math.round(developerMarginTargetUsd),
-    residualLandValue: Math.round(residualLandValue),
-    profitOverBaselineLand: Math.round(profitOverBaselineLand),
-    isDevelopmentFeasible,
-  };
-}
-
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = { calculateResidualLandValue };
-}
 
 
 /**
@@ -1233,9 +1191,6 @@ const _evalHousing = (typeof evaluateByRightHousing !== "undefined")
   ? evaluateByRightHousing
   : ((typeof require !== "undefined") ? require("./statutoryZoningEngine").evaluateByRightHousing : null);
 
-const _calcSolar = (typeof calculateSolarMicrogridRoi !== "undefined")
-  ? calculateSolarMicrogridRoi
-  : ((typeof require !== "undefined") ? require("./solarMicrogridEngine").calculateSolarMicrogridRoi : null);
 
 // Sum of the construction valuations recorded on permits (a recorded fact). Nothing is added to the home value:
 // no sourced rate exists for how much of permitted work shows up in sale prices.
@@ -1439,7 +1394,6 @@ function auditSingleHouseParcel(input) {
       structVal: baseAvm.structVal,
       permitValuationTotal,
       permitCapitalizationAdded: 0,
-      multiUnitBonusPct: (!isVacant && (input.units || 1) > 1) ? Math.min(24, ((input.units || 1) - 1) * 8) : 0,
     },
     imagery: {
       parcelId: input.parcelId,
@@ -4654,10 +4608,13 @@ function parseOsmHeight(val) {
 
 // building outlines (and pools) on this lot from OpenStreetMap; in LA most outlines come from the County's building
 // data import, often with a height. Returns null when OSM can't be reached.
+const _osmLotCache = new Map();
 async function fetchOsmLot(rings) {
   const ring = rings[0] || [];
+  if (!ring.length) return null;
   const step = Math.max(1, Math.ceil(ring.length / 40));
   const poly = ring.filter((_, i) => i % step === 0).map(([x, y]) => `${y.toFixed(6)} ${x.toFixed(6)}`).join(" ");
+  if (_osmLotCache.has(poly)) return _osmLotCache.get(poly);
   const q = `[out:json][timeout:12];(way["building"](poly:"${poly}");way["leisure"="swimming_pool"](poly:"${poly}"););out tags geom;`;
   const groupAbort = new AbortController();
   const one = async (url, delay) => {
@@ -4671,7 +4628,7 @@ async function fetchOsmLot(rings) {
     const ctl = new AbortController();
     const forwardAbort = () => ctl.abort();
     groupAbort.signal.addEventListener("abort", forwardAbort, { once: true });
-    const t = setTimeout(() => ctl.abort(), 10000);
+    const t = setTimeout(() => ctl.abort(), 6000);
     try {
       const r = await fetch(url, {
         method: "POST",
@@ -4697,14 +4654,19 @@ async function fetchOsmLot(rings) {
       groupAbort.signal.removeEventListener("abort", forwardAbort);
     }
   };
-  try {
-    const res = await Promise.any(OVERPASS.map((u, k) => one(u, k * 2500)));
-    groupAbort.abort();
-    return res;
-  } catch (e) {
-    groupAbort.abort();
-  }
-  return null;
+  const p = (async () => {
+    try {
+      const res = await Promise.any(OVERPASS.map((u, k) => one(u, k * 1500)));
+      groupAbort.abort();
+      return res;
+    } catch (e) {
+      groupAbort.abort();
+      return null;
+    }
+  })();
+  if (_osmLotCache.size >= 100) _osmLotCache.clear();
+  _osmLotCache.set(poly, p);
+  return p;
 }
 function houseFacts(a, lot, osm, PF, st) {
   const slots = [1, 2, 3, 4, 5].map(i => ({ i, sqft: +a[`SQFTmain${i}`] || 0, units: +a[`Units${i}`] || 0, beds: +a[`Bedrooms${i}`] || 0,
@@ -5430,13 +5392,6 @@ function toggleUpgradeCost(idx) {
   if (el) el.hidden = !el.hidden;
 }
 
-function toggleHouseStories() {
-  if (!activeHouse || !activeHouse.box || !activeHouse.box.isConnected) return;
-  const { box, a, lot, ll, st } = activeHouse;
-  const current = st.manualStories != null ? st.manualStories : (activeHouse.lastStories || 1);
-  const next = current === 1 ? 2 : (current === 2 ? 3 : 1);
-  setHouseStories(next);
-}
 
 function setHouseStories(n) {
   if (!activeHouse || !activeHouse.box || !activeHouse.box.isConnected) return;
@@ -6722,15 +6677,6 @@ function onAduSliderChange(val) {
 // ---------------- address search: find a home by street address (County Assessor parcels)
 let addrTimer = null;
 function hideAddr() { const el = $("#addr-results"); if (el) el.remove(); }
-async function goToParcel(f) {
-  hideAddr();
-  const rings = (f.geometry && f.geometry.rings) || []; if (!rings.length) return;
-  const poly = L.polygon(rings.map(r => r.map(([x, y]) => [y, x]))), c = poly.getBounds().getCenter();
-  map.fitBounds(poly.getBounds(), { maxZoom: 18, padding: [120, 120], animate: false });
-  const bg = allFeatures().find(ff => pointInFeature(ff, c.lng, c.lat));
-  if (bg) select(bg.properties.id, false);
-  houseAt(c, f);
-}
 let addrPin = null;
 function jsonpGet(url, ms = 15000) {   // the Census Bureau geocoder answers JSONP (format=jsonp&callback=), not CORS
   return new Promise((resolve, reject) => {

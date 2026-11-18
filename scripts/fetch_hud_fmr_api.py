@@ -15,7 +15,7 @@ revised FY2026 values (2026-07741: 2-bedroom $2,903), which HUD's map service ne
 New England: HUD defines FMR areas by town there, so those counties carry their towns' values and a min-max range,
 and no single county value is invented.
 
-Usage: HUD_API_TOKEN=... python3 scripts/fetch_hud_fmr_api.py [year]      (default 2027)
+Usage: HUD_API_TOKEN=... python3 scripts/fetch_hud_fmr_api.py [year] [--safmr]      (default 2027)
 """
 import json
 import os
@@ -108,6 +108,20 @@ def main():
         if c.get("smallarea_status") == "1":
             r["small_area_fmr_metro"] = True
             note = ((note + " ") if note else "") + "HUD uses ZIP-code Small Area FMRs in this metro; the value shown is the metro-wide FMR."
+            if "--safmr" in sys.argv or os.environ.get("FETCH_SAFMR"):
+                try:
+                    cdata = get(f"data/{fips}99999?year={year}")
+                    if cdata and "smallareadata" in cdata:
+                        zips = {}
+                        for zrow in cdata["smallareadata"]:
+                            zc = str(zrow.get("zip_code") or zrow.get("ZIP_Code") or zrow.get("zip") or "").zfill(5)
+                            if zc and len(zc) == 5:
+                                zips[zc] = {k: zrow.get(v) for k, v in FIELDS}
+                        if zips:
+                            r["zip_rents"] = zips
+                    time.sleep(0.2)
+                except Exception as ex:
+                    print(f"Warning: could not fetch SAFMR for {fips}: {ex}", file=sys.stderr)
         r["verification"] = {"status": "verified", "evidence": f"https://www.huduser.gov/hudapi/public/fmr/statedata/{c['state_code']}?year={year}"}
         if note:
             r["verification"]["notes"] = note

@@ -34,6 +34,9 @@ async function getJson(fetcher: FetchLike, url: string, init?: RequestInit): Pro
   const res = await fetcher(url, { signal: AbortSignal.timeout(20000), ...init, headers: { "User-Agent": UA, Accept: "application/json", ...(init?.headers || {}) } });
   if (!res.ok) throw new Error(`HTTP ${res.status} from ${new URL(url).host}`);
   const text = await res.text();
+  if (text.includes("missing_key") || (text.trim().startsWith("<") && text.includes("key"))) {
+    throw new Error("Census Data API requires a valid CENSUS_API_KEY (received missing_key response)");
+  }
   try {
     return JSON.parse(text);
   } catch {
@@ -222,6 +225,7 @@ type HudRecord = {
   zero_bed_eff: number | null; one_bed_1br: number | null; two_bed_2br: number | null; three_bed_3br: number | null; four_bed_4br: number | null;
   two_bed_range?: number[]; towns?: unknown[]; sub_areas?: { area: string; fmr_area: string; two_bed_2br: number }[];
   small_area_fmr_metro?: boolean; verification: { status: string; notes?: string };
+  zip_rents?: Record<string, { zero_bed_eff?: number; one_bed_1br?: number; two_bed_2br?: number; three_bed_3br?: number; four_bed_4br?: number }>;
 };
 const HUD_BY_FIPS = new Map<string, HudRecord>((HUD_FMR as unknown as { records: HudRecord[] }).records.map((r) => [r.fips, r]));
 const HUD_SRC = (HUD_FMR as unknown as { _source: { fiscal_year: number; retrieved: string; federal_register?: string } })._source;
@@ -238,7 +242,7 @@ export type HudFmr = {
   rent_2br_range_by_town: number[] | null; // New England, where HUD sets FMRs by town
 };
 
-export function hudFairMarketRentForCounty(countyFips: string): Sourced<HudFmr> {
+export function hudFairMarketRentForCounty(countyFips: string, zipCode?: string): Sourced<HudFmr> {
   const source: SourceRef = {
     name: `HUD Fair Market Rents FY${HUD_SRC.fiscal_year}`,
     publisher: "U.S. Department of Housing and Urban Development (PD&R), FMR API",
@@ -250,6 +254,27 @@ export function hudFairMarketRentForCounty(countyFips: string): Sourced<HudFmr> 
   if (!r || r.verification.status !== "verified") return fail(source, "No HUD Fair Market Rent on file for this county");
   const notes = ["FMRs are HUD's 40th-percentile gross rent (rent + utilities) for voucher payment standards; they are not market asking rents."];
   if (r.verification.notes) notes.push(r.verification.notes);
+
+  if (zipCode && r.zip_rents && r.zip_rents[zipCode]) {
+    const zr = r.zip_rents[zipCode];
+    notes.push(`HUD Small Area Fair Market Rent (SAFMR) for ZIP ${zipCode}.`);
+    return {
+      ok: true,
+      source,
+      value: {
+        fiscal_year: r.fiscal_year,
+        fmr_area_name: `ZIP ${zipCode} Small Area FMR (${r.metro_or_county_name || r.county_name})`,
+        rent_0br: zr.zero_bed_eff ?? null,
+        rent_1br: zr.one_bed_1br ?? null,
+        rent_2br: zr.two_bed_2br ?? null,
+        rent_3br: zr.three_bed_3br ?? null,
+        rent_4br: zr.four_bed_4br ?? null,
+        rent_2br_range_by_town: null,
+      },
+      notes,
+    };
+  }
+
   return {
     ok: true,
     source,
