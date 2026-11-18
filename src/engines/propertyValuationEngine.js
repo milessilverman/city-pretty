@@ -172,6 +172,7 @@ function getTierElasticity(salePrice) {
  */
 function estimatePropertyMarketValue(params) {
   const { attributes: a = {}, lotSqft = 6000, neighborhood: m = {}, stateCode = "CA", facts: F = {}, salesInfo = null } = params;
+  const cal = params.calibration || null;
   const state = (stateCode || "CA").toUpperCase();
   const profile = STATE_BASELINE_PROFILES[state] || STATE_BASELINE_PROFILES.DEFAULT;
 
@@ -275,10 +276,12 @@ function estimatePropertyMarketValue(params) {
   const unitsCount = +(F.units || a.Units1 || a.Units || 1) || 1;
   const multiUnitBonus = (!isVacantLand && unitsCount > 1) ? Math.min(0.24, (unitsCount - 1) * 0.08) * structVal : 0;
 
-  const hedonicEst = isVacantLand ? Math.round(siteValue + lotAdj) :
+  const hedonicRaw = isVacantLand ? Math.round(siteValue + lotAdj) :
     Math.round((siteValue + structVal + lotAdj + bedBathAdj + ageAdj + qualityAdj + poolBonus + garageBonus + viewBonus + basementBonus + multiUnitBonus) * condoFactor);
 
   // 4. Municipal Assessor Market Value Calibration across All 50 States
+  const hedonicEst = (cal && cal.hedonicScale && cal.hedonicScale > 0) ? Math.round(hedonicRaw * cal.hedonicScale) : hedonicRaw;
+
   let assessorMarketEst = null;
   let assessorWeight = 0;
   let assessorMethodName = "Assessor Market Value";
@@ -420,6 +423,14 @@ function estimatePropertyMarketValue(params) {
   }
 
   // 5. Repeat Deed Sales Model with Case-Shiller Tier Elasticity Dampening
+  // County calibration: the county's measured median sale / assessor-value ratio replaces the statutory multiplier.
+  const calBase = mktVal > 0 ? mktVal : (rollTot > 0 ? rollTot : 0);
+  if (cal && cal.assessorRatio && cal.assessorRatio > 0 && calBase > 0) {
+    assessorMarketEst = Math.round(calBase * cal.assessorRatio);
+    assessorMethodName = "County-calibrated assessor value";
+    if (!assessorWeight) assessorWeight = 0.60;
+  }
+
   let saleCompEst = null;
   let saleWeight = 0;
   
@@ -434,6 +445,16 @@ function estimatePropertyMarketValue(params) {
     const effectiveHpi = 1.0 + (rawHpi - 1.0) * tierEl;
     saleCompEst = Math.round(rawSalePrice * effectiveHpi);
     saleWeight = rawSaleYear >= 2021 ? 0.70 : rawSaleYear >= 2015 ? 0.55 : 0.35;
+  }
+  // A caller-supplied index change (from a published price index for the right metro and dates) replaces the
+  // built-in national table for the prior sale.
+  if (salesInfo && salesInfo.hpiRatio && salesInfo.hpiRatio > 0 && rawSalePrice > 25000) {
+    saleCompEst = Math.round(rawSalePrice * salesInfo.hpiRatio);
+    if (!saleWeight) saleWeight = 0.35;
+  }
+  if (cal && cal.weights) {
+    if (saleCompEst) saleWeight = cal.weights.priorSale;
+    if (assessorMarketEst) assessorWeight = cal.weights.assessor;
   }
 
   // 6. Multi-Model Bayesian Ensemble Synthesis
@@ -454,10 +475,10 @@ function estimatePropertyMarketValue(params) {
   }
 
   // Hedonic model acts as the grounding anchor
-  const hedonicWeight = Math.max(0.20, 1.0 - totalWeight);
+  const hedonicWeight = (cal && cal.weights && cal.weights.hedonic != null && totalWeight > 0) ? cal.weights.hedonic : Math.max(0.20, 1.0 - totalWeight);
   weightedSum += hedonicEst * hedonicWeight;
   totalWeight += hedonicWeight;
-  methodTokens.push("Hedonic Micro-Model");
+  if (hedonicWeight > 0) methodTokens.push("Hedonic Micro-Model");
 
   const rawEstimatedValue = Math.round(weightedSum / totalWeight);
   // Round to nearest $1,000 for presentation precision
@@ -499,6 +520,7 @@ function estimatePropertyMarketValue(params) {
     hedonicEst,
     assessorMarketEst,
     saleCompEst,
+    calibrated: !!cal,
     siteValue: Math.round(siteValue),
     structVal: Math.round(structVal)
   };

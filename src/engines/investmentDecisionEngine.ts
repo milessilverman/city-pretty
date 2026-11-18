@@ -635,13 +635,15 @@ export function buildDecisionBrief(county: CountyBundle, selection: BriefSelecti
   const rank = rankNeighborhoods(county, { backtest: ctx.backtest });
   const fips = rank.county ? rank.county.fips : (county && county.meta && county.meta.fips) || null;
   const compact = r => ({ rank: r.rank, id: r.id, name: r.name, city: r.city, score: r.score.value, quintile: r.scoreQuintile, confidence: r.confidence.grade, reason: r.reasons[0] || null, history2020_25: r.historicalRelativeChange ? r.historicalRelativeChange["2020_2025"].value : null });
-  const brief = {
+  const brief: any = {
     schema: "city-pretty/decision-brief@1", engineVersion: DECISION_ENGINE_VERSION,
     county: rank.county || { fips },
     role: rank.role,
     howToRead: "Every number is {value, unit, source, basis}. basis: measured = read from a cited table; modelled = computed from measured inputs; assumed = no evidence. null means not known.",
     backtest: ctx.backtest ? { headline: ctx.backtest.headline || null, verdict: ctx.backtest.verdict || null, retrieved: ctx.backtest.retrieved || null } : null,
-    topNeighborhoods: (rank.ranked || []).slice(0, top).map(compact),
+    topNeighborhoods: (rank.ranked || []).filter(r => !r.dataFlags.length).slice(0, top).map(compact),
+    topNeighborhoodsNote: "block groups failing a data check (dataFlags) are left out of this list; rankNeighborhoods still returns them, graded D",
+    flaggedInTopN: (rank.ranked || []).slice(0, top).filter(r => r.dataFlags.length).length,
     neighborhood: null, parcel: null, transit: null,
     caveats: [],
     missing: rank.missing.slice(),
@@ -668,11 +670,22 @@ export function buildDecisionBrief(county: CountyBundle, selection: BriefSelecti
     brief.parcel = recommendForParcel(selection.parcel, { unitCosts: ctx.unitCosts, valueCoefficients: ctx.valueCoefficients, sizes: ctx.sizes, overCapRatio: ctx.overCapRatio, neighborhood: Object.assign({ medianHomeValue: nbm ? num(nbm.hv) : null }, ctx.neighborhood || {}) });
   }
   brief.caveats = [
-    rank.role === "screen" ? "The neighborhood score is a relative-value screen. In the back-test (50 large counties, 2015-20 and 2020-25) it did no better than picking the cheapest tracts in the county, and in about 30% of counties that failed in 2020-25." : "The neighborhood score beat simple baselines in the back-test.",
+    (() => {
+      const bt: any = ctx.backtest || {}, n = bt.sample ? bt.sample.counties : null;
+      const p2 = bt.per_metro_summary && bt.per_metro_summary.engine_P2 ? bt.per_metro_summary.engine_P2.share_positive : null;
+      const tail = p2 != null ? ` In 2020-25 it ranked tracts the right way round in ${Math.round(p2 * 100)}% of counties tested.` : "";
+      return rank.role === "screen" ? `The neighborhood score is a relative-value screen. In the back-test (${n == null ? "?" : n} large counties, 2015-20 and 2020-25) it did no better than picking the cheapest tracts in the county.${tail}` : `The neighborhood score beat simple baselines in the back-test.${tail}`;
+    })(),
     "Scores rank block groups against their own county only; a county-wide boom or bust is not predicted.",
     "Back-tested on tracts whose boundaries did not change 2010-2020; fast-growing new-build areas are under-represented.",
     "Improvement costs and value gains are pipeline estimates; most effect sizes are borrowed from studies in other cities.",
     "Transit verdicts use planning rules of thumb (TCQSM density guidelines, FTA CIG breakpoints); they are not a ridership forecast.",
+  ];
+  brief.sources = [
+    ...(((ctx.backtest && ctx.backtest.sources) || []) as any[]).map((x: any) => ({ name: x.name, url: x.url })),
+    { name: TRANSIT_THRESHOLDS.tcqsm_density.source.title, url: TRANSIT_THRESHOLDS.tcqsm_density.source.url },
+    { name: TRANSIT_THRESHOLDS.fta_cig.source.title, url: TRANSIT_THRESHOLDS.fta_cig.source.url },
+    { name: TRANSIT_THRESHOLDS.fra_hsr.source.title, url: TRANSIT_THRESHOLDS.fra_hsr.source.url },
   ];
   return brief;
 }

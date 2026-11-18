@@ -426,7 +426,7 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
     expect(txAdu.statute_url).toMatch(/^https?:\/\//);
   });
 
-  it("16. intercity_transit_corridors.json contains verified rail corridors with official FRA/DOT study sources", () => {
+  it("16. intercity_transit_corridors.json contains FRA Corridor ID corridors; unpublished figures are null, not invented", () => {
     const filePath = path.join(rootDir, "app/data/intercity_transit_corridors.json");
     expect(fs.existsSync(filePath)).toBe(true);
 
@@ -436,7 +436,6 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
 
     const corridorIds = corridors.map((c: any) => c.id);
     expect(corridorIds).toContain("corridor_phx_tus");
-    expect(corridorIds).toContain("corridor_atx_sat");
     expect(corridorIds).toContain("corridor_front_range");
     expect(corridorIds).toContain("corridor_brightline_west");
 
@@ -445,16 +444,16 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
       expect(c.name).toBeTruthy();
       expect(Array.isArray(c.states)).toBe(true);
       expect(c.states.length).toBeGreaterThan(0);
-      expect(c.route_length_miles).toBeGreaterThan(0);
+      // route length / times / cost are only present when a published study gives them
+      for (const f of ["route_length_miles", "projected_one_way_minutes", "highway_comparison_minutes", "estimated_capital_cost_billions", "max_speed_mph"]) {
+        expect(c[f] === null || (typeof c[f] === "number" && c[f] > 0)).toBe(true);
+      }
       expect(c.official_study_url).toMatch(/^https?:\/\//);
       expect(c.source_url).toMatch(/^https?:\/\//);
       expect(c.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
-      expect(c.projected_one_way_minutes).toBeGreaterThan(0);
-      expect(c.highway_comparison_minutes).toBeGreaterThan(0);
       expect(Array.isArray(c.proposed_stations)).toBe(true);
       expect(c.proposed_stations.length).toBeGreaterThan(0);
       expect(Array.isArray(c.candidate_railyard_sites)).toBe(true);
-      expect(c.candidate_railyard_sites.length).toBeGreaterThan(0);
 
       for (const stn of c.proposed_stations) {
         expect(stn.id).toBeTruthy();
@@ -463,21 +462,12 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
         expect(stn.fips).toMatch(/^\d{5}$/);
         expect(stn.lat).toBeGreaterThan(20);
         expect(stn.lng).toBeLessThan(-60);
-        expect(stn.statutory_housing_regime).toBeTruthy();
-      }
-
-      for (const yard of c.candidate_railyard_sites) {
-        expect(yard.id).toBeTruthy();
-        expect(yard.name).toBeTruthy();
-        expect(yard.required_acres).toBeGreaterThan(0);
-        expect(yard.total_land_acquisition_cost).toBeGreaterThan(0);
-        expect(yard.adjacent_mainline).toBeTruthy();
-        expect(yard.siting_recommendation).toBeTruthy();
+        expect(stn.station_basis).toBe("illustrative_city_center");
       }
     }
   });
 
-  it("17. transitCorridorOpportunityEngine evaluates macro corridor viability, station TOD, and railyard economics", async () => {
+  it("17. transitCorridorOpportunityEngine returns null (not NaN) when corridor or station inputs are not on file", async () => {
     const { evaluateCorridorFeasibility, evaluateStationTODPotential, generateStationInvestmentPlan } = await import("../../src/engines/transitCorridorOpportunityEngine");
     const filePath = path.join(rootDir, "app/data/intercity_transit_corridors.json");
     const corridors = JSON.parse(fs.readFileSync(filePath, "utf-8"));
@@ -486,47 +476,34 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
     expect(phxTuc).toBeDefined();
 
     const evalPhx = evaluateCorridorFeasibility(phxTuc);
-    expect(evalPhx.isViable).toBe(true);
-    expect(evalPhx.travelTimeSavedMinutes).toBe(30); // 115 min hwy vs 85 min rail
-    expect(evalPhx.speedCompetitivenessRatio).toBeGreaterThan(1.2);
-    expect(evalPhx.railyardCostSavingsUsd).toBeGreaterThan(150_000_000); // Coolidge ($1.68M) vs Tempe ($175M)
-    expect(evalPhx.recommendedRailyardSite?.id).toBe("yard_coolidge_junction");
+    expect(evalPhx.isViable).toBeNull();
+    expect(evalPhx.travelTimeSavedMinutes).toBeNull();
+    expect(evalPhx.speedCompetitivenessRatio).toBeNull();
+    expect(evalPhx.totalStationUnderusedAcres).toBeNull();
+    expect(evalPhx.railyardCostSavingsUsd).toBeNull();
+    expect(evalPhx.recommendedRailyardSite).toBeNull();
+    expect(evalPhx.verdictSummary).toContain("Not on file");
 
-    const austinSa = corridors.find((c: any) => c.id === "corridor_atx_sat");
-    expect(austinSa).toBeDefined();
-    const evalAtx = evaluateCorridorFeasibility(austinSa);
-    expect(evalAtx.isViable).toBe(true);
-    expect(evalAtx.railyardCostSavingsUsd).toBeGreaterThan(150_000_000); // Kyle ($2.7M) vs Austin ($160M)
+    // With supplied numbers the arithmetic still works
+    const evalWith = evaluateCorridorFeasibility({ ...phxTuc, highway_comparison_minutes: 115, projected_one_way_minutes: 85 });
+    expect(evalWith.isViable).toBe(true);
+    expect(evalWith.travelTimeSavedMinutes).toBe(30);
 
-    // Test Station TOD evaluation
-    const phxStation = phxTuc.proposed_stations.find((s: any) => s.id === "phx_downtown");
+    const phxStation = phxTuc.proposed_stations.find((s: any) => s.id === "phx_tus_phoenix");
     expect(phxStation).toBeDefined();
     const todEval = evaluateStationTODPotential(phxStation);
-    expect(todEval.walkshedAcquisitionCostPerAcre).toBe(95 * 43560);
-    expect(todEval.feasibleHousingUnits).toBeGreaterThan(1000);
-    expect(todEval.projectedLandValueUpliftPct).toBe(0.32);
-    expect(todEval.recommendedBikeNetworkMiles).toBeGreaterThan(0);
-    expect(todEval.estimatedBikeNetworkCost).toBeGreaterThan(500_000);
+    for (const v of Object.values(todEval)) {
+      if (typeof v === "number") expect(Number.isNaN(v)).toBe(false);
+    }
+    expect(todEval.walkshedAcquisitionCostPerAcre).toBeNull();
+    expect(todEval.feasibleHousingUnits).toBeNull();
+    expect(todEval.projectedLandValueUpliftPct).toBeNull();
+    expect(todEval.estimatedBikeNetworkCost).toBeNull();
 
-    // Test Capital Allocation Plans
-    // Tier 1: $150k homeowner
-    const plan150k = generateStationInvestmentPlan(phxTuc, phxStation, 150_000);
-    expect(plan150k.tier).toBe("homeowner_single_lot");
-    expect(plan150k.pillars.length).toBeGreaterThanOrEqual(3);
-    expect(plan150k.everySpaceMonetizationStrategy).toContain("EverySpace");
-    expect(plan150k.statutoryPreemptionLeveraged).toContain("AZ HB 2720");
-
-    // Tier 2: $5M syndication
-    const plan5M = generateStationInvestmentPlan(phxTuc, phxStation, 5_000_000);
-    expect(plan5M.tier).toBe("private_syndication");
-    expect(plan5M.budget).toBe(5_000_000);
-    expect(plan5M.pillars.some(p => p.pillar.includes("Bike Spur") || p.pillar.includes("Micro-Mobility"))).toBe(true);
-
-    // Tier 3: $50M institutional P3
-    const plan50M = generateStationInvestmentPlan(phxTuc, phxStation, 50_000_000);
-    expect(plan50M.tier).toBe("institutional_p3_fund");
-    expect(plan50M.budget).toBe(50_000_000);
-    expect(plan50M.pillars.some(p => p.pillar.includes("Transit-Oriented Development") || p.pillar.includes("TOD"))).toBe(true);
+    for (const budget of [150_000, 5_000_000, 50_000_000]) {
+      const plan = generateStationInvestmentPlan(phxTuc, phxStation, budget);
+      expect(JSON.stringify(plan)).not.toMatch(/NaN|undefined|null-mile/);
+    }
   });
 
   it("18. funding_programs.json contains verified municipal & state funding programs nationwide", () => {

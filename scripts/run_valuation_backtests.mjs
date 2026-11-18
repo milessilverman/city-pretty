@@ -47,7 +47,7 @@ const CACHE = process.env.BACKTEST_CACHE || path.join(os.tmpdir(), "city-pretty-
 const MAX_SALES = +(process.env.BACKTEST_MAX_SALES || 8000);
 const ONLY = (process.env.BACKTEST_COUNTIES || "").split(",").map(s => s.trim()).filter(Boolean);
 const OUT_FILE = path.join(ROOT, "app/data/valuation_backtest_benchmarks.json");
-const DETAIL_FILE = path.join(CACHE, "backtest_detail.json");
+const DETAIL_FILE = path.join(CACHE, `backtest_detail_${ONLY.length ? ONLY.join("_") : "all"}.json`);
 const WINDOW = { start: "2025-01-01", end: "2026-09-30" };
 const RETRIEVED = new Date().toISOString().slice(0, 10);
 const MAX_EXAMPLES = 20;
@@ -638,7 +638,7 @@ function engineInput(meta, s, bundle, extra = {}) {
     neighborhood: nb,
     stateCode: meta.state,
     facts,
-    salesInfo: s.prior ? { price: s.prior.price, date: s.prior.date, year: s.prior.year } : null,
+    salesInfo: s.prior ? { price: s.prior.price, date: s.prior.date, year: s.prior.year, ...(extra.calibration && s.hpiRatio ? { hpiRatio: s.hpiRatio } : {}) } : null,
     ...extra
   };
   if (s.chars.lotSqft != null) input.lotSqft = s.chars.lotSqft;
@@ -686,11 +686,35 @@ function evaluateCounty(meta, salesIn) {
     s.baseA = s.roll.total * ratio;
     if (s.prior) {
       const h0 = hpiAt(meta.msad, s.prior.date, 0), h1 = hpiAt(meta.msad, s.saleDate, 90);
-      s.baseB = (h0 && h1) ? s.prior.price * h1 / h0 : null;
-    } else s.baseB = null;
+      s.hpiRatio = (h0 && h1) ? h1 / h0 : null;
+      s.baseB = s.hpiRatio ? s.prior.price * s.hpiRatio : null;
+    } else { s.hpiRatio = null; s.baseB = null; }
   }
   const calib = VBE.median(cal.filter(s => s.engine).map(s => s.salePrice / s.engine));
-  return { meta, bundle, post, guard, usable, cal, ev, ratio, calib };
+
+  // County calibration for the engine, fitted on the calibration half only:
+  //   assessorRatio = median(sale / pre-sale roll value); hedonicScale = median(sale / hedonic estimate);
+  //   blend weights proportional to 1 / MdAPE^2 of each calibrated component on the calibration half.
+  const hedonicScale = VBE.median(cal.filter(s => s.engineHedonic > 0).map(s => s.salePrice / s.engineHedonic));
+  const mdapeOf = arr => VBE.median(arr.map(([p, e]) => Math.abs(e - p) / p));
+  const eA = mdapeOf(cal.map(s => [s.salePrice, s.roll.total * ratio]));
+  const eP = mdapeOf(cal.filter(s => s.baseB).map(s => [s.salePrice, s.baseB]));
+  const eH = mdapeOf(cal.filter(s => s.engineHedonic > 0).map(s => [s.salePrice, s.engineHedonic * hedonicScale]));
+  const inv = e => (e > 0 ? 1 / (e * e) : 0);
+  const tot = inv(eA) + inv(eP) + inv(eH);
+  const r4 = v => Math.round(v * 10000) / 10000;
+  const calibration = {
+    assessorRatio: r4(ratio), hedonicScale: r4(hedonicScale),
+    weights: { assessor: r4(inv(eA) / tot), priorSale: r4(inv(eP) / tot), hedonic: r4(inv(eH) / tot) },
+    component_mdape_on_calibration_half: { assessor: r4(eA), priorSale: r4(eP), hedonic: r4(eH) },
+    fitted_on: `calibration half (${cal.length} sales, disjoint parcels from the evaluation half)`
+  };
+  for (const s of usable) {
+    const res = PVE.estimatePropertyMarketValue(engineInput(meta, s, bundle, { calibration }));
+    s.engineCal = res.estimatedValue > 0 ? res.estimatedValue : null;
+    s.engineCalMethod = methodPath(res);
+  }
+  return { meta, bundle, post, guard, usable, cal, ev, ratio, calib, calibration };
 }
 
 function pct(v) { return v == null ? "n/a" : (v * 100).toFixed(1) + "%"; }
@@ -726,6 +750,7 @@ async function main() {
     const salesCount = res.post.kept.length + res.post.report.reduce((n, f) => n + f.dropped, 0);
     const sumEngine = VBE.summarizeErrors(ev.map(s => ({ price: s.salePrice, estimate: s.engine, method: s.engineMethod })));
     const sumEngineCal = VBE.summarizeErrors(ev.map(s => ({ price: s.salePrice, estimate: s.engine ? s.engine * calib : null, method: s.engineMethod })));
+    const sumCal = VBE.summarizeErrors(ev.map(s => ({ price: s.salePrice, estimate: s.engineCal, method: s.engineCalMethod })));
     const sumA = VBE.summarizeErrors(ev.map(s => ({ price: s.salePrice, estimate: s.baseA })));
     const evB = ev.filter(s => s.baseB);
     const sumB = VBE.summarizeErrors(evB.map(s => ({ price: s.salePrice, estimate: s.baseB })));
@@ -791,6 +816,12 @@ async function main() {
         },
         engine_beats_assessor_ratio: beats
       },
+      engine_calibrated: {
+        description: "Same engine with the county calibration below passed in (calibration input): assessor value x county ratio, prior sale x FHFA metro HPI, hedonic x county scale, blended with weights from each component's calibration-half error. Fitted on the calibration half; measured on the evaluation half.",
+        calibration: res.calibration,
+        ...sumCal,
+        engine_calibrated_beats_assessor_ratio: sumCal.mdape != null && sumA.mdape != null ? sumCal.mdape < sumA.mdape : null
+      },
       engine_with_county_scale: {
         description: "Shipped engine output x one county-wide scale factor fitted on the calibration half (median sale / estimate). Shows how much of the error is a level bias.",
         factor: Math.round(calib * 10000) / 10000,
@@ -799,7 +830,7 @@ async function main() {
     };
     detail[meta.fips] = ev.map(s => ({ p: s.parcelId, d: s.saleDate, price: s.salePrice, roll: s.roll, prior: s.prior, bg: s.bg, chars: s.chars, engine: s.engine, method: s.engineMethodFull, aEst: s.engineAssessorEst, sEst: s.engineSaleEst, hEst: s.engineHedonic, baseA: s.baseA, baseB: s.baseB }))
       .concat(cal.map(s => ({ cal: 1, p: s.parcelId, d: s.saleDate, price: s.salePrice, roll: s.roll, prior: s.prior, bg: s.bg, chars: s.chars, engine: s.engine, method: s.engineMethodFull, aEst: s.engineAssessorEst, sEst: s.engineSaleEst, hEst: s.engineHedonic, baseA: s.baseA, baseB: s.baseB })));
-    log(`${meta.fips} ${meta.name}: eval n=${ev.length} engine MdAPE ${pct(sumEngine.mdape)} (bias ${pct(sumEngine.medianBiasPct)}, w10 ${pct(sumEngine.shareWithin10Pct)}) | assessor x ${ratio.toFixed(3)}: ${pct(sumA.mdape)} (w10 ${pct(sumA.shareWithin10Pct)}) | prior x HPI n=${sumB.sampleCount}: ${pct(sumB.mdape)} vs engine on same ${pct(sumEngineOnB.mdape)} | engine x ${calib.toFixed(3)}: ${pct(sumEngineCal.mdape)}`);
+    log(`${meta.fips} ${meta.name}: eval n=${ev.length} engine MdAPE ${pct(sumEngine.mdape)} (bias ${pct(sumEngine.medianBiasPct)}, w10 ${pct(sumEngine.shareWithin10Pct)}) | assessor x ${ratio.toFixed(3)}: ${pct(sumA.mdape)} (w10 ${pct(sumA.shareWithin10Pct)}) | prior x HPI n=${sumB.sampleCount}: ${pct(sumB.mdape)} vs engine on same ${pct(sumEngineOnB.mdape)} | engine x ${calib.toFixed(3)}: ${pct(sumEngineCal.mdape)} | engine calibrated: ${pct(sumCal.mdape)} (w10 ${pct(sumCal.shareWithin10Pct)}, bias ${pct(sumCal.medianBiasPct)}) w=${JSON.stringify(res.calibration.weights)}`);
   }
   fs.writeFileSync(DETAIL_FILE, JSON.stringify(detail));
   if (process.env.BACKTEST_DRY_RUN) { log("dry run; benchmarks file not written"); return; }
