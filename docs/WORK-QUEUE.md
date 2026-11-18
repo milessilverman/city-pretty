@@ -16,7 +16,7 @@ audit doc the same day.
 | R3 | **LA neighborhood values made traceable**, and a home-value model developed on 2022–24 sales and tested once on 2025–26 | Values rebuilt from the assessor's base-year resets with code committed; the model ships only if it beats the neighborhood value alone and stays under 15% median error |
 | R4 | **Real evidence for the most-asked-about improvements** (trees, bike lanes, parks, sidewalks, lighting, ADUs, vacant lots, bus lanes) | Each effect matched to a quoted, fetched study, or left unverified |
 | ✓ | **HUD rents current**: FY2027 for all counties from HUD's FMR API (token added 16 Nov) | Done |
-| R5 | **Remaining unchecked records**: 22 state tax profiles, ~38 sources marked "couldn't check", and HUD's FY2026-vs-FY2024 question | Each upgraded with evidence, corrected, or left marked |
+| R5 | **Remaining unchecked records**: 22 state tax profiles, ~38 sources marked "couldn't check" (HUD FY2027 resolved via API) | Each upgraded with evidence, corrected, or left marked |
 | R6 | **Nationwide spot check of the county files' census numbers** (home value, rent, income, population), bus frequency, schools, EV chargers, tree canopy | Mismatch rate per field, per state; corrections where wrong |
 
 ## What I'm doing in parallel (doesn't touch the files above)

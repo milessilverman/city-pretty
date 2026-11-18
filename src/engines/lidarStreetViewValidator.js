@@ -28,7 +28,7 @@ function validateParcelImageryVintage(input) {
       isStreetViewStale: true,
       confidenceBadge: "no_street_view",
       warningMessage:
-        "No Google Street View coverage at parcel frontage; story count relies solely on USGS LiDAR/OSM footprints.",
+        "No Google Street View coverage at parcel frontage; story count relies on OpenStreetMap footprints or assessor records.",
     };
   }
 

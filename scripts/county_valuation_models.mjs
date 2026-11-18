@@ -82,7 +82,7 @@ if (mode === "dev") {
   const model = errorMetrics(pairs);
   const baseline = res.neighborhood_median;
   const gate = passesGate(model, baseline);
-  const bands = groupedMetrics(pairs.filter((x) => x.est > 0), (x) => priceBand(x.target), (x) => x, 30);
+  const bands = groupedMetrics(pairs.filter((x) => x.est > 0), (x) => priceBand(x.est), (x) => x, 30);
   const out = {
     fips, county_name: data.county_name, mode, run_on: new Date().toISOString(), sales_file: cfg.sales_file, sources: data.sources, filters: data.filters,
     windows: { fit: cfg.fit, dev: cfg.dev, test: cfg.test }, locked: cfg.locked,

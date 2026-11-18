@@ -36,7 +36,7 @@ function estimateAccurateRoofArea(input) {
 
   if (input.footprintSqft && input.footprintSqft > 200) {
     groundFootprintSqft = Math.round(input.footprintSqft);
-    method = "cadastral_lidar_osm_polygon";
+    method = input.footprintSource || "osm_building_outline";
   } else if (hasGla) {
     groundFootprintSqft = Math.round(livingSqft / stories);
   } else {
@@ -69,6 +69,8 @@ function estimateAccurateRoofArea(input) {
     };
   }
 
+  const isTracedOutline = method === "osm_building_outline" || method === "cadastral_lidar_osm_polygon";
+
   // 2. Attached Garage Addition (if not already counted in footprint)
   let garageAdditionSqft = 0;
   const hasGarage = input.hasGarage !== false;
@@ -77,13 +79,14 @@ function estimateAccurateRoofArea(input) {
     const specifiedGarage = input.garageSqft && input.garageSqft > 150 ? input.garageSqft : 0;
     if (specifiedGarage) {
       garageAdditionSqft = specifiedGarage;
-    } else if (method !== "cadastral_lidar_osm_polygon") {
+    } else if (!isTracedOutline) {
       garageAdditionSqft = stories > 1 ? 400 : 380;
     }
   }
 
-  // 3. Eaves & Overhang Perimeter Calculation
-  const overhangInches = input.eavesOverhangInches != null ? Math.max(0, input.eavesOverhangInches) : 18;
+  // 3. Eaves & Overhang Perimeter Calculation (overhang is 0 for traced outlines already at roof edge)
+  const defaultOverhang = isTracedOutline ? 0 : 18;
+  const overhangInches = input.eavesOverhangInches != null ? Math.max(0, input.eavesOverhangInches) : defaultOverhang;
   const overhangFeet = overhangInches / 12.0;
 
   const approxWidth = Math.sqrt(groundFootprintSqft / 1.4);

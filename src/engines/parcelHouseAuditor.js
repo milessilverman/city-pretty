@@ -129,7 +129,8 @@ function auditSingleHouseParcel(input) {
   const rawZone = hasZoning ? String(input.zoningCode).trim() : null;
   const zoneOrUse = String(rawZone || "") + " " + String(input.useDescription || "");
   const isComm = hasZoning && /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-  const isSfr = hasZoning && !isComm && /r-|r1|sfr|single|res/i.test(zoneOrUse);
+  const isMulti = /r-?[2-9]|mf|multi|apartment|condo|duplex|triplex|fourplex/i.test(zoneOrUse);
+  const isSfr = hasZoning && !isComm && !isMulti && (/r-?1\b|single|sfr/i.test(zoneOrUse) || (/^r-?[a-z]?$/i.test(String(rawZone || "").trim()) && !isMulti));
 
   const parcelCtx = {
     parcel_id: input.parcelId,
@@ -143,15 +144,15 @@ function auditSingleHouseParcel(input) {
     dist_to_heavy_rail_mi: input.distToHeavyRailMi ?? null,
     dist_to_frequent_bus_or_brt_mi: input.distToFrequentBusMi ?? null,
     exclusions: {
-      historic_district_hpoz: !!exclusions.historic_district_hpoz,
-      coastal_commission_or_sma: !!exclusions.coastal_commission_or_sma,
-      fema_100yr_floodway: !!exclusions.fema_100yr_floodway,
-      calfire_or_state_vhfhsz: !!exclusions.calfire_or_state_vhfhsz,
-      airport_noise_or_runway_zone: !!exclusions.airport_noise_or_runway_zone,
-      williamson_or_ag_preserve: !!exclusions.williamson_or_ag_preserve,
-      public_or_tribal_land: !!exclusions.public_or_tribal_land,
-      everglades_or_wekiva_or_trpa: !!exclusions.everglades_or_wekiva_or_trpa,
-      population_threshold_ineligible: !!exclusions.population_threshold_ineligible,
+      historic_district_hpoz: exclusions.historic_district_hpoz != null ? !!exclusions.historic_district_hpoz : null,
+      coastal_commission_or_sma: exclusions.coastal_commission_or_sma != null ? !!exclusions.coastal_commission_or_sma : null,
+      fema_100yr_floodway: exclusions.fema_100yr_floodway != null ? !!exclusions.fema_100yr_floodway : null,
+      calfire_or_state_vhfhsz: exclusions.calfire_or_state_vhfhsz != null ? !!exclusions.calfire_or_state_vhfhsz : null,
+      airport_noise_or_runway_zone: exclusions.airport_noise_or_runway_zone != null ? !!exclusions.airport_noise_or_runway_zone : null,
+      williamson_or_ag_preserve: exclusions.williamson_or_ag_preserve != null ? !!exclusions.williamson_or_ag_preserve : null,
+      public_or_tribal_land: exclusions.public_or_tribal_land != null ? !!exclusions.public_or_tribal_land : null,
+      everglades_or_wekiva_or_trpa: exclusions.everglades_or_wekiva_or_trpa != null ? !!exclusions.everglades_or_wekiva_or_trpa : null,
+      population_threshold_ineligible: exclusions.population_threshold_ineligible != null ? !!exclusions.population_threshold_ineligible : null,
     },
   };
   const statutoryZoning = _evalHousing(parcelCtx);
@@ -164,20 +165,26 @@ function auditSingleHouseParcel(input) {
   let statutoryNotes = "";
   if (!hasZoning) {
     statutoryNotes = "Zoning is not on file for this parcel; by-right housing rights and lot splits cannot be determined without recorded local zoning.";
+  } else if (!statutoryZoning.laws_loaded) {
+    statutoryNotes = "State housing law records are still loading; by-right screening will update once available.";
   } else if ((statutoryZoning.applicable_statutes || []).length) {
     statutoryNotes = "State laws the screening engine applies here: " + statutoryZoning.applicable_statutes.map(s => s.short_name || s.citation).filter(Boolean).join(", ") + ". Unverified screening — confirm with the planning department.";
+  } else if ((statutoryZoning.not_confirmed || []).length) {
+    const unconfirmedReasons = statutoryZoning.not_confirmed.map(nc => `${nc.name} (${nc.reason})`).join("; ");
+    statutoryNotes = "Screening not confirmed for state housing laws: " + unconfirmedReasons + ". Local zoning governs.";
   } else {
     statutoryNotes = "No state housing law in the screening engine applies to this parcel as recorded. Local zoning governs.";
   }
 
   // 4. Roof area (geometry model; see roof engine assumptions) and solar system size. No dollar outputs: install
   //    cost, utility rates and export credits are not on file from a source, so savings and payback are not shown.
-  const roofCalc = (typeof estimateAccurateRoofArea === "function" && livingSqft) ? estimateAccurateRoofArea({
-    livingSqft,
-    stories: input.stories || 1,
-    hasGarage: input.hasGarage,
-    garageAttached: true,
-    yearBuilt: input.yearBuilt,
+  const roofCalc = (typeof estimateAccurateRoofArea === "function" && (livingSqft || input.footprintSqft)) ? estimateAccurateRoofArea({
+    footprintSqft: input.footprintSqft || null,
+    footprintSource: input.footprintSource || null,
+    livingSqft: livingSqft,
+    stories: input.stories || null,
+    hasGarage: !!input.hasGarage,
+    yearBuilt: input.yearBuilt || null,
     stateCode: stCode,
   }) : null;
   // Solar size is not reported: the roof model's usable share (64%, or 88% if flat) is an assumption and roof
@@ -220,7 +227,7 @@ function auditSingleHouseParcel(input) {
       isStreetViewStale: imageryCheck.isStreetViewStale,
       confidenceBadge,
       warningMessage,
-      storyCalibrationSource: hasStreetView ? "Street View photo and assessor records" : "Assessor records",
+      storyCalibrationSource: input.storyCalibrationSource || (hasStreetView ? "Street View photo and assessor records" : "Assessor records"),
     },
     statutoryZoning: {
       parcel_id: statutoryZoning.parcel_id,

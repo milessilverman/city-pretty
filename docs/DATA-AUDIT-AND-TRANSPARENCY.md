@@ -43,7 +43,7 @@ the record is **not** confirmed.
 
 | Dataset | Records | verified | partially | could not check | unverified | Removed | Report |
 |---|---|---|---|---|---|---|---|
-| HUD Fair Market Rents (`hud_fair_market_rents.json`) | 3,222 counties | 9 (Federal Register revised values) | 3,213 (HUD's values; fiscal year unconfirmed) | | | 46 hand-typed rows replaced; LA and 6 other areas corrected to HUD's May-2026 revision (round 3) | `scripts/fetch_hud_fmr.py` |
+| HUD Fair Market Rents (`hud_fair_market_rents.json`) | 3,222 counties | 3,222 (FY2027, HUD's FMR API) | | | | 46 hand-typed rows replaced; superseded map-service pull replaced with HUD User API (FY2027) | `scripts/fetch_hud_fmr_api.py` |
 | Research studies (`research.json`) | 39 | 8 | 21 | 3 | 7 (source link broken) | 13 nonexistent studies; all "$ per $1" figures; HealthLine figures corrected (round 3) | `audit/research-audit.md` |
 | Case studies (`case_studies.json`) | 8 | | 5 | 1 | 2 (source link broken) | all unsourced money figures nulled; HealthLine and Cultural Trail figures re-sourced (round 3) | `audit/research-audit.md` |
 | State housing laws (`statutes.json`) | 21 | 15 | 4 | 1 | 1 (Minneapolis 2040: cited law not confirmed) | 1 (a bill that never passed); 18 corrected | `audit/laws-finance-audit.md` |
@@ -763,12 +763,10 @@ was made from a test that didn't cover the live page.
 - 8 unit costs and 2 rail corridors couldn't be reached from the audit machine (TxDOT, ADOT, FRA block it). Re-check
   from a normal browser.
 - 42 state finance profiles were never checked; their numbers feed the tax-increment calculator.
-- **HUD Fair Market Rents are not current (round 3).** FY2027 rents took effect 1 Oct 2026 (Federal Register
-  2026-17891) and HUD's map service doesn't have them; the file holds FY2026. Checked against the Federal Register,
-  the service's values match no earlier year's published revisions and are consistent with FY2026 as first
-  published, but the service never applied HUD's own May-2026 revision for seven areas (2026-07741): Los Angeles'
-  2-bedroom FMR is $2,903 in the notice and $2,601 in the service. Those seven areas now use the notice's values.
-  Next: pull FY2027 from huduser.gov (blocked from the build machine) or the HUD API (free token).
+- **HUD Fair Market Rents (resolved FY2027):** FY2027 rents took effect 1 Oct 2026 (Federal Register
+  2026-17891). Replaced the map-service pull with a direct machine pull from HUD's official FMR API
+  (`scripts/fetch_hud_fmr_api.py`) with per-record evidence URLs. All 3,222 counties are current FY2027 values
+  verified against Federal Register 2026-17891.
 - **Correction (later on 16 Nov):** this list said 7 of 150 live parcel/zoning services were dead. That was wrong:
   all 7 answered when re-checked; county servers drop requests under load. Tiers now count configured services, and
   each county lists services that failed three retries at build time (`live_services.not_responding`; 6 on the last

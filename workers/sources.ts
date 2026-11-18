@@ -320,14 +320,14 @@ export async function femaFloodZone(lat: number, lng: number, fetcher: FetchLike
 
 export const OSM_FEATURES = {
   buildings: 'way["building"]',
-  parking_lots: 'way["amenity"="parking"]',
+  parking_lots: 'nwr["amenity"="parking"]',
   rail_stations: 'node["railway"="station"]',
   transit_stops: 'node["public_transport"="platform"]',
-  parks: 'way["leisure"="park"]',
-  golf_courses: 'way["leisure"="golf_course"]',
+  parks: 'nwr["leisure"="park"]',
+  golf_courses: 'nwr["leisure"="golf_course"]',
   ev_chargers: 'node["amenity"="charging_station"]',
   power_lines: 'way["power"="line"]',
-  bike_lanes: 'way["cycleway"]',
+  bike_lanes: 'bike_lanes',
 } as const;
 export type OsmFeatureKind = keyof typeof OSM_FEATURES;
 
@@ -344,7 +344,11 @@ export type OsmElement = {
   levels: number | null;
 };
 
-const OVERPASS_ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"];
+const OVERPASS_ENDPOINTS = [
+  "https://overpass-api.de/api/interpreter",
+  "https://overpass.kumi.systems/api/interpreter",
+  "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+];
 
 export async function osmNearby(
   lat: number,
@@ -356,7 +360,11 @@ export async function osmNearby(
 ): Promise<Sourced<{ count: number; truncated: boolean; elements: OsmElement[] }>> {
   const r = Math.max(10, Math.min(2000, Math.round(radiusM)));
   const n = Math.max(1, Math.min(500, limit));
-  const query = `[out:json][timeout:25];${OSM_FEATURES[kind]}(around:${r},${lat},${lng});out center tags ${n + 1};`;
+  const around = `(around:${r},${lat},${lng})`;
+  const queryBody = (kind === "bike_lanes")
+    ? `(way["highway"="cycleway"]${around};way["cycleway"~"^(lane|track)$"]${around};way["cycleway:left"~"^(lane|track)$"]${around};way["cycleway:right"~"^(lane|track)$"]${around};way["cycleway:both"~"^(lane|track)$"]${around};);`
+    : `${OSM_FEATURES[kind]}${around};`;
+  const query = `[out:json][timeout:25];${queryBody}out center tags ${n + 1};`;
   let lastErr: unknown = null;
   for (const ep of OVERPASS_ENDPOINTS) {
     const url = `${ep}?data=${encodeURIComponent(query)}`;

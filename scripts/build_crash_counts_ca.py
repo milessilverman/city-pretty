@@ -156,16 +156,20 @@ def build_county(code, ksi_ids, today, pb_ids=frozenset()):
         w = (r["MotorVehicleInvolvedWithDesc"] or "").upper()
         ped = "PEDESTRIAN" in w or "BICYCLE" in w or int(r["Collision Id"]) in pb_ids
         ksi =(r["NumberKilled"] or 0) > 0 or int(r["Collision Id"]) in ksi_ids
+        k = len(hits)
+        w_ped = (1.0 / k) if ped else 0.0
+        w_ksi = (1.0 / k) if ksi else 0.0
+        w_all = 1.0 / k
         for i in hits:
             c = out[gids[i]]
-            c[2] += 1
-            c[0] += ped
-            c[1] += ksi
+            c[2] = round(c[2] + w_all, 3)
+            c[0] = round(c[0] + w_ped, 3)
+            c[1] = round(c[1] + w_ksi, 3)
     out["_meta"] = {
         "county_fips": fips,
         "source": f"CHP California Crash Reporting System (CCRS), data.ca.gov: Crashes and InjuredWitnessPassengers 2023-2025, County Code {code}",
         "geography": "Census TIGERweb 2020 block groups",
-        "rule": f"A crash counts for a block group if it is inside it or within {BOUNDARY_M:g} m of its boundary; crashes on boundary streets count for each bordering block group.",
+        "rule": f"A crash counts for a block group if it is inside it or within {BOUNDARY_M:g} m of its boundary; crashes touching k boundary block groups are weighted 1/k.",
         "years": [2023, 2025],
         "pedbike_rule": "first object struck is a pedestrian or bicycle, or any party (Parties table) or injured person is a Pedestrian or Bicyclist",
         "fields": ["pedestrian or bicycle crashes", "killed or seriously injured crashes (any person Fatal, SuspectSerious or SevereInactive, or NumberKilled > 0)", "all crashes"],
@@ -176,8 +180,8 @@ def build_county(code, ksi_ids, today, pb_ids=frozenset()):
     os.makedirs(OUT_DIR, exist_ok=True)
     with open(os.path.join(OUT_DIR, f"{fips}.json"), "w") as f:
         json.dump(out, f, separators=(",", ":"))
-    pct = round(100 * stats["with_coordinates"] / stats["crashes"]) if stats["crashes"] else 0
-    print(f"{fips}: {len(gids)} block groups, {stats['crashes']} crashes, {pct}% with coordinates", file=sys.stderr)
+    pct = round(100 * stats["matched"] / stats["crashes"]) if stats["crashes"] else 0
+    print(f"{fips}: {len(gids)} block groups, {stats['crashes']} crashes, {pct}% placed", file=sys.stderr)
 
 
 def main():

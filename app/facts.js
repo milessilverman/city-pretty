@@ -40,7 +40,12 @@ async function getJsonOnce(url, fetcher) {
   try {
     const r = await fetcher(url, ctl ? { signal: ctl.signal } : undefined);
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    const d = await r.json();
+    let d;
+    try {
+      d = await r.json();
+    } catch {
+      throw new Error(`non-JSON reply from service (HTTP ${r.status})`);
+    }
     if (d && d.error) throw new Error(d.error.message || "service error");
     return d;
   } finally {
@@ -51,6 +56,29 @@ async function getJsonOnce(url, fetcher) {
 const ok = (label, value, source, url, note) => ({ ok: true, label, value, source, url, note: note || null, at: new Date().toISOString() });
 const no = (label, reason, source, url) => ({ ok: false, label, value: null, reason, source, url, at: new Date().toISOString() });
 const money = (n) => (typeof n === "number" && isFinite(n) ? "$" + n.toLocaleString("en-US") : null);
+
+function formatFemaZone(fldZone, zoneSubty, sfhaTf) {
+  const zoneRaw = String(fldZone || "").trim().toUpperCase();
+  const sfha = sfhaTf === "T" || sfhaTf === true;
+  let zoneDesc = `Zone ${fldZone}`;
+  let note = sfha ? "Federally backed mortgages here require flood insurance." : null;
+  if (zoneRaw === "AREA NOT INCLUDED") {
+    zoneDesc = "Area not included in flood survey";
+    note = "Not included in FEMA's National Flood Hazard Layer survey.";
+  } else if (zoneRaw === "OPEN WATER") {
+    zoneDesc = "Open water";
+    note = "Mapped as open water.";
+  } else if (zoneRaw === "D") {
+    zoneDesc = "Zone D (undetermined flood hazard)";
+    note = "Possible but undetermined flood hazard; no flood analysis conducted.";
+  } else if (zoneSubty) {
+    zoneDesc += ` (${String(zoneSubty).toLowerCase()})`;
+  }
+  if (sfha && !zoneDesc.includes("special flood hazard area")) {
+    zoneDesc += " · special flood hazard area";
+  }
+  return { zoneDesc, note };
+}
 
 export async function liveSiteFacts(lat, lng, opts = {}) {
   const fetcher = opts.fetcher || ((u, i) => fetch(u, i));
@@ -81,13 +109,13 @@ export async function liveSiteFacts(lat, lng, opts = {}) {
   // FEMA flood zone
   if (fema.status === "fulfilled" && fema.value.features && fema.value.features[0]) {
     const f = fema.value.features[0].attributes;
-    const sfha = f.SFHA_TF === "T";
-    rows.push(ok("FEMA flood zone", `Zone ${f.FLD_ZONE}${f.ZONE_SUBTY ? " (" + String(f.ZONE_SUBTY).toLowerCase() + ")" : ""}${sfha ? " · special flood hazard area" : ""}`, "FEMA National Flood Hazard Layer", femaUrl,
-      sfha ? "Federally backed mortgages here require flood insurance." : null));
+    const { zoneDesc, note } = formatFemaZone(f.FLD_ZONE, f.ZONE_SUBTY, f.SFHA_TF);
+    rows.push(ok("FEMA flood zone", zoneDesc, "FEMA National Flood Hazard Layer", femaUrl, note));
   } else rows.push(no("FEMA flood zone", fema.status === "rejected" ? err(fema) : "No effective FEMA flood map here (unmapped, not 'no risk')", "FEMA National Flood Hazard Layer", femaUrl));
 
   // USGS ground elevation
-  const ev = usgs.status === "fulfilled" ? Number(usgs.value.value) : NaN;
+  const rawEv = (usgs.status === "fulfilled" && usgs.value) ? usgs.value.value : null;
+  const ev = (rawEv !== null && rawEv !== undefined && rawEv !== "" && !isNaN(Number(rawEv))) ? Number(rawEv) : NaN;
   if (isFinite(ev) && ev > -100000) rows.push(ok("Ground elevation", `${Math.round(ev).toLocaleString("en-US")} ft`, "U.S. Geological Survey 3DEP", usgsUrl));
   else rows.push(no("Ground elevation", usgs.status === "rejected" ? err(usgs) : "No elevation data at this point", "U.S. Geological Survey 3DEP", usgsUrl));
 
@@ -163,6 +191,9 @@ export async function attachLiveFacts(container, lat, lng) {
   if (old) old.remove();
   if (!cache.has(key)) cache.set(key, loadRows(lat, lng));
   const rows = await cache.get(key);
+  if (rows && rows.some(r => !r.ok)) {
+    cache.delete(key);
+  }
   if (current !== key || !container.isConnected || container.querySelector("[data-live-facts]")) return;
   renderFacts(container, rows);
 }
@@ -186,7 +217,12 @@ export function fromWorker(f) {
   const g = f.geographies, h = f.hud_fair_market_rent, fl = f.flood_zone, e = f.elevation;
   rows.push(g && g.ok ? ok("Census area", `${g.value.county_name}${g.value.block_group_geoid ? " · block group " + g.value.block_group_geoid : ""}`, g.source.publisher, g.source.url) : no("Census area", (g && g.error) || "unavailable", "U.S. Census Bureau", g && g.source ? g.source.url : ""));
   rows.push(h && h.ok ? hudRow({ fiscal_year: h.value.fiscal_year, metro_or_county_name: h.value.fmr_area_name, one_bed_1br: h.value.rent_1br, two_bed_2br: h.value.rent_2br, three_bed_3br: h.value.rent_3br, two_bed_range: h.value.rent_2br_range_by_town, verification: { notes: (h.notes || []).slice(1).join(" ") } }) : no("HUD Fair Market Rent", (h && h.error) || "unavailable", "HUD", HUD_FMR_INFO_URL));
-  rows.push(fl && fl.ok ? ok("FEMA flood zone", `Zone ${fl.value.zone}${fl.value.zone_subtype ? " (" + String(fl.value.zone_subtype).toLowerCase() + ")" : ""}${fl.value.special_flood_hazard_area ? " · special flood hazard area" : ""}`, fl.source.publisher, fl.source.url) : no("FEMA flood zone", (fl && fl.error) || "unavailable", "FEMA", fl && fl.source ? fl.source.url : ""));
+  if (fl && fl.ok) {
+    const { zoneDesc, note } = formatFemaZone(fl.value.zone, fl.value.zone_subtype, fl.value.special_flood_hazard_area);
+    rows.push(ok("FEMA flood zone", zoneDesc, fl.source.publisher, fl.source.url, note));
+  } else {
+    rows.push(no("FEMA flood zone", (fl && fl.error) || "unavailable", "FEMA", fl && fl.source ? fl.source.url : ""));
+  }
   rows.push(e && e.ok ? ok("Ground elevation", `${Math.round(e.value.elevation_ft).toLocaleString("en-US")} ft`, e.source.publisher, e.source.url) : no("Ground elevation", (e && e.error) || "unavailable", "USGS", e && e.source ? e.source.url : ""));
   return rows;
 }

@@ -48,7 +48,7 @@ describe("provenance: every record says how it was checked", () => {
         const v = r.verification;
         if (v.status !== "verified") return false;
         const method = v.method || fileMethod;
-        const evidence = v.evidence || (fileMethod && (r.fmr_area_code || r.fips)); // HUD: evidence is HUD's own area code
+        const evidence = v.evidence;
         return !method || !evidence || String(method).length < 10;
       });
       expect(bad.map((r: any) => r?.id ?? r?.fips ?? "?")).toEqual([]);
@@ -86,6 +86,12 @@ describe("HUD Fair Market Rents: current fiscal year, from HUD's FMR API, by scr
     expect(by["06037"].two_bed_2br).toBe(2964);
     expect(by["48453"].two_bed_2br).toBe(1817);
     expect(by["29055"].sub_areas[0].fmr_area).toMatch(/St\. Louis/);
+  });
+
+  it("every record carries its HUD API URL as evidence", () => {
+    for (const r of d.records) {
+      expect(r.verification?.evidence).toMatch(/^https:\/\/www\.huduser\.gov\/hudapi\/public\/fmr\/statedata\//);
+    }
   });
 
   it("New England counties carry town values and no invented county figure", () => {
@@ -177,6 +183,16 @@ describe("Tree Equity Score current release (2020 block groups), per county", ()
       expect(Math.abs(gap - Math.max(0, goal - canopy))).toBeLessThanOrEqual(0.15);
     }
   });
+
+  it("all Connecticut county files have > 0 block groups (crosswalked to planning regions)", () => {
+    const ctFiles = files.filter((f) => f.startsWith("09"));
+    expect(ctFiles.length).toBe(8);
+    for (const f of ctFiles) {
+      const d = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"));
+      const bgCount = Object.keys(d).filter((k) => k !== "_meta").length;
+      expect(bgCount, `Connecticut file ${f} has 0 block groups`).toBeGreaterThan(0);
+    }
+  });
 });
 
 describe("fabricated content that was removed stays removed", () => {
@@ -249,5 +265,54 @@ describe("fabricated content that was removed stays removed", () => {
     for (const f of ["scripts/expand_hud_fmr_nationwide.mjs", "scripts/expand_underused_sites_nationwide.mjs", "scripts/add_nationwide_housing_laws.mjs", "scripts/expand_funding_programs_nationwide.mjs", "scripts/build_verified_data.py", "scripts/build_verified_data.mjs", "scripts/build_underused_sites.mjs"]) {
       expect(fs.existsSync(path.join(root, f))).toBe(false);
     }
+  });
+});
+
+describe("provenance: operational registries and model files have provenance", () => {
+  it("app/data/parcel_services.json states its source and every service has a valid url and terms", () => {
+    const d = load("app/data/parcel_services.json");
+    expect(d._source.generated_from).toBeDefined();
+    expect(Array.isArray(d.services) && d.services.length > 0).toBe(true);
+    for (const s of d.services) {
+      expect(s.url).toMatch(/^https?:\/\//);
+      expect(s.name).toBeTruthy();
+    }
+  });
+
+  it("app/data/county_valuation_models.json documents its source and every county has a passing model", () => {
+    const d = load("app/data/county_valuation_models.json");
+    expect(d._source).toContain("publish_benchmarks");
+    for (const [fips, c] of Object.entries(d.counties) as [string, any][]) {
+      expect(c.model).toBeDefined();
+      expect(c.tested.mdape).toBeLessThanOrEqual(0.15);
+    }
+  });
+
+  it("app/data/intervention_verification.json documents its audit provenance and statuses", () => {
+    const d = load("app/data/intervention_verification.json");
+    expect(d._about.audit).toMatch(/bundle-catalog-audit/);
+    const keys = Object.keys(d).filter((k) => !k.startsWith("_"));
+    expect(keys.length).toBeGreaterThan(0);
+    for (const k of keys) {
+      expect(STATUSES).toContain(d[k].status);
+    }
+  });
+
+  it("app/data/upgrade_verification.json documents its audit provenance and row statuses", () => {
+    const d = load("app/data/upgrade_verification.json");
+    expect(d._about).toMatch(/catalog-coverage-round2/);
+    const keys = Object.keys(d.rows);
+    expect(keys.length).toBeGreaterThan(0);
+    for (const k of keys) {
+      expect(STATUSES).toContain(d.rows[k].status);
+    }
+  });
+
+  it("app/data/la_neighborhood_values.json states its legal basis, assessor service, and reset method", () => {
+    const d = load("app/data/la_neighborhood_values.json");
+    expect(d._source.legal_basis.text).toContain("Cal. Rev. & Tax. Code §110.1");
+    expect(d._source.service).toMatch(/LACounty_Parcel/);
+    expect(d._source.script).toBe("scripts/build_la_neighborhood_values.mjs");
+    expect(d._source.rows_used).toBeGreaterThan(100000);
   });
 });

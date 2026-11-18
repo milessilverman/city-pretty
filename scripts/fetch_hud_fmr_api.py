@@ -71,13 +71,13 @@ def main():
             vals = {k: c.get(v) for k, v in FIELDS}
             if c.get("town_name") and st in NEW_ENGLAND:  # New England: FMR areas are towns
                 towns[fips10[:5]].append({"town": c["town_name"], "fmr_area": c["metro_name"], **vals})
-                counties.setdefault(fips10[:5], {"county_name": c["county_name"], "state_code": c["statecode"], "smallarea_status": c.get("smallarea_status")})
+                counties.setdefault(fips10[:5], {"county_name": c["county_name"], "state_code": str(c.get("statecode") or "").upper(), "smallarea_status": c.get("smallarea_status")})
             elif c.get("town_name") and " part of " in c["town_name"]:
                 # A piece of a county that HUD puts in a different FMR area (e.g. "Sullivan city part of Crawford County",
                 # MO, in the St. Louis metro). Attached to its parent county as a sub-area, never as a county of its own.
                 sub_areas.append((st, c["town_name"].split(" part of ")[1].strip(), {"area": c["town_name"], "fmr_area": c["metro_name"], **vals}))
             else:
-                counties[fips10[:5]] = {"county_name": c["county_name"], "state_code": c["statecode"], "metro_or_county_name": c["metro_name"],
+                counties[fips10[:5]] = {"county_name": c["county_name"], "state_code": str(c.get("statecode") or "").upper(), "metro_or_county_name": c["metro_name"],
                                         "smallarea_status": c.get("smallarea_status"), **vals}
         time.sleep(0.3)
 
@@ -108,7 +108,7 @@ def main():
         if c.get("smallarea_status") == "1":
             r["small_area_fmr_metro"] = True
             note = ((note + " ") if note else "") + "HUD uses ZIP-code Small Area FMRs in this metro; the value shown is the metro-wide FMR."
-        r["verification"] = {"status": "verified"}
+        r["verification"] = {"status": "verified", "evidence": f"https://www.huduser.gov/hudapi/public/fmr/statedata/{c['state_code']}?year={year}"}
         if note:
             r["verification"]["notes"] = note
         recs.append(r)

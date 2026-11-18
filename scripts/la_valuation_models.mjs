@@ -39,7 +39,7 @@ export function rowsFrom(LA, file, years, newBuildYearFor) {
 
 function score(label, est, rows) {
   const pairs = rows.map((r) => ({ est: est(r), target: r.value }));
-  const withBand = rows.map((r, i) => ({ ...pairs[i], band: priceBand(r.value) }));
+  const withBand = rows.map((r, i) => ({ ...pairs[i], band: priceBand(pairs[i].est) }));
   return { label, overall: errorMetrics(pairs), by_price_band: groupedMetrics(withBand, (x) => x.band, (x) => x, 30).groups };
 }
 

@@ -113,14 +113,21 @@ async function handleAdvisor(request: Request, env: Env, origin: string | null):
 async function handleFacts(request: Request, env: Env, origin: string | null): Promise<Response> {
   if (await rateLimited(env.STREETVIEW_RATE_LIMITER, request)) return json({ ok: false, error: "Too many requests" }, 429, origin);
   const url = new URL(request.url);
-  const lat = Number(url.searchParams.get("lat"));
-  const lng = Number(url.searchParams.get("lng"));
+  const rawLat = url.searchParams.get("lat");
+  const rawLng = url.searchParams.get("lng");
+  if (!rawLat || !rawLng) {
+    return json({ ok: false, error: "lat and lng query parameters are required" }, 400, origin);
+  }
+  const lat = Number(rawLat);
+  const lng = Number(rawLng);
   if (!Number.isFinite(lat) || !Number.isFinite(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180) {
     return json({ ok: false, error: "lat and lng must be numbers" }, 400, origin);
   }
   const facts = await siteFacts(lat, lng, { censusApiKey: env.CENSUS_API_KEY });
+  const allSucceeded = Object.values(facts).every((f: any) => f && f.ok);
+  const cacheHeader = allSucceeded ? "public, max-age=86400" : "no-store";
   return new Response(JSON.stringify({ ok: true, facts }), {
-    headers: { "Content-Type": "application/json", "Cache-Control": "public, max-age=86400", ...cors(origin) },
+    headers: { "Content-Type": "application/json", "Cache-Control": cacheHeader, ...cors(origin) },
   });
 }
 
@@ -128,8 +135,13 @@ async function handleStreetView(request: Request, env: Env, origin: string | nul
   if (await rateLimited(env.STREETVIEW_RATE_LIMITER, request)) return json({ ok: false, error: "Too many requests" }, 429, origin);
   if (!env.GOOGLE_MAPS_KEY) return json({ ok: false, error: "Street View is not configured" }, 503, origin);
   const url = new URL(request.url);
-  const lat = Number(url.searchParams.get("lat"));
-  const lng = Number(url.searchParams.get("lng"));
+  const rawLat = url.searchParams.get("lat");
+  const rawLng = url.searchParams.get("lng");
+  if (!rawLat || !rawLng) {
+    return json({ ok: false, error: "lat and lng query parameters are required" }, 400, origin);
+  }
+  const lat = Number(rawLat);
+  const lng = Number(rawLng);
   const heading = Math.round(Number(url.searchParams.get("heading") ?? 0)) % 360;
   if (!Number.isFinite(lat) || !Number.isFinite(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180 || !Number.isFinite(heading)) {
     return json({ ok: false, error: "lat, lng and heading must be numbers" }, 400, origin);

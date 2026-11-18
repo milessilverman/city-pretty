@@ -39,4 +39,14 @@ describe("parcel lookup", () => {
     const err = await parcelAt(34.05, -118.24, "06037", serve(JSON.stringify({ error: { message: "Service unavailable" } })));
     expect(err.ok).toBe(false);
   });
+
+  it("every registry field name matches ^[A-Za-z0-9_.]+(\\(\\))?$", () => {
+    const raw = JSON.parse(fs.readFileSync(path.join(root, "app/data/parcel_services.json"), "utf8"));
+    const validFieldPattern = /^[A-Za-z0-9_.]+(\(\))?$/;
+    for (const svc of raw.services) {
+      for (const [field, label] of svc.fields) {
+        expect(field, `Invalid field '${field}' in service '${svc.name}'`).toMatch(validFieldPattern);
+      }
+    }
+  });
 });

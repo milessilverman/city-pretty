@@ -270,7 +270,8 @@
   {
    "url": "https://services.nconemap.gov/secure/rest/services/NC1Map_Parcels/FeatureServer/1",
    "states": [
-    "37"
+    "37",
+    "NC"
    ],
    "counties": [],
    "name": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
@@ -331,7 +332,8 @@
   {
    "url": "https://services9.arcgis.com/Gh9awoU677aKree0/arcgis/rest/services/Florida_Statewide_Cadastral/FeatureServer/0",
    "states": [
-    "12"
+    "12",
+    "FL"
    ],
    "counties": [],
    "name": "Florida Statewide Parcels (FGIO / Dept. of Revenue Property Tax Oversight)",
@@ -409,7 +411,8 @@
   {
    "url": "https://services3.arcgis.com/n6uYoouQZW75n5WI/arcgis/rest/services/Wisconsin_Statewide_Parcels_DB/FeatureServer/0",
    "states": [
-    "55"
+    "55",
+    "WI"
    ],
    "counties": [],
    "name": "Wisconsin Statewide Parcels V12 (Statewide Parcel Map Initiative)",
@@ -466,7 +469,8 @@
   {
    "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/Massachusetts_Property_Tax_Parcels/FeatureServer/0",
    "states": [
-    "25"
+    "25",
+    "MA"
    ],
    "counties": [],
    "name": "MassGIS Massachusetts Property Tax Parcels (Level 3 + assessor extract)",
@@ -535,7 +539,8 @@
   {
    "url": "https://services1.arcgis.com/99lidPhWCzftIe9K/arcgis/rest/services/UtahStatewideParcels/FeatureServer/0",
    "states": [
-    "49"
+    "49",
+    "UT"
    ],
    "counties": [],
    "name": "UGRC Utah Statewide Parcels + county LIR (Land Information Records) parcels",
@@ -572,7 +577,8 @@
   {
    "url": "https://gisservice.mt.gov/ArcGIS/rest/services/msdi_cadastral_map_v1/MapServer/1",
    "states": [
-    "30"
+    "30",
+    "MT"
    ],
    "counties": [],
    "name": "Montana Cadastral Framework (Montana State Library / Dept. of Revenue ORION)",
@@ -625,7 +631,8 @@
   {
    "url": "https://services.arcgis.com/jsIt88o09Q0r1j8h/arcgis/rest/services/Current_Parcels/FeatureServer/0",
    "states": [
-    "53"
+    "53",
+    "WA"
    ],
    "counties": [],
    "name": "Washington State Current Parcels (WaTech / WA Geoportal)",
@@ -666,7 +673,8 @@
   {
    "url": "https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/arcgis/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0",
    "states": [
-    "34"
+    "34",
+    "NJ"
    ],
    "counties": [],
    "name": "Parcels and MOD-IV Composite of NJ, Web Mercator (NJOGIS)",
@@ -731,7 +739,8 @@
   {
    "url": "https://services3.arcgis.com/3FL1kr7L4LvwA2Kb/arcgis/rest/services/Connecticut_CAMA_and_Parcel_Layer/FeatureServer/0",
    "states": [
-    "09"
+    "09",
+    "CT"
    ],
    "counties": [],
    "name": "Connecticut CAMA and Parcel Layer (CT GIS Office / OPM)",
@@ -804,7 +813,8 @@
   {
    "url": "https://mdgeodata.md.gov/imap/rest/services/PlanningCadastre/MD_ParcelBoundaries/MapServer/0",
    "states": [
-    "24"
+    "24",
+    "MD"
    ],
    "counties": [],
    "name": "Maryland Parcel Boundaries (MD iMAP / MDP / SDAT)",
@@ -865,7 +875,8 @@
   {
    "url": "https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/FS_VCGI_OPENDATA_Cadastral_VTPARCELS_poly_standardized_parcels_SP_v1/FeatureServer/0",
    "states": [
-    "50"
+    "50",
+    "VT"
    ],
    "counties": [],
    "name": "VCGI Statewide Standardized Parcel Data (VTPARCELS, Grand List joined)",
@@ -918,7 +929,8 @@
   {
    "url": "https://services6.arcgis.com/EbVsqZ18sv1kVJ3k/arcgis/rest/services/NYS_Tax_Parcels_Public/FeatureServer/1",
    "states": [
-    "36"
+    "36",
+    "NY"
    ],
    "counties": [],
    "name": "NYS Tax Parcels Public (NYS GIS Program Office; opt-in counties only)",
@@ -979,7 +991,8 @@
   {
    "url": "https://gis.colorado.gov/public/rest/services/Address_and_Parcel/Colorado_Public_Parcels/FeatureServer/0",
    "states": [
-    "08"
+    "08",
+    "CO"
    ],
    "counties": [],
    "name": "Colorado Public Parcels (Governor's Office of Information Technology)",
@@ -1040,7 +1053,8 @@
   {
    "url": "https://gisdata.in.gov/server/rest/services/Hosted/Parcel_Boundaries_of_Indiana_Current/FeatureServer/0",
    "states": [
-    "18"
+    "18",
+    "IN"
    ],
    "counties": [],
    "name": "Parcel Boundaries of Indiana Current (IGIO Data Harvest)",
@@ -1069,7 +1083,8 @@
   {
    "url": "https://enterprise.gisdata.mn.gov/aghost/rest/services/us_mn_state_mngeo/plan_parcels_open/FeatureServer/0",
    "states": [
-    "27"
+    "27",
+    "MN"
    ],
    "counties": [],
    "name": "Parcels, Compiled from Opt-In Open Data Counties, Minnesota (MnGeo)",
@@ -1134,7 +1149,8 @@
   {
    "url": "https://vginmaps.vdem.virginia.gov/arcgis/rest/services/VA_Base_Layers/VA_Parcels/MapServer/0",
    "states": [
-    "51"
+    "51",
+    "VA"
    ],
    "counties": [],
    "name": "Virginia Parcels (VGIN, VA_Base_Layers/VA_Parcels)",
@@ -1159,7 +1175,8 @@
   {
    "url": "https://services.wvgis.wvu.edu/arcgis/rest/services/Planning_Cadastre/WV_Parcels/MapServer/0",
    "states": [
-    "54"
+    "54",
+    "WV"
    ],
    "counties": [],
    "name": "WV Parcels (WVGIS Technical Center / WV Property Tax Division)",
@@ -1188,7 +1205,8 @@
   {
    "url": "https://enterprise.firstmap.delaware.gov/arcgis/rest/services/PlanningCadastre/DE_StateParcels/MapServer/0",
    "states": [
-    "10"
+    "10",
+    "DE"
    ],
    "counties": [],
    "name": "Delaware State Parcels (FirstMap)",
@@ -1213,7 +1231,8 @@
   {
    "url": "https://gis.arkansas.gov/arcgis/rest/services/FEATURESERVICES/Planning_Cadastre/FeatureServer/6",
    "states": [
-    "05"
+    "05",
+    "AR"
    ],
    "counties": [],
    "name": "Arkansas Parcel Polygons - County Assessor Mapping Program (AGISO)",
@@ -1266,7 +1285,8 @@
   {
    "url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Property_and_Land_WebMercator/MapServer/40",
    "states": [
-    "11"
+    "11",
+    "DC"
    ],
    "counties": [],
    "name": "DC Owner Polygons (Common Ownership Layer) + ITSPE / CAMA sales",
@@ -1316,7 +1336,8 @@
   {
    "url": "https://services1.arcgis.com/RbMX0mRVOFNTdLzd/arcgis/rest/services/Maine_Parcels_Organized_Towns/FeatureServer/10",
    "states": [
-    "23"
+    "23",
+    "ME"
    ],
    "counties": [],
    "name": "Maine Parcels Organized Towns (Maine GeoLibrary / MEGIS)",
@@ -1349,7 +1370,8 @@
   {
    "url": "https://services2.arcgis.com/MlJ0G8iWUyC7jAmu/arcgis/rest/services/OhioStatewidePacels_full_view/FeatureServer/0",
    "states": [
-    "39"
+    "39",
+    "OH"
    ],
    "counties": [],
    "name": "Ohio Statewide Parcels Public View (OGRIP)",
@@ -1382,7 +1404,8 @@
   {
    "url": "https://services1.arcgis.com/GOcSXpzwBHyk2nog/arcgis/rest/services/NDGISHUB_Parcels/FeatureServer/0",
    "states": [
-    "38"
+    "38",
+    "ND"
    ],
    "counties": [],
    "name": "NDGISHUB Parcels + Parcels_TaxRoll (North Dakota State Parcel Program)",
@@ -1419,7 +1442,8 @@
   {
    "url": "https://services3.arcgis.com/r0iJ85SKZ4zAzz3P/arcgis/rest/services/Wyoming_Parcels_for_2026/FeatureServer/0",
    "states": [
-    "56"
+    "56",
+    "WY"
    ],
    "counties": [],
    "name": "Wyoming Parcels for 2026 (Wyoming Statewide Parcel Viewer, Dept. of Revenue)",
@@ -1460,7 +1484,8 @@
   {
    "url": "https://services1.arcgis.com/CNPdEkvnGl65jCX8/arcgis/rest/services/Public_Idaho_Parcels_/FeatureServer/7",
    "states": [
-    "16"
+    "16",
+    "ID"
    ],
    "counties": [],
    "name": "Public Idaho Parcels (Idaho ITS, Idaho Parcel Data Exchange Standard)",
@@ -1513,7 +1538,8 @@
   {
    "url": "https://giscat.ne.gov/enterprise/rest/services/StatewideParcelsExternal/MapServer/0",
    "states": [
-    "31"
+    "31",
+    "NE"
    ],
    "counties": [],
    "name": "Nebraska StatewideParcelsExternal (OCIO, county CAMA)",
@@ -1578,7 +1604,8 @@
   {
    "url": "https://risegis.ri.gov/hosting/rest/services/RIDEM/Tax_Parcels/MapServer/0",
    "states": [
-    "44"
+    "44",
+    "RI"
    ],
    "counties": [],
    "name": "Rhode Island Tax Parcels (RIDEM / RIGIS, 37 towns)",
@@ -2001,7 +2028,8 @@
   {
    "url": "https://gis.crcog.org/arcgis/rest/services/RegionalParcelViewer/Parcels/MapServer/0",
    "states": [
-    "09"
+    "09",
+    "CT"
    ],
    "counties": [
     "09003"
@@ -2045,7 +2073,8 @@
   {
    "url": "https://services6.arcgis.com/UwEXjTguDDovBVaQ/ArcGIS/rest/services/Parcels/FeatureServer/0",
    "states": [
-    "09"
+    "09",
+    "CT"
    ],
    "counties": [
     "09001"
@@ -2072,7 +2101,8 @@
   {
    "url": "https://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_Parcels/MapServer/0",
    "states": [
-    "53"
+    "53",
+    "WA"
    ],
    "counties": [
     "53033"
@@ -2099,7 +2129,8 @@
   {
    "url": "https://services.arcgis.com/KaARkuoKF9vrGr3P/arcgis/rest/services/New_Orleans_Parcels/FeatureServer/0",
    "states": [
-    "22"
+    "22",
+    "LA"
    ],
    "counties": [
     "22071"
@@ -2127,6 +2158,7 @@
   {
    "url": "https://jccgis.jccal.org/server/rest/services/Basemap/Parcels/MapServer/0",
    "states": [
+    "01",
     "AL"
    ],
    "counties": [
@@ -2151,6 +2183,7 @@
   {
    "url": "https://services8.arcgis.com/HND1NcQt6vgOGn1z/ArcGIS/rest/services/MCRC_Public_Parcels/FeatureServer/1",
    "states": [
+    "01",
     "AL"
    ],
    "counties": [
@@ -2175,6 +2208,7 @@
   {
    "url": "https://maps.shelbyal.com/gisserver/rest/services/LegacyServices/Cadastral_2026/MapServer/91",
    "states": [
+    "01",
     "AL"
    ],
    "counties": [
@@ -2199,6 +2233,7 @@
   {
    "url": "https://azwatermaps.azwater.gov/arcgis/rest/services/General/Parcels/MapServer/10",
    "states": [
+    "04",
     "AZ"
    ],
    "counties": [
@@ -2223,6 +2258,7 @@
   {
    "url": "https://azwatermaps.azwater.gov/arcgis/rest/services/General/Parcels/MapServer/11",
    "states": [
+    "04",
     "AZ"
    ],
    "counties": [
@@ -2247,6 +2283,7 @@
   {
    "url": "https://azwatermaps.azwater.gov/arcgis/rest/services/General/Parcels/MapServer/13",
    "states": [
+    "04",
     "AZ"
    ],
    "counties": [
@@ -2271,6 +2308,7 @@
   {
    "url": "https://azwatermaps.azwater.gov/arcgis/rest/services/General/Parcels/MapServer/14",
    "states": [
+    "04",
     "AZ"
    ],
    "counties": [
@@ -2293,32 +2331,9 @@
    ]
   },
   {
-   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
-   "states": [
-    "CA"
-   ],
-   "counties": [
-    "06037"
-   ],
-   "name": "Los Angeles County GIS Parcels",
-   "terms": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0",
-   "addr": "SitusFullAddress",
-   "apn": "AIN",
-   "max": 1000,
-   "fields": [
-    [
-     "AIN",
-     "Parcel ID"
-    ],
-    [
-     "SitusFullAddress",
-     "Site Address"
-    ]
-   ]
-  },
-  {
    "url": "https://ocgis.com/arcpub/rest/services/Map_Layers/Parcels/MapServer/0",
    "states": [
+    "06",
     "CA"
    ],
    "counties": [
@@ -2343,6 +2358,7 @@
   {
    "url": "https://gis.countyofriverside.us/arcgis_mapping/rest/services/OpenData/Assessor/MapServer/50",
    "states": [
+    "06",
     "CA"
    ],
    "counties": [
@@ -2367,6 +2383,7 @@
   {
    "url": "https://services.arcgis.com/aA3snZwJfFkVyDuP/arcgis/rest/services/San_Bernardino_County_Parcel_Dataset/FeatureServer/0",
    "states": [
+    "06",
     "CA"
    ],
    "counties": [
@@ -2387,6 +2404,7 @@
   {
    "url": "https://services3.arcgis.com/RfpmnkSAQleRbndX/ArcGIS/rest/services/Property_and_Tax/FeatureServer/0",
    "states": [
+    "13",
     "GA"
    ],
    "counties": [
@@ -2411,6 +2429,7 @@
   {
    "url": "https://dcgis.dekalbcountyga.gov/hosted/rest/services/PropertyAppraisal/Parcels_IASWorld/MapServer/0",
    "states": [
+    "13",
     "GA"
    ],
    "counties": [
@@ -2435,6 +2454,7 @@
   {
    "url": "https://pub.sagis.org/arcgis/rest/services/OpenData/Parcels/MapServer/27",
    "states": [
+    "13",
     "GA"
    ],
    "counties": [
@@ -2459,6 +2479,7 @@
   {
    "url": "https://gis.linncountyiowa.gov/ags/rest/services/Planning/mapBSAPermitting/MapServer/6",
    "states": [
+    "19",
     "IA"
    ],
    "counties": [
@@ -2483,6 +2504,7 @@
   {
    "url": "https://services.arcgis.com/ovln19YRWV44nBqV/ArcGIS/rest/services/Cadastral/FeatureServer/3",
    "states": [
+    "19",
     "IA"
    ],
    "counties": [
@@ -2507,6 +2529,7 @@
   {
    "url": "https://gis.johnsoncountyiowa.gov/arcgis/rest/services/LandRecords/Land_Records/MapServer/9",
    "states": [
+    "19",
     "IA"
    ],
    "counties": [
@@ -2531,6 +2554,7 @@
   {
    "url": "https://services5.arcgis.com/ya62ECiavqTkK0wv/ArcGIS/rest/services/ParcelFabricPublished_gdb/FeatureServer/15",
    "states": [
+    "19",
     "IA"
    ],
    "counties": [
@@ -2555,6 +2579,7 @@
   {
    "url": "https://gis.dupageco.org/arcgis/rest/services/DuPage_County_IL/ParcelsWithRealEstateCC/MapServer/0",
    "states": [
+    "17",
     "IL"
    ],
    "counties": [
@@ -2579,6 +2604,7 @@
   {
    "url": "https://maps.lakecountyil.gov/arcgis/rest/services/CCAO/TaxParcelViewerPro/MapServer/12",
    "states": [
+    "17",
     "IL"
    ],
    "counties": [
@@ -2599,6 +2625,7 @@
   {
    "url": "https://gistech.countyofkane.org/arcgis/rest/services/KanePINList/MapServer/0",
    "states": [
+    "17",
     "IL"
    ],
    "counties": [
@@ -2623,6 +2650,7 @@
   {
    "url": "https://gisweb.wycokck.org/arcgis/rest/services/GISPUB/UGMAPS_4_V02/MapServer/0",
    "states": [
+    "20",
     "KS"
    ],
    "counties": [
@@ -2643,6 +2671,7 @@
   {
    "url": "https://gis.dgcoks.gov/server/rest/services/Tax_Parcel/MapServer/0",
    "states": [
+    "20",
     "KS"
    ],
    "counties": [
@@ -2665,28 +2694,38 @@
    ]
   },
   {
-   "url": "https://gis.lojic.org/maps/rest/services/LojicApps/MsdCsoSsoLocations/MapServer/4",
+   "url": "https://gis.lojic.org/maps/rest/services/PvaGis/CamaViewer/MapServer/26",
    "states": [
+    "21",
     "KY"
    ],
    "counties": [
     "21111"
    ],
-   "name": "Jefferson County GIS Parcels",
+   "name": "Jefferson County PVA / LOJIC GIS Parcels",
    "terms": "https://gis.lojic.org/maps/rest/services/LojicApps/MsdCsoSsoLocations/MapServer/4",
-   "addr": "",
+   "addr": "BLOCKLOT",
    "apn": "PARCELID",
    "max": 2000,
    "fields": [
     [
      "PARCELID",
      "Parcel ID"
+    ],
+    [
+     "BLOCKLOT",
+     "Block Lot"
+    ],
+    [
+     "LOT",
+     "Lot"
     ]
    ]
   },
   {
    "url": "https://services1.arcgis.com/Mg7DLdfYcSWIaDnu/arcgis/rest/services/Parcel/FeatureServer/0",
    "states": [
+    "21",
     "KY"
    ],
    "counties": [
@@ -2711,6 +2750,7 @@
   {
    "url": "https://maps.linkgis.org/server/rest/services/Web_Scene_Map_Parcels/MapServer/13",
    "states": [
+    "21",
     "KY"
    ],
    "counties": [
@@ -2735,6 +2775,7 @@
   {
    "url": "https://webgis.bgky.org/server/rest/services/WARCO/Parcel_Reference/FeatureServer/0",
    "states": [
+    "21",
     "KY"
    ],
    "counties": [
@@ -2755,6 +2796,7 @@
   {
    "url": "https://secure.boonecountygis.com/server/rest/services/ParcelLayers/MapServer/0",
    "states": [
+    "21",
     "KY"
    ],
    "counties": [
@@ -2779,6 +2821,7 @@
   {
    "url": "https://services.arcgis.com/KYvXadMcgf0K1EzK/ArcGIS/rest/services/Tax_Parcels_2026/FeatureServer/0",
    "states": [
+    "22",
     "LA"
    ],
    "counties": [
@@ -2803,21 +2846,44 @@
   {
    "url": "https://jpgis.jeffparish.net/server/rest/services/Parcels/FeatureServer/0",
    "states": [
+    "22",
     "LA"
    ],
    "counties": [
     "22051"
    ],
-   "name": "Jefferson County GIS Parcels",
+   "name": "Jefferson Parish GIS Parcels",
    "terms": "https://jpgis.jeffparish.net/server/rest/services/Parcels/FeatureServer/0",
-   "addr": "",
-   "apn": "",
+   "addr": "SUBDIVISION",
+   "apn": "LOT",
    "max": 2000,
-   "fields": []
+   "fields": [
+    [
+     "LOT",
+     "Lot Number"
+    ],
+    [
+     "SUBDIVISION",
+     "Subdivision"
+    ],
+    [
+     "PRIMARY_ZONING",
+     "Primary Zoning"
+    ],
+    [
+     "FLOOD_ZONE",
+     "Flood Zone"
+    ],
+    [
+     "SITE_ID",
+     "Site ID"
+    ]
+   ]
   },
   {
    "url": "https://maps.stpgov.org/server/rest/services/Referenced_Layers/2025_Parcels/MapServer/0",
    "states": [
+    "22",
     "LA"
    ],
    "counties": [
@@ -2842,6 +2908,7 @@
   {
    "url": "https://services2.arcgis.com/qvkbeam7Wirps6zC/arcgis/rest/services/parcel_file_current/FeatureServer/0",
    "states": [
+    "26",
     "MI"
    ],
    "counties": [
@@ -2884,8 +2951,9 @@
    ]
   },
   {
-   "url": "https://qagisservices.oakgov.com/arcgisds/rest/services/Hosted/Tax_Parcel_2024/FeatureServer/32",
+   "url": "https://gisservices.oakgov.com/arcgisds/rest/services/Hosted/Tax_Parcel_2024/FeatureServer/32",
    "states": [
+    "26",
     "MI"
    ],
    "counties": [
@@ -2906,6 +2974,7 @@
   {
    "url": "https://services6.arcgis.com/K0qS4r8AEJxrE8em/ArcGIS/rest/services/Macomb_County_Parcel_Data/FeatureServer/10",
    "states": [
+    "26",
     "MI"
    ],
    "counties": [
@@ -2930,8 +2999,8 @@
   {
    "url": "https://gisportalgr.grcity.us/arcgis/rest/services/Core_Data/Parcels/MapServer/1",
    "states": [
-    "MI",
-    "26"
+    "26",
+    "MI"
    ],
    "counties": [
     "26081"
@@ -2971,12 +3040,13 @@
   {
    "url": "https://services2.arcgis.com/w657bnjzrjguNyOy/ArcGIS/rest/services/STLCO_STC_Parcels_IND/FeatureServer/0",
    "states": [
+    "29",
     "MO"
    ],
    "counties": [
     "29189"
    ],
-   "name": "St. Louis County County GIS Parcels",
+   "name": "St. Louis County GIS Parcels",
    "terms": "https://services2.arcgis.com/w657bnjzrjguNyOy/ArcGIS/rest/services/STLCO_STC_Parcels_IND/FeatureServer/0",
    "addr": "PROP_ADD",
    "apn": "LOCATOR",
@@ -2993,8 +3063,9 @@
    ]
   },
   {
-   "url": "https://jcgis.jacksongov.org/arcgis/rest/services/Cadastral/PastYearParcels/FeatureServer/0",
+   "url": "https://jcgis.jacksongov.org/arcgis/rest/services/ParcelViewer/ParcelsAscendRelate/MapServer/1",
    "states": [
+    "29",
     "MO"
    ],
    "counties": [
@@ -3002,19 +3073,28 @@
    ],
    "name": "Jackson County GIS Parcels",
    "terms": "https://jcgis.jacksongov.org/arcgis/rest/services/Cadastral/PastYearParcels/FeatureServer/0",
-   "addr": "",
-   "apn": "Name",
+   "addr": "Name",
+   "apn": "parcel_id",
    "max": 3000,
    "fields": [
     [
-     "Name",
+     "parcel_id",
      "Parcel ID"
+    ],
+    [
+     "PropertyID",
+     "Property ID"
+    ],
+    [
+     "Name",
+     "Name"
     ]
    ]
   },
   {
    "url": "https://services7.arcgis.com/n2n27A5sWjEWTpfF/arcgis/rest/services/St_Charles_County_Parcels/FeatureServer/0",
    "states": [
+    "29",
     "MO"
    ],
    "counties": [
@@ -3051,6 +3131,7 @@
   {
    "url": "https://greenecountyassessor.org/arcgis/rest/services/TopoCountyParcels/MapServer/0",
    "states": [
+    "29",
     "MO"
    ],
    "counties": [
@@ -3071,12 +3152,13 @@
   {
    "url": "https://maps8.stlouis-mo.gov/arcgis/rest/services/PDA/PARCELS_PUBLIC/MapServer/0",
    "states": [
+    "29",
     "MO"
    ],
    "counties": [
     "29510"
    ],
-   "name": "St. Louis city County GIS Parcels",
+   "name": "St. Louis City GIS Parcels",
    "terms": "https://maps8.stlouis-mo.gov/arcgis/rest/services/PDA/PARCELS_PUBLIC/MapServer/0",
    "addr": "SITEADDR",
    "apn": "ColParcelId",
@@ -3095,6 +3177,7 @@
   {
    "url": "https://services3.arcgis.com/vv3YkTdKe8qzmf0Z/arcgis/rest/services/Hinds_Service/FeatureServer/1",
    "states": [
+    "28",
     "MS"
    ],
    "counties": [
@@ -3147,6 +3230,7 @@
   {
    "url": "https://geo.co.harrison.ms.us/server/rest/services/AGO/HarrisonCounty_ApprovedParcels/MapServer/0",
    "states": [
+    "28",
     "MS"
    ],
    "counties": [
@@ -3171,6 +3255,7 @@
   {
    "url": "https://gis.desotocountyms.gov/arcgis/rest/services/BaseLayers/MapServer/1",
    "states": [
+    "28",
     "MS"
    ],
    "counties": [
@@ -3195,108 +3280,17 @@
   {
    "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
    "states": [
+    "33",
     "NH"
    ],
    "counties": [
-    "33011"
-   ],
-   "name": "Hillsborough County GIS Parcels",
-   "terms": "Planning-use disclaimer; redistribution/display restriction not found; affirmative open-data license not found. Q-NH",
-   "addr": "streetaddress",
-   "apn": "nh_gis_id",
-   "max": 2000,
-   "fields": [
-    [
-     "nh_gis_id",
-     "Parcel ID"
-    ],
-    [
-     "streetaddress",
-     "Site Address"
-    ]
-   ]
-  },
-  {
-   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
-   "states": [
-    "NH"
-   ],
-   "counties": [
-    "33015"
-   ],
-   "name": "Rockingham County GIS Parcels",
-   "terms": "Planning-use disclaimer; redistribution/display restriction not found; affirmative open-data license not found. Q-NH",
-   "addr": "streetaddress",
-   "apn": "nh_gis_id",
-   "max": 2000,
-   "fields": [
-    [
-     "nh_gis_id",
-     "Parcel ID"
-    ],
-    [
-     "streetaddress",
-     "Site Address"
-    ]
-   ]
-  },
-  {
-   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
-   "states": [
-    "NH"
-   ],
-   "counties": [
-    "33013"
-   ],
-   "name": "Merrimack County GIS Parcels",
-   "terms": "Planning-use disclaimer; redistribution/display restriction not found; affirmative open-data license not found. Q-NH",
-   "addr": "streetaddress",
-   "apn": "nh_gis_id",
-   "max": 2000,
-   "fields": [
-    [
-     "nh_gis_id",
-     "Parcel ID"
-    ],
-    [
-     "streetaddress",
-     "Site Address"
-    ]
-   ]
-  },
-  {
-   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
-   "states": [
-    "NH"
-   ],
-   "counties": [
-    "33017"
-   ],
-   "name": "Strafford County GIS Parcels",
-   "terms": "Planning-use disclaimer; redistribution/display restriction not found; affirmative open-data license not found. Q-NH",
-   "addr": "streetaddress",
-   "apn": "nh_gis_id",
-   "max": 2000,
-   "fields": [
-    [
-     "nh_gis_id",
-     "Parcel ID"
-    ],
-    [
-     "streetaddress",
-     "Site Address"
-    ]
-   ]
-  },
-  {
-   "url": "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1",
-   "states": [
-    "NH"
-   ],
-   "counties": [
+    "33011",
+    "33015",
+    "33013",
+    "33017",
     "33009"
    ],
-   "name": "Grafton County GIS Parcels",
+   "name": "NH GRANIT Statewide Cadastral Parcel Mosaic",
    "terms": "Planning-use disclaimer; redistribution/display restriction not found; affirmative open-data license not found. Q-NH",
    "addr": "streetaddress",
    "apn": "nh_gis_id",
@@ -3315,6 +3309,7 @@
   {
    "url": "https://gisenterprise.washoecounty.gov/server/rest/services/WashoeGIS/Parcels/MapServer/0",
    "states": [
+    "32",
     "NV"
    ],
    "counties": [
@@ -3339,6 +3334,7 @@
   {
    "url": "https://gis.lyon-county.org/server/rest/services/Landbase/Parcels/MapServer/1",
    "states": [
+    "32",
     "NV"
    ],
    "counties": [
@@ -3359,6 +3355,7 @@
   {
    "url": "https://portal.carsoncity.gov/server/rest/services/CarsonCity/CarsonCityNV_OpenData/MapServer/36",
    "states": [
+    "32",
     "NV"
    ],
    "counties": [
@@ -3379,6 +3376,7 @@
   {
    "url": "https://arcgis.water.nv.gov/arcgis/rest/services/BaseLayers/County_Parcels_in_Nevada/MapServer/0",
    "states": [
+    "32",
     "NV"
    ],
    "counties": [
@@ -3399,6 +3397,7 @@
   {
    "url": "https://map11.incog.org/arcgis11wa/rest/services/Parcels_TulsaCo/FeatureServer/0",
    "states": [
+    "40",
     "OK"
    ],
    "counties": [
@@ -3423,6 +3422,7 @@
   {
    "url": "https://www3.multco.us/gisagspublic/rest/services/DART/Taxlots_Orion_Public/MapServer/0",
    "states": [
+    "41",
     "OR"
    ],
    "counties": [
@@ -3447,6 +3447,7 @@
   {
    "url": "https://pappgispub1.co.washington.or.us/server/rest/services/baselayers/Taxlots_SP/MapServer/0",
    "states": [
+    "41",
     "OR"
    ],
    "counties": [
@@ -3467,6 +3468,7 @@
   {
    "url": "https://services3.arcgis.com/I2eWXOndpF9m8oKC/ArcGIS/rest/services/Taxlots_CMap/FeatureServer/0",
    "states": [
+    "41",
     "OR"
    ],
    "counties": [
@@ -3491,6 +3493,7 @@
   {
    "url": "https://lcmaps.lanecounty.org/arcgis/rest/services/CommishSearch/AddressParcelNew/FeatureServer/1",
    "states": [
+    "41",
     "OR"
    ],
    "counties": [
@@ -3511,6 +3514,7 @@
   {
    "url": "https://gis.co.marion.or.us/arcgis/rest/services/Public/Parcels/MapServer/0",
    "states": [
+    "41",
     "OR"
    ],
    "counties": [
@@ -3535,6 +3539,7 @@
   {
    "url": "https://services.arcgis.com/fLeGjb7u4uXqeF9q/ArcGIS/rest/services/PWD_PARCELS/FeatureServer/0",
    "states": [
+    "42",
     "PA"
    ],
    "counties": [
@@ -3571,6 +3576,7 @@
   {
    "url": "https://mapservices.pasda.psu.edu/server/rest/services/pasda/MontgomeryCounty/MapServer/14",
    "states": [
+    "42",
     "PA"
    ],
    "counties": [
@@ -3591,6 +3597,7 @@
   {
    "url": "https://mapservices.pasda.psu.edu/server/rest/services/pasda/BucksCounty/MapServer/17",
    "states": [
+    "42",
     "PA"
    ],
    "counties": [
@@ -3615,6 +3622,7 @@
   {
    "url": "https://citygis.greenvillesc.gov/arcgis/rest/services/AddressSearch/Property/MapServer/3",
    "states": [
+    "45",
     "SC"
    ],
    "counties": [
@@ -3635,6 +3643,7 @@
   {
    "url": "https://gisportal.horrycounty.org/server/rest/services/Hosted/Energov_iGapps_WFL1/FeatureServer/6",
    "states": [
+    "45",
     "SC"
    ],
    "counties": [
@@ -3655,6 +3664,7 @@
   {
    "url": "https://maps.spartanburgcounty.org/server/rest/services/GIS/CAMA_Parcels/MapServer/0",
    "states": [
+    "45",
     "SC"
    ],
    "counties": [
@@ -3679,6 +3689,7 @@
   {
    "url": "https://services1.arcgis.com/Ezk9fcjSUkeadg6u/ArcGIS/rest/services/Minnehaha_Map_WFL1/FeatureServer/6",
    "states": [
+    "46",
     "SD"
    ],
    "counties": [
@@ -3699,6 +3710,7 @@
   {
    "url": "https://gis.rcgov.org/server/rest/services/OpenData/TaxParcels/MapServer/0",
    "states": [
+    "46",
     "SD"
    ],
    "counties": [
@@ -3723,11 +3735,11 @@
   {
    "url": "https://gis.siouxfalls.gov/arcgis/rest/services/Data/Property/MapServer/1",
    "states": [
+    "46",
     "SD"
    ],
    "counties": [
-    "46083",
-    "46099"
+    "46083"
    ],
    "name": "City of Sioux Falls Parcels (Lincoln and Minnehaha counties, SD)",
    "terms": "https://gis.siouxfalls.gov/arcgis/rest/services/Data/Property/MapServer/1",
@@ -3760,6 +3772,7 @@
   {
    "url": "https://utility.arcgis.com/usrsvcs/servers/cc1241646f84404185571113c1233665/rest/services/Parcel/CERT_TAX_PARCELS/FeatureServer/0",
    "states": [
+    "47",
     "TN"
    ],
    "counties": [
@@ -3804,6 +3817,7 @@
   {
    "url": "https://services2.arcgis.com/HdTo6HJqh92wn4D8/arcgis/rest/services/Parcels_view/FeatureServer/0",
    "states": [
+    "47",
     "TN"
    ],
    "counties": [
@@ -3844,6 +3858,7 @@
   {
    "url": "https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/3",
    "states": [
+    "47",
     "TN"
    ],
    "counties": [
@@ -3876,6 +3891,7 @@
   {
    "url": "https://services2.arcgis.com/cclAu9OKhOfjeUdr/arcgis/rest/services/Parcels_ZoneAugust2026/FeatureServer/0",
    "states": [
+    "47",
     "TN"
    ],
    "counties": [
@@ -3916,6 +3932,7 @@
   {
    "url": "https://services5.arcgis.com/A5C0MR9xfkxVRwat/ArcGIS/rest/services/Parcel_Data/FeatureServer/1",
    "states": [
+    "47",
     "TN"
    ],
    "counties": [
@@ -3940,6 +3957,7 @@
   {
    "url": "https://www.gis.hctx.net/arcgis/rest/services/HCAD/Parcels/MapServer/0",
    "states": [
+    "48",
     "TX"
    ],
    "counties": [
@@ -3947,7 +3965,7 @@
    ],
    "name": "Harris County GIS Parcels",
    "terms": "https://www.gis.hctx.net/arcgis/rest/services/HCAD/Parcels/MapServer/0",
-   "addr": "site_str_num + site_str_pfx + site_str_name + site_str_sfx + site_str_sfx_dir",
+   "addr": "site_str_name",
    "apn": "HCAD_NUM",
    "max": 1000,
    "fields": [
@@ -3956,14 +3974,31 @@
      "Parcel ID"
     ],
     [
-     "site_str_num + site_str_pfx + site_str_name + site_str_sfx + site_str_sfx_dir",
-     "Site Address"
+     "site_str_num",
+     "Street Number"
+    ],
+    [
+     "site_str_pfx",
+     "Street Prefix"
+    ],
+    [
+     "site_str_name",
+     "Street Name"
+    ],
+    [
+     "site_str_sfx",
+     "Street Suffix"
+    ],
+    [
+     "site_str_sfx_dir",
+     "Street Suffix Direction"
     ]
    ]
   },
   {
    "url": "https://egis.dallascityhall.com/arcgis/rest/services/Basemap/DallasTaxParcels/MapServer/0",
    "states": [
+    "48",
     "TX"
    ],
    "counties": [
@@ -3971,7 +4006,7 @@
    ],
    "name": "Dallas County GIS Parcels",
    "terms": "https://egis.dallascityhall.com/arcgis/rest/services/Basemap/DallasTaxParcels/MapServer/0",
-   "addr": "ST_NUM + ST_NAME + ST_TYPE + ST_DIR + UNITID",
+   "addr": "ST_NAME",
    "apn": "ACCT",
    "max": 1000,
    "fields": [
@@ -3980,14 +4015,31 @@
      "Parcel ID"
     ],
     [
-     "ST_NUM + ST_NAME + ST_TYPE + ST_DIR + UNITID",
-     "Site Address"
+     "ST_NUM",
+     "Street Number"
+    ],
+    [
+     "ST_NAME",
+     "Street Name"
+    ],
+    [
+     "ST_TYPE",
+     "Street Type"
+    ],
+    [
+     "ST_DIR",
+     "Street Direction"
+    ],
+    [
+     "UNITID",
+     "Unit ID"
     ]
    ]
   },
   {
    "url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0",
    "states": [
+    "48",
     "TX"
    ],
    "counties": [
@@ -4012,6 +4064,7 @@
   {
    "url": "https://maps.bexar.org/arcgis/rest/services/Parcels/MapServer/0",
    "states": [
+    "48",
     "TX"
    ],
    "counties": [
@@ -4036,6 +4089,7 @@
   {
    "url": "https://services.arcgis.com/0L95CJ0VTaxqcmED/arcgis/rest/services/EXTERNAL_tcad_parcel/FeatureServer/0",
    "states": [
+    "48",
     "TX"
    ],
    "counties": [

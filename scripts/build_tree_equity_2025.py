@@ -76,9 +76,27 @@ def main():
             continue
         member = next(i for i in z.infolist() if i.filename.endswith("_tes.csv"))
         member_date = "%04d-%02d-%02d" % member.date_time[:3]
+        # Crosswalk Connecticut's 2020 county codes (09001...) in the American Forests CSV
+        # to Connecticut's planning regions (09110...) used in modern bundles.
+        ct_bgs = {}
+        if st == "ct":
+            import gzip
+            for p in glob.glob(os.path.join(ROOT, "counties", "bundle_09*.json.gz")):
+                try:
+                    with gzip.open(p) as f_gz:
+                        d_gz = json.load(f_gz)
+                        for bg in d_gz.get("details", {}).keys():
+                            ct_bgs[bg[5:]] = bg
+                except Exception:
+                    pass
+
         rows = {}
         for r in csv.DictReader(io.TextIOWrapper(z.open(member), encoding="utf-8-sig")):
             g = str(r["GEOID"]).zfill(12)
+            if st == "ct" and g.startswith("09"):
+                suffix = g[5:]
+                if suffix in ct_bgs:
+                    g = ct_bgs[suffix]
             if g[:5] in by_state[st]:
                 rows.setdefault(g[:5], {})[g] = [pct(r.get("tc_gap")), pct(r.get("treecanopy")), pct(r.get("tc_goal"))]
         for f in sorted(by_state[st]):
