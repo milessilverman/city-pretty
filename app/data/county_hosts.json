@@ -1,8 +1,13 @@
 {
   "_source": {
-    "note": "Regional GitHub Pages sites that host county data files. GitHub Pages publishes at most 1 GB per site; the county files outgrew one site (17 Nov 2026). Regions are the Census Bureau's four regions (Puerto Rico placed with the South). A region is used only when enabled, which is set after its site was checked to serve a county file with access-control-allow-origin: *. Otherwise the page loads the file from this site's counties/ folder.",
+    "note": "Regional GitHub Pages sites and Cloudflare R2 bucket that host county data files. GitHub Pages publishes at most 1 GB per site; Cloudflare R2 provides a 10 GB free tier with zero egress fees (Access-Control-Allow-Origin: *). A remote source is used only when enabled; otherwise the page loads the file from this site's counties/ folder.",
     "limit_bytes_per_site": 1073741824,
     "split_script": "scripts/split_county_hosting.py"
+  },
+  "r2": {
+    "enabled": false,
+    "base": "https://pub-data.citypretty.org/",
+    "note": "Cloudflare R2 public bucket (10 GB free tier, 0 egress fees, CORS enabled). Recommended by Audit P1-10 to avoid maintaining 4 separate GitHub repositories."
   },
   "regions": {
     "northeast": {

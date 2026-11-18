@@ -10171,7 +10171,10 @@ async function countyBundleSources(el) {
   if (!local) return [];
   const H = await COUNTY_HOSTS_READY, st = String(el.dataset.fips || "").slice(0, 2), out = [];
   if (H && !/^(?:https?:)?\/\//i.test(local)) {
-    for (const r of Object.values(H.regions)) {
+    if (H.r2 && H.r2.enabled && H.r2.base) {
+      out.push(H.r2.base.replace(/\/?$/, "/") + local.replace(/^\/+/, ""));
+    }
+    for (const r of Object.values(H.regions || {})) {
       if (r && r.enabled && r.base && (r.states || []).includes(st)) out.push(r.base.replace(/\/?$/, "/") + local.replace(/^\/+/, ""));
     }
   }

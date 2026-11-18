@@ -449,6 +449,68 @@ export async function usgsSeismicDesign(lat: number, lng: number, fetcher: Fetch
 }
 
 // ---------------------------------------------------------------------------------------------------------------
+// NLR PVWatts v8 Solar Photovoltaic Energy Model
+// ---------------------------------------------------------------------------------------------------------------
+
+export type PvWattsResult = {
+  ac_annual_kwh: number | null;
+  solrad_annual: number | null;
+  capacity_factor_pct: number | null;
+  system_capacity_kw: number;
+};
+
+export async function pvwattsV8(
+  lat: number,
+  lng: number,
+  systemCapacityKw: number,
+  opts: { tiltDeg?: number; azimuthDeg?: number; apiKey?: string; fetcher?: FetchLike } = {}
+): Promise<Sourced<PvWattsResult>> {
+  const f = opts.fetcher || fetch;
+  const key = opts.apiKey || "DEMO_KEY";
+  const tilt = opts.tiltDeg ?? 20;
+  const azimuth = opts.azimuthDeg ?? 180;
+  const kw = Math.max(0.1, Number(systemCapacityKw.toFixed(2)));
+  const params = new URLSearchParams({
+    api_key: key,
+    lat: String(lat),
+    lon: String(lng),
+    system_capacity: String(kw),
+    azimuth: String(azimuth),
+    tilt: String(tilt),
+    array_type: "1", // fixed roof mount
+    module_type: "0", // standard
+    losses: "14",
+  });
+  const publicUrl = `https://developer.nlr.gov/api/pvwatts/v8.json?lat=${lat}&lon=${lng}&system_capacity=${kw}&azimuth=${azimuth}&tilt=${tilt}&array_type=1&module_type=0&losses=14`;
+  const source: SourceRef = {
+    name: "NLR PVWatts v8 (Solar Photovoltaic Energy Model)",
+    publisher: "National Laboratory for Renewable Energy (NLR)",
+    url: publicUrl,
+    retrieved_at: now(),
+    vintage: "PVWatts v8.5.0",
+  };
+  if (!validLatLng(lat, lng)) return fail(source, "Invalid coordinates");
+  try {
+    const d = (await getJson(f, `https://developer.nlr.gov/api/pvwatts/v8.json?${params}`)) as any;
+    if (d?.errors && d.errors.length) return fail(source, d.errors.join("; "));
+    const out = d?.outputs;
+    if (!out || out.ac_annual == null) return fail(source, "No PVWatts energy yield returned");
+    return {
+      ok: true,
+      source,
+      value: {
+        ac_annual_kwh: Math.round(out.ac_annual),
+        solrad_annual: num(out.solrad_annual),
+        capacity_factor_pct: num(out.capacity_factor),
+        system_capacity_kw: kw,
+      },
+    };
+  } catch (e) {
+    return fail(source, e);
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------
 // OpenStreetMap via Overpass
 // ---------------------------------------------------------------------------------------------------------------
 

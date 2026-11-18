@@ -31,4 +31,9 @@ describe("county hosts", () => {
       expect(size, name).toBeLessThan(limit * 0.95);
     }
   });
+  it("defines Cloudflare R2 bucket configuration with zero egress fee architecture", () => {
+    expect(H.r2).toBeDefined();
+    expect(H.r2.base).toMatch(/^https:\/\//);
+    expect(typeof H.r2.enabled).toBe("boolean");
+  });
 });

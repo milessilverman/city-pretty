@@ -10,6 +10,7 @@ import {
   censusGeographies,
   femaFloodZone,
   femaNationalRiskIndex,
+  pvwattsV8,
   usgsSeismicDesign,
   geocodeAddress,
   hudFairMarketRentForCounty,
@@ -43,6 +44,7 @@ const AUSTIN = fakeFetch([
   [/NFHL\/MapServer\/28/, fx("fema_flood_austin.json")],
   [/National_Risk_Index_Census_Tracts/, fx("fema_nri_austin.json")],
   [/earthquake\.usgs\.gov\/ws\/designmaps/, fx("usgs_seismic_austin.json")],
+  [/developer\.nlr\.gov\/api\/pvwatts\/v8/, fx("pvwatts_austin.json")],
 ]);
 
 describe("official-source connectors (real captured responses)", () => {
@@ -176,6 +178,17 @@ describe("official-source connectors (real captured responses)", () => {
     expect(res.value.ss).toBe(0.064);
   });
 
+  it("pvwattsV8 returns annual generation and solar radiation from NLR PVWatts v8", async () => {
+    const res = await pvwattsV8(30.3005, -97.724, 4.0, { fetcher: AUSTIN });
+    expect(res.ok).toBe(true);
+    if (!res.ok) return;
+    expect(res.source.publisher).toContain("National Laboratory for Renewable Energy");
+    expect(res.value.ac_annual_kwh).toBe(5932);
+    expect(res.value.solrad_annual).toBeCloseTo(5.4, 1);
+    expect(res.value.capacity_factor_pct).toBeCloseTo(16.9, 1);
+    expect(res.value.system_capacity_kw).toBe(4.0);
+  });
+
   it("parseOsmHeight converts feet/inches, feet, and meters correctly", () => {
     expect(parseOsmHeight("12'6\"")).toBe(3.81);
     expect(parseOsmHeight("10'")).toBe(3.05);
@@ -216,6 +229,11 @@ describe("advisor loop", () => {
     expect(r.sources.map((s) => s.publisher)).toContain("Federal Emergency Management Agency");
     expect((await runAdvisorTool("lookup_site_facts", { lat: "x" }, {})).isError).toBe(true);
     expect((await runAdvisorTool("nope", {}, {})).isError).toBe(true);
+
+    const solarRes = await runAdvisorTool("model_solar_pv", { lat: 30.3005, lng: -97.724, system_capacity_kw: 4.0 }, { fetcher: AUSTIN });
+    expect(solarRes.isError).toBe(false);
+    expect(solarRes.sources.map((s) => s.publisher)).toContain("National Laboratory for Renewable Energy (NLR)");
+    expect(solarRes.text).toContain("5932");
   });
 
   it("runs tools, returns all results in one user turn, and returns the final text with sources", async () => {

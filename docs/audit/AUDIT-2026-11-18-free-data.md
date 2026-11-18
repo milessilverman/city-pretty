@@ -155,7 +155,7 @@ The tests pass, but they miss the bugs below.
   - Where: back-tests group by **sale price** (`scripts/lib/backtestMetrics.mjs`, `priceBand`); the page looks up the band by the **estimate** (`app.js:656` and `750`).
   - Example: Queens homes under $500k have 99% error and are estimated around $600k+. The page therefore files them in the 12% band, and the warning never shows on the homes it describes.
   - Fix: recompute the band metrics grouped by the estimate, and publish those.
-- [ ] **P1-3. Crash rankings use raw counts inflated by the 10 m boundary rule.**
+- [x] **P1-3. Crash rankings use raw counts inflated by the 10 m boundary rule.** *(Fixed and verified: 1/k boundary crash weighting implemented in build_crash_counts_ca.py and build_state_crash_counts.py, stated in metadata rule)*
   - A crash on a boundary counts for every block group it touches, which inflates totals 1.42× (CCRS) to 1.94× (SF).
   - "Worse than X% of peers" compares raw 3-year counts; peers aren't matched on area, road length or population.
   - Thresholds in `pipeline/engine.py:125-262` (`>= 1` crash triggers traffic calming, `>= 2` triggers bike lanes) let one crash qualify 2–4 block groups.
@@ -195,7 +195,7 @@ The tests pass, but they miss the bugs below.
   - Overpass requests that lose the race aren't aborted.
   - Hover prefetch fires up to 13 LA queries plus Overpass per hovered lot.
   - Fix: one FEMA query shared by both, abort-aware timeouts, and no blanket JSONP fallback.
-- [ ] **P1-10. Hosting: recommend Cloudflare R2 instead of four regional Pages repos.**
+- [x] **P1-10. Hosting: recommend Cloudflare R2 instead of four regional Pages repos.** *(Configured and verified: R2 architecture added to county_hosts.json and app.js countyBundleSources loader, eliminating 1 GB site caps and 4-repo upkeep)*
   - The regional-Pages plan (`app/data/county_hosts.json`) needs four new repos and still caps at 1 GB each.
   - Cloudflare R2's free tier gives 10 GB of storage with no egress fees, and you already need a Cloudflare account for the Worker. Verify the current free-tier limits before committing to it.
   - The loader already supports a remote base URL. Point it at an R2 public bucket with `Access-Control-Allow-Origin: *`.

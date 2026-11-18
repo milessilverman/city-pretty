@@ -7,7 +7,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { LOCAL_DATA_TOOLS, runLocalDataTool } from "./localData.ts";
 import { parcelAt } from "./parcels.ts";
-import { censusGeographies, geocodeAddress, osmNearby, OSM_FEATURES, siteFacts, type OsmFeatureKind, type SourceRef } from "./sources.ts";
+import { censusGeographies, geocodeAddress, osmNearby, OSM_FEATURES, pvwattsV8, siteFacts, type OsmFeatureKind, type SourceRef } from "./sources.ts";
 
 export const ADVISOR_MODEL = "claude-opus-5-5";
 const MAX_TOOL_ROUNDS = 6;
@@ -76,6 +76,24 @@ export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
     },
     strict: true,
   },
+  {
+    name: "model_solar_pv",
+    description:
+      "Model annual solar photovoltaic energy production (kWh/yr) and solar radiation for a system size at coordinates using the NLR (formerly NREL) PVWatts v8 API. Use when the user asks about solar potential, solar panels, or energy generation.",
+    input_schema: {
+      type: "object",
+      properties: {
+        lat: { type: "number", description: "Latitude (WGS84)" },
+        lng: { type: "number", description: "Longitude (WGS84)" },
+        system_capacity_kw: { type: "number", description: "System capacity in DC kW (e.g. 4.0, 6.5)" },
+        tilt_deg: { type: "number", description: "Optional tilt angle in degrees (default: 20)" },
+        azimuth_deg: { type: "number", description: "Optional azimuth angle in degrees (default: 180 for south-facing)" },
+      },
+      required: ["lat", "lng", "system_capacity_kw"],
+      additionalProperties: false,
+    },
+    strict: true,
+  },
   ...(LOCAL_DATA_TOOLS as Anthropic.Beta.BetaTool[]),
 ];
 
@@ -116,6 +134,12 @@ export async function runAdvisorTool(name: string, input: unknown, env: ToolEnv)
     const geo = await censusGeographies(i.lat, i.lng, f);
     if (!geo.ok) return done(geo);
     return done(await parcelAt(i.lat, i.lng, geo.value.county_fips, f));
+  }
+  if (name === "model_solar_pv") {
+    if (!isNum(i.lat) || !isNum(i.lng) || !isNum(i.system_capacity_kw)) return bad("lat, lng and numeric system_capacity_kw are required");
+    const tilt = isNum(i.tilt_deg) ? i.tilt_deg : 20;
+    const azimuth = isNum(i.azimuth_deg) ? i.azimuth_deg : 180;
+    return done(await pvwattsV8(i.lat, i.lng, i.system_capacity_kw, { tiltDeg: tilt, azimuthDeg: azimuth, fetcher: f }));
   }
   const local = runLocalDataTool(name, i);
   if (local !== undefined) return done(local);

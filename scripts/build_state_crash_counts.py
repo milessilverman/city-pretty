@@ -36,7 +36,7 @@ OUT_DIR = os.path.join(ROOT, "app", "data", "crash_counts")
 UA = {"User-Agent": "city-pretty-data-pipeline/1.0"}
 TIGER = "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer"
 BOUNDARY_M = 10.0
-RULE = f"A crash counts for a block group if it is inside it or within {BOUNDARY_M:g} m of its boundary; crashes on boundary streets count for each bordering block group."
+RULE = f"A crash counts for a block group if it is inside it or within {BOUNDARY_M:g} m of its boundary; crashes touching k boundary block groups are weighted 1/k."
 
 IDOT = "https://services2.arcgis.com/aIrBD8yn1TDTEXoz/arcgis/rest/services"
 UDOT = "https://services.arcgis.com/pA2nEVnB6tquxgOW/arcgis/rest/services/Utah_Crash_Locations/FeatureServer"
@@ -288,9 +288,16 @@ def build(fips, name, old_window, bundle_path):
         st["matched"] += 1
         if len(hits) > 1:
             st["on_boundary"] += 1
-        pb, ksi = 1 if (ped or bike) else 0, 1 if (k > 0 or s > 0) else 0
+        pb, ksi = (1 if (ped or bike) else 0), (1 if (k > 0 or s > 0) else 0)
+        num_hits = len(hits)
+        w_all = 1.0 / num_hits
+        w_pb = (1.0 / num_hits) if pb else 0.0
+        w_ksi = (1.0 / num_hits) if ksi else 0.0
         for i in hits:
-            c = out[gids[i]]; c[0] += pb; c[1] += ksi; c[2] += 1
+            c = out[gids[i]]
+            c[0] = round(c[0] + w_pb, 3)
+            c[1] = round(c[1] + w_ksi, 3)
+            c[2] = round(c[2] + w_all, 3)
         for i in strict.query(p, predicate="within"):
             c = strict_out[gids[int(i)]]; c[0] += pb; c[1] += ksi; c[2] += 1
             break
