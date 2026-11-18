@@ -300,6 +300,26 @@ export function fromWorker(f) {
     const label = v.in_low_lying_slr_area ? `In ${v.scenario_ft}ft SLR inundation zone` : `Above ${v.scenario_ft}ft SLR inundation zone`;
     rows.push(ok("Sea level rise (NOAA)", label, slr.source.publisher, slr.source.url, v.notes));
   }
+  const hist = f.historic_preservation;
+  if (hist && hist.ok && hist.value) {
+    const v = hist.value;
+    const label = v.is_in_historic_district
+      ? `${v.resources.length} NRHP resource(s) on file`
+      : "Not in National Register historic district";
+    const note = v.resources.length
+      ? v.resources.map(r => `${r.name} (${r.resource_type}${r.is_national_historic_landmark ? ", NHL" : ""})`).join("; ")
+      : "Point does not intersect official NPS National Register historic polygon.";
+    rows.push(ok("Historic preservation (NPS NRHP)", label, hist.source.publisher, hist.source.url, note));
+  }
+  const hpi = f.fhfa_hpi;
+  if (hpi && hpi.ok && hpi.value) {
+    const v = hpi.value;
+    const label = v.ten_year_appreciation_pct != null
+      ? `${v.ten_year_appreciation_pct >= 0 ? "+" : ""}${v.ten_year_appreciation_pct}% (10-yr)`
+      : `${v.latest_hpi} (${v.latest_year})`;
+    const note = `Tract ${v.tract_fips || ""} · ${v.latest_year} HPI: ${v.latest_hpi}${v.annual_change_pct != null ? ` (${v.annual_change_pct >= 0 ? "+" : ""}${v.annual_change_pct}% 1-yr)` : ""}`;
+    rows.push(ok("Home price appreciation (FHFA HPI)", label, hpi.source.publisher, hpi.source.url, note));
+  }
   return rows;
 }
 

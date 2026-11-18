@@ -83,5 +83,31 @@ describe("app/facts.js live public records", () => {
     expect(rows.find((r: any) => r.label.includes("NCES EDGE")).value).toContain("LEE EL");
     expect(rows.find((r: any) => r.label.includes("Walkability")).value).toContain("18 / 20 (Most Walkable)");
     expect(rows.find((r: any) => r.label.includes("Sea level rise")).value).toContain("Above 1ft SLR");
+
+    const sampleWorkerPayload = {
+      ...JSON.parse(JSON.stringify(f)),
+      historic_preservation: {
+        ok: true,
+        source: { name: "National Register of Historic Places", publisher: "National Park Service", url: "https://mapservices.nps.gov/", retrieved_at: "2026-11-18" },
+        value: {
+          is_in_historic_district: true,
+          resources: [{ ref_num: "01000874", name: "Perry Estate", resource_type: "district", is_national_historic_landmark: false }],
+        },
+      },
+      fhfa_hpi: {
+        ok: true,
+        source: { name: "FHFA HPI", publisher: "Federal Housing Finance Agency", url: "https://www.fhfa.gov/", retrieved_at: "2026-11-18" },
+        value: {
+          tract_fips: "48453000302",
+          latest_year: 2025,
+          latest_hpi: 954.01,
+          annual_change_pct: 13.28,
+          ten_year_appreciation_pct: 87.8,
+        },
+      },
+    };
+    const extendedRows = fromWorker(sampleWorkerPayload);
+    expect(extendedRows.find((r: any) => r.label.includes("Historic preservation")).value).toContain("1 NRHP resource(s)");
+    expect(extendedRows.find((r: any) => r.label.includes("Home price appreciation")).value).toContain("+87.8% (10-yr)");
   });
 });
