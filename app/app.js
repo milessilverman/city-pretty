@@ -7308,6 +7308,7 @@ function eifdSection(p, m) {
 
     return `<div class="section">
       <h3>${esc(tifCap.vehicleName)}: Municipal Finance Capacity</h3>
+      <p class="small" style="color:#92400e;margin:2px 0 4px;"><b>Illustrative only: inputs are assumptions, not local data</b> (tax rate, growth, turnover, new construction, pledge share and bond terms are typed in). ${esc(profLabel)}</p>
       <p class="small muted">
         Under ${esc(activeStateName())} municipal finance law, local governments pledge ad valorem tax increment from revitalization districts to finance public infrastructure.
         ${profile.annual_assessment_cap ? `Assessed values are constrained by ${esc(activeStateName())}'s ${(profile.annual_assessment_cap * 100).toFixed(0)}% annual assessment cap.` : `Properties undergo annual market assessment with no statutory reassessment cap.`}
