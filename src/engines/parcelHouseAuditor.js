@@ -174,8 +174,8 @@ function auditSingleHouseParcel(input) {
 
   const imageryCheck = _valVintage({
     parcelId: input.parcelId,
-    lidarAcquisitionYear: imagery.lidarYear || 2020,
-    streetViewCaptureDate: hasStreetView ? (imagery.streetViewDate || "2021-06") : null,
+    lidarAcquisitionYear: imagery.lidarYear ?? null,
+    streetViewCaptureDate: hasStreetView ? imagery.streetViewDate : null,
     latestPostConstructionPermitDate: latestPermit ? latestPermit.issue_date : null,
     permitScopeDescription: latestPermit ? latestPermit.description : null,
     referenceYear: 2026,
@@ -186,7 +186,7 @@ function auditSingleHouseParcel(input) {
     : imageryCheck.confidenceBadge;
 
   const warningMessage = !hasStreetView
-    ? "Google Street View coverage is unavailable (rural, gated community, cul-de-sac, or flag lot). Story count and facade condition calibrated from USGS 3DEP LiDAR and county assessor records."
+    ? (imagery.hasStreetView ? "Street View capture date is not on file, so imagery age cannot be checked; story count comes from county assessor records." : "Google Street View coverage is unavailable (rural, gated community, cul-de-sac, or flag lot). Story count and facade condition calibrated from USGS 3DEP LiDAR and county assessor records.")
     : imageryCheck.warningMessage;
 
   // 3. Statutory By-Right Housing Rights & Exclusion Engine
@@ -318,16 +318,16 @@ function auditSingleHouseParcel(input) {
     countyFips: input.countyFips,
     bedrooms: input.bedrooms || 3,
     bathrooms: input.bathrooms || 2,
-    lotSqft: lotSqft || 6000,
-    livingSqft: livingSqft || 1500,
+    lotSqft: lotSqft ?? null,
+    livingSqft: livingSqft ?? null,
     monthlyDebtServiceMortgageUsd: Math.round(finalEstimatedValue * 0.0055),
     monthlyPropertyTaxAndInsuranceUsd: Math.round(finalEstimatedValue * 0.0012),
     plannedHoldingMonths: 18,
     features: {
       hasDriveway: input.hasGarage !== false,
       drivewaySpacesCount: 2,
-      hasAtticOrBasementStorage: (livingSqft || 1500) > 1200,
-      storageSqft: Math.round((livingSqft || 1500) * 0.15),
+      hasAtticOrBasementStorage: livingSqft != null && livingSqft > 1200,
+      storageSqft: livingSqft != null ? Math.round(livingSqft * 0.15) : undefined,
       hasPool: !!input.hasPool,
       hasAvailableRoofSqftForSolar: unshadedRoofSqft > 250,
       availableRoofSqft: unshadedRoofSqft,
@@ -342,8 +342,8 @@ function auditSingleHouseParcel(input) {
       propertyAddress: input.address,
       stateCode: stCode,
       currentPropertyValue: finalEstimatedValue,
-      currentLivingSqft: livingSqft || 1500,
-      lotSqft: lotSqft || 6000,
+      currentLivingSqft: livingSqft ?? null,
+      lotSqft: lotSqft ?? null,
       zoningCode: input.zoningCode,
       improvementType: "garage_conversion_adu",
       quotedTotalCost: 65_000,
@@ -353,8 +353,8 @@ function auditSingleHouseParcel(input) {
       propertyAddress: input.address,
       stateCode: stCode,
       currentPropertyValue: finalEstimatedValue,
-      currentLivingSqft: livingSqft || 1500,
-      lotSqft: lotSqft || 6000,
+      currentLivingSqft: livingSqft ?? null,
+      lotSqft: lotSqft ?? null,
       zoningCode: input.zoningCode,
       improvementType: "detached_adu",
       quotedTotalCost: 185_000,
@@ -364,7 +364,7 @@ function auditSingleHouseParcel(input) {
       propertyAddress: input.address,
       stateCode: stCode,
       currentPropertyValue: finalEstimatedValue,
-      currentLivingSqft: livingSqft || 1500,
+      currentLivingSqft: livingSqft ?? null,
       improvementType: "kitchen_remodel_minor",
       quotedTotalCost: 26_000,
     }),
@@ -392,8 +392,8 @@ function auditSingleHouseParcel(input) {
     },
     imagery: {
       parcelId: input.parcelId,
-      lidarAcquisitionYear: imagery.lidarYear || 2020,
-      streetViewCaptureDate: hasStreetView ? (imagery.streetViewDate || "2021-06") : null,
+      lidarAcquisitionYear: imagery.lidarYear ?? null,
+      streetViewCaptureDate: hasStreetView ? imagery.streetViewDate : null,
       latestPostConstructionPermitDate: latestPermit ? latestPermit.issue_date : null,
       permitScopeDescription: latestPermit ? latestPermit.description : null,
       isLidarStale: imageryCheck.isLidarStale,
@@ -435,6 +435,14 @@ function auditSingleHouseParcel(input) {
       annualYieldKwh,
       paybackYearsCash,
       paybackYearsLease,
+      // Install cost, yield, bill saving and battery cost are typed-in state defaults, not local quotes.
+      illustrative: true,
+      assumptions: [
+        { name: "install cost per watt", value: stCode === "CA" ? 3.15 : 2.85, assumed: true },
+        { name: "yield, kWh per kW per year", value: stCode === "CA" ? 1620 : stCode === "AZ" ? 1780 : 1250, assumed: true },
+        { name: "bill saving per kWh", value: stCode === "CA" ? 0.28 : 0.15, assumed: true },
+        { name: "battery cost", value: stCode === "CA" ? 11500 : 0, assumed: true },
+      ],
       nemTariffNotice: stCode === "CA"
         ? "CA NEM 3.0 / Net Billing Tariff: Mid-day solar export rates are credited at avoided cost (~$0.055/kWh). Paired 10–13.5 kWh battery storage is required for positive 25-yr NPV."
         : "Standard net metering or net billing applies. Battery optional for resilience.",

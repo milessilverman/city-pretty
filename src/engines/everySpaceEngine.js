@@ -24,8 +24,9 @@ export function evaluateEverySpaceMonetization(input) {
     });
   }
 
-  if (input.features && input.features.hasAtticOrBasementStorage) {
-    const sqft = input.features.storageSqft || 250;
+  // No stand-in size: a storage channel is listed only when the storage area is known.
+  if (input.features && input.features.hasAtticOrBasementStorage && input.features.storageSqft) {
+    const sqft = input.features.storageSqft;
     const expected = Math.round(sqft * 1.25);
     channels.push({
       channelId: "enclosed_storage",
@@ -56,8 +57,8 @@ export function evaluateEverySpaceMonetization(input) {
     });
   }
 
-  if (input.features && input.features.hasAvailableRoofSqftForSolar) {
-    const roofSqft = input.features.availableRoofSqft || 1200;
+  if (input.features && input.features.hasAvailableRoofSqftForSolar && input.features.availableRoofSqft) {
+    const roofSqft = input.features.availableRoofSqft;
     const kwCapacity = Math.round(roofSqft / 100);
     const solarRev = Math.round(kwCapacity * 18);
     channels.push({
@@ -74,8 +75,10 @@ export function evaluateEverySpaceMonetization(input) {
     });
   }
 
-  if (input.features && input.features.hasExistingCasitaOrAdu) {
-    const aduRent = (input.localHudFmr && input.localHudFmr.one_bed_1br) || 1850;
+  // Rent only from HUD's Fair Market Rent for the county; with no HUD rent on file the channel is left out.
+  const hudOneBed = (input.localHudFmr && input.localHudFmr.one_bed_1br != null) ? input.localHudFmr.one_bed_1br : null;
+  if (input.features && input.features.hasExistingCasitaOrAdu && hudOneBed != null) {
+    const aduRent = hudOneBed;
     channels.push({
       channelId: "existing_casita_adu",
       name: "Secondary Unit / Casita Tenant Rental",
@@ -86,9 +89,19 @@ export function evaluateEverySpaceMonetization(input) {
       upfrontSetupCostUsd: 600,
       operationalComplexity: "low_touch_digital",
       holdingPhaseApplicability: "both",
-      revenueNotes: "Backed by HUD FY2026 Fair Market Rent benchmarks for guaranteed workforce demand."
+      revenueNotes: `Rent is HUD's ${input.localHudFmr && input.localHudFmr.fiscal_year ? "FY" + input.localHudFmr.fiscal_year + " " : ""}one-bedroom Fair Market Rent for the county; actual demand is not checked.`
     });
   }
+
+  // Every per-sq-ft rate, flat monthly figure and range multiplier in this engine is a typed-in assumption; only the
+  // HUD rent (input.localHudFmr) is sourced. The page labels this block "Illustrative only".
+  const assumptions = [
+    { name: "parking space rent per month", value: 180, assumed: true },
+    { name: "storage rent per sq ft per month", value: 1.25, assumed: true },
+    { name: "pool rental per month", value: 750, assumed: true },
+    { name: "solar lease per kW per month", value: 18, assumed: true },
+    { name: "low / high range multipliers", value: "0.90-1.60", assumed: true }
+  ];
 
   const totalMonthlyRev = channels.reduce((sum, ch) => sum + ch.monthlyRevenueExpectedUsd, 0);
   const netMonthlyCashFlow = totalMonthlyRev - monthlyExpenses;
@@ -118,7 +131,9 @@ export function evaluateEverySpaceMonetization(input) {
     cumulativeEverySpaceEarningsOverHoldUsd: cumulativeEarnings,
     netEquityPreservedOverHoldUsd: Math.min(cumulativeHoldingCost, cumulativeEarnings),
     isCashFlowPositiveDuringHold: isPositive,
-    holdingStrategyRecommendation: recommendation
+    holdingStrategyRecommendation: recommendation,
+    illustrative: true,
+    assumptions
   };
 }
 

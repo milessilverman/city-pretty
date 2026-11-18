@@ -11,7 +11,7 @@ function validateParcelImageryVintage(input) {
     : null;
 
   const isLidarStale =
-    permitYear !== null && permitYear >= (input.lidarAcquisitionYear || 2020);
+    permitYear !== null && input.lidarAcquisitionYear != null && permitYear >= input.lidarAcquisitionYear;
 
   let isStreetViewStale = false;
   if (input.streetViewCaptureDate) {
@@ -40,7 +40,7 @@ function validateParcelImageryVintage(input) {
       confidenceBadge: "stale_imagery_permit_override",
       warningMessage: `Building permit (${input.latestPostConstructionPermitDate}: ${
         input.permitScopeDescription || "structural alteration"
-      }) post-dates LiDAR (${input.lidarAcquisitionYear}) or Street View (${
+      }) post-dates LiDAR (${input.lidarAcquisitionYear ?? "year not on file"}) or Street View (${
         input.streetViewCaptureDate
       }). Verify current structure before modeling ADU/SB 9 capacity.`,
     };

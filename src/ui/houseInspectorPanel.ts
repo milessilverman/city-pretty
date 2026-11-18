@@ -20,7 +20,7 @@ export function renderHouseAuditAside(audit: HouseParcelAuditResult): string {
 
   const badgeText =
     im.confidenceBadge === "verified_current"
-      ? "Verified Current Imagery"
+      ? "Imagery newer than the last permit"
       : im.confidenceBadge === "stale_imagery_permit_override"
       ? "Stale Imagery (Post-Construction Permit Override)"
       : "No Street View (Rural / Cul-de-sac / Gated)";
@@ -30,7 +30,7 @@ export function renderHouseAuditAside(audit: HouseParcelAuditResult): string {
     <!-- Header & Parcel ID -->
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px;border-bottom:1px solid #e2e8f0;padding-bottom:8px;">
       <div>
-        <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.04em;">Parcel Comprehensive Institutional Audit</div>
+        <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.04em;">Parcel Screening Summary</div>
         <div style="font-size:14px;font-weight:800;color:#0f172a;">Parcel ID: ${audit.parcelId} (${audit.stateCode} · FIPS ${audit.countyFips})</div>
       </div>
       <div style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:12px;background:${badgeColor}15;color:${badgeColor};border:1px solid ${badgeColor}40;">
@@ -41,7 +41,7 @@ export function renderHouseAuditAside(audit: HouseParcelAuditResult): string {
     <!-- 1. Zillow-Parity AVM & Permit Capitalization -->
     <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
       <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;">
-        <span style="font-size:11px;font-weight:700;color:#334155;">Institutional AVM Valuation</span>
+        <span style="font-size:11px;font-weight:700;color:#334155;">Automated Valuation Estimate</span>
         <span style="font-size:11px;color:#0284c7;font-weight:600;">${v.confidenceRating}</span>
       </div>
       <div style="font-size:20px;font-weight:800;color:#0f172a;margin:3px 0;">
@@ -62,9 +62,9 @@ export function renderHouseAuditAside(audit: HouseParcelAuditResult): string {
 
     <!-- 2. LiDAR, Stories & Street View Proxy Verification -->
     <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
-      <div style="font-size:11.5px;font-weight:700;color:#334155;margin-bottom:4px;">Building Footprints &amp; 4-Angle Street View Verification</div>
+      <div style="font-size:11.5px;font-weight:700;color:#334155;margin-bottom:4px;">Building Footprints &amp; Street View Imagery Check</div>
       <div style="font-size:11px;color:#475569;margin-bottom:6px;">
-        • <b>LiDAR Acquisition:</b> ${im.lidarAcquisitionYear} USGS 3DEP DSM &middot; <b>Street View:</b> ${im.streetViewCaptureDate || "Unavailable"} &middot; <b>Permit Vintage:</b> ${im.latestPostConstructionPermitDate || "None post-imagery"}<br>
+        • <b>LiDAR Acquisition:</b> ${im.lidarAcquisitionYear != null ? im.lidarAcquisitionYear + " USGS 3DEP DSM" : "year not on file"} &middot; <b>Street View:</b> ${im.streetViewCaptureDate || "capture date not on file"} &middot; <b>Permit Vintage:</b> ${im.latestPostConstructionPermitDate || "None post-imagery"}<br>
         • <b>Story Calibration:</b> ${im.storyCalibrationSource}
       </div>
       ${im.warningMessage ? `<div style="font-size:11px;color:#b45309;background:#fef3c7;padding:6px 8px;border-radius:4px;border:1px solid #fde68a;margin-bottom:6px;"><b>Imagery Notice:</b> ${im.warningMessage}</div>` : ""}
@@ -78,15 +78,15 @@ export function renderHouseAuditAside(audit: HouseParcelAuditResult): string {
       <div style="font-size:11.5px;font-weight:700;color:#334155;margin-bottom:4px;">Statutory By-Right Housing Rights &amp; Exclusions</div>
       <div style="font-size:11px;color:#475569;margin-bottom:6px;">
         ${z.applicable_statutes.length > 0 ? `
-          <div style="color:#15803d;font-weight:700;margin-bottom:4px;">✓ Statutory Preemption Active: ${z.applicable_statutes.map(s => s.citation).join(", ")}</div>
+          <div style="color:#15803d;font-weight:700;margin-bottom:4px;">✓ State law that applies (checked against the statute): ${z.applicable_statutes.map(s => s.citation).join(", ")}</div>
           • <b>By-Right Density:</b> Up to ${z.applicable_statutes[0].max_units_by_right} units ministerially.<br>
           • <b>Height &amp; FAR:</b> ${z.applicable_statutes[0].max_height_ft ? `${z.applicable_statutes[0].max_height_ft} ft` : "Base zoning"} ${z.applicable_statutes[0].max_far ? `&middot; ${z.applicable_statutes[0].max_far} FAR` : ""}<br>
-          • <b>Mandatory Parking:</b> ${z.applicable_statutes[0].min_parking_spaces_per_unit} spaces/unit.<br>
-          ${z.applicable_statutes[0].tax_exemption_pct > 0 ? `• <b>Ad Valorem Exemption:</b> ${(z.applicable_statutes[0].tax_exemption_pct * 100).toFixed(0)}% under Fla. Stat. § 196.1979.<br>` : ""}
+          • <b>Parking:</b> ${z.applicable_statutes[0].min_parking_spaces_per_unit != null ? `at most ${z.applicable_statutes[0].min_parking_spaces_per_unit} spaces/unit may be required.` : "not set by this law (local rules apply)."}<br>
+          ${z.applicable_statutes[0].tax_exemption_pct > 0 ? `• <b>Ad Valorem Exemption:</b> ${(z.applicable_statutes[0].tax_exemption_pct * 100).toFixed(0)}% (Fla. Stat. 196.1978(3)).<br>` : ""}
         ` : `
           <div style="color:#334155;">${z.statutoryNotes}</div>
         `}
-        • <b>Lot Split Feasibility:</b> ${z.lotSplitFeasible ? "<span style='color:#15803d;font-weight:700;'>Feasible (≥4,800 sq ft, unencumbered)</span>" : "<span style='color:#64748b;'>Ineligible (lot size or floodway/HPOZ exclusion)</span>"}<br>
+        • <b>Lot Split Feasibility:</b> ${z.lotSplitFeasible ? "<span style='color:#15803d;font-weight:700;'>Possible under SB 9 (lot of 2,400+ sq ft so each new lot is at least 1,200 sq ft)</span>" : "<span style='color:#64748b;'>Not shown as possible (California SB 9 only; lot size, zoning or an HPOZ, fire-zone or floodway flag)</span>"}<br>
         • <b>ADU Feasibility:</b> ${z.aduFeasible ? "<span style='color:#15803d;font-weight:700;'>By-Right Feasible</span>" : "<span style='color:#b45309;'>Discretionary HPOZ review required</span>"}
       </div>
       <div style="font-size:10.5px;color:#64748b;background:#ffffff;padding:6px;border-radius:4px;border:1px solid #e2e8f0;">
@@ -171,7 +171,7 @@ export function renderHouseAuditAside(audit: HouseParcelAuditResult): string {
     <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
       <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;">
         <span style="font-size:11.5px;font-weight:700;color:#334155;">Homeowner Renovation &amp; Quote Evaluator</span>
-        <span style="font-size:10.5px;font-weight:700;color:#15803d;">Statutory By-Right Verified</span>
+        <span style="font-size:10.5px;font-weight:700;color:#15803d;">Illustrative only: inputs are assumptions, not local data</span>
       </div>
       <div style="font-size:11px;color:#475569;margin-top:4px;">
         ${audit.renovationOptions.map(r => `
@@ -195,7 +195,7 @@ export function renderHouseAuditAside(audit: HouseParcelAuditResult): string {
 
     <!-- 7. Legal & Engineering Disclaimers -->
     <div style="border-top:1px solid #e2e8f0;padding-top:8px;font-size:10px;color:#64748b;line-height:1.4;">
-      <b>Institutional Disclaimers:</b><br>
+      <b>Disclaimers:</b><br>
       ${audit.legalEngineeringDisclaimers.map(d => `• ${d}`).join("<br>")}
     </div>
   </div>

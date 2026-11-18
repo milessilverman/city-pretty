@@ -43,7 +43,16 @@ function evaluateCorridorFeasibility(corridor) {
   };
 }
 
-function evaluateStationTODPotential(station) {
+// A measured station value effect from app/data/transit_value_effects.json (rows), or null when none is passed.
+// Uses the first row checked in fetched text for "all rail station types" within 1/4 mile (a pooled meta-analysis
+// mean, not a local estimate). The old 0.32 / 0.24 / 0.18 uplift by station type had no source.
+function pickValueEffect(rows) {
+  if (!Array.isArray(rows)) return null;
+  const r = rows.find((x) => x && x.mode === "all rail station types" && x.distance_band === "within 1/4 mile of the station" && typeof x.effect_pct === "number" && !!x.verification && /^verified/.test(String(x.verification.status || "")));
+  return r ? Math.round(r.effect_pct * 10) / 1000 : null;
+}
+
+function evaluateStationTODPotential(station, valueEffects) {
   const landSqft = num(station.avg_land_cost_per_sqft);
   const acres = num(station.available_underused_acres_walkshed);
   const homeValue = num(station.median_home_value_walkshed);
@@ -52,15 +61,15 @@ function evaluateStationTODPotential(station) {
   const costPerAcre = landSqft !== null ? Math.round(landSqft * 43560) : null;
   const totalAcquisition = costPerAcre !== null && acres !== null ? Math.round(costPerAcre * acres) : null;
 
-  const upliftPct = nothingOnFile ? null : station.station_type === "urban_center" ? 0.32 : station.station_type === "suburban_infill" ? 0.24 : 0.18;
+  const upliftPct = nothingOnFile ? null : pickValueEffect(valueEffects);
   const densityMultiplier = station.station_type === "urban_center" ? 75 : station.station_type === "university_intermodal" ? 60 : 35;
   const feasibleUnits = acres !== null ? Math.round(acres * densityMultiplier) : null;
 
   const finishedUnitValue = homeValue !== null ? Math.round(homeValue * 0.85) : null;
   const totalFinishedValue = feasibleUnits !== null && finishedUnitValue !== null ? feasibleUnits * finishedUnitValue : null;
 
-  const bikeMiles = nothingOnFile ? null : station.station_type === "rural_exurban_infill" ? 2.5 : 4.5;
-  const bikeCost = bikeMiles !== null ? Math.round(bikeMiles * 220000) : null;
+  const bikeMiles = nothingOnFile ? null : null;   // no sourced network length
+  const bikeCost = bikeMiles !== null ? null : null;   // the old $220k/mile figure had no source
 
   const strategy = nothingOnFile
     ? `Not on file: no walkshed land-cost, underused-acre or home-value data exists for ${station.name}.`
@@ -96,17 +105,17 @@ function generateStationInvestmentPlan(corridor, station, capitalBudget) {
           `Place 20% down on an existing single-family residence within 0.75 miles of ${station.name} (${station.city}).`,
           `Target lots with ≥5,000 sq ft and detached rear yard access.`
         ],
-        projectedReturn: "Equity upside from +20% to +30% post-rail ground-breaking appreciation."
+        projectedReturn: "Not estimated: no local pro-forma or measured return on file."
       },
       {
         pillar: "Statutory Casita / ADU Permitting & Architectural Pre-Fab",
         allocatedAmount: Math.round(capitalBudget * 0.20),
         sharePct: 20,
         actionItems: [
-          `File ministerial by-right ADU application under ${station.statutory_housing_regime}.`,
-          `Zero public hearing or discretionary council approval required.`
+          `File an ADU application under the rules that apply (${station.statutory_housing_regime}).`,
+          `Whether a public hearing is needed is not determined here.`
         ],
-        projectedReturn: "+$1,200 to +$1,600/mo incremental rental income upon completion."
+        projectedReturn: "Not estimated: no local pro-forma or measured return on file."
       },
       {
         pillar: "EverySpace Holding Carry Monetization",
@@ -114,9 +123,9 @@ function generateStationInvestmentPlan(corridor, station, capitalBudget) {
         sharePct: 10,
         actionItems: [
           "Monetize driveway for commuter/RV parking and rooftop for solar generation during 6-12 month permitting period.",
-          "Generates $400-$750/mo to offset debt service and eliminate negative holding carry."
+          "Monthly income from these uses is not estimated here (no local data on file)."
         ],
-        projectedReturn: "100% negative carry offset during entitlement phase."
+        projectedReturn: "Not estimated: no local pro-forma or measured return on file."
       }
     ];
 
@@ -128,7 +137,7 @@ function generateStationInvestmentPlan(corridor, station, capitalBudget) {
       pillars,
       everySpaceMonetizationStrategy: "EverySpace driveway and rooftop solar leasing during pre-construction entitlement window.",
       statutoryPreemptionLeveraged: station.statutory_housing_regime,
-      recommendationNarrative: `With $${capitalBudget.toLocaleString()}, acquire a single residential house near ${station.name}. Use ${station.statutory_housing_regime} to add a second unit by-right while EverySpace monetizes storage and driveway parking to ensure positive cash flow from day one.`
+      recommendationNarrative: `With $${capitalBudget.toLocaleString()}, acquire a single residential house near ${station.name}. Check whether ${station.statutory_housing_regime} allows a second unit; renting out parking or storage during permitting can offset some carrying cost (not estimated here).`
     };
   } else if (capitalBudget <= 10000000) {
     const pillars = [
@@ -138,9 +147,9 @@ function generateStationInvestmentPlan(corridor, station, capitalBudget) {
         sharePct: 65,
         actionItems: [
           `Assemble 2 to 4 adjacent residential parcels within 0.5 miles of ${station.name}.`,
-          "Perform statutory lot splits under state middle-housing statutes (e.g. Austin HOME / AZ HB 2720 / CA SB 9)."
+          "Check whether a state lot-split or middle-housing law applies (only CA SB 9, WA HB 1110 and OR HB 2001 are checked against the statute in this repo)."
         ],
-        projectedReturn: "Doubles or triples building footprint capacity by-right."
+        projectedReturn: "Not estimated: no local pro-forma or measured return on file."
       },
       {
         pillar: "Missing-Middle Multi-Unit Construction",
@@ -150,7 +159,7 @@ function generateStationInvestmentPlan(corridor, station, capitalBudget) {
           "Construct 6 to 16 townhomes or garden cluster units.",
           "Eliminate vehicular parking requirements where permitted near passenger rail."
         ],
-        projectedReturn: "18% to 24% IRR upon finished sale or long-term lease-up."
+        projectedReturn: "Not estimated: no local pro-forma or measured return on file."
       },
       {
         pillar: "Feeder Bike Spur & Neighborhood Micro-Mobility",
@@ -160,7 +169,7 @@ function generateStationInvestmentPlan(corridor, station, capitalBudget) {
           `Co-fund a dedicated 0.5-mile protected bike path connecting the parcels directly to ${station.name}.`,
           "Install secure bike lockers and EV micromobility charging."
         ],
-        projectedReturn: "Premium tenant appeal and 10% rent premium for direct station connectivity."
+        projectedReturn: "Not estimated: no local pro-forma or measured return on file."
       }
     ];
 
@@ -172,7 +181,7 @@ function generateStationInvestmentPlan(corridor, station, capitalBudget) {
       pillars,
       everySpaceMonetizationStrategy: "Interim contractor staging yard and fleet parking rental during site prep.",
       statutoryPreemptionLeveraged: station.statutory_housing_regime,
-      recommendationNarrative: `With $${(capitalBudget / 1e6).toFixed(1)}M, assemble contiguous parcels near ${station.name}. Leverage statutory lot splits to deliver 10–16 missing-middle homes with zero parking requirements and a direct bike link to the rail platform.`
+      recommendationNarrative: `With $${(capitalBudget / 1e6).toFixed(1)}M, assemble contiguous parcels near ${station.name}. Where a state or local law allows it, split lots and build missing-middle homes with a direct bike link to the platform (home count and parking rules not determined here).`
     };
   } else {
     const pillars = [
@@ -194,7 +203,7 @@ function generateStationInvestmentPlan(corridor, station, capitalBudget) {
           `Deliver 300 to 800 residential units with 15–20% deed-restricted workforce housing.`,
           "Incorporate ground-floor neighborhood retail, grocery, and child care."
         ],
-        projectedReturn: "22% to 28% project equity IRR supported by regional housing demand."
+        projectedReturn: "Not estimated: no local pro-forma or measured return on file."
       },
       {
         pillar: "Public Realm, Tax Increment Financing (TIF/TIRZ) & Active Transit",
@@ -204,7 +213,7 @@ function generateStationInvestmentPlan(corridor, station, capitalBudget) {
           `Pledge incremental tax yield into a dedicated TIF / TIRZ / EIFD district to issue infrastructure bonds.`,
           `${tod.recommendedBikeNetworkMiles !== null ? `Fund complete ${tod.recommendedBikeNetworkMiles}-mile protected bicycle and trail network connecting the entire neighborhood.` : "Active-transportation network length: not on file."}`
         ],
-        projectedReturn: "Municipal bond financing repays 40–60% of public realm infrastructure costs."
+        projectedReturn: "Not estimated: no local pro-forma or measured return on file."
       }
     ];
 
@@ -216,7 +225,7 @@ function generateStationInvestmentPlan(corridor, station, capitalBudget) {
       pillars,
       everySpaceMonetizationStrategy: "Temporary EV fleet charging depot, food truck plaza, and event parking during phased construction.",
       statutoryPreemptionLeveraged: `${station.statutory_housing_regime} + Municipal P3 / Tax Increment District`,
-      recommendationNarrative: `With $${(capitalBudget / 1e6).toFixed(1)}M, transform ${station.name} through an institutional P3. Build hundreds of transit-oriented homes, capture tax increment revenue to fund public infrastructure, and construct a complete active transit network.`
+      recommendationNarrative: `With $${(capitalBudget / 1e6).toFixed(1)}M, transform ${station.name} through a public-private partnership. Build hundreds of transit-oriented homes, capture tax increment revenue to fund public infrastructure, and construct a complete active transit network.`
     };
   }
 }

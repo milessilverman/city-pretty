@@ -45,8 +45,8 @@ export interface RenovationQuoteInput {
   lineItems?: RenovationLineItem[];
 
   localHudFmr?: {
-    zero_bed_eff?: number;
-    one_bed_1br?: number;
+    zero_bed_eff?: number | null;
+    one_bed_1br?: number | null;
     two_bed_2br?: number;
   };
 }
@@ -64,7 +64,7 @@ export interface RenovationQuoteEvaluation {
   returnOnInvestmentPct: number;
   paybackYears: number | null;
 
-  everySpaceMonthlyYieldUsd: number;
+  everySpaceMonthlyYieldUsd: number | null;
   everySpaceHoldingCarryOffsetUsd: number; // during 6-12 month permitting & construction
 
   statutoryEntitlementStatus: {
@@ -76,13 +76,15 @@ export interface RenovationQuoteEvaluation {
 
   verdict: "STRONG_BUY_RECOMMENDED" | "FAIR_LIFESTYLE_IMPROVEMENT" | "OVERPRICED_RENEGOTIATE" | "NOT_RECOMMENDED_NEGATIVE_ROI";
   verdictSummary: string;
+  illustrative: true;
+  assumptions: { name: string; value: number | string; assumed: boolean }[];
   suggestedNegotiationPoints: string[];
   alternativeHigherRoiOptions: Array<{
     alternativeType: string;
     estimatedCost: number;
     projectedEquityAdd: number;
     projectedRoiPct: number;
-    monthlyEverySpaceYield: number;
+    monthlyEverySpaceYield: number | null;
     rationale: string;
   }>;
 }
@@ -109,62 +111,20 @@ const RENOVATION_BENCHMARKS: Record<string, { lowPerSqft: number; highPerSqft: n
  * Checks by-right zoning preemption based on state code and improvement type
  */
 function checkStatutoryPreemption(stateCode: string, improvementType: string): { isByRight: boolean; governingStatute: string; parkingMandateEliminated: boolean; discretionaryReviewRequired: boolean } {
-  const isAdu = improvementType.includes("adu");
-
-  if (isAdu) {
-    if (stateCode === "CA") {
-      return {
-        isByRight: true,
-        governingStatute: "California Gov. Code § 65852.2 & AB 2097 (Ministerial approval ≤60 days; zero parking requirement)",
-        parkingMandateEliminated: true,
-        discretionaryReviewRequired: false
-      };
-    }
-    if (stateCode === "AZ") {
-      return {
-        isByRight: true,
-        governingStatute: "Arizona HB 2720 / A.R.S. § 9-467.04 (Casitas by-right in municipalities >75k pop; max 1 parking space)",
-        parkingMandateEliminated: true,
-        discretionaryReviewRequired: false
-      };
-    }
-    if (stateCode === "TX") {
-      return {
-        isByRight: true,
-        governingStatute: "Texas Local Gov't Code § 214.909 / Austin HOME Phase 1 (3 units by-right, 0 parking minimums)",
-        parkingMandateEliminated: true,
-        discretionaryReviewRequired: false
-      };
-    }
-    if (stateCode === "WA") {
-      return {
-        isByRight: true,
-        governingStatute: "Washington HB 1337 / RCW 36.70A.696 (2 ADUs per single-family lot by-right)",
-        parkingMandateEliminated: true,
-        discretionaryReviewRequired: false
-      };
-    }
-    if (stateCode === "CO") {
-      return {
-        isByRight: true,
-        governingStatute: "Colorado HB 24-1152 / C.R.S. § 29-35-102 (By-right ADU authorization in subject jurisdictions)",
-        parkingMandateEliminated: true,
-        discretionaryReviewRequired: false
-      };
-    }
-    if (stateCode === "FL") {
-      return {
-        isByRight: true,
-        governingStatute: "Florida Live Local Act / Fla. Stat. § 166.04151 (Commercial infill & ADU encouragement)",
-        parkingMandateEliminated: false,
-        discretionaryReviewRequired: false
-      };
-    }
+  // State ADU laws are not checked in app/data/statutes.json for any state, so none is reported as a by-right
+  // entitlement here. Only California AB 2097 (Gov. Code 65863.2, verified) is named, for parking near transit.
+  const isAdu = String(improvementType).includes("adu");
+  if (isAdu && stateCode === "CA") {
+    return {
+      isByRight: false,
+      governingStatute: "California ADU law, Gov. Code § 66314 et seq. (not checked here); parking: AB 2097, Gov. Code § 65863.2 (no parking minimum within 1/2 mile of public transit)",
+      parkingMandateEliminated: false,
+      discretionaryReviewRequired: false
+    };
   }
-
   return {
     isByRight: false,
-    governingStatute: "Local Municipal Land Use Code (Subject to standard municipal plan check and setback requirements)",
+    governingStatute: isAdu ? "State ADU law not determined here; the city's ADU ordinance applies" : "Local Municipal Land Use Code (Subject to standard municipal plan check and setback requirements)",
     parkingMandateEliminated: false,
     discretionaryReviewRequired: false
   };
@@ -175,7 +135,6 @@ function checkStatutoryPreemption(stateCode: string, improvementType: string): {
  */
 export function evaluateHomeownerRenovationQuote(input: RenovationQuoteInput): RenovationQuoteEvaluation {
   const bench = RENOVATION_BENCHMARKS[input.improvementType] || RENOVATION_BENCHMARKS.detached_adu;
-  const sqft = input.projectedSqft || 500;
 
   // Calculate market benchmark cost
   let marketLow: number;
@@ -209,13 +168,13 @@ export function evaluateHomeownerRenovationQuote(input: RenovationQuoteInput): R
   const roiPct = Math.round((netEquityGain / input.quotedTotalCost) * 100);
 
   // EverySpace Monthly Yield calculation
-  let everySpaceMonthlyYield = 0;
+  let everySpaceMonthlyYield: number | null = 0;
   if (input.improvementType === "detached_adu" || input.improvementType === "attached_adu") {
     // 1-bed ADU benchmarked to local HUD FMR
-    everySpaceMonthlyYield = input.localHudFmr?.one_bed_1br || 1850;
+    everySpaceMonthlyYield = input.localHudFmr?.one_bed_1br ?? null;   // HUD rent or nothing
   } else if (input.improvementType === "garage_conversion_adu" || input.improvementType === "junior_adu") {
     // Studio / efficiency benchmarked to HUD FMR
-    everySpaceMonthlyYield = input.localHudFmr?.zero_bed_eff || 1450;
+    everySpaceMonthlyYield = input.localHudFmr?.zero_bed_eff ?? null;
   } else if (input.improvementType === "rooftop_solar_battery") {
     // Electric bill offset + virtual power plant revenue
     everySpaceMonthlyYield = 220;
@@ -225,8 +184,8 @@ export function evaluateHomeownerRenovationQuote(input: RenovationQuoteInput): R
   // Driveway rental + storage rental during design & entitlement
   const everySpaceHoldingCarry = 450 * 6; // $450/mo for 6 months = $2,700
 
-  const paybackYears = everySpaceMonthlyYield > 0
-    ? Math.round((input.quotedTotalCost / (everySpaceMonthlyYield * 12)) * 10) / 10
+  const paybackYears = (everySpaceMonthlyYield || 0) > 0
+    ? Math.round((input.quotedTotalCost / ((everySpaceMonthlyYield || 1) * 12)) * 10) / 10
     : null;
 
   const preemption = checkStatutoryPreemption(input.stateCode, input.improvementType);
@@ -238,10 +197,10 @@ export function evaluateHomeownerRenovationQuote(input: RenovationQuoteInput): R
   if (fairness === "substantially_overpriced") {
     verdict = "OVERPRICED_RENEGOTIATE";
     summary = `Contractor quote ($${input.quotedTotalCost.toLocaleString()}) is ${variancePct}% above local market benchmarks ($${marketLow.toLocaleString()} – $${marketHigh.toLocaleString()}). Request an itemized cost breakdown for labor, framing, and finishes before signing.`;
-  } else if (roiPct >= 15 || (everySpaceMonthlyYield > 0 && (paybackYears || 99) <= 10.0)) {
+  } else if (roiPct >= 15 || ((everySpaceMonthlyYield || 0) > 0 && (paybackYears || 99) <= 10.0)) {
     verdict = "STRONG_BUY_RECOMMENDED";
-    summary = `High-conviction value add. Projects +$${estimatedEquityValueAdd.toLocaleString()} in property equity (+${roiPct}% net ROI) and +$${everySpaceMonthlyYield.toLocaleString()}/mo ongoing EverySpace rental yield (${paybackYears} yr payback). Permitted by-right under ${preemption.governingStatute}.`;
-  } else if (fairness === "fair_market" && (roiPct >= -35 || (everySpaceMonthlyYield > 0 && (paybackYears || 99) <= 14.0))) {
+    summary = `Screening estimate (assumed benchmark costs and value lift): about +$${estimatedEquityValueAdd.toLocaleString()} in property value (${roiPct >= 0 ? "+" : ""}${roiPct}% net)${everySpaceMonthlyYield ? ` and about $${everySpaceMonthlyYield.toLocaleString()}/mo rent at HUD's Fair Market Rent (${paybackYears} yr payback)` : ""}. Rules: ${preemption.governingStatute}.`;
+  } else if (fairness === "fair_market" && (roiPct >= -35 || ((everySpaceMonthlyYield || 0) > 0 && (paybackYears || 99) <= 14.0))) {
     verdict = "FAIR_LIFESTYLE_IMPROVEMENT";
     summary = `Fair market price ($${input.quotedTotalCost.toLocaleString()}). Adds roughly equivalent value to the home ($${estimatedEquityValueAdd.toLocaleString()}). Recommended primarily for lifestyle and living space expansion rather than immediate resale profit.`;
   } else {
@@ -268,7 +227,7 @@ export function evaluateHomeownerRenovationQuote(input: RenovationQuoteInput): R
       estimatedCost: 65_000,
       projectedEquityAdd: 95_000,
       projectedRoiPct: 46,
-      monthlyEverySpaceYield: input.localHudFmr?.zero_bed_eff || 1450,
+      monthlyEverySpaceYield: input.localHudFmr?.zero_bed_eff ?? null,
       rationale: "Converts existing foundation and roof envelope for half the cost of ground-up construction, delivering immediate rental cash flow."
     });
   }
@@ -300,7 +259,14 @@ export function evaluateHomeownerRenovationQuote(input: RenovationQuoteInput): R
     verdict,
     verdictSummary: summary,
     suggestedNegotiationPoints: negotiationPoints,
-    alternativeHigherRoiOptions
+    alternativeHigherRoiOptions,
+    // Benchmark costs, value-lift shares, alternatives and the solar figure are typed-in assumptions, not local data.
+    illustrative: true,
+    assumptions: [
+      { name: "benchmark cost per sq ft (" + input.improvementType + ")", value: bench.lowPerSqft + "-" + bench.highPerSqft, assumed: true },
+      { name: "value lift as share of home value", value: bench.typicalEquityLiftPct, assumed: true },
+      { name: "solar monthly yield", value: 220, assumed: true }
+    ]
   };
 }
 

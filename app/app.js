@@ -45,27 +45,8 @@ let VALUATION_BACKTEST_BENCHMARKS = {};
 let UNDERUSED_SITES_DATA = [];
 let INTERCITY_CORRIDORS_DATA = [];
 
-const DEFAULT_CA_PROFILE = {
-  state_code: "CA",
-  res_assessment_ratio: 1.0,
-  comm_assessment_ratio: 1.0,
-  annual_assessment_cap: 0.02,
-  uncaps_on_sale: true,
-  reassessment_cycle_years: 1,
-  homestead_exemption_rule: { type: "flat_market", amount_or_pct: 7000 },
-  tif_vehicle_name: "CA EIFD (Gov. Code § 53398.50)",
-  non_pledgeable_share: 0.47,
-  rsmeans_cost_multiplier: 1.24,
-  tree_capital_cost_usd: 1945,
-  climate_energy_regime: "mixed_temperate",
-  statutory_citation: "Cal. Const. art. XIII A (Prop 13), RTC § 51 & Gov. Code § 53398.50 (EIFD)",
-  source_url: "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=51.&lawCode=RTC",
-  retrieved: "2026-11-15",
-  last_verified: "2026-11-15",
-  verified_by: "state_statute_database"
-};
-
-let STATE_FINANCE_PROFILES = { CA: DEFAULT_CA_PROFILE };
+// State property-tax profiles come only from app/data/state_finance_profiles.json (each row has verification.status).
+let STATE_FINANCE_PROFILES = {};
 
 function loadVerifiedDataFiles() {
   cpJson("research").then(d => { if (Array.isArray(d)) RESEARCH_CORPUS_500 = d; });
@@ -75,7 +56,7 @@ function loadVerifiedDataFiles() {
   cpJson("funding-programs").then(d => { if (Array.isArray(d)) FUNDING_PROGRAMS_DATA = d; });
   cpJson("state-finance-profiles").then(d => {
     if (d && typeof d === "object") {
-      STATE_FINANCE_PROFILES = Object.assign({ CA: DEFAULT_CA_PROFILE }, d);
+      STATE_FINANCE_PROFILES = d;
     }
   });
   cpJson("unit-costs").then(d => { if (Array.isArray(d)) UNIT_COSTS_DATA = d; });
@@ -1362,7 +1343,7 @@ function validateParcelImageryVintage(input) {
     : null;
 
   const isLidarStale =
-    permitYear !== null && permitYear >= (input.lidarAcquisitionYear || 2020);
+    permitYear !== null && input.lidarAcquisitionYear != null && permitYear >= input.lidarAcquisitionYear;
 
   let isStreetViewStale = false;
   if (input.streetViewCaptureDate) {
@@ -1391,7 +1372,7 @@ function validateParcelImageryVintage(input) {
       confidenceBadge: "stale_imagery_permit_override",
       warningMessage: `Building permit (${input.latestPostConstructionPermitDate}: ${
         input.permitScopeDescription || "structural alteration"
-      }) post-dates LiDAR (${input.lidarAcquisitionYear}) or Street View (${
+      }) post-dates LiDAR (${input.lidarAcquisitionYear ?? "year not on file"}) or Street View (${
         input.streetViewCaptureDate
       }). Verify current structure before modeling ADU/SB 9 capacity.`,
     };
@@ -1594,8 +1575,8 @@ function auditSingleHouseParcel(input) {
 
   const imageryCheck = _valVintage({
     parcelId: input.parcelId,
-    lidarAcquisitionYear: imagery.lidarYear || 2020,
-    streetViewCaptureDate: hasStreetView ? (imagery.streetViewDate || "2021-06") : null,
+    lidarAcquisitionYear: imagery.lidarYear ?? null,
+    streetViewCaptureDate: hasStreetView ? imagery.streetViewDate : null,
     latestPostConstructionPermitDate: latestPermit ? latestPermit.issue_date : null,
     permitScopeDescription: latestPermit ? latestPermit.description : null,
     referenceYear: 2026,
@@ -1606,7 +1587,7 @@ function auditSingleHouseParcel(input) {
     : imageryCheck.confidenceBadge;
 
   const warningMessage = !hasStreetView
-    ? "Google Street View coverage is unavailable (rural, gated community, cul-de-sac, or flag lot). Story count and facade condition calibrated from USGS 3DEP LiDAR and county assessor records."
+    ? (imagery.hasStreetView ? "Street View capture date is not on file, so imagery age cannot be checked; story count comes from county assessor records." : "Google Street View coverage is unavailable (rural, gated community, cul-de-sac, or flag lot). Story count and facade condition calibrated from USGS 3DEP LiDAR and county assessor records.")
     : imageryCheck.warningMessage;
 
   // 3. Statutory By-Right Housing Rights & Exclusion Engine
@@ -1738,16 +1719,16 @@ function auditSingleHouseParcel(input) {
     countyFips: input.countyFips,
     bedrooms: input.bedrooms || 3,
     bathrooms: input.bathrooms || 2,
-    lotSqft: lotSqft || 6000,
-    livingSqft: livingSqft || 1500,
+    lotSqft: lotSqft ?? null,
+    livingSqft: livingSqft ?? null,
     monthlyDebtServiceMortgageUsd: Math.round(finalEstimatedValue * 0.0055),
     monthlyPropertyTaxAndInsuranceUsd: Math.round(finalEstimatedValue * 0.0012),
     plannedHoldingMonths: 18,
     features: {
       hasDriveway: input.hasGarage !== false,
       drivewaySpacesCount: 2,
-      hasAtticOrBasementStorage: (livingSqft || 1500) > 1200,
-      storageSqft: Math.round((livingSqft || 1500) * 0.15),
+      hasAtticOrBasementStorage: livingSqft != null && livingSqft > 1200,
+      storageSqft: livingSqft != null ? Math.round(livingSqft * 0.15) : undefined,
       hasPool: !!input.hasPool,
       hasAvailableRoofSqftForSolar: unshadedRoofSqft > 250,
       availableRoofSqft: unshadedRoofSqft,
@@ -1762,8 +1743,8 @@ function auditSingleHouseParcel(input) {
       propertyAddress: input.address,
       stateCode: stCode,
       currentPropertyValue: finalEstimatedValue,
-      currentLivingSqft: livingSqft || 1500,
-      lotSqft: lotSqft || 6000,
+      currentLivingSqft: livingSqft ?? null,
+      lotSqft: lotSqft ?? null,
       zoningCode: input.zoningCode,
       improvementType: "garage_conversion_adu",
       quotedTotalCost: 65_000,
@@ -1773,8 +1754,8 @@ function auditSingleHouseParcel(input) {
       propertyAddress: input.address,
       stateCode: stCode,
       currentPropertyValue: finalEstimatedValue,
-      currentLivingSqft: livingSqft || 1500,
-      lotSqft: lotSqft || 6000,
+      currentLivingSqft: livingSqft ?? null,
+      lotSqft: lotSqft ?? null,
       zoningCode: input.zoningCode,
       improvementType: "detached_adu",
       quotedTotalCost: 185_000,
@@ -1784,7 +1765,7 @@ function auditSingleHouseParcel(input) {
       propertyAddress: input.address,
       stateCode: stCode,
       currentPropertyValue: finalEstimatedValue,
-      currentLivingSqft: livingSqft || 1500,
+      currentLivingSqft: livingSqft ?? null,
       improvementType: "kitchen_remodel_minor",
       quotedTotalCost: 26_000,
     }),
@@ -1812,8 +1793,8 @@ function auditSingleHouseParcel(input) {
     },
     imagery: {
       parcelId: input.parcelId,
-      lidarAcquisitionYear: imagery.lidarYear || 2020,
-      streetViewCaptureDate: hasStreetView ? (imagery.streetViewDate || "2021-06") : null,
+      lidarAcquisitionYear: imagery.lidarYear ?? null,
+      streetViewCaptureDate: hasStreetView ? imagery.streetViewDate : null,
       latestPostConstructionPermitDate: latestPermit ? latestPermit.issue_date : null,
       permitScopeDescription: latestPermit ? latestPermit.description : null,
       isLidarStale: imageryCheck.isLidarStale,
@@ -1855,6 +1836,14 @@ function auditSingleHouseParcel(input) {
       annualYieldKwh,
       paybackYearsCash,
       paybackYearsLease,
+      // Install cost, yield, bill saving and battery cost are typed-in state defaults, not local quotes.
+      illustrative: true,
+      assumptions: [
+        { name: "install cost per watt", value: stCode === "CA" ? 3.15 : 2.85, assumed: true },
+        { name: "yield, kWh per kW per year", value: stCode === "CA" ? 1620 : stCode === "AZ" ? 1780 : 1250, assumed: true },
+        { name: "bill saving per kWh", value: stCode === "CA" ? 0.28 : 0.15, assumed: true },
+        { name: "battery cost", value: stCode === "CA" ? 11500 : 0, assumed: true },
+      ],
       nemTariffNotice: stCode === "CA"
         ? "CA NEM 3.0 / Net Billing Tariff: Mid-day solar export rates are credited at avoided cost (~$0.055/kWh). Paired 10–13.5 kWh battery storage is required for positive 25-yr NPV."
         : "Standard net metering or net billing applies. Battery optional for resilience.",
@@ -1899,9 +1888,9 @@ if (typeof window !== "undefined") {
  * LiDAR DSM pitch/azimuth/overhang geometry, and roofing material assemblies.
  */
 
+// Inline copy of src/engines/roofAreaEngine.js (keep identical).
 function getDefaultPitchRise(yearBuilt, stateCode) {
   const st = (stateCode || "CA").toUpperCase();
-  const yb = yearBuilt || 1975;
 
   // Regional climate adaptations
   const isDesertOrArid = ["AZ", "NV", "NM"].includes(st);
@@ -1911,19 +1900,20 @@ function getDefaultPitchRise(yearBuilt, stateCode) {
     return 3.5; // Predominantly low-pitch ranch or flat tile
   }
   if (isHeavySnowOrRain) {
-    return yb < 1940 ? 8.0 : 7.0; // Steep pitch for snow and ice shedding
+    return (yearBuilt && yearBuilt < 1940) ? 8.0 : 7.0; // Steep pitch for snow and ice shedding
   }
 
   // Era adaptations
-  if (yb < 1940) return 7.5; // Craftsman, Tudor, Victorian, Spanish revival
-  if (yb >= 1945 && yb <= 1978) return 4.5; // California Ranch, Mid-Century Modern
-  return 6.0; // Modern suburban standard (5:12 to 6:12)
+  if (yearBuilt && yearBuilt < 1940) return 7.5; // Craftsman, Tudor, Victorian, Spanish revival
+  if (yearBuilt && yearBuilt >= 1945 && yearBuilt <= 1978) return 4.5; // California Ranch, Mid-Century Modern
+  return 5.5; // Standard typical suburban pitch (5.5:12)
 }
 
 function estimateAccurateRoofArea(input) {
   input = input || {};
   const stories = Math.max(1, Number(input.stories) || 1);
-  const livingSqft = Math.max(400, Number(input.livingSqft) || 1600);
+  const hasGla = input.livingSqft != null && !isNaN(Number(input.livingSqft)) && Number(input.livingSqft) > 0;
+  const livingSqft = hasGla ? Math.max(200, Number(input.livingSqft)) : 0;
 
   // 1. Base Footprint determination
   let groundFootprintSqft = 0;
@@ -1932,8 +1922,36 @@ function estimateAccurateRoofArea(input) {
   if (input.footprintSqft && input.footprintSqft > 200) {
     groundFootprintSqft = Math.round(input.footprintSqft);
     method = "cadastral_lidar_osm_polygon";
-  } else {
+  } else if (hasGla) {
     groundFootprintSqft = Math.round(livingSqft / stories);
+  } else {
+    method = "not_recorded";
+  }
+
+  if (method === "not_recorded") {
+    return {
+      groundFootprintSqft: 0,
+      eavesOverhangSqft: 0,
+      garageRoofAdditionSqft: 0,
+      effectiveGroundFootprintSqft: 0,
+      pitchRise: 0,
+      pitchRatio: "0:12",
+      slopeAngleDeg: 0,
+      pitchMultiplier: 1.0,
+      roofShape: "flat",
+      shapeComplexityMultiplier: 1.0,
+      grossRoofSqft: 0,
+      roofingSquares: 0,
+      productiveAzimuthFraction: 0,
+      fireCodeAndVentSetbackFraction: 0,
+      treeShadeFraction: 0,
+      usableSolarSqft: 0,
+      maxSolarPanels: 0,
+      solarDcKw: 0,
+      annualYieldKwh: 0,
+      materials: [],
+      estimationMethod: "not_recorded",
+    };
   }
 
   // 2. Attached Garage Addition (if not already counted in footprint)
@@ -2216,9 +2234,9 @@ function renderHouseAuditAside(audit) {
 
     <!-- 2. LiDAR, Stories & Street View Proxy Verification -->
     <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
-      <div style="font-size:11.5px;font-weight:700;color:#334155;margin-bottom:4px;">Building Footprints &amp; 4-Angle Street View Verification</div>
+      <div style="font-size:11.5px;font-weight:700;color:#334155;margin-bottom:4px;">Building Footprints &amp; Street View Imagery Check</div>
       <div style="font-size:11px;color:#475569;margin-bottom:6px;">
-        • <b>LiDAR Acquisition:</b> ${im.lidarAcquisitionYear} USGS 3DEP DSM &middot; <b>Street View:</b> ${im.streetViewCaptureDate || "Unavailable"} &middot; <b>Permit Vintage:</b> ${im.latestPostConstructionPermitDate || "None post-imagery"}<br>
+        • <b>LiDAR Acquisition:</b> ${im.lidarAcquisitionYear != null ? im.lidarAcquisitionYear + " USGS 3DEP DSM" : "year not on file"} &middot; <b>Street View:</b> ${im.streetViewCaptureDate || "capture date not on file"} &middot; <b>Permit Vintage:</b> ${im.latestPostConstructionPermitDate || "None post-imagery"}<br>
         • <b>Story Calibration:</b> ${im.storyCalibrationSource}
       </div>
       ${im.warningMessage ? `<div style="font-size:11px;color:#b45309;background:#fef3c7;padding:6px 8px;border-radius:4px;border:1px solid #fde68a;margin-bottom:6px;"><b>Imagery Notice:</b> ${im.warningMessage}</div>` : ""}
@@ -2250,10 +2268,10 @@ function renderHouseAuditAside(audit) {
     </div>
 
     <!-- 3.5 Accurate Roof Cadastre & Pitch Engineering -->
-    ${audit.roofCadastre ? `
+    ${audit.roofCadastre && audit.roofCadastre.estimationMethod !== "not_recorded" && (audit.roofCadastre.materials || []).length >= 2 ? `
     <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
       <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;">
-        <span style="font-size:11.5px;font-weight:700;color:#334155;">Accurate Roof Cadastre &amp; Pitch Engineering</span>
+        <span style="font-size:11.5px;font-weight:700;color:#334155;">Roof Area &amp; Pitch Estimate (pitch and costs assumed)</span>
         <span style="font-size:11px;color:#0284c7;font-weight:600;">${audit.roofCadastre.pitchRatio} Pitch (${audit.roofCadastre.slopeAngleDeg}°)</span>
       </div>
       <div style="font-size:11px;color:#475569;margin-top:4px;">
@@ -3676,38 +3694,16 @@ function zoningSection(m) {
   const L_ = [];
   const st = (typeof activeState === "function" ? activeState() : "") || (countyOf().match(/,\s*([A-Z]{2})/i) || ["", "CA"])[1];
   
-  if (st === "CA" || isCAActive()) {
-    L_.push("<b>ADUs:</b> California Gov. Code § 66310 mandates cities allow by-right at least an 800 sq ft ADU plus a junior ADU (JADU) on single-family lots, and up to 2 detached ADUs on multifamily lots.");
-    if (z && (z.sh["single-family"] || 0) > 0) L_.push("<b>SB 9 (Duplex & Lot Split):</b> Single-family lots can hold up to two primary homes and be subdivided into two lots by right, exempt from CEQA and local discretionary review.");
-    L_.push("<b>SB 79 (Transit Rail Upzoning, Eff. July 1, 2026):</b> Authorizes by-right multifamily upzoning within ½ mile of heavy and light rail stations (Tier 1: up to 75 ft / 120 du/acre; Tier 2: up to 55 ft / 80 du/acre).");
-    L_.push("<b>AB 2097 (Parking Deregulation):</b> Eliminates mandatory minimum parking requirements for any residential or commercial project within ½ mile of a major transit stop.");
-    L_.push("<b>AB 2011 / SB 6 (Commercial Infill):</b> Allows multifamily residential development by right on commercially zoned land along commercial corridors.");
-    L_.push("<b>SB 4 (Affordable Housing on Faith Lands):</b> Permits 100% affordable housing by right on land owned by religious institutions and nonprofit colleges.");
-    L_.push("<b>6th-Cycle Housing Elements (Gov. Code § 65583.2):</b> Statutory by-right density overrides for sites inventory parcels (2021–2029 cycle), superseding legacy SCAG 2019 baseline classifications.");
-  } else if (st === "WA") {
-    L_.push("<b>HB 1110 (Middle Housing Reform):</b> Legalizes duplexes, fourplexes, and sixplexes across all residential zones in cities over 25,000 and near major transit stops.");
-    L_.push("<b>HB 1337 (ADU Reform):</b> Requires municipalities to permit at least two ADUs per residential lot with zero owner-occupancy requirements and no impact fee discrimination.");
-    L_.push("<b>SB 5466 (Transit-Oriented Development):</b> Eliminates residential parking minimums within ½ mile of high-capacity transit and establishes minimum floor area ratio standards.");
-  } else if (st === "FL") {
-    L_.push("<b>Live Local Act (SB 102 / SB 328):</b> Preempts municipal zoning to allow multifamily and mixed-use residential development by right in commercial, industrial, and mixed-use zones.");
-    L_.push("<b>Density & Height Bonuses:</b> Authorizes developers to match the highest allowable residential density and height in the jurisdiction within 1 mile.");
-    L_.push("<b>Property Tax Abatement:</b> Up to 100% county and municipal ad valorem tax exemptions for units dedicated to moderate- and workforce-income households.");
-    L_.push("<b>Parking Reduction:</b> Mandates 20% to 50% parking reductions for developments within ½ mile of transit centers.");
-  } else if (st === "TX") {
-    L_.push("<b>Austin HOME Initiative (Phases 1 & 2):</b> Allows up to 3 residential units per single-family lot by right, reduces minimum lot size to 2,000 sq ft, and eliminates single-family minimum parking requirements.");
-    L_.push("<b>Texas Local Gov Code Infill:</b> Expedited administrative platting and missing-middle approvals for urban infill properties.");
-  } else if (st === "CO") {
-    L_.push("<b>HB 24-1152 (Statewide ADUs):</b> Legalizes accessory dwelling units by right in all subject jurisdictions with no owner-occupancy restrictions.");
-    L_.push("<b>HB 24-1313 (Transit-Oriented Communities):</b> Requires Front Range local governments to designate transit centers zoned for high-density residential housing.");
-  } else if (st === "MA") {
-    L_.push("<b>MBTA Communities Act (Ch. 40A § 3A):</b> Mandates that 177 transit-adjacent communities zone for multifamily housing by right with a minimum gross density of 15 units/acre.");
-    L_.push("<b>Affordable Homes Act (2024):</b> Establishes by-right ADU construction on single-family parcels across the Commonwealth.");
-  } else if (st === "OR") {
-    L_.push("<b>HB 2001 (Middle Housing):</b> Requires all cities over 10,000 to allow duplexes, triplexes, quadplexes, and cottage clusters in residential areas.");
-    L_.push("<b>CFEC Parking Reform:</b> Eliminates minimum parking requirements near frequent-transit corridors.");
-  } else {
-    L_.push("<b>By-Right Infill & ADUs:</b> Accessory dwellings and missing-middle housing units are increasingly supported by municipal zoning codes and federal financing programs (FHA / Fannie Mae ADU guidelines).");
-    L_.push("<b>Transit-Oriented Development:</b> Check local planning department guidelines for density bonuses and parking reductions near transit stops.");
+  // Laws on file in statutes.json for this state, each with what was checked; nothing typed here.
+  {
+    const recs = stateLawRecords(st === "" && isCAActive() ? "CA" : st);
+    if (!recs.length) L_.push("<b>State housing laws:</b> none on file for this state; the city's or county's zoning code decides.");
+    recs.slice(0, 8).forEach(r => {
+      const s = r.verification && r.verification.status;
+      L_.push(s === "verified"
+        ? `<b>${esc(r.short_name || r.id)}:</b> ${esc(r.summary || "")} <span class="muted">(${esc(verificationLabel(r, "statute"))})</span>`
+        : `<b>${esc(r.short_name || r.id)}:</b> <span class="muted">not determined (${s === "partly" ? "partly checked against the statute" : "not yet checked"}).</span>`);
+    });
   }
 
   h += `<div class="small" style="margin-top:8px"><b>Housing laws & rights:</b><ul style="margin:4px 0 0;padding-left:16px">${L_.map(x => `<li>${x}</li>`).join("")}</ul></div></div>`;
@@ -4049,7 +4045,7 @@ function ocFundingHtml(id, m) {
   const F = ocFunding(id); if (!F) return isOrangeArea(m) ? "" : `<p class="small muted">Funding programmes for ${esc(countyOf(m))} have not been verified yet, so none are listed (LA County's programmes don't apply here).</p>`;
   const fees = ocFeeLine(id, m);
   if (!F.funding.length) return `<p class="small"><b>Orange County funding:</b> <span class="muted">${esc(F.notes)}</span></p>${fees}`;
-  return `<p class="small"><b>Orange County funding (verified):</b> ${F.funding.map(x => `<a href="${esc(x.source)}" target="_blank" rel="noopener">${esc(x.name)}</a> <span class="muted">(${esc(x.what)})</span>`).join("; ")}.${F.process ? ` <b>How:</b> ${esc(F.process)}.` : ""}${F.who_decides ? ` <b>Who decides:</b> ${esc(F.who_decides)}.` : ""}${F.notes ? ` <span class="muted">${esc(F.notes)}</span>` : ""}</p>${fees}`;
+  return `<p class="small"><b>Orange County funding (checked against the programme pages):</b> ${F.funding.map(x => `<a href="${esc(x.source)}" target="_blank" rel="noopener">${esc(x.name)}</a> <span class="muted">(${esc(x.what)})</span>`).join("; ")}.${F.process ? ` <b>How:</b> ${esc(F.process)}.` : ""}${F.who_decides ? ` <b>Who decides:</b> ${esc(F.who_decides)}.` : ""}${F.notes ? ` <span class="muted">${esc(F.notes)}</span>` : ""}</p>${fees}`;
 }
 function ocFeeLine(id, m) {
   const fees = (typeof D_OC !== "undefined" && D_OC && D_OC.oc_fees) || null; if (!fees) return "";
@@ -5649,8 +5645,9 @@ function renderHouse(box, a, lot, ll, st) {
         countyFips: typeof activeFips === "function" ? activeFips() : "06037",
         recentPermits: permitsList,
         imageryInfo: {
-          lidarYear: (typeof activeState === "function" && activeState() === "CA") ? 2020 : 2023,
-          streetViewDate: hasStreetView ? "2021-06" : null,
+          // Neither the LiDAR acquisition year nor the Street View capture date is fetched for this lot: not on file.
+          lidarYear: null,
+          streetViewDate: null,
           hasStreetView: hasStreetView
         },
         exclusions: {
@@ -5892,8 +5889,8 @@ function renderHouse(box, a, lot, ll, st) {
             ${(() => {
               const effYear = +(a.EffectiveYear1 || a.EffectiveYear || a.EFF_YR_BLT || a.EFF_YEAR || 0);
               const yb = +(a.YearBuilt1 || a.YearBuilt || a.CONST_YEAR || a.ACT_YR_BLT || 0);
-              const lidarYear = (typeof activeState === "function" && activeState() === "CA") ? 2020 : 2023;
-              const hasPostImageryRemodel = effYear && effYear > lidarYear && (!yb || effYear > yb);
+              const lidarYear = null;   // acquisition year is not fetched for this lot; no stand-in year
+              const hasPostImageryRemodel = lidarYear != null && effYear && effYear > lidarYear && (!yb || effYear > yb);
               if (hasPostImageryRemodel) {
                 return `
                 <div style="margin-top:8px;padding:7px 10px;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;font-size:11px;color:#92400e;line-height:1.4;">
@@ -5902,7 +5899,7 @@ function renderHouse(box, a, lot, ll, st) {
               }
               return `
               <div style="margin-top:8px;padding:6px 10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;font-size:11px;color:#64748b;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;">
-                <span>✓ <b>Remote Sensing Cadastre:</b> LiDAR (${lidarYear}) &amp; Facade verified current with tax roll vintage (${effYear || yb || "active"}).</span>
+                <span><b>Remote Sensing Cadastre:</b> LiDAR acquisition year not on file, so imagery age is not checked against the tax roll (${effYear || yb || "year built not on file"}).</span>
                 <span style="font-size:10px;color:#94a3b8;">USGS 3DEP / LARIAC Cadastral Mesh</span>
               </div>`;
             })()}
@@ -5933,6 +5930,10 @@ function renderHouse(box, a, lot, ll, st) {
             stateCode: typeof activeState === "function" ? activeState() : "CA"
           };
 
+          // No footprint and no living area on file: say so instead of drawing a 0-sq-ft roof and a 0 kW system.
+          if (roofCalc && roofCalc.estimationMethod === "not_recorded") {
+            return `<p class="small muted" style="margin:10px 0">Roof area and rooftop solar: not on file (no building footprint or living area recorded for this lot).</p>`;
+          }
           const usableSolarSqft = roofCalc ? roofCalc.usableSolarSqft : (F.foot ? Math.round(F.foot * 0.65) : 0);
           const solarKw = roofCalc ? roofCalc.solarDcKw : Math.max(3.5, Math.min(18.0, Math.round((usableSolarSqft / 60) * 2) / 2));
           const solarKwhYr = roofCalc ? roofCalc.annualYieldKwh : Math.round(solarKw * 1480);
@@ -6044,7 +6045,7 @@ function renderHouse(box, a, lot, ll, st) {
 
               <!-- Material Replacement Cost Table -->
               <div style="border-top:1px solid #e2e8f0;padding-top:8px;">
-                <div style="font-size:11px;font-weight:700;color:#0f172a;margin-bottom:4px;">Re-Roofing Material Estimates (RSMeans 2026 Installed):</div>
+                <div style="font-size:11px;font-weight:700;color:#0f172a;margin-bottom:4px;">Re-Roofing Material Estimates (illustrative only: assumed unit costs, not local quotes):</div>
                 <table style="width:100%;font-size:11px;border-collapse:collapse;">
                   <tr style="border-bottom:1px solid #f1f5f9;">
                     <td style="padding:3px 0;color:#475569;">• 30-Yr Architectural Shingles ($460–$590/sq):</td>
@@ -6173,7 +6174,7 @@ function renderHouse(box, a, lot, ll, st) {
     <ul class="small" style="margin:8px 0 0 0;padding:0;list-style:none">${h.C.map(c => `<li style="margin:3px 0"><b style="color:${col[c.v]}">${tag[c.v]} ${esc(c.name)}</b> — ${c.why}</li>`).join("")}</ul>
 
     
-    <!-- INSTITUTIONAL PARCEL AUDIT & COMPREHENSIVE SCREENING PANEL -->
+    <!-- PARCEL SCREENING PANEL -->
     ${houseAudit && typeof renderHouseAuditAside === "function" ? renderHouseAuditAside(houseAudit) : ""}
 
     <!-- INTERACTIVE SITE PLAN & INFILL / ADU MASSING VISUALIZER -->
@@ -8382,12 +8383,13 @@ function select(id, fly) {
     h += `<div class="pkg" style="margin-bottom:12px">
       ${tile("Paying projects", pkg.length, "≥ $1 per $1 (Sub-additive)")}
       ${tile("Total cost", fmt$(subCost), "build + land + 10-yr upkeep")}
-      ${tile("Joint Value Created", fmt$(subVal), "Capped at " + (isUrbanCore ? "30%" : "22%") + " max neighborhood lift")}
-    </div>`;
+      ${tile("Joint Value Created", fmt$(subVal), "Capped at " + (isUrbanCore ? "30%" : "22%") + " max neighborhood lift (assumed cap)")}
+    </div>
+    <p class="small muted" style="margin:-6px 0 10px">The 22% / 30% ceiling and the study error bands used to combine projects are assumptions, not local measurements.</p>`;
 
     if (renterViewOn || subPkg.displacementRiskScore > 40) {
       h += `<div style="background:#fff7ed;border:1px solid #fdba74;border-radius:6px;padding:7px 10px;margin-bottom:10px;font-size:11.5px;color:#9a3412;">
-        <b>Renter Displacement Sensitivity Index: ${subPkg.displacementRiskScore}/100</b> · Public capital investment of this scale may trigger market rent escalation in non-rent-stabilized parcels. Pair with local tenant protections.
+        <b>Renter Displacement Sensitivity Index: ${subPkg.displacementRiskScore}/100</b> (illustrative: rent-burden and rent-control shares are assumed, not local data) · Public capital investment of this scale may trigger market rent escalation in non-rent-stabilized parcels. Pair with local tenant protections.
       </div>`;
     }
   }
@@ -10124,11 +10126,11 @@ function renderCountyReadinessMatrix(targetFips) {
     <!-- 639-County Searchable Directory Section -->
     <div style="border-top:1px solid #e2e8f0;padding-top:18px;">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
-        <h4 style="margin:0;font-size:15px;font-weight:800;color:var(--ink);">All 639 Audited US Counties Directory</h4>
+        <h4 style="margin:0;font-size:15px;font-weight:800;color:var(--ink);">All 639 US Counties Directory</h4>
         <div style="display:flex;gap:6px;flex-wrap:wrap;">
           <button type="button" class="action-pill active" id="btn-filter-all" onclick="filterCountyReadinessTier('all')" style="font-size:11px;padding:3px 9px;">All (639)</button>
           <button type="button" class="action-pill" id="btn-filter-audited" onclick="filterCountyReadinessTier('audited_A')" style="font-size:11px;padding:3px 9px;">Tier A (LA)</button>
-          <button type="button" class="action-pill" id="btn-filter-verified" onclick="filterCountyReadinessTier('verified_B')" style="font-size:11px;padding:3px 9px;">Verified B (Metros)</button>
+          <button type="button" class="action-pill" id="btn-filter-verified" onclick="filterCountyReadinessTier('verified_B')" style="font-size:11px;padding:3px 9px;">Tier B (Metros)</button>
           <button type="button" class="action-pill" id="btn-filter-prelim" onclick="filterCountyReadinessTier('preliminary_C')" style="font-size:11px;padding:3px 9px;">Preliminary C</button>
           <button type="button" class="action-pill" id="btn-filter-cadastral" onclick="filterCountyReadinessTier('cadastral_only_D')" style="font-size:11px;padding:3px 9px;">Cadastral D</button>
         </div>
@@ -10204,7 +10206,7 @@ function renderCountyReadinessTableRows() {
   const displayList = filtered.slice(0, 100);
   tbody.innerHTML = displayList.map(c => {
     const tierPill = c.readiness_tier === "audited_A" ? '<span style="background:#064e3b;color:#a7f3d0;padding:1px 6px;border-radius:10px;font-weight:700;font-size:10px;">Tier A</span>' :
-      c.readiness_tier === "verified_B" ? '<span style="background:#1e3a8a;color:#bfdbfe;padding:1px 6px;border-radius:10px;font-weight:700;font-size:10px;">Verified B</span>' :
+      c.readiness_tier === "verified_B" ? '<span style="background:#1e3a8a;color:#bfdbfe;padding:1px 6px;border-radius:10px;font-weight:700;font-size:10px;">Tier B</span>' :
       c.readiness_tier === "preliminary_C" ? '<span style="background:#78350f;color:#fef3c7;padding:1px 6px;border-radius:10px;font-weight:700;font-size:10px;">Prelim C</span>' :
       '<span style="background:#334155;color:#e2e8f0;padding:1px 6px;border-radius:10px;font-weight:700;font-size:10px;">Cadastral D</span>';
 
@@ -11674,21 +11676,16 @@ function exportExecutiveProspectus() {
       </div>
     </div>
 
-    <!-- Section 3: Empirical Academic Grounding (Verified Studies) -->
+    <!-- Section 3: Research on file (app/data/research.json, effect confirmed in the source text) -->
     <div style="margin-bottom:24px;">
       <div style="font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;color:#0f172a;border-bottom:1px solid #cbd5e1;padding-bottom:4px;margin-bottom:10px;">
-        3. Empirical Academic &amp; Precedent Grounding
+        3. Research on file
       </div>
       <div style="display:flex;flex-direction:column;gap:8px;font-size:11.5px;">
-        <div style="border-left:3px solid #0284c7;padding-left:10px;">
-          <b>UC Berkeley Terner Center for Housing Innovation (2023):</b> Confirms secondary detached infill units generate 14.8%–22.4% unlevered cap rates on cost, outperforming multi-family syndications by 2.4x due to zero land acquisition overhead.
-        </div>
-        <div style="border-left:3px solid #059669;padding-left:10px;">
-          <b>Furman Center for Real Estate and Urban Policy, NYU (2022):</b> Parcels within statutory transit walksheds exempt from parking mandates exhibit a 21.8% higher rate of permit issuance and complete construction 4.2 months faster.
-        </div>
-        <div style="border-left:3px solid #f59e0b;padding-left:10px;">
-          <b>US Department of Agriculture Forest Service (Donovan &amp; Butry):</b> Mature street shade trees and high-NDVI canopy contribute an average +$7,130 in capitalized property price premium while curbing AC electrical bills by 18%–26%.
-        </div>
+        ${(() => {
+          const sup = (Array.isArray(RESEARCH_CORPUS_500) ? RESEARCH_CORPUS_500 : []).filter(s => s && s.verification && s.verification.finding === "supported" && s.impact).slice(0, 3);
+          return sup.length ? sup.map(s => `<div style="border-left:3px solid #0284c7;padding-left:10px;"><b>${esc(s.authors || "")} (${esc(s.year != null ? s.year : "n.d.")}):</b> ${esc(s.impact)} <span style="color:#64748b">(effect checked against the source${s.verification.checked ? " on " + esc(fmtCheckedDate(s.verification.checked)) : ""})</span></div>`).join("") : `<div style="color:#64748b">The research library has not loaded; open it from the menu to see the studies on file.</div>`;
+        })()}
       </div>
     </div>
 

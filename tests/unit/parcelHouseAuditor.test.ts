@@ -246,6 +246,7 @@ describe("Parcel House Auditor Unit Tests", () => {
     expect(garageConversion).toBeDefined();
     expect(garageConversion?.verdict).toBe("STRONG_BUY_RECOMMENDED");
     expect(garageConversion?.returnOnInvestmentPct).toBeGreaterThan(20);
-    expect(garageConversion?.statutoryEntitlementStatus.governingStatute).toContain("HB 2720");
+    expect(garageConversion?.statutoryEntitlementStatus.governingStatute).toContain("not determined");
+    expect(garageConversion?.statutoryEntitlementStatus.isByRight).toBe(false);
   });
 });

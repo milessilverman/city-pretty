@@ -648,8 +648,10 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
     });
 
     expect(evalFair.costFairnessRating).toBe("fair_market");
-    expect(evalFair.statutoryEntitlementStatus.isByRight).toBe(true);
-    expect(evalFair.statutoryEntitlementStatus.governingStatute).toContain("HB 2720");
+    // AZ's ADU record (az_hb2720_2721) is only partly checked, so no by-right entitlement is claimed.
+    expect(evalFair.statutoryEntitlementStatus.isByRight).toBe(false);
+    expect(evalFair.statutoryEntitlementStatus.governingStatute).toContain("not determined");
+    expect((evalFair as any).illustrative).toBe(true);
     expect(evalFair.verdict).toBe("STRONG_BUY_RECOMMENDED");
     expect(evalFair.everySpaceMonthlyYieldUsd).toBe(1680);
     expect(evalFair.paybackYears).toBeLessThanOrEqual(9.0);

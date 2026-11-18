@@ -16,10 +16,10 @@ export function evaluateRightOfWayReallocation(input) {
   const grantFunding = Math.round(capitalCost * grantShare);
   const netMunicipalCost = capitalCost - grantFunding;
 
-  const aadt = input.currentAadt || 14000;
+  const aadt = input.currentAadt ?? null;   // no stand-in traffic count
   const capacityPerLane = 800;
-  const isConstrained = (aadt / (input.currentDriveLanes * 10)) > capacityPerLane;
-  const delaySec = isConstrained ? Math.min(65, Math.round((aadt / 1000) * 2.8)) : 12;
+  const isConstrained = aadt != null && (aadt / (input.currentDriveLanes * 10)) > capacityPerLane;
+  const delaySec = aadt == null ? null : isConstrained ? Math.min(65, Math.round((aadt / 1000) * 2.8)) : 12;
   const divertedPct = isConstrained ? 8.5 : 3.0;
   const newBikeRiders = Math.round(miles * (input.reallocationType === "protected_bike_lane" ? 620 : 310));
 
@@ -59,7 +59,7 @@ export function evaluateRightOfWayReallocation(input) {
       peakHourDelaySecondsPerVehicle: delaySec,
       divertedVehiclesDailyPct: divertedPct,
       modeShiftTransitBikeDailyRiders: newBikeRiders,
-      congestionCostAnnualUsd: Math.round(delaySec * aadt * 0.005 * 250)
+      congestionCostAnnualUsd: (aadt != null && delaySec != null) ? Math.round(delaySec * aadt * 0.005 * 250) : null
     },
     pollutionAndEmissions: {
       co2TonsAvoidedAnnual: co2TonsAvoided,
