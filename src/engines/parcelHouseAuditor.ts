@@ -326,7 +326,8 @@ export function auditSingleHouseParcel(input: HouseParcelAuditInput): HouseParce
   const rawZone = hasZoning ? input.zoningCode!.trim() : null;
   const zoneOrUse = String(rawZone || "") + " " + String(input.useDescription || "");
   const isComm = hasZoning && /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-  const isSfr = hasZoning && !isComm && (/r-|r1|sfr|single|res/i.test(zoneOrUse) || (!input.useDescription && !isComm));
+  // Single-family is read from the zone code itself (not the building use, which says nothing about zoning).
+  const isSfr = hasZoning && !isComm && /^(R-?1|RS|RE\d|RA\b|R-A|RW1|SF|NR|RSA|UR[123])|single/i.test(String(rawZone));
 
   const parcelCtx: ParcelContext = {
     parcel_id: input.parcelId,

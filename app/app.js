@@ -1596,7 +1596,8 @@ function auditSingleHouseParcel(input) {
   const rawZone = hasZoning ? String(input.zoningCode).trim() : null;
   const zoneOrUse = String(rawZone || "") + " " + String(input.useDescription || "");
   const isComm = hasZoning && /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-  const isSfr = hasZoning && !isComm && (/r-|r1|sfr|single|res/i.test(zoneOrUse) || (!input.useDescription && !isComm));
+  // Single-family is read from the zone code itself (not the building use, which says nothing about zoning).
+  const isSfr = hasZoning && !isComm && /^(R-?1|RS|RE\d|RA\b|R-A|RW1|SF|NR|RSA|UR[123])|single/i.test(String(rawZone));
 
   const parcelCtx = {
     parcel_id: input.parcelId,
@@ -5263,7 +5264,7 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
       const baseZone = zRule ? zRule.zone : (hasZon ? String(a.ZoneCode).trim() : null);
       const zoneOrUse = String(baseZone || "") + " " + String((a && a.UseDescription) || "");
       const isComm = hasZon && /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-      const isSfr = hasZon && !isComm && (/r-|r1|sfr|single|res/i.test(zoneOrUse) || (!a.UseDescription && !isComm));
+      const isSfr = hasZon && !isComm && /^(R-?1|RS|RE\d|RA\b|R-A|RW1|SF|NR|RSA|UR[123])|single/i.test(String(baseZone));   // from the zone code, not the building use
       const parcelCtx = {
         parcel_id: String((a && (a.AIN || a.APN)) || "PARCEL"),
         state_code: stCode,
@@ -5276,10 +5277,10 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
         dist_to_heavy_rail_mi: (nearestStn && (nearestStn.type === "heavy_rail" || !nearestStn.type)) ? nearestStn.distMi : null,
         dist_to_frequent_bus_or_brt_mi: (nearestStn && (nearestStn.type === "bus" || nearestStn.type === "brt")) ? nearestStn.distMi : null,
         exclusions: {
-          historic_district_hpoz: !!(st && st.R && st.R.hpoz && st.R.hpoz.ok),
+          historic_district_hpoz: !!(st && st.R && st.R.hpoz && st.R.hpoz.ok && st.R.hpoz.v && st.R.hpoz.v.length),   // ok = the query ran; v = districts hit
           coastal_commission_or_sma: false,
-          fema_100yr_floodway: !!(st && st.R && st.R.flood && st.R.flood.ok),
-          calfire_or_state_vhfhsz: !!(st && st.R && st.R.fire && st.R.fire.ok),
+          fema_100yr_floodway: !!(st && st.R && st.R.fema && st.R.fema.sfha),   // FEMA 100-year special flood hazard area (SB 9 bars the whole SFHA)
+          calfire_or_state_vhfhsz: !!(st && st.R && st.R.fire && st.R.fire.vh),
           airport_noise_or_runway_zone: false,
           working_waterfront_or_port: false,
           everglades_or_wekiva_or_trpa: false,
@@ -5503,7 +5504,7 @@ function valuationCheck(a, lot, est, options) {
     const mdapeTxt = bench.mdape != null ? `${(bench.mdape * 100).toFixed(1)}%` : "not on file";
     if (bench.withhold) {
       return { ok: false, roll, backtested: true, status: bench.status || "withhold", measuredMdape: bench.mdape != null ? bench.mdape : null,
-        reason: `Withheld: on ${bench.sampleCount != null ? fmtN(bench.sampleCount) + " " : ""}recorded sales in ${bench.countyName || "this county"}, the model's typical error was ${mdapeTxt} (median absolute error), too large to show a figure.${bench.withholdReason ? " " + bench.withholdReason : ""}` };
+        reason: bench.withholdReason || `Withheld: on ${bench.sampleCount != null ? fmtN(bench.sampleCount) + " " : ""}recorded sales in ${bench.countyName || "this county"}, the model's typical error was ${mdapeTxt} (median absolute error), too large to show a figure.` };
     }
     // Range sized by the measured error of the configuration actually used (calibrated or as shipped).
     const cal = options.calibrated && bench.engine_calibrated && bench.engine_calibrated.mdape != null ? bench.engine_calibrated.mdape : null;
@@ -5651,9 +5652,9 @@ function renderHouse(box, a, lot, ll, st) {
           hasStreetView: hasStreetView
         },
         exclusions: {
-          historic_district_hpoz: !!(R && R.hpoz && R.hpoz.ok),
-          fema_100yr_floodway: !!(R && R.flood && R.flood.ok),
-          calfire_or_state_vhfhsz: !!(R && R.fire && R.fire.ok)
+          historic_district_hpoz: !!(R && R.hpoz && R.hpoz.ok && R.hpoz.v && R.hpoz.v.length),   // ok = the query ran; v = districts hit
+          fema_100yr_floodway: !!(R && R.fema && R.fema.sfha),   // FEMA 100-year special flood hazard area
+          calfire_or_state_vhfhsz: !!(R && R.fire && R.fire.vh)
         }
       });
       // The audit's value block follows the county back-test: withheld, measured range, or "not back-tested here".
@@ -9363,9 +9364,9 @@ function serializeLiveAdvisorContext() {
     const audit = ah.audit || null;
     const stR = (ah.st && ah.st.R) || null;
     const ex = (audit && audit.statutoryZoning && audit.statutoryZoning.statutory_exclusions) || null;
-    const floodVal = ex ? !!ex.fema_100yr_floodway : (stR && stR.flood ? !!stR.flood.ok : null);
-    const fireVal = ex ? !!ex.calfire_or_state_vhfhsz : (stR && stR.fire ? !!stR.fire.ok : null);
-    const historicVal = ex ? !!ex.historic_district_hpoz : (stR && stR.hpoz ? !!stR.hpoz.ok : null);
+    const floodVal = ex ? !!ex.fema_100yr_floodway : (stR && stR.fema ? !!stR.fema.sfha : null);
+    const fireVal = ex ? !!ex.calfire_or_state_vhfhsz : (stR && stR.fire ? !!stR.fire.vh : null);
+    const historicVal = ex ? !!ex.historic_district_hpoz : (stR && stR.hpoz ? !!(stR.hpoz.ok && stR.hpoz.v && stR.hpoz.v.length) : null);
     const lotSplitVal = (audit && audit.statutoryZoning && typeof audit.statutoryZoning.lotSplitFeasible === "boolean")
       ? audit.statutoryZoning.lotSplitFeasible
       : null;

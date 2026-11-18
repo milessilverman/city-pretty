@@ -28,7 +28,7 @@ ranking whose past hit rate is measured and shown, so the confidence on each rec
 - Nothing combines the engines into a ranked decision, and no recommendation has been tested against what happened.
 - The AI advisor is not connected.
 
-## Stage 1: make every input real (in progress, 8 agents)
+## Stage 1: make every input real (done 18 Nov; results in `DATA-AUDIT-AND-TRANSPARENCY.md`)
 
 | Workstream | Model | Output |
 |---|---|---|
@@ -44,7 +44,7 @@ ranking whose past hit rate is measured and shown, so the confidence on each rec
 Exit test: every row of every data table carries a `verification` block (status, date, evidence URL, quote); a unit
 test fails the build if one is missing or if an unverified row carries a number.
 
-## Stage 2: the decision brief, easy to use
+## Stage 2: the decision brief, easy to use (first version done 18 Nov)
 
 - An **Invest** view beside Map and Explore: pick a county (or search an address), get the brief in five cards:
   where, what to build, which sites, this house, transit. Each number shows its basis (measured, modelled, assumed) and
@@ -52,7 +52,7 @@ test fails the build if one is missing or if an unverified row carries a number.
 - The page's null guards updated wherever Stage 1 removed a number, so "not on file" appears instead of a blank or NaN.
 - Docs and README corrected to say what is and is not verified.
 
-## Stage 3: the AI advisor
+## Stage 3: the AI advisor (code done 18 Nov; not deployed, never run against the live API)
 
 - `workers/api-proxy.ts`: the Claude call (Opus 5.5, prompt caching), given the decision brief as context, with lookup
   tools that return rows from the verified tables (lot facts, laws, costs, rents, sites, transit benchmarks).

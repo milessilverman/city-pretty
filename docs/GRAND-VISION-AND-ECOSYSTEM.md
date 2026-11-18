@@ -113,8 +113,8 @@ To achieve true real-world accuracy without hallucinating data, City Pretty inte
 
 ```mermaid
 flowchart LR
-    P0["P0: Sourced Data\n(Purge Filler & Fallbacks)\n✅ COMPLETED"]
-    P1["P1: Core Reality\n(Zoning Safety, State Law)\n✅ COMPLETED"]
+    P0["P0: Sourced Data\n(Purge Filler & Fallbacks)\nRe-checked 18 Nov 2026"]
+    P1["P1: Core Reality\n(Zoning Safety, State Law)\n5 of 22 laws confirmed"]
     P2["P2: Data Foundations\n(HUD Rent, Unit Costs)\n⏳ IN PROGRESS"]
     P3["P3: AI Integration\n(Claude Opus 5.5 + Tools)\nNEXT"]
     P4["P4: Multi-App Synergy\n(StreetForge + EverySpace)\nHORIZON"]

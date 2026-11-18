@@ -637,7 +637,7 @@ function render() {
     const r2 = ready(); if (r2.state !== "ok") { render(); return; }
     const p = parcelFacts();
     const needLaws = p && !d.laws;
-    if (needLaws && typeof cpJson === "function") { d.laws = []; cpJson("state-housing-laws").then(L => { d.laws = Array.isArray(L) ? L : []; iv.key = null; render(); }); }
+    if (needLaws && typeof cpJson === "function") { d.laws = []; cpJson("statutes").then(L => { d.laws = Array.isArray(L) ? L : []; iv.key = null; render(); }); }
     const key = [r2.fips, iv.hood, p && p.facts.parcel_id, p && p.facts.base_zoning_code, d.laws ? d.laws.length : -1, typeof SITES !== "undefined" && SITES ? 1 : 0].join("|");
     if (key !== iv.key || !iv.model) { iv.model = build(r2.fips, r2.B, d); iv.key = key; }
     const m = iv.model;
