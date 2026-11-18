@@ -30,18 +30,32 @@ async function badWords(page: Page) {
   });
 }
 
-test("Invest view renders the five cards for a mid-size county, with no null, NaN or undefined text", async ({ page }) => {
+async function openAll(page: Page) {
+  await page.evaluate(() => document.querySelectorAll("#invest details").forEach((d) => ((d as HTMLDetailsElement).open = true)));
+}
+
+test("Invest view renders the five sections for a mid-size county, with no null, NaN or undefined text", async ({ page }) => {
   const errors = await openPage(page);
   await openInvest(page);
   await expect(page.locator("#map")).toBeHidden();
   for (const id of ["iv-where", "iv-build", "iv-sites", "iv-house", "iv-transit"]) await expect(page.locator("#" + id)).toBeVisible();
   await expect(page.locator(".iv-title")).toContainText("Travis County");
-  await expect(page.locator(".iv-honest")).toContainText(/ranking|back-tested/i);
-  expect(await page.locator("#iv-where .iv-hood").count()).toBeGreaterThan(3);
+  // plain-words bottom line, one line per question, no statistics jargon
+  await expect(page.locator("#iv-bottom li")).toHaveCount(5);
+  const bl = await page.locator("#iv-bottom").innerText();
+  expect(bl).not.toMatch(/correlation|rho|quintile|percentile/i);
+  expect(await page.locator("#iv-where .iv-hood").count()).toBeGreaterThanOrEqual(3);
+  expect(await page.locator("#iv-where .iv-hood").count()).toBeLessThanOrEqual(5);
   await expect(page.locator("#iv-where .iv-grade").first()).toContainText("Confidence");
-  await expect(page.locator("#iv-where .iv-basis").first()).toBeVisible();
   await expect(page.locator("#iv-house")).toContainText("lot");
   await expect(page.locator("#iv-transit")).toContainText("Rules used");
+  // the test details (rank correlation etc.) live in the "How this was tested" panel
+  await expect(page.locator(".iv-honest")).toBeHidden();
+  await page.locator(".iv-tested > summary").click();
+  await expect(page.locator(".iv-honest")).toContainText(/ranking|back-tested/i);
+  // sticky nav reaches every section
+  await page.click(".iv-nav [data-iv-jump=iv-transit]");
+  await expect(page.locator("#iv-transit")).toBeVisible();
   // the brief is stashed for the advisor, and copying it works
   const brief = await page.evaluate(() => (window as any).__cpDecisionBrief);
   expect(brief.schema).toBe("city-pretty/decision-brief@1");
@@ -49,7 +63,44 @@ test("Invest view renders the five cards for a mid-size county, with no null, Na
   await page.click("[data-iv=copy]");
   await expect(page.locator("#iv-copy-l")).toHaveText("Copied");
   expect(await badWords(page)).toEqual([]);
+  await openAll(page);
+  await expect(page.locator("#iv-where .iv-basis").first()).toBeVisible();
+  await expect(page.locator("#iv-where .iv-hood.sel")).toHaveCount(1);
+  expect(await badWords(page)).toEqual([]);
+  await page.click("[data-iv-budget='4']");
+  await openAll(page);
+  expect(await badWords(page)).toEqual([]);
   expect(errors).toEqual([]);
+});
+
+test("display ranks start at 1 and run in order; Show 10 lists more; selecting updates Build", async ({ page }) => {
+  await openPage(page);
+  await openInvest(page);
+  const ranks = async () => (await page.locator("#iv-where .iv-rank").allInnerTexts()).map(Number);
+  const r5 = await ranks();
+  expect(r5[0]).toBe(1);
+  expect(r5).toEqual(r5.map((_, i) => i + 1));
+  const more = page.locator("[data-iv=more-hoods]");
+  if (await more.count()) { await more.click(); expect((await ranks()).length).toBeGreaterThan(r5.length); }
+  const rows = page.locator("#iv-where .iv-hood");
+  if ((await rows.count()) > 1) {
+    const id = await rows.nth(1).getAttribute("data-hood");
+    const name = (await rows.nth(1).locator(".iv-hood-name b").innerText()).trim();
+    await rows.nth(1).locator("[data-iv-hood]").click();
+    await expect(page.locator(`#iv-where .iv-hood.sel`)).toHaveAttribute("data-hood", id!);
+    await expect(page.locator("#iv-build .iv-lede")).toContainText(name.slice(0, 20));
+  }
+});
+
+test("default page is short: under 5,000 px for Travis County at 1280x900", async ({ browser }) => {
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  const page = await ctx.newPage();
+  await openPage(page);
+  await openInvest(page);
+  await page.waitForTimeout(500);
+  const h = await page.evaluate(() => document.documentElement.scrollHeight);
+  expect(h).toBeLessThan(5000);
+  await ctx.close();
 });
 
 test("changing the budget changes which plays are listed", async ({ page }) => {
@@ -102,6 +153,7 @@ test("Invest view fits a phone screen", async ({ browser }) => {
   expect(r.scroll).toBeLessThanOrEqual(r.width);
   await expect(page.locator("#view-switch [data-view=invest]")).toBeVisible();
   await page.click("[data-iv-budget='4']");
+  await openAll(page);
   const r2 = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, width: document.documentElement.clientWidth }));
   expect(r2.scroll).toBeLessThanOrEqual(r2.width);
   expect(await badWords(page)).toEqual([]);

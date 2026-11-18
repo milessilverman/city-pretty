@@ -17,7 +17,7 @@ export interface ParcelContext {
 export type LawVerificationStatus = "verified" | "partly" | "unverified";
 
 /**
- * Mirror of verification.status in app/data/state-housing-laws.json (hand-checked 2026-11-18 against
+ * Mirror of verification.status in app/data/statutes.json (hand-checked 2026-11-18 against
  * legislature / code-publisher text; see research/laws_verification.csv). tests/unit/lawsVerification.test.ts
  * asserts this table equals the JSON. A law that is not "verified" is NEVER returned as an applicable
  * (allowed) statute; it is returned in not_determined_statutes instead.
@@ -73,7 +73,7 @@ export function evaluateByRightHousing(parcel: ParcelContext): StatutoryZoningEv
       notDetermined.push({
         id,
         citation,
-        reason: reason ?? `law record is "${status ?? "unverified"}" in state-housing-laws.json; not treated as allowed`,
+        reason: reason ?? `law record is "${status ?? "unverified"}" in statutes.json; not treated as allowed`,
       });
     }
   };

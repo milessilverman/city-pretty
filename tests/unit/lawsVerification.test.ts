@@ -6,7 +6,7 @@ import * as tsEngine from "../../src/engines/statutoryZoningEngine";
 
 const root = path.resolve(__dirname, "../..");
 const read = (p: string) => fs.readFileSync(path.join(root, p), "utf-8");
-const laws = JSON.parse(read("app/data/state-housing-laws.json"));
+const laws = JSON.parse(read("app/data/statutes.json"));
 const funding = JSON.parse(read("app/data/funding_programs.json"));
 const finance = JSON.parse(read("app/data/state_finance_profiles.json"));
 const jsEngine = createRequire(import.meta.url)("../../src/engines/statutoryZoningEngine.js");
@@ -61,8 +61,9 @@ describe("laws verification data", () => {
     expect(Object.keys(finance).length).toBeGreaterThanOrEqual(51);
     for (const [c, p] of Object.entries<any>(finance)) checkBlock(p, c);
   });
-  it("statutes.json is identical to state-housing-laws.json", () => {
-    expect(read("app/data/statutes.json")).toBe(read("app/data/state-housing-laws.json"));
+  it("statutes.json is the only law table (state-housing-laws.json, its old duplicate, is gone)", () => {
+    expect(fs.existsSync(path.join(root, "app/data/state-housing-laws.json"))).toBe(false);
+    expect(read("app/app.js")).toContain('"statutes": "statutes.json"');
   });
   it("both copies of state_finance_profiles.json are identical", () => {
     expect(read("src/data/state_finance_profiles.json")).toBe(read("app/data/state_finance_profiles.json"));

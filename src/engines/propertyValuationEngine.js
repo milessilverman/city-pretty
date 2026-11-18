@@ -287,7 +287,7 @@ function estimatePropertyMarketValue(params) {
   let assessorMethodName = "Assessor Market Value";
 
   // Extract recorded roll / market values
-  const mktVal = +(a.MARKET_VALUE ?? a.TOT_MKT_VAL ?? a.TOTAL_MKT_VAL ?? a.TOTAL_MARKET ?? a.JV ?? a.FCV_CUR ?? a.FCV ?? a.FCVTOT ?? a.TOTAL_FCV ?? a.ESTFMKVALUE ?? a.parval ?? a.MarketTot ?? a.APPRAISED_VALUE ?? a.TOTAL_APPRAISED ?? a.APPRAISED_VAL ?? a.APPR_VALUE ?? a.ACTUAL_VAL ?? a.TOTAL_ACTUAL ?? a.RMV ?? a.RMV_TOTAL ?? a.AppraisedValue ?? a.MarketValue ?? a.MARKET_VAL ?? a.TRUE_CASH_VALUE ?? 0);
+  const mktVal = +(a.MARKET_VALUE ?? a.TOT_MKT_VAL ?? a.TOTAL_MKT_VAL ?? a.TOTAL_MARKET ?? a.JV ?? a.FCV_CUR ?? a.FCV ?? a.FCVTOT ?? a.TOTAL_FCV ?? a.ESTFMKVALUE ?? a.parval ?? a.MarketTot ?? a.APPRAISED_VALUE ?? a.TOTAL_APPRAISED ?? a.APPRAISED_VAL ?? a.APPR_VALUE ?? a.ACTUAL_VAL ?? a.TOTAL_ACTUAL ?? a.RMV ?? a.RMV_TOTAL ?? a.AppraisedValue ?? a.MarketValue ?? a.market_value ?? a.MARKET_VAL ?? a.TRUE_CASH_VALUE ?? 0);   // market_value: Philadelphia OPA layer (lowercase)
   const sev = +(a.SEV ?? a.CNTASSDVALUE ?? 0);
   const rollLand = +(a.Roll_LandValue ?? a.LND_VAL ?? a.LNDVALUE ?? 0);
   const rollImp = +(a.Roll_ImpValue ?? a.IMPROVVAL ?? a.IMPVALUE ?? 0);

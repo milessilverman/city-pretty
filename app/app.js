@@ -6,7 +6,7 @@ const $ = s => document.querySelector(s);
 const CP_DATA_FILES = {
   "bundle": "bundle-la.b64.txt", "details-chunks": "details-la.json", "overlay-chunks": "overlays-la.json",
   "sites-data": "sites-la.b64.txt", "la-crash-counts": "la-crash-counts.json", "bundle-oc": "bundle-oc.b64.txt",
-  "research": "research.json", "statutes": "statutes.json", "state-housing-laws": "state-housing-laws.json",
+  "research": "research.json", "statutes": "statutes.json", "state-housing-laws": "statutes.json" /* old id, kept as an alias for app/invest.js */,
   "funding-programs": "funding_programs.json", "case-studies": "case_studies.json", "transit-pipelines": "transit_pipelines.json",
   "state-finance-profiles": "state_finance_profiles.json", "unit-costs": "unit_costs.json", "hud-fmr": "hud_fair_market_rents.json",
   "valuation-benchmarks": "valuation_backtest_benchmarks.json", "underused-sites": "underused_sites.json",
@@ -115,6 +115,32 @@ function verificationLabel(rec, what) {
   if (st === "verified") return `Checked against the ${what || "source"}${on}`;
   if (st === "partly") return `Partly checked against the ${what || "source"}${on}; some details unconfirmed`;
   return "Not yet checked";
+}
+
+// State housing laws on file in statutes.json for a state, each tagged with what was checked. A law that is not
+// "verified" is named with "not determined" wording, never as a right.
+function stateLawRecords(st) {
+  st = String(st || "").toUpperCase();
+  return (Array.isArray(STATE_HOUSING_LAWS_DATA) ? STATE_HOUSING_LAWS_DATA : []).filter(r => r && r.state_code === st);
+}
+function stateLawSummaryText(st) {
+  const recs = stateLawRecords(st);
+  if (!recs.length) return "No statewide housing law for this state is on file; the city's or county's zoning code decides.";
+  return recs.map(r => {
+    const s = r.verification && r.verification.status;
+    const tag = s === "verified" ? "checked against the statute" : s === "partly" ? "partly checked; details not determined" : "not yet checked; not determined";
+    return `${r.short_name || r.bill_number || r.id} (${tag})`;
+  }).join(" · ");
+}
+function stateLawSummaryHtml(st) {
+  const recs = stateLawRecords(st);
+  if (!recs.length) return "<b>ADUs and missing-middle housing:</b> no statewide rule on file for this state; the city's or county's code decides.";
+  return recs.slice(0, 4).map(r => {
+    const s = r.verification && r.verification.status;
+    const tail = s === "verified" ? `${esc(r.summary || "")} <span class="muted">(${esc(verificationLabel(r, "statute"))})</span>`
+      : `<span class="muted">Not determined: ${esc(s === "partly" ? "partly checked against the statute" : "not yet checked")}${r.verification && Array.isArray(r.verification.fields_unconfirmed) && r.verification.fields_unconfirmed.length ? "; unconfirmed: " + esc(r.verification.fields_unconfirmed.slice(0, 3).join(", ").replace(/_/g, " ")) : ""}.</span>`;
+    return `<b>${esc(r.short_name || r.bill_number || r.id)}:</b> ${tail}`;
+  }).join("<br>");
 }
 
 function getHudFmr(fips) {
@@ -457,23 +483,34 @@ if (typeof module !== "undefined" && module.exports) {
   module.exports = { evaluateByRightHousing };
 }
 
+// Inline copy of src/engines/propertyValuationEngine.js (keep identical; the page does not import src/).
+// BEGIN INLINE VALUATION ENGINE
 /**
  * Property Valuation Engine (AVM - Automated Valuation Model)
  * Zillow Zestimate-Grade Econometric Valuation Architecture
  * 
  * Features:
- * 1. Repeat-sales indexing using metro/state FHFA & Case-Shiller HPI series (1980-2026).
+ * 1. Tiered repeat-sales indexing using metro/state FHFA & Case-Shiller HPI series (1980-2026)
+ *    with non-linear tier elasticity dampening for luxury properties.
  * 2. Assessment regime normalization across all 50 states:
  *    - Michigan: State Equalized Value (SEV / CNTASSDVALUE) = 50% True Cash Market Value.
  *    - Florida: Just Value (JV) = 100% Statutory Fair Market Value (Fla. Const. Art. VII).
- *    - Wisconsin: Estimated Fair Market Value (ESTFMKVALUE) = 100% Market Value.
- *    - Texas: Total Market Value (MARKET_VALUE / TOT_MKT_VAL) = 100% Market Value.
+ *    - Texas: Total Market Value (MARKET_VALUE / TOT_MKT_VAL) = 100% Market Value (Tax Code § 23.01).
  *    - New York: MapPLUTO Full Market Value (MarketTot) = 100% Market Value.
+ *    - Wisconsin: Estimated Fair Market Value (ESTFMKVALUE) = 100% Market Value.
  *    - North Carolina: Appraised Parcel Value (parval) = 100% Market Value.
- *    - California: Prop 13 Assessor Base-Year Uncapping & Repeat-Sales Indexing.
- * 3. Log-linear hedonic elasticities (living area marginal diminishing returns 0.72, lot size 0.15).
+ *    - Ohio: Taxable Assessed Value / 0.35 (ORC § 5713.03 35% statutory ratio).
+ *    - Illinois: Cook County Class 2 Residential Assessed Value * 10.0 (10% ratio).
+ *    - Georgia: Assessed Value / 0.40 (40% statutory ratio).
+ *    - Nevada: Assessed Value / 0.35 (35% taxable ratio).
+ *    - Tennessee: Assessed Value / 0.25 (25% statutory ratio).
+ *    - Alabama: Class III Assessed Value / 0.10 (10% statutory ratio).
+ *    - Colorado: Residential Assessed Value / 0.067 (6.7% residential assessment rate).
+ *    - California: Prop 13 Assessor Base-Year Uncapping & Inferred Acquisition Tenure Recovery.
+ * 3. Strict USPAP appraisal decomposition: Site Land Value + Structural Living Area GLA Elasticity.
  * 4. Micro-neighborhood 2026 HPI inflation adjustment (+16.5% from Census ACS midpoint).
- * 5. Multi-model ensemble synthesis (Sale Comp + Assessor Market Value + Hedonic Micro-Model).
+ * 5. Census ACS luxury top-coding ($2,000,001) municipal enclave un-capping.
+ * 6. Multi-model Bayesian ensemble synthesis (Repeat Sale Comp + Assessor Market Value + Hedonic Model).
  */
 
 const HPI_INDEX_TO_2026 = {
@@ -559,24 +596,6 @@ const STATE_BASELINE_PROFILES = {
   DEFAULT: { medianHv: 360000, medianVpsf: 210, refSqft: 1750, refLot: 7500 }
 };
 
-function getHpiMultiplier(year) {
-  if (!year || isNaN(year) || year >= 2026) return 1.0;
-  if (year < 1980) year = 1980;
-  
-  if (HPI_INDEX_TO_2026[year]) return HPI_INDEX_TO_2026[year];
-  
-  // Linear interpolation between known anchor years
-  const keys = Object.keys(HPI_INDEX_TO_2026).map(Number).sort((a, b) => b - a);
-  for (let i = 0; i < keys.length - 1; i++) {
-    const yHigh = keys[i], yLow = keys[i + 1];
-    if (year <= yHigh && year >= yLow) {
-      const frac = (year - yLow) / (yHigh - yLow);
-      return HPI_INDEX_TO_2026[yLow] + frac * (HPI_INDEX_TO_2026[yHigh] - HPI_INDEX_TO_2026[yLow]);
-    }
-  }
-  return 1.0;
-}
-
 // Luxury municipal enclaves top-coded at $2,000,001 by Census ACS
 const LUXURY_TIER_MUNICIPALITIES = {
   "beverly hills": 3950000,
@@ -599,6 +618,24 @@ const LUXURY_TIER_MUNICIPALITIES = {
   "palm beach": 4800000
 };
 
+function getHpiMultiplier(year) {
+  if (!year || isNaN(year) || year >= 2026) return 1.0;
+  if (year < 1980) year = 1980;
+  
+  if (HPI_INDEX_TO_2026[year]) return HPI_INDEX_TO_2026[year];
+  
+  // Linear interpolation between known anchor years
+  const keys = Object.keys(HPI_INDEX_TO_2026).map(Number).sort((a, b) => b - a);
+  for (let i = 0; i < keys.length - 1; i++) {
+    const yHigh = keys[i], yLow = keys[i + 1];
+    if (year <= yHigh && year >= yLow) {
+      const frac = (year - yLow) / (yHigh - yLow);
+      return HPI_INDEX_TO_2026[yLow] + frac * (HPI_INDEX_TO_2026[yHigh] - HPI_INDEX_TO_2026[yLow]);
+    }
+  }
+  return 1.0;
+}
+
 // Case-Shiller price tier elasticity dampening for luxury properties
 function getTierElasticity(salePrice) {
   if (!salePrice || salePrice <= 450000) return 1.05;
@@ -609,7 +646,7 @@ function getTierElasticity(salePrice) {
 }
 
 /**
- * Screening estimate of a home's market value (not an appraisal); see valuationCheck() for where it is withheld.
+ * Calculates high-precision Zillow-grade automated property valuation.
  * 
  * @param {Object} params
  * @param {Object} params.attributes Assessor & parcel attributes
@@ -622,6 +659,7 @@ function getTierElasticity(salePrice) {
  */
 function estimatePropertyMarketValue(params) {
   const { attributes: a = {}, lotSqft = 6000, neighborhood: m = {}, stateCode = "CA", facts: F = {}, salesInfo = null } = params;
+  const cal = params.calibration || null;
   const state = (stateCode || "CA").toUpperCase();
   const profile = STATE_BASELINE_PROFILES[state] || STATE_BASELINE_PROFILES.DEFAULT;
 
@@ -691,13 +729,13 @@ function estimatePropertyMarketValue(params) {
   }
 
   // Bed & Bath utility on structure
-  const beds = F.beds || +(a.Bedrooms1 ?? a.BEDROOMS ?? 3) || 3;
-  const baths = F.baths || +(a.Bathrooms1 ?? a.BATHROOMS ?? 2) || 2;
-  const bedBathAdj = Math.max(-0.15, Math.min(0.20, (beds - 3) * 0.025 + (baths - 2) * 0.035)) * structVal;
+  const beds = F.beds ? +(F.beds) : (a.Bedrooms1 != null || a.BEDROOMS != null ? +(a.Bedrooms1 ?? a.BEDROOMS) : null);
+  const baths = F.baths ? +(F.baths) : (a.Bathrooms1 != null || a.BATHROOMS != null ? +(a.Bathrooms1 ?? a.BATHROOMS) : null);
+  const bedBathAdj = (beds != null && baths != null) ? Math.max(-0.15, Math.min(0.20, (beds - 3) * 0.025 + (baths - 2) * 0.035)) * structVal : 0;
 
   // Age & remodel depreciation on structure (land does not depreciate)
-  const effYear = +(F.eff || a.EffectiveYear1 || a.EffectiveYear || a.EFF_YR_BLT || F.yb || a.YearBuilt1 || a.YearBuilt || a.CONST_YEAR || 1975) || 1975;
-  const ageAdj = Math.max(-0.25, Math.min(0.25, (effYear - 1980) * 0.003)) * structVal;
+  const effYear = +(F.eff || a.EffectiveYear1 || a.EffectiveYear || a.EFF_YR_BLT || F.yb || a.YearBuilt1 || a.YearBuilt || a.CONST_YEAR || 0) || null;
+  const ageAdj = effYear ? Math.max(-0.25, Math.min(0.25, (effYear - 1980) * 0.003)) * structVal : 0;
 
   // Quality & construction class bonus
   let qualityAdj = 0;
@@ -725,16 +763,18 @@ function estimatePropertyMarketValue(params) {
   const unitsCount = +(F.units || a.Units1 || a.Units || 1) || 1;
   const multiUnitBonus = (!isVacantLand && unitsCount > 1) ? Math.min(0.24, (unitsCount - 1) * 0.08) * structVal : 0;
 
-  const hedonicEst = isVacantLand ? Math.round(siteValue + lotAdj) :
+  const hedonicRaw = isVacantLand ? Math.round(siteValue + lotAdj) :
     Math.round((siteValue + structVal + lotAdj + bedBathAdj + ageAdj + qualityAdj + poolBonus + garageBonus + viewBonus + basementBonus + multiUnitBonus) * condoFactor);
 
   // 4. Municipal Assessor Market Value Calibration across All 50 States
+  const hedonicEst = (cal && cal.hedonicScale && cal.hedonicScale > 0) ? Math.round(hedonicRaw * cal.hedonicScale) : hedonicRaw;
+
   let assessorMarketEst = null;
   let assessorWeight = 0;
   let assessorMethodName = "Assessor Market Value";
 
   // Extract recorded roll / market values
-  const mktVal = +(a.MARKET_VALUE ?? a.TOT_MKT_VAL ?? a.TOTAL_MKT_VAL ?? a.TOTAL_MARKET ?? a.JV ?? a.FCV_CUR ?? a.FCV ?? a.FCVTOT ?? a.TOTAL_FCV ?? a.ESTFMKVALUE ?? a.parval ?? a.MarketTot ?? a.APPRAISED_VALUE ?? a.TOTAL_APPRAISED ?? a.APPRAISED_VAL ?? a.APPR_VALUE ?? a.ACTUAL_VAL ?? a.TOTAL_ACTUAL ?? a.RMV ?? a.RMV_TOTAL ?? a.AppraisedValue ?? a.MarketValue ?? a.MARKET_VAL ?? a.TRUE_CASH_VALUE ?? 0);
+  const mktVal = +(a.MARKET_VALUE ?? a.TOT_MKT_VAL ?? a.TOTAL_MKT_VAL ?? a.TOTAL_MARKET ?? a.JV ?? a.FCV_CUR ?? a.FCV ?? a.FCVTOT ?? a.TOTAL_FCV ?? a.ESTFMKVALUE ?? a.parval ?? a.MarketTot ?? a.APPRAISED_VALUE ?? a.TOTAL_APPRAISED ?? a.APPRAISED_VAL ?? a.APPR_VALUE ?? a.ACTUAL_VAL ?? a.TOTAL_ACTUAL ?? a.RMV ?? a.RMV_TOTAL ?? a.AppraisedValue ?? a.MarketValue ?? a.market_value ?? a.MARKET_VAL ?? a.TRUE_CASH_VALUE ?? 0);   // market_value: Philadelphia OPA layer (lowercase)
   const sev = +(a.SEV ?? a.CNTASSDVALUE ?? 0);
   const rollLand = +(a.Roll_LandValue ?? a.LND_VAL ?? a.LNDVALUE ?? 0);
   const rollImp = +(a.Roll_ImpValue ?? a.IMPROVVAL ?? a.IMPVALUE ?? 0);
@@ -803,7 +843,10 @@ function estimatePropertyMarketValue(params) {
     assessorMarketEst = Math.round((rollTot / 0.35) * 1.02);
     assessorWeight = 0.60;
     assessorMethodName = "Ohio 35% Assessment Ratio Fair Market Value";
-  } else if (state === "IL" && rollTot > 10000 && !mktVal) {
+  // Threshold on the assessed (10%-level) value: 2,500 ~ $25k market, the generic path's $25k floor. It was
+  // 10,000 (~$100k market), which silently dropped every Cook home under ~$100k to the hedonic/prior-sale paths
+  // (back-test 2026-11-18: those sales had a 40-48% median error vs 16-17% on the assessor path).
+  } else if (state === "IL" && rollTot > 2500 && !mktVal) {
     // Cook County Class 2 Residential: 10% Statutory Assessment Ratio
     assessorMarketEst = Math.round(rollTot * 10.0 * 1.02);
     assessorWeight = 0.55;
@@ -870,6 +913,14 @@ function estimatePropertyMarketValue(params) {
   }
 
   // 5. Repeat Deed Sales Model with Case-Shiller Tier Elasticity Dampening
+  // County calibration: the county's measured median sale / assessor-value ratio replaces the statutory multiplier.
+  const calBase = mktVal > 0 ? mktVal : (rollTot > 0 ? rollTot : 0);
+  if (cal && cal.assessorRatio && cal.assessorRatio > 0 && calBase > 0) {
+    assessorMarketEst = Math.round(calBase * cal.assessorRatio);
+    assessorMethodName = "County-calibrated assessor value";
+    if (!assessorWeight) assessorWeight = 0.60;
+  }
+
   let saleCompEst = null;
   let saleWeight = 0;
   
@@ -884,6 +935,16 @@ function estimatePropertyMarketValue(params) {
     const effectiveHpi = 1.0 + (rawHpi - 1.0) * tierEl;
     saleCompEst = Math.round(rawSalePrice * effectiveHpi);
     saleWeight = rawSaleYear >= 2021 ? 0.70 : rawSaleYear >= 2015 ? 0.55 : 0.35;
+  }
+  // A caller-supplied index change (from a published price index for the right metro and dates) replaces the
+  // built-in national table for the prior sale.
+  if (salesInfo && salesInfo.hpiRatio && salesInfo.hpiRatio > 0 && rawSalePrice > 25000) {
+    saleCompEst = Math.round(rawSalePrice * salesInfo.hpiRatio);
+    if (!saleWeight) saleWeight = 0.35;
+  }
+  if (cal && cal.weights) {
+    if (saleCompEst) saleWeight = cal.weights.priorSale;
+    if (assessorMarketEst) assessorWeight = cal.weights.assessor;
   }
 
   // 6. Multi-Model Bayesian Ensemble Synthesis
@@ -904,13 +965,13 @@ function estimatePropertyMarketValue(params) {
   }
 
   // Hedonic model acts as the grounding anchor
-  const hedonicWeight = Math.max(0.20, 1.0 - totalWeight);
+  const hedonicWeight = (cal && cal.weights && cal.weights.hedonic != null && totalWeight > 0) ? cal.weights.hedonic : Math.max(0.20, 1.0 - totalWeight);
   weightedSum += hedonicEst * hedonicWeight;
   totalWeight += hedonicWeight;
-  methodTokens.push("Hedonic Micro-Model");
+  if (hedonicWeight > 0) methodTokens.push("Hedonic Micro-Model");
 
   const rawEstimatedValue = Math.round(weightedSum / totalWeight);
-  // Round to nearest $1,000 for precision
+  // Round to nearest $1,000 for presentation precision
   const estimatedValue = Math.round(rawEstimatedValue / 1000) * 1000;
   const finalVpsf = isVacantLand ? Math.round(estimatedValue / Math.max(lotSqft, 1)) : Math.round(estimatedValue / Math.max(livingSqft, 1));
 
@@ -949,10 +1010,12 @@ function estimatePropertyMarketValue(params) {
     hedonicEst,
     assessorMarketEst,
     saleCompEst,
+    calibrated: !!cal,
     siteValue: Math.round(siteValue),
     structVal: Math.round(structVal)
   };
 }
+// END INLINE VALUATION ENGINE
 
 if (typeof module !== "undefined" && module.exports && false) {
   module.exports = {
@@ -2132,16 +2195,17 @@ function renderHouseAuditAside(audit) {
     <div style="background:#f8fafc;padding:10px;border-radius:6px;border:1px solid #e2e8f0;margin-bottom:10px;">
       <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;">
         <span style="font-size:11px;font-weight:700;color:#334155;">Automated Valuation Estimate</span>
-        <span style="font-size:11px;color:#0284c7;font-weight:600;">${v.confidenceRating}</span>
+        <span style="font-size:11px;color:#0284c7;font-weight:600;">${audit.valCheck ? (audit.valCheck.backtested ? `Back-test status: ${esc(audit.valCheck.status || "on file")}` : "Not back-tested here") : esc(v.confidenceRating || "")}</span>
       </div>
+      ${audit.valCheck && !audit.valCheck.ok ? `<div style="font-size:12px;color:#475569;margin:3px 0;"><b>No estimate.</b> ${esc(audit.valCheck.reason || "")}</div>` : `
       <div style="font-size:20px;font-weight:800;color:#0f172a;margin:3px 0;">
         ${fmt$(v.estimatedValue)}
-        <span style="font-size:12px;font-weight:500;color:#64748b;">(${fmt$(v.valueLow)} – ${fmt$(v.valueHigh)} · ±${(v.confidenceMarginPct * 100).toFixed(1)}%)</span>
-      </div>
-      <div style="font-size:11.5px;color:#475569;margin-bottom:6px;">
+        ${audit.measuredRange ? (audit.measuredRange.low != null && audit.measuredRange.high != null ? `<span style="font-size:12px;font-weight:500;color:#64748b;">(${fmt$(audit.measuredRange.low)} – ${fmt$(audit.measuredRange.high)} · ±${(audit.measuredRange.mdape * 100).toFixed(1)}% measured typical error)</span>` : `<span style="font-size:12px;font-weight:500;color:#64748b;">(not back-tested here, so no error range)</span>`) : (v.confidenceMarginPct != null ? `<span style="font-size:12px;font-weight:500;color:#64748b;">(${fmt$(v.valueLow)} – ${fmt$(v.valueHigh)} · ±${(v.confidenceMarginPct * 100).toFixed(1)}%, model's own margin, not measured)</span>` : "")}
+      </div>`}
+      ${audit.valCheck && !audit.valCheck.ok ? "" : `<div style="font-size:11.5px;color:#475569;margin-bottom:6px;">
         ~${fmt$(v.vpsf)}/sq ft ${v.isVacantLand ? "lot (Vacant Land Appraisal)" : "living area"} &middot; Model: <b>${v.valuationMethod}</b>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;background:#ffffff;padding:8px;border-radius:4px;border:1px solid #cbd5e1;">
+      </div>`}
+      <div style="display:${audit.valCheck && !audit.valCheck.ok ? "none" : "grid"};grid-template-columns:1fr 1fr;gap:6px;font-size:11px;background:#ffffff;padding:8px;border-radius:4px;border:1px solid #cbd5e1;">
         <div>• <b>Site Land Equity:</b> ${fmt$(v.siteValue)}</div>
         <div>• <b>Finished Structure (GLA):</b> ${v.isVacantLand ? "$0 (unimproved)" : fmt$(v.structVal)}</div>
         ${v.permitCapitalizationAdded > 0 ? `<div style="color:#15803d;font-weight:700;">• <b>Permit Capitalization (+85%):</b> +${fmt$(v.permitCapitalizationAdded)}</div>` : `<div>• <b>Permit Additions:</b> No unassessed active permits</div>`}
@@ -2805,7 +2869,7 @@ function drawP3Corridors() {
         weight: 2.5,
         fillColor: isAnchor ? "#38bdf8" : "#ffffff",
         fillOpacity: 1
-      }).bindTooltip(`<b>${isAnchor ? '' : ''}${esc(stn.name)}</b><br><span style="font-size:11px;color:#0284c7">${stn.units} TOD Homes (${stn.affordPct}% affordable)</span>`, { sticky: true });
+      }).bindTooltip(`<b>${isAnchor ? '' : ''}${esc(stn.name)}</b><br><span style="font-size:11px;color:#0284c7">${stn.units != null ? `${stn.units} TOD Homes${stn.affordPct != null ? ` (${stn.affordPct}% affordable)` : ""}` : (stn.status ? esc(stn.status) : "Station")}</span>`, { sticky: true });
 
       marker.on("click", (e) => {
         L.DomEvent.stopPropagation(e);
@@ -5437,14 +5501,27 @@ function valuationCheck(a, lot, est, options) {
   
   // Statistical back-test check (ACCURACY-ROADMAP.md Item 8)
   const fips = (options && options.countyFips) || a.countyFips || (typeof activeFips === "function" ? activeFips() : null);
-  if (options && options.enforceCountyBacktest && fips && typeof VALUATION_BACKTEST_BENCHMARKS !== "undefined" && VALUATION_BACKTEST_BENCHMARKS[fips]) {
-    const bench = VALUATION_BACKTEST_BENCHMARKS[fips];
+  if (options && options.enforceCountyBacktest) {
+    const bench = countyValuationBenchmark(fips);
+    if (!bench) return { ok: true, roll, backtested: false, measuredMdape: null };
+    const mdapeTxt = bench.mdape != null ? `${(bench.mdape * 100).toFixed(1)}%` : "not on file";
     if (bench.withhold) {
-      return { ok: false, roll, reason: bench.withholdReason || `Valuation withheld: back-testing in county ${fips} against recorder sales showed error exceeding acceptable bounds (MdAPE: ${(bench.mdape * 100).toFixed(1)}%).` };
+      return { ok: false, roll, backtested: true, status: bench.status || "withhold", measuredMdape: bench.mdape != null ? bench.mdape : null,
+        reason: `Withheld: on ${bench.sampleCount != null ? fmtN(bench.sampleCount) + " " : ""}recorded sales in ${bench.countyName || "this county"}, the model's typical error was ${mdapeTxt} (median absolute error), too large to show a figure.${bench.withholdReason ? " " + bench.withholdReason : ""}` };
     }
+    // Range sized by the measured error of the configuration actually used (calibrated or as shipped).
+    const cal = options.calibrated && bench.engine_calibrated && bench.engine_calibrated.mdape != null ? bench.engine_calibrated.mdape : null;
+    const md = cal != null ? cal : (bench.supportedConfidenceMarginPct != null ? bench.supportedConfidenceMarginPct : bench.mdape);
+    return { ok: true, roll, backtested: true, status: bench.status || null, measuredMdape: md != null && isFinite(md) ? md : null, sampleCount: bench.sampleCount != null ? bench.sampleCount : null };
   }
 
   return { ok: true, roll };
+}
+// The county's entry in app/data/valuation_backtest_benchmarks.json, or null when it has not been back-tested.
+function countyValuationBenchmark(fips) {
+  if (!fips || typeof VALUATION_BACKTEST_BENCHMARKS === "undefined" || !VALUATION_BACKTEST_BENCHMARKS) return null;
+  const b = VALUATION_BACKTEST_BENCHMARKS[String(fips).padStart(5, "0")];
+  return (b && typeof b === "object") ? b : null;
 }
 function noEstimateHtml(vc) {
   return `<b>No estimate</b><div class="small muted" style="margin-top:2px">${esc(vc.reason)}${vc.roll > 0 ? ` Assessor value: ${fmt$(vc.roll)}.` : ""}</div>`;
@@ -5491,23 +5568,29 @@ function renderHouse(box, a, lot, ll, st) {
   const poolBonus = (F.pool && baseNeighborhoodHv) ? baseNeighborhoodHv * 0.045 : 0;
   const lotBonus = (lot && baseNeighborhoodHv) ? Math.max(-0.08, Math.min(0.12, ((lot - 5500) / 5500) * 0.10)) * baseNeighborhoodHv : 0;
 
-  // Screening home-value estimate (not an appraisal)
+  // Screening home-value estimate (not an appraisal). The county's back-test entry (valuation_backtest_benchmarks.json)
+  // supplies the fitted calibration and the measured error used for the range; a county with no entry is
+  // "not back-tested here" and gets no range.
+  const valFips = typeof activeFips === "function" ? activeFips() : null;
+  const valBench = countyValuationBenchmark(valFips);
+  const valCal = (valBench && valBench.engine_calibrated && valBench.engine_calibrated.calibration) || null;
   const valuation = (typeof estimatePropertyMarketValue === "function") ? estimatePropertyMarketValue({
     attributes: a,
     lotSqft: lot || a.LotSqft || undefined,
     neighborhood: m,
     stateCode: typeof activeState === "function" ? activeState() : "CA",
     facts: F,
-    salesInfo: sale
+    salesInfo: sale,
+    calibration: valCal || undefined
   }) : null;
 
   const houseHv = valuation ? valuation.estimatedValue : null;
   const houseVpsf = valuation ? valuation.vpsf : (houseHv && livingSqft ? Math.round(houseHv / livingSqft) : null);
-  const confMarginPct = valuation ? valuation.confidenceMarginPct : 0.065;
-  const valLow = (valuation && houseHv != null) ? valuation.valueLow : (houseHv ? Math.round((houseHv * (1 - confMarginPct)) / 1000) * 1000 : null);
-  const valHigh = (valuation && houseHv != null) ? valuation.valueHigh : (houseHv ? Math.round((houseHv * (1 + confMarginPct)) / 1000) * 1000 : null);
+  const valCheck = valuationCheck(a, lot, houseHv, { enforceCountyBacktest: true, countyFips: valFips, calibrated: !!valCal });
+  const confMarginPct = valCheck.measuredMdape != null ? valCheck.measuredMdape : null;
+  const valLow = (houseHv != null && confMarginPct != null) ? Math.round((houseHv * (1 - confMarginPct)) / 1000) * 1000 : null;
+  const valHigh = (houseHv != null && confMarginPct != null) ? Math.round((houseHv * (1 + confMarginPct)) / 1000) * 1000 : null;
   const valMethod = valuation ? valuation.valuationMethod : "Hedonic Micro-Model";
-  const valCheck = valuationCheck(a, lot, houseHv);
   if (!houseHv && valCheck.ok) {
     valCheck.ok = false;
     valCheck.reason = "Living area and valuation attributes are not recorded in official county records.";
@@ -5576,6 +5659,9 @@ function renderHouse(box, a, lot, ll, st) {
           calfire_or_state_vhfhsz: !!(R && R.fire && R.fire.ok)
         }
       });
+      // The audit's value block follows the county back-test: withheld, measured range, or "not back-tested here".
+      houseAudit.valCheck = valCheck;
+      houseAudit.measuredRange = { low: valLow, high: valHigh, mdape: confMarginPct };
       if (activeHouse) {
         activeHouse.audit = houseAudit;
       }
@@ -5694,9 +5780,9 @@ function renderHouse(box, a, lot, ll, st) {
       ${!valCheck.ok ? fact("Estimated market value", noEstimateHtml(valCheck), "") : ""}
       ${valCheck.ok ? fact("Estimated market value", `<div>
         <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;">
-          <b>${fmt$(houseHv)}</b> <span class="vpd-range" style="font-size:12px;color:var(--ink-2)">(${fmt$(valLow)} – ${fmt$(valHigh)} · screening range ±${(confMarginPct * 100).toFixed(1)}%)</span>
+          <b>${fmt$(houseHv)}</b> ${valLow != null && valHigh != null ? `<span class="vpd-range" style="font-size:12px;color:var(--ink-2)">(${fmt$(valLow)} – ${fmt$(valHigh)} · ±${(confMarginPct * 100).toFixed(1)}%, the model's typical error on ${valCheck.sampleCount != null ? fmtN(valCheck.sampleCount) + " " : ""}recorded sales in this county)</span>` : `<span class="vpd-range" style="font-size:12px;color:var(--ink-2)">(not back-tested here, so no error range)</span>`}
         </div>
-        ${valuation && valuation.confidenceRating ? `<div style="font-size:11px;font-weight:600;color:#0284c7;margin-top:2px;">${esc(valuation.confidenceRating)}</div>` : ""}
+        ${valCheck.backtested && valCheck.status ? `<div style="font-size:11px;font-weight:600;color:#0284c7;margin-top:2px;">Back-test status: ${esc(valCheck.status)}</div>` : ""}
         <div style="font-size:11px;color:#64748b;margin-top:2px;">
           Model: <b>${esc(valMethod)}</b> &middot; ${valuation && valuation.isVacantLand ? `~${fmt$(houseVpsf)}/sq ft lot (${fmtN(valuation.lotSqft || lot || 0)} sq ft buildable land)` : `~${fmt$(houseVpsf)}/sq ft (${fmtN(valuation ? valuation.livingSqft : livingSqft)} sq ft living)`}
         </div>
@@ -7195,11 +7281,15 @@ function eifdArea(p, scope) {
 }
 function eifdSection(p, m) {
   const stCode = (typeof activeState === "function" ? activeState() : "CA");
-  const profile = STATE_FINANCE_PROFILES[stCode] || STATE_FINANCE_PROFILES["CA"];
-  
+  const profile = STATE_FINANCE_PROFILES[stCode] || null;
+
   if (stCode !== "CA") {
     // Generalized Multi-State TIF/TIRZ/CRA/DDA Engine
-    const baselineMv = (m && m.hv && m.homes) ? m.hv * m.homes : 45000000;
+    if (!profile) return `<div class="section"><h3>Tax-increment financing</h3><p class="small muted">No property-tax profile for ${esc(activeStateName())} is on file, so no bond capacity is shown.</p></div>`;
+    const baselineMv = (m && m.hv && m.homes) ? m.hv * m.homes : null;
+    if (baselineMv == null) return `<div class="section"><h3>Tax-increment financing</h3><p class="small muted">Home values or home counts for this block group are not on file, so no bond capacity is shown.</p></div>`;
+    const profStatus = profile.verification && profile.verification.status;
+    const profLabel = profStatus === "verified" ? `State tax rule: ${verificationLabel(profile, "statute")}.` : "Unverified state rule: this state's assessment figures have not been checked against the statute.";
     const effMillage = profile.state_code === "TX" ? 0.021 : profile.state_code === "FL" ? 0.0165 : 0.0125;
     const tifCap = calculateTaxIncrementCapacity({
       profile,
@@ -7753,7 +7843,7 @@ function focusP3Walkshed(lat, lng, name, radiusMeters = 805) {
         <button type="button" onclick="focusP3Walkshed(${lat}, ${lng}, '${esc(name)}', 1207)" style="font-size:10px;padding:3px 6px;border:1px solid #cbd5e1;background:${radiusMeters > 1000 ? '#0284c7' : '#fff'};color:${radiusMeters > 1000 ? '#fff' : '#0f172a'};border-radius:4px;cursor:pointer;">15-Min (0.75 mi)</button>
       </div>
       <div style="font-size:11px;color:#0369a1;background:#e0f2fe;padding:5px 8px;border-radius:4px;">
-        <b>Transit Infill Bonus:</b> 0 parking minimums for ADUs &amp; conversions within ½ mile
+        ${(typeof activeState === "function" && activeState() === "CA") ? "<b>California AB 2097:</b> no minimum parking may be required within ½ mile of public transit (Gov. Code § 65863.2, checked against the statute)" : "<b>Parking near transit:</b> state rule not determined here; ask the city"}
       </div>
     </div>
   `);
@@ -7829,8 +7919,8 @@ function flyToP3Hub(fips, targetIdx = -1) {
         .bindPopup(`
           <div style="font-family:var(--body);line-height:1.4;color:#0f172a;max-width:280px">
             <div style="font-weight:800;font-size:13px;color:#0369a1;margin-bottom:3px">${isAnchor ? '' : ''} ${esc(stn.name)}</div>
-            <div style="font-size:11.5px;color:#334155;margin-bottom:4px"><b>TOD Potential:</b> ${stn.units} mixed-income homes (${stn.affordPct}% affordable)</div>
-            <div style="font-size:11px;color:#64748b;margin-bottom:6px;">${esc(stn.desc)}</div>
+            <div style="font-size:11.5px;color:#334155;margin-bottom:4px"><b>TOD Potential:</b> ${stn.units != null ? `${stn.units} mixed-income homes${stn.affordPct != null ? ` (${stn.affordPct}% affordable)` : ""}` : "not on file"}</div>
+            ${stn.desc || stn.status ? `<div style="font-size:11px;color:#64748b;margin-bottom:6px;">${esc(stn.desc || stn.status)}</div>` : ""}
             <button type="button" onclick="flyToP3Station(${stn.lat}, ${stn.lng}, '${esc(stn.name)}', ${stn.units}, ${stn.affordPct}, ${stn.retailSqft})" style="background:#0284c7;color:#fff;border:none;padding:4px 8px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;">
               Focus 0.5-Mi Walkshed
             </button>
@@ -7966,8 +8056,8 @@ function p3Section(p, m) {
           <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;font-size:12.5px;">
             <input type="checkbox" id="p3-trail" checked onchange="runP3Sim()" style="margin-top:2px;">
             <div>
-              <b>${esc(pipe.bikewayName)}</b>
-              <div style="font-size:11.5px;color:var(--ink-2);">${esc(pipe.bikewayDesc)} (+${pipe.bikewayHomeLift}% home value lift; +${pipe.bikewayRidership}% station cycling boardings).</div>
+              <b>${esc(pipe.bikewayName || "Protected bikeway to the station")}</b>
+              <div style="font-size:11.5px;color:var(--ink-2);">${pipe.bikewayDesc ? esc(pipe.bikewayDesc) : "Route and length not on file"}${pipe.bikewayHomeLift != null ? ` (+${pipe.bikewayHomeLift}% home value lift${pipe.bikewayRidership != null ? `; +${pipe.bikewayRidership}% station cycling boardings` : ""})` : " (value effect not on file)"}.</div>
             </div>
           </label>
 
@@ -7975,15 +8065,15 @@ function p3Section(p, m) {
             <input type="checkbox" id="p3-trees" checked onchange="runP3Sim()" style="margin-top:2px;">
             <div>
               <b>Urban Forest Shade Tree Canopy Corridor</b>
-              <div style="font-size:11.5px;color:var(--ink-2);">${fmtN(pipe.treeCount)} native shade trees (${esc(pipe.treeSpecies)}) along station walkshed (cooling ambient heat by -${pipe.treeTempDrop}°F; +${pipe.treeHomeLift}% property value lift).</div>
+              <div style="font-size:11.5px;color:var(--ink-2);">${pipe.treeCount != null ? `${fmtN(pipe.treeCount)} shade trees${pipe.treeSpecies ? ` (${esc(pipe.treeSpecies)})` : ""}` : "Tree count not on file"} along the station walkshed${pipe.treeHomeLift != null ? ` (+${pipe.treeHomeLift}% property value lift)` : " (value effect not on file)"}.</div>
             </div>
           </label>
 
           <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;font-size:12.5px;">
             <input type="checkbox" id="p3-ev" checked onchange="runP3Sim()" style="margin-top:2px;">
             <div>
-              <b>Station Fast EV Charging Hub (${pipe.evStalls} DC Fast Stalls, ${pipe.evKw} kW)</b>
-              <div style="font-size:11.5px;color:var(--ink-2);">${pipe.evStalls} ultra-fast charging bays with solar canopy; generates ~$${fmtN(pipe.evAnnualMargin)}/yr net charging margin and offsets ${pipe.evCo2Tons} tons CO2/yr.</div>
+              <b>Station Fast EV Charging Hub${pipe.evStalls != null ? ` (${pipe.evStalls} DC Fast Stalls${pipe.evKw != null ? `, ${pipe.evKw} kW` : ""})` : ""}</b>
+              <div style="font-size:11.5px;color:var(--ink-2);">${pipe.evAnnualMargin != null ? `~$${fmtN(pipe.evAnnualMargin)}/yr net charging margin` : "Stalls, margin and emissions: not on file"}.</div>
             </div>
           </label>
 
@@ -7991,7 +8081,7 @@ function p3Section(p, m) {
             <input type="checkbox" id="p3-retail" checked onchange="runP3Sim()" style="margin-top:2px;">
             <div>
               <b>Station Plaza Micro-Retail &amp; Local Bodega / Grocer Hub</b>
-              <div style="font-size:11.5px;color:var(--ink-2);">${fmtN(pipe.plazaRetailSqft)} sq ft active station storefronts; generates $${fmtN(pipe.plazaAnnualRent)}/yr concession revenue and $${fmtN(pipe.localSalesTax)}/yr municipal sales tax.</div>
+              <div style="font-size:11.5px;color:var(--ink-2);">${pipe.plazaRetailSqft != null ? `${fmtN(pipe.plazaRetailSqft)} sq ft station storefronts` : "Storefront area not on file"}${pipe.plazaAnnualRent != null ? `; $${fmtN(pipe.plazaAnnualRent)}/yr concession revenue` : ""}${pipe.localSalesTax != null ? `; $${fmtN(pipe.localSalesTax)}/yr sales tax` : ""}.</div>
             </div>
           </label>
         </div>
@@ -7999,31 +8089,31 @@ function p3Section(p, m) {
         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));gap:8px;margin-bottom:12px;">
           <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px;text-align:center;">
             <div style="font-size:11px;font-weight:700;color:#166534;text-transform:uppercase;">Private Dev IRR</div>
-            <div id="p3-irr" style="font-size:20px;font-weight:800;color:#15803d;margin-top:2px;">15.6%</div>
-            <div id="p3-irr-sub" style="font-size:10px;color:#166534;margin-top:2px;">Target: 14.0%–16.5%</div>
+            <div id="p3-irr" style="font-size:20px;font-weight:800;color:#15803d;margin-top:2px;">Not on file</div>
+            <div id="p3-irr-sub" style="font-size:10px;color:#166534;margin-top:2px;">Needs a published pro-forma</div>
           </div>
 
           <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px;text-align:center;">
             <div style="font-size:11px;font-weight:700;color:#1e40af;text-transform:uppercase;">Public Agency Rev</div>
-            <div id="p3-rev" style="font-size:20px;font-weight:800;color:#1d4ed8;margin-top:2px;">$1.62M / yr</div>
+            <div id="p3-rev" style="font-size:20px;font-weight:800;color:#1d4ed8;margin-top:2px;">Not on file</div>
             <div style="font-size:10px;color:#1e40af;margin-top:2px;">Ground Lease + Concessions</div>
           </div>
 
           <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:8px;padding:10px;text-align:center;">
             <div style="font-size:11px;font-weight:700;color:#6b21a8;text-transform:uppercase;">Property Value Lift</div>
-            <div id="p3-lift" style="font-size:20px;font-weight:800;color:#7e22ce;margin-top:2px;">+12.5%</div>
+            <div id="p3-lift" style="font-size:20px;font-weight:800;color:#7e22ce;margin-top:2px;">Not on file</div>
             <div style="font-size:10px;color:#6b21a8;margin-top:2px;">Corridor Walkshed Homes</div>
           </div>
 
           <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px;text-align:center;">
             <div style="font-size:11px;font-weight:700;color:#92400e;text-transform:uppercase;">Ridership Boost</div>
-            <div id="p3-ridership" style="font-size:20px;font-weight:800;color:#b45309;margin-top:2px;">+54%</div>
+            <div id="p3-ridership" style="font-size:20px;font-weight:800;color:#b45309;margin-top:2px;">Not on file</div>
             <div style="font-size:10px;color:#92400e;margin-top:2px;">Station Boardings</div>
           </div>
         </div>
 
         <div id="p3-notes" style="font-size:11.5px;color:var(--ink-2);background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:8px 10px;line-height:1.4;margin-bottom:8px;">
-          <b>P3 Partnership Structure:</b> Public transit agency contributes land/concession rights via 99-year ground lease with zero taxpayer bond debt for vertical construction. Private capital consortium finances, builds, and manages residential towers & retail, providing guaranteed annual lease revenue back to public transit operations.
+          <b>P3 Partnership Structure (typical model, not this project's terms):</b> the transit agency leases land near a station to a private developer on a long ground lease; the developer finances, builds and manages the homes and shops and pays the agency lease revenue.
         </div>
         <div style="display:flex;gap:6px;margin-bottom:12px;">
           <button type="button" class="story-btn" onclick="copyP3TermSheet()" style="flex:1;background:#0284c7;color:#fff;border:none;padding:7px 12px;font-size:11.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);">
@@ -8047,7 +8137,7 @@ function p3Section(p, m) {
         </details>
 
         <details style="margin-top:8px;border:1px solid #e2e8f0;border-radius:6px;padding:8px 10px;background:#f8fafc;font-size:12px;">
-          <summary style="font-weight:700;cursor:pointer;color:#047857;">Best-Practice Engineering Specs &amp; Implementation Playbook</summary>
+          <summary style="font-weight:700;cursor:pointer;color:#047857;">Best-Practice Engineering Specs &amp; Implementation Playbook (illustrative only: inputs are assumptions, not local data)</summary>
           <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e2e8f0;display:flex;flex-direction:column;gap:8px;">
             <div>
               <b style="color:#0f766e;">Rail-with-Trail Active Greenway:</b> 12-ft paved dual-direction cycleway with 2-ft decomposed granite shoulders, grade-separated rail crossings with automated pedestrian gates, and solar LED pathway lighting. Connects directly to station turnstiles with secure Bikestation lockers.
@@ -9285,7 +9375,8 @@ function serializeLiveAdvisorContext() {
       stories: num(F.stories), units: num(a.Units),
       assessorValue: num(((+a.Roll_LandValue || 0) + (+a.Roll_ImpValue || 0)) || a.Roll_TotalValue),
       lastSale: ah.sale ? { price: ah.sale.price, date: ah.sale.date } : null,
-      valueEstimate: vc.ok && val ? { value: val.estimatedValue, low: val.valueLow, high: val.valueHigh, method: val.valuationMethod } : null,
+      // Range only when the county was back-tested (measured typical error); otherwise low/high are null.
+      valueEstimate: vc.ok && val ? { value: val.estimatedValue, low: ah.valLow != null ? ah.valLow : null, high: ah.valHigh != null ? ah.valHigh : null, method: (val.valuationMethod || "") + (vc.backtested === false ? " (not back-tested in this county)" : "") } : null,
       valueEstimateWithheld: vc.ok ? null : vc.reason,
       flood: floodVal,
       fire: fireVal,
@@ -9932,8 +10023,16 @@ function renderCountyReadinessMatrix(targetFips) {
     safetyGapsMarkup = `<div style="font-size:11px;color:#475569;margin-top:4px;">Regional law enforcement records matched to FBI NIBRS federal reporting schedules.</div>`;
     tifRegimeText = "Municipal Tax-Increment Financing (TIF) & Capital Improvement Program (CIP) Revenue Bonding";
   }
+  // Laws come from statutes.json with their check status, not the typed summaries above.
+  zoningStatutesText = stateLawSummaryText(comp.state);
+  // The assessment rule text above is typed per state; label it from the state's finance profile check.
+  {
+    const prof = (typeof STATE_FINANCE_PROFILES !== "undefined" && STATE_FINANCE_PROFILES) ? STATE_FINANCE_PROFILES[comp.state] : null;
+    const ps = prof && prof.verification && prof.verification.status;
+    assessRatioText += ps === "verified" ? ` (state rule: ${verificationLabel(prof, "statute")})` : " (unverified state rule)";
+  }
 
-  const compsWindowStr = (comp.sales_comps_window && comp.sales_comps_window.length === 2) ?
+  const compsWindowStr =(comp.sales_comps_window && comp.sales_comps_window.length === 2) ?
     `${comp.sales_comps_window[0]} to ${comp.sales_comps_window[1]}` : "2022–2026 Sales Comps Window";
 
   container.innerHTML = `
@@ -11280,30 +11379,8 @@ document.addEventListener("click", (e) => {
 // --- Interactive Leaflet Map Popup for Every House ---
 let houseMapPopup = null;
 function stateReformHeadline(st, m) {
-  st = String(st || "").toUpperCase();
-  const nearTransit = (m.nearest_transit && m.nearest_transit.distance_mi <= 0.5) || (m.din >= 4);
-  if (st === "CA") {
-    return nearTransit ? "<b>AB 2097:</b> 0 parking minimums within ½ mi of transit · <b>SB 9:</b> By-right duplex & lot split" : "<b>SB 9:</b> By-right lot split & duplex permitted · <b>Gov Code § 66310:</b> By-right ADUs";
-  } else if (st === "WA") {
-    return "<b>HB 1110:</b> By-right duplex & 4-plex · <b>HB 1337:</b> Up to 2 ADUs per lot with zero owner-occupancy requirements";
-  } else if (st === "FL") {
-    return "<b>Live Local Act (SB 102/328):</b> By-right commercial-to-residential infill & matching highest allowable density within 1 mi";
-  } else if (st === "TX") {
-    return "<b>Austin HOME Initiative:</b> Up to 3 homes per single-family lot · 2,000 sq ft lot minimums";
-  } else if (st === "CO") {
-    return "<b>HB 24-1152:</b> By-right ADUs statewide · <b>HB 24-1313:</b> Transit-oriented communities density";
-  } else if (st === "MA") {
-    return "<b>MBTA Communities Act:</b> 15 units/acre by-right multifamily zoning near transit";
-  } else if (st === "OR") {
-    return "<b>HB 2001:</b> Middle housing duplexes & cottage clusters permitted by right · <b>CFEC:</b> 0 parking near transit";
-  } else if (st === "AZ") {
-    return "<b>HB 2720 / SB 1415:</b> Statewide ADU by-right legalization & missing-middle urban infill";
-  } else if (st === "IL") {
-    return "<b>Chicago ADU Ordinance:</b> By-right coach houses & conversion units · Transit-served infill density";
-  } else if (st === "NY") {
-    return "<b>NY Pro-Housing Communities:</b> Discretionary infrastructure funding prioritization & by-right infill financing";
-  }
-  return "<b>ADUs and missing-middle housing:</b> no statewide rule on file for this state; the city's or county's code decides.";
+  // Driven by app/data/statutes.json: only laws checked against the statute are described as rules.
+  return stateLawSummaryHtml(st);
 }
 
 function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R, valCheck, valLow, valHigh) {
@@ -11539,16 +11616,7 @@ function exportExecutiveProspectus() {
       <div style="font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;color:#0f172a;border-bottom:1px solid #cbd5e1;padding-bottom:4px;margin-bottom:10px;">
         1. State housing rules (${activeState()})
       </div>
-      ${["TX", "FL", "WA", "CA"].includes(activeState()) ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:12px;line-height:1.5;">
-        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:12px;">
-          <div style="font-weight:800;color:#166534;margin-bottom:4px;">${activeState() === "TX" ? "✓ Texas Missing Middle &amp; Parking Relief (SB 840 / Austin HOME)" : activeState() === "FL" ? "✓ Florida Live Local Act 4.0 Preemption (Fla. Stat. § 166.04151)" : activeState() === "WA" ? "✓ Washington Middle Housing Mandate (HB 1110 / Statewide)" : "✓ Statutory Zero-Parking Exemption (AB 2097 / Statewide)"}</div>
-          <div style="color:#14532d;">${activeState() === "TX" ? "Qualifies under enacted Texas infill statutes authorizing up to 3 residential units by-right on single-family parcels with minimum lot sizes reduced to 2,500 sqft and mandatory parking waivers near transit." : activeState() === "FL" ? "Preempts municipal zoning to allow by-right residential infill up to the highest allowable commercial density without rezoning, accompanied by local parking reductions." : activeState() === "WA" ? "Requires by-right authorization of 2 to 4 residential units per lot (up to 6 units within 0.5 mi of transit), completely prohibiting municipal off-street parking mandates." : "This parcel qualifies for complete by-right elimination of parking minimums for all new residential units within 0.5 mi of major transit stops, saving an estimated <b>$35,000–$50,000</b> in garage construction costs."}</div>
-        </div>
-        <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:6px;padding:12px;">
-          <div style="font-weight:800;color:#0369a1;margin-bottom:4px;">${activeState() === "TX" ? "✓ By-Right Commercial/Office Conversion (Tex. Loc. Gov't Code)" : activeState() === "FL" ? "✓ Middle Housing Infill &amp; 75% Tax Abatement (SB 102/328)" : activeState() === "WA" ? "✓ By-Right Accessory Dwellings (HB 1337 Statewide ADU Law)" : "✓ By-Right ADU &amp; Lot Split Allowance (Gov Code § 66314 / SB 9)"}</div>
-          <div style="color:#0c4a6e;">${activeState() === "TX" ? "Streamlined administrative approval for accessory dwelling units and adaptive residential reuse without public hearings or conditional use permit burdens." : activeState() === "FL" ? "Qualifies for statutory expedited administrative site plan approval and up to a 75% ad valorem property tax exemption on qualifying workforce units." : activeState() === "WA" ? "Authorizes at least two ADUs per lot by-right without owner-occupancy requirements, design-review delays, or utility impact fee surcharges." : "Permits up to a 1,200 sqft detached ADU plus a 500 sqft Junior ADU (JADU) or by-right 2-unit lot split without discretionary zoning board approvals or environmental (CEQA) review."}</div>
-        </div>
-      </div>` : `<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:12px;font-size:12px;line-height:1.5;color:#334155;">No statewide ADU, lot-split or parking rule for ${esc(activeState() || "this state")} is on file in City Pretty. What can be built on this lot is set by the city's or county's zoning code; check with its planning department.</div>`}
+      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:12px;font-size:12px;line-height:1.5;color:#334155;">${stateLawSummaryHtml(activeState())}<div style="margin-top:6px;color:#64748b;">What can be built on this lot is finally set by the city's or county's zoning code; check with its planning department.</div></div>
     </div>
 
     <!-- Section 2: Financial Pro-Forma & Recommended Move -->

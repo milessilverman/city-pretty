@@ -409,8 +409,8 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
     expect(filtered[0].id).toBe("golf_test_1");
   });
 
-  it("15. state-housing-laws.json includes verified Austin HOME and Texas statutes", () => {
-    const filePath = path.join(rootDir, "app/data/state-housing-laws.json");
+  it("15. statutes.json includes verified Austin HOME and Texas statutes", () => {
+    const filePath = path.join(rootDir, "app/data/statutes.json");
     const laws = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
     const austinHome = laws.find((l: any) => l.id === "tx_austin_home");
@@ -565,9 +565,9 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
     }
   });
 
-  it("20. state-housing-laws.json and statutes.json cover nationwide statutory zoning preemptions across 14 states", () => {
+  it("20. statutes.json covers nationwide statutory zoning preemptions across 14 states", () => {
     const statutesPath = path.join(rootDir, "app/data/statutes.json");
-    const stateHousingPath = path.join(rootDir, "app/data/state-housing-laws.json");
+    const stateHousingPath = statutesPath;   // state-housing-laws.json was a duplicate and has been removed
 
     const statutes = JSON.parse(fs.readFileSync(statutesPath, "utf-8"));
     const stateLaws = JSON.parse(fs.readFileSync(stateHousingPath, "utf-8"));
