@@ -10,8 +10,10 @@ import { parcelAt } from "./parcels.ts";
 import {
   cdcPlacesTractHealth,
   censusGeographies,
+  epaWalkabilityIndex,
   geocodeAddress,
   ncesNearbySchools,
+  noaaSeaLevelRise,
   osmNearby,
   OSM_FEATURES,
   pvwattsV8,
@@ -135,6 +137,37 @@ export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
     },
     strict: true,
   },
+  {
+    name: "lookup_walkability_index",
+    description:
+      "Look up the EPA National Walkability Index score (1 to 20, categorized from 'Least Walkable' to 'Most Walkable') and quantile rankings for street intersection density, land use diversity, and transit commute split.",
+    input_schema: {
+      type: "object",
+      properties: {
+        lat: { type: "number", description: "Latitude (WGS84)" },
+        lng: { type: "number", description: "Longitude (WGS84)" },
+      },
+      required: ["lat", "lng"],
+      additionalProperties: false,
+    },
+    strict: true,
+  },
+  {
+    name: "check_sea_level_rise",
+    description:
+      "Screen whether coordinates intersect NOAA Sea Level Rise (SLR) inundation or low-lying coastal flooding zones under 1ft to 10ft scenarios.",
+    input_schema: {
+      type: "object",
+      properties: {
+        lat: { type: "number", description: "Latitude (WGS84)" },
+        lng: { type: "number", description: "Longitude (WGS84)" },
+        scenario_ft: { type: "number", description: "Sea level rise scenario in feet (1 to 10, default: 1)" },
+      },
+      required: ["lat", "lng"],
+      additionalProperties: false,
+    },
+    strict: true,
+  },
   ...(LOCAL_DATA_TOOLS as Anthropic.Beta.BetaTool[]),
 ];
 
@@ -190,6 +223,15 @@ export async function runAdvisorTool(name: string, input: unknown, env: ToolEnv)
     if (!isNum(i.lat) || !isNum(i.lng)) return bad("lat and lng must be numbers");
     const radius = isNum(i.radius_m) ? i.radius_m : 2000;
     return done(await ncesNearbySchools(i.lat, i.lng, radius, f));
+  }
+  if (name === "lookup_walkability_index") {
+    if (!isNum(i.lat) || !isNum(i.lng)) return bad("lat and lng must be numbers");
+    return done(await epaWalkabilityIndex(i.lat, i.lng, f));
+  }
+  if (name === "check_sea_level_rise") {
+    if (!isNum(i.lat) || !isNum(i.lng)) return bad("lat and lng must be numbers");
+    const scenario = isNum(i.scenario_ft) ? i.scenario_ft : 1;
+    return done(await noaaSeaLevelRise(i.lat, i.lng, scenario, f));
   }
   const local = runLocalDataTool(name, i);
   if (local !== undefined) return done(local);

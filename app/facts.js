@@ -288,6 +288,18 @@ export function fromWorker(f) {
     rows.push(ok("Nearby public schools (NCES EDGE)", label, sch.source.publisher, sch.source.url,
       `${v.count} public school(s) within 2 km.`));
   }
+  const wlk = f.walkability;
+  if (wlk && wlk.ok && wlk.value) {
+    const v = wlk.value;
+    rows.push(ok("Walkability (EPA Walkability Index)", `${v.walkability_index} / 20 (${v.category})`, wlk.source.publisher, wlk.source.url,
+      `Block group ${v.block_group_fips || ""} · National Walkability Index (2021)`));
+  }
+  const slr = f.sea_level_rise;
+  if (slr && slr.ok && slr.value) {
+    const v = slr.value;
+    const label = v.in_low_lying_slr_area ? `In ${v.scenario_ft}ft SLR inundation zone` : `Above ${v.scenario_ft}ft SLR inundation zone`;
+    rows.push(ok("Sea level rise (NOAA)", label, slr.source.publisher, slr.source.url, v.notes));
+  }
   return rows;
 }
 

@@ -764,6 +764,123 @@ export async function fhwaNhcci(
 }
 
 // ---------------------------------------------------------------------------------------------------------------
+// EPA National Walkability Index
+// ---------------------------------------------------------------------------------------------------------------
+
+export type EpaWalkabilityResult = {
+  block_group_fips: string;
+  walkability_index: number;
+  category: "Least Walkable" | "Below Average Walkable" | "Above Average Walkable" | "Most Walkable";
+  rankings?: {
+    intersection_density_rank?: number;
+    land_use_mix_rank?: number;
+    employment_diversity_rank?: number;
+    transit_commute_rank?: number;
+  };
+};
+
+export async function epaWalkabilityIndex(
+  lat: number,
+  lng: number,
+  fetcher: FetchLike = fetch
+): Promise<Sourced<EpaWalkabilityResult>> {
+  const url = `https://geodata.epa.gov/arcgis/rest/services/OA/WalkabilityIndex/MapServer/0/query?geometry=${lng},${lat}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=GEOID20,GEOID10,NatWalkInd,D3B_Ranked,D2A_Ranked,D2B_Ranked,D4A_Ranked&returnGeometry=false&f=json`;
+  const source: SourceRef = {
+    name: "EPA National Walkability Index",
+    publisher: "U.S. Environmental Protection Agency (EPA)",
+    url,
+    retrieved_at: now(),
+    vintage: "2021 Release (Census 2020 / Smart Location Database)",
+  };
+  if (!validLatLng(lat, lng)) return fail(source, "Invalid coordinates");
+  try {
+    const d = (await getJson(fetcher, url)) as any;
+    const feat = d?.features?.[0];
+    if (!feat || !feat.attributes) return fail(source, "No EPA Walkability Index feature found for coordinates");
+    const a = feat.attributes;
+    const rawScore = num(a.NatWalkInd);
+    if (rawScore == null) return fail(source, "No NatWalkInd score returned");
+    const score = Number(rawScore.toFixed(2));
+    let category: EpaWalkabilityResult["category"];
+    if (score <= 5.75) category = "Least Walkable";
+    else if (score <= 10.5) category = "Below Average Walkable";
+    else if (score <= 15.25) category = "Above Average Walkable";
+    else category = "Most Walkable";
+
+    return {
+      ok: true,
+      source,
+      value: {
+        block_group_fips: String(a.GEOID20 || a.GEOID10 || "").trim(),
+        walkability_index: score,
+        category,
+        rankings: {
+          intersection_density_rank: num(a.D3B_Ranked) ?? undefined,
+          land_use_mix_rank: num(a.D2A_Ranked) ?? undefined,
+          employment_diversity_rank: num(a.D2B_Ranked) ?? undefined,
+          transit_commute_rank: num(a.D4A_Ranked) ?? undefined,
+        },
+      },
+      notes: [
+        `EPA Walkability Index: ${score} / 20 (${category}). Quantile scores reflect intersection density, diversity of land uses, and transit commute mode split.`,
+      ],
+    };
+  } catch (e) {
+    return fail(source, e);
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// NOAA Sea Level Rise Screening
+// ---------------------------------------------------------------------------------------------------------------
+
+export type NoaaSlrResult = {
+  scenario_ft: number;
+  in_low_lying_slr_area: boolean;
+  layer_name?: string;
+  notes: string;
+};
+
+export async function noaaSeaLevelRise(
+  lat: number,
+  lng: number,
+  scenarioFt: number = 1,
+  fetcher: FetchLike = fetch
+): Promise<Sourced<NoaaSlrResult>> {
+  const allowed = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const ft = allowed.includes(scenarioFt) ? scenarioFt : 1;
+  const url = `https://coast.noaa.gov/arcgis/rest/services/dc_slr/slr_${ft}ft/MapServer/identify?geometry=${lng},${lat}&geometryType=esriGeometryPoint&sr=4326&layers=top&tolerance=1&mapExtent=${lng - 0.01},${lat - 0.01},${lng + 0.01},${lat + 0.01}&imageDisplay=400,400,96&returnGeometry=false&f=json`;
+  const source: SourceRef = {
+    name: `NOAA Sea Level Rise (${ft}ft Scenario)`,
+    publisher: "National Oceanic and Atmospheric Administration (NOAA) Office for Coastal Management",
+    url,
+    retrieved_at: now(),
+    vintage: "NOAA SLR Inundation Viewer (CORS enabled)",
+  };
+  if (!validLatLng(lat, lng)) return fail(source, "Invalid coordinates");
+  try {
+    const d = (await getJson(fetcher, url)) as any;
+    const results = Array.isArray(d?.results) ? d.results : [];
+    const isIn = results.length > 0;
+    const topLayer = results[0]?.layerName || undefined;
+    return {
+      ok: true,
+      source,
+      value: {
+        scenario_ft: ft,
+        in_low_lying_slr_area: isIn,
+        layer_name: topLayer,
+        notes: isIn
+          ? `Point intersects NOAA ${ft}ft Sea Level Rise inundation / low-lying zone.`
+          : `Point does not intersect NOAA ${ft}ft Sea Level Rise inundation zone.`,
+      },
+    };
+  } catch (e) {
+    return fail(source, e);
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------
 // OpenStreetMap via Overpass
 // ---------------------------------------------------------------------------------------------------------------
 
@@ -893,13 +1010,15 @@ export const DEFAULT_ACS_YEAR = Math.max(2024, CURRENT_CALENDAR_YEAR - (new Date
 
 export async function siteFacts(lat: number, lng: number, opts: { censusApiKey?: string; acsYear?: number; fetcher?: FetchLike } = {}) {
   const f = opts.fetcher || fetch;
-  const [geo, elev, flood, nri, seismic, schools] = await Promise.all([
+  const [geo, elev, flood, nri, seismic, schools, walkability, slr] = await Promise.all([
     censusGeographies(lat, lng, f),
     usgsElevation(lat, lng, f),
     femaFloodZone(lat, lng, f),
     femaNationalRiskIndex(lat, lng, f),
     usgsSeismicDesign(lat, lng, f),
     ncesNearbySchools(lat, lng, 2000, f),
+    epaWalkabilityIndex(lat, lng, f),
+    noaaSeaLevelRise(lat, lng, 1, f),
   ]);
   const fmr: Sourced<HudFmr> = geo.ok
     ? hudFairMarketRentForCounty(geo.value.county_fips)
@@ -928,6 +1047,8 @@ export async function siteFacts(lat: number, lng: number, opts: { censusApiKey?:
     national_risk_index: nri,
     seismic_design: seismic,
     nearby_schools: schools,
+    walkability,
+    sea_level_rise: slr,
     health_profile: health,
     acs_tract: acs,
   };

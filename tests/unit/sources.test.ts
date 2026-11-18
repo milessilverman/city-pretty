@@ -9,11 +9,13 @@ import {
   addressMismatch,
   cdcPlacesTractHealth,
   censusGeographies,
+  epaWalkabilityIndex,
   femaFloodZone,
   femaNationalRiskIndex,
   fhwaNhcci,
   googleSolarBuildingInsights,
   ncesNearbySchools,
+  noaaSeaLevelRise,
   pvwattsV8,
   usgsSeismicDesign,
   geocodeAddress,
@@ -51,6 +53,8 @@ const AUSTIN = fakeFetch([
   [/developer\.nlr\.gov\/api\/pvwatts\/v8/, fx("pvwatts_austin.json")],
   [/chronicdata\.cdc\.gov\/resource\/cwsq-ngmh/, fx("cdc_places_austin.json")],
   [/Public_School_Locations_Current/, fx("nces_schools_austin.json")],
+  [/WalkabilityIndex\/MapServer\/0/, fx("epa_walkability_austin.json")],
+  [/dc_slr\/slr_1ft/, fx("noaa_slr_austin.json")],
   [/solar\.googleapis\.com\/v1\/buildingInsights/, fx("google_solar_austin.json")],
   [/data\.transportation\.gov\/resource\/r94d-n4f9/, fx("fhwa_nhcci_latest.json")],
 ]);
@@ -242,6 +246,33 @@ describe("official-source connectors (real captured responses)", () => {
     expect(res.value.base_year_2024_adjustment_factor).toBeCloseTo(0.9823, 3);
   });
 
+  it("epaWalkabilityIndex returns walkability score and category for coordinates", async () => {
+    const res = await epaWalkabilityIndex(30.3005, -97.724, AUSTIN);
+    expect(res.ok).toBe(true);
+    if (!res.ok) return;
+    expect(res.source.publisher).toContain("Environmental Protection Agency");
+    expect(res.value.walkability_index).toBe(18);
+    expect(res.value.category).toBe("Most Walkable");
+    expect(res.value.block_group_fips).toBe("484530003025");
+    expect(res.value.rankings?.intersection_density_rank).toBe(20);
+    expect(res.value.rankings?.land_use_mix_rank).toBe(14);
+  });
+
+  it("noaaSeaLevelRise identifies low-lying SLR zones in coastal areas and negative in inland", async () => {
+    const inland = await noaaSeaLevelRise(30.3005, -97.724, 1, AUSTIN);
+    expect(inland.ok).toBe(true);
+    if (!inland.ok) return;
+    expect(inland.value.in_low_lying_slr_area).toBe(false);
+    expect(inland.value.scenario_ft).toBe(1);
+
+    const miamiFetch = fakeFetch([[/dc_slr\/slr_1ft/, fx("noaa_slr_miami.json")]]);
+    const coastal = await noaaSeaLevelRise(25.79065, -80.13005, 1, miamiFetch);
+    expect(coastal.ok).toBe(true);
+    if (!coastal.ok) return;
+    expect(coastal.value.in_low_lying_slr_area).toBe(true);
+    expect(coastal.value.layer_name).toBe("1ft SLR Low-lying Areas");
+  });
+
   it("parseOsmHeight converts feet/inches, feet, and meters correctly", () => {
     expect(parseOsmHeight("12'6\"")).toBe(3.81);
     expect(parseOsmHeight("10'")).toBe(3.05);
@@ -297,6 +328,16 @@ describe("advisor loop", () => {
     expect(schoolRes.isError).toBe(false);
     expect(schoolRes.sources.map((s) => s.publisher)).toContain("National Center for Education Statistics (NCES)");
     expect(schoolRes.text).toContain("LEE EL");
+
+    const walkRes = await runAdvisorTool("lookup_walkability_index", { lat: 30.3005, lng: -97.724 }, { fetcher: AUSTIN });
+    expect(walkRes.isError).toBe(false);
+    expect(walkRes.sources.map((s) => s.publisher)).toContain("U.S. Environmental Protection Agency (EPA)");
+    expect(walkRes.text).toContain("Most Walkable");
+
+    const slrRes = await runAdvisorTool("check_sea_level_rise", { lat: 30.3005, lng: -97.724, scenario_ft: 1 }, { fetcher: AUSTIN });
+    expect(slrRes.isError).toBe(false);
+    expect(slrRes.sources.some((s) => s.publisher.includes("National Oceanic and Atmospheric Administration"))).toBe(true);
+    expect(slrRes.text).toContain("in_low_lying_slr_area");
   });
 
   it("runs tools, returns all results in one user turn, and returns the final text with sources", async () => {
