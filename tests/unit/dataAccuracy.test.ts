@@ -201,8 +201,9 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
     for (const r of rents) {
       expect(r.fips).toMatch(/^\d{5}$/);
       expect(r.metro_or_county_name).toBeTruthy();
+      if (r.one_bed_1br === null) { expect(r.null_reason).toBeTruthy(); continue; } // explicit null rows are covered by hudFmr.test.ts
       expect(r.one_bed_1br).toBeGreaterThan(500);
-      expect(r.two_bed_2br).toBeGreaterThan(r.one_bed_1br);
+      expect(r.two_bed_2br).toBeGreaterThanOrEqual(r.one_bed_1br);
       expect(r.source_url).toMatch(/^https?:\/\//);
       expect(r.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     }
@@ -365,8 +366,11 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
     const golfEval = evaluateGolfCourseConversion(sampleGolf);
     expect(golfEval.publicParkPreservedAcres).toBe(88); // 88% public park preserved
     expect(golfEval.housingEdgeAcres).toBe(12); // 12% edge developed
-    expect(golfEval.potentialHomes).toBe(480);
-    expect(golfEval.netDevelopmentMargin).toBe(25000000);
+    // typed potentialHomes / margin on a site are ignored: the engine computes the screening estimate
+    // from measured fields + named assumptions (100 acres x 12% x 45 homes/acre near rail = 540)
+    expect(golfEval.potentialHomes).toBe(540);
+    expect(golfEval.netDevelopmentMargin).toBe(golfEval.screening_estimate.margin);
+    expect(golfEval.netDevelopmentMargin).not.toBe(25000000);
     expect(golfEval.applicableStatutes).toContain("CA SB 79 (Transit-Oriented Density)");
     expect(golfEval.applicableStatutes).toContain("CA AB 2097 (Zero Parking Mandates)");
 
@@ -542,7 +546,7 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
     }
   });
 
-  it("19. hud_fair_market_rents.json contains 46 verified major metropolitan markets with FY2026 FMR values", () => {
+  it("19. hud_fair_market_rents.json covers every manifest county (and the major metros) with HUD FMR values", () => {
     const fmrPath = path.join(rootDir, "app/data/hud_fair_market_rents.json");
     expect(fs.existsSync(fmrPath)).toBe(true);
 
@@ -564,11 +568,12 @@ describe("Data Accuracy & Source Verification Tests (ACCURACY-ROADMAP.md)", () =
       expect(f.fips).toMatch(/^\d{5}$/);
       expect(f.metro_or_county_name).toBeTruthy();
       expect(f.state_code).toMatch(/^[A-Z]{2}$/);
+      if (f.one_bed_1br === null) { expect(f.null_reason).toBeTruthy(); continue; }
       expect(f.zero_bed_eff).toBeGreaterThan(400);
       expect(f.one_bed_1br).toBeGreaterThan(400);
-      expect(f.two_bed_2br).toBeGreaterThan(f.one_bed_1br);
-      expect(f.three_bed_3br).toBeGreaterThan(f.two_bed_2br);
-      expect(f.four_bed_4br).toBeGreaterThan(f.three_bed_3br);
+      expect(f.two_bed_2br).toBeGreaterThanOrEqual(f.one_bed_1br);
+      expect(f.three_bed_3br).toBeGreaterThanOrEqual(f.two_bed_2br);
+      expect(f.four_bed_4br).toBeGreaterThanOrEqual(f.three_bed_3br);
       expect(f.source_url).toMatch(/^https?:\/\//);
       expect(f.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     }

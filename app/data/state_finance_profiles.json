@@ -17,9 +17,35 @@
     "climate_energy_regime": "cooling_dominant",
     "statutory_citation": "Ala. Code § 40-8-1 & § 11-99 (TIF Act)",
     "source_url": "https://alison.legislature.state.al.us/code-of-alabama",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "AK": {
     "state_code": "AK",
@@ -39,14 +65,40 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Alaska Stat. § 29.45.110 (Full and True Value)",
     "source_url": "https://www.akleg.gov/basis/statutes.asp#29.45.110",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "AZ": {
     "state_code": "AZ",
     "res_assessment_ratio": 0.1,
-    "comm_assessment_ratio": 0.165,
+    "comm_assessment_ratio": 0.155,
     "annual_assessment_cap": 0.05,
     "uncaps_on_sale": false,
     "reassessment_cycle_years": 1,
@@ -61,9 +113,28 @@
     "climate_energy_regime": "arid_irrigation_limited",
     "statutory_citation": "Ariz. Rev. Stat. § 42-13301 (5% LPV Cap) & § 42-6201 (GPLET)",
     "source_url": "https://www.azleg.gov/ars/42/13301.htm",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": "2026-11-18",
+    "last_verified": "2026-11-18",
+    "verified_by": "hand check against primary text, 2026-11-18",
+    "comm_assessment_ratio_note": "class one ratio for valuation year 2026 is 15.5%; 15.0% from valuation year 2027 (previous record 16.5% was the 2024 ratio)",
+    "verification": {
+      "status": "partly",
+      "checked": "2026-11-18",
+      "evidence_url": "https://www.azleg.gov/ars/42/15001.htm",
+      "evidence_quote": "A.R.S. 42-15001: class one \"Sixteen percent ... through December 31, 2025. 15. Fifteen and one-half percent beginning from and after December 31, 2025 through December 31, 2026. 17. Fifteen percent beginning from and after December 31, 2026\"; 42-15003/15004: 10% for classes three and four; 42-13301: limited property value = prior \"plus five per cent\"",
+      "fields_unconfirmed": [
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name"
+      ]
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "AR": {
     "state_code": "AR",
@@ -83,9 +154,35 @@
     "climate_energy_regime": "cooling_dominant",
     "statutory_citation": "Ark. Code Ann. § 26-26-1201 & Amend. 79 (5% Cap)",
     "source_url": "https://www.dfa.arkansas.gov/",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "CA": {
     "state_code": "CA",
@@ -105,9 +202,28 @@
     "climate_energy_regime": "mixed_temperate",
     "statutory_citation": "Cal. Const. art. XIII A (Prop 13), RTC § 51 & Gov. Code § 53398.50 (EIFD)",
     "source_url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=51.&lawCode=RTC",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": "2026-11-18",
+    "last_verified": "2026-11-18",
+    "verified_by": "hand check against primary text, 2026-11-18",
+    "verification": {
+      "status": "verified",
+      "checked": "2026-11-18",
+      "evidence_url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+      "evidence_quote": "Rev. & Tax. Code 51(a)(1)(D): \"In no event shall the percentage increase ... exceed 2 percent of the prior year's value.\" RTC 110.1: base year value reset on \"purchase or change in ownership\"; RTC 218(a): \"seven thousand dollars ($7,000) of the full value of the dwelling\"",
+      "fields_unconfirmed": [
+        "tif_vehicle_name",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime",
+        "non_pledgeable_share"
+      ]
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "CO": {
     "state_code": "CO",
@@ -127,9 +243,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Colo. Const. art. X, § 3 & SB 24-233 (Biennial Assessment)",
     "source_url": "https://leg.colorado.gov/bills/sb24-233",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "CT": {
     "state_code": "CT",
@@ -149,9 +291,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Conn. Gen. Stat. § 12-62a (70% Uniform Ratio) & § 8-124 (TIF)",
     "source_url": "https://www.cga.ct.gov/current/pub/chap_203.htm#sec_12-62a",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "DE": {
     "state_code": "DE",
@@ -171,9 +339,35 @@
     "climate_energy_regime": "mixed_temperate",
     "statutory_citation": "Del. Code Ann. tit. 9, § 8301 & tit. 22, § 1701 (TIF)",
     "source_url": "https://delcode.delaware.gov/title9/c083/sc01/index.html",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "DC": {
     "state_code": "DC",
@@ -193,9 +387,35 @@
     "climate_energy_regime": "mixed_temperate",
     "statutory_citation": "D.C. Code § 47-820 (100% Market Value) & § 2-1217.01 (TIF)",
     "source_url": "https://code.dccouncil.gov/us/dc/council/code/sections/47-820",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "FL": {
     "state_code": "FL",
@@ -215,9 +435,29 @@
     "climate_energy_regime": "cooling_dominant",
     "statutory_citation": "Fla. Const. art. VII, § 4(d) (SOH 3% Cap), Fla. Stat. § 163 (CRA) & § 196.1979",
     "source_url": "https://www.flsenate.gov/Laws/Statutes/2026/163.387",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": "2026-11-18",
+    "last_verified": "2026-11-18",
+    "verified_by": "hand check against primary text, 2026-11-18",
+    "annual_assessment_cap_scope": "homestead only; lesser of 3% or CPI change",
+    "verification": {
+      "status": "partly",
+      "checked": "2026-11-18",
+      "evidence_url": "http://www.leg.state.fl.us/statutes/index.cfm?Mode=Constitution&Submenu=3&Tab=statutes",
+      "evidence_quote": "Art. VII s. 4(d): \"changes in assessments shall not exceed the lower of the following: a. Three percent (3%) of the assessment for the prior year. b. The percent change in the Consumer Price Index\"",
+      "fields_unconfirmed": [
+        "uncaps_on_sale",
+        "homestead_exemption_rule amount",
+        "reassessment_cycle_years",
+        "non-homestead 10% cap not modelled",
+        "tif_vehicle_name"
+      ]
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "GA": {
     "state_code": "GA",
@@ -237,9 +477,35 @@
     "climate_energy_regime": "cooling_dominant",
     "statutory_citation": "O.C.G.A. § 48-5-7 (40% Ratio) & § 36-44 (TAD / Redevelopment Powers)",
     "source_url": "https://law.justia.com/codes/georgia/title-48/chapter-5/article-1/section-48-5-7/",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "HI": {
     "state_code": "HI",
@@ -259,9 +525,35 @@
     "climate_energy_regime": "cooling_dominant",
     "statutory_citation": "Haw. Rev. Stat. § 246 (Real Property Tax) & § 46-101 (TIF)",
     "source_url": "https://www.capitol.hawaii.gov/hrscurrent/Vol04_Ch0201-0257/HRS0246/",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "ID": {
     "state_code": "ID",
@@ -281,9 +573,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Idaho Code § 63-205 (Market Value) & § 50-2901 (Urban Renewal / TIF)",
     "source_url": "https://legislature.idaho.gov/statutesrules/idstat/title63/t63ch6/sect63-602g/",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "IL": {
     "state_code": "IL",
@@ -303,9 +621,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "35 ILCS 200/ (Cook Triennial Ratio) & 65 ILCS 5/11-74.4 (TIF Act)",
     "source_url": "https://www.ilga.gov/legislation/ilcs/ilcs4.asp?DocName=006500050HArt.+11+Div.+74.4",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "IN": {
     "state_code": "IN",
@@ -325,9 +669,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Ind. Code § 6-1.1-20.6 (1% Circuit Breaker) & § 36-7-14 (TIF)",
     "source_url": "https://iga.in.gov/laws/current/ic/title/6/article/1.1/chapter/20.6/",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "IA": {
     "state_code": "IA",
@@ -347,9 +717,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Iowa Code § 441.21 (Rollback Assessment) & § 403 (Urban Renewal / TIF)",
     "source_url": "https://www.legis.iowa.gov/docs/ico/chapter/441.pdf",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "KS": {
     "state_code": "KS",
@@ -369,9 +765,35 @@
     "climate_energy_regime": "mixed_temperate",
     "statutory_citation": "Kan. Stat. Ann. § 79-1439 (11.5% Res Ratio) & § 12-1770 (TIF)",
     "source_url": "https://www.ksrevisor.org/statutes/chapters/ch79/079_014_0039.html",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "KY": {
     "state_code": "KY",
@@ -391,9 +813,35 @@
     "climate_energy_regime": "mixed_temperate",
     "statutory_citation": "Ky. Rev. Stat. § 132.191 (Fair Cash Value) & § 65.7041 (TIF)",
     "source_url": "https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=51664",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "LA": {
     "state_code": "LA",
@@ -413,9 +861,35 @@
     "climate_energy_regime": "cooling_dominant",
     "statutory_citation": "La. Const. art. VII, § 18 (10% Res Ratio) & La. R.S. § 33:9038.31 (TIF)",
     "source_url": "https://legis.la.gov/legis/Law.aspx?d=206538",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "ME": {
     "state_code": "ME",
@@ -435,9 +909,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Me. Rev. Stat. tit. 36, § 708 & tit. 30-A, § 5221 (Municipal TIF)",
     "source_url": "https://legislature.maine.gov/statutes/36/title36sec708.html",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "MD": {
     "state_code": "MD",
@@ -457,9 +957,35 @@
     "climate_energy_regime": "mixed_temperate",
     "statutory_citation": "Md. Code Ann., Tax-Prop. § 8-103 (Triennial Cycle) & Econ. Dev. § 12-201 (TIF)",
     "source_url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtp&section=9-105",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "MA": {
     "state_code": "MA",
@@ -479,9 +1005,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Mass. Gen. Laws ch. 59, § 2A (Prop 2½) & ch. 40Q (DIF)",
     "source_url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIX/Chapter59/Section2A",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "MI": {
     "state_code": "MI",
@@ -501,9 +1053,27 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Mich. Const. art. IX, § 3 (Proposal A / Headlee), MCL 211.27a & PA 57 (TIF)",
     "source_url": "https://www.legislature.mi.gov/statutes/mcl-211-27a",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": "2026-11-18",
+    "last_verified": "2026-11-18",
+    "verified_by": "hand check against primary text, 2026-11-18",
+    "annual_assessment_cap_scope": "lesser of 5% or inflation rate; resets to current value on transfer",
+    "verification": {
+      "status": "partly",
+      "checked": "2026-11-18",
+      "evidence_url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-Article-IX-3",
+      "evidence_quote": "Const. art. IX s. 3: assessed proportion \"shall not, after January 1, 1966, exceed 50 percent\"; taxable value increases limited to \"the lesser of 1.05 or the inflation rate\" until ownership transfer (MCL 211.27a)",
+      "fields_unconfirmed": [
+        "homestead_exemption_rule",
+        "reassessment_cycle_years",
+        "tif_vehicle_name"
+      ]
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "MN": {
     "state_code": "MN",
@@ -523,9 +1093,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Minn. Stat. § 273.13 (Class 1a Classification) & § 469.174 (TIF)",
     "source_url": "https://www.revisor.mn.gov/statutes/cite/273.13",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "MS": {
     "state_code": "MS",
@@ -545,9 +1141,35 @@
     "climate_energy_regime": "cooling_dominant",
     "statutory_citation": "Miss. Code Ann. § 27-35-4 (Class I 10% Ratio) & § 21-45-1 (TIF)",
     "source_url": "https://www.dor.ms.gov/property",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "MO": {
     "state_code": "MO",
@@ -567,9 +1189,35 @@
     "climate_energy_regime": "mixed_temperate",
     "statutory_citation": "Mo. Rev. Stat. § 137.115 (19% Res Ratio) & § 99.800 (Real Property TIF)",
     "source_url": "https://revisor.mo.gov/main/OneSection.aspx?section=137.115",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "MT": {
     "state_code": "MT",
@@ -589,9 +1237,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Mont. Code Ann. § 15-7-111 (Biennial Market Appraisal) & § 7-15-4282 (TEDD/TIF)",
     "source_url": "https://leg.mt.gov/bills/mca/title_0150/chapter_0070/part_0010/section_0110/0150-0070-0010-0110.html",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "NE": {
     "state_code": "NE",
@@ -611,9 +1285,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Neb. Rev. Stat. § 77-201 (100% Market Value) & § 18-2101 (Community Development TIF)",
     "source_url": "https://nebraskalegislature.gov/laws/statutes.php?statute=77-201",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "NV": {
     "state_code": "NV",
@@ -633,9 +1333,35 @@
     "climate_energy_regime": "arid_irrigation_limited",
     "statutory_citation": "Nev. Rev. Stat. § 361.225 (35% Taxable Ratio), § 361.4723 (3% Abatement) & § 278C (TIF)",
     "source_url": "https://www.leg.state.nv.us/nrs/nrs-361.html",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "NH": {
     "state_code": "NH",
@@ -655,9 +1381,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "N.H. Rev. Stat. Ann. § 75:1 (100% Full and True Value) & § 162-K (TIF)",
     "source_url": "https://www.gencourt.state.nh.us/rsa/html/V/75/75-1.htm",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "NJ": {
     "state_code": "NJ",
@@ -677,9 +1429,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "N.J. Stat. Ann. § 54:4-23 (True Value) & § 52:27D-489 (ERB / TIF)",
     "source_url": "https://lis.njleg.state.nj.us/",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "NM": {
     "state_code": "NM",
@@ -699,9 +1477,35 @@
     "climate_energy_regime": "arid_irrigation_limited",
     "statutory_citation": "N.M. Stat. Ann. § 7-36-21.2 (3% Cap) & § 5-15-1 (TIDD Act)",
     "source_url": "https://laws.nmonesource.com/w/nmos/Chapter-7-NMSA-1978#!fragment/zoupio-_Toc140502128",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "NY": {
     "state_code": "NY",
@@ -721,9 +1525,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "N.Y. Real Prop. Tax Law § 1805 (Assessment Caps) & Gen. Mun. Law § 970-a (TIF)",
     "source_url": "https://www.nysenate.gov/legislation/laws/RPT/1805",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "NC": {
     "state_code": "NC",
@@ -731,7 +1561,7 @@
     "comm_assessment_ratio": 1,
     "annual_assessment_cap": null,
     "uncaps_on_sale": false,
-    "reassessment_cycle_years": 4,
+    "reassessment_cycle_years": 8,
     "homestead_exemption_rule": {
       "type": "none",
       "amount_or_pct": 0
@@ -743,9 +1573,26 @@
     "climate_energy_regime": "cooling_dominant",
     "statutory_citation": "N.C. Gen. Stat. § 105-286 (Octennial Cycle) & § 159-101 (Project Development Financing)",
     "source_url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_105/GS_105-286.html",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": "2026-11-18",
+    "last_verified": "2026-11-18",
+    "verified_by": "hand check against primary text, 2026-11-18",
+    "reassessment_cycle_note": "statutory maximum interval is 8 years; counties may reappraise sooner (previous record said 4)",
+    "verification": {
+      "status": "partly",
+      "checked": "2026-11-18",
+      "evidence_url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_105/GS_105-286.html",
+      "evidence_quote": "G.S. 105-286(a): \"Each county must reappraise all real property ... every eighth year thereafter, unless the county is required to advance the date ... or chooses to advance the date\"",
+      "fields_unconfirmed": [
+        "res_assessment_ratio (100% of market value not read)",
+        "tif_vehicle_name"
+      ]
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "ND": {
     "state_code": "ND",
@@ -765,9 +1612,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "N.D. Cent. Code § 57-02-27 (50% True Value) & § 40-58 (Urban Renewal / TIF)",
     "source_url": "https://www.ndlegis.gov/cencode/t57c02.pdf",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "OH": {
     "state_code": "OH",
@@ -787,9 +1660,26 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Ohio Rev. Code § 5713.03 (35% Taxable Value), HB 920 & § 5709.40 (TIF)",
     "source_url": "https://codes.ohio.gov/ohio-revised-code/section-5713.03",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": "2026-11-18",
+    "last_verified": "2026-11-18",
+    "verified_by": "hand check against primary text, 2026-11-18",
+    "verification": {
+      "status": "partly",
+      "checked": "2026-11-18",
+      "evidence_url": "https://codes.ohio.gov/ohio-revised-code/section-5715.01",
+      "evidence_quote": "R.C. 5715.01: assessment percentage \"shall not exceed thirty-five per cent\"",
+      "fields_unconfirmed": [
+        "reassessment_cycle_years (3 in record; not confirmed)",
+        "homestead_exemption_rule",
+        "tif_vehicle_name"
+      ]
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "OK": {
     "state_code": "OK",
@@ -809,9 +1699,35 @@
     "climate_energy_regime": "cooling_dominant",
     "statutory_citation": "Okla. Const. art. X, § 8B (5% Cap) & 62 O.S. § 850 (Local Development Act / TIF)",
     "source_url": "https://oksenate.gov/about/constitution/article-x/section-8b",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "OR": {
     "state_code": "OR",
@@ -831,9 +1747,35 @@
     "climate_energy_regime": "mixed_temperate",
     "statutory_citation": "Or. Const. art. XI, § 11 (Measure 50 3% Cap, ORS 308.146) & ORS 457 (Urban Renewal)",
     "source_url": "https://www.oregonlegislature.gov/bills_laws/ors/ors308.html",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "PA": {
     "state_code": "PA",
@@ -853,9 +1795,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "53 Pa. Cons. Stat. § 8811 (Common Level Ratio) & 53 P.S. § 6930 (TIF Act)",
     "source_url": "https://www.legis.state.pa.us/cfdocs/legis/LI/consCheck.cfm?txtType=HTM&ttl=53",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "RI": {
     "state_code": "RI",
@@ -875,9 +1843,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "R.I. Gen. Laws § 44-5-11.6 (Cyclical Revaluation) & § 45-33.2 (TIF)",
     "source_url": "https://webserver.rilegislature.gov/Statutes/TITLE44/44-5/44-5-11.6.htm",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "SC": {
     "state_code": "SC",
@@ -897,9 +1891,35 @@
     "climate_energy_regime": "cooling_dominant",
     "statutory_citation": "S.C. Code Ann. § 12-43-220 (4% Res Ratio, 15% 5-Yr Cap) & § 31-6 (TIF Act)",
     "source_url": "https://www.scstatehouse.gov/code/t12c043.php",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "SD": {
     "state_code": "SD",
@@ -919,9 +1939,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "S.D. Codified Laws § 10-6-104 (85% Factor) & § 11-9 (TID / TIF)",
     "source_url": "https://sdlegislature.gov/Statutes/10-6-104",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "TN": {
     "state_code": "TN",
@@ -941,15 +1987,41 @@
     "climate_energy_regime": "cooling_dominant",
     "statutory_citation": "Tenn. Code Ann. § 67-5-801 (25% Res Ratio) & § 13-20-205 (Housing & Redevelopment TIF)",
     "source_url": "https://www.tn.gov/comptroller/divisions/property-assessments/assessment.html",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "TX": {
     "state_code": "TX",
     "res_assessment_ratio": 1,
     "comm_assessment_ratio": 1,
-    "annual_assessment_cap": null,
+    "annual_assessment_cap": 0.1,
     "uncaps_on_sale": true,
     "reassessment_cycle_years": 1,
     "homestead_exemption_rule": {
@@ -963,9 +2035,29 @@
     "climate_energy_regime": "cooling_dominant",
     "statutory_citation": "Tex. Tax Code § 23.23 (10% Cap), § 311 (TIRZ) & Tex. Const. art. VIII, § 1-b",
     "source_url": "https://statutes.capitol.texas.gov/Docs/TX/htm/TX.23.htm",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": "2026-11-18",
+    "last_verified": "2026-11-18",
+    "verified_by": "hand check against primary text, 2026-11-18",
+    "annual_assessment_cap_scope": "residence homestead (10%); other qualifying real property 20% under Tax Code 23.231; previous record had no cap",
+    "verification": {
+      "status": "partly",
+      "checked": "2026-11-18",
+      "evidence_url": "https://texas.public.law/statutes/tex._tax_code_section_23.23",
+      "evidence_quote": "Tax Code 23.23: appraised value may not exceed the lesser of market value or \"(A) 10 percent of the appraised value of the property for the preceding tax year ... plus new improvements\" (residence homestead); 23.231 applies 20 percent to other qualifying real property; 23.01: \"all taxable property is appraised at its market value as of January 1\"",
+      "fields_unconfirmed": [
+        "uncaps_on_sale",
+        "reassessment_cycle_years (statute requires reappraisal at least every 3 years; not read)",
+        "homestead_exemption_rule amount",
+        "tif_vehicle_name",
+        "non_pledgeable_share"
+      ]
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "UT": {
     "state_code": "UT",
@@ -985,9 +2077,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Utah Code § 59-2-103 (45% Primary Res Exemption) & § 17C (CRA / TIF)",
     "source_url": "https://le.utah.gov/xcode/Title59/Chapter2/59-2-S103.html",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "VT": {
     "state_code": "VT",
@@ -1007,9 +2125,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Vt. Stat. Ann. tit. 32, § 3481 (100% FMV / 1% Grand List) & tit. 24, § 1891 (TIF)",
     "source_url": "https://legislature.vermont.gov/statutes/section/32/121/03481",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "VA": {
     "state_code": "VA",
@@ -1029,9 +2173,26 @@
     "climate_energy_regime": "mixed_temperate",
     "statutory_citation": "Va. Code Ann. § 58.1-3201 (100% FMV) & § 58.1-3245 (TIF)",
     "source_url": "https://law.lis.virginia.gov/vacode/title58.1/chapter32/section58.1-3201/",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": "2026-11-18",
+    "last_verified": "2026-11-18",
+    "verified_by": "hand check against primary text, 2026-11-18",
+    "verification": {
+      "status": "partly",
+      "checked": "2026-11-18",
+      "evidence_url": "https://law.lis.virginia.gov/vacode/title58.1/chapter32/section58.1-3201/",
+      "evidence_quote": "Va. Code 58.1-3201: reassessments \"shall be made at 100 percent fair market value\"",
+      "fields_unconfirmed": [
+        "reassessment_cycle_years (varies 1-6 years by locality; not read)",
+        "uncaps_on_sale",
+        "tif_vehicle_name"
+      ]
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "WA": {
     "state_code": "WA",
@@ -1051,9 +2212,26 @@
     "climate_energy_regime": "mixed_temperate",
     "statutory_citation": "Wash. Rev. Code § 84.41.030 (Annual Revaluation), § 84.55.010 & § 39.114 (TIF)",
     "source_url": "https://app.leg.wa.gov/rcw/default.aspx?cite=84.55.010",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": "2026-11-18",
+    "last_verified": "2026-11-18",
+    "verified_by": "hand check against primary text, 2026-11-18",
+    "verification": {
+      "status": "partly",
+      "checked": "2026-11-18",
+      "evidence_url": "https://app.leg.wa.gov/RCW/default.aspx?cite=84.41.030",
+      "evidence_quote": "RCW 84.41.030: \"All taxable real property within a county must be revalued annually, and all taxable real property within a county must be physically inspected at least once every six years\"; RCW 84.55.005 limit factor \"one hundred one percent\" applies to levies, not assessed values",
+      "fields_unconfirmed": [
+        "res_assessment_ratio (RCW 84.40.030 not fetched)",
+        "homestead_exemption_rule",
+        "tif_vehicle_name"
+      ]
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "WV": {
     "state_code": "WV",
@@ -1073,9 +2251,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "W. Va. Code § 11-3-1 (60% Assessment Ratio) & § 7-11B (Property TIF Act)",
     "source_url": "https://code.wvlegislature.gov/11-3-1/",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "WI": {
     "state_code": "WI",
@@ -1095,9 +2299,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Wis. Stat. § 70.05 (100% Full Market Value) & § 66.1105 (TID / TIF Law)",
     "source_url": "https://docs.legis.wisconsin.gov/statutes/statutes/66/xi/1105",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "WY": {
     "state_code": "WY",
@@ -1117,9 +2347,35 @@
     "climate_energy_regime": "heating_dominant",
     "statutory_citation": "Wyo. Stat. Ann. § 39-13-103 (9.5% Res Ratio, 2024 HB 45 4% Cap) & § 15-9 (TIF)",
     "source_url": "https://wyoleg.gov/statutes/compress/title39.pdf",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   },
   "PR": {
     "state_code": "PR",
@@ -1139,8 +2395,34 @@
     "climate_energy_regime": "cooling_dominant",
     "statutory_citation": "21 L.P.R.A. § 5001 (CRIM Municipal Revenue Collection Center)",
     "source_url": "https://portal.crimpr.net/",
-    "retrieved": "2026-11-15",
-    "last_verified": "2026-11-15",
-    "verified_by": "state_statute_database"
+    "retrieved": null,
+    "last_verified": null,
+    "verified_by": null,
+    "verification": {
+      "status": "unverified",
+      "checked": "2026-11-18",
+      "evidence_url": null,
+      "evidence_quote": null,
+      "fields_unconfirmed": [
+        "res_assessment_ratio",
+        "comm_assessment_ratio",
+        "annual_assessment_cap",
+        "uncaps_on_sale",
+        "reassessment_cycle_years",
+        "homestead_exemption_rule",
+        "tif_vehicle_name",
+        "non_pledgeable_share",
+        "rsmeans_cost_multiplier",
+        "tree_capital_cost_usd",
+        "climate_energy_regime"
+      ],
+      "note": "values carried over from an earlier build; not checked against the state revenue department or statute in this pass"
+    },
+    "unverified_non_tax_fields": [
+      "rsmeans_cost_multiplier",
+      "tree_capital_cost_usd",
+      "climate_energy_regime",
+      "non_pledgeable_share"
+    ]
   }
 }
