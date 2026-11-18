@@ -12,6 +12,7 @@ import {
   epaWalkabilityIndex,
   femaFloodZone,
   femaNationalRiskIndex,
+  fhfaTractHpi,
   fhwaNhcci,
   googleSolarBuildingInsights,
   ncesNearbySchools,
@@ -57,6 +58,7 @@ const AUSTIN = fakeFetch([
   [/dc_slr\/slr_1ft/, fx("noaa_slr_austin.json")],
   [/solar\.googleapis\.com\/v1\/buildingInsights/, fx("google_solar_austin.json")],
   [/data\.transportation\.gov\/resource\/r94d-n4f9/, fx("fhwa_nhcci_latest.json")],
+  [/fhfa\.gov\/hpi\/download\/annual\/hpi_at_tract/, fx("fhfa_hpi_austin.json")],
 ]);
 
 describe("official-source connectors (real captured responses)", () => {
@@ -246,6 +248,35 @@ describe("official-source connectors (real captured responses)", () => {
     expect(res.value.base_year_2024_adjustment_factor).toBeCloseTo(0.9823, 3);
   });
 
+  it("fhfaTractHpi returns annual house price index history, 1-yr change, 5-yr CAGR, and 10-yr appreciation", async () => {
+    const res = await fhfaTractHpi("48453000302", AUSTIN);
+    expect(res.ok).toBe(true);
+    if (!res.ok) return;
+    expect(res.source.publisher).toContain("Federal Housing Finance Agency");
+    expect(res.value.tract_fips).toBe("48453000302");
+    expect(res.value.state_abbr).toBe("TX");
+    expect(res.value.latest_year).toBe(2025);
+    expect(res.value.latest_hpi).toBe(954.01);
+    expect(res.value.annual_change_pct).toBe(13.28);
+    expect(res.value.five_year_appreciation_pct).toBe(47.14);
+    expect(res.value.five_year_cagr_pct).toBe(8.03);
+    expect(res.value.ten_year_appreciation_pct).toBe(87.8);
+    expect(res.value.history.length).toBe(35);
+
+    // Also verify CSV parsing path
+    const sampleCsv = `tract,state_abbr,year,annual_change,hpi,hpi1990,hpi2000
+48453000302,TX,2015,5.92,508.00,,213.84
+48453000302,TX,2020,5.72,648.37,,272.93
+48453000302,TX,2024,-8.45,842.18,,354.51
+48453000302,TX,2025,13.28,954.01,,401.59`;
+    const csvFetcher = async () => new Response(sampleCsv, { status: 200, headers: { "Content-Type": "text/csv" } });
+    const csvRes = await fhfaTractHpi("48453000302", csvFetcher);
+    expect(csvRes.ok).toBe(true);
+    if (!csvRes.ok) return;
+    expect(csvRes.value.latest_hpi).toBe(954.01);
+    expect(csvRes.value.ten_year_appreciation_pct).toBe(87.8);
+  });
+
   it("epaWalkabilityIndex returns walkability score and category for coordinates", async () => {
     const res = await epaWalkabilityIndex(30.3005, -97.724, AUSTIN);
     expect(res.ok).toBe(true);
@@ -338,6 +369,12 @@ describe("advisor loop", () => {
     expect(slrRes.isError).toBe(false);
     expect(slrRes.sources.some((s) => s.publisher.includes("National Oceanic and Atmospheric Administration"))).toBe(true);
     expect(slrRes.text).toContain("in_low_lying_slr_area");
+
+    const hpiRes = await runAdvisorTool("lookup_hpi_appreciation", { tract_fips: "48453000302" }, { fetcher: AUSTIN });
+    expect(hpiRes.isError).toBe(false);
+    expect(hpiRes.sources.map((s) => s.publisher)).toContain("Federal Housing Finance Agency (FHFA)");
+    expect(hpiRes.text).toContain("954.01");
+    expect(hpiRes.text).toContain("87.8");
   });
 
   it("runs tools, returns all results in one user turn, and returns the final text with sources", async () => {

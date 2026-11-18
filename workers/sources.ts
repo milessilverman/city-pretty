@@ -764,6 +764,143 @@ export async function fhwaNhcci(
 }
 
 // ---------------------------------------------------------------------------------------------------------------
+// FHFA House Price Index (tract-level annual)
+// ---------------------------------------------------------------------------------------------------------------
+
+export type FhfaHpiPoint = {
+  year: number;
+  hpi: number;
+  annual_change_pct: number | null;
+  hpi2000?: number | null;
+};
+
+export type FhfaTractHpiResult = {
+  tract_fips: string;
+  state_abbr?: string | null;
+  latest_year: number;
+  latest_hpi: number;
+  annual_change_pct: number | null;
+  five_year_appreciation_pct: number | null;
+  five_year_cagr_pct: number | null;
+  ten_year_appreciation_pct: number | null;
+  history: FhfaHpiPoint[];
+};
+
+export const FHFA_HPI_URL = "https://www.fhfa.gov/hpi/download/annual/hpi_at_tract.csv";
+
+export async function fhfaTractHpi(
+  tractFips: string,
+  fetcher: FetchLike = fetch,
+  urlOverride?: string
+): Promise<Sourced<FhfaTractHpiResult>> {
+  const cleanFips = String(tractFips || "").replace(/\D/g, "");
+  const url = urlOverride || FHFA_HPI_URL;
+  const source: SourceRef = {
+    name: "FHFA House Price Index (tract-level annual)",
+    publisher: "Federal Housing Finance Agency (FHFA)",
+    url,
+    retrieved_at: now(),
+    vintage: "Annual Tract-Level HPI (1975–present)",
+  };
+  if (cleanFips.length !== 11) return fail(source, `Invalid 11-digit Census tract FIPS: ${tractFips}`);
+
+  try {
+    const res = await fetcher(url, {
+      signal: AbortSignal.timeout(20000),
+      headers: { "User-Agent": UA, Accept: "application/json, text/csv, text/plain" },
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status} from ${new URL(url).host}`);
+    const text = await res.text();
+
+    let records: Array<{ tract: string; state_abbr?: string; year: number; annual_change: number | null; hpi: number; hpi2000?: number | null }> = [];
+    const trimmed = text.trim();
+    if (trimmed.startsWith("[") || trimmed.startsWith("{")) {
+      const parsed = JSON.parse(trimmed);
+      const arr = Array.isArray(parsed) ? parsed : parsed.records || parsed.data || [];
+      records = arr
+        .filter((r: any) => String(r.tract || "").replace(/\D/g, "") === cleanFips)
+        .map((r: any) => ({
+          tract: cleanFips,
+          state_abbr: r.state_abbr || r.state,
+          year: Number(r.year),
+          annual_change: num(r.annual_change ?? r.annual_change_pct),
+          hpi: num(r.hpi) ?? 0,
+          hpi2000: num(r.hpi2000),
+        }));
+    } else {
+      const lines = text.split(/\r?\n/);
+      for (const line of lines) {
+        if (!line.includes(cleanFips)) continue;
+        const parts = line.split(",").map((p) => p.trim());
+        if (parts[0] === cleanFips) {
+          records.push({
+            tract: cleanFips,
+            state_abbr: parts[1] || undefined,
+            year: Number(parts[2]),
+            annual_change: num(parts[3]),
+            hpi: num(parts[4]) ?? 0,
+            hpi2000: num(parts[6]),
+          });
+        }
+      }
+    }
+
+    if (!records.length) return fail(source, `No FHFA HPI records found for tract ${cleanFips}`);
+
+    records.sort((a, b) => a.year - b.year);
+
+    const history: FhfaHpiPoint[] = records.map((r) => ({
+      year: r.year,
+      hpi: r.hpi,
+      annual_change_pct: r.annual_change,
+      hpi2000: r.hpi2000,
+    }));
+
+    const latest = history[history.length - 1];
+    const latestYear = latest.year;
+    const latestHpi = latest.hpi;
+
+    const prior1 = history.find((p) => p.year === latestYear - 1);
+    const annualChange = latest.annual_change_pct != null
+      ? latest.annual_change_pct
+      : prior1 && prior1.hpi > 0
+      ? Number((((latestHpi - prior1.hpi) / prior1.hpi) * 100).toFixed(2))
+      : null;
+
+    const prior5 = history.find((p) => p.year === latestYear - 5);
+    const fiveYearAppreciation = prior5 && prior5.hpi > 0
+      ? Number((((latestHpi - prior5.hpi) / prior5.hpi) * 100).toFixed(2))
+      : null;
+    const fiveYearCagr = prior5 && prior5.hpi > 0 && latestHpi > 0
+      ? Number(((Math.pow(latestHpi / prior5.hpi, 1 / 5) - 1) * 100).toFixed(2))
+      : null;
+
+    const prior10 = history.find((p) => p.year === latestYear - 10);
+    const tenYearAppreciation = prior10 && prior10.hpi > 0
+      ? Number((((latestHpi - prior10.hpi) / prior10.hpi) * 100).toFixed(2))
+      : null;
+
+    return {
+      ok: true,
+      source,
+      value: {
+        tract_fips: cleanFips,
+        state_abbr: records[0].state_abbr || null,
+        latest_year: latestYear,
+        latest_hpi: latestHpi,
+        annual_change_pct: annualChange,
+        five_year_appreciation_pct: fiveYearAppreciation,
+        five_year_cagr_pct: fiveYearCagr,
+        ten_year_appreciation_pct: tenYearAppreciation,
+        history,
+      },
+    };
+  } catch (e) {
+    return fail(source, e);
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------
 // EPA National Walkability Index
 // ---------------------------------------------------------------------------------------------------------------
 

@@ -11,6 +11,7 @@ import {
   cdcPlacesTractHealth,
   censusGeographies,
   epaWalkabilityIndex,
+  fhfaTractHpi,
   geocodeAddress,
   ncesNearbySchools,
   noaaSeaLevelRise,
@@ -168,6 +169,20 @@ export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
     },
     strict: true,
   },
+  {
+    name: "lookup_hpi_appreciation",
+    description:
+      "Look up Federal Housing Finance Agency (FHFA) annual tract-level House Price Index (HPI), 1-year price change %, 5-year CAGR %, and 10-year appreciation % for an 11-digit Census tract.",
+    input_schema: {
+      type: "object",
+      properties: {
+        tract_fips: { type: "string", description: "11-digit Census tract FIPS (e.g. '48453000302')" },
+      },
+      required: ["tract_fips"],
+      additionalProperties: false,
+    },
+    strict: true,
+  },
   ...(LOCAL_DATA_TOOLS as Anthropic.Beta.BetaTool[]),
 ];
 
@@ -232,6 +247,10 @@ export async function runAdvisorTool(name: string, input: unknown, env: ToolEnv)
     if (!isNum(i.lat) || !isNum(i.lng)) return bad("lat and lng must be numbers");
     const scenario = isNum(i.scenario_ft) ? i.scenario_ft : 1;
     return done(await noaaSeaLevelRise(i.lat, i.lng, scenario, f));
+  }
+  if (name === "lookup_hpi_appreciation") {
+    if (typeof i.tract_fips !== "string" || !i.tract_fips.trim()) return bad("11-digit tract_fips is required");
+    return done(await fhfaTractHpi(i.tract_fips, f));
   }
   const local = runLocalDataTool(name, i);
   if (local !== undefined) return done(local);

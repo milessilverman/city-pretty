@@ -1,9 +1,9 @@
 {
- "ran_on": "2026-11-18T09:26:10.576Z",
+ "ran_on": "2026-11-18T19:03:53.698Z",
  "script": "scripts/check_parcel_registry.mjs",
  "counts": {
-  "ok": 117,
-  "unreachable": 1
+  "ok": 116,
+  "unreachable": 2
  },
  "services": [
   {
@@ -211,19 +211,6 @@
    "geometry": "esriGeometryPolygon",
    "missing_fields": [],
    "status": "ok"
-  },
-  {
-   "url": "https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/3",
-   "name": "Knox County GIS Parcels",
-   "counties": [
-    "47093"
-   ],
-   "states": [
-    "47",
-    "TN"
-   ],
-   "status": "unreachable",
-   "detail": "{\"code\":500,\"message\":\"Service GeoViewer/NonImpact_Parcels/MapServer not started \",\"details\":[]}"
   },
   {
    "url": "https://gis.arkansas.gov/arcgis/rest/services/FEATURESERVICES/Planning_Cadastre/FeatureServer/6",
@@ -817,8 +804,8 @@
    "status": "ok"
   },
   {
-   "url": "https://maps.linkgis.org/server/rest/services/Web_Scene_Map_Parcels/MapServer/13",
-   "name": "Kenton County GIS Parcels",
+   "url": "https://maps.linkgis.org/server/rest/services/Parcel_QueryOnly/MapServer/1",
+   "name": "Kenton County PVA Parcels",
    "counties": [
     "21117"
    ],
@@ -826,7 +813,7 @@
     "21",
     "KY"
    ],
-   "layer_name": "Kenton Parcels",
+   "layer_name": "Parcels_KC_PVA",
    "geometry": "esriGeometryPolygon",
    "missing_fields": [],
    "status": "ok"
@@ -890,7 +877,7 @@
    "status": "ok"
   },
   {
-   "url": "https://maps8.stlouis-mo.gov/arcgis/rest/services/PDA/PARCELS_PUBLIC/MapServer/0",
+   "url": "https://maps8.stlouis-mo.gov/arcgis/rest/services/ASSESSOR/Assessor_Public_Parcels/MapServer/11",
    "name": "St. Louis City GIS Parcels",
    "counties": [
     "29510"
@@ -899,7 +886,7 @@
     "29",
     "MO"
    ],
-   "layer_name": "PARCELS",
+   "layer_name": "Parcels",
    "geometry": "esriGeometryPolygon",
    "missing_fields": [],
    "status": "ok"
@@ -957,10 +944,8 @@
     "06",
     "CA"
    ],
-   "layer_name": "Parcels",
-   "geometry": "esriGeometryPolygon",
-   "missing_fields": [],
-   "status": "ok"
+   "status": "unreachable",
+   "detail": "HTTP 500"
   },
   {
    "url": "https://pappgispub1.co.washington.or.us/server/rest/services/baselayers/Taxlots_SP/MapServer/0",
@@ -1691,6 +1676,19 @@
    "geometry": "esriGeometryPolygon",
    "missing_fields": [],
    "status": "ok"
+  },
+  {
+   "url": "https://www.kgis.org/arcgis/rest/services/Maps/GlobalSearch/MapServer/0",
+   "name": "Knoxville-Knox County KGIS Parcels",
+   "counties": [
+    "47093"
+   ],
+   "states": [
+    "47",
+    "TN"
+   ],
+   "status": "unreachable",
+   "detail": "HTTP 401"
   },
   {
    "url": "https://www3.multco.us/gisagspublic/rest/services/DART/Taxlots_Orion_Public/MapServer/0",
