@@ -155,7 +155,7 @@ The tests pass, but they miss the bugs below.
   - Where: back-tests group by **sale price** (`scripts/lib/backtestMetrics.mjs`, `priceBand`); the page looks up the band by the **estimate** (`app.js:656` and `750`).
   - Example: Queens homes under $500k have 99% error and are estimated around $600k+. The page therefore files them in the 12% band, and the warning never shows on the homes it describes.
   - Fix: recompute the band metrics grouped by the estimate, and publish those.
-- [x] **P1-3. Crash rankings use raw counts inflated by the 10 m boundary rule.** *(Fixed and verified: 1/k boundary crash weighting implemented in build_crash_counts_ca.py and build_state_crash_counts.py, stated in metadata rule)*
+- [ ] **P1-3. Crash rankings use raw counts inflated by the 10 m boundary rule.** *(Partially done: 1/k boundary weighting algorithm implemented in build_crash_counts_ca.py and build_state_crash_counts.py, but California's 58 county crash files have not yet been rebuilt with this method due to download size; page and metadata currently display un-split boundary counts)*
   - A crash on a boundary counts for every block group it touches, which inflates totals 1.42× (CCRS) to 1.94× (SF).
   - "Worse than X% of peers" compares raw 3-year counts; peers aren't matched on area, road length or population.
   - Thresholds in `pipeline/engine.py:125-262` (`>= 1` crash triggers traffic calming, `>= 2` triggers bike lanes) let one crash qualify 2–4 block groups.
@@ -212,7 +212,7 @@ The tests pass, but they miss the bugs below.
     - `1181`
   - Also, `storyCalibrationSource` is hard-coded to "Assessor records" (`app.js:1441`).
   - Fix: credit "OpenStreetMap contributors", and use `F.src.stories` for `storyCalibrationSource`.
-- [x] **P1-13. Bring the docs in line with the data.** *(Fixed and verified: documented FY2027 HUD API pull with per-record evidence URLs; expanded provenance test to cover parcel_services, county_valuation_models, intervention_verification, upgrade_verification, la_neighborhood_values)*
+- [x] **P1-13. Bring the docs in line with the data.** *(Fixed and verified: documented FY2027 HUD official API pull with per-record evidence URLs; clarified that all 3,222 counties come straight from HUD's official API for FY2027 with an automated sanity check confirming the Los Angeles FY2026 value against Federal Register notice 2026-07741, rather than cross-checking all 3,222 against Federal Register notice text; expanded provenance test to cover parcel_services, county_valuation_models, intervention_verification, upgrade_verification, la_neighborhood_values)*
   - `docs/DATA-AUDIT-AND-TRANSPARENCY.md` still says HUD is FY2026, "9 verified, 3,213 partial", and cites the deleted `fetch_hud_fmr.py`.
   - `docs/WORK-QUEUE.md` R5 still lists the FY2026 question.
   - The HUD provenance test is satisfied by `r.fips`, so it can't fail.
@@ -263,6 +263,26 @@ The tests pass, but they miss the bugs below.
 - [x] **CA crash script:** "placed %" uses points in the CA bounding box; use matched points instead. *(Fixed and verified: build_crash_counts_ca.py uses stats["matched"] / stats["crashes"])*
 - [x] **Remove `pipeline/old_versions/*`.** *(Fixed and verified: developer.nlr.gov used in fetch_oc.py, old versions directory removed)*
 - [x] **Dev dependencies:** bump `vitest` to 2.1.9 or later (npm audit: 2 critical findings, dev-only). *(Fixed and verified: vitest is 2.1.9)*
+
+### 2.1 Corrections and Live Behavioral Fixes Recorded (18 Nov)
+
+The following changes directly resolved live user-facing defects, calculation errors, or data integrity claims:
+
+1. **Hazard checks reading incorrect response fields (`app/app.js`):** `lotChecks()` returns `R.fema.sfha`, `R.fire.vh`, and `R.hpoz.ok && R.hpoz.v.length`. Earlier code read `R.flood.ok` and `R.fire.ok` (which were never set, evaluating to false) and treated any successful HTTP query in `R.hpoz.ok` as an active historic designation (falsely excluding every Los Angeles parcel from SB 9 / ADU screening). Fixed to evaluate actual exclusion fields, and rows report "Not checked for this lot" when unqueried instead of asserting negative status.
+2. **Underused-land popup speculative figures (`app/app.js`):** Removed speculative "development margin" ($250k–$800k) and "net equity" estimates that were derived from unverified residual land value formulas. The popup now displays only the County Assessor's official recorded land value.
+3. **Roof area & footprint grounding (`app/app.js`, `src/engines/roofAreaEngine.js`):** When no building outline is found in OpenStreetMap, the footprint is now explicitly set to `null` ("Footprint not on file") instead of inventing a footprint from living area / 30% lot area. Traced building outlines use 0 overhang (as aerial polygons trace eaves). Default pitches remain unsourced rules of thumb by state and era, and the UI states this explicitly.
+4. **Address search state collisions (`app/app.js`):** Replaced substring matching (where "maryland" matched "AR") with an exact 2-letter state code lookup table, fixing county search collisions across MD, NC, GA, MS, MO, RI, and WA.
+5. **Zoning fallback & multi-family classification (`app/app.js`, `src/engines/parcelHouseAuditor.js`):** Removed fallback from missing zoning codes to land use codes (`DOR_UC`/`LUCode`), and hardened single-family detection to explicitly exclude multi-family designations (`R-3`, `R-4`, `RES-MF`).
+6. **LiDAR attributions removed (`app/app.js`):** Removed claims that building heights were "calibrated from USGS 3DEP LiDAR DSM". Attributed building footprints and heights to OpenStreetMap contributors and County Assessor records.
+7. **ACS top- and bottom-coded values (`app/app.js`):** Census top-coded values ($3,501 rent, $2.0M value) and bottom-codes are formatted as "$3,500 or more", "$2,000,000 or more", and excluded from rent burden and sum calculations.
+8. **St. Louis City Parcel Layer Modernization (`app/data/parcel_services.json`, `app/app.js`):** Migrated from stalled `PDA/PARCELS_PUBLIC/MapServer/0` (HTTP 499 Token Required) to the active public St. Louis City Assessor layer (`maps8.stlouis-mo.gov/arcgis/rest/services/ASSESSOR/Assessor_Public_Parcels/MapServer/11`) which serves full parcel polygons, APNs, and addresses without requiring tokens or falling back to blocked JSONP.
+9. **Florida parcel retry (`app/app.js`):** Added a 15-second fetch retry for slow CORS-enabled parcel services (such as Florida's statewide cadastral layer) so slow cold starts succeed instead of timing out.
+10. **Security policy unblocked (`index.html`):** Added `connect-src data: blob:` to unblock the browser's fast base64 decoding shortcut (`b64Bytes`) without triggering security policy violations.
+11. **Kenton County KY parcel layer (`app/data/parcel_services.json`):** Replaced the obsolete Kenton County GIS endpoint with the active LinkGIS PVA parcel query layer (`maps.linkgis.org/arcgis/rest/services/KentonPVA/PVA_Basemap/MapServer/12`).
+12. **Aleutians West (02016) antimeridian 180° longitude split (`pipeline/fetch_oc.py`, `pipeline/osm_extract.py`, `app/app.js`):** Bounding boxes crossing the 180th meridian are split into two hemisphere boxes (`170°E..180°` and `-180°..-160°W`), and Leaflet map bounds are protected to prevent global zoom-out.
+13. **HUD Fair Market Rents FY2027 clarification (`docs/DATA-AUDIT-AND-TRANSPARENCY.md`, `app/data/hud_fair_market_rents.json`):** Clarified that all 3,222 counties are current FY2027 values pulled directly from HUD's official API (`https://www.huduser.gov/hudapi`), and the Federal Register check was an automated sanity check confirming that the API's FY2026 Los Angeles value ($2,903) matched Federal Register notice 2026-07741.
+14. **California crash counts boundary split status (`docs/audit/AUDIT-2026-11-18-free-data.md`):** Clarified that the 1/k weighting algorithm is implemented in `build_crash_counts_ca.py` and `build_state_crash_counts.py`, while California's 58 county crash files currently display un-split boundary counts where a boundary crash counts for each bordering block group.
+15. **EPA Walkability Index & NOAA Sea Level Rise Connectors (`workers/sources.ts`, `workers/advisorAgent.ts`, `app/facts.js`):** Live screening for EPA National Walkability Index (1–20 score and quantile ranks) and NOAA Sea Level Rise (1ft–10ft scenarios).
 
 ---
 
