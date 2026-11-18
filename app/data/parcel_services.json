@@ -2748,7 +2748,7 @@
    ]
   },
   {
-   "url": "https://maps.linkgis.org/server/rest/services/Web_Scene_Map_Parcels/MapServer/13",
+   "url": "https://maps.linkgis.org/server/rest/services/Parcel_QueryOnly/MapServer/1",
    "states": [
     "21",
     "KY"
@@ -2756,8 +2756,8 @@
    "counties": [
     "21117"
    ],
-   "name": "Kenton County GIS Parcels",
-   "terms": "https://maps.linkgis.org/server/rest/services/Web_Scene_Map_Parcels/MapServer/13",
+   "name": "Kenton County PVA Parcels",
+   "terms": "https://maps.linkgis.org/server/rest/services/Parcel_QueryOnly/MapServer/1",
    "addr": "ADDRESS",
    "apn": "PIDN",
    "max": 2000,
@@ -2769,6 +2769,18 @@
     [
      "ADDRESS",
      "Site Address"
+    ],
+    [
+     "LANDUSE_TE",
+     "Land Use"
+    ],
+    [
+     "CLASS_TEXT",
+     "Property Class"
+    ],
+    [
+     "ACREAGE",
+     "Acreage"
     ]
    ]
   },
