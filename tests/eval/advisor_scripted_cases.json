@@ -1,0 +1,482 @@
+{
+ "_about": "Offline cases for the advisor's script-first layer (app/advisor-scripts.js), run by `npm run eval:advisor -- --scripted` with no model and no network. Each case names a page snapshot built by scripts/lib/advisor_snapshot.mjs from the repository's own data files (county bundles, app/data tables) plus, for lots, fixture parcel facts that are test inputs only. expect is the intent the layer must answer with, or handoff (it must send the question to the Worker). must_include entries in braces are resolved from the raw data files at run time: {bg:FIPS:FIELD} the bundle's default block group (money), {bgraw:FIPS:FIELD} the same as a plain number, {hud:FIPS:BEDROOMS} HUD FMR (money), a *12 suffix multiplies, {sites:FIPS:count} measured sites, {top1:FIPS} the engine's first ranked area.",
+ "created": "2026-11-19",
+ "cases": [
+  {
+   "id": "fig_rent",
+   "question": "What is the median rent here?",
+   "snapshot": "travis",
+   "expect": "figure",
+   "must_include": [
+    "{bg:48453:rent}",
+    "[measured]"
+   ]
+  },
+  {
+   "id": "fig_hv",
+   "question": "What's the typical home value here?",
+   "snapshot": "travis",
+   "expect": "figure",
+   "must_include": [
+    "{bg:48453:hv}",
+    "tract"
+   ]
+  },
+  {
+   "id": "fig_income",
+   "question": "What is the median household income?",
+   "snapshot": "travis",
+   "expect": "figure",
+   "must_include": [
+    "{bg:48453:inc}"
+   ]
+  },
+  {
+   "id": "fig_pop",
+   "question": "What is the population of this neighborhood?",
+   "snapshot": "travis",
+   "expect": "figure",
+   "must_include": [
+    "{bgraw:48453:pop}"
+   ]
+  },
+  {
+   "id": "fig_fmr2",
+   "question": "What is the 2-bedroom fair market rent?",
+   "snapshot": "travis",
+   "expect": "figure",
+   "must_include": [
+    "{hud:48453:2}",
+    "HUD"
+   ]
+  },
+  {
+   "id": "fig_fmr0",
+   "question": "What is HUD's fair market rent for a studio?",
+   "snapshot": "sutter_lot",
+   "expect": "figure",
+   "must_include": [
+    "{hud:06101:0}"
+   ]
+  },
+  {
+   "id": "fig_fmr_county",
+   "question": "Show me the HUD fair market rents for this county",
+   "snapshot": "travis",
+   "expect": "figure",
+   "must_include": [
+    "{hud:48453:1}",
+    "{hud:48453:3}",
+    "{hud:48453:4}"
+   ]
+  },
+  {
+   "id": "fig_crash",
+   "question": "How many crashes here?",
+   "snapshot": "sutter_lot",
+   "expect": "figure",
+   "must_include": [
+    "crashes recorded"
+   ]
+  },
+  {
+   "id": "fig_crash_none",
+   "question": "How many crashes here?",
+   "snapshot": "travis",
+   "expect": "figure",
+   "must_include": [
+    "Not on file"
+   ]
+  },
+  {
+   "id": "fig_canopy",
+   "question": "What is the tree canopy here?",
+   "snapshot": "sutter_lot",
+   "expect": "figure",
+   "must_include": [
+    "{bgraw:06101:tg} pts below"
+   ]
+  },
+  {
+   "id": "fig_income_missing",
+   "question": "What is the median income here?",
+   "snapshot": "sutter_lot",
+   "expect": "figure",
+   "must_include": [
+    "Not on file"
+   ],
+   "must_not_include": [
+    "$"
+   ]
+  },
+  {
+   "id": "fig_flood",
+   "question": "Is this lot in a flood zone?",
+   "snapshot": "travis_lot",
+   "expect": "figure",
+   "must_include": [
+    "Zone AE",
+    "FEMA"
+   ]
+  },
+  {
+   "id": "fig_zoning",
+   "question": "What is the zoning of this lot?",
+   "snapshot": "travis_lot",
+   "expect": "figure",
+   "must_include": [
+    "SF-3"
+   ]
+  },
+  {
+   "id": "fig_zoning_nolot",
+   "question": "What is this lot zoned?",
+   "snapshot": "travis",
+   "expect": "figure",
+   "must_include": [
+    "No lot is open"
+   ]
+  },
+  {
+   "id": "fig_zoning_none",
+   "question": "What is the zoning of this lot?",
+   "snapshot": "travis_nozone",
+   "expect": "figure",
+   "must_include": [
+    "Not on file",
+    "no zoning code"
+   ]
+  },
+  {
+   "id": "fig_nohood",
+   "question": "What is the median rent here?",
+   "snapshot": "travis_nohood",
+   "expect": "figure",
+   "must_include": [
+    "No neighborhood is selected"
+   ]
+  },
+  {
+   "id": "where_travis",
+   "question": "Where should I invest?",
+   "snapshot": "travis",
+   "expect": "where",
+   "must_include": [
+    "{top1:48453}",
+    "rank correlation"
+   ]
+  },
+  {
+   "id": "where_sutter",
+   "question": "Which neighborhoods should I look at?",
+   "snapshot": "sutter_lot",
+   "expect": "where",
+   "must_include": [
+    "{top1:06101}",
+    "Not back-tested"
+   ]
+  },
+  {
+   "id": "build_travis",
+   "question": "What should I build here?",
+   "snapshot": "travis",
+   "expect": "build",
+   "must_include": [
+    "Housing plays",
+    "Split a lot into two parcels"
+   ]
+  },
+  {
+   "id": "build_sutter",
+   "question": "What could I build in this neighborhood?",
+   "snapshot": "sutter_lot",
+   "expect": "build",
+   "must_include": [
+    "Housing plays"
+   ]
+  },
+  {
+   "id": "adu_tx",
+   "question": "Can I add an ADU?",
+   "snapshot": "travis_lot",
+   "expect": "lot_adu",
+   "must_include": [
+    "Not determined"
+   ]
+  },
+  {
+   "id": "adu_ca",
+   "question": "Can I build an ADU on this lot?",
+   "snapshot": "sutter_lot",
+   "expect": "lot_adu",
+   "must_include": [
+    "Allowed by",
+    "66317"
+   ]
+  },
+  {
+   "id": "split_ca",
+   "question": "Can I split this lot?",
+   "snapshot": "sutter_lot",
+   "expect": "lot_split",
+   "must_include": [
+    "Allowed by",
+    "66411.7"
+   ]
+  },
+  {
+   "id": "split_tx",
+   "question": "Can I split the lot?",
+   "snapshot": "travis_lot",
+   "expect": "lot_split",
+   "must_include": [
+    "Not determined"
+   ]
+  },
+  {
+   "id": "split_nolot",
+   "question": "Can I split this lot?",
+   "snapshot": "travis",
+   "expect": "lot_split",
+   "must_include": [
+    "No lot is open"
+   ]
+  },
+  {
+   "id": "units_tx",
+   "question": "Can I build 4 units?",
+   "snapshot": "travis_lot",
+   "expect": "lot_units",
+   "must_include": [
+    "Not determined"
+   ]
+  },
+  {
+   "id": "sites_la",
+   "question": "What properties could be redeveloped?",
+   "snapshot": "la",
+   "expect": "sites",
+   "must_include": [
+    "{sites:06037:count} measured",
+    "acres"
+   ]
+  },
+  {
+   "id": "sites_none",
+   "question": "Are there any underused sites?",
+   "snapshot": "travis",
+   "expect": "sites",
+   "must_include": [
+    "No underused sites"
+   ]
+  },
+  {
+   "id": "transit_travis",
+   "question": "Should transit be built here?",
+   "snapshot": "travis",
+   "expect": "transit",
+   "must_include": [
+    "4.5 homes per net acre",
+    "TCRP"
+   ]
+  },
+  {
+   "id": "transit_sutter",
+   "question": "What kind of transit does this area support?",
+   "snapshot": "sutter_lot",
+   "expect": "transit",
+   "must_include": [
+    "Thresholds used"
+   ]
+  },
+  {
+   "id": "budget_50k",
+   "question": "I have $50,000",
+   "snapshot": "travis",
+   "expect": "budget",
+   "must_include": [
+    "no cost on file"
+   ]
+  },
+  {
+   "id": "budget_300k",
+   "question": "My budget is $300k",
+   "snapshot": "travis",
+   "expect": "budget",
+   "must_include": [
+    "$300,000"
+   ]
+  },
+  {
+   "id": "budget_1_5m",
+   "question": "What can I do with $1.5 million?",
+   "snapshot": "sutter_lot",
+   "expect": "budget",
+   "must_include": [
+    "$1,500,000"
+   ]
+  },
+  {
+   "id": "arith_rent12",
+   "question": "rent x 12",
+   "snapshot": "travis",
+   "expect": "arith",
+   "must_include": [
+    "{bg:48453:rent*12}"
+   ]
+  },
+  {
+   "id": "arith_annual",
+   "question": "What is the annual rent?",
+   "snapshot": "travis",
+   "expect": "arith",
+   "must_include": [
+    "{bg:48453:rent*12}"
+   ]
+  },
+  {
+   "id": "arith_fmr12",
+   "question": "2-bedroom FMR x 12",
+   "snapshot": "travis",
+   "expect": "arith",
+   "must_include": [
+    "{hud:48453:2*12}"
+   ]
+  },
+  {
+   "id": "arith_psf",
+   "question": "What is the sale price per square foot?",
+   "snapshot": "travis_lot",
+   "expect": "arith",
+   "must_include": [
+    "$400.00"
+   ]
+  },
+  {
+   "id": "hand_why",
+   "question": "Why is the rent so high here?",
+   "snapshot": "travis",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_compare",
+   "question": "Compare the rent here with the county average",
+   "snapshot": "travis",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_should_buy",
+   "question": "Should I buy a house here?",
+   "snapshot": "travis",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_horizon",
+   "question": "What will home values be in 5 years?",
+   "snapshot": "travis",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_strategy",
+   "question": "What's the best strategy for $500k?",
+   "snapshot": "travis",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_address",
+   "question": "Can I split the lot at 811 E 41st St, Austin, TX?",
+   "snapshot": "travis_lot",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_named_place",
+   "question": "What is the median rent in Balcones Park?",
+   "snapshot": "travis",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_two_counties",
+   "question": "What is the fair market rent in Travis County and Williamson County?",
+   "snapshot": "travis",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_document",
+   "question": "Here is the listing: \"3 bed, 2 bath, motivated seller\" - is it fairly priced?",
+   "snapshot": "travis_lot",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_parking",
+   "question": "Can I build an ADU without adding parking?",
+   "snapshot": "sutter_lot",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_law",
+   "question": "Under SB 9 can I split this lot?",
+   "snapshot": "sutter_lot",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_two_amounts",
+   "question": "I have $50,000 and $20,000 from my parents, what can I do?",
+   "snapshot": "travis",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_roi",
+   "question": "What is the ROI of an ADU here?",
+   "snapshot": "travis",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_maximize",
+   "question": "What should I build here to maximize rent?",
+   "snapshot": "travis",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_two_fields",
+   "question": "What is the median rent and income here?",
+   "snapshot": "travis",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_state",
+   "question": "Where should I invest in Florida?",
+   "snapshot": "travis",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_cost",
+   "question": "How much does it cost to build an ADU?",
+   "snapshot": "travis",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_insurance",
+   "question": "Is this lot in a flood zone and what is the flood insurance cost?",
+   "snapshot": "travis_lot",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_each",
+   "question": "rent x 12 for each neighborhood",
+   "snapshot": "travis",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_or",
+   "question": "Should transit be built here or should we widen the road?",
+   "snapshot": "travis",
+   "expect": "handoff"
+  },
+  {
+   "id": "hand_units_law",
+   "question": "Can I build 2 units?",
+   "snapshot": "sutter_lot",
+   "expect": "handoff"
+  }
+ ]
+}

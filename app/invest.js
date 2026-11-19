@@ -771,6 +771,22 @@ function init() {
   if (want === "invest") setInvest(true, { keepScroll: true });
 }
 
-window.cpInvest = { render, setView: v => setInvest(v === "invest"), get state() { return iv; } };
+// The same inputs the cards use, for the advisor's no-AI answers (app/advisor-scripts.js): the engine context from
+// the loaded tables, the open lot's facts, this county's measured sites and the back-test honesty line. Builds nothing
+// new; null while the county or the tables are still loading.
+function advisorInputs() {
+  const r = ready();
+  if (r.state === "nodata") return Promise.resolve({ state: "nodata", fips: r.fips });
+  if (r.state !== "ok" || !E()) return Promise.resolve(null);
+  return loadData().then(d => {
+    const r2 = ready(); if (r2.state !== "ok") return null;
+    const ctx = { backtest: d.backtest, catalog: D.catalog, verification: d.verification, underusedSites: d.sites, sites: (typeof SITES !== "undefined") ? SITES : null, costBenchmarks: engineCosts(d.cost), valueEffects: engineEffects(d.effects),
+      laws: d.laws || undefined, unitCosts: d.unitCosts, valuationModels: d.valuationModels };
+    const sl = siteLists({ countySites: d.sites.filter(s => s && s.countyFips === r2.fips) });
+    return { state: "ok", fips: r2.fips, countyName: countyShort(), B: r2.B, ctx, pf: parcelFacts(), honest: honest(d.backtest, r2.fips, countyShort()), countySites: sl.all.map(s => Object.assign({}, s, { displayName: siteName(s) })) };
+  });
+}
+
+window.cpInvest = { render, advisorInputs, setView: v => setInvest(v === "invest"), get state() { return iv; } };
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();

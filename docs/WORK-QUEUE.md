@@ -45,6 +45,17 @@ audit doc the same day.
 - (Superseded by the item above) Still to decide: how the public site gets under GitHub Pages' 1 GB cap now that R2 serves the county files
   (deploy Pages from a workflow that leaves out `counties/bundle_*`, or remove them from the repository).
 
+## Advisor: script-first answers (19 Nov 2026)
+
+- The chat now answers plain lookups from the page's own data with no model call (`app/advisor-scripts.js`,
+  `docs/ADVISOR-ROUTING.md`): figures for the selected neighborhood and the open lot, HUD rents, where to look, what
+  to build, ADU and lot-split screens, sites, transit, "I have $X" and simple sums. Everything else goes to the Worker
+  with the page's findings attached. Offline eval: `npm run eval:advisor -- --scripted` (58 cases, no wrong answers);
+  it answers 0 of the 113 model-eval questions, because every one of them names an address or another place.
+- Optional Worker secret added: `NREL_API_KEY` for the solar tool (without it the tool keeps the shared DEMO_KEY).
+- Open: LA lots inside a mapped zone reach the legal screen with no zoning code (see the 19 Nov correction in
+  `DATA-AUDIT-AND-TRANSPARENCY.md`), so ADU and lot-split answers there say "not determined".
+
 ## Running now (background)
 
 | # | Item | Done when |

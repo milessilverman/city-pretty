@@ -135,6 +135,77 @@ test("AI advisor shows a Worker reply as text, not HTML", async ({ page }) => {
   expect(JSON.stringify(body)).not.toMatch(/systemPrompt|apiKey/);
 });
 
+// Script-first advisor (app/advisor-scripts.js): plain lookups are answered from the page's data with no request.
+async function advisorWithStubbedWorker(page: Page) {
+  await page.route("**/app/config.js", (r) => r.fulfill({ contentType: "text/javascript", body: 'window.CITY_PRETTY_CONFIG = { workerUrl: "https://worker.test" };' }));
+  await page.route("https://worker.test/api/health", (r) => r.fulfill({ contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: '{"status":"ok","ai_advisor_ready":true}' }));
+  const bodies: any[] = [];
+  await page.route("https://worker.test/api/ai", (r) => {
+    bodies.push(JSON.parse(r.request().postData() || "{}"));
+    return r.fulfill({ contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: JSON.stringify({ ok: true, text: "Stub reply from the Worker." }) });
+  });
+  await openPage(page);
+  // the tables the answers read (HUD rents, the Invest view's inputs) are loaded
+  await page.waitForFunction(() => typeof (window as any).getHudFmr === "function" && (window as any).getHudFmr("06037") && (window as any).AdvisorScripts, null, { timeout: 30_000 });
+  await page.waitForFunction(() => (window as any).cpInvest.advisorInputs().then((x: any) => !!(x && x.state === "ok")), null, { timeout: 30_000 });
+  await page.click("#btn-ai-header");
+  return bodies;
+}
+async function ask(page: Page, q: string) {
+  await page.fill("#ai-user-input", q);
+  await page.press("#ai-user-input", "Enter");
+}
+
+test("advisor answers a figure lookup from the page's data without calling the Worker", async ({ page }) => {
+  const bodies = await advisorWithStubbedWorker(page);
+  const fmr = await page.evaluate(() => "$" + (window as any).getHudFmr("06037").two_bed_2br.toLocaleString("en-US"));
+  await ask(page, "What is the 2-bedroom fair market rent?");
+  const chat = page.locator("#ai-chat-history");
+  await expect(chat).toContainText("From this page's data (no AI)");
+  await expect(chat).toContainText(fmr);
+  await expect(chat).toContainText("[measured]");
+  await expect(chat).toContainText("Answered from this page's data without the AI.");
+  await page.waitForTimeout(500);
+  expect(bodies.length).toBe(0);
+  // the button sends the same question to the Worker, with what the page found
+  await chat.getByRole("button", { name: "Ask the AI for a deeper answer" }).click();
+  await expect(chat).toContainText("Stub reply from the Worker.");
+  expect(bodies.length).toBe(1);
+  expect(bodies[0].question).toBe("What is the 2-bedroom fair market rent?");
+  expect(bodies[0].context.scripted_findings.answered_on_page).toBe(true);
+  expect(JSON.stringify(bodies[0].context.scripted_findings.findings)).toContain(fmr);
+});
+
+test("advisor sends a complex question to the Worker with the page's partial findings", async ({ page }) => {
+  const bodies = await advisorWithStubbedWorker(page);
+  await ask(page, "Why is the rent so high here?");
+  await expect(page.locator("#ai-chat-history")).toContainText("Stub reply from the Worker.");
+  expect(bodies.length).toBe(1);
+  expect(Object.keys(bodies[0]).sort()).toEqual(["context", "history", "promptKey", "question"]);
+  expect(bodies[0].context.scripted_findings.answered_on_page).toBe(false);
+  expect(bodies[0].context.scripted_findings.findings.join(" ")).toMatch(/Median rent/);
+});
+
+test("advisor budget answer lists only plays within the budget", async ({ page }) => {
+  const bodies = await advisorWithStubbedWorker(page);
+  await ask(page, "I have $500,000");
+  const chat = page.locator("#ai-chat-history");
+  await expect(chat).toContainText("Answered from this page's data without the AI.");
+  const r = await page.evaluate(async () => {
+    const last = (window as any).__cpAdvisorLast;
+    const snap = await (window as any).AdvisorScripts.pageSnapshot();
+    const n = snap.brief.neighborhood;
+    const items = n.housingPlays.map((h: any) => ({ name: h.label, cost: h.cost && h.cost.value })).concat(n.build.map((x: any) => ({ name: x.name, cost: x.cost && x.cost.value })));
+    return { intent: last.intent, matched: last.matched, over: items.filter((x: any) => typeof x.cost === "number" && x.cost > 500000).map((x: any) => x.name), within: items.filter((x: any) => typeof x.cost === "number" && x.cost <= 500000).map((x: any) => x.name) };
+  });
+  expect(r.intent).toBe("budget");
+  for (const x of r.matched) expect(x.cost).toBeLessThanOrEqual(500000);
+  const text = await chat.innerText();
+  for (const name of r.matched.map((x: any) => x.name)) expect(text).toContain(name);
+  for (const name of r.over) if (!r.within.includes(name)) expect(text).not.toContain(name);
+  expect(bodies.length).toBe(0);
+});
+
 test("fits a phone screen", async ({ browser }) => {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   const page = await ctx.newPage();
