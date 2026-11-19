@@ -63,7 +63,15 @@ export interface StatutoryZoningResult {
     max_parking_requirement_per_unit: number | null;
     affordability_mandate_pct: number | null;
     tax_exemption_pct: number | null;
+    // Listed exclusions of kind "limits" that are present (quoted) or not checked; they do not block the law.
+    exclusion_limits?: string[];
+    exclusion_limits_not_checked?: string[];
     unconfirmed_fields: string[];
+  }>;
+  // Laws blocked by an exclusion in the law's own text that is present on the parcel; each quotes the statute.
+  excluded_by_statute?: Array<{
+    id: string; name: string; statute_url: string | null; detail: string; reason: string;
+    exclusions: Array<{ key: string; wording: string; citation: string | null; url: string | null; note: string }>;
   }>;
   // Laws for this state that could not be confirmed for this parcel, with the reason.
   not_confirmed: Array<{ id: string; name: string; reason: string }>;
@@ -77,7 +85,8 @@ export interface StatutoryZoningResult {
     public_or_tribal_land?: boolean;
     wekiva_or_everglades_protection_area?: boolean;
     population_threshold_ineligible?: boolean;
-    [k: string]: boolean | undefined;
+    // true = present, false = checked and absent, null/missing = not checked
+    [k: string]: boolean | null | undefined;
   };
   net_by_right_feasible: boolean;
   laws_loaded: boolean;

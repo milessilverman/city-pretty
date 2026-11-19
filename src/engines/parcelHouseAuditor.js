@@ -172,6 +172,8 @@ function auditSingleHouseParcel(input) {
   } else if ((statutoryZoning.not_confirmed || []).length) {
     const unconfirmedReasons = statutoryZoning.not_confirmed.map(nc => `${nc.name} (${nc.reason})`).join("; ");
     statutoryNotes = "Screening not confirmed for state housing laws: " + unconfirmedReasons + ". Local zoning governs.";
+  } else if ((statutoryZoning.excluded_by_statute || []).length) {
+    statutoryNotes = "Excluded by the law's own text: " + statutoryZoning.excluded_by_statute.map(x => x.name + " — " + x.detail).join(" ") + " Local zoning governs.";
   } else {
     statutoryNotes = "No state housing law in the screening engine applies to this parcel as recorded. Local zoning governs.";
   }
