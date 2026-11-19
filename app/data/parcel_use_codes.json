@@ -1,0 +1,4034 @@
+{
+ "_source": {
+  "description": "Parcel-use code tables, from each publisher's own documentation, used to tell whether a parcel is a home.",
+  "built_by": "scripts/build_zoning_standards.py",
+  "built_on": "2026-11-17"
+ },
+ "systems": [
+  {
+   "id": "nyc_pluto_landuse",
+   "counties": [
+    "36005",
+    "36047",
+    "36061",
+    "36081",
+    "36085"
+   ],
+   "field": "LandUse",
+   "codes": {
+    "01": {
+     "label": "One & Two Family Buildings",
+     "type": "residential"
+    },
+    "02": {
+     "label": "Multi-Family Walk-Up Buildings",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "03": {
+     "label": "Multi-Family Elevator Buildings",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "04": {
+     "label": "Mixed Residential & Commercial Buildings",
+     "type": "mixed"
+    },
+    "05": {
+     "label": "Commercial & Office Buildings",
+     "type": "non-residential"
+    },
+    "06": {
+     "label": "Industrial & Manufacturing",
+     "type": "non-residential"
+    },
+    "07": {
+     "label": "Transportation & Utility",
+     "type": "non-residential"
+    },
+    "08": {
+     "label": "Public Facilities & Institutions",
+     "type": "non-residential"
+    },
+    "09": {
+     "label": "Open Space & Outdoor Recreation",
+     "type": "non-residential"
+    },
+    "10": {
+     "label": "Parking Facilities",
+     "type": "non-residential"
+    },
+    "11": {
+     "label": "Vacant Land",
+     "type": "vacant"
+    }
+   },
+   "source": {
+    "name": "PLUTO Data Dictionary, August 2026 (26v2), LAND USE CATEGORY (LandUse)",
+    "url": "https://s-media.nyc.gov/agencies/dcp/assets/files/pdf/data-tools/bytes/pluto_datadictionary.pdf"
+   },
+   "type_rule": "The label is the agency's; the type is read from it: one- and two-family and multi-family buildings are residential, mixed residential & commercial is mixed, vacant land is vacant, all others non-residential.",
+   "verification": {
+    "status": "verified",
+    "checked_on": "2026-11-17",
+    "method": "Parsed from the PDF by scripts/build_zoning_standards.py",
+    "evidence": "11 codes",
+    "unverified_fields": []
+   }
+  },
+  {
+   "id": "dc_otr_usecode",
+   "counties": [
+    "11001"
+   ],
+   "field": "USECODE",
+   "codes": {
+    "000": {
+     "label": "Not assigned yet",
+     "type": "unknown",
+     "form": null
+    },
+    "001": {
+     "label": "Residential-Single Family (NC)",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "002": {
+     "label": "Residential-Multi-Family (NC)",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "003": {
+     "label": "Residential-Transient (NC)",
+     "type": "non-residential",
+     "form": null
+    },
+    "004": {
+     "label": "Commercial-Retail (NC)",
+     "type": "non-residential",
+     "form": null
+    },
+    "005": {
+     "label": "Commercial-Office (NC)",
+     "type": "non-residential",
+     "form": null
+    },
+    "006": {
+     "label": "Commercial-Specific Purpose (NC)",
+     "type": "non-residential",
+     "form": null
+    },
+    "007": {
+     "label": "Industrial (NC)",
+     "type": "non-residential",
+     "form": null
+    },
+    "008": {
+     "label": "Special Purpose (NC)",
+     "type": "non-residential",
+     "form": null
+    },
+    "011": {
+     "label": "Residential-Row-Single-Family",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "012": {
+     "label": "Residential-Detached-Single-Family",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "013": {
+     "label": "Residential-Semi-Detached-Single-Family",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "014": {
+     "label": "Residential-Garage",
+     "type": "non-residential",
+     "form": null
+    },
+    "015": {
+     "label": "Residential-Mixed Use",
+     "type": "mixed",
+     "form": "single-family"
+    },
+    "016": {
+     "label": "Residential-Condo-Horizontal",
+     "type": "residential",
+     "form": "unit"
+    },
+    "017": {
+     "label": "Residential-Condo-Vertical",
+     "type": "residential",
+     "form": "unit"
+    },
+    "018": {
+     "label": "Residential-Condo-Garage",
+     "type": "non-residential",
+     "form": null
+    },
+    "019": {
+     "label": "Residential-Single-Family-Misc",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "021": {
+     "label": "Residential-Apartment-Walk-Up",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "022": {
+     "label": "Residential-Apartment-Elevator",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "023": {
+     "label": "Residential Flats-Less than 5",
+     "type": "residential",
+     "form": "small-multi"
+    },
+    "024": {
+     "label": "Residential-Conversions-Less than 5",
+     "type": "residential",
+     "form": "small-multi"
+    },
+    "025": {
+     "label": "Residential-Conversion-5 units",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "026": {
+     "label": "Residential-Cooperative-Horizontal",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "027": {
+     "label": "Residential-Cooperative-Vertical",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "028": {
+     "label": "Residential-Cooperative-Mrth5",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "029": {
+     "label": "Residential-Mutlifamily, Misc",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "031": {
+     "label": "Hotel-Small",
+     "type": "non-residential",
+     "form": null
+    },
+    "032": {
+     "label": "Hotel-Large",
+     "type": "non-residential",
+     "form": null
+    },
+    "033": {
+     "label": "Motel",
+     "type": "non-residential",
+     "form": null
+    },
+    "034": {
+     "label": "Club-Private",
+     "type": "non-residential",
+     "form": null
+    },
+    "035": {
+     "label": "Tourist Homes",
+     "type": "non-residential",
+     "form": null
+    },
+    "036": {
+     "label": "Dormitory",
+     "type": "non-residential",
+     "form": null
+    },
+    "037": {
+     "label": "Inn",
+     "type": "non-residential",
+     "form": null
+    },
+    "038": {
+     "label": "Fraternity/Sorority House",
+     "type": "non-residential",
+     "form": null
+    },
+    "039": {
+     "label": "Residential-Transient, Misc",
+     "type": "non-residential",
+     "form": null
+    },
+    "041": {
+     "label": "Store-Small 1-Story",
+     "type": "non-residential",
+     "form": null
+    },
+    "042": {
+     "label": "Store-Misc",
+     "type": "non-residential",
+     "form": null
+    },
+    "043": {
+     "label": "Store-Department",
+     "type": "non-residential",
+     "form": null
+    },
+    "044": {
+     "label": "Store-Shopping Center/Mall",
+     "type": "non-residential",
+     "form": null
+    },
+    "045": {
+     "label": "Store-Restaurant",
+     "type": "non-residential",
+     "form": null
+    },
+    "046": {
+     "label": "Store-Barber/Beauty Shop",
+     "type": "non-residential",
+     "form": null
+    },
+    "047": {
+     "label": "Store-Super Market",
+     "type": "non-residential",
+     "form": null
+    },
+    "048": {
+     "label": "Commercial-Retail-Condo",
+     "type": "non-residential",
+     "form": null
+    },
+    "049": {
+     "label": "Commercial-Retail-Misc",
+     "type": "non-residential",
+     "form": null
+    },
+    "051": {
+     "label": "Commercial-Office-Small",
+     "type": "non-residential",
+     "form": null
+    },
+    "052": {
+     "label": "Commercial-Office-Large",
+     "type": "non-residential",
+     "form": null
+    },
+    "053": {
+     "label": "Commercial-Planned Development",
+     "type": "non-residential",
+     "form": null
+    },
+    "056": {
+     "label": "Office-Condo-Horizontal",
+     "type": "non-residential",
+     "form": null
+    },
+    "057": {
+     "label": "Office-Condo-Vertical",
+     "type": "non-residential",
+     "form": null
+    },
+    "058": {
+     "label": "Commercial-Office-Condo",
+     "type": "non-residential",
+     "form": null
+    },
+    "059": {
+     "label": "Commercial-Office-Misc.",
+     "type": "non-residential",
+     "form": null
+    },
+    "061": {
+     "label": "Commercial-Banks, Financial",
+     "type": "non-residential",
+     "form": null
+    },
+    "062": {
+     "label": "Commercial-Garage, Vehicle Sale",
+     "type": "non-residential",
+     "form": null
+    },
+    "063": {
+     "label": "Commercial-Parking Garage",
+     "type": "non-residential",
+     "form": null
+    },
+    "064": {
+     "label": "Parking Lot-Special Purpose",
+     "type": "non-residential",
+     "form": null
+    },
+    "065": {
+     "label": "Vehicle Service Station-Vintage",
+     "type": "non-residential",
+     "form": null
+    },
+    "066": {
+     "label": "Theaters, Entertainment",
+     "type": "non-residential",
+     "form": null
+    },
+    "067": {
+     "label": "Commercial-Restaurant",
+     "type": "non-residential",
+     "form": null
+    },
+    "068": {
+     "label": "Commercial-Restaurant-Fast Food",
+     "type": "non-residential",
+     "form": null
+    },
+    "069": {
+     "label": "Commercial-Specific Purpose, Misc.",
+     "type": "non-residential",
+     "form": null
+    },
+    "071": {
+     "label": "Industrial-Raw Material Handling",
+     "type": "non-residential",
+     "form": null
+    },
+    "072": {
+     "label": "Industrial-Heavy Manufacturing",
+     "type": "non-residential",
+     "form": null
+    },
+    "073": {
+     "label": "Industrial-Light",
+     "type": "non-residential",
+     "form": null
+    },
+    "074": {
+     "label": "Industrial-Warehouse-1-Story",
+     "type": "non-residential",
+     "form": null
+    },
+    "075": {
+     "label": "Industrial-Warehouse-Multi-Story",
+     "type": "non-residential",
+     "form": null
+    },
+    "076": {
+     "label": "Industrial-Truck Terminal",
+     "type": "non-residential",
+     "form": null
+    },
+    "078": {
+     "label": "Warehouse-Condo",
+     "type": "non-residential",
+     "form": null
+    },
+    "079": {
+     "label": "Industrial-Misc.",
+     "type": "non-residential",
+     "form": null
+    },
+    "081": {
+     "label": "Religious",
+     "type": "non-residential",
+     "form": null
+    },
+    "082": {
+     "label": "Medical",
+     "type": "non-residential",
+     "form": null
+    },
+    "083": {
+     "label": "Educational",
+     "type": "non-residential",
+     "form": null
+    },
+    "084": {
+     "label": "Public Service",
+     "type": "non-residential",
+     "form": null
+    },
+    "085": {
+     "label": "Embassy, Chancery, etc.",
+     "type": "non-residential",
+     "form": null
+    },
+    "086": {
+     "label": "Museum, Library, Gallery",
+     "type": "non-residential",
+     "form": null
+    },
+    "087": {
+     "label": "Recreational",
+     "type": "non-residential",
+     "form": null
+    },
+    "088": {
+     "label": "Health Care Facility",
+     "type": "non-residential",
+     "form": null
+    },
+    "089": {
+     "label": "Special Purpose-Misc",
+     "type": "non-residential",
+     "form": null
+    },
+    "091": {
+     "label": "Vacant-True",
+     "type": "vacant",
+     "form": null
+    },
+    "092": {
+     "label": "Vacant-With Permit",
+     "type": "vacant",
+     "form": null
+    },
+    "093": {
+     "label": "Vacant-Zoning Limits",
+     "type": "vacant",
+     "form": null
+    },
+    "094": {
+     "label": "Vacant-False-Abutting",
+     "type": "vacant",
+     "form": null
+    },
+    "095": {
+     "label": "Vacant-Commercial Use",
+     "type": "vacant",
+     "form": null
+    },
+    "096": {
+     "label": "Vacant-Unimproved Parking",
+     "type": "vacant",
+     "form": null
+    },
+    "097": {
+     "label": "Vacant-Improved and Abandoned",
+     "type": "vacant",
+     "form": null
+    },
+    "116": {
+     "label": "Condo-Horizontal-Combined",
+     "type": "residential",
+     "form": "unit"
+    },
+    "117": {
+     "label": "Condo-Vertical-Combined",
+     "type": "residential",
+     "form": "unit"
+    },
+    "126": {
+     "label": "Coop-Horizontal-Mixed Use",
+     "type": "non-residential",
+     "form": null
+    },
+    "127": {
+     "label": "Coop-Vertical-Mixed Use",
+     "type": "non-residential",
+     "form": null
+    },
+    "165": {
+     "label": "Vehicle Service Station -Kiosk",
+     "type": "non-residential",
+     "form": null
+    },
+    "189": {
+     "label": "Special Purpose-Memorial",
+     "type": "non-residential",
+     "form": null
+    },
+    "191": {
+     "label": "Vacant-True",
+     "type": "vacant",
+     "form": null
+    },
+    "192": {
+     "label": "Vacant-With Permit",
+     "type": "vacant",
+     "form": null
+    },
+    "193": {
+     "label": "Vacant-Zoning Limits",
+     "type": "vacant",
+     "form": null
+    },
+    "194": {
+     "label": "Vacant-False-Abutting",
+     "type": "vacant",
+     "form": null
+    },
+    "195": {
+     "label": "Vacant-Commercial Use",
+     "type": "vacant",
+     "form": null
+    },
+    "196": {
+     "label": "Vacant-Unimproved Parking",
+     "type": "vacant",
+     "form": null
+    },
+    "197": {
+     "label": "Vacan-Improved and Abandoned",
+     "type": "vacant",
+     "form": null
+    },
+    "214": {
+     "label": "Garage-Multi-Family",
+     "type": "non-residential",
+     "form": null
+    },
+    "216": {
+     "label": "Condo-Investment-Horizontal",
+     "type": "residential",
+     "form": "unit"
+    },
+    "217": {
+     "label": "Condo-Investment-Vertical",
+     "type": "residential",
+     "form": "unit"
+    },
+    "265": {
+     "label": "Vehicle Service Staion-Kiosk",
+     "type": "non-residential",
+     "form": null
+    },
+    "316": {
+     "label": "Condo-Duplex",
+     "type": "residential",
+     "form": "unit"
+    },
+    "365": {
+     "label": "Vehicle Service Station-Market",
+     "type": "non-residential",
+     "form": null
+    },
+    "416": {
+     "label": "Condo-Horizontal-Parking-Unid",
+     "type": "non-residential",
+     "form": null
+    },
+    "417": {
+     "label": "Condo-Vertical-Parking-Unid",
+     "type": "non-residential",
+     "form": null
+    },
+    "465": {
+     "label": "Vehicle Service Station-Market",
+     "type": "non-residential",
+     "form": null
+    },
+    "516": {
+     "label": "Condo-Detached",
+     "type": "residential",
+     "form": "unit"
+    },
+    "995": {
+     "label": "Condo Main",
+     "type": "unknown",
+     "form": null
+    }
+   },
+   "source": {
+    "name": "DC Office of Tax and Revenue USECODE Table, DC GIS Property and Land service, layer 54",
+    "url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Property_and_Land_WebMercator/MapServer/54",
+    "description": "The Property Use Code table contains a code, brief description and long description of DC's property use code system. It provides a complete set of the currently available use codes (with their descriptions) that are applicable to various categories of property. A property use code identifies the pr"
+   },
+   "type_rule": "Labels are OTR's. Residential: labels starting 'Residential' (except garages and transient uses) and condominium units whose OTR description says single-family use. Mixed: 'Residential-Mixed Use'. Vacant: labels starting 'Vacant'. Codes 000 'Not assigned yet' and 995 'Condo Main' (a condominium's master record) are unknown. Everything else, including garages (no living quarters), parking units, hotels, dormitories, commercial and institutional codes, is non-residential. Form (residential and mixed only): condominium labels are a unit; cooperative, apartment, multi-family and 5-unit conversion labels are a multi-family building; 'Less than 5' flats and conversions are small multi-unit (2-4); the rest single-family.",
+   "verification": {
+    "status": "verified",
+    "checked_on": "2026-11-17",
+    "method": "Read from OTR's USECODE table by scripts/build_zoning_standards.py",
+    "evidence": "109 codes",
+    "unverified_fields": []
+   }
+  },
+  {
+   "id": "nashville_ludesc",
+   "counties": [
+    "47037"
+   ],
+   "field": "LUDesc",
+   "codes": {
+    "APARTMENT: HIGH RISE (3 STORIES OR GREATER)": {
+     "label": "APARTMENT: HIGH RISE (3 STORIES OR GREATER)",
+     "codes": [
+      "039"
+     ],
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "APARTMENT: LOW RISE (BUILT SINCE 1960)": {
+     "label": "APARTMENT: LOW RISE (BUILT SINCE 1960)",
+     "codes": [
+      "038"
+     ],
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "APARTMENT: WALK UP (BUILT PRIOR TO 1960)\r\nA": {
+     "label": "APARTMENT: WALK UP (BUILT PRIOR TO 1960) A",
+     "codes": [
+      "037"
+     ],
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "AUTO DEALER": {
+     "label": "AUTO DEALER",
+     "codes": [
+      "041"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "AUTO REPAIR/BODY SHOP": {
+     "label": "AUTO REPAIR/BODY SHOP",
+     "codes": [
+      "042"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "BRANCH FINANCIAL INSTITUTION": {
+     "label": "BRANCH FINANCIAL INSTITUTION",
+     "codes": [
+      "031"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "BUSINESS CENTER": {
+     "label": "BUSINESS CENTER",
+     "codes": [
+      "075"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "CAMP GROUND": {
+     "label": "CAMP GROUND",
+     "codes": [
+      "061"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "CAR WASH": {
+     "label": "CAR WASH",
+     "codes": [
+      "047"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "CHURCH": {
+     "label": "CHURCH",
+     "codes": [
+      "091"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "CLUB/UNION HALL/LODGE": {
+     "label": "CLUB/UNION HALL/LODGE",
+     "codes": [
+      "098"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "CONDOMINIUM OFC  OR OTHER COM CONDO": {
+     "label": "CONDOMINIUM OFC OR OTHER COM CONDO",
+     "codes": [
+      "036"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "CONDOMINIUM OFC OR OTHER COM CONDO": {
+     "label": "CONDOMINIUM OFC OR OTHER COM CONDO",
+     "codes": [
+      "036"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "CONVENIENCE MARKET WITH GAS": {
+     "label": "CONVENIENCE MARKET WITH GAS",
+     "codes": [
+      "045"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "CONVENIENCE MARKET WITHOUT GAS": {
+     "label": "CONVENIENCE MARKET WITHOUT GAS",
+     "codes": [
+      "029"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "DAY CARE CENTER": {
+     "label": "DAY CARE CENTER",
+     "codes": [
+      "027"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "DEPARTMENT STORE": {
+     "label": "DEPARTMENT STORE",
+     "codes": [
+      "026"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "DOCK/MARINA": {
+     "label": "DOCK/MARINA",
+     "codes": [
+      "067"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "DORMITORY/BOARDING HOUSE": {
+     "label": "DORMITORY/BOARDING HOUSE",
+     "codes": [
+      "017"
+     ],
+     "type": "unknown",
+     "form": null
+    },
+    "DUPLEX": {
+     "label": "DUPLEX",
+     "codes": [
+      "012",
+      "082"
+     ],
+     "type": "residential",
+     "form": "small-multi"
+    },
+    "ENCLOSED MALL": {
+     "label": "ENCLOSED MALL",
+     "codes": [
+      "028"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "EVENT CENTER": {
+     "label": "EVENT CENTER",
+     "codes": [
+      "069"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "EXEMPT VACANT LAND": {
+     "label": "EXEMPT VACANT LAND",
+     "codes": [
+      "090"
+     ],
+     "type": "vacant",
+     "form": null
+    },
+    "FARM BUILDINGS ONLY": {
+     "label": "FARM BUILDINGS ONLY",
+     "codes": [
+      "085"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "FAST FOOD": {
+     "label": "FAST FOOD",
+     "codes": [
+      "052"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "FEDERAL OTHER THAN OFC, SCHOOL, HOSP, PARK": {
+     "label": "FEDERAL OTHER THAN OFC, SCHOOL, HOSP, PARK",
+     "codes": [
+      "005"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "FIRE STATION": {
+     "label": "FIRE STATION",
+     "codes": [
+      "007"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "GOLF COURSE/DRIVING RANGE": {
+     "label": "GOLF COURSE/DRIVING RANGE",
+     "codes": [
+      "057"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "GREENHOUSE/NURSERY": {
+     "label": "GREENHOUSE/NURSERY",
+     "codes": [
+      "066"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "HEAVY MANUFACTURING": {
+     "label": "HEAVY MANUFACTURING",
+     "codes": [
+      "072"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "HOSPITAL OR CLINIC": {
+     "label": "HOSPITAL OR CLINIC",
+     "codes": [
+      "094"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "HOTEL/MOTEL": {
+     "label": "HOTEL/MOTEL",
+     "codes": [
+      "059"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "LIBRARY": {
+     "label": "LIBRARY",
+     "codes": [
+      "006"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "LIGHT MANUFACTURING": {
+     "label": "LIGHT MANUFACTURING",
+     "codes": [
+      "071"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "LUMBER YARD/SAWMILL": {
+     "label": "LUMBER YARD/SAWMILL",
+     "codes": [
+      "073"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "MEDICAL OFFICE (ONE OR TWO STORIES)": {
+     "label": "MEDICAL OFFICE (ONE OR TWO STORIES)",
+     "codes": [
+      "034"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "MEDICAL OFFICE (THREE STORIES OR GREATER)": {
+     "label": "MEDICAL OFFICE (THREE STORIES OR GREATER)",
+     "codes": [
+      "035"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "METRO OTHER THAN OFC, SCHOOL,HOSP, OR PARK": {
+     "label": "METRO OTHER THAN OFC, SCHOOL,HOSP, OR PARK",
+     "codes": [
+      "002"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "MINERAL PROCESSING": {
+     "label": "MINERAL PROCESSING",
+     "codes": [
+      "076"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "MINI LUBE": {
+     "label": "MINI LUBE",
+     "codes": [
+      "046"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "MINI WAREHOUSE": {
+     "label": "MINI WAREHOUSE",
+     "codes": [
+      "063"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "MOBILE HOME": {
+     "label": "MOBILE HOME",
+     "codes": [
+      "018",
+      "088"
+     ],
+     "type": "residential",
+     "form": "single-family"
+    },
+    "MOBILE HOME PARK": {
+     "label": "MOBILE HOME PARK",
+     "codes": [
+      "062"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "MORTUARY/CEMETERY": {
+     "label": "MORTUARY/CEMETERY",
+     "codes": [
+      "096"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "MUSEUM OR OTHER CULTURAL ORG.": {
+     "label": "MUSEUM OR OTHER CULTURAL ORG.",
+     "codes": [
+      "099"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "NEIGHBORHOOD SUPERMARKET (FREE STANDING)": {
+     "label": "NEIGHBORHOOD SUPERMARKET (FREE STANDING)",
+     "codes": [
+      "021"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "NIGHTCLUB/LOUNGE": {
+     "label": "NIGHTCLUB/LOUNGE",
+     "codes": [
+      "053"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "NON-PROFIT CHARITABLE SERVICE": {
+     "label": "NON-PROFIT CHARITABLE SERVICE",
+     "codes": [
+      "097"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "NURSING HOME": {
+     "label": "NURSING HOME",
+     "codes": [
+      "095"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "OFFICE BLDG (3 OR MORE STORIES)": {
+     "label": "OFFICE BLDG (3 OR MORE STORIES)",
+     "codes": [
+      "033"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "OFFICE BLDG (ONE OR TWO STORIES)": {
+     "label": "OFFICE BLDG (ONE OR TWO STORIES)",
+     "codes": [
+      "032"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "ONE STORY GENERAL RETAIL STORE": {
+     "label": "ONE STORY GENERAL RETAIL STORE",
+     "codes": [
+      "025"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "OPEN STORAGE": {
+     "label": "OPEN STORAGE",
+     "codes": [
+      "078"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "PACKING PLANT/FOOD PROCESSING": {
+     "label": "PACKING PLANT/FOOD PROCESSING",
+     "codes": [
+      "074"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "PARK OR RECREATION": {
+     "label": "PARK OR RECREATION",
+     "codes": [
+      "001"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "PARKING GARAGE": {
+     "label": "PARKING GARAGE",
+     "codes": [
+      "049"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "PARKING LOT": {
+     "label": "PARKING LOT",
+     "codes": [
+      "048"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "PARSONAGE": {
+     "label": "PARSONAGE",
+     "codes": [
+      "092"
+     ],
+     "type": "unknown",
+     "form": null
+    },
+    "POLICE SUB STATION": {
+     "label": "POLICE SUB STATION",
+     "codes": [
+      "008"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "QUADPLEX": {
+     "label": "QUADPLEX",
+     "codes": [
+      "014"
+     ],
+     "type": "residential",
+     "form": "small-multi"
+    },
+    "RECORDING STUDIO": {
+     "label": "RECORDING STUDIO",
+     "codes": [
+      "058"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "RECREATIONAL": {
+     "label": "RECREATIONAL",
+     "codes": [
+      "056"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "RESIDENTIAL COMBO/MISC": {
+     "label": "RESIDENTIAL COMBO/MISC",
+     "codes": [
+      "019"
+     ],
+     "type": "residential",
+     "form": null
+    },
+    "RESIDENTIAL CONDO": {
+     "label": "RESIDENTIAL CONDO",
+     "codes": [
+      "015",
+      "086"
+     ],
+     "type": "residential",
+     "form": "unit"
+    },
+    "RESTURANT/CAFETERIA": {
+     "label": "RESTURANT/CAFETERIA",
+     "codes": [
+      "051"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "RURAL COMBO": {
+     "label": "RURAL COMBO",
+     "codes": [
+      "089"
+     ],
+     "type": "unknown",
+     "form": null
+    },
+    "SATELLITE CITY OTHER THAN OFC, SCHOOL, HOSP, PARK": {
+     "label": "SATELLITE CITY OTHER THAN OFC, SCHOOL, HOSP, PARK",
+     "codes": [
+      "003"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "SCHOOL OR COLLEGE": {
+     "label": "SCHOOL OR COLLEGE",
+     "codes": [
+      "093"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "SELF SERVICE STATION (GAS ONLY)": {
+     "label": "SELF SERVICE STATION (GAS ONLY)",
+     "codes": [
+      "044"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "SERVICE STATION FULL SERVICE": {
+     "label": "SERVICE STATION FULL SERVICE",
+     "codes": [
+      "043"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "SHOPPING CENTER": {
+     "label": "SHOPPING CENTER",
+     "codes": [
+      "023"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "SINGLE FAMILY": {
+     "label": "SINGLE FAMILY",
+     "codes": [
+      "011",
+      "081"
+     ],
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SMALL SERVICE SHOP": {
+     "label": "SMALL SERVICE SHOP",
+     "codes": [
+      "024"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "SMALL WAREHOUSE": {
+     "label": "SMALL WAREHOUSE",
+     "codes": [
+      "064"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "STATE OTHER THAN OFC, SCHOOL, HOSP, OR PARK": {
+     "label": "STATE OTHER THAN OFC, SCHOOL, HOSP, OR PARK",
+     "codes": [
+      "004"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "STRIP SHOPPING CENTER": {
+     "label": "STRIP SHOPPING CENTER",
+     "codes": [
+      "022"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "TERMINAL/DISTRIBUTION WAREHOUSE": {
+     "label": "TERMINAL/DISTRIBUTION WAREHOUSE",
+     "codes": [
+      "077"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "TERMINAL/DISTRIBUTION WARHOUSE": {
+     "label": "TERMINAL/DISTRIBUTION WARHOUSE",
+     "codes": [
+      "077"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "THEATER/AUDITORIUM": {
+     "label": "THEATER/AUDITORIUM",
+     "codes": [
+      "054"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "TRANSMITTING TOWERS": {
+     "label": "TRANSMITTING TOWERS",
+     "codes": [
+      "055"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "TRIPLEX": {
+     "label": "TRIPLEX",
+     "codes": [
+      "013"
+     ],
+     "type": "residential",
+     "form": "small-multi"
+    },
+    "VACANT COMMERCIAL LAND": {
+     "label": "VACANT COMMERCIAL LAND",
+     "codes": [
+      "020"
+     ],
+     "type": "vacant",
+     "form": null
+    },
+    "VACANT INDUSTRIAL LAND": {
+     "label": "VACANT INDUSTRIAL LAND",
+     "codes": [
+      "070"
+     ],
+     "type": "vacant",
+     "form": null
+    },
+    "VACANT RESIDENTIAL LAND": {
+     "label": "VACANT RESIDENTIAL LAND",
+     "codes": [
+      "010"
+     ],
+     "type": "vacant",
+     "form": null
+    },
+    "VACANT RESIENTIAL LAND": {
+     "label": "VACANT RESIENTIAL LAND",
+     "codes": [
+      "010"
+     ],
+     "type": "vacant",
+     "form": null
+    },
+    "VACANT RURAL LAND": {
+     "label": "VACANT RURAL LAND",
+     "codes": [
+      "080",
+      "80M"
+     ],
+     "type": "vacant",
+     "form": null
+    },
+    "VACANT ZONED MULTI FAMILY": {
+     "label": "VACANT ZONED MULTI FAMILY",
+     "codes": [
+      "030"
+     ],
+     "type": "vacant",
+     "form": null
+    },
+    "WHOLESALE OUTLET": {
+     "label": "WHOLESALE OUTLET",
+     "codes": [
+      "065"
+     ],
+     "type": "non-residential",
+     "form": null
+    },
+    "ZERO LOT LINE": {
+     "label": "ZERO LOT LINE",
+     "codes": [
+      "016"
+     ],
+     "type": "residential",
+     "form": "single-family"
+    }
+   },
+   "source": {
+    "name": "Metro Nashville Parcels (Parcels_view), LUDesc: General Land Use assigned by the Assessor of Property (Parcels metadata document)",
+    "url": "https://nashville.maps.arcgis.com/sharing/rest/content/items/691604512e634cb88615773d388d4379/data",
+    "values_read_from": "https://services2.arcgis.com/HdTo6HJqh92wn4D8/arcgis/rest/services/Parcels_view/FeatureServer/0"
+   },
+   "type_rule": "Labels are the Assessor's; the type is read from the label. Residential: SINGLE FAMILY, DUPLEX, TRIPLEX, QUADPLEX, RESIDENTIAL CONDO, ZERO LOT LINE, MOBILE HOME, RESIDENTIAL COMBO/MISC and the APARTMENT labels. Vacant: labels containing VACANT. Unknown (a home may or may not be there): RURAL COMBO, PARSONAGE, DORMITORY/BOARDING HOUSE. All others non-residential. Form: SINGLE FAMILY, ZERO LOT LINE and MOBILE HOME single-family; DUPLEX, TRIPLEX, QUADPLEX small multi-unit (2-4); RESIDENTIAL CONDO a unit; APARTMENT labels a multi-family building; RESIDENTIAL COMBO/MISC not stated.",
+   "verification": {
+    "status": "verified",
+    "checked_on": "2026-11-17",
+    "method": "Field definition read from the metadata PDF; the distinct LUCode/LUDesc pairs read from the layer by scripts/build_zoning_standards.py",
+    "evidence": "89 labels",
+    "unverified_fields": []
+   }
+  },
+  {
+   "id": "sandiego_nucleus_use",
+   "counties": [
+    "06073"
+   ],
+   "field": "nucleus_use_cd",
+   "codes": {
+    "000": {
+     "label": "UNKNOWN",
+     "group": null,
+     "type": "unknown",
+     "form": null
+    },
+    "060": {
+     "label": "INFO PARCEL-GENERIC",
+     "group": "INFO",
+     "type": "unknown",
+     "form": null
+    },
+    "067": {
+     "label": "INFO PARCEL-TIME SHARE",
+     "group": "INFO",
+     "type": "unknown",
+     "form": null
+    },
+    "068": {
+     "label": "INFO PARCEL-OWNER IN MH CO-OP",
+     "group": "INFO",
+     "type": "unknown",
+     "form": null
+    },
+    "069": {
+     "label": "INFO PARCEL-MH SPACE IN RENTAL PARK",
+     "group": "INFO",
+     "type": "unknown",
+     "form": null
+    },
+    "070": {
+     "label": "TIME SHARE GENERIC",
+     "group": "INFO",
+     "type": "unknown",
+     "form": null
+    },
+    "072": {
+     "label": "TIME SHARE INDEXED",
+     "group": "INFO",
+     "type": "unknown",
+     "form": null
+    },
+    "090": {
+     "label": "MANUFACTURED HOME IN PARK - NOT SPECIFIED",
+     "group": "MANUFACTURED HOME",
+     "type": "residential",
+     "form": "unit"
+    },
+    "091": {
+     "label": "MANUFACTURED HOME IN RENTAL PARK",
+     "group": "MANUFACTURED HOME",
+     "type": "residential",
+     "form": "unit"
+    },
+    "092": {
+     "label": "MH IN CONDO/SUBDIVISION PARK",
+     "group": "MANUFACTURED HOME",
+     "type": "residential",
+     "form": "unit"
+    },
+    "093": {
+     "label": "MH IN PLANNED UNIT DEVELOPMENT (PUD) PARK",
+     "group": "MANUFACTURED HOME",
+     "type": "residential",
+     "form": "unit"
+    },
+    "094": {
+     "label": "MANUFACTURED HOME IN CO-OP PARK",
+     "group": "MANUFACTURED HOME",
+     "type": "residential",
+     "form": "unit"
+    },
+    "095": {
+     "label": "MH IN LONG TERM LEASE PARK",
+     "group": "MANUFACTURED HOME",
+     "type": "residential",
+     "form": "unit"
+    },
+    "096": {
+     "label": "MH ON INDIAN RESERVATION",
+     "group": "MANUFACTURED HOME",
+     "type": "residential",
+     "form": "unit"
+    },
+    "097": {
+     "label": "MH ON LEASED LAND - NOT A PARK",
+     "group": "MANUFACTURED HOME",
+     "type": "residential",
+     "form": "unit"
+    },
+    "098": {
+     "label": "MANUFACTURED HOME ACCESSORIES ONLY",
+     "group": "MANUFACTURED HOME",
+     "type": "non-residential",
+     "form": null
+    },
+    "099": {
+     "label": "MH ON PRIVATE PROPERTY - NOT A PARK",
+     "group": "MANUFACTURED HOME",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "109": {
+     "label": "SINGLE FAMILY RESIDENCE WITH ADU",
+     "group": "RESIDENTIAL",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "110": {
+     "label": "SINGLE FAMILY RESIDENCE - GENERIC",
+     "group": "RESIDENTIAL",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "111": {
+     "label": "SINGLE FAMILY RESIDENCE",
+     "group": "RESIDENTIAL",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "112": {
+     "label": "SINGLE FAMILY RESIDENCE W/GRANNY FLAT",
+     "group": "RESIDENTIAL",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "113": {
+     "label": "SINGLE FAMILY GATED COMMUNITY",
+     "group": "RESIDENTIAL",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "114": {
+     "label": "SINGLE FAMILY ATTACHED/PUD",
+     "group": "RESIDENTIAL",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "115": {
+     "label": "SINGLE FAMILY DETACHED/PUD",
+     "group": "RESIDENTIAL",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "116": {
+     "label": "SINGLE FAMILY RESIDENCE W/SHARED WATER SYS",
+     "group": "RESIDENTIAL",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "117": {
+     "label": "SINGLE FAMILY WITH AG BUILDINGS",
+     "group": "RESIDENTIAL",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "118": {
+     "label": "SINGLE FAMILY RESIDENCE ATTACHED - AGE RESTRICTED",
+     "group": "RESIDENTIAL",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "119": {
+     "label": "SINGLE FAMILY RESIDENCE DETACHED - AGE RESTRICTED",
+     "group": "RESIDENTIAL",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "120": {
+     "label": "DUPLEX - GENERIC",
+     "group": "MULTIPLE",
+     "type": "residential",
+     "form": "small-multi"
+    },
+    "130": {
+     "label": "2 - 4 UNITS - GENERIC",
+     "group": "MULTIPLE",
+     "type": "residential",
+     "form": "small-multi"
+    },
+    "140": {
+     "label": "5 - 15 UNITS GENERIC",
+     "group": "MULTIPLE",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "150": {
+     "label": "16 - 60 UNITS GENERIC",
+     "group": "MULTIPLE",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "152": {
+     "label": "16 - 60 UNITS SENIOR HOUSING",
+     "group": "MULTIPLE",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "153": {
+     "label": "16 - 60 UNITS - RESTRICTED RENTS",
+     "group": "MULTIPLE",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "160": {
+     "label": "61 UNITS AND UP GENERIC",
+     "group": "MULTIPLE",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "162": {
+     "label": "61 UNITS AND UP SENIOR HOUSING",
+     "group": "MULTIPLE",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "163": {
+     "label": "61 UNITS AND UP RESTRICTED HOUSING",
+     "group": "MULTIPLE",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "170": {
+     "label": "CONDOS AND OTHER RES CLASSIFICATIONS",
+     "group": "CONDOMINIUMS",
+     "type": "residential",
+     "form": "unit"
+    },
+    "171": {
+     "label": "CONDOS ATTACHED",
+     "group": "CONDOMINIUMS",
+     "type": "residential",
+     "form": "unit"
+    },
+    "172": {
+     "label": "CONDOS DETACHED",
+     "group": "CONDOMINIUMS",
+     "type": "residential",
+     "form": "unit"
+    },
+    "173": {
+     "label": "2 UNIT PROJECT",
+     "group": "CONDOMINIUMS",
+     "type": "residential",
+     "form": "unit"
+    },
+    "174": {
+     "label": "SEPARATE SUB-IDS-PROJECT OPERATED AS LG APT",
+     "group": "CONDOMINIUMS",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "175": {
+     "label": "CONDOS ATTACHED - AGE RESTRICTED",
+     "group": "CONDOMINIUMS",
+     "type": "residential",
+     "form": "unit"
+    },
+    "176": {
+     "label": "CONDOS DETACHED - AGE RESTRICTED",
+     "group": "CONDOMINIUMS",
+     "type": "residential",
+     "form": "unit"
+    },
+    "180": {
+     "label": "CO-OP GENERIC",
+     "group": "CO-OP/MISC",
+     "type": "residential",
+     "form": "unit"
+    },
+    "182": {
+     "label": "CO-OP ON LEASED LAND",
+     "group": "CO-OP/MISC",
+     "type": "residential",
+     "form": "unit"
+    },
+    "190": {
+     "label": "SPECIAL-SLIVER, SMALL PARCEL",
+     "group": "CO-OP/MISC",
+     "type": "non-residential",
+     "form": null
+    },
+    "191": {
+     "label": "COMMON AREA, RECREATION FACILITY FOR DEVELOP",
+     "group": "CO-OP/MISC",
+     "type": "non-residential",
+     "form": null
+    },
+    "192": {
+     "label": "PARCEL USED FOR ACCESS (DRVWY FOR MULT PRCLS)",
+     "group": "CO-OP/MISC",
+     "type": "non-residential",
+     "form": null
+    },
+    "193": {
+     "label": "SLIVER LEFT OVER-PARCEL NON-BUILDABLE",
+     "group": "CO-OP/MISC",
+     "type": "non-residential",
+     "form": null
+    },
+    "200": {
+     "label": "VACANT LAND COMMERCIAL",
+     "group": "COMMERCIAL",
+     "type": "vacant",
+     "form": null
+    },
+    "209": {
+     "label": "OFFICE LABORATORY",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "210": {
+     "label": "GENERIC COMMERCIAL OFFICE/RETAIL 1-3 STORIES",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "211": {
+     "label": "1 - 3 STORY OFFICE ONLY",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "212": {
+     "label": "OFFICE/RETAIL BUILDING",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "213": {
+     "label": "SINGLE TENANT STAND ALONE RETAIL BLDG",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "214": {
+     "label": "CONVENIENCE STORE (7/11, CIRCLE K, ETC)",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "215": {
+     "label": "DEPARTMENT STORE",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "216": {
+     "label": "SINGLE STORY STRIP RETAIL",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "217": {
+     "label": "COMBINATION COMMERCIAL/RESIDENTIAL BUILDING",
+     "group": "COMMERCIAL",
+     "type": "mixed",
+     "form": null
+    },
+    "218": {
+     "label": "GARDENING/NURSERY",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "219": {
+     "label": "RETAIL CONDOMINIMUM",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "220": {
+     "label": "GENERIC-4 AND MORE STORY OFFICE BUILDING",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "221": {
+     "label": "4 AND MORE STORY OFFICE",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "222": {
+     "label": "4 OR MORE STORY RETAIL",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "230": {
+     "label": "REGIONAL SHOPPING CENTER",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "232": {
+     "label": "FACTORY OUTLET CENTER",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "240": {
+     "label": "COMMUNITY SHOPPING CENTER",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "250": {
+     "label": "NEIGHBORHOOD SHOPPING CENTER",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "251": {
+     "label": "NEIGHBORHOOD SHOPPING CTR (ANCHOR W/DRUG/GROC)",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "252": {
+     "label": "NEIGHBORHOOD SHOP CTR (UNANCHORED W/DRUG/GROC)",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "260": {
+     "label": "HOTEL/MOTEL - GENERIC",
+     "group": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "261": {
+     "label": "HOTEL",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "262": {
+     "label": "RESORT HOTEL",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "263": {
+     "label": "SRO HOTEL",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "264": {
+     "label": "HOTEL CONDOMINIMUM",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "265": {
+     "label": "MOTEL - INDEPENDENT",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "266": {
+     "label": "MOTEL - CHAIN",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "267": {
+     "label": "BED AND BREAKFAST",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "270": {
+     "label": "SERVICE STATION - GENERIC",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "271": {
+     "label": "SERVICE STATION",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "272": {
+     "label": "SERVICE STATION WITH MINI-MART/RETAIL",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "273": {
+     "label": "SERVICE STATION-CAR WASH W/MINI MART/RETAIL",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "274": {
+     "label": "MINI LUBE/OIL CHANGE",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "280": {
+     "label": "GENERIC MEDICAL/DENTAL OFFICE",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "281": {
+     "label": "MEDICAL-DENTAL OFFICE",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "282": {
+     "label": "VETERINARY OFFICES",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "283": {
+     "label": "ANIMAL HOSPITAL",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "284": {
+     "label": "KENNELS",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "290": {
+     "label": "REST HOME/CONVALESCENT HOSPITAL",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "291": {
+     "label": "COMBINATION ASSISTED LIVING/SKILLED NURSING",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "292": {
+     "label": "CONVALESCENT HOSPITAL",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "293": {
+     "label": "REST HOME",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "294": {
+     "label": "RETIREMENT/INDEPENDENT LIVING",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "300": {
+     "label": "OFFICE CONDOS",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "310": {
+     "label": "GARAGE PARKING LOT/USED CAR",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "311": {
+     "label": "PARKING LOT MINIMAL IMPROVEMENTS",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "312": {
+     "label": "PARKING STRUCTURE",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "320": {
+     "label": "TRAILER PARK",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "321": {
+     "label": "MOBILE HOME PARK-RENTAL",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "322": {
+     "label": "RV PARK",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "330": {
+     "label": "THEATER-GENERIC",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "331": {
+     "label": "MOVIE THEATER",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "332": {
+     "label": "MOVIE THEATER - MULTIPLEX",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "333": {
+     "label": "AUDITORIUM/LIVE THEATER",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "337": {
+     "label": "DRIVE IN THEATER",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "340": {
+     "label": "BOWLING ALLEY",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "342": {
+     "label": "MISC. RECREATIONAL",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "343": {
+     "label": "GYM/FITNESS CENTER",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "344": {
+     "label": "AMUSEMENT PARK",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "345": {
+     "label": "TENNIS/SWIM CLUB",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "346": {
+     "label": "RACE TRACK",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "347": {
+     "label": "PLAYING FIELD",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "348": {
+     "label": "CASINO",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "349": {
+     "label": "HORSE FACILITIES-RIDING STABLE",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "350": {
+     "label": "GENERIC RESTAURANT/NIGHT CLUB/TAVERN",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "351": {
+     "label": "RESTAURANT - INDEPENDENT",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "352": {
+     "label": "CHAIN TYPE RESTAURANT",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "353": {
+     "label": "NIGHT CLUB",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "354": {
+     "label": "BAR/TAVERN",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "355": {
+     "label": "FAST FOOD RESTAURANT",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "360": {
+     "label": "CAR WASH",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "370": {
+     "label": "GROCERY/DRUG LARGE CHAIN GENERIC",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "371": {
+     "label": "GROCERY CHAIN",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "372": {
+     "label": "DRUG STORE CHAIN",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "373": {
+     "label": "GROCERY STORE INDEPENDENT",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "380": {
+     "label": "AUTO SALES/SERVICE AGENCY",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "381": {
+     "label": "NEW CAR DEALERSHIP",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "382": {
+     "label": "USED CAR LOT",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "390": {
+     "label": "GENERIC- RADIO STATION/BANK/MISC",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "391": {
+     "label": "RADIO/TV STATION MEDIA CENTER",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "392": {
+     "label": "BANK",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "397": {
+     "label": "ANTENNA/CELL SITE",
+     "group": "HOTEL/MOTEL - GENERIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "400": {
+     "label": "VACANT INDUSTIAL",
+     "group": "INDUSTRIAL",
+     "type": "vacant",
+     "form": null
+    },
+    "410": {
+     "label": "FACTORY/LIGHT MANUFACTURING",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "411": {
+     "label": "SINGLE TENANT INDUSTRIAL",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "412": {
+     "label": "MULTI-TENANT INDUSTRIAL",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "413": {
+     "label": "INDUSTRIAL LABORATORY",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "414": {
+     "label": "R & D BUILDING",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "415": {
+     "label": "MANUFACTURING CLEAN ROOM (ELECTRONICS)",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "416": {
+     "label": "OFFICE/R & D/LIGHT MANUFACTURING (BIOTECH)",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "420": {
+     "label": "FACTORY HEAVY MANUFACTURING",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "430": {
+     "label": "WAREHOUSE-PROCESSING/STORAGE/DISTRIBUTION",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "432": {
+     "label": "MAJOR DISTRIBUTION CENTER",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "433": {
+     "label": "TANK FARM",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "440": {
+     "label": "STORAGE BULK CHEMICAL/OIL REFINERY",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "442": {
+     "label": "BULK STORAGE",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "443": {
+     "label": "LUMBERYARD",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "450": {
+     "label": "NATURAL RESOURCES-MINIG, EXTRACTIVE, PROCESS",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "452": {
+     "label": "LANDFILL",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "453": {
+     "label": "CEMENT/ROCK/GRAVEL PLANT",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "454": {
+     "label": "WINERY/BREWERY",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "455": {
+     "label": "PACKING COLD STORAGE",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "456": {
+     "label": "PRIVATE WATER COMPANIES",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "457": {
+     "label": "POWER PLANTS",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "458": {
+     "label": "OPEN STORAGE",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "460": {
+     "label": "AUTOMOTIVE REPAIR GARAGES",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "462": {
+     "label": "TRUCK TERMINAL",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "463": {
+     "label": "AUTO WRECKING YARDS",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "464": {
+     "label": "SHIPYARD, SHIP/BOAT REPAIR FACILITIES",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "465": {
+     "label": "AIRPLANE HANGAR",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "470": {
+     "label": "INDUSTRIAL CONDOS",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "490": {
+     "label": "MISC INDUSTRY/SPECIAL",
+     "group": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "500": {
+     "label": "IRRIGATED FARM VACANT WATER AVAILABLE",
+     "group": "IRRIGATED FARM",
+     "type": "vacant",
+     "form": null
+    },
+    "510": {
+     "label": "CITRUS",
+     "group": "IRRIGATED FARM",
+     "type": "non-residential",
+     "form": null
+    },
+    "520": {
+     "label": "AVOCADO",
+     "group": "IRRIGATED FARM",
+     "type": "non-residential",
+     "form": null
+    },
+    "530": {
+     "label": "VINES",
+     "group": "IRRIGATED FARM",
+     "type": "non-residential",
+     "form": null
+    },
+    "532": {
+     "label": "VINEYARD",
+     "group": "IRRIGATED FARM",
+     "type": "non-residential",
+     "form": null
+    },
+    "533": {
+     "label": "VINEYARD W/WINE TASTING ROOM",
+     "group": "IRRIGATED FARM",
+     "type": "non-residential",
+     "form": null
+    },
+    "540": {
+     "label": "TREES MISC",
+     "group": "IRRIGATED FARM",
+     "type": "non-residential",
+     "form": null
+    },
+    "550": {
+     "label": "LIVESTOCK",
+     "group": "IRRIGATED FARM",
+     "type": "non-residential",
+     "form": null
+    },
+    "560": {
+     "label": "POULTRY",
+     "group": "IRRIGATED FARM",
+     "type": "non-residential",
+     "form": null
+    },
+    "570": {
+     "label": "IRRIGATED CROPS OTHER VEG., FLORAL, FEEDING",
+     "group": "IRRIGATED FARM",
+     "type": "non-residential",
+     "form": null
+    },
+    "580": {
+     "label": "GROWING HOUSES",
+     "group": "IRRIGATED FARM",
+     "type": "non-residential",
+     "form": null
+    },
+    "590": {
+     "label": "MISC AGRICULTURAL",
+     "group": "IRRIGATED FARM",
+     "type": "non-residential",
+     "form": null
+    },
+    "610": {
+     "label": "1 - 10 ACRES RURAL LAND OTHER",
+     "group": "RURAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "620": {
+     "label": "11 -40 ACRES NON-IRRIGATED",
+     "group": "RURAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "630": {
+     "label": "41 - 160 ACRES NON-IRRIGATED",
+     "group": "RURAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "640": {
+     "label": "161 -360 ACRES NON-IRRIGATED",
+     "group": "RURAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "650": {
+     "label": "361 ACRES & UP NON-IRRIGATED",
+     "group": "RURAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "700": {
+     "label": "INSTITUTIONAL - VACANT",
+     "group": "INSTITUTIONAL",
+     "type": "vacant",
+     "form": null
+    },
+    "710": {
+     "label": "CHURCH",
+     "group": "INSTITUTIONAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "720": {
+     "label": "CHURCH RECTORY, PRKG & OTHER CHURCH RELATED",
+     "group": "INSTITUTIONAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "730": {
+     "label": "CEMETERY",
+     "group": "INSTITUTIONAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "740": {
+     "label": "MAUSOLEUM",
+     "group": "INSTITUTIONAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "750": {
+     "label": "MORTUARY",
+     "group": "INSTITUTIONAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "760": {
+     "label": "PUBLIC BUILDING - SCHOOL, FIREHOUSE, LIBRARY, ETC",
+     "group": "INSTITUTIONAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "770": {
+     "label": "HOSPITAL",
+     "group": "INSTITUTIONAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "780": {
+     "label": "PRIVATE SCHOOLS & FACILITIES",
+     "group": "INSTITUTIONAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "782": {
+     "label": "PRESCHOOL AND CHILDCARE FACILITY",
+     "group": "INSTITUTIONAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "783": {
+     "label": "FRATERNITY AND SORORITY HOUSE",
+     "group": "INSTITUTIONAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "784": {
+     "label": "DORMS-PRIVATE",
+     "group": "INSTITUTIONAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "790": {
+     "label": "MISC INST",
+     "group": "INSTITUTIONAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "792": {
+     "label": "CORRECTIONAL FACILITY",
+     "group": "INSTITUTIONAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "800": {
+     "label": "VACANT RECREATIONAL",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "vacant",
+     "form": null
+    },
+    "810": {
+     "label": "MEETING HALL/GYM",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "811": {
+     "label": "MEETING HALL",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "812": {
+     "label": "AMPHITHEATER",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "813": {
+     "label": "ARENA/STADIUM",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "820": {
+     "label": "GOLF COURSE",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "823": {
+     "label": "DRIVING RANGE",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "830": {
+     "label": "MARINA DOCKS",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "840": {
+     "label": "RECREATIONAL CAMPS",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "850": {
+     "label": "NON-TAXABLE",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "851": {
+     "label": "MILITARY BASE",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "852": {
+     "label": "STATE PARK",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "853": {
+     "label": "COUNTY PARK",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "854": {
+     "label": "CITY PARK",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "855": {
+     "label": "NATIONAL PARK",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "856": {
+     "label": "WATER TANK SITE",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "857": {
+     "label": "INDIAN RESERVATION",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "858": {
+     "label": "NATIONAL WILDLIFE REFUGE",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "859": {
+     "label": "MISC NON-TAXABLE IMPROVEMENT",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "860": {
+     "label": "OPEN SPACE",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "861": {
+     "label": "OPEN SPACE OWNED BY AN HOA",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "862": {
+     "label": "OPEN SPACE OWNED BY A DEVELOPER",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "864": {
+     "label": "OPEN SPACE ESMT-IN FAVOR OF GOVERNMENT",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "865": {
+     "label": "LAND BANK - CREDITS BEING SOLD",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "866": {
+     "label": "MITIGATION LAND-CREDITS USED",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "867": {
+     "label": "STATE ASSESSED",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "868": {
+     "label": "CONSERVATION EASEMENT (UNDER CONTRACT - RESTRICTED)",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "870": {
+     "label": "AGRICULTURAL PRESERVE (NOT UNDER CONTRACT",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "880": {
+     "label": "AGRICULTURAL PRESERVE (UNDER CONTRACT - RESTRICTED)",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "881": {
+     "label": "AGRICULTURAL PRESERVE WITH HOUSE",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "882": {
+     "label": "AGRICULTURAL PRESERVE AVOCADO",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "883": {
+     "label": "AGRICULTURAL PERSERVE",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "884": {
+     "label": "AGRICULTURAL PRESERVE GRAZING",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "885": {
+     "label": "VINEYARD UNDER CONTRACT",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "886": {
+     "label": "URBAN AGRICULTURAL INCENTIVE ZONE (UAIZ)",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "887": {
+     "label": "MILLS ACT (SINGLE FAM OWNER OCCUPIED)",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "888": {
+     "label": "MILLS ACT (OTHER THAN SINGL FAM OWNER OCCUPIED)",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "889": {
+     "label": "HABITAT FOR HUMANITY",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "890": {
+     "label": "MISC/SPECIAL",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "900": {
+     "label": "VACANT TAXABLE GOVT OWNED PROPERTY",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "vacant",
+     "form": null
+    },
+    "910": {
+     "label": "IMPROVED TAXABLE GOVT OWNED PROPERTY",
+     "group": "RECREATIONAL AND GOVERNMENT",
+     "type": "non-residential",
+     "form": null
+    }
+   },
+   "source": {
+    "name": "SanGIS Parcels, NUCLEUS_USE_CD (San Diego County Assessor use code; list printed in the field definition of the layer's metadata)",
+    "url": "https://geo.sandag.org/server/rest/services/Hosted/Parcels/FeatureServer/0/metadata",
+    "caveat": "The metadata says the field is irregularly maintained by the Assessor's Office and land use and zoning fields should only be used as an approximate guide."
+   },
+   "type_rule": "Labels and group headings are the Assessor's; the type is read from the group. RESIDENTIAL: a single-family house. MULTIPLE: 120 duplex and 130 2-4 units are small multi-unit, the rest a multi-family building. CONDOMINIUMS: a unit, except 174 (operated as a large apartment) a multi-family building. CO-OP/MISC: 180 and 182 co-op units; 190-193 slivers, common areas and access parcels non-residential. MANUFACTURED HOME: 099 (on private property, not a park) single-family; 098 accessories only non-residential; the rest a unit in a park or development. INFO and 000 UNKNOWN: unknown. Labels containing VACANT: vacant. 217 combination commercial/residential: mixed. Everything else non-residential.",
+   "verification": {
+    "status": "verified",
+    "checked_on": "2026-11-17",
+    "method": "Code list parsed from the NUCLEUS_USE_CD field definition in the SanGIS Parcels layer metadata by scripts/build_zoning_standards.py",
+    "evidence": "235 codes",
+    "unverified_fields": []
+   }
+  },
+  {
+   "id": "multnomah_propclass",
+   "counties": [
+    "41051"
+   ],
+   "field": "PROPCLASS",
+   "codes": {
+    "013": {
+     "label": "Miscellaneous, State responsibility",
+     "type": "unknown",
+     "form": null
+    },
+    "021": {
+     "label": "Miscellaneous, Improved",
+     "type": "unknown",
+     "form": null
+    },
+    "023": {
+     "label": "Miscellaneous, State responsibility",
+     "type": "unknown",
+     "form": null
+    },
+    "033": {
+     "label": "Miscellaneous, State responsibility",
+     "type": "unknown",
+     "form": null
+    },
+    "043": {
+     "label": "Miscellaneous, State responsibility",
+     "type": "unknown",
+     "form": null
+    },
+    "053": {
+     "label": "Miscellaneous, State responsibility",
+     "type": "unknown",
+     "form": null
+    },
+    "073": {
+     "label": "Miscellaneous, State responsibility",
+     "type": "unknown",
+     "form": null
+    },
+    "083": {
+     "label": "Miscellaneous, State responsibility",
+     "type": "unknown",
+     "form": null
+    },
+    "100": {
+     "label": "Residential, Vacant",
+     "type": "vacant",
+     "form": null
+    },
+    "101": {
+     "label": "Residential, Improved",
+     "type": "residential",
+     "form": null
+    },
+    "102": {
+     "label": "Residential, Condominium",
+     "type": "residential",
+     "form": "unit"
+    },
+    "109": {
+     "label": "Residential, Manufactured Structure",
+     "type": "residential",
+     "form": null
+    },
+    "119": {
+     "label": "Residential, Manufactured Structure",
+     "type": "residential",
+     "form": null
+    },
+    "121": {
+     "label": "Residential, Improved",
+     "type": "residential",
+     "form": null
+    },
+    "122": {
+     "label": "Residential, Condominium",
+     "type": "residential",
+     "form": "unit"
+    },
+    "131": {
+     "label": "Residential, Improved",
+     "type": "residential",
+     "form": null
+    },
+    "132": {
+     "label": "Residential, Condominium",
+     "type": "residential",
+     "form": "unit"
+    },
+    "151": {
+     "label": "Residential, Improved",
+     "type": "residential",
+     "form": null
+    },
+    "171": {
+     "label": "Residential, Improved",
+     "type": "residential",
+     "form": null
+    },
+    "200": {
+     "label": "Commercial, Vacant",
+     "type": "vacant",
+     "form": null
+    },
+    "2003": {
+     "label": "county code 2003 (not one of OAR 150-308-0310's three-digit classes)",
+     "type": "unknown",
+     "form": null
+    },
+    "201": {
+     "label": "Commercial, Improved",
+     "type": "non-residential",
+     "form": null
+    },
+    "2013": {
+     "label": "county code 2013 (not one of OAR 150-308-0310's three-digit classes)",
+     "type": "unknown",
+     "form": null
+    },
+    "202": {
+     "label": "Commercial, Condominium",
+     "type": "non-residential",
+     "form": null
+    },
+    "2023": {
+     "label": "county code 2023 (not one of OAR 150-308-0310's three-digit classes)",
+     "type": "unknown",
+     "form": null
+    },
+    "211": {
+     "label": "Commercial, Improved",
+     "type": "non-residential",
+     "form": null
+    },
+    "2113": {
+     "label": "county code 2113 (not one of OAR 150-308-0310's three-digit classes)",
+     "type": "unknown",
+     "form": null
+    },
+    "212": {
+     "label": "Commercial, Condominium",
+     "type": "non-residential",
+     "form": null
+    },
+    "2213": {
+     "label": "county code 2213 (not one of OAR 150-308-0310's three-digit classes)",
+     "type": "unknown",
+     "form": null
+    },
+    "231": {
+     "label": "Commercial, Improved",
+     "type": "non-residential",
+     "form": null
+    },
+    "232": {
+     "label": "Commercial, Condominium",
+     "type": "non-residential",
+     "form": null
+    },
+    "2703": {
+     "label": "county code 2703 (not one of OAR 150-308-0310's three-digit classes)",
+     "type": "unknown",
+     "form": null
+    },
+    "271": {
+     "label": "Commercial, Improved",
+     "type": "non-residential",
+     "form": null
+    },
+    "300": {
+     "label": "Industrial, Vacant",
+     "type": "vacant",
+     "form": null
+    },
+    "303": {
+     "label": "Industrial, State responsibility",
+     "type": "non-residential",
+     "form": null
+    },
+    "311": {
+     "label": "Industrial, Improved",
+     "type": "non-residential",
+     "form": null
+    },
+    "313": {
+     "label": "Industrial, State responsibility",
+     "type": "non-residential",
+     "form": null
+    },
+    "321": {
+     "label": "Industrial, Improved",
+     "type": "non-residential",
+     "form": null
+    },
+    "323": {
+     "label": "Industrial, State responsibility",
+     "type": "non-residential",
+     "form": null
+    },
+    "400": {
+     "label": "Tract, Vacant",
+     "type": "vacant",
+     "form": null
+    },
+    "401": {
+     "label": "Tract, Improved",
+     "type": "residential",
+     "form": null
+    },
+    "450": {
+     "label": "Tract, Vacant",
+     "type": "vacant",
+     "form": null
+    },
+    "451": {
+     "label": "Tract, Improved",
+     "type": "residential",
+     "form": null
+    },
+    "500": {
+     "label": "Farm, Vacant",
+     "type": "unknown",
+     "form": null
+    },
+    "501": {
+     "label": "Farm, Improved",
+     "type": "unknown",
+     "form": null
+    },
+    "540": {
+     "label": "Farm, Vacant",
+     "type": "unknown",
+     "form": null
+    },
+    "541": {
+     "label": "Farm, Improved",
+     "type": "unknown",
+     "form": null
+    },
+    "550": {
+     "label": "Farm, Vacant",
+     "type": "unknown",
+     "form": null
+    },
+    "551": {
+     "label": "Farm, Improved",
+     "type": "unknown",
+     "form": null
+    },
+    "640": {
+     "label": "Forest, Vacant",
+     "type": "unknown",
+     "form": null
+    },
+    "641": {
+     "label": "Forest, Improved",
+     "type": "unknown",
+     "form": null
+    },
+    "660": {
+     "label": "Forest, Vacant",
+     "type": "unknown",
+     "form": null
+    },
+    "661": {
+     "label": "Forest, Improved",
+     "type": "unknown",
+     "form": null
+    },
+    "680": {
+     "label": "Forest, Vacant",
+     "type": "unknown",
+     "form": null
+    },
+    "681": {
+     "label": "Forest, Improved",
+     "type": "unknown",
+     "form": null
+    },
+    "700": {
+     "label": "Multi-family, Vacant",
+     "type": "vacant",
+     "form": null
+    },
+    "701": {
+     "label": "Multi-family, Improved",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "702": {
+     "label": "Multi-family, Condominium",
+     "type": "residential",
+     "form": "unit"
+    },
+    "707": {
+     "label": "Multi-family, Mobile home parks",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "711": {
+     "label": "Multi-family, Improved",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "717": {
+     "label": "Multi-family, Mobile home parks",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "721": {
+     "label": "Multi-family, Improved",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "722": {
+     "label": "Multi-family, Condominium",
+     "type": "residential",
+     "form": "unit"
+    },
+    "727": {
+     "label": "Multi-family, Mobile home parks",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "731": {
+     "label": "Multi-family, Improved",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "737": {
+     "label": "Multi-family, Mobile home parks",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "781": {
+     "label": "Multi-family, Improved",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "782": {
+     "label": "Multi-family, Condominium",
+     "type": "residential",
+     "form": "unit"
+    },
+    "800": {
+     "label": "Recreation, Vacant",
+     "type": "unknown",
+     "form": null
+    },
+    "801": {
+     "label": "Recreation, Improved",
+     "type": "unknown",
+     "form": null
+    },
+    "9013": {
+     "label": "county code 9013 (not one of OAR 150-308-0310's three-digit classes)",
+     "type": "unknown",
+     "form": null
+    },
+    "9033": {
+     "label": "county code 9033 (not one of OAR 150-308-0310's three-digit classes)",
+     "type": "unknown",
+     "form": null
+    },
+    "999": {
+     "label": "Exempt, Manufactured Structure",
+     "type": "unknown",
+     "form": null
+    }
+   },
+   "source": {
+    "name": "Oregon property class (OAR 150-308-0310) on Multnomah County taxlots",
+    "attachment": "Basic Property Classes",
+    "url": "https://secure.sos.state.or.us/oard/viewAttachment.action?ruleVrsnRsn=252769",
+    "values_read_from": "https://www3.multco.us/gisagspublic/rest/services/DART/Taxlots_Orion_Public/MapServer/0"
+   },
+   "type_rule": "Decoded digit by digit from the rule's table: first digit 1 Residential, 4 Tract (homesite), 7 Multi-family, 2 Commercial, 3 Industrial, others (miscellaneous, farm, forest, recreation, exempt) unknown here; third digit 0 Vacant, 1 Improved, 2 Condominium (a unit), 6 Waterfront, 9 Manufactured Structure. 1-x-1 / 1-x-6 / 1-x-9 / 4-x-1 are a residential lot whose form the class doesn't say; 7-x-x improved is an apartment building. Four-digit county codes are unknown.",
+   "verification": {
+    "status": "verified",
+    "checked_on": "2026-11-17",
+    "method": "Digit meanings from the OAR 150-308-0310 attachment (Oregon Secretary of State); distinct PROPCLASS values read from the taxlot layer by scripts/build_zoning_standards.py",
+    "evidence": "73 values",
+    "unverified_fields": []
+   }
+  },
+  {
+   "id": "mecklenburg_landuse",
+   "counties": [
+    "37119"
+   ],
+   "field": "landuse_description",
+   "codes": {
+    "100 YEAR FLOOD PLAIN - AC": {
+     "label": "100 YEAR FLOOD PLAIN - AC",
+     "type": "non-residential",
+     "form": null
+    },
+    "AGRICULTURAL - COMMERCIAL PRODUCTION": {
+     "label": "AGRICULTURAL - COMMERCIAL PRODUCTION",
+     "type": "non-residential",
+     "form": null
+    },
+    "AIR RIGHTS PARCEL": {
+     "label": "AIR RIGHTS PARCEL",
+     "type": "unknown",
+     "form": null
+    },
+    "AIRPORT": {
+     "label": "AIRPORT",
+     "type": "non-residential",
+     "form": null
+    },
+    "AUTO SALES AND SERVICE": {
+     "label": "AUTO SALES AND SERVICE",
+     "type": "non-residential",
+     "form": null
+    },
+    "BANK": {
+     "label": "BANK",
+     "type": "non-residential",
+     "form": null
+    },
+    "BILL BOARD": {
+     "label": "BILL BOARD",
+     "type": "non-residential",
+     "form": null
+    },
+    "BOWLING ALLEY, SKATING RINK": {
+     "label": "BOWLING ALLEY, SKATING RINK",
+     "type": "non-residential",
+     "form": null
+    },
+    "BREWERY, BOTTLER, CANNERY, WINERY": {
+     "label": "BREWERY, BOTTLER, CANNERY, WINERY",
+     "type": "non-residential",
+     "form": null
+    },
+    "BUFFER STRIP": {
+     "label": "BUFFER STRIP",
+     "type": "non-residential",
+     "form": null
+    },
+    "CAR WASH": {
+     "label": "CAR WASH",
+     "type": "non-residential",
+     "form": null
+    },
+    "CELL TOWER": {
+     "label": "CELL TOWER",
+     "type": "non-residential",
+     "form": null
+    },
+    "CHURCH": {
+     "label": "CHURCH",
+     "type": "non-residential",
+     "form": null
+    },
+    "CLUB, LODGES, UNION HALL, SWIM CLUB": {
+     "label": "CLUB, LODGES, UNION HALL, SWIM CLUB",
+     "type": "non-residential",
+     "form": null
+    },
+    "COLLEGE - PUBLIC": {
+     "label": "COLLEGE - PUBLIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "COMMERCIAL": {
+     "label": "COMMERCIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "COMMERCIAL COMMON AREA": {
+     "label": "COMMERCIAL COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "COMMERCIAL CONDOMINIUM": {
+     "label": "COMMERCIAL CONDOMINIUM",
+     "type": "non-residential",
+     "form": null
+    },
+    "COMMERCIAL CONDOMINIUM COMMON AREA": {
+     "label": "COMMERCIAL CONDOMINIUM COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "COMMERCIAL LANDFIL": {
+     "label": "COMMERCIAL LANDFIL",
+     "type": "non-residential",
+     "form": null
+    },
+    "COMMERCIAL SERVICE(LAUNDRY,TV,RADIO,ETC)": {
+     "label": "COMMERCIAL SERVICE(LAUNDRY,TV,RADIO,ETC)",
+     "type": "non-residential",
+     "form": null
+    },
+    "COMMERCIAL WATER FRONTAGE": {
+     "label": "COMMERCIAL WATER FRONTAGE",
+     "type": "non-residential",
+     "form": null
+    },
+    "CONDO AFFORDABLE HOUSING": {
+     "label": "CONDO AFFORDABLE HOUSING",
+     "type": "residential",
+     "form": "unit"
+    },
+    "CONDOMINIUM": {
+     "label": "CONDOMINIUM",
+     "type": "residential",
+     "form": "unit"
+    },
+    "CONDOMINIUM COMMON AREA": {
+     "label": "CONDOMINIUM COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "CONDOMINIUM HIGH RISE": {
+     "label": "CONDOMINIUM HIGH RISE",
+     "type": "residential",
+     "form": "unit"
+    },
+    "CONDOMINIUM WATER FRONTAGE": {
+     "label": "CONDOMINIUM WATER FRONTAGE",
+     "type": "residential",
+     "form": "unit"
+    },
+    "CONSERVATION - AGRICULTURAL COMM": {
+     "label": "CONSERVATION - AGRICULTURAL COMM",
+     "type": "non-residential",
+     "form": null
+    },
+    "CONSERVATION - FORESTRY COMM": {
+     "label": "CONSERVATION - FORESTRY COMM",
+     "type": "non-residential",
+     "form": null
+    },
+    "CONSERVATION - HORTICULTURAL COMM": {
+     "label": "CONSERVATION - HORTICULTURAL COMM",
+     "type": "non-residential",
+     "form": null
+    },
+    "CONSERVATION - WILDLIFE": {
+     "label": "CONSERVATION - WILDLIFE",
+     "type": "non-residential",
+     "form": null
+    },
+    "CONSERVATION - WOODLAND EXCESS AC": {
+     "label": "CONSERVATION - WOODLAND EXCESS AC",
+     "type": "non-residential",
+     "form": null
+    },
+    "CONVENIENCE STORE": {
+     "label": "CONVENIENCE STORE",
+     "type": "non-residential",
+     "form": null
+    },
+    "CONVIENCE/FAST FOOD STORE": {
+     "label": "CONVIENCE/FAST FOOD STORE",
+     "type": "non-residential",
+     "form": null
+    },
+    "COS NO AV10": {
+     "label": "COS NO AV10",
+     "type": "unknown",
+     "form": null
+    },
+    "COUNTRY CLUB": {
+     "label": "COUNTRY CLUB",
+     "type": "non-residential",
+     "form": null
+    },
+    "DAY CARE CENTER": {
+     "label": "DAY CARE CENTER",
+     "type": "non-residential",
+     "form": null
+    },
+    "DEPARTMENT STORE": {
+     "label": "DEPARTMENT STORE",
+     "type": "non-residential",
+     "form": null
+    },
+    "DISPOSAL": {
+     "label": "DISPOSAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "ENVIRONMENTAL HAZARD": {
+     "label": "ENVIRONMENTAL HAZARD",
+     "type": "non-residential",
+     "form": null
+    },
+    "FAST FOOD": {
+     "label": "FAST FOOD",
+     "type": "non-residential",
+     "form": null
+    },
+    "FIRE DEPARTMENT": {
+     "label": "FIRE DEPARTMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "FLUM/SWIM FLOODWAY (NO BUILD ZONE)": {
+     "label": "FLUM/SWIM FLOODWAY (NO BUILD ZONE)",
+     "type": "non-residential",
+     "form": null
+    },
+    "FOREST - COMMERCIAL PRODUCTION": {
+     "label": "FOREST - COMMERCIAL PRODUCTION",
+     "type": "non-residential",
+     "form": null
+    },
+    "FUNERAL (MORTUARY, CEMETERY, CREMATORIUM, MAUS)": {
+     "label": "FUNERAL (MORTUARY, CEMETERY, CREMATORIUM, MAUS)",
+     "type": "non-residential",
+     "form": null
+    },
+    "FURNITURE STORE": {
+     "label": "FURNITURE STORE",
+     "type": "non-residential",
+     "form": null
+    },
+    "GOLF COURSE CLASS 1 - CHAMPIONSHIP": {
+     "label": "GOLF COURSE CLASS 1 - CHAMPIONSHIP",
+     "type": "non-residential",
+     "form": null
+    },
+    "GOLF COURSE CLASS 2 - PRIVATE CLUB": {
+     "label": "GOLF COURSE CLASS 2 - PRIVATE CLUB",
+     "type": "non-residential",
+     "form": null
+    },
+    "GOLF COURSE CLASS 3 - SEMI-PRIVATE & MUNICIPAL": {
+     "label": "GOLF COURSE CLASS 3 - SEMI-PRIVATE & MUNICIPAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "GOLF COURSE CLASS 4 - MINIMUM QUALITY": {
+     "label": "GOLF COURSE CLASS 4 - MINIMUM QUALITY",
+     "type": "non-residential",
+     "form": null
+    },
+    "GREENWAY TRAIL": {
+     "label": "GREENWAY TRAIL",
+     "type": "non-residential",
+     "form": null
+    },
+    "HABITAT FOR HUMANITY": {
+     "label": "HABITAT FOR HUMANITY",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "HEAVY MANUFACTURING": {
+     "label": "HEAVY MANUFACTURING",
+     "type": "non-residential",
+     "form": null
+    },
+    "HOME FOR THE AGED": {
+     "label": "HOME FOR THE AGED",
+     "type": "non-residential",
+     "form": null
+    },
+    "HORTICULTURAL - COMMERCIAL PRODUCTION": {
+     "label": "HORTICULTURAL - COMMERCIAL PRODUCTION",
+     "type": "non-residential",
+     "form": null
+    },
+    "HOSPITAL, PRIVATE": {
+     "label": "HOSPITAL, PRIVATE",
+     "type": "non-residential",
+     "form": null
+    },
+    "HOSPITALS - PUBLIC": {
+     "label": "HOSPITALS - PUBLIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "HOTEL/MOTEL < 7 FLOORS": {
+     "label": "HOTEL/MOTEL < 7 FLOORS",
+     "type": "non-residential",
+     "form": null
+    },
+    "HOTEL/MOTEL > 6 FLOORS": {
+     "label": "HOTEL/MOTEL > 6 FLOORS",
+     "type": "non-residential",
+     "form": null
+    },
+    "INDUSTRIAL": {
+     "label": "INDUSTRIAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "INDUSTRIAL COMMON AREA": {
+     "label": "INDUSTRIAL COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "INDUSTRIAL PARK": {
+     "label": "INDUSTRIAL PARK",
+     "type": "non-residential",
+     "form": null
+    },
+    "INSTITUTIONAL": {
+     "label": "INSTITUTIONAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "ISLAND": {
+     "label": "ISLAND",
+     "type": "non-residential",
+     "form": null
+    },
+    "JAIL": {
+     "label": "JAIL",
+     "type": "non-residential",
+     "form": null
+    },
+    "LABORATORY / RESEARCH": {
+     "label": "LABORATORY / RESEARCH",
+     "type": "non-residential",
+     "form": null
+    },
+    "LEASEHOLD INTEREST": {
+     "label": "LEASEHOLD INTEREST",
+     "type": "unknown",
+     "form": null
+    },
+    "LESS MINERAL RIGHTS (TAXED ELSEWHERE)": {
+     "label": "LESS MINERAL RIGHTS (TAXED ELSEWHERE)",
+     "type": "unknown",
+     "form": null
+    },
+    "LIGHT MANUFACTURING": {
+     "label": "LIGHT MANUFACTURING",
+     "type": "non-residential",
+     "form": null
+    },
+    "LOUNGE, NIGHT CLUB, BAR": {
+     "label": "LOUNGE, NIGHT CLUB, BAR",
+     "type": "non-residential",
+     "form": null
+    },
+    "LUMBER YARD": {
+     "label": "LUMBER YARD",
+     "type": "non-residential",
+     "form": null
+    },
+    "MARINA LAND": {
+     "label": "MARINA LAND",
+     "type": "non-residential",
+     "form": null
+    },
+    "MEDICAL CONDOMINIUM": {
+     "label": "MEDICAL CONDOMINIUM",
+     "type": "non-residential",
+     "form": null
+    },
+    "MEDICAL CONDOMINIUM COMMON AREA": {
+     "label": "MEDICAL CONDOMINIUM COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "MEDICAL OFFICE": {
+     "label": "MEDICAL OFFICE",
+     "type": "non-residential",
+     "form": null
+    },
+    "MINI WAREHOUSE": {
+     "label": "MINI WAREHOUSE",
+     "type": "non-residential",
+     "form": null
+    },
+    "MINIATURE GOLF COURSES/DRIVING RANGE": {
+     "label": "MINIATURE GOLF COURSES/DRIVING RANGE",
+     "type": "non-residential",
+     "form": null
+    },
+    "MINING": {
+     "label": "MINING",
+     "type": "non-residential",
+     "form": null
+    },
+    "MOBILE HOME HS": {
+     "label": "MOBILE HOME HS",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "MOBILE HOME PARK": {
+     "label": "MOBILE HOME PARK",
+     "type": "residential",
+     "form": "attached"
+    },
+    "MOBILE HOME SUBDIVISION": {
+     "label": "MOBILE HOME SUBDIVISION",
+     "type": "residential",
+     "form": "attached"
+    },
+    "MULTI FAMILTY AFFORDABLE HOUSING": {
+     "label": "MULTI FAMILTY AFFORDABLE HOUSING",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "MULTI FAMILY": {
+     "label": "MULTI FAMILY",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "MULTI FAMILY COMMON AREA": {
+     "label": "MULTI FAMILY COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "MULTI FAMILY DUPLEX/TRIPLEX": {
+     "label": "MULTI FAMILY DUPLEX/TRIPLEX",
+     "type": "residential",
+     "form": "small-multi"
+    },
+    "MULTI FAMILY GARDEN": {
+     "label": "MULTI FAMILY GARDEN",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "MULTI FAMILY HIGH RISE": {
+     "label": "MULTI FAMILY HIGH RISE",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "MULTI FAMILY TOWNHOUSE": {
+     "label": "MULTI FAMILY TOWNHOUSE",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "MULTI FAMILY WATER ACCESS": {
+     "label": "MULTI FAMILY WATER ACCESS",
+     "type": "non-residential",
+     "form": null
+    },
+    "MUNICIPAL AIRPORT": {
+     "label": "MUNICIPAL AIRPORT",
+     "type": "non-residential",
+     "form": null
+    },
+    "MUNICIPAL EDUCATION": {
+     "label": "MUNICIPAL EDUCATION",
+     "type": "non-residential",
+     "form": null
+    },
+    "MUNICIPAL HOUSING AUTHORITY": {
+     "label": "MUNICIPAL HOUSING AUTHORITY",
+     "type": "residential",
+     "form": "multi-family"
+    },
+    "NEW PARCEL": {
+     "label": "NEW PARCEL",
+     "type": "unknown",
+     "form": null
+    },
+    "NO LAND INTEREST": {
+     "label": "NO LAND INTEREST",
+     "type": "unknown",
+     "form": null
+    },
+    "NURSING HOME": {
+     "label": "NURSING HOME",
+     "type": "non-residential",
+     "form": null
+    },
+    "OFFICE": {
+     "label": "OFFICE",
+     "type": "non-residential",
+     "form": null
+    },
+    "OFFICE CONDOMINIUM": {
+     "label": "OFFICE CONDOMINIUM",
+     "type": "non-residential",
+     "form": null
+    },
+    "OFFICE CONDOMINIUM COMMON AREA": {
+     "label": "OFFICE CONDOMINIUM COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "OFFICE HIGH RISE - > 6 STORIES": {
+     "label": "OFFICE HIGH RISE - > 6 STORIES",
+     "type": "non-residential",
+     "form": null
+    },
+    "OTHER COUNTY PROPERTY": {
+     "label": "OTHER COUNTY PROPERTY",
+     "type": "non-residential",
+     "form": null
+    },
+    "OTHER FEDERAL": {
+     "label": "OTHER FEDERAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "OTHER MUNICIPAL": {
+     "label": "OTHER MUNICIPAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "PACKING PLANT": {
+     "label": "PACKING PLANT",
+     "type": "non-residential",
+     "form": null
+    },
+    "PARKING": {
+     "label": "PARKING",
+     "type": "non-residential",
+     "form": null
+    },
+    "PATIO HOME": {
+     "label": "PATIO HOME",
+     "type": "residential",
+     "form": "attached"
+    },
+    "PATIO HOME - COMMON": {
+     "label": "PATIO HOME - COMMON",
+     "type": "non-residential",
+     "form": null
+    },
+    "PATIO HOME - WATERFRONT": {
+     "label": "PATIO HOME - WATERFRONT",
+     "type": "residential",
+     "form": "attached"
+    },
+    "PETROLEUM AND GAS": {
+     "label": "PETROLEUM AND GAS",
+     "type": "non-residential",
+     "form": null
+    },
+    "PVT Owned RR with Rail ROW": {
+     "label": "PVT Owned RR with Rail ROW",
+     "type": "non-residential",
+     "form": null
+    },
+    "R101": {
+     "label": "R101",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "REC AREA": {
+     "label": "REC AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "RECYCLING": {
+     "label": "RECYCLING",
+     "type": "non-residential",
+     "form": null
+    },
+    "RESERVED PARCEL": {
+     "label": "RESERVED PARCEL",
+     "type": "unknown",
+     "form": null
+    },
+    "RESIDENTIAL AFFORDABLE HOUSING": {
+     "label": "RESIDENTIAL AFFORDABLE HOUSING",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "RESTAURANT": {
+     "label": "RESTAURANT",
+     "type": "non-residential",
+     "form": null
+    },
+    "RETREATS": {
+     "label": "RETREATS",
+     "type": "non-residential",
+     "form": null
+    },
+    "RIGHT OF WAY": {
+     "label": "RIGHT OF WAY",
+     "type": "non-residential",
+     "form": null
+    },
+    "ROADWAY CORRIDOR": {
+     "label": "ROADWAY CORRIDOR",
+     "type": "non-residential",
+     "form": null
+    },
+    "RURAL HOMESITE": {
+     "label": "RURAL HOMESITE",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SCHOOL - PUBLIC": {
+     "label": "SCHOOL - PUBLIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "SCHOOL,COLLEGE, PRIVATE": {
+     "label": "SCHOOL,COLLEGE, PRIVATE",
+     "type": "non-residential",
+     "form": null
+    },
+    "SERVICE GARAGE": {
+     "label": "SERVICE GARAGE",
+     "type": "non-residential",
+     "form": null
+    },
+    "SERVICE STATION": {
+     "label": "SERVICE STATION",
+     "type": "non-residential",
+     "form": null
+    },
+    "SHOPPING CENTER - MALL": {
+     "label": "SHOPPING CENTER - MALL",
+     "type": "non-residential",
+     "form": null
+    },
+    "SHOPPING CENTER - STRIP": {
+     "label": "SHOPPING CENTER - STRIP",
+     "type": "non-residential",
+     "form": null
+    },
+    "SINGLE FAMILY RESIDENTIAL": {
+     "label": "SINGLE FAMILY RESIDENTIAL",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SINGLE FAMILY RESIDENTIAL - ACREAGE": {
+     "label": "SINGLE FAMILY RESIDENTIAL - ACREAGE",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SINGLE FAMILY RESIDENTIAL - COMMON": {
+     "label": "SINGLE FAMILY RESIDENTIAL - COMMON",
+     "type": "non-residential",
+     "form": null
+    },
+    "SINGLE FAMILY RESIDENTIAL - GOLF": {
+     "label": "SINGLE FAMILY RESIDENTIAL - GOLF",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SINGLE FAMILY RESIDENTIAL - RIVER": {
+     "label": "SINGLE FAMILY RESIDENTIAL - RIVER",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SINGLE FAMILY RESIDENTIAL - WATER VIEW": {
+     "label": "SINGLE FAMILY RESIDENTIAL - WATER VIEW",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SINGLE FAMILY RESIDENTIAL - WATERFRONT": {
+     "label": "SINGLE FAMILY RESIDENTIAL - WATERFRONT",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SINGLE FAMILY RESIDENTIAL GATED COMMUNITY": {
+     "label": "SINGLE FAMILY RESIDENTIAL GATED COMMUNITY",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "SINGLE FAMILY RESIDENTIAL MINI FARM/ESTATE": {
+     "label": "SINGLE FAMILY RESIDENTIAL MINI FARM/ESTATE",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "STADIUM / ARENA": {
+     "label": "STADIUM / ARENA",
+     "type": "non-residential",
+     "form": null
+    },
+    "STATE PROP": {
+     "label": "STATE PROP",
+     "type": "non-residential",
+     "form": null
+    },
+    "SUBMERGED LAND, RIVERS AND LAKES": {
+     "label": "SUBMERGED LAND, RIVERS AND LAKES",
+     "type": "non-residential",
+     "form": null
+    },
+    "SUPERMARKET": {
+     "label": "SUPERMARKET",
+     "type": "non-residential",
+     "form": null
+    },
+    "THEATRE": {
+     "label": "THEATRE",
+     "type": "non-residential",
+     "form": null
+    },
+    "TOWN HOUSE  GOLF COURSE FRONTAGE": {
+     "label": "TOWN HOUSE GOLF COURSE FRONTAGE",
+     "type": "residential",
+     "form": "attached"
+    },
+    "TOWN HOUSE  SFR": {
+     "label": "TOWN HOUSE SFR",
+     "type": "residential",
+     "form": "attached"
+    },
+    "TOWN HOUSE  WATER ACCESS": {
+     "label": "TOWN HOUSE WATER ACCESS",
+     "type": "non-residential",
+     "form": null
+    },
+    "TOWN HOUSE  WATER FRONTAGE": {
+     "label": "TOWN HOUSE WATER FRONTAGE",
+     "type": "residential",
+     "form": "attached"
+    },
+    "TOWN HOUSE COMMON AREA": {
+     "label": "TOWN HOUSE COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "TOWNHOUSE AFFORDABLE HOUSING": {
+     "label": "TOWNHOUSE AFFORDABLE HOUSING",
+     "type": "residential",
+     "form": "attached"
+    },
+    "TRUCK TERMINAL": {
+     "label": "TRUCK TERMINAL",
+     "type": "non-residential",
+     "form": null
+    },
+    "UNSUITABLE FOR SEPTIC": {
+     "label": "UNSUITABLE FOR SEPTIC",
+     "type": "non-residential",
+     "form": null
+    },
+    "USE VALUE HOMESITE": {
+     "label": "USE VALUE HOMESITE",
+     "type": "residential",
+     "form": "single-family"
+    },
+    "UTILITY (GAS, ELECTRIC, TELEPHONE, TELEGRAPH, RAIL": {
+     "label": "UTILITY (GAS, ELECTRIC, TELEPHONE, TELEGRAPH, RAIL",
+     "type": "non-residential",
+     "form": null
+    },
+    "UTILITY EASEMENT": {
+     "label": "UTILITY EASEMENT",
+     "type": "non-residential",
+     "form": null
+    },
+    "UTILITY/P": {
+     "label": "UTILITY/P",
+     "type": "non-residential",
+     "form": null
+    },
+    "WAREHOUSE CONDOMINIUM": {
+     "label": "WAREHOUSE CONDOMINIUM",
+     "type": "non-residential",
+     "form": null
+    },
+    "WAREHOUSE CONDOMINIUM COMMON AREA": {
+     "label": "WAREHOUSE CONDOMINIUM COMMON AREA",
+     "type": "non-residential",
+     "form": null
+    },
+    "WAREHOUSING": {
+     "label": "WAREHOUSING",
+     "type": "non-residential",
+     "form": null
+    },
+    "WASTELAND, SLIVERS, GULLIES, ROCK OUTCROP": {
+     "label": "WASTELAND, SLIVERS, GULLIES, ROCK OUTCROP",
+     "type": "non-residential",
+     "form": null
+    },
+    "WATER PLANT": {
+     "label": "WATER PLANT",
+     "type": "non-residential",
+     "form": null
+    },
+    "WATER RETENTION POND": {
+     "label": "WATER RETENTION POND",
+     "type": "non-residential",
+     "form": null
+    },
+    "WELL LOT": {
+     "label": "WELL LOT",
+     "type": "non-residential",
+     "form": null
+    },
+    "WETLAND": {
+     "label": "WETLAND",
+     "type": "non-residential",
+     "form": null
+    },
+    "WOODLAND - EXCESS ON AG PCL": {
+     "label": "WOODLAND - EXCESS ON AG PCL",
+     "type": "non-residential",
+     "form": null
+    },
+    "YACHT CLUB": {
+     "label": "YACHT CLUB",
+     "type": "non-residential",
+     "form": null
+    }
+   },
+   "source": {
+    "name": "Mecklenburg County land use on Charlotte's All Parcel Data layer",
+    "url": "https://gis.charlottenc.gov/arcgis/rest/services/PLN/AllParcelData/MapServer/0",
+    "values_read_from": "https://gis.charlottenc.gov/arcgis/rest/services/PLN/AllParcelData/MapServer/0/query (distinct landuse_description)",
+    "caveat": "No code list is published with the layer; the values are the Assessor's own words read from the layer."
+   },
+   "type_rule": "Typed by the description's own words: SINGLE FAMILY RESIDENTIAL (and its variants, RURAL HOMESITE, USE VALUE HOMESITE, HABITAT FOR HUMANITY, RESIDENTIAL AFFORDABLE HOUSING, MOBILE HOME HS, R101) a single-family house; MULTI FAMILY DUPLEX/TRIPLEX small multi-unit; other MULTI FAMILY descriptions and MUNICIPAL HOUSING AUTHORITY an apartment building; CONDOMINIUM descriptions a unit; TOWN HOUSE, TOWNHOUSE, PATIO HOME and mobile home park/subdivision descriptions 'attached' (recorded apart from a detached single-family house, so the detached-house checks aren't run); COMMON AREA, '- COMMON', WATER ACCESS and commercial/medical/office/warehouse condominiums non-residential; placeholder records (NEW PARCEL, RESERVED PARCEL, None, mineral/air/leasehold interests) unknown; everything else non-residential.",
+   "verification": {
+    "status": "verified",
+    "checked_on": "2026-11-17",
+    "method": "Distinct landuse_description values read from the layer by scripts/build_zoning_standards.py and typed by the stated rule",
+    "evidence": "161 descriptions",
+    "unverified_fields": []
+   }
+  }
+ ]
+}

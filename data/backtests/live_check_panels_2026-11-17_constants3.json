@@ -1,0 +1,396 @@
+{
+ "ran_on": "2026-11-17T05:39:12.972Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "36081": {
+   "points": [
+    {
+     "bg": "360810190001",
+     "lat": 40.685339,
+     "lng": -73.794525,
+     "service": "NYC MapPLUTO (NYC Department of City Planning)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $619k, rent $2,104/mo, homes 402"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 14 pts (current release); page: 14 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 14.3 pts below its 30% goal; box: \"14.3 pts below its 30% goal\" / \"+3.6°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for undefined"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Queens County · 360810190001; page \"Census area: Queens County · block group 360810190001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2971 for 36081; page \"HUD Fair Market Rent (FY2027): 1 bed $2,729 · 2 bed $2,971 · 3 bed $3,760/moNew York, NY HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), not \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 29 ft; page \"Ground elevation: 29 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Zoning district R3A (New York City Zoning Resolution) — Housing types: limited to single- or two-family detached residences and single- or two-family zero lot line buildings (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). Minimum lot for a detached or zero-lot-line home: 2,375 sq ft and 25 ft wide (ZR 23-11); this lot (2,000 sq ft) is smaller, which may mean it predates the minimum (not checked here). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.",
+      "✓ Floor area allowed by zoning — Up to 1,500 sq ft of floor area on this 2,000 sq ft lot (FAR 0.75, ZR 23-21). The city records 1,012 sq ft of gross floor area here, so about 488 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.",
+      "✓ Second home (two-family or more) — A two-family home is an allowed type here: single- or two-family detached residences and single- or two-family zero lot line buildings (ZR 22-122), within the floor area above.",
+      "? Ancillary dwelling unit (ADU, up to 800 sq ft) — ZR 12-10 allows one ancillary dwelling unit of up to 800 sq ft per single- or two-family home; an owner must live on the lot when it is first occupied. A backyard ADU is not allowed in Historic Districts or in DEP's mapped flood-risk areas, and in R3A only inside the Greater Transit Zone; none of these is checked here. About 578 sq ft of open yard (estimated).",
+      "• Second story — Already 2 stories (inferred: 1,012 sq ft living area indicates 2-story layout).",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "✓ Garden, deck or patio — ~578 sq ft of open yard.",
+      "✓ Rooftop solar — ~1,012 sq ft of roof footprint.",
+      "✓ Foundation & thermal envelope modernization — Built in 1915: continuous sill plate anchoring and air-barrier insulation sealing.",
+      "? Whole-house repiping — Built in 1915: galvanized steel supply piping common in pre-1975 homes."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "360810121001",
+     "lat": 40.772043,
+     "lng": -73.90262,
+     "service": "NYC MapPLUTO (NYC Department of City Planning)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $1.1M, rent $2,254/mo, homes 664"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 1 pts (current release); page: 1 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 0.5 pts below its 20% goal; box: \"0.5 pts below its 20% goal\" / \"-4.5°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for undefined"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Queens County · 360810121001; page \"Census area: Queens County · block group 360810121001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2971 for 36081; page \"HUD Fair Market Rent (FY2027): 1 bed $2,729 · 2 bed $2,971 · 3 bed $3,760/moNew York, NY HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), not \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 58 ft; page \"Ground elevation: 58 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Zoning district R4 (New York City Zoning Resolution) — Housing types: no limit on the type of residence (ZR 22-121, 22-122). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11); this lot (2,650 sq ft) is smaller, which may mean it predates the minimum (not checked here). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.",
+      "✗ Floor area allowed by zoning — Up to 2,650 sq ft of floor area on this 2,650 sq ft lot (FAR 1.00, ZR 23-21). The city records 2,600 sq ft of gross floor area here, so about 50 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.",
+      "✓ Second home (two-family or more) — R4 sets no limit on the type of residence (ZR 22-121, 22-122), within the floor area above.",
+      "? Ancillary dwelling unit (ADU, up to 800 sq ft) — ZR 12-10 allows one ancillary dwelling unit of up to 800 sq ft per single- or two-family home; an owner must live on the lot when it is first occupied. A backyard ADU is not allowed in Historic Districts or in DEP's mapped flood-risk areas; none of these is checked here. About 573 sq ft of open yard (estimated).",
+      "• Second story — Already 2 stories (inferred: 2,600 sq ft living area indicates 2-story layout).",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "✓ Garden, deck or patio — ~573 sq ft of open yard.",
+      "✓ Rooftop solar — ~1,720 sq ft of roof footprint.",
+      "✓ Foundation & thermal envelope modernization — Built in 1925: continuous sill plate anchoring and air-barrier insulation sealing.",
+      "? Whole-house repiping — Built in 1925: galvanized steel supply piping common in pre-1975 homes."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "360811467001",
+     "lat": 40.761794,
+     "lng": -73.770409,
+     "service": "NYC MapPLUTO (NYC Department of City Planning)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $675k, rent $2,101/mo, homes 620"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 13 pts (current release); page: 13 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 13.3 pts below its 30% goal; box: \"13.3 pts below its 30% goal\" / \"-0.7°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for undefined"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Queens County · 360811467001; page \"Census area: Queens County · block group 360811467001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2971 for 36081; page \"HUD Fair Market Rent (FY2027): 1 bed $2,729 · 2 bed $2,971 · 3 bed $3,760/moNew York, NY HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), not \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 68 ft; page \"Ground elevation: 68 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "✗ Home upgrades — This parcel is Commercial & Office Buildings (PLUTO Data Dictionary, LandUse 05), so residential homeowner checks do not apply."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8870' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8870' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8870' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  },
+  "06037": {
+   "county": "Los Angeles CA",
+   "state": "CA",
+   "points": [
+    {
+     "bg": "060379200472",
+     "lat": 34.410886,
+     "lng": -118.451681,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected none (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 13 pts (current release); page: 13 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 12.6 pts below its 25% goal; box: \"12.6 pts below its 25% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,1,15]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County · 060379200472; page \"Census area: Los Angeles County · block group 060379200472(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 · 2 bed $2,964 · 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1444 ft; page \"Ground elevation: 1,444 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Geologic hazard zone — In state liquefaction hazard zone: new additions or ADUs require a site-specific geotechnical/soils investigation.",
+      "• Second building on the lot — The Assessor lists 5 structures (11,516 sq ft, 11,516 sq ft, 11,516 sq ft, 11,516 sq ft, 189,362 sq ft): an existing ADU or guest house may already be present.",
+      "✗ Detached ADU — Limited open yard (~0 sq ft); a garage conversion or Junior ADU is recommended.",
+      "• Second story — Already 3 stories (inferred: 11,516 sq ft living area indicates 3-story layout).",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "✓ Rooftop solar — ~11,516 sq ft of roof footprint."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "060372077121",
+     "lat": 34.04518,
+     "lng": -118.258052,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected none (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 14 pts (current release); page: 14 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 14 pts below its 20% goal; box: \"14 pts below its 20% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0,1]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County · 060372077121; page \"Census area: Los Angeles County · block group 060372077121(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 · 2 bed $2,964 · 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": false,
+       "detail": "USGS now: 261 ft; page \"Ground elevation: Not available (signal is aborted without reason)(U.S. Geologic\""
+      }
+     },
+     "house_checks": [
+      "• Historic district or landmark — This lot is in a historic district or is a designated resource: exterior alterations require HPOZ design review, and SB 9 does not apply.",
+      "✓ Detached ADU (backyard home) — About 1,832 sq ft of open yard after setbacks; room for a 600–800 sq ft detached ADU by area; for a new detached ADU the city can require side and rear setbacks of no more than 4 ft (Gov. Code § 66314(d)(7)).",
+      "✓ Swimming pool — ~1,832 sq ft of open yard.",
+      "• Second story — Already 3 stories (inferred: 58,686 sq ft living area indicates 3-story layout).",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "✓ Garden, deck or patio — ~1,832 sq ft of open yard.",
+      "✓ Rooftop solar — ~5,495 sq ft of roof footprint.",
+      "? Whole-house repiping — Built in 1924: galvanized steel supply piping common in pre-1975 homes.",
+      "✓ Add a bathroom — 98 bedrooms but only 70 baths: would fix the bedroom-to-bath imbalance. What an added bathroom is worth at resale is not on file (the survey figure used before could not be checked, and it was for Los Angeles only)."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "060375342023",
+     "lat": 33.956785,
+     "lng": -118.162212,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected $650k (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 21 pts (current release); page: 21 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 21 pts below its 30% goal; box: \"21 pts below its 30% goal\" / \"+3.4°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [4,2,59]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County · 060375342023; page \"Census area: Los Angeles County · block group 060375342023(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 · 2 bed $2,964 · 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area with reduced flood risk due to levee)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 112 ft; page \"Ground elevation: 112 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Geologic hazard zone — In state liquefaction hazard zone: new additions or ADUs require a site-specific geotechnical/soils investigation.",
+      "• Second building on the lot — The Assessor lists 2 structures (1,619 sq ft, 490 sq ft): an existing ADU or guest house may already be present.",
+      "✓ Detached ADU (backyard home) — About 7,213 sq ft of open yard after setbacks; room for a 600–800 sq ft detached ADU by area; for a new detached ADU the city can require side and rear setbacks of no more than 4 ft (Gov. Code § 66314(d)(7)).",
+      "✓ Swimming pool — ~7,213 sq ft of open yard.",
+      "✓ Second story — One story (inferred: single-story profile (1,619 sq ft living area)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "✓ Garden, deck or patio — ~7,213 sq ft of open yard.",
+      "✓ Rooftop solar — ~1,619 sq ft of roof footprint.",
+      "? Whole-house repiping — Built in 1937: galvanized steel supply piping common in pre-1975 homes.",
+      "✓ Add a bathroom — 4 bedrooms but only 2 baths: would fix the bedroom-to-bath imbalance. What an added bathroom is worth at resale is not on file (the survey figure used before could not be checked, and it was for Los Angeles only)."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "fail",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8870' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8870' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8870' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  }
+ }
+}

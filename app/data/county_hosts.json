@@ -1,0 +1,98 @@
+{
+  "_source": {
+    "note": "Regional GitHub Pages sites and Cloudflare R2 bucket that host county data files. GitHub Pages publishes at most 1 GB per site; Cloudflare R2 provides a 10 GB free tier with zero egress fees (Access-Control-Allow-Origin: *). A remote source is used only when enabled; otherwise the page loads the file from this site's counties/ folder.",
+    "limit_bytes_per_site": 1073741824,
+    "split_script": "scripts/split_county_hosting.py"
+  },
+  "r2": {
+    "enabled": false,
+    "base": "https://pub-data.citypretty.org/",
+    "note": "Cloudflare R2 public bucket (10 GB free tier, 0 egress fees, CORS enabled). Recommended by Audit P1-10 to avoid maintaining 4 separate GitHub repositories."
+  },
+  "regions": {
+    "northeast": {
+      "repo": "milessilverman/city-pretty-data-northeast",
+      "base": "https://milessilverman.github.io/city-pretty-data-northeast/",
+      "states": [
+        "09",
+        "23",
+        "25",
+        "33",
+        "44",
+        "50",
+        "34",
+        "36",
+        "42"
+      ],
+      "enabled": false,
+      "checked_on": null
+    },
+    "midwest": {
+      "repo": "milessilverman/city-pretty-data-midwest",
+      "base": "https://milessilverman.github.io/city-pretty-data-midwest/",
+      "states": [
+        "17",
+        "18",
+        "26",
+        "39",
+        "55",
+        "19",
+        "20",
+        "27",
+        "29",
+        "31",
+        "38",
+        "46"
+      ],
+      "enabled": false,
+      "checked_on": null
+    },
+    "south": {
+      "repo": "milessilverman/city-pretty-data-south",
+      "base": "https://milessilverman.github.io/city-pretty-data-south/",
+      "states": [
+        "10",
+        "11",
+        "12",
+        "13",
+        "24",
+        "37",
+        "45",
+        "51",
+        "54",
+        "01",
+        "21",
+        "28",
+        "47",
+        "05",
+        "22",
+        "40",
+        "48",
+        "72"
+      ],
+      "enabled": false,
+      "checked_on": null
+    },
+    "west": {
+      "repo": "milessilverman/city-pretty-data-west",
+      "base": "https://milessilverman.github.io/city-pretty-data-west/",
+      "states": [
+        "04",
+        "08",
+        "16",
+        "30",
+        "32",
+        "35",
+        "49",
+        "56",
+        "02",
+        "06",
+        "15",
+        "41",
+        "53"
+      ],
+      "enabled": false,
+      "checked_on": null
+    }
+  }
+}

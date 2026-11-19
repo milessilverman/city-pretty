@@ -11,7 +11,7 @@ function validateParcelImageryVintage(input) {
     : null;
 
   const isLidarStale =
-    permitYear !== null && input.lidarAcquisitionYear != null && permitYear >= input.lidarAcquisitionYear;
+    permitYear !== null && permitYear >= (input.lidarAcquisitionYear || 2020);
 
   let isStreetViewStale = false;
   if (input.streetViewCaptureDate) {
@@ -28,7 +28,7 @@ function validateParcelImageryVintage(input) {
       isStreetViewStale: true,
       confidenceBadge: "no_street_view",
       warningMessage:
-        "No Google Street View coverage at parcel frontage; story count relies solely on USGS LiDAR/OSM footprints.",
+        "No Google Street View coverage at parcel frontage; story count relies on OpenStreetMap footprints or assessor records.",
     };
   }
 
@@ -40,7 +40,7 @@ function validateParcelImageryVintage(input) {
       confidenceBadge: "stale_imagery_permit_override",
       warningMessage: `Building permit (${input.latestPostConstructionPermitDate}: ${
         input.permitScopeDescription || "structural alteration"
-      }) post-dates LiDAR (${input.lidarAcquisitionYear ?? "year not on file"}) or Street View (${
+      }) post-dates LiDAR (${input.lidarAcquisitionYear}) or Street View (${
         input.streetViewCaptureDate
       }). Verify current structure before modeling ADU/SB 9 capacity.`,
     };

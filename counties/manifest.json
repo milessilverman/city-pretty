@@ -156,6 +156,325 @@
    "crash_years": null
   },
   {
+   "fips": "02013",
+   "name": "Aleutians East Borough",
+   "state": "AK",
+   "block_groups": 3,
+   "bundle_mb": 2.8,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T10:44:49Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02020",
+   "name": "Anchorage Municipality",
+   "state": "AK",
+   "block_groups": 200,
+   "bundle_mb": 2.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-16T23:46:04Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02050",
+   "name": "Bethel Census Area",
+   "state": "AK",
+   "block_groups": 10,
+   "bundle_mb": 14.8,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T05:48:43Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02060",
+   "name": "Bristol Bay Borough",
+   "state": "AK",
+   "block_groups": 1,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T08:46:36Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02063",
+   "name": "Chugach Census Area",
+   "state": "AK",
+   "block_groups": 7,
+   "bundle_mb": 2.9,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T10:22:20Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02066",
+   "name": "Copper River Census Area",
+   "state": "AK",
+   "block_groups": 2,
+   "bundle_mb": 2.9,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T09:36:23Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02068",
+   "name": "Denali Borough",
+   "state": "AK",
+   "block_groups": 2,
+   "bundle_mb": 0.8,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T09:20:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02070",
+   "name": "Dillingham Census Area",
+   "state": "AK",
+   "block_groups": 2,
+   "bundle_mb": 5.8,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T09:24:09Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02090",
+   "name": "Fairbanks North Star Borough",
+   "state": "AK",
+   "block_groups": 63,
+   "bundle_mb": 1.0,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00:53:34Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02100",
+   "name": "Haines Borough",
+   "state": "AK",
+   "block_groups": 3,
+   "bundle_mb": 6.7,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T06:20:13Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02105",
+   "name": "Hoonah-Angoon Census Area",
+   "state": "AK",
+   "block_groups": 3,
+   "bundle_mb": 11.7,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T07:38:34Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02110",
+   "name": "Juneau City and Borough",
+   "state": "AK",
+   "block_groups": 21,
+   "bundle_mb": 6.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T02:58:23Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02122",
+   "name": "Kenai Peninsula Borough",
+   "state": "AK",
+   "block_groups": 35,
+   "bundle_mb": 4.6,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T02:58:23Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02130",
+   "name": "Ketchikan Gateway Borough",
+   "state": "AK",
+   "block_groups": 11,
+   "bundle_mb": 8.7,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T05:20:00Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02150",
+   "name": "Kodiak Island Borough",
+   "state": "AK",
+   "block_groups": 10,
+   "bundle_mb": 2.7,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T05:26:13Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02158",
+   "name": "Kusilvak Census Area",
+   "state": "AK",
+   "block_groups": 4,
+   "bundle_mb": 3.9,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T10:46:50Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02164",
+   "name": "Lake and Peninsula Borough",
+   "state": "AK",
+   "block_groups": 1,
+   "bundle_mb": 3.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T10:47:51Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02170",
+   "name": "Matanuska-Susitna Borough",
+   "state": "AK",
+   "block_groups": 61,
+   "bundle_mb": 3.5,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T01:25:12Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02180",
+   "name": "Nome Census Area",
+   "state": "AK",
+   "block_groups": 5,
+   "bundle_mb": 3.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T06:07:08Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02185",
+   "name": "North Slope Borough",
+   "state": "AK",
+   "block_groups": 6,
+   "bundle_mb": 3.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T11:44:35Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02188",
+   "name": "Northwest Arctic Borough",
+   "state": "AK",
+   "block_groups": 9,
+   "bundle_mb": 2.6,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T11:17:06Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02195",
+   "name": "Petersburg Borough",
+   "state": "AK",
+   "block_groups": 4,
+   "bundle_mb": 6.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T11:48:35Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02198",
+   "name": "Prince of Wales-Hyder Census Area",
+   "state": "AK",
+   "block_groups": 10,
+   "bundle_mb": 17.5,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T07:45:49Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02220",
+   "name": "Sitka City and Borough",
+   "state": "AK",
+   "block_groups": 11,
+   "bundle_mb": 7.5,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T06:07:08Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02230",
+   "name": "Skagway Municipality",
+   "state": "AK",
+   "block_groups": 1,
+   "bundle_mb": 4.9,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T05:19:05Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02240",
+   "name": "Southeast Fairbanks Census Area",
+   "state": "AK",
+   "block_groups": 5,
+   "bundle_mb": 1.7,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T08:21:14Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02275",
+   "name": "Wrangell City and Borough",
+   "state": "AK",
+   "block_groups": 2,
+   "bundle_mb": 8.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T06:43:59Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02282",
+   "name": "Yakutat City and Borough",
+   "state": "AK",
+   "block_groups": 1,
+   "bundle_mb": 6.5,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T08:38:28Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
+   "fips": "02290",
+   "name": "Yukon-Koyukuk Census Area",
+   "state": "AK",
+   "block_groups": 8,
+   "bundle_mb": 7.7,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T11:18:10Z",
+   "crash_source": null,
+   "crash_years": null
+  },
+  {
    "fips": "04003",
    "name": "Cochise County",
    "state": "AZ",
@@ -6039,6 +6358,50 @@
    "crash_years": null
   },
   {
+   "fips": "47001",
+   "name": "Anderson County",
+   "state": "TN",
+   "block_groups": 54,
+   "bundle_mb": 0.9,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47003",
+   "name": "Bedford County",
+   "state": "TN",
+   "block_groups": 27,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47005",
+   "name": "Benton County",
+   "state": "TN",
+   "block_groups": 15,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47007",
+   "name": "Bledsoe County",
+   "state": "TN",
+   "block_groups": 10,
+   "bundle_mb": 0.5,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
    "fips": "47009",
    "name": "Blount County",
    "state": "TN",
@@ -6067,6 +6430,138 @@
    ]
   },
   {
+   "fips": "47013",
+   "name": "Campbell County",
+   "state": "TN",
+   "block_groups": 33,
+   "bundle_mb": 0.5,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47015",
+   "name": "Cannon County",
+   "state": "TN",
+   "block_groups": 10,
+   "bundle_mb": 0.1,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47017",
+   "name": "Carroll County",
+   "state": "TN",
+   "block_groups": 23,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47019",
+   "name": "Carter County",
+   "state": "TN",
+   "block_groups": 38,
+   "bundle_mb": 1.0,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47021",
+   "name": "Cheatham County",
+   "state": "TN",
+   "block_groups": 21,
+   "bundle_mb": 0.4,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47023",
+   "name": "Chester County",
+   "state": "TN",
+   "block_groups": 13,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47025",
+   "name": "Claiborne County",
+   "state": "TN",
+   "block_groups": 23,
+   "bundle_mb": 0.4,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47027",
+   "name": "Clay County",
+   "state": "TN",
+   "block_groups": 6,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47029",
+   "name": "Cocke County",
+   "state": "TN",
+   "block_groups": 25,
+   "bundle_mb": 1.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47031",
+   "name": "Coffee County",
+   "state": "TN",
+   "block_groups": 41,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47033",
+   "name": "Crockett County",
+   "state": "TN",
+   "block_groups": 13,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47035",
+   "name": "Cumberland County",
+   "state": "TN",
+   "block_groups": 45,
+   "bundle_mb": 0.5,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
    "fips": "47037",
    "name": "Davidson County",
    "state": "TN",
@@ -6079,6 +6574,149 @@
     2021,
     2025
    ]
+  },
+  {
+   "fips": "47039",
+   "name": "Decatur County",
+   "state": "TN",
+   "block_groups": 13,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47041",
+   "name": "DeKalb County",
+   "state": "TN",
+   "block_groups": 13,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47043",
+   "name": "Dickson County",
+   "state": "TN",
+   "block_groups": 31,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47045",
+   "name": "Dyer County",
+   "state": "TN",
+   "block_groups": 27,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47047",
+   "name": "Fayette County",
+   "state": "TN",
+   "block_groups": 34,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47049",
+   "name": "Fentress County",
+   "state": "TN",
+   "block_groups": 16,
+   "bundle_mb": 0.4,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47051",
+   "name": "Franklin County",
+   "state": "TN",
+   "block_groups": 29,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47053",
+   "name": "Gibson County",
+   "state": "TN",
+   "block_groups": 42,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47055",
+   "name": "Giles County",
+   "state": "TN",
+   "block_groups": 20,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47057",
+   "name": "Grainger County",
+   "state": "TN",
+   "block_groups": 18,
+   "bundle_mb": 0.4,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47059",
+   "name": "Greene County",
+   "state": "TN",
+   "block_groups": 49,
+   "bundle_mb": 1.5,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47061",
+   "name": "Grundy County",
+   "state": "TN",
+   "block_groups": 11,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47063",
+   "name": "Hamblen County",
+   "state": "TN",
+   "block_groups": 42,
+   "bundle_mb": 0.4,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
   },
   {
    "fips": "47065",
@@ -6095,6 +6733,149 @@
    ]
   },
   {
+   "fips": "47067",
+   "name": "Hancock County",
+   "state": "TN",
+   "block_groups": 6,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47069",
+   "name": "Hardeman County",
+   "state": "TN",
+   "block_groups": 20,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47071",
+   "name": "Hardin County",
+   "state": "TN",
+   "block_groups": 22,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47073",
+   "name": "Hawkins County",
+   "state": "TN",
+   "block_groups": 38,
+   "bundle_mb": 0.7,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47075",
+   "name": "Haywood County",
+   "state": "TN",
+   "block_groups": 15,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47077",
+   "name": "Henderson County",
+   "state": "TN",
+   "block_groups": 21,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47079",
+   "name": "Henry County",
+   "state": "TN",
+   "block_groups": 30,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47081",
+   "name": "Hickman County",
+   "state": "TN",
+   "block_groups": 16,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47083",
+   "name": "Houston County",
+   "state": "TN",
+   "block_groups": 7,
+   "bundle_mb": 0.1,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47085",
+   "name": "Humphreys County",
+   "state": "TN",
+   "block_groups": 15,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47087",
+   "name": "Jackson County",
+   "state": "TN",
+   "block_groups": 10,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47089",
+   "name": "Jefferson County",
+   "state": "TN",
+   "block_groups": 32,
+   "bundle_mb": 0.5,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47091",
+   "name": "Johnson County",
+   "state": "TN",
+   "block_groups": 12,
+   "bundle_mb": 0.9,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
    "fips": "47093",
    "name": "Knox County",
    "state": "TN",
@@ -6107,6 +6888,138 @@
     2021,
     2025
    ]
+  },
+  {
+   "fips": "47095",
+   "name": "Lake County",
+   "state": "TN",
+   "block_groups": 7,
+   "bundle_mb": 0.1,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47097",
+   "name": "Lauderdale County",
+   "state": "TN",
+   "block_groups": 25,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47099",
+   "name": "Lawrence County",
+   "state": "TN",
+   "block_groups": 31,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47101",
+   "name": "Lewis County",
+   "state": "TN",
+   "block_groups": 7,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47103",
+   "name": "Lincoln County",
+   "state": "TN",
+   "block_groups": 25,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47105",
+   "name": "Loudon County",
+   "state": "TN",
+   "block_groups": 37,
+   "bundle_mb": 0.5,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47107",
+   "name": "McMinn County",
+   "state": "TN",
+   "block_groups": 38,
+   "bundle_mb": 0.8,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47109",
+   "name": "McNairy County",
+   "state": "TN",
+   "block_groups": 19,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47111",
+   "name": "Macon County",
+   "state": "TN",
+   "block_groups": 16,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47113",
+   "name": "Madison County",
+   "state": "TN",
+   "block_groups": 66,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47115",
+   "name": "Marion County",
+   "state": "TN",
+   "block_groups": 20,
+   "bundle_mb": 0.4,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47117",
+   "name": "Marshall County",
+   "state": "TN",
+   "block_groups": 20,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
   },
   {
    "fips": "47119",
@@ -6123,6 +7036,28 @@
    ]
   },
   {
+   "fips": "47121",
+   "name": "Meigs County",
+   "state": "TN",
+   "block_groups": 9,
+   "bundle_mb": 0.6,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47123",
+   "name": "Monroe County",
+   "state": "TN",
+   "block_groups": 34,
+   "bundle_mb": 1.1,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
    "fips": "47125",
    "name": "Montgomery County",
    "state": "TN",
@@ -6135,6 +7070,127 @@
     2021,
     2025
    ]
+  },
+  {
+   "fips": "47127",
+   "name": "Moore County",
+   "state": "TN",
+   "block_groups": 5,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47129",
+   "name": "Morgan County",
+   "state": "TN",
+   "block_groups": 14,
+   "bundle_mb": 0.4,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47131",
+   "name": "Obion County",
+   "state": "TN",
+   "block_groups": 28,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47133",
+   "name": "Overton County",
+   "state": "TN",
+   "block_groups": 16,
+   "bundle_mb": 0.4,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47135",
+   "name": "Perry County",
+   "state": "TN",
+   "block_groups": 8,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47137",
+   "name": "Pickett County",
+   "state": "TN",
+   "block_groups": 6,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47139",
+   "name": "Polk County",
+   "state": "TN",
+   "block_groups": 13,
+   "bundle_mb": 0.7,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47141",
+   "name": "Putnam County",
+   "state": "TN",
+   "block_groups": 46,
+   "bundle_mb": 0.6,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47143",
+   "name": "Rhea County",
+   "state": "TN",
+   "block_groups": 19,
+   "bundle_mb": 0.5,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47145",
+   "name": "Roane County",
+   "state": "TN",
+   "block_groups": 37,
+   "bundle_mb": 0.6,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47147",
+   "name": "Robertson County",
+   "state": "TN",
+   "block_groups": 41,
+   "bundle_mb": 0.4,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
   },
   {
    "fips": "47149",
@@ -6151,6 +7207,39 @@
    ]
   },
   {
+   "fips": "47151",
+   "name": "Scott County",
+   "state": "TN",
+   "block_groups": 16,
+   "bundle_mb": 0.4,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47153",
+   "name": "Sequatchie County",
+   "state": "TN",
+   "block_groups": 9,
+   "bundle_mb": 0.4,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47155",
+   "name": "Sevier County",
+   "state": "TN",
+   "block_groups": 69,
+   "bundle_mb": 1.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
    "fips": "47157",
    "name": "Shelby County",
    "state": "TN",
@@ -6163,6 +7252,28 @@
     2021,
     2025
    ]
+  },
+  {
+   "fips": "47159",
+   "name": "Smith County",
+   "state": "TN",
+   "block_groups": 13,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47161",
+   "name": "Stewart County",
+   "state": "TN",
+   "block_groups": 12,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
   },
   {
    "fips": "47163",
@@ -6193,6 +7304,72 @@
    ]
   },
   {
+   "fips": "47167",
+   "name": "Tipton County",
+   "state": "TN",
+   "block_groups": 37,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47169",
+   "name": "Trousdale County",
+   "state": "TN",
+   "block_groups": 5,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47171",
+   "name": "Unicoi County",
+   "state": "TN",
+   "block_groups": 14,
+   "bundle_mb": 0.9,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47173",
+   "name": "Union County",
+   "state": "TN",
+   "block_groups": 14,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47175",
+   "name": "Van Buren County",
+   "state": "TN",
+   "block_groups": 4,
+   "bundle_mb": 0.1,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47177",
+   "name": "Warren County",
+   "state": "TN",
+   "block_groups": 27,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
    "fips": "47179",
    "name": "Washington County",
    "state": "TN",
@@ -6205,6 +7382,39 @@
     2021,
     2025
    ]
+  },
+  {
+   "fips": "47181",
+   "name": "Wayne County",
+   "state": "TN",
+   "block_groups": 13,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47183",
+   "name": "Weakley County",
+   "state": "TN",
+   "block_groups": 26,
+   "bundle_mb": 0.2,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
+  },
+  {
+   "fips": "47185",
+   "name": "White County",
+   "state": "TN",
+   "block_groups": 17,
+   "bundle_mb": 0.3,
+   "built": "2026-11-17",
+   "osm": "2026-11-17T00\\:54\\:33Z",
+   "crash_source": "Tennessee TITAN injury crash records 2021-2025",
+   "crash_years": null
   },
   {
    "fips": "47187",

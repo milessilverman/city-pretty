@@ -1,0 +1,1231 @@
+{
+ "audited": "2026-11-16",
+ "legend": {
+  "a": "cites a source I confirmed by fetching",
+  "b": "cites a source I could not confirm",
+  "b-partial": "source exists but is mis-cited/mis-described",
+  "b-contradicted": "source fetched and it contradicts the code",
+  "c": "no source - assumption/invented",
+  "logic": "logic defect, not a constant"
+ },
+ "constants": [
+  {
+   "file": "src/engines/streetForgeEngine.ts",
+   "line": "105-109",
+   "value": "240k/285k/115k/95k/850k per mile",
+   "represents": "lane reallocation capital cost per mile",
+   "cls": "c",
+   "evidence": "No source cited.",
+   "action": "Remove or replace with sourced unit costs (app/data/unit_costs.json bid items) and label."
+  },
+  {
+   "file": "src/engines/streetForgeEngine.ts",
+   "line": "115,149",
+   "value": "0.75 / 0.60; narrative '75% federal SS4A match'",
+   "represents": "SS4A federal grant share",
+   "cls": "b-contradicted",
+   "evidence": "IIJA (P.L. 117-58) SS4A text fetched from govinfo: 'Federal share ... shall not exceed 80 percent'; authorized FY2022-2026 only; grants go to public agencies (MPOs, local govts, tribes), not private investors. 0.60 for bus/other lanes and 0.75 are not in law; narrative says 75% even when 0.60 is applied.",
+   "action": "Replace with 'up to 80%, competitive, public applicants only, authorization ends FY2026'; never subtract an unawarded grant from cost."
+  },
+  {
+   "file": "src/engines/streetForgeEngine.ts",
+   "line": "120",
+   "value": "14,000",
+   "represents": "default AADT when none given",
+   "cls": "c",
+   "evidence": "Invented fallback.",
+   "action": "Require real AADT (state DOT counts) or return null."
+  },
+  {
+   "file": "src/engines/streetForgeEngine.ts",
+   "line": "121-124",
+   "value": "800 veh/hr/lane; delay 2.8 s per 1k AADT cap 65 s; 8.5%/3.0% diversion",
+   "represents": "traffic capacity and delay model",
+   "cls": "c",
+   "evidence": "No source.",
+   "action": "Label as placeholder or remove."
+  },
+  {
+   "file": "src/engines/streetForgeEngine.ts",
+   "line": "125-129",
+   "value": "620/310 new riders per mile; 2.5 mi trips; 70% replace driving; 310 days",
+   "represents": "bike-lane ridership and VMT model",
+   "cls": "c",
+   "evidence": "No source.",
+   "action": "Remove or source."
+  },
+  {
+   "file": "src/engines/streetForgeEngine.ts",
+   "line": "130",
+   "value": "0.000404 t CO2 per vehicle-mile",
+   "represents": "passenger-vehicle emission factor",
+   "cls": "b",
+   "evidence": "Consistent with EPA 'typical passenger vehicle ~400 g CO2/mile' figure but not fetched/confirmed here.",
+   "action": "Cite EPA page with retrieval date after fetching."
+  },
+  {
+   "file": "src/engines/streetForgeEngine.ts",
+   "line": "131",
+   "value": "0.00078 lb NOx per mile",
+   "represents": "NOx factor",
+   "cls": "c",
+   "evidence": "No source.",
+   "action": "Remove or source (EPA MOVES)."
+  },
+  {
+   "file": "src/engines/streetForgeEngine.ts",
+   "line": "132 (+39)",
+   "value": "$190/ton",
+   "represents": "social cost of carbon",
+   "cls": "b-contradicted",
+   "evidence": "$190/t is EPA's Nov-2023 estimate. EO 14154 (90 FR, 2025-01-29; govinfo 2025-01956) disbanded the IWG, withdrew its SC-GHG estimates, and directed EPA to consider eliminating SC-CO2 from federal decisions. Not current federal policy; cannot be presented as 'EPA 2024' fact.",
+   "action": "Show only as an optional, labeled assumption; exclude from 'BCR' headline."
+  },
+  {
+   "file": "src/engines/streetForgeEngine.ts",
+   "line": "135-137",
+   "value": "42%/28% crash reduction; 1.8 severe crashes/mi/yr; $145,000 per crash (NSC)",
+   "represents": "safety benefit model",
+   "cls": "c / b",
+   "evidence": "Crash-reduction %, base rate: no source. $145k attributed to National Safety Council but not confirmed (NSC publishes cost by severity; a single average is not their figure as cited).",
+   "action": "Use FHWA CMF Clearinghouse CMFs + local crash data (repo has la-crash-counts.json) or remove."
+  },
+  {
+   "file": "src/engines/streetForgeEngine.ts",
+   "line": "140-143",
+   "value": "18 businesses/mi; +14.5%/+8% sales; $350k sales per business; 2% local tax share; +6.5% property appreciation",
+   "represents": "retail and property uplift",
+   "cls": "c",
+   "evidence": "No source.",
+   "action": "Remove."
+  },
+  {
+   "file": "src/engines/streetForgeEngine.ts",
+   "line": "167,178",
+   "value": "0.005 $/veh-sec x 250 days; +16 walkability points",
+   "represents": "congestion cost, walkability gain",
+   "cls": "c",
+   "evidence": "No source.",
+   "action": "Remove."
+  },
+  {
+   "file": "src/engines/streetForgeEngine.ts",
+   "line": "197-217",
+   "value": "DCFC 150kW $45k hw/$18k civil/$32k transformer per port; 350kW $85k/$26k/$65k; L2 $5.5k/$4.2k/$6k; $85/m trench; x1.5 transformer if >80 m; 12% soft",
+   "represents": "EV charger capital cost",
+   "cls": "c",
+   "evidence": "No source.",
+   "action": "Replace with sourced cost data (e.g., NREL/JOET published cost studies) after fetching, or label as placeholder."
+  },
+  {
+   "file": "src/engines/streetForgeEngine.ts",
+   "line": "223-227 (+80)",
+   "value": "NEVI = 65% of cost for any DCFC or any 'Justice40' tract (comment: 'up to 80%')",
+   "represents": "NEVI grant",
+   "cls": "b-contradicted",
+   "evidence": "IIJA Div. J NEVI paragraph fetched: federal share 80%; funds are formula apportionments to States (FY2022-2026) under FHWA Interim Final Guidance (Aug 11, 2025, listed on fhwa.dot.gov/environment/nevi). Eligibility is by state plan / designated Alternative Fuel Corridors, not 'Justice40'. Justice40 (EO 14008 sec. 223) was revoked by EO 14148 (2025-01-20; govinfo 2025-01901, item (s)). Engine also grants NEVI to Level-2 chargers in 'J40' tracts.",
+   "action": "Remove automatic NEVI award; show 'may be eligible via <state> NEVI subgrant if on a designated corridor'."
+  },
+  {
+   "file": "src/engines/streetForgeEngine.ts",
+   "line": "229-231 (+81)",
+   "value": "IRC 30C credit = 30% up to $100k/port, only in 'Justice40' tracts",
+   "represents": "30C tax credit",
+   "cls": "b-contradicted",
+   "evidence": "P.L. 119-21 sec. 70504 (fetched) amended 30C(i) to end the credit for property placed in service after June 30, 2026. AFDC law 10513 (fetched) marks it 'Expired: 06/30/2026'. IRS page (fetched): 6% base / 30% with prevailing wage & apprenticeship, max $100k per item, eligibility by IRS-listed low-income or non-urban census tracts (not Justice40). As of 2026-11-16 a new charger gets $0 from 30C.",
+   "action": "Set to 0 for placed-in-service after 2026-06-30; remove 'Justice40' gating."
+  },
+  {
+   "file": "src/engines/streetForgeEngine.ts",
+   "line": "234-249",
+   "value": "85% incentive cap; 4.2 sessions/port/day; 36/14 kWh/session; $0.48/$0.28 per kWh price; $0.21/kWh electricity; $1,800/port/yr opex",
+   "represents": "EV charger revenue model",
+   "cls": "c",
+   "evidence": "No source.",
+   "action": "Remove or source (utilization data from AFDC/state dashboards; local tariffs)."
+  },
+  {
+   "file": "src/engines/streetForgeEngine.ts",
+   "line": "252-257",
+   "value": "score 75 base, +15/-20/+10/+10",
+   "represents": "siting score",
+   "cls": "c",
+   "evidence": "Heuristic; +10 for 'Justice40' references a revoked program.",
+   "action": "Label as heuristic; remove J40 term."
+  },
+  {
+   "file": "src/engines/everySpaceEngine.ts",
+   "line": "84-94",
+   "value": "$180/space expected ($120-$240), $250 setup",
+   "represents": "driveway parking rent",
+   "cls": "c",
+   "evidence": "No source.",
+   "action": "Label as placeholder until sourced from a real listings dataset."
+  },
+  {
+   "file": "src/engines/everySpaceEngine.ts",
+   "line": "103-113",
+   "value": "$1.25/sq ft/mo ($0.90-$1.60); 250 sq ft default; $400 setup",
+   "represents": "attic/basement storage rent",
+   "cls": "c",
+   "evidence": "No source.",
+   "action": "Same."
+  },
+  {
+   "file": "src/engines/everySpaceEngine.ts",
+   "line": "127-130",
+   "value": "$750/mo ($450-$1,250), $500 setup",
+   "represents": "pool rental income",
+   "cls": "c",
+   "evidence": "No source.",
+   "action": "Same."
+  },
+  {
+   "file": "src/engines/everySpaceEngine.ts",
+   "line": "139-150",
+   "value": "10 W/sq ft roof; $18/kW-month ($14-$24); $0 setup 'third-party PPA'",
+   "represents": "rooftop solar lease income",
+   "cls": "c",
+   "evidence": "No source. Residential third-party PPAs/leases normally sell power to the homeowner; they do not pay the owner rent. Claim is likely wrong in most markets.",
+   "action": "Remove or restrict to verified community-solar roof-lease programs."
+  },
+  {
+   "file": "src/engines/everySpaceEngine.ts",
+   "line": "159,170",
+   "value": "$1,850 fallback ADU rent; note 'Backed by HUD FY2026 Fair Market Rent benchmarks'",
+   "represents": "ADU rent",
+   "cls": "b-contradicted",
+   "evidence": "The HUD FMR file it reads (app/data/hud_fair_market_rents.json) was hand-typed (see parent audit; values differ from HUD's FY2026 FMR service, e.g. LA 1BR 2010 vs HUD 2085). $1,850 is invented.",
+   "action": "Use HUD FMR pulled from HUD service; null when absent."
+  },
+  {
+   "file": "src/engines/everySpaceEngine.ts",
+   "line": "79",
+   "value": "12-month default hold",
+   "represents": "holding period",
+   "cls": "c",
+   "evidence": "Assumption.",
+   "action": "Require user input."
+  },
+  {
+   "file": "app/app.js",
+   "line": "1677-1700",
+   "value": "debt service 0.55%/mo of value; tax+insurance 0.12%/mo; 3 bd/2 ba/6,000 lot/1,500 living fallbacks; 2 driveway spaces; 18-month hold; storage = 15% of living area",
+   "represents": "EverySpace inputs built in app.js",
+   "cls": "c",
+   "evidence": "Invented fallbacks. NOTE: dead code in the browser (_evalEverySpace is null; verified in Chromium).",
+   "action": "Remove fallbacks; require real inputs."
+  },
+  {
+   "file": "src/engines/renovationQuoteEngine.ts",
+   "line": "95-105",
+   "value": "per-sq-ft and turnkey cost ranges + 'typicalEquityLiftPct' (3%-28%) for 11 project types",
+   "represents": "renovation cost benchmarks and value lift",
+   "cls": "c",
+   "evidence": "No source (GRAND-VISION doc mentions RSMeans, which the repo does not have).",
+   "action": "Remove or label 'placeholder, not local data'; never call a quote fair/overpriced from these."
+  },
+  {
+   "file": "src/engines/renovationQuoteEngine.ts",
+   "line": "118",
+   "value": "CA Gov. Code 65852.2 + AB 2097",
+   "represents": "CA ADU statute",
+   "cls": "b",
+   "evidence": "leginfo.legislature.ca.gov returned 403 from this environment; not confirmed. CA ADU law was reorganized in 2024 legislation (needs check whether 65852.2 is still the operative section).",
+   "action": "Verify on leginfo before shipping."
+  },
+  {
+   "file": "src/engines/renovationQuoteEngine.ts",
+   "line": "126",
+   "value": "A.R.S. 9-467.04 (Arizona HB 2720)",
+   "represents": "AZ ADU statute",
+   "cls": "b-contradicted",
+   "evidence": "azleg.gov/ars/9/00467-04.htm returns 404 (section does not exist). Arizona's ADU statute is A.R.S. 9-461.18 'Accessory dwelling units; regulation; applicability; definitions' (fetched, 200).",
+   "action": "Fix citation to 9-461.18 and re-read its population threshold and parking terms."
+  },
+  {
+   "file": "src/engines/renovationQuoteEngine.ts",
+   "line": "134",
+   "value": "Tex. Local Gov't Code 214.909 / Austin HOME",
+   "represents": "TX ADU authority",
+   "cls": "b",
+   "evidence": "Could not confirm 214.909 (statutes.capitol.texas.gov chapter page renders via JS). Austin HOME is a city ordinance, not a state statute.",
+   "action": "Verify; cite Austin ordinance separately."
+  },
+  {
+   "file": "src/engines/renovationQuoteEngine.ts",
+   "line": "142",
+   "value": "RCW 36.70A.696 (WA HB 1337)",
+   "represents": "WA ADU statute",
+   "cls": "b-partial",
+   "evidence": "app.leg.wa.gov fetched: 36.70A.696 is 'Accessory dwelling units - Definitions'; the operative 2-ADU rule is RCW 36.70A.681 'Accessory dwelling units - Limitations on local regulation'.",
+   "action": "Cite 36.70A.681."
+  },
+  {
+   "file": "src/engines/renovationQuoteEngine.ts",
+   "line": "150",
+   "value": "C.R.S. 29-35-102 (CO HB 24-1152)",
+   "represents": "CO ADU statute",
+   "cls": "b",
+   "evidence": "leg.colorado.gov returned 406; not confirmed.",
+   "action": "Verify."
+  },
+  {
+   "file": "src/engines/renovationQuoteEngine.ts",
+   "line": "158",
+   "value": "Fla. Stat. 166.04151 (Live Local) as 'ADU encouragement'",
+   "represents": "FL statute",
+   "cls": "b-partial",
+   "evidence": "flsenate.gov fetched: 166.04151 exists, titled 'Affordable housing' (Live Local multifamily on commercial/industrial land). It is not an ADU statute; description is wrong.",
+   "action": "Fix description."
+  },
+  {
+   "file": "src/engines/renovationQuoteEngine.ts",
+   "line": "178,196-205,212-226,268-281",
+   "value": "500 sq ft default; +/-12%/30% fairness bands; 1.2x lift cap; rent fallbacks $1,850/$1,450/$220; $450/mo x 6 carry; alternative projects with fixed cost $65k/$24k, equity add $95k/$34k, ROI 46%/42%",
+   "represents": "quote verdict logic and suggested alternatives",
+   "cls": "c",
+   "evidence": "No source. The 'alternatives' are fixed numbers shown for every property.",
+   "action": "Remove fixed alternatives; label all as placeholder."
+  },
+  {
+   "file": "src/engines/underusedLandEngine.ts",
+   "line": "187",
+   "value": "0.12 (12% of golf course for housing)",
+   "represents": "golf edge share",
+   "cls": "c",
+   "evidence": "Assumption; conflicts with the bundle's own 0.10 (under.assumptions.golf_course_share_for_housing).",
+   "action": "Use one documented assumption."
+  },
+  {
+   "file": "src/engines/underusedLandEngine.ts",
+   "line": "192,253",
+   "value": "45/30 and 60/35 homes per acre",
+   "represents": "density",
+   "cls": "c",
+   "evidence": "Assumption (bundle uses a different density table).",
+   "action": "Same."
+  },
+  {
+   "file": "src/engines/underusedLandEngine.ts",
+   "line": "195",
+   "value": "$750,000 fallback median home value",
+   "represents": "fallback",
+   "cls": "c",
+   "evidence": "Invented fallback - the kind DATA-AUDIT says was removed.",
+   "action": "null."
+  },
+  {
+   "file": "src/engines/underusedLandEngine.ts",
+   "line": "196,254",
+   "value": "$800,000/acre and $1,200,000/acre fallback land cost",
+   "represents": "fallback",
+   "cls": "c",
+   "evidence": "Invented fallback.",
+   "action": "null."
+  },
+  {
+   "file": "src/engines/underusedLandEngine.ts",
+   "line": "199,203",
+   "value": "$340,000 per unit hard+soft; finished value = 85% of median home value",
+   "represents": "dev cost / value",
+   "cls": "c",
+   "evidence": "No source.",
+   "action": "Source or label."
+  },
+  {
+   "file": "src/engines/underusedLandEngine.ts",
+   "line": "255",
+   "value": "$65,000 margin per home fallback",
+   "represents": "fallback",
+   "cls": "c",
+   "evidence": "Invented fallback.",
+   "action": "null."
+  },
+  {
+   "file": "src/engines/underusedLandEngine.ts",
+   "line": "152-171",
+   "value": "suitability score weights",
+   "represents": "heuristic",
+   "cls": "c",
+   "evidence": "Heuristic.",
+   "action": "Label."
+  },
+  {
+   "file": "src/engines/underusedLandEngine.ts",
+   "line": "214-216,258-263",
+   "value": "applies CA SB 79 / AB 2097 / Surplus Land Act based only on distance",
+   "represents": "statute applicability",
+   "cls": "logic",
+   "evidence": "No state check; would apply CA law to any state's site. (Only CA sites remain after this audit.)",
+   "action": "Gate on stateCode === 'CA'."
+  },
+  {
+   "file": "src/engines/transitCorridorOpportunityEngine.ts",
+   "line": "113,118",
+   "value": "viable if >=20 min saved & speed ratio >=1.15; 45 units/acre",
+   "represents": "corridor viability, yield",
+   "cls": "c",
+   "evidence": "Assumption.",
+   "action": "Label."
+  },
+  {
+   "file": "src/engines/transitCorridorOpportunityEngine.ts",
+   "line": "153,156,160",
+   "value": "land uplift 32%/24%/18% by station type; density 75/60/35; finished value 85% of median",
+   "represents": "station TOD model",
+   "cls": "c",
+   "evidence": "No source.",
+   "action": "Source from studies that actually pass DOI check, or remove."
+  },
+  {
+   "file": "src/engines/transitCorridorOpportunityEngine.ts",
+   "line": "164-166",
+   "value": "2.5/4.5 bike miles; $220,000 per mile",
+   "represents": "bike connection cost",
+   "cls": "c",
+   "evidence": "No source.",
+   "action": "Use unit_costs.json bid items."
+  },
+  {
+   "file": "src/engines/transitCorridorOpportunityEngine.ts",
+   "line": "196-317 (notably 207,217,225,262,272,307,317)",
+   "value": "'+20% to +30% appreciation', '+$1,200-$1,600/mo', '$400-$750/mo', '100% negative carry offset', '18% to 24% IRR', '10% rent premium', '22% to 28% project equity IRR', 'bonds repay 40-60%'",
+   "represents": "return promises in investment plans",
+   "cls": "c",
+   "evidence": "No source. These are presented to users as projected returns.",
+   "action": "Remove all return promises until there is a validated model."
+  },
+  {
+   "file": "src/engines/valuationBacktestEngine.ts",
+   "line": "105",
+   "value": "default lastVerified '2026-11-15'",
+   "represents": "verification date",
+   "cls": "c",
+   "evidence": "Auto-stamps a verification date on any run.",
+   "action": "Use the actual run date; never default."
+  },
+  {
+   "file": "src/engines/valuationBacktestEngine.ts",
+   "line": "139-149",
+   "value": "lotSqft 6000, hv 750000, beds 3, baths 2, yearBuilt 1980 fallbacks",
+   "represents": "test inputs",
+   "cls": "c",
+   "evidence": "Invents property attributes during a back-test, which invalidates the test.",
+   "action": "Drop records missing attributes."
+  },
+  {
+   "file": "app/app.js",
+   "line": "929-942 (copy of src/engines/propertyValuationEngine.ts ~433-447)",
+   "value": "+/-3.8%, 5.0%, 6.5%, 7.8% with labels 'High Precision', 'High Confidence'",
+   "represents": "home value confidence band",
+   "cls": "c",
+   "evidence": "No back-test against real sales supports these bands (the only 'back-test' used fabricated sales). SHIPS in app.js.",
+   "action": "Replace with 'unvalidated estimate' label and wide/no band until a real back-test exists."
+  },
+  {
+   "file": "src/ai/advisorGroundingContract.ts",
+   "line": "154",
+   "value": "IRC 25D 30% residential solar credit ends after 2025",
+   "represents": "federal law statement",
+   "cls": "a",
+   "evidence": "P.L. 119-21 sec. 70506 (fetched from govinfo): 25D(h) amended so the credit does not apply 'with respect to any expenditures made after December 31, 2025'.",
+   "action": "Keep; wording: 'expenditures made after 2025'."
+  }
+ ],
+ "underused_sites": {
+  "before": 99,
+  "after": 90,
+  "removed": [
+   {
+    "id": "site_phx_golf_1",
+    "reason": "hand-typed in scripts/expand_underused_sites_nationwide.mjs; valuations/homes/margin invented. Geocoded Papago Golf Course (nominatim) ~2.8 km from 44th St/Washington station, record says 620 m; address is E Karsten Way, record says E Moreland St; isHousingElementSite=true is a California-only concept."
+   },
+   {
+    "id": "site_phx_lot_2",
+    "reason": "hand-typed; valuations/homes/margin invented; no fetch in script."
+   },
+   {
+    "id": "site_atx_golf_1",
+    "reason": "hand-typed; Hancock Golf Course geocoded ~4.1 km from Plaza Saltillo, record says 750 m; 'Downtown Connect' is not a Red Line station name; Housing Element flag is CA-only."
+   },
+   {
+    "id": "site_atx_lot_2",
+    "reason": "hand-typed; valuations/homes/margin invented."
+   },
+   {
+    "id": "site_sea_lot_1",
+    "reason": "hand-typed; valuations/homes/margin invented."
+   },
+   {
+    "id": "site_den_golf_1",
+    "reason": "hand-typed; valuations/homes/margin invented (1,200 homes, $185M margin)."
+   },
+   {
+    "id": "site_chi_lot_1",
+    "reason": "hand-typed; valuations/homes/margin invented."
+   },
+   {
+    "id": "site_det_vacant_1",
+    "reason": "hand-typed; valuations/homes/margin invented."
+   },
+   {
+    "id": "site_tpa_lot_1",
+    "reason": "hand-typed; valuations/homes/margin invented."
+   }
+  ],
+  "kept_la": {
+   "count": 90,
+   "origin": "scripts/build_underused_sites.mjs selects from app/data/bundle-la.b64.txt under.sites (9,411 sites). The code that built the bundle's under.sites is not in this repo.",
+   "source_fields_spot_check": {
+    "checked": 33,
+    "matched": 33,
+    "method": "LA County public parcel layer (public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0) queried by SitusFullAddress on 2026-11-16; Roll_LandValue exact match and parcel area within ~1% for all addressed sites. 57 sites have no address and were not spot-checked.",
+    "details": [
+     {
+      "id": "site_la_2_4153",
+      "address": "4515 PARK ENTRADA CALABASAS CA 91302",
+      "kind": "golf course",
+      "repo_lav": 12399495,
+      "repo_acres": 104.96,
+      "repo_base_year": 2004,
+      "parcels": [
+       {
+        "AIN": "2069012068",
+        "use": "Golf Courses",
+        "lav": 12399495,
+        "base": "2004",
+        "acres": 104.84
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_4_4508",
+      "address": "22751 GOLDEN SPRINGS DR DIAMOND BAR CA 91765",
+      "kind": "golf course",
+      "repo_lav": null,
+      "repo_acres": 89.13,
+      "repo_base_year": null,
+      "parcels": [
+       {
+        "AIN": "8717002911",
+        "use": "Golf Courses",
+        "lav": null,
+        "base": "0000",
+        "acres": 89.05
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_8_4260",
+      "address": "12445 MOUNTAIN GATE DR LOS ANGELES CA 90049",
+      "kind": "golf course",
+      "repo_lav": 3447797,
+      "repo_acres": 134,
+      "repo_base_year": 1978,
+      "parcels": [
+       {
+        "AIN": "4490024009",
+        "use": "Golf Courses",
+        "lav": 3447797,
+        "base": "1978",
+        "acres": 134.06
+       },
+       {
+        "AIN": "4493035004",
+        "use": "Golf Courses",
+        "lav": 2403526,
+        "base": "1983",
+        "acres": 114.19
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_9_4263",
+      "address": "12445 MOUNTAIN GATE DR LOS ANGELES CA 90049",
+      "kind": "golf course",
+      "repo_lav": 2403526,
+      "repo_acres": 114.16,
+      "repo_base_year": 1983,
+      "parcels": [
+       {
+        "AIN": "4490024009",
+        "use": "Golf Courses",
+        "lav": 3447797,
+        "base": "1978",
+        "acres": 134.06
+       },
+       {
+        "AIN": "4493035004",
+        "use": "Golf Courses",
+        "lav": 2403526,
+        "base": "1983",
+        "acres": 114.19
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_11_4151",
+      "address": "4812 LAKEVIEW CANYON RD WESTLAKE VILLAGE CA 91361",
+      "kind": "golf course",
+      "repo_lav": 11253424,
+      "repo_acres": 81.52,
+      "repo_base_year": 2014,
+      "parcels": [
+       {
+        "AIN": "2060001015",
+        "use": "Golf Courses",
+        "lav": 11253424,
+        "base": "2014",
+        "acres": 81.54
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_15_4222",
+      "address": "5001 NESTLE AVE LOS ANGELES CA 91356",
+      "kind": "golf course",
+      "repo_lav": 2420871,
+      "repo_acres": 73.59,
+      "repo_base_year": 1975,
+      "parcels": [
+       {
+        "AIN": "2184004004",
+        "use": "Golf Courses",
+        "lav": 2420871,
+        "base": "1975",
+        "acres": 73.59
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_17_4221",
+      "address": "18300 TARZANA DR LOS ANGELES CA 91356",
+      "kind": "golf course",
+      "repo_lav": 2422114,
+      "repo_acres": 67.67,
+      "repo_base_year": 1975,
+      "parcels": [
+       {
+        "AIN": "2184003012",
+        "use": "Golf Courses",
+        "lav": 2422114,
+        "base": "1975",
+        "acres": 67.6
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_18_4406",
+      "address": "537 MEADOWVIEW DR LA CANAD-FLNTRDG CA 91011",
+      "kind": "golf course",
+      "repo_lav": 1648102,
+      "repo_acres": 55.29,
+      "repo_base_year": 1979,
+      "parcels": [
+       {
+        "AIN": "5817001037",
+        "use": "Golf Courses",
+        "lav": 1648102,
+        "base": "1979",
+        "acres": 55.35
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_19_4475",
+      "address": "1000 LAS LOMAS RD DUARTE CA 91010",
+      "kind": "golf course",
+      "repo_lav": 2512110,
+      "repo_acres": 27.49,
+      "repo_base_year": 2013,
+      "parcels": [
+       {
+        "AIN": "8604009015",
+        "use": "Golf Courses",
+        "lav": 1130444,
+        "base": "2013",
+        "acres": 6.08
+       },
+       {
+        "AIN": "8604009016",
+        "use": "Golf Courses",
+        "lav": 2512110,
+        "base": "2013",
+        "acres": 27.5
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_20_4402",
+      "address": "1201 E COLORADO BLVD PASADENA CA 91106",
+      "kind": "golf course",
+      "repo_lav": 2395858,
+      "repo_acres": 70.54,
+      "repo_base_year": 1975,
+      "parcels": [
+       {
+        "AIN": "5708011003",
+        "use": "Golf Courses",
+        "lav": 2395858,
+        "base": "1975",
+        "acres": 70.56
+       },
+       {
+        "AIN": "5708012008",
+        "use": "Golf Courses",
+        "lav": 340091,
+        "base": "1975",
+        "acres": 10.33
+       },
+       {
+        "AIN": "5708013001",
+        "use": "Golf Courses",
+        "lav": 1157894,
+        "base": "1975",
+        "acres": 34.84
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_35_312",
+      "address": "14501 HINDRY AVE HAWTHORNE CA 90250",
+      "kind": "parking lot",
+      "repo_lav": 6562951,
+      "repo_acres": 3.11,
+      "repo_base_year": 2001,
+      "parcels": [
+       {
+        "AIN": "4149013075",
+        "use": "Department Stores",
+        "lav": 14269398,
+        "base": "2001",
+        "acres": 6.95
+       },
+       {
+        "AIN": "4149016060",
+        "use": "Parking Lots (Commercial Use Properties)",
+        "lav": 6562951,
+        "base": "2001",
+        "acres": 3.1
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_54_4618",
+      "address": "6620 CANOGA AVE LOS ANGELES CA 91303",
+      "kind": "vacant",
+      "repo_lav": null,
+      "repo_acres": 3.85,
+      "repo_base_year": null,
+      "parcels": [
+       {
+        "AIN": "2148031901",
+        "use": "Industrial",
+        "lav": null,
+        "base": "0000",
+        "acres": 3.8
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_57_4996",
+      "address": "541 BANNING ST LOS ANGELES CA 90012",
+      "kind": "vacant",
+      "repo_lav": null,
+      "repo_acres": 1.2,
+      "repo_base_year": null,
+      "parcels": [
+       {
+        "AIN": "5173009903",
+        "use": "Heavy Manufacturing",
+        "lav": null,
+        "base": "0000",
+        "acres": 1.21
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_59_4967",
+      "address": "900 JAMES M WOOD BLVD LOS ANGELES CA 90015",
+      "kind": "vacant",
+      "repo_lav": 565791,
+      "repo_acres": 0.84,
+      "repo_base_year": 1991,
+      "parcels": [
+       {
+        "AIN": "5138005033",
+        "use": "Commercial",
+        "lav": 565791,
+        "base": "1991",
+        "acres": 0.84
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_60_4977",
+      "address": "737 S FLOWER ST LOS ANGELES CA 90017",
+      "kind": "vacant",
+      "repo_lav": 4495709,
+      "repo_acres": 0.59,
+      "repo_base_year": 2004,
+      "parcels": [
+       {
+        "AIN": "5144010025",
+        "use": "Commercial",
+        "lav": 4495709,
+        "base": "2004",
+        "acres": 0.59
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_61_4700",
+      "address": "3814 MIDWAY AVE CULVER CITY CA 90232",
+      "kind": "vacant",
+      "repo_lav": null,
+      "repo_acres": 2.03,
+      "repo_base_year": 2017,
+      "parcels": [
+       {
+        "AIN": "4208017048",
+        "use": "Commercial",
+        "lav": 22,
+        "base": "2017",
+        "acres": 2.07
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_69_4995",
+      "address": "537 BANNING ST LOS ANGELES CA 90012",
+      "kind": "vacant",
+      "repo_lav": null,
+      "repo_acres": 0.6,
+      "repo_base_year": null,
+      "parcels": [
+       {
+        "AIN": "5173008902",
+        "use": "Heavy Manufacturing",
+        "lav": null,
+        "base": "0000",
+        "acres": 0.6
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_71_6104",
+      "address": "700 S FLOWER ST LOS ANGELES CA 90017",
+      "kind": "lightly built commercial",
+      "repo_lav": null,
+      "repo_acres": 4.29,
+      "repo_base_year": 2013,
+      "parcels": [
+       {
+        "AIN": "5144010401",
+        "use": "Shopping Centers (Regional)",
+        "lav": 22,
+        "base": "2013",
+        "acres": 4.28
+       },
+       {
+        "AIN": "5144010421",
+        "use": "Office Buildings",
+        "lav": 154921,
+        "base": "2013",
+        "acres": 4.28
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_72_5538",
+      "address": "1 W CENTURY DR LOS ANGELES CA 90067",
+      "kind": "lightly built commercial",
+      "repo_lav": null,
+      "repo_acres": 3.69,
+      "repo_base_year": 2005,
+      "parcels": [
+       {
+        "AIN": "4319004143",
+        "use": "Hotel & Motels",
+        "lav": 9,
+        "base": "2005",
+        "acres": 3.71
+       },
+       {
+        "AIN": "4319004146",
+        "use": "Hotel & Motels",
+        "lav": 108515,
+        "base": "2005",
+        "acres": 3.71
+       },
+       {
+        "AIN": "4319017162",
+        "use": "Hotel & Motels",
+        "lav": 204,
+        "base": "2005",
+        "acres": 3.71
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_76_5312",
+      "address": "14900 HINDRY AVE HAWTHORNE CA 90250",
+      "kind": "lightly built commercial",
+      "repo_lav": 7110143,
+      "repo_acres": 2.44,
+      "repo_base_year": 2015,
+      "parcels": [
+       {
+        "AIN": "4149009026",
+        "use": "Auto, Recreation EQPT, Construction EQPT, Sales & Service",
+        "lav": 8581210,
+        "base": "2015",
+        "acres": 2.89
+       },
+       {
+        "AIN": "4149009027",
+        "use": "Auto, Recreation EQPT, Construction EQPT, Sales & Service",
+        "lav": 7110143,
+        "base": "2015",
+        "acres": 2.42
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_77_5435",
+      "address": "3550 CAHUENGA BLVD W LOS ANGELES CA 90068",
+      "kind": "lightly built commercial",
+      "repo_lav": 20133237,
+      "repo_acres": 2.1,
+      "repo_base_year": 2022,
+      "parcels": [
+       {
+        "AIN": "2425001056",
+        "use": "Auto, Recreation EQPT, Construction EQPT, Sales & Service",
+        "lav": 20133237,
+        "base": "2022",
+        "acres": 2.07
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_79_6441",
+      "address": "250 W 1ST ST CLAREMONT CA 91711",
+      "kind": "lightly built commercial",
+      "repo_lav": 3190198,
+      "repo_acres": 2.79,
+      "repo_base_year": 1995,
+      "parcels": [
+       {
+        "AIN": "8313021007",
+        "use": "Office Buildings",
+        "lav": 3190198,
+        "base": "1995",
+        "acres": 2.81
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_80_6223",
+      "address": "3333 E FOOTHILL BLVD PASADENA CA 91107",
+      "kind": "lightly built commercial",
+      "repo_lav": 1719422,
+      "repo_acres": 1.33,
+      "repo_base_year": 1997,
+      "parcels": [
+       {
+        "AIN": "5752025015",
+        "use": "Restaurants, Cocktail Lounges",
+        "lav": 1719422,
+        "base": "1997",
+        "acres": 1.33
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_81_6226",
+      "address": "3660 E FOOTHILL BLVD PASADENA CA 91107",
+      "kind": "lightly built commercial",
+      "repo_lav": 6375000,
+      "repo_acres": 1.62,
+      "repo_base_year": 2025,
+      "parcels": [
+       {
+        "AIN": "5757029050",
+        "use": "Stores",
+        "lav": 6375000,
+        "base": "2025",
+        "acres": 1.63
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_82_6516",
+      "address": "1290 W OPTICAL DR AZUSA CA 91702",
+      "kind": "lightly built commercial",
+      "repo_lav": 7459668,
+      "repo_acres": 1.9,
+      "repo_base_year": 2024,
+      "parcels": [
+       {
+        "AIN": "8615001060",
+        "use": "Lgt Manf.Sm. EQPT. Manuf Sm.Shps Instr.Manuf. Prnt Plnts",
+        "lav": 7459668,
+        "base": "2024",
+        "acres": 1.9
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_83_6222",
+      "address": "1965 E FOOTHILL BLVD PASADENA CA 91107",
+      "kind": "lightly built commercial",
+      "repo_lav": 7017600,
+      "repo_acres": 2.05,
+      "repo_base_year": 2025,
+      "parcels": [
+       {
+        "AIN": "5746006022",
+        "use": "Auto, Recreation EQPT, Construction EQPT, Sales & Service",
+        "lav": 7017600,
+        "base": "2025",
+        "acres": 2.04
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_84_6517",
+      "address": "1303 OPTICAL DR AZUSA CA 91702",
+      "kind": "lightly built commercial",
+      "repo_lav": 2617005,
+      "repo_acres": 1.32,
+      "repo_base_year": 2019,
+      "parcels": [
+       {
+        "AIN": "8615001064",
+        "use": "Office Buildings",
+        "lav": 2617005,
+        "base": "2019",
+        "acres": 1.33
+       },
+       {
+        "AIN": "8615001402",
+        "use": "Office Buildings",
+        "lav": 6258060,
+        "base": "2019",
+        "acres": 3.07
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_85_5584",
+      "address": "1500 VINE ST LOS ANGELES CA 90028",
+      "kind": "lightly built commercial",
+      "repo_lav": 24562858,
+      "repo_acres": 1.42,
+      "repo_base_year": 2009,
+      "parcels": [
+       {
+        "AIN": "5546026034",
+        "use": "Banks Savings & Loan",
+        "lav": 24562858,
+        "base": "2009",
+        "acres": 1.42
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_86_5528",
+      "address": "12210 NEBRASKA AVE LOS ANGELES CA 90025",
+      "kind": "lightly built commercial",
+      "repo_lav": 7302137,
+      "repo_acres": 1.5,
+      "repo_base_year": 2016,
+      "parcels": [
+       {
+        "AIN": "4259018002",
+        "use": "Lgt Manf.Sm. EQPT. Manuf Sm.Shps Instr.Manuf. Prnt Plnts",
+        "lav": 7302137,
+        "base": "2016",
+        "acres": 1.52
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_87_6218",
+      "address": "83 N LAKE AVE PASADENA CA 91101",
+      "kind": "lightly built commercial",
+      "repo_lav": 14006691,
+      "repo_acres": 1.61,
+      "repo_base_year": 2016,
+      "parcels": [
+       {
+        "AIN": "5723030050",
+        "use": "Shopping Centers (Neighborhood, community)",
+        "lav": 14006691,
+        "base": "2016",
+        "acres": 1.61
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_88_6230",
+      "address": "25 N SANTA ANITA AVE ARCADIA CA 91006",
+      "kind": "lightly built commercial",
+      "repo_lav": 20265274,
+      "repo_acres": 1.66,
+      "repo_base_year": 2026,
+      "parcels": [
+       {
+        "AIN": "5775025037",
+        "use": "Professional Buildings",
+        "lav": 20265274,
+        "base": "2026",
+        "acres": 1.67
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_89_6330",
+      "address": "1624 RAYMOND AVE MONROVIA CA 91016",
+      "kind": "lightly built commercial",
+      "repo_lav": 960776,
+      "repo_acres": 1.6,
+      "repo_base_year": 1996,
+      "parcels": [
+       {
+        "AIN": "8513011034",
+        "use": "Lgt Manf.Sm. EQPT. Manuf Sm.Shps Instr.Manuf. Prnt Plnts",
+        "lav": 960776,
+        "base": "1996",
+        "acres": 1.62
+       }
+      ],
+      "match": true
+     },
+     {
+      "id": "site_la_90_5640",
+      "address": "22422 12TH ST SANTA CLARITA CA 91321",
+      "kind": "lightly built commercial",
+      "repo_lav": 1137430,
+      "repo_acres": 1.5,
+      "repo_base_year": 2005,
+      "parcels": [
+       {
+        "AIN": "2833005025",
+        "use": "Auto, Recreation EQPT, Construction EQPT, Sales & Service",
+        "lav": 1137430,
+        "base": "2005",
+        "acres": 1.51
+       }
+      ],
+      "match": true
+     }
+    ]
+   },
+   "model_fields": "marketLandValue, potentialHomes, margin, idea are model outputs (assumptions in bundle under.assumptions). margin is not reproducible from repo code; site_la_1 (Palmdale golf, $94.3M margin on 452 homes, ~$208k/home) looks implausible.",
+   "classification_notes": [
+    "Some 'vacant' records carry Assessor use 'Heavy Manufacturing'/'Industrial'/'Commercial' (e.g. site_la_54, _57, _69) - classification rule unknown.",
+    "site_la_82 (1290 W Optical Dr, Azusa) is 'lightly built commercial' but the roll shows ~222k sq ft of building records (light manufacturing)."
+   ]
+  }
+ },
+ "valuation_backtest": {
+  "finding": "fabricated",
+  "evidence": [
+   "LA: 5 of 6 parcelIds (5406002015, 5406002018, 5356072004, 5730044012, 1060201022) not found in LA County parcel layer; 4091001009 exists (3442 Artesia Blvd, Torrance) but roll land 411,981 / base year 2013 / 1,363 sq ft vs script 620,000 / 2020 / 2,150.",
+   "King 7230000100,+45,+45,+30,+60; Harris 114500010010 step 35; Hillsborough 182901100010 step 30-35; Cook 1420100010 step 35 - arithmetic sequences. Cook PINs are 14 digits; script uses 10.",
+   "All sale prices round to $5k-$10k; prior sales hand-typed."
+  ],
+  "file_now": "app/data/valuation_backtest_benchmarks.json replaced with no_backtest_run stub.",
+  "consumers": [
+   {
+    "file": "app/app.js",
+    "line": "12",
+    "what": "CP_DATA_FILES maps 'valuation-benchmarks' to the file"
+   },
+   {
+    "file": "app/app.js",
+    "line": "42,81",
+    "what": "loads into VALUATION_BACKTEST_BENCHMARKS (object check passes for stub)"
+   },
+   {
+    "file": "app/app.js",
+    "line": "5515-5522",
+    "what": "valuationCheck() withholds if VALUATION_BACKTEST_BENCHMARKS[fips].withhold - only when options.enforceCountyBacktest; no caller passes it (dead path). Stub has no fips keys -> no effect. Change: remove the block or key it to a real back-test; also remove the 'ACCURACY-ROADMAP Item 8' claim in the comment at 5502."
+   },
+   {
+    "file": "tests/unit/dataAccuracy.test.ts",
+    "line": "211-240",
+    "what": "test 11 asserts the file 'contains verified county recorder back-tests' - WILL FAIL now; must be rewritten to assert the stub/_status or real data provenance."
+   },
+   {
+    "file": "tests/unit/dataAccuracy.test.ts",
+    "line": "242-311",
+    "what": "test 12 exercises the engine on synthetic inputs - acceptable as an engine unit test if labeled synthetic."
+   },
+   {
+    "file": "scripts/run_valuation_backtests.mjs",
+    "line": "16-360",
+    "what": "COUNTY_SALES_SAMPLES fabricated; delete script or replace with a fetch from a real recorder/sales dataset (e.g., Cook County Assessor 'Parcel Sales' on datacatalog.cookcountyil.gov - Socrata, publicly reachable)."
+   },
+   {
+    "file": "docs/DATA-AUDIT-AND-TRANSPARENCY.md, docs/CHANGELOG.md",
+    "line": "-",
+    "what": "claims 'BACK-TESTED'/'Benchmark validated' - false."
+   }
+  ]
+ },
+ "engines_shipping": {
+  "method": "Served repo with scripts/serve.mjs, loaded in headless Chromium, evaluated globals.",
+  "index_html_scripts": [
+   "app/vendor/leaflet-1.9.4.js",
+   "app/vendor/fflate.js",
+   "app/config.js",
+   "app/app.js",
+   "app/explore.js"
+  ],
+  "results": {
+   "everySpaceEngine": "NOT loaded. app.js:1383 resolves to null in browser (no global, no require). EverySpace UI block (app.js:2244-2260) never renders.",
+   "renovationQuoteEngine": "NOT loaded; also name mismatch: app.js:1387-1389 looks for evaluateRenovationQuote but engine exports evaluateHomeownerRenovationQuote (renovationQuoteEngine.js:82), so it would be undefined even under Node.",
+   "streetForgeEngine": "NOT loaded (app.js:1391-1397 null in browser). Advisor payload streetForge block (app.js:9426) never runs.",
+   "transitCorridorOpportunityEngine": "NOT referenced by app.js at all.",
+   "underusedLandEngine": "NOT referenced by app.js at all.",
+   "valuationBacktestEngine": "NOT loaded; only the JSON output is read (app.js:81).",
+   "propertyValuationEngine": "A copy is inlined in app.js:634-970 and SHIPS (including the unsupported confidence bands at 929-942).",
+   "data_that_ships": "underused_sites.json and intercity_transit_corridors.json ARE loaded (app.js:82-83) and sent to the AI advisor payload (app.js:9343-9392). Advisor matcher bug: app.js:9375 falls back to ANY golf course in the county when the selected block group has no site, so the AI gets an unrelated site."
+  }
+ }
+}

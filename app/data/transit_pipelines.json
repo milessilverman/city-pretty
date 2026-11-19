@@ -1,345 +1,541 @@
 [
- {
-  "fips": "48453",
-  "metroName": "Austin Metro · Project Connect",
-  "title": "Austin Light Rail Phase 1",
-  "agency": "Austin Transit Partnership (ATP)",
-  "status": "FTA New Starts Project Development (rating assigned November 2024); FFGA not yet executed",
-  "rtp_document_url": "https://www.transit.dot.gov/sites/fta.dot.gov/files/2025-11/TX-Austin-Light-Rail-Phase-1-Profile-AR26-11-19-25.pdf",
-  "adopted_year": 2023,
-  "adopted_year_basis": "ATP selected the locally preferred alternative in June 2023 (FTA profile); the 2020 voter-approved Project Connect plan is a separate, earlier event not checked here",
-  "hubName": null,
-  "hubLat": null,
-  "hubLng": null,
-  "corridorRings": [],
-  "stations": [],
-  "station_count_per_source": 15,
-  "station_names_verified": [],
-  "length_miles": 9.8,
-  "total_capital_cost_musd": 8233.6,
-  "cig_share_musd": 4067.4,
-  "corridorDesc": "9.8 miles, 15 stations: Guadalupe St at 38th St through Downtown, a new bridge over Lady Bird Lake, then one branch south on South Congress Ave to Oltorf St and one east on East Riverside Dr to a park-and-ride west of SH 71 near the airport (FTA profile text).",
-  "last_verified": "2026-11-18",
-  "p3Type": null,
-  "units": null,
-  "affordPct": null,
-  "retailSqft": null,
-  "baseIRR": null,
-  "baseGroundLease": null,
-  "baseHomeLiftPct": null,
-  "tdc": null,
-  "seniorDebt": null,
-  "tifiaLoan": null,
-  "developerEquity": null,
-  "verification": {
-   "status": "verified_against_fta_profile",
-   "checked_on": "2026-11-18",
-   "sources": [
-    "https://www.transit.dot.gov/funding/grant-programs/capital-investments/current-capital-investment-grant-cig-projects (listing: TX | Austin | Austin Light Rail Phase 1 Project | NSPD)",
-    "https://www.atptx.org/light-rail/"
-   ],
-   "evidence": [
-    "Proposed Project: Light Rail Transit 9.8 Miles, 15 Stations Total Capital Cost ($YOE): $8,233.60 Million (Includes $1,085.3 million in finance charges) Section 5309 CIG Share ($YOE): $4,067.40 Million (49.4%)",
-    "ATP selected the locally preferred alternative (LPA) in June 2023. The project entered New Starts Project Development phase in May 2024.",
-    "ATP page: \"The line features 15 stations\""
-   ],
-   "retrieval_note": "transit.dot.gov returns 403 here; the PDF was read from an Internet Archive copy. atptx.org read directly.",
-   "removed": "p3Type, units, affordPct, retailSqft (earlier values such as 460 units / 35% affordable / 28,000 sq ft retail had no source), station desc text with invented specifics (EV stalls, cycleway miles, solar canopy, health centre), unsourced station coordinates",
-   "station_note": "No agency station list with coordinates was fetched, so stations and corridorRings are empty rather than guessed."
+  {
+    "fips": "48453",
+    "metroName": "Austin Metro · Project Connect",
+    "title": "Project Connect Light Rail (Phase 1) & Riverside/South Congress TOD Corridor",
+    "agency": "Austin Transit Partnership (ATP) / CapMetro / City of Austin",
+    "status": "Phase 1 light rail in pre-construction. Voter approval Nov 3, 2020 (Prop A). FTA Record of Decision Jan 16, 2026 and construction start 2027 per secondary source (Wikipedia); not confirmed on an agency page this audit.",
+    "rtp_document_url": "https://www.atptx.org/light-rail/",
+    "adopted_year": 2020,
+    "hubName": "East Riverside & Pleasant Valley Transit Hub",
+    "hubLat": 30.2435,
+    "hubLng": -97.717,
+    "corridorRings": [
+      [
+        30.2672,
+        -97.7431
+      ],
+      [
+        30.258,
+        -97.749
+      ],
+      [
+        30.2485,
+        -97.742
+      ],
+      [
+        30.2435,
+        -97.717
+      ],
+      [
+        30.237,
+        -97.705
+      ],
+      [
+        30.231,
+        -97.698
+      ]
+    ],
+    "stations": [
+      {
+        "name": "Downtown / Congress",
+        "lat": 30.2672,
+        "lng": -97.7431,
+        "desc": "Unverified illustrative stop location; not taken from the agency's official stop list.",
+        "verified": false
+      },
+      {
+        "name": "Waterfront / Lady Bird Lake",
+        "lat": 30.258,
+        "lng": -97.749,
+        "desc": "Unverified illustrative stop location; not taken from the agency's official stop list.",
+        "verified": false
+      },
+      {
+        "name": "South Congress / Travis Heights",
+        "lat": 30.2485,
+        "lng": -97.742,
+        "desc": "Unverified illustrative stop location; not taken from the agency's official stop list.",
+        "verified": false
+      },
+      {
+        "name": "East Riverside & Pleasant Valley (Hub)",
+        "lat": 30.2435,
+        "lng": -97.717,
+        "desc": "Unverified illustrative stop location; not taken from the agency's official stop list.",
+        "verified": false
+      },
+      {
+        "name": "Montopolis / Crossing Place",
+        "lat": 30.237,
+        "lng": -97.705,
+        "desc": "Unverified illustrative stop location; not taken from the agency's official stop list.",
+        "verified": false
+      },
+      {
+        "name": "Yellow Jacket / Riverside Terminus",
+        "lat": 30.231,
+        "lng": -97.698,
+        "desc": "Unverified illustrative stop location; not taken from the agency's official stop list.",
+        "verified": false
+      }
+    ],
+    "corridorDesc": "Phase 1 light rail (ATP: \"15 Stops\"; street-level) serving UT, Downtown, the Hike-and-Bike Trail, East Riverside and South Congress. Length ~9.8 miles per secondary source (Wikipedia).",
+    "p3Type": "Station-Area Ground Lease & Master Joint Development",
+    "units": null,
+    "affordPct": null,
+    "retailSqft": null,
+    "baseIRR": null,
+    "baseGroundLease": null,
+    "baseHomeLiftPct": null,
+    "tdc": null,
+    "seniorDebt": null,
+    "tifiaLoan": null,
+    "developerEquity": null,
+    "last_verified": "2026-11-16",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched https://www.atptx.org/light-rail/ (HTTP 200); Wikipedia 'Project Connect' extract as secondary; Nominatim (OSM) for coordinates.",
+      "checked_on": "2026-11-16",
+      "evidence": "ATP: \"The Line 15 Stops at Key Locations ... UT, Downtown, the Hike-and-Bike Trail, East Riverside and South Congress\"; \"direct street-level access\". Wikipedia: \"a 9.8 mile system\"; \"On January 16, 2026, the FTA released a Record of Decision\"; voters approved Nov 3, 2020.",
+      "unverified_fields": [
+        "stations (names and coordinates)",
+        "hubName",
+        "hubLat",
+        "hubLng",
+        "corridorRings",
+        "p3Type",
+        "adopted_year"
+      ],
+      "notes": "The 6 stations on file are not the agency's 15-stop list; 'Downtown / Congress' uses 30.2672,-97.7431 (generic Austin city geocode). Prior station descriptions invented amenities ('16 DC fast EV stalls', '3.4-mi rail-with-trail cycleway') and were removed. Prior corridorDesc wrongly said 'grade-separated'. Prior status said 'NEPA Environmental Review' (outdated: ROD issued). units/affordPct/retailSqft (460/35/28000) had no source and were set to null."
+    }
+  },
+  {
+    "fips": "06037",
+    "metroName": "Los Angeles County · Metro Measure M/R",
+    "title": "Metro D Line (Purple Line) Subway Extension & Station Joint Development",
+    "agency": "Los Angeles County Metropolitan Transportation Authority (Metro)",
+    "status": "Section 1 open (May 8, 2026: Wilshire/La Brea, Wilshire/Fairfax, Wilshire/La Cienega). Sections 2 (Beverly Hills, Century City) and 3 (Westwood: UCLA and VA Hospital stations) under construction.",
+    "rtp_document_url": "https://www.metro.net/projects/westside/",
+    "adopted_year": 2016,
+    "hubName": "Wilshire/La Brea D Line Hub",
+    "hubLat": 34.0625,
+    "hubLng": -118.344,
+    "corridorRings": [
+      [
+        34.061,
+        -118.29
+      ],
+      [
+        34.0615,
+        -118.309
+      ],
+      [
+        34.0625,
+        -118.344
+      ],
+      [
+        34.063,
+        -118.375
+      ],
+      [
+        34.062,
+        -118.398
+      ],
+      [
+        34.0585,
+        -118.444
+      ]
+    ],
+    "stations": [
+      {
+        "name": "Wilshire / Western (D Line)",
+        "lat": 34.0615,
+        "lng": -118.309,
+        "desc": "Existing D Line station (eastern end of the extension).",
+        "verified": true
+      },
+      {
+        "name": "Wilshire / La Brea (Anchor Hub)",
+        "lat": 34.0625,
+        "lng": -118.344,
+        "desc": "Section 1 station, open since May 8, 2026.",
+        "verified": true
+      },
+      {
+        "name": "Wilshire / Fairfax (Museum Row)",
+        "lat": 34.0628,
+        "lng": -118.361,
+        "desc": "Section 1 station, open since May 8, 2026.",
+        "verified": true
+      },
+      {
+        "name": "Wilshire / La Cienega",
+        "lat": 34.063,
+        "lng": -118.375,
+        "desc": "Section 1 station, open since May 8, 2026.",
+        "verified": true
+      },
+      {
+        "name": "Century City / Constellation",
+        "lat": 34.0585,
+        "lng": -118.418,
+        "desc": "Section 2 station (under construction).",
+        "verified": true
+      },
+      {
+        "name": "Westwood / UCLA",
+        "lat": 34.059,
+        "lng": -118.444,
+        "desc": "Section 3 station (under construction).",
+        "verified": true
+      },
+      {
+        "name": "Westwood / VA Hospital",
+        "lat": 34.0542,
+        "lng": -118.4537,
+        "desc": "Section 3 station (under construction); coordinates from OpenStreetMap.",
+        "verified": true
+      }
+    ],
+    "corridorDesc": "Subway extension west from Wilshire/Western nearly nine miles along Wilshire Blvd to Westwood, delivered in three sections (Metro).",
+    "p3Type": "Metro Joint Development Ground Lease (Prevailing Wage + 35% Affordable)",
+    "units": null,
+    "affordPct": null,
+    "retailSqft": null,
+    "baseIRR": null,
+    "baseGroundLease": null,
+    "baseHomeLiftPct": null,
+    "tdc": null,
+    "seniorDebt": null,
+    "tifiaLoan": null,
+    "developerEquity": null,
+    "last_verified": "2026-11-16",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched https://www.metro.net/projects/westside/ (HTTP 200); Nominatim (OSM) station coordinates.",
+      "checked_on": "2026-11-16",
+      "evidence": "Metro: \"Section 1 is OPEN! This includes the new stations at La Brea, Fairfax, and La Cienega\"; \"Opened on May 8, 2026\"; \"expands the existing subway west from Wilshire/Western nearly nine miles along Wilshire Bl to Westwood\"; Section 3 \"work at the UCLA and VA Hospital stations\". OSM distances: Western 70 m, La Brea 33 m, Fairfax 24 m, La Cienega 240 m, Century City 157 m, Westwood/UCLA 285 m.",
+      "unverified_fields": [
+        "FTA CIG grant amount",
+        "p3Type",
+        "adopted_year",
+        "hubName amenities"
+      ],
+      "notes": "Prior status 'Phases 1-3 Under Construction' was outdated. Prior '$3.6B in FTA CIG grants' not confirmed and removed. Prior station descriptions invented amenities ('24 fast EV charging bays') and were replaced. Missing Section 3 terminus Westwood/VA Hospital added; a Section 2 Beverly Hills station is not on file (name/coords not confirmed this audit). units/affordPct/retailSqft (520/35/32000) unsourced -> null."
+    }
+  },
+  {
+    "fips": "06059",
+    "metroName": "Orange County · OC Streetcar & Regional Transit",
+    "title": "OC Streetcar Santa Ana–Garden Grove Corridor & SARTC Regional Transit Center",
+    "agency": "Orange County Transportation Authority (OCTA)",
+    "status": "Under construction / testing; OCTA: \"Service starting early 2027\".",
+    "rtp_document_url": "https://www.octa.net/projects-and-programs/all-projects/rail-projects/oc-streetcar/",
+    "adopted_year": 2018,
+    "hubName": "Santa Ana Regional Transportation Center (SARTC)",
+    "hubLat": 33.7515,
+    "hubLng": -117.855,
+    "corridorRings": [
+      [
+        33.7515,
+        -117.855
+      ],
+      [
+        33.7485,
+        -117.868
+      ],
+      [
+        33.749,
+        -117.873
+      ],
+      [
+        33.753,
+        -117.892
+      ],
+      [
+        33.765,
+        -117.925
+      ],
+      [
+        33.774,
+        -117.94
+      ]
+    ],
+    "stations": [
+      {
+        "name": "SARTC Transit Center (Anchor Hub)",
+        "lat": 33.7515,
+        "lng": -117.855,
+        "desc": "Santa Ana Regional Transportation Center (Metrolink/Amtrak); eastern terminus.",
+        "verified": true
+      },
+      {
+        "name": "Downtown Santa Ana / 4th St",
+        "lat": 33.7485,
+        "lng": -117.868,
+        "desc": "Unverified illustrative stop location; not taken from the agency's official stop list.",
+        "verified": false
+      },
+      {
+        "name": "Civic Center / Santa Ana Blvd",
+        "lat": 33.749,
+        "lng": -117.873,
+        "desc": "Unverified illustrative stop location; not taken from the agency's official stop list.",
+        "verified": false
+      },
+      {
+        "name": "Pacific Electric ROW / Fairview",
+        "lat": 33.753,
+        "lng": -117.892,
+        "desc": "Unverified illustrative stop location; not taken from the agency's official stop list.",
+        "verified": false
+      },
+      {
+        "name": "Harbor Blvd Transit Transfer",
+        "lat": 33.765,
+        "lng": -117.925,
+        "desc": "Unverified illustrative stop location; not taken from the agency's official stop list.",
+        "verified": false
+      },
+      {
+        "name": "Garden Grove / Harbor Terminus",
+        "lat": 33.774,
+        "lng": -117.94,
+        "desc": "Unverified illustrative stop location; not taken from the agency's official stop list.",
+        "verified": false
+      }
+    ],
+    "corridorDesc": "4.15-mile modern streetcar (OCTA: 16 stops) from the Santa Ana Regional Transportation Center to the Harbor corridor in Garden Grove, largely on the former Pacific Electric right-of-way.",
+    "p3Type": "Municipal Transit Joint Development (OCTA / City of Santa Ana)",
+    "units": null,
+    "affordPct": null,
+    "retailSqft": null,
+    "baseIRR": null,
+    "baseGroundLease": null,
+    "baseHomeLiftPct": null,
+    "tdc": null,
+    "seniorDebt": null,
+    "tifiaLoan": null,
+    "developerEquity": null,
+    "last_verified": "2026-11-16",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched OCTA project page (HTTP 200 at corrected URL; original rtp_document_url returned 404); Wikipedia 'OC Streetcar' as secondary; Nominatim.",
+      "checked_on": "2026-11-16",
+      "evidence": "OCTA: \"4.15 MILES\", \"16 STOPS\", \"Service starting early 2027\", \"from the Santa Ana Regional Transportation Center to the Harbor Corridor\". SARTC coordinate 134 m from OSM.",
+      "unverified_fields": [
+        "5 of 6 station names/coordinates",
+        "FTA CIG status wording",
+        "p3Type",
+        "adopted_year"
+      ],
+      "notes": "Original rtp_document_url https://www.octa.net/programs-projects/projects/rail-projects/oc-streetcar/ returned HTTP 404 and was replaced. Wikipedia (secondary) places a single western terminus (Harbor Transit Center, Westminster Ave & Harbor Blvd); the file lists two separate Harbor stations, which is likely wrong. units/affordPct/retailSqft (380/30/24000) unsourced -> null."
+    }
+  },
+  {
+    "fips": "08031",
+    "metroName": "Denver Metro · FasTracks & East Colfax BRT",
+    "title": "East Colfax Center-Running Bus Rapid Transit & Station Infill",
+    "agency": "City and County of Denver / RTD / CDOT",
+    "status": "Under construction (2024-2027 per City of Denver); total FTA CIG federal allocation $150M; center bus-only lanes Broadway-Colorado Blvd from Sept 27, 2026.",
+    "rtp_document_url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Department-of-Transportation-and-Infrastructure/Programs-Services/Projects/Colfax-BRT",
+    "adopted_year": 2023,
+    "hubName": "East Colfax & Colorado Blvd Station Hub",
+    "hubLat": 39.7402,
+    "hubLng": -104.9405,
+    "corridorRings": [
+      [
+        39.74,
+        -104.988
+      ],
+      [
+        39.74,
+        -104.973
+      ],
+      [
+        39.7401,
+        -104.958
+      ],
+      [
+        39.7402,
+        -104.9405
+      ],
+      [
+        39.7404,
+        -104.912
+      ],
+      [
+        39.7406,
+        -104.887
+      ]
+    ],
+    "stations": [
+      {
+        "name": "Colfax & Broadway (Civic Center)",
+        "lat": 39.74,
+        "lng": -104.988,
+        "desc": "State Capitol, Denver Art Museum, and Civic Center transit concourse.",
+        "verified": false
+      },
+      {
+        "name": "Colfax & Downing",
+        "lat": 39.74,
+        "lng": -104.973,
+        "desc": "Capitol Hill commercial corridor infill.",
+        "verified": false
+      },
+      {
+        "name": "Colfax & Josephine",
+        "lat": 39.7401,
+        "lng": -104.958,
+        "desc": "Denver Botanic Gardens and City Park connector.",
+        "verified": false
+      },
+      {
+        "name": "Colfax & Colorado (Anchor Hub)",
+        "lat": 39.7402,
+        "lng": -104.9405,
+        "desc": "Unverified illustrative stop location; not taken from the agency's official stop list.",
+        "verified": false
+      },
+      {
+        "name": "Colfax & Monaco",
+        "lat": 39.7404,
+        "lng": -104.912,
+        "desc": "Parkway greenway connection and neighborhood services.",
+        "verified": false
+      },
+      {
+        "name": "Colfax & Yosemite / Aurora",
+        "lat": 39.7406,
+        "lng": -104.887,
+        "desc": "Denver/Aurora line: east end of center-running segment; side-running in mixed traffic continues to I-225.",
+        "verified": false
+      }
+    ],
+    "corridorDesc": "Center-running BRT on East Colfax from Broadway to Yosemite; side-running on 15th/17th Streets west of Civic Center to Union Station; side-running in mixed traffic east of Yosemite to I-225 (Aurora).",
+    "p3Type": "DURA Urban Renewal & Ground Lease Joint Development",
+    "units": null,
+    "affordPct": null,
+    "retailSqft": null,
+    "baseIRR": null,
+    "baseGroundLease": null,
+    "baseHomeLiftPct": null,
+    "tdc": null,
+    "seniorDebt": null,
+    "tifiaLoan": null,
+    "developerEquity": null,
+    "last_verified": "2026-11-16",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched denvergov.org East Colfax BRT page (HTTP 200); Nominatim.",
+      "checked_on": "2026-11-16",
+      "evidence": "Denver: \"bringing the total federal allocation to $150M\"; \"center-running bus rapid transit (BRT) service from Broadway to Yosemite\"; \"East of Yosemite to I-225, BRT will be side-running in mixed flow traffic\"; \"2024-2027: Construction, testing and commissioning\"; bus-only lanes \"Beginning Sunday, September 27, 2026\".",
+      "unverified_fields": [
+        "station names/coordinates",
+        "corridor length",
+        "adopted_year",
+        "p3Type"
+      ],
+      "notes": "Prior corridorDesc ('10-mile dedicated center-running BRT ... to the Anschutz Medical Campus') overstated the center-running segment. Prior 'Colfax & Yosemite ... R Line light rail' connection is wrong (R Line is along I-225, not Yosemite). Prior anchor-hub description invented amenities. units/affordPct/retailSqft (320/40/18000) unsourced -> null."
+    }
+  },
+  {
+    "fips": "17031",
+    "metroName": "Chicago Metro · CTA Red Line Extension (RLE)",
+    "title": "CTA Red Line Extension to 130th St & Far South Side Equitable TOD",
+    "agency": "Chicago Transit Authority (CTA)",
+    "status": "Under construction (construction began Apr 24, 2026 per secondary source). FFGA amount/date not confirmed this audit.",
+    "rtp_document_url": "https://www.transitchicago.com/rle/",
+    "adopted_year": 2024,
+    "hubName": "130th Street Terminal & Altgeld Gardens Hub",
+    "hubLat": 41.6575,
+    "hubLng": -87.598,
+    "corridorRings": [
+      [
+        41.722,
+        -87.625
+      ],
+      [
+        41.708,
+        -87.624
+      ],
+      [
+        41.691,
+        -87.621
+      ],
+      [
+        41.682,
+        -87.608
+      ],
+      [
+        41.6575,
+        -87.598
+      ]
+    ],
+    "stations": [
+      {
+        "name": "95th / Dan Ryan Multimodal Terminal",
+        "lat": 41.722,
+        "lng": -87.625,
+        "desc": "Major rail-to-bus regional hub.",
+        "verified": true
+      },
+      {
+        "name": "103rd Street Station",
+        "lat": 41.708,
+        "lng": -87.624,
+        "desc": "Station named by CTA; coordinates approximate and unverified.",
+        "verified": false
+      },
+      {
+        "name": "111th Street Station",
+        "lat": 41.691,
+        "lng": -87.621,
+        "desc": "Station named by CTA; coordinates approximate and unverified.",
+        "verified": false
+      },
+      {
+        "name": "Michigan Avenue / 116th St",
+        "lat": 41.682,
+        "lng": -87.608,
+        "desc": "Station named by CTA; coordinates approximate and unverified.",
+        "verified": false
+      },
+      {
+        "name": "130th Street Terminal (Anchor Hub)",
+        "lat": 41.6575,
+        "lng": -87.598,
+        "desc": "Station named by CTA; coordinates approximate and unverified.",
+        "verified": false
+      }
+    ],
+    "corridorDesc": "5.5-mile Red Line extension from 95th/Dan Ryan to 130th Street with four new accessible stations near 103rd St, 111th St, Michigan Ave and 130th St (CTA).",
+    "p3Type": "CTA Master Joint Development & Community Land Trust Ground Lease",
+    "units": null,
+    "affordPct": null,
+    "retailSqft": null,
+    "baseIRR": null,
+    "baseGroundLease": null,
+    "baseHomeLiftPct": null,
+    "tdc": null,
+    "seniorDebt": null,
+    "tifiaLoan": null,
+    "developerEquity": null,
+    "last_verified": "2026-11-16",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched https://www.transitchicago.com/rle/ (HTTP 200); Wikipedia 'Red Line (CTA)' as secondary; Nominatim for 95th/Dan Ryan.",
+      "checked_on": "2026-11-16",
+      "evidence": "CTA: \"The 5.5-mile Red Line Extension (RLE) will include four new fully-accessible stations near 103rd Street, 111th Street, Michigan Avenue, and 130th Street\". Wikipedia: \"project costing $5.7 billion. Construction began on April 24, 2026\" (secondary; Wikipedia also says 5.6 miles - CTA figure used). 95th/Dan Ryan 66 m from OSM.",
+      "unverified_fields": [
+        "FFGA amount and date",
+        "new-station coordinates",
+        "adopted_year",
+        "p3Type"
+      ],
+      "notes": "Prior status 'FTA Full Funding Grant Agreement ($1.973B Federal CIG Grant Executed Sept 2024)' could not be confirmed (no agency page with the FFGA found; FTA site returns 403). Prior length 5.6 mi replaced with CTA's 5.5 mi. units/affordPct/retailSqft (420/45/26000) unsourced -> null."
+    }
   }
- },
- {
-  "fips": "06037",
-  "metroName": "Los Angeles County · Metro D Line Extension",
-  "title": "Metro D Line Subway Extension (Sections 1-3)",
-  "agency": "Los Angeles County Metropolitan Transportation Authority (LA Metro)",
-  "status": "Section 1 open since May 8, 2026 (La Brea, Fairfax, La Cienega stations); Sections 2 and 3 under construction",
-  "rtp_document_url": "https://www.metro.net/projects/westside/",
-  "adopted_year": null,
-  "adopted_year_basis": null,
-  "hubName": "Wilshire/La Brea",
-  "hubLat": 34.0625,
-  "hubLng": -118.3444,
-  "corridorRings": [
-   [
-    34.0621,
-    -118.3089
-   ],
-   [
-    34.0625,
-    -118.3444
-   ],
-   [
-    34.063,
-    -118.3612
-   ],
-   [
-    34.0651,
-    -118.3757
-   ],
-   [
-    34.0583,
-    -118.447
-   ]
-  ],
-  "corridorRings_basis": "schematic straight segments joining the listed station points; not the surveyed tunnel alignment",
-  "stations": [
-   {
-    "name": "Wilshire/Western (existing D Line station)",
-    "lat": 34.0621,
-    "lng": -118.3089,
-    "desc": null,
-    "status": "open",
-    "coordinate_source": "OpenStreetMap node/6217648790 via Nominatim, retrieved 2026-11-18"
-   },
-   {
-    "name": "Wilshire/La Brea",
-    "lat": 34.0625,
-    "lng": -118.3444,
-    "desc": null,
-    "status": "open (Section 1)",
-    "coordinate_source": "OpenStreetMap node/13807935243 via Nominatim, retrieved 2026-11-18"
-   },
-   {
-    "name": "Wilshire/Fairfax",
-    "lat": 34.063,
-    "lng": -118.3612,
-    "desc": null,
-    "status": "open (Section 1)",
-    "coordinate_source": "OpenStreetMap node/13807935237 via Nominatim, retrieved 2026-11-18"
-   },
-   {
-    "name": "Wilshire/La Cienega",
-    "lat": 34.0651,
-    "lng": -118.3757,
-    "desc": null,
-    "status": "open (Section 1)",
-    "coordinate_source": "OpenStreetMap node/13807935230 via Nominatim, retrieved 2026-11-18"
-   },
-   {
-    "name": "Westwood/UCLA",
-    "lat": 34.0583,
-    "lng": -118.447,
-    "desc": null,
-    "status": "under construction (Section 3)",
-    "coordinate_source": "OpenStreetMap relation/18028015 (landuse=construction) via Nominatim, retrieved 2026-11-18; centre of a construction area, not a platform"
-   }
-  ],
-  "station_names_verified": [
-   "Wilshire/La Brea",
-   "Wilshire/Fairfax",
-   "Wilshire/La Cienega",
-   "Century City",
-   "Westwood/UCLA",
-   "Westwood/VA Hospital (called \"UCLA and VA Hospital stations\" by Metro)"
-  ],
-  "corridorDesc": "Extends the D Line west from Wilshire/Western \"nearly nine miles along Wilshire Bl to Westwood\" in three sections (Metro).",
-  "last_verified": "2026-11-18",
-  "p3Type": null,
-  "units": null,
-  "affordPct": null,
-  "retailSqft": null,
-  "baseIRR": null,
-  "baseGroundLease": null,
-  "baseHomeLiftPct": null,
-  "tdc": null,
-  "seniorDebt": null,
-  "tifiaLoan": null,
-  "developerEquity": null,
-  "verification": {
-   "status": "verified_against_agency_page",
-   "checked_on": "2026-11-18",
-   "sources": [
-    "https://www.metro.net/projects/westside/"
-   ],
-   "evidence": [
-    "Section 1 extends the subway from Koreatown to the Wilshire/La Cienega area ... This Opened on May 8, 2026.",
-    "Section 1 is OPEN! This includes the new stations at La Brea, Fairfax, and La Cienega.",
-    "expands the existing subway west from Wilshire/Western in Koreatown nearly nine miles along Wilshire Bl to Westwood"
-   ],
-   "removed": "p3Type, units, affordPct, retailSqft (earlier values such as 460 units / 35% affordable / 28,000 sq ft retail had no source), station desc text with invented specifics (EV stalls, cycleway miles, solar canopy, health centre), unsourced station coordinates; \"$3.6B in FTA CIG grants\" and \"FFGA\" wording (not on the fetched Metro page; the project is no longer in the FTA current-projects list); status \"Phases 1-3 Under Construction\" was out of date",
-   "station_note": "Century City/Constellation and Wilshire/Rodeo (Beverly Hills) stations are under construction but returned no OSM coordinates, so they are omitted."
-  }
- },
- {
-  "fips": "06059",
-  "metroName": "Orange County · OC Streetcar",
-  "title": "OC Streetcar",
-  "agency": "Orange County Transportation Authority (OCTA)",
-  "status": "Under construction; OCTA states \"Service starting early 2027\"",
-  "rtp_document_url": "https://www.octa.net/programs-projects/projects/rail-projects/oc-streetcar/overview/",
-  "adopted_year": null,
-  "adopted_year_basis": null,
-  "hubName": "Santa Ana Regional Transportation Center (SARTC)",
-  "hubLat": 33.7516,
-  "hubLng": -117.8565,
-  "corridorRings": [],
-  "stations": [
-   {
-    "name": "Santa Ana Regional Transportation Center",
-    "lat": 33.7516,
-    "lng": -117.8565,
-    "desc": null,
-    "status": "existing transit centre named by OCTA as the line's start",
-    "coordinate_source": "OpenStreetMap node/5514948721 via Nominatim, retrieved 2026-11-18"
-   }
-  ],
-  "station_count_per_source": 16,
-  "station_names_verified": [
-   "Santa Ana Regional Transportation Center"
-  ],
-  "length_miles": 4.15,
-  "corridorDesc": "4.15 miles of track with 16 stops between the Santa Ana Regional Transportation Center and the Harbor Corridor, through Santa Ana and Garden Grove (OCTA).",
-  "last_verified": "2026-11-18",
-  "p3Type": null,
-  "units": null,
-  "affordPct": null,
-  "retailSqft": null,
-  "baseIRR": null,
-  "baseGroundLease": null,
-  "baseHomeLiftPct": null,
-  "tdc": null,
-  "seniorDebt": null,
-  "tifiaLoan": null,
-  "developerEquity": null,
-  "verification": {
-   "status": "verified_against_agency_page",
-   "checked_on": "2026-11-18",
-   "sources": [
-    "https://www.octa.net/programs-projects/projects/rail-projects/oc-streetcar/overview/"
-   ],
-   "evidence": [
-    "With 16 stops spread over 4.15 miles of track, OC Streetcar will connect riders to the most popular destinations in Santa Ana and Garden Grove. You'll be able to travel easily from the Santa Ana Regional Transportation Center to the Harbor Corridor",
-    "Service starting early 2027."
-   ],
-   "removed": "p3Type, units, affordPct, retailSqft (earlier values such as 460 units / 35% affordable / 28,000 sq ft retail had no source), station desc text with invented specifics (EV stalls, cycleway miles, solar canopy, health centre), unsourced station coordinates; \"FTA CIG project\", cost and the 6 invented station names/coordinates (OCTA lists 16 stops; no list fetched); \"Under Construction / Testing\" softened to what OCTA says",
-   "station_note": "Only the SARTC stop is named on the fetched page; the other 15 stops were not located."
-  }
- },
- {
-  "fips": "08031",
-  "metroName": "Denver Metro · East Colfax BRT",
-  "title": "East Colfax Avenue Bus Rapid Transit",
-  "agency": "City and County of Denver (partnership with RTD, CDOT, DRCOG, FTA and the City of Aurora)",
-  "status": "Under construction (began October 2024, continuing through 2027); center-running bus-only lanes Broadway to Colorado Blvd began September 27, 2026; FTA Capital Investment Grant total federal allocation $150M",
-  "rtp_document_url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Department-of-Transportation-and-Infrastructure/Programs-Services/Projects/Colfax-BRT",
-  "adopted_year": null,
-  "adopted_year_basis": "the Denver page lists \"2018-2019: Determination of center-running BRT as the locally preferred alternative\"; no single adoption year stated",
-  "hubName": null,
-  "hubLat": null,
-  "hubLng": null,
-  "corridorRings": [],
-  "stations": [],
-  "station_count_per_source": null,
-  "station_names_verified": [
-   "Colorado",
-   "Downing",
-   "Syracuse",
-   "Josephine/York",
-   "Krameria",
-   "Madison",
-   "Elm",
-   "Franklin & Park",
-   "Quebec",
-   "Hudson",
-   "Pennsylvania",
-   "Unita (as spelled on the page)",
-   "Cherry",
-   "Fillmore",
-   "Havana"
-  ],
-  "length_miles": null,
-  "corridorDesc": "Center-running BRT from Broadway to Yosemite with a dedicated transit lane in each direction, then side-running in mixed traffic from Yosemite St. to I-225 in Aurora (Denver project page). The earlier \"10-mile ... to the Anschutz Medical Campus\" description was not on the page.",
-  "total_federal_allocation_musd": 150,
-  "last_verified": "2026-11-18",
-  "p3Type": null,
-  "units": null,
-  "affordPct": null,
-  "retailSqft": null,
-  "baseIRR": null,
-  "baseGroundLease": null,
-  "baseHomeLiftPct": null,
-  "tdc": null,
-  "seniorDebt": null,
-  "tifiaLoan": null,
-  "developerEquity": null,
-  "verification": {
-   "status": "verified_against_agency_page",
-   "checked_on": "2026-11-18",
-   "sources": [
-    "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Department-of-Transportation-and-Infrastructure/Programs-Services/Projects/Colfax-BRT"
-   ],
-   "evidence": [
-    "On July 29, 2024, the Federal Transit Administration (FTA) announced it apportioned an additional $23M in Fixed Guideway Capital Investment Grants for East Colfax BRT, bringing the total federal allocation to $150M.",
-    "Construction began in October 2024 and will continue through 2027",
-    "Beginning Sunday, September 27, 2026, the two center lanes of East Colfax Avenue from Broadway to Colorado Blvd will be bus-only lanes."
-   ],
-   "removed": "p3Type, units, affordPct, retailSqft (earlier values such as 460 units / 35% affordable / 28,000 sq ft retail had no source), station desc text with invented specifics (EV stalls, cycleway miles, solar canopy, health centre), unsourced station coordinates; \"Colfax & Josephine/Monaco/Yosemite\" station coordinates; \"10-mile Civic Center to Anschutz\" scope; \"adopted 2023\"",
-   "station_note": "Station names are from the project page, which gives no coordinates; Denver station lat/lng were not found in OSM, so stations is empty.",
-   "fta_listing_note": "East Colfax BRT is not in the FTA current-projects listing fetched 2026-11-18 (the CDOT Federal Boulevard BRT is), consistent with a project already under a grant agreement/construction."
-  }
- },
- {
-  "fips": "17031",
-  "metroName": "Chicago Metro · CTA Red Line Extension",
-  "title": "Red Line Extension (RLE)",
-  "agency": "Chicago Transit Authority (CTA)",
-  "status": "FTA New Starts Full Funding Grant Agreement executed January 2025; revenue service projected August 2031 (FTA profile)",
-  "rtp_document_url": "https://www.transit.dot.gov/sites/fta.dot.gov/files/2025-01/IL-Chicago-Red-Line-Extension-FFGA-Profile-FY26-01-16-2025_0.pdf",
-  "adopted_year": 2010,
-  "adopted_year_basis": "CTA selected the LPA in August 2009; the LPA was adopted into the fiscally constrained long-range plan in October 2010 (FTA profile)",
-  "hubName": "95th/Dan Ryan (existing terminal)",
-  "hubLat": 41.7224,
-  "hubLng": -87.6244,
-  "corridorRings": [],
-  "stations": [
-   {
-    "name": "95th/Dan Ryan (existing terminal)",
-    "lat": 41.7224,
-    "lng": -87.6244,
-    "desc": null,
-    "status": "existing",
-    "coordinate_source": "OpenStreetMap node/8018718986 via Nominatim, retrieved 2026-11-18"
-   }
-  ],
-  "station_count_per_source": 4,
-  "station_names_verified": [
-   "103rd Street",
-   "111th Street",
-   "Michigan Avenue",
-   "130th Street"
-  ],
-  "length_miles": 5.5,
-  "total_capital_cost_musd": 5750.0,
-  "cig_share_musd": 1973.98,
-  "corridorDesc": "5.5-mile heavy rail extension from the 95th Street terminal to the 130th Street area; elevated 95th to about 118th, at grade after; four stations near 103rd St, 111th St, Michigan Ave and 130th St; new railyard and shop near 120th St; 78 rail cars (FTA profile).",
-  "last_verified": "2026-11-18",
-  "p3Type": null,
-  "units": null,
-  "affordPct": null,
-  "retailSqft": null,
-  "baseIRR": null,
-  "baseGroundLease": null,
-  "baseHomeLiftPct": null,
-  "tdc": null,
-  "seniorDebt": null,
-  "tifiaLoan": null,
-  "developerEquity": null,
-  "verification": {
-   "status": "verified_against_fta_profile",
-   "checked_on": "2026-11-18",
-   "sources": [
-    "https://www.transit.dot.gov/funding/grant-programs/capital-investments/current-capital-investment-grant-cig-projects (IL | Chicago | Red Line Extension | FFGA)",
-    "https://www.transitchicago.com/rle/"
-   ],
-   "evidence": [
-    "The total project cost under the Full Funding Grant Agreement (FFGA) is $5,750.00 million; of which, the Section 5309 New Starts funding share is $1,973.98 million.",
-    "CTA and FTA entered into an FFGA in January 2025 with the revenue service date projected for August 2031.",
-    "The 5.5-mile Red Line Extension (RLE) will include four new fully-accessible stations near 103rd Street, 111th Street, Michigan Avenue, and 130th Street. (CTA)"
-   ],
-   "retrieval_note": "transit.dot.gov returns 403 here; the PDF was read from an Internet Archive copy. transitchicago.com read directly.",
-   "removed": "p3Type, units, affordPct, retailSqft (earlier values such as 460 units / 35% affordable / 28,000 sq ft retail had no source), station desc text with invented specifics (EV stalls, cycleway miles, solar canopy, health centre), unsourced station coordinates; \"5.6-mile\" -> 5.5; \"FFGA executed Sept 2024\" -> January 2025; \"$1.973B\" -> $1,973.98M of $5,750.00M; the invented intermediate station coordinates (103rd, 111th, Michigan, 130th) because no agency coordinates were fetched; \"95th/Dan Ryan Multimodal Terminal\" description",
-   "station_note": "The four new stations are named but not located; only the existing 95th/Dan Ryan node is mapped."
-  }
- }
 ]

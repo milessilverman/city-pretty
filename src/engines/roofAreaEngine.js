@@ -1,27 +1,30 @@
 /**
  * Roof Area & Architectural Cadastre Calculation Engine
  * Estimates true 3D roof plane surface area from 2D building footprints,
- * LiDAR DSM pitch/azimuth/overhang geometry, and roofing material assemblies.
+ * pitch/slope geometry, and roofing material assemblies.
+ * Default pitches are a rule of thumb by state and build era, with no source. An 18 Nov 2026 edit credited them to
+ * "NREL ResStock (NREL/TP-5500-75217)" and "IRC Section R905"; no report with that number was found, and R905 sets only
+ * minimum slopes per roofing material (e.g. 2:12 for asphalt shingles), not typical pitches, so the credit was removed.
  */
 
 function getDefaultPitchRise(yearBuilt, stateCode) {
   const st = (stateCode || "CA").toUpperCase();
 
-  // Regional climate adaptations
+  // Regional adjustments (rule of thumb; no source)
   const isDesertOrArid = ["AZ", "NV", "NM"].includes(st);
   const isHeavySnowOrRain = ["MN", "WI", "MI", "NY", "MA", "VT", "NH", "ME", "WA", "OR"].includes(st);
 
   if (isDesertOrArid) {
-    return 3.5; // Predominantly low-pitch ranch or flat tile
+    return 3.5; // low-pitch ranch or flat tile (rule of thumb)
   }
   if (isHeavySnowOrRain) {
-    return (yearBuilt && yearBuilt < 1940) ? 8.0 : 7.0; // Steep pitch for snow and ice shedding
+    return (yearBuilt && yearBuilt < 1940) ? 8.0 : 7.0; // steeper roofs for snow (rule of thumb)
   }
 
-  // Era adaptations
-  if (yearBuilt && yearBuilt < 1940) return 7.5; // Craftsman, Tudor, Victorian, Spanish revival
+  // Era adjustments (rule of thumb; no source)
+  if (yearBuilt && yearBuilt < 1940) return 7.5; // Historic Craftsman, Tudor, Victorian, Spanish revival
   if (yearBuilt && yearBuilt >= 1945 && yearBuilt <= 1978) return 4.5; // California Ranch, Mid-Century Modern
-  return 5.5; // Standard typical suburban pitch (5.5:12)
+  return 5.5; // Standard typical suburban truss pitch (5.5:12)
 }
 
 function estimateAccurateRoofArea(input) {
@@ -36,7 +39,7 @@ function estimateAccurateRoofArea(input) {
 
   if (input.footprintSqft && input.footprintSqft > 200) {
     groundFootprintSqft = Math.round(input.footprintSqft);
-    method = "cadastral_lidar_osm_polygon";
+    method = input.footprintSource || "osm_building_outline";
   } else if (hasGla) {
     groundFootprintSqft = Math.round(livingSqft / stories);
   } else {
@@ -69,6 +72,8 @@ function estimateAccurateRoofArea(input) {
     };
   }
 
+  const isTracedOutline = method === "osm_building_outline" || method === "cadastral_outline";
+
   // 2. Attached Garage Addition (if not already counted in footprint)
   let garageAdditionSqft = 0;
   const hasGarage = input.hasGarage !== false;
@@ -77,13 +82,14 @@ function estimateAccurateRoofArea(input) {
     const specifiedGarage = input.garageSqft && input.garageSqft > 150 ? input.garageSqft : 0;
     if (specifiedGarage) {
       garageAdditionSqft = specifiedGarage;
-    } else if (method !== "cadastral_lidar_osm_polygon") {
+    } else if (!isTracedOutline) {
       garageAdditionSqft = stories > 1 ? 400 : 380;
     }
   }
 
-  // 3. Eaves & Overhang Perimeter Calculation
-  const overhangInches = input.eavesOverhangInches != null ? Math.max(0, input.eavesOverhangInches) : 18;
+  // 3. Eaves & Overhang Perimeter Calculation (overhang is 0 for traced outlines already at roof edge)
+  const defaultOverhang = isTracedOutline ? 0 : 18;
+  const overhangInches = input.eavesOverhangInches != null ? Math.max(0, input.eavesOverhangInches) : defaultOverhang;
   const overhangFeet = overhangInches / 12.0;
 
   const approxWidth = Math.sqrt(groundFootprintSqft / 1.4);
@@ -128,57 +134,9 @@ function estimateAccurateRoofArea(input) {
   // 8. Solar Capacity & Energy Yield
   const maxSolarPanels = Math.max(4, Math.floor(usableSolarSqft / 19.5));
   const solarDcKw = Number(((maxSolarPanels * 410) / 1000.0).toFixed(1));
-  const stUpper = (input.stateCode || "CA").toUpperCase();
-  const yieldMultiplier = ["CA", "AZ", "NV", "NM", "TX", "FL"].includes(stUpper) ? 1520 : 1240;
-  const annualYieldKwh = Math.round(solarDcKw * yieldMultiplier);
-
-  // 9. Roofing Material Cost Estimates
-  const materials = [
-    {
-      materialKey: "asphalt_shingle",
-      materialName: "30-Yr Architectural Asphalt Shingle",
-      costPerSquareLowUsd: 460,
-      costPerSquareHighUsd: 590,
-      totalCostLowUsd: Math.round(roofingSquares * 460),
-      totalCostHighUsd: Math.round(roofingSquares * 590),
-      lifespanYears: 30,
-      warranty: "30-Year Manufacturer Limited Warranty",
-      solarFriendly: true,
-    },
-    {
-      materialKey: "standing_seam_metal",
-      materialName: "24-Gauge Standing Seam Metal",
-      costPerSquareLowUsd: 1100,
-      costPerSquareHighUsd: 1480,
-      totalCostLowUsd: Math.round(roofingSquares * 1100),
-      totalCostHighUsd: Math.round(roofingSquares * 1480),
-      lifespanYears: 50,
-      warranty: "Lifetime / 50-Year Non-Prorated",
-      solarFriendly: true,
-    },
-    {
-      materialKey: "concrete_clay_tile",
-      materialName: "Concrete / Spanish Clay Barrel Tile",
-      costPerSquareLowUsd: 1250,
-      costPerSquareHighUsd: 1750,
-      totalCostLowUsd: Math.round(roofingSquares * 1250),
-      totalCostHighUsd: Math.round(roofingSquares * 1750),
-      lifespanYears: 60,
-      warranty: "50-Year Class A Fire Rated",
-      solarFriendly: false,
-    },
-    {
-      materialKey: "tpo_commercial_flat",
-      materialName: "60-Mil TPO Single-Ply Membrane (Low-Slope)",
-      costPerSquareLowUsd: 580,
-      costPerSquareHighUsd: 820,
-      totalCostLowUsd: Math.round(roofingSquares * 580),
-      totalCostHighUsd: Math.round(roofingSquares * 820),
-      lifespanYears: 25,
-      warranty: "25-Year Commercial NDL",
-      solarFriendly: true,
-    },
-  ];
+  // Solar yield (kWh/yr) and re-roofing costs are not modeled: no sourced yield or installed-cost data is loaded.
+  const annualYieldKwh = null;
+  const materials = [];
 
   return {
     groundFootprintSqft,

@@ -1,5 +1,10 @@
 # City Pretty Ecosystem: Grand Vision & Technical Architecture
 
+> **Correction, 16 Nov 2026:** the vision below stands, but this document's status claims and vendor prices were not
+> checked. Phases marked "✅ COMPLETED" were not complete, the paid-data prices were not from the vendors, and the
+> EverySpace income ranges had no source. For the current plan, real status and vendor prices checked on the vendors'
+> own pages, see [`GAME-PLAN.md`](GAME-PLAN.md). For data status, see [`DATA-AUDIT-AND-TRANSPARENCY.md`](DATA-AUDIT-AND-TRANSPARENCY.md).
+
 **Platform Vision:** The definitive real-world intelligence engine for real estate investors and civic builders who acquire land, build housing, and transform communities while generating high-conviction financial returns.
 
 ---
@@ -113,8 +118,8 @@ To achieve true real-world accuracy without hallucinating data, City Pretty inte
 
 ```mermaid
 flowchart LR
-    P0["P0: Sourced Data\n(Purge Filler & Fallbacks)\nRe-checked 18 Nov 2026"]
-    P1["P1: Core Reality\n(Zoning Safety, State Law)\n5 of 22 laws confirmed"]
+    P0["P0: Sourced Data\n(Purge Filler & Fallbacks)\n✅ COMPLETED"]
+    P1["P1: Core Reality\n(Zoning Safety, State Law)\n✅ COMPLETED"]
     P2["P2: Data Foundations\n(HUD Rent, Unit Costs)\n⏳ IN PROGRESS"]
     P3["P3: AI Integration\n(Claude Opus 5.5 + Tools)\nNEXT"]
     P4["P4: Multi-App Synergy\n(StreetForge + EverySpace)\nHORIZON"]

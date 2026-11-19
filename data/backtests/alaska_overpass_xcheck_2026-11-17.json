@@ -1,0 +1,555 @@
+{
+ "script": "Overpass ID-for-ID cross-check of each borough's OSM extract (roads: the highway classes osm_extract.py keeps as streets; bus stops: node highway=bus_stop), box = the borough's block groups + 0.02 degree, endpoint maps.mail.ru",
+ "boroughs": {
+  "02013": {
+   "fips": "02013",
+   "box_s_w_n_e": "53.89621700009182,-166.24564699979842,56.965059000180055,-158.87347100003788",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T11:13:58Z",
+   "roads": {
+    "direct": 259,
+    "extract": 259,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 3,
+   "file_mb": 2.8
+  },
+  "02050": {
+   "fips": "02050",
+   "box_s_w_n_e": "58.476018999777224,-173.2568299996326,62.312643999852746,-152.9815209998531",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T06:27:42Z",
+   "roads": {
+    "direct": 2056,
+    "extract": 2056,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 2,
+    "extract": 2,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 10,
+   "file_mb": 14.8
+  },
+  "02060": {
+   "fips": "02060",
+   "box_s_w_n_e": "58.59588800020176,-158.0221549996417,58.905146000131914,-156.29601300004728",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T09:23:51Z",
+   "roads": {
+    "direct": 267,
+    "extract": 267,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 1,
+   "file_mb": 0.3
+  },
+  "02063": {
+   "fips": "02063",
+   "box_s_w_n_e": "59.31400599980462,-148.96876199974403,61.44627599994128,-141.945971999891",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T10:47:19Z",
+   "roads": {
+    "direct": 719,
+    "extract": 719,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 1,
+    "extract": 1,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 7,
+   "file_mb": 2.9
+  },
+  "02066": {
+   "fips": "02066",
+   "box_s_w_n_e": "60.37167599996266,-147.76475299965884,63.237780999971505,-140.98160300004207",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T10:36:19Z",
+   "roads": {
+    "direct": 1157,
+    "extract": 1157,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 2,
+   "file_mb": 2.9
+  },
+  "02068": {
+   "fips": "02068",
+   "box_s_w_n_e": "62.70583099998171,-153.01960899955125,64.37821399986633,-146.97988600009643",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T10:20:03Z",
+   "roads": {
+    "direct": 606,
+    "extract": 606,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 11,
+    "extract": 11,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 2,
+   "file_mb": 0.8
+  },
+  "02070": {
+   "fips": "02070",
+   "box_s_w_n_e": "58.31413999985836,-161.38504899989545,61.01284700013431,-155.9800859997585",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T10:46:19Z",
+   "roads": {
+    "direct": 678,
+    "extract": 678,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 2,
+   "file_mb": 5.8
+  },
+  "02100": {
+   "fips": "02100",
+   "box_s_w_n_e": "58.1113280000913,-136.5157560003331,59.748397000043866,-134.29358099963076",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T07:38:03Z",
+   "roads": {
+    "direct": 1661,
+    "extract": 1661,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 64,
+    "extract": 64,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 3,
+   "file_mb": 6.7
+  },
+  "02105": {
+   "fips": "02105",
+   "box_s_w_n_e": "56.84187299982833,-138.0492970000582,59.429555999991166,-132.62979600043462",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T08:19:47Z",
+   "roads": {
+    "direct": 2176,
+    "extract": 2176,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 114,
+    "extract": 114,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 3,
+   "file_mb": 11.7
+  },
+  "02110": {
+   "fips": "02110",
+   "box_s_w_n_e": "57.77133099999912,-135.24182499966628,58.99133700005607,-133.15231100014853",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T05:20:31Z",
+   "roads": {
+    "direct": 1205,
+    "extract": 1205,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 59,
+    "extract": 59,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 21,
+   "file_mb": 6.2
+  },
+  "02130": {
+   "fips": "02130",
+   "box_s_w_n_e": "54.628905999966335,-132.29723899981903,56.42600499995655,-129.9541669998212",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T06:06:15Z",
+   "roads": {
+    "direct": 875,
+    "extract": 875,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 54,
+    "extract": 54,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 11,
+   "file_mb": 8.7
+  },
+  "02150": {
+   "fips": "02150",
+   "box_s_w_n_e": "55.67991200017017,-156.9231529998285,59.03788699982739,-151.67050500022887",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T05:47:18Z",
+   "roads": {
+    "direct": 803,
+    "extract": 803,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 2,
+    "extract": 2,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 10,
+   "file_mb": 2.7
+  },
+  "02158": {
+   "fips": "02158",
+   "box_s_w_n_e": "60.89710800001681,-166.30861300018208,63.33735500017911,-160.16666000022235",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T11:15:41Z",
+   "roads": {
+    "direct": 448,
+    "extract": 448,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 4,
+   "file_mb": 3.9
+  },
+  "02164": {
+   "fips": "02164",
+   "box_s_w_n_e": "55.61853099995494,-159.92014899956368,60.92623599986611,-153.37726099997406",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T12:11:26Z",
+   "roads": {
+    "direct": 1036,
+    "extract": 1036,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 2,
+    "extract": 2,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 1,
+   "file_mb": 3.3
+  },
+  "02180": {
+   "fips": "02180",
+   "box_s_w_n_e": "62.864907999970846,-171.98531900015405,66.64650899994797,-159.35736500023623",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T06:36:25Z",
+   "roads": {
+    "direct": 887,
+    "extract": 887,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 2,
+    "extract": 2,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 5,
+   "file_mb": 3.2
+  },
+  "02185": {
+   "fips": "02185",
+   "box_s_w_n_e": "67.97995199989597,-166.99210699982046,71.45978600002834,-140.98059100026381",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T12:16:37Z",
+   "roads": {
+    "direct": 637,
+    "extract": 637,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 1,
+    "extract": 1,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 6,
+   "file_mb": 3.3
+  },
+  "02188": {
+   "fips": "02188",
+   "box_s_w_n_e": "65.41715200004732,-165.61604600000445,68.31456399997981,-154.12622099975374",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T11:48:56Z",
+   "roads": {
+    "direct": 320,
+    "extract": 320,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 9,
+   "file_mb": 2.6
+  },
+  "02195": {
+   "fips": "02195",
+   "box_s_w_n_e": "56.3350930002421,-133.75861099982308,57.844725999983645,-132.02518999999046",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T12:35:57Z",
+   "roads": {
+    "direct": 356,
+    "extract": 356,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 4,
+   "file_mb": 6.2
+  },
+  "02198": {
+   "fips": "02198",
+   "box_s_w_n_e": "54.612044999977066,-134.68844200032794,57.18695299983969,-129.98348399971712",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T08:48:23Z",
+   "roads": {
+    "direct": 1883,
+    "extract": 1883,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 54,
+    "extract": 54,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 10,
+   "file_mb": 17.5
+  },
+  "02220": {
+   "fips": "02220",
+   "box_s_w_n_e": "56.128413999881225,-136.47514200032484,58.02254599983148,-134.44465599988592",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T06:42:17Z",
+   "roads": {
+    "direct": 500,
+    "extract": 500,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 55,
+    "extract": 55,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 11,
+   "file_mb": 7.5
+  },
+  "02230": {
+   "fips": "02230",
+   "box_s_w_n_e": "59.326339999874534,-135.74307500002448,59.81804100010688,-134.9697459997005",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T06:04:23Z",
+   "roads": {
+    "direct": 105,
+    "extract": 105,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 5,
+    "extract": 5,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 1,
+   "file_mb": 4.9
+  },
+  "02240": {
+   "fips": "02240",
+   "box_s_w_n_e": "61.88404700015123,-147.0200369997092,65.85943299994523,-140.98131099996402",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T09:32:11Z",
+   "roads": {
+    "direct": 1889,
+    "extract": 1889,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 5,
+   "file_mb": 1.7
+  },
+  "02275": {
+   "fips": "02275",
+   "box_s_w_n_e": "55.61428199991226,-133.18907900009683,56.92330500014204,-130.97789900028133",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T07:46:32Z",
+   "roads": {
+    "direct": 519,
+    "extract": 519,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 2,
+   "file_mb": 8.2
+  },
+  "02282": {
+   "fips": "02282",
+   "box_s_w_n_e": "58.78833299985036,-143.91332899973966,60.54303599993594,-137.48000000022353",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T09:18:30Z",
+   "roads": {
+    "direct": 111,
+    "extract": 111,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 1,
+   "file_mb": 6.5
+  },
+  "02290": {
+   "fips": "02290",
+   "box_s_w_n_e": "61.92593299991388,-161.0681759999506,68.5200210000324,-140.98090099988522",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "checked_at": "2026-11-17T11:43:12Z",
+   "roads": {
+    "direct": 9847,
+    "extract": 9847,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 115,
+    "extract": 115,
+    "missing_from_extract": 0,
+    "extra_in_extract": 0,
+    "match": true
+   },
+   "block_groups": 8,
+   "file_mb": 7.7
+  }
+ }
+}

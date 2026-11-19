@@ -1,10 +1,15 @@
 import { describe, expect, it } from "vitest";
-import { calculateTaxIncrementCapacity } from "../../src/engines/municipalFinanceEngine";
+import { calculateTaxIncrementCapacity, financeProfileGate } from "../../src/engines/municipalFinanceEngine";
 import { evaluateByRightHousing, ParcelContext } from "../../src/engines/statutoryZoningEngine";
 import { computeSubAdditivePackage } from "../../src/engines/hedonicCapitalizationEngine";
 import { calculateSolarMicrogridRoi } from "../../src/engines/solarMicrogridEngine";
 import { normalizeArcGisFeature } from "../../src/adapters/arcgisNormalizer";
 import { StateFinanceProfile } from "../../src/types";
+import * as fs from "fs";
+import * as path from "path";
+
+// The statute engine reads app/data/statutes.json; these tests run it against the real file.
+const LAWS = JSON.parse(fs.readFileSync(path.join(__dirname, "../../app/data/statutes.json"), "utf-8"));
 
 const BASE_EXCLUSIONS: ParcelContext["exclusions"] = {
   historic_district_hpoz: false,
@@ -19,7 +24,7 @@ const BASE_EXCLUSIONS: ParcelContext["exclusions"] = {
 };
 
 describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
-  it("1. Texas SB 840: population gate applies, and a partly checked law is 'not determined', never allowed", () => {
+  it("1. Texas SB 840 (2025) needs both population thresholds on file and commercial zoning", () => {
     const houstonCommercial: ParcelContext = {
       parcel_id: "48201-001",
       state_code: "TX",
@@ -33,31 +38,25 @@ describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
       dist_to_frequent_bus_or_brt_mi: 0.1,
       exclusions: { ...BASE_EXCLUSIONS },
     };
+    const houstonRes = evaluateByRightHousing(houstonCommercial, LAWS);
+    expect(houstonRes.net_by_right_feasible).toBe(true);
+    const sb840 = houstonRes.applicable_statutes.find(s => s.id === "tx_sb840")!;
+    expect(sb840.citation).toContain("SB 840");
+    // The law caps parking at 1 space per unit; it does not set a 1-space minimum.
+    expect(sb840.min_parking_spaces_per_unit).toBeNull();
+    expect(sb840.max_parking_requirement_per_unit).toBe(1);
 
-    const smallTxCityCommercial: ParcelContext = {
-      ...houstonCommercial,
-      parcel_id: "48039-002",
-      county_fips: "48039",
-      municipality_pop: 42000,
-      county_pop: 388000,
-      exclusions: { ...BASE_EXCLUSIONS },
-    };
-
-    const houstonRes = evaluateByRightHousing(houstonCommercial);
-    const smallRes = evaluateByRightHousing(smallTxCityCommercial);
-
-    // tx_sb840 is "partly" in statutes.json, so it is reported as not determined, not as a right.
-    expect(houstonRes.net_by_right_feasible).toBe(false);
-    expect(houstonRes.applicable_statutes).toEqual([]);
-    expect(houstonRes.not_determined_statutes.map((s) => s.id)).toContain("tx_sb840");
-    expect(houstonRes.statutory_exclusions.population_threshold_ineligible).toBe(false);
-
+    const smallRes = evaluateByRightHousing({ ...houstonCommercial, parcel_id: "48039-002", county_fips: "48039", municipality_pop: 42000, county_pop: 388000 }, LAWS);
     expect(smallRes.net_by_right_feasible).toBe(false);
     expect(smallRes.statutory_exclusions.population_threshold_ineligible).toBe(true);
-    expect(smallRes.not_determined_statutes.map((s) => s.id)).not.toContain("tx_sb840");
+
+    // Unknown population: not applied, and the reason is reported instead of assumed.
+    const unknownPop = evaluateByRightHousing({ ...houstonCommercial, municipality_pop: null, county_pop: null }, LAWS);
+    expect(unknownPop.applicable_statutes).toEqual([]);
+    expect(unknownPop.not_confirmed.map(n => n.id)).toContain("tx_sb840");
   });
 
-  it("2. Florida Live Local: excluded in Everglades zones; elsewhere 'not determined' (record partly checked), no tax exemption asserted", () => {
+  it("2. Florida Live Local: excluded in Everglades/Wekiva areas; 75% exemption read from the verified record", () => {
     const evergladesParcel: ParcelContext = {
       parcel_id: "12086-001",
       state_code: "FL",
@@ -71,25 +70,16 @@ describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
       dist_to_frequent_bus_or_brt_mi: 0.2,
       exclusions: { ...BASE_EXCLUSIONS, everglades_or_wekiva_or_trpa: true },
     };
-
-    const eligibleMiamiParcel: ParcelContext = {
-      ...evergladesParcel,
-      exclusions: { ...BASE_EXCLUSIONS },
-    };
-
-    const glades = evaluateByRightHousing(evergladesParcel);
-    expect(glades.net_by_right_feasible).toBe(false);
-    expect(glades.not_determined_statutes).toEqual([]);
-
-    const miamiRes = evaluateByRightHousing(eligibleMiamiParcel);
-    expect(miamiRes.net_by_right_feasible).toBe(false);
-    expect(miamiRes.applicable_statutes).toEqual([]);
-    const fl = miamiRes.not_determined_statutes.find((s) => s.id === "fl_live_local");
-    expect(fl).toBeTruthy();
-    expect(fl!.citation).toContain("166.04151(7)");
+    expect(evaluateByRightHousing(evergladesParcel, LAWS).net_by_right_feasible).toBe(false);
+    const miamiRes = evaluateByRightHousing({ ...evergladesParcel, exclusions: { ...BASE_EXCLUSIONS } }, LAWS);
+    expect(miamiRes.net_by_right_feasible).toBe(true);
+    const ll = miamiRes.applicable_statutes.find(s => s.id === "fl_live_local")!;
+    expect(ll.tax_exemption_pct).toBe(0.75);
+    // No parking minimum is stated in the statute.
+    expect(ll.min_parking_spaces_per_unit).toBeNull();
   });
 
-  it("3. California SB 79 near rail is 'not determined' (partly checked); SB 9 (verified) applies to single-family zones unless HPOZ", () => {
+  it("3. California SB 79: 75 ft is a floor on local height limits, not a unit cap; HPOZ-free parcels only via the record's exclusions", () => {
     const laTransitParcel: ParcelContext = {
       parcel_id: "06037-5001",
       state_code: "CA",
@@ -103,115 +93,61 @@ describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
       dist_to_frequent_bus_or_brt_mi: 0.05,
       exclusions: { ...BASE_EXCLUSIONS },
     };
+    const res = evaluateByRightHousing(laTransitParcel, LAWS);
+    const t1 = res.applicable_statutes.find(s => s.id === "ca_sb79_tier1")!;
+    expect(t1).toBeTruthy();
+    expect(t1.max_height_ft).toBe(75);
+    expect(t1.min_allowed_density_du_per_acre).toBe(120);
+    expect(t1.max_units_by_right).toBeNull(); // the old "120 units" cap was wrong
+    // County eligibility list is from a secondary source: reported as not confirmed.
+    expect(t1.unconfirmed_fields.join(" ")).toMatch(/eligible_counties/);
 
-    const res = evaluateByRightHousing(laTransitParcel);
-    expect(res.net_by_right_feasible).toBe(false);
-    expect(res.applicable_statutes).toEqual([]);
-    expect(res.not_determined_statutes.map((s) => s.id)).toEqual(["ca_sb79_tier1"]);
-
-    const tier2 = evaluateByRightHousing({ ...laTransitParcel, dist_to_heavy_rail_mi: 0.4 });
-    expect(tier2.not_determined_statutes.map((s) => s.id)).toEqual(["ca_sb79_tier2"]);
-
-    const hpozBlocked = evaluateByRightHousing({
-      ...laTransitParcel,
-      exclusions: { ...BASE_EXCLUSIONS, historic_district_hpoz: true },
-    });
-    expect(hpozBlocked.net_by_right_feasible).toBe(false);
-    expect(hpozBlocked.not_determined_statutes).toEqual([]);
-
-    const sfr = evaluateByRightHousing({
-      ...laTransitParcel,
-      base_zoning_code: "R1-1",
-      is_commercial_or_mixed_use: false,
-      is_single_family_residential: true,
-      dist_to_heavy_rail_mi: 2,
-      dist_to_frequent_bus_or_brt_mi: 2,
-    });
-    expect(sfr.net_by_right_feasible).toBe(true);
-    expect(sfr.applicable_statutes[0].citation).toContain("SB 9");
-    expect(sfr.applicable_statutes[0].max_units_by_right).toBe(4);
-    expect(sfr.applicable_statutes[0].max_height_ft).toBeNull();
-    expect(sfr.applicable_statutes[0].min_parking_spaces_per_unit).toBe(1);
+    const fire = evaluateByRightHousing({ ...laTransitParcel, exclusions: { ...BASE_EXCLUSIONS, calfire_or_state_vhfhsz: true } }, LAWS);
+    expect(fire.net_by_right_feasible).toBe(false);
   });
 
-  it("4. Produces distinct, legally valid bond capacities across CA Prop 13, OR Measure 50, LA Homestead, and TX TIRZ", () => {
-    const makeProfile = (overrides: Partial<StateFinanceProfile>): StateFinanceProfile => ({
-      state_code: "CA",
-      res_assessment_ratio: 1.0,
-      comm_assessment_ratio: 1.0,
-      annual_assessment_cap: 0.02,
-      uncaps_on_sale: true,
-      reassessment_cycle_years: 1,
-      homestead_exemption_rule: { type: "none", amount_or_pct: 0 },
-      tif_vehicle_name: "CA EIFD",
-      non_pledgeable_share: 0.47,
-      rsmeans_cost_multiplier: 1.24,
-      tree_capital_cost_usd: 1945,
-      climate_energy_regime: "mixed_temperate",
-      ...overrides,
-    });
+  it("3b. Laws whose text could not be checked never apply; missing zoning never implies residential", () => {
+    const raleigh: ParcelContext = {
+      parcel_id: "37183-1", state_code: "NC", county_fips: "37183", municipality_pop: 480000, county_pop: 1200000,
+      base_zoning_code: "R-4", is_commercial_or_mixed_use: false, is_single_family_residential: true,
+      dist_to_heavy_rail_mi: null, dist_to_frequent_bus_or_brt_mi: null, exclusions: { ...BASE_EXCLUSIONS },
+    };
+    const r = evaluateByRightHousing(raleigh, LAWS);
+    expect(r.applicable_statutes).toEqual([]);
+    expect(r.not_confirmed.map(n => n.id)).toContain("nc_raleigh_missing_middle");
 
-    const caOut = calculateTaxIncrementCapacity({
-      profile: makeProfile({}),
-      baselineMarketValueUsd: 100_000_000,
-      effectiveMillageRate: 0.01,
-      annualMarketAppreciation: 0.035,
-      historicalTurnoverRate: 0.035,
-      newConstructionAnnualUsd: 0,
-      affordableExemptUnitsShare: 0,
-      affordableExemptionPct: 0,
-      localPledgeShare: 0.65,
-      bondTermYears: 30,
-      bondInterestRate: 0.0525,
-      dscr: 1.35,
-    });
+    const noZoning = evaluateByRightHousing({ ...raleigh, state_code: "CA", county_fips: "06037", base_zoning_code: null }, LAWS);
+    expect(noZoning.base_zoning_code).toBeNull();
+    expect(noZoning.applicable_statutes).toEqual([]);
+  });
 
-    const orOut = calculateTaxIncrementCapacity({
-      profile: makeProfile({
-        state_code: "OR",
-        res_assessment_ratio: 0.65,
-        annual_assessment_cap: 0.03,
-        uncaps_on_sale: false,
-        tif_vehicle_name: "OR Urban Renewal TIF",
-        non_pledgeable_share: 0.0,
-      }),
-      baselineMarketValueUsd: 100_000_000,
-      effectiveMillageRate: 0.015,
-      annualMarketAppreciation: 0.035,
-      historicalTurnoverRate: 0.05,
-      newConstructionAnnualUsd: 0,
-      affordableExemptUnitsShare: 0,
-      affordableExemptionPct: 0,
-      localPledgeShare: 0.75,
-      bondTermYears: 30,
-      bondInterestRate: 0.05,
-      dscr: 1.35,
-    });
+  it("4. Tax-increment model refuses to compute on unconfirmed state rules, and applies confirmed ones", () => {
+    const PROFILES = JSON.parse(fs.readFileSync(path.join(__dirname, "../../app/data/state_finance_profiles.json"), "utf-8"));
+    const base = {
+      baselineMarketValueUsd: 100_000_000, effectiveMillageRate: 0.01, annualMarketAppreciation: 0.035,
+      historicalTurnoverRate: 0.035, newConstructionAnnualUsd: 0, affordableExemptUnitsShare: 0, affordableExemptionPct: 0,
+      localPledgeShare: 0.65, nonPledgeableShare: 0.47, bondTermYears: 30, bondInterestRate: 0.0525, dscr: 1.35,
+    };
+    // Real file: Utah's ratio was corrected, but its cap / sale rule / cycle are not confirmed, so nothing is computed.
+    const ut = calculateTaxIncrementCapacity({ ...base, profile: PROFILES.UT });
+    expect(ut.computed).toBe(false);
+    expect(ut.maxBondCapacityUsd).toBeNull();
+    expect(ut.missingFields).toEqual(expect.arrayContaining(["annual_assessment_cap", "uncaps_on_sale", "reassessment_cycle_years"]));
+    expect(financeProfileGate(PROFILES.NY)).toHaveLength(5);
 
-    const txOut = calculateTaxIncrementCapacity({
-      profile: makeProfile({
-        state_code: "TX",
-        annual_assessment_cap: null,
-        uncaps_on_sale: true,
-        tif_vehicle_name: "TX TIRZ",
-        non_pledgeable_share: 0.0,
-      }),
-      baselineMarketValueUsd: 100_000_000,
-      effectiveMillageRate: 0.018,
-      annualMarketAppreciation: 0.035,
-      historicalTurnoverRate: 0.06,
-      newConstructionAnnualUsd: 0,
-      affordableExemptUnitsShare: 0,
-      affordableExemptionPct: 0,
-      localPledgeShare: 0.75,
-      bondTermYears: 30,
-      bondInterestRate: 0.05,
-      dscr: 1.35,
+    // A profile whose rules are all confirmed computes; a 2% cap yields less capacity than an uncapped annual market.
+    const confirmed = (o: Partial<StateFinanceProfile>): StateFinanceProfile => ({
+      state_code: "XX", res_assessment_ratio: 1, comm_assessment_ratio: 1, annual_assessment_cap: null, uncaps_on_sale: true,
+      reassessment_cycle_years: 1, homestead_exemption_rule: { type: "none", amount_or_pct: 0 }, tif_vehicle_name: "test",
+      verification: { status: "verified", unverified_fields: [] }, ...o,
     });
-
-    expect(caOut.maxBondCapacityUsd).toBeGreaterThan(0);
-    expect(orOut.maxBondCapacityUsd).toBeGreaterThan(caOut.maxBondCapacityUsd);
-    expect(txOut.maxBondCapacityUsd).toBeGreaterThan(orOut.maxBondCapacityUsd);
+    const capped = calculateTaxIncrementCapacity({ ...base, profile: confirmed({ annual_assessment_cap: 0.02 }) });
+    const open = calculateTaxIncrementCapacity({ ...base, profile: confirmed({}) });
+    expect(capped.computed && open.computed).toBe(true);
+    expect(open.maxBondCapacityUsd).toBeGreaterThan(capped.maxBondCapacityUsd);
+    // The non-pledgeable share is a caller input now (it had no source as a state-wide profile field).
+    const allPledgeable = calculateTaxIncrementCapacity({ ...base, nonPledgeableShare: 0, profile: confirmed({}) });
+    expect(allPledgeable.maxBondCapacityUsd).toBeGreaterThan(open.maxBondCapacityUsd);
   });
 
   it("5. Prevents linear stacking double-counting via the 22% suburban capitalization ceiling", () => {

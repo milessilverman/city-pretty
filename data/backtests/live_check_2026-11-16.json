@@ -1,0 +1,2607 @@
+{
+ "ran_on": "2026-11-16T19:23:32.768Z",
+ "script": "scripts/live_check_valuations.mjs",
+ "results": {
+  "11001": {
+   "county": "Washington DC",
+   "points": 5,
+   "homes": [
+    {
+     "id": "1356    0035",
+     "mode": "point",
+     "lat": 38.90767,
+     "lng": -77.084006,
+     "sales_file_bg": "110010008021",
+     "result": "model estimate shown",
+     "value": 1945000,
+     "method": "District of Columbia model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 10.7% on 1,523 District of Columbia sales (2026-05-01 to 2026-10-31; 75.9% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1945000,
+      "reason": null
+     },
+     "page_bg": "110010008021",
+     "page_bgs_all_calls": [
+      "110010008021"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "6212    0019",
+     "mode": "point",
+     "lat": 38.824913,
+     "lng": -76.998767,
+     "sales_file_bg": "110010098113",
+     "result": "model estimate shown",
+     "value": 328000,
+     "method": "District of Columbia model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 10.7% on 1,523 District of Columbia sales (2026-05-01 to 2026-10-31; 75.9% within 20%). For homes under $500k the test error was larger: 13.9%. Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 328000,
+      "reason": null
+     },
+     "page_bg": "110010098113",
+     "page_bgs_all_calls": [
+      "110010098113"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "1832    0033",
+     "mode": "point",
+     "lat": 38.944426,
+     "lng": -77.07485,
+     "sales_file_bg": "110010012004",
+     "result": "model estimate shown",
+     "value": 1592000,
+     "method": "District of Columbia model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 10.7% on 1,523 District of Columbia sales (2026-05-01 to 2026-10-31; 75.9% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1592000,
+      "reason": null
+     },
+     "page_bg": "110010012004",
+     "page_bgs_all_calls": [
+      "110010012004"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "1476    0033",
+     "mode": "point",
+     "lat": 38.939984,
+     "lng": -77.097085,
+     "sales_file_bg": "110010009042",
+     "result": "model estimate shown",
+     "value": 2831000,
+     "method": "District of Columbia model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 10.7% on 1,523 District of Columbia sales (2026-05-01 to 2026-10-31; 75.9% within 20%). For homes of $2M and up the test error was larger: 14.2%. Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 2831000,
+      "reason": null
+     },
+     "page_bg": "110010009042",
+     "page_bgs_all_calls": [
+      "110010009042"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "3150    0012",
+     "mode": "point",
+     "lat": 38.953936,
+     "lng": -77.023119,
+     "sales_file_bg": "110010021013",
+     "result": "model estimate shown",
+     "value": 781000,
+     "method": "District of Columbia model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 10.7% on 1,523 District of Columbia sales (2026-05-01 to 2026-10-31; 75.9% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 781000,
+      "reason": null
+     },
+     "page_bg": "110010021013",
+     "page_bgs_all_calls": [
+      "110010021013"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "1356    0035",
+     "mode": "drawn lot",
+     "lat": 38.90767,
+     "lng": -77.084006,
+     "sales_file_bg": "110010008021",
+     "result": "model estimate shown",
+     "value": 1945000,
+     "method": "District of Columbia model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 10.7% on 1,523 District of Columbia sales (2026-05-01 to 2026-10-31; 75.9% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1945000,
+      "reason": null
+     },
+     "page_bg": "110010008021",
+     "page_bgs_all_calls": [
+      "110010008021"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "6212    0019",
+     "mode": "drawn lot",
+     "lat": 38.824913,
+     "lng": -76.998767,
+     "sales_file_bg": "110010098113",
+     "result": "model estimate shown",
+     "value": 328000,
+     "method": "District of Columbia model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 10.7% on 1,523 District of Columbia sales (2026-05-01 to 2026-10-31; 75.9% within 20%). For homes under $500k the test error was larger: 13.9%. Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 328000,
+      "reason": null
+     },
+     "page_bg": "110010098113",
+     "page_bgs_all_calls": [
+      "110010098113"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "1832    0033",
+     "mode": "drawn lot",
+     "lat": 38.944426,
+     "lng": -77.07485,
+     "sales_file_bg": "110010012004",
+     "result": "model estimate shown",
+     "value": 1592000,
+     "method": "District of Columbia model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 10.7% on 1,523 District of Columbia sales (2026-05-01 to 2026-10-31; 75.9% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1592000,
+      "reason": null
+     },
+     "page_bg": "110010012004",
+     "page_bgs_all_calls": [
+      "110010012004"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "1476    0033",
+     "mode": "drawn lot",
+     "lat": 38.939984,
+     "lng": -77.097085,
+     "sales_file_bg": "110010009042",
+     "result": "model estimate shown",
+     "value": 2831000,
+     "method": "District of Columbia model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 10.7% on 1,523 District of Columbia sales (2026-05-01 to 2026-10-31; 75.9% within 20%). For homes of $2M and up the test error was larger: 14.2%. Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 2831000,
+      "reason": null
+     },
+     "page_bg": "110010009042",
+     "page_bgs_all_calls": [
+      "110010009042"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "3150    0012",
+     "mode": "drawn lot",
+     "lat": 38.953936,
+     "lng": -77.023119,
+     "sales_file_bg": "110010021013",
+     "result": "model estimate shown",
+     "value": 781000,
+     "method": "District of Columbia model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 10.7% on 1,523 District of Columbia sales (2026-05-01 to 2026-10-31; 75.9% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 781000,
+      "reason": null
+     },
+     "page_bg": "110010021013",
+     "page_bgs_all_calls": [
+      "110010021013"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    }
+   ],
+   "page_errors": []
+  },
+  "12011": {
+   "county": "Broward",
+   "points": 5,
+   "homes": [
+    {
+     "id": "474128011420",
+     "mode": "point",
+     "lat": 26.337609,
+     "lng": -80.26286,
+     "sales_file_bg": "120110105034",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 1300000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1162000,
+      "reason": null
+     },
+     "page_bg": "120110105034",
+     "page_bgs_all_calls": [
+      "120110105034"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "494219270315",
+     "mode": "point",
+     "lat": 26.167552,
+     "lng": -80.188588,
+     "sales_file_bg": "120110503013",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 399000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 406000,
+      "reason": null
+     },
+     "page_bg": "120110503013",
+     "page_bgs_all_calls": [
+      "120110503013"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "514107023850",
+     "mode": "point",
+     "lat": 26.020659,
+     "lng": -80.290182,
+     "sales_file_bg": "120111103072",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 650000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 654000,
+      "reason": null
+     },
+     "page_bg": "120111103072",
+     "page_bgs_all_calls": [
+      "120111103072"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "494103100150",
+     "mode": "point",
+     "lat": 26.220839,
+     "lng": -80.242257,
+     "sales_file_bg": "120110204061",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 355000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 376000,
+      "reason": null
+     },
+     "page_bg": "120110204061",
+     "page_bgs_all_calls": [
+      "120110204061"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "504218010050",
+     "mode": "point",
+     "lat": 26.106304,
+     "lng": -80.196287,
+     "sales_file_bg": "120110430021",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 230000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 234000,
+      "reason": null
+     },
+     "page_bg": "120110430021",
+     "page_bgs_all_calls": [
+      "120110430021"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "474128011420",
+     "mode": "drawn lot",
+     "lat": 26.337609,
+     "lng": -80.26286,
+     "sales_file_bg": "120110105034",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 1300000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1162000,
+      "reason": null
+     },
+     "page_bg": "120110105034",
+     "page_bgs_all_calls": [
+      "120110105034"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "494219270315",
+     "mode": "drawn lot",
+     "lat": 26.167552,
+     "lng": -80.188588,
+     "sales_file_bg": "120110503013",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 399000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 406000,
+      "reason": null
+     },
+     "page_bg": "120110503013",
+     "page_bgs_all_calls": [
+      "120110503013"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "514107023850",
+     "mode": "drawn lot",
+     "lat": 26.020659,
+     "lng": -80.290182,
+     "sales_file_bg": "120111103072",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 650000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 654000,
+      "reason": null
+     },
+     "page_bg": "120111103072",
+     "page_bgs_all_calls": [
+      "120111103072"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "494103100150",
+     "mode": "drawn lot",
+     "lat": 26.220839,
+     "lng": -80.242257,
+     "sales_file_bg": "120110204061",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 355000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 376000,
+      "reason": null
+     },
+     "page_bg": "120110204061",
+     "page_bgs_all_calls": [
+      "120110204061"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "504218010050",
+     "mode": "drawn lot",
+     "lat": 26.106304,
+     "lng": -80.196287,
+     "sales_file_bg": "120110430021",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 230000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 234000,
+      "reason": null
+     },
+     "page_bg": "120110430021",
+     "page_bgs_all_calls": [
+      "120110430021"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    }
+   ],
+   "page_errors": []
+  },
+  "12031": {
+   "county": "Duval",
+   "points": 5,
+   "homes": [
+    {
+     "id": "0014713010R",
+     "mode": "point",
+     "lat": 30.327861,
+     "lng": -81.848899,
+     "sales_file_bg": "120310119014",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 405000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 410000,
+      "reason": null
+     },
+     "page_bg": "120310119014",
+     "page_bgs_all_calls": [
+      "120310119014"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "0983750955R",
+     "mode": "point",
+     "lat": 30.225398,
+     "lng": -81.723801,
+     "sales_file_bg": "120310135222",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 335000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 330000,
+      "reason": null
+     },
+     "page_bg": "120310135222",
+     "page_bgs_all_calls": [
+      "120310135222"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "1677403260R",
+     "mode": "point",
+     "lat": 30.241227,
+     "lng": -81.49401,
+     "sales_file_bg": "120310144242",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 605100,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 736000,
+      "reason": null
+     },
+     "page_bg": "120310144242",
+     "page_bgs_all_calls": [
+      "120310144242"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "0527540000R",
+     "mode": "point",
+     "lat": 30.342057,
+     "lng": -81.682742,
+     "sales_file_bg": "120310028021",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 50000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 48000,
+      "reason": null
+     },
+     "page_bg": "120310028021",
+     "page_bgs_all_calls": [
+      "120310028021"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "1550240000R",
+     "mode": "point",
+     "lat": 30.272582,
+     "lng": -81.60402,
+     "sales_file_bg": "120310160013",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 195000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 254000,
+      "reason": null
+     },
+     "page_bg": "120310160013",
+     "page_bgs_all_calls": [
+      "120310160013"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "0014713010R",
+     "mode": "drawn lot",
+     "lat": 30.327861,
+     "lng": -81.848899,
+     "sales_file_bg": "120310119014",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 405000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 410000,
+      "reason": null
+     },
+     "page_bg": "120310119014",
+     "page_bgs_all_calls": [
+      "120310119014"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "0983750955R",
+     "mode": "drawn lot",
+     "lat": 30.225398,
+     "lng": -81.723801,
+     "sales_file_bg": "120310135222",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 335000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 330000,
+      "reason": null
+     },
+     "page_bg": "120310135222",
+     "page_bgs_all_calls": [
+      "120310135222"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "1677403260R",
+     "mode": "drawn lot",
+     "lat": 30.241227,
+     "lng": -81.49401,
+     "sales_file_bg": "120310144242",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 605100,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 736000,
+      "reason": null
+     },
+     "page_bg": "120310144242",
+     "page_bgs_all_calls": [
+      "120310144242"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "0527540000R",
+     "mode": "drawn lot",
+     "lat": 30.342057,
+     "lng": -81.682742,
+     "sales_file_bg": "120310028021",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 50000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 48000,
+      "reason": null
+     },
+     "page_bg": "120310028021",
+     "page_bgs_all_calls": [
+      "120310028021"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "1550240000R",
+     "mode": "drawn lot",
+     "lat": 30.272582,
+     "lng": -81.60402,
+     "sales_file_bg": "120310160013",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 195000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 254000,
+      "reason": null
+     },
+     "page_bg": "120310160013",
+     "page_bgs_all_calls": [
+      "120310160013"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    }
+   ],
+   "page_errors": []
+  },
+  "12057": {
+   "county": "Hillsborough",
+   "points": 5,
+   "homes": [
+    {
+     "id": "172701001000000000081U",
+     "mode": "point",
+     "lat": 28.169952,
+     "lng": -82.56107,
+     "sales_file_bg": "120570115093",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 1167000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1039000,
+      "reason": null
+     },
+     "page_bg": "120570115093",
+     "page_bgs_all_calls": [
+      "120570115093"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "1931201T7000002000160U",
+     "mode": "point",
+     "lat": 27.766787,
+     "lng": -82.429364,
+     "sales_file_bg": "120570141182",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 1125000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 995000,
+      "reason": null
+     },
+     "page_bg": "120570141182",
+     "page_bgs_all_calls": [
+      "120570141182"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "222811D2V000000005630P",
+     "mode": "point",
+     "lat": 28.058122,
+     "lng": -82.080218,
+     "sales_file_bg": "120570101082",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 305000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 288000,
+      "reason": null
+     },
+     "page_bg": "120570101082",
+     "page_bgs_all_calls": [
+      "120570101082"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "19281945M000007000120A",
+     "mode": "point",
+     "lat": 28.027283,
+     "lng": -82.450593,
+     "sales_file_bg": "120570007012",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 252000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 267000,
+      "reason": null
+     },
+     "page_bg": "120570007012",
+     "page_bgs_all_calls": [
+      "120570007012"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "203125D3H000000001500U",
+     "mode": "point",
+     "lat": 27.754038,
+     "lng": -82.264281,
+     "sales_file_bg": "120570139071",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 379900,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 420000,
+      "reason": null
+     },
+     "page_bg": "120570139071",
+     "page_bgs_all_calls": [
+      "120570139071"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "172701001000000000081U",
+     "mode": "drawn lot",
+     "lat": 28.169952,
+     "lng": -82.56107,
+     "sales_file_bg": "120570115093",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 1167000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1039000,
+      "reason": null
+     },
+     "page_bg": "120570115093",
+     "page_bgs_all_calls": [
+      "120570115093"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "1931201T7000002000160U",
+     "mode": "drawn lot",
+     "lat": 27.766787,
+     "lng": -82.429364,
+     "sales_file_bg": "120570141182",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 1125000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 995000,
+      "reason": null
+     },
+     "page_bg": "120570141182",
+     "page_bgs_all_calls": [
+      "120570141182"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "222811D2V000000005630P",
+     "mode": "drawn lot",
+     "lat": 28.058122,
+     "lng": -82.080218,
+     "sales_file_bg": "120570101082",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 305000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 288000,
+      "reason": null
+     },
+     "page_bg": "120570101082",
+     "page_bgs_all_calls": [
+      "120570101082"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "19281945M000007000120A",
+     "mode": "drawn lot",
+     "lat": 28.027283,
+     "lng": -82.450593,
+     "sales_file_bg": "120570007012",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 252000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 267000,
+      "reason": null
+     },
+     "page_bg": "120570007012",
+     "page_bgs_all_calls": [
+      "120570007012"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "203125D3H000000001500U",
+     "mode": "drawn lot",
+     "lat": 27.754038,
+     "lng": -82.264281,
+     "sales_file_bg": "120570139071",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 379900,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 420000,
+      "reason": null
+     },
+     "page_bg": "120570139071",
+     "page_bgs_all_calls": [
+      "120570139071"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    }
+   ],
+   "page_errors": []
+  },
+  "12086": {
+   "county": "Miami-Dade",
+   "points": 5,
+   "homes": [
+    {
+     "id": "0131130230920",
+     "mode": "point",
+     "lat": 25.836962,
+     "lng": -80.202985,
+     "sales_file_bg": "120860014011",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 415000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 426000,
+      "reason": null
+     },
+     "page_bg": "120860014011",
+     "page_bgs_all_calls": [
+      "120860014011"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "3022060602410",
+     "mode": "point",
+     "lat": 25.951574,
+     "lng": -80.182431,
+     "sales_file_bg": "120860098083",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 950000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 967000,
+      "reason": null
+     },
+     "page_bg": "120860098083",
+     "page_bgs_all_calls": [
+      "120860098083"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "3350340420280",
+     "mode": "point",
+     "lat": 25.609607,
+     "lng": -80.323117,
+     "sales_file_bg": "120860082024",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 1545000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1631000,
+      "reason": null
+     },
+     "page_bg": "120860082024",
+     "page_bgs_all_calls": [
+      "120860082024"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "1079280170635",
+     "mode": "point",
+     "lat": 25.449274,
+     "lng": -80.438563,
+     "sales_file_bg": "120860114015",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 585000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 610000,
+      "reason": null
+     },
+     "page_bg": "120860114015",
+     "page_bgs_all_calls": [
+      "120860114015"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "3059200111090",
+     "mode": "point",
+     "lat": 25.639424,
+     "lng": -80.454775,
+     "sales_file_bg": "120860196001",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 885000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 977000,
+      "reason": null
+     },
+     "page_bg": "120860196001",
+     "page_bgs_all_calls": [
+      "120860196001"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "0131130230920",
+     "mode": "drawn lot",
+     "lat": 25.836962,
+     "lng": -80.202985,
+     "sales_file_bg": "120860014011",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 415000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 426000,
+      "reason": null
+     },
+     "page_bg": "120860014011",
+     "page_bgs_all_calls": [
+      "120860014011"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "3022060602410",
+     "mode": "drawn lot",
+     "lat": 25.951574,
+     "lng": -80.182431,
+     "sales_file_bg": "120860098083",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 950000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 967000,
+      "reason": null
+     },
+     "page_bg": "120860098083",
+     "page_bgs_all_calls": [
+      "120860098083"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "3350340420280",
+     "mode": "drawn lot",
+     "lat": 25.609607,
+     "lng": -80.323117,
+     "sales_file_bg": "120860082024",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 1545000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1631000,
+      "reason": null
+     },
+     "page_bg": "120860082024",
+     "page_bgs_all_calls": [
+      "120860082024"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "1079280170635",
+     "mode": "drawn lot",
+     "lat": 25.449274,
+     "lng": -80.438563,
+     "sales_file_bg": "120860114015",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 585000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 610000,
+      "reason": null
+     },
+     "page_bg": "120860114015",
+     "page_bgs_all_calls": [
+      "120860114015"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "3059200111090",
+     "mode": "drawn lot",
+     "lat": 25.639424,
+     "lng": -80.454775,
+     "sales_file_bg": "120860196001",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 885000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 977000,
+      "reason": null
+     },
+     "page_bg": "120860196001",
+     "page_bgs_all_calls": [
+      "120860196001"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    }
+   ],
+   "page_errors": []
+  },
+  "12095": {
+   "county": "Orange FL",
+   "points": 5,
+   "homes": [
+    {
+     "id": "012128063400470",
+     "mode": "point",
+     "lat": 28.687613,
+     "lng": -81.469073,
+     "sales_file_bg": "120950178062",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 420000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 439000,
+      "reason": null
+     },
+     "page_bg": "120950178062",
+     "page_bgs_all_calls": [
+      "120950178062"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "172328933602580",
+     "mode": "point",
+     "lat": 28.496252,
+     "lng": -81.528797,
+     "sales_file_bg": "120950148092",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 2400000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 2431000,
+      "reason": null
+     },
+     "page_bg": "120950148092",
+     "page_bgs_all_calls": [
+      "120950148092"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "312231200202590",
+     "mode": "point",
+     "lat": 28.530433,
+     "lng": -81.260389,
+     "sales_file_bg": "120950167161",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 500000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 507000,
+      "reason": null
+     },
+     "page_bg": "120950167161",
+     "page_bgs_all_calls": [
+      "120950167161"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "082331205101060",
+     "mode": "point",
+     "lat": 28.498109,
+     "lng": -81.241027,
+     "sales_file_bg": "120950167532",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 396000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 410000,
+      "reason": null
+     },
+     "page_bg": "120950167532",
+     "page_bgs_all_calls": [
+      "120950167532"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "212128252401300",
+     "mode": "point",
+     "lat": 28.652836,
+     "lng": -81.519825,
+     "sales_file_bg": "120950175051",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 380000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 389000,
+      "reason": null
+     },
+     "page_bg": "120950175051",
+     "page_bgs_all_calls": [
+      "120950175051"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "012128063400470",
+     "mode": "drawn lot",
+     "lat": 28.687613,
+     "lng": -81.469073,
+     "sales_file_bg": "120950178062",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 420000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 439000,
+      "reason": null
+     },
+     "page_bg": "120950178062",
+     "page_bgs_all_calls": [
+      "120950178062"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "172328933602580",
+     "mode": "drawn lot",
+     "lat": 28.496252,
+     "lng": -81.528797,
+     "sales_file_bg": "120950148092",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 2400000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 2431000,
+      "reason": null
+     },
+     "page_bg": "120950148092",
+     "page_bgs_all_calls": [
+      "120950148092"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "312231200202590",
+     "mode": "drawn lot",
+     "lat": 28.530433,
+     "lng": -81.260389,
+     "sales_file_bg": "120950167161",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 500000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 507000,
+      "reason": null
+     },
+     "page_bg": "120950167161",
+     "page_bgs_all_calls": [
+      "120950167161"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "082331205101060",
+     "mode": "drawn lot",
+     "lat": 28.498109,
+     "lng": -81.241027,
+     "sales_file_bg": "120950167532",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 396000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 410000,
+      "reason": null
+     },
+     "page_bg": "120950167532",
+     "page_bgs_all_calls": [
+      "120950167532"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "212128252401300",
+     "mode": "drawn lot",
+     "lat": 28.652836,
+     "lng": -81.519825,
+     "sales_file_bg": "120950175051",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 380000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 389000,
+      "reason": null
+     },
+     "page_bg": "120950175051",
+     "page_bgs_all_calls": [
+      "120950175051"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    }
+   ],
+   "page_errors": []
+  },
+  "12099": {
+   "county": "Palm Beach",
+   "points": 5,
+   "homes": [
+    {
+     "id": "00374133010020030",
+     "mode": "point",
+     "lat": 26.864566,
+     "lng": -80.630548,
+     "sales_file_bg": "120990080011",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 130000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 130000,
+      "reason": null
+     },
+     "page_bg": "120990080011",
+     "page_bgs_all_calls": [
+      "120990080011"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "00434219040000431",
+     "mode": "point",
+     "lat": 26.804447,
+     "lng": -80.09378,
+     "sales_file_bg": "120990010041",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 310000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 297000,
+      "reason": null
+     },
+     "page_bg": "120990010041",
+     "page_bgs_all_calls": [
+      "120990010041"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "74424227010000090",
+     "mode": "point",
+     "lat": 26.792735,
+     "lng": -80.142528,
+     "sales_file_bg": "120990078311",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 1245000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1319000,
+      "reason": null
+     },
+     "page_bg": "120990078311",
+     "page_bgs_all_calls": [
+      "120990078311"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "00424611280002220",
+     "mode": "point",
+     "lat": 26.472115,
+     "lng": -80.135857,
+     "sales_file_bg": "120990059301",
+     "result": "parcel service did not answer",
+     "value": null,
+     "method": null,
+     "rating": null,
+     "withheld_reason": null,
+     "model_estimate_same_inputs": null,
+     "page_bg": null,
+     "page_bgs_all_calls": [],
+     "valuation_calls": 0,
+     "address": null
+    },
+    {
+     "id": "38434421153640160",
+     "mode": "point",
+     "lat": 26.629895,
+     "lng": -80.050288,
+     "sales_file_bg": "120990053005",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 380000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 459000,
+      "reason": null
+     },
+     "page_bg": "120990053005",
+     "page_bgs_all_calls": [
+      "120990053005"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "00374133010020030",
+     "mode": "drawn lot",
+     "lat": 26.864566,
+     "lng": -80.630548,
+     "sales_file_bg": "120990080011",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 130000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 130000,
+      "reason": null
+     },
+     "page_bg": "120990080011",
+     "page_bgs_all_calls": [
+      "120990080011"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "00434219040000431",
+     "mode": "drawn lot",
+     "lat": 26.804447,
+     "lng": -80.09378,
+     "sales_file_bg": "120990010041",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 310000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 297000,
+      "reason": null
+     },
+     "page_bg": "120990010041",
+     "page_bgs_all_calls": [
+      "120990010041"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "74424227010000090",
+     "mode": "drawn lot",
+     "lat": 26.792735,
+     "lng": -80.142528,
+     "sales_file_bg": "120990078311",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 1245000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1319000,
+      "reason": null
+     },
+     "page_bg": "120990078311",
+     "page_bgs_all_calls": [
+      "120990078311"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "00424611280002220",
+     "mode": "drawn lot",
+     "lat": 26.472115,
+     "lng": -80.135857,
+     "sales_file_bg": "120990059301",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 539335,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 460000,
+      "reason": null
+     },
+     "page_bg": "120990059301",
+     "page_bgs_all_calls": [
+      "120990059301"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "38434421153640160",
+     "mode": "drawn lot",
+     "lat": 26.629895,
+     "lng": -80.050288,
+     "sales_file_bg": "120990053005",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 380000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 459000,
+      "reason": null
+     },
+     "page_bg": "120990053005",
+     "page_bgs_all_calls": [
+      "120990053005"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    }
+   ],
+   "page_errors": []
+  },
+  "12103": {
+   "county": "Pinellas",
+   "points": 5,
+   "homes": [
+    {
+     "id": "14 30 13 00000 410 0400",
+     "mode": "point",
+     "lat": 27.87195,
+     "lng": -82.845292,
+     "sales_file_bg": "121030252051",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 1675000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1267000,
+      "reason": null
+     },
+     "page_bg": "121030252051",
+     "page_bgs_all_calls": [
+      "121030252051"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "16 28 17 18689 000 0340",
+     "mode": "point",
+     "lat": 28.046374,
+     "lng": -82.725701,
+     "sales_file_bg": "121030268211",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 899000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 938000,
+      "reason": null
+     },
+     "page_bg": "121030268211",
+     "page_bgs_all_calls": [
+      "121030268211"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "17 31 04 81522 013 0160",
+     "mode": "point",
+     "lat": 27.806694,
+     "lng": -82.606329,
+     "sales_file_bg": "121030240052",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 230000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 259000,
+      "reason": null
+     },
+     "page_bg": "121030240052",
+     "page_bgs_all_calls": [
+      "121030240052"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "15 31 05 73890 017 0210",
+     "mode": "point",
+     "lat": 27.811798,
+     "lng": -82.811402,
+     "sales_file_bg": "121030277013",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 430000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 363000,
+      "reason": null
+     },
+     "page_bg": "121030277013",
+     "page_bgs_all_calls": [
+      "121030277013"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "16 31 21 14562 011 0120",
+     "mode": "point",
+     "lat": 27.770367,
+     "lng": -82.697792,
+     "sales_file_bg": "121030220002",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 395000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 391000,
+      "reason": null
+     },
+     "page_bg": "121030220002",
+     "page_bgs_all_calls": [
+      "121030220002"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "14 30 13 00000 410 0400",
+     "mode": "drawn lot",
+     "lat": 27.87195,
+     "lng": -82.845292,
+     "sales_file_bg": "121030252051",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 1675000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1267000,
+      "reason": null
+     },
+     "page_bg": "121030252051",
+     "page_bgs_all_calls": [
+      "121030252051"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "16 28 17 18689 000 0340",
+     "mode": "drawn lot",
+     "lat": 28.046374,
+     "lng": -82.725701,
+     "sales_file_bg": "121030268211",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 899000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 938000,
+      "reason": null
+     },
+     "page_bg": "121030268211",
+     "page_bgs_all_calls": [
+      "121030268211"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "17 31 04 81522 013 0160",
+     "mode": "drawn lot",
+     "lat": 27.806694,
+     "lng": -82.606329,
+     "sales_file_bg": "121030240052",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 230000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 259000,
+      "reason": null
+     },
+     "page_bg": "121030240052",
+     "page_bgs_all_calls": [
+      "121030240052"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "15 31 05 73890 017 0210",
+     "mode": "drawn lot",
+     "lat": 27.811798,
+     "lng": -82.811402,
+     "sales_file_bg": "121030277013",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 430000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 363000,
+      "reason": null
+     },
+     "page_bg": "121030277013",
+     "page_bgs_all_calls": [
+      "121030277013"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "16 31 21 14562 011 0120",
+     "mode": "drawn lot",
+     "lat": 27.770367,
+     "lng": -82.697792,
+     "sales_file_bg": "121030220002",
+     "result": "sourced figure shown (recorded sale / base-year value)",
+     "value": 395000,
+     "method": "Recorded sale (2025)",
+     "rating": "Recorded sale price, 2025",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 391000,
+      "reason": null
+     },
+     "page_bg": "121030220002",
+     "page_bgs_all_calls": [
+      "121030220002"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    }
+   ],
+   "page_errors": []
+  },
+  "36081": {
+   "county": "Queens",
+   "points": 5,
+   "homes": [
+    {
+     "id": "4036760029",
+     "mode": "point",
+     "lat": 40.701378,
+     "lng": -73.890097,
+     "sales_file_bg": "360810577001",
+     "result": "model estimate shown",
+     "value": 869000,
+     "method": "Queens County model on tract sales 2023\u20132025 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 15.0% on 2,863 Queens County sales (2026-05-01 to 2026-09-30; 63.1% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 869000,
+      "reason": null
+     },
+     "page_bg": "360810577001",
+     "page_bgs_all_calls": [
+      "360810577001"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "4104880016",
+     "mode": "point",
+     "lat": 40.717421,
+     "lng": -73.761796,
+     "sales_file_bg": "360810484001",
+     "result": "model estimate shown",
+     "value": 717000,
+     "method": "Queens County model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 15.0% on 2,863 Queens County sales (2026-05-01 to 2026-09-30; 63.1% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 717000,
+      "reason": null
+     },
+     "page_bg": "360810484001",
+     "page_bgs_all_calls": [
+      "360810484001"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "4032890018",
+     "mode": "point",
+     "lat": 40.715712,
+     "lng": -73.840147,
+     "sales_file_bg": "360810749001",
+     "result": "model estimate shown",
+     "value": 2007000,
+     "method": "Queens County model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 15.0% on 2,863 Queens County sales (2026-05-01 to 2026-09-30; 63.1% within 20%). For homes of $2M and up the test error was larger: 35.1%. Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 2007000,
+      "reason": null
+     },
+     "page_bg": "360810749001",
+     "page_bgs_all_calls": [
+      "360810749001"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "4047750040",
+     "mode": "point",
+     "lat": 40.771832,
+     "lng": -73.825908,
+     "sales_file_bg": "360811047003",
+     "result": "model estimate shown",
+     "value": 1126000,
+     "method": "Queens County model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 15.0% on 2,863 Queens County sales (2026-05-01 to 2026-09-30; 63.1% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1126000,
+      "reason": null
+     },
+     "page_bg": "360811047003",
+     "page_bgs_all_calls": [
+      "360811047003"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "4120850012",
+     "mode": "point",
+     "lat": 40.668061,
+     "lng": -73.799137,
+     "sales_file_bg": "360810792002",
+     "result": "model estimate shown",
+     "value": 788000,
+     "method": "Queens County model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 15.0% on 2,863 Queens County sales (2026-05-01 to 2026-09-30; 63.1% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 788000,
+      "reason": null
+     },
+     "page_bg": "360810792002",
+     "page_bgs_all_calls": [
+      "360810792002"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "4036760029",
+     "mode": "drawn lot",
+     "lat": 40.701378,
+     "lng": -73.890097,
+     "sales_file_bg": "360810577001",
+     "result": "model estimate shown",
+     "value": 869000,
+     "method": "Queens County model on tract sales 2023\u20132025 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 15.0% on 2,863 Queens County sales (2026-05-01 to 2026-09-30; 63.1% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 869000,
+      "reason": null
+     },
+     "page_bg": "360810577001",
+     "page_bgs_all_calls": [
+      "360810577001"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "4104880016",
+     "mode": "drawn lot",
+     "lat": 40.717421,
+     "lng": -73.761796,
+     "sales_file_bg": "360810484001",
+     "result": "model estimate shown",
+     "value": 717000,
+     "method": "Queens County model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 15.0% on 2,863 Queens County sales (2026-05-01 to 2026-09-30; 63.1% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 717000,
+      "reason": null
+     },
+     "page_bg": "360810484001",
+     "page_bgs_all_calls": [
+      "360810484001"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "4032890018",
+     "mode": "drawn lot",
+     "lat": 40.715712,
+     "lng": -73.840147,
+     "sales_file_bg": "360810749001",
+     "result": "model estimate shown",
+     "value": 2007000,
+     "method": "Queens County model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 15.0% on 2,863 Queens County sales (2026-05-01 to 2026-09-30; 63.1% within 20%). For homes of $2M and up the test error was larger: 35.1%. Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 2007000,
+      "reason": null
+     },
+     "page_bg": "360810749001",
+     "page_bgs_all_calls": [
+      "360810749001"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "4047750040",
+     "mode": "drawn lot",
+     "lat": 40.771832,
+     "lng": -73.825908,
+     "sales_file_bg": "360811047003",
+     "result": "model estimate shown",
+     "value": 1126000,
+     "method": "Queens County model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 15.0% on 2,863 Queens County sales (2026-05-01 to 2026-09-30; 63.1% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1126000,
+      "reason": null
+     },
+     "page_bg": "360811047003",
+     "page_bgs_all_calls": [
+      "360811047003"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "4120850012",
+     "mode": "drawn lot",
+     "lat": 40.668061,
+     "lng": -73.799137,
+     "sales_file_bg": "360810792002",
+     "result": "model estimate shown",
+     "value": 788000,
+     "method": "Queens County model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 15.0% on 2,863 Queens County sales (2026-05-01 to 2026-09-30; 63.1% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 788000,
+      "reason": null
+     },
+     "page_bg": "360810792002",
+     "page_bgs_all_calls": [
+      "360810792002"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    }
+   ],
+   "page_errors": []
+  },
+  "36085": {
+   "county": "Staten Island",
+   "points": 5,
+   "homes": [
+    {
+     "id": "5003770401",
+     "mode": "point",
+     "lat": 40.614326,
+     "lng": -74.128604,
+     "sales_file_bg": "360850151005",
+     "result": "model estimate shown",
+     "value": 764000,
+     "method": "Richmond County (Staten Island) model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 13.1% on 1,173 Richmond County (Staten Island) sales (2026-05-01 to 2026-09-30; 71.1% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 764000,
+      "reason": null
+     },
+     "page_bg": "360850151005",
+     "page_bgs_all_calls": [
+      "360850151005"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "5041300611",
+     "mode": "point",
+     "lat": 40.559172,
+     "lng": -74.108793,
+     "sales_file_bg": "360850128065",
+     "result": "model estimate shown",
+     "value": 590000,
+     "method": "Richmond County (Staten Island) model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 13.1% on 1,173 Richmond County (Staten Island) sales (2026-05-01 to 2026-09-30; 71.1% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 590000,
+      "reason": null
+     },
+     "page_bg": "360850128065",
+     "page_bgs_all_calls": [
+      "360850128065"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "5052470030",
+     "mode": "point",
+     "lat": 40.544385,
+     "lng": -74.149363,
+     "sales_file_bg": "360850156012",
+     "result": "model estimate shown",
+     "value": 711000,
+     "method": "Richmond County (Staten Island) model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 13.1% on 1,173 Richmond County (Staten Island) sales (2026-05-01 to 2026-09-30; 71.1% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 711000,
+      "reason": null
+     },
+     "page_bg": "360850156012",
+     "page_bgs_all_calls": [
+      "360850156012"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "5064210074",
+     "mode": "point",
+     "lat": 40.53315,
+     "lng": -74.174152,
+     "sales_file_bg": "360850176003",
+     "result": "model estimate shown",
+     "value": 1123000,
+     "method": "Richmond County (Staten Island) model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 13.1% on 1,173 Richmond County (Staten Island) sales (2026-05-01 to 2026-09-30; 71.1% within 20%). For homes in the $1M-$2M range the test error was larger: 19.2%. Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1123000,
+      "reason": null
+     },
+     "page_bg": "360850176003",
+     "page_bgs_all_calls": [
+      "360850176003"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "5069180074",
+     "mode": "point",
+     "lat": 40.53433,
+     "lng": -74.205488,
+     "sales_file_bg": "360850208034",
+     "result": "model estimate shown",
+     "value": 1141000,
+     "method": "Richmond County (Staten Island) model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 13.1% on 1,173 Richmond County (Staten Island) sales (2026-05-01 to 2026-09-30; 71.1% within 20%). For homes in the $1M-$2M range the test error was larger: 19.2%. Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1141000,
+      "reason": null
+     },
+     "page_bg": "360850208034",
+     "page_bgs_all_calls": [
+      "360850208034"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "5003770401",
+     "mode": "drawn lot",
+     "lat": 40.614326,
+     "lng": -74.128604,
+     "sales_file_bg": "360850151005",
+     "result": "model estimate shown",
+     "value": 764000,
+     "method": "Richmond County (Staten Island) model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 13.1% on 1,173 Richmond County (Staten Island) sales (2026-05-01 to 2026-09-30; 71.1% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 764000,
+      "reason": null
+     },
+     "page_bg": "360850151005",
+     "page_bgs_all_calls": [
+      "360850151005"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "5041300611",
+     "mode": "drawn lot",
+     "lat": 40.559172,
+     "lng": -74.108793,
+     "sales_file_bg": "360850128065",
+     "result": "model estimate shown",
+     "value": 590000,
+     "method": "Richmond County (Staten Island) model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 13.1% on 1,173 Richmond County (Staten Island) sales (2026-05-01 to 2026-09-30; 71.1% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 590000,
+      "reason": null
+     },
+     "page_bg": "360850128065",
+     "page_bgs_all_calls": [
+      "360850128065"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "5052470030",
+     "mode": "drawn lot",
+     "lat": 40.544385,
+     "lng": -74.149363,
+     "sales_file_bg": "360850156012",
+     "result": "model estimate shown",
+     "value": 711000,
+     "method": "Richmond County (Staten Island) model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 13.1% on 1,173 Richmond County (Staten Island) sales (2026-05-01 to 2026-09-30; 71.1% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 711000,
+      "reason": null
+     },
+     "page_bg": "360850156012",
+     "page_bgs_all_calls": [
+      "360850156012"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "5064210074",
+     "mode": "drawn lot",
+     "lat": 40.53315,
+     "lng": -74.174152,
+     "sales_file_bg": "360850176003",
+     "result": "model estimate shown",
+     "value": 1123000,
+     "method": "Richmond County (Staten Island) model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 13.1% on 1,173 Richmond County (Staten Island) sales (2026-05-01 to 2026-09-30; 71.1% within 20%). For homes in the $1M-$2M range the test error was larger: 19.2%. Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1123000,
+      "reason": null
+     },
+     "page_bg": "360850176003",
+     "page_bgs_all_calls": [
+      "360850176003"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "5069180074",
+     "mode": "drawn lot",
+     "lat": 40.53433,
+     "lng": -74.205488,
+     "sales_file_bg": "360850208034",
+     "result": "model estimate shown",
+     "value": 1141000,
+     "method": "Richmond County (Staten Island) model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 13.1% on 1,173 Richmond County (Staten Island) sales (2026-05-01 to 2026-09-30; 71.1% within 20%). For homes in the $1M-$2M range the test error was larger: 19.2%. Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 1141000,
+      "reason": null
+     },
+     "page_bg": "360850208034",
+     "page_bgs_all_calls": [
+      "360850208034"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    }
+   ],
+   "page_errors": []
+  },
+  "53033": {
+   "county": "King County",
+   "points": 5,
+   "homes": [
+    {
+     "id": "7658600027",
+     "mode": "point",
+     "lat": 47.592353,
+     "lng": -122.302068,
+     "sales_file_bg": "530330089004",
+     "result": "model estimate shown",
+     "value": 846000,
+     "method": "King County model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 8.8% on 7,261 King County sales (2026-05-01 to 2026-10-31; 82.6% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 846000,
+      "reason": null
+     },
+     "page_bg": "530330089004",
+     "page_bgs_all_calls": [
+      "530330089004"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "3698700080",
+     "mode": "point",
+     "lat": 47.21182,
+     "lng": -122.008008,
+     "sales_file_bg": "530330314003",
+     "result": "model estimate shown",
+     "value": 713000,
+     "method": "King County model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 8.8% on 7,261 King County sales (2026-05-01 to 2026-10-31; 82.6% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 713000,
+      "reason": null
+     },
+     "page_bg": "530330314003",
+     "page_bgs_all_calls": [
+      "530330314003"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "9485930270",
+     "mode": "point",
+     "lat": 47.344163,
+     "lng": -122.096424,
+     "sales_file_bg": "530330320063",
+     "result": "model estimate shown",
+     "value": 848000,
+     "method": "King County model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 8.8% on 7,261 King County sales (2026-05-01 to 2026-10-31; 82.6% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 848000,
+      "reason": null
+     },
+     "page_bg": "530330320063",
+     "page_bgs_all_calls": [
+      "530330320063"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "4024101293",
+     "mode": "point",
+     "lat": 47.755863,
+     "lng": -122.311691,
+     "sales_file_bg": "530330205002",
+     "result": "model estimate shown",
+     "value": 852000,
+     "method": "King County model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 8.8% on 7,261 King County sales (2026-05-01 to 2026-10-31; 82.6% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 852000,
+      "reason": null
+     },
+     "page_bg": "530330205002",
+     "page_bgs_all_calls": [
+      "530330205002"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "7010700110",
+     "mode": "point",
+     "lat": 47.657896,
+     "lng": -122.393864,
+     "sales_file_bg": "530330058014",
+     "result": "model estimate shown",
+     "value": 933000,
+     "method": "King County model on block group sales 2023\u20132025 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 8.8% on 7,261 King County sales (2026-05-01 to 2026-10-31; 82.6% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 933000,
+      "reason": null
+     },
+     "page_bg": "530330058014",
+     "page_bgs_all_calls": [
+      "530330058014"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "7658600027",
+     "mode": "drawn lot",
+     "lat": 47.592353,
+     "lng": -122.302068,
+     "sales_file_bg": "530330089004",
+     "result": "model estimate shown",
+     "value": 846000,
+     "method": "King County model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 8.8% on 7,261 King County sales (2026-05-01 to 2026-10-31; 82.6% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 846000,
+      "reason": null
+     },
+     "page_bg": "530330089004",
+     "page_bgs_all_calls": [
+      "530330089004"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "3698700080",
+     "mode": "drawn lot",
+     "lat": 47.21182,
+     "lng": -122.008008,
+     "sales_file_bg": "530330314003",
+     "result": "model estimate shown",
+     "value": 713000,
+     "method": "King County model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 8.8% on 7,261 King County sales (2026-05-01 to 2026-10-31; 82.6% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 713000,
+      "reason": null
+     },
+     "page_bg": "530330314003",
+     "page_bgs_all_calls": [
+      "530330314003"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "9485930270",
+     "mode": "drawn lot",
+     "lat": 47.344163,
+     "lng": -122.096424,
+     "sales_file_bg": "530330320063",
+     "result": "model estimate shown",
+     "value": 848000,
+     "method": "King County model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 8.8% on 7,261 King County sales (2026-05-01 to 2026-10-31; 82.6% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 848000,
+      "reason": null
+     },
+     "page_bg": "530330320063",
+     "page_bgs_all_calls": [
+      "530330320063"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "4024101293",
+     "mode": "drawn lot",
+     "lat": 47.755863,
+     "lng": -122.311691,
+     "sales_file_bg": "530330205002",
+     "result": "model estimate shown",
+     "value": 852000,
+     "method": "King County model on block group sales 2023\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 8.8% on 7,261 King County sales (2026-05-01 to 2026-10-31; 82.6% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 852000,
+      "reason": null
+     },
+     "page_bg": "530330205002",
+     "page_bgs_all_calls": [
+      "530330205002"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    },
+    {
+     "id": "7010700110",
+     "mode": "drawn lot",
+     "lat": 47.657896,
+     "lng": -122.393864,
+     "sales_file_bg": "530330058014",
+     "result": "model estimate shown",
+     "value": 933000,
+     "method": "King County model on block group sales 2023\u20132025 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 8.8% on 7,261 King County sales (2026-05-01 to 2026-10-31; 82.6% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": {
+      "value": 933000,
+      "reason": null
+     },
+     "page_bg": "530330058014",
+     "page_bgs_all_calls": [
+      "530330058014"
+     ],
+     "valuation_calls": 2,
+     "address": null
+    }
+   ],
+   "page_errors": []
+  },
+  "06037": {
+   "county": "Los Angeles",
+   "points": 5,
+   "homes": [
+    {
+     "id": "2004001027",
+     "mode": "point",
+     "lat": 34.220486,
+     "lng": -118.62052,
+     "sales_file_bg": null,
+     "result": "model estimate shown",
+     "value": 1039000,
+     "method": "LA model on block group transfers 2022\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 10.4% on 50,323 LA homes that changed hands in 2025\u201326 (76.2% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": null,
+     "page_bg": "060371132321",
+     "page_bgs_all_calls": [
+      "060371132321"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "2216013015",
+     "mode": "point",
+     "lat": 34.195725,
+     "lng": -118.439136,
+     "sales_file_bg": null,
+     "result": "model estimate shown",
+     "value": 862000,
+     "method": "LA model on block group transfers 2022\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 10.4% on 50,323 LA homes that changed hands in 2025\u201326 (76.2% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": null,
+     "page_bg": "060371279202",
+     "page_bgs_all_calls": [
+      "060371279202"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "2449023033",
+     "mode": "point",
+     "lat": 34.177335,
+     "lng": -118.323982,
+     "sales_file_bg": null,
+     "result": "model estimate shown",
+     "value": 1254000,
+     "method": "LA model on block group transfers 2022\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 10.4% on 50,323 LA homes that changed hands in 2025\u201326 (76.2% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": null,
+     "page_bg": "060373109005",
+     "page_bgs_all_calls": [
+      "060373109005"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "2633010006",
+     "mode": "point",
+     "lat": 34.224862,
+     "lng": -118.39482,
+     "sales_file_bg": null,
+     "result": "model estimate shown",
+     "value": 881000,
+     "method": "LA model on block group transfers 2022\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 10.4% on 50,323 LA homes that changed hands in 2025\u201326 (76.2% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": null,
+     "page_bg": "060371212211",
+     "page_bgs_all_calls": [
+      "060371212211"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    },
+    {
+     "id": "2811009008",
+     "mode": "point",
+     "lat": 34.434902,
+     "lng": -118.538124,
+     "sales_file_bg": null,
+     "result": "model estimate shown",
+     "value": 725000,
+     "method": "LA model on block group transfers 2022\u20132026 (back-tested)",
+     "rating": "Back-tested estimate: off by a median of 10.4% on 50,323 LA homes that changed hands in 2025\u201326 (76.2% within 20%). Not an appraisal.",
+     "withheld_reason": null,
+     "model_estimate_same_inputs": null,
+     "page_bg": "060379201122",
+     "page_bgs_all_calls": [
+      "060379201122"
+     ],
+     "valuation_calls": 6,
+     "address": null
+    }
+   ],
+   "page_errors": []
+  }
+ },
+ "rerun_after_jsonp_fix": {
+  "counties": [
+   "12099",
+   "06037"
+  ],
+  "ran_on": "2026-11-16T19:31:46.206Z"
+ }
+}

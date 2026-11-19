@@ -8,7 +8,7 @@ import osmium.filter as F
 import region
 DATA = region.DATA
 PBF = os.path.join(DATA, "osm", region.OSM_FILE)
-STATE_TXT = PBF.replace("-latest.osm.pbf", ".state.txt")
+STATE_TXT = os.path.join(DATA, "osm", region.OSM_STATE)
 ROADS = {"motorway", "motorway_link", "trunk", "trunk_link", "primary", "secondary", "tertiary", "residential", "living_street", "unclassified", "primary_link", "secondary_link", "tertiary_link"}
 RAIL_W = {"rail", "light_rail", "subway", "tram"}
 PARK_LEISURE = {"park", "garden", "nature_reserve", "dog_park", "playground", "recreation_ground"}
@@ -55,8 +55,9 @@ def is_infra(t):
     return (t.get("barrier") == "wall" and "noise" in (t.get("wall") or "")) or "noise_barrier" in t or t.get("power") == "line" or (t.get("highway") == "service" and t.get("service") == "alley")
 
 
-def county_box(margin=0.02):
-    """(w, s, e, n) of the county's block groups plus a margin: used to clip state or regional extracts (registry clip=True)"""
+def county_boxes(margin=0.02):
+    """List of (w, s, e, n) boxes. If the county crosses the 180th meridian (e.g. Aleutians West 02016),
+    returns two disjoint boxes split at the antimeridian rather than one box spanning 360 degrees."""
     xs, ys = [], []
     def walk(c):
         if isinstance(c[0], (int, float)): xs.append(c[0]); ys.append(c[1])
@@ -64,14 +65,28 @@ def county_box(margin=0.02):
             for q in c: walk(q)
     for f in json.load(open(os.path.join(DATA, "bg.geojson")))["features"]:
         walk(f["geometry"]["coordinates"])
-    return min(xs) - margin, min(ys) - margin, max(xs) + margin, max(ys) + margin
+    min_x, max_x = min(xs), max(xs)
+    min_y, max_y = min(ys) - margin, max(ys) + margin
+    if min_x < -160 and max_x > 160:
+        pos_xs = [x for x in xs if x > 0]
+        neg_xs = [x for x in xs if x < 0]
+        return [
+            (max(170.0, min(pos_xs) - margin), min_y, 180.0, max_y),
+            (-180.0, min_y, min(-160.0, max(neg_xs) + margin), max_y)
+        ]
+    return [(min_x - margin, min_y, max_x + margin, max_y)]
+
+
+def county_box(margin=0.02):
+    """(w, s, e, n) of the county's block groups plus a margin: used to clip state or regional extracts (registry clip=True)"""
+    return county_boxes(margin)[0]
 
 
 def main():
     t0 = time.time()
-    BOX = county_box() if region.OSM.get("clip") else None
-    inb = (lambda lon, lat: BOX[0] <= lon <= BOX[2] and BOX[1] <= lat <= BOX[3]) if BOX else (lambda lon, lat: True)
-    if BOX: print("clipping", os.path.basename(PBF), "to", [round(v, 3) for v in BOX])
+    BOXES = county_boxes() if region.OSM.get("clip") else None
+    inb = (lambda lon, lat: any(b[0] <= lon <= b[2] and b[1] <= lat <= b[3] for b in BOXES)) if BOXES else (lambda lon, lat: True)
+    if BOXES: print("clipping", os.path.basename(PBF), "to", [[round(v, 3) for v in b] for b in BOXES])
     out = {k: [] for k in ("roads", "rail", "parks", "water", "amenities", "places", "infra", "bus_stops")}
     seen_area_ways = set()
     gj = GeoJSONFactory()
@@ -148,7 +163,7 @@ def main():
     print("rail stations:", n_nodes, "nodes,", n_areas, "areas,", len(kept) - n_nodes - n_areas, "stop positions")
     for k, v in out.items():
         with open(os.path.join(DATA, f"osm_{k}.json"), "w", encoding="utf-8") as fh:
-            json.dump({"elements": v, "source": "OpenStreetMap, " + region.OSM["url"] + (" (cut to " + region.OSM["split"] + " by osm_split.py)" if region.OSM.get("split") else ""), "state": open(STATE_TXT).read().strip() if os.path.exists(STATE_TXT) else ""}, fh)
+            json.dump({"elements": v, "source": ("OpenStreetMap, Overpass API " + region.OVERPASS_URL) if region.OVERPASS_URL else ("OpenStreetMap, " + region.OSM["url"] + (" (cut to " + region.OSM["split"] + " by osm_split.py)" if region.OSM.get("split") else "")), "state": open(STATE_TXT).read().strip() if os.path.exists(STATE_TXT) else ""}, fh)
         print(k, len(v))
     print("objects", n, "secs", round(time.time() - t0))
 

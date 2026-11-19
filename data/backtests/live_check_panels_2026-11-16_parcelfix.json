@@ -1,0 +1,171 @@
+{
+ "ran_on": "2026-11-16T21:33:45.118Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "47037": {
+   "county": "Davidson TN (East South Central)",
+   "state": "TN",
+   "points": [
+    {
+     "bg": "470370195033",
+     "lat": 36.158639,
+     "lng": -86.774596,
+     "service": "Metro Nashville & Davidson County Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $633k, rent $1,967/mo, homes 1,054"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 16 pts (current release); page: 16 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [117,27,357]; comparison [117,4,1,\"g\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Davidson County · 470370195033; page \"Census area: Davidson County · block group 470370195033(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1798 for 47037; page \"HUD Fair Market Rent (FY2027): 1 bed $1,650 · 2 bed $1,798 · 3 bed $2,309/moNashville-Davidson--Murfreesboro--Franklin, TN HUD Metro FMR Area. HUD's voucher ben\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 418 ft; page \"Ground elevation: 418 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "470370169005",
+     "lat": 36.129918,
+     "lng": -86.809341,
+     "service": "Metro Nashville & Davidson County Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $1.4M, rent $1,692/mo, homes 582"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 2 pts (current release); page: 2 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [3,0,22]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Davidson County · 470370169005; page \"Census area: Davidson County · block group 470370169005(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1798 for 47037; page \"HUD Fair Market Rent (FY2027): 1 bed $1,650 · 2 bed $1,798 · 3 bed $2,309/moNashville-Davidson--Murfreesboro--Franklin, TN HUD Metro FMR Area. HUD's voucher ben\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 593 ft; page \"Ground elevation: 593 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "470370187001",
+     "lat": 36.082669,
+     "lng": -86.784125,
+     "service": "Metro Nashville & Davidson County Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $1.2M, rent –, homes 420"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [2,1,106]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Davidson County · 470370187001; page \"Census area: Davidson County · block group 470370187001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1798 for 47037; page \"HUD Fair Market Rent (FY2027): 1 bed $1,650 · 2 bed $1,798 · 3 bed $2,309/moNashville-Davidson--Murfreesboro--Franklin, TN HUD Metro FMR Area. HUD's voucher ben\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 636 ft; page \"Ground elevation: 636 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8899' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8899' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-86.809341%2C36.129918&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-86.809341%2C36.129918&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8899' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  }
+ }
+}

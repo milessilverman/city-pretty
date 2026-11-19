@@ -40,36 +40,18 @@ export interface AdvisorParcel {
   units: number | null;
   assessorValue: number | null;
   lastSale: { price: number | null; date: string | null } | null;
-  valueEstimate: { value: number | null; low: number | null; high: number | null; method: string | null } | null;
+  valueEstimate: { value: number | null; low: number | null; high: number | null; method: string | null; status: string | null } | null;
   valueEstimateWithheld: string | null;
   nearestRailOrBrt: { name: string | null; miles: number | null } | null;
   flood: boolean | null;
   fire: boolean | null;
   historic: boolean | null;
   lotSplitEligibility: boolean | null;
-  byRightLaws?: {
-    applicable: { citation: string | null; verification_status: string | null }[];
-    not_determined: { id: string | null; citation: string | null; reason: string | null; verification_status: string | null }[];
-  } | null;
-}
-
-// A state housing law from app/data/statutes.json with its verification status (verified | partly | unverified).
-export interface AdvisorLaw {
-  id: string | null;
-  name: string | null;
-  citation: string | null;
-  summary: string | null;
-  verification_status: string | null;
-  checked: string | null;
-  fields_unconfirmed: string[];
 }
 
 export interface AdvisorHudFmr {
   fips: string | null;
   metro_or_county_name: string | null;
-  fiscal_year?: number | null;
-  null_reason?: string | null;
-  verification_status?: string | null;
   efficiency_0br: number | null;
   one_bed_1br: number | null;
   two_bed_2br: number | null;
@@ -81,8 +63,7 @@ export interface AdvisorHudFmr {
 export interface AdvisorIntercityCorridor {
   id: string | null;
   name: string | null;
-  verification_status?: string | null;
-  corridor_confirmed?: boolean | null;
+  verification: string | null;
   route_length_miles: number | null;
   funding_status: string | null;
   projected_minutes: number | null;
@@ -91,15 +72,9 @@ export interface AdvisorIntercityCorridor {
   nearestStation?: {
     name: string | null;
     city: string | null;
-    station_basis?: string | null;
+    location_verified: boolean | null;
     avg_land_cost_per_sqft: number | null;
     available_underused_acres: number | null;
-    statutory_housing_regime: string | null;
-  } | null;
-  recommendedRailyard?: {
-    name: string | null;
-    location: string | null;
-    total_land_cost: number | null;
   } | null;
 }
 
@@ -111,60 +86,13 @@ export interface AdvisorUnderusedSite {
   cityName: string | null;
   baseZoning: string | null;
   distanceToRailMeters: number | null;
+  potentialHomes: number | null;
+  margin: number | null;
+  modelOutputsAreEstimates: boolean | null;
   publicOwner: string | null;
   inConservationEasement: boolean | null;
-  verification_status?: string | null;
-  // Model output from underused_sites.json (screening_estimate), never a measured fact.
-  screening_estimate?: {
-    potentialHomes: number | null;
-    margin: number | null;
-    marginBeforeLand: number | null;
-    idea: string | null;
-    assumed_inputs: string[];
-    missing_inputs: string[];
-  } | null;
+  verification: string | null;
 }
-
-export interface AdvisorRenovationQuote {
-  improvementType: string | null;
-  quotedCost: number | null;
-  benchmarkMarketCostLow: number | null;
-  benchmarkMarketCostHigh: number | null;
-  costFairnessRating: string | null;
-  estimatedEquityValueAdd: number | null;
-  netEquityGainUsd: number | null;
-  returnOnInvestmentPct: number | null;
-  everySpaceMonthlyYieldUsd: number | null;
-  governingStatute: string | null;
-  verdict: string | null;
-  verdictSummary: string | null;
-  basis?: string | null;
-}
-
-export interface AdvisorStreetForge {
-  reallocationType: string | null;
-  lengthMiles: number | null;
-  netMunicipalCostUsd: number | null;
-  annualCo2TonsAvoided: number | null;
-  crashReductionPct: number | null;
-  benefitCostRatio: number | null;
-  evChargerSuitabilityScore?: number | null;
-  evNetProjectCostUsd?: number | null;
-  evPaybackYears?: number | null;
-  basis?: string | null;
-}
-
-export interface AdvisorEverySpace {
-  totalMonthlyGrossRevenueUsd: number | null;
-  netMonthlyHoldingCashFlowUsd: number | null;
-  monthlyHoldingDeficitReductionPct: number | null;
-  isCashFlowPositiveDuringHold: boolean | null;
-  holdingStrategyRecommendation: string | null;
-  basis?: string | null;
-}
-
-// The decision brief from the Invest view (window.__cpDecisionBrief). Passed through as data, size-capped.
-export const DECISION_BRIEF_MAX_CHARS = 60000;
 
 export interface AdvisorContext {
   county: AdvisorCounty;
@@ -174,23 +102,15 @@ export interface AdvisorContext {
   hudFmr?: AdvisorHudFmr | null;
   intercityCorridor?: AdvisorIntercityCorridor | null;
   underusedSite?: AdvisorUnderusedSite | null;
-  renovationQuote?: AdvisorRenovationQuote | null;
-  streetForge?: AdvisorStreetForge | null;
-  everySpace?: AdvisorEverySpace | null;
-  laws?: AdvisorLaw[];
-  decision_brief?: unknown;
-  decision_brief_omitted?: string | null;
 }
 
 // Stable text: keep it free of per-request values so it can be prompt-cached.
 export const ADVISOR_SYSTEM_PROMPT = [
   "You answer questions from visitors to City Pretty, a public map of US neighborhoods. For each block group it estimates which public improvements (street trees, parks, bus service, safer streets, clinics, schools and more) would make the area better and raise home values per dollar spent, and it can screen a single lot: its public record, zoning and a rough home-value estimate.",
   "Each question comes with the data the page is showing, as JSON. Base every figure you give on that JSON. When a value is null or missing, say the page does not have it; do not estimate it or bring in numbers from elsewhere.",
-  "If parcel.valueEstimateWithheld is set, the page deliberately gives no home value for this lot. Do not give one; explain the reason it states.",
+  "If parcel.valueEstimateWithheld is set, the page deliberately gives no home value for this lot. Do not give one; explain the reason it states. A parcel.valueEstimate has no accuracy range; unless its status reports a back-test result, it is an unvalidated estimate that has not been tested against recorded sales. Say which whenever you use it.",
+  "Some records carry a verification field. Treat anything not marked \"verified\" as unconfirmed and say so. Fields such as underusedSite.potentialHomes and underusedSite.margin are model estimates, not facts.",
   "The page's figures are screening estimates from public data, not appraisals, zoning determinations, tax advice or legal advice. When a question is about building, adding a unit, splitting a lot, permits or property taxes, give what the data shows and name the city or county office that decides.",
-  "Items carry a verification_status. Treat a law, site, corridor, study or cost whose status is \"partly\", \"unverified\", \"corridor_not_confirmed\" or missing as unconfirmed: say it is not confirmed and never present it as a right or a fact. Only laws listed in parcel.byRightLaws.applicable (status \"verified\") may be described as applying to the lot; laws in not_determined are not determined. A corridor with corridor_confirmed false is not an official corridor.",
-  "Values inside screening_estimate, and any block whose basis is \"illustrative_assumed_inputs\", are model outputs built on assumptions, not measurements. Call them screening estimates and name the assumptions when you use them.",
-  "decision_brief, when present, is the page's own decision brief; the same rules apply to each item in it.",
   "Mention a state or federal law only when you are confident it applies in this state, and say that rules change. As of 2026 the federal 30% residential solar credit (IRC 25D) no longer applies to systems installed after 2025.",
   "Answer in a few sentences, then at most five short bullet points if they help. Use plain text with **bold** and '-' bullets only.",
 ].join("\n\n");
@@ -199,8 +119,6 @@ const str = (v: unknown, max = 200): string | null => (typeof v === "string" && 
 const num = (v: unknown): number | null => (typeof v === "number" && Number.isFinite(v) ? v : null);
 const bool = (v: unknown): boolean | null => (typeof v === "boolean" ? v : null);
 const obj = (v: unknown): Record<string, unknown> => (v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : {});
-const arr = (v: unknown): unknown[] => (Array.isArray(v) ? v : []);
-const strList = (v: unknown, n = 12, max = 60): string[] => arr(v).map((x) => str(x, max)).filter((x): x is string => x !== null).slice(0, n);
 
 export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
   const r = obj(raw);
@@ -250,7 +168,7 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       units: num(p.units),
       assessorValue: num(p.assessorValue),
       lastSale: sale ? { price: num(sale.price), date: str(sale.date, 10) } : null,
-      valueEstimate: est ? { value: num(est.value), low: num(est.low), high: num(est.high), method: str(est.method, 80) } : null,
+      valueEstimate: est ? { value: num(est.value), low: num(est.low), high: num(est.high), method: str(est.method, 120), status: str(est.status, 120) } : null,
       valueEstimateWithheld: str(p.valueEstimateWithheld, 300),
       nearestRailOrBrt: rail ? { name: str(rail.name, 80), miles: num(rail.miles) } : null,
       flood: bool(p.flood),
@@ -258,19 +176,6 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       historic: bool(p.historic),
       lotSplitEligibility: bool(p.lotSplitEligibility),
     };
-    if (p.byRightLaws) {
-      const bl = obj(p.byRightLaws);
-      ctx.parcel.byRightLaws = {
-        applicable: arr(bl.applicable).slice(0, 6).map((x) => {
-          const o = obj(x);
-          return { citation: str(o.citation, 160), verification_status: str(o.verification_status, 30) };
-        }),
-        not_determined: arr(bl.not_determined).slice(0, 8).map((x) => {
-          const o = obj(x);
-          return { id: str(o.id, 40), citation: str(o.citation, 160), reason: str(o.reason, 300), verification_status: str(o.verification_status, 30) };
-        }),
-      };
-    }
     if (ctx.parcel.valueEstimateWithheld) ctx.parcel.valueEstimate = null;
   }
   if (r.hudFmr) {
@@ -278,9 +183,6 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
     ctx.hudFmr = {
       fips: str(f.fips, 5),
       metro_or_county_name: str(f.metro_or_county_name, 100),
-      fiscal_year: num(f.fiscal_year),
-      null_reason: str(f.null_reason, 200),
-      verification_status: str(f.verification_status, 30),
       efficiency_0br: num(f.efficiency_0br),
       one_bed_1br: num(f.one_bed_1br),
       two_bed_2br: num(f.two_bed_2br),
@@ -292,12 +194,10 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
   if (r.intercityCorridor) {
     const ic = obj(r.intercityCorridor);
     const stn = ic.nearestStation ? obj(ic.nearestStation) : null;
-    const yd = ic.recommendedRailyard ? obj(ic.recommendedRailyard) : null;
     ctx.intercityCorridor = {
       id: str(ic.id, 40),
       name: str(ic.name, 100),
-      verification_status: str(ic.verification_status, 40),
-      corridor_confirmed: bool(ic.corridor_confirmed),
+      verification: str(ic.verification, 40),
       route_length_miles: num(ic.route_length_miles),
       funding_status: str(ic.funding_status, 200),
       projected_minutes: num(ic.projected_minutes),
@@ -306,15 +206,9 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       nearestStation: stn ? {
         name: str(stn.name, 80),
         city: str(stn.city, 60),
-        station_basis: str(stn.station_basis, 60),
+        location_verified: bool(stn.location_verified),
         avg_land_cost_per_sqft: num(stn.avg_land_cost_per_sqft),
         available_underused_acres: num(stn.available_underused_acres),
-        statutory_housing_regime: str(stn.statutory_housing_regime, 120),
-      } : null,
-      recommendedRailyard: yd ? {
-        name: str(yd.name, 80),
-        location: str(yd.location, 80),
-        total_land_cost: num(yd.total_land_cost),
       } : null,
     };
   }
@@ -328,92 +222,13 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       cityName: str(us.cityName, 60),
       baseZoning: str(us.baseZoning, 40),
       distanceToRailMeters: num(us.distanceToRailMeters),
+      potentialHomes: num(us.potentialHomes),
+      margin: num(us.margin),
+      modelOutputsAreEstimates: bool(us.modelOutputsAreEstimates),
       publicOwner: str(us.publicOwner, 100),
       inConservationEasement: bool(us.inConservationEasement),
-      verification_status: str(us.verification_status, 30),
-      screening_estimate: null,
+      verification: str(us.verification, 40),
     };
-    // Model outputs only arrive inside screening_estimate; top-level potentialHomes/margin/idea are dropped.
-    if (us.screening_estimate) {
-      const se = obj(us.screening_estimate);
-      ctx.underusedSite.screening_estimate = {
-        potentialHomes: num(se.potentialHomes),
-        margin: num(se.margin),
-        marginBeforeLand: num(se.marginBeforeLand),
-        idea: str(se.idea, 300),
-        assumed_inputs: strList(se.assumed_inputs),
-        missing_inputs: strList(se.missing_inputs),
-      };
-    }
-  }
-  if (r.renovationQuote) {
-    const rq = obj(r.renovationQuote);
-    ctx.renovationQuote = {
-      improvementType: str(rq.improvementType, 60),
-      quotedCost: num(rq.quotedCost),
-      benchmarkMarketCostLow: num(rq.benchmarkMarketCostLow),
-      benchmarkMarketCostHigh: num(rq.benchmarkMarketCostHigh),
-      costFairnessRating: str(rq.costFairnessRating, 40),
-      estimatedEquityValueAdd: num(rq.estimatedEquityValueAdd),
-      netEquityGainUsd: num(rq.netEquityGainUsd),
-      returnOnInvestmentPct: num(rq.returnOnInvestmentPct),
-      everySpaceMonthlyYieldUsd: num(rq.everySpaceMonthlyYieldUsd),
-      governingStatute: str(rq.governingStatute, 150),
-      verdict: str(rq.verdict, 60),
-      verdictSummary: str(rq.verdictSummary, 300),
-      basis: str(rq.basis, 40),
-    };
-  }
-  if (r.streetForge) {
-    const sf = obj(r.streetForge);
-    ctx.streetForge = {
-      reallocationType: str(sf.reallocationType, 60),
-      lengthMiles: num(sf.lengthMiles),
-      netMunicipalCostUsd: num(sf.netMunicipalCostUsd),
-      annualCo2TonsAvoided: num(sf.annualCo2TonsAvoided),
-      crashReductionPct: num(sf.crashReductionPct),
-      benefitCostRatio: num(sf.benefitCostRatio),
-      evChargerSuitabilityScore: num(sf.evChargerSuitabilityScore),
-      evNetProjectCostUsd: num(sf.evNetProjectCostUsd),
-      evPaybackYears: num(sf.evPaybackYears),
-      basis: str(sf.basis, 40),
-    };
-  }
-  if (r.everySpace) {
-    const es = obj(r.everySpace);
-    ctx.everySpace = {
-      totalMonthlyGrossRevenueUsd: num(es.totalMonthlyGrossRevenueUsd),
-      netMonthlyHoldingCashFlowUsd: num(es.netMonthlyHoldingCashFlowUsd),
-      monthlyHoldingDeficitReductionPct: num(es.monthlyHoldingDeficitReductionPct),
-      isCashFlowPositiveDuringHold: bool(es.isCashFlowPositiveDuringHold),
-      holdingStrategyRecommendation: str(es.holdingStrategyRecommendation, 300),
-      basis: str(es.basis, 40),
-    };
-  }
-  if (Array.isArray(r.laws)) {
-    ctx.laws = r.laws.slice(0, 12).map((x) => {
-      const l = obj(x);
-      return {
-        id: str(l.id, 40),
-        name: str(l.name, 120),
-        citation: str(l.citation, 200),
-        summary: str(l.summary, 600),
-        verification_status: str(l.verification_status, 30),
-        checked: str(l.checked, 10),
-        fields_unconfirmed: strList(l.fields_unconfirmed, 10, 80),
-      };
-    });
-  }
-  if (r.decision_brief != null && typeof r.decision_brief === "object") {
-    // Plain JSON data only (functions and prototypes vanish in the round trip); dropped whole if too large.
-    let text: string | null = null;
-    try { text = JSON.stringify(r.decision_brief); } catch { text = null; }
-    if (text && text.length <= DECISION_BRIEF_MAX_CHARS) {
-      ctx.decision_brief = JSON.parse(text);
-    } else {
-      ctx.decision_brief = null;
-      ctx.decision_brief_omitted = text ? `decision brief too large (${text.length} characters; limit ${DECISION_BRIEF_MAX_CHARS})` : "decision brief could not be read";
-    }
   }
   return ctx;
 }

@@ -1,5 +1,7 @@
-node_modules/
+node_modules
 .vite/
 test-results/
 playwright-report/
-tests/live/last-run.json
+.claude/
+__pycache__/
+.law_cache/

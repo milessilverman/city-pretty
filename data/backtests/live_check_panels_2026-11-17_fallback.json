@@ -1,0 +1,348 @@
+{
+ "ran_on": "2026-11-17T02:59:25.176Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "37183": {
+   "county": "Wake NC (South Atlantic)",
+   "state": "NC",
+   "points": [
+    {
+     "bg": "371830537192",
+     "lat": 35.926979,
+     "lng": -78.741982,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $444k, rent $2,030/mo, homes 363"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 7 pts (current release); page: 7 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 6.6 pts below its 40% goal; box: \"6.6 pts below its 40% goal\" / \"-0.1°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wake County · 371830537192; page \"Census area: Wake County · block group 371830537192(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1689 for 37183; page \"HUD Fair Market Rent (FY2027): 1 bed $1,552 · 2 bed $1,689 · 3 bed $2,103/moRaleigh-Cary, NC MSA. HUD's voucher benchmark (rent plus utilities), not a market as\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 499 ft; page \"Ground elevation: 499 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "371830523075",
+     "lat": 35.756231,
+     "lng": -78.696221,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $362k, rent $832/mo, homes 493"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"-1.5°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wake County · 371830523075; page \"Census area: Wake County · block group 371830523075(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1689 for 37183; page \"HUD Fair Market Rent (FY2027): 1 bed $1,552 · 2 bed $1,689 · 3 bed $2,103/moRaleigh-Cary, NC MSA. HUD's voucher benchmark (rent plus utilities), not a market as\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 378 ft; page \"Ground elevation: 378 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "371830541132",
+     "lat": 35.817242,
+     "lng": -78.52746,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $407k, rent $1,623/mo, homes 1,280"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"-2.2°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wake County · 371830541132; page \"Census area: Wake County · block group 371830541132(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1689 for 37183; page \"HUD Fair Market Rent (FY2027): 1 bed $1,552 · 2 bed $1,689 · 3 bed $2,103/moRaleigh-Cary, NC MSA. HUD's voucher benchmark (rent plus utilities), not a market as\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: AE; page \"FEMA flood zone: Zone AE (floodway) · special flood hazard areaFederally backed mortgages here require flood insurance.(\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 180 ft; page \"Ground elevation: 180 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8878' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8878' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass.kumi.systems/api/interpreter' from origin 'http://127.0.0.1:8878' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the reques",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8878' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  },
+  "06019": {
+   "state": "CA",
+   "points": [
+    {
+     "bg": "060190043023",
+     "lat": 36.833579,
+     "lng": -119.821882,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $482k, rent $2,070/mo, homes 407"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 11 pts (current release); page: 11 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 10.5 pts below its 30% goal; box: \"10.5 pts below its 30% goal\" / \"+0.1°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,2,39]; comparison [0,1,0,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no house panel"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no house panel"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no house panel"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no house panel"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no house panel"
+    },
+    {
+     "bg": "060190066023",
+     "lat": 36.596456,
+     "lng": -119.448892,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $239k, rent $1,004/mo, homes 573"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 24 pts (current release); page: 24 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 23.7 pts below its 30% goal; box: \"23.7 pts below its 30% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [3,0,19]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no house panel"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no house panel"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no house panel"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no house panel"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no house panel"
+    },
+    {
+     "bg": "060190011001",
+     "lat": 36.707046,
+     "lng": -119.78089,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $186k, rent $1,601/mo, homes 313"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 24 pts (current release); page: 24 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 24.2 pts below its 30% goal; box: \"24.2 pts below its 30% goal\" / \"+1.2°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [14,11,215]; comparison [14,2,1,\"g\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no house panel"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no house panel"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no house panel"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no house panel"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no house panel"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": []
+  }
+ }
+}

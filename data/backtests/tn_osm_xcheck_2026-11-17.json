@@ -1,0 +1,138 @@
+{
+ "script": "scripts/check_osm_extract_vs_overpass.py",
+ "notes": {
+  "47185": "Way 19650649 (Locke Bend Road, tiger:county Warren, TN) is in the Tennessee file; it only crosses the corner of the check box, so Overpass returns it and the extract (node in box) does not.",
+  "47113": "Way 19439975 (Malone Road, tiger:county Crockett, TN; last edited 2012) is in the Tennessee file; same box-edge case."
+ },
+ "counties": {
+  "47155": {
+   "fips": "47155",
+   "box_s_w_n_e": "35.54192899971186,-83.81427500007605,36.063118999770786,-83.23152100013007",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-17T00:54:33Z",
+   "checked_at": "2026-11-17T14:07:34Z",
+   "roads": {
+    "direct": 10650,
+    "extract": 10650,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 133,
+    "extract": 133,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  },
+  "47185": {
+   "fips": "47185",
+   "box_s_w_n_e": "35.746927000145526,-85.70288599983732,36.10201199986495,-85.19311499992219",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-17T00:54:33Z",
+   "checked_at": "2026-11-17T13:55:12Z",
+   "roads": {
+    "direct": 2686,
+    "extract": 2685,
+    "missing_from_extract": [
+     19650649
+    ],
+    "extra_in_extract": [],
+    "n_missing": 1,
+    "n_extra": 0,
+    "match": false
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  },
+  "47137": {
+   "fips": "47137",
+   "box_s_w_n_e": "36.38561399998632,-85.30541300041293,36.64681600004575,-84.71183900038054",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-17T00:54:33Z",
+   "checked_at": "2026-11-17T13:40:29Z",
+   "roads": {
+    "direct": 1829,
+    "extract": 1829,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  },
+  "47113": {
+   "fips": "47113",
+   "box_s_w_n_e": "35.40745099963413,-89.09887600038486,35.817355999827974,-88.58329599976919",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-17T00:54:33Z",
+   "checked_at": "2026-11-17T15:40:45Z",
+   "roads": {
+    "direct": 5101,
+    "extract": 5100,
+    "missing_from_extract": [
+     19439975
+    ],
+    "extra_in_extract": [],
+    "n_missing": 1,
+    "n_extra": 0,
+    "match": false
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  },
+  "47177": {
+   "fips": "47177",
+   "box_s_w_n_e": "35.484572999643206,-86.0177319998526,35.87216199974925,-85.53753499975133",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-17T00:54:33Z",
+   "checked_at": "2026-11-17T15:32:47Z",
+   "roads": {
+    "direct": 2626,
+    "extract": 2626,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 1,
+    "extract": 1,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  }
+ }
+}

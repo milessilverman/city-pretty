@@ -98,14 +98,7 @@ const KIND_TXT = {
   owner: "Something a homeowner does on their own lot",
   policy: "A rule change, not a building project",
 };
-const GRADE_PLAIN = {
-  A: ["Strongest evidence", "Measured on actual home sales in Los Angeles County.", 4],   // outside LA, gradeOf() adds "and applied here"
-  B: ["Good evidence", "Studied in other cities and applied here.", 3],
-  C: ["Some evidence", "Borrowed from a study of something similar.", 2],
-  D: ["Best guess", "An assumption we have not been able to back with a study yet.", 1],
-  U: ["Unchecked lead", "From early research that has not been checked against its sources.", 0],
-  none: ["Not priced", "We did not estimate a home-value effect for this one.", 0],
-};
+// (Catalog A-D grade descriptions removed 16 Nov 2026: labels now come from the verification audit; see gradeOf.)
 const CAT_BLURB = {
   "Greening": "Trees, gardens and green space",
   "Parks & recreation": "Parks, courts, pools and places to play",
@@ -133,11 +126,20 @@ const countyLabel = () => { const el = $("#county-pick-label"); return el ? el.t
 const countyShort = () => countyLabel().replace(/,\s*[A-Z]{2}$/, "");
 const catColor = c => css((CAT_COLOR[c] || "--ink-3"));
 const ideaName = c => isCAActive() ? c.name : String(c.name).replace(" (SB 79 / TOC zoning)", " (transit-oriented zoning)");
+// "How sure we are" comes from the 16 Nov 2026 verification audit (app/data/intervention_verification.json); the
+// catalog's own A-D grade is only mentioned next to it.
 const gradeOf = c => {
-  const g = GRADE_PLAIN[c.grade] || GRADE_PLAIN.none;
-  return c.grade === "A" && typeof activeFips === "function" && activeFips() !== "06037" ? [g[0], "Measured on actual home sales in Los Angeles County and applied here.", g[2]] : g;
+  const st = typeof ivStatus === "function" ? ivStatus(c.id) : "unverified";
+  const gr = c.grade && c.grade !== "none" ? ` Catalog grade ${c.grade} (the build's own rating).` : "";
+  if (st === "verified") {
+    const r = typeof ivRec === "function" ? ivRec(c.id) : null;
+    const caution = r && r.caution ? ` Caution: ${r.caution}.` : "";
+    return ["Sourced inputs", "The effect size and the cost were both found in their cited sources. The dollar return applies them to this place with a model that has not been checked against real outcomes." + caution + gr, 4];
+  }
+  if (st === "partially_verified") return ["Partly verified", ivLabel(c.id).replace(/^Partly verified: /, "Checked one side; ") + "." + gr, 2];
+  return ["Effect not sourced yet", "Its effect size or cost could not be confirmed against a source, so no dollar figures are shown." + gr, 0];
 };
-const showIdea = c => c && (c.grade === "none" || !c.grade || allowed(c.id));
+const showIdea = c => c && (typeof ivStatus !== "function" || ivStatus(c.id) !== "unverified") && (c.grade === "none" || !c.grade || allowed(c.id));
 const lc = t => /^[A-Z][a-z]/.test(t) ? t[0].toLowerCase() + t.slice(1) : t;   // keeps "EV", "ADU"
 const rangeTxt = r => String(r.str).replace(/\s*\/\s*\$1.*$/, "").replace(/\s*\(model range\)/, "");
 const plural = (n, one, many) => `${fmtN(n)} ${n === 1 ? one : (many || one + "s")}`;
@@ -145,7 +147,7 @@ const plural = (n, one, many) => `${fmtN(n)} ${n === 1 ? one : (many || one + "s
 // Same ranking as the map panel (select() in app.js): value ideas the evidence filter allows, best return per $1 first
 function rankedRecs(id) {
   const d = (D.details && D.details[id]) || {}, m = d.m || {};
-  const recs = (d.r || []).map(a => Object.fromEntries(REC_KEYS.map((k, i) => [k, a[i]])));
+  const { recs, other } = gateRecs(recsOf(d), m);   // verification gate (app.js): unverified ideas carry no numbers
   const kind = r => (D.catalog[r.id] && D.catalog[r.id].kind) || "value";
   const eff = r => {
     if (typeof roiMode !== "undefined" && roiMode === "adj") { const cal = calibrateVpd(r.vpd, (D.catalog[r.id] || {}).grade, r.id, m); return cal.adj != null ? cal.adj : r.vpd; }
@@ -154,13 +156,13 @@ function rankedRecs(id) {
   const score = r => (r.id === "farmers_market" || r.id === "night_market") ? eff(r) * 0.4 : eff(r);
   const val = recs.filter(r => D.catalog[r.id] && (kind(r) === "value" || kind(r) === "regional") && allowed(r.id)).sort((a, b) => score(b) - score(a));
   const qol = recs.filter(r => D.catalog[r.id] && kind(r) === "qol").sort((a, b) => b.qol - a.qol || a.cost - b.cost);
-  return { m, val, qol };
+  return { m, val, qol, other: [...new Set(other.map(r => r.id))] };
 }
 
 // Per-county summary, rebuilt when the county or the evidence filter changes
 let _sumKey = null, _sum = null;
 function summary() {
-  const fs = feats(), key = (typeof activeFips === "function" ? activeFips() : "") + "|" + fs.length + "|" + ($("#evid") || {}).value + "|" + (typeof roiMode !== "undefined" ? roiMode : "");
+  const fs = feats(), key = (typeof activeFips === "function" ? activeFips() : "") + "|" + fs.length + "|" + ($("#evid") || {}).value + "|" + (typeof roiMode !== "undefined" ? roiMode : "") + "|" + (typeof IV_LA_SCANNED !== "undefined" && IV_LA_SCANNED ? 1 : 0) + (typeof INTERVENTION_VERIFICATION !== "undefined" && INTERVENTION_VERIFICATION ? 1 : 0);
   if (key === _sumKey && _sum) return _sum;
   const best = {}, groups = new Map(), cities = new Set();
   let pays = 0, homes = 0;
@@ -266,7 +268,7 @@ function ideasTab(s, ideas) {
     </div>
     ${ex.cat !== "All" ? `<p class="ex-cat-blurb">${esc(CAT_BLURB[ex.cat] || "")}</p>` : ""}
     <div class="ex-grid">${list.map(c => ideaCard(c, s)).join("") || `<p class="ex-empty">No idea matches “${esc(ex.q)}”.</p>`}</div>
-    ${hiddenU ? `<p class="ex-foot">${plural(hiddenU, "early research lead")} not yet checked against ${hiddenU === 1 ? "its" : "their"} sources ${hiddenU === 1 ? "is" : "are"} hidden. Turn on “Also show unverified leads” under Layers on the map to include ${hiddenU === 1 ? "it" : "them"}.</p>` : ""}`;
+    ${hiddenU ? `<p class="ex-foot">${plural(hiddenU, "idea")} whose effect or cost could not be confirmed against a source ${hiddenU === 1 ? "is" : "are"} not shown here. A neighborhood's page lists ${hiddenU === 1 ? "it" : "them"} by name, without numbers.</p>` : ""}`;
 }
 
 function ideaCard(c, s) {
@@ -276,7 +278,7 @@ function ideaCard(c, s) {
       <span class="ex-card-cat"><i></i>${esc(c.category)}</span>
       <span class="ex-card-name">${esc(ideaName(c))}</span>
       <span class="ex-card-plain">${esc(PLAIN[c.id] || c.economic_nuance || "")}</span>
-      <span class="ex-card-foot">${tag}${c.grade && c.grade !== "none" ? `<span class="ex-grade" title="${esc(g[1])}">${dots(g[2])}${esc(g[0])}</span>` : ""}</span>
+      <span class="ex-card-foot">${tag}<span class="ex-grade" title="${esc(g[1])}">${dots(g[2])}${esc(g[0])}</span></span>
     </button>`;
 }
 const dots = n => `<span class="ex-dots" aria-hidden="true">${[1, 2, 3, 4].map(i => `<i class="${i <= n ? "on" : ""}"></i>`).join("")}</span>`;
@@ -319,12 +321,12 @@ function howTab(s, nIdeas) {
     ["Look at what each place has", "For every area we gather public data: tree cover and summer heat, parks within a short walk, how often buses come, crashes, crime, home values, schools, shops and more."],
     ["Compare with similar places", "Each area is compared with the neighborhoods most like it. If it is hotter, has fewer parks or more crashes than its look-alikes, that gap points to what could help."],
     ["Price out each idea", `We test ${fmtN(nIdeas)} ideas in every area, from planting trees to adding bus lanes, using local construction and upkeep costs where we have them.`],
-    ["Estimate the payoff", "Studies show how much nearby home prices rise after, say, new street trees or a renovated park. We apply those findings to the homes each idea would reach and divide by the cost: dollars of home value back for each $1 spent."],
+    ["Estimate the payoff", "Studies show how much nearby home prices rise after, say, a renovated park or a new grocery store. We apply those findings to the homes each idea would reach and divide by the cost: dollars of home value back for each $1 spent. We only show this where the study's effect size or the cost was checked against its source."],
   ];
   return `<ol class="ex-steps">${steps.map(([h, t], i) => `<li><span class="ex-step-n">${i + 1}</span><div><h3>${h}</h3><p>${t}</p></div></li>`).join("")}</ol>
     <div class="ex-how-grid">
-      <div class="ex-note"><h3>How sure are we?</h3><p>Every idea carries an evidence label, so you can tell a measured result from an educated guess.</p>
-        <ul class="ex-grades">${["A", "B", "C", "D"].map(k => `<li>${dots(GRADE_PLAIN[k][2])}<b>${GRADE_PLAIN[k][0]}</b><span>${GRADE_PLAIN[k][1]}</span></li>`).join("")}</ul></div>
+      <div class="ex-note"><h3>How sure are we?</h3><p>Every idea carries a verification label from our 16 November 2026 data audit.</p>
+        <ul class="ex-grades">${[[4, "Sourced inputs", "The effect size and the cost were both found in their cited sources; the dollar return is still a model estimate."], [2, "Partly verified", "One side was checked; the label names the side that was not."], [0, "Effect not sourced yet", "Listed by name only, with no dollar figures."]].map(([n, t, d]) => `<li>${dots(n)}<b>${t}</b><span>${d}</span></li>`).join("")}</ul></div>
       <div class="ex-note"><h3>What “$ back per $1” means</h3><p>If an idea shows <b>$3 back per $1</b>, our estimate is that each dollar spent adds about three dollars to the value of the homes it reaches. It is a range from a model, not a promise, and it does not count every benefit: cleaner air, safety and fun matter even when they do not show up in home prices.</p>
         <p>Rising home values are good news for owners but can push rents up. Each idea says how it tends to affect renters.</p></div>
     </div>
@@ -352,7 +354,7 @@ function ideaPage(id) {
       </div>
       <div class="ex-facts">
         <div class="ex-fact"><div class="ex-fact-k">What kind of idea</div><div class="ex-fact-v">${esc(KIND_TXT[c.kind] || "")}</div></div>
-        <div class="ex-fact"><div class="ex-fact-k">How sure we are</div><div class="ex-fact-v">${c.grade && c.grade !== "none" ? dots(g[2]) : ""}${esc(g[0])}</div><div class="ex-fact-s">${esc(g[1])}</div></div>
+        <div class="ex-fact"><div class="ex-fact-k">How sure we are</div><div class="ex-fact-v">${dots(g[2])}${esc(g[0])}</div><div class="ex-fact-s">${esc(g[1])}</div></div>
         <div class="ex-fact ${rentTxt[0]}"><div class="ex-fact-k">For renters</div><div class="ex-fact-v">${rentTxt[1]}</div><div class="ex-fact-s">${rentTxt[2]}</div></div>
         <div class="ex-fact"><div class="ex-fact-k">In ${esc(countyShort())}</div><div class="ex-fact-v">${wins.length ? `Best bet in ${plural(wins.length, "area")}` : "Not the top idea anywhere"}</div><div class="ex-fact-s">${wins.length ? `Up to ${fvpd(wins[0].v)} back per $1` : "It can still show up lower on a neighborhood's list."}</div></div>
       </div>
@@ -373,7 +375,7 @@ function hoodPage(key, areaId) {
   if (!g) { ex.hood = null; return home(); }
   const areas = g.areas.slice().sort((a, b) => (b.v || 0) - (a.v || 0));
   const p = areas.find(a => a.id === areaId) || areas[0];
-  const { m, val, qol } = rankedRecs(p.id);
+  const { m, val, qol, other } = rankedRecs(p.id);
   const top = val[0], tc = top && D.catalog[top.id];
   const rng = top && tc ? formatVpdRange(top.vpd, tc.grade, top.id, m) : null;
   const gaps = ((m.gp || {}).g || []).filter(x => x && x[5]).slice(0, 4);
@@ -382,13 +384,13 @@ function hoodPage(key, areaId) {
   const story = top && tc && top.vpd >= 1
     ? `The idea that gives the most back here: <b>${esc(ideaName(tc))}</b>. Our estimate is that every $1 spent adds about <b>${esc(rangeTxt(rng))}</b> in value to nearby homes.`
     : top && tc ? `No idea here is expected to add more home value than it costs. The closest: <b>${esc(ideaName(tc))}</b>. Ideas below can still make daily life better.`
-    : "We do not have enough data here to rank ideas yet.";
+    : "No sourced estimate is available here yet: none of the ideas whose effect and cost could be checked applies to this area.";
   return `${crumbs(g.n)}
     <article class="ex-detail ex-story" style="--cc:${tc ? catColor(tc.category) : "var(--accent)"}">
       <div class="ex-detail-head">
         <span class="ex-card-cat">${esc(g.c || countyShort())}</span>
         <h2 class="ex-title">${esc(g.n)}</h2>
-        <p class="ex-sub">${homes ? `About ${plural(homes, "home")}` : ""}${hv ? ` · typical home value ${fmt$(hv)}${m.hvs ? ` <span class="ex-muted">(${esc(m.hvs)})</span>` : ""}` : ""}${m.pop ? ` · ${fmtN(m.pop)} residents` : ""}</p>
+        <p class="ex-sub">${homes ? `About ${plural(homes, "home")}` : ""}${hv ? ` · typical home value ${fmt$(hv)}${m.hvs ? ` <span class="ex-muted">(${esc(typeof hvSourceText === "function" ? hvSourceText(m.hvs) : m.hvs)})</span>` : ""}` : ""}${m.pop ? ` · ${fmtN(m.pop)} residents` : ""}</p>
         ${areas.length > 1 ? `<div class="ex-areas"><span>${esc(g.n)} is ${areas.length} small areas. Showing:</span>${areas.slice(0, 12).map((a, i) => `<button type="button" class="ex-chip${a.id === p.id ? " active" : ""}" data-ex-area="${esc(a.id)}" aria-pressed="${a.id === p.id}">Area ${i + 1}${a.v >= 1 ? ` · ${fvpd(a.v)}` : ""}</button>`).join("")}${areas.length > 12 ? `<span class="ex-muted">+${areas.length - 12} more on the map</span>` : ""}</div>` : ""}
       </div>
       <section class="ex-sec ex-short"><h3>The short version</h3><p>${story}</p>
@@ -397,6 +399,7 @@ function hoodPage(key, areaId) {
         ${strengths.length ? `<p class="ex-muted">Already doing well: ${strengths.map(x => `${esc((D.gap_labels && D.gap_labels[x[0]]) || x[0])} (${esc(x[1])}; similar places ${esc(x[2])})`).join(", ")}.</p>` : ""}</section>` : ""}
       ${val.length ? `<section class="ex-sec"><h3>Top ideas for this area</h3><div class="ex-ideas">${val.slice(0, 5).map((r, i) => storyIdea(r, i, m)).join("")}</div></section>` : ""}
       ${qol.length ? `<section class="ex-sec"><h3>Also worth doing for daily life</h3><p class="ex-muted">These are not priced in home value, but this area is short on them.</p><div class="ex-pills">${qol.slice(0, 6).map(r => `<button type="button" class="ex-chip" data-ex-idea="${esc(r.id)}">${esc(ideaName(D.catalog[r.id]))}</button>`).join("")}</div></section>` : ""}
+      ${other.length ? `<section class="ex-sec" data-other-ideas><h3>Other ideas (effect not sourced yet)</h3><p class="ex-muted">Suggested by the model, but their effect or cost could not be confirmed against a source, so no numbers are shown.</p><div class="ex-pills">${other.filter(id => D.catalog[id]).map(id => `<span class="ex-chip">${esc(ideaName(D.catalog[id]))}</span>`).join("")}</div></section>` : ""}
       <p class="ex-foot">Estimates come from public data and published studies; they are a starting point for a conversation with the city, not a promise. The map view has the full numbers, sources and costs.</p>
     </article>`;
 }
@@ -407,7 +410,7 @@ function storyIdea(r, i, m) {
       <div class="ex-idea-head"><span class="ex-idea-n">${i + 1}</span><div><div class="ex-idea-name">${esc(ideaName(c))}</div><div class="ex-idea-what">${esc(r.project || "")}</div></div>
         <div class="ex-idea-v"><b>${esc(rangeTxt(rng))}</b><span>back per $1</span></div></div>
       <p>${esc(PLAIN[c.id] || "")}</p>
-      <p class="ex-idea-meta">Costs about <b>${fmt$(r.cost)}</b>${r.value > 0 ? ` · adds about <b>${fmt$(r.value)}</b> across ~${plural(r.homes, "home")}` : ""} · ${c.grade && c.grade !== "none" ? dots(g[2]) : ""}${esc(g[0])}</p>
+      <p class="ex-idea-meta">Costs about <b>${fmt$(r.cost)}</b>${r.value > 0 ? ` · adds about <b>${fmt$(r.value)}</b> across ~${plural(r.homes, "home")}` : ""} · ${dots(g[2])}${esc(g[0])}</p>
       ${r.why ? `<p class="ex-why"><b>Why here:</b> ${esc(whyFix(r.why))}</p>` : ""}
       <button type="button" class="ex-link" data-ex-idea="${esc(c.id)}">Learn about this idea</button>
     </div>`;

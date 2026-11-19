@@ -1,0 +1,49 @@
+{
+ "ran_on": "2026-11-17T00:55:32.625Z",
+ "script": "scripts/live_check_alaska_parcels.mjs",
+ "results": {
+  "02020": {
+   "service": "Municipality of Anchorage Property Information",
+   "points": [
+    {
+     "lat": 61.21574,
+     "lng": -149.89388,
+     "service_parcel_id": "00211397000",
+     "service_address": "646 F ST",
+     "panel_has_id": true,
+     "panel_has_address": true,
+     "pass": true
+    },
+    {
+     "lat": 61.139344,
+     "lng": -149.899613,
+     "service_parcel_id": "01233104000",
+     "service_address": "1200 W DIMOND BLVD",
+     "panel_has_id": true,
+     "panel_has_address": true,
+     "pass": true
+    },
+    {
+     "lat": 61.188369,
+     "lng": -149.741337,
+     "service_parcel_id": "00705315000",
+     "service_address": "7431 E 36TH AVE",
+     "panel_has_id": true,
+     "panel_has_address": true,
+     "pass": true
+    }
+   ],
+   "failed_requests": [
+    "404 http://127.0.0.1:8867/city-pretty/app/data/crash_gaps/02020.json",
+    "404 http://127.0.0.1:8867/city-pretty/app/data/crash_counts/02020.json",
+    "504 https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+    "504 https://maps.mail.ru/osm/tools/overpass/api/interpreter"
+   ],
+   "bundle": {
+    "fips": "02020",
+    "block_groups": 200,
+    "load_failed": false
+   }
+  }
+ }
+}

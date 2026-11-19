@@ -1,21 +1,14 @@
 # City Pretty
 
 > [!WARNING]
-> ### What has and has not been checked (18 Nov 2026)
-> Earlier builds contained invented studies, numbers and legal claims, and a first clean-up (14-15 Nov) replaced many
-> of them with figures typed from memory and labelled as checked. On 18 Nov every data table was re-checked row by row
-> against its primary source. Anything that could not be traced is now blank ("not on file") or marked unconfirmed.
->
-> - **Checked against the source:** HUD Fair Market Rents (639 counties, from HUD's API), 18 studies, 5 housing laws,
->   22 street unit costs, 5 local transit projects, 94 redevelopment sites, 52 transit cost benchmarks.
-> - **Measured, and not good enough to rely on:** the home-value estimate (tested on 18,600 recorded sales in six
->   counties; shown in two, withheld in four, untested elsewhere) and the neighborhood ranking (tested on tract prices
->   in 50 counties; no better than picking the cheapest areas).
-> - **Still unconfirmed:** 17 of 22 housing laws, all 11 funding programs, 43 of 52 state assessment rules.
->
-> This is a screening tool. Do not commit money or make zoning decisions on it alone. Status by table:
-> [`docs/DATA-AUDIT-AND-TRANSPARENCY.md`](docs/DATA-AUDIT-AND-TRANSPARENCY.md). Plan:
-> [`docs/PLAN-ACCURACY-TO-DECISIONS.md`](docs/PLAN-ACCURACY-TO-DECISIONS.md).
+> ### Data accuracy (16 Nov 2026)
+> A line-by-line audit found that most data previously labeled "verified" was not, including data added by the
+> session that claimed to fix it. For example, only 7 of 52 cited studies hold up, the HUD rents and the valuation
+> "back-test" were invented, and several state housing laws cited the wrong bills. Fabricated content was removed or
+> replaced with pulls from official sources, and every record now carries its verification status.
+> **Do not make investment, legal or zoning decisions from this site unless the record is marked verified and you
+> have opened its source.** Details: [`docs/DATA-AUDIT-AND-TRANSPARENCY.md`](docs/DATA-AUDIT-AND-TRANSPARENCY.md).
+> Plan: [`docs/GAME-PLAN.md`](docs/GAME-PLAN.md).
 
 A civic data map of **639 US counties** (48 contiguous states, DC and Puerto Rico; 269 million people), plus 67 more
 where only live property lines are shown so far. For each block group it scores what a city could build or fix there
@@ -47,12 +40,6 @@ showing canned answers. Phones get a compact layout.
 every improvement idea, each explained in plain words (what it is, how sure the estimate is, what it means for renters, who
 decides, who could pay, and where in the county it pays off most), a searchable list of neighborhoods with a short story for
 each, and a step-by-step "How it works". "See it on the map" opens the same neighborhood in map mode.
-
-**Invest view, 18 Nov 2026:** a third switch beside Map and Explore. For the open county it gives a short brief: where
-to look, what to build there, which properties could be redeveloped, what could be added to a house opened on the map,
-and whether transit is worth building and at what scale. Every figure is tagged measured, modelled or assumed, and
-what is missing is listed rather than filled in. How the ranking was tested: `docs/DECISION-ENGINE.md`; the home-value
-test: `docs/VALUATION-BACKTEST.md`.
 
 ## What is here
 
@@ -94,10 +81,7 @@ Then open http://127.0.0.1:8080/city-pretty/.
 local copy of the page (run `npx playwright install chromium` once first). GitHub runs all three on every push
 (`.github/workflows/checks.yml`).
 
-## The AI advisor and Street View (code ready, not deployed)
-
-The Worker now calls Claude with lookups over the checked tables and checks every figure in a reply; see
-`docs/AI-ADVISOR-SETUP.md` for the deploy steps (the three steps below predate it; step 1 is done).
+## The AI advisor and Street View (not connected yet)
 
 Both need the Cloudflare Worker in `workers/api-proxy.ts`, which holds the API keys so the page never does. Until it is
 deployed and `workerUrl` is set in `app/config.js`, the advisor shows "Not connected" and Street View opens on Google Maps.

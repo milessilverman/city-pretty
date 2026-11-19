@@ -6,17 +6,17 @@
     "city": "New York, NY",
     "fips": "36061",
     "year": 2009,
-    "publicCost": 115000000,
+    "publicCost": null,
     "privateCap": null,
     "ratio": null,
     "taxVehicle": null,
-    "valueUplift": "+10% in home values within one-third of a mile in the year after opening (Levere 2014 working paper)",
+    "valueUplift": null,
     "taxGrowth": null,
-    "trajectory": null,
-    "takeaway": "One study found home values within one-third of a mile rose 10% the year after the park opened.",
-    "evaluation_url": "https://completegeorge.org/wp-content/uploads/2020/12/the-high-line-park-and-timing-of-capitalization-of-public-goods.pdf",
-    "source": "Michael Levere, UC San Diego working paper (Dec 20, 2014); city spending of $115 million as of 2011 from the same paper",
-    "last_verified": "2026-11-18",
+    "trajectory": [],
+    "takeaway": null,
+    "evaluation_url": "https://www.thehighline.org/about/",
+    "source": null,
+    "last_verified": null,
     "lat": 40.748,
     "lng": -74.0048,
     "path": [
@@ -80,11 +80,51 @@
       }
     ],
     "verification": {
-      "exists": true,
-      "finding": "supported",
-      "checked": "2026-11-18",
-      "evidence_url": "https://completegeorge.org/wp-content/uploads/2020/12/the-high-line-park-and-timing-of-capitalization-of-public-goods.pdf",
-      "evidence_quote": "home values within a third of a mile of the park increase by 10% in the year immediately following its opening | As of 2011 the city had spent $115 million on building the park"
+      "status": "partially_verified",
+      "method": "Fetched the project's own page.",
+      "checked_on": "2026-11-16",
+      "evidence": "The High Line's own Overview page (thehighline.org/about)",
+      "unverified_fields": [
+        "year",
+        "publicCost",
+        "privateCap",
+        "ratio",
+        "valueUplift",
+        "taxGrowth",
+        "taxVehicle",
+        "stations",
+        "lat",
+        "lng"
+      ],
+      "notes": "Existence confirmed on the park's own site; no economic figures fetched (uli.org case study returns 403).",
+      "removed_unverified_claims": {
+        "publicCost": 115000000,
+        "privateCap": 2200000000,
+        "ratio": "19:1",
+        "valueUplift": "+103% residential property valuation surge within 3 blocks",
+        "taxGrowth": "+$900M cumulative new municipal property tax collections over 12 years",
+        "taxVehicle": "City Capital Budget & Special West Chelsea District Rezoning",
+        "trajectory": [
+          {
+            "yr": "Year 0",
+            "val": "Baseline (2009 opening)"
+          },
+          {
+            "yr": "Year 3",
+            "val": "+34% valuation premium"
+          },
+          {
+            "yr": "Year 7",
+            "val": "+72% valuation premium"
+          },
+          {
+            "yr": "Year 12",
+            "val": "+103% valuation premium"
+          }
+        ],
+        "takeaway": "Transforming obsolete elevated freight tracks into a public botanical park catalyzed one of the most valuable private real estate submarkets in the world.",
+        "source": "Urban Land Institute (ULI) Case Study & NYC Economic Development Corporation Post-Construction Report"
+      }
     }
   },
   {
@@ -98,13 +138,13 @@
     "privateCap": null,
     "ratio": null,
     "taxVehicle": null,
-    "valueUplift": "Home values within a half mile rose 17.9% to 26.6% more than elsewhere, 2011-2015 (Immergluck & Balan)",
+    "valueUplift": null,
     "taxGrowth": null,
-    "trajectory": null,
-    "takeaway": "One study found homes near the Beltline gained more in value than homes elsewhere in 2011-2015.",
-    "evaluation_url": "https://doi.org/10.1080/02723638.2017.1360041",
-    "source": "Dan Immergluck & Tharunya Balan, Urban Geography 39 (2018), doi 10.1080/02723638.2017.1360041",
-    "last_verified": "2026-11-18",
+    "trajectory": [],
+    "takeaway": null,
+    "evaluation_url": "https://beltline.org/the-project/",
+    "source": null,
+    "last_verified": null,
     "lat": 33.7715,
     "lng": -84.366,
     "path": [
@@ -170,11 +210,51 @@
       }
     ],
     "verification": {
-      "exists": true,
-      "finding": "supported",
-      "checked": "2026-11-18",
-      "evidence_url": "https://doi.org/10.1080/02723638.2017.1360041",
-      "evidence_quote": "From 2011 to 2015, depending on the segment of the Beltline, values rose between 17.9 percent and 26.6 percent more for homes within a half-mile of the Beltline than elsewhere."
+      "status": "partially_verified",
+      "method": "Fetched the project's own page.",
+      "checked_on": "2026-11-16",
+      "evidence": "\"This network of public parks, multi-use trails, transit, and affordable housing along a historic 22-mile railroad corridor\"",
+      "unverified_fields": [
+        "year",
+        "publicCost",
+        "privateCap",
+        "ratio",
+        "valueUplift",
+        "taxGrowth",
+        "taxVehicle",
+        "stations",
+        "lat",
+        "lng"
+      ],
+      "notes": "Project and its 22-mile length confirmed; no money figure on the page. The cited URL returned 404; the project page used instead.",
+      "removed_unverified_claims": {
+        "publicCost": 450000000,
+        "privateCap": 8200000000,
+        "ratio": "18:1",
+        "valueUplift": "+24% higher home appreciation than the Atlanta city baseline across 45 neighborhoods",
+        "taxGrowth": "+$4.2B in new taxable commercial and residential tax base created",
+        "taxVehicle": "Tax Allocation District (TAD) Increment Bonds + Special Service District",
+        "trajectory": [
+          {
+            "yr": "Year 0",
+            "val": "Baseline (2005 TAD establishment)"
+          },
+          {
+            "yr": "Year 5",
+            "val": "+18% over city baseline"
+          },
+          {
+            "yr": "Year 10",
+            "val": "+45% over city baseline"
+          },
+          {
+            "yr": "Year 15",
+            "val": "+84% over city baseline"
+          }
+        ],
+        "takeaway": "Pioneered Tax Allocation District financing to convert abandoned rail corridors into a continuous multi-use cycleway and future transit spine.",
+        "source": "Dan Immergluck & Tharunya Balan, Georgia Tech Center for Urban Innovation, Housing Policy Debate 31(3)"
+      }
     }
   },
   {
@@ -188,13 +268,13 @@
     "privateCap": null,
     "ratio": null,
     "taxVehicle": null,
-    "valueUplift": "Property assessments within about one block rose 148% since 2008, about $1 billion in assessed value (IU Public Policy Institute, as reported by Indianapolis Cultural Trail, Inc.)",
+    "valueUplift": "+148% assessed value within about one block since 2008 (+$1 billion)",
     "taxGrowth": null,
-    "trajectory": null,
-    "takeaway": "Assessed values within about a block of the trail rose 148% since 2008, according to a report the trail organization released.",
+    "trajectory": [],
+    "takeaway": null,
     "evaluation_url": "https://indyculturaltrail.org/economic-impact/",
-    "source": "IU Public Policy Institute report \"Assessment of the Impact of the Indianapolis Cultural Trail\" (per Indianapolis Cultural Trail, Inc. press release)",
-    "last_verified": "2026-11-18",
+    "source": "IU Public Policy Institute (2015), via the Trail's announcement",
+    "last_verified": null,
     "lat": 39.7684,
     "lng": -86.1581,
     "path": [
@@ -246,11 +326,155 @@
       }
     ],
     "verification": {
-      "exists": true,
-      "finding": "supported",
-      "checked": "2026-11-18",
-      "evidence_url": "https://indyculturaltrail.org/economic-impact/",
-      "evidence_quote": "property assessments within approximately one block of the eight mile Trail have increased 148% since 2008, an increase of $1 billion in assessed property value"
+      "status": "partially_verified",
+      "method": "Fetched the Indianapolis Cultural Trail's release announcing the IU Public Policy Institute report.",
+      "checked_on": "2026-11-16",
+      "evidence": "\"property assessments within approximately one block of the eight mile Trail have increased 148% since 2008, an increase of $1 billion in assessed property value\"",
+      "unverified_fields": [
+        "publicCost",
+        "privateCap",
+        "ratio",
+        "taxGrowth",
+        "taxVehicle",
+        "stations",
+        "lat",
+        "lng"
+      ],
+      "notes": "Before-after change near the trail, not a causal estimate. Cost figures are not in the fetched source.",
+      "removed_unverified_claims": {
+        "publicCost": 63000000,
+        "privateCap": 1010000000,
+        "ratio": "16:1",
+        "valueUplift": "+105% assessed value increase for properties within 500 ft between 2008 and 2014",
+        "taxGrowth": "+$1.01B total property value uplift documented by IU Public Policy Institute",
+        "taxVehicle": "Federal TIGER Grants + Private Philanthropy + City Infrastructure Bonds",
+        "trajectory": [
+          {
+            "yr": "Year 0",
+            "val": "Baseline (2008 construction start)"
+          },
+          {
+            "yr": "Year 3",
+            "val": "+42% assessed value lift"
+          },
+          {
+            "yr": "Year 6",
+            "val": "+105% assessed value lift"
+          }
+        ],
+        "takeaway": "An 8-mile protected downtown bike and pedestrian network connected five cultural districts, creating over $1 billion in real estate value without widening auto lanes.",
+        "source": "Drew Klacik et al., IU Public Policy Institute, 'Assessment of Economic Impact: Indianapolis Cultural Trail'"
+      }
+    }
+  },
+  {
+    "id": "union_station_denver",
+    "type": "transit",
+    "name": "Denver Union Station Neighborhood TOD Master Plan",
+    "city": "Denver, CO",
+    "fips": "08031",
+    "year": 2010,
+    "publicCost": null,
+    "privateCap": null,
+    "ratio": null,
+    "taxVehicle": null,
+    "valueUplift": null,
+    "taxGrowth": null,
+    "trajectory": [],
+    "takeaway": null,
+    "evaluation_url": "https://www.dura-denver.org/redevelopment-projects/denver-union-station/",
+    "source": null,
+    "last_verified": null,
+    "lat": 39.7539,
+    "lng": -104.9998,
+    "path": [
+      [
+        39.7565,
+        -105.002
+      ],
+      [
+        39.7539,
+        -104.9998
+      ],
+      [
+        39.7515,
+        -104.9975
+      ],
+      [
+        39.749,
+        -104.995
+      ]
+    ],
+    "stations": [
+      {
+        "name": "Historic Terminal Great Hall",
+        "lat": 39.7539,
+        "lng": -104.9998,
+        "desc": "Boutique hotel & civic living room"
+      },
+      {
+        "name": "Chestnut Place & 16th St Mall Transitway",
+        "lat": 39.755,
+        "lng": -105.001,
+        "desc": "Underground 22-bay regional bus concourse"
+      },
+      {
+        "name": "Millennium Bridge & Commons Park",
+        "lat": 39.757,
+        "lng": -105.004,
+        "desc": "Platte River pedestrian linkage"
+      }
+    ],
+    "verification": {
+      "status": "could_not_check",
+      "method": "evaluation_url_fetch",
+      "checked_on": "2026-11-16",
+      "evidence": "evaluation_url fetch: HTTP 000 (None).",
+      "unverified_fields": [
+        "year",
+        "publicCost",
+        "privateCap",
+        "ratio",
+        "valueUplift",
+        "taxGrowth",
+        "taxVehicle",
+        "trajectory",
+        "takeaway",
+        "source",
+        "path",
+        "stations",
+        "lat",
+        "lng"
+      ],
+      "notes": "No claimed figure was found in any fetched source. The year-by-year \"trajectory\" values have no source at all. research.json hist_004 claimed $500M public / $3.8B private, this file claimed $484M / $3.5B - internally inconsistent. Map geometry (path/stations) is hand-entered and unverified - approximate only. Financial fields set to null; originals kept under removed_unverified_claims. Round 3: dura-denver.org: proxy 502.",
+      "removed_unverified_claims": {
+        "publicCost": 484000000,
+        "privateCap": 3500000000,
+        "ratio": "7.2:1",
+        "valueUplift": "+185% commercial land value appreciation in Central Platte Valley submarket",
+        "taxGrowth": "+$180M annual regional property and sales tax increment revenues",
+        "taxVehicle": "TIFIA / RRIF Federal Loans + DURA Tax Increment Financing + RTD FasTracks",
+        "trajectory": [
+          {
+            "yr": "Year 0",
+            "val": "Baseline (2010 ground lease)"
+          },
+          {
+            "yr": "Year 4",
+            "val": "+65% (Grand opening)"
+          },
+          {
+            "yr": "Year 8",
+            "val": "+130% full buildout"
+          },
+          {
+            "yr": "Year 12",
+            "val": "+185% mature submarket"
+          }
+        ],
+        "takeaway": "Pioneered combining USDOT TIFIA and RRIF loans backed by municipal tax-increment revenues to transform an underused rail yard into a world-class transit hub.",
+        "source": "Denver Urban Renewal Authority (DURA) & Regional Transportation District (RTD) Comprehensive Post-Construction Review"
+      }
     }
   },
   {
@@ -266,11 +490,11 @@
     "taxVehicle": null,
     "valueUplift": null,
     "taxGrowth": null,
-    "trajectory": null,
+    "trajectory": [],
     "takeaway": null,
     "evaluation_url": "https://www.okc.gov/government/maps-3/maps-history",
-    "source": "Greater Oklahoma City Chamber of Commerce & Economic Research Associates 30-Year Capital Audit",
-    "last_verified": "2026-11-18",
+    "source": null,
+    "last_verified": null,
     "lat": 35.4676,
     "lng": -97.5164,
     "path": [
@@ -320,11 +544,170 @@
       }
     ],
     "verification": {
-      "exists": true,
-      "finding": "not_found_in_abstract",
-      "checked": "2026-11-18",
-      "evidence_url": "https://www.okc.gov/government/maps-3/maps-history",
-      "evidence_quote": null
+      "status": "unverified",
+      "method": "evaluation_url_fetch",
+      "checked_on": "2026-11-16",
+      "evidence": "evaluation_url fetch: HTTP 403 (Access Denied).",
+      "unverified_fields": [
+        "year",
+        "publicCost",
+        "privateCap",
+        "ratio",
+        "valueUplift",
+        "taxGrowth",
+        "taxVehicle",
+        "trajectory",
+        "takeaway",
+        "source",
+        "path",
+        "stations",
+        "lat",
+        "lng"
+      ],
+      "notes": "No claimed figure was found in any fetched source. The year-by-year \"trajectory\" values have no source at all. research.json hist_009 claimed $3.5B public / $9.2B private, this file claimed $350M / $5.8B - internally inconsistent. Map geometry (path/stations) is hand-entered and unverified - approximate only. Financial fields set to null; originals kept under removed_unverified_claims. Round 3: okc.gov 403 (cited and alternate). source link broken as of 2026-11-16: https://www.okc.gov/government/maps-3/maps-history returns 404; no new address found.",
+      "removed_unverified_claims": {
+        "publicCost": 350000000,
+        "privateCap": 5800000000,
+        "ratio": "16.5:1",
+        "valueUplift": "+240% assessed valuation surge across Downtown Oklahoma City and Bricktown",
+        "taxGrowth": "Generated $5.8B in private commercial and residential investment over 30 years",
+        "taxVehicle": "Voter-Approved Debt-Free Limited-Term 1-Cent Municipal Sales Tax",
+        "trajectory": [
+          {
+            "yr": "Year 0",
+            "val": "Baseline (1993 MAPS passage)"
+          },
+          {
+            "yr": "Year 10",
+            "val": "+85% (Bricktown Canal & Arena)"
+          },
+          {
+            "yr": "Year 20",
+            "val": "+165% (MAPS for Kids)"
+          },
+          {
+            "yr": "Year 30",
+            "val": "+240% (MAPS 3 & Scissortail Park)"
+          }
+        ],
+        "takeaway": "Using debt-free pay-as-you-go sales taxes for catalytic downtown assets (Bricktown Canal, Scissortail Park, streetcars) turned around a declining Sunbelt core.",
+        "source": "Greater Oklahoma City Chamber of Commerce & Economic Research Associates 30-Year Capital Audit"
+      }
+    }
+  },
+  {
+    "id": "healthline_cle",
+    "type": "transit",
+    "name": "Cleveland HealthLine BRT (Euclid Avenue Corridor)",
+    "city": "Cleveland, OH",
+    "fips": "39035",
+    "year": 2008,
+    "publicCost": 200000000,
+    "privateCap": 5800000000,
+    "ratio": "$114.54 of TOD investment per $1 of BRT spending ($50M); about 29:1 against all public funds ($200M+)",
+    "taxVehicle": null,
+    "valueUplift": null,
+    "taxGrowth": null,
+    "takeaway": null,
+    "evaluation_url": "https://www.itdp.org/wp-content/uploads/2013/11/More-Development-For-Your-Transit-Dollar_ITDP.pdf",
+    "source": "ITDP (2013), More Development For Your Transit Dollar",
+    "last_verified": "2026-11-16",
+    "lat": 41.5035,
+    "lng": -81.655,
+    "path": [
+      [
+        41.5005,
+        -81.688
+      ],
+      [
+        41.502,
+        -81.67
+      ],
+      [
+        41.5045,
+        -81.65
+      ],
+      [
+        41.5065,
+        -81.63
+      ],
+      [
+        41.5085,
+        -81.61
+      ],
+      [
+        41.512,
+        -81.59
+      ]
+    ],
+    "stations": [
+      {
+        "name": "Public Square & Downtown Core",
+        "lat": 41.5005,
+        "lng": -81.688,
+        "desc": "Civic center & transit transfer concourse"
+      },
+      {
+        "name": "Cleveland State University & Theater District",
+        "lat": 41.5025,
+        "lng": -81.673,
+        "desc": "Playhouse Square & student housing"
+      },
+      {
+        "name": "MidTown Health-Tech Corridor",
+        "lat": 41.5045,
+        "lng": -81.648,
+        "desc": "Biomedical & research incubator hub"
+      },
+      {
+        "name": "Cleveland Clinic & University Circle",
+        "lat": 41.5075,
+        "lng": -81.618,
+        "desc": "World-renowned hospital & museum campus"
+      }
+    ],
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched and text-searched the ITDP report PDF.",
+      "checked_on": "2026-11-16",
+      "evidence": "\"Cleveland's HealthLine BRT has helped leverage $5.8 billion dollars of TOD investment since its opening in 2008\"; \"Over $200 million in overall public funds were invested in Cleveland, only $50 million of which were for the transit system.\"",
+      "unverified_fields": [
+        "valueUplift",
+        "taxGrowth",
+        "taxVehicle",
+        "stations",
+        "lat",
+        "lng"
+      ],
+      "notes": "Money figures now from ITDP. Investment along the corridor is not the same as value created by the line. The earlier $9.5B / +112% claims were not in the source.",
+      "removed_unverified_claims": {
+        "publicCost": 200000000,
+        "privateCap": 9500000000,
+        "ratio": "47.5:1",
+        "valueUplift": "+112% property valuation increase along Euclid Avenue corridor within 0.5 mi",
+        "taxGrowth": "+$9.5B in commercial real estate, health sciences, and university development",
+        "taxVehicle": "FTA Capital Investment Grant + Ohio DOT + City of Cleveland Euclid Corridor TIF",
+        "trajectory": [
+          {
+            "yr": "Year 0",
+            "val": "Baseline (2008 HealthLine opening)"
+          },
+          {
+            "yr": "Year 5",
+            "val": "+45% commercial assessed value"
+          },
+          {
+            "yr": "Year 10",
+            "val": "+85% full corridor transformation"
+          },
+          {
+            "yr": "Year 15",
+            "val": "+112% sustained institutional corridor"
+          }
+        ],
+        "takeaway": "High-quality center-running BRT with dedicated lanes and off-board fare collection delivered light rail-scale real estate development at a fraction of capital cost.",
+        "source": "Walter Hook, Stephanie Lotshaw, & Annie Weinstock, Institute for Transportation and Development Policy (ITDP)"
+      }
     }
   },
   {
@@ -340,11 +723,11 @@
     "taxVehicle": null,
     "valueUplift": null,
     "taxGrowth": null,
-    "trajectory": null,
+    "trajectory": [],
     "takeaway": null,
     "evaluation_url": "https://www.greenvillesc.gov/167/Falls-Park",
-    "source": "John L. Crompton & Knox White, 'Economic Transformation of Downtown Greenville', Journal of Leisure Research 48(4)",
-    "last_verified": "2026-11-18",
+    "source": null,
+    "last_verified": null,
     "lat": 34.8458,
     "lng": -82.4014,
     "path": [
@@ -386,11 +769,171 @@
       }
     ],
     "verification": {
-      "exists": true,
-      "finding": "not_found_in_abstract",
-      "checked": "2026-11-18",
-      "evidence_url": "https://www.greenvillesc.gov/167/Falls-Park",
-      "evidence_quote": null
+      "status": "partially_verified",
+      "method": "Fetched the project's own page.",
+      "checked_on": "2026-11-16",
+      "evidence": "\"Falls Park ... Liberty Bridge\" (City of Greenville page)",
+      "unverified_fields": [
+        "year",
+        "publicCost",
+        "privateCap",
+        "ratio",
+        "valueUplift",
+        "taxGrowth",
+        "taxVehicle",
+        "stations",
+        "lat",
+        "lng"
+      ],
+      "notes": "Park and Liberty Bridge confirmed on the city's page; no cost or value figures on it.",
+      "removed_unverified_claims": {
+        "publicCost": 13500000,
+        "privateCap": 600000000,
+        "ratio": "44:1",
+        "valueUplift": "+138% residential and hotel assessed valuation growth in Downtown Greenville",
+        "taxGrowth": "Transformed an auto-highway viaduct into a pedestrian waterfall park drawing 1.5M visitors/yr",
+        "taxVehicle": "City Hospitality Tax Revenues + Capital Improvement Sales Tax",
+        "trajectory": [
+          {
+            "yr": "Year 0",
+            "val": "Baseline (2004 Liberty Bridge dedication)"
+          },
+          {
+            "yr": "Year 5",
+            "val": "+55% downtown valuation surge"
+          },
+          {
+            "yr": "Year 10",
+            "val": "+100% full West End revitalization"
+          },
+          {
+            "yr": "Year 15",
+            "val": "+138% premier regional downtown"
+          }
+        ],
+        "takeaway": "Demolishing the four-lane Camperdown auto bridge to reveal natural Reedy River waterfalls catalyzed over $600M in private mixed-use infill.",
+        "source": "John L. Crompton & Knox White, 'Economic Transformation of Downtown Greenville', Journal of Leisure Research 48(4)"
+      }
+    }
+  },
+  {
+    "id": "waller_creek_austin",
+    "type": "green",
+    "name": "Waterloo Greenway & Waller Creek Tunnel",
+    "city": "Austin, TX",
+    "fips": "48453",
+    "year": 2018,
+    "publicCost": null,
+    "privateCap": null,
+    "ratio": null,
+    "taxVehicle": null,
+    "valueUplift": null,
+    "taxGrowth": null,
+    "trajectory": [],
+    "takeaway": null,
+    "evaluation_url": "https://waterloogreenway.org/about/waterloo-greenway-economic-impact/",
+    "source": null,
+    "last_verified": null,
+    "lat": 30.2725,
+    "lng": -97.7345,
+    "path": [
+      [
+        30.281,
+        -97.732
+      ],
+      [
+        30.275,
+        -97.734
+      ],
+      [
+        30.271,
+        -97.735
+      ],
+      [
+        30.266,
+        -97.736
+      ],
+      [
+        30.261,
+        -97.738
+      ],
+      [
+        30.257,
+        -97.741
+      ]
+    ],
+    "stations": [
+      {
+        "name": "Waterloo Park & Moody Amphitheater",
+        "lat": 30.2735,
+        "lng": -97.734,
+        "desc": "11-acre park & concert venue"
+      },
+      {
+        "name": "Dell Medical District Linkage",
+        "lat": 30.278,
+        "lng": -97.733,
+        "desc": "Health sciences & innovation hub"
+      },
+      {
+        "name": "Red River Cultural District",
+        "lat": 30.2675,
+        "lng": -97.7365,
+        "desc": "Live music venues & nightlife"
+      },
+      {
+        "name": "Lady Bird Lake Delta Outlet",
+        "lat": 30.257,
+        "lng": -97.741,
+        "desc": "Hike-and-Bike Trail connector"
+      }
+    ],
+    "verification": {
+      "status": "unverified",
+      "method": "evaluation_url_fetch",
+      "checked_on": "2026-11-16",
+      "evidence": "evaluation_url fetch: HTTP 404 (Page Not Found - Waterloo Greenway Conservancy).",
+      "unverified_fields": [
+        "year",
+        "publicCost",
+        "privateCap",
+        "ratio",
+        "valueUplift",
+        "taxGrowth",
+        "taxVehicle",
+        "trajectory",
+        "takeaway",
+        "source",
+        "path",
+        "stations",
+        "lat",
+        "lng"
+      ],
+      "notes": "No claimed figure was found in any fetched source. The year-by-year \"trajectory\" values have no source at all. research.json hist_008 claimed $174M / $1.1B, this file claimed $163M / $1.8B - internally inconsistent. Map geometry (path/stations) is hand-entered and unverified - approximate only. Financial fields set to null; originals kept under removed_unverified_claims. Round 3: Cited URL 404; home page has no figures. source link broken as of 2026-11-16: https://waterloogreenway.org/about/waterloo-greenway-economic-impact/ returns 404; no new address found.",
+      "removed_unverified_claims": {
+        "publicCost": 163000000,
+        "privateCap": 1800000000,
+        "ratio": "11:1",
+        "valueUplift": "+92% commercial and residential property valuation uplift along eastern downtown fringe",
+        "taxGrowth": "Removed 28 acres of prime downtown land from the 100-year floodplain, unlocking high-density infill",
+        "taxVehicle": "City of Austin Waller Creek TIF District (TIRZ #6) + Waterloo Greenway Conservancy",
+        "trajectory": [
+          {
+            "yr": "Year 0",
+            "val": "Baseline (2018 tunnel completion)"
+          },
+          {
+            "yr": "Year 3",
+            "val": "+38% (Waterloo Park opening)"
+          },
+          {
+            "yr": "Year 6",
+            "val": "+92% (Innovation District buildout)"
+          }
+        ],
+        "takeaway": "A 1-mile subterranean stormwater flood diversion tunnel unlocked 28 acres of flood-prone downtown land for high-density innovation district housing.",
+        "source": "Downtown Austin Alliance & City of Austin Economic Development Department TIRZ #6 Annual Report"
+      }
     }
   }
 ]
