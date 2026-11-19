@@ -1415,6 +1415,12 @@ function auditSingleHouseParcel(input) {
   } else {
     statutoryNotes = "No state housing law in the screening engine applies to this parcel as recorded. Local zoning governs.";
   }
+  if ((statutoryZoning.applicable_statutes || []).length) {
+    // Laws that were held back by an exclusion in their own text, or whose exclusion list could not be settled, are named too.
+    const heldBack = (statutoryZoning.excluded_by_statute || []).map(x => x.name + " — " + x.detail)
+      .concat((statutoryZoning.not_confirmed || []).filter(nc => /^Not determined/.test(nc.reason)).map(nc => nc.name + " (" + nc.reason + ")"));
+    if (heldBack.length) statutoryNotes += " Not applied: " + heldBack.join("; ");
+  }
 
   // 4. Roof area (geometry model; see roof engine assumptions) and solar system size. No dollar outputs: install
   //    cost, utility rates and export credits are not on file from a source, so savings and payback are not shown.

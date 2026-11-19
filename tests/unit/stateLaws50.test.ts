@@ -10,11 +10,12 @@ const AUDIT = JSON.parse(fs.readFileSync(path.join(root, "docs/audit/state-laws-
 const NEW_IDS = Object.values(AUDIT.states).flatMap((s: any) => s.added_records) as string[];
 const byId = Object.fromEntries(LAWS.map((r: any) => [r.id, r]));
 
-const EX: ParcelContext["exclusions"] = {
-  historic_district_hpoz: false, coastal_commission_or_sma: false, fema_100yr_floodway: false, calfire_or_state_vhfhsz: false,
-  airport_noise_or_runway_zone: false, williamson_or_ag_preserve: false, public_or_tribal_land: false, wekiva_or_everglades_protection_area: false,
-  population_threshold_ineligible: false,
-};
+// Stands in for "every exclusion any law lists was checked and found absent". The page itself checks only three flags
+// (flood, California fire zone, Los Angeles historic); tests/unit/exclusionsPerStatute.test.ts covers unchecked and present flags.
+const EX: ParcelContext["exclusions"] = Object.fromEntries([
+  ...LAWS.flatMap((r: any) => (r.exclusion_sources || []).map((e: any) => [e.key, false])),
+  ["population_threshold_ineligible", false],
+]);
 const sfr = (o: Partial<ParcelContext>): ParcelContext => ({
   parcel_id: "t", state_code: "XX", county_fips: "00000", municipality_pop: 100000, county_pop: 500000, lot_sqft: 6000,
   base_zoning_code: "R-1", is_commercial_or_mixed_use: false, is_single_family_residential: true,

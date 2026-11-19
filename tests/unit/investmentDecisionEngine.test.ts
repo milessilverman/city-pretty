@@ -237,9 +237,11 @@ describe("one house", () => {
     const law = statutes.find((l: any) => l.id === adu.legal.statute_id);
     expect(["verified", "partially_verified"]).toContain(law.verification.status);
     expect(adu.legal.verification_status).toBe(law.verification.status);
+    // SB 9's site exclusions are taken from a 2021 version of Gov. Code 65913.4 that was not read, so the record's exclusion
+    // list is "not confirmed" and the lot split is never "allowed" on it (it was, before 19 Nov 2026, on a blanket rule).
     const split = out.expansions.find((e: any) => e.expansion === "lot_split");
-    expect(split.legal.status).toBe("allowed by state law");
-    expect(split.legal.citation).toMatch(/lot split/i);
+    expect(split.legal.status).toBe("not determined");
+    expect(split.legal.why).toMatch(/excludes has not been confirmed/);
     const bed = out.expansions.find((e: any) => e.expansion === "added_bedroom");
     expect(bed.legal.status).toBe("not determined");
   });

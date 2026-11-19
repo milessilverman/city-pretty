@@ -105,9 +105,12 @@ describe("Parcel house auditor", () => {
   });
 
   it("8. Flags a California lot split only from the SB 9 record, and never in an HPOZ", () => {
+    // The SB 9 record's list of excluded sites is not confirmed (it points to a 2021 version of Gov. Code 65913.4 that was not
+    // read), so the lot split is "not determined", with the reason, and is never flagged feasible.
     const ok = auditSingleHouseParcel({ ...BASE, parcelId: "p8", lotSqft: 7500, livingSqft: 1800, zoningCode: "R-1", neighborhoodMedianHv: 850000 });
-    expect(ok.statutoryZoning.applicable_statutes.map((s: any) => s.id)).toContain("ca_sb9_lot_split");
-    expect(ok.statutoryZoning.lotSplitFeasible).toBe(true);
+    expect(ok.statutoryZoning.applicable_statutes.map((s: any) => s.id)).not.toContain("ca_sb9_lot_split");
+    expect(ok.statutoryZoning.lotSplitFeasible).toBe(false);
+    expect(ok.statutoryZoning.statutoryNotes).toMatch(/excludes has not been confirmed/);
 
     const hpoz = auditSingleHouseParcel({ ...BASE, parcelId: "p8b", lotSqft: 7500, livingSqft: 1800, zoningCode: "R-1", neighborhoodMedianHv: 850000, exclusions: { historic_district_hpoz: true } });
     expect(hpoz.statutoryZoning.lotSplitFeasible).toBe(false);
