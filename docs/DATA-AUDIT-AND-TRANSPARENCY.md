@@ -1042,7 +1042,7 @@ passenger rail stations)" for SB 79.
   locations." California High-Speed Rail's and Texas Central's current status were not obtained.
 - **Leads from the earlier branch (4e76a8a).** Held up in the FRA text: Phoenix-Tucson, Front Range, Brightline West, Cascadia
   (Seattle, Portland, Eugene), Houston to San Antonio (Rosenberg, Flatonia, Seguin). Did not hold: Austin-San Antonio (in no
-  fetched document; kept as unconfirmed). Its "Seattle" and "Portland" stops were right but it omitted "Vancouver, Canada".
+  fetched document; kept as unconfirmed).
 - **Test fixed.** `tests/unit/studyCorrections1119.test.ts` expected the lead agency "Arizona Department of Transportation
   (ADOT)"; the FRA text has no acronym, so it now expects the name as written.
 - **Not obtained:** Amtrak's Corridor Vision report, the FRA Long-Distance Service Study report, hsr.ca.gov status pages, TxDOT
