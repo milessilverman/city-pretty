@@ -9338,7 +9338,7 @@ function aiTextToHtml(t) {
     .replace(/\n/g, "<br>");
 }
 
-async function sendAiQuery(q, promptKey = null) {
+async function sendAiQuery(q, promptKey = null, opts = null) {
   aiHistory.push({ role: "user", text: q });
   const ep = aiEndpoint();
   if (!ep) {
@@ -9356,6 +9356,8 @@ async function sendAiQuery(q, promptKey = null) {
     box.appendChild(typingEl); box.scrollTop = box.scrollHeight;
   }
   const context = serializeLiveAdvisorContext();
+  // what the page's no-AI layer (app/advisor-scripts.js) already found for this question, so the model need not redo it
+  if (opts && opts.scripted && Array.isArray(opts.scripted.findings) && opts.scripted.findings.length) context.scripted_findings = { intent: opts.scripted.intent || null, answered_on_page: !!opts.scripted.answered, findings: opts.scripted.findings };
   const previewEl = document.getElementById("ai-grounded-json-preview");
   if (previewEl) { try { previewEl.textContent = JSON.stringify(context, null, 2); } catch (e) {} }
   const history = aiHistory.filter(m => m.role === "user" || m.role === "assistant").slice(0, -1).slice(-8)
@@ -9495,10 +9497,11 @@ function renderAiChat() {
         </details>`
       : "";
     return `<div style="align-self:flex-start;background:${isAi ? "#fff" : "#f8fafc"};border:1px solid #e2e8f0;color:#0f172a;padding:12px 14px;border-radius:12px 12px 12px 0;max-width:92%;line-height:1.5;">
-        <div style="font-size:11px;font-weight:700;color:${isAi ? "#7c3aed" : "#475569"};margin-bottom:4px;">${isAi ? "AI advisor (can be wrong)" : "City Pretty"}</div>
+        <div style="font-size:11px;font-weight:700;color:${isAi ? "#7c3aed" : "#475569"};margin-bottom:4px;">${msg.scripted ? "From this page's data (no AI)" : isAi ? "AI advisor (can be wrong)" : "City Pretty"}</div>
         ${msg.text}
         ${stoppedNotice}
         ${sourcesHtml}
+        ${msg.scripted ? `<button type="button" class="tool-btn" data-ai-deeper="${aiHistory.indexOf(msg)}" style="margin-top:8px;">Ask the AI for a deeper answer</button>` : ""}
       </div>`;
   }).join("");
   box.scrollTop = box.scrollHeight;
@@ -9511,8 +9514,24 @@ function handleAiSubmit(e) {
   const q = input.value.trim();
   if (!q) return;
   input.value = "";
-  sendAiQuery(q, null);
+  // Script-first (app/advisor-scripts.js): a plain lookup is answered from the page's own data, with no request and no
+  // cost; anything else goes to the Worker with what the page already found.
+  const S = window.AdvisorScripts, loaded = typeof activeFips === "function" && activeFips() && (document.getElementById("loading") || {}).hidden !== false;
+  if (!S || !loaded) { sendAiQuery(q, null); return; }
+  S.tryScripted(q).then(r => {
+    if (!r || !r.answered) { sendAiQuery(q, null, { scripted: r }); return; }
+    aiHistory.push({ role: "user", text: q });
+    aiHistory.push({ role: "assistant", scripted: true, question: q, findings: r.findings, intent: r.intent, raw: r.text, text: aiTextToHtml(r.text), sources: r.sources || [] });
+    renderAiChat();
+  }, () => sendAiQuery(q, null));
 }
+// "Ask the AI for a deeper answer" under a page-data answer sends the same question to the Worker, with the findings
+if (typeof document !== "undefined") document.addEventListener("click", e => {
+  const b = e.target && e.target.closest ? e.target.closest("[data-ai-deeper]") : null;
+  if (!b) return;
+  const msg = aiHistory[+b.getAttribute("data-ai-deeper")];
+  if (msg && msg.scripted) { b.disabled = true; sendAiQuery(msg.question, null, { scripted: { intent: msg.intent, answered: true, findings: msg.findings } }); }
+});
 
 function askAiPrompt(key) {
   let promptText = "";

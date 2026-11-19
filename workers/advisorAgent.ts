@@ -215,7 +215,8 @@ export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
   ...(LOCAL_DATA_TOOLS as Anthropic.Beta.BetaTool[]),
 ];
 
-export type ToolEnv = { censusApiKey?: string; fetcher?: (url: string, init?: RequestInit) => Promise<Response> };
+// nrelApiKey: developer key for PVWatts (NREL_API_KEY Worker secret, from developer.nlr.gov/signup/); without it the tool uses the shared DEMO_KEY.
+export type ToolEnv = { censusApiKey?: string; nrelApiKey?: string; fetcher?: (url: string, init?: RequestInit) => Promise<Response> };
 
 const isNum = (v: unknown): v is number => typeof v === "number" && Number.isFinite(v);
 
@@ -257,7 +258,7 @@ export async function runAdvisorTool(name: string, input: unknown, env: ToolEnv)
     if (!isNum(i.lat) || !isNum(i.lng) || !isNum(i.system_capacity_kw)) return bad("lat, lng and numeric system_capacity_kw are required");
     const tilt = isNum(i.tilt_deg) ? i.tilt_deg : 20;
     const azimuth = isNum(i.azimuth_deg) ? i.azimuth_deg : 180;
-    return done(await pvwattsV8(i.lat, i.lng, i.system_capacity_kw, { tiltDeg: tilt, azimuthDeg: azimuth, fetcher: f }));
+    return done(await pvwattsV8(i.lat, i.lng, i.system_capacity_kw, { tiltDeg: tilt, azimuthDeg: azimuth, apiKey: env.nrelApiKey || undefined, fetcher: f }));
   }
   if (name === "lookup_health_profile") {
     if (typeof i.tract_fips !== "string" || !i.tract_fips.trim()) return bad("11-digit tract_fips is required");

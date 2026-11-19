@@ -1002,3 +1002,16 @@ returns, for a Miami-Dade residential lot, "Not on file ... zoning as commercial
 parcel" for Live Local, applies it when the parcel is flagged as public or religious-institution land, and for a
 Contra Costa parcel 0.2 mi from heavy rail reports "whether this county is an urban transit county (more than 15
 passenger rail stations)" for SB 79.
+
+### Found 19 Nov 2026 (not fixed here): LA lots in a mapped zone reach the legal screen with no zoning code
+
+While checking the advisor's no-AI answers on the real page (2107 Duxbury Cir, Los Angeles, opened through
+`houseAt`), the house panel's Zoning row showed **R1V2-O** (LA's parcel zoning layer), while the same panel's owner
+playbook said "Zoning is not on file for this parcel, so no housing-law strategies can be screened" and the Invest
+view's "This house" gave every addition "Not determined: zoning code unknown". Cause: `computePropertyPlaybook`
+(app/app.js, `zRule.zone`) and `parcelFacts` (app/invest.js, `zr.zone`) read a `zone` field from the row
+`zoneRules()` returns, and those rows (`zone_rules` in the LA bundle, 14 rows) have no `zone` field, so the code is
+always dropped when a rule matches. Old behaviour: no state law is tested for such LA lots. Correct behaviour: pass
+`zoneAt(ll).zone` (the code the Zoning row shows). Left for the owner or the agent working on the house panel,
+because it changes which laws apply to every LA lot and needs the lot-fit live check. Until then the advisor's
+ADU and lot-split answers for such lots say that the Zoning row shows a code the legal screen did not receive.

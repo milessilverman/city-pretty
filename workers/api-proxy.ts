@@ -23,6 +23,7 @@ export interface Env {
   ANTHROPIC_API_KEY?: string; // `wrangler secret put ANTHROPIC_API_KEY`
   GOOGLE_MAPS_KEY?: string; // `wrangler secret put GOOGLE_MAPS_KEY`
   CENSUS_API_KEY?: string; // `wrangler secret put CENSUS_API_KEY` (free: api.census.gov/data/key_signup.html); enables ACS lookups
+  NREL_API_KEY?: string; // optional, `wrangler secret put NREL_API_KEY` (free key from developer.nlr.gov/signup/); without it PVWatts uses the shared DEMO_KEY
   AI_RATE_LIMITER?: RateLimiter; // [[ratelimits]] in wrangler.toml
   STREETVIEW_RATE_LIMITER?: RateLimiter;
   ENVIRONMENT?: string; // "production" or "development"
@@ -39,7 +40,7 @@ type ChatMessage = { role: "user" | "assistant"; content: string };
 
 async function askAdvisorModel(env: Env, system: string, messages: ChatMessage[]): Promise<AdvisorAnswer> {
   const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 2 });
-  return runAdvisor(client, system, messages, { censusApiKey: env.CENSUS_API_KEY });
+  return runAdvisor(client, system, messages, { censusApiKey: env.CENSUS_API_KEY, nrelApiKey: env.NREL_API_KEY });
 }
 
 // ---------------------------------------------------------------------------------------------------------------
