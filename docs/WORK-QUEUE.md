@@ -37,7 +37,12 @@ audit doc the same day.
   Registry count of what is left (counties in `national/data/counties.json` with no data file, Puerto Rico left out,
   under 100,000 people by ACS 2020-24): 2,387 counties, 52,817 block groups, 61.6 million people; this is 35 more than
   2,443 minus Tennessee and Maryland, so the 17 Nov count and this one were not made the same way.
-- Still to decide: how the public site gets under GitHub Pages' 1 GB cap now that R2 serves the county files
+- **Site off GitHub Pages (19 Nov, built, not yet deployed):** a second Worker `city-pretty` (`wrangler.site.toml`,
+  `npm run deploy:site`) serves a 1,908-file, 63 MiB `dist-site/` and also answers `/city-pretty/...`; the advisor Worker
+  now allows its origin (redeployed). The deploy itself failed from the build session because its proxy overwrites
+  Wrangler's asset-upload token (401); deploy from a normal machine or the `deploy-site.yml` workflow, then run the
+  checks in `docs/HOSTING.md` before making the repository private. Evidence: `docs/audit/hosting-cloudflare-2026-11-19.md`.
+- (Superseded by the item above) Still to decide: how the public site gets under GitHub Pages' 1 GB cap now that R2 serves the county files
   (deploy Pages from a workflow that leaves out `counties/bundle_*`, or remove them from the repository).
 
 ## Running now (background)

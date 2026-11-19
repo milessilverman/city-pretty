@@ -17,3 +17,5 @@ counties/bundle_24039.json.gz
 counties/bundle_24041.json.gz
 counties/bundle_24047.json.gz
 # END r2-only county files
+dist-site
+.wrangler

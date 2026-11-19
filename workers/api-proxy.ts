@@ -46,6 +46,7 @@ async function askAdvisorModel(env: Env, system: string, messages: ChatMessage[]
 
 const ALLOWED_ORIGINS = [
   /^https:\/\/milessilverman\.github\.io$/,
+  /^https:\/\/city-pretty\.city-pretty\.workers\.dev$/, // the site Worker (wrangler.site.toml)
   /^http:\/\/127\.0\.0\.1:\d+$/,
   /^http:\/\/localhost:\d+$/,
 ];
