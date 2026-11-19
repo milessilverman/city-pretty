@@ -1,5 +1,5 @@
 /**
- * Investment Decision Engine (browser global + CommonJS companion of investmentDecisionEngine.ts)
+ * Investment Decision Engine (browser global and CommonJS module; the one copy, loaded by index.html and the tests)
  *
  * Turns a county bundle plus the measured back-test (app/data/neighborhood_score_backtest.json) into ranked,
  * traceable decisions: which neighborhoods, what to build there, what to add to one house, whether transit
@@ -7,12 +7,15 @@
  *
  * Rules: a missing input gives null and a `missing` list, never a default number. Every output number is
  * { value, unit, source, basis } with basis "measured" | "modelled" | "assumed".
+ * An improvement idea carries figures only when app/data/intervention_verification.json (ctx.verification) allows it,
+ * with the same rule and the same sourced-effect override as the map panel (ivAllows / ivRow in app/app.js; the unit
+ * tests run both on the same rows). Without that table every idea is listed by name only.
+ * Legality comes from the statute engine (evaluateByRightHousing, app/data/statutes.json passed as ctx.laws); when it
+ * does not confirm a law, the answer is "not determined" with its reason.
  *
- * Keep this file and investmentDecisionEngine.ts in step (tests/unit/investmentDecisionEngine.test.ts compares them).
- *
- * Loading: in the browser add <script src="src/engines/investmentDecisionEngine.js"></script> after app/app.js (it uses
- * app.js's global evaluateByRightHousing when present) or paste it into app.js like the other engines. Everything is
- * wrapped in one function so no names leak; the API is window.InvestmentDecisionEngine. In Node: require() it.
+ * Loading: index.html loads src/engines/investmentDecisionEngine.js after app/app.js (it uses app.js's global
+ * evaluateByRightHousing). Everything is wrapped in one function so no names leak; the API is
+ * window.InvestmentDecisionEngine. In Node: require() it.
  */
 (function () {
 "use strict";
@@ -257,45 +260,109 @@ function rankNeighborhoods(countyBundle, opts) {
 
 // ---------------------------------------------------------------- 2. what to build in a neighborhood
 const REC_KEYS = ["id", "project", "homes", "cost", "capex", "land", "om", "value", "vpd", "pct", "why", "qol"];
-const EVIDENCE_RANK = { "measured locally": 0, "borrowed study": 1, assumed: 2 };
-function evidenceFor(id, catalog, countyFips) {
+const EVIDENCE_RANK = { "borrowed study": 0, assumed: 1 };
+const IV_FILE = "app/data/intervention_verification.json";
+const ivUsable = st => st === "verified" || st === "partially_verified";
+// May an idea show figures for a block group with metrics m? Same rule as ivAllows in app/app.js.
+function ideaAllowed(id, m, verification, fips) {
+  const r = verification && verification[id];
+  if (!r || !ivUsable(r.status)) return false;
+  const cond = r.applies_if;
+  if (cond && cond.median_household_income_below != null) {
+    const inc = m && m.inc != null ? +m.inc : NaN;
+    if (!(inc < cond.median_household_income_below)) return false;
+  }
+  if (cond && Array.isArray(cond.state_fips_in)) {
+    if (!cond.state_fips_in.includes(String(fips || "").slice(0, 2))) return false;
+  }
+  return true;
+}
+// A bundle row with the sourced-effect override applied. Same arithmetic as ivRow in app/app.js.
+function sourcedRow(a, verification) {
+  if (!Array.isArray(a)) return a;
+  const r = verification && verification[a[0]], o = r && r.sourced_effect;
+  if (o && +o.value_per_dollar > 0 && +a[3] > 0) {
+    const b = a.slice();
+    b[7] = Math.round(+a[3] * +o.value_per_dollar);
+    b[8] = +o.value_per_dollar;
+    b._sourced = o;
+    return b;
+  }
+  if (!o || !(+o.pct > 0) || !(+a[9] > 0)) return a;
+  const capexSwap = +o.capex > 0 && +o.replaces_capex > 0;
+  if (+a[9] === +o.pct && !capexSwap) return a;
+  const b = a.slice(), f = +o.pct / +a[9];
+  b[7] = Math.round(+a[7] * f);
+  if (capexSwap) {
+    const oldCapex = +a[4] > 0 ? +a[4] : +o.replaces_capex;
+    b[3] = Math.max(0, Math.round(+a[3] - oldCapex + +o.capex));
+    b[4] = +o.capex;
+  }
+  b[8] = +b[3] ? Math.round((b[7] / +b[3]) * 1000) / 1000 : 0;
+  b[9] = +o.pct;
+  b._sourced = o;
+  return b;
+}
+// Evidence tier from the verification audit. The catalog's own A-D grade is carried as `grade` (the build's own rating)
+// and never raises the tier: the grade-A "local sales estimate" could not be reproduced (docs/audit/bundle-catalog-audit.md).
+function evidenceFor(id, catalog, verification) {
   const c = catalog && catalog[id];
-  if (!c) return { grade: null, tier: "assumed", sources: [], note: "no catalog entry passed in ctx.catalog" };
-  const g = c.grade || null, sources = Array.isArray(c.sources) ? c.sources : [];
-  let tier = "assumed";
-  if (g && /^[A-D]$/.test(g) && sources.length) tier = (g === "A" && /local/i.test(c.evidence || "") && countyFips === "06037") ? "measured locally" : "borrowed study";
-  return { grade: g, tier, sources, caveat: c.caveat || null, note: tier === "borrowed study" ? "effect size taken from a study elsewhere; not measured in this county" : tier === "assumed" ? "no study grade (U/none)" : "local sales estimate (Los Angeles)" };
+  if (!c) return { grade: null, tier: "assumed", verification: null, sources: [], note: "no catalog entry passed in ctx.catalog" };
+  const g = c.grade && c.grade !== "none" ? c.grade : null, sources = Array.isArray(c.sources) ? c.sources : [];
+  const r = verification ? verification[id] : null, st = r && r.status ? r.status : (verification ? "unverified" : null);
+  const base = { grade: g, verification: st, sources, caveat: c.caveat || null, evidenceNote: r && r.evidence ? String(r.evidence) : null };
+  if (!verification) return Object.assign(base, { tier: "assumed", note: `verification table (${IV_FILE}) not loaded, so no figure is shown` });
+  if (st === "verified") return Object.assign(base, { tier: "borrowed study", note: "effect size and cost found in their cited sources (studies from elsewhere); the model that applies them here has not been checked against real outcomes" + (r.caution ? "; caution: " + r.caution : "") });
+  if (st === "partially_verified") return Object.assign(base, { tier: "borrowed study", note: "partly verified: " + (r.partial_reason || (r.effect === "checked" ? "cost not re-checked" : r.cost === "checked" ? "effect not confirmed" : "effect and cost not re-checked")) });
+  return Object.assign(base, { tier: "assumed", note: "effect size or cost could not be confirmed against a source" });
 }
 /**
  * recommendForNeighborhood(blockGroup, ctx)
- *   blockGroup: { id, m, r } (details[geoid] of a bundle plus its id)
- *   ctx.catalog: the idea catalog (D.catalog from the LA bundle); ctx.countyFips; ctx.stateCode
+ *   blockGroup: { id, m, r } (details[geoid] of a bundle plus its id; r = the bundle's raw rows)
+ *   ctx.catalog: the idea catalog (D.catalog from the LA bundle); ctx.countyFips
+ *   ctx.verification: app/data/intervention_verification.json (without it no idea carries figures)
  *   ctx.underusedSites: rows of app/data/underused_sites.json (optional); ctx.sites: sites_<fips> entries for this block group (optional)
  */
 function recommendForNeighborhood(blockGroup, ctx) {
   ctx = ctx || {};
   const missing = [];
-  if (!blockGroup || !blockGroup.m) return { id: blockGroup && blockGroup.id || null, ideas: [], housingPlays: [], missing: ["blockGroup.m"] };
-  if (!ctx.catalog) missing.push("ctx.catalog (idea grades and sources)");
+  if (!blockGroup || !blockGroup.m) return { id: blockGroup && blockGroup.id || null, ideas: [], withheld: [], housingPlays: [], missing: ["blockGroup.m"] };
+  if (!ctx.catalog) missing.push("ctx.catalog (idea names, kinds and sources)");
+  if (!ctx.verification) missing.push(`ctx.verification (${IV_FILE}); until it is loaded no idea shows a figure`);
   const fips = ctx.countyFips || (blockGroup.id ? String(blockGroup.id).slice(0, 5) : null);
   const bsrc = `counties/bundle_${fips}.json.gz details.r (pipeline estimate)`;
   const m = blockGroup.m;
-  const ideas = (blockGroup.r || []).map(a => {
+  const withheld = [];
+  const ideas = [];
+  for (const a0 of (blockGroup.r || [])) {
+    const id0 = Array.isArray(a0) ? a0[0] : a0 && a0.id;
+    const c = (ctx.catalog && ctx.catalog[id0]) || null;
+    if (!c) continue;   // the map panel drops rows the catalog does not know (gateRecs)
+    const ev = evidenceFor(id0, ctx.catalog, ctx.verification);
+    if (!ideaAllowed(id0, m, ctx.verification, fips)) {
+      if (!withheld.some(w => w.id === id0)) {
+        const rv = ctx.verification && ctx.verification[id0];
+        withheld.push({ id: id0, name: c.name || id0, kind: c.kind || null, verification: ev.verification,
+          reason: !ctx.verification ? `verification table (${IV_FILE}) not loaded` : rv && ivUsable(rv.status) ? `the study it relies on does not apply here (applies_if in ${IV_FILE})` : `effect size or cost could not be confirmed against a source (${IV_FILE})` });
+      }
+      continue;
+    }
+    const a = sourcedRow(a0, ctx.verification);
     const r = Object.fromEntries(REC_KEYS.map((k, i) => [k, a[i]]));
-    const c = (ctx.catalog && ctx.catalog[r.id]) || {};
-    const kind = c.kind || null, ev = evidenceFor(r.id, ctx.catalog, fips);
+    const kind = c.kind || null;
     const returns = kind === "value" || kind === "owner" || kind === "regional";
-    return {
+    const vsrc = a._sourced ? `${bsrc}, value rescaled to the sourced effect in ${IV_FILE}` : bsrc;
+    ideas.push({
       id: r.id, name: c.name || r.id, kind, project: r.project || null, why: r.why || null,
       homesReached: tv(num(r.homes), "homes", bsrc, "modelled"),
       cost: tv(num(r.cost), "USD (build + land + 10-yr upkeep)", bsrc, "modelled"),
-      valueAdded: tv(returns ? num(r.value) : null, "USD of nearby home value", bsrc, ev.tier === "assumed" ? "assumed" : "modelled"),
-      valuePerDollar: tv(returns ? num(r.vpd) : null, "USD of home value per USD spent", bsrc, ev.tier === "assumed" ? "assumed" : "modelled"),
-      priceLiftPct: tv(returns ? num(r.pct) : null, "% per reached home", ev.sources[0] || bsrc, ev.tier === "assumed" ? "assumed" : "modelled"),
+      valueAdded: tv(returns ? num(r.value) : null, "USD of nearby home value", vsrc, "modelled"),
+      valuePerDollar: tv(returns ? num(r.vpd) : null, "USD of home value per USD spent", vsrc, "modelled"),
+      priceLiftPct: tv(returns ? num(r.pct) : null, "% per reached home", a._sourced ? IV_FILE : (ev.sources[0] || bsrc), "modelled"),
       evidence: ev,
       missing: returns && num(r.vpd) == null ? ["value per dollar"] : [],
-    };
-  });
+    });
+  }
   const byReturn = ideas.filter(x => x.valuePerDollar.value != null).sort((a, b) => b.valuePerDollar.value - a.valuePerDollar.value || (a.id < b.id ? -1 : 1));
   const pays = x => (x.valuePerDollar.value != null && x.valuePerDollar.value >= 1) ? 0 : 1;
   const gradeRank = x => { const i = GRADES.indexOf(x.evidence.grade); return i < 0 ? 9 : i; };
@@ -304,29 +371,38 @@ function recommendForNeighborhood(blockGroup, ctx) {
   // housing plays
   const plays = [];
   const adu = ideas.find(x => x.id === "adu");
+  const aduHeld = withheld.find(x => x.id === "adu");
   plays.push({
     play: "adu", label: "Backyard home (ADU) on a typical lot here",
-    available: adu ? "pipeline found single-family lots" : "not determined", legal: "not determined at block-group level: depends on each parcel's zoning (use recommendForParcel)",
+    available: adu || aduHeld ? "pipeline found single-family lots" : "not determined", legal: "not determined at block-group level: depends on each parcel's zoning (open a lot on the map)",
     cost: adu ? adu.cost : tv(null, "USD", null, null), valueAdded: adu ? adu.valueAdded : tv(null, "USD", null, null), valuePerDollar: adu ? adu.valuePerDollar : tv(null, "USD per USD", null, null),
-    evidence: adu ? adu.evidence : { tier: "assumed", grade: null, sources: [] },
-    missing: adu ? [] : ["bundle ADU row"],
+    evidence: adu ? adu.evidence : { tier: "assumed", grade: null, verification: aduHeld ? aduHeld.verification : null, sources: [] },
+    missing: adu ? [] : [aduHeld ? "ADU figures withheld: " + aduHeld.reason : "bundle ADU row"],
   });
-  plays.push({ play: "lot_split", label: "Split a lot into two parcels", available: "not determined", legal: "not determined at block-group level: needs the parcel's zoning code and state law (recommendForParcel)", cost: tv(null, "USD", null, null), valueAdded: tv(null, "USD", null, null), valuePerDollar: tv(null, "USD per USD", null, null), evidence: { tier: "assumed", grade: null, sources: [] }, missing: ["parcel zoning", "lot-split sale comps"] });
-  plays.push({ play: "small_multifamily", label: "Small apartment building (2-19 homes)", available: "not determined", legal: "not determined: needs parcel zoning", cost: tv(null, "USD", null, null), valueAdded: tv(null, "USD", null, null), valuePerDollar: tv(null, "USD per USD", null, null), evidence: { tier: "assumed", grade: null, sources: [] }, missing: ["construction cost per sq ft for the region (none in app/data/unit_costs.json)", "rents or sale prices of new small buildings"] });
+  plays.push({ play: "lot_split", label: "Split a lot into two parcels", available: "not determined", legal: "not determined at block-group level: needs the parcel's zoning code and state law (open a lot on the map)", cost: tv(null, "USD", null, null), valueAdded: tv(null, "USD", null, null), valuePerDollar: tv(null, "USD per USD", null, null), evidence: { tier: "assumed", grade: null, sources: [] }, missing: ["parcel zoning", "lot-split sale comps"] });
+  plays.push({ play: "small_multifamily", label: "Small apartment building (2-19 homes)", available: "not determined", legal: "not determined: needs parcel zoning", cost: tv(null, "USD", null, null), valueAdded: tv(null, "USD", null, null), valuePerDollar: tv(null, "USD per USD", null, null), evidence: { tier: "assumed", grade: null, sources: [] }, missing: ["construction cost per sq ft for the region (app/data/unit_costs.json lists public-works items only)", "rents or sale prices of new small buildings"] });
+  // A site's model-output fields (verification.unverified_fields) carry no figure; the record's own note says why.
+  const siteNum = (s, f, unit, src, basis) => {
+    const v = s.verification || {};
+    if ((v.unverified_fields || []).some(u => String(u).split(/[\s(]/)[0] === f)) return Object.assign(tv(null, unit, src, null), { withheld: String((v.model_output_fields && v.model_output_fields[f]) || "listed as unverified in the site record") });
+    return tv(num(s[f]), unit, src, basis);
+  };
   const sites = (ctx.underusedSites || []).filter(s => s && s.blockGroupId === blockGroup.id).map(s => ({
-    id: s.id, name: s.name || null, kind: s.kind || null, acres: tv(num(s.acres), "acres", s.sourceUrl || "app/data/underused_sites.json", "measured"),
-    potentialHomes: tv(num(s.potentialHomes), "homes", "app/data/underused_sites.json", "modelled"), margin: tv(num(s.margin), "USD", "app/data/underused_sites.json (repo estimate, not re-checked)", "modelled"),
-    zoning: s.zoningCategory || null, distanceToRailMeters: tv(num(s.distanceToRailMeters), "m", "app/data/underused_sites.json", "measured"), idea: s.idea || null,
-  })).sort((a, b) => (b.margin.value ?? -Infinity) - (a.margin.value ?? -Infinity) || (a.id < b.id ? -1 : 1));
+    id: s.id, name: s.name || null, kind: s.kind || null, acres: siteNum(s, "acres", "acres", s.sourceUrl || "app/data/underused_sites.json", "measured"),
+    potentialHomes: siteNum(s, "potentialHomes", "homes", "app/data/underused_sites.json", "modelled"), margin: siteNum(s, "margin", "USD", "app/data/underused_sites.json", "modelled"),
+    zoning: s.zoningCategory || null, distanceToRailMeters: siteNum(s, "distanceToRailMeters", "m", "app/data/underused_sites.json", "measured"),
+    verification: (s.verification && s.verification.status) || "unverified",
+  })).sort((a, b) => (b.acres.value ?? -Infinity) - (a.acres.value ?? -Infinity) || (a.id < b.id ? -1 : 1));
   plays.push({ play: "underused_site_conversion", label: "Build homes on an underused site (parking lot, golf course, vacant lot)", available: sites.length ? `${sites.length} site(s) listed` : (ctx.underusedSites ? "none listed in this block group" : "not determined"), legal: "depends on each site's zoning", sites, evidence: { tier: sites.length ? "borrowed study" : "assumed", grade: null, sources: sites.length ? ["app/data/underused_sites.json"] : [] }, missing: ctx.underusedSites ? [] : ["ctx.underusedSites"] });
   const placeSites = (ctx.sites || []).map(s => ({ type: s.t, idea: s.p, name: s.nm || s.street || s.dest || null, cost: Array.isArray(s.cost) ? { low: tv(num(s.cost[0]), "USD", "counties/sites bundle", "modelled"), high: tv(num(s.cost[1]), "USD", "counties/sites bundle", "modelled") } : null }));
 
   return {
     id: blockGroup.id || null, name: m.n || null, city: m.c || null,
-    ideas: ranked, byReturn: byReturn.map(x => x.id), housingPlays: plays, places: placeSites,
-    ordering: "ideas sorted by evidence tier (measured locally > borrowed study > assumed), then those returning at least $1 per $1, then study grade (A-D), then value per dollar; byReturn sorts by value per dollar alone",
+    ideas: ranked, byReturn: byReturn.map(x => x.id), withheld, housingPlays: plays, places: placeSites,
+    ordering: "ideas that passed the verification audit, sorted by evidence tier, then those returning at least $1 per $1, then the catalog's own grade (A-D), then value per dollar; byReturn sorts by value per dollar alone; withheld lists the rest by name, with no figures",
     caveats: [
-      "Costs and value gains are the pipeline's estimates from the idea catalog's studies; most effect sizes come from studies in other cities.",
+      "Costs and value gains are the pipeline's estimates; an idea shows them only where the data audit confirmed its effect size or cost against a source (app/data/intervention_verification.json). The model that applies them here has not been checked against real outcomes.",
+      "Effect sizes come from studies in other places, not from sales in this county.",
       "Value gains are for nearby homes in total, not cash to whoever pays.",
     ],
     missing,
@@ -341,17 +417,35 @@ const EXPANSIONS = [
   { id: "second_storey", label: "Add a second storey", sizeKey: "secondStoreySqft" },
   { id: "lot_split", label: "Split the lot", sizeKey: null },
 ];
+// A cost row the engine may use: an injected { low, high, unit } row, or an app/data/unit_costs.json row
+// ({ unit_price, unit: "SF" | "EA" ... }) that is confirmed and verified or partly verified. Other units (SY, LF, mile)
+// do not price a house addition and are skipped.
+function costRow(x) {
+  if (!x) return null;
+  if (num(x.low) != null || num(x.high) != null) return x;
+  if (num(x.unit_price) == null || x.status !== "confirmed" || !ivUsable(x.verification && x.verification.status)) return null;
+  const unit = x.unit === "SF" ? "USD/sqft" : x.unit === "EA" ? "USD/each" : null;
+  return unit ? Object.assign({}, x, { low: x.unit_price, high: x.unit_price, unit }) : null;
+}
 function pickRow(rows, item, state, county) {
+  const r = (rows || []).filter(x => x && x.item === item).map(costRow).filter(Boolean);
+  return r.find(x => x.county_fips && x.county_fips === county) || r.find(x => x.state === state) || r.find(x => x.state === "US" || x.region === "national") || null;
+}
+function valueRow(rows, item, state, county) {
   const r = (rows || []).filter(x => x && x.item === item);
   return r.find(x => x.county_fips && x.county_fips === county) || r.find(x => x.state === state) || r.find(x => x.state === "US" || x.region === "national") || null;
 }
+const lawById = (laws, id) => (Array.isArray(laws) ? laws : []).find(l => l && l.id === id) || null;
 /**
  * recommendForParcel(parcelFacts, ctx)
  *   parcelFacts: { parcel_id, state_code, county_fips, base_zoning_code, municipality_pop, county_pop,
  *                  is_single_family_residential, is_commercial_or_mixed_use, dist_to_heavy_rail_mi, dist_to_frequent_bus_or_brt_mi,
  *                  exclusions, marketValue, livingSqft, lotSqft, stories }
- *   ctx.unitCosts: [{ item, state|county_fips, low, high, unit: "USD/sqft"|"USD/each", source_url, year }]
+ *   ctx.laws: app/data/statutes.json (passed to the statute engine; in the browser it falls back to the page's copy)
+ *   ctx.unitCosts: injected [{ item, state|county_fips, low, high, unit: "USD/sqft"|"USD/each", source_url, year }] or
+ *                  app/data/unit_costs.json rows (only confirmed, verified or partly verified SF/EA rows are used)
  *   ctx.valueCoefficients: [{ item, state|county_fips, value_per_sqft | pct_of_value | value_each, source_url, year }]
+ *   ctx.valuationModels: app/data/county_valuation_models.json (read only to say why it is not used for additions)
  *   ctx.sizes: { aduSqft, bedroomSqft, bathroomSqft, secondStoreySqft } (sq ft to price; none assumed)
  *   ctx.neighborhood: { medianHomeValue, ceilingValue? }; ctx.overCapRatio (optional threshold; default none)
  *   ctx.zoningEngine: override for evaluateByRightHousing (tests)
@@ -366,16 +460,33 @@ function recommendForParcel(parcelFacts, ctx) {
   if (!zoningKnown) missing.push("base_zoning_code");
   if (zoningKnown && zoningFn) {
     const ex = Object.assign({ historic_district_hpoz: false, coastal_commission_or_sma: false, fema_100yr_floodway: false, calfire_or_state_vhfhsz: false, airport_noise_or_runway_zone: false, williamson_or_ag_preserve: false, public_or_tribal_land: false, everglades_or_wekiva_or_trpa: false, population_threshold_ineligible: false }, p.exclusions || {});
-    zoning = zoningFn(Object.assign({}, p, { exclusions: ex, municipality_pop: num(p.municipality_pop), county_pop: num(p.county_pop), dist_to_heavy_rail_mi: num(p.dist_to_heavy_rail_mi), dist_to_frequent_bus_or_brt_mi: num(p.dist_to_frequent_bus_or_brt_mi) }));
+    try {
+      zoning = zoningFn(Object.assign({}, p, { exclusions: ex, municipality_pop: num(p.municipality_pop), county_pop: num(p.county_pop), dist_to_heavy_rail_mi: num(p.dist_to_heavy_rail_mi), dist_to_frequent_bus_or_brt_mi: num(p.dist_to_frequent_bus_or_brt_mi), lot_sqft: num(p.lot_sqft != null ? p.lot_sqft : p.lotSqft) }), ctx.laws);
+    } catch (e) { zoning = null; }
   }
   const statutes = zoning ? zoning.applicable_statutes || [] : [];
+  const notConfirmed = zoning ? zoning.not_confirmed || [] : [];
+  const lawsLoaded = !!(zoning && zoning.laws_loaded !== false);
+  // "allowed by state law" only for a law the statute engine applied to this parcel; otherwise not determined, with
+  // the engine's own reason for any law of that kind it could not confirm.
+  const allowed = s => {
+    const rec = lawById(ctx.laws, s.id);
+    return { status: "allowed by state law", citation: s.citation, statute_id: s.id || null, statute_url: s.statute_url || null, verification_status: s.verification_status || null, checked: rec ? (rec.last_verified || (rec.verification && rec.verification.checked_on) || null) : null, unconfirmed_fields: s.unconfirmed_fields || [] };
+  };
+  const heldWhy = (re, fallback) => { const n = notConfirmed.filter(x => re.test(String(x.id) + " " + String(x.name))); return n.length ? n.map(x => `${x.name}: ${x.reason}`).join(" ") : fallback; };
   const legalFor = id => {
     if (!zoningKnown) return { status: "not determined", why: "zoning code unknown" };
-    if (!zoning) return { status: "not determined", why: "zoning engine not available" };
-    if (id === "lot_split") { const s = statutes.find(x => /lot split/i.test(x.citation)); return s ? { status: "allowed by state law", citation: s.citation } : { status: "not determined", why: "no state lot-split statute found by statutoryZoningEngine; local subdivision rules decide" }; }
-    if (id === "adu") { const s = p.is_single_family_residential ? statutes.find(x => x.max_units_by_right >= 2) : null; return s ? { status: "allowed by state law", citation: s.citation } : { status: "not determined", why: "no by-right statute found; local ADU ordinance decides" }; }
+    if (!zoning) return { status: "not determined", why: "statute engine not available" };
+    if (!lawsLoaded) return { status: "not determined", why: "state law table (app/data/statutes.json) not loaded" };
+    if (id === "lot_split") { const s = statutes.find(x => /lot split/i.test(x.citation)); return s ? allowed(s) : { status: "not determined", why: heldWhy(/lot.?split/i, "no state lot-split law on file applies to this parcel; local subdivision rules decide") }; }
+    if (id === "adu") {
+      const s = p.is_single_family_residential ? (statutes.find(x => /(^|_)adu(_|$)/i.test(String(x.id))) || statutes.find(x => num(x.max_units_by_right) != null && x.max_units_by_right >= 2)) : null;
+      return s ? allowed(s) : { status: "not determined", why: heldWhy(/(^|_)adu(_|$)|\bADU\b/i, p.is_single_family_residential ? "no state ADU law on file applies to this parcel; local ADU rules decide" : "the lot is not recorded as single-family, so state ADU laws on file were not applied") };
+    }
     return { status: "not determined", why: "set by local height, floor-area and setback rules; no local rule table is loaded" };
   };
+  const costItems = [...new Set((ctx.unitCosts || []).map(x => x && x.item).filter(Boolean))];
+  const vm = ctx.valuationModels && ctx.valuationModels.counties ? ctx.valuationModels.counties[p.county_fips] : null;
   const mv = num(p.marketValue), sizes = ctx.sizes || {};
   const items = EXPANSIONS.map(e => {
     const miss = [];
@@ -383,12 +494,14 @@ function recommendForParcel(parcelFacts, ctx) {
     const size = e.sizeKey ? num(sizes[e.sizeKey]) : null;
     const uc = pickRow(ctx.unitCosts, e.id, p.state_code, p.county_fips);
     let costLow = null, costHigh = null, costSrc = uc ? uc.source_url || null : null;
-    if (!uc) miss.push(`unit cost for ${e.id} in ${p.state_code || "this state"} (app/data/unit_costs.json has none)`);
+    if (!uc) miss.push(`no sourced cost for "${e.label}" in ${p.state_code || "this state"}` + (costItems.length ? ` (app/data/unit_costs.json lists public-works items only: ${costItems.slice(0, 6).join(", ").replace(/_/g, " ")})` : " (app/data/unit_costs.json not passed in)"));
     else if (uc.unit === "USD/sqft") { if (size == null) miss.push(`ctx.sizes.${e.sizeKey}`); else { costLow = num(uc.low) != null ? uc.low * size : null; costHigh = num(uc.high) != null ? uc.high * size : null; } }
     else { costLow = num(uc.low); costHigh = num(uc.high); }
-    const vc = pickRow(ctx.valueCoefficients, e.id, p.state_code, p.county_fips);
+    const vc = valueRow(ctx.valueCoefficients, e.id, p.state_code, p.county_fips);
     let value = null; const vSrc = vc ? vc.source_url || null : null;
-    if (!vc) miss.push(`sourced value coefficient for ${e.id} (local sales hedonic $/sq ft or capitalisation study)`);
+    if (!vc) miss.push(vm && vm.tested && num(vm.tested.mdape) != null
+      ? `no sourced value for "${e.label}": this county's home-value model (app/data/county_valuation_models.json, median error ${Math.round(vm.tested.mdape * 1000) / 10}% on recorded sales) was tested on whole-home prices, not on what an addition adds, so it is not used here`
+      : `no sourced value for "${e.label}" (needs a local sales study of what it adds)`);
     else if (num(vc.value_per_sqft) != null) { if (size == null) miss.push(`ctx.sizes.${e.sizeKey}`); else value = vc.value_per_sqft * size; }
     else if (num(vc.pct_of_value) != null) { if (mv == null) miss.push("marketValue"); else value = mv * vc.pct_of_value / 100; }
     else if (num(vc.value_each) != null) value = vc.value_each;
@@ -420,9 +533,9 @@ function recommendForParcel(parcelFacts, ctx) {
   const ranked = items.slice().sort((a, b) => ((b.netValue.value ?? -Infinity) - (a.netValue.value ?? -Infinity)) || (EXPANSIONS.findIndex(e => e.id === a.expansion) - EXPANSIONS.findIndex(e => e.id === b.expansion)));
   return {
     parcelId: p.parcel_id || null,
-    zoning: zoning ? { base_zoning_code: zoning.base_zoning_code, statutes: statutes.map(s => s.citation), net_by_right_feasible: zoning.net_by_right_feasible, note: "statute details come from statutoryZoningEngine and are not re-checked here" } : null,
+    zoning: zoning ? { base_zoning_code: zoning.base_zoning_code, laws_loaded: lawsLoaded, statutes: statutes.map(s => s.citation), not_confirmed: notConfirmed.map(x => `${x.name}: ${x.reason}`), net_by_right_feasible: zoning.net_by_right_feasible, note: "statutes from app/data/statutes.json via the statute engine (evaluateByRightHousing); only laws whose text was checked can apply" } : null,
     expansions: ranked,
-    caveats: ["No cost or value is filled in unless a sourced table row is passed in; the repo has no sourced construction $/sq ft or hedonic coefficient for these expansions yet."],
+    caveats: ["No cost or value is filled in unless a sourced table row is passed in; app/data/unit_costs.json has no house-addition costs and no sourced value of an addition is on file yet.", "A state law marked as allowing something here is a screen, not a permit: the city or county decides."],
     missing,
   };
 }
@@ -570,7 +683,8 @@ function areaFromBlockGroup(id, m) {
  * buildDecisionBrief(county, selection, ctx)
  *   county: decoded county bundle
  *   selection: { blockGroupId?, parcel?, corridor?, top? (default 10) }
- *   ctx: { backtest, catalog, underusedSites, sites, costBenchmarks, valueEffects, unitCosts, valueCoefficients, sizes, overCapRatio }
+ *   ctx: { backtest, catalog, verification, underusedSites, sites, costBenchmarks, valueEffects, laws, unitCosts, valueCoefficients,
+ *          valuationModels, sizes, overCapRatio }
  */
 function buildDecisionBrief(county, selection, ctx) {
   selection = selection || {}; ctx = ctx || {};
@@ -596,10 +710,11 @@ function buildDecisionBrief(county, selection, ctx) {
     const d = county.details[id];
     const full = (rank.ranked || []).find(r => r.id === id) || (rank.unscored || []).find(r => r.id === id) || null;
     const sitesForBg = ctx.sites && ctx.sites.sites ? ctx.sites.sites[id] : (Array.isArray(ctx.sites) ? ctx.sites : null);
-    const rec = recommendForNeighborhood({ id, m: d.m, r: d.r }, { catalog: ctx.catalog, countyFips: fips, underusedSites: ctx.underusedSites, sites: sitesForBg || [] });
+    const rec = recommendForNeighborhood({ id, m: d.m, r: d.r }, { catalog: ctx.catalog, verification: ctx.verification, countyFips: fips, underusedSites: ctx.underusedSites, sites: sitesForBg || [] });
     brief.neighborhood = {
       ranking: full,
-      build: rec.ideas.slice(0, 8).map(x => ({ id: x.id, name: x.name, project: x.project, cost: x.cost, valuePerDollar: x.valuePerDollar, evidence: { tier: x.evidence.tier, grade: x.evidence.grade } })),
+      build: rec.ideas.slice(0, 8).map(x => ({ id: x.id, name: x.name, project: x.project, cost: x.cost, valuePerDollar: x.valuePerDollar, evidence: { tier: x.evidence.tier, verification: x.evidence.verification, catalogGrade: x.evidence.grade } })),
+      withheld: rec.withheld.map(x => ({ id: x.id, name: x.name, reason: x.reason })),
       housingPlays: rec.housingPlays,
       places: rec.places.slice(0, 10),
       missing: rec.missing,
@@ -610,7 +725,7 @@ function buildDecisionBrief(county, selection, ctx) {
   if (!brief.transit) brief.transit = { verdict: "not_enough_data", scale: null, missing: ["selection.corridor or selection.blockGroupId"] };
   if (selection.parcel) {
     const nbm = id && county && county.details && county.details[id] ? county.details[id].m : null;
-    brief.parcel = recommendForParcel(selection.parcel, { unitCosts: ctx.unitCosts, valueCoefficients: ctx.valueCoefficients, sizes: ctx.sizes, overCapRatio: ctx.overCapRatio, neighborhood: Object.assign({ medianHomeValue: nbm ? num(nbm.hv) : null }, ctx.neighborhood || {}) });
+    brief.parcel = recommendForParcel(selection.parcel, { laws: ctx.laws, unitCosts: ctx.unitCosts, valueCoefficients: ctx.valueCoefficients, valuationModels: ctx.valuationModels, sizes: ctx.sizes, overCapRatio: ctx.overCapRatio, neighborhood: Object.assign({ medianHomeValue: nbm ? num(nbm.hv) : null }, ctx.neighborhood || {}) });
   }
   brief.caveats = [
     (() => {
@@ -621,7 +736,7 @@ function buildDecisionBrief(county, selection, ctx) {
     })(),
     "Scores rank block groups against their own county only; a county-wide boom or bust is not predicted.",
     "Back-tested on tracts whose boundaries did not change 2010-2020; fast-growing new-build areas are under-represented.",
-    "Improvement costs and value gains are pipeline estimates; most effect sizes are borrowed from studies in other cities.",
+    "Improvement costs and value gains are pipeline estimates, shown only for ideas whose effect size or cost the data audit confirmed against a source; effect sizes come from studies in other places.",
     "Transit verdicts use planning rules of thumb (TCQSM density guidelines, FTA CIG breakpoints); they are not a ridership forecast.",
   ];
   brief.sources = [
@@ -633,10 +748,36 @@ function buildDecisionBrief(county, selection, ctx) {
   return brief;
 }
 
+// The part of the brief the AI advisor gets (the Worker caps it at DECISION_BRIEF_MAX_CHARS in
+// src/ai/advisorGroundingContract.ts): every figure keeps its unit, basis and source; per-signal score tables,
+// per-mode cost tables and the threshold rows are left out (they are in TRANSIT_THRESHOLDS and the data files).
+function briefForAdvisor(brief) {
+  if (!brief) return null;
+  const f = x => (x && x.value != null) ? { value: x.value, unit: x.unit, basis: x.basis, source: x.source } : null;
+  const n = brief.neighborhood, p = brief.parcel, t = brief.transit;
+  return {
+    schema: brief.schema, engineVersion: brief.engineVersion, county: brief.county, role: brief.role, howToRead: brief.howToRead,
+    backtest: brief.backtest ? { headline: brief.backtest.headline, engine_role: brief.backtest.verdict ? brief.backtest.verdict.engine_role || null : null, retrieved: brief.backtest.retrieved } : null,
+    topNeighborhoods: brief.topNeighborhoods, topNeighborhoodsNote: brief.topNeighborhoodsNote, flaggedInTopN: brief.flaggedInTopN,
+    neighborhood: n ? {
+      id: n.ranking ? n.ranking.id : null, name: n.ranking ? n.ranking.name : null,
+      confidence: n.ranking && n.ranking.confidence ? n.ranking.confidence : null, reasons: n.ranking && n.ranking.reasons ? n.ranking.reasons : [],
+      build: (n.build || []).map(x => ({ id: x.id, name: x.name, project: x.project, cost: f(x.cost), valuePerDollar: f(x.valuePerDollar), evidence: x.evidence })),
+      withheld: n.withheld || [],
+      housingPlays: (n.housingPlays || []).map(h => ({ play: h.play, label: h.label, available: h.available, legal: h.legal, cost: f(h.cost), valueAdded: f(h.valueAdded), valuePerDollar: f(h.valuePerDollar), sites: (h.sites || []).slice(0, 5).map(s => ({ id: s.id, name: s.name, kind: s.kind, acres: f(s.acres), verification: s.verification, potentialHomesWithheld: s.potentialHomes && s.potentialHomes.withheld ? "model output, listed as unverified" : null })), missing: h.missing })),
+      places: (n.places || []).slice(0, 5).map(s => ({ type: s.type, name: s.name, costLow: s.cost ? f(s.cost.low) : null, costHigh: s.cost ? f(s.cost.high) : null })),
+      missing: n.missing,
+    } : null,
+    parcel: p ? { parcelId: p.parcelId, zoning: p.zoning, expansions: (p.expansions || []).map(e => ({ expansion: e.expansion, label: e.label, legal: e.legal, costLow: f(e.cost.low), costHigh: f(e.cost.high), valueAdded: f(e.valueAdded), netValue: f(e.netValue), missing: e.missing })), missing: p.missing } : null,
+    transit: t ? { name: t.name || null, verdict: t.verdict, scale: t.scale, verdictMeaning: t.verdictMeaning || null, homesPerNetAcre: t.density ? f(t.density.homesPerNetAcre) : null, reasons: t.reasons || [], missing: t.missing || [] } : null,
+    caveats: brief.caveats, missing: brief.missing, sources: brief.sources,
+  };
+}
+
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { DATA_CHECKS, rankNeighborhoods, recommendForNeighborhood, recommendForParcel, evaluateTransit, buildDecisionBrief, areaFromBlockGroup, percentileRanks, TRANSIT_THRESHOLDS, DECISION_ENGINE_VERSION };
+  module.exports = { DATA_CHECKS, ideaAllowed, sourcedRow, briefForAdvisor, rankNeighborhoods, recommendForNeighborhood, recommendForParcel, evaluateTransit, buildDecisionBrief, areaFromBlockGroup, percentileRanks, TRANSIT_THRESHOLDS, DECISION_ENGINE_VERSION };
 }
 if (typeof window !== "undefined") {
-  window.InvestmentDecisionEngine = { DATA_CHECKS, rankNeighborhoods, recommendForNeighborhood, recommendForParcel, evaluateTransit, buildDecisionBrief, areaFromBlockGroup, percentileRanks, TRANSIT_THRESHOLDS, DECISION_ENGINE_VERSION };
+  window.InvestmentDecisionEngine = { DATA_CHECKS, ideaAllowed, sourcedRow, briefForAdvisor, rankNeighborhoods, recommendForNeighborhood, recommendForParcel, evaluateTransit, buildDecisionBrief, areaFromBlockGroup, percentileRanks, TRANSIT_THRESHOLDS, DECISION_ENGINE_VERSION };
 }
 })();

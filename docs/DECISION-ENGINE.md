@@ -1,7 +1,8 @@
 # Decision engine
 
-`src/engines/investmentDecisionEngine.ts` (source) and `src/engines/investmentDecisionEngine.js` (the browser twin)
-turn a county bundle into ranked decisions: which neighborhoods to look at, what to build there, what to add to one
+`src/engines/investmentDecisionEngine.js` (one file, loaded by `index.html` after `app/app.js` and by the unit tests;
+the `.ts` twin was removed on 19 Nov 2026 because nothing ran it, as for the other engines in `docs/audit/engine-copies.md`)
+turns a county bundle into ranked decisions: which neighborhoods to look at, what to build there, what to add to one
 house, and whether transit should be built and how big. The functions are pure: no network, no file reads. Every
 table is passed in. A missing input gives `null` plus a `missing: [...]` list, never a default number. Every number is
 `{ value, unit, source, basis }`, where basis is `measured` (read from a cited table), `modelled` (computed from
@@ -112,12 +113,9 @@ run, and the bootstrap is seeded so results repeat.
 
 ## API
 
-The browser twin is one IIFE that publishes `window.InvestmentDecisionEngine`. To load it:
-- add `<script src="src/engines/investmentDecisionEngine.js"></script>` after `app/app.js`, or
-- paste it into app.js like the other engines.
-
-It uses app.js's global `evaluateByRightHousing` when that exists. In Node, `require()` it. In TS, import the
-named exports from `src/engines/investmentDecisionEngine`.
+The file is one IIFE that publishes `window.InvestmentDecisionEngine`; `index.html` loads it after `app/app.js`, and
+`app/invest.js` (the Invest view) calls it. It uses app.js's global `evaluateByRightHousing` (the statute engine; in
+Node, `src/engines/statutoryZoningEngine.js`). In Node, `require()` it; the tests import it as an ES module.
 
 ```
 rankNeighborhoods(countyBundle, { backtest, limit?, minHomes? })
@@ -125,12 +123,13 @@ rankNeighborhoods(countyBundle, { backtest, limit?, minHomes? })
        historicalRelativeChange: { "2020_2025", "2015_2020" }, components: [...], confidence: { grade A-D, reasons },
        dataFlags, reasons: [plain sentences], missing } ], rankedCount, unscored: [ { id, missing } ], missing }
 
-recommendForNeighborhood({ id, m, r }, { catalog, countyFips?, underusedSites?, sites? })
+recommendForNeighborhood({ id, m, r }, { catalog, verification, countyFips?, underusedSites?, sites? })
   -> { ideas: [ { id, name, kind, project, cost, valueAdded, valuePerDollar, priceLiftPct,
-       evidence: { tier: "measured locally"|"borrowed study"|"assumed", grade, sources } } ],
-       byReturn: [ids], housingPlays: [adu, lot_split, small_multifamily, underused_site_conversion], places, caveats, missing }
+       evidence: { tier: "borrowed study"|"assumed", verification, grade (the catalog's own), sources, note } } ],
+       withheld: [ { id, name, reason } ], byReturn: [ids],
+       housingPlays: [adu, lot_split, small_multifamily, underused_site_conversion], places, caveats, missing }
 
-recommendForParcel(parcelFacts, { unitCosts?, valueCoefficients?, sizes?, neighborhood?, overCapRatio?, zoningEngine? })
+recommendForParcel(parcelFacts, { laws?, unitCosts?, valueCoefficients?, valuationModels?, sizes?, neighborhood?, overCapRatio?, zoningEngine? })
   -> { zoning, expansions: [ { expansion: adu|added_bedroom|added_bathroom|second_storey|lot_split, legal, cost: {low, high},
        valueAdded, netValue, overCapitalisation, missing } ], caveats, missing }
 
@@ -142,13 +141,34 @@ evaluateTransit(corridorOrArea, { costBenchmarks?, valueEffects? })
 buildDecisionBrief(countyBundle, { blockGroupId?, parcel?, corridor?, top? }, ctx)
   -> { schema: "city-pretty/decision-brief@1", county, role, howToRead, backtest, topNeighborhoods, neighborhood,
        parcel, transit, caveats, sources, missing }
+
+briefForAdvisor(brief)
+  -> the same brief without the per-signal tables (about 12-16k characters for Travis, Cook and Perry TN); the page
+     sends it to the AI advisor as context.decision_brief, which the Worker keeps if it is at most 20,000 characters
+     (DECISION_BRIEF_MAX_CHARS in src/ai/advisorGroundingContract.ts)
 ```
+
+**Verification gate (since 19 Nov 2026).** An improvement idea carries a cost or value only when
+`app/data/intervention_verification.json` marks it verified or partly verified and its `applies_if` conditions hold,
+with the sourced-effect override applied: the same rule and arithmetic as the map panel (`ivAllows` and `ivRow` in
+`app/app.js`; a unit test runs both on every row of two real counties). Every other idea is in `withheld` by name with
+its reason. The tier is "borrowed study" for audited ideas and "assumed" otherwise; the old "measured locally" tier for
+catalog grade A is gone, because that LA sales estimate could not be reproduced (`docs/audit/bundle-catalog-audit.md`).
+Underused-site fields listed in a site's `verification.unverified_fields` (homes it could hold, margin, land value)
+come back null with the record's own note.
+
+**Legality.** `recommendForParcel` passes `ctx.laws` (`app/data/statutes.json`) to `evaluateByRightHousing`. A play is
+"allowed by state law" only when that engine applies a law to the parcel (only laws whose text was checked can apply),
+and then carries the law's id, URL, verification status and check date. Anything else is "not determined" with the
+statute engine's reason (for example "Not on file for this parcel: city name" for Austin's HOME ordinance).
 
 **Context the caller supplies.**
 - `ctx.backtest`: the parsed `app/data/neighborhood_score_backtest.json`.
 - `ctx.catalog`: `D.catalog` from the LA bundle, which holds the idea grades and sources. County bundles do not carry it.
 - `ctx.sites`: a decoded `sites_<fips>.json.gz`.
-- `ctx.underusedSites`: `app/data/underused_sites.json`.
+- `ctx.underusedSites`: `app/data/underused_sites.json` (Los Angeles County only on this base).
+- `ctx.verification`: `app/data/intervention_verification.json`. Without it no idea shows a figure.
+- `ctx.laws`: `app/data/statutes.json`.
 
 **Transit tables.** These are injected, never read by the engine:
 - `costBenchmarks` rows: `{ mode, cost_per_mile, year, source_url }`;
@@ -157,7 +177,9 @@ buildDecisionBrief(countyBundle, { blockGroupId?, parcel?, corridor?, top? }, ct
 Mode names are normalised, so "LRT" and "light rail" both read as light_rail.
 
 **House tables.**
-- `unitCosts` rows: `{ item, state|county_fips, low, high, unit: "USD/sqft"|"USD/each", source_url }`;
+- `unitCosts` rows: `{ item, state|county_fips, low, high, unit: "USD/sqft"|"USD/each", source_url }`, or the rows of
+  `app/data/unit_costs.json` (used only when confirmed, verified or partly verified, and priced per SF or each). That
+  table holds public-works items (sidewalks, curb ramps, crossings, an EV site), so no house addition is priced from it;
 - `valueCoefficients` rows: `{ item, state|county_fips, value_per_sqft|pct_of_value|value_each, source_url }`.
 
 Items are `adu`, `added_bedroom`, `added_bathroom`, `second_storey` and `lot_split`.
@@ -212,10 +234,15 @@ The policy guidance was fetched through web.archive.org, because transit.dot.gov
   behave in a bust.
 - **Returns on improvements.** Idea costs and value gains in the bundles are pipeline estimates, and most effect sizes
   are borrowed from studies elsewhere.
-- **What an expansion costs or adds.** The repo has no sourced construction cost per sq ft and no sourced hedonic
-  coefficient for an added bedroom, bathroom, storey or ADU, so those come back null.
-- **Local zoning.** The engine knows only what `statutoryZoningEngine` knows about state laws. Local height, FAR and
-  setback limits are not loaded, so bedroom, bathroom and storey legality is "not determined".
+- **What an expansion costs or adds.** The repo has no sourced construction cost per sq ft and no sourced value of an
+  added bedroom, bathroom, storey or ADU, so those come back null. `app/data/unit_costs.json` holds public-works items
+  only. The county home-value models in `app/data/county_valuation_models.json` (DC, King, Queens, Staten Island and
+  seven Florida counties) were tested on whole-home sale prices, not on what an addition adds; their bedroom and
+  bathroom terms hold living area fixed, so they are not used, and the reason names the model's tested error.
+- **Local zoning.** The engine knows only what the statute engine knows about state laws (and the city ordinances in
+  `app/data/statutes.json`). The local district standards in `app/data/zoning_standards.json` (NYC, DC, San Diego,
+  Portland, Charlotte) feed the map's lot-fit rows but are not used here, so bedroom, bathroom and storey legality is
+  "not determined".
 - **Ridership.** Transit verdicts are rules of thumb unless the caller supplies FTA-style annualised cost and trip
   forecasts.
 

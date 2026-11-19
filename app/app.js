@@ -13,7 +13,10 @@ const CP_DATA_FILES = {
   "intercity-corridors": "intercity_transit_corridors.json", "county-completeness": "county_completeness.json", "county-hosts": "county_hosts.json",
   "ca-counties-registry": "ca_counties_registry.json", "intervention-verification": "intervention_verification.json", "upgrade-verification": "upgrade_verification.json",
   "la-neighborhood-values": "la_neighborhood_values.json", "bundle-corrections": "bundle_corrections.json", "county-valuation-models": "county_valuation_models.json",
-  "zoning-standards": "zoning_standards.json", "parcel-use-codes": "parcel_use_codes.json", "acs-fallback-flags": "acs_fallback_flags.json"
+  "zoning-standards": "zoning_standards.json", "parcel-use-codes": "parcel_use_codes.json", "acs-fallback-flags": "acs_fallback_flags.json",
+  // Read by the Invest view (app/invest.js)
+  "neighborhood-score-backtest": "neighborhood_score_backtest.json", "transit-cost-benchmarks": "transit_cost_benchmarks.json",
+  "transit-value-effects": "transit_value_effects.json"
 };
 const _cpData = {};
 function cpText(id) {
@@ -9200,6 +9203,9 @@ function serializeLiveAdvisorContext() {
     },
     roiMode: typeof getRoiMode === "function" ? getRoiMode() : null,
     hudFmr: (typeof getHudFmr === "function") ? getHudFmr(fips, ahZip) : null,
+    // The Invest view's brief for this county (app/invest.js), in the engine's advisor form; null until that view built one.
+    decision_brief: (typeof window !== "undefined" && window.__cpDecisionBrief && window.__cpDecisionBrief.county && window.__cpDecisionBrief.county.fips === fips && window.InvestmentDecisionEngine)
+      ? window.InvestmentDecisionEngine.briefForAdvisor(window.__cpDecisionBrief) : null,
   };
   if (selected && byId.get(selected)) {
     const p = byId.get(selected).properties || {};

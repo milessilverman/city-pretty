@@ -1,0 +1,86 @@
+{
+ "ran_on": "2026-11-19T16:42:54.875Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "06037": {
+   "county": "Los Angeles CA",
+   "state": "CA",
+   "points": [
+    {
+     "bg": "060377001015",
+     "lat": 34.092343,
+     "lng": -118.356334,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected $1.4M (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 2 pts (current release); page: 2 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 1.7 pts below its 25% goal; box: \"1.7 pts below its 25% goal\" / \"+1.1°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [4,3,45]; comparison [4,0,0.92,\"g\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County · 060377001015; page \"Census area: Los Angeles County · block group 060377001015(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 · 2 bed $2,964 · 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 310 ft; page \"Ground elevation: 310 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Second building on the lot — The Assessor lists 2 structures (1,429 sq ft, 712 sq ft): an existing ADU or guest house may already be present.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "? Whole-house repiping — Built in 1920: galvanized steel supply piping common in pre-1975 homes.",
+      "✓ Heat-pump heating and cooling — Existing heating is floor or wall heat with no central AC: heat pump provides both."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8931' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass.private.coffee/api/interpreter' from origin 'http://127.0.0.1:8931' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requ",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  }
+ }
+}

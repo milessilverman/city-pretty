@@ -2,14 +2,16 @@ import { describe, it, expect } from "vitest";
 import fs from "fs";
 import path from "path";
 import zlib from "zlib";
-import { createRequire } from "module";
 import {
-  rankNeighborhoods, recommendForNeighborhood, recommendForParcel, evaluateTransit, buildDecisionBrief,
-  percentileRanks, TRANSIT_THRESHOLDS, DATA_CHECKS,
-} from "../../src/engines/investmentDecisionEngine";
+  rankNeighborhoods, recommendForNeighborhood, recommendForParcel, evaluateTransit, buildDecisionBrief, briefForAdvisor,
+  percentileRanks, TRANSIT_THRESHOLDS, DATA_CHECKS, ideaAllowed, sourcedRow,
+} from "../../src/engines/investmentDecisionEngine.js";
+// @ts-ignore plain ES module script
+import { grabFunction } from "../../scripts/check_engine_copies.mjs";
 
 const root = path.resolve(__dirname, "../..");
-const jsEngine = createRequire(import.meta.url)("../../src/engines/investmentDecisionEngine.js");
+const statutes = JSON.parse(fs.readFileSync(path.join(root, "app/data/statutes.json"), "utf8"));
+const verification = JSON.parse(fs.readFileSync(path.join(root, "app/data/intervention_verification.json"), "utf8"));
 const backtest = JSON.parse(fs.readFileSync(path.join(root, "app/data/neighborhood_score_backtest.json"), "utf8"));
 const SMALL_FIPS = "06101"; // Sutter County, CA: 69 block groups, not in the back-test sample
 const smallBundle = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root, `counties/bundle_${SMALL_FIPS}.json.gz`))).toString("utf8"));
@@ -66,7 +68,7 @@ describe("null propagation", () => {
       expect(e.cost.low.value).toBeNull();
       expect(e.valueAdded.value).toBeNull();
       expect(e.netValue.value).toBeNull();
-      expect(e.missing.join(" ")).toMatch(/unit cost/);
+      expect(e.missing.join(" ")).toMatch(/no sourced cost/);
     }
   });
   it("says not enough data for transit without density", () => {
@@ -128,18 +130,32 @@ describe("real bundle smoke test", () => {
     const d = smallBundle.details[top.id];
     const rec = recommendForNeighborhood({ id: top.id, m: d.m, r: d.r }, { countyFips: SMALL_FIPS });
     expect(rec.missing[0]).toMatch(/catalog/);
-    for (const i of rec.ideas) expect(i.evidence.tier).toBe("assumed"); // no catalog => no evidence claimed
+    expect(rec.missing[1]).toMatch(/verification/);
+    expect(rec.ideas).toEqual([]); // no catalog and no verification table => no idea carries a figure
     const brief = buildDecisionBrief(smallBundle, { blockGroupId: top.id }, { backtest });
     expect(brief.topNeighborhoods.length).toBeLessThanOrEqual(10);
     expect(brief.caveats.length).toBeGreaterThan(2);
     expect(brief.transit.verdict).toMatch(/build|do_not_build|screen_only|not_enough_data/);
     expect(JSON.stringify(brief).length).toBeLessThan(60000);
   });
-  it("the browser twin (.js) gives the same answers as the .ts source", () => {
-    const sel = { blockGroupId: Object.keys(smallBundle.details).sort()[3], corridor: { dwellingUnitsPerNetAcre: 10, cbdMillionSqft: 40, mode: "light rail", annualizedCapitalCostUsd: 3e7, annualOperatingCostUsd: 1e7, annualTrips: 3e6 }, parcel: { parcel_id: "p1", state_code: "CA", county_fips: SMALL_FIPS, base_zoning_code: "R-1", is_single_family_residential: true, marketValue: 450000, municipality_pop: 100000, county_pop: 100000 } };
-    const ctx = { backtest };
-    expect(JSON.stringify(jsEngine.buildDecisionBrief(smallBundle, sel, ctx))).toBe(JSON.stringify(buildDecisionBrief(smallBundle as any, sel as any, ctx)));
-    expect(JSON.stringify(jsEngine.TRANSIT_THRESHOLDS)).toBe(JSON.stringify(TRANSIT_THRESHOLDS));
+  // The .ts twin was removed on 19 Nov 2026: it ran nowhere (the tests resolve the .js file, as for every other engine;
+  // docs/audit/engine-copies.md), so the old twin test compared the .js file with itself. What matters is that the
+  // page loads this same file.
+  it("is the one copy: the page loads src/engines/investmentDecisionEngine.js and no .ts twin exists", () => {
+    const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
+    expect(html).toContain('<script src="src/engines/investmentDecisionEngine.js"></script>');
+    expect(html.indexOf("src/engines/investmentDecisionEngine.js")).toBeGreaterThan(html.indexOf('<script src="app/app.js"></script>'));
+    expect(fs.existsSync(path.join(root, "src/engines/investmentDecisionEngine.ts"))).toBe(false);
+  });
+  it("the advisor's copy of the brief keeps every figure's basis and stays small", () => {
+    const sel = { blockGroupId: Object.keys(smallBundle.details).sort()[3], parcel: { parcel_id: "p1", state_code: "CA", county_fips: SMALL_FIPS, base_zoning_code: "R-1", is_single_family_residential: true, municipality_pop: 100000, county_pop: 100000 } };
+    const brief = buildDecisionBrief(smallBundle as any, sel as any, { backtest, laws: statutes, verification });
+    const a = briefForAdvisor(brief);
+    expect(a.schema).toBe(brief.schema);
+    expect(a.topNeighborhoods).toEqual(brief.topNeighborhoods);
+    expect(a.parcel.expansions.length).toBe(brief.parcel.expansions.length);
+    expect(JSON.stringify(a).length).toBeLessThan(20000);
+    expect(JSON.stringify(a)).not.toMatch(/NaN|undefined/);
   });
 });
 
@@ -154,16 +170,52 @@ describe("neighborhood recommendations", () => {
     ["street_trees", "39 trees", 117, 97500, 75855, 0, 2535, 151000, 1.549, 0.24, "why", 0.79],
     ["splash_pad", "1 pad", 398, 1190000, 850000, 0, 40000, 0, 0, 0, "why", 0.79],
   ] };
-  it("orders by evidence tier, then pay-back, and grades every item", () => {
-    const la = recommendForNeighborhood(bg, { catalog, countyFips: "06037" });
-    expect(la.ideas.map((x: any) => x.id)).toEqual(["street_trees", "farmers_market", "splash_pad"]);
-    expect(la.ideas[0].evidence.tier).toBe("measured locally");
-    expect(la.ideas[2].evidence.tier).toBe("assumed");
-    expect(la.ideas[2].valuePerDollar.value).toBeNull(); // quality-of-life item: no return claimed
+  // Tiers come from the verification audit (app/data/intervention_verification.json), not the catalog grade: until
+  // 19 Nov 2026 a grade-A "local" item was called "measured locally", but that LA sales estimate could not be reproduced.
+  const ver = { street_trees: { status: "verified" }, farmers_market: { status: "partially_verified", effect: "checked", cost: "unchecked" }, splash_pad: { status: "unverified" } };
+  it("shows figures only for audited ideas, orders by pay-back then catalog grade, and names the rest", () => {
+    const la = recommendForNeighborhood(bg, { catalog, verification: ver, countyFips: "06037" });
+    expect(la.ideas.map((x: any) => x.id)).toEqual(["street_trees", "farmers_market"]);
+    expect(la.ideas.every((x: any) => x.evidence.tier === "borrowed study")).toBe(true);
+    expect(la.ideas[1].evidence.note).toMatch(/partly verified/);
     expect(la.byReturn).toEqual(["farmers_market", "street_trees"]);
-    const elsewhere = recommendForNeighborhood({ ...bg, id: "170310000001" }, { catalog, countyFips: "17031" });
-    expect(elsewhere.ideas[0].evidence.tier).toBe("borrowed study");
+    expect(la.withheld.map((x: any) => x.id)).toEqual(["splash_pad"]);
+    expect(la.withheld[0].reason).toMatch(/could not be confirmed/);
+    expect(JSON.stringify(la.withheld)).not.toMatch(/1190000|850000/); // no figure for a withheld idea
     for (const i of la.ideas) for (const k of ["cost", "valueAdded", "valuePerDollar"]) expect(i[k]).toHaveProperty("basis");
+    const none = recommendForNeighborhood(bg, { catalog, countyFips: "06037" });
+    expect(none.ideas).toEqual([]);
+    expect(none.withheld.length).toBe(3);
+    expect(none.missing.join(" ")).toMatch(/verification/);
+  });
+  it("applies the audit's conditions (income, state) like the map panel", () => {
+    const v = { street_trees: { status: "verified", applies_if: { median_household_income_below: 60000 } }, farmers_market: { status: "verified", applies_if: { state_fips_in: ["06"] } } };
+    expect(ideaAllowed("street_trees", { inc: 50000 }, v, "06037")).toBe(true);
+    expect(ideaAllowed("street_trees", { inc: 70000 }, v, "06037")).toBe(false);
+    expect(ideaAllowed("street_trees", { inc: null }, v, "06037")).toBe(false);
+    expect(ideaAllowed("farmers_market", {}, v, "48453")).toBe(false);
+    expect(ideaAllowed("farmers_market", {}, v, "06059")).toBe(true);
+  });
+  // The page's own gate (ivAllows, ivRow in app/app.js) and the engine's copy must agree on every real row.
+  it("gives the same gate and sourced-effect override as the map panel on every row of a real county", () => {
+    const app = fs.readFileSync(path.join(root, "app/app.js"), "utf8");
+    for (const fips of ["17031", "48453"]) {
+      // eslint-disable-next-line no-new-func
+      const page = new Function("verification", "fips", `const ivRec = id => (verification && verification[id]) || null; const activeFips = () => fips;\n${grabFunction(app, "ivAllows")}\n${grabFunction(app, "ivRow")}\nreturn { ivAllows, ivRow };`)(verification, fips);
+      const B = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root, `counties/bundle_${fips}.json.gz`))).toString("utf8"));
+      let n = 0, changed = 0;
+      for (const d of Object.values(B.details) as any[]) {
+        for (const a of d.r || []) {
+          expect(ideaAllowed(a[0], d.m, verification, fips)).toBe(page.ivAllows(a[0], d.m));
+          const x = sourcedRow(a, verification), y = page.ivRow(a);
+          expect(JSON.stringify(x)).toBe(JSON.stringify(y));
+          if (x !== a) changed++;
+          n++;
+        }
+      }
+      expect(n).toBeGreaterThan(1000);
+      expect(changed).toBeGreaterThan(0);
+    }
   });
   it("lists underused sites in the block group only", () => {
     const out = recommendForNeighborhood(bg, { catalog, underusedSites: [{ id: "a", blockGroupId: "060370000001", acres: 2, margin: 5 }, { id: "b", blockGroupId: "other", acres: 9, margin: 9 }] });
@@ -174,13 +226,41 @@ describe("neighborhood recommendations", () => {
 
 describe("one house", () => {
   const parcel = { parcel_id: "p", state_code: "CA", county_fips: "06037", base_zoning_code: "R1", is_single_family_residential: true, marketValue: 800000, municipality_pop: 300000, county_pop: 9000000 };
-  it("delegates legality to the statutory zoning engine", () => {
-    const out = recommendForParcel(parcel, {});
+  // The statute engine on this base reads app/data/statutes.json (passed as ctx.laws) and applies only laws whose text
+  // was checked; anything it does not confirm is "not determined" here, with its reason.
+  it("delegates legality to the statute engine, which reads app/data/statutes.json", () => {
+    const out = recommendForParcel(parcel, { laws: statutes });
+    expect(out.zoning.laws_loaded).toBe(true);
     expect(out.zoning.statutes.length).toBeGreaterThan(0);
     const adu = out.expansions.find((e: any) => e.expansion === "adu");
     expect(adu.legal.status).toBe("allowed by state law");
+    const law = statutes.find((l: any) => l.id === adu.legal.statute_id);
+    expect(["verified", "partially_verified"]).toContain(law.verification.status);
+    expect(adu.legal.verification_status).toBe(law.verification.status);
+    const split = out.expansions.find((e: any) => e.expansion === "lot_split");
+    expect(split.legal.status).toBe("allowed by state law");
+    expect(split.legal.citation).toMatch(/lot split/i);
     const bed = out.expansions.find((e: any) => e.expansion === "added_bedroom");
     expect(bed.legal.status).toBe("not determined");
+  });
+  it("says not determined, with the reason, whenever the statute engine does not confirm a law", () => {
+    const noLaws = recommendForParcel(parcel, { laws: [] });
+    for (const e of noLaws.expansions) { expect(e.legal.status).toBe("not determined"); expect(e.legal.why).toBeTruthy(); }
+    expect(noLaws.expansions.find((e: any) => e.expansion === "adu").legal.why).toMatch(/statutes\.json/);
+    // a law whose text was not checked never applies
+    const unchecked = statutes.map((l: any) => l.state_code === "CA" ? { ...l, verification: { ...l.verification, status: "unverified" } } : l);
+    const out = recommendForParcel(parcel, { laws: unchecked });
+    for (const e of out.expansions) expect(e.legal.status).toBe("not determined");
+    expect(out.zoning.not_confirmed.join(" ")).toMatch(/could not be checked/);
+    // Austin's ordinance needs the city name, which this parcel record lacks: not determined, and the reason says so
+    const tx = recommendForParcel({ parcel_id: "t", state_code: "TX", county_fips: "48453", base_zoning_code: "SF-3", is_single_family_residential: true }, { laws: statutes });
+    expect(tx.expansions.find((e: any) => e.expansion === "adu").legal.status).toBe("not determined");
+    expect(tx.zoning.not_confirmed.join(" ")).toMatch(/city name/);
+  });
+  it("uses no row of app/data/unit_costs.json for a house addition (it holds public-works items)", () => {
+    const rows = JSON.parse(fs.readFileSync(path.join(root, "app/data/unit_costs.json"), "utf8"));
+    const out = recommendForParcel(parcel, { laws: statutes, unitCosts: rows });
+    for (const e of out.expansions) { expect(e.cost.low.value).toBeNull(); expect(e.missing.join(" ")).toMatch(/public-works items only/); }
   });
   it("prices an expansion only from injected sourced rows and checks the ceiling", () => {
     const out = recommendForParcel(parcel, {

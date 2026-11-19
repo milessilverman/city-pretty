@@ -849,3 +849,37 @@ was made from a test that didn't cover the live page.
 - **AI Advisor Turn Limits & Grounding Transparency:** Handled `pause_turn` gracefully on the final model tool round in
   `workers/advisorAgent.ts` to prevent unexpected loop termination, and surfaced `data.sources` as an expandable "Sources consulted"
   list and `stopped_early` as a prominent pause notice in the chat UI.
+
+### Two branches merged; this base's tables kept; the Invest view carried over (19 Nov)
+
+On 19 Nov the smaller decision-brief branch (last full state: commit 4e76a8a) was merged into this branch. For every
+file both branches changed, this branch's version was kept, including all shared data tables (`statutes.json`,
+`underused_sites.json`, `transit_pipelines.json`, `intercity_transit_corridors.json`, `unit_costs.json` and the
+valuation files). Carried over from the smaller branch: the Invest view (`app/invest.js`, its CSS, `tests/e2e/invest.spec.ts`),
+the decision engine (`src/engines/investmentDecisionEngine.js`, `docs/DECISION-ENGINE.md`, its unit tests), the
+neighborhood-score back-test (`app/data/neighborhood_score_backtest.json`, `scripts/backtest_neighborhood_score.mjs`),
+two new transit tables (`app/data/transit_cost_benchmarks.json`, `app/data/transit_value_effects.json`, their build
+scripts), `scripts/brief.mjs` (`npm run brief -- <fips>`), `scripts/ai_verify_sources.mjs`,
+`docs/PLAN-ACCURACY-TO-DECISIONS.md` and the `research/*_verification.csv`, `research/leftover_claims.md` and
+`research/url_checks.csv` records. The smaller branch's link checker (`scripts/check_source_urls.mjs`) was dropped:
+`scripts/check_sources.py` checks the same `app/data` links monthly. (`research/url_checks.csv` is that script's
+18 Nov output, kept as a record; the research CSVs' own links are not in the monthly check.)
+
+Corrections made while wiring the carried-over code to this base's data:
+- **Improvement ideas showed figures the map withholds.** The engine read every bundle row's cost and value. It now
+  applies `intervention_verification.json` with the map panel's rule and sourced-effect override (a unit test runs
+  both on every row of Cook and Travis). In Travis County's top area, for example, street trees, park upgrades and
+  rooftop solar are now named with no figures.
+- **"Measured locally" evidence tier removed.** The engine called catalog grade-A items in LA "measured locally"; that
+  LA sales estimate could not be reproduced (`audit/bundle-catalog-audit.md`). Audited ideas are now "Sourced inputs" or
+  "Partly verified", from the audit.
+- **Underused-site homes and margin no longer shown.** The smaller branch showed a "screening estimate" for them; this
+  base lists them as unverified model outputs ("margin ... NOT REPRODUCIBLE"), so the Invest view shows the record's
+  note instead of a number. This base has underused sites for Los Angeles County only (the nine hand-typed sites
+  elsewhere, including two in Austin, were removed as fabricated), so other counties say none are measured.
+- **Transit project lengths and costs.** This base's `transit_pipelines.json` has no length or cost fields, so local
+  projects are listed without a capital cost (the smaller branch showed 5.5 miles and $5,750M for the CTA Red Line
+  Extension from its own copy of the table). An intercity corridor's length or cost is used only when its record does
+  not list it as unverified: Austin-San Antonio's 74 miles is shown as not confirmed.
+- **Legality.** The engine called a statute engine that this base replaced; it now passes `statutes.json` to this base's
+  `evaluateByRightHousing` and says "not determined", with that engine's reason, whenever it does not apply a law.

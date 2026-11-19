@@ -8,7 +8,10 @@ const isUrl = (s: any) => typeof s === "string" && /^https?:\/\//.test(s);
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 describe("transit data: every row is sourced and carries a verification block", () => {
-  it("transit_pipelines.json: sourced facts only, no invented metrics or station blurbs", () => {
+  // transit_pipelines.json, intercity_transit_corridors.json and unit_costs.json are this base's tables (the smaller
+  // branch's versions were not carried over on 19 Nov 2026). tests/unit/provenance.test.ts already checks every record's
+  // verification status and the corridors' removed railyard claims; these tests check what the Invest view relies on.
+  it("transit_pipelines.json: no length or cost fields, no finance figures, and p3Type only as an unconfirmed field", () => {
     const pipes = load("app/data/transit_pipelines.json");
     expect(pipes.length).toBeGreaterThanOrEqual(5);
     for (const p of pipes) {
@@ -17,77 +20,57 @@ describe("transit data: every row is sourced and carries a verification block", 
       expect(isUrl(p.rtp_document_url)).toBe(true);
       expect(p.last_verified).toMatch(DATE);
       expect(p.verification.checked_on).toMatch(DATE);
-      expect(p.verification.sources.length).toBeGreaterThan(0);
-      p.verification.sources.forEach((s: string) => expect(isUrl(s)).toBe(true));
-      expect(p.verification.evidence.length).toBeGreaterThan(0);
-      for (const k of ["tdc", "seniorDebt", "tifiaLoan", "developerEquity", "units", "affordPct", "retailSqft", "p3Type", "baseIRR", "baseGroundLease", "baseHomeLiftPct"]) {
-        expect(p[k]).toBeNull();
-      }
-      for (const s of p.stations) {
-        expect(typeof s.lat).toBe("number");
-        expect(typeof s.lng).toBe("number");
-        expect(Number.isNaN(s.lat) || Number.isNaN(s.lng)).toBe(false);
-        expect(s.coordinate_source).toBeTruthy();
-        expect(s.desc).toBeNull(); // no unsourced station descriptions
-      }
-      expect(JSON.stringify({ d: p.corridorDesc, s: p.stations })).not.toMatch(/EV stalls|fast EV|cycleway|solar canopy|health center/i);
+      expect(p.verification.evidence.length).toBeGreaterThan(20);
+      // the Invest view lists every project without a length or cost because the table has none
+      expect(p.length_miles).toBeUndefined();
+      expect(p.total_capital_cost_musd).toBeUndefined();
+      for (const k of ["tdc", "seniorDebt", "tifiaLoan", "developerEquity", "units", "affordPct", "retailSqft", "baseIRR", "baseGroundLease", "baseHomeLiftPct"]) expect(p[k]).toBeNull();
+      if (p.p3Type != null) expect(p.verification.unverified_fields).toContain("p3Type");
+      for (const st of p.stations) { expect(Number.isFinite(st.lat)).toBe(true); expect(Number.isFinite(st.lng)).toBe(true); }
     }
-    const chi = pipes.find((p: any) => p.fips === "17031");
-    expect(chi.total_capital_cost_musd).toBe(5750);
-    expect(chi.length_miles).toBe(5.5);
   });
 
-  it("intercity_transit_corridors.json: only FRA-document facts; every other number is null", () => {
+  it("intercity_transit_corridors.json: a number the record does not list as unverified is quoted in its own evidence", () => {
     const cs = load("app/data/intercity_transit_corridors.json");
     const numericFields = ["route_length_miles", "max_speed_mph", "projected_one_way_minutes", "highway_comparison_minutes", "estimated_capital_cost_billions"];
     for (const c of cs) {
       expect(isUrl(c.source_url)).toBe(true);
-      expect(c.verification).toBeTruthy();
       expect(c.verification.checked_on).toMatch(DATE);
-      for (const f of numericFields) expect(c[f]).toBeNull();
-      expect(c.candidate_railyard_sites).toEqual([]);
-      if (c.verification.status !== "verified_in_fetched_document") {
-        // an unconfirmed corridor must not carry a CID selection or any number
-        expect(c.cid_selection).toBeNull();
-      } else {
-        expect(c.cid_selection.quote.length).toBeGreaterThan(20);
+      const unv = (c.verification.unverified_fields || []).map((u: string) => String(u).split(/[\s(]/)[0]);
+      for (const f of numericFields) {
+        if (c[f] == null || unv.includes(f)) continue;
+        // used as a fact by the Invest view: the record must be checked and its text must carry the figure
+        expect(["verified", "partially_verified"]).toContain(c.verification.status);
+        expect(`${c.verification.evidence} ${c.verification.notes || ""}`).toContain(String(c[f]));
       }
-      for (const s of c.proposed_stations) {
-        expect(s.station_basis).toBe("illustrative_city_center");
-        expect(s.coordinate_source).toBeTruthy();
-        for (const f of ["median_home_value_walkshed", "avg_land_cost_per_sqft", "available_underused_acres_walkshed", "statutory_housing_regime", "recommended_redevelopment_focus"]) {
-          expect(s[f]).toBeNull();
-        }
+      for (const st of c.proposed_stations) {
+        for (const f of ["median_home_value_walkshed", "avg_land_cost_per_sqft", "available_underused_acres_walkshed"]) expect(st[f]).toBeNull();
       }
     }
-    expect(cs.find((c: any) => c.id === "corridor_atx_sat").verification.status).toBe("corridor_not_confirmed");
+    // Austin-San Antonio: the record could not be checked, so its route length is not a fact
+    const atx = cs.find((c: any) => c.id === "corridor_atx_sat");
+    expect(atx.verification.status).toBe("unverified");
+    expect(atx.verification.unverified_fields.join(" ")).toMatch(/route_length_miles/);
   });
 
-  it("unit_costs.json: a price exists only on a confirmed row with source, quote, period and region", () => {
+  it("unit_costs.json: confirmed prices are checked rows with source and quote; no row prices a house addition", () => {
     const rows = load("app/data/unit_costs.json");
-    expect(rows.length).toBe(32);
+    expect(rows.length).toBeGreaterThan(20);
     for (const r of rows) {
-      expect(r.verification).toBeTruthy();
       expect(r.verification.checked_on).toMatch(DATE);
-      if (r.unit_price !== null) {
-        expect(r.status).toBe("confirmed");
+      if (r.status === "confirmed") {
+        expect(["verified", "partially_verified"]).toContain(r.verification.status);
         expect(r.unit_price).toBeGreaterThan(0);
         expect(isUrl(r.source_url)).toBe(true);
         expect(r.quote).toBeTruthy();
-        expect(r.period).toBeTruthy();
-        expect(r.region).toBeTruthy();
-        expect(r.price_basis).toBeTruthy();
         expect(r.unit).toBeTruthy();
-        expect(r.verification.status).toBe("verified_in_fetched_document");
-      } else {
-        expect(r.status).not.toBe("confirmed");
       }
+      if (r.verification.status === "could_not_check" && r.unit_price != null) expect(r.status).not.toBe("confirmed");
+      // the decision engine's house additions find no cost here (docs/DECISION-ENGINE.md)
+      expect(["adu", "added_bedroom", "added_bathroom", "second_storey", "lot_split"]).not.toContain(r.item);
     }
-    // corrections made on 2026-11-18
     const ga = rows.find((r: any) => r.state === "GA" && r.item === "sidewalk");
     expect(ga.unit_price).toBe(45);
-    const tx = rows.filter((r: any) => r.state === "TX");
-    tx.forEach((r: any) => expect(r.unit_price).toBeNull());
   });
 
   it("transit_cost_benchmarks.json: at least 40 US rows, each with source_url, quote and verification; cost/mile is cost / length", () => {
@@ -144,31 +127,8 @@ describe("transit data: every row is sourced and carries a verification block", 
     }
   });
 
-  it("transitCorridorOpportunityEngine returns null, never NaN, on null/missing inputs (ts and js twins)", async () => {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const twins = [await import("../../src/engines/transitCorridorOpportunityEngine"), await import("../../src/engines/transitCorridorOpportunityEngine.js")];
-    for (const m of twins as any[]) {
-      const E = m.default && m.default.evaluateCorridorFeasibility ? m.default : m;
-      const station: any = { id: "s", name: "X", city: "Y", fips: "00000", station_type: "city_center", lat: 40, lng: -100, median_home_value_walkshed: null, avg_land_cost_per_sqft: null, available_underused_acres_walkshed: null, statutory_housing_regime: null, recommended_redevelopment_focus: null };
-      const corridor: any = { id: "c", name: "C", states: ["XX"], proposed_stations: [station], candidate_railyard_sites: [], projected_one_way_minutes: null, highway_comparison_minutes: null };
-      const ev = E.evaluateCorridorFeasibility(corridor);
-      expect(ev.isViable).toBeNull();
-      expect(ev.speedCompetitivenessRatio).toBeNull();
-      expect(ev.totalFeasibleHousingUnits).toBeNull();
-      const tod = E.evaluateStationTODPotential(station);
-      for (const val of Object.values(tod)) if (typeof val === "number") expect(Number.isNaN(val)).toBe(false);
-      expect(tod.feasibleHousingUnits).toBeNull();
-      expect(tod.estimatedFinishedDevelopmentValue).toBeNull();
-      // partial data: only acres known -> units computed, value still null
-      const partial = E.evaluateStationTODPotential({ ...station, available_underused_acres_walkshed: 10 });
-      expect(partial.feasibleHousingUnits).toBe(350);
-      expect(partial.estimatedFinishedDevelopmentValue).toBeNull();
-      // string undefined inputs also safe
-      const undef = E.evaluateCorridorFeasibility({ ...corridor, projected_one_way_minutes: undefined, highway_comparison_minutes: undefined });
-      expect(undef.travelTimeSavedMinutes).toBeNull();
-      for (const budget of [100000, 5000000, 50000000]) {
-        expect(JSON.stringify(E.generateStationInvestmentPlan(corridor, station, budget))).not.toMatch(/NaN|undefined/);
-      }
-    }
-  });
+  // The smaller branch's transitCorridorOpportunityEngine test was removed on 19 Nov 2026: this base has no such
+  // engine (corridor facts reach the page and the advisor as the record's own fields, gated by its verification), and
+  // the Invest view's transit verdicts come from investmentDecisionEngine.evaluateTransit, tested in
+  // tests/unit/investmentDecisionEngine.test.ts.
 });

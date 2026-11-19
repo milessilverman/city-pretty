@@ -111,10 +111,29 @@ test("changing the budget changes which plays are listed", async ({ page }) => {
   await page.click("[data-iv-budget='4']");
   const big = await page.locator("#invest .iv-play").count();
   expect(big).toBeGreaterThan(small);
-  await expect(page.locator("#iv-sites")).toContainText("golf");
+  // Travis County has no underused site on this base (the hand-typed Austin golf course and parking lot were removed as
+  // fabricated, tests/unit/provenance.test.ts), so the card says none are listed instead of inventing one.
+  await expect(page.locator("#iv-sites")).toContainText("No underused sites have been measured");
   expect(await badWords(page)).toEqual([]);
+  // the local project table has no length or cost, so the light-rail project is listed without a cost figure
+  await expect(page.locator("#iv-transit")).toContainText("Project Connect");
+  await expect(page.locator("#iv-transit")).toContainText("not in the project table");
   await page.click("[data-iv-budget='0']");
-  await expect(page.locator("#iv-sites .iv-gated")).toBeVisible();
+  await expect(page.locator("#iv-transit .iv-gated")).toBeVisible();
+});
+
+test("ideas the data audit did not confirm are listed by name with no figures, as on the map panel", async ({ page }) => {
+  await openPage(page);
+  await openInvest(page);
+  await page.click("[data-iv-budget='4']");
+  await openAll(page);
+  const st = await page.evaluate(() => {
+    const m = (window as any).cpInvest.state.model, ver = (window as any).cpInvest.state.data.verification;
+    return { withheld: m.rec.withheld.map((w: any) => w.id), shown: m.rec.ideas.map((x: any) => [x.id, ver[x.id] && ver[x.id].status]) };
+  });
+  expect(st.withheld.length).toBeGreaterThan(0);
+  for (const [, s] of st.shown) expect(["verified", "partially_verified"]).toContain(s);
+  await expect(page.locator("#iv-build .iv-nofgroup")).toContainText("could not be confirmed against a source");
 });
 
 test("See on map leaves Invest and selects that neighborhood; Map and Explore still switch", async ({ page }) => {

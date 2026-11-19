@@ -1,0 +1,388 @@
+{
+ "ran_on": "2026-11-19T16:34:43.319Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "17031": {
+   "county": "Cook IL (East North Central)",
+   "state": "IL",
+   "points": [
+    {
+     "bg": "170318281001",
+     "lat": 41.566985,
+     "lng": -87.528723,
+     "service": "Cook County GIS - Current Parcel (cookVwrDynmc layer 44)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $184k, rent $1,707/mo, homes 257"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 18 pts (current release); page: 18 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 17.8 pts below its 40% goal; box: \"17.8 pts below its 40% goal\" / \"+2.3°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [2,3,53]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IL"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Cook County · 170318281001; page \"Census area: Cook County · block group 170318281001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2011 for 17031; page \"HUD Fair Market Rent (FY2027): 1 bed $1,780 · 2 bed $2,011 · 3 bed $2,586/moChicago-Joliet-Naperville, IL HUD Metro FMR Area. HUD's voucher benchmark (rent plus\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "re-checked alone: FEMA now X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 610 ft; page \"Ground elevation: 610 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "fema_first": {
+       "pass": false,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Not available (No effective FEMA flood map here (unmapped, not 'no risk'))(FEMA National Flood Hazard L\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Chicago: Chicago's Zoning Ordinance is published on American Legal Publishing, which answered the build machine with HTTP 403 on 16 Nov 2026.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "170314605005",
+     "lat": 41.746982,
+     "lng": -87.575555,
+     "service": "Cook County GIS - Current Parcel (cookVwrDynmc layer 44)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $172k, rent $914/mo, homes 222"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 7 pts (current release); page: 7 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 6.7 pts below its 30% goal; box: \"6.7 pts below its 30% goal\" / \"+1.7°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [3,1,71]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IL"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Cook County · 170314605005; page \"Census area: Cook County · block group 170314605005(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2011 for 17031; page \"HUD Fair Market Rent (FY2027): 1 bed $1,780 · 2 bed $2,011 · 3 bed $2,586/moChicago-Joliet-Naperville, IL HUD Metro FMR Area. HUD's voucher benchmark (rent plus\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 587 ft; page \"Ground elevation: 587 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Chicago: Chicago's Zoning Ordinance is published on American Legal Publishing, which answered the build machine with HTTP 403 on 16 Nov 2026.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8931' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-87.528723%2C41.566985&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-87.528723%2C41.566985&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-87.528723%2C41.566985&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8931' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-87.575555%2C41.746982&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-87.575555%2C41.746982&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  },
+  "47135": {
+   "state": "TN",
+   "points": [
+    {
+     "bg": "471359302011",
+     "lat": 35.632827,
+     "lng": -87.931276,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $181k, rent $520/mo, homes 890"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,13,37]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "471359301004",
+     "lat": 35.787008,
+     "lng": -87.905221,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $118k, rent $1,087/mo, homes 678"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,5,13]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": []
+  },
+  "48453": {
+   "county": "Travis TX (West South Central)",
+   "state": "TX",
+   "points": [
+    {
+     "bg": "484530010004",
+     "lat": 30.250146,
+     "lng": -97.723467,
+     "service": "Travis Central Appraisal District parcels (City of Austin copy)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": false,
+       "detail": "expected home value $865k, rent $3,501/mo, homes 245 | panel: Typical home value$865kCensus ACS 2020-24 median value for this block group (Census values stop at $2M) Median rent$3,500 or more/moCensus ACS 2020–24 Homes24"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 11 pts (current release); page: 11 pts, Tree Equity Score 2026 release (file dated 2026-03-13), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 10.7 pts below its 50% goal; box: \"10.7 pts below its 50% goal\" / \"-3.9°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for TX"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Travis County · 484530010004; page \"Census area: Travis County · block group 484530010004(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1817 for 48453; page \"HUD Fair Market Rent (FY2027): 1 bed $1,530 · 2 bed $1,817 · 3 bed $2,292/moAustin-Round Rock-San Marcos, TX MSA. HUD's voucher benchmark (rent plus utilities),\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (0.2 pct annual chance flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 446 ft; page \"Ground elevation: 446 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Austin: Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "484530330002",
+     "lat": 30.240477,
+     "lng": -97.899217,
+     "service": "Travis Central Appraisal District parcels (City of Austin copy)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $560k, rent $1,904/mo, homes 1,106"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 2 pts (current release); page: 2 pts, Tree Equity Score 2026 release (file dated 2026-03-13), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 1.5 pts below its 50% goal; box: \"1.5 pts below its 50% goal\" / \"-0.7°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for TX"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Travis County · 484530330002; page \"Census area: Travis County · block group 484530330002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1817 for 48453; page \"HUD Fair Market Rent (FY2027): 1 bed $1,530 · 2 bed $1,817 · 3 bed $2,292/moAustin-Round Rock-San Marcos, TX MSA. HUD's voucher benchmark (rent plus utilities),\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1051 ft; page \"Ground elevation: 1,051 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Austin: Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "fail",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8931' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8931' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  }
+ },
+ "fema_rechecked_on": "2026-11-19T16:35:17.584Z"
+}

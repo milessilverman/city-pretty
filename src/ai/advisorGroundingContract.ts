@@ -94,6 +94,11 @@ export interface AdvisorUnderusedSite {
   verification: string | null;
 }
 
+// The Invest view's decision brief (app/invest.js; the engine's briefForAdvisor form), passed through as plain JSON.
+// Kept under this size so a request with a full chat history stays under the Worker's 64,000-byte body limit; a larger
+// brief is dropped whole and the reason is sent instead (never cut in the middle).
+export const DECISION_BRIEF_MAX_CHARS = 20000;
+
 export interface AdvisorContext {
   county: AdvisorCounty;
   roiMode: string | null;
@@ -102,6 +107,8 @@ export interface AdvisorContext {
   hudFmr?: AdvisorHudFmr | null;
   intercityCorridor?: AdvisorIntercityCorridor | null;
   underusedSite?: AdvisorUnderusedSite | null;
+  decision_brief?: unknown;
+  decision_brief_omitted?: string | null;
 }
 
 // Stable text: keep it free of per-request values so it can be prompt-cached.
@@ -110,6 +117,7 @@ export const ADVISOR_SYSTEM_PROMPT = [
   "Each question comes with the data the page is showing, as JSON. Base every figure you give on that JSON. When a value is null or missing, say the page does not have it; do not estimate it or bring in numbers from elsewhere.",
   "If parcel.valueEstimateWithheld is set, the page deliberately gives no home value for this lot. Do not give one; explain the reason it states. A parcel.valueEstimate has no accuracy range; unless its status reports a back-test result, it is an unvalidated estimate that has not been tested against recorded sales. Say which whenever you use it.",
   "Some records carry a verification field. Treat anything not marked \"verified\" as unconfirmed and say so. Fields such as underusedSite.potentialHomes and underusedSite.margin are model estimates, not facts.",
+  "decision_brief, when present, is the page's own investment brief for this county. Every number in it is {value, unit, basis, source}; basis \"modelled\" or \"assumed\" means an estimate, not a measurement. Items in its withheld lists and fields marked not determined have no figure or answer on the page: say so, and do not fill them in.",
   "The page's figures are screening estimates from public data, not appraisals, zoning determinations, tax advice or legal advice. When a question is about building, adding a unit, splitting a lot, permits or property taxes, give what the data shows and name the city or county office that decides.",
   "Mention a state or federal law only when you are confident it applies in this state, and say that rules change. As of 2026 the federal 30% residential solar credit (IRC 25D) no longer applies to systems installed after 2025.",
   "Answer in a few sentences, then at most five short bullet points if they help. Use plain text with **bold** and '-' bullets only.",
@@ -229,6 +237,17 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       inConservationEasement: bool(us.inConservationEasement),
       verification: str(us.verification, 40),
     };
+  }
+  if (r.decision_brief != null && typeof r.decision_brief === "object" && !Array.isArray(r.decision_brief)) {
+    // Plain JSON only (functions and prototypes vanish in the round trip); dropped whole if too large.
+    let text: string | null = null;
+    try { text = JSON.stringify(r.decision_brief); } catch { text = null; }
+    if (text && text.length <= DECISION_BRIEF_MAX_CHARS) {
+      ctx.decision_brief = JSON.parse(text);
+    } else {
+      ctx.decision_brief = null;
+      ctx.decision_brief_omitted = text ? `decision brief too large (${text.length} characters; limit ${DECISION_BRIEF_MAX_CHARS})` : "decision brief could not be read";
+    }
   }
   return ctx;
 }

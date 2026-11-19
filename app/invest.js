@@ -1,7 +1,10 @@
 // Invest view: the decision brief for one county. Reads the globals app.js sets up (D, D_OC, COUNTY_BUNDLES, SITES,
-// activeCounty, activeFips, activeHouse, byId, select, cpJson, ...) and the engine in src/engines/investmentDecisionEngine.js.
-// Every figure comes from the engine's output ({ value, unit, source, basis }) or from a data table; this file adds
-// no financial maths. A figure the engine could not fill shows "Not on file" with the reason the engine gave.
+// activeCounty, activeFips, activeHouse, byId, select, cpJson, findNearestTransitStation, openAiAdvisor, ...) and the
+// engine in src/engines/investmentDecisionEngine.js. Every figure comes from the engine's output ({ value, unit, source,
+// basis }) or from a data table; this file adds no financial maths. A figure the engine could not fill shows
+// "Not on file" with the reason the engine gave. The same verification rules as the map panel apply: an idea carries
+// figures only when app/data/intervention_verification.json allows it, a law applies only when the statute engine
+// confirms it, and a field a record lists in verification.unverified_fields is shown as not confirmed, not as a number.
 (() => {
 "use strict";
 
@@ -79,12 +82,25 @@ const tierCls = t => /measured/i.test(t) ? TIER_CLS.measured : /borrowed/i.test(
 function loadData() {
   if (iv.dataP) return iv.dataP;
   const j = id => (typeof cpJson === "function" ? cpJson(id) : Promise.resolve(null)).catch(() => null);
-  iv.dataP = Promise.all([j("neighborhood-score-backtest"), j("transit-cost-benchmarks"), j("transit-value-effects"), j("underused-sites"), j("intercity-corridors"), j("transit-pipelines")])
-    .then(([bt, cost, eff, sites, corr, pipe]) => {
-      iv.data = { backtest: bt, cost: cost && cost.rows || [], effects: eff && eff.rows || [], sites: Array.isArray(sites) ? sites : [], corridors: Array.isArray(corr) ? corr : [], pipelines: Array.isArray(pipe) ? pipe : [], laws: null };
+  iv.dataP = Promise.all([j("neighborhood-score-backtest"), j("transit-cost-benchmarks"), j("transit-value-effects"), j("underused-sites"), j("intercity-corridors"), j("transit-pipelines"),
+    j("intervention-verification"), j("statutes"), j("unit-costs"), j("county-valuation-models")])
+    .then(([bt, cost, eff, sites, corr, pipe, ver, laws, uc, vm]) => {
+      const verOk = ver && typeof ver === "object" && !Array.isArray(ver);
+      iv.data = { backtest: bt, cost: cost && cost.rows || [], effects: eff && eff.rows || [], sites: Array.isArray(sites) ? sites : [], corridors: Array.isArray(corr) ? corr : [], pipelines: Array.isArray(pipe) ? pipe : [],
+        verification: verOk ? ver : null, laws: Array.isArray(laws) ? laws : null, unitCosts: Array.isArray(uc) ? uc : [], valuationModels: vm && vm.counties ? vm : null };
       return iv.data;
     });
   return iv.dataP;
+}
+// A record's own verification decides whether a field is a fact here: listed in verification.unverified_fields, or the
+// whole record unchecked, gives no figure and the reason instead.
+const UNCHECKED = /^(unverified|could_not_check|corridor_not_confirmed)$/;
+function checkedNum(rec, field) {
+  const v = (rec && rec.verification) || {}, x = rec ? rec[field] : null;
+  if (!isNum(x)) return { value: null, why: "not in the record" };
+  if (UNCHECKED.test(v.status || "unverified")) return { value: null, why: `not confirmed: the record could not be checked against a source (${v.status || "no status"})` };
+  if ((v.unverified_fields || []).some(u => String(u).split(/[\s(]/)[0] === field)) return { value: null, why: "not confirmed: listed as unverified in the record" };
+  return { value: x, why: null };
 }
 
 const _laCache = {};
@@ -93,8 +109,17 @@ function bundleFor(fips) {
     if (typeof D === "undefined" || !D || !D.details || !D.catalog) return null;
     const c = _laCache.b;
     if (c && c.src === D.details) return c.b;
+    // LA's details are a lazily unpacked Proxy (lazyDetails in app/app.js) whose keys are not enumerable, so the block
+    // group ids come from the map's features and each record is read through the Proxy.
     const det = {};
-    for (const k of Object.keys(D.details)) if (k.startsWith("06037")) det[k] = D.details[k];
+    // LA's names live on the map features (properties n, c), not in the detail records.
+    const props = new Map(((D.bgs && D.bgs.features) || []).filter(f => f && f.properties && typeof f.properties.id === "string").map(f => [f.properties.id, f.properties]));
+    const ids = [...props.keys()].filter(k => k.startsWith("06037"));
+    for (const k of (ids.length ? ids : Object.keys(D.details))) {
+      if (!k.startsWith("06037")) continue;
+      const v = D.details[k], p = props.get(k) || {};
+      if (v && v.m) det[k] = (v.m.n || !p.n) ? v : Object.assign({}, v, { m: Object.assign({}, v.m, { n: p.n, c: v.m.c || p.c || null }) });
+    }
     const b = { details: det, meta: Object.assign({}, D.meta || {}, { fips: "06037", county: "Los Angeles County" }), features: (D.bgs && D.bgs.features) || [] };
     _laCache.b = { src: D.details, b };
     return b;
@@ -119,21 +144,51 @@ function engineEffects(rows) {
   return rows.filter(r => r && isNum(r.effect_pct)).map(r => ({ mode: effectMode(r.mode), distance_band: r.distance_band, effect_pct: r.effect_pct, source_url: r.source_url || null }));
 }
 
+// The open lot's facts, read the way the house panel reads them for the statute engine (renderHouse in app/app.js:
+// the same zoning-text tests, nearest-station distance and hazard checks), so both give the same legal answer.
 function parcelFacts() {
   const h = (typeof activeHouse !== "undefined") ? activeHouse : null;
   if (!h || !h.a) return null;
   const a = h.a;
+  const zr = (() => {   // LA's zoning layer at the lot, as renderHouse reads it (zoneAt, zoneRules)
+    try {
+      const z = h.ll && typeof zoneAt === "function" ? zoneAt(h.ll) : null;
+      if (!z || typeof zoneRules !== "function") return null;
+      const B = (typeof activeBundle === "function" && activeBundle()) || (typeof D !== "undefined" ? D : null) || {};
+      const sel = typeof selected !== "undefined" ? selected : null;
+      const p = sel && typeof byId !== "undefined" && byId.get(sel) ? byId.get(sel).properties : {};
+      const m = ((B.details && sel && B.details[sel]) || {}).m || p || {};
+      return zoneRules(z.zone, (m.z || {}).j || p.c);
+    } catch (e) { return null; }
+  })();
+  const hasZon = !!(zr ? zr.zone : (a.ZoneCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(a.ZoneCode).trim())));
+  const baseZone = zr ? zr.zone : (hasZon ? String(a.ZoneCode).trim() : null);
+  const zoneOrUse = String(baseZone || "") + " " + String(a.UseDescription || "");
+  const isComm = /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
+  const isMulti = (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(baseZone || ""));
+  const isSfr = !isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(baseZone || "").trim()));
+  let stn = null;
+  if (h.ll && typeof findNearestTransitStation === "function") { try { stn = findNearestTransitStation(h.ll.lat, h.ll.lng); } catch (e) { stn = null; } }
+  const R = h.st && h.st.R;
   return {
     address: a.SitusFullAddress || null,
     facts: {
-      parcel_id: String(a.AIN || a.APN || ""),
+      parcel_id: String(a.AIN || a.APN || "PARCEL"),
       state_code: typeof activeState === "function" ? activeState() : null,
       county_fips: fipsNow(),
-      base_zoning_code: a.ZoneCode ? String(a.ZoneCode).trim() : null,
+      base_zoning_code: baseZone,
       municipality_pop: isNum(a.municipality_pop) ? a.municipality_pop : null,
       county_pop: isNum(a.county_pop) ? a.county_pop : null,
-      is_single_family_residential: /single\s*family|sfr/i.test(String(a.UseDescription || "")),
-      lotSqft: isNum(h.lot) ? h.lot : null,
+      is_commercial_or_mixed_use: isComm,
+      is_single_family_residential: isSfr,
+      dist_to_heavy_rail_mi: (stn && (stn.type === "heavy_rail" || !stn.type) && isNum(stn.distMi)) ? stn.distMi : null,
+      dist_to_frequent_bus_or_brt_mi: (stn && (stn.type === "bus" || stn.type === "brt") && isNum(stn.distMi)) ? stn.distMi : null,
+      exclusions: {
+        historic_district_hpoz: (R && R.hpoz && R.hpoz.ok) ? ([R.hpoz, R.hcm].filter(Boolean).some(x => x && x.ok && x.v && x.v.length) || (R.hc && R.hc.ok && Array.isArray(R.hc.v) && R.hc.v.some(r => /design|landmark|register/i.test(r.Status_Code_Description || "")))) : null,
+        fema_100yr_floodway: (R && R.fema) ? !!R.fema.sfha : null,
+        calfire_or_state_vhfhsz: (R && R.fire) ? !!R.fire.vh : null,
+      },
+      lot_sqft: isNum(h.lot) && h.lot > 0 ? h.lot : null,
     },
   };
 }
@@ -145,7 +200,7 @@ function transitAreas(fips, d) {
 }
 function pipeMode(p) {
   const t = String(p.title || "");
-  return /light rail|streetcar/i.test(t) ? "light_rail" : /bus rapid|\bBRT\b/i.test(t) ? "brt" : null;
+  return /light rail|streetcar/i.test(t) ? "light_rail" : /bus rapid|\bBRT\b/i.test(t) ? "brt" : /subway|red line|heavy rail/i.test(t) ? "heavy_rail" : null;
 }
 
 // ---------------------------------------------------------------- model: everything the engine says for this county
@@ -160,7 +215,8 @@ function ready() {
 
 function build(fips, B, d) {
   const eng = E();
-  const ctx = { backtest: d.backtest, catalog: D.catalog, underusedSites: d.sites, sites: (typeof SITES !== "undefined") ? SITES : null, costBenchmarks: engineCosts(d.cost), valueEffects: engineEffects(d.effects) };
+  const ctx = { backtest: d.backtest, catalog: D.catalog, verification: d.verification, underusedSites: d.sites, sites: (typeof SITES !== "undefined") ? SITES : null, costBenchmarks: engineCosts(d.cost), valueEffects: engineEffects(d.effects),
+    laws: d.laws || undefined, unitCosts: d.unitCosts, valuationModels: d.valuationModels };
   const rk = eng.rankNeighborhoods(B, { backtest: d.backtest });
   const ranked = rk.ranked || [];
   const clean = ranked.filter(r => !(r.dataFlags && r.dataFlags.length));
@@ -173,12 +229,17 @@ function build(fips, B, d) {
   try { brief = eng.buildDecisionBrief(B, { blockGroupId: hood, parcel: pf ? pf.facts : null, top: 10 }, ctx); } catch (e) { brief = null; }
   const d0 = hood ? B.details[hood] : null;
   let rec = null;
-  if (d0) { try { rec = eng.recommendForNeighborhood({ id: hood, m: d0.m, r: d0.r }, { catalog: D.catalog, countyFips: fips, underusedSites: d.sites, sites: (SITES_FOR(hood)) }); } catch (e) { rec = null; } }
-  // transit: this county's local pipelines and intercity corridors, each run through the engine
+  if (d0) { try { rec = eng.recommendForNeighborhood({ id: hood, m: d0.m, r: d0.r }, { catalog: D.catalog, verification: d.verification, countyFips: fips, underusedSites: d.sites, sites: (SITES_FOR(hood)) }); } catch (e) { rec = null; } }
+  // transit: this county's local projects and intercity corridors, each run through the engine. The project table
+  // (transit_pipelines.json) has no length or cost fields; a corridor's length and cost are used only when its own
+  // verification confirms them.
   const { corr, pipes } = transitAreas(fips, d);
   const tCtx = { costBenchmarks: ctx.costBenchmarks, valueEffects: ctx.valueEffects };
-  const pipeEval = pipes.map(p => ({ row: p, ev: eng.evaluateTransit({ name: p.title, lengthMiles: isNum(p.length_miles) ? p.length_miles : null, capitalCostUsd: isNum(p.total_capital_cost_musd) ? p.total_capital_cost_musd * 1e6 : null, mode: pipeMode(p) }, tCtx) }));
-  const corrEval = corr.map(c => ({ row: c, ev: eng.evaluateTransit({ name: c.name, lengthMiles: isNum(c.route_length_miles) ? c.route_length_miles : null, intercityDistanceMiles: isNum(c.route_length_miles) ? c.route_length_miles : null, capitalCostUsd: isNum(c.estimated_capital_cost_billions) ? c.estimated_capital_cost_billions * 1e9 : null, mode: /high_speed/.test(c.corridor_type || "") ? "hsr" : null }, tCtx) }));
+  const pipeEval = pipes.map(p => ({ row: p, ev: eng.evaluateTransit({ name: p.title, lengthMiles: null, capitalCostUsd: null, mode: pipeMode(p) }, tCtx) }));
+  const corrEval = corr.map(c => {
+    const len = checkedNum(c, "route_length_miles"), cost = checkedNum(c, "estimated_capital_cost_billions");
+    return { row: c, len, cost, ev: eng.evaluateTransit({ name: c.name, lengthMiles: len.value, intercityDistanceMiles: len.value, capitalCostUsd: cost.value != null ? cost.value * 1e9 : null, mode: /high_speed/.test(c.corridor_type || "") ? "hsr" : null }, tCtx) };
+  });
   return { fips, B, rk, ranked, clean, hood, brief, rec, pf, pipeEval, corrEval, countySites: d.sites.filter(s => s && s.countyFips === fips) };
 }
 function SITES_FOR(id) {
@@ -192,15 +253,18 @@ function nofGroup(open, key, items) {
   if (!items.length) return "";
   return det(open, key, `Not on file yet (${items.length}) - what data is missing`, `<ul class="iv-nofl">${items.map(x => `<li><b>${esc2(x.name)}</b>${x.chip ? ` <span class="iv-chip">${esc2(x.chip)}</span>` : ""}<span class="iv-muted"> ${x.why ? esc2(x.why) : "no figure on file"}</span></li>`).join("")}</ul>`, "iv-nofgroup");
 }
+// The chip says what the data audit found (app/data/intervention_verification.json), as the map panel does.
+const VER_TXT = { verified: "Sourced inputs", partially_verified: "Partly verified", unverified: "Not sourced yet" };
 function tierChip(ev) {
   if (!ev) return "";
   const t = ev.tier || "assumed";
-  return `<span class="iv-tier ${tierCls(t)}" title="${esc2(ev.note || "")}">${esc2(TIER_TXT[t] || t)}</span>`;
+  const label = ev.verification && VER_TXT[ev.verification] ? VER_TXT[ev.verification] : (TIER_TXT[t] || t);
+  return `<span class="iv-tier ${tierCls(t)}" title="${esc2(ev.note || "")}">${esc2(label)}</span>`;
 }
 function evidenceDetail(ev) {
   if (!ev) return "";
   const srcs = (ev.sources || []).map(s => { const u = String(s).match(/https?:\/\/[^\s;,)"]+/); return `<li>${u ? `<a href="${esc2(u[0])}" target="_blank" rel="noopener">${esc2(s)}</a>` : esc2(s)}</li>`; }).join("");
-  return `<div class="iv-ev">${tierChip(ev)}${ev.grade ? `<span class="iv-muted"> study grade ${esc2(ev.grade)}</span>` : ""}${ev.note ? `<p class="iv-muted">${esc2(ev.note)}</p>` : ""}${srcs ? `<p class="iv-k">Sources (${(ev.sources || []).length})</p><ul>${srcs}</ul>` : ""}${ev.caveat ? `<p class="iv-muted">${esc2(ev.caveat)}</p>` : ""}</div>`;
+  return `<div class="iv-ev">${tierChip(ev)}${ev.grade ? `<span class="iv-muted"> catalog grade ${esc2(ev.grade)} (the build's own rating)</span>` : ""}${ev.note ? `<p class="iv-muted">${esc2(ev.note)}</p>` : ""}${ev.evidenceNote ? `<p class="iv-muted">Audit note: ${esc2(ev.evidenceNote)}</p>` : ""}${srcs ? `<p class="iv-k">Sources the catalog cites (${(ev.sources || []).length})</p><ul>${srcs}</ul>` : ""}${ev.caveat ? `<p class="iv-muted">${esc2(ev.caveat)}</p>` : ""}</div>`;
 }
 function rowHTML(o, open) {
   return `<li class="iv-play iv-row${o.cls ? " " + o.cls : ""}"><div class="iv-row-top">
@@ -218,7 +282,7 @@ function honest(bt, fips, name) {
   const row = (bt.per_metro || []).find(r => r.fips === fips);
   const n = bt.sample && bt.sample.counties;
   if (!row || (row.engine_rho_P1 == null && row.engine_rho_P2 == null)) {
-    return { tone: "neutral", plain: "this county was not back-tested, so treat these as places to investigate, not a forecast", text: `Not back-tested here. The test covered the ${n || "50"} largest counties and ${name} was not one of them, so we do not know whether this ranking has worked here. Treat it as a list to investigate, not a forecast.` };
+    return { tone: "neutral", plain: "this county was not back-tested, so treat these as places to investigate, not a forecast", text: `Not back-tested here. The test covered ${n || "50"} large counties, chosen by size from the county data files, and ${name} was not one of them, so we do not know whether this ranking has worked here. Treat it as a list to investigate, not a forecast.` };
   }
   const r1 = row.engine_rho_P1, r2 = row.engine_rho_P2;
   const rho = v => v == null ? "not tested" : String(v);
@@ -377,6 +441,7 @@ function buildCard(m, open) {
         ${x.why ? `<p class="iv-muted">Why here: ${esc2(x.why)}</p>` : ""}${evidenceDetail(x.evidence)}` }, open);
   };
   const offItems = bl.off.map(it => ({ name: it.name, chip: it.chip, why: (it.p ? it.p.missing : it.x.missing) && (it.p ? it.p.missing : it.x.missing).length ? missList(it.p ? it.p.missing : it.x.missing) : "no cost or value figure on file" }));
+  for (const w of rec.withheld || []) offItems.push({ name: w.name, chip: "no figures", why: w.reason });
   if (rec.missing && rec.missing.length) offItems.push({ name: "Other inputs for this area", why: missList(rec.missing) });
   return `<section class="iv-card" id="iv-build" aria-labelledby="iv-build-h">
     <h3 id="iv-build-h">Build</h3>
@@ -391,12 +456,13 @@ function buildCard(m, open) {
 }
 
 // ---------------------------------------------------------------- card: properties to redevelop
+// Model-output fields a site record lists as unverified (homes it could hold, margin, land value) get no figure here;
+// the record's own note on how each was made is shown instead.
+const SITE_MODEL_FIELDS = [["potentialHomes", "Homes it could hold"], ["margin", "Developer margin"], ["marketLandValue", "Market land value"]];
 function siteDetail(s) {
-  const v = s.verification || {}, se = s.screening_estimate;
-  const ins = se && se.inputs ? Object.keys(se.inputs).map(k => {
-    const x = se.inputs[k];
-    return `<li><span class="iv-in-k">${esc2(k)}</span> ${x.value == null ? nof(x.source || "") : `<b>${esc2(String(x.value))}</b>`} ${basisTag(x.assumed ? "assumed" : "measured")}<span class="iv-muted"> ${esc2(x.note || x.source || "")}</span></li>`;
-  }).join("") : "";
+  const v = s.verification || {};
+  const uf = (v.unverified_fields || []).map(u => String(u).split(/[\s(]/)[0]);
+  const held = SITE_MODEL_FIELDS.filter(([f]) => s[f] != null || uf.includes(f)).map(([f, label]) => `<div><dt>${label}</dt><dd>${uf.includes(f) ? nof("model estimate, listed as unverified in the record" + (v.model_output_fields && v.model_output_fields[f] ? ": " + v.model_output_fields[f] : "")) : isNum(s[f]) ? (f === "potentialHomes" ? Math.round(s[f]).toLocaleString("en-US") : money(s[f])) + " " + basisTag("modelled") : nof("")}</dd></div>`).join("");
   const facts = [
     ["Zoning", s.baseZoning ? `${esc2(s.baseZoning)}${s.zoningCategory ? ` (${esc2(s.zoningCategory)})` : ""} <span class="iv-muted">from the county data bundle, not re-checked</span>` : nof("zoning code not on file")],
     ["Owner", s.publicOwner || s.ownerName ? esc2(s.publicOwner || s.ownerName) : nof("owner not on file")],
@@ -405,16 +471,9 @@ function siteDetail(s) {
   ].map(([k, val]) => `<div><dt>${k}</dt><dd>${val}</dd></div>`).join("");
   const ev = v.evidence_url ? `<a href="${esc2(v.evidence_url)}" target="_blank" rel="noopener">evidence</a>` : "";
   return `${s.address ? `<p class="iv-muted">${esc2(s.address)}${s.cityName ? ", " + esc2(s.cityName) : ""}</p>` : s.cityName ? `<p class="iv-muted">${esc2(s.cityName)}</p>` : ""}
-    <p class="iv-muted">Facts verification: ${esc2(v.status || "not verified")}${v.checked ? `, checked ${esc2(v.checked)}` : ""} ${ev}${(v.fields_measured || []).length ? ` (measured: ${esc2(v.fields_measured.join(", "))})` : ""}</p>
+    <p class="iv-muted">Facts verification: ${esc2((v.status || "not verified").replace(/_/g, " "))}${v.audited ? `, checked ${esc2(v.audited)}` : ""} ${ev}${v.source_fields_origin ? ` (${esc2(v.source_fields_origin)})` : ""}</p>
     <dl class="iv-dl iv-facts">${facts}</dl>
-    ${se ? `<div class="iv-screen"><div class="iv-screen-h">Screening estimate - assumptions</div>
-      <p>${esc2(se.idea || "")}</p>
-      <dl class="iv-dl"><div><dt>Homes</dt><dd>${se.potentialHomes != null ? `${Math.round(se.potentialHomes).toLocaleString("en-US")} ${basisTag("assumed")}` : nof("missing input")}</dd></div>
-        <div><dt>Margin</dt><dd>${se.margin != null ? `${money(se.margin)} ${basisTag("assumed")}` : nof("needs " + ((se.missing_inputs || []).join(", ") || "more inputs"))}</dd></div></dl>
-      <ul class="iv-ins">${ins}</ul>
-      ${(se.missing_inputs || []).length ? `<p class="iv-muted">Missing inputs: ${missList(se.missing_inputs)}</p>` : ""}
-      ${se.formula ? `<p class="iv-muted">Formula: ${esc2(se.formula)}</p>` : ""}
-      <p class="iv-muted">A scenario, not a measurement. The homes-per-acre, share built on, sale-price ratio and cost per home are assumptions.</p></div>` : ""}`;
+    ${held ? `<div class="iv-screen"><div class="iv-screen-h">Model estimates in the record</div><dl class="iv-dl">${held}</dl></div>` : ""}`;
 }
 function sitesCard(m, open) {
   const bud = BUDGET_OK();
@@ -422,7 +481,7 @@ function sitesCard(m, open) {
   const places = ((m.rec && m.rec.places) || []).filter(p => !p.cost || p.cost.low.value == null || p.cost.low.value <= bud);
   const openTier = bud >= TIER_MIN.site;
   const shown = iv.moreSites ? sl.on : sl.on.slice(0, 4);
-  const sRow = s => { const v = s.verification || {}; return rowHTML({ name: siteName(s), chip: s.kind || "site", fig: keyFig("Size", fig({ value: s.acres, unit: "acres", source: s.sourceUrl, basis: "measured" })), ev: `<span class="iv-verif" title="${esc2((v.fields_measured || []).join(", "))}">Facts: ${esc2(v.status || "not verified")}</span>${s.screening_estimate ? ` <span class="iv-chip iv-unconf">Screening estimate inside</span>` : ""}`, sub: s.cityName ? esc2(s.cityName) : "", key: "site-" + esc2(s.id), detail: siteDetail(s) }, open); };
+  const sRow = s => { const v = s.verification || {}; return rowHTML({ name: siteName(s), chip: s.kind || "site", fig: keyFig("Size", fig({ value: s.acres, unit: "acres", source: s.sourceUrl, basis: "measured" })), ev: `<span class="iv-verif" title="${esc2((v.source_fields || []).join(", "))}">Facts: ${esc2((v.status || "not verified").replace(/_/g, " "))}</span>`, sub: s.cityName ? esc2(s.cityName) : "", key: "site-" + esc2(s.id), detail: siteDetail(s) }, open); };
   let body;
   if (!list.length) body = `<p class="iv-empty">No underused sites have been measured for ${esc2(countyShort())} yet, so none are listed. Only sites whose size was measured from a parcel or map record are shown; none are inferred.</p>`;
   else if (!openTier) body = `<p class="iv-gated">${list.length} measured ${list.length === 1 ? "site is" : "sites are"} listed in ${esc2(countyShort())}. Site-sized plays start at about $2M; raise the budget to see ${list.length === 1 ? "it" : "them"}.</p>`;
@@ -433,22 +492,21 @@ function sitesCard(m, open) {
   const offItems = (openTier ? sl.off.map(s => ({ name: siteName(s), chip: s.kind || "site", why: "size not measured" })) : []).concat(pOff.map(p => ({ name: p.name || p.type || "Site", chip: p.type || "site", why: "no cost range in the sites bundle" })));
   return `<section class="iv-card" id="iv-sites" aria-labelledby="iv-sites-h">
     <h3 id="iv-sites-h">Properties</h3>
-    <p class="iv-lede">Golf courses, parking lots and vacant land to redevelop. The facts (size, place) carry a verification status. The homes-and-margin figure is a separate screening estimate built on assumptions.</p>
+    <p class="iv-lede">Golf courses, parking lots and vacant land to redevelop. The facts (size, place) carry a verification status. The record's model estimates (homes it could hold, margin, land value) are listed as unverified, so no figure is shown for them.</p>
     ${body}${placeHTML}${nofGroup(open, "off-sites", offItems)}
   </section>`;
 }
 
 // ---------------------------------------------------------------- card: this house
-function lawDate(citation) {
-  const L = iv.data && iv.data.laws; if (!L || !citation) return null;
-  const c = String(citation);
-  const row = L.find(l => l && l.bill_number && c.includes(l.bill_number) && (!l.state_code || c.startsWith(l.state_code)));
-  return row ? (row.last_verified || null) : null;
-}
 function legalShort(l) { return !l ? "Law not determined" : /^allowed/.test(l.status) ? "Allowed by state law" : "Law not determined"; }
 function legalHTML(l) {
   if (!l) return nof("");
-  if (/^allowed/.test(l.status)) { const dt = lawDate(l.citation); return `Allowed by ${esc2(l.citation || "state law")} - ${dt ? `checked ${esc2(dt)}` : "check date not on file"}`; }
+  if (/^allowed/.test(l.status)) {
+    const st = l.verification_status ? String(l.verification_status).replace(/_/g, " ") : "status not on file";
+    const link = l.statute_url ? ` <a class="iv-src" href="${esc2(l.statute_url)}" target="_blank" rel="noopener">law text</a>` : "";
+    const unc = (l.unconfirmed_fields || []).length ? `<br><span class="iv-muted">Not confirmed in the law's text: ${esc2(l.unconfirmed_fields.join("; "))}</span>` : "";
+    return `Allowed by ${esc2(l.citation || "state law")} (law text ${esc2(st)}${l.checked ? `, checked ${esc2(l.checked)}` : ", check date not on file"})${link}. A screen, not a permit: the city or county decides.${unc}`;
+  }
   return `Not determined: ${esc2(l.why || "no rule loaded")}`;
 }
 function houseCard(m, open) {
@@ -466,11 +524,11 @@ function houseCard(m, open) {
         <div><dt>Value added</dt><dd>${fig(x.valueAdded, "no sourced value coefficient for this item")}</dd></div>
         <div><dt>Net value</dt><dd>${fig(x.netValue, "needs both cost and value added")}</dd></div></dl>
       ${x.missing && x.missing.length ? `<p class="iv-k">What data is missing</p><ul>${x.missing.map(t => `<li>${esc2(t)}</li>`).join("")}</ul>` : ""}` }, open)).join("");
-  const offItems = off.map(x => ({ name: x.label, chip: legalShort(x.legal), why: x.missing && x.missing.length ? x.missing.join("; ") : "no sourced construction cost or value for this item" }));
-  return head + `<p class="iv-lede">${m.pf.address ? `<b>${esc2(m.pf.address)}</b>` : "The lot open on the map"}${p.parcelId ? ` <span class="iv-muted">(parcel ${esc2(p.parcelId)})</span>` : ""}.</p>
+  const offItems = off.map(x => ({ name: x.label, chip: legalShort(x.legal), why: [x.legal && x.legal.why ? "Law: " + x.legal.why : "", x.missing && x.missing.length ? x.missing.join("; ") : "no sourced construction cost or value for this item"].filter(Boolean).join(". ") }));
+  return head + `<p class="iv-lede">${m.pf.address ? `<b>${esc2(m.pf.address)}</b>` : "The lot open on the map"}${p.parcelId && !String(m.pf.address || "").includes(p.parcelId) ? ` <span class="iv-muted">(parcel ${esc2(p.parcelId)})</span>` : ""}.</p>
     ${exps ? `<ul class="iv-plays">${exps}</ul>` : `<p class="iv-empty">No addition has a cost or value figure on file.</p>`}
     ${nofGroup(open, "off-house", offItems)}
-    ${det(open, "house-law", "Zoning, statutes and caveats", `${p.zoning ? `<p class="iv-muted">Statutes found for this zone: ${p.zoning.statutes.length ? esc2(p.zoning.statutes.join("; ")) : "none"}. ${esc2(p.zoning.note || "")}</p>` : `<p class="iv-muted">Zoning not determined${p.missing && p.missing.length ? ": " + missList(p.missing) : ""}.</p>`}<ul class="iv-caveats">${p.caveats.map(c => `<li>${esc2(c)}</li>`).join("")}</ul>`)}</section>`;
+    ${det(open, "house-law", "Zoning, statutes and caveats", `${p.zoning ? `<p class="iv-muted">State laws that apply to this lot: ${p.zoning.statutes.length ? esc2(p.zoning.statutes.join("; ")) : "none confirmed"}. ${esc2(p.zoning.note || "")}</p>${(p.zoning.not_confirmed || []).length ? `<p class="iv-k">Laws on file that could not be applied here</p><ul class="iv-caveats">${p.zoning.not_confirmed.map(c => `<li>${esc2(c)}</li>`).join("")}</ul>` : ""}` : `<p class="iv-muted">Zoning not determined: ${(p.missing || []).includes("base_zoning_code") ? "the parcel record has no zoning code, so no state law was applied" : "the statute engine did not run"}.</p>`}<ul class="iv-caveats">${p.caveats.map(c => `<li>${esc2(c)}</li>`).join("")}</ul>`)}</section>`;
 }
 
 // ---------------------------------------------------------------- card: transit
@@ -554,22 +612,25 @@ function transitCard(m, open) {
   const corridorOpen = bud >= TIER_MIN.corridor;
   const nCorr = m.pipeEval.length + m.corrEval.length;
   const pipeRows = [], corrRows = [], offItems = [];
-  m.pipeEval.forEach(({ row, ev }) => {
-    if (row.length_miles == null && row.total_capital_cost_musd == null) { offItems.push({ name: row.title, chip: "local project", why: "no length or cost stated" }); return; }
-    pipeRows.push(rowHTML({ name: row.title, chip: "local project", fig: row.total_capital_cost_musd != null ? keyFig("Capital cost", money(row.total_capital_cost_musd * 1e6) + " " + basisTag("measured")) : keyFig("Length", esc2(row.length_miles + " miles") + " " + basisTag("measured")), ev: `<span class="iv-chip">${esc2(VERDICT_TXT[ev.verdict] || "Not enough data to say")}</span>`, sub: esc2(row.agency || "") + (row.status ? ". Status: " + esc2(row.status) : ""), key: "tp-" + esc2(row.title),
-      detail: `<dl class="iv-dl"><div><dt>Length</dt><dd>${row.length_miles != null ? esc2(row.length_miles + " miles") + " " + basisTag("measured") : nof("not stated")}</dd></div>
-        <div><dt>Capital cost</dt><dd>${row.total_capital_cost_musd != null ? money(row.total_capital_cost_musd * 1e6) + " " + basisTag("measured") : nof("not stated")}</dd></div></dl>
-        ${row.rtp_document_url ? `<p class="iv-muted"><a href="${esc2(row.rtp_document_url)}" target="_blank" rel="noopener">Official project profile</a></p>` : ""}
-        ${verdictBox(ev, "Verdict from this project's own figures; the density test needs a station-area density that is not on file.", open, "tpv-" + esc2(row.title))}` }, open));
+  const verLine = r => { const v = r.verification || {}; return `<p class="iv-muted">Record check: ${esc2(String(v.status || "unverified").replace(/_/g, " "))}${v.checked_on ? `, ${esc2(v.checked_on)}` : ""}.${v.evidence ? ` What the source showed: ${esc2(v.evidence)}` : ""}${(v.unverified_fields || []).length ? ` Not confirmed: ${esc2(v.unverified_fields.join("; "))}.` : ""}</p>`; };
+  // The local project table has no length or cost fields, so every project is listed without figures.
+  m.pipeEval.forEach(({ row }) => {
+    pipeRows.push(rowHTML({ name: row.title, chip: "local project", fig: keyFig("Capital cost", nof("not in the project table")), ev: `<span class="iv-chip">${esc2(String((row.verification && row.verification.status) || "unverified").replace(/_/g, " "))}</span>`, sub: esc2(row.agency || ""), key: "tp-" + esc2(row.title),
+      detail: `${row.status ? `<p class="iv-muted">Status on file: ${esc2(row.status)}</p>` : ""}${verLine(row)}
+        ${row.rtp_document_url ? `<p class="iv-muted"><a href="${esc2(row.rtp_document_url)}" target="_blank" rel="noopener">Project page</a></p>` : ""}
+        <p class="iv-muted">No build verdict: the project table gives no length, cost or ridership, and the density test needs a station-area density that is not on file.</p>` }, open));
   });
-  m.corrEval.forEach(({ row, ev }) => {
-    const unconfirmed = !row.cid_selection || /not_confirmed/.test((row.verification && row.verification.status) || "");
-    if (row.route_length_miles == null && row.estimated_capital_cost_billions == null) { offItems.push({ name: row.name, chip: "intercity corridor" + (unconfirmed ? ", unconfirmed" : ""), why: "no route length or cost published in the source on file" }); return; }
-    corrRows.push(rowHTML({ name: row.name, chip: "intercity corridor", fig: row.estimated_capital_cost_billions != null ? keyFig("Capital cost", "$" + esc2(row.estimated_capital_cost_billions) + "B") : keyFig("Route length", esc2(row.route_length_miles + " miles")), ev: `${unconfirmed ? `<span class="iv-chip iv-unconf">Unconfirmed</span> ` : ""}<span class="iv-chip">${esc2(VERDICT_TXT[ev.verdict] || "Not enough data to say")}</span>`, sub: esc2(row.funding_status || "No funding status on file."), key: "tc-" + esc2(row.name),
-      detail: `<dl class="iv-dl"><div><dt>Route length</dt><dd>${row.route_length_miles != null ? esc2(row.route_length_miles + " miles") : nof(row.route_length_basis || "not stated")}</dd></div>
-        <div><dt>Capital cost</dt><dd>${row.estimated_capital_cost_billions != null ? "$" + esc2(row.estimated_capital_cost_billions) + "B" : nof("no estimate published in the source on file")}</dd></div></dl>
+  m.corrEval.forEach(({ row, ev, len, cost }) => {
+    const st = (row.verification && row.verification.status) || "unverified";
+    const unconfirmed = UNCHECKED.test(st);
+    const chip = "intercity corridor" + (unconfirmed ? ", not confirmed" : "");
+    if (len.value == null && cost.value == null) { offItems.push({ name: row.name, chip, why: `route length ${len.why}; capital cost ${cost.why}` }); return; }
+    corrRows.push(rowHTML({ name: row.name, chip: "intercity corridor", fig: cost.value != null ? keyFig("Capital cost", "$" + esc2(cost.value) + "B") : keyFig("Route length", esc2(len.value + " miles")), ev: `<span class="iv-chip${unconfirmed ? " iv-unconf" : ""}">${esc2(st.replace(/_/g, " "))}</span> <span class="iv-chip">${esc2(VERDICT_TXT[ev.verdict] || "Not enough data to say")}</span>`, sub: esc2(row.funding_status || "No funding status on file."), key: "tc-" + esc2(row.name),
+      detail: `<dl class="iv-dl"><div><dt>Route length</dt><dd>${len.value != null ? esc2(len.value + " miles") : nof(len.why)}</dd></div>
+        <div><dt>Capital cost</dt><dd>${cost.value != null ? "$" + esc2(cost.value) + "B" : nof(cost.why)}</dd></div></dl>
+        ${verLine(row)}
         <p class="iv-muted">${(row.official_study_url || row.source_url) ? `<a href="${esc2(row.official_study_url || row.source_url)}" target="_blank" rel="noopener">Source document</a>` : ""}</p>
-        ${verdictBox(ev, unconfirmed ? "This corridor is not confirmed by an official selection or study; read the verdict as a placeholder." : "", open, "tcv-" + esc2(row.name))}` }, open));
+        ${verdictBox(ev, "", open, "tcv-" + esc2(row.name))}` }, open));
   });
   const corr = !nCorr ? `<p class="iv-empty">No local rail or bus project and no intercity corridor in the data lists ${esc2(countyShort())}.</p>`
     : !corridorOpen ? `<p class="iv-gated">${nCorr} corridor-scale ${nCorr === 1 ? "project lists" : "projects list"} ${esc2(countyShort())}. Corridor-scale plays start at about $10M; raise the budget to see ${nCorr === 1 ? "it" : "them"}.</p>`
@@ -636,9 +697,7 @@ function render() {
     if (iv.view !== "invest") return;
     const r2 = ready(); if (r2.state !== "ok") { render(); return; }
     const p = parcelFacts();
-    const needLaws = p && !d.laws;
-    if (needLaws && typeof cpJson === "function") { d.laws = []; cpJson("statutes").then(L => { d.laws = Array.isArray(L) ? L : []; iv.key = null; render(); }); }
-    const key = [r2.fips, iv.hood, p && p.facts.parcel_id, p && p.facts.base_zoning_code, d.laws ? d.laws.length : -1, typeof SITES !== "undefined" && SITES ? 1 : 0].join("|");
+    const key = [r2.fips, iv.hood, p && p.facts.parcel_id, p && p.facts.base_zoning_code, p && p.facts.exclusions && JSON.stringify(p.facts.exclusions), d.laws ? d.laws.length : -1, d.verification ? 1 : 0, typeof SITES !== "undefined" && SITES ? 1 : 0].join("|");
     if (key !== iv.key || !iv.model) { iv.model = build(r2.fips, r2.B, d); iv.key = key; }
     const m = iv.model;
     const open = openSet();

@@ -2,6 +2,9 @@
 //   node scripts/brief.mjs 48453            plain text
 //   node scripts/brief.mjs 48453 --json     the JSON the Invest view and the AI advisor read
 //   node scripts/brief.mjs 48453 --area 484530023271   pick the neighborhood (block group) to detail
+// Uses the same tables as the Invest view: the idea catalog from the LA bundle, the verification audit
+// (intervention_verification.json: only audited ideas carry figures), state laws, unit costs, valuation models and the
+// California bundle corrections the page applies. Los Angeles County (06037) is packed differently and is not supported.
 import fs from "fs";
 import path from "path";
 import zlib from "zlib";
@@ -19,15 +22,33 @@ const asJson = args.includes("--json");
 const areaArg = args.includes("--area") ? args[args.indexOf("--area") + 1] : null;
 if (!fips) { console.error("Usage: node scripts/brief.mjs <5-digit county FIPS> [--json] [--area <block group id>]"); process.exit(1); }
 const bundlePath = path.join(root, `counties/bundle_${fips}.json.gz`);
+if (fips === "06037") { console.error("Los Angeles County is packed in app/data/bundle-la.b64.txt and details-la.json chunks; this script reads counties/bundle_<fips>.json.gz only."); process.exit(1); }
 if (!fs.existsSync(bundlePath)) { console.error(`No county file for ${fips} (counties/bundle_${fips}.json.gz)`); process.exit(1); }
 
 const bundle = JSON.parse(zlib.gunzipSync(fs.readFileSync(bundlePath)).toString("utf8"));
-const camel = (r) => ({ ...r, cost_per_mile: r.cost_per_mile ?? (r.cost_per_mile_usd_millions != null ? r.cost_per_mile_usd_millions * 1e6 : null) });
+// The same fill-ins the page applies on load (applyBundleCorrections in app/app.js): blanks only, never overwrites.
+const fixes = (data("bundle_corrections.json").block_groups) || {};
+for (const id in fixes) {
+  const d = bundle.details && bundle.details[id];
+  if (!d) continue;
+  const m = d.m || d, c = fixes[id];
+  if (c.hv != null && m.hv == null) { m.hv = c.hv; m.hvs = c.hvs; }
+  if (c.rent != null && m.rent == null) { m.rent = c.rent; m.rent_s = c.rent_s; }
+}
+const la = JSON.parse(zlib.gunzipSync(Buffer.from(fs.readFileSync(path.join(root, "app/data/bundle-la.b64.txt"), "utf8").trim(), "base64")).toString("utf8"));
+// Same conversion as the Invest view (engineCosts / engineEffects in app/invest.js)
+const costRows = (data("transit_cost_benchmarks.json").rows || []).filter((r) => r && Number.isFinite(r.cost_per_mile_usd_millions)).map((r) => ({ mode: r.mode, cost_per_mile: r.cost_per_mile_usd_millions * 1e6, year: r.dollar_year || null, source_url: r.source_url || null }));
+const effectMode = (l) => { const t = String(l || "").toLowerCase(); return /light rail/.test(t) ? "light_rail" : /heavy rail|metro/.test(t) ? "heavy_rail" : /commuter/.test(t) ? "commuter_rail" : /bus rapid|brt/.test(t) ? "brt" : "all_rail"; };
 const ctx = {
   backtest: data("neighborhood_score_backtest.json"),
+  catalog: la.catalog,
+  verification: data("intervention_verification.json"),
   underusedSites: data("underused_sites.json"),
-  costBenchmarks: (data("transit_cost_benchmarks.json").rows || []).map(camel),
-  valueEffects: data("transit_value_effects.json").rows || [],
+  costBenchmarks: costRows,
+  valueEffects: (data("transit_value_effects.json").rows || []).filter((r) => r && Number.isFinite(r.effect_pct)).map((r) => ({ mode: effectMode(r.mode), distance_band: r.distance_band, effect_pct: r.effect_pct, source_url: r.source_url || null })),
+  laws: data("statutes.json"),
+  unitCosts: data("unit_costs.json"),
+  valuationModels: data("county_valuation_models.json"),
 };
 let brief = E.buildDecisionBrief(bundle, { top: 5 }, ctx);
 const area = areaArg || brief.topNeighborhoods?.[0]?.id;
@@ -36,7 +57,7 @@ if (area) brief = E.buildDecisionBrief(bundle, { top: 5, blockGroupId: area }, c
 if (asJson) { console.log(JSON.stringify(brief, null, 2)); process.exit(0); }
 
 const money = (v) => (v == null ? "not on file" : "$" + Math.round(v).toLocaleString("en-US"));
-const fig = (f) => (f && f.value != null ? `${typeof f.value === "number" && /USD/.test(f.unit || "") ? money(f.value) : f.value} [${f.basis}]` : "not on file");
+const fig = (f) => (f && f.value != null ? `${/per USD/.test(f.unit || "") ? "$" + f.value.toFixed(2) + " per $1" : typeof f.value === "number" && /USD/.test(f.unit || "") ? money(f.value) : f.value} [${f.basis}]` : "not on file");
 const out = [];
 out.push(`DECISION BRIEF: ${brief.county?.name} (${fips})`, "");
 out.push("How far to trust this:");
@@ -48,14 +69,15 @@ const nb = brief.neighborhood;
 if (nb) {
   out.push("", `WHAT TO BUILD in ${nb.ranking?.name || area}`);
   for (const p of nb.housingPlays || []) out.push(`  - ${p.label}: cost ${fig(p.cost)}, value added ${fig(p.valueAdded)}; legal: ${p.legal}`);
-  for (const b of (nb.build || []).slice(0, 8)) out.push(`  - ${b.project || b.name}: cost ${fig(b.cost)}, value per $1 ${fig(b.valuePerDollar)}, evidence ${b.evidence?.tier || "unknown"}`);
-  out.push("", "PROPERTIES TO REDEVELOP near it");
+  for (const b of (nb.build || []).slice(0, 8)) out.push(`  - ${b.name}${b.project ? " (" + b.project + ")" : ""}: cost ${fig(b.cost)}, return ${fig(b.valuePerDollar)}, audit: ${(b.evidence?.verification || "unverified").replace(/_/g, " ")}`);
+  if ((nb.withheld || []).length) out.push(`  Listed with no figures (${nb.withheld.length}): ${nb.withheld.map((w) => w.name).join("; ")}. Reason: effect size or cost not confirmed against a source.`);
+  out.push("", "PLACES NEAR IT (sites bundle)");
   if (!(nb.places || []).length) out.push("  none on file for this area");
-  for (const s of nb.places || []) out.push(`  - ${s.name} (${s.kind}), ${s.acres ?? "?"} acres`);
+  for (const s of nb.places || []) out.push(`  - ${s.name || s.type}${s.cost ? `: cost ${fig(s.cost.low)} to ${fig(s.cost.high)}` : ""}`);
 }
 const countySites = ctx.underusedSites.filter((s) => s.countyFips === fips);
 out.push("", `Sites on file in the county: ${countySites.length}`);
-for (const s of countySites.slice(0, 10)) out.push(`  - ${s.name} (${s.kind}), ${s.acres ?? "?"} acres, checked: ${s.verification?.status || "no"}`);
+for (const s of countySites.slice(0, 10)) out.push(`  - ${s.name} (${s.kind}), ${s.acres ?? "acres not on file"} acres, record: ${s.verification?.status || "unverified"}; homes and margin are unverified model estimates, not shown`);
 const t = brief.transit;
 if (t) {
   out.push("", `TRANSIT for ${t.name || "this area"}: ${t.verdict}${t.scale ? ", scale: " + t.scale : ""}`);
