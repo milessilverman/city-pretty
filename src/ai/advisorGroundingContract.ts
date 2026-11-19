@@ -164,7 +164,7 @@ export interface AdvisorEverySpace {
 }
 
 // The decision brief from the Invest view (window.__cpDecisionBrief). Passed through as data, size-capped.
-export const DECISION_BRIEF_MAX_CHARS = 16000;
+export const DECISION_BRIEF_MAX_CHARS = 60000;
 
 export interface AdvisorContext {
   county: AdvisorCounty;

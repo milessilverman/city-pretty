@@ -81,3 +81,19 @@ and the model is told to say so.
   accept (for example an `ADVISOR_MODEL` that is not in the Opus 5.5 / Fable / Sonnet 5.5 family and does not take
   `output_config.effort`, or the fallback header: set `ADVISOR_FALLBACKS = "off"`).
 - The tools return nothing: check that `SITE_DATA_BASE` serves the JSON files (open `<base>statutes.json` in a browser).
+
+## Live check (19 Nov 2026)
+
+The Worker was run locally against the real API with Travis County's decision brief and three questions
+(`npm run serve`, then `ANTHROPIC_API_KEY=... npm run test:live`). All three answered in 9 to 12 seconds, used the
+lookup tools, and passed the figure check. Token counts from the API put a question at about 4 cents on Claude
+Opus 5.5 at list prices. It has still not been deployed to Cloudflare.
+
+## What runs without the AI
+
+- `npm run brief -- 48453` prints a county's decision brief from the data in the repository: no model, no network.
+- `npm run refresh:rents`, `refresh:valuation`, `refresh:ranking`, `refresh:sites` and `check:links` rebuild the
+  data tables and back-tests from their public sources.
+- `node scripts/ai_verify_sources.mjs statutes` is the one job that needs the model: it has Claude read each law's
+  official page and then checks, in code, that every quote Claude gives appears in the fetched text. About 22 cents
+  a row in the pilot. It writes to `research/ai_verification/` and changes no data.

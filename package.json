@@ -6,9 +6,17 @@
     "test": "vitest run tests/unit",
     "test:e2e": "playwright test --trace off",
     "typecheck": "tsc --noEmit --strict --target es2022 --module esnext --moduleResolution bundler --lib es2022,dom,dom.iterable --skipLibCheck workers/api-proxy.ts",
-    "check": "npm test && npm run typecheck && npm run test:e2e"
+    "check": "npm test && npm run typecheck && npm run test:e2e",
+    "brief": "node scripts/brief.mjs",
+    "refresh:rents": "node scripts/fetch_hud_fmr.mjs",
+    "refresh:valuation": "node scripts/run_valuation_backtests.mjs",
+    "refresh:ranking": "node scripts/backtest_neighborhood_score.mjs",
+    "refresh:sites": "node scripts/build_underused_sites.mjs",
+    "check:links": "node scripts/check_source_urls.mjs",
+    "test:live": "vitest run tests/live --testTimeout 600000"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^1.10.0",
     "@playwright/test": "1.63.0",
     "typescript": "5.6.3",
     "vitest": "2.1.8"
