@@ -95,7 +95,7 @@ export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
   {
     name: "model_solar_pv",
     description:
-      "Model annual solar photovoltaic energy production (kWh/yr) and solar radiation for a system size at coordinates using the NLR (formerly NREL) PVWatts v8 API. Use when the user asks about solar potential, solar panels, or energy generation.",
+      "Model annual solar photovoltaic energy production (kWh/yr) for a system size at coordinates with the PVWatts v8 API of the National Laboratory of the Rockies (developer.nlr.gov). It is a model for an unshaded fixed roof array with the stated tilt, azimuth and 14% losses, not a measurement of this roof; always state those assumptions with the number.",
     input_schema: {
       type: "object",
       properties: {
@@ -113,7 +113,7 @@ export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
   {
     name: "lookup_health_profile",
     description:
-      "Look up CDC PLACES local health data (prevalence of asthma, depression, physical inactivity, general health status, obesity) for a Census tract from the CDC PLACES 2025 release.",
+      "Look up CDC PLACES 2025 model-based estimates of adult health measures (asthma, depression, no leisure-time physical activity, fair or poor health, obesity) for a Census tract. They are modeled tract estimates, not counts of people at the address; say so when you use them.",
     input_schema: {
       type: "object",
       properties: {
@@ -127,7 +127,7 @@ export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
   {
     name: "find_nearby_schools",
     description:
-      "Look up official public schools near coordinates using the National Center for Education Statistics (NCES EDGE) Public School Locations directory.",
+      "List NCES public school records near coordinates by straight-line distance (NCES EDGE school locations). The list includes charter, virtual, hospital and detention programs and does not say which school an address is assigned to; never present the nearest record as the assigned school.",
     input_schema: {
       type: "object",
       properties: {
@@ -143,7 +143,7 @@ export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
   {
     name: "lookup_walkability_index",
     description:
-      "Look up the EPA National Walkability Index score (1 to 20, categorized from 'Least Walkable' to 'Most Walkable') and quantile rankings for street intersection density, land use diversity, and transit commute split.",
+      "Look up the EPA National Walkability Index score (1 to 20, from 'Least walkable' to 'Most walkable') for the block group, a rank against all U.S. block groups on intersection density, distance to the nearest transit stop, and the mix of jobs and homes (2019 block groups).",
     input_schema: {
       type: "object",
       properties: {
@@ -158,7 +158,7 @@ export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
   {
     name: "check_sea_level_rise",
     description:
-      "Screen whether coordinates intersect NOAA Sea Level Rise (SLR) inundation or low-lying coastal flooding zones under 1ft to 10ft scenarios.",
+      "Withheld: always returns 'not on file' with the reason (NOAA's map service answers every coastal point with one region-wide polygon, so it cannot tell flooded from dry). Do not call it to answer a question; point the user to coast.noaa.gov/slr instead.",
     input_schema: {
       type: "object",
       properties: {
@@ -174,7 +174,7 @@ export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
   {
     name: "lookup_hpi_appreciation",
     description:
-      "Look up Federal Housing Finance Agency (FHFA) annual tract-level House Price Index (HPI), 1-year price change %, 5-year CAGR %, and 10-year appreciation % for an 11-digit Census tract.",
+      "Look up the Federal Housing Finance Agency (FHFA) annual all-transactions House Price Index for an 11-digit Census tract (FHFA labels tract indexes a Developmental Index), with 1-year change, 5-year CAGR and 10-year change. It is a tract price trend, not the value of a home.",
     input_schema: {
       type: "object",
       properties: {
@@ -203,7 +203,7 @@ export const ADVISOR_TOOLS: Anthropic.Beta.BetaTool[] = [
   {
     name: "lookup_construction_cost_index",
     description:
-      "Look up the latest Federal Highway Administration (FHWA) National Highway Construction Cost Index (NHCCI) and adjustment factor to index 2024 unit bid prices to current quarter.",
+      "Look up the latest FHWA National Highway Construction Cost Index (NHCCI), a national price index for highway construction contracts (2003 Q1 = 1). Never use it to adjust home, ADU, roof, renovation or other building costs; it says nothing about them.",
     input_schema: {
       type: "object",
       properties: {},

@@ -374,7 +374,9 @@ export async function femaNationalRiskIndex(lat: number, lng: number, fetcher: F
     publisher: "Federal Emergency Management Agency (FEMA)",
     url,
     retrieved_at: now(),
-    vintage: "December 2025 release",
+    // FEMA's item page (arcgis.com item 9da4eeb936544335a6db0cd7a8448a51), read 19 Nov 2026: "National Risk Index Data
+    // Version: December 2025 (1.20.0)"; each row's NRI_VER field reads "December 2025".
+    vintage: "December 2025 (1.20.0)",
   };
   if (!validLatLng(lat, lng)) return fail(source, "Invalid coordinates");
   try {
@@ -385,6 +387,10 @@ export async function femaNationalRiskIndex(lat: number, lng: number, fetcher: F
     return {
       ok: true,
       source,
+      notes: [
+        "Scores and ratings rank this census tract against others; they are relative, not a probability or a dollar loss for this property.",
+        'FEMA\'s terms: "The National Risk Index data are meant for planning purposes only" and "not a substitute for localized risk assessment analysis."',
+      ],
       value: {
         tract_fips: f.TRACTFIPS,
         risk_score: num(f.RISK_SCORE),
@@ -409,6 +415,8 @@ export async function femaNationalRiskIndex(lat: number, lng: number, fetcher: F
 // ---------------------------------------------------------------------------------------------------------------
 
 export type SeismicDesign = {
+  site_class: string; // assumed, not this lot's soil
+  risk_category: string; // assumed: ordinary building
   seismic_design_category: string | null;
   pga_m: number | null;
   sds: number | null;
@@ -434,7 +442,13 @@ export async function usgsSeismicDesign(lat: number, lng: number, fetcher: Fetch
     return {
       ok: true,
       source,
+      notes: [
+        "Building-code design values for an assumed Site Class D soil and Risk Category II building; the real soil can change the category (St. Louis checked 19 Nov 2026: C on Site Class C, D on Site Class D).",
+        "These are design values for engineers, not a forecast of shaking or damage.",
+      ],
       value: {
+        site_class: "D",
+        risk_category: "II",
         seismic_design_category: data.sdc || null,
         pga_m: num(data.pgam),
         sds: num(data.sds),
@@ -457,6 +471,9 @@ export type PvWattsResult = {
   solrad_annual: number | null;
   capacity_factor_pct: number | null;
   system_capacity_kw: number;
+  assumptions: { tilt_deg: number; azimuth_deg: number; losses_pct: number; array_type: string; module_type: string };
+  weather_station_distance_m: number | null;
+  weather_data_source: string | null;
 };
 
 export async function pvwattsV8(
@@ -484,7 +501,9 @@ export async function pvwattsV8(
   const publicUrl = `https://developer.nlr.gov/api/pvwatts/v8.json?lat=${lat}&lon=${lng}&system_capacity=${kw}&azimuth=${azimuth}&tilt=${tilt}&array_type=1&module_type=0&losses=14`;
   const source: SourceRef = {
     name: "NLR PVWatts v8 (Solar Photovoltaic Energy Model)",
-    publisher: "National Laboratory for Renewable Energy (NLR)",
+    // developer.nlr.gov/docs/solar/pvwatts/v8/ footer, read 19 Nov 2026: "The National Laboratory of the Rockies is a
+    // national laboratory of the U.S. Department of Energy".
+    publisher: "National Laboratory of the Rockies (NLR)",
     url: publicUrl,
     retrieved_at: now(),
     vintage: "PVWatts v8.5.0",
@@ -498,11 +517,17 @@ export async function pvwattsV8(
     return {
       ok: true,
       source,
+      notes: [
+        `A model run, not a quote: assumes a ${kw} kW fixed roof-mounted array of standard modules, tilt ${tilt} degrees, azimuth ${azimuth} degrees, 14% system losses, and no shading from this roof's trees or neighbours.`,
+      ],
       value: {
         ac_annual_kwh: Math.round(out.ac_annual),
         solrad_annual: num(out.solrad_annual),
         capacity_factor_pct: num(out.capacity_factor),
         system_capacity_kw: kw,
+        assumptions: { tilt_deg: tilt, azimuth_deg: azimuth, losses_pct: 14, array_type: "fixed, roof mounted", module_type: "standard" },
+        weather_station_distance_m: num(d?.station_info?.distance),
+        weather_data_source: typeof d?.station_info?.weather_data_source === "string" ? d.station_info.weather_data_source : null,
       },
     };
   } catch (e) {
@@ -546,7 +571,7 @@ export async function cdcPlacesTractHealth(
     publisher: "Centers for Disease Control and Prevention (CDC)",
     url,
     retrieved_at: now(),
-    vintage: "PLACES 2025 Release (BRFSS 2022-2023)",
+    vintage: "PLACES 2025 release (BRFSS 2023, or 2022 for five measures)",
   };
   if (cleanFips.length !== 11) return fail(source, `Invalid 11-digit Census tract FIPS: ${tractFips}`);
   try {
@@ -570,6 +595,10 @@ export async function cdcPlacesTractHealth(
     return {
       ok: true,
       source,
+      notes: [
+        'CDC\'s dataset page (data.cdc.gov cwsq-ngmh), read 19 Nov 2026: "This dataset contains model-based census tract estimates" and "users are cautioned against using these estimates for program or policy evaluations."',
+        "Values are crude prevalence among adults 18 and over, mostly from the 2023 BRFSS survey (2022 for five measures); population is the 2020 Census count.",
+      ],
       value: {
         tract_fips: cleanFips,
         population: pop,
@@ -591,12 +620,13 @@ export type NcesSchool = {
   city: string;
   state: string;
   zip: string;
-  lat: number;
-  lng: number;
+  lat: number | null;
+  lng: number | null;
   distance_m?: number;
 };
 
 export type NcesNearbySchoolsResult = {
+  school_year: string | null; // from the layer's own SCHOOLYEAR field
   count: number;
   schools: NcesSchool[];
 };
@@ -607,22 +637,25 @@ export async function ncesNearbySchools(
   radiusM: number = 2000,
   fetcher: FetchLike = fetch
 ): Promise<Sourced<NcesNearbySchoolsResult>> {
-  const url = `https://services1.arcgis.com/Ua5sjt3LWTPigjyD/arcgis/rest/services/Public_School_Locations_Current/FeatureServer/0/query?geometry=${lng},${lat}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&distance=${radiusM}&units=esriSRUnit_Meter&outFields=NAME,STREET,CITY,STATE,ZIP,LAT,LON&returnGeometry=false&f=json`;
+  const url = `https://services1.arcgis.com/Ua5sjt3LWTPigjyD/arcgis/rest/services/Public_School_Locations_Current/FeatureServer/0/query?geometry=${lng},${lat}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&distance=${radiusM}&units=esriSRUnit_Meter&outFields=NAME,STREET,CITY,STATE,ZIP,LAT,LON,SCHOOLYEAR&returnGeometry=false&f=json`;
   const source: SourceRef = {
     name: "NCES EDGE Public School Locations",
     publisher: "National Center for Education Statistics (NCES)",
     url,
     retrieved_at: now(),
-    vintage: "Current 2023-2024 School Year",
+    // The year is read from each record's SCHOOLYEAR (19 Nov 2026: every record "2024-2025"); the earlier fixed label said 2023-2024.
+    vintage: "NCES EDGE school locations, most recent Common Core of Data collection",
   };
   if (!validLatLng(lat, lng)) return fail(source, "Invalid coordinates");
   try {
     const d = (await getJson(fetcher, url)) as any;
     const feats = Array.isArray(d?.features) ? d.features : [];
     const schools: NcesSchool[] = [];
+    const years = new Set<string>();
     for (const f of feats) {
       const a = f.attributes || {};
       if (!a.NAME) continue;
+      if (a.SCHOOLYEAR) years.add(String(a.SCHOOLYEAR));
       const sLat = num(a.LAT);
       const sLon = num(a.LON);
       const dist = sLat != null && sLon != null ? Math.round(haversineDistanceM(lat, lng, sLat, sLon)) : undefined;
@@ -632,16 +665,21 @@ export async function ncesNearbySchools(
         city: String(a.CITY || "").trim(),
         state: String(a.STATE || "").trim(),
         zip: String(a.ZIP || "").trim(),
-        lat: sLat ?? 0,
-        lng: sLon ?? 0,
+        lat: sLat,
+        lng: sLon,
         distance_m: dist,
       });
     }
-    schools.sort((a, b) => (a.distance_m ?? 0) - (b.distance_m ?? 0));
+    // A school with no coordinates sorts last, never first.
+    schools.sort((a, b) => (a.distance_m ?? Infinity) - (b.distance_m ?? Infinity));
     return {
       ok: true,
       source,
+      notes: [
+        "Straight-line distances to NCES public school records. The list includes charter, virtual, hospital and detention programs, and it does not say which school this address is assigned to.",
+      ],
       value: {
+        school_year: years.size ? [...years].sort().join(", ") : null,
         count: schools.length,
         schools,
       },
@@ -656,9 +694,9 @@ export async function ncesNearbySchools(
 // ---------------------------------------------------------------------------------------------------------------
 
 export type GoogleSolarRoofSegment = {
-  pitch_degrees: number;
-  azimuth_degrees: number;
-  area_m2: number;
+  pitch_degrees: number | null;
+  azimuth_degrees: number | null;
+  area_m2: number | null;
   center?: { lat: number; lng: number };
 };
 
@@ -692,9 +730,10 @@ export async function googleSolarBuildingInsights(
     const pot = d?.solarPotential;
     if (!pot) return fail(source, "No solar potential data returned for this location");
     const segments: GoogleSolarRoofSegment[] = (pot.roofSegmentStats || []).map((s: any) => ({
-      pitch_degrees: num(s.pitchDegrees) ?? 0,
-      azimuth_degrees: num(s.azimuthDegrees) ?? 0,
-      area_m2: num(s.stats?.areaMeters2) ?? 0,
+      // Missing stays null: a 0 would read as a flat, north-facing or empty roof segment.
+      pitch_degrees: num(s.pitchDegrees),
+      azimuth_degrees: num(s.azimuthDegrees),
+      area_m2: num(s.stats?.areaMeters2),
       center: s.center ? { lat: s.center.latitude, lng: s.center.longitude } : undefined,
     }));
     const imgDate = d.imageryDate ? `${d.imageryDate.year}-${String(d.imageryDate.month).padStart(2, "0")}-${String(d.imageryDate.day).padStart(2, "0")}` : null;
@@ -742,7 +781,7 @@ export async function fhwaNhcci(
     publisher: "Federal Highway Administration (FHWA)",
     url,
     retrieved_at: now(),
-    vintage: "data.transportation.gov dataset r94d-n4f9",
+    vintage: "data.transportation.gov dataset r94d-n4f9 (2003 Q1 = 1)",
   };
   try {
     const rows = (await getJson(fetcher, url)) as any[];
@@ -753,6 +792,10 @@ export async function fhwaNhcci(
     return {
       ok: true,
       source,
+      notes: [
+        "A national price index for highway construction contracts (FHWA). It is not a home building or renovation cost index; do not use it to adjust home, ADU, roof or other building costs.",
+        "base_year_2024_adjustment_factor is this quarter's index divided by the 2024 Q1 index (3.191321352).",
+      ],
       value: {
         quarter: String(r.quarter || ""),
         nhcci: val,
@@ -802,8 +845,12 @@ export async function fhfaTractHpi(
     publisher: "Federal Housing Finance Agency (FHFA)",
     url,
     retrieved_at: now(),
-    vintage: "Annual Tract-Level HPI (1975–present)",
+    // fhfa.gov/data/hpi/datasets (read 19 Nov 2026) lists this file as "Census Tracts (Developmental Index; Not Seasonally
+    // Adjusted)". In the file pulled 19 Nov 2026, 17,211 of 63,930 tracts have a blank index for 2025.
+    vintage: "Annual all-transactions index by census tract (FHFA: Developmental Index)",
   };
+  // FHFA leaves a cell blank when it has no index; Number("") is 0, so a blank must be read as missing.
+  const cell = (v: unknown): number | null => (v == null || String(v).trim() === "" || String(v).trim() === "." ? null : num(v));
   if (cleanFips.length !== 11) return fail(source, `Invalid 11-digit Census tract FIPS: ${tractFips}`);
 
   try {
@@ -814,7 +861,7 @@ export async function fhfaTractHpi(
     if (!res.ok) throw new Error(`HTTP ${res.status} from ${new URL(url).host}`);
     const text = await res.text();
 
-    let records: Array<{ tract: string; state_abbr?: string; year: number; annual_change: number | null; hpi: number; hpi2000?: number | null }> = [];
+    let records: Array<{ tract: string; state_abbr?: string; year: number; annual_change: number | null; hpi: number | null; hpi2000?: number | null }> = [];
     const trimmed = text.trim();
     if (trimmed.startsWith("[") || trimmed.startsWith("{")) {
       const parsed = JSON.parse(trimmed);
@@ -825,9 +872,9 @@ export async function fhfaTractHpi(
           tract: cleanFips,
           state_abbr: r.state_abbr || r.state,
           year: Number(r.year),
-          annual_change: num(r.annual_change ?? r.annual_change_pct),
-          hpi: num(r.hpi) ?? 0,
-          hpi2000: num(r.hpi2000),
+          annual_change: cell(r.annual_change ?? r.annual_change_pct),
+          hpi: cell(r.hpi),
+          hpi2000: cell(r.hpi2000),
         }));
     } else {
       const lines = text.split(/\r?\n/);
@@ -839,21 +886,24 @@ export async function fhfaTractHpi(
             tract: cleanFips,
             state_abbr: parts[1] || undefined,
             year: Number(parts[2]),
-            annual_change: num(parts[3]),
-            hpi: num(parts[4]) ?? 0,
-            hpi2000: num(parts[6]),
+            annual_change: cell(parts[3]),
+            hpi: cell(parts[4]),
+            hpi2000: cell(parts[6]),
           });
         }
       }
     }
 
     if (!records.length) return fail(source, `No FHFA HPI records found for tract ${cleanFips}`);
+    // Years with no index are dropped, so "latest" is the latest year FHFA actually published a number for.
+    records = records.filter((r) => r.hpi != null && Number.isFinite(r.year));
+    if (!records.length) return fail(source, `FHFA publishes no index value for tract ${cleanFips}`);
 
     records.sort((a, b) => a.year - b.year);
 
     const history: FhfaHpiPoint[] = records.map((r) => ({
       year: r.year,
-      hpi: r.hpi,
+      hpi: r.hpi as number,
       annual_change_pct: r.annual_change,
       hpi2000: r.hpi2000,
     }));
@@ -885,6 +935,9 @@ export async function fhfaTractHpi(
     return {
       ok: true,
       source,
+      notes: [
+        "FHFA lists tract indexes as a Developmental Index. The index tracks repeat sales and appraisals in the tract; it is a price trend, not the value of any one home.",
+      ],
       value: {
         tract_fips: cleanFips,
         state_abbr: records[0].state_abbr || null,
@@ -912,9 +965,9 @@ export type EpaWalkabilityResult = {
   category: "Least Walkable" | "Below Average Walkable" | "Above Average Walkable" | "Most Walkable";
   rankings?: {
     intersection_density_rank?: number;
-    land_use_mix_rank?: number;
-    employment_diversity_rank?: number;
-    transit_commute_rank?: number;
+    land_use_mix_rank?: number; // D2A_Ranked: EPA "Employment and household mix"
+    employment_diversity_rank?: number; // D2B_Ranked: EPA "Employment mix"
+    transit_stop_proximity_rank?: number; // D4A_Ranked: EPA "Distance from population center to nearest transit stop"
   };
 };
 
@@ -929,7 +982,8 @@ export async function epaWalkabilityIndex(
     publisher: "U.S. Environmental Protection Agency (EPA)",
     url,
     retrieved_at: now(),
-    vintage: "2021 Release (Census 2020 / Smart Location Database)",
+    // EPA layer description, read 19 Nov 2026: "This dataset shares the SLD's 2019 Census Block Groups."
+    vintage: "EPA Smart Location Database 2021 version (2019 Census block groups)",
   };
   if (!validLatLng(lat, lng)) return fail(source, "Invalid coordinates");
   try {
@@ -957,11 +1011,11 @@ export async function epaWalkabilityIndex(
           intersection_density_rank: num(a.D3B_Ranked) ?? undefined,
           land_use_mix_rank: num(a.D2A_Ranked) ?? undefined,
           employment_diversity_rank: num(a.D2B_Ranked) ?? undefined,
-          transit_commute_rank: num(a.D4A_Ranked) ?? undefined,
+          transit_stop_proximity_rank: num(a.D4A_Ranked) ?? undefined,
         },
       },
       notes: [
-        `EPA Walkability Index: ${score} / 20 (${category}). Quantile scores reflect intersection density, diversity of land uses, and transit commute mode split.`,
+        `EPA National Walkability Index: ${score} of 20 (${category}), a rank of this block group against all U.S. block groups on intersection density, distance to the nearest transit stop, and the mix of jobs and homes (EPA user guide, June 2021). It does not measure sidewalks or safety.`,
       ],
     };
   } catch (e) {
@@ -980,6 +1034,9 @@ export type NoaaSlrResult = {
   notes: string;
 };
 
+export const SLR_WITHHELD_REASON =
+  "Not on file: NOAA's sea level rise map service answers every coastal point with one region-wide polygon, so this check cannot tell a flooded point from a dry one (found 19 Nov 2026). See coast.noaa.gov/slr to view the maps.";
+
 export async function noaaSeaLevelRise(
   lat: number,
   lng: number,
@@ -994,29 +1051,14 @@ export async function noaaSeaLevelRise(
     publisher: "National Oceanic and Atmospheric Administration (NOAA) Office for Coastal Management",
     url,
     retrieved_at: now(),
-    vintage: "NOAA SLR Inundation Viewer (CORS enabled)",
+    vintage: "NOAA Sea Level Rise Viewer map service",
   };
   if (!validLatLng(lat, lng)) return fail(source, "Invalid coordinates");
-  try {
-    const d = (await getJson(fetcher, url)) as any;
-    const results = Array.isArray(d?.results) ? d.results : [];
-    const isIn = results.length > 0;
-    const topLayer = results[0]?.layerName || undefined;
-    return {
-      ok: true,
-      source,
-      value: {
-        scenario_ft: ft,
-        in_low_lying_slr_area: isIn,
-        layer_name: topLayer,
-        notes: isIn
-          ? `Point intersects NOAA ${ft}ft Sea Level Rise inundation / low-lying zone.`
-          : `Point does not intersect NOAA ${ft}ft Sea Level Rise inundation zone.`,
-      },
-    };
-  } catch (e) {
-    return fail(source, e);
-  }
+  // Withheld (19 Nov 2026): this identify call returns NOAA's "Low-lying Areas" layer as one region-wide polygon (the same
+  // feature, Shape_Area 403,369,097,568 in map units, for San Francisco and Seattle) for every coastal point, including San Francisco City Hall and downtown Seattle, and
+  // the depth layer returns nothing even at low points in Miami Beach. A "yes" therefore meant nothing. No request is made.
+  void fetcher;
+  return fail(source, SLR_WITHHELD_REASON);
 }
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -1091,7 +1133,7 @@ export async function npsHistoricPlaces(
           ? [
               `Location intersects ${resources.length} National Register of Historic Places resource(s): ${resources.map((r) => `${r.name} (${r.resource_type}${r.is_national_historic_landmark ? ", National Historic Landmark" : ""})`).join("; ")}.`,
             ]
-          : ["Location does not intersect a National Register of Historic Places historic district or landmark polygon."],
+          : ["No National Register boundary polygon at this point. Not a finding that the property is unlisted: NPS maps most listed buildings as points, which this check does not read, and city or county historic districts are not in this layer."],
     };
   } catch (e) {
     return fail(source, e);

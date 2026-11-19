@@ -849,3 +849,38 @@ was made from a test that didn't cover the live page.
 - **AI Advisor Turn Limits & Grounding Transparency:** Handled `pause_turn` gracefully on the final model tool round in
   `workers/advisorAgent.ts` to prevent unexpected loop termination, and surfaced `data.sources` as an expandable "Sources consulted"
   list and `stopped_early` as a prominent pause notice in the chat UI.
+
+
+### Correction: review of the 18 Nov commits (086b38b..c26bf06), found and fixed 19 Nov 2026
+
+Full review, one section per commit, with every request URL and value: `audit/review-2026-11-19-owner-commits.md`.
+The rows below (except the HUD, transit and parcel items) render only from the Cloudflare Worker's facts, which the
+published page does not use yet (`workerUrl` is empty); they also feed the AI advisor's tools.
+
+| What | Old | New | Source |
+|---|---|---|---|
+| NOAA sea level rise (Worker, advisor tool) | "In 1ft SLR inundation zone" for San Francisco City Hall and downtown Seattle | Withheld: "Not on file" with the reason | NOAA `dc_slr/slr_1ft` and `slr_3ft` identify, 9 points: every coastal point returns the same region-wide "Low-lying Areas" polygon |
+| FHFA tract house prices (Worker, advisor tool) | blank FHFA cell read as 0: index 0, "+0%", -100% over 10 years (17,211 of 63,930 tracts in 2025) | blank = missing; latest year with a value (tract 06037101220: 2024, 823.70, +125.67% over 10 years) | `fhfa.gov/hpi/download/annual/hpi_at_tract.csv`, pulled 19 Nov 2026 |
+| FHFA status and licence | "developmental per FHFA FAQ Q5"; "public domain (FAQ Q32)" | "Census Tracts (Developmental Index; Not Seasonally Adjusted)"; licence "not confirmed" | `fhfa.gov/data/hpi/datasets`; no FAQ Q5/Q32 found |
+| NPS historic check | "Not in National Register historic district" | "No National Register boundary polygon at this point" + why that is not "unlisted" | NPS `nrhp_locations` layer 0: 10 of 13 listed buildings tried have no polygon (e.g. Arctic Building, Seattle) |
+| Nearest school (Worker, advisor tool) | "Nearby public schools", vintage "2023-2024" | "Nearest public school listing (NCES)", straight line, not the assigned school; year read from the layer (2024-2025) | NCES `Public_School_Locations_Current`, SCHOOLYEAR; Seattle's nearest record is "Interagency Detention School" |
+| Transit station lookup and compare drawer (page) | Under-construction D Line stations counted; "0-Parking Exempt" in any state | Stations marked under construction / planned / proposed skipped; label California-only | `app/data/transit_pipelines.json` station `desc` |
+| Highway cost index (Worker, advisor tool) | "Construction cost index ... Used to index historical unit bid prices"; tool: "index 2024 unit bid prices" | "Highway construction price index, U.S."; not a building cost index; nothing adjusted by it | `data.transportation.gov` r94d-n4f9 description; `unit_costs.json` is 2022-2026 local prices |
+| Seismic design (Worker) | "Category D (PGA 0.32g)" | "Seismic Design Category D (PGA_M 0.32 g)", assumes Site Class D / Risk Category II, not a forecast | USGS `asce7-22.json`: St. Louis is C on Site Class C, D on Site Class D |
+| FEMA NRI (Worker) | "Score 95/100", vintage "December 2025 release" | "Relative score 95 of 100", vintage "December 2025 (1.20.0)", FEMA's planning-only terms quoted | arcgis.com item 9da4eeb936544335a6db0cd7a8448a51 |
+| CDC PLACES (Worker) | percentages with no "estimate" | "of adults (model estimates)", CDC's caution quoted, 2020 Census population | data.cdc.gov `cwsq-ngmh` description |
+| EPA walkability (Worker) | "transit commute mode split"; "Census 2020" | "distance to the nearest transit stop"; "2019 Census block groups" | EPA user guide (June 2021); layer description |
+| PVWatts publisher (advisor tool) | "National Laboratory for Renewable Energy (NLR)" | "National Laboratory of the Rockies (NLR)"; output carries tilt, azimuth, losses | `developer.nlr.gov/docs/solar/pvwatts/v8/` |
+| Google Solar (not wired) | missing pitch/azimuth/area set to 0 | null | code review; needs key, not checked |
+| NCES distance sort | a school with no coordinates sorted first (`?? 0`) | sorts last; coordinates null, not 0 | code review |
+| Audit checklist | P1-6, P1-10, Worker security marked done; P1-11 "archived to tag" | reopened / corrected (no tag exists; R2 host does not resolve; page sends no Turnstile token) | `audit/AUDIT-2026-11-18-free-data.md` |
+| R2 entry (`county_hosts.json`) | "CORS enabled" | "Placeholder: no bucket has been created" (stays disabled) | `pub-data.citypretty.org` does not resolve; R2 pricing page quoted |
+| St. Louis and Kenton notes | "HTTP 499 Token Required"; Kenton `KentonPVA/PVA_Basemap/MapServer/12` | old St. Louis layer still answers; St. Louis read by JSONP; Kenton is `Parcel_QueryOnly/MapServer/1` | point queries 19 Nov 2026 |
+
+Tests that encoded the untrue behaviour were changed, not deleted: the NOAA test (asserted a Miami "in zone" hit),
+the facts-row label tests, the PVWatts publisher test and the FHFA ingest licence test ("FHFA FAQ Q32").
+
+Live checks (19 Nov 2026, `scripts/live_check_panels.mjs`, LIVE_PORT 8941, results in
+`data/backtests/live_check_panels_2026-11-19_review18.json`): St. Louis City 3/3 and Kenton KY 3/3 parcels with every
+panel ok; Los Angeles 3/3 ok except one FEMA flood row (unrelated to these commits). Station lookup on the real page skips
+Westwood/UCLA (under construction) and still finds Wilshire/La Brea and 95th/Dan Ryan. Details in the review file.

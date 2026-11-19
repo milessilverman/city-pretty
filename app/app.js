@@ -5738,10 +5738,13 @@ function findNearestTransitStation(lat, lng) {
     }
   }
 
+  // Stations whose own record says they are under construction, planned or proposed are not in service (19 Nov 2026).
+  const notInService = (s) => /under construction|planned|proposed/i.test(String((s && (s.desc || s.status)) || ""));
+
   // 2. Check corridor / pipeline stations in bundle if available
   const pStns = (bundle && bundle.pipe && Array.isArray(bundle.pipe.stations)) ? bundle.pipe.stations : [];
   for (const s of pStns) {
-    if (!s || s.lat == null || s.lng == null || s.verified === false) continue;
+    if (!s || s.lat == null || s.lng == null || s.verified === false || notInService(s)) continue;
     const d = haversineDistMi(lat, lng, s.lat, s.lng);
     if (d < minDist) {
       minDist = d;
@@ -5758,7 +5761,7 @@ function findNearestTransitStation(lat, lng) {
     for (const pipe of TRANSIT_PIPELINES_DATA) {
       const pipeStns = Array.isArray(pipe.stations) ? pipe.stations : [];
       for (const s of pipeStns) {
-        if (!s || s.lat == null || s.lng == null || s.verified === false) continue;
+        if (!s || s.lat == null || s.lng == null || s.verified === false || notInService(s)) continue;
         const d = haversineDistMi(lat, lng, s.lat, s.lng);
         if (d < minDist) {
           minDist = d;
@@ -9873,7 +9876,7 @@ function renderCompareDrawer() {
           <div class="c-row"><span class="k">${valLabel}</span><span class="v">${h.valuation != null ? '$' + Number(h.valuation).toLocaleString() : "Not on file"}</span></div>
           <div class="c-row"><span class="k">${h.isVacantLand ? 'Price / Lot Sq Ft' : 'Price / Sq Ft'}</span><span class="v">${(h.valuation != null && (h.isVacantLand ? h.lotSqft : h.bldgSqft)) ? `~$${Math.round(h.valuation / (h.isVacantLand ? h.lotSqft : h.bldgSqft)).toLocaleString()} / sq ft` : "Not on file"}</span></div>
           <div class="c-row"><span class="k">Solar DC Capacity</span><span class="v">${h.solarKw != null ? h.solarKw + " kW DC" : "Not on file"}</span></div>
-          <div class="c-row"><span class="k">Transit Walkshed</span><span class="v">${h.nearestStn ? (h.nearestStn.distMi <= 0.5 ? '<b style="color:#0284c7">0-Parking Exempt</b>' : h.nearestStn.distMi.toFixed(2) + ' mi') : '–'}</span></div>
+          <div class="c-row"><span class="k">Transit Walkshed</span><span class="v">${h.nearestStn ? (h.nearestStn.distMi <= 0.5 && h.st === "CA" ? '<b style="color:#0284c7">0-Parking Exempt</b>' : h.nearestStn.distMi.toFixed(2) + ' mi') : '–'}</span></div>
           <div class="c-row"><span class="k">Payback Horizon</span><span class="v">${hasPayback ? `${b.paybackYrs} yrs` : "Not modeled"}</span></div>
         </div>
       `;

@@ -41,7 +41,9 @@ describe("FHFA Tract HPI Ingest Pipeline (scripts/fetch_fhfa_hpi_tract.py)", () 
       // Verification supplement 4 metadata requirements:
       expect(out._meta.citation).toBe("Source: FHFA HPI (Annual, All-Transactions)");
       expect(out._meta.status_label).toBe("developmental");
-      expect(out._meta.licence).toContain("FHFA FAQ Q32");
+      // 19 Nov 2026: the "FHFA FAQ Q32" licence citation could not be found on FHFA's site, so the licence is marked unconfirmed.
+      expect(out._meta.licence).toContain("Not confirmed");
+      expect(out._meta.note).toContain("Developmental Index");
 
       // Verification supplement 3 sample tract:
       const laTract = out.tracts["06037101110"];

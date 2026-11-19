@@ -80,14 +80,33 @@ describe("app/facts.js live public records", () => {
     const rows = fromWorker(JSON.parse(JSON.stringify(f)));
     expect(rows.find((r: any) => r.label.startsWith("HUD")).value).toContain("$1,817");
     expect(rows.find((r: any) => r.label === "FEMA flood zone").value).toContain("Zone AE");
-    expect(rows.find((r: any) => r.label.includes("FEMA NRI")).value).toContain("Score 28/100");
-    expect(rows.find((r: any) => r.label.includes("Earthquake design")).value).toContain("Category A");
-    expect(rows.find((r: any) => r.label.includes("CDC PLACES")).value).toContain("Obesity");
-    expect(rows.find((r: any) => r.label.includes("NCES EDGE")).value).toContain("LEE EL");
-    expect(rows.find((r: any) => r.label.includes("Walkability")).value).toContain("18 / 20 (Most Walkable)");
-    expect(rows.find((r: any) => r.label.includes("Sea level rise")).value).toContain("Above 1ft SLR");
-    expect(rows.find((r: any) => r.label.includes("Historic preservation")).value).toContain("1 NRHP resource(s)");
-    expect(rows.find((r: any) => r.label.includes("Construction cost index")).value).toContain("2026 Q1");
+    // Review 19 Nov 2026: each row now says what the figure is and its limits (docs/audit/review-2026-11-19-owner-commits.md).
+    const nri = rows.find((r: any) => r.label.includes("FEMA National Risk Index"));
+    expect(nri.label).toContain("relative to other tracts");
+    expect(nri.value).toContain("Relative score 28 of 100");
+    expect(nri.note).toContain("December 2025 (1.20.0)");
+    expect(nri.note).toContain("not a chance of loss");
+    const seis = rows.find((r: any) => r.label.includes("earthquake design values"));
+    expect(seis.value).toContain("Seismic Design Category A");
+    expect(seis.note).toContain("Site Class D");
+    expect(seis.note).toContain("not a forecast");
+    const places = rows.find((r: any) => r.label.includes("CDC PLACES"));
+    expect(places.value).toContain("Obesity: 26.7%");
+    expect(places.value).toContain("of adults (model estimates)");
+    expect(places.note).toContain("model-based census tract estimates");
+    const sch = rows.find((r: any) => r.label.includes("public school listing"));
+    expect(sch.value).toContain("LEE EL");
+    expect(sch.value).toContain("straight line");
+    expect(sch.note).toContain("does not say which school this address is assigned to");
+    expect(rows.find((r: any) => r.label.includes("Walkability")).value).toContain("18 of 20 (Most Walkable)");
+    // NOAA sea level rise is withheld: no row claims a point is in or out of an inundation zone.
+    expect(rows.find((r: any) => /sea level/i.test(r.label))).toBeUndefined();
+    expect(f.sea_level_rise.ok).toBe(false);
+    expect(rows.find((r: any) => r.label.includes("Historic preservation")).value).toContain("1 National Register boundary polygon(s) here");
+    const nh = rows.find((r: any) => r.label.includes("Highway construction price index"));
+    expect(nh.value).toContain("2026 Q1");
+    expect(nh.note).toContain("not a home building or renovation cost index");
+    expect(rows.some((r: any) => /^Construction cost index/.test(r.label))).toBe(false);
 
     const sampleWorkerPayload = {
       ...JSON.parse(JSON.stringify(f)),
@@ -112,7 +131,15 @@ describe("app/facts.js live public records", () => {
       },
     };
     const extendedRows = fromWorker(sampleWorkerPayload);
-    expect(extendedRows.find((r: any) => r.label.includes("Historic preservation")).value).toContain("1 NRHP resource(s)");
-    expect(extendedRows.find((r: any) => r.label.includes("Home price appreciation")).value).toContain("+87.8% (10-yr)");
+    expect(extendedRows.find((r: any) => r.label.includes("Historic preservation")).value).toContain("1 National Register boundary polygon(s) here");
+    const hpiRow = extendedRows.find((r: any) => r.label.includes("FHFA HPI"));
+    expect(hpiRow.value).toContain("+87.8% over 10 years to 2025");
+    expect(hpiRow.note).toContain("Developmental Index");
+
+    // No polygon at the point must not read as "not listed" (NPS maps most listed buildings as points).
+    const negRows = fromWorker({ ...sampleWorkerPayload, historic_preservation: { ...sampleWorkerPayload.historic_preservation, value: { is_in_historic_district: false, resources: [] } } });
+    const neg = negRows.find((r: any) => r.label.includes("Historic preservation"));
+    expect(neg.value).toBe("No National Register boundary polygon at this point");
+    expect(neg.note).toContain("Not a finding that the property is unlisted");
   });
 });

@@ -657,7 +657,7 @@
    "effect_status": "V",
    "effect_note": "Polloni abstract: \"decreasing traffic by 16% raise home values on treated streets by 1%\" (Crossref)",
    "cost_status": "V",
-   "cost_note": "$5,958/hump in LADOT 2025 speed hump report saved at w5/research/t_hump25.txt line 77",
+   "cost_note": "$5,958/hump in LADOT 2025 speed hump report saved at w5/research/t_hump25.txt line 77 (w5/ removed in 4bc63cd; read it with git show 4bc63cd^:w5/research/t_hump25.txt)",
    "class": "V",
    "shipped_rows_nonLA": 34052,
    "net_value_nonLA_usd": 3585223300,
