@@ -5,10 +5,12 @@
     "split_script": "scripts/split_county_hosting.py"
   },
   "r2": {
-    "enabled": false,
-    "base": "https://pub-data.citypretty.org/",
-    "status": "placeholder",
-    "note": "Placeholder: no bucket has been created. pub-data.citypretty.org did not resolve on 19 Nov 2026, so nothing has been checked (CORS included). Enable only after a county file is served from the real bucket with access-control-allow-origin: *. Suggested in audit item P1-10."
+    "enabled": true,
+    "base": "https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/",
+    "status": "live",
+    "bucket": "city-pretty-data",
+    "checked_on": "2026-11-19",
+    "note": "Cloudflare R2 bucket city-pretty-data, public r2.dev address (no custom domain yet). Checked 19 Nov 2026: 1,385 county files uploaded with scripts/r2_sync_counties.py (1.138 GB stored); counties/bundle_48453, bundle_17031, bundle_47135 and bundle_06075 were fetched from this address with an Origin header and returned 200 with access-control-allow-origin: * and an ETag, byte-identical to the repository copies for the first three. HARD LIMIT set by the owner: R2 storage must never exceed the 10 GB free allowance; upload only with scripts/r2_sync_counties.py, which stops at 8 GB. See CLAUDE.md."
   },
   "regions": {
     "northeast": {

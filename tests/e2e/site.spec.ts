@@ -1940,6 +1940,7 @@ test("a county file loads from its enabled regional site, and falls back to the 
   const fs = require("fs"), path = require("path");
   const hosts = JSON.parse(fs.readFileSync(path.join(__dirname, "../../app/data/county_hosts.json"), "utf8"));
   hosts.regions.south.enabled = true; hosts.regions.south.checked_on = "2026-11-17";
+  hosts.r2.enabled = false;   // this test is about the regional site; R2 (tried first when enabled) is covered by the live check in county_hosts.json
   await page.route(/county_hosts\.json/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(hosts) }));
   const regional: string[] = [];
   const local = fs.readFileSync(path.join(__dirname, "../../counties/bundle_47155.json.gz"));
