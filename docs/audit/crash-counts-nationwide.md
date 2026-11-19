@@ -56,7 +56,7 @@ observed on 16 Nov 2026, and the checks recorded in `pipeline/region.py`.
 
 - **Crashes stored without a location** are not returned by a map query, so their share is unknown for these
   sources (in LA's CCRS data it is 26%).
-- **California outside LA** (55 counties on CCRS, and San Francisco on DataSF) was not rebuilt in this pass.
+- **California** was rebuilt separately (`scripts/build_crash_counts_ca.py`; San Francisco with this script) and, on 19 Nov 2026, again with the 1/k split. The files from this pass (outside California) were built under the older rule (a boundary crash counts in full in each bordering block group) and have not been rebuilt with the 1/k split; the page labels each county with its own rule (`_meta.weighting` is `1/k` only in rebuilt files).
 - **Counties with no crash source** (most of the 637) have no crash counts; only federal FARS fatal crashes were
   downloaded and are not scored.
 - The bundles' own crash-based rankings and the traffic-calming placement still use the old counts until the page is

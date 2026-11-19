@@ -53,6 +53,15 @@ Drops happen outside California and Illinois where the rebuilt 3-year count has 
 counts covered 7–10 years. The engine's 1-crash threshold was set on LA's ~3-year window, which is what the rebuilt
 counts use.
 
+## Update 19 Nov 2026: California on the 1/k counts
+
+All 58 California count files were rebuilt with the 1/k split and the California `crash_gaps` recomputed. On the 57 CCRS
+counties plus San Francisco: gaps 4,624 -> 5,099, strengths 6,571 -> 6,398, crash rows dropped 15,417 -> 25,367, added
+2,898 -> 615, crosswalks re-sized 4,291 -> 4,380. The engine's thresholds (`>= 1` pedestrian/cyclist crash and so on) now
+read the split counts, so a block group whose only crash sits on an edge shared with two others (0.33 or 0.5) no longer
+qualifies; that is the intent of audit item P1-3 but it is the main reason rows dropped. Counts and medians in
+`crash_gaps` are shown to one decimal when fractional. Outside California the gaps still use the older, un-split counts.
+
 ## Not done
 
 - Neighborhood plans (`plans` in the data files) aggregate the old gaps; their pedestrian/cyclist steps are hidden,

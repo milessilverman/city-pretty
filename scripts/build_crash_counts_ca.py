@@ -6,8 +6,8 @@ Why: most crashes are geocoded onto street centerlines, and streets are usually 
 so a count that assigns each boundary crash to one side by tie-break swings by half. The previous file
 (w5/tools/la_crash_counts.py, inputs not in the repo) did exactly that.
 
-Rule here: a crash counts for a block group if it is inside it OR within 10 m of its boundary. A crash on a boundary
-street therefore counts for each block group that street borders. Totals across block groups are not crash totals.
+Rule here: a crash counts for a block group if it is inside it OR within 10 m of its boundary, and a crash that
+touches k block groups counts 1/k for each (so a county's block-group counts add up to the number of located crashes).
 
 Sources (public, no key):
   CHP California Crash Reporting System (CCRS) on data.ca.gov, Crashes_2023/2024/2025, all counties. CCRS County Code
@@ -28,6 +28,10 @@ import time
 import urllib.parse
 import urllib.request
 from datetime import date
+
+# Optional cache of the raw rows downloaded from data.ca.gov (set CCRS_CACHE to a folder outside the repo), so a rebuild
+# can be repeated or checked by hand without downloading again.
+CACHE = os.environ.get("CCRS_CACHE")
 
 from shapely.geometry import Point, Polygon, MultiPolygon
 from shapely.ops import transform
@@ -94,6 +98,21 @@ def block_groups(county3):
     return {g: transform(to_m, p).buffer(0) for g, p in raw.items()}, to_m
 
 
+def cached(name, fn):
+    if not CACHE:
+        return fn()
+    os.makedirs(CACHE, exist_ok=True)
+    p = os.path.join(CACHE, name + ".json")
+    if os.path.exists(p):
+        with open(p) as f:
+            return json.load(f)
+    v = fn()
+    with open(p + ".tmp", "w") as f:
+        json.dump(v, f)
+    os.replace(p + ".tmp", p)
+    return v
+
+
 def pedbike_collisions():
     """Crashes with a pedestrian or bicyclist party (Parties table) or a pedestrian/bicyclist injured person.
     The crash table's MotorVehicleInvolvedWithDesc names only the first thing struck, so it misses crashes where a
@@ -115,6 +134,10 @@ def ksi_collisions():
 
 
 def county_crashes(code):
+    return cached(f"crashes_county_{code}", lambda: list(_county_crashes(code)))
+
+
+def _county_crashes(code):
     for y, rid in CRASHES.items():
         last = 0
         while True:
@@ -134,7 +157,8 @@ def build_county(code, ksi_ids, today, pb_ids=frozenset()):
         return
     gids = list(bgs)
     outer = STRtree([bgs[g].buffer(BOUNDARY_M) for g in gids])
-    out = {g: [0, 0, 0] for g in gids}
+    out = {g: [0.0, 0.0, 0.0] for g in gids}
+    tot_w = [0.0, 0.0, 0.0]
     stats = {"crashes": 0, "with_coordinates": 0, "matched": 0, "on_boundary": 0, "latest_crash": None}
     for r in county_crashes(code):
         stats["crashes"] += 1
@@ -160,19 +184,26 @@ def build_county(code, ksi_ids, today, pb_ids=frozenset()):
         w_ped = (1.0 / k) if ped else 0.0
         w_ksi = (1.0 / k) if ksi else 0.0
         w_all = 1.0 / k
+        tot_w[0] += 1.0 if ped else 0.0
+        tot_w[1] += 1.0 if ksi else 0.0
+        tot_w[2] += 1.0
         for i in hits:
             c = out[gids[i]]
-            c[2] = round(c[2] + w_all, 3)
-            c[0] = round(c[0] + w_ped, 3)
-            c[1] = round(c[1] + w_ksi, 3)
+            c[0] += w_ped
+            c[1] += w_ksi
+            c[2] += w_all
+    out = {g: [round(v, 4) for v in c] for g, c in out.items()}
     out["_meta"] = {
         "county_fips": fips,
         "source": f"CHP California Crash Reporting System (CCRS), data.ca.gov: Crashes and InjuredWitnessPassengers 2023-2025, County Code {code}",
         "geography": "Census TIGERweb 2020 block groups",
-        "rule": f"A crash counts for a block group if it is inside it or within {BOUNDARY_M:g} m of its boundary; crashes touching k boundary block groups are weighted 1/k.",
+        "rule": f"A crash counts for a block group if it is inside it or within {BOUNDARY_M:g} m of its boundary; a crash within 10 m of k block groups' edges counts 1/k for each, so a county's block-group counts add up to the number of located crashes.",
         "years": [2023, 2025],
         "pedbike_rule": "first object struck is a pedestrian or bicycle, or any party (Parties table) or injured person is a Pedestrian or Bicyclist",
         "fields": ["pedestrian or bicycle crashes", "killed or seriously injured crashes (any person Fatal, SuspectSerious or SevereInactive, or NumberKilled > 0)", "all crashes"],
+        "weighting": "1/k",
+        "located_crashes": [round(tot_w[0], 3), round(tot_w[1], 3), round(tot_w[2], 3)],
+        "block_group_sums": [round(sum(c[j] for c in out.values()), 3) for j in range(3)],
         "built": today,
         "script": "scripts/build_crash_counts_ca.py",
         **stats,
@@ -187,9 +218,9 @@ def build_county(code, ksi_ids, today, pb_ids=frozenset()):
 def main():
     today = date.today().isoformat()
     want = {a for a in sys.argv[1:] if a.isdigit()}
-    ksi_ids = ksi_collisions()
+    ksi_ids = set(cached("ksi_ids", lambda: sorted(ksi_collisions())))
     print(f"{len(ksi_ids)} statewide crashes with a killed or seriously injured person", file=sys.stderr)
-    pb_ids = pedbike_collisions()
+    pb_ids = set(cached("pedbike_ids", lambda: sorted(pedbike_collisions())))
     print(f"{len(pb_ids)} statewide crashes with a pedestrian or bicyclist party or injured person", file=sys.stderr)
     for code in range(1, 59):
         fips = "06" + str(2 * code - 1).zfill(3)

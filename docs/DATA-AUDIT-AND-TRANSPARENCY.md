@@ -918,3 +918,42 @@ Live checks (19 Nov 2026, `scripts/live_check_panels.mjs`, LIVE_PORT 8941, resul
 `data/backtests/live_check_panels_2026-11-19_review18.json`): St. Louis City 3/3 and Kenton KY 3/3 parcels with every
 panel ok; Los Angeles 3/3 ok except one FEMA flood row (unrelated to these commits). Station lookup on the real page skips
 Westwood/UCLA (under construction) and still finds Wilshire/La Brea and 95th/Dan Ryan. Details in the review file.
+### Correction: California crash counts said 1/k but were built without it (found and fixed 19 Nov)
+
+**What was claimed.** The 18 Nov audit item P1-3 and the script `scripts/build_crash_counts_ca.py` said a crash within
+10 m of k block groups counts 1/k in each, and `build_crash_counts_ca.py` implemented it. The work queue (R1) said the 58
+California files used the boundary rule.
+
+**What was true.** None of the 58 files had been rebuilt after the 1/k code was written. All 58 (built 16 Nov) counted a
+boundary crash in full in every block group it borders (their `_meta.rule` said "crashes on boundary streets count for each
+bordering block group"). Their block groups added up to 1,348,795 crashes where the counties have 945,609 located crashes
+(43% too many; 1.94 times in San Francisco). The page text said "recorded inside this block group or on its boundary
+streets" without saying a crash is shared, and the comparison ("worse than X% of similar areas") and the crash-based
+improvement rows used those inflated counts. Nothing on the page was wrong about which crashes were near a block group; the
+counts were too high wherever a boundary street had crashes, and two neighbours both showed the same crash in full.
+
+**What is true now.**
+- All 57 CCRS counties rebuilt on 19 Nov (CHP CCRS Crashes and InjuredWitnessPassengers 2023-2025 via data.ca.gov; TIGERweb
+  2020 block groups; raw downloads kept outside the repo) and San Francisco rebuilt from DataSF with
+  `scripts/build_state_crash_counts.py` (its script already had the split; the committed file did not). Each file's `_meta`
+  has `weighting: "1/k"`, `located_crashes` and `block_group_sums`.
+- Across California: 1,219,650 crashes read (CHP's table has grown by 2 to 10 crashes in six counties since 16 Nov); 950,656
+  with coordinates (78%; lowest Sutter 52%); 945,609 placed in a block group; block-group sums now equal 945,608.95
+  (rounding). Pedestrian/cyclist 69,956 -> 44,391; killed or seriously injured 58,076 -> 39,905. Per-block-group changes
+  run from -373.3 crashes (Santa Clara, 060855046011) to +1.0 (Santa Clara 060855027013, the only block group that rose; CHP's table has two more Santa Clara crashes than on 16 Nov).
+- Invariant, every county: sum over block groups of the all-crashes count equals the placed crashes (and pedestrian and
+  KSI sums equal their located totals) within rounding. Unit test `tests/unit/caCrashInvariant.test.ts` (58 counties).
+- Hand check (independent distance count from the raw rows, no spatial index) of 7 block groups in 3 counties (Amador
+  060050003031, 060050004024, 060050003042; Mariposa 060430001012, 060430001013; Los Angeles 060379800241, 060375021001):
+  all three counts matched the file exactly (e.g. 060050003031: 184 rows within 10 m, 55 solely its own, 129 shared; 116.5
+  crashes; file 116.5; old file 184).
+- `crash_gaps` recomputed for the 58 counties (`scripts/recompute_crash_gaps.py`; counts shown to one decimal). Gaps
+  4,624 -> 5,099; strengths 6,571 -> 6,398; crash rows dropped 15,417 -> 25,367 (the engine's ">= 1 crash" thresholds
+  now read split counts; owner to confirm that is wanted).
+- Page: `crashTextFor`, the comparison text and the "killed or seriously injured" row show one decimal where a count is a
+  fraction and state the rule of that county's file. The 175 counties outside California still use the older rule and
+  the page says so (`older rule: ... counts in full for every block group it borders ... run higher than the number of
+  crashes`) until they are rebuilt.
+- Live check on the real page (counties 06073 San Diego large, 06077 San Joaquin mid-size, 06049 Modoc small; 3 block
+  groups each, all crash checks pass): `data/backtests/live_check_panels_2026-11-19_cacrash.json`; panel text showing the
+  rule: `data/backtests/live_check_crash_panel_text_2026-11-19.json`.

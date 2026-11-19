@@ -406,12 +406,13 @@ test("LA crash text uses the rebuilt counts, states the boundary rule and the co
     const w = window as any;
     const id = w.D.bgs.features[0].properties.id;
     w.select(id, false);
-    ev("CRASH_COUNTS")["06037"] = { [id]: [4, 2, 37], _meta: { crashes: 100, with_coordinates: 74, source: "CHP California Crash Reporting System (CCRS)", years: [2023, 2025], script: "scripts/build_crash_counts_ca.py" } };
+    ev("CRASH_COUNTS")["06037"] = { [id]: [4, 2, 37], _meta: { crashes: 100, with_coordinates: 74, source: "CHP California Crash Reporting System (CCRS)", years: [2023, 2025], script: "scripts/build_crash_counts_ca.py", weighting: "1/k" } };
     return ev("whyFix")("12 pedestrian or bike crashes recorded");
   });
   expect(out).toContain("37 crashes recorded inside this block group or on its boundary streets");
   expect(out).toContain("4 involving a pedestrian or cyclist");
   expect(out).toContain("only the 74% of this county's crashes that have coordinates");
+  expect(out).toContain("counts 1/k in each");
   expect(out).not.toContain("12 ");
   // A state map-service source (Tennessee): its own noun, and the unlocated-crash caveat even though every returned row has a location.
   const tn = await page.evaluate(() => {
@@ -421,6 +422,7 @@ test("LA crash text uses the rebuilt counts, states the boundary rule and the co
   });
   expect(tn).toContain("9 injury or fatal crashes recorded");
   expect(tn).toContain("without a location are not counted");
+  expect(tn).toContain("older rule: a crash within 10 m of a block group's edge counts in full for every block group it borders");
   expect(errors).toEqual([]);
 });
 
@@ -699,7 +701,8 @@ test("San Francisco crash text uses DataSF's counts: injury crashes, measured lo
     ev("CRASH_COUNTS")["06075"] = data;
     return ev("crashTextFor")("06075", id);
   }, [sf, bg]);
-  expect(out).toContain(`${sf[bg][2]} injury or fatal crashes recorded inside this block group or on its boundary streets`);
+  const shown = Number.isInteger(sf[bg][2]) ? sf[bg][2].toLocaleString() : sf[bg][2].toFixed(1); // 1/k counts show one decimal
+  expect(out).toContain(`${shown} injury or fatal crashes recorded inside this block group or on its boundary streets`);
   expect(out).toContain("only the 96% of this source's crashes that have a location can be placed");
   expect(out).toContain("lower bound");
   expect(errors).toEqual([]);

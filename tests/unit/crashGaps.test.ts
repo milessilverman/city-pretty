@@ -29,12 +29,13 @@ describe("recomputed crash comparisons", () => {
         expect(g.startsWith(fips)).toBe(true);
         if (a.p) {
           const [x, med, worse, cls] = a.p;
-          expect(Number.isInteger(x)).toBe(true);
+          expect(Math.abs(x * 10 - Math.round(x * 10))).toBeLessThan(1e-9); // whole, or one decimal under the 1/k rule
+          if (!mt.crash_weighting) expect(Number.isInteger(x)).toBe(true);
           expect(worse).toBeGreaterThanOrEqual(0);
           expect(worse).toBeLessThanOrEqual(1);
           if (cls === "g") expect(worse).toBeGreaterThanOrEqual(0.8);
           else expect(cls === "s" && worse <= 0.2).toBe(true);
-          expect(Math.abs(x - med)).toBeGreaterThanOrEqual(med ? 0.1 * Math.abs(med) - 1e-9 : 0);
+          expect(Math.abs(x - med)).toBeGreaterThanOrEqual(med ? 0.1 * Math.abs(med) - 0.06 : 0) /* x and med are rounded for display */;
         }
         // a lower-bound count can prove a block group qualifies, never that it doesn't
         if (mt.pedbike_count_is_lower_bound) expect(a.drop).toBeUndefined();

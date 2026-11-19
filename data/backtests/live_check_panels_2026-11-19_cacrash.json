@@ -1,0 +1,524 @@
+{
+ "ran_on": "2026-11-19T17:06:26.096Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "06073": {
+   "county": "San Diego CA (Pacific)",
+   "state": "CA",
+   "points": [
+    {
+     "bg": "060730091081",
+     "lat": 32.77074,
+     "lng": -117.203781,
+     "service": "SanGIS Parcels (hosted by SANDAG)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $1.0M, rent $1,776/mo, homes 622"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 23 pts (current release); page: 23 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 23.3 pts below its 30% goal; box: \"23.3 pts below its 30% goal\" / \"-4.9°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0.5,3.5,87.5]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb San Diego County · 060730091081; page \"Census area: San Diego County · block group 060730091081(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2823 for 06073; page \"HUD Fair Market Rent (FY2027): 1 bed $2,335 · 2 bed $2,823 · 3 bed $3,743/moSan Diego-Chula Vista-Carlsbad, CA MSA. HUD's voucher benchmark (rent plus utilities\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 26 ft; page \"Ground elevation: 26 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: City of San Diego's standards are on file only for RS-1-1, RS-1-2, RS-1-3, RS-1-4, RS-1-5, RS-1-6, RS-1-7, RS-1-8, RS-1-9, RS-1-10, RS-1-11, RS-1-12, RS-1-13, RS-1-14; this lot is CC-4-2. Only the RS (Residential--Single Unit) zones are encoded. RE, RX, RT, RM, commercial, industrial and agricultural zones, the planned districts (such as CCPD, CUPD, CVPD) and overlay zones (such as the Coastal Overlay Zone) are not.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "060730008002",
+     "lat": 32.743916,
+     "lng": -117.139757,
+     "service": "SanGIS Parcels (hosted by SANDAG)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $1.2M, rent $3,250/mo, homes 224"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 9 pts (current release); page: 9 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 9 pts below its 25% goal; box: \"9 pts below its 25% goal\" / \"+1.3°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0,0]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb San Diego County · 060730008002; page \"Census area: San Diego County · block group 060730008002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2823 for 06073; page \"HUD Fair Market Rent (FY2027): 1 bed $2,335 · 2 bed $2,823 · 3 bed $3,743/moSan Diego-Chula Vista-Carlsbad, CA MSA. HUD's voucher benchmark (rent plus utilities\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 294 ft; page \"Ground elevation: 294 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Zoning district RS-1-7 (San Diego Municipal Code, Chapter 13 (Zones)) — The purpose of the RS zones is to provide appropriate regulations for the development of single dwelling units that accommodate a variety of lot sizes and residential dwelling types and which promote neighborhood quality, character, and livability. (SDMC §131.0403(a)). RS-1-7 allows 1 dwelling unit per lot (SDMC §131.0431, Table 131-04D). Minimum lot: 5,000 sq ft, 50 ft wide (55 ft on a corner), 50 ft of street frontage and 95 ft deep (SDMC §131.0431, Table 131-04D); this lot (about 4,537 sq ft by its parcel outline) is smaller. Minimum setbacks: front 15 ft, side 4 ft, street side 5 ft, rear 13 ft (SDMC §131.0431, Table 131-04D; note 2: See Section 131.0443(a)(4).); the table's footnotes and SDMC §131.0443 adjust these in some cases, which aren't checked here. Height: listed as 24/30 ft (SDMC §131.0431, Table 131-04D), so no part above 30 ft, and \"Maximum structure height shall not exceed the height of the angled building envelope plane, which connects the maximum structure height adjacent to the setback and the overall maximum structure height as determined by the underlying base zone and the requirements below.\" (SDMC §131.0444(a), (c)). Planned districts, overlay zones (such as the Coastal Overlay Zone) and state law (ADUs, SB 9) can change these; overlay zones and planned districts aren't checked here.",
+      "? Floor area allowed by zoning — Up to about 2,722 sq ft of gross floor area on this ~4,537 sq ft lot (FAR 0.60, SDMC §131.0446(a)(1), Table 131-04J, row \"4.001 - 5,000 | 0.60\"). On a lot over the minimum area that is mostly steep hillside the ratio is figured differently (SDMC §131.0446(a)(2)); slope isn't checked here. The Assessor records 1,733 sq ft of living area, so about 989 sq ft remain by this measure; the Assessor's living area isn't gross floor area and is incomplete, so this is a screening figure.",
+      "✗ Second home (two-family or more) — RS-1-7 allows 1 dwelling unit per lot under the base zone (SDMC §131.0431, Table 131-04D). State law can allow more (an ADU, a junior ADU, or an SB 9 two-unit project); those are the rows below.",
+      "✗ Split into two lots (by area only) — Two lots would each need at least 5,000 sq ft under RS-1-7 (SDMC §131.0431); this lot has about 4,537 sq ft. A state-law (SB 9) split has its own rules.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "? Second story — One story (inferred (assumption: single-story layout)). The height limit here is 30 ft (SDMC §131.0431); the floor area allowed is above. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "060730029051",
+     "lat": 32.769502,
+     "lng": -117.046398,
+     "service": "SanGIS Parcels (hosted by SANDAG)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $599k, rent $2,157/mo, homes 661"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 20 pts (current release); page: 20 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 20.3 pts below its 30% goal; box: \"20.3 pts below its 30% goal\" / \"+3.9°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0,0]; comparison [0,0.5,0,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb San Diego County · 060730029051; page \"Census area: San Diego County · block group 060730029051(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2823 for 06073; page \"HUD Fair Market Rent (FY2027): 1 bed $2,335 · 2 bed $2,823 · 3 bed $3,743/moSan Diego-Chula Vista-Carlsbad, CA MSA. HUD's voucher benchmark (rent plus utilities\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 487 ft; page \"Ground elevation: 487 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: City of San Diego's standards are on file only for RS-1-1, RS-1-2, RS-1-3, RS-1-4, RS-1-5, RS-1-6, RS-1-7, RS-1-8, RS-1-9, RS-1-10, RS-1-11, RS-1-12, RS-1-13, RS-1-14; this lot is RM-3-9. Only the RS (Residential--Single Unit) zones are encoded. RE, RX, RT, RM, commercial, industrial and agricultural zones, the planned districts (such as CCPD, CUPD, CVPD) and overlay zones (such as the Coastal Overlay Zone) are not.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-117.203781%2C32.77074&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8951' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-117.203781%2C32.77074&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8951' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-117.139757%2C32.743916&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInte",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-117.139757%2C32.743916&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInte",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-117.046398%2C32.769502&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatial",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8951' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  },
+  "06077": {
+   "state": "CA",
+   "points": [
+    {
+     "bg": "060770001011",
+     "lat": 37.949158,
+     "lng": -121.279589,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $274k, rent $1,101/mo, homes 295"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 23 pts (current release); page: 23 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 23.1 pts below its 30% goal; box: \"23.1 pts below its 30% goal\" / \"+2.3°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [7,3,92.8333]; comparison [7,1.5,0.9,\"g\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "060770031162",
+     "lat": 37.985829,
+     "lng": -121.315358,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $506k, rent $1,638/mo, homes 383"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 21 pts (current release); page: 21 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 20.6 pts below its 30% goal; box: \"20.6 pts below its 30% goal\" / \"-0.1°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [6.5,0.5,98.5]; comparison [6.5,1,0.9,\"g\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "060770042031",
+     "lat": 38.142981,
+     "lng": -121.282956,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $454k, rent $1,759/mo, homes 738"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 11 pts (current release); page: 11 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 11.2 pts below its 30% goal; box: \"11.2 pts below its 30% goal\" / \"-0.1°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,0,5.3333]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": []
+  },
+  "06049": {
+   "state": "CA",
+   "points": [
+    {
+     "bg": "060490001002",
+     "lat": 41.496214,
+     "lng": -120.527401,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $185k, rent $812/mo, homes 302"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0,4]; comparison [0,2,0,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "060490001003",
+     "lat": 41.480659,
+     "lng": -120.544813,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $239k, rent $666/mo, homes 378"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0,0]; comparison [0,1,0,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "060490002001",
+     "lat": 41.713547,
+     "lng": -121.319483,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $265k, rent $590/mo, homes 470"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,7,69.5]; comparison [0,1.58,0,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": []
+  }
+ }
+}

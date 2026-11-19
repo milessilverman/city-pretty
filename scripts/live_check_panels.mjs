@@ -243,10 +243,11 @@ async function main() {
         if (cc) {
           const cnt = Array.isArray(cc[bg]) ? cc[bg] : null;
           const wantGap = a && a.p && a.p[3] === "g";
-          const gapTxt = wantGap ? `${a.p[0]} ${a.p[0] === 1 ? "crash" : "crashes"} involving a pedestrian or cyclist inside this block group` : null;
+          const shownN = (v) => (Number.isInteger(v) ? v.toLocaleString() : v.toFixed(1));   // 1/k counts show one decimal
+          const gapTxt = wantGap ? `${shownN(a.p[0])} ${a.p[0] === 1 ? "crash" : "crashes"} involving a pedestrian or cyclist inside this block group` : null;
           const oldTxt = /\d+ pedestrian\/bike crash|fatal\/severe and \d+ pedestrian\/bike/.test(panel);
-          const ksiRow = panel.match(/Crashes with someone killed or seriously injured, inside or on boundary streets\s*(\d[\d,]*)/);
-          const ksiOk = !cnt || !ksiRow || +ksiRow[1].replace(/,/g, "") === cnt[1];
+          const ksiRow = panel.match(/Crashes with someone killed or seriously injured, inside or on boundary streets\s*(\d[\d,]*(?:\.\d)?)/);
+          const ksiOk = !cnt || !ksiRow || +ksiRow[1].replace(/,/g, "") === +shownN(cnt[1]).replace(/,/g, "");
           ok("crash", (!wantGap || panel.includes(gapTxt)) && !oldTxt && ksiOk,
             `counts ${cnt ? JSON.stringify(cnt) : "none for this block group"}; comparison ${a && a.p ? JSON.stringify(a.p) : "none"}` +
             (wantGap && !panel.includes(gapTxt) ? " | gap text missing" : "") + (oldTxt ? " | old unrewritten crash text shown" : "") + (!ksiOk ? ` | KSI row ${ksiRow[1]} != ${cnt[1]}` : ""));

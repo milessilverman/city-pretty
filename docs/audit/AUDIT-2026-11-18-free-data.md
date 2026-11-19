@@ -155,7 +155,7 @@ The tests pass, but they miss the bugs below.
   - Where: back-tests group by **sale price** (`scripts/lib/backtestMetrics.mjs`, `priceBand`); the page looks up the band by the **estimate** (`app.js:656` and `750`).
   - Example: Queens homes under $500k have 99% error and are estimated around $600k+. The page therefore files them in the 12% band, and the warning never shows on the homes it describes.
   - Fix: recompute the band metrics grouped by the estimate, and publish those.
-- [ ] **P1-3. Crash rankings use raw counts inflated by the 10 m boundary rule.** *(Partially done: 1/k boundary weighting algorithm implemented in build_crash_counts_ca.py and build_state_crash_counts.py, but California's 58 county crash files have not yet been rebuilt with this method due to download size; page and metadata currently display un-split boundary counts)*
+- [ ] **P1-3. Crash rankings use raw counts inflated by the 10 m boundary rule.** *(California done 19 Nov: all 58 county crash files rebuilt with 1/k weighting from CCRS (57) and DataSF (San Francisco), `crash_gaps` recomputed, page text names the rule per county. The 175 non-California files are still under the older rule and say so on the page. Still open: a rate per road-km or resident, and the engine's `>= 1` thresholds now read fractional counts)*
   - A crash on a boundary counts for every block group it touches, which inflates totals 1.42× (CCRS) to 1.94× (SF).
   - "Worse than X% of peers" compares raw 3-year counts; peers aren't matched on area, road length or population.
   - Thresholds in `pipeline/engine.py:125-262` (`>= 1` crash triggers traffic calming, `>= 2` triggers bike lanes) let one crash qualify 2–4 block groups.
