@@ -7,6 +7,21 @@ Rule for every item: a number reaches the page or the AI only if it was fetched 
 is withheld with the reason. Each item ends with tests passing and a commit; anything I get wrong is reported in the
 audit doc the same day.
 
+## Status 19 Nov 2026 (hosting and the advisor)
+
+- **County files are served from Cloudflare R2** (bucket `city-pretty-data`, public r2.dev address in
+  `app/data/county_hosts.json`). 1,385 files, 1.138 GB. Five counties were opened on the real page and loaded from R2.
+  The local `counties/` folder is still in the repository as the fallback and for tests and scripts.
+  **Hard limit from the owner: R2 storage must never exceed 10 GB. Upload only with `scripts/r2_sync_counties.py`
+  (stops at 8 GB). See `CLAUDE.md`.**
+- **The advisor Worker is deployed** at `https://city-pretty-api-proxy.city-pretty.workers.dev` with the Claude key
+  set as a secret; `/api/health` reports the advisor ready, and one real question (Travis County two-bedroom Fair
+  Market Rent) returned HUD's figure with its sources. `app/config.js` points at it. Not set: `CENSUS_API_KEY`,
+  `GOOGLE_MAPS_KEY`. Do NOT set `TURNSTILE_SECRET_KEY` until the page sends a Turnstile token (it would refuse every
+  question).
+- Still to decide: how the public site gets under GitHub Pages' 1 GB cap now that R2 serves the county files
+  (deploy Pages from a workflow that leaves out `counties/bundle_*`, or remove them from the repository).
+
 ## Running now (background)
 
 | # | Item | Done when |

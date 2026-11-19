@@ -101,7 +101,9 @@ test("names a block group after a label outside it as 'Near …'", async ({ page
   expect(name).toBe("Near The Wharf");
 });
 
-test("AI advisor says it is not connected and sends nothing", async ({ page }) => {
+test("AI advisor says it is not connected and sends nothing when no Worker address is set", async ({ page }) => {
+  // app/config.js now carries the deployed Worker's address (19 Nov 2026), so this test sets it empty itself.
+  await page.route("**/app/config.js", (r) => r.fulfill({ contentType: "text/javascript", body: 'window.CITY_PRETTY_CONFIG = { workerUrl: "" };' }));
   let sent = false;
   page.on("request", (r) => { if (r.url().includes("/api/ai")) sent = true; });
   await openPage(page);
