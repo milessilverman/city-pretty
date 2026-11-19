@@ -1,0 +1,83 @@
+{
+ "ran_on": "2026-11-17T05:57:50.614Z",
+ "script": "scripts/live_check_constants3.mjs",
+ "counties": {
+  "36047": {
+   "neighborhood": {
+    "bg": "360470561001",
+    "has_tiles": true,
+    "not_modeled_tile": true,
+    "banned": []
+   },
+   "houses": [
+    {
+     "bg": "360470594033",
+     "lat": 40.595393,
+     "lng": -73.949896,
+     "estimate_block": false,
+     "recorded_facts": false,
+     "banned": [],
+     "ok": true
+    },
+    {
+     "bg": "360470052011",
+     "lat": 40.622934,
+     "lng": -74.039558,
+     "estimate_block": false,
+     "recorded_facts": false,
+     "banned": [],
+     "ok": true
+    },
+    {
+     "bg": "360470802001",
+     "lat": 40.658645,
+     "lng": -73.953021,
+     "estimate_block": false,
+     "recorded_facts": false,
+     "banned": [],
+     "ok": true
+    }
+   ]
+  },
+  "06037": {
+   "neighborhood": {
+    "bg": "060372044201",
+    "has_tiles": true,
+    "not_modeled_tile": true,
+    "banned": []
+   },
+   "houses": [
+    {
+     "bg": "060379200472",
+     "lat": 34.410886,
+     "lng": -118.451681,
+     "estimate_block": false,
+     "recorded_facts": false,
+     "banned": [],
+     "ok": true
+    },
+    {
+     "bg": "060372077121",
+     "lat": 34.04518,
+     "lng": -118.258052,
+     "estimate_block": false,
+     "recorded_facts": false,
+     "banned": [],
+     "ok": true
+    },
+    {
+     "bg": "060375342023",
+     "lat": 33.956785,
+     "lng": -118.162212,
+     "estimate_block": true,
+     "recorded_facts": true,
+     "banned": [],
+     "ok": true
+    }
+   ]
+  }
+ },
+ "metric_option_present": false,
+ "page_errors": [],
+ "fails": 0
+}

@@ -4,89 +4,298 @@
     "state_code": "CA",
     "bill_number": "SB 79",
     "session": "2025-2026 Regular Session",
-    "short_name": "CA SB 79 (Tier 1 Heavy Rail Transit-Oriented Density)",
-    "statute_citation": "Cal. Gov. Code § 65913.16",
+    "short_name": "CA SB 79 — Tier 1 TOD stop, within 1/4 mile",
+    "statute_citation": "Cal. Gov. Code §§ 65912.155–65912.162 (added by Stats. 2025, Ch. 512 (SB 79)); § 65912.157 amended by Stats. 2026, Ch. 100 (SB 722), approved 2026-07-16",
     "effective_date": "2026-07-01",
     "statute_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB79",
     "eligible_counties": [
+      "06001",
       "06037",
       "06059",
+      "06067",
       "06073",
       "06075",
-      "06001",
-      "06013",
       "06081",
-      "06085",
-      "06067"
+      "06085"
     ],
     "distance_to_transit_max_mi": 0.25,
-    "transit_mode": "heavy_rail",
-    "max_units_by_right": 120,
+    "transit_mode": "heavy_rail_or_very_high_frequency_commuter_rail_72_trains_per_day",
+    "max_units_by_right": null,
     "max_height_ft": 75,
     "max_far": 3.5,
     "min_parking_spaces_per_unit": 0,
-    "affordability_mandate_pct": 0.1,
+    "affordability_mandate_pct": null,
     "tax_exemption_pct": 0,
     "statutory_exclusions": [
-      "historic_district_hpoz",
-      "coastal_commission_or_sma",
-      "fema_100yr_floodway",
-      "calfire_or_state_vhfhsz"
+      "calfire_or_state_vhfhsz (very high fire hazard severity zone bars streamlined review under § 65913.4(a)(6)(D), applied through § 65912.159(a)(3); § 65912.157(j) also requires objective fire safety standards)",
+      "rent_controlled_housing_site (§ 65912.157(h)(1)-(2): demolition of, or previous use for, more than two units subject to rent or price control)",
+      "mobilehome_or_rv_park_site (§ 65912.157(h)(3), added by SB 722: land governed by the Mobilehome Residency Law, Recreational Vehicle Park Occupancy Law, Mobilehome Parks Act or Special Occupancy Parks Act)"
     ],
-    "summary": "Mandates ministerial by-right approval for multifamily housing developments up to 75 feet and 120 units on parcels within 0.25 miles of an existing or funded heavy rail passenger station, with parking minimums eliminated.",
-    "last_verified": "2026-11-15"
+    "summary": "Housing development is an allowed use on residential, mixed or commercial sites within 1/4 mile of a Tier 1 transit-oriented development stop (heavy rail or 72+ trains/day commuter rail) in an urban transit county (>15 passenger rail stations). Local governments may not impose a height limit below 75 ft, a density cap below 120 du/acre, or standards precluding a residential FAR of 3.5 (§ 65912.157(a)(3)). Projects need at least 5 units and 30 du/acre. Applies to local agencies from July 1, 2026 (§ 65912.157(n)). The 75 ft / 120 du/ac figures are floors on local limits, not a unit cap. SB 79 does not by itself grant ministerial approval; see § 65912.159 for the streamlining path. Amended by SB 722 (Ch. 100, Stats. 2026, approved 2026-07-16) to exclude sites governed by the mobilehome and RV park laws.",
+    "last_verified": "2026-11-19",
+    "min_allowed_density_du_per_acre": 120,
+    "affordability_options": {
+      "one_of": [
+        {
+          "pct": 0.07,
+          "income": "extremely low"
+        },
+        {
+          "pct": 0.1,
+          "income": "very low"
+        },
+        {
+          "pct": 0.13,
+          "income": "lower"
+        }
+      ],
+      "exempt_if_units_at_or_below": 10,
+      "term_years_rental": 55,
+      "term_years_ownership": 45,
+      "citation": "Gov. Code § 65912.157(i)"
+    },
+    "verification": {
+      "status": "verified",
+      "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container); Gov. Code §§ 65912.156, 65912.157 read in full; Legislature bulk data pubinfo_2025.zip read again 2026-11-19: BILL_VERSION_TBL_9511.lob (SB 79 chaptered), BILL_VERSION_TBL_16242.lob (SB 722 chaptered), LAW_SECTION_TBL row GOV65912.157.20261002",
+      "checked_on": "2026-11-19",
+      "evidence": "§ 65912.157(a)(3): 'shall not impose any height limit less than 75 feet ... any maximum density of less than 120 dwelling units per acre ... residential floor area ratio of up to 3.5' SB 722 (Ch. 100, Stats. 2026): \"(3) The existing parcel of land or site is governed under the Mobilehome Residency Law ..., the Recreational Vehicle Park Occupancy Law ..., the Mobilehome Parks Act ..., or the Special Occupancy Parks Act\" (new § 65912.157(h)(3)); \"This act is an urgency statute ... and shall go into immediate effect.\" § 65912.156(q): \"'Urban transit county' means a county with more than 15 passenger rail stations.\" (the county list on file is not in the statute).",
+      "unverified_fields": [
+        "eligible_counties (list of urban transit counties is from Wikipedia 'California Senate Bill 79', a secondary source; statute defines the test as >15 passenger rail stations)",
+        "min_parking_spaces_per_unit (SB 79 itself sets none; 0 comes from AB 2097, Gov. Code § 65863.2, subject to its exceptions)",
+        "statutory_exclusions (no parcel layer for rent-controlled housing sites or mobilehome / RV park sites)"
+      ],
+      "notes": "Original record cited Gov. Code § 65913.16 (a different section, amended by SB 597), included Contra Costa (06013), labelled the 120 du/acre density floor as a 120-unit by-right cap, claimed a single 10% affordability mandate, and said the law 'mandates ministerial by-right approval'. All corrected. 2026-11-19: SB 79 was amended by SB 722 (Ch. 100, Stats. 2026); heights, densities and FARs in § 65912.157(a) are unchanged. The engine no longer rules out a county missing from the list on file when a qualifying stop is in range; it reports the county test as not confirmed."
+    },
+    "statutory_exclusions_note": "Corrected 2026-11-19. The earlier list named sea-level-rise and local-historic-register sites; those appear only in the local alternative-plan rules (§ 65912.161), not as limits on a project's eligibility under § 65912.157. Gov. Code § 65912.157(h) lists the real site exclusions.",
+    "amended_by": "SB 722 (Stats. 2026, Ch. 100), approved 2026-07-16, urgency statute effective immediately: adds § 65912.157(h)(3), excluding parcels governed by the mobilehome and RV park laws. The official code table reads \"Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026.\""
   },
   {
     "id": "ca_sb79_tier2",
     "state_code": "CA",
     "bill_number": "SB 79",
     "session": "2025-2026 Regular Session",
-    "short_name": "CA SB 79 (Tier 2 Heavy Rail Transit-Oriented Density)",
-    "statute_citation": "Cal. Gov. Code § 65913.16",
+    "short_name": "CA SB 79 — Tier 1 TOD stop, 1/4 to 1/2 mile (city pop ≥ 35,000)",
+    "statute_citation": "Cal. Gov. Code §§ 65912.155–65912.162 (added by Stats. 2025, Ch. 512 (SB 79)); § 65912.157 amended by Stats. 2026, Ch. 100 (SB 722), approved 2026-07-16",
     "effective_date": "2026-07-01",
     "statute_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB79",
     "eligible_counties": [
+      "06001",
       "06037",
       "06059",
+      "06067",
       "06073",
       "06075",
-      "06001",
-      "06013",
       "06081",
-      "06085",
-      "06067"
+      "06085"
     ],
     "distance_to_transit_max_mi": 0.5,
-    "transit_mode": "heavy_rail",
-    "max_units_by_right": 100,
+    "transit_mode": "heavy_rail_or_very_high_frequency_commuter_rail_72_trains_per_day",
+    "max_units_by_right": null,
     "max_height_ft": 65,
     "max_far": 3,
     "min_parking_spaces_per_unit": 0,
-    "affordability_mandate_pct": 0.1,
+    "affordability_mandate_pct": null,
     "tax_exemption_pct": 0,
     "statutory_exclusions": [
-      "historic_district_hpoz",
-      "coastal_commission_or_sma",
-      "fema_100yr_floodway",
-      "calfire_or_state_vhfhsz"
+      "calfire_or_state_vhfhsz (very high fire hazard severity zone bars streamlined review under § 65913.4(a)(6)(D), applied through § 65912.159(a)(3); § 65912.157(j) also requires objective fire safety standards)",
+      "rent_controlled_housing_site (§ 65912.157(h)(1)-(2): demolition of, or previous use for, more than two units subject to rent or price control)",
+      "mobilehome_or_rv_park_site (§ 65912.157(h)(3), added by SB 722: land governed by the Mobilehome Residency Law, Recreational Vehicle Park Occupancy Law, Mobilehome Parks Act or Special Occupancy Parks Act)"
     ],
-    "summary": "Mandates ministerial by-right approval for multifamily housing developments up to 65 feet and 100 units on parcels within 0.25 to 0.50 miles of heavy rail passenger stations, with parking minimums eliminated.",
-    "last_verified": "2026-11-15"
+    "summary": "Between 1/4 and 1/2 mile of a Tier 1 TOD stop, in a city of at least 35,000, local governments may not impose a height limit below 65 ft, a density cap below 100 du/acre, or standards precluding FAR 3.0 (§ 65912.157(a)(4)). NOTE: the id 'ca_sb79_tier2' is historical; this record is Tier 1 at the outer ring. Statutory Tier 2 (light rail etc.) is in ca_sb79_tier2_light_rail_*.",
+    "last_verified": "2026-11-19",
+    "distance_to_transit_min_mi": 0.25,
+    "city_population_min": 35000,
+    "min_allowed_density_du_per_acre": 100,
+    "affordability_options": {
+      "one_of": [
+        {
+          "pct": 0.07,
+          "income": "extremely low"
+        },
+        {
+          "pct": 0.1,
+          "income": "very low"
+        },
+        {
+          "pct": 0.13,
+          "income": "lower"
+        }
+      ],
+      "exempt_if_units_at_or_below": 10,
+      "term_years_rental": 55,
+      "term_years_ownership": 45,
+      "citation": "Gov. Code § 65912.157(i)"
+    },
+    "verification": {
+      "status": "verified",
+      "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container); Legislature bulk data pubinfo_2025.zip read again 2026-11-19: BILL_VERSION_TBL_9511.lob (SB 79 chaptered), BILL_VERSION_TBL_16242.lob (SB 722 chaptered), LAW_SECTION_TBL row GOV65912.157.20261002",
+      "checked_on": "2026-11-19",
+      "evidence": "§ 65912.157(a)(4): 'height limit less than 65 feet ... less than 100 dwelling units per acre ... floor area ratio of up to 3' SB 722 (Ch. 100, Stats. 2026): \"(3) The existing parcel of land or site is governed under the Mobilehome Residency Law ..., the Recreational Vehicle Park Occupancy Law ..., the Mobilehome Parks Act ..., or the Special Occupancy Parks Act\" (new § 65912.157(h)(3)); \"This act is an urgency statute ... and shall go into immediate effect.\" § 65912.156(q): \"'Urban transit county' means a county with more than 15 passenger rail stations.\" (the county list on file is not in the statute).",
+      "unverified_fields": [
+        "eligible_counties (secondary source, see tier1)",
+        "statutory_exclusions (no parcel layer for rent-controlled housing sites or mobilehome / RV park sites)"
+      ],
+      "notes": "Original record was mislabelled 'Tier 2' (statutory Tier 2 is light rail/48+ trains/BRT) and omitted the 35,000-population condition. 2026-11-19: SB 79 was amended by SB 722 (Ch. 100, Stats. 2026); heights, densities and FARs in § 65912.157(a) are unchanged. The engine no longer rules out a county missing from the list on file when a qualifying stop is in range; it reports the county test as not confirmed."
+    },
+    "statutory_exclusions_note": "Corrected 2026-11-19. The earlier list named sea-level-rise and local-historic-register sites; those appear only in the local alternative-plan rules (§ 65912.161), not as limits on a project's eligibility under § 65912.157. Gov. Code § 65912.157(h) lists the real site exclusions.",
+    "amended_by": "SB 722 (Stats. 2026, Ch. 100), approved 2026-07-16, urgency statute effective immediately: adds § 65912.157(h)(3), excluding parcels governed by the mobilehome and RV park laws. The official code table reads \"Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026.\""
+  },
+  {
+    "id": "ca_sb79_tier2_light_rail_quarter",
+    "state_code": "CA",
+    "bill_number": "SB 79",
+    "session": "2025-2026 Regular Session",
+    "short_name": "CA SB 79 — Tier 2 TOD stop (light rail / 48+ trains / qualifying BRT), within 1/4 mile",
+    "statute_citation": "Cal. Gov. Code §§ 65912.155–65912.162 (added by Stats. 2025, Ch. 512 (SB 79)); § 65912.157 amended by Stats. 2026, Ch. 100 (SB 722), approved 2026-07-16",
+    "effective_date": "2026-07-01",
+    "statute_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB79",
+    "eligible_counties": [
+      "06001",
+      "06037",
+      "06059",
+      "06067",
+      "06073",
+      "06075",
+      "06081",
+      "06085"
+    ],
+    "distance_to_transit_max_mi": 0.25,
+    "transit_mode": "light_rail_or_high_frequency_commuter_rail_48_trains_or_qualifying_bus",
+    "max_units_by_right": null,
+    "min_allowed_density_du_per_acre": 100,
+    "max_height_ft": 65,
+    "max_far": 3,
+    "min_parking_spaces_per_unit": 0,
+    "affordability_mandate_pct": null,
+    "affordability_options": {
+      "one_of": [
+        {
+          "pct": 0.07,
+          "income": "extremely low"
+        },
+        {
+          "pct": 0.1,
+          "income": "very low"
+        },
+        {
+          "pct": 0.13,
+          "income": "lower"
+        }
+      ],
+      "exempt_if_units_at_or_below": 10,
+      "term_years_rental": 55,
+      "term_years_ownership": 45,
+      "citation": "Gov. Code § 65912.157(i)"
+    },
+    "tax_exemption_pct": 0,
+    "statutory_exclusions": [
+      "calfire_or_state_vhfhsz (very high fire hazard severity zone bars streamlined review under § 65913.4(a)(6)(D), applied through § 65912.159(a)(3); § 65912.157(j) also requires objective fire safety standards)",
+      "rent_controlled_housing_site (§ 65912.157(h)(1)-(2): demolition of, or previous use for, more than two units subject to rent or price control)",
+      "mobilehome_or_rv_park_site (§ 65912.157(h)(3), added by SB 722: land governed by the Mobilehome Residency Law, Recreational Vehicle Park Occupancy Law, Mobilehome Parks Act or Special Occupancy Parks Act)"
+    ],
+    "summary": "Local governments may not impose a height limit below 65 ft, a density cap below 100 du/acre, or standards precluding FAR 3 (§ 65912.157(a)(5)).",
+    "last_verified": "2026-11-19",
+    "verification": {
+      "status": "verified",
+      "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container); Legislature bulk data pubinfo_2025.zip read again 2026-11-19: BILL_VERSION_TBL_9511.lob (SB 79 chaptered), BILL_VERSION_TBL_16242.lob (SB 722 chaptered), LAW_SECTION_TBL row GOV65912.157.20261002",
+      "checked_on": "2026-11-19",
+      "evidence": "§ 65912.157(a)(5): 'height limit less than 65 feet ... less than 100 dwelling units per acre ... floor area ratio of up to 3' SB 722 (Ch. 100, Stats. 2026): \"(3) The existing parcel of land or site is governed under the Mobilehome Residency Law ..., the Recreational Vehicle Park Occupancy Law ..., the Mobilehome Parks Act ..., or the Special Occupancy Parks Act\" (new § 65912.157(h)(3)); \"This act is an urgency statute ... and shall go into immediate effect.\" § 65912.156(q): \"'Urban transit county' means a county with more than 15 passenger rail stations.\" (the county list on file is not in the statute).",
+      "unverified_fields": [
+        "eligible_counties (secondary source)",
+        "min_parking_spaces_per_unit (from AB 2097, not SB 79)",
+        "statutory_exclusions (no parcel layer for rent-controlled housing sites or mobilehome / RV park sites)"
+      ],
+      "notes": "Added in this audit from the official statute text; the original data had no true Tier 2 rows. 2026-11-19: SB 79 was amended by SB 722 (Ch. 100, Stats. 2026); heights, densities and FARs in § 65912.157(a) are unchanged. The engine no longer rules out a county missing from the list on file when a qualifying stop is in range; it reports the county test as not confirmed."
+    },
+    "statutory_exclusions_note": "Corrected 2026-11-19. The earlier list named sea-level-rise and local-historic-register sites; those appear only in the local alternative-plan rules (§ 65912.161), not as limits on a project's eligibility under § 65912.157. Gov. Code § 65912.157(h) lists the real site exclusions.",
+    "amended_by": "SB 722 (Stats. 2026, Ch. 100), approved 2026-07-16, urgency statute effective immediately: adds § 65912.157(h)(3), excluding parcels governed by the mobilehome and RV park laws. The official code table reads \"Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026.\""
+  },
+  {
+    "id": "ca_sb79_tier2_light_rail_half",
+    "state_code": "CA",
+    "bill_number": "SB 79",
+    "session": "2025-2026 Regular Session",
+    "short_name": "CA SB 79 — Tier 2 TOD stop (light rail / 48+ trains / qualifying BRT), 1/4 to 1/2 mile (city pop ≥ 35,000)",
+    "statute_citation": "Cal. Gov. Code §§ 65912.155–65912.162 (added by Stats. 2025, Ch. 512 (SB 79)); § 65912.157 amended by Stats. 2026, Ch. 100 (SB 722), approved 2026-07-16",
+    "effective_date": "2026-07-01",
+    "statute_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB79",
+    "eligible_counties": [
+      "06001",
+      "06037",
+      "06059",
+      "06067",
+      "06073",
+      "06075",
+      "06081",
+      "06085"
+    ],
+    "distance_to_transit_max_mi": 0.5,
+    "transit_mode": "light_rail_or_high_frequency_commuter_rail_48_trains_or_qualifying_bus",
+    "max_units_by_right": null,
+    "min_allowed_density_du_per_acre": 80,
+    "max_height_ft": 55,
+    "max_far": 2.5,
+    "min_parking_spaces_per_unit": 0,
+    "affordability_mandate_pct": null,
+    "affordability_options": {
+      "one_of": [
+        {
+          "pct": 0.07,
+          "income": "extremely low"
+        },
+        {
+          "pct": 0.1,
+          "income": "very low"
+        },
+        {
+          "pct": 0.13,
+          "income": "lower"
+        }
+      ],
+      "exempt_if_units_at_or_below": 10,
+      "term_years_rental": 55,
+      "term_years_ownership": 45,
+      "citation": "Gov. Code § 65912.157(i)"
+    },
+    "tax_exemption_pct": 0,
+    "statutory_exclusions": [
+      "calfire_or_state_vhfhsz (very high fire hazard severity zone bars streamlined review under § 65913.4(a)(6)(D), applied through § 65912.159(a)(3); § 65912.157(j) also requires objective fire safety standards)",
+      "rent_controlled_housing_site (§ 65912.157(h)(1)-(2): demolition of, or previous use for, more than two units subject to rent or price control)",
+      "mobilehome_or_rv_park_site (§ 65912.157(h)(3), added by SB 722: land governed by the Mobilehome Residency Law, Recreational Vehicle Park Occupancy Law, Mobilehome Parks Act or Special Occupancy Parks Act)"
+    ],
+    "summary": "Local governments may not impose a height limit below 55 ft, a density cap below 80 du/acre, or standards precluding FAR 2.5 (§ 65912.157(a)(6)).",
+    "last_verified": "2026-11-19",
+    "verification": {
+      "status": "verified",
+      "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container); Legislature bulk data pubinfo_2025.zip read again 2026-11-19: BILL_VERSION_TBL_9511.lob (SB 79 chaptered), BILL_VERSION_TBL_16242.lob (SB 722 chaptered), LAW_SECTION_TBL row GOV65912.157.20261002",
+      "checked_on": "2026-11-19",
+      "evidence": "§ 65912.157(a)(6): 'height limit less than 55 feet ... less than 80 dwelling units per acre ... floor area ratio of up to 2.5' SB 722 (Ch. 100, Stats. 2026): \"(3) The existing parcel of land or site is governed under the Mobilehome Residency Law ..., the Recreational Vehicle Park Occupancy Law ..., the Mobilehome Parks Act ..., or the Special Occupancy Parks Act\" (new § 65912.157(h)(3)); \"This act is an urgency statute ... and shall go into immediate effect.\" § 65912.156(q): \"'Urban transit county' means a county with more than 15 passenger rail stations.\" (the county list on file is not in the statute).",
+      "unverified_fields": [
+        "eligible_counties (secondary source)",
+        "min_parking_spaces_per_unit (from AB 2097, not SB 79)",
+        "statutory_exclusions (no parcel layer for rent-controlled housing sites or mobilehome / RV park sites)"
+      ],
+      "notes": "Added in this audit from the official statute text; the original data had no true Tier 2 rows. 2026-11-19: SB 79 was amended by SB 722 (Ch. 100, Stats. 2026); heights, densities and FARs in § 65912.157(a) are unchanged. The engine no longer rules out a county missing from the list on file when a qualifying stop is in range; it reports the county test as not confirmed."
+    },
+    "distance_to_transit_min_mi": 0.25,
+    "city_population_min": 35000,
+    "statutory_exclusions_note": "Corrected 2026-11-19. The earlier list named sea-level-rise and local-historic-register sites; those appear only in the local alternative-plan rules (§ 65912.161), not as limits on a project's eligibility under § 65912.157. Gov. Code § 65912.157(h) lists the real site exclusions.",
+    "amended_by": "SB 722 (Stats. 2026, Ch. 100), approved 2026-07-16, urgency statute effective immediately: adds § 65912.157(h)(3), excluding parcels governed by the mobilehome and RV park laws. The official code table reads \"Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026.\""
   },
   {
     "id": "ca_sb9_lot_split",
     "state_code": "CA",
     "bill_number": "SB 9",
     "session": "2021-2022 Regular Session",
-    "short_name": "CA SB 9 (California Home Opportunity & Act)",
-    "statute_citation": "Cal. Gov. Code §§ 65852.21, 66411.7",
+    "short_name": "CA SB 9 (California HOME Act) — two units per lot and urban lot split",
+    "statute_citation": "Cal. Gov. Code §§ 65852.21, 66411.7; §§ 65852.21 and 66411.7 amended by Stats. 2026, Ch. 56 (SB 1426), effective 2026-06-30",
     "effective_date": "2022-01-01",
     "statute_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202120220SB9",
     "max_units_by_right": 4,
-    "max_height_ft": 25,
+    "max_height_ft": null,
     "max_far": null,
-    "min_parking_spaces_per_unit": 0,
-    "parking_note": "0 parking required if within 0.5 mi of major transit stop or car-share facility; max 1 space otherwise",
+    "min_parking_spaces_per_unit": null,
+    "parking_note": "Local agency may require up to one off-street space per unit, but none where the parcel is within one-half mile walking distance of qualifying transit or another statutory exception applies (Gov. Code §§ 65852.21, 66411.7).",
     "affordability_mandate_pct": 0,
     "tax_exemption_pct": 0,
     "statutory_exclusions": [
@@ -96,7 +305,21 @@
       "prime_farmland"
     ],
     "summary": "Requires ministerial approval of urban lot splits (creating two parcels of at least 1,200 sq ft each) and construction of up to two residential units per lot (up to 4 units total) in single-family residential zones.",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-19",
+    "verification": {
+      "status": "partially_verified",
+      "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container); Gov. Code §§ 65852.21 and 66411.7 (current text, as amended by SB 1426 (2026))",
+      "checked_on": "2026-11-19",
+      "evidence": "§ 66411.7: 'no more than two new parcels of approximately equal lot area ... not be smaller than 40 percent ... both newly created parcels are no smaller than 1,200 square feet'; § 65852.21: 'no more than two residential units within a single-family residential zone shall be considered ministerially' Official code table 2026-11-19: GOV 65852.21 \"Amended by Stats. 2026, Ch. 56, Sec. 7. (SB 1426) Effective June 30, 2026.\"; GOV 66411.7 \"Amended by Stats. 2026, Ch. 56, Sec. 9. (SB 1426) Effective June 30, 2026.\"; § 66411.7(a)(2)(A): \"both newly created parcels are no smaller than 1,200 square feet\".",
+      "unverified_fields": [
+        "effective_date (2022-01-01 not checked; the 2021 bill version was not retrieved)",
+        "statutory_exclusions (§ 65913.4(a)(6)(B)-(K) as it read on 2021-09-16 was not read; only four site conditions are checked)"
+      ],
+      "notes": "Original max_height_ft 25 does not appear in either section and was removed. Original min_parking 0 was wrong as a general rule (up to 1/unit may be required). Short name was garbled ('Home Opportunity & Act')."
+    },
+    "min_new_parcel_sqft": 1200,
+    "min_new_parcel_note": "§ 66411.7(a)(2)(A): \"both newly created parcels are no smaller than 1,200 square feet\" unless a local ordinance sets a smaller size; one parcel not smaller than 40 percent of the original lot area (§ 66411.7(a)(1)).",
+    "statutory_exclusions_note": "§ 65852.21(a)(2) incorporates § 65913.4(a)(6)(B)-(K) \"as that section read on September 16, 2021\" (a longer list of site conditions than the four flags used here; the flood bar is the FEMA special flood hazard area, broader than a floodway). Also excluded: certain housing under rent control or occupied in the last three years (§ 65852.21(a)(3)) and historic districts or landmarks (§ 65852.21(a)(5))."
   },
   {
     "id": "ca_ab2097",
@@ -109,55 +332,105 @@
     "statute_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202120220AB2097",
     "min_parking_spaces_per_unit": 0,
     "distance_to_transit_max_mi": 0.5,
-    "summary": "Prohibits public agencies from imposing or enforcing minimum automobile parking mandates on residential, commercial, or mixed-use developments located within 0.5 miles of a major transit stop.",
-    "last_verified": "2026-11-15"
+    "summary": "Prohibits public agencies from imposing minimum automobile parking requirements on residential, commercial or other development within one-half mile of public transit (a major transit stop). Cities may still impose them on some projects by written findings within 30 days, except for projects with ≥20% affordable units or fewer than 20 units (Gov. Code § 65863.2(b)–(c)).",
+    "last_verified": "2026-11-16",
+    "verification": {
+      "status": "verified",
+      "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container)",
+      "checked_on": "2026-11-16",
+      "evidence": "§ 65863.2(a): 'A public agency shall not impose or enforce any minimum automobile parking requirement ... within one-half mile of public transit.' History: 'Added by Stats. 2022, Ch. 459 (AB 2097) Effective January 1, 2023.'",
+      "unverified_fields": [],
+      "notes": "Summary updated to include the statutory exceptions."
+    }
   },
   {
     "id": "fl_live_local",
     "state_code": "FL",
-    "bill_number": "SB 328 / SB 102",
-    "session": "2024 / 2023 Regular Session",
-    "short_name": "FL Live Local Act (Fla. Stat. § 166.04151 + § 196.1979)",
-    "statute_citation": "Fla. Stat. §§ 166.04151, 163.3168, 196.1979",
-    "effective_date": "2024-07-01",
-    "statute_url": "https://www.flsenate.gov/Session/Bill/2024/328",
-    "commercial_or_industrial_only": true,
-    "max_units_by_right": 999,
-    "height_preemption": "Allowed up to tallest commercial or residential height permitted within 1 mile or 3 stories, whichever is higher",
-    "density_preemption": "Allowed up to highest residential density permitted in jurisdiction",
+    "bill_number": "SB 102 (2023, Ch. 2023-17) / SB 328 (2024, Ch. 2024-188) / SB 1730 (2025, Ch. 2025-172) / SB 104 (2026, Ch. 2026-14) / SB 962 (2026, Ch. 2026-163) / HB 1389 (2026, Ch. 2026-179)",
+    "session": "2023 to 2026 Regular Sessions",
+    "short_name": "FL Live Local Act (Fla. Stat. § 166.04151(7) zoning + § 196.1978(3) exemption)",
+    "statute_citation": "Fla. Stat. §§ 166.04151(7) (municipalities), 125.01055(7) (counties), 196.1978(3) (tax exemption); amended through s. 2, ch. 2026-179",
+    "effective_date": "2023-07-01",
+    "statute_url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html",
+    "max_units_by_right": null,
+    "height_preemption": "Not below the highest currently allowed (or allowed on July 1, 2023) height of a commercial or residential building within 1 mile of the proposed development, or three stories, whichever is higher",
+    "density_preemption": "Not below the highest currently allowed (or allowed on July 1, 2023) residential density on any land in the municipality where residential development is allowed",
     "affordability_mandate_pct": 0.4,
     "affordability_term_years": 30,
     "affordability_ami_ceiling": 1.2,
     "tax_exemption_pct": 0.75,
-    "min_parking_spaces_per_unit": 0.5,
+    "min_parking_spaces_per_unit": null,
     "statutory_exclusions": [
-      "airport_noise_or_runway_zone",
-      "everglades_or_wekiva_or_trpa"
+      "airport_noise_or_runway_zone (airport-impacted areas, s. 333.03; § 166.04151(7)(o)1)",
+      "working_waterfront_in_industrial_zone (recreational and commercial working waterfront, s. 342.201(2)(b), in any area zoned industrial; (7)(o)2)",
+      "wekiva_or_everglades_protection_area (Wekiva Study Area, s. 369.316; Everglades Protection Area, s. 373.4592(2); (7)(o)3-4)",
+      "open_character_district (land development regulations in existence before July 1, 2026 that retain open character, such as open space and park districts; (7)(o)5)",
+      "area_of_critical_state_concern (ss. 380.055, 380.0551, 380.0552, 380.0553, 380.0555; (7)(o)6)",
+      "recorded_conservation_easement (any portion of a property so encumbered; (7)(o)7)"
     ],
-    "summary": "Authorizes by-right multifamily housing on commercial, industrial, or mixed-use land if at least 40% of units are affordable at ≤120% AMI for 30 years. Preempts local zoning height and density, and grants 75% ad valorem property tax exemption under Fla. Stat. § 196.1979.",
-    "last_verified": "2026-11-15"
+    "summary": "Municipalities must authorize multifamily and mixed-use residential in any area zoned commercial, industrial or mixed use, on property owned by a county, municipality or school district, and on religious-institution land of more than 3 acres (with a house of public worship for at least 10 years), regardless of the underlying zoning, if at least 40% of the residential units in a multifamily development are rentals affordable under s. 420.0004 for at least 30 years. No zoning change, special exception, variance or comprehensive plan amendment may be required for the height, zoning and density authorized. Density not below the highest allowed in the municipality; floor area ratio not below 150% of the highest allowed; height not below the tallest within 1 mile or three stories, whichever is higher; administrative approval. Parking must be cut 15% on request near transit and eliminated for mixed-use projects in a transit-oriented area. Counties have a parallel rule (s. 125.01055(7)). The subsection is listed to expire October 1, 2033. Qualifying units may receive the § 196.1978(3) property-tax exemption. Land that falls under one of the exclusions (airport-impacted areas, working waterfronts in industrial zones, the Wekiva and Everglades areas, open-character districts, areas of critical state concern, conservation easements) is outside the law.",
+    "last_verified": "2026-11-19",
+    "max_far_rule": "Not below 150% of the highest currently allowed (or allowed on July 1, 2023) FAR in the municipality",
+    "tax_exemption_note": "§ 196.1978(3)(d)1.a: 75% of assessed value for qualifying units at >80% to ≤120% AMI; units at ≤80% AMI are exempt under (d)1.b. § 196.1979 is a separate LOCAL-OPTION exemption for ≤60% AMI units.",
+    "parking_note": "Municipality must reduce parking by 15% on request near a transit stop or other listed conditions, and must eliminate parking for mixed-use projects in a recognized TOD area (§ 166.04151(7)(f)).",
+    "verification": {
+      "status": "verified",
+      "method": "Official Florida Statutes 2026 (www.leg.state.fl.us) §§ 166.04151, 125.01055, 196.1978, 420.0004 read in full on 2026-11-19; Laws of Florida chapters 2023-17, 2024-188, 2025-172, 2026-14, 2026-163, 2026-179 (laws.flrules.org) for effective dates",
+      "checked_on": "2026-11-19",
+      "evidence": "§ 166.04151(7)(a)1: \"A municipality must authorize multifamily and mixed-use residential as allowable uses in any area zoned for commercial, industrial, or mixed use; ... on property owned by a county, municipality, or school district; and on property that is more than 3 acres in size and owned by a religious institution ... regardless of the underlying zoning, if at least 40 percent of the residential units in a proposed multifamily development are rental units that, for a period of at least 30 years, are affordable as defined in s. 420.0004.\" § 166.04151(7)(o): \"This subsection does not apply to: 1. Airport-impacted areas as provided in s. 333.03. 2. Property defined as recreational and commercial working waterfront in s. 342.201(2)(b) in any area zoned as industrial. 3. The Wekiva Study Area ... 4. The Everglades Protection Area ... 5. Areas subject to land development regulations ... in existence before July 1, 2026, and ... intended to retain the open character of land ... 6. Any area of critical state concern ... 7. Any portion of a property encumbered by a recorded conservation easement\"; (7)(p): \"This subsection expires October 1, 2033.\" History line: \"s. 5, ch. 2023-17; s. 2, ch. 2024-188; s. 2, ch. 2025-172; s. 15, ch. 2026-14; s. 2, ch. 2026-163; s. 2, ch. 2026-179.\" § 196.1978(3)(d)1.a: \"Seventy-five percent of the assessed value of the units in multifamily projects ... greater than 80 percent but not more than 120 percent of the median annual adjusted gross income\".",
+      "unverified_fields": [
+        "statutory_exclusions (no parcel layer is loaded for airport-impacted areas, working waterfronts, the Wekiva Study Area, the Everglades Protection Area, open-character districts, areas of critical state concern or conservation easements; the page cannot check them)",
+        "parcel ownership (county, city or school district land and religious-institution land qualify regardless of zoning; ownership is not a parcel field here)",
+        "county provision applies in unincorporated areas (§ 125.01055(7) read only for its structure, not applied to parcels)"
+      ],
+      "notes": "Corrected 2026-11-19 after comparing with an independent check of the same statute: (1) \"commercial or industrial zoning only\" was wrong; public and some religious-institution land qualifies regardless of zoning; (2) the exclusions list was wrong (see statutory_exclusions_note); (3) the section has been amended through ch. 2026-14, 2026-163 and 2026-179. Earlier corrections kept: original cited § 196.1979 for the 75% exemption (wrong section), set a fabricated 0.5 parking minimum, and a 999-unit placeholder cap."
+    },
+    "effective_date_note": "First enacted by ch. 2023-17 (\"this act shall take effect July 1, 2023\", approved 2023-03-29). Later amendments: ch. 2024-188 (effective on becoming law, approved 2024-05-16), ch. 2025-172 (effective 2025-07-01), ch. 2026-14 (a statutes-correction act; effective the 60th day after adjournment), ch. 2026-163 (effective on becoming law, approved 2026-06-25) and ch. 2026-179 (effective 2026-07-01). Ch. 2026-179 s. 3 says its changes to (7)(n) apply retroactively to 2024-01-01.",
+    "applies_to_zone": "commercial",
+    "applies_to_zone_note": "Not only commercial or industrial land: § 166.04151(7)(a)1 also covers land owned by a county, municipality or school district, and religious-institution land of more than 3 acres, regardless of zoning. \"applies_to_zone\" only keeps this law out of the homeowner (ADU / middle-housing) notes.",
+    "statutory_exclusions_note": "Corrected 2026-11-19. The earlier list (\"everglades_or_wekiva_or_trpa\") named a TRPA (Tahoe Regional Planning Agency) exclusion that is not in the statute and omitted working waterfronts in industrial zones, airport-impacted areas under s. 333.03, open-character districts, areas of critical state concern and conservation easements.",
+    "affordability_ami_ceiling_note": "s. 420.0004(3): \"Affordable\" means rent or mortgage payments not above 30 percent of the stated share of median income; the highest tier, moderate income (s. 420.0004(12)), is \"less than 120 percent of the median annual adjusted gross income for households within the state, or ... within the metropolitan statistical area ... whichever is greater\"."
   },
   {
     "id": "tx_sb840",
     "state_code": "TX",
     "bill_number": "SB 840",
-    "session": "88th Legislature Regular Session",
-    "short_name": "TX SB 840 (Commercial/Office-to-Multifamily Redevelopment)",
-    "statute_citation": "Tex. Loc. Gov't Code § 214.908",
-    "effective_date": "2023-09-01",
-    "statute_url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=88R&Bill=SB840",
+    "session": "89th Legislature, Regular Session (2025)",
+    "short_name": "TX SB 840 (2025) — multifamily/mixed-use allowed in commercial zones",
+    "statute_citation": "Tex. Loc. Gov't Code ch. 218 (§§ 218.001–218.102 and subch. C) & § 211.0011",
+    "effective_date": "2025-09-01",
+    "statute_url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB840",
     "municipality_pop_min": 150000,
     "county_pop_min": 300000,
-    "commercial_or_office_only": true,
-    "max_units_by_right": 999,
-    "min_parking_spaces_per_unit": 1,
+    "max_units_by_right": null,
+    "min_parking_spaces_per_unit": null,
     "affordability_mandate_pct": 0,
     "tax_exemption_pct": 0,
     "statutory_exclusions": [
-      "airport_noise_or_runway_zone"
+      "airport_noise_or_runway_zone (statute: land within 3,000 feet of an airport or military base, § 218.101(c)(2)(B); this flag is only an approximation)",
+      "heavy_industrial_zoning (§ 218.101(c)(1): a zoning classification that allows heavy industrial use)",
+      "within_1000_ft_of_heavy_industrial_use (§ 218.101(c)(2)(A))",
+      "clear_zone_or_accident_potential_zone (§ 218.101(c)(3): an area designated by a municipality)"
     ],
-    "summary": "In municipalities with population >150,000 located in counties >300,000, prohibits cities from barring by-right adaptive reuse or redevelopment of commercial office buildings into multifamily residential use.",
-    "last_verified": "2026-11-15"
+    "summary": "In cities over 150,000 population located wholly or partly in a county over 300,000, cities must allow multifamily and mixed-use residential (≥65% residential) without rezoning in zones that allow office, commercial, retail, warehouse or mixed use; may not cap density below the greater of the city's highest density or 36 du/acre, height below the greater of the commercial height or 45 ft, or require more than one parking space per unit; compliant permits must be administratively approved.",
+    "last_verified": "2026-11-19",
+    "applies_in_zoning": "Any zoning classification allowing office, commercial, retail, warehouse or mixed use (not heavy industrial; not within 1,000 ft of heavy industrial use or 3,000 ft of an airport/military base; not clear/accident-potential zones)",
+    "min_allowed_density_du_per_acre": 36,
+    "density_rule": "Not more restrictive than the greater of the highest residential density allowed in the city or 36 units/acre",
+    "height_rule_ft": 45,
+    "height_rule": "Not more restrictive than the greater of the height allowed for office/commercial/retail/warehouse on the site or 45 ft",
+    "max_parking_requirement_per_unit": 1,
+    "verification": {
+      "status": "verified",
+      "method": "Texas Legislature Online: bill history 89(R) SB 840 and enrolled text (capitol.texas.gov/tlodocs/89R/billtext/html/SB00840F.htm)",
+      "checked_on": "2026-11-19",
+      "evidence": "History: '06/20/2025 E Effective on 9/1/25'; § 218.002: 'applies only to a municipality with a population greater than 150,000 that is wholly or partly located in a county with a population greater than 300,000'",
+      "unverified_fields": [
+        "statutory_exclusions (no parcel layer for heavy industrial zoning or use, airports, military bases or clear zones)"
+      ],
+      "notes": "SEVERE: original record cited 88(R) SB 840 (2023), which is 'Relating to increasing the criminal penalty for assault of certain hospital personnel' — an unrelated bill — and § 214.908. The housing law is 89(R) SB 840 (2025). It is not limited to office conversions."
+    },
+    "statutory_exclusions_note": "Corrected 2026-11-19 from the enrolled text: § 218.101(c) \"This section does not apply to: (1) a zoning classification that allows heavy industrial use; (2) land located within: (A) 1,000 feet of an existing heavy industrial use or development site; or (B) 3,000 feet of an airport or military base; or (3) an area designated by a municipality as a clear zone or accident potential zone.\""
   },
   {
     "id": "wa_hb1110",
@@ -168,27 +441,41 @@
     "statute_citation": "RCW 36.70A.635",
     "effective_date": "2023-07-23",
     "statute_url": "https://app.leg.wa.gov/billsummary?BillNumber=1110&Year=2023",
-    "max_height_ft": 35,
+    "max_height_ft": null,
     "rules": [
       {
         "pop_min": 75000,
         "base_units": 4,
-        "near_transit_or_affordable_units": 6
+        "near_transit_or_affordable_units": 6,
+        "note": "6 within 1/4-mile walking distance of a major transit stop, or if at least 2 units are affordable"
       },
       {
         "pop_min": 25000,
+        "pop_max_exclusive": 75000,
         "base_units": 2,
-        "near_transit_or_affordable_units": 4
+        "near_transit_or_affordable_units": 4,
+        "note": "4 within 1/4-mile walking distance of a major transit stop, or if at least 1 unit is affordable"
       },
       {
         "pop_min": 0,
+        "pop_max_exclusive": 25000,
         "base_units": 2,
-        "near_transit_or_affordable_units": 2
+        "near_transit_or_affordable_units": 2,
+        "condition": "Only cities within a contiguous urban growth area with the largest city in a county of more than 275,000"
       }
     ],
-    "min_parking_spaces_per_unit": 0,
+    "min_parking_spaces_per_unit": null,
     "summary": "Requires GMA cities to allow middle housing (duplexes, triplexes, fourplexes, townhomes, cottage clusters) on all lots zoned for residential use, scaling to 4-6 units per lot in cities over 75,000 population.",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-16",
+    "parking_note": "No off-street parking may be required for middle housing within 1/2-mile walking distance of a major transit stop; otherwise at most 1 space/unit on lots ≤6,000 sq ft and 2 spaces/unit on larger lots (RCW 36.70A.635(6)).",
+    "verification": {
+      "status": "verified",
+      "method": "Washington Legislature: RCW 36.70A.635 (app.leg.wa.gov) and bill summary HB 1110 (2023)",
+      "checked_on": "2026-11-16",
+      "evidence": "RCW 36.70A.635(1)(b): 'at least four units per lot ... at least six units per lot ... within one-quarter mile walking distance of a major transit stop'; bill page: 'Governor signed. Chapter 332, 2023 Laws. Effective date 7/23/2023.'",
+      "unverified_fields": [],
+      "notes": "Original max_height_ft 35 not found in the statute; removed. The <25,000 rule lacked its UGA condition. min_parking 0 was only true near major transit."
+    }
   },
   {
     "id": "or_hb2001",
@@ -196,22 +483,35 @@
     "bill_number": "HB 2001",
     "session": "2019 Regular Session",
     "short_name": "OR HB 2001 (Oregon Housing Choice & Middle Housing)",
-    "statute_citation": "ORS 197.758",
-    "effective_date": "2020-01-01",
-    "statute_url": "https://olis.oregonlegislature.gov/liz/2019R1/Measures/Overview/HB2001",
+    "statute_citation": "ORS 197A.420 (formerly ORS 197.758; HB 2001 (2019))",
+    "effective_date": null,
+    "statute_url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
     "rules": [
       {
         "pop_min": 25000,
-        "allowed": "duplexes, triplexes, quadplexes, cottage clusters, townhouses on all residential lots"
+        "allowed": "all middle housing types (duplex, triplex, quadplex, cottage cluster, townhouse) on each lot zoned for residential use; also each county and each city ≥1,000 within Metro"
       },
       {
-        "pop_min": 10000,
-        "allowed": "duplexes on all lots zoned for single-family homes"
+        "pop_min": 2500,
+        "pop_max_exclusive": 25000,
+        "allowed": "a duplex on each lot zoned for residential use (cities not within Metro)"
       }
     ],
-    "min_parking_spaces_per_unit": 0,
-    "summary": "Requires Oregon cities with population >10,000 within Urban Growth Boundaries to permit duplexes on all lots zoned for single-family detached homes, and cities >25,000 to permit triplexes, quadplexes, and townhomes.",
-    "last_verified": "2026-11-15"
+    "min_parking_spaces_per_unit": null,
+    "summary": "Oregon cities of 25,000+ (and Metro-area cities of 1,000+, and counties) must allow all middle housing types on residential lots inside urban growth boundaries; cities of 2,500–25,000 outside Metro must allow duplexes.",
+    "last_verified": "2026-11-19",
+    "verification": {
+      "status": "verified",
+      "method": "Official ORS chapter 197A (oregonlegislature.gov/bills_laws/ors/ors197A.html)",
+      "checked_on": "2026-11-19",
+      "evidence": "ORS 197A.420(2)–(3): 'each city with a population of 25,000 or greater, and each city with a population of 1,000 or greater within Metro, shall allow the development of all middle housing types ... Each city not within Metro with a population of 2,500 or greater and less than 25,000 shall allow the development of a duplex' 2026-11-19, enrolled HB 2001 (olis.oregonlegislature.gov): \"an emergency is declared to exist, and this 2019 Act takes effect on its passage.\"",
+      "unverified_fields": [
+        "effective_date 2020-01-01",
+        "effective_date (takes effect on passage; signing date not read)"
+      ],
+      "notes": "Original cited the renumbered ORS 197.758 and a 10,000 duplex threshold; current law is 2,500. min_parking 0 not found in statute."
+    },
+    "effective_date_note": "Enrolled HB 2001 (Ch. 639, Oregon Laws 2019): \"this 2019 Act takes effect on its passage\" (emergency clause). The 2020-01-01 date earlier on file is not in the act; the Governor's signing date was not on the enrolled copy fetched. Local compliance deadlines in the act: June 30, 2021 (cities of 25,000+) and June 30, 2022 (others)."
   },
   {
     "id": "az_hb2720_2721",
@@ -219,44 +519,63 @@
     "bill_number": "HB 2720 / HB 2721",
     "session": "56th Legislature - 2nd Regular Session (2024)",
     "short_name": "AZ HB 2720 / 2721 (Arizona Casitas & Middle Housing)",
-    "statute_citation": "A.R.S. §§ 9-467.04, 9-467.05",
+    "statute_citation": "A.R.S. § 9-461.18 (HB 2720, Laws 2024 ch. 196, ADUs); Laws 2024 ch. 197 (HB 2721) adding § 9-462.10 as enacted (middle housing)",
     "effective_date": "2024-09-14",
-    "statute_url": "https://www.azleg.gov/legtext/56leg/2R/bills/HB2720P.pdf",
+    "statute_url": "https://www.azleg.gov/legtext/56leg/2R/laws/0197.pdf",
     "municipality_pop_min": 75000,
-    "max_units_by_right": 4,
-    "max_height_ft": 30,
-    "min_parking_spaces_per_unit": 1,
-    "summary": "Requires Arizona municipalities with population >75,000 to permit detached and attached casitas (ADUs) by-right on single-family lots and allow duplexes, triplexes, and fourplexes within 1 mile of central business districts without discretionary review.",
-    "last_verified": "2026-11-15"
+    "max_units_by_right": null,
+    "max_height_ft": null,
+    "min_parking_spaces_per_unit": null,
+    "summary": "ADUs (A.R.S. § 9-461.18, Laws 2024 ch. 196, still in the Revised Statutes): municipalities over 75,000 must allow at least one attached and one detached ADU on any lot where a single-family home is allowed, with no added parking. Middle housing (Laws 2024 ch. 197, HB 2721, approved 2024-05-21): chaptered text required municipalities of 75,000+ to allow duplexes, triplexes, fourplexes and townhomes on single-family lots within one mile of the central business district by January 1, 2026, with no more than one parking space per unit. The section that chapter 197 added, A.R.S. § 9-462.10, is today a different provision (multifamily and adaptive reuse of commercial parcels in cities of 150,000+), so whether the middle-housing rule is still in force is not confirmed here and no unit count is shown.",
+    "last_verified": "2026-11-19",
+    "height_rule": "Municipality may not restrict middle housing to less than two floors or FAR below 50%",
+    "max_parking_requirement_per_unit": 1,
+    "verification": {
+      "status": "verified",
+      "method": "Arizona Legislature: chaptered session laws 2024 ch. 196 and ch. 197 (azleg.gov/legtext/56leg/2R/laws/0196.pdf, 0197.pdf) and current A.R.S. § 9-461.18",
+      "checked_on": "2026-11-19",
+      "evidence": "Ch. 197: 'ON OR BEFORE JANUARY 1, 2026, A MUNICIPALITY WITH A POPULATION OF SEVENTY-FIVE THOUSAND PERSONS OR MORE MUST AUTHORIZE ... DUPLEXES, TRIPLEXES, FOURPLEXES AND TOWNHOMES ... WITHIN ONE MILE OF THE MUNICIPALITY'S CENTRAL BUSINESS DISTRICT' 2026-11-19: azleg.gov/legtext/56leg/2R/laws/0197.pdf: \"CHAPTER 197 ... HOUSE BILL 2721 ... ADDING SECTION 9-462.10 ... APPROVED BY THE GOVERNOR MAY 21, 2024\"; current A.R.S. 9-462.10 title: \"Commercial buildings; multifamily residential development; adaptive reuse; prohibition on rezoning or municipal review; objective standards; applicability; definitions\". A.R.S. 9-461.18(A): \"At least one attached and one detached accessory dwelling unit as a permitted use.\"",
+      "unverified_fields": [
+        "effective_date 2024-09-14",
+        "current codified section number for the HB 2721 text (the current online § 9-462.10 contains a different, commercial adaptive-reuse provision)",
+        "max_units_by_right (3 on the ADU path; the 2024 middle-housing provision, up to four units, has an unconfirmed current status)",
+        "current in-force status of the Laws 2024 ch. 197 middle-housing rule (A.R.S. § 9-462.10 now has different text)"
+      ],
+      "notes": "Original cited A.R.S. §§ 9-467.04 and 9-467.05, which do not exist (azleg.gov 404). max_height_ft 30 was not in the law. Parking value is a cap, not a minimum. 2026-11-19: another check counted 3 units (ADU path) while this record counted 4 (middle-housing path); both are in the statutes but only the ADU path is in the current Revised Statutes, so the by-right unit count is withheld."
+    },
+    "max_units_adu_path": 3,
+    "max_units_adu_path_note": "A.R.S. § 9-461.18(A)(1): \"At least one attached and one detached accessory dwelling unit as a permitted use\" on any lot where a single-family dwelling is allowed (single-family home plus two ADUs = 3 units); § 9-461.18(H) applies it to municipalities of more than 75,000 people. Current section text read 2026-11-19."
   },
   {
     "id": "tx_austin_home",
     "state_code": "TX",
-    "bill_number": "Ordinance 20240516-004",
+    "bill_number": "Ordinances 20231207-001 (Phase 1) & 20240516-006 (Phase 2)",
     "session": "Austin City Council 2024",
     "short_name": "Austin HOME Initiative (Phase 1 & 2)",
-    "statute_citation": "Austin City Code Ord. 20231207-001 & 20240516-004",
+    "statute_citation": "Austin Ordinances No. 20231207-001 and No. 20240516-006 (Land Development Code amendments)",
     "effective_date": "2024-05-16",
-    "statute_url": "https://www.austintexas.gov/department/home-options-middle-income-economy",
+    "statute_url": "https://www.austintexas.gov/development-services/home-amendments",
     "municipality": "Austin",
-    "min_lot_size_sqft": 1500,
+    "min_lot_size_sqft": 1800,
     "max_units_by_right": 3,
-    "min_parking_spaces_per_unit": 0,
-    "summary": "Authorizes up to 3 residential units by-right on single-family zoned lots in Austin, TX, reduces minimum single-family lot size from 5,750 sq ft to 1,500 sq ft, and eliminates municipal vehicular parking requirements.",
-    "last_verified": "2026-11-15"
-  },
-  {
-    "id": "tx_adu_statute",
-    "state_code": "TX",
-    "bill_number": "SB 1412 / Texas Local Government Code",
-    "session": "88th Texas Legislature Regular Session",
-    "short_name": "TX Middle Housing & ADU Framework",
-    "statute_citation": "Tex. Loc. Gov't Code § 214.909",
-    "effective_date": "2023-09-01",
-    "statute_url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=88R&Bill=SB1412",
-    "max_units_by_right": 2,
-    "summary": "Establishes statutory framework curbing municipal prohibitions against accessory dwelling units (casitas/backyard homes) on single-family parcels across Texas metropolitan jurisdictions.",
-    "last_verified": "2026-11-15"
+    "min_parking_spaces_per_unit": null,
+    "summary": "HOME Phase 1 (adopted Dec. 7, 2023) allows up to three housing units on SF-1, SF-2 and SF-3 lots. HOME Phase 2 (adopted May 16, 2024) creates 'small lot single-family residential use' allowing one unit on lots of at least 1,800 sq ft (standard minimum is 5,750 sq ft).",
+    "last_verified": "2026-11-19",
+    "verification": {
+      "status": "verified",
+      "method": "City of Austin Development Services 'HOME Amendments' page (austintexas.gov/development-services/home-amendments)",
+      "checked_on": "2026-11-16",
+      "evidence": "'Allow up to three housing units, including tiny homes, on a Single-Family (SF) zoned property (SF-1, SF-2, SF-3)'; 'one unit on lots of at least 1,800 square feet but less than 5,750 square feet'; 'Ordinance 20240516-006 - Phase 2 HOME Amendments adopted ordinance' 2026-11-19: city page lists \"Ordinance 20231207-001 - Phase 1 HOME Amendments adopted ordinance\" and \"Ordinance 20240516-006 - Phase 2 HOME Amendments adopted ordinance\".",
+      "unverified_fields": [
+        "min_parking_spaces_per_unit (Austin's parking-minimum repeal is a separate action, not checked)"
+      ],
+      "notes": "Original had the wrong Phase 2 ordinance number (-004) and wrong minimum lot size (1,500 sq ft)."
+    },
+    "local_jurisdiction": {
+      "name": "City of Austin",
+      "match": "^austin\\b"
+    },
+    "effective_date_note": "City page (austintexas.gov/development-services/home-amendments, read 2026-11-19): \"Dec. 7, 2023: HOME Phase 1 adopted by the Austin City Council; Feb. 5, 2024: Development applications accepted under HOME Phase 1; May 16, 2024: HOME Phase 2 adopted\". The ordinance numbers on file (\"Ordinance 20231207-001 - Phase 1\", \"Ordinance 20240516-006 - Phase 2\") are listed on that page."
   },
   {
     "id": "co_hb24_1313",
@@ -264,15 +583,28 @@
     "bill_number": "HB 24-1313",
     "session": "74th General Assembly (2024)",
     "short_name": "CO HB 24-1313 (Transit-Oriented Communities)",
-    "statute_citation": "C.R.S. § 29-35-101 et seq.",
+    "statute_citation": "HB 24-1313 (Colo. 2024); C.R.S. section numbers not confirmed",
     "effective_date": "2024-06-05",
     "statute_url": "https://leg.colorado.gov/bills/hb24-1313",
-    "municipality_types": "Metropolitan Planning Organization (MPO) Transit Communities",
+    "municipality_types": "Local governments within an MPO with population ≥4,000 and ≥75 acres of transit-related areas (plus certain county areas)",
     "distance_to_transit_max_mi": 0.5,
-    "min_average_density_units_per_acre": 40,
-    "min_parking_spaces_per_unit": 0,
-    "summary": "Requires 31 Front Range transit-served municipalities to establish Transit-Oriented Communities (TOC) zoning districts within 0.5 miles of passenger rail and bus rapid transit lines with an average minimum density of 40 units/acre by-right and eliminates automobile parking mandates.",
-    "last_verified": "2026-11-15"
+    "min_average_density_units_per_acre": null,
+    "min_parking_spaces_per_unit": null,
+    "summary": "Requires 'transit-oriented communities' to meet a housing opportunity goal: zoning CAPACITY equal to an average 40 dwelling units/acre times the acres of transit-related areas, mainly via 'transit centers' that uniformly allow at least 15 units/acre net and have administrative approval for multifamily on parcels ≤5 acres. It is a zoning-capacity goal, not a by-right density on every parcel, and the act does not itself abolish parking minimums.",
+    "last_verified": "2026-11-16",
+    "housing_opportunity_goal_du_per_acre": 40,
+    "verification": {
+      "status": "verified",
+      "method": "Colorado General Assembly bill page leg.colorado.gov/bills/hb24-1313 (bill summary and history)",
+      "checked_on": "2026-11-16",
+      "evidence": "'A housing opportunity goal is a zoning capacity goal determined based on an average zoned housing density of 40 dwelling units per acre multiplied by the number of acres of transit-related areas'; history '05/13/2024 Governor Signed'",
+      "unverified_fields": [
+        "effective_date 2024-06-05",
+        "statute_citation (C.R.S. § 29-35-101 et seq. not confirmed)",
+        "number of covered municipalities"
+      ],
+      "notes": "Original summary claimed '31 municipalities', a by-right 40 du/acre minimum and parking-mandate elimination — none supported by the bill summary."
+    }
   },
   {
     "id": "co_hb24_1152",
@@ -280,13 +612,22 @@
     "bill_number": "HB 24-1152",
     "session": "74th General Assembly (2024)",
     "short_name": "CO HB 24-1152 (Accessory Dwelling Units By-Right)",
-    "statute_citation": "C.R.S. § 29-20-105.5",
-    "effective_date": "2024-05-13",
-    "statute_url": "https://leg.colorado.gov/bills/hb24-1152",
-    "max_units_by_right": 2,
-    "min_parking_spaces_per_unit": 0,
-    "summary": "Prohibits subject local governments from restricting the construction or conversion of accessory dwelling units (ADUs) on single-family lots, eliminates discretionary design review, and bars parking minimums for ADUs.",
-    "last_verified": "2026-11-15"
+    "statute_citation": "C.R.S. § 29-35-103 (HB 24-1152)",
+    "effective_date": "2025-06-30",
+    "statute_url": "https://leg.colorado.gov/sites/default/files/2024a_1152_signed.pdf",
+    "summary": "Subject jurisdictions (municipalities of ≥1,000 in an MPO, and county areas in census-designated places of ≥40,000 in an MPO) must, from June 30, 2025, allow one ADU as an accessory use to a single-unit detached dwelling wherever such dwellings are allowed, through administrative approval.",
+    "last_verified": "2026-11-16",
+    "verification": {
+      "status": "verified",
+      "method": "Colorado General Assembly, signed act text (leg.colorado.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "29-35-103. Accessory dwelling unit requirements for a subject jurisdiction. (1) ON OR AFTER JUNE 30, 2025, A SUBJECT JURISDICTION SHALL ALLOW, SUBJECT TO AN ADMINISTRATIVE APPROVAL PROCESS, ONE ACCESSORY DWELLING UNIT AS AN ACCESSORY USE TO A SINGLE-UNIT DETACHED DWELLING IN ANY PART OF THE SUBJECT JURISDICTION WHERE THE JURISDICTION ALLOWS SINGLE-UNIT DETACHED DWELLINGS. (2) ON OR AFTER JUNE 30, 2025, A SUBJECT JURI || (2) ON OR AFTER JUNE 30, 2025, A SUBJECT JURISDICTION SHALL NOT: (a) REQUIRE THE CONSTRUCTION OF A NEW OFF-STREET PARKING SPACE IN CONNECTION WITH THE CONSTRUCTION OR CONVERSION OF AN ACCESSORY DWELLING UNIT, EXCEPT AS DESCRIBED IN SUBSECTIONS (3)(a) AND (3)(b || (21) \"SUBJECT JURISDICTION\" MEANS EITHER: (a) A MUNICIPALITY THAT BOTH HAS A POPULATION OF ONE THOUSAND OR MORE, AS REPORTED BY THE STATE DEMOGRAPHY OFFICE, PAGE 10-HOUSE BILL 24-1152 AND IS WITHIN A METROPOLITAN PLANNING ORGANIZATION; OR (b) THE PORTION OF A",
+      "unverified_fields": [],
+      "notes": "Round 2 (16 Nov): citation and parking rule confirmed from the signed act; effective_date is now the operative date (30 June 2025) rather than the signature date; coverage condition added so the engine no longer applies it to every Colorado parcel."
+    },
+    "adus_by_right": 1,
+    "max_parking_requirement_per_unit": 0,
+    "unmapped_condition": "municipality of 1,000+ within a metropolitan planning organization, or a county area within a census-designated place in an MPO (a 'subject jurisdiction', § 29-35-102(21))"
   },
   {
     "id": "mn_minneapolis_2040",
@@ -298,9 +639,27 @@
     "effective_date": "2020-01-01",
     "statute_url": "https://minneapolis2040.com/topics/housing/",
     "max_units_by_right": 3,
-    "min_parking_spaces_per_unit": 0,
+    "min_parking_spaces_per_unit": null,
     "summary": "Abolished single-family zoning citywide, permitting duplexes and triplexes by-right in all lower-density residential districts, while completely eliminating off-street motor vehicle parking minimums citywide.",
-    "last_verified": "2026-11-15"
+    "last_verified": null,
+    "verification": {
+      "status": "unverified",
+      "method": "Fetched minneapolis2040.com housing page and the Minnesota Revisor's pages for Minn. Stat. 473.858 and Laws 2024 c. 115.",
+      "checked_on": "2026-11-16",
+      "evidence": "minneapolis2040.com/topics/housing has background text but no triplex or parking rule; Minn. Stat. 473.858 version history lists no 2024 amendment ('Subd. 1 Amended 2014 c 271'); Laws 2024 c. 115 contains no comprehensive-plan language.",
+      "unverified_fields": [
+        "max_units_by_right",
+        "summary",
+        "bill_number",
+        "statute_citation",
+        "effective_date"
+      ],
+      "notes": "The triplex-by-right and parking claims, and the cited 2024 law, could not be confirmed; the cited 2024 chapter does not appear to concern this plan. Do not present as by-right."
+    },
+    "local_jurisdiction": {
+      "name": "City of Minneapolis",
+      "match": "^minneapolis\\b"
+    }
   },
   {
     "id": "mt_sb323",
@@ -310,11 +669,22 @@
     "short_name": "MT SB 323 (Montana Duplex Preemption)",
     "statute_citation": "Mont. Code Ann. § 76-2-304(3)",
     "effective_date": "2024-01-01",
-    "statute_url": "https://leg.mt.gov/bills/2023/billhtml/SB0323.htm",
+    "statute_url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html",
     "municipality_pop_min": 5000,
     "max_units_by_right": 2,
     "summary": "Requires cities with population ≥5,000 to permit duplex housing by-right on any parcel or lot where a single-family residence is a permitted use, preempting local zoning exclusions.",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-16",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Montana Code Annotated § 76-2-304 (leg.mt.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "§ 76-2-304(3): 'In a city with a population of at least 5,000 residents, duplex housing must be allowed as a permitted use on a lot where a single-family residence is a permitted use'",
+      "unverified_fields": [
+        "bill_number SB 323 (statute history lists Ch. 445 and Ch. 499, L. 2023; mapping to SB 323 not confirmed)",
+        "effective_date 2024-01-01"
+      ],
+      "notes": "Original statute_url (leg.mt.gov/bills/2023/billhtml/SB0323.htm) returns 404."
+    }
   },
   {
     "id": "me_ld2003",
@@ -322,22 +692,34 @@
     "bill_number": "LD 2003 / Public Law 2021 c. 672",
     "session": "130th Maine Legislature",
     "short_name": "Maine LD 2003 (Up to 4 Units By-Right)",
-    "statute_citation": "30-A M.R.S. § 4364-A & § 4364-B",
+    "statute_citation": "30-A M.R.S. § 4364-A (created by PL 2021, c. 672, § 5; amended through PL 2025, c. 733) & § 4364-B (ADUs)",
     "effective_date": "2024-01-01",
-    "statute_url": "https://legislature.maine.gov/legis/bills/display_ps.asp?PID=1456&snum=130&paper=SP0703",
+    "statute_url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html",
     "rules": [
       {
-        "area": "Designated growth area with sewer/water",
+        "area": "Designated growth area, or served by public water and public sewer",
         "max_units_by_right": 4
       },
       {
-        "area": "Outside designated growth area",
-        "max_units_by_right": 2
+        "area": "Any other area where residential use is allowed",
+        "max_units_by_right": 3
       }
     ],
-    "min_parking_spaces_per_unit": 0,
-    "summary": "Requires municipalities to permit up to 4 residential dwelling units by-right on lots where housing is allowed if connected to municipal water/sewer, and permits accessory dwelling units on all residential lots.",
-    "last_verified": "2026-11-15"
+    "min_parking_spaces_per_unit": null,
+    "summary": "Maine municipalities must allow at least 3 dwelling units per lot (inclusive of ADUs) wherever housing is allowed, and at least 4 per lot in designated growth areas or on lots served by public water and sewer (current text, as amended in 2025).",
+    "last_verified": "2026-11-16",
+    "verification": {
+      "status": "verified",
+      "method": "Maine Revisor of Statutes, 30-A M.R.S. § 4364-A and § 4364-B (legislature.maine.gov/statutes)",
+      "checked_on": "2026-11-16",
+      "evidence": "§ 4364-A(1): 'At least 3 dwelling units ... per lot; and B. At least 4 dwelling units ... if the lot is located in a designated growth area ... or ... served by ... a public sewer system'; history 'PL 2021, c. 672, §5 (NEW)'",
+      "unverified_fields": [
+        "effective_date 2024-01-01",
+        "min_parking (§ 4364-F not read)",
+        "bill number LD 2003 (statute history gives PL 2021 c. 672, not the LD number)"
+      ],
+      "notes": "Original rule (2 outside growth areas) reflects the pre-2025 law; current statute is 3. Section is marked '(CONFLICT)' between two 2025 chapters; both versions give 3/4."
+    }
   },
   {
     "id": "vt_act47",
@@ -345,12 +727,28 @@
     "bill_number": "Act 47 (S.100 / HOME Act)",
     "session": "2023-2024 Legislative Session",
     "short_name": "VT Act 47 (Housing Opportunities Made for Everyone)",
-    "statute_citation": "24 V.S.A. § 4412(1)(E)",
+    "statute_citation": "24 V.S.A. § 4412(1)(D) & (12); § 4414 (parking); 2023, No. 47, § 2, eff. July 1, 2023",
     "effective_date": "2023-07-01",
-    "statute_url": "https://legislature.vermont.gov/bill/status/2024/Act-47",
-    "max_units_by_right": 2,
-    "summary": "Permits duplexes by-right anywhere a single-family home is allowed statewide, allows multi-unit development up to 5 units per acre where municipal water/sewer exists, and caps parking requirements at 1 space per unit.",
-    "last_verified": "2026-11-15"
+    "statute_url": "https://legislature.vermont.gov/statutes/section/24/117/04412",
+    "max_units_by_right": null,
+    "summary": "Duplexes must be a permitted use, with no stricter dimensional standards than a single-unit dwelling, in any district allowing year-round residential development; in districts served by municipal sewer and water, multiunit dwellings with four or fewer units must be a permitted use on the same size lot as a single-unit dwelling. Areas served by municipal sewer and water must allow at least five dwelling units per acre; a municipality may not require more than one parking space per unit in such districts.",
+    "last_verified": "2026-11-19",
+    "min_density_units_per_acre_where_sewer_water": 5,
+    "max_parking_requirement_per_unit": 1,
+    "verification": {
+      "status": "verified",
+      "method": "Vermont Statutes Online 24 V.S.A. §§ 4412, 4414 (legislature.vermont.gov/statutes)",
+      "checked_on": "2026-11-19",
+      "evidence": "§ 4412(12): 'bylaws shall establish lot and building dimensional standards that allow five or more dwelling units per acre'; § 4414: 'a municipality shall not require more than one parking space per dwelling unit'; history '2023, No. 47, § 2, eff. July 1, 2023' 2026-11-19, 24 V.S.A. § 4412(1)(D): \"multiunit dwellings with four or fewer units shall be a permitted use on the same size lot as a single-unit dwelling\"; Act 47 as enacted: \"Date Governor signed bill: June 5, 2023\".",
+      "unverified_fields": [
+        "max_units_by_right (2 where residential use is allowed year-round, 4 where municipal sewer and water serve the district; service is not on file for a parcel)"
+      ],
+      "notes": "Citation corrected from (1)(E) to (1)(D)/(12). The current text also contains a future (eff. Jan 1, 2028) version allowing up to 4 units in sewer/water districts. 2026-11-19: this record counted duplexes only (2 units); another check counted 4. The statute gives both: 2 everywhere, 4 where sewer and water serve the district. The effective date 2024-12-01 used elsewhere applies to the parking provision (§ 4414) and the rest of § 4412, not to subdivision (1)(D)."
+    },
+    "max_units_two_unit_districts": 2,
+    "max_units_sewer_water_districts": 4,
+    "max_units_note": "24 V.S.A. § 4412(1)(D) as in force through 2027-12-31: \"In any district that allows year-round residential development, duplexes shall be a permitted use ... In any district that is served by municipal sewer and water infrastructure that allows residential development, multiunit dwellings with four or fewer units shall be a permitted use on the same size lot as a single-unit dwelling.\" Two units everywhere residential use is allowed year-round; four units where municipal sewer and water serve the district. Whether a parcel is served is not a parcel field here.",
+    "effective_date_note": "Act 47 sec. 47 (as enacted): the act takes effect 2023-07-01 except that secs. 1 (24 V.S.A. § 4414) and 2 (§ 4412) take effect 2024-12-01 \"except for subdivision (1)(D) of Sec. 2, which shall take effect on July 1, 2023\"; Governor signed 2023-06-05."
   },
   {
     "id": "ma_mbta_communities",
@@ -360,12 +758,23 @@
     "short_name": "MA MBTA Communities Act (M.G.L. c. 40A § 3A)",
     "statute_citation": "Mass. Gen. Laws ch. 40A, § 3A",
     "effective_date": "2021-01-14",
-    "statute_url": "https://www.mass.gov/info-details/multi-family-zoning-requirement-for-mbta-communities",
+    "statute_url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3A",
     "min_average_density_units_per_acre": 15,
     "distance_to_transit_max_mi": 0.5,
-    "min_parking_spaces_per_unit": 0,
-    "summary": "Mandates that 177 transit-served municipalities across the MBTA service area establish zoning districts where multi-family housing is permitted by-right with a minimum gross density of 15 units per acre without age restrictions.",
-    "last_verified": "2026-11-15"
+    "min_parking_spaces_per_unit": null,
+    "summary": "Requires each MBTA community to have at least one zoning district of reasonable size where multi-family housing is permitted as of right, without age restrictions and suitable for families with children, with a minimum gross density of 15 units per acre, located not more than 0.5 miles from a commuter rail station, subway station, ferry terminal or bus station, if applicable.",
+    "last_verified": "2026-11-16",
+    "verification": {
+      "status": "verified",
+      "method": "Massachusetts General Laws ch. 40A § 3A (malegislature.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "'(i) have a minimum gross density of 15 units per acre ... and (ii) be located not more than 0.5 miles from a commuter rail station, subway station, ferry terminal or bus station, if applicable'",
+      "unverified_fields": [
+        "effective_date 2021-01-14",
+        "number of covered municipalities (177; mass.gov returned 403)"
+      ],
+      "notes": "Removed unverified '177 municipalities' from summary and the parking-0 value (not in § 3A)."
+    }
   },
   {
     "id": "nc_raleigh_missing_middle",
@@ -379,19 +788,630 @@
     "max_units_by_right": 4,
     "min_parking_spaces_per_unit": 0,
     "summary": "Authorizes duplexes, triplexes, fourplexes, townhouses, and cottage clusters by-right in all residential zoning districts (R-1 through R-10) across Raleigh, eliminating conventional public hearing zoning hurdles.",
-    "last_verified": "2026-11-15"
+    "last_verified": null,
+    "verification": {
+      "status": "could_not_check",
+      "method": "raleighnc.gov returned 403 from the audit container; no alternate source reached",
+      "checked_on": "2026-11-16",
+      "evidence": "",
+      "unverified_fields": [
+        "all fields"
+      ],
+      "notes": "Round 3: raleighnc.gov returns 403."
+    },
+    "local_jurisdiction": {
+      "name": "City of Raleigh",
+      "match": "^raleigh\\b"
+    }
   },
   {
-    "id": "ut_sb174",
+    "id": "ut_hb82_iadu",
     "state_code": "UT",
-    "bill_number": "SB 174 & HB 465",
+    "bill_number": "HB 82 (2021)",
     "session": "2021 & 2024 General Sessions",
-    "short_name": "Utah Statewide ADU & Transit Housing Framework",
-    "statute_citation": "Utah Code Ann. § 10-9a-530 & § 10-9a-403",
-    "effective_date": "2021-10-01",
-    "statute_url": "https://le.utah.gov/~2021/bills/static/SB0174.html",
+    "short_name": "Utah HB 82 (2021) — internal accessory dwelling units",
+    "statute_citation": "Utah Code § 10-9a-530 (municipalities) & § 17-27a-526 (counties), enacted by HB 82 (2021)",
+    "effective_date": "2021-05-05",
+    "statute_url": "https://le.utah.gov/~2021/bills/static/HB0082.html",
     "max_units_by_right": 2,
-    "summary": "Prohibits municipalities statewide from barring internal accessory dwelling units (IADUs) on single-family lots, mandates expedited subdivision approvals, and incentivizes dense housing near commuter rail stations.",
-    "last_verified": "2026-11-15"
+    "summary": "Requires municipalities and counties to classify internal accessory dwelling units within owner-occupied single-family homes as a permitted use in zones allowing single-family homes (with listed exceptions).",
+    "last_verified": "2026-11-16",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Utah Legislature: HB 82 (2021) status page and enrolled text (le.utah.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "Status: '16 Mar 2021, Governor Signed'; enrolled text: 'ENACTS: 10-9a-530 ... 17-27a-526'; '(1) Except as provided in Subsection (2), this bill takes effect on May 5, 2021.'",
+      "unverified_fields": [
+        "max_units_by_right 2",
+        "owner-occupancy and lot-size conditions (summary paraphrase not checked clause-by-clause)"
+      ],
+      "notes": "SEVERE: original record cited Utah SB 174 (2021), which is 'Driver License Document Requirements' — unrelated. Also cited 'HB 465' and § 10-9a-403 and a commuter-rail incentive, none of which were confirmed; removed."
+    }
+  },
+  {
+    "id": "wa_hb1337_adu",
+    "state_code": "WA",
+    "bill_number": "HB 1337 (2023)",
+    "session": "2023 Regular Session",
+    "short_name": "WA HB 1337: two ADUs on single-family lots in urban growth areas",
+    "statute_citation": "RCW 36.70A.681 (2023 c 334 s 4)",
+    "effective_date": "2023-07-23",
+    "statute_url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681",
+    "max_units_by_right": null,
+    "adus_by_right": 2,
+    "max_parking_requirement_per_unit": 2,
+    "unmapped_condition": "lot inside an urban growth area of a city or county planning under RCW 36.70A.040 (and past its local compliance deadline)",
+    "statutory_exclusions": [
+      "critical_areas_or_buffers (RCW 36.70A.060)",
+      "impaired_reservoir_watershed"
+    ],
+    "summary": "Cities and counties planning under the Growth Management Act must allow at least two accessory dwelling units on every lot in zones within an urban growth area that allow single-family homes; no owner-occupancy rule; ADU floor-area cap no smaller than 1,000 sq ft; no off-street parking within 1/2 mile walk of a major transit stop, at most one space per ADU on lots under 6,000 sq ft and two on larger lots (exceptions by approved study).",
+    "verification": {
+      "status": "verified",
+      "method": "Official RCW text (app.leg.wa.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "(c) The city or county must allow at least two accessory dwelling units on all lots that are located in all zoning districts within an urban growth area that allow for single-family homes in the following configurations: (i) One attached accessory dwelling unit and one detached accessory dwelling unit; (ii) Two attached accessory dwelling units; or (iii) Two detached accessory dwelling units, which may be comprised of either one or two detached structures; (d) The city or county must permit accessory dwelling units in structures detached from the principal unit; (e) The city or county must allow an accessory dwelling unit on any lot that meets the minimum lot size required for the principal",
+      "unverified_fields": [
+        "local compliance deadline (set in RCW 36.70A.680, not fetched)"
+      ],
+      "notes": "Effective date is the session law's (the section's exclusion clause refers to 'as of July 23, 2023'); each jurisdiction's obligation begins six months after its periodic plan update under RCW 36.70A.680, which was not fetched."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "wa_sb5184_parking",
+    "state_code": "WA",
+    "bill_number": "ESSB 5184 (2025)",
+    "session": "2025 Regular Session",
+    "short_name": "WA SB 5184: statewide caps on minimum parking",
+    "statute_citation": "Laws of 2025, ch. 204 (new sections in RCW 35.21, 35A.21, 36.01)",
+    "effective_date": "2025-07-27",
+    "statute_url": "https://lawfilesext.leg.wa.gov/biennium/2025-26/Pdf/Bills/Session%20Laws/Senate/5184-S.SL.pdf",
+    "parcel_level": false,
+    "municipality_pop_min": 30001,
+    "max_parking_requirement_per_unit": 0.5,
+    "summary": "Cities and counties over 30,000 people may not require more than 0.5 parking space per multifamily unit or 1 per single-family home, or 2 per 1,000 sq ft of commercial space, and may require none for homes under 1,200 sq ft, affordable or senior housing, small commercial spaces and changes of use to residential. Cities of 50,000+ must comply within 18 months of the effective date, 30,000-50,000 within three years; exceptions by approved empirical study.",
+    "verification": {
+      "status": "verified",
+      "method": "Session law PDF (lawfilesext.leg.wa.gov) and bill status page (app.leg.wa.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "(1) A city may not require more than 0.5 parking space per 18 multifamily dwelling unit or more than one parking space per single-19 family home. 20 ENGROSSED SUBSTITUTE SENATE BILL 5184 AS AMENDED BY THE HOUSE Passed Legislature - 2025 Regular Session State of Washington 69th Legislature 2025 Regular Session By Senate Housing (originally sponsored by Senators Bateman, Trudeau, Frame, Krishnadasan, Liias, Nobles, Pedersen, Salomon, Shewmake, and Stanford) READ FIRST TIME 02/07/25. p. 1 ESSB 5184.SL (2) A city may not require more than two parking spaces per 1,000 1 square feet of commercial space. 2 (3) A city may not require any minimum parking requirements for:3 (a) Residences under 1,200 || May 7 Governor signed. Chapter 204, 2025 Laws. (View session law) Effective date 7/27/2025. Close View all roll calls Cl",
+      "unverified_fields": [],
+      "notes": "Jurisdiction-wide parking caps, not a parcel-level housing right (parcel_level false). Compliance deadlines: about 2027-01-27 (50,000+) and 2028-07-27 (30,000-50,000), computed from the effective date."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "wa_hb1042_existing_buildings",
+    "state_code": "WA",
+    "bill_number": "ESHB 1042 (2023)",
+    "session": "2023 Regular Session",
+    "short_name": "WA HB 1042: +50% homes inside existing commercial and mixed-use buildings",
+    "statute_citation": "Laws of 2023, ch. 285 (new sections in RCW 35.21 and 35A.21)",
+    "effective_date": "2023-07-23",
+    "statute_url": "https://lawfilesext.leg.wa.gov/biennium/2023-24/Pdf/Bills/Session%20Laws/House/1042-S.SL.pdf",
+    "applies_to_zone": "commercial",
+    "unmapped_condition": "an existing building in a zone that permits multifamily housing, in a city past its compliance deadline (six months after its next periodic plan update)",
+    "summary": "In buildings zoned commercial or mixed use, cities may not stop new homes inside an existing building envelope at up to 50% more density than the zone allows, may not require parking for the added units, and may not impose permitting beyond what applies to other residential development. Self-executing in cities that miss the deadline.",
+    "verification": {
+      "status": "verified",
+      "method": "Session law PDF (lawfilesext.leg.wa.gov) and bill status page",
+      "checked_on": "2026-11-16",
+      "evidence": "(1)(a) Code cities must adopt or amend by ordinance, and 8 incorporate into their development regulations, zoning regulations, 9 and other official controls the requirements of subsection (2) of 10 this section for buildings that are zoned for commercial or mixed use 11 no later than six months after its next periodic comprehensive plan 12 update required under RCW 36.70A.130. 13 (b) The requirements of subsection (2) of this section apply and 14 take effect in any code city that has not adopted or amended 15 ordinances, regulations, or other official controls as required under 16 this section by the timeline in (a) of this subsection and supersede, 17 preempt, and invalidate any conflicting || (a) Impose a restriction on housing unit density that prevents 4 the addition of housing units at a density up to 50 percent more than 5 what is allowed in the underlying zone if constructed entirely within 6 an existing building envelope in a building located within a zone 7 that permits multifamily housing, provided that generally applicable 8 health and safety standards, including but not limited to building 9 code standards and fire and life safety standards, can be met within 10 the buildin || Effective date 7/23/2023. Close View all",
+      "unverified_fields": [],
+      "notes": ""
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "or_adu_197a425",
+    "state_code": "OR",
+    "bill_number": "SB 1051 (2017)",
+    "session": "2017 Regular Session",
+    "short_name": "OR ADU law: one ADU per detached home inside urban growth boundaries",
+    "statute_citation": "ORS 197A.425 (formerly ORS 197.312(5); Oregon Laws 2017, ch. 745)",
+    "effective_date": "2018-07-01",
+    "statute_url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197a.html",
+    "adus_by_right": 1,
+    "municipality_pop_min": 2501,
+    "max_parking_requirement_per_unit": 0,
+    "unmapped_condition": "inside an urban growth boundary, in an area zoned for detached single-unit dwellings (counties over 15,000 people are also covered; unincorporated areas are not modeled)",
+    "summary": "Cities over 2,500 people and counties over 15,000 must allow at least one accessory dwelling unit per detached single-unit home inside the urban growth boundary, subject to reasonable siting and design rules, which may not include owner-occupancy or additional off-street parking requirements.",
+    "verification": {
+      "status": "verified",
+      "method": "Official ORS chapter 197A (oregonlegislature.gov) and Oregon Laws 2017 ch. 745",
+      "checked_on": "2026-11-16",
+      "evidence": "197A.425 Accessory dwelling units. (1)(a) A city with a population greater than 2,500 or a county with a population greater than 15,000 shall allow in areas within the urban growth boundary that are zoned for detached single-unit dwellings the development of at least one accessory dwelling unit for each detached single-unit dwelling, subject to reasonable local regulations relating to siting and design. (b) As used in this subsection: (A) Accessory dwelling unit means an interior, attached or detached residential structure that is used in connection with or that is accessory to a single-unit dwelling. (B) Reasonable local regulations relating to siting and design does not include owner-occupancy requirements of either the primary or accessory structure or requirements to construct additional off-street parking. (2) Subsection (1) of this section does not prohibit local governments from r || SECTION 12. The amendments to ORS 197.312, 215.416 and 227.175 by sections 2, 3 and 6 of this 2017 Act become operative on July 1, 2018. SECTION 13. (1) Section 1 of this 2017 Act and the amendments t",
+      "unverified_fields": [],
+      "notes": ""
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "or_commercial_197a460",
+    "state_code": "OR",
+    "bill_number": "HB 3395 (2023)",
+    "session": "2023 Regular Session",
+    "short_name": "OR: affordable housing allowed on commercial-only land",
+    "statute_citation": "ORS 197A.460 (Oregon Laws 2023, ch. 223, s. 2)",
+    "effective_date": "2024-01-01",
+    "statute_url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197a.html",
+    "applies_to_zone": "commercial",
+    "affordability_mandate_pct": null,
+    "unmapped_condition": "affordable-housing covenant (each unit at or below 60% of area median income, or mixed use for moderate income), inside an urban growth boundary, land not vacant and not added to the boundary in the last 15 years, no slope of 25%+ or 100-year floodplain",
+    "summary": "Inside urban growth boundaries, local governments must allow covenant-restricted affordable housing (60% AMI) or mixed-use buildings with ground-floor commercial and moderate-income homes on land zoned only for commercial (not industrial) use, under the standards of the most comparable residential zone.",
+    "verification": {
+      "status": "verified",
+      "method": "Official ORS chapter 197A and Oregon Laws 2023 ch. 223",
+      "checked_on": "2026-11-16",
+      "evidence": "197A.460 Residential use of commercial lands for affordable housing. (1) Notwithstanding an acknowledged comprehensive plan or land use regulations, within an urban growth boundary a local government shall allow, on lands zoned to allow only commercial uses and not industrial uses, the siting and development of: (a) Residential structures subject to an affordable housing covenant as provided in ORS 456.270 to 456.295 making each unit affordable to a household with income less than or equal to 60 percent of the area median income as defined in ORS 456.270; or (b) Mixed use structures with ground floor commercial units and residential units subject to an affordable housing covenant as provided in ORS 456.270 to 456.295 making the properties affordable to moderate income households, as defined in ORS 456.270. (2) The local government may only apply those approval standards, conditions and p || Sections 2, 17, 29 and 30 of this 2023 Act and the amendments to ORS 92.090, 94.550, 100.015, 100.022, 100.105, 100.110, 100.115, 197.303, 197.830, 215.427 and",
+      "unverified_fields": [
+        "bill_number HB 3395 (the chapter text was fetched; the bill number was not read from it)"
+      ],
+      "notes": ""
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "mt_adu_76_2_345",
+    "state_code": "MT",
+    "bill_number": "SB 528 (2023)",
+    "session": "68th Legislature (2023)",
+    "short_name": "MT: one ADU by right on single-family lots",
+    "statute_citation": "Mont. Code Ann. § 76-2-345 (Ch. 502, L. 2023)",
+    "effective_date": null,
+    "statute_url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0450/0760-0020-0030-0450.html",
+    "adus_by_right": 1,
+    "max_parking_requirement_per_unit": 0,
+    "summary": "Municipalities must allow at least one accessory dwelling unit by right on a lot with a single-family dwelling (attached, detached or internal; detached/attached at most 75% of the house or 1,000 sq ft), with no added parking, design-matching or owner-occupancy requirement.",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Montana Code Annotated 2025 (leg.mt.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "(1) (a) A municipality shall adopt regulations under this chapter that allow a minimum of one accessory dwelling unit by right on a lot or parcel that contains a single-family dwelling. (b) An accessory dwelling unit may be attached, detached, or internal to the single-family dwelling on a lot or parcel. (c) If the accessory dwelling unit is detached from or attached to the single-family dwelling, it may not be more than 75% of the gross floor area of the single-family dwelling or 1,000 square feet, whichever is less. (2) A municipality may not: (a) require that a lot or parcel have additional parking to accommodate an accessory dwelling unit or require fees in lieu of additional parking; (b",
+      "unverified_fields": [
+        "bill_number SB 528 (code history says Ch. 502, L. 2023; bill number not read from a fetched source)",
+        "effective_date (session law not reachable)",
+        "in_effect (a 2023 court challenge to Montana's housing laws was reported; outcome not confirmed from a court source)"
+      ],
+      "notes": ""
+    },
+    "last_verified": null
+  },
+  {
+    "id": "mt_commercial_76_2_304_4",
+    "state_code": "MT",
+    "bill_number": "SB 245 (2023)",
+    "session": "68th Legislature (2023)",
+    "short_name": "MT: multifamily allowed in commercial zones; parking caps",
+    "statute_citation": "Mont. Code Ann. § 76-2-304(4)-(5)",
+    "effective_date": null,
+    "statute_url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html",
+    "applies_to_zone": "commercial",
+    "municipality_pop_min": 5001,
+    "max_parking_requirement_per_unit": 1,
+    "unmapped_condition": "municipality designated an urban area by the Census Bureau, and a will-serve letter from both the municipal water and sewer systems",
+    "summary": "In Census-designated urban municipalities over 5,000 people, multiple-unit dwellings and mixed-use developments with them are a permitted use in commercial zones when municipal water and sewer will serve the lot; zoning may not require more than one parking space per unit (or the shared-parking equivalent), or set height limits under 60 ft in downtown commercial, heavy commercial or industrial zones.",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Montana Code Annotated 2025 (leg.mt.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "(4) (a) In a municipality that is designated as an urban area by the United States census bureau with a population over 5,000 as of the most recent census, the city council or other legislative body of the municipality shall allow as a permitted use multiple-unit dwellings and mixed-use developments that include multiple-unit dwellings on a parcel or lot that: (i) has a will-serve letter from both a municipal water system and a municipal sewer system; and (ii) is located in a commercial zone. (b) Zoning regulations in municipalities meeting the requirements of subsection (4)(a) may not include a requirement to provide more than: (i) one off-street parking space for each unit and accessible parking spaces as required by the Americans With Disabilities Act of 1990, 42 U.S.C. 12101, et seq.; or (ii) an equivalent number of spaces required under subsection (4)(b)(i) provided through a shared",
+      "unverified_fields": [
+        "bill_number SB 245 (not read from a fetched source)",
+        "effective_date (session law not reachable)",
+        "current version (the code page shows two versions of subsection (4), likely a contingent amendment from Ch. 591 or 68, L. 2025)"
+      ],
+      "notes": ""
+    },
+    "last_verified": null
+  },
+  {
+    "id": "ma_adu_40a3",
+    "state_code": "MA",
+    "bill_number": "Affordable Homes Act (St. 2024, c. 150, s. 8)",
+    "session": "2023-2024 (193rd General Court)",
+    "short_name": "MA: one ADU by right in single-family zones",
+    "statute_citation": "M.G.L. c. 40A, § 3 (added by St. 2024, c. 150, § 8)",
+    "effective_date": "2025-02-02",
+    "statute_url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3",
+    "adus_by_right": 1,
+    "max_parking_requirement_per_unit": 1,
+    "summary": "No zoning ordinance or bylaw may prohibit, unreasonably restrict or require a special permit for a single accessory dwelling unit (or its rental) in a single-family residential zoning district; reasonable regulations allowed; no owner-occupancy requirement; at most one added parking space, none within 0.5 mile of a commuter rail, subway, ferry or bus station.",
+    "verification": {
+      "status": "verified",
+      "method": "General Laws c. 40A § 3 and Session Laws 2024 c. 150 (malegislature.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "No zoning ordinance or by-law shall prohibit, unreasonably restrict or require a special permit or other discretionary zoning approval for the use of land or structures for a single accessory dwelling unit, or the rental thereof, in a single-family residential zoning district; provided, that the use of land or structures for such accessory dwelling unit under this paragraph may be subject to reasonable regulations, including, but not limited to, 310 CMR 15.000 et seq., if applicable, site plan review, regulations concerning dimensional setbacks and the bulk and height of structures and may be subject to restrictions and prohibitions on short-term rental, as defined in section 1 of chapter 64 || SECTION 143. Sections 8, 46, 48 and 49 shall take effect 180 days after the effective date of this act. SECTION 144. Sec || therefore it is hereby declared to be an emergency law, necessary for the immediate preservation of the public convenien || Approved, August 6, 2024. Go D",
+      "unverified_fields": [],
+      "notes": "Effective date computed: the act is an emergency law approved 2024-08-06, and section 8 takes effect 180 days after the act's effective date."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "ri_adu_large_lot",
+    "state_code": "RI",
+    "bill_number": "P.L. 2024, ch. 284/285",
+    "session": "2024",
+    "short_name": "RI: one ADU by right on residential lots of 20,000 sq ft or more",
+    "statute_citation": "R.I. Gen. Laws §§ 45-24-37(e), 45-24-73(a)(2)",
+    "effective_date": "2024-06-25",
+    "statute_url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm",
+    "adus_by_right": 1,
+    "min_lot_size_sqft": 20000,
+    "summary": "One accessory dwelling unit per lot is allowed by right, through an administrative building permit, on lots of 20,000 sq ft or more whose primary use is residential, if it meets the design standards of §§ 45-24-31 and 45-24-73.",
+    "verification": {
+      "status": "verified",
+      "method": "Rhode Island General Laws (webserver.rilegislature.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "(a) Pursuant to § 45-24-37, one accessory dwelling unit (ADU) per lot shall be allowed by right under the following circumstances: (1) On an owner-occupied property as a reasonable accommodation for family members with disabilities; or (2) On a lot with a total lot area of twenty thousand square feet (20,000 sq. ft.) or more for which the primary use is residential; or (3) Where the proposed ADU is located within the existing footprint of the primary structure or existing accessory attached or detached structure and does not expand the footprint of the structure. (b) Uniform standards. (1) A m || (e) Notwithstanding any other provision of this chapter, an accessory dwelling unit (“ADU”) that meets the requirements of §§ 45-24-31 and 45-24-73(a) shall be a permitted use in all residential zoning districts. An ADU that meets the requirements of §§ 45-24-31 and 45-24-73(a) shall be permitted through an administrative building permit process only. (f) Wh || P.L. 2024, ch. 284, § 1, effective June 25, 2024;",
+      "unverified_fields": [],
+      "notes": ""
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "ri_adu_existing_footprint",
+    "state_code": "RI",
+    "bill_number": "P.L. 2024, ch. 284/285",
+    "session": "2024",
+    "short_name": "RI: one ADU by right inside an existing structure's footprint",
+    "statute_citation": "R.I. Gen. Laws § 45-24-73(a)(3)",
+    "effective_date": "2024-06-25",
+    "statute_url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm",
+    "adus_by_right": 1,
+    "unmapped_condition": "the ADU fits within the existing footprint of the primary structure or an existing accessory structure",
+    "summary": "One accessory dwelling unit per lot is allowed by right where it is located within the existing footprint of the primary structure or an existing attached or detached accessory structure and does not expand it.",
+    "verification": {
+      "status": "verified",
+      "method": "Rhode Island General Laws (webserver.rilegislature.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "(3) Where the proposed ADU is located within the existing footprint of the primary structure or existing accessory attached or detached structure and does not expand the footprint of the structure. (b) Uniform standards.",
+      "unverified_fields": [],
+      "notes": ""
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "ca_adu_66323",
+    "state_code": "CA",
+    "bill_number": "ADU law (Gov. Code §§ 66314-66342)",
+    "session": "recodified 2024",
+    "short_name": "CA: ADU and junior ADU approved ministerially on single-family lots",
+    "statute_citation": "Cal. Gov. Code §§ 66317(a)(1), 66323(a)",
+    "effective_date": null,
+    "statute_url": "https://codes.findlaw.com/ca/government-code/gov-sect-66323/",
+    "adus_by_right": 2,
+    "summary": "A local agency must ministerially approve, in residential or mixed-use zones, one ADU and one junior ADU per lot with a proposed or existing single-family dwelling (among other combinations in § 66323); ADU permit applications are approved ministerially without discretionary review or a hearing (§ 66317).",
+    "verification": {
+      "status": "partially_verified",
+      "method": "FindLaw copy of the California Government Code, 'current as of January 01, 2026' (leginfo.legislature.ca.gov blocks the audit machine)",
+      "checked_on": "2026-11-16",
+      "evidence": "(a) Notwithstanding Sections 66314 to 66322 , inclusive, a local agency shall ministerially approve an application for a building permit within a residential or mixed-use zone to create any of the following units, or any combination of the following units : (1) One accessory dwelling unit and one junior accessory dwelling unit per lot with a proposed or existing single-family dwelling if all of the following apply: ( || (a) (1) A permit application for an accessory dwelling unit shall be considered and approved ministerially without discretionary review or a hearing, notwithstanding Section 65901 or 65906 or any local ordinance regulating the issuance of variances or special use permits. (2)(A) A permitting agency",
+      "unverified_fields": [
+        "effective_date (section history not on the fetched page; the ADU statute was renumbered into §§ 66314 et seq. in 2024)",
+        "adus_by_right (other unit combinations in § 66323 not modeled)"
+      ],
+      "notes": "Secondary copy (FindLaw) of the official code; re-check against leginfo when reachable."
+    },
+    "last_verified": null
+  },
+  {
+    "id": "az_adaptive_reuse_9_462_10",
+    "state_code": "AZ",
+    "bill_number": "A.R.S. § 9-462.10 (as amended)",
+    "session": "unconfirmed",
+    "short_name": "AZ: multifamily / adaptive reuse on commercial, office and mixed-use parcels in cities of 150,000+",
+    "statute_citation": "A.R.S. § 9-462.10",
+    "effective_date": null,
+    "statute_url": "https://www.azleg.gov/ars/9/00462-10.htm",
+    "applies_to_zone": "commercial",
+    "municipality_pop_min": 150000,
+    "unmapped_condition": "parcel not inside a city-designated commercial or employment hub (cities may exclude up to 10% of such parcels), and within the share of parcels the city must open (at least 10%)",
+    "summary": "Cities of 150,000+ must set objective standards allowing multifamily residential development or adaptive reuse of existing commercial, office or mixed-use parcels without a conditional use permit, PUD, rezoning or any hearing, on at least 10% of such parcels; they may exclude designated commercial/employment hubs (up to 10%) and may not exclude parcels averaging under 65 dB.",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Arizona Revised Statutes (azleg.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "A. Within ninety days after the effective date of this amendment to this section, the governing body of a municipality with a population of one hundred fifty thousand or more persons shall establish objective standards to allow multifamily residential development or adaptive reuse of existing commercial, office or mixed use parcels within the municipality without requiring a conditional use permit, a planned unit development or rezoning application or any other application that would require a public hearing. The governing body of the municipality shall: 1. Allow for multifamily residential development or adaptive reuse of at least ten percent of the existing commercial, office or mixed use parcels. For the purposes of determining the minimum percentage of parcels eligible for multifamily residential development or adaptive reuse, the governing body of the municipality may analyze the co",
+      "unverified_fields": [
+        "effective_date (the azleg page has no history note; the amending act was not identified)",
+        "bill_number"
+      ],
+      "notes": ""
+    },
+    "last_verified": null
+  },
+  {
+    "id": "tx_sb15_small_lots",
+    "state_code": "TX",
+    "bill_number": "SB 15 (2025)",
+    "session": "89th Legislature, Regular Session",
+    "short_name": "TX SB 15: 3,000 sq ft lots allowed in new subdivisions of large cities",
+    "statute_citation": "Tex. Local Gov't Code §§ 211.051-211.058 (added by SB 15, 89th Leg.)",
+    "effective_date": "2025-09-01",
+    "statute_url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00015F.htm",
+    "municipality_pop_min": 150001,
+    "unmapped_condition": "an unplatted tract of 5 acres or more in a single-family zone, in a city wholly or partly in a county of more than 300,000 people",
+    "summary": "In cities over 150,000 people in counties over 300,000, on unplatted tracts of 5+ acres zoned single-family, a city may not require residential lots larger than 3,000 sq ft, wider than 30 ft or deeper than 75 ft, nor density rules that block a house on a 3,000 sq ft lot; small lots (≤4,000 sq ft) get setback, cover and parking limits.",
+    "verification": {
+      "status": "verified",
+      "method": "Enrolled bill text and bill history (capitol.texas.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "Sec. 211.054. CERTAIN DWELLING UNIT LOT SIZE REQUIREMENTS PROHIBITED. A municipality may not adopt or enforce an ordinance, rule, or other measure that requires: (1) a residential lot to be: (A) larger than 3,000 square feet; (B) wider than 30 feet; or (C) deeper than 75 feet; or (2) if regulating the density of dwelling units in a residential development, a ratio of dwelling units per acre that prevents a single-family home from being built on a residential lot that is at least 3,000 square fee || Sec. 211.052. APPLICABILITY. (a) This subchapter applies only to: (1) a municipality that: (A) has a population of more than 150,000; and (B) is wholly or partly located in a county with a population of more than 300,000; and (2) a tract of land located in a municipality described by Subdivision (1) that: (A) will be platted and located in an area zoned for single-family homes; (B) is five acres or more; and (C) has || E Effective on 9/1/25 06/20/2025 E Signed by the Governor 06/20/2025 3",
+      "unverified_fields": [],
+      "notes": "A lot-size preemption for new subdivisions, not a right to added units on existing lots."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "id_adu_67_6541",
+    "state_code": "ID",
+    "bill_number": "S 1354aa (2026)",
+    "session": "2026 Regular Session",
+    "short_name": "ID: ADUs approved administratively as of right in cities over 10,000",
+    "statute_citation": "Idaho Code § 67-6541 (2026 Idaho Sess. Laws ch. 265)",
+    "effective_date": "2026-07-01",
+    "statute_url": "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6541/",
+    "adus_by_right": 1,
+    "municipality_pop_min": 10001,
+    "statutory_exclusions": [
+      "historic district (§ 67-4607) or historic property (§ 67-4614), for the zoning amendments due 1 Feb 2027"
+    ],
+    "summary": "Cities over 10,000 may not ban ADUs in residential zones; ADU projects that meet the city's land use requirements must be approved administratively and as a matter of right. By 1 Feb 2027 cities must also allow one internal or detached ADU per single-family lot, with no off-street parking requirement in most cases, no owner-occupancy rule, and a size floor of 1,000 sq ft or 75% of the house.",
+    "verification": {
+      "status": "verified",
+      "method": "Idaho Statutes (legislature.idaho.gov) and the 2026 session's chapter list",
+      "checked_on": "2026-11-16",
+      "evidence": "67-6541. accessory dwelling units. (1) No city shall enact or enforce any ordinance, rule, regulation, or policy that bans accessory dwelling units in any residential zoning area within its jurisdiction. An accessory dwelling unit shall be classified as a residential land use for zoning purposes subject to all applicable zoning || (3) Accessory dwelling unit projects that meet the jurisdiction’s established land use requirements shall be approved administratively and as a matter of right, without the need for discretionary approval. (4) Any approval standar || (6) The provisions of this section shall apply only to cities with a population greater than ten thousand (10,000). (7) || 265 S 1354 aa Accessory dwelling units 03/31/26 07/01/2026 2",
+      "unverified_fields": [],
+      "notes": "The 1 Feb 2027 requirements (parking, size, owner-occupancy) are not yet binding; the engine relies only on the administrative as-of-right approval in subsection (3)."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "id_starter_home_67_6542",
+    "state_code": "ID",
+    "bill_number": "S 1352aa (2026)",
+    "session": "2026 Regular Session",
+    "short_name": "ID: starter-home subdivisions (lots up to 1,500 sq ft) in cities over 10,000",
+    "statute_citation": "Idaho Code § 67-6542 (2026 Idaho Sess. Laws ch. 264)",
+    "effective_date": "2026-07-01",
+    "statute_url": "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6542/",
+    "parcel_level": false,
+    "municipality_pop_min": 10001,
+    "summary": "Cities over 10,000 may not ban starter-home subdivisions (at least 4 acres, single-family lots no greater than 1,500 sq ft) in residential zones, and by 1 Feb 2027 must allow them with lot minimums no greater than 1,500 sq ft, setbacks of at most 15 ft front/rear and 5 ft side, lot widths of at most 30 ft and depths of at most 70 ft. Cities may still deny for inadequate infrastructure. A subdivision rule on sites of 4+ acres, not a right on a single lot.",
+    "verification": {
+      "status": "verified",
+      "method": "Idaho Statutes (legislature.idaho.gov) and the 2026 session's chapter list",
+      "checked_on": "2026-11-16",
+      "evidence": "starter home subdivisions. (1) No city shall enact or enforce any ordinance within its jurisdiction that bans starter home subdivisions in any residential zoning area. \"Starter home subdivision\" means a residential subdivision on at least four (4) acres of land that is designed to provide attainable homeownership opportunities with single-family detached dwellings on smaller lots that are no greater than one thousand five hundred (1,500) square feet per lot, have compact home sizes, and have efficient site design t || (a) Prohibit requiring minimum lot sizes exceeding one thousand five hundred (1,500) square feet for lots located in starter home subdivisions unless infrastructure limitations, lot configuration, or environmental constr || 264 S 1352 aa Starter home subdivisions 03/31/26 07/01/2026",
+      "unverified_fields": [],
+      "notes": ""
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "nv_adu_ordinance_278_257",
+    "state_code": "NV",
+    "bill_number": null,
+    "session": "2025",
+    "short_name": "NV: large counties and cities must adopt an ordinance allowing ADUs",
+    "statute_citation": "NRS 278.257 (added 2025)",
+    "effective_date": null,
+    "statute_url": "https://www.leg.state.nv.us/nrs/nrs-278.html#NRS278Sec257",
+    "adus_by_right": 1,
+    "max_parking_requirement_per_unit": 1,
+    "unmapped_condition": "county of 100,000+ or city of 60,000+ (outside the Tahoe regional planning area), with the local ADU ordinance NRS 278.257 requires; the statute does not make approval ministerial",
+    "summary": "Each county of 100,000 or more and each city of 60,000 or more must adopt an ordinance authorizing ADUs on residential property. The ordinance may not ban separate kitchens, require more than one extra parking space (where existing parking suffices), impose stricter side or rear setbacks than for the house, or ban long-term rental. At most two ADUs per property.",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Nevada Revised Statutes chapter 278 (leg.state.nv.us)",
+      "checked_on": "2026-11-16",
+      "evidence": "NRS 278.257 Ordinance authorizing development and use of accessory dwelling unit on residential property; requirements; applicability. 1. Except as otherwise provided in this section, each governing body of a county whose population is 100,000 or more and each governing body of a city whose population is 60,000 or more shall adopt an ordinance that authorizes the development and use of an accessory dwelling unit on residential property. 2. The ordinance adopted pursuant to subsection 1 must not as a condition of approval of an accessory dwelling unit: (a) Prohibit separate kitchen facilities for the accessory dwelling unit. (b) Require more than one additional parking space for the accessory dwelling unit provided that the existing parking for the primary residence and street parking satisfy the anticipated parking needs for the accessory dwelling unit. (c) Require any side or rear setba",
+      "unverified_fields": [
+        "effective_date (NRS says only 'Added to NRS by 2025'; bill not identified)",
+        "bill_number"
+      ],
+      "notes": "A mandate to adopt an ordinance, not a parcel-level by-right rule; the engine reports it as unconfirmed."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "ca_ab2011_affordable",
+    "state_code": "CA",
+    "bill_number": "AB 2011 (2022), amended by AB 2243 (2024)",
+    "session": "2021-2022; 2023-2024",
+    "short_name": "CA AB 2011: 100%-affordable housing by right on commercial sites",
+    "statute_citation": "Cal. Gov. Code §§ 65912.110-65912.114 (Stats. 2022, ch. 647; Stats. 2024, ch. 272)",
+    "effective_date": "2023-01-01",
+    "statute_url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=65912.111",
+    "applies_to_zone": "commercial",
+    "affordability_mandate_pct": 100,
+    "affordability_term_years": 55,
+    "unmapped_condition": "site in a Census urbanized area with 75% of its perimeter adjoining urban uses, not on or next to a site over one-third industrial, outside the § 65913.4(a)(6) exclusions; multifamily at or above the jurisdiction's lower-income default density; 100% lower-income units with a 55-year (rental) or 45-year (owner) deed restriction",
+    "summary": "A multifamily development in a zone where office, retail or parking are principally permitted is a use by right with streamlined ministerial review if every unit is for lower-income households under a recorded deed restriction (55 years rental, 45 owner) and the site meets the urbanized-area, urban-perimeter, non-industrial and site-exclusion criteria. Repealed 1 Jan 2033. Article 2 (mixed-income on commercial corridors, §§ 65912.120 ff.) is not in this record.",
+    "verification": {
+      "status": "verified",
+      "method": "California Legislative Counsel bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL; read by scripts/ca_pubinfo_section.py because leginfo blocks the audit machine)",
+      "checked_on": "2026-11-16",
+      "evidence": "<caml:Content xmlns:caml=\"http://lc.ca.gov/legalservices/schemas/caml.1#\"><p>Notwithstanding any inconsistent provision of a local government’s general plan, specific plan, zoning ordinance, or regulation, a development proponent may submit an application for a housing development that shall be a use by right and that shall be subject to a streamlined, ministerial review pursuant to Section 65912.114 if the proposed housing de || <caml:Content xmlns:caml=\"http://lc.ca.gov/legalservices/schemas/caml.1#\"><p>A development project shall not be subject to the streamlined, ministerial review process provided by Section 65912.114 unless the development is proposed to be located on a site that satisfies all of the following criteria:</p><p>(a)<span class=\"EnSpac || <caml:Content xmlns:caml=\"http://lc.ca.gov/legalservices/schemas/caml.1#\"><p>A development project shall not be subject to the streamlined, ministerial review process provided by Section 65912.114 unless the new units created by the development project meet all of the following affordability criteria:</p><p>(a)<span class=\"EnSpace\"/>One hundred percent of the units within the development project, excluding managers’  || <caml:Content xmlns:caml=\"http://lc.ca.gov/legalservices/schemas/caml.1#\"><p>This chapter shall remain in effe || history: Added by Stats. 2022, Ch. 647, Sec. 3.   (AB 2011)   Effective January 1, 2023.   Operative July 1, 2023, pursuant to Sec. 7 of Stats. 2022, Ch. 647.   Repealed as of January 1, 2033, pursuant to Sec. 65912.105.",
+      "unverified_fields": [],
+      "notes": "effective_date is the date the Legislative Counsel's database gives for § 65912.110 (Stats. 2022, ch. 647)."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "co_hb24_1304_parking",
+    "state_code": "CO",
+    "bill_number": "HB 24-1304",
+    "session": "74th General Assembly (2024)",
+    "short_name": "CO HB 24-1304: no parking minimums for multifamily near transit in MPO areas",
+    "statute_citation": "C.R.S. § 29-36-103 (HB 24-1304)",
+    "effective_date": "2025-06-30",
+    "statute_url": "https://leg.colorado.gov/sites/default/files/2024a_1304_signed.pdf",
+    "parcel_level": false,
+    "max_parking_requirement_per_unit": 0,
+    "unmapped_condition": "multifamily or residential adaptive re-use project inside a metropolitan planning organization and at least partly within an applicable transit service area (map under § 29-36-106)",
+    "summary": "From 30 June 2025 a municipality or county may not enact or enforce minimum parking requirements for multifamily residential development or residential (or 50%+ residential mixed-use) adaptive re-use within the jurisdiction, an MPO, and at least partly within an applicable transit service area.",
+    "verification": {
+      "status": "verified",
+      "method": "Colorado General Assembly, signed act text (leg.colorado.gov)",
+      "checked_on": "2026-11-16",
+      "evidence": "29-36-103. Limitations on minimum parking requirements. (1) ON OR AFTER JUNE 30, 2025, A MUNICIPALITY SHALL NEITHER ENACT NOR ENFORCE LOCAL LAWS THAT ESTABLISH A MINIMUM PARKING REQUIREMENT THAT APPLIES TO A LAND USE APPROVAL FOR A MULTIFAMILY RESIDENTIAL DEVELOPMENT, ADAPTIVE RE-USE FOR RESIDENTIAL PURPOSES, OR ADAPTIVE RE-USE MIXED-USE PURPOSES WHICH INCLUDE AT LEAST FIFTY PERCENT OF USE FOR RESIDENTIAL PURPOSES THAT IS WITHIN THE MUNICIPALITY, A METROPOLITAN PLANNING ORGANIZATION, AND AT LEAST PARTIALLY WITHIN AN APPLICABLE TRANSIT SERVICE AREA. (2) ON OR AFTER JUNE 30, 2025, A COUNTY SHALL NEITHER ENACT NOR ENFORCE LOCAL LAWS TH",
+      "unverified_fields": [],
+      "notes": ""
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "va_parking_2209_4",
+    "state_code": "VA",
+    "bill_number": "2026 Acts ch. 1075",
+    "session": "2026 Regular Session",
+    "short_name": "VA: parking minimums capped within 1/2 mile of transit stations",
+    "statute_citation": "Va. Code § 15.2-2209.4 (2026, c. 1075)",
+    "effective_date": "2026-07-01",
+    "statute_url": "https://law.lis.virginia.gov/vacode/title15.2/chapter22/section15.2-2209.4/",
+    "parcel_level": false,
+    "distance_to_transit_max_mi": 0.5,
+    "max_parking_requirement_per_unit": 0.5,
+    "unmapped_condition": "parcel within one-half mile of the entrance to a mass transit or public transportation station or facility (a building or enhanced structure where the public boards; school buses, microtransit and charter service excluded); localities over 600,000 people may exceed the caps near locality-managed bus stops if they offer the required administrative reduction",
+    "summary": "A locality may not require, as a condition of zoning approval, more than 0.5 off-street parking space per unit for multifamily or mixed-use residential development, or more than 1 per unit for one- and two-family homes and townhouses, on parcels within half a mile of a transit station entrance. Localities over 20,000 must also offer an administrative parking reduction of at least 20% elsewhere.",
+    "verification": {
+      "status": "verified",
+      "method": "Code of Virginia, official site (law.lis.virginia.gov), section page dated 11/16/2026",
+      "checked_on": "2026-11-16",
+      "evidence": "B. Any locality that has adopted a zoning ordinance pursuant to this chapter shall not require, as a condition of zoning approval, minimum off-street parking for residential, multifamily, or mixed-use development located within a designated area in amounts exceeding the following: 1. One-half of one parking space per dwelling unit for multifamily or mixed-use residential development; and 2. One parking space per dwelling unit || \"Designated area\" means any parcel located within one-half mile of the entrance to a mass transit or public transportation station || 2026, c. 1075",
+      "unverified_fields": [
+        "effective_date (Virginia acts take effect 1 July unless they say otherwise; the act itself was not fetched. The Code page, dated 11/16/2026, shows this section as current with no future-effective label, unlike § 15.2-2292.4, which is labelled 'Effective July 1, 2027')"
+      ],
+      "notes": "A jurisdiction-wide cap on what a locality may require, not a parcel right; the engine never applies it to a single parcel."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "va_small_lot_2286_2",
+    "state_code": "VA",
+    "bill_number": "2026 Acts ch. 751",
+    "session": "2026 Regular Session",
+    "short_name": "VA: localities of 50,000+ must have a 3,000 sq ft single-family lot district",
+    "statute_citation": "Va. Code § 15.2-2286.2 (2026, c. 751)",
+    "effective_date": "2026-07-01",
+    "statute_url": "https://law.lis.virginia.gov/vacode/title15.2/chapter22/section15.2-2286.2/",
+    "parcel_level": false,
+    "municipality_pop_min": 50000,
+    "unmapped_condition": "land the locality has placed in a zoning district meeting § 15.2-2286.2 (the law requires at least one such district, not small lots everywhere); not in a historic district under § 15.2-2306",
+    "summary": "Every locality of 50,000 or more must adopt, keep and apply to land at least one zoning district that allows a single-family home on a lot of no more than 3,000 sq ft, with no minimum lot width over 30 ft and no setback, coverage or density rule that would prevent such homes on conforming lots. Historic districts are excluded.",
+    "verification": {
+      "status": "verified",
+      "method": "Code of Virginia, official site (law.lis.virginia.gov), section page dated 11/16/2026",
+      "checked_on": "2026-11-16",
+      "evidence": "A. Any locality with a population of 50,000 or more shall adopt, maintain, and apply to land within its boundaries at least one zoning district classification that permits a single-family dwelling on a lot with a minimum lot area not exceeding 3,000 square feet. B. Such zoning district classifications shall not impose minimum lot widths exceeding 30 feet or setback, lot coverage, or density requirements that would pr || D. This section shall not apply to areas within a historic district established pursuant to § 15.2-2306 . 2026",
+      "unverified_fields": [
+        "effective_date (Virginia acts take effect 1 July unless they say otherwise; the act itself was not fetched. The Code page, dated 11/16/2026, shows this section as current with no future-effective label, unlike § 15.2-2292.4, which is labelled 'Effective July 1, 2027')"
+      ],
+      "notes": "A duty to zone some land for small lots; which land is up to the locality, so it is never a right on a given parcel."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "dc_adu_accessory_apartment_u253",
+    "state_code": "DC",
+    "bill_number": "Zoning Regulations of 2016, 11-U DCMR § 253",
+    "session": "DC Zoning Commission final rulemaking, 63 DCR 2447 (2016); amended 70 DCR 011297 (2023) and 73 DCR 013245 (2026)",
+    "short_name": "DC: one accessory apartment as a matter of right in most R zones",
+    "statute_citation": "11-U DCMR § 253",
+    "effective_date": null,
+    "statute_url": "https://dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-U253",
+    "adus_by_right": 1,
+    "unmapped_condition": "an R zone other than R-1B/GT or R-3/GT (DC zone names are not on the parcel record); the principal dwelling or the apartment owner-occupied; in the house, the zone's minimum gross floor area (Table U 253.7(a)) with the apartment at most 35% of it; in an accessory building, permanent access as set out in § U-253.8",
+    "summary": "One accessory apartment is allowed as a matter of right in a house or accessory building in DC's R zones, except R-1B/GT and R-3/GT (special exception there). Conditions: owner occupancy of one unit, at most 3 occupants in the apartment, a minimum house size and a 35% cap for apartments in the house, and permanent street or alley access for apartments in accessory buildings. A rental business license is needed before renting.",
+    "verification": {
+      "status": "verified",
+      "method": "DC Municipal Regulations, official text file of 11-U DCMR § 253 downloaded from dcregs.dc.gov",
+      "checked_on": "2026-11-16",
+      "evidence": "An accessory apartment shall be permitted in a principal dwelling or an accessory building as a matter of right in the R zones, except the R-1B/GT or R 3/GT zone, subject to the provisions of this section. An a || Either the principal dwelling or accessory apartment unit shall be owner-occupied for the duration of the acce || SOURCE: Final Rulemaking published at 63 DCR 2447, 3338 (March 4, 2016 Part 2); as amended by Final Rulemaking published at 70 DCR 011297 (August 25, 2023); as amended by Final Rulemaking published at 73 DCR 013245 (October 16, 2026). Distr",
+      "unverified_fields": [
+        "effective_date (the text lists final rulemakings published in 2016, 2023 and 16 Oct 2026; the date each took effect was not fetched)"
+      ],
+      "notes": "Text file: https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={8E59471E-8C75-40F3-858C-FEB57CD5BA4B}. DC is a single jurisdiction, so this is its own zoning code rather than a state preemption law."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "ct_adu_8_2o",
+    "state_code": "CT",
+    "bill_number": "Public Act 21-29",
+    "session": "2021 Regular Session",
+    "short_name": "CT: one ADU as of right on single-family lots (towns could opt out before 2023)",
+    "statute_citation": "Conn. Gen. Stat. § 8-2o",
+    "effective_date": "2023-01-01",
+    "statute_url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99440&Index=I%3a%5czindex%5csurs&HitCount=2&hits=470+471+&hc=2&req=%28number+contains+8%2D2o%2A%29&Item=0",
+    "adus_by_right": 1,
+    "max_parking_requirement_per_unit": 1,
+    "unmapped_condition": "the town did not complete an opt-out under § 8-2o(f) before 1 January 2023 (Connecticut's list of opted-out towns is not on file); in an opted-out town the right still applies to an owner of 3+ years inside a transit-oriented district (§ 8-13hh)",
+    "summary": "Zoning must allow at least one accessory dwelling unit, attached or detached, as of right on each lot with a single-family home, with a decision within 65 days; towns may not require more than one parking space, owner-occupant relationships, age limits, a passageway or separate utility connections. Rules not amended by 1 Jan 2023 became void. Towns could opt out by two-thirds votes, but not on or after 1 Jan 2023.",
+    "verification": {
+      "status": "verified",
+      "method": "Connecticut General Statutes, official statute search (search.cga.state.ct.us), section text",
+      "checked_on": "2026-11-16",
+      "evidence": "(1) Designate locations or zoning districts within the municipality in which accessory dwelling units are allowed, provided at least one accessory dwelling unit shall be allowed as of right on each lot that contains a single-family dwelling and no such accessory dwelling unit shall be required to be an affordable accessory dwell || (C) any more than one parking space for any such accessory d || (e) If a municipality fails to adopt new regulations or amend existing regulations by January 1, 2023, for the purpose of complying with the provisions of subsections (a) to (d), inclusive, of this section, and unless such municipality opts out of the provisions of said subsections in accordance wit || except that, on and after January 1, 2023, no municipality may opt out of the provisions of said subsections. (g) Notwit",
+      "unverified_fields": [
+        "bill_number (from round-1 secondary sources; the section's history line was not fetched)"
+      ],
+      "notes": "Effective date taken from the statute's own 1 Jan 2023 compliance date in subsection (e)."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "ct_parking_8_3n",
+    "state_code": "CT",
+    "bill_number": "Nov. Sp. Sess. P.A. 25-1, § 18 (amending § 8-2(d)(9))",
+    "session": "2025 November Special Session",
+    "short_name": "CT: no residential parking minimums except for 17+ units (capped) and small districts",
+    "statute_citation": "Conn. Gen. Stat. §§ 8-2(d)(9), 8-3n",
+    "effective_date": null,
+    "statute_url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99443&Index=I%3a%5czindex%5csurs&HitCount=2&hits=2ba+2bb+&hc=2&req=%28number+contains+8%2D3n%2A%29&Item=0",
+    "parcel_level": false,
+    "max_parking_requirement_per_unit": 2,
+    "unmapped_condition": "16 or fewer units, and outside the town's conservation and traffic mitigation districts (at most two, together no more than 4% of land area); 17+ units may be required up to 1 space per studio or one-bedroom and 2 per larger unit, or the parking-needs-assessment number if lower",
+    "summary": "Zoning may not require a minimum number of off-street parking spaces for any residential development except as § 8-3n allows: towns may set minimums for developments over 16 units (and, in up to two small districts, for smaller ones), but if the developer submits a parking needs assessment the requirement cannot exceed 1 space per studio or one-bedroom and 2 per unit with two or more bedrooms, or the assessment's number if lower.",
+    "verification": {
+      "status": "verified",
+      "method": "Connecticut General Statutes, official statute search (search.cga.state.ct.us), section text of §§ 8-2 and 8-3n",
+      "checked_on": "2026-11-16",
+      "evidence": "(d) Zoning regulations adopted pursuant to subsection (a) of this section shall not: || (9) Require a minimum number of off-street motor vehicle parking spaces for any residential development except as provided in section 8-3n; || Nov. Sp. Sess. P.A. 25-1, S. 18.) || (b) A municipality may require a minimum number of off-street motor vehicle parking spaces for a residential development that contains more than sixteen dwelling units, as defined in section 47a-1, provided any such municipality shall allow the proposed developer of such development to submit to the zoning enforcement officer, planning commission, zoning commission or combined planning and zoning commission a parking needs assessment that conforms with the requirements of subsection (c) of this section. Such officer or commission shall condition the approval of such development on the construction of off-street parking spaces not exceeding: (1) One such space for each studio or one-bedroom d",
+      "unverified_fields": [
+        "effective_date (the amending act, Nov. Sp. Sess. P.A. 25-1, was not fetched)"
+      ],
+      "notes": "§ 8-2 text: https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=4648&Index=I%3a%5czindex%5csurs&HitCount=2&hits=6e+6f+&hc=530&req=%28number+contains+8%2D2%2A%29&Item=7. A jurisdiction-wide limit, not a parcel right."
+    },
+    "last_verified": "2026-11-16"
+  },
+  {
+    "id": "ct_middle_housing_8_2s",
+    "state_code": "CT",
+    "bill_number": null,
+    "session": "2025",
+    "short_name": "CT: transit community middle housing or mixed use on commercial lots, summary review (from 1 July 2026)",
+    "statute_citation": "Conn. Gen. Stat. § 8-2s",
+    "effective_date": "2026-07-01",
+    "statute_url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99441&Index=I%3a%5czindex%5csurs&HitCount=2&hits=14b+14c+&hc=2&req=%28number+contains+8%2D2s%2A%29&Item=0",
+    "applies_to_zone": "commercial",
+    "unmapped_condition": "the project meets the definition of a transit community middle housing development (§ 8-13hh) or a mixed-use development (definitions not fetched); review is summary review under § 8-2r",
+    "summary": "From 1 July 2026, zoning must allow a transit community middle housing development or a mixed-use development on any lot zoned for commercial or mixed-use development, subject only to summary review; towns may also allow it on residential lots and earn housing points for doing so.",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Connecticut General Statutes, official statute search (search.cga.state.ct.us), section text",
+      "checked_on": "2026-11-16",
+      "evidence": "(a) On and after July 1, 2026, any zoning regulations adopted or amended pursuant to section 8-2 (1) shall allow for the development of a transit community middle housing development, as defined in section 8-13hh, or a mixed-use development, on any lot that is zoned for commercial or mixed-use development, subject only to summary review, as defined in section 8-2r, and (2) may allow for the development of a transit community middle housing development on any lot that allows for residential use subject only to such",
+      "unverified_fields": [
+        "bill_number (the enacting act was not fetched)",
+        "definitions of transit community middle housing development and mixed-use development (§ 8-13hh, not fetched)"
+      ],
+      "notes": "Effective date from the section's own 'On and after July 1, 2026'."
+    },
+    "last_verified": "2026-11-16"
   }
 ]

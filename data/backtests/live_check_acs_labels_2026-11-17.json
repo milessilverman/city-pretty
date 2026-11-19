@@ -1,0 +1,117 @@
+{
+ "ran_on": "2026-11-17T05:04:43.549Z",
+ "script": "scripts/live_check_acs_labels.mjs",
+ "label": "tract median; the block group's is suppressed by the Census",
+ "counties": {
+  "37183": {
+   "rows": [
+    {
+     "id": "371830516001",
+     "kind": "tract",
+     "census_bg": -666666666,
+     "census_value": 1743,
+     "shown": true,
+     "labeled": true,
+     "any_label_in_panel": true,
+     "ok": true
+    },
+    {
+     "id": "371830531141",
+     "kind": "tract",
+     "census_bg": -666666666,
+     "census_value": 1653,
+     "shown": true,
+     "labeled": true,
+     "any_label_in_panel": true,
+     "ok": true
+    },
+    {
+     "id": "371830537213",
+     "kind": "tract",
+     "census_bg": -666666666,
+     "census_value": 3501,
+     "shown": true,
+     "labeled": true,
+     "any_label_in_panel": true,
+     "ok": true
+    },
+    {
+     "id": "371830542042",
+     "kind": "own",
+     "census_bg": 1606,
+     "census_value": 1606,
+     "shown": true,
+     "labeled": false,
+     "any_label_in_panel": false,
+     "ok": true
+    },
+    {
+     "id": "371830534052",
+     "kind": "own",
+     "census_bg": 1745,
+     "census_value": 1745,
+     "shown": true,
+     "labeled": false,
+     "any_label_in_panel": false,
+     "ok": true
+    },
+    {
+     "id": "371830525093",
+     "kind": "own",
+     "census_bg": 1614,
+     "census_value": 1614,
+     "shown": true,
+     "labeled": false,
+     "any_label_in_panel": false,
+     "ok": true
+    }
+   ],
+   "page_errors": []
+  },
+  "06027": {
+   "rows": [
+    {
+     "id": "060270002002",
+     "kind": "tract",
+     "census_bg": -666666666,
+     "census_value": 1366,
+     "shown": true,
+     "labeled": true,
+     "any_label_in_panel": true,
+     "ok": true
+    },
+    {
+     "id": "060270004003",
+     "kind": "own",
+     "census_bg": 1331,
+     "census_value": 1331,
+     "shown": true,
+     "labeled": false,
+     "any_label_in_panel": false,
+     "ok": true
+    },
+    {
+     "id": "060270002001",
+     "kind": "own",
+     "census_bg": 1379,
+     "census_value": 1379,
+     "shown": true,
+     "labeled": false,
+     "any_label_in_panel": false,
+     "ok": true
+    },
+    {
+     "id": "060270004002",
+     "kind": "own",
+     "census_bg": 1510,
+     "census_value": 1510,
+     "shown": true,
+     "labeled": false,
+     "any_label_in_panel": false,
+     "ok": true
+    }
+   ],
+   "page_errors": []
+  }
+ }
+}

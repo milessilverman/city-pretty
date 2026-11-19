@@ -1,0 +1,196 @@
+{
+ "ran_on": "2026-11-17T09:15:49.897Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "37119": {
+   "state": "NC",
+   "points": [
+    {
+     "bg": "371190055222",
+     "lat": 35.317692,
+     "lng": -80.786965,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $314k, rent $1,672/mo, homes 1,169"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 1 pts (current release); page: 1 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 0.7 pts below its 50% goal; box: \"0.7 pts below its 50% goal\" / \"+2.4°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Mecklenburg County · 371190055222; page \"Census area: Mecklenburg County · block group 371190055222(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1785 for 37119; page \"HUD Fair Market Rent (FY2027): 1 bed $1,640 · 2 bed $1,785 · 3 bed $2,179/moCharlotte-Concord-Gastonia, NC-SC HUD Metro FMR Area. HUD's voucher benchmark (rent \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 728 ft; page \"Ground elevation: 728 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "371190028002",
+     "lat": 35.188159,
+     "lng": -80.82704,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $2.0M, rent $1,588/mo, homes 388"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"-0.3°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Mecklenburg County · 371190028002; page \"Census area: Mecklenburg County · block group 371190028002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1785 for 37119; page \"HUD Fair Market Rent (FY2027): 1 bed $1,640 · 2 bed $1,785 · 3 bed $2,179/moCharlotte-Concord-Gastonia, NC-SC HUD Metro FMR Area. HUD's voucher benchmark (rent \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 682 ft; page \"Ground elevation: 682 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Zoning district N1-A (Charlotte Unified Development Ordinance) — Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed. \"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6).\" Minimum lot for a residential use: 10,000 sq ft and 70 ft wide (UDO 4.3.B, Table 4-1); \"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.\" Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots (UDO 4.3.B, Table 4-1); on this ~19,654 sq ft lot that is about 7,862 sq ft of building coverage. Minimum setbacks: front 27 ft and corner side 13.5 ft from the right-of-way, side 5 ft, rear 40 ft (UDO 4.3.C, Table 4-2); \"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.\" An alternative front setback for an established blockface (the table's note 2) isn't checked here. Residential height: up to 48 ft (UDO 4.3.D, Table 4-3); \"The sidewall height for all duplex and triplex buildings is limited to 20 feet.\" (UDO 4.3.D.1).",
+      "? Second home (two-family or more) — A duplex or triplex is allowed in N1-A with prescribed conditions (UDO Table 15-1: \"Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC\"), among them: \"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.\" (UDO 15.4.EE.1). A quadraplex is allowed in N1-A only as UDO 15.4.GG.3 says: \"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.\" Whether the lot is on an arterial street isn't checked here.",
+      "? Accessory dwelling unit (ADU) — Allowed in N1-A with prescribed conditions (UDO Table 15-1: \"Dwelling – Accessory Unit (ADU) | PC | PC | PC | PC | PC | PC | PC\"): \"In conjunction with a single-family dwelling in any zoning district in which a single-family dwelling is allowed and in accordance with the prescribed conditions of Section 15.4.HH.\" \"Only one ADU shall be permitted on the lot.\" \"The ADU and its associated principal dwelling shall be under the same ownership.\" In an accessory structure: \"The heated floor area of the ADU shall not exceed 600 heated square feet or 70% of the total floor area of the principal residential use, whichever is greater. However, in no case shall the ADU exceed 1,000 heated square feet.\" (UDO 15.6.F). The Assessor records 7,993 heated sq ft here, so by that rule an ADU in an accessory structure could have up to about 1,000 heated sq ft.",
+      "✗ Split into two lots (by area only) — Two lots would each need at least 10,000 sq ft in N1-A (UDO 4.3.B, Table 4-1); this lot has about 19,654 sq ft by its parcel outline.",
+      "✓ Swimming pool — ~9,827 sq ft of open yard.",
+      "? Second story — One story (assumed 1 story (no living-area record for this parcel)). The height limit here is 48 ft (UDO 4.3.D); the floor area allowed is above. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "✓ Garden, deck or patio — ~9,827 sq ft of open yard.",
+      "✓ Rooftop solar — ~5,896 sq ft of roof footprint."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "371190061091",
+     "lat": 35.321816,
+     "lng": -80.854042,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $264k, rent $1,195/mo, homes 1,396"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 9 pts (current release); page: 9 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 9.3 pts below its 50% goal; box: \"9.3 pts below its 50% goal\" / \"+0.3°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Mecklenburg County · 371190061091; page \"Census area: Mecklenburg County · block group 371190061091(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1785 for 37119; page \"HUD Fair Market Rent (FY2027): 1 bed $1,640 · 2 bed $1,785 · 3 bed $2,179/moCharlotte-Concord-Gastonia, NC-SC HUD Metro FMR Area. HUD's voucher benchmark (rent \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 763 ft; page \"Ground elevation: 763 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Zoning district N1-A (Charlotte Unified Development Ordinance) — Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed. \"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6).\" Minimum lot for a residential use: 10,000 sq ft and 70 ft wide (UDO 4.3.B, Table 4-1); this lot (about 8,957 sq ft by its parcel outline) is smaller; \"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.\" Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots (UDO 4.3.B, Table 4-1); on this ~8,957 sq ft lot that is about 4,479 sq ft of building coverage. Minimum setbacks: front 27 ft and corner side 13.5 ft from the right-of-way, side 5 ft, rear 40 ft (UDO 4.3.C, Table 4-2); \"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.\" An alternative front setback for an established blockface (the table's note 2) isn't checked here. Residential height: up to 48 ft (UDO 4.3.D, Table 4-3); \"The sidewall height for all duplex and triplex buildings is limited to 20 feet.\" (UDO 4.3.D.1).",
+      "? Second home (two-family or more) — A duplex or triplex is allowed in N1-A with prescribed conditions (UDO Table 15-1: \"Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC\"), among them: \"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.\" (UDO 15.4.EE.1). A quadraplex is allowed in N1-A only as UDO 15.4.GG.3 says: \"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.\" Whether the lot is on an arterial street isn't checked here.",
+      "? Accessory dwelling unit (ADU) — Allowed in N1-A with prescribed conditions (UDO Table 15-1: \"Dwelling – Accessory Unit (ADU) | PC | PC | PC | PC | PC | PC | PC\"): \"In conjunction with a single-family dwelling in any zoning district in which a single-family dwelling is allowed and in accordance with the prescribed conditions of Section 15.4.HH.\" \"Only one ADU shall be permitted on the lot.\" \"The ADU and its associated principal dwelling shall be under the same ownership.\" In an accessory structure: \"The heated floor area of the ADU shall not exceed 600 heated square feet or 70% of the total floor area of the principal residential use, whichever is greater. However, in no case shall the ADU exceed 1,000 heated square feet.\" (UDO 15.6.F). The Assessor records 1,902 heated sq ft here, so by that rule an ADU in an accessory structure could have up to about 1,000 heated sq ft.",
+      "✗ Split into two lots (by area only) — Two lots would each need at least 10,000 sq ft in N1-A (UDO 4.3.B, Table 4-1); this lot has about 8,957 sq ft by its parcel outline.",
+      "✓ Swimming pool — ~4,479 sq ft of open yard.",
+      "? Second story — One story (assumed 1 story (no living-area record for this parcel)). The height limit here is 48 ft (UDO 4.3.D); the floor area allowed is above. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "✓ Garden, deck or patio — ~4,479 sq ft of open yard.",
+      "✓ Rooftop solar — ~2,687 sq ft of roof footprint."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8890' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8890' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  }
+ }
+}

@@ -1,0 +1,414 @@
+{
+ "ran_on": "2026-11-19T17:32:41.572Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "12086": {
+   "state": "FL",
+   "points": [
+    {
+     "bg": "120860090312",
+     "lat": 25.77754,
+     "lng": -80.323685,
+     "service": "Florida Statewide Parcels (FGIO / Dept. of Revenue Property Tax Oversight)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $266k, rent $2,300/mo, homes 1,209"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 37 pts (current release); page: 37 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 37 pts below its 50% goal; box: \"37 pts below its 50% goal\" / \"+3.8°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for FL"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Miami-Dade County · 120860090312; page \"Census area: Miami-Dade County · block group 120860090312(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2564 for 12086; page \"HUD Fair Market Rent (FY2027): 1 bed $2,121 · 2 bed $2,564 · 3 bed $3,277/moMiami-Miami Beach-Kendall, FL HUD Metro FMR Area. HUD's voucher benchmark (rent plus\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: AH; page \"FEMA flood zone: Zone AH · special flood hazard areaFederally backed mortgages here require flood insurance.(FEMA Nation\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 6 ft; page \"Ground elevation: 6 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Miami: The City of Miami's zoning code (Miami 21) is published on Gridics CodeHub, a page that builds the code text in the browser; no copy of the text could be read from the build machine (the CodeHub page's HTML carries no code text, and the Article 5 PDF formerly on miami21.org answers HTTP 404), so no standard could be read from the code itself.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "? Duplex, middle housing or lot split — 109,248 sq ft parcel: allowed only where local zoning or a state law permits it; no state middle-housing or lot-split law for FL is on file here.",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "120860012091",
+     "lat": 25.875959,
+     "lng": -80.173068,
+     "service": "Florida Statewide Parcels (FGIO / Dept. of Revenue Property Tax Oversight)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $536k, rent $1,887/mo, homes 506"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 30 pts (current release); page: 30 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 29.7 pts below its 50% goal; box: \"29.7 pts below its 50% goal\" / \"+0.4°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for FL"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Miami-Dade County · 120860012091; page \"Census area: Miami-Dade County · block group 120860012091(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2564 for 12086; page \"HUD Fair Market Rent (FY2027): 1 bed $2,121 · 2 bed $2,564 · 3 bed $3,277/moMiami-Miami Beach-Kendall, FL HUD Metro FMR Area. HUD's voucher benchmark (rent plus\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: AE; page \"FEMA flood zone: Zone AE · special flood hazard areaFederally backed mortgages here require flood insurance.(FEMA Nation\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 6 ft; page \"Ground elevation: 6 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Miami: The City of Miami's zoning code (Miami 21) is published on Gridics CodeHub, a page that builds the code text in the browser; no copy of the text could be read from the build machine (the CodeHub page's HTML carries no code text, and the Article 5 PDF formerly on miami21.org answers HTTP 404), so no standard could be read from the code itself.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "? Duplex, middle housing or lot split — 11,529 sq ft parcel: allowed only where local zoning or a state law permits it; no state middle-housing or lot-split law for FL is on file here.",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8971' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-80.323685%2C25.777540&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-80.173068%2C25.875959&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8971' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  },
+  "06037": {
+   "county": "Los Angeles CA",
+   "state": "CA",
+   "points": [
+    {
+     "bg": "060372218101",
+     "lat": 34.030749,
+     "lng": -118.293745,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected $1.0M (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 19 pts (current release); page: 19 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 18.8 pts below its 30% goal; box: \"18.8 pts below its 30% goal\" / \"+2.1°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0,0]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County · 060372218101; page \"Census area: Los Angeles County · block group 060372218101(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 · 2 bed $2,964 · 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 188 ft; page \"Ground elevation: 188 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Historic district or landmark — This lot is in a historic district or is a designated resource: exterior alterations require HPOZ design review, and SB 9 does not apply.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "? Whole-house repiping — Built in 1903: galvanized steel supply piping common in pre-1975 homes.",
+      "✓ Add a bathroom — 3 bedrooms but only 1 bath: would fix the bedroom-to-bath imbalance. What an added bathroom is worth at resale is not on file (the survey figure used before could not be checked, and it was for Los Angeles only).",
+      "✓ Heat-pump heating and cooling — Existing heating is floor or wall heat with no central AC: heat pump provides both."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "060372049102",
+     "lat": 34.024464,
+     "lng": -118.197027,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected $583k (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 17 pts (current release); page: 17 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 17.2 pts below its 30% goal; box: \"17.2 pts below its 30% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [5,6,119]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County · 060372049102; page \"Census area: Los Angeles County · block group 060372049102(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 · 2 bed $2,964 · 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 231 ft; page \"Ground elevation: 231 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "? Whole-house repiping — Built in 1911: galvanized steel supply piping common in pre-1975 homes.",
+      "✓ Add a bathroom — 3 bedrooms but only 1 bath: would fix the bedroom-to-bath imbalance. What an added bathroom is worth at resale is not on file (the survey figure used before could not be checked, and it was for Los Angeles only).",
+      "✓ Heat-pump heating and cooling — Existing heating is floor or wall heat with no central AC: heat pump provides both."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8971' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8971' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-118.197027%2C34.024464&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInte",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  },
+  "04013": {
+   "county": "Maricopa AZ (Mountain)",
+   "state": "AZ",
+   "points": [
+    {
+     "bg": "040134203023",
+     "lat": 33.463396,
+     "lng": -111.780981,
+     "service": "Maricopa County Assessor Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $655k, rent $1,723/mo, homes 599"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 15% goal; box: \"At or above its 15% goal\" / \"+0.7°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for AZ"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Maricopa County · 040134203023; page \"Census area: Maricopa County · block group 040134203023(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1734 for 04013; page \"HUD Fair Market Rent (FY2027): 1 bed $1,493 · 2 bed $1,734 · 3 bed $2,287/moPhoenix-Mesa-Chandler, AZ MSA. HUD's voucher benchmark (rent plus utilities), not a \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (0.2 pct annual chance flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1306 ft; page \"Ground elevation: 1,306 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Phoenix: Phoenix's Zoning Ordinance is published on municipal.codes, which answered the build machine with HTTP 403 on 16 Nov 2026.",
+      "• Home upgrades — The parcel service doesn't record this lot's use (it gives \"9790\"), so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "040138109003",
+     "lat": 33.301409,
+     "lng": -111.941993,
+     "service": "Maricopa County Assessor Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $381k, rent $1,900/mo, homes 499"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 15% goal; box: \"At or above its 15% goal\" / \"+1.7°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for AZ"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Maricopa County · 040138109003; page \"Census area: Maricopa County · block group 040138109003(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1734 for 04013; page \"HUD Fair Market Rent (FY2027): 1 bed $1,493 · 2 bed $1,734 · 3 bed $2,287/moPhoenix-Mesa-Chandler, AZ MSA. HUD's voucher benchmark (rent plus utilities), not a \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (0.2 pct annual chance flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1164 ft; page \"Ground elevation: 1,164 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Phoenix: Phoenix's Zoning Ordinance is published on municipal.codes, which answered the build machine with HTTP 403 on 16 Nov 2026.",
+      "• Home upgrades — The parcel service doesn't record this lot's use (it gives \"0131\"), so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8971' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-111.780981%2C33.463396&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInte",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-111.780981%2C33.463396&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatial",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8971' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  }
+ }
+}

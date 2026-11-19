@@ -583,8 +583,12 @@ def main():
         cr = crime.get(city) or (crime.get(region.UNINC) if _sheriff_area(city, city_inc, sheriff_cities, own_cdps) else None)   # round 8.6: CDPs and contract cities
         pb = ksi = None
         if crash_idx and crash_idx.tree:
-            hits = crash_idx.tree.query(pm)
-            pts = [crash_idx.pts[int(i)][2] for i in hits if crash_idx.geoms[int(i)].within(pm)]
+            # Boundary rule (16 Nov 2026, docs/audit/crash-rankings.md): a crash counts for a block group if it is inside it or
+            # within 10 m of its boundary, so a crash on a boundary street counts for each neighbour. Strict `within` gave each
+            # centreline crash to whichever side the geocode fell on. Same rule as scripts/build_crash_counts_ca.py.
+            pmb = pm.buffer(10)
+            hits = crash_idx.tree.query(pmb)
+            pts = [crash_idx.pts[int(i)][2] for i in hits if crash_idx.geoms[int(i)].intersects(pmb)]
             pb = sum(1 for p in pts if p["pb"]); ksi = sum(1 for p in pts if p["ksi"])
         m = {"c": city, "n": n, "county": region.NAME, "acres": round(ac, 1), "ns": ns, "csa": None,   # round 8.6: 'County area' is LA County's Countywide Statistical Area; none elsewhere
              "hv": hv, "hvs": hvs,

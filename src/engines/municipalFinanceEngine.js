@@ -2,6 +2,18 @@
  * Municipal Finance Engine (ES6 / Browser & Node compatible)
  * Generalized multi-state TIF/EIFD/TIRZ/CRA bonding capacity and tax-increment model.
  */
+// The state rules this model reads. It computes only when every one is confirmed in the profile's verification
+// record (state_finance_profiles.json); otherwise it returns computed:false and names what is missing.
+const FINANCE_CALC_FIELDS = ["res_assessment_ratio", "annual_assessment_cap", "uncaps_on_sale", "reassessment_cycle_years", "homestead_exemption_rule"];
+
+function financeProfileGate(profile) {
+  const v = profile.verification;
+  if (!v) return [...FINANCE_CALC_FIELDS];
+  const uf = (v.unverified_fields || []).map(u => String(u).split(/[\s(]/)[0]);
+  // A confirmed null assessment cap means "no cap"; any other null or a listed field means "not confirmed".
+  return FINANCE_CALC_FIELDS.filter(f => uf.includes(f) || profile[f] === undefined || (profile[f] === null && f !== "annual_assessment_cap"));
+}
+
 function calculateTaxIncrementCapacity(input) {
   const {
     profile,
@@ -13,15 +25,21 @@ function calculateTaxIncrementCapacity(input) {
     affordableExemptUnitsShare,
     affordableExemptionPct,
     localPledgeShare,
+    nonPledgeableShare,
     bondTermYears,
     bondInterestRate,
     dscr,
   } = input;
 
+  const missingFields = financeProfileGate(profile);
+  if (missingFields.length) {
+    return { computed: false, missingFields, vehicleName: profile.tif_vehicle_name, initialTaxableValueUsd: null, year10AnnualIncrementUsd: null, maxBondCapacityUsd: null, notes: [`Not computed: tax rules not verified yet (${missingFields.join(", ")})`] };
+  }
   const notes = [];
 
   // 1. Apply state residential/commercial assessment ratio
-  let initialTaxable = baselineMarketValueUsd * profile.res_assessment_ratio;
+  const ratio = profile.res_assessment_ratio;
+  let initialTaxable = baselineMarketValueUsd * ratio;
 
   // 2. Apply homestead or primary residence exemptions
   const hs = profile.homestead_exemption_rule;
@@ -29,7 +47,7 @@ function calculateTaxIncrementCapacity(input) {
     initialTaxable = Math.max(0, initialTaxable - hs.amount_or_pct);
     notes.push(`Applied flat assessed exemption of $${hs.amount_or_pct.toLocaleString()}`);
   } else if (hs.type === "flat_market") {
-    initialTaxable = Math.max(0, (baselineMarketValueUsd - hs.amount_or_pct) * profile.res_assessment_ratio);
+    initialTaxable = Math.max(0, (baselineMarketValueUsd - hs.amount_or_pct) * ratio);
   } else if (hs.type === "percent_market") {
     initialTaxable = initialTaxable * (1 - hs.amount_or_pct);
     notes.push(`Applied ${(hs.amount_or_pct * 100).toFixed(0)}% primary-residence exemption`);
@@ -59,7 +77,7 @@ function calculateTaxIncrementCapacity(input) {
     }
 
     // Add new construction assessed value
-    currentTaxable += newConstructionAnnualUsd * profile.res_assessment_ratio;
+    currentTaxable += newConstructionAnnualUsd * ratio;
 
     // Deduct statutory affordable housing tax exemptions (e.g., FL Live Local § 196.1979)
     const statutoryExemptDeduction =
@@ -77,7 +95,7 @@ function calculateTaxIncrementCapacity(input) {
     }
 
     const pledgeableIncrement =
-      grossTaxIncrement * (1 - profile.non_pledgeable_share) * localPledgeShare;
+      grossTaxIncrement * (1 - nonPledgeableShare) * localPledgeShare;
 
     if (year === 10) {
       year10AnnualIncrementUsd = pledgeableIncrement;
@@ -88,6 +106,8 @@ function calculateTaxIncrementCapacity(input) {
   }
 
   return {
+    computed: true,
+    missingFields: [],
     vehicleName: profile.tif_vehicle_name,
     initialTaxableValueUsd: Math.round(initialTaxable),
     year10AnnualIncrementUsd: Math.round(year10AnnualIncrementUsd),
@@ -97,5 +117,5 @@ function calculateTaxIncrementCapacity(input) {
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { calculateTaxIncrementCapacity };
+  module.exports = { calculateTaxIncrementCapacity, financeProfileGate, FINANCE_CALC_FIELDS };
 }

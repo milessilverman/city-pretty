@@ -1,251 +1,154 @@
 import { describe, expect, it } from "vitest";
 import {
   auditSingleHouseParcel,
-  getHighValueSaturationMultiplier,
   calculatePermitCapitalization,
   calculateCalibratedTreeEconomics,
-  HouseParcelAuditInput,
 } from "../../src/engines/parcelHouseAuditor";
+import { estimatePropertyMarketValue } from "../../src/engines/propertyValuationEngine";
 
-describe("Parcel House Auditor Unit Tests", () => {
-  it("1. Capitalizes permitted additions/remodels at +85%", () => {
+// These tests pin the honest behavior adopted on 2026-11-16: values come only from records on file, invented
+// constants are gone, and anything that cannot be sourced is null with a reason.
+
+const BASE = {
+  lat: 34.05,
+  lng: -118.25,
+  stateCode: "CA",
+  countyFips: "06037",
+};
+
+describe("Parcel house auditor", () => {
+  it("1. Reports recorded permit valuations but never adds them to the value estimate", () => {
     const permits = [
-      {
-        issue_date: "2024-05-10",
-        permit_type: "remodel" as const,
-        valuation_usd: 80000,
-        description: "Permitted master suite remodel and kitchen expansion",
-      },
-      {
-        issue_date: "2024-09-15",
-        permit_type: "seismic" as const,
-        valuation_usd: 9500,
-        description: "Seismic foundation bolting",
-      },
+      { issue_date: "2024-05-10", permit_type: "remodel" as const, valuation_usd: 80000, description: "Kitchen remodel" },
+      { issue_date: "2024-09-15", permit_type: "seismic" as const, valuation_usd: 9500, description: "Seismic bolting" },
     ];
-    const cap = calculatePermitCapitalization(permits);
-    // 80,000 * 0.85 = 68,000 + 9,500 = 77,500
-    expect(cap).toBe(77500);
+    expect(calculatePermitCapitalization(permits)).toBe(89500);
 
-    const audit = auditSingleHouseParcel({
-      parcelId: "06037-12345",
-      address: "1234 Maple St, Pasadena, CA",
-      lat: 34.1478,
-      lng: -118.1445,
-      lotSqft: 6500,
-      livingSqft: 1800,
-      yearBuilt: 1965,
-      bedrooms: 3,
-      bathrooms: 2,
-      stories: 1,
-      neighborhoodMedianHv: 950000,
-      stateCode: "CA",
-      countyFips: "06037",
-      recentPermits: permits,
-    });
-
-    expect(audit.valuation.permitCapitalizationAdded).toBe(77500);
-    expect(audit.valuation.estimatedValue).toBeGreaterThan(900000);
+    const withPermits = auditSingleHouseParcel({ ...BASE, parcelId: "p1", lotSqft: 6500, livingSqft: 1800, neighborhoodMedianHv: 950000, recentPermits: permits });
+    const without = auditSingleHouseParcel({ ...BASE, parcelId: "p1", lotSqft: 6500, livingSqft: 1800, neighborhoodMedianHv: 950000 });
+    expect(withPermits.valuation.permitValuationTotal).toBe(89500);
+    expect(withPermits.valuation.permitCapitalizationAdded).toBe(0);
+    expect(withPermits.valuation.estimatedValue).toBe(without.valuation.estimatedValue);
   });
 
-  it("2. Applies high-value saturation dampening on $2.5M+ luxury parcels", () => {
-    expect(getHighValueSaturationMultiplier(1800000)).toBe(1.0);
-    expect(getHighValueSaturationMultiplier(2500000)).toBe(1.0);
-
-    const mult5M = getHighValueSaturationMultiplier(5000000);
-    expect(mult5M).toBeLessThan(1.0);
-    expect(mult5M).toBeGreaterThan(0.70);
-
-    const auditLuxury = auditSingleHouseParcel({
-      parcelId: "06037-BEVERLY",
-      address: "700 Foothill Rd, Beverly Hills, CA",
-      lat: 34.08,
-      lng: -118.40,
-      lotSqft: 18000,
-      livingSqft: 4800,
-      yearBuilt: 1998,
-      neighborhoodMedianHv: 3800000,
-      stateCode: "CA",
-      countyFips: "06037",
-    });
-
-    expect(auditLuxury.valuation.luxuryDampeningApplied).toBe(true);
-    expect(auditLuxury.valuation.luxurySaturationMultiplier).toBeLessThan(1.0);
+  it("2. Gives no accuracy range and labels the estimate unvalidated (a county without a back-test)", () => {
+    const a = auditSingleHouseParcel({ ...BASE, countyFips: "06059", parcelId: "p2", lotSqft: 6000, livingSqft: 1600, neighborhoodMedianHv: 800000 });
+    expect(a.valuation.estimatedValue).toBeGreaterThan(0);
+    expect(a.valuation.valueLow).toBeNull();
+    expect(a.valuation.valueHigh).toBeNull();
+    expect(a.valuation.confidenceMarginPct).toBeNull();
+    expect(a.valuation.confidenceRating).toMatch(/Unvalidated/);
+    expect(a.valuation.confidenceRating).not.toMatch(/precision|institutional|high confidence/i);
   });
 
-  it("3. Validates LiDAR & Street View vintage against post-construction permits", () => {
-    const auditStale = auditSingleHouseParcel({
-      parcelId: "06037-STALE",
-      lat: 34.05,
-      lng: -118.25,
-      lotSqft: 6000,
-      neighborhoodMedianHv: 750000,
-      stateCode: "CA",
-      countyFips: "06037",
-      imageryInfo: {
-        lidarYear: 2020,
-        streetViewDate: "2021-06",
-        hasStreetView: true,
-      },
-      recentPermits: [
-        {
-          issue_date: "2024-03-12",
-          permit_type: "addition",
-          valuation_usd: 120000,
-          description: "Second story addition",
-        },
-      ],
-    });
-
-    expect(auditStale.imagery.confidenceBadge).toBe("stale_imagery_permit_override");
-    expect(auditStale.imagery.warningMessage).toContain("Building permit (2024-03");
-
-    // Missing Street View handling (rural/gated/flag lot)
-    const auditRural = auditSingleHouseParcel({
-      parcelId: "06003-ALPINE",
-      lat: 38.6,
-      lng: -119.8,
-      lotSqft: 25000,
-      neighborhoodMedianHv: 550000,
-      stateCode: "CA",
-      countyFips: "06003",
-      imageryInfo: {
-        lidarYear: 2021,
-        streetViewDate: null,
-        hasStreetView: false,
-      },
-    });
-
-    expect(auditRural.imagery.confidenceBadge).toBe("no_street_view_fallback");
-    expect(auditRural.imagery.warningMessage).toContain("Google Street View coverage is unavailable");
+  // The page withholds the generic estimate through publishValuation (LA shows only its tested model; e2e covers it).
+  // This engine is the page's code (tests/unit/engineCopies.test.ts) and calls that gate whenever the page defines it.
+  // Before 17 Nov 2026 this test checked an LA early return that existed only in the tested copy, not on the page.
+  it("2b. The auditor passes its value through the page's publishValuation gate when one is defined", () => {
+    const g = globalThis as any;
+    g.publishValuation = (v: any, fips: string) => (fips === "06037" ? { ...v, estimatedValue: null, withheldReason: "failed its back-test (test gate)" } : v);
+    try {
+      const a = auditSingleHouseParcel({ ...BASE, parcelId: "p2b", lotSqft: 6000, livingSqft: 1600, neighborhoodMedianHv: 800000 });
+      expect(a.valuation.estimatedValue).toBeNull();
+      expect(a.valuation.withheldReason).toMatch(/failed its back-test/);
+    } finally {
+      delete g.publishValuation;
+    }
   });
 
-  it("4. Enforces deterministic legal exclusion mask and middle-housing enactments", () => {
-    const auditHpoz = auditSingleHouseParcel({
-      parcelId: "06037-HPOZ",
-      lat: 34.04,
-      lng: -118.31,
-      lotSqft: 7500,
-      neighborhoodMedianHv: 1100000,
-      stateCode: "CA",
-      countyFips: "06037",
-      exclusions: {
-        historic_district_hpoz: true,
-      },
-    });
-
-    expect(auditHpoz.statutoryZoning.statutory_exclusions.historic_district_hpoz).toBe(true);
-    expect(auditHpoz.statutoryZoning.lotSplitFeasible).toBe(false);
-
-    // Private covenants disclaimer present
-    expect(auditHpoz.statutoryZoning.privateCovenantsDisclaimer).toContain("NOTICE ON PRIVATE COVENANTS");
+  it("3. Withholds the value when nothing usable is on file instead of using a state default", () => {
+    const a = auditSingleHouseParcel({ ...BASE, parcelId: "p3", lotSqft: 6000, livingSqft: 1600, neighborhoodMedianHv: null });
+    expect(a.valuation.estimatedValue).toBeNull();
+    expect(a.valuation.withheldReason).toBeTruthy();
   });
 
-  it("5. Complies with 2026 Solar ITC expiration (0% § 25D) & CA NEM 3.0 paired battery", () => {
-    const auditSolarCa = auditSingleHouseParcel({
-      parcelId: "06037-SOLAR",
-      lat: 34.05,
-      lng: -118.25,
-      lotSqft: 6000,
-      livingSqft: 2000,
-      stories: 1,
-      neighborhoodMedianHv: 850000,
-      stateCode: "CA",
-      countyFips: "06037",
-    });
+  it("4. Does not index old sales or old Prop 13 base years without a price index", () => {
+    const oldSale = estimatePropertyMarketValue({ attributes: {}, lotSqft: 6000, neighborhood: {}, stateCode: "CA", facts: { bldg: 1500 }, salesInfo: { price: 400000, year: 2012 } });
+    expect(oldSale.saleCompEst).toBeNull();
+    expect(oldSale.estimatedValue).toBeNull();
 
-    expect(auditSolarCa.solarMicrogrid.tax_year).toBe(2026);
-    expect(auditSolarCa.solarMicrogrid.federal_itc_pct).toBe(0.0); // 0% cash under expired § 25D
-    expect(auditSolarCa.solarMicrogrid.net_metering_tariff).toBe("ca_nem_3_avoided_cost");
-    expect(auditSolarCa.solarMicrogrid.battery_storage_required_for_roi).toBe(true);
+    const recentSale = estimatePropertyMarketValue({ attributes: {}, lotSqft: 6000, neighborhood: {}, stateCode: "CA", facts: { bldg: 1500 }, salesInfo: { price: 910000, year: 2026 } });
+    expect(recentSale.saleCompEst).toBe(910000);
+    expect(recentSale.estimatedValue).toBe(910000);
+
+    const oldBase = estimatePropertyMarketValue({ attributes: { Roll_LandValue: 300000, Roll_ImpValue: 100000, Roll_LandBaseYear: 2005 }, lotSqft: 6000, neighborhood: {}, stateCode: "CA", facts: { bldg: 1500 } });
+    expect(oldBase.assessorMarketEst).toBeNull();
   });
 
-  it("6. Calibrates street tree economics across diverse climate regimes", () => {
-    // Heating-dominant (Minnesota)
-    const mnTree = calculateCalibratedTreeEconomics("MN", 350000, 1.05);
-    expect(mnTree.climateRegime).toBe("heating_dominant");
-    expect(mnTree.annualIrrigationCostUsd).toBe(0);
-    expect(mnTree.utilityBenefitDescription).toContain("windbreak");
-
-    // Arid / Desert (Arizona)
-    const azTree = calculateCalibratedTreeEconomics("AZ", 450000, 1.02);
-    expect(azTree.climateRegime).toBe("arid_irrigation_limited");
-    expect(azTree.annualUtilitySavingsUsd).toBe(220);
-    expect(azTree.annualIrrigationCostUsd).toBe(45);
-    expect(azTree.netAnnualSavingsUsd).toBe(175);
+  it("5. Does not anchor on a top-coded ACS median", () => {
+    const r = estimatePropertyMarketValue({ attributes: {}, lotSqft: 9000, neighborhood: { hv: 2000001, c: "beverly hills" }, stateCode: "CA", facts: { bldg: 3000 } });
+    expect(r.hedonicEst).toBeNull();
+    expect(r.estimatedValue).toBeNull();
+    expect(r.notes.join(" ")).toMatch(/top-coded/);
   });
 
-  it("7. Never infers by-right rights or lot splits from missing or unzoned zoning records", () => {
-    // Missing zoningCode
-    const auditMissingZoning = auditSingleHouseParcel({
-      parcelId: "06037-NOZONE",
-      lat: 34.05,
-      lng: -118.25,
-      lotSqft: 7500,
-      livingSqft: 1800,
-      neighborhoodMedianHv: 850000,
-      stateCode: "CA",
-      countyFips: "06037",
+  it("6. Only checks imagery against real capture dates", () => {
+    const stale = auditSingleHouseParcel({
+      ...BASE, parcelId: "p6", lotSqft: 6000, neighborhoodMedianHv: 750000,
+      imageryInfo: { lidarYear: 2020, streetViewDate: "2021-06", hasStreetView: true },
+      recentPermits: [{ issue_date: "2024-03-12", permit_type: "addition", valuation_usd: 120000, description: "Second story addition" }],
     });
+    expect(stale.imagery.confidenceBadge).toBe("stale_imagery_permit_override");
 
-    expect(auditMissingZoning.statutoryZoning.base_zoning_code).toBeNull();
-    expect(auditMissingZoning.statutoryZoning.applicable_statutes).toEqual([]);
-    expect(auditMissingZoning.statutoryZoning.net_by_right_feasible).toBe(false);
-    expect(auditMissingZoning.statutoryZoning.lotSplitFeasible).toBe(false);
-    expect(auditMissingZoning.statutoryZoning.statutoryNotes).toContain("Zoning is not on file");
-
-    // Explicit valid zoningCode "R-1" in CA with 7500 sqft lot
-    const auditValidZoning = auditSingleHouseParcel({
-      parcelId: "06037-VALIDZONE",
-      lat: 34.05,
-      lng: -118.25,
-      lotSqft: 7500,
-      livingSqft: 1800,
-      zoningCode: "R-1",
-      neighborhoodMedianHv: 850000,
-      stateCode: "CA",
-      countyFips: "06037",
-    });
-
-    expect(auditValidZoning.statutoryZoning.base_zoning_code).toBe("R-1");
-    expect(auditValidZoning.statutoryZoning.applicable_statutes.length).toBeGreaterThan(0);
-    expect(auditValidZoning.statutoryZoning.net_by_right_feasible).toBe(true);
-    expect(auditValidZoning.statutoryZoning.lotSplitFeasible).toBe(true);
+    const unknown = auditSingleHouseParcel({ ...BASE, parcelId: "p6b", lotSqft: 6000, neighborhoodMedianHv: 750000 });
+    expect(unknown.imagery.confidenceBadge).toBe("imagery_dates_unknown");
+    expect(unknown.imagery.lidarAcquisitionYear).toBeNull();
+    expect(unknown.imagery.streetViewCaptureDate).toBeNull();
   });
 
-  it("8. Generates EverySpace property space monetization and renovation quote options", () => {
-    const audit = auditSingleHouseParcel({
-      parcelId: "04013-PHX-101",
-      address: "2410 E Campbell Ave, Phoenix, AZ",
-      lat: 33.50,
-      lng: -112.03,
-      lotSqft: 8500,
-      livingSqft: 1950,
-      yearBuilt: 1978,
-      bedrooms: 3,
-      bathrooms: 2,
-      hasPool: true,
-      hasGarage: true,
-      zoningCode: "R-1",
-      neighborhoodMedianHv: 620000,
-      stateCode: "AZ",
-      countyFips: "04013",
-    });
+  it("7. Never infers housing rights or lot splits from missing zoning", () => {
+    const a = auditSingleHouseParcel({ ...BASE, parcelId: "p7", lotSqft: 7500, livingSqft: 1800, neighborhoodMedianHv: 850000 });
+    expect(a.statutoryZoning.base_zoning_code).toBeNull();
+    expect(a.statutoryZoning.applicable_statutes).toEqual([]);
+    expect(a.statutoryZoning.lotSplitFeasible).toBe(false);
+    expect(a.statutoryZoning.statutoryNotes).toContain("Zoning is not on file");
+  });
 
-    // EverySpace monetization check
-    expect(audit.everySpace).toBeDefined();
-    expect(audit.everySpace?.channels.length).toBeGreaterThanOrEqual(3); // driveway, pool, solar, storage
-    expect(audit.everySpace?.totalMonthlyEverySpaceGrossRevenueUsd).toBeGreaterThan(1000);
-    expect(audit.everySpace?.monthlyHoldingDeficitReductionPct).toBeGreaterThan(0);
-    expect(audit.everySpace?.holdingStrategyRecommendation).toContain("EverySpace generates");
+  it("8. Flags a California lot split only from the SB 9 record, and never in an HPOZ", () => {
+    const ok = auditSingleHouseParcel({ ...BASE, parcelId: "p8", lotSqft: 7500, livingSqft: 1800, zoningCode: "R-1", neighborhoodMedianHv: 850000 });
+    expect(ok.statutoryZoning.applicable_statutes.map((s: any) => s.id)).toContain("ca_sb9_lot_split");
+    expect(ok.statutoryZoning.lotSplitFeasible).toBe(true);
 
-    // Renovation options check
-    expect(audit.renovationOptions).toBeDefined();
-    expect(audit.renovationOptions?.length).toBe(3);
-    const garageConversion = audit.renovationOptions?.find(r => r.improvementType === "garage_conversion_adu");
-    expect(garageConversion).toBeDefined();
-    expect(garageConversion?.verdict).toBe("STRONG_BUY_RECOMMENDED");
-    expect(garageConversion?.returnOnInvestmentPct).toBeGreaterThan(20);
-    expect(garageConversion?.statutoryEntitlementStatus.governingStatute).toContain("HB 2720");
+    const hpoz = auditSingleHouseParcel({ ...BASE, parcelId: "p8b", lotSqft: 7500, livingSqft: 1800, zoningCode: "R-1", neighborhoodMedianHv: 850000, exclusions: { historic_district_hpoz: true } });
+    expect(hpoz.statutoryZoning.lotSplitFeasible).toBe(false);
+  });
+
+  it("9. Shows no solar size, cost, savings or payback (none is sourced)", () => {
+    const a = auditSingleHouseParcel({ ...BASE, parcelId: "p9", lotSqft: 6000, livingSqft: 2000, stories: 1, neighborhoodMedianHv: 850000 });
+    expect(a.solarMicrogrid.federal_itc_pct_owner).toBe(0); // IRC § 25D ended after 2025
+    expect(a.solarMicrogrid.dcKwCapacity).toBeNull(); // orientation and shading are not on file
+    expect(a.solarMicrogrid.grossSystemCostUsd).toBeNull();
+    expect(a.solarMicrogrid.paybackYearsCash).toBeNull();
+    expect(a.solarMicrogrid.dollarStatus).toMatch(/Not modeled yet/);
+  });
+
+  it("10. Tree economics report the climate regime without invented dollar figures", () => {
+    const mn = calculateCalibratedTreeEconomics("MN");
+    expect(mn.climateRegime).toBe("heating_dominant");
+    expect(mn.capitalizedValueLiftUsd).toBeNull();
+    expect(mn.netAnnualSavingsUsd).toBeNull();
+    const az = calculateCalibratedTreeEconomics("AZ");
+    expect(az.climateRegime).toBe("arid_irrigation_limited");
+    expect(az.annualUtilitySavingsUsd).toBeNull();
+  });
+
+  it("11. No longer produces EverySpace or renovation-quote outputs (engines removed: invented numbers)", () => {
+    const a: any = auditSingleHouseParcel({ ...BASE, parcelId: "p11", lotSqft: 8500, livingSqft: 1950, zoningCode: "R-1", neighborhoodMedianHv: 620000, stateCode: "AZ", countyFips: "04013" });
+    expect(a.everySpace).toBeUndefined();
+    expect(a.renovationOptions).toBeUndefined();
+  });
+
+  it("12. Does not classify R-3, R-4, or RES-MF as single-family residential", () => {
+    const r3 = auditSingleHouseParcel({ ...BASE, parcelId: "p12_r3", lotSqft: 6500, livingSqft: 1800, zoningCode: "R-3", neighborhoodMedianHv: 850000 });
+    expect(r3.statutoryZoning.applicable_statutes.map((s: any) => s.id)).not.toContain("ca_sb9_lot_split");
+    expect(r3.statutoryZoning.lotSplitFeasible).toBe(false);
+
+    const r4 = auditSingleHouseParcel({ ...BASE, parcelId: "p12_r4", lotSqft: 6500, livingSqft: 1800, zoningCode: "R-4", neighborhoodMedianHv: 850000 });
+    expect(r4.statutoryZoning.applicable_statutes.map((s: any) => s.id)).not.toContain("ca_sb9_lot_split");
+    expect(r4.statutoryZoning.lotSplitFeasible).toBe(false);
+
+    const resMf = auditSingleHouseParcel({ ...BASE, parcelId: "p12_mf", lotSqft: 6500, livingSqft: 1800, zoningCode: "RES-MF", neighborhoodMedianHv: 850000 });
+    expect(resMf.statutoryZoning.applicable_statutes.map((s: any) => s.id)).not.toContain("ca_sb9_lot_split");
+    expect(resMf.statutoryZoning.lotSplitFeasible).toBe(false);
   });
 });

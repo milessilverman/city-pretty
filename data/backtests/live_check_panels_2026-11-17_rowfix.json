@@ -1,0 +1,552 @@
+{
+ "ran_on": "2026-11-17T17:48:44.041Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "37183": {
+   "county": "Wake NC (South Atlantic)",
+   "state": "NC",
+   "points": [
+    {
+     "bg": "371830537192",
+     "lat": 35.926979,
+     "lng": -78.741982,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $444k, rent $2,030/mo, homes 363"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 7 pts (current release); page: 7 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 6.6 pts below its 40% goal; box: \"6.6 pts below its 40% goal\" / \"-0.1°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wake County · 371830537192; page \"Census area: Wake County · block group 371830537192(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1689 for 37183; page \"HUD Fair Market Rent (FY2027): 1 bed $1,552 · 2 bed $1,689 · 3 bed $2,103/moRaleigh-Cary, NC MSA. HUD's voucher benchmark (rent plus utilities), not a market as\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": false,
+       "detail": "USGS now: 499 ft; page \"Ground elevation: Not available (signal is aborted without reason)(U.S. Geologic\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "371830523075",
+     "lat": 35.756231,
+     "lng": -78.696221,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $362k, rent $832/mo, homes 493"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"-1.5°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wake County · 371830523075; page \"Census area: Wake County · block group 371830523075(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1689 for 37183; page \"HUD Fair Market Rent (FY2027): 1 bed $1,552 · 2 bed $1,689 · 3 bed $2,103/moRaleigh-Cary, NC MSA. HUD's voucher benchmark (rent plus utilities), not a market as\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 378 ft; page \"Ground elevation: 378 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "371830541132",
+     "lat": 35.81568,
+     "lng": -78.525517,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $407k, rent $1,623/mo, homes 1,280"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"-2.2°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wake County · 371830541132; page \"Census area: Wake County · block group 371830541132(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1689 for 37183; page \"HUD Fair Market Rent (FY2027): 1 bed $1,552 · 2 bed $1,689 · 3 bed $2,103/moRaleigh-Cary, NC MSA. HUD's voucher benchmark (rent plus utilities), not a market as\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: AE; page \"FEMA flood zone: Zone AE (floodway) · special flood hazard areaFederally backed mortgages here require flood insurance.(\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 183 ft; page \"Ground elevation: 183 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "fail",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8896' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-78.741982%2C35.926979&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8896' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-78.525517%2C35.81568&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInters",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-78.525517%2C35.81568&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRe",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  },
+  "47155": {
+   "state": "TN",
+   "points": [
+    {
+     "bg": "471550809031",
+     "lat": 35.71776,
+     "lng": -83.595889,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $472k, rent $867/mo, homes 981"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,1,16]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "471550806043",
+     "lat": 35.866707,
+     "lng": -83.4661,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $395k, rent $849/mo, homes 527"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 10 pts (current release); page: 10 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 10 pts below its 50% goal; box: \"10 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,1,24]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "471550802032",
+     "lat": 35.882415,
+     "lng": -83.761531,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $295k, rent $1,203/mo, homes 1,092"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 17 pts (current release); page: 17 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 17.2 pts below its 50% goal; box: \"17.2 pts below its 50% goal\" / \"-0.8°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,9,65]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": []
+  },
+  "06037": {
+   "county": "Los Angeles CA",
+   "state": "CA",
+   "points": [
+    {
+     "bg": "060379200472",
+     "lat": 34.410886,
+     "lng": -118.451681,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected none (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 13 pts (current release); page: 13 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 12.6 pts below its 25% goal; box: \"12.6 pts below its 25% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,1,15]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County · 060379200472; page \"Census area: Los Angeles County · block group 060379200472(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 · 2 bed $2,964 · 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": null,
+       "detail": "FEMA now: did not answer; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1444 ft; page \"Ground elevation: 1,444 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Geologic hazard zone — In state liquefaction hazard zone: new additions or ADUs require a site-specific geotechnical/soils investigation.",
+      "• Second building on the lot — The Assessor lists 5 structures (11,516 sq ft, 11,516 sq ft, 11,516 sq ft, 11,516 sq ft, 189,362 sq ft): an existing ADU or guest house may already be present.",
+      "✗ Detached ADU — Limited open yard (~0 sq ft); a garage conversion or Junior ADU is recommended.",
+      "• Second story — Already 3 stories (inferred: 11,516 sq ft living area indicates 3-story layout).",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "✓ Rooftop solar — ~11,516 sq ft of roof footprint."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "060372077121",
+     "lat": 34.04518,
+     "lng": -118.258052,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected none (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 14 pts (current release); page: 14 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 14 pts below its 20% goal; box: \"14 pts below its 20% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0,1]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County · 060372077121; page \"Census area: Los Angeles County · block group 060372077121(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 · 2 bed $2,964 · 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 261 ft; page \"Ground elevation: 261 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Historic district or landmark — This lot is in a historic district or is a designated resource: exterior alterations require HPOZ design review, and SB 9 does not apply.",
+      "✓ Detached ADU (backyard home) — About 1,832 sq ft of open yard after setbacks; room for a 600–800 sq ft detached ADU by area; for a new detached ADU the city can require side and rear setbacks of no more than 4 ft (Gov. Code § 66314(d)(7)).",
+      "✓ Swimming pool — ~1,832 sq ft of open yard.",
+      "• Second story — Already 3 stories (inferred: 58,686 sq ft living area indicates 3-story layout).",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "✓ Garden, deck or patio — ~1,832 sq ft of open yard.",
+      "✓ Rooftop solar — ~5,495 sq ft of roof footprint.",
+      "? Whole-house repiping — Built in 1924: galvanized steel supply piping common in pre-1975 homes.",
+      "✓ Add a bathroom — 98 bedrooms but only 70 baths: would fix the bedroom-to-bath imbalance. What an added bathroom is worth at resale is not on file (the survey figure used before could not be checked, and it was for Los Angeles only)."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "060375342023",
+     "lat": 33.956785,
+     "lng": -118.162212,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected $650k (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 21 pts (current release); page: 21 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 21 pts below its 30% goal; box: \"21 pts below its 30% goal\" / \"+3.4°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [4,2,59]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County · 060375342023; page \"Census area: Los Angeles County · block group 060375342023(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 · 2 bed $2,964 · 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area with reduced flood risk due to levee)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 112 ft; page \"Ground elevation: 112 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Geologic hazard zone — In state liquefaction hazard zone: new additions or ADUs require a site-specific geotechnical/soils investigation.",
+      "• Second building on the lot — The Assessor lists 2 structures (1,619 sq ft, 490 sq ft): an existing ADU or guest house may already be present.",
+      "✓ Detached ADU (backyard home) — About 7,213 sq ft of open yard after setbacks; room for a 600–800 sq ft detached ADU by area; for a new detached ADU the city can require side and rear setbacks of no more than 4 ft (Gov. Code § 66314(d)(7)).",
+      "✓ Swimming pool — ~7,213 sq ft of open yard.",
+      "✓ Second story — One story (inferred: single-story profile (1,619 sq ft living area)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "✓ Garden, deck or patio — ~7,213 sq ft of open yard.",
+      "✓ Rooftop solar — ~1,619 sq ft of roof footprint.",
+      "? Whole-house repiping — Built in 1937: galvanized steel supply piping common in pre-1975 homes.",
+      "✓ Add a bathroom — 4 bedrooms but only 2 baths: would fix the bedroom-to-bath imbalance. What an added bathroom is worth at resale is not on file (the survey figure used before could not be checked, and it was for Los Angeles only)."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8896' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8896' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-118.258052%2C34.04518&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  }
+ }
+}

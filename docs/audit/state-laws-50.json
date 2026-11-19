@@ -1,0 +1,2129 @@
+{
+ "_source": {
+  "review": "50-state + DC review of state laws requiring local governments to allow, by right or ministerially: ADUs, middle housing on single-family lots, lot splits, parking-minimum limits, residential use on commercial land",
+  "as_of": "2026-11-16",
+  "method": "Primary text only as evidence (legislature sites, session laws, official code); quotes cut from fetched pages by scripts/add_state_laws_50.py",
+  "secondary_sources": [
+   "https://en.wikipedia.org/wiki/Single-family_zoning",
+   "https://en.wikipedia.org/wiki/Missing_middle_housing",
+   "https://en.wikipedia.org/wiki/YIMBY_movement",
+   "https://en.wikipedia.org/wiki/Accessory_dwelling_unit"
+  ],
+  "limits": "Candidate discovery was not exhaustive: secondary pages plus a known-reform list, with full-text code searches only where noted. 'none_found' means no candidate was found, not that none exists.",
+  "round2": {
+   "date": "2026-11-16",
+   "method": "scripts/search_zoning_chapters.py full-text searched each 'none found' state's zoning-enabling chapter(s) on the official code site; scripts/add_state_laws_n3b.py added what was found and wrote these notes. Search engines (legiscan, Justia search, DuckDuckGo, Brave, Mojeek) blocked automated queries; Bing's results were not used because its terms forbid it.",
+   "limits": "Only the zoning-enabling chapters were searched, and only where the state's site returned statute text; a law codified elsewhere, or enacted but not yet on the state's site, would be missed."
+  },
+  "round3": {
+   "date": "2026-11-16",
+   "scope": "the 23 states whose code sites blocked round 2, plus NH, CT, DC and Maryland HB 538",
+   "method": "scripts/law_search_chapters.py (section-by-section fetch of zoning chapters), scripts/law_search_la.py (Louisiana's own statute text search), direct reads of official section pages and session-law PDFs; scripts/add_state_laws_round3.py cut every quote from fetched text and wrote round3_search",
+   "terms": {
+    "adu": "accessory dwelling|accessory apartment|accessory residential unit|accessory living unit",
+    "middle_housing": "duplex|two-family|middle housing|triplex|fourplex|quadplex|multiplex",
+    "lot_split": "lot split|urban lot split|split(ting)? (of )?(a |an )?(residential )?lot",
+    "parking": "minimum parking|parking minimum|minimum number of (off-street )?parking|off-street parking (space|requirement)",
+    "commercial_residential": "residential use[s]? (in|on|within) .{0,40}commercial|commercial(ly)? zoned .{0,60}residential"
+   },
+   "not_used": "search engines whose terms forbid automated use; LegiScan and Justia returned 403"
+  }
+ },
+ "states": {
+  "AL": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (Code of Ala. §§ 11-52-70 to -85 (zoning): HTTP 403), so this rests on round 1's candidate search only. Round 3 (2026-11-16) could not full-text search: https://alison.legislature.state.al.us/: JavaScript application; no statute text in the page; https://legiscan.com/ and https://law.justia.com/: HTTP 403 (Cloudflare) from the build machine. Would unblock it: a normal browser session on alison.legislature.state.al.us, or running scripts/law_search_chapters.py from a normal computer.",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "Code of Ala. §§ 11-52-70 to -85 (zoning)",
+      "url": "https://law.justia.com/codes/alabama/title-11/title-3/chapter-52/article-4/",
+      "full_text_searched": false,
+      "why_not": "HTTP 403",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "routes": [
+     {
+      "url": "https://alison.legislature.state.al.us/",
+      "result": "JavaScript application; no statute text in the page"
+     },
+     {
+      "url": "https://legiscan.com/ and https://law.justia.com/",
+      "result": "HTTP 403 (Cloudflare) from the build machine"
+     }
+    ],
+    "route_worked": null,
+    "full_text_searched": false,
+    "unblock": "a normal browser session on alison.legislature.state.al.us, or running scripts/law_search_chapters.py from a normal computer"
+   }
+  },
+  "AK": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (AS 29.40 (planning, platting, land use): table of contents or bot check only, not statute text); round 3 below replaces that. Round 3 (2026-11-16) full-text searched via https://www.akleg.gov/basis/statutes.asp (print view, media=print, AS 29.40.010-29.40.200): searched, none.",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "AS 29.40 (planning, platting, land use)",
+      "url": "https://www.akleg.gov/basis/statutes.asp?title=29#29.40",
+      "full_text_searched": false,
+      "why_not": "table of contents or bot check only, not statute text",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "route_worked": "https://www.akleg.gov/basis/statutes.asp (print view, media=print, AS 29.40.010-29.40.200)",
+    "searched": [
+     {
+      "citation": "AS 29.40.010-.200 (planning, platting, land use)",
+      "sections": 20,
+      "full_text_searched": true,
+      "term_hits": {}
+     }
+    ],
+    "outcome": "searched, none"
+   }
+  },
+  "AZ": {
+   "existing_records": [
+    "az_hb2720_2721"
+   ],
+   "added_records": [
+    "az_adaptive_reuse_9_462_10"
+   ],
+   "status": "laws_on_file"
+  },
+  "AR": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (A.C.A. § 14-56-416 (zoning ordinances): HTTP 403), so this rests on round 1's candidate search only. Round 3 (2026-11-16) could not full-text search: https://www.arkleg.state.ar.us/: home page loads; the Arkansas Code is published through a Lexis-hosted JavaScript site; https://legiscan.com/ and https://law.justia.com/: HTTP 403 (Cloudflare) from the build machine. Would unblock it: a normal browser on the Lexis-hosted Arkansas Code.",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "A.C.A. § 14-56-416 (zoning ordinances)",
+      "url": "https://law.justia.com/codes/arkansas/title-14/subtitle-3/chapter-56/subchapter-4/section-14-56-416/",
+      "full_text_searched": false,
+      "why_not": "HTTP 403",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "routes": [
+     {
+      "url": "https://www.arkleg.state.ar.us/",
+      "result": "home page loads; the Arkansas Code is published through a Lexis-hosted JavaScript site"
+     },
+     {
+      "url": "https://legiscan.com/ and https://law.justia.com/",
+      "result": "HTTP 403 (Cloudflare) from the build machine"
+     }
+    ],
+    "route_worked": null,
+    "full_text_searched": false,
+    "unblock": "a normal browser on the Lexis-hosted Arkansas Code"
+   }
+  },
+  "CA": {
+   "existing_records": [
+    "ca_sb79_tier1",
+    "ca_sb79_tier2",
+    "ca_sb79_tier2_light_rail_quarter",
+    "ca_sb79_tier2_light_rail_half",
+    "ca_sb9_lot_split",
+    "ca_ab2097"
+   ],
+   "added_records": [
+    "ca_ab2011_affordable",
+    "ca_adu_66323"
+   ],
+   "status": "laws_on_file",
+   "known_gap": "AB 2011 (Gov. Code §§ 65912.100-65912.140, housing on commercial land): § 65912.114 (ministerial review) was fetched, but the eligibility section § 65912.111 returned 403, so no record was added.",
+   "notes": "Round 2 (2026-11-16): AB 2011 Article 1 (Gov. Code 65912.110-.114) added from the Legislative Counsel bulk database; Article 2 (mixed-income corridors, 65912.120 ff.) not yet added. Round 2 (2026-11-16): AB 2011 Article 1 (Gov. Code 65912.110-.114) added from the Legislative Counsel bulk database; Article 2 (mixed-income corridors, 65912.120 ff.) not yet added. Round 2 (2026-11-16): AB 2011 Article 1 (Gov. Code 65912.110-.114) added from the Legislative Counsel bulk database; Article 2 (mixed-income corridors, 65912.120 ff.) not yet added."
+  },
+  "CO": {
+   "existing_records": [
+    "co_hb24_1313",
+    "co_hb24_1152"
+   ],
+   "added_records": [
+    "co_hb24_1304_parking"
+   ],
+   "status": "laws_on_file",
+   "known_gap": "HB 24-1304 (minimum parking near transit) became law 2024-05-10 per leg.colorado.gov, but its operative text was not fetched (signed-bill PDF 404), so no record was added.",
+   "notes": "Round 2 (2026-11-16): HB 24-1152 confirmed from the signed act (C.R.S. 29-35-103) and given its coverage condition; HB 24-1304 parking (C.R.S. 29-36-103) added. Round 2 (2026-11-16): HB 24-1152 confirmed from the signed act (C.R.S. 29-35-103) and given its coverage condition; HB 24-1304 parking (C.R.S. 29-36-103) added. Round 2 (2026-11-16): HB 24-1152 confirmed from the signed act (C.R.S. 29-35-103) and given its coverage condition; HB 24-1304 parking (C.R.S. 29-36-103) added."
+  },
+  "CT": {
+   "existing_records": [],
+   "added_records": [
+    "ct_adu_8_2o",
+    "ct_middle_housing_8_2s",
+    "ct_parking_8_3n"
+   ],
+   "status": "laws_on_file",
+   "notes": "Round 3 (2026-11-16) found and added ct_adu_8_2o, ct_parking_8_3n, ct_middle_housing_8_2s from official text via https://search.cga.state.ct.us/r/statute/ (statute search by section number, one cookie session for search and document; retried with backoff after connection resets). Also found, not added: Conn. Gen. Stat. § 8-2t (commercial-to-residential conversion) (local option).",
+   "tried": [
+    "https://www.cga.ct.gov/current/pub/chap_124.htm"
+   ],
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "route_worked": "https://search.cga.state.ct.us/r/statute/ (statute search by section number, one cookie session for search and document; retried with backoff after connection resets)",
+    "searched": [
+     {
+      "citation": "Conn. Gen. Stat. § 8-2"
+     },
+     {
+      "citation": "Conn. Gen. Stat. § 8-2o"
+     },
+     {
+      "citation": "Conn. Gen. Stat. § 8-2s"
+     },
+     {
+      "citation": "Conn. Gen. Stat. § 8-2t"
+     },
+     {
+      "citation": "Conn. Gen. Stat. § 8-3n"
+     }
+    ],
+    "added": [
+     "ct_adu_8_2o",
+     "ct_parking_8_3n",
+     "ct_middle_housing_8_2s"
+    ],
+    "found_not_qualifying": [
+     {
+      "citation": "Conn. Gen. Stat. § 8-2t (commercial-to-residential conversion)",
+      "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=87370&Index=I%3a%5czindex%5csurs&HitCount=2&hits=225+226+&hc=2&req=%28number+contains+8%2D2t%2A%29&Item=0",
+      "why": "local option",
+      "quote": "(b) Any zoning regulations adopted pursuant to section 8-2 may allow the conversion or partial conversion of any commercial building into a"
+     }
+    ],
+    "outcome": "3 added"
+   }
+  },
+  "DE": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (22 Del. C. ch. 3 (municipal zoning): table of contents or bot check only, not statute text; 9 Del. C. ch. 26 (New Castle County zoning): table of contents or bot check only, not statute text); round 3 below replaces that. Round 3 (2026-11-16) full-text searched via https://delcode.delaware.gov/ subchapter pages: searched, none.",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "22 Del. C. ch. 3 (municipal zoning)",
+      "url": "https://delcode.delaware.gov/title22/c003/index.html",
+      "full_text_searched": false,
+      "why_not": "table of contents or bot check only, not statute text",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     },
+     {
+      "citation": "9 Del. C. ch. 26 (New Castle County zoning)",
+      "url": "https://delcode.delaware.gov/title9/c026/index.html",
+      "full_text_searched": false,
+      "why_not": "table of contents or bot check only, not statute text",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "route_worked": "https://delcode.delaware.gov/ subchapter pages",
+    "searched": [
+     {
+      "citation": "Del. Code title22/c003/sc01",
+      "url": "https://delcode.delaware.gov/title22/c003/sc01/index.html",
+      "chars": 15948
+     },
+     {
+      "citation": "Del. Code title22/c003/sc02",
+      "url": "https://delcode.delaware.gov/title22/c003/sc02/index.html",
+      "chars": 13546
+     },
+     {
+      "citation": "Del. Code title9/c026/sc01",
+      "url": "https://delcode.delaware.gov/title9/c026/sc01/index.html",
+      "chars": 32473
+     },
+     {
+      "citation": "Del. Code title9/c026/sc02",
+      "url": "https://delcode.delaware.gov/title9/c026/sc02/index.html",
+      "chars": 69315
+     },
+     {
+      "citation": "Del. Code title9/c026/sc03",
+      "url": "https://delcode.delaware.gov/title9/c026/sc03/index.html",
+      "chars": 958
+     },
+     {
+      "citation": "Del. Code title9/c049/sc01",
+      "url": "https://delcode.delaware.gov/title9/c049/sc01/index.html",
+      "chars": 29340
+     },
+     {
+      "citation": "Del. Code title9/c049/sc02",
+      "url": "https://delcode.delaware.gov/title9/c049/sc02/index.html",
+      "chars": 63503
+     },
+     {
+      "citation": "Del. Code title9/c049/sc03",
+      "url": "https://delcode.delaware.gov/title9/c049/sc03/index.html",
+      "chars": 952
+     },
+     {
+      "citation": "Del. Code title 9 ch. 68 (index page holds the full text)",
+      "url": "https://delcode.delaware.gov/title9/c068/index.html",
+      "chars": 21717
+     }
+    ],
+    "outcome": "searched, none"
+   }
+  },
+  "DC": {
+   "existing_records": [],
+   "added_records": [
+    "dc_adu_accessory_apartment_u253"
+   ],
+   "status": "laws_on_file",
+   "notes": "Round 3 (2026-11-16) found and added dc_adu_accessory_apartment_u253 from official text via https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile=... (the section's official Word file; the handbook and section pages are script-driven).",
+   "tried": [
+    "https://www.dcregs.dc.gov/"
+   ],
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "route_worked": "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile=... (the section's official Word file; the handbook and section pages are script-driven)",
+    "searched": [
+     {
+      "citation": "11-U DCMR § 253",
+      "url": "https://dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-U253"
+     }
+    ],
+    "added": [
+     "dc_adu_accessory_apartment_u253"
+    ],
+    "outcome": "1 added"
+   }
+  },
+  "FL": {
+   "existing_records": [
+    "fl_live_local"
+   ],
+   "added_records": [],
+   "status": "laws_on_file",
+   "notes": "ADUs are local option only: Fla. Stat. § 163.31771(3), 'A local government may adopt an ordinance to allow accessory dwelling units'. Live Local Act already in the table.",
+   "checked": [
+    "https://www.flsenate.gov/Laws/Statutes/2025/163.31771"
+   ]
+  },
+  "GA": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (O.C.G.A. ch. 36-66 (Zoning Procedures Law): HTTP 403), so this rests on round 1's candidate search only. Round 3 (2026-11-16) could not full-text search: https://www.legis.ga.gov/: JavaScript shell (1.5 KB); https://law.resource.org/pub/us/code/ga/: only correspondence letters (2013), no code text; https://legiscan.com/ and https://law.justia.com/: HTTP 403 (Cloudflare) from the build machine. Would unblock it: a normal browser on the Lexis-hosted O.C.G.A., or the legislature's bill search for 2023-2026 enacted bills.",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "O.C.G.A. ch. 36-66 (Zoning Procedures Law)",
+      "url": "https://law.justia.com/codes/georgia/title-36/chapter-66/",
+      "full_text_searched": false,
+      "why_not": "HTTP 403",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "routes": [
+     {
+      "url": "https://www.legis.ga.gov/",
+      "result": "JavaScript shell (1.5 KB)"
+     },
+     {
+      "url": "https://law.resource.org/pub/us/code/ga/",
+      "result": "only correspondence letters (2013), no code text"
+     },
+     {
+      "url": "https://legiscan.com/ and https://law.justia.com/",
+      "result": "HTTP 403 (Cloudflare) from the build machine"
+     }
+    ],
+    "route_worked": null,
+    "full_text_searched": false,
+    "unblock": "a normal browser on the Lexis-hosted O.C.G.A., or the legislature's bill search for 2023-2026 enacted bills"
+   }
+  },
+  "HI": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "passed_not_yet_in_effect",
+   "notes": "SB 3202 (2024) requires each county to adopt ordinances allowing at least two ADUs (or the equivalent) on residentially zoned lots; a county that has not done so by December 31, 2026 may not deny permits for exceeding the unit count (subsection (g)). Not a parcel-level right before 2027, so no statutes.json record.",
+   "checked": [
+    "https://www.capitol.hawaii.gov/sessions/session2024/bills/SB3202_CD1_.HTM"
+   ],
+   "act_number": "not found (bill status page unreadable)"
+  },
+  "ID": {
+   "existing_records": [],
+   "added_records": [
+    "id_adu_67_6541",
+    "id_starter_home_67_6542"
+   ],
+   "status": "laws_on_file",
+   "notes": "Round 2 (2026-11-16): found in the table of contents of Idaho Code chapter 67-65 (section titles 'Accessory dwelling units' and 'Starter home subdivisions'), then read from each section's own page; dates from the 2026 session's chapter list. Idaho Code 67-6541 (ADUs) and 67-6542 (starter-home subdivisions) found and added",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "Idaho Code ch. 67-65 (Local Land Use Planning)",
+      "url": "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/",
+      "full_text_searched": false,
+      "why_not": "table of contents or bot check only, not statute text",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": "Idaho Code 67-6541 (ADUs) and 67-6542 (starter-home subdivisions) found and added"
+   }
+  },
+  "IL": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (65 ILCS 5/11-13 (municipal zoning): HTTP 0), so this rests on round 1's candidate search only. Round 3 (2026-11-16) could not full-text search: https://www.ilga.gov/legislation/ilcs/ilcs5.asp?ActID=802&ChapterID=14: no response within 20 s; https://ilga.gov/ftp/ILCS/: no response within 20 s; https://legiscan.com/ and https://law.justia.com/: HTTP 403 (Cloudflare) from the build machine. Would unblock it: running scripts/law_search_chapters.py from a normal computer (ilga.gov does not answer the build machine).",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "65 ILCS 5/11-13 (municipal zoning)",
+      "url": "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=006500050K11-13-1",
+      "full_text_searched": false,
+      "why_not": "HTTP 0",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "routes": [
+     {
+      "url": "https://www.ilga.gov/legislation/ilcs/ilcs5.asp?ActID=802&ChapterID=14",
+      "result": "no response within 20 s"
+     },
+     {
+      "url": "https://ilga.gov/ftp/ILCS/",
+      "result": "no response within 20 s"
+     },
+     {
+      "url": "https://legiscan.com/ and https://law.justia.com/",
+      "result": "HTTP 403 (Cloudflare) from the build machine"
+     }
+    ],
+    "route_worked": null,
+    "full_text_searched": false,
+    "unblock": "running scripts/law_search_chapters.py from a normal computer (ilga.gov does not answer the build machine)"
+   }
+  },
+  "IN": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (IC 36-7-4 (local planning and zoning): HTTP 403), so this rests on round 1's candidate search only. Round 3 (2026-11-16) could not full-text search: https://iga.in.gov/: JavaScript shell (691 bytes); the IGA API needs a key; https://legiscan.com/ and https://law.justia.com/: HTTP 403 (Cloudflare) from the build machine. Would unblock it: a free Indiana General Assembly API key, or a normal browser.",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "IC 36-7-4 (local planning and zoning)",
+      "url": "https://law.justia.com/codes/indiana/title-36/article-7/chapter-4/",
+      "full_text_searched": false,
+      "why_not": "HTTP 403",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "routes": [
+     {
+      "url": "https://iga.in.gov/",
+      "result": "JavaScript shell (691 bytes); the IGA API needs a key"
+     },
+     {
+      "url": "https://legiscan.com/ and https://law.justia.com/",
+      "result": "HTTP 403 (Cloudflare) from the build machine"
+     }
+    ],
+    "route_worked": null,
+    "full_text_searched": false,
+    "unblock": "a free Indiana General Assembly API key, or a normal browser"
+   }
+  },
+  "IA": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 full-text searched Iowa Code ch. 414 (city zoning); Iowa Code ch. 335 (county zoning) for ADU, middle-housing, lot-split, parking-minimum and commercial-residential terms (hits are rental-permit caps and building definitions mentioning duplexes, not a housing mandate). Laws outside these chapters, or enacted but not yet codified on the state's site, could still exist.",
+   "checked": [
+    "https://www.legis.iowa.gov/docs/code/414.pdf"
+   ],
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "Iowa Code ch. 414 (city zoning)",
+      "url": "https://www.legis.iowa.gov/docs/code/414.pdf",
+      "full_text_searched": true,
+      "why_not": null,
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {
+       "middle_housing": 2
+      }
+     },
+     {
+      "citation": "Iowa Code ch. 335 (county zoning)",
+      "url": "https://www.legis.iowa.gov/docs/code/335.pdf",
+      "full_text_searched": true,
+      "why_not": null,
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": "hits are rental-permit caps and building definitions mentioning duplexes, not a housing mandate"
+   }
+  },
+  "KS": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (K.S.A. 12-741 et seq. (planning and zoning): table of contents or bot check only, not statute text); round 3 below replaces that. Round 3 (2026-11-16) full-text searched via https://www.ksrevisor.gov/statutes/ (section pages): searched, none (7 of 72 sections did not load; the one hit, K.S.A. 12-764, is a vesting rule that lists duplexes as residential development).",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "K.S.A. 12-741 et seq. (planning and zoning)",
+      "url": "https://www.ksrevisor.org/statutes/chapters/ch12/012_007_0041.html",
+      "full_text_searched": false,
+      "why_not": "table of contents or bot check only, not statute text",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "route_worked": "https://www.ksrevisor.gov/statutes/ (section pages)",
+    "searched": [
+     {
+      "citation": "K.S.A. 12-741 to 12-775 (planning and zoning)",
+      "url": "https://www.ksrevisor.gov/statutes/ksa_ch12.html",
+      "sections_found": 72,
+      "sections_fetched": 65,
+      "title_filtered": false,
+      "full_text_searched": false,
+      "term_hits_by_section": {
+       "middle_housing": [
+        "012_007_0064"
+       ]
+      }
+     }
+    ],
+    "outcome": "searched, none (7 of 72 sections did not load; the one hit, K.S.A. 12-764, is a vesting rule that lists duplexes as residential development)"
+   }
+  },
+  "KY": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (KRS ch. 100 (planning and zoning): table of contents or bot check only, not statute text); round 3 below replaces that. Round 3 (2026-11-16) full-text searched via https://apps.legislature.ky.gov/law/statutes/ (section PDFs/pages): searched, none (11 of 293 sections did not load). Found, not qualifying: KRS 100.2101 (2025 Ky. Acts ch. 56, § 3, effective 2025-06-27) (restricts housing: in Louisville Metro, multifamily 'density development projects' in traditional single-family zones must go through the map-amendment process).",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "KRS ch. 100 (planning and zoning)",
+      "url": "https://apps.legislature.ky.gov/law/statutes/chapter.aspx?id=37542",
+      "full_text_searched": false,
+      "why_not": "table of contents or bot check only, not statute text",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "route_worked": "https://apps.legislature.ky.gov/law/statutes/ (section PDFs/pages)",
+    "searched": [
+     {
+      "citation": "KRS ch. 100 (planning and zoning)",
+      "url": "https://apps.legislature.ky.gov/law/statutes/chapter.aspx?id=37542",
+      "sections_found": 293,
+      "sections_fetched": 282,
+      "full_text_searched": false,
+      "term_hits_by_section": {
+       "adu": [
+        "KRS 100.2101"
+       ]
+      }
+     }
+    ],
+    "found_not_qualifying": [
+     {
+      "citation": "KRS 100.2101 (2025 Ky. Acts ch. 56, § 3, effective 2025-06-27)",
+      "url": "https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=56173",
+      "why": "restricts housing: in Louisville Metro, multifamily 'density development projects' in traditional single-family zones must go through the map-amendment process",
+      "quote": "(2) In a county containing a consolidated local government, any density development project that is proposed in a traditional single -family home zone shall be treated as if it were an amendment to the zoning map, and shall be subject to the procedures set for"
+     }
+    ],
+    "outcome": "searched, none (11 of 293 sections did not load)"
+   }
+  },
+  "LA": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (La. R.S. 33:4721 (municipal zoning): table of contents or bot check only, not statute text); round 3 below replaces that. Round 3 (2026-11-16) full-text searched via https://www.legis.la.gov/legis/LawSearch.aspx (the legislature's own Revised Statutes text search; scripts/law_search_la.py): searched, none ('accessory dwelling', 'accessory apartment', 'lot split', 'middle housing', 'minimum parking' and 'accessory residential' match no section; 'duplex' matches 5 definitions sections outside zoning; 'off-street parking' is matched word by word and its first 94 listed results contain no zoning section).",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "La. R.S. 33:4721 (municipal zoning)",
+      "url": "https://legis.la.gov/Legis/Law.aspx?d=91364",
+      "full_text_searched": false,
+      "why_not": "table of contents or bot check only, not statute text",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "route_worked": "https://www.legis.la.gov/legis/LawSearch.aspx (the legislature's own Revised Statutes text search; scripts/law_search_la.py)",
+    "searched": [
+     {
+      "phrase": "accessory dwelling",
+      "sections_reported": 0,
+      "sections_listed": 0,
+      "zoning_sections": []
+     },
+     {
+      "phrase": "accessory apartment",
+      "sections_reported": 0,
+      "sections_listed": 0,
+      "zoning_sections": []
+     },
+     {
+      "phrase": "duplex",
+      "sections_reported": 5,
+      "sections_listed": 5,
+      "zoning_sections": []
+     },
+     {
+      "phrase": "minimum parking",
+      "sections_reported": 0,
+      "sections_listed": 0,
+      "zoning_sections": []
+     },
+     {
+      "phrase": "off-street parking",
+      "sections_reported": 345,
+      "sections_listed": 94,
+      "zoning_sections": []
+     },
+     {
+      "phrase": "lot split",
+      "sections_reported": 0,
+      "sections_listed": 0,
+      "zoning_sections": []
+     },
+     {
+      "phrase": "middle housing",
+      "sections_reported": 0,
+      "sections_listed": 0,
+      "zoning_sections": []
+     },
+     {
+      "phrase": "residential use commercial zone",
+      "sections_reported": 0,
+      "sections_listed": 0,
+      "zoning_sections": []
+     },
+     {
+      "phrase": "accessory residential",
+      "sections_reported": 0,
+      "sections_listed": 0,
+      "zoning_sections": []
+     }
+    ],
+    "outcome": "searched, none ('accessory dwelling', 'accessory apartment', 'lot split', 'middle housing', 'minimum parking' and 'accessory residential' match no section; 'duplex' matches 5 definitions sections outside zoning; 'off-street parking' is matched word by word and its first 94 listed results contain no zoning section)"
+   }
+  },
+  "ME": {
+   "existing_records": [
+    "me_ld2003"
+   ],
+   "added_records": [],
+   "status": "laws_on_file"
+  },
+  "MD": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 3 (2026-11-16) full-text searched via https://mgaleg.maryland.gov/2024RS/Chapters_noln/CH_122_hb0538e.pdf: searched, none. Found, not qualifying: HB 538 (2024 ch. 122), Land Use Art. §§ 7-501 to 7-503 (density bonuses for 'qualified projects' with deed-restricted affordable units; the act says a jurisdiction 'shall allow' the extra density but sets no by-right or administrative approval; its manufactured-home rule is outside the five topics).",
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "route_worked": "https://mgaleg.maryland.gov/2024RS/Chapters_noln/CH_122_hb0538e.pdf",
+    "searched": [
+     {
+      "citation": "2024 Md. Laws ch. 122 (HB 538)",
+      "url": "https://mgaleg.maryland.gov/2024RS/Chapters_noln/CH_122_hb0538e.pdf",
+      "full_text_searched": true
+     }
+    ],
+    "found_not_qualifying": [
+     {
+      "citation": "HB 538 (2024 ch. 122), Land Use Art. §§ 7-501 to 7-503",
+      "why": "density bonuses for 'qualified projects' with deed-restricted affordable units; the act says a jurisdiction 'shall allow' the extra density but sets no by-right or administrative approval; its manufactured-home rule is outside the five topics",
+      "quote": "(B) (1) IN ACCORDANCE WITH THIS SUBSECTION, A LOCAL JURISDICTION SHALL ALLOW THE DENS ITY OF A QUALIFIED P ROJECT TO EXCEED THE DENSITY OTHERWISE AUTHORIZED IN || this Act shall take effect October 1, 2024 January 1, 2025."
+     }
+    ],
+    "outcome": "searched, none"
+   }
+  },
+  "MA": {
+   "existing_records": [
+    "ma_mbta_communities"
+   ],
+   "added_records": [
+    "ma_adu_40a3"
+   ],
+   "status": "laws_on_file"
+  },
+  "MI": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 full-text searched MCL 125.3101-125.3702 (Michigan Zoning Enabling Act) for ADU, middle-housing, lot-split, parking-minimum and commercial-residential terms (full Michigan Zoning Enabling Act searched: no ADU, two-family or parking-minimum provision). Laws outside these chapters, or enacted but not yet codified on the state's site, could still exist.",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "MCL 125.3101-125.3702 (Michigan Zoning Enabling Act)",
+      "url": "https://www.legislature.mi.gov/documents/mcl/pdf/mcl-Act-110-of-2006.pdf",
+      "full_text_searched": true,
+      "why_not": null,
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": "full Michigan Zoning Enabling Act searched: no ADU, two-family or parking-minimum provision"
+   }
+  },
+  "MN": {
+   "existing_records": [
+    "mn_minneapolis_2040 (local, unverified)"
+   ],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 full-text searched Minn. Stat. § 462.357 (municipal zoning) for ADU, middle-housing, lot-split, parking-minimum and commercial-residential terms (§ 462.357 hit is the variance rule allowing temporary two-family use; no mandate). Laws outside these chapters, or enacted but not yet codified on the state's site, could still exist.",
+   "checked": [
+    "https://www.revisor.mn.gov/statutes/cite/462.357"
+   ],
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "Minn. Stat. § 462.357 (municipal zoning)",
+      "url": "https://www.revisor.mn.gov/statutes/cite/462.357",
+      "full_text_searched": true,
+      "why_not": null,
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {
+       "middle_housing": 1
+      }
+     },
+     {
+      "citation": "Minn. Stat. § 462.3593 (temporary family health care dwellings)",
+      "url": "https://www.revisor.mn.gov/statutes/cite/462.3593",
+      "full_text_searched": false,
+      "why_not": "table of contents or bot check only, not statute text",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": "§ 462.357 hit is the variance rule allowing temporary two-family use; no mandate"
+   }
+  },
+  "MS": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (Miss. Code §§ 17-1-1 et seq. (zoning): HTTP 403), so this rests on round 1's candidate search only. Round 3 (2026-11-16) could not full-text search: https://www.legislature.ms.gov/: home page loads; the Mississippi Code is published through a Lexis-hosted JavaScript site; https://legiscan.com/ and https://law.justia.com/: HTTP 403 (Cloudflare) from the build machine. Would unblock it: a normal browser on the Lexis-hosted Mississippi Code.",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "Miss. Code §§ 17-1-1 et seq. (zoning)",
+      "url": "https://law.justia.com/codes/mississippi/title-17/chapter-1/",
+      "full_text_searched": false,
+      "why_not": "HTTP 403",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "routes": [
+     {
+      "url": "https://www.legislature.ms.gov/",
+      "result": "home page loads; the Mississippi Code is published through a Lexis-hosted JavaScript site"
+     },
+     {
+      "url": "https://legiscan.com/ and https://law.justia.com/",
+      "result": "HTTP 403 (Cloudflare) from the build machine"
+     }
+    ],
+    "route_worked": null,
+    "full_text_searched": false,
+    "unblock": "a normal browser on the Lexis-hosted Mississippi Code"
+   }
+  },
+  "MO": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (RSMo ch. 89 (zoning and planning): table of contents or bot check only, not statute text); round 3 below replaces that. Round 3 (2026-11-16) full-text searched via https://revisor.mo.gov/main/OneSection.aspx: searched, none (hits are court-case annotations under §§ 89.020, 89.090).",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "RSMo ch. 89 (zoning and planning)",
+      "url": "https://revisor.mo.gov/main/OneChapter.aspx?chapter=89",
+      "full_text_searched": false,
+      "why_not": "table of contents or bot check only, not statute text",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "route_worked": "https://revisor.mo.gov/main/OneSection.aspx",
+    "searched": [
+     {
+      "citation": "RSMo ch. 89 (zoning and planning)",
+      "url": "https://revisor.mo.gov/main/OneChapter.aspx?chapter=89",
+      "sections_found": 45,
+      "sections_fetched": 45,
+      "title_filtered": false,
+      "full_text_searched": true,
+      "term_hits_by_section": {
+       "middle_housing": [
+        "89.020",
+        "89.090"
+       ]
+      }
+     }
+    ],
+    "outcome": "searched, none (hits are court-case annotations under §§ 89.020, 89.090)"
+   }
+  },
+  "MT": {
+   "existing_records": [
+    "mt_sb323"
+   ],
+   "added_records": [
+    "mt_adu_76_2_345",
+    "mt_commercial_76_2_304_4"
+   ],
+   "status": "laws_on_file",
+   "known_gap": "A 2023 court challenge to Montana's housing laws was reported; its outcome was not confirmed from a court source."
+  },
+  "NE": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (Neb. Rev. Stat. ch. 19 (cities: zoning): table of contents or bot check only, not statute text); round 3 below replaces that. Round 3 (2026-11-16) full-text searched via https://nebraskalegislature.gov/laws/statutes.php: searched, none (sections chosen by title words: zoning, housing, dwelling, parking, residential, density, lot). Found, not qualifying: Neb. Rev. Stat. §§ 19-5501 to 19-5506 (Municipal Density and Missing Middle Housing Act, LB 866, Laws 2020) (requires reports on zoning (§ 19-5504) and affordable-housing action plans with goals (§ 19-5505); zoning must 'comply with' the Act (§§ 19-901, 15-902) but the Act makes no housing type allowed by right).",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "Neb. Rev. Stat. ch. 19 (cities: zoning)",
+      "url": "https://nebraskalegislature.gov/laws/browse-chapters.php?chapter=19",
+      "full_text_searched": false,
+      "why_not": "table of contents or bot check only, not statute text",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "route_worked": "https://nebraskalegislature.gov/laws/statutes.php",
+    "searched": [
+     {
+      "citation": "Neb. Rev. Stat. ch. 19",
+      "url": "https://nebraskalegislature.gov/laws/browse-chapters.php?chapter=19",
+      "sections_found": 21,
+      "sections_fetched": 21,
+      "title_filtered": true,
+      "full_text_searched": true,
+      "term_hits_by_section": {
+       "adu": [
+        "19-5504"
+       ],
+       "middle_housing": [
+        "19-5504",
+        "19-5505",
+        "19-901",
+        "19-902"
+       ]
+      }
+     },
+     {
+      "citation": "Neb. Rev. Stat. ch. 14",
+      "url": "https://nebraskalegislature.gov/laws/browse-chapters.php?chapter=14",
+      "sections_found": 39,
+      "sections_fetched": 39,
+      "title_filtered": true,
+      "full_text_searched": true,
+      "term_hits_by_section": {}
+     },
+     {
+      "citation": "Neb. Rev. Stat. ch. 15",
+      "url": "https://nebraskalegislature.gov/laws/browse-chapters.php?chapter=15",
+      "sections_found": 19,
+      "sections_fetched": 19,
+      "title_filtered": true,
+      "full_text_searched": true,
+      "term_hits_by_section": {
+       "middle_housing": [
+        "15-902"
+       ]
+      }
+     },
+     {
+      "citation": "Neb. Rev. Stat. ch. 16",
+      "url": "https://nebraskalegislature.gov/laws/browse-chapters.php?chapter=16",
+      "sections_found": 6,
+      "sections_fetched": 6,
+      "title_filtered": true,
+      "full_text_searched": true,
+      "term_hits_by_section": {}
+     },
+     {
+      "citation": "Neb. Rev. Stat. ch. 17",
+      "url": "https://nebraskalegislature.gov/laws/browse-chapters.php?chapter=17",
+      "sections_found": 21,
+      "sections_fetched": 21,
+      "title_filtered": true,
+      "full_text_searched": true,
+      "term_hits_by_section": {}
+     },
+     {
+      "citation": "Neb. Rev. Stat. ch. 23",
+      "url": "https://nebraskalegislature.gov/laws/browse-chapters.php?chapter=23",
+      "sections_found": 16,
+      "sections_fetched": 16,
+      "title_filtered": true,
+      "full_text_searched": true,
+      "term_hits_by_section": {}
+     }
+    ],
+    "found_not_qualifying": [
+     {
+      "citation": "Neb. Rev. Stat. §§ 19-5501 to 19-5506 (Municipal Density and Missing Middle Housing Act, LB 866, Laws 2020)",
+      "why": "requires reports on zoning (§ 19-5504) and affordable-housing action plans with goals (§ 19-5505); zoning must 'comply with' the Act (§§ 19-901, 15-902) but the Act makes no housing type allowed by right"
+     }
+    ],
+    "outcome": "searched, none (sections chosen by title words: zoning, housing, dwelling, parking, residential, density, lot)"
+   }
+  },
+  "NV": {
+   "existing_records": [],
+   "added_records": [
+    "nv_adu_ordinance_278_257"
+   ],
+   "status": "laws_on_file",
+   "notes": "Round 2 (2026-11-16): found by full-text search of NRS chapter 278. NRS 278.257 found and added (ADU ordinance mandate); tiny-house zoning (278.253) is not an ADU-by-right rule",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "NRS ch. 278 (planning and zoning)",
+      "url": "https://www.leg.state.nv.us/nrs/nrs-278.html",
+      "full_text_searched": true,
+      "why_not": null,
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {
+       "adu": 19,
+       "middle_housing": 1
+      }
+     }
+    ],
+    "review": "NRS 278.257 found and added (ADU ordinance mandate); tiny-house zoning (278.253) is not an ADU-by-right rule"
+   }
+  },
+  "NH": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "could_not_check",
+   "notes": "Candidate: RSA 674:71-73 (ADUs; reported to be allowed by right, conditional use permit or special exception, which would not be strictly by right) and any 2025 amendments. gc.nh.gov and gencourt.state.nh.us did not answer from the audit machine; FindLaw returned 503. Round 2 (2026-11-16) retry failed: gencourt.state.nh.us and gc.nh.gov did not connect from the audit machine; law.justia.com and codes.findlaw.com returned 403. Round 2 (2026-11-16) retry failed: gencourt.state.nh.us and gc.nh.gov did not connect from the audit machine; law.justia.com and codes.findlaw.com returned 403. Round 2 (2026-11-16) retry failed: gencourt.state.nh.us and gc.nh.gov did not connect from the audit machine; law.justia.com and codes.findlaw.com returned 403. Round 3 (2026-11-16) could not full-text search: https://gc.nh.gov/rsa/html/LXIV/674/674-72.htm: no response within 20 s; https://www.gencourt.state.nh.us/rsa/html/LXIV/674/674-72.htm: HTTP 301 to gc.nh.gov, which does not answer; https://legiscan.com/ and https://law.justia.com/: HTTP 403 (Cloudflare) from the build machine. Would unblock it: a normal browser on gc.nh.gov (RSA 674:71-73).",
+   "tried": [
+    "https://gc.nh.gov/rsa/html/LXIV/674/674-72.htm",
+    "https://www.gencourt.state.nh.us/rsa/html/LXIV/674/674-72.htm",
+    "https://codes.findlaw.com/nh/title-lxiv-planning-and-zoning/nh-rev-stat-sect-674-72/"
+   ],
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "routes": [
+     {
+      "url": "https://gc.nh.gov/rsa/html/LXIV/674/674-72.htm",
+      "result": "no response within 20 s"
+     },
+     {
+      "url": "https://www.gencourt.state.nh.us/rsa/html/LXIV/674/674-72.htm",
+      "result": "HTTP 301 to gc.nh.gov, which does not answer"
+     },
+     {
+      "url": "https://legiscan.com/ and https://law.justia.com/",
+      "result": "HTTP 403 (Cloudflare) from the build machine"
+     }
+    ],
+    "route_worked": null,
+    "full_text_searched": false,
+    "unblock": "a normal browser on gc.nh.gov (RSA 674:71-73)"
+   }
+  },
+  "NJ": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (N.J.S.A. 40:55D (Municipal Land Use Law): HTTP 403), so this rests on round 1's candidate search only. Round 3 (2026-11-16) could not full-text search: https://pub.njleg.state.nj.us/Bills/2024/PL24/: HTTP 403; https://lis.njleg.state.nj.us/nxt/gateway.dll: reachable, but the statute search is a frame/JavaScript Folio application; not completed; https://legiscan.com/ and https://law.justia.com/: HTTP 403 (Cloudflare) from the build machine. Would unblock it: a normal browser on lis.njleg.state.nj.us (N.J.S.A. 40:55D), or the P.L. bill-text PDFs from pub.njleg.state.nj.us.",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "N.J.S.A. 40:55D (Municipal Land Use Law)",
+      "url": "https://law.justia.com/codes/new-jersey/title-40/chapter-40-55d/",
+      "full_text_searched": false,
+      "why_not": "HTTP 403",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "routes": [
+     {
+      "url": "https://pub.njleg.state.nj.us/Bills/2024/PL24/",
+      "result": "HTTP 403"
+     },
+     {
+      "url": "https://lis.njleg.state.nj.us/nxt/gateway.dll",
+      "result": "reachable, but the statute search is a frame/JavaScript Folio application; not completed"
+     },
+     {
+      "url": "https://legiscan.com/ and https://law.justia.com/",
+      "result": "HTTP 403 (Cloudflare) from the build machine"
+     }
+    ],
+    "route_worked": null,
+    "full_text_searched": false,
+    "unblock": "a normal browser on lis.njleg.state.nj.us (N.J.S.A. 40:55D), or the P.L. bill-text PDFs from pub.njleg.state.nj.us"
+   }
+  },
+  "NM": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (NMSA 3-21 (zoning): HTTP 403), so this rests on round 1's candidate search only. Round 3 (2026-11-16) could not full-text search: https://nmonesource.com/nmos/nmsa/en/nav_date.do: reachable, but the NMSA 3-21 section paths tried returned 404; https://www.nmlegis.gov/: home page loads; no statute text; https://legiscan.com/ and https://law.justia.com/: HTTP 403 (Cloudflare) from the build machine. Would unblock it: a normal browser on nmonesource.com (NMSA ch. 3 art. 21).",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "NMSA 3-21 (zoning)",
+      "url": "https://law.justia.com/codes/new-mexico/chapter-3/article-21/",
+      "full_text_searched": false,
+      "why_not": "HTTP 403",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "routes": [
+     {
+      "url": "https://nmonesource.com/nmos/nmsa/en/nav_date.do",
+      "result": "reachable, but the NMSA 3-21 section paths tried returned 404"
+     },
+     {
+      "url": "https://www.nmlegis.gov/",
+      "result": "home page loads; no statute text"
+     },
+     {
+      "url": "https://legiscan.com/ and https://law.justia.com/",
+      "result": "HTTP 403 (Cloudflare) from the build machine"
+     }
+    ],
+    "route_worked": null,
+    "full_text_searched": false,
+    "unblock": "a normal browser on nmonesource.com (NMSA ch. 3 art. 21)"
+   }
+  },
+  "NY": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (Town Law § 261 (zoning): HTTP 403; Village Law § 7-700: HTTP 403; General City Law § 20: HTTP 403), so this rests on round 1's candidate search only. Round 3 (2026-11-16) could not full-text search: https://legislation.nysenate.gov/api/3/laws/TWN/261: HTTP 401: the Open Legislation API needs a key; https://www.nysenate.gov/legislation/laws/TWN/261: HTTP 403; https://legiscan.com/ and https://law.justia.com/: HTTP 403 (Cloudflare) from the build machine. Would unblock it: a free NY Open Legislation API key (legislation.nysenate.gov), saved as a network credential.",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "Town Law § 261 (zoning)",
+      "url": "https://www.nysenate.gov/legislation/laws/TWN/261",
+      "full_text_searched": false,
+      "why_not": "HTTP 403",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     },
+     {
+      "citation": "Village Law § 7-700",
+      "url": "https://www.nysenate.gov/legislation/laws/VIL/7-700",
+      "full_text_searched": false,
+      "why_not": "HTTP 403",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     },
+     {
+      "citation": "General City Law § 20",
+      "url": "https://www.nysenate.gov/legislation/laws/GCT/20",
+      "full_text_searched": false,
+      "why_not": "HTTP 403",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "routes": [
+     {
+      "url": "https://legislation.nysenate.gov/api/3/laws/TWN/261",
+      "result": "HTTP 401: the Open Legislation API needs a key"
+     },
+     {
+      "url": "https://www.nysenate.gov/legislation/laws/TWN/261",
+      "result": "HTTP 403"
+     },
+     {
+      "url": "https://legiscan.com/ and https://law.justia.com/",
+      "result": "HTTP 403 (Cloudflare) from the build machine"
+     }
+    ],
+    "route_worked": null,
+    "full_text_searched": false,
+    "unblock": "a free NY Open Legislation API key (legislation.nysenate.gov), saved as a network credential"
+   }
+  },
+  "NC": {
+   "existing_records": [
+    "nc_raleigh_missing_middle (local, could not check)"
+   ],
+   "added_records": [],
+   "status": "laws_on_file",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "N.C.G.S. ch. 160D (local planning and development)",
+      "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/ByChapter/Chapter_160D.html",
+      "full_text_searched": true,
+      "why_not": null,
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {
+       "middle_housing": 10,
+       "parking": 2
+      }
+     }
+    ],
+    "review": "G.S. 160D-702(c)(2a) bars minimum parking requirements but is marked '(Effective January 1, 2027)': passed, not yet in effect (coastal-area exceptions)"
+   },
+   "notes": "Round 2 (2026-11-16): G.S. 160D-702(c)(2a) bars minimum parking requirements but is marked '(Effective January 1, 2027)': passed, not yet in effect (coastal-area exceptions) — (c) (Effective January 1, 2027) A zoning or other development regulation shall not do any of the following: (1) Set a mi. Round 2 (2026-11-16): G.S. 160D-702(c)(2a) bars minimum parking requirements but is marked '(Effective January 1, 2027)': passed, not yet in effect (coastal-area exceptions) — (c) (Effective January 1, 2027) A zoning or other development regulation shall not do any of the following: (1) Set a mi. Round 2 (2026-11-16): G.S. 160D-702(c)(2a) bars minimum parking requirements but is marked '(Effective January 1, 2027)': passed, not yet in effect (coastal-area exceptions) — (c) (Effective January 1, 2027) A zoning or other development regulation shall not do any of the following: (1) Set a mi."
+  },
+  "ND": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 full-text searched N.D.C.C. ch. 40-47 (city zoning) for ADU, middle-housing, lot-split, parking-minimum and commercial-residential terms. Laws outside these chapters, or enacted but not yet codified on the state's site, could still exist.",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "N.D.C.C. ch. 40-47 (city zoning)",
+      "url": "https://www.ndlegis.gov/cencode/t40c47.pdf",
+      "full_text_searched": true,
+      "why_not": null,
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   }
+  },
+  "OH": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 full-text searched ORC ch. 713 (municipal planning and zoning); ORC ch. 519 (township zoning) for ADU, middle-housing, lot-split, parking-minimum and commercial-residential terms. Laws outside these chapters, or enacted but not yet codified on the state's site, could still exist.",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "ORC ch. 713 (municipal planning and zoning)",
+      "url": "https://codes.ohio.gov/ohio-revised-code/chapter-713",
+      "full_text_searched": true,
+      "why_not": null,
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     },
+     {
+      "citation": "ORC ch. 519 (township zoning)",
+      "url": "https://codes.ohio.gov/ohio-revised-code/chapter-519",
+      "full_text_searched": true,
+      "why_not": null,
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   }
+  },
+  "OK": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (11 O.S. §§ 43-101 et seq. (municipal zoning): HTTP 403); round 3 below replaces that. Round 3 (2026-11-16) full-text searched via https://www.oklegislature.gov/OK_Statutes/CompleteTitles/ (complete-title PDFs): searched, none (hits are contractor-permit and small-wireless rules and the county zoning district list).",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "11 O.S. §§ 43-101 et seq. (municipal zoning)",
+      "url": "https://law.justia.com/codes/oklahoma/title-11/",
+      "full_text_searched": false,
+      "why_not": "HTTP 403",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "route_worked": "https://www.oklegislature.gov/OK_Statutes/CompleteTitles/ (complete-title PDFs)",
+    "searched": [
+     {
+      "citation": "Okla. Stat. title 11 (complete title PDF; includes Laws 2026)",
+      "url": "https://www.oklegislature.gov/OK_Statutes/CompleteTitles/os11.pdf",
+      "chars": 2017979,
+      "full_text_searched": true,
+      "term_hits": {
+       "middle_housing": 5
+      }
+     },
+     {
+      "citation": "Okla. Stat. title 19 (complete title PDF; includes Laws 2026)",
+      "url": "https://www.oklegislature.gov/OK_Statutes/CompleteTitles/os19.pdf",
+      "chars": 1764005,
+      "full_text_searched": true,
+      "term_hits": {
+       "middle_housing": 1
+      }
+     }
+    ],
+    "outcome": "searched, none (hits are contractor-permit and small-wireless rules and the county zoning district list)"
+   }
+  },
+  "OR": {
+   "existing_records": [
+    "or_hb2001"
+   ],
+   "added_records": [
+    "or_adu_197a425",
+    "or_commercial_197a460"
+   ],
+   "status": "laws_on_file"
+  },
+  "PA": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (53 P.S. § 10601 et seq. (MPC Article VI, zoning): table of contents or bot check only, not statute text); round 3 below replaces that. Round 3 (2026-11-16) full-text searched via https://www.palegis.us/statutes/unconsolidated/ (MPC, Act 247 of 1968 as amended, PDF): searched, none (hits: § 604(4)'s general duty to provide for single-family and two-family dwellings, and a sewage-planning exemption).",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "53 P.S. § 10601 et seq. (MPC Article VI, zoning)",
+      "url": "https://www.legis.state.pa.us/cfdocs/legis/LI/uconsCheck.cfm?txtType=HTM&yr=1968&sessInd=0&smthLwInd=0&act=247&chpt=6",
+      "full_text_searched": false,
+      "why_not": "table of contents or bot check only, not statute text",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "route_worked": "https://www.palegis.us/statutes/unconsolidated/ (MPC, Act 247 of 1968 as amended, PDF)",
+    "searched": [
+     {
+      "citation": "Pennsylvania Municipalities Planning Code (53 P.S. § 10101 et seq.), full text",
+      "url": "https://www.palegis.us/statutes/unconsolidated/law-information/view-statute?txtType=PDF&SessYr=1968&ActNum=0247.&SessInd=0",
+      "chars": 395258,
+      "full_text_searched": true,
+      "term_hits": {
+       "middle_housing": 2
+      }
+     }
+    ],
+    "outcome": "searched, none (hits: § 604(4)'s general duty to provide for single-family and two-family dwellings, and a sewage-planning exemption)"
+   }
+  },
+  "RI": {
+   "existing_records": [],
+   "added_records": [
+    "ri_adu_large_lot",
+    "ri_adu_existing_footprint"
+   ],
+   "status": "laws_on_file"
+  },
+  "SC": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 full-text searched S.C. Code ch. 6-29 (local planning) for ADU, middle-housing, lot-split, parking-minimum and commercial-residential terms (§ 6-29 hits: 'accessory dwellings' appears in an optional affordable-housing incentive definition; parking hits are local powers and optional waivers; no mandate). Laws outside these chapters, or enacted but not yet codified on the state's site, could still exist.",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "S.C. Code ch. 6-29 (local planning)",
+      "url": "https://www.scstatehouse.gov/code/t06c029.php",
+      "full_text_searched": true,
+      "why_not": null,
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {
+       "adu": 1,
+       "parking": 3
+      }
+     }
+    ],
+    "review": "§ 6-29 hits: 'accessory dwellings' appears in an optional affordable-housing incentive definition; parking hits are local powers and optional waivers; no mandate"
+   }
+  },
+  "SD": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (SDCL ch. 11-4 (municipal zoning): table of contents or bot check only, not statute text; SDCL ch. 11-2 (county planning and zoning): table of contents or bot check only, not statute text); round 3 below replaces that. Round 3 (2026-11-16) full-text searched via https://sdlegislature.gov/api/Statutes/: searched, none (2 of 48 sections in ch. 11-6 did not load).",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "SDCL ch. 11-4 (municipal zoning)",
+      "url": "https://sdlegislature.gov/api/Statutes/11-4.html",
+      "full_text_searched": false,
+      "why_not": "table of contents or bot check only, not statute text",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     },
+     {
+      "citation": "SDCL ch. 11-2 (county planning and zoning)",
+      "url": "https://sdlegislature.gov/api/Statutes/11-2.html",
+      "full_text_searched": false,
+      "why_not": "table of contents or bot check only, not statute text",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "route_worked": "https://sdlegislature.gov/api/Statutes/",
+    "searched": [
+     {
+      "citation": "SDCL ch. 11-4",
+      "url": "https://sdlegislature.gov/api/Statutes/11-4.html",
+      "sections_found": 42,
+      "sections_fetched": 42,
+      "title_filtered": false,
+      "full_text_searched": true,
+      "term_hits_by_section": {}
+     },
+     {
+      "citation": "SDCL ch. 11-2",
+      "url": "https://sdlegislature.gov/api/Statutes/11-2.html",
+      "sections_found": 95,
+      "sections_fetched": 95,
+      "title_filtered": false,
+      "full_text_searched": true,
+      "term_hits_by_section": {}
+     },
+     {
+      "citation": "SDCL ch. 11-6",
+      "url": "https://sdlegislature.gov/api/Statutes/11-6.html",
+      "sections_found": 48,
+      "sections_fetched": 46,
+      "title_filtered": false,
+      "full_text_searched": false,
+      "term_hits_by_section": {}
+     }
+    ],
+    "outcome": "searched, none (2 of 48 sections in ch. 11-6 did not load)"
+   }
+  },
+  "TN": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (Tenn. Code § 13-7-201 et seq. (municipal zoning): HTTP 403), so this rests on round 1's candidate search only. Round 3 (2026-11-16) could not full-text search: https://wapp.capitol.tn.gov/apps/: redirects to a JavaScript application; https://publications.tnsosfiles.com/acts/113/pub/: public-chapter PDFs reachable, but no listing or keyword search; https://legiscan.com/ and https://law.justia.com/: HTTP 403 (Cloudflare) from the build machine. Would unblock it: a normal browser on the Lexis-hosted Tennessee Code, or a list of 2023-2026 public chapter numbers on housing.",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "Tenn. Code § 13-7-201 et seq. (municipal zoning)",
+      "url": "https://law.justia.com/codes/tennessee/title-13/chapter-7/part-2/",
+      "full_text_searched": false,
+      "why_not": "HTTP 403",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "routes": [
+     {
+      "url": "https://wapp.capitol.tn.gov/apps/",
+      "result": "redirects to a JavaScript application"
+     },
+     {
+      "url": "https://publications.tnsosfiles.com/acts/113/pub/",
+      "result": "public-chapter PDFs reachable, but no listing or keyword search"
+     },
+     {
+      "url": "https://legiscan.com/ and https://law.justia.com/",
+      "result": "HTTP 403 (Cloudflare) from the build machine"
+     }
+    ],
+    "route_worked": null,
+    "full_text_searched": false,
+    "unblock": "a normal browser on the Lexis-hosted Tennessee Code, or a list of 2023-2026 public chapter numbers on housing"
+   }
+  },
+  "TX": {
+   "existing_records": [
+    "tx_sb840",
+    "tx_austin_home (local ordinance)"
+   ],
+   "added_records": [
+    "tx_sb15_small_lots"
+   ],
+   "status": "laws_on_file",
+   "known_gap": "2025 ADU bills were not checked; SB 1412 (2023) failed and was removed in the first audit.",
+   "notes": "Round 2 (2026-11-16): 2025 ADU bill SB 673 was not enacted (Last Action: 05/26/2025 H Placed on General State Calendar Council Doc); HB 2789, checked as a possible ADU bill, is a child-welfare bill (Caption Text: Relating to the regulation of child welfare, including licensure, community-based care contracto). Round 2 (2026-11-16): 2025 ADU bill SB 673 was not enacted (Last Action: 05/26/2025 H Placed on General State Calendar Council Doc); HB 2789, checked as a possible ADU bill, is a child-welfare bill (Caption Text: Relating to the regulation of child welfare, including licensure, community-based care contracto). Round 2 (2026-11-16): 2025 ADU bill SB 673 was not enacted (Last Action: 05/26/2025 H Placed on General State Calendar Council Doc); HB 2789, checked as a possible ADU bill, is a child-welfare bill (Caption Text: Relating to the regulation of child welfare, including licensure, community-based care contracto)."
+  },
+  "UT": {
+   "existing_records": [
+    "ut_hb82_iadu"
+   ],
+   "added_records": [],
+   "status": "laws_on_file"
+  },
+  "VT": {
+   "existing_records": [
+    "vt_act47"
+   ],
+   "added_records": [],
+   "status": "laws_on_file"
+  },
+  "VA": {
+   "existing_records": [],
+   "added_records": [
+    "va_parking_2209_4",
+    "va_small_lot_2286_2"
+   ],
+   "status": "laws_on_file",
+   "notes": "Round 3 (2026-11-16) found and added va_parking_2209_4, va_small_lot_2286_2 from official text via https://law.lis.virginia.gov/vacode/title15.2/chapter22/ (table of contents lists 192 sections; sections chosen by title were fetched). Also found, not added: Va. Code § 15.2-2292.4 (ADUs as a permitted accessory use in single-family districts) (not yet in effect); Va. Code § 15.2-2288.1 (bars special-use permits only for homes already allowed by right; creates no new right); Va. Code § 15.2-2292.3 (local option ('may by ordinance') administrative rezoning for 75%-affordable developments).",
+   "checked": [
+    "https://law.lis.virginia.gov/vacode/title15.2/chapter22/section15.2-2292/"
+   ],
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "Va. Code ch. 15.2-22 art. 7 (zoning)",
+      "url": "https://law.lis.virginia.gov/vacode/title15.2/chapter22/article7/",
+      "full_text_searched": false,
+      "why_not": "table of contents or bot check only, not statute text",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "route_worked": "https://law.lis.virginia.gov/vacode/title15.2/chapter22/ (table of contents lists 192 sections; sections chosen by title were fetched)",
+    "searched": [
+     {
+      "citation": "Va. Code §§ 15.2-2209.4, 15.2-2286.2, 15.2-2288.1, 15.2-2292.3, 15.2-2292.4",
+      "url": "https://law.lis.virginia.gov/vacode/title15.2/chapter22/",
+      "full_text_searched": false
+     }
+    ],
+    "added": [
+     "va_parking_2209_4",
+     "va_small_lot_2286_2"
+    ],
+    "found_not_qualifying": [
+     {
+      "citation": "Va. Code § 15.2-2292.4 (ADUs as a permitted accessory use in single-family districts)",
+      "url": "https://law.lis.virginia.gov/vacode/title15.2/chapter22/section15.2-2292.4/",
+      "why": "not yet in effect",
+      "quote": "§ 15.2-2292.4 . (Effective July 1, 2027) Development and use of accessory dwelli"
+     },
+     {
+      "citation": "Va. Code § 15.2-2288.1",
+      "why": "bars special-use permits only for homes already allowed by right; creates no new right"
+     },
+     {
+      "citation": "Va. Code § 15.2-2292.3",
+      "why": "local option ('may by ordinance') administrative rezoning for 75%-affordable developments"
+     }
+    ],
+    "outcome": "2 added; ADU law passed but not in effect until 2027-07-01"
+   }
+  },
+  "WA": {
+   "existing_records": [
+    "wa_hb1110"
+   ],
+   "added_records": [
+    "wa_hb1337_adu",
+    "wa_sb5184_parking",
+    "wa_hb1042_existing_buildings"
+   ],
+   "status": "laws_on_file"
+  },
+  "WV": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (W. Va. Code ch. 8A-7 (zoning ordinance): table of contents or bot check only, not statute text); round 3 below replaces that. Round 3 (2026-11-16) full-text searched via https://code.wvlegislature.gov/: searched, none.",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "W. Va. Code ch. 8A-7 (zoning ordinance)",
+      "url": "https://code.wvlegislature.gov/8A-7/",
+      "full_text_searched": false,
+      "why_not": "table of contents or bot check only, not statute text",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "route_worked": "https://code.wvlegislature.gov/",
+    "searched": [
+     {
+      "citation": "W. Va. Code ch. 8A-7",
+      "url": "https://code.wvlegislature.gov/8A-7/",
+      "sections_found": 13,
+      "sections_fetched": 13,
+      "title_filtered": false,
+      "full_text_searched": true,
+      "term_hits_by_section": {}
+     },
+     {
+      "citation": "W. Va. Code ch. 8A-4",
+      "url": "https://code.wvlegislature.gov/8A-4/",
+      "sections_found": 7,
+      "sections_fetched": 7,
+      "title_filtered": false,
+      "full_text_searched": true,
+      "term_hits_by_section": {}
+     },
+     {
+      "citation": "W. Va. Code ch. 8A-5",
+      "url": "https://code.wvlegislature.gov/8A-5/",
+      "sections_found": 12,
+      "sections_fetched": 12,
+      "title_filtered": false,
+      "full_text_searched": true,
+      "term_hits_by_section": {}
+     }
+    ],
+    "outcome": "searched, none"
+   }
+  },
+  "WI": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 could not full-text search the zoning chapter (Wis. Stat. § 62.23 (city planning and zoning): HTTP 0; Wis. Stat. § 66.10015 (development approvals): HTTP 0; Wis. Stat. § 66.1001 (comprehensive planning): HTTP 0), so this rests on round 1's candidate search only. Round 3 (2026-11-16) could not full-text search: https://docs.legis.wisconsin.gov/statutes/statutes/62/23: no response within 20 s; https://legiscan.com/ and https://law.justia.com/: HTTP 403 (Cloudflare) from the build machine. Would unblock it: running scripts/law_search_chapters.py from a normal computer (docs.legis.wisconsin.gov does not answer the build machine).",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "Wis. Stat. § 62.23 (city planning and zoning)",
+      "url": "https://docs.legis.wisconsin.gov/statutes/statutes/62/23",
+      "full_text_searched": false,
+      "why_not": "HTTP 0",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     },
+     {
+      "citation": "Wis. Stat. § 66.10015 (development approvals)",
+      "url": "https://docs.legis.wisconsin.gov/statutes/statutes/66/x/10015",
+      "full_text_searched": false,
+      "why_not": "HTTP 0",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     },
+     {
+      "citation": "Wis. Stat. § 66.1001 (comprehensive planning)",
+      "url": "https://docs.legis.wisconsin.gov/statutes/statutes/66/x/1001",
+      "full_text_searched": false,
+      "why_not": "HTTP 0",
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {}
+     }
+    ],
+    "review": null
+   },
+   "round3_search": {
+    "date": "2026-11-16",
+    "terms": [
+     "adu",
+     "middle_housing",
+     "lot_split",
+     "parking",
+     "commercial_residential"
+    ],
+    "routes": [
+     {
+      "url": "https://docs.legis.wisconsin.gov/statutes/statutes/62/23",
+      "result": "no response within 20 s"
+     },
+     {
+      "url": "https://legiscan.com/ and https://law.justia.com/",
+      "result": "HTTP 403 (Cloudflare) from the build machine"
+     }
+    ],
+    "route_worked": null,
+    "full_text_searched": false,
+    "unblock": "running scripts/law_search_chapters.py from a normal computer (docs.legis.wisconsin.gov does not answer the build machine)"
+   }
+  },
+  "WY": {
+   "existing_records": [],
+   "added_records": [],
+   "status": "none_found",
+   "notes": "no qualifying statewide law found as of 2026-11-16. Round 2 full-text searched W.S. title 15 (cities and towns; 15-1-601 zoning) for ADU, middle-housing, lot-split, parking-minimum and commercial-residential terms (title 15 parking hits concern municipal parking facilities, not minimums). Laws outside these chapters, or enacted but not yet codified on the state's site, could still exist.",
+   "round2_search": {
+    "date": "2026-11-16",
+    "chapters": [
+     {
+      "citation": "W.S. title 15 (cities and towns; 15-1-601 zoning)",
+      "url": "https://wyoleg.gov/statutes/compress/title15.pdf",
+      "full_text_searched": true,
+      "why_not": null,
+      "terms": [
+       "adu",
+       "middle_housing",
+       "lot_split",
+       "parking",
+       "commercial_residential"
+      ],
+      "term_hits": {
+       "parking": 5
+      }
+     }
+    ],
+    "review": "title 15 parking hits concern municipal parking facilities, not minimums"
+   }
+  }
+ }
+}

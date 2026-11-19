@@ -1,0 +1,486 @@
+{
+ "ran_on": "2026-11-17T16:06:28.162Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "47067": {
+   "state": "TN",
+   "points": [
+    {
+     "bg": "470679605002",
+     "lat": 36.45189,
+     "lng": -83.252336,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $125k, rent $679/mo, homes 1,152"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,9,32]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel at point (right-of-way)"
+    },
+    {
+     "bg": "470679606003",
+     "lat": 36.525562,
+     "lng": -83.302587,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $164k, rent $488/mo, homes 455"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,5,20]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel at point (right-of-way)"
+    },
+    {
+     "bg": "470679606004",
+     "lat": 36.478957,
+     "lng": -83.324608,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $117k, rent $611/mo, homes 678"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,6,35]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel at point (right-of-way)"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": []
+  },
+  "47155": {
+   "state": "TN",
+   "points": [
+    {
+     "bg": "471550809031",
+     "lat": 35.71776,
+     "lng": -83.595889,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $472k, rent $867/mo, homes 981"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,1,16]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel at point (right-of-way)"
+    },
+    {
+     "bg": "471550806043",
+     "lat": 35.866707,
+     "lng": -83.4661,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $395k, rent $849/mo, homes 527"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 10 pts (current release); page: 10 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 10 pts below its 50% goal; box: \"10 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,1,24]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel at point (right-of-way)"
+    },
+    {
+     "bg": "471550802032",
+     "lat": 35.882415,
+     "lng": -83.761531,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $295k, rent $1,203/mo, homes 1,092"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 17 pts (current release); page: 17 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 17.2 pts below its 50% goal; box: \"17.2 pts below its 50% goal\" / \"-0.8°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,9,65]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel at point (right-of-way)"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel at point (right-of-way)"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": []
+  },
+  "47175": {
+   "state": "TN",
+   "points": [
+    {
+     "bg": "471759250002",
+     "lat": 35.752412,
+     "lng": -85.331832,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $150k, rent $722/mo, homes 371"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,5,17]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "471759252002",
+     "lat": 35.741661,
+     "lng": -85.436941,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $143k, rent $467/mo, homes 747"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,5,25]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "471759250001",
+     "lat": 35.638559,
+     "lng": -85.485086,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $162k, rent $744/mo, homes 1,107"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,11,34]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": []
+  }
+ }
+}

@@ -1,0 +1,2436 @@
+{
+ "ran_on": "2026-11-17T10:02:03.916Z",
+ "script": "scripts/live_check_lot_fit.mjs",
+ "browser_via_explicit_proxy": false,
+ "nyc": [
+  {
+   "county": "36081",
+   "area": "Queens (Hollis Hills / Bayside)",
+   "lat": 40.743406,
+   "lng": -73.763878,
+   "pluto": {
+    "BBL": 4076120032,
+    "Address": "64-54 212 STREET",
+    "LandUse": "01",
+    "ZoneDist1": "R1-2A",
+    "LotArea": 6000,
+    "LotFront": 60,
+    "BldgArea": 2174,
+    "UnitsRes": 1
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "64-54 212 STREET · AIN/APN 4076120032 · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t35 ft\n• Zoning district R1-2A (New York City Zoning Resolution) — Housing types: limited to single-family detached residences (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). Minimum lot for a detached or zero-lot-line home: 4,750 sq ft and 50 ft wide (ZR 23-11). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — Up to 4,500 sq ft of floor area on this 6,000 sq ft lot (FAR 0.75, ZR 23-21); on a lot of 4,000 sq ft or more no single home may exceed 3,600 sq ft (FAR 0.60). The city records 2,174 sq ft of gross floor area here, so about 2,326 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✗ Second home (two-family or more) — R1-2A is limited to single-family detached residences (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). An ancillary dwelling unit is"
+  },
+  {
+   "county": "36081",
+   "area": "Queens (Hollis Hills / Bayside)",
+   "lat": 40.744814,
+   "lng": -73.759756,
+   "pluto": {
+    "BBL": 4076170049,
+    "Address": "64-45 BELL BOULEVARD",
+    "LandUse": "01",
+    "ZoneDist1": "R4-1",
+    "LotArea": 2600,
+    "LotFront": 26,
+    "BldgArea": 1188,
+    "UnitsRes": 1
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "64-45 BELL BOULEVARD · AIN/APN 4076170049 · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t35 ft\n• Zoning district R4-1 (New York City Zoning Resolution) — Housing types: limited to single- or two-family residences, detached or semi-detached, or single- or two-family zero lot line buildings (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). Minimum lot for a detached or zero-lot-line home: 2,375 sq ft and 25 ft wide (ZR 23-11). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — Up to 2,600 sq ft of floor area on this 2,600 sq ft lot (FAR 1.00, ZR 23-21). The city records 1,188 sq ft of gross floor area here, so about 1,412 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✓ Second home (two-family or more) — A two-family home is an allowed type here: single- or two-family residences, detached or semi-detached, or single- or two-family zero lot line buildings (ZR 22-122), within the floor area above.\n✗ Split into two lots (by size only) — Two lots would each need at least 2,375 sq ft and 25 ft of width for a detached hom"
+  },
+  {
+   "county": "36085",
+   "area": "Staten Island (Westerleigh / Todt Hill)",
+   "lat": 40.617174,
+   "lng": -74.120139,
+   "pluto": {
+    "BBL": 5003380009,
+    "Address": "207 POTTER AVENUE",
+    "LandUse": "01",
+    "ZoneDist1": "R2",
+    "LotArea": 4000,
+    "LotFront": 40,
+    "BldgArea": 1090,
+    "UnitsRes": 1
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "207 POTTER AVENUE · AIN/APN 5003380009 · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t35 ft\n• Zoning district R2 (New York City Zoning Resolution) — Housing types: limited to single-family detached residences (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — Up to 3,000 sq ft of floor area on this 4,000 sq ft lot (FAR 0.75, ZR 23-21); on a lot of 4,000 sq ft or more no single home may exceed 2,400 sq ft (FAR 0.60). The city records 1,090 sq ft of gross floor area here, so about 1,910 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✗ Second home (two-family or more) — R2 is limited to single-family detached residences (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). An ancillary dwelling unit is the "
+  },
+  {
+   "county": "36085",
+   "area": "Staten Island (Westerleigh / Todt Hill)",
+   "lat": 40.619351,
+   "lng": -74.101414,
+   "pluto": {
+    "BBL": 5002430068,
+    "Address": "47 WALDRON AVENUE",
+    "LandUse": "01",
+    "ZoneDist1": "R3X",
+    "LotArea": 4800,
+    "LotFront": 48,
+    "BldgArea": 1040,
+    "UnitsRes": 1
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "47 WALDRON AVENUE · AIN/APN 5002430068 · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t35 ft\n• Zoning district R3X (New York City Zoning Resolution) — Housing types: limited to single- or two-family detached residences (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — Up to 3,600 sq ft of floor area on this 4,800 sq ft lot (FAR 0.75, ZR 23-21); on a lot of 4,000 sq ft or more no single home may exceed 2,880 sq ft (FAR 0.60). The city records 1,040 sq ft of gross floor area here, so about 2,560 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✓ Second home (two-family or more) — A two-family home is an allowed type here: single- or two-family detached residences (ZR 22-122), within the floor area above.\n✗ Split into two lots (by size only) — Two lots would each need at least 2,850 sq ft and 30 ft of width for a detached home (ZR 23-11); this lot has 4,800 sq ft and 48 ft of fronta"
+  },
+  {
+   "county": "36047",
+   "area": "Brooklyn (Marine Park / Midwood)",
+   "lat": 40.609402,
+   "lng": -73.942666,
+   "pluto": {
+    "BBL": 3068150017,
+    "Address": "1744 STUART STREET",
+    "LandUse": "01",
+    "ZoneDist1": "R3-2",
+    "LotArea": 2500,
+    "LotFront": 25,
+    "BldgArea": 1376,
+    "UnitsRes": 1
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "1744 STUART STREET · AIN/APN 3068150017 · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t35 ft\n• Zoning district R3-2 (New York City Zoning Resolution) — Housing types: no limit on the type of residence (ZR 22-121, 22-122). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11); this lot (2,500 sq ft, 25 ft of frontage) is smaller, which may mean it predates the minimum (not checked here). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — Up to 1,875 sq ft of floor area on this 2,500 sq ft lot (FAR 0.75, ZR 23-21). The city records 1,376 sq ft of gross floor area here, so about 499 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✓ Second home (two-family or more) — R3-2 sets no limit on the type of residence (ZR 22-121, 22-122), within the floor area above.\n✗ Split into two lots (by size only) — Two lots would each need at least 2,850 sq ft and 30 ft of width for a detached home (ZR 23-11); this lot has 2,500 sq ft and 25 ft of frontage. Where other residence types are allowed the minimum is 1,700 sq ft and 18 ft (ZR 23-11).\n? Ancillary dwelling unit (ADU, up to 800 sq ft) — ZR 12-10 allows one ancillary dwelling unit of up to 800 sq ft per single- or two-famil"
+  },
+  {
+   "county": "36047",
+   "area": "Brooklyn (Marine Park / Midwood)",
+   "lat": 40.608238,
+   "lng": -73.941373,
+   "pluto": {
+    "BBL": 3068400013,
+    "Address": "1818 STUART STREET",
+    "LandUse": "01",
+    "ZoneDist1": "R4",
+    "LotArea": 1800,
+    "LotFront": 18,
+    "BldgArea": 1890,
+    "UnitsRes": 2
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "1818 STUART STREET · AIN/APN 3068400013 · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t35 ft\n• Zoning district R4 (New York City Zoning Resolution) — Housing types: no limit on the type of residence (ZR 22-121, 22-122). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11); this lot (1,800 sq ft, 18 ft of frontage) is smaller, which may mean it predates the minimum (not checked here). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✗ Floor area allowed by zoning — Up to 1,800 sq ft of floor area on this 1,800 sq ft lot (FAR 1.00, ZR 23-21). The city records 1,890 sq ft of gross floor area here, so about 90 sq ft more than that is already built by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✓ Second home (two-family or more) — R4 sets no limit on the type of residence (ZR 22-121, 22-122), within the floor area above.\n✗ Split into two lots (by size only) — Two lots would each need at least 2,850 sq ft and 30 ft of width for a detached home (ZR 23-11); this lot has 1,800 sq ft and 18 ft of frontage. Where other residence types are allowed the minimum is 1,700 sq ft and 18 ft (ZR 23-11).\n? Ancillary dwelling unit (ADU, up to 800 sq ft) — ZR 12-10 allows one ancillary dwelling unit of up to 800 sq ft per "
+  },
+  {
+   "county": "36005",
+   "area": "Bronx (Riverdale / Throggs Neck)",
+   "lat": 40.884897,
+   "lng": -73.903418,
+   "pluto": {
+    "BBL": 2057670784,
+    "Address": "3610 TIBBETT AVENUE",
+    "LandUse": "01",
+    "ZoneDist1": "R4",
+    "LotArea": 2500,
+    "LotFront": 25,
+    "BldgArea": 2350,
+    "UnitsRes": 2
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "3610 TIBBETT AVENUE · AIN/APN 2057670784 · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t35 ft\n• Zoning district R4 (New York City Zoning Resolution) — Housing types: no limit on the type of residence (ZR 22-121, 22-122). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11); this lot (2,500 sq ft, 25 ft of frontage) is smaller, which may mean it predates the minimum (not checked here). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✗ Floor area allowed by zoning — Up to 2,500 sq ft of floor area on this 2,500 sq ft lot (FAR 1.00, ZR 23-21). The city records 2,350 sq ft of gross floor area here, so about 150 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✓ Second home (two-family or more) — R4 sets no limit on the type of residence (ZR 22-121, 22-122), within the floor area above.\n✗ Split into two lots (by size only) — Two lots would each need at least 2,850 sq ft and 30 ft of width for a detached home (ZR 23-11); this lot has 2,500 sq ft and 25 ft of frontage. Where other residence types are allowed the minimum is 1,700 sq ft and 18 ft (ZR 23-11).\n? Ancillary dwelling unit (ADU, up to 800 sq ft) — ZR 12-10 allows one ancillary dwelling unit of up to 800 sq ft per single- or two-family h"
+  },
+  {
+   "county": "36005",
+   "area": "Bronx (Riverdale / Throggs Neck)",
+   "lat": 40.894096,
+   "lng": -73.906797,
+   "pluto": {
+    "BBL": 2058222628,
+    "Address": "4600 DELAFIELD AVENUE",
+    "LandUse": "01",
+    "ZoneDist1": "R1-2",
+    "LotArea": 9000,
+    "LotFront": 180,
+    "BldgArea": 2724,
+    "UnitsRes": 1
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "4600 DELAFIELD AVENUE · AIN/APN 2058222628 · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t35 ft\n• Zoning district R1-2 (New York City Zoning Resolution) — Housing types: limited to single-family detached residences (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). Minimum lot for a detached or zero-lot-line home: 4,750 sq ft and 50 ft wide (ZR 23-11). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — Up to 6,750 sq ft of floor area on this 9,000 sq ft lot (FAR 0.75, ZR 23-21); on a lot of 4,000 sq ft or more no single home may exceed 5,400 sq ft (FAR 0.60). The city records 2,724 sq ft of gross floor area here, so about 4,026 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✗ Second home (two-family or more) — R1-2 is limited to single-family detached residences (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). An ancillary dwelling unit"
+  }
+ ],
+ "other": [
+  {
+   "county": "48453",
+   "area": "Travis TX, 809 Park Blvd (Austin: code on Municode, withheld)",
+   "lat": 30.301426,
+   "lng": -97.722411,
+   "shows_not_on_file": true,
+   "unknown_use": true,
+   "excerpt": "Selling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Local zoning standards — Not on file: No local zoning standards are on file here. Austin: Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.\n• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+  },
+  {
+   "county": "01073",
+   "area": "Jefferson AL (no standards read)",
+   "lat": 33.4877,
+   "lng": -86.7697,
+   "shows_not_on_file": true,
+   "unknown_use": true,
+   "excerpt": "Selling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.\n• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+  }
+ ],
+ "quotes": [
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122",
+   "what": "R1-1 housing types",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11",
+   "what": "R1-1 min lot",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21",
+   "what": "R1-1 FAR",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421",
+   "what": "R1-1 height",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11",
+   "what": "R1-2 min lot",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11",
+   "what": "R2 min lot",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21",
+   "what": "R2X FAR",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122",
+   "what": "R3-1 housing types",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122",
+   "what": "R3A housing types",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11",
+   "what": "R3A min lot",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122",
+   "what": "R3X housing types",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21",
+   "what": "R4 FAR",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122",
+   "what": "R4-1 housing types",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122",
+   "what": "R4B housing types",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-422",
+   "what": "R4B height",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21",
+   "what": "R5 FAR",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-422",
+   "what": "R5 height",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-422",
+   "what": "R5B height",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21",
+   "what": "R5D FAR",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-422",
+   "what": "R5D height",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-i/chapter-2/12-10",
+   "what": "ADU definition",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-i/chapter-2/12-10",
+   "what": "qualifying residential site",
+   "found": true
+  }
+ ],
+ "high_rows": [
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12",
+   "what": "R12 min lot",
+   "row": "Single- or two-family detached or zero lot line | R6 - R12 | 2,375 | 25",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12",
+   "what": "R12 min lot",
+   "row": "Other residences | R6 - R12 | 1,700 | 18",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+   "what": "R7B FAR",
+   "row": "R6A R6^1 R6-1 R7B | 3.00 | 3.90",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+   "what": "R6 FAR",
+   "row": "R6 | 2.20 | 3.90",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R6A height",
+   "row": "R6A R6^1 R6-1 | 40 | 65 | 75 | 65 | 95",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R6 height",
+   "row": "R6^2 | 30 | 45 | 55 | 65 | 85",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+   "what": "R6D FAR",
+   "row": "R6D R6-2 | 2.50 | 3.00",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R6D height",
+   "row": "R6D R6-2 | 30 | 45 | 65 | 55 | 75",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+   "what": "R6B FAR",
+   "row": "R6B | 2.00 | 2.40",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R6B height",
+   "row": "R6B | 30 | 45 | 55 | 45 | 65",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+   "what": "R7A FAR",
+   "row": "R7A R7-1^1 R7-2^1 | 4.00 | 5.01",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+   "what": "R7-2 FAR",
+   "row": "R7-1 R7-2 | 3.44 | 5.01",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R7A height",
+   "row": "R7A R7-1^1 R7-2^1 | 40 | 75 | 85 | 85 | 115",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R7-2 height",
+   "row": "R7-1^2 R7-2^2 | 40 | 65 | 75 | 85 | 105",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+   "what": "R7X FAR",
+   "row": "R7X R7-3 | 5.00 | 6.00",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R7X height",
+   "row": "R7X R7-3 | 60 | 95 | 125 | 105 | 145",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R7B height",
+   "row": "R7B | 40 | 65 | 75 | 65 | 95",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+   "what": "R7D FAR",
+   "row": "R7D | 4.66 | 5.60",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R7D height",
+   "row": "R7D | 60 | 85 | 105 | 95 | 125",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+   "what": "R8X FAR",
+   "row": "R8A R8X R8 | 6.02 | 7.20",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+   "what": "R8 FAR",
+   "row": "R8 | 7.20^1 | 8.64^2",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R8 height",
+   "row": "R8^2 | 60 | 85 | 115 | 105 | 145",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R8 height",
+   "row": "R8^1 | 60 | 95 | 135 | 105 | 145",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R8 height",
+   "row": "R8^3 | 60 | 95 | 135 | 125 | 175",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R8A height",
+   "row": "R8A | 60 | 95 | 125 | 105 | 145",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+   "what": "R8B FAR",
+   "row": "R8B | 4.00 | 4.80",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R8B height",
+   "row": "R8B | 55 | 65 | 75 | 85 | 95",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R8X height",
+   "row": "R8X | 60 | 95 | 155 | 105 | 175",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+   "what": "R9A FAR",
+   "row": "R9A R9 | 7.52 | 9.02",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R9A height",
+   "row": "R9A^1R9^1 | 60 | 105 | 145 | 135 | 185",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R9A height",
+   "row": "R9A^2R9^2 | 60 | 95 | 135 | 135 | 185",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+   "what": "R9X FAR",
+   "row": "R9D R9X R9-1 | 9.00 | 10.80",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R9D height",
+   "row": "R9D R9-1 | 60 | 125 | 175 | 155 | 215",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R9X height",
+   "row": "R9X^1 | 105 | 125 | 175 | 155 | 215",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R9X height",
+   "row": "R9X^2 | 60 | 125 | 165 | 155 | 215",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+   "what": "R10X FAR",
+   "row": "R10A R10X R10 | 10.00 | 12.00",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R10X height",
+   "row": "R10X^1 R10^1 | 60 | 155 | 215 | 155 | 235",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R10X height",
+   "row": "R10A^2 R10X^2 R10^2 | 60 | 125 | 185 | 155 | 235",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R10A height",
+   "row": "R10A^1 | 125 | 155 | 215 | 155 | 235",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+   "what": "R11A FAR",
+   "row": "R11 | 12.00 | 15.00",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R11A height",
+   "row": "R11A^2 R11 | 60 | 155 | 255 | 155 | 325",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R11A height",
+   "row": "R11A^1 | 125 | 155 | 255 | 155 | 325",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+   "what": "R12 FAR",
+   "row": "R12 | 15.00 | 18.00",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432",
+   "what": "R12 height",
+   "row": "R12 | 60 | 155 | 325 | 155 | 395",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121",
+   "what": "22-121: every residence type ● in R6-R12",
+   "found": true
+  }
+ ],
+ "nyc_high": [
+  {
+   "county": "36047",
+   "area": "Brooklyn (Park Slope / Prospect Heights)",
+   "lat": 40.676565,
+   "lng": -73.975112,
+   "pluto": {
+    "BBL": 3009480032,
+    "Address": "176 ST JOHNS PLACE",
+    "LandUse": "02",
+    "ZoneDist1": "R6B",
+    "LotArea": 1850,
+    "LotFront": 18.5,
+    "BldgArea": 3495,
+    "UnitsRes": 8
+   },
+   "missing": [],
+   "house_rows_on_apartment_building": false,
+   "null_height": false,
+   "ok": true,
+   "panel_excerpt": "176 ST JOHNS PLACE · AIN/APN 3009480032 · Multi-Family Walk-Up Buildings (PLUTO Data Dictionary, LandUse 02)\nHeight limit\t55 ft\n• Zoning district R6B (New York City Zoning Resolution) — Housing types: every type of residence is permitted in R6B (ZR 22-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 30–45 ft, building up to 55 ft; qualifying affordable or senior housing: base 30–45 ft, building up to 65 ft (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 2.00; qualifying affordable or senior housing: 2.40 (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — For standard residences, up to 3,700 sq ft of floor area on this 1,850 sq ft lot (FAR 2.00) (ZR 23-22); which applies isn't checked here. Qualifying affordable or senior housing can reach FAR 2.40 under its conditions (ZR 23-22). The city records 3,495 sq ft of gross floor area here. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n• Home upgrades — This record is Multi-Family Walk-Up Buildings (PLUTO Data Dictionary, LandUse 02): an apartment building. The checks here are written for a house on its own lot, so they aren't run."
+  },
+  {
+   "county": "36047",
+   "area": "Brooklyn (Park Slope / Prospect Heights)",
+   "lat": 40.675878,
+   "lng": -73.979742,
+   "pluto": {
+    "BBL": 3009560019,
+    "Address": "714 UNION STREET",
+    "LandUse": "01",
+    "ZoneDist1": "R6A",
+    "LotArea": 1583,
+    "LotFront": 16.67,
+    "BldgArea": 2198,
+    "UnitsRes": 2
+   },
+   "missing": [],
+   "house_rows_on_apartment_building": false,
+   "null_height": false,
+   "ok": true,
+   "panel_excerpt": "714 UNION STREET · AIN/APN 3009560019 · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t75 ft\n• Zoning district R6A (New York City Zoning Resolution) — Housing types: every type of residence is permitted in R6A (ZR 22-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 40–65 ft, building up to 75 ft; qualifying affordable or senior housing: base 40–65 ft, building up to 95 ft (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 3.00; qualifying affordable or senior housing: 3.90 (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — For standard residences, up to 4,749 sq ft of floor area on this 1,583 sq ft lot (FAR 3.00) (ZR 23-22); which applies isn't checked here. Qualifying affordable or senior housing can reach FAR 3.90 under its conditions (ZR 23-22). The city records 2,198 sq ft of gross floor area here. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✓ Second home (two-family or more) — R6A permits every type of residence (ZR 22-121), within the floor area above.\n✗ Split into two lots (by size only) — Two lots would each need at least 1,700 sq ft and 18 ft of width (ZR 23-12); this lot has 1,583 sq ft and 17 ft of frontage."
+  },
+  {
+   "county": "36047",
+   "area": "Brooklyn (Park Slope / Prospect Heights)",
+   "lat": 40.678578,
+   "lng": -73.974073,
+   "pluto": {
+    "BBL": 3009397501,
+    "Address": "112 PROSPECT PLACE",
+    "LandUse": "02",
+    "ZoneDist1": "R7A",
+    "LotArea": 2100,
+    "LotFront": 21,
+    "BldgArea": 5262,
+    "UnitsRes": 6
+   },
+   "missing": [],
+   "house_rows_on_apartment_building": false,
+   "null_height": false,
+   "ok": true,
+   "panel_excerpt": "112 PROSPECT PLACE · AIN/APN 3009397501 · Multi-Family Walk-Up Buildings (PLUTO Data Dictionary, LandUse 02)\nHeight limit\t85 ft\n• Zoning district R7A (New York City Zoning Resolution) — Housing types: every type of residence is permitted in R7A (ZR 22-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 40–75 ft, building up to 85 ft; qualifying affordable or senior housing: base 40–85 ft, building up to 115 ft (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 4.00; qualifying affordable or senior housing: 5.01 (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — For standard residences, up to 8,400 sq ft of floor area on this 2,100 sq ft lot (FAR 4.00) (ZR 23-22); which applies isn't checked here. Qualifying affordable or senior housing can reach FAR 5.01 under its conditions (ZR 23-22). The city records 5,262 sq ft of gross floor area here. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n• Home upgrades — This record is Multi-Family Walk-Up Buildings (PLUTO Data Dictionary, LandUse 02): an apartment building. The checks here are written for a house on its own lot, so they aren't run."
+  },
+  {
+   "county": "36061",
+   "area": "Manhattan (Upper West Side)",
+   "lat": 40.786874,
+   "lng": -73.97391,
+   "pluto": {
+    "BBL": 1012160050,
+    "Address": "142 WEST 86 STREET",
+    "LandUse": "03",
+    "ZoneDist1": "R10A",
+    "LotArea": 2315,
+    "LotFront": 21.67,
+    "BldgArea": 6825,
+    "UnitsRes": 10
+   },
+   "missing": [],
+   "house_rows_on_apartment_building": false,
+   "null_height": false,
+   "ok": true,
+   "panel_excerpt": "142 WEST 86 STREET · AIN/APN 1012160050 · Multi-Family Elevator Buildings (PLUTO Data Dictionary, LandUse 03)\nHeight limit\t185–215 ft, depending on the street (standard residences)\n• Zoning district R10A (New York City Zoning Resolution) — Housing types: every type of residence is permitted in R10A (ZR 22-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 125–155 ft, building up to 215 ft for zoning lots or portions thereof within 100 feet of a wide street; base 60–125 ft, building up to 185 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line; qualifying affordable or senior housing: base 125–155 ft, building up to 235 ft for zoning lots or portions thereof within 100 feet of a wide street; base 60–155 ft, building up to 235 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 10.00; qualifying affordable or senior housing: 12.00 (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — For standard residences, up to 23,150 sq ft of floor area on this 2,315 sq ft lot (FAR 10.00) (ZR 23-22); which applies isn't checked here. Qualifying affordable or senior housing can reach FAR 12.00 under its conditions (ZR 23-22"
+  },
+  {
+   "county": "36061",
+   "area": "Manhattan (Upper West Side)",
+   "lat": 40.780254,
+   "lng": -73.978797,
+   "pluto": {
+    "BBL": 1011470015,
+    "Address": "137 WEST 75 STREET",
+    "LandUse": "02",
+    "ZoneDist1": "R8B",
+    "LotArea": 2043,
+    "LotFront": 20,
+    "BldgArea": 5972,
+    "UnitsRes": 10
+   },
+   "missing": [],
+   "house_rows_on_apartment_building": false,
+   "null_height": false,
+   "ok": true,
+   "panel_excerpt": "137 WEST 75 STREET · AIN/APN 1011470015 · Multi-Family Walk-Up Buildings (PLUTO Data Dictionary, LandUse 02)\nHeight limit\t75 ft\n• Zoning district R8B (New York City Zoning Resolution) — Housing types: every type of residence is permitted in R8B (ZR 22-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 55–65 ft, building up to 75 ft; qualifying affordable or senior housing: base 55–85 ft, building up to 95 ft (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 4.00; qualifying affordable or senior housing: 4.80 (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — For standard residences, up to 8,172 sq ft of floor area on this 2,043 sq ft lot (FAR 4.00) (ZR 23-22); which applies isn't checked here. Qualifying affordable or senior housing can reach FAR 4.80 under its conditions (ZR 23-22). The city records 5,972 sq ft of gross floor area here. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n• Home upgrades — This record is Multi-Family Walk-Up Buildings (PLUTO Data Dictionary, LandUse 02): an apartment building. The checks here are written for a house on its own lot, so they aren't run."
+  },
+  {
+   "county": "36061",
+   "area": "Manhattan (Upper West Side)",
+   "lat": 40.79301,
+   "lng": -73.969309,
+   "pluto": {
+    "BBL": 1012260016,
+    "Address": "141 WEST 95 STREET",
+    "LandUse": "01",
+    "ZoneDist1": "R7-2",
+    "LotArea": 2050,
+    "LotFront": 20.5,
+    "BldgArea": 5600,
+    "UnitsRes": 2
+   },
+   "missing": [],
+   "house_rows_on_apartment_building": false,
+   "null_height": false,
+   "ok": true,
+   "panel_excerpt": "141 WEST 95 STREET · AIN/APN 1012260016 · One & Two Family Buildings (PLUTO Data Dictionary, LandUse 01)\nHeight limit\t75–85 ft, depending on the street (standard residences)\n• Zoning district R7-2 (New York City Zoning Resolution) — Housing types: every type of residence is permitted in R7-2 (ZR 22-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 40–75 ft, building up to 85 ft for zoning lots or portions thereof within 100 feet of a wide street; base 40–65 ft, building up to 75 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line; qualifying affordable or senior housing: base 40–85 ft, building up to 115 ft for zoning lots or portions thereof within 100 feet of a wide street; base 40–85 ft, building up to 105 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 4.00 for zoning lots, or portions thereof, located within 100 feet of a wide street; 3.44 for other lots; qualifying affordable or senior housing: 5.01 for zoning lots, or portions thereof, located within 100 feet of a wide street; 5.01 for other lots (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — For standard residences, up to 7,052 sq ft of f"
+  },
+  {
+   "county": "36081",
+   "area": "Queens (Jackson Heights / Elmhurst)",
+   "lat": 40.748847,
+   "lng": -73.882749,
+   "pluto": {
+    "BBL": 4014710012,
+    "Address": "37-16 84 STREET",
+    "LandUse": "02",
+    "ZoneDist1": "R7-1",
+    "LotArea": 100000,
+    "LotFront": 500,
+    "BldgArea": 180804,
+    "UnitsRes": 204
+   },
+   "missing": [],
+   "house_rows_on_apartment_building": false,
+   "null_height": false,
+   "ok": true,
+   "panel_excerpt": "37-16 84 STREET · AIN/APN 4014710012 · Multi-Family Walk-Up Buildings (PLUTO Data Dictionary, LandUse 02)\nHeight limit\t75–85 ft, depending on the street (standard residences)\n• Zoning district R7-1 (New York City Zoning Resolution) — Housing types: every type of residence is permitted in R7-1 (ZR 22-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 40–75 ft, building up to 85 ft for zoning lots or portions thereof within 100 feet of a wide street; base 40–65 ft, building up to 75 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line; qualifying affordable or senior housing: base 40–85 ft, building up to 115 ft for zoning lots or portions thereof within 100 feet of a wide street; base 40–85 ft, building up to 105 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 4.00 for zoning lots, or portions thereof, located within 100 feet of a wide street; 3.44 for other lots; qualifying affordable or senior housing: 5.01 for zoning lots, or portions thereof, located within 100 feet of a wide street; 5.01 for other lots (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — For standard residences, up to 344,000 sq ft o"
+  },
+  {
+   "county": "36081",
+   "area": "Queens (Jackson Heights / Elmhurst)",
+   "lat": 40.750393,
+   "lng": -73.895174,
+   "pluto": {
+    "BBL": 4012710071,
+    "Address": "35-15 LEVERICH STREET",
+    "LandUse": "03",
+    "ZoneDist1": "R7A",
+    "LotArea": 19000,
+    "LotFront": 140.42,
+    "BldgArea": 83272,
+    "UnitsRes": 78
+   },
+   "missing": [],
+   "house_rows_on_apartment_building": false,
+   "null_height": false,
+   "ok": true,
+   "panel_excerpt": "35-15 LEVERICH STREET · AIN/APN 4012710071 · Multi-Family Elevator Buildings (PLUTO Data Dictionary, LandUse 03)\nHeight limit\t85 ft\n• Zoning district R7A (New York City Zoning Resolution) — Housing types: every type of residence is permitted in R7A (ZR 22-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 40–75 ft, building up to 85 ft; qualifying affordable or senior housing: base 40–85 ft, building up to 115 ft (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 4.00; qualifying affordable or senior housing: 5.01 (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✗ Floor area allowed by zoning — For standard residences, up to 76,000 sq ft of floor area on this 19,000 sq ft lot (FAR 4.00) (ZR 23-22); which applies isn't checked here. Qualifying affordable or senior housing can reach FAR 5.01 under its conditions (ZR 23-22). The city records 83,272 sq ft of gross floor area here. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n• Home upgrades — This record is Multi-Family Elevator Buildings (PLUTO Data Dictionary, LandUse 03): an apartment building. The checks here are written for a house on its own lot, so they aren't run."
+  },
+  {
+   "county": "36081",
+   "area": "Queens (Jackson Heights / Elmhurst)",
+   "lat": 40.748172,
+   "lng": -73.894183,
+   "pluto": {
+    "BBL": 4012820193,
+    "Address": "37-18 72 STREET",
+    "LandUse": "02",
+    "ZoneDist1": "R6",
+    "LotArea": 4000,
+    "LotFront": 40,
+    "BldgArea": 10208,
+    "UnitsRes": 16
+   },
+   "missing": [],
+   "house_rows_on_apartment_building": false,
+   "null_height": false,
+   "ok": true,
+   "panel_excerpt": "37-18 72 STREET · AIN/APN 4012820193 · Multi-Family Walk-Up Buildings (PLUTO Data Dictionary, LandUse 02)\nHeight limit\t55–75 ft, depending on the street (standard residences)\n• Zoning district R6 (New York City Zoning Resolution) — Housing types: every type of residence is permitted in R6 (ZR 22-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 40–65 ft, building up to 75 ft for zoning lots or portions thereof within 100 feet of a wide street; base 30–45 ft, building up to 55 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line; qualifying affordable or senior housing: base 40–65 ft, building up to 95 ft for zoning lots or portions thereof within 100 feet of a wide street; base 30–65 ft, building up to 85 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 3.00 for zoning lots, or portions thereof, located within 100 feet of a wide street; 2.20 for other lots; qualifying affordable or senior housing: 3.90 for zoning lots, or portions thereof, located within 100 feet of a wide street; 3.90 for other lots (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n? Floor area allowed by zoning — For standard residences, up to 8,800 sq ft of floor "
+  },
+  {
+   "county": "36005",
+   "area": "Bronx (Grand Concourse)",
+   "lat": 40.835111,
+   "lng": -73.916087,
+   "pluto": {
+    "BBL": 2024570023,
+    "Address": "1231 SHERIDAN AVENUE",
+    "LandUse": "02",
+    "ZoneDist1": "R8",
+    "LotArea": 10284,
+    "LotFront": 102.84,
+    "BldgArea": 40050,
+    "UnitsRes": 54
+   },
+   "missing": [],
+   "house_rows_on_apartment_building": false,
+   "null_height": false,
+   "ok": true,
+   "panel_excerpt": "1231 SHERIDAN AVENUE · AIN/APN 2024570023 · Multi-Family Walk-Up Buildings (PLUTO Data Dictionary, LandUse 02)\nHeight limit\t115–135 ft, depending on the street (standard residences)\n• Zoning district R8 (New York City Zoning Resolution) — Housing types: every type of residence is permitted in R8 (ZR 22-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 60–85 ft, building up to 115 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line; base 60–95 ft, building up to 135 ft for zoning lots or portions thereof within 100 feet of a wide street; qualifying affordable or senior housing: base 60–105 ft, building up to 145 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line; base 60–105 ft, building up to 145 ft for zoning lots or portions thereof within 100 feet of a wide street; base 60–125 ft, building up to 175 ft outside of Mandatory Inclusionary Housing areas, for zoning lots, or portions thereof, located within 100 feet of a wide street, containing UAP developments or qualifying senior housing (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 6.02 for other lots; 7.20 for zoning lots, or portions thereof, located within 100 feet of a wide street; qualifying affordable or senior housing: 7.20 for other lots; 8.64 outside of Mandatory Inclusionary Housing areas, for zoning lots, or portions thereof, located within 100 feet of a wide street, containing UAP developments or qualifying seni"
+  },
+  {
+   "county": "36005",
+   "area": "Bronx (Grand Concourse)",
+   "lat": 40.825876,
+   "lng": -73.916715,
+   "pluto": {
+    "BBL": 2024210024,
+    "Address": "304 EAST 162 STREET",
+    "LandUse": "02",
+    "ZoneDist1": "R8A",
+    "LotArea": 4833,
+    "LotFront": 41.66,
+    "BldgArea": 16570,
+    "UnitsRes": 21
+   },
+   "missing": [],
+   "house_rows_on_apartment_building": false,
+   "null_height": false,
+   "ok": true,
+   "panel_excerpt": "304 EAST 162 STREET · AIN/APN 2024210024 · Multi-Family Walk-Up Buildings (PLUTO Data Dictionary, LandUse 02)\nHeight limit\t125 ft\n• Zoning district R8A (New York City Zoning Resolution) — Housing types: every type of residence is permitted in R8A (ZR 22-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 60–95 ft, building up to 125 ft; qualifying affordable or senior housing: base 60–105 ft, building up to 145 ft (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 6.02; qualifying affordable or senior housing: 7.20 (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — For standard residences, up to 29,095 sq ft of floor area on this 4,833 sq ft lot (FAR 6.02) (ZR 23-22); which applies isn't checked here. Qualifying affordable or senior housing can reach FAR 7.20 under its conditions (ZR 23-22). The city records 16,570 sq ft of gross floor area here. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n• Home upgrades — This record is Multi-Family Walk-Up Buildings (PLUTO Data Dictionary, LandUse 02): an apartment building. The checks here are written for a house on its own lot, so they aren't run."
+  },
+  {
+   "county": "36005",
+   "area": "Bronx (Grand Concourse)",
+   "lat": 40.82892,
+   "lng": -73.919349,
+   "pluto": {
+    "BBL": 2024550014,
+    "Address": "974 SHERIDAN AVENUE",
+    "LandUse": "03",
+    "ZoneDist1": "R7-1",
+    "LotArea": 10813,
+    "LotFront": 80,
+    "BldgArea": 47538,
+    "UnitsRes": 49
+   },
+   "missing": [],
+   "house_rows_on_apartment_building": false,
+   "null_height": false,
+   "ok": true,
+   "panel_excerpt": "974 SHERIDAN AVENUE · AIN/APN 2024550014 · Multi-Family Elevator Buildings (PLUTO Data Dictionary, LandUse 03)\nHeight limit\t75–85 ft, depending on the street (standard residences)\n• Zoning district R7-1 (New York City Zoning Resolution) — Housing types: every type of residence is permitted in R7-1 (ZR 22-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 40–75 ft, building up to 85 ft for zoning lots or portions thereof within 100 feet of a wide street; base 40–65 ft, building up to 75 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line; qualifying affordable or senior housing: base 40–85 ft, building up to 115 ft for zoning lots or portions thereof within 100 feet of a wide street; base 40–85 ft, building up to 105 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 4.00 for zoning lots, or portions thereof, located within 100 feet of a wide street; 3.44 for other lots; qualifying affordable or senior housing: 5.01 for zoning lots, or portions thereof, located within 100 feet of a wide street; 5.01 for other lots (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✗ Floor area allowed by zoning — For standard residences, up to 37,197 sq "
+  }
+ ],
+ "commercial_quotes": [
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C6-1 residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "34-112 sentence",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-01",
+   "what": "34-01",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-221",
+   "what": "34-221",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-5/35-632",
+   "what": "C6-9 35-632",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C4-5A residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C6-2 residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C6-2A residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C6-3 residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C6-3A residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C6-3X residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C6-9 residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C6-4A residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C3 residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-5/35-62",
+   "what": "35-62",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-03",
+   "what": "C3A 34-03",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-2/32-122",
+   "what": "C3A housing types",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C4-1 residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-2/32-123",
+   "what": "C4-1 32-123",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C6-1A residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C4-3A residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C4-5D residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C4-5X residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C6-11 residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C6-12 residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C6-3D residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112",
+   "what": "C6-4X residential equivalent row",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-4/34-111",
+   "what": "34-111",
+   "found": true
+  },
+  {
+   "url": "https://zr.planning.nyc.gov/article-iii/chapter-2/32-121",
+   "what": "32-121 residence types by commercial district",
+   "found": true
+  }
+ ],
+ "nyc_commercial": [
+  {
+   "county": "36047",
+   "area": "Brooklyn (Flatbush / Fulton St)",
+   "lat": 40.68082,
+   "lng": -73.950629,
+   "pluto": {
+    "BBL": 3018480107,
+    "Address": "12 MACON STREET",
+    "LandUse": "02",
+    "ZoneDist1": "C4-5D",
+    "Overlay1": null,
+    "Overlay2": null,
+    "SPDist1": null,
+    "SPDist2": null,
+    "LotArea": 1095,
+    "LotFront": 27.78,
+    "BldgArea": 2392,
+    "UnitsRes": 3
+   },
+   "missing": [],
+   "null_value": false,
+   "ok": true,
+   "panel_excerpt": "Height limit\t105 ft\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Zoning district C4-5D (New York City Zoning Resolution) — Housing types: every type of residence is permitted in C4-5D (ZR 32-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 60–85 ft, building up to 105 ft; qualifying affordable or senior housing: base 60–95 ft, building up to 125 ft (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 4.66; qualifying affordable or senior housing: 5.60 (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial district C4-5D — C4-5D takes the residential rules of R7D: \"In the districts indicated, the applicable bulk regulations are the bulk regulations for the residential equivalent of the Commercial District as set forth in the following table: C4-5D | R7D\" (ZR 34-112). They apply to a zoning lot with only residential buildings: \"The bulk regulations of this Chapter apply to any zoning lot containing only residential buildings in any Commercial District in which such buildings are permitted. Where a residential building and one or more buildings containing non-residential uses are on a single zoning lot, the bulk regulations of Article III, Chapter 5, shall apply.\" (ZR 34-01); a mixed residential and commercial building isn't checked here. Floor area bonuses for a public plaza or arcade (ZR 34-221) aren't counted.\n✓ Floor area allowed by zoning — For standard residences, up to 5,103 sq ft of floor area on this 1,095 sq ft lot (FAR 4.66) (ZR 23-22); which applies isn't checked here. Qualifying affordable or senior housing can reach FAR 5.60 under its conditions (ZR 23-22). The city records 2,392 sq ft of gross floor area here. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n• ADU: Cannot be screened (zoning not on file or historic district)."
+  },
+  {
+   "county": "36047",
+   "area": "Brooklyn (Flatbush / Fulton St)",
+   "lat": 40.678751,
+   "lng": -73.950584,
+   "pluto": {
+    "BBL": 3018660037,
+    "Address": "1213 ATLANTIC AVENUE",
+    "LandUse": "01",
+    "ZoneDist1": "C6-3A",
+    "Overlay1": null,
+    "Overlay2": null,
+    "SPDist1": "AAM",
+    "SPDist2": null,
+    "LotArea": 1667,
+    "LotFront": 33.33,
+    "BldgArea": 2334,
+    "UnitsRes": 2
+   },
+   "missing": [],
+   "null_value": false,
+   "ok": true,
+   "panel_excerpt": "Height limit\t135–145 ft, depending on the street (standard residences)\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Zoning district C6-3A (New York City Zoning Resolution) — Housing types: every type of residence is permitted in C6-3A (ZR 32-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 60–105 ft, building up to 145 ft for zoning lots or portions thereof within 100 feet of a wide street; base 60–95 ft, building up to 135 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line; qualifying affordable or senior housing: base 60–135 ft, building up to 185 ft for zoning lots or portions thereof within 100 feet of a wide street; base 60–135 ft, building up to 185 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 7.52; qualifying affordable or senior housing: 9.02 (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial district C6-3A — C6-3A takes the residential rules of R9A: \"In the districts indicated, the applicable bulk regulations are the bulk regulations for the residential equivalent of the Commercial District as set forth in the following table: C1-8A C2-7A C6-3A | R9A\" (ZR 34-112). They apply to a zoning lot with only residential buildings: \"The bulk regulations of this Chapter apply to any zoning lot containing only residential buildings in any Commercial District in which such buildings are permitted. Where a residential building and one or more buildings containing non-residential uses are on a single zoning lot, the bulk regulations of Article III, Chapter 5, shall apply.\" (ZR 34-01); a mixed reside"
+  },
+  {
+   "county": "36047",
+   "area": "Brooklyn (Flatbush / Fulton St)",
+   "lat": 40.679731,
+   "lng": -73.954072,
+   "pluto": {
+    "BBL": 3020220012,
+    "Address": "13 BEDFORD PLACE",
+    "LandUse": "01",
+    "ZoneDist1": "C4-3A",
+    "Overlay1": null,
+    "Overlay2": null,
+    "SPDist1": "AAM",
+    "SPDist2": null,
+    "LotArea": 1682,
+    "LotFront": 29,
+    "BldgArea": 1846,
+    "UnitsRes": 2
+   },
+   "missing": [],
+   "null_value": false,
+   "ok": true,
+   "panel_excerpt": "Height limit\t75 ft\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Zoning district C4-3A (New York City Zoning Resolution) — Housing types: every type of residence is permitted in C4-3A (ZR 32-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 40–65 ft, building up to 75 ft; qualifying affordable or senior housing: base 40–65 ft, building up to 95 ft (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 3.00; qualifying affordable or senior housing: 3.90 (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial district C4-3A — C4-3A takes the residential rules of R6A: \"In the districts indicated, the applicable bulk regulations are the bulk regulations for the residential equivalent of the Commercial District as set forth in the following table: C4-2A C4-3A | R6A\" (ZR 34-112). They apply to a zoning lot with only residential buildings: \"The bulk regulations of this Chapter apply to any zoning lot containing only residential buildings in any Commercial District in which such buildings are permitted. Where a residential building and one or more buildings containing non-residential uses are on a single zoning lot, the bulk regulations of Article III, Chapter 5, shall apply.\" (ZR 34-01); a mixed residential and commercial building isn't checked here. Floor area bonuses for a public plaza or arcade (ZR 34-221) aren't counted.\n• Special purpose district — MapPLUTO records special purpose district AAM on this lot. Special purpose district rules supplement and modify the underlying zoning (PLUTO data dictionary); they aren't checked here, so the standards shown may not be the ones that apply.\n✓ Floor area allowed by zoning — For standard residences, up to 5,046 sq ft of floor area on this 1,682 sq ft lot (FAR 3.00) (ZR 23-22); which applies isn't checked here. Qualifying affordable or senior housing can reach FAR 3.90 under its conditions (ZR 23-22). The city records 1,846 sq"
+  },
+  {
+   "county": "36081",
+   "area": "Queens (Jamaica / Flushing)",
+   "lat": 40.712188,
+   "lng": -73.827726,
+   "pluto": {
+    "BBL": 4033590023,
+    "Address": "124-30 QUEENS BOULEVARD",
+    "LandUse": "03",
+    "ZoneDist1": "C4-4",
+    "Overlay1": null,
+    "Overlay2": null,
+    "SPDist1": null,
+    "SPDist2": null,
+    "LotArea": 43200,
+    "LotFront": 120.42,
+    "BldgArea": 150507,
+    "UnitsRes": 129
+   },
+   "missing": [],
+   "null_value": false,
+   "ok": true,
+   "panel_excerpt": "Height limit\t75–85 ft, depending on the street (standard residences)\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Zoning district C4-4 (New York City Zoning Resolution) — Housing types: every type of residence is permitted in C4-4 (ZR 32-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 40–75 ft, building up to 85 ft for zoning lots or portions thereof within 100 feet of a wide street; base 40–65 ft, building up to 75 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line; qualifying affordable or senior housing: base 40–85 ft, building up to 115 ft for zoning lots or portions thereof within 100 feet of a wide street; base 40–85 ft, building up to 105 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 4.00 for zoning lots, or portions thereof, located within 100 feet of a wide street; 3.44 for other lots; qualifying affordable or senior housing: 5.01 for zoning lots, or portions thereof, located within 100 feet of a wide street; 5.01 for other lots (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial district C4-4 — C4-4 takes the residential rules of R7-2: \"In the districts indicated, the applicable bulk regulations are the bulk regulations for the residential equivalent of the Commercial District as set forth in the following table: C1-6 C2-6 C4-4 C4-5 C6-1 | R7-2\" (ZR 34-112). They apply to a zoning lot with only residential buildings: \"The bulk regulations of this Chapter apply to any zoning lot containing only residential buildings in any Commercial District in which such buildings are permitted. Where"
+  },
+  {
+   "county": "36081",
+   "area": "Queens (Jamaica / Flushing)",
+   "lat": 40.759378,
+   "lng": -73.834279,
+   "pluto": {
+    "BBL": 4049720001,
+    "Address": "37-33 LAWRENCE STREET",
+    "LandUse": "02",
+    "ZoneDist1": "C4-2",
+    "Overlay1": null,
+    "Overlay2": null,
+    "SPDist1": null,
+    "SPDist2": null,
+    "LotArea": 16892,
+    "LotFront": 116,
+    "BldgArea": 43000,
+    "UnitsRes": 60
+   },
+   "missing": [],
+   "null_value": false,
+   "ok": true,
+   "panel_excerpt": "Height limit\t55–75 ft, depending on the street (standard residences)\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Zoning district C4-2 (New York City Zoning Resolution) — Housing types: every type of residence is permitted in C4-2 (ZR 32-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 40–65 ft, building up to 75 ft for zoning lots or portions thereof within 100 feet of a wide street; base 30–45 ft, building up to 55 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line; qualifying affordable or senior housing: base 40–65 ft, building up to 95 ft for zoning lots or portions thereof within 100 feet of a wide street; base 30–65 ft, building up to 85 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 3.00 for zoning lots, or portions thereof, located within 100 feet of a wide street; 2.20 for other lots; qualifying affordable or senior housing: 3.90 for zoning lots, or portions thereof, located within 100 feet of a wide street; 3.90 for other lots (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial district C4-2 — C4-2 takes the residential rules of R6: \"In the districts indicated, the applicable bulk regulations are the bulk regulations for the residential equivalent of the Commercial District as set forth in the following table: C4-2 C4-3 C6-1A | R6\" (ZR 34-112). They apply to a zoning lot with only residential buildings: \"The bulk regulations of this Chapter apply to any zoning lot containing only residential buildings in any Commercial District in which such buildings are permitted. Where a residential "
+  },
+  {
+   "county": "36081",
+   "area": "Queens (Jamaica / Flushing)",
+   "lat": 40.762606,
+   "lng": -73.828419,
+   "pluto": {
+    "BBL": 4049777501,
+    "Address": "136-75 37 AVENUE",
+    "LandUse": "03",
+    "ZoneDist1": "C4-3",
+    "Overlay1": null,
+    "Overlay2": null,
+    "SPDist1": null,
+    "SPDist2": null,
+    "LotArea": 36466,
+    "LotFront": 177,
+    "BldgArea": 69480,
+    "UnitsRes": 80
+   },
+   "missing": [],
+   "null_value": false,
+   "ok": true,
+   "panel_excerpt": "Height limit\t55–75 ft, depending on the street (standard residences)\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Zoning district C4-3 (New York City Zoning Resolution) — Housing types: every type of residence is permitted in C4-3 (ZR 32-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 40–65 ft, building up to 75 ft for zoning lots or portions thereof within 100 feet of a wide street; base 30–45 ft, building up to 55 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line; qualifying affordable or senior housing: base 40–65 ft, building up to 95 ft for zoning lots or portions thereof within 100 feet of a wide street; base 30–65 ft, building up to 85 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 3.00 for zoning lots, or portions thereof, located within 100 feet of a wide street; 2.20 for other lots; qualifying affordable or senior housing: 3.90 for zoning lots, or portions thereof, located within 100 feet of a wide street; 3.90 for other lots (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial district C4-3 — C4-3 takes the residential rules of R6: \"In the districts indicated, the applicable bulk regulations are the bulk regulations for the residential equivalent of the Commercial District as set forth in the following table: C4-2 C4-3 C6-1A | R6\" (ZR 34-112). They apply to a zoning lot with only residential buildings: \"The bulk regulations of this Chapter apply to any zoning lot containing only residential buildings in any Commercial District in which such buildings are permitted. Where a residential "
+  },
+  {
+   "county": "36005",
+   "area": "Bronx (Fordham / Grand Concourse)",
+   "lat": 40.850761,
+   "lng": -73.908031,
+   "pluto": {
+    "BBL": 2028280022,
+    "Address": "64 EAST TREMONT AVENUE",
+    "LandUse": "02",
+    "ZoneDist1": "C4-4D",
+    "Overlay1": null,
+    "Overlay2": null,
+    "SPDist1": "J",
+    "SPDist2": null,
+    "LotArea": 6348,
+    "LotFront": 50.08,
+    "BldgArea": 20375,
+    "UnitsRes": 26
+   },
+   "missing": [],
+   "null_value": false,
+   "ok": true,
+   "panel_excerpt": "Height limit\t125 ft\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Zoning district C4-4D (New York City Zoning Resolution) — Housing types: every type of residence is permitted in C4-4D (ZR 32-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 60–95 ft, building up to 125 ft; qualifying affordable or senior housing: base 60–105 ft, building up to 145 ft (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 6.02; qualifying affordable or senior housing: 7.20 (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial district C4-4D — C4-4D takes the residential rules of R8A: \"In the districts indicated, the applicable bulk regulations are the bulk regulations for the residential equivalent of the Commercial District as set forth in the following table: C1-7A C4-4D C6-2A | R8A\" (ZR 34-112). They apply to a zoning lot with only residential buildings: \"The bulk regulations of this Chapter apply to any zoning lot containing only residential buildings in any Commercial District in which such buildings are permitted. Where a residential building and one or more buildings containing non-residential uses are on a single zoning lot, the bulk regulations of Article III, Chapter 5, shall apply.\" (ZR 34-01); a mixed residential and commercial building isn't checked here. Floor area bonuses for a public plaza or arcade (ZR 34-221) aren't counted.\n• Special purpose district — MapPLUTO records special purpose district J on this lot. Special purpose district rules supplement and modify the underlying zoning (PLUTO data dictionary); they aren't checked here, so the standards shown may not be the ones that apply.\n✓ Floor area allowed by zoning — For standard residences, up to 38,215 sq ft of floor area on this 6,348 sq ft lot (FAR 6.02) (ZR 23-22); which applies isn't checked here. Qualifying affordable or senior housing can reach FAR 7.20 under its conditions (ZR 23-22). The city records"
+  },
+  {
+   "county": "36005",
+   "area": "Bronx (Fordham / Grand Concourse)",
+   "lat": 40.847359,
+   "lng": -73.895108,
+   "pluto": {
+    "BBL": 2030600121,
+    "Address": "1935 MONTEREY AVENUE",
+    "LandUse": "01",
+    "ZoneDist1": "C4-5X",
+    "Overlay1": null,
+    "Overlay2": null,
+    "SPDist1": null,
+    "SPDist2": null,
+    "LotArea": 1750,
+    "LotFront": 25,
+    "BldgArea": 2300,
+    "UnitsRes": 2
+   },
+   "missing": [],
+   "null_value": false,
+   "ok": true,
+   "panel_excerpt": "Height limit\t125 ft\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Zoning district C4-5X (New York City Zoning Resolution) — Housing types: every type of residence is permitted in C4-5X (ZR 32-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 60–95 ft, building up to 125 ft; qualifying affordable or senior housing: base 60–105 ft, building up to 145 ft (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 5.00; qualifying affordable or senior housing: 6.00 (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial district C4-5X — C4-5X takes the residential rules of R7X: \"In the districts indicated, the applicable bulk regulations are the bulk regulations for the residential equivalent of the Commercial District as set forth in the following table: C4-5X | R7X\" (ZR 34-112). They apply to a zoning lot with only residential buildings: \"The bulk regulations of this Chapter apply to any zoning lot containing only residential buildings in any Commercial District in which such buildings are permitted. Where a residential building and one or more buildings containing non-residential uses are on a single zoning lot, the bulk regulations of Article III, Chapter 5, shall apply.\" (ZR 34-01); a mixed residential and commercial building isn't checked here. Floor area bonuses for a public plaza or arcade (ZR 34-221) aren't counted.\n✓ Floor area allowed by zoning — For standard residences, up to 8,750 sq ft of floor area on this 1,750 sq ft lot (FAR 5.00) (ZR 23-22); which applies isn't checked here. Qualifying affordable or senior housing can reach FAR 6.00 under its conditions (ZR 23-22). The city records 2,300 sq ft of gross floor area here. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n✓ Second home (two-family or more) — C4-5X permits every type of residence (ZR 32-121), within the floor area above."
+  },
+  {
+   "county": "36005",
+   "area": "Bronx (Fordham / Grand Concourse)",
+   "lat": 40.844314,
+   "lng": -73.88787,
+   "pluto": {
+    "BBL": 2031060142,
+    "Address": "1971 MAPES AVENUE",
+    "LandUse": "02",
+    "ZoneDist1": "C4-4A",
+    "Overlay1": null,
+    "Overlay2": null,
+    "SPDist1": null,
+    "SPDist2": null,
+    "LotArea": 3112,
+    "LotFront": 28.55,
+    "BldgArea": 2400,
+    "UnitsRes": 3
+   },
+   "missing": [],
+   "null_value": false,
+   "ok": true,
+   "panel_excerpt": "Height limit\t85 ft\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Zoning district C4-4A (New York City Zoning Resolution) — Housing types: every type of residence is permitted in C4-4A (ZR 32-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 40–75 ft, building up to 85 ft; qualifying affordable or senior housing: base 40–85 ft, building up to 115 ft (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 4.00; qualifying affordable or senior housing: 5.01 (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial district C4-4A — C4-4A takes the residential rules of R7A: \"In the districts indicated, the applicable bulk regulations are the bulk regulations for the residential equivalent of the Commercial District as set forth in the following table: C1-6A C2-6A C4-4A C4-4L C4-5A | R7A\" (ZR 34-112). They apply to a zoning lot with only residential buildings: \"The bulk regulations of this Chapter apply to any zoning lot containing only residential buildings in any Commercial District in which such buildings are permitted. Where a residential building and one or more buildings containing non-residential uses are on a single zoning lot, the bulk regulations of Article III, Chapter 5, shall apply.\" (ZR 34-01); a mixed residential and commercial building isn't checked here. Floor area bonuses for a public plaza or arcade (ZR 34-221) aren't counted.\n✓ Floor area allowed by zoning — For standard residences, up to 12,448 sq ft of floor area on this 3,112 sq ft lot (FAR 4.00) (ZR 23-22); which applies isn't checked here. Qualifying affordable or senior housing can reach FAR 5.01 under its conditions (ZR 23-22). The city records 2,400 sq ft of gross floor area here. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n• ADU: Cannot be screened (zoning not on file or historic district)."
+  },
+  {
+   "county": "36085",
+   "area": "Staten Island (St. George / Port Richmond)",
+   "lat": 40.626917,
+   "lng": -74.133461,
+   "pluto": {
+    "BBL": 5010420190,
+    "Address": "34 HAMLIN PLACE",
+    "LandUse": "01",
+    "ZoneDist1": "C4-1",
+    "Overlay1": null,
+    "Overlay2": null,
+    "SPDist1": null,
+    "SPDist2": null,
+    "LotArea": 4000,
+    "LotFront": 40,
+    "BldgArea": 2659,
+    "UnitsRes": 2
+   },
+   "missing": [],
+   "null_value": false,
+   "ok": true,
+   "panel_excerpt": "Selling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Zoning district C4-1 (New York City Zoning Resolution) — Housing types: no limit on the type of residence (ZR 32-121). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11). Height: not shown. ZR 35-62 modifies the residence district's height rules in commercial districts with an R1-R5 equivalent for non-qualifying residential sites; how it applies to C4-1 isn't settled here, so no height is shown. \"However, for non-qualifying residential sites: (a) located within R3 and R4 Districts, the height and setback regulations for R4 Districts without a letter or number suffix shall apply; and (b) located within R5A or R5B Districts, the height and setback regulations for R5 Districts without a letter suffix shall apply.\" (ZR 35-62). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n✓ Floor area allowed by zoning — Up to 6,000 sq ft of floor area on this 4,000 sq ft lot (FAR 1.50, ZR 23-21). The city records 2,659 sq ft of gross floor area here, so about 3,341 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.\n• Commercial district C4-1 — C4-1 takes the residential rules of R5: \"In the districts indicated, the applicable bulk regulations are the bulk regulations for the residential equivalent of the Commercial District as set forth in the following table: C4-1 | R5\" (ZR 34-112). They apply to a zoning lot with only residential buildings: \"The bulk regulations of this Chapter apply to any zoning lot containing only residential buildings in any Commercial District in which such buildings are permitted. Where a residential building and one or more buildings containing non-residential uses are on a single zoning lot, the bulk regulations of Article III, Chapter 5, shall apply.\" (ZR 34-01); a mixed residential and commercial building isn't checked here. Floor area bonuses for a public plaza or arcade (ZR 34-221) aren't counted. ZR 32-123: \"In C4 Districts, all residential uses shall be permitted except that in lower density growth management areas within the Borough of Staten Island, no residences shall be allowed on the following zoning lots in C4-1 Districts where such zoning district occupies at least four acres within a blo"
+  },
+  {
+   "county": "36085",
+   "area": "Staten Island (St. George / Port Richmond)",
+   "lat": 40.635848,
+   "lng": -74.135707,
+   "pluto": {
+    "BBL": 5010820064,
+    "Address": "1580 CASTLETON AVENUE",
+    "LandUse": "01",
+    "ZoneDist1": "C4-2",
+    "Overlay1": null,
+    "Overlay2": null,
+    "SPDist1": null,
+    "SPDist2": null,
+    "LotArea": 2500,
+    "LotFront": 25,
+    "BldgArea": 1882,
+    "UnitsRes": 2
+   },
+   "missing": [],
+   "null_value": false,
+   "ok": true,
+   "panel_excerpt": "Height limit\t55–75 ft, depending on the street (standard residences)\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Zoning district C4-2 (New York City Zoning Resolution) — Housing types: every type of residence is permitted in C4-2 (ZR 32-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 40–65 ft, building up to 75 ft for zoning lots or portions thereof within 100 feet of a wide street; base 30–45 ft, building up to 55 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line; qualifying affordable or senior housing: base 40–65 ft, building up to 95 ft for zoning lots or portions thereof within 100 feet of a wide street; base 30–65 ft, building up to 85 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 3.00 for zoning lots, or portions thereof, located within 100 feet of a wide street; 2.20 for other lots; qualifying affordable or senior housing: 3.90 for zoning lots, or portions thereof, located within 100 feet of a wide street; 3.90 for other lots (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial district C4-2 — C4-2 takes the residential rules of R6: \"In the districts indicated, the applicable bulk regulations are the bulk regulations for the residential equivalent of the Commercial District as set forth in the following table: C4-2 C4-3 C6-1A | R6\" (ZR 34-112). They apply to a zoning lot with only residential buildings: \"The bulk regulations of this Chapter apply to any zoning lot containing only residential buildings in any Commercial District in which such buildings are permitted. Where a residential "
+  },
+  {
+   "county": "36061",
+   "area": "Manhattan (Upper West Side)",
+   "lat": 40.775576,
+   "lng": -73.983339,
+   "pluto": {
+    "BBL": 1011390001,
+    "Address": "145 WEST 67 STREET",
+    "LandUse": "03",
+    "ZoneDist1": "C4-7",
+    "Overlay1": null,
+    "Overlay2": null,
+    "SPDist1": "L",
+    "SPDist2": null,
+    "LotArea": 30125,
+    "LotFront": 150,
+    "BldgArea": 568001,
+    "UnitsRes": 450
+   },
+   "missing": [],
+   "null_value": false,
+   "ok": true,
+   "panel_excerpt": "Height limit\t185–215 ft, depending on the street (standard residences)\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Zoning district C4-7 (New York City Zoning Resolution) — Housing types: every type of residence is permitted in C4-7 (ZR 32-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 60–155 ft, building up to 215 ft for zoning lots or portions thereof within 100 feet of a wide street; base 60–125 ft, building up to 185 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line; qualifying affordable or senior housing: base 60–155 ft, building up to 235 ft for zoning lots or portions thereof within 100 feet of a wide street; base 60–155 ft, building up to 235 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 10.00; qualifying affordable or senior housing: 12.00 (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial district C4-7 — C4-7 takes the residential rules of R10: \"In the districts indicated, the applicable bulk regulations are the bulk regulations for the residential equivalent of the Commercial District as set forth in the following table: C1-9 C2-8 C4-6 C4-7 C5 C6-4 C6-5 C6-6 C6-7 C6-8 C6-9 | R10\" (ZR 34-112). They apply to a zoning lot with only residential buildings: \"The bulk regulations of this Chapter apply to any zoning lot containing only residential buildings in any Commercial District in which such buildings are permitted. Where a residential building and one or more buildings containing non-residential uses are on a single zoning lot, the bulk regulations of Article III, Chapter 5, shall "
+  },
+  {
+   "county": "36061",
+   "area": "Manhattan (Upper West Side)",
+   "lat": 40.779114,
+   "lng": -73.983546,
+   "pluto": {
+    "BBL": 1011630152,
+    "Address": "242 WEST 72 STREET",
+    "LandUse": "02",
+    "ZoneDist1": "C4-6A",
+    "Overlay1": null,
+    "Overlay2": null,
+    "SPDist1": null,
+    "SPDist2": null,
+    "LotArea": 2042,
+    "LotFront": 20,
+    "BldgArea": 7835,
+    "UnitsRes": 8
+   },
+   "missing": [],
+   "null_value": false,
+   "ok": true,
+   "panel_excerpt": "Height limit\t185–215 ft, depending on the street (standard residences)\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Zoning district C4-6A (New York City Zoning Resolution) — Housing types: every type of residence is permitted in C4-6A (ZR 32-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 125–155 ft, building up to 215 ft for zoning lots or portions thereof within 100 feet of a wide street; base 60–125 ft, building up to 185 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line; qualifying affordable or senior housing: base 125–155 ft, building up to 235 ft for zoning lots or portions thereof within 100 feet of a wide street; base 60–155 ft, building up to 235 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 10.00; qualifying affordable or senior housing: 12.00 (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial district C4-6A — C4-6A takes the residential rules of R10A: \"In the districts indicated, the applicable bulk regulations are the bulk regulations for the residential equivalent of the Commercial District as set forth in the following table: C1-9A C2-8A C4-6A C4-7A C5-1A C5-2A C6-4A | R10A\" (ZR 34-112). They apply to a zoning lot with only residential buildings: \"The bulk regulations of this Chapter apply to any zoning lot containing only residential buildings in any Commercial District in which such buildings are permitted. Where a residential building and one or more buildings containing non-residential uses are on a single zoning lot, the bulk regulations of Article III, Chapter 5, shall app"
+  },
+  {
+   "county": "36061",
+   "area": "Manhattan (Upper West Side)",
+   "lat": 40.776463,
+   "lng": -73.979988,
+   "pluto": {
+    "BBL": 1011420129,
+    "Address": "107 WEST 70 STREET",
+    "LandUse": "02",
+    "ZoneDist1": "C1-8A",
+    "Overlay1": null,
+    "Overlay2": null,
+    "SPDist1": null,
+    "SPDist2": null,
+    "LotArea": 2008,
+    "LotFront": 20,
+    "BldgArea": 7790,
+    "UnitsRes": 10
+   },
+   "missing": [],
+   "null_value": false,
+   "ok": true,
+   "panel_excerpt": "Height limit\t135–145 ft, depending on the street (standard residences)\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Zoning district C1-8A (New York City Zoning Resolution) — Housing types: every type of residence is permitted in C1-8A (ZR 32-121). Minimum lot: 2,375 sq ft and 25 ft wide for a detached or zero-lot-line one- or two-family home, 1,700 sq ft and 18 ft for other residences (ZR 23-12). Height, standard residences: base 60–105 ft, building up to 145 ft for zoning lots or portions thereof within 100 feet of a wide street; base 60–95 ft, building up to 135 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line; qualifying affordable or senior housing: base 60–135 ft, building up to 185 ft for zoning lots or portions thereof within 100 feet of a wide street; base 60–135 ft, building up to 185 ft for zoning lots or portions thereof on a narrow street beyond 100 feet of a wide street or, for zoning lots with only wide street frontage, portions of such zoning lot beyond 100 feet of the street line (ZR 23-432). Above the maximum base height a setback is required (ZR 23-433); towers, special areas and the alternative rules of ZR 23-70 aren't checked here. Floor area ratio, standard residences: 7.52; qualifying affordable or senior housing: 9.02 (ZR 23-22). Whether the lot is within 100 feet of a wide street, in a Mandatory Inclusionary Housing area or in a transit zone isn't checked here. Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial district C1-8A — C1-8A takes the residential rules of R9A: \"In the districts indicated, the applicable bulk regulations are the bulk regulations for the residential equivalent of the Commercial District as set forth in the following table: C1-8A C2-7A C6-3A | R9A\" (ZR 34-112). They apply to a zoning lot with only residential buildings: \"The bulk regulations of this Chapter apply to any zoning lot containing only residential buildings in any Commercial District in which such buildings are permitted. Where a residential building and one or more buildings containing non-residential uses are on a single zoning lot, the bulk regulations of Article III, Chapter 5, shall apply.\" (ZR 34-01); a mixed reside"
+  },
+  {
+   "county": "36061",
+   "area": "R11 / R12 equivalents (citywide)",
+   "lat": 40.803858,
+   "lng": -73.937289,
+   "pluto": {
+    "BBL": 1017730020,
+    "Address": "EAST 125 STREET",
+    "LandUse": "11",
+    "ZoneDist1": "C6-11",
+    "Overlay1": null,
+    "Overlay2": null,
+    "SPDist1": "125th",
+    "SPDist2": "TA",
+    "LotArea": 36228,
+    "LotFront": 220.1,
+    "BldgArea": 0,
+    "UnitsRes": 0
+   },
+   "missing": [],
+   "null_value": false,
+   "ok": false,
+   "skipped": "LandUse 11 (not residential), so the home checks don't run",
+   "panel_excerpt": "Height limit\t255 ft\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• ADU: Cannot be screened (zoning not on file or historic district)."
+  },
+  {
+   "county": "36047",
+   "area": "R11 / R12 equivalents (citywide)",
+   "lat": 40.689396,
+   "lng": -73.980713,
+   "pluto": {
+    "BBL": 3020930001,
+    "Address": "395 FLATBUSH AVENUE EXT",
+    "LandUse": "05",
+    "ZoneDist1": "C6-12",
+    "Overlay1": null,
+    "Overlay2": null,
+    "SPDist1": "DB",
+    "SPDist2": null,
+    "LotArea": 50618,
+    "LotFront": 125.92,
+    "BldgArea": 376071,
+    "UnitsRes": 0
+   },
+   "missing": [],
+   "null_value": false,
+   "ok": false,
+   "skipped": "LandUse 05 (not residential), so the home checks don't run",
+   "panel_excerpt": "Height limit\t325 ft\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• ADU: Cannot be screened (zoning not on file or historic district)."
+  }
+ ],
+ "nyc_overlay": [
+  {
+   "county": "36081",
+   "area": "Queens (Bayside / Fresh Meadows)",
+   "lat": 40.758079,
+   "lng": -73.779999,
+   "pluto": {
+    "BBL": 4062670032,
+    "Address": "43-21 203 STREET",
+    "LandUse": "01",
+    "ZoneDist1": "R3-2",
+    "Overlay1": "C2-2",
+    "Overlay2": null,
+    "SPDist1": null,
+    "SPDist2": null,
+    "LotArea": 2200,
+    "LotFront": 22,
+    "BldgArea": 2106,
+    "UnitsRes": 2
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "• Zoning district R3-2 (New York City Zoning Resolution) — Housing types: no limit on the type of residence (ZR 22-121, 22-122). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11); this lot (2,200 sq ft, 22 ft of frontage) is smaller, which may mean it predates the minimum (not checked here). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial overlay C2-2 — MapPLUTO records a C2-2 commercial overlay on this lot. MapPLUTO assigns a commercial overlay to a tax lot when it covers at least 10% of the lot's area or at least 50% of the overlay lies within the lot (PLUTO data dictionary, Overlay1), so part of the lot can lie outside it. On the part within the overlay: \"In the districts indicated, the bulk regulations for the Residence District within which such Commercial Districts are mapped apply, except that: on qualifying residential sites within the Greater Transit Zone, where such districts are mapped within R1 through R5 Districts, the bulk regulations for R5 Districts without a letter suffix shall apply; and on non-qualifying residential sites, where such districts are mapped within R1 or R2 Districts, the bulk regulations for R3-2 Districts shall apply.\" (ZR 34-111); and \"However, for non-qualifying residential sites: (a) located within R3 and R4 Districts, the height and setback regulations for R4 Districts without a letter or number suffix shall apply; and (b) located within R5A or R5B Districts, the height and setback regulations for R5 Districts without a letter suffix shall apply.\" (ZR 35-62). So within the overlay the R3-2 floor area and lot rules shown here stand, and on a lot that isn't a qualifying residential site the height rules are R4's. Residential use within a C1 or C2 district follows ZR 32-121, which permits every type of residence there."
+  },
+  {
+   "county": "36081",
+   "area": "Queens (Bayside / Fresh Meadows)",
+   "lat": 40.754885,
+   "lng": -73.783001,
+   "pluto": {
+    "BBL": 4055410053,
+    "Address": "196-64 45 DRIVE",
+    "LandUse": "01",
+    "ZoneDist1": "R3X",
+    "Overlay1": "C2-2",
+    "Overlay2": null,
+    "SPDist1": null,
+    "SPDist2": null,
+    "LotArea": 3800,
+    "LotFront": 40,
+    "BldgArea": 2400,
+    "UnitsRes": 2
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "• Zoning district R3X (New York City Zoning Resolution) — Housing types: limited to single- or two-family detached residences (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial overlay C2-2 — MapPLUTO records a C2-2 commercial overlay on this lot. MapPLUTO assigns a commercial overlay to a tax lot when it covers at least 10% of the lot's area or at least 50% of the overlay lies within the lot (PLUTO data dictionary, Overlay1), so part of the lot can lie outside it. On the part within the overlay: \"In the districts indicated, the bulk regulations for the Residence District within which such Commercial Districts are mapped apply, except that: on qualifying residential sites within the Greater Transit Zone, where such districts are mapped within R1 through R5 Districts, the bulk regulations for R5 Districts without a letter suffix shall apply; and on non-qualifying residential sites, where such districts are mapped within R1 or R2 Districts, the bulk regulations for R3-2 Districts shall apply.\" (ZR 34-111); and \"However, for non-qualifying residential sites: (a) located within R3 and R4 Districts, the height and setback regulations for R4 Districts without a letter or number suffix shall apply; and (b) located within R5A or R5B Districts, the height and setback regulations for R5 Districts without a letter suffix shall apply.\" (ZR 35-62). So within the overlay the R3X floor area and lot rules shown here stand, and on a lot that isn't a qualifying residential site the height rules are R4's. Residential use within a C1 or C2 dis"
+  },
+  {
+   "county": "36081",
+   "area": "Queens (Bayside / Fresh Meadows)",
+   "lat": 40.754003,
+   "lng": -73.794292,
+   "pluto": {
+    "BBL": 4055250013,
+    "Address": "45-55 AUBURNDALE LANE",
+    "LandUse": "01",
+    "ZoneDist1": "R3-2",
+    "Overlay1": "C1-3",
+    "Overlay2": null,
+    "SPDist1": null,
+    "SPDist2": null,
+    "LotArea": 3623,
+    "LotFront": 30,
+    "BldgArea": 1638,
+    "UnitsRes": 1
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "• Zoning district R3-2 (New York City Zoning Resolution) — Housing types: no limit on the type of residence (ZR 22-121, 22-122). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial overlay C1-3 — MapPLUTO records a C1-3 commercial overlay on this lot. MapPLUTO assigns a commercial overlay to a tax lot when it covers at least 10% of the lot's area or at least 50% of the overlay lies within the lot (PLUTO data dictionary, Overlay1), so part of the lot can lie outside it. On the part within the overlay: \"In the districts indicated, the bulk regulations for the Residence District within which such Commercial Districts are mapped apply, except that: on qualifying residential sites within the Greater Transit Zone, where such districts are mapped within R1 through R5 Districts, the bulk regulations for R5 Districts without a letter suffix shall apply; and on non-qualifying residential sites, where such districts are mapped within R1 or R2 Districts, the bulk regulations for R3-2 Districts shall apply.\" (ZR 34-111); and \"However, for non-qualifying residential sites: (a) located within R3 and R4 Districts, the height and setback regulations for R4 Districts without a letter or number suffix shall apply; and (b) located within R5A or R5B Districts, the height and setback regulations for R5 Districts without a letter suffix shall apply.\" (ZR 35-62). So within the overlay the R3-2 floor area and lot rules shown here stand, and on a lot that isn't a qualifying residential site the height rules are R4's. Residential use within a C1 or C2 district follows ZR 32-121, which permits every type of residence there."
+  },
+  {
+   "county": "36085",
+   "area": "Staten Island (New Dorp / Great Kills)",
+   "lat": 40.57975,
+   "lng": -74.109847,
+   "pluto": {
+    "BBL": 5035920055,
+    "Address": "88 LINCOLN AVENUE",
+    "LandUse": "01",
+    "ZoneDist1": "R3-2",
+    "Overlay1": "C1-1",
+    "Overlay2": null,
+    "SPDist1": null,
+    "SPDist2": null,
+    "LotArea": 1056,
+    "LotFront": 22,
+    "BldgArea": 1600,
+    "UnitsRes": 2
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "• Zoning district R3-2 (New York City Zoning Resolution) — Housing types: no limit on the type of residence (ZR 22-121, 22-122). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11); this lot (1,056 sq ft, 22 ft of frontage) is smaller, which may mean it predates the minimum (not checked here). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial overlay C1-1 — MapPLUTO records a C1-1 commercial overlay on this lot. MapPLUTO assigns a commercial overlay to a tax lot when it covers at least 10% of the lot's area or at least 50% of the overlay lies within the lot (PLUTO data dictionary, Overlay1), so part of the lot can lie outside it. On the part within the overlay: \"In the districts indicated, the bulk regulations for the Residence District within which such Commercial Districts are mapped apply, except that: on qualifying residential sites within the Greater Transit Zone, where such districts are mapped within R1 through R5 Districts, the bulk regulations for R5 Districts without a letter suffix shall apply; and on non-qualifying residential sites, where such districts are mapped within R1 or R2 Districts, the bulk regulations for R3-2 Districts shall apply.\" (ZR 34-111); and \"However, for non-qualifying residential sites: (a) located within R3 and R4 Districts, the height and setback regulations for R4 Districts without a letter or number suffix shall apply; and (b) located within R5A or R5B Districts, the height and setback regulations for R5 Districts without a letter suffix shall apply.\" (ZR 35-62). So within the overlay the R3-2 floor area and lot rules shown here stand, and on a lot that isn't a qualifying residential site the height rules are R4's. Residential use within a C1 or C2 district follows ZR 32-121, which permits every type of residence there."
+  },
+  {
+   "county": "36085",
+   "area": "Staten Island (New Dorp / Great Kills)",
+   "lat": 40.578111,
+   "lng": -74.103092,
+   "pluto": {
+    "BBL": 5035910049,
+    "Address": "260 MIDLAND AVENUE",
+    "LandUse": "01",
+    "ZoneDist1": "R3X",
+    "Overlay1": "C2-1",
+    "Overlay2": null,
+    "SPDist1": null,
+    "SPDist2": null,
+    "LotArea": 4750,
+    "LotFront": 50,
+    "BldgArea": 2664,
+    "UnitsRes": 2
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "• Zoning district R3X (New York City Zoning Resolution) — Housing types: limited to single- or two-family detached residences (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial overlay C2-1 — MapPLUTO records a C2-1 commercial overlay on this lot. MapPLUTO assigns a commercial overlay to a tax lot when it covers at least 10% of the lot's area or at least 50% of the overlay lies within the lot (PLUTO data dictionary, Overlay1), so part of the lot can lie outside it. On the part within the overlay: \"In the districts indicated, the bulk regulations for the Residence District within which such Commercial Districts are mapped apply, except that: on qualifying residential sites within the Greater Transit Zone, where such districts are mapped within R1 through R5 Districts, the bulk regulations for R5 Districts without a letter suffix shall apply; and on non-qualifying residential sites, where such districts are mapped within R1 or R2 Districts, the bulk regulations for R3-2 Districts shall apply.\" (ZR 34-111); and \"However, for non-qualifying residential sites: (a) located within R3 and R4 Districts, the height and setback regulations for R4 Districts without a letter or number suffix shall apply; and (b) located within R5A or R5B Districts, the height and setback regulations for R5 Districts without a letter suffix shall apply.\" (ZR 35-62). So within the overlay the R3X floor area and lot rules shown here stand, and on a lot that isn't a qualifying residential site the height rules are R4's. Residential use within a C1 or C2 dis"
+  },
+  {
+   "county": "36085",
+   "area": "Staten Island (New Dorp / Great Kills)",
+   "lat": 40.568943,
+   "lng": -74.149973,
+   "pluto": {
+    "BBL": 5044650018,
+    "Address": "17 CHESS LOOP",
+    "LandUse": "01",
+    "ZoneDist1": "R3-2",
+    "Overlay1": "C2-1",
+    "Overlay2": null,
+    "SPDist1": "SRD",
+    "SPDist2": null,
+    "LotArea": 1410,
+    "LotFront": 15,
+    "BldgArea": 1250,
+    "UnitsRes": 1
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "• Zoning district R3-2 (New York City Zoning Resolution) — Housing types: no limit on the type of residence (ZR 22-121, 22-122). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11); this lot (1,410 sq ft, 15 ft of frontage) is smaller, which may mean it predates the minimum (not checked here). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.\n• Commercial overlay C2-1 — MapPLUTO records a C2-1 commercial overlay on this lot. MapPLUTO assigns a commercial overlay to a tax lot when it covers at least 10% of the lot's area or at least 50% of the overlay lies within the lot (PLUTO data dictionary, Overlay1), so part of the lot can lie outside it. On the part within the overlay: \"In the districts indicated, the bulk regulations for the Residence District within which such Commercial Districts are mapped apply, except that: on qualifying residential sites within the Greater Transit Zone, where such districts are mapped within R1 through R5 Districts, the bulk regulations for R5 Districts without a letter suffix shall apply; and on non-qualifying residential sites, where such districts are mapped within R1 or R2 Districts, the bulk regulations for R3-2 Districts shall apply.\" (ZR 34-111); and \"However, for non-qualifying residential sites: (a) located within R3 and R4 Districts, the height and setback regulations for R4 Districts without a letter or number suffix shall apply; and (b) located within R5A or R5B Districts, the height and setback regulations for R5 Districts without a letter suffix shall apply.\" (ZR 35-62). So within the overlay the R3-2 floor area and lot rules shown here stand, and on a lot that isn't a qualifying residential site the height rules are R4's. Residential use within a C1 or C2 district follows ZR 32-121, which permits every type of residence there.\n• Special purpose district — MapPLUTO record"
+  }
+ ],
+ "dc_quotes": [
+  {
+   "section": "Subtitle D § 101",
+   "what": "R-1A purpose",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 201",
+   "what": "R-1A dwelling units",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 202",
+   "what": "R-1A min lot",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 203",
+   "what": "R-1A height",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 210",
+   "what": "R-1A lot occupancy",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 210",
+   "what": "R-1A lot occupancy",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 210",
+   "what": "R-1A lot occupancy",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 101",
+   "what": "R-1B purpose",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 202",
+   "what": "R-1B min lot",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 101",
+   "what": "R-2 purpose",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 202",
+   "what": "R-2 min lot",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 202",
+   "what": "R-2 min lot",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 203",
+   "what": "R-2 height",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 101",
+   "what": "R-3 purpose",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 202",
+   "what": "R-3 min lot",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 203",
+   "what": "R-3 height",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 210",
+   "what": "R-3 lot occupancy",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment by_right",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment owner",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment persons",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment share",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment entrance",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment access",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment license",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment min GFA R-1A",
+   "found": true
+  },
+  {
+   "section": "Subtitle U § 253",
+   "what": "accessory apartment min GFA R-2",
+   "found": true
+  },
+  {
+   "section": "Subtitle D § 100",
+   "what": "overlay rule",
+   "found": true
+  }
+ ],
+ "dc": [
+  {
+   "county": "11001",
+   "area": "Chevy Chase DC",
+   "lat": 38.962354,
+   "lng": -77.076405,
+   "zone": "R-2",
+   "parcel": {
+    "SSL": "1858    0053",
+    "PREMISEADD": "3825 LEGATION ST NW WASHINGTON DC 20015",
+    "USECODE": "013",
+    "LANDAREA": 6245,
+    "GBA": 1800
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "3825 LEGATION ST NW WASHINGTON DC 20015 · AIN/APN 1858 0053 · Residential-Semi-Detached-Single-Family (DC Office of Tax and Revenue USECODE Table, USECODE 013)\nHeight limit\t40 ft\n• Zoning district R-2 (DC Zoning Regulations of 2016 (11 DCMR)) — The R-2 zone is intended to provide for areas predominantly developed with semi-detached houses on moderately sized lots that also contain some detached houses. (11 DCMR Subtitle D § 101). One principal dwelling unit and one accessory apartment are allowed per lot of record (11 DCMR Subtitle D § 201). Minimum lot to create a new lot of record: semi-detached: 3,000 sq ft and 30 ft wide; all other structures: 4,000 sq ft and 40 ft wide (11 DCMR Subtitle D § 202, Table D § 202.1). Height: up to 40 ft and 3 stories, not counting a penthouse or rooftop structure (11 DCMR Subtitle D § 203). Other parts of the regulations and any Board of Zoning Adjustment relief can change these; they aren't checked here.\n• Lot coverage allowed by zoning — Up to 40% lot occupancy for all other structures (11 DCMR Subtitle D § 210, Table D § 210.1): about 2,498 sq ft of building footprint on this 6,245 sq ft lot. The building's footprint isn't known from outlines here, so what's left isn't computed.\n✗ Second home (two-family or more) — 11 DCMR Subtitle D § 201: \"In all R zones, one (1) principal dwelling unit and one (1) accessory apartment shall be permitted per lot of record, subject to Subtitle U, Use Permissions.\" A second principal home (a flat) isn't allowed in R-2; the accessory apartment (below) is the second home allowed.\n? Split into two lots (by area only) — At 6,245 sq ft the lot has at least twice the minimum area for semi-detached (11 DCMR Subtitle D § 202). Each new lot must also meet the minimum width (30 ft / 40 ft), which the parcel re"
+  },
+  {
+   "county": "11001",
+   "area": "Chevy Chase DC",
+   "lat": 38.967277,
+   "lng": -77.074426,
+   "zone": "R-1B",
+   "parcel": {
+    "SSL": "1864    0068",
+    "PREMISEADD": "5820 CHEVY CHASE PKWY NW WASHINGTON DC 20015",
+    "USECODE": "012",
+    "LANDAREA": 4777,
+    "GBA": 2010
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "5820 CHEVY CHASE PKWY NW WASHINGTON DC 20015 · AIN/APN 1864 0068 · Residential-Detached-Single-Family (DC Office of Tax and Revenue USECODE Table, USECODE 012)\nHeight limit\t40 ft\n• Zoning district R-1B (DC Zoning Regulations of 2016 (11 DCMR)) — The R-1B zone is intended to provide for areas predominantly developed with detached houses on moderately sized lots. (11 DCMR Subtitle D § 101). One principal dwelling unit and one accessory apartment are allowed per lot of record (11 DCMR Subtitle D § 201). Minimum lot to create a new lot of record: 5,000 sq ft and 50 ft wide (11 DCMR Subtitle D § 202, Table D § 202.1); this lot (4,777 sq ft) is smaller, and those minimums apply to creating a new lot of record (11 DCMR Subtitle D § 202.1). Height: up to 40 ft and 3 stories, not counting a penthouse or rooftop structure (11 DCMR Subtitle D § 203). Other parts of the regulations and any Board of Zoning Adjustment relief can change these; they aren't checked here.\n• Lot coverage allowed by zoning — Up to 40% lot occupancy for all other structures (11 DCMR Subtitle D § 210, Table D § 210.1): about 1,911 sq ft of building footprint on this 4,777 sq ft lot. The building's footprint isn't known from outlines here, so what's left isn't computed.\n✗ Second home (two-family or more) — 11 DCMR Subtitle D § 201: \"In all R zones, one (1) principal dwelling unit and one (1) accessory apartment shall be permitted per lot of record, subject to Subtitle U, Use Permissions.\" A second principal home (a flat) isn't allowed in R-1B; the accessory apartment (below) is the second home allowed.\n✗ Split into two lots (by area only) — Two lots would each need at least 5,000 sq ft (11 DCMR Subtitle D § 202); this lot has 4,777 sq ft.\n? Accessory apartment (ADU) — 11 DCMR Subtitle U § 253 allows one acces"
+  },
+  {
+   "county": "11001",
+   "area": "Spring Valley",
+   "lat": 38.938508,
+   "lng": -77.098999,
+   "zone": "R-1A",
+   "parcel": {
+    "SSL": "1475    0052",
+    "PREMISEADD": "3717 FORDHAM RD NW WASHINGTON DC 20016",
+    "USECODE": "012",
+    "LANDAREA": 15950,
+    "GBA": 2246
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "3717 FORDHAM RD NW WASHINGTON DC 20016 · AIN/APN 1475 0052 · Residential-Detached-Single-Family (DC Office of Tax and Revenue USECODE Table, USECODE 012)\nHeight limit\t40 ft\n• Zoning district R-1A (DC Zoning Regulations of 2016 (11 DCMR)) — The R-1A zone is intended to provide for areas predominantly developed with detached houses on large lots. (11 DCMR Subtitle D § 101). One principal dwelling unit and one accessory apartment are allowed per lot of record (11 DCMR Subtitle D § 201). Minimum lot to create a new lot of record: 7,500 sq ft and 75 ft wide (11 DCMR Subtitle D § 202, Table D § 202.1). Height: up to 40 ft and 3 stories, not counting a penthouse or rooftop structure (11 DCMR Subtitle D § 203). Other parts of the regulations and any Board of Zoning Adjustment relief can change these; they aren't checked here.\n• Lot coverage allowed by zoning — Up to 40% lot occupancy for all other structures (11 DCMR Subtitle D § 210, Table D § 210.1): about 6,380 sq ft of building footprint on this 15,950 sq ft lot. The building's footprint isn't known from outlines here, so what's left isn't computed.\n✗ Second home (two-family or more) — 11 DCMR Subtitle D § 201: \"In all R zones, one (1) principal dwelling unit and one (1) accessory apartment shall be permitted per lot of record, subject to Subtitle U, Use Permissions.\" A second principal home (a flat) isn't allowed in R-1A; the accessory apartment (below) is the second home allowed.\n? Split into two lots (by area only) — At 15,950 sq ft the lot has at least twice the minimum area for all structures (11 DCMR Subtitle D § 202). Each new lot must also meet the minimum width (75 ft), which the parcel record doesn't give, and the subdivision rules; neither is checked here.\n? Accessory apartment (ADU) — 11 DCMR Subtitle U § 253 al"
+  },
+  {
+   "county": "11001",
+   "area": "Burleith",
+   "lat": 38.915976,
+   "lng": -77.074511,
+   "zone": "R-3/GT",
+   "parcel": {
+    "SSL": "1310    0032",
+    "PREMISEADD": "1918 38TH ST NW WASHINGTON DC 20007",
+    "USECODE": "011",
+    "LANDAREA": 1637,
+    "GBA": 1548
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "1918 38TH ST NW WASHINGTON DC 20007 · AIN/APN 1310 0032 · Residential-Row-Single-Family (DC Office of Tax and Revenue USECODE Table, USECODE 011)\n• Local zoning standards — Not on file: This lot is in R-3/GT, a geographically modified version of R-3 (11 DCMR Subtitle D § 100): its own rules change the base zone's and aren't encoded here, so no standards are shown."
+  },
+  {
+   "county": "11001",
+   "area": "Chevy Chase DC, Connecticut Ave row houses",
+   "lat": 38.960823,
+   "lng": -77.073499,
+   "zone": "R-3",
+   "parcel": {
+    "SSL": "1872    0049",
+    "PREMISEADD": "5330 CONNECTICUT AVE NW WASHINGTON DC 20015",
+    "USECODE": "011",
+    "LANDAREA": 1453,
+    "GBA": 2349
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "5330 CONNECTICUT AVE NW WASHINGTON DC 20015 · AIN/APN 1872 0049 · Residential-Row-Single-Family (DC Office of Tax and Revenue USECODE Table, USECODE 011)\nHeight limit\t40 ft\n• Zoning district R-3 (DC Zoning Regulations of 2016 (11 DCMR)) — The R-3 zone is intended to permit attached row houses on small lots. (11 DCMR Subtitle D § 101). One principal dwelling unit and one accessory apartment are allowed per lot of record (11 DCMR Subtitle D § 201). Minimum lot to create a new lot of record: row: 2,000 sq ft and 20 ft wide; semi-detached: 3,000 sq ft and 30 ft wide; all other structures: 4,000 sq ft and 40 ft wide (11 DCMR Subtitle D § 202, Table D § 202.1); this lot (1,453 sq ft) is smaller, and those minimums apply to creating a new lot of record (11 DCMR Subtitle D § 202.1). Height: up to 40 ft and 3 stories, not counting a penthouse or rooftop structure (11 DCMR Subtitle D § 203). Other parts of the regulations and any Board of Zoning Adjustment relief can change these; they aren't checked here.\n• Lot coverage allowed by zoning — Up to 60% lot occupancy for single household row building (11 DCMR Subtitle D § 210, Table D § 210.1): about 872 sq ft of building footprint on this 1,453 sq ft lot. The building's footprint isn't known from outlines here, so what's left isn't computed.\n✗ Second home (two-family or more) — 11 DCMR Subtitle D § 201: \"In all R zones, one (1) principal dwelling unit and one (1) accessory apartment shall be permitted per lot of record, subject to Subtitle U, Use Permissions.\" A second principal home (a flat) isn't allowed in R-3; the accessory apartment (below) is the second home allowed.\n✗ Split into two lots (by area only) — Two lots would each need at least 2,000 sq ft (11 DCMR Subtitle D § 202); this lot has 1,453 sq ft.\n? Accessory apartment "
+  }
+ ],
+ "nashville": [
+  {
+   "county": "47037",
+   "lat": 36.138108,
+   "lng": -86.793214,
+   "parcel": {
+    "ParID": 155490,
+    "PropAddr": "1619 VILLA PL",
+    "LUDesc": "SINGLE FAMILY",
+    "Zoning": "RS5"
+   },
+   "use_decoded": true,
+   "shows_reason": true,
+   "home_checks_run": true,
+   "ok": true,
+   "excerpt": "1619 VILLA PL · AIN/APN 155490 · SINGLE FAMILY (Metro Nashville Parcels (Parcels_view))\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Local zoning standards — Not on file: No local zoning standards are on file here. Nashville / Davidson County: Metro Nashville's Zoning Code (Title 17) is published on Municode, which answered the build machine with HTTP 403 on 16 Nov 2026, so no standard could be read from the code itself. The parcel record does give the Assessor's land use (LUDesc), so home checks run there, without local standards."
+  },
+  {
+   "county": "47037",
+   "lat": 36.138693,
+   "lng": -86.7931,
+   "parcel": {
+    "ParID": 155583,
+    "PropAddr": "1603 VILLA PL",
+    "LUDesc": "SINGLE FAMILY",
+    "Zoning": "RS5"
+   },
+   "use_decoded": true,
+   "shows_reason": true,
+   "home_checks_run": true,
+   "ok": true,
+   "excerpt": "1603 VILLA PL · AIN/APN 155583 · SINGLE FAMILY (Metro Nashville Parcels (Parcels_view))\nSelling an ADU separately\tNot on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules\n• Local zoning standards — Not on file: No local zoning standards are on file here. Nashville / Davidson County: Metro Nashville's Zoning Code (Title 17) is published on Municode, which answered the build machine with HTTP 403 on 16 Nov 2026, so no standard could be read from the code itself. The parcel record does give the Assessor's land use (LUDesc), so home checks run there, without local standards."
+  }
+ ],
+ "sd_quotes": [
+  {
+   "what": "RS-1-1 purpose",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 density row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 min lot row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 min lot row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 min lot row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 min lot row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 min lot row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 setback row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 setback row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 setback row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 setback row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 height row",
+   "found": true
+  },
+  {
+   "what": "RS-1-1 FAR row",
+   "found": true
+  },
+  {
+   "what": "height envelope (a)",
+   "found": true
+  },
+  {
+   "what": "height envelope (c)",
+   "found": true
+  },
+  {
+   "what": "hillside FAR",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J intro",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "Table 131-04J row",
+   "found": true
+  },
+  {
+   "what": "RS-1-8 min lot row",
+   "found": true
+  },
+  {
+   "what": "RS-1-8 setback row",
+   "found": true
+  },
+  {
+   "what": "RS-1-8 setback row",
+   "found": true
+  },
+  {
+   "what": "RS-1-8 setback row",
+   "found": true
+  },
+  {
+   "what": "RS-1-8 setback row",
+   "found": true
+  },
+  {
+   "what": "RS-1-8 height row",
+   "found": true
+  },
+  {
+   "what": "RS-1-8 FAR row",
+   "found": true
+  },
+  {
+   "what": "garage exclusion",
+   "found": true
+  }
+ ],
+ "sd": [
+  {
+   "county": "06073",
+   "area": "Pacific Beach / Bay Park",
+   "lat": 32.808023,
+   "lng": -117.237862,
+   "zone": "RS-1-7",
+   "parcel": {
+    "nucleus_use_cd": "111",
+    "total_lvg_area": 2361,
+    "apn": "4162422900",
+    "situs_address": 4924
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "4924 LAMONT ST · AIN/APN 4162422900 · SINGLE FAMILY RESIDENCE (SanGIS Parcels, nucleus_use_cd 111)\n• Zoning district RS-1-7 (San Diego Municipal Code, Chapter 13 (Zones)) — The purpose of the RS zones is to provide appropriate regulations for the development of single dwelling units that accommodate a variety of lot sizes and residential dwelling types and which promote neighborhood quality, character, and livability. (SDMC §131.0403(a)). RS-1-7 allows 1 dwelling unit per lot (SDMC §131.0431, Table 131-04D). Minimum lot: 5,000 sq ft, 50 ft wide (55 ft on a corner), 50 ft of street frontage and 95 ft deep (SDMC §131.0431, Table 131-04D). Minimum setbacks: front 15 ft, side 4 ft, street side 5 ft, rear 13 ft (SDMC §131.0431, Table 131-04D; note 2: See Section 131.0443(a)(4).); the table's footnotes and SDMC §131.0443 adjust these in some cases, which aren't checked here. Height: listed as 24/30 ft (SDMC §131.0431, Table 131-04D), so no part above 30 ft, and \"Maximum structure height shall not exceed the height of the angled building envelope plane, which connects the maximum structure height adjacent to the setback and the overall maximum structure height as determined by the underlying base zone and the requirements below.\" (SDMC §131.0444(a), (c)). Planned districts, overlay zones (such as the Coastal Overlay Zone) and state law (ADUs, SB 9) can change these; overlay zones and planned districts aren't checked here.\n? Floor area allowed by zoning — Up to about 3,728 sq ft of gross floor area on this ~6,427 sq ft lot (FAR 0.58, SDMC §131.0446(a)(1), Table 131-04J, row \"6,001 - 7,000 | 0.58\"). On a lot over the minimum area that is mostly steep hillside the ratio is figured differently (SDMC §131.0446(a)(2)); slope isn't checked here. The Assessor records 2,361 sq ft of living area, so about 1,367 sq ft remain by this measure; the Assessor's living area isn't gross floor area and is incomplete, so this is a screening figure.\n✗ Second home (two-family or more) — RS-1-7 "
+  },
+  {
+   "county": "06073",
+   "area": "Pacific Beach / Bay Park",
+   "lat": 32.817448,
+   "lng": -117.249723,
+   "zone": "RS-1-4",
+   "parcel": {
+    "nucleus_use_cd": "111",
+    "total_lvg_area": 2699,
+    "apn": "3587422000",
+    "situs_address": 1407
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "1407 CAMINITO BATEA · AIN/APN 3587422000 · SINGLE FAMILY RESIDENCE (SanGIS Parcels, nucleus_use_cd 111)\n• Zoning district RS-1-4 (San Diego Municipal Code, Chapter 13 (Zones)) — The purpose of the RS zones is to provide appropriate regulations for the development of single dwelling units that accommodate a variety of lot sizes and residential dwelling types and which promote neighborhood quality, character, and livability. (SDMC §131.0403(a)). RS-1-4 allows 1 dwelling unit per lot (SDMC §131.0431, Table 131-04D). Minimum lot: 10,000 sq ft, 65 ft wide (70 ft on a corner), 65 ft of street frontage and 100 ft deep (SDMC §131.0431, Table 131-04D); this lot (about 6,266 sq ft by its parcel outline) is smaller. Minimum setbacks: front 20 ft, side 6 ft, street side 6 ft, rear 20 ft (SDMC §131.0431, Table 131-04D; note 2: See Section 131.0443(a)(4).); the table's footnotes and SDMC §131.0443 adjust these in some cases, which aren't checked here. Height: listed as 24/30 ft (SDMC §131.0431, Table 131-04D), so no part above 30 ft, and \"Maximum structure height shall not exceed the height of the angled building envelope plane, which connects the maximum structure height adjacent to the setback and the overall maximum structure height as determined by the underlying base zone and the requirements below.\" (SDMC §131.0444(a), (c)). Planned districts, overlay zones (such as the Coastal Overlay Zone) and state law (ADUs, SB 9) can change these; overlay zones and planned districts aren't checked here.\n? Floor area allowed by zoning — Up to about 3,634 sq ft of gross floor area on this ~6,266 sq ft lot (FAR 0.58, SDMC §131.0446(a)(1), Table 131-04J, row \"6,001 - 7,000 | 0.58\"). On a lot over the minimum area that is mostly steep hillside the ratio is figured differently (SDMC §131.0446(a)(2)); slope isn't checked here. The Assessor records 2,699 sq ft of living area, so about 935 sq ft remain by this measure; the Assessor's living area isn't gross floor area and is incomplete, so this"
+  },
+  {
+   "county": "06073",
+   "area": "Rancho Penasquitos",
+   "lat": 32.97993,
+   "lng": -117.13061,
+   "zone": "RS-1-14",
+   "parcel": {
+    "nucleus_use_cd": "111",
+    "total_lvg_area": 1843,
+    "apn": "3122323800",
+    "situs_address": 14488
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "14488 CORTE DE VERDAD · AIN/APN 3122323800 · SINGLE FAMILY RESIDENCE (SanGIS Parcels, nucleus_use_cd 111)\n• Zoning district RS-1-14 (San Diego Municipal Code, Chapter 13 (Zones)) — The purpose of the RS zones is to provide appropriate regulations for the development of single dwelling units that accommodate a variety of lot sizes and residential dwelling types and which promote neighborhood quality, character, and livability. (SDMC §131.0403(a)). RS-1-14 allows 1 dwelling unit per lot (SDMC §131.0431, Table 131-04D). Minimum lot: 5,000 sq ft, 50 ft wide (55 ft on a corner), 50 ft of street frontage and 95 ft deep (SDMC §131.0431, Table 131-04D). Minimum setbacks: front 15 ft, side 4 ft, street side 10 ft, rear 10 ft (SDMC §131.0431, Table 131-04D; note 1: For lots where at least one-half of the front 50 feet of the lot depth has a minimum slope gradient of 25 percent, the setback closest to the street frontage may be reduced to a minimum 6 feet.); the table's footnotes and SDMC §131.0443 adjust these in some cases, which aren't checked here. Height: up to 35 ft (SDMC §131.0431, Table 131-04D). Planned districts, overlay zones (such as the Coastal Overlay Zone) and state law (ADUs, SB 9) can change these; overlay zones and planned districts aren't checked here.\n? Floor area allowed by zoning — Up to about 3,595 sq ft of gross floor area on this ~5,992 sq ft lot (FAR 0.60, SDMC §131.0431, Table 131-04D). Up to 400 sq ft of garage area isn't counted (SDMC §131.0446(b)). On a lot over the minimum area that is mostly steep hillside the ratio is figured differently (SDMC §131.0446(a)(2)); slope isn't checked here. The Assessor records 1,843 sq ft of living area, so about 1,752 sq ft remain by this measure; the Assessor's living area isn't gross floor area and is incomplete, so this is a screening figure.\n✗ Second home (two-family or more) — RS-1-14 allows 1 dwelling unit per lot under the base zone (SDMC §131.0431, Table 131-04D). State law can allow more (an ADU, a junio"
+  }
+ ],
+ "sd_outside": {
+  "county": "06073",
+  "area": "Chula Vista",
+  "lat": 32.621857,
+  "lng": -117.059886,
+  "parcel": {
+   "nucleus_use_cd": "111",
+   "total_lvg_area": 1196,
+   "apn": "5752210500",
+   "situs_address": 27
+  },
+  "city_zone": null,
+  "ok": true,
+  "excerpt": "• Local zoning standards — Not on file: City of San Diego's zoning district couldn't be read here (the point is outside the City of San Diego's Official Zoning Map (another city in San Diego County, or unincorporated county land); only the City of San Diego's code is on file), so its standards can't be applied."
+ },
+ "pdx_quotes": [
+  {
+   "what": "R20 House row",
+   "found": true
+  },
+  {
+   "what": "R20 Attached house row",
+   "found": true
+  },
+  {
+   "what": "R20 Accessory dwelling unit row",
+   "found": true
+  },
+  {
+   "what": "R20 Duplex row",
+   "found": true
+  },
+  {
+   "what": "R20 Triplex row",
+   "found": true
+  },
+  {
+   "what": "R20 Fourplex row",
+   "found": true
+  },
+  {
+   "what": "R20 Multi-dwelling structure row",
+   "found": true
+  },
+  {
+   "what": "R20 Cottage cluster row",
+   "found": true
+  },
+  {
+   "what": "planned development only",
+   "found": true
+  },
+  {
+   "what": "FAR row",
+   "found": true
+  },
+  {
+   "what": "bonus FAR row",
+   "found": true
+  },
+  {
+   "what": "FAR row",
+   "found": true
+  },
+  {
+   "what": "bonus FAR row",
+   "found": true
+  },
+  {
+   "what": "FAR row",
+   "found": true
+  },
+  {
+   "what": "bonus FAR row",
+   "found": true
+  },
+  {
+   "what": "FAR row",
+   "found": true
+  },
+  {
+   "what": "bonus FAR row",
+   "found": true
+  },
+  {
+   "what": "FAR units",
+   "found": true
+  },
+  {
+   "what": "FAR adjustments",
+   "found": true
+  },
+  {
+   "what": "Table 110-4 note",
+   "found": true
+  },
+  {
+   "what": "Table 110-4 note",
+   "found": true
+  },
+  {
+   "what": "Table 110-4 note",
+   "found": true
+  },
+  {
+   "what": "FAR scope",
+   "found": true
+  },
+  {
+   "what": "height row",
+   "found": true
+  },
+  {
+   "what": "setback row",
+   "found": true
+  },
+  {
+   "what": "setback row",
+   "found": true
+  },
+  {
+   "what": "setback row",
+   "found": true
+  },
+  {
+   "what": "setback row",
+   "found": true
+  },
+  {
+   "what": "outdoor area row",
+   "found": true
+  },
+  {
+   "what": "existing lot",
+   "found": true
+  },
+  {
+   "what": "Table 610-2 row",
+   "found": true
+  },
+  {
+   "what": "Table 610-2 row",
+   "found": true
+  },
+  {
+   "what": "Table 610-2 row",
+   "found": true
+  },
+  {
+   "what": "lot area rule",
+   "found": true
+  },
+  {
+   "what": "R7 min density",
+   "found": true
+  },
+  {
+   "what": "min density exempt",
+   "found": true
+  },
+  {
+   "what": "R5 min density",
+   "found": true
+  },
+  {
+   "what": "R2.5 min density",
+   "found": true
+  }
+ ],
+ "pdx": [
+  {
+   "county": "41051",
+   "area": "NE Portland (Concordia / Vernon)",
+   "lat": 45.569959,
+   "lng": -122.638908,
+   "zone": "R5",
+   "map": {
+    "ZONE": "R5",
+    "UNINC": "N",
+    "OVRLY_DESC": "Aircraft Landing",
+    "PLDIST_DESC": null
+   },
+   "parcel": {
+    "MAPTAXLOT": "1N1E13BC  -08900",
+    "SITUSADDR": "6504 NE 26TH AVE ",
+    "PROPCLASS": "101",
+    "xCentroid": -122.63890823073568,
+    "yCentroid": 45.56995939557422
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "6504 NE 26TH AVE · AIN/APN 1N1E13BC -08900 · Residential, Improved (Oregon property class (OAR 150-308-0310) on Multnomah County taxlots, PROPCLASS 101)\n• Zoning district R5 (Portland City Code, Title 33 (Planning and Zoning)) — Housing types allowed in R5: House, Attached house, Accessory dwelling unit, Duplex, Triplex, Fourplex, Multi-dwelling structure, Cottage cluster (PCC 33.110.200, Table 110-2). Height: up to 30 ft (PCC 33.110.215, Table 110-4); the table's note [3]: \"[3] Additional FAR and height may be allowed. See 33.110.265.F.\". Minimum setbacks: front 10 ft, side 5 ft, rear 5 ft, garage entrance 18 ft (PCC 33.110.220, Table 110-4). Required outdoor area: at least 250 sq ft (PCC 33.110.240, Table 110-4). The City's zoning map also puts this lot in: Aircraft Landing. Overlay zones, plan districts and historic or conservation designations change these standards; they aren't checked here.\n• Floor area allowed by zoning — On this ~4,974 sq ft lot (by its parcel outline) the maximum floor area depends on the total number of homes on the lot, ADUs included: 1 home: up to about 2,487 sq ft (FAR 0.5); 2 homes: up to about 2,984 sq ft (FAR 0.6), or 3,482 sq ft with a bonus option (FAR 0.7); 3 homes: up to about 3,482 sq ft (FAR 0.7), or 3,979 sq ft with a bonus option (FAR 0.8); 4 or more homes: up to about 3,979 sq ft (FAR 0.8), or 4,477 sq ft with a bonus option (FAR 0.9) (PCC 33.110.210, Table 110-4). \"Maximum FAR applies to all buildings on the lot, however the maximum allowed is based on the total number of dwelling units on the lot and whether a bonus option is chosen.\" \"Adjustments to the maximum FAR ratios, including bonus ratios, are prohibited.\" Which count and bonus apply depends on what is built, so no single figure is given; the table's note [3]: \"[3] Additional FAR and height may be allowed. See 33.110.265.F.\".\n✓ Second home (two-family or more) — R5 allows duplexes, triplexes and fourplexes (PCC 33.110.200, Table 110-2: \"Duplex No Yes Yes Yes Yes Yes\"; \"Triplex No Yes Yes Yes Yes Yes\"; \"Fourplex No Yes Yes Yes Yes Yes\"), within the floor area above; state law on file: OR HB 2001 (Oregon Housing Choice & Middle Housing) (text checked), which applies only where all of its conditions are met (see Housing laws & rights).\n? Accessory dwelling unit (ADU) — Allowed in R5 (PCC 33.110.200, Table 110-2: \"Accessory dwelling unit (See Chapter 33.205) Ye"
+  },
+  {
+   "county": "41051",
+   "area": "SW Portland (Hillsdale / Bridlemile)",
+   "lat": 45.500632,
+   "lng": -122.727938,
+   "zone": "R20",
+   "map": {
+    "ZONE": "R20",
+    "UNINC": "N",
+    "OVRLY_DESC": "Environmental Conservation,Constrained Sites",
+    "PLDIST_DESC": null
+   },
+   "parcel": {
+    "MAPTAXLOT": "1S1E07AC  -00100",
+    "SITUSADDR": "4960 SW HEWETT BLVD ",
+    "PROPCLASS": "101",
+    "xCentroid": -122.72793820222667,
+    "yCentroid": 45.50063206749375
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "4960 SW HEWETT BLVD · AIN/APN 1S1E07AC -00100 · Residential, Improved (Oregon property class (OAR 150-308-0310) on Multnomah County taxlots, PROPCLASS 101)\n• Zoning district R20 (Portland City Code, Title 33 (Planning and Zoning)) — Housing types allowed in R20: House, Attached house, Accessory dwelling unit, Duplex, Triplex, Fourplex, Multi-dwelling structure; not allowed: Cottage cluster (PCC 33.110.200, Table 110-2). Height: up to 30 ft (PCC 33.110.215, Table 110-4); the table's note [3]: \"[3] Additional FAR and height may be allowed. See 33.110.265.F.\". Minimum setbacks: front 20 ft, side 10 ft, rear 10 ft, garage entrance 18 ft (PCC 33.110.220, Table 110-4). Required outdoor area: at least 250 sq ft (PCC 33.110.240, Table 110-4). The City's zoning map also puts this lot in: Environmental Conservation,Constrained Sites. Overlay zones, plan districts and historic or conservation designations change these standards; they aren't checked here.\n• Floor area allowed by zoning — \"In the R10 and R20 zones, the maximum FAR only applies to lots that are less than 10,000 square feet in area.\" (PCC 33.110.210). This lot is about 172,727 sq ft by its parcel outline, so Table 110-4's floor area ratios don't limit it.\n✓ Second home (two-family or more) — R20 allows duplexes, triplexes and fourplexes (PCC 33.110.200, Table 110-2: \"Duplex No Yes Yes Yes Yes Yes\"; \"Triplex No Yes Yes Yes Yes Yes\"; \"Fourplex No Yes Yes Yes Yes Yes\"), within the floor area above; state law on file: OR HB 2001 (Oregon Housing Choice & Middle Housing) (text checked), which applies only where all of its conditions are met (see Housing laws & rights).\n? Accessory dwelling unit (ADU) — Allowed in R20 (PCC 33.110.200, Table 110-2: \"Accessory dwelling unit (See Chapter 33.205) Yes Yes Yes Yes Yes Yes\"). Its size, placement and number are set by Chapter 33.205, which isn't read here; state law on file: OR ADU law: one ADU per detached home inside urban growth boundaries (text checked), which applies only where all of its conditions are met (see Housing laws & rights).\n? Split into two lots (by area only) — At about 172,727 sq ft the lot has at least twice the 12,000 sq ft minimum for a new lot in R20 (PCC 33.610.200, Table 610-2: \"All other lots 52,000 12,000 6,000 4,200 3,000 1,500\"). Each new lot also needs 60 ft of width and 60 ft of depth, which the parcel record doesn't give, and land division"
+  },
+  {
+   "county": "41051",
+   "area": "SE Portland (Woodstock / Brentwood)",
+   "lat": 45.489051,
+   "lng": -122.620145,
+   "zone": "R2.5",
+   "map": {
+    "ZONE": "R2.5",
+    "UNINC": "N",
+    "OVRLY_DESC": null,
+    "PLDIST_DESC": null
+   },
+   "parcel": {
+    "MAPTAXLOT": "1S1E13AA  -02700",
+    "SITUSADDR": "4631 SE 41ST AVE ",
+    "PROPCLASS": "101",
+    "xCentroid": -122.62014506878053,
+    "yCentroid": 45.48905110922193
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "4631 SE 41ST AVE · AIN/APN 1S1E13AA -02700 · Residential, Improved (Oregon property class (OAR 150-308-0310) on Multnomah County taxlots, PROPCLASS 101)\n• Zoning district R2.5 (Portland City Code, Title 33 (Planning and Zoning)) — Housing types allowed in R2.5: House, Attached house, Accessory dwelling unit, Duplex, Triplex, Fourplex, Multi-dwelling structure, Cottage cluster (PCC 33.110.200, Table 110-2). Height: up to 35 ft (PCC 33.110.215, Table 110-4). Minimum setbacks: front 10 ft, side 5 ft, rear 5 ft, garage entrance 18 ft (PCC 33.110.220, Table 110-4). Required outdoor area: at least 200 sq ft (PCC 33.110.240, Table 110-4). Overlay zones, plan districts and historic or conservation designations change these standards; they aren't checked here.\n• Floor area allowed by zoning — On this ~5,653 sq ft lot (by its parcel outline) the maximum floor area depends on the total number of homes on the lot, ADUs included: 1 home: up to about 3,957 sq ft (FAR 0.7); 2 homes: up to about 4,522 sq ft (FAR 0.8), or 5,088 sq ft with a bonus option (FAR 0.9); 3 homes: up to about 5,088 sq ft (FAR 0.9), or 5,653 sq ft with a bonus option (FAR 1); 4 or more homes: up to about 5,653 sq ft (FAR 1), or 6,218 sq ft with a bonus option (FAR 1.1) (PCC 33.110.210, Table 110-4). \"Maximum FAR applies to all buildings on the lot, however the maximum allowed is based on the total number of dwelling units on the lot and whether a bonus option is chosen.\" \"Adjustments to the maximum FAR ratios, including bonus ratios, are prohibited.\" Which count and bonus apply depends on what is built, so no single figure is given; the table's note [3]: \"[3] Additional FAR and height may be allowed. See 33.110.265.F.\".\n✓ Second home (two-family or more) — R2.5 allows duplexes, triplexes and fourplexes (PCC 33.110.200, Table 110-2: \"Duplex No Yes Yes Yes Yes Yes\"; \"Triplex No Yes Yes Yes Yes Yes\"; \"Fourplex No Yes Yes Yes Yes Yes\"), within the floor area above; state law on file: OR HB 2001 (Oregon Housing Choice & Middle Housing) (text checked), which applies only where all of its conditions are met (see Housing laws & rights).\n? Accessory dwelling unit (ADU) — Allowed in R2.5 (PCC 33.110.200, Table 110-2: \"Accessory dwelling unit (See Chapter 33.205) Yes Yes Yes Yes Yes Yes\"). Its size, placement and number are set by Chapter 33.205, which isn't read here; state law on file: OR ADU law: one ADU per"
+  }
+ ],
+ "pdx_outside": {
+  "county": "41051",
+  "area": "Gresham",
+  "lat": 45.509943,
+  "lng": -122.426677,
+  "parcel": {
+   "MAPTAXLOT": "1S3E03CA  -09300",
+   "SITUSADDR": "1811 NE BEECH AVE ",
+   "PROPCLASS": "101",
+   "xCentroid": -122.42667687629354,
+   "yCentroid": 45.509942560067095
+  },
+  "city_zone": null,
+  "ok": true,
+  "excerpt": "• Local zoning standards — Not on file: City of Portland's zoning district couldn't be read here (the point is outside the City of Portland's zoning map (another city in Multnomah County, such as Gresham, or county land Portland doesn't zone); only Portland's code is on file), so its standards can't be applied."
+ },
+ "clt_quotes": [
+  {
+   "what": "N1-A table row",
+   "found": true
+  },
+  {
+   "what": "N1-A table row",
+   "found": true
+  },
+  {
+   "what": "N1-A table row",
+   "found": true
+  },
+  {
+   "what": "N1-A table row",
+   "found": true
+  },
+  {
+   "what": "N1-A table row",
+   "found": true
+  },
+  {
+   "what": "N1-A table row",
+   "found": true
+  },
+  {
+   "what": "N1-A table row",
+   "found": true
+  },
+  {
+   "what": "N1-A table row",
+   "found": true
+  },
+  {
+   "what": "use matrix row",
+   "found": true
+  },
+  {
+   "what": "use matrix row",
+   "found": true
+  },
+  {
+   "what": "use matrix row",
+   "found": true
+  },
+  {
+   "what": "use matrix row",
+   "found": true
+  },
+  {
+   "what": "use matrix row",
+   "found": true
+  },
+  {
+   "what": "use matrix row",
+   "found": true
+  },
+  {
+   "what": "use matrix row",
+   "found": true
+  },
+  {
+   "what": "sublot note",
+   "found": true
+  },
+  {
+   "what": "plat setback",
+   "found": true
+  },
+  {
+   "what": "blockface",
+   "found": true
+  },
+  {
+   "what": "FAA",
+   "found": true
+  },
+  {
+   "what": "sidewall",
+   "found": true
+  },
+  {
+   "what": "legend X",
+   "found": true
+  },
+  {
+   "what": "legend PC",
+   "found": true
+  },
+  {
+   "what": "quadraplex",
+   "found": true
+  },
+  {
+   "what": "common wall",
+   "found": true
+  },
+  {
+   "what": "ADU with_house",
+   "found": true
+  },
+  {
+   "what": "ADU one",
+   "found": true
+  },
+  {
+   "what": "ADU owner",
+   "found": true
+  },
+  {
+   "what": "ADU size",
+   "found": true
+  }
+ ],
+ "clt": [
+  {
+   "county": "37119",
+   "area": "Myers Park / Eastover",
+   "lat": 35.179927,
+   "lng": -80.829631,
+   "zone": "N1-A",
+   "map": {
+    "ZoneDes": "N1-A",
+    "Overlay": "none"
+   },
+   "parcel": {
+    "parcelid": "17502101",
+    "location_address": "2726 CHILTON PL CHARLOTTE NC",
+    "num_heatedarea": 0
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "2726 CHILTON PL CHARLOTTE NC · AIN/APN 17502101 · SINGLE FAMILY RESIDENTIAL (Mecklenburg County land use on Charlotte's All Parcel Data layer)\n• Zoning district N1-A (Charlotte Unified Development Ordinance) — Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed. \"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6).\" Minimum lot for a residential use: 10,000 sq ft and 70 ft wide (UDO 4.3.B, Table 4-1); \"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.\" Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots (UDO 4.3.B, Table 4-1); on this ~35,109 sq ft lot that is about 14,044 sq ft of building coverage. Minimum setbacks: front 27 ft and corner side 13.5 ft from the right-of-way, side 5 ft, rear 40 ft (UDO 4.3.C, Table 4-2); \"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.\" An alternative front setback for an established blockface (the table's note 2) isn't checked here. Residential height: up to 48 ft (UDO 4.3.D, Table 4-3); \"The sidewall height for all duplex and triplex buildings is limited to 20 feet.\" (UDO 4.3.D.1).\n? Second home (two-family or more) — A duplex or triplex is allowed in N1-A with prescribed conditions (UDO Table 15-1: \"Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC\"), among them: \"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.\" (UDO 15.4.EE.1). A quadraplex is allowed in N1-A only as UDO 15.4.GG.3 says: \"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.\" Whether the lot is on an arteria"
+  },
+  {
+   "county": "37119",
+   "area": "Dilworth / Sedgefield",
+   "lat": 35.199386,
+   "lng": -80.844917,
+   "zone": "N1-C",
+   "map": {
+    "ZoneDes": "N1-C",
+    "Overlay": "none"
+   },
+   "parcel": {
+    "parcelid": "15101519",
+    "location_address": "2002 FLORAL AV CHARLOTTE NC",
+    "num_heatedarea": 3984
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "2002 FLORAL AV CHARLOTTE NC · AIN/APN 15101519 · SINGLE FAMILY RESIDENTIAL (Mecklenburg County land use on Charlotte's All Parcel Data layer)\n• Zoning district N1-C (Charlotte Unified Development Ordinance) — Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed. \"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6).\" Minimum lot for a residential use: 6,000 sq ft and 50 ft wide (UDO 4.3.B, Table 4-1); \"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.\" Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots (UDO 4.3.B, Table 4-1); on this ~13,273 sq ft lot that is about 5,309 sq ft of building coverage. Minimum setbacks: front 17 ft and corner side 10 ft from the right-of-way, side 5 ft, rear 30 ft (UDO 4.3.C, Table 4-2); \"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.\" An alternative front setback for an established blockface (the table's note 2) isn't checked here. Residential height: up to 40 ft (UDO 4.3.D, Table 4-3); \"The sidewall height for all duplex and triplex buildings is limited to 20 feet.\" (UDO 4.3.D.1).\n? Second home (two-family or more) — A duplex or triplex is allowed in N1-C with prescribed conditions (UDO Table 15-1: \"Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC\"), among them: \"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.\" (UDO 15.4.EE.1). A quadraplex is allowed in N1-C only as UDO 15.4.GG.3 says: \"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.\" Whether the lot is on an arterial str"
+  },
+  {
+   "county": "37119",
+   "area": "Plaza Midwood / NoDa",
+   "lat": 35.221432,
+   "lng": -80.793545,
+   "zone": "N1-B",
+   "map": {
+    "ZoneDes": "N1-B",
+    "Overlay": "none"
+   },
+   "parcel": {
+    "parcelid": "09510274",
+    "location_address": " ARNOLD DR CHARLOTTE NC",
+    "num_heatedarea": 0
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "ARNOLD DR CHARLOTTE NC · AIN/APN 09510274 · SINGLE FAMILY RESIDENTIAL (Mecklenburg County land use on Charlotte's All Parcel Data layer)\n• Zoning district N1-B (Charlotte Unified Development Ordinance) — Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed. \"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6).\" Minimum lot for a residential use: 8,000 sq ft and 60 ft wide (UDO 4.3.B, Table 4-1); this lot (about 6,995 sq ft by its parcel outline) is smaller; \"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.\" Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots (UDO 4.3.B, Table 4-1); on this ~6,995 sq ft lot that is about 3,498 sq ft of building coverage. Minimum setbacks: front 27 ft and corner side 13.5 ft from the right-of-way, side 5 ft, rear 35 ft (UDO 4.3.C, Table 4-2); \"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.\" An alternative front setback for an established blockface (the table's note 2) isn't checked here. Residential height: up to 48 ft (UDO 4.3.D, Table 4-3); \"The sidewall height for all duplex and triplex buildings is limited to 20 feet.\" (UDO 4.3.D.1).\n? Second home (two-family or more) — A duplex or triplex is allowed in N1-B with prescribed conditions (UDO Table 15-1: \"Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC\"), among them: \"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.\" (UDO 15.4.EE.1). A quadraplex is allowed in N1-B only as UDO 15.4.GG.3 says: \"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N"
+  },
+  {
+   "county": "37119",
+   "area": "West Charlotte (Wesley Heights)",
+   "lat": 35.238835,
+   "lng": -80.860924,
+   "zone": "N1-D",
+   "map": {
+    "ZoneDes": "N1-D",
+    "Overlay": "none"
+   },
+   "parcel": {
+    "parcelid": "07101714",
+    "location_address": "229 AUTEN ST CHARLOTTE NC",
+    "num_heatedarea": 802
+   },
+   "missing": [],
+   "ok": true,
+   "panel_excerpt": "229 AUTEN ST CHARLOTTE NC · AIN/APN 07101714 · SINGLE FAMILY RESIDENTIAL (Mecklenburg County land use on Charlotte's All Parcel Data layer)\n• Zoning district N1-D (Charlotte Unified Development Ordinance) — Uses (UDO 15.2, Table 15-1): a single-family home by right; a duplex with prescribed conditions, a triplex with prescribed conditions, a quadraplex with prescribed conditions, a multi-family building not allowed. \"A “PC” indicates that the use is allowed in the zoning district and shall comply with the prescribed conditions of this Article (Sections 15.4 through 15.6).\" Minimum lot for a residential use: 3,500 sq ft and 40 ft wide (UDO 4.3.B, Table 4-1); \"Lot Standards do not apply to individual sublots but do apply to the parcel on which the sublot(s) is located.\" Maximum building coverage: 40% on lots of 10,000 sq ft and greater, 50% on smaller lots (UDO 4.3.B, Table 4-1); on this ~4,968 sq ft lot that is about 2,484 sq ft of building coverage. Minimum setbacks: front 17 ft and corner side 10 ft from the right-of-way, side 5 ft, rear 25 ft (UDO 4.3.C, Table 4-2); \"Front setbacks shown on a plat recorded at the Register of Deeds shall supersede required zoning district front setbacks.\" An alternative front setback for an established blockface (the table's note 2) isn't checked here. Residential height: up to 40 ft (UDO 4.3.D, Table 4-3); \"The sidewall height for all duplex and triplex buildings is limited to 20 feet.\" (UDO 4.3.D.1).\n? Second home (two-family or more) — A duplex or triplex is allowed in N1-D with prescribed conditions (UDO Table 15-1: \"Dwelling – Duplex | PC | PC | PC | PC | PC | PC | PC\"), among them: \"When located in a Neighborhood 1 or Neighborhood 2 Zoning District, side-by-side units in a duplex dwelling shall be separated by a straight, singular, and continuous common wall of at least 20 feet in depth front-to-back, separating either heated living areas in each unit or abutting garages.\" (UDO 15.4.EE.1). A quadraplex is allowed in N1-D only as UDO 15.4.GG.3 says: \"Quadraplex dwellings are permitted only on arterial streets and a minimum of one unit within the structure shall be set aside for households earning 80% AMI or less for a 15-year affordability period, utilizing the procedures found in the UDO Zoning Administration Manual. This restriction does not apply to the N1-F Zoning District.\" Whether the lot is on an arterial street"
+  }
+ ],
+ "clt_outside": {
+  "county": "37119",
+  "area": "Matthews",
+  "lat": 35.120406,
+  "lng": -80.72128,
+  "parcel": {
+   "parcelid": "19327102",
+   "location_address": "338 N AMES ST MATTHEWS NC",
+   "num_heatedarea": 1155
+  },
+  "city_zone": null,
+  "ok": true,
+  "excerpt": "• Local zoning standards — Not on file: City of Charlotte's zoning district couldn't be read here (the point is outside the City of Charlotte's zoning map (another town in Mecklenburg County, such as Matthews or Huntersville); only Charlotte's UDO is on file), so its standards can't be applied."
+ },
+ "page_errors": []
+}

@@ -1,0 +1,16 @@
+{
+  "locked_on": "2026-11-16",
+  "applies_to": "the next fresh NYC test window (sales dated after 2026-09-30); the published Queens and Staten Island finals are not re-run",
+  "decided_from": "development-window evidence only: data/backtests/acris_diag_36081_2026-01-01_2026-04-30.json (the 2026-05-01..09-30 test-window run, acris_diag_36081_2026-05-01_2026-09-30.json, showed the same pattern but did not choose the screens)",
+  "deed_match": "ACRIS Real Property Master (bnx9-e6tj) DEED-type document on the same borough/block/lot (Legals 8h5j-fqxa), document_date within 3 days of the DOF sale date, document_amt within 0.1% of the sale price",
+  "exclude_when": [
+    {"marker": "partial_interest", "rule": "0 < percent_trans < 100", "why": "a share of the property, not the whole home, was conveyed; dev window: 2.3% of sales under $500k vs 0.1-0.2% above"},
+    {"marker": "shared_surname", "rule": "a grantor (party_type 1) and grantee (party_type 2) share a 'LAST, FIRST' surname, ignoring entity names", "why": "likely family transfer; dev window: 27% of sales under $500k vs 3.3% ($500k-$1M) and 0.6% ($1M-$2M)"},
+    {"marker": "referee_grantor", "rule": "a grantor name contains REFEREE", "why": "court-ordered foreclosure sale; dev window: 10% under $500k vs 4.5% and 1.4%"}
+  ],
+  "not_excluded": [
+    {"marker": "estate_grantor", "why": "common in every band (dev window 20% / 12% / 6%); estate sales are often at market"},
+    {"marker": "trust_party", "why": "common in every band; a trust as party says nothing about price"}
+  ],
+  "unmatched_deed": "kept (dev window: 1 of 2,186 sales had no matching deed)"
+}

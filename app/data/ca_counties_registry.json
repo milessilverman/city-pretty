@@ -12,8 +12,11 @@
     ],
     "funding": "Measure BB / SB 63 (2026)",
     "hazard": "Hayward Fault / Bay Sea-Level Rise",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06003": {
     "fips": "06003",
@@ -24,8 +27,11 @@
     ],
     "funding": "Sierra Nevada Conservancy / SB 1",
     "hazard": "CAL FIRE VHFHSZ / Alpine Snow Load",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06005": {
     "fips": "06005",
@@ -36,8 +42,11 @@
     ],
     "funding": "SB 1 / Rural STIP",
     "hazard": "CAL FIRE WUI / Foothill Slope",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06007": {
     "fips": "06007",
@@ -48,8 +57,11 @@
     ],
     "funding": "SB 1 / CDBG-DR",
     "hazard": "Post-Camp Fire WUI / Feather River Flood",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06009": {
     "fips": "06009",
@@ -60,8 +72,11 @@
     ],
     "funding": "SB 1 / Rural STIP",
     "hazard": "CAL FIRE VHFHSZ / Hwy 4 Snow Zone",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06011": {
     "fips": "06011",
@@ -72,8 +87,11 @@
     ],
     "funding": "SB 1 / Flood Control Grants",
     "hazard": "Williamson Act Ag / Colusa Basin Flood",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06013": {
     "fips": "06013",
@@ -87,8 +105,11 @@
     ],
     "funding": "CCTA Measure J / SB 63 (2026)",
     "hazard": "Concord Fault / Refinery Buffers / Bay SLR",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06015": {
     "fips": "06015",
@@ -99,8 +120,11 @@
     ],
     "funding": "SB 1 / Coastal Conservancy",
     "hazard": "CGS Tsunami Zone / Coastal Commission",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06017": {
     "fips": "06017",
@@ -112,8 +136,11 @@
     ],
     "funding": "Measure S / TRPA Mitigation",
     "hazard": "TRPA Basin Rules / Post-Caldor VHFHSZ",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06019": {
     "fips": "06019",
@@ -125,8 +152,11 @@
     ],
     "funding": "Fresno Measure C",
     "hazard": "Extreme Valley Heat / SR-99 Air Buffer",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06021": {
     "fips": "06021",
@@ -137,8 +167,11 @@
     ],
     "funding": "SB 1 / SGMA Groundwater",
     "hazard": "Williamson Act Ag / Sacramento River Flood",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06023": {
     "fips": "06023",
@@ -149,8 +182,11 @@
     ],
     "funding": "Measure O / SB 1",
     "hazard": "Cascadia Tsunami / Coastal Commission",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06025": {
     "fips": "06025",
@@ -161,8 +197,11 @@
     ],
     "funding": "Imperial Measure D",
     "hazard": "Desert Irrigation Cap / Salton Sea PM10",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06027": {
     "fips": "06027",
@@ -173,8 +212,11 @@
     ],
     "funding": "SB 1 / LADWP Mitigation",
     "hazard": ">90% Federal/LADWP Land Mask / Desert",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06029": {
     "fips": "06029",
@@ -186,8 +228,11 @@
     ],
     "funding": "SB 1 / Regional STIP",
     "hazard": "3-Zone Climate Split / Oil-Field Buffers",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06031": {
     "fips": "06031",
@@ -198,8 +243,11 @@
     ],
     "funding": "SB 1 / Valley Air District",
     "hazard": "NAS Lemoore Mask / Williamson Act Ag",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06033": {
     "fips": "06033",
@@ -210,8 +258,11 @@
     ],
     "funding": "SB 1 / Clear Lake Watershed",
     "hazard": "Post-Fire VHFHSZ / Clear Lake Runoff",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06035": {
     "fips": "06035",
@@ -222,8 +273,11 @@
     ],
     "funding": "SB 1 / Rural STIP",
     "hazard": "Correctional Pop. Mask / Cold Snow Load",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06037": {
     "fips": "06037",
@@ -238,8 +292,11 @@
     ],
     "funding": "Measure M / Measure W",
     "hazard": "SB 79 Rail Tiers / Coastal / VHFHSZ",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06039": {
     "fips": "06039",
@@ -250,8 +307,11 @@
     ],
     "funding": "Madera Measure T",
     "hazard": "Valley-to-Sierra Split / HSR Alignment",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06041": {
     "fips": "06041",
@@ -264,8 +324,11 @@
     ],
     "funding": "TAM Measure AA / SB 63 (2026)",
     "hazard": "Coastal Commission / Richardson Bay SLR",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06043": {
     "fips": "06043",
@@ -276,8 +339,11 @@
     ],
     "funding": "SB 1 / Yosemite Gateway",
     "hazard": "Federal Park Mask / CAL FIRE VHFHSZ",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06045": {
     "fips": "06045",
@@ -288,8 +354,11 @@
     ],
     "funding": "Measure B / SB 1",
     "hazard": "Coastal Commission / Inland Valley Heat",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06047": {
     "fips": "06047",
@@ -300,8 +369,11 @@
     ],
     "funding": "Merced Measure V",
     "hazard": "Bear Creek Floodway / UC Merced & HSR",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06049": {
     "fips": "06049",
@@ -312,8 +384,11 @@
     ],
     "funding": "SB 1 / Rural STIP",
     "hazard": "Low-Density Tract Agg. / Cold Climate",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06051": {
     "fips": "06051",
@@ -325,8 +400,11 @@
     ],
     "funding": "SB 1 / Town of Mammoth",
     "hazard": "Public Land Mask / Heavy Alpine Snow",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06053": {
     "fips": "06053",
@@ -337,8 +415,11 @@
     ],
     "funding": "Monterey Measure X",
     "hazard": "Coastal Commission / Salinas Valley Heat",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06055": {
     "fips": "06055",
@@ -349,8 +430,11 @@
     ],
     "funding": "NVTA Measure T",
     "hazard": "Measure P Ag Preserve / Napa River Flood",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06057": {
     "fips": "06057",
@@ -362,8 +446,11 @@
     ],
     "funding": "SB 1 / Town of Truckee",
     "hazard": "West Slope vs. Truckee Snow / VHFHSZ",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06059": {
     "fips": "06059",
@@ -375,8 +462,11 @@
     ],
     "funding": "OC Measure M2",
     "hazard": "SB 79 Rail Tiers / Coastal Commission",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06061": {
     "fips": "06061",
@@ -389,8 +479,11 @@
     ],
     "funding": "SB 1 / Tahoe TRPA",
     "hazard": "3-Zone Split (Suburb / Foothill / TRPA)",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06063": {
     "fips": "06063",
@@ -401,8 +494,11 @@
     ],
     "funding": "SB 1 / CDBG-DR",
     "hazard": "Post-Dixie Fire Rebuild / Snow Load",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06065": {
     "fips": "06065",
@@ -415,8 +511,11 @@
     ],
     "funding": "RCTC Measure A",
     "hazard": "3-Zone Climate Split / Logistics Buffers",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06067": {
     "fips": "06067",
@@ -428,8 +527,11 @@
     ],
     "funding": "STA Measure A",
     "hazard": "SB 79 Rail Tiers / Natomas-River Flood",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06069": {
     "fips": "06069",
@@ -440,8 +542,11 @@
     ],
     "funding": "San Benito Measure G",
     "hazard": "San Andreas/Calaveras Faults / Ag Mask",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06071": {
     "fips": "06071",
@@ -455,8 +560,11 @@
     ],
     "funding": "SBCTA Measure I",
     "hazard": "4-Zone Climate Split / Freight Air Buffer",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06073": {
     "fips": "06073",
@@ -468,8 +576,11 @@
     ],
     "funding": "SANDAG TransNet",
     "hazard": "SB 79 Rail Tiers / Coastal / Tijuana River",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06075": {
     "fips": "06075",
@@ -484,8 +595,11 @@
     ],
     "funding": "SF Prop H (2026) / SB 63",
     "hazard": "SB 79 Rail Tiers / Consolidated Tax / SLR",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06077": {
     "fips": "06077",
@@ -498,8 +612,11 @@
     ],
     "funding": "San Joaquin Measure K",
     "hazard": "Delta 100/200-Yr Flood / Freight Buffers",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06079": {
     "fips": "06079",
@@ -510,8 +627,11 @@
     ],
     "funding": "SB 1 / Local Sales Tax",
     "hazard": "Coastal Commission / Coast-Inland Heat",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06081": {
     "fips": "06081",
@@ -525,8 +645,11 @@
     ],
     "funding": "SMCTA Measure A & W / SB 63",
     "hazard": "SB 79 Rail Tiers / Coastal / Bay SLR",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06083": {
     "fips": "06083",
@@ -539,8 +662,11 @@
     ],
     "funding": "Santa Barbara Measure A",
     "hazard": "Post-Fire Debris Flow / Coastal / N-S Split",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06085": {
     "fips": "06085",
@@ -554,8 +680,11 @@
     ],
     "funding": "VTA Measure B / SB 63 (2026)",
     "hazard": "SB 79 Rail Tiers / Coyote Creek Flood",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06087": {
     "fips": "06087",
@@ -566,8 +695,11 @@
     ],
     "funding": "Santa Cruz Measure D",
     "hazard": "Coastal Commission / CZU Fire / River Flood",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06089": {
     "fips": "06089",
@@ -578,8 +710,11 @@
     ],
     "funding": "SB 1 / Regional STIP",
     "hazard": "Post-Carr/Park Fire VHFHSZ / Valley Heat",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06091": {
     "fips": "06091",
@@ -590,8 +725,11 @@
     ],
     "funding": "SB 1 / Forest Service",
     "hazard": "Micro-Pop Tract Agg. / Alpine Snow",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06093": {
     "fips": "06093",
@@ -602,8 +740,11 @@
     ],
     "funding": "SB 1 / Rural STIP",
     "hazard": "Cold-Climate Lifecycle / WUI Wildfire",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06095": {
     "fips": "06095",
@@ -617,8 +758,11 @@
     ],
     "funding": "SB 1 / Regional Measure 3",
     "hazard": "Bay-to-Valley Heat / Suisun Marsh SLR",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06097": {
     "fips": "06097",
@@ -631,8 +775,11 @@
     ],
     "funding": "Sonoma Measure M / Go Sonoma",
     "hazard": "Post-Tubbs/Kincade WUI / Coastal Zone",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06099": {
     "fips": "06099",
@@ -644,8 +791,11 @@
     ],
     "funding": "Stanislaus Measure L",
     "hazard": "Williamson Act Ag / SR-99 Air Buffer",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06101": {
     "fips": "06101",
@@ -656,8 +806,11 @@
     ],
     "funding": "SB 1 / SBFCA Levee Dist.",
     "hazard": "Feather River / Sutter Bypass Floodway",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06103": {
     "fips": "06103",
@@ -668,8 +821,11 @@
     ],
     "funding": "Red Bluff Street Measure",
     "hazard": "Extreme Valley Heat / Park Fire VHFHSZ",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06105": {
     "fips": "06105",
@@ -680,8 +836,11 @@
     ],
     "funding": "SB 1 / Forest Service",
     "hazard": ">70% Federal Forest Mask / WUI Wildfire",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06107": {
     "fips": "06107",
@@ -694,8 +853,11 @@
     ],
     "funding": "Tulare Measure R",
     "hazard": "Valley-to-Sierra Split / Ag Mask",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06109": {
     "fips": "06109",
@@ -707,8 +869,11 @@
     ],
     "funding": "SB 1 / Yosemite Gateway",
     "hazard": "Foothill/Alpine Snow / CAL FIRE VHFHSZ",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06111": {
     "fips": "06111",
@@ -721,8 +886,11 @@
     ],
     "funding": "SB 1 / Local Measures",
     "hazard": "SOAR Ag Protection / Coastal / VHFHSZ",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06113": {
     "fips": "06113",
@@ -735,8 +903,11 @@
     ],
     "funding": "SB 1 / Local Measures",
     "hazard": "Yolo Bypass Flood / UC Davis Rent Skew",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   },
   "06115": {
     "fips": "06115",
@@ -747,7 +918,10 @@
     ],
     "funding": "Yuba Water Agency / TRLIA",
     "hazard": "Beale AFB Pop. Mask / Levee Floodway",
-    "source_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
-    "last_verified": "2026-11-15"
+    "source": "Hand-entered summary (MPO, transit operators, funding measures, hazards). Not checked against any source.",
+    "verification": {
+      "status": "unverified",
+      "notes": "The previous file stamped every row with a Census TIGER URL and a 2026-11-15 verification date; TIGER does not contain MPO, transit, funding or hazard information, so those stamps were removed on 2026-11-16."
+    }
   }
 }

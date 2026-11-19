@@ -40,7 +40,7 @@ export interface AdvisorParcel {
   units: number | null;
   assessorValue: number | null;
   lastSale: { price: number | null; date: string | null } | null;
-  valueEstimate: { value: number | null; low: number | null; high: number | null; method: string | null } | null;
+  valueEstimate: { value: number | null; low: number | null; high: number | null; method: string | null; status: string | null } | null;
   valueEstimateWithheld: string | null;
   nearestRailOrBrt: { name: string | null; miles: number | null } | null;
   flood: boolean | null;
@@ -63,6 +63,7 @@ export interface AdvisorHudFmr {
 export interface AdvisorIntercityCorridor {
   id: string | null;
   name: string | null;
+  verification: string | null;
   route_length_miles: number | null;
   funding_status: string | null;
   projected_minutes: number | null;
@@ -71,14 +72,9 @@ export interface AdvisorIntercityCorridor {
   nearestStation?: {
     name: string | null;
     city: string | null;
+    location_verified: boolean | null;
     avg_land_cost_per_sqft: number | null;
     available_underused_acres: number | null;
-    statutory_housing_regime: string | null;
-  } | null;
-  recommendedRailyard?: {
-    name: string | null;
-    location: string | null;
-    total_land_cost: number | null;
   } | null;
 }
 
@@ -92,45 +88,16 @@ export interface AdvisorUnderusedSite {
   distanceToRailMeters: number | null;
   potentialHomes: number | null;
   margin: number | null;
+  modelOutputsAreEstimates: boolean | null;
   publicOwner: string | null;
   inConservationEasement: boolean | null;
-  idea: string | null;
+  verification: string | null;
 }
 
-export interface AdvisorRenovationQuote {
-  improvementType: string | null;
-  quotedCost: number | null;
-  benchmarkMarketCostLow: number | null;
-  benchmarkMarketCostHigh: number | null;
-  costFairnessRating: string | null;
-  estimatedEquityValueAdd: number | null;
-  netEquityGainUsd: number | null;
-  returnOnInvestmentPct: number | null;
-  everySpaceMonthlyYieldUsd: number | null;
-  governingStatute: string | null;
-  verdict: string | null;
-  verdictSummary: string | null;
-}
-
-export interface AdvisorStreetForge {
-  reallocationType: string | null;
-  lengthMiles: number | null;
-  netMunicipalCostUsd: number | null;
-  annualCo2TonsAvoided: number | null;
-  crashReductionPct: number | null;
-  benefitCostRatio: number | null;
-  evChargerSuitabilityScore?: number | null;
-  evNetProjectCostUsd?: number | null;
-  evPaybackYears?: number | null;
-}
-
-export interface AdvisorEverySpace {
-  totalMonthlyGrossRevenueUsd: number | null;
-  netMonthlyHoldingCashFlowUsd: number | null;
-  monthlyHoldingDeficitReductionPct: number | null;
-  isCashFlowPositiveDuringHold: boolean | null;
-  holdingStrategyRecommendation: string | null;
-}
+// The Invest view's decision brief (app/invest.js; the engine's briefForAdvisor form), passed through as plain JSON.
+// Kept under this size so a request with a full chat history stays under the Worker's 64,000-byte body limit; a larger
+// brief is dropped whole and the reason is sent instead (never cut in the middle).
+export const DECISION_BRIEF_MAX_CHARS = 20000;
 
 export interface AdvisorContext {
   county: AdvisorCounty;
@@ -140,16 +107,17 @@ export interface AdvisorContext {
   hudFmr?: AdvisorHudFmr | null;
   intercityCorridor?: AdvisorIntercityCorridor | null;
   underusedSite?: AdvisorUnderusedSite | null;
-  renovationQuote?: AdvisorRenovationQuote | null;
-  streetForge?: AdvisorStreetForge | null;
-  everySpace?: AdvisorEverySpace | null;
+  decision_brief?: unknown;
+  decision_brief_omitted?: string | null;
 }
 
 // Stable text: keep it free of per-request values so it can be prompt-cached.
 export const ADVISOR_SYSTEM_PROMPT = [
   "You answer questions from visitors to City Pretty, a public map of US neighborhoods. For each block group it estimates which public improvements (street trees, parks, bus service, safer streets, clinics, schools and more) would make the area better and raise home values per dollar spent, and it can screen a single lot: its public record, zoning and a rough home-value estimate.",
   "Each question comes with the data the page is showing, as JSON. Base every figure you give on that JSON. When a value is null or missing, say the page does not have it; do not estimate it or bring in numbers from elsewhere.",
-  "If parcel.valueEstimateWithheld is set, the page deliberately gives no home value for this lot. Do not give one; explain the reason it states.",
+  "If parcel.valueEstimateWithheld is set, the page deliberately gives no home value for this lot. Do not give one; explain the reason it states. A parcel.valueEstimate has no accuracy range; unless its status reports a back-test result, it is an unvalidated estimate that has not been tested against recorded sales. Say which whenever you use it.",
+  "Some records carry a verification field. Treat anything not marked \"verified\" as unconfirmed and say so. Fields such as underusedSite.potentialHomes and underusedSite.margin are model estimates, not facts.",
+  "decision_brief, when present, is the page's own investment brief for this county. Every number in it is {value, unit, basis, source}; basis \"modelled\" or \"assumed\" means an estimate, not a measurement. Items in its withheld lists and fields marked not determined have no figure or answer on the page: say so, and do not fill them in.",
   "The page's figures are screening estimates from public data, not appraisals, zoning determinations, tax advice or legal advice. When a question is about building, adding a unit, splitting a lot, permits or property taxes, give what the data shows and name the city or county office that decides.",
   "Mention a state or federal law only when you are confident it applies in this state, and say that rules change. As of 2026 the federal 30% residential solar credit (IRC 25D) no longer applies to systems installed after 2025.",
   "Answer in a few sentences, then at most five short bullet points if they help. Use plain text with **bold** and '-' bullets only.",
@@ -208,7 +176,7 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       units: num(p.units),
       assessorValue: num(p.assessorValue),
       lastSale: sale ? { price: num(sale.price), date: str(sale.date, 10) } : null,
-      valueEstimate: est ? { value: num(est.value), low: num(est.low), high: num(est.high), method: str(est.method, 80) } : null,
+      valueEstimate: est ? { value: num(est.value), low: num(est.low), high: num(est.high), method: str(est.method, 120), status: str(est.status, 120) } : null,
       valueEstimateWithheld: str(p.valueEstimateWithheld, 300),
       nearestRailOrBrt: rail ? { name: str(rail.name, 80), miles: num(rail.miles) } : null,
       flood: bool(p.flood),
@@ -234,10 +202,10 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
   if (r.intercityCorridor) {
     const ic = obj(r.intercityCorridor);
     const stn = ic.nearestStation ? obj(ic.nearestStation) : null;
-    const yd = ic.recommendedRailyard ? obj(ic.recommendedRailyard) : null;
     ctx.intercityCorridor = {
       id: str(ic.id, 40),
       name: str(ic.name, 100),
+      verification: str(ic.verification, 40),
       route_length_miles: num(ic.route_length_miles),
       funding_status: str(ic.funding_status, 200),
       projected_minutes: num(ic.projected_minutes),
@@ -246,14 +214,9 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       nearestStation: stn ? {
         name: str(stn.name, 80),
         city: str(stn.city, 60),
+        location_verified: bool(stn.location_verified),
         avg_land_cost_per_sqft: num(stn.avg_land_cost_per_sqft),
         available_underused_acres: num(stn.available_underused_acres),
-        statutory_housing_regime: str(stn.statutory_housing_regime, 120),
-      } : null,
-      recommendedRailyard: yd ? {
-        name: str(yd.name, 80),
-        location: str(yd.location, 80),
-        total_land_cost: num(yd.total_land_cost),
       } : null,
     };
   }
@@ -269,51 +232,22 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       distanceToRailMeters: num(us.distanceToRailMeters),
       potentialHomes: num(us.potentialHomes),
       margin: num(us.margin),
+      modelOutputsAreEstimates: bool(us.modelOutputsAreEstimates),
       publicOwner: str(us.publicOwner, 100),
       inConservationEasement: bool(us.inConservationEasement),
-      idea: str(us.idea, 300),
+      verification: str(us.verification, 40),
     };
   }
-  if (r.renovationQuote) {
-    const rq = obj(r.renovationQuote);
-    ctx.renovationQuote = {
-      improvementType: str(rq.improvementType, 60),
-      quotedCost: num(rq.quotedCost),
-      benchmarkMarketCostLow: num(rq.benchmarkMarketCostLow),
-      benchmarkMarketCostHigh: num(rq.benchmarkMarketCostHigh),
-      costFairnessRating: str(rq.costFairnessRating, 40),
-      estimatedEquityValueAdd: num(rq.estimatedEquityValueAdd),
-      netEquityGainUsd: num(rq.netEquityGainUsd),
-      returnOnInvestmentPct: num(rq.returnOnInvestmentPct),
-      everySpaceMonthlyYieldUsd: num(rq.everySpaceMonthlyYieldUsd),
-      governingStatute: str(rq.governingStatute, 150),
-      verdict: str(rq.verdict, 60),
-      verdictSummary: str(rq.verdictSummary, 300),
-    };
-  }
-  if (r.streetForge) {
-    const sf = obj(r.streetForge);
-    ctx.streetForge = {
-      reallocationType: str(sf.reallocationType, 60),
-      lengthMiles: num(sf.lengthMiles),
-      netMunicipalCostUsd: num(sf.netMunicipalCostUsd),
-      annualCo2TonsAvoided: num(sf.annualCo2TonsAvoided),
-      crashReductionPct: num(sf.crashReductionPct),
-      benefitCostRatio: num(sf.benefitCostRatio),
-      evChargerSuitabilityScore: num(sf.evChargerSuitabilityScore),
-      evNetProjectCostUsd: num(sf.evNetProjectCostUsd),
-      evPaybackYears: num(sf.evPaybackYears),
-    };
-  }
-  if (r.everySpace) {
-    const es = obj(r.everySpace);
-    ctx.everySpace = {
-      totalMonthlyGrossRevenueUsd: num(es.totalMonthlyGrossRevenueUsd),
-      netMonthlyHoldingCashFlowUsd: num(es.netMonthlyHoldingCashFlowUsd),
-      monthlyHoldingDeficitReductionPct: num(es.monthlyHoldingDeficitReductionPct),
-      isCashFlowPositiveDuringHold: bool(es.isCashFlowPositiveDuringHold),
-      holdingStrategyRecommendation: str(es.holdingStrategyRecommendation, 300),
-    };
+  if (r.decision_brief != null && typeof r.decision_brief === "object" && !Array.isArray(r.decision_brief)) {
+    // Plain JSON only (functions and prototypes vanish in the round trip); dropped whole if too large.
+    let text: string | null = null;
+    try { text = JSON.stringify(r.decision_brief); } catch { text = null; }
+    if (text && text.length <= DECISION_BRIEF_MAX_CHARS) {
+      ctx.decision_brief = JSON.parse(text);
+    } else {
+      ctx.decision_brief = null;
+      ctx.decision_brief_omitted = text ? `decision brief too large (${text.length} characters; limit ${DECISION_BRIEF_MAX_CHARS})` : "decision brief could not be read";
+    }
   }
   return ctx;
 }

@@ -1,0 +1,317 @@
+[
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 1991,
+    "annual_change": null,
+    "hpi": 100,
+    "hpi1990": null,
+    "hpi2000": 42.09
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 1992,
+    "annual_change": 5.41,
+    "hpi": 105.41,
+    "hpi1990": null,
+    "hpi2000": 44.37
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 1993,
+    "annual_change": 13.26,
+    "hpi": 119.39,
+    "hpi1990": null,
+    "hpi2000": 50.26
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 1994,
+    "annual_change": 9.91,
+    "hpi": 131.23,
+    "hpi1990": null,
+    "hpi2000": 55.24
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 1995,
+    "annual_change": 6.99,
+    "hpi": 140.39,
+    "hpi1990": null,
+    "hpi2000": 59.1
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 1996,
+    "annual_change": 4.53,
+    "hpi": 146.76,
+    "hpi1990": null,
+    "hpi2000": 61.78
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 1997,
+    "annual_change": 10.13,
+    "hpi": 161.62,
+    "hpi1990": null,
+    "hpi2000": 68.03
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 1998,
+    "annual_change": 8.38,
+    "hpi": 175.16,
+    "hpi1990": null,
+    "hpi2000": 73.73
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 1999,
+    "annual_change": 17.9,
+    "hpi": 206.52,
+    "hpi1990": null,
+    "hpi2000": 86.93
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2000,
+    "annual_change": 15.03,
+    "hpi": 237.56,
+    "hpi1990": null,
+    "hpi2000": 100
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2001,
+    "annual_change": 8.99,
+    "hpi": 258.93,
+    "hpi1990": null,
+    "hpi2000": 108.99
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2002,
+    "annual_change": 3,
+    "hpi": 266.69,
+    "hpi1990": null,
+    "hpi2000": 112.26
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2003,
+    "annual_change": -2,
+    "hpi": 261.35,
+    "hpi1990": null,
+    "hpi2000": 110.02
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2004,
+    "annual_change": 7.9,
+    "hpi": 282.01,
+    "hpi1990": null,
+    "hpi2000": 118.71
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2005,
+    "annual_change": 10.78,
+    "hpi": 312.4,
+    "hpi1990": null,
+    "hpi2000": 131.5
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2006,
+    "annual_change": 11.93,
+    "hpi": 349.67,
+    "hpi1990": null,
+    "hpi2000": 147.19
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2007,
+    "annual_change": 8.51,
+    "hpi": 379.41,
+    "hpi1990": null,
+    "hpi2000": 159.71
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2008,
+    "annual_change": 2.53,
+    "hpi": 389.01,
+    "hpi1990": null,
+    "hpi2000": 163.75
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2009,
+    "annual_change": 1.81,
+    "hpi": 396.05,
+    "hpi1990": null,
+    "hpi2000": 166.71
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2010,
+    "annual_change": -0.61,
+    "hpi": 393.64,
+    "hpi1990": null,
+    "hpi2000": 165.7
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2011,
+    "annual_change": -0.64,
+    "hpi": 391.14,
+    "hpi1990": null,
+    "hpi2000": 164.65
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2012,
+    "annual_change": -2.68,
+    "hpi": 380.65,
+    "hpi1990": null,
+    "hpi2000": 160.23
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2013,
+    "annual_change": 13,
+    "hpi": 430.15,
+    "hpi1990": null,
+    "hpi2000": 181.07
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2014,
+    "annual_change": 11.5,
+    "hpi": 479.62,
+    "hpi1990": null,
+    "hpi2000": 201.89
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2015,
+    "annual_change": 5.92,
+    "hpi": 508,
+    "hpi1990": null,
+    "hpi2000": 213.84
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2016,
+    "annual_change": 3.31,
+    "hpi": 524.8,
+    "hpi1990": null,
+    "hpi2000": 220.91
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2017,
+    "annual_change": 5.54,
+    "hpi": 553.86,
+    "hpi1990": null,
+    "hpi2000": 233.15
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2018,
+    "annual_change": 3.79,
+    "hpi": 574.86,
+    "hpi1990": null,
+    "hpi2000": 241.98
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2019,
+    "annual_change": 6.68,
+    "hpi": 613.27,
+    "hpi1990": null,
+    "hpi2000": 258.15
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2020,
+    "annual_change": 5.72,
+    "hpi": 648.37,
+    "hpi1990": null,
+    "hpi2000": 272.93
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2021,
+    "annual_change": 11.57,
+    "hpi": 723.4,
+    "hpi1990": null,
+    "hpi2000": 304.51
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2022,
+    "annual_change": 17.13,
+    "hpi": 847.31,
+    "hpi1990": null,
+    "hpi2000": 356.67
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2023,
+    "annual_change": 8.56,
+    "hpi": 919.87,
+    "hpi1990": null,
+    "hpi2000": 387.22
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2024,
+    "annual_change": -8.45,
+    "hpi": 842.18,
+    "hpi1990": null,
+    "hpi2000": 354.51
+  },
+  {
+    "tract": "48453000302",
+    "state_abbr": "TX",
+    "year": 2025,
+    "annual_change": 13.28,
+    "hpi": 954.01,
+    "hpi1990": null,
+    "hpi2000": 401.59
+  }
+]

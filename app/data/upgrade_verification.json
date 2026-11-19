@@ -1,0 +1,328 @@
+{
+ "_about": "Verification status of the homeowner upgrade table (D.upgrades in app/data/bundle-la.b64.txt) and the house-level figures app/app.js derives from it. Audited 2026-11-16 (docs/audit/catalog-coverage-round2.md). Only verified or partially_verified rows may show cost, value, return per $1 or profit.",
+ "checked_on": "2026-11-16",
+ "rows": {
+  "Full second story (~1,000 sq ft)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Partial second story / primary suite (~400 sq ft)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Ground-floor room addition (400 sq ft)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Detached ADU (800 sq ft)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Junior ADU (inside the house)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Garage to living space (not an ADU)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Convert a den or attic to a bedroom": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Add a full bathroom": {
+   "status": "could_not_check",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "app.js note claims 'JLC/Zonda Cost vs Value 2025, Los Angeles, midrange 6x8-ft bathroom addition' ($63,595 cost / $36,603 value). costvsvalue.com and remodeling.hw.net return 403 from the audit machine, so the figures were not confirmed.",
+   "notes": "Cost vs Value is a survey of estimated (not measured) resale value."
+  },
+  "Kitchen remodel, midrange": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Kitchen refresh (minor)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Bathroom remodel, midrange": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Rooftop deck (~300 sq ft, flat roof or garage)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Ground-level deck (~300 sq ft, composite)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Covered patio or pergola": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Outdoor kitchen": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Fire pit and seating area": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Hot tub / spa": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "In-ground pool": {
+   "status": "could_not_check",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "app.js computes the house-level value from 'Redfin 2019' county estimates ($20,001 San Diego; ~$56k Orange County) or a hardcoded $95,000 / $20,000; the Redfin pieces were not fetched; the $95,000 has no source.",
+   "notes": ""
+  },
+  "Half-court sport court (basketball / pickleball)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Kids' play structure": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Landscape and path lighting": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Native / drought-tolerant garden (front yard)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Vegetable garden with raised beds and drip": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Fruit trees (6) and shade trees": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Front-yard curb-appeal landscaping": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Home office build-out": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Home gym": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Skylights (2)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Window replacement (10 vinyl)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Roof replacement": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Exterior repainting": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Interior repainting": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Garage door replacement": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Privacy fence and gate": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Permeable paver driveway": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Solar (6 kW)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Home battery (13.5 kWh)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Heat-pump HVAC": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Heat-pump water heater": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Level 2 EV charger": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Seismic bolting and cripple-wall bracing": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Whole-house repiping": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Sewer lateral replacement (trenchless)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Wildfire hardening (Zone 0, vents)": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Legalize unpermitted work": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  },
+  "Staging before a sale": {
+   "status": "unverified",
+   "cost": "unchecked",
+   "value": "unchecked",
+   "evidence": "Row is self-graded 'est' (City Pretty estimate) in the LA bundle; no source is given for its cost_2025, resale_value_added or annual_savings.",
+   "notes": ""
+  }
+ }
+}

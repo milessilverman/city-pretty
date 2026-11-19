@@ -1,0 +1,385 @@
+{
+ "ran_on": "2026-11-16T23:10:49.531Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "36081": {
+   "points": [
+    {
+     "bg": "360810190001",
+     "lat": 40.685339,
+     "lng": -73.794525,
+     "service": "NYC MapPLUTO (NYC Department of City Planning)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $619k, rent $2,104/mo, homes 402"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 14 pts (current release); page: 14 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 14.3 pts below its 30% goal; box: \"14.3 pts below its 30% goal\" / \"+3.6°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for undefined"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Queens County · 360810190001; page \"Census area: Queens County · block group 360810190001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2971 for 36081; page \"HUD Fair Market Rent (FY2027): 1 bed $2,729 · 2 bed $2,971 · 3 bed $3,760/moNew York, NY HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), not \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 29 ft; page \"Ground elevation: 29 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Zoning district R3A (New York City Zoning Resolution) — Housing types: limited to single- or two-family detached residences and single- or two-family zero lot line buildings (ZR 22-122), unless the lot is a qualifying residential site (ZR 12-10; among its conditions: at least 5,000 sq ft, in the Greater Transit Zone, on a wide street or the short end of a block, and not in R1 or R2; not checked here). Minimum lot for a detached or zero-lot-line home: 2,375 sq ft and 25 ft wide (ZR 23-11); this lot (2,000 sq ft) is smaller, which may mean it predates the minimum (not checked here). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.",
+      "✓ Floor area allowed by zoning — Up to 1,500 sq ft of floor area on this 2,000 sq ft lot (FAR 0.75, ZR 23-21). The city records 1,012 sq ft of gross floor area here, so about 488 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.",
+      "✓ Second home (two-family or more) — A two-family home is an allowed type here: single- or two-family detached residences and single- or two-family zero lot line buildings (ZR 22-122), within the floor area above.",
+      "? Ancillary dwelling unit (ADU, up to 800 sq ft) — ZR 12-10 allows one ancillary dwelling unit of up to 800 sq ft per single- or two-family home; an owner must live on the lot when it is first occupied. A backyard ADU is not allowed in Historic Districts or in DEP's mapped flood-risk areas, and in R3A only inside the Greater Transit Zone; none of these is checked here. About 578 sq ft of open yard (estimated).",
+      "• Second story — Already 2 stories (inferred: 1,012 sq ft living area indicates 2-story layout).",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "✓ Garden, deck or patio — ~578 sq ft of open yard.",
+      "✓ Rooftop solar — ~1,012 sq ft of roof footprint.",
+      "✓ Foundation & thermal envelope modernization — Built in 1915: continuous sill plate anchoring and air-barrier insulation sealing.",
+      "? Whole-house repiping — Built in 1915: galvanized steel supply piping common in pre-1975 homes."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "360810121001",
+     "lat": 40.772043,
+     "lng": -73.90262,
+     "service": "NYC MapPLUTO (NYC Department of City Planning)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $1.1M, rent $2,254/mo, homes 664"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 1 pts (current release); page: 1 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 0.5 pts below its 20% goal; box: \"0.5 pts below its 20% goal\" / \"-4.5°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for undefined"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Queens County · 360810121001; page \"Census area: Queens County · block group 360810121001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2971 for 36081; page \"HUD Fair Market Rent (FY2027): 1 bed $2,729 · 2 bed $2,971 · 3 bed $3,760/moNew York, NY HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), not \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 58 ft; page \"Ground elevation: 58 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Zoning district R4 (New York City Zoning Resolution) — Housing types: no limit on the type of residence (ZR 22-121, 22-122). Minimum lot for a detached or zero-lot-line home: 2,850 sq ft and 30 ft wide (ZR 23-11); this lot (2,650 sq ft) is smaller, which may mean it predates the minimum (not checked here). Height: up to 35 ft, with perimeter walls up to 25 ft (ZR 23-421). Special Purpose Districts and Article VI rules can change these (ZR 22-00); they aren't checked here.",
+      "✗ Floor area allowed by zoning — Up to 2,650 sq ft of floor area on this 2,650 sq ft lot (FAR 1.00, ZR 23-21). The city records 2,600 sq ft of gross floor area here, so about 50 sq ft remain by this measure. Gross floor area isn't zoning floor area, and a zoning lot can include more than one tax lot, so this is a screening figure.",
+      "✓ Second home (two-family or more) — R4 sets no limit on the type of residence (ZR 22-121, 22-122), within the floor area above.",
+      "? Ancillary dwelling unit (ADU, up to 800 sq ft) — ZR 12-10 allows one ancillary dwelling unit of up to 800 sq ft per single- or two-family home; an owner must live on the lot when it is first occupied. A backyard ADU is not allowed in Historic Districts or in DEP's mapped flood-risk areas; none of these is checked here. About 573 sq ft of open yard (estimated).",
+      "• Second story — Already 2 stories (inferred: 2,600 sq ft living area indicates 2-story layout).",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "✓ Garden, deck or patio — ~573 sq ft of open yard.",
+      "✓ Rooftop solar — ~1,720 sq ft of roof footprint.",
+      "✓ Foundation & thermal envelope modernization — Built in 1925: continuous sill plate anchoring and air-barrier insulation sealing.",
+      "? Whole-house repiping — Built in 1925: galvanized steel supply piping common in pre-1975 homes."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "360811467001",
+     "lat": 40.761794,
+     "lng": -73.770409,
+     "service": "NYC MapPLUTO (NYC Department of City Planning)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $675k, rent $2,101/mo, homes 620"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 13 pts (current release); page: 13 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 13.3 pts below its 30% goal; box: \"13.3 pts below its 30% goal\" / \"-0.7°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for undefined"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Queens County · 360811467001; page \"Census area: Queens County · block group 360811467001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2971 for 36081; page \"HUD Fair Market Rent (FY2027): 1 bed $2,729 · 2 bed $2,971 · 3 bed $3,760/moNew York, NY HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), not \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 68 ft; page \"Ground elevation: 68 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: New York City's standards are on file only for R1-1, R1-2, R1-2A, R2, R2A, R2X, R3-1, R3-2, R3A, R3X, R4, R4-1, R4A, R4B, R5, R5A, R5B, R5D; this lot is R6B. R6-R12, commercial (C), manufacturing (M) and special-purpose district standards are not encoded here.",
+      "✗ Home upgrades — This parcel is Commercial & Office Buildings (PLUTO Data Dictionary, LandUse 05), so residential homeowner checks do not apply."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8872' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8872' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8872' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  },
+  "37183": {
+   "county": "Wake NC (South Atlantic)",
+   "state": "NC",
+   "points": [
+    {
+     "bg": "371830537192",
+     "lat": 35.926979,
+     "lng": -78.741982,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $444k, rent $2,030/mo, homes 363"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 7 pts (current release); page: 7 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 6.6 pts below its 40% goal; box: \"6.6 pts below its 40% goal\" / \"-0.1°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wake County · 371830537192; page \"Census area: Wake County · block group 371830537192(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1689 for 37183; page \"HUD Fair Market Rent (FY2027): 1 bed $1,552 · 2 bed $1,689 · 3 bed $2,103/moRaleigh-Cary, NC MSA. HUD's voucher benchmark (rent plus utilities), not a market as\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 499 ft; page \"Ground elevation: 499 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "371830523075",
+     "lat": 35.756231,
+     "lng": -78.696221,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $362k, rent $832/mo, homes 493"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"-1.5°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wake County · 371830523075; page \"Census area: Wake County · block group 371830523075(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1689 for 37183; page \"HUD Fair Market Rent (FY2027): 1 bed $1,552 · 2 bed $1,689 · 3 bed $2,103/moRaleigh-Cary, NC MSA. HUD's voucher benchmark (rent plus utilities), not a market as\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 378 ft; page \"Ground elevation: 378 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "371830541132",
+     "lat": 35.817242,
+     "lng": -78.52746,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $407k, rent $1,623/mo, homes 1,280"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"-2.2°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wake County · 371830541132; page \"Census area: Wake County · block group 371830541132(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1689 for 37183; page \"HUD Fair Market Rent (FY2027): 1 bed $1,552 · 2 bed $1,689 · 3 bed $2,103/moRaleigh-Cary, NC MSA. HUD's voucher benchmark (rent plus utilities), not a market as\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: AE; page \"FEMA flood zone: Zone AE (floodway) · special flood hazard areaFederally backed mortgages here require flood insurance.(\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 180 ft; page \"Ground elevation: 180 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-78.741982%2C35.926979&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8872' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-78.696221%2C35.756231&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8872' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8872' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  }
+ }
+}

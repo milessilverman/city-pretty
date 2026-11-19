@@ -1,0 +1,3552 @@
+{
+ "ran_on": "2026-11-16T20:59:14.012Z",
+ "script": "scripts/live_check_panels.mjs",
+ "how": "4 parallel browsers (shards a-d); then every FEMA/USGS row the page showed as 'Not available' was re-opened alone (--recheck-fema); Davidson County re-run alone (shard e) after its parcel service failed in shard c",
+ "shard_runs": [
+  {
+   "file": "live_check_panels_2026-11-16_a.json",
+   "ran_on": "2026-11-16T20:04:21.086Z",
+   "fema_rechecked_on": "2026-11-16T20:55:53.645Z"
+  },
+  {
+   "file": "live_check_panels_2026-11-16_b.json",
+   "ran_on": "2026-11-16T20:06:01.193Z",
+   "fema_rechecked_on": "2026-11-16T20:56:37.031Z"
+  },
+  {
+   "file": "live_check_panels_2026-11-16_c.json",
+   "ran_on": "2026-11-16T20:00:11.816Z",
+   "fema_rechecked_on": "2026-11-16T20:57:50.054Z"
+  },
+  {
+   "file": "live_check_panels_2026-11-16_d.json",
+   "ran_on": "2026-11-16T20:02:49.482Z",
+   "fema_rechecked_on": "2026-11-16T20:58:54.077Z"
+  },
+  {
+   "file": "live_check_panels_2026-11-16_e.json",
+   "ran_on": "2026-11-16T20:59:14.012Z",
+   "fema_rechecked_on": null
+  }
+ ],
+ "results": {
+  "23005": {
+   "county": "Cumberland ME (New England)",
+   "state": "ME",
+   "points": [
+    {
+     "bg": "230050046001",
+     "lat": 43.86594,
+     "lng": -70.23383,
+     "service": "Maine Parcels Organized Towns (Maine GeoLibrary / MEGIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $520k, rent $2k/mo, homes 733"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,1,95]; comparison [0,1,0,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for ME"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Cumberland County \u00b7 230050046001; page \"Census area: Cumberland County \u00b7 block group 230050046001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR [1941,2353] for 23005; page \"HUD Fair Market Rent (FY2027): varies by town: 2 bed $1,941\u2013$2,353/moHUD's voucher benchmark (rent plus utilities), not a market asking rent. New England: HUD s\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 118 ft; page \"Ground elevation: 118 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "230050010002",
+     "lat": 43.653372,
+     "lng": -70.270097,
+     "service": "Maine Parcels Organized Towns (Maine GeoLibrary / MEGIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $767k, rent $2k/mo, homes 895"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 9 pts (current release); page: 9 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [14,4,189]; comparison [14,5,0.84,\"g\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for ME"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Cumberland County \u00b7 230050010002; page \"Census area: Cumberland County \u00b7 block group 230050010002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR [1941,2353] for 23005; page \"HUD Fair Market Rent (FY2027): varies by town: 2 bed $1,941\u2013$2,353/moHUD's voucher benchmark (rent plus utilities), not a market asking rent. New England: HUD s\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: did not answer; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\"",
+       "reference_requeried": "FEMA re-queried from Node after the run (the first reference query did not answer): Zone X"
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 121 ft; page \"Ground elevation: 121 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "230050113001",
+     "lat": 43.931419,
+     "lng": -70.032643,
+     "service": "Maine Parcels Organized Towns (Maine GeoLibrary / MEGIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $414k, rent \u2013, homes 612"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,3,197]; comparison [0,1,0,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for ME"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Cumberland County \u00b7 230050113001; page \"Census area: Cumberland County \u00b7 block group 230050113001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR [1941,2353] for 23005; page \"HUD Fair Market Rent (FY2027): varies by town: 2 bed $1,941\u2013$2,353/moHUD's voucher benchmark (rent plus utilities), not a market asking rent. New England: HUD s\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "re-checked alone: USGS now 214 ft; page \"Ground elevation: 214 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "usgs_first": {
+       "pass": false,
+       "detail": "USGS now: 214 ft; page \"Ground elevation: Not available (signal is aborted without reason)(U.S. Geologic\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8897' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-70.23383%2C43.86594&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRel",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8897' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-70.032643%2C43.931419&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-70.032643%2C43.931419&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8897' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  },
+  "42003": {
+   "county": "Allegheny PA (Middle Atlantic)",
+   "state": "PA",
+   "points": [
+    {
+     "bg": "420034035004",
+     "lat": 40.601018,
+     "lng": -79.750211,
+     "service": "Allegheny County OPENDATA Parcels (geometry)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $83k, rent $775/mo, homes 413"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 34 pts (current release); page: 34 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0,4]; comparison [0,1,0,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for PA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Allegheny County \u00b7 420034035004; page \"Census area: Allegheny County \u00b7 block group 420034035004(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1389 for 42003; page \"HUD Fair Market Rent (FY2027): 1 bed $1,146 \u00b7 2 bed $1,389 \u00b7 3 bed $1,773/moPittsburgh, PA HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), no\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (0.2 pct annual chance flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 760 ft; page \"Ground elevation: 760 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "420034734023",
+     "lat": 40.358703,
+     "lng": -80.040424,
+     "service": "Allegheny County OPENDATA Parcels (geometry)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $406k, rent $1k/mo, homes 639"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,2,20]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for PA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Allegheny County \u00b7 420034734023; page \"Census area: Allegheny County \u00b7 block group 420034734023(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1389 for 42003; page \"HUD Fair Market Rent (FY2027): 1 bed $1,146 \u00b7 2 bed $1,389 \u00b7 3 bed $1,773/moPittsburgh, PA HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), no\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1156 ft; page \"Ground elevation: 1,156 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "420030902001",
+     "lat": 40.469434,
+     "lng": -79.959351,
+     "service": "Allegheny County OPENDATA Parcels (geometry)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $386k, rent $1k/mo, homes 716"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 9 pts (current release); page: 9 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [7,2,50]; comparison [7,3,0.88,\"g\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for PA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Allegheny County \u00b7 420030902001; page \"Census area: Allegheny County \u00b7 block group 420030902001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1389 for 42003; page \"HUD Fair Market Rent (FY2027): 1 bed $1,146 \u00b7 2 bed $1,389 \u00b7 3 bed $1,773/moPittsburgh, PA HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), no\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 801 ft; page \"Ground elevation: 801 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8897' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8897' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-79.959351%2C40.469434&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  },
+  "06037": {
+   "county": "Los Angeles CA",
+   "state": "CA",
+   "points": [
+    {
+     "bg": "060379200472",
+     "lat": 34.410886,
+     "lng": -118.451681,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected none (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 13 pts (current release); page: 13 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,1,15]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County \u00b7 060379200472; page \"Census area: Los Angeles County \u00b7 block group 060379200472(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 \u00b7 2 bed $2,964 \u00b7 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: did not answer; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\"",
+       "reference_requeried": "FEMA re-queried from Node after the run (the first reference query did not answer): Zone X"
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1444 ft; page \"Ground elevation: 1,444 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Geologic hazard zone \u2014 In state liquefaction hazard zone: new additions or ADUs require a site-specific geotechnical/soils investigation.",
+      "\u2022 Second building on the lot \u2014 The Assessor lists 5 structures (11,516 sq ft, 11,516 sq ft, 11,516 sq ft, 11,516 sq ft, 189,362 sq ft): an existing ADU or guest house may already be present.",
+      "\u2717 Detached ADU \u2014 Limited open yard (~0 sq ft); a garage conversion or Junior ADU is recommended.",
+      "\u2022 Second story \u2014 Already 3 stories (inferred: 11,516 sq ft living area indicates 3-story layout).",
+      "? Rooftop deck \u2014 Requires a flat roof or flat garage roof section.",
+      "\u2713 Rooftop solar \u2014 ~11,516 sq ft of roof footprint."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "060372077121",
+     "lat": 34.04518,
+     "lng": -118.258052,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected none (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 14 pts (current release); page: 14 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0,1]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County \u00b7 060372077121; page \"Census area: Los Angeles County \u00b7 block group 060372077121(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 \u00b7 2 bed $2,964 \u00b7 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "re-checked alone: FEMA now X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 261 ft; page \"Ground elevation: 261 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "fema_first": {
+       "pass": false,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Not available (signal is aborted without reason)(FEMA National Flood Hazard Layer)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Historic district or landmark \u2014 This lot is in a historic district or is a designated resource: exterior alterations require HPOZ design review, and SB 9 does not apply.",
+      "\u2713 Detached ADU (backyard home) \u2014 About 1,832 sq ft of open yard after setbacks; easily fits a 600\u2013800 sq ft detached ADU with the 4-ft rear/side setbacks state law allows (Gov. Code \u00a7 66314(d)(7)).",
+      "\u2713 Swimming pool \u2014 ~1,832 sq ft of open yard.",
+      "\u2022 Second story \u2014 Already 3 stories (inferred: 58,686 sq ft living area indicates 3-story layout).",
+      "? Rooftop deck \u2014 Requires a flat roof or flat garage roof section.",
+      "\u2713 Garden, deck or patio \u2014 ~1,832 sq ft of open yard.",
+      "\u2713 Rooftop solar \u2014 ~5,495 sq ft of roof footprint.",
+      "? Whole-house repiping \u2014 Built in 1924: galvanized steel supply piping common in pre-1975 homes.",
+      "\u2713 Add a bathroom \u2014 98 bedrooms but only 70 baths: fixes the bedroom-to-bath imbalance, though an addition recoups only about 58% of its cost at resale (JLC/Zonda Cost vs Value 2025: $63,595 cost, $36,603 value)."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "060375342023",
+     "lat": 33.956785,
+     "lng": -118.162212,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected $650k (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 21 pts (current release); page: 21 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [4,2,59]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County \u00b7 060375342023; page \"Census area: Los Angeles County \u00b7 block group 060375342023(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 \u00b7 2 bed $2,964 \u00b7 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area with reduced flood risk due to levee)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 112 ft; page \"Ground elevation: 112 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Geologic hazard zone \u2014 In state liquefaction hazard zone: new additions or ADUs require a site-specific geotechnical/soils investigation.",
+      "\u2022 Second building on the lot \u2014 The Assessor lists 2 structures (1,619 sq ft, 490 sq ft): an existing ADU or guest house may already be present.",
+      "\u2713 Detached ADU (backyard home) \u2014 About 7,213 sq ft of open yard after setbacks; easily fits a 600\u2013800 sq ft detached ADU with the 4-ft rear/side setbacks state law allows (Gov. Code \u00a7 66314(d)(7)).",
+      "\u2713 Swimming pool \u2014 ~7,213 sq ft of open yard.",
+      "\u2713 Second story \u2014 One story (inferred: single-story profile (1,619 sq ft living area)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck \u2014 Requires a flat roof or flat garage roof section.",
+      "\u2713 Garden, deck or patio \u2014 ~7,213 sq ft of open yard.",
+      "\u2713 Rooftop solar \u2014 ~1,619 sq ft of roof footprint.",
+      "? Whole-house repiping \u2014 Built in 1937: galvanized steel supply piping common in pre-1975 homes.",
+      "\u2713 Add a bathroom \u2014 4 bedrooms but only 2 baths: fixes the bedroom-to-bath imbalance, though an addition recoups only about 58% of its cost at resale (JLC/Zonda Cost vs Value 2025: $63,595 cost, $36,603 value)."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-118.451681%2C34.410886&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInte",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-118.451681%2C34.410886&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatial",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8897' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8897' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-118.258052%2C34.04518&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-118.162212%2C33.956785&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatial",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8897' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  },
+  "06059": {
+   "county": "Orange CA",
+   "state": "CA",
+   "points": [
+    {
+     "bg": "060590994181",
+     "lat": 33.691757,
+     "lng": -117.995561,
+     "service": "Orange County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $1.1M, rent $3k/mo, homes 602"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 12 pts (current release); page: 12 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [5,0,22]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Orange County \u00b7 060590994181; page \"Census area: Orange County \u00b7 block group 060590994181(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 3057 for 06059; page \"HUD Fair Market Rent (FY2027): 1 bed $2,610 \u00b7 2 bed $3,057 \u00b7 3 bed $4,153/moSanta Ana-Anaheim-Irvine, CA HUD Metro FMR Area. HUD's voucher benchmark (rent plus \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 62 ft; page \"Ground elevation: 62 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "060590997013",
+     "lat": 33.748073,
+     "lng": -117.991895,
+     "service": "Orange County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $823k, rent $2k/mo, homes 769"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 10 pts (current release); page: 10 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [9,9,90]; comparison [9,1,0.8,\"g\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Orange County \u00b7 060590997013; page \"Census area: Orange County \u00b7 block group 060590997013(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 3057 for 06059; page \"HUD Fair Market Rent (FY2027): 1 bed $2,610 \u00b7 2 bed $3,057 \u00b7 3 bed $4,153/moSanta Ana-Anaheim-Irvine, CA HUD Metro FMR Area. HUD's voucher benchmark (rent plus \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (0.2 pct annual chance flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 41 ft; page \"Ground elevation: 41 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Geologic hazard zone \u2014 In state liquefaction hazard zone: new additions or ADUs require a site-specific geotechnical/soils investigation.",
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "060591100124",
+     "lat": 33.778132,
+     "lng": -118.062032,
+     "service": "Orange County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $1.2M, rent $4k/mo, homes 769"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 14 pts (current release); page: 14 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,2,345]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Orange County \u00b7 060591100124; page \"Census area: Orange County \u00b7 block group 060591100124(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 3057 for 06059; page \"HUD Fair Market Rent (FY2027): 1 bed $2,610 \u00b7 2 bed $3,057 \u00b7 3 bed $4,153/moSanta Ana-Anaheim-Irvine, CA HUD Metro FMR Area. HUD's voucher benchmark (rent plus \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area with reduced flood risk due to levee)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 20 ft; page \"Ground elevation: 20 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Geologic hazard zone \u2014 In state liquefaction hazard zone: new additions or ADUs require a site-specific geotechnical/soils investigation.",
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8897' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-117.995561%2C33.691757&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatial",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8897' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8897' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  },
+  "09110": {
+   "county": "Capitol Planning Region CT (New England)",
+   "state": "CT",
+   "points": [
+    {
+     "bg": "091104601002",
+     "lat": 41.717426,
+     "lng": -72.783294,
+     "service": "Connecticut CAMA and Parcel Layer (CT GIS Office / OPM)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $431k, rent $4k/mo, homes 681"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: 100 pts, Tree Equity Score 2021, 2010 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for CT"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Capitol Planning Region \u00b7 091104601002; page \"Census area: Capitol Planning Region \u00b7 block group 091104601002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR [1933,1933] for 09110; page \"HUD Fair Market Rent (FY2027): 2 bed $1,933/moHUD's voucher benchmark (rent plus utilities), not a market asking rent. New England: HUD sets FMRs by town; 38 to\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "re-checked alone: USGS now 325 ft; page \"Ground elevation: 325 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "usgs_first": {
+       "pass": false,
+       "detail": "USGS now: 325 ft; page \"Ground elevation: Not available (signal is aborted without reason)(U.S. Geologic\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "091104155001",
+     "lat": 41.65927,
+     "lng": -72.766496,
+     "service": "Connecticut CAMA and Parcel Layer (CT GIS Office / OPM)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $248k, rent $1k/mo, homes 403"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: 3 pts, Tree Equity Score 2021, 2010 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for CT"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Capitol Planning Region \u00b7 091104155001; page \"Census area: Capitol Planning Region \u00b7 block group 091104155001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR [1933,1933] for 09110; page \"HUD Fair Market Rent (FY2027): 2 bed $1,933/moHUD's voucher benchmark (rent plus utilities), not a market asking rent. New England: HUD sets FMRs by town; 38 to\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "re-checked alone: FEMA now X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 119 ft; page \"Ground elevation: 119 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "fema_first": {
+       "pass": false,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Layer)\""
+      }
+     },
+     "retried": [
+      "FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Laye"
+     ],
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "091105009001",
+     "lat": 41.781581,
+     "lng": -72.673647,
+     "service": "Connecticut CAMA and Parcel Layer (CT GIS Office / OPM)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $172k, rent $591/mo, homes 909"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: 15 pts, Tree Equity Score 2021, 2010 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for CT"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Capitol Planning Region \u00b7 091105009001; page \"Census area: Capitol Planning Region \u00b7 block group 091105009001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR [1933,1933] for 09110; page \"HUD Fair Market Rent (FY2027): 2 bed $1,933/moHUD's voucher benchmark (rent plus utilities), not a market asking rent. New England: HUD sets FMRs by town; 38 to\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 73 ft; page \"Ground elevation: 73 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-72.783294%2C41.717426&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8897' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-72.783294%2C41.717426&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-72.766496%2C41.65927&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInters",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-72.766496%2C41.65927&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInters",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  },
+  "17031": {
+   "county": "Cook IL (East North Central)",
+   "state": "IL",
+   "points": [
+    {
+     "bg": "170311002006",
+     "lat": 41.999824,
+     "lng": -87.803314,
+     "service": "Cook County GIS - Current Parcel (cookVwrDynmc layer 44)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $380k, rent $2k/mo, homes 335"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 19 pts (current release); page: 19 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,0,72]; comparison [1,3,0.1,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IL"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: parcel service did not answer"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: parcel service did not answer"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: parcel service did not answer"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: parcel service did not answer"
+      }
+     },
+     "house_checks": [],
+     "house_status": "parcel service did not answer"
+    },
+    {
+     "bg": "170311201002",
+     "lat": 42.00181,
+     "lng": -87.770968,
+     "service": "Cook County GIS - Current Parcel (cookVwrDynmc layer 44)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $591k, rent $2k/mo, homes 417"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,1,38]; comparison [1,3,0.12,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IL"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Cook County \u00b7 170311201002; page \"Census area: Cook County \u00b7 block group 170311201002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2011 for 17031; page \"HUD Fair Market Rent (FY2027): 1 bed $1,780 \u00b7 2 bed $2,011 \u00b7 3 bed $2,586/moChicago-Joliet-Naperville, IL HUD Metro FMR Area. HUD's voucher benchmark (rent plus\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 624 ft; page \"Ground elevation: 624 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "170318020021",
+     "lat": 42.069633,
+     "lng": -87.832044,
+     "service": "Cook County GIS - Current Parcel (cookVwrDynmc layer 44)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $621k, rent $2k/mo, homes 798"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 16 pts (current release); page: 16 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [2,3,185]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IL"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Cook County \u00b7 170318020021; page \"Census area: Cook County \u00b7 block group 170318020021(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2011 for 17031; page \"HUD Fair Market Rent (FY2027): 1 bed $1,780 \u00b7 2 bed $2,011 \u00b7 3 bed $2,586/moChicago-Joliet-Naperville, IL HUD Metro FMR Area. HUD's voucher benchmark (rent plus\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "re-checked alone: FEMA now X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 672 ft; page \"Ground elevation: 672 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "fema_first": {
+       "pass": false,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Layer)\""
+      }
+     },
+     "retried": [
+      "FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Laye"
+     ],
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8898' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8898' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-87.832044%2C42.069633&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-87.832044%2C42.069633&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  },
+  "18057": {
+   "county": "Hamilton IN (East North Central)",
+   "state": "IN",
+   "points": [
+    {
+     "bg": "180571108182",
+     "lat": 39.983831,
+     "lng": -85.96459,
+     "service": "Parcel Boundaries of Indiana Current (IGIO Data Harvest)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $360k, rent $2k/mo, homes 1,259"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 24 pts (current release); page: 24 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IN"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Hamilton County \u00b7 180571108182; page \"Census area: Hamilton County \u00b7 block group 180571108182(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1536 for 18057; page \"HUD Fair Market Rent (FY2027): 1 bed $1,336 \u00b7 2 bed $1,536 \u00b7 3 bed $1,991/moIndianapolis-Carmel, IN HUD Metro FMR Area. HUD's voucher benchmark (rent plus utili\""
+      },
+      "fema": {
+       "pass": null,
+       "detail": "FEMA now: did not answer; page \"FEMA flood zone: Not available (signal is aborted without reason)(FEMA National Flood Hazard Layer)\"",
+       "reference_requeried": "FEMA re-queried from Node after the run (the first reference query timed out): Zone X",
+       "unanswered": true
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 824 ft; page \"Ground elevation: 824 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "180571109101",
+     "lat": 39.994947,
+     "lng": -86.224938,
+     "service": "Parcel Boundaries of Indiana Current (IGIO Data Harvest)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $687k, rent $2k/mo, homes 1,065"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 32 pts (current release); page: 32 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IN"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Hamilton County \u00b7 180571109101; page \"Census area: Hamilton County \u00b7 block group 180571109101(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1536 for 18057; page \"HUD Fair Market Rent (FY2027): 1 bed $1,336 \u00b7 2 bed $1,536 \u00b7 3 bed $1,991/moIndianapolis-Carmel, IN HUD Metro FMR Area. HUD's voucher benchmark (rent plus utili\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: did not answer; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\"",
+       "reference_requeried": "FEMA re-queried from Node after the run (the first reference query timed out): Zone X"
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 914 ft; page \"Ground elevation: 914 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "180571105171",
+     "lat": 40.011238,
+     "lng": -86.04458,
+     "service": "Parcel Boundaries of Indiana Current (IGIO Data Harvest)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $669k, rent $1k/mo, homes 601"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 27 pts (current release); page: 27 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IN"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Hamilton County \u00b7 180571105171; page \"Census area: Hamilton County \u00b7 block group 180571105171(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1536 for 18057; page \"HUD Fair Market Rent (FY2027): 1 bed $1,336 \u00b7 2 bed $1,536 \u00b7 3 bed $1,991/moIndianapolis-Carmel, IN HUD Metro FMR Area. HUD's voucher benchmark (rent plus utili\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: did not answer; page \"FEMA flood zone: Zone AE \u00b7 special flood hazard areaFederally backed mortgages here require flood insurance.(FEMA Nation\"",
+       "reference_requeried": "FEMA re-queried from Node after the run (the first reference query timed out): Zone AE"
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 699 ft; page \"Ground elevation: 699 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8898' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-85.96459%2C39.983831&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRe",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8898' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8898' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-86.04458%2C40.011238&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInters",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  },
+  "19113": {
+   "county": "Linn IA (West North Central)",
+   "state": "IA",
+   "points": [
+    {
+     "bg": "191130029002",
+     "lat": 41.952617,
+     "lng": -91.663827,
+     "service": "Linn County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $189k, rent $892/mo, homes 529"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 16 pts (current release); page: 16 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Linn County \u00b7 191130029002; page \"Census area: Linn County \u00b7 block group 191130029002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1054 for 19113; page \"HUD Fair Market Rent (FY2027): 1 bed $806 \u00b7 2 bed $1,054 \u00b7 3 bed $1,459/moCedar Rapids, IA HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), no\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "re-checked alone: FEMA now X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 779 ft; page \"Ground elevation: 779 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "fema_first": {
+       "pass": false,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Layer)\""
+      }
+     },
+     "retried": [
+      "FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Laye"
+     ],
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "191130010023",
+     "lat": 41.9674,
+     "lng": -91.74972,
+     "service": "Linn County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $163k, rent $977/mo, homes 848"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 22 pts (current release); page: 22 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Linn County \u00b7 191130010023; page \"Census area: Linn County \u00b7 block group 191130010023(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1054 for 19113; page \"HUD Fair Market Rent (FY2027): 1 bed $806 \u00b7 2 bed $1,054 \u00b7 3 bed $1,459/moCedar Rapids, IA HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), no\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "re-checked alone: FEMA now X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 848 ft; page \"Ground elevation: 848 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "fema_first": {
+       "pass": false,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Layer)\""
+      }
+     },
+     "retried": [
+      "FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Laye"
+     ],
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "191130017001",
+     "lat": 41.9908,
+     "lng": -91.639773,
+     "service": "Linn County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $267k, rent $1k/mo, homes 869"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 6 pts (current release); page: 6 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Linn County \u00b7 191130017001; page \"Census area: Linn County \u00b7 block group 191130017001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1054 for 19113; page \"HUD Fair Market Rent (FY2027): 1 bed $806 \u00b7 2 bed $1,054 \u00b7 3 bed $1,459/moCedar Rapids, IA HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), no\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 796 ft; page \"Ground elevation: 796 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8898' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-91.663827%2C41.952617&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-91.663827%2C41.952617&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8898' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-91.74972%2C41.9674&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersec",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-91.74972%2C41.9674&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersec",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  },
+  "20209": {
+   "county": "Wyandotte KS (West North Central)",
+   "state": "KS",
+   "points": [
+    {
+     "bg": "202090421001",
+     "lat": 39.107162,
+     "lng": -94.646224,
+     "service": "Wyandotte County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $151k, rent $996/mo, homes 280"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 1 pts (current release); page: 1 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for KS"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wyandotte County \u00b7 202090421001; page \"Census area: Wyandotte County \u00b7 block group 202090421001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1546 for 20209; page \"HUD Fair Market Rent (FY2027): 1 bed $1,366 \u00b7 2 bed $1,546 \u00b7 3 bed $2,020/moKansas City, MO-KS HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities)\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 903 ft; page \"Ground elevation: 903 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "202090433012",
+     "lat": 39.051237,
+     "lng": -94.625123,
+     "service": "Wyandotte County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $175k, rent $1k/mo, homes 398"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for KS"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wyandotte County \u00b7 202090433012; page \"Census area: Wyandotte County \u00b7 block group 202090433012(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1546 for 20209; page \"HUD Fair Market Rent (FY2027): 1 bed $1,366 \u00b7 2 bed $1,546 \u00b7 3 bed $2,020/moKansas City, MO-KS HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities)\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 949 ft; page \"Ground elevation: 949 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "202090441011",
+     "lat": 39.111546,
+     "lng": -94.7507,
+     "service": "Wyandotte County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $179k, rent $1k/mo, homes 666"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for KS"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wyandotte County \u00b7 202090441011; page \"Census area: Wyandotte County \u00b7 block group 202090441011(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1546 for 20209; page \"HUD Fair Market Rent (FY2027): 1 bed $1,366 \u00b7 2 bed $1,546 \u00b7 3 bed $2,020/moKansas City, MO-KS HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities)\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 890 ft; page \"Ground elevation: 890 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8898' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8898' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-94.625123%2C39.051237&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-94.7507%2C39.111546&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRel",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-94.7507%2C39.111546&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInterse",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8898' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  },
+  "34013": {
+   "county": "Essex NJ (Middle Atlantic)",
+   "state": "NJ",
+   "points": [
+    {
+     "bg": "340130103002",
+     "lat": 40.76406,
+     "lng": -74.196802,
+     "service": "Parcels and MOD-IV Composite of NJ, Web Mercator (NJOGIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $355k, rent $1k/mo, homes 465"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 16 pts (current release); page: 16 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for NJ"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Essex County \u00b7 340130103002; page \"Census area: Essex County \u00b7 block group 340130103002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2233 for 34013; page \"HUD Fair Market Rent (FY2027): 1 bed $1,850 \u00b7 2 bed $2,233 \u00b7 3 bed $2,785/moNewark, NJ HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), not a \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 133 ft; page \"Ground elevation: 133 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "340130006001",
+     "lat": 40.765705,
+     "lng": -74.188458,
+     "service": "Parcels and MOD-IV Composite of NJ, Web Mercator (NJOGIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $365k, rent $1k/mo, homes 850"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 17 pts (current release); page: 17 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for NJ"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Essex County \u00b7 340130006001; page \"Census area: Essex County \u00b7 block group 340130006001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2233 for 34013; page \"HUD Fair Market Rent (FY2027): 1 bed $1,850 \u00b7 2 bed $2,233 \u00b7 3 bed $2,785/moNewark, NJ HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), not a \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 113 ft; page \"Ground elevation: 113 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "340130148003",
+     "lat": 40.832602,
+     "lng": -74.18971,
+     "service": "Parcels and MOD-IV Composite of NJ, Web Mercator (NJOGIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $697k, rent $2k/mo, homes 189"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 5 pts (current release); page: 5 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for NJ"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Essex County \u00b7 340130148003; page \"Census area: Essex County \u00b7 block group 340130148003(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2233 for 34013; page \"HUD Fair Market Rent (FY2027): 1 bed $1,850 \u00b7 2 bed $2,233 \u00b7 3 bed $2,785/moNewark, NJ HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), not a \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 191 ft; page \"Ground elevation: 191 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-74.196802%2C40.76406&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInters",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8898' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-74.188458%2C40.765705&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8898' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-74.188458%2C40.765705&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 502 (Bad Gateway)"
+   ]
+  },
+  "37183": {
+   "county": "Wake NC (South Atlantic)",
+   "state": "NC",
+   "points": [
+    {
+     "bg": "371830537192",
+     "lat": 35.926979,
+     "lng": -78.741982,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $444k, rent $2k/mo, homes 363"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 7 pts (current release); page: 7 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wake County \u00b7 371830537192; page \"Census area: Wake County \u00b7 block group 371830537192(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1689 for 37183; page \"HUD Fair Market Rent (FY2027): 1 bed $1,552 \u00b7 2 bed $1,689 \u00b7 3 bed $2,103/moRaleigh-Cary, NC MSA. HUD's voucher benchmark (rent plus utilities), not a market as\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 499 ft; page \"Ground elevation: 499 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "371830523075",
+     "lat": 35.756231,
+     "lng": -78.696221,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $362k, rent $832/mo, homes 493"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wake County \u00b7 371830523075; page \"Census area: Wake County \u00b7 block group 371830523075(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1689 for 37183; page \"HUD Fair Market Rent (FY2027): 1 bed $1,552 \u00b7 2 bed $1,689 \u00b7 3 bed $2,103/moRaleigh-Cary, NC MSA. HUD's voucher benchmark (rent plus utilities), not a market as\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 378 ft; page \"Ground elevation: 378 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "371830541132",
+     "lat": 35.817242,
+     "lng": -78.52746,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $407k, rent $2k/mo, homes 1,280"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wake County \u00b7 371830541132; page \"Census area: Wake County \u00b7 block group 371830541132(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1689 for 37183; page \"HUD Fair Market Rent (FY2027): 1 bed $1,552 \u00b7 2 bed $1,689 \u00b7 3 bed $2,103/moRaleigh-Cary, NC MSA. HUD's voucher benchmark (rent plus utilities), not a market as\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "re-checked alone: FEMA now AE; page \"FEMA flood zone: Zone AE (floodway) \u00b7 special flood hazard areaFederally backed mortgages here require flood insurance.(\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 180 ft; page \"Ground elevation: 180 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "fema_first": {
+       "pass": false,
+       "detail": "FEMA now: AE; page \"FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Layer)\""
+      }
+     },
+     "retried": [
+      "FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Laye"
+     ],
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8899' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-78.741982%2C35.926979&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8899' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-78.52746%2C35.817242&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInters",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-78.52746%2C35.817242&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRe",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-78.52746%2C35.817242&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInters",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  },
+  "48453": {
+   "county": "Travis TX (West South Central)",
+   "state": "TX",
+   "points": [
+    {
+     "bg": "484530301001",
+     "lat": 30.381998,
+     "lng": -97.756404,
+     "service": "Travis County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $769k, rent $2k/mo, homes 475"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2026 release (file dated 2026-03-13), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for TX"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Travis County \u00b7 484530301001; page \"Census area: Travis County \u00b7 block group 484530301001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1817 for 48453; page \"HUD Fair Market Rent (FY2027): 1 bed $1,530 \u00b7 2 bed $1,817 \u00b7 3 bed $2,292/moAustin-Round Rock-San Marcos, TX MSA. HUD's voucher benchmark (rent plus utilities),\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 826 ft; page \"Ground elevation: 826 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "484530413001",
+     "lat": 30.421934,
+     "lng": -97.720369,
+     "service": "Travis County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $563k, rent $2k/mo, homes 628"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 5 pts (current release); page: 5 pts, Tree Equity Score 2026 release (file dated 2026-03-13), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for TX"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Travis County \u00b7 484530413001; page \"Census area: Travis County \u00b7 block group 484530413001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1817 for 48453; page \"HUD Fair Market Rent (FY2027): 1 bed $1,530 \u00b7 2 bed $1,817 \u00b7 3 bed $2,292/moAustin-Round Rock-San Marcos, TX MSA. HUD's voucher benchmark (rent plus utilities),\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "re-checked alone: FEMA now X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 792 ft; page \"Ground elevation: 792 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "fema_first": {
+       "pass": false,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Layer)\""
+      }
+     },
+     "retried": [
+      "FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Laye"
+     ],
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "484530408001",
+     "lat": 30.373956,
+     "lng": -97.707929,
+     "service": "Travis County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $470k, rent $1k/mo, homes 688"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 10 pts (current release); page: 10 pts, Tree Equity Score 2026 release (file dated 2026-03-13), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for TX"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Travis County \u00b7 484530408001; page \"Census area: Travis County \u00b7 block group 484530408001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1817 for 48453; page \"HUD Fair Market Rent (FY2027): 1 bed $1,530 \u00b7 2 bed $1,817 \u00b7 3 bed $2,292/moAustin-Round Rock-San Marcos, TX MSA. HUD's voucher benchmark (rent plus utilities),\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: did not answer; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\"",
+       "reference_requeried": "FEMA re-queried from Node after the run (the first reference query did not answer): Zone X"
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 728 ft; page \"Ground elevation: 728 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8899' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-97.756404%2C30.381998&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-97.720369%2C30.421934&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8899' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-97.720369%2C30.421934&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8899' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-97.707929%2C30.373956&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  },
+  "51059": {
+   "county": "Fairfax VA (South Atlantic)",
+   "state": "VA",
+   "points": [
+    {
+     "bg": "510594206003",
+     "lat": 38.785042,
+     "lng": -77.081513,
+     "service": "Virginia Parcels (VGIN, VA_Base_Layers/VA_Parcels)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $654k, rent $3k/mo, homes 822"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,1,36]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for VA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Fairfax County \u00b7 510594206003; page \"Census area: Fairfax County \u00b7 block group 510594206003(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2438 for 51059; page \"HUD Fair Market Rent (FY2027): 1 bed $2,204 \u00b7 2 bed $2,438 \u00b7 3 bed $3,107/moWashington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area. HUD's voucher benchmar\""
+      },
+      "fema": {
+       "pass": null,
+       "detail": "re-checked alone: FEMA now X; page \"FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Layer)\" | page showed no value; the same browser got FEMA's answer for this point on a separate request afterwards (transient)",
+       "unanswered": true
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 157 ft; page \"Ground elevation: 157 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "fema_first": {
+       "pass": false,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Layer)\""
+      }
+     },
+     "retried": [
+      "FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Laye"
+     ],
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "510594505002",
+     "lat": 38.861465,
+     "lng": -77.181568,
+     "service": "Virginia Parcels (VGIN, VA_Base_Layers/VA_Parcels)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $618k, rent $3k/mo, homes 585"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 17 pts (current release); page: 17 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,2,41]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for VA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Fairfax County \u00b7 510594505002; page \"Census area: Fairfax County \u00b7 block group 510594505002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2438 for 51059; page \"HUD Fair Market Rent (FY2027): 1 bed $2,204 \u00b7 2 bed $2,438 \u00b7 3 bed $3,107/moWashington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area. HUD's voucher benchmar\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "re-checked alone: FEMA now X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 310 ft; page \"Ground elevation: 310 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "fema_first": {
+       "pass": false,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Not available (signal is aborted without reason)(FEMA National Flood Hazard Layer)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "510594325002",
+     "lat": 38.756302,
+     "lng": -77.247399,
+     "service": "Virginia Parcels (VGIN, VA_Base_Layers/VA_Parcels)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $659k, rent $3k/mo, homes 763"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [2,0,10]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for VA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Fairfax County \u00b7 510594325002; page \"Census area: Fairfax County \u00b7 block group 510594325002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2438 for 51059; page \"HUD Fair Market Rent (FY2027): 1 bed $2,204 \u00b7 2 bed $2,438 \u00b7 3 bed $3,107/moWashington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area. HUD's voucher benchmar\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 277 ft; page \"Ground elevation: 277 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-77.081513%2C38.785042&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8899' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-77.081513%2C38.785042&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-77.081513%2C38.785042&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8899' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-77.181568%2C38.861465&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-77.181568%2C38.861465&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-77.247399%2C38.756302&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  },
+  "01073": {
+   "county": "Jefferson AL (East South Central)",
+   "state": "AL",
+   "points": [
+    {
+     "bg": "010730112101",
+     "lat": 33.672287,
+     "lng": -86.691051,
+     "service": "Jefferson County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $185k, rent $1k/mo, homes 764"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for AL"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Jefferson County \u00b7 010730112101; page \"Census area: Jefferson County \u00b7 block group 010730112101(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1375 for 01073; page \"HUD Fair Market Rent (FY2027): 1 bed $1,263 \u00b7 2 bed $1,375 \u00b7 3 bed $1,727/moBirmingham-Hoover, AL HUD Metro FMR Area. HUD's voucher benchmark (rent plus utiliti\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "re-checked alone: FEMA now X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 744 ft; page \"Ground elevation: 744 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "fema_first": {
+       "pass": false,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Not available (signal is aborted without reason)(FEMA National Flood Hazard Layer)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "010730027025",
+     "lat": 33.521824,
+     "lng": -86.80763,
+     "service": "Jefferson County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value \u2013, rent $417/mo, homes 323"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 25 pts (current release); page: 25 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for AL"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Jefferson County \u00b7 010730027025; page \"Census area: Jefferson County \u00b7 block group 010730027025(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1375 for 01073; page \"HUD Fair Market Rent (FY2027): 1 bed $1,263 \u00b7 2 bed $1,375 \u00b7 3 bed $1,727/moBirmingham-Hoover, AL HUD Metro FMR Area. HUD's voucher benchmark (rent plus utiliti\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 611 ft; page \"Ground elevation: 611 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "010730111174",
+     "lat": 33.667476,
+     "lng": -86.625968,
+     "service": "Jefferson County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $221k, rent $1k/mo, homes 536"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for AL"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Jefferson County \u00b7 010730111174; page \"Census area: Jefferson County \u00b7 block group 010730111174(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1375 for 01073; page \"HUD Fair Market Rent (FY2027): 1 bed $1,263 \u00b7 2 bed $1,375 \u00b7 3 bed $1,727/moBirmingham-Hoover, AL HUD Metro FMR Area. HUD's voucher benchmark (rent plus utiliti\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 881 ft; page \"Ground elevation: 881 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8899' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-86.691051%2C33.672287&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8899' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 502 (Bad Gateway)"
+   ]
+  },
+  "41051": {
+   "county": "Multnomah OR (Pacific)",
+   "state": "OR",
+   "points": [
+    {
+     "bg": "410510017043",
+     "lat": 45.524818,
+     "lng": -122.582987,
+     "service": "Multnomah County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $481k, rent $2k/mo, homes 358"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 10 pts (current release); page: 10 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for OR"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Multnomah County \u00b7 410510017043; page \"Census area: Multnomah County \u00b7 block group 410510017043(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1878 for 41051; page \"HUD Fair Market Rent (FY2027): 1 bed $1,633 \u00b7 2 bed $1,878 \u00b7 3 bed $2,550/moPortland-Vancouver-Hillsboro, OR-WA MSA. HUD's voucher benchmark (rent plus utilitie\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "re-checked alone: FEMA now X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 259 ft; page \"Ground elevation: 259 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "fema_first": {
+       "pass": false,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Layer)\""
+      }
+     },
+     "retried": [
+      "FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Laye"
+     ],
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "410510026002",
+     "lat": 45.542745,
+     "lng": -122.626659,
+     "service": "Multnomah County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $763k, rent $3k/mo, homes 291"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for OR"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Multnomah County \u00b7 410510026002; page \"Census area: Multnomah County \u00b7 block group 410510026002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1878 for 41051; page \"HUD Fair Market Rent (FY2027): 1 bed $1,633 \u00b7 2 bed $1,878 \u00b7 3 bed $2,550/moPortland-Vancouver-Hillsboro, OR-WA MSA. HUD's voucher benchmark (rent plus utilitie\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 163 ft; page \"Ground elevation: 163 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "410510066022",
+     "lat": 45.471937,
+     "lng": -122.71665,
+     "service": "Multnomah County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $735k, rent $2k/mo, homes 673"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 4 pts (current release); page: 4 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for OR"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Multnomah County \u00b7 410510066022; page \"Census area: Multnomah County \u00b7 block group 410510066022(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1878 for 41051; page \"HUD Fair Market Rent (FY2027): 1 bed $1,633 \u00b7 2 bed $1,878 \u00b7 3 bed $2,550/moPortland-Vancouver-Hillsboro, OR-WA MSA. HUD's voucher benchmark (rent plus utilitie\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 397 ft; page \"Ground elevation: 397 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-122.582987%2C45.524818&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInte",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8900' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-122.582987%2C45.524818&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInte",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-122.582987%2C45.524818&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatial",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-122.626659%2C45.542745&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatial",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-122.71665%2C45.471937&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-122.71665%2C45.471937&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8900' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  },
+  "49035": {
+   "county": "Salt Lake UT (Mountain)",
+   "state": "UT",
+   "points": [
+    {
+     "bg": "490351003081",
+     "lat": 40.794713,
+     "lng": -111.937733,
+     "service": "UGRC Utah Statewide Parcels + county LIR (Land Information Records) parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $477k, rent $881/mo, homes 857"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [13,11,116]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for UT"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Salt Lake County \u00b7 490351003081; page \"Census area: Salt Lake County \u00b7 block group 490351003081(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1615 for 49035; page \"HUD Fair Market Rent (FY2027): 1 bed $1,349 \u00b7 2 bed $1,615 \u00b7 3 bed $2,143/moSalt Lake City, UT HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities)\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area with reduced flood risk due to levee)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 4218 ft; page \"Ground elevation: 4,218 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "490351128261",
+     "lat": 40.492946,
+     "lng": -111.96878,
+     "service": "UGRC Utah Statewide Parcels + county LIR (Land Information Records) parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $1.1M, rent $2k/mo, homes 765"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 7 pts (current release); page: 7 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,1,194]; comparison [0,1.5,0,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for UT"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Salt Lake County \u00b7 490351128261; page \"Census area: Salt Lake County \u00b7 block group 490351128261(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1615 for 49035; page \"HUD Fair Market Rent (FY2027): 1 bed $1,349 \u00b7 2 bed $1,615 \u00b7 3 bed $2,143/moSalt Lake City, UT HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities)\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "re-checked alone: FEMA now X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 4586 ft; page \"Ground elevation: 4,586 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "fema_first": {
+       "pass": false,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Layer)\""
+      }
+     },
+     "retried": [
+      "FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Laye"
+     ],
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "490351135141",
+     "lat": 40.667484,
+     "lng": -111.92883,
+     "service": "UGRC Utah Statewide Parcels + county LIR (Land Information Records) parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $470k, rent $2k/mo, homes 697"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [5,8,149]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for UT"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Salt Lake County \u00b7 490351135141; page \"Census area: Salt Lake County \u00b7 block group 490351135141(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1615 for 49035; page \"HUD Fair Market Rent (FY2027): 1 bed $1,349 \u00b7 2 bed $1,615 \u00b7 3 bed $2,143/moSalt Lake City, UT HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities)\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 4282 ft; page \"Ground elevation: 4,282 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-111.937733%2C40.794713&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatial",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8900' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8900' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-111.96878%2C40.492946&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-111.96878%2C40.492946&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-111.96878%2C40.492946&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  },
+  "05119": {
+   "county": "Pulaski AR (West South Central)",
+   "state": "AR",
+   "points": [
+    {
+     "bg": "051190013001",
+     "lat": 34.737295,
+     "lng": -92.306686,
+     "service": "Arkansas Parcel Polygons - County Assessor Mapping Program (AGISO)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $111k, rent $968/mo, homes 375"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 10 pts (current release); page: 10 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for AR"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Pulaski County \u00b7 051190013001; page \"Census area: Pulaski County \u00b7 block group 051190013001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1121 for 05119; page \"HUD Fair Market Rent (FY2027): 1 bed $969 \u00b7 2 bed $1,121 \u00b7 3 bed $1,504/moLittle Rock-North Little Rock-Conway, AR HUD Metro FMR Area. HUD's voucher benchmark (\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: did not answer; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\"",
+       "reference_requeried": "FEMA re-queried from Node after the run (the first reference query did not answer): Zone X"
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 332 ft; page \"Ground elevation: 332 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "051190033071",
+     "lat": 34.78402,
+     "lng": -92.233628,
+     "service": "Arkansas Parcel Polygons - County Assessor Mapping Program (AGISO)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $246k, rent $1k/mo, homes 882"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 22 pts (current release); page: 22 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for AR"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Pulaski County \u00b7 051190033071; page \"Census area: Pulaski County \u00b7 block group 051190033071(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1121 for 05119; page \"HUD Fair Market Rent (FY2027): 1 bed $969 \u00b7 2 bed $1,121 \u00b7 3 bed $1,504/moLittle Rock-North Little Rock-Conway, AR HUD Metro FMR Area. HUD's voucher benchmark (\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "re-checked alone: FEMA now X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 327 ft; page \"Ground elevation: 327 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "fema_first": {
+       "pass": false,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Not available (signal is aborted without reason)(FEMA National Flood Hazard Layer)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "051190032024",
+     "lat": 34.81075,
+     "lng": -92.272701,
+     "service": "Arkansas Parcel Polygons - County Assessor Mapping Program (AGISO)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $99k, rent $746/mo, homes 1,031"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 1 pts (current release); page: 1 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for AR"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Pulaski County \u00b7 051190032024; page \"Census area: Pulaski County \u00b7 block group 051190032024(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1121 for 05119; page \"HUD Fair Market Rent (FY2027): 1 bed $969 \u00b7 2 bed $1,121 \u00b7 3 bed $1,504/moLittle Rock-North Little Rock-Conway, AR HUD Metro FMR Area. HUD's voucher benchmark (\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 436 ft; page \"Ground elevation: 436 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8900' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8900' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-92.233628%2C34.78402&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInters",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8900' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-92.272701%2C34.81075&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInters",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-92.272701%2C34.81075&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRe",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  },
+  "04013": {
+   "county": "Maricopa AZ (Mountain)",
+   "state": "AZ",
+   "points": [
+    {
+     "bg": "040134226542",
+     "lat": 33.358285,
+     "lng": -111.664143,
+     "service": "Maricopa County Assessor Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $567k, rent $2k/mo, homes 496"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 4 pts (current release); page: 4 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for AZ"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Maricopa County \u00b7 040134226542; page \"Census area: Maricopa County \u00b7 block group 040134226542(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1734 for 04013; page \"HUD Fair Market Rent (FY2027): 1 bed $1,493 \u00b7 2 bed $1,734 \u00b7 3 bed $2,287/moPhoenix-Mesa-Chandler, AZ MSA. HUD's voucher benchmark (rent plus utilities), not a \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (0.2 pct annual chance flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1364 ft; page \"Ground elevation: 1,364 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use (it gives \"0261\"), so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "040133194034",
+     "lat": 33.405106,
+     "lng": -111.899053,
+     "service": "Maricopa County Assessor Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $448k, rent $2k/mo, homes 398"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 3 pts (current release); page: 3 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for AZ"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Maricopa County \u00b7 040133194034; page \"Census area: Maricopa County \u00b7 block group 040133194034(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1734 for 04013; page \"HUD Fair Market Rent (FY2027): 1 bed $1,493 \u00b7 2 bed $1,734 \u00b7 3 bed $2,287/moPhoenix-Mesa-Chandler, AZ MSA. HUD's voucher benchmark (rent plus utilities), not a \""
+      },
+      "fema": {
+       "pass": null,
+       "detail": "re-checked alone: FEMA now X; page \"FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Layer)\" | page showed no value; the same browser got FEMA's answer for this point on a separate request afterwards (transient)",
+       "unanswered": true
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1194 ft; page \"Ground elevation: 1,194 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "fema_first": {
+       "pass": false,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Not available (signal is aborted without reason)(FEMA National Flood Hazard Layer)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use (it gives \"9690\"), so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "040130609023",
+     "lat": 33.612399,
+     "lng": -112.321048,
+     "service": "Maricopa County Assessor Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $209k, rent $1k/mo, homes 526"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 7 pts (current release); page: 7 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for AZ"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Maricopa County \u00b7 040130609023; page \"Census area: Maricopa County \u00b7 block group 040130609023(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1734 for 04013; page \"HUD Fair Market Rent (FY2027): 1 bed $1,493 \u00b7 2 bed $1,734 \u00b7 3 bed $2,287/moPhoenix-Mesa-Chandler, AZ MSA. HUD's voucher benchmark (rent plus utilities), not a \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (0.2 pct annual chance flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1132 ft; page \"Ground elevation: 1,132 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use (it gives \"0131\"), so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8900' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8900' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-111.899053%2C33.405106&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInte",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-112.321048%2C33.612399&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatial",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8900' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-112.321048%2C33.612399&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInte",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  },
+  "06073": {
+   "county": "San Diego CA (Pacific)",
+   "state": "CA",
+   "points": [
+    {
+     "bg": "060730091081",
+     "lat": 32.77074,
+     "lng": -117.203781,
+     "service": "SanGIS Parcels (hosted by SANDAG)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $1.0M, rent $2k/mo, homes 622"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 23 pts (current release); page: 23 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,4,125]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb San Diego County \u00b7 060730091081; page \"Census area: San Diego County \u00b7 block group 060730091081(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2823 for 06073; page \"HUD Fair Market Rent (FY2027): 1 bed $2,335 \u00b7 2 bed $2,823 \u00b7 3 bed $3,743/moSan Diego-Chula Vista-Carlsbad, CA MSA. HUD's voucher benchmark (rent plus utilities\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 26 ft; page \"Ground elevation: 26 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "060730008002",
+     "lat": 32.743916,
+     "lng": -117.139757,
+     "service": "SanGIS Parcels (hosted by SANDAG)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $1.2M, rent $3k/mo, homes 224"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 9 pts (current release); page: 9 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0,0]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb San Diego County \u00b7 060730008002; page \"Census area: San Diego County \u00b7 block group 060730008002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2823 for 06073; page \"HUD Fair Market Rent (FY2027): 1 bed $2,335 \u00b7 2 bed $2,823 \u00b7 3 bed $3,743/moSan Diego-Chula Vista-Carlsbad, CA MSA. HUD's voucher benchmark (rent plus utilities\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 294 ft; page \"Ground elevation: 294 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "060730029051",
+     "lat": 32.769502,
+     "lng": -117.046398,
+     "service": "SanGIS Parcels (hosted by SANDAG)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $599k, rent $2k/mo, homes 661"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 20 pts (current release); page: 20 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0,0]; comparison [0,1,0,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb San Diego County \u00b7 060730029051; page \"Census area: San Diego County \u00b7 block group 060730029051(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2823 for 06073; page \"HUD Fair Market Rent (FY2027): 1 bed $2,335 \u00b7 2 bed $2,823 \u00b7 3 bed $3,743/moSan Diego-Chula Vista-Carlsbad, CA MSA. HUD's voucher benchmark (rent plus utilities\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "re-checked alone: USGS now 487 ft; page \"Ground elevation: 487 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "usgs_first": {
+       "pass": false,
+       "detail": "USGS now: 487 ft; page \"Ground elevation: Not available (signal is aborted without reason)(U.S. Geologic\""
+      }
+     },
+     "house_checks": [
+      "\u2022 Home upgrades \u2014 The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8900' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-117.203781%2C32.77074&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-117.203781%2C32.77074&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8900' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8900' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-117.046398%2C32.769502&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInte",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-117.046398%2C32.769502&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatial",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ]
+  },
+  "47037": {
+   "county": "Davidson TN (East South Central)",
+   "state": "TN",
+   "points": [
+    {
+     "bg": "470370195033",
+     "lat": 36.158639,
+     "lng": -86.774596,
+     "service": "Davidson County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $633k, rent $2k/mo, homes 1,054"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 16 pts (current release); page: 16 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [117,27,357]; comparison [117,4,1,\"g\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: parcel service did not answer"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: parcel service did not answer"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: parcel service did not answer"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: parcel service did not answer"
+      }
+     },
+     "house_checks": [],
+     "house_status": "parcel service did not answer"
+    },
+    {
+     "bg": "470370169005",
+     "lat": 36.129918,
+     "lng": -86.809341,
+     "service": "Davidson County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $1.4M, rent $2k/mo, homes 582"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 2 pts (current release); page: 2 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [3,0,22]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: parcel service did not answer"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: parcel service did not answer"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: parcel service did not answer"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: parcel service did not answer"
+      }
+     },
+     "house_checks": [],
+     "house_status": "parcel service did not answer"
+    },
+    {
+     "bg": "470370187001",
+     "lat": 36.082669,
+     "lng": -86.784125,
+     "service": "Davidson County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $1.2M, rent \u2013, homes 420"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [2,1,106]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for TN"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: parcel service did not answer"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: parcel service did not answer"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: parcel service did not answer"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: parcel service did not answer"
+      }
+     },
+     "house_checks": [],
+     "house_status": "parcel service did not answer"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Access to fetch at 'https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/1/query?f=json&geometry=-86.7745960%2C36.1586390&geometryType=esriGeometryPoint&inSR=4326&sp",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/1/query?f=json&geometry=-86.774946%2C36.158289%2C-86.774246%2C36.158989&geometryType=esriGeo",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/1/query?f=json&geometry=-86.8093410%2C36.1299180&geometryType=esriGeometryPoint&inSR=4326&sp",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/1/query?f=json&geometry=-86.809691%2C36.129568%2C-86.808991%2C36.130268&geometryType=esriGeo",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/1/query?f=json&geometry=-86.7841250%2C36.0826690&geometryType=esriGeometryPoint&inSR=4326&sp",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/1/query?f=json&geometry=-86.784475%2C36.082319%2C-86.783775%2C36.083019&geometryType=esriGeo",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  }
+ },
+ "superseded": {
+  "47037": {
+   "shard": "live_check_panels_2026-11-16_c.json",
+   "points": [
+    "parcel service did not answer",
+    "parcel service did not answer",
+    "parcel service did not answer"
+   ]
+  }
+ }
+}

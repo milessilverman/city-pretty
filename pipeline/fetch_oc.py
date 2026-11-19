@@ -81,44 +81,72 @@ def manifest(name, url, rows, note=""):
     log("  manifest", name, rows, "rows", url)
 
 
-def county_bbox():
-    """west, south, east, north of the county's block groups (plus 0.01 degree); Orange County keeps its original box"""
+def county_bboxes():
+    """west, south, east, north list of the county's block groups (plus 0.01 degree).
+    If coordinates cross the 180th meridian (e.g. Aleutians West 02016), splits into two boxes
+    at the antimeridian rather than spanning 358 degrees across the planet."""
     global BBOX
     if BBOX:
-        return BBOX
+        return [BBOX]
     j = json.load(open(os.path.join(DATA, "bg.geojson")))
     xs, ys = [], []
     def walk(c):
         if isinstance(c[0], (int, float)): xs.append(c[0]); ys.append(c[1])
         else: [walk(x) for x in c]
     for f in j["features"]: walk(f["geometry"]["coordinates"])
-    BBOX = (round(min(xs) - .01, 4), round(min(ys) - .01, 4), round(max(xs) + .01, 4), round(max(ys) + .01, 4))
-    return BBOX
+    min_x, max_x = min(xs), max(xs)
+    min_y, max_y = round(min(ys) - .01, 4), round(max(ys) + .01, 4)
+    if min_x < -160 and max_x > 160:
+        pos_xs = [x for x in xs if x > 0]
+        neg_xs = [x for x in xs if x < 0]
+        b1 = (round(min(pos_xs) - .01, 4), min_y, 180.0, max_y)
+        b2 = (-180.0, min_y, round(max(neg_xs) + .01, 4), max_y)
+        return [b1, b2]
+    BBOX = (round(min_x - .01, 4), min_y, round(max_x + .01, 4), max_y)
+    return [BBOX]
+
+
+def county_bbox():
+    """west, south, east, north of the county's block groups (plus 0.01 degree); Orange County keeps its original box"""
+    boxes = county_bboxes()
+    return boxes[0]
 
 
 def arcgis_query(url, where="1=1", fields="*", bbox=None, page=2000, extra=None, use_bbox=True):
-    """Page through an ArcGIS REST layer as GeoJSON features."""
-    feats, offset = [], 0
+    """Page through an ArcGIS REST layer as GeoJSON features. Seamlessly handles antimeridian split boxes."""
     if use_bbox and bbox is None:
-        bbox = county_bbox()
-    while True:
-        p = {"where": where, "outFields": fields, "returnGeometry": "true", "outSR": "4326", "f": "geojson", "resultOffset": offset, "resultRecordCount": page}
-        if use_bbox:
-            p.update({"geometry": ",".join(str(v) for v in bbox), "geometryType": "esriGeometryEnvelope", "inSR": "4326", "spatialRel": "esriSpatialRelIntersects"})
-        if extra:
-            p.update(extra)
-        j = json.loads(get(f"{url}/query", p, timeout=900))
-        if "error" in j:
-            raise RuntimeError(f"{url}: {j['error']}")
-        got = j.get("features", [])
-        feats += got
-        log("   ", url.split("/services/")[-1][:60], "offset", offset, "got", len(got))
-        if len(got) < page and not j.get("exceededTransferLimit"):
-            break
-        offset += len(got)
-        if not got:
-            break
-    return feats
+        boxes = county_bboxes()
+    elif use_bbox and bbox is not None:
+        boxes = [bbox]
+    else:
+        boxes = [None]
+    all_feats, seen_ids = [], set()
+    for b in boxes:
+        offset = 0
+        while True:
+            p = {"where": where, "outFields": fields, "returnGeometry": "true", "outSR": "4326", "f": "geojson", "resultOffset": offset, "resultRecordCount": page}
+            if b is not None:
+                p.update({"geometry": ",".join(str(v) for v in b), "geometryType": "esriGeometryEnvelope", "inSR": "4326", "spatialRel": "esriSpatialRelIntersects"})
+            if extra:
+                p.update(extra)
+            j = json.loads(get(f"{url}/query", p, timeout=900))
+            if "error" in j:
+                raise RuntimeError(f"{url}: {j['error']}")
+            got = j.get("features", [])
+            for feat in got:
+                fid = feat.get("id") or (feat.get("properties") and feat.get("properties").get("OBJECTID"))
+                if fid is not None:
+                    if fid in seen_ids:
+                        continue
+                    seen_ids.add(fid)
+                all_feats.append(feat)
+            log("   ", url.split("/services/")[-1][:60], "offset", offset, "got", len(got))
+            if len(got) < page and not j.get("exceededTransferLimit"):
+                break
+            offset += len(got)
+            if not got:
+                break
+    return all_feats
 
 
 def fetch_arcgis_geojson(name, url, **kw):
@@ -190,7 +218,9 @@ def place_pop(rows_place=None):
 
 
 def fetch_acs():
-    if have("acs_bg.json") and have("acs_place.json"):
+    # acs_tract.json is required too: without it the tract fallback in metrics_oc.py silently does nothing, which left
+    # 4,178 California block groups blank (audit 16 Nov 2026, docs/audit/bundles-nationwide-audit.md).
+    if have("acs_bg.json") and have("acs_place.json") and have("acs_tract.json"):
         if region.STATE == "CA" and "_rule" not in json.load(open(os.path.join(DATA, "acs_place.json"))):
             place_pop()   # round 8.6: rewrite a file written before the incorporated-first rule (this file only)
         return
@@ -1341,11 +1371,14 @@ def fetch_gtfs():
 
 # ---------------- 7. Schools (CDE), fire zones (CAL FIRE), EV chargers (AFDC) ----------------
 def fetch_schools():
-    if region.STATE != "CA":   # NCES EDGE public school locations (current school year), this county only
+    if region.STATE != "CA":   # NCES EDGE public school locations (current school year), county plus a padded margin
         if have("nces_schools.geojson"):
             return
         url = "https://services1.arcgis.com/Ua5sjt3LWTPigjyD/arcgis/rest/services/Public_School_Locations_Current/FeatureServer/0"
-        feats = arcgis_query(url, where=f"CNTY='{region.FIPS}'", fields="NCESSCH,NAME,CITY,STATE,CNTY,LAT,LON,SCHOOLYEAR", use_bbox=False)
+        # Padded county box, not CNTY=<county>: the nearest school is often across the county line
+        # (audit 16 Nov 2026: a Travis County block group showed 9,298 m; the nearest school, in Williamson County, is 5,665 m).
+        w, so, e, n = county_bbox()   # county_bbox pads only 0.01 deg (~1 km); schools need ~10 km
+        feats = arcgis_query(url, where="1=1", fields="NCESSCH,NAME,CITY,STATE,CNTY,LAT,LON,SCHOOLYEAR", bbox=(w - 0.09, so - 0.09, e + 0.09, n + 0.09))
         json.dump({"type": "FeatureCollection", "features": feats, "source": url, "downloaded": time.strftime("%Y-%m-%d")}, open(os.path.join(DATA, "nces_schools.geojson"), "w"))
         log("saved nces_schools.geojson", len(feats)); manifest("nces_schools.geojson", url, len(feats), "NCES EDGE public school locations (current)")
         return
@@ -1372,9 +1405,9 @@ def fetch_fire_ev():
         meta = json.loads(get(u, {"f": "json"}))
         save("afdc_dcfc.json", json.dumps({"source": u, "downloaded": time.strftime("%Y-%m-%d"), "dataLastEditDate": (meta.get("editingInfo") or {}).get("dataLastEditDate"), "fuel_stations": rows}))
         manifest("afdc_dcfc.json", u, len(rows), "public, available DC fast-charging stations (AFDC via USDOT/BTS NTAD)")
-    key = os.environ.get("NREL_API_KEY")
+    key = os.environ.get("NLR_API_KEY") or os.environ.get("NREL_API_KEY")
     if key and not have("afdc_dcfc.json"):
-        save("afdc_dcfc.json", get("https://developer.nrel.gov/api/alt-fuel-stations/v1.json", {"fuel_type": "ELEC", "state": "CA", "ev_charging_level": "dc_fast", "status": "E", "access": "public", "limit": "all", "api_key": key}))
+        save("afdc_dcfc.json", get("https://developer.nlr.gov/api/alt-fuel-stations/v1.json", {"fuel_type": "ELEC", "state": "CA", "ev_charging_level": "dc_fast", "status": "E", "access": "public", "limit": "all", "api_key": key}))
 
 
 # ---------------- 8. CCRS crashes (CHP via data.ca.gov datastore) ----------------
@@ -1707,9 +1740,101 @@ def fetch_doj():
     if os.path.exists(p) and os.path.getsize(p) > 1000: return
     os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, "wb").write(get(DOJ_URL, binary=True, timeout=900)); manifest("doj/Crimes_and_Clearances_with_Arson-1985-2025.csv", DOJ_URL, None, "CA DOJ agency-year crime")
+# Tags osm_extract.py keeps (its ROADS, RAIL_W, PARK_*, AMEN*, SHOP, SPORTS, PLACES, is_water, is_infra, bus stops). Used only where the
+# registry has no downloadable extract (region.OVERPASS_URL): Overpass returns the county box with these tags, plus every node and member way
+# they need (recurse down), as OSM XML; osm_extract.py then reads it exactly as it reads a .pbf. Anything else in an extract is dropped by
+# osm_extract.py's own filters, so its output is the same set of features.
+OVERPASS_SELECT = [
+    'nwr["highway"~"^(motorway|motorway_link|trunk|trunk_link|primary|secondary|tertiary|residential|living_street|unclassified|primary_link|secondary_link|tertiary_link|bus_stop)$"]',
+    'way["highway"="service"]["service"="alley"]',
+    'nwr["railway"~"^(station|halt|stop|rail|light_rail|subway|tram)$"]', 'nwr["public_transport"="station"]',
+    'nwr["leisure"~"^(park|garden|nature_reserve|dog_park|playground|recreation_ground|pitch|swimming_pool|sports_centre|fitness_station)$"]',
+    'nwr["landuse"~"^(recreation_ground|allotments|cemetery)$"]', 'nwr["natural"~"^(beach|water|coastline)$"]', 'nwr["boundary"="protected_area"]',
+    'nwr["waterway"~"^(river|stream|canal|drain)$"]',
+    'nwr["amenity"~"^(library|community_centre|townhall|fire_station|police|post_office|hospital|clinic|doctors|courthouse|school|college|university|kindergarten|marketplace|charging_station|social_facility|restaurant|cafe|fast_food|toilets)$"]',
+    'nwr["tourism"="museum"]', 'nwr["sport"~"pickleball|tennis|basketball|soccer|baseball|skateboard"]', 'nwr["shop"~"^(supermarket|greengrocer|grocery)$"]',
+    'node["place"~"^(neighbourhood|suburb|quarter|village|hamlet|town|city)$"]', 'way["barrier"="wall"]', 'way["noise_barrier"]', 'way["power"="line"]',
+]
+
+
+# Overpass query groups: (selectors, tiles per side). Roads and water are dense, so their box is cut into tiles; each query also returns
+# every node and member way its features need (recurse down), so a feature that crosses a tile line is complete in each tile it touches.
+OVERPASS_GROUPS = [(OVERPASS_SELECT[:2], 3), ([x for x in OVERPASS_SELECT if '"natural"' in x or '"waterway"' in x], 2),
+                   ([x for x in OVERPASS_SELECT[2:] if '"natural"' not in x and '"waterway"' not in x], 2)]
+
+
+def _overpass_xml(sel, box, depth=0):
+    """OSM XML for the selectors in one box (south, west, north, east). The public endpoint answers some requests with 504: each query is
+    retried with growing waits, and a box that still fails is cut in four (up to twice). Returns a list of XML strings (one per box)."""
+    s_, w, n, e = box
+    q = "[out:xml][timeout:900];(" + "".join(f"{x}({s_:.5f},{w:.5f},{n:.5f},{e:.5f});" for x in sel) + ");(._;>;);out body;"
+    for i in range(8):
+        try:
+            x = get(region.OVERPASS_URL, data=("data=" + urllib.parse.quote(q)).encode(), binary=True, timeout=1000, retries=1)
+            if b"</osm>" in x[-200:] and b"<remark>" not in x[-3000:]:
+                return [x]
+            log("  overpass incomplete answer", box, x[-300:].decode("utf-8", "replace"))
+        except Exception as ex:
+            log("  overpass", "try", i + 1, box, str(ex)[:80])
+        time.sleep(min(15 * (i + 1), 90))
+    if depth >= 2:
+        raise RuntimeError(f"Overpass: box {box} failed after retries and splits")
+    ms, mw = (s_ + n) / 2, (w + e) / 2
+    out = []
+    for sub in ((s_, w, ms, mw), (s_, mw, ms, e), (ms, w, n, mw), (ms, mw, n, e)):
+        out += _overpass_xml(sel, sub, depth + 1)
+    return out
+
+
+def fetch_osm_overpass(p):
+    """The county box from the Overpass API (region.OVERPASS_URL), only the tags osm_extract.py keeps, merged into one OSM XML file with
+    osmium (duplicate objects from overlapping tiles kept once). All or nothing: if any tile fails, nothing is saved, so a partial download
+    can never undercount the county's features."""
+    import osmium, re as _re, tempfile
+    # the box osm_extract.py clips an extract to (its county_box: block groups plus 0.02 degree), not county_bbox()'s 0.01: with the smaller
+    # box, 111 of Anchorage's 10,674 road ways in the clip box were never downloaded (found by comparing with an Overpass count, 16 Nov)
+    import osm_extract
+    boxes = osm_extract.county_boxes() if hasattr(osm_extract, "county_boxes") else [osm_extract.county_box()]
+    parts, base = [], None
+    for w, s_, e, n in boxes:
+        for sel, k in OVERPASS_GROUPS:
+            for i in range(k):
+                for j in range(k):
+                    box = (s_ + (n - s_) * j / k, w + (e - w) * i / k, s_ + (n - s_) * (j + 1) / k, w + (e - w) * (i + 1) / k)
+                    xs = _overpass_xml(sel, box)
+                    parts += xs
+                    log("  overpass ok", len(sel), "selectors", [round(v, 3) for v in box], sum(len(x) for x in xs) // 1000, "kB")
+    for x in parts:
+        m = _re.search(rb'<meta osm_base="([^"]+)"', x[:3000])
+        if m and (base is None or m.group(1).decode() < base):
+            base = m.group(1).decode()   # the oldest database state among the answers
+    tmp = tempfile.mkdtemp(dir=os.path.dirname(p))
+    mr = osmium.MergeInputReader()
+    for i, x in enumerate(parts):
+        q = os.path.join(tmp, f"part{i}.osm"); open(q, "wb").write(x); mr.add_file(q)
+    wr = osmium.SimpleWriter(p + ".tmp.osm", overwrite=True)
+    class H(osmium.SimpleHandler):
+        def node(self, o): wr.add_node(o)
+        def way(self, o): wr.add_way(o)
+        def relation(self, o): wr.add_relation(o)
+    mr.apply(H(), idx="")
+    wr.close()
+    for f in os.listdir(tmp):
+        os.remove(os.path.join(tmp, f))
+    os.rmdir(tmp)
+    os.replace(p + ".tmp.osm", p)
+    box = f"{s_:.4f},{w:.4f},{n:.4f},{e:.4f}"
+    open(os.path.join(os.path.dirname(p), region.OSM_STATE), "w").write(f"timestamp={base or ''}\nsource={region.OVERPASS_URL}\nbox={box}\nqueries={len(parts)}\n")
+    log("saved", p, f"{os.path.getsize(p) / 1e6:.0f} MB", "osm_base", base, "box", box, len(parts), "queries")
+
+
 def fetch_osm_extract():
     url = region.OSM["url"]; name = region.OSM_FILE; p = os.path.join(DATA, "osm", name)
     os.makedirs(os.path.dirname(p), exist_ok=True)
+    if region.OVERPASS_URL:
+        if not have(os.path.join("osm", name)):
+            fetch_osm_overpass(p)
+        return
     if not have(os.path.join("osm", name)) and region.OSM.get("split"):
         # a state cut once from the regional file by osm_split.py (cache/osm_states); shared by every county in the state
         sp = os.path.join(SHARED, "osm_states", region.OSM["split"].replace("/", "__"))

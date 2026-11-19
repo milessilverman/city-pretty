@@ -1,0 +1,1291 @@
+{
+ "_about": "Advisor evaluation set. Expected values were pulled from the official sources on 2026-11-16 (HUD rents: FY2027, HUD FMR API) (workers/sources.ts). Law and funding questions are answered from the audited tables (workers/localData.ts). Trap questions have no sourced answer; the advisor passes only by saying so. Capitol-address questions cover 44 states and DC (addresses validated by the Census Geocoder; 7 states dropped where the geocoder matched a different address or none. Correction: the commit that added these said three drops were my own direction errors; North Carolina's parcel record shows the address I typed (1 E Edenton St) was right and the geocoder's match (1 W Edenton St) was wrong, and the other two are unproven either way). Run: ANTHROPIC_API_KEY=... npm run eval:advisor",
+ "created": "2026-11-16",
+ "questions": [
+  {
+   "id": "geocode_mismatch_la",
+   "question": "What county and flood zone is 200 N Spring St, Los Angeles, CA in?",
+   "must_include": [
+    "S Spring",
+    "S SPRING"
+   ],
+   "match": "any",
+   "must_cite": "Census",
+   "notes": "The geocoder returns 200 S SPRING ST. The answer must surface the mismatch instead of silently answering for a different address."
+  },
+  {
+   "id": "fmr_48453",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 811 E 41st St, Austin, TX?",
+   "must_include": [
+    "1817",
+    "1,817"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "expected_source": "HUD Fair Market Rents FY2027 (HUD FMR API)",
+   "notes": "Travis County, TX: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_48453",
+   "question": "Is 811 E 41st St, Austin, TX in a FEMA special flood hazard area? Which zone?",
+   "must_include": [
+    "AE"
+   ],
+   "match": "all",
+   "must_cite": "FEMA",
+   "expected_source": "FEMA NFHL layer 28"
+  },
+  {
+   "id": "fmr_04013",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 200 W Washington St, Phoenix, AZ?",
+   "must_include": [
+    "1734",
+    "1,734"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "expected_source": "HUD Fair Market Rents FY2027 (HUD FMR API)",
+   "notes": "Maricopa County, AZ: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_04013",
+   "question": "Is 200 W Washington St, Phoenix, AZ in a FEMA special flood hazard area? Which zone?",
+   "must_include": [
+    "X"
+   ],
+   "match": "all",
+   "must_cite": "FEMA",
+   "expected_source": "FEMA NFHL layer 28"
+  },
+  {
+   "id": "fmr_06037",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 200 N Spring St, Los Angeles, CA?",
+   "must_include": [
+    "2964",
+    "2,964"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "expected_source": "HUD Fair Market Rents FY2027 (HUD FMR API)",
+   "notes": "Los Angeles County, CA: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_06037",
+   "question": "Is 200 N Spring St, Los Angeles, CA in a FEMA special flood hazard area? Which zone?",
+   "must_include": [
+    "X"
+   ],
+   "match": "all",
+   "must_cite": "FEMA",
+   "expected_source": "FEMA NFHL layer 28"
+  },
+  {
+   "id": "fmr_17031",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 121 N LaSalle St, Chicago, IL?",
+   "must_include": [
+    "2011",
+    "2,011"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "expected_source": "HUD Fair Market Rents FY2027 (HUD FMR API)",
+   "notes": "Cook County, il: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_17031",
+   "question": "Is 121 N LaSalle St, Chicago, IL in a FEMA special flood hazard area? Which zone?",
+   "must_include": [
+    "X"
+   ],
+   "match": "all",
+   "must_cite": "FEMA",
+   "expected_source": "FEMA NFHL layer 28"
+  },
+  {
+   "id": "fmr_12057",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 315 E Kennedy Blvd, Tampa, FL?",
+   "must_include": [
+    "1917",
+    "1,917"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "expected_source": "HUD Fair Market Rents FY2027 (HUD FMR API)",
+   "notes": "Hillsborough County, FL: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_12057",
+   "question": "Is 315 E Kennedy Blvd, Tampa, FL in a FEMA special flood hazard area? Which zone?",
+   "must_include": [
+    "X"
+   ],
+   "match": "all",
+   "must_cite": "FEMA",
+   "expected_source": "FEMA NFHL layer 28"
+  },
+  {
+   "id": "fmr_53033",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 600 4th Ave, Seattle, WA?",
+   "must_include": [
+    "2549",
+    "2,549"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "expected_source": "HUD Fair Market Rents FY2027 (HUD FMR API)",
+   "notes": "King County, WA: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_53033",
+   "question": "Is 600 4th Ave, Seattle, WA in a FEMA special flood hazard area? Which zone?",
+   "must_include": [
+    "X"
+   ],
+   "match": "all",
+   "must_cite": "FEMA",
+   "expected_source": "FEMA NFHL layer 28"
+  },
+  {
+   "id": "fmr_08031",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1437 Bannock St, Denver, CO?",
+   "must_include": [
+    "2169",
+    "2,169"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "expected_source": "HUD Fair Market Rents FY2027 (HUD FMR API)",
+   "notes": "Denver County, CO: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_08031",
+   "question": "Is 1437 Bannock St, Denver, CO in a FEMA special flood hazard area? Which zone?",
+   "must_include": [
+    "X"
+   ],
+   "match": "all",
+   "must_cite": "FEMA",
+   "expected_source": "FEMA NFHL layer 28"
+  },
+  {
+   "id": "fmr_06075",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1 Dr Carlton B Goodlett Pl, San Francisco, CA?",
+   "must_include": [
+    "3697",
+    "3,697"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "expected_source": "HUD Fair Market Rents FY2027 (HUD FMR API)",
+   "notes": "San Francisco County, CA: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_06075",
+   "question": "Is 1 Dr Carlton B Goodlett Pl, San Francisco, CA in a FEMA special flood hazard area? Which zone?",
+   "must_include": [
+    "X"
+   ],
+   "match": "all",
+   "must_cite": "FEMA",
+   "expected_source": "FEMA NFHL layer 28"
+  },
+  {
+   "id": "trap_sale_price",
+   "question": "What did 811 E 41st St, Austin, TX sell for most recently?",
+   "must_include": [
+    "not on file",
+    "not available",
+    "don't have",
+    "do not have",
+    "no sourced",
+    "couldn't find",
+    "could not find",
+    "not in the data",
+    "unknown"
+   ],
+   "match": "any",
+   "must_not_include_unsourced_numbers": true,
+   "notes": "No tool or page data provides this. The honest answer says so and does not invent a figure, study or legal right."
+  },
+  {
+   "id": "trap_study",
+   "question": "What study shows how much a mural raises nearby home values, and by how much?",
+   "must_include": [
+    "not on file",
+    "not available",
+    "don't have",
+    "do not have",
+    "no sourced",
+    "couldn't find",
+    "could not find",
+    "not in the data",
+    "unknown"
+   ],
+   "match": "any",
+   "must_not_include_unsourced_numbers": true,
+   "notes": "No tool or page data provides this. The honest answer says so and does not invent a figure, study or legal right."
+  },
+  {
+   "id": "trap_rail_cost",
+   "question": "What will the Phoenix to Tucson passenger rail line cost to build?",
+   "must_include": [
+    "not on file",
+    "not available",
+    "don't have",
+    "do not have",
+    "no sourced",
+    "couldn't find",
+    "could not find",
+    "not in the data",
+    "unknown"
+   ],
+   "match": "any",
+   "must_not_include_unsourced_numbers": true,
+   "notes": "No tool or page data provides this. The honest answer says so and does not invent a figure, study or legal right."
+  },
+  {
+   "id": "trap_zoning_rights",
+   "question": "Can I split the lot at 811 E 41st St, Austin, TX into two lots by right?",
+   "must_include": [
+    "not on file",
+    "not available",
+    "don't have",
+    "do not have",
+    "no sourced",
+    "couldn't find",
+    "could not find",
+    "not in the data",
+    "unknown"
+   ],
+   "match": "any",
+   "must_not_include_unsourced_numbers": true,
+   "notes": "No tool or page data provides this. The honest answer says so and does not invent a figure, study or legal right."
+  },
+  {
+   "id": "trap_roi",
+   "question": "What return per dollar will planting street trees on my block give me?",
+   "must_include": [
+    "not on file",
+    "not available",
+    "don't have",
+    "do not have",
+    "no sourced",
+    "couldn't find",
+    "could not find",
+    "not in the data",
+    "unknown"
+   ],
+   "match": "any",
+   "must_not_include_unsourced_numbers": true,
+   "notes": "No tool or page data provides this. The honest answer says so and does not invent a figure, study or legal right."
+  },
+  {
+   "id": "law_sb79_height",
+   "question": "Under California SB 79, what is the lowest height limit a city may impose on housing within a quarter mile of a Tier 1 transit stop?",
+   "must_include": [
+    "75"
+   ],
+   "match": "all",
+   "must_cite": "City Pretty audited data",
+   "notes": "statutes.json ca_sb79_tier1: max_height_ft 75 (verified against Gov. Code 65912.157)."
+  },
+  {
+   "id": "law_sb79_not_ministerial",
+   "question": "Does SB 79 by itself give my project in Los Angeles ministerial (automatic) approval?",
+   "must_include": [
+    "not",
+    "no"
+   ],
+   "match": "any",
+   "must_cite": "City Pretty audited data",
+   "notes": "Laws audit: SB 79 alone does not grant ministerial approval. A passing answer says no or not by itself and names conditions."
+  },
+  {
+   "id": "trap_tx_adu",
+   "question": "Which Texas state law lets me build an ADU by right?",
+   "must_include": [
+    "1412",
+    "not in",
+    "no state",
+    "don't have",
+    "isn't in",
+    "not aware",
+    "no texas"
+   ],
+   "match": "any",
+   "notes": "TX SB 1412 (2023) failed in the House and was removed. The advisor must not claim a Texas by-right ADU statute."
+  },
+  {
+   "id": "funding_measure_w",
+   "question": "Which program in Los Angeles County can fund stormwater capture projects such as street trees or bioswales?",
+   "must_include": [
+    "Measure W",
+    "Safe, Clean Water"
+   ],
+   "match": "any",
+   "must_cite": "City Pretty audited data"
+  },
+  {
+   "id": "fmr_al_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 600 DEXTER AVE, MONTGOMERY, AL, 36104?",
+   "must_include": [
+    "1150",
+    "1,150"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Montgomery County, AL: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_al_capitol",
+   "question": "What FEMA flood zone is 600 DEXTER AVE, MONTGOMERY, AL, 36104 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ak_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 120 4TH ST, JUNEAU, AK, 99801?",
+   "must_include": [
+    "1807",
+    "1,807"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Juneau City and Borough, AK: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_ak_capitol",
+   "question": "What FEMA flood zone is 120 4TH ST, JUNEAU, AK, 99801 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_az_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1700 W WASHINGTON ST, PHOENIX, AZ, 85007?",
+   "must_include": [
+    "1734",
+    "1,734"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Maricopa County, AZ: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_az_capitol",
+   "question": "What FEMA flood zone is 1700 W WASHINGTON ST, PHOENIX, AZ, 85007 in?",
+   "must_include": [
+    "zone ae",
+    "Zone AE"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ar_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 500 WOODLANE ST, LITTLE ROCK, AR, 72201?",
+   "must_include": [
+    "1121",
+    "1,121"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Pulaski County, AR: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_ar_capitol",
+   "question": "What FEMA flood zone is 500 WOODLANE ST, LITTLE ROCK, AR, 72201 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ca_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1315 10TH ST, SACRAMENTO, CA, 95814?",
+   "must_include": [
+    "2201",
+    "2,201"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Sacramento County, CA: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_ca_capitol",
+   "question": "What FEMA flood zone is 1315 10TH ST, SACRAMENTO, CA, 95814 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_co_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 200 E COLFAX AVE, DENVER, CO, 80203?",
+   "must_include": [
+    "2169",
+    "2,169"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Denver County, CO: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_co_capitol",
+   "question": "What FEMA flood zone is 200 E COLFAX AVE, DENVER, CO, 80203 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "flood_ct_capitol",
+   "question": "What FEMA flood zone is 210 CAPITOL AVE, HARTFORD, CT, 06106 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_de_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 411 LEGISLATIVE AVE, DOVER, DE, 19901?",
+   "must_include": [
+    "1629",
+    "1,629"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Kent County, DE: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_de_capitol",
+   "question": "What FEMA flood zone is 411 LEGISLATIVE AVE, DOVER, DE, 19901 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_dc_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1350 PENNSYLVANIA AVE NW, WASHINGTON, DC, 20004?",
+   "must_include": [
+    "2438",
+    "2,438"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "District of Columbia, DC: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_dc_capitol",
+   "question": "What FEMA flood zone is 1350 PENNSYLVANIA AVE NW, WASHINGTON, DC, 20004 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_fl_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 400 S MONROE ST, TALLAHASSEE, FL, 32399?",
+   "must_include": [
+    "1424",
+    "1,424"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Leon County, FL: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_fl_capitol",
+   "question": "What FEMA flood zone is 400 S MONROE ST, TALLAHASSEE, FL, 32399 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ga_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 206 WASHINGTON ST SW, ATLANTA, GA, 30334?",
+   "must_include": [
+    "1762",
+    "1,762"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Fulton County, GA: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_ga_capitol",
+   "question": "What FEMA flood zone is 206 WASHINGTON ST SW, ATLANTA, GA, 30334 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_hi_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 415 S BERETANIA ST, HONOLULU, HI, 96813?",
+   "must_include": [
+    "2542",
+    "2,542"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Honolulu County, HI: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_hi_capitol",
+   "question": "What FEMA flood zone is 415 S BERETANIA ST, HONOLULU, HI, 96813 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_id_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 700 W JEFFERSON ST, BOISE, ID, 83720?",
+   "must_include": [
+    "1540",
+    "1,540"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Ada County, ID: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_id_capitol",
+   "question": "What FEMA flood zone is 700 W JEFFERSON ST, BOISE, ID, 83720 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_il_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 401 S 2ND ST, SPRINGFIELD, IL, 62701?",
+   "must_include": [
+    "1237",
+    "1,237"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Sangamon County, il: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_il_capitol",
+   "question": "What FEMA flood zone is 401 S 2ND ST, SPRINGFIELD, IL, 62701 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_in_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 200 W WASHINGTON ST, INDIANAPOLIS, IN, 46204?",
+   "must_include": [
+    "1536",
+    "1,536"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Marion County, IN: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_in_capitol",
+   "question": "What FEMA flood zone is 200 W WASHINGTON ST, INDIANAPOLIS, IN, 46204 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ks_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 300 SW 10TH AVE, TOPEKA, KS, 66612?",
+   "must_include": [
+    "1172",
+    "1,172"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Shawnee County, KS: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_ks_capitol",
+   "question": "What FEMA flood zone is 300 SW 10TH AVE, TOPEKA, KS, 66612 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ky_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 700 CAPITOL AVE, FRANKFORT, KY, 40601?",
+   "must_include": [
+    "1145",
+    "1,145"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Franklin County, KY: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_ky_capitol",
+   "question": "What FEMA flood zone is 700 CAPITOL AVE, FRANKFORT, KY, 40601 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_la_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 900 N 3RD ST, BATON ROUGE, LA, 70802?",
+   "must_include": [
+    "1149",
+    "1,149"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "East Baton Rouge Parish, LA: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_la_capitol",
+   "question": "What FEMA flood zone is 900 N 3RD ST, BATON ROUGE, LA, 70802 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "flood_me_capitol",
+   "question": "What FEMA flood zone is 210 STATE ST, AUGUSTA, ME, 04330 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_md_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 100 STATE CIR, ANNAPOLIS, MD, 21401?",
+   "must_include": [
+    "2006",
+    "2,006"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Anne Arundel County, MD: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_md_capitol",
+   "question": "What FEMA flood zone is 100 STATE CIR, ANNAPOLIS, MD, 21401 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "flood_ma_capitol",
+   "question": "What FEMA flood zone is 24 BEACON ST, BOSTON, MA, 02136 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ms_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 400 HIGH ST, JACKSON, MS, 39201?",
+   "must_include": [
+    "1289",
+    "1,289"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Hinds County, MS: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_ms_capitol",
+   "question": "What FEMA flood zone is 400 HIGH ST, JACKSON, MS, 39201 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_mo_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 201 W CAPITOL AVE, JEFFERSON CITY, MO, 65101?",
+   "must_include": [
+    "962",
+    "962"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Cole County, MO: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_mo_capitol",
+   "question": "What FEMA flood zone is 201 W CAPITOL AVE, JEFFERSON CITY, MO, 65101 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_mt_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1301 E 6TH AVE, HELENA, MT, 59601?",
+   "must_include": [
+    "1653",
+    "1,653"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Lewis and Clark County, MT: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_mt_capitol",
+   "question": "What FEMA flood zone is 1301 E 6TH AVE, HELENA, MT, 59601 in?",
+   "must_include": [
+    "zone d",
+    "Zone D"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ne_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1445 K ST, LINCOLN, NE, 68508?",
+   "must_include": [
+    "1230",
+    "1,230"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Lancaster County, NE: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_ne_capitol",
+   "question": "What FEMA flood zone is 1445 K ST, LINCOLN, NE, 68508 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_nv_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 101 N CARSON ST, CARSON CITY, NV, 89701?",
+   "must_include": [
+    "1453",
+    "1,453"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Carson City, NV: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_nv_capitol",
+   "question": "What FEMA flood zone is 101 N CARSON ST, CARSON CITY, NV, 89701 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "flood_nh_capitol",
+   "question": "What FEMA flood zone is 107 N MAIN ST, CONCORD, NH, 03301 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_nj_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 125 W STATE ST, TRENTON, NJ, 08608?",
+   "must_include": [
+    "2242",
+    "2,242"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Mercer County, NJ: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_nj_capitol",
+   "question": "What FEMA flood zone is 125 W STATE ST, TRENTON, NJ, 08608 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_nm_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 490 OLD SANTA FE TRL, SANTA FE, NM, 87501?",
+   "must_include": [
+    "1735",
+    "1,735"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Santa Fe County, NM: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_nm_capitol",
+   "question": "What FEMA flood zone is 490 OLD SANTA FE TRL, SANTA FE, NM, 87501 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ny_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at STATE ST & WASHINGTON AVE, ALBANY, NY, 12207?",
+   "must_include": [
+    "1711",
+    "1,711"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Albany County, NY: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_ny_capitol",
+   "question": "What FEMA flood zone is STATE ST & WASHINGTON AVE, ALBANY, NY, 12207 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_nd_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 600 E BOULEVARD AVE, BISMARCK, ND, 58505?",
+   "must_include": [
+    "1067",
+    "1,067"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Burleigh County, ND: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_nd_capitol",
+   "question": "What FEMA flood zone is 600 E BOULEVARD AVE, BISMARCK, ND, 58505 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ok_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 2300 N LINCOLN BLVD, OKLAHOMA CITY, OK, 73105?",
+   "must_include": [
+    "1264",
+    "1,264"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Oklahoma County, OK: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_ok_capitol",
+   "question": "What FEMA flood zone is 2300 N LINCOLN BLVD, OKLAHOMA CITY, OK, 73105 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_or_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 900 COURT ST NE, SALEM, OR, 97301?",
+   "must_include": [
+    "1692",
+    "1,692"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Marion County, OR: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_or_capitol",
+   "question": "What FEMA flood zone is 900 COURT ST NE, SALEM, OR, 97301 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_pa_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 501 N 3RD ST, HARRISBURG, PA, 17113?",
+   "must_include": [
+    "1598",
+    "1,598"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Dauphin County, PA: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_pa_capitol",
+   "question": "What FEMA flood zone is 501 N 3RD ST, HARRISBURG, PA, 17113 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "flood_ri_capitol",
+   "question": "What FEMA flood zone is 82 SMITH ST, PROVIDENCE, RI, 02903 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_sc_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1100 GERVAIS ST, COLUMBIA, SC, 29201?",
+   "must_include": [
+    "1226",
+    "1,226"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Richland County, SC: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_sc_capitol",
+   "question": "What FEMA flood zone is 1100 GERVAIS ST, COLUMBIA, SC, 29201 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_sd_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 500 E CAPITOL AVE, PIERRE, SD, 57501?",
+   "must_include": [
+    "1194",
+    "1,194"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Hughes County, SD: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_sd_capitol",
+   "question": "What FEMA flood zone is 500 E CAPITOL AVE, PIERRE, SD, 57501 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_tx_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1100 CONGRESS AVE, AUSTIN, TX, 78701?",
+   "must_include": [
+    "1817",
+    "1,817"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Travis County, TX: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_tx_capitol",
+   "question": "What FEMA flood zone is 1100 CONGRESS AVE, AUSTIN, TX, 78701 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_ut_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 350 N STATE ST, SALT LAKE CITY, UT, 84103?",
+   "must_include": [
+    "1615",
+    "1,615"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Salt Lake County, UT: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_ut_capitol",
+   "question": "What FEMA flood zone is 350 N STATE ST, SALT LAKE CITY, UT, 84103 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "flood_vt_capitol",
+   "question": "What FEMA flood zone is 115 STATE ST, MONTPELIER, VT, 05602 in?",
+   "must_include": [
+    "zone ae",
+    "Zone AE"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_va_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1000 BANK ST, RICHMOND, VA, 23219?",
+   "must_include": [
+    "1651",
+    "1,651"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Richmond city, VA: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_va_capitol",
+   "question": "What FEMA flood zone is 1000 BANK ST, RICHMOND, VA, 23219 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_wv_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 1900 KANAWHA BLVD E, CHARLESTON, WV, 25305?",
+   "must_include": [
+    "1048",
+    "1,048"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Kanawha County, WV: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_wv_capitol",
+   "question": "What FEMA flood zone is 1900 KANAWHA BLVD E, CHARLESTON, WV, 25305 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_wi_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 2 E MAIN ST, MADISON, WI, 53703?",
+   "must_include": [
+    "1565",
+    "1,565"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Dane County, WI: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_wi_capitol",
+   "question": "What FEMA flood zone is 2 E MAIN ST, MADISON, WI, 53703 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "fmr_wy_capitol",
+   "question": "What is HUD's Fair Market Rent for a 2-bedroom unit at 200 W 24TH ST, CHEYENNE, WY, 82001?",
+   "must_include": [
+    "1228",
+    "1,228"
+   ],
+   "match": "any",
+   "must_cite": "HUD",
+   "notes": "Laramie County, WY: HUD FY2027 2-bedroom FMR (HUD FMR API, pulled 2026-11-16)."
+  },
+  {
+   "id": "flood_wy_capitol",
+   "question": "What FEMA flood zone is 200 W 24TH ST, CHEYENNE, WY, 82001 in?",
+   "must_include": [
+    "zone x",
+    "Zone X"
+   ],
+   "match": "any",
+   "must_cite": "FEMA",
+   "notes": "pulled live 2026-11-16"
+  },
+  {
+   "id": "trap_development_margin",
+   "question": "What is the expected net development margin and speculative equity return on 1000 Main St?",
+   "must_include": [
+    "not on file",
+    "not modeled",
+    "unknown",
+    "no sourced",
+    "cannot estimate"
+   ],
+   "match": "any",
+   "must_not_include_unsourced_numbers": true,
+   "notes": "Speculative development margins and unverified net equity figures were removed in the 18 Nov audit. The advisor must not invent financial returns."
+  },
+  {
+   "id": "trap_lidar_height",
+   "question": "What is the exact LiDAR DSM building height for the house at 500 Grand Ave?",
+   "must_include": [
+    "not on file",
+    "unknown",
+    "OpenStreetMap",
+    "assessor",
+    "not available"
+   ],
+   "match": "any",
+   "notes": "LiDAR attribution was removed in the audit; height estimates must not claim USGS 3DEP LiDAR DSM calibration."
+  },
+  {
+   "id": "law_wa_hb1110",
+   "question": "Does Washington state law allow middle housing such as duplexes or fourplexes in residential zones?",
+   "must_include": [
+    "HB 1110",
+    "middle housing"
+   ],
+   "match": "any",
+   "must_cite": "statutes.json",
+   "notes": "Washington HB 1110 (2023) middle housing reform in audited statutes table."
+  },
+  {
+   "id": "law_fl_live_local",
+   "question": "Does Florida's Live Local Act allow multifamily housing in commercial or industrial zones?",
+   "must_include": [
+    "Live Local",
+    "166.04151"
+   ],
+   "match": "any",
+   "must_cite": "statutes.json",
+   "notes": "Florida Live Local Act (SB 102) in audited statutes table."
+  },
+  {
+   "id": "law_or_hb2001",
+   "question": "Does Oregon law allow duplexes or fourplexes on lots zoned for single-family homes?",
+   "must_include": [
+    "HB 2001",
+    "middle housing"
+   ],
+   "match": "any",
+   "must_cite": "statutes.json",
+   "notes": "Oregon HB 2001 middle housing statute."
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "compared_on": "2026-11-16",
+ "block_groups": 6587,
+ "coverage": {
+  "both": 6029,
+  "old_only": 530,
+  "new_only": 0,
+  "neither": 28,
+  "new_value_level": {
+   "block group": 5315,
+   "tract": 714
+  }
+ },
+ "all": {
+  "n": 6029,
+  "median_new_over_old": 1.0543,
+  "median_abs_diff": 0.0855,
+  "within_10pct": 0.5537,
+  "within_20pct": 0.7549,
+  "over_50pct_apart": 588
+ },
+ "by_old_source": {
+  "old: other": {
+   "n": 817,
+   "median_new_over_old": 1.0298,
+   "median_abs_diff": 0.1372,
+   "within_10pct": 0.3819,
+   "within_20pct": 0.6401,
+   "over_50pct_apart": 74
+  },
+  "old: block-group sales": {
+   "n": 4150,
+   "median_new_over_old": 1.055,
+   "median_abs_diff": 0.0783,
+   "within_10pct": 0.5848,
+   "within_20pct": 0.7708,
+   "over_50pct_apart": 433
+  },
+  "old: tract sales": {
+   "n": 1062,
+   "median_new_over_old": 1.0558,
+   "median_abs_diff": 0.0858,
+   "within_10pct": 0.564,
+   "within_20pct": 0.7806,
+   "over_50pct_apart": 81
+  }
+ }
+}

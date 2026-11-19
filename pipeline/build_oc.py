@@ -212,7 +212,7 @@ def sources_table(M):
     cov = M.get("coverage") or {}; tr = cov.get("transit") or {}; te = cov.get("tree_equity") or {}; st = cov.get("street_trees") or {}; ta = cov.get("tax_rate_areas") or {}
     osm_state = ""
     try:
-        osm_state = [l.split("=")[1].replace("\\", "") for l in open(os.path.join(DATA, "osm", region.OSM_FILE.replace("-latest.osm.pbf", ".state.txt"))).read().splitlines() if l.startswith("timestamp")][0][:10]
+        osm_state = [l.split("=")[1].replace("\\", "") for l in open(os.path.join(DATA, "osm", region.OSM_STATE)).read().splitlines() if l.startswith("timestamp")][0][:10]
     except Exception:
         pass
     ex = lambda n: os.path.exists(os.path.join(DATA, n)); CA = region.STATE == "CA"
@@ -226,7 +226,8 @@ def sources_table(M):
         except Exception:
             return None
     osm = region.OSM; host = (osm.get("url") or "").split("/")[2] if "//" in (osm.get("url") or "") else "download.openstreetmap.fr"
-    osm_desc = (f'{osm["url"].rsplit("/", 1)[1]} from {host}, cut to {STN} with osmium, then to the box around {NM}' if osm.get("split") else
+    osm_desc = (f"the Overpass API at {region.OVERPASS_URL.split('/')[2]} (no {STN} extract can be downloaded here), the box around {NM}" if region.OVERPASS_URL else
+                f'{osm["url"].rsplit("/", 1)[1]} from {host}, cut to {STN} with osmium, then to the box around {NM}' if osm.get("split") else
                 f"{region.OSM_FILE} from {host}" + (f", clipped to the box around {NM}" if osm.get("clip") else ""))
     afdc = _jl("afdc_dcfc.json") if ex("afdc_dcfc.json") else None
     n_af = len((afdc or {}).get("fuel_stations") or [])
@@ -439,8 +440,7 @@ def main():
         raise FileNotFoundError(f"Neither {p} nor {pgz} found")
     la_det = _load_la("details"); la_b = _load_la("bundle")
     cat = la_b["catalog"]
-    cat.update(engine.CATALOG_EXTENSIONS)
-    la_b.setdefault("funding", {}).update(engine.FUNDING_EXTENSIONS)
+    # (engine.CATALOG_EXTENSIONS / FUNDING_EXTENSIONS were deleted 16 Nov 2026; see docs/audit/bundle-catalog-audit.md)
     # ---- percentile pools across LA + OC ----
     KEYS = ["ht", "vc", "pcr", "pa", "pn", "bt", "gro", "din", "ten", "dog", "pool", "ev", "fw", "tg", "nocar", "inc", "yb", "pop"]
     pool_lists = {k: [v["m"][k] for v in la_det.values() if v["m"].get(k) is not None] + [m[k] for m in metrics.values() if m.get(k) is not None] for k in KEYS}

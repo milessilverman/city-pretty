@@ -13,6 +13,7 @@ the catalog that ships inside the page (D.catalog[id].sources).
 import math
 
 CAP = 0.045          # cap rate used to value renter-occupied homes from rent
+LIHTC_LOW_INCOME_CUT = 26000   # Diamond & McQuade 2019: +6.5% applies to low-income areas only (audit 16 Nov 2026)
 PV10 = (1 - 1.03 ** -10) / 0.03   # 8.5302; the LA rows round to 8.53
 PV10 = 8.5294117647
 
@@ -181,27 +182,9 @@ def run(m, pools, county="Orange County", state="CA"):
     if pn is not None and pn <= 400:
         add("park_upgrade", "new playground and paths at the nearest park", H15, 760000, 0, 0, 0.5,
             (f"park {int(pn)} m away" if pn >= 1 else "a park lies in this block group") + "; renovations raise home values within ~400 m (+0.5% assumed)", 0.5, 1, scale=0.8)
-    if pn is not None and pn <= 600:
-        add("park_trees", "40 shade trees in the nearby park with deep watering", H15, 38000, 0, 2400, 1.0,
-            f"park {int(pn)} m away; shade trees cool playground/benches and reduce park heat", 0.5, 2)
-        add("park_seating", "12 vandal-resistant shaded benches and picnic tables", H15, 42000, 0, 1500, 0.4,
-            f"park {int(pn)} m away; shaded seating and accessible picnic tables for families and seniors", 0.5, 1)
-        add("park_mural", "2 large-scale public art murals on park pavilions", H15, 25000, 0, 0, 0.3,
-            f"park {int(pn)} m away; community murals deter graffiti and build neighborhood pride", 0.5, 1)
-        add("park_lighting", "16 solar LED path lights along park walking paths", H15, 96000, 0, 2000, 1.4,
-            f"park {int(pn)} m away; path illumination extends safe usable hours and reduces crime", 0.5, 1)
-
-    # Coastal enhancements
-    if x.get("beach_m") is not None and x["beach_m"] <= 600:
-        add("beach_nourishment", "beach expansion & dune restoration (50 ft wider public beach)", H15, 3200000, 0, 50000, 5.0,
-            f"beachfront area ({int(x['beach_m'])} m to ocean); beach widening provides storm surge buffer and recreational value (USACE cost-share)", 0.5, 3, kind="regional")
-        add("beach_volleyball", "4 tournament-grade beach volleyball courts + outdoor showers", H15, 75000, 0, 4000, 0.8,
-            f"public beach {int(x['beach_m'])} m away; active coastal recreation amenity", 0.5, 1)
-
-    # Inland / foothill mountain bike trails
-    if pa >= 15 and (x.get("beach_m", 9e9) > 4000):
-        add("mountain_bike_trails", "3.5 miles of mountain bike singletrack trails + trailhead kiosk", H15, 210000, 0, 12000, 3.2,
-            f"{pa:.0f} acres of open space/park; graded singletrack trails raise home values across the recreational viewshed (Santa Clarita trail model)", 0.5, 2)
+    # (park_trees, park_seating, park_mural, park_lighting, beach_nourishment, beach_volleyball and
+    #  mountain_bike_trails were removed 16 Nov 2026: their effect sizes cited themselves as sources.
+    #  See docs/audit/bundle-catalog-audit.md, finding 8.)
     if pn is not None and pn >= 594 and d >= 4.9 and hv:
         hi_crime = vc is not None and vc >= 2 * LA_MED["vc"]
         share = 0.22 if d < 8 else 0.33 if d < 15 else 0.45 if d < 30 else 0.85   # homes within ~100 m of a new quarter-acre lot
@@ -271,23 +254,18 @@ def run(m, pools, county="Orange County", state="CA"):
             miles = min(3.0, max(0.5, round(m["acres"] / 320, 1)))
             add("slow_streets", f"{miles} miles of slow streets", int(round(0.13 * H)), int(120000 * miles), 0, int(6500 * miles), 1.1,
                 f"{local_km:.1f} km of local streets; {int(crashes)} pedestrian/bike {'crash' if int(crashes) == 1 else 'crashes'}", 0.5, 2)
-    # Compound Safe Routes to School + Street Greening Package
-    if x.get("school_m", 9e9) <= 872 and H and (crashes >= 1 or (tg or 0) > 10 or (ht is not None and ht >= 0.5)):
-        n_trees_route = max(20, min(80, int(round(0.04 * (m.get("acres") or 20) + 15))))
-        humps_route = max(2, min(6, int(round((m.get("acres") or 20) / 30))))
-        pkg_capex = n_trees_route * 1945 + humps_route * 5958 + 4 * 58000 + int(0.15 * (10000 * H))
-        pkg_om = n_trees_route * 65
-        add("safe_school_corridor", f"Safe Routes to School package ({n_trees_route} shaded trees, {humps_route} speed humps, 4 crosswalks + campus modernizing)",
-            int(round(0.85 * H)), pkg_capex, 0, pkg_om, 5.8,
-            f"public school {int(x['school_m'])} m away; combines shaded canopy, traffic calming and campus modernization (25% compounding willingness-to-pay synergy)",
-            pools.pct("vc", vc) if vc else 0.5, 2, scale=1.25)
+    # (safe_school_corridor was removed 16 Nov 2026: grade A with an invented "25% compounding synergy" multiplier;
+    #  see docs/audit/bundle-catalog-audit.md, finding 8.)
     if H:
         sqft = int(round(21 * H))
         add("sidewalks", f"~{sqft:,} sq ft of broken sidewalk (10% of walks)", H, sqft * 59, 0, 0, 0, ("LA's sidewalks are ~40% damaged citywide; local survey not loaded" if county == "la" else "assumes 10% of sidewalks need repair (the rule used for Los Angeles, where about 40% are damaged citywide); no sidewalk survey is available for " + county), pools.pct("yb", yb, False) if yb else 0.5, 0, kind="qol")
     if vc is not None and vc >= 10.4 and crashes >= 3 and m.get("acres"):
         km = round(0.01697 * m["acres"], 1)
-        add("street_lighting", f"~{km} km of streets relit", int(round(0.3 * H)), int(655600 * km), 0, int(12000 * km), 1.358,
-            f"violent crime {vc / LA_MED['vc']:.1f}x LA County's median; lighting cut nighttime outdoor crime 36% in a New York trial (no LA trial found)", pools.pct("vc", vc), 0)
+        # +0.6%: lighting cut overall index crime ~4% (Chalfin et al. 2019, NBER w25798) x the low-end crime elasticity
+        # of home values, 0.15 (Pope & Pope 2012). Was 1.358 (an assumed 32.5% nighttime-outdoor share x an unverified
+        # 0.116 coefficient); see docs/audit/catalog-coverage-round3.md.
+        add("street_lighting", f"~{km} km of streets relit", int(round(0.3 * H)), int(655600 * km), 0, int(12000 * km), 0.6,
+            f"violent crime {vc / LA_MED['vc']:.1f}x LA County's median; lighting cut nighttime outdoor crime 36% and overall index crime about 4% in a New York trial (no LA trial found)", pools.pct("vc", vc), 0)
     if vc is not None and vc >= 14:
         add("cameras", "10 cameras at hot spots", int(round(0.25 * H)), 81500, 0, 87000, 0, f"violent crime {vc / LA_MED['vc']:.1f}x LA County's median; CCTV cuts crime ~13% in view", pools.pct("vc", vc), 0, kind="qol")
     if vc is not None and vc >= 17.1:
@@ -298,14 +276,18 @@ def run(m, pools, county="Orange County", state="CA"):
 
     # ---------------- Housing ----------------
     if sf >= 40 and hv:
-        add("adu", "1 ADU on a typical lot", 1, 130000, 0, 0, 9.2, f"single-family area; typical home {_money(hv)}", 0, 1, kind="owner", value=sig(hv * 0.092))
+        # 7%: low end of "raises a parcel's assessed value and selling price by 7%-9%" (Brueckner & Thomaz 2024, Real
+        # Estate Economics, Los Angeles). Was 9.2%, above the study's range; see docs/audit/catalog-coverage-round3.md.
+        add("adu", "1 ADU on a typical lot", 1, 130000, 0, 0, 7.0, f"single-family area; typical home {_money(hv)}", 0, 1, kind="owner", value=sig(hv * 0.07))
         add("solar", "6 kW system", 1, 17700, 0, 0, round(24000 / hv * 100, 3), "owned solar sells for ~$4/W more", 0, 0, kind="owner", value=24000)
     vac = x.get("other_vacant") or 0
     if vac >= 20 and hv:
         n = max(2, int(round(vac * 0.18)))
         add("blight_rehab", f"{n} homes rehabbed", int(round(0.64 * H)), n * 110000, 0, 0, 2.3, f"{int(vac)} long-term vacant homes (Census 'other vacant'); rehab lifts neighbors' values (land-value gains of $2-6 per $1 in Richmond)", pools.pct("pop", m.get("pop"), False) if m.get("pop") else 0.5, 2, scale=0.4)
-    if below_med_inc and hv and hv <= 790000:
-        add("affordable_housing", "50 affordable homes", int(round(0.3 * H)), 39100000, 0, 0, 6.5, _inc_cut(inc) + ": new affordable housing raised nearby prices 6.5% within 0.1 mi", pools.pct("inc", inc, False), 3)
+    # Diamond & McQuade's +6.5% is for low-income neighborhoods (median income under ~$26k per the catalog's citation);
+    # it was applied below LA's median ($93,240) until 16 Nov 2026. See app/data/intervention_verification.json.
+    if inc is not None and inc < LIHTC_LOW_INCOME_CUT and hv and hv <= 790000:
+        add("affordable_housing", "50 affordable homes", int(round(0.3 * H)), 39100000, 0, 0, 6.5, f"household income below ${LIHTC_LOW_INCOME_CUT:,} (the low-income range of the study)" + ": new affordable housing raised nearby prices 6.5% within 0.1 mi in low-income areas", pools.pct("inc", inc, False), 3)
     if d >= 28.5 and below_med_inc and (own is None or own < 50):
         add("clt", "1 eight-unit building into a land trust", H15, 3500000, 0, 45000, 1.4, "dense, lower-income area of mostly rentals", pools.pct("inc", inc, False), 3)
     if sf >= 50 and rm is not None and rm <= 810:
@@ -317,7 +299,9 @@ def run(m, pools, county="Orange County", state="CA"):
         add("undergrounding", f"{miles} miles of overhead lines undergrounded", H, int(3440000 * miles), 0, 0, 2.9,
             f"homes built ~{int(yb)}, so overhead lines are likely " + ("(no utility line map outside LADWP's area)" if county == "la" else "(no utility line map is loaded for this county)") + "; $3.4M per circuit-mile in 2024 dollars", pools.pct("yb", yb, False), 2, scale=0.7)
     if d >= 8.18 and ev is not None and ev >= 801:
-        add("ev_hub", "8-port fast-charging hub", H15, 800000, 0, 20000, 1.0, ("no public DC fast charger within 800 m (federal AFDC data)" if county == "la" else "no public charging station mapped within 800 m (OpenStreetMap; the federal AFDC list needs an API key and was not loaded)") + "; 1% assumed (the study's +3.3% is likely partly where chargers get built)", pools.pct("ev", ev), 1)
+        # Round 4 (16 Nov 2026): +3.3% within 1 km (Liang et al. 2023, Nature Sustainability; hedonic association) and
+        # $1,777,000 for an 8-port DC fast site (CTC/SBCAG Santa Barbara project report, Nov 2025). Was 1.0% and $800,000.
+        add("ev_hub", "8-port fast-charging hub", H15, 1777000, 0, 20000, 3.3,("no public DC fast charger within 800 m (federal AFDC data)" if county == "la" else "no public charging station mapped within 800 m (OpenStreetMap; the federal AFDC list needs an API key and was not loaded)") + "; 1% assumed (the study's +3.3% is likely partly where chargers get built)", pools.pct("ev", ev), 1)
     if ht is not None and ht >= 1.1 and inc is not None and inc <= 93400:
         add("microgrid", "1 resilience hub (solar + battery)", H15, 3940000, 0, 30000, 0, f"{_warmer(ht)}; cooling center during outages", pools.pct("ht", ht), 0, kind="qol")
     if d >= 15.9 and H:
@@ -326,7 +310,10 @@ def run(m, pools, county="Orange County", state="CA"):
     # ---------------- Environment ----------------
     if fw is not None and fw <= 493 and x.get("fwy_unwalled_m"):
         L = int(round(x["fwy_unwalled_m"]))
-        add("noise_wall", f"{L:,} m of sound wall", int(round(x.get("homes_100m_fwy", 0.22 * H))), L * 2485, 0, 5000, 6.8,
+        # Cost: LA Metro soundwall presentation, Feb 2019 (Legistar file 2018-0787): "$10 Million/mile if placed adjacent to
+        # the freeway shoulder" (design and construction) = $6,214 per metre. The previous $2,485/m was 40% of that figure
+        # (docs/audit/catalog-coverage-round2.md). Walls on structures cost $20M/mile; not modeled.
+        add("noise_wall", f"{L:,} m of sound wall", int(round(x.get("homes_100m_fwy", 0.22 * H))), L * 6214, 0, 5000, 6.8,
             f"~{L:,} m of freeway within 150 m with no wall in OpenStreetMap; walls add ~6.8% within 100 m. OpenStreetMap misses many walls (it maps only a few dozen in Los Angeles), so check " + ("Caltrans" if state == "CA" else "the state DOT") + " before acting (counted at half weight)", pools.pct("fw", fw, False), 0, scale=0.5)
     if fw is not None and fw <= 500 and x.get("school_m", 9e9) <= 500:
         add("school_filters", "30 classrooms", H15, 30000, 0, 6000, 0, "school within 500 m of a freeway", pools.pct("fw", fw, False), 0, kind="qol")
@@ -336,8 +323,12 @@ def run(m, pools, county="Orange County", state="CA"):
     # ---------------- Schools & services ----------------
     if yb and yb <= 1970 and x.get("school_m", 9e9) <= 872 and H:
         share = H / 4000 * 100
+        # Cellini, Ferreira & Rothstein (2010, QJE): marginal homebuyers' willingness to pay is "$1.50 or more for each $1
+        # of capital spending" (California school bond referenda). Value = 1.5 x this area's spending share; was +3% on
+        # every home, inconsistent with the catalog's "+6%". See docs/audit/catalog-coverage-round4.md.
         add("school_bond", (f"modernize the nearby school (this area's {share:.0f}% share of ~$40M)" if share >= 0.5 else "modernize the nearby school (this area's share of ~$40M is under 1%)"), H, 10000 * H, 0, 0, 3.0,
-            "older area served by a nearby public school; California bond passage raised prices ~6% (half used here, for one campus)", 0.5, 3)
+            "older area served by a nearby public school; California school-bond studies find home values rise $1.50 or more per $1 of capital spending", 0.5, 3,
+            value=sig(1.5 * 10000 * H))
     if x.get("library_m") is not None and x["library_m"] >= 1960 and d >= 8.2:
         add("library", "branch renovation + Sunday hours, 10 years", H15, 5500000, 0, 250000, 0, "no library within 2 km", 0.5, 0, kind="qol")
     if x.get("clinic_m") is not None and x["clinic_m"] >= 2570 and below_med_inc:
@@ -367,149 +358,7 @@ def run(m, pools, county="Orange County", state="CA"):
     return rows
 
 
-CATALOG_EXTENSIONS = {
-    "safe_school_corridor": {
-        "id": "safe_school_corridor",
-        "name": "Safe Routes to School corridor (trees, humps, crosswalks & campus upgrade)",
-        "category": "Safety & civic",
-        "kind": "value",
-        "evidence": "strong",
-        "sources": [
-            "FHWA Safe Routes to School (SRTS) safety evaluations (37-44% injury drop)",
-            "Black (1999) & Figlio (2004): school quality capitalization +5.8%",
-            "Compounding willingness-to-pay synergy: trees + traffic calming + campus modernizing"
-        ],
-        "qol": ["kids", "safe", "heat"],
-        "years": 2,
-        "grade": "A",
-        "caveat": "Requires inter-agency coordination between municipal public works and school district.",
-        "funding": ["SRTS", "SS4A", "ATP", "HSIP"]
-    },
-    "park_trees": {
-        "id": "park_trees",
-        "name": "Plant shade tree grove in the park",
-        "category": "Parks & recreation",
-        "kind": "value",
-        "evidence": "strong",
-        "sources": [
-            "Donovan & Butry 2010; USFS Urban Forest Assessment: park canopy reduces heat island 5-8°F",
-            "Hedonic capitalization within 400 m: +1.0%"
-        ],
-        "qol": ["heat", "parks"],
-        "years": 2,
-        "grade": "B",
-        "caveat": "Requires 3-year establishment watering program.",
-        "funding": ["A", "QUIMBY", "IRA_UF", "LWCF"]
-    },
-    "park_seating": {
-        "id": "park_seating",
-        "name": "Install shaded benches and picnic pavilion in the park",
-        "category": "Parks & recreation",
-        "kind": "value",
-        "evidence": "moderate",
-        "sources": [
-            "Trust for Public Land ParkScore amenity assessment",
-            "Municipal park capital bids: ADA picnic shelters and shaded bench clusters",
-            "Capitalization within 300 m: +0.4%"
-        ],
-        "qol": ["parks"],
-        "years": 1,
-        "grade": "B",
-        "caveat": "Equipment replacement and ADA path connection included.",
-        "funding": ["A", "QUIMBY"]
-    },
-    "park_mural": {
-        "id": "park_mural",
-        "name": "Commission community art & park pavilion murals",
-        "category": "Parks & recreation",
-        "kind": "value",
-        "evidence": "moderate",
-        "sources": [
-            "Americans for the Arts Public Art Economic Impact",
-            "Philadelphia Mural Arts / Sampson 2019: place attachment and graffiti deterrence",
-            "Capitalization within 200 m: +0.3%"
-        ],
-        "qol": ["parks"],
-        "years": 1,
-        "grade": "C",
-        "caveat": "Anti-graffiti clear protective sealant required.",
-        "funding": ["CDBG", "NEA", "A"]
-    },
-    "park_lighting": {
-        "id": "park_lighting",
-        "name": "Install solar LED pathway and perimeter lighting in the park",
-        "category": "Parks & recreation",
-        "kind": "value",
-        "evidence": "strong",
-        "sources": [
-            "Chalfin et al. 2021 (NYC street/park lighting RCT: -36% nighttime outdoor crimes)",
-            "Clean Energy solar LED commercial lighting benchmarks",
-            "Capitalization within 400 m: +1.4%"
-        ],
-        "qol": ["safe", "parks"],
-        "years": 1,
-        "grade": "A",
-        "caveat": "Dark-sky compliant shielded fixtures to prevent light spill into adjacent homes.",
-        "funding": ["A", "CDBG", "EPA"]
-    },
-    "beach_nourishment": {
-        "id": "beach_nourishment",
-        "name": "Beach nourishment and coastal dune restoration",
-        "category": "Parks & recreation",
-        "kind": "value",
-        "evidence": "strong",
-        "sources": [
-            "Landry et al. 2003, 2021: hedonic valuation of coastal beach width and dune erosion buffers",
-            "USACE coastal storm risk management benefit-cost studies",
-            "Capitalization within 800 m: +5.0%"
-        ],
-        "qol": ["parks"],
-        "years": 3,
-        "grade": "A",
-        "caveat": "Coastal zone only; requires periodic replenishment cycle.",
-        "funding": ["USACE", "LWCF", "P4"]
-    },
-    "beach_volleyball": {
-        "id": "beach_volleyball",
-        "name": "Public beach volleyball courts with evening lighting",
-        "category": "Parks & recreation",
-        "kind": "value",
-        "evidence": "moderate",
-        "sources": [
-            "California Department of Parks and Recreation recreation needs assessment",
-            "Municipal beach court installation bids",
-            "Capitalization within 400 m: +0.8%"
-        ],
-        "qol": ["parks"],
-        "years": 1,
-        "grade": "B",
-        "caveat": "Coastal sand beaches only.",
-        "funding": ["QUIMBY", "A"]
-    },
-    "mountain_bike_trails": {
-        "id": "mountain_bike_trails",
-        "name": "Mountain bike trail system and trailhead kiosk",
-        "category": "Parks & recreation",
-        "kind": "value",
-        "evidence": "strong",
-        "sources": [
-            "City of Santa Clarita Trek Bike Park economic and property value impact assessment",
-            "Headwaters Economics 2022: outdoor recreation singletrack trail proximity",
-            "Capitalization within 1,200 m: +3.2%"
-        ],
-        "qol": ["parks"],
-        "years": 2,
-        "grade": "A",
-        "caveat": "Inland / foothill open space terrain with slope elevation.",
-        "funding": ["LWCF", "R20", "P4", "QUIMBY"]
-    }
-}
-
-FUNDING_EXTENSIONS = {
-    "SRTS": ["Safe Routes to School", "federal/state dedicated infrastructure grants for pedestrian and bicycle safety near K-12 schools", "https://www.transportation.gov"],
-    "LWCF": ["Land and Water Conservation Fund", "federal Land and Water Conservation Fund state assistance grants for public outdoor recreation acquisition and development", "https://www.nps.gov/subjects/lwcf"],
-    "IRA_UF": ["IRA Urban Forestry", "Inflation Reduction Act Urban and Community Forestry competitive grant program for disadvantaged communities", "https://www.fs.usda.gov"],
-    "USACE": ["US Army Corps of Engineers", "federal coastal storm risk management and shoreline protection under Water Resources Development Acts", "https://www.usace.army.mil"],
-    "NEA": ["National Endowment for the Arts / Civic Arts", "public arts trust funds and state/federal arts development grants", "https://www.arts.gov"]
-}
-
+# CATALOG_EXTENSIONS and FUNDING_EXTENSIONS were deleted on 16 Nov 2026 so they cannot ship on a rebuild. The eight
+# catalog entries they added cited their own effect sizes as sources ("Capitalization within 400 m: +1.0%"); see
+# docs/audit/bundle-catalog-audit.md (finding 8) and app/data/intervention_verification.json. Any new intervention
+# needs a source whose effect size and cost can be checked before it is added here.

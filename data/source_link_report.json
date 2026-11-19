@@ -1,0 +1,3587 @@
+{
+ "checked": "2026-11-18",
+ "counts": {
+  "ok": 396,
+  "blocked": 46,
+  "broken": 15,
+  "error": 12
+ },
+ "urls": {
+  "https://alison.legislature.state.al.us/code-of-alabama": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.AL.source_url"
+   ]
+  },
+  "https://api.municode.com/codes/tn/metro_government_of_nashville_and_davidson_county": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "zoning_standards.json.withheld[6].tried[1].url"
+   ]
+  },
+  "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[21].statute_url",
+    "statutes.json[21].statute_url"
+   ]
+  },
+  "https://app.leg.wa.gov/billsummary?BillNumber=1110&Year=2023": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[8].statute_url",
+    "statutes.json[8].statute_url"
+   ]
+  },
+  "https://app.leg.wa.gov/rcw/default.aspx?cite=84.41.030": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.WA.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://app.leg.wa.gov/rcw/default.aspx?cite=84.55.010": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.WA.source_url"
+   ]
+  },
+  "https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=51664": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.KY.source_url"
+   ]
+  },
+  "https://arcgis.water.nv.gov/arcgis/rest/services/BaseLayers/County_Parcels_in_Nevada/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[87].url"
+   ]
+  },
+  "https://azdot.gov/planning/transportation-studies/arizona-passenger-rail-study-phoenix-tucson": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "intercity_transit_corridors.json[0].official_study_url",
+    "intercity_transit_corridors.json[0].source_url"
+   ]
+  },
+  "https://azwatermaps.azwater.gov/arcgis/rest/services/General/Parcels/MapServer/10": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[44].url",
+    "parcel_services.json.services[44].terms"
+   ]
+  },
+  "https://azwatermaps.azwater.gov/arcgis/rest/services/General/Parcels/MapServer/11": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[45].url",
+    "parcel_services.json.services[45].terms"
+   ]
+  },
+  "https://azwatermaps.azwater.gov/arcgis/rest/services/General/Parcels/MapServer/13": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[46].url",
+    "parcel_services.json.services[46].terms"
+   ]
+  },
+  "https://azwatermaps.azwater.gov/arcgis/rest/services/General/Parcels/MapServer/14": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[47].url",
+    "parcel_services.json.services[47].terms"
+   ]
+  },
+  "https://beltline.org/the-project/": {
+   "status": "error",
+   "detail": "308",
+   "used_in": [
+    "case_studies.json[1].evaluation_url"
+   ]
+  },
+  "https://cabq.gov": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[115].terms"
+   ]
+  },
+  "https://california.public.law/codes/revenue_and_taxation_code_section_110": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "la_neighborhood_values.json._source.legal_basis.sources[1]",
+    "valuation_backtest_benchmarks.json.counties.06037.legal_basis.sources[1]",
+    "valuation_backtest_benchmarks.json.counties.06037.previous_page_model.legal_basis.sources[1]"
+   ]
+  },
+  "https://california.public.law/codes/revenue_and_taxation_code_section_110.1": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "la_neighborhood_values.json._source.legal_basis.sources[0]",
+    "state_finance_profiles.json.CA.field_evidence.uncaps_on_sale.source_url",
+    "valuation_backtest_benchmarks.json.counties.06037.legal_basis.sources[0]",
+    "valuation_backtest_benchmarks.json.counties.06037.previous_page_model.legal_basis.sources[0]"
+   ]
+  },
+  "https://california.public.law/codes/revenue_and_taxation_code_section_401.3": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.CA.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB840": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[7].statute_url",
+    "statutes.json[7].statute_url"
+   ]
+  },
+  "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00015F.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[33].statute_url",
+    "statutes.json[33].statute_url"
+   ]
+  },
+  "https://catc.ca.gov/-/media/ctc-media/documents/programs/baseline-agreements/2026-01/5-sbcag-ba-sb-us-101.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "intervention_verification.json.ev_hub.sourced_effect.citations[1].url",
+    "unit_costs.json[32].source_url"
+   ]
+  },
+  "https://charlotteudo.org/articles": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[4].code_url"
+   ]
+  },
+  "https://charlotteudo.org/articles/part-iii-neighborhood-zoning-districts/article-4-neighborhood-1-zoning-districts": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[4].districts.N1-A.sidewall.url",
+    "zoning_standards.json.jurisdictions[4].districts.N1-A.min_lot.url",
+    "zoning_standards.json.jurisdictions[4].districts.N1-A.coverage.url",
+    "zoning_standards.json.jurisdictions[4].districts.N1-A.setbacks.url",
+    "zoning_standards.json.jurisdictions[4].districts.N1-A.height.url"
+   ]
+  },
+  "https://charlotteudo.org/articles/part-vii-uses/article-15-uses": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[4].districts.N1-A.use_url",
+    "zoning_standards.json.jurisdictions[4].districts.N1-A.quadraplex_condition.url",
+    "zoning_standards.json.jurisdictions[4].districts.N1-A.common_wall.url",
+    "zoning_standards.json.jurisdictions[4].districts.N1-A.adu.url",
+    "zoning_standards.json.jurisdictions[4].districts.N1-B.use_url"
+   ]
+  },
+  "https://citygis.greenvillesc.gov/arcgis/rest/services/AddressSearch/Property/MapServer/3": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[97].url",
+    "parcel_services.json.services[97].terms"
+   ]
+  },
+  "https://cityofstillwater.granicus.com/MetaViewer.php?clip_id=1809&meta_id=139536&view_id=3": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[26].source_url"
+   ]
+  },
+  "https://clark.wa.gov/sites/default/files/2025-09/0000586-301022-bid-tabulation-with-unilateral-adjustment.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[16].source_url"
+   ]
+  },
+  "https://cms.chathamcountyga.gov/api/assets/purchasing-website/9498b5cc-fa39-442c-ad32-e5031cf5dc0a?download=0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[24].source_url"
+   ]
+  },
+  "https://coageo.cabq.gov/cabqgeo/rest/services/agis/AGIS_Platted_Parcels/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[115].url"
+   ]
+  },
+  "https://code.dccouncil.gov/us/dc/council/code/sections/47-820": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.DC.source_url"
+   ]
+  },
+  "https://code.wvlegislature.gov/11-3-1/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.WV.source_url",
+    "state_finance_profiles.json.WV.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://codehub.gridics.com/us/fl/miami": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.withheld[7].tried[1].url"
+   ]
+  },
+  "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2627958": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "zoning_standards.json.withheld[3].tried[0].url"
+   ]
+  },
+  "https://codelibrary.amlegal.com/codes/philadelphia/latest/philadelphia_pa/0-0-0-1": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "zoning_standards.json.withheld[4].tried[0].url"
+   ]
+  },
+  "https://codes.findlaw.com/ca/government-code/gov-sect-66323/": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state-housing-laws.json[31].statute_url",
+    "statutes.json[31].statute_url"
+   ]
+  },
+  "https://codes.ohio.gov/ohio-revised-code/section-5713.01": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.OH.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://codes.ohio.gov/ohio-revised-code/section-5713.03": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.OH.source_url"
+   ]
+  },
+  "https://codes.ohio.gov/ohio-revised-code/section-5715.01": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.OH.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://colorado.public.law/statutes/crs_31-25-107": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "funding_programs.json[7].source_url"
+   ]
+  },
+  "https://colorado.public.law/statutes/crs_39-1-104": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.CO.field_evidence.reassessment_cycle_years.source_url",
+    "state_finance_profiles.json.CO.field_evidence.uncaps_on_sale.source_url"
+   ]
+  },
+  "https://comptroller.texas.gov/economy/local/ch311/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "funding_programs.json[4].source_url"
+   ]
+  },
+  "https://comptroller.texas.gov/taxes/property-tax/exemptions/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.TX.field_evidence.homestead_exemption_rule.source_url"
+   ]
+  },
+  "https://comptroller.tn.gov/office-functions/pa.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.TN.source_url"
+   ]
+  },
+  "https://connect.ncdot.gov/letting/Division%204%20Letting/09-22-2026/DD00528_Bid_Tabs.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[7].source_url",
+    "unit_costs.json[8].source_url"
+   ]
+  },
+  "https://data.lacounty.gov/datasets/lacounty::assessor-parcels-data-2024": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "underused_sites.json[0].sourceUrl",
+    "underused_sites.json[1].sourceUrl",
+    "underused_sites.json[2].sourceUrl",
+    "underused_sites.json[3].sourceUrl",
+    "underused_sites.json[4].sourceUrl"
+   ]
+  },
+  "https://datacatalog.cookcountyil.gov/resource/pabr-t5kh.json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "valuation_backtest_benchmarks.json.counties.17031.sources.pabr-t5kh"
+   ]
+  },
+  "https://datacatalog.cookcountyil.gov/resource/wvhk-k5uv.json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "valuation_backtest_benchmarks.json.counties.17031.sources.wvhk-k5uv"
+   ]
+  },
+  "https://datacatalog.cookcountyil.gov/resource/x54s-btds.json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "valuation_backtest_benchmarks.json.counties.17031.sources.x54s-btds"
+   ]
+  },
+  "https://dcgis.dekalbcountyga.gov/hosted/rest/services/PropertyAppraisal/Parcels_IASWorld/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[52].url",
+    "parcel_services.json.services[52].terms"
+   ]
+  },
+  "https://dcregs.dc.gov": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].code_url"
+   ]
+  },
+  "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={57E99C60-31E7-428B-8B0D-AB385A49B9F6}": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].districts.R-1A.dwelling_units.text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-1B.dwelling_units.text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-2.dwelling_units.text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-3.dwelling_units.text_file"
+   ]
+  },
+  "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={693E6414-46E4-47BD-818F-BADFC36CA96B}": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].principal_use.text_file"
+   ]
+  },
+  "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={8E59471E-8C75-40F3-858C-FEB57CD5BA4B}": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].accessory_apartment.text_file"
+   ]
+  },
+  "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={979A0B36-54DB-48FA-B8B5-67231BA95A15}": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].districts.R-1A.height.text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-1B.height.text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-2.height.text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-3.height.text_file"
+   ]
+  },
+  "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={C4E3B8DA-E206-480F-A473-576D45BC8879}": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].districts.R-1A.lot_occupancy[0].text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-1A.lot_occupancy[1].text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-1A.lot_occupancy[2].text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-1B.lot_occupancy[0].text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-1B.lot_occupancy[1].text_file"
+   ]
+  },
+  "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={E9232560-ED36-403B-BF2E-6D96713D84B5}": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].r1_family.text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-1A.purpose.text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-1B.purpose.text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-2.purpose.text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-3.purpose.text_file"
+   ]
+  },
+  "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={ED322EB8-4818-42D6-911A-C558B383E243}": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].overlay_rule.text_file"
+   ]
+  },
+  "https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={F3BD4053-A2FF-4999-8194-22B021840800}": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].districts.R-1A.min_lot[0].text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-1B.min_lot[0].text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-2.min_lot[0].text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-2.min_lot[1].text_file",
+    "zoning_standards.json.jurisdictions[1].districts.R-2.min_lot_inclusionary[0].text_file"
+   ]
+  },
+  "https://dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-U253": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[41].statute_url",
+    "statutes.json[41].statute_url"
+   ]
+  },
+  "https://delcode.delaware.gov/title9/c083/sc01/index.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.DE.source_url"
+   ]
+  },
+  "https://denvergov.org/files/assets/public/community-planning-and-development/documents/zoning/denver-zoning-code/denver_zoning_code_article4_urban_edge.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.withheld[5].tried[1].url"
+   ]
+  },
+  "https://docs.legis.wisconsin.gov/statutes/statutes/66/xi/1105": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.WI.source_url"
+   ]
+  },
+  "https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division04.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[2].code_url",
+    "zoning_standards.json.jurisdictions[2].districts.RS-1-1.purpose.url",
+    "zoning_standards.json.jurisdictions[2].districts.RS-1-1.density.url",
+    "zoning_standards.json.jurisdictions[2].districts.RS-1-1.min_lot.url",
+    "zoning_standards.json.jurisdictions[2].districts.RS-1-1.setbacks.url"
+   ]
+  },
+  "https://doi.org/10.1007/s11146-007-9089-8": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[22].source_url"
+   ]
+  },
+  "https://doi.org/10.1016/j.ecolecon.2010.03.011": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[5].source_url"
+   ]
+  },
+  "https://doi.org/10.1016/j.landurbplan.2009.07.019": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[4].source_url"
+   ]
+  },
+  "https://doi.org/10.1016/j.regsciurbeco.2011.03.013": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[26].source_url"
+   ]
+  },
+  "https://doi.org/10.1073/pnas.1718503115": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[35].source_url"
+   ]
+  },
+  "https://doi.org/10.1078/1618-8667-00025": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[8].source_url"
+   ]
+  },
+  "https://doi.org/10.1080/00222216.2001.11949928": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[19].source_url"
+   ]
+  },
+  "https://doi.org/10.1080/00222216.2005.11950056": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[21].source_url"
+   ]
+  },
+  "https://doi.org/10.1080/02723638.2017.1360041": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[11].source_url"
+   ]
+  },
+  "https://doi.org/10.1111/1540-6229.12471": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "intervention_verification.json.adu.sourced_effect.citations[0].url",
+    "research.json[40].source_url"
+   ]
+  },
+  "https://doi.org/10.1111/j.1540-6229.2008.00212.x": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[42].source_url"
+   ]
+  },
+  "https://doi.org/10.1111/j.1540-6229.2010.00296.x": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[29].source_url"
+   ]
+  },
+  "https://doi.org/10.1136/jech.2007.071894": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[9].source_url"
+   ]
+  },
+  "https://doi.org/10.1162/003355399556070": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[32].source_url"
+   ]
+  },
+  "https://doi.org/10.1162/qjec.2010.125.1.215": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "intervention_verification.json.school_bond.sourced_effect.citations[0].url",
+    "research.json[31].source_url"
+   ]
+  },
+  "https://doi.org/10.1177/0739456x09354380": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[0].source_url"
+   ]
+  },
+  "https://doi.org/10.1177/0739456x09358555": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[2].source_url"
+   ]
+  },
+  "https://doi.org/10.1257/0002828041464489": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[33].source_url"
+   ]
+  },
+  "https://doi.org/10.1353/urb.2007.0004": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[37].source_url"
+   ]
+  },
+  "https://doi.org/10.2139/ssrn.3794796": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[44].source_url"
+   ]
+  },
+  "https://doi.org/10.2139/ssrn.3899624": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "intervention_verification.json.vacant_lot_green.sourced_effect.citations[0].url",
+    "research.json[41].source_url"
+   ]
+  },
+  "https://doi.org/10.2172/1172644": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[34].source_url"
+   ]
+  },
+  "https://doi.org/10.3141/1805-02": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[24].source_url"
+   ]
+  },
+  "https://doi.org/10.4324/9781351179782": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[27].source_url"
+   ]
+  },
+  "https://donaanacounty.org": {
+   "status": "error",
+   "detail": "[SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version (_ssl.c:1129)",
+   "used_in": [
+    "parcel_services.json.services[117].terms"
+   ]
+  },
+  "https://dor.georgia.gov/property-tax-valuation": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.GA.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://dor.sd.gov/individuals/taxes/property-tax/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.SD.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://dor.wa.gov/taxes-rates/property-tax/property-tax-exemptions-and-deferrals": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.WA.field_evidence.homestead_exemption_rule.source_url"
+   ]
+  },
+  "https://edocs-public.dot.state.mn.us/edocs_public/DMResultSet/download?docId=39047462": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[20].source_url"
+   ]
+  },
+  "https://egis.dallascityhall.com/arcgis/rest/services/Basemap/DallasTaxParcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[109].url",
+    "parcel_services.json.services[109].terms"
+   ]
+  },
+  "https://en.wikipedia.org/wiki/Front_Range_Passenger_Rail": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "intercity_transit_corridors.json[2].source_url"
+   ]
+  },
+  "https://eng.lacity.gov/prop-k": {
+   "status": "broken",
+   "detail": "DNS",
+   "used_in": [
+    "funding_programs.json[1].source_url"
+   ]
+  },
+  "https://enterprise.firstmap.delaware.gov/arcgis/rest/services/PlanningCadastre/DE_StateParcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[19].url"
+   ]
+  },
+  "https://enterprise.firstmap.delaware.gov/arcgis/rest/services/PlanningCadastre/DE_StateParcels/MapServer/info/iteminfo?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[19].terms"
+   ]
+  },
+  "https://enterprise.gisdata.mn.gov/aghost/rest/services/us_mn_state_mngeo/plan_parcels_open/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[16].url"
+   ]
+  },
+  "https://events.ogdencity.com/DocumentCenter/View/28487/2024-Citywide-Striping-Bid-Tab": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[27].source_url"
+   ]
+  },
+  "https://fdotwww.blob.core.windows.net/sitefinity/docs/default-source/fpo/fpc/reports/historicalitemaveragecost/moving/statewide/pdf/historical-item-averages-statewide-12-months.pdf?sfvrsn=32501f5b_16": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[3].source_url",
+    "unit_costs.json[4].source_url",
+    "unit_costs.json[5].source_url"
+   ]
+  },
+  "https://file.lacounty.gov/SDSInter/bos/supdocs/124293.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "funding_programs.json[0].verification.field_evidence.40% municipal return.source_url",
+    "funding_programs.json[0].verification.field_evidence.statutory_citation.source_url"
+   ]
+  },
+  "https://floridacra.org/": {
+   "status": "broken",
+   "detail": "DNS",
+   "used_in": [
+    "funding_programs.json[5].source_url"
+   ]
+  },
+  "https://floridarevenue.com/property/Pages/Taxpayers_Exemptions.aspx": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "funding_programs.json[6].source_url"
+   ]
+  },
+  "https://flysrq.com/sites/default/files/2023-01/01-30-23%20Agenda%20FINAL.pdf": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "unit_costs.json[25].source_url"
+   ]
+  },
+  "https://ftp.txdot.gov/pub/txdot-info/cmd/cserve/distinfo/cisrpts/004713033.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[0].source_url",
+    "unit_costs.json[1].source_url",
+    "unit_costs.json[2].source_url"
+   ]
+  },
+  "https://gardner-ma.gov/DocumentCenter/View/11549/2025-942-DPW---Paving-BId-Tab": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[17].source_url",
+    "unit_costs.json[18].source_url"
+   ]
+  },
+  "https://geo.co.harrison.ms.us/server/rest/services/AGO/HarrisonCounty_ApprovedParcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[81].url",
+    "parcel_services.json.services[81].terms"
+   ]
+  },
+  "https://geo.sandag.org/server/rest/services/Hosted/Parcels/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[32].url",
+    "zoning_standards.json.jurisdictions[2].zone_source.extra_fields.url"
+   ]
+  },
+  "https://geo.sandag.org/server/rest/services/Hosted/Parcels/FeatureServer/0/metadata": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_use_codes.json.systems[3].source.url"
+   ]
+  },
+  "https://geo.sandag.org/server/rest/services/Hosted/Parcels/FeatureServer/0?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[32].terms"
+   ]
+  },
+  "https://geodata.hawaii.gov/arcgis/rest/services/ParcelsZoning/MapServer/25": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[113].url"
+   ]
+  },
+  "https://geoportal.hawaii.gov": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[113].terms"
+   ]
+  },
+  "https://geoviewer.cot.tn.gov/arcgis/rest/services/GeoViewer/NonImpact_Parcels/MapServer/3": {
+   "status": "error",
+   "detail": "500",
+   "used_in": [
+    "parcel_services.json.services[105].url"
+   ]
+  },
+  "https://gis.arkansas.gov/arcgis/rest/services/FEATURESERVICES/Planning_Cadastre/FeatureServer/6": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[20].url"
+   ]
+  },
+  "https://gis.arkansas.gov/arcgis/rest/services/FEATURESERVICES/Planning_Cadastre/MapServer/6/metadata": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[20].terms"
+   ]
+  },
+  "https://gis.bakersfieldcity.us/webmaps/rest/services/General/Cadastre/MapServer": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[1].terms"
+   ]
+  },
+  "https://gis.bakersfieldcity.us/webmaps/rest/services/General/Cadastre/MapServer/1": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[1].url"
+   ]
+  },
+  "https://gis.charlottenc.gov/arcgis/rest/services/PLN/AllParcelData/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_use_codes.json.systems[5].source.url",
+    "zoning_standards.json.jurisdictions[4].zone_source.extra_fields.url"
+   ]
+  },
+  "https://gis.charlottenc.gov/arcgis/rest/services/PLN/Zoning/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[4].zone_source.url"
+   ]
+  },
+  "https://gis.co.marion.or.us/arcgis/rest/services/Public/Parcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[93].url",
+    "parcel_services.json.services[93].terms"
+   ]
+  },
+  "https://gis.colorado.gov/public/rest/services/Address_and_Parcel/Colorado_Public_Parcels/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[14].url"
+   ]
+  },
+  "https://gis.colorado.gov/public/rest/services/Address_and_Parcel/Colorado_Public_Parcels/FeatureServer/info/iteminfo?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[14].terms"
+   ]
+  },
+  "https://gis.cookcountyil.gov/traditional/rest/services/cookVwrDynmc/MapServer/44": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[31].url"
+   ]
+  },
+  "https://gis.cookcountyil.gov/traditional/rest/services/cookVwrDynmc/MapServer/info/iteminfo?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[31].terms"
+   ]
+  },
+  "https://gis.countyofriverside.us/arcgis_mapping/rest/services/OpenData/Assessor/MapServer/50": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[49].url",
+    "parcel_services.json.services[49].terms"
+   ]
+  },
+  "https://gis.crcog.org": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[37].terms"
+   ]
+  },
+  "https://gis.crcog.org/arcgis/rest/services/RegionalParcelViewer/Parcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[37].url"
+   ]
+  },
+  "https://gis.desotocountyms.gov/arcgis/rest/services/BaseLayers/MapServer/1": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[82].url",
+    "parcel_services.json.services[82].terms"
+   ]
+  },
+  "https://gis.dgcoks.gov/server/rest/services/Tax_Parcel/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[62].url"
+   ]
+  },
+  "https://gis.dupageco.org/arcgis/rest/services/DuPage_County_IL/ParcelsWithRealEstateCC/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[58].url",
+    "parcel_services.json.services[58].terms"
+   ]
+  },
+  "https://gis.franklincountyohio.gov/hosting/rest/services/ParcelFeatures/Parcel_Features/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[33].url"
+   ]
+  },
+  "https://gis.franklincountyohio.gov/hosting/rest/services/ParcelFeatures/Parcel_Features/MapServer/info/iteminfo?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[33].terms"
+   ]
+  },
+  "https://gis.johnsoncountyiowa.gov/arcgis/rest/services/LandRecords/Land_Records/MapServer/9": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[56].url",
+    "parcel_services.json.services[56].terms"
+   ]
+  },
+  "https://gis.linncountyiowa.gov/ags/rest/services/Planning/mapBSAPermitting/MapServer/6": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[54].url"
+   ]
+  },
+  "https://gis.lojic.org/maps/rest/services/LojicApps/MsdCsoSsoLocations/MapServer/4": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[63].terms"
+   ]
+  },
+  "https://gis.lojic.org/maps/rest/services/PvaGis/CamaViewer/MapServer/26": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[63].url"
+   ]
+  },
+  "https://gis.lyon-county.org/server/rest/services/Landbase/Parcels/MapServer/1": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[85].url",
+    "parcel_services.json.services[85].terms"
+   ]
+  },
+  "https://gis.mcassessor.maricopa.gov/arcgis/rest/services/Parcels/MapServer/0": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "parcel_services.json.services[30].url"
+   ]
+  },
+  "https://gis.mcassessor.maricopa.gov/arcgis/rest/services/Parcels/MapServer/info/iteminfo?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[30].terms"
+   ]
+  },
+  "https://gis.rcgov.org/server/rest/services/OpenData/TaxParcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[101].url",
+    "parcel_services.json.services[101].terms"
+   ]
+  },
+  "https://gis.siouxfalls.gov/arcgis/rest/services/Data/Property/MapServer/1": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "parcel_services.json.services[102].url",
+    "parcel_services.json.services[102].terms"
+   ]
+  },
+  "https://gis.utah.gov/products/sgid/cadastre/parcels/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[6].terms"
+   ]
+  },
+  "https://giscat.ne.gov/enterprise/rest/services/StatewideParcelsExternal/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[27].url"
+   ]
+  },
+  "https://giscat.ne.gov/enterprise/rest/services/StatewideParcelsExternal/MapServer/0?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[27].terms"
+   ]
+  },
+  "https://gisdata.alleghenycounty.us/arcgis/rest/services/OPENDATA/Parcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[35].url"
+   ]
+  },
+  "https://gisdata.alleghenycounty.us/arcgis/rest/services/OPENDATA/Parcels/MapServer/info/iteminfo?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[35].terms"
+   ]
+  },
+  "https://gisdata.in.gov/portal/sharing/rest/content/items/ce78e8017fcb479c81a06a6255cfcfa6?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[15].terms"
+   ]
+  },
+  "https://gisdata.in.gov/server/rest/services/Hosted/Parcel_Boundaries_of_Indiana_Current/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[15].url"
+   ]
+  },
+  "https://gisenterprise.washoecounty.gov/server/rest/services/WashoeGIS/Parcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[84].url",
+    "parcel_services.json.services[84].terms"
+   ]
+  },
+  "https://gismaps.fultoncountyga.gov/arcgispub/rest/services/OpenData/Tax_Parcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[34].url"
+   ]
+  },
+  "https://gismaps.fultoncountyga.gov/arcgispub/rest/services/OpenData/Tax_Parcels/MapServer/info/iteminfo?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[34].terms"
+   ]
+  },
+  "https://gismaps.kingcounty.gov": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[39].terms"
+   ]
+  },
+  "https://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_Parcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[39].url"
+   ]
+  },
+  "https://gisportal.horrycounty.org/server/rest/services/Hosted/Energov_iGapps_WFL1/FeatureServer/6": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[98].url",
+    "parcel_services.json.services[98].terms"
+   ]
+  },
+  "https://gisportalgr.grcity.us/arcgis/rest/services/Core_Data/Parcels/MapServer/1": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[74].url",
+    "parcel_services.json.services[74].terms"
+   ]
+  },
+  "https://gisservice.mt.gov/ArcGIS/rest/services/msdi_cadastral_map_v1/MapServer/1": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[7].url"
+   ]
+  },
+  "https://gisservice.mt.gov/ArcGIS/rest/services/msdi_cadastral_map_v1/MapServer/info/iteminfo?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[7].terms"
+   ]
+  },
+  "https://gisservices.oakgov.com/arcgisds/rest/services/Hosted/Tax_Parcel_2024/FeatureServer/32": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[72].url"
+   ]
+  },
+  "https://gistech.countyofkane.org/arcgis/rest/services/KanePINList/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[60].url",
+    "parcel_services.json.services[60].terms"
+   ]
+  },
+  "https://gisweb.wycokck.org/arcgis/rest/services/GISPUB/UGMAPS_4_V02/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[61].url",
+    "parcel_services.json.services[61].terms"
+   ]
+  },
+  "https://granit24a.sr.unh.edu/hosting/rest/services/Hosted/CAD_ParcelMosaic/FeatureServer/1": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[83].url"
+   ]
+  },
+  "https://greenecountyassessor.org/arcgis/rest/services/TopoCountyParcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[78].url",
+    "parcel_services.json.services[78].terms"
+   ]
+  },
+  "https://iga.in.gov/laws/current/ic/title/6/article/1.1/chapter/20.6/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.IN.source_url"
+   ]
+  },
+  "https://indyculturaltrail.org/economic-impact/": {
+   "status": "error",
+   "detail": "Remote end closed connection without response",
+   "used_in": [
+    "case_studies.json[2].evaluation_url",
+    "research.json[12].source_url"
+   ]
+  },
+  "https://jccgis.jccal.org/server/rest/services/Basemap/Parcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[41].url",
+    "parcel_services.json.services[41].terms"
+   ]
+  },
+  "https://jcgis.jacksongov.org/arcgis/rest/services/Cadastral/PastYearParcels/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[76].terms"
+   ]
+  },
+  "https://jcgis.jacksongov.org/arcgis/rest/services/ParcelViewer/ParcelsAscendRelate/MapServer/1": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[76].url"
+   ]
+  },
+  "https://jpgis.jeffparish.net/server/rest/services/Parcels/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[69].url",
+    "parcel_services.json.services[69].terms"
+   ]
+  },
+  "https://ksrevisor.gov/statutes/chapters/ch79/079_014_0039.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.KS.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://law.justia.com/codes/georgia/title-48/chapter-5/article-1/section-48-5-7/": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state_finance_profiles.json.GA.source_url"
+   ]
+  },
+  "https://law.lis.virginia.gov/vacode/title15.2/chapter22/section15.2-2209.4/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[39].statute_url",
+    "statutes.json[39].statute_url"
+   ]
+  },
+  "https://law.lis.virginia.gov/vacode/title15.2/chapter22/section15.2-2286.2/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[40].statute_url",
+    "statutes.json[40].statute_url"
+   ]
+  },
+  "https://law.lis.virginia.gov/vacode/title58.1/chapter32/section58.1-3201/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.VA.source_url",
+    "state_finance_profiles.json.VA.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://lawfilesext.leg.wa.gov/biennium/2023-24/Pdf/Bills/Session%20Laws/House/1042-S.SL.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[23].statute_url",
+    "statutes.json[23].statute_url"
+   ]
+  },
+  "https://lawfilesext.leg.wa.gov/biennium/2025-26/Pdf/Bills/Session%20Laws/Senate/5184-S.SL.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[22].statute_url",
+    "statutes.json[22].statute_url"
+   ]
+  },
+  "https://laws.nmonesource.com/w/nmos/Chapter-7-NMSA-1978#!fragment/zoupio-_Toc140502128": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.NM.source_url"
+   ]
+  },
+  "https://lcmaps.lanecounty.org/arcgis/rest/services/CommishSearch/AddressParcelNew/FeatureServer/1": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[92].url",
+    "parcel_services.json.services[92].terms"
+   ]
+  },
+  "https://le.utah.gov/xcode/Title59/Chapter2/59-2-S103.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.UT.source_url"
+   ]
+  },
+  "https://le.utah.gov/xcode/Title59/Chapter2/C59-2-S103_2024050120240501.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.UT.field_evidence.res_assessment_ratio.source_url",
+    "state_finance_profiles.json.UT.field_evidence.homestead_exemption_rule.source_url"
+   ]
+  },
+  "https://le.utah.gov/~2021/bills/static/HB0082.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[20].statute_url",
+    "statutes.json[20].statute_url"
+   ]
+  },
+  "https://leg.colorado.gov/bills/hb24-1313": {
+   "status": "error",
+   "detail": "406",
+   "used_in": [
+    "state-housing-laws.json[12].statute_url",
+    "statutes.json[12].statute_url"
+   ]
+  },
+  "https://leg.colorado.gov/bills/sb24-233": {
+   "status": "error",
+   "detail": "406",
+   "used_in": [
+    "state_finance_profiles.json.CO.source_url"
+   ]
+  },
+  "https://leg.colorado.gov/sites/default/files/2024a_1152_signed.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[13].statute_url",
+    "statutes.json[13].statute_url"
+   ]
+  },
+  "https://leg.colorado.gov/sites/default/files/2024a_1304_signed.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[38].statute_url",
+    "statutes.json[38].statute_url"
+   ]
+  },
+  "https://leg.colorado.gov/sites/default/files/documents/2024B/bills/2024b_1001_enr.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.CO.field_evidence.res_assessment_ratio.source_url",
+    "state_finance_profiles.json.CO.field_evidence.homestead_exemption_rule.source_url"
+   ]
+  },
+  "https://leg.mt.gov/bills/mca/title_0150/chapter_0070/part_0010/section_0110/0150-0070-0010-0110.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.MT.source_url",
+    "state_finance_profiles.json.MT.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[15].statute_url",
+    "state-housing-laws.json[27].statute_url",
+    "statutes.json[15].statute_url",
+    "statutes.json[27].statute_url"
+   ]
+  },
+  "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0450/0760-0020-0030-0450.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[26].statute_url",
+    "statutes.json[26].statute_url"
+   ]
+  },
+  "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202120220AB2097": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state-housing-laws.json[5].statute_url",
+    "statutes.json[5].statute_url"
+   ]
+  },
+  "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202120220SB9": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state-housing-laws.json[4].statute_url",
+    "statutes.json[4].statute_url"
+   ]
+  },
+  "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB79": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state-housing-laws.json[0].statute_url",
+    "state-housing-laws.json[1].statute_url",
+    "state-housing-laws.json[2].statute_url",
+    "state-housing-laws.json[3].statute_url",
+    "statutes.json[0].statute_url"
+   ]
+  },
+  "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=65912.111": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state-housing-laws.json[37].statute_url",
+    "statutes.json[37].statute_url"
+   ]
+  },
+  "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=51.&lawCode=RTC": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state_finance_profiles.json.CA.source_url"
+   ]
+  },
+  "https://legis.la.gov/legis/Law.aspx?d=206538": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.LA.source_url"
+   ]
+  },
+  "https://legislature.idaho.gov/statutesrules/idstat/Title63/T63CH2/SECT63-205/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.ID.field_evidence.res_assessment_ratio.source_url",
+    "state_finance_profiles.json.ID.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://legislature.idaho.gov/statutesrules/idstat/Title63/T63CH6/SECT63-602G/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.ID.field_evidence.homestead_exemption_rule.source_url"
+   ]
+  },
+  "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6541/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[34].statute_url",
+    "statutes.json[34].statute_url"
+   ]
+  },
+  "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6542/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[35].statute_url",
+    "statutes.json[35].statute_url"
+   ]
+  },
+  "https://legislature.idaho.gov/statutesrules/idstat/title63/t63ch6/sect63-602g/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.ID.source_url"
+   ]
+  },
+  "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[16].statute_url",
+    "statutes.json[16].statute_url"
+   ]
+  },
+  "https://legislature.maine.gov/statutes/36/title36sec708.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.ME.source_url"
+   ]
+  },
+  "https://legislature.vermont.gov/statutes/section/24/117/04412": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[17].statute_url",
+    "statutes.json[17].statute_url"
+   ]
+  },
+  "https://legislature.vermont.gov/statutes/section/32/121/03481": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.VT.source_url"
+   ]
+  },
+  "https://library.municode.com/tn/metro_government_of_nashville_and_davidson_county/codes/code_of_ordinances?nodeId=CD_TIT17ZO": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "zoning_standards.json.withheld[6].tried[0].url"
+   ]
+  },
+  "https://library.municode.com/tx/austin/codes/land_development_code": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "zoning_standards.json.withheld[0].tried[0].url"
+   ]
+  },
+  "https://lis.njleg.state.nj.us/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.NJ.source_url"
+   ]
+  },
+  "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIX/Chapter59/Section2A": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.MA.source_url",
+    "state_finance_profiles.json.MA.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[28].statute_url",
+    "statutes.json[28].statute_url"
+   ]
+  },
+  "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3A": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[18].statute_url",
+    "statutes.json[18].statute_url"
+   ]
+  },
+  "https://map11.incog.org/arcgis11wa/rest/services/Parcels_TulsaCo/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[88].url",
+    "parcel_services.json.services[88].terms"
+   ]
+  },
+  "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[110].url",
+    "parcel_services.json.services[110].terms"
+   ]
+  },
+  "https://maps.bexar.org/arcgis/rest/services/Parcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[111].url",
+    "parcel_services.json.services[111].terms"
+   ]
+  },
+  "https://maps.clarkcountynv.gov/arcgis/rest/services/Assessor/Layers/MapServer/1": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[36].url"
+   ]
+  },
+  "https://maps.clarkcountynv.gov/arcgis/rest/services/Assessor/Layers/MapServer/info/iteminfo?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[36].terms"
+   ]
+  },
+  "https://maps.lakecountyil.gov/arcgis/rest/services/CCAO/TaxParcelViewerPro/MapServer/12": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[59].url",
+    "parcel_services.json.services[59].terms"
+   ]
+  },
+  "https://maps.linkgis.org/server/rest/services/Web_Scene_Map_Parcels/MapServer/13": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[65].url",
+    "parcel_services.json.services[65].terms"
+   ]
+  },
+  "https://maps.shelbyal.com/gisserver/rest/services/LegacyServices/Cadastral_2026/MapServer/91": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[43].url",
+    "parcel_services.json.services[43].terms"
+   ]
+  },
+  "https://maps.spartanburgcounty.org/server/rest/services/GIS/CAMA_Parcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[99].url",
+    "parcel_services.json.services[99].terms"
+   ]
+  },
+  "https://maps.stpgov.org/server/rest/services/Referenced_Layers/2025_Parcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[70].url",
+    "parcel_services.json.services[70].terms"
+   ]
+  },
+  "https://maps.vcgi.vermont.gov/gisdata/metadata/CadastralParcels_VTPARCELS.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[12].terms"
+   ]
+  },
+  "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Planning_Landuse_and_Zoning_WebMercator/MapServer/32": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].zone_source.url"
+   ]
+  },
+  "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Property_and_Land_WebMercator/MapServer/25": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "valuation_backtest_benchmarks.json.counties.11001.sources.residential_cama"
+   ]
+  },
+  "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Property_and_Land_WebMercator/MapServer/40": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[21].url",
+    "valuation_backtest_benchmarks.json.counties.11001.sources.owner_polygons"
+   ]
+  },
+  "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Property_and_Land_WebMercator/MapServer/40/iteminfo?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[21].terms"
+   ]
+  },
+  "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Property_and_Land_WebMercator/MapServer/54": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_use_codes.json.systems[1].source.url"
+   ]
+  },
+  "https://maps8.stlouis-mo.gov/arcgis/rest/services/PDA/PARCELS_PUBLIC/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[79].url",
+    "parcel_services.json.services[79].terms"
+   ]
+  },
+  "https://mapservices.pasda.psu.edu/server/rest/services/pasda/BucksCounty/MapServer/17": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[96].url",
+    "parcel_services.json.services[96].terms"
+   ]
+  },
+  "https://mapservices.pasda.psu.edu/server/rest/services/pasda/MontgomeryCounty/MapServer/14": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[95].url",
+    "parcel_services.json.services[95].terms"
+   ]
+  },
+  "https://mdgeodata.md.gov/imap/rest/services/PlanningCadastre/MD_ParcelBoundaries/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[11].url"
+   ]
+  },
+  "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtp&section=8-103": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.MD.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtp&section=9-105": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.MD.source_url",
+    "state_finance_profiles.json.MD.field_evidence.annual_assessment_cap.source_url",
+    "state_finance_profiles.json.MD.field_evidence.homestead_exemption_rule.source_url"
+   ]
+  },
+  "https://milessilverman.github.io/city-pretty-data-midwest/": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "county_hosts.json.regions.midwest.base"
+   ]
+  },
+  "https://milessilverman.github.io/city-pretty-data-northeast/": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "county_hosts.json.regions.northeast.base"
+   ]
+  },
+  "https://milessilverman.github.io/city-pretty-data-south/": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "county_hosts.json.regions.south.base"
+   ]
+  },
+  "https://milessilverman.github.io/city-pretty-data-west/": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "county_hosts.json.regions.west.base"
+   ]
+  },
+  "https://minneapolis2040.com/topics/housing/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[14].statute_url",
+    "statutes.json[14].statute_url"
+   ]
+  },
+  "https://nashville.maps.arcgis.com/sharing/rest/content/items/691604512e634cb88615773d388d4379/data": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_use_codes.json.systems[2].source.url"
+   ]
+  },
+  "https://nebraskalegislature.gov/laws/statutes.php?statute=77-201": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.NE.source_url",
+    "state_finance_profiles.json.NE.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://ocgis.com/arcpub/rest/services/Map_Layers/Parcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[48].url",
+    "parcel_services.json.services[48].terms"
+   ]
+  },
+  "https://oitco.hylandcloud.com/cdotrmpop/docpop/docpop.aspx?docid=58703563": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[15].source_url"
+   ]
+  },
+  "https://oksenate.gov/about/constitution/article-x/section-8b": {
+   "status": "error",
+   "detail": "307",
+   "used_in": [
+    "state_finance_profiles.json.OK.source_url"
+   ]
+  },
+  "https://pappgispub1.co.washington.or.us/server/rest/services/baselayers/Taxlots_SP/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[90].url",
+    "parcel_services.json.services[90].terms"
+   ]
+  },
+  "https://perkasieborough.org/media/3444/2025_06_02-public-council-packet.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[10].source_url"
+   ]
+  },
+  "https://phoenix.municipal.codes/ZO": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "zoning_standards.json.withheld[1].tried[0].url"
+   ]
+  },
+  "https://piquaoh.gov/AgendaCenter/ViewFile/Agenda/_05212024-246": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[9].source_url"
+   ]
+  },
+  "https://portal.carsoncity.gov/server/rest/services/CarsonCity/CarsonCityNV_OpenData/MapServer/36": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[86].url",
+    "parcel_services.json.services[86].terms"
+   ]
+  },
+  "https://portal.crimpr.net/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.PR.source_url"
+   ]
+  },
+  "https://portal.ct.gov/dot/-/media/dot/contracts/0000---2025-3-low-bid/0301-0130.pdf?hash=BDDE2CE8489332E3A5E45B8F571DCD4D&rev=568e00a742474522a6c95008a8a22a60": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[23].source_url"
+   ]
+  },
+  "https://pub.sagis.org/arcgis/rest/services/OpenData/Parcels/MapServer/27": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[53].url",
+    "parcel_services.json.services[53].terms"
+   ]
+  },
+  "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[0].terms"
+   ]
+  },
+  "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "la_neighborhood_values.json._source.service",
+    "parcel_services.json.services[0].url"
+   ]
+  },
+  "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=Roll_LandBaseYear%3D'2022'%20AND%20Roll_ImpBaseYear%3D'2022'%20AND%20UseCode%3D'0100'&outFields=...&orderByFields=OBJECTID&resultOffset=<0,1000,...>&resultRecordCount=1000&f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "la_neighborhood_values.json._source.pulls[0].queries[0].url_pattern"
+   ]
+  },
+  "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=Roll_LandBaseYear%3D'2023'%20AND%20Roll_ImpBaseYear%3D'2023'%20AND%20UseCode%3D'0100'&outFields=...&orderByFields=OBJECTID&resultOffset=<0,1000,...>&resultRecordCount=1000&f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "la_neighborhood_values.json._source.pulls[0].queries[1].url_pattern"
+   ]
+  },
+  "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=Roll_LandBaseYear%3D'2024'%20AND%20Roll_ImpBaseYear%3D'2024'%20AND%20UseCode%3D'0100'&outFields=...&orderByFields=OBJECTID&resultOffset=<0,1000,...>&resultRecordCount=1000&f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "la_neighborhood_values.json._source.pulls[0].queries[2].url_pattern"
+   ]
+  },
+  "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=Roll_LandBaseYear%3D'2025'%20AND%20Roll_ImpBaseYear%3D'2025'%20AND%20UseCode%3D'0100'&outFields=...&orderByFields=OBJECTID&resultOffset=<0,1000,...>&resultRecordCount=1000&f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "la_neighborhood_values.json._source.pulls[1].queries[0].url_pattern",
+    "valuation_backtest_benchmarks.json.counties.06037.previous_page_model.sample.queries[0].url_pattern"
+   ]
+  },
+  "https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query?where=Roll_LandBaseYear%3D'2026'%20AND%20Roll_ImpBaseYear%3D'2026'%20AND%20UseCode%3D'0100'&outFields=...&orderByFields=OBJECTID&resultOffset=<0,1000,...>&resultRecordCount=1000&f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "la_neighborhood_values.json._source.pulls[1].queries[1].url_pattern",
+    "valuation_backtest_benchmarks.json.counties.06037.previous_page_model.sample.queries[1].url_pattern"
+   ]
+  },
+  "https://qagisservices.oakgov.com/arcgisds/rest/services/Hosted/Tax_Parcel_2024/FeatureServer/32": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[72].terms"
+   ]
+  },
+  "https://raleighnc.gov/planning-and-building/services/missing-middle-housing": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state-housing-laws.json[19].statute_url",
+    "statutes.json[19].statute_url"
+   ]
+  },
+  "https://repository.upenn.edu/bitstreams/438c8723-dc56-4664-a888-d00956186681/download": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "intervention_verification.json.street_lighting.sourced_effect.citations[1].url",
+    "research.json[39].source_url"
+   ]
+  },
+  "https://research.fs.usda.gov/download/treesearch/36186.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[4].verification.field_evidence.impact.source_url"
+   ]
+  },
+  "https://research.fs.usda.gov/download/treesearch/48730.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[8].verification.field_evidence.impact.source_url",
+    "research.json[8].verification.field_evidence.geography.source_url"
+   ]
+  },
+  "https://research.fs.usda.gov/treesearch/36186": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[4].verification.field_evidence.geography.source_url"
+   ]
+  },
+  "https://resources.ca.gov/grants/urban-greening/": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "funding_programs.json[2].source_url"
+   ]
+  },
+  "https://revisor.mo.gov/main/OneSection.aspx?section=137.115": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.MO.source_url",
+    "state_finance_profiles.json.MO.field_evidence.res_assessment_ratio.source_url",
+    "state_finance_profiles.json.MO.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://risegis.ri.gov/hosting/rest/services/RIDEM/Tax_Parcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[28].url"
+   ]
+  },
+  "https://risegis.ri.gov/hosting/rest/services/RIDEM/Tax_Parcels/MapServer/info/iteminfo?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[28].terms"
+   ]
+  },
+  "https://s-media.nyc.gov/agencies/dcp/assets/files/pdf/data-tools/bytes/pluto_datadictionary.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_use_codes.json.systems[0].source.url",
+    "zoning_standards.json.jurisdictions[0].caveats[1].url"
+   ]
+  },
+  "https://safecleanwaterla.org/": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "funding_programs.json[0].source_url"
+   ]
+  },
+  "https://santafecountynm.gov": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[116].terms"
+   ]
+  },
+  "https://sdlegislature.gov/Statutes/10-6-104": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.SD.source_url"
+   ]
+  },
+  "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99440&Index=I%3a%5czindex%5csurs&HitCount=2&hits=470+471+&hc=2&req=%28number+contains+8%2D2o%2A%29&Item=0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[42].statute_url",
+    "statutes.json[42].statute_url"
+   ]
+  },
+  "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99441&Index=I%3a%5czindex%5csurs&HitCount=2&hits=14b+14c+&hc=2&req=%28number+contains+8%2D2s%2A%29&Item=0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[44].statute_url",
+    "statutes.json[44].statute_url"
+   ]
+  },
+  "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99443&Index=I%3a%5czindex%5csurs&HitCount=2&hits=2ba+2bb+&hc=2&req=%28number+contains+8%2D3n%2A%29&Item=0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[43].statute_url",
+    "statutes.json[43].statute_url"
+   ]
+  },
+  "https://seattle.municipal.codes/SMC/23.44.010": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "zoning_standards.json.withheld[2].tried[0].url"
+   ]
+  },
+  "https://secure.boonecountygis.com/server/rest/services/ParcelLayers/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[67].url",
+    "parcel_services.json.services[67].terms"
+   ]
+  },
+  "https://secure.sos.state.or.us/oard/viewAttachment.action?ruleVrsnRsn=252769": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_use_codes.json.systems[4].source.url"
+   ]
+  },
+  "https://services.arcgis.com/0L95CJ0VTaxqcmED/arcgis/rest/services/EXTERNAL_tcad_parcel/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[112].url"
+   ]
+  },
+  "https://services.arcgis.com/KYvXadMcgf0K1EzK/ArcGIS/rest/services/Tax_Parcels_2026/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[68].url",
+    "parcel_services.json.services[68].terms"
+   ]
+  },
+  "https://services.arcgis.com/KaARkuoKF9vrGr3P/arcgis/rest/services/New_Orleans_Parcels/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[40].url",
+    "parcel_services.json.services[40].terms"
+   ]
+  },
+  "https://services.arcgis.com/aA3snZwJfFkVyDuP/arcgis/rest/services/San_Bernardino_County_Parcel_Dataset/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[50].url",
+    "parcel_services.json.services[50].terms"
+   ]
+  },
+  "https://services.arcgis.com/fLeGjb7u4uXqeF9q/ArcGIS/rest/services/PWD_PARCELS/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[94].url",
+    "parcel_services.json.services[94].terms"
+   ]
+  },
+  "https://services.arcgis.com/jsIt88o09Q0r1j8h/arcgis/rest/services/Current_Parcels/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "county_valuation_models.json.counties.53033.input_map.input_layer.url",
+    "parcel_services.json.services[8].url"
+   ]
+  },
+  "https://services.arcgis.com/ovln19YRWV44nBqV/ArcGIS/rest/services/Cadastral/FeatureServer/3": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[55].url",
+    "parcel_services.json.services[55].terms"
+   ]
+  },
+  "https://services.nconemap.gov/secure/rest/services/NC1Map_Parcels/FeatureServer/1": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[2].url"
+   ]
+  },
+  "https://services.nconemap.gov/secure/rest/services/NC1Map_Parcels/MapServer/1/metadata": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[2].terms"
+   ]
+  },
+  "https://services.wvgis.wvu.edu/arcgis/rest/services/Planning_Cadastre/WV_Parcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[18].url"
+   ]
+  },
+  "https://services.wvgis.wvu.edu/arcgis/rest/services/Planning_Cadastre/WV_Parcels/MapServer/0?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[18].terms"
+   ]
+  },
+  "https://services1.arcgis.com/99lidPhWCzftIe9K/arcgis/rest/services/UtahStatewideParcels/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[6].url"
+   ]
+  },
+  "https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/FS_VCGI_OPENDATA_Cadastral_VTPARCELS_poly_standardized_parcels_SP_v1/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[12].url"
+   ]
+  },
+  "https://services1.arcgis.com/CNPdEkvnGl65jCX8/arcgis/rest/services/Public_Idaho_Parcels_/FeatureServer/7": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[26].url"
+   ]
+  },
+  "https://services1.arcgis.com/Ezk9fcjSUkeadg6u/ArcGIS/rest/services/Minnehaha_Map_WFL1/FeatureServer/6": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[100].url",
+    "parcel_services.json.services[100].terms"
+   ]
+  },
+  "https://services1.arcgis.com/GOcSXpzwBHyk2nog/arcgis/rest/services/NDGISHUB_Parcels/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[24].url"
+   ]
+  },
+  "https://services1.arcgis.com/Mg7DLdfYcSWIaDnu/arcgis/rest/services/Parcel/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[64].url",
+    "parcel_services.json.services[64].terms"
+   ]
+  },
+  "https://services1.arcgis.com/RbMX0mRVOFNTdLzd/arcgis/rest/services/Maine_Parcels_Organized_Towns/FeatureServer/10": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[22].url"
+   ]
+  },
+  "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/Massachusetts_Property_Tax_Parcels/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[5].url"
+   ]
+  },
+  "https://services2.arcgis.com/Ce3DhLRthdwbHlfF/arcgis/rest/services/PropertyInformation_Hosted/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[114].url"
+   ]
+  },
+  "https://services2.arcgis.com/HdTo6HJqh92wn4D8/arcgis/rest/services/Parcels_view/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[104].url",
+    "parcel_use_codes.json.systems[2].source.values_read_from"
+   ]
+  },
+  "https://services2.arcgis.com/MlJ0G8iWUyC7jAmu/arcgis/rest/services/OhioStatewidePacels_full_view/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[23].url"
+   ]
+  },
+  "https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/arcgis/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[9].url"
+   ]
+  },
+  "https://services2.arcgis.com/cclAu9OKhOfjeUdr/arcgis/rest/services/Parcels_ZoneAugust2026/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[106].url"
+   ]
+  },
+  "https://services2.arcgis.com/qvkbeam7Wirps6zC/arcgis/rest/services/parcel_file_current/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[71].url"
+   ]
+  },
+  "https://services2.arcgis.com/w657bnjzrjguNyOy/ArcGIS/rest/services/STLCO_STC_Parcels_IND/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[75].url",
+    "parcel_services.json.services[75].terms"
+   ]
+  },
+  "https://services3.arcgis.com/3FL1kr7L4LvwA2Kb/arcgis/rest/services/Connecticut_CAMA_and_Parcel_Layer/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[10].url"
+   ]
+  },
+  "https://services3.arcgis.com/I2eWXOndpF9m8oKC/ArcGIS/rest/services/Taxlots_CMap/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[91].url",
+    "parcel_services.json.services[91].terms"
+   ]
+  },
+  "https://services3.arcgis.com/RfpmnkSAQleRbndX/ArcGIS/rest/services/Property_and_Tax/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[51].url",
+    "parcel_services.json.services[51].terms"
+   ]
+  },
+  "https://services3.arcgis.com/n6uYoouQZW75n5WI/arcgis/rest/services/Wisconsin_Statewide_Parcels_DB/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[4].url"
+   ]
+  },
+  "https://services3.arcgis.com/r0iJ85SKZ4zAzz3P/arcgis/rest/services/Wyoming_Parcels_for_2026/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[25].url"
+   ]
+  },
+  "https://services3.arcgis.com/vv3YkTdKe8qzmf0Z/arcgis/rest/services/Hinds_Service/FeatureServer/1": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[80].url"
+   ]
+  },
+  "https://services5.arcgis.com/A5C0MR9xfkxVRwat/ArcGIS/rest/services/Parcel_Data/FeatureServer/1": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[107].url"
+   ]
+  },
+  "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/MAPPLUTO/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[29].url",
+    "zoning_standards.json.jurisdictions[0].zone_source.extra_fields.url"
+   ]
+  },
+  "https://services5.arcgis.com/ya62ECiavqTkK0wv/ArcGIS/rest/services/ParcelFabricPublished_gdb/FeatureServer/15": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[57].url",
+    "parcel_services.json.services[57].terms"
+   ]
+  },
+  "https://services6.arcgis.com/EbVsqZ18sv1kVJ3k/arcgis/rest/services/NYS_Tax_Parcels_Public/FeatureServer/1": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[13].url"
+   ]
+  },
+  "https://services6.arcgis.com/EbVsqZ18sv1kVJ3k/arcgis/rest/services/NYS_Tax_Parcels_Public/FeatureServer/1?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[13].terms"
+   ]
+  },
+  "https://services6.arcgis.com/K0qS4r8AEJxrE8em/ArcGIS/rest/services/Macomb_County_Parcel_Data/FeatureServer/10": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[73].url",
+    "parcel_services.json.services[73].terms"
+   ]
+  },
+  "https://services6.arcgis.com/UwEXjTguDDovBVaQ/ArcGIS/rest/services/Parcels/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[38].url"
+   ]
+  },
+  "https://services7.arcgis.com/JMIoqakAkedEx0oU/arcgis/rest/services/DAC_Parcels/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[117].url"
+   ]
+  },
+  "https://services7.arcgis.com/n2n27A5sWjEWTpfF/arcgis/rest/services/St_Charles_County_Parcels/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[77].url",
+    "parcel_services.json.services[77].terms"
+   ]
+  },
+  "https://services7.arcgis.com/p0Gk2nDbPs7KEqSZ/arcgis/rest/services/SFC_Parcels_20250415/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[116].url"
+   ]
+  },
+  "https://services8.arcgis.com/HND1NcQt6vgOGn1z/ArcGIS/rest/services/MCRC_Public_Parcels/FeatureServer/1": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[42].url",
+    "parcel_services.json.services[42].terms"
+   ]
+  },
+  "https://services9.arcgis.com/Gh9awoU677aKree0/arcgis/rest/services/Florida_Statewide_Cadastral/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "county_valuation_models.json.counties.12086.input_map.input_layer.url",
+    "parcel_services.json.services[3].url"
+   ]
+  },
+  "https://smartgrowthamerica.org/resources/safer-streets-stronger-economies/": {
+   "status": "error",
+   "detail": "308",
+   "used_in": [
+    "research.json[30].source_url"
+   ]
+  },
+  "https://statutes.capitol.texas.gov/Docs/TX/htm/TX.23.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.TX.source_url"
+   ]
+  },
+  "https://texas.public.law/statutes/tex._tax_code_section_23.23": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.TX.field_evidence.uncaps_on_sale.source_url"
+   ]
+  },
+  "https://texas.public.law/statutes/tex._tax_code_section_25.18": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.TX.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/10/query": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "valuation_backtest_benchmarks.json.counties.11001.sources.block_groups",
+    "valuation_backtest_benchmarks.json.counties.42101.sources.block_groups"
+   ]
+  },
+  "https://treeequityscore.org/methodology/": {
+   "status": "error",
+   "detail": "308",
+   "used_in": [
+    "research.json[6].verification.original_claimed_citation.source_url"
+   ]
+  },
+  "https://uli.org/case-studies/the-high-line/": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[10].source_url"
+   ]
+  },
+  "https://utility.arcgis.com/usrsvcs/servers/cc1241646f84404185571113c1233665/rest/services/Parcel/CERT_TAX_PARCELS/FeatureServer/0": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "parcel_services.json.services[103].url"
+   ]
+  },
+  "https://vginmaps.vdem.virginia.gov/arcgis/rest/services/VA_Base_Layers/VA_Parcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[17].url"
+   ]
+  },
+  "https://vginmaps.vdem.virginia.gov/arcgis/rest/services/VA_Base_Layers/VA_Parcels/MapServer/info/iteminfo?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[17].terms"
+   ]
+  },
+  "https://waterloogreenway.org/about/waterloo-greenway-economic-impact/": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "case_studies.json[7].evaluation_url",
+    "research.json[16].source_url"
+   ]
+  },
+  "https://webgis.bgky.org/server/rest/services/WARCO/Parcel_Reference/FeatureServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[66].url",
+    "parcel_services.json.services[66].terms"
+   ]
+  },
+  "https://webmaps.sandiego.gov/arcgis/rest/services/DSD/Zoning_Base/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[2].zone_source.url"
+   ]
+  },
+  "https://webserver.rilegislature.gov/Statutes/TITLE44/44-5/44-5-11.6.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.RI.source_url",
+    "state_finance_profiles.json.RI.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[29].statute_url",
+    "state-housing-laws.json[30].statute_url",
+    "statutes.json[29].statute_url",
+    "statutes.json[30].statute_url"
+   ]
+  },
+  "https://westcog.org": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[38].terms"
+   ]
+  },
+  "https://www.akleg.gov/basis/statutes.asp#29.45.110": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.AK.source_url"
+   ]
+  },
+  "https://www.americansforthearts.org/by-program/reports-and-data/research-studies-publications/arts-economic-prosperity-6": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[1].source_url",
+    "research.json[1].verification.original_claimed_citation.source_url"
+   ]
+  },
+  "https://www.arcgis.com/home/item.html?id=3c784c118e5c4083b37038e9b38573df": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[71].terms"
+   ]
+  },
+  "https://www.arcgis.com/home/item.html?id=57d6ff611f444d75a1bf2b4a1d340163": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[114].terms"
+   ]
+  },
+  "https://www.arcgis.com/home/item.html?id=6f5f919cf5c948cfaa3b3c326af3fba3": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[112].terms"
+   ]
+  },
+  "https://www.arcgis.com/home/item.html?id=84204e58446e43e9a406fbd28c2ca95c": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[106].terms"
+   ]
+  },
+  "https://www.arcgis.com/home/item.html?id=cc1241646f84404185571113c1233665": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[103].terms"
+   ]
+  },
+  "https://www.arcgis.com/home/item.html?id=d409b11173134140981e5394319f629d": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[80].terms"
+   ]
+  },
+  "https://www.arcgis.com/sharing/rest/content/items/1564ace0b4f44318ac39920737f9bd07?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[29].terms"
+   ]
+  },
+  "https://www.arcgis.com/sharing/rest/content/items/2386813b23ea4e51a009f7d1d6b76e02?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[4].terms"
+   ]
+  },
+  "https://www.arcgis.com/sharing/rest/content/items/26ab5fad8d5d4258a7492a14de83bc0e?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[23].terms"
+   ]
+  },
+  "https://www.arcgis.com/sharing/rest/content/items/2b603a599a0842a3b2284c04c8927f35?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[8].terms"
+   ]
+  },
+  "https://www.arcgis.com/sharing/rest/content/items/346131b710a645ffb624f448a9cba6d4?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[22].terms"
+   ]
+  },
+  "https://www.arcgis.com/sharing/rest/content/items/4bb9a66f7287402b8f650aa9f21d3fa5?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[25].terms"
+   ]
+  },
+  "https://www.arcgis.com/sharing/rest/content/items/533599bbfbaa4748bf39faf1375a8a9c?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[9].terms"
+   ]
+  },
+  "https://www.arcgis.com/sharing/rest/content/items/65a3f7c6d4ca404ba6ab677913953b35?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[26].terms"
+   ]
+  },
+  "https://www.arcgis.com/sharing/rest/content/items/69148d3959194a05a23964cc60f6517b?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[16].terms"
+   ]
+  },
+  "https://www.arcgis.com/sharing/rest/content/items/73d4c766167848b795f1048cad3919c7?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[5].terms"
+   ]
+  },
+  "https://www.arcgis.com/sharing/rest/content/items/82a733423a244c43a9d4bf552954cea9?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[10].terms"
+   ]
+  },
+  "https://www.arcgis.com/sharing/rest/content/items/ac6da1176038457db16e8debe3f1abaf?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[24].terms"
+   ]
+  },
+  "https://www.arcgis.com/sharing/rest/content/items/b33e5f03d50844b8819a4046ecfe0d97?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[11].terms"
+   ]
+  },
+  "https://www.arcgis.com/sharing/rest/content/items/efa909d6b1c841d298b0a649e7f71cf2?f=json": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[3].terms"
+   ]
+  },
+  "https://www.atptx.org/light-rail/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "transit_pipelines.json[0].rtp_document_url"
+   ]
+  },
+  "https://www.austintexas.gov/development-services/home-amendments": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[11].statute_url",
+    "statutes.json[11].statute_url"
+   ]
+  },
+  "https://www.azleg.gov/ars/15/00972.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.AZ.field_evidence.homestead_exemption_rule.source_url"
+   ]
+  },
+  "https://www.azleg.gov/ars/42/06209.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "funding_programs.json[9].source_url"
+   ]
+  },
+  "https://www.azleg.gov/ars/42/13301.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.AZ.source_url"
+   ]
+  },
+  "https://www.azleg.gov/ars/42/13302.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.AZ.field_evidence.uncaps_on_sale.source_url"
+   ]
+  },
+  "https://www.azleg.gov/ars/9/00462-10.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[32].statute_url",
+    "statutes.json[32].statute_url"
+   ]
+  },
+  "https://www.azleg.gov/legtext/56leg/2R/laws/0197.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[10].statute_url",
+    "statutes.json[10].statute_url"
+   ]
+  },
+  "https://www.brightlinewest.com/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "intercity_transit_corridors.json[3].official_study_url",
+    "intercity_transit_corridors.json[3].source_url"
+   ]
+  },
+  "https://www.capitol.hawaii.gov/hrscurrent/Vol04_Ch0201-0257/HRS0246/": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state_finance_profiles.json.HI.source_url"
+   ]
+  },
+  "https://www.cga.ct.gov/current/pub/chap_203.htm#sec_12-62a": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.CT.source_url"
+   ]
+  },
+  "https://www.chicago.gov/city/en/depts/dcd/provdrs/tif/svcs/transit_tif.html": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "funding_programs.json[8].source_url"
+   ]
+  },
+  "https://www.cnt.org/publications/the-value-of-green-infrastructure-a-guide-to-recognizing-its-economic-environmental-and-social-benefits": {
+   "status": "error",
+   "detail": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, c",
+   "used_in": [
+    "research.json[7].source_url"
+   ]
+  },
+  "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D100": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].overlay_rule.url"
+   ]
+  },
+  "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D101": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].r1_family.url",
+    "zoning_standards.json.jurisdictions[1].districts.R-1A.purpose.url",
+    "zoning_standards.json.jurisdictions[1].districts.R-1B.purpose.url",
+    "zoning_standards.json.jurisdictions[1].districts.R-2.purpose.url",
+    "zoning_standards.json.jurisdictions[1].districts.R-3.purpose.url"
+   ]
+  },
+  "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D201": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].districts.R-1A.dwelling_units.url",
+    "zoning_standards.json.jurisdictions[1].districts.R-1B.dwelling_units.url",
+    "zoning_standards.json.jurisdictions[1].districts.R-2.dwelling_units.url",
+    "zoning_standards.json.jurisdictions[1].districts.R-3.dwelling_units.url"
+   ]
+  },
+  "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D202": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].districts.R-1A.min_lot[0].url",
+    "zoning_standards.json.jurisdictions[1].districts.R-1B.min_lot[0].url",
+    "zoning_standards.json.jurisdictions[1].districts.R-2.min_lot[0].url",
+    "zoning_standards.json.jurisdictions[1].districts.R-2.min_lot[1].url",
+    "zoning_standards.json.jurisdictions[1].districts.R-2.min_lot_inclusionary[0].url"
+   ]
+  },
+  "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D203": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].districts.R-1A.height.url",
+    "zoning_standards.json.jurisdictions[1].districts.R-1B.height.url",
+    "zoning_standards.json.jurisdictions[1].districts.R-2.height.url",
+    "zoning_standards.json.jurisdictions[1].districts.R-3.height.url"
+   ]
+  },
+  "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-D210": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].districts.R-1A.lot_occupancy[0].url",
+    "zoning_standards.json.jurisdictions[1].districts.R-1A.lot_occupancy[1].url",
+    "zoning_standards.json.jurisdictions[1].districts.R-1A.lot_occupancy[2].url",
+    "zoning_standards.json.jurisdictions[1].districts.R-1B.lot_occupancy[0].url",
+    "zoning_standards.json.jurisdictions[1].districts.R-1B.lot_occupancy[1].url"
+   ]
+  },
+  "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-U201": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].principal_use.url"
+   ]
+  },
+  "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-U253": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[1].accessory_apartment.url"
+   ]
+  },
+  "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Community-Planning-and-Development/Denver-Zoning-Code": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.withheld[5].tried[0].url"
+   ]
+  },
+  "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Department-of-Transportation-and-Infrastructure/Programs-Services/Projects/Colfax-BRT": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "transit_pipelines.json[3].rtp_document_url"
+   ]
+  },
+  "https://www.desperesmo.org/DocumentCenter/View/26018/R25-3905--Contract-with-SIC-Concrete-for-Concrete-Sidewalk-Replacements-BOA": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[21].source_url"
+   ]
+  },
+  "https://www.dfa.arkansas.gov/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.AR.source_url"
+   ]
+  },
+  "https://www.dor.ms.gov/property": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.MS.source_url"
+   ]
+  },
+  "https://www.dura-denver.org/redevelopment-projects/denver-union-station/": {
+   "status": "broken",
+   "detail": "DNS",
+   "used_in": [
+    "case_studies.json[3].evaluation_url",
+    "research.json[13].source_url"
+   ]
+  },
+  "https://www.fire.ca.gov/what-we-do/natural-resource-management/urban-community-forestry": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "funding_programs.json[3].source_url"
+   ]
+  },
+  "https://www.flsenate.gov/Laws/Statutes/2026/163.387": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.FL.source_url"
+   ]
+  },
+  "https://www.flsenate.gov/Laws/Statutes/2026/192.042": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.FL.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://www.flsenate.gov/Laws/Statutes/2026/193.155": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.FL.field_evidence.uncaps_on_sale.source_url"
+   ]
+  },
+  "https://www.flsenate.gov/Session/Bill/2024/328": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[6].statute_url",
+    "statutes.json[6].statute_url"
+   ]
+  },
+  "https://www.frbsf.org/community-development/publications/community-development-investment-review/2015/december/creative-placemaking-arts-community-economic-development/": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "research.json[3].source_url"
+   ]
+  },
+  "https://www.gencourt.state.nh.us/rsa/html/V/75/75-1.htm": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.NH.source_url"
+   ]
+  },
+  "https://www.gis.hctx.net/arcgis/rest/services/HCAD/Parcels/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[108].url",
+    "parcel_services.json.services[108].terms"
+   ]
+  },
+  "https://www.greenvillesc.gov/167/Falls-Park": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "case_studies.json[6].evaluation_url"
+   ]
+  },
+  "https://www.gwinnettcounty.com/static/upload/bid/802542/BL129-26%20Award%20Tab.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[6].source_url"
+   ]
+  },
+  "https://www.housingstudies.org/releases/measuring-impact-606/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[15].source_url",
+    "research.json[15].verification.original_claimed_citation.source_url"
+   ]
+  },
+  "https://www.ilga.gov/legislation/ilcs/ilcs4.asp?DocName=006500050HArt.+11+Div.+74.4": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "state_finance_profiles.json.IL.source_url"
+   ]
+  },
+  "https://www.invillapark.com/DocumentCenter/View/12557/Bid-Tabulation---2025-Sidewalk-Improvements-": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[11].source_url"
+   ]
+  },
+  "https://www.itdp.org/wp-content/uploads/2013/11/More-Development-For-Your-Transit-Dollar_ITDP.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "case_studies.json[5].evaluation_url",
+    "research.json[18].source_url"
+   ]
+  },
+  "https://www.kalamazoocity.org/files/assets/public/v/1/purchasing/bid-documents/2025/91396-022.0/91396-022.0-bid-tabulation.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[12].source_url"
+   ]
+  },
+  "https://www.ksrevisor.org/statutes/chapters/ch79/079_014_0039.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.KS.source_url"
+   ]
+  },
+  "https://www.law.cornell.edu/uscode/text/49/24911": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "funding_programs.json[10].source_url"
+   ]
+  },
+  "https://www.leg.state.nv.us/NRS/NRS-361.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.NV.field_evidence.res_assessment_ratio.source_url",
+    "state_finance_profiles.json.NV.field_evidence.annual_assessment_cap.source_url"
+   ]
+  },
+  "https://www.leg.state.nv.us/nrs/nrs-278.html#NRS278Sec257": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[36].statute_url",
+    "statutes.json[36].statute_url"
+   ]
+  },
+  "https://www.leg.state.nv.us/nrs/nrs-361.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.NV.source_url"
+   ]
+  },
+  "https://www.legis.iowa.gov/docs/code/441.21.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.IA.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://www.legis.iowa.gov/docs/ico/chapter/441.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.IA.source_url"
+   ]
+  },
+  "https://www.legis.state.pa.us/cfdocs/legis/LI/consCheck.cfm?txtType=HTM&ttl=53": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.PA.source_url"
+   ]
+  },
+  "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-211-27a": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.MI.source_url",
+    "state_finance_profiles.json.MI.field_evidence.res_assessment_ratio.source_url",
+    "state_finance_profiles.json.MI.field_evidence.annual_assessment_cap.source_url",
+    "state_finance_profiles.json.MI.field_evidence.uncaps_on_sale.source_url"
+   ]
+  },
+  "https://www.mesaaz.gov/files/assets/public/v/2/business-development/engineering/constructionbid/cp0062cap-cp0062wtr-cp0062gas-cp0956sr18_results.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[13].source_url",
+    "unit_costs.json[14].source_url"
+   ]
+  },
+  "https://www.metro.net/projects/westside/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "transit_pipelines.json[1].rtp_document_url"
+   ]
+  },
+  "https://www.miami21.org/final_code/ARTICLE5-SpecificToZones.pdf": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "zoning_standards.json.withheld[7].tried[2].url"
+   ]
+  },
+  "https://www.miami21.org/finalcode.asp": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.withheld[7].tried[0].url"
+   ]
+  },
+  "https://www.nashville.gov/departments/metro-clerk/legal-resources/executive-orders/mayor-freddie-oconnell/fo018": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[104].terms"
+   ]
+  },
+  "https://www.nature.com/articles/s41893-022-01058-5": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "intervention_verification.json.ev_hub.sourced_effect.citations[0].url",
+    "research.json[43].source_url"
+   ]
+  },
+  "https://www.nber.org/system/files/working_papers/w25798/w25798.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "intervention_verification.json.street_lighting.sourced_effect.citations[0].url",
+    "research.json[36].source_url"
+   ]
+  },
+  "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_105/GS_105-286.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.NC.source_url"
+   ]
+  },
+  "https://www.ndlegis.gov/cencode/t57c02.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.ND.source_url",
+    "state_finance_profiles.json.ND.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://www.newrochelleny.gov/DocumentCenter/View/20837/5785-Bid-Tabulation?bidId=": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[19].source_url"
+   ]
+  },
+  "https://www.nyc.gov/html/dot/downloads/pdf/2012-10-measuring-the-street.pdf": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "research.json[28].source_url"
+   ]
+  },
+  "https://www.nysenate.gov/legislation/laws/RPT/1805": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "state_finance_profiles.json.NY.source_url"
+   ]
+  },
+  "https://www.octa.net/projects-and-programs/all-projects/rail-projects/oc-streetcar/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "transit_pipelines.json[2].rtp_document_url"
+   ]
+  },
+  "https://www.okc.gov/government/maps-3/maps-history": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "case_studies.json[4].evaluation_url",
+    "research.json[17].source_url"
+   ]
+  },
+  "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[9].statute_url",
+    "statutes.json[9].statute_url"
+   ]
+  },
+  "https://www.oregonlegislature.gov/bills_laws/ors/ors197a.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state-housing-laws.json[24].statute_url",
+    "state-housing-laws.json[25].statute_url",
+    "statutes.json[24].statute_url",
+    "statutes.json[25].statute_url"
+   ]
+  },
+  "https://www.oregonlegislature.gov/bills_laws/ors/ors308.html": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.OR.source_url"
+   ]
+  },
+  "https://www.placeeconomics.com/resources/twenty-four-reasons-historic-preservation-is-good-for-your-community/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[38].source_url",
+    "research.json[38].verification.original_claimed_citation.source_url"
+   ]
+  },
+  "https://www.portland.gov/bps/planning/central-city/south-waterfront": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "research.json[14].source_url"
+   ]
+  },
+  "https://www.portland.gov/code/33": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[3].code_url"
+   ]
+  },
+  "https://www.portland.gov/sites/default/files/code/110-sd-zone_3.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[3].districts.R20.housing_url",
+    "zoning_standards.json.jurisdictions[3].districts.R20.far.url",
+    "zoning_standards.json.jurisdictions[3].districts.R20.height.url",
+    "zoning_standards.json.jurisdictions[3].districts.R20.setbacks.url",
+    "zoning_standards.json.jurisdictions[3].districts.R20.existing_lot.url"
+   ]
+  },
+  "https://www.portland.gov/sites/default/files/code/610-rf-r2.5-lots.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[3].districts.R20.min_lot.url",
+    "zoning_standards.json.jurisdictions[3].districts.R10.min_lot.url",
+    "zoning_standards.json.jurisdictions[3].districts.R7.min_lot.url",
+    "zoning_standards.json.jurisdictions[3].districts.R5.min_lot.url",
+    "zoning_standards.json.jurisdictions[3].districts.R2.5.min_lot.url"
+   ]
+  },
+  "https://www.portlandmaps.com/arcgis/rest/services/Public/Zoning/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[3].zone_source.url"
+   ]
+  },
+  "https://www.railstotrails.org/resource-library/resources/active-transportation-transforms-america-report/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[23].source_url"
+   ]
+  },
+  "https://www.railstotrails.org/resource-library/resources/active-transportation-transforms-america/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[23].verification.original_claimed_citation.source_url"
+   ]
+  },
+  "https://www.revisor.mn.gov/statutes/cite/273.13": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.MN.source_url",
+    "state_finance_profiles.json.MN.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://www.scstatehouse.gov/code/t12c037.php": {
+   "status": "error",
+   "detail": "[SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version (_ssl.c:1129)",
+   "used_in": [
+    "state_finance_profiles.json.SC.field_evidence.annual_assessment_cap.source_url"
+   ]
+  },
+  "https://www.scstatehouse.gov/code/t12c043.php": {
+   "status": "error",
+   "detail": "[SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version (_ssl.c:1129)",
+   "used_in": [
+    "state_finance_profiles.json.SC.source_url",
+    "state_finance_profiles.json.SC.field_evidence.res_assessment_ratio.source_url",
+    "state_finance_profiles.json.SC.field_evidence.reassessment_cycle_years.source_url"
+   ]
+  },
+  "https://www.thehighline.org/about/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "case_studies.json[0].evaluation_url"
+   ]
+  },
+  "https://www.tn.gov/content/dam/tn/tdot/construction/previous_lettings/Const_aup2025.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "unit_costs.json[22].source_url"
+   ]
+  },
+  "https://www.tpl.org/measuring-economic-value-city-park-system": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[20].source_url"
+   ]
+  },
+  "https://www.transit.dot.gov/research-innovation/capturing-value-transit-complete-report": {
+   "status": "blocked",
+   "detail": "403",
+   "used_in": [
+    "research.json[25].source_url"
+   ]
+  },
+  "https://www.transitchicago.com/rle/": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "transit_pipelines.json[4].rtp_document_url"
+   ]
+  },
+  "https://www.treeequityscore.org/methodology": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "research.json[6].source_url"
+   ]
+  },
+  "https://www.txdot.gov/projects/hearings-meetings/intercity-passenger-rail-study.html": {
+   "status": "broken",
+   "detail": "404",
+   "used_in": [
+    "intercity_transit_corridors.json[1].official_study_url",
+    "intercity_transit_corridors.json[1].source_url"
+   ]
+  },
+  "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25064.dat": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "acs_fallback_flags.json._source.census_files[0]"
+   ]
+  },
+  "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25077.dat": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "acs_fallback_flags.json._source.census_files[1]"
+   ]
+  },
+  "https://www3.multco.us/gisagspublic/rest/services/DART/Taxlots_Orion_Public/MapServer/0": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "parcel_services.json.services[89].url",
+    "parcel_use_codes.json.systems[4].source.values_read_from",
+    "zoning_standards.json.jurisdictions[3].zone_source.extra_fields.url"
+   ]
+  },
+  "https://wyoleg.gov/statutes/compress/title39.pdf": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "state_finance_profiles.json.WY.source_url",
+    "state_finance_profiles.json.WY.field_evidence.res_assessment_ratio.source_url"
+   ]
+  },
+  "https://zr.planning.nyc.gov": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].code_url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-i/chapter-2/12-10": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].adu.url",
+    "zoning_standards.json.jurisdictions[0].qualifying_residential_site.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-ii/chapter-2/22-00": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].caveats[0].url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-ii/chapter-2/22-121": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].districts.R6.housing_types.url",
+    "zoning_standards.json.jurisdictions[0].districts.R6-1.housing_types.url",
+    "zoning_standards.json.jurisdictions[0].districts.R6-2.housing_types.url",
+    "zoning_standards.json.jurisdictions[0].districts.R6A.housing_types.url",
+    "zoning_standards.json.jurisdictions[0].districts.R6B.housing_types.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-ii/chapter-2/22-122": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].districts.R1-1.housing_types.url",
+    "zoning_standards.json.jurisdictions[0].districts.R1-2.housing_types.url",
+    "zoning_standards.json.jurisdictions[0].districts.R1-2A.housing_types.url",
+    "zoning_standards.json.jurisdictions[0].districts.R2.housing_types.url",
+    "zoning_standards.json.jurisdictions[0].districts.R2A.housing_types.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-ii/chapter-3/23-11": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].districts.R1-1.min_lot.url",
+    "zoning_standards.json.jurisdictions[0].districts.R1-1.min_lot_other_residences.url",
+    "zoning_standards.json.jurisdictions[0].districts.R1-2.min_lot.url",
+    "zoning_standards.json.jurisdictions[0].districts.R1-2.min_lot_other_residences.url",
+    "zoning_standards.json.jurisdictions[0].districts.R1-2A.min_lot.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-ii/chapter-3/23-12": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].districts.R6.min_lot.url",
+    "zoning_standards.json.jurisdictions[0].districts.R6.min_lot_other_residences.url",
+    "zoning_standards.json.jurisdictions[0].districts.R6-1.min_lot.url",
+    "zoning_standards.json.jurisdictions[0].districts.R6-1.min_lot_other_residences.url",
+    "zoning_standards.json.jurisdictions[0].districts.R6-2.min_lot.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].districts.R1-1.far.url",
+    "zoning_standards.json.jurisdictions[0].districts.R1-2.far.url",
+    "zoning_standards.json.jurisdictions[0].districts.R1-2A.far.url",
+    "zoning_standards.json.jurisdictions[0].districts.R2.far.url",
+    "zoning_standards.json.jurisdictions[0].districts.R2A.far.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].districts.R6.far.url",
+    "zoning_standards.json.jurisdictions[0].districts.R6-1.far.url",
+    "zoning_standards.json.jurisdictions[0].districts.R6-2.far.url",
+    "zoning_standards.json.jurisdictions[0].districts.R6A.far.url",
+    "zoning_standards.json.jurisdictions[0].districts.R6B.far.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-ii/chapter-3/23-421": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].districts.R1-1.height.url",
+    "zoning_standards.json.jurisdictions[0].districts.R1-2.height.url",
+    "zoning_standards.json.jurisdictions[0].districts.R1-2A.height.url",
+    "zoning_standards.json.jurisdictions[0].districts.R2.height.url",
+    "zoning_standards.json.jurisdictions[0].districts.R2A.height.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-ii/chapter-3/23-422": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].districts.R4B.height.url",
+    "zoning_standards.json.jurisdictions[0].districts.R5.height.url",
+    "zoning_standards.json.jurisdictions[0].districts.R5B.height.url",
+    "zoning_standards.json.jurisdictions[0].districts.R5D.height.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-ii/chapter-3/23-432": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].districts.R6.height.url",
+    "zoning_standards.json.jurisdictions[0].districts.R6-1.height.url",
+    "zoning_standards.json.jurisdictions[0].districts.R6-2.height.url",
+    "zoning_standards.json.jurisdictions[0].districts.R6A.height.url",
+    "zoning_standards.json.jurisdictions[0].districts.R6B.height.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-iii/chapter-2/32-121": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].no_residences.C7.url",
+    "zoning_standards.json.jurisdictions[0].no_residences.C7-1.url",
+    "zoning_standards.json.jurisdictions[0].no_residences.C8-1.url",
+    "zoning_standards.json.jurisdictions[0].no_residences.C8-2.url",
+    "zoning_standards.json.jurisdictions[0].no_residences.C8-3.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-iii/chapter-2/32-122": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].districts.C3A.housing_types.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-iii/chapter-4/34-01": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].districts.C1-6.commercial.residential_only.url",
+    "zoning_standards.json.jurisdictions[0].districts.C1-6A.commercial.residential_only.url",
+    "zoning_standards.json.jurisdictions[0].districts.C1-7.commercial.residential_only.url",
+    "zoning_standards.json.jurisdictions[0].districts.C1-7A.commercial.residential_only.url",
+    "zoning_standards.json.jurisdictions[0].districts.C1-8.commercial.residential_only.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-iii/chapter-4/34-03": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].districts.C3A.height.commercial_note.url",
+    "zoning_standards.json.jurisdictions[0].districts.C3A.commercial.how.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-iii/chapter-4/34-111": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].commercial_overlay.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-iii/chapter-4/34-112": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].districts.C1-6.commercial.how.url",
+    "zoning_standards.json.jurisdictions[0].districts.C1-6A.commercial.how.url",
+    "zoning_standards.json.jurisdictions[0].districts.C1-7.commercial.how.url",
+    "zoning_standards.json.jurisdictions[0].districts.C1-7A.commercial.how.url",
+    "zoning_standards.json.jurisdictions[0].districts.C1-8.commercial.how.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-iii/chapter-4/34-221": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].districts.C1-6.commercial.bonus.url",
+    "zoning_standards.json.jurisdictions[0].districts.C1-6A.commercial.bonus.url",
+    "zoning_standards.json.jurisdictions[0].districts.C1-7.commercial.bonus.url",
+    "zoning_standards.json.jurisdictions[0].districts.C1-7A.commercial.bonus.url",
+    "zoning_standards.json.jurisdictions[0].districts.C1-8.commercial.bonus.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-iii/chapter-5/35-62": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].commercial_overlay.height_url",
+    "zoning_standards.json.jurisdictions[0].districts.C3.height.url",
+    "zoning_standards.json.jurisdictions[0].districts.C4-1.height.url"
+   ]
+  },
+  "https://zr.planning.nyc.gov/article-iii/chapter-5/35-632": {
+   "status": "ok",
+   "detail": "200",
+   "used_in": [
+    "zoning_standards.json.jurisdictions[0].districts.C1-6.height.commercial_note.url",
+    "zoning_standards.json.jurisdictions[0].districts.C1-6A.height.commercial_note.url",
+    "zoning_standards.json.jurisdictions[0].districts.C1-7.height.commercial_note.url",
+    "zoning_standards.json.jurisdictions[0].districts.C1-7A.height.commercial_note.url",
+    "zoning_standards.json.jurisdictions[0].districts.C1-8.height.commercial_note.url"
+   ]
+  }
+ }
+}

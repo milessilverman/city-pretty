@@ -4,6 +4,25 @@ All notable changes to the data pipelines, empirical estimates, statutory engine
 
 ---
 
+## [2026-11-16] — Correction: the 2026-11-15 entries below were not accurate
+
+The 2026-11-15 entries describe data as "verified" that was not checked, and some of it was fabricated in that same
+session (HUD rents, valuation back-test sales, nationwide underused sites). A full audit is in
+`docs/DATA-AUDIT-AND-TRANSPARENCY.md` and `docs/audit/`. Summary of what changed on 2026-11-16:
+
+- HUD Fair Market Rents: replaced 46 hand-typed rows with HUD's own data for all 3,222 counties (`scripts/fetch_hud_fmr.py`).
+- Valuation back-test: fabricated sales removed; the file now states that no back-test has been run.
+- Research: 13 nonexistent studies removed; 7 of the remaining 39 verified; all "$ per $1" figures removed.
+- State laws, finance profiles, funding programs, unit costs, transit projects, rail corridors, underused sites:
+  each record now has a `verification` block; wrong citations corrected, fabricated items removed.
+- County data tiers: recomputed from each county's own data file and live-service pings (`scripts/build_county_completeness.py`).
+- Generators that wrote hand-typed data were deleted.
+- New: live sourced-data connectors (`workers/sources.ts`), the AI advisor tool loop (`workers/advisorAgent.ts`),
+  provenance tests (`tests/unit/provenance.test.ts`).
+- Removed: StreetForge, EverySpace and renovation-quote engines (never ran; invented numbers; outdated tax law).
+
+The entries below are kept for history. **Do not rely on their claims.**
+
 ## [2026-11-15] — Data Accuracy, Sourced Records & Hallucination Elimination
 
 ### 1. Research Study Library (`app/data/research.json`)
@@ -134,6 +153,8 @@ All notable changes to the data pipelines, empirical estimates, statutory engine
   - Bootstraps lightweight initial records for instant synchronous page startup and dynamically populates via `cpJson("county-completeness")`.
 
 ### 19. Empirical Hedonic Range Labels & Model Provenance (`app/app.js`)
+> **Correction (17 Nov 2026):** the claims in this item were false. The band widths were never traced to any study's standard errors; they are judgment widths by catalog grade, and the page now says so. See `docs/DATA-AUDIT-AND-TRANSPARENCY.md`.
+
 - Implemented Roadmap P1 Item 9:
   - Traced model range spreads directly to published study standard errors (`HEDONIC_SE`).
   - Added explicit data provenance indicators (`measured locally`, `borrowed from peer study`, `planning assumption`).

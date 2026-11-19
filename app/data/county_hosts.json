@@ -1,0 +1,101 @@
+{
+  "_source": {
+    "note": "Regional GitHub Pages sites (and, once one exists, a Cloudflare R2 bucket) that host county data files. GitHub Pages publishes at most 1 GB per site. Cloudflare's R2 pricing page (developers.cloudflare.com/r2/pricing, read 19 Nov 2026): free tier 'Storage | 10 GB-month / month' and 'There are no charges for egress bandwidth'. A remote source is used only when enabled, after its site was checked to serve a county file with access-control-allow-origin: *; otherwise the page loads the file from this site's counties/ folder.",
+    "limit_bytes_per_site": 1073741824,
+    "split_script": "scripts/split_county_hosting.py"
+  },
+  "r2": {
+    "enabled": true,
+    "base": "https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/",
+    "status": "live",
+    "bucket": "city-pretty-data",
+    "checked_on": "2026-11-19",
+    "note": "Cloudflare R2 bucket city-pretty-data, public r2.dev address (no custom domain yet). Checked 19 Nov 2026: 1,385 county files uploaded with scripts/r2_sync_counties.py (1.138 GB stored); counties/bundle_48453, bundle_17031, bundle_47135 and bundle_06075 were fetched from this address with an Origin header and returned 200 with access-control-allow-origin: * and an ETag, byte-identical to the repository copies for the first three. HARD LIMIT set by the owner: R2 storage must never exceed the 10 GB free allowance; upload only with scripts/r2_sync_counties.py, which stops at 8 GB. See CLAUDE.md."
+  },
+  "regions": {
+    "northeast": {
+      "repo": "milessilverman/city-pretty-data-northeast",
+      "base": "https://milessilverman.github.io/city-pretty-data-northeast/",
+      "states": [
+        "09",
+        "23",
+        "25",
+        "33",
+        "44",
+        "50",
+        "34",
+        "36",
+        "42"
+      ],
+      "enabled": false,
+      "checked_on": null
+    },
+    "midwest": {
+      "repo": "milessilverman/city-pretty-data-midwest",
+      "base": "https://milessilverman.github.io/city-pretty-data-midwest/",
+      "states": [
+        "17",
+        "18",
+        "26",
+        "39",
+        "55",
+        "19",
+        "20",
+        "27",
+        "29",
+        "31",
+        "38",
+        "46"
+      ],
+      "enabled": false,
+      "checked_on": null
+    },
+    "south": {
+      "repo": "milessilverman/city-pretty-data-south",
+      "base": "https://milessilverman.github.io/city-pretty-data-south/",
+      "states": [
+        "10",
+        "11",
+        "12",
+        "13",
+        "24",
+        "37",
+        "45",
+        "51",
+        "54",
+        "01",
+        "21",
+        "28",
+        "47",
+        "05",
+        "22",
+        "40",
+        "48",
+        "72"
+      ],
+      "enabled": false,
+      "checked_on": null
+    },
+    "west": {
+      "repo": "milessilverman/city-pretty-data-west",
+      "base": "https://milessilverman.github.io/city-pretty-data-west/",
+      "states": [
+        "04",
+        "08",
+        "16",
+        "30",
+        "32",
+        "35",
+        "49",
+        "56",
+        "02",
+        "06",
+        "15",
+        "41",
+        "53"
+      ],
+      "enabled": false,
+      "checked_on": null
+    }
+  }
+}

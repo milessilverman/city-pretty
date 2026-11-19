@@ -1,0 +1,1 @@
+{"displayFieldName":"BASENAME","fieldAliases":{"GEOID":"GEOID"},"fields":[{"name":"GEOID","type":"esriFieldTypeString","alias":"GEOID","length":12}],"features":[{"attributes":{"GEOID":"484530003023"}}]}

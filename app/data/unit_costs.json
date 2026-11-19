@@ -10,10 +10,22 @@
     "document": "TxDOT contract 11243202; monthly estimate, CSJ 0047-13-033",
     "source_url": "https://ftp.txdot.gov/pub/txdot-info/cmd/cserve/distinfo/cisrpts/004713033.pdf",
     "quote": "05316001 … SY … 92.000",
-    "status": "confirmed",
+    "status": "unchecked",
     "notes": "Concrete placement pay item; use separate removal, foundation/base and traffic-control items where required.; Awarded contract unit price",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "could_not_check",
+      "method": "curl via session egress proxy",
+      "checked_on": "2026-11-16",
+      "evidence": "ftp.txdot.gov fails TLS verification through the egress proxy (curl error 60); Wayback availability API returns no snapshot.",
+      "unverified_fields": [
+        "unit_price",
+        "quote",
+        "contract"
+      ],
+      "notes": "Prior status \"confirmed\" downgraded to \"unchecked\" until the PDF can be fetched."
+    }
   },
   {
     "item": "curb_ramp",
@@ -26,10 +38,22 @@
     "document": "TxDOT contract 11243202; monthly estimate, CSJ 0047-13-033",
     "source_url": "https://ftp.txdot.gov/pub/txdot-info/cmd/cserve/distinfo/cisrpts/004713033.pdf",
     "quote": "05316004 … EA … 2,994.000",
-    "status": "confirmed",
+    "status": "unchecked",
     "notes": "Type-specific ramp; do not generalize to every ramp configuration.; Awarded contract unit price",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "could_not_check",
+      "method": "curl via session egress proxy",
+      "checked_on": "2026-11-16",
+      "evidence": "ftp.txdot.gov fails TLS verification through the egress proxy (curl error 60); Wayback availability API returns no snapshot.",
+      "unverified_fields": [
+        "unit_price",
+        "quote",
+        "contract"
+      ],
+      "notes": "Prior status \"confirmed\" downgraded to \"unchecked\" until the PDF can be fetched."
+    }
   },
   {
     "item": "led_streetlight",
@@ -42,10 +66,22 @@
     "document": "TxDOT contract 11243202; monthly estimate, CSJ 0047-13-033",
     "source_url": "https://ftp.txdot.gov/pub/txdot-info/cmd/cserve/distinfo/cisrpts/004713033.pdf",
     "quote": "06106191 … EA … 5,500.000",
-    "status": "confirmed",
+    "status": "unchecked",
     "notes": "38S-8-8, 250W-equivalent LED assembly. Item 610 includes pole; new foundation, external conduit, feeder wires, service and ground boxes are separately paid. Not a complete energized-site budget.; Awarded contract unit price",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "could_not_check",
+      "method": "curl via session egress proxy",
+      "checked_on": "2026-11-16",
+      "evidence": "ftp.txdot.gov fails TLS verification through the egress proxy (curl error 60); Wayback availability API returns no snapshot.",
+      "unverified_fields": [
+        "unit_price",
+        "quote",
+        "contract"
+      ],
+      "notes": "Prior status \"confirmed\" downgraded to \"unchecked\" until the PDF can be fetched."
+    }
   },
   {
     "item": "sidewalk",
@@ -61,7 +97,15 @@
     "status": "confirmed",
     "notes": "Item combines sidewalk and driveways; excludes other separately paid contract items.; Quantity-weighted awarded-contract average",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "0522 1 ... $67.54 ... 154,926.000 SY ... CONCRETE SIDEWALK AND DRIVEWAYS, 4\" THICK",
+      "unverified_fields": [],
+      "notes": ""
+    }
   },
   {
     "item": "rrfb",
@@ -77,7 +121,15 @@
     "status": "confirmed",
     "notes": "Furnish and install one solar sign assembly. One AS is not necessarily a complete two-sided pedestrian crossing.; Quantity-weighted awarded-contract average",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "0654 2 21 ... $14,288.83 ... 10.000 AS ... MIDBLOCK CROSSWALK: RECTANGULAR RAPID FLASHING BEACON",
+      "unverified_fields": [],
+      "notes": ""
+    }
   },
   {
     "item": "sound_wall",
@@ -93,23 +145,39 @@
     "status": "confirmed",
     "notes": "Specific 14-foot noise-wall/barrier configuration; preserve wall height in cost models.; Quantity-weighted awarded-contract average",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "0521 72 27 ... $909.87 ... 5,866.000 LF ... SHOULDER CONCRETE BARRIER WALL, 14' NOISE WALL",
+      "unverified_fields": [],
+      "notes": ""
+    }
   },
   {
     "item": "sidewalk",
     "state": "GA",
     "city_or_region": "Gwinnett County",
-    "unit_price": 42,
+    "unit_price": 45,
     "unit": "SY",
     "year": "2026",
     "source_agency": "Gwinnett DOT BL129-26",
     "document": "Gwinnett DOT BL129-26, Pedestrian Improvement Projects; Award Notice and bid tab",
     "source_url": "https://www.gwinnettcounty.com/static/upload/bid/802542/BL129-26%20Award%20Tab.pdf",
-    "quote": "155 CONC SIDEWALK, 4 IN … $42.00",
+    "quote": "155 CONC SIDEWALK, 4 IN ... 4,398 SY ... The Dickerson Group, Inc. $45.00",
     "status": "confirmed",
-    "notes": "Winner The Dickerson Group is on the second tabulation page, not the first.; Awarded contractor unit price",
+    "notes": "Winner The Dickerson Group is on the second tabulation page, not the first.; Awarded contractor unit price Corrected 2026-11-16: earlier value $42 was a non-awarded bidder's price.",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "Award Notice: \"the bid has been awarded to The Dickerson Group, Inc. in the amount of $1,248,247.84\"; Dickerson column (page 2, col 4): 155 CONC SIDEWALK, 4 IN 4,398 SY $45.00 $197,910.00",
+      "unverified_fields": [],
+      "notes": "DISPROVED prior value $42: $42.00 appears only in page-1 columns of other bidders (totals $1,257,949.99 / $1,469,779.26), not the awardee."
+    }
   },
   {
     "item": "sidewalk",
@@ -125,7 +193,17 @@
     "status": "confirmed",
     "notes": "Allen Grading first bidder; other grading, drainage and pavement items separately paid.; Awarded contractor unit price",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "0031 2591000000-E 848 4\" CONCRETE SIDEWALK 650 SY 64.00 (ALLEN GRADING COMPANY, INC., rank 1, $860,737.00)",
+      "unverified_fields": [
+        "award"
+      ],
+      "notes": "Price is the rank-1 low bid in \"BIDDERS IN ORDER\"; Notice of Award not in the fetched document."
+    }
   },
   {
     "item": "curb_ramp",
@@ -141,7 +219,17 @@
     "status": "confirmed",
     "notes": "Allen Grading first bidder; item 2605000000-N, specification 848.; Awarded contractor unit price",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "0032 2605000000-N 848 CONCRETE CURB RAMPS 3 EA 1,550.00 (ALLEN GRADING COMPANY, INC., rank 1)",
+      "unverified_fields": [
+        "award"
+      ],
+      "notes": "Price is the rank-1 low bid in \"BIDDERS IN ORDER\"; Notice of Award not in the fetched document."
+    }
   },
   {
     "item": "sidewalk",
@@ -157,7 +245,17 @@
     "status": "confirmed",
     "notes": "Grissom Construction; concrete walk/ramp slab component. This is not a per-ramp price.; Awarded contractor unit price",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "Exhibit A bid tab: 608 - CONCRETE WALK (6\" NON-REINFORCED QC1) - SF 2,895.00 $14.00 (Grissom Construction, LLC; A to Z also $14.00); resolution \"awarding a contract to Grissom Construction, LLC ... as the lowest, responsible bidder\"",
+      "unverified_fields": [
+        "resolution adoption"
+      ],
+      "notes": "Agenda packet contains the draft resolution with blank PASSED line; adoption of R-74-24 not confirmed in this document."
+    }
   },
   {
     "item": "sidewalk",
@@ -173,7 +271,17 @@
     "status": "confirmed",
     "notes": "NJS Concrete; base-bid installation at Kulp Park. Do not include unawarded alternates.; Awarded contractor base-bid unit price",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "6 Concrete Sidewalk (4\") - Install 982 SF $24.00 (NJS Concrete LLC); engineer: \"recommend that Council award ... to NJS Concrete LLC in the amount of $108,122.00\"",
+      "unverified_fields": [
+        "council award vote"
+      ],
+      "notes": "Packet precedes the vote; June 2 minutes not fetched."
+    }
   },
   {
     "item": "sidewalk",
@@ -189,7 +297,17 @@
     "status": "confirmed",
     "notes": "Davis Concrete Construction; removal and aggregate base are separate pay items.; Awarded contractor unit price",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "14 PORTLAND CEMENT CONCRETE SIDEWALK, 5\" SQFT 11000 $8.50 (Davis Concrete Construction Co., lowest total $288,352.00)",
+      "unverified_fields": [
+        "award"
+      ],
+      "notes": "Award page not fetched."
+    }
   },
   {
     "item": "sidewalk",
@@ -202,10 +320,21 @@
     "document": "Kalamazoo 91396-022.0, Westnedge Ave (Vine–Michigan); bid tab and award listing",
     "source_url": "https://www.kalamazoocity.org/files/assets/public/v/1/purchasing/bid-documents/2025/91396-022.0/91396-022.0-bid-tabulation.pdf",
     "quote": "8030044 Sidewalk, Conc, 4 inch SFT 403 $ 12.64",
-    "status": "confirmed",
+    "status": "unchecked",
     "notes": "Michigan Paving & Materials; ramp, warning surfaces and other items separately paid. The PDF opened successfully initially; a later fetch returned 403.; Awarded contractor unit price",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "could_not_check",
+      "method": "curl via session egress proxy",
+      "checked_on": "2026-11-16",
+      "evidence": "HTTP 403 from www.kalamazoocity.org; no Wayback snapshot (availability API).",
+      "unverified_fields": [
+        "unit_price",
+        "quote"
+      ],
+      "notes": ""
+    }
   },
   {
     "item": "sidewalk",
@@ -218,10 +347,21 @@
     "document": "Mesa CP0062CAP/CP0062WTR/CP0062GAS/CP0956SR18; bid results and approved council minutes",
     "source_url": "https://www.mesaaz.gov/files/assets/public/v/2/business-development/engineering/constructionbid/cp0062cap-cp0062wtr-cp0062gas-cp0956sr18_results.pdf",
     "quote": "12 … CONCRETE SIDEWALK, MAG DET 230 … 34.00",
-    "status": "confirmed",
+    "status": "unchecked",
     "notes": "Granite Construction; selected first bidder, not the lower-priced individual sidewalk line of losing bidders.; Awarded contractor unit price",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "could_not_check",
+      "method": "curl via session egress proxy",
+      "checked_on": "2026-11-16",
+      "evidence": "HTTP 403 from www.mesaaz.gov; Wayback snapshot 20250902151052 exists but web.archive.org connections were reset by the egress proxy.",
+      "unverified_fields": [
+        "unit_price",
+        "quote"
+      ],
+      "notes": ""
+    }
   },
   {
     "item": "curb_ramp",
@@ -234,10 +374,21 @@
     "document": "Mesa CP0062CAP/CP0062WTR/CP0062GAS/CP0956SR18; bid results and approved council minutes",
     "source_url": "https://www.mesaaz.gov/files/assets/public/v/2/business-development/engineering/constructionbid/cp0062cap-cp0062wtr-cp0062gas-cp0956sr18_results.pdf",
     "quote": "SIDEWALK RAMP, COM DET M-44.02, TYPE A … 8,500.00",
-    "status": "confirmed",
+    "status": "unchecked",
     "notes": "Granite Construction; Type A only. Different configurations have different pay items.; Awarded contractor unit price",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "could_not_check",
+      "method": "curl via session egress proxy",
+      "checked_on": "2026-11-16",
+      "evidence": "HTTP 403 from www.mesaaz.gov; Wayback snapshot 20250902151052 exists but web.archive.org connections were reset by the egress proxy.",
+      "unverified_fields": [
+        "unit_price",
+        "quote"
+      ],
+      "notes": ""
+    }
   },
   {
     "item": "sidewalk",
@@ -248,12 +399,20 @@
     "year": "2025",
     "source_agency": "CDOT 2025 Cost Data Book",
     "document": "CDOT 2025 Cost Data Book, project STR025A-054",
-    "source_url": "https://www.codot.gov/business/eema/assets/2025-cost-data-book.pdf",
-    "quote": "Conc Sidewalk … Sq Yard … 09/18/25 … 110.00",
+    "source_url": "https://oitco.hylandcloud.com/cdotrmpop/docpop/docpop.aspx?docid=58703563",
+    "quote": "STR025A-054 I-25C NORTH OUT OF WALSENBURG 09/18/25 220.00 115.29 111.22 110.00 (Conc Sidewalk, Sq Yard; quantity, engineer's estimate, average bid, awarded bid)",
     "status": "confirmed",
     "notes": "Use Awarded Bid column rather than Average Bid. Book cover/internal date ranges conflict; no claim that it is a complete calendar-year average.; Awarded Bid column, project-specific",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-16",
+    "verification": {
+      "status": "verified",
+      "method": "Fetched CDOT's 2025 Cost Data Book (linked from codot.gov/business/eema/costdatabook) and read item 608-00000.",
+      "checked_on": "2026-11-16",
+      "evidence": "PDF page 417 (book p. 404): awarded bid $110.00 per SY, 220 SY, let 09/18/25.",
+      "unverified_fields": [],
+      "notes": "The old codot.gov PDF path returns 404; the book now lives in CDOT's OnBase document viewer."
+    }
   },
   {
     "item": "sidewalk",
@@ -269,7 +428,17 @@
     "status": "confirmed",
     "notes": "Thompson Bros. Excavating, bidder 1. Curb ramps and detectable warnings separately paid.; Awarded contractor unit price",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "70 8-14 CEMENT CONC. SIDEWALK S.Y. 3170 ... $138.00 $437,460.00 (Bidder #1 Thompson Bros. Excavating, Inc.; TOTAL BID $7,406,494.50, lowest of 5 bidders)",
+      "unverified_fields": [
+        "award"
+      ],
+      "notes": "Engineer's estimate $100.00/SY; document titled \"Bid Tabulation with Unilateral Adjustment\"."
+    }
   },
   {
     "item": "sidewalk",
@@ -285,7 +454,17 @@
     "status": "confirmed",
     "notes": "Massachusetts Broken Stone Company, first bidder. Closing date is not represented as award date.; Awarded contractor unit price",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "701 Concrete Sidewalk (Monolithic) SY 800 $80.00 (Massachusetts Broken Stone Company, lowest TOTAL $1,592,920.00)",
+      "unverified_fields": [
+        "award register"
+      ],
+      "notes": "Contract is road resurfacing (2025-942); sidewalk/ramps are incidental items."
+    }
   },
   {
     "item": "curb_ramp",
@@ -301,23 +480,44 @@
     "status": "confirmed",
     "notes": "Use source's ramp item name; do not treat as every possible ADA retrofit scope.; Awarded contractor unit price",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "701.2 Concrete Handicap Ramps Each 8 $2,000.00 (Massachusetts Broken Stone Company, lowest TOTAL)",
+      "unverified_fields": [
+        "award register"
+      ],
+      "notes": "Contract is road resurfacing (2025-942); sidewalk/ramps are incidental items."
+    }
   },
   {
     "item": "sidewalk",
     "state": "NY",
     "city_or_region": "New Rochelle",
-    "unit_price": 237.01,
+    "unit_price": 245,
     "unit": "SY",
     "year": "2025",
     "source_agency": "New Rochelle Spec 5785 / DPW 25-017",
     "document": "New Rochelle Spec 5785 / DPW 25-017, Sidewalk & Curb Improvements (CDBG)",
     "source_url": "https://www.newrochelleny.gov/DocumentCenter/View/20837/5785-Bid-Tabulation?bidId=",
-    "quote": "Concrete Sidewalk 5\" thick 4500 psi … SY … $237.01",
+    "quote": "1 Concrete Sidewalk 5\" thick 4500 psi 700 SY ... MFD Quality Construction $245.00 $171,500.00 (TOTAL $251,060.00, lowest of 7)",
     "status": "confirmed",
     "notes": "Award page names Peduto Construction. Do not substitute a lower line item from another bidder.; Awarded contractor unit price",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "price_basis": "apparent low bidder by total; award not confirmed",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "Bidder totals: Peduto $266,557.00; AM Restoration $286,560.00; Maple Leaf $459,510.00; Lindi $422,904.10; Paladino $523,850.00; Peter J Landi $286,040.00; MFD Quality $251,060.00. Item 1 unit prices range $237.01-$585.00.",
+      "unverified_fields": [
+        "award"
+      ],
+      "notes": "DISPROVED prior value $237.01: it is Peduto Construction's price, and Peduto was not the low bidder. Corrected to the apparent low bidder's $245.00; award not confirmed."
+    }
   },
   {
     "item": "sidewalk",
@@ -333,7 +533,15 @@
     "status": "confirmed",
     "notes": "State Aid projects excluded. Initial PDF was readable; a later fetch was disabled.; Average bid price for awarded contracts",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "2521 2521518/00040 4\" CONCRETE WALK SF 231,359.00 $1,915.65 $8.28 21",
+      "unverified_fields": [],
+      "notes": ""
+    }
   },
   {
     "item": "sidewalk",
@@ -349,23 +557,39 @@
     "status": "confirmed",
     "notes": "Resolution's operative table states $/SF. A later staff-summary table mislabels the same number $/SY; use the resolution table.; Awarded unit-price contract",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "SIC Concrete $11.25 ... resolution: \"award of a unit price contract to SIC Concrete\" value $78,960",
+      "unverified_fields": [],
+      "notes": ""
+    }
   },
   {
     "item": "sidewalk",
     "state": "TN",
     "city_or_region": "Statewide",
-    "unit_price": 7.19,
+    "unit_price": 8.21,
     "unit": "SF",
-    "year": "2025",
+    "year": "2025 (01JAN-31DEC)",
     "source_agency": "TDOT Average Unit Prices",
-    "document": "TDOT Average Unit Prices, 01JAN2025 thru 30JUN2025, Awarded Contracts",
+    "document": "TDOT Average Unit Prices, 01JAN2025 thru 31DEC2025, Awarded Contracts",
     "source_url": "https://www.tn.gov/content/dam/tn/tdot/construction/previous_lettings/Const_aup2025.pdf",
-    "quote": "701-01.01 … CONCRETE SIDEWALK (4 \") … STATE … $7.19",
+    "quote": "701-01.01 CONCRETE SIDEWALK (4 \") S.F. ... STATE $8.21 $3,864,647.05 470481.00",
     "status": "confirmed",
     "notes": "The opened document covers only January–June, despite the generic 2025 filename.; Statewide awarded-contract average",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "Header: \"Average Unit Prices - 01JAN2025 thru 31DEC2025 - Awarded Contracts\"; 701-01.01 CONCRETE SIDEWALK (4 \") ... STATE $8.21",
+      "unverified_fields": [],
+      "notes": "Prior value $7.19 (Jan-Jun 2025) could not be reproduced: the file at this URL now covers all of 2025 and no line shows $7.19 for this item. Updated to the full-year statewide average."
+    }
   },
   {
     "item": "speed_hump",
@@ -381,7 +605,17 @@
     "status": "confirmed",
     "notes": "Yonkers Contracting, bidder 1. The $4,727 unit price in the same PDF belongs to losing bidder 4 and is not used. Rail-yard setting, not a typical residential street.; Awarded contractor unit price",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "0947253 SPEED HUMP ea. 3.000 6,000.00000 (Yonkers Contracting Co Inc, rank 1, $159,611,625.00)",
+      "unverified_fields": [
+        "contract execution"
+      ],
+      "notes": "Context: $160M rail car/diesel shop rehabilitation in a rail yard; not representative of residential traffic calming."
+    }
   },
   {
     "item": "playground",
@@ -397,7 +631,15 @@
     "status": "confirmed",
     "notes": "One named replacement project, not a standardized per-playground unit. Do not divide by play areas without a verified scope and allocation.; Awarded project lump sum",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "BID NUMBER 25-0092-2 GREENBRIAR PLAYGROUND REPLACEMENT AWARDED TO KOMPAN, INC. AMOUNT AWARDED $207,666 COMMISSION APPROVAL DATE DECEMBER 18, 2025",
+      "unverified_fields": [],
+      "notes": ""
+    }
   },
   {
     "item": "bus_shelter",
@@ -410,10 +652,21 @@
     "document": "Sarasota Manatee Airport Authority, January 30, 2023 agenda, Parking Lot Expansion Change Order 14; approved minutes",
     "source_url": "https://flysrq.com/sites/default/files/2023-01/01-30-23%20Agenda%20FINAL.pdf",
     "quote": "Bus Shelters, concrete foundation design and engineering, installed … $31,555.62",
-    "status": "confirmed",
+    "status": "unchecked",
     "notes": "Four shelters priced each in a remote airport parking-lot package. Includes foundation design/engineering and installation; site mobilization and other package items are separate. Treat as a qualified change-order observation, not a new 2023 competitive bid. Original agreement has conflicting older dates in the packet.; Repriced contractor schedule attached to approved change order; original contract predates requested interval",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "could_not_check",
+      "method": "curl via session egress proxy",
+      "checked_on": "2026-11-16",
+      "evidence": "HTTP 403 from flysrq.com; Wayback snapshot 20230803203847 exists but web.archive.org connections were reset.",
+      "unverified_fields": [
+        "unit_price",
+        "quote"
+      ],
+      "notes": "Airport parking-lot shelter, not a transit agency bus stop."
+    }
   },
   {
     "item": "street_tree",
@@ -429,23 +682,43 @@
     "status": "not_found",
     "notes": "Planting agreement was adopted, but its compensation clause caps payment at $120,533 while Exhibit A also lists $55,825 maintenance, for a $176,358 schedule total. This does not establish that the complete planting-plus-watering package was awarded. Replacement trees include park and street locations; no street-only allocation was verified.",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "Staff report: lowest bid Hoffman & McNamara $120,533.00 to replace 175 ash trees; maintenance $106.33 per tree per year ($18,608.33/yr)",
+      "unverified_fields": [
+        "unit_price"
+      ],
+      "notes": "unit_price left null (no itemized per-tree price). Derived, not stated: $120,533 / 175 = $688.76 per tree installed; scope of the lump bid not itemized."
+    }
   },
   {
     "item": "crosswalk",
     "state": "UT",
     "city_or_region": "Ogden",
-    "unit_price": null,
+    "unit_price": 218,
     "unit": "EA",
     "year": "2024 bid",
     "source_agency": "Ogden 2024 Citywide Striping bid tab",
     "document": "Ogden 2024 Citywide Striping bid tab",
     "source_url": "https://events.ogdencity.com/DocumentCenter/View/28487/2024-Citywide-Striping-Bid-Tab",
-    "quote": "HIGH VISIBILITY CROSSWALK … EA … 130 … $218.00",
-    "status": "not_found",
+    "quote": "7 HIGH VISIBILITY CROSSWALK EA 130 $ 218.00 $ 28,340.00 (All Star Striping, sole bidder on tab)",
+    "status": "confirmed",
     "notes": "Official bid tab opened and quotes All Star Striping; no award confirmation was recovered. Do not call a sole submitted bid an awarded contract.",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "partially_verified",
+      "method": "Fetched source_url this session; extracted text with pdftotext; located pay item, unit and price; identified bidder column and low/awarded bidder.",
+      "checked_on": "2026-11-16",
+      "evidence": "Ogden City Bid Opening 2024 Citywide Striping Bid Tab 3/11/2024: All Star Striping ... 7 HIGH VISIBILITY CROSSWALK EA 130 $ 218.00",
+      "unverified_fields": [
+        "award"
+      ],
+      "notes": "Prior record said not_found although the price is in the cited document; filled from the source. Only one bidder appears on the tab."
+    }
   },
   {
     "item": "protected_bike_lane",
@@ -461,7 +734,17 @@
     "status": "not_found",
     "notes": "No verified awarded unit per mile for a defined curb-protected-lane package was recovered. Corridor-wide reconstruction totals were not converted to bike-lane costs.",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "unverified",
+      "method": "none (no source on record)",
+      "checked_on": "2026-11-16",
+      "evidence": "No source document on record; unit_price is null.",
+      "unverified_fields": [
+        "unit_price"
+      ],
+      "notes": "Nothing to verify. Note: src/engines/transitCorridorOpportunityEngine.ts uses $220,000/mile for protected bike lanes citing \"verified DOT unit costs\" - no such value exists in this file."
+    }
   },
   {
     "item": "red_bus_lane",
@@ -477,7 +760,17 @@
     "status": "not_found",
     "notes": "No verified awarded lane-mile price with a defined width and scope was recovered. Generic striping, pre-2022 red-coating contracts and whole BRT budgets were excluded.",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "unverified",
+      "method": "none (no source on record)",
+      "checked_on": "2026-11-16",
+      "evidence": "No source document on record; unit_price is null.",
+      "unverified_fields": [
+        "unit_price"
+      ],
+      "notes": "Nothing to verify. Note: src/engines/transitCorridorOpportunityEngine.ts uses $220,000/mile for protected bike lanes citing \"verified DOT unit costs\" - no such value exists in this file."
+    }
   },
   {
     "item": "bioswale_extension",
@@ -493,7 +786,17 @@
     "status": "not_found",
     "notes": "No verified awarded each-price for a complete bioswale curb extension was recovered. Bioswale area prices, median bioswales, ordinary curb extensions and pre-2022 projects do not establish the requested unit.",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "unverified",
+      "method": "none (no source on record)",
+      "checked_on": "2026-11-16",
+      "evidence": "No source document on record; unit_price is null.",
+      "unverified_fields": [
+        "unit_price"
+      ],
+      "notes": "Nothing to verify. Note: src/engines/transitCorridorOpportunityEngine.ts uses $220,000/mile for protected bike lanes citing \"verified DOT unit costs\" - no such value exists in this file."
+    }
   },
   {
     "item": "undergrounding",
@@ -509,6 +812,40 @@
     "status": "not_found",
     "notes": "No verified awarded per-mile conversion contract was recovered. Utility program averages, budget forecasts, and conduit-only prices are different evidence and were not labeled bid awards.",
     "retrieved": "2026-11-11",
-    "last_verified": "2026-11-15"
+    "last_verified": "2026-11-15",
+    "verification": {
+      "status": "unverified",
+      "method": "none (no source on record)",
+      "checked_on": "2026-11-16",
+      "evidence": "No source document on record; unit_price is null.",
+      "unverified_fields": [
+        "unit_price"
+      ],
+      "notes": "Nothing to verify. Note: src/engines/transitCorridorOpportunityEngine.ts uses $220,000/mile for protected bike lanes citing \"verified DOT unit costs\" - no such value exists in this file."
+    }
+  },
+  {
+    "item": "ev_dcfc_site_8port",
+    "state": "CA",
+    "city_or_region": "Santa Barbara (West Cabrillo Pavilion Lot)",
+    "unit_price": 1777000,
+    "unit": "site (8 DC fast-charging ports)",
+    "year": "2025",
+    "source_agency": "California Transportation Commission / SBCAG / City of Santa Barbara",
+    "document": "SB1 Cycle 4 baseline agreement, Santa Barbara ZEV Charging Infrastructure (PPNO 3273), project report Nov 2025, p. 171",
+    "source_url": "https://catc.ca.gov/-/media/ctc-media/documents/programs/baseline-agreements/2026-01/5-sbcag-ba-sb-us-101.pdf",
+    "quote": "Eight DC Fast Chargers (DCFC) will be installed at this location. ... Total Project Cost $1,777,000 Outputs 8 DC charging ports",
+    "status": "confirmed",
+    "notes": "Planned project budget (total project cost, includes design and support), not a completed-project cost. One site.",
+    "retrieved": "2026-11-16",
+    "last_verified": "2026-11-16",
+    "verification": {
+      "status": "verified",
+      "method": "PDF fetched 2026-11-16; text read on p. 171 and the funding table on p. 174 ($1,777 thousand total)",
+      "checked_on": "2026-11-16",
+      "evidence": "Eight DC Fast Chargers (DCFC) will be installed at this location. ... Total Project Cost $1,777,000 Outputs 8 DC charging ports",
+      "unverified_fields": [],
+      "notes": "Planned budget, one project."
+    }
   }
 ]

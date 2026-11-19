@@ -1,199 +1,211 @@
+"use strict";
+
 /**
- * Statutory Zoning Engine (ES6 / Browser & Node compatible)
- * Multi-state statutory housing laws:
- * - California SB 79 (Effective July 1, 2026), AB 2097, SB 9, Gov. Code § 66314
- * - Texas SB 840 (Commercial/Office-to-Multifamily) & SB 15 population gating (>150k pop in >300k county)
- * - Florida Live Local Act 4.0 (July 2026 statutory exclusions + Fla. Stat. § 196.1979)
- * - Washington HB 1110 / HB 1337 / SB 5184
- * - Oregon HB 2001 (inside UGB)
- * - Arizona HB 2720 / HB 2721 (cities > 75k)
+ * Statutory Zoning Engine (browser & Node).
+ *
+ * Reads state housing laws from app/data/statutes.json. It does not carry its own copy of any law: an earlier
+ * hardcoded version stated several rules wrongly (e.g. a 120-unit SB 79 "cap", a 30 ft Arizona height limit, a
+ * 0.5-space Florida parking minimum) and was replaced 2026-11-16.
+ *
+ * Rules:
+ *  - Only records whose verification.status is "verified" or "partially_verified" can apply. Others are listed in
+ *    `not_confirmed` with the reason.
+ *  - Any field named in a record's verification.unverified_fields is returned as null and listed in
+ *    `unconfirmed_fields`, so it is never shown as a fact.
+ *  - A law applies only when every condition it needs is known for the parcel (zoning, population, transit
+ *    distance...). A condition that cannot be checked is reported, not assumed.
+ *  - Recorded zoning is required. Missing zoning never implies residential use.
  */
 
-const CA_SB79_ELIGIBLE_COUNTIES = new Set([
-  "06037", // Los Angeles
-  "06059", // Orange
-  "06073", // San Diego
-  "06075", // San Francisco
-  "06001", // Alameda
-  "06013", // Contra Costa
-  "06081", // San Mateo
-  "06085", // Santa Clara
-  "06067", // Sacramento
-]);
+const STATUTE_USABLE_STATUSES = new Set(["verified", "partially_verified"]);
 
-function evaluateByRightHousing(parcel) {
-  const statutes = [];
+// Laws that set a jurisdiction-wide obligation (a zoning target or a planning duty) rather than a parcel-level
+// right. They are never reported as applying to a single parcel.
+const STATUTE_NOT_PARCEL_LEVEL = new Set(["co_hb24_1313", "ma_mbta_communities"]);
+
+function statuteFieldUnconfirmed(rec, field) {
+  const uf = (rec.verification && rec.verification.unverified_fields) || [];
+  return uf.some(u => String(u).trim().split(/[\s(]/)[0] === field);
+}
+
+function statuteField(rec, field, unconfirmed) {
+  if (rec[field] === undefined || rec[field] === null) return null;
+  if (statuteFieldUnconfirmed(rec, field)) {
+    unconfirmed.push(field);
+    return null;
+  }
+  return rec[field];
+}
+
+// Returns { applies: boolean, missing: string[] } for one law record and one parcel.
+function statuteAppliesTo(rec, parcel) {
+  const missing = [];
+  const sfr = !!parcel.is_single_family_residential;
+  const comm = !!parcel.is_commercial_or_mixed_use;
+  const pop = parcel.municipality_pop;
+  const heavy = parcel.dist_to_heavy_rail_mi;
+  const bus = parcel.dist_to_frequent_bus_or_brt_mi;
+  const light = parcel.dist_to_light_rail_mi;
+  const ex = parcel.exclusions || {};
+  const popAtLeast = (min) => {
+    if (min == null) return true;
+    if (pop == null) { missing.push("municipality population"); return false; }
+    return pop >= min;
+  };
+  const excludedBy = (rec.statutory_exclusions || []).some(e => ex[String(e).split(/[\s(]/)[0]]);
+  if (excludedBy) return { applies: false, missing };
+  // A city ordinance (local_jurisdiction) applies only inside that city. Before 17 Nov 2026 Raleigh's and Minneapolis's
+  // ordinances fell through to the generic state-wide rule below and were applied to residential lots across NC and MN.
+  if (rec.local_jurisdiction) {
+    if (!parcel.municipality_name) { missing.push("city name"); return { applies: false, missing }; }
+    if (!new RegExp(rec.local_jurisdiction.match, "i").test(String(parcel.municipality_name))) return { applies: false, missing };
+  }
+
+  switch (rec.id) {
+    case "ca_sb79_tier1":
+    case "ca_sb79_tier2": {
+      // The statute's test is an "urban transit county" (more than 15 passenger rail stations, Gov. Code 65912.156(q)), not a
+      // fixed list. A county outside the list on file is reported as not confirmed when a stop is in range, not ruled out.
+      if (heavy == null) { missing.push("distance to heavy rail"); return { applies: false, missing }; }
+      const minD = rec.distance_to_transit_min_mi || 0;
+      if (heavy > rec.distance_to_transit_max_mi || (minD > 0 && heavy <= minD)) return { applies: false, missing };
+      if (!(rec.eligible_counties || []).includes(parcel.county_fips)) { missing.push("whether this county is an urban transit county (more than 15 passenger rail stations)"); return { applies: false, missing }; }
+      return { applies: popAtLeast(rec.city_population_min), missing };
+    }
+    case "ca_sb79_tier2_light_rail_quarter":
+    case "ca_sb79_tier2_light_rail_half": {
+      if (light == null) { missing.push("distance to light rail / qualifying BRT"); return { applies: false, missing }; }
+      const minD = rec.distance_to_transit_min_mi || 0;
+      if (light > rec.distance_to_transit_max_mi || (minD > 0 && light <= minD)) return { applies: false, missing };
+      if (!(rec.eligible_counties || []).includes(parcel.county_fips)) { missing.push("whether this county is an urban transit county (more than 15 passenger rail stations)"); return { applies: false, missing }; }
+      return { applies: popAtLeast(rec.city_population_min), missing };
+    }
+    case "ca_sb9_lot_split":
+      return { applies: sfr, missing };
+    case "ca_ab2097": {
+      const d = [heavy, bus].filter(x => x != null);
+      if (!d.length) { missing.push("distance to major transit stop"); return { applies: false, missing }; }
+      return { applies: Math.min(...d) <= rec.distance_to_transit_max_mi, missing };
+    }
+    case "fl_live_local": {
+      // Fla. Stat. 166.04151(7)(a)1: areas zoned commercial, industrial or mixed use, and also land owned by a county,
+      // municipality or school district and religious-institution land (over 3 acres), regardless of the underlying zoning.
+      if (comm) return { applies: true, missing };
+      if (parcel.is_public_or_religious_land === true) return { applies: true, missing };
+      if (parcel.is_public_or_religious_land == null) missing.push("zoning as commercial, industrial or mixed use, or who owns the parcel (county, city or school district land, or a religious institution's land over 3 acres, qualifies regardless of zoning)");
+      return { applies: false, missing };
+    }
+    case "tx_sb840": {
+      if (!comm) return { applies: false, missing };
+      if (pop == null) missing.push("municipality population");
+      if (parcel.county_pop == null) missing.push("county population");
+      if (missing.length) return { applies: false, missing };
+      return { applies: pop >= rec.municipality_pop_min && parcel.county_pop >= rec.county_pop_min, missing };
+    }
+    case "tx_austin_home": {
+      if (!sfr) return { applies: false, missing };
+      if (!parcel.municipality_name) { missing.push("city name"); return { applies: false, missing }; }
+      if (!/^austin\b/i.test(String(parcel.municipality_name))) return { applies: false, missing };
+      if (parcel.lot_sqft == null) { missing.push("lot size"); return { applies: false, missing }; }
+      return { applies: parcel.lot_sqft >= (rec.min_lot_size_sqft || 0), missing };
+    }
+    case "wa_hb1110":
+    case "or_hb2001": {
+      if (!sfr) return { applies: false, missing };
+      if (pop == null) { missing.push("municipality population"); return { applies: false, missing }; }
+      // Only population bands with no extra unmapped condition (e.g. WA's growth-area rule under 25,000).
+      const rule = (rec.rules || []).find(r => pop >= (r.pop_min || 0) && (r.pop_max_exclusive == null || pop < r.pop_max_exclusive));
+      if (!rule) return { applies: false, missing };
+      if (rule.condition) { missing.push("growth-area condition: " + rule.condition); return { applies: false, missing }; }
+      return { applies: true, missing, rule };
+    }
+    default: {
+      // Generic law: state match; residential zoning, or commercial zoning when applies_to_zone is "commercial";
+      // optional population and lot-size floors; any condition the parcel record can't express (unmapped_condition) is
+      // reported as missing, never assumed.
+      if (rec.applies_to_zone === "commercial") { if (!comm) return { applies: false, missing }; }
+      else if (!sfr) return { applies: false, missing };
+      if (!popAtLeast(rec.municipality_pop_min)) return { applies: false, missing };
+      if (rec.min_lot_size_sqft != null) {
+        if (parcel.lot_sqft == null) { missing.push("lot size"); return { applies: false, missing }; }
+        if (parcel.lot_sqft < rec.min_lot_size_sqft) return { applies: false, missing };
+      }
+      if (rec.unmapped_condition) { missing.push(String(rec.unmapped_condition)); return { applies: false, missing }; }
+      return { applies: true, missing };
+    }
+  }
+}
+
+function evaluateByRightHousing(parcel, laws) {
   const ex = Object.assign({}, parcel.exclusions);
-
-  // Rule 1 & Item 10: Never infer by-right rights from a missing, unzoned, or unknown zoning code.
-  if (!parcel.base_zoning_code || /^(unzoned|unknown|missing|none|n\/a)$/i.test(String(parcel.base_zoning_code).trim())) {
-    return {
-      parcel_id: parcel.parcel_id,
-      state_code: parcel.state_code,
-      base_zoning_code: null,
-      applicable_statutes: [],
-      statutory_exclusions: ex,
-      net_by_right_feasible: false,
-    };
-  }
-
-  const hasHardPhysicalExclusion =
-    ex.fema_100yr_floodway ||
-    ex.calfire_or_state_vhfhsz ||
-    ex.williamson_or_ag_preserve ||
-    ex.public_or_tribal_land ||
-    ex.everglades_or_wekiva_or_trpa;
-
-  if (!hasHardPhysicalExclusion) {
-    // CALIFORNIA (SB 79 [2026], AB 2097, SB 9, Gov. Code § 66314)
-    if (parcel.state_code === "CA") {
-      if (
-        CA_SB79_ELIGIBLE_COUNTIES.has(parcel.county_fips) &&
-        parcel.dist_to_heavy_rail_mi !== null &&
-        parcel.dist_to_heavy_rail_mi <= 0.25 &&
-        !ex.historic_district_hpoz &&
-        !ex.coastal_commission_or_sma
-      ) {
-        statutes.push({
-          citation: "CA SB 79 (Effective July 1, 2026) — Tier 1 Heavy Rail",
-          max_units_by_right: 120,
-          max_height_ft: 75,
-          max_far: 3.5,
-          min_parking_spaces_per_unit: 0,
-          affordability_mandate_pct: 0.1,
-          tax_exemption_pct: 0,
-        });
-      } else if (
-        CA_SB79_ELIGIBLE_COUNTIES.has(parcel.county_fips) &&
-        parcel.dist_to_heavy_rail_mi !== null &&
-        parcel.dist_to_heavy_rail_mi <= 0.5 &&
-        !ex.historic_district_hpoz &&
-        !ex.coastal_commission_or_sma
-      ) {
-        statutes.push({
-          citation: "CA SB 79 (Effective July 1, 2026) — Tier 2 Heavy Rail",
-          max_units_by_right: 100,
-          max_height_ft: 65,
-          max_far: 3.0,
-          min_parking_spaces_per_unit: 0,
-          affordability_mandate_pct: 0.1,
-          tax_exemption_pct: 0,
-        });
-      }
-
-      if (parcel.is_single_family_residential && !ex.historic_district_hpoz) {
-        const nearTransit =
-          (parcel.dist_to_heavy_rail_mi !== null && parcel.dist_to_heavy_rail_mi <= 0.5) ||
-          (parcel.dist_to_frequent_bus_or_brt_mi !== null && parcel.dist_to_frequent_bus_or_brt_mi <= 0.5);
-        statutes.push({
-          citation: "CA SB 9 + Gov. Code § 66314 (Lot Split + ADU/JADU)",
-          max_units_by_right: 4,
-          max_height_ft: 25,
-          max_far: null,
-          min_parking_spaces_per_unit: nearTransit ? 0 : 1,
-          affordability_mandate_pct: 0,
-          tax_exemption_pct: 0,
-        });
-      }
-    }
-
-    // TEXAS (SB 840 Commercial-to-Residential + SB 15 Small-Lot Gating)
-    if (parcel.state_code === "TX") {
-      const meetsPopulationGate = parcel.municipality_pop > 150000 && parcel.county_pop > 300000;
-      if (meetsPopulationGate && parcel.is_commercial_or_mixed_use && !ex.airport_noise_or_runway_zone) {
-        statutes.push({
-          citation: "TX SB 840 (By-Right Commercial/Office-to-Multifamily)",
-          max_units_by_right: 999,
-          max_height_ft: null,
-          max_far: null,
-          min_parking_spaces_per_unit: 1.0,
-          affordability_mandate_pct: 0,
-          tax_exemption_pct: 0,
-        });
-      } else if (!meetsPopulationGate) {
-        ex.population_threshold_ineligible = true;
-      }
-    }
-
-    // FLORIDA (Live Local Act 4.0 — July 2026 Statutory Exclusions + § 196.1979)
-    if (parcel.state_code === "FL") {
-      if (
-        parcel.is_commercial_or_mixed_use &&
-        !ex.airport_noise_or_runway_zone &&
-        !ex.everglades_or_wekiva_or_trpa
-      ) {
-        const nearTransit = parcel.dist_to_heavy_rail_mi !== null && parcel.dist_to_heavy_rail_mi <= 0.5;
-        statutes.push({
-          citation: "FL Live Local Act 4.0 (Fla. Stat. § 166.04151 + § 196.1979)",
-          max_units_by_right: 999,
-          max_height_ft: null,
-          max_far: null,
-          min_parking_spaces_per_unit: nearTransit ? 0.5 : 1.0,
-          affordability_mandate_pct: 0.4,
-          tax_exemption_pct: 0.75,
-        });
-      }
-    }
-
-    // WASHINGTON (HB 1110 Middle Housing + HB 1337 ADUs + SB 5184 Parking Cap)
-    if (parcel.state_code === "WA" && parcel.is_single_family_residential) {
-      const nearTransit =
-        (parcel.dist_to_heavy_rail_mi !== null && parcel.dist_to_heavy_rail_mi <= 0.25) ||
-        (parcel.dist_to_frequent_bus_or_brt_mi !== null && parcel.dist_to_frequent_bus_or_brt_mi <= 0.25);
-      const units =
-        parcel.municipality_pop > 75000 ? (nearTransit ? 6 : 4) :
-        parcel.municipality_pop >= 25000 ? (nearTransit ? 4 : 2) : 2;
-      statutes.push({
-        citation: "WA HB 1110 + HB 1337 + SB 5184 (2025 Parking Reform)",
-        max_units_by_right: units,
-        max_height_ft: 35,
-        max_far: null,
-        min_parking_spaces_per_unit: nearTransit ? 0 : 0.5,
-        affordability_mandate_pct: nearTransit && units === 6 ? 0.17 : 0,
-        tax_exemption_pct: 0,
-      });
-    }
-
-    // OREGON (HB 2001 Middle Housing inside Urban Growth Boundary)
-    if (parcel.state_code === "OR" && parcel.is_single_family_residential) {
-      const units = parcel.municipality_pop > 25000 ? 4 : parcel.municipality_pop > 10000 ? 2 : 1;
-      if (units > 1) {
-        statutes.push({
-          citation: "OR HB 2001 (Middle Housing inside UGB)",
-          max_units_by_right: units,
-          max_height_ft: 35,
-          max_far: null,
-          min_parking_spaces_per_unit: 0,
-          affordability_mandate_pct: 0,
-          tax_exemption_pct: 0,
-        });
-      }
-    }
-
-    // ARIZONA (HB 2720 ADUs + HB 2721 Middle Housing in cities > 75k)
-    if (parcel.state_code === "AZ" && parcel.municipality_pop > 75000 && parcel.is_single_family_residential) {
-      statutes.push({
-        citation: "AZ HB 2720 + HB 2721 (By-Right ADUs & 2-4 Unit Middle Housing)",
-        max_units_by_right: 4,
-        max_height_ft: 30,
-        max_far: null,
-        min_parking_spaces_per_unit: 1.0,
-        affordability_mandate_pct: 0,
-        tax_exemption_pct: 0,
-      });
-    }
-  }
-
-  return {
+  const lawList = Array.isArray(laws) ? laws
+    : (typeof STATE_HOUSING_LAWS_DATA !== "undefined" && Array.isArray(STATE_HOUSING_LAWS_DATA) ? STATE_HOUSING_LAWS_DATA : []);
+  const base = {
     parcel_id: parcel.parcel_id,
     state_code: parcel.state_code,
-    base_zoning_code: parcel.base_zoning_code,
-    applicable_statutes: statutes,
+    applicable_statutes: [],
+    not_confirmed: [],
     statutory_exclusions: ex,
-    net_by_right_feasible: statutes.length > 0 && !hasHardPhysicalExclusion,
+    net_by_right_feasible: false,
+    laws_loaded: lawList.length > 0,
   };
+
+  if (!parcel.base_zoning_code || /^(unzoned|unknown|missing|none|n\/a)$/i.test(String(parcel.base_zoning_code).trim())) {
+    return Object.assign(base, { base_zoning_code: null });
+  }
+  base.base_zoning_code = parcel.base_zoning_code;
+
+  const hasHardPhysicalExclusion =
+    ex.fema_100yr_floodway || ex.calfire_or_state_vhfhsz || ex.williamson_or_ag_preserve ||
+    ex.public_or_tribal_land;
+  if (hasHardPhysicalExclusion) return base;
+
+  for (const rec of lawList) {
+    if (!rec || rec.state_code !== parcel.state_code) continue;
+    if (STATUTE_NOT_PARCEL_LEVEL.has(rec.id)) continue;
+    if (rec.parcel_level === false) continue;   // jurisdiction-wide rule (e.g. a parking cap), not a parcel right
+    const status = rec.verification && rec.verification.status;
+    const label = rec.short_name || rec.bill_number || rec.id;
+    if (!STATUTE_USABLE_STATUSES.has(status)) {
+      base.not_confirmed.push({ id: rec.id, name: label, reason: "The law's text could not be checked (" + (status || "no status") + ")." });
+      continue;
+    }
+    const check = statuteAppliesTo(rec, parcel);
+    if (rec.id === "tx_sb840" && !check.applies && !check.missing.length && parcel.is_commercial_or_mixed_use) {
+      ex.population_threshold_ineligible = true;
+    }
+    if (!check.applies) {
+      if (check.missing.length) base.not_confirmed.push({ id: rec.id, name: label, reason: "Not on file for this parcel: " + check.missing.join(", ") + "." });
+      continue;
+    }
+    const unconfirmed = [];
+    let units = statuteField(rec, "max_units_by_right", unconfirmed);
+    if (check.rule && check.rule.base_units != null) {
+      const near = [parcel.dist_to_heavy_rail_mi, parcel.dist_to_frequent_bus_or_brt_mi].filter(x => x != null);
+      units = (near.length && Math.min(...near) <= 0.25) ? check.rule.near_transit_or_affordable_units : check.rule.base_units;
+    }
+    base.applicable_statutes.push({
+      id: rec.id,
+      citation: label + " — " + (rec.statute_citation || ""),
+      short_name: label,
+      statute_url: rec.statute_url || null,
+      summary: rec.summary || null,
+      verification_status: status,
+      max_units_by_right: units,
+      max_height_ft: statuteField(rec, "max_height_ft", unconfirmed),
+      max_far: statuteField(rec, "max_far", unconfirmed),
+      min_allowed_density_du_per_acre: statuteField(rec, "min_allowed_density_du_per_acre", unconfirmed),
+      min_parking_spaces_per_unit: statuteField(rec, "min_parking_spaces_per_unit", unconfirmed),
+      max_parking_requirement_per_unit: statuteField(rec, "max_parking_requirement_per_unit", unconfirmed),
+      affordability_mandate_pct: statuteField(rec, "affordability_mandate_pct", unconfirmed),
+      tax_exemption_pct: statuteField(rec, "tax_exemption_pct", unconfirmed),
+      unconfirmed_fields: unconfirmed.concat(((rec.verification && rec.verification.unverified_fields) || []).map(String).filter(u => !unconfirmed.includes(u.split(/[\s(]/)[0]))),
+    });
+  }
+  base.net_by_right_feasible = base.applicable_statutes.length > 0;
+  return base;
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { evaluateByRightHousing, CA_SB79_ELIGIBLE_COUNTIES };
+  module.exports = { evaluateByRightHousing, statuteAppliesTo, STATUTE_USABLE_STATUSES };
 }

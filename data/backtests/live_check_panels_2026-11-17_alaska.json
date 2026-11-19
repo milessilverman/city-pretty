@@ -1,0 +1,186 @@
+{
+ "ran_on": "2026-11-17T00:55:03.828Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "02020": {
+   "points": [
+    {
+     "bg": "020200027122",
+     "lat": 61.139344,
+     "lng": -149.899613,
+     "service": "Municipality of Anchorage Property Information",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $340k, rent $1,877/mo, homes 290"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 32 pts (current release); page: 32 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 32.2 pts below its 40% goal; box: \"32.2 pts below its 40% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for undefined"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Anchorage Municipality · 020200027122; page \"Census area: Anchorage Municipality · block group 020200027122(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1529 for 02020; page \"HUD Fair Market Rent (FY2027): 1 bed $1,169 · 2 bed $1,529 · 3 bed $2,117/moAnchorage, AK HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), not\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 80 ft; page \"Ground elevation: 80 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "020200017321",
+     "lat": 61.188369,
+     "lng": -149.741337,
+     "service": "Municipality of Anchorage Property Information",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $347k, rent $2,079/mo, homes 837"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 4 pts (current release); page: 4 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 4.4 pts below its 50% goal; box: \"4.4 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for undefined"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Anchorage Municipality · 020200017321; page \"Census area: Anchorage Municipality · block group 020200017321(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1529 for 02020; page \"HUD Fair Market Rent (FY2027): 1 bed $1,169 · 2 bed $1,529 · 3 bed $2,117/moAnchorage, AK HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), not\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 346 ft; page \"Ground elevation: 346 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "020200008013",
+     "lat": 61.222996,
+     "lng": -149.781839,
+     "service": "Municipality of Anchorage Property Information",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $446k, rent $1,575/mo, homes 389"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 31 pts (current release); page: 31 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 31.1 pts below its 50% goal; box: \"31.1 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for undefined"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Anchorage Municipality · 020200008013; page \"Census area: Anchorage Municipality · block group 020200008013(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1529 for 02020; page \"HUD Fair Market Rent (FY2027): 1 bed $1,169 · 2 bed $1,529 · 3 bed $2,117/moAnchorage, AK HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), not\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 204 ft; page \"Ground elevation: 204 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8866' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8866' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8866' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass.kumi.systems/api/interpreter' from origin 'http://127.0.0.1:8866' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the reques",
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  }
+ }
+}

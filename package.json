@@ -5,13 +5,19 @@
     "serve": "node scripts/serve.mjs",
     "test": "vitest run tests/unit",
     "test:e2e": "playwright test --trace off",
-    "typecheck": "tsc --noEmit --strict --target es2022 --module esnext --moduleResolution bundler --lib es2022,dom,dom.iterable --skipLibCheck workers/api-proxy.ts",
-    "build:verified-data": "node scripts/build_verified_data.mjs",
-    "check": "npm test && npm run typecheck && npm run test:e2e"
+    "typecheck": "tsc --noEmit --strict --target es2022 --module esnext --moduleResolution bundler --lib es2022,dom,dom.iterable --skipLibCheck --allowImportingTsExtensions --resolveJsonModule workers/api-proxy.ts workers/sources.ts workers/advisorAgent.ts workers/localData.ts workers/parcels.ts",
+    "check": "npm test && npm run typecheck && npm run test:e2e",
+    "brief": "node scripts/brief.mjs",
+    "fetch:hud-fmr": "python3 scripts/fetch_hud_fmr_api.py",
+    "smoke:sources": "NODE_USE_ENV_PROXY=1 node --no-warnings --experimental-strip-types scripts/smoke_sources.mts",
+    "eval:advisor": "NODE_USE_ENV_PROXY=1 node --no-warnings --experimental-strip-types scripts/run_advisor_eval.mts"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
     "typescript": "5.6.3",
-    "vitest": "2.1.8"
+    "vitest": "^2.1.9"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.8.0"
   }
 }

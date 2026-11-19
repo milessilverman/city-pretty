@@ -5,5 +5,5 @@ window.CITY_PRETTY_CONFIG = {
   // /api/streetview (Street View photos) and /api/health. While this is empty the AI advisor shows "Not connected"
   // and sends nothing, and Street View opens on Google Maps instead of showing a photo in the page.
   // (A browser can point the advisor at a test Worker from the advisor's settings drawer.)
-  workerUrl: "",
+  workerUrl: "https://city-pretty-api-proxy.city-pretty.workers.dev",
 };
