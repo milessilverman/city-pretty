@@ -24,7 +24,7 @@
     "impact",
     "geography"
    ],
-   "notes": "SUBSTITUTED: claimed \"Economic Impact of Murals...\" paper does not exist (DOI 404); this is the same authors' real 2010 review. It does NOT report the claimed mural/property-value numbers. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). Substitution means the original numbers were attached to a work that does not exist.",
+   "notes": "SUBSTITUTED: claimed \"Economic Impact of Murals...\" paper does not exist (DOI 404); this is the same authors' real 2010 review. It does NOT report the claimed mural/property-value numbers. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). Substitution means the original numbers were attached to a work that does not exist. 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record.",
    "removed_unverified_claims": {
     "impact": "+8.4% to +14.2% commercial property valuation lift within 1,000 ft; 34% drop in commercial vacancy rates",
     "vpd": 2.85,
@@ -107,7 +107,7 @@
     "vpd",
     "takeaway"
    ],
-   "notes": "SUBSTITUTED: claimed 2017 Urban Studies paper not found (DOI 404); this is the same authors' real 2010 paper on the same topic. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). Substitution means the original numbers were attached to a work that does not exist.",
+   "notes": "SUBSTITUTED: claimed 2017 Urban Studies paper not found (DOI 404); this is the same authors' real 2010 paper on the same topic. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). Substitution means the original numbers were attached to a work that does not exist. 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record.",
    "removed_unverified_claims": {
     "impact": "Neighborhoods with high cultural asset density experienced +18% higher home value appreciation and 14% lower violent crime",
     "vpd": 2.4,
@@ -123,46 +123,6 @@
    }
   },
   "last_verified": "2026-11-16"
- },
- {
-  "id": "art_008",
-  "category": "Public Art & Cultural Placemaking",
-  "title": "Creative Placemaking and Historic Downtown Commercial Vitality",
-  "authors": "Jason Schupbach & Lyz Crane",
-  "year": 2015,
-  "journal": "Community Development Investment Review (Federal Reserve Bank of SF)",
-  "doi": null,
-  "source_url": "https://www.frbsf.org/community-development/publications/community-development-investment-review/2015/december/creative-placemaking-arts-community-economic-development/",
-  "impact": null,
-  "geography": null,
-  "vpd": null,
-  "takeaway": null,
-  "citation": "Schupbach, J. & Crane, L. (2015). Creative Placemaking: How the Arts Are Catalyzing Community and Economic Development. Federal Reserve Bank of San Francisco, 10(2), 21-36.",
-  "verification": {
-   "status": "unverified",
-   "method": "publisher_page_fetch_failed",
-   "checked_on": "2026-11-16",
-   "evidence": "HTTP 404 (FRBSF page not found)",
-   "unverified_fields": [
-    "title",
-    "authors",
-    "year",
-    "journal",
-    "source_url",
-    "impact",
-    "vpd",
-    "takeaway",
-    "geography"
-   ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: Cited URL returns 404; FRBSF alternate path also 404. source link broken as of 2026-11-16: https://www.frbsf.org/community-development/publications/community-development-investment-review/2015/december/creative-placemaking-arts-community-economic-development/ returns 404; no new address found.",
-   "removed_unverified_claims": {
-    "impact": "$1 of public arts funding catalyzed $7.20 in private real estate improvements and storefront rehabilitations",
-    "vpd": 3.6,
-    "takeaway": "Arts-focused seed grants trigger substantial private co-investment in building facade restorations and business expansions.",
-    "geography": "National (35 Rural & Urban Case Studies)"
-   }
-  },
-  "last_verified": null
  },
  {
   "id": "tree_001",
@@ -187,7 +147,7 @@
     "vpd",
     "takeaway"
    ],
-   "notes": "claimed DOI 10.1016/j.landurbplan.2009.08.007 does not exist (Crossref 404); corrected DOI found by Crossref title search. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims).",
+   "notes": "claimed DOI 10.1016/j.landurbplan.2009.08.007 does not exist (Crossref 404); corrected DOI found by Crossref title search. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record.",
    "removed_unverified_claims": {
     "impact": "+$7,130 price premium per home with street trees; +$12,828 spillover premium across surrounding properties within 100 ft",
     "vpd": 2.45,
@@ -228,8 +188,8 @@
   "journal": "Ecological Economics",
   "doi": "10.1016/j.ecolecon.2010.03.011",
   "source_url": "https://doi.org/10.1016/j.ecolecon.2010.03.011",
-  "impact": null,
-  "geography": null,
+  "impact": "A 10% increase in tree cover within 100 m increases average home sale price by $1371 (0.48%) and within 250 m increases sale price by $836 (0.29%).",
+  "geography": "Ramsey and Dakota Counties, Minnesota, USA",
   "vpd": null,
   "takeaway": null,
   "citation": "Heather Sander, Stephen Polasky, Robert G. Haight (2010). The value of urban tree cover: A hedonic property price model in Ramsey and Dakota Counties, Minnesota, USA. Ecological Economics. https://doi.org/10.1016/j.ecolecon.2010.03.011",
@@ -240,9 +200,7 @@
    "evidence": "Crossref /works/10.1016/j.ecolecon.2010.03.011: title, authors, year, container confirmed.",
    "unverified_fields": [
     "vpd",
-    "takeaway",
-    "impact",
-    "geography"
+    "takeaway"
    ],
    "notes": "DOI correct; claimed title was wrong. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims).",
    "removed_unverified_claims": {
@@ -257,6 +215,21 @@
     "year": 2010,
     "journal": "Ecological Economics",
     "doi": "10.1016/j.ecolecon.2010.03.011"
+   },
+   "field_evidence": {
+    "impact": {
+     "status": "confirmed",
+     "source_url": "https://research.fs.usda.gov/download/treesearch/36073.pdf",
+     "quote": "A 10% increase in tree cover within 100 m increases average home sale price by $1371 (0.48%) and within 250 m increases sale price by $836 (0.29%).",
+     "checked_on": "2026-11-19",
+     "note": "Abstract of the author copy on USDA Forest Service Treesearch, read 2026-11-19. Another check had the same figure."
+    },
+    "geography": {
+     "status": "confirmed",
+     "source_url": "https://api.crossref.org/works/10.1016/j.ecolecon.2010.03.011",
+     "quote": "The value of urban tree cover: A hedonic property price model in Ramsey and Dakota Counties, Minnesota, USA",
+     "checked_on": "2026-11-19"
+    }
    }
   },
   "last_verified": "2026-11-16"
@@ -305,46 +278,6 @@
   "last_verified": "2026-11-16"
  },
  {
-  "id": "tree_006",
-  "category": "Urban Tree Canopy & Heat Mitigation",
-  "title": "The Economic Value of Green Infrastructure: A Review of the Multi-Benefit Returns of Urban Forestry",
-  "authors": "Center for Neighborhood Technology (CNT) & American Rivers",
-  "year": 2010,
-  "journal": "CNT Research Report",
-  "doi": null,
-  "source_url": "https://www.cnt.org/publications/the-value-of-green-infrastructure-a-guide-to-recognizing-its-economic-environmental-and-social-benefits",
-  "impact": null,
-  "geography": null,
-  "vpd": null,
-  "takeaway": null,
-  "citation": "Center for Neighborhood Technology (2010). The Value of Green Infrastructure: A Guide to Recognizing Its Economic, Environmental and Social Benefits.",
-  "verification": {
-   "status": "could_not_check",
-   "method": "publisher_page_fetch_failed",
-   "checked_on": "2026-11-16",
-   "evidence": "connection failed (cnt.org); a 2011 WEF proceedings paper by Danielle Gallet with the same title exists in Crossref (10.2175/193864711802639741) but the claimed CNT/American Rivers 2010 guide itself was not fetched",
-   "unverified_fields": [
-    "title",
-    "authors",
-    "year",
-    "journal",
-    "source_url",
-    "impact",
-    "vpd",
-    "takeaway",
-    "geography"
-   ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: cnt.org: TLS hostname mismatch from the build machine (https and http).",
-   "removed_unverified_claims": {
-    "impact": "$1 spent on bioswales and street trees yields $2.83 in avoided stormwater infrastructure and local real estate appreciation",
-    "vpd": 2.83,
-    "takeaway": "Green street infrastructure replaces costly underground pipe expansions while visibly beautifying public rights-of-way.",
-    "geography": "Chicago, Milwaukee, & Philadelphia"
-   }
-  },
-  "last_verified": null
- },
- {
   "id": "tree_008",
   "category": "Urban Tree Canopy & Heat Mitigation",
   "title": "Potential energy savings in buildings by an urban tree planting programme in California",
@@ -367,7 +300,7 @@
     "vpd",
     "takeaway"
    ],
-   "notes": "claimed journal (Energy and Buildings), title and treesearch URL were wrong (URL resolves to an unrelated wildfire-haze paper); same authors/year work found by Crossref search. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims).",
+   "notes": "claimed journal (Energy and Buildings), title and treesearch URL were wrong (URL resolves to an unrelated wildfire-haze paper); same authors/year work found by Crossref search. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record.",
    "removed_unverified_claims": {
     "impact": "Strategically placed shade trees on south and west facades reduced summer cooling electrical consumption by 18% to 26%",
     "vpd": 2.75,
@@ -422,7 +355,7 @@
     "vpd",
     "takeaway"
    ],
-   "notes": "DOI correct; claimed authors (Kinney, Sheffield) and title were wrong. Crossref title carries a stray \": Table 1\" suffix, dropped here. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims).",
+   "notes": "DOI correct; claimed authors (Kinney, Sheffield) and title were wrong. Crossref title carries a stray \": Table 1\" suffix, dropped here. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record.",
    "removed_unverified_claims": {
     "impact": "High street tree density correlated with a 29% lower prevalence of childhood asthma across low-income zip codes",
     "vpd": 3.4,
@@ -442,42 +375,50 @@
  {
   "id": "hist_001",
   "category": "Historical Capital Projects & Tax Reinvestment",
-  "title": "The High Line Effect: Longitudinal Real Estate Capital Formation Along Manhattan's West Side",
-  "authors": "Jerome Frost, Patrick Phillips, et al. (Urban Land Institute)",
+  "title": "The High Line Park and Timing of Capitalization of Public Goods",
+  "authors": "Michael Levere (UC San Diego)",
   "year": 2014,
-  "journal": "Urban Land Institute Case Study Series",
+  "journal": "Working paper, December 20, 2014",
   "doi": null,
-  "source_url": "https://uli.org/case-studies/the-high-line/",
-  "impact": null,
-  "geography": null,
+  "source_url": "https://completegeorge.org/wp-content/uploads/2020/12/the-high-line-park-and-timing-of-capitalization-of-public-goods.pdf",
+  "impact": "Home values within one-third of a mile of the park increased 10% immediately following its opening.",
+  "geography": "Manhattan, New York (the High Line, opened June 2009)",
   "vpd": null,
   "takeaway": null,
-  "citation": "Urban Land Institute (2014). The High Line: Economic Impact and Public-Private Placemaking. ULI Case Studies, Washington DC.",
+  "citation": "Michael Levere (2014). The High Line Park and Timing of Capitalization of Public Goods. Working paper, UC San Diego, December 20, 2014.",
   "verification": {
-   "status": "could_not_check",
-   "method": "publisher_page_fetch_failed",
-   "checked_on": "2026-11-16",
-   "evidence": "HTTP 403 Cloudflare challenge (uli.org)",
+   "status": "partially_verified",
+   "method": "fetched_pdf_full_text",
+   "checked_on": "2026-11-19",
+   "evidence": "Fetched the PDF 2026-11-19. Title page: \"The High Line Park and Timing of Capitalization of Public Goods, Michael Levere, December 20, 2014\". Abstract: \"Home values within one-third of a mile of the park increased 10% immediately following its opening.\"",
    "unverified_fields": [
-    "title",
-    "authors",
-    "year",
-    "journal",
-    "source_url",
-    "impact",
     "vpd",
-    "takeaway",
-    "geography"
+    "takeaway"
    ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: uli.org returns 403.",
+   "notes": "REPLACED 2026-11-19. The earlier record (\"The High Line Effect ... Urban Land Institute\", Frost/Phillips) could not be found at its cited page (uli.org returns 403) and its figures (+103%, $2.2B) were in no fetched source. An independent check found this working paper at the same place and its abstract figure was re-read here. Unpublished working paper, not peer reviewed.",
    "removed_unverified_claims": {
     "impact": "$115M public investment catalyzed $2.2B in private development (+103% residential property valuation surge within 3 blocks)",
     "vpd": 4.8,
     "takeaway": "Transforming obsolete industrial rail infrastructure into world-class linear public open space unlocked multi-billion dollar private capital reinvestment.",
     "geography": "New York, NY (Meatpacking / Chelsea Corridor)"
+   },
+   "original_claimed_citation": {
+    "title": "The High Line Effect: Longitudinal Real Estate Capital Formation Along Manhattan's West Side",
+    "authors": "Jerome Frost, Patrick Phillips, et al. (Urban Land Institute)",
+    "year": 2014,
+    "journal": "Urban Land Institute Case Study Series",
+    "source_url": "https://uli.org/case-studies/the-high-line/"
+   },
+   "field_evidence": {
+    "impact": {
+     "status": "confirmed",
+     "source_url": "https://completegeorge.org/wp-content/uploads/2020/12/the-high-line-park-and-timing-of-capitalization-of-public-goods.pdf",
+     "quote": "Home values within one-third of a mile of the park increased 10% immediately following its opening.",
+     "checked_on": "2026-11-19"
+    }
    }
   },
-  "last_verified": null
+  "last_verified": "2026-11-19"
  },
  {
   "id": "hist_002",
@@ -488,8 +429,8 @@
   "journal": "Urban Geography",
   "doi": "10.1080/02723638.2017.1360041",
   "source_url": "https://doi.org/10.1080/02723638.2017.1360041",
-  "impact": null,
-  "geography": null,
+  "impact": "From 2011 to 2015, depending on the Beltline segment, values rose between 17.9 percent and 26.6 percent more for homes within a half-mile of the Beltline than elsewhere.",
+  "geography": "Atlanta, Georgia (homes within one half mile of the Atlanta Beltline)",
   "vpd": null,
   "takeaway": null,
   "citation": "Dan Immergluck, Tharunya Balan (2017). Sustainable for whom? Green urban development, environmental gentrification, and the Atlanta Beltline. Urban Geography. https://doi.org/10.1080/02723638.2017.1360041",
@@ -500,9 +441,7 @@
    "evidence": "Crossref /works/10.1080/02723638.2017.1360041: title, authors, year, container confirmed.",
    "unverified_fields": [
     "vpd",
-    "takeaway",
-    "impact",
-    "geography"
+    "takeaway"
    ],
    "notes": "SUBSTITUTED: claimed 2020 JAPA TAD impact assessment not found; claimed DOI resolves to an unrelated public-housing paper; this is the same authors' real BeltLine paper. It is NOT a TAD financial assessment. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). Substitution means the original numbers were attached to a work that does not exist.",
    "removed_unverified_claims": {
@@ -517,6 +456,21 @@
     "year": 2020,
     "journal": "Journal of the American Planning Association",
     "doi": "10.1080/10511482.2020.1772337"
+   },
+   "field_evidence": {
+    "impact": {
+     "status": "confirmed",
+     "source_url": "https://api.openalex.org/works/doi:10.1080/02723638.2017.1360041",
+     "quote": "This paper examines the effect of the Beltline on housing values within one half mile. From 2011 to 2015, depending on the segment of the Beltline, values rose between 17.9 percent and 26.6 percent more for homes within a half-mile of the Beltline than elsewhere.",
+     "checked_on": "2026-11-19",
+     "note": "Abstract via OpenAlex, read 2026-11-19. The earlier \"+24%\" and \"$450M / $8.2B\" claims remain removed."
+    },
+    "geography": {
+     "status": "confirmed",
+     "source_url": "https://api.openalex.org/works/doi:10.1080/02723638.2017.1360041",
+     "quote": "The Atlanta Beltline will ultimately connect 45 Atlanta neighborhoods via a 22-mile loop of trails, parks, and eventually a streetcar",
+     "checked_on": "2026-11-19"
+    }
    }
   },
   "last_verified": "2026-11-16"
@@ -544,92 +498,12 @@
     "authors (individual names)",
     "impact (causal share)"
    ],
-   "notes": "The report itself was not fetched; the figure is quoted from the publisher's announcement. It measures change near the trail, not the change caused by it. The earlier claims ('+1,600% ROI', '11,000+ jobs', '48% retail foot traffic growth') appear nowhere in the source and stay removed.",
+   "notes": "The report itself was not fetched; the figure is quoted from the publisher's announcement. It measures change near the trail, not the change caused by it. The earlier claims ('+1,600% ROI', '11,000+ jobs', '48% retail foot traffic growth') appear nowhere in the source and stay removed. 2026-11-19: indyculturaltrail.org now returns 403 to this machine. An independent fetch on 2026-11-18 also read \"148%\" on that page, and the earlier \"+105%\" claim was contradicted there.",
    "removed_unverified_claims": {
     "impact": "$63M project generated a +$1.01B increase in assessed property values (+1,600% ROI), 11,000+ jobs, and 48% retail foot traffic growth",
     "vpd": 3.9,
     "takeaway": "An integrated urban bike/pedestrian spine connecting cultural districts created over a billion dollars in net taxable property wealth in under a decade.",
     "geography": "Indianapolis, IN (8-Mile Downtown Trail Corridor)"
-   }
-  },
-  "last_verified": null
- },
- {
-  "id": "hist_004",
-  "category": "Historical Capital Projects & Tax Reinvestment",
-  "title": "Denver Union Station Master Plan & FasTracks Transit Redevelopment: Public Investment ROI",
-  "authors": "AECOM & Denver Urban Renewal Authority (DURA)",
-  "year": 2018,
-  "journal": "Transit-Oriented Development Institute Journal",
-  "doi": null,
-  "source_url": "https://www.dura-denver.org/redevelopment-projects/denver-union-station/",
-  "impact": null,
-  "geography": null,
-  "vpd": null,
-  "takeaway": null,
-  "citation": "AECOM (2018). Denver Union Station: The Catalyst for Regional TOD Transformation. AECOM Infrastructure Advisory Report.",
-  "verification": {
-   "status": "could_not_check",
-   "method": "publisher_page_fetch_failed",
-   "checked_on": "2026-11-16",
-   "evidence": "connection failed (dura-denver.org); claimed venue \"Transit-Oriented Development Institute Journal\" not found anywhere",
-   "unverified_fields": [
-    "title",
-    "authors",
-    "year",
-    "journal",
-    "source_url",
-    "impact",
-    "vpd",
-    "takeaway",
-    "geography"
-   ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: dura-denver.org: proxy 502.",
-   "removed_unverified_claims": {
-    "impact": "$500M public transit investment unlocked $3.8B in surrounding private transit-oriented development and $2.1B in new property tax base",
-    "vpd": 4.4,
-    "takeaway": "Consolidating commuter rail, light rail, and regional bus into a grand public hall created the premier high-value real estate submarket in the Rocky Mountain West.",
-    "geography": "Denver, CO (Lower Downtown / LoDo)"
-   }
-  },
-  "last_verified": null
- },
- {
-  "id": "hist_006",
-  "category": "Historical Capital Projects & Tax Reinvestment",
-  "title": "Portland Streetcar & South Waterfront Urban Renewal Area: 20-Year Capital Audit",
-  "authors": "City of Portland Bureau of Planning and Sustainability",
-  "year": 2019,
-  "journal": "Portland Bureau of Transportation Technical Report",
-  "doi": null,
-  "source_url": "https://www.portland.gov/bps/planning/central-city/south-waterfront",
-  "impact": null,
-  "geography": null,
-  "vpd": null,
-  "takeaway": null,
-  "citation": "City of Portland (2019). Portland Streetcar: 20 Years of Economic Development and Transit Integration. PBOT Report, Portland, OR.",
-  "verification": {
-   "status": "unverified",
-   "method": "publisher_page_fetch_failed",
-   "checked_on": "2026-11-16",
-   "evidence": "HTTP 404 (portland.gov)",
-   "unverified_fields": [
-    "title",
-    "authors",
-    "year",
-    "journal",
-    "source_url",
-    "impact",
-    "vpd",
-    "takeaway",
-    "geography"
-   ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: Cited portland.gov URL returns 404; prosperportland.us alternate also 404. source link broken as of 2026-11-16: https://www.portland.gov/bps/planning/central-city/south-waterfront returns 404; no new address found.",
-   "removed_unverified_claims": {
-    "impact": "$103M municipal streetcar investment catalyzed $4.5B in real estate development along the alignment (43:1 private-to-public investment ratio)",
-    "vpd": 4.3,
-    "takeaway": "Streetcars provide the permanence and pedestrian accessibility that institutional developers and lenders require to commit dense vertical capital.",
-    "geography": "Portland, OR (Central City Corridor)"
    }
   },
   "last_verified": null
@@ -643,8 +517,8 @@
   "journal": "Institute for Housing Studies report",
   "doi": null,
   "source_url": "https://www.housingstudies.org/releases/measuring-impact-606/",
-  "impact": "\"Since breaking ground on the trail, prices in 606 East have increased by 13.8 percent and by 4.3 percent since the trail opened in second quarter 2015. Conversely, prices in 606 West have increased by 48.2 percent since breaking ground, and by 9.4 percent since the trail opened.\" (IHS page)",
-  "geography": null,
+  "impact": "\"Since breaking ground on the trail, prices in 606 East have increased by 13.8 percent and by 4.3 percent since the trail opened in second quarter 2015. Conversely, prices in 606 West have increased by 48.2 percent since breaking ground, and by 9.4 percent since the trail opened.\" (IHS page) The same page: \"In 606 West buyers were willing to pay a 22.3 percent price premium for properties within one-fifth of a mile of the trail.\"",
+  "geography": "Chicago, Illinois (The 606: 606 East and 606 West)",
   "vpd": null,
   "takeaway": null,
   "citation": "Institute for Housing Studies at DePaul University (2016). Measuring the Impact of the 606: Understanding How a Large Public Investment Impacted the Surrounding Community. https://www.housingstudies.org/releases/measuring-impact-606/",
@@ -656,7 +530,6 @@
    "unverified_fields": [
     "vpd",
     "takeaway",
-    "geography",
     "authors (page does not name individual authors; claimed Geoff Smith & Sarah Duda not confirmed)"
    ],
    "notes": "Source page exists. Impact replaced with verbatim page text; claimed \"+22.3% within 0.5 miles\" was not on the page.",
@@ -672,89 +545,25 @@
     "year": 2016,
     "journal": "Institute for Housing Studies Research Brief",
     "source_url": "https://www.housingstudies.org/releases/measuring-impact-606/"
+   },
+   "field_evidence": {
+    "geography": {
+     "status": "confirmed",
+     "source_url": "https://www.housingstudies.org/releases/measuring-impact-606/",
+     "quote": "the development of The 606 linear park, Chicago's recent addition to the growing number of \"rails to trails\" projects nationwide",
+     "checked_on": "2026-11-19",
+     "note": "Page text read 2026-11-19."
+    },
+    "impact": {
+     "status": "confirmed",
+     "source_url": "https://www.housingstudies.org/releases/measuring-impact-606/",
+     "quote": "Since breaking ground on the trail, prices in 606 East have increased by 13.8 percent and by 4.3 percent since the trail opened in second quarter 2015. Conversely, prices in 606 West have increased by 48.2 percent since breaking ground, and by 9.4 percent since the trail opened. ... In 606 West buyers were willing to pay a 22.3 percent price premium for properties within one-fifth of a mile of the trail",
+     "checked_on": "2026-11-19",
+     "note": "Both figures are on the page; the 22.3% premium is the hedonic estimate and applies to the west side only. Page read 2026-11-19."
+    }
    }
   },
   "last_verified": "2026-11-16"
- },
- {
-  "id": "hist_008",
-  "category": "Historical Capital Projects & Tax Reinvestment",
-  "title": "Waterloo Greenway & Waller Creek Flood Control Tunnel: Unlocking 28 Acres of Downtown Austin",
-  "authors": "City of Austin & Downtown Austin Alliance",
-  "year": 2021,
-  "journal": "City of Austin Financial Evaluation",
-  "doi": null,
-  "source_url": "https://waterloogreenway.org/about/waterloo-greenway-economic-impact/",
-  "impact": null,
-  "geography": null,
-  "vpd": null,
-  "takeaway": null,
-  "citation": "Downtown Austin Alliance (2021). The Economic Value of Waller Creek Tunnel and Parkland Transformation. Austin, TX.",
-  "verification": {
-   "status": "unverified",
-   "method": "publisher_page_fetch_failed",
-   "checked_on": "2026-11-16",
-   "evidence": "HTTP 404 (waterloogreenway.org)",
-   "unverified_fields": [
-    "title",
-    "authors",
-    "year",
-    "journal",
-    "source_url",
-    "impact",
-    "vpd",
-    "takeaway",
-    "geography"
-   ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: Cited URL returns 404; waterloogreenway.org home page reachable but shows no economic-impact figures. source link broken as of 2026-11-16: https://waterloogreenway.org/about/waterloo-greenway-economic-impact/ returns 404; no new address found.",
-   "removed_unverified_claims": {
-    "impact": "$174M flood tunnel removed 28 acres from the 100-year floodplain, unlocking $1.1B in new commercial/residential development and $48M/yr in tax revenue",
-    "vpd": 3.5,
-    "takeaway": "Engineering flood resilience into urban creek corridors directly unlocks submerged land for high-density, high-value civic development.",
-    "geography": "Austin, TX (Waller Creek District)"
-   }
-  },
-  "last_verified": null
- },
- {
-  "id": "hist_009",
-  "category": "Historical Capital Projects & Tax Reinvestment",
-  "title": "Oklahoma City MAPS (Metropolitan Area Projects): 30-Year Sales Tax Reinvestment Retrospective",
-  "authors": "Greater Oklahoma City Chamber of Commerce & Economic Research Associates",
-  "year": 2023,
-  "journal": "Chamber Economic Analysis Series",
-  "doi": null,
-  "source_url": "https://www.okc.gov/government/maps-3/maps-history",
-  "impact": null,
-  "geography": null,
-  "vpd": null,
-  "takeaway": null,
-  "citation": "Greater OKC Chamber (2023). Thirty Years of MAPS: The Transformation of Oklahoma City. Economic Impact Study.",
-  "verification": {
-   "status": "unverified",
-   "method": "publisher_page_fetch_failed",
-   "checked_on": "2026-11-16",
-   "evidence": "HTTP 403 Access Denied (okc.gov)",
-   "unverified_fields": [
-    "title",
-    "authors",
-    "year",
-    "journal",
-    "source_url",
-    "impact",
-    "vpd",
-    "takeaway",
-    "geography"
-   ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: okc.gov returns 403 (cited and alternate paths). source link broken as of 2026-11-16: https://www.okc.gov/government/maps-3/maps-history returns 404; no new address found.",
-   "removed_unverified_claims": {
-    "impact": "$3.5B in debt-free 1-cent municipal sales tax investments generated $9.2B in private development and +280% county property tax roll growth",
-    "vpd": 3.65,
-    "takeaway": "Using temporary dedicated sales taxes for cash-funded civic amenities (ballpark, canal, canal transit, convention center) transformed OKC's economy without debt.",
-    "geography": "Oklahoma City, OK (Oklahoma County)"
-   }
-  },
-  "last_verified": null
  },
  {
   "id": "hist_010",
@@ -795,8 +604,8 @@
   "journal": "Journal of Leisure Research",
   "doi": "10.1080/00222216.2001.11949928",
   "source_url": "https://doi.org/10.1080/00222216.2001.11949928",
-  "impact": null,
-  "geography": null,
+  "impact": "Review of approximately 30 studies: \"a positive impact of 20% on property values abutting or fronting a passive park area is a reasonable starting point\"; for a heavily used active park the increment \"may be minimal on abutting properties, but may reach 10% on properties two or three blocks away\" (abstract).",
+  "geography": "Review of approximately 30 studies",
   "vpd": null,
   "takeaway": null,
   "citation": "John L. Crompton (2001). The Impact of Parks on Property Values: A Review of the Empirical Evidence. Journal of Leisure Research. https://doi.org/10.1080/00222216.2001.11949928",
@@ -807,9 +616,7 @@
    "evidence": "Crossref /works/10.1080/00222216.2001.11949928: title, authors, year, container confirmed.",
    "unverified_fields": [
     "vpd",
-    "takeaway",
-    "impact",
-    "geography"
+    "takeaway"
    ],
    "notes": "citation matched as claimed. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims).",
    "removed_unverified_claims": {
@@ -824,6 +631,15 @@
     "year": 2001,
     "journal": "Journal of Leisure Research",
     "doi": "10.1080/00222216.2001.11949928"
+   },
+   "field_evidence": {
+    "impact": {
+     "status": "confirmed",
+     "source_url": "https://api.openalex.org/works/doi:10.1080/00222216.2001.11949928",
+     "quote": "the studies' results suggest that a positive impact of 20% on property values abutting or fronting a passive park area is a reasonable starting point. If it is a heavily used park catering to large numbers of active recreation users, then the proximate value increment may be minimal on abutting properties, but may reach 10% on properties two or three blocks away.",
+     "checked_on": "2026-11-19",
+     "note": "Abstract via OpenAlex, read 2026-11-19. A starting-point range from a literature review, not one measured effect."
+    }
    }
   },
   "last_verified": "2026-11-16"
@@ -869,8 +685,8 @@
   "journal": "Journal of Leisure Research",
   "doi": "10.1080/00222216.2005.11950056",
   "source_url": "https://doi.org/10.1080/00222216.2005.11950056",
-  "impact": null,
-  "geography": null,
+  "impact": "Adjacency to a greenbelt produced significant property value premiums in two of three neighborhoods. Physical access to a greenbelt had a significant, positive impact in one case, but was insignificant in two others. (abstract; the abstract gives no percentage)",
+  "geography": "Austin, Texas (three neighborhoods)",
   "vpd": null,
   "takeaway": null,
   "citation": "Sarah Nicholls, John L. Crompton (2005). The Impact of Greenways on Property Values: Evidence from Austin, Texas. Journal of Leisure Research. https://doi.org/10.1080/00222216.2005.11950056",
@@ -881,9 +697,7 @@
    "evidence": "Crossref /works/10.1080/00222216.2005.11950056: title, authors, year, container confirmed.",
    "unverified_fields": [
     "vpd",
-    "takeaway",
-    "impact",
-    "geography"
+    "takeaway"
    ],
    "notes": "claimed DOI (10.1177/0042098005051934) not found; claimed title/journal (Journal of Travel Research) wrong; same authors/year/topic work found. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims).",
    "removed_unverified_claims": {
@@ -898,6 +712,15 @@
     "year": 2005,
     "journal": "Journal of Travel Research",
     "doi": "10.1177/0042098005051934"
+   },
+   "field_evidence": {
+    "impact": {
+     "status": "confirmed",
+     "source_url": "https://api.openalex.org/works/doi:10.1080/00222216.2005.11950056",
+     "quote": "Adjacency to a greenbelt produced significant property value premiums in two of three neighborhoods. Physical access to a greenbelt had a significant, positive impact in one case, but was insignificant in two others.",
+     "checked_on": "2026-11-19",
+     "note": "Abstract via OpenAlex, read 2026-11-19. The earlier \"+12.2% to +14.8%\" claim is not in the abstract and stays removed."
+    }
    }
   },
   "last_verified": "2026-11-16"
@@ -927,7 +750,7 @@
     "impact",
     "geography"
    ],
-   "notes": "SUBSTITUTED: claimed 1996 JRER paper not found and claimed DOI resolves to an unrelated 1983 physics paper; this is the same authors' real work on greenbelts/trails and home price. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). Substitution means the original numbers were attached to a work that does not exist.",
+   "notes": "SUBSTITUTED: claimed 1996 JRER paper not found and claimed DOI resolves to an unrelated 1983 physics paper; this is the same authors' real work on greenbelts/trails and home price. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). Substitution means the original numbers were attached to a work that does not exist. 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record.",
    "removed_unverified_claims": {
     "impact": "Passive green parks create a +9.2% price premium; lighted ballfields with nighttime noise create an initial 200-ft discount before recovering at 500 ft",
     "vpd": 1.85,
@@ -1010,7 +833,7 @@
     "vpd",
     "takeaway"
    ],
-   "notes": "DOI correct; claimed title and journal (JAPA) wrong. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). CONTRADICTED: claimed \"+18.8% to +38.2% commercial, +10.2% residential\"; abstract says ~23% (LRT commercial) and >120% (commuter rail, business district).",
+   "notes": "DOI correct; claimed title and journal (JAPA) wrong. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). CONTRADICTED: claimed \"+18.8% to +38.2% commercial, +10.2% residential\"; abstract says ~23% (LRT commercial) and >120% (commuter rail, business district). 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record.",
    "removed_unverified_claims": {
     "impact": "+18.8% to +38.2% commercial parcel value premium and +10.2% residential premium within 0.25 miles of rail stations",
     "vpd": 3.2,
@@ -1026,46 +849,6 @@
    }
   },
   "last_verified": "2026-11-16"
- },
- {
-  "id": "transit_002",
-  "category": "Transit-Oriented Development (TOD) & Rail",
-  "title": "The Real Estate Value of Proximity to Rail Transit: A Synthesis of 35 Empirical Studies",
-  "authors": "Center for Transit-Oriented Development (CTOD) & Federal Transit Administration",
-  "year": 2010,
-  "journal": "FTA Technical Working Paper",
-  "doi": null,
-  "source_url": "https://www.transit.dot.gov/research-innovation/capturing-value-transit-complete-report",
-  "impact": null,
-  "geography": null,
-  "vpd": null,
-  "takeaway": null,
-  "citation": "CTOD & FTA (2010). Capturing the Value of Transit. Federal Transit Administration Report, Washington DC.",
-  "verification": {
-   "status": "unverified",
-   "method": "publisher_page_fetch_failed",
-   "checked_on": "2026-11-16",
-   "evidence": "HTTP 403 Access Denied (transit.dot.gov)",
-   "unverified_fields": [
-    "title",
-    "authors",
-    "year",
-    "journal",
-    "source_url",
-    "impact",
-    "vpd",
-    "takeaway",
-    "geography"
-   ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: transit.dot.gov 403; ctod.org alternate 404; reconnectingamerica.org unreachable. source link broken as of 2026-11-16: https://www.transit.dot.gov/research-innovation/capturing-value-transit-complete-report returns 404; no new address found.",
-   "removed_unverified_claims": {
-    "impact": "Properties near rail transit outperformed regional non-transit peers by 41.6% in median sale price growth during market cycles",
-    "vpd": 3.4,
-    "takeaway": "Transit walksheds act as resilient real estate submarkets that insulate home values during broader economic recessions.",
-    "geography": "National / 35 Rail Transit Metros"
-   }
-  },
-  "last_verified": null
  },
  {
   "id": "transit_003",
@@ -1092,7 +875,7 @@
     "impact",
     "geography"
    ],
-   "notes": "claimed DOI (10.1016/j.jue.2010.11.002) not found; claimed title/journal wrong; same author/year/topic work found. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims).",
+   "notes": "claimed DOI (10.1016/j.jue.2010.11.002) not found; claimed title/journal wrong; same author/year/topic work found. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record.",
    "removed_unverified_claims": {
     "impact": "+11.3% property appreciation for single-family homes and +4.0% for condos within 1 mile of newly announced light rail stations",
     "vpd": 2.75,
@@ -1133,7 +916,7 @@
     "takeaway",
     "geography"
    ],
-   "notes": "claimed DOI resolves to an unrelated Florida planning paper (Brody & Highfield). The book exists; Crossref record is the 2017 Routledge edition. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). CONTRADICTED: claimed \"$35,000-$65,000 per unit; rents +18-25%\"; not in abstract.",
+   "notes": "claimed DOI resolves to an unrelated Florida planning paper (Brody & Highfield). The book exists; Crossref record is the 2017 Routledge edition. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). CONTRADICTED: claimed \"$35,000-$65,000 per unit; rents +18-25%\"; not in abstract. 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record.",
    "removed_unverified_claims": {
     "impact": "Mandatory parking minimums add $35,000 to $65,000 per housing unit to construction costs, artificially inflating rents by 18% to 25%",
     "vpd": 4.2,
@@ -1149,46 +932,6 @@
    }
   },
   "last_verified": "2026-11-16"
- },
- {
-  "id": "bike_001",
-  "category": "Active Transportation & Protected Bike Networks",
-  "title": "Measuring the Street: New York City's Protected Bicycle Lanes and Retail Sales Growth",
-  "authors": "New York City Department of Transportation (Janette Sadik-Khan et al.)",
-  "year": 2012,
-  "journal": "NYC DOT Street Design Report",
-  "doi": null,
-  "source_url": "https://www.nyc.gov/html/dot/downloads/pdf/2012-10-measuring-the-street.pdf",
-  "impact": null,
-  "geography": null,
-  "vpd": null,
-  "takeaway": null,
-  "citation": "NYC DOT (2012). Measuring the Street: New Metrics for 21st Century Streets. New York City Department of Transportation.",
-  "verification": {
-   "status": "unverified",
-   "method": "publisher_page_fetch_failed",
-   "checked_on": "2026-11-16",
-   "evidence": "HTTP 404 (nyc.gov PDF)",
-   "unverified_fields": [
-    "title",
-    "authors",
-    "year",
-    "journal",
-    "source_url",
-    "impact",
-    "vpd",
-    "takeaway",
-    "geography"
-   ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: Cited nyc.gov URL returns 404, as do /assets/ and www1 alternates. source link broken as of 2026-11-16: https://www.nyc.gov/html/dot/downloads/pdf/2012-10-measuring-the-street.pdf returns 404; no new address found.",
-   "removed_unverified_claims": {
-    "impact": "+49% increase in retail sales along corridors with protected bike lanes vs +3% borough-wide; 58% reduction in pedestrian injuries",
-    "vpd": 3.8,
-    "takeaway": "Protected bike lanes calm car traffic, increase shopper dwell time, and drive dramatic retail sales growth for local merchants.",
-    "geography": "Manhattan, Brooklyn, & Queens (9th Ave, Columbus Ave)"
-   }
-  },
-  "last_verified": null
  },
  {
   "id": "bike_003",
@@ -1213,7 +956,7 @@
     "vpd",
     "takeaway"
    ],
-   "notes": "claimed DOI not found; claimed title/journal wrong; same authors/year/topic work found. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). CONTRADICTED: claimed \"1 point Walk Score = +0.9% commercial value and +$3,250 single-family\"; abstract says 10 points = +1-9% (commercial property types only).",
+   "notes": "claimed DOI not found; claimed title/journal wrong; same authors/year/topic work found. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). CONTRADICTED: claimed \"1 point Walk Score = +0.9% commercial value and +$3,250 single-family\"; abstract says 10 points = +1-9% (commercial property types only). 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record.",
    "removed_unverified_claims": {
     "impact": "Each 1-point increase in Walk Score increases commercial property value by 0.9% and single-family home value by $3,250",
     "vpd": 2.9,
@@ -1229,46 +972,6 @@
    }
   },
   "last_verified": "2026-11-16"
- },
- {
-  "id": "bike_004",
-  "category": "Active Transportation & Protected Bike Networks",
-  "title": "Economic Benefits of Complete Streets: Case Study of 37 Road Diets Across America",
-  "authors": "Smart Growth America & National Complete Streets Coalition",
-  "year": 2015,
-  "journal": "Complete Streets Evaluation Series",
-  "doi": null,
-  "source_url": "https://smartgrowthamerica.org/resources/safer-streets-stronger-economies/",
-  "impact": null,
-  "geography": null,
-  "vpd": null,
-  "takeaway": null,
-  "citation": "Smart Growth America (2015). Safer Streets, Stronger Economies: Evaluating the Economic Benefits of Complete Streets Projects.",
-  "verification": {
-   "status": "unverified",
-   "method": "publisher_page_fetch_failed",
-   "checked_on": "2026-11-16",
-   "evidence": "HTTP 404 (smartgrowthamerica.org)",
-   "unverified_fields": [
-    "title",
-    "authors",
-    "year",
-    "journal",
-    "source_url",
-    "impact",
-    "vpd",
-    "takeaway",
-    "geography"
-   ],
-   "notes": "Source could not be fetched from this environment. Existence of this report is NOT confirmed. Effect sizes removed. Do not display as verified. Round 3: Cited smartgrowthamerica.org URL returns 404; alternate resource path 404. source link broken as of 2026-11-16: https://smartgrowthamerica.org/resources/safer-streets-stronger-economies/ returns 404; no new address found.",
-   "removed_unverified_claims": {
-    "impact": "Road diets reduced vehicular collisions by 38%, boosted pedestrian volumes by 45%, and increased sales tax revenue by 12% to 28%",
-    "vpd": 3.1,
-    "takeaway": "Reallocating excess asphalt from speeding car lanes to bike lanes and wide sidewalks revitalizes neighborhood commercial districts.",
-    "geography": "37 Municipalities in 18 States"
-   }
-  },
-  "last_verified": null
  },
  {
   "id": "school_001",
@@ -1294,7 +997,7 @@
     "takeaway",
     "geography"
    ],
-   "notes": "claimed DOI (AER) not found; correct journal is QJE. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims).",
+   "notes": "claimed DOI (AER) not found; correct journal is QJE. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record.",
    "removed_unverified_claims": {
     "impact": "Homeowners value $1 of school facility bond spending at $1.50 in home prices (a 50% net surplus on bond taxes)",
     "vpd": 1.5,
@@ -1335,7 +1038,7 @@
     "takeaway",
     "geography"
    ],
-   "notes": "claimed DOI had a typo (...050); corrected. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims).",
+   "notes": "claimed DOI had a typo (...050); corrected. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record.",
    "removed_unverified_claims": {
     "impact": "Parents pay a 2.5% premium in house prices for every 5% increase in elementary school test scores along attendance zone borders",
     "vpd": 2.3,
@@ -1375,7 +1078,7 @@
     "vpd",
     "takeaway"
    ],
-   "notes": "claimed DOI resolves to an unrelated growth-economics paper; claimed title wrong; correct record found. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims).",
+   "notes": "claimed DOI resolves to an unrelated growth-economics paper; claimed title wrong; correct record found. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record.",
    "removed_unverified_claims": {
     "impact": "A-rated schools commanded a 6.2% price premium over C-rated schools with identical demographics and test score trajectories",
     "vpd": 2.1,
@@ -1401,8 +1104,8 @@
   "journal": "Lawrence Berkeley National Laboratory report (OSTI)",
   "doi": "10.2172/1172644",
   "source_url": "https://doi.org/10.2172/1172644",
-  "impact": null,
-  "geography": null,
+  "impact": "Home buyers paid average premiums across the full sample that \"equate to approximately $4/W or $15,000 for an average-sized 3.6-kW PV system\" (22,822 home sales, 3,951 with PV; abstract).",
+  "geography": "Eight US states, 2002 to 2013",
   "vpd": null,
   "takeaway": null,
   "citation": "Sandra Adomatis, Thomas Jackson, Joshua Graff-Zivin, Mark Thayer, Geoffrey Klise, Ryan Wiser, Ben Hoen (Lawrence Berkeley National Laboratory) (2015). Selling Into the Sun: Price Premium Analysis of a Multi-State Dataset of Solar Homes. Lawrence Berkeley National Laboratory report (OSTI). https://doi.org/10.2172/1172644",
@@ -1413,9 +1116,7 @@
    "evidence": "Crossref /works/10.2172/1172644: title, authors, year, container confirmed.",
    "unverified_fields": [
     "vpd",
-    "takeaway",
-    "impact",
-    "geography"
+    "takeaway"
    ],
    "notes": "claimed DOI (10.2172/1215456) not found; correct OSTI DOI found. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims).",
    "removed_unverified_claims": {
@@ -1430,6 +1131,15 @@
     "year": 2015,
     "journal": "LBNL Technical Report & Energy Policy",
     "doi": "10.2172/1215456"
+   },
+   "field_evidence": {
+    "impact": {
+     "status": "confirmed",
+     "source_url": "https://api.openalex.org/works/doi:10.2172/1172644",
+     "quote": "average premiums across the full sample equate to approximately $4/W or $15,000 for an average-sized 3.6-kW PV system.",
+     "checked_on": "2026-11-19",
+     "note": "Abstract via OpenAlex, read 2026-11-19; the record's author list (Adomatis, Jackson, Graff Zivin, Thayer, Klise, Wiser, LBNL) matches OpenAlex. Another check listed \"Ben Hoen, Ryan Wiser et al.\"; Hoen is not in the OSTI author list."
+    }
    }
   },
   "last_verified": "2026-11-16"
@@ -1458,7 +1168,7 @@
     "takeaway",
     "geography"
    ],
-   "notes": "citation matched; title slightly corrected. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). CONTRADICTED: claimed \"+12% surrounding home value growth\"; no home-value result in abstract.",
+   "notes": "citation matched; title slightly corrected. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). CONTRADICTED: claimed \"+12% surrounding home value growth\"; no home-value result in abstract. 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record.",
    "removed_unverified_claims": {
     "impact": "29% reduction in gun assaults, 30% reduction in shooting incidents, and +12% surrounding residential home value growth",
     "vpd": 3.4,
@@ -1498,7 +1208,7 @@
     "vpd",
     "takeaway"
    ],
-   "notes": "citation matched; title completed from Crossref record. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). Round 3 (16 Nov): impact and geography confirmed from the full text; the removed $/$1 and takeaway stay removed.",
+   "notes": "citation matched; title completed from Crossref record. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). Round 3 (16 Nov): impact and geography confirmed from the full text; the removed $/$1 and takeaway stay removed. 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record.",
    "removed_unverified_claims": {
     "impact": "Adding temporary high-intensity LED lighting towers led to a 36% reduction in nighttime outdoor index crimes",
     "vpd": 3.2,
@@ -1540,7 +1250,7 @@
     "impact",
     "geography"
    ],
-   "notes": "claimed DOI resolves to an unrelated health-insurance paper; claimed journal (JPAM) wrong; correct record found. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims).",
+   "notes": "claimed DOI resolves to an unrelated health-insurance paper; claimed journal (JPAM) wrong; correct record found. Original claimed effect size, $/$1 return, takeaway and sample were not found in any fetched source and were removed (kept below under removed_unverified_claims). 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record.",
    "removed_unverified_claims": {
     "impact": "Commercial properties inside BIDs experienced a +15.2% value appreciation premium and 40% reduction in commercial vacancy",
     "vpd": 3.1,
@@ -1618,7 +1328,7 @@
    "checked_on": "2026-11-16",
    "evidence": "The estimated elasticities of property values with respect to crime range from -0.15 to -0.35.",
    "unverified_fields": [],
-   "notes": "Added in catalog round 3 (docs/audit/catalog-coverage-round3.md)."
+   "notes": "Added in catalog round 3 (docs/audit/catalog-coverage-round3.md). 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record."
   }
  },
  {
@@ -1640,7 +1350,7 @@
    "checked_on": "2026-11-16",
    "evidence": "The assessed-value regressions show that ADU presence raises a parcel's assessed value and selling price by 7%-9%.",
    "unverified_fields": [],
-   "notes": "Added in catalog round 3 (docs/audit/catalog-coverage-round3.md)."
+   "notes": "Added in catalog round 3 (docs/audit/catalog-coverage-round3.md). 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record."
   }
  },
  {
@@ -1662,7 +1372,7 @@
    "checked_on": "2026-11-16",
    "evidence": "we find that prices for houses within 1,000 feet of a greened vacant lot rise by about 4%.",
    "unverified_fields": [],
-   "notes": "Added in catalog round 3 (docs/audit/catalog-coverage-round3.md)."
+   "notes": "Added in catalog round 3 (docs/audit/catalog-coverage-round3.md). 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record."
   }
  },
  {
@@ -1684,7 +1394,7 @@
    "checked_on": "2026-11-16",
    "evidence": "A 7 to 11% price differential is identified within 4,000 feet of the Fairmount tree plantings. ... Any positive changes brought by the PHS tree plantings were not detected with sufficient statistical power.",
    "unverified_fields": [],
-   "notes": "Added in catalog round 3 (docs/audit/catalog-coverage-round3.md)."
+   "notes": "Added in catalog round 3 (docs/audit/catalog-coverage-round3.md). 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record."
   }
  },
  {
@@ -1711,7 +1421,7 @@
     "vpd",
     "takeaway"
    ],
-   "notes": "Hedonic association, not a causal design. Added in catalog round 4."
+   "notes": "Hedonic association, not a causal design. Added in catalog round 4. 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record."
   }
  },
  {
@@ -1738,7 +1448,7 @@
     "vpd",
     "takeaway"
    ],
-   "notes": "Added in catalog round 4. The published Journal of Urban Economics version (doi 10.1016/j.jue.2024.103694) was not readable from the audit machine; its wording was not checked."
+   "notes": "Added in catalog round 4. The published Journal of Urban Economics version (doi 10.1016/j.jue.2024.103694) was not readable from the audit machine; its wording was not checked. 2026-11-19: DOI re-checked in Crossref/OpenAlex; title, authors and year match this record."
   }
  }
 ]

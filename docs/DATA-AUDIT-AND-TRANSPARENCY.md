@@ -957,3 +957,48 @@ counts were too high wherever a boundary street had crashes, and two neighbours 
 - Live check on the real page (counties 06073 San Diego large, 06077 San Joaquin mid-size, 06049 Modoc small; 3 block
   groups each, all crash checks pass): `data/backtests/live_check_panels_2026-11-19_cacrash.json`; panel text showing the
   rule: `data/backtests/live_check_crash_panel_text_2026-11-19.json`.
+
+### Comparison with the other branch's checking evidence (19 Nov 2026)
+
+The two branches had checked the same tables independently; this base kept its tables on merge and never compared the
+other's evidence. `docs/audit/branch-evidence-comparison-2026-11-19.md` does it record by record. Every disagreement
+below was settled at the official source on 19 Nov 2026. Details, quotes and the unsettled items are in that file.
+
+| What | Old | New | Source |
+|---|---|---|---|
+| Florida Live Local: which land | "commercial or industrial zoning only" (`commercial_or_industrial_only`) | commercial, industrial or mixed-use zoning, and land owned by a county, city or school district, and religious-institution land over 3 acres, whatever the zoning; the page asks who owns a parcel it cannot classify | Fla. Stat. 166.04151(7)(a)1 |
+| Florida Live Local: exclusions | airport noise, "everglades / Wekiva / TRPA" | airport-impacted areas (s. 333.03), working waterfronts in industrial zones, Wekiva Study Area, Everglades Protection Area, open-character districts, areas of critical state concern, conservation easements; no TRPA | 166.04151(7)(o) |
+| Florida Live Local: amendments | through ch. 2024-188 | through ch. 2025-172, 2026-14, 2026-163, 2026-179; subsection expires 2033-10-01; first effective 2023-07-01 | History line; Laws of Florida chs. 2023-17 to 2026-179 |
+| California SB 79 | ch. 512 only; exclusions VHFHSZ, sea-level, historic register; 8-county gate | amended by SB 722 (Ch. 100, Stats. 2026, approved 2026-07-16, urgency): adds mobilehome and RV park sites; real exclusions are 65912.157(h); a county off the list is "not confirmed" (statute says "more than 15 passenger rail stations") | Legislature bulk data, GOV 65912.157 row and SB 722 chaptered text; 65912.156(q) |
+| California SB 9 | no 2026 amendment noted | 65852.21 and 66411.7 amended by SB 1426 (Stats. 2026, ch. 56, eff. 2026-06-30); 1,200 sq ft new-parcel minimum recorded; exclusion list flagged incomplete | Legislature bulk data code table |
+| Texas SB 840 exclusions | airport noise only | heavy-industrial zoning, within 1,000 ft of heavy industry, within 3,000 ft of an airport or military base, clear zones | enrolled text, 218.101(c) |
+| Vermont Act 47 | 2 units by right | 2 units where residential use is allowed year-round, 4 where municipal sewer and water serve; count withheld for a parcel | 24 V.S.A. 4412(1)(D); Act 47 sec. 47 |
+| Arizona HB 2720 / 2721 | 4 units by right | 3 units on the ADU path (A.R.S. 9-461.18); the 2024 middle-housing act's section number now holds different text, so its status is not confirmed; count withheld | azleg.gov chapter 197; A.R.S. 9-462.10 |
+| Oregon HB 2001 effective date | 2020-01-01 | on passage; date unconfirmed | enrolled HB 2001 |
+| Funding programs | percent shares (Measure W 100%, Prop K 80%, Illinois TIF 100%, Arizona GPLET 100%, CalFire 90%) and application cycles with no source | removed; CalFire shown as the 25-90% range; GPLET described as the 8-year lease-excise abatement | PRC 4799.12; A.R.S. 42-6209; Public Works board letter |
+| 9 study records | listed with titles or links that do not resolve | removed (existence not confirmed) | pages 404 or unreachable 19 Nov |
+| 7 study effect sizes | withheld | restored with quote: tree cover $1371 / 0.48% (Ramsey and Dakota Counties), Beltline 17.9-26.6%, parks 20%, greenways, solar $4/W, The 606 22.3%, High Line +10% (Levere working paper replaces an unfindable ULI report) | abstracts via OpenAlex; USDA PDF; IHS page; Levere PDF |
+| Case studies | High Line and Beltline with no figures | $115M and +10%; 17.9-26.6% | same sources |
+| Intercity corridors | Austin-San Antonio "FRA Corridor ID Step 1 award ($500k)"; Phoenix-Tucson leads MAG and PAG; route lengths 74, 120, 173 | Austin-San Antonio: not confirmed (no such selection in the FY22 list); Phoenix-Tucson: ADOT sponsor, Step 1; lengths removed; Front Range and Brightline FY22 selections added | FRA FY22 selection PDF |
+| Austin and Chicago pipeline status | "pre-construction; ROD Jan 2026 (Wikipedia)"; adopted 2020 / 2024; Chicago FFGA unconfirmed | Austin: New Starts Project Development, LPA June 2023; Chicago: FFGA January 2025, $5,750M, revenue service August 2031 | FTA project profiles |
+| 2 Los Angeles sites | parking lot (OSM polygon) and shopping center taken as parcels | one flagged unconfirmed (kind, acres), one noted | other branch's live parcel check, not re-run (no coordinates) |
+
+Checked and found correct on this base (other branch wrong or stale): Texas homestead $140,000 and 3-year reappraisal,
+Colorado commercial ratio 25%, Ohio 6-year cycle, Utah ratio 1.0, Maryland 10% credit, Nevada tax-bill cap; the Austin HOME
+ordinance numbers; the Ogden crosswalk $218; solar premium authors; the High Line and Cleveland HealthLine ITDP figures.
+
+The carried-over `research/research_verification.csv`, `research/laws_verification.csv` and `research/url_checks.csv` were
+deleted (content captured in the comparison file); `research/sites_verification.csv`, `research/transit_verification.csv`
+(a unit test reads it) and `research/leftover_claims.md` were kept, with the reasons in the comparison file.
+
+Tests: `tests/unit/statuteCorrections1119.test.ts` and `tests/unit/studyCorrections1119.test.ts` (new); the flag
+`everglades_or_wekiva_or_trpa` was renamed `wekiva_or_everglades_protection_area` in `app/app.js`, `parcelHouseAuditor.js`,
+the types and two tests.
+
+Live checks (19 Nov 2026, `scripts/live_check_panels.mjs`, LIVE_PORT 8971, 2 parcels each, results in
+`data/backtests/live_check_panels_2026-11-19_evidence.json`): Los Angeles County CA 2/2, Maricopa AZ 2/2 and Miami-Dade FL 2/2
+parcels with every panel ok (the housing-laws panel lists the state's records). On the real page the changed engine
+returns, for a Miami-Dade residential lot, "Not on file ... zoning as commercial, industrial or mixed use, or who owns the
+parcel" for Live Local, applies it when the parcel is flagged as public or religious-institution land, and for a
+Contra Costa parcel 0.2 mi from heavy rail reports "whether this county is an urban transit county (more than 15
+passenger rail stations)" for SB 79.

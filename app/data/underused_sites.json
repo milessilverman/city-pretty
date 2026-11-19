@@ -2100,8 +2100,11 @@
         "marketLandValue",
         "potentialHomes",
         "margin",
-        "idea"
-      ]
+        "idea",
+        "kind",
+        "acres"
+      ],
+      "checked_note": "2026-11-19: another branch's live LA County parcel check (2026-11-18, research/sites_verification.csv) found no parcel confirming \"parking lot\" here (best live parcel: use \"Single\", 1.29 ac). This record's 6.12 acres and kind come from an OpenStreetMap-mapped surface-parking polygon, not an Assessor parcel, and the record has no coordinates to re-run the check, so the kind and acreage are listed as unconfirmed."
     }
   },
   {
@@ -5048,7 +5051,8 @@
         "potentialHomes",
         "margin",
         "idea"
-      ]
+      ],
+      "checked_note": "2026-11-19: another branch's live LA County parcel check (2026-11-18) dropped this site because the best live parcel is use \"Store Combination\", 7.48 ac, not a shopping-center use. The record's Assessor use is \"Shopping Centers (Neighborhood, community)\", 7.52 ac: acreage agrees within 1%; both are retail uses. Kept; not re-run (no coordinates in the record)."
     }
   },
   {

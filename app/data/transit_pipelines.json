@@ -2,11 +2,11 @@
   {
     "fips": "48453",
     "metroName": "Austin Metro · Project Connect",
-    "title": "Project Connect Light Rail (Phase 1) & Riverside/South Congress TOD Corridor",
-    "agency": "Austin Transit Partnership (ATP) / CapMetro / City of Austin",
-    "status": "Phase 1 light rail in pre-construction. Voter approval Nov 3, 2020 (Prop A). FTA Record of Decision Jan 16, 2026 and construction start 2027 per secondary source (Wikipedia); not confirmed on an agency page this audit.",
-    "rtp_document_url": "https://www.atptx.org/light-rail/",
-    "adopted_year": 2020,
+    "title": "Austin Light Rail Phase 1 (Project Connect)",
+    "agency": "Austin Transit Partnership (ATP)",
+    "status": "FTA New Starts Project Development (rating assigned November 2024); Full Funding Grant Agreement not yet executed per the FTA profile dated November 2025. A secondary source (Wikipedia) reports an FTA Record of Decision on Jan 16, 2026 and construction start 2027; not confirmed on an agency page.",
+    "rtp_document_url": "https://www.transit.dot.gov/sites/fta.dot.gov/files/2025-11/TX-Austin-Light-Rail-Phase-1-Profile-AR26-11-19-25.pdf",
+    "adopted_year": 2023,
     "hubName": "East Riverside & Pleasant Valley Transit Hub",
     "hubLat": 30.2435,
     "hubLng": -97.717,
@@ -80,7 +80,7 @@
         "verified": false
       }
     ],
-    "corridorDesc": "Phase 1 light rail (ATP: \"15 Stops\"; street-level) serving UT, Downtown, the Hike-and-Bike Trail, East Riverside and South Congress. Length ~9.8 miles per secondary source (Wikipedia).",
+    "corridorDesc": "Light rail, 9.8 miles and 15 stations (FTA profile): Guadalupe St at 38th St through Downtown, a new bridge over Lady Bird Lake, then one branch south on South Congress Ave to Oltorf St and one east on East Riverside Dr to a proposed park and ride near State Highway 71.",
     "p3Type": "Station-Area Ground Lease & Master Joint Development",
     "units": null,
     "affordPct": null,
@@ -92,22 +92,32 @@
     "seniorDebt": null,
     "tifiaLoan": null,
     "developerEquity": null,
-    "last_verified": "2026-11-16",
+    "last_verified": "2026-11-19",
     "verification": {
       "status": "partially_verified",
       "method": "Fetched https://www.atptx.org/light-rail/ (HTTP 200); Wikipedia 'Project Connect' extract as secondary; Nominatim (OSM) for coordinates.",
-      "checked_on": "2026-11-16",
-      "evidence": "ATP: \"The Line 15 Stops at Key Locations ... UT, Downtown, the Hike-and-Bike Trail, East Riverside and South Congress\"; \"direct street-level access\". Wikipedia: \"a 9.8 mile system\"; \"On January 16, 2026, the FTA released a Record of Decision\"; voters approved Nov 3, 2020.",
+      "checked_on": "2026-11-19",
+      "evidence": "ATP: \"The Line 15 Stops at Key Locations ... UT, Downtown, the Hike-and-Bike Trail, East Riverside and South Congress\"; \"direct street-level access\". Wikipedia: \"a 9.8 mile system\"; \"On January 16, 2026, the FTA released a Record of Decision\"; voters approved Nov 3, 2020. FTA project profile (PDF fetched 2026-11-19): \"Austin Light Rail Phase 1 Project ... New Starts Project Development (Rating Assigned November 2024)\"; \"ATP selected the locally preferred alternative (LPA) in June 2023. The project entered New Starts Project Development phase in May 2024\"; \"receiving a Full Funding Grant Agreement in June 2027\" (ATP's anticipated schedule in that profile).",
       "unverified_fields": [
         "stations (names and coordinates)",
         "hubName",
         "hubLat",
         "hubLng",
         "corridorRings",
-        "p3Type",
-        "adopted_year"
+        "p3Type"
       ],
-      "notes": "The 6 stations on file are not the agency's 15-stop list; 'Downtown / Congress' uses 30.2672,-97.7431 (generic Austin city geocode). Prior station descriptions invented amenities ('16 DC fast EV stalls', '3.4-mi rail-with-trail cycleway') and were removed. Prior corridorDesc wrongly said 'grade-separated'. Prior status said 'NEPA Environmental Review' (outdated: ROD issued). units/affordPct/retailSqft (460/35/28000) had no source and were set to null."
+      "notes": "The 6 stations on file are not the agency's 15-stop list; 'Downtown / Congress' uses 30.2672,-97.7431 (generic Austin city geocode). Prior station descriptions invented amenities ('16 DC fast EV stalls', '3.4-mi rail-with-trail cycleway') and were removed. Prior corridorDesc wrongly said 'grade-separated'. Prior status said 'NEPA Environmental Review' (outdated: ROD issued). units/affordPct/retailSqft (460/35/28000) had no source and were set to null. 2026-11-19: title, agency, status wording and adoption year corrected against the FTA profile (an independent check had reached the same values). \"Riverside/South Congress TOD Corridor\" in the old title is not in any source. Station list and corridor line on file remain unverified illustrations."
+    },
+    "adopted_year_basis": "ATP selected the locally preferred alternative in June 2023 (FTA profile); the 2020 voter-approved Project Connect plan is a separate, earlier event",
+    "fta_profile": {
+      "source_url": "https://www.transit.dot.gov/sites/fta.dot.gov/files/2025-11/TX-Austin-Light-Rail-Phase-1-Profile-AR26-11-19-25.pdf",
+      "project_length_miles": 9.8,
+      "stations": 15,
+      "total_capital_cost_musd": 8233.6,
+      "cig_share_musd": 4067.4,
+      "cig_share_pct": 0.494,
+      "quote": "Proposed Project: Light Rail Transit 9.8 Miles, 15 Stations Total Capital Cost ($YOE): $8,233.60 Million (Includes $1,085.3 million in finance charges) Section 5309 CIG Share ($YOE): $4,067.40 Million (49.4%)",
+      "checked_on": "2026-11-19"
     }
   },
   {
@@ -446,9 +456,9 @@
     "metroName": "Chicago Metro · CTA Red Line Extension (RLE)",
     "title": "CTA Red Line Extension to 130th St & Far South Side Equitable TOD",
     "agency": "Chicago Transit Authority (CTA)",
-    "status": "Under construction (construction began Apr 24, 2026 per secondary source). FFGA amount/date not confirmed this audit.",
+    "status": "FTA New Starts Full Funding Grant Agreement entered January 2025; revenue service projected August 2031 (FTA profile, January 2025). CTA construction start on Apr 24, 2026 is from a secondary source (Wikipedia).",
     "rtp_document_url": "https://www.transitchicago.com/rle/",
-    "adopted_year": 2024,
+    "adopted_year": 2010,
     "hubName": "130th Street Terminal & Altgeld Gardens Hub",
     "hubLat": 41.6575,
     "hubLng": -87.598,
@@ -523,19 +533,27 @@
     "seniorDebt": null,
     "tifiaLoan": null,
     "developerEquity": null,
-    "last_verified": "2026-11-16",
+    "last_verified": "2026-11-19",
     "verification": {
       "status": "partially_verified",
       "method": "Fetched https://www.transitchicago.com/rle/ (HTTP 200); Wikipedia 'Red Line (CTA)' as secondary; Nominatim for 95th/Dan Ryan.",
-      "checked_on": "2026-11-16",
-      "evidence": "CTA: \"The 5.5-mile Red Line Extension (RLE) will include four new fully-accessible stations near 103rd Street, 111th Street, Michigan Avenue, and 130th Street\". Wikipedia: \"project costing $5.7 billion. Construction began on April 24, 2026\" (secondary; Wikipedia also says 5.6 miles - CTA figure used). 95th/Dan Ryan 66 m from OSM.",
+      "checked_on": "2026-11-19",
+      "evidence": "CTA: \"The 5.5-mile Red Line Extension (RLE) will include four new fully-accessible stations near 103rd Street, 111th Street, Michigan Avenue, and 130th Street\". Wikipedia: \"project costing $5.7 billion. Construction began on April 24, 2026\" (secondary; Wikipedia also says 5.6 miles - CTA figure used). 95th/Dan Ryan 66 m from OSM. FTA project profile (PDF fetched 2026-11-19): \"CTA and FTA entered into an FFGA in January 2025 with the revenue service date projected for August 2031\"; \"The total project cost under the Full Funding Grant Agreement (FFGA) is $5,750.00 million; of which, the Section 5309 New Starts funding share is $1,973.98 million.\"",
       "unverified_fields": [
-        "FFGA amount and date",
         "new-station coordinates",
-        "adopted_year",
         "p3Type"
       ],
-      "notes": "Prior status 'FTA Full Funding Grant Agreement ($1.973B Federal CIG Grant Executed Sept 2024)' could not be confirmed (no agency page with the FFGA found; FTA site returns 403). Prior length 5.6 mi replaced with CTA's 5.5 mi. units/affordPct/retailSqft (420/45/26000) unsourced -> null."
+      "notes": "Prior status 'FTA Full Funding Grant Agreement ($1.973B Federal CIG Grant Executed Sept 2024)' could not be confirmed (no agency page with the FFGA found; FTA site returns 403). Prior length 5.6 mi replaced with CTA's 5.5 mi. units/affordPct/retailSqft (420/45/26000) unsourced -> null. 2026-11-19: FFGA date, amounts and adoption year added from the FTA profile (an independent check had the same). The earlier \"executed Sept 2024\" claim stays removed."
+    },
+    "adopted_year_basis": "CTA selected the locally preferred alternative in August 2009; it was adopted into the fiscally constrained long-range transportation plan in October 2010 (FTA profile)",
+    "fta_profile": {
+      "source_url": "https://www.transit.dot.gov/sites/fta.dot.gov/files/2025-01/IL-Chicago-Red-Line-Extension-FFGA-Profile-FY26-01-16-2025_0.pdf",
+      "project_length_miles": 5.5,
+      "stations": 4,
+      "total_capital_cost_musd": 5750,
+      "cig_share_musd": 1973.98,
+      "quote": "The total project cost under the Full Funding Grant Agreement (FFGA) is $5,750.00 million; of which, the Section 5309 New Starts funding share is $1,973.98 million.",
+      "checked_on": "2026-11-19"
     }
   }
 ]

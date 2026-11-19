@@ -19,7 +19,7 @@ const BASE_EXCLUSIONS: ParcelContext["exclusions"] = {
   airport_noise_or_runway_zone: false,
   williamson_or_ag_preserve: false,
   public_or_tribal_land: false,
-  everglades_or_wekiva_or_trpa: false,
+  wekiva_or_everglades_protection_area: false,
   population_threshold_ineligible: false,
 };
 
@@ -68,7 +68,7 @@ describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
       is_single_family_residential: false,
       dist_to_heavy_rail_mi: 0.4,
       dist_to_frequent_bus_or_brt_mi: 0.2,
-      exclusions: { ...BASE_EXCLUSIONS, everglades_or_wekiva_or_trpa: true },
+      exclusions: { ...BASE_EXCLUSIONS, wekiva_or_everglades_protection_area: true },
     };
     expect(evaluateByRightHousing(evergladesParcel, LAWS).net_by_right_feasible).toBe(false);
     const miamiRes = evaluateByRightHousing({ ...evergladesParcel, exclusions: { ...BASE_EXCLUSIONS } }, LAWS);

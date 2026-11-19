@@ -11,10 +11,10 @@
       "Infiltration basins, bio-retention swales, permeable pavers, and curbside rain gardens",
       "Multi-benefit green stormwater infrastructure"
     ],
-    "funding_share_pct": 1,
-    "funding_share_description": "Regional program funds up to 100% of approved capital costs; municipal program returns 40% of revenues to local cities",
+    "funding_share_pct": null,
+    "funding_share_description": "Revenue split in the proposed Chapter 16 ordinance: 50% Regional Program, 40% Municipalities, 10% District (Public Works Board letter, 17 July 2018). The share of an individual project's cost that the program pays is not confirmed.",
     "how_to_apply": "Annual Call for Projects via the Safe, Clean Water Portal; technical and community scoring by Watershed Area Steering Committees",
-    "cycle_dates": "Annual call opens spring; deadline July 31",
+    "cycle_dates": null,
     "last_verified": null,
     "verification": {
       "status": "partially_verified",
@@ -26,7 +26,7 @@
         "cycle_dates",
         "amendments after 2018"
       ],
-      "notes": "Round 3: safecleanwaterla.org 403; dpw.lacounty.gov alternate 403. Round 4 (2026-11-16): allocation, DAC and scoring terms confirmed from the 2018 Board letter; the record's 'up to 100% of capital costs' and the July 31 deadline are not in it.",
+      "notes": "Round 3: safecleanwaterla.org 403; dpw.lacounty.gov alternate 403. Round 4 (2026-11-16): allocation, DAC and scoring terms confirmed from the 2018 Board letter; the record's 'up to 100% of capital costs' and the July 31 deadline are not in it. 2026-11-19: compared with an independent check; values that had no fetched source (percent shares, application cycles) were removed and the statute's own wording kept.",
       "field_evidence": {
         "40% municipal return": {
           "status": "confirmed",
@@ -56,10 +56,10 @@
       "Urban tree canopy planting in parklands and public rights-of-way",
       "Recreation facilities and youth athletic field restoration"
     ],
-    "funding_share_pct": 0.8,
-    "funding_share_description": "Competitive grants up to $1,000,000+ per project with non-profit / community matching funds",
+    "funding_share_pct": null,
+    "funding_share_description": null,
     "how_to_apply": "Competitive request for proposals (RFP) administered through the Bureau of Engineering",
-    "cycle_dates": "Biennial competitive grant cycles",
+    "cycle_dates": null,
     "last_verified": null,
     "verification": {
       "status": "could_not_check",
@@ -72,7 +72,7 @@
         "statutory_citation (Ordinance 171215)",
         "cycle_dates"
       ],
-      "notes": "funding_share_pct 0.8 and grant size have no stated source. Round 3: eng.lacity.gov: proxy 502."
+      "notes": "funding_share_pct 0.8 and grant size have no stated source. Round 3: eng.lacity.gov: proxy 502. 2026-11-19: compared with an independent check; values that had no fetched source (percent shares, application cycles) were removed and the statute's own wording kept."
     }
   },
   {
@@ -102,7 +102,7 @@
         "funding_share_pct",
         "statutory_citation"
       ],
-      "notes": "Corrected: the record said Cap-and-Trade funding, an annual window and SOAR applications; the program page says Proposition 4, two cycles (next late 2027/early 2028) and RAPTR."
+      "notes": "Corrected: the record said Cap-and-Trade funding, an annual window and SOAR applications; the program page says Proposition 4, two cycles (next late 2027/early 2028) and RAPTR. 2026-11-19: compared with an independent check; values that had no fetched source (percent shares, application cycles) were removed and the statute's own wording kept."
     }
   },
   {
@@ -118,10 +118,10 @@
       "Urban forest management plans and inventories",
       "Green schoolyards and canopy shade over playgrounds"
     ],
-    "funding_share_pct": 0.9,
+    "funding_share_pct": null,
     "funding_share_description": "Statute: grants of 25 to 90 percent of project costs; the director may waive cost sharing for projects in disadvantaged and low-income communities (PRC § 4799.12).",
     "how_to_apply": "Statewide solicitation via e-granting system",
-    "cycle_dates": "Annual grant cycles",
+    "cycle_dates": null,
     "last_verified": "2026-11-16",
     "verification": {
       "status": "partially_verified",
@@ -133,8 +133,12 @@
         "cycle_dates",
         "current program guidelines"
       ],
-      "notes": "Original '100% for DAC; up to 75% for non-DAC' contradicts the statute (25–90%, waivable)."
-    }
+      "notes": "Original '100% for DAC; up to 75% for non-DAC' contradicts the statute (25–90%, waivable). 2026-11-19: compared with an independent check; values that had no fetched source (percent shares, application cycles) were removed and the statute's own wording kept."
+    },
+    "funding_share_range_pct": [
+      0.25,
+      0.9
+    ]
   },
   {
     "id": "tx_tirz_ch311",
@@ -152,7 +156,7 @@
     "funding_share_pct": null,
     "funding_share_description": "Each participating taxing unit's share of tax increment and term are set by agreement or order (Tex. Tax Code § 311.013); no statutory 50–100% range was confirmed.",
     "how_to_apply": "City council or commissioners court petition and ordinance designation pursuant to Tex. Tax Code § 311.005",
-    "cycle_dates": "Ongoing municipal designation",
+    "cycle_dates": null,
     "last_verified": "2026-11-16",
     "verification": {
       "status": "partially_verified",
@@ -163,7 +167,7 @@
         "20–30 year term",
         "how_to_apply (§ 311.005)"
       ],
-      "notes": "Original '50% to 100%' pledge range unconfirmed; funding_share_pct 1 removed."
+      "notes": "Original '50% to 100%' pledge range unconfirmed; funding_share_pct 1 removed. 2026-11-19: compared with an independent check; values that had no fetched source (percent shares, application cycles) were removed and the statute's own wording kept."
     }
   },
   {
@@ -171,7 +175,7 @@
     "program_name": "Florida Community Redevelopment Agency (CRA Trust Fund)",
     "jurisdiction_fips": null,
     "state_code": "FL",
-    "administering_agency": "Local Municipal/County CRAs and Florida Department of Economic Opportunity",
+    "administering_agency": "Local community redevelopment agencies (Fla. Stat. ch. 163, part III)",
     "statutory_citation": "Fla. Stat. § 163.387",
     "source_url": "https://floridacra.org/",
     "eligible_improvements": [
@@ -182,7 +186,7 @@
     "funding_share_pct": 0.95,
     "funding_share_description": "Increment equal to 95% of the difference between current and base-year ad valorem taxes of each taxing authority (excluding debt-service millage); a governing body may set a lower share but not below 50% (Fla. Stat. § 163.387(1)(a)).",
     "how_to_apply": "Application through local municipal CRA office; projects must align with adopted Community Redevelopment Plan",
-    "cycle_dates": "Annual budgeting and grant application windows",
+    "cycle_dates": null,
     "last_verified": "2026-11-16",
     "verification": {
       "status": "verified",
@@ -194,7 +198,7 @@
         "cycle_dates",
         "source_url floridacra.org unreachable"
       ],
-      "notes": ""
+      "notes": "2026-11-19: compared with an independent check; values that had no fetched source (percent shares, application cycles) were removed and the statute's own wording kept."
     }
   },
   {
@@ -211,7 +215,7 @@
     "funding_share_pct": 0.75,
     "funding_share_description": "Exempts 75% of the assessed value of qualifying units for households at >80% to ≤120% AMI; qualifying units at ≤80% AMI are exempt under § 196.1978(3)(d)1.b. (§ 196.1979 is a separate local-option exemption.)",
     "how_to_apply": "Form DR-504AFH filed with the county property appraiser (Florida DOR lists DR-504AFH for § 196.1978)",
-    "cycle_dates": "Annual deadline March 1",
+    "cycle_dates": null,
     "last_verified": "2026-11-16",
     "verification": {
       "status": "partially_verified",
@@ -220,9 +224,10 @@
       "evidence": "§ 196.1978(3)(d)1.a: 'Seventy-five percent of the assessed value of the units ... greater than 80 percent but not more than 120 percent'; DOR: 'DR-504AFH ... Multifamily Project and Affordable Housing Property ... (section 196.1978, F.S.)'",
       "unverified_fields": [
         "eligible_improvements wording (project-size and new-construction conditions not checked)",
-        "cycle_dates March 1 deadline"
+        "cycle_dates March 1 deadline",
+        "cycle_dates"
       ],
-      "notes": "Original cited § 196.1979 (wrong section) and form 'DR-504AF' (wrong form)."
+      "notes": "Original cited § 196.1979 (wrong section) and form 'DR-504AF' (wrong form). 2026-11-19: compared with an independent check; values that had no fetched source (percent shares, application cycles) were removed and the statute's own wording kept."
     }
   },
   {
@@ -241,7 +246,7 @@
     "funding_share_pct": null,
     "funding_share_description": "An urban renewal plan may divide property taxes and/or municipal sales taxes in the area for a period not to exceed 25 years; the increment over the base goes to a special fund for the project.",
     "how_to_apply": "Urban renewal plan adoption by city council with statutory blight/condition study and taxing entity agreements",
-    "cycle_dates": "Ongoing municipal plan adoption",
+    "cycle_dates": null,
     "last_verified": null,
     "verification": {
       "status": "partially_verified",
@@ -252,7 +257,7 @@
         "funding_share_pct",
         "eligible_improvements"
       ],
-      "notes": "Mechanism and 25-year limit confirmed. The '100% of increment' share and the listed eligible projects (incl. the HB 24-1313 density link) are not in the statute; share depends on agreements with taxing bodies."
+      "notes": "Mechanism and 25-year limit confirmed. The '100% of increment' share and the listed eligible projects (incl. the HB 24-1313 density link) are not in the statute; share depends on agreements with taxing bodies. 2026-11-19: compared with an independent check; values that had no fetched source (percent shares, application cycles) were removed and the statute's own wording kept."
     }
   },
   {
@@ -267,10 +272,10 @@
       "Major passenger rail station modernization, track infrastructure, and Americans with Disabilities Act accessibility",
       "Direct station-adjacent transit-oriented public realm improvements"
     ],
-    "funding_share_pct": 1,
-    "funding_share_description": "Captures 100% of incremental property tax growth within a 0.5-mile corridor to fund local matching requirements for federal transit grants",
+    "funding_share_pct": null,
+    "funding_share_description": null,
     "how_to_apply": "Intergovernmental agreement between municipality and transit authority approved by city council",
-    "cycle_dates": "Dedicated 35-year transit district lifecycle",
+    "cycle_dates": null,
     "last_verified": null,
     "verification": {
       "status": "unverified",
@@ -282,7 +287,7 @@
         "35-year term",
         "0.5-mile corridor"
       ],
-      "notes": "source_url is dead (HTTP 404). Round 3: Cited chicago.gov URL 404; ilga.gov statute page unreachable. source link broken as of 2026-11-16: https://www.chicago.gov/city/en/depts/dcd/provdrs/tif/svcs/transit_tif.html returns 404; no new address found."
+      "notes": "source_url is dead (HTTP 404). Round 3: Cited chicago.gov URL 404; ilga.gov statute page unreachable. source link broken as of 2026-11-16: https://www.chicago.gov/city/en/depts/dcd/provdrs/tif/svcs/transit_tif.html returns 404; no new address found. 2026-11-19: compared with an independent check; values that had no fetched source (percent shares, application cycles) were removed and the statute's own wording kept."
     }
   },
   {
@@ -296,10 +301,10 @@
     "eligible_improvements": [
       "High-density mixed-use redevelopment and transit-oriented housing in designated central business districts (CBDs) or redevelopment areas"
     ],
-    "funding_share_pct": 1,
-    "funding_share_description": "Provides up to 8 years of 100% property tax abatement by conveying fee title to city and leasing back property, followed by reduced excise tax rates",
+    "funding_share_pct": null,
+    "funding_share_description": "A city or town may abate the government property lease excise tax for a limited period ending eight years after the certificate of occupancy is issued, for property in a single central business district (A.R.S. 42-6209). It abates the lease excise tax, not the property tax.",
     "how_to_apply": "Economic development agreement approved by city council following statutory economic impact analysis",
-    "cycle_dates": "Ad hoc developer proposals to municipal economic development departments",
+    "cycle_dates": null,
     "last_verified": "2026-11-16",
     "verification": {
       "status": "partially_verified",
@@ -310,7 +315,7 @@
         "'followed by reduced excise tax rates'",
         "list of cities"
       ],
-      "notes": "Abatement is of the GPLET excise tax, limited to a single CBD. Round 3: https://www.phoenix.gov/econdev/gplet returns 404; source_url now the statute this record was checked against (A.R.S. 42-6209)."
+      "notes": "Abatement is of the GPLET excise tax, limited to a single CBD. Round 3: https://www.phoenix.gov/econdev/gplet returns 404; source_url now the statute this record was checked against (A.R.S. 42-6209). 2026-11-19: compared with an independent check; values that had no fetched source (percent shares, application cycles) were removed and the statute's own wording kept."
     }
   },
   {
@@ -329,7 +334,7 @@
     "funding_share_pct": 0.8,
     "funding_share_description": "Provides up to 80% federal share of total capital project costs with 20% non-federal matching requirement",
     "how_to_apply": "Competitive Notice of Funding Opportunity (NOFO) application submitted via Grants.gov by state DOTs, regional authorities, or multi-state compacts",
-    "cycle_dates": "Annual competitive NOFO solicitations",
+    "cycle_dates": null,
     "last_verified": "2026-11-16",
     "verification": {
       "status": "verified",
@@ -340,7 +345,7 @@
         "cycle_dates (annual NOFO)",
         "example corridors in eligible_improvements are illustrative, not FRA-designated"
       ],
-      "notes": "Round 3: the FRA program page (https://railroads.dot.gov/grants-loans/competitive-discretionary-grant-programs/federal-state-partnership-intercity-passenger-rail) returns 404; source_url now points to 49 U.S.C. 24911, which this record was verified against (fetched 2026-11-16: 'shall not exceed 80 percent')."
+      "notes": "Round 3: the FRA program page (https://railroads.dot.gov/grants-loans/competitive-discretionary-grant-programs/federal-state-partnership-intercity-passenger-rail) returns 404; source_url now points to 49 U.S.C. 24911, which this record was verified against (fetched 2026-11-16: 'shall not exceed 80 percent'). 2026-11-19: compared with an independent check; values that had no fetched source (percent shares, application cycles) were removed and the statute's own wording kept."
     }
   }
 ]

@@ -12,7 +12,7 @@ const byId = Object.fromEntries(LAWS.map((r: any) => [r.id, r]));
 
 const EX: ParcelContext["exclusions"] = {
   historic_district_hpoz: false, coastal_commission_or_sma: false, fema_100yr_floodway: false, calfire_or_state_vhfhsz: false,
-  airport_noise_or_runway_zone: false, williamson_or_ag_preserve: false, public_or_tribal_land: false, everglades_or_wekiva_or_trpa: false,
+  airport_noise_or_runway_zone: false, williamson_or_ag_preserve: false, public_or_tribal_land: false, wekiva_or_everglades_protection_area: false,
   population_threshold_ineligible: false,
 };
 const sfr = (o: Partial<ParcelContext>): ParcelContext => ({

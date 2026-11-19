@@ -5,7 +5,7 @@
     "bill_number": "SB 79",
     "session": "2025-2026 Regular Session",
     "short_name": "CA SB 79 — Tier 1 TOD stop, within 1/4 mile",
-    "statute_citation": "Cal. Gov. Code §§ 65912.155–65912.162 (added by Stats. 2025, Ch. 512 (SB 79))",
+    "statute_citation": "Cal. Gov. Code §§ 65912.155–65912.162 (added by Stats. 2025, Ch. 512 (SB 79)); § 65912.157 amended by Stats. 2026, Ch. 100 (SB 722), approved 2026-07-16",
     "effective_date": "2026-07-01",
     "statute_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB79",
     "eligible_counties": [
@@ -27,12 +27,12 @@
     "affordability_mandate_pct": null,
     "tax_exemption_pct": 0,
     "statutory_exclusions": [
-      "calfire_or_state_vhfhsz",
-      "sea_level_rise_1ft (alternative-plan exclusion, § 65912.161)",
-      "local_historic_register (≤10% of TOD zone, § 65912.161)"
+      "calfire_or_state_vhfhsz (very high fire hazard severity zone bars streamlined review under § 65913.4(a)(6)(D), applied through § 65912.159(a)(3); § 65912.157(j) also requires objective fire safety standards)",
+      "rent_controlled_housing_site (§ 65912.157(h)(1)-(2): demolition of, or previous use for, more than two units subject to rent or price control)",
+      "mobilehome_or_rv_park_site (§ 65912.157(h)(3), added by SB 722: land governed by the Mobilehome Residency Law, Recreational Vehicle Park Occupancy Law, Mobilehome Parks Act or Special Occupancy Parks Act)"
     ],
-    "summary": "Housing development is an allowed use on residential, mixed or commercial sites within 1/4 mile of a Tier 1 transit-oriented development stop (heavy rail or 72+ trains/day commuter rail) in an urban transit county (>15 passenger rail stations). Local governments may not impose a height limit below 75 ft, a density cap below 120 du/acre, or standards precluding a residential FAR of 3.5 (§ 65912.157(a)(3)). Projects need at least 5 units and 30 du/acre. Applies to local agencies from July 1, 2026 (§ 65912.157(n)). The 75 ft / 120 du/ac figures are floors on local limits, not a unit cap. SB 79 does not by itself grant ministerial approval; see § 65912.159 for the streamlining path.",
-    "last_verified": "2026-11-16",
+    "summary": "Housing development is an allowed use on residential, mixed or commercial sites within 1/4 mile of a Tier 1 transit-oriented development stop (heavy rail or 72+ trains/day commuter rail) in an urban transit county (>15 passenger rail stations). Local governments may not impose a height limit below 75 ft, a density cap below 120 du/acre, or standards precluding a residential FAR of 3.5 (§ 65912.157(a)(3)). Projects need at least 5 units and 30 du/acre. Applies to local agencies from July 1, 2026 (§ 65912.157(n)). The 75 ft / 120 du/ac figures are floors on local limits, not a unit cap. SB 79 does not by itself grant ministerial approval; see § 65912.159 for the streamlining path. Amended by SB 722 (Ch. 100, Stats. 2026, approved 2026-07-16) to exclude sites governed by the mobilehome and RV park laws.",
+    "last_verified": "2026-11-19",
     "min_allowed_density_du_per_acre": 120,
     "affordability_options": {
       "one_of": [
@@ -56,15 +56,18 @@
     },
     "verification": {
       "status": "verified",
-      "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container); Gov. Code §§ 65912.156, 65912.157 read in full",
-      "checked_on": "2026-11-16",
-      "evidence": "§ 65912.157(a)(3): 'shall not impose any height limit less than 75 feet ... any maximum density of less than 120 dwelling units per acre ... residential floor area ratio of up to 3.5'",
+      "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container); Gov. Code §§ 65912.156, 65912.157 read in full; Legislature bulk data pubinfo_2025.zip read again 2026-11-19: BILL_VERSION_TBL_9511.lob (SB 79 chaptered), BILL_VERSION_TBL_16242.lob (SB 722 chaptered), LAW_SECTION_TBL row GOV65912.157.20261002",
+      "checked_on": "2026-11-19",
+      "evidence": "§ 65912.157(a)(3): 'shall not impose any height limit less than 75 feet ... any maximum density of less than 120 dwelling units per acre ... residential floor area ratio of up to 3.5' SB 722 (Ch. 100, Stats. 2026): \"(3) The existing parcel of land or site is governed under the Mobilehome Residency Law ..., the Recreational Vehicle Park Occupancy Law ..., the Mobilehome Parks Act ..., or the Special Occupancy Parks Act\" (new § 65912.157(h)(3)); \"This act is an urgency statute ... and shall go into immediate effect.\" § 65912.156(q): \"'Urban transit county' means a county with more than 15 passenger rail stations.\" (the county list on file is not in the statute).",
       "unverified_fields": [
         "eligible_counties (list of urban transit counties is from Wikipedia 'California Senate Bill 79', a secondary source; statute defines the test as >15 passenger rail stations)",
-        "min_parking_spaces_per_unit (SB 79 itself sets none; 0 comes from AB 2097, Gov. Code § 65863.2, subject to its exceptions)"
+        "min_parking_spaces_per_unit (SB 79 itself sets none; 0 comes from AB 2097, Gov. Code § 65863.2, subject to its exceptions)",
+        "statutory_exclusions (no parcel layer for rent-controlled housing sites or mobilehome / RV park sites)"
       ],
-      "notes": "Original record cited Gov. Code § 65913.16 (a different section, amended by SB 597), included Contra Costa (06013), labelled the 120 du/acre density floor as a 120-unit by-right cap, claimed a single 10% affordability mandate, and said the law 'mandates ministerial by-right approval'. All corrected."
-    }
+      "notes": "Original record cited Gov. Code § 65913.16 (a different section, amended by SB 597), included Contra Costa (06013), labelled the 120 du/acre density floor as a 120-unit by-right cap, claimed a single 10% affordability mandate, and said the law 'mandates ministerial by-right approval'. All corrected. 2026-11-19: SB 79 was amended by SB 722 (Ch. 100, Stats. 2026); heights, densities and FARs in § 65912.157(a) are unchanged. The engine no longer rules out a county missing from the list on file when a qualifying stop is in range; it reports the county test as not confirmed."
+    },
+    "statutory_exclusions_note": "Corrected 2026-11-19. The earlier list named sea-level-rise and local-historic-register sites; those appear only in the local alternative-plan rules (§ 65912.161), not as limits on a project's eligibility under § 65912.157. Gov. Code § 65912.157(h) lists the real site exclusions.",
+    "amended_by": "SB 722 (Stats. 2026, Ch. 100), approved 2026-07-16, urgency statute effective immediately: adds § 65912.157(h)(3), excluding parcels governed by the mobilehome and RV park laws. The official code table reads \"Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026.\""
   },
   {
     "id": "ca_sb79_tier2",
@@ -72,7 +75,7 @@
     "bill_number": "SB 79",
     "session": "2025-2026 Regular Session",
     "short_name": "CA SB 79 — Tier 1 TOD stop, 1/4 to 1/2 mile (city pop ≥ 35,000)",
-    "statute_citation": "Cal. Gov. Code §§ 65912.155–65912.162 (added by Stats. 2025, Ch. 512 (SB 79))",
+    "statute_citation": "Cal. Gov. Code §§ 65912.155–65912.162 (added by Stats. 2025, Ch. 512 (SB 79)); § 65912.157 amended by Stats. 2026, Ch. 100 (SB 722), approved 2026-07-16",
     "effective_date": "2026-07-01",
     "statute_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB79",
     "eligible_counties": [
@@ -94,12 +97,12 @@
     "affordability_mandate_pct": null,
     "tax_exemption_pct": 0,
     "statutory_exclusions": [
-      "calfire_or_state_vhfhsz",
-      "sea_level_rise_1ft (alternative-plan exclusion, § 65912.161)",
-      "local_historic_register (≤10% of TOD zone, § 65912.161)"
+      "calfire_or_state_vhfhsz (very high fire hazard severity zone bars streamlined review under § 65913.4(a)(6)(D), applied through § 65912.159(a)(3); § 65912.157(j) also requires objective fire safety standards)",
+      "rent_controlled_housing_site (§ 65912.157(h)(1)-(2): demolition of, or previous use for, more than two units subject to rent or price control)",
+      "mobilehome_or_rv_park_site (§ 65912.157(h)(3), added by SB 722: land governed by the Mobilehome Residency Law, Recreational Vehicle Park Occupancy Law, Mobilehome Parks Act or Special Occupancy Parks Act)"
     ],
     "summary": "Between 1/4 and 1/2 mile of a Tier 1 TOD stop, in a city of at least 35,000, local governments may not impose a height limit below 65 ft, a density cap below 100 du/acre, or standards precluding FAR 3.0 (§ 65912.157(a)(4)). NOTE: the id 'ca_sb79_tier2' is historical; this record is Tier 1 at the outer ring. Statutory Tier 2 (light rail etc.) is in ca_sb79_tier2_light_rail_*.",
-    "last_verified": "2026-11-16",
+    "last_verified": "2026-11-19",
     "distance_to_transit_min_mi": 0.25,
     "city_population_min": 35000,
     "min_allowed_density_du_per_acre": 100,
@@ -125,14 +128,17 @@
     },
     "verification": {
       "status": "verified",
-      "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container)",
-      "checked_on": "2026-11-16",
-      "evidence": "§ 65912.157(a)(4): 'height limit less than 65 feet ... less than 100 dwelling units per acre ... floor area ratio of up to 3'",
+      "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container); Legislature bulk data pubinfo_2025.zip read again 2026-11-19: BILL_VERSION_TBL_9511.lob (SB 79 chaptered), BILL_VERSION_TBL_16242.lob (SB 722 chaptered), LAW_SECTION_TBL row GOV65912.157.20261002",
+      "checked_on": "2026-11-19",
+      "evidence": "§ 65912.157(a)(4): 'height limit less than 65 feet ... less than 100 dwelling units per acre ... floor area ratio of up to 3' SB 722 (Ch. 100, Stats. 2026): \"(3) The existing parcel of land or site is governed under the Mobilehome Residency Law ..., the Recreational Vehicle Park Occupancy Law ..., the Mobilehome Parks Act ..., or the Special Occupancy Parks Act\" (new § 65912.157(h)(3)); \"This act is an urgency statute ... and shall go into immediate effect.\" § 65912.156(q): \"'Urban transit county' means a county with more than 15 passenger rail stations.\" (the county list on file is not in the statute).",
       "unverified_fields": [
-        "eligible_counties (secondary source, see tier1)"
+        "eligible_counties (secondary source, see tier1)",
+        "statutory_exclusions (no parcel layer for rent-controlled housing sites or mobilehome / RV park sites)"
       ],
-      "notes": "Original record was mislabelled 'Tier 2' (statutory Tier 2 is light rail/48+ trains/BRT) and omitted the 35,000-population condition."
-    }
+      "notes": "Original record was mislabelled 'Tier 2' (statutory Tier 2 is light rail/48+ trains/BRT) and omitted the 35,000-population condition. 2026-11-19: SB 79 was amended by SB 722 (Ch. 100, Stats. 2026); heights, densities and FARs in § 65912.157(a) are unchanged. The engine no longer rules out a county missing from the list on file when a qualifying stop is in range; it reports the county test as not confirmed."
+    },
+    "statutory_exclusions_note": "Corrected 2026-11-19. The earlier list named sea-level-rise and local-historic-register sites; those appear only in the local alternative-plan rules (§ 65912.161), not as limits on a project's eligibility under § 65912.157. Gov. Code § 65912.157(h) lists the real site exclusions.",
+    "amended_by": "SB 722 (Stats. 2026, Ch. 100), approved 2026-07-16, urgency statute effective immediately: adds § 65912.157(h)(3), excluding parcels governed by the mobilehome and RV park laws. The official code table reads \"Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026.\""
   },
   {
     "id": "ca_sb79_tier2_light_rail_quarter",
@@ -140,7 +146,7 @@
     "bill_number": "SB 79",
     "session": "2025-2026 Regular Session",
     "short_name": "CA SB 79 — Tier 2 TOD stop (light rail / 48+ trains / qualifying BRT), within 1/4 mile",
-    "statute_citation": "Cal. Gov. Code §§ 65912.155–65912.162 (added by Stats. 2025, Ch. 512 (SB 79))",
+    "statute_citation": "Cal. Gov. Code §§ 65912.155–65912.162 (added by Stats. 2025, Ch. 512 (SB 79)); § 65912.157 amended by Stats. 2026, Ch. 100 (SB 722), approved 2026-07-16",
     "effective_date": "2026-07-01",
     "statute_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB79",
     "eligible_counties": [
@@ -183,23 +189,26 @@
     },
     "tax_exemption_pct": 0,
     "statutory_exclusions": [
-      "calfire_or_state_vhfhsz",
-      "sea_level_rise_1ft (alternative-plan exclusion, § 65912.161)",
-      "local_historic_register (≤10% of TOD zone, § 65912.161)"
+      "calfire_or_state_vhfhsz (very high fire hazard severity zone bars streamlined review under § 65913.4(a)(6)(D), applied through § 65912.159(a)(3); § 65912.157(j) also requires objective fire safety standards)",
+      "rent_controlled_housing_site (§ 65912.157(h)(1)-(2): demolition of, or previous use for, more than two units subject to rent or price control)",
+      "mobilehome_or_rv_park_site (§ 65912.157(h)(3), added by SB 722: land governed by the Mobilehome Residency Law, Recreational Vehicle Park Occupancy Law, Mobilehome Parks Act or Special Occupancy Parks Act)"
     ],
     "summary": "Local governments may not impose a height limit below 65 ft, a density cap below 100 du/acre, or standards precluding FAR 3 (§ 65912.157(a)(5)).",
-    "last_verified": "2026-11-16",
+    "last_verified": "2026-11-19",
     "verification": {
       "status": "verified",
-      "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container)",
-      "checked_on": "2026-11-16",
-      "evidence": "§ 65912.157(a)(5): 'height limit less than 65 feet ... less than 100 dwelling units per acre ... floor area ratio of up to 3'",
+      "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container); Legislature bulk data pubinfo_2025.zip read again 2026-11-19: BILL_VERSION_TBL_9511.lob (SB 79 chaptered), BILL_VERSION_TBL_16242.lob (SB 722 chaptered), LAW_SECTION_TBL row GOV65912.157.20261002",
+      "checked_on": "2026-11-19",
+      "evidence": "§ 65912.157(a)(5): 'height limit less than 65 feet ... less than 100 dwelling units per acre ... floor area ratio of up to 3' SB 722 (Ch. 100, Stats. 2026): \"(3) The existing parcel of land or site is governed under the Mobilehome Residency Law ..., the Recreational Vehicle Park Occupancy Law ..., the Mobilehome Parks Act ..., or the Special Occupancy Parks Act\" (new § 65912.157(h)(3)); \"This act is an urgency statute ... and shall go into immediate effect.\" § 65912.156(q): \"'Urban transit county' means a county with more than 15 passenger rail stations.\" (the county list on file is not in the statute).",
       "unverified_fields": [
         "eligible_counties (secondary source)",
-        "min_parking_spaces_per_unit (from AB 2097, not SB 79)"
+        "min_parking_spaces_per_unit (from AB 2097, not SB 79)",
+        "statutory_exclusions (no parcel layer for rent-controlled housing sites or mobilehome / RV park sites)"
       ],
-      "notes": "Added in this audit from the official statute text; the original data had no true Tier 2 rows."
-    }
+      "notes": "Added in this audit from the official statute text; the original data had no true Tier 2 rows. 2026-11-19: SB 79 was amended by SB 722 (Ch. 100, Stats. 2026); heights, densities and FARs in § 65912.157(a) are unchanged. The engine no longer rules out a county missing from the list on file when a qualifying stop is in range; it reports the county test as not confirmed."
+    },
+    "statutory_exclusions_note": "Corrected 2026-11-19. The earlier list named sea-level-rise and local-historic-register sites; those appear only in the local alternative-plan rules (§ 65912.161), not as limits on a project's eligibility under § 65912.157. Gov. Code § 65912.157(h) lists the real site exclusions.",
+    "amended_by": "SB 722 (Stats. 2026, Ch. 100), approved 2026-07-16, urgency statute effective immediately: adds § 65912.157(h)(3), excluding parcels governed by the mobilehome and RV park laws. The official code table reads \"Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026.\""
   },
   {
     "id": "ca_sb79_tier2_light_rail_half",
@@ -207,7 +216,7 @@
     "bill_number": "SB 79",
     "session": "2025-2026 Regular Session",
     "short_name": "CA SB 79 — Tier 2 TOD stop (light rail / 48+ trains / qualifying BRT), 1/4 to 1/2 mile (city pop ≥ 35,000)",
-    "statute_citation": "Cal. Gov. Code §§ 65912.155–65912.162 (added by Stats. 2025, Ch. 512 (SB 79))",
+    "statute_citation": "Cal. Gov. Code §§ 65912.155–65912.162 (added by Stats. 2025, Ch. 512 (SB 79)); § 65912.157 amended by Stats. 2026, Ch. 100 (SB 722), approved 2026-07-16",
     "effective_date": "2026-07-01",
     "statute_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB79",
     "eligible_counties": [
@@ -250,25 +259,28 @@
     },
     "tax_exemption_pct": 0,
     "statutory_exclusions": [
-      "calfire_or_state_vhfhsz",
-      "sea_level_rise_1ft (alternative-plan exclusion, § 65912.161)",
-      "local_historic_register (≤10% of TOD zone, § 65912.161)"
+      "calfire_or_state_vhfhsz (very high fire hazard severity zone bars streamlined review under § 65913.4(a)(6)(D), applied through § 65912.159(a)(3); § 65912.157(j) also requires objective fire safety standards)",
+      "rent_controlled_housing_site (§ 65912.157(h)(1)-(2): demolition of, or previous use for, more than two units subject to rent or price control)",
+      "mobilehome_or_rv_park_site (§ 65912.157(h)(3), added by SB 722: land governed by the Mobilehome Residency Law, Recreational Vehicle Park Occupancy Law, Mobilehome Parks Act or Special Occupancy Parks Act)"
     ],
     "summary": "Local governments may not impose a height limit below 55 ft, a density cap below 80 du/acre, or standards precluding FAR 2.5 (§ 65912.157(a)(6)).",
-    "last_verified": "2026-11-16",
+    "last_verified": "2026-11-19",
     "verification": {
       "status": "verified",
-      "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container)",
-      "checked_on": "2026-11-16",
-      "evidence": "§ 65912.157(a)(6): 'height limit less than 55 feet ... less than 80 dwelling units per acre ... floor area ratio of up to 2.5'",
+      "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container); Legislature bulk data pubinfo_2025.zip read again 2026-11-19: BILL_VERSION_TBL_9511.lob (SB 79 chaptered), BILL_VERSION_TBL_16242.lob (SB 722 chaptered), LAW_SECTION_TBL row GOV65912.157.20261002",
+      "checked_on": "2026-11-19",
+      "evidence": "§ 65912.157(a)(6): 'height limit less than 55 feet ... less than 80 dwelling units per acre ... floor area ratio of up to 2.5' SB 722 (Ch. 100, Stats. 2026): \"(3) The existing parcel of land or site is governed under the Mobilehome Residency Law ..., the Recreational Vehicle Park Occupancy Law ..., the Mobilehome Parks Act ..., or the Special Occupancy Parks Act\" (new § 65912.157(h)(3)); \"This act is an urgency statute ... and shall go into immediate effect.\" § 65912.156(q): \"'Urban transit county' means a county with more than 15 passenger rail stations.\" (the county list on file is not in the statute).",
       "unverified_fields": [
         "eligible_counties (secondary source)",
-        "min_parking_spaces_per_unit (from AB 2097, not SB 79)"
+        "min_parking_spaces_per_unit (from AB 2097, not SB 79)",
+        "statutory_exclusions (no parcel layer for rent-controlled housing sites or mobilehome / RV park sites)"
       ],
-      "notes": "Added in this audit from the official statute text; the original data had no true Tier 2 rows."
+      "notes": "Added in this audit from the official statute text; the original data had no true Tier 2 rows. 2026-11-19: SB 79 was amended by SB 722 (Ch. 100, Stats. 2026); heights, densities and FARs in § 65912.157(a) are unchanged. The engine no longer rules out a county missing from the list on file when a qualifying stop is in range; it reports the county test as not confirmed."
     },
     "distance_to_transit_min_mi": 0.25,
-    "city_population_min": 35000
+    "city_population_min": 35000,
+    "statutory_exclusions_note": "Corrected 2026-11-19. The earlier list named sea-level-rise and local-historic-register sites; those appear only in the local alternative-plan rules (§ 65912.161), not as limits on a project's eligibility under § 65912.157. Gov. Code § 65912.157(h) lists the real site exclusions.",
+    "amended_by": "SB 722 (Stats. 2026, Ch. 100), approved 2026-07-16, urgency statute effective immediately: adds § 65912.157(h)(3), excluding parcels governed by the mobilehome and RV park laws. The official code table reads \"Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026.\""
   },
   {
     "id": "ca_sb9_lot_split",
@@ -276,7 +288,7 @@
     "bill_number": "SB 9",
     "session": "2021-2022 Regular Session",
     "short_name": "CA SB 9 (California HOME Act) — two units per lot and urban lot split",
-    "statute_citation": "Cal. Gov. Code §§ 65852.21, 66411.7",
+    "statute_citation": "Cal. Gov. Code §§ 65852.21, 66411.7; §§ 65852.21 and 66411.7 amended by Stats. 2026, Ch. 56 (SB 1426), effective 2026-06-30",
     "effective_date": "2022-01-01",
     "statute_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202120220SB9",
     "max_units_by_right": 4,
@@ -293,17 +305,21 @@
       "prime_farmland"
     ],
     "summary": "Requires ministerial approval of urban lot splits (creating two parcels of at least 1,200 sq ft each) and construction of up to two residential units per lot (up to 4 units total) in single-family residential zones.",
-    "last_verified": "2026-11-16",
+    "last_verified": "2026-11-19",
     "verification": {
       "status": "partially_verified",
       "method": "California Legislative Counsel official bulk database (downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip, LAW_SECTION_TBL, read via HTTP range requests; leginfo.legislature.ca.gov itself returns 403 from the audit container); Gov. Code §§ 65852.21 and 66411.7 (current text, as amended by SB 1426 (2026))",
-      "checked_on": "2026-11-16",
-      "evidence": "§ 66411.7: 'no more than two new parcels of approximately equal lot area ... not be smaller than 40 percent ... both newly created parcels are no smaller than 1,200 square feet'; § 65852.21: 'no more than two residential units within a single-family residential zone shall be considered ministerially'",
+      "checked_on": "2026-11-19",
+      "evidence": "§ 66411.7: 'no more than two new parcels of approximately equal lot area ... not be smaller than 40 percent ... both newly created parcels are no smaller than 1,200 square feet'; § 65852.21: 'no more than two residential units within a single-family residential zone shall be considered ministerially' Official code table 2026-11-19: GOV 65852.21 \"Amended by Stats. 2026, Ch. 56, Sec. 7. (SB 1426) Effective June 30, 2026.\"; GOV 66411.7 \"Amended by Stats. 2026, Ch. 56, Sec. 9. (SB 1426) Effective June 30, 2026.\"; § 66411.7(a)(2)(A): \"both newly created parcels are no smaller than 1,200 square feet\".",
       "unverified_fields": [
-        "effective_date (2022-01-01 not checked; the 2021 bill version was not retrieved)"
+        "effective_date (2022-01-01 not checked; the 2021 bill version was not retrieved)",
+        "statutory_exclusions (§ 65913.4(a)(6)(B)-(K) as it read on 2021-09-16 was not read; only four site conditions are checked)"
       ],
       "notes": "Original max_height_ft 25 does not appear in either section and was removed. Original min_parking 0 was wrong as a general rule (up to 1/unit may be required). Short name was garbled ('Home Opportunity & Act')."
-    }
+    },
+    "min_new_parcel_sqft": 1200,
+    "min_new_parcel_note": "§ 66411.7(a)(2)(A): \"both newly created parcels are no smaller than 1,200 square feet\" unless a local ordinance sets a smaller size; one parcel not smaller than 40 percent of the original lot area (§ 66411.7(a)(1)).",
+    "statutory_exclusions_note": "§ 65852.21(a)(2) incorporates § 65913.4(a)(6)(B)-(K) \"as that section read on September 16, 2021\" (a longer list of site conditions than the four flags used here; the flood bar is the FEMA special flood hazard area, broader than a floodway). Also excluded: certain housing under rent control or occupied in the last three years (§ 65852.21(a)(3)) and historic districts or landmarks (§ 65852.21(a)(5))."
   },
   {
     "id": "ca_ab2097",
@@ -330,42 +346,50 @@
   {
     "id": "fl_live_local",
     "state_code": "FL",
-    "bill_number": "SB 102 (2023) / SB 328 (2024)",
-    "session": "2024 / 2023 Regular Session",
+    "bill_number": "SB 102 (2023, Ch. 2023-17) / SB 328 (2024, Ch. 2024-188) / SB 1730 (2025, Ch. 2025-172) / SB 104 (2026, Ch. 2026-14) / SB 962 (2026, Ch. 2026-163) / HB 1389 (2026, Ch. 2026-179)",
+    "session": "2023 to 2026 Regular Sessions",
     "short_name": "FL Live Local Act (Fla. Stat. § 166.04151(7) zoning + § 196.1978(3) exemption)",
-    "statute_citation": "Fla. Stat. §§ 166.04151(7) (municipalities), 125.01055 (counties), 196.1978(3) (tax exemption)",
-    "effective_date": "2024-07-01",
-    "statute_url": "https://www.flsenate.gov/Session/Bill/2024/328",
-    "commercial_or_industrial_only": true,
+    "statute_citation": "Fla. Stat. §§ 166.04151(7) (municipalities), 125.01055(7) (counties), 196.1978(3) (tax exemption); amended through s. 2, ch. 2026-179",
+    "effective_date": "2023-07-01",
+    "statute_url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html",
     "max_units_by_right": null,
-    "height_preemption": "Allowed up to tallest commercial or residential height permitted within 1 mile or 3 stories, whichever is higher",
-    "density_preemption": "Allowed up to highest residential density permitted in jurisdiction",
+    "height_preemption": "Not below the highest currently allowed (or allowed on July 1, 2023) height of a commercial or residential building within 1 mile of the proposed development, or three stories, whichever is higher",
+    "density_preemption": "Not below the highest currently allowed (or allowed on July 1, 2023) residential density on any land in the municipality where residential development is allowed",
     "affordability_mandate_pct": 0.4,
     "affordability_term_years": 30,
     "affordability_ami_ceiling": 1.2,
     "tax_exemption_pct": 0.75,
     "min_parking_spaces_per_unit": null,
     "statutory_exclusions": [
-      "airport_noise_or_runway_zone",
-      "everglades_or_wekiva_or_trpa"
+      "airport_noise_or_runway_zone (airport-impacted areas, s. 333.03; § 166.04151(7)(o)1)",
+      "working_waterfront_in_industrial_zone (recreational and commercial working waterfront, s. 342.201(2)(b), in any area zoned industrial; (7)(o)2)",
+      "wekiva_or_everglades_protection_area (Wekiva Study Area, s. 369.316; Everglades Protection Area, s. 373.4592(2); (7)(o)3-4)",
+      "open_character_district (land development regulations in existence before July 1, 2026 that retain open character, such as open space and park districts; (7)(o)5)",
+      "area_of_critical_state_concern (ss. 380.055, 380.0551, 380.0552, 380.0553, 380.0555; (7)(o)6)",
+      "recorded_conservation_easement (any portion of a property so encumbered; (7)(o)7)"
     ],
-    "summary": "Municipalities must allow multifamily and mixed-use residential in any commercial, industrial or mixed-use zone (and on some public and religious-institution land) if at least 40% of units are affordable rentals for at least 30 years; density not below the highest allowed in the municipality, FAR not below 150% of the highest allowed, height not below the tallest allowed within 1 mile or 3 stories; administrative approval required. Qualifying units may receive the § 196.1978(3) property-tax exemption.",
-    "last_verified": "2026-11-16",
+    "summary": "Municipalities must authorize multifamily and mixed-use residential in any area zoned commercial, industrial or mixed use, on property owned by a county, municipality or school district, and on religious-institution land of more than 3 acres (with a house of public worship for at least 10 years), regardless of the underlying zoning, if at least 40% of the residential units in a multifamily development are rentals affordable under s. 420.0004 for at least 30 years. No zoning change, special exception, variance or comprehensive plan amendment may be required for the height, zoning and density authorized. Density not below the highest allowed in the municipality; floor area ratio not below 150% of the highest allowed; height not below the tallest within 1 mile or three stories, whichever is higher; administrative approval. Parking must be cut 15% on request near transit and eliminated for mixed-use projects in a transit-oriented area. Counties have a parallel rule (s. 125.01055(7)). The subsection is listed to expire October 1, 2033. Qualifying units may receive the § 196.1978(3) property-tax exemption. Land that falls under one of the exclusions (airport-impacted areas, working waterfronts in industrial zones, the Wekiva and Everglades areas, open-character districts, areas of critical state concern, conservation easements) is outside the law.",
+    "last_verified": "2026-11-19",
     "max_far_rule": "Not below 150% of the highest currently allowed (or allowed on July 1, 2023) FAR in the municipality",
     "tax_exemption_note": "§ 196.1978(3)(d)1.a: 75% of assessed value for qualifying units at >80% to ≤120% AMI; units at ≤80% AMI are exempt under (d)1.b. § 196.1979 is a separate LOCAL-OPTION exemption for ≤60% AMI units.",
     "parking_note": "Municipality must reduce parking by 15% on request near a transit stop or other listed conditions, and must eliminate parking for mixed-use projects in a recognized TOD area (§ 166.04151(7)(f)).",
     "verification": {
       "status": "verified",
-      "method": "Official Florida Statutes (leg.state.fl.us) §§ 166.04151, 196.1978, 196.1979; flsenate.gov bill page SB 328 (2024)",
-      "checked_on": "2026-11-16",
-      "evidence": "§ 166.04151(7)(a)1: 'if at least 40 percent of the residential units ... are rental units that, for a period of at least 30 years, are affordable'; § 196.1978(3)(d)1.a: 'Seventy-five percent of the assessed value of the units ... greater than 80 percent but not more than 120 percent'",
+      "method": "Official Florida Statutes 2026 (www.leg.state.fl.us) §§ 166.04151, 125.01055, 196.1978, 420.0004 read in full on 2026-11-19; Laws of Florida chapters 2023-17, 2024-188, 2025-172, 2026-14, 2026-163, 2026-179 (laws.flrules.org) for effective dates",
+      "checked_on": "2026-11-19",
+      "evidence": "§ 166.04151(7)(a)1: \"A municipality must authorize multifamily and mixed-use residential as allowable uses in any area zoned for commercial, industrial, or mixed use; ... on property owned by a county, municipality, or school district; and on property that is more than 3 acres in size and owned by a religious institution ... regardless of the underlying zoning, if at least 40 percent of the residential units in a proposed multifamily development are rental units that, for a period of at least 30 years, are affordable as defined in s. 420.0004.\" § 166.04151(7)(o): \"This subsection does not apply to: 1. Airport-impacted areas as provided in s. 333.03. 2. Property defined as recreational and commercial working waterfront in s. 342.201(2)(b) in any area zoned as industrial. 3. The Wekiva Study Area ... 4. The Everglades Protection Area ... 5. Areas subject to land development regulations ... in existence before July 1, 2026, and ... intended to retain the open character of land ... 6. Any area of critical state concern ... 7. Any portion of a property encumbered by a recorded conservation easement\"; (7)(p): \"This subsection expires October 1, 2033.\" History line: \"s. 5, ch. 2023-17; s. 2, ch. 2024-188; s. 2, ch. 2025-172; s. 15, ch. 2026-14; s. 2, ch. 2026-163; s. 2, ch. 2026-179.\" § 196.1978(3)(d)1.a: \"Seventy-five percent of the assessed value of the units in multifamily projects ... greater than 80 percent but not more than 120 percent of the median annual adjusted gross income\".",
       "unverified_fields": [
-        "effective_date 2024-07-01",
-        "affordability_ami_ceiling 1.2 (depends on § 420.0004 definition, not fetched)",
-        "§ 125.01055 county provision not fetched"
+        "statutory_exclusions (no parcel layer is loaded for airport-impacted areas, working waterfronts, the Wekiva Study Area, the Everglades Protection Area, open-character districts, areas of critical state concern or conservation easements; the page cannot check them)",
+        "parcel ownership (county, city or school district land and religious-institution land qualify regardless of zoning; ownership is not a parcel field here)",
+        "county provision applies in unincorporated areas (§ 125.01055(7) read only for its structure, not applied to parcels)"
       ],
-      "notes": "Original cited § 196.1979 for the 75% exemption (wrong section), set a fabricated 0.5 parking minimum, and a 999-unit placeholder cap."
-    }
+      "notes": "Corrected 2026-11-19 after comparing with an independent check of the same statute: (1) \"commercial or industrial zoning only\" was wrong; public and some religious-institution land qualifies regardless of zoning; (2) the exclusions list was wrong (see statutory_exclusions_note); (3) the section has been amended through ch. 2026-14, 2026-163 and 2026-179. Earlier corrections kept: original cited § 196.1979 for the 75% exemption (wrong section), set a fabricated 0.5 parking minimum, and a 999-unit placeholder cap."
+    },
+    "effective_date_note": "First enacted by ch. 2023-17 (\"this act shall take effect July 1, 2023\", approved 2023-03-29). Later amendments: ch. 2024-188 (effective on becoming law, approved 2024-05-16), ch. 2025-172 (effective 2025-07-01), ch. 2026-14 (a statutes-correction act; effective the 60th day after adjournment), ch. 2026-163 (effective on becoming law, approved 2026-06-25) and ch. 2026-179 (effective 2026-07-01). Ch. 2026-179 s. 3 says its changes to (7)(n) apply retroactively to 2024-01-01.",
+    "applies_to_zone": "commercial",
+    "applies_to_zone_note": "Not only commercial or industrial land: § 166.04151(7)(a)1 also covers land owned by a county, municipality or school district, and religious-institution land of more than 3 acres, regardless of zoning. \"applies_to_zone\" only keeps this law out of the homeowner (ADU / middle-housing) notes.",
+    "statutory_exclusions_note": "Corrected 2026-11-19. The earlier list (\"everglades_or_wekiva_or_trpa\") named a TRPA (Tahoe Regional Planning Agency) exclusion that is not in the statute and omitted working waterfronts in industrial zones, airport-impacted areas under s. 333.03, open-character districts, areas of critical state concern and conservation easements.",
+    "affordability_ami_ceiling_note": "s. 420.0004(3): \"Affordable\" means rent or mortgage payments not above 30 percent of the stated share of median income; the highest tier, moderate income (s. 420.0004(12)), is \"less than 120 percent of the median annual adjusted gross income for households within the state, or ... within the metropolitan statistical area ... whichever is greater\"."
   },
   {
     "id": "tx_sb840",
@@ -383,10 +407,13 @@
     "affordability_mandate_pct": 0,
     "tax_exemption_pct": 0,
     "statutory_exclusions": [
-      "airport_noise_or_runway_zone"
+      "airport_noise_or_runway_zone (statute: land within 3,000 feet of an airport or military base, § 218.101(c)(2)(B); this flag is only an approximation)",
+      "heavy_industrial_zoning (§ 218.101(c)(1): a zoning classification that allows heavy industrial use)",
+      "within_1000_ft_of_heavy_industrial_use (§ 218.101(c)(2)(A))",
+      "clear_zone_or_accident_potential_zone (§ 218.101(c)(3): an area designated by a municipality)"
     ],
     "summary": "In cities over 150,000 population located wholly or partly in a county over 300,000, cities must allow multifamily and mixed-use residential (≥65% residential) without rezoning in zones that allow office, commercial, retail, warehouse or mixed use; may not cap density below the greater of the city's highest density or 36 du/acre, height below the greater of the commercial height or 45 ft, or require more than one parking space per unit; compliant permits must be administratively approved.",
-    "last_verified": "2026-11-16",
+    "last_verified": "2026-11-19",
     "applies_in_zoning": "Any zoning classification allowing office, commercial, retail, warehouse or mixed use (not heavy industrial; not within 1,000 ft of heavy industrial use or 3,000 ft of an airport/military base; not clear/accident-potential zones)",
     "min_allowed_density_du_per_acre": 36,
     "density_rule": "Not more restrictive than the greater of the highest residential density allowed in the city or 36 units/acre",
@@ -396,11 +423,14 @@
     "verification": {
       "status": "verified",
       "method": "Texas Legislature Online: bill history 89(R) SB 840 and enrolled text (capitol.texas.gov/tlodocs/89R/billtext/html/SB00840F.htm)",
-      "checked_on": "2026-11-16",
+      "checked_on": "2026-11-19",
       "evidence": "History: '06/20/2025 E Effective on 9/1/25'; § 218.002: 'applies only to a municipality with a population greater than 150,000 that is wholly or partly located in a county with a population greater than 300,000'",
-      "unverified_fields": [],
+      "unverified_fields": [
+        "statutory_exclusions (no parcel layer for heavy industrial zoning or use, airports, military bases or clear zones)"
+      ],
       "notes": "SEVERE: original record cited 88(R) SB 840 (2023), which is 'Relating to increasing the criminal penalty for assault of certain hospital personnel' — an unrelated bill — and § 214.908. The housing law is 89(R) SB 840 (2025). It is not limited to office conversions."
-    }
+    },
+    "statutory_exclusions_note": "Corrected 2026-11-19 from the enrolled text: § 218.101(c) \"This section does not apply to: (1) a zoning classification that allows heavy industrial use; (2) land located within: (A) 1,000 feet of an existing heavy industrial use or development site; or (B) 3,000 feet of an airport or military base; or (3) an area designated by a municipality as a clear zone or accident potential zone.\""
   },
   {
     "id": "wa_hb1110",
@@ -454,7 +484,7 @@
     "session": "2019 Regular Session",
     "short_name": "OR HB 2001 (Oregon Housing Choice & Middle Housing)",
     "statute_citation": "ORS 197A.420 (formerly ORS 197.758; HB 2001 (2019))",
-    "effective_date": "2020-01-01",
+    "effective_date": null,
     "statute_url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
     "rules": [
       {
@@ -469,17 +499,19 @@
     ],
     "min_parking_spaces_per_unit": null,
     "summary": "Oregon cities of 25,000+ (and Metro-area cities of 1,000+, and counties) must allow all middle housing types on residential lots inside urban growth boundaries; cities of 2,500–25,000 outside Metro must allow duplexes.",
-    "last_verified": "2026-11-16",
+    "last_verified": "2026-11-19",
     "verification": {
       "status": "verified",
       "method": "Official ORS chapter 197A (oregonlegislature.gov/bills_laws/ors/ors197A.html)",
-      "checked_on": "2026-11-16",
-      "evidence": "ORS 197A.420(2)–(3): 'each city with a population of 25,000 or greater, and each city with a population of 1,000 or greater within Metro, shall allow the development of all middle housing types ... Each city not within Metro with a population of 2,500 or greater and less than 25,000 shall allow the development of a duplex'",
+      "checked_on": "2026-11-19",
+      "evidence": "ORS 197A.420(2)–(3): 'each city with a population of 25,000 or greater, and each city with a population of 1,000 or greater within Metro, shall allow the development of all middle housing types ... Each city not within Metro with a population of 2,500 or greater and less than 25,000 shall allow the development of a duplex' 2026-11-19, enrolled HB 2001 (olis.oregonlegislature.gov): \"an emergency is declared to exist, and this 2019 Act takes effect on its passage.\"",
       "unverified_fields": [
-        "effective_date 2020-01-01"
+        "effective_date 2020-01-01",
+        "effective_date (takes effect on passage; signing date not read)"
       ],
       "notes": "Original cited the renumbered ORS 197.758 and a 10,000 duplex threshold; current law is 2,500. min_parking 0 not found in statute."
-    }
+    },
+    "effective_date_note": "Enrolled HB 2001 (Ch. 639, Oregon Laws 2019): \"this 2019 Act takes effect on its passage\" (emergency clause). The 2020-01-01 date earlier on file is not in the act; the Governor's signing date was not on the enrolled copy fetched. Local compliance deadlines in the act: June 30, 2021 (cities of 25,000+) and June 30, 2022 (others)."
   },
   {
     "id": "az_hb2720_2721",
@@ -491,24 +523,28 @@
     "effective_date": "2024-09-14",
     "statute_url": "https://www.azleg.gov/legtext/56leg/2R/laws/0197.pdf",
     "municipality_pop_min": 75000,
-    "max_units_by_right": 4,
+    "max_units_by_right": null,
     "max_height_ft": null,
     "min_parking_spaces_per_unit": null,
-    "summary": "Municipalities over 75,000 must allow at least one attached and one detached ADU on any lot where a single-family home is allowed, with no added parking (A.R.S. § 9-461.18). Municipalities of 75,000+ must, by January 1, 2026, allow duplexes, triplexes, fourplexes and townhomes on all single-family lots within one mile of the central business district and on at least 20% of new developments over 10 contiguous acres, requiring no more than one parking space per unit (Laws 2024 ch. 197).",
-    "last_verified": "2026-11-16",
+    "summary": "ADUs (A.R.S. § 9-461.18, Laws 2024 ch. 196, still in the Revised Statutes): municipalities over 75,000 must allow at least one attached and one detached ADU on any lot where a single-family home is allowed, with no added parking. Middle housing (Laws 2024 ch. 197, HB 2721, approved 2024-05-21): chaptered text required municipalities of 75,000+ to allow duplexes, triplexes, fourplexes and townhomes on single-family lots within one mile of the central business district by January 1, 2026, with no more than one parking space per unit. The section that chapter 197 added, A.R.S. § 9-462.10, is today a different provision (multifamily and adaptive reuse of commercial parcels in cities of 150,000+), so whether the middle-housing rule is still in force is not confirmed here and no unit count is shown.",
+    "last_verified": "2026-11-19",
     "height_rule": "Municipality may not restrict middle housing to less than two floors or FAR below 50%",
     "max_parking_requirement_per_unit": 1,
     "verification": {
       "status": "verified",
       "method": "Arizona Legislature: chaptered session laws 2024 ch. 196 and ch. 197 (azleg.gov/legtext/56leg/2R/laws/0196.pdf, 0197.pdf) and current A.R.S. § 9-461.18",
-      "checked_on": "2026-11-16",
-      "evidence": "Ch. 197: 'ON OR BEFORE JANUARY 1, 2026, A MUNICIPALITY WITH A POPULATION OF SEVENTY-FIVE THOUSAND PERSONS OR MORE MUST AUTHORIZE ... DUPLEXES, TRIPLEXES, FOURPLEXES AND TOWNHOMES ... WITHIN ONE MILE OF THE MUNICIPALITY'S CENTRAL BUSINESS DISTRICT'",
+      "checked_on": "2026-11-19",
+      "evidence": "Ch. 197: 'ON OR BEFORE JANUARY 1, 2026, A MUNICIPALITY WITH A POPULATION OF SEVENTY-FIVE THOUSAND PERSONS OR MORE MUST AUTHORIZE ... DUPLEXES, TRIPLEXES, FOURPLEXES AND TOWNHOMES ... WITHIN ONE MILE OF THE MUNICIPALITY'S CENTRAL BUSINESS DISTRICT' 2026-11-19: azleg.gov/legtext/56leg/2R/laws/0197.pdf: \"CHAPTER 197 ... HOUSE BILL 2721 ... ADDING SECTION 9-462.10 ... APPROVED BY THE GOVERNOR MAY 21, 2024\"; current A.R.S. 9-462.10 title: \"Commercial buildings; multifamily residential development; adaptive reuse; prohibition on rezoning or municipal review; objective standards; applicability; definitions\". A.R.S. 9-461.18(A): \"At least one attached and one detached accessory dwelling unit as a permitted use.\"",
       "unverified_fields": [
         "effective_date 2024-09-14",
-        "current codified section number for the HB 2721 text (the current online § 9-462.10 contains a different, commercial adaptive-reuse provision)"
+        "current codified section number for the HB 2721 text (the current online § 9-462.10 contains a different, commercial adaptive-reuse provision)",
+        "max_units_by_right (3 on the ADU path; the 2024 middle-housing provision, up to four units, has an unconfirmed current status)",
+        "current in-force status of the Laws 2024 ch. 197 middle-housing rule (A.R.S. § 9-462.10 now has different text)"
       ],
-      "notes": "Original cited A.R.S. §§ 9-467.04 and 9-467.05, which do not exist (azleg.gov 404). max_height_ft 30 was not in the law. Parking value is a cap, not a minimum."
-    }
+      "notes": "Original cited A.R.S. §§ 9-467.04 and 9-467.05, which do not exist (azleg.gov 404). max_height_ft 30 was not in the law. Parking value is a cap, not a minimum. 2026-11-19: another check counted 3 units (ADU path) while this record counted 4 (middle-housing path); both are in the statutes but only the ADU path is in the current Revised Statutes, so the by-right unit count is withheld."
+    },
+    "max_units_adu_path": 3,
+    "max_units_adu_path_note": "A.R.S. § 9-461.18(A)(1): \"At least one attached and one detached accessory dwelling unit as a permitted use\" on any lot where a single-family dwelling is allowed (single-family home plus two ADUs = 3 units); § 9-461.18(H) applies it to municipalities of more than 75,000 people. Current section text read 2026-11-19."
   },
   {
     "id": "tx_austin_home",
@@ -524,12 +560,12 @@
     "max_units_by_right": 3,
     "min_parking_spaces_per_unit": null,
     "summary": "HOME Phase 1 (adopted Dec. 7, 2023) allows up to three housing units on SF-1, SF-2 and SF-3 lots. HOME Phase 2 (adopted May 16, 2024) creates 'small lot single-family residential use' allowing one unit on lots of at least 1,800 sq ft (standard minimum is 5,750 sq ft).",
-    "last_verified": "2026-11-16",
+    "last_verified": "2026-11-19",
     "verification": {
       "status": "verified",
       "method": "City of Austin Development Services 'HOME Amendments' page (austintexas.gov/development-services/home-amendments)",
       "checked_on": "2026-11-16",
-      "evidence": "'Allow up to three housing units, including tiny homes, on a Single-Family (SF) zoned property (SF-1, SF-2, SF-3)'; 'one unit on lots of at least 1,800 square feet but less than 5,750 square feet'; 'Ordinance 20240516-006 - Phase 2 HOME Amendments adopted ordinance'",
+      "evidence": "'Allow up to three housing units, including tiny homes, on a Single-Family (SF) zoned property (SF-1, SF-2, SF-3)'; 'one unit on lots of at least 1,800 square feet but less than 5,750 square feet'; 'Ordinance 20240516-006 - Phase 2 HOME Amendments adopted ordinance' 2026-11-19: city page lists \"Ordinance 20231207-001 - Phase 1 HOME Amendments adopted ordinance\" and \"Ordinance 20240516-006 - Phase 2 HOME Amendments adopted ordinance\".",
       "unverified_fields": [
         "min_parking_spaces_per_unit (Austin's parking-minimum repeal is a separate action, not checked)"
       ],
@@ -538,7 +574,8 @@
     "local_jurisdiction": {
       "name": "City of Austin",
       "match": "^austin\\b"
-    }
+    },
+    "effective_date_note": "City page (austintexas.gov/development-services/home-amendments, read 2026-11-19): \"Dec. 7, 2023: HOME Phase 1 adopted by the Austin City Council; Feb. 5, 2024: Development applications accepted under HOME Phase 1; May 16, 2024: HOME Phase 2 adopted\". The ordinance numbers on file (\"Ordinance 20231207-001 - Phase 1\", \"Ordinance 20240516-006 - Phase 2\") are listed on that page."
   },
   {
     "id": "co_hb24_1313",
@@ -693,19 +730,25 @@
     "statute_citation": "24 V.S.A. § 4412(1)(D) & (12); § 4414 (parking); 2023, No. 47, § 2, eff. July 1, 2023",
     "effective_date": "2023-07-01",
     "statute_url": "https://legislature.vermont.gov/statutes/section/24/117/04412",
-    "max_units_by_right": 2,
-    "summary": "Duplexes must be a permitted use, with no stricter dimensional standards than a single-unit dwelling, in any district allowing year-round residential use; areas served by municipal sewer and water must allow at least five dwelling units per acre; in such districts a municipality may not require more than one parking space per unit.",
-    "last_verified": "2026-11-16",
+    "max_units_by_right": null,
+    "summary": "Duplexes must be a permitted use, with no stricter dimensional standards than a single-unit dwelling, in any district allowing year-round residential development; in districts served by municipal sewer and water, multiunit dwellings with four or fewer units must be a permitted use on the same size lot as a single-unit dwelling. Areas served by municipal sewer and water must allow at least five dwelling units per acre; a municipality may not require more than one parking space per unit in such districts.",
+    "last_verified": "2026-11-19",
     "min_density_units_per_acre_where_sewer_water": 5,
     "max_parking_requirement_per_unit": 1,
     "verification": {
       "status": "verified",
       "method": "Vermont Statutes Online 24 V.S.A. §§ 4412, 4414 (legislature.vermont.gov/statutes)",
-      "checked_on": "2026-11-16",
-      "evidence": "§ 4412(12): 'bylaws shall establish lot and building dimensional standards that allow five or more dwelling units per acre'; § 4414: 'a municipality shall not require more than one parking space per dwelling unit'; history '2023, No. 47, § 2, eff. July 1, 2023'",
-      "unverified_fields": [],
-      "notes": "Citation corrected from (1)(E) to (1)(D)/(12). The current text also contains a future (eff. Jan 1, 2028) version allowing up to 4 units in sewer/water districts."
-    }
+      "checked_on": "2026-11-19",
+      "evidence": "§ 4412(12): 'bylaws shall establish lot and building dimensional standards that allow five or more dwelling units per acre'; § 4414: 'a municipality shall not require more than one parking space per dwelling unit'; history '2023, No. 47, § 2, eff. July 1, 2023' 2026-11-19, 24 V.S.A. § 4412(1)(D): \"multiunit dwellings with four or fewer units shall be a permitted use on the same size lot as a single-unit dwelling\"; Act 47 as enacted: \"Date Governor signed bill: June 5, 2023\".",
+      "unverified_fields": [
+        "max_units_by_right (2 where residential use is allowed year-round, 4 where municipal sewer and water serve the district; service is not on file for a parcel)"
+      ],
+      "notes": "Citation corrected from (1)(E) to (1)(D)/(12). The current text also contains a future (eff. Jan 1, 2028) version allowing up to 4 units in sewer/water districts. 2026-11-19: this record counted duplexes only (2 units); another check counted 4. The statute gives both: 2 everywhere, 4 where sewer and water serve the district. The effective date 2024-12-01 used elsewhere applies to the parking provision (§ 4414) and the rest of § 4412, not to subdivision (1)(D)."
+    },
+    "max_units_two_unit_districts": 2,
+    "max_units_sewer_water_districts": 4,
+    "max_units_note": "24 V.S.A. § 4412(1)(D) as in force through 2027-12-31: \"In any district that allows year-round residential development, duplexes shall be a permitted use ... In any district that is served by municipal sewer and water infrastructure that allows residential development, multiunit dwellings with four or fewer units shall be a permitted use on the same size lot as a single-unit dwelling.\" Two units everywhere residential use is allowed year-round; four units where municipal sewer and water serve the district. Whether a parcel is served is not a parcel field here.",
+    "effective_date_note": "Act 47 sec. 47 (as enacted): the act takes effect 2023-07-01 except that secs. 1 (24 V.S.A. § 4414) and 2 (§ 4412) take effect 2024-12-01 \"except for subdivision (1)(D) of Sec. 2, which shall take effect on July 1, 2023\"; Governor signed 2023-06-05."
   },
   {
     "id": "ma_mbta_communities",

@@ -5,14 +5,11 @@
     "states": [
       "AZ"
     ],
-    "route_length_miles": 120,
+    "route_length_miles": null,
     "lead_agencies": [
-      "Arizona Department of Transportation (ADOT)",
-      "Maricopa Association of Governments (MAG)",
-      "Pima Association of Governments (PAG)",
-      "Federal Railroad Administration (FRA)"
+      "Arizona Department of Transportation (ADOT)"
     ],
-    "funding_status": "FRA Corridor Identification and Development (Corridor ID) Program recipient ($500,000 Step 1 Service Development Plan award)",
+    "funding_status": "FRA Corridor Identification and Development Program FY22 selection: up to $500,000 for planning (sponsor: Arizona Department of Transportation; Step 1, to develop a scope, schedule and cost estimate for a service development plan). Not a construction grant.",
     "official_study_url": "https://azdot.gov/planning/transportation-studies/arizona-passenger-rail-study-phoenix-tucson",
     "source_url": "https://azdot.gov/planning/transportation-studies/arizona-passenger-rail-study-phoenix-tucson",
     "last_verified": "2026-11-16",
@@ -21,7 +18,7 @@
     "projected_one_way_minutes": null,
     "highway_comparison_minutes": null,
     "estimated_capital_cost_billions": null,
-    "federal_match_program": "FRA Federal-State Partnership for Intercity Passenger Rail (80% federal / 20% state-local)",
+    "federal_match_program": null,
     "proposed_stations": [
       {
         "id": "phx_downtown",
@@ -127,19 +124,26 @@
     "candidate_railyard_sites": [],
     "verification": {
       "status": "could_not_check",
-      "method": "Fetched source_url (azdot.gov) -> HTTP 403 through egress proxy; FRA Corridor ID pages (railroads.dot.gov) -> 403; Wikipedia Corridor ID list did not render; Nominatim for station coordinates.",
-      "checked_on": "2026-11-16",
-      "evidence": "None obtained from an official source this session.",
+      "method": "Fetched source_url (azdot.gov) -> HTTP 403 through egress proxy; FRA Corridor ID pages (railroads.dot.gov) -> 403; Wikipedia Corridor ID list did not render; Nominatim for station coordinates. 2026-11-19: FRA \"FY22 Corridor Identification and Development Program Selections\" PDF (railroads.dot.gov/sites/fra.dot.gov/files/2025-02/FY22%20CID%20Project%20Summaries-Map-r3.pdf) fetched and read; only the fields named in the notes were re-checked, nothing else in this record was.",
+      "checked_on": "2026-11-19",
+      "evidence": "FRA \"FY22 Corridor Identification and Development Program Selections\" (PDF fetched 2026-11-19): \"Phoenix-Tucson Corridor (Up to $500,000) Arizona Department of Transportation ... The proposed corridor would reconnect Phoenix (Buckeye) to Tucson, AZ ... The corridor sponsor would enter Step 1 of the program\".",
       "unverified_fields": [
         "route_length_miles",
-        "lead_agencies",
-        "funding_status ($500,000 Corridor ID award)",
         "federal_match_program",
         "proposed_stations (all names and locations)",
         "statutory_housing_regime",
         "recommended_redevelopment_focus"
       ],
-      "notes": "Station coordinates for Phoenix, Chandler, Coolidge and Marana are city centroids (Phoenix 14 m from OSM's city point) - the stations themselves appear invented by the earlier build. Removed as fabricated (no source): max_speed_mph 90, projected_one_way_minutes 85, highway_comparison_minutes 115, estimated_capital_cost_billions 4.5; all per-station home values, land $/sqft and 'underused acres'; both candidate railyard sites (Coolidge $2.38M 'RECOMMENDED' vs Tempe $171M 'NOT RECOMMENDED'), whose costs and recommendations had no source."
+      "notes": "Station coordinates for Phoenix, Chandler, Coolidge and Marana are city centroids (Phoenix 14 m from OSM's city point) - the stations themselves appear invented by the earlier build. Removed as fabricated (no source): max_speed_mph 90, projected_one_way_minutes 85, highway_comparison_minutes 115, estimated_capital_cost_billions 4.5; all per-station home values, land $/sqft and 'underused acres'; both candidate railyard sites (Coolidge $2.38M 'RECOMMENDED' vs Tempe $171M 'NOT RECOMMENDED'), whose costs and recommendations had no source. 2026-11-19: the FRA selection document names ADOT as the sponsor; MAG, PAG and the 80/20 Federal-State Partnership match and the 120-mile length are not in it and were removed."
+    },
+    "cid_selection": {
+      "program": "FRA Corridor ID Program",
+      "selection_round": "FY22",
+      "sponsor": "Arizona Department of Transportation",
+      "step_note": "Step 1",
+      "source_url": "https://railroads.dot.gov/sites/fra.dot.gov/files/2025-02/FY22%20CID%20Project%20Summaries-Map-r3.pdf",
+      "quote": "Phoenix-Tucson Corridor (Up to $500,000) Arizona Department of Transportation ... The corridor sponsor would enter Step 1 of the program to develop a scope, schedule, and cost estimate for preparing, completing, or documenting its service development plan.",
+      "checked_on": "2026-11-19"
     }
   },
   {
@@ -148,14 +152,9 @@
     "states": [
       "TX"
     ],
-    "route_length_miles": 74,
-    "lead_agencies": [
-      "Texas Department of Transportation (TxDOT)",
-      "Capital Area Metropolitan Planning Organization (CAMPO)",
-      "Alamo Area MPO (AAMPO)",
-      "FRA"
-    ],
-    "funding_status": "FRA Corridor ID Step 1 Award ($500k) & Texas Legislature HB 1 study",
+    "route_length_miles": null,
+    "lead_agencies": [],
+    "funding_status": "Not confirmed. The FRA FY22 Corridor ID selection list (fetched 2026-11-19) has no Austin-San Antonio corridor; it lists Houston to San Antonio, the Texas Triangle (Dallas-Fort Worth-Houston) and Amtrak Texas High-Speed Rail. Other selection rounds were not checked.",
     "official_study_url": "https://www.txdot.gov/projects/hearings-meetings/intercity-passenger-rail-study.html",
     "source_url": "https://www.txdot.gov/projects/hearings-meetings/intercity-passenger-rail-study.html",
     "last_verified": "2026-11-16",
@@ -164,7 +163,7 @@
     "projected_one_way_minutes": null,
     "highway_comparison_minutes": null,
     "estimated_capital_cost_billions": null,
-    "federal_match_program": "FRA Intercity Passenger Rail Partnership + Texas Chapter 311 TIRZ value capture",
+    "federal_match_program": null,
     "proposed_stations": [
       {
         "id": "atx_downtown",
@@ -254,8 +253,8 @@
     "candidate_railyard_sites": [],
     "verification": {
       "status": "unverified",
-      "method": "Fetched source_url (txdot.gov) -> HTTP 404 (dead link); FRA pages 403; Nominatim.",
-      "checked_on": "2026-11-16",
+      "method": "Fetched source_url (txdot.gov) -> HTTP 404 (dead link); FRA pages 403; Nominatim. 2026-11-19: FRA \"FY22 Corridor Identification and Development Program Selections\" PDF (railroads.dot.gov/sites/fra.dot.gov/files/2025-02/FY22%20CID%20Project%20Summaries-Map-r3.pdf) fetched and read; only the fields named in the notes were re-checked, nothing else in this record was.",
+      "checked_on": "2026-11-19",
       "evidence": "None obtained.",
       "unverified_fields": [
         "route_length_miles",
@@ -265,7 +264,7 @@
         "proposed_stations (all)",
         "statutory_housing_regime"
       ],
-      "notes": "source_url and official_study_url return 404. No adopted station plan was found. 'Austin Downtown / Plaza Saltillo Connection' uses the generic Austin geocode, 1.57 km from Plaza Saltillo. Removed as fabricated: speed 110, minutes 58/95, capital cost $3.2B, per-station numbers, and railyard sites (Kyle $3.15M vs East Austin $165M). source link broken as of 2026-11-16: https://www.txdot.gov/projects/hearings-meetings/intercity-passenger-rail-study.html returns 404; no new address found."
+      "notes": "source_url and official_study_url return 404. No adopted station plan was found. 'Austin Downtown / Plaza Saltillo Connection' uses the generic Austin geocode, 1.57 km from Plaza Saltillo. Removed as fabricated: speed 110, minutes 58/95, capital cost $3.2B, per-station numbers, and railyard sites (Kyle $3.15M vs East Austin $165M). source link broken as of 2026-11-16: https://www.txdot.gov/projects/hearings-meetings/intercity-passenger-rail-study.html returns 404; no new address found. 2026-11-19: the earlier \"FRA Corridor ID Step 1 Award ($500k)\" is not in the FY22 selection list, in which the word \"Austin\" does not appear (FRA PDF fetched 2026-11-19; an independent check found the same). Lead agencies and route length (74 miles) removed as unsourced."
     }
   },
   {
@@ -274,7 +273,7 @@
     "states": [
       "CO"
     ],
-    "route_length_miles": 173,
+    "route_length_miles": null,
     "lead_agencies": [
       "Front Range Passenger Rail District (FRPR)",
       "Colorado Department of Transportation (CDOT)",
@@ -328,8 +327,8 @@
     "source_type": "secondary (Wikipedia); official site not identified this audit",
     "verification": {
       "status": "partially_verified",
-      "method": "Fetched prior source_url -> redirected to an unrelated gambling link page (linklist.bio/koitoto-slot); Wikipedia 'Front Range Passenger Rail' (resolves to 'Colorado Connector') as secondary; Nominatim.",
-      "checked_on": "2026-11-16",
+      "method": "Fetched prior source_url -> redirected to an unrelated gambling link page (linklist.bio/koitoto-slot); Wikipedia 'Front Range Passenger Rail' (resolves to 'Colorado Connector') as secondary; Nominatim. 2026-11-19: FRA \"FY22 Corridor Identification and Development Program Selections\" PDF (railroads.dot.gov/sites/fra.dot.gov/files/2025-02/FY22%20CID%20Project%20Summaries-Map-r3.pdf) fetched and read; only the fields named in the notes were re-checked, nothing else in this record was.",
+      "checked_on": "2026-11-19",
       "evidence": "Wikipedia: \"The Colorado Connector (CoCo), also known as Front Range Passenger Rail ... major stops in Fort Collins, Boulder, Denver, Colorado Springs, and Pueblo\"; \"In May 2024, Governor Polis signed SB24-184\"; delivery plan July 2026. Denver Union Station 75 m from OSM.",
       "unverified_fields": [
         "route_length_miles",
@@ -338,7 +337,16 @@
         "stations other than Denver Union Station",
         "statutory_housing_regime (HB 24-1313 is described as 'mandatory 40 units/acre by-right', not confirmed)"
       ],
-      "notes": "SECURITY/INTEGRITY: prior source_url https://www.frontrangepassengerrail.com/ now redirects to a gambling spam page; replaced. 2020 alternatives analysis cited speeds up to 110 mph (secondary) vs file's 90. Removed as fabricated: speed, minutes 135/190, $5.8B cost, per-station numbers, Pueblo TTC railyard ($18,000/acre). Fort Collins and Boulder stops (phase 1) are not on file."
+      "notes": "SECURITY/INTEGRITY: prior source_url https://www.frontrangepassengerrail.com/ now redirects to a gambling spam page; replaced. 2020 alternatives analysis cited speeds up to 110 mph (secondary) vs file's 90. Removed as fabricated: speed, minutes 135/190, $5.8B cost, per-station numbers, Pueblo TTC railyard ($18,000/acre). Fort Collins and Boulder stops (phase 1) are not on file. 2026-11-19: FRA FY22 selection for this corridor added from the FRA PDF; the 173-mile route length is not in it and was removed."
+    },
+    "cid_selection": {
+      "program": "FRA Corridor ID Program",
+      "selection_round": "FY22",
+      "sponsor": "Front Range Passenger Rail District",
+      "step_note": "Step 2 (a service development plan was already being funded under a prior FRA grant)",
+      "source_url": "https://railroads.dot.gov/sites/fra.dot.gov/files/2025-02/FY22%20CID%20Project%20Summaries-Map-r3.pdf",
+      "quote": "Colorado Front Range Corridor (Up to $500,000) Front Range Passenger Rail District ... The proposed corridor would connect Fort Collins to Pueblo, CO, with intermediate stops in Boulder, Denver, Colorado Springs, CO, and other points ... The Corridor sponsor would enter Step 2 of the program",
+      "checked_on": "2026-11-19"
     }
   },
   {
@@ -438,8 +446,8 @@
     "estimated_capital_cost_source": "Wikipedia (secondary): \"In January 2026, updated financial disclosure revealed that the estimated cost of the project had risen to $21.5 billion.\"",
     "verification": {
       "status": "partially_verified",
-      "method": "Fetched https://www.brightlinewest.com/ (HTTP 200); Wikipedia 'Brightline West' as secondary.",
-      "checked_on": "2026-11-16",
+      "method": "Fetched https://www.brightlinewest.com/ (HTTP 200); Wikipedia 'Brightline West' as secondary. 2026-11-19: FRA \"FY22 Corridor Identification and Development Program Selections\" PDF (railroads.dot.gov/sites/fra.dot.gov/files/2025-02/FY22%20CID%20Project%20Summaries-Map-r3.pdf) fetched and read; only the fields named in the notes were re-checked, nothing else in this record was.",
+      "checked_on": "2026-11-19",
       "evidence": "Brightline West: \"This 218-mile, all-electric high-speed rail service will include a flagship station in Las Vegas, with additional stations in Apple Valley, Hesperia, and Rancho Cucamonga. At speeds up to 200 miles per hour ... in approximately 2 hours, twice as fast as the normal drive time.\" Wikipedia: $3B USDOT award Dec 2023; cost $21.5B (Jan 2026); VMF \"moved from the Victor Valley site to a 246-acre parcel ... in Sloan, Nevada\".",
       "unverified_fields": [
         "station coordinates",
@@ -447,7 +455,16 @@
         "lead_agencies",
         "statutory_housing_regime (SB 79 'Tier 1' applicability not confirmed)"
       ],
-      "notes": "DISPROVED: estimated_capital_cost_billions 12.0 -> 21.5 (secondary); railyard record 'High Desert VMF, Apple Valley, APPROVED & UNDER CONSTRUCTION, $3.85M' contradicted - VMF was relocated to Sloan, NV (secondary) - removed. Missing Hesperia station added (official site). projected_one_way_minutes 130 -> 120 ('approximately 2 hours'); highway minutes 270 -> null (only 'twice as fast' is stated)."
+      "notes": "DISPROVED: estimated_capital_cost_billions 12.0 -> 21.5 (secondary); railyard record 'High Desert VMF, Apple Valley, APPROVED & UNDER CONSTRUCTION, $3.85M' contradicted - VMF was relocated to Sloan, NV (secondary) - removed. Missing Hesperia station added (official site). projected_one_way_minutes 130 -> 120 ('approximately 2 hours'); highway minutes 270 -> null (only 'twice as fast' is stated). 2026-11-19: FRA FY22 Corridor ID selection (planning funds, Step 1) added from the FRA PDF; it is separate from the $3B construction grant reported by a secondary source."
+    },
+    "cid_selection": {
+      "program": "FRA Corridor ID Program",
+      "selection_round": "FY22",
+      "sponsor": "Nevada Department of Transportation",
+      "step_note": "Step 1",
+      "source_url": "https://railroads.dot.gov/sites/fra.dot.gov/files/2025-02/FY22%20CID%20Project%20Summaries-Map-r3.pdf",
+      "quote": "Brightline West High-Speed Corridor (Up to $500,000) Nevada Department of Transportation ... connect Rancho Cucamonga, CA, to Las Vegas, NV ... with intermediate stops at Hesperia and Victorville, CA",
+      "checked_on": "2026-11-19"
     }
   }
 ]

@@ -151,7 +151,7 @@ function auditSingleHouseParcel(input) {
       airport_noise_or_runway_zone: exclusions.airport_noise_or_runway_zone != null ? !!exclusions.airport_noise_or_runway_zone : null,
       williamson_or_ag_preserve: exclusions.williamson_or_ag_preserve != null ? !!exclusions.williamson_or_ag_preserve : null,
       public_or_tribal_land: exclusions.public_or_tribal_land != null ? !!exclusions.public_or_tribal_land : null,
-      everglades_or_wekiva_or_trpa: exclusions.everglades_or_wekiva_or_trpa != null ? !!exclusions.everglades_or_wekiva_or_trpa : null,
+      wekiva_or_everglades_protection_area: exclusions.wekiva_or_everglades_protection_area != null ? !!exclusions.wekiva_or_everglades_protection_area : null,
       population_threshold_ineligible: exclusions.population_threshold_ineligible != null ? !!exclusions.population_threshold_ineligible : null,
     },
   };
