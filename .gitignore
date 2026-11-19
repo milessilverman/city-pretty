@@ -5,3 +5,5 @@ playwright-report/
 .claude/
 __pycache__/
 .law_cache/
+dist-site
+.wrangler
