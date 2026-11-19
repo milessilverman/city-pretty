@@ -3839,6 +3839,13 @@ function crashCountsFor(fips) {
   }
   return CRASH_COUNTS[fips];
 }
+// Counts built with the 1/k rule are fractions (a crash on the edge of k block groups counts 1/k in each); show one decimal.
+const crashN = n => (n == null || isNaN(n)) ? "–" : (Number.isInteger(+n) ? Math.round(n).toLocaleString() : (+n).toFixed(1));
+function crashRuleText(mt) {
+  return mt && (mt.weighting || mt.crash_weighting) === "1/k"
+    ? "a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes"
+    : "older rule: a crash within 10 m of a block group's edge counts in full for every block group it borders, so these counts overlap and run higher than the number of crashes";
+}
 function crashTextFor(fips, bg) {
   const d = crashCountsFor(fips);
   const c = d && Array.isArray(d[bg]) ? d[bg] : null;
@@ -3859,8 +3866,8 @@ function crashTextFor(fips, bg) {
   }
   if (/first harmful event/i.test(mt.notes || "")) caveats.push("pedestrian/cyclist count is a lower bound (only the first thing struck is recorded)");
   else if (mt.pedbike_lower_bound) caveats.push("pedestrian/cyclist count is a lower bound (one recorded collision partner per crash)");
-  return `${c[2]} ${noun} recorded inside this block group or on its boundary streets (${src} ${yrs}): ${c[0]} involving a pedestrian or cyclist, ${c[1]} with someone killed or seriously injured` +
-    (caveats.length ? "; " + caveats.join("; ") : "");
+  return `${crashN(c[2])} ${noun} recorded inside this block group or on its boundary streets (${src} ${yrs}): ${crashN(c[0])} involving a pedestrian or cyclist, ${crashN(c[1])} with someone killed or seriously injured` +
+    (caveats.length ? "; " + caveats.join("; ") : "") + ` (${crashRuleText(mt)})`;
 }
 // Tree canopy gap from American Forests' current Tree Equity Score release on 2020 block groups
 // (scripts/build_tree_equity_2025.py -> app/data/tree_equity_2025/<fips>.json). It replaces the county data files' 2021
@@ -3915,7 +3922,7 @@ async function loadCrashGaps(fips) {
 function crashGapWhy(x, med, mt) {
   const yrs = mt && Array.isArray(mt.crash_years) ? `${mt.crash_years[0]}–${mt.crash_years[mt.crash_years.length - 1]}` : "3 years";
   const src = mt && /CCRS/.test(mt.crash_source || "") ? "CHP CCRS" : ((mt && mt.crash_source) || "state crash records");
-  return `${x} ${x === 1 ? "crash" : "crashes"} involving a pedestrian or cyclist inside this block group or on its boundary streets (${src} ${yrs}; similar neighborhoods: ${+med})` +
+  return `${crashN(x)} ${x === 1 ? "crash" : "crashes"} involving a pedestrian or cyclist inside this block group or on its boundary streets (${src} ${yrs}; similar neighborhoods: ${crashN(+med)}; ${crashRuleText(mt)})` +
     (mt && mt.pedbike_count_is_lower_bound ? ". This source undercounts pedestrian and cyclist crashes, so the true count may be higher." : ".");
 }
 // details: an object of block-group records ({m, r}); cg: the county's recomputed file or null.
@@ -8340,7 +8347,7 @@ function select(id, fly) {
   if (!oc) { add("Street trees (city survey)", m.st, fmtN); add("Open tree sites", m.ts, fmtN); }
   add("Canopy gap to goal (" + (m.tg_src || "Tree Equity Score 2021, 2010 block groups") + ")", m.tg, v => (+v).toFixed(0) + " pts");
   add("Property crimes, 12 mo", m.pcr, fmtN); { const cc = crashCountsFor(activeFips()); const row = cc && typeof selected !== "undefined" ? cc[selected] : null;
-    if (Array.isArray(row)) add("Crashes with someone killed or seriously injured, inside or on boundary streets", row[1], fmtN);
+    if (Array.isArray(row)) add("Crashes with someone killed or seriously injured, inside or on boundary streets", row[1], crashN);
     else add("Fatal/severe crashes recorded (older count, boundary crashes on one side only)", m.ksi, fmtN); }
   if (!oc) { add("Dumping/litter reports, 12 mo (311)", m.dump, fmtN); add("Graffiti reports, 12 mo (311)", m.graf, fmtN); }
   if (oc && m.nearest_transit && m.nearest_transit.station) add("Nearest rail station", `${esc(m.nearest_transit.station)}${m.nearest_transit.lines ? " (" + esc(m.nearest_transit.lines) + ")" : ""}${m.nearest_transit.distance_mi != null ? ", " + m.nearest_transit.distance_mi + " mi" : ""}`);

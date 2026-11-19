@@ -77,6 +77,11 @@ def counts(fips):
     return json.load(open(p)) if os.path.exists(p) else None
 
 
+def xr(x):
+    """A count as shown: a whole number stays an int; a 1/k-weighted count keeps one decimal."""
+    return int(round(x)) if abs(x - round(x)) < 1e-9 else round(float(x), 1)
+
+
 def crosswalk_n(row):
     mm = re.match(r"(\d+) intersections", row[1] or "")
     return int(mm.group(1)) if mm else None
@@ -142,10 +147,10 @@ def build(fips, la_det, la_counts, today):
                 stats["rank_compared"] += 1
                 stats["rank_moved_10pts"] += abs(worse - float(old_p[3])) > 0.10
             if worse >= 0.8 and margin:
-                rec["p"] = [int(x), med, round(worse, 2), "g"]
+                rec["p"] = [xr(x), round(float(med), 2), round(worse, 2), "g"]
                 stats["gaps"] += 1
             elif worse <= 0.2 and margin:
-                rec["p"] = [int(x), med, round(worse, 2), "s"]
+                rec["p"] = [xr(x), round(float(med), 2), round(worse, 2), "s"]
                 stats["strengths"] += 1
         # crash-dependent rows
         rows = (det[gid].get("r") or [])
@@ -181,6 +186,7 @@ def build(fips, la_det, la_counts, today):
             "script": "scripts/recompute_crash_gaps.py",
             "crash_counts": f"app/data/crash_counts/{fips}.json",
             "crash_source": cm.get("source"),
+            "crash_weighting": cm.get("weighting"),
             "crash_years": years,
             "peers": "50 most similar block groups by standardized income, homes per acre, home value, year built, share without a car, single-family share, "
                      + ("within LA County" if is_la else "from LA County plus this county (all CHP CCRS 2023-2025)" if ca else "within this county (one state crash source)"),

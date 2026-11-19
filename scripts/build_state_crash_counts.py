@@ -295,12 +295,13 @@ def build(fips, name, old_window, bundle_path):
         w_ksi = (1.0 / num_hits) if ksi else 0.0
         for i in hits:
             c = out[gids[i]]
-            c[0] = round(c[0] + w_pb, 3)
-            c[1] = round(c[1] + w_ksi, 3)
-            c[2] = round(c[2] + w_all, 3)
+            c[0] += w_pb
+            c[1] += w_ksi
+            c[2] += w_all
         for i in strict.query(p, predicate="within"):
             c = strict_out[gids[int(i)]]; c[0] += pb; c[1] += ksi; c[2] += 1
             break
+    out = {g: [round(v, 4) for v in c] for g, c in out.items()}   # sum unrounded, round once (1/k parts must add up)
     # with_coordinates above counts crashes inside the county's padded envelope; crashes outside it belong to neighbours
 
     y0, y1 = src["years"]
@@ -310,6 +311,8 @@ def build(fips, name, old_window, bundle_path):
         "where": [j["where"] for j in src["jobs"]],
         "years": [y0, y1],
         "rule": RULE,
+        "weighting": "1/k",
+        "block_group_sums": [round(sum(v[i] for v in out.values()), 3) for i in range(3)],
         "fields": ["pedestrian or bicycle crashes", "killed or seriously injured crashes", "injury or fatal crashes" if src.get("all_injury") else "all crashes"],
         "field_map": {k: (list(v) if isinstance(v, tuple) else v) for k, v in src["jobs"][0]["map"].items()},
         "field_aliases": aliases,

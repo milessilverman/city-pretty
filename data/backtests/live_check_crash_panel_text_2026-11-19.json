@@ -1,0 +1,26 @@
+{
+ "060730091081": [
+  "Crashes with someone killed or seriously injured, inside or on boundary streets3.5"
+ ],
+ "060770001011": [
+  "t, 3 with someone killed or seriously injured; only the 93% of this county's crashes that have coordinates can be placed, so true counts are higher (a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes); calming that cuts through-traffic ~16% adds ~1% for homes on those streets (assumes ~15% of homes sit on cut-through streets) total",
+  "5; a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes)",
+  "t, 3 with someone killed or seriously injured; only the 93% of this county's crashes that have coordinates can be placed, so true counts are higher (a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes); calming that cuts through-traffic ~16% adds ~1% for homes on those streets (assumes ~15% of homes sit on cut-through streets) total",
+  "Crashes with someone killed or seriously injured, inside or on boundary streets3"
+ ],
+ "060770031162": [
+  "5 with someone killed or seriously injured; only the 93% of this county's crashes that have coordinates can be placed, so true counts are higher (a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes); calming that cuts through-traffic ~16% adds ~1% for homes on those streets (assumes ~15% of homes sit on cut-through streets) total",
+  "5 crashes involving a pedestrian or cyclist inside this block group or on its boundary streets (CHP CCRS 2023–2025; similar neighborhoods: 1; a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes)",
+  "5 with someone killed or seriously injured; only the 93% of this county's crashes that have coordinates can be placed, so true counts are higher (a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes); calming that cuts through-traffic ~16% adds ~1% for homes on those streets (assumes ~15% of homes sit on cut-through streets) total",
+  "Crashes with someone killed or seriously injured, inside or on boundary streets0.5"
+ ],
+ "060490002001": [
+  "Crashes with someone killed or seriously injured, inside or on boundary streets7"
+ ],
+ "060750101011": [
+  "that have a location can be placed, so true counts are higher; pedestrian/cyclist count is a lower bound (one recorded collision partner per crash) (a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes); calming that cuts through-traffic ~16% adds ~1% for homes on those streets (assumes ~15% of homes sit on cut-through streets) total",
+  "0; a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes)",
+  "that have a location can be placed, so true counts are higher; pedestrian/cyclist count is a lower bound (one recorded collision partner per crash) (a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes); calming that cuts through-traffic ~16% adds ~1% for homes on those streets (assumes ~15% of homes sit on cut-through streets) total",
+  "Crashes with someone killed or seriously injured, inside or on boundary streets6.5"
+ ]
+}
