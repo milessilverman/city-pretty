@@ -104,12 +104,12 @@
   "timestamp": "2026-11-07T00:59:21Z"
  },
  "MD": {
-  "bytes": 332988223,
-  "made": "2026-11-07",
+  "bytes": 333905538,
+  "made": "2026-11-19",
   "method": "osmium extract -s smart, union of county boxes + 0.05 deg (osm_split.py)",
   "source": "https://download.openstreetmap.fr/extracts/north-america/us-south-latest.osm.pbf",
   "split": "us-south/maryland",
-  "timestamp": "2026-11-07T00:59:21Z"
+  "timestamp": "2026-11-19T01:25:58Z"
  },
  "ME": {
   "bytes": 113777254,

@@ -4160,6 +4160,7 @@ function sharedFemaNfhlQuery(lat, lng) {
       const v = (d && d.features) ? d.features.map(f => f.attributes) : [];
       return { ok: true, v };
     } catch (e) {
+      _femaQueryCache.delete(key);   // let the next click ask FEMA again
       return { ok: false, v: [], e };
     }
   })();
@@ -10188,19 +10189,22 @@ function pushAll(dst, src) { for (const x of src) dst.push(x); return dst; }
 // Where a county's data file is served from (app/data/county_hosts.json). GitHub Pages caps a site at 1 GB, so county files
 // live on regional Pages sites; a region is tried first only when enabled, and this site's counties/ path is the fallback.
 const COUNTY_HOSTS_READY = cpJson("county-hosts").then(d => (d && d.regions ? d : null)).catch(() => null);
-async function countyBundleSources(el) {
-  const local = el && el.dataset.src;
-  if (!local) return [];
+// A county tagged data-r2only="1" (counties/.r2-only.txt) has its files only in R2, not in this site's counties/
+// folder, so R2 is its only source; if R2 is off or unreachable the page says the file could not be loaded.
+async function countyBundleSources(el, file) {
+  const local = file === undefined ? el && el.dataset.src : file;
+  if (!local || !el) return [];
   const H = await COUNTY_HOSTS_READY, st = String(el.dataset.fips || "").slice(0, 2), out = [];
+  const r2only = el.dataset.r2only === "1";
   if (H && !/^(?:https?:)?\/\//i.test(local)) {
     if (H.r2 && H.r2.enabled && H.r2.base) {
       out.push(H.r2.base.replace(/\/?$/, "/") + local.replace(/^\/+/, ""));
     }
     for (const r of Object.values(H.regions || {})) {
-      if (r && r.enabled && r.base && (r.states || []).includes(st)) out.push(r.base.replace(/\/?$/, "/") + local.replace(/^\/+/, ""));
+      if (!r2only && r && r.enabled && r.base && (r.states || []).includes(st)) out.push(r.base.replace(/\/?$/, "/") + local.replace(/^\/+/, ""));
     }
   }
-  out.push(local);
+  if (!r2only) out.push(local);
   return out;
 }
 
@@ -10262,6 +10266,8 @@ async function loadCountyBundle(fips) {
           sources: [
             el && el.dataset.coverage === "lots"
               ? ["County data", "Not built yet for this county; only live property lines are shown", "Lot lines only", false]
+              : el && el.dataset.r2only === "1"
+              ? ["County data file", "This county's data could not be loaded: its file is kept only on the R2 data host (app/data/county_hosts.json), which " + (srcs.length ? "could not be reached or did not return it" : "is not enabled") + "; only live property lines are shown", "Not loaded", false]
               : ["County data file", "This county's data file could not be downloaded; only live property lines are shown", "Not loaded", false]
           ]
         }
@@ -10273,7 +10279,11 @@ async function loadCountyBundle(fips) {
     }
     if (el && el.dataset && el.dataset.sites) {
       try {
-        const S = await fetchJSON(el.dataset.sites);
+        // the same hosts as the data file (R2 first when enabled; R2 only for an R2-only county)
+        let S = null;
+        for (const u of await countyBundleSources(el, el.dataset.sites)) {
+          try { S = await fetchJSON(u); if (S) break; } catch (e) { console.warn("Site suggestions not available from " + u, e); S = null; }
+        }
         await loadSites();
         if (SITES && S && S.sites) {
           SITES.meta = SITES.meta || {};
@@ -10433,6 +10443,14 @@ async function openCounty(fips, wantBgId) {
     if (typeof scheduleNatLots === "function") scheduleNatLots();
     if (typeof setProgress === "function") setProgress(100);
     if (typeof setHud === "function") setHud("✓ " + cName + " Ready");
+    // The data file could not be loaded (e.g. an R2-only county while R2 is unreachable): say so instead of an empty map.
+    if (B.meta && B.meta.load_failed && B.meta.coverage === "missing") {
+      const why = cName + ": " + ((B.meta.sources && B.meta.sources[0] && B.meta.sources[0][1]) || "this county's data file could not be loaded") + ".";
+      if (typeof setHud === "function") setHud("Could not load " + cName + " data");
+      if (typeof showToast === "function") showToast(why);
+      const pn = document.getElementById("panel");
+      if (pn) { pn.innerHTML = '<p class="empty" id="county-load-failed" role="alert"></p>'; pn.querySelector("#county-load-failed").textContent = why; }
+    }
     setTimeout(() => {
       if (typeof doneProgress === "function") doneProgress();
       if (typeof hideHud === "function") hideHud();

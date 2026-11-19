@@ -1966,3 +1966,51 @@ test("a county file loads from its enabled regional site, and falls back to the 
   expect(r.b).toBe(true);   // Blount County: the regional site answered 503, the local file loaded
   expect(errors.filter((e: string) => !/County file not available/.test(e))).toEqual([]);
 });
+
+// Counties whose files are kept only in R2 (counties/.r2-only.txt, 19 Nov 2026) are not in this site's counties/
+// folder. The page asks R2 alone for them, and when R2 fails it says the county's data could not be loaded.
+test("an R2-only county loads from R2 alone, and says so when R2 fails", async ({ page, browser }) => {
+  const fs = require("fs"), path = require("path"), zlib = require("zlib");
+  const list = fs.readFileSync(path.join(__dirname, "../../counties/.r2-only.txt"), "utf8").split("\n").filter(Boolean);
+  const fips = list.find((n: string) => n.startsWith("bundle_")).slice(7, 12);
+  const hosts = JSON.parse(fs.readFileSync(path.join(__dirname, "../../app/data/county_hosts.json"), "utf8"));
+  expect(hosts.r2.enabled).toBe(true);
+  // a minimal stand-in file (the real one is not in the repository): one block group square
+  const body = zlib.gzipSync(JSON.stringify({ type: "FeatureCollection", details: {}, layers: {}, meta: { fips, county: "Test", sources: [] },
+    features: [{ type: "Feature", properties: { id: fips + "0000001" }, geometry: { type: "Polygon", coordinates: [[[-76, 39], [-75.99, 39], [-75.99, 39.01], [-76, 39]]] } }] }));
+  const r2Host = new URL(hosts.r2.base).hostname;
+  const asked: string[] = [];
+  page.on("request", (q) => { if (q.url().includes(`bundle_${fips}`)) asked.push(q.url()); });
+  await page.route(new RegExp(`r2\\.dev/counties/bundle_${fips}\\.json\\.gz`), (route) =>
+    route.fulfill({ status: 200, contentType: "application/gzip", headers: { "access-control-allow-origin": "*", etag: "\"t1\"" }, body: route.request().method() === "HEAD" ? "" : body }));
+  const errors = await openPage(page);
+  const n = await page.evaluate(async (f) => { const B = await (0, eval)("loadCountyBundle")(f); return B.features.length; }, fips);
+  expect(n).toBe(1);
+  expect(asked.length).toBeGreaterThan(0);
+  expect(asked.every((u) => new URL(u).hostname === r2Host)).toBe(true);   // never this site's counties/ path
+  expect(errors).toEqual([]);
+  // R2 down, in a fresh browser context (no cached copy): opening the county says its data could not be loaded
+  const ctx = await browser.newContext({ baseURL: test.info().project.use.baseURL });
+  const p2 = await ctx.newPage();
+  const asked2: string[] = [];
+  p2.on("request", (q) => { if (q.url().includes(`bundle_${fips}`)) asked2.push(q.url()); });
+  await p2.route(new RegExp(`r2\\.dev/counties/bundle_${fips}\\.json\\.gz`), (route) => route.fulfill({ status: 503, headers: { "access-control-allow-origin": "*" }, body: "down" }));
+  const errors2 = await openPage(p2);
+  await p2.evaluate((f) => (0, eval)("openCounty")(f), fips);
+  await expect(p2.locator("#county-load-failed")).toContainText("data could not be loaded", { timeout: 30_000 });
+  await expect(p2.locator("#county-load-failed")).toContainText("R2 data host");
+  expect(asked2.length).toBeGreaterThan(0);
+  expect(asked2.every((u) => new URL(u).hostname === r2Host)).toBe(true);
+  expect(errors2).toEqual([]);
+  await ctx.close();
+});
+
+test("site-suggestion files are asked of R2 first, like the county data files", async ({ page }) => {
+  const sitesFrom: string[] = [];
+  page.on("request", (q) => { if (/sites_24003\.json\.gz/.test(q.url())) sitesFrom.push(new URL(q.url()).hostname); });
+  await page.route(/r2\.dev\/counties\/(bundle|sites)_24003\.json\.gz/, (route) => route.fulfill({ status: 503, headers: { "access-control-allow-origin": "*" }, body: "down" }));
+  await openPage(page);
+  await page.evaluate(() => (0, eval)("loadCountyBundle")("24003"));
+  expect(sitesFrom[0]).toMatch(/r2\.dev$/);
+  expect(sitesFrom).toContain("127.0.0.1");   // R2 answered 503, so the local copy was used
+});

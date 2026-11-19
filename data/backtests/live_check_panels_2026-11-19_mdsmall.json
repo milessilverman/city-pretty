@@ -1,0 +1,595 @@
+{
+ "ran_on": "2026-11-19T18:26:35.802Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "24023": {
+   "state": "MD",
+   "points": [
+    {
+     "bg": "240230006013",
+     "lat": 39.416042,
+     "lng": -79.416951,
+     "service": "Maryland Parcel Boundaries (MD iMAP / MDP / SDAT)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $230k, rent $579/mo, homes 772"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 6 pts (current release); page: 6 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 5.9 pts below its 50% goal; box: \"5.9 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for MD"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Garrett County · 240230006013; page \"Census area: Garrett County · block group 240230006013(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1014 for 24023; page \"HUD Fair Market Rent (FY2027): 1 bed $877 · 2 bed $1,014 · 3 bed $1,339/moGarrett County, MD. HUD's voucher benchmark (rent plus utilities), not a market asking\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "re-checked alone: FEMA now AE; page \"FEMA flood zone: Zone AE · special flood hazard areaFederally backed mortgages here require flood insurance.(FEMA Nation\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 2371 ft; page \"Ground elevation: 2,371 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "fema_first": {
+       "pass": false,
+       "detail": "FEMA now: AE; page \"FEMA flood zone: Not available (signal is aborted without reason)(FEMA National Flood Hazard Layer)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "240230006012",
+     "lat": 39.408586,
+     "lng": -79.396911,
+     "service": "Maryland Parcel Boundaries (MD iMAP / MDP / SDAT)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $282k, rent $1,604/mo, homes 581"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 18 pts (current release); page: 18 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 17.5 pts below its 50% goal; box: \"17.5 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for MD"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Garrett County · 240230006012; page \"Census area: Garrett County · block group 240230006012(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1014 for 24023; page \"HUD Fair Market Rent (FY2027): 1 bed $877 · 2 bed $1,014 · 3 bed $1,339/moGarrett County, MD. HUD's voucher benchmark (rent plus utilities), not a market asking\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 2448 ft; page \"Ground elevation: 2,448 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "240230007004",
+     "lat": 39.412041,
+     "lng": -79.359458,
+     "service": "Maryland Parcel Boundaries (MD iMAP / MDP / SDAT)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $234k, rent $708/mo, homes 959"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 7 pts (current release); page: 7 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 6.7 pts below its 50% goal; box: \"6.7 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for MD"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Garrett County · 240230007004; page \"Census area: Garrett County · block group 240230007004(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1014 for 24023; page \"HUD Fair Market Rent (FY2027): 1 bed $877 · 2 bed $1,014 · 3 bed $1,339/moGarrett County, MD. HUD's voucher benchmark (rent plus utilities), not a market asking\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 2511 ft; page \"Ground elevation: 2,511 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8991' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-79.416951%2C39.416042&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8991' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8991' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_24023.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_24023.json.gz"
+   ]
+  },
+  "24029": {
+   "state": "MD",
+   "points": [
+    {
+     "bg": "240299502003",
+     "lat": 39.297153,
+     "lng": -76.126923,
+     "service": "Maryland Parcel Boundaries (MD iMAP / MDP / SDAT)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $273k, rent $1,466/mo, homes 324"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for MD"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Kent County · 240299502003; page \"Census area: Kent County · block group 240299502003(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1241 for 24029; page \"HUD Fair Market Rent (FY2027): 1 bed $1,140 · 2 bed $1,241 · 3 bed $1,603/moKent County, MD. HUD's voucher benchmark (rent plus utilities), not a market asking \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 87 ft; page \"Ground elevation: 87 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "240299504002",
+     "lat": 39.179226,
+     "lng": -76.130445,
+     "service": "Maryland Parcel Boundaries (MD iMAP / MDP / SDAT)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $397k, rent $1,483/mo, homes 1,059"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 15 pts (current release); page: 15 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 15.3 pts below its 50% goal; box: \"15.3 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for MD"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Kent County · 240299504002; page \"Census area: Kent County · block group 240299504002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1241 for 24029; page \"HUD Fair Market Rent (FY2027): 1 bed $1,140 · 2 bed $1,241 · 3 bed $1,603/moKent County, MD. HUD's voucher benchmark (rent plus utilities), not a market asking \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 37 ft; page \"Ground elevation: 37 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "240299503001",
+     "lat": 39.233577,
+     "lng": -76.073681,
+     "service": "Maryland Parcel Boundaries (MD iMAP / MDP / SDAT)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $303k, rent $1,272/mo, homes 771"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 15 pts (current release); page: 15 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 15.3 pts below its 50% goal; box: \"15.3 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for MD"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Kent County · 240299503001; page \"Census area: Kent County · block group 240299503001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1241 for 24029; page \"HUD Fair Market Rent (FY2027): 1 bed $1,140 · 2 bed $1,241 · 3 bed $1,603/moKent County, MD. HUD's voucher benchmark (rent plus utilities), not a market asking \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 66 ft; page \"Ground elevation: 66 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8991' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8991' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8991' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_24029.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_24029.json.gz"
+   ]
+  },
+  "24047": {
+   "state": "MD",
+   "points": [
+    {
+     "bg": "240479501002",
+     "lat": 38.386513,
+     "lng": -75.063858,
+     "service": "Maryland Parcel Boundaries (MD iMAP / MDP / SDAT)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $560k, rent $1,282/mo, homes 5,610"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 25 pts (current release); page: 25 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 25.1 pts below its 30% goal; box: \"25.1 pts below its 30% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for MD"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Worcester County · 240479501002; page \"Census area: Worcester County · block group 240479501002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1184 for 24047; page \"HUD Fair Market Rent (FY2027): 1 bed $995 · 2 bed $1,184 · 3 bed $1,639/moWorcester County, MD. HUD's voucher benchmark (rent plus utilities), not a market aski\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 15 ft; page \"Ground elevation: 15 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "240479507002",
+     "lat": 38.401306,
+     "lng": -75.192795,
+     "service": "Maryland Parcel Boundaries (MD iMAP / MDP / SDAT)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $345k, rent $2,051/mo, homes 1,255"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for MD"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Worcester County · 240479507002; page \"Census area: Worcester County · block group 240479507002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1184 for 24047; page \"HUD Fair Market Rent (FY2027): 1 bed $995 · 2 bed $1,184 · 3 bed $1,639/moWorcester County, MD. HUD's voucher benchmark (rent plus utilities), not a market aski\""
+      },
+      "fema": {
+       "pass": null,
+       "detail": "FEMA now: did not answer; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 16 ft; page \"Ground elevation: 16 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "240479514001",
+     "lat": 38.068593,
+     "lng": -75.425565,
+     "service": "Maryland Parcel Boundaries (MD iMAP / MDP / SDAT)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $199k, rent $791/mo, homes 475"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for MD"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Worcester County · 240479514001; page \"Census area: Worcester County · block group 240479514001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1184 for 24047; page \"HUD Fair Market Rent (FY2027): 1 bed $995 · 2 bed $1,184 · 3 bed $1,639/moWorcester County, MD. HUD's voucher benchmark (rent plus utilities), not a market aski\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 32 ft; page \"Ground elevation: 32 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "retried": [
+      "FEMA flood zone: Not available (Failed to fetch)(FEMA National Flood Hazard Laye"
+     ],
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-75.063858%2C38.386513&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8991' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8991' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-75.192795%2C38.401306&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-75.192795%2C38.401306&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8991' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?f=json&geometry=-75.425565%2C38.068593&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialR",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-75.425565%2C38.068593&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-75.425565%2C38.068593&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelInter",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_24047.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_24047.json.gz"
+   ]
+  }
+ },
+ "fema_rechecked_on": "2026-11-19T18:27:07.520Z"
+}

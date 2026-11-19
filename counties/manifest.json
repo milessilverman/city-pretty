@@ -3350,6 +3350,18 @@
    ]
   },
   {
+   "fips": "24001",
+   "name": "Allegany County",
+   "state": "MD",
+   "block_groups": 53,
+   "bundle_mb": 0.7,
+   "built": "2026-11-19",
+   "osm": "2026-11-19T01\\:25\\:58Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "24003",
    "name": "Anne Arundel County",
    "state": "MD",
@@ -3370,6 +3382,30 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "24009",
+   "name": "Calvert County",
+   "state": "MD",
+   "block_groups": 41,
+   "bundle_mb": 0.6,
+   "built": "2026-11-19",
+   "osm": "2026-11-19T01\\:25\\:58Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "24011",
+   "name": "Caroline County",
+   "state": "MD",
+   "block_groups": 22,
+   "bundle_mb": 0.4,
+   "built": "2026-11-19",
+   "osm": "2026-11-19T01\\:25\\:58Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "24013",
@@ -3405,6 +3441,18 @@
    "crash_years": null
   },
   {
+   "fips": "24019",
+   "name": "Dorchester County",
+   "state": "MD",
+   "block_groups": 30,
+   "bundle_mb": 1.1,
+   "built": "2026-11-19",
+   "osm": "2026-11-19T01\\:25\\:58Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "24021",
    "name": "Frederick County",
    "state": "MD",
@@ -3414,6 +3462,18 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "24023",
+   "name": "Garrett County",
+   "state": "MD",
+   "block_groups": 24,
+   "bundle_mb": 0.7,
+   "built": "2026-11-19",
+   "osm": "2026-11-19T01\\:25\\:58Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "24025",
@@ -3438,6 +3498,18 @@
    "crash_years": null
   },
   {
+   "fips": "24029",
+   "name": "Kent County",
+   "state": "MD",
+   "block_groups": 18,
+   "bundle_mb": 0.5,
+   "built": "2026-11-19",
+   "osm": "2026-11-19T01\\:25\\:58Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "24031",
    "name": "Montgomery County",
    "state": "MD",
@@ -3460,6 +3532,18 @@
    "crash_years": null
   },
   {
+   "fips": "24035",
+   "name": "Queen Anne's County",
+   "state": "MD",
+   "block_groups": 35,
+   "bundle_mb": 0.7,
+   "built": "2026-11-19",
+   "osm": "2026-11-19T01\\:25\\:58Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "24037",
    "name": "St. Mary's County",
    "state": "MD",
@@ -3469,6 +3553,30 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "24039",
+   "name": "Somerset County",
+   "state": "MD",
+   "block_groups": 22,
+   "bundle_mb": 0.8,
+   "built": "2026-11-19",
+   "osm": "2026-11-19T01\\:25\\:58Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "24041",
+   "name": "Talbot County",
+   "state": "MD",
+   "block_groups": 27,
+   "bundle_mb": 0.6,
+   "built": "2026-11-19",
+   "osm": "2026-11-19T01\\:25\\:58Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "24043",
@@ -3491,6 +3599,18 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "24047",
+   "name": "Worcester County",
+   "state": "MD",
+   "block_groups": 55,
+   "bundle_mb": 0.8,
+   "built": "2026-11-19",
+   "osm": "2026-11-19T01\\:25\\:58Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "24510",

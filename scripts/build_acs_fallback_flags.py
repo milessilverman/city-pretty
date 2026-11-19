@@ -83,6 +83,7 @@ def same(a, b):
 
 def main():
     cache = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.expanduser("~"), ".cache", "city-pretty", "acs")
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import r2_only; r2_only.require_local("build_acs_fallback_flags.py")   # R2-only county files must be on disk, or they would be dropped
     files = sorted(glob.glob(os.path.join(ROOT, "counties", "bundle_*.json.gz")))
     corr = json.load(open(os.path.join(ROOT, "app", "data", "bundle_corrections.json"))).get("block_groups", {})
     vint = Counter()
