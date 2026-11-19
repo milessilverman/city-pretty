@@ -18,7 +18,9 @@ const here = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteRoot = process.env.SITE_ROOT || here;
 const PORT = Number(process.env.LIVE_PORT || 8897);
 
-const points = process.argv.slice(2).map((a) => { const [label, fips, lat, lng] = a.split("|"); return { label, fips, lat: +lat, lng: +lng }; });
+// "LABEL|fips|lat|lng", or "LABEL|fips|FIND|R1-1" (Los Angeles: a point inside a zoning polygon of that zone), or
+// "LABEL|ENGINE:VT|lat|lng" (see below; OLD_PAGE=1 builds the exclusion flags the way the 19 Nov 2026 base page did)
+const points = process.argv.slice(2).map((a) => { const [label, fips, lat, lng] = a.split("|"); return lat === "FIND" ? { label, fips, find: lng } : fips.startsWith("ENGINE:") ? { label, fips: "00000", engine: fips.slice(7), lat: +lat, lng: +lng } : { label, fips, lat: +lat, lng: +lng }; });
 if (!points.length) { console.error('usage: live_check_exclusions.mjs "LABEL|fips|lat|lng" ...'); process.exit(2); }
 
 const busy = await fetch(`http://127.0.0.1:${PORT}/`, { signal: AbortSignal.timeout(1500) }).then(() => true, () => false);
@@ -35,11 +37,47 @@ try {
     await page.addInitScript(() => { try { localStorage.setItem("cp_welcome_seen", "1"); } catch (e) {} });
     await page.goto(`http://127.0.0.1:${PORT}/city-pretty/`);
     await page.waitForFunction(() => document.querySelector("#loading")?.hidden === true, null, { timeout: 120000 });
-    if (P.fips !== "06037") {
+    if (P.fips !== "06037" && !P.engine) {
       await page.evaluate((f) => (0, eval)("openCounty")(f), P.fips);
       await page.waitForFunction((f) => (window.D_OC && window.D_OC.meta && window.D_OC.meta.fips === f) || false, P.fips, { timeout: 180000 }).catch(() => {});
     }
     await page.waitForFunction(() => { try { return (0, eval)("STATE_HOUSING_LAWS_DATA").length > 0; } catch { return false; } }, null, { timeout: 30000 }).catch(() => {});
+    if (P.find) {
+      // Los Angeles only: the centre of a real zoning polygon of that zone from the page's own zoning layer
+      const f = await page.evaluate((zone) => {
+        const ev = (s) => (0, eval)(s), Z = ev("D").layers.zoning, zCell = ev("zCell"), zoneAt = ev("zoneAt");
+        for (const k of Object.keys(Z.cells)) for (const z of zCell(k)) {
+          if (z.zone !== zone || !z.rings || !z.rings[0]) continue;
+          const r = z.rings[0], c = { lat: r.reduce((s, q) => s + q[0], 0) / r.length, lng: r.reduce((s, q) => s + q[1], 0) / r.length };
+          const hit = zoneAt(c);
+          if (hit && hit.zone === zone && c.lat > 33.9 && c.lat < 34.2 && c.lng > -118.5 && c.lng < -118.2) return c;
+        }
+        return null;
+      }, P.find);
+      if (f) { P.lat = f.lat; P.lng = f.lng; }
+    }
+    if (P.engine) {
+      // States where the page has no zoning source for the lot: the page's own flood and fire checks run on the real point
+      // (lotChecks, live FEMA and CAL FIRE services), a single-family zoning code is supplied by this script, and the page's own
+      // evaluateByRightHousing screens it. The exclusion flags are built exactly as the page builds them for its checkout.
+      const e = await page.evaluate(async ({ lat, lng, state, stepdown }) => {
+        const ev = (x) => (0, eval)(x);
+        const R = await ev("lotChecks")({ lat, lng }, {});
+        const hist = (R && R.hpoz && R.hpoz.ok) ? false : null;
+        const ex = { historic_district_hpoz: hist, coastal_commission_or_sma: stepdown, fema_100yr_floodway: (R && R.fema) ? !!R.fema.sfha : null,
+          calfire_or_state_vhfhsz: (R && R.fire) ? !!R.fire.vh : null, airport_noise_or_runway_zone: stepdown, working_waterfront_or_port: stepdown,
+          wekiva_or_everglades_protection_area: stepdown, williamson_or_ag_preserve: stepdown, public_or_tribal_land: stepdown,
+          has_active_single_family_stepdown: stepdown, population_threshold_ineligible: stepdown };
+        const res = ev("evaluateByRightHousing")({ parcel_id: "check", state_code: state, county_fips: null, municipality_pop: null, county_pop: null, base_zoning_code: "R-1",
+          is_commercial_or_mixed_use: false, is_single_family_residential: true, dist_to_heavy_rail_mi: null, dist_to_frequent_bus_or_brt_mi: null, exclusions: ex });
+        return { fema: R && R.fema ? R.fema.label : "not answered", flood_flag: ex.fema_100yr_floodway, fire_flag: ex.calfire_or_state_vhfhsz,
+          applied: res.applicable_statutes.map((x) => x.id), not_confirmed: res.not_confirmed.map((n) => n.id + ": " + n.reason),
+          excluded_by_statute: (res.excluded_by_statute || []).map((n) => n.id + ": " + n.reason) };
+      }, { lat: P.lat, lng: P.lng, state: P.engine, stepdown: process.env.OLD_PAGE ? false : null });
+      result.push({ ...P, mode: "engine on the real point; zoning R-1 supplied by the script", ...e });
+      await page.close();
+      continue;
+    }
     await page.evaluate((ll) => (0, eval)("houseAt")(ll), { lat: P.lat, lng: P.lng });
     await page.waitForFunction(() => { const ah = (0, eval)("typeof activeHouse !== 'undefined' ? activeHouse : null"); const box = document.querySelector("#house");
       return box && !box.querySelector(".house-loading") && ah && ah.audit; }, null, { timeout: 60000 }).catch(() => {});
