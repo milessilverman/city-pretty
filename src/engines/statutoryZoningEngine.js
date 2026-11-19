@@ -64,18 +64,20 @@ function statuteAppliesTo(rec, parcel) {
   switch (rec.id) {
     case "ca_sb79_tier1":
     case "ca_sb79_tier2": {
-      if (!(rec.eligible_counties || []).includes(parcel.county_fips)) return { applies: false, missing };
+      // The statute's test is an "urban transit county" (more than 15 passenger rail stations, Gov. Code 65912.156(q)), not a
+      // fixed list. A county outside the list on file is reported as not confirmed when a stop is in range, not ruled out.
       if (heavy == null) { missing.push("distance to heavy rail"); return { applies: false, missing }; }
       const minD = rec.distance_to_transit_min_mi || 0;
       if (heavy > rec.distance_to_transit_max_mi || (minD > 0 && heavy <= minD)) return { applies: false, missing };
+      if (!(rec.eligible_counties || []).includes(parcel.county_fips)) { missing.push("whether this county is an urban transit county (more than 15 passenger rail stations)"); return { applies: false, missing }; }
       return { applies: popAtLeast(rec.city_population_min), missing };
     }
     case "ca_sb79_tier2_light_rail_quarter":
     case "ca_sb79_tier2_light_rail_half": {
-      if (!(rec.eligible_counties || []).includes(parcel.county_fips)) return { applies: false, missing };
       if (light == null) { missing.push("distance to light rail / qualifying BRT"); return { applies: false, missing }; }
       const minD = rec.distance_to_transit_min_mi || 0;
       if (light > rec.distance_to_transit_max_mi || (minD > 0 && light <= minD)) return { applies: false, missing };
+      if (!(rec.eligible_counties || []).includes(parcel.county_fips)) { missing.push("whether this county is an urban transit county (more than 15 passenger rail stations)"); return { applies: false, missing }; }
       return { applies: popAtLeast(rec.city_population_min), missing };
     }
     case "ca_sb9_lot_split":
@@ -85,8 +87,14 @@ function statuteAppliesTo(rec, parcel) {
       if (!d.length) { missing.push("distance to major transit stop"); return { applies: false, missing }; }
       return { applies: Math.min(...d) <= rec.distance_to_transit_max_mi, missing };
     }
-    case "fl_live_local":
-      return { applies: comm, missing };
+    case "fl_live_local": {
+      // Fla. Stat. 166.04151(7)(a)1: areas zoned commercial, industrial or mixed use, and also land owned by a county,
+      // municipality or school district and religious-institution land (over 3 acres), regardless of the underlying zoning.
+      if (comm) return { applies: true, missing };
+      if (parcel.is_public_or_religious_land === true) return { applies: true, missing };
+      if (parcel.is_public_or_religious_land == null) missing.push("zoning as commercial, industrial or mixed use, or who owns the parcel (county, city or school district land, or a religious institution's land over 3 acres, qualifies regardless of zoning)");
+      return { applies: false, missing };
+    }
     case "tx_sb840": {
       if (!comm) return { applies: false, missing };
       if (pop == null) missing.push("municipality population");
@@ -149,7 +157,7 @@ function evaluateByRightHousing(parcel, laws) {
 
   const hasHardPhysicalExclusion =
     ex.fema_100yr_floodway || ex.calfire_or_state_vhfhsz || ex.williamson_or_ag_preserve ||
-    ex.public_or_tribal_land || ex.everglades_or_wekiva_or_trpa;
+    ex.public_or_tribal_land;
   if (hasHardPhysicalExclusion) return base;
 
   for (const rec of lawList) {

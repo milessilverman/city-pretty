@@ -75,7 +75,7 @@ export interface StatutoryZoningResult {
     airport_noise_or_runway_zone?: boolean;
     williamson_or_ag_preserve?: boolean;
     public_or_tribal_land?: boolean;
-    everglades_or_wekiva_or_trpa?: boolean;
+    wekiva_or_everglades_protection_area?: boolean;
     population_threshold_ineligible?: boolean;
     [k: string]: boolean | undefined;
   };
