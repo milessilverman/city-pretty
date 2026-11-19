@@ -7,6 +7,26 @@ Rule for every item: a number reaches the page or the AI only if it was fetched 
 is withheld with the reason. Each item ends with tests passing and a commit; anything I get wrong is reported in the
 audit doc the same day.
 
+## Status 19 Nov 2026 (planned rail corridors)
+
+- **Done:** `app/data/intercity_transit_corridors.json` now holds all 69 FRA FY22 Corridor ID selections (4 Amtrak-led, 65 by
+  others; Amtrak's release of 2023-12-08 gives the same 69) plus the unconfirmed Austin-San Antonio record. Each lists only the
+  cities the document names (309 stop records), each with its quote, the Census place and county lookups, and
+  `county_on_page`. Source texts are in `research/corridors/`. Brightline West, Cascadia and Dallas-Houston carry their sponsor
+  or Amtrak documents and status as stated. The Invest view's Transit card says how many neighborhoods lie within 1 mile of
+  each stop city centre (`src/engines/corridorStopAreas.js`), with links. Checks: `tests/unit/transitCorridors.test.ts`,
+  `scripts/live_check_corridors.mjs` (three counties, counts agree with Census TIGERweb).
+- **Documents not obtained (the owner supplies them through a research request):** Amtrak's Corridor Vision report
+  (media.amtrak.com link from the 2021 release returns 404, amtrak.com 403, amtrakconnectsus.com not configured, Internet
+  Archive resets), the FRA Amtrak Daily Long-Distance Service Study final report and appendices (railroads.dot.gov 403;
+  fralongdistancerailstudy.org says the files are "being re-attached" and its media library holds only unrelated images),
+  California High-Speed Rail's own status pages (hsr.ca.gov bot challenge), a current Texas Central status (its site shows
+  posts only to 2020), and TxDOT's rail pages. So no corridor was built from the Amtrak vision or the long-distance study.
+- **Next:** when those documents arrive, add their corridors the same way (`scripts` for the Census lookups are not in the
+  repository; the lookup URL is recorded on each stop). The Worker's `transitProjectsFor` still matches intercity corridors
+  by state, not by county (outside this change; `workers/localData.ts`). `app/app.js` builds the advisor's
+  `intercityCorridor` from the first corridor with a stop in the county only.
+
 ## Status 19 Nov 2026 (hosting and the advisor)
 
 - **County files are served from Cloudflare R2** (bucket `city-pretty-data`, public r2.dev address in

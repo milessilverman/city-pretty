@@ -1024,3 +1024,29 @@ passenger rail stations)" for SB 79.
   renamed it `BOXES`, so every county that clips a state or regional extract stopped with `NameError: name 'BOX' is not
   defined` before writing anything. Three references corrected. No published file was affected: no county had been
   built with the broken code.
+
+### Planned-rail corridors: the three Phoenix, Front Range and Brightline West station lists replaced (19 Nov 2026)
+
+- **Old -> real.** `app/data/intercity_transit_corridors.json` listed stations that no document named (for example Phoenix
+  Tempe/Chandler/Coolidge/Marana as Phoenix-Tucson stations, city centres from OpenStreetMap labelled as stations). It now lists,
+  for each of the 69 FRA FY22 Corridor ID selections, only the cities the FRA text names, with the sentence quoted. Phoenix-Tucson:
+  Phoenix, Buckeye, Tucson. Brightline West: Rancho Cucamonga, Hesperia, Victorville, Las Vegas (FRA) and Apple Valley (the
+  sponsor's pages; its "Victor Valley Station" is "Situated in Apple Valley", so Victorville and Apple Valley disagree between
+  documents and both are listed). Each stop sits at the Census internal point of the city, not at a station; the county is the
+  one containing that point (a city can reach into other counties; New York City's point is in Kings County).
+- **Sources.** FRA "FY22 Corridor Identification and Development Program Selections": text read on 18 Nov from an archived copy
+  (railroads.dot.gov returns 403); count checked against Amtrak's release of 2023-12-08 (4 + 65 = 69). Numbers appear only
+  with a quote: Brightline West 218 miles / 200 mph / about 2 hours (sponsor pages), Dallas-Houston about 240 miles and 205 mph
+  (Amtrak, 2023-08-09), Scranton-New York about 2 h 50 min and 110 mph on one segment (Amtrak, 2023-03-22). Status is the
+  document's own words; Cascadia's WSDOT page says its plan "will not: Select a preferred route. Identify station
+  locations." California High-Speed Rail's and Texas Central's current status were not obtained.
+- **Leads from the earlier branch (4e76a8a).** Held up in the FRA text: Phoenix-Tucson, Front Range, Brightline West, Cascadia
+  (Seattle, Portland, Eugene), Houston to San Antonio (Rosenberg, Flatonia, Seguin). Did not hold: Austin-San Antonio (in no
+  fetched document; kept as unconfirmed). Its "Seattle" and "Portland" stops were right but it omitted "Vancouver, Canada".
+- **Test fixed.** `tests/unit/studyCorrections1119.test.ts` expected the lead agency "Arizona Department of Transportation
+  (ADOT)"; the FRA text has no acronym, so it now expects the name as written.
+- **Not obtained:** Amtrak's Corridor Vision report, the FRA Long-Distance Service Study report, hsr.ca.gov status pages, TxDOT
+  rail pages (see `WORK-QUEUE.md`). No corridor was built from Amtrak's vision or the long-distance study.
+- Live check (19 Nov 2026, `scripts/live_check_corridors.mjs`, LIVE_PORT 9061): Guadalupe TX (Seguin, 10 neighborhoods),
+  Larimer CO (Fort Collins, 21) and Rowan NC (Salisbury, 11, on two corridors) match Census TIGERweb block groups within 1 mile;
+  `data/backtests/live_check_corridors_2026-11-19.json`.
