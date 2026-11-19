@@ -1,13 +1,14 @@
 {
   "_source": {
-    "note": "Regional GitHub Pages sites and Cloudflare R2 bucket that host county data files. GitHub Pages publishes at most 1 GB per site; Cloudflare R2 provides a 10 GB free tier with zero egress fees (Access-Control-Allow-Origin: *). A remote source is used only when enabled; otherwise the page loads the file from this site's counties/ folder.",
+    "note": "Regional GitHub Pages sites (and, once one exists, a Cloudflare R2 bucket) that host county data files. GitHub Pages publishes at most 1 GB per site. Cloudflare's R2 pricing page (developers.cloudflare.com/r2/pricing, read 19 Nov 2026): free tier 'Storage | 10 GB-month / month' and 'There are no charges for egress bandwidth'. A remote source is used only when enabled, after its site was checked to serve a county file with access-control-allow-origin: *; otherwise the page loads the file from this site's counties/ folder.",
     "limit_bytes_per_site": 1073741824,
     "split_script": "scripts/split_county_hosting.py"
   },
   "r2": {
     "enabled": false,
     "base": "https://pub-data.citypretty.org/",
-    "note": "Cloudflare R2 public bucket (10 GB free tier, 0 egress fees, CORS enabled). Recommended by Audit P1-10 to avoid maintaining 4 separate GitHub repositories."
+    "status": "placeholder",
+    "note": "Placeholder: no bucket has been created. pub-data.citypretty.org did not resolve on 19 Nov 2026, so nothing has been checked (CORS included). Enable only after a county file is served from the real bucket with access-control-allow-origin: *. Suggested in audit item P1-10."
   },
   "regions": {
     "northeast": {

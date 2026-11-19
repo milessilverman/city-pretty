@@ -4,9 +4,9 @@
 Data Source:
   Federal Housing Finance Agency (FHFA)
   URL: https://www.fhfa.gov/hpi/download/annual/hpi_at_tract.csv
-  Licence: Public domain / freely available for download (HPI FAQ Q32)
+  Licence: not confirmed; no FHFA licence text found on 19 Nov 2026 (an "FAQ Q32" cited here earlier could not be found)
   Citation: "Source: FHFA HPI (Annual, All-Transactions)"
-  Status Label: "developmental" (per FHFA FAQ Q5: tract-level HPI should be considered developmental)
+  Status Label: "developmental" (fhfa.gov/data/hpi/datasets lists the file as "Census Tracts (Developmental Index; Not Seasonally Adjusted)")
 
 File Format:
   Long-form CSV: one row per tract per year.
@@ -173,12 +173,12 @@ def fetch_fhfa_tract_hpi(csv_path_or_url=None, target_county_fips=None):
             "source": CITATION,
             "url": source_url if source_url.startswith("http") else DEFAULT_URL,
             "status_label": STATUS_LABEL,
-            "licence": "Public domain / freely available for download (FHFA FAQ Q32)",
+            "licence": "Not confirmed: no FHFA licence text found (19 Nov 2026); the FAQ Q32 cited earlier could not be found",
             "retrieved_at": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
             "target_county_fips": target_county_fips,
             "tracts_count": len(data),
             "citation": CITATION,
-            "note": "Tract-level All-Transactions HPI is developmental per FHFA FAQ Q5. Missing years are null, not zeroed.",
+            "note": "FHFA lists tract indexes as 'Census Tracts (Developmental Index; Not Seasonally Adjusted)' (fhfa.gov/data/hpi/datasets, read 19 Nov 2026). Missing years are null, not zeroed.",
         },
         "tracts": data,
     }

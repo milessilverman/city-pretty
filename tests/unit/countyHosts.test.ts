@@ -35,5 +35,8 @@ describe("county hosts", () => {
     expect(H.r2).toBeDefined();
     expect(H.r2.base).toMatch(/^https:\/\//);
     expect(typeof H.r2.enabled).toBe("boolean");
+    // 19 Nov 2026: the R2 base host did not resolve; a placeholder must stay disabled until a real bucket is checked.
+    if (H.r2.status === "placeholder") expect(H.r2.enabled).toBe(false);
+    expect(H.r2.note).not.toMatch(/CORS enabled/);
   });
 });

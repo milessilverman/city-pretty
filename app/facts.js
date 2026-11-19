@@ -253,16 +253,16 @@ export function fromWorker(f) {
   const nri = f.national_risk_index;
   if (nri && nri.ok && nri.value) {
     const v = nri.value;
-    const scoreStr = v.risk_score != null ? `Score ${Math.round(v.risk_score)}/100 (${v.risk_rating || "Rated"})` : (v.risk_rating || "On file");
-    rows.push(ok("Natural hazard risk (FEMA NRI)", scoreStr, nri.source.publisher, nri.source.url,
-      `Tract ${v.tract_fips || ""} · Social vulnerability: ${v.social_vulnerability_rating || "N/A"}, Resilience: ${v.community_resilience_rating || "N/A"}`));
+    const scoreStr = v.risk_score != null ? `Relative score ${Math.round(v.risk_score)} of 100 (${v.risk_rating || "no rating"})` : (v.risk_rating || "On file");
+    rows.push(ok("Natural hazard risk, relative to other tracts (FEMA National Risk Index)", scoreStr, nri.source.publisher, nri.source.url,
+      `Census tract ${v.tract_fips || ""}, ${nri.source.vintage || "FEMA NRI"}. A score compares this tract with others; it is not a chance of loss. FEMA: "meant for planning purposes only" and "not a substitute for localized risk assessment analysis." Social vulnerability: ${v.social_vulnerability_rating || "not on file"}; community resilience: ${v.community_resilience_rating || "not on file"}.`));
   }
   const seis = f.seismic_design;
   if (seis && seis.ok && seis.value) {
     const v = seis.value;
-    const label = v.seismic_design_category ? `Category ${v.seismic_design_category}${v.pga_m != null ? ` (PGA ${v.pga_m}g)` : ""}` : (v.pga_m != null ? `PGA ${v.pga_m}g` : "Mapped");
-    rows.push(ok("Earthquake design (USGS ASCE 7-22)", label, seis.source.publisher, seis.source.url,
-      `Mapped seismic design parameters from USGS.`));
+    const label = v.seismic_design_category ? `Seismic Design Category ${v.seismic_design_category}${v.pga_m != null ? ` (PGA_M ${v.pga_m} g)` : ""}` : (v.pga_m != null ? `PGA_M ${v.pga_m} g` : "Mapped");
+    rows.push(ok("Building-code earthquake design values (USGS, ASCE 7-22)", label, seis.source.publisher, seis.source.url,
+      `Assumes Site Class ${v.site_class || "D"} soil and Risk Category ${v.risk_category || "II"} (an ordinary building); the category can differ on the real soil. Design values for engineers, not a forecast of shaking or of damage.`));
   }
   const hp = f.health_profile;
   if (hp && hp.ok && hp.value) {
@@ -275,58 +275,53 @@ export function fromWorker(f) {
     if (ghlth != null) parts.push(`Fair/poor health: ${ghlth}%`);
     if (asthma != null) parts.push(`Asthma: ${asthma}%`);
     if (obesity != null) parts.push(`Obesity: ${obesity}%`);
-    if (lpa != null) parts.push(`Inactivity: ${lpa}%`);
-    const label = parts.length ? parts.join(" · ") : "Tract profile on file";
-    rows.push(ok("Public health profile (CDC PLACES)", label, hp.source.publisher, hp.source.url,
-      `Tract ${v.tract_fips || ""} population ${v.population != null ? v.population.toLocaleString("en-US") : "N/A"}`));
+    if (lpa != null) parts.push(`No leisure-time activity: ${lpa}%`);
+    const label = parts.length ? parts.join(" · ") + " of adults (model estimates)" : "Tract profile on file";
+    rows.push(ok("Adult health estimates for the census tract (CDC PLACES)", label, hp.source.publisher, hp.source.url,
+      `Census tract ${v.tract_fips || ""}; ${hp.source.vintage || "CDC PLACES"}. CDC: "model-based census tract estimates", not counts of people here; CDC cautions against using them to evaluate local programs. 2020 Census population ${v.population != null ? v.population.toLocaleString("en-US") : "not on file"}.`));
   }
   const sch = f.nearby_schools;
   if (sch && sch.ok && sch.value) {
     const v = sch.value;
     const closest = v.schools && v.schools[0];
-    const label = closest ? `${closest.name} (${closest.distance_m != null ? Math.round(closest.distance_m * 3.28084) + " ft" : "nearby"})` : `${v.count} schools within 2 km`;
-    rows.push(ok("Nearby public schools (NCES EDGE)", label, sch.source.publisher, sch.source.url,
-      `${v.count} public school(s) within 2 km.`));
+    const label = closest ? `${closest.name} (${closest.distance_m != null ? Math.round(closest.distance_m * 3.28084).toLocaleString("en-US") + " ft straight line" : "distance not on file"})` : `${v.count} schools within 2 km`;
+    rows.push(ok("Nearest public school listing (NCES)", label, sch.source.publisher, sch.source.url,
+      `${v.count} NCES public school record(s) within 2 km${v.school_year ? `, school year ${v.school_year}` : ""}. The list includes charter, virtual, hospital and detention programs; it does not say which school this address is assigned to.`));
   }
   const wlk = f.walkability;
   if (wlk && wlk.ok && wlk.value) {
     const v = wlk.value;
-    rows.push(ok("Walkability (EPA Walkability Index)", `${v.walkability_index} / 20 (${v.category})`, wlk.source.publisher, wlk.source.url,
-      `Block group ${v.block_group_fips || ""} · National Walkability Index (2021)`));
+    rows.push(ok("Walkability rank (EPA National Walkability Index)", `${v.walkability_index} of 20 (${v.category})`, wlk.source.publisher, wlk.source.url,
+      `Block group ${v.block_group_fips || ""} (2019 block groups), EPA 2021 version. Ranks the block group against all U.S. block groups on intersection density, distance to the nearest transit stop and the mix of jobs and homes; it does not measure sidewalks or safety.`));
   }
-  const slr = f.sea_level_rise;
-  if (slr && slr.ok && slr.value) {
-    const v = slr.value;
-    const label = v.in_low_lying_slr_area ? `In ${v.scenario_ft}ft SLR inundation zone` : `Above ${v.scenario_ft}ft SLR inundation zone`;
-    rows.push(ok("Sea level rise (NOAA)", label, slr.source.publisher, slr.source.url, v.notes));
-  }
+  // NOAA sea level rise: withheld (19 Nov 2026). The map service answers every coastal point with one region-wide
+  // "Low-lying Areas" polygon, so it cannot tell a flooded point from a dry one; workers/sources.ts returns the reason.
   const hist = f.historic_preservation;
   if (hist && hist.ok && hist.value) {
     const v = hist.value;
     const label = v.is_in_historic_district
-      ? `${v.resources.length} NRHP resource(s) on file`
-      : "Not in National Register historic district";
+      ? `${v.resources.length} National Register boundary polygon(s) here`
+      : "No National Register boundary polygon at this point";
     const note = v.resources.length
-      ? v.resources.map(r => `${r.name} (${r.resource_type}${r.is_national_historic_landmark ? ", NHL" : ""})`).join("; ")
-      : "Point does not intersect official NPS National Register historic polygon.";
+      ? v.resources.map(r => `${r.name} (${r.resource_type}${r.is_national_historic_landmark ? ", NHL" : ""})`).join("; ") + ". Boundaries are approximate (NPS draws them from the nomination's corner coordinates)."
+      : "Not a finding that the property is unlisted: NPS maps most listed buildings as points, which this check does not read, and city or county historic districts are not in this layer.";
     rows.push(ok("Historic preservation (NPS NRHP)", label, hist.source.publisher, hist.source.url, note));
   }
   const hpi = f.fhfa_hpi;
   if (hpi && hpi.ok && hpi.value) {
     const v = hpi.value;
     const label = v.ten_year_appreciation_pct != null
-      ? `${v.ten_year_appreciation_pct >= 0 ? "+" : ""}${v.ten_year_appreciation_pct}% (10-yr)`
-      : `${v.latest_hpi} (${v.latest_year})`;
-    const note = `Tract ${v.tract_fips || ""} · ${v.latest_year} HPI: ${v.latest_hpi}${v.annual_change_pct != null ? ` (${v.annual_change_pct >= 0 ? "+" : ""}${v.annual_change_pct}% 1-yr)` : ""}`;
-    rows.push(ok("Home price appreciation (FHFA HPI)", label, hpi.source.publisher, hpi.source.url, note));
+      ? `${v.ten_year_appreciation_pct >= 0 ? "+" : ""}${v.ten_year_appreciation_pct}% over 10 years to ${v.latest_year}`
+      : `index ${v.latest_hpi} (${v.latest_year})`;
+    const note = `Census tract ${v.tract_fips || ""}; FHFA all-transactions index, which FHFA labels a "Developmental Index" for tracts. ${v.latest_year} index ${v.latest_hpi}${v.annual_change_pct != null ? ` (${v.annual_change_pct >= 0 ? "+" : ""}${v.annual_change_pct}% that year)` : ""}. A price trend for the tract, not this home's value.`;
+    rows.push(ok("Tract house price trend (FHFA HPI)", label, hpi.source.publisher, hpi.source.url, note));
   }
   const nhcci = f.fhwa_nhcci;
   if (nhcci && nhcci.ok && nhcci.value) {
     const v = nhcci.value;
-    const label = `${v.quarter}: index ${v.nhcci}`;
-    const factorPct = (v.base_year_2024_adjustment_factor * 100).toFixed(1);
-    const note = `FHWA National Highway Construction Cost Index · ${factorPct}% of 2024 base · Used to index historical unit bid prices.`;
-    rows.push(ok("Construction cost index (FHWA NHCCI)", label, nhcci.source.publisher, nhcci.source.url, note));
+    const label = `${v.quarter}: ${Number(v.nhcci).toFixed(3)} (2003 Q1 = 1)`;
+    const note = "National index of highway construction bid prices (FHWA). The same for every address; it is not a home building or renovation cost index and nothing on this page is adjusted by it.";
+    rows.push(ok("Highway construction price index, U.S. (FHWA NHCCI)", label, nhcci.source.publisher, nhcci.source.url, note));
   }
   return rows;
 }

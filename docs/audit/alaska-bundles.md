@@ -25,7 +25,7 @@ The same county pipeline as every other county (`pipeline/fetch_oc.py`, `osm_ext
   18 Nov 2026), NCES schools, AFDC chargers. HUD FY2027 rents and the current Tree Equity release come from the page's
   own files (`app/data/hud_fair_market_rents.json`, `app/data/tree_equity_2025/02020.json`, built by
   `scripts/build_tree_equity_2025.py ak`: 197 of 200 block groups).
-- Published with `scripts/export_county_bundle.py` (same format as `w5/tools/export_county.py --gz`), which also turns the
+- Published with `scripts/export_county_bundle.py` (same format as `w5/tools/export_county.py --gz`; w5/ was removed in 4bc63cd and is at `git show 4bc63cd^:w5/tools/export_county.py`), which also turns the
   borough's placeholder tag into a data tag and adds its `counties/manifest.json` row. `app/data/county_completeness.json`
   rebuilt: Anchorage is tier C (Census, OpenStreetMap, transit; no parcel-and-zoning pair).
 

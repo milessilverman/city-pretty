@@ -369,6 +369,21 @@ describe("Audit checklist verification (Section 5)", () => {
       // Invalid or out-of-range coordinates return null
       expect(runner.findNearestTransitStation(null, -97.744)).toBeNull();
       expect(runner.findNearestTransitStation(NaN, -97.744)).toBeNull();
+
+      // Review 19 Nov 2026: a station whose own record says "under construction" is not in service, so it is never the
+      // nearest station (transit_pipelines.json marks Century City and both Westwood D Line stations that way).
+      const realPipes = JSON.parse(fs.readFileSync(path.join(__dirname, "../../app/data/transit_pipelines.json"), "utf8"));
+      const r2: any = {};
+      new Function("TRANSIT_PIPELINES_DATA", "activeBundle", "D", "runner", `
+        ${transitSnippet}
+        runner.findNearestTransitStation = findNearestTransitStation;
+      `)(realPipes, () => null, null, r2);
+      const westwood = realPipes.flatMap((p: any) => p.stations || []).find((s: any) => s.name === "Westwood / UCLA");
+      expect(westwood.desc).toMatch(/under construction/);
+      const near = r2.findNearestTransitStation(westwood.lat, westwood.lng);
+      expect(near.name).not.toMatch(/Westwood|Century City/);
+      // The parking-exemption label in the compare drawer is California-only (it is a California state law).
+      expect(appJs).toMatch(/h\.nearestStn\.distMi <= 0\.5 && h\.st === "CA" \? '<b style="color:#0284c7">0-Parking Exempt<\/b>'/);
     });
   });
 
@@ -410,8 +425,8 @@ describe("Audit checklist verification (Section 5)", () => {
 
     it("app/facts.js formats live FEMA National Risk Index and USGS Seismic rows", () => {
       const factsJs = fs.readFileSync(path.join(__dirname, "../../app/facts.js"), "utf8");
-      expect(factsJs).toMatch(/Natural hazard risk \(FEMA NRI\)/);
-      expect(factsJs).toMatch(/Earthquake design \(USGS ASCE 7-22\)/);
+      expect(factsJs).toMatch(/Natural hazard risk, relative to other tracts \(FEMA National Risk Index\)/);
+      expect(factsJs).toMatch(/Building-code earthquake design values \(USGS, ASCE 7-22\)/);
     });
   });
 });

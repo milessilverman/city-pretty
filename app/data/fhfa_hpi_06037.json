@@ -3,12 +3,12 @@
     "source": "Source: FHFA HPI (Annual, All-Transactions)",
     "url": "https://www.fhfa.gov/hpi/download/annual/hpi_at_tract.csv",
     "status_label": "developmental",
-    "licence": "Public domain / freely available for download (FHFA FAQ Q32)",
+    "licence": "Not confirmed: no FHFA licence text found (19 Nov 2026); the FAQ Q32 cited earlier could not be found",
     "retrieved_at": "2026-11-18",
     "target_county_fips": "06037",
     "tracts_count": 1933,
     "citation": "Source: FHFA HPI (Annual, All-Transactions)",
-    "note": "Tract-level All-Transactions HPI is developmental per FHFA FAQ Q5. Missing years are null, not zeroed."
+    "note": "FHFA lists tract indexes as \"Census Tracts (Developmental Index; Not Seasonally Adjusted)\" (fhfa.gov/data/hpi/datasets, read 19 Nov 2026). Missing years are null, not zeroed."
   },
   "tracts": {
     "06037101110": {

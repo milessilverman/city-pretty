@@ -200,7 +200,10 @@ describe("official-source connectors (real captured responses)", () => {
     const res = await pvwattsV8(30.3005, -97.724, 4.0, { fetcher: AUSTIN });
     expect(res.ok).toBe(true);
     if (!res.ok) return;
-    expect(res.source.publisher).toContain("National Laboratory for Renewable Energy");
+    // The lab's own site (developer.nlr.gov, read 19 Nov 2026) names it "National Laboratory of the Rockies".
+    expect(res.source.publisher).toBe("National Laboratory of the Rockies (NLR)");
+    expect(res.value.assumptions).toEqual({ tilt_deg: 20, azimuth_deg: 180, losses_pct: 14, array_type: "fixed, roof mounted", module_type: "standard" });
+    expect(res.notes?.join(" ")).toContain("not a quote");
     expect(res.value.ac_annual_kwh).toBe(5932);
     expect(res.value.solrad_annual).toBeCloseTo(5.4, 1);
     expect(res.value.capacity_factor_pct).toBeCloseTo(16.9, 1);
@@ -281,6 +284,61 @@ describe("official-source connectors (real captured responses)", () => {
     expect(csvRes.value.ten_year_appreciation_pct).toBe(87.8);
   });
 
+  // Review 19 Nov 2026: FHFA leaves a cell blank where it has no index (2025 is blank for 17,211 of 63,930 tracts in
+  // the file pulled that day). Number("") is 0, so the connector read such a tract as index 0, "+0%" for the year and
+  // -100% over 10 years. Fixture: the real rows for tract 06037101220, 2014-2025, copied from hpi_at_tract.csv.
+  it("fhfaTractHpi reads FHFA's blank cells as missing, never as 0", async () => {
+    const csv = fx("fhfa_hpi_tract_06037101220_2014_2025.csv");
+    const res = await fhfaTractHpi("06037101220", (async () => new Response(csv, { status: 200 })) as any);
+    expect(res.ok).toBe(true);
+    if (!res.ok) return;
+    expect(res.value.latest_year).toBe(2024); // 2025 is blank in FHFA's file
+    expect(res.value.latest_hpi).toBe(823.7);
+    expect(res.value.annual_change_pct).toBe(9.9);
+    expect(res.value.ten_year_appreciation_pct).toBe(125.67); // (823.70 - 365.01) / 365.01, the ingest script's value too
+    expect(res.value.history.every((p) => p.hpi > 0)).toBe(true);
+    expect(res.source.vintage).toContain("Developmental Index");
+    const allBlank = "tract,state_abbr,year,annual_change,hpi,hpi1990,hpi2000\n01001020100,AL,2025,,,,\n";
+    const none = await fhfaTractHpi("01001020100", (async () => new Response(allBlank, { status: 200 })) as any);
+    expect(none.ok).toBe(false);
+  });
+
+  it("ncesNearbySchools reads the school year from the layer and never sorts a school without coordinates first", async () => {
+    const body = JSON.stringify({ features: [
+      { attributes: { NAME: "NO COORDS SCHOOL", LAT: null, LON: null, SCHOOLYEAR: "2024-2025" } },
+      { attributes: { NAME: "NEAR SCHOOL", LAT: 30.3006, LON: -97.7241, SCHOOLYEAR: "2024-2025" } },
+    ] });
+    const res = await ncesNearbySchools(30.3005, -97.724, 2000, (async () => new Response(body, { status: 200 })) as any);
+    expect(res.ok).toBe(true);
+    if (!res.ok) return;
+    expect(res.value.school_year).toBe("2024-2025");
+    expect(res.value.schools[0].name).toBe("NEAR SCHOOL");
+    expect(res.value.schools[1].lat).toBeNull();
+    expect(res.source.vintage).not.toContain("2023-2024");
+    expect(res.notes?.join(" ")).toContain("does not say which school this address is assigned to");
+  });
+
+  it("googleSolarBuildingInsights keeps a missing pitch, azimuth or area as null, not 0", async () => {
+    const body = JSON.stringify({ solarPotential: { roofSegmentStats: [{ stats: {} }] } });
+    const res = await googleSolarBuildingInsights(30.3005, -97.724, "TEST_API_KEY", (async () => new Response(body, { status: 200 })) as any);
+    expect(res.ok).toBe(true);
+    if (!res.ok) return;
+    expect(res.value.roof_segments[0]).toMatchObject({ pitch_degrees: null, azimuth_degrees: null, area_m2: null });
+  });
+
+  it("NHCCI, NRI, seismic and PLACES results carry their limits for the advisor", async () => {
+    const nh = await fhwaNhcci(undefined, AUSTIN);
+    expect(nh.ok && nh.notes?.join(" ")).toContain("not a home building or renovation cost index");
+    const nri = await femaNationalRiskIndex(30.3005, -97.724, AUSTIN);
+    expect(nri.ok && nri.source.vintage).toBe("December 2025 (1.20.0)");
+    expect(nri.ok && nri.notes?.join(" ")).toContain("meant for planning purposes only");
+    const seis = await usgsSeismicDesign(30.3005, -97.724, AUSTIN);
+    expect(seis.ok && seis.value.site_class).toBe("D");
+    expect(seis.ok && seis.notes?.join(" ")).toContain("not a forecast");
+    const pl = await cdcPlacesTractHealth("48453000302", AUSTIN);
+    expect(pl.ok && pl.notes?.join(" ")).toContain("model-based census tract estimates");
+  });
+
   it("epaWalkabilityIndex returns walkability score and category for coordinates", async () => {
     const res = await epaWalkabilityIndex(30.3005, -97.724, AUSTIN);
     expect(res.ok).toBe(true);
@@ -293,19 +351,19 @@ describe("official-source connectors (real captured responses)", () => {
     expect(res.value.rankings?.land_use_mix_rank).toBe(14);
   });
 
-  it("noaaSeaLevelRise identifies low-lying SLR zones in coastal areas and negative in inland", async () => {
-    const inland = await noaaSeaLevelRise(30.3005, -97.724, 1, AUSTIN);
-    expect(inland.ok).toBe(true);
-    if (!inland.ok) return;
-    expect(inland.value.in_low_lying_slr_area).toBe(false);
-    expect(inland.value.scenario_ft).toBe(1);
-
-    const miamiFetch = fakeFetch([[/dc_slr\/slr_1ft/, fx("noaa_slr_miami.json")]]);
-    const coastal = await noaaSeaLevelRise(25.79065, -80.13005, 1, miamiFetch);
-    expect(coastal.ok).toBe(true);
-    if (!coastal.ok) return;
-    expect(coastal.value.in_low_lying_slr_area).toBe(true);
-    expect(coastal.value.layer_name).toBe("1ft SLR Low-lying Areas");
+  // Replaced 19 Nov 2026. The old test passed a captured "Low-lying Areas" hit for Miami Beach as proof of a coastal
+  // positive, but NOAA's service returns that same region-wide polygon for San Francisco City Hall and downtown Seattle
+  // (identify calls in docs/audit/review-2026-11-19-owner-commits.md), so the result is withheld with its reason.
+  it("noaaSeaLevelRise is withheld with its reason and never claims a point is in or out of a zone", async () => {
+    let called = false;
+    const spy = (async () => { called = true; throw new Error("should not be called"); }) as any;
+    for (const [la, ln] of [[30.3005, -97.724], [25.79065, -80.13005], [37.7793, -122.4193]]) {
+      const r = await noaaSeaLevelRise(la, ln, 1, spy);
+      expect(r.ok).toBe(false);
+      if (r.ok) return;
+      expect(r.error).toContain("cannot tell a flooded point from a dry one");
+    }
+    expect(called).toBe(false);
   });
 
   it("npsHistoricPlaces screens National Register of Historic Places districts and landmarks", async () => {
@@ -383,7 +441,7 @@ describe("advisor loop", () => {
 
     const solarRes = await runAdvisorTool("model_solar_pv", { lat: 30.3005, lng: -97.724, system_capacity_kw: 4.0 }, { fetcher: AUSTIN });
     expect(solarRes.isError).toBe(false);
-    expect(solarRes.sources.map((s) => s.publisher)).toContain("National Laboratory for Renewable Energy (NLR)");
+    expect(solarRes.sources.map((s) => s.publisher)).toContain("National Laboratory of the Rockies (NLR)");
     expect(solarRes.text).toContain("5932");
 
     const healthRes = await runAdvisorTool("lookup_health_profile", { tract_fips: "48453000302" }, { fetcher: AUSTIN });
@@ -402,9 +460,9 @@ describe("advisor loop", () => {
     expect(walkRes.text).toContain("Most Walkable");
 
     const slrRes = await runAdvisorTool("check_sea_level_rise", { lat: 30.3005, lng: -97.724, scenario_ft: 1 }, { fetcher: AUSTIN });
-    expect(slrRes.isError).toBe(false);
     expect(slrRes.sources.some((s) => s.publisher.includes("National Oceanic and Atmospheric Administration"))).toBe(true);
-    expect(slrRes.text).toContain("in_low_lying_slr_area");
+    expect(slrRes.text).toContain("Not on file");
+    expect(slrRes.text).not.toContain("in_low_lying_slr_area");
 
     const hpiRes = await runAdvisorTool("lookup_hpi_appreciation", { tract_fips: "48453000302" }, { fetcher: AUSTIN });
     expect(hpiRes.isError).toBe(false);
