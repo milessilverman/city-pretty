@@ -96,7 +96,7 @@ def main():
         n += 1
         t = dict(o.tags)
         if o.is_node():
-            if BOX and not inb(o.location.lon, o.location.lat):
+            if BOXES and not inb(o.location.lon, o.location.lat):
                 continue
             el = {"type": "node", "id": o.id, "lat": o.location.lat, "lon": o.location.lon, "tags": t}
             if t.get("place") in PLACES:
@@ -114,7 +114,7 @@ def main():
                 pts = [{"lat": nd.location.lat, "lon": nd.location.lon} for nd in o.nodes if nd.location.valid()]
             except Exception:
                 continue
-            if len(pts) < 2 or (BOX and not any(inb(p["lon"], p["lat"]) for p in pts)):
+            if len(pts) < 2 or (BOXES and not any(inb(p["lon"], p["lat"]) for p in pts)):
                 continue
             el = {"type": "way", "id": o.id, "tags": t, "geometry": pts}
             hw = t.get("highway")
@@ -133,7 +133,7 @@ def main():
                 continue
             rings = [p[0] for p in g["coordinates"]] if g["type"] == "MultiPolygon" else [g["coordinates"][0]]
             members = [{"role": "outer", "geometry": [{"lon": x, "lat": y} for x, y in r]} for r in rings if len(r) >= 4]
-            if not members or (BOX and not any(inb(p["lon"], p["lat"]) for m in members for p in m["geometry"])):
+            if not members or (BOXES and not any(inb(p["lon"], p["lat"]) for m in members for p in m["geometry"])):
                 continue
             r0 = members[0]["geometry"]
             cx = sum(p["lon"] for p in r0) / len(r0); cy = sum(p["lat"] for p in r0) / len(r0)

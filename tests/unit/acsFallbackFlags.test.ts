@@ -6,6 +6,7 @@ import { describe, expect, it } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
+import { allBundleFips } from "../r2Only";
 
 const root = path.resolve(__dirname, "../..");
 const F = JSON.parse(fs.readFileSync(path.join(root, "app/data/acs_fallback_flags.json"), "utf8"));
@@ -23,8 +24,8 @@ describe("acs_fallback_flags.json", () => {
   });
 
   it("lists only the four kinds, as 7-digit block-group suffixes, sorted and unique, for every county file plus LA and Orange", () => {
-    const files = fs.readdirSync(path.join(root, "counties")).filter((f) => /^bundle_\d{5}\.json\.gz$/.test(f)).map((f) => f.slice(7, 12));
-    for (const fips of [...files, "06037", "06059"]) expect(F.counties[fips], fips).toBeDefined();
+    // every county with a data file, including R2-only ones (counties/.r2-only.txt), which may not be on disk here
+    for (const fips of [...allBundleFips(), "06037", "06059"]) expect(F.counties[fips], fips).toBeDefined();
     let n = 0;
     for (const [fips, c] of Object.entries<any>(F.counties)) {
       expect(fips).toMatch(/^\d{5}$/);

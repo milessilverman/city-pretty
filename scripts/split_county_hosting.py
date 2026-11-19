@@ -20,7 +20,9 @@ def main():
     hosts = json.load(open(os.path.join(ROOT, "app/data/county_hosts.json")))
     limit = hosts["_source"]["limit_bytes_per_site"]
     manifest = json.load(open(os.path.join(ROOT, "counties/manifest.json")))
-    files = sorted(f for f in os.listdir(os.path.join(ROOT, "counties")) if f.startswith("bundle_") and f.endswith(".json.gz"))
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import r2_only
+    r2 = set(r2_only.names())   # R2-only files (counties/.r2-only.txt) are served from R2, never from a Pages site: skipped by name
+    files = sorted(f for f in os.listdir(os.path.join(ROOT, "counties")) if f.startswith("bundle_") and f.endswith(".json.gz") and f not in r2)
     state_region = {st: name for name, r in hosts["regions"].items() for st in r["states"]}
     unplaced = sorted({f[7:9] for f in files if f[7:9] not in state_region})
     if unplaced:

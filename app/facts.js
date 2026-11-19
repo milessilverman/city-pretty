@@ -93,7 +93,8 @@ export async function liveSiteFacts(lat, lng, opts = {}) {
   const femaKey = `${(+lat).toFixed(4)},${(+lng).toFixed(4)}`;
   const sharedFema = (typeof window !== "undefined" && window._femaQueryCache && window._femaQueryCache.get(femaKey));
   const femaPromise = sharedFema
-    ? sharedFema.then(res => ({ features: (res.v || []).map(attrs => ({ attributes: attrs })) }))
+    // a failed shared query is a failed request, not "no flood map here" (19 Nov 2026: Kent County MD showed "unmapped" for Zone X)
+    ? sharedFema.then(res => { if (!res.ok) throw new Error("FEMA did not answer" + (res.e && res.e.message ? ": " + res.e.message : "")); return { features: (res.v || []).map(attrs => ({ attributes: attrs })) }; })
     : getJson(femaUrl, fetcher);
 
   const [bg, cnty, fema, usgs] = await Promise.allSettled([
@@ -103,7 +104,8 @@ export async function liveSiteFacts(lat, lng, opts = {}) {
     getJson(usgsUrl, fetcher),
   ]);
   const hudLookup = opts.hudLookup || ((f, z) => (typeof window !== "undefined" && typeof window.getHudFmr === "function" ? window.getHudFmr(f, z) : null));
-  const err = (s) => (s.reason && s.reason.message) || "request failed";
+  const err = (s) => (s.reason && (s.reason.name === "AbortError" || /aborted/i.test(s.reason.message || "")) ? "the service did not answer in time"
+    : (s.reason && s.reason.message) || "request failed");
 
   // Census area
   if (cnty.status === "fulfilled" && cnty.value.features && cnty.value.features[0]) {

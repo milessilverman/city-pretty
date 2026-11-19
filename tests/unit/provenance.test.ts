@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
+import { allBundleFips } from "../r2Only";
 
 const root = path.resolve(__dirname, "../..");
 const load = (rel: string) => JSON.parse(fs.readFileSync(path.join(root, rel), "utf8"));
@@ -166,7 +167,8 @@ describe("Tree Equity Score current release (2020 block groups), per county", ()
   const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => /^\d{5}\.json$/.test(f)) : [];
   it("covers every county with a data file, from American Forests' published state files", () => {
     // one file per county data file (counties/bundle_<fips>.json.gz) plus LA and Orange, whose data files are embedded
-    const bundles = fs.readdirSync(path.join(root, "counties")).filter((f) => /^bundle_\d{5}\.json\.gz$/.test(f)).map((f) => f.slice(7, 12));
+    // R2-only county files (counties/.r2-only.txt) count as data files whether or not a copy is on disk here
+    const bundles = allBundleFips();
     expect(files.length).toBe(bundles.length + 2);
     for (const f of [...bundles, "06037", "06059"]) expect(files).toContain(`${f}.json`);
     for (const f of files) {

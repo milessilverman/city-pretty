@@ -72,6 +72,7 @@ def tiger_names():
 def bundle_sources():
     """fips -> (built, [source rows]) from every county data file that carries a source list."""
     found = {}
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import r2_only; r2_only.require_local("build_county_completeness.py")   # R2-only county files must be on disk, or they would be dropped
     for p in sorted(glob.glob(os.path.join(ROOT, "counties", "bundle_*.json.gz"))):
         d = json.loads(gzip.decompress(open(p, "rb").read()))
         m = d.get("meta", {})

@@ -1002,3 +1002,25 @@ returns, for a Miami-Dade residential lot, "Not on file ... zoning as commercial
 parcel" for Live Local, applies it when the parcel is flagged as public or religious-institution land, and for a
 Contra Costa parcel 0.2 mi from heavy rail reports "whether this county is an urban transit county (more than 15
 passenger rail stations)" for SB 79.
+### Correction: a FEMA query that failed was shown as "no flood map here" (found and fixed 19 Nov)
+
+- Found by the live check of the new Maryland counties (`audit/small-counties-maryland.md`). At Kent County MD
+  240299504002 (39.179226, -76.130445) and Garrett County MD 240230007004 the house panel said "FEMA flood zone: Not
+  available (No effective FEMA flood map here (unmapped, not 'no risk'))"; FEMA's National Flood Hazard Layer
+  (`hazards.fema.gov/.../NFHL/MapServer/28/query`) returns Zone X at both points.
+- Cause: the page's shared FEMA query (`sharedFemaNfhlQuery`, app/app.js) returns `{ ok: false, v: [] }` when FEMA does
+  not answer (here an error reply without a CORS header), and `app/facts.js` read that as an answer with no flood map.
+  The failed query was also kept for the session, so clicking again gave the same wrong row. This applied in every
+  county.
+- Fix: a failed shared query is now a failed request ("Not available (FEMA did not answer ...)" or "... the service did
+  not answer in time"), and a failed query is dropped from the cache so the next click asks FEMA again. Re-run on the
+  same points: Kent 240299504002 now matches (Zone X); the Garrett point at 240230006013 first timed out at the page's
+  6 s limit and said so, and re-checked alone showed Zone AE as FEMA does
+  (`data/backtests/live_check_panels_2026-11-19_mdsmall.json`).
+
+### Correction: county builds stopped at the OpenStreetMap step (found and fixed 19 Nov)
+
+- `pipeline/osm_extract.py` still tested `BOX` after commit 835f341 (18 Nov, the antimeridian split for Aleutians West)
+  renamed it `BOXES`, so every county that clips a state or regional extract stopped with `NameError: name 'BOX' is not
+  defined` before writing anything. Three references corrected. No published file was affected: no county had been
+  built with the broken code.

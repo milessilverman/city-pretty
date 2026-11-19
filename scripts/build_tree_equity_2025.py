@@ -35,6 +35,7 @@ FIPS_ST = {"01": "al", "02": "ak", "04": "az", "05": "ar", "06": "ca", "08": "co
 
 
 def counties_with_files():
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import r2_only; r2_only.require_local("build_tree_equity_2025.py")   # R2-only county files must be on disk, or they would be dropped
     f = {re.search(r"bundle_(\d{5})", p).group(1) for p in glob.glob(os.path.join(ROOT, "counties", "bundle_*.json.gz"))}
     return f | {"06037", "06059"}
 

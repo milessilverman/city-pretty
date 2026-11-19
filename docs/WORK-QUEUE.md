@@ -19,6 +19,24 @@ audit doc the same day.
   Market Rent) returned HUD's figure with its sources. `app/config.js` points at it. Not set: `CENSUS_API_KEY`,
   `GOOGLE_MAPS_KEY`. Do NOT set `TURNSTILE_SECRET_KEY` until the page sends a Turnstile token (it would refuse every
   question).
+- **Small counties, Maryland (19 Nov, `audit/small-counties-maryland.md`): the path to R2 proven end to end.**
+  Built: 10 counties (Allegany, Calvert, Caroline, Dorchester, Garrett, Kent, Queen Anne's, Somerset, Talbot,
+  Worcester; 327 block groups, 444,413 people); none withheld. Time: 20.6 min from the start of the OSM download to the
+  last county built (download 6 min, Maryland cut 106 s, then about 2-2.5 min a county, three at a time; 47.6 s a
+  county overall for the nine run together). The new files are uploaded to R2 and **not committed**
+  (`counties/.r2-only.txt`, generated `.gitignore` block); the page loads them from R2 only and says so if R2 fails.
+  Checks: Census 240 of 240 values equal (0% mismatch); OpenStreetMap ID for ID in 2 counties, 0 differences; live on
+  the real page from R2, 3 counties x 3 block groups, 0 wrong values.
+  **R2 bytes added: 6,852,303** (data files 6,849,774 plus the larger manifest): 1,137,938,782 -> 1,144,791,085 bytes
+  (1.138 -> 1.145 GB, 1,385 -> 1,395 objects).
+  **Projection, measured:** Maryland's files average 684,977 bytes a county and 20,947 bytes a block group
+  (Tennessee's: 0.39 MB a county). Building the remaining 2,387 counties the same way adds about 1.64 GB by the
+  per-county figure (1.11 GB by the per-block-group figure), so total R2 storage would be about **2.8 GB, under the
+  6 GB mark and the 8 GB ceiling** of `scripts/r2_sync_counties.py`, without site-suggestion files (not built for small
+  counties). The path is ready to repeat state by state; run `--dry-run` before every upload.
+  Registry count of what is left (counties in `national/data/counties.json` with no data file, Puerto Rico left out,
+  under 100,000 people by ACS 2020-24): 2,387 counties, 52,817 block groups, 61.6 million people; this is 35 more than
+  2,443 minus Tennessee and Maryland, so the 17 Nov count and this one were not made the same way.
 - Still to decide: how the public site gets under GitHub Pages' 1 GB cap now that R2 serves the county files
   (deploy Pages from a workflow that leaves out `counties/bundle_*`, or remove them from the repository).
 
@@ -81,5 +99,5 @@ audit doc the same day.
 | **New Hampshire's statewide parcel layer (GRANIT CAD_ParcelMosaic) answers HTTP 503 on every layer, on both its old and new hosts** (17 Nov; the catalog item is still public) | Clicks in Hillsborough, Rockingham, Merrimack, Strafford and Grafton say "couldn't get this lot" | Re-check; if it stays down, look for county or town layers |
 | ✓ **Tract medians labeled** (17 Nov: 43,901 rents and 13,724 home values; 0 mismatches against the Census files) | | |
 | ✓ **Lot-fit outside LA and Florida** (16 Nov: NYC R1-R5 from the Zoning Resolution) | The checks were skipped everywhere else | DC R-1A/R-1B/R-2/R-3 added and Davidson/DC use tables added (16 Nov, round 2). NYC R6-R10 added 17 Nov (round 3); NYC R11/R12 + commercial (round 4); San Diego RS zones (round 5). Charlotte and Portland added (round 6); Miami withheld (code only in a JS app). Engine copies reconciled 17 Nov (drift test; .ts copies deleted). Next: roof pitch values are unsourced; Denver (code text not found), Nashville (Municode 403), NYC R11/R12 and commercial districts, other counties' use-code tables; NYC R6+ districts; the NYC "Owner playbook" line still says zoning not on file. Fixed 17 Nov: NYC and DC clicks showed "Lot Parcel" for the parcel number (now BBL / SSL), and NC OneMap's sale date was read as a sale price (never shown: it parsed as year 1727) |
-| **2,443 US counties (under 100,000 people; 63.6 million people) aren't on the page** (measured 17 Nov). Tennessee done 17 Nov (all 95 counties; `audit/small-counties-pilot.md`) | Most small-town and rural addresses can't be looked up | **Hosting decided 17 Nov: regional Pages sites** (`app/data/county_hosts.json`, `scripts/split_county_hosting.py`; page support built, regions disabled until each site is checked). **Waiting on the user to create** `city-pretty-data-northeast`, `-midwest`, `-south`, `-west` (public, Pages on from main). Earlier note: GitHub Pages publishes at most 1 GB per site; `main` is already 1.07 GB and this branch 1.30 GB, almost all county files. The rest of the US adds about 1 GB more (about 0.2 GB with light files that leave out drawn streets, water and parks). Options: split county files into a few regional Pages repos (no new accounts; recommended), host them on Cloudflare (needs the user's account), or light files for small counties. Merging this branch into `main` as it is would likely push the site past the limit |
+| **2,443 US counties (under 100,000 people; 63.6 million people) aren't on the page** (measured 17 Nov). Tennessee done 17 Nov (all 95 counties; `audit/small-counties-pilot.md`). **Maryland done 19 Nov** (10 counties, all 24 now; the first state served from R2 only, not committed: `audit/small-counties-maryland.md`). Remaining: 2,387 counties under 100,000 people, 52,817 block groups (registry count, 19 Nov; see the status note above) | Most small-town and rural addresses can't be looked up | **Hosting decided 17 Nov: regional Pages sites** (`app/data/county_hosts.json`, `scripts/split_county_hosting.py`; page support built, regions disabled until each site is checked). **Waiting on the user to create** `city-pretty-data-northeast`, `-midwest`, `-south`, `-west` (public, Pages on from main). Earlier note: GitHub Pages publishes at most 1 GB per site; `main` is already 1.07 GB and this branch 1.30 GB, almost all county files. The rest of the US adds about 1 GB more (about 0.2 GB with light files that leave out drawn streets, water and parks). Options: split county files into a few regional Pages repos (no new accounts; recommended), host them on Cloudflare (needs the user's account), or light files for small counties. Merging this branch into `main` as it is would likely push the site past the limit |
 | **23 states' codes unsearchable from the build machine** | "No law found" is unverified there | Alternate routes, or a script run from the user's computer |
