@@ -487,6 +487,7 @@
       "evidence": "§ 66411.7: 'no more than two new parcels of approximately equal lot area ... not be smaller than 40 percent ... both newly created parcels are no smaller than 1,200 square feet'; § 65852.21: 'no more than two residential units within a single-family residential zone shall be considered ministerially' Official code table 2026-11-19: GOV 65852.21 \"Amended by Stats. 2026, Ch. 56, Sec. 7. (SB 1426) Effective June 30, 2026.\"; GOV 66411.7 \"Amended by Stats. 2026, Ch. 56, Sec. 9. (SB 1426) Effective June 30, 2026.\"; § 66411.7(a)(2)(A): \"both newly created parcels are no smaller than 1,200 square feet\".",
       "unverified_fields": [
         "effective_date (2022-01-01 not checked; the 2021 bill version was not retrieved)",
+        "exclusion_sources (not confirmed: SB 9 (65852.21(a)(2); 66411.7(a)(3)(C)) takes its site exclusions from Gov)",
         "exclusion_sources (not confirmed: SB 9 (65852.21(a)(2); 66411.7(a)(3)(C)) takes its site exclusions from Gov)"
       ],
       "notes": "Original max_height_ft 25 does not appear in either section and was removed. Original min_parking 0 was wrong as a general rule (up to 1/unit may be required). Short name was garbled ('Home Opportunity & Act')."
@@ -981,12 +982,39 @@
         "wording": "ANY LAND WITHIN THE TERRITORY IN THE VICINITY OF A MILITARY AIRPORT AS DEFINED IN SECTION 28-8461.",
         "url": "https://www.azleg.gov/legtext/56leg/2R/laws/0197.pdf",
         "checked_on": "2026-11-19"
+      },
+      {
+        "key": "tribal_land",
+        "label": "lots on tribal land (ADU path)",
+        "citation": "A.R.S. 9-461.18(G)(1)",
+        "wording": "Tribal land.",
+        "url": "https://www.azleg.gov/ars/9/00461-18.htm",
+        "checked_on": "2026-11-19",
+        "scope_note": "excludes the accessory dwelling unit path of this record"
+      },
+      {
+        "key": "military_airport_vicinity_adu",
+        "label": "land in the vicinity of a military airport or ancillary military facility (ADU path)",
+        "citation": "A.R.S. 9-461.18(G)(2)",
+        "wording": "Land that is in the territory in the vicinity of a military airport or ancillary military facility as defined in section 28-8461.",
+        "url": "https://www.azleg.gov/ars/9/00461-18.htm",
+        "checked_on": "2026-11-19",
+        "scope_note": "excludes the accessory dwelling unit path of this record"
+      },
+      {
+        "key": "airport_vicinity_over_65_db",
+        "label": "land near a licensed commercial, general aviation or public airport with a noise level over 65 decibels (ADU path)",
+        "citation": "A.R.S. 9-461.18(G)(3)",
+        "wording": "Land that is in the territory in the vicinity of a federal aviation administration commercially licensed airport or a general aviation airport or land that is in the territory in the vicinity of a public airport as defined in section 28-8486 and that has a noise level of greater than sixty-five decibels.",
+        "url": "https://www.azleg.gov/ars/9/00461-18.htm",
+        "checked_on": "2026-11-19",
+        "scope_note": "excludes the accessory dwelling unit path of this record"
       }
     ],
     "exclusions_review": {
       "status": "confirmed",
       "checked_on": "2026-11-19",
-      "note": "Exclusions read from the chaptered text of Laws 2024 ch. 197 (the text is in capitals in the source). Whether that middle-housing section is still in force is a separate open item in verification.unverified_fields; the ADU path in A.R.S. 9-461.18 was read for its text on 19 Nov 2026 but its site exclusions were not extracted here."
+      "note": "This record joins two Arizona laws, so it lists both sets of exclusions and an exclusion in either one stops the record (the conservative choice): the middle-housing exclusions from the chaptered text of Laws 2024 ch. 197, section 9-462.10(D) (the text is in capitals in the source), and the ADU exclusions from A.R.S. 9-461.18(G), read on 19 Nov 2026. Whether the middle-housing section is still in force is a separate open item in verification.unverified_fields."
     }
   },
   {
@@ -1011,6 +1039,7 @@
       "evidence": "'Allow up to three housing units, including tiny homes, on a Single-Family (SF) zoned property (SF-1, SF-2, SF-3)'; 'one unit on lots of at least 1,800 square feet but less than 5,750 square feet'; 'Ordinance 20240516-006 - Phase 2 HOME Amendments adopted ordinance' 2026-11-19: city page lists \"Ordinance 20231207-001 - Phase 1 HOME Amendments adopted ordinance\" and \"Ordinance 20240516-006 - Phase 2 HOME Amendments adopted ordinance\".",
       "unverified_fields": [
         "min_parking_spaces_per_unit (Austin's parking-minimum repeal is a separate action, not checked)",
+        "exclusion_sources (not confirmed: the source on file is the City of Austin's HOME information page, not the ordinances (20231207-001 and 20240516-006); the page names no site exclusions, and the ordinance text was not read)",
         "exclusion_sources (not confirmed: the source on file is the City of Austin's HOME information page, not the ordinances (20231207-001 and 20240516-006); the page names no site exclusions, and the ordinance text was not read)"
       ],
       "notes": "Original had the wrong Phase 2 ordinance number (-004) and wrong minimum lot size (1,500 sq ft)."
@@ -1052,6 +1081,7 @@
         "effective_date 2024-06-05",
         "statute_citation (C.R.S. § 29-35-101 et seq. not confirmed)",
         "number of covered municipalities",
+        "exclusion_sources (not confirmed: HB24-1313 sets a jurisdiction-wide transit-area housing target that the engine never applies to a single parcel, so its exclusions were not extracted)",
         "exclusion_sources (not confirmed: HB24-1313 sets a jurisdiction-wide transit-area housing target that the engine never applies to a single parcel, so its exclusions were not extracted)"
       ],
       "notes": "Original summary claimed '31 municipalities', a by-right 40 du/acre minimum and parking-mandate elimination — none supported by the bill summary."
@@ -1143,6 +1173,7 @@
         "bill_number",
         "statute_citation",
         "effective_date",
+        "exclusion_sources (not confirmed: the source on file is the Minneapolis 2040 plan's housing topic page, not an ordinance, and the law's status is unverified, so it is never applied to a parcel)",
         "exclusion_sources (not confirmed: the source on file is the Minneapolis 2040 plan's housing topic page, not an ordinance, and the law's status is unverified, so it is never applied to a parcel)"
       ],
       "notes": "The triplex-by-right and parking claims, and the cited 2024 law, could not be confirmed; the cited 2024 chapter does not appear to concern this plan. Do not present as by-right."
@@ -1332,6 +1363,7 @@
       "unverified_fields": [
         "effective_date 2021-01-14",
         "number of covered municipalities (177; mass.gov returned 403)",
+        "exclusion_sources (not confirmed: G.L)",
         "exclusion_sources (not confirmed: G.L)"
       ],
       "notes": "Removed unverified '177 municipalities' from summary and the parking-0 value (not in § 3A)."
@@ -1363,6 +1395,7 @@
       "evidence": "",
       "unverified_fields": [
         "all fields",
+        "exclusion_sources (not confirmed: the City of Raleigh page refuses this machine (HTTP 403), so no text was read; the law is not applied to a parcel)",
         "exclusion_sources (not confirmed: the City of Raleigh page refuses this machine (HTTP 403), so no text was read; the law is not applied to a parcel)"
       ],
       "notes": "Round 3: raleighnc.gov returns 403."
@@ -1398,6 +1431,7 @@
       "unverified_fields": [
         "max_units_by_right 2",
         "owner-occupancy and lot-size conditions (summary paraphrase not checked clause-by-clause)",
+        "exclusion_sources (not confirmed: the current Utah Code section (10-9a-530 and 17-27a-526) is script-rendered and not readable from here)",
         "exclusion_sources (not confirmed: the current Utah Code section (10-9a-530 and 17-27a-526) is script-rendered and not readable from here)"
       ],
       "notes": "SEVERE: original record cited Utah SB 174 (2021), which is 'Driver License Document Requirements' — unrelated. Also cited 'HB 465' and § 10-9a-403 and a commuter-rail incentive, none of which were confirmed; removed."
@@ -1478,6 +1512,7 @@
       "checked_on": "2026-11-16",
       "evidence": "(1) A city may not require more than 0.5 parking space per 18 multifamily dwelling unit or more than one parking space per single-19 family home. 20 ENGROSSED SUBSTITUTE SENATE BILL 5184 AS AMENDED BY THE HOUSE Passed Legislature - 2025 Regular Session State of Washington 69th Legislature 2025 Regular Session By Senate Housing (originally sponsored by Senators Bateman, Trudeau, Frame, Krishnadasan, Liias, Nobles, Pedersen, Salomon, Shewmake, and Stanford) READ FIRST TIME 02/07/25. p. 1 ESSB 5184.SL (2) A city may not require more than two parking spaces per 1,000 1 square feet of commercial space. 2 (3) A city may not require any minimum parking requirements for:3 (a) Residences under 1,200 || May 7 Governor signed. Chapter 204, 2025 Laws. (View session law) Effective date 7/27/2025. Close View all roll calls Cl",
       "unverified_fields": [
+        "exclusion_sources (not confirmed: this is a jurisdiction-wide parking rule that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted)",
         "exclusion_sources (not confirmed: this is a jurisdiction-wide parking rule that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted)"
       ],
       "notes": "Jurisdiction-wide parking caps, not a parcel-level housing right (parcel_level false). Compliance deadlines: about 2027-01-27 (50,000+) and 2028-07-27 (30,000-50,000), computed from the effective date."
@@ -2025,6 +2060,7 @@
       "checked_on": "2026-11-16",
       "evidence": "starter home subdivisions. (1) No city shall enact or enforce any ordinance within its jurisdiction that bans starter home subdivisions in any residential zoning area. \"Starter home subdivision\" means a residential subdivision on at least four (4) acres of land that is designed to provide attainable homeownership opportunities with single-family detached dwellings on smaller lots that are no greater than one thousand five hundred (1,500) square feet per lot, have compact home sizes, and have efficient site design t || (a) Prohibit requiring minimum lot sizes exceeding one thousand five hundred (1,500) square feet for lots located in starter home subdivisions unless infrastructure limitations, lot configuration, or environmental constr || 264 S 1352 aa Starter home subdivisions 03/31/26 07/01/2026",
       "unverified_fields": [
+        "exclusion_sources (not confirmed: this is a subdivision rule for sites of four acres or more that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted)",
         "exclusion_sources (not confirmed: this is a subdivision rule for sites of four acres or more that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted)"
       ],
       "notes": ""
@@ -2235,6 +2271,7 @@
       "checked_on": "2026-11-16",
       "evidence": "29-36-103. Limitations on minimum parking requirements. (1) ON OR AFTER JUNE 30, 2025, A MUNICIPALITY SHALL NEITHER ENACT NOR ENFORCE LOCAL LAWS THAT ESTABLISH A MINIMUM PARKING REQUIREMENT THAT APPLIES TO A LAND USE APPROVAL FOR A MULTIFAMILY RESIDENTIAL DEVELOPMENT, ADAPTIVE RE-USE FOR RESIDENTIAL PURPOSES, OR ADAPTIVE RE-USE MIXED-USE PURPOSES WHICH INCLUDE AT LEAST FIFTY PERCENT OF USE FOR RESIDENTIAL PURPOSES THAT IS WITHIN THE MUNICIPALITY, A METROPOLITAN PLANNING ORGANIZATION, AND AT LEAST PARTIALLY WITHIN AN APPLICABLE TRANSIT SERVICE AREA. (2) ON OR AFTER JUNE 30, 2025, A COUNTY SHALL NEITHER ENACT NOR ENFORCE LOCAL LAWS TH",
       "unverified_fields": [
+        "exclusion_sources (not confirmed: HB24-1304 is a jurisdiction-wide parking rule that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted)",
         "exclusion_sources (not confirmed: HB24-1304 is a jurisdiction-wide parking rule that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted)"
       ],
       "notes": ""
@@ -2268,6 +2305,7 @@
       "evidence": "B. Any locality that has adopted a zoning ordinance pursuant to this chapter shall not require, as a condition of zoning approval, minimum off-street parking for residential, multifamily, or mixed-use development located within a designated area in amounts exceeding the following: 1. One-half of one parking space per dwelling unit for multifamily or mixed-use residential development; and 2. One parking space per dwelling unit || \"Designated area\" means any parcel located within one-half mile of the entrance to a mass transit or public transportation station || 2026, c. 1075",
       "unverified_fields": [
         "effective_date (Virginia acts take effect 1 July unless they say otherwise; the act itself was not fetched. The Code page, dated 11/16/2026, shows this section as current with no future-effective label, unlike § 15.2-2292.4, which is labelled 'Effective July 1, 2027')",
+        "exclusion_sources (not confirmed: this is a jurisdiction-wide parking rule that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted)",
         "exclusion_sources (not confirmed: this is a jurisdiction-wide parking rule that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted)"
       ],
       "notes": "A jurisdiction-wide cap on what a locality may require, not a parcel right; the engine never applies it to a single parcel."
@@ -2340,6 +2378,7 @@
       "evidence": "An accessory apartment shall be permitted in a principal dwelling or an accessory building as a matter of right in the R zones, except the R-1B/GT or R 3/GT zone, subject to the provisions of this section. An a || Either the principal dwelling or accessory apartment unit shall be owner-occupied for the duration of the acce || SOURCE: Final Rulemaking published at 63 DCR 2447, 3338 (March 4, 2016 Part 2); as amended by Final Rulemaking published at 70 DCR 011297 (August 25, 2023); as amended by Final Rulemaking published at 73 DCR 013245 (October 16, 2026). Distr",
       "unverified_fields": [
         "effective_date (the text lists final rulemakings published in 2016, 2023 and 16 Oct 2026; the date each took effect was not fetched)",
+        "exclusion_sources (not confirmed: the DCRegs page fetched for 11-U253 lists the rule's versions and gives no regulation text, so no exclusions were read)",
         "exclusion_sources (not confirmed: the DCRegs page fetched for 11-U253 lists the rule's versions and gives no regulation text, so no exclusions were read)"
       ],
       "notes": "Text file: https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={8E59471E-8C75-40F3-858C-FEB57CD5BA4B}. DC is a single jurisdiction, so this is its own zoning code rather than a state preemption law."
@@ -2372,6 +2411,7 @@
       "evidence": "(1) Designate locations or zoning districts within the municipality in which accessory dwelling units are allowed, provided at least one accessory dwelling unit shall be allowed as of right on each lot that contains a single-family dwelling and no such accessory dwelling unit shall be required to be an affordable accessory dwell || (C) any more than one parking space for any such accessory d || (e) If a municipality fails to adopt new regulations or amend existing regulations by January 1, 2023, for the purpose of complying with the provisions of subsections (a) to (d), inclusive, of this section, and unless such municipality opts out of the provisions of said subsections in accordance wit || except that, on and after January 1, 2023, no municipality may opt out of the provisions of said subsections. (g) Notwit",
       "unverified_fields": [
         "bill_number (from round-1 secondary sources; the section's history line was not fetched)",
+        "exclusion_sources (not confirmed: the Connecticut General Assembly's statute page fetched from the record's URL is a script-rendered shell with no statute text, and www.cga.ct.gov fails its certificate check through this machine's proxy (checked 19 Nov 2026), so no text was read)",
         "exclusion_sources (not confirmed: the Connecticut General Assembly's statute page fetched from the record's URL is a script-rendered shell with no statute text, and www.cga.ct.gov fails its certificate check through this machine's proxy (checked 19 Nov 2026), so no text was read)"
       ],
       "notes": "Effective date taken from the statute's own 1 Jan 2023 compliance date in subsection (e)."
@@ -2404,6 +2444,7 @@
       "evidence": "(d) Zoning regulations adopted pursuant to subsection (a) of this section shall not: || (9) Require a minimum number of off-street motor vehicle parking spaces for any residential development except as provided in section 8-3n; || Nov. Sp. Sess. P.A. 25-1, S. 18.) || (b) A municipality may require a minimum number of off-street motor vehicle parking spaces for a residential development that contains more than sixteen dwelling units, as defined in section 47a-1, provided any such municipality shall allow the proposed developer of such development to submit to the zoning enforcement officer, planning commission, zoning commission or combined planning and zoning commission a parking needs assessment that conforms with the requirements of subsection (c) of this section. Such officer or commission shall condition the approval of such development on the construction of off-street parking spaces not exceeding: (1) One such space for each studio or one-bedroom d",
       "unverified_fields": [
         "effective_date (the amending act, Nov. Sp. Sess. P.A. 25-1, was not fetched)",
+        "exclusion_sources (not confirmed: the Connecticut General Assembly's statute page fetched from the record's URL is a script-rendered shell with no statute text, and www.cga.ct.gov fails its certificate check through this machine's proxy (checked 19 Nov 2026), so no text was read)",
         "exclusion_sources (not confirmed: the Connecticut General Assembly's statute page fetched from the record's URL is a script-rendered shell with no statute text, and www.cga.ct.gov fails its certificate check through this machine's proxy (checked 19 Nov 2026), so no text was read)"
       ],
       "notes": "§ 8-2 text: https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=4648&Index=I%3a%5czindex%5csurs&HitCount=2&hits=6e+6f+&hc=530&req=%28number+contains+8%2D2%2A%29&Item=7. A jurisdiction-wide limit, not a parcel right."
@@ -2436,6 +2477,7 @@
       "unverified_fields": [
         "bill_number (the enacting act was not fetched)",
         "definitions of transit community middle housing development and mixed-use development (§ 8-13hh, not fetched)",
+        "exclusion_sources (not confirmed: the Connecticut General Assembly's statute page fetched from the record's URL is a script-rendered shell with no statute text, and www.cga.ct.gov fails its certificate check through this machine's proxy (checked 19 Nov 2026), so no text was read)",
         "exclusion_sources (not confirmed: the Connecticut General Assembly's statute page fetched from the record's URL is a script-rendered shell with no statute text, and www.cga.ct.gov fails its certificate check through this machine's proxy (checked 19 Nov 2026), so no text was read)"
       ],
       "notes": "Effective date from the section's own 'On and after July 1, 2026'."
