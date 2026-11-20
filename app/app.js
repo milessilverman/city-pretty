@@ -5824,16 +5824,24 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
   const strategies = [];
   const blank = { equity: null, roi: null, cost: null, annualCashflow: null, paybackYrs: null, dollarStatus: PLAYBOOK_NOT_MODELED, modeled: false };
 
-  const hasZon = !!(zRule ? zRule.zone : (a.ZoneCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(a.ZoneCode).trim())));
-  const baseZone = zRule ? zRule.zone : (hasZon ? String(a.ZoneCode).trim() : null);
+  // The code comes from the zoning map at the lot (zoneAt, what the Zoning row shows), else the parcel record.
+  // zRule (a zone_rules row) carries standards only and has no code of its own, so it is not read here.
+  const zAt = (hasLoc && typeof zoneAt === "function") ? zoneAt(ll) : null;
+  const zCode = String((zAt && zAt.zone) || a.ZoneCode || "").trim();
+  const hasZon = !!zCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(zCode);
+  const baseZone = hasZon ? zCode : null;
   let statutes = [];
   let statEval = null;
   if (hasZon && typeof evaluateByRightHousing === "function") {
     try {
+      // Where the zoning map classes the zone itself (single-family, multifamily, commercial / mixed use), that decides.
+      // The text tests misread LA's R1 variation zones: R1V2-O has no word boundary after R1, and R1R3 reads as R3.
+      // Only the county bundle's own zoning layer counts: zones read from a live city service carry a `desc` and a guessed category.
+      const zCat = (zAt && zAt.zone && zAt.desc === undefined && /^(single-family|multifamily|commercial)/.test(String(zAt.cat || ""))) ? String(zAt.cat) : null;
       const zoneOrUse = String(baseZone || "") + " " + String(a.UseDescription || "");
-      const isComm = /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-      const isMulti = (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(baseZone));
-      const isSfr = !isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(baseZone || "").trim()));
+      const isComm = zCat ? /^commercial/.test(zCat) : /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
+      const isMulti = zCat ? zCat === "multifamily" : (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(baseZone));
+      const isSfr = zCat ? zCat === "single-family" : (!isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(baseZone || "").trim())));
       const R = st && st.R;
       statEval = evaluateByRightHousing({
         parcel_id: String(a.AIN || a.APN || "PARCEL"),

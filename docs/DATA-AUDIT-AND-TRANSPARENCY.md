@@ -1024,3 +1024,40 @@ passenger rail stations)" for SB 79.
   renamed it `BOXES`, so every county that clips a state or regional extract stopped with `NameError: name 'BOX' is not
   defined` before writing anything. Three references corrected. No published file was affected: no county had been
   built with the broken code.
+
+### Correction: LA lots in a mapped zone reached the legal screen with no zoning code (found 19 Nov, fixed 20 Nov 2026)
+
+- What was wrong: for a Los Angeles lot inside a mapped zone with a matching `zone_rules` row, the house panel's Zoning
+  row showed the zone (from `zoneAt(ll)`), but the owner playbook said "Zoning is not on file for this parcel" and the
+  Invest view's "This house" said "Not determined: zoning code unknown" for every addition. Example: 2107 Duxbury Cir,
+  Los Angeles (zone R1V2-O).
+- Cause: `computePropertyPlaybook` (`app/app.js`) and `parcelFacts` (`app/invest.js`) read a `zone` field from the row
+  `zoneRules()` returns. The 14 `zone_rules` rows in `app/data/bundle-la.b64.txt` have no `zone` field (they hold
+  `zone_prefix` and the standards), so the code was dropped exactly when a rule matched.
+- Fix: both now take the code from `zoneAt(ll).zone`, the same value the Zoning row shows, and fall back to the parcel
+  record's `ZoneCode`. The rule row is no longer read for the code.
+- Second fault found while checking the fix: with the code restored, the single-family test still failed for LA's R1
+  variation zones. `R1V2-O` has no word boundary after `R1`, `R1R3` matched the multifamily pattern as `R3`, and LA's
+  assessor use text for a house is "Single", which the text test does not match. Where the lot is in the county
+  bundle's own zoning layer and that layer classes the zone as single-family, multifamily or commercial / mixed use,
+  that category now decides; the text tests are kept for every other case (parcel-record zoning, and zones read from a
+  live city service, whose category is a guess from the code). Counted from the bundle on 20 Nov: of 408 zone codes the
+  layer classes single-family, the old text test on the code alone read 127 as single-family, 7 as multifamily (the six
+  `R1R3` codes and `UR2`) and 274 as neither.
+- Limit, stated plainly: the layer's single-family category also holds LA's agricultural and estate codes (for example
+  `A1-1-K`, `RA-1`, `RE40-1-H-K`). Those lots are now screened against the state ADU law and SB 9 like any other lot the
+  layer calls single-family. Whether SB 9 reaches each of those zones was not checked against the city's own text in
+  this session; the cards already say "unverified screening; confirm eligibility with the planning department".
+- Not on this branch: the earlier "found, not fixed" note for this fault and `app/advisor-scripts.js` (`answerLot`)
+  are in none of the pushed branches (checked 20 Nov), so there was no entry to mark fixed and no sentence to remove.
+  If that file lands from another branch, its sentence explaining this gap should be dropped.
+- Seen on the real page (20 Nov, `scripts/live_check_la_zoning_screen.mjs`, LIVE_PORT 8953, result in
+  `data/backtests/live_check_la_zoning_screen_2026-11-20.json`): 2107 Duxbury Cir, geocoded by the Census geocoder
+  (matched "2107 DUXBURY CIR, LOS ANGELES, CA, 90034"), opened as parcel situs "2107 DUXBURY CIR LOS ANGELES CA 90034".
+  Zoning row R1V2-O; owner playbook shows CA SB 9 "as applying to this parcel's recorded zoning (R1V2-O)" and "Also
+  screened: CA: ADU and junior ADU approved ministerially on single-family lots"; "This house" shows "Backyard home
+  (ADU) Allowed by state law".
+- Other checks the same day: `npm test` 862 passed; `npm run typecheck` clean; `npm run test:e2e` 83 passed (one new
+  test for an R1 variation lot with use "Single"); `scripts/live_check_panels.mjs 06037` (LIVE_PORT 8964, 3 lots, all
+  rows ok, `data/backtests/live_check_panels_2026-11-20_lazone.json`); `scripts/live_check_lot_fit.mjs` (LIVE_PORT
+  8965, all groups ok, `data/backtests/live_check_lot_fit_2026-11-20.json`).
