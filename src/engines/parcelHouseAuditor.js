@@ -128,9 +128,12 @@ function auditSingleHouseParcel(input) {
   const hasZoning = !!(input.zoningCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(input.zoningCode).trim()));
   const rawZone = hasZoning ? String(input.zoningCode).trim() : null;
   const zoneOrUse = String(rawZone || "") + " " + String(input.useDescription || "");
-  const isComm = hasZoning && /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-  const isMulti = hasZoning && (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(rawZone));
-  const isSfr = hasZoning && !isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(rawZone || "").trim()));
+  // input.zoningCategory: the zoning map's own class for the zone, when the caller has one (LA's bundle layer). It decides;
+  // the text tests misread LA's R1 variation zones (R1V2-O has no word boundary after R1, and R1R3 reads as R3).
+  const zCat = hasZoning && /^(single-family|multifamily|commercial|none$)/.test(String(input.zoningCategory || "")) ? String(input.zoningCategory) : null;
+  const isComm = hasZoning && (zCat ? /^commercial/.test(zCat) : /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse));
+  const isMulti = hasZoning && (zCat ? zCat === "multifamily" : (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(rawZone)));
+  const isSfr = hasZoning && (zCat ? zCat === "single-family" : (!isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(rawZone || "").trim()))));
 
   const parcelCtx = {
     parcel_id: input.parcelId,

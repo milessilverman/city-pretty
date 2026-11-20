@@ -113,6 +113,25 @@ describe("Parcel house auditor", () => {
     expect(hpoz.statutoryZoning.lotSplitFeasible).toBe(false);
   });
 
+  it("8b. The zoning map's own category decides where the caller has one (LA R1 variation zones)", () => {
+    const ids = (x: any) => x.statutoryZoning.applicable_statutes.map((s: any) => s.id);
+    const base = { ...BASE, lotSqft: 7500, livingSqft: 1800, neighborhoodMedianHv: 850000, useDescription: "Single" };
+    // Without a category the text tests misread both codes (found 20 Nov 2026 at 2107 Duxbury Cir and on R1R3 lots).
+    expect(ids(auditSingleHouseParcel({ ...base, parcelId: "p8c", zoningCode: "R1V2-O" }))).not.toContain("ca_sb9_lot_split");
+    expect(ids(auditSingleHouseParcel({ ...base, parcelId: "p8d", zoningCode: "R1R3-RG" }))).not.toContain("ca_sb9_lot_split");
+    for (const zoningCode of ["R1V2-O", "R1R3-RG"]) {
+      const a: any = auditSingleHouseParcel({ ...base, parcelId: "p8e", zoningCode, zoningCategory: "single-family" } as any);
+      expect(ids(a)).toContain("ca_sb9_lot_split");
+      expect(a.statutoryZoning.base_zoning_code).toBe(zoningCode);
+    }
+    // A multifamily or commercial category is never single-family, whatever the code looks like; other categories fall back to the text tests.
+    expect(ids(auditSingleHouseParcel({ ...base, parcelId: "p8f", zoningCode: "R-1", zoningCategory: "multifamily" } as any))).not.toContain("ca_sb9_lot_split");
+    expect(ids(auditSingleHouseParcel({ ...base, parcelId: "p8g", zoningCode: "R-1", zoningCategory: "commercial / mixed use" } as any))).not.toContain("ca_sb9_lot_split");
+    expect(ids(auditSingleHouseParcel({ ...base, parcelId: "p8h", zoningCode: "R-1", zoningCategory: "other" } as any))).toContain("ca_sb9_lot_split");
+    // "none": the caller knows the zone is on no single-family list (e.g. an LA County A-1 lot), so no text test rescues it.
+    expect(ids(auditSingleHouseParcel({ ...base, parcelId: "p8i", zoningCode: "R-1", zoningCategory: "none" } as any))).not.toContain("ca_sb9_lot_split");
+  });
+
   it("9. Shows no solar size, cost, savings or payback (none is sourced)", () => {
     const a = auditSingleHouseParcel({ ...BASE, parcelId: "p9", lotSqft: 6000, livingSqft: 2000, stories: 1, neighborhoodMedianHv: 850000 });
     expect(a.solarMicrogrid.federal_itc_pct_owner).toBe(0); // IRC § 25D ended after 2025

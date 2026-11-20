@@ -1326,9 +1326,12 @@ function auditSingleHouseParcel(input) {
   const hasZoning = !!(input.zoningCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(input.zoningCode).trim()));
   const rawZone = hasZoning ? String(input.zoningCode).trim() : null;
   const zoneOrUse = String(rawZone || "") + " " + String(input.useDescription || "");
-  const isComm = hasZoning && /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-  const isMulti = hasZoning && (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(rawZone));
-  const isSfr = hasZoning && !isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(rawZone || "").trim()));
+  // input.zoningCategory: the zoning map's own class for the zone, when the caller has one (LA's bundle layer). It decides;
+  // the text tests misread LA's R1 variation zones (R1V2-O has no word boundary after R1, and R1R3 reads as R3).
+  const zCat = hasZoning && /^(single-family|multifamily|commercial|none$)/.test(String(input.zoningCategory || "")) ? String(input.zoningCategory) : null;
+  const isComm = hasZoning && (zCat ? /^commercial/.test(zCat) : /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse));
+  const isMulti = hasZoning && (zCat ? zCat === "multifamily" : (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(rawZone)));
+  const isSfr = hasZoning && (zCat ? zCat === "single-family" : (!isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(rawZone || "").trim()))));
 
   const parcelCtx = {
     parcel_id: input.parcelId,
@@ -3256,6 +3259,22 @@ function zoneRules(code, juris) {
   const t = String(code).toUpperCase().replace(/\[[^\]]*\]|\([^)]*\)/g, "").replace(/^[QTD]+(?=[A-Z])/, "");
   juris = String(juris).replace(/ \(SCAG 2019\)$/, "");
   return (D.zone_rules || []).find(r => r.jurisdiction === juris && new RegExp("^" + r.zone_prefix.replace(/[.]/g, "\\.") + "(?![0-9.])").test(t));
+}
+// How the statute screen classes a lot that sits in the county bundle's own zoning layer (LA): "single-family",
+// "multifamily", "commercial / mixed use", "none" (no single-family or commercial law is screened), or null (not this
+// layer, or a jurisdiction with no list on file: the caller's text tests apply). Single-family needs both the layer's
+// own category and a zone on the jurisdiction's published SB 9 list (docs/audit/la_sb9_zone_scope.md, fetched 20 Nov
+// 2026): City of Los Angeles memo "A, RA, RE, RS, R1, RU, RZ, and RW1"; LA County memo "Zone R-1 or R-A". R1V/R1F/
+// R1R/R1H are read as R1 (the memo does not name the variations). Parking variants (R1P, RAP, A2P) are not on the list.
+function bundleZoneClass(z) {
+  if (!z || !z.zone || z.desc !== undefined) return null;   // zones read from a live city service carry a desc and a guessed category
+  const cat = String(z.cat || "");
+  if (cat === "multifamily" || /^commercial/.test(cat)) return cat;
+  const t = String(z.zone).toUpperCase().replace(/\[[^\]]*\]|\([^)]*\)/g, "").replace(/^[QTD]+(?=[A-Z])/, "");
+  const list = z.juris === "Los Angeles" ? /^(A[12]|RA|RE|RS|RU|RZ|RW1|R1(?:[VFRH]\d)?)(?![A-Z])/ : z.juris === "Unincorporated LA County" ? /^R-?[1A](?![0-9A-Z])/ : null;
+  if (!list || cat !== "single-family") return null;
+  const m = t.match(list);
+  return m && !/^(A[12]|R1|RW1)\d/.test(t.replace(/^R1[VFRH]\d/, "R1")) ? "single-family" : "none";
 }
 // Local zoning standards for a parcel, from app/data/zoning_standards.json (parsed from each code's own text by
 // scripts/build_zoning_standards.py). Returns { juris, district, std } when the district's standards are on file;
@@ -5834,10 +5853,9 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
   let statEval = null;
   if (hasZon && typeof evaluateByRightHousing === "function") {
     try {
-      // Where the zoning map classes the zone itself (single-family, multifamily, commercial / mixed use), that decides.
-      // The text tests misread LA's R1 variation zones: R1V2-O has no word boundary after R1, and R1R3 reads as R3.
-      // Only the county bundle's own zoning layer counts: zones read from a live city service carry a `desc` and a guessed category.
-      const zCat = (zAt && zAt.zone && zAt.desc === undefined && /^(single-family|multifamily|commercial)/.test(String(zAt.cat || ""))) ? String(zAt.cat) : null;
+      // Where bundleZoneClass has an answer for the lot's mapped zone, that decides. The text tests misread LA's R1
+      // variation zones: R1V2-O has no word boundary after R1, and R1R3 reads as R3.
+      const zCat = bundleZoneClass(zAt);
       const zoneOrUse = String(baseZone || "") + " " + String(a.UseDescription || "");
       const isComm = zCat ? /^commercial/.test(zCat) : /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
       const isMulti = zCat ? zCat === "multifamily" : (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(baseZone));
@@ -6098,6 +6116,7 @@ function renderHouse(box, a, lot, ll, st) {
         isVacantLand: valuation ? valuation.isVacantLand : false,
         units: F.units || 1,
         zoningCode: z ? z.zone : ((a.ZoneCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(a.ZoneCode).trim())) ? String(a.ZoneCode).trim() : null),
+        zoningCategory: bundleZoneClass(z),   // null outside the county bundle's own layer: the text tests apply
         useDescription: a.UseDescription || "",
         rollLandValue: rollLand,
         rollImpValue: rollImp,
@@ -11243,7 +11262,7 @@ function exportExecutiveProspectus() {
   const lot = window.__activeLotData || (typeof currentHouse !== "undefined" && currentHouse && currentHouse.lot) || (AH && AH.lot ? { lotSqft: AH.lot } : {});
   const F = window.__activeFacts || (typeof currentHouse !== "undefined" && currentHouse && currentHouse.F) || (AH && AH.F) || {};
   const zRule = window.__activeZRule || (typeof currentHouse !== "undefined" && currentHouse && currentHouse.zRule) || {};
-  const playbook = (typeof computePropertyPlaybook === "function") ? computePropertyPlaybook(a, lot, F, zRule, window.__activeLatLng, activeState()) : null;
+  const playbook = (typeof computePropertyPlaybook === "function") ? computePropertyPlaybook(a, AH ? AH.lot : lot, F, zRule, window.__activeLatLng || (AH && AH.ll), AH ? AH.st : null) : null;   // the open lot's size, point and hazard checks, as the panel passes them
 
   const addr = a.SitusFullAddress || a.PROPERTYADDRESS || a.Address || "Address not recorded";
   const ain = a.AIN || a.APN || a.PPN_TEXT || a.ParcelID || "not recorded";

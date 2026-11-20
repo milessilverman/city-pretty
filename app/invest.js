@@ -156,10 +156,9 @@ function parcelFacts() {
   const zCode = String((zAt && zAt.zone) || a.ZoneCode || "").trim();
   const hasZon = !!zCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(zCode);
   const baseZone = hasZon ? zCode : null;
-  // Where the zoning map classes the zone itself (single-family, multifamily, commercial / mixed use), that decides.
-  // The text tests misread LA's R1 variation zones: R1V2-O has no word boundary after R1, and R1R3 reads as R3.
-  // Only the county bundle's own zoning layer counts: zones read from a live city service carry a `desc` and a guessed category.
-  const zCat = (zAt && zAt.zone && zAt.desc === undefined && /^(single-family|multifamily|commercial)/.test(String(zAt.cat || ""))) ? String(zAt.cat) : null;
+  // Where bundleZoneClass (app/app.js) has an answer for the lot's mapped zone, that decides. The text tests misread
+  // LA's R1 variation zones: R1V2-O has no word boundary after R1, and R1R3 reads as R3.
+  const zCat = typeof bundleZoneClass === "function" ? bundleZoneClass(zAt) : null;
   const zoneOrUse = String(baseZone || "") + " " + String(a.UseDescription || "");
   const isComm = zCat ? /^commercial/.test(zCat) : /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
   const isMulti = zCat ? zCat === "multifamily" : (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(baseZone || ""));

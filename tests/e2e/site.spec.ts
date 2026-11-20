@@ -1324,6 +1324,30 @@ test("an LA lot in a mapped single-family variation zone reaches the state-law s
   expect(scr.onFile).toBe(true);
   expect(scr.ids).toEqual(expect.arrayContaining(["lot_split_duplex", "adu"]));
   expect(scr.text).toContain(`recorded zoning (${zone})`);
+  // Single-family needs the jurisdiction's published SB 9 list as well as the layer's category (docs/audit/la_sb9_zone_scope.md):
+  // the County lists "Zone R-1 or R-A" only, so a County A-1 lot the layer calls single-family is screened for no single-family law.
+  const cls = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s), Z = ev("D").layers.zoning, zCell = ev("zCell"), f = ev("bundleZoneClass"), pb = ev("computePropertyPlaybook");
+    const R = { hpoz: { ok: true, v: [] }, hcm: { ok: true, v: [] }, hc: { ok: true, v: [] }, fema: { sfha: false }, fire: { vh: false } };
+    const out: Record<string, any> = {};
+    for (const k of Object.keys(Z.cells)) for (const z of zCell(k)) {
+      const key = z.juris === "Unincorporated LA County" && z.cat === "single-family" ? (/^A-1/.test(z.zone) ? "countyA1" : /^R-1/.test(z.zone) ? "countyR1" : null)
+        : z.juris === "Los Angeles" && /^R3-1$/.test(z.zone) ? "cityR3" : z.juris === "Los Angeles" && z.cat === "single-family" && /^R1P/.test(z.zone) ? "cityR1P" : null;
+      if (!key || out[key] || !z.rings || !z.rings[0]) continue;
+      const r = z.rings[0], c = { lat: r.reduce((s: number, q: number[]) => s + q[0], 0) / r.length, lng: r.reduce((s: number, q: number[]) => s + q[1], 0) / r.length };
+      const hit = ev("zoneAt")(c);
+      if (!hit || hit.zone !== z.zone) continue;
+      out[key] = { cls: f(z), ids: pb({ AIN: "1", UseDescription: "Single" }, 8000, {}, null, c, { R }).all.map((x: any) => x.id) };
+    }
+    return out;
+  });
+  expect(cls.countyR1.cls).toBe("single-family");
+  expect(cls.countyR1.ids).toContain("lot_split_duplex");
+  expect(cls.countyA1.cls).toBe("none");
+  expect(cls.countyA1.ids).not.toContain("lot_split_duplex");
+  expect(cls.cityR3.cls).toBe("multifamily");
+  expect(cls.cityR3.ids).not.toContain("lot_split_duplex");
+  expect(cls.cityR1P.cls).toBe("none");   // parking variants are not on the City's list
   // The Invest view's "This house" reads the same lot the same way.
   await page.click("#view-switch [data-view=invest]");
   await page.waitForFunction(() => { const h = document.querySelector("#iv-house"); return !!h && /Backyard home \(ADU\)/.test(h.textContent || ""); }, null, { timeout: 90_000 });
