@@ -172,10 +172,12 @@ function auditSingleHouseParcel(input) {
     statutoryNotes = "State housing law records are still loading; by-right screening will update once available.";
   } else if ((statutoryZoning.applicable_statutes || []).length) {
     statutoryNotes = "State laws the screening engine applies here: " + statutoryZoning.applicable_statutes.map(s => s.short_name || s.citation).filter(Boolean).join(", ") + ". Unverified screening — confirm with the planning department."
-      + ((statutoryZoning.not_confirmed || []).length ? " Not confirmed: " + statutoryZoning.not_confirmed.map(nc => `${nc.name} (${nc.reason})`).join("; ") : "");
-  } else if ((statutoryZoning.not_confirmed || []).length) {
-    const unconfirmedReasons = statutoryZoning.not_confirmed.map(nc => `${nc.name} (${nc.reason})`).join("; ");
-    statutoryNotes = "Screening not confirmed for state housing laws: " + unconfirmedReasons + ". Local zoning governs.";
+      + ((statutoryZoning.not_confirmed || []).length ? " Not confirmed: " + statutoryZoning.not_confirmed.map(nc => `${nc.name} (${nc.reason})`).join("; ") : "")
+      + ((statutoryZoning.excluded_by_site || []).length ? " Ruled out here: " + statutoryZoning.excluded_by_site.map(nc => `${nc.name} (${nc.reason})`).join("; ") : "");
+  } else if ((statutoryZoning.not_confirmed || []).length || (statutoryZoning.excluded_by_site || []).length) {
+    const list = l => (l || []).map(nc => `${nc.name} (${nc.reason})`).join("; ");
+    statutoryNotes = [(statutoryZoning.not_confirmed || []).length ? "Screening not confirmed for state housing laws: " + list(statutoryZoning.not_confirmed) + "." : "",
+      (statutoryZoning.excluded_by_site || []).length ? "Ruled out here: " + list(statutoryZoning.excluded_by_site) + "." : ""].filter(Boolean).join(" ") + " Local zoning governs.";
   } else {
     statutoryNotes = "No state housing law in the screening engine applies to this parcel as recorded. Local zoning governs.";
   }
@@ -238,6 +240,7 @@ function auditSingleHouseParcel(input) {
       base_zoning_code: statutoryZoning.base_zoning_code,
       applicable_statutes: statutoryZoning.applicable_statutes,
       not_confirmed: statutoryZoning.not_confirmed || [],
+      excluded_by_site: statutoryZoning.excluded_by_site || [],
       statutory_exclusions: statutoryZoning.statutory_exclusions,
       net_by_right_feasible: statutoryZoning.net_by_right_feasible,
       privateCovenantsDisclaimer: "Private covenants: state housing laws override city zoning but may not cancel recorded HOA covenants or CC&Rs. Check the title report.",

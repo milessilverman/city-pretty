@@ -1,0 +1,1311 @@
+{
+ "fetched_on": "2026-11-20",
+ "scope": "Records in app/data/statutes.json with parcel_level not false and state_code in TX, WA, OR, MT, AZ, CO, UT, ID, NV (19 records). Research only; no engine or data change made.",
+ "how_to_read": {
+  "excluded": "true = the fetched text itself removes land in that condition from the law (see note for whether this is automatic, conditional on a local determination, or keyed to a local designation rather than the engine's map flag). false = the operative section(s) named in the note were read in full and contain no such exclusion. null = cannot be reduced to yes/no from the text: a power the city may or may not use (CITY OPTION), a clause preserving other laws (SAVINGS CLAUSE), or a split result (SPLIT / PARTIAL).",
+  "quote": "Verbatim from the fetched source, whitespace collapsed. ' [...] ' joins separate passages; where passages come from different documents the note says which. Every quote was machine-checked as a substring of the downloaded text.",
+  "key_names": "The five keys match the engine's flags. calfire_or_state_vhfhsz is used here for any state's wildfire hazard condition; williamson_or_ag_preserve for any agricultural or resource-land condition."
+ },
+ "not_fetched": [
+  "Colorado Revised Statutes (current codified text of HB 24-1152 and HB 24-1313): only the 2024 signed acts on leg.colorado.gov were fetched; later amendments not checked. The HB 24-1313 signed act numbers its sections 29-37-xxx; the current C.R.S. numbering was not confirmed.",
+  "Utah Code 10-9a-530 and 17-27a-526 (the record's citation): pages return no text; the renumbered sections 10-21-303 and 17-80-303 were fetched instead.",
+  "statutes.capitol.texas.gov/Docs/LG/htm/LG.218.htm and LG.211.htm: return a JavaScript application shell with no statute text; the same chapters were fetched from tcss.legis.texas.gov/resources/LG/htm/.",
+  "Texas S.B. 2477 (89th Leg.), which the code page also credits for chapter 218: not read.",
+  "City of Austin Code Title 25 outside the two HOME ordinances (floodplain, wildland-urban interface, historic and overlay regulations) and any ordinance amending HOME after May 2024: not fetched.",
+  "Arizona Revised Statutes title 48, chapter 6, article 4 (cross-referenced in A.R.S. 9-462.13(D)(6)): not fetched, so what it covers is not stated.",
+  "Local ordinances, local critical-area maps and local hazard regulations in every state: not fetched. Where a law leaves the exclusion to the city, the result here is null."
+ ],
+ "findings_beyond_the_question": [
+  "Utah: the record's citation (10-9a-530 / 17-27a-526) is out of date; the text now sits at Utah Code 10-21-303 and 17-80-303.",
+  "Arizona: the middle-housing text enacted by Laws 2024 ch. 197 as 9-462.10 is now at A.R.S. 9-462.13 (fetched: 'Zoning; development; middle housing; applicability; definitions'); 9-462.10 holds the adaptive-reuse section.",
+  "Texas: chapter 211 currently has two different subchapters both numbered 211.051-211.057 (S.B. 1567 and S.B. 15).",
+  "Montana: the 76-2-304 page shows a '(Temporary)' version and an '(Effective October 1, 2026)' version; in the later one subsections (5)-(6) are new parking rules and the definitions move to subsection (7).",
+  "None of the 19 records' texts supports a blanket hard stop for all four conditions. Only Colorado's two acts name the FEMA floodway / one hundred year floodplain directly; Oregon 197A.460 names a '100-year floodplain' on a local determination; Washington reaches flood land only through locally designated critical areas."
+ ],
+ "records": {
+  "wa_hb1110": {
+   "sections_read": [
+    {
+     "citation": "RCW 36.70A.635 (history note: 2025 c 301 s 3; 2025 c 148 s 3; 2024 c 152 s 2; 2023 c 332 s 3)",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635",
+     "source_kind": "official",
+     "as_of": "current RCW page, fetched 2026-11-20"
+    },
+    {
+     "citation": "RCW 36.70A.030(12) (definition of critical areas)",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.030",
+     "source_kind": "official",
+     "as_of": "current RCW page, fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": true,
+     "quote": "(8) The provisions of this section do not apply to: (a) Portions of a lot, parcel, or tract designated with critical areas designated under RCW 36.70A.170 or their buffers as required by RCW 36.70A.170, except for critical aquifer recharge areas where a single-family detached house is an allowed use provided that any requirements to maintain aquifer recharge are met; [...] (12) \"Critical areas\" include the following areas and ecosystems: (a) Wetlands; (b) areas with a critical recharging effect on aquifers used for potable water; (c) fish and wildlife habitat conservation areas; (d) frequently flooded areas; and (e) geologically hazardous areas.",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635",
+     "note": "AUTOMATIC, but keyed to the city's own critical-area designation, not to the FEMA map: the section does not apply to the PORTIONS of a lot designated as critical areas or their buffers, and RCW 36.70A.030(12) (https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.030) lists 'frequently flooded areas' as a critical area. The text does not name FEMA or the special flood hazard area; a FEMA flag is only a proxy for the local designation. Only the designated portion is excluded, not the whole lot. Separately, a city using the 75-percent alternative in subsection (4) must put 'areas subject to ... increased flooding' among the lots left out (city option). Section 36.70A.635 read in full."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": null,
+     "quote": "(4)(a) As an alternative to the density requirements in subsection (1) of this section, a city may implement the density requirements in subsection (1) of this section for at least 75 percent of lots in the city that are primarily dedicated to single-family detached housing units. [...] (v) Any areas subject to sea level rise, increased flooding, susceptible to wildfires, or geological hazards over the next 100 years.",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635",
+     "note": "CITY OPTION, not automatic: wildfire is not in the critical-areas definition (RCW 36.70A.030(12) lists wetlands, aquifer recharge, habitat, frequently flooded and geologically hazardous areas). Wildfire-susceptible areas are named only in subsection (4)(b)(v), as areas that must be among the up-to-25 percent of lots a city leaves out IF the city chooses the 75-percent alternative. Whether a given lot is left out depends on the city's ordinance. Section read in full."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635",
+     "note": "NONE FOUND. RCW 36.70A.635 read in full: no exclusion for agricultural or resource land. The duty covers 'all lots zoned predominantly for residential use' in the listed cities, so land not zoned residential is outside the section's scope rather than excluded by a clause."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635",
+     "note": "NONE FOUND. RCW 36.70A.635 read in full: no mention of public, federal or tribal land."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635",
+     "note": "NONE FOUND. RCW 36.70A.635 read in full: no mention of historic districts or landmarks."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Other critical areas and buffers (wetlands, fish and wildlife habitat, geologically hazardous areas); critical aquifer recharge areas are NOT excluded where a single-family house is allowed",
+     "quote": "(8) The provisions of this section do not apply to: (a) Portions of a lot, parcel, or tract designated with critical areas designated under RCW 36.70A.170 or their buffers as required by RCW 36.70A.170, except for critical aquifer recharge areas where a single-family detached house is an allowed use provided that any requirements to maintain aquifer recharge are met;",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635"
+    },
+    {
+     "what": "Sole-source aquifers on Puget Sound islands",
+     "quote": "(b) Areas designated as sole-source aquifers by the United States environmental protection agency on islands in the Puget Sound;",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635"
+    },
+    {
+     "what": "Impaired or threatened watershed serving a potable-water reservoir",
+     "quote": "(c) A watershed serving a reservoir for potable water if that watershed is or was listed, as of July 23, 2023, as impaired or threatened under section 303(d) of the federal clean water act (33 U.S.C. Sec. 1313(d));",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635"
+    },
+    {
+     "what": "Urban separators",
+     "quote": "(d) Lots that have been designated urban separators by countywide planning policies as of July 23, 2023; or",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635"
+    },
+    {
+     "what": "Lots created by a lot split under RCW 58.17.145",
+     "quote": "(e) A lot that was created through the splitting of a single residential lot pursuant to RCW 58.17.145.",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635"
+    },
+    {
+     "what": "75-percent alternative: the left-out 25 percent must include displacement-risk areas, infrastructure-deficient areas, critical-area lots, the airport radius and hazard areas (city option)",
+     "quote": "(4)(a) As an alternative to the density requirements in subsection (1) of this section, a city may implement the density requirements in subsection (1) of this section for at least 75 percent of lots in the city that are primarily dedicated to single-family detached housing units. [...] (v) Any areas subject to sea level rise, increased flooding, susceptible to wildfires, or geological hazards over the next 100 years.",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635"
+    },
+    {
+     "what": "Parking limits do not apply near a large commercial airport (parking only, not eligibility)",
+     "quote": "(b) To portions of cities within a one-mile radius of a commercial airport in Washington with at least 9,000,000 annual enplanements.",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635"
+    },
+    {
+     "what": "Other permit requirements still apply",
+     "quote": "(10) Nothing in this section requires a city to issue a building permit if other federal, state, and local requirements for a building permit are not met.",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635"
+    }
+   ]
+  },
+  "wa_hb1337_adu": {
+   "sections_read": [
+    {
+     "citation": "RCW 36.70A.681 (2023 c 334 s 4)",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681",
+     "source_kind": "official",
+     "as_of": "current RCW page, fetched 2026-11-20"
+    },
+    {
+     "citation": "RCW 36.70A.680 (2025 c 148 s 4; 2023 c 334 s 3)",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.680",
+     "source_kind": "official",
+     "as_of": "current RCW page, fetched 2026-11-20"
+    },
+    {
+     "citation": "RCW 36.70A.030(12) (definition of critical areas)",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.030",
+     "source_kind": "official",
+     "as_of": "current RCW page, fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": true,
+     "quote": "(4) The provisions of this section do not apply to lots designated with critical areas or their buffers as designated in RCW 36.70A.060, or to a watershed serving a reservoir for potable water if that watershed is or was listed, as of July 23, 2023, as impaired or threatened under section 303(d) of the federal clean water act (33 U.S.C. Sec. 1313(d)). [...] (12) \"Critical areas\" include the following areas and ecosystems: (a) Wetlands; (b) areas with a critical recharging effect on aquifers used for potable water; (c) fish and wildlife habitat conservation areas; (d) frequently flooded areas; and (e) geologically hazardous areas.",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681",
+     "note": "AUTOMATIC, but keyed to the local critical-area designation, not the FEMA map: RCW 36.70A.681(4) says the section does not apply to 'lots designated with critical areas or their buffers' (whole lot here, unlike HB 1110's 'portions of a lot'); 'frequently flooded areas' are critical areas under RCW 36.70A.030(12) (https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.030). FEMA is not named. In addition RCW 36.70A.680(5)(e) (https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.680) is a CITY OPTION to prohibit or restrict ADUs in 'flood plains' in residential zones of one unit per acre or less. Sections 36.70A.680 and .681 read in full."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "(4) Nothing in this section or RCW 36.70A.681 requires or authorizes a city or county to authorize the construction of an accessory dwelling unit in a location where development is restricted under other laws, rules, or ordinances as a result of physical proximity to on-site sewage system infrastructure, critical areas, or other unsuitable physical characteristics of a property.",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.680",
+     "note": "NONE FOUND by name. RCW 36.70A.680 and .681 read in full: wildfire is not mentioned and is not in the critical-areas definition. The quoted general savings clause (680(4)) leaves in place restrictions under OTHER laws based on 'unsuitable physical characteristics of a property'; that is not an exclusion in this law."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "(2) Ordinances, development regulations, and other official controls adopted or amended pursuant to this section and RCW 36.70A.681 must only apply in the portions of towns, cities, and counties that are within urban growth areas designated under this chapter.",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.680",
+     "note": "NONE FOUND as an exclusion. Scope limit instead: the ADU rules apply only inside urban growth areas (680(2), quoted), so resource land outside a UGA is out of scope. No clause on agricultural land inside a UGA. Sections read in full."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681",
+     "note": "NONE FOUND. RCW 36.70A.680 and .681 read in full: no mention of public or tribal land."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681",
+     "note": "NONE FOUND. RCW 36.70A.680 and .681 read in full: no mention of historic districts or landmarks."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "All critical areas and their buffers; impaired/threatened reservoir watershed (automatic)",
+     "quote": "(4) The provisions of this section do not apply to lots designated with critical areas or their buffers as designated in RCW 36.70A.060, or to a watershed serving a reservoir for potable water if that watershed is or was listed, as of July 23, 2023, as impaired or threatened under section 303(d) of the federal clean water act (33 U.S.C. Sec. 1313(d)).",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681"
+    },
+    {
+     "what": "City option: prohibit or restrict ADUs in low-density zones within wetlands, habitat, flood plains or geologically hazardous areas",
+     "quote": "(e) Prohibiting or restricting the construction of accessory dwelling units in residential zones with a density of one dwelling unit per acre or less that are within areas designated as wetlands, fish and wildlife habitats, flood plains, or geologically hazardous areas.",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.680"
+    },
+    {
+     "what": "City option: prohibit ADUs on lots not served by public sewer",
+     "quote": "(d) Prohibiting the construction of accessory dwelling units on lots that are not connected to or served by public sewers; or",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.680"
+    },
+    {
+     "what": "Savings clause: locations where development is restricted under other laws (on-site sewage, critical areas, unsuitable physical characteristics)",
+     "quote": "(4) Nothing in this section or RCW 36.70A.681 requires or authorizes a city or county to authorize the construction of an accessory dwelling unit in a location where development is restricted under other laws, rules, or ordinances as a result of physical proximity to on-site sewage system infrastructure, critical areas, or other unsuitable physical characteristics of a property.",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.680"
+    },
+    {
+     "what": "Only within urban growth areas",
+     "quote": "(2) Ordinances, development regulations, and other official controls adopted or amended pursuant to this section and RCW 36.70A.681 must only apply in the portions of towns, cities, and counties that are within urban growth areas designated under this chapter.",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.680"
+    },
+    {
+     "what": "Parking limits do not apply near a large commercial airport (parking only)",
+     "quote": "(ii) To portions of cities within a one mile radius of a commercial airport in Washington with at least 9,000,000 annual enplanements.",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681"
+    }
+   ]
+  },
+  "wa_hb1042_existing_buildings": {
+   "sections_read": [
+    {
+     "citation": "RCW 35.21.990 (2025 c 203 s 2; 2025 c 139 s 3; 2023 c 285 s 2)",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=35.21.990",
+     "source_kind": "official",
+     "as_of": "current RCW page, fetched 2026-11-20"
+    },
+    {
+     "citation": "RCW 35A.21.440 (2025 c 203 s 1; 2025 c 139 s 4; 2023 c 285 s 1)",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=35A.21.440",
+     "source_kind": "official",
+     "as_of": "current RCW page, fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=35.21.990",
+     "note": "NONE FOUND. RCW 35.21.990 and 35A.21.440 read in full: no flood, floodplain or critical-area exclusion. The law concerns units added inside an existing building."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "(3) Nothing in this section requires a city to approve a building permit application for the addition of housing units constructed entirely within an existing building envelope in a building located within a zone that permits multifamily housing in cases in which the building cannot satisfy life safety standards.",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=35.21.990",
+     "note": "NONE FOUND. Both sections read in full: no wildfire-area exclusion. The quoted clause is about the building meeting life safety standards, not about where the lot is."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=35.21.990",
+     "note": "NONE FOUND. Both sections read in full. They cover existing buildings 'in commercial, mixed-use, or residential zones'."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=35.21.990",
+     "note": "NONE FOUND. Both sections read in full: no mention of public or tribal land."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "(e) Impose exterior design or architectural requirements on the residential use of an existing building beyond those necessary for health and safety of the use of the interior of the building or to preserve character-defining streetscapes, unless the building is a designated landmark or is within a historic district established through a local preservation ordinance; [...] (e) Impose exterior design or architectural requirements on the residential use of an existing building beyond those necessary for health and safety of the use of the interior of the building or to preserve character-defining streetscapes, unless the building is a designated landmark or is within a historic district established through a local preservation ordinance;",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=35.21.990",
+     "note": "NOT EXCLUDED, partial carve-out only: for a designated landmark or a building in a locally established historic district the city KEEPS the power to impose exterior design or architectural requirements (subsection (2)(e)). The density, parking and permitting limits in the rest of subsection (2) have no historic exception. Same words in RCW 35A.21.440 (https://app.leg.wa.gov/RCW/default.aspx?cite=35A.21.440)."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Ground-floor commercial or retail along a major pedestrian corridor (city may bar units in that part of the building)",
+     "quote": "(f) Prohibit the addition of housing units in any specific part of a building except ground floor commercial or retail that is along a major pedestrian corridor as defined by each city, unless the addition of the units would violate applicable building codes or health and safety standards;",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=35.21.990"
+    },
+    {
+     "what": "Buildings that cannot meet life safety standards",
+     "quote": "(3) Nothing in this section requires a city to approve a building permit application for the addition of housing units constructed entirely within an existing building envelope in a building located within a zone that permits multifamily housing in cases in which the building cannot satisfy life safety standards.",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=35.21.990"
+    },
+    {
+     "what": "Only buildings with a certificate of occupancy at least three years old",
+     "quote": "(4) For the purpose of this section, \"existing building\" means a building that received a certificate of occupancy at least three years prior to the permit application to add housing units.",
+     "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=35.21.990"
+    }
+   ]
+  },
+  "or_hb2001": {
+   "sections_read": [
+    {
+     "citation": "ORS 197A.420 (Formerly 197.758; 2025 c.38 s.24; 2025 c.476 s.1)",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "source_kind": "official",
+     "as_of": "ORS 2025 Edition, fetched 2026-11-20"
+    },
+    {
+     "citation": "ORS 197A.421 (2025 c.476 s.3), subsections (2)-(5) read for cross-reference only",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "source_kind": "official",
+     "as_of": "ORS 2025 Edition, fetched 2026-11-20"
+    },
+    {
+     "citation": "OAR 660-046-0010 (administrative rule implementing ORS 197A.420; not the statute)",
+     "url": "https://secure.sos.state.or.us/oard/displayDivisionRules.action?selectedDivision=5988",
+     "source_kind": "official",
+     "as_of": "Oregon Secretary of State rule database; rule history shows last amendment 'LCDD 14-2026, amend filed 11/12/2026, effective 11/17/2026'; fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": null,
+     "quote": "(b) May regulate middle housing to comply with protective measures adopted pursuant to statewide land use planning goals. [...] (c) Goal 7: Areas Subject to Natural Hazards – Pursuant to OAR 660-015-0000(7), Medium and Large Cities must adopt comprehensive plans (inventories, policies, and implementing measures) to reduce risk to people and property from natural hazards. Such protective measures adopted pursuant to Goal 7 apply to Middle Housing, including, but not limited to, restrictions on use, density, and occupancy in the following areas: (A) Special Flood Hazard Areas as identified on the applicable Federal Emergency Management Agency Flood Insurance Rate Map; and (B) Other hazard areas identified in an adopted comprehensive plan or development code, provided the Medium or Large City determines that the development of Middle Housing presents a greater risk to life or property than the development of detached single-unit dwellings from the identified hazard.",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "note": "CITY OPTION, not automatic. The statute (ORS 197A.420(5)(b), first quote) only lets a local government 'regulate middle housing to comply with protective measures adopted pursuant to statewide land use planning goals'; it names no goal and no flood area. The second quote is from the implementing RULE, OAR 660-046-0010(3)(c) (https://secure.sos.state.or.us/oard/displayDivisionRules.action?selectedDivision=5988), which says Goal 7 protective measures, including restrictions on use, density and occupancy in FEMA Special Flood Hazard Areas, apply to middle housing. So a lot in an SFHA is excluded only if the city's adopted Goal 7 measures restrict it. ORS 197A.420 read in full."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": null,
+     "quote": "(b) May regulate middle housing to comply with protective measures adopted pursuant to statewide land use planning goals. [...] (c) Goal 7: Areas Subject to Natural Hazards – Pursuant to OAR 660-015-0000(7), Medium and Large Cities must adopt comprehensive plans (inventories, policies, and implementing measures) to reduce risk to people and property from natural hazards. Such protective measures adopted pursuant to Goal 7 apply to Middle Housing, including, but not limited to, restrictions on use, density, and occupancy in the following areas: (A) Special Flood Hazard Areas as identified on the applicable Federal Emergency Management Agency Flood Insurance Rate Map; and (B) Other hazard areas identified in an adopted comprehensive plan or development code, provided the Medium or Large City determines that the development of Middle Housing presents a greater risk to life or property than the development of detached single-unit dwellings from the identified hazard.",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "note": "CITY OPTION, not automatic. Same power as for flood (ORS 197A.420(5)(b)). Wildfire is not named in the statute. Under the rule (OAR 660-046-0010(3)(c)(B), quoted) 'other hazard areas identified in an adopted comprehensive plan or development code' may carry restrictions only if the city determines middle housing presents a greater risk than detached single-unit dwellings. ORS 197A.420 read in full."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": true,
+     "quote": "(2) Except as provided in subsection (4) of this section, each county, each city with a population of 25,000 or greater, and each city with a population of 1,000 or greater within Metro, shall allow the development of all middle housing types on each lot or parcel zoned for residential use. [...] means land that: (A) Is within an urban growth boundary; (B) Has base zoning for, or is designated to allow, residential uses; (C) Allows the development of a detached single-unit dwelling; [...] (D) Is not zoned primarily for commercial, industrial, agricultural or public uses; and",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "note": "AUTOMATIC, by zoning not by preserve status: the duty covers only lots 'zoned for residential use', and that term is defined (ORS 197A.420(1)(j)) to require land inside an urban growth boundary that 'Is not zoned primarily for commercial, industrial, agricultural or public uses'. A lot zoned primarily agricultural is therefore outside the law. The text says nothing about farm-use tax status or other preserve programs. Section read in full."
+    },
+    "public_or_tribal_land": {
+     "excluded": null,
+     "quote": "(D) Is not zoned primarily for commercial, industrial, agricultural or public uses; and",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "note": "PARTIAL, by zoning: land 'zoned primarily for ... public uses' is outside the definition of 'zoned for residential use' (automatic). Publicly owned land that is residentially zoned is not excluded by the text, and tribal land is not mentioned. Because the engine flag is ownership-based, a single true/false cannot be given. Section read in full."
+    },
+    "historic_district_hpoz": {
+     "excluded": null,
+     "quote": "(b) May regulate middle housing to comply with protective measures adopted pursuant to statewide land use planning goals. [...] Medium or Large Cities may not apply the following types of regulations specific to Middle Housing: (i) Use, density, and occupancy restrictions that prohibit the development of Middle Housing on historic properties or districts that otherwise permit the development of detached single-unit dwellings; and (ii) Standards that prohibit the development of Middle Housing on historic properties or districts that otherwise permit the development of detached single-unit dwellings.",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "note": "CITY OPTION to regulate, but the rule bars prohibition. The statute does not mention historic districts; a city may apply Goal 5 protective measures under ORS 197A.420(5)(b). The implementing rule OAR 660-046-0010(3)(a)(B) (https://secure.sos.state.or.us/oard/displayDivisionRules.action?selectedDivision=5988, second quote) says cities may NOT apply use, density or occupancy restrictions or standards that prohibit middle housing on historic properties or districts that otherwise permit detached single-unit dwellings. So historic status is not a hard stop under the rule."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Land outside an urban growth boundary, land not allowing a detached single-unit dwelling, and land zoned primarily commercial or industrial (definition of 'zoned for residential use')",
+     "quote": "means land that: (A) Is within an urban growth boundary; (B) Has base zoning for, or is designated to allow, residential uses; (C) Allows the development of a detached single-unit dwelling; [...] (D) Is not zoned primarily for commercial, industrial, agricultural or public uses; and [...] (E) Is incorporated or urban unincorporated land.",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html"
+    },
+    {
+     "what": "Siting and design regulation allowed if it does not discourage middle housing through unreasonable cost or delay",
+     "quote": "(a) May regulate siting and design of middle housing required to be permitted under this section, provided that the regulations do not individually or cumulatively discourage, through unreasonable costs or delay, the development of all middle housing types permitted in the area.",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html"
+    },
+    {
+     "what": "Rule (not statute): Goal 5 natural resource sites; cities may limit middle housing other than duplexes there",
+     "quote": "(ii) Medium and Large Cities may limit the development of Middle Housing other than Duplexes in significant resource sites identified and protected pursuant to Goal 5; and",
+     "url": "https://secure.sos.state.or.us/oard/displayDivisionRules.action?selectedDivision=5988"
+    },
+    {
+     "what": "Rule (not statute): estuarine resource areas (Goal 16)",
+     "quote": "Medium and Large Cities may prohibit Middle Housing in areas regulated to protect estuarine resources under Goal 16 in the same manner as the Medium or Large City prohibits detached single-unit dwellings to protect estuarine resources under Goal 16.",
+     "url": "https://secure.sos.state.or.us/oard/displayDivisionRules.action?selectedDivision=5988"
+    },
+    {
+     "what": "Rule (not statute): residential lots designated for future industrial or employment use (Goal 9)",
+     "quote": "Medium and Large Cities may limit the development of Middle Housing on Lots or Parcels Zoned For Residential Use designated for future industrial or employment uses.",
+     "url": "https://secure.sos.state.or.us/oard/displayDivisionRules.action?selectedDivision=5988"
+    }
+   ]
+  },
+  "or_adu_197a425": {
+   "sections_read": [
+    {
+     "citation": "ORS 197A.425 (Formerly subsections (5) and (6) of 197.312; 2025 c.38 s.25)",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "source_kind": "official",
+     "as_of": "ORS 2025 Edition, fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "(1)(a) A city with a population greater than 2,500 or a county with a population greater than 15,000 shall allow in areas within the urban growth boundary that are zoned for detached single-unit dwellings the development of at least one accessory dwelling unit for each detached single-unit dwelling, subject to reasonable local regulations relating to siting and design.",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "note": "NONE FOUND. ORS 197A.425 read in full (two subsections): it contains no site exclusion of any kind. The only local power is 'reasonable local regulations relating to siting and design' (quoted), which the section does not define beyond saying it excludes owner-occupancy and off-street parking requirements. Whether a city's siting rules bar an ADU on such a lot is a matter of local ordinance, not of this text."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "(1)(a) A city with a population greater than 2,500 or a county with a population greater than 15,000 shall allow in areas within the urban growth boundary that are zoned for detached single-unit dwellings the development of at least one accessory dwelling unit for each detached single-unit dwelling, subject to reasonable local regulations relating to siting and design.",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "note": "NONE FOUND. ORS 197A.425 read in full (two subsections): it contains no site exclusion of any kind. The only local power is 'reasonable local regulations relating to siting and design' (quoted), which the section does not define beyond saying it excludes owner-occupancy and off-street parking requirements. Whether a city's siting rules bar an ADU on such a lot is a matter of local ordinance, not of this text."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "(1)(a) A city with a population greater than 2,500 or a county with a population greater than 15,000 shall allow in areas within the urban growth boundary that are zoned for detached single-unit dwellings the development of at least one accessory dwelling unit for each detached single-unit dwelling, subject to reasonable local regulations relating to siting and design.",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "note": "NONE FOUND as an exclusion; scope limit only: the duty covers 'areas within the urban growth boundary that are zoned for detached single-unit dwellings'. ORS 197A.425 read in full (two subsections): it contains no site exclusion of any kind. The only local power is 'reasonable local regulations relating to siting and design' (quoted), which the section does not define beyond saying it excludes owner-occupancy and off-street parking requirements. Whether a city's siting rules bar an ADU on such a lot is a matter of local ordinance, not of this text."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "note": "NONE FOUND. ORS 197A.425 read in full (two subsections): it contains no site exclusion of any kind. The only local power is 'reasonable local regulations relating to siting and design' (quoted), which the section does not define beyond saying it excludes owner-occupancy and off-street parking requirements. Whether a city's siting rules bar an ADU on such a lot is a matter of local ordinance, not of this text."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "note": "NONE FOUND. ORS 197A.425 read in full (two subsections): it contains no site exclusion of any kind. The only local power is 'reasonable local regulations relating to siting and design' (quoted), which the section does not define beyond saying it excludes owner-occupancy and off-street parking requirements. Whether a city's siting rules bar an ADU on such a lot is a matter of local ordinance, not of this text."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Scope: only inside an urban growth boundary, in areas zoned for detached single-unit dwellings; subject to reasonable local siting and design regulations",
+     "quote": "(1)(a) A city with a population greater than 2,500 or a county with a population greater than 15,000 shall allow in areas within the urban growth boundary that are zoned for detached single-unit dwellings the development of at least one accessory dwelling unit for each detached single-unit dwelling, subject to reasonable local regulations relating to siting and design.",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html"
+    }
+   ]
+  },
+  "or_commercial_197a460": {
+   "sections_read": [
+    {
+     "citation": "ORS 197A.460 (2023 c.223 s.2)",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "source_kind": "official",
+     "as_of": "ORS 2025 Edition, fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": true,
+     "quote": "(3) Development under this section does not: [...] (b) Apply on lands where the local government determines that: [...] (C) The property is within a 100-year floodplain; or",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "note": "AUTOMATIC ONCE THE LOCAL GOVERNMENT DETERMINES IT: ORS 197A.460(3)(b)(C) says development under the section does not apply on lands where the local government determines the property is within a 100-year floodplain. The text says '100-year floodplain' and does not name FEMA. Section read in full."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": true,
+     "quote": "(3) Development under this section does not: [...] (b) Apply on lands where the local government determines that: [...] (D) The development of the property is constrained by land use regulations based on statewide land use planning goals relating to: (i) Natural disasters and hazards; or (ii) Natural resources, including air, water, land or natural areas, but not including open spaces.",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "note": "CONDITIONAL on a local determination: the section does not apply where the local government determines development 'is constrained by land use regulations based on statewide land use planning goals relating to ... Natural disasters and hazards'. Wildfire is not named; a wildfire-hazard lot is excluded only if a local hazard regulation based on that goal constrains development of the property. A state wildfire map flag alone does not establish this. Section read in full."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "within an urban growth boundary a local government shall allow, on lands zoned to allow only commercial uses and not industrial uses, the siting and development of:",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "note": "NONE FOUND as an agricultural exclusion; scope limit only: the section covers 'lands zoned to allow only commercial uses and not industrial uses' inside an urban growth boundary, so farm-zoned land is out of scope. Natural-resource constraints are a separate exclusion (see other_site_exclusions_in_text). Section read in full."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "note": "NONE FOUND. ORS 197A.460 read in full: no mention of public or tribal land."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+     "note": "NONE FOUND. ORS 197A.460 read in full: historic districts and landmarks are not mentioned. (Subsection (3)(b)(D)(ii) names 'Natural resources, including air, water, land or natural areas'; it does not name historic resources.)"
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Property not adequately served by water, sewer, storm drainage or streets (local determination)",
+     "quote": "(b) Apply on lands where the local government determines that: [...] (A) The development on the property cannot be adequately served by water, sewer, storm water drainage or streets, or will not be adequately served at the time that development on the lot is complete;",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html"
+    },
+    {
+     "what": "Slope of 25 percent or greater (local determination)",
+     "quote": "(B) The property contains a slope of 25 percent or greater;",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html"
+    },
+    {
+     "what": "Development constrained by goal-based natural-resource regulations (local determination)",
+     "quote": "(D) The development of the property is constrained by land use regulations based on statewide land use planning goals relating to: (i) Natural disasters and hazards; or (ii) Natural resources, including air, water, land or natural areas, but not including open spaces.",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html"
+    },
+    {
+     "what": "Vacant land, and land added to the urban growth boundary in the last 15 years",
+     "quote": "(c) Apply on lands that are vacant or that were added to the urban growth boundary within the last 15 years.",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html"
+    },
+    {
+     "what": "Land zoned to allow industrial uses; land outside an urban growth boundary",
+     "quote": "within an urban growth boundary a local government shall allow, on lands zoned to allow only commercial uses and not industrial uses, the siting and development of:",
+     "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html"
+    }
+   ]
+  },
+  "mt_sb323": {
+   "sections_read": [
+    {
+     "citation": "Mont. Code Ann. 76-2-304 (history: ... amd. Sec. 1, Ch. 445, L. 2023; amd. Sec. 1, Ch. 499, L. 2023; amd. Sec. 1, Ch. 591, L. 2025; amd. Sec. 1, Ch. 682, L. 2025)",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html",
+     "source_kind": "official",
+     "as_of": "Montana Code Annotated 2025, fetched 2026-11-20. The page shows two versions of the section: '(Temporary)' and '(Effective October 1, 2026)'; both were read."
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "(3) In a city with a population of at least 5,000 residents, duplex housing must be allowed as a permitted use on a lot where a single-family residence is a permitted use, and zoning regulations that apply to the development or use of duplex housing may not be more restrictive than zoning regulations that are applicable to single-family residences.",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html",
+     "note": "NONE FOUND. Mont. Code Ann. 76-2-304 read in full in both versions shown on the page (the '(Temporary)' text and the '(Effective October 1, 2026)' text): the section contains no site exclusion. The duplex rule applies 'on a lot where a single-family residence is a permitted use', so a floodplain rule that bars a single-family residence would bar the duplex too; that comes from local zoning, not from this text."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html",
+     "note": "NONE FOUND. Mont. Code Ann. 76-2-304 read in full in both versions shown on the page (the '(Temporary)' text and the '(Effective October 1, 2026)' text): the section contains no site exclusion. Subsection (1)(b)(i) says zoning must be designed to 'secure safety from fire and other dangers'; that is a general zoning criterion, not an exclusion."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html",
+     "note": "NONE FOUND. Mont. Code Ann. 76-2-304 read in full in both versions shown on the page (the '(Temporary)' text and the '(Effective October 1, 2026)' text): the section contains no site exclusion. "
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html",
+     "note": "NONE FOUND. Mont. Code Ann. 76-2-304 read in full in both versions shown on the page (the '(Temporary)' text and the '(Effective October 1, 2026)' text): the section contains no site exclusion. "
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html",
+     "note": "NONE FOUND. Mont. Code Ann. 76-2-304 read in full in both versions shown on the page (the '(Temporary)' text and the '(Effective October 1, 2026)' text): the section contains no site exclusion. "
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Scope: only lots where a single-family residence is a permitted use, in cities of at least 5,000 residents",
+     "quote": "(3) In a city with a population of at least 5,000 residents, duplex housing must be allowed as a permitted use on a lot where a single-family residence is a permitted use, and zoning regulations that apply to the development or use of duplex housing may not be more restrictive than zoning regulations that are applicable to single-family residences.",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html"
+    }
+   ]
+  },
+  "mt_commercial_76_2_304_4": {
+   "sections_read": [
+    {
+     "citation": "Mont. Code Ann. 76-2-304(4) and following",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html",
+     "source_kind": "official",
+     "as_of": "Montana Code Annotated 2025, fetched 2026-11-20. The page shows two versions of the section: '(Temporary)' and '(Effective October 1, 2026)'; both were read."
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html",
+     "note": "NONE FOUND. Mont. Code Ann. 76-2-304 read in full in both versions shown on the page (the '(Temporary)' text and the '(Effective October 1, 2026)' text): the section contains no site exclusion. "
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html",
+     "note": "NONE FOUND. Mont. Code Ann. 76-2-304 read in full in both versions shown on the page (the '(Temporary)' text and the '(Effective October 1, 2026)' text): the section contains no site exclusion. "
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "on a parcel or lot that: (i) has a will-serve letter from both a municipal water system and a municipal sewer system; and (ii) is located in a commercial zone.",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html",
+     "note": "NONE FOUND as an exclusion; scope limit only: the parcel must be 'located in a commercial zone' and have water and sewer will-serve letters. Mont. Code Ann. 76-2-304 read in full in both versions shown on the page (the '(Temporary)' text and the '(Effective October 1, 2026)' text): the section contains no site exclusion. "
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html",
+     "note": "NONE FOUND. Mont. Code Ann. 76-2-304 read in full in both versions shown on the page (the '(Temporary)' text and the '(Effective October 1, 2026)' text): the section contains no site exclusion. "
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html",
+     "note": "NONE FOUND. Mont. Code Ann. 76-2-304 read in full in both versions shown on the page (the '(Temporary)' text and the '(Effective October 1, 2026)' text): the section contains no site exclusion. "
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Scope: commercial zone and will-serve letters from municipal water and sewer",
+     "quote": "on a parcel or lot that: (i) has a will-serve letter from both a municipal water system and a municipal sewer system; and (ii) is located in a commercial zone.",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html"
+    }
+   ]
+  },
+  "mt_adu_76_2_345": {
+   "sections_read": [
+    {
+     "citation": "Mont. Code Ann. 76-2-345 (En. Sec. 1, Ch. 502, L. 2023)",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0450/0760-0020-0030-0450.html",
+     "source_kind": "official",
+     "as_of": "Montana Code Annotated 2025, fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "(6) The provisions of this section do not supersede applicable building codes, fire codes, or public health and safety regulations adopted pursuant to Title 50, chapter 2.",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0450/0760-0020-0030-0450.html",
+     "note": "NONE FOUND. Mont. Code Ann. 76-2-345 read in full: no site exclusion. The quoted savings clause keeps building codes, fire codes and Title 50, chapter 2 public health and safety regulations in force; it does not name floodplains."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "(6) The provisions of this section do not supersede applicable building codes, fire codes, or public health and safety regulations adopted pursuant to Title 50, chapter 2.",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0450/0760-0020-0030-0450.html",
+     "note": "NONE FOUND. Mont. Code Ann. 76-2-345 read in full: no site exclusion. 'Fire codes' in the quoted savings clause are building-level codes, not a wildfire-area exclusion."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0450/0760-0020-0030-0450.html",
+     "note": "NONE FOUND. Mont. Code Ann. 76-2-345 read in full: no site exclusion. "
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0450/0760-0020-0030-0450.html",
+     "note": "NONE FOUND. Mont. Code Ann. 76-2-345 read in full: no site exclusion. "
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0450/0760-0020-0030-0450.html",
+     "note": "NONE FOUND. Mont. Code Ann. 76-2-345 read in full: no site exclusion. Subsection (2)(b) bars a municipality from requiring the ADU to match the exterior design of the house; no historic exception is stated."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "City option: require will-serve letters from municipal water and sewer",
+     "quote": "(7) A municipality may require an accessory dwelling unit to have a will-serve letter from both a municipal water system and a municipal sewer system.",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0450/0760-0020-0030-0450.html"
+    },
+    {
+     "what": "Savings clause: building codes, fire codes, public health and safety regulations",
+     "quote": "(6) The provisions of this section do not supersede applicable building codes, fire codes, or public health and safety regulations adopted pursuant to Title 50, chapter 2.",
+     "url": "https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0450/0760-0020-0030-0450.html"
+    }
+   ]
+  },
+  "az_hb2720_2721": {
+   "sections_read": [
+    {
+     "citation": "A.R.S. 9-461.18 (accessory dwelling units)",
+     "url": "https://www.azleg.gov/ars/9/00461-18.htm",
+     "source_kind": "official",
+     "as_of": "current online A.R.S. page (the page shows no edition date or history note), fetched 2026-11-20"
+    },
+    {
+     "citation": "A.R.S. 9-462.13 (Zoning; development; middle housing) - the current section holding the middle-housing text that Laws 2024 ch. 197 enacted as 9-462.10",
+     "url": "https://www.azleg.gov/ars/9/00462-13.htm",
+     "source_kind": "official",
+     "as_of": "current online A.R.S. page (the page shows no edition date or history note), fetched 2026-11-20"
+    },
+    {
+     "citation": "Laws 2024, ch. 197 (HB 2721) as chaptered, compared with 9-462.13",
+     "url": "https://www.azleg.gov/legtext/56leg/2R/laws/0197.pdf",
+     "source_kind": "official",
+     "as_of": "chaptered session law; the PDF states 'APPROVED BY THE GOVERNOR MAY 21, 2024'"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://www.azleg.gov/ars/9/00461-18.htm",
+     "note": "NONE FOUND. A.R.S. 9-461.18 (ADUs) and 9-462.13 (middle housing) both read in full. Neither section mentions floodplains or flood hazard areas."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "D. This section does not supersede applicable building codes, fire codes or public health and safety regulations, except that a municipality may not require an accessory dwelling unit to comply with a commercial building code or contain a fire sprinkler.",
+     "url": "https://www.azleg.gov/ars/9/00461-18.htm",
+     "note": "NONE FOUND. A.R.S. 9-461.18 (ADUs) and 9-462.13 (middle housing) both read in full. The ADU section's savings clause (quoted) keeps building and fire codes in force; neither section names wildfire areas."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "4. Areas that are not zoned for residential use.",
+     "url": "https://www.azleg.gov/ars/9/00462-13.htm",
+     "note": "NONE FOUND as an agricultural exclusion. A.R.S. 9-461.18 (ADUs) and 9-462.13 (middle housing) both read in full. Scope limits only: ADUs 'on any lot or parcel where a single-family dwelling is allowed'; middle housing does not apply to 'Areas that are not zoned for residential use' (quoted)."
+    },
+    "public_or_tribal_land": {
+     "excluded": true,
+     "quote": "G. This section does not apply to lots or parcels that are located on: 1. Tribal land.",
+     "url": "https://www.azleg.gov/ars/9/00461-18.htm",
+     "note": "AUTOMATIC for TRIBAL land on the ADU path only: A.R.S. 9-461.18(G)(1). Public (government-owned) land is not mentioned in either section. The middle-housing section 9-462.13 has NO tribal-land clause (its exclusions are listed under other_site_exclusions_in_text). A.R.S. 9-461.18 (ADUs) and 9-462.13 (middle housing) both read in full. "
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://www.azleg.gov/ars/9/00461-18.htm",
+     "note": "NONE FOUND. A.R.S. 9-461.18 (ADUs) and 9-462.13 (middle housing) both read in full. Neither section mentions historic districts or landmarks."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "ADUs: land in the vicinity of a military airport or ancillary military facility",
+     "quote": "2. Land that is in the territory in the vicinity of a military airport or ancillary military facility as defined in section 28-8461.",
+     "url": "https://www.azleg.gov/ars/9/00461-18.htm"
+    },
+    {
+     "what": "ADUs: land in the vicinity of certain airports with noise above sixty-five decibels",
+     "quote": "3. Land that is in the territory in the vicinity of a federal aviation administration commercially licensed airport or a general aviation airport or land that is in the territory in the vicinity of a public airport as defined in section 28-8486 and that has a noise level of greater than sixty-five decibels.",
+     "url": "https://www.azleg.gov/ars/9/00461-18.htm"
+    },
+    {
+     "what": "ADUs: not on top of a public utility easement without the utility's written consent",
+     "quote": "E. An accessory dwelling unit may not be built on top of a current or planned public utility easement unless the property owner receives written consent from any utility that is currently using the public utility easement or that may use the public utility easement in the future.",
+     "url": "https://www.azleg.gov/ars/9/00461-18.htm"
+    },
+    {
+     "what": "Middle housing (9-462.13(D)): unincorporated areas, areas lacking urban services or water and sewer, areas not zoned residential, areas 'covered under title 48, chapter 6, article 4' (that article was not fetched, so what it covers is not stated here), public and military airport vicinity",
+     "quote": "D. This section does not apply to any of the following: 1. Areas that are not incorporated. 2. Areas that lack sufficient urban services. 3. Areas that are not served by water and sewer services. 4. Areas that are not zoned for residential use. 5. Areas that are not incorporated and are zoned under an interim zoning designation that maintains the area's potential for planned urban development. 6. Areas covered under title 48, chapter 6, article 4. 7. Any land within the territory in the vicinity of a public airport as defined in section 28-8486 or to the extent this section would interfere with the public airport's ability to comply with the laws, regulations and requirements of the United States related to applying for, receiving or spending federal monies. 8. Any land within the territory in the vicinity of a military airport as defined in section 28-8461.",
+     "url": "https://www.azleg.gov/ars/9/00462-13.htm"
+    }
+   ]
+  },
+  "az_adaptive_reuse_9_462_10": {
+   "sections_read": [
+    {
+     "citation": "A.R.S. 9-462.10 (Commercial buildings; multifamily residential development; adaptive reuse)",
+     "url": "https://www.azleg.gov/ars/9/00462-10.htm",
+     "source_kind": "official",
+     "as_of": "current online A.R.S. page (the page shows no edition date or history note), fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://www.azleg.gov/ars/9/00462-10.htm",
+     "note": "NONE FOUND. A.R.S. 9-462.10 read in full. No mention of floodplains."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://www.azleg.gov/ars/9/00462-10.htm",
+     "note": "NONE FOUND. A.R.S. 9-462.10 read in full. No mention of wildfire areas; subsection (C)(3) requires compliance with building and fire codes."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://www.azleg.gov/ars/9/00462-10.htm",
+     "note": "NONE FOUND. A.R.S. 9-462.10 read in full. The section covers 'existing commercial, office or mixed use parcels'."
+    },
+    "public_or_tribal_land": {
+     "excluded": true,
+     "quote": "G. This section does not apply to any of the following: [...] 6. Land in a municipality that is located on tribal land.",
+     "url": "https://www.azleg.gov/ars/9/00462-10.htm",
+     "note": "AUTOMATIC for TRIBAL land: subsection (G)(6). Public (government-owned) land is not mentioned. A.R.S. 9-462.10 read in full. "
+    },
+    "historic_district_hpoz": {
+     "excluded": true,
+     "quote": "G. This section does not apply to any of the following: 1. Land in an area that is designated as a district of historical significance pursuant to section 9-462.01, subsection A, paragraph 10. 2. Land in an area that is designated historic by a local government. 3. Land in an area that is designated as historic on the national register of historic places. 4. Land in the territory in the vicinity of a military airport or ancillary military facility as defined in section 28-8461. 5. Land in the territory in the vicinity of a federal aviation administration commercially licensed airport or a general aviation or public airport as defined in section 28-8486. 6. Land in a municipality that is located on tribal land.",
+     "url": "https://www.azleg.gov/ars/9/00462-10.htm",
+     "note": "AUTOMATIC: subsection (G)(1)-(3) removes land in a district of historical significance under 9-462.01(A)(10), land in an area designated historic by a local government, and land in an area designated historic on the National Register. The text speaks of land 'in an area' so designated; an individually listed building outside such an area is not addressed. A.R.S. 9-462.10 read in full. "
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Military airport vicinity; commercial, general aviation or public airport vicinity",
+     "quote": "G. This section does not apply to any of the following: 1. Land in an area that is designated as a district of historical significance pursuant to section 9-462.01, subsection A, paragraph 10. 2. Land in an area that is designated historic by a local government. 3. Land in an area that is designated as historic on the national register of historic places. 4. Land in the territory in the vicinity of a military airport or ancillary military facility as defined in section 28-8461. 5. Land in the territory in the vicinity of a federal aviation administration commercially licensed airport or a general aviation or public airport as defined in section 28-8486. 6. Land in a municipality that is located on tribal land.",
+     "url": "https://www.azleg.gov/ars/9/00462-10.htm"
+    },
+    {
+     "what": "City option: commercial or employment hubs, up to ten percent of such parcels",
+     "quote": "B. A municipality may designate commercial or employment hubs and other essential commercial or employment use areas where existing commercial, office, employment or mixed use parcels are excluded from the provisions of this section. The designations made pursuant to this subsection may not exceed ten percent of the existing commercial, office, employment or mixed use parcels within the municipality.",
+     "url": "https://www.azleg.gov/ars/9/00462-10.htm"
+    },
+    {
+     "what": "Only at least ten percent of existing commercial, office or mixed use parcels must be eligible; the city may not designate individual parcels",
+     "quote": "1. Allow for multifamily residential development or adaptive reuse of at least ten percent of the existing commercial, office or mixed use parcels.",
+     "url": "https://www.azleg.gov/ars/9/00462-10.htm"
+    },
+    {
+     "what": "Objective standards require parcels of one to twenty acres with economically or functionally obsolete buildings",
+     "quote": "5. That the existing buildings are located on a parcel or parcels that are at least one acre in size but not more than twenty acres in size.",
+     "url": "https://www.azleg.gov/ars/9/00462-10.htm"
+    }
+   ]
+  },
+  "co_hb24_1152": {
+   "sections_read": [
+    {
+     "citation": "C.R.S. 29-35-102 and 29-35-103 as enacted by HB 24-1152 (signed act)",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1152_signed.pdf",
+     "source_kind": "official",
+     "as_of": "signed act of the 2024 session (PDF text is machine-read from a scanned image, so minor character errors are possible); the current Colorado Revised Statutes and any later amendments were NOT fetched"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": true,
+     "quote": "(4) THIS SECTION ONLY APPLIES TO A PARCEL IN A SUBJECT JURISDICTION THAT IS NOT AN EXEMPT PARCEL. [...] (9) \"EXEMPT PARCEL\" MEANS A PARCEL THAT IS: [...] (c) IN A FLOODWAY OR IN A ONE HUNDRED YEAR FLOODPLAIN, AS IDENTIFIED BY THE FEDERAL EMERGENCY MANAGEMENT AGENCY.",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1152_signed.pdf",
+     "note": "AUTOMATIC: section 29-35-103(4) applies the ADU duty only to a parcel that is not an 'exempt parcel', and 29-35-102(9)(c) makes a parcel in a FEMA-identified floodway or one hundred year floodplain exempt. This matches the engine's FEMA flag directly. HB 24-1152 sections 29-35-102 (definitions) and 29-35-103 read in full in the signed act. "
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "(i)APPLYING AND ENFORCING A LOCALLY ADOPTED LIFE SAFETY CODE, INCLUDING BUT NOT LIMITED TO, A BUILDING, FIRE, UTILITY, OR STORM WATER CODE;",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1152_signed.pdf",
+     "note": "NONE FOUND. HB 24-1152 sections 29-35-102 (definitions) and 29-35-103 read in full in the signed act. No wildfire-area exemption. The quoted clause (29-35-103(3)(i)) lets a jurisdiction apply a locally adopted life safety code, including a fire code; that regulates the building, not eligibility of the lot."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1152_signed.pdf",
+     "note": "NONE FOUND. HB 24-1152 sections 29-35-102 (definitions) and 29-35-103 read in full in the signed act. The duty applies 'IN ANY PART OF THE SUBJECT JURISDICTION WHERE THE JURISDICTION ALLOWS SINGLE-UNIT DETACHED DWELLINGS'; agricultural land is not named."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1152_signed.pdf",
+     "note": "NONE FOUND. HB 24-1152 sections 29-35-102 (definitions) and 29-35-103 read in full in the signed act. Public and tribal land are not named as exempt. (The definition of 'local government' includes a 'TRIBAL NATION WITH JURISDICTION IN COLORADO'; that is a definition, not an exclusion.)"
+    },
+    "historic_district_hpoz": {
+     "excluded": null,
+     "quote": "(9) \"EXEMPT PARCEL\" MEANS A PARCEL THAT IS: [...] (b) A HISTORIC PROPERTY THAT IS NOT WITHIN A HISTORIC DISTRICT; OR [...] (11) \"HISTORIC PROPERTY\" MEANS A PROPERTY LISTED: (a) ON THE NATIONAL REGISTER OF HISTORIC PLACES; (b) ON THE COLORADO STATE REGISTER OF HISTORIC PROPERTIES; OR (c) AS A CONTRIBUTING STRUCTURE OR HISTORIC LANDMARK BY A CERTIFIED LOCAL GOVERNMENT, AS DEFINED IN SECTION 39-22-514.5 (2)(b). [...] (h) APPLYING THE DESIGN STANDARDS AND PROCEDURES OF A HISTORIC DISTRICT TO A LOT ON WHICH AN ACCESSORY DWELLING UNIT IS ALLOWED IN THAT HISTORIC DISTRICT, INCLUDING A STANDARD OR PROCEDURE RELATED TO DEMOLITION;",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1152_signed.pdf",
+     "note": "SPLIT, so no single true/false: (1) a 'historic property' (National Register, State Register, or a contributing structure or landmark listed by a certified local government) that is NOT within a historic district is an exempt parcel - AUTOMATIC exclusion; (2) a lot INSIDE a historic district is not exempt, and the jurisdiction may apply the district's design standards and procedures, including on demolition (29-35-103(3)(h)). HB 24-1152 sections 29-35-102 (definitions) and 29-35-103 read in full in the signed act. "
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Parcels without domestic water and sewage treatment service, or on a well whose permit cannot supply another unit",
+     "quote": "(a) NOT SERVED BY A DOMESTIC WATER AND SEWAGE TREATMENT SYSTEM, AS DEFINED IN SECTION 24-65.1-104 (5), OR IS SERVED BY A WELL WITH A PERMIT THAT CANNOT SUPPLY AN ADDITIONAL DWELLING UNIT;",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1152_signed.pdf"
+    },
+    {
+     "what": "Jurisdiction may require a water or wastewater provider's capacity statement",
+     "quote": "REQUIRING A STATEMENT BY A WATER OR WASTEWATER SERVICE PROVIDER REGARDING ITS CAPACITY TO SERVICE THE PROPERTY AS A CONDITION OF PERMITTING AN ACCESSORY DWELLING UNIT.",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1152_signed.pdf"
+    }
+   ]
+  },
+  "co_hb24_1313": {
+   "sections_read": [
+    {
+     "citation": "HB 24-1313 signed act, section 29-37-202(2) (definition of exempt parcel) and 29-37-204(2) (goal calculation), as numbered in the signed act",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf",
+     "source_kind": "official",
+     "as_of": "signed act of the 2024 session (PDF text is machine-read from a scanned image, so minor character errors are possible); the current Colorado Revised Statutes and any later amendments were NOT fetched"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": true,
+     "quote": "(2) \"EXEMPT PARCEL\" MEANS: [...] (f) ANY PART OF A PARCEL THAT, AS OF JANUARY 1, 2024, IS IN A FLOODWAY OR IN A ONE HUNDRED-YEAR FLOODPLAIN, AS IDENTIFIED BY THE FEDERAL EMERGENCY MANAGEMENT AGENCY; [...] A TRANSIT-ORIENTED COMMUNITY SHALL CALCULATE ITS HOUSING OPPORTUNITY GOAL BY MULTIPLYING THE TOTAL AREA OF THE TRANSIT AREAS, AS DEFINED IN THE TRANSIT AREAS MAP CREATED PURSUANT TO SECTION 29-37-207 (1), WITHIN THE LOCAL GOVERNMENT'S JURISDICTION, EXCLUSIVE OF THE EXEMPT PARCELS IN THOSE TRANSIT AREAS, BY FORTY DWELLING UNITS PER ACRE.",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf",
+     "note": "AUTOMATIC, for the PART of a parcel in a FEMA-identified floodway or one hundred-year floodplain as of January 1, 2024. IMPORTANT: in HB 24-1313 an 'exempt parcel' is left out of the city's zoning-capacity GOAL calculation (section 29-37-204(2), quoted elsewhere in this record); the act sets a jurisdiction-wide goal and does not itself give any parcel a by-right entitlement. The signed act numbers these sections 29-37-201 to 29-37-207 ('ARTICLE 37'); the number in the current C.R.S. was not confirmed. The exempt-parcel definition (29-37-202(2)(a)-(q)) was read in full; the rest of the 88,000-character act was keyword-searched, not read in full. "
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": null,
+     "quote": "(2) \"EXEMPT PARCEL\" MEANS: [...] (a) ANY PARCEL THAT A TRANSIT-ORIENTED COMMUNITY HAS APPLIED TO THE DEPARTMENT FOR QUALIFICATION AS AN EXEMPT PARCEL BECAUSE THE TRANSIT-ORIENTED COMMUNITY BELIEVES THE PARCEL CANNOT BE DEVELOPED FOR REASONS INCLUDING HEALTH AND SAFETY, TOPOGRAPHY, OR PRACTICAL LIMITATIONS AND FOR WHICH THE DEPARTMENT HAS APPROVED THE TRANSIT-ORIENTED COMMUNITY'S APPLICATION ACCORDING TO A PROCESS ESTABLISHED BY POLICIES AND PROCEDURES DEVELOPED BY THE DEPARTMENT;",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf",
+     "note": "CITY OPTION WITH STATE APPROVAL, wildfire not named: no exempt-parcel category mentions wildfire. Category (a) lets a transit-oriented community apply to the Department of Local Affairs to exempt a parcel it believes cannot be developed 'FOR REASONS INCLUDING HEALTH AND SAFETY, TOPOGRAPHY, OR PRACTICAL LIMITATIONS'. Whether any wildfire-area parcel has been approved is not in the act. IMPORTANT: in HB 24-1313 an 'exempt parcel' is left out of the city's zoning-capacity GOAL calculation (section 29-37-204(2), quoted elsewhere in this record); the act sets a jurisdiction-wide goal and does not itself give any parcel a by-right entitlement. The signed act numbers these sections 29-37-201 to 29-37-207 ('ARTICLE 37'); the number in the current C.R.S. was not confirmed. The exempt-parcel definition (29-37-202(2)(a)-(q)) was read in full; the rest of the 88,000-character act was keyword-searched, not read in full. "
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": true,
+     "quote": "(2) \"EXEMPT PARCEL\" MEANS: [...] (d) A PARCEL THAT, AS OF JANUARY 1, 2024, IS IN AN AGRICULTURAL, FORESTRY, NATURAL RESOURCE PRESERVATION, OR OPEN SPACE ZONING DISTRICT; [...] (i) ANY PART OF A PARCEL THAT, AS OF JANUARY 1,2024, IS SUBJECT TO A CONSERVATION EASEMENT;",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf",
+     "note": "AUTOMATIC, by zoning district or easement as of January 1, 2024: a parcel in an agricultural, forestry, natural resource preservation or open space zoning district, and any part of a parcel under a conservation easement. IMPORTANT: in HB 24-1313 an 'exempt parcel' is left out of the city's zoning-capacity GOAL calculation (section 29-37-204(2), quoted elsewhere in this record); the act sets a jurisdiction-wide goal and does not itself give any parcel a by-right entitlement. The signed act numbers these sections 29-37-201 to 29-37-207 ('ARTICLE 37'); the number in the current C.R.S. was not confirmed. The exempt-parcel definition (29-37-202(2)(a)-(q)) was read in full; the rest of the 88,000-character act was keyword-searched, not read in full. "
+    },
+    "public_or_tribal_land": {
+     "excluded": true,
+     "quote": "(2) \"EXEMPT PARCEL\" MEANS: [...] (n) A PARCEL THAT, AS OF JANUARY 1, 2024, IS OWNED BY A FEDERAL, STATE, OR LOCAL GOVERNMENT ENTITY;",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf",
+     "note": "AUTOMATIC for PUBLIC land: a parcel owned by a federal, state or local government entity as of January 1, 2024 (also school-district-owned parcels and park and open space, see other_site_exclusions_in_text). Tribal land is not named in the exempt-parcel definition. IMPORTANT: in HB 24-1313 an 'exempt parcel' is left out of the city's zoning-capacity GOAL calculation (section 29-37-204(2), quoted elsewhere in this record); the act sets a jurisdiction-wide goal and does not itself give any parcel a by-right entitlement. The signed act numbers these sections 29-37-201 to 29-37-207 ('ARTICLE 37'); the number in the current C.R.S. was not confirmed. The exempt-parcel definition (29-37-202(2)(a)-(q)) was read in full; the rest of the 88,000-character act was keyword-searched, not read in full. "
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf",
+     "note": "NONE FOUND in the exempt-parcel definition, which was read in full: historic districts and historic properties are not an exempt category. The act's definition of 'administrative approval process' allows a historic preservation commission role for locally designated historic property; that is procedure, not exclusion. IMPORTANT: in HB 24-1313 an 'exempt parcel' is left out of the city's zoning-capacity GOAL calculation (section 29-37-204(2), quoted elsewhere in this record); the act sets a jurisdiction-wide goal and does not itself give any parcel a by-right entitlement. The signed act numbers these sections 29-37-201 to 29-37-207 ('ARTICLE 37'); the number in the current C.R.S. was not confirmed. The exempt-parcel definition (29-37-202(2)(a)-(q)) was read in full; the rest of the 88,000-character act was keyword-searched, not read in full. "
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Goal is computed excluding exempt parcels (what 'exempt' means in this act)",
+     "quote": "A TRANSIT-ORIENTED COMMUNITY SHALL CALCULATE ITS HOUSING OPPORTUNITY GOAL BY MULTIPLYING THE TOTAL AREA OF THE TRANSIT AREAS, AS DEFINED IN THE TRANSIT AREAS MAP CREATED PURSUANT TO SECTION 29-37-207 (1), WITHIN THE LOCAL GOVERNMENT'S JURISDICTION, EXCLUSIVE OF THE EXEMPT PARCELS IN THOSE TRANSIT AREAS, BY FORTY DWELLING UNITS PER ACRE.",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf"
+    },
+    {
+     "what": "Parcels not on a domestic water and sewage treatment system, or on a well or septic tank",
+     "quote": "(b) A PARCEL THAT, AS OF JANUARY 1, 2024, IS NOT SERVED BY A DOMESTIC WATER AND SEWAGE TREATMENT SYSTEM, AS DEFINED IN SECTION 24-65.1-104 (5), IS SERVED BY A WELL THAT IS NOT CONNECTED TO A WATER DISTRIBUTION SYSTEM, AS DEFINED IN SECTION 25-9-102 (6), OR IS SERVED BY A SEPTIC TANK, AS DEFINED IN SECTION 25-10-103 (18);",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf"
+    },
+    {
+     "what": "Industrial zoning or use; Toxic Release Inventory parcels",
+     "quote": "(e) A PARCEL THAT, AS OF JANUARY 1, 2024, IS ZONED OR USED PRIMARILY FOR INDUSTRIAL USE, [...] PARCELS THAT ARE IDENTIFIED WITHIN THE UNITED STATES ENVIRONMENTAL PROTECTION AGENCY'S TOXIC RELEASE INVENTORY;",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf"
+    },
+    {
+     "what": "Major electric or natural gas facility easements",
+     "quote": "(g) ANY PART OF A PARCEL THAT, AS OF JANUARY 1, 2024, IS SUBJECT TO AN EASEMENT FOR A MAJOR ELECTRIC OR NATURAL GAS FACILITY, AS DEFINED IN SECTION 29-20-108 (3);",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf"
+    },
+    {
+     "what": "Cemeteries",
+     "quote": "(h) A PARCEL THAT, AS OF JANUARY 1, 2024, IS USED AS A CEMETERY, AS DEFINED IN SECTION 31-25-701 (2);",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf"
+    },
+    {
+     "what": "Airport-owned, used or operated parcels and easements",
+     "quote": "(j) A PARCEL OR EASEMENT THAT, AS OF JANUARY 1, 2024, IS OWNED BY, USED AS, OR OPERATED BY AN AIRPORT;",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf"
+    },
+    {
+     "what": "Public or railroad rights-of-way",
+     "quote": "(k) A PUBLIC OR RAILROAD RIGHT-OF-WAY THAT EXISTS AS OF JANUARY 1, 2024;",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf"
+    },
+    {
+     "what": "Mobile home parks",
+     "quote": "A PARCEL THAT, AS OF JANUARY 1, 2024, IS USED AS A MOBILE HOME PARK, AS DEFINED IN SECTION 38-12-201.5 (6);",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf"
+    },
+    {
+     "what": "Park and open space land",
+     "quote": "ANY PART OF A PARCEL THAT, AS OF JANUARY 1, 2024, INCLUDES LAND THAT IS PARK AND OPEN SPACE, AS DEFINED IN SECTION 29-7.5-103 (2);",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf"
+    },
+    {
+     "what": "School-district-owned parcels",
+     "quote": "(p) A PARCEL THAT AS OF JANUARY 1, 2024, IS OWNED BY A SCHOOL DISTRICT, AS DEFINED IN SECTION 22-30-103 (13); OR",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf"
+    },
+    {
+     "what": "Zoning capacity limited below forty units per acre by FAA rules, an environmental covenant or a flammable gas overlay",
+     "quote": "(q) ANY PART OF A PARCEL'S ZONING CAPACITY WHERE RESIDENTIAL USE IS PREVENTED OR LIMITED TO LESS THAN FORTY DWELLING UNITS PER ACRE BY STATE REGULATION, FEDERAL REGULATION, OR DEED RESTRICTION PURSUANT TO EITHER: (I) FEDERAL AVIATION ADMINISTRATION RESTRICTIONS PURSUANT TO 14 CFR PART 77; (II) AN ENVIRONMENTAL COVENANT PURSUANT TO SECTION 25-15-318 TO SECTION 25-15-323; OR (III) RESTRICTIONS WITHIN A FLAMMABLE GAS OVERLAY ZONING DISTRICT.",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf"
+    },
+    {
+     "what": "Parcels cut off from the station by a limited-access highway or railroad and beyond a half-mile walk",
+     "quote": "(II) SEPARATED BY A STATE-OWNED LIMITED-ACCESS HIGHWAY OR RAILROAD TRACK FROM ALL EXITS TO THE TRANSIT STATION",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf"
+    },
+    {
+     "what": "Department-approved exemptions for health and safety, topography or practical limitations",
+     "quote": "(a) ANY PARCEL THAT A TRANSIT-ORIENTED COMMUNITY HAS APPLIED TO THE DEPARTMENT FOR QUALIFICATION AS AN EXEMPT PARCEL BECAUSE THE TRANSIT-ORIENTED COMMUNITY BELIEVES THE PARCEL CANNOT BE DEVELOPED FOR REASONS INCLUDING HEALTH AND SAFETY, TOPOGRAPHY, OR PRACTICAL LIMITATIONS AND FOR WHICH THE DEPARTMENT HAS APPROVED THE TRANSIT-ORIENTED COMMUNITY'S APPLICATION ACCORDING TO A PROCESS ESTABLISHED BY POLICIES AND PROCEDURES DEVELOPED BY THE DEPARTMENT;",
+     "url": "https://leg.colorado.gov/sites/default/files/2024a_1313_signed.pdf"
+    }
+   ]
+  },
+  "ut_hb82_iadu": {
+   "sections_read": [
+    {
+     "citation": "Utah Code 10-21-303 (Internal accessory dwelling units; formerly 10-9a-530)",
+     "url": "https://le.utah.gov/xcode/Title10/Chapter21/10-21-S303.html",
+     "source_kind": "official",
+     "as_of": "version tag C10-21-S303_2025110620251206 shown as 'Current Version' on le.utah.gov; text read from the chapter XML https://le.utah.gov/xcode/Title10/Chapter21/C10-21_2025110620251206.xml; fetched 2026-11-20"
+    },
+    {
+     "citation": "Utah Code 17-80-303 (Internal accessory dwelling units, counties; formerly 17-27a-526)",
+     "url": "https://le.utah.gov/xcode/Title17/Chapter80/17-80-S303.html",
+     "source_kind": "official",
+     "as_of": "text read from the chapter XML https://le.utah.gov/xcode/Title17/Chapter80/C17-80_2025110620251206.xml (version tag C17-80_2025110620251206); fetched 2026-11-20"
+    },
+    {
+     "citation": "Utah Code 10-9a-530 and 17-27a-526 (the record's cited sections)",
+     "url": "https://le.utah.gov/xcode/Title10/Chapter9A/10-9a-S530.html",
+     "source_kind": "official",
+     "as_of": "page fetched 2026-11-20 returned no statute text (empty version list)"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://le.utah.gov/xcode/Title10/Chapter21/10-21-S303.html",
+     "note": "NONE FOUND. RENUMBERED: Utah Code 10-9a-530 and 17-27a-526 no longer return any text on le.utah.gov (the section pages load with an empty version list). The current sections are Utah Code 10-21-303 (municipalities) and 17-80-303 (counties), each marked 'Renumbered and Amended by Chapter 15 [municipal] / Chapter 14 [county], 2025 Special Session 1'. Both read in full: neither contains a hazard, farmland, public-land or historic exclusion. "
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "An internal accessory dwelling unit shall comply with all applicable building, health, and fire codes.",
+     "url": "https://le.utah.gov/xcode/Title10/Chapter21/10-21-S303.html",
+     "note": "NONE FOUND. RENUMBERED: Utah Code 10-9a-530 and 17-27a-526 no longer return any text on le.utah.gov (the section pages load with an empty version list). The current sections are Utah Code 10-21-303 (municipalities) and 17-80-303 (counties), each marked 'Renumbered and Amended by Chapter 15 [municipal] / Chapter 14 [county], 2025 Special Session 1'. Both read in full: neither contains a hazard, farmland, public-land or historic exclusion. The quoted subsection (2) requires compliance with building, health and fire codes; it is not a wildfire-area exclusion."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://le.utah.gov/xcode/Title10/Chapter21/10-21-S303.html",
+     "note": "NONE FOUND as an exclusion; scope limit only: the rule applies 'In any area zoned primarily for residential use'. RENUMBERED: Utah Code 10-9a-530 and 17-27a-526 no longer return any text on le.utah.gov (the section pages load with an empty version list). The current sections are Utah Code 10-21-303 (municipalities) and 17-80-303 (counties), each marked 'Renumbered and Amended by Chapter 15 [municipal] / Chapter 14 [county], 2025 Special Session 1'. Both read in full: neither contains a hazard, farmland, public-land or historic exclusion. "
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://le.utah.gov/xcode/Title10/Chapter21/10-21-S303.html",
+     "note": "NONE FOUND. RENUMBERED: Utah Code 10-9a-530 and 17-27a-526 no longer return any text on le.utah.gov (the section pages load with an empty version list). The current sections are Utah Code 10-21-303 (municipalities) and 17-80-303 (counties), each marked 'Renumbered and Amended by Chapter 15 [municipal] / Chapter 14 [county], 2025 Special Session 1'. Both read in full: neither contains a hazard, farmland, public-land or historic exclusion. "
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "a municipality's regulation of architectural elements for internal accessory dwelling units shall be consistent with the regulation of single-family units, including single-family units located in historic districts.",
+     "url": "https://le.utah.gov/xcode/Title10/Chapter21/10-21-S303.html",
+     "note": "NOT EXCLUDED: the only mention of historic districts (subsection (1)(c), quoted) assumes internal ADUs exist there and requires architectural regulation consistent with single-family units. RENUMBERED: Utah Code 10-9a-530 and 17-27a-526 no longer return any text on le.utah.gov (the section pages load with an empty version list). The current sections are Utah Code 10-21-303 (municipalities) and 17-80-303 (counties), each marked 'Renumbered and Amended by Chapter 15 [municipal] / Chapter 14 [county], 2025 Special Session 1'. Both read in full: neither contains a hazard, farmland, public-land or historic exclusion. "
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "City option: prohibit internal ADUs in zoning districts covering up to 25% of the residentially zoned area (67% in a municipality with the main campus of a university of 10,000 or more students). Any kind of area may be chosen; the text is not hazard-specific. For counties, 25% of the unincorporated residentially zoned area.",
+     "quote": "prohibit the creation of an internal accessory dwelling unit within a zoning district covering an area that is equivalent to: [...] 25% or less of the total area in the municipality that is zoned primarily for residential use, except that the municipality may not prohibit newly constructed internal accessory dwelling units that: [...] 67% or less of the total area in the municipality that is zoned primarily for residential use, if the main campus of a state or private university with a student population of 10,000 or more is located within the municipality;",
+     "url": "https://le.utah.gov/xcode/Title10/Chapter21/10-21-S303.html"
+    },
+    {
+     "what": "City option: lots of 6,000 square feet or less",
+     "quote": "prohibit the creation of an internal accessory dwelling unit if the lot containing the primary dwelling is 6,000 square feet or less in size;",
+     "url": "https://le.utah.gov/xcode/Title10/Chapter21/10-21-S303.html"
+    },
+    {
+     "what": "City option: failing septic tank",
+     "quote": "prohibit the creation of an internal accessory dwelling unit if the primary dwelling is served by a failing septic tank;",
+     "url": "https://le.utah.gov/xcode/Title10/Chapter21/10-21-S303.html"
+    },
+    {
+     "what": "City option: mobile homes",
+     "quote": "prohibit the creation of an internal accessory dwelling unit within a mobile home as defined in Section 57-16-3",
+     "url": "https://le.utah.gov/xcode/Title10/Chapter21/10-21-S303.html"
+    },
+    {
+     "what": "County version, same 25% option",
+     "quote": "prohibit the creation of an internal accessory dwelling unit within a zoning district covering an area that is equivalent to 25% or less of the total unincorporated area in the county that is zoned primarily for residential use, except that the county may not prohibit newly constructed internal accessory dwelling units that:",
+     "url": "https://le.utah.gov/xcode/Title17/Chapter80/C17-80_2025110620251206.xml"
+    }
+   ]
+  },
+  "id_adu_67_6541": {
+   "sections_read": [
+    {
+     "citation": "Idaho Code 67-6541 ([67-6541, added 2026, ch. 265, sec. 2, p. 1118.])",
+     "url": "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6541/",
+     "source_kind": "official",
+     "as_of": "Idaho Statutes website (which states 'Idaho Statutes are updated to the website July 1 following the legislative session'), fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": null,
+     "quote": "(7) The provisions of this section shall not supersede state or local laws that protect public health, safety, and welfare, including: (a) Building codes, fire safety standards, and flood plain regulations; (b) Laws regarding water, sewer, storm drainage, road access, and utility services necessary to support the required density; (c) Laws regarding environmental hazards, aquifer recharge zones, steep slopes, and critical habitat protections; and (d) Laws and regulations regarding setback requirements for rights-of-way and easements.",
+     "url": "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6541/",
+     "note": "SAVINGS CLAUSE, exclusion left to other law: the section does not exclude floodplain lots, but subsection (7)(a) says it does not supersede state or local 'flood plain regulations'. Whether an ADU is barred on a floodplain lot depends on those regulations, which were not read. Idaho Code 67-6541 read in full. "
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": null,
+     "quote": "(7) The provisions of this section shall not supersede state or local laws that protect public health, safety, and welfare, including: (a) Building codes, fire safety standards, and flood plain regulations; (b) Laws regarding water, sewer, storm drainage, road access, and utility services necessary to support the required density; (c) Laws regarding environmental hazards, aquifer recharge zones, steep slopes, and critical habitat protections; and (d) Laws and regulations regarding setback requirements for rights-of-way and easements.",
+     "url": "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6541/",
+     "note": "SAVINGS CLAUSE, exclusion left to other law: wildfire areas are not named, but subsection (7) preserves 'fire safety standards' and 'Laws regarding environmental hazards'. Whether these bar an ADU on a given lot depends on state or local law, not on this text. Idaho Code 67-6541 read in full. "
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6541/",
+     "note": "NONE FOUND as an exclusion; scope limits only: subsection (1) covers 'any residential zoning area' and subsection (2) 'all land zoned for single-family residential uses'. Idaho Code 67-6541 read in full. "
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6541/",
+     "note": "NONE FOUND. Idaho Code 67-6541 read in full. No mention of public or tribal land."
+    },
+    "historic_district_hpoz": {
+     "excluded": true,
+     "quote": "(2) By February 1, 2027, by resolution or ordinance adopted, amended, or repealed in accordance with the notice and hearing procedures provided under section 67-6509, Idaho Code, each city governing board shall amend its comprehensive plan and land use regulations for all land zoned for single-family residential uses, except for lands falling within an area defined as a historic district under section 67-4607, Idaho Code, or designated as a historic property pursuant to section 67-4614, Idaho Code, to: [...] (3) Accessory dwelling unit projects that meet the jurisdiction’s established land use requirements shall be approved administratively and as a matter of right, without the need for discretionary approval.",
+     "url": "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6541/",
+     "note": "AUTOMATIC, but only for subsection (2): historic districts (Idaho Code 67-4607) and designated historic properties (67-4614) are carved out of the land for which cities must adopt the subsection (2) standards (one ADU per lot, parking, size, owner-occupancy, height limits) by February 1, 2027. Subsection (1) (no ban on ADUs in any residential zoning area) and subsection (3) (administrative, as-of-right approval, second quote) carry NO historic exception. Idaho Code 67-6541 read in full. "
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Savings clause: building codes, fire safety, flood plain regulations; water, sewer, drainage, road access, utilities; environmental hazards, aquifer recharge zones, steep slopes, critical habitat; right-of-way and easement setbacks",
+     "quote": "(7) The provisions of this section shall not supersede state or local laws that protect public health, safety, and welfare, including: (a) Building codes, fire safety standards, and flood plain regulations; (b) Laws regarding water, sewer, storm drainage, road access, and utility services necessary to support the required density; (c) Laws regarding environmental hazards, aquifer recharge zones, steep slopes, and critical habitat protections; and (d) Laws and regulations regarding setback requirements for rights-of-way and easements.",
+     "url": "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6541/"
+    },
+    {
+     "what": "Applies only to cities above 10,000 population",
+     "quote": "(6) The provisions of this section shall apply only to cities with a population greater than ten thousand (10,000).",
+     "url": "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6541/"
+    }
+   ]
+  },
+  "nv_adu_ordinance_278_257": {
+   "sections_read": [
+    {
+     "citation": "NRS 278.257 (Added to NRS by 2025, 2376)",
+     "url": "https://www.leg.state.nv.us/nrs/nrs-278.html#NRS278Sec257",
+     "source_kind": "official",
+     "as_of": "NRS chapter 278 page on leg.state.nv.us, fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://www.leg.state.nv.us/nrs/nrs-278.html#NRS278Sec257",
+     "note": "NONE FOUND. NRS 278.257 read in full. It tells large counties and cities to adopt an ADU ordinance and limits what that ordinance may require; it contains no hazard, farmland, public-land or historic exclusion, and it does not say whether a local ordinance may add one. "
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "(a) Must meet all applicable building codes, housing codes and any other codes regulating the health and safety of residential property.",
+     "url": "https://www.leg.state.nv.us/nrs/nrs-278.html#NRS278Sec257",
+     "note": "NONE FOUND. NRS 278.257 read in full. It tells large counties and cities to adopt an ADU ordinance and limits what that ordinance may require; it contains no hazard, farmland, public-land or historic exclusion, and it does not say whether a local ordinance may add one. The quoted subsection (3)(a) requires an approved ADU to meet building, housing and health-and-safety codes."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://www.leg.state.nv.us/nrs/nrs-278.html#NRS278Sec257",
+     "note": "NONE FOUND as an exclusion; scope limit only: 'residential property' is defined as property in an area 'zoned for single-family residential use'. NRS 278.257 read in full. It tells large counties and cities to adopt an ADU ordinance and limits what that ordinance may require; it contains no hazard, farmland, public-land or historic exclusion, and it does not say whether a local ordinance may add one. "
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://www.leg.state.nv.us/nrs/nrs-278.html#NRS278Sec257",
+     "note": "NONE FOUND. NRS 278.257 read in full. It tells large counties and cities to adopt an ADU ordinance and limits what that ordinance may require; it contains no hazard, farmland, public-land or historic exclusion, and it does not say whether a local ordinance may add one. "
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://www.leg.state.nv.us/nrs/nrs-278.html#NRS278Sec257",
+     "note": "NONE FOUND. NRS 278.257 read in full. It tells large counties and cities to adopt an ADU ordinance and limits what that ordinance may require; it contains no hazard, farmland, public-land or historic exclusion, and it does not say whether a local ordinance may add one. "
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Regions with an interstate-compact regional planning agency whose regional plan regulates housing",
+     "quote": "5. Any ordinance adopted pursuant to this section does not apply in a region in a county or city in this State for which there has been created by interstate compact a regional planning agency and the regional plan adopted by the regional planning agency calls for the regulation of housing.",
+     "url": "https://www.leg.state.nv.us/nrs/nrs-278.html#NRS278Sec257"
+    },
+    {
+     "what": "No more than two ADUs on any residential property",
+     "quote": "(b) Authorize more than two accessory dwelling units on any residential property.",
+     "url": "https://www.leg.state.nv.us/nrs/nrs-278.html#NRS278Sec257"
+    }
+   ]
+  },
+  "tx_sb840": {
+   "sections_read": [
+    {
+     "citation": "Tex. Loc. Gov't Code ch. 218 (current code page)",
+     "url": "https://tcss.legis.texas.gov/resources/LG/htm/LG.218.htm",
+     "source_kind": "official",
+     "as_of": "Texas Legislature code file; history notes show 'Added by Acts 2025, 89th Leg., R.S., Ch. 778 (S.B. 840), Sec. 2, eff. September 1, 2025' and 'Ch. 1026 (S.B. 2477)'; fetched 2026-11-20. The record's statutes.capitol.texas.gov address now returns only a JavaScript shell with no statute text."
+    },
+    {
+     "citation": "S.B. 840, 89th Leg., R.S., enrolled text (adds Tex. Loc. Gov't Code 211.0011 and ch. 218)",
+     "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00840F.htm",
+     "source_kind": "official",
+     "as_of": "enrolled bill text, fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "Sec. 218.003. NO EFFECT ON OTHER RESTRICTIONS AND RULES. This chapter does not affect the authority of a municipality to: [...] (4) apply the following regulations that are generally applicable to other developments in the municipality: [...] (B) stormwater mitigation requirements; or",
+     "url": "https://tcss.legis.texas.gov/resources/LG/htm/LG.218.htm",
+     "note": "NONE FOUND. Tex. Loc. Gov't Code ch. 218 (subchapters A-D) read in full in the enrolled SB 840 text and checked against the current code page for 218.003 and 218.101. Note: the code page shows each section 'Added by' both Ch. 778 (S.B. 840) and Ch. 1026 (S.B. 2477); S.B. 2477 was not read. No floodplain exclusion. The city keeps authority to apply generally applicable 'stormwater mitigation requirements' (quoted) and water quality regulations; those regulate the project, they do not remove the lot from the law."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://tcss.legis.texas.gov/resources/LG/htm/LG.218.htm",
+     "note": "NONE FOUND. Tex. Loc. Gov't Code ch. 218 (subchapters A-D) read in full in the enrolled SB 840 text and checked against the current code page for 218.003 and 218.101. Note: the code page shows each section 'Added by' both Ch. 778 (S.B. 840) and Ch. 1026 (S.B. 2477); S.B. 2477 was not read. Wildfire areas are not mentioned. ('Heavy industrial use' is defined by reference to flammable or explosive materials; that is about neighbouring industrial uses.)"
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://tcss.legis.texas.gov/resources/LG/htm/LG.218.htm",
+     "note": "NONE FOUND as an exclusion; scope limit only: 218.101(a) applies in a zoning classification that allows 'office, commercial, retail, warehouse, or mixed-use use or development'. Tex. Loc. Gov't Code ch. 218 (subchapters A-D) read in full in the enrolled SB 840 text and checked against the current code page for 218.003 and 218.101. Note: the code page shows each section 'Added by' both Ch. 778 (S.B. 840) and Ch. 1026 (S.B. 2477); S.B. 2477 was not read. "
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://tcss.legis.texas.gov/resources/LG/htm/LG.218.htm",
+     "note": "NONE FOUND. Tex. Loc. Gov't Code ch. 218 (subchapters A-D) read in full in the enrolled SB 840 text and checked against the current code page for 218.003 and 218.101. Note: the code page shows each section 'Added by' both Ch. 778 (S.B. 840) and Ch. 1026 (S.B. 2477); S.B. 2477 was not read. Public and tribal land are not mentioned (military bases and airports are handled by distance, see other_site_exclusions_in_text)."
+    },
+    "historic_district_hpoz": {
+     "excluded": null,
+     "quote": "Sec. 218.003. NO EFFECT ON OTHER RESTRICTIONS AND RULES. This chapter does not affect the authority of a municipality to: [...] (4) apply the following regulations that are generally applicable to other developments in the municipality: [...] (C) regulations related to historic preservation, including protecting historic landmarks or property in the boundaries of a local historic district.",
+     "url": "https://tcss.legis.texas.gov/resources/LG/htm/LG.218.htm",
+     "note": "SAVINGS CLAUSE, not an exclusion: chapter 218 still applies in historic districts, but section 218.003(4)(C) says the chapter does not affect the city's authority to apply generally applicable historic-preservation regulations, 'including protecting historic landmarks or property in the boundaries of a local historic district'. Whether a project is blocked or only conditioned depends on the city's historic rules. Tex. Loc. Gov't Code ch. 218 (subchapters A-D) read in full in the enrolled SB 840 text and checked against the current code page for 218.003 and 218.101. Note: the code page shows each section 'Added by' both Ch. 778 (S.B. 840) and Ch. 1026 (S.B. 2477); S.B. 2477 was not read. "
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Heavy industrial zoning; within 1,000 feet of a heavy industrial use; within 3,000 feet of an airport or military base; municipally designated clear zone or accident potential zone (automatic)",
+     "quote": "(c) This section does not apply to: (1) a zoning classification that allows heavy industrial use; (2) land located within: (A) 1,000 feet of an existing heavy industrial use or development site; or (B) 3,000 feet of an airport or military base; or (3) an area designated by a municipality as a clear zone or accident potential zone.",
+     "url": "https://tcss.legis.texas.gov/resources/LG/htm/LG.218.htm"
+    },
+    {
+     "what": "Applies only in large municipalities",
+     "quote": "Sec. 218.002. APPLICABILITY. This chapter applies only to a municipality with a population greater than 150,000 that is wholly or partly located in a county with a population greater than 300,000.",
+     "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00840F.htm"
+    },
+    {
+     "what": "City keeps water quality protection regulations",
+     "quote": "(2) adopt or enforce water quality protection regulations to implement or comply with water quality requirements under state or federal law, including Chapter 366, Health and Safety Code;",
+     "url": "https://tcss.legis.texas.gov/resources/LG/htm/LG.218.htm"
+    }
+   ]
+  },
+  "tx_sb15_small_lots": {
+   "sections_read": [
+    {
+     "citation": "S.B. 15, 89th Leg., R.S., enrolled text (adds Tex. Loc. Gov't Code 211.051-211.058)",
+     "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00015F.htm",
+     "source_kind": "official",
+     "as_of": "enrolled bill text, fetched 2026-11-20"
+    },
+    {
+     "citation": "Tex. Loc. Gov't Code ch. 211 (current code page)",
+     "url": "https://tcss.legis.texas.gov/resources/LG/htm/LG.211.htm",
+     "source_kind": "official",
+     "as_of": "Texas Legislature code file; history note 'Added by Acts 2025, 89th Leg., R.S., Ch. 1127 (S.B. 15), Sec. 1, eff. September 1, 2025'; fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": null,
+     "quote": "Sec. 211.053. CONSTRUCTION OF SUBCHAPTER. This subchapter may not be construed to affect requirements directly related to: (1) the use and occupancy of residential units leased for a term of less than 30 days; or (2) flooding, sewer facilities, or well water located on an individual residential lot and serving only that lot. [...] (a-1) Notwithstanding Subsection (a)(1), a municipality may require with respect to a small lot a setback related to environmental features, erosion, or waterways, to the extent authorized by federal or other state law.",
+     "url": "https://tcss.legis.texas.gov/resources/LG/htm/LG.211.htm",
+     "note": "SAVINGS CLAUSE, exclusion left to other rules: the subchapter does not exclude floodplain land, but 211.053(2) says it may not be construed to affect requirements 'directly related to ... flooding ... located on an individual residential lot and serving only that lot', and 211.055(a-1) (second quote, https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00015F.htm) lets a city require setbacks related to environmental features, erosion or waterways where federal or other state law authorizes. Whether flood rules bar a small lot is a matter of those rules. Tex. Loc. Gov't Code 211.051-211.058 as added by S.B. 15 read in full (enrolled text; 211.052, 211.053 and 211.056 also checked on the current code page). Note: the current chapter 211 page contains TWO subchapters using section numbers 211.051-211.057, one added by Ch. 841 (S.B. 1567, occupancy limits) and one by Ch. 1127 (S.B. 15); cite S.B. 15's by its chapter. "
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00015F.htm",
+     "note": "NONE FOUND. Tex. Loc. Gov't Code 211.051-211.058 as added by S.B. 15 read in full (enrolled text; 211.052, 211.053 and 211.056 also checked on the current code page). Note: the current chapter 211 page contains TWO subchapters using section numbers 211.051-211.057, one added by Ch. 841 (S.B. 1567, occupancy limits) and one by Ch. 1127 (S.B. 15); cite S.B. 15's by its chapter. Wildfire areas are not mentioned."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00015F.htm",
+     "note": "NONE FOUND as an exclusion; scope limit only: the tract must be 'located in an area zoned for single-family homes', five acres or more, with no recorded plat (211.052(a)(2)). Tex. Loc. Gov't Code 211.051-211.058 as added by S.B. 15 read in full (enrolled text; 211.052, 211.053 and 211.056 also checked on the current code page). Note: the current chapter 211 page contains TWO subchapters using section numbers 211.051-211.057, one added by Ch. 841 (S.B. 1567, occupancy limits) and one by Ch. 1127 (S.B. 15); cite S.B. 15's by its chapter. "
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00015F.htm",
+     "note": "NONE FOUND. Tex. Loc. Gov't Code 211.051-211.058 as added by S.B. 15 read in full (enrolled text; 211.052, 211.053 and 211.056 also checked on the current code page). Note: the current chapter 211 page contains TWO subchapters using section numbers 211.051-211.057, one added by Ch. 841 (S.B. 1567, occupancy limits) and one by Ch. 1127 (S.B. 15); cite S.B. 15's by its chapter. Public and tribal land are not mentioned (military bases and airports are handled by distance)."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00015F.htm",
+     "note": "NONE FOUND. Tex. Loc. Gov't Code 211.051-211.058 as added by S.B. 15 read in full (enrolled text; 211.052, 211.053 and 211.056 also checked on the current code page). Note: the current chapter 211 page contains TWO subchapters using section numbers 211.051-211.057, one added by Ch. 841 (S.B. 1567, occupancy limits) and one by Ch. 1127 (S.B. 15); cite S.B. 15's by its chapter. Historic districts and landmarks are not mentioned. Section 211.056 leaves the city free to impose 'restrictions that are applicable to all similarly situated lots or subdivisions'."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Near a law enforcement training center, an airport or military base, or a military airport overlay zone (automatic)",
+     "quote": "(b) This subchapter does not apply to an area located within: (1) one mile of a campus of the perimeter of a law enforcement training center in a county that has a population of 2,600,000 or more; (2) 3,000 feet of an airport or military base; or (3) 15,000 feet of the boundary of a military base if the area is designated by a municipality or joint airport zoning board, as applicable, as a military airport overlay zone with a clear zone and accident potential zone designation, as described by the military base's air installation compatible use zone report.",
+     "url": "https://tcss.legis.texas.gov/resources/LG/htm/LG.211.htm"
+    },
+    {
+     "what": "Only unplatted tracts of five acres or more zoned single-family, in large municipalities",
+     "quote": "(2) a tract of land located in a municipality described by Subdivision (1) that: (A) will be platted and located in an area zoned for single-family homes; (B) is five acres or more; and (C) has no recorded plat.",
+     "url": "https://tcss.legis.texas.gov/resources/LG/htm/LG.211.htm"
+    },
+    {
+     "what": "Aquifer recharge zones: city may keep open-space or permeable-surface rules that protect an aquifer",
+     "quote": "(c) Notwithstanding Subsection (a)(5), a municipality may adopt or enforce an ordinance, rule, or other measure with respect to a small lot that: (1) applies to land located in an aquifer recharge zone; and (2) relates to the protection of an aquifer.",
+     "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00015F.htm"
+    },
+    {
+     "what": "Generally applicable restrictions preserved",
+     "quote": "Sec. 211.056. NO EFFECT ON OTHER ZONING AUTHORITY. Except as expressly provided by this subchapter, this subchapter does not prohibit a municipality from imposing restrictions that are applicable to all similarly situated lots or subdivisions, including requiring all subdivisions or all small lots to fully mitigate stormwater runoff.",
+     "url": "https://tcss.legis.texas.gov/resources/LG/htm/LG.211.htm"
+    }
+   ]
+  },
+  "tx_austin_home": {
+   "sections_read": [
+    {
+     "citation": "City of Austin Ordinance No. 20231207-001 (HOME Phase 1), as adopted",
+     "url": "https://services.austintexas.gov/edims/document.cfm?id=421611",
+     "source_kind": "official",
+     "as_of": "adopted ordinance PDF linked from the City's HOME Amendments page; the ordinance text says it 'takes effect on December 18,2023' [sic]; fetched 2026-11-20"
+    },
+    {
+     "citation": "City of Austin Ordinance No. 20240516-006 (HOME Phase 2), as adopted",
+     "url": "https://services.austintexas.gov/edims/document.cfm?id=430451",
+     "source_kind": "official",
+     "as_of": "adopted ordinance PDF linked from the City's HOME Amendments page; the ordinance text says it 'takes effect on May 27,2024' [sic]; fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "(5) The number and types ofunits built in, flash flood zones, FEMA identified flood risk areas and areas identified as high-risk areas in the Atlas 14.",
+     "url": "https://services.austintexas.gov/edims/document.cfm?id=421611",
+     "note": "NONE FOUND in the two ordinances. The only flood references are a reporting duty (quoted, Phase 1 Part 19(B)(5): the City Manager must report units built in FEMA flood risk areas, which presupposes they can be built) and a direction to study flood plain mitigation (Part 20(B)). Austin Ordinance No. 20231207-001 (13 pages) and No. 20240516-006 (11 pages) read in full as adopted (machine-read text of scanned PDFs, so minor character errors are possible). They amend zoning-use and site-development sections of City Code Title 25 and contain no clause removing lots from the HOME rules by site condition. The REST of Title 25 (floodplain, drainage, wildland-urban interface code, historic landmark and district regulations, Lake Austin and other overlay rules) and any later amending ordinances were NOT fetched; those separate regulations may still restrict a lot. "
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "(2) This ordinance applies only to an application filed on or after November 16, 2024, for a property located within: (a) the wildland-urban interface area;",
+     "url": "https://services.austintexas.gov/edims/document.cfm?id=430451",
+     "note": "NOT EXCLUDED; timing only: Phase 2 Part 10 delayed the ordinance's application in the wildland-urban interface area to applications filed on or after November 16, 2024 (quoted). That date has passed, so the text no longer distinguishes those lots. Austin Ordinance No. 20231207-001 (13 pages) and No. 20240516-006 (11 pages) read in full as adopted (machine-read text of scanned PDFs, so minor character errors are possible). They amend zoning-use and site-development sections of City Code Title 25 and contain no clause removing lots from the HOME rules by site condition. The REST of Title 25 (floodplain, drainage, wildland-urban interface code, historic landmark and district regulations, Lake Austin and other overlay rules) and any later amending ordinances were NOT fetched; those separate regulations may still restrict a lot. "
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://services.austintexas.gov/edims/document.cfm?id=421611",
+     "note": "NONE FOUND. The ordinances apply by base zoning district (SF-1, SF-2, SF-3). Austin Ordinance No. 20231207-001 (13 pages) and No. 20240516-006 (11 pages) read in full as adopted (machine-read text of scanned PDFs, so minor character errors are possible). They amend zoning-use and site-development sections of City Code Title 25 and contain no clause removing lots from the HOME rules by site condition. The REST of Title 25 (floodplain, drainage, wildland-urban interface code, historic landmark and district regulations, Lake Austin and other overlay rules) and any later amending ordinances were NOT fetched; those separate regulations may still restrict a lot. "
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://services.austintexas.gov/edims/document.cfm?id=421611",
+     "note": "NONE FOUND. Austin Ordinance No. 20231207-001 (13 pages) and No. 20240516-006 (11 pages) read in full as adopted (machine-read text of scanned PDFs, so minor character errors are possible). They amend zoning-use and site-development sections of City Code Title 25 and contain no clause removing lots from the HOME rules by site condition. The REST of Title 25 (floodplain, drainage, wildland-urban interface code, historic landmark and district regulations, Lake Austin and other overlay rules) and any later amending ordinances were NOT fetched; those separate regulations may still restrict a lot. "
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "(d) If the property is designated as a historic landmark or located within a historic district, the Historic Design Standards or applicable design standards apply and control over this subsection.",
+     "url": "https://services.austintexas.gov/edims/document.cfm?id=421611",
+     "note": "NOT EXCLUDED in the two ordinances: the only historic clause (Phase 1, new section 25-2-773(F)(2)(d), quoted) says that for the preservation bonus the Historic Design Standards control on a landmark or in a historic district. The three-unit and small-lot allowances have no historic exception in these ordinances. Austin Ordinance No. 20231207-001 (13 pages) and No. 20240516-006 (11 pages) read in full as adopted (machine-read text of scanned PDFs, so minor character errors are possible). They amend zoning-use and site-development sections of City Code Title 25 and contain no clause removing lots from the HOME rules by site condition. The REST of Title 25 (floodplain, drainage, wildland-urban interface code, historic landmark and district regulations, Lake Austin and other overlay rules) and any later amending ordinances were NOT fetched; those separate regulations may still restrict a lot. "
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Phase 2 phased start for wildland-urban interface and displacement-risk census tracts (expired timing rule)",
+     "quote": "(2) This ordinance applies only to an application filed on or after November 16, 2024, for a property located within: (a) the wildland-urban interface area; [...] (b) a census tract that is identified as undergoing active displacement by the Uprooted Report; or",
+     "url": "https://services.austintexas.gov/edims/document.cfm?id=430451"
+    },
+    {
+     "what": "Minimum lot area for duplex, two-unit and three-unit use",
+     "quote": "(1) minimum lot area is 5,750 square feet;",
+     "url": "https://services.austintexas.gov/edims/document.cfm?id=421611"
+    },
+    {
+     "what": "Small-lot single-family lot size range in SF-3 or more restrictive districts",
+     "quote": "(1) A lot must be at least 1,800 square feet but less than 5,750 square feet.",
+     "url": "https://services.austintexas.gov/edims/document.cfm?id=430451"
+    }
+   ]
+  }
+ }
+}

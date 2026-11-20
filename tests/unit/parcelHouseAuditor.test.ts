@@ -119,10 +119,12 @@ describe("Parcel house auditor", () => {
     expect(noFema.statutoryZoning.applicable_statutes.map((s: any) => s.id)).not.toContain("ca_sb9_lot_split");
     expect(noFema.statutoryZoning.lotSplitFeasible).toBe(false);
     expect(noFema.statutoryZoning.not_confirmed.find((n: any) => n.id === "ca_sb9_lot_split").reason).toContain("whether the lot is in a FEMA special flood hazard area");
-    // On a site the engine stops at (very high fire zone), every law is listed as not screened, with that reason.
+    // Very high fire zone: decided law by law. SB 9's record lists the fire zone, so SB 9 is ruled out with the reason;
+    // no law is applied or dropped silently (the engine's old blanket stop is gone, tests/unit/statuteSiteConditions.test.ts).
     const fire: any = auditSingleHouseParcel({ ...BASE, parcelId: "p8v", lotSqft: 7500, livingSqft: 1800, zoningCode: "R-1", neighborhoodMedianHv: 850000, exclusions: { ...ANSWERED_NO, calfire_or_state_vhfhsz: true } });
-    expect(fire.statutoryZoning.applicable_statutes).toEqual([]);
-    expect(fire.statutoryZoning.not_confirmed.find((n: any) => n.id === "ca_adu_66323").reason).toContain("Not screened: the lot is in a very high fire hazard severity zone");
+    expect(fire.statutoryZoning.applicable_statutes.map((s: any) => s.id)).not.toContain("ca_sb9_lot_split");
+    expect(fire.statutoryZoning.lotSplitFeasible).toBe(false);
+    expect(fire.statutoryZoning.excluded_by_site.find((n: any) => n.id === "ca_sb9_lot_split").reason).toBe("Does not apply: the lot is in a very high fire hazard severity zone, which this law's text excludes.");
     expect(fire.statutoryZoning.statutoryNotes).toContain("very high fire hazard severity zone");
   });
 

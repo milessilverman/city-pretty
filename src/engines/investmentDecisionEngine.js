@@ -465,7 +465,7 @@ function recommendForParcel(parcelFacts, ctx) {
     } catch (e) { zoning = null; }
   }
   const statutes = zoning ? zoning.applicable_statutes || [] : [];
-  const notConfirmed = zoning ? zoning.not_confirmed || [] : [];
+  const notConfirmed = zoning ? (zoning.not_confirmed || []).concat(zoning.excluded_by_site || []) : [];   // both carry the engine's reason
   const lawsLoaded = !!(zoning && zoning.laws_loaded !== false);
   // "allowed by state law" only for a law the statute engine applied to this parcel; otherwise not determined, with
   // the engine's own reason for any law of that kind it could not confirm.

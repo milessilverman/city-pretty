@@ -145,6 +145,7 @@ function evaluateByRightHousing(parcel, laws) {
     state_code: parcel.state_code,
     applicable_statutes: [],
     not_confirmed: [],
+    excluded_by_site: [],
     statutory_exclusions: ex,
     net_by_right_feasible: false,
     laws_loaded: lawList.length > 0,
@@ -155,19 +156,27 @@ function evaluateByRightHousing(parcel, laws) {
   }
   base.base_zoning_code = parcel.base_zoning_code;
 
-  // An engine rule, not a finding about any one law: on these sites no law is screened. Each law that would otherwise
-  // be looked at is listed as not confirmed with that reason, so the page never says "no law applies" without saying why.
+  // Site conditions (flood area, fire zone, ...) are decided law by law, from each law's own record:
+  //  - a condition the record lists in statutory_exclusions, or that its site_conditions marks excluded (with the
+  //    quote from the text), rules the law out on such a lot, and the page says so;
+  //  - a condition site_conditions marks as checked and not excluded does not affect the law;
+  //  - one of the four hazard conditions the law's text has not been checked for leaves the law not confirmed there.
+  // Before 20 Nov 2026 the engine screened no law at all on a lot in any of the four hazard conditions, in every
+  // state, which no record says (docs/audit/site_exclusions/).
   const SITE_LABELS = { fema_100yr_floodway: "a FEMA special flood hazard area", calfire_or_state_vhfhsz: "a very high fire hazard severity zone", williamson_or_ag_preserve: "an agricultural preserve", public_or_tribal_land: "public or tribal land", historic_district_hpoz: "a historic district or landmark site" };
   const siteLabel = k => SITE_LABELS[k] || String(k).replace(/_/g, " ");
-  const hardStops = ["fema_100yr_floodway", "calfire_or_state_vhfhsz", "williamson_or_ag_preserve", "public_or_tribal_land"].filter(k => ex[k]);
-  if (hardStops.length) {
-    for (const rec of lawList) {
-      if (!rec || rec.state_code !== parcel.state_code || STATUTE_NOT_PARCEL_LEVEL.has(rec.id) || rec.parcel_level === false) continue;
-      base.not_confirmed.push({ id: rec.id, name: rec.short_name || rec.bill_number || rec.id, reason: "Not screened: the lot is in " + hardStops.map(siteLabel).join(" and ") + ", and the screening engine stops there for every law (its own rule, not a finding about this law)." });
+  const HAZARD_KEYS = ["fema_100yr_floodway", "calfire_or_state_vhfhsz", "williamson_or_ag_preserve", "public_or_tribal_land"];
+  const siteVerdict = rec => {
+    const listed = (rec.statutory_exclusions || []).map(e => String(e).split(/[\s(]/)[0]);
+    const sc = rec.site_conditions || {};
+    const out = { excluded: [], unchecked: [], unanswered: [] };
+    for (const k of new Set([...listed, ...HAZARD_KEYS, ...Object.keys(sc)])) {
+      const rule = listed.includes(k) ? true : (sc[k] ? sc[k].excluded : undefined);   // true: the text excludes it; false: text checked, no exclusion; otherwise not checked
+      if (ex[k] === true) { if (rule === true) out.excluded.push(k); else if (rule !== false && HAZARD_KEYS.includes(k)) out.unchecked.push(k); }
+      else if (ex[k] === null && rule === true) out.unanswered.push(k);   // asked and not answered (e.g. FEMA did not reply)
     }
-    return base;
-  }
-
+    return out;
+  };
   for (const rec of lawList) {
     if (!rec || rec.state_code !== parcel.state_code) continue;
     if (STATUTE_NOT_PARCEL_LEVEL.has(rec.id)) continue;
@@ -178,15 +187,20 @@ function evaluateByRightHousing(parcel, laws) {
       base.not_confirmed.push({ id: rec.id, name: label, reason: "The law's text could not be checked (" + (status || "no status") + ")." });
       continue;
     }
-    const check = statuteAppliesTo(rec, parcel);
+    const check = statuteAppliesTo(rec, Object.assign({}, parcel, { exclusions: {} }));   // zone, transit and population tests first; site conditions below
     if (rec.id === "tx_sb840" && !check.applies && !check.missing.length && parcel.is_commercial_or_mixed_use) {
       ex.population_threshold_ineligible = true;
     }
-    // A site condition the law names that was asked and not answered (passed as null, e.g. FEMA did not reply): the law
-    // is then not confirmed. It is not applied as if the answer were "no".
     if (check.applies) {
-      const unanswered = (rec.statutory_exclusions || []).map(e => String(e).split(/[\s(]/)[0]).filter(k => ex[k] === null);
-      if (unanswered.length) { check.applies = false; check.missing.push(...unanswered.map(k => "whether the lot is in " + siteLabel(k))); }
+      const sv = siteVerdict(rec);
+      if (sv.excluded.length) {
+        base.excluded_by_site.push({ id: rec.id, name: label, reason: "Does not apply: the lot is in " + sv.excluded.map(siteLabel).join(" and ") + ", which this law's text excludes." });
+        continue;
+      }
+      // Not answered, or not checked in the law's text: the law is not confirmed. It is not applied as if the answer were "no".
+      const miss = sv.unanswered.map(k => "whether the lot is in " + siteLabel(k))
+        .concat(sv.unchecked.map(k => "whether this law reaches a lot in " + siteLabel(k) + " (this lot is in one, and the law's text has not been checked for it)"));
+      if (miss.length) { check.applies = false; check.missing.push(...miss); }
     }
     if (!check.applies) {
       if (check.missing.length) base.not_confirmed.push({ id: rec.id, name: label, reason: "Not on file for this parcel: " + check.missing.join(", ") + "." });
