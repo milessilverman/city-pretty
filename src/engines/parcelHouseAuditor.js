@@ -144,6 +144,7 @@ function auditSingleHouseParcel(input) {
     base_zoning_code: rawZone,
     is_commercial_or_mixed_use: isComm,
     is_single_family_residential: isSfr,
+    is_multifamily_residential: isMulti,
     dist_to_heavy_rail_mi: input.distToHeavyRailMi ?? null,
     dist_to_frequent_bus_or_brt_mi: input.distToFrequentBusMi ?? null,
     exclusions: {

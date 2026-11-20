@@ -480,7 +480,9 @@ function recommendForParcel(parcelFacts, ctx) {
     if (!lawsLoaded) return { status: "not determined", why: "state law table (app/data/statutes.json) not loaded" };
     if (id === "lot_split") { const s = statutes.find(x => /lot split/i.test(x.citation)); return s ? allowed(s) : { status: "not determined", why: heldWhy(/lot.?split/i, "no state lot-split law on file applies to this parcel; local subdivision rules decide") }; }
     if (id === "adu") {
-      const s = p.is_single_family_residential ? (statutes.find(x => /(^|_)adu(_|$)/i.test(String(x.id))) || statutes.find(x => num(x.max_units_by_right) != null && x.max_units_by_right >= 2)) : null;
+      // an ADU law the statute engine applied to this lot counts whatever the zone class (the engine checked it); the
+      // "two or more units by right" stand-in is used for single-family lots only
+      const s = statutes.find(x => /(^|_)adu(_|$)/i.test(String(x.id))) || (p.is_single_family_residential ? statutes.find(x => num(x.max_units_by_right) != null && x.max_units_by_right >= 2) : null);
       return s ? allowed(s) : { status: "not determined", why: heldWhy(/(^|_)adu(_|$)|\bADU\b/i, p.is_single_family_residential ? "no state ADU law on file applies to this parcel; local ADU rules decide" : "the lot is not recorded as single-family, so state ADU laws on file were not applied") };
     }
     return { status: "not determined", why: "set by local height, floor-area and setback rules; no local rule table is loaded" };

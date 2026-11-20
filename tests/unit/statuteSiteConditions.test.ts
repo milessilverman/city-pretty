@@ -49,6 +49,21 @@ describe("statute engine: site conditions are decided law by law", () => {
     expect(o.r.not_confirmed.find((n: any) => n.id === "lists_flood").reason).toContain("whether the lot is in a FEMA special flood hazard area");
   });
 
+  it("an exclusion on terms the page cannot see leaves the law not confirmed, with those terms; an exception is shown with a ruling-out", () => {
+    const laws = [
+      law("local_option", { site_conditions: { fema_100yr_floodway: { excluded: "conditional", condition: "only where the municipality has exempted the lot by ordinance", quote: "q", url: "u" } } }),
+      law("with_exception", { statutory_exclusions: ["fema_100yr_floodway"], site_conditions: { fema_100yr_floodway: { excluded: true, exception: "a map revision", quote: "q", url: "u" } } }),
+    ];
+    const r: any = evaluateByRightHousing(parcel({ fema_100yr_floodway: true }), laws as any);
+    expect(r.applicable_statutes).toEqual([]);
+    expect(r.not_confirmed.map((n: any) => n.id)).toEqual(["local_option"]);
+    expect(r.not_confirmed[0].reason).toBe("Not on file for this parcel: whether this law reaches this lot (it is in a FEMA special flood hazard area, which the law's text excludes only where the municipality has exempted the lot by ordinance).");
+    expect(r.excluded_by_site[0].reason).toBe("Does not apply: the lot is in a FEMA special flood hazard area, which this law's text excludes. The text has exceptions: a map revision.");
+    // Farmland and land ownership are never asked by the page, so an unanswered (null) one does not hold a law back.
+    const ag: any = evaluateByRightHousing(parcel({ williamson_or_ag_preserve: null }), [law("ag_conditional", { site_conditions: { williamson_or_ag_preserve: { excluded: "conditional", condition: "only by zoning", quote: "q", url: "u" } } })] as any);
+    expect(ag.applicable_statutes.map((x: any) => x.id)).toEqual(["ag_conditional"]);
+  });
+
   it("a law the zone does not reach is not listed at all, whatever the site", () => {
     const r: any = evaluateByRightHousing({ ...parcel({ calfire_or_state_vhfhsz: true }), base_zoning_code: "M-1", is_single_family_residential: false }, [law("commercial_only", { applies_to_zone: "commercial" })] as any);
     expect(r.applicable_statutes).toEqual([]);

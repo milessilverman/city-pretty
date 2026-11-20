@@ -317,6 +317,7 @@ function statuteAppliesTo(rec, parcel) {
       // optional population and lot-size floors; any condition the parcel record can't express (unmapped_condition) is
       // reported as missing, never assumed.
       if (rec.applies_to_zone === "commercial") { if (!comm) return { applies: false, missing }; }
+      else if (rec.applies_to_zone === "residential") { if (!sfr && !parcel.is_multifamily_residential) return { applies: false, missing }; }   // single-family or multifamily zoning
       else if (!sfr) return { applies: false, missing };
       if (!popAtLeast(rec.municipality_pop_min)) return { applies: false, missing };
       if (rec.min_lot_size_sqft != null) {
@@ -353,20 +354,29 @@ function evaluateByRightHousing(parcel, laws) {
   //  - a condition the record lists in statutory_exclusions, or that its site_conditions marks excluded (with the
   //    quote from the text), rules the law out on such a lot, and the page says so;
   //  - a condition site_conditions marks as checked and not excluded does not affect the law;
-  //  - one of the four hazard conditions the law's text has not been checked for leaves the law not confirmed there.
+  //  - a condition the text excludes only on terms the page cannot see ("conditional": a local ordinance or
+  //    determination, part of the law only) leaves the law not confirmed there, with those terms;
+  //  - one of the four hazard conditions the law's text has not been checked for, or does not settle, leaves the law
+  //    not confirmed there.
   // Before 20 Nov 2026 the engine screened no law at all on a lot in any of the four hazard conditions, in every
   // state, which no record says (docs/audit/site_exclusions/).
   const SITE_LABELS = { fema_100yr_floodway: "a FEMA special flood hazard area", calfire_or_state_vhfhsz: "a very high fire hazard severity zone", williamson_or_ag_preserve: "an agricultural preserve", public_or_tribal_land: "public or tribal land", historic_district_hpoz: "a historic district or landmark site" };
   const siteLabel = k => SITE_LABELS[k] || String(k).replace(/_/g, " ");
   const HAZARD_KEYS = ["fema_100yr_floodway", "calfire_or_state_vhfhsz", "williamson_or_ag_preserve", "public_or_tribal_land"];
+  const ASKED_KEYS = ["fema_100yr_floodway", "calfire_or_state_vhfhsz"];   // the two the page queries a map for; farmland and land ownership are not measured
   const siteVerdict = rec => {
     const listed = (rec.statutory_exclusions || []).map(e => String(e).split(/[\s(]/)[0]);
     const sc = rec.site_conditions || {};
-    const out = { excluded: [], unchecked: [], unanswered: [] };
+    const out = { excluded: [], conditional: [], unchecked: [], unanswered: [] };
     for (const k of new Set([...listed, ...HAZARD_KEYS, ...Object.keys(sc)])) {
-      const rule = listed.includes(k) ? true : (sc[k] ? sc[k].excluded : undefined);   // true: the text excludes it; false: text checked, no exclusion; otherwise not checked
-      if (ex[k] === true) { if (rule === true) out.excluded.push(k); else if (rule !== false && HAZARD_KEYS.includes(k)) out.unchecked.push(k); }
-      else if (ex[k] === null && rule === true) out.unanswered.push(k);   // asked and not answered (e.g. FEMA did not reply)
+      if (k.charAt(0) === "_") continue;
+      // true: the text excludes it; "conditional": only on terms the page cannot see; false: text checked, no exclusion; otherwise not settled
+      const rule = (sc[k] && sc[k].excluded === "conditional") ? "conditional" : listed.includes(k) ? true : (sc[k] ? sc[k].excluded : undefined);
+      if (ex[k] === true) {
+        if (rule === true) out.excluded.push(k);
+        else if (rule === "conditional") out.conditional.push(k);
+        else if (rule !== false && HAZARD_KEYS.includes(k)) out.unchecked.push(k);
+      } else if (ex[k] === null && (rule === true || (rule === "conditional" && ASKED_KEYS.includes(k)))) out.unanswered.push(k);   // asked and not answered (e.g. FEMA did not reply)
     }
     return out;
   };
@@ -387,12 +397,14 @@ function evaluateByRightHousing(parcel, laws) {
     if (check.applies) {
       const sv = siteVerdict(rec);
       if (sv.excluded.length) {
-        base.excluded_by_site.push({ id: rec.id, name: label, reason: "Does not apply: the lot is in " + sv.excluded.map(siteLabel).join(" and ") + ", which this law's text excludes." });
+        const exceptions = sv.excluded.map(k => rec.site_conditions && rec.site_conditions[k] && rec.site_conditions[k].exception).filter(Boolean);
+        base.excluded_by_site.push({ id: rec.id, name: label, reason: "Does not apply: the lot is in " + sv.excluded.map(siteLabel).join(" and ") + ", which this law's text excludes." + (exceptions.length ? " The text has exceptions: " + exceptions.join("; ") + "." : "") });
         continue;
       }
       // Not answered, or not checked in the law's text: the law is not confirmed. It is not applied as if the answer were "no".
       const miss = sv.unanswered.map(k => "whether the lot is in " + siteLabel(k))
-        .concat(sv.unchecked.map(k => "whether this law reaches a lot in " + siteLabel(k) + " (this lot is in one, and the law's text has not been checked for it)"));
+        .concat(sv.conditional.map(k => "whether this law reaches this lot (it is in " + siteLabel(k) + ", which the law's text excludes " + rec.site_conditions[k].condition + ")"))
+        .concat(sv.unchecked.map(k => "whether this law reaches a lot in " + siteLabel(k) + " (this lot is in one, and the law's text " + (rec.site_conditions && rec.site_conditions[k] ? "does not settle it" : "has not been checked for it") + ")"));
       if (miss.length) { check.applies = false; check.missing.push(...miss); }
     }
     if (!check.applies) {
@@ -1370,6 +1382,7 @@ function auditSingleHouseParcel(input) {
     base_zoning_code: rawZone,
     is_commercial_or_mixed_use: isComm,
     is_single_family_residential: isSfr,
+    is_multifamily_residential: isMulti,
     dist_to_heavy_rail_mi: input.distToHeavyRailMi ?? null,
     dist_to_frequent_bus_or_brt_mi: input.distToFrequentBusMi ?? null,
     exclusions: {
@@ -3297,14 +3310,16 @@ function zoneRules(code, juris) {
 // "multifamily", "commercial / mixed use", "none" (no single-family or commercial law is screened), or null (not this
 // layer, or a jurisdiction with no list on file: the caller's text tests apply). Single-family needs both the layer's
 // own category and a zone on the jurisdiction's published SB 9 list (docs/audit/la_sb9_zone_scope.md, fetched 20 Nov
-// 2026): City of Los Angeles memo "A, RA, RE, RS, R1, RU, RZ, and RW1"; LA County memo "Zone R-1 or R-A". R1V/R1F/
+// 2026): City of Los Angeles memo "A, RA, RE, RS, R1, RU, RZ, and RW1"; LA County memo "Zone R-1 or R-A"; Santa Clarita
+// SB 9 FAQ "NU1, NU2, NU3, NU4, NU5, UR1, or UR2" (docs/audit/site_exclusions/ca_notes.md, section B3). R1V/R1F/
 // R1R/R1H are read as R1 (the memo does not name the variations). Parking variants (R1P, RAP, A2P) are not on the list.
 function bundleZoneClass(z) {
   if (!z || !z.zone || z.desc !== undefined) return null;   // zones read from a live city service carry a desc and a guessed category
   const cat = String(z.cat || "");
   if (cat === "multifamily" || /^commercial/.test(cat)) return cat;
   const t = String(z.zone).toUpperCase().replace(/\[[^\]]*\]|\([^)]*\)/g, "").replace(/^[QTD]+(?=[A-Z])/, "");
-  const list = z.juris === "Los Angeles" ? /^(A[12]|RA|RE|RS|RU|RZ|RW1|R1(?:[VFRH]\d)?)(?![A-Z])/ : z.juris === "Unincorporated LA County" ? /^R-?[1A](?![0-9A-Z])/ : null;
+  const list = z.juris === "Los Angeles" ? /^(A[12]|RA|RE|RS|RU|RZ|RW1|R1(?:[VFRH]\d)?)(?![A-Z])/ : z.juris === "Unincorporated LA County" ? /^R-?[1A](?![0-9A-Z])/
+    : z.juris === "Santa Clarita" ? /^(NU[1-5]|UR[12])(?![0-9A-Z])/ : null;
   if (!list || cat !== "single-family") return null;
   const m = t.match(list);
   return m && !/^(A[12]|R1|RW1)\d/.test(t.replace(/^R1[VFRH]\d/, "R1")) ? "single-family" : "none";
@@ -5909,6 +5924,7 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
         base_zoning_code: baseZone,
         is_commercial_or_mixed_use: isComm,
         is_single_family_residential: isSfr,
+        is_multifamily_residential: isMulti,
         dist_to_heavy_rail_mi: (nearestStn && (nearestStn.type === "heavy_rail" || !nearestStn.type)) ? nearestStn.distMi : null,
         dist_to_frequent_bus_or_brt_mi: (nearestStn && (nearestStn.type === "bus" || nearestStn.type === "brt")) ? nearestStn.distMi : null,
         exclusions: {

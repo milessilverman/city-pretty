@@ -124,7 +124,9 @@ describe("Parcel house auditor", () => {
     const fire: any = auditSingleHouseParcel({ ...BASE, parcelId: "p8v", lotSqft: 7500, livingSqft: 1800, zoningCode: "R-1", neighborhoodMedianHv: 850000, exclusions: { ...ANSWERED_NO, calfire_or_state_vhfhsz: true } });
     expect(fire.statutoryZoning.applicable_statutes.map((s: any) => s.id)).not.toContain("ca_sb9_lot_split");
     expect(fire.statutoryZoning.lotSplitFeasible).toBe(false);
-    expect(fire.statutoryZoning.excluded_by_site.find((n: any) => n.id === "ca_sb9_lot_split").reason).toBe("Does not apply: the lot is in a very high fire hazard severity zone, which this law's text excludes.");
+    expect(fire.statutoryZoning.excluded_by_site.find((n: any) => n.id === "ca_sb9_lot_split").reason).toBe("Does not apply: the lot is in a very high fire hazard severity zone, which this law's text excludes. The text has exceptions: sites the local agency excluded from the hazard zone, or sites with adopted fire hazard mitigation measures.");
+    // The state ADU law's text was read and has no fire-zone exclusion, so it still applies there.
+    expect(fire.statutoryZoning.applicable_statutes.map((s: any) => s.id)).toContain("ca_adu_66323");
     expect(fire.statutoryZoning.statutoryNotes).toContain("very high fire hazard severity zone");
   });
 

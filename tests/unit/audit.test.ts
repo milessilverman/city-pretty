@@ -103,7 +103,15 @@ describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
     expect(t1.unconfirmed_fields.join(" ")).toMatch(/eligible_counties/);
 
     const fire = evaluateByRightHousing({ ...laTransitParcel, exclusions: { ...BASE_EXCLUSIONS, calfire_or_state_vhfhsz: true } }, LAWS);
-    expect(fire.net_by_right_feasible).toBe(false);
+    // Very high fire zone, decided law by law from the text (docs/audit/site_exclusions/ca.json, 20 Nov 2026). Before
+    // that date the engine dropped every law here. SB 79's standards section has no fire exclusion: the bar is on the
+    // optional streamlined approval, and a city may exclude such sites by ordinance, so SB 79 is not confirmed (not
+    // applied, not ruled out). AB 2097 was read in full and has no site exclusion, so it still applies.
+    expect(fire.applicable_statutes.map(s => s.id)).not.toContain("ca_sb79_tier1");
+    const nc = (fire as any).not_confirmed.find((n: any) => n.id === "ca_sb79_tier1");
+    expect(nc.reason).toContain("it is in a very high fire hazard severity zone, which the law's text excludes only from the optional streamlined ministerial approval");
+    expect(fire.applicable_statutes.map(s => s.id)).toContain("ca_ab2097");
+    expect((fire as any).excluded_by_site).toEqual([]);
   });
 
   it("3b. Laws whose text could not be checked never apply; missing zoning never implies residential", () => {

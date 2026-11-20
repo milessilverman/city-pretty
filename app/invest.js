@@ -177,6 +177,7 @@ function parcelFacts() {
       county_pop: isNum(a.county_pop) ? a.county_pop : null,
       is_commercial_or_mixed_use: isComm,
       is_single_family_residential: isSfr,
+      is_multifamily_residential: isMulti,
       dist_to_heavy_rail_mi: (stn && (stn.type === "heavy_rail" || !stn.type) && isNum(stn.distMi)) ? stn.distMi : null,
       dist_to_frequent_bus_or_brt_mi: (stn && (stn.type === "bus" || stn.type === "brt") && isNum(stn.distMi)) ? stn.distMi : null,
       exclusions: {
