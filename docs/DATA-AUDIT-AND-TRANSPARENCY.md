@@ -1061,3 +1061,60 @@ passenger rail stations)" for SB 79.
   test for an R1 variation lot with use "Single"); `scripts/live_check_panels.mjs 06037` (LIVE_PORT 8964, 3 lots, all
   rows ok, `data/backtests/live_check_panels_2026-11-20_lazone.json`); `scripts/live_check_lot_fit.mjs` (LIVE_PORT
   8965, all groups ok, `data/backtests/live_check_lot_fit_2026-11-20.json`).
+
+### Correction: LA single-family screening followed the map's category, not each jurisdiction's SB 9 list; a failed flood check counted as "not in a flood area"; hazard-blocked lots were told "no law applies" (found and fixed 20 Nov 2026)
+
+Follow-up to the correction above, after (1) the sources were fetched (`docs/audit/la_sb9_zone_scope.md`) and (2) 31
+real lots across zone groups were opened on the real page (`scripts/live_check_la_zoning_screen.mjs --sample`).
+
+- Too wide: the same day's fix let the zoning layer's "single-family" category decide. That category also holds
+  County A-1 / A-2 and City parking variants (R1P, RAP, A2P). A lot is now classed single-family only where the layer
+  says so AND the zone is on the jurisdiction's published list (`bundleZoneClass` in `app/app.js`):
+  - City of Los Angeles, City Planning SB 9 memo: "which includes the following Zones: A, RA, RE, RS, R1, RU, RZ, and
+    RW1 in Chapter 1 of the Zoning Code, as well as 1L Density Districts in Chapter 1A of the Zoning Code."
+    (`https://planning.lacity.gov/odocument/bef6b998-de32-4090-9557-5f98711c6c15/SB9_Memo_2-7-22MG_-_signed.pdf`)
+  - LA County Regional Planning SB 9 memo: "The project site is located within Zone R-1 or R-A"
+    (`https://planning.lacounty.gov/wp-content/uploads/2026/01/SB9_MEMO.pdf`)
+  - Santa Clarita (the layer's third jurisdiction): no list fetched, so the older text tests still apply there.
+- Not confirmed, stated plainly:
+  - The codified statute on leginfo.legislature.ca.gov could not be fetched (HTTP 403 challenge page); SB 9's text is
+    quoted from the copy attached to the County memo. Gov. Code § 66314 (ADU) was not fetched verbatim.
+  - The City memo names "R1" but not the variation zones. R1V, R1F, R1R and R1H are read as R1; that is this project's
+    reading, not the memo's words.
+  - The City lists "A" zones; HCD's SB 9 fact sheet says parcels in agricultural zones "are not subject to SB 9
+    mandates even if they allow single-family residential uses"
+    (`https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/sb-9-fact-sheet.pdf`). The page follows
+    the City's list for City lots; whether state law requires it there is not confirmed.
+  - The state ADU law also reaches multifamily zones (per the sources in the audit file), but the engine applies its
+    ADU record to single-family lots only. R2 / RD / R4 lots with a house are told the ADU law "was not applied"; that
+    is true of the engine and is an open gap, not a finding that no ADU is allowed.
+- Same misread elsewhere: the house panel's statutory notes (`auditSingleHouseParcel`, in `app/app.js` and
+  `src/engines/parcelHouseAuditor.js`) used the old text tests; they now take the same class. The prospectus export
+  passed an empty rule, no point and no hazard answers to the playbook; it now passes the open lot's.
+- A failed flood check counted as "no": on 4 of the sampled single-family lots FEMA did not answer, and SB 9 was shown
+  as applying. A site condition a law names (historic, flood, fire for SB 9) that was asked and not answered now makes
+  that law "Not confirmed" with the reason ("whether the lot is in a FEMA special flood hazard area"); the playbook
+  and the statutory notes show the not-confirmed laws next to the ones that apply
+  (`evaluateByRightHousing`, both copies).
+- "No state housing law applies" with no reason: the engine stops screening every law on a lot in a FEMA flood hazard
+  area, a very high fire hazard severity zone, an agricultural preserve or public / tribal land. That is a rule of the
+  engine, not something each law's record says (the California ADU record lists no site exclusions). Five sampled
+  lots in very high fire zones got the bare sentence. The page now lists each law as "Not screened: the lot is in a
+  very high fire hazard severity zone, and the screening engine stops there for every law (its own rule, not a finding
+  about this law)". The rule itself is unchanged: whether to drop it and let each law's own exclusions decide is the
+  owner's call (it would change results in every state) and is listed in `docs/WORK-QUEUE.md`.
+- Seen on the real page (20 Nov, final code):
+  - Sample, LIVE_PORT 8986 and 8987: 31 lots checked, 0 failed, 0 points skipped
+    (`data/backtests/live_check_la_zoning_screen_2026-11-20_sample.json`). Long Beach, Glendale, Pasadena, Torrance
+    and Burbank have no polygons in the layer and were not sampled.
+  - 2107 Duxbury Cir, LIVE_PORT 8985: all checks ok (`data/backtests/live_check_la_zoning_screen_2026-11-20.json`).
+  - `scripts/live_check_panels.mjs 06037 41051 48453`, LIVE_PORT 8988, 2 lots each: law rows ok on all 6; one
+    unrelated failure, Travis block group 484530010004, where the check expected rent "$3,501/mo" and the page showed
+    "$3,500 or more/mo" (`data/backtests/live_check_panels_2026-11-20_lazone2.json`). Not fixed here.
+  - `scripts/live_check_lot_fit.mjs`: three runs. LIVE_PORT 8989: Portland 1 of 3, Gresham reason not shown; 8990:
+    Portland 2 of 3, Gresham not shown; 8991: all groups ok. In the failing runs the panel said "the zoning map
+    service didn't answer" while the same service answered 6 of 6 direct queries, the intermittent browser-path
+    failure already noted in that script's header. The saved file is the passing third run.
+- Tests the same day: `npm test` 863 passed; `npm run typecheck` clean; `npm run test:e2e` 83 passed. Two existing
+  auditor tests assumed a lot split with no hazard answers given; they now supply the answers, and new assertions
+  cover the unanswered and the blocked cases.

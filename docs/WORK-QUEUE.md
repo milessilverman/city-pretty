@@ -106,3 +106,21 @@ audit doc the same day.
 | ✓ **Lot-fit outside LA and Florida** (16 Nov: NYC R1-R5 from the Zoning Resolution) | The checks were skipped everywhere else | DC R-1A/R-1B/R-2/R-3 added and Davidson/DC use tables added (16 Nov, round 2). NYC R6-R10 added 17 Nov (round 3); NYC R11/R12 + commercial (round 4); San Diego RS zones (round 5). Charlotte and Portland added (round 6); Miami withheld (code only in a JS app). Engine copies reconciled 17 Nov (drift test; .ts copies deleted). Next: roof pitch values are unsourced; Denver (code text not found), Nashville (Municode 403), NYC R11/R12 and commercial districts, other counties' use-code tables; NYC R6+ districts; the NYC "Owner playbook" line still says zoning not on file. Fixed 17 Nov: NYC and DC clicks showed "Lot Parcel" for the parcel number (now BBL / SSL), and NC OneMap's sale date was read as a sale price (never shown: it parsed as year 1727) |
 | **2,443 US counties (under 100,000 people; 63.6 million people) aren't on the page** (measured 17 Nov). Tennessee done 17 Nov (all 95 counties; `audit/small-counties-pilot.md`). **Maryland done 19 Nov** (10 counties, all 24 now; the first state served from R2 only, not committed: `audit/small-counties-maryland.md`). Remaining: 2,387 counties under 100,000 people, 52,817 block groups (registry count, 19 Nov; see the status note above) | Most small-town and rural addresses can't be looked up | **Hosting decided 17 Nov: regional Pages sites** (`app/data/county_hosts.json`, `scripts/split_county_hosting.py`; page support built, regions disabled until each site is checked). **Waiting on the user to create** `city-pretty-data-northeast`, `-midwest`, `-south`, `-west` (public, Pages on from main). Earlier note: GitHub Pages publishes at most 1 GB per site; `main` is already 1.07 GB and this branch 1.30 GB, almost all county files. The rest of the US adds about 1 GB more (about 0.2 GB with light files that leave out drawn streets, water and parks). Options: split county files into a few regional Pages repos (no new accounts; recommended), host them on Cloudflare (needs the user's account), or light files for small counties. Merging this branch into `main` as it is would likely push the site past the limit |
 | **23 states' codes unsearchable from the build machine** | "No law found" is unverified there | Alternate routes, or a script run from the user's computer |
+
+## Open from the LA zoning screen work (20 Nov 2026)
+
+Details and sources: `docs/DATA-AUDIT-AND-TRANSPARENCY.md` (the two 20 Nov corrections) and `docs/audit/la_sb9_zone_scope.md`.
+
+- **Owner's decision: the engine's blanket hazard stop.** `evaluateByRightHousing` screens no law at all on a lot in a
+  FEMA flood hazard area, a very high fire zone, an agricultural preserve or public / tribal land, in every state. No
+  law record says that (the California ADU record lists no site exclusions). The page now says the stop is the
+  engine's own rule. Dropping it would let each law's `statutory_exclusions` decide and would change results nationwide.
+- The engine applies the state ADU record to single-family lots only; the sources say the ADU law also reaches
+  multifamily zones. R2 / RD / R4 lots are told it "was not applied".
+- Not fetched: the codified text of Gov. Code §§ 65852.21, 66411.7 and 66314 (leginfo returned a 403 challenge page);
+  Santa Clarita's SB 9 zones; whether the City memo's "R1" covers R1V / R1F / R1R / R1H and R1P; whether SB 9 is
+  mandatory in the City's A zones (HCD's fact sheet says agricultural zones are not subject to it).
+- `scripts/live_check_panels.mjs` expects "$3,501/mo" where the page shows the Census top-code "$3,500 or more/mo"
+  (Travis block group 484530010004).
+- `app/advisor-scripts.js` (`answerLot`) is on no pushed branch. If it lands, drop its sentence explaining the old
+  "no zoning code" gap.

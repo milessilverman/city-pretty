@@ -155,10 +155,18 @@ function evaluateByRightHousing(parcel, laws) {
   }
   base.base_zoning_code = parcel.base_zoning_code;
 
-  const hasHardPhysicalExclusion =
-    ex.fema_100yr_floodway || ex.calfire_or_state_vhfhsz || ex.williamson_or_ag_preserve ||
-    ex.public_or_tribal_land;
-  if (hasHardPhysicalExclusion) return base;
+  // An engine rule, not a finding about any one law: on these sites no law is screened. Each law that would otherwise
+  // be looked at is listed as not confirmed with that reason, so the page never says "no law applies" without saying why.
+  const SITE_LABELS = { fema_100yr_floodway: "a FEMA special flood hazard area", calfire_or_state_vhfhsz: "a very high fire hazard severity zone", williamson_or_ag_preserve: "an agricultural preserve", public_or_tribal_land: "public or tribal land", historic_district_hpoz: "a historic district or landmark site" };
+  const siteLabel = k => SITE_LABELS[k] || String(k).replace(/_/g, " ");
+  const hardStops = ["fema_100yr_floodway", "calfire_or_state_vhfhsz", "williamson_or_ag_preserve", "public_or_tribal_land"].filter(k => ex[k]);
+  if (hardStops.length) {
+    for (const rec of lawList) {
+      if (!rec || rec.state_code !== parcel.state_code || STATUTE_NOT_PARCEL_LEVEL.has(rec.id) || rec.parcel_level === false) continue;
+      base.not_confirmed.push({ id: rec.id, name: rec.short_name || rec.bill_number || rec.id, reason: "Not screened: the lot is in " + hardStops.map(siteLabel).join(" and ") + ", and the screening engine stops there for every law (its own rule, not a finding about this law)." });
+    }
+    return base;
+  }
 
   for (const rec of lawList) {
     if (!rec || rec.state_code !== parcel.state_code) continue;
@@ -173,6 +181,12 @@ function evaluateByRightHousing(parcel, laws) {
     const check = statuteAppliesTo(rec, parcel);
     if (rec.id === "tx_sb840" && !check.applies && !check.missing.length && parcel.is_commercial_or_mixed_use) {
       ex.population_threshold_ineligible = true;
+    }
+    // A site condition the law names that was asked and not answered (passed as null, e.g. FEMA did not reply): the law
+    // is then not confirmed. It is not applied as if the answer were "no".
+    if (check.applies) {
+      const unanswered = (rec.statutory_exclusions || []).map(e => String(e).split(/[\s(]/)[0]).filter(k => ex[k] === null);
+      if (unanswered.length) { check.applies = false; check.missing.push(...unanswered.map(k => "whether the lot is in " + siteLabel(k))); }
     }
     if (!check.applies) {
       if (check.missing.length) base.not_confirmed.push({ id: rec.id, name: label, reason: "Not on file for this parcel: " + check.missing.join(", ") + "." });

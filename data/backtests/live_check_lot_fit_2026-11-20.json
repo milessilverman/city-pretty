@@ -1,7 +1,7 @@
 {
- "ran_on": "2026-11-20T11:19:59.278Z",
+ "ran_on": "2026-11-20T18:20:57.564Z",
  "script": "scripts/live_check_lot_fit.mjs",
- "browser_via_explicit_proxy": false,
+ "browser_via_explicit_proxy": true,
  "nyc": [
   {
    "county": "36081",
