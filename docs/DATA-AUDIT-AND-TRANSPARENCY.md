@@ -1118,3 +1118,63 @@ real lots across zone groups were opened on the real page (`scripts/live_check_l
 - Tests the same day: `npm test` 863 passed; `npm run typecheck` clean; `npm run test:e2e` 83 passed. Two existing
   auditor tests assumed a lot split with no hazard answers given; they now supply the answers, and new assertions
   cover the unanswered and the blocked cases.
+
+### Correction: the statute engine dropped every law on flood, fire, farmland and public-land lots; site conditions are now decided law by law from each law's text (found and fixed 20 Nov 2026)
+
+- What was wrong: `evaluateByRightHousing` screened no law at all on a lot in a FEMA flood hazard area, a very high
+  fire hazard zone, an agricultural preserve or public / tribal land, in every state. No law record said that. Earlier
+  the same day the page was made to say this was the engine's own rule; the rule itself is now gone.
+- What was checked: for all 39 parcel-level law records, the law's text was fetched and read for five site conditions
+  (flood, fire, farmland, public / tribal land, historic). Evidence, with verbatim quotes and URLs:
+  `docs/audit/site_exclusions/ca.json` (8 records, from the Legislature's own bulk files at
+  `downloads.leginfo.legislature.ca.gov`, which answer where the web pages return 403), `west.json` (19 records),
+  `east.json` (12 records) and `ca_notes.md`. `scripts/apply_site_exclusions.py` writes the results onto each record
+  as `site_conditions` and refuses an exclusion without a quote and a URL. Counts written: 7 exclusions, 145 "text
+  read, no such exclusion", 20 conditional, 23 not settled.
+- The rule now (`evaluateByRightHousing`, identical in `app/app.js` and `src/engines/statutoryZoningEngine.js`):
+  - the text excludes such a lot: the law is listed as "Ruled out here", with the reason and any exception in the text
+    (SB 9 and AB 2011 for flood and fire; Colorado HB 24-1152 for a FEMA floodplain; Arizona adaptive reuse for
+    historic areas);
+  - the text was read and has no such exclusion: the law is screened as on any other lot (for example the California
+    ADU law and AB 2097 in a very high fire zone);
+  - the text excludes such land only on terms the page cannot see: the law is "Not confirmed", with those terms (for
+    example Maine LD 2003 "only where the municipality has exempted the lot by ordinance"; Washington HB 1110 and
+    HB 1337 "a local designation, not the FEMA map"; SB 79 in a fire zone "only from the optional streamlined
+    ministerial approval, and where the city has excluded such sites by ordinance for now");
+  - the text does not settle it, or could not be fetched (Minneapolis: Municode returned 403): "Not confirmed".
+  The short "only ..." wordings and the exception wordings are this project's restatements of the evidence notes; they
+  are listed in `scripts/apply_site_exclusions.py` next to the record and condition they describe.
+- SB 79 was over-excluded: its records listed the fire zone as a site exclusion. § 65912.157 (the standards the page
+  shows) has no such exclusion; the fire-zone bar is on the optional streamlined approval (§ 65912.159(a)(3)) and a
+  city may exclude such sites for a time by ordinance (§ 65912.161(b)). It now reads "Not confirmed" there.
+- California ADU law was applied to single-family lots only. Gov. Code § 66323(a): "a local agency shall ministerially
+  approve an application for a building permit within a residential or mixed-use zone", and (a)(3)(B): "A local agency
+  shall allow at least one accessory dwelling unit within an existing multifamily dwelling". The record now applies to
+  single-family and multifamily zoning (`scripts/apply_ca_adu_zone_scope.py`). Not applied to commercial / mixed-use
+  zoning (the page cannot tell whether such a lot has a dwelling); unit counts on multifamily lots are not modeled.
+- Santa Clarita's SB 9 zones, from the city's SB 9 FAQ: "Parcels must be zoned NU1, NU2, NU3, NU4, NU5, UR1, or UR2."
+  (`https://santaclarita.gov/home/showpublisheddocument/21438/637964290558900000`; PDF metadata dates it 2022; whether
+  it is current after the 2025-2026 amendments is not confirmed).
+- Still not confirmed:
+  - whether LA's R1V / R1F / R1R / R1H and R1P are R1 zones in the municipal code (LAMC and City Planning pages
+    returned 403); the variations are still read as R1 and R1P is still left out;
+  - the § 65913.4 text in force on 16 Sep 2021 that SB 9 freezes (quoted from AB 1174 as chaptered that day);
+  - farmland and land ownership are not measured by the page at all, so those exclusions never fire;
+  - Colorado's current C.R.S. numbering (the signed 2024 acts were read); Minneapolis Title 20;
+  - citation changes the research found and that are NOT yet applied to the records: Utah 10-9a-530 / 17-27a-526 now
+    return no text (the research found 10-21-303 / 17-80-303); Arizona middle housing is now § 9-462.13.
+- Seen on the real page (20 Nov, final code):
+  - LA sample, LIVE_PORT 8995 / 8996 / 8997: 31 lots, 0 failed
+    (`data/backtests/live_check_la_zoning_screen_2026-11-20_sample.json`). 14033 Barner Ave (RS-1, very high fire
+    zone) now shows the ADU law as applying and SB 9 as ruled out with its exception; 436 W Gage Ave (R2-1, a house)
+    and 10050 Sepulveda Blvd (R3-1, apartments) show the ADU law; 28871 Silversmith Dr (Santa Clarita UR2) is classed
+    single-family. The County A-2 desert lot gets no single-family law and "This house" says its zoning is why.
+  - 2107 Duxbury Cir, LIVE_PORT 8998: ok.
+  - `scripts/live_check_panels.mjs 06037 53033 08031 41051`, LIVE_PORT 8999, 2 lots each: law rows ok on all 8; one
+    Multnomah lot's USGS elevation timed out and the page said so
+    (`data/backtests/live_check_panels_2026-11-20_sitecond.json`).
+  - `scripts/live_check_lot_fit.mjs`, LIVE_PORT 9002: all groups ok.
+  - The Travis rent failure noted above is fixed in the check: the page's "$N or more/mo" top-code wording is accepted
+    when the file's value is at least N (`data/backtests/live_check_panels_2026-11-20_travisrent.json`).
+- Tests: `npm test` 869 passed; `npm run typecheck` clean; `npm run test:e2e` 83 passed. Tests that asserted the old
+  blanket stop were rewritten to the sourced behaviour; `tests/unit/statuteSiteConditions.test.ts` covers the rule.

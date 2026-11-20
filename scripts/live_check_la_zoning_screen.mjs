@@ -154,9 +154,14 @@ function checkLot(rec, pick) {
   C.a_playbook_has_zoning = !!pb && !/Zoning is not on file/i.test(pb);
   C.b_this_house_has_zoning = !!ih && !/zoning code unknown/i.test(ih);
   if (rec.screen_code != null) C.c_law_card_code_is_mapped_zone = rec.screen_code === rec.mapped_zone;
-  if (cat === "single-family") {
+  if (cat === "single-family" && rec.page_zone_class === "none") {
+    // The layer calls the zone single-family but it is not on the jurisdiction's published SB 9 list (e.g. County A-2):
+    // the page must screen no single-family law for it, and say the zoning is why.
+    C.d_off_list_zone_gets_no_single_family_law = !/(Backyard home \(ADU\)|Split the lot) Allowed by state law/i.test(ih) && !/recorded zoning \([^)]*\)/.test(pb);
+    C.d_off_list_zone_says_why = /zoning is not classed here as single-family or multifamily residential/i.test(ih);
+  } else if (cat === "single-family") {
     C.d_single_family_shows_sb9_and_adu_or_not_confirmed = (/SB\s*9/i.test(pb) && /ADU/i.test(pb)) || /Not confirmed/i.test(pb);
-    C.d_this_house_not_called_non_single_family = !/not recorded as single-family/i.test(ih);
+    C.d_this_house_not_called_non_single_family = !/not (recorded|classed here) as single-family/i.test(ih);
   } else if (/^(multifamily|commercial)/.test(cat)) {
     C.d_no_sb9_in_playbook = !SF_LAW.test(pb);
     C.d_this_house_no_state_lot_split = !/Split the lot Allowed by state law/i.test(ih) && !/apply to this lot:[^.]*SB\s*9/i.test(ih);

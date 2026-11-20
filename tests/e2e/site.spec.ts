@@ -1353,7 +1353,7 @@ test("an LA lot in a mapped single-family variation zone reaches the state-law s
   await page.waitForFunction(() => { const h = document.querySelector("#iv-house"); return !!h && /Backyard home \(ADU\)/.test(h.textContent || ""); }, null, { timeout: 90_000 });
   const ih = await page.evaluate(() => (document.querySelector("#iv-house") as HTMLElement).innerText);
   expect(ih).not.toContain("zoning code unknown");
-  expect(ih).not.toContain("not recorded as single-family");
+  expect(ih).not.toContain("not classed here as single-family");
 });
 
 test("California house checks state SB 9, ADU sale and fee rules only as the statutes say (live click path, LA)", async ({ page }) => {
