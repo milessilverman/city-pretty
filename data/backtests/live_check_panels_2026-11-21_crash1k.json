@@ -1,0 +1,565 @@
+{
+ "ran_on": "2026-11-21T10:38:39.152Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "23005": {
+   "county": "Cumberland ME (New England)",
+   "state": "ME",
+   "points": [
+    {
+     "bg": "230050046001",
+     "lat": 43.86594,
+     "lng": -70.23383,
+     "service": "Maine Parcels Organized Towns (Maine GeoLibrary / MEGIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $520k, rent $1,708/mo, homes 733"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"-4.9°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,1,93.5]; comparison [0,0.5,0,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for ME"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Cumberland County · 230050046001; page \"Census area: Cumberland County · block group 230050046001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR [1941,2353] for 23005; page \"HUD Fair Market Rent (FY2027): varies by town: 2 bed $1,941–$2,353/moHUD's voucher benchmark (rent plus utilities), not a market asking rent. New England: HUD s\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 118 ft; page \"Ground elevation: 118 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "230050010002",
+     "lat": 43.653372,
+     "lng": -70.270097,
+     "service": "Maine Parcels Organized Towns (Maine GeoLibrary / MEGIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $767k, rent $1,527/mo, homes 895"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 9 pts (current release); page: 9 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 8.8 pts below its 30% goal; box: \"8.8 pts below its 30% goal\" / \"+11.3°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [8.5,2.8333,120.6667]; comparison [8.5,3,0.82,\"g\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for ME"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Cumberland County · 230050010002; page \"Census area: Cumberland County · block group 230050010002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR [1941,2353] for 23005; page \"HUD Fair Market Rent (FY2027): varies by town: 2 bed $1,941–$2,353/moHUD's voucher benchmark (rent plus utilities), not a market asking rent. New England: HUD s\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 121 ft; page \"Ground elevation: 121 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "230050113001",
+     "lat": 43.931419,
+     "lng": -70.032643,
+     "service": "Maine Parcels Organized Towns (Maine GeoLibrary / MEGIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $414k, rent –, homes 612"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,3,164.5]; comparison [0,0.75,0,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for ME"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Cumberland County · 230050113001; page \"Census area: Cumberland County · block group 230050113001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR [1941,2353] for 23005; page \"HUD Fair Market Rent (FY2027): varies by town: 2 bed $1,941–$2,353/moHUD's voucher benchmark (rent plus utilities), not a market asking rent. New England: HUD s\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 214 ft; page \"Ground elevation: 214 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_23005.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_23005.json.gz"
+   ]
+  },
+  "42003": {
+   "county": "Allegheny PA (Middle Atlantic)",
+   "state": "PA",
+   "points": [
+    {
+     "bg": "420034035004",
+     "lat": 40.601018,
+     "lng": -79.750211,
+     "service": "Allegheny County OPENDATA Parcels (geometry)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $83k, rent $775/mo, homes 413"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 34 pts (current release); page: 34 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 33.9 pts below its 50% goal; box: \"33.9 pts below its 50% goal\" / \"-0.5°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0,4]; comparison [0,0.5,0,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for PA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Allegheny County · 420034035004; page \"Census area: Allegheny County · block group 420034035004(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1389 for 42003; page \"HUD Fair Market Rent (FY2027): 1 bed $1,146 · 2 bed $1,389 · 3 bed $1,773/moPittsburgh, PA HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), no\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (0.2 pct annual chance flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 760 ft; page \"Ground elevation: 760 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "420034734023",
+     "lat": 40.358703,
+     "lng": -80.040424,
+     "service": "Allegheny County OPENDATA Parcels (geometry)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $406k, rent $1,135/mo, homes 639"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"-1.7°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0.5,1.5,15]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for PA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Allegheny County · 420034734023; page \"Census area: Allegheny County · block group 420034734023(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1389 for 42003; page \"HUD Fair Market Rent (FY2027): 1 bed $1,146 · 2 bed $1,389 · 3 bed $1,773/moPittsburgh, PA HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), no\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1156 ft; page \"Ground elevation: 1,156 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "420030902001",
+     "lat": 40.469434,
+     "lng": -79.959351,
+     "service": "Allegheny County OPENDATA Parcels (geometry)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $386k, rent $1,062/mo, homes 716"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 9 pts (current release); page: 9 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 9.1 pts below its 20% goal; box: \"9.1 pts below its 20% goal\" / \"+7.8°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [4,1.5,26.8333]; comparison [4,1.58,0.88,\"g\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for PA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Allegheny County · 420030902001; page \"Census area: Allegheny County · block group 420030902001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1389 for 42003; page \"HUD Fair Market Rent (FY2027): 1 bed $1,146 · 2 bed $1,389 · 3 bed $1,773/moPittsburgh, PA HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), no\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 801 ft; page \"Ground elevation: 801 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_42003.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_42003.json.gz"
+   ]
+  },
+  "49035": {
+   "county": "Salt Lake UT (Mountain)",
+   "state": "UT",
+   "points": [
+    {
+     "bg": "490351003081",
+     "lat": 40.794713,
+     "lng": -111.937733,
+     "service": "UGRC Utah Statewide Parcels + county LIR (Land Information Records) parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $477k, rent $881/mo, homes 857"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 15% goal; box: \"At or above its 15% goal\" / \"-1.9°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [7.5833,6,69]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for UT"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Salt Lake County · 490351003081; page \"Census area: Salt Lake County · block group 490351003081(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1615 for 49035; page \"HUD Fair Market Rent (FY2027): 1 bed $1,349 · 2 bed $1,615 · 3 bed $2,143/moSalt Lake City, UT HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities)\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area with reduced flood risk due to levee)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 4218 ft; page \"Ground elevation: 4,218 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "490351128261",
+     "lat": 40.492946,
+     "lng": -111.96878,
+     "service": "UGRC Utah Statewide Parcels + county LIR (Land Information Records) parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $1.1M, rent $1,819/mo, homes 765"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 7 pts (current release); page: 7 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 6.8 pts below its 15% goal; box: \"6.8 pts below its 15% goal\" / \"-1.1°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0.5,114]; comparison [0,0.67,0,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for UT"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Salt Lake County · 490351128261; page \"Census area: Salt Lake County · block group 490351128261(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1615 for 49035; page \"HUD Fair Market Rent (FY2027): 1 bed $1,349 · 2 bed $1,615 · 3 bed $2,143/moSalt Lake City, UT HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities)\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 4586 ft; page \"Ground elevation: 4,586 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "490351135141",
+     "lat": 40.667484,
+     "lng": -111.92883,
+     "service": "UGRC Utah Statewide Parcels + county LIR (Land Information Records) parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $470k, rent $1,665/mo, homes 697"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 15% goal; box: \"At or above its 15% goal\" / \"-3.5°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [2.5,3.25,64.9167]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for UT"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Salt Lake County · 490351135141; page \"Census area: Salt Lake County · block group 490351135141(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1615 for 49035; page \"HUD Fair Market Rent (FY2027): 1 bed $1,349 · 2 bed $1,615 · 3 bed $2,143/moSalt Lake City, UT HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities)\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 4282 ft; page \"Ground elevation: 4,282 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_49035.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_49035.json.gz"
+   ]
+  }
+ }
+}
