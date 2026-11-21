@@ -33,6 +33,42 @@ describe("state finance profiles", () => {
     }
   });
 
+  it("round 4: every tax-increment field counted as confirmed has a fetched quote and source URL on file", () => {
+    // A record marked verified (or a field left off unverified_fields in a partly verified record) must carry the
+    // verbatim quote and URL it was confirmed from, field by field; a summary sentence in verification.evidence is not enough.
+    for (const [st, r] of Object.entries(P) as [string, any][]) {
+      const uf = (r.verification.unverified_fields || []).map((u: string) => String(u).split(/[\s(]/)[0]);
+      for (const f of FINANCE_CALC_FIELDS) {
+        if (uf.includes(f)) continue;
+        const e = (r.field_evidence || {})[f];
+        expect(e, `${st}.${f} is counted as confirmed but has no field_evidence`).toBeTruthy();
+        expect(["confirmed", "corrected"], `${st}.${f}`).toContain(e.status);
+        expect(e.source_url, `${st}.${f} source_url`).toMatch(/^https:\/\/[^\s]+\.[a-z]{2,}/);
+        expect(String(e.quote).trim().length, `${st}.${f} quote`).toBeGreaterThan(20);
+        expect(e.checked_on, `${st}.${f} checked_on`).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      }
+      if (r.verification.status === "verified") {
+        expect(uf.filter((f: string) => FINANCE_CALC_FIELDS.includes(f)), `${st} is verified but lists unverified fields`).toEqual([]);
+        expect(r.last_verified, `${st}.last_verified`).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      }
+      if (r.verification.status === "unverified" || r.verification.status === "could_not_check") {
+        expect(financeProfileGate(r).length, `${st} is ${r.verification.status} but the gate passes`).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it("round 4 (21 Nov 2026) corrections stay corrected", () => {
+    expect(P.AL.annual_assessment_cap).toBe(0.07); // Act 2024-344: 7% cap on Class II and III (ALDOR)
+    expect(P.AK.homestead_exemption_rule.type).toBe("none"); // AS 29.45.050(a): local option only, up to $75,000
+    expect(P.AR.reassessment_cycle_years).toBe(4); // Act 139 of 2023 (ACD annual report 2025)
+    expect(P.DC.homestead_exemption_rule.amount_or_pct).toBe(95100); // OTR, tax year 2027
+    expect(P.IN.homestead_exemption_rule).toBeNull(); // the 1% circuit breaker caps the bill; it is not an exemption
+    expect(P.ME.res_assessment_ratio).toBeNull(); // 36 M.R.S. 327: each town's ratio, 70% to 110%
+    expect(P.ME.homestead_exemption_rule).toEqual({ type: "flat_market", amount_or_pct: 25000 }); // just value
+    expect(P.NJ.res_assessment_ratio).toBe(1); // all 21 counties chose 100% (Division of Taxation)
+    expect(P.NJ.reassessment_cycle_years).toBeNull(); // no fixed statewide cycle
+  });
+
   it("a calculator field counts as confirmed only when it is not listed as unverified", () => {
     for (const [st, r] of Object.entries(P) as [string, any][]) {
       const missing = financeProfileGate(r);
