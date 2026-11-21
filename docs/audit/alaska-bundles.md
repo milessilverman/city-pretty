@@ -212,7 +212,7 @@ Geofabrik, overpass-api.de and the other Overpass mirrors (no answer), the 2021 
 | Parks | 100 OSM parks in the extract; the Alaska Maritime and Aleutian Islands Wilderness refuges are whole outlines, reaching 197.6 and 226.5 (= 133.5 W), as full outlines are kept in every county |
 | Bus, rail, EV | none: no feed stop in the county, no station, no charger (shown as not on file, not 0) |
 | Not built | crash gaps, 2021 heat, crime, rail distance, site suggestions (same reasons as the other boroughs) |
-| OSM extract vs a direct Overpass count of the same two boxes | not done: the check script (`scripts/check_osm_extract_vs_overpass.py`, now two boxes) was started but Overpass did not answer in time |
+| OSM extract vs a direct Overpass count of the same two boxes | roads 485 = 485, bus stops 0 = 0, ID for ID (`data/backtests/aleutians_west_overpass_xcheck_2026-11-21.json`) |
 
 **On the real page** (`LIVE_PORT` 9001, local file; screenshots `aleutians_open.png`, `aleutians_click_east_of_180.png`,
 `aleutians_click_west_of_180.png` in the scratchpad): the county opens at zoom 9 centred on Unalaska (191.8 to 194.4 east), not on the whole
