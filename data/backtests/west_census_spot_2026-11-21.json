@@ -8,7 +8,7 @@
   ],
   "method": "Census spot check: for a sample of block groups in each county, compare the county file's population, median home\nvalue, median gross rent and median household income with the Census Bureau's ACS 2020-2024 5-year table files\n(www2.census.gov .../table-based-SF/data/5YRData/acsdt5y2024-<table>.dat), read here with a separate parser.\nWhere the block group's own median is suppressed (negative sentinel), the file is expected to hold the tract's\npublished median (and acs_fallback_flags.json to say so) or nothing.\nusage: python3 -I scripts/census_spot_check.py <repo root> <acs .dat dir> <per county> <out.json> fips...",
   "seed": 20261119,
-  "values_checked": 1424,
+  "values_checked": 2000,
   "mismatches": 0
  },
  "counties": {
@@ -13219,6 +13219,5346 @@
      "file": 101574.0,
      "census_bg": "101574",
      "census_tract": "90357",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41001": {
+   "county": "Baker County",
+   "block_groups": 17,
+   "checked": [
+    {
+     "bg": "410019502002",
+     "field": "pop",
+     "file": 1545.0,
+     "census_bg": "1545",
+     "census_tract": "3044",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019502002",
+     "field": "hv",
+     "file": 272100.0,
+     "census_bg": "272100",
+     "census_tract": "284200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019502002",
+     "field": "rent",
+     "file": 1033.0,
+     "census_bg": "1033",
+     "census_tract": "894",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019502002",
+     "field": "inc",
+     "file": 54110.0,
+     "census_bg": "54110",
+     "census_tract": "54778",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019502003",
+     "field": "pop",
+     "file": 697.0,
+     "census_bg": "697",
+     "census_tract": "3044",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019502003",
+     "field": "hv",
+     "file": 277800.0,
+     "census_bg": "277800",
+     "census_tract": "284200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019502003",
+     "field": "rent",
+     "file": 783.0,
+     "census_bg": "783",
+     "census_tract": "894",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019502003",
+     "field": "inc",
+     "file": 47609.0,
+     "census_bg": "47609",
+     "census_tract": "54778",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019503001",
+     "field": "pop",
+     "file": 1041.0,
+     "census_bg": "1041",
+     "census_tract": "2687",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019503001",
+     "field": "hv",
+     "file": 248200.0,
+     "census_bg": "248200",
+     "census_tract": "218400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019503001",
+     "field": "rent",
+     "file": 861.0,
+     "census_bg": "861",
+     "census_tract": "764",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019503001",
+     "field": "inc",
+     "file": 53986.0,
+     "census_bg": "53986",
+     "census_tract": "49107",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019503003",
+     "field": "pop",
+     "file": 786.0,
+     "census_bg": "786",
+     "census_tract": "2687",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019503003",
+     "field": "hv",
+     "file": 124200.0,
+     "census_bg": "124200",
+     "census_tract": "218400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019503003",
+     "field": "rent",
+     "file": 681.0,
+     "census_bg": "681",
+     "census_tract": "764",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019503003",
+     "field": "inc",
+     "file": 36313.0,
+     "census_bg": "36313",
+     "census_tract": "49107",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019504001",
+     "field": "pop",
+     "file": 2288.0,
+     "census_bg": "2288",
+     "census_tract": "3120",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019504001",
+     "field": "hv",
+     "file": 364900.0,
+     "census_bg": "364900",
+     "census_tract": "331000",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019504001",
+     "field": "rent",
+     "file": 1194.0,
+     "census_bg": "1194",
+     "census_tract": "1134",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019504001",
+     "field": "inc",
+     "file": 88041.0,
+     "census_bg": "88041",
+     "census_tract": "73347",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019504003",
+     "field": "pop",
+     "file": 403.0,
+     "census_bg": "403",
+     "census_tract": "3120",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019504003",
+     "field": "hv",
+     "file": 252700.0,
+     "census_bg": "252700",
+     "census_tract": "331000",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019504003",
+     "field": "rent",
+     "file": 854.0,
+     "census_bg": "854",
+     "census_tract": "1134",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410019504003",
+     "field": "inc",
+     "file": 72652.0,
+     "census_bg": "72652",
+     "census_tract": "73347",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41003": {
+   "county": "Benton County",
+   "block_groups": 67,
+   "checked": [
+    {
+     "bg": "410030001013",
+     "field": "pop",
+     "file": 1764.0,
+     "census_bg": "1764",
+     "census_tract": "4209",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030001013",
+     "field": "hv",
+     "file": 445200.0,
+     "census_bg": "445200",
+     "census_tract": "423500",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030001013",
+     "field": "rent",
+     "file": 2014.0,
+     "census_bg": "2014",
+     "census_tract": "1229",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030001013",
+     "field": "inc",
+     "file": 66442.0,
+     "census_bg": "66442",
+     "census_tract": "61290",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030004021",
+     "field": "pop",
+     "file": 2017.0,
+     "census_bg": "2017",
+     "census_tract": "4942",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030004021",
+     "field": "hv",
+     "file": 558800.0,
+     "census_bg": "558800",
+     "census_tract": "600400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030004021",
+     "field": "rent",
+     "file": 1481.0,
+     "census_bg": "1481",
+     "census_tract": "1461",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030004021",
+     "field": "inc",
+     "file": 70234.0,
+     "census_bg": "70234",
+     "census_tract": "105288",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030010013",
+     "field": "pop",
+     "file": 1531.0,
+     "census_bg": "1531",
+     "census_tract": "4472",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030010013",
+     "field": "hv",
+     "file": 446800.0,
+     "census_bg": "446800",
+     "census_tract": "418800",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030010013",
+     "field": "rent",
+     "file": 1427.0,
+     "census_bg": "1427",
+     "census_tract": "1346",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030010013",
+     "field": "inc",
+     "file": 44375.0,
+     "census_bg": "44375",
+     "census_tract": "55137",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030106012",
+     "field": "pop",
+     "file": 1256.0,
+     "census_bg": "1256",
+     "census_tract": "2864",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030106012",
+     "field": "hv",
+     "file": 354800.0,
+     "census_bg": "354800",
+     "census_tract": "418400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030106012",
+     "field": "rent",
+     "file": 1188.0,
+     "census_bg": "1188",
+     "census_tract": "1117",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030106012",
+     "field": "inc",
+     "file": 22738.0,
+     "census_bg": "22738",
+     "census_tract": "31915",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030106021",
+     "field": "pop",
+     "file": 1772.0,
+     "census_bg": "1772",
+     "census_tract": "4255",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030106021",
+     "field": "hv",
+     "file": 585900.0,
+     "census_bg": "-666666666",
+     "census_tract": "585900",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 585900; flagged as tract value: True"
+    },
+    {
+     "bg": "410030106021",
+     "field": "rent",
+     "file": 1183.0,
+     "census_bg": "1183",
+     "census_tract": "1186",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030106021",
+     "field": "inc",
+     "file": null,
+     "census_bg": "-666666666",
+     "census_tract": "15653",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 15653; flagged as tract value: False"
+    },
+    {
+     "bg": "410030108003",
+     "field": "pop",
+     "file": 2142.0,
+     "census_bg": "2142",
+     "census_tract": "4225",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030108003",
+     "field": "hv",
+     "file": 336500.0,
+     "census_bg": "336500",
+     "census_tract": "376800",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030108003",
+     "field": "rent",
+     "file": 1620.0,
+     "census_bg": "1620",
+     "census_tract": "1412",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410030108003",
+     "field": "inc",
+     "file": 62298.0,
+     "census_bg": "62298",
+     "census_tract": "72917",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41007": {
+   "county": "Clatsop County",
+   "block_groups": 37,
+   "checked": [
+    {
+     "bg": "410079502003",
+     "field": "pop",
+     "file": 1026.0,
+     "census_bg": "1026",
+     "census_tract": "3835",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079502003",
+     "field": "hv",
+     "file": 497900.0,
+     "census_bg": "497900",
+     "census_tract": "459800",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079502003",
+     "field": "rent",
+     "file": 1632.0,
+     "census_bg": "1632",
+     "census_tract": "1298",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079502003",
+     "field": "inc",
+     "file": 81473.0,
+     "census_bg": "81473",
+     "census_tract": "80417",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079502004",
+     "field": "pop",
+     "file": 283.0,
+     "census_bg": "283",
+     "census_tract": "3835",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079502004",
+     "field": "hv",
+     "file": 360000.0,
+     "census_bg": "360000",
+     "census_tract": "459800",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079502004",
+     "field": "rent",
+     "file": 1032.0,
+     "census_bg": "1032",
+     "census_tract": "1298",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079502004",
+     "field": "inc",
+     "file": 48365.0,
+     "census_bg": "48365",
+     "census_tract": "80417",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079503003",
+     "field": "pop",
+     "file": 1833.0,
+     "census_bg": "1833",
+     "census_tract": "3193",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079503003",
+     "field": "hv",
+     "file": 444200.0,
+     "census_bg": "444200",
+     "census_tract": "454000",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079503003",
+     "field": "rent",
+     "file": 1176.0,
+     "census_bg": "1176",
+     "census_tract": "1146",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079503003",
+     "field": "inc",
+     "file": 64792.0,
+     "census_bg": "64792",
+     "census_tract": "61271",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079506002",
+     "field": "pop",
+     "file": 1717.0,
+     "census_bg": "1717",
+     "census_tract": "3785",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079506002",
+     "field": "hv",
+     "file": 649600.0,
+     "census_bg": "649600",
+     "census_tract": "568700",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079506002",
+     "field": "rent",
+     "file": 1331.0,
+     "census_bg": "-666666666",
+     "census_tract": "1331",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1331; flagged as tract value: True"
+    },
+    {
+     "bg": "410079506002",
+     "field": "inc",
+     "file": 111131.0,
+     "census_bg": "111131",
+     "census_tract": "92093",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079509003",
+     "field": "pop",
+     "file": 736.0,
+     "census_bg": "736",
+     "census_tract": "4295",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079509003",
+     "field": "hv",
+     "file": 434600.0,
+     "census_bg": "434600",
+     "census_tract": "428700",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079509003",
+     "field": "rent",
+     "file": 1111.0,
+     "census_bg": "1111",
+     "census_tract": "1080",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079509003",
+     "field": "inc",
+     "file": 19834.0,
+     "census_bg": "19834",
+     "census_tract": "39995",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079512001",
+     "field": "pop",
+     "file": 997.0,
+     "census_bg": "997",
+     "census_tract": "3173",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079512001",
+     "field": "hv",
+     "file": 252600.0,
+     "census_bg": "252600",
+     "census_tract": "380200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410079512001",
+     "field": "rent",
+     "file": 850.0,
+     "census_bg": "-666666666",
+     "census_tract": "850",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 850; flagged as tract value: True"
+    },
+    {
+     "bg": "410079512001",
+     "field": "inc",
+     "file": 37250.0,
+     "census_bg": "37250",
+     "census_tract": "66667",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41009": {
+   "county": "Columbia County",
+   "block_groups": 40,
+   "checked": [
+    {
+     "bg": "410099705002",
+     "field": "pop",
+     "file": 1037.0,
+     "census_bg": "1037",
+     "census_tract": "7035",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099705002",
+     "field": "hv",
+     "file": 713100.0,
+     "census_bg": "713100",
+     "census_tract": "489100",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099705002",
+     "field": "rent",
+     "file": 1703.0,
+     "census_bg": "-666666666",
+     "census_tract": "1703",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1703; flagged as tract value: True"
+    },
+    {
+     "bg": "410099705002",
+     "field": "inc",
+     "file": 124022.0,
+     "census_bg": "124022",
+     "census_tract": "93773",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099705004",
+     "field": "pop",
+     "file": 1724.0,
+     "census_bg": "1724",
+     "census_tract": "7035",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099705004",
+     "field": "hv",
+     "file": 382500.0,
+     "census_bg": "382500",
+     "census_tract": "489100",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099705004",
+     "field": "rent",
+     "file": 1463.0,
+     "census_bg": "1463",
+     "census_tract": "1703",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099705004",
+     "field": "inc",
+     "file": 96331.0,
+     "census_bg": "96331",
+     "census_tract": "93773",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099706001",
+     "field": "pop",
+     "file": 1995.0,
+     "census_bg": "1995",
+     "census_tract": "6193",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099706001",
+     "field": "hv",
+     "file": 462900.0,
+     "census_bg": "462900",
+     "census_tract": "494200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099706001",
+     "field": "rent",
+     "file": 1157.0,
+     "census_bg": "1157",
+     "census_tract": "1208",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099706001",
+     "field": "inc",
+     "file": 102000.0,
+     "census_bg": "102000",
+     "census_tract": "125978",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099708001",
+     "field": "pop",
+     "file": 1655.0,
+     "census_bg": "1655",
+     "census_tract": "7697",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099708001",
+     "field": "hv",
+     "file": 240600.0,
+     "census_bg": "240600",
+     "census_tract": "403200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099708001",
+     "field": "rent",
+     "file": 1332.0,
+     "census_bg": "1332",
+     "census_tract": "1519",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099708001",
+     "field": "inc",
+     "file": 61840.0,
+     "census_bg": "61840",
+     "census_tract": "82238",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099709002",
+     "field": "pop",
+     "file": 1144.0,
+     "census_bg": "1144",
+     "census_tract": "5004",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099709002",
+     "field": "hv",
+     "file": 438500.0,
+     "census_bg": "438500",
+     "census_tract": "375100",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099709002",
+     "field": "rent",
+     "file": 1375.0,
+     "census_bg": "1375",
+     "census_tract": "1391",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099709002",
+     "field": "inc",
+     "file": 57485.0,
+     "census_bg": "57485",
+     "census_tract": "82262",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099710002",
+     "field": "pop",
+     "file": 2847.0,
+     "census_bg": "2847",
+     "census_tract": "5911",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099710002",
+     "field": "hv",
+     "file": 562700.0,
+     "census_bg": "562700",
+     "census_tract": "544500",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099710002",
+     "field": "rent",
+     "file": 2385.0,
+     "census_bg": "2385",
+     "census_tract": "1691",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410099710002",
+     "field": "inc",
+     "file": 117019.0,
+     "census_bg": "117019",
+     "census_tract": "105246",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41011": {
+   "county": "Coos County",
+   "block_groups": 67,
+   "checked": [
+    {
+     "bg": "410110006002",
+     "field": "pop",
+     "file": 435.0,
+     "census_bg": "435",
+     "census_tract": "2464",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110006002",
+     "field": "hv",
+     "file": 342900.0,
+     "census_bg": "342900",
+     "census_tract": "349100",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110006002",
+     "field": "rent",
+     "file": 1124.0,
+     "census_bg": "-666666666",
+     "census_tract": "1124",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1124; flagged as tract value: True"
+    },
+    {
+     "bg": "410110006002",
+     "field": "inc",
+     "file": 98641.0,
+     "census_bg": "98641",
+     "census_tract": "71776",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110007014",
+     "field": "pop",
+     "file": 965.0,
+     "census_bg": "965",
+     "census_tract": "4143",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110007014",
+     "field": "hv",
+     "file": 362900.0,
+     "census_bg": "362900",
+     "census_tract": "334300",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110007014",
+     "field": "rent",
+     "file": 978.0,
+     "census_bg": "978",
+     "census_tract": "1024",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110007014",
+     "field": "inc",
+     "file": 51250.0,
+     "census_bg": "51250",
+     "census_tract": "56752",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110009012",
+     "field": "pop",
+     "file": 757.0,
+     "census_bg": "757",
+     "census_tract": "3320",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110009012",
+     "field": "hv",
+     "file": 258900.0,
+     "census_bg": "258900",
+     "census_tract": "274200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110009012",
+     "field": "rent",
+     "file": 1289.0,
+     "census_bg": "1289",
+     "census_tract": "1281",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110009012",
+     "field": "inc",
+     "file": 41563.0,
+     "census_bg": "41563",
+     "census_tract": "66967",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110009022",
+     "field": "pop",
+     "file": 909.0,
+     "census_bg": "909",
+     "census_tract": "3692",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110009022",
+     "field": "hv",
+     "file": 282700.0,
+     "census_bg": "282700",
+     "census_tract": "318100",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110009022",
+     "field": "rent",
+     "file": 1115.0,
+     "census_bg": "-666666666",
+     "census_tract": "1115",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1115; flagged as tract value: True"
+    },
+    {
+     "bg": "410110009022",
+     "field": "inc",
+     "file": 34118.0,
+     "census_bg": "34118",
+     "census_tract": "44272",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110010013",
+     "field": "pop",
+     "file": 728.0,
+     "census_bg": "728",
+     "census_tract": "3307",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110010013",
+     "field": "hv",
+     "file": 292000.0,
+     "census_bg": "292000",
+     "census_tract": "466400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110010013",
+     "field": "rent",
+     "file": 1132.0,
+     "census_bg": "1132",
+     "census_tract": "1255",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110010013",
+     "field": "inc",
+     "file": 39122.0,
+     "census_bg": "39122",
+     "census_tract": "51795",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110010023",
+     "field": "pop",
+     "file": 988.0,
+     "census_bg": "988",
+     "census_tract": "4182",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110010023",
+     "field": "hv",
+     "file": 397000.0,
+     "census_bg": "397000",
+     "census_tract": "441500",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110010023",
+     "field": "rent",
+     "file": 1049.0,
+     "census_bg": "1049",
+     "census_tract": "851",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410110010023",
+     "field": "inc",
+     "file": 51554.0,
+     "census_bg": "51554",
+     "census_tract": "49568",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41013": {
+   "county": "Crook County",
+   "block_groups": 20,
+   "checked": [
+    {
+     "bg": "410139501013",
+     "field": "pop",
+     "file": 1491.0,
+     "census_bg": "1491",
+     "census_tract": "3588",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139501013",
+     "field": "hv",
+     "file": 337400.0,
+     "census_bg": "337400",
+     "census_tract": "405900",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139501013",
+     "field": "rent",
+     "file": 1500.0,
+     "census_bg": "1500",
+     "census_tract": "1538",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139501013",
+     "field": "inc",
+     "file": 72301.0,
+     "census_bg": "72301",
+     "census_tract": "87316",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139501021",
+     "field": "pop",
+     "file": 1228.0,
+     "census_bg": "1228",
+     "census_tract": "5155",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139501021",
+     "field": "hv",
+     "file": 627400.0,
+     "census_bg": "627400",
+     "census_tract": "485200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139501021",
+     "field": "rent",
+     "file": 1153.0,
+     "census_bg": "1153",
+     "census_tract": "1421",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139501021",
+     "field": "inc",
+     "file": 53990.0,
+     "census_bg": "53990",
+     "census_tract": "74318",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139503012",
+     "field": "pop",
+     "file": 2367.0,
+     "census_bg": "2367",
+     "census_tract": "3920",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139503012",
+     "field": "hv",
+     "file": 869300.0,
+     "census_bg": "869300",
+     "census_tract": "703100",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139503012",
+     "field": "rent",
+     "file": 1607.0,
+     "census_bg": "-666666666",
+     "census_tract": "1607",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1607; flagged as tract value: True"
+    },
+    {
+     "bg": "410139503012",
+     "field": "inc",
+     "file": 161250.0,
+     "census_bg": "161250",
+     "census_tract": "119495",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139503022",
+     "field": "pop",
+     "file": 1508.0,
+     "census_bg": "1508",
+     "census_tract": "3450",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139503022",
+     "field": "hv",
+     "file": 303500.0,
+     "census_bg": "303500",
+     "census_tract": "374300",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139503022",
+     "field": "rent",
+     "file": 1040.0,
+     "census_bg": "1040",
+     "census_tract": "1106",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139503022",
+     "field": "inc",
+     "file": 55809.0,
+     "census_bg": "55809",
+     "census_tract": "59917",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139504021",
+     "field": "pop",
+     "file": 929.0,
+     "census_bg": "929",
+     "census_tract": "2817",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139504021",
+     "field": "hv",
+     "file": 271400.0,
+     "census_bg": "271400",
+     "census_tract": "432500",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139504021",
+     "field": "rent",
+     "file": 907.0,
+     "census_bg": "-666666666",
+     "census_tract": "907",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 907; flagged as tract value: True"
+    },
+    {
+     "bg": "410139504021",
+     "field": "inc",
+     "file": 56563.0,
+     "census_bg": "56563",
+     "census_tract": "67607",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139504022",
+     "field": "pop",
+     "file": 1888.0,
+     "census_bg": "1888",
+     "census_tract": "2817",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139504022",
+     "field": "hv",
+     "file": 459000.0,
+     "census_bg": "459000",
+     "census_tract": "432500",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139504022",
+     "field": "rent",
+     "file": 907.0,
+     "census_bg": "907",
+     "census_tract": "907",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410139504022",
+     "field": "inc",
+     "file": 80164.0,
+     "census_bg": "80164",
+     "census_tract": "67607",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41015": {
+   "county": "Curry County",
+   "block_groups": 21,
+   "checked": [
+    {
+     "bg": "410159502011",
+     "field": "pop",
+     "file": 1237.0,
+     "census_bg": "1237",
+     "census_tract": "3603",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159502011",
+     "field": "hv",
+     "file": 357000.0,
+     "census_bg": "357000",
+     "census_tract": "386200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159502011",
+     "field": "rent",
+     "file": 840.0,
+     "census_bg": "840",
+     "census_tract": "893",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159502011",
+     "field": "inc",
+     "file": 49737.0,
+     "census_bg": "49737",
+     "census_tract": "57466",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159502012",
+     "field": "pop",
+     "file": 2366.0,
+     "census_bg": "2366",
+     "census_tract": "3603",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159502012",
+     "field": "hv",
+     "file": 401200.0,
+     "census_bg": "401200",
+     "census_tract": "386200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159502012",
+     "field": "rent",
+     "file": 1250.0,
+     "census_bg": "1250",
+     "census_tract": "893",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159502012",
+     "field": "inc",
+     "file": 90375.0,
+     "census_bg": "90375",
+     "census_tract": "57466",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159503022",
+     "field": "pop",
+     "file": 792.0,
+     "census_bg": "792",
+     "census_tract": "5399",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159503022",
+     "field": "hv",
+     "file": 478700.0,
+     "census_bg": "478700",
+     "census_tract": "440300",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159503022",
+     "field": "rent",
+     "file": 1386.0,
+     "census_bg": "1386",
+     "census_tract": "1381",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159503022",
+     "field": "inc",
+     "file": 72269.0,
+     "census_bg": "72269",
+     "census_tract": "75795",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159503023",
+     "field": "pop",
+     "file": 1593.0,
+     "census_bg": "1593",
+     "census_tract": "5399",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159503023",
+     "field": "hv",
+     "file": 470300.0,
+     "census_bg": "470300",
+     "census_tract": "440300",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159503023",
+     "field": "rent",
+     "file": 1337.0,
+     "census_bg": "1337",
+     "census_tract": "1381",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159503023",
+     "field": "inc",
+     "file": 76134.0,
+     "census_bg": "76134",
+     "census_tract": "75795",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159504021",
+     "field": "pop",
+     "file": 490.0,
+     "census_bg": "490",
+     "census_tract": "1877",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159504021",
+     "field": "hv",
+     "file": 315500.0,
+     "census_bg": "315500",
+     "census_tract": "325900",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159504021",
+     "field": "rent",
+     "file": 1078.0,
+     "census_bg": "1078",
+     "census_tract": "1230",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159504021",
+     "field": "inc",
+     "file": 43125.0,
+     "census_bg": "43125",
+     "census_tract": "47969",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159901010",
+     "field": "pop",
+     "file": 0.0,
+     "census_bg": "0",
+     "census_tract": "0",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410159901010",
+     "field": "hv",
+     "file": null,
+     "census_bg": "-666666666",
+     "census_tract": "-666666666",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract -666666666; flagged as tract value: False"
+    },
+    {
+     "bg": "410159901010",
+     "field": "rent",
+     "file": null,
+     "census_bg": "-666666666",
+     "census_tract": "-666666666",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract -666666666; flagged as tract value: False"
+    },
+    {
+     "bg": "410159901010",
+     "field": "inc",
+     "file": null,
+     "census_bg": "-666666666",
+     "census_tract": "-666666666",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract -666666666; flagged as tract value: False"
+    }
+   ]
+  },
+  "41021": {
+   "county": "Gilliam County",
+   "block_groups": 2,
+   "checked": [
+    {
+     "bg": "410219601001",
+     "field": "pop",
+     "file": 929.0,
+     "census_bg": "929",
+     "census_tract": "1971",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410219601001",
+     "field": "hv",
+     "file": 276100.0,
+     "census_bg": "276100",
+     "census_tract": "189300",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410219601001",
+     "field": "rent",
+     "file": 1318.0,
+     "census_bg": "1318",
+     "census_tract": "1125",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410219601001",
+     "field": "inc",
+     "file": 76855.0,
+     "census_bg": "76855",
+     "census_tract": "66917",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410219601002",
+     "field": "pop",
+     "file": 1042.0,
+     "census_bg": "1042",
+     "census_tract": "1971",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410219601002",
+     "field": "hv",
+     "file": 147700.0,
+     "census_bg": "147700",
+     "census_tract": "189300",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410219601002",
+     "field": "rent",
+     "file": 1026.0,
+     "census_bg": "1026",
+     "census_tract": "1125",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410219601002",
+     "field": "inc",
+     "file": 57578.0,
+     "census_bg": "57578",
+     "census_tract": "66917",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41023": {
+   "county": "Grant County",
+   "block_groups": 8,
+   "checked": [
+    {
+     "bg": "410239601001",
+     "field": "pop",
+     "file": 852.0,
+     "census_bg": "852",
+     "census_tract": "2006",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239601001",
+     "field": "hv",
+     "file": 404400.0,
+     "census_bg": "404400",
+     "census_tract": "263900",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239601001",
+     "field": "rent",
+     "file": 713.0,
+     "census_bg": "713",
+     "census_tract": "719",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239601001",
+     "field": "inc",
+     "file": 39314.0,
+     "census_bg": "39314",
+     "census_tract": "39889",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239601003",
+     "field": "pop",
+     "file": 601.0,
+     "census_bg": "601",
+     "census_tract": "2006",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239601003",
+     "field": "hv",
+     "file": 246700.0,
+     "census_bg": "246700",
+     "census_tract": "263900",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239601003",
+     "field": "rent",
+     "file": 330.0,
+     "census_bg": "330",
+     "census_tract": "719",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239601003",
+     "field": "inc",
+     "file": 56250.0,
+     "census_bg": "56250",
+     "census_tract": "39889",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239602011",
+     "field": "pop",
+     "file": 1072.0,
+     "census_bg": "1072",
+     "census_tract": "1713",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239602011",
+     "field": "hv",
+     "file": 224300.0,
+     "census_bg": "224300",
+     "census_tract": "194300",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239602011",
+     "field": "rent",
+     "file": 675.0,
+     "census_bg": "675",
+     "census_tract": "765",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239602011",
+     "field": "inc",
+     "file": 81136.0,
+     "census_bg": "81136",
+     "census_tract": "59583",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239602012",
+     "field": "pop",
+     "file": 641.0,
+     "census_bg": "641",
+     "census_tract": "1713",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239602012",
+     "field": "hv",
+     "file": 172300.0,
+     "census_bg": "172300",
+     "census_tract": "194300",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239602012",
+     "field": "rent",
+     "file": 789.0,
+     "census_bg": "789",
+     "census_tract": "765",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239602012",
+     "field": "inc",
+     "file": 58565.0,
+     "census_bg": "58565",
+     "census_tract": "59583",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239602021",
+     "field": "pop",
+     "file": 1997.0,
+     "census_bg": "1997",
+     "census_tract": "3490",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239602021",
+     "field": "hv",
+     "file": 233100.0,
+     "census_bg": "233100",
+     "census_tract": "227800",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239602021",
+     "field": "rent",
+     "file": 816.0,
+     "census_bg": "816",
+     "census_tract": "833",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239602021",
+     "field": "inc",
+     "file": 74583.0,
+     "census_bg": "74583",
+     "census_tract": "70022",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239602023",
+     "field": "pop",
+     "file": 666.0,
+     "census_bg": "666",
+     "census_tract": "3490",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239602023",
+     "field": "hv",
+     "file": 261100.0,
+     "census_bg": "261100",
+     "census_tract": "227800",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239602023",
+     "field": "rent",
+     "file": 964.0,
+     "census_bg": "964",
+     "census_tract": "833",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410239602023",
+     "field": "inc",
+     "file": 56042.0,
+     "census_bg": "56042",
+     "census_tract": "70022",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41025": {
+   "county": "Harney County",
+   "block_groups": 7,
+   "checked": [
+    {
+     "bg": "410259601011",
+     "field": "pop",
+     "file": 1613.0,
+     "census_bg": "1613",
+     "census_tract": "2455",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259601011",
+     "field": "hv",
+     "file": 279400.0,
+     "census_bg": "279400",
+     "census_tract": "233500",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259601011",
+     "field": "rent",
+     "file": 775.0,
+     "census_bg": "775",
+     "census_tract": "479",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259601011",
+     "field": "inc",
+     "file": 89071.0,
+     "census_bg": "89071",
+     "census_tract": "80208",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259601021",
+     "field": "pop",
+     "file": 1782.0,
+     "census_bg": "1782",
+     "census_tract": "3010",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259601021",
+     "field": "hv",
+     "file": 262200.0,
+     "census_bg": "262200",
+     "census_tract": "213900",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259601021",
+     "field": "rent",
+     "file": 924.0,
+     "census_bg": "924",
+     "census_tract": "853",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259601021",
+     "field": "inc",
+     "file": 51513.0,
+     "census_bg": "51513",
+     "census_tract": "48062",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259601022",
+     "field": "pop",
+     "file": 461.0,
+     "census_bg": "461",
+     "census_tract": "3010",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259601022",
+     "field": "hv",
+     "file": 87300.0,
+     "census_bg": "87300",
+     "census_tract": "213900",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259601022",
+     "field": "rent",
+     "file": 378.0,
+     "census_bg": "378",
+     "census_tract": "853",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259601022",
+     "field": "inc",
+     "file": 29079.0,
+     "census_bg": "29079",
+     "census_tract": "48062",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259601023",
+     "field": "pop",
+     "file": 767.0,
+     "census_bg": "767",
+     "census_tract": "3010",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259601023",
+     "field": "hv",
+     "file": 256300.0,
+     "census_bg": "256300",
+     "census_tract": "213900",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259601023",
+     "field": "rent",
+     "file": 740.0,
+     "census_bg": "740",
+     "census_tract": "853",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259601023",
+     "field": "inc",
+     "file": 39167.0,
+     "census_bg": "39167",
+     "census_tract": "48062",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259602001",
+     "field": "pop",
+     "file": 1266.0,
+     "census_bg": "1266",
+     "census_tract": "2034",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259602001",
+     "field": "hv",
+     "file": 293400.0,
+     "census_bg": "293400",
+     "census_tract": "305700",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259602001",
+     "field": "rent",
+     "file": 642.0,
+     "census_bg": "642",
+     "census_tract": "651",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259602001",
+     "field": "inc",
+     "file": 60833.0,
+     "census_bg": "60833",
+     "census_tract": "61410",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259602002",
+     "field": "pop",
+     "file": 768.0,
+     "census_bg": "768",
+     "census_tract": "2034",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259602002",
+     "field": "hv",
+     "file": 381300.0,
+     "census_bg": "381300",
+     "census_tract": "305700",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259602002",
+     "field": "rent",
+     "file": 667.0,
+     "census_bg": "667",
+     "census_tract": "651",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410259602002",
+     "field": "inc",
+     "file": 68438.0,
+     "census_bg": "68438",
+     "census_tract": "61410",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41027": {
+   "county": "Hood River County",
+   "block_groups": 19,
+   "checked": [
+    {
+     "bg": "410279501001",
+     "field": "pop",
+     "file": 1378.0,
+     "census_bg": "1378",
+     "census_tract": "4904",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279501001",
+     "field": "hv",
+     "file": 385100.0,
+     "census_bg": "385100",
+     "census_tract": "518000",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279501001",
+     "field": "rent",
+     "file": 1102.0,
+     "census_bg": "1102",
+     "census_tract": "1292",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279501001",
+     "field": "inc",
+     "file": 70000.0,
+     "census_bg": "70000",
+     "census_tract": "82986",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279501003",
+     "field": "pop",
+     "file": 1196.0,
+     "census_bg": "1196",
+     "census_tract": "4904",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279501003",
+     "field": "hv",
+     "file": 733000.0,
+     "census_bg": "733000",
+     "census_tract": "518000",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279501003",
+     "field": "rent",
+     "file": 1292.0,
+     "census_bg": "-666666666",
+     "census_tract": "1292",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1292; flagged as tract value: True"
+    },
+    {
+     "bg": "410279501003",
+     "field": "inc",
+     "file": 59602.0,
+     "census_bg": "59602",
+     "census_tract": "82986",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279501004",
+     "field": "pop",
+     "file": 1231.0,
+     "census_bg": "1231",
+     "census_tract": "4904",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279501004",
+     "field": "hv",
+     "file": 678600.0,
+     "census_bg": "678600",
+     "census_tract": "518000",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279501004",
+     "field": "rent",
+     "file": 1292.0,
+     "census_bg": "-666666666",
+     "census_tract": "1292",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1292; flagged as tract value: True"
+    },
+    {
+     "bg": "410279501004",
+     "field": "inc",
+     "file": 106188.0,
+     "census_bg": "106188",
+     "census_tract": "82986",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279502012",
+     "field": "pop",
+     "file": 1186.0,
+     "census_bg": "1186",
+     "census_tract": "3611",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279502012",
+     "field": "hv",
+     "file": 821800.0,
+     "census_bg": "821800",
+     "census_tract": "737800",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279502012",
+     "field": "rent",
+     "file": 1143.0,
+     "census_bg": "-666666666",
+     "census_tract": "1143",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1143; flagged as tract value: True"
+    },
+    {
+     "bg": "410279502012",
+     "field": "inc",
+     "file": 128393.0,
+     "census_bg": "128393",
+     "census_tract": "95885",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279503013",
+     "field": "pop",
+     "file": 2176.0,
+     "census_bg": "2176",
+     "census_tract": "3478",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279503013",
+     "field": "hv",
+     "file": 729400.0,
+     "census_bg": "729400",
+     "census_tract": "726600",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279503013",
+     "field": "rent",
+     "file": 705.0,
+     "census_bg": "705",
+     "census_tract": "961",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279503013",
+     "field": "inc",
+     "file": 71250.0,
+     "census_bg": "71250",
+     "census_tract": "64402",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279504003",
+     "field": "pop",
+     "file": 2053.0,
+     "census_bg": "2053",
+     "census_tract": "5333",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279504003",
+     "field": "hv",
+     "file": 435500.0,
+     "census_bg": "435500",
+     "census_tract": "606000",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279504003",
+     "field": "rent",
+     "file": 1151.0,
+     "census_bg": "1151",
+     "census_tract": "1691",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410279504003",
+     "field": "inc",
+     "file": 110326.0,
+     "census_bg": "110326",
+     "census_tract": "88182",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41031": {
+   "county": "Jefferson County",
+   "block_groups": 19,
+   "checked": [
+    {
+     "bg": "410319400002",
+     "field": "pop",
+     "file": 1431.0,
+     "census_bg": "1431",
+     "census_tract": "2592",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319400002",
+     "field": "hv",
+     "file": 222400.0,
+     "census_bg": "222400",
+     "census_tract": "231700",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319400002",
+     "field": "rent",
+     "file": 553.0,
+     "census_bg": "553",
+     "census_tract": "557",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319400002",
+     "field": "inc",
+     "file": 37269.0,
+     "census_bg": "37269",
+     "census_tract": "56250",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319601001",
+     "field": "pop",
+     "file": 1185.0,
+     "census_bg": "1185",
+     "census_tract": "2389",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319601001",
+     "field": "hv",
+     "file": 442600.0,
+     "census_bg": "442600",
+     "census_tract": "466500",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319601001",
+     "field": "rent",
+     "file": 857.0,
+     "census_bg": "857",
+     "census_tract": "859",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319601001",
+     "field": "inc",
+     "file": 80000.0,
+     "census_bg": "80000",
+     "census_tract": "85208",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319602024",
+     "field": "pop",
+     "file": 660.0,
+     "census_bg": "660",
+     "census_tract": "6230",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319602024",
+     "field": "hv",
+     "file": 477300.0,
+     "census_bg": "477300",
+     "census_tract": "371100",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319602024",
+     "field": "rent",
+     "file": 990.0,
+     "census_bg": "-666666666",
+     "census_tract": "990",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 990; flagged as tract value: True"
+    },
+    {
+     "bg": "410319602024",
+     "field": "inc",
+     "file": 87024.0,
+     "census_bg": "87024",
+     "census_tract": "78007",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319603011",
+     "field": "pop",
+     "file": 849.0,
+     "census_bg": "849",
+     "census_tract": "4773",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319603011",
+     "field": "hv",
+     "file": 469700.0,
+     "census_bg": "469700",
+     "census_tract": "455600",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319603011",
+     "field": "rent",
+     "file": 1837.0,
+     "census_bg": "-666666666",
+     "census_tract": "1837",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1837; flagged as tract value: True"
+    },
+    {
+     "bg": "410319603011",
+     "field": "inc",
+     "file": 77460.0,
+     "census_bg": "77460",
+     "census_tract": "85230",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319603012",
+     "field": "pop",
+     "file": 1429.0,
+     "census_bg": "1429",
+     "census_tract": "4773",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319603012",
+     "field": "hv",
+     "file": 409600.0,
+     "census_bg": "409600",
+     "census_tract": "455600",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319603012",
+     "field": "rent",
+     "file": 1837.0,
+     "census_bg": "-666666666",
+     "census_tract": "1837",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1837; flagged as tract value: True"
+    },
+    {
+     "bg": "410319603012",
+     "field": "inc",
+     "file": 86843.0,
+     "census_bg": "86843",
+     "census_tract": "85230",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319603032",
+     "field": "pop",
+     "file": 494.0,
+     "census_bg": "494",
+     "census_tract": "771",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319603032",
+     "field": "hv",
+     "file": 775000.0,
+     "census_bg": "775000",
+     "census_tract": "581900",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319603032",
+     "field": "rent",
+     "file": 1750.0,
+     "census_bg": "1750",
+     "census_tract": "1750",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410319603032",
+     "field": "inc",
+     "file": 80625.0,
+     "census_bg": "80625",
+     "census_tract": "75870",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41033": {
+   "county": "Josephine County",
+   "block_groups": 65,
+   "checked": [
+    {
+     "bg": "410333603004",
+     "field": "pop",
+     "file": 1661.0,
+     "census_bg": "1661",
+     "census_tract": "5827",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333603004",
+     "field": "hv",
+     "file": 273700.0,
+     "census_bg": "273700",
+     "census_tract": "448000",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333603004",
+     "field": "rent",
+     "file": 1082.0,
+     "census_bg": "1082",
+     "census_tract": "1049",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333603004",
+     "field": "inc",
+     "file": null,
+     "census_bg": "-666666666",
+     "census_tract": "71792",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 71792; flagged as tract value: False"
+    },
+    {
+     "bg": "410333605005",
+     "field": "pop",
+     "file": 1210.0,
+     "census_bg": "1210",
+     "census_tract": "6136",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333605005",
+     "field": "hv",
+     "file": 360800.0,
+     "census_bg": "360800",
+     "census_tract": "355400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333605005",
+     "field": "rent",
+     "file": 1532.0,
+     "census_bg": "1532",
+     "census_tract": "970",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333605005",
+     "field": "inc",
+     "file": 105853.0,
+     "census_bg": "105853",
+     "census_tract": "47386",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333606012",
+     "field": "pop",
+     "file": 774.0,
+     "census_bg": "774",
+     "census_tract": "2655",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333606012",
+     "field": "hv",
+     "file": 361700.0,
+     "census_bg": "361700",
+     "census_tract": "365200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333606012",
+     "field": "rent",
+     "file": 943.0,
+     "census_bg": "943",
+     "census_tract": "1019",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333606012",
+     "field": "inc",
+     "file": 65619.0,
+     "census_bg": "65619",
+     "census_tract": "45083",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333607031",
+     "field": "pop",
+     "file": 1162.0,
+     "census_bg": "1162",
+     "census_tract": "2617",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333607031",
+     "field": "hv",
+     "file": 314000.0,
+     "census_bg": "314000",
+     "census_tract": "326300",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333607031",
+     "field": "rent",
+     "file": 1384.0,
+     "census_bg": "1384",
+     "census_tract": "1228",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333607031",
+     "field": "inc",
+     "file": 52679.0,
+     "census_bg": "52679",
+     "census_tract": "47500",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333612022",
+     "field": "pop",
+     "file": 1433.0,
+     "census_bg": "1433",
+     "census_tract": "3839",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333612022",
+     "field": "hv",
+     "file": 365500.0,
+     "census_bg": "365500",
+     "census_tract": "367000",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333612022",
+     "field": "rent",
+     "file": 1736.0,
+     "census_bg": "-666666666",
+     "census_tract": "1736",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1736; flagged as tract value: True"
+    },
+    {
+     "bg": "410333612022",
+     "field": "inc",
+     "file": 67929.0,
+     "census_bg": "67929",
+     "census_tract": "74224",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333616011",
+     "field": "pop",
+     "file": 1129.0,
+     "census_bg": "1129",
+     "census_tract": "5067",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333616011",
+     "field": "hv",
+     "file": 278300.0,
+     "census_bg": "278300",
+     "census_tract": "289600",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333616011",
+     "field": "rent",
+     "file": 1149.0,
+     "census_bg": "1149",
+     "census_tract": "1159",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410333616011",
+     "field": "inc",
+     "file": 39798.0,
+     "census_bg": "39798",
+     "census_tract": "39782",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41035": {
+   "county": "Klamath County",
+   "block_groups": 70,
+   "checked": [
+    {
+     "bg": "410359713001",
+     "field": "pop",
+     "file": 548.0,
+     "census_bg": "548",
+     "census_tract": "6490",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359713001",
+     "field": "hv",
+     "file": 219000.0,
+     "census_bg": "219000",
+     "census_tract": "292200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359713001",
+     "field": "rent",
+     "file": 1148.0,
+     "census_bg": "1148",
+     "census_tract": "1118",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359713001",
+     "field": "inc",
+     "file": null,
+     "census_bg": "-666666666",
+     "census_tract": "67554",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 67554; flagged as tract value: False"
+    },
+    {
+     "bg": "410359713004",
+     "field": "pop",
+     "file": 884.0,
+     "census_bg": "884",
+     "census_tract": "6490",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359713004",
+     "field": "hv",
+     "file": 265900.0,
+     "census_bg": "265900",
+     "census_tract": "292200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359713004",
+     "field": "rent",
+     "file": 1058.0,
+     "census_bg": "1058",
+     "census_tract": "1118",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359713004",
+     "field": "inc",
+     "file": 46681.0,
+     "census_bg": "46681",
+     "census_tract": "67554",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359715005",
+     "field": "pop",
+     "file": 1470.0,
+     "census_bg": "1470",
+     "census_tract": "4649",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359715005",
+     "field": "hv",
+     "file": 170700.0,
+     "census_bg": "170700",
+     "census_tract": "159300",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359715005",
+     "field": "rent",
+     "file": 1261.0,
+     "census_bg": "1261",
+     "census_tract": "1020",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359715005",
+     "field": "inc",
+     "file": 33864.0,
+     "census_bg": "33864",
+     "census_tract": "46538",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359717004",
+     "field": "pop",
+     "file": 546.0,
+     "census_bg": "546",
+     "census_tract": "3351",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359717004",
+     "field": "hv",
+     "file": 333100.0,
+     "census_bg": "-666666666",
+     "census_tract": "333100",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 333100; flagged as tract value: True"
+    },
+    {
+     "bg": "410359717004",
+     "field": "rent",
+     "file": 816.0,
+     "census_bg": "816",
+     "census_tract": "909",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359717004",
+     "field": "inc",
+     "file": 12939.0,
+     "census_bg": "12939",
+     "census_tract": "44406",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359719004",
+     "field": "pop",
+     "file": 649.0,
+     "census_bg": "649",
+     "census_tract": "3270",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359719004",
+     "field": "hv",
+     "file": 203200.0,
+     "census_bg": "203200",
+     "census_tract": "222100",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359719004",
+     "field": "rent",
+     "file": 910.0,
+     "census_bg": "910",
+     "census_tract": "925",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359719004",
+     "field": "inc",
+     "file": null,
+     "census_bg": "-666666666",
+     "census_tract": "46261",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 46261; flagged as tract value: False"
+    },
+    {
+     "bg": "410359720001",
+     "field": "pop",
+     "file": 734.0,
+     "census_bg": "734",
+     "census_tract": "4163",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359720001",
+     "field": "hv",
+     "file": 248100.0,
+     "census_bg": "248100",
+     "census_tract": "302100",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359720001",
+     "field": "rent",
+     "file": 1481.0,
+     "census_bg": "1481",
+     "census_tract": "1159",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410359720001",
+     "field": "inc",
+     "file": 62881.0,
+     "census_bg": "62881",
+     "census_tract": "63612",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41037": {
+   "county": "Lake County",
+   "block_groups": 10,
+   "checked": [
+    {
+     "bg": "410379602001",
+     "field": "pop",
+     "file": 1337.0,
+     "census_bg": "1337",
+     "census_tract": "5582",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602001",
+     "field": "hv",
+     "file": 396300.0,
+     "census_bg": "396300",
+     "census_tract": "219400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602001",
+     "field": "rent",
+     "file": 966.0,
+     "census_bg": "-666666666",
+     "census_tract": "966",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 966; flagged as tract value: True"
+    },
+    {
+     "bg": "410379602001",
+     "field": "inc",
+     "file": 111645.0,
+     "census_bg": "111645",
+     "census_tract": "70150",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602002",
+     "field": "pop",
+     "file": 478.0,
+     "census_bg": "478",
+     "census_tract": "5582",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602002",
+     "field": "hv",
+     "file": 173400.0,
+     "census_bg": "173400",
+     "census_tract": "219400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602002",
+     "field": "rent",
+     "file": 848.0,
+     "census_bg": "848",
+     "census_tract": "966",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602002",
+     "field": "inc",
+     "file": null,
+     "census_bg": "-666666666",
+     "census_tract": "70150",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 70150; flagged as tract value: False"
+    },
+    {
+     "bg": "410379602003",
+     "field": "pop",
+     "file": 891.0,
+     "census_bg": "891",
+     "census_tract": "5582",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602003",
+     "field": "hv",
+     "file": 125000.0,
+     "census_bg": "125000",
+     "census_tract": "219400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602003",
+     "field": "rent",
+     "file": 1242.0,
+     "census_bg": "1242",
+     "census_tract": "966",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602003",
+     "field": "inc",
+     "file": 70938.0,
+     "census_bg": "70938",
+     "census_tract": "70150",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602004",
+     "field": "pop",
+     "file": 921.0,
+     "census_bg": "921",
+     "census_tract": "5582",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602004",
+     "field": "hv",
+     "file": 208000.0,
+     "census_bg": "208000",
+     "census_tract": "219400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602004",
+     "field": "rent",
+     "file": 918.0,
+     "census_bg": "918",
+     "census_tract": "966",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602004",
+     "field": "inc",
+     "file": 48750.0,
+     "census_bg": "48750",
+     "census_tract": "70150",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602005",
+     "field": "pop",
+     "file": 1020.0,
+     "census_bg": "1020",
+     "census_tract": "5582",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602005",
+     "field": "hv",
+     "file": 222100.0,
+     "census_bg": "222100",
+     "census_tract": "219400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602005",
+     "field": "rent",
+     "file": 1324.0,
+     "census_bg": "1324",
+     "census_tract": "966",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602005",
+     "field": "inc",
+     "file": 80357.0,
+     "census_bg": "80357",
+     "census_tract": "70150",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602007",
+     "field": "pop",
+     "file": 514.0,
+     "census_bg": "514",
+     "census_tract": "5582",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602007",
+     "field": "hv",
+     "file": 45700.0,
+     "census_bg": "45700",
+     "census_tract": "219400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410379602007",
+     "field": "rent",
+     "file": 966.0,
+     "census_bg": "-666666666",
+     "census_tract": "966",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 966; flagged as tract value: True"
+    },
+    {
+     "bg": "410379602007",
+     "field": "inc",
+     "file": 51050.0,
+     "census_bg": "51050",
+     "census_tract": "70150",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41041": {
+   "county": "Lincoln County",
+   "block_groups": 47,
+   "checked": [
+    {
+     "bg": "410419504022",
+     "field": "pop",
+     "file": 1550.0,
+     "census_bg": "1550",
+     "census_tract": "2463",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419504022",
+     "field": "hv",
+     "file": 401500.0,
+     "census_bg": "401500",
+     "census_tract": "368800",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419504022",
+     "field": "rent",
+     "file": 1389.0,
+     "census_bg": "1389",
+     "census_tract": "1387",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419504022",
+     "field": "inc",
+     "file": 53841.0,
+     "census_bg": "53841",
+     "census_tract": "51250",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419506021",
+     "field": "pop",
+     "file": 660.0,
+     "census_bg": "660",
+     "census_tract": "2743",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419506021",
+     "field": "hv",
+     "file": 579800.0,
+     "census_bg": "579800",
+     "census_tract": "346000",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419506021",
+     "field": "rent",
+     "file": 1913.0,
+     "census_bg": "1913",
+     "census_tract": "1405",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419506021",
+     "field": "inc",
+     "file": 87262.0,
+     "census_bg": "87262",
+     "census_tract": "67177",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419509002",
+     "field": "pop",
+     "file": 1288.0,
+     "census_bg": "1288",
+     "census_tract": "3710",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419509002",
+     "field": "hv",
+     "file": 476900.0,
+     "census_bg": "-666666666",
+     "census_tract": "476900",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 476900; flagged as tract value: True"
+    },
+    {
+     "bg": "410419509002",
+     "field": "rent",
+     "file": 1292.0,
+     "census_bg": "1292",
+     "census_tract": "1324",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419509002",
+     "field": "inc",
+     "file": 57033.0,
+     "census_bg": "57033",
+     "census_tract": "67876",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419513002",
+     "field": "pop",
+     "file": 1434.0,
+     "census_bg": "1434",
+     "census_tract": "2357",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419513002",
+     "field": "hv",
+     "file": 329500.0,
+     "census_bg": "329500",
+     "census_tract": "421200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419513002",
+     "field": "rent",
+     "file": 1096.0,
+     "census_bg": "1096",
+     "census_tract": "1093",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419513002",
+     "field": "inc",
+     "file": 63929.0,
+     "census_bg": "63929",
+     "census_tract": "78571",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419516002",
+     "field": "pop",
+     "file": 874.0,
+     "census_bg": "874",
+     "census_tract": "3870",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419516002",
+     "field": "hv",
+     "file": 390600.0,
+     "census_bg": "390600",
+     "census_tract": "350500",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419516002",
+     "field": "rent",
+     "file": 896.0,
+     "census_bg": "896",
+     "census_tract": "1152",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419516002",
+     "field": "inc",
+     "file": 41190.0,
+     "census_bg": "41190",
+     "census_tract": "61083",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419518001",
+     "field": "pop",
+     "file": 948.0,
+     "census_bg": "948",
+     "census_tract": "3906",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419518001",
+     "field": "hv",
+     "file": 346800.0,
+     "census_bg": "346800",
+     "census_tract": "338700",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410419518001",
+     "field": "rent",
+     "file": 924.0,
+     "census_bg": "-666666666",
+     "census_tract": "924",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 924; flagged as tract value: True"
+    },
+    {
+     "bg": "410419518001",
+     "field": "inc",
+     "file": 106308.0,
+     "census_bg": "106308",
+     "census_tract": "69911",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41045": {
+   "county": "Malheur County",
+   "block_groups": 31,
+   "checked": [
+    {
+     "bg": "410459702004",
+     "field": "pop",
+     "file": 1756.0,
+     "census_bg": "1756",
+     "census_tract": "4860",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459702004",
+     "field": "hv",
+     "file": 264100.0,
+     "census_bg": "264100",
+     "census_tract": "280400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459702004",
+     "field": "rent",
+     "file": 420.0,
+     "census_bg": "-666666666",
+     "census_tract": "420",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 420; flagged as tract value: True"
+    },
+    {
+     "bg": "410459702004",
+     "field": "inc",
+     "file": 66563.0,
+     "census_bg": "66563",
+     "census_tract": "70163",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459703003",
+     "field": "pop",
+     "file": 943.0,
+     "census_bg": "943",
+     "census_tract": "4514",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459703003",
+     "field": "hv",
+     "file": 116900.0,
+     "census_bg": "116900",
+     "census_tract": "301600",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459703003",
+     "field": "rent",
+     "file": 991.0,
+     "census_bg": "991",
+     "census_tract": "822",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459703003",
+     "field": "inc",
+     "file": 34889.0,
+     "census_bg": "34889",
+     "census_tract": "43090",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459703005",
+     "field": "pop",
+     "file": 575.0,
+     "census_bg": "575",
+     "census_tract": "4514",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459703005",
+     "field": "hv",
+     "file": 301600.0,
+     "census_bg": "-666666666",
+     "census_tract": "301600",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 301600; flagged as tract value: True"
+    },
+    {
+     "bg": "410459703005",
+     "field": "rent",
+     "file": 1095.0,
+     "census_bg": "1095",
+     "census_tract": "822",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459703005",
+     "field": "inc",
+     "file": 33815.0,
+     "census_bg": "33815",
+     "census_tract": "43090",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459704002",
+     "field": "pop",
+     "file": 340.0,
+     "census_bg": "340",
+     "census_tract": "4930",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459704002",
+     "field": "hv",
+     "file": 171200.0,
+     "census_bg": "171200",
+     "census_tract": "152800",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459704002",
+     "field": "rent",
+     "file": 837.0,
+     "census_bg": "837",
+     "census_tract": "822",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459704002",
+     "field": "inc",
+     "file": 33583.0,
+     "census_bg": "33583",
+     "census_tract": "34536",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459706004",
+     "field": "pop",
+     "file": 1182.0,
+     "census_bg": "1182",
+     "census_tract": "4540",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459706004",
+     "field": "hv",
+     "file": 171300.0,
+     "census_bg": "171300",
+     "census_tract": "303500",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459706004",
+     "field": "rent",
+     "file": 1019.0,
+     "census_bg": "1019",
+     "census_tract": "834",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459706004",
+     "field": "inc",
+     "file": 54482.0,
+     "census_bg": "54482",
+     "census_tract": "63125",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459707001",
+     "field": "pop",
+     "file": 2235.0,
+     "census_bg": "2235",
+     "census_tract": "2235",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459707001",
+     "field": "hv",
+     "file": 370300.0,
+     "census_bg": "370300",
+     "census_tract": "370300",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459707001",
+     "field": "rent",
+     "file": 839.0,
+     "census_bg": "839",
+     "census_tract": "839",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410459707001",
+     "field": "inc",
+     "file": 49167.0,
+     "census_bg": "49167",
+     "census_tract": "49167",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41049": {
+   "county": "Morrow County",
+   "block_groups": 10,
+   "checked": [
+    {
+     "bg": "410499701012",
+     "field": "pop",
+     "file": 1957.0,
+     "census_bg": "1957",
+     "census_tract": "5396",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499701012",
+     "field": "hv",
+     "file": 294100.0,
+     "census_bg": "294100",
+     "census_tract": "275700",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499701012",
+     "field": "rent",
+     "file": 854.0,
+     "census_bg": "854",
+     "census_tract": "979",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499701012",
+     "field": "inc",
+     "file": 81250.0,
+     "census_bg": "81250",
+     "census_tract": "68594",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499701013",
+     "field": "pop",
+     "file": 2429.0,
+     "census_bg": "2429",
+     "census_tract": "5396",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499701013",
+     "field": "hv",
+     "file": 280800.0,
+     "census_bg": "280800",
+     "census_tract": "275700",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499701013",
+     "field": "rent",
+     "file": 1356.0,
+     "census_bg": "1356",
+     "census_tract": "979",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499701013",
+     "field": "inc",
+     "file": 58657.0,
+     "census_bg": "58657",
+     "census_tract": "68594",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499701022",
+     "field": "pop",
+     "file": 1882.0,
+     "census_bg": "1882",
+     "census_tract": "3915",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499701022",
+     "field": "hv",
+     "file": 254300.0,
+     "census_bg": "254300",
+     "census_tract": "232400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499701022",
+     "field": "rent",
+     "file": 1381.0,
+     "census_bg": "1381",
+     "census_tract": "1262",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499701022",
+     "field": "inc",
+     "file": 64831.0,
+     "census_bg": "64831",
+     "census_tract": "72719",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499702001",
+     "field": "pop",
+     "file": 322.0,
+     "census_bg": "322",
+     "census_tract": "2989",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499702001",
+     "field": "hv",
+     "file": 222700.0,
+     "census_bg": "222700",
+     "census_tract": "223400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499702001",
+     "field": "rent",
+     "file": 1156.0,
+     "census_bg": "1156",
+     "census_tract": "900",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499702001",
+     "field": "inc",
+     "file": 102917.0,
+     "census_bg": "102917",
+     "census_tract": "89401",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499702002",
+     "field": "pop",
+     "file": 600.0,
+     "census_bg": "600",
+     "census_tract": "2989",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499702002",
+     "field": "hv",
+     "file": 219900.0,
+     "census_bg": "219900",
+     "census_tract": "223400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499702002",
+     "field": "rent",
+     "file": 1021.0,
+     "census_bg": "1021",
+     "census_tract": "900",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499702002",
+     "field": "inc",
+     "file": 104231.0,
+     "census_bg": "104231",
+     "census_tract": "89401",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499702004",
+     "field": "pop",
+     "file": 627.0,
+     "census_bg": "627",
+     "census_tract": "2989",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499702004",
+     "field": "hv",
+     "file": 264200.0,
+     "census_bg": "264200",
+     "census_tract": "223400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499702004",
+     "field": "rent",
+     "file": 741.0,
+     "census_bg": "741",
+     "census_tract": "900",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410499702004",
+     "field": "inc",
+     "file": 49656.0,
+     "census_bg": "49656",
+     "census_tract": "89401",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41053": {
+   "county": "Polk County",
+   "block_groups": 48,
+   "checked": [
+    {
+     "bg": "410530053012",
+     "field": "pop",
+     "file": 815.0,
+     "census_bg": "815",
+     "census_tract": "8540",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530053012",
+     "field": "hv",
+     "file": 384900.0,
+     "census_bg": "384900",
+     "census_tract": "583100",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530053012",
+     "field": "rent",
+     "file": 2112.0,
+     "census_bg": "-666666666",
+     "census_tract": "2112",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 2112; flagged as tract value: True"
+    },
+    {
+     "bg": "410530053012",
+     "field": "inc",
+     "file": 81635.0,
+     "census_bg": "81635",
+     "census_tract": "133281",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530202021",
+     "field": "pop",
+     "file": 2329.0,
+     "census_bg": "2329",
+     "census_tract": "7411",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530202021",
+     "field": "hv",
+     "file": 430200.0,
+     "census_bg": "430200",
+     "census_tract": "399500",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530202021",
+     "field": "rent",
+     "file": 1288.0,
+     "census_bg": "-666666666",
+     "census_tract": "1288",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1288; flagged as tract value: True"
+    },
+    {
+     "bg": "410530202021",
+     "field": "inc",
+     "file": 103780.0,
+     "census_bg": "103780",
+     "census_tract": "60106",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530202032",
+     "field": "pop",
+     "file": 879.0,
+     "census_bg": "879",
+     "census_tract": "3408",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530202032",
+     "field": "hv",
+     "file": 355600.0,
+     "census_bg": "355600",
+     "census_tract": "355400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530202032",
+     "field": "rent",
+     "file": 1135.0,
+     "census_bg": "1135",
+     "census_tract": "1214",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530202032",
+     "field": "inc",
+     "file": null,
+     "census_bg": "-666666666",
+     "census_tract": "50136",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 50136; flagged as tract value: False"
+    },
+    {
+     "bg": "410530202042",
+     "field": "pop",
+     "file": 1197.0,
+     "census_bg": "1197",
+     "census_tract": "4733",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530202042",
+     "field": "hv",
+     "file": 519600.0,
+     "census_bg": "519600",
+     "census_tract": "441900",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530202042",
+     "field": "rent",
+     "file": 1225.0,
+     "census_bg": "1225",
+     "census_tract": "1194",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530202042",
+     "field": "inc",
+     "file": 119107.0,
+     "census_bg": "119107",
+     "census_tract": "86125",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530203031",
+     "field": "pop",
+     "file": 3231.0,
+     "census_bg": "3231",
+     "census_tract": "5466",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530203031",
+     "field": "hv",
+     "file": 483200.0,
+     "census_bg": "483200",
+     "census_tract": "486300",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530203031",
+     "field": "rent",
+     "file": 1615.0,
+     "census_bg": "1615",
+     "census_tract": "1361",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530203031",
+     "field": "inc",
+     "file": 87614.0,
+     "census_bg": "87614",
+     "census_tract": "69708",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530205003",
+     "field": "pop",
+     "file": 2753.0,
+     "census_bg": "2753",
+     "census_tract": "7720",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530205003",
+     "field": "hv",
+     "file": 440800.0,
+     "census_bg": "440800",
+     "census_tract": "471000",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410530205003",
+     "field": "rent",
+     "file": 945.0,
+     "census_bg": "-666666666",
+     "census_tract": "945",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 945; flagged as tract value: True"
+    },
+    {
+     "bg": "410530205003",
+     "field": "inc",
+     "file": 141038.0,
+     "census_bg": "141038",
+     "census_tract": "109648",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41055": {
+   "county": "Sherman County",
+   "block_groups": 2,
+   "checked": [
+    {
+     "bg": "410559501001",
+     "field": "pop",
+     "file": 966.0,
+     "census_bg": "966",
+     "census_tract": "1938",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410559501001",
+     "field": "hv",
+     "file": 212500.0,
+     "census_bg": "212500",
+     "census_tract": "211800",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410559501001",
+     "field": "rent",
+     "file": 927.0,
+     "census_bg": "927",
+     "census_tract": "1032",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410559501001",
+     "field": "inc",
+     "file": 63333.0,
+     "census_bg": "63333",
+     "census_tract": "60161",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410559501002",
+     "field": "pop",
+     "file": 972.0,
+     "census_bg": "972",
+     "census_tract": "1938",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410559501002",
+     "field": "hv",
+     "file": 211400.0,
+     "census_bg": "211400",
+     "census_tract": "211800",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410559501002",
+     "field": "rent",
+     "file": 1104.0,
+     "census_bg": "1104",
+     "census_tract": "1032",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410559501002",
+     "field": "inc",
+     "file": 50625.0,
+     "census_bg": "50625",
+     "census_tract": "60161",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41057": {
+   "county": "Tillamook County",
+   "block_groups": 30,
+   "checked": [
+    {
+     "bg": "410579601011",
+     "field": "pop",
+     "file": 887.0,
+     "census_bg": "887",
+     "census_tract": "2189",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579601011",
+     "field": "hv",
+     "file": 334100.0,
+     "census_bg": "334100",
+     "census_tract": "586100",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579601011",
+     "field": "rent",
+     "file": 1625.0,
+     "census_bg": "-666666666",
+     "census_tract": "1625",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1625; flagged as tract value: True"
+    },
+    {
+     "bg": "410579601011",
+     "field": "inc",
+     "file": 79053.0,
+     "census_bg": "79053",
+     "census_tract": "78245",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579602001",
+     "field": "pop",
+     "file": 967.0,
+     "census_bg": "967",
+     "census_tract": "2857",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579602001",
+     "field": "hv",
+     "file": 350000.0,
+     "census_bg": "350000",
+     "census_tract": "367700",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579602001",
+     "field": "rent",
+     "file": 1114.0,
+     "census_bg": "-666666666",
+     "census_tract": "1114",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1114; flagged as tract value: True"
+    },
+    {
+     "bg": "410579602001",
+     "field": "inc",
+     "file": 56667.0,
+     "census_bg": "56667",
+     "census_tract": "56042",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579602003",
+     "field": "pop",
+     "file": 1072.0,
+     "census_bg": "1072",
+     "census_tract": "2857",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579602003",
+     "field": "hv",
+     "file": 389900.0,
+     "census_bg": "389900",
+     "census_tract": "367700",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579602003",
+     "field": "rent",
+     "file": 1142.0,
+     "census_bg": "1142",
+     "census_tract": "1114",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579602003",
+     "field": "inc",
+     "file": 73750.0,
+     "census_bg": "73750",
+     "census_tract": "56042",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579604011",
+     "field": "pop",
+     "file": 766.0,
+     "census_bg": "766",
+     "census_tract": "3206",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579604011",
+     "field": "hv",
+     "file": 517100.0,
+     "census_bg": "517100",
+     "census_tract": "555100",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579604011",
+     "field": "rent",
+     "file": 1702.0,
+     "census_bg": "-666666666",
+     "census_tract": "1702",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1702; flagged as tract value: True"
+    },
+    {
+     "bg": "410579604011",
+     "field": "inc",
+     "file": 85074.0,
+     "census_bg": "85074",
+     "census_tract": "103587",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579604023",
+     "field": "pop",
+     "file": 691.0,
+     "census_bg": "691",
+     "census_tract": "4533",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579604023",
+     "field": "hv",
+     "file": 273800.0,
+     "census_bg": "273800",
+     "census_tract": "286500",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579604023",
+     "field": "rent",
+     "file": 1177.0,
+     "census_bg": "-666666666",
+     "census_tract": "1177",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1177; flagged as tract value: True"
+    },
+    {
+     "bg": "410579604023",
+     "field": "inc",
+     "file": 47481.0,
+     "census_bg": "47481",
+     "census_tract": "57393",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579605003",
+     "field": "pop",
+     "file": 641.0,
+     "census_bg": "641",
+     "census_tract": "1923",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579605003",
+     "field": "hv",
+     "file": 338000.0,
+     "census_bg": "338000",
+     "census_tract": "376400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579605003",
+     "field": "rent",
+     "file": 1360.0,
+     "census_bg": "1360",
+     "census_tract": "1315",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410579605003",
+     "field": "inc",
+     "file": 47363.0,
+     "census_bg": "47363",
+     "census_tract": "62629",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41059": {
+   "county": "Umatilla County",
+   "block_groups": 63,
+   "checked": [
+    {
+     "bg": "410599505003",
+     "field": "pop",
+     "file": 1895.0,
+     "census_bg": "1895",
+     "census_tract": "4759",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599505003",
+     "field": "hv",
+     "file": 365400.0,
+     "census_bg": "365400",
+     "census_tract": "302600",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599505003",
+     "field": "rent",
+     "file": 918.0,
+     "census_bg": "918",
+     "census_tract": "957",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599505003",
+     "field": "inc",
+     "file": 77500.0,
+     "census_bg": "77500",
+     "census_tract": "76762",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599507001",
+     "field": "pop",
+     "file": 884.0,
+     "census_bg": "884",
+     "census_tract": "2620",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599507001",
+     "field": "hv",
+     "file": 214300.0,
+     "census_bg": "214300",
+     "census_tract": "238400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599507001",
+     "field": "rent",
+     "file": 1049.0,
+     "census_bg": "1049",
+     "census_tract": "1030",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599507001",
+     "field": "inc",
+     "file": 48750.0,
+     "census_bg": "48750",
+     "census_tract": "53701",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599508004",
+     "field": "pop",
+     "file": 1958.0,
+     "census_bg": "1958",
+     "census_tract": "7340",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599508004",
+     "field": "hv",
+     "file": 319900.0,
+     "census_bg": "319900",
+     "census_tract": "291900",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599508004",
+     "field": "rent",
+     "file": 1235.0,
+     "census_bg": "-666666666",
+     "census_tract": "1235",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 1235; flagged as tract value: True"
+    },
+    {
+     "bg": "410599508004",
+     "field": "inc",
+     "file": 59691.0,
+     "census_bg": "59691",
+     "census_tract": "62259",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599510005",
+     "field": "pop",
+     "file": 1376.0,
+     "census_bg": "1376",
+     "census_tract": "6473",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599510005",
+     "field": "hv",
+     "file": 230000.0,
+     "census_bg": "230000",
+     "census_tract": "336600",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599510005",
+     "field": "rent",
+     "file": 783.0,
+     "census_bg": "783",
+     "census_tract": "1058",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599510005",
+     "field": "inc",
+     "file": 56613.0,
+     "census_bg": "56613",
+     "census_tract": "69175",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599511002",
+     "field": "pop",
+     "file": 1982.0,
+     "census_bg": "1982",
+     "census_tract": "6548",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599511002",
+     "field": "hv",
+     "file": 209300.0,
+     "census_bg": "209300",
+     "census_tract": "271600",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599511002",
+     "field": "rent",
+     "file": 1196.0,
+     "census_bg": "1196",
+     "census_tract": "966",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599511002",
+     "field": "inc",
+     "file": 53984.0,
+     "census_bg": "53984",
+     "census_tract": "65136",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599512012",
+     "field": "pop",
+     "file": 750.0,
+     "census_bg": "750",
+     "census_tract": "5941",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599512012",
+     "field": "hv",
+     "file": 228800.0,
+     "census_bg": "-666666666",
+     "census_tract": "228800",
+     "match": true,
+     "rule": "suppressed in block group (-666666666); tract 228800; flagged as tract value: True"
+    },
+    {
+     "bg": "410599512012",
+     "field": "rent",
+     "file": 985.0,
+     "census_bg": "985",
+     "census_tract": "1190",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410599512012",
+     "field": "inc",
+     "file": 70078.0,
+     "census_bg": "70078",
+     "census_tract": "79242",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41061": {
+   "county": "Union County",
+   "block_groups": 26,
+   "checked": [
+    {
+     "bg": "410619701002",
+     "field": "pop",
+     "file": 1017.0,
+     "census_bg": "1017",
+     "census_tract": "3091",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619701002",
+     "field": "hv",
+     "file": 203000.0,
+     "census_bg": "203000",
+     "census_tract": "289400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619701002",
+     "field": "rent",
+     "file": 1023.0,
+     "census_bg": "1023",
+     "census_tract": "1041",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619701002",
+     "field": "inc",
+     "file": 51875.0,
+     "census_bg": "51875",
+     "census_tract": "63673",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619702001",
+     "field": "pop",
+     "file": 954.0,
+     "census_bg": "954",
+     "census_tract": "3433",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619702001",
+     "field": "hv",
+     "file": 290400.0,
+     "census_bg": "290400",
+     "census_tract": "229200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619702001",
+     "field": "rent",
+     "file": 1042.0,
+     "census_bg": "1042",
+     "census_tract": "882",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619702001",
+     "field": "inc",
+     "file": 64861.0,
+     "census_bg": "64861",
+     "census_tract": "65484",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619702003",
+     "field": "pop",
+     "file": 1131.0,
+     "census_bg": "1131",
+     "census_tract": "3433",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619702003",
+     "field": "hv",
+     "file": 170600.0,
+     "census_bg": "170600",
+     "census_tract": "229200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619702003",
+     "field": "rent",
+     "file": 748.0,
+     "census_bg": "748",
+     "census_tract": "882",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619702003",
+     "field": "inc",
+     "file": 73182.0,
+     "census_bg": "73182",
+     "census_tract": "65484",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619704003",
+     "field": "pop",
+     "file": 787.0,
+     "census_bg": "787",
+     "census_tract": "2528",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619704003",
+     "field": "hv",
+     "file": 186500.0,
+     "census_bg": "186500",
+     "census_tract": "294100",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619704003",
+     "field": "rent",
+     "file": 1018.0,
+     "census_bg": "1018",
+     "census_tract": "1034",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619704003",
+     "field": "inc",
+     "file": 46067.0,
+     "census_bg": "46067",
+     "census_tract": "70431",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619706001",
+     "field": "pop",
+     "file": 1508.0,
+     "census_bg": "1508",
+     "census_tract": "3988",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619706001",
+     "field": "hv",
+     "file": 461100.0,
+     "census_bg": "461100",
+     "census_tract": "417900",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619706001",
+     "field": "rent",
+     "file": 1403.0,
+     "census_bg": "1403",
+     "census_tract": "1032",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619706001",
+     "field": "inc",
+     "file": 114076.0,
+     "census_bg": "114076",
+     "census_tract": "100972",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619708002",
+     "field": "pop",
+     "file": 548.0,
+     "census_bg": "548",
+     "census_tract": "4191",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619708002",
+     "field": "hv",
+     "file": 189700.0,
+     "census_bg": "189700",
+     "census_tract": "265100",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619708002",
+     "field": "rent",
+     "file": 1009.0,
+     "census_bg": "1009",
+     "census_tract": "911",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410619708002",
+     "field": "inc",
+     "file": 40833.0,
+     "census_bg": "40833",
+     "census_tract": "59375",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41063": {
+   "county": "Wallowa County",
+   "block_groups": 8,
+   "checked": [
+    {
+     "bg": "410639601001",
+     "field": "pop",
+     "file": 1354.0,
+     "census_bg": "1354",
+     "census_tract": "2097",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639601001",
+     "field": "hv",
+     "file": 351300.0,
+     "census_bg": "351300",
+     "census_tract": "383000",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639601001",
+     "field": "rent",
+     "file": 1228.0,
+     "census_bg": "1228",
+     "census_tract": "1219",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639601001",
+     "field": "inc",
+     "file": 58542.0,
+     "census_bg": "58542",
+     "census_tract": "69821",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639601002",
+     "field": "pop",
+     "file": 743.0,
+     "census_bg": "743",
+     "census_tract": "2097",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639601002",
+     "field": "hv",
+     "file": 598600.0,
+     "census_bg": "598600",
+     "census_tract": "383000",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639601002",
+     "field": "rent",
+     "file": 1125.0,
+     "census_bg": "1125",
+     "census_tract": "1219",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639601002",
+     "field": "inc",
+     "file": 79118.0,
+     "census_bg": "79118",
+     "census_tract": "69821",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639603001",
+     "field": "pop",
+     "file": 852.0,
+     "census_bg": "852",
+     "census_tract": "3544",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639603001",
+     "field": "hv",
+     "file": 377900.0,
+     "census_bg": "377900",
+     "census_tract": "406400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639603001",
+     "field": "rent",
+     "file": 799.0,
+     "census_bg": "799",
+     "census_tract": "902",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639603001",
+     "field": "inc",
+     "file": 56957.0,
+     "census_bg": "56957",
+     "census_tract": "67438",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639603002",
+     "field": "pop",
+     "file": 805.0,
+     "census_bg": "805",
+     "census_tract": "3544",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639603002",
+     "field": "hv",
+     "file": 438900.0,
+     "census_bg": "438900",
+     "census_tract": "406400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639603002",
+     "field": "rent",
+     "file": 900.0,
+     "census_bg": "900",
+     "census_tract": "902",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639603002",
+     "field": "inc",
+     "file": 65313.0,
+     "census_bg": "65313",
+     "census_tract": "67438",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639603003",
+     "field": "pop",
+     "file": 1273.0,
+     "census_bg": "1273",
+     "census_tract": "3544",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639603003",
+     "field": "hv",
+     "file": 350500.0,
+     "census_bg": "350500",
+     "census_tract": "406400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639603003",
+     "field": "rent",
+     "file": 871.0,
+     "census_bg": "871",
+     "census_tract": "902",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639603003",
+     "field": "inc",
+     "file": 66641.0,
+     "census_bg": "66641",
+     "census_tract": "67438",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639603004",
+     "field": "pop",
+     "file": 614.0,
+     "census_bg": "614",
+     "census_tract": "3544",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639603004",
+     "field": "hv",
+     "file": 592300.0,
+     "census_bg": "592300",
+     "census_tract": "406400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639603004",
+     "field": "rent",
+     "file": 1679.0,
+     "census_bg": "1679",
+     "census_tract": "902",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410639603004",
+     "field": "inc",
+     "file": 86630.0,
+     "census_bg": "86630",
+     "census_tract": "67438",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41065": {
+   "county": "Wasco County",
+   "block_groups": 22,
+   "checked": [
+    {
+     "bg": "410659703003",
+     "field": "pop",
+     "file": 1345.0,
+     "census_bg": "1345",
+     "census_tract": "3114",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659703003",
+     "field": "hv",
+     "file": 305900.0,
+     "census_bg": "305900",
+     "census_tract": "366200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659703003",
+     "field": "rent",
+     "file": 1164.0,
+     "census_bg": "1164",
+     "census_tract": "1273",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659703003",
+     "field": "inc",
+     "file": 77250.0,
+     "census_bg": "77250",
+     "census_tract": "91250",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659704002",
+     "field": "pop",
+     "file": 2594.0,
+     "census_bg": "2594",
+     "census_tract": "3534",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659704002",
+     "field": "hv",
+     "file": 347300.0,
+     "census_bg": "347300",
+     "census_tract": "359900",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659704002",
+     "field": "rent",
+     "file": 922.0,
+     "census_bg": "922",
+     "census_tract": "946",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659704002",
+     "field": "inc",
+     "file": 57470.0,
+     "census_bg": "57470",
+     "census_tract": "59038",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659705001",
+     "field": "pop",
+     "file": 788.0,
+     "census_bg": "788",
+     "census_tract": "3072",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659705001",
+     "field": "hv",
+     "file": 308000.0,
+     "census_bg": "308000",
+     "census_tract": "211500",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659705001",
+     "field": "rent",
+     "file": 2512.0,
+     "census_bg": "2512",
+     "census_tract": "927",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659705001",
+     "field": "inc",
+     "file": 70474.0,
+     "census_bg": "70474",
+     "census_tract": "37308",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659705002",
+     "field": "pop",
+     "file": 1482.0,
+     "census_bg": "1482",
+     "census_tract": "3072",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659705002",
+     "field": "hv",
+     "file": 193000.0,
+     "census_bg": "193000",
+     "census_tract": "211500",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659705002",
+     "field": "rent",
+     "file": 955.0,
+     "census_bg": "955",
+     "census_tract": "927",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659705002",
+     "field": "inc",
+     "file": 32358.0,
+     "census_bg": "32358",
+     "census_tract": "37308",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659708001",
+     "field": "pop",
+     "file": 2045.0,
+     "census_bg": "2045",
+     "census_tract": "4785",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659708001",
+     "field": "hv",
+     "file": 421600.0,
+     "census_bg": "421600",
+     "census_tract": "338200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659708001",
+     "field": "rent",
+     "file": 1199.0,
+     "census_bg": "1199",
+     "census_tract": "1168",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659708001",
+     "field": "inc",
+     "file": 79006.0,
+     "census_bg": "79006",
+     "census_tract": "69138",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659708004",
+     "field": "pop",
+     "file": 1361.0,
+     "census_bg": "1361",
+     "census_tract": "4785",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659708004",
+     "field": "hv",
+     "file": 278500.0,
+     "census_bg": "278500",
+     "census_tract": "338200",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659708004",
+     "field": "rent",
+     "file": 1358.0,
+     "census_bg": "1358",
+     "census_tract": "1168",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410659708004",
+     "field": "inc",
+     "file": 62917.0,
+     "census_bg": "62917",
+     "census_tract": "69138",
+     "match": true,
+     "rule": "block group value"
+    }
+   ]
+  },
+  "41069": {
+   "county": "Wheeler County",
+   "block_groups": 2,
+   "checked": [
+    {
+     "bg": "410699601001",
+     "field": "pop",
+     "file": 701.0,
+     "census_bg": "701",
+     "census_tract": "1485",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410699601001",
+     "field": "hv",
+     "file": 232400.0,
+     "census_bg": "232400",
+     "census_tract": "272400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410699601001",
+     "field": "rent",
+     "file": 732.0,
+     "census_bg": "732",
+     "census_tract": "870",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410699601001",
+     "field": "inc",
+     "file": 55714.0,
+     "census_bg": "55714",
+     "census_tract": "55284",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410699601002",
+     "field": "pop",
+     "file": 784.0,
+     "census_bg": "784",
+     "census_tract": "1485",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410699601002",
+     "field": "hv",
+     "file": 370000.0,
+     "census_bg": "370000",
+     "census_tract": "272400",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410699601002",
+     "field": "rent",
+     "file": 1135.0,
+     "census_bg": "1135",
+     "census_tract": "870",
+     "match": true,
+     "rule": "block group value"
+    },
+    {
+     "bg": "410699601002",
+     "field": "inc",
+     "file": 54620.0,
+     "census_bg": "54620",
+     "census_tract": "55284",
      "match": true,
      "rule": "block group value"
     }

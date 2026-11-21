@@ -164,3 +164,44 @@ The method is the Northeast batch's (`small-counties-northeast.md`), unchanged.
   records: all 10 checks pass at all 6 points. Data files from the r2.dev address (HEAD 200, GET 200).
 - R2: the first dry run stopped on a malformed Cloudflare API reply (JSON "Extra data"; nothing was uploaded); run
   again: "23 files, net +0.014 GB, projected 1.277 GB"; after 1,277,108,927 bytes (1,569 objects).
+
+## Oregon (26 of 26 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Baker (41001) | 16,840 | 17 | 950,773 | C | 10 |
+| Benton (41003) | 96,303 | 67 | 733,801 | C | 59 |
+| Clatsop (41007) | 41,363 | 37 | 886,483 | C | 25 |
+| Columbia (41009) | 53,493 | 40 | 731,198 | C | 26 |
+| Coos (41011) | 64,827 | 67 | 1,000,663 | C | 47 |
+| Crook (41013) | 26,277 | 20 | 695,573 | C | 13 |
+| Curry (41015) | 23,381 | 21 | 1,003,585 | C | 12 |
+| Gilliam (41021) | 1,971 | 2 | 340,293 | D | 0 |
+| Grant (41023) | 7,209 | 8 | 1,169,595 | C | 0 |
+| Harney (41025) | 7,499 | 7 | 1,136,001 | C | 5 |
+| Hood River (41027) | 23,905 | 19 | 498,148 | C | 11 |
+| Jefferson (41031) | 25,203 | 19 | 533,349 | C | 7 |
+| Josephine (41033) | 88,179 | 65 | 1,519,295 | C | 47 |
+| Klamath (41035) | 70,247 | 70 | 1,381,450 | C | 49 |
+| Lake (41037) | 8,267 | 10 | 1,325,492 | D | 0 |
+| Lincoln (41041) | 50,964 | 47 | 801,635 | C | 37 |
+| Malheur (41045) | 31,954 | 31 | 1,129,389 | C | 13 |
+| Morrow (41049) | 12,300 | 10 | 485,435 | C | 0 |
+| Polk (41053) | 89,662 | 48 | 607,096 | C | 39 |
+| Sherman (41055) | 1,938 | 2 | 350,255 | C | 0 |
+| Tillamook (41057) | 27,496 | 30 | 871,427 | C | 18 |
+| Umatilla (41059) | 79,940 | 63 | 1,251,398 | C | 50 |
+| Union (41061) | 26,144 | 26 | 1,035,968 | C | 17 |
+| Wallowa (41063) | 7,553 | 8 | 873,435 | C | 0 |
+| Wasco (41065) | 26,552 | 22 | 1,149,653 | C | 18 |
+| Wheeler (41069) | 1,485 | 2 | 498,393 | C | 0 |
+| **26 counties** | **910,952** | **758** | **22,959,783** | 24 C, 2 D | 503 |
+
+- Oregon cut alone: 146 s, peak osmium memory 4.17 GB, 318 MB. Build: fetch 17-90 s, build 122-147 s per county.
+- Census spot check: all 92 counties so far, 2,000 of 2,000 values equal (0% mismatch). Tract-median flags: 26
+  counties added, no existing county changed, 0 mismatches.
+- Crash counts: Oregon has no state crash source connected.
+- Live check from R2 (`LIVE_PORT=9336`): Klamath and Crook, 3 points each; neither county has a parcel service on the
+  page, so the house rows are not checkable; neighborhood, canopy, canopy goal, crash text, state laws and console
+  pass at all 6. Data files from the r2.dev address (HEAD 200, GET 200).
+- R2: dry run "27 files, net +0.023 GB, projected 1.300 GB"; after 1,300,075,243 bytes (1,595 objects).
