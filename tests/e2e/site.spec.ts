@@ -584,7 +584,12 @@ test("crash comparisons use the rebuilt counts in a California and a Pennsylvani
       dropped: (d["420035162002"].r || []).some((r: any) => r[0] === "traffic_calming"),
     };
   });
-  expect(pa.text).toContain("4 crashes involving a pedestrian or cyclist inside this block group or on its boundary streets");
+  // The expected count is read from the committed comparison file: 4 under the older rule (16 Nov), 3 since the 1/k
+  // rebuild of 21 Nov 2026 (a crash on the edge of k block groups counts 1/k in each).
+  const paGap = JSON.parse(require("fs").readFileSync(require("path").join(__dirname, "../../app/data/crash_gaps/42003.json"), "utf8")).bg["420035153001"].p;
+  expect(paGap[3]).toBe("g");
+  const paShown = Number.isInteger(paGap[0]) ? paGap[0].toLocaleString() : paGap[0].toFixed(1); // 1/k counts show one decimal
+  expect(pa.text).toContain(`${paShown} ${paGap[0] === 1 ? "crash" : "crashes"} involving a pedestrian or cyclist inside this block group or on its boundary streets`);
   expect(pa.text).not.toContain("crashes injured people walking or biking here");
   expect(pa.dropped).toBe(false);
   expect(errors).toEqual([]);

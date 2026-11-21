@@ -32,8 +32,10 @@ describe("rebuilt state crash counts", () => {
         expect(v[0]).toBeLessThanOrEqual(v[2]);
         expect(v[1]).toBeLessThanOrEqual(v[2]);
       }
-      // the boundary rule can only add crashes relative to strictly-inside counting
-      expect(rows.reduce((s, [, v]) => s + v[2], 0)).toBeGreaterThanOrEqual(m.strict_within_totals[2]);
+      // the boundary rule can only add crashes relative to strictly-inside counting (1/k counts are rounded to 4
+      // decimals per block group, so their sum may fall short of a whole number by that rounding)
+      const tol = 5e-5 * rows.length + 1e-6;
+      expect(rows.reduce((s, [, v]) => s + v[2], 0)).toBeGreaterThanOrEqual(m.strict_within_totals[2] - tol);
     });
   }
 });
