@@ -6,6 +6,12 @@ playwright-report/
 __pycache__/
 .law_cache/
 # BEGIN r2-only county files (generated from counties/.r2-only.txt by scripts/r2_only.py --gitignore; do not edit)
+counties/bundle_04001.json.gz
+counties/bundle_04007.json.gz
+counties/bundle_04009.json.gz
+counties/bundle_04011.json.gz
+counties/bundle_04012.json.gz
+counties/bundle_04023.json.gz
 counties/bundle_09150.json.gz
 counties/bundle_23003.json.gz
 counties/bundle_23007.json.gz

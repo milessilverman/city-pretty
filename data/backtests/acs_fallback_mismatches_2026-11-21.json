@@ -218,6 +218,12 @@
    "rent_own": 5,
    "rent_tract": 3
   },
+  "04001": {
+   "hv_own": 51,
+   "rent_tract": 19,
+   "rent_own": 30,
+   "hv_tract": 5
+  },
   "04003": {
    "hv_own": 96,
    "rent_own": 70,
@@ -229,6 +235,29 @@
    "rent_own": 69,
    "rent_tract": 37,
    "hv_tract": 15
+  },
+  "04007": {
+   "hv_own": 40,
+   "rent_own": 24,
+   "hv_tract": 5,
+   "rent_tract": 18
+  },
+  "04009": {
+   "hv_own": 26,
+   "rent_own": 20,
+   "rent_tract": 10,
+   "hv_tract": 4
+  },
+  "04011": {
+   "hv_own": 5,
+   "rent_own": 5,
+   "rent_tract": 1
+  },
+  "04012": {
+   "hv_own": 19,
+   "rent_tract": 8,
+   "rent_own": 11,
+   "hv_tract": 4
   },
   "04013": {
    "hv_own": 2527,
@@ -259,6 +288,12 @@
    "rent_own": 139,
    "rent_tract": 67,
    "hv_tract": 12
+  },
+  "04023": {
+   "hv_own": 34,
+   "rent_own": 24,
+   "rent_tract": 11,
+   "hv_tract": 2
   },
   "04025": {
    "hv_own": 169,
