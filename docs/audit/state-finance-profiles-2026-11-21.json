@@ -495,6 +495,66 @@
     }
    }
   },
+  "IL": {
+   "host": "tax.illinois.gov (Illinois Department of Revenue: PIO-16 'An Overview of Property Tax' and the Property Tax Relief page); www.ilga.gov still did not answer",
+   "status_before": "could_not_check",
+   "status_after": "partially_verified",
+   "fields": {
+    "res_assessment_ratio": {
+     "status": "confirmed",
+     "source_url": "https://tax.illinois.gov/content/dam/soi/en/web/tax/research/publications/documents/pios/pio-16.pdf",
+     "quote": "The required assessment level for tax purposes on any parcel of real property in any county, except Cook County, is 33 1/3 percent of the property’s fair market value, excluding farmland and farm buildings.",
+     "note": "Outside Cook County. Cook County assesses the residential class at 10% of fair market value (same source).",
+     "fetched_at": "2026-11-21T10:38:03.362215+00:00Z",
+     "http": "200"
+    },
+    "comm_assessment_ratio": {
+     "status": "confirmed",
+     "source_url": "https://tax.illinois.gov/content/dam/soi/en/web/tax/research/publications/documents/pios/pio-16.pdf",
+     "quote": "The required assessment level for tax purposes on any parcel of real property in any county, except Cook County, is 33 1/3 percent of the property’s fair market value, excluding farmland and farm buildings.",
+     "note": "Outside Cook County, which classifies property at different percentages.",
+     "fetched_at": "2026-11-21T10:38:03.362215+00:00Z",
+     "http": "200"
+    },
+    "annual_assessment_cap": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "No fetched page states whether yearly assessment increases are limited."
+    },
+    "uncaps_on_sale": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "Depends on the cap, which is not confirmed."
+    },
+    "reassessment_cycle_years": {
+     "status": "corrected",
+     "source_url": "https://tax.illinois.gov/content/dam/soi/en/web/tax/research/publications/documents/pios/pio-16.pdf",
+     "quote": "Every four years when all property is reassessed (three years in Cook County), a complete list of assessments must be published for notification purposes.",
+     "note": "Corrected from 3, which is Cook County's cycle; the profile's ratio is the one used outside Cook County, where the cycle is four years.",
+     "old": 3,
+     "new": 4,
+     "fetched_at": "2026-11-21T10:38:03.362215+00:00Z",
+     "http": "200"
+    },
+    "homestead_exemption_rule": {
+     "status": "corrected",
+     "source_url": "https://tax.illinois.gov/localgovernments/property/taxrelief.html",
+     "quote": "The amount of exemption is the increase in the current year's equalized assessed value (EAV), above the 1977 EAV, up to a maximum of $10,000 in Cook County, $8,000 in counties contiguous to Cook County, and $6,000 in all other counties.",
+     "note": "Corrected from $10,000 (Cook County's maximum) to $6,000, the maximum in all other counties, to match the profile's downstate ratio. It is a maximum: the exemption is the growth in EAV above the 1977 EAV, up to that amount.",
+     "old": {
+      "type": "flat_assessed",
+      "amount_or_pct": 10000
+     },
+     "new": {
+      "type": "flat_assessed",
+      "amount_or_pct": 6000,
+      "applies_to": "counties other than Cook and the counties contiguous to Cook ($10,000 in Cook, $8,000 in contiguous counties)"
+     },
+     "fetched_at": "2026-11-21T10:38:18.843441+00:00Z",
+     "http": "200"
+    }
+   }
+  },
   "IN": {
    "host": "www.in.gov/dlgf and forms.in.gov (Department of Local Government Finance)",
    "status_before": "unverified",
@@ -876,6 +936,152 @@
     }
    }
   },
+  "NM": {
+   "host": "www.nmlegis.gov (New Mexico Legislature committee handout, Revenue Stabilization and Tax Policy Committee, 23 Sep 2024) and www.santafecountynm.gov (Santa Fe County Assessor 2024 Help Guide); laws.nmonesource.com not used",
+   "status_before": "unverified",
+   "status_after": "verified",
+   "fields": {
+    "res_assessment_ratio": {
+     "status": "confirmed",
+     "source_url": "https://www.nmlegis.gov/handouts/RSTP%20092324%20Item%203%20Property%20Tax%20Overview%20and%20Technology.pdf",
+     "quote": "Taxable value of a property is 33 1/3% of assessed value",
+     "note": "",
+     "fetched_at": "2026-11-21T10:30:26.548916+00:00Z",
+     "http": "200"
+    },
+    "comm_assessment_ratio": {
+     "status": "confirmed",
+     "source_url": "https://www.nmlegis.gov/handouts/RSTP%20092324%20Item%203%20Property%20Tax%20Overview%20and%20Technology.pdf",
+     "quote": "Taxable value of a property is 33 1/3% of assessed value",
+     "note": "",
+     "fetched_at": "2026-11-21T10:30:26.548916+00:00Z",
+     "http": "200"
+    },
+    "annual_assessment_cap": {
+     "status": "confirmed",
+     "source_url": "https://www.nmlegis.gov/handouts/RSTP%20092324%20Item%203%20Property%20Tax%20Overview%20and%20Technology.pdf",
+     "quote": "Residential assessments may not rise more than 3% per year unless the property changes ownership, is improved, or re-zoned",
+     "note": "Residential property only.",
+     "fetched_at": "2026-11-21T10:30:26.548916+00:00Z",
+     "http": "200"
+    },
+    "uncaps_on_sale": {
+     "status": "confirmed",
+     "source_url": "https://www.nmlegis.gov/handouts/RSTP%20092324%20Item%203%20Property%20Tax%20Overview%20and%20Technology.pdf",
+     "quote": "Residential assessments may not rise more than 3% per year unless the property changes ownership, is improved, or re-zoned",
+     "note": "",
+     "fetched_at": "2026-11-21T10:30:26.548916+00:00Z",
+     "http": "200"
+    },
+    "reassessment_cycle_years": {
+     "status": "confirmed",
+     "source_url": "https://www.nmlegis.gov/handouts/RSTP%20092324%20Item%203%20Property%20Tax%20Overview%20and%20Technology.pdf",
+     "quote": "Properties are valued as of January 1 - situs date. Changes after that date cannot be reflected in value until the following January 1",
+     "note": "Valued every year as of 1 January.",
+     "fetched_at": "2026-11-21T10:30:26.548916+00:00Z",
+     "http": "200"
+    },
+    "homestead_exemption_rule": {
+     "status": "confirmed",
+     "source_url": "https://www.santafecountynm.gov/assessor/uploads/documents/2024_Help_Guide.pdf",
+     "quote": "The Head of Family Exemption is a $2,000 reduction of the taxable value of your residential real estate.",
+     "note": "$2,000 of taxable (one-third) value, as stored (flat_assessed). The Legislature's handout adds it has not been adjusted for inflation since 1993.",
+     "fetched_at": "2026-11-21T10:30:36.388868+00:00Z",
+     "http": "200"
+    }
+   }
+  },
+  "NY": {
+   "host": "www.tax.ny.gov (Department of Taxation and Finance, Office of Real Property Tax Services); www.nysenate.gov (RPTL § 1805) returned 403",
+   "status_before": "unverified",
+   "status_after": "unverified",
+   "fields": {
+    "res_assessment_ratio": {
+     "status": "corrected_to_unknown",
+     "source_url": "https://www.tax.ny.gov/research/property/assess/reassessment/reassessqa.htm",
+     "quote": "While it doesn't require assessments to be at 100 percent of market value, it does establish a standard that assessments be fair at a uniform percentage of market value.",
+     "note": "Set to unknown. Each New York city and town assesses at its own level; the Department's example is a city assessing at 27% of market value (https://www.tax.ny.gov/pit/property/learn/howassess.htm, read 21 Nov 2026). A single statewide 100% does not hold where a town assesses at a fraction.",
+     "old": 1,
+     "fetched_at": "2026-11-21T10:31:15.538908+00:00Z",
+     "http": "200"
+    },
+    "comm_assessment_ratio": {
+     "status": "corrected_to_unknown",
+     "source_url": "https://www.tax.ny.gov/research/property/assess/reassessment/reassessqa.htm",
+     "quote": "While it doesn't require assessments to be at 100 percent of market value, it does establish a standard that assessments be fair at a uniform percentage of market value.",
+     "note": "Set to unknown, as for residential.",
+     "old": 1,
+     "fetched_at": "2026-11-21T10:31:15.538908+00:00Z",
+     "http": "200"
+    },
+    "annual_assessment_cap": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "The record cites RPTL § 1805 (the record's own label: 'Assessment Caps'), which returned 403 from nysenate.gov; whether and where a cap applies was not read."
+    },
+    "uncaps_on_sale": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "Depends on the cap, which is not confirmed."
+    },
+    "reassessment_cycle_years": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "No fetched page sets a reassessment cycle; the stored 1 (yearly) has no source."
+    },
+    "homestead_exemption_rule": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "Stored as 'none'; no fetched page covers New York's homeowner exemptions."
+    }
+   }
+  },
+  "OK": {
+   "host": "www.law.cornell.edu (LII copy of the Oklahoma Administrative Code, Tax Commission rules; secondary) and www.oklegislature.gov (fiscal impact statement quoting 68 O.S. § 2889); oksenate.gov returned 404 and oscn.net answered with a human-verification page",
+   "status_before": "unverified",
+   "status_after": "partially_verified",
+   "fields": {
+    "res_assessment_ratio": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "The ratio is set under Okla. Const. art. X, § 8, which could not be read (oscn.net human-verification page)."
+    },
+    "annual_assessment_cap": {
+     "status": "confirmed",
+     "source_url": "https://www.law.cornell.edu/regulations/oklahoma/OAC-710-10-1-3",
+     "quote": "the fair cash value of any parcel of locally assessed real property which constitutes homestead property or agricultural land shall not increase by more than 3% in any taxable year. The fair cash value of all other locally assessed real property shall not increase by more than 5%.",
+     "note": "OAC 710:10-1-3(a), implementing Okla. Const. art. X, § 8B: 3% for homesteads (as stored), 5% for other real property. Read on LII's copy of the rule; amendments after the copy's date were not checked.",
+     "fetched_at": "2026-11-21T10:33:26.860320+00:00Z",
+     "http": "200"
+    },
+    "uncaps_on_sale": {
+     "status": "corrected",
+     "source_url": "https://www.law.cornell.edu/regulations/oklahoma/OAC-710-10-1-3",
+     "quote": "The limitation on valuation increases set forth in this subsection do not apply in any year when the title of the property is transferred, changed, or conveyed to another person",
+     "note": "Corrected from false: a sale ends the cap for that year and the property is valued at fair cash value.",
+     "old": false,
+     "new": true,
+     "fetched_at": "2026-11-21T10:33:26.860320+00:00Z",
+     "http": "200"
+    },
+    "reassessment_cycle_years": {
+     "status": "confirmed",
+     "source_url": "https://www.law.cornell.edu/regulations/oklahoma/OAC-710-10-1-3",
+     "quote": "County assessors should continue to determine fair cash value on an annual basis.",
+     "note": "OAC 710:10-1-3(b).",
+     "fetched_at": "2026-11-21T10:33:26.860320+00:00Z",
+     "http": "200"
+    },
+    "homestead_exemption_rule": {
+     "status": "confirmed",
+     "source_url": "https://www.oklegislature.gov/cf_pdf/2023-24%20SUPPORT%20DOCUMENTS/impact%20statements/fiscal/Senate/SB2007%20INT%20FI.PDF",
+     "quote": "shall be exempted from all forms of ad valorem taxation to the extent of $1,000 of the assessed valuation",
+     "note": "68 O.S. § 2889 as quoted in the Legislature's fiscal impact statement for SB 2007 (2024). An additional $1,000 applies below an income limit (OAC 710:10-1-4).",
+     "fetched_at": "2026-11-21T10:33:14.498315+00:00Z",
+     "http": "200"
+    }
+   }
+  },
   "OR": {
    "host": "www.oregonlegislature.gov (Oregon Revised Statutes chapter 308, official text)",
    "status_before": "partially_verified",
@@ -904,6 +1110,135 @@
     }
    }
   },
+  "PA": {
+   "host": "www.palegis.us (Pennsylvania General Assembly, Consolidated Statutes Title 53)",
+   "status_before": "unverified",
+   "status_after": "unverified",
+   "fields": {
+    "res_assessment_ratio": {
+     "status": "corrected_to_unknown",
+     "source_url": "https://www.palegis.us/statutes/consolidated/view-statute?txtType=HTM&ttl=53&div=0&chapter=88&section=42&subsctn=0&iFrame=true",
+     "quote": "The county assessment office shall assess real property at a value based upon an established predetermined ratio which may not exceed 100% of actual value. The ratio shall be established and determined by the board of county commissioners by ordinance.",
+     "note": "Set to unknown. Each county sets its own ratio (up to 100%), and may apply it to a base-year value rather than current market value (53 Pa.C.S. § 8842(a)); one statewide 100% does not describe that.",
+     "old": 1,
+     "fetched_at": "2026-11-21T10:34:13.024087+00:00Z",
+     "http": "200"
+    },
+    "comm_assessment_ratio": {
+     "status": "corrected_to_unknown",
+     "source_url": "https://www.palegis.us/statutes/consolidated/view-statute?txtType=HTM&ttl=53&div=0&chapter=88&section=42&subsctn=0&iFrame=true",
+     "quote": "The county assessment office shall assess real property at a value based upon an established predetermined ratio which may not exceed 100% of actual value.",
+     "note": "Set to unknown, as for residential.",
+     "old": 1,
+     "fetched_at": "2026-11-21T10:34:13.024087+00:00Z",
+     "http": "200"
+    },
+    "annual_assessment_cap": {
+     "status": "not_confirmed",
+     "source_url": "https://www.palegis.us/statutes/consolidated/view-statute?txtType=HTM&ttl=53&div=0&chapter=88&section=42&subsctn=0&iFrame=true",
+     "quote": "In arriving at actual value, the county may utilize the current market value or it may adopt a base-year market value.",
+     "note": "Stored as null (no cap). In base-year counties values do not follow the market at all between reassessments, which the model's 'no cap' does not describe; not confirmed.",
+     "fetched_at": "2026-11-21T10:34:13.024087+00:00Z",
+     "http": "200"
+    },
+    "uncaps_on_sale": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "Depends on the cap, which is not confirmed."
+    },
+    "reassessment_cycle_years": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "No fetched section sets a reassessment cycle; the stored 5 years has no source."
+    },
+    "homestead_exemption_rule": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "Stored as 'none'; Pennsylvania's homestead provisions were not read this session."
+    }
+   }
+  },
+  "PR": {
+   "host": "none with the rules: portal.crimpr.net (CRIM) answered but its home page has no assessment rules; bvirtualogp.pr.gov (official law library, Ley 107-2020 Código Municipal) did not answer; law.justia.com returns 403",
+   "status_before": "unverified",
+   "status_after": "could_not_check",
+   "fields": {
+    "res_assessment_ratio": {
+     "status": "could_not_check",
+     "quote": "",
+     "note": "The Código Municipal could not be fetched."
+    },
+    "annual_assessment_cap": {
+     "status": "could_not_check",
+     "quote": "",
+     "note": "Could not be fetched."
+    },
+    "uncaps_on_sale": {
+     "status": "could_not_check",
+     "quote": "",
+     "note": "Could not be fetched."
+    },
+    "reassessment_cycle_years": {
+     "status": "could_not_check",
+     "quote": "",
+     "note": "Could not be fetched."
+    },
+    "homestead_exemption_rule": {
+     "status": "could_not_check",
+     "quote": "",
+     "note": "Could not be fetched from an official page. Search results (not fetched pages) described a $15,000 main-residence exemption; it is not used as evidence."
+    }
+   }
+  },
+  "TN": {
+   "host": "comptroller.tn.gov (Tennessee Comptroller of the Treasury, Division of Property Assessments)",
+   "status_before": "unverified",
+   "status_after": "partially_verified",
+   "fields": {
+    "res_assessment_ratio": {
+     "status": "confirmed",
+     "source_url": "https://comptroller.tn.gov/office-functions/pa/property-taxes/how-to-figure-your-tax-bill.html",
+     "quote": "The Assessment Ratio for the different classes of property is established by state law (residential and farm @ 25% of appraised value, commercial/industrial @ 40% of appraised value).",
+     "note": "",
+     "fetched_at": "2026-11-21T10:34:39.832601+00:00Z",
+     "http": "200"
+    },
+    "comm_assessment_ratio": {
+     "status": "confirmed",
+     "source_url": "https://comptroller.tn.gov/office-functions/pa/property-taxes/how-to-figure-your-tax-bill.html",
+     "quote": "The Assessment Ratio for the different classes of property is established by state law (residential and farm @ 25% of appraised value, commercial/industrial @ 40% of appraised value).",
+     "note": "",
+     "fetched_at": "2026-11-21T10:34:39.832601+00:00Z",
+     "http": "200"
+    },
+    "annual_assessment_cap": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "No fetched Comptroller page states whether yearly assessment increases are limited."
+    },
+    "uncaps_on_sale": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "Depends on the cap, which is not confirmed."
+    },
+    "reassessment_cycle_years": {
+     "status": "not_confirmed",
+     "source_url": "https://comptroller.tn.gov/office-functions/pa/property-taxes/understanding-tennessee-property-assessments.html",
+     "quote": "Tennessee law requires every county to undergo a countywide revaluation of all real property on a 4-, 5-, or 6-year reappraisal cycle.",
+     "note": "The cycle is 4, 5 or 6 years depending on the county, so the stored single value (4) is right only for some counties; not confirmed as a statewide figure.",
+     "fetched_at": "2026-11-21T10:34:39.513739+00:00Z",
+     "http": "200"
+    },
+    "homestead_exemption_rule": {
+     "status": "confirmed",
+     "source_url": "https://comptroller.tn.gov/office-functions/pa/property-taxes/property-tax-programs.html",
+     "quote": "Tennessee state law provides for property tax relief for low-income elderly and disabled homeowners as well as disabled veteran homeowners or their surviving spouses.",
+     "note": "'none' is right for a homeowner outside these groups; the relief and freeze programs listed are limited to low-income elderly, disabled and disabled-veteran owners.",
+     "fetched_at": "2026-11-21T10:34:40.420864+00:00Z",
+     "http": "200"
+    }
+   }
+  },
   "TX": {
    "host": "comptroller.texas.gov (Texas Comptroller) and texas.public.law (secondary mirror of the Tax Code; statutes.capitol.texas.gov returned only its menu); backfill of per-field quotes for a profile already marked verified",
    "status_before": "verified",
@@ -924,6 +1259,54 @@
      "note": "Tax Code § 23.23(a)(2), residence homesteads only, via the texas.public.law mirror (secondary; the official statutes site returned only its menu to this machine).",
      "fetched_at": "2026-11-21T10:26:08.325332+00:00Z",
      "http": "200"
+    }
+   }
+  },
+  "VT": {
+   "host": "legislature.vermont.gov (Vermont Statutes Online) and tax.vermont.gov (Department of Taxes, Property Valuation and Review)",
+   "status_before": "unverified",
+   "status_after": "partially_verified",
+   "fields": {
+    "res_assessment_ratio": {
+     "status": "confirmed",
+     "source_url": "https://legislature.vermont.gov/statutes/section/32/121/03481",
+     "quote": "and with respect to all other property, except for owner-occupied housing identified in subdivision (C) of this subdivision (1), the estimated fair market value.",
+     "note": "32 V.S.A. § 3481(1)(A): appraisal value is estimated fair market value (100%); exceptions are use-value land and housing under a subsidy covenant.",
+     "fetched_at": "2026-11-21T10:34:56.781547+00:00Z",
+     "http": "200"
+    },
+    "comm_assessment_ratio": {
+     "status": "confirmed",
+     "source_url": "https://legislature.vermont.gov/statutes/section/32/121/03481",
+     "quote": "and with respect to all other property, except for owner-occupied housing identified in subdivision (C) of this subdivision (1), the estimated fair market value.",
+     "note": "",
+     "fetched_at": "2026-11-21T10:34:56.781547+00:00Z",
+     "http": "200"
+    },
+    "annual_assessment_cap": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "No fetched section states whether yearly increases are limited."
+    },
+    "uncaps_on_sale": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "Depends on the cap, which is not confirmed."
+    },
+    "reassessment_cycle_years": {
+     "status": "corrected",
+     "source_url": "https://tax.vermont.gov/municipal-officials/listers-and-assessors/reappraisals",
+     "quote": "Vermont towns are required to reappraise every six years as of January 2025, unless a longer period of time is approved by the Director of Property Valuation and Review (PVR).",
+     "note": "Corrected from 3 years, which has no source.",
+     "old": 3,
+     "new": 6,
+     "fetched_at": "2026-11-21T10:35:35.926040+00:00Z",
+     "http": "200"
+    },
+    "homestead_exemption_rule": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "Stored as 'none'; Vermont's homestead provisions were not read this session."
     }
    }
   },
@@ -955,6 +1338,54 @@
      "note": "Moot: there is no assessed-value cap. The model ignores this field when the cap is null.",
      "fetched_at": "2026-11-21T10:26:25.164630+00:00Z",
      "http": "200"
+    }
+   }
+  },
+  "WI": {
+   "host": "www.revenue.wi.gov (Wisconsin Department of Revenue, 2026 Guide for Property Owners, PB-060 rev. 1-26); docs.legis.wisconsin.gov did not answer",
+   "status_before": "unverified",
+   "status_after": "partially_verified",
+   "fields": {
+    "res_assessment_ratio": {
+     "status": "confirmed",
+     "source_url": "https://www.revenue.wi.gov/DOR%20Publications/pb060.pdf",
+     "quote": "Under state law, all non-agricultural assessments must be based on the property’s market value as of January 1.",
+     "note": "The legal standard is 100% of market value; a municipality's actual level may drift and must be within 10% of full value at least once every five years.",
+     "fetched_at": "2026-11-21T10:36:34.427379+00:00Z",
+     "http": "200"
+    },
+    "comm_assessment_ratio": {
+     "status": "confirmed",
+     "source_url": "https://www.revenue.wi.gov/DOR%20Publications/pb060.pdf",
+     "quote": "Under state law, all non-agricultural assessments must be based on the property’s market value as of January 1.",
+     "note": "",
+     "fetched_at": "2026-11-21T10:36:34.427379+00:00Z",
+     "http": "200"
+    },
+    "annual_assessment_cap": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "No fetched page states whether yearly increases are limited."
+    },
+    "uncaps_on_sale": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "Depends on the cap, which is not confirmed."
+    },
+    "reassessment_cycle_years": {
+     "status": "corrected",
+     "source_url": "https://www.revenue.wi.gov/DOR%20Publications/pb060.pdf",
+     "quote": "Under state law (sec. 70.05(5)(b), Wis. Stats.), each municipality must assess all major classes of property within 10% of full value in the same year, at least once within a five-year period.",
+     "note": "Corrected from 1 (yearly). The Department says 'State law recognizes every municipality cannot be assessed at market value each year'; the requirement is to be within 10% of full value at least once in five years.",
+     "old": 1,
+     "new": 5,
+     "fetched_at": "2026-11-21T10:36:34.427379+00:00Z",
+     "http": "200"
+    },
+    "homestead_exemption_rule": {
+     "status": "not_confirmed",
+     "quote": "",
+     "note": "Stored as 'none'. The Department's guide lists a 'Homestead tax credit' under assistance with property taxes, which is a credit rather than a reduction in assessed value; its terms were not read, so not confirmed."
     }
    }
   }

@@ -67,6 +67,13 @@ describe("state finance profiles", () => {
     expect(P.ME.homestead_exemption_rule).toEqual({ type: "flat_market", amount_or_pct: 25000 }); // just value
     expect(P.NJ.res_assessment_ratio).toBe(1); // all 21 counties chose 100% (Division of Taxation)
     expect(P.NJ.reassessment_cycle_years).toBeNull(); // no fixed statewide cycle
+    expect(P.NY.res_assessment_ratio).toBeNull(); // RPTL: uniform percentage, not necessarily 100%
+    expect(P.PA.res_assessment_ratio).toBeNull(); // 53 Pa.C.S. 8842: county predetermined ratio
+    expect(P.OK.uncaps_on_sale).toBe(true); // OAC 710:10-1-3: cap does not apply when title transfers
+    expect(P.VT.reassessment_cycle_years).toBe(6); // Department of Taxes: every six years from Jan 2025
+    expect(P.WI.reassessment_cycle_years).toBe(5); // s. 70.05(5)(b): within 10% once every five years
+    expect(P.IL.reassessment_cycle_years).toBe(4); // PIO-16: four years outside Cook County
+    expect(P.IL.homestead_exemption_rule.amount_or_pct).toBe(6000); // 35 ILCS 200/15-175, other counties
   });
 
   it("a calculator field counts as confirmed only when it is not listed as unverified", () => {
