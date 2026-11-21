@@ -10818,7 +10818,7 @@ function switchCounty(c, wantBgId) {
           l.bindTooltip(() => {
             const k = $("#metric").value;
             const m = METRICS[k];
-            const mv = m ? m.unit(m.f(p)) : "";
+            const mv0 = m ? m.f(p) : null, mv = m ? (mv0 == null ? "not scored" : m.unit(mv0)) : "";   // a block group with no best bet has no value: the tooltip threw, and a click there selected nothing
             const catName = p.t && D.catalog[p.t] ? D.catalog[p.t].name : p.t;
             return `<b>${esc(p.n)}</b> · ${esc(p.c)}<br>${m ? m.label.split("(")[0] + ": " + mv + "<br>" : ""}${p.t && p.v >= 1 ? "Best bet: " + esc(catName) + " (" + fvpd(p.v) + " / $1)" : "Nothing returns $1 per $1"}`;
           }, { sticky: true });

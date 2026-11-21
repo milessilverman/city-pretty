@@ -1169,3 +1169,13 @@ engine ran on the real point with zoning R-1 supplied by the script:
 | VT, Montpelier (44.2594, -72.5753), FEMA Zone AE | no laws (flood flag blocked everything) | `vt_act47` applies (the Vermont text lists no exclusion) |
 | MA, Boston Seaport (42.3519, -71.044), FEMA Zone AE | no laws | `ma_adu_40a3` applies (no exclusion in the text) |
 | ME, Portland (43.6615, -70.2553), FEMA Zone X | `me_ld2003` applies | not determined: the law excludes a Lewiston or Auburn watershed lot, a coastal barrier, a coastal sand dune system and Title 12 chapter 423-A land (each where the text says), and the page has not checked these |
+
+
+### Correction: the 18 Nov "180th meridian" fix was broken and incomplete (found and fixed 21 Nov)
+Commit 835f341 (18 Nov) said the pipeline and page handled Aleutians West. Not true: (1) `osm_extract.py` referred to a variable that no longer
+existed (`BOX`) and stopped with a NameError on the first node of every county that clips an extract, so no county could have been rebuilt from
+it (no published file was affected; the Maryland work fixed it on the base 19 Nov); (2) the page change covered only the street grid; selecting a
+block group by point, fitting the map and service lookups still assumed one longitude range; (3) the boxes cut at 180 were never run, and an
+ArcGIS envelope ending at exactly 180 returns features far outside it. All fixed and tested 21 Nov (`docs/audit/alaska-bundles.md`, last
+section); the county file is built. Also found and fixed: the map tooltip of a block group with no best bet threw an error, which made a click on
+it select nothing (any county). The 17 Nov entry above that said 29 of 30 Alaska counties are built is now 30 of 30.
