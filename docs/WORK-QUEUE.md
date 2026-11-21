@@ -84,7 +84,7 @@ audit doc the same day.
   **Open from this batch:** (1) ~~Montana's 52 counties not built~~ **done 21 Nov (second session)**: all 52 built,
   538 block groups, 592,477 people, served from R2 only; Census 948 of 948 values equal; OSM ID for ID Broadwater
   2,408 = 2,408 roads (Blaine's 16 box-only roads all in Canada); live from R2 Cascade and Carbon, 6 points, all 10
-  checks pass; R2 1,380,323,467 -> 1,408,044,502 bytes (1,741 objects); end-to-end suite not run for Montana (time). (2) Colorado's 53 are clipped from openstreetmap.fr Colorado sub-region files (the
+  checks pass; R2 1,380,323,467 -> 1,408,044,502 bytes (1,741 objects); end-to-end 87 of 87 passed after the Montana commits. (2) Colorado's 53 are clipped from openstreetmap.fr Colorado sub-region files (the
   New York edge problem); cut Colorado from us-west and build them. (3) `scripts/r2_sync_counties.py` uploads on any
   unrecognised argument (e.g. `--help`); it should refuse unknown arguments (fixed 21 Nov: it now exits with a usage message and uploads nothing). (4) Left (registry count, Puerto Rico,
   LA and Orange left out): 2,096 counties with no data file, 2,093 under 100,000 people (43,754 block groups,

@@ -481,8 +481,8 @@ The method is the Northeast batch's (`small-counties-northeast.md`), unchanged.
   +0.005 GB, projected 1.386 GB", "17 files, +0.009 GB, 1.394 GB", "27 files, +0.014 GB, 1.408 GB"; after
   **1,408,044,502 bytes** (1.408 GB, 1,741 objects): 27,721,035 bytes added (the 52 data files, 27,707,927, plus the
   larger `manifest.json`). 1.408 GB of the 8 GB ceiling and the 10 GB allowance.
-- Tests: `npm test` 1,280 of 1,280 and `npm run typecheck` clean before each of the three commits. **The end-to-end
-  suite was not run for Montana** (about 8 minutes; not enough time before the 16:00 UTC deadline).
+- Tests: `npm test` 1,280 of 1,280 and `npm run typecheck` clean before each of the three commits. `PW_PORT=9360 npm run
+  test:e2e -- --trace off` after the last Montana commit: 87 of 87 passed (7.4 min).
 
 ## Found on the way
 
