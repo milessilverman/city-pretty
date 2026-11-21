@@ -423,3 +423,11 @@ The method is the Northeast batch's (`small-counties-northeast.md`), unchanged.
 - Registry count after this batch (Puerto Rico, Los Angeles and Orange left out): **2,096 counties with no data
   file**, 2,093 under 100,000 people (43,754 block groups, 51,105,486 people by ACS 2020-24): the Northeast batch's
   2,282 and 2,279 less these 186.
+
+## Tests
+
+- Before every state's commit: `npm test` (1,211 tests before Utah, 1,280 after: the suite adds per-county tests for
+  crash files) and `npm run typecheck` clean.
+- `PW_PORT=9331 npm run test:e2e -- --trace off` after the Idaho commit (all eight states in): 87 of 87 passed (7.8 min).
+- Two test-facing data changes, both stated in their commits: `crashCountsInvariant.test.ts` pins (Utah) and the two
+  corridor `county_on_page` flags. No test was skipped or loosened.
