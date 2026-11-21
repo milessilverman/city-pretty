@@ -2,7 +2,7 @@
 // county's block groups must add up to the number of crashes that were placed (scripts/build_crash_counts_ca.py for
 // California's CCRS counties, scripts/build_state_crash_counts.py for San Francisco and every county outside California).
 // A count built under the older rule (a boundary crash counted in full in each bordering block group) fails this test.
-// California was rebuilt 19 Nov 2026, the 175 files outside California (states 08, 17, 23, 42, 47, 49, 51) 21 Nov 2026; 47 more (11 Maine, 36 Pennsylvania) were built with the 1/k rule by the northeast small-counties batch, 21 Nov 2026.
+// California was rebuilt 19 Nov 2026, the 175 files outside California (states 08, 17, 23, 42, 47, 49, 51) 21 Nov 2026; 47 more (11 Maine, 36 Pennsylvania) were built with the 1/k rule by the northeast small-counties batch, 21 Nov 2026; 23 more (Utah) by the west small-counties batch, 21 Nov 2026.
 import { describe, expect, it } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
@@ -13,10 +13,10 @@ const perState = (st: string) => files.filter((f) => f.startsWith(st)).length;
 
 describe("crash counts: block groups add up to the located crashes (1/k rule), every county", () => {
   it("has all 58 California counties", () => expect(perState("06")).toBe(58));
-  it("has the 222 counties outside California that have a state or city crash source", () => {
-    const want: Record<string, number> = { "08": 1, "17": 20, "23": 16, "42": 67, "47": 95, "49": 6, "51": 17 };
+  it("has the 245 counties outside California that have a state or city crash source", () => {
+    const want: Record<string, number> = { "08": 1, "17": 20, "23": 16, "42": 67, "47": 95, "49": 29, "51": 17 };
     for (const [st, n] of Object.entries(want)) expect(perState(st), `state ${st}`).toBe(n);
-    expect(files.length).toBe(58 + 222);
+    expect(files.length).toBe(58 + 245);
   });
   for (const f of files) {
     it(`${f.slice(0, 5)} uses the 1/k rule and its block-group sums equal the located crashes`, () => {

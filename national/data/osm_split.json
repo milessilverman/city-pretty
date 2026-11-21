@@ -16,12 +16,12 @@
   "timestamp": "2026-11-07T00:59:21Z"
  },
  "AZ": {
-  "bytes": 341458016,
-  "made": "2026-11-07",
+  "bytes": 342605831,
+  "made": "2026-11-21",
   "method": "osmium extract -s smart, union of county boxes + 0.05 deg (osm_split.py)",
   "source": "https://download.openstreetmap.fr/extracts/north-america/us-west-latest.osm.pbf",
   "split": "us-west/arizona",
-  "timestamp": "2026-11-07T01:00:22Z"
+  "timestamp": "2026-11-21T01:28:06Z"
  },
  "CT": {
   "bytes": 268588355,
@@ -56,12 +56,12 @@
   "timestamp": "2026-11-07T00:47:05Z"
  },
  "ID": {
-  "bytes": 156284768,
-  "made": "2026-11-07",
+  "bytes": 156719000,
+  "made": "2026-11-21",
   "method": "osmium extract -s smart, union of county boxes + 0.05 deg (osm_split.py)",
   "source": "https://download.openstreetmap.fr/extracts/north-america/us-west-latest.osm.pbf",
   "split": "us-west/idaho",
-  "timestamp": "2026-11-07T01:00:22Z"
+  "timestamp": "2026-11-21T01:28:06Z"
  },
  "IN": {
   "bytes": 239717148,
@@ -144,12 +144,12 @@
   "timestamp": "2026-11-07T00:59:21Z"
  },
  "MT": {
-  "bytes": 117897540,
-  "made": "2026-11-07",
+  "bytes": 118300541,
+  "made": "2026-11-21",
   "method": "osmium extract -s smart, union of county boxes + 0.05 deg (osm_split.py)",
   "source": "https://download.openstreetmap.fr/extracts/north-america/us-west-latest.osm.pbf",
   "split": "us-west/montana",
-  "timestamp": "2026-11-07T01:00:22Z"
+  "timestamp": "2026-11-21T01:28:06Z"
  },
  "ND": {
   "bytes": 137427292,
@@ -184,20 +184,20 @@
   "timestamp": "2026-11-21T01:28:06Z"
  },
  "NM": {
-  "bytes": 151661767,
-  "made": "2026-11-07",
+  "bytes": 151883455,
+  "made": "2026-11-21",
   "method": "osmium extract -s smart, union of county boxes + 0.05 deg (osm_split.py)",
   "source": "https://download.openstreetmap.fr/extracts/north-america/us-west-latest.osm.pbf",
   "split": "us-west/new-mexico",
-  "timestamp": "2026-11-07T01:00:22Z"
+  "timestamp": "2026-11-21T01:28:06Z"
  },
  "NV": {
-  "bytes": 154052559,
-  "made": "2026-11-07",
+  "bytes": 154295068,
+  "made": "2026-11-21",
   "method": "osmium extract -s smart, union of county boxes + 0.05 deg (osm_split.py)",
   "source": "https://download.openstreetmap.fr/extracts/north-america/us-west-latest.osm.pbf",
   "split": "us-west/nevada",
-  "timestamp": "2026-11-07T01:00:22Z"
+  "timestamp": "2026-11-21T01:28:06Z"
  },
  "OH": {
   "bytes": 372953610,
@@ -216,12 +216,12 @@
   "timestamp": "2026-11-07T00:59:21Z"
  },
  "OR": {
-  "bytes": 317288824,
-  "made": "2026-11-07",
+  "bytes": 317845809,
+  "made": "2026-11-21",
   "method": "osmium extract -s smart, union of county boxes + 0.05 deg (osm_split.py)",
   "source": "https://download.openstreetmap.fr/extracts/north-america/us-west-latest.osm.pbf",
   "split": "us-west/oregon",
-  "timestamp": "2026-11-07T01:00:22Z"
+  "timestamp": "2026-11-21T01:28:06Z"
  },
  "PA": {
   "bytes": 432186615,
@@ -264,12 +264,12 @@
   "timestamp": "2026-11-17T00:54:33Z"
  },
  "UT": {
-  "bytes": 191760237,
-  "made": "2026-11-07",
+  "bytes": 192496532,
+  "made": "2026-11-21",
   "method": "osmium extract -s smart, union of county boxes + 0.05 deg (osm_split.py)",
   "source": "https://download.openstreetmap.fr/extracts/north-america/us-west-latest.osm.pbf",
   "split": "us-west/utah",
-  "timestamp": "2026-11-07T01:00:22Z"
+  "timestamp": "2026-11-21T01:28:06Z"
  },
  "VT": {
   "bytes": 62061510,
@@ -280,12 +280,12 @@
   "timestamp": "2026-11-21T01:28:06Z"
  },
  "WA": {
-  "bytes": 440382696,
-  "made": "2026-11-07",
+  "bytes": 441217212,
+  "made": "2026-11-21",
   "method": "osmium extract -s smart, union of county boxes + 0.05 deg (osm_split.py)",
   "source": "https://download.openstreetmap.fr/extracts/north-america/us-west-latest.osm.pbf",
   "split": "us-west/washington",
-  "timestamp": "2026-11-07T01:00:22Z"
+  "timestamp": "2026-11-21T01:28:06Z"
  },
  "WI": {
   "bytes": 351493253,
@@ -304,11 +304,11 @@
   "timestamp": "2026-11-07T00:59:21Z"
  },
  "WY": {
-  "bytes": 105479376,
-  "made": "2026-11-07",
+  "bytes": 106019479,
+  "made": "2026-11-21",
   "method": "osmium extract -s smart, union of county boxes + 0.05 deg (osm_split.py)",
   "source": "https://download.openstreetmap.fr/extracts/north-america/us-west-latest.osm.pbf",
   "split": "us-west/wyoming",
-  "timestamp": "2026-11-07T01:00:22Z"
+  "timestamp": "2026-11-21T01:28:06Z"
  }
 }
