@@ -2476,6 +2476,55 @@
    "rent_tract": 48,
    "hv_tract": 42
   },
+  "30001": {
+   "hv_own": 10,
+   "rent_own": 5,
+   "rent_tract": 5
+  },
+  "30003": {
+   "hv_own": 11,
+   "rent_tract": 3,
+   "rent_own": 8
+  },
+  "30005": {
+   "hv_own": 6,
+   "rent_own": 6
+  },
+  "30007": {
+   "hv_own": 5,
+   "rent_own": 2
+  },
+  "30009": {
+   "hv_own": 12,
+   "rent_own": 10,
+   "rent_tract": 2
+  },
+  "30011": {
+   "hv_own": 2,
+   "rent_own": 2
+  },
+  "30013": {
+   "hv_own": 70,
+   "rent_own": 59,
+   "rent_tract": 16,
+   "hv_tract": 1
+  },
+  "30015": {
+   "hv_own": 6,
+   "rent_own": 5,
+   "rent_tract": 1
+  },
+  "30017": {
+   "hv_own": 13,
+   "rent_own": 13,
+   "hv_tract": 1,
+   "rent_tract": 1
+  },
+  "30019": {
+   "hv_own": 2,
+   "rent_own": 1,
+   "rent_tract": 1
+  },
   "30029": {
    "hv_own": 81,
    "rent_own": 60,
