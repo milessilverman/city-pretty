@@ -1,8 +1,8 @@
 # Small counties: the West (21 Nov 2026), served from R2 only
 
 **Result: 186 of the 238 counties built, checked and on the page, served from R2 only; none withheld for a failed
-check. Montana's 52 were not built (time: the batch had a hard stop at 15:40 UTC; Montana's state file is cut and
-waiting, see "What is left").** Each state was uploaded, checked live and committed on its own.
+check. Montana's 52 were not built in the first session (time) and were built, checked and uploaded by a second session
+the same afternoon (see "Montana"): all 238 are now on the page.** Each state was uploaded, checked live and committed on its own.
 
 | State | Counties built / missing | People (ACS 2020-24) | Block groups | Data files (bytes) | Tiers |
 |---|---|---|---|---|---|
@@ -14,8 +14,8 @@ waiting, see "What is left").** Each state was uploaded, checked live and commit
 | WA | 26 / 26 | 1,065,186 | 843 | 33,591,841 | 25 C, 1 D |
 | NM | 28 / 28 | 791,399 | 682 | 20,898,297 | 17 C, 11 D |
 | ID | 40 / 40 | 853,018 | 644 | 25,734,441 | 16 C, 24 D |
-| MT | 0 / 52 | | | | not built (time) |
-| **All** | **186 / 238** | **5,206,482** | **4,115** | **159,344,749** | 108 C, 78 D |
+| MT | 52 / 52 | 592,477 | 538 | 27,707,927 | 15 C, 37 D |
+| **All** | **238 / 238** | **5,798,959** | **4,653** | **187,052,676** | 123 C, 115 D |
 
 Summary of the checks (details per state below):
 
@@ -395,6 +395,95 @@ The method is the Northeast batch's (`small-counties-northeast.md`), unchanged.
   of the 6 block-group interior points, so the house rows are not checkable; neighborhood, canopy, canopy goal, crash
   text, state laws and console pass at all 6. Data files from the r2.dev address (HEAD 200, GET 200).
 
+## Montana (52 of 52 built, none withheld; second session, 21 Nov 15:14-15:47 UTC)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Beaverhead (30001) | 9,713 | 10 | 1,442,690 | C | 7 |
+| Big Horn (30003) | 12,891 | 11 | 921,460 | D | 0 |
+| Blaine (30005) | 6,949 | 6 | 364,231 | D | 0 |
+| Broadwater (30007) | 7,668 | 5 | 399,740 | D | 0 |
+| Carbon (30009) | 11,116 | 12 | 540,244 | D | 0 |
+| Carter (30011) | 1,308 | 2 | 171,494 | D | 0 |
+| Cascade (30013) | 84,606 | 75 | 531,107 | C | 65 |
+| Chouteau (30015) | 5,906 | 6 | 533,070 | C | 0 |
+| Custer (30017) | 11,961 | 14 | 250,989 | D | 13 |
+| Daniels (30019) | 1,494 | 2 | 62,860 | D | 0 |
+| Dawson (30021) | 8,827 | 10 | 170,465 | D | 8 |
+| Deer Lodge (30023) | 9,597 | 11 | 349,451 | D | 8 |
+| Fallon (30025) | 2,760 | 3 | 137,244 | D | 0 |
+| Fergus (30027) | 11,687 | 10 | 646,425 | D | 8 |
+| Garfield (30033) | 1,094 | 1 | 392,402 | D | 0 |
+| Glacier (30035) | 13,637 | 15 | 1,774,453 | C | 0 |
+| Golden Valley (30037) | 899 | 1 | 298,679 | D | 0 |
+| Granite (30039) | 3,462 | 3 | 551,031 | D | 0 |
+| Hill (30041) | 16,155 | 14 | 257,117 | C | 12 |
+| Jefferson (30043) | 12,774 | 9 | 529,332 | D | 0 |
+| Judith Basin (30045) | 2,071 | 2 | 216,465 | D | 0 |
+| Lake (30047) | 32,561 | 27 | 707,821 | D | 7 |
+| Lewis and Clark (30049) | 73,464 | 54 | 1,252,903 | D | 46 |
+| Liberty (30051) | 1,952 | 2 | 86,754 | D | 0 |
+| Lincoln (30053) | 21,175 | 20 | 1,201,818 | C | 8 |
+| McCone (30055) | 1,670 | 2 | 198,052 | C | 0 |
+| Madison (30057) | 9,223 | 8 | 844,544 | C | 0 |
+| Meagher (30059) | 2,007 | 3 | 364,732 | D | 0 |
+| Mineral (30061) | 4,959 | 5 | 666,570 | D | 0 |
+| Musselshell (30065) | 5,152 | 5 | 247,932 | D | 0 |
+| Park (30067) | 17,710 | 18 | 1,156,820 | C | 10 |
+| Petroleum (30069) | 447 | 1 | 296,743 | D | 0 |
+| Phillips (30071) | 4,221 | 4 | 454,663 | C | 0 |
+| Pondera (30073) | 6,035 | 7 | 981,325 | C | 0 |
+| Powder River (30075) | 1,815 | 2 | 257,429 | D | 0 |
+| Powell (30077) | 7,053 | 8 | 845,969 | D | 0 |
+| Prairie (30079) | 1,250 | 1 | 166,744 | D | 0 |
+| Ravalli (30081) | 46,727 | 32 | 1,056,911 | D | 8 |
+| Richland (30083) | 11,235 | 9 | 164,617 | D | 7 |
+| Roosevelt (30085) | 10,526 | 10 | 183,704 | C | 0 |
+| Rosebud (30087) | 8,165 | 8 | 847,506 | D | 0 |
+| Sanders (30089) | 13,285 | 11 | 1,463,963 | C | 0 |
+| Sheridan (30091) | 3,669 | 4 | 115,035 | D | 0 |
+| Silver Bow (30093) | 35,785 | 37 | 389,484 | D | 36 |
+| Stillwater (30095) | 9,182 | 7 | 795,744 | D | 0 |
+| Sweet Grass (30097) | 3,720 | 5 | 778,258 | D | 0 |
+| Teton (30099) | 6,353 | 6 | 456,158 | D | 0 |
+| Toole (30101) | 5,061 | 8 | 149,554 | C | 0 |
+| Treasure (30103) | 732 | 1 | 90,425 | D | 0 |
+| Valley (30105) | 7,519 | 8 | 465,506 | C | 0 |
+| Wheatland (30107) | 2,056 | 2 | 401,669 | D | 0 |
+| Wibaux (30109) | 1,193 | 1 | 77,625 | D | 0 |
+| **52 counties** | **592,477** | **538** | **27,707,927** | 15 C, 37 D | 243 |
+
+- OpenStreetMap: the Montana cut left by the first session (`us-west__montana-latest.osm.pbf`, 118,300,541 bytes,
+  same us-west snapshot, 2026-11-21T01:28:06Z). Build: the same `build_one.sh` steps (fetch_oc, osm_extract,
+  metrics_oc, layers_oc, build_oc inputs/page_dec), three at a time, detached from the tool so no time limit stopped
+  it: all 52 in 26 min (15:15-15:41), fetch 12-91 s, build 50-71 s per county, no failure. Exported, checked,
+  uploaded and committed in three groups (10, 16, 26), each upload committed right after.
+- Census spot check (`scripts/census_spot_check.py`, seed 20261119, 6 block groups per county or all of them):
+  948 of 948 values equal (0% mismatch), `data/backtests/mt_census_spot_2026-11-21.json`. Tract-median flags: 52
+  counties added, no existing county changed, 0 mismatches.
+- Canopy (`build_tree_equity_2025.py mt`, release 2025-07-01): 52 new files; the 4 existing Montana files differed
+  only in their build date and were left as committed.
+- Completeness: 52 rows from a fresh `build_county_completeness.py` run (15 C, 37 D); every other row left as
+  committed.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru mirror, 504 first), `data/backtests/mt_osm_xcheck_2026-11-21.json`:
+  Broadwater (30007, interior) 2,408 = 2,408 roads, 0 = 0 bus stops (0%). Blaine (30005, on the Canadian border):
+  2,362 of 2,378 roads in the box, 0 = 0 bus stops; the 16 missing roads, looked up by ID on the same mirror, all lie
+  wholly north of 49.005 N (in Canada, which the us-west file does not hold), so 0 missing on the US side.
+- Live check from R2 (`LIVE_PORT=9350`, `data/backtests/live_check_panels_2026-11-21_mt.json`): Cascade (30013)
+  and Carbon (30009), 3 points each, all with the house panel on live parcel records (Montana Cadastral Framework):
+  all 10 checks pass at all 6 points. Data files from `pub-79001cd74c284c499559e54d4aa4f33b.r2.dev` (HEAD 200,
+  GET 200); no console errors (404s for optional files, as before).
+- Crash counts: Montana has no state crash source connected; the files say crash gaps are not scored.
+- Transit corridors: the Big Sky North Coast corridor's Glendive (30021), Helena (30049), Butte (30093) and St. Regis
+  (30061) stops are now in counties on the page; their `county_on_page` flags are set to true (only the flags changed;
+  `tests/unit/transitCorridors.test.ts` failed until they were, as it should).
+- R2 (`--usage` and the script's byte total): before 1,380,323,467 bytes (1,689 objects). Dry runs "11 files, net
+  +0.005 GB, projected 1.386 GB", "17 files, +0.009 GB, 1.394 GB", "27 files, +0.014 GB, 1.408 GB"; after
+  **1,408,044,502 bytes** (1.408 GB, 1,741 objects): 27,721,035 bytes added (the 52 data files, 27,707,927, plus the
+  larger `manifest.json`). 1.408 GB of the 8 GB ceiling and the 10 GB allowance.
+- Tests: `npm test` 1,280 of 1,280 and `npm run typecheck` clean before each of the three commits. `PW_PORT=9360 npm run
+  test:e2e -- --trace off` after the last Montana commit: 87 of 87 passed (7.4 min).
+
 ## Found on the way
 
 - **`scripts/r2_sync_counties.py` uploads on any unrecognised argument (found, not changed).** It reads only
@@ -411,7 +500,7 @@ The method is the Northeast batch's (`small-counties-northeast.md`), unchanged.
 
 ## What is left
 
-- **Montana: 52 counties**, registry `split: us-west/montana`. Its state file is cut
+- ~~Montana: 52 counties~~ **done (see "Montana")**. Was: registry `split: us-west/montana`. Its state file is cut
   (`us-west__montana-latest.osm.pbf`, 118 MB, from the same us-west snapshot, 2026-11-21T01:28:06Z; recorded in
   `national/data/osm_split.json`) and was kept in the session's scratch folder; if it is gone, download us-west
   again and run `osm_split.py us-west --states MT --per-pass 1`. At this batch's pace (Idaho: 26 counties in 15 min
