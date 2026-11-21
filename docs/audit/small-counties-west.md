@@ -71,3 +71,53 @@ The method is the Northeast batch's (`small-counties-northeast.md`), unchanged.
   the r2.dev address (HEAD 200, GET 200). Failed loads on the page: optional files (404), overpass-api.de blocked by
   CORS from this machine, three 403s, as in earlier batches.
 - R2: dry run "16 files, net +0.015 GB, projected 1.245 GB"; after 1,244,679,103 bytes (1,524 objects).
+
+## Utah (23 of 23 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Beaver (49001) | 7,273 | 6 | 192,718 | D | 0 |
+| Box Elder (49003) | 61,246 | 42 | 1,204,938 | C | 33 |
+| Carbon (49007) | 20,517 | 15 | 368,550 | C | 14 |
+| Daggett (49009) | 783 | 1 | 255,680 | D | 0 |
+| Duchesne (49013) | 20,185 | 12 | 529,837 | C | 4 |
+| Emery (49015) | 10,046 | 9 | 1,418,226 | C | 0 |
+| Garfield (49017) | 5,219 | 5 | 1,425,347 | D | 0 |
+| Grand (49019) | 9,754 | 8 | 1,334,959 | C | 8 |
+| Iron (49021) | 62,252 | 36 | 496,630 | D | 28 |
+| Juab (49023) | 12,586 | 9 | 431,252 | C | 6 |
+| Kane (49025) | 8,170 | 7 | 1,608,679 | D | 0 |
+| Millard (49027) | 13,315 | 11 | 328,181 | D | 0 |
+| Morgan (49029) | 12,802 | 6 | 673,372 | C | 0 |
+| Piute (49031) | 1,694 | 2 | 151,554 | D | 0 |
+| Rich (49033) | 2,631 | 2 | 647,971 | D | 0 |
+| San Juan (49037) | 14,483 | 11 | 2,708,872 | D | 0 |
+| Sanpete (49039) | 29,719 | 20 | 424,914 | D | 4 |
+| Sevier (49041) | 22,085 | 17 | 375,398 | D | 7 |
+| Summit (49043) | 42,970 | 36 | 1,163,853 | C | 24 |
+| Tooele (49045) | 79,347 | 39 | 402,882 | C | 34 |
+| Uintah (49047) | 37,056 | 23 | 647,022 | C | 16 |
+| Wasatch (49051) | 36,642 | 22 | 855,575 | C | 19 |
+| Wayne (49055) | 2,584 | 2 | 822,979 | D | 0 |
+| **23 counties** | **513,359** | **341** | **18,469,389** | 11 C, 12 D | 197 |
+
+- Utah cut alone: 138 s, peak osmium memory 4.10 GB, 192 MB. Build: fetch 20-130 s, build 81-108 s per county.
+- **Interrupted and re-run:** the first build queue ran as a background job with the default 30-minute limit and was
+  stopped at 12:22 while Emery, Garfield and Grand were being built (nothing had been exported for them). They were
+  built again from the start of the pipeline (the fetch step reused the downloads already in their folders, hence
+  fetch 4 s) and checked like the rest. The queue was restarted with the 2-hour limit.
+- Census spot check: AZ, NV and UT together 924 of 924 values equal (0% mismatch). Tract-median flags: 23 counties
+  added, no existing county changed, 0 mismatches.
+- **Crash counts (Utah DOT, the state source the pipeline reads: UDOT UPlan "Utah Crash Locations", layers 2019-2025):**
+  `scripts/build_state_crash_counts.py` (boundary rule, 1/k weighting) wrote `app/data/crash_counts/` for all 23
+  (341 block groups); `scripts/recompute_crash_gaps.py` then found 42 pedestrian/cyclist gaps and 66 strengths (only
+  counties with enough block groups for the 20-peer minimum get either), dropped 487 crash-based improvement rows
+  that the rebuilt counts no longer qualify and re-sized 32 (the same rule as every county with a state source).
+  `tests/unit/crashCountsInvariant.test.ts` pinned Utah at 6 files and 222 outside California; it now pins 29 and 245
+  (the 23 new files pass its 1/k sum check).
+- R2: dry run "24 files, net +0.018 GB, projected 1.263 GB"; after 1,263,154,945 bytes (1,547 objects).
+- Live check from R2 (`LIVE_PORT=9334`): Summit and Iron, 3 points each: 4 points with the house panel on live
+  parcel records pass all 10 checks; 2 points with no parcel at the point pass the 6 checks that apply. The crash
+  rows show the rebuilt 1/k counts (e.g. Summit 490439643073: 2 pedestrian/cyclist, 4.5 killed or seriously injured,
+  127.3 all, a pedestrian/cyclist gap), as `crash_counts/49043.json` and `crash_gaps/49043.json` hold. Data files
+  from the r2.dev address (HEAD 200, GET 200); no console errors.

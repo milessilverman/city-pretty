@@ -1,0 +1,362 @@
+{
+ "ran_on": "2026-11-21T12:45:41.890Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "49021": {
+   "state": "UT",
+   "points": [
+    {
+     "bg": "490211104002",
+     "lat": 37.672351,
+     "lng": -113.070716,
+     "service": "UGRC Utah Statewide Parcels + county LIR (Land Information Records) parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $271k, rent $1,167/mo, homes 222"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 15% goal; box: \"At or above its 15% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0,13.75]; comparison [0,1,0,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for UT"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Iron County · 490211104002; page \"Census area: Iron County · block group 490211104002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1144 for 49021; page \"HUD Fair Market Rent (FY2027): 1 bed $875 · 2 bed $1,144 · 3 bed $1,584/moIron County, UT. HUD's voucher benchmark (rent plus utilities), not a market asking re\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: unmapped; page \"FEMA flood zone: Not available (No effective FEMA flood map here (unmapped, not 'no risk'))(FEMA National Flood Hazard L\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 5843 ft; page \"Ground elevation: 5,843 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "490211101001",
+     "lat": 37.971228,
+     "lng": -112.867261,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $237k, rent $966/mo, homes 378"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [2,12,185.3333]; comparison [2,0.5,0.83,\"g\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for UT"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel at point"
+    },
+    {
+     "bg": "490211101003",
+     "lat": 37.852949,
+     "lng": -112.81866,
+     "service": "UGRC Utah Statewide Parcels + county LIR (Land Information Records) parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $310k, rent $952/mo, homes 624"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,1,21.3333]; comparison [0,1,0,\"s\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for UT"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Iron County · 490211101003; page \"Census area: Iron County · block group 490211101003(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1144 for 49021; page \"HUD Fair Market Rent (FY2027): 1 bed $875 · 2 bed $1,144 · 3 bed $1,584/moIron County, UT. HUD's voucher benchmark (rent plus utilities), not a market asking re\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: unmapped; page \"FEMA flood zone: Not available (No effective FEMA flood map here (unmapped, not 'no risk'))(FEMA National Flood Hazard L\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 5947 ft; page \"Ground elevation: 5,947 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9334' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9334' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_49021.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_49021.json.gz"
+   ]
+  },
+  "49043": {
+   "state": "UT",
+   "points": [
+    {
+     "bg": "490439642011",
+     "lat": 40.596302,
+     "lng": -111.18815,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $599k, rent $1,176/mo, homes 538"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0.5,1,44.5]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for UT"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel at point"
+    },
+    {
+     "bg": "490439642013",
+     "lat": 40.679783,
+     "lng": -111.350424,
+     "service": "UGRC Utah Statewide Parcels + county LIR (Land Information Records) parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $769k, rent $1,768/mo, homes 848"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1.5,5,70.8333]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for UT"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Summit County · 490439642013; page \"Census area: Summit County · block group 490439642013(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2153 for 49043; page \"HUD Fair Market Rent (FY2027): 1 bed $1,899 · 2 bed $2,153 · 3 bed $2,890/moSummit County, UT. HUD's voucher benchmark (rent plus utilities), not a market askin\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 7103 ft; page \"Ground elevation: 7,103 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "490439643073",
+     "lat": 40.709387,
+     "lng": -111.528473,
+     "service": "UGRC Utah Statewide Parcels + county LIR (Land Information Records) parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $986k, rent $3,189/mo, homes 858"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 42 pts (current release); page: 42 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 42.4 pts below its 50% goal; box: \"42.4 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [2,4.5,127.3333]; comparison [2,0.5,0.8,\"g\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for UT"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Summit County · 490439643073; page \"Census area: Summit County · block group 490439643073(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2153 for 49043; page \"HUD Fair Market Rent (FY2027): 1 bed $1,899 · 2 bed $2,153 · 3 bed $2,890/moSummit County, UT. HUD's voucher benchmark (rent plus utilities), not a market askin\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (0.2 pct annual chance flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 6431 ft; page \"Ground elevation: 6,431 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9334' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9334' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_49043.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_49043.json.gz"
+   ]
+  }
+ }
+}

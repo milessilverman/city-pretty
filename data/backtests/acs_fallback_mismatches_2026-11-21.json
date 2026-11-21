@@ -4725,11 +4725,30 @@
    "hv_tract": 14,
    "rent_tract": 67
   },
+  "49001": {
+   "hv_own": 6,
+   "rent_own": 3,
+   "rent_tract": 3
+  },
+  "49003": {
+   "hv_own": 42,
+   "rent_own": 28,
+   "rent_tract": 14
+  },
   "49005": {
    "hv_own": 72,
    "rent_own": 60,
    "rent_tract": 17,
    "hv_tract": 6
+  },
+  "49007": {
+   "hv_own": 15,
+   "rent_own": 14,
+   "rent_tract": 1
+  },
+  "49009": {
+   "hv_own": 1,
+   "rent_own": 1
   },
   "49011": {
    "hv_own": 187,
@@ -4737,11 +4756,98 @@
    "rent_tract": 70,
    "hv_tract": 3
   },
+  "49013": {
+   "hv_own": 12,
+   "rent_own": 11,
+   "rent_tract": 1
+  },
+  "49015": {
+   "hv_own": 9,
+   "rent_own": 8,
+   "rent_tract": 1
+  },
+  "49017": {
+   "hv_own": 5,
+   "rent_own": 4,
+   "rent_tract": 1
+  },
+  "49019": {
+   "hv_own": 8,
+   "rent_tract": 3,
+   "rent_own": 5
+  },
+  "49021": {
+   "hv_own": 34,
+   "rent_tract": 11,
+   "rent_own": 25,
+   "hv_tract": 2
+  },
+  "49023": {
+   "hv_own": 9,
+   "rent_own": 5,
+   "rent_tract": 4
+  },
+  "49025": {
+   "hv_own": 7,
+   "rent_own": 3,
+   "rent_tract": 4
+  },
+  "49027": {
+   "hv_own": 11,
+   "rent_own": 7,
+   "rent_tract": 4
+  },
+  "49029": {
+   "hv_own": 6,
+   "rent_tract": 4,
+   "rent_own": 2
+  },
+  "49031": {
+   "hv_own": 2,
+   "rent_own": 1,
+   "rent_tract": 1
+  },
+  "49033": {
+   "hv_own": 2,
+   "rent_tract": 1,
+   "rent_own": 1
+  },
   "49035": {
    "hv_own": 668,
    "rent_own": 493,
    "rent_tract": 192,
    "hv_tract": 35
+  },
+  "49037": {
+   "hv_own": 11,
+   "rent_own": 7,
+   "rent_tract": 4
+  },
+  "49039": {
+   "hv_own": 20,
+   "rent_own": 17,
+   "rent_tract": 3
+  },
+  "49041": {
+   "hv_own": 17,
+   "rent_own": 17
+  },
+  "49043": {
+   "hv_own": 32,
+   "rent_own": 23,
+   "rent_tract": 12,
+   "hv_tract": 4
+  },
+  "49045": {
+   "hv_own": 36,
+   "rent_own": 23,
+   "rent_tract": 11,
+   "hv_tract": 2
+  },
+  "49047": {
+   "hv_own": 23,
+   "rent_own": 16,
+   "rent_tract": 7
   },
   "49049": {
    "hv_own": 385,
@@ -4749,11 +4855,20 @@
    "rent_own": 289,
    "hv_tract": 27
   },
+  "49051": {
+   "hv_own": 21,
+   "rent_own": 10,
+   "rent_tract": 6
+  },
   "49053": {
    "hv_own": 90,
    "rent_tract": 16,
    "rent_own": 78,
    "hv_tract": 4
+  },
+  "49055": {
+   "hv_own": 2,
+   "rent_own": 2
   },
   "49057": {
    "hv_own": 161,
