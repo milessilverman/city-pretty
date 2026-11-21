@@ -121,3 +121,46 @@ The method is the Northeast batch's (`small-counties-northeast.md`), unchanged.
   rows show the rebuilt 1/k counts (e.g. Summit 490439643073: 2 pedestrian/cyclist, 4.5 killed or seriously injured,
   127.3 all, a pedestrian/cyclist gap), as `crash_counts/49043.json` and `crash_gaps/49043.json` hold. Data files
   from the r2.dev address (HEAD 200, GET 200); no console errors.
+
+## Wyoming (22 of 22 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Albany (56001) | 38,249 | 33 | 823,569 | D | 29 |
+| Big Horn (56003) | 11,828 | 9 | 461,458 | D | 0 |
+| Campbell (56005) | 47,240 | 29 | 477,963 | D | 26 |
+| Carbon (56007) | 14,463 | 16 | 842,212 | D | 9 |
+| Converse (56009) | 13,762 | 11 | 412,670 | D | 6 |
+| Crook (56011) | 7,455 | 6 | 334,602 | D | 0 |
+| Fremont (56013) | 39,533 | 33 | 1,449,502 | C | 23 |
+| Goshen (56015) | 12,605 | 12 | 212,066 | D | 8 |
+| Hot Springs (56017) | 4,620 | 4 | 254,431 | D | 0 |
+| Johnson (56019) | 8,686 | 7 | 618,054 | D | 6 |
+| Lincoln (56023) | 20,486 | 15 | 1,520,448 | C | 0 |
+| Natrona (56025) | 79,977 | 56 | 449,774 | D | 53 |
+| Niobrara (56027) | 2,368 | 2 | 219,625 | D | 0 |
+| Park (56029) | 30,449 | 23 | 1,526,809 | D | 17 |
+| Platte (56031) | 8,612 | 9 | 274,892 | D | 0 |
+| Sheridan (56033) | 32,055 | 22 | 376,484 | D | 18 |
+| Sublette (56035) | 8,838 | 7 | 859,083 | D | 0 |
+| Sweetwater (56037) | 41,542 | 34 | 611,034 | D | 32 |
+| Teton (56039) | 23,396 | 20 | 1,147,335 | C | 9 |
+| Uinta (56041) | 20,644 | 17 | 538,716 | D | 11 |
+| Washakie (56043) | 7,703 | 9 | 245,753 | D | 7 |
+| Weston (56045) | 6,826 | 5 | 291,967 | D | 0 |
+| **22 counties** | **481,337** | **379** | **13,948,447** | 3 C, 19 D | 254 |
+
+- Wyoming cut alone: 132 s, peak osmium memory 4.05 GB, 106 MB. Build: fetch 2-68 s, build 56-76 s per county (the
+  smallest state file, so the fastest builds).
+- **Built twice (my mistake, no effect on the files):** after the Utah commit I deleted build folders by taking the
+  first 44 lines of a queue file that also listed Wyoming, which removed the 20 finished and 2 running Wyoming
+  folders before they were exported (2 of the running builds then failed). All 22 were built again from scratch,
+  the first run's logs kept aside, and only the second run was exported. Since then folders are deleted by each
+  state's own list.
+- Census spot check: AZ, NV, UT and WY together 1,424 of 1,424 values equal (0% mismatch). Tract-median flags: 22
+  counties added, no existing county changed, 0 mismatches.
+- Crash counts: Wyoming has no state crash source connected.
+- Live check from R2 (`LIVE_PORT=9335`): Albany and Park, 3 points each, all with the house panel on live parcel
+  records: all 10 checks pass at all 6 points. Data files from the r2.dev address (HEAD 200, GET 200).
+- R2: the first dry run stopped on a malformed Cloudflare API reply (JSON "Extra data"; nothing was uploaded); run
+  again: "23 files, net +0.014 GB, projected 1.277 GB"; after 1,277,108,927 bytes (1,569 objects).
