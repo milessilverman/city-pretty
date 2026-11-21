@@ -1256,3 +1256,65 @@ both parcels ok on every panel, 484530010004 "expected home value $865k, rent $3
 no block group in the Travis County file holds it, and the live check would report it as a failure if one were sampled.
 Other counties' files were not searched for a stored 3500. The places that leave a top-coded rent out of a calculation
 (`m.rent < 3500` in `app/app.js`) were left as they are, so an exact 3500 is also left out there.
+
+### Correction: crash counts outside California still counted a boundary crash in full in every bordering block group (fixed 21 Nov 2026)
+
+**What was true before.** The 175 crash-count files outside California (`app/data/crash_counts/`, states 08, 17, 23,
+42, 47, 49, 51; built 16-17 Nov) were made before `scripts/build_state_crash_counts.py` had the 1/k split. A crash within
+10 m of k block groups counted in full in each, so block groups added up to more crashes than were placed. California was
+corrected on 19 Nov (entry above); the page labelled these 175 counties "older rule ... run higher than the number of
+crashes". Their comparisons ("worse than X% of similar areas") and crash-based improvement rows (`app/data/crash_gaps/`)
+used the inflated counts.
+
+**What is true now.** All 175 files rebuilt on 21 Nov 2026 with `python3 scripts/build_state_crash_counts.py <fips...>`
+(same sources, layers, queries and years as on 16-17 Nov; TIGERweb 2020 block groups). Every source answered; no county
+kept its old file. Each source returned the same records as before: crashes read and crashes placed are identical to the old
+files in all 175 counties. Each file's `_meta` now has `weighting: "1/k"`, the 1/k `rule` and `block_group_sums`.
+
+Sum over block groups of the all-crashes count, against the crashes placed in a block group (`_meta.matched`), computed
+from the old and new files:
+
+| State (source) | Counties | Placed crashes | Block-group sum before | Before / placed | Block-group sum after | Pedestrian or cyclist, sum before -> after | Killed or seriously injured, sum before -> after |
+|---|---|---|---|---|---|---|---|
+| 08 Colorado (Denver Police) | 1 | 51,561 | 84,502 | 1.64 | 51,561.0 | 3,479 -> 2,007 | 2,134 -> 1,174 |
+| 17 Illinois (IDOT) | 20 | 803,735 | 1,189,172 | 1.48 | 803,735.0 | 32,761 -> 22,103 | 28,709 -> 18,429 |
+| 23 Maine (MaineDOT) | 5 | 69,522 | 98,692 | 1.42 | 69,522.0 | 1,737 -> 1,115 | 2,089 -> 1,542 |
+| 42 Pennsylvania (PennShare) | 31 | 302,628 | 448,097 | 1.48 | 302,628.0 | 19,420 -> 11,731 | 19,528 -> 13,286 |
+| 47 Tennessee (TITAN, injury crashes) | 95 | 141,107 | 221,471 | 1.57 | 141,107.0 | 8,726 -> 5,692 | 26,994 -> 18,137 |
+| 49 Utah (UDOT) | 6 | 148,709 | 243,448 | 1.64 | 148,709.0 | 7,488 -> 4,606 | 6,683 -> 3,924 |
+| 51 Virginia (VDOT) | 17 | 209,055 | 309,516 | 1.48 | 209,055.0 | 7,551 -> 4,941 | 13,487 -> 8,912 |
+| All 175 | 175 | 1,726,317 | 2,594,898 | 1.50 | 1,726,316.9 | 81,162 -> 52,195 | 99,624 -> 65,404 |
+
+"After" sums are of the rounded per-block-group values (4 decimals), so they differ from whole numbers by rounding only
+(at most 0.03 per state). Before, the 175 counties' block groups held 50% more crashes than were placed (42% Maine to 64%
+Denver and Utah).
+
+- Invariant, every county in the repository (58 California + 175 others): the block groups' all-crashes sum equals
+  `_meta.matched` within rounding, and the three sums equal `_meta.block_group_sums`. The unit test
+  `tests/unit/caCrashInvariant.test.ts` was renamed `tests/unit/crashCountsInvariant.test.ts` and now covers every file and
+  the per-state file counts (58, 1, 20, 5, 31, 95, 6, 17). `tests/unit/stateCrashCounts.test.ts` ("the boundary rule can
+  only add crashes relative to strictly-inside counting") now allows the same 4-decimal rounding tolerance: in 38 counties
+  every placed crash is also strictly inside one block group, and in 25 of them the rounded sum fell below that whole number
+  by rounding alone (at most 0.00005 per block group).
+- `crash_gaps` recomputed for the 175 counties (`scripts/recompute_crash_gaps.py`, unchanged). Totals over the 175, from each
+  file's `_meta` before and after: gaps 4,855 -> 5,401; strengths 7,250 -> 6,642; crash rows dropped 10,451 -> 21,774; added
+  4,225 -> 661; crosswalks re-sized 1,181 -> 1,521. Illinois drops none (its pedestrian/cyclist count is a lower bound).
+  As in California, the engine's ">= 1 pedestrian/cyclist crash" thresholds now read split counts, so a block group whose only
+  crash sits on an edge shared with others (0.5, 0.33) no longer qualifies; owner to confirm that is wanted (same open
+  question as 19 Nov).
+- `scripts/build_state_crash_counts.py`: when FIPS codes are named, it now checks only those county files are on disk
+  instead of stopping because 10 unrelated R2-only Maryland county files are not on this machine (the full-list run still
+  requires every R2-only file). No R2 access was made.
+- e2e test "crash comparisons use the rebuilt counts in a California and a Pennsylvania county": Allegheny block group
+  420035153001 now has 3 pedestrian/cyclist crashes (was 4: counts [4, 2, 35] -> [3.0, 1.5, 27.6667]); the test now reads the
+  expected count from `app/data/crash_gaps/42003.json` and still checks the exact sentence on the page.
+- Seen on the real page (21 Nov, `NODE_USE_ENV_PROXY=1 LIVE_PORT=9311 LIVE_SHARD=crash1k node scripts/live_check_panels.mjs
+  23005 42003 49035`): Cumberland ME, Allegheny PA, Salt Lake UT, 3 block groups each, every panel check ok including
+  crash (the "killed or seriously injured" row equals the new file, e.g. 420034734023 shows 1.5, file [0.5, 1.5, 15], old
+  file [1, 2, 20]): `data/backtests/live_check_panels_2026-11-21_crash1k.json`. Panel text for the same 9 block groups
+  (`scripts/live_check_crash_panel_text.mjs`): where the page writes the crash sentence it shows the new count and the 1/k
+  rule (e.g. 230050010002 "120.7 crashes recorded ... 8.5 involving a pedestrian or cyclist, 2.8 with someone killed or
+  seriously injured", file [8.5, 2.8333, 120.6667], old file [14, 4, 189]); "older rule" appears on none:
+  `data/backtests/live_check_crash_panel_text_2026-11-21_crash1k.json`.
+- Checks before commit (21 Nov): `npm test` 38 files, 1,068 tests pass; `npm run typecheck` passes;
+  `PW_PORT=9310 npm run test:e2e -- --trace off` 87 passed.
