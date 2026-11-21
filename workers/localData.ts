@@ -108,9 +108,19 @@ export function transitProjectsFor(countyFips?: string, state?: string) {
   const f = fips5(countyFips);
   const st = upper(state);
   const local = (transitProjects as Rec[]).filter((r) => f && r.fips === f);
-  const inter = (intercity as Rec[]).filter((r) => st && Array.isArray(r.states) && r.states.includes(st));
-  return result("transit_pipelines.json + intercity_transit_corridors.json", "Transit projects", [...local, ...inter], [
+  // A corridor matches a county only when one of its named stops has that county's FIPS (each stop's county was
+  // looked up from Census). Corridors that merely run in the same state are returned after those, marked state_only.
+  const stopsIn = (r: Rec) => (Array.isArray(r.proposed_stations) ? r.proposed_stations : []).filter((s: Rec) => f && s && s.fips === f);
+  const inCounty: Rec[] = [];
+  const inState: Rec[] = [];
+  for (const r of intercity as Rec[]) {
+    const stops = stopsIn(r);
+    if (stops.length) inCounty.push({ ...r, county_match: "stop_in_county", stops_in_county: stops.map((s: Rec) => s.name) });
+    else if (st && Array.isArray(r.states) && r.states.includes(st)) inState.push({ ...r, county_match: f ? "state_only" : "state" });
+  }
+  return result("transit_pipelines.json + intercity_transit_corridors.json", "Transit projects", [...local, ...inCounty, ...inState], [
     "Station coordinates flagged in coordinate_basis as city centroids are not station locations.",
+    "county_match says how an intercity corridor was matched: stop_in_county (a stop the source names is in this county), state_only (it runs in the state but names no stop in this county; do not describe it as serving the county), or state (no county was given).",
   ]);
 }
 

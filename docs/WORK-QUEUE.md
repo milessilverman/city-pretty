@@ -22,6 +22,7 @@ audit doc the same day.
   fralongdistancerailstudy.org says the files are "being re-attached" and its media library holds only unrelated images),
   California High-Speed Rail's own status pages (hsr.ca.gov bot challenge), a current Texas Central status (its site shows
   posts only to 2020), and TxDOT's rail pages. So no corridor was built from the Amtrak vision or the long-distance study.
+- **Fixed 21 Nov:** the Worker's `transit_projects` tool now matches an intercity corridor to a county only when a stop the source names is in that county (`county_match: stop_in_county`); same-state corridors follow, marked `state_only` (test in `tests/unit/localData.test.ts`).
 - **Next:** when those documents arrive, add their corridors the same way (`scripts` for the Census lookups are not in the
   repository; the lookup URL is recorded on each stop). The Worker's `transitProjectsFor` still matches intercity corridors
   by state, not by county (outside this change; `workers/localData.ts`). `app/app.js` builds the advisor's
