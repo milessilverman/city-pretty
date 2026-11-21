@@ -97,6 +97,8 @@ out["LA County"] = (n, ok, both, dist.most_common(8))
 N = OK = BOTH = 0
 DIST = collections.Counter()
 trav = None
+sys.path.insert(0, __file__.rsplit("/", 1)[0] if "/" in __file__ else "."); import r2_only
+r2_only.require_local("catalog_coverage.py")   # R2-only county files must be on disk, or they would be left out
 for p in sorted(glob.glob("counties/bundle_*.json.gz")):
     FIPS = p.split("bundle_")[1][:5]
     n, ok, both, dist = tally(bundle_items(p), CAT)

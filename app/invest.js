@@ -238,7 +238,9 @@ function build(fips, B, d) {
   const pipeEval = pipes.map(p => ({ row: p, ev: eng.evaluateTransit({ name: p.title, lengthMiles: null, capitalCostUsd: null, mode: pipeMode(p) }, tCtx) }));
   const corrEval = corr.map(c => {
     const len = checkedNum(c, "route_length_miles"), cost = checkedNum(c, "estimated_capital_cost_billions");
-    return { row: c, len, cost, ev: eng.evaluateTransit({ name: c.name, lengthMiles: len.value, intercityDistanceMiles: len.value, capitalCostUsd: cost.value != null ? cost.value * 1e9 : null, mode: /high_speed/.test(c.corridor_type || "") ? "hsr" : null }, tCtx) };
+    // block groups within 1 mile of each stop city point that lies in this county (src/engines/corridorStopAreas.js)
+    const stops = window.CorridorStopAreas ? window.CorridorStopAreas.stopAreasForCounty(c, B, fips, 1) : [];
+    return { row: c, len, cost, stops, ev: eng.evaluateTransit({ name: c.name, lengthMiles: len.value, intercityDistanceMiles: len.value, capitalCostUsd: cost.value != null ? cost.value * 1e9 : null, mode: /high_speed/.test(c.corridor_type || "") ? "hsr" : null }, tCtx) };
   });
   return { fips, B, rk, ranked, clean, hood, brief, rec, pf, pipeEval, corrEval, countySites: d.sites.filter(s => s && s.countyFips === fips) };
 }
@@ -604,6 +606,19 @@ function verdictBox(ev, label, open, key, full) {
     ${det(open, key, "Reasons and what is missing", inner)}
   </div>`;
 }
+// Neighborhoods within 1 mile of a stop city's centre point (not a station site), each with a link to the map.
+function stopAreasHTML(stops, open, id) {
+  return (stops || []).map(({ stop, ok, reason, areas }) => {
+    const n = areas.length, city = esc2(stop.city);
+    const note = stop.site_note ? ` <span class="iv-muted">${esc2(stop.site_note)}</span>` : "";
+    if (!ok) return `<p class="iv-muted">${city}: no neighborhood count (${esc2(reason)}).</p>`;
+    const lead = `<b>${n}</b> ${n === 1 ? "neighborhood" : "neighborhoods"} within 1 mile of the ${city} stop city centre (the station site itself is not chosen yet)`;
+    if (!n) return `<p class="iv-stopareas">${lead}.${note}</p>`;
+    const shown = areas.slice(0, 30);
+    const list = `<ul class="iv-stoplist">${shown.map(a => `<li><button type="button" class="tool-btn" data-iv-map="${esc2(a.id)}">${esc2(a.name || "Block group " + a.id)}${a.city ? ", " + esc2(a.city) : ""}</button> <span class="iv-muted">${a.miles === 0 ? "contains the point" : a.miles + " mi away"}</span></li>`).join("")}${n > shown.length ? `<li class="iv-muted">and ${n - shown.length} more</li>` : ""}</ul>`;
+    return `<div class="iv-stopareas"><p>${lead}.${note}</p>${det(open, "sa-" + esc2(id) + "-" + esc2(stop.id), "Show these neighborhoods", list)}</div>`;
+  }).join("");
+}
 function transitCard(m, open) {
   const d = iv.data, T = E().TRANSIT_THRESHOLDS, bud = BUDGET_OK();
   const area = m.brief && m.brief.transit;
@@ -620,17 +635,19 @@ function transitCard(m, open) {
         ${row.rtp_document_url ? `<p class="iv-muted"><a href="${esc2(row.rtp_document_url)}" target="_blank" rel="noopener">Project page</a></p>` : ""}
         <p class="iv-muted">No build verdict: the project table gives no length, cost or ridership, and the density test needs a station-area density that is not on file.</p>` }, open));
   });
-  m.corrEval.forEach(({ row, ev, len, cost }) => {
+  m.corrEval.forEach(({ row, ev, len, cost, stops }) => {
     const st = (row.verification && row.verification.status) || "unverified";
     const unconfirmed = UNCHECKED.test(st);
-    const chip = "intercity corridor" + (unconfirmed ? ", not confirmed" : "");
-    if (len.value == null && cost.value == null) { offItems.push({ name: row.name, chip, why: `route length ${len.why}; capital cost ${cost.why}` }); return; }
-    corrRows.push(rowHTML({ name: row.name, chip: "intercity corridor", fig: cost.value != null ? keyFig("Capital cost", "$" + esc2(cost.value) + "B") : keyFig("Route length", esc2(len.value + " miles")), ev: `<span class="iv-chip${unconfirmed ? " iv-unconf" : ""}">${esc2(st.replace(/_/g, " "))}</span> <span class="iv-chip">${esc2(VERDICT_TXT[ev.verdict] || "Not enough data to say")}</span>`, sub: esc2(row.funding_status || "No funding status on file."), key: "tc-" + esc2(row.name),
+    const noFig = len.value == null && cost.value == null;
+    // a corridor with a stop city in this county is listed even when no length or cost is on file: where the stop is matters for the land around it
+    corrRows.push(rowHTML({ name: row.name, chip: "intercity corridor", fig: noFig ? keyFig("Route length and cost", nof("not stated in the source documents")) : cost.value != null ? keyFig("Capital cost", "$" + esc2(cost.value) + "B") : keyFig("Route length", esc2(len.value + " miles")), ev: `<span class="iv-chip${unconfirmed ? " iv-unconf" : ""}">${esc2(st.replace(/_/g, " "))}</span> <span class="iv-chip">${esc2(VERDICT_TXT[ev.verdict] || "Not enough data to say")}</span>`, sub: esc2(row.funding_status || "No funding status on file."), key: "tc-" + esc2(row.name),
       detail: `<dl class="iv-dl"><div><dt>Route length</dt><dd>${len.value != null ? esc2(len.value + " miles") : nof(len.why)}</dd></div>
         <div><dt>Capital cost</dt><dd>${cost.value != null ? "$" + esc2(cost.value) + "B" : nof(cost.why)}</dd></div></dl>
+        ${row.status_stated && row.status_stated.text ? `<p class="iv-muted">Status as stated: ${esc2(row.status_stated.text)}${row.status_stated.as_of ? ` (${esc2(row.status_stated.as_of)})` : ""}</p>` : ""}
+        ${stopAreasHTML(stops, open, row.id)}
         ${verLine(row)}
         <p class="iv-muted">${(row.official_study_url || row.source_url) ? `<a href="${esc2(row.official_study_url || row.source_url)}" target="_blank" rel="noopener">Source document</a>` : ""}</p>
-        ${verdictBox(ev, "", open, "tcv-" + esc2(row.name))}` }, open));
+        ${noFig ? `<p class="iv-muted">No build verdict: the source documents give no length or cost for this corridor.</p>` : verdictBox(ev, "", open, "tcv-" + esc2(row.name))}` }, open));
   });
   const corr = !nCorr ? `<p class="iv-empty">No local rail or bus project and no intercity corridor in the data lists ${esc2(countyShort())}.</p>`
     : !corridorOpen ? `<p class="iv-gated">${nCorr} corridor-scale ${nCorr === 1 ? "project lists" : "projects list"} ${esc2(countyShort())}. Corridor-scale plays start at about $10M; raise the budget to see ${nCorr === 1 ? "it" : "them"}.</p>`
@@ -771,6 +788,22 @@ function init() {
   if (want === "invest") setInvest(true, { keepScroll: true });
 }
 
-window.cpInvest = { render, setView: v => setInvest(v === "invest"), get state() { return iv; } };
+// The same inputs the cards use, for the advisor's no-AI answers (app/advisor-scripts.js): the engine context from
+// the loaded tables, the open lot's facts, this county's measured sites and the back-test honesty line. Builds nothing
+// new; null while the county or the tables are still loading.
+function advisorInputs() {
+  const r = ready();
+  if (r.state === "nodata") return Promise.resolve({ state: "nodata", fips: r.fips });
+  if (r.state !== "ok" || !E()) return Promise.resolve(null);
+  return loadData().then(d => {
+    const r2 = ready(); if (r2.state !== "ok") return null;
+    const ctx = { backtest: d.backtest, catalog: D.catalog, verification: d.verification, underusedSites: d.sites, sites: (typeof SITES !== "undefined") ? SITES : null, costBenchmarks: engineCosts(d.cost), valueEffects: engineEffects(d.effects),
+      laws: d.laws || undefined, unitCosts: d.unitCosts, valuationModels: d.valuationModels };
+    const sl = siteLists({ countySites: d.sites.filter(s => s && s.countyFips === r2.fips) });
+    return { state: "ok", fips: r2.fips, countyName: countyShort(), B: r2.B, ctx, pf: parcelFacts(), honest: honest(d.backtest, r2.fips, countyShort()), countySites: sl.all.map(s => Object.assign({}, s, { displayName: siteName(s) })) };
+  });
+}
+
+window.cpInvest = { render, advisorInputs, setView: v => setInvest(v === "invest"), get state() { return iv; } };
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();

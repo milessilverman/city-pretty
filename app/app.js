@@ -208,6 +208,11 @@ const CA_COUNTIES_REGISTRY = {};
  *  - A law applies only when every condition it needs is known for the parcel (zoning, population, transit
  *    distance...). A condition that cannot be checked is reported, not assumed.
  *  - Recorded zoning is required. Missing zoning never implies residential use.
+ *  - Site exclusions come from each law's own list (rec.exclusion_sources, one entry per exclusion with the statute's
+ *    wording and URL), never from a rule applied to every state. A listed condition that is present blocks that law and
+ *    the output quotes the statute. A listed condition the page has not checked (null) or an exclusion list not yet
+ *    confirmed against the statute text (rec.exclusions_review.status other than "confirmed") gives "not determined",
+ *    never "allowed". A condition the statute does not list has no effect on that law.
  */
 
 const STATUTE_USABLE_STATUSES = new Set(["verified", "partially_verified"]);
@@ -239,14 +244,11 @@ function statuteAppliesTo(rec, parcel) {
   const heavy = parcel.dist_to_heavy_rail_mi;
   const bus = parcel.dist_to_frequent_bus_or_brt_mi;
   const light = parcel.dist_to_light_rail_mi;
-  const ex = parcel.exclusions || {};
   const popAtLeast = (min) => {
     if (min == null) return true;
     if (pop == null) { missing.push("municipality population"); return false; }
     return pop >= min;
   };
-  const excludedBy = (rec.statutory_exclusions || []).some(e => ex[String(e).split(/[\s(]/)[0]]);
-  if (excludedBy) return { applies: false, missing };
   // A city ordinance (local_jurisdiction) applies only inside that city. Before 17 Nov 2026 Raleigh's and Minneapolis's
   // ordinances fell through to the generic state-wide rule below and were applied to residential lots across NC and MN.
   if (rec.local_jurisdiction) {
@@ -329,6 +331,28 @@ function statuteAppliesTo(rec, parcel) {
   }
 }
 
+// Checks one law's own exclusion list against the parcel's flags. A flag is true (present), false (checked, absent) or
+// null/undefined (not checked). Only flags the page really reads are ever true or false: fema_100yr_floodway (FEMA special
+// flood hazard area, every state), calfire_or_state_vhfhsz (very high zone, California only), historic_district_hpoz
+// (Los Angeles only).
+function statuteExclusionCheck(rec, parcel) {
+  const ex = parcel.exclusions || {};
+  const entries = Array.isArray(rec.exclusion_sources) ? rec.exclusion_sources : [];
+  const review = rec.exclusions_review || {};
+  const confirmed = review.status === "confirmed" && Array.isArray(rec.exclusion_sources);
+  // An entry with effect "limits" does not remove the law from the parcel (it narrows a route or leaves other laws in force);
+  // it is reported with the law but never blocks it or makes it "not determined".
+  const present = [], notChecked = [], limitsPresent = [], limitsNotChecked = [];
+  for (const e of entries) {
+    const v = ex[e.key], lim = e.effect === "limits";
+    if (v === true) (lim ? limitsPresent : present).push(e);
+    else if (v !== false) (lim ? limitsNotChecked : notChecked).push(e);
+  }
+  const quote = e => "\"" + e.wording + "\"" + (e.citation ? " (" + e.citation + ")" : "") +
+    (e.key === "fema_100yr_floodway" ? ". The page's flood flag is FEMA's special flood hazard area (the 100-year floodplain)" + (e.scope_note ? "; " + e.scope_note : "") : (e.scope_note ? ". " + e.scope_note : ""));
+  return { confirmed, present, notChecked, limitsPresent, limitsNotChecked, quote, review };
+}
+
 function evaluateByRightHousing(parcel, laws) {
   const ex = Object.assign({}, parcel.exclusions);
   const lawList = Array.isArray(laws) ? laws
@@ -338,6 +362,7 @@ function evaluateByRightHousing(parcel, laws) {
     state_code: parcel.state_code,
     applicable_statutes: [],
     not_confirmed: [],
+    excluded_by_statute: [],
     statutory_exclusions: ex,
     net_by_right_feasible: false,
     laws_loaded: lawList.length > 0,
@@ -347,11 +372,6 @@ function evaluateByRightHousing(parcel, laws) {
     return Object.assign(base, { base_zoning_code: null });
   }
   base.base_zoning_code = parcel.base_zoning_code;
-
-  const hasHardPhysicalExclusion =
-    ex.fema_100yr_floodway || ex.calfire_or_state_vhfhsz || ex.williamson_or_ag_preserve ||
-    ex.public_or_tribal_land;
-  if (hasHardPhysicalExclusion) return base;
 
   for (const rec of lawList) {
     if (!rec || rec.state_code !== parcel.state_code) continue;
@@ -369,6 +389,24 @@ function evaluateByRightHousing(parcel, laws) {
     }
     if (!check.applies) {
       if (check.missing.length) base.not_confirmed.push({ id: rec.id, name: label, reason: "Not on file for this parcel: " + check.missing.join(", ") + "." });
+      continue;
+    }
+    const exc = statuteExclusionCheck(rec, parcel);
+    if (exc.confirmed && exc.present.length) {
+      base.excluded_by_statute.push({
+        id: rec.id, name: label, statute_url: rec.statute_url || null,
+        exclusions: exc.present.map(e => ({ key: e.key, wording: e.wording, citation: e.citation || null, url: e.url || null, note: exc.quote(e) })),
+        detail: exc.present.map(exc.quote).join("; ") + ".",
+        reason: "Excluded by the law's own text: " + exc.present.map(exc.quote).join("; ") + ".",
+      });
+      continue;
+    }
+    if (!exc.confirmed) {
+      base.not_confirmed.push({ id: rec.id, name: label, reason: "Not determined: the list of sites this law excludes has not been confirmed against the statute text" + (exc.present.length ? " (the page found a condition that may be on it: " + exc.present.map(e => e.key).join(", ") + ")" : "") + "." });
+      continue;
+    }
+    if (exc.notChecked.length) {
+      base.not_confirmed.push({ id: rec.id, name: label, reason: "Not determined: the law excludes " + exc.notChecked.map(e => (e.label || e.key) + " (" + (e.citation || "statute text") + ")").join("; ") + ", and the page has not checked " + (exc.notChecked.length > 1 ? "these" : "this") + " for this parcel." });
       continue;
     }
     const unconfirmed = [];
@@ -392,6 +430,8 @@ function evaluateByRightHousing(parcel, laws) {
       max_parking_requirement_per_unit: statuteField(rec, "max_parking_requirement_per_unit", unconfirmed),
       affordability_mandate_pct: statuteField(rec, "affordability_mandate_pct", unconfirmed),
       tax_exemption_pct: statuteField(rec, "tax_exemption_pct", unconfirmed),
+      exclusion_limits: exc.limitsPresent.map(exc.quote),
+      exclusion_limits_not_checked: exc.limitsNotChecked.map(e => e.label || e.key),
       unconfirmed_fields: unconfirmed.concat(((rec.verification && rec.verification.unverified_fields) || []).map(String).filter(u => !unconfirmed.includes(u.split(/[\s(]/)[0]))),
     });
   }
@@ -400,7 +440,7 @@ function evaluateByRightHousing(parcel, laws) {
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { evaluateByRightHousing, statuteAppliesTo };
+  module.exports = { evaluateByRightHousing, statuteAppliesTo, statuteExclusionCheck };
 }
 
 /**
@@ -1370,8 +1410,16 @@ function auditSingleHouseParcel(input) {
   } else if ((statutoryZoning.not_confirmed || []).length) {
     const unconfirmedReasons = statutoryZoning.not_confirmed.map(nc => `${nc.name} (${nc.reason})`).join("; ");
     statutoryNotes = "Screening not confirmed for state housing laws: " + unconfirmedReasons + ". Local zoning governs.";
+  } else if ((statutoryZoning.excluded_by_statute || []).length) {
+    statutoryNotes = "Excluded by the law's own text: " + statutoryZoning.excluded_by_statute.map(x => x.name + " — " + x.detail).join(" ") + " Local zoning governs.";
   } else {
     statutoryNotes = "No state housing law in the screening engine applies to this parcel as recorded. Local zoning governs.";
+  }
+  if ((statutoryZoning.applicable_statutes || []).length) {
+    // Laws that were held back by an exclusion in their own text, or whose exclusion list could not be settled, are named too.
+    const heldBack = (statutoryZoning.excluded_by_statute || []).map(x => x.name + " — " + x.detail)
+      .concat((statutoryZoning.not_confirmed || []).filter(nc => /^Not determined/.test(nc.reason)).map(nc => nc.name + " (" + nc.reason + ")"));
+    if (heldBack.length) statutoryNotes += " Not applied: " + heldBack.join("; ");
   }
 
   // 4. Roof area (geometry model; see roof engine assumptions) and solar system size. No dollar outputs: install
@@ -4177,6 +4225,7 @@ function sharedFemaNfhlQuery(lat, lng) {
       const v = (d && d.features) ? d.features.map(f => f.attributes) : [];
       return { ok: true, v };
     } catch (e) {
+      _femaQueryCache.delete(key);   // let the next click ask FEMA again
       return { ok: false, v: [], e };
     }
   })();
@@ -5857,16 +5906,17 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
         dist_to_frequent_bus_or_brt_mi: (nearestStn && (nearestStn.type === "bus" || nearestStn.type === "brt")) ? nearestStn.distMi : null,
         exclusions: {
           historic_district_hpoz: (R && R.hpoz && R.hpoz.ok) ? ([R.hpoz, R.hcm].filter(Boolean).some(x => x && x.ok && x.v && x.v.length) || (R.hc && R.hc.ok && Array.isArray(R.hc.v) && R.hc.v.some(r => /design|landmark|register/i.test(r.Status_Code_Description || "")))) : null,
-          coastal_commission_or_sma: false,
+          // Only the three flags above are read from a source. Every other exclusion is "not checked" (null), never false.
+          coastal_commission_or_sma: null,
           fema_100yr_floodway: (R && R.fema) ? !!R.fema.sfha : null,
           calfire_or_state_vhfhsz: (R && R.fire) ? !!R.fire.vh : null,
-          airport_noise_or_runway_zone: false,
-          working_waterfront_or_port: false,
-          wekiva_or_everglades_protection_area: false,
-          williamson_or_ag_preserve: false,
-          public_or_tribal_land: false,
-          has_active_single_family_stepdown: false,
-          population_threshold_ineligible: false,
+          airport_noise_or_runway_zone: null,
+          working_waterfront_or_port: null,
+          wekiva_or_everglades_protection_area: null,
+          williamson_or_ag_preserve: null,
+          public_or_tribal_land: null,
+          has_active_single_family_stepdown: null,
+          population_threshold_ineligible: null,
         },
       });
       statutes = (statEval && statEval.applicable_statutes) || [];
@@ -5928,8 +5978,10 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
   } else if (!strategies.length) {
     if (statEval && !statEval.laws_loaded) {
       note = "State housing law records are still loading; by-right screening will update once available.";
+    } else if (statEval && statEval.excluded_by_statute && statEval.excluded_by_statute.length) {
+      note = "Excluded by the law's own text: " + statEval.excluded_by_statute.map(x => x.name + " — " + x.detail).join(" ") + " Local zoning governs.";
     } else if (statEval && statEval.not_confirmed && statEval.not_confirmed.length) {
-      note = "Not confirmed: transit distance or municipal eligibility is unknown for this parcel. Local zoning governs.";
+      note = statEval.not_confirmed.map(nc => nc.name + ": " + nc.reason).join(" ") + " Local zoning governs.";
     } else {
       note = "No state housing law in the screening engine applies to this parcel as recorded. Local zoning governs.";
     }
@@ -9356,7 +9408,7 @@ function aiTextToHtml(t) {
     .replace(/\n/g, "<br>");
 }
 
-async function sendAiQuery(q, promptKey = null) {
+async function sendAiQuery(q, promptKey = null, opts = null) {
   aiHistory.push({ role: "user", text: q });
   const ep = aiEndpoint();
   if (!ep) {
@@ -9374,6 +9426,8 @@ async function sendAiQuery(q, promptKey = null) {
     box.appendChild(typingEl); box.scrollTop = box.scrollHeight;
   }
   const context = serializeLiveAdvisorContext();
+  // what the page's no-AI layer (app/advisor-scripts.js) already found for this question, so the model need not redo it
+  if (opts && opts.scripted && Array.isArray(opts.scripted.findings) && opts.scripted.findings.length) context.scripted_findings = { intent: opts.scripted.intent || null, answered_on_page: !!opts.scripted.answered, findings: opts.scripted.findings };
   const previewEl = document.getElementById("ai-grounded-json-preview");
   if (previewEl) { try { previewEl.textContent = JSON.stringify(context, null, 2); } catch (e) {} }
   const history = aiHistory.filter(m => m.role === "user" || m.role === "assistant").slice(0, -1).slice(-8)
@@ -9513,10 +9567,11 @@ function renderAiChat() {
         </details>`
       : "";
     return `<div style="align-self:flex-start;background:${isAi ? "#fff" : "#f8fafc"};border:1px solid #e2e8f0;color:#0f172a;padding:12px 14px;border-radius:12px 12px 12px 0;max-width:92%;line-height:1.5;">
-        <div style="font-size:11px;font-weight:700;color:${isAi ? "#7c3aed" : "#475569"};margin-bottom:4px;">${isAi ? "AI advisor (can be wrong)" : "City Pretty"}</div>
+        <div style="font-size:11px;font-weight:700;color:${isAi ? "#7c3aed" : "#475569"};margin-bottom:4px;">${msg.scripted ? "From this page's data (no AI)" : isAi ? "AI advisor (can be wrong)" : "City Pretty"}</div>
         ${msg.text}
         ${stoppedNotice}
         ${sourcesHtml}
+        ${msg.scripted ? `<button type="button" class="tool-btn" data-ai-deeper="${aiHistory.indexOf(msg)}" style="margin-top:8px;">Ask the AI for a deeper answer</button>` : ""}
       </div>`;
   }).join("");
   box.scrollTop = box.scrollHeight;
@@ -9529,8 +9584,24 @@ function handleAiSubmit(e) {
   const q = input.value.trim();
   if (!q) return;
   input.value = "";
-  sendAiQuery(q, null);
+  // Script-first (app/advisor-scripts.js): a plain lookup is answered from the page's own data, with no request and no
+  // cost; anything else goes to the Worker with what the page already found.
+  const S = window.AdvisorScripts, loaded = typeof activeFips === "function" && activeFips() && (document.getElementById("loading") || {}).hidden !== false;
+  if (!S || !loaded) { sendAiQuery(q, null); return; }
+  S.tryScripted(q).then(r => {
+    if (!r || !r.answered) { sendAiQuery(q, null, { scripted: r }); return; }
+    aiHistory.push({ role: "user", text: q });
+    aiHistory.push({ role: "assistant", scripted: true, question: q, findings: r.findings, intent: r.intent, raw: r.text, text: aiTextToHtml(r.text), sources: r.sources || [] });
+    renderAiChat();
+  }, () => sendAiQuery(q, null));
 }
+// "Ask the AI for a deeper answer" under a page-data answer sends the same question to the Worker, with the findings
+if (typeof document !== "undefined") document.addEventListener("click", e => {
+  const b = e.target && e.target.closest ? e.target.closest("[data-ai-deeper]") : null;
+  if (!b) return;
+  const msg = aiHistory[+b.getAttribute("data-ai-deeper")];
+  if (msg && msg.scripted) { b.disabled = true; sendAiQuery(msg.question, null, { scripted: { intent: msg.intent, answered: true, findings: msg.findings } }); }
+});
 
 function askAiPrompt(key) {
   let promptText = "";
@@ -10214,19 +10285,22 @@ function pushAll(dst, src) { for (const x of src) dst.push(x); return dst; }
 // Where a county's data file is served from (app/data/county_hosts.json). GitHub Pages caps a site at 1 GB, so county files
 // live on regional Pages sites; a region is tried first only when enabled, and this site's counties/ path is the fallback.
 const COUNTY_HOSTS_READY = cpJson("county-hosts").then(d => (d && d.regions ? d : null)).catch(() => null);
-async function countyBundleSources(el) {
-  const local = el && el.dataset.src;
-  if (!local) return [];
+// A county tagged data-r2only="1" (counties/.r2-only.txt) has its files only in R2, not in this site's counties/
+// folder, so R2 is its only source; if R2 is off or unreachable the page says the file could not be loaded.
+async function countyBundleSources(el, file) {
+  const local = file === undefined ? el && el.dataset.src : file;
+  if (!local || !el) return [];
   const H = await COUNTY_HOSTS_READY, st = String(el.dataset.fips || "").slice(0, 2), out = [];
+  const r2only = el.dataset.r2only === "1";
   if (H && !/^(?:https?:)?\/\//i.test(local)) {
     if (H.r2 && H.r2.enabled && H.r2.base) {
       out.push(H.r2.base.replace(/\/?$/, "/") + local.replace(/^\/+/, ""));
     }
     for (const r of Object.values(H.regions || {})) {
-      if (r && r.enabled && r.base && (r.states || []).includes(st)) out.push(r.base.replace(/\/?$/, "/") + local.replace(/^\/+/, ""));
+      if (!r2only && r && r.enabled && r.base && (r.states || []).includes(st)) out.push(r.base.replace(/\/?$/, "/") + local.replace(/^\/+/, ""));
     }
   }
-  out.push(local);
+  if (!r2only) out.push(local);
   return out;
 }
 
@@ -10288,6 +10362,8 @@ async function loadCountyBundle(fips) {
           sources: [
             el && el.dataset.coverage === "lots"
               ? ["County data", "Not built yet for this county; only live property lines are shown", "Lot lines only", false]
+              : el && el.dataset.r2only === "1"
+              ? ["County data file", "This county's data could not be loaded: its file is kept only on the R2 data host (app/data/county_hosts.json), which " + (srcs.length ? "could not be reached or did not return it" : "is not enabled") + "; only live property lines are shown", "Not loaded", false]
               : ["County data file", "This county's data file could not be downloaded; only live property lines are shown", "Not loaded", false]
           ]
         }
@@ -10299,7 +10375,11 @@ async function loadCountyBundle(fips) {
     }
     if (el && el.dataset && el.dataset.sites) {
       try {
-        const S = await fetchJSON(el.dataset.sites);
+        // the same hosts as the data file (R2 first when enabled; R2 only for an R2-only county)
+        let S = null;
+        for (const u of await countyBundleSources(el, el.dataset.sites)) {
+          try { S = await fetchJSON(u); if (S) break; } catch (e) { console.warn("Site suggestions not available from " + u, e); S = null; }
+        }
         await loadSites();
         if (SITES && S && S.sites) {
           SITES.meta = SITES.meta || {};
@@ -10459,6 +10539,14 @@ async function openCounty(fips, wantBgId) {
     if (typeof scheduleNatLots === "function") scheduleNatLots();
     if (typeof setProgress === "function") setProgress(100);
     if (typeof setHud === "function") setHud("✓ " + cName + " Ready");
+    // The data file could not be loaded (e.g. an R2-only county while R2 is unreachable): say so instead of an empty map.
+    if (B.meta && B.meta.load_failed && B.meta.coverage === "missing") {
+      const why = cName + ": " + ((B.meta.sources && B.meta.sources[0] && B.meta.sources[0][1]) || "this county's data file could not be loaded") + ".";
+      if (typeof setHud === "function") setHud("Could not load " + cName + " data");
+      if (typeof showToast === "function") showToast(why);
+      const pn = document.getElementById("panel");
+      if (pn) { pn.innerHTML = '<p class="empty" id="county-load-failed" role="alert"></p>'; pn.querySelector("#county-load-failed").textContent = why; }
+    }
     setTimeout(() => {
       if (typeof doneProgress === "function") doneProgress();
       if (typeof hideHud === "function") hideHud();

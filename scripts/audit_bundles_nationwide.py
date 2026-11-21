@@ -37,6 +37,7 @@ def load_bundle(p):
 
 
 def sample(seed, per_state, per_county):
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import r2_only; r2_only.require_local("audit_bundles_nationwide.py")   # R2-only county files must be on disk, or they would be dropped
     files = sorted(f for f in os.listdir(os.path.join(ROOT, "counties")) if f.startswith("bundle_"))
     by_state = defaultdict(list)
     for f in files:
@@ -165,6 +166,7 @@ def acs():
 def fallback():
     """Full scan (all bundles, all block groups): where a block group has homes but no home value or rent, did the bundle
     apply the tract fallback that pipeline/metrics_oc.py specifies? Census tract values come from the same table files."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import r2_only; r2_only.require_local("audit_bundles_nationwide.py")   # R2-only county files must be on disk, or they would be dropped
     files = sorted(f for f in os.listdir(os.path.join(ROOT, "counties")) if f.startswith("bundle_"))
     nulls = []
     for f in files:

@@ -73,6 +73,31 @@ test("Invest view renders the five sections for a mid-size county, with no null,
   expect(errors).toEqual([]);
 });
 
+test("Transit card: a corridor with a stop city in the county says how many neighborhoods are within 1 mile of that city's centre, with links", async ({ page }) => {
+  // Guadalupe County, TX: the FRA Corridor ID list names Seguin on the Houston to San Antonio corridor
+  const errors = await openPage(page);
+  await openInvest(page, "48187");
+  await page.click("[data-iv-budget='4']");
+  await openAll(page);
+  const card = page.locator("#iv-transit");
+  await expect(card).toContainText("Houston to San Antonio Corridor");
+  const line = card.locator(".iv-stopareas p").first();
+  await expect(line).toContainText(/\d+ neighborhoods within 1 mile of the Seguin stop city centre \(the station site itself is not chosen yet\)/);
+  // each listed neighborhood is a link that leaves Invest for the map
+  const links = card.locator(".iv-stoplist [data-iv-map]");
+  expect(await links.count()).toBeGreaterThan(0);
+  const id = await links.first().getAttribute("data-iv-map");
+  expect(id!.startsWith("48187")).toBe(true);
+  // a corridor that names no city in this county is not listed here
+  await expect(card).not.toContainText("Texas Triangle");
+  // the source documents give no length or cost, so the card says so instead of showing a number
+  await expect(card).toContainText("not stated in the source documents");
+  expect(await badWords(page)).toEqual([]);
+  await links.first().click();
+  await expect(page.locator("#invest")).toBeHidden();
+  expect(errors.filter((e) => !/crash_/.test(e))).toEqual([]);
+});
+
 test("display ranks start at 1 and run in order; Show 10 lists more; selecting updates Build", async ({ page }) => {
   await openPage(page);
   await openInvest(page);

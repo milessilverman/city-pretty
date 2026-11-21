@@ -241,6 +241,7 @@ def fetch_rows(job, env):
 def bundle_crash_sources():
     """fips -> (source name as in SOURCES, old window string) for every bundle that loaded a state/city crash row."""
     out = {}
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import r2_only; r2_only.require_local("build_state_crash_counts.py")   # R2-only county files must be on disk, or they would be dropped
     for p in sorted(glob.glob(os.path.join(ROOT, "counties", "bundle_*.json.gz"))):
         d = json.loads(gzip.decompress(open(p, "rb").read())); m = d["meta"]
         for s in m.get("sources", []):

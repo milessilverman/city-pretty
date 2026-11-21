@@ -26,11 +26,6 @@
     "min_parking_spaces_per_unit": 0,
     "affordability_mandate_pct": null,
     "tax_exemption_pct": 0,
-    "statutory_exclusions": [
-      "calfire_or_state_vhfhsz (very high fire hazard severity zone bars streamlined review under § 65913.4(a)(6)(D), applied through § 65912.159(a)(3); § 65912.157(j) also requires objective fire safety standards)",
-      "rent_controlled_housing_site (§ 65912.157(h)(1)-(2): demolition of, or previous use for, more than two units subject to rent or price control)",
-      "mobilehome_or_rv_park_site (§ 65912.157(h)(3), added by SB 722: land governed by the Mobilehome Residency Law, Recreational Vehicle Park Occupancy Law, Mobilehome Parks Act or Special Occupancy Parks Act)"
-    ],
     "summary": "Housing development is an allowed use on residential, mixed or commercial sites within 1/4 mile of a Tier 1 transit-oriented development stop (heavy rail or 72+ trains/day commuter rail) in an urban transit county (>15 passenger rail stations). Local governments may not impose a height limit below 75 ft, a density cap below 120 du/acre, or standards precluding a residential FAR of 3.5 (§ 65912.157(a)(3)). Projects need at least 5 units and 30 du/acre. Applies to local agencies from July 1, 2026 (§ 65912.157(n)). The 75 ft / 120 du/ac figures are floors on local limits, not a unit cap. SB 79 does not by itself grant ministerial approval; see § 65912.159 for the streamlining path. Amended by SB 722 (Ch. 100, Stats. 2026, approved 2026-07-16) to exclude sites governed by the mobilehome and RV park laws.",
     "last_verified": "2026-11-19",
     "min_allowed_density_du_per_acre": 120,
@@ -61,13 +56,63 @@
       "evidence": "§ 65912.157(a)(3): 'shall not impose any height limit less than 75 feet ... any maximum density of less than 120 dwelling units per acre ... residential floor area ratio of up to 3.5' SB 722 (Ch. 100, Stats. 2026): \"(3) The existing parcel of land or site is governed under the Mobilehome Residency Law ..., the Recreational Vehicle Park Occupancy Law ..., the Mobilehome Parks Act ..., or the Special Occupancy Parks Act\" (new § 65912.157(h)(3)); \"This act is an urgency statute ... and shall go into immediate effect.\" § 65912.156(q): \"'Urban transit county' means a county with more than 15 passenger rail stations.\" (the county list on file is not in the statute).",
       "unverified_fields": [
         "eligible_counties (list of urban transit counties is from Wikipedia 'California Senate Bill 79', a secondary source; statute defines the test as >15 passenger rail stations)",
-        "min_parking_spaces_per_unit (SB 79 itself sets none; 0 comes from AB 2097, Gov. Code § 65863.2, subject to its exceptions)",
-        "statutory_exclusions (no parcel layer for rent-controlled housing sites or mobilehome / RV park sites)"
+        "min_parking_spaces_per_unit (SB 79 itself sets none; 0 comes from AB 2097, Gov. Code § 65863.2, subject to its exceptions)"
       ],
       "notes": "Original record cited Gov. Code § 65913.16 (a different section, amended by SB 597), included Contra Costa (06013), labelled the 120 du/acre density floor as a 120-unit by-right cap, claimed a single 10% affordability mandate, and said the law 'mandates ministerial by-right approval'. All corrected. 2026-11-19: SB 79 was amended by SB 722 (Ch. 100, Stats. 2026); heights, densities and FARs in § 65912.157(a) are unchanged. The engine no longer rules out a county missing from the list on file when a qualifying stop is in range; it reports the county test as not confirmed."
     },
     "statutory_exclusions_note": "Corrected 2026-11-19. The earlier list named sea-level-rise and local-historic-register sites; those appear only in the local alternative-plan rules (§ 65912.161), not as limits on a project's eligibility under § 65912.157. Gov. Code § 65912.157(h) lists the real site exclusions.",
-    "amended_by": "SB 722 (Stats. 2026, Ch. 100), approved 2026-07-16, urgency statute effective immediately: adds § 65912.157(h)(3), excluding parcels governed by the mobilehome and RV park laws. The official code table reads \"Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026.\""
+    "amended_by": "SB 722 (Stats. 2026, Ch. 100), approved 2026-07-16, urgency statute effective immediately: adds § 65912.157(h)(3), excluding parcels governed by the mobilehome and RV park laws. The official code table reads \"Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026.\"",
+    "exclusion_sources": [
+      {
+        "key": "rent_controlled_housing_site",
+        "label": "a site where rent-controlled housing was demolished or would be",
+        "citation": "Cal. Gov. Code 65912.157(h)(1)",
+        "wording": "A site containing more than two units where the development would require the demolition of housing that is subject to any form of rent or price control through a public entity’s valid exercise of its police power that has been occupied by tenants within the past seven years.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "rent_controlled_housing_site_prior_use",
+        "label": "a site previously used for more than two units of rent-controlled housing demolished within seven years",
+        "citation": "Cal. Gov. Code 65912.157(h)(2)",
+        "wording": "A site that was previously used for more than two units of housing that were demolished within seven years before the development proponent submits an application under this section and any of the units were subject to any form of rent or price control through a public entity’s valid exercise of its police power.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "mobilehome_or_rv_park_site",
+        "label": "a mobilehome park, RV park or special occupancy park site",
+        "citation": "Cal. Gov. Code 65912.157(h)(3) (added by SB 722, Stats. 2026, ch. 100)",
+        "wording": "The existing parcel of land or site is governed under the Mobilehome Residency Law (Chapter 2.5 (commencing with Section 798) of Title 2 of Part 2 of Division 2 of the Civil Code), the Recreational Vehicle Park Occupancy Law (Chapter 2.6 (commencing with Section 799.20) of Title 2 of Part 2 of Division 2 of the Civil Code), the Mobilehome Parks Act (Part 2.1 (commencing with Section 18200) of Division 13 of the Health and Safety Code), or the Special Occupancy Parks Act (Part 2.3 (commencing with Section 18860) of Division 13 of the Health and Safety Code).",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "calfire_or_state_vhfhsz",
+        "label": "a very high fire hazard severity zone (bars the streamlined-approval route only)",
+        "citation": "Cal. Gov. Code 65912.159(a)(3)",
+        "wording": "The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19",
+        "effect": "limits",
+        "scope_note": "Under 65912.159(a) this bar applies to a project seeking streamlined ministerial approval under 65913.4; 65912.157(h) does not list the zone, so the law stays on the parcel and the zone limits that route. 65912.157(j) separately requires consistency with objective fire safety standards"
+      },
+      {
+        "key": "airport_noise_or_runway_zone",
+        "label": "an airport land use compatibility plan or military air installation zone",
+        "citation": "Cal. Gov. Code 65912.157(j)",
+        "wording": "A development proposed pursuant to this chapter shall be consistent with the height, noise, and safety standards of an adopted airport land use compatibility plan or Department of Defense Air Installation Compatible Use Zones developed pursuant to Section 21675 of the Public Utilities Code",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19",
+        "effect": "limits",
+        "scope_note": "a consistency condition on the project, not a bar on the site"
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Gov. Code 65912.157(h) lists the sites the chapter does not reach (rent-controlled housing, mobilehome and RV parks). The earlier list on file also barred very high fire hazard zones outright; the text bars them only from the streamlined-approval route (65912.159(a)(3)), so that item is now recorded as a limit. Text read from the Legislative Counsel bulk database (LAW_SECTION_TBL in https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip), because leginfo.legislature.ca.gov refuses this machine."
+    }
   },
   {
     "id": "ca_sb79_tier2",
@@ -96,11 +141,6 @@
     "min_parking_spaces_per_unit": 0,
     "affordability_mandate_pct": null,
     "tax_exemption_pct": 0,
-    "statutory_exclusions": [
-      "calfire_or_state_vhfhsz (very high fire hazard severity zone bars streamlined review under § 65913.4(a)(6)(D), applied through § 65912.159(a)(3); § 65912.157(j) also requires objective fire safety standards)",
-      "rent_controlled_housing_site (§ 65912.157(h)(1)-(2): demolition of, or previous use for, more than two units subject to rent or price control)",
-      "mobilehome_or_rv_park_site (§ 65912.157(h)(3), added by SB 722: land governed by the Mobilehome Residency Law, Recreational Vehicle Park Occupancy Law, Mobilehome Parks Act or Special Occupancy Parks Act)"
-    ],
     "summary": "Between 1/4 and 1/2 mile of a Tier 1 TOD stop, in a city of at least 35,000, local governments may not impose a height limit below 65 ft, a density cap below 100 du/acre, or standards precluding FAR 3.0 (§ 65912.157(a)(4)). NOTE: the id 'ca_sb79_tier2' is historical; this record is Tier 1 at the outer ring. Statutory Tier 2 (light rail etc.) is in ca_sb79_tier2_light_rail_*.",
     "last_verified": "2026-11-19",
     "distance_to_transit_min_mi": 0.25,
@@ -132,13 +172,63 @@
       "checked_on": "2026-11-19",
       "evidence": "§ 65912.157(a)(4): 'height limit less than 65 feet ... less than 100 dwelling units per acre ... floor area ratio of up to 3' SB 722 (Ch. 100, Stats. 2026): \"(3) The existing parcel of land or site is governed under the Mobilehome Residency Law ..., the Recreational Vehicle Park Occupancy Law ..., the Mobilehome Parks Act ..., or the Special Occupancy Parks Act\" (new § 65912.157(h)(3)); \"This act is an urgency statute ... and shall go into immediate effect.\" § 65912.156(q): \"'Urban transit county' means a county with more than 15 passenger rail stations.\" (the county list on file is not in the statute).",
       "unverified_fields": [
-        "eligible_counties (secondary source, see tier1)",
-        "statutory_exclusions (no parcel layer for rent-controlled housing sites or mobilehome / RV park sites)"
+        "eligible_counties (secondary source, see tier1)"
       ],
       "notes": "Original record was mislabelled 'Tier 2' (statutory Tier 2 is light rail/48+ trains/BRT) and omitted the 35,000-population condition. 2026-11-19: SB 79 was amended by SB 722 (Ch. 100, Stats. 2026); heights, densities and FARs in § 65912.157(a) are unchanged. The engine no longer rules out a county missing from the list on file when a qualifying stop is in range; it reports the county test as not confirmed."
     },
     "statutory_exclusions_note": "Corrected 2026-11-19. The earlier list named sea-level-rise and local-historic-register sites; those appear only in the local alternative-plan rules (§ 65912.161), not as limits on a project's eligibility under § 65912.157. Gov. Code § 65912.157(h) lists the real site exclusions.",
-    "amended_by": "SB 722 (Stats. 2026, Ch. 100), approved 2026-07-16, urgency statute effective immediately: adds § 65912.157(h)(3), excluding parcels governed by the mobilehome and RV park laws. The official code table reads \"Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026.\""
+    "amended_by": "SB 722 (Stats. 2026, Ch. 100), approved 2026-07-16, urgency statute effective immediately: adds § 65912.157(h)(3), excluding parcels governed by the mobilehome and RV park laws. The official code table reads \"Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026.\"",
+    "exclusion_sources": [
+      {
+        "key": "rent_controlled_housing_site",
+        "label": "a site where rent-controlled housing was demolished or would be",
+        "citation": "Cal. Gov. Code 65912.157(h)(1)",
+        "wording": "A site containing more than two units where the development would require the demolition of housing that is subject to any form of rent or price control through a public entity’s valid exercise of its police power that has been occupied by tenants within the past seven years.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "rent_controlled_housing_site_prior_use",
+        "label": "a site previously used for more than two units of rent-controlled housing demolished within seven years",
+        "citation": "Cal. Gov. Code 65912.157(h)(2)",
+        "wording": "A site that was previously used for more than two units of housing that were demolished within seven years before the development proponent submits an application under this section and any of the units were subject to any form of rent or price control through a public entity’s valid exercise of its police power.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "mobilehome_or_rv_park_site",
+        "label": "a mobilehome park, RV park or special occupancy park site",
+        "citation": "Cal. Gov. Code 65912.157(h)(3) (added by SB 722, Stats. 2026, ch. 100)",
+        "wording": "The existing parcel of land or site is governed under the Mobilehome Residency Law (Chapter 2.5 (commencing with Section 798) of Title 2 of Part 2 of Division 2 of the Civil Code), the Recreational Vehicle Park Occupancy Law (Chapter 2.6 (commencing with Section 799.20) of Title 2 of Part 2 of Division 2 of the Civil Code), the Mobilehome Parks Act (Part 2.1 (commencing with Section 18200) of Division 13 of the Health and Safety Code), or the Special Occupancy Parks Act (Part 2.3 (commencing with Section 18860) of Division 13 of the Health and Safety Code).",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "calfire_or_state_vhfhsz",
+        "label": "a very high fire hazard severity zone (bars the streamlined-approval route only)",
+        "citation": "Cal. Gov. Code 65912.159(a)(3)",
+        "wording": "The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19",
+        "effect": "limits",
+        "scope_note": "Under 65912.159(a) this bar applies to a project seeking streamlined ministerial approval under 65913.4; 65912.157(h) does not list the zone, so the law stays on the parcel and the zone limits that route. 65912.157(j) separately requires consistency with objective fire safety standards"
+      },
+      {
+        "key": "airport_noise_or_runway_zone",
+        "label": "an airport land use compatibility plan or military air installation zone",
+        "citation": "Cal. Gov. Code 65912.157(j)",
+        "wording": "A development proposed pursuant to this chapter shall be consistent with the height, noise, and safety standards of an adopted airport land use compatibility plan or Department of Defense Air Installation Compatible Use Zones developed pursuant to Section 21675 of the Public Utilities Code",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19",
+        "effect": "limits",
+        "scope_note": "a consistency condition on the project, not a bar on the site"
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Gov. Code 65912.157(h) lists the sites the chapter does not reach (rent-controlled housing, mobilehome and RV parks). The earlier list on file also barred very high fire hazard zones outright; the text bars them only from the streamlined-approval route (65912.159(a)(3)), so that item is now recorded as a limit. Text read from the Legislative Counsel bulk database (LAW_SECTION_TBL in https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip), because leginfo.legislature.ca.gov refuses this machine."
+    }
   },
   {
     "id": "ca_sb79_tier2_light_rail_quarter",
@@ -188,11 +278,6 @@
       "citation": "Gov. Code § 65912.157(i)"
     },
     "tax_exemption_pct": 0,
-    "statutory_exclusions": [
-      "calfire_or_state_vhfhsz (very high fire hazard severity zone bars streamlined review under § 65913.4(a)(6)(D), applied through § 65912.159(a)(3); § 65912.157(j) also requires objective fire safety standards)",
-      "rent_controlled_housing_site (§ 65912.157(h)(1)-(2): demolition of, or previous use for, more than two units subject to rent or price control)",
-      "mobilehome_or_rv_park_site (§ 65912.157(h)(3), added by SB 722: land governed by the Mobilehome Residency Law, Recreational Vehicle Park Occupancy Law, Mobilehome Parks Act or Special Occupancy Parks Act)"
-    ],
     "summary": "Local governments may not impose a height limit below 65 ft, a density cap below 100 du/acre, or standards precluding FAR 3 (§ 65912.157(a)(5)).",
     "last_verified": "2026-11-19",
     "verification": {
@@ -202,13 +287,63 @@
       "evidence": "§ 65912.157(a)(5): 'height limit less than 65 feet ... less than 100 dwelling units per acre ... floor area ratio of up to 3' SB 722 (Ch. 100, Stats. 2026): \"(3) The existing parcel of land or site is governed under the Mobilehome Residency Law ..., the Recreational Vehicle Park Occupancy Law ..., the Mobilehome Parks Act ..., or the Special Occupancy Parks Act\" (new § 65912.157(h)(3)); \"This act is an urgency statute ... and shall go into immediate effect.\" § 65912.156(q): \"'Urban transit county' means a county with more than 15 passenger rail stations.\" (the county list on file is not in the statute).",
       "unverified_fields": [
         "eligible_counties (secondary source)",
-        "min_parking_spaces_per_unit (from AB 2097, not SB 79)",
-        "statutory_exclusions (no parcel layer for rent-controlled housing sites or mobilehome / RV park sites)"
+        "min_parking_spaces_per_unit (from AB 2097, not SB 79)"
       ],
       "notes": "Added in this audit from the official statute text; the original data had no true Tier 2 rows. 2026-11-19: SB 79 was amended by SB 722 (Ch. 100, Stats. 2026); heights, densities and FARs in § 65912.157(a) are unchanged. The engine no longer rules out a county missing from the list on file when a qualifying stop is in range; it reports the county test as not confirmed."
     },
     "statutory_exclusions_note": "Corrected 2026-11-19. The earlier list named sea-level-rise and local-historic-register sites; those appear only in the local alternative-plan rules (§ 65912.161), not as limits on a project's eligibility under § 65912.157. Gov. Code § 65912.157(h) lists the real site exclusions.",
-    "amended_by": "SB 722 (Stats. 2026, Ch. 100), approved 2026-07-16, urgency statute effective immediately: adds § 65912.157(h)(3), excluding parcels governed by the mobilehome and RV park laws. The official code table reads \"Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026.\""
+    "amended_by": "SB 722 (Stats. 2026, Ch. 100), approved 2026-07-16, urgency statute effective immediately: adds § 65912.157(h)(3), excluding parcels governed by the mobilehome and RV park laws. The official code table reads \"Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026.\"",
+    "exclusion_sources": [
+      {
+        "key": "rent_controlled_housing_site",
+        "label": "a site where rent-controlled housing was demolished or would be",
+        "citation": "Cal. Gov. Code 65912.157(h)(1)",
+        "wording": "A site containing more than two units where the development would require the demolition of housing that is subject to any form of rent or price control through a public entity’s valid exercise of its police power that has been occupied by tenants within the past seven years.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "rent_controlled_housing_site_prior_use",
+        "label": "a site previously used for more than two units of rent-controlled housing demolished within seven years",
+        "citation": "Cal. Gov. Code 65912.157(h)(2)",
+        "wording": "A site that was previously used for more than two units of housing that were demolished within seven years before the development proponent submits an application under this section and any of the units were subject to any form of rent or price control through a public entity’s valid exercise of its police power.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "mobilehome_or_rv_park_site",
+        "label": "a mobilehome park, RV park or special occupancy park site",
+        "citation": "Cal. Gov. Code 65912.157(h)(3) (added by SB 722, Stats. 2026, ch. 100)",
+        "wording": "The existing parcel of land or site is governed under the Mobilehome Residency Law (Chapter 2.5 (commencing with Section 798) of Title 2 of Part 2 of Division 2 of the Civil Code), the Recreational Vehicle Park Occupancy Law (Chapter 2.6 (commencing with Section 799.20) of Title 2 of Part 2 of Division 2 of the Civil Code), the Mobilehome Parks Act (Part 2.1 (commencing with Section 18200) of Division 13 of the Health and Safety Code), or the Special Occupancy Parks Act (Part 2.3 (commencing with Section 18860) of Division 13 of the Health and Safety Code).",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "calfire_or_state_vhfhsz",
+        "label": "a very high fire hazard severity zone (bars the streamlined-approval route only)",
+        "citation": "Cal. Gov. Code 65912.159(a)(3)",
+        "wording": "The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19",
+        "effect": "limits",
+        "scope_note": "Under 65912.159(a) this bar applies to a project seeking streamlined ministerial approval under 65913.4; 65912.157(h) does not list the zone, so the law stays on the parcel and the zone limits that route. 65912.157(j) separately requires consistency with objective fire safety standards"
+      },
+      {
+        "key": "airport_noise_or_runway_zone",
+        "label": "an airport land use compatibility plan or military air installation zone",
+        "citation": "Cal. Gov. Code 65912.157(j)",
+        "wording": "A development proposed pursuant to this chapter shall be consistent with the height, noise, and safety standards of an adopted airport land use compatibility plan or Department of Defense Air Installation Compatible Use Zones developed pursuant to Section 21675 of the Public Utilities Code",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19",
+        "effect": "limits",
+        "scope_note": "a consistency condition on the project, not a bar on the site"
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Gov. Code 65912.157(h) lists the sites the chapter does not reach (rent-controlled housing, mobilehome and RV parks). The earlier list on file also barred very high fire hazard zones outright; the text bars them only from the streamlined-approval route (65912.159(a)(3)), so that item is now recorded as a limit. Text read from the Legislative Counsel bulk database (LAW_SECTION_TBL in https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip), because leginfo.legislature.ca.gov refuses this machine."
+    }
   },
   {
     "id": "ca_sb79_tier2_light_rail_half",
@@ -258,11 +393,6 @@
       "citation": "Gov. Code § 65912.157(i)"
     },
     "tax_exemption_pct": 0,
-    "statutory_exclusions": [
-      "calfire_or_state_vhfhsz (very high fire hazard severity zone bars streamlined review under § 65913.4(a)(6)(D), applied through § 65912.159(a)(3); § 65912.157(j) also requires objective fire safety standards)",
-      "rent_controlled_housing_site (§ 65912.157(h)(1)-(2): demolition of, or previous use for, more than two units subject to rent or price control)",
-      "mobilehome_or_rv_park_site (§ 65912.157(h)(3), added by SB 722: land governed by the Mobilehome Residency Law, Recreational Vehicle Park Occupancy Law, Mobilehome Parks Act or Special Occupancy Parks Act)"
-    ],
     "summary": "Local governments may not impose a height limit below 55 ft, a density cap below 80 du/acre, or standards precluding FAR 2.5 (§ 65912.157(a)(6)).",
     "last_verified": "2026-11-19",
     "verification": {
@@ -272,15 +402,65 @@
       "evidence": "§ 65912.157(a)(6): 'height limit less than 55 feet ... less than 80 dwelling units per acre ... floor area ratio of up to 2.5' SB 722 (Ch. 100, Stats. 2026): \"(3) The existing parcel of land or site is governed under the Mobilehome Residency Law ..., the Recreational Vehicle Park Occupancy Law ..., the Mobilehome Parks Act ..., or the Special Occupancy Parks Act\" (new § 65912.157(h)(3)); \"This act is an urgency statute ... and shall go into immediate effect.\" § 65912.156(q): \"'Urban transit county' means a county with more than 15 passenger rail stations.\" (the county list on file is not in the statute).",
       "unverified_fields": [
         "eligible_counties (secondary source)",
-        "min_parking_spaces_per_unit (from AB 2097, not SB 79)",
-        "statutory_exclusions (no parcel layer for rent-controlled housing sites or mobilehome / RV park sites)"
+        "min_parking_spaces_per_unit (from AB 2097, not SB 79)"
       ],
       "notes": "Added in this audit from the official statute text; the original data had no true Tier 2 rows. 2026-11-19: SB 79 was amended by SB 722 (Ch. 100, Stats. 2026); heights, densities and FARs in § 65912.157(a) are unchanged. The engine no longer rules out a county missing from the list on file when a qualifying stop is in range; it reports the county test as not confirmed."
     },
     "distance_to_transit_min_mi": 0.25,
     "city_population_min": 35000,
     "statutory_exclusions_note": "Corrected 2026-11-19. The earlier list named sea-level-rise and local-historic-register sites; those appear only in the local alternative-plan rules (§ 65912.161), not as limits on a project's eligibility under § 65912.157. Gov. Code § 65912.157(h) lists the real site exclusions.",
-    "amended_by": "SB 722 (Stats. 2026, Ch. 100), approved 2026-07-16, urgency statute effective immediately: adds § 65912.157(h)(3), excluding parcels governed by the mobilehome and RV park laws. The official code table reads \"Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026.\""
+    "amended_by": "SB 722 (Stats. 2026, Ch. 100), approved 2026-07-16, urgency statute effective immediately: adds § 65912.157(h)(3), excluding parcels governed by the mobilehome and RV park laws. The official code table reads \"Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026.\"",
+    "exclusion_sources": [
+      {
+        "key": "rent_controlled_housing_site",
+        "label": "a site where rent-controlled housing was demolished or would be",
+        "citation": "Cal. Gov. Code 65912.157(h)(1)",
+        "wording": "A site containing more than two units where the development would require the demolition of housing that is subject to any form of rent or price control through a public entity’s valid exercise of its police power that has been occupied by tenants within the past seven years.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "rent_controlled_housing_site_prior_use",
+        "label": "a site previously used for more than two units of rent-controlled housing demolished within seven years",
+        "citation": "Cal. Gov. Code 65912.157(h)(2)",
+        "wording": "A site that was previously used for more than two units of housing that were demolished within seven years before the development proponent submits an application under this section and any of the units were subject to any form of rent or price control through a public entity’s valid exercise of its police power.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "mobilehome_or_rv_park_site",
+        "label": "a mobilehome park, RV park or special occupancy park site",
+        "citation": "Cal. Gov. Code 65912.157(h)(3) (added by SB 722, Stats. 2026, ch. 100)",
+        "wording": "The existing parcel of land or site is governed under the Mobilehome Residency Law (Chapter 2.5 (commencing with Section 798) of Title 2 of Part 2 of Division 2 of the Civil Code), the Recreational Vehicle Park Occupancy Law (Chapter 2.6 (commencing with Section 799.20) of Title 2 of Part 2 of Division 2 of the Civil Code), the Mobilehome Parks Act (Part 2.1 (commencing with Section 18200) of Division 13 of the Health and Safety Code), or the Special Occupancy Parks Act (Part 2.3 (commencing with Section 18860) of Division 13 of the Health and Safety Code).",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "calfire_or_state_vhfhsz",
+        "label": "a very high fire hazard severity zone (bars the streamlined-approval route only)",
+        "citation": "Cal. Gov. Code 65912.159(a)(3)",
+        "wording": "The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19",
+        "effect": "limits",
+        "scope_note": "Under 65912.159(a) this bar applies to a project seeking streamlined ministerial approval under 65913.4; 65912.157(h) does not list the zone, so the law stays on the parcel and the zone limits that route. 65912.157(j) separately requires consistency with objective fire safety standards"
+      },
+      {
+        "key": "airport_noise_or_runway_zone",
+        "label": "an airport land use compatibility plan or military air installation zone",
+        "citation": "Cal. Gov. Code 65912.157(j)",
+        "wording": "A development proposed pursuant to this chapter shall be consistent with the height, noise, and safety standards of an adopted airport land use compatibility plan or Department of Defense Air Installation Compatible Use Zones developed pursuant to Section 21675 of the Public Utilities Code",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19",
+        "effect": "limits",
+        "scope_note": "a consistency condition on the project, not a bar on the site"
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Gov. Code 65912.157(h) lists the sites the chapter does not reach (rent-controlled housing, mobilehome and RV parks). The earlier list on file also barred very high fire hazard zones outright; the text bars them only from the streamlined-approval route (65912.159(a)(3)), so that item is now recorded as a limit. Text read from the Legislative Counsel bulk database (LAW_SECTION_TBL in https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip), because leginfo.legislature.ca.gov refuses this machine."
+    }
   },
   {
     "id": "ca_sb9_lot_split",
@@ -298,12 +478,6 @@
     "parking_note": "Local agency may require up to one off-street space per unit, but none where the parcel is within one-half mile walking distance of qualifying transit or another statutory exception applies (Gov. Code §§ 65852.21, 66411.7).",
     "affordability_mandate_pct": 0,
     "tax_exemption_pct": 0,
-    "statutory_exclusions": [
-      "historic_district_hpoz",
-      "fema_100yr_floodway",
-      "calfire_or_state_vhfhsz",
-      "prime_farmland"
-    ],
     "summary": "Requires ministerial approval of urban lot splits (creating two parcels of at least 1,200 sq ft each) and construction of up to two residential units per lot (up to 4 units total) in single-family residential zones.",
     "last_verified": "2026-11-19",
     "verification": {
@@ -313,13 +487,66 @@
       "evidence": "§ 66411.7: 'no more than two new parcels of approximately equal lot area ... not be smaller than 40 percent ... both newly created parcels are no smaller than 1,200 square feet'; § 65852.21: 'no more than two residential units within a single-family residential zone shall be considered ministerially' Official code table 2026-11-19: GOV 65852.21 \"Amended by Stats. 2026, Ch. 56, Sec. 7. (SB 1426) Effective June 30, 2026.\"; GOV 66411.7 \"Amended by Stats. 2026, Ch. 56, Sec. 9. (SB 1426) Effective June 30, 2026.\"; § 66411.7(a)(2)(A): \"both newly created parcels are no smaller than 1,200 square feet\".",
       "unverified_fields": [
         "effective_date (2022-01-01 not checked; the 2021 bill version was not retrieved)",
-        "statutory_exclusions (§ 65913.4(a)(6)(B)-(K) as it read on 2021-09-16 was not read; only four site conditions are checked)"
+        "exclusion_sources (not confirmed: SB 9 (65852.21(a)(2); 66411.7(a)(3)(C)) takes its site exclusions from Gov)",
+        "exclusion_sources (not confirmed: SB 9 (65852.21(a)(2); 66411.7(a)(3)(C)) takes its site exclusions from Gov)"
       ],
       "notes": "Original max_height_ft 25 does not appear in either section and was removed. Original min_parking 0 was wrong as a general rule (up to 1/unit may be required). Short name was garbled ('Home Opportunity & Act')."
     },
     "min_new_parcel_sqft": 1200,
     "min_new_parcel_note": "§ 66411.7(a)(2)(A): \"both newly created parcels are no smaller than 1,200 square feet\" unless a local ordinance sets a smaller size; one parcel not smaller than 40 percent of the original lot area (§ 66411.7(a)(1)).",
-    "statutory_exclusions_note": "§ 65852.21(a)(2) incorporates § 65913.4(a)(6)(B)-(K) \"as that section read on September 16, 2021\" (a longer list of site conditions than the four flags used here; the flood bar is the FEMA special flood hazard area, broader than a floodway). Also excluded: certain housing under rent control or occupied in the last three years (§ 65852.21(a)(3)) and historic districts or landmarks (§ 65852.21(a)(5))."
+    "statutory_exclusions_note": "§ 65852.21(a)(2) incorporates § 65913.4(a)(6)(B)-(K) \"as that section read on September 16, 2021\" (a longer list of site conditions than the four flags used here; the flood bar is the FEMA special flood hazard area, broader than a floodway). Also excluded: certain housing under rent control or occupied in the last three years (§ 65852.21(a)(3)) and historic districts or landmarks (§ 65852.21(a)(5)).",
+    "exclusion_sources": [
+      {
+        "key": "historic_district_hpoz",
+        "label": "a historical landmark property, or a site designated a city or county landmark",
+        "citation": "Cal. Gov. Code 66411.7(a)(3)(E)",
+        "wording": "The parcel is not located within a historical landmark property included on the State Historic Resources Inventory, as defined in Section 5020.1 of the Public Resources Code, or within a site that is designated or listed as a city or county landmark pursuant to a city or county ordinance.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19",
+        "scope_note": "The page's historic flag is read only for Los Angeles (HPOZ, Historic-Cultural Monument and historic-register overlays); elsewhere it is not checked."
+      },
+      {
+        "key": "prime_farmland",
+        "label": "prime farmland or farmland of statewide importance",
+        "citation": "Cal. Gov. Code 65913.4(a)(6)(B), incorporated by 65852.21(a)(2) and 66411.7(a)(3)(C)",
+        "wording": "Either prime farmland or farmland of statewide importance, as defined pursuant to the United States Department of Agriculture land inventory and monitoring criteria, as modified for California, and designated on the maps prepared by the Farmland Mapping and Monitoring Program of the Department of Conservation, or land zoned or designated for agricultural protection or preservation by a local ballot measure that was approved by the voters of that jurisdiction.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19",
+        "scope_note": "SB 9 incorporates 65913.4(a)(6)(B) to (K) \"as that section read on September 16, 2021\"; the wording here is the section as it reads now, because the 2021 text was not read"
+      },
+      {
+        "key": "calfire_or_state_vhfhsz",
+        "label": "a very high fire hazard severity zone or state responsibility area",
+        "citation": "Cal. Gov. Code 65913.4(a)(6)(D), incorporated by 65852.21(a)(2) and 66411.7(a)(3)(C)",
+        "wording": "Within a very high fire hazard severity zone, as determined by the Department of Forestry and Fire Protection pursuant to Section 51178, or within the state responsibility area, as defined in Section 4102 of the Public Resources Code.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19",
+        "scope_note": "current wording; SB 9 incorporates the 16 September 2021 text, which was not read"
+      },
+      {
+        "key": "fema_100yr_floodway",
+        "label": "a FEMA special flood hazard area",
+        "citation": "Cal. Gov. Code 65913.4(a)(6)(G), incorporated by 65852.21(a)(2) and 66411.7(a)(3)(C)",
+        "wording": "Within a special flood hazard area subject to inundation by the 1 percent annual chance flood (100-year flood) as determined by the Federal Emergency Management Agency in any official maps published by the Federal Emergency Management Agency.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19",
+        "scope_note": "current wording, with exceptions for a Letter of Map Revision or National Flood Insurance Program compliance; SB 9 incorporates the 16 September 2021 text, which was not read"
+      },
+      {
+        "key": "fema_regulatory_floodway",
+        "label": "a FEMA regulatory floodway",
+        "citation": "Cal. Gov. Code 65913.4(a)(6)(H), incorporated by 65852.21(a)(2) and 66411.7(a)(3)(C)",
+        "wording": "Within a regulatory floodway as determined by the Federal Emergency Management Agency in any official maps published by the Federal Emergency Management Agency, unless the development has received a no-rise certification in accordance with Section 60.3(d)(3) of Title 44 of the Code of Federal Regulations.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19",
+        "scope_note": "current wording; the 2021 text was not read"
+      }
+    ],
+    "exclusions_review": {
+      "status": "not confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Not confirmed: SB 9 (65852.21(a)(2); 66411.7(a)(3)(C)) takes its site exclusions from Gov. Code 65913.4(a)(6)(B) to (K) \"as that section read on September 16, 2021\", and that version of the section is not in the current bulk file. The entries listed are the current wording of those items plus SB 9's own historic-landmark item; the demolition and tenancy items in 65852.21(a)(3) and 66411.7(a)(3)(D) are project conditions and are not listed. Text read from the Legislative Counsel bulk database (LAW_SECTION_TBL in https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip), because leginfo.legislature.ca.gov refuses this machine."
+    }
   },
   {
     "id": "ca_ab2097",
@@ -341,6 +568,12 @@
       "evidence": "§ 65863.2(a): 'A public agency shall not impose or enforce any minimum automobile parking requirement ... within one-half mile of public transit.' History: 'Added by Stats. 2022, Ch. 459 (AB 2097) Effective January 1, 2023.'",
       "unverified_fields": [],
       "notes": "Summary updated to include the statutory exceptions."
+    },
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Gov. Code 65863.2 read in full: it names no site that is outside the law. It carves out hotels and transient lodging as project types ((e)(6)), event-center employee parking ((d)) and a few contracts ((h)); none is a parcel condition. Text read from the Legislative Counsel bulk database (LAW_SECTION_TBL in https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip), because leginfo.legislature.ca.gov refuses this machine."
     }
   },
   {
@@ -360,14 +593,6 @@
     "affordability_ami_ceiling": 1.2,
     "tax_exemption_pct": 0.75,
     "min_parking_spaces_per_unit": null,
-    "statutory_exclusions": [
-      "airport_noise_or_runway_zone (airport-impacted areas, s. 333.03; § 166.04151(7)(o)1)",
-      "working_waterfront_in_industrial_zone (recreational and commercial working waterfront, s. 342.201(2)(b), in any area zoned industrial; (7)(o)2)",
-      "wekiva_or_everglades_protection_area (Wekiva Study Area, s. 369.316; Everglades Protection Area, s. 373.4592(2); (7)(o)3-4)",
-      "open_character_district (land development regulations in existence before July 1, 2026 that retain open character, such as open space and park districts; (7)(o)5)",
-      "area_of_critical_state_concern (ss. 380.055, 380.0551, 380.0552, 380.0553, 380.0555; (7)(o)6)",
-      "recorded_conservation_easement (any portion of a property so encumbered; (7)(o)7)"
-    ],
     "summary": "Municipalities must authorize multifamily and mixed-use residential in any area zoned commercial, industrial or mixed use, on property owned by a county, municipality or school district, and on religious-institution land of more than 3 acres (with a house of public worship for at least 10 years), regardless of the underlying zoning, if at least 40% of the residential units in a multifamily development are rentals affordable under s. 420.0004 for at least 30 years. No zoning change, special exception, variance or comprehensive plan amendment may be required for the height, zoning and density authorized. Density not below the highest allowed in the municipality; floor area ratio not below 150% of the highest allowed; height not below the tallest within 1 mile or three stories, whichever is higher; administrative approval. Parking must be cut 15% on request near transit and eliminated for mixed-use projects in a transit-oriented area. Counties have a parallel rule (s. 125.01055(7)). The subsection is listed to expire October 1, 2033. Qualifying units may receive the § 196.1978(3) property-tax exemption. Land that falls under one of the exclusions (airport-impacted areas, working waterfronts in industrial zones, the Wekiva and Everglades areas, open-character districts, areas of critical state concern, conservation easements) is outside the law.",
     "last_verified": "2026-11-19",
     "max_far_rule": "Not below 150% of the highest currently allowed (or allowed on July 1, 2023) FAR in the municipality",
@@ -379,7 +604,6 @@
       "checked_on": "2026-11-19",
       "evidence": "§ 166.04151(7)(a)1: \"A municipality must authorize multifamily and mixed-use residential as allowable uses in any area zoned for commercial, industrial, or mixed use; ... on property owned by a county, municipality, or school district; and on property that is more than 3 acres in size and owned by a religious institution ... regardless of the underlying zoning, if at least 40 percent of the residential units in a proposed multifamily development are rental units that, for a period of at least 30 years, are affordable as defined in s. 420.0004.\" § 166.04151(7)(o): \"This subsection does not apply to: 1. Airport-impacted areas as provided in s. 333.03. 2. Property defined as recreational and commercial working waterfront in s. 342.201(2)(b) in any area zoned as industrial. 3. The Wekiva Study Area ... 4. The Everglades Protection Area ... 5. Areas subject to land development regulations ... in existence before July 1, 2026, and ... intended to retain the open character of land ... 6. Any area of critical state concern ... 7. Any portion of a property encumbered by a recorded conservation easement\"; (7)(p): \"This subsection expires October 1, 2033.\" History line: \"s. 5, ch. 2023-17; s. 2, ch. 2024-188; s. 2, ch. 2025-172; s. 15, ch. 2026-14; s. 2, ch. 2026-163; s. 2, ch. 2026-179.\" § 196.1978(3)(d)1.a: \"Seventy-five percent of the assessed value of the units in multifamily projects ... greater than 80 percent but not more than 120 percent of the median annual adjusted gross income\".",
       "unverified_fields": [
-        "statutory_exclusions (no parcel layer is loaded for airport-impacted areas, working waterfronts, the Wekiva Study Area, the Everglades Protection Area, open-character districts, areas of critical state concern or conservation easements; the page cannot check them)",
         "parcel ownership (county, city or school district land and religious-institution land qualify regardless of zoning; ownership is not a parcel field here)",
         "county provision applies in unincorporated areas (§ 125.01055(7) read only for its structure, not applied to parcels)"
       ],
@@ -389,7 +613,70 @@
     "applies_to_zone": "commercial",
     "applies_to_zone_note": "Not only commercial or industrial land: § 166.04151(7)(a)1 also covers land owned by a county, municipality or school district, and religious-institution land of more than 3 acres, regardless of zoning. \"applies_to_zone\" only keeps this law out of the homeowner (ADU / middle-housing) notes.",
     "statutory_exclusions_note": "Corrected 2026-11-19. The earlier list (\"everglades_or_wekiva_or_trpa\") named a TRPA (Tahoe Regional Planning Agency) exclusion that is not in the statute and omitted working waterfronts in industrial zones, airport-impacted areas under s. 333.03, open-character districts, areas of critical state concern and conservation easements.",
-    "affordability_ami_ceiling_note": "s. 420.0004(3): \"Affordable\" means rent or mortgage payments not above 30 percent of the stated share of median income; the highest tier, moderate income (s. 420.0004(12)), is \"less than 120 percent of the median annual adjusted gross income for households within the state, or ... within the metropolitan statistical area ... whichever is greater\"."
+    "affordability_ami_ceiling_note": "s. 420.0004(3): \"Affordable\" means rent or mortgage payments not above 30 percent of the stated share of median income; the highest tier, moderate income (s. 420.0004(12)), is \"less than 120 percent of the median annual adjusted gross income for households within the state, or ... within the metropolitan statistical area ... whichever is greater\".",
+    "exclusion_sources": [
+      {
+        "key": "airport_noise_or_runway_zone",
+        "label": "an airport-impacted area (s. 333.03)",
+        "citation": "Fla. Stat. 166.04151(7)(o)1.",
+        "wording": "Airport-impacted areas as provided in s. 333.03.",
+        "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "working_waterfront_in_industrial_zone",
+        "label": "a working waterfront in an industrial zone (s. 342.201(2)(b))",
+        "citation": "Fla. Stat. 166.04151(7)(o)2.",
+        "wording": "Property defined as recreational and commercial working waterfront in s. 342.201(2)(b) in any area zoned as industrial.",
+        "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "wekiva_study_area",
+        "label": "the Wekiva Study Area (s. 369.316)",
+        "citation": "Fla. Stat. 166.04151(7)(o)3.",
+        "wording": "The Wekiva Study Area, as described in s. 369.316.",
+        "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "everglades_protection_area",
+        "label": "the Everglades Protection Area (s. 373.4592(2))",
+        "citation": "Fla. Stat. 166.04151(7)(o)4.",
+        "wording": "The Everglades Protection Area, as defined in s. 373.4592(2).",
+        "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "open_character_district",
+        "label": "an open-character land development regulation area in existence before July 1, 2026",
+        "citation": "Fla. Stat. 166.04151(7)(o)5.",
+        "wording": "Areas subject to land development regulations, as defined in s. 163.3164, which are in existence before July 1, 2026, and are intended to retain the open character of land, including, but not limited to, open space districts, open space recreation districts, open use estate districts, open use rural districts, and park and open space districts.",
+        "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "area_of_critical_state_concern",
+        "label": "an area of critical state concern",
+        "citation": "Fla. Stat. 166.04151(7)(o)6.",
+        "wording": "Any area of critical state concern, as designated in ss. 380.055, 380.0551, 380.0552, 380.0553, and 380.0555.",
+        "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "recorded_conservation_easement",
+        "label": "a recorded conservation easement (any portion of the property)",
+        "citation": "Fla. Stat. 166.04151(7)(o)7.",
+        "wording": "Any portion of a property encumbered by a recorded conservation easement, as defined in s. 704.06(1).",
+        "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Fla. Stat. 166.04151(7)(o), read in full on 19 Nov 2026. The earlier single Wekiva-or-Everglades key is now two entries, one per item of the statute."
+    }
   },
   {
     "id": "tx_sb840",
@@ -406,12 +693,6 @@
     "min_parking_spaces_per_unit": null,
     "affordability_mandate_pct": 0,
     "tax_exemption_pct": 0,
-    "statutory_exclusions": [
-      "airport_noise_or_runway_zone (statute: land within 3,000 feet of an airport or military base, § 218.101(c)(2)(B); this flag is only an approximation)",
-      "heavy_industrial_zoning (§ 218.101(c)(1): a zoning classification that allows heavy industrial use)",
-      "within_1000_ft_of_heavy_industrial_use (§ 218.101(c)(2)(A))",
-      "clear_zone_or_accident_potential_zone (§ 218.101(c)(3): an area designated by a municipality)"
-    ],
     "summary": "In cities over 150,000 population located wholly or partly in a county over 300,000, cities must allow multifamily and mixed-use residential (≥65% residential) without rezoning in zones that allow office, commercial, retail, warehouse or mixed use; may not cap density below the greater of the city's highest density or 36 du/acre, height below the greater of the commercial height or 45 ft, or require more than one parking space per unit; compliant permits must be administratively approved.",
     "last_verified": "2026-11-19",
     "applies_in_zoning": "Any zoning classification allowing office, commercial, retail, warehouse or mixed use (not heavy industrial; not within 1,000 ft of heavy industrial use or 3,000 ft of an airport/military base; not clear/accident-potential zones)",
@@ -425,12 +706,50 @@
       "method": "Texas Legislature Online: bill history 89(R) SB 840 and enrolled text (capitol.texas.gov/tlodocs/89R/billtext/html/SB00840F.htm)",
       "checked_on": "2026-11-19",
       "evidence": "History: '06/20/2025 E Effective on 9/1/25'; § 218.002: 'applies only to a municipality with a population greater than 150,000 that is wholly or partly located in a county with a population greater than 300,000'",
-      "unverified_fields": [
-        "statutory_exclusions (no parcel layer for heavy industrial zoning or use, airports, military bases or clear zones)"
-      ],
+      "unverified_fields": [],
       "notes": "SEVERE: original record cited 88(R) SB 840 (2023), which is 'Relating to increasing the criminal penalty for assault of certain hospital personnel' — an unrelated bill — and § 214.908. The housing law is 89(R) SB 840 (2025). It is not limited to office conversions."
     },
-    "statutory_exclusions_note": "Corrected 2026-11-19 from the enrolled text: § 218.101(c) \"This section does not apply to: (1) a zoning classification that allows heavy industrial use; (2) land located within: (A) 1,000 feet of an existing heavy industrial use or development site; or (B) 3,000 feet of an airport or military base; or (3) an area designated by a municipality as a clear zone or accident potential zone.\""
+    "statutory_exclusions_note": "Corrected 2026-11-19 from the enrolled text: § 218.101(c) \"This section does not apply to: (1) a zoning classification that allows heavy industrial use; (2) land located within: (A) 1,000 feet of an existing heavy industrial use or development site; or (B) 3,000 feet of an airport or military base; or (3) an area designated by a municipality as a clear zone or accident potential zone.\"",
+    "exclusion_sources": [
+      {
+        "key": "heavy_industrial_zoning",
+        "label": "a zoning classification that allows heavy industrial use",
+        "citation": "Tex. Loc. Gov't Code 218.101(c)(1)",
+        "wording": "a zoning classification that allows heavy industrial use",
+        "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00840F.htm",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "within_1000_ft_of_heavy_industrial_use",
+        "label": "land within 1,000 feet of an existing heavy industrial use or development site",
+        "citation": "Tex. Loc. Gov't Code 218.101(c)(2)(A)",
+        "wording": "1,000 feet of an existing heavy industrial use or development site",
+        "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00840F.htm",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "airport_noise_or_runway_zone",
+        "label": "land within 3,000 feet of an airport or military base",
+        "citation": "Tex. Loc. Gov't Code 218.101(c)(2)(B)",
+        "wording": "3,000 feet of an airport or military base",
+        "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00840F.htm",
+        "checked_on": "2026-11-19",
+        "scope_note": "the statute's test is distance to an airport or military base; the page has no such layer"
+      },
+      {
+        "key": "clear_zone_or_accident_potential_zone",
+        "label": "an area a municipality designated a clear zone or accident potential zone",
+        "citation": "Tex. Loc. Gov't Code 218.101(c)(3)",
+        "wording": "an area designated by a municipality as a clear zone or accident potential zone",
+        "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00840F.htm",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Tex. Loc. Gov't Code 218.101(c), from the enrolled bill: \"This section does not apply to: (1) a zoning classification that allows heavy industrial use; (2) land located within: (A) 1,000 feet of an existing heavy industrial use or development site; or (B) 3,000 feet of an airport or military base; or (3) an area designated by a municipality as a clear zone or accident potential zone.\""
+    }
   },
   {
     "id": "wa_hb1110",
@@ -475,6 +794,54 @@
       "evidence": "RCW 36.70A.635(1)(b): 'at least four units per lot ... at least six units per lot ... within one-quarter mile walking distance of a major transit stop'; bill page: 'Governor signed. Chapter 332, 2023 Laws. Effective date 7/23/2023.'",
       "unverified_fields": [],
       "notes": "Original max_height_ft 35 not found in the statute; removed. The <25,000 rule lacked its UGA condition. min_parking 0 was only true near major transit."
+    },
+    "exclusion_sources": [
+      {
+        "key": "critical_areas_or_buffers",
+        "label": "parts of a lot designated as critical areas or their buffers",
+        "citation": "RCW 36.70A.635(8)(a)",
+        "wording": "Portions of a lot, parcel, or tract designated with critical areas designated under RCW 36.70A.170 or their buffers as required by RCW 36.70A.170, except for critical aquifer recharge areas where a single-family detached house is an allowed use provided that any requirements to maintain aquifer recharge are met",
+        "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635",
+        "checked_on": "2026-11-19",
+        "scope_note": "critical areas include frequently flooded areas, but the page has no critical-area layer and FEMA's special flood hazard area is not the same test"
+      },
+      {
+        "key": "puget_sound_island_sole_source_aquifer",
+        "label": "a sole-source aquifer area on a Puget Sound island",
+        "citation": "RCW 36.70A.635(8)(b)",
+        "wording": "Areas designated as sole-source aquifers by the United States environmental protection agency on islands in the Puget Sound",
+        "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "impaired_reservoir_watershed",
+        "label": "a watershed serving a potable-water reservoir listed as impaired or threatened",
+        "citation": "RCW 36.70A.635(8)(c)",
+        "wording": "A watershed serving a reservoir for potable water if that watershed is or was listed, as of July 23, 2023, as impaired or threatened under section 303(d) of the federal clean water act (33 U.S.C. Sec. 1313(d))",
+        "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "urban_separator",
+        "label": "a lot designated an urban separator",
+        "citation": "RCW 36.70A.635(8)(d)",
+        "wording": "Lots that have been designated urban separators by countywide planning policies as of July 23, 2023",
+        "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "lot_from_residential_lot_split",
+        "label": "a lot created by splitting a single residential lot",
+        "citation": "RCW 36.70A.635(8)(e)",
+        "wording": "A lot that was created through the splitting of a single residential lot pursuant to RCW 58.17.145",
+        "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "RCW 36.70A.635(8) \"The provisions of this section do not apply to\", read on 19 Nov 2026 (current text, which includes the 2025 amendments)."
     }
   },
   {
@@ -511,7 +878,13 @@
       ],
       "notes": "Original cited the renumbered ORS 197.758 and a 10,000 duplex threshold; current law is 2,500. min_parking 0 not found in statute."
     },
-    "effective_date_note": "Enrolled HB 2001 (Ch. 639, Oregon Laws 2019): \"this 2019 Act takes effect on its passage\" (emergency clause). The 2020-01-01 date earlier on file is not in the act; the Governor's signing date was not on the enrolled copy fetched. Local compliance deadlines in the act: June 30, 2021 (cities of 25,000+) and June 30, 2022 (others)."
+    "effective_date_note": "Enrolled HB 2001 (Ch. 639, Oregon Laws 2019): \"this 2019 Act takes effect on its passage\" (emergency clause). The 2020-01-01 date earlier on file is not in the act; the Governor's signing date was not on the enrolled copy fetched. Local compliance deadlines in the act: June 30, 2021 (cities of 25,000+) and June 30, 2022 (others).",
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "ORS 197A.420 read in full on 19 Nov 2026: it lists no site that is outside the law. Subsection (5)(b) lets a local government regulate middle housing \"to comply with protective measures adopted pursuant to statewide land use planning goals\", which is a local power, not a listed exclusion."
+    }
   },
   {
     "id": "az_hb2720_2721",
@@ -544,7 +917,105 @@
       "notes": "Original cited A.R.S. §§ 9-467.04 and 9-467.05, which do not exist (azleg.gov 404). max_height_ft 30 was not in the law. Parking value is a cap, not a minimum. 2026-11-19: another check counted 3 units (ADU path) while this record counted 4 (middle-housing path); both are in the statutes but only the ADU path is in the current Revised Statutes, so the by-right unit count is withheld."
     },
     "max_units_adu_path": 3,
-    "max_units_adu_path_note": "A.R.S. § 9-461.18(A)(1): \"At least one attached and one detached accessory dwelling unit as a permitted use\" on any lot where a single-family dwelling is allowed (single-family home plus two ADUs = 3 units); § 9-461.18(H) applies it to municipalities of more than 75,000 people. Current section text read 2026-11-19."
+    "max_units_adu_path_note": "A.R.S. § 9-461.18(A)(1): \"At least one attached and one detached accessory dwelling unit as a permitted use\" on any lot where a single-family dwelling is allowed (single-family home plus two ADUs = 3 units); § 9-461.18(H) applies it to municipalities of more than 75,000 people. Current section text read 2026-11-19.",
+    "exclusion_sources": [
+      {
+        "key": "area_not_incorporated",
+        "label": "an unincorporated area",
+        "citation": "Laws 2024 ch. 197 (HB 2721), adding A.R.S. 9-462.10(D)(1)",
+        "wording": "AREAS THAT ARE NOT INCORPORATED.",
+        "url": "https://www.azleg.gov/legtext/56leg/2R/laws/0197.pdf",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "lacks_urban_services",
+        "label": "an area that lacks sufficient urban services",
+        "citation": "Laws 2024 ch. 197 (HB 2721), adding A.R.S. 9-462.10(D)(2)",
+        "wording": "AREAS THAT LACK SUFFICIENT URBAN SERVICES.",
+        "url": "https://www.azleg.gov/legtext/56leg/2R/laws/0197.pdf",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "not_served_by_water_and_sewer",
+        "label": "an area not served by water and sewer services",
+        "citation": "Laws 2024 ch. 197 (HB 2721), adding A.R.S. 9-462.10(D)(3)",
+        "wording": "AREAS THAT ARE NOT SERVED BY WATER AND SEWER SERVICES.",
+        "url": "https://www.azleg.gov/legtext/56leg/2R/laws/0197.pdf",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "not_zoned_residential",
+        "label": "an area not zoned for residential use",
+        "citation": "Laws 2024 ch. 197 (HB 2721), adding A.R.S. 9-462.10(D)(4)",
+        "wording": "AREAS THAT ARE NOT ZONED FOR RESIDENTIAL USE.",
+        "url": "https://www.azleg.gov/legtext/56leg/2R/laws/0197.pdf",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "unincorporated_interim_zoning",
+        "label": "an unincorporated area under interim zoning for planned urban development",
+        "citation": "Laws 2024 ch. 197 (HB 2721), adding A.R.S. 9-462.10(D)(5)",
+        "wording": "AREAS THAT ARE NOT INCORPORATED AND ARE ZONED UNDER AN INTERIM ZONING DESIGNATION THAT MAINTAINS THE AREA'S POTENTIAL FOR PLANNED URBAN DEVELOPMENT.",
+        "url": "https://www.azleg.gov/legtext/56leg/2R/laws/0197.pdf",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "title_48_chapter_6_article_4_area",
+        "label": "an area covered under Title 48, chapter 6, article 4",
+        "citation": "Laws 2024 ch. 197 (HB 2721), adding A.R.S. 9-462.10(D)(6)",
+        "wording": "AREAS COVERED UNDER TITLE 48, CHAPTER 6, ARTICLE 4.",
+        "url": "https://www.azleg.gov/legtext/56leg/2R/laws/0197.pdf",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "public_airport_vicinity",
+        "label": "land in the vicinity of a public airport",
+        "citation": "Laws 2024 ch. 197 (HB 2721), adding A.R.S. 9-462.10(D)(7)",
+        "wording": "ANY LAND WITHIN THE TERRITORY IN THE VICINITY OF A PUBLIC AIRPORT AS DEFINED IN SECTION 28-8486 OR TO THE EXTENT THIS SECTION WOULD INTERFERE WITH THE PUBLIC AIRPORT'S ABILITY TO COMPLY WITH THE LAWS, REGULATIONS AND REQUIREMENTS OF THE UNITED STATES RELATED TO APPLYING FOR, RECEIVING OR SPENDING FEDERAL MONIES.",
+        "url": "https://www.azleg.gov/legtext/56leg/2R/laws/0197.pdf",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "military_airport_vicinity",
+        "label": "land in the vicinity of a military airport",
+        "citation": "Laws 2024 ch. 197 (HB 2721), adding A.R.S. 9-462.10(D)(8)",
+        "wording": "ANY LAND WITHIN THE TERRITORY IN THE VICINITY OF A MILITARY AIRPORT AS DEFINED IN SECTION 28-8461.",
+        "url": "https://www.azleg.gov/legtext/56leg/2R/laws/0197.pdf",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "tribal_land",
+        "label": "lots on tribal land (ADU path)",
+        "citation": "A.R.S. 9-461.18(G)(1)",
+        "wording": "Tribal land.",
+        "url": "https://www.azleg.gov/ars/9/00461-18.htm",
+        "checked_on": "2026-11-19",
+        "scope_note": "excludes the accessory dwelling unit path of this record"
+      },
+      {
+        "key": "military_airport_vicinity_adu",
+        "label": "land in the vicinity of a military airport or ancillary military facility (ADU path)",
+        "citation": "A.R.S. 9-461.18(G)(2)",
+        "wording": "Land that is in the territory in the vicinity of a military airport or ancillary military facility as defined in section 28-8461.",
+        "url": "https://www.azleg.gov/ars/9/00461-18.htm",
+        "checked_on": "2026-11-19",
+        "scope_note": "excludes the accessory dwelling unit path of this record"
+      },
+      {
+        "key": "airport_vicinity_over_65_db",
+        "label": "land near a licensed commercial, general aviation or public airport with a noise level over 65 decibels (ADU path)",
+        "citation": "A.R.S. 9-461.18(G)(3)",
+        "wording": "Land that is in the territory in the vicinity of a federal aviation administration commercially licensed airport or a general aviation airport or land that is in the territory in the vicinity of a public airport as defined in section 28-8486 and that has a noise level of greater than sixty-five decibels.",
+        "url": "https://www.azleg.gov/ars/9/00461-18.htm",
+        "checked_on": "2026-11-19",
+        "scope_note": "excludes the accessory dwelling unit path of this record"
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "This record joins two Arizona laws, so it lists both sets of exclusions and an exclusion in either one stops the record (the conservative choice): the middle-housing exclusions from the chaptered text of Laws 2024 ch. 197, section 9-462.10(D) (the text is in capitals in the source), and the ADU exclusions from A.R.S. 9-461.18(G), read on 19 Nov 2026. Whether the middle-housing section is still in force is a separate open item in verification.unverified_fields."
+    }
   },
   {
     "id": "tx_austin_home",
@@ -567,7 +1038,9 @@
       "checked_on": "2026-11-16",
       "evidence": "'Allow up to three housing units, including tiny homes, on a Single-Family (SF) zoned property (SF-1, SF-2, SF-3)'; 'one unit on lots of at least 1,800 square feet but less than 5,750 square feet'; 'Ordinance 20240516-006 - Phase 2 HOME Amendments adopted ordinance' 2026-11-19: city page lists \"Ordinance 20231207-001 - Phase 1 HOME Amendments adopted ordinance\" and \"Ordinance 20240516-006 - Phase 2 HOME Amendments adopted ordinance\".",
       "unverified_fields": [
-        "min_parking_spaces_per_unit (Austin's parking-minimum repeal is a separate action, not checked)"
+        "min_parking_spaces_per_unit (Austin's parking-minimum repeal is a separate action, not checked)",
+        "exclusion_sources (not confirmed: the source on file is the City of Austin's HOME information page, not the ordinances (20231207-001 and 20240516-006); the page names no site exclusions, and the ordinance text was not read)",
+        "exclusion_sources (not confirmed: the source on file is the City of Austin's HOME information page, not the ordinances (20231207-001 and 20240516-006); the page names no site exclusions, and the ordinance text was not read)"
       ],
       "notes": "Original had the wrong Phase 2 ordinance number (-004) and wrong minimum lot size (1,500 sq ft)."
     },
@@ -575,7 +1048,13 @@
       "name": "City of Austin",
       "match": "^austin\\b"
     },
-    "effective_date_note": "City page (austintexas.gov/development-services/home-amendments, read 2026-11-19): \"Dec. 7, 2023: HOME Phase 1 adopted by the Austin City Council; Feb. 5, 2024: Development applications accepted under HOME Phase 1; May 16, 2024: HOME Phase 2 adopted\". The ordinance numbers on file (\"Ordinance 20231207-001 - Phase 1\", \"Ordinance 20240516-006 - Phase 2\") are listed on that page."
+    "effective_date_note": "City page (austintexas.gov/development-services/home-amendments, read 2026-11-19): \"Dec. 7, 2023: HOME Phase 1 adopted by the Austin City Council; Feb. 5, 2024: Development applications accepted under HOME Phase 1; May 16, 2024: HOME Phase 2 adopted\". The ordinance numbers on file (\"Ordinance 20231207-001 - Phase 1\", \"Ordinance 20240516-006 - Phase 2\") are listed on that page.",
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "not confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Not confirmed: the source on file is the City of Austin's HOME information page, not the ordinances (20231207-001 and 20240516-006); the page names no site exclusions, and the ordinance text was not read. The page's phase dates mention the Wildland-Urban Interface and Uprooted Report areas, which are dates for accepting applications, not exclusions."
+    }
   },
   {
     "id": "co_hb24_1313",
@@ -601,9 +1080,17 @@
       "unverified_fields": [
         "effective_date 2024-06-05",
         "statute_citation (C.R.S. § 29-35-101 et seq. not confirmed)",
-        "number of covered municipalities"
+        "number of covered municipalities",
+        "exclusion_sources (not confirmed: HB24-1313 sets a jurisdiction-wide transit-area housing target that the engine never applies to a single parcel, so its exclusions were not extracted)",
+        "exclusion_sources (not confirmed: HB24-1313 sets a jurisdiction-wide transit-area housing target that the engine never applies to a single parcel, so its exclusions were not extracted)"
       ],
       "notes": "Original summary claimed '31 municipalities', a by-right 40 du/acre minimum and parking-mandate elimination — none supported by the bill summary."
+    },
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "not confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Not confirmed: HB24-1313 sets a jurisdiction-wide transit-area housing target that the engine never applies to a single parcel, so its exclusions were not extracted."
     }
   },
   {
@@ -627,7 +1114,40 @@
     },
     "adus_by_right": 1,
     "max_parking_requirement_per_unit": 0,
-    "unmapped_condition": "municipality of 1,000+ within a metropolitan planning organization, or a county area within a census-designated place in an MPO (a 'subject jurisdiction', § 29-35-102(21))"
+    "unmapped_condition": "municipality of 1,000+ within a metropolitan planning organization, or a county area within a census-designated place in an MPO (a 'subject jurisdiction', § 29-35-102(21))",
+    "exclusion_sources": [
+      {
+        "key": "not_served_by_water_and_sewer",
+        "label": "a parcel not served by a domestic water and sewage treatment system (or served by a well that cannot supply another unit)",
+        "citation": "C.R.S. 29-35-102(9)(a), applied by 29-35-103(4)",
+        "wording": "NOT SERVED BY A DOMESTIC WATER AND SEWAGE TREATMENT SYSTEM, AS DEFINED IN SECTION 24-65.1-104 (5), OR IS SERVED BY A WELL WITH A PERMIT THAT CANNOT SUPPLY AN ADDITIONAL DWELLING UNIT",
+        "url": "https://leg.colorado.gov/sites/default/files/2024a_1152_signed.pdf",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "historic_property_outside_district",
+        "label": "a historic property that is not within a historic district",
+        "citation": "C.R.S. 29-35-102(9)(b), applied by 29-35-103(4)",
+        "wording": "A HISTORIC PROPERTY THAT IS NOT WITHIN A HISTORIC DISTRICT",
+        "url": "https://leg.colorado.gov/sites/default/files/2024a_1152_signed.pdf",
+        "checked_on": "2026-11-19",
+        "scope_note": "The page's historic flag is read only for Los Angeles (HPOZ, Historic-Cultural Monument and historic-register overlays); elsewhere it is not checked."
+      },
+      {
+        "key": "fema_100yr_floodway",
+        "label": "a parcel in a FEMA floodway or 100-year floodplain",
+        "citation": "C.R.S. 29-35-102(9)(c), applied by 29-35-103(4)",
+        "wording": "IN A FLOODWAY OR IN A ONE HUNDRED YEAR FLOODPLAIN, AS IDENTIFIED BY THE FEDERAL EMERGENCY MANAGEMENT AGENCY",
+        "url": "https://leg.colorado.gov/sites/default/files/2024a_1152_signed.pdf",
+        "checked_on": "2026-11-19",
+        "scope_note": "The statute's own test is the FEMA special flood hazard area, which is what the page's flag reads."
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "The three parts of the bill's \"exempt parcel\" definition, 29-35-102(9), which 29-35-103(4) uses: \"THIS SECTION ONLY APPLIES TO A PARCEL IN A SUBJECT JURISDICTION THAT IS NOT AN EXEMPT PARCEL.\" Text is in capitals in the source."
+    }
   },
   {
     "id": "mn_minneapolis_2040",
@@ -652,13 +1172,21 @@
         "summary",
         "bill_number",
         "statute_citation",
-        "effective_date"
+        "effective_date",
+        "exclusion_sources (not confirmed: the source on file is the Minneapolis 2040 plan's housing topic page, not an ordinance, and the law's status is unverified, so it is never applied to a parcel)",
+        "exclusion_sources (not confirmed: the source on file is the Minneapolis 2040 plan's housing topic page, not an ordinance, and the law's status is unverified, so it is never applied to a parcel)"
       ],
       "notes": "The triplex-by-right and parking claims, and the cited 2024 law, could not be confirmed; the cited 2024 chapter does not appear to concern this plan. Do not present as by-right."
     },
     "local_jurisdiction": {
       "name": "City of Minneapolis",
       "match": "^minneapolis\\b"
+    },
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "not confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Not confirmed: the source on file is the Minneapolis 2040 plan's housing topic page, not an ordinance, and the law's status is unverified, so it is never applied to a parcel. No exclusions were read."
     }
   },
   {
@@ -684,6 +1212,12 @@
         "effective_date 2024-01-01"
       ],
       "notes": "Original statute_url (leg.mt.gov/bills/2023/billhtml/SB0323.htm) returns 404."
+    },
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "MCA 76-2-304 (both the temporary text and the text effective 1 Oct 2026) read in full on 19 Nov 2026: subsections (3) and (4) name no excluded site; (4)(a)(i)-(ii) set a will-serve letter and a commercial zone as conditions, recorded in unmapped_condition."
     }
   },
   {
@@ -719,6 +1253,57 @@
         "bill number LD 2003 (statute history gives PL 2021 c. 672, not the LD number)"
       ],
       "notes": "Original rule (2 outside growth areas) reflects the pre-2025 law; current statute is 3. Section is marked '(CONFLICT)' between two 2025 chapters; both versions give 3/4."
+    },
+    "exclusion_sources": [
+      {
+        "key": "lewiston_auburn_drinking_water_watershed",
+        "label": "a lot in the watershed of a filtration-waiver drinking water source of Lewiston or Auburn",
+        "citation": "30-A M.R.S. 4364-A(1-B)(A)",
+        "wording": "A lot or portion of a lot that is within the watershed of a water source that is located in the City of Lewiston or the City of Auburn and that is used to provide drinking water by a water utility that has received a waiver from filtration pursuant to 40 Code of Federal Regulations, Sections 141.70 to 141.76, as determined by the Department of Health and Human Services",
+        "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "coastal_barrier",
+        "label": "a coastal barrier (Title 38, section 1904), where the municipality exempts the lot in an adopted ordinance",
+        "citation": "30-A M.R.S. 4364-A(1-B)(B)",
+        "wording": "A lot or a portion of a lot that is within an area identified as a coastal barrier in Title 38, section 1904",
+        "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html",
+        "checked_on": "2026-11-19",
+        "scope_note": "applies \"as long as a municipality exempts the lot or portion of the lot in a duly adopted ordinance\""
+      },
+      {
+        "key": "fema_100yr_floodway",
+        "label": "an area of special flood hazard (Title 38, section 436-A), where the municipality exempts the lot in an adopted ordinance",
+        "citation": "30-A M.R.S. 4364-A(1-B)(B)",
+        "wording": "an area of special flood hazard as defined in Title 38, section 436‑A, subsection 1‑C",
+        "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html",
+        "checked_on": "2026-11-19",
+        "scope_note": "applies \"as long as a municipality exempts the lot or portion of the lot in a duly adopted ordinance\"; Maine's definition is Title 38's, while the page's flag is FEMA's special flood hazard area, so a true flag means the lot may be excluded only where the municipality has adopted the exemption"
+      },
+      {
+        "key": "coastal_sand_dune_system",
+        "label": "a coastal sand dune system (Title 38, section 480-B), where the municipality exempts the lot in an adopted ordinance",
+        "citation": "30-A M.R.S. 4364-A(1-B)(B)",
+        "wording": "an area within a coastal sand dune system as defined in Title 38, section 480‑B, subsection 1",
+        "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html",
+        "checked_on": "2026-11-19",
+        "scope_note": "applies \"as long as a municipality exempts the lot or portion of the lot in a duly adopted ordinance\""
+      },
+      {
+        "key": "title_12_chapter_423a_land",
+        "label": "land governed by Title 12, chapter 423-A",
+        "citation": "30-A M.R.S. 4364-A(1)",
+        "wording": "Notwithstanding any provision of law to the contrary, except Title 12, chapter 423‑A",
+        "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html",
+        "checked_on": "2026-11-19",
+        "scope_note": "the chapter was not read; the exception is in the statute's opening words"
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "30-A M.R.S. 4364-A(1) and (1-B), read on 19 Nov 2026. The page publishes two conflicting texts of subsection 1 (PL 2025 c. 655 and c. 733); the exceptions in (1-B) come from c. 733 section 13. Because the flood and coastal items depend on a municipal exemption, a true page flag is reported but cannot by itself settle the point."
     }
   },
   {
@@ -748,7 +1333,13 @@
     "max_units_two_unit_districts": 2,
     "max_units_sewer_water_districts": 4,
     "max_units_note": "24 V.S.A. § 4412(1)(D) as in force through 2027-12-31: \"In any district that allows year-round residential development, duplexes shall be a permitted use ... In any district that is served by municipal sewer and water infrastructure that allows residential development, multiunit dwellings with four or fewer units shall be a permitted use on the same size lot as a single-unit dwelling.\" Two units everywhere residential use is allowed year-round; four units where municipal sewer and water serve the district. Whether a parcel is served is not a parcel field here.",
-    "effective_date_note": "Act 47 sec. 47 (as enacted): the act takes effect 2023-07-01 except that secs. 1 (24 V.S.A. § 4414) and 2 (§ 4412) take effect 2024-12-01 \"except for subdivision (1)(D) of Sec. 2, which shall take effect on July 1, 2023\"; Governor signed 2023-06-05."
+    "effective_date_note": "Act 47 sec. 47 (as enacted): the act takes effect 2023-07-01 except that secs. 1 (24 V.S.A. § 4414) and 2 (§ 4412) take effect 2024-12-01 \"except for subdivision (1)(D) of Sec. 2, which shall take effect on July 1, 2023\"; Governor signed 2023-06-05.",
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "24 V.S.A. 4412(1)(D) (both the version in force until 1 Jan 2028 and the version after) read on 19 Nov 2026: the duplex and four-or-fewer-unit rules name no excluded site; the four-unit rule requires municipal sewer and water, which is a condition, not an exclusion. The separate accessory dwelling unit rule in (1)(E) excepts \"flood hazard and fluvial erosion area bylaws adopted pursuant to section 4424\"; this record does not model it."
+    }
   },
   {
     "id": "ma_mbta_communities",
@@ -771,9 +1362,17 @@
       "evidence": "'(i) have a minimum gross density of 15 units per acre ... and (ii) be located not more than 0.5 miles from a commuter rail station, subway station, ferry terminal or bus station, if applicable'",
       "unverified_fields": [
         "effective_date 2021-01-14",
-        "number of covered municipalities (177; mass.gov returned 403)"
+        "number of covered municipalities (177; mass.gov returned 403)",
+        "exclusion_sources (not confirmed: G.L)",
+        "exclusion_sources (not confirmed: G.L)"
       ],
       "notes": "Removed unverified '177 municipalities' from summary and the parking-0 value (not in § 3A)."
+    },
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "not confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Not confirmed: G.L. c. 40A s. 3A sets a district-zoning duty on MBTA communities that the engine never applies to a single parcel, so its exclusions were not extracted."
     }
   },
   {
@@ -795,13 +1394,21 @@
       "checked_on": "2026-11-16",
       "evidence": "",
       "unverified_fields": [
-        "all fields"
+        "all fields",
+        "exclusion_sources (not confirmed: the City of Raleigh page refuses this machine (HTTP 403), so no text was read; the law is not applied to a parcel)",
+        "exclusion_sources (not confirmed: the City of Raleigh page refuses this machine (HTTP 403), so no text was read; the law is not applied to a parcel)"
       ],
       "notes": "Round 3: raleighnc.gov returns 403."
     },
     "local_jurisdiction": {
       "name": "City of Raleigh",
       "match": "^raleigh\\b"
+    },
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "not confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Not confirmed: the City of Raleigh page refuses this machine (HTTP 403), so no text was read; the law is not applied to a parcel."
     }
   },
   {
@@ -823,9 +1430,17 @@
       "evidence": "Status: '16 Mar 2021, Governor Signed'; enrolled text: 'ENACTS: 10-9a-530 ... 17-27a-526'; '(1) Except as provided in Subsection (2), this bill takes effect on May 5, 2021.'",
       "unverified_fields": [
         "max_units_by_right 2",
-        "owner-occupancy and lot-size conditions (summary paraphrase not checked clause-by-clause)"
+        "owner-occupancy and lot-size conditions (summary paraphrase not checked clause-by-clause)",
+        "exclusion_sources (not confirmed: the current Utah Code section (10-9a-530 and 17-27a-526) is script-rendered and not readable from here)",
+        "exclusion_sources (not confirmed: the current Utah Code section (10-9a-530 and 17-27a-526) is script-rendered and not readable from here)"
       ],
       "notes": "SEVERE: original record cited Utah SB 174 (2021), which is 'Driver License Document Requirements' — unrelated. Also cited 'HB 465' and § 10-9a-403 and a commuter-rail incentive, none of which were confirmed; removed."
+    },
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "not confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Not confirmed: the current Utah Code section (10-9a-530 and 17-27a-526) is script-rendered and not readable from here. The enrolled 2021 bill (https://le.utah.gov/~2021/bills/hbillenr/HB0082.htm) was read; its 10-9a-530(4) lets a municipality prohibit an internal ADU in a mobile home, in a district covering a share of residential land, with a failing septic tank or on a lot of 6,000 sq ft or less, but later amendments to the code are not known, so no list is recorded."
     }
   },
   {
@@ -841,10 +1456,6 @@
     "adus_by_right": 2,
     "max_parking_requirement_per_unit": 2,
     "unmapped_condition": "lot inside an urban growth area of a city or county planning under RCW 36.70A.040 (and past its local compliance deadline)",
-    "statutory_exclusions": [
-      "critical_areas_or_buffers (RCW 36.70A.060)",
-      "impaired_reservoir_watershed"
-    ],
     "summary": "Cities and counties planning under the Growth Management Act must allow at least two accessory dwelling units on every lot in zones within an urban growth area that allow single-family homes; no owner-occupancy rule; ADU floor-area cap no smaller than 1,000 sq ft; no off-street parking within 1/2 mile walk of a major transit stop, at most one space per ADU on lots under 6,000 sq ft and two on larger lots (exceptions by approved study).",
     "verification": {
       "status": "verified",
@@ -856,7 +1467,31 @@
       ],
       "notes": "Effective date is the session law's (the section's exclusion clause refers to 'as of July 23, 2023'); each jurisdiction's obligation begins six months after its periodic plan update under RCW 36.70A.680, which was not fetched."
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [
+      {
+        "key": "critical_areas_or_buffers",
+        "label": "a lot designated with critical areas or their buffers",
+        "citation": "RCW 36.70A.681(4)",
+        "wording": "lots designated with critical areas or their buffers as designated in RCW 36.70A.060",
+        "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681",
+        "checked_on": "2026-11-19",
+        "scope_note": "critical areas include frequently flooded areas, but the page has no critical-area layer and FEMA's special flood hazard area is not the same test"
+      },
+      {
+        "key": "impaired_reservoir_watershed",
+        "label": "a watershed serving a potable-water reservoir listed as impaired or threatened",
+        "citation": "RCW 36.70A.681(4)",
+        "wording": "a watershed serving a reservoir for potable water if that watershed is or was listed, as of July 23, 2023, as impaired or threatened under section 303(d) of the federal clean water act (33 U.S.C. Sec. 1313(d))",
+        "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "RCW 36.70A.681(4) \"The provisions of this section do not apply to ...\", read on 19 Nov 2026."
+    }
   },
   {
     "id": "wa_sb5184_parking",
@@ -876,10 +1511,19 @@
       "method": "Session law PDF (lawfilesext.leg.wa.gov) and bill status page (app.leg.wa.gov)",
       "checked_on": "2026-11-16",
       "evidence": "(1) A city may not require more than 0.5 parking space per 18 multifamily dwelling unit or more than one parking space per single-19 family home. 20 ENGROSSED SUBSTITUTE SENATE BILL 5184 AS AMENDED BY THE HOUSE Passed Legislature - 2025 Regular Session State of Washington 69th Legislature 2025 Regular Session By Senate Housing (originally sponsored by Senators Bateman, Trudeau, Frame, Krishnadasan, Liias, Nobles, Pedersen, Salomon, Shewmake, and Stanford) READ FIRST TIME 02/07/25. p. 1 ESSB 5184.SL (2) A city may not require more than two parking spaces per 1,000 1 square feet of commercial space. 2 (3) A city may not require any minimum parking requirements for:3 (a) Residences under 1,200 || May 7 Governor signed. Chapter 204, 2025 Laws. (View session law) Effective date 7/27/2025. Close View all roll calls Cl",
-      "unverified_fields": [],
+      "unverified_fields": [
+        "exclusion_sources (not confirmed: this is a jurisdiction-wide parking rule that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted)",
+        "exclusion_sources (not confirmed: this is a jurisdiction-wide parking rule that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted)"
+      ],
       "notes": "Jurisdiction-wide parking caps, not a parcel-level housing right (parcel_level false). Compliance deadlines: about 2027-01-27 (50,000+) and 2028-07-27 (30,000-50,000), computed from the effective date."
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "not confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Not confirmed: this is a jurisdiction-wide parking rule that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted. Its (6) exceptions (small cities, an approved empirical study) are about jurisdictions, not sites."
+    }
   },
   {
     "id": "wa_hb1042_existing_buildings",
@@ -901,7 +1545,24 @@
       "unverified_fields": [],
       "notes": ""
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [
+      {
+        "key": "historic_district_hpoz",
+        "label": "a designated landmark or a building in a historic district (limits exterior design rules only)",
+        "citation": "Laws 2023 ch. 285 sec. 1(2)(e) (code cities) and sec. 2(2)(e) (cities)",
+        "wording": "unless the building is a designated landmark or is within a historic district established through a local preservation ordinance",
+        "url": "https://lawfilesext.leg.wa.gov/biennium/2023-24/Pdf/Bills/Session%20Laws/House/1042-S.SL.pdf",
+        "checked_on": "2026-11-19",
+        "effect": "limits",
+        "scope_note": "this carve-out lets the city keep exterior design or architectural requirements; it does not remove the right to add units. The page's historic flag is read only for Los Angeles (HPOZ, Historic-Cultural Monument and historic-register overlays); elsewhere it is not checked."
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Laws 2023 ch. 285 (ESHB 1042) read in full: it has no site exclusion. Sec. 1(3) and sec. 2(3) say a city need not approve units where the building cannot satisfy life safety standards, a building condition, not a site condition."
+    }
   },
   {
     "id": "or_adu_197a425",
@@ -925,7 +1586,13 @@
       "unverified_fields": [],
       "notes": ""
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "ORS 197A.425 read in full on 19 Nov 2026: it requires one ADU per detached single-unit dwelling in zoned areas inside the urban growth boundary, subject to reasonable local siting and design rules, and lists no excluded site."
+    }
   },
   {
     "id": "or_commercial_197a460",
@@ -950,7 +1617,57 @@
       ],
       "notes": ""
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [
+      {
+        "key": "not_adequately_served",
+        "label": "a property that cannot be adequately served by water, sewer, storm drainage or streets",
+        "citation": "ORS 197A.460(3)(b)(A)",
+        "wording": "The development on the property cannot be adequately served by water, sewer, storm water drainage or streets, or will not be adequately served at the time that development on the lot is complete",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+        "checked_on": "2026-11-19",
+        "scope_note": "applies on lands where the local government determines this"
+      },
+      {
+        "key": "slope_25_percent_or_more",
+        "label": "a property with a slope of 25 percent or greater",
+        "citation": "ORS 197A.460(3)(b)(B)",
+        "wording": "The property contains a slope of 25 percent or greater",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+        "checked_on": "2026-11-19",
+        "scope_note": "applies on lands where the local government determines this"
+      },
+      {
+        "key": "fema_100yr_floodway",
+        "label": "a property within a 100-year floodplain",
+        "citation": "ORS 197A.460(3)(b)(C)",
+        "wording": "The property is within a 100-year floodplain",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+        "checked_on": "2026-11-19",
+        "scope_note": "the statute applies this where the local government determines it; the page's flag is FEMA's special flood hazard area"
+      },
+      {
+        "key": "goal_constrained_hazard_or_resource_land",
+        "label": "land constrained by regulations based on statewide goals on natural disasters and hazards or natural resources",
+        "citation": "ORS 197A.460(3)(b)(D)",
+        "wording": "The development of the property is constrained by land use regulations based on statewide land use planning goals relating to: (i) Natural disasters and hazards; or (ii) Natural resources, including air, water, land or natural areas, but not including open spaces.",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "vacant_or_recently_added_to_ugb",
+        "label": "land that is vacant or was added to the urban growth boundary within the last 15 years",
+        "citation": "ORS 197A.460(3)(c)",
+        "wording": "Apply on lands that are vacant or that were added to the urban growth boundary within the last 15 years.",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "ORS 197A.460(3), read on 19 Nov 2026. Items (b)(A) to (D) apply on lands where the local government determines the condition, so the page can only approximate them."
+    }
   },
   {
     "id": "mt_adu_76_2_345",
@@ -976,7 +1693,13 @@
       ],
       "notes": ""
     },
-    "last_verified": null
+    "last_verified": null,
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "MCA 76-2-345 read in full on 19 Nov 2026: it names no excluded site. Subsection (7) lets a municipality require a will-serve letter, a local option, and (6) keeps building, fire and health codes in force."
+    }
   },
   {
     "id": "mt_commercial_76_2_304_4",
@@ -1004,7 +1727,13 @@
       ],
       "notes": ""
     },
-    "last_verified": null
+    "last_verified": null,
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "MCA 76-2-304 (both the temporary text and the text effective 1 Oct 2026) read in full on 19 Nov 2026: subsections (3) and (4) name no excluded site; (4)(a)(i)-(ii) set a will-serve letter and a commercial zone as conditions, recorded in unmapped_condition."
+    }
   },
   {
     "id": "ma_adu_40a3",
@@ -1026,7 +1755,13 @@
       "unverified_fields": [],
       "notes": "Effective date computed: the act is an emergency law approved 2024-08-06, and section 8 takes effect 180 days after the act's effective date."
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "The accessory dwelling unit paragraph of G.L. c. 40A s. 3 read on 19 Nov 2026: it allows one ADU in a single-family zoning district subject to reasonable regulations (including 310 CMR 15.000, the septic rules) and names no excluded site."
+    }
   },
   {
     "id": "ri_adu_large_lot",
@@ -1048,7 +1783,13 @@
       "unverified_fields": [],
       "notes": ""
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "R.I. Gen. Laws 45-24-73 read in full on 19 Nov 2026: it names no excluded site."
+    }
   },
   {
     "id": "ri_adu_existing_footprint",
@@ -1070,7 +1811,13 @@
       "unverified_fields": [],
       "notes": ""
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "R.I. Gen. Laws 45-24-73 read in full on 19 Nov 2026: it names no excluded site."
+    }
   },
   {
     "id": "ca_adu_66323",
@@ -1094,7 +1841,13 @@
       ],
       "notes": "Secondary copy (FindLaw) of the official code; re-check against leginfo when reachable."
     },
-    "last_verified": null
+    "last_verified": null,
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Gov. Code 66323 read in full from the Legislative Counsel bulk database: it requires ministerial approval within a residential or mixed-use zone and lists no site that is outside it. Text read from the Legislative Counsel bulk database (LAW_SECTION_TBL in https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip), because leginfo.legislature.ca.gov refuses this machine."
+    }
   },
   {
     "id": "az_adaptive_reuse_9_462_10",
@@ -1120,7 +1873,63 @@
       ],
       "notes": ""
     },
-    "last_verified": null
+    "last_verified": null,
+    "exclusion_sources": [
+      {
+        "key": "historic_district_hpoz",
+        "label": "a district of historical significance",
+        "citation": "A.R.S. 9-462.10(G)(1)",
+        "wording": "Land in an area that is designated as a district of historical significance pursuant to section 9-462.01, subsection A, paragraph 10.",
+        "url": "https://www.azleg.gov/ars/9/00462-10.htm",
+        "checked_on": "2026-11-19",
+        "scope_note": "The page's historic flag is read only for Los Angeles (HPOZ, Historic-Cultural Monument and historic-register overlays); elsewhere it is not checked."
+      },
+      {
+        "key": "local_historic_designation",
+        "label": "land designated historic by a local government",
+        "citation": "A.R.S. 9-462.10(G)(2)",
+        "wording": "Land in an area that is designated historic by a local government.",
+        "url": "https://www.azleg.gov/ars/9/00462-10.htm",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "national_register_historic_area",
+        "label": "land designated historic on the national register of historic places",
+        "citation": "A.R.S. 9-462.10(G)(3)",
+        "wording": "Land in an area that is designated as historic on the national register of historic places.",
+        "url": "https://www.azleg.gov/ars/9/00462-10.htm",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "military_airport_vicinity",
+        "label": "land in the vicinity of a military airport or ancillary military facility",
+        "citation": "A.R.S. 9-462.10(G)(4)",
+        "wording": "Land in the territory in the vicinity of a military airport or ancillary military facility as defined in section 28-8461.",
+        "url": "https://www.azleg.gov/ars/9/00462-10.htm",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "public_airport_vicinity",
+        "label": "land in the vicinity of a licensed commercial, general aviation or public airport",
+        "citation": "A.R.S. 9-462.10(G)(5)",
+        "wording": "Land in the territory in the vicinity of a federal aviation administration commercially licensed airport or a general aviation or public airport as defined in section 28-8486.",
+        "url": "https://www.azleg.gov/ars/9/00462-10.htm",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "tribal_land",
+        "label": "land in a municipality that is located on tribal land",
+        "citation": "A.R.S. 9-462.10(G)(6)",
+        "wording": "Land in a municipality that is located on tribal land.",
+        "url": "https://www.azleg.gov/ars/9/00462-10.htm",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "A.R.S. 9-462.10(G) \"This section does not apply to any of the following\", read in full on 19 Nov 2026. Subsection B (city-designated commercial or employment hubs, up to 10 percent of parcels) is already in unmapped_condition."
+    }
   },
   {
     "id": "tx_sb15_small_lots",
@@ -1142,7 +1951,38 @@
       "unverified_fields": [],
       "notes": "A lot-size preemption for new subdivisions, not a right to added units on existing lots."
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [
+      {
+        "key": "law_enforcement_training_center_area",
+        "label": "an area within one mile of a law enforcement training center campus or perimeter (counties of 2,600,000 or more)",
+        "citation": "Tex. Loc. Gov't Code 211.052(b)(1)",
+        "wording": "one mile of a campus of the perimeter of a law enforcement training center in a county that has a population of 2,600,000 or more",
+        "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00015F.htm",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "airport_noise_or_runway_zone",
+        "label": "an area within 3,000 feet of an airport or military base",
+        "citation": "Tex. Loc. Gov't Code 211.052(b)(2)",
+        "wording": "3,000 feet of an airport or military base",
+        "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00015F.htm",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "military_airport_overlay_zone",
+        "label": "an area within 15,000 feet of a military base boundary designated as a military airport overlay zone",
+        "citation": "Tex. Loc. Gov't Code 211.052(b)(3)",
+        "wording": "15,000 feet of the boundary of a military base if the area is designated by a municipality or joint airport zoning board, as applicable, as a military airport overlay zone with a clear zone and accident potential zone designation, as described by the military base's air installation compatible use zone report",
+        "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00015F.htm",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Tex. Loc. Gov't Code 211.052(b) \"This subchapter does not apply to an area located within\", from the enrolled bill. 211.053 and 211.055(a-1), (c) leave flooding, sewer, well-water, waterway setback and aquifer-protection rules in place; they are not site exclusions."
+    }
   },
   {
     "id": "id_adu_67_6541",
@@ -1155,9 +1995,6 @@
     "statute_url": "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6541/",
     "adus_by_right": 1,
     "municipality_pop_min": 10001,
-    "statutory_exclusions": [
-      "historic district (§ 67-4607) or historic property (§ 67-4614), for the zoning amendments due 1 Feb 2027"
-    ],
     "summary": "Cities over 10,000 may not ban ADUs in residential zones; ADU projects that meet the city's land use requirements must be approved administratively and as a matter of right. By 1 Feb 2027 cities must also allow one internal or detached ADU per single-family lot, with no off-street parking requirement in most cases, no owner-occupancy rule, and a size floor of 1,000 sq ft or 75% of the house.",
     "verification": {
       "status": "verified",
@@ -1167,7 +2004,43 @@
       "unverified_fields": [],
       "notes": "The 1 Feb 2027 requirements (parking, size, owner-occupancy) are not yet binding; the engine relies only on the administrative as-of-right approval in subsection (3)."
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [
+      {
+        "key": "historic_district_hpoz",
+        "label": "a historic district (67-4607) or historic property (67-4614)",
+        "citation": "Idaho Code 67-6541(2)",
+        "wording": "except for lands falling within an area defined as a historic district under section 67-4607, Idaho Code, or designated as a historic property pursuant to section 67-4614, Idaho Code",
+        "url": "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6541/",
+        "checked_on": "2026-11-19",
+        "scope_note": "this exception is to the amendments due 1 Feb 2027 under subsection (2). The page's historic flag is read only for Los Angeles (HPOZ, Historic-Cultural Monument and historic-register overlays); elsewhere it is not checked."
+      },
+      {
+        "key": "fema_100yr_floodway",
+        "label": "flood plain regulations",
+        "citation": "Idaho Code 67-6541(7)(a)",
+        "wording": "Building codes, fire safety standards, and flood plain regulations",
+        "url": "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6541/",
+        "checked_on": "2026-11-19",
+        "effect": "limits",
+        "scope_note": "the section does not supersede these laws; the law stays on the parcel and local flood plain rules still apply. The statute's own test is the FEMA special flood hazard area, which is what the page's flag reads."
+      },
+      {
+        "key": "environmental_hazard_aquifer_slope_habitat_land",
+        "label": "environmental hazards, aquifer recharge zones, steep slopes and critical habitat",
+        "citation": "Idaho Code 67-6541(7)(c)",
+        "wording": "Laws regarding environmental hazards, aquifer recharge zones, steep slopes, and critical habitat protections",
+        "url": "https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6541/",
+        "checked_on": "2026-11-19",
+        "effect": "limits",
+        "scope_note": "the section does not supersede these laws"
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Idaho Code 67-6541 read in full on 19 Nov 2026. Only the historic carve-out in subsection (2) removes land from the amendments; subsection (7) says the section does not supersede public health, safety and environmental laws, so it is recorded as limits."
+    }
   },
   {
     "id": "id_starter_home_67_6542",
@@ -1186,10 +2059,19 @@
       "method": "Idaho Statutes (legislature.idaho.gov) and the 2026 session's chapter list",
       "checked_on": "2026-11-16",
       "evidence": "starter home subdivisions. (1) No city shall enact or enforce any ordinance within its jurisdiction that bans starter home subdivisions in any residential zoning area. \"Starter home subdivision\" means a residential subdivision on at least four (4) acres of land that is designed to provide attainable homeownership opportunities with single-family detached dwellings on smaller lots that are no greater than one thousand five hundred (1,500) square feet per lot, have compact home sizes, and have efficient site design t || (a) Prohibit requiring minimum lot sizes exceeding one thousand five hundred (1,500) square feet for lots located in starter home subdivisions unless infrastructure limitations, lot configuration, or environmental constr || 264 S 1352 aa Starter home subdivisions 03/31/26 07/01/2026",
-      "unverified_fields": [],
+      "unverified_fields": [
+        "exclusion_sources (not confirmed: this is a subdivision rule for sites of four acres or more that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted)",
+        "exclusion_sources (not confirmed: this is a subdivision rule for sites of four acres or more that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted)"
+      ],
       "notes": ""
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "not confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Not confirmed: this is a subdivision rule for sites of four acres or more that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted."
+    }
   },
   {
     "id": "nv_adu_ordinance_278_257",
@@ -1215,7 +2097,22 @@
       ],
       "notes": "A mandate to adopt an ordinance, not a parcel-level by-right rule; the engine reports it as unconfirmed."
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [
+      {
+        "key": "interstate_compact_regional_planning_area",
+        "label": "a region with an interstate-compact regional planning agency whose plan regulates housing (Tahoe)",
+        "citation": "NRS 278.257(5)",
+        "wording": "Any ordinance adopted pursuant to this section does not apply in a region in a county or city in this State for which there has been created by interstate compact a regional planning agency and the regional plan adopted by the regional planning agency calls for the regulation of housing.",
+        "url": "https://www.leg.state.nv.us/nrs/nrs-278.html#NRS278Sec257",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "NRS 278.257 read in full on 19 Nov 2026."
+    }
   },
   {
     "id": "ca_ab2011_affordable",
@@ -1239,7 +2136,121 @@
       "unverified_fields": [],
       "notes": "effective_date is the date the Legislative Counsel's database gives for § 65912.110 (Stats. 2022, ch. 647)."
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [
+      {
+        "key": "coastal_commission_or_sma",
+        "label": "coastal-zone sites listed in 65913.4(a)(6)(A) (clause (iv) is excluded from the test)",
+        "citation": "Cal. Gov. Code 65912.111(e), applying 65913.4(a)(6)(A)",
+        "wording": "An area of the coastal zone subject to paragraph (1) or (2) of subdivision (a) of Section 30603 of the Public Resources Code.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "prime_farmland",
+        "label": "prime farmland or farmland of statewide importance",
+        "citation": "Cal. Gov. Code 65912.111(e), applying 65913.4(a)(6)(B)",
+        "wording": "Either prime farmland or farmland of statewide importance, as defined pursuant to the United States Department of Agriculture land inventory and monitoring criteria, as modified for California, and designated on the maps prepared by the Farmland Mapping and Monitoring Program of the Department of Conservation, or land zoned or designated for agricultural protection or preservation by a local ballot measure that was approved by the voters of that jurisdiction.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "wetlands",
+        "label": "wetlands",
+        "citation": "Cal. Gov. Code 65912.111(e), applying 65913.4(a)(6)(C)",
+        "wording": "Wetlands, as defined in the United States Fish and Wildlife Service Manual, Part 660 FW 2 (June 21, 1993).",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "calfire_or_state_vhfhsz",
+        "label": "a very high fire hazard severity zone or state responsibility area",
+        "citation": "Cal. Gov. Code 65912.111(e), applying 65913.4(a)(6)(D)",
+        "wording": "Within a very high fire hazard severity zone, as determined by the Department of Forestry and Fire Protection pursuant to Section 51178, or within the state responsibility area, as defined in Section 4102 of the Public Resources Code.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19",
+        "scope_note": "the section excepts sites with adopted fire hazard mitigation measures; the page does not check those, and for a vacant site 65912.111(h)(2) separately bars a very high zone"
+      },
+      {
+        "key": "hazardous_waste_site",
+        "label": "a listed hazardous waste site",
+        "citation": "Cal. Gov. Code 65912.111(e), applying 65913.4(a)(6)(E)",
+        "wording": "A hazardous waste site that is listed pursuant to Section 65962.5 or a hazardous waste site designated by the Department of Toxic Substances Control pursuant to Section 25356 of the Health and Safety Code",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "earthquake_fault_zone",
+        "label": "a delineated earthquake fault zone",
+        "citation": "Cal. Gov. Code 65912.111(e), applying 65913.4(a)(6)(F)",
+        "wording": "Within a delineated earthquake fault zone as determined by the State Geologist in any official maps published by the State Geologist",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "fema_100yr_floodway",
+        "label": "a FEMA special flood hazard area",
+        "citation": "Cal. Gov. Code 65912.111(e), applying 65913.4(a)(6)(G)",
+        "wording": "Within a special flood hazard area subject to inundation by the 1 percent annual chance flood (100-year flood) as determined by the Federal Emergency Management Agency in any official maps published by the Federal Emergency Management Agency.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19",
+        "scope_note": "The statute's own test is the FEMA special flood hazard area, which is what the page's flag reads. The section allows a site that has a FEMA Letter of Map Revision or meets National Flood Insurance Program criteria, which the page does not check"
+      },
+      {
+        "key": "fema_regulatory_floodway",
+        "label": "a FEMA regulatory floodway",
+        "citation": "Cal. Gov. Code 65912.111(e), applying 65913.4(a)(6)(H)",
+        "wording": "Within a regulatory floodway as determined by the Federal Emergency Management Agency in any official maps published by the Federal Emergency Management Agency, unless the development has received a no-rise certification in accordance with Section 60.3(d)(3) of Title 44 of the Code of Federal Regulations.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "conservation_plan_land",
+        "label": "land identified for conservation in an adopted conservation plan",
+        "citation": "Cal. Gov. Code 65912.111(e), applying 65913.4(a)(6)(I)",
+        "wording": "Lands identified for conservation in an adopted natural community conservation plan pursuant to the Natural Community Conservation Planning Act (Chapter 10 (commencing with Section 2800) of Division 3 of the Fish and Game Code), habitat conservation plan pursuant to the federal Endangered Species Act of 1973 (16 U.S.C. Sec. 1531 et seq.), or other adopted natural resource protection plan.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "protected_species_habitat",
+        "label": "habitat for protected species",
+        "citation": "Cal. Gov. Code 65912.111(e), applying 65913.4(a)(6)(J)",
+        "wording": "Habitat for protected species identified as candidate, sensitive, or species of special status by state or federal agencies, fully protected species, or species protected by the federal Endangered Species Act of 1973 (16 U.S.C. Sec. 1531 et seq.), the California Endangered Species Act (Chapter 1.5 (commencing with Section 2050) of Division 3 of the Fish and Game Code), or the Native Plant Protection Act (Chapter 10 (commencing with Section 1900) of Division 2 of the Fish and Game Code).",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "recorded_conservation_easement",
+        "label": "land under a conservation easement",
+        "citation": "Cal. Gov. Code 65912.111(e), applying 65913.4(a)(6)(K)",
+        "wording": "Lands under conservation easement.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      },
+      {
+        "key": "historic_register_demolition",
+        "label": "a site where a registered historic structure would be demolished",
+        "citation": "Cal. Gov. Code 65912.111(f)(1)",
+        "wording": "The development would require the demolition of a historic structure that was placed on a national, state, or local historic register.",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19",
+        "scope_note": "The page's historic flag is read only for Los Angeles (HPOZ, Historic-Cultural Monument and historic-register overlays); elsewhere it is not checked."
+      },
+      {
+        "key": "mobilehome_or_rv_park_site",
+        "label": "a mobilehome park, RV park or special occupancy park site",
+        "citation": "Cal. Gov. Code 65912.111(f)(2)",
+        "wording": "The existing parcel of land or site that is governed under the Mobilehome Residency Law (Chapter 2.5 (commencing with Section 798) of Title 2 of Part 2 of Division 2 of the Civil Code), the Recreational Vehicle Park Occupancy Law (Chapter 2.6 (commencing with Section 799.20) of Title 2 of Part 2 of Division 2 of the Civil Code), the Mobilehome Parks Act (Part 2.1 (commencing with Section 18200) of Division 13 of the Health and Safety Code), or the Special Occupancy Parks Act (Part 2.3 (commencing with Section 18860) of Division 13 of the Health and Safety Code).",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Gov. Code 65912.111(e) applies 65913.4(a)(6) as it reads now, except clause (iv) of (A); (f) adds two more. Items (a) to (d), (g) and (h)(1) of 65912.111 are zoning, urban-location, industrial-adjacency and neighborhood-plan tests, recorded in unmapped_condition, not site exclusions. Text read from the Legislative Counsel bulk database (LAW_SECTION_TBL in https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip), because leginfo.legislature.ca.gov refuses this machine."
+    }
   },
   {
     "id": "co_hb24_1304_parking",
@@ -1259,10 +2270,19 @@
       "method": "Colorado General Assembly, signed act text (leg.colorado.gov)",
       "checked_on": "2026-11-16",
       "evidence": "29-36-103. Limitations on minimum parking requirements. (1) ON OR AFTER JUNE 30, 2025, A MUNICIPALITY SHALL NEITHER ENACT NOR ENFORCE LOCAL LAWS THAT ESTABLISH A MINIMUM PARKING REQUIREMENT THAT APPLIES TO A LAND USE APPROVAL FOR A MULTIFAMILY RESIDENTIAL DEVELOPMENT, ADAPTIVE RE-USE FOR RESIDENTIAL PURPOSES, OR ADAPTIVE RE-USE MIXED-USE PURPOSES WHICH INCLUDE AT LEAST FIFTY PERCENT OF USE FOR RESIDENTIAL PURPOSES THAT IS WITHIN THE MUNICIPALITY, A METROPOLITAN PLANNING ORGANIZATION, AND AT LEAST PARTIALLY WITHIN AN APPLICABLE TRANSIT SERVICE AREA. (2) ON OR AFTER JUNE 30, 2025, A COUNTY SHALL NEITHER ENACT NOR ENFORCE LOCAL LAWS TH",
-      "unverified_fields": [],
+      "unverified_fields": [
+        "exclusion_sources (not confirmed: HB24-1304 is a jurisdiction-wide parking rule that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted)",
+        "exclusion_sources (not confirmed: HB24-1304 is a jurisdiction-wide parking rule that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted)"
+      ],
       "notes": ""
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "not confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Not confirmed: HB24-1304 is a jurisdiction-wide parking rule that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted."
+    }
   },
   {
     "id": "va_parking_2209_4",
@@ -1284,11 +2304,19 @@
       "checked_on": "2026-11-16",
       "evidence": "B. Any locality that has adopted a zoning ordinance pursuant to this chapter shall not require, as a condition of zoning approval, minimum off-street parking for residential, multifamily, or mixed-use development located within a designated area in amounts exceeding the following: 1. One-half of one parking space per dwelling unit for multifamily or mixed-use residential development; and 2. One parking space per dwelling unit || \"Designated area\" means any parcel located within one-half mile of the entrance to a mass transit or public transportation station || 2026, c. 1075",
       "unverified_fields": [
-        "effective_date (Virginia acts take effect 1 July unless they say otherwise; the act itself was not fetched. The Code page, dated 11/16/2026, shows this section as current with no future-effective label, unlike § 15.2-2292.4, which is labelled 'Effective July 1, 2027')"
+        "effective_date (Virginia acts take effect 1 July unless they say otherwise; the act itself was not fetched. The Code page, dated 11/16/2026, shows this section as current with no future-effective label, unlike § 15.2-2292.4, which is labelled 'Effective July 1, 2027')",
+        "exclusion_sources (not confirmed: this is a jurisdiction-wide parking rule that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted)",
+        "exclusion_sources (not confirmed: this is a jurisdiction-wide parking rule that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted)"
       ],
       "notes": "A jurisdiction-wide cap on what a locality may require, not a parcel right; the engine never applies it to a single parcel."
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "not confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Not confirmed: this is a jurisdiction-wide parking rule that the engine never applies to a single parcel (parcel_level false), so its exclusions were not extracted."
+    }
   },
   {
     "id": "va_small_lot_2286_2",
@@ -1313,7 +2341,23 @@
       ],
       "notes": "A duty to zone some land for small lots; which land is up to the locality, so it is never a right on a given parcel."
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [
+      {
+        "key": "historic_district_hpoz",
+        "label": "an area within a historic district established under 15.2-2306",
+        "citation": "Va. Code 15.2-2286.2(D)",
+        "wording": "This section shall not apply to areas within a historic district established pursuant to § 15.2-2306.",
+        "url": "https://law.lis.virginia.gov/vacode/title15.2/chapter22/section15.2-2286.2/",
+        "checked_on": "2026-11-19",
+        "scope_note": "The page's historic flag is read only for Los Angeles (HPOZ, Historic-Cultural Monument and historic-register overlays); elsewhere it is not checked."
+      }
+    ],
+    "exclusions_review": {
+      "status": "confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Va. Code 15.2-2286.2 read in full on 19 Nov 2026. The law sets a zoning-district duty on localities of 50,000 or more and is not applied to a single parcel (parcel_level false); the exclusion is recorded for completeness."
+    }
   },
   {
     "id": "dc_adu_accessory_apartment_u253",
@@ -1333,11 +2377,19 @@
       "checked_on": "2026-11-16",
       "evidence": "An accessory apartment shall be permitted in a principal dwelling or an accessory building as a matter of right in the R zones, except the R-1B/GT or R 3/GT zone, subject to the provisions of this section. An a || Either the principal dwelling or accessory apartment unit shall be owner-occupied for the duration of the acce || SOURCE: Final Rulemaking published at 63 DCR 2447, 3338 (March 4, 2016 Part 2); as amended by Final Rulemaking published at 70 DCR 011297 (August 25, 2023); as amended by Final Rulemaking published at 73 DCR 013245 (October 16, 2026). Distr",
       "unverified_fields": [
-        "effective_date (the text lists final rulemakings published in 2016, 2023 and 16 Oct 2026; the date each took effect was not fetched)"
+        "effective_date (the text lists final rulemakings published in 2016, 2023 and 16 Oct 2026; the date each took effect was not fetched)",
+        "exclusion_sources (not confirmed: the DCRegs page fetched for 11-U253 lists the rule's versions and gives no regulation text, so no exclusions were read)",
+        "exclusion_sources (not confirmed: the DCRegs page fetched for 11-U253 lists the rule's versions and gives no regulation text, so no exclusions were read)"
       ],
       "notes": "Text file: https://dcregs.dc.gov/Common/DCMR/RuleList.aspx?DownloadFile={8E59471E-8C75-40F3-858C-FEB57CD5BA4B}. DC is a single jurisdiction, so this is its own zoning code rather than a state preemption law."
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "not confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Not confirmed: the DCRegs page fetched for 11-U253 lists the rule's versions and gives no regulation text, so no exclusions were read."
+    }
   },
   {
     "id": "ct_adu_8_2o",
@@ -1358,11 +2410,19 @@
       "checked_on": "2026-11-16",
       "evidence": "(1) Designate locations or zoning districts within the municipality in which accessory dwelling units are allowed, provided at least one accessory dwelling unit shall be allowed as of right on each lot that contains a single-family dwelling and no such accessory dwelling unit shall be required to be an affordable accessory dwell || (C) any more than one parking space for any such accessory d || (e) If a municipality fails to adopt new regulations or amend existing regulations by January 1, 2023, for the purpose of complying with the provisions of subsections (a) to (d), inclusive, of this section, and unless such municipality opts out of the provisions of said subsections in accordance wit || except that, on and after January 1, 2023, no municipality may opt out of the provisions of said subsections. (g) Notwit",
       "unverified_fields": [
-        "bill_number (from round-1 secondary sources; the section's history line was not fetched)"
+        "bill_number (from round-1 secondary sources; the section's history line was not fetched)",
+        "exclusion_sources (not confirmed: the Connecticut General Assembly's statute page fetched from the record's URL is a script-rendered shell with no statute text, and www.cga.ct.gov fails its certificate check through this machine's proxy (checked 19 Nov 2026), so no text was read)",
+        "exclusion_sources (not confirmed: the Connecticut General Assembly's statute page fetched from the record's URL is a script-rendered shell with no statute text, and www.cga.ct.gov fails its certificate check through this machine's proxy (checked 19 Nov 2026), so no text was read)"
       ],
       "notes": "Effective date taken from the statute's own 1 Jan 2023 compliance date in subsection (e)."
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "not confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Not confirmed: the Connecticut General Assembly's statute page fetched from the record's URL is a script-rendered shell with no statute text, and www.cga.ct.gov fails its certificate check through this machine's proxy (checked 19 Nov 2026), so no text was read."
+    }
   },
   {
     "id": "ct_parking_8_3n",
@@ -1383,11 +2443,19 @@
       "checked_on": "2026-11-16",
       "evidence": "(d) Zoning regulations adopted pursuant to subsection (a) of this section shall not: || (9) Require a minimum number of off-street motor vehicle parking spaces for any residential development except as provided in section 8-3n; || Nov. Sp. Sess. P.A. 25-1, S. 18.) || (b) A municipality may require a minimum number of off-street motor vehicle parking spaces for a residential development that contains more than sixteen dwelling units, as defined in section 47a-1, provided any such municipality shall allow the proposed developer of such development to submit to the zoning enforcement officer, planning commission, zoning commission or combined planning and zoning commission a parking needs assessment that conforms with the requirements of subsection (c) of this section. Such officer or commission shall condition the approval of such development on the construction of off-street parking spaces not exceeding: (1) One such space for each studio or one-bedroom d",
       "unverified_fields": [
-        "effective_date (the amending act, Nov. Sp. Sess. P.A. 25-1, was not fetched)"
+        "effective_date (the amending act, Nov. Sp. Sess. P.A. 25-1, was not fetched)",
+        "exclusion_sources (not confirmed: the Connecticut General Assembly's statute page fetched from the record's URL is a script-rendered shell with no statute text, and www.cga.ct.gov fails its certificate check through this machine's proxy (checked 19 Nov 2026), so no text was read)",
+        "exclusion_sources (not confirmed: the Connecticut General Assembly's statute page fetched from the record's URL is a script-rendered shell with no statute text, and www.cga.ct.gov fails its certificate check through this machine's proxy (checked 19 Nov 2026), so no text was read)"
       ],
       "notes": "§ 8-2 text: https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=4648&Index=I%3a%5czindex%5csurs&HitCount=2&hits=6e+6f+&hc=530&req=%28number+contains+8%2D2%2A%29&Item=7. A jurisdiction-wide limit, not a parcel right."
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "not confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Not confirmed: the Connecticut General Assembly's statute page fetched from the record's URL is a script-rendered shell with no statute text, and www.cga.ct.gov fails its certificate check through this machine's proxy (checked 19 Nov 2026), so no text was read."
+    }
   },
   {
     "id": "ct_middle_housing_8_2s",
@@ -1408,10 +2476,18 @@
       "evidence": "(a) On and after July 1, 2026, any zoning regulations adopted or amended pursuant to section 8-2 (1) shall allow for the development of a transit community middle housing development, as defined in section 8-13hh, or a mixed-use development, on any lot that is zoned for commercial or mixed-use development, subject only to summary review, as defined in section 8-2r, and (2) may allow for the development of a transit community middle housing development on any lot that allows for residential use subject only to such",
       "unverified_fields": [
         "bill_number (the enacting act was not fetched)",
-        "definitions of transit community middle housing development and mixed-use development (§ 8-13hh, not fetched)"
+        "definitions of transit community middle housing development and mixed-use development (§ 8-13hh, not fetched)",
+        "exclusion_sources (not confirmed: the Connecticut General Assembly's statute page fetched from the record's URL is a script-rendered shell with no statute text, and www.cga.ct.gov fails its certificate check through this machine's proxy (checked 19 Nov 2026), so no text was read)",
+        "exclusion_sources (not confirmed: the Connecticut General Assembly's statute page fetched from the record's URL is a script-rendered shell with no statute text, and www.cga.ct.gov fails its certificate check through this machine's proxy (checked 19 Nov 2026), so no text was read)"
       ],
       "notes": "Effective date from the section's own 'On and after July 1, 2026'."
     },
-    "last_verified": "2026-11-16"
+    "last_verified": "2026-11-16",
+    "exclusion_sources": [],
+    "exclusions_review": {
+      "status": "not confirmed",
+      "checked_on": "2026-11-19",
+      "note": "Not confirmed: the Connecticut General Assembly's statute page fetched from the record's URL is a script-rendered shell with no statute text, and www.cga.ct.gov fails its certificate check through this machine's proxy (checked 19 Nov 2026), so no text was read."
+    }
   }
 ]

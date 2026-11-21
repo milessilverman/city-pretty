@@ -1,0 +1,11 @@
+# The static site (separate from the advisor Worker in wrangler.toml). Deploy: npm run deploy:site
+# Serves dist-site/ as Workers static assets; workers/site.ts only maps /city-pretty/* to the same files.
+name = "city-pretty"
+main = "workers/site.ts"
+compatibility_date = "2026-11-08"
+
+[assets]
+directory = "./dist-site"
+binding = "ASSETS"
+# Run the Worker only for the old GitHub Pages path; every other request is a plain (free) asset request.
+run_worker_first = ["/city-pretty", "/city-pretty/*"]

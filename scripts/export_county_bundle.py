@@ -7,9 +7,9 @@ for a county the page doesn't list yet (in FIPS order), and adds or
 replaces its row in counties/manifest.json. No site-suggestions file is written: those need w5/tools/sites.py, which this
 environment can't run (it reads the old build machine's paths); the page handles a county without data-sites.
 
-Usage: python3 scripts/export_county_bundle.py <pipeline data dir (holds bundle-oc.b64, metrics.json)> <fips>
+Usage: python3 scripts/export_county_bundle.py <pipeline data dir (holds bundle-oc.b64, metrics.json)> <fips> [--r2-only]
 """
-import base64, gzip, json, os, re, sys
+import base64, gzip, json, os, re, subprocess, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -35,8 +35,11 @@ def main():
         # A county the page doesn't list yet (under 100,000 people): its name and state come from the registry (Census
         # Gazetteer), and its tag goes in FIPS order among the existing ones.
         name, st = reg["name"], reg["state"]
+    # --r2-only: the file is uploaded to R2 (scripts/r2_sync_counties.py) and not committed; the page loads it from R2
+    # only, and counties/.r2-only.txt (scripts/r2_only.py) lists it for .gitignore and for tests.
+    r2 = "--r2-only" in sys.argv
     tag = (f'<script type="application/json" class="county-bundle" data-fips="{fips}" data-name="{name}" data-st="{st}" '
-           f'data-src="counties/bundle_{fips}.json.gz"></script>')
+           f'data-src="counties/bundle_{fips}.json.gz"' + (' data-r2only="1"' if r2 else '') + '></script>')
     if m:
         h = h[:m.start()] + tag + h[m.end():]
     else:
@@ -56,8 +59,12 @@ def main():
     row = {"fips": fips, "name": reg["name"], "state": reg["state"], "block_groups": len(json.load(open(os.path.join(d, "metrics.json")))["metrics"]),
            "bundle_mb": round(os.path.getsize(out) / 1e6, 1), "built": B["meta"].get("built"), "osm": osm_state,
            "crash_source": crash[0] if crash and crash[3] else None, "crash_years": None}
+    if r2:
+        row["r2_only"] = True
     M["counties"] = sorted([c for c in M["counties"] if c["fips"] != fips] + [row], key=lambda c: c["fips"])
     json.dump(M, open(mp, "w"), indent=1)
+    if r2:
+        subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "r2_only.py"), "--add", f"bundle_{fips}.json.gz"], check=True)
     print(fips, name, row["block_groups"], "block groups,", row["bundle_mb"], "MB")
 
 

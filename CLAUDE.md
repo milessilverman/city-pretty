@@ -12,7 +12,8 @@ Going over costs the owner money. This overrides every other goal, including fin
   other tool, create another bucket, turn on object versioning, or start a multipart upload (unfinished parts are
   billed but do not show in listings).
 - Do not store anything in R2 except the files under `counties/`. No backups, caches, raw downloads or logs.
-- If data no longer fits under 8 GB: **stop and ask the owner.** Do not delete objects to make room without asking.
+- If data no longer fits under 8 GB: **stop and ask the owner.** The owner repeated on 19 Nov: do not pass the limit
+  without asking, no matter what. Do not delete objects to make room without asking either.
 - R2 also meters requests. Do not write scripts that list or re-upload the whole bucket in a loop.
 
 ## Accuracy rules (the owner's, from `docs/WORK-QUEUE.md` and `docs/DATA-AUDIT-AND-TRANSPARENCY.md`)
@@ -28,6 +29,7 @@ Going over costs the owner money. This overrides every other goal, including fin
 
 ## Where things are
 
-- Open work: `docs/WORK-QUEUE.md`. Plan: `docs/PLAN-ACCURACY-TO-DECISIONS.md`. Evidence per area: `docs/audit/`.
+- Open work: `docs/WORK-QUEUE.md`. One-month plan: `docs/PLAN-DEVELOPER-PLATFORM.md`. Research prompts the owner sends
+  out: `docs/RESEARCH-PROMPTS.md`. Evidence per area: `docs/audit/`.
 - County files load from the host in `app/data/county_hosts.json` (R2 when enabled), falling back to `counties/`.
 - The AI advisor runs in the Cloudflare Worker (`workers/`); the page works without it.

@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest";
 import * as fs from "fs";
 import * as path from "path";
+import { localBundleFiles } from "../r2Only";
 
 // County data files are served from regional GitHub Pages sites (each capped at 1 GB). app/data/county_hosts.json says
 // which region serves which states; every state that has county files must be in exactly one region.
 const H = JSON.parse(fs.readFileSync(path.join(__dirname, "../../app/data/county_hosts.json"), "utf-8"));
-const files = fs.readdirSync(path.join(__dirname, "../../counties")).filter((f) => /^bundle_\d{5}\.json\.gz$/.test(f));
+// R2-only files (counties/.r2-only.txt) are not in the repository, so not on any Pages site: skipped by name.
+const files = localBundleFiles();
 
 describe("county hosts", () => {
   it("every state with county files is in exactly one region", () => {

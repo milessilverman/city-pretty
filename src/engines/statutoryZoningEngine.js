@@ -15,6 +15,11 @@
  *  - A law applies only when every condition it needs is known for the parcel (zoning, population, transit
  *    distance...). A condition that cannot be checked is reported, not assumed.
  *  - Recorded zoning is required. Missing zoning never implies residential use.
+ *  - Site exclusions come from each law's own list (rec.exclusion_sources, one entry per exclusion with the statute's
+ *    wording and URL), never from a rule applied to every state. A listed condition that is present blocks that law and
+ *    the output quotes the statute. A listed condition the page has not checked (null) or an exclusion list not yet
+ *    confirmed against the statute text (rec.exclusions_review.status other than "confirmed") gives "not determined",
+ *    never "allowed". A condition the statute does not list has no effect on that law.
  */
 
 const STATUTE_USABLE_STATUSES = new Set(["verified", "partially_verified"]);
@@ -46,14 +51,11 @@ function statuteAppliesTo(rec, parcel) {
   const heavy = parcel.dist_to_heavy_rail_mi;
   const bus = parcel.dist_to_frequent_bus_or_brt_mi;
   const light = parcel.dist_to_light_rail_mi;
-  const ex = parcel.exclusions || {};
   const popAtLeast = (min) => {
     if (min == null) return true;
     if (pop == null) { missing.push("municipality population"); return false; }
     return pop >= min;
   };
-  const excludedBy = (rec.statutory_exclusions || []).some(e => ex[String(e).split(/[\s(]/)[0]]);
-  if (excludedBy) return { applies: false, missing };
   // A city ordinance (local_jurisdiction) applies only inside that city. Before 17 Nov 2026 Raleigh's and Minneapolis's
   // ordinances fell through to the generic state-wide rule below and were applied to residential lots across NC and MN.
   if (rec.local_jurisdiction) {
@@ -136,6 +138,28 @@ function statuteAppliesTo(rec, parcel) {
   }
 }
 
+// Checks one law's own exclusion list against the parcel's flags. A flag is true (present), false (checked, absent) or
+// null/undefined (not checked). Only flags the page really reads are ever true or false: fema_100yr_floodway (FEMA special
+// flood hazard area, every state), calfire_or_state_vhfhsz (very high zone, California only), historic_district_hpoz
+// (Los Angeles only).
+function statuteExclusionCheck(rec, parcel) {
+  const ex = parcel.exclusions || {};
+  const entries = Array.isArray(rec.exclusion_sources) ? rec.exclusion_sources : [];
+  const review = rec.exclusions_review || {};
+  const confirmed = review.status === "confirmed" && Array.isArray(rec.exclusion_sources);
+  // An entry with effect "limits" does not remove the law from the parcel (it narrows a route or leaves other laws in force);
+  // it is reported with the law but never blocks it or makes it "not determined".
+  const present = [], notChecked = [], limitsPresent = [], limitsNotChecked = [];
+  for (const e of entries) {
+    const v = ex[e.key], lim = e.effect === "limits";
+    if (v === true) (lim ? limitsPresent : present).push(e);
+    else if (v !== false) (lim ? limitsNotChecked : notChecked).push(e);
+  }
+  const quote = e => "\"" + e.wording + "\"" + (e.citation ? " (" + e.citation + ")" : "") +
+    (e.key === "fema_100yr_floodway" ? ". The page's flood flag is FEMA's special flood hazard area (the 100-year floodplain)" + (e.scope_note ? "; " + e.scope_note : "") : (e.scope_note ? ". " + e.scope_note : ""));
+  return { confirmed, present, notChecked, limitsPresent, limitsNotChecked, quote, review };
+}
+
 function evaluateByRightHousing(parcel, laws) {
   const ex = Object.assign({}, parcel.exclusions);
   const lawList = Array.isArray(laws) ? laws
@@ -145,6 +169,7 @@ function evaluateByRightHousing(parcel, laws) {
     state_code: parcel.state_code,
     applicable_statutes: [],
     not_confirmed: [],
+    excluded_by_statute: [],
     statutory_exclusions: ex,
     net_by_right_feasible: false,
     laws_loaded: lawList.length > 0,
@@ -154,11 +179,6 @@ function evaluateByRightHousing(parcel, laws) {
     return Object.assign(base, { base_zoning_code: null });
   }
   base.base_zoning_code = parcel.base_zoning_code;
-
-  const hasHardPhysicalExclusion =
-    ex.fema_100yr_floodway || ex.calfire_or_state_vhfhsz || ex.williamson_or_ag_preserve ||
-    ex.public_or_tribal_land;
-  if (hasHardPhysicalExclusion) return base;
 
   for (const rec of lawList) {
     if (!rec || rec.state_code !== parcel.state_code) continue;
@@ -176,6 +196,24 @@ function evaluateByRightHousing(parcel, laws) {
     }
     if (!check.applies) {
       if (check.missing.length) base.not_confirmed.push({ id: rec.id, name: label, reason: "Not on file for this parcel: " + check.missing.join(", ") + "." });
+      continue;
+    }
+    const exc = statuteExclusionCheck(rec, parcel);
+    if (exc.confirmed && exc.present.length) {
+      base.excluded_by_statute.push({
+        id: rec.id, name: label, statute_url: rec.statute_url || null,
+        exclusions: exc.present.map(e => ({ key: e.key, wording: e.wording, citation: e.citation || null, url: e.url || null, note: exc.quote(e) })),
+        detail: exc.present.map(exc.quote).join("; ") + ".",
+        reason: "Excluded by the law's own text: " + exc.present.map(exc.quote).join("; ") + ".",
+      });
+      continue;
+    }
+    if (!exc.confirmed) {
+      base.not_confirmed.push({ id: rec.id, name: label, reason: "Not determined: the list of sites this law excludes has not been confirmed against the statute text" + (exc.present.length ? " (the page found a condition that may be on it: " + exc.present.map(e => e.key).join(", ") + ")" : "") + "." });
+      continue;
+    }
+    if (exc.notChecked.length) {
+      base.not_confirmed.push({ id: rec.id, name: label, reason: "Not determined: the law excludes " + exc.notChecked.map(e => (e.label || e.key) + " (" + (e.citation || "statute text") + ")").join("; ") + ", and the page has not checked " + (exc.notChecked.length > 1 ? "these" : "this") + " for this parcel." });
       continue;
     }
     const unconfirmed = [];
@@ -199,6 +237,8 @@ function evaluateByRightHousing(parcel, laws) {
       max_parking_requirement_per_unit: statuteField(rec, "max_parking_requirement_per_unit", unconfirmed),
       affordability_mandate_pct: statuteField(rec, "affordability_mandate_pct", unconfirmed),
       tax_exemption_pct: statuteField(rec, "tax_exemption_pct", unconfirmed),
+      exclusion_limits: exc.limitsPresent.map(exc.quote),
+      exclusion_limits_not_checked: exc.limitsNotChecked.map(e => e.label || e.key),
       unconfirmed_fields: unconfirmed.concat(((rec.verification && rec.verification.unverified_fields) || []).map(String).filter(u => !unconfirmed.includes(u.split(/[\s(]/)[0]))),
     });
   }
@@ -207,5 +247,5 @@ function evaluateByRightHousing(parcel, laws) {
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { evaluateByRightHousing, statuteAppliesTo, STATUTE_USABLE_STATUSES };
+  module.exports = { evaluateByRightHousing, statuteAppliesTo, statuteExclusionCheck, STATUTE_USABLE_STATUSES };
 }

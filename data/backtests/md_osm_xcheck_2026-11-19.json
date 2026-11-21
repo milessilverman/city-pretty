@@ -1,0 +1,58 @@
+{
+ "_source": {
+  "script": "scripts/check_osm_extract_vs_overpass.py",
+  "note": "Maryland small counties, 19 Nov 2026: ID-for-ID comparison of the county extract (us-south cut to Maryland, data timestamp 2026-11-19T01:25:58Z) with a live Overpass query of the same box. Two counties checked (the public mirror answered 504 on several tries before answering)."
+ },
+ "counties": {
+  "24029": {
+   "fips": "24029",
+   "box_s_w_n_e": "38.97242800013666,-76.3748430003562,39.42550600016498,-75.73600399988146",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-19T01:25:58Z",
+   "checked_at": "2026-11-19T18:08:58Z",
+   "roads": {
+    "direct": 4459,
+    "extract": 4459,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 35,
+    "extract": 35,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  },
+  "24011": {
+   "fips": "24011",
+   "box_s_w_n_e": "38.61535799966222,-76.03504499975048,39.16333799974833,-75.68744700001126",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-19T01:25:58Z",
+   "checked_at": "2026-11-19T18:09:58Z",
+   "roads": {
+    "direct": 2728,
+    "extract": 2728,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 1,
+    "extract": 1,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  }
+ }
+}

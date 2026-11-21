@@ -521,6 +521,13 @@ describe("advisor loop", () => {
       expect(isAllowedOrigin("https://milessilverman.github.io", { ENVIRONMENT: "development" })).toBe(true);
     });
 
+    it("allows the site Worker's origin, and only that exact workers.dev host", () => {
+      expect(isAllowedOrigin("https://city-pretty.city-pretty.workers.dev", { ENVIRONMENT: "production" })).toBe(true);
+      expect(isAllowedOrigin("https://evil.city-pretty.workers.dev", { ENVIRONMENT: "production" })).toBe(false);
+      expect(isAllowedOrigin("https://city-pretty.city-pretty.workers.dev.evil.com", { ENVIRONMENT: "production" })).toBe(false);
+      expect(isAllowedOrigin("http://city-pretty.city-pretty.workers.dev", { ENVIRONMENT: "production" })).toBe(false);
+    });
+
     it("allows localhost origins during development, but strictly blocks them in production", () => {
       expect(isAllowedOrigin("http://localhost:3000")).toBe(true);
       expect(isAllowedOrigin("http://127.0.0.1:8080")).toBe(true);

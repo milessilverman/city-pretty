@@ -129,13 +129,23 @@ async function parcelPointIn(fips, bg) {
   return { lat: c.lat, lng: c.lng, service: null, note: "no parcel found near the block group's interior point; clicked the interior point" };
 }
 
-function countyFile(fips) {
+// County files kept only in R2 (counties/.r2-only.txt): read the local copy when this machine has one (the build
+// machine), else download the R2 copy the page itself loads.
+const R2_ONLY = new Set((loadText("counties/.r2-only.txt") || "").split("\n").map((l) => l.trim()).filter(Boolean));
+function loadText(rel) { return fs.existsSync(path.join(root, rel)) ? fs.readFileSync(path.join(root, rel), "utf8") : null; }
+async function countyFile(fips) {
   if (fips === "06037") return null;
   if (fips === "06059") {
     const b64 = fs.readFileSync(path.join(root, "app/data/bundle-oc.b64.txt"), "utf8").trim();
     return JSON.parse(zlib.gunzipSync(Buffer.from(b64, "base64")));
   }
-  return JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root, `counties/bundle_${fips}.json.gz`))));
+  const rel = `counties/bundle_${fips}.json.gz`;
+  if (R2_ONLY.has(`bundle_${fips}.json.gz`) && !fs.existsSync(path.join(root, rel))) {
+    const r = await fetch(load("app/data/county_hosts.json").r2.base.replace(/\/?$/, "/") + rel, { headers: UA });
+    if (!r.ok) throw new Error(`R2-only county file ${rel}: HTTP ${r.status}`);
+    return JSON.parse(zlib.gunzipSync(Buffer.from(await r.arrayBuffer())));
+  }
+  return JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root, rel))));
 }
 
 function hudExpected(fips) {
@@ -176,6 +186,9 @@ async function main() {
         if (/Failed to load resource|Access to fetch at|net::ERR_/.test(t)) rec.network_errors.push(t);
         else rec.errors.push("console: " + t);
       });
+      // where the county's data file actually came from (R2's r2.dev address or this site's counties/ path)
+      rec.bundle_requests = [];
+      page.on("response", (r) => { if (/bundle_\d{5}\.json\.gz/.test(r.url())) rec.bundle_requests.push(`${r.request().method()} ${r.status()} ${r.url()}`); });
       await page.addInitScript(() => { try { localStorage.setItem("cp_welcome_seen", "1"); } catch (e) {} });
       await page.goto(`http://127.0.0.1:${PORT}/city-pretty/`);
       await page.waitForFunction(() => document.querySelector("#loading")?.hidden === true, null, { timeout: 120000 });
@@ -194,7 +207,7 @@ async function main() {
         for (let i = ids.length > n * 3 ? step : 0; i < ids.length && pick.length < n * 3; i += step) pick.push(ids[i]);
         return pick;
       }, [fips, PER]);
-      const file = countyFile(fips);
+      const file = await countyFile(fips);
       const cc = loadIf(`app/data/crash_counts/${fips}.json`), cg = loadIf(`app/data/crash_gaps/${fips}.json`), te = loadIf(`app/data/tree_equity_2025/${fips}.json`);
       for (const bg of bgs) {
         if (rec.points.length >= PER) break;
