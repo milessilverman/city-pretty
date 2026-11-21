@@ -1,6 +1,45 @@
 # Small counties: the West (21 Nov 2026), served from R2 only
 
-In progress; this file is rewritten as each state group is uploaded and committed.
+**Result: 186 of the 238 counties built, checked and on the page, served from R2 only; none withheld for a failed
+check. Montana's 52 were not built (time: the batch had a hard stop at 15:40 UTC; Montana's state file is cut and
+waiting, see "What is left").** Each state was uploaded, checked live and committed on its own.
+
+| State | Counties built / missing | People (ACS 2020-24) | Block groups | Data files (bytes) | Tiers |
+|---|---|---|---|---|---|
+| AZ | 6 / 6 | 233,367 | 204 | 9,238,194 | 2 C, 4 D |
+| NV | 15 / 15 | 357,864 | 264 | 14,504,357 | 10 C, 5 D |
+| UT | 23 / 23 | 513,359 | 341 | 18,469,389 | 11 C, 12 D |
+| WY | 22 / 22 | 481,337 | 379 | 13,948,447 | 3 C, 19 D |
+| OR | 26 / 26 | 910,952 | 758 | 22,959,783 | 24 C, 2 D |
+| WA | 26 / 26 | 1,065,186 | 843 | 33,591,841 | 25 C, 1 D |
+| NM | 28 / 28 | 791,399 | 682 | 20,898,297 | 17 C, 11 D |
+| ID | 40 / 40 | 853,018 | 644 | 25,734,441 | 16 C, 24 D |
+| MT | 0 / 52 | | | | not built (time) |
+| **All** | **186 / 238** | **5,206,482** | **4,115** | **159,344,749** | 108 C, 78 D |
+
+Summary of the checks (details per state below):
+
+| Check | Sample | Result | Mismatch rate |
+|---|---|---|---|
+| Census: population, median home value, median gross rent, median household income vs the ACS 2020-24 table files (`scripts/census_spot_check.py`, seed 20261119) | 6 block groups in each of the 186 counties (all of them where a county has fewer), 4,076 values | 4,076 of 4,076 equal | 0% |
+| Tract-median flags (`build_acs_fallback_flags.py`, every county file) | all county files | 186 counties added, no existing county changed, 0 mismatches | 0% |
+| OpenStreetMap ID for ID vs live Overpass (`scripts/check_osm_extract_vs_overpass.py`) | Greenlee AZ, Esmeralda NV | 1,235 = 1,235 and 1,810 = 1,810 roads; 0 = 0 and 14 = 14 bus stops | 0% |
+| Crash counts, Utah DOT (the only western state with a state source) | all 23 Utah counties, 341 block groups | 1/k rule, sums pass `crashCountsInvariant.test.ts`; 42 gaps, 66 strengths | |
+| Live, real page loading from R2 (`scripts/live_check_panels.mjs`, LIVE_PORT 9332-9339) | 15 counties (1 AZ, 2 in each other state), 45 points, 9 checks each (405) | 301 pass, 104 not checkable, 0 fail; 19 points had the house panel on live parcel records and passed all 10 checks; the rest had no parcel service or no parcel at the point (house rows not checkable). Every data file came from `pub-79001cd74c284c499559e54d4aa4f33b.r2.dev` (HEAD 200, GET 200); no console errors | 0 wrong values |
+
+Files: `data/backtests/west_census_spot_2026-11-21.json`, `data/backtests/west_osm_xcheck_2026-11-21.json`,
+`data/backtests/live_check_panels_2026-11-21_west_{az,nv,ut,wy,or,wa,nm,id}.json`,
+`data/backtests/acs_fallback_mismatches_2026-11-21.json`.
+
+**R2 storage:** before 1,220,931,278 bytes (1,503 objects); after 1,380,323,467 bytes (1.380 GB, 1,689 objects):
+159,392,189 bytes added (the 186 data files, 159,344,749, plus the larger `manifest.json`). 1.380 GB of the 8 GB
+ceiling and the 10 GB allowance. Every upload went through `scripts/r2_sync_counties.py` after a `--dry-run`.
+
+**Pipeline code: not changed.** Test pins changed: `tests/unit/crashCountsInvariant.test.ts` (Utah 6 -> 29 files,
+222 -> 245 outside California). Data flags changed: two corridor stops' `county_on_page` (Pasco WA, Sandpoint ID).
+
+**No `sites_` files** were built (as for every small-county batch: `w5/tools/sites.py` needs the old build
+machine's paths).
 
 The batch is every county with no data file (not in `counties/bundle_*.json.gz`, not in `counties/.r2-only.txt`) whose
 registry OSM extract (`national/data/counties.json`) is openstreetmap.fr's `us-west-latest.osm.pbf`. Recount before
@@ -355,3 +394,32 @@ The method is the Northeast batch's (`small-counties-northeast.md`), unchanged.
 - Live check from R2 (`LIVE_PORT=9339`): Latah and Twin Falls, 3 points each; the checker found no parcel near any
   of the 6 block-group interior points, so the house rows are not checkable; neighborhood, canopy, canopy goal, crash
   text, state laws and console pass at all 6. Data files from the r2.dev address (HEAD 200, GET 200).
+
+## Found on the way
+
+- **`scripts/r2_sync_counties.py` uploads on any unrecognised argument (found, not changed).** It reads only
+  `--dry-run` and `--usage`; anything else, including `--help`, runs a real upload. Run once with `--help` at the start
+  of this batch, it printed the account total and "To upload: 0 files" (nothing was pending), so nothing was sent. The
+  storage guard still applies on that path, but a script whose job is to protect the owner's limit should refuse
+  unknown arguments. Not changed here (the brief allows pipeline changes only when a county cannot build otherwise).
+- **Background time limits stopped two build queues.** The first queue ran under the default 30-minute limit and the
+  second under the 2-hour maximum; each stop killed the three builds in flight (Emery, Garfield, Grand UT; Clearwater,
+  Custer, Elmore ID). Nothing had been exported for them; each was built again from the start and checked.
+- **Wyoming built twice** (my deletion mistake, described in the Wyoming section; no effect on the published files).
+- **One malformed Cloudflare API reply** (JSON "Extra data") stopped a dry run; nothing was uploaded; the rerun was
+  normal.
+
+## What is left
+
+- **Montana: 52 counties**, registry `split: us-west/montana`. Its state file is cut
+  (`us-west__montana-latest.osm.pbf`, 118 MB, from the same us-west snapshot, 2026-11-21T01:28:06Z; recorded in
+  `national/data/osm_split.json`) and was kept in the session's scratch folder; if it is gone, download us-west
+  again and run `osm_split.py us-west --states MT --per-pass 1`. At this batch's pace (Idaho: 26 counties in 15 min
+  three at a time) Montana is about 30 minutes of builds plus about 15 minutes of checks. Montana has no state crash
+  source connected.
+- **Not us-west, left out of this batch:** Colorado 53 (the registry clips them from openstreetmap.fr's five Colorado
+  sub-region files, the same edge problem the Northeast batch found for New York: cut Colorado from us-west instead),
+  Hawaii 5 and Alaska 1 (no OSM extract in the registry), Puerto Rico 73.
+- Registry count after this batch (Puerto Rico, Los Angeles and Orange left out): **2,096 counties with no data
+  file**, 2,093 under 100,000 people (43,754 block groups, 51,105,486 people by ACS 2020-24): the Northeast batch's
+  2,282 and 2,279 less these 186.
