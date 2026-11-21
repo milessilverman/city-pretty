@@ -457,6 +457,38 @@
     }
    }
   },
+  "GA": {
+   "host": "dor.georgia.gov (Georgia Department of Revenue)",
+   "status_before": "partially_verified",
+   "status_after": "partially_verified",
+   "fields": {
+    "annual_assessment_cap": {
+     "status": "not_confirmed",
+     "source_url": "https://dor.georgia.gov/property-tax-homestead-exemptions",
+     "quote": "Several counties have implemented an exemption that will freeze the valuation of property at the base year valuation for as long as the homeowner resides on the property.",
+     "note": "Stored as null (no cap). The Department lists county-by-county base-year freezes for homesteads; no fetched page states a statewide rule, so not confirmed.",
+     "fetched_at": "2026-11-21T10:40:11.839194+00:00Z",
+     "http": "200"
+    },
+    "homestead_exemption_rule": {
+     "status": "corrected",
+     "source_url": "https://dor.georgia.gov/property-tax-homestead-exemptions",
+     "quote": "The $2,000 is deducted from the 40% assessed value of the homestead.",
+     "note": "Corrected from $10,000 to the State's standard homestead exemption of $2,000 of assessed value. The $10,000 figure on the same page is the cap on an income-limited exemption for owners 65 and older (O.C.G.A. 48-5-52). Many counties add their own exemptions.",
+     "old": {
+      "type": "flat_assessed",
+      "amount_or_pct": 10000
+     },
+     "new": {
+      "type": "flat_assessed",
+      "amount_or_pct": 2000,
+      "applies_to": "county and school taxes (not municipal school taxes or bond debt)"
+     },
+     "fetched_at": "2026-11-21T10:40:11.839194+00:00Z",
+     "http": "200"
+    }
+   }
+  },
   "HI": {
    "host": "realproperty.honolulu.gov (City and County of Honolulu Real Property Assessment Division); www.capitol.hawaii.gov returned 403",
    "status_before": "unverified",
@@ -597,6 +629,21 @@
     }
    }
   },
+  "KS": {
+   "host": "www.ksrevisor.gov (Kansas Statutes, K.S.A. 79-1476)",
+   "status_before": "partially_verified",
+   "status_after": "partially_verified",
+   "fields": {
+    "reassessment_cycle_years": {
+     "status": "confirmed",
+     "source_url": "https://www.ksrevisor.gov/statutes/chapters/ch79/079_014_0076.html",
+     "quote": "the county appraiser shall have the duty of reappraising all of the real property in the county pursuant to guidelines and timetables prescribed by the director of property valuation and of updating the same on an annual basis.",
+     "note": "K.S.A. 79-1476(a); every parcel must also be physically inspected once every six years.",
+     "fetched_at": "2026-11-21T10:42:24.550660+00:00Z",
+     "http": "200"
+    }
+   }
+  },
   "KY": {
    "host": "revenue.ky.gov (Kentucky Department of Revenue)",
    "status_before": "unverified",
@@ -707,6 +754,38 @@
     }
    }
   },
+  "MA": {
+   "host": "malegislature.gov (Massachusetts General Laws); www.mass.gov returned 403",
+   "status_before": "partially_verified",
+   "status_after": "partially_verified",
+   "fields": {
+    "reassessment_cycle_years": {
+     "status": "corrected",
+     "source_url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIX/Chapter59/Section2A",
+     "quote": "The assessors of each city and town shall determine the fair cash valuation of such real property for the purpose of taxation on the first day of January of each year.",
+     "note": "Corrected from 3, which has no source: G.L. c. 59, § 2A(a) requires a fair cash valuation as of 1 January every year. The Department of Revenue's periodic certification of town values was not read.",
+     "old": 3,
+     "new": 1,
+     "fetched_at": "2026-11-21T10:42:07.919740+00:00Z",
+     "http": "200"
+    }
+   }
+  },
+  "MD": {
+   "host": "mgaleg.maryland.gov (Maryland General Assembly, Tax-Property Article)",
+   "status_before": "partially_verified",
+   "status_after": "partially_verified",
+   "fields": {
+    "uncaps_on_sale": {
+     "status": "confirmed",
+     "source_url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtp&section=9-105",
+     "quote": "shall grant a property tax credit under this section for a taxable year unless during the previous taxable year: (i) the dwelling was transferred for consideration to new ownership",
+     "note": "Tax-Prop. § 9-105(d)(1): a sale for consideration ends the homestead credit (the 10% cap) for the next year.",
+     "fetched_at": "2026-11-21T10:41:31.281378+00:00Z",
+     "http": "200"
+    }
+   }
+  },
   "ME": {
    "host": "legislature.maine.gov (Maine Revised Statutes, Title 36)",
    "status_before": "unverified",
@@ -753,6 +832,21 @@
       "amount_or_pct": 25000
      },
      "fetched_at": "2026-11-21T10:21:04.202156+00:00Z",
+     "http": "200"
+    }
+   }
+  },
+  "MI": {
+   "host": "www.legislature.mi.gov (Michigan Compiled Laws)",
+   "status_before": "partially_verified",
+   "status_after": "partially_verified",
+   "fields": {
+    "reassessment_cycle_years": {
+     "status": "confirmed",
+     "source_url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-211-10",
+     "quote": "An assessment of all the property in the state liable to taxation shall be made annually in all townships, villages, and cities by the applicable assessing officer",
+     "note": "MCL 211.10(1).",
+     "fetched_at": "2026-11-21T10:41:45.672825+00:00Z",
      "http": "200"
     }
    }
@@ -849,6 +943,21 @@
      "quote": "Each county must reappraise all real property in accordance with the provisions of G.S. 105-283 and G.S. 105-317 as of January 1 of the year set out in the following schedule and every eighth year thereafter",
      "note": "Eight years is the maximum; a county may advance the date or be required to.",
      "fetched_at": "2026-11-21T10:28:24.862497+00:00Z",
+     "http": "200"
+    }
+   }
+  },
+  "NE": {
+   "host": "nebraskalegislature.gov (Nebraska Revised Statutes)",
+   "status_before": "partially_verified",
+   "status_after": "partially_verified",
+   "fields": {
+    "reassessment_cycle_years": {
+     "status": "confirmed",
+     "source_url": "https://nebraskalegislature.gov/laws/statutes.php?statute=77-1301",
+     "quote": "The county assessor shall complete the assessment of real property on or before March 19 of each year",
+     "note": "Neb. Rev. Stat. 77-1301(3); assessment date 1 January (77-1301(1)).",
+     "fetched_at": "2026-11-21T10:42:37.050787+00:00Z",
      "http": "200"
     }
    }
@@ -1036,6 +1145,25 @@
     }
    }
   },
+  "OH": {
+   "host": "codes.ohio.gov (Ohio Revised Code)",
+   "status_before": "partially_verified",
+   "status_after": "partially_verified",
+   "fields": {
+    "homestead_exemption_rule": {
+     "status": "corrected_to_unknown",
+     "source_url": "https://codes.ohio.gov/ohio-revised-code/section-323.152",
+     "quote": "(i) Twenty-five thousand dollars of the true value of the property in money, as adjusted under division (A)(1)(d) of this section",
+     "note": "Set to unknown. R.C. 323.152(A)(1) gives this reduction only to owners who are permanently and totally disabled, 65 or older, or a qualifying surviving spouse, and it is $25,000 of true (market) value, adjusted, not $25,000 of assessed value. What applies to other homeowners was not read, so no rule is stored.",
+     "old": {
+      "type": "flat_assessed",
+      "amount_or_pct": 25000
+     },
+     "fetched_at": "2026-11-21T10:40:56.132433+00:00Z",
+     "http": "200"
+    }
+   }
+  },
   "OK": {
    "host": "www.law.cornell.edu (LII copy of the Oklahoma Administrative Code, Tax Commission rules; secondary) and www.oklegislature.gov (fiscal impact statement quoting 68 O.S. § 2889); oksenate.gov returned 404 and oscn.net answered with a human-verification page",
    "status_before": "unverified",
@@ -1190,6 +1318,55 @@
     }
    }
   },
+  "RI": {
+   "host": "webserver.rilegislature.gov (Rhode Island General Laws)",
+   "status_before": "partially_verified",
+   "status_after": "partially_verified",
+   "fields": {
+    "res_assessment_ratio": {
+     "status": "corrected_to_unknown",
+     "source_url": "https://webserver.rilegislature.gov/Statutes/TITLE44/44-5/44-5-12.htm",
+     "quote": "All real property subject to taxation shall be assessed at its full and fair cash value, as of December 31 in the year of the last revaluation, statistical revaluation or update thereto, or at a uniform percentage thereof, not to exceed one hundred percent (100%), with such value to be determined by the assessors in each town or city.",
+     "note": "Set to unknown: each town or city may assess at a uniform percentage up to 100%, so one statewide 100% is not right everywhere.",
+     "old": 1,
+     "fetched_at": "2026-11-21T10:41:45.998169+00:00Z",
+     "http": "200"
+    },
+    "annual_assessment_cap": {
+     "status": "confirmed",
+     "source_url": "https://webserver.rilegislature.gov/Statutes/TITLE44/44-5/44-5-12.htm",
+     "quote": "There shall be no adjustment to an assessment because of an increase or decrease in such value as a result of market forces in years when there is no revaluation, statistical revaluation, or update thereto.",
+     "note": "null means no yearly cap: values are held between revaluations and reset at each one.",
+     "fetched_at": "2026-11-21T10:41:45.998169+00:00Z",
+     "http": "200"
+    },
+    "uncaps_on_sale": {
+     "status": "confirmed",
+     "source_url": "https://webserver.rilegislature.gov/Statutes/TITLE44/44-5/44-5-12.htm",
+     "quote": "There shall be no adjustment to an assessment because of an increase or decrease in such value as a result of market forces in years when there is no revaluation, statistical revaluation, or update thereto.",
+     "note": "false is right in effect: a sale does not change the assessment between revaluations. With no cap the model ignores this field.",
+     "fetched_at": "2026-11-21T10:41:45.998169+00:00Z",
+     "http": "200"
+    }
+   }
+  },
+  "SC": {
+   "host": "www.scstatehouse.gov (South Carolina Code of Laws, Title 12 chapter 37)",
+   "status_before": "partially_verified",
+   "status_after": "partially_verified",
+   "fields": {
+    "uncaps_on_sale": {
+     "status": "corrected",
+     "source_url": "https://www.scstatehouse.gov/code/t12c037.php",
+     "quote": "the fair market value of real property is its fair market value applicable for the later of: (a) the base year, as defined in subsection (C) of this section; (b) December thirty-first of the year in which an assessable transfer of interest has occurred",
+     "note": "Corrected from false. S.C. Code § 12-37-3140(A)(1): after an assessable transfer of interest (which includes 'a conveyance by deed', § 12-37-3150(A)(1)) the parcel takes its current fair market value, so a sale ends the 15% reassessment limit for that parcel.",
+     "old": false,
+     "new": true,
+     "fetched_at": "2026-11-21T10:40:44.820630+00:00Z",
+     "http": "200"
+    }
+   }
+  },
   "TN": {
    "host": "comptroller.tn.gov (Tennessee Comptroller of the Treasury, Division of Property Assessments)",
    "status_before": "unverified",
@@ -1258,6 +1435,23 @@
      "quote": "(A) 10 percent of the appraised value of the property for the preceding tax year; (B) the appraised value of the property for the preceding tax year; and (C) the market value of all new improvements to the property",
      "note": "Tax Code § 23.23(a)(2), residence homesteads only, via the texas.public.law mirror (secondary; the official statutes site returned only its menu to this machine).",
      "fetched_at": "2026-11-21T10:26:08.325332+00:00Z",
+     "http": "200"
+    }
+   }
+  },
+  "VA": {
+   "host": "law.lis.virginia.gov (Code of Virginia)",
+   "status_before": "partially_verified",
+   "status_after": "partially_verified",
+   "fields": {
+    "reassessment_cycle_years": {
+     "status": "corrected",
+     "source_url": "https://law.lis.virginia.gov/vacode/title58.1/chapter32/section58.1-3252/",
+     "quote": "There shall be a general reassessment of real estate every four years or, if determined by majority vote of a county's board of supervisors, every three years.",
+     "note": "Corrected from 1 (yearly) to the default for counties. Va. Code § 58.1-3252 also lets counties of 50,000 or fewer choose five or six years and any county use annual or biennial assessment. Cities are under a different section, not read.",
+     "old": 1,
+     "new": 4,
+     "fetched_at": "2026-11-21T10:41:12.067740+00:00Z",
      "http": "200"
     }
    }

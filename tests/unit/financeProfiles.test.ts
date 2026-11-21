@@ -74,6 +74,14 @@ describe("state finance profiles", () => {
     expect(P.WI.reassessment_cycle_years).toBe(5); // s. 70.05(5)(b): within 10% once every five years
     expect(P.IL.reassessment_cycle_years).toBe(4); // PIO-16: four years outside Cook County
     expect(P.IL.homestead_exemption_rule.amount_or_pct).toBe(6000); // 35 ILCS 200/15-175, other counties
+    expect(P.IL.scope_note).toMatch(/outside Cook County/); // the page must not present downstate figures as Cook's
+    expect(app.match(/pf\.scope_note/g)?.length ?? 0).toBeGreaterThanOrEqual(2); // TIF section and methods panel
+    expect(P.GA.homestead_exemption_rule.amount_or_pct).toBe(2000); // DOR: $2,000 off the 40% assessed value
+    expect(P.SC.uncaps_on_sale).toBe(true); // 12-37-3140(A)(1)(b): value resets after an assessable transfer
+    expect(P.VA.reassessment_cycle_years).toBe(4); // Va. Code 58.1-3252, counties
+    expect(P.MA.reassessment_cycle_years).toBe(1); // G.L. c. 59, 2A: valuation as of 1 January each year
+    expect(P.OH.homestead_exemption_rule).toBeNull(); // R.C. 323.152: seniors/disabled only, of true value
+    expect(P.RI.res_assessment_ratio).toBeNull(); // R.I.G.L. 44-5-12: uniform percentage up to 100%
   });
 
   it("a calculator field counts as confirmed only when it is not listed as unverified", () => {

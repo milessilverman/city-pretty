@@ -670,26 +670,26 @@
     "reassessment_cycle_years": 1,
     "homestead_exemption_rule": {
       "type": "flat_assessed",
-      "amount_or_pct": 10000
+      "amount_or_pct": 2000,
+      "applies_to": "county and school taxes (not municipal school taxes or bond debt)"
     },
     "tif_vehicle_name": "GA TAD (Tax Allocation District)",
     "statutory_citation": "O.C.G.A. \u00a7 48-5-7 (40% Ratio) & \u00a7 36-44 (TAD / Redevelopment Powers)",
     "source_url": "https://law.justia.com/codes/georgia/title-48/chapter-5/article-1/section-48-5-7/",
     "retrieved": "2026-11-15",
-    "last_verified": null,
-    "verified_by": null,
+    "last_verified": "2026-11-21",
+    "verified_by": "state_revenue_department",
     "verification": {
       "status": "partially_verified",
-      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
-      "checked_on": "2026-11-16",
+      "method": "Round 4 (21 Nov 2026): dor.georgia.gov (Georgia Department of Revenue); per-field quotes in field_evidence. Earlier rounds: Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
+      "checked_on": "2026-11-21",
       "evidence": "res_assessment_ratio: 'In Georgia property is required to be assessed at 40% of the fair market value unless othe'",
       "unverified_fields": [
         "annual_assessment_cap",
         "uncaps_on_sale",
-        "reassessment_cycle_years",
-        "homestead_exemption_rule"
+        "reassessment_cycle_years"
       ],
-      "notes": "Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "notes": "Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 0 field(s) confirmed, 1 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, reassessment_cycle_years."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -698,6 +698,20 @@
         "quote": "In Georgia property is required to be assessed at 40% of the fair market value unless otherwise specified by law. (O.C.G.A. 48-5-7)",
         "checked_on": "2026-11-16",
         "note": "Source is the Georgia Department of Revenue page quoting the statute (the legislature's site was not reachable)."
+      },
+      "annual_assessment_cap": {
+        "status": "not_confirmed",
+        "source_url": "https://dor.georgia.gov/property-tax-homestead-exemptions",
+        "quote": "Several counties have implemented an exemption that will freeze the valuation of property at the base year valuation for as long as the homeowner resides on the property.",
+        "checked_on": "2026-11-21",
+        "note": "Stored as null (no cap). The Department lists county-by-county base-year freezes for homesteads; no fetched page states a statewide rule, so not confirmed."
+      },
+      "homestead_exemption_rule": {
+        "status": "corrected",
+        "source_url": "https://dor.georgia.gov/property-tax-homestead-exemptions",
+        "quote": "The $2,000 is deducted from the 40% assessed value of the homestead.",
+        "checked_on": "2026-11-21",
+        "note": "Corrected from $10,000 to the State's standard homestead exemption of $2,000 of assessed value. The $10,000 figure on the same page is the cap on an income-limited exemption for owners 65 and older (O.C.G.A. 48-5-52). Many counties add their own exemptions."
       }
     }
   },
@@ -745,7 +759,8 @@
         "checked_on": "2026-11-21",
         "note": "Honolulu only; $160,000 for owners 65 and older. The other counties were not checked. The model treats the deduction as a market-value deduction, which is the same only if assessed value equals market value (not confirmed here)."
       }
-    }
+    },
+    "scope_note": "Hawaii's counties set their own real property tax rules; the figures confirmed here are the City and County of Honolulu's."
   },
   "ID": {
     "state_code": "ID",
@@ -812,7 +827,7 @@
       "applies_to": "counties other than Cook and the counties contiguous to Cook ($10,000 in Cook, $8,000 in contiguous counties)"
     },
     "tif_vehicle_name": "IL TIF (65 ILCS 5/11-74.4) / SSA",
-    "statutory_citation": "35 ILCS 200/ (Cook Triennial Ratio) & 65 ILCS 5/11-74.4 (TIF Act)",
+    "statutory_citation": "35 ILCS 200/ (Property Tax Code), 35 ILCS 200/15-175 (general homestead exemption) & 65 ILCS 5/11-74.4 (TIF Act)",
     "source_url": "https://www.ilga.gov/legislation/ilcs/ilcs4.asp?DocName=006500050HArt.+11+Div.+74.4",
     "retrieved": "2026-11-15",
     "last_verified": "2026-11-21",
@@ -857,7 +872,8 @@
         "checked_on": "2026-11-21",
         "note": "Corrected from $10,000 (Cook County's maximum) to $6,000, the maximum in all other counties, to match the profile's downstate ratio. It is a maximum: the exemption is the growth in EAV above the 1977 EAV, up to that amount."
       }
-    }
+    },
+    "scope_note": "These figures are for counties outside Cook County (in the counties next to Cook the homestead exemption is up to $8,000). Cook County assesses the residential class at 10% of market value, reassesses every three years and allows a homestead exemption of up to $10,000 (Illinois Department of Revenue)."
   },
   "IN": {
     "state_code": "IN",
@@ -960,20 +976,19 @@
     "statutory_citation": "Kan. Stat. Ann. \u00a7 79-1439 (11.5% Res Ratio) & \u00a7 12-1770 (TIF)",
     "source_url": "https://www.ksrevisor.org/statutes/chapters/ch79/079_014_0039.html",
     "retrieved": "2026-11-15",
-    "last_verified": null,
-    "verified_by": null,
+    "last_verified": "2026-11-21",
+    "verified_by": "state_statute_database",
     "verification": {
       "status": "partially_verified",
-      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
-      "checked_on": "2026-11-16",
+      "method": "Round 4 (21 Nov 2026): www.ksrevisor.gov (Kansas Statutes, K.S.A. 79-1476); per-field quotes in field_evidence. Earlier rounds: Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
+      "checked_on": "2026-11-21",
       "evidence": "res_assessment_ratio: 'real property used for residential purposes ... at 11.5%'",
       "unverified_fields": [
         "annual_assessment_cap",
         "uncaps_on_sale",
-        "reassessment_cycle_years",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -982,6 +997,13 @@
         "quote": "real property used for residential purposes ... at 11.5%",
         "checked_on": "2026-11-16",
         "note": ""
+      },
+      "reassessment_cycle_years": {
+        "status": "confirmed",
+        "source_url": "https://www.ksrevisor.gov/statutes/chapters/ch79/079_014_0076.html",
+        "quote": "the county appraiser shall have the duty of reappraising all of the real property in the county pursuant to guidelines and timetables prescribed by the director of property valuation and of updating the same on an annual basis.",
+        "checked_on": "2026-11-21",
+        "note": "K.S.A. 79-1476(a); every parcel must also be physically inspected once every six years."
       }
     }
   },
@@ -1194,18 +1216,17 @@
     "statutory_citation": "Md. Code Ann., Tax-Prop. \u00a7 8-103 (Triennial Cycle) & Econ. Dev. \u00a7 12-201 (TIF)",
     "source_url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtp&section=9-105",
     "retrieved": "2026-11-15",
-    "last_verified": null,
-    "verified_by": null,
+    "last_verified": "2026-11-21",
+    "verified_by": "state_statute_database",
     "verification": {
       "status": "partially_verified",
-      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
-      "checked_on": "2026-11-16",
+      "method": "Round 4 (21 Nov 2026): mgaleg.maryland.gov (Maryland General Assembly, Tax-Property Article); per-field quotes in field_evidence. Earlier rounds: Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
+      "checked_on": "2026-11-21",
       "evidence": "reassessment_cycle_years: 'for the 1st, 2nd, or 3rd year of a 3-year cycle'; annual_assessment_cap: 'for the State property tax ... 110% ... The homestead credit percentage for any county or '; homestead_exemption_rule: 'the property tax credit under this section is calculated by: (i) multiplying the prior yea'",
       "unverified_fields": [
-        "res_assessment_ratio",
-        "uncaps_on_sale"
+        "res_assessment_ratio"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: res_assessment_ratio."
     },
     "field_evidence": {
       "reassessment_cycle_years": {
@@ -1228,6 +1249,13 @@
         "quote": "the property tax credit under this section is calculated by: (i) multiplying the prior year's taxable assessment by the homestead credit percentage",
         "checked_on": "2026-11-16",
         "note": "Corrected: Maryland's homestead relief is the assessment-growth credit above, not a 5% exemption of market value."
+      },
+      "uncaps_on_sale": {
+        "status": "confirmed",
+        "source_url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtp&section=9-105",
+        "quote": "shall grant a property tax credit under this section for a taxable year unless during the previous taxable year: (i) the dwelling was transferred for consideration to new ownership",
+        "checked_on": "2026-11-21",
+        "note": "Tax-Prop. \u00a7 9-105(d)(1): a sale for consideration ends the homestead credit (the 10% cap) for the next year."
       }
     }
   },
@@ -1237,7 +1265,7 @@
     "comm_assessment_ratio": 1,
     "annual_assessment_cap": null,
     "uncaps_on_sale": false,
-    "reassessment_cycle_years": 3,
+    "reassessment_cycle_years": 1,
     "homestead_exemption_rule": {
       "type": "none",
       "amount_or_pct": 0
@@ -1246,20 +1274,19 @@
     "statutory_citation": "Mass. Gen. Laws ch. 59, \u00a7 2A (Prop 2\u00bd) & ch. 40Q (DIF)",
     "source_url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIX/Chapter59/Section2A",
     "retrieved": "2026-11-15",
-    "last_verified": null,
-    "verified_by": null,
+    "last_verified": "2026-11-21",
+    "verified_by": "state_statute_database",
     "verification": {
       "status": "partially_verified",
-      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
-      "checked_on": "2026-11-16",
+      "method": "Round 4 (21 Nov 2026): malegislature.gov (Massachusetts General Laws); www.mass.gov returned 403; per-field quotes in field_evidence. Earlier rounds: Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
+      "checked_on": "2026-11-21",
       "evidence": "res_assessment_ratio: 'the assessments on the real property that they propose to make are at full and fair cash v'",
       "unverified_fields": [
         "annual_assessment_cap",
         "uncaps_on_sale",
-        "reassessment_cycle_years",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 0 field(s) confirmed, 1 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -1268,6 +1295,13 @@
         "quote": "the assessments on the real property that they propose to make are at full and fair cash valuation as required by section thirty-eight",
         "checked_on": "2026-11-16",
         "note": ""
+      },
+      "reassessment_cycle_years": {
+        "status": "corrected",
+        "source_url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIX/Chapter59/Section2A",
+        "quote": "The assessors of each city and town shall determine the fair cash valuation of such real property for the purpose of taxation on the first day of January of each year.",
+        "checked_on": "2026-11-21",
+        "note": "Corrected from 3, which has no source: G.L. c. 59, \u00a7 2A(a) requires a fair cash valuation as of 1 January every year. The Department of Revenue's periodic certification of town values was not read."
       }
     }
   },
@@ -1286,18 +1320,17 @@
     "statutory_citation": "Mich. Const. art. IX, \u00a7 3 (Proposal A / Headlee), MCL 211.27a & PA 57 (TIF)",
     "source_url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-211-27a",
     "retrieved": "2026-11-15",
-    "last_verified": null,
-    "verified_by": null,
+    "last_verified": "2026-11-21",
+    "verified_by": "state_statute_database",
     "verification": {
       "status": "partially_verified",
-      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
-      "checked_on": "2026-11-16",
+      "method": "Round 4 (21 Nov 2026): www.legislature.mi.gov (Michigan Compiled Laws); per-field quotes in field_evidence. Earlier rounds: Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
+      "checked_on": "2026-11-21",
       "evidence": "res_assessment_ratio: 'property shall be assessed at 50%'; annual_assessment_cap: 'multiplied by the lesser of 1.05 or the inflation rate'; uncaps_on_sale: 'Upon a transfer of ownership of property after 1994, the property's taxable value for the '",
       "unverified_fields": [
-        "reassessment_cycle_years",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 3: old legislature.mi.gov/statutes/ URL returns 404; replaced with the MCL page the field evidence was read from."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 3: old legislature.mi.gov/statutes/ URL returns 404; replaced with the MCL page the field evidence was read from. Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: homestead_exemption_rule."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -1320,6 +1353,13 @@
         "quote": "Upon a transfer of ownership of property after 1994, the property's taxable value for the calendar year following the year of the transfer is the property's state equalized valuation",
         "checked_on": "2026-11-16",
         "note": ""
+      },
+      "reassessment_cycle_years": {
+        "status": "confirmed",
+        "source_url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-211-10",
+        "quote": "An assessment of all the property in the state liable to taxation shall be made annually in all townships, villages, and cities by the applicable assessing officer",
+        "checked_on": "2026-11-21",
+        "note": "MCL 211.10(1)."
       }
     }
   },
@@ -1525,20 +1565,19 @@
     "statutory_citation": "Neb. Rev. Stat. \u00a7 77-201 (100% Market Value) & \u00a7 18-2101 (Community Development TIF)",
     "source_url": "https://nebraskalegislature.gov/laws/statutes.php?statute=77-201",
     "retrieved": "2026-11-15",
-    "last_verified": null,
-    "verified_by": null,
+    "last_verified": "2026-11-21",
+    "verified_by": "state_statute_database",
     "verification": {
       "status": "partially_verified",
-      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
-      "checked_on": "2026-11-16",
+      "method": "Round 4 (21 Nov 2026): nebraskalegislature.gov (Nebraska Revised Statutes); per-field quotes in field_evidence. Earlier rounds: Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
+      "checked_on": "2026-11-21",
       "evidence": "res_assessment_ratio: 'all real property in this state, not expressly exempt therefrom, shall be subject to taxat'",
       "unverified_fields": [
         "annual_assessment_cap",
         "uncaps_on_sale",
-        "reassessment_cycle_years",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -1547,6 +1586,13 @@
         "quote": "all real property in this state, not expressly exempt therefrom, shall be subject to taxation and shall be valued at its actual value",
         "checked_on": "2026-11-16",
         "note": ""
+      },
+      "reassessment_cycle_years": {
+        "status": "confirmed",
+        "source_url": "https://nebraskalegislature.gov/laws/statutes.php?statute=77-1301",
+        "quote": "The county assessor shall complete the assessment of real property on or before March 19 of each year",
+        "checked_on": "2026-11-21",
+        "note": "Neb. Rev. Stat. 77-1301(3); assessment date 1 January (77-1301(1))."
       }
     }
   },
@@ -1916,10 +1962,7 @@
     "annual_assessment_cap": null,
     "uncaps_on_sale": false,
     "reassessment_cycle_years": 6,
-    "homestead_exemption_rule": {
-      "type": "flat_assessed",
-      "amount_or_pct": 25000
-    },
+    "homestead_exemption_rule": null,
     "tif_vehicle_name": "OH TIF (ORC \u00a7 5709.40) / NCA",
     "statutory_citation": "Ohio Rev. Code \u00a7 5713.03 (35% Taxable Value), HB 920 & \u00a7 5709.40 (TIF)",
     "source_url": "https://codes.ohio.gov/ohio-revised-code/section-5713.03",
@@ -1928,15 +1971,15 @@
     "verified_by": null,
     "verification": {
       "status": "partially_verified",
-      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
-      "checked_on": "2026-11-16",
+      "method": "Round 4 (21 Nov 2026): codes.ohio.gov (Ohio Revised Code); per-field quotes in field_evidence. Earlier rounds: Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
+      "checked_on": "2026-11-21",
       "evidence": "res_assessment_ratio: 'that per cent of true value in money ... the commissioner by rule establishes, but it shal'; reassessment_cycle_years: 'at least once in each six-year period'",
       "unverified_fields": [
         "annual_assessment_cap",
         "uncaps_on_sale",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 0 field(s) confirmed, 0 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -1952,6 +1995,13 @@
         "quote": "at least once in each six-year period",
         "checked_on": "2026-11-16",
         "note": "Corrected from 3. Interim (triennial) updates under R.C. 5715.33 were not confirmed."
+      },
+      "homestead_exemption_rule": {
+        "status": "corrected_to_unknown",
+        "source_url": "https://codes.ohio.gov/ohio-revised-code/section-323.152",
+        "quote": "(i) Twenty-five thousand dollars of the true value of the property in money, as adjusted under division (A)(1)(d) of this section",
+        "checked_on": "2026-11-21",
+        "note": "Set to unknown. R.C. 323.152(A)(1) gives this reduction only to owners who are permanently and totally disabled, 65 or older, or a qualifying surviving spouse, and it is $25,000 of true (market) value, adjusted, not $25,000 of assessed value. What applies to other homeowners was not read, so no rule is stored."
       }
     }
   },
@@ -2117,7 +2167,7 @@
   },
   "RI": {
     "state_code": "RI",
-    "res_assessment_ratio": 1,
+    "res_assessment_ratio": null,
     "comm_assessment_ratio": 1,
     "annual_assessment_cap": null,
     "uncaps_on_sale": false,
@@ -2130,20 +2180,18 @@
     "statutory_citation": "R.I. Gen. Laws \u00a7 44-5-11.6 (Cyclical Revaluation) & \u00a7 45-33.2 (TIF)",
     "source_url": "https://webserver.rilegislature.gov/Statutes/TITLE44/44-5/44-5-11.6.htm",
     "retrieved": "2026-11-15",
-    "last_verified": null,
-    "verified_by": null,
+    "last_verified": "2026-11-21",
+    "verified_by": "state_statute_database",
     "verification": {
       "status": "partially_verified",
-      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
-      "checked_on": "2026-11-16",
+      "method": "Round 4 (21 Nov 2026): webserver.rilegislature.gov (Rhode Island General Laws); per-field quotes in field_evidence. Earlier rounds: Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
+      "checked_on": "2026-11-21",
       "evidence": "reassessment_cycle_years: 'shall conduct a revaluation within nine (9) years of the date of the prior revaluation and'",
       "unverified_fields": [
         "res_assessment_ratio",
-        "annual_assessment_cap",
-        "uncaps_on_sale",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 2 field(s) confirmed, 0 corrected; still not confirmed: res_assessment_ratio, homestead_exemption_rule."
     },
     "field_evidence": {
       "reassessment_cycle_years": {
@@ -2152,6 +2200,27 @@
         "quote": "shall conduct a revaluation within nine (9) years of the date of the prior revaluation and shall conduct an update of real property every three (3) years",
         "checked_on": "2026-11-16",
         "note": "3 = statistical update interval; full revaluation every 9 years."
+      },
+      "res_assessment_ratio": {
+        "status": "corrected_to_unknown",
+        "source_url": "https://webserver.rilegislature.gov/Statutes/TITLE44/44-5/44-5-12.htm",
+        "quote": "All real property subject to taxation shall be assessed at its full and fair cash value, as of December 31 in the year of the last revaluation, statistical revaluation or update thereto, or at a uniform percentage thereof, not to exceed one hundred percent (100%), with such value to be determined by the assessors in each town or city.",
+        "checked_on": "2026-11-21",
+        "note": "Set to unknown: each town or city may assess at a uniform percentage up to 100%, so one statewide 100% is not right everywhere."
+      },
+      "annual_assessment_cap": {
+        "status": "confirmed",
+        "source_url": "https://webserver.rilegislature.gov/Statutes/TITLE44/44-5/44-5-12.htm",
+        "quote": "There shall be no adjustment to an assessment because of an increase or decrease in such value as a result of market forces in years when there is no revaluation, statistical revaluation, or update thereto.",
+        "checked_on": "2026-11-21",
+        "note": "null means no yearly cap: values are held between revaluations and reset at each one."
+      },
+      "uncaps_on_sale": {
+        "status": "confirmed",
+        "source_url": "https://webserver.rilegislature.gov/Statutes/TITLE44/44-5/44-5-12.htm",
+        "quote": "There shall be no adjustment to an assessment because of an increase or decrease in such value as a result of market forces in years when there is no revaluation, statistical revaluation, or update thereto.",
+        "checked_on": "2026-11-21",
+        "note": "false is right in effect: a sale does not change the assessment between revaluations. With no cap the model ignores this field."
       }
     }
   },
@@ -2160,7 +2229,7 @@
     "res_assessment_ratio": 0.04,
     "comm_assessment_ratio": 0.06,
     "annual_assessment_cap": null,
-    "uncaps_on_sale": false,
+    "uncaps_on_sale": true,
     "reassessment_cycle_years": 5,
     "homestead_exemption_rule": {
       "type": "none",
@@ -2170,19 +2239,18 @@
     "statutory_citation": "S.C. Code Ann. \u00a7 12-43-220 (4% Res Ratio, 15% 5-Yr Cap) & \u00a7 31-6 (TIF Act)",
     "source_url": "https://www.scstatehouse.gov/code/t12c043.php",
     "retrieved": "2026-11-15",
-    "last_verified": null,
-    "verified_by": null,
+    "last_verified": "2026-11-21",
+    "verified_by": "state_statute_database",
     "verification": {
       "status": "partially_verified",
-      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
-      "checked_on": "2026-11-16",
+      "method": "Round 4 (21 Nov 2026): www.scstatehouse.gov (South Carolina Code of Laws, Title 12 chapter 37); per-field quotes in field_evidence. Earlier rounds: Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
+      "checked_on": "2026-11-21",
       "evidence": "res_assessment_ratio: 'taxed on an assessment equal to four percent of the fair market value of the property'; reassessment_cycle_years: 'once every fifth year each county or the State shall appraise and equalize those propertie'; annual_assessment_cap: 'The fifteen percent cap in Section 12-37-3140'",
       "unverified_fields": [
         "annual_assessment_cap",
-        "uncaps_on_sale",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 0 field(s) confirmed, 1 corrected; still not confirmed: annual_assessment_cap, homestead_exemption_rule."
     },
     "reassessment_increase_cap": 0.15,
     "field_evidence": {
@@ -2206,6 +2274,13 @@
         "quote": "The fifteen percent cap in Section 12-37-3140",
         "checked_on": "2026-11-16",
         "note": "South Carolina's cap is 15% per five-year reassessment, not a yearly cap; stored as reassessment_increase_cap."
+      },
+      "uncaps_on_sale": {
+        "status": "corrected",
+        "source_url": "https://www.scstatehouse.gov/code/t12c037.php",
+        "quote": "the fair market value of real property is its fair market value applicable for the later of: (a) the base year, as defined in subsection (C) of this section; (b) December thirty-first of the year in which an assessable transfer of interest has occurred",
+        "checked_on": "2026-11-21",
+        "note": "Corrected from false. S.C. Code \u00a7 12-37-3140(A)(1): after an assessable transfer of interest (which includes 'a conveyance by deed', \u00a7 12-37-3150(A)(1)) the parcel takes its current fair market value, so a sale ends the 15% reassessment limit for that parcel."
       }
     }
   },
@@ -2478,7 +2553,7 @@
     "comm_assessment_ratio": 1,
     "annual_assessment_cap": null,
     "uncaps_on_sale": true,
-    "reassessment_cycle_years": 1,
+    "reassessment_cycle_years": 4,
     "homestead_exemption_rule": {
       "type": "none",
       "amount_or_pct": 0
@@ -2487,20 +2562,19 @@
     "statutory_citation": "Va. Code Ann. \u00a7 58.1-3201 (100% FMV) & \u00a7 58.1-3245 (TIF)",
     "source_url": "https://law.lis.virginia.gov/vacode/title58.1/chapter32/section58.1-3201/",
     "retrieved": "2026-11-15",
-    "last_verified": null,
-    "verified_by": null,
+    "last_verified": "2026-11-21",
+    "verified_by": "state_statute_database",
     "verification": {
       "status": "partially_verified",
-      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
-      "checked_on": "2026-11-16",
+      "method": "Round 4 (21 Nov 2026): law.lis.virginia.gov (Code of Virginia); per-field quotes in field_evidence. Earlier rounds: Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
+      "checked_on": "2026-11-21",
       "evidence": "res_assessment_ratio: 'shall be made at 100 percent fair market value'",
       "unverified_fields": [
         "annual_assessment_cap",
         "uncaps_on_sale",
-        "reassessment_cycle_years",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 0 field(s) confirmed, 1 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -2509,6 +2583,13 @@
         "quote": "shall be made at 100 percent fair market value",
         "checked_on": "2026-11-16",
         "note": ""
+      },
+      "reassessment_cycle_years": {
+        "status": "corrected",
+        "source_url": "https://law.lis.virginia.gov/vacode/title58.1/chapter32/section58.1-3252/",
+        "quote": "There shall be a general reassessment of real estate every four years or, if determined by majority vote of a county's board of supervisors, every three years.",
+        "checked_on": "2026-11-21",
+        "note": "Corrected from 1 (yearly) to the default for counties. Va. Code \u00a7 58.1-3252 also lets counties of 50,000 or fewer choose five or six years and any county use annual or biennial assessment. Cities are under a different section, not read."
       }
     }
   },
