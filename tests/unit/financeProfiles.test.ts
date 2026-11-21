@@ -113,8 +113,12 @@ describe("state finance profiles", () => {
     expect(app).not.toContain("function setEifdTurnover");
   });
 
-  it("round 3: TX, FL, AZ, WA and CA have every tax-increment field confirmed; CO does not", () => {
-    for (const st of ["TX", "FL", "AZ", "WA", "CA"]) expect(financeProfileGate(P[st]), st).toEqual([]);
+  it("round 3: TX, AZ, WA and CA have every tax-increment field confirmed; CO does not; FL lost its homestead rule in round 4", () => {
+    for (const st of ["TX", "AZ", "WA", "CA"]) expect(financeProfileGate(P[st]), st).toEqual([]);
+    // Round 4 (21 Nov 2026): Florida's Amendment 3, approved 3 Nov 2026, changes the homestead exemption from the 2027
+    // roll (DOR bulletin PTO 26-21), so the $50,000 rule was withheld; FL's other four fields stay confirmed.
+    expect(financeProfileGate(P.FL)).toEqual(["homestead_exemption_rule"]);
+    expect(P.FL.homestead_exemption_rule).toBeNull();
     expect(financeProfileGate(P.CO)).toEqual(expect.arrayContaining(["res_assessment_ratio", "homestead_exemption_rule"]));
     // Texas: 2025 law raised the school homestead exemption to $140,000 (Comptroller); reappraisal is at least every 3 years.
     expect(P.TX.homestead_exemption_rule.amount_or_pct).toBe(140000);

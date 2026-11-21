@@ -427,9 +427,9 @@
    }
   },
   "FL": {
-   "host": "www.leg.state.fl.us (Florida Statutes, Online Sunshine); backfill of per-field quotes",
+   "host": "www.leg.state.fl.us (Florida Statutes, Online Sunshine) and floridarevenue.com (Department of Revenue bulletin PTO 26-21); per-field quotes",
    "status_before": "partially_verified",
-   "status_after": "verified",
+   "status_after": "partially_verified",
    "fields": {
     "res_assessment_ratio": {
      "status": "confirmed",
@@ -443,16 +443,20 @@
      "status": "confirmed",
      "source_url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0193/Sections/0193.155.html",
      "quote": "Any change resulting from such reassessment shall not exceed the lower of the following: (a) Three percent of the assessed value of the property for the prior year; or (b) The percentage change in the Consumer Price Index",
-     "note": "Homestead property only (Save Our Homes).",
+     "note": "Homestead property only (Save Our Homes). The Department's bulletin PTO 26-21 says Amendment 3 (approved 3 Nov 2026) 'Reduces the annual cap on assessment increases for non-homestead properties from 10% to 5%'; it does not change this homestead cap.",
      "fetched_at": "2026-11-21T10:27:39.383444+00:00Z",
      "http": "200"
     },
     "homestead_exemption_rule": {
-     "status": "confirmed",
-     "source_url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0196/Sections/0196.031.html",
-     "quote": "is entitled to an additional exemption of up to $25,000 on the assessed valuation greater than $50,000 for all levies other than school district levies.",
-     "note": "F.S. 196.031(1)(a) gives $25,000 against all taxes and (1)(b) this additional amount for non-school levies, $50,000 in all. The statute now says the additional $25,000 'shall be adjusted annually on January 1 of each year for inflation', so the current figure may be above $25,000; the indexed amount was not checked.",
-     "fetched_at": "2026-11-21T10:27:39.913792+00:00Z",
+     "status": "corrected_to_unknown",
+     "source_url": "https://floridarevenue.com/property/Documents/PTO_BUL_26-21.pdf",
+     "quote": "Increases the homestead exemption for all non-school taxes, exempting assessed value up to $150,000 in 2027 and up to $250,000 in 2028, and adjusts for inflation thereafter",
+     "note": "Set to unknown. Department of Revenue bulletin PTO 26-21 (5 Nov 2026): Amendment 3 (HJR 1-F) was approved by voters on 3 Nov 2026 and first applies to the 2027 tax roll. The stored $50,000 (F.S. 196.031: $25,000 against all taxes plus an additional $25,000 for non-school levies, which the statute now says 'shall be adjusted annually on January 1 of each year for inflation') is the rule before 2027. From 2027 the non-school exemption is far larger than the school exemption, which one flat amount cannot represent.",
+     "old": {
+      "type": "flat_market",
+      "amount_or_pct": 50000
+     },
+     "fetched_at": "2026-11-21T10:47:04.128718+00:00Z",
      "http": "200"
     }
    }
@@ -1287,14 +1291,14 @@
    }
   },
   "PR": {
-   "host": "none with the rules: portal.crimpr.net (CRIM) answered but its home page has no assessment rules; bvirtualogp.pr.gov (official law library, Ley 107-2020 Código Municipal) did not answer; law.justia.com returns 403",
+   "host": "none with the rules: portal.crimpr.net (CRIM) answered but its home page has no assessment rules; bvirtualogp.pr.gov (official law library) did not answer; law.justia.com returned 403 to this machine (tested on an Alabama statute page)",
    "status_before": "unverified",
    "status_after": "could_not_check",
    "fields": {
     "res_assessment_ratio": {
      "status": "could_not_check",
      "quote": "",
-     "note": "The Código Municipal could not be fetched."
+     "note": "No page with Puerto Rico's assessment rules could be fetched."
     },
     "annual_assessment_cap": {
      "status": "could_not_check",
@@ -1314,7 +1318,7 @@
     "homestead_exemption_rule": {
      "status": "could_not_check",
      "quote": "",
-     "note": "Could not be fetched from an official page. Search results (not fetched pages) described a $15,000 main-residence exemption; it is not used as evidence."
+     "note": "Could not be fetched from an official page; search-result summaries were not used as evidence."
     }
    }
   },

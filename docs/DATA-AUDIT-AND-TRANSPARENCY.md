@@ -47,7 +47,7 @@ the record is **not** confirmed.
 | Research studies (`research.json`) | 39 | 8 | 21 | 3 | 7 (source link broken) | 13 nonexistent studies; all "$ per $1" figures; HealthLine figures corrected (round 3) | `audit/research-audit.md` |
 | Case studies (`case_studies.json`) | 8 | | 5 | 1 | 2 (source link broken) | all unsourced money figures nulled; HealthLine and Cultural Trail figures re-sourced (round 3) | `audit/research-audit.md` |
 | State housing laws (`statutes.json`) | 21 | 15 | 4 | 1 | 1 (Minneapolis 2040: cited law not confirmed) | 1 (a bill that never passed); 18 corrected | `audit/laws-finance-audit.md` |
-| State finance profiles (`state_finance_profiles.json`) | 52 | 4 (TX, AZ, WA, CA; FL has all 5 calculator fields too) | 25 | 1 | 22 | round 3: TX homestead $100,000 -> $140,000, TX reappraisal 1 -> 3 years, CO homestead 'none' -> unknown | `audit/laws-finance-audit.md` |
+| State finance profiles (`state_finance_profiles.json`) | 52 | 10 (AK, AL, AZ, CA, DC, KY, LA, NM, TX, WA) | 37 | 2 (NH, PR) | 3 (IN, NY, PA: checked, nothing confirmed) | round 3: TX homestead $100,000 -> $140,000, TX reappraisal 1 -> 3 years, CO homestead 'none' -> unknown; round 4 (21 Nov): 26 values corrected or set to unknown in 20 states | `audit/laws-finance-audit.md`, `audit/state-finance-profiles-2026-11-21.md` |
 | Funding programs (`funding_programs.json`) | 11 | 2 | 6 | 2 | 1 (source link broken) | round 3: CA Urban Greening funding source, cycle and portal corrected | `audit/laws-finance-audit.md` |
 | Construction unit costs (`unit_costs.json`) | 32 | 9 | 12 | 7 | 4 (no source) | 3 wrong bid prices corrected; CDOT Walsenburg price confirmed at its new address (round 3) | `audit/costs-transit-audit.md` |
 | Transit projects (`transit_pipelines.json`) | 5 | | 5 | | | invented housing/EV details nulled | `audit/costs-transit-audit.md` |
@@ -762,7 +762,9 @@ was made from a test that didn't cover the live page.
 
 - 8 unit costs and 2 rail corridors couldn't be reached from the audit machine (TxDOT, ADOT, FRA block it). Re-check
   from a normal browser.
-- 42 state finance profiles were never checked; their numbers feed the tax-increment calculator.
+- State finance profiles (21 Nov): NH and PR could not be fetched; IN, NY and PA were checked but nothing could be
+  confirmed; 11 partly verified profiles (ID, IA, MN, MO, MT, ND, NV, SD, UT, WV, WY) were not re-checked in round 4
+  (`audit/state-finance-profiles-2026-11-21.md`). The page computes no tax-increment amount outside California.
 - **HUD Fair Market Rents (resolved FY2027):** FY2027 rents took effect 1 Oct 2026 (Federal Register
   2026-17891). Replaced the map-service pull with a direct machine pull from HUD's official FMR API
   (`scripts/fetch_hud_fmr_api.py`) with per-record evidence URLs. All 3,222 counties are current FY2027 values
@@ -1256,3 +1258,71 @@ both parcels ok on every panel, 484530010004 "expected home value $865k, rent $3
 no block group in the Travis County file holds it, and the live check would report it as a failure if one were sampled.
 Other counties' files were not searched for a stored 3500. The places that leave a top-coded rent out of a calculation
 (`m.rent < 3500` in `app/app.js`) were left as they are, so an exact 3500 is also left out there.
+
+### Correction: state finance profiles held numbers no source gave; 26 values corrected or withheld in 20 states (found and fixed 21 Nov 2026)
+
+**What was wrong.** 22 profiles in `app/data/state_finance_profiles.json` had never been checked, Illinois could not be
+checked on 16 Nov, and the four "verified" profiles (AZ, CA, TX, WA) had a quote on file for only some of the fields the
+tax-increment model uses. Round 4 fetched the state's own statute or revenue-department page for each field and stored
+the verbatim quote, URL and date with the field (`field_evidence`). Every quote was checked word for word against the
+fetched page text before it was written. Full table, sources and hosts: `docs/audit/state-finance-profiles-2026-11-21.md`;
+per-field evidence: `docs/audit/state-finance-profiles-2026-11-21.json`.
+
+**Corrections (old -> new, all sources fetched 21 Nov 2026).**
+
+- AL `annual_assessment_cap` null -> 0.07: ALDOR, "New rules will cap annual increases in taxable assessed value for
+  Class II and Class III real properties at 7 percent." (HB73, Act 2024-344).
+- AK `homestead_exemption_rule` $50,000 of market value -> none: AS 29.45.050(a) allows only a voter-approved municipal
+  exemption that "may not exceed the assessed value of $75,000"; $50,000 appears nowhere.
+- AR `reassessment_cycle_years` 3 -> 4: ACD 2025 annual report, "all counties will now reappraise real property on
+  four-year cycles" (Act 139 of 2023).
+- DC `homestead_exemption_rule` $87,500 -> $95,100 (tax year 2027): OTR, "reduces your real property's assessed value by
+  $95,100.00 for tax year 2027".
+- FL `homestead_exemption_rule` $50,000 -> unknown: DOR bulletin PTO 26-21 (5 Nov 2026), Amendment 3 approved 3 Nov 2026
+  exempts "assessed value up to $150,000 in 2027 and up to $250,000 in 2028" for non-school taxes. The unit test that
+  required every FL field to be confirmed (round 3) now requires exactly this field to be withheld.
+- GA `homestead_exemption_rule` $10,000 -> $2,000 of assessed value: Georgia DOR, "The $2,000 is deducted from the 40%
+  assessed value of the homestead."
+- IL `reassessment_cycle_years` 3 -> 4 and `homestead_exemption_rule` $10,000 -> $6,000: IDOR, "Every four years when all
+  property is reassessed (three years in Cook County)" and "up to a maximum of $10,000 in Cook County, $8,000 in counties
+  contiguous to Cook County, and $6,000 in all other counties". The record mixed Cook County's cycle and exemption with
+  the 33 1/3% ratio used outside Cook; it now describes counties outside Cook and says so on the page (`scope_note`).
+- IN `homestead_exemption_rule` "1% circuit breaker" -> unknown: the circuit breaker limits the bill; the DLGF form gives a
+  standard deduction of "$40,000" for 2026 falling to "$0" in 2030 plus a supplemental percentage, which the model cannot
+  represent.
+- MA `reassessment_cycle_years` 3 -> 1: G.L. c. 59, s. 2A, fair cash valuation "on the first day of January of each year".
+- ME `res_assessment_ratio` 1 -> unknown (36 M.R.S. s. 327: each town's ratio, at least 70%, not above 110%) and
+  `homestead_exemption_rule` $25,000 of assessed value -> $25,000 of just value (36 M.R.S. s. 683).
+- NJ ratios 0.85 -> 1 ("All 21 counties in New Jersey have chosen 100%") and cycle 3 -> unknown (no fixed cycle).
+- NY ratios 1 -> unknown: ORPTS, the law "doesn't require assessments to be at 100 percent of market value".
+- OH `homestead_exemption_rule` $25,000 of assessed value -> unknown: R.C. 323.152 gives "Twenty-five thousand dollars of
+  the true value" to owners 65 and older, disabled owners and qualifying surviving spouses only.
+- OK `uncaps_on_sale` false -> true: OAC 710:10-1-3 (LII copy), the limits "do not apply in any year when the title of the
+  property is transferred".
+- PA ratios 1 -> unknown: 53 Pa.C.S. s. 8842(a), a county "predetermined ratio which may not exceed 100%".
+- RI `res_assessment_ratio` 1 -> unknown: R.I.G.L. 44-5-12, "or at a uniform percentage thereof, not to exceed one
+  hundred percent".
+- SC `uncaps_on_sale` false -> true: S.C. Code 12-37-3140(A)(1)(b), value as of "December thirty-first of the year in
+  which an assessable transfer of interest has occurred".
+- VA `reassessment_cycle_years` 1 -> 4: Va. Code 58.1-3252, "every four years" in counties (3, 5 or 6 by option).
+- VT `reassessment_cycle_years` 3 -> 6: Department of Taxes, "required to reappraise every six years as of January 2025".
+- WI `reassessment_cycle_years` 1 -> 5: DOR PB-060, "within 10% of full value in the same year, at least once within a
+  five-year period".
+- LA `source_url` pointed at Constitution art. VII s. 11 (Budgets); it now points at s. 18.
+- OR's homestead rule and CO's null cap had been counted as confirmed with no quote on file; both are now listed as not
+  confirmed.
+
+**Result.** verified 4 -> 10 (AK, AL, AZ, CA, DC, KY, LA, NM, TX, WA); partly verified 25 -> 37; could not check 1 -> 2
+(NH, PR: no official host answered); unverified 22 -> 3 (IN, NY, PA: checked, nothing could be confirmed).
+New unit test (`tests/unit/financeProfiles.test.ts`): every tax-increment field counted as confirmed must carry a quote
+and an https source URL, and a verified profile may list no unverified field.
+
+**Seen on the real page.** A short Playwright script served this branch on port 9324 (county-file requests to R2 were
+answered from `counties/`, so none reached R2) and read the tax-increment section and methods panel for Jefferson AL,
+DC, Essex NJ and Cook IL (`data/backtests/live_check_finance_profiles_2026-11-21.json`). It caught Cook County being shown
+the downstate 33.3% ratio once Illinois's ratio was confirmed; the profile's new `scope_note` is now printed in both
+places and the rerun shows it.
+
+**Not done.** 11 partly verified profiles (ID, IA, MN, MO, MT, ND, NV, SD, UT, WV, WY) were not re-checked. Fields stored
+as "no cap" or "no homestead exemption" were confirmed only where a source said so; most such fields stay listed as not
+confirmed. The advisor (Cloudflare Worker) does not read these profiles.

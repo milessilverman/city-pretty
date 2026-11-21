@@ -603,10 +603,7 @@
     "annual_assessment_cap": 0.03,
     "uncaps_on_sale": true,
     "reassessment_cycle_years": 1,
-    "homestead_exemption_rule": {
-      "type": "flat_market",
-      "amount_or_pct": 50000
-    },
+    "homestead_exemption_rule": null,
     "tif_vehicle_name": "FL CRA / CDD / Live Local \u00a7 196.1979",
     "statutory_citation": "Fla. Const. art. VII, \u00a7 4(d) (SOH 3% Cap), Fla. Stat. \u00a7 163 (CRA) & \u00a7 196.1979",
     "source_url": "https://www.flsenate.gov/Laws/Statutes/2026/163.387",
@@ -614,14 +611,15 @@
     "last_verified": "2026-11-21",
     "verified_by": "state_statute_database",
     "verification": {
-      "status": "verified",
-      "method": "Round 4 (21 Nov 2026): www.leg.state.fl.us (Florida Statutes, Online Sunshine); backfill of per-field quotes; per-field quotes in field_evidence. Earlier rounds: Official Florida Statutes \u00a7\u00a7 193.155, 196.031, 163.387 (leg.state.fl.us)",
+      "status": "partially_verified",
+      "method": "Round 4 (21 Nov 2026): www.leg.state.fl.us (Florida Statutes, Online Sunshine) and floridarevenue.com (Department of Revenue bulletin PTO 26-21); per-field quotes; per-field quotes in field_evidence. Earlier rounds: Official Florida Statutes \u00a7\u00a7 193.155, 196.031, 163.387 (leg.state.fl.us)",
       "checked_on": "2026-11-21",
       "evidence": "\u00a7 193.155: change 'shall not exceed the lower of ... Three percent ... or ... Consumer Price Index'; \u00a7 196.031: $25,000 exemption plus 'additional exemption of up to $25,000 on the assessed valuation greater than $50,000 for all levies other than school district levies'",
       "unverified_fields": [
-        "homestead $50,000 applies in full only to non-school levies"
+        "homestead $50,000 applies in full only to non-school levies",
+        "homestead_exemption_rule"
       ],
-      "notes": "Cap is the lower of 3% or CPI. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 3 (2026-11-16): field_evidence added for reassessment_cycle_years, uncaps_on_sale. All five tax-increment fields confirmed. Round 4 (2026-11-21): status partially_verified -> verified; 3 field(s) confirmed, 0 corrected."
+      "notes": "Cap is the lower of 3% or CPI. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 3 (2026-11-16): field_evidence added for reassessment_cycle_years, uncaps_on_sale. All five tax-increment fields confirmed. Round 4 (2026-11-21): status partially_verified -> partially_verified; 2 field(s) confirmed, 0 corrected; still not confirmed: homestead_exemption_rule."
     },
     "field_evidence": {
       "uncaps_on_sale": {
@@ -650,14 +648,14 @@
         "source_url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0193/Sections/0193.155.html",
         "quote": "Any change resulting from such reassessment shall not exceed the lower of the following: (a) Three percent of the assessed value of the property for the prior year; or (b) The percentage change in the Consumer Price Index",
         "checked_on": "2026-11-21",
-        "note": "Homestead property only (Save Our Homes)."
+        "note": "Homestead property only (Save Our Homes). The Department's bulletin PTO 26-21 says Amendment 3 (approved 3 Nov 2026) 'Reduces the annual cap on assessment increases for non-homestead properties from 10% to 5%'; it does not change this homestead cap."
       },
       "homestead_exemption_rule": {
-        "status": "confirmed",
-        "source_url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0196/Sections/0196.031.html",
-        "quote": "is entitled to an additional exemption of up to $25,000 on the assessed valuation greater than $50,000 for all levies other than school district levies.",
+        "status": "corrected_to_unknown",
+        "source_url": "https://floridarevenue.com/property/Documents/PTO_BUL_26-21.pdf",
+        "quote": "Increases the homestead exemption for all non-school taxes, exempting assessed value up to $150,000 in 2027 and up to $250,000 in 2028, and adjusts for inflation thereafter",
         "checked_on": "2026-11-21",
-        "note": "F.S. 196.031(1)(a) gives $25,000 against all taxes and (1)(b) this additional amount for non-school levies, $50,000 in all. The statute now says the additional $25,000 'shall be adjusted annually on January 1 of each year for inflation', so the current figure may be above $25,000; the indexed amount was not checked."
+        "note": "Set to unknown. Department of Revenue bulletin PTO 26-21 (5 Nov 2026): Amendment 3 (HJR 1-F) was approved by voters on 3 Nov 2026 and first applies to the 2027 tax roll. The stored $50,000 (F.S. 196.031: $25,000 against all taxes plus an additional $25,000 for non-school levies, which the statute now says 'shall be adjusted annually on January 1 of each year for inflation') is the rule before 2027. From 2027 the non-school exemption is far larger than the school exemption, which one flat amount cannot represent."
       }
     }
   },
@@ -2808,7 +2806,7 @@
     "verified_by": null,
     "verification": {
       "status": "could_not_check",
-      "method": "Round 4 (21 Nov 2026): none with the rules: portal.crimpr.net (CRIM) answered but its home page has no assessment rules; bvirtualogp.pr.gov (official law library, Ley 107-2020 C\u00f3digo Municipal) did not answer; law.justia.com returns 403.",
+      "method": "Round 4 (21 Nov 2026): none with the rules: portal.crimpr.net (CRIM) answered but its home page has no assessment rules; bvirtualogp.pr.gov (official law library) did not answer; law.justia.com returned 403 to this machine (tested on an Alabama statute page).",
       "checked_on": "2026-11-21",
       "evidence": "",
       "unverified_fields": [
@@ -2818,7 +2816,7 @@
         "reassessment_cycle_years",
         "homestead_exemption_rule"
       ],
-      "notes": "Before round 4 (21 Nov 2026) this profile was not checked against a source. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status unverified -> could_not_check; 0 field(s) confirmed, 0 corrected; still not confirmed: res_assessment_ratio, annual_assessment_cap, uncaps_on_sale, reassessment_cycle_years, homestead_exemption_rule. Withheld (no source sentence found): res_assessment_ratio: The C\u00f3digo Municipal could not be fetched. annual_assessment_cap: Could not be fetched. uncaps_on_sale: Could not be fetched. reassessment_cycle_years: Could not be fetched. homestead_exemption_rule: Could not be fetched from an official page. Search results (not fetched pages) described a $15,000 main-residence exemption; it is not used as evidence."
+      "notes": "Before round 4 (21 Nov 2026) this profile was not checked against a source. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status unverified -> could_not_check; 0 field(s) confirmed, 0 corrected; still not confirmed: res_assessment_ratio, annual_assessment_cap, uncaps_on_sale, reassessment_cycle_years, homestead_exemption_rule. Withheld (no source sentence found): res_assessment_ratio: No page with Puerto Rico's assessment rules could be fetched. annual_assessment_cap: Could not be fetched. uncaps_on_sale: Could not be fetched. reassessment_cycle_years: Could not be fetched. homestead_exemption_rule: Could not be fetched from an official page; search-result summaries were not used as evidence."
     },
     "field_evidence": {}
   }
