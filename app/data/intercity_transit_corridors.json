@@ -5846,7 +5846,7 @@
     "state": "WA",
     "county": "Franklin County",
     "fips": "53021",
-    "county_on_page": false,
+    "county_on_page": true,
     "station_type": "city_center",
     "station_basis": "named_in_source",
     "verified": false,

@@ -205,3 +205,50 @@ The method is the Northeast batch's (`small-counties-northeast.md`), unchanged.
   page, so the house rows are not checkable; neighborhood, canopy, canopy goal, crash text, state laws and console
   pass at all 6. Data files from the r2.dev address (HEAD 200, GET 200).
 - R2: dry run "27 files, net +0.023 GB, projected 1.300 GB"; after 1,300,075,243 bytes (1,595 objects).
+
+## Washington (26 of 26 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (current release) |
+|---|---|---|---|---|---|
+| Adams (53001) | 20,800 | 15 | 348,518 | C | 7 |
+| Asotin (53003) | 22,467 | 21 | 556,044 | C | 21 |
+| Chelan (53007) | 80,172 | 63 | 2,607,297 | C | 50 |
+| Clallam (53009) | 77,813 | 66 | 1,863,528 | C | 51 |
+| Columbia (53013) | 4,014 | 5 | 324,985 | D | 0 |
+| Douglas (53017) | 44,366 | 31 | 1,115,317 | C | 22 |
+| Ferry (53019) | 7,387 | 8 | 494,649 | C | 0 |
+| Franklin (53021) | 98,902 | 56 | 693,015 | C | 50 |
+| Garfield (53023) | 2,353 | 3 | 491,058 | C | 0 |
+| Grays Harbor (53027) | 77,053 | 68 | 3,350,468 | C | 51 |
+| Island (53029) | 86,836 | 65 | 791,028 | C | 46 |
+| Jefferson (53031) | 33,577 | 27 | 3,745,130 | C | 16 |
+| Kittitas (53037) | 47,172 | 32 | 1,813,286 | C | 23 |
+| Klickitat (53039) | 23,411 | 19 | 871,358 | C | 5 |
+| Lewis (53041) | 85,154 | 62 | 3,269,388 | C | 32 |
+| Lincoln (53043) | 11,489 | 11 | 415,664 | C | 0 |
+| Mason (53045) | 67,982 | 56 | 1,449,300 | C | 27 |
+| Okanogan (53047) | 43,425 | 43 | 2,430,806 | C | 13 |
+| Pacific (53049) | 23,994 | 25 | 2,500,788 | C | 12 |
+| Pend Oreille (53051) | 14,050 | 14 | 505,059 | C | 0 |
+| San Juan (53055) | 18,478 | 19 | 379,364 | C | 5 |
+| Skamania (53059) | 12,402 | 10 | 1,049,617 | C | 0 |
+| Stevens (53065) | 48,067 | 38 | 769,337 | C | 8 |
+| Wahkiakum (53069) | 4,658 | 5 | 735,137 | C | 0 |
+| Walla Walla (53071) | 62,161 | 46 | 452,711 | C | 37 |
+| Whitman (53075) | 47,003 | 35 | 568,989 | C | 24 |
+| **26 counties** | **1,065,186** | **843** | **33,591,841** | 25 C, 1 D | 500 |
+
+- Washington cut alone: 144 s, peak osmium memory 4.16 GB, 441 MB (the largest state file). Build: fetch 15-128 s,
+  build 170-205 s per county.
+- Canopy: American Forests' Washington zip has a newer member (dated 2026-03-13) than the other states (2025-07-01);
+  `build_tree_equity_2025.py` records it per file; the 13 existing Washington files changed only in their build date
+  and were left as committed.
+- Census spot check: all 118 counties so far, 2,604 of 2,604 values equal (0% mismatch). Tract-median flags: 26
+  counties added, no existing county changed, 0 mismatches.
+- Crash counts: Washington has no state crash source connected.
+- Transit corridors: the Big Sky North Coast corridor's Pasco stop is in Franklin County (53021), now on the page;
+  its `county_on_page` flag in `app/data/intercity_transit_corridors.json` is set to true (only the flag changed;
+  `tests/unit/transitCorridors.test.ts` checks it against the manifest).
+- Live check from R2 (`LIVE_PORT=9337`): Kittitas and Walla Walla, 3 points each, all with the house panel on live
+  parcel records: all 10 checks pass at all 6 points. Data files from the r2.dev address (HEAD 200, GET 200).
+- R2: dry run "27 files, net +0.034 GB, projected 1.334 GB"; after 1,333,673,648 bytes (1,621 objects).

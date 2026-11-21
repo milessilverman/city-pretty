@@ -10507,6 +10507,30 @@
    ]
   },
   {
+   "fips": "53001",
+   "name": "Adams County",
+   "state": "WA",
+   "block_groups": 15,
+   "bundle_mb": 0.3,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "53003",
+   "name": "Asotin County",
+   "state": "WA",
+   "block_groups": 21,
+   "bundle_mb": 0.6,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "53005",
    "name": "Benton County",
    "state": "WA",
@@ -10516,6 +10540,30 @@
    "osm": "2026-11-07T01:00:22Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "53007",
+   "name": "Chelan County",
+   "state": "WA",
+   "block_groups": 63,
+   "bundle_mb": 2.6,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "53009",
+   "name": "Clallam County",
+   "state": "WA",
+   "block_groups": 66,
+   "bundle_mb": 1.9,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "53011",
@@ -10529,6 +10577,18 @@
    "crash_years": null
   },
   {
+   "fips": "53013",
+   "name": "Columbia County",
+   "state": "WA",
+   "block_groups": 5,
+   "bundle_mb": 0.3,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "53015",
    "name": "Cowlitz County",
    "state": "WA",
@@ -10540,6 +10600,54 @@
    "crash_years": null
   },
   {
+   "fips": "53017",
+   "name": "Douglas County",
+   "state": "WA",
+   "block_groups": 31,
+   "bundle_mb": 1.1,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "53019",
+   "name": "Ferry County",
+   "state": "WA",
+   "block_groups": 8,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "53021",
+   "name": "Franklin County",
+   "state": "WA",
+   "block_groups": 56,
+   "bundle_mb": 0.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "53023",
+   "name": "Garfield County",
+   "state": "WA",
+   "block_groups": 3,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "53025",
    "name": "Grant County",
    "state": "WA",
@@ -10549,6 +10657,42 @@
    "osm": "2026-11-07T01:00:22Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "53027",
+   "name": "Grays Harbor County",
+   "state": "WA",
+   "block_groups": 68,
+   "bundle_mb": 3.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "53029",
+   "name": "Island County",
+   "state": "WA",
+   "block_groups": 65,
+   "bundle_mb": 0.8,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "53031",
+   "name": "Jefferson County",
+   "state": "WA",
+   "block_groups": 27,
+   "bundle_mb": 3.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "53033",
@@ -10573,6 +10717,102 @@
    "crash_years": null
   },
   {
+   "fips": "53037",
+   "name": "Kittitas County",
+   "state": "WA",
+   "block_groups": 32,
+   "bundle_mb": 1.8,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "53039",
+   "name": "Klickitat County",
+   "state": "WA",
+   "block_groups": 19,
+   "bundle_mb": 0.9,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "53041",
+   "name": "Lewis County",
+   "state": "WA",
+   "block_groups": 62,
+   "bundle_mb": 3.3,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "53043",
+   "name": "Lincoln County",
+   "state": "WA",
+   "block_groups": 11,
+   "bundle_mb": 0.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "53045",
+   "name": "Mason County",
+   "state": "WA",
+   "block_groups": 56,
+   "bundle_mb": 1.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "53047",
+   "name": "Okanogan County",
+   "state": "WA",
+   "block_groups": 43,
+   "bundle_mb": 2.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "53049",
+   "name": "Pacific County",
+   "state": "WA",
+   "block_groups": 25,
+   "bundle_mb": 2.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "53051",
+   "name": "Pend Oreille County",
+   "state": "WA",
+   "block_groups": 14,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "53053",
    "name": "Pierce County",
    "state": "WA",
@@ -10584,6 +10824,18 @@
    "crash_years": null
   },
   {
+   "fips": "53055",
+   "name": "San Juan County",
+   "state": "WA",
+   "block_groups": 19,
+   "bundle_mb": 0.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "53057",
    "name": "Skagit County",
    "state": "WA",
@@ -10593,6 +10845,18 @@
    "osm": "2026-11-07T01:00:22Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "53059",
+   "name": "Skamania County",
+   "state": "WA",
+   "block_groups": 10,
+   "bundle_mb": 1.0,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "53061",
@@ -10617,6 +10881,18 @@
    "crash_years": null
   },
   {
+   "fips": "53065",
+   "name": "Stevens County",
+   "state": "WA",
+   "block_groups": 38,
+   "bundle_mb": 0.8,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "53067",
    "name": "Thurston County",
    "state": "WA",
@@ -10628,6 +10904,30 @@
    "crash_years": null
   },
   {
+   "fips": "53069",
+   "name": "Wahkiakum County",
+   "state": "WA",
+   "block_groups": 5,
+   "bundle_mb": 0.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "53071",
+   "name": "Walla Walla County",
+   "state": "WA",
+   "block_groups": 46,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "53073",
    "name": "Whatcom County",
    "state": "WA",
@@ -10637,6 +10937,18 @@
    "osm": "2026-11-07T01:00:22Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "53075",
+   "name": "Whitman County",
+   "state": "WA",
+   "block_groups": 35,
+   "bundle_mb": 0.6,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "53077",
