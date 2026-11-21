@@ -90,7 +90,7 @@ def build():
     # bus stops with 7-9am frequency
     sp = next((os.path.join(DATA, n) for n in ("octa_stops_7_9.json", "transit_stops_7_9.json") if os.path.exists(os.path.join(DATA, n))), None)
     stops = json.load(open(sp)) if sp else []
-    L["stops"] = fc([feat(Point(s[0], s[1]), {"cell": "", "t": s[2]}) for s in stops if s[2] >= 6])
+    L["stops"] = fc([feat(Point(geo.wl(s[0]), s[1]), {"cell": "", "t": s[2]}) for s in stops if s[2] >= 6])
     # amenities (points) and facilities
     am, fac, fac_cells = [], [], collections.defaultdict(list)
     for t, g, _ in amen:
