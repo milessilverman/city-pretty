@@ -1390,3 +1390,30 @@ places and the rerun shows it.
 **Not done.** 8 partly verified profiles (ID, MN, MO, MT, ND, SD, UT, WV) were not re-checked. Fields stored
 as "no cap" or "no homestead exemption" were confirmed only where a source said so; most such fields stay listed as not
 confirmed. The advisor (Cloudflare Worker) does not read these profiles.
+
+### Northeast small counties: what the checks found (21 Nov 2026)
+
+108 counties in CT, RI, NJ, MA, NH, ME, VT, NY and PA were built and served from R2 (`audit/small-counties-northeast.md`).
+Nothing published was wrong; four things were found:
+
+- **New York county edges (found, not fixed).** The registry clips each New York county from the smallest
+  openstreetmap.fr New York file whose polygon contains it, and those sub-region files stop at their own polygons. A
+  live Overpass query of Hamilton County's box returned 2,024 roads; the extract has 1,489. Every road with a node inside
+  Hamilton's block groups in `us-northeast-latest.osm.pbf` (1,092) is in the extract: the 535 missing roads lie in the
+  0.02 degree margin the county box keeps beyond the county line. The same comparison for all 34 new New York counties:
+  0 roads missing inside any county, 0 to 4,550 missing in the margin (Madison 4,550). Distances that can reach across
+  a county line (nearest park, amenity or facility) may therefore be overstated for edge block groups of these counties
+  and, by the same rule, the 28 New York counties built before. Fix: cut New York from the regional file with
+  `osm_split.py` (it skips New York today) and rebuild. Listed in `WORK-QUEUE.md`.
+- **Live checker misread a top-coded rent (fixed).** `scripts/live_check_panels.mjs` expected "$3,501/mo" where the
+  page shows "$3,500 or more/mo" (Bristol RI block group 440010304001: the block group's rent is suppressed and the
+  tract's published median is 3501, the Census top-code for "$3,500+"). The page was right; the checker now expects the
+  Census top- and bottom-code wording.
+- **Crash-count test compared rounded sums exactly (fixed).** `tests/unit/stateCrashCounts.test.ts` required the stored
+  per-block-group sum to be at least the strictly-inside total, but the stored counts are rounded to 4 decimals (1/k
+  parts), so eight of the 47 new Maine and Pennsylvania files fell short by 0.0001-0.0002 (Aroostook: 3993.9998 against
+  3994). The test now allows that rounding (0.00005 per block group) and nothing more. The counts themselves are
+  unchanged.
+- **Corridor stops in counties now on the page (updated).** Six FRA corridor stops (Rockland ME; Rutland, Bennington,
+  Manchester, St. Albans, White River Junction VT) said `county_on_page: false`; their counties now have data files,
+  so `app/data/intercity_transit_corridors.json` says true. No other field changed.

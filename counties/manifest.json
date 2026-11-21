@@ -1614,6 +1614,18 @@
    "crash_years": null
   },
   {
+   "fips": "09150",
+   "name": "Northeastern Connecticut Planning Region",
+   "state": "CT",
+   "block_groups": 83,
+   "bundle_mb": 1.2,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "09160",
    "name": "Northwest Hills Planning Region",
    "state": "CT",
@@ -3294,6 +3306,18 @@
    ]
   },
   {
+   "fips": "23003",
+   "name": "Aroostook County",
+   "state": "ME",
+   "block_groups": 75,
+   "bundle_mb": 3.0,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "MaineDOT crash records 2016-2025",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "23005",
    "name": "Cumberland County",
    "state": "ME",
@@ -3306,6 +3330,30 @@
     2016,
     2025
    ]
+  },
+  {
+   "fips": "23007",
+   "name": "Franklin County",
+   "state": "ME",
+   "block_groups": 38,
+   "bundle_mb": 0.9,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "MaineDOT crash records 2016-2025",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "23009",
+   "name": "Hancock County",
+   "state": "ME",
+   "block_groups": 50,
+   "bundle_mb": 1.6,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "MaineDOT crash records 2016-2025",
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "23011",
@@ -3322,6 +3370,42 @@
    ]
   },
   {
+   "fips": "23013",
+   "name": "Knox County",
+   "state": "ME",
+   "block_groups": 41,
+   "bundle_mb": 0.8,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "MaineDOT crash records 2016-2025",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "23015",
+   "name": "Lincoln County",
+   "state": "ME",
+   "block_groups": 35,
+   "bundle_mb": 0.9,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "MaineDOT crash records 2016-2025",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "23017",
+   "name": "Oxford County",
+   "state": "ME",
+   "block_groups": 56,
+   "bundle_mb": 1.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "MaineDOT crash records 2016-2025",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "23019",
    "name": "Penobscot County",
    "state": "ME",
@@ -3334,6 +3418,66 @@
     2016,
     2025
    ]
+  },
+  {
+   "fips": "23021",
+   "name": "Piscataquis County",
+   "state": "ME",
+   "block_groups": 20,
+   "bundle_mb": 1.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "MaineDOT crash records 2016-2025",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "23023",
+   "name": "Sagadahoc County",
+   "state": "ME",
+   "block_groups": 34,
+   "bundle_mb": 0.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "MaineDOT crash records 2016-2025",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "23025",
+   "name": "Somerset County",
+   "state": "ME",
+   "block_groups": 49,
+   "bundle_mb": 2.0,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "MaineDOT crash records 2016-2025",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "23027",
+   "name": "Waldo County",
+   "state": "ME",
+   "block_groups": 34,
+   "bundle_mb": 0.6,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "MaineDOT crash records 2016-2025",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "23029",
+   "name": "Washington County",
+   "state": "ME",
+   "block_groups": 36,
+   "bundle_mb": 1.3,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "MaineDOT crash records 2016-2025",
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "23031",
@@ -3657,6 +3801,18 @@
    "crash_years": null
   },
   {
+   "fips": "25007",
+   "name": "Dukes County",
+   "state": "MA",
+   "block_groups": 21,
+   "bundle_mb": 0.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "25009",
    "name": "Essex County",
    "state": "MA",
@@ -3666,6 +3822,18 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "25011",
+   "name": "Franklin County",
+   "state": "MA",
+   "block_groups": 62,
+   "bundle_mb": 1.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "25013",
@@ -3699,6 +3867,18 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "25019",
+   "name": "Nantucket County",
+   "state": "MA",
+   "block_groups": 12,
+   "bundle_mb": 0.1,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "25021",
@@ -4394,6 +4574,66 @@
    "crash_years": null
   },
   {
+   "fips": "33001",
+   "name": "Belknap County",
+   "state": "NH",
+   "block_groups": 53,
+   "bundle_mb": 0.9,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "33003",
+   "name": "Carroll County",
+   "state": "NH",
+   "block_groups": 53,
+   "bundle_mb": 1.1,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "33005",
+   "name": "Cheshire County",
+   "state": "NH",
+   "block_groups": 59,
+   "bundle_mb": 0.9,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "33007",
+   "name": "Coos County",
+   "state": "NH",
+   "block_groups": 36,
+   "bundle_mb": 1.0,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "33009",
+   "name": "Grafton County",
+   "state": "NH",
+   "block_groups": 80,
+   "bundle_mb": 1.8,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "33011",
    "name": "Hillsborough County",
    "state": "NH",
@@ -4438,6 +4678,18 @@
    "crash_years": null
   },
   {
+   "fips": "33019",
+   "name": "Sullivan County",
+   "state": "NH",
+   "block_groups": 40,
+   "bundle_mb": 0.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "34001",
    "name": "Atlantic County",
    "state": "NJ",
@@ -4480,6 +4732,18 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "34009",
+   "name": "Cape May County",
+   "state": "NJ",
+   "block_groups": 107,
+   "bundle_mb": 0.9,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "34011",
@@ -4603,6 +4867,18 @@
    "crash_years": null
   },
   {
+   "fips": "34033",
+   "name": "Salem County",
+   "state": "NJ",
+   "block_groups": 46,
+   "bundle_mb": 0.9,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "34035",
    "name": "Somerset County",
    "state": "NJ",
@@ -4713,6 +4989,18 @@
    "crash_years": null
   },
   {
+   "fips": "36003",
+   "name": "Allegany County",
+   "state": "NY",
+   "block_groups": 48,
+   "bundle_mb": 0.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "36005",
    "name": "Bronx County",
    "state": "NY",
@@ -4735,6 +5023,30 @@
    "crash_years": null
   },
   {
+   "fips": "36009",
+   "name": "Cattaraugus County",
+   "state": "NY",
+   "block_groups": 80,
+   "bundle_mb": 0.6,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36011",
+   "name": "Cayuga County",
+   "state": "NY",
+   "block_groups": 80,
+   "bundle_mb": 0.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "36013",
    "name": "Chautauqua County",
    "state": "NY",
@@ -4744,6 +5056,78 @@
    "osm": "2026-11-07T00:58:19Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "36015",
+   "name": "Chemung County",
+   "state": "NY",
+   "block_groups": 86,
+   "bundle_mb": 0.3,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36017",
+   "name": "Chenango County",
+   "state": "NY",
+   "block_groups": 52,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36019",
+   "name": "Clinton County",
+   "state": "NY",
+   "block_groups": 78,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36021",
+   "name": "Columbia County",
+   "state": "NY",
+   "block_groups": 64,
+   "bundle_mb": 0.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36023",
+   "name": "Cortland County",
+   "state": "NY",
+   "block_groups": 47,
+   "bundle_mb": 0.3,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36025",
+   "name": "Delaware County",
+   "state": "NY",
+   "block_groups": 55,
+   "bundle_mb": 0.8,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "36027",
@@ -4768,6 +5152,90 @@
    "crash_years": null
   },
   {
+   "fips": "36031",
+   "name": "Essex County",
+   "state": "NY",
+   "block_groups": 44,
+   "bundle_mb": 1.0,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36033",
+   "name": "Franklin County",
+   "state": "NY",
+   "block_groups": 42,
+   "bundle_mb": 0.8,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36035",
+   "name": "Fulton County",
+   "state": "NY",
+   "block_groups": 60,
+   "bundle_mb": 0.3,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36037",
+   "name": "Genesee County",
+   "state": "NY",
+   "block_groups": 51,
+   "bundle_mb": 0.3,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36039",
+   "name": "Greene County",
+   "state": "NY",
+   "block_groups": 46,
+   "bundle_mb": 0.6,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36041",
+   "name": "Hamilton County",
+   "state": "NY",
+   "block_groups": 8,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36043",
+   "name": "Herkimer County",
+   "state": "NY",
+   "block_groups": 64,
+   "bundle_mb": 0.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "36045",
    "name": "Jefferson County",
    "state": "NY",
@@ -4790,6 +5258,42 @@
    "crash_years": null
   },
   {
+   "fips": "36049",
+   "name": "Lewis County",
+   "state": "NY",
+   "block_groups": 22,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36051",
+   "name": "Livingston County",
+   "state": "NY",
+   "block_groups": 49,
+   "bundle_mb": 0.3,
+   "built": "2026-11-21",
+   "osm": "2026-11-19T01\\:25\\:58Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36053",
+   "name": "Madison County",
+   "state": "NY",
+   "block_groups": 50,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "36055",
    "name": "Monroe County",
    "state": "NY",
@@ -4799,6 +5303,18 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "36057",
+   "name": "Montgomery County",
+   "state": "NY",
+   "block_groups": 43,
+   "bundle_mb": 0.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "36059",
@@ -4878,6 +5394,18 @@
    "crash_years": null
   },
   {
+   "fips": "36073",
+   "name": "Orleans County",
+   "state": "NY",
+   "block_groups": 33,
+   "bundle_mb": 0.2,
+   "built": "2026-11-21",
+   "osm": "2026-11-19T01\\:25\\:58Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "36075",
    "name": "Oswego County",
    "state": "NY",
@@ -4887,6 +5415,30 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "36077",
+   "name": "Otsego County",
+   "state": "NY",
+   "block_groups": 59,
+   "bundle_mb": 0.6,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36079",
+   "name": "Putnam County",
+   "state": "NY",
+   "block_groups": 74,
+   "bundle_mb": 0.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:26\\:02Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "36081",
@@ -4966,6 +5518,54 @@
    "crash_years": null
   },
   {
+   "fips": "36095",
+   "name": "Schoharie County",
+   "state": "NY",
+   "block_groups": 33,
+   "bundle_mb": 0.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36097",
+   "name": "Schuyler County",
+   "state": "NY",
+   "block_groups": 19,
+   "bundle_mb": 0.2,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36099",
+   "name": "Seneca County",
+   "state": "NY",
+   "block_groups": 32,
+   "bundle_mb": 0.2,
+   "built": "2026-11-21",
+   "osm": "2026-11-19T01\\:25\\:58Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36101",
+   "name": "Steuben County",
+   "state": "NY",
+   "block_groups": 94,
+   "bundle_mb": 0.6,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "36103",
    "name": "Suffolk County",
    "state": "NY",
@@ -4975,6 +5575,30 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "36105",
+   "name": "Sullivan County",
+   "state": "NY",
+   "block_groups": 89,
+   "bundle_mb": 1.1,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:26\\:02Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36107",
+   "name": "Tioga County",
+   "state": "NY",
+   "block_groups": 45,
+   "bundle_mb": 0.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "36109",
@@ -4999,6 +5623,42 @@
    "crash_years": null
   },
   {
+   "fips": "36113",
+   "name": "Warren County",
+   "state": "NY",
+   "block_groups": 60,
+   "bundle_mb": 0.6,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36115",
+   "name": "Washington County",
+   "state": "NY",
+   "block_groups": 53,
+   "bundle_mb": 0.6,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36117",
+   "name": "Wayne County",
+   "state": "NY",
+   "block_groups": 64,
+   "bundle_mb": 0.3,
+   "built": "2026-11-21",
+   "osm": "2026-11-19T01\\:25\\:58Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "36119",
    "name": "Westchester County",
    "state": "NY",
@@ -5008,6 +5668,30 @@
    "osm": "2026-11-07T00:58:19Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "36121",
+   "name": "Wyoming County",
+   "state": "NY",
+   "block_groups": 38,
+   "bundle_mb": 0.2,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:27\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "36123",
+   "name": "Yates County",
+   "state": "NY",
+   "block_groups": 25,
+   "bundle_mb": 0.2,
+   "built": "2026-11-21",
+   "osm": "2026-11-19T01\\:25\\:58Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "37001",
@@ -5841,6 +6525,18 @@
    ]
   },
   {
+   "fips": "42005",
+   "name": "Armstrong County",
+   "state": "PA",
+   "block_groups": 66,
+   "bundle_mb": 0.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "42007",
    "name": "Beaver County",
    "state": "PA",
@@ -5853,6 +6549,18 @@
     2017,
     2023
    ]
+  },
+  {
+   "fips": "42009",
+   "name": "Bedford County",
+   "state": "PA",
+   "block_groups": 42,
+   "bundle_mb": 1.1,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "42011",
@@ -5881,6 +6589,18 @@
     2017,
     2023
    ]
+  },
+  {
+   "fips": "42015",
+   "name": "Bradford County",
+   "state": "PA",
+   "block_groups": 59,
+   "bundle_mb": 0.8,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "42017",
@@ -5925,6 +6645,30 @@
    ]
   },
   {
+   "fips": "42023",
+   "name": "Cameron County",
+   "state": "PA",
+   "block_groups": 5,
+   "bundle_mb": 0.3,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42025",
+   "name": "Carbon County",
+   "state": "PA",
+   "block_groups": 56,
+   "bundle_mb": 0.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "42027",
    "name": "Centre County",
    "state": "PA",
@@ -5951,6 +6695,66 @@
     2017,
     2023
    ]
+  },
+  {
+   "fips": "42031",
+   "name": "Clarion County",
+   "state": "PA",
+   "block_groups": 40,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42033",
+   "name": "Clearfield County",
+   "state": "PA",
+   "block_groups": 66,
+   "bundle_mb": 0.9,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42035",
+   "name": "Clinton County",
+   "state": "PA",
+   "block_groups": 36,
+   "bundle_mb": 0.8,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42037",
+   "name": "Columbia County",
+   "state": "PA",
+   "block_groups": 54,
+   "bundle_mb": 0.8,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42039",
+   "name": "Crawford County",
+   "state": "PA",
+   "block_groups": 83,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "42041",
@@ -5995,6 +6799,18 @@
    ]
   },
   {
+   "fips": "42047",
+   "name": "Elk County",
+   "state": "PA",
+   "block_groups": 26,
+   "bundle_mb": 0.6,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "42049",
    "name": "Erie County",
    "state": "PA",
@@ -6023,6 +6839,18 @@
    ]
   },
   {
+   "fips": "42053",
+   "name": "Forest County",
+   "state": "PA",
+   "block_groups": 5,
+   "bundle_mb": 0.2,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "42055",
    "name": "Franklin County",
    "state": "PA",
@@ -6035,6 +6863,78 @@
     2017,
     2023
    ]
+  },
+  {
+   "fips": "42057",
+   "name": "Fulton County",
+   "state": "PA",
+   "block_groups": 11,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42059",
+   "name": "Greene County",
+   "state": "PA",
+   "block_groups": 38,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42061",
+   "name": "Huntingdon County",
+   "state": "PA",
+   "block_groups": 38,
+   "bundle_mb": 0.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42063",
+   "name": "Indiana County",
+   "state": "PA",
+   "block_groups": 71,
+   "bundle_mb": 0.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42065",
+   "name": "Jefferson County",
+   "state": "PA",
+   "block_groups": 44,
+   "bundle_mb": 0.6,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42067",
+   "name": "Juniata County",
+   "state": "PA",
+   "block_groups": 19,
+   "bundle_mb": 0.8,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "42069",
@@ -6063,6 +6963,18 @@
     2017,
     2023
    ]
+  },
+  {
+   "fips": "42073",
+   "name": "Lawrence County",
+   "state": "PA",
+   "block_groups": 77,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "42075",
@@ -6121,6 +7033,18 @@
    ]
   },
   {
+   "fips": "42083",
+   "name": "McKean County",
+   "state": "PA",
+   "block_groups": 35,
+   "bundle_mb": 0.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "42085",
    "name": "Mercer County",
    "state": "PA",
@@ -6133,6 +7057,18 @@
     2017,
     2023
    ]
+  },
+  {
+   "fips": "42087",
+   "name": "Mifflin County",
+   "state": "PA",
+   "block_groups": 37,
+   "bundle_mb": 0.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "42089",
@@ -6163,6 +7099,18 @@
    ]
   },
   {
+   "fips": "42093",
+   "name": "Montour County",
+   "state": "PA",
+   "block_groups": 13,
+   "bundle_mb": 0.3,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "42095",
    "name": "Northampton County",
    "state": "PA",
@@ -6175,6 +7123,30 @@
     2017,
     2023
    ]
+  },
+  {
+   "fips": "42097",
+   "name": "Northumberland County",
+   "state": "PA",
+   "block_groups": 85,
+   "bundle_mb": 1.1,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42099",
+   "name": "Perry County",
+   "state": "PA",
+   "block_groups": 36,
+   "bundle_mb": 1.0,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "42101",
@@ -6191,6 +7163,30 @@
    ]
   },
   {
+   "fips": "42103",
+   "name": "Pike County",
+   "state": "PA",
+   "block_groups": 59,
+   "bundle_mb": 1.0,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42105",
+   "name": "Potter County",
+   "state": "PA",
+   "block_groups": 17,
+   "bundle_mb": 0.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "42107",
    "name": "Schuylkill County",
    "state": "PA",
@@ -6203,6 +7199,102 @@
     2017,
     2023
    ]
+  },
+  {
+   "fips": "42109",
+   "name": "Snyder County",
+   "state": "PA",
+   "block_groups": 30,
+   "bundle_mb": 0.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42111",
+   "name": "Somerset County",
+   "state": "PA",
+   "block_groups": 75,
+   "bundle_mb": 0.9,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42113",
+   "name": "Sullivan County",
+   "state": "PA",
+   "block_groups": 9,
+   "bundle_mb": 0.3,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42115",
+   "name": "Susquehanna County",
+   "state": "PA",
+   "block_groups": 40,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42117",
+   "name": "Tioga County",
+   "state": "PA",
+   "block_groups": 38,
+   "bundle_mb": 0.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42119",
+   "name": "Union County",
+   "state": "PA",
+   "block_groups": 31,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42121",
+   "name": "Venango County",
+   "state": "PA",
+   "block_groups": 52,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "42123",
+   "name": "Warren County",
+   "state": "PA",
+   "block_groups": 45,
+   "bundle_mb": 0.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "42125",
@@ -6219,6 +7311,18 @@
    ]
   },
   {
+   "fips": "42127",
+   "name": "Wayne County",
+   "state": "PA",
+   "block_groups": 49,
+   "bundle_mb": 0.8,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "42129",
    "name": "Westmoreland County",
    "state": "PA",
@@ -6231,6 +7335,18 @@
     2017,
     2023
    ]
+  },
+  {
+   "fips": "42131",
+   "name": "Wyoming County",
+   "state": "PA",
+   "block_groups": 22,
+   "bundle_mb": 0.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": "Pennsylvania DOT crash records (PennShare) 2017-2023",
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "42133",
@@ -6247,6 +7363,18 @@
    ]
   },
   {
+   "fips": "44001",
+   "name": "Bristol County",
+   "state": "RI",
+   "block_groups": 37,
+   "bundle_mb": 0.3,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "44003",
    "name": "Kent County",
    "state": "RI",
@@ -6256,6 +7384,18 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "44005",
+   "name": "Newport County",
+   "state": "RI",
+   "block_groups": 63,
+   "bundle_mb": 0.9,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "44007",
@@ -8122,6 +9262,42 @@
    ]
   },
   {
+   "fips": "50001",
+   "name": "Addison County",
+   "state": "VT",
+   "block_groups": 31,
+   "bundle_mb": 0.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "50003",
+   "name": "Bennington County",
+   "state": "VT",
+   "block_groups": 36,
+   "bundle_mb": 0.8,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "50005",
+   "name": "Caledonia County",
+   "state": "VT",
+   "block_groups": 26,
+   "bundle_mb": 0.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "50007",
    "name": "Chittenden County",
    "state": "VT",
@@ -8131,6 +9307,126 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "50009",
+   "name": "Essex County",
+   "state": "VT",
+   "block_groups": 6,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "50011",
+   "name": "Franklin County",
+   "state": "VT",
+   "block_groups": 37,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "50013",
+   "name": "Grand Isle County",
+   "state": "VT",
+   "block_groups": 8,
+   "bundle_mb": 0.2,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "50015",
+   "name": "Lamoille County",
+   "state": "VT",
+   "block_groups": 15,
+   "bundle_mb": 0.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "50017",
+   "name": "Orange County",
+   "state": "VT",
+   "block_groups": 24,
+   "bundle_mb": 0.7,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "50019",
+   "name": "Orleans County",
+   "state": "VT",
+   "block_groups": 27,
+   "bundle_mb": 0.5,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "50021",
+   "name": "Rutland County",
+   "state": "VT",
+   "block_groups": 60,
+   "bundle_mb": 0.9,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "50023",
+   "name": "Washington County",
+   "state": "VT",
+   "block_groups": 54,
+   "bundle_mb": 0.8,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "50025",
+   "name": "Windham County",
+   "state": "VT",
+   "block_groups": 47,
+   "bundle_mb": 1.0,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "50027",
+   "name": "Windsor County",
+   "state": "VT",
+   "block_groups": 61,
+   "bundle_mb": 1.4,
+   "built": "2026-11-21",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "51003",

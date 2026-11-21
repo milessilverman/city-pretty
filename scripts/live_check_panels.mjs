@@ -239,8 +239,8 @@ async function main() {
           if (m.hv == null && CORR[bg] && CORR[bg].hv != null) m.hv = CORR[bg].hv;
           if (m.rent == null && CORR[bg] && CORR[bg].rent != null) m.rent = CORR[bg].rent;
           // Rent to the dollar, formatted here (not with the page's own formatter). 3501 is not a dollar figure: it is the
-          // Census code for a median gross rent of "$3,500 or more" (ACS_RENT_TOP above), so the page must show that wording.
-          const eRent = !m.rent ? "–" : m.rent === ACS_RENT_TOP ? "$3,500 or more/mo" : "$" + Math.round(m.rent).toLocaleString("en-US") + "/mo";
+          // Census code for a median gross rent of "$3,500 or more" (ACS_RENT_TOP above), so the page must show that wording; 100 or less is the bottom-code, "$100 or less".
+          const eRent = !m.rent ? "–" : m.rent === ACS_RENT_TOP ? "$3,500 or more/mo" : m.rent <= 100 ? "$100 or less/mo" : "$" + Math.round(m.rent).toLocaleString("en-US") + "/mo";
           const eHv = await fmt(m.hv);
           const eHomes = await page.evaluate((x) => (0, eval)("fmtN")(x), m.homes);
           // A top-coded rent: the page shows "$N or more/mo" (its ACS top-code rule), which matches when the file's value is at
