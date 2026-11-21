@@ -295,3 +295,63 @@ The method is the Northeast batch's (`small-counties-northeast.md`), unchanged.
   the page (house rows not checkable); neighborhood, canopy, canopy goal, crash text, state laws and console pass at
   all 6. Data files from the r2.dev address (HEAD 200, GET 200).
 - R2: dry run "29 files, net +0.021 GB, projected 1.355 GB"; after 1,354,578,978 bytes (1,649 objects).
+
+## Idaho (40 of 40 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Adams (16003) | 4,744 | 5 | 682,562 | D | 0 |
+| Bannock (16005) | 89,454 | 64 | 507,168 | C | 56 |
+| Bear Lake (16007) | 6,650 | 7 | 369,242 | D | 0 |
+| Benewah (16009) | 10,142 | 9 | 291,018 | C | 0 |
+| Bingham (16011) | 49,664 | 32 | 774,374 | D | 20 |
+| Blaine (16013) | 24,951 | 20 | 1,155,223 | C | 18 |
+| Boise (16015) | 8,273 | 8 | 1,038,063 | C | 0 |
+| Bonner (16017) | 51,049 | 44 | 878,366 | C | 16 |
+| Boundary (16021) | 13,172 | 9 | 472,330 | C | 0 |
+| Butte (16023) | 2,684 | 3 | 336,579 | D | 0 |
+| Camas (16025) | 1,124 | 1 | 345,833 | C | 0 |
+| Caribou (16029) | 7,162 | 7 | 447,370 | D | 0 |
+| Cassia (16031) | 25,483 | 19 | 414,180 | D | 12 |
+| Clark (16033) | 849 | 1 | 418,138 | D | 0 |
+| Clearwater (16035) | 9,012 | 13 | 994,193 | D | 0 |
+| Custer (16037) | 4,470 | 4 | 1,049,962 | C | 0 |
+| Elmore (16039) | 29,321 | 19 | 1,147,472 | C | 14 |
+| Franklin (16041) | 15,056 | 10 | 294,441 | C | 0 |
+| Fremont (16043) | 13,943 | 12 | 529,715 | D | 0 |
+| Gem (16045) | 20,614 | 12 | 343,747 | D | 12 |
+| Gooding (16047) | 15,931 | 13 | 233,495 | D | 0 |
+| Idaho (16049) | 17,432 | 15 | 2,710,357 | D | 0 |
+| Jefferson (16051) | 33,154 | 16 | 374,548 | D | 8 |
+| Jerome (16053) | 25,173 | 19 | 301,356 | D | 13 |
+| Latah (16057) | 41,049 | 31 | 463,748 | D | 19 |
+| Lemhi (16059) | 8,249 | 8 | 1,039,425 | D | 0 |
+| Lewis (16061) | 3,682 | 5 | 346,790 | D | 0 |
+| Lincoln (16063) | 5,358 | 4 | 238,986 | D | 0 |
+| Madison (16065) | 54,618 | 32 | 318,059 | D | 27 |
+| Minidoka (16067) | 22,208 | 16 | 213,336 | D | 14 |
+| Nez Perce (16069) | 42,697 | 36 | 631,392 | C | 29 |
+| Oneida (16071) | 4,768 | 3 | 194,946 | D | 0 |
+| Owyhee (16073) | 12,503 | 9 | 1,988,850 | C | 0 |
+| Payette (16075) | 26,771 | 16 | 246,088 | C | 11 |
+| Power (16077) | 8,133 | 7 | 449,597 | C | 0 |
+| Shoshone (16079) | 13,785 | 17 | 1,075,387 | C | 0 |
+| Teton (16081) | 12,425 | 19 | 221,571 | C | 0 |
+| Twin Falls (16083) | 93,734 | 57 | 607,028 | D | 37 |
+| Valley (16085) | 12,389 | 12 | 1,090,610 | D | 3 |
+| Washington (16087) | 11,142 | 10 | 498,896 | D | 6 |
+| **40 counties** | **853,018** | **644** | **25,734,441** | 16 C, 24 D | 315 |
+
+- Idaho cut alone: 126 s, peak osmium memory 4.11 GB, 157 MB. Build: fetch 3-100 s, build 58-80 s per county.
+- **Interrupted and re-run:** the second build queue reached the 2-hour background limit at 14:22 while Clearwater,
+  Custer and Elmore were being built; they were built again from the start in a new queue that held only the 26
+  Idaho counties not yet built, and checked like the rest.
+- Census spot check: all 186 counties, 4,076 of 4,076 values equal (0% mismatch). Tract-median flags: 40 counties
+  added, no existing county changed, 0 mismatches.
+- Crash counts: Idaho has no state crash source connected.
+- Transit corridors: the Big Sky North Coast corridor's Sandpoint stop is in Bonner County (16017), now on the page;
+  its `county_on_page` flag is set to true (only the flag changed).
+- R2: dry run "41 files, net +0.026 GB, projected 1.380 GB"; after 1,380,323,467 bytes (1,689 objects).
+- Live check from R2 (`LIVE_PORT=9339`): Latah and Twin Falls, 3 points each; the checker found no parcel near any
+  of the 6 block-group interior points, so the house rows are not checkable; neighborhood, canopy, canopy goal, crash
+  text, state laws and console pass at all 6. Data files from the r2.dev address (HEAD 200, GET 200).
