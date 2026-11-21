@@ -7859,6 +7859,7 @@ function eifdSection(p, m) {
         ${pf.reassessment_increase_cap != null ? `Assessment increases capped at <b>${(pf.reassessment_increase_cap * 100).toFixed(0)}%</b> per reassessment. ` : ""}
         ${pf.tax_bill_growth_cap != null ? `Owner-occupied home tax bills capped at <b>${(pf.tax_bill_growth_cap * 100).toFixed(0)}%</b> growth a year. ` : ""}
         ${pf.statutory_citation ? `Law: ${esc(pf.statutory_citation)}. ` : ""}
+        ${pf.scope_note ? `${esc(pf.scope_note)} ` : ""}
         <span style="color:${vlab.color}">(${vlab.text})</span>
       </p>` : `<p class="small muted">No finance profile on file for this state.</p>`}
       <p class="small muted">${(() => { const miss = financeGateMissing(pf); return miss.length
@@ -9753,7 +9754,7 @@ function methodsFinancingHtml(f, st, countyName) {
   const vl = pf ? verificationLabel(pf) : null;
   let h = `<h3>Tax-increment financing (${esc(st)})</h3>`;
   h += pf
-    ? `<p class="small">On file for ${esc(st)}: <b>${esc(pf.tif_vehicle_name || "tax-increment financing")}</b>${pf.statutory_citation ? `, ${esc(pf.statutory_citation)}` : ""} <span style="color:${vl.color}">(${vl.text})</span>${pf.source_url ? ` · <a href="${esc(pf.source_url)}" target="_blank" rel="noopener">source</a>` : ""}.</p>`
+    ? `<p class="small">On file for ${esc(st)}: <b>${esc(pf.tif_vehicle_name || "tax-increment financing")}</b>${pf.statutory_citation ? `, ${esc(pf.statutory_citation)}` : ""} <span style="color:${vl.color}">(${vl.text})</span>${pf.source_url ? ` · <a href="${esc(pf.source_url)}" target="_blank" rel="noopener">source</a>` : ""}.${pf.scope_note ? ` ${esc(pf.scope_note)}` : ""}</p>`
     : `<p class="small muted">No finance profile on file for ${esc(st)}.</p>`;
   if (f === "06037") {
     const E = (typeof D !== "undefined" && D && D.eifd && D.eifd.tras) ? D.eifd : null;
