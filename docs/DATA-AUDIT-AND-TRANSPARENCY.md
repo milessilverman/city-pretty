@@ -1428,7 +1428,7 @@ found:
 - **`scripts/r2_sync_counties.py` uploads on any unrecognised argument (found, not fixed).** The script reads only
   `--dry-run` and `--usage`; `--help` (or a typo such as `--dryrun`) runs a real upload. Run with `--help` at the start
   of this batch, it reported "To upload: 0 files" and sent nothing, and the 8 GB guard applies on that path too, but the
-  owner's R2 rule depends on this script, so it should refuse unknown arguments. Listed in `WORK-QUEUE.md`.
+  owner's R2 rule depends on this script, so it should refuse unknown arguments. **Fixed 21 Nov 2026:** any argument other than `--dry-run` or `--usage` now exits with a usage message before anything is listed or uploaded (`python3 scripts/r2_sync_counties.py --help` printed "Unknown argument(s): --help ... Nothing was uploaded." and exit code 1).
 - **Corridor stops in counties now on the page (updated).** Two Big Sky North Coast corridor stops (Pasco WA, Franklin
   County 53021; Sandpoint ID, Bonner County 16017) said `county_on_page: false`; their counties now have data files, so
   `app/data/intercity_transit_corridors.json` says true. No other field changed.

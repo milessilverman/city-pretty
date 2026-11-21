@@ -84,7 +84,7 @@ audit doc the same day.
   **Open from this batch:** (1) **Montana's 52 counties not built** (time); its state cut is recorded in
   `national/data/osm_split.json`. (2) Colorado's 53 are clipped from openstreetmap.fr Colorado sub-region files (the
   New York edge problem); cut Colorado from us-west and build them. (3) `scripts/r2_sync_counties.py` uploads on any
-  unrecognised argument (e.g. `--help`); it should refuse unknown arguments. (4) Left (registry count, Puerto Rico,
+  unrecognised argument (e.g. `--help`); it should refuse unknown arguments (fixed 21 Nov: it now exits with a usage message and uploads nothing). (4) Left (registry count, Puerto Rico,
   LA and Orange left out): 2,096 counties with no data file, 2,093 under 100,000 people (43,754 block groups,
   51,105,486 people).
 - **Site off GitHub Pages (19 Nov, built, not yet deployed):** a second Worker `city-pretty` (`wrangler.site.toml`,
