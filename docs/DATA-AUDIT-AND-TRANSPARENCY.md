@@ -1002,3 +1002,44 @@ returns, for a Miami-Dade residential lot, "Not on file ... zoning as commercial
 parcel" for Live Local, applies it when the parcel is flagged as public or religious-institution land, and for a
 Contra Costa parcel 0.2 mi from heavy rail reports "whether this county is an urban transit county (more than 15
 passenger rail stations)" for SB 79.
+
+### Correction: the live check expected a Census rent code as a dollar figure; the page called an exact $3,500 median "or more" (found 20 Nov, fixed 21 Nov 2026)
+
+**What failed.** `scripts/live_check_panels.mjs` for Travis County TX (48453), 20 Nov, block group 484530010004
+(saved in `data/backtests/live_check_panels_2026-11-20_lazone2.json` on branch `claude/upbeat-rubin-7orjxv`):
+"expected home value $865k, rent $3,501/mo, homes 245 | panel: ... Median rent$3,500 or more/mo Census ACS 2020–24".
+
+**What the sources say (all fetched 21 Nov 2026).**
+
+- Census ACS jam values, <https://www2.census.gov/programs-surveys/acs/tech_docs/jam_values/2024_Jam_Values.xlsx>
+  (sha256 `14a61938cff58166ef265af9a324b8a6f4cf6040f8630634e5711cb5b07e2cf5`), section "Median - Jam Values", row
+  "Gross Rent", upper interval: meaning "$3,500 or more", character value (data.census.gov) "3,500+", numeric value
+  (API and Summary File) "3501". Lower interval: "Less than $100", "100-", "99". The 2023 workbook in the same folder
+  has the same row. Caveat: the title cell of the file named 2024 reads "Jam Value Specifications for the 2023
+  American Community Survey"; it is the file Census publishes under the 2024 name.
+- Census ACS 2020-24 5-year table file,
+  <https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25064.dat>
+  (header `GEO_ID|B25064_E001|B25064_M001`): `1500000US484530010004|3501|-333333333` and
+  `1500000US484530013092|3500|2500`.
+- `counties/bundle_48453.json.gz` stores `rent: 3501.0` for 484530010004, the same as the Census file. Of its 766 block
+  groups, 31 hold 3501 and one (484530013092) holds 3500.
+
+**Who was wrong.**
+
+1. The live check. It built its expected text as "$" + the stored number, so the code 3501 became "$3,501/mo". The page's
+   "$3,500 or more/mo" for that block group was right. Fixed: the check now expects "$3,500 or more/mo" when the file
+   holds exactly 3501 (`ACS_RENT_TOP`), and still formats every other rent itself, to the dollar.
+2. The page, for a different value. `fmtRent` in `app/app.js` treated any rent of 3500 or above as the top-code, so
+   block group 484530013092, where Census publishes an estimate of 3500 with a margin of 2500, was shown as
+   "$3,500 or more/mo". Fixed: only 3501 and above is the top-code; 3500 is shown as "$3,500/mo". The unit test in
+   `tests/unit/auditChecklist.test.ts` asserted the old behavior for 3500 and was changed to assert the new one.
+
+**Seen on the real page (21 Nov, after the fix).** `LIVE_PORT=18611 LIVE_N=2 node scripts/live_check_panels.mjs 48453`:
+both parcels ok on every panel, 484530010004 "expected home value $865k, rent $3,500 or more/mo, homes 245"
+(`data/backtests/live_check_panels_2026-11-21.json`). A separate read of the panel: 484530013092 shows
+"Median rent$3,500/mo", 484530010004 shows "Median rent$3,500 or more/mo".
+
+**Not changed, still open.** The page words the bottom code (99) as "$100 or less/mo" where Census says "Less than $100";
+no block group in the Travis County file holds it, and the live check would report it as a failure if one were sampled.
+Other counties' files were not searched for a stored 3500. The places that leave a top-coded rent out of a calculation
+(`m.rent < 3500` in `app/app.js`) were left as they are, so an exact 3500 is also left out there.
