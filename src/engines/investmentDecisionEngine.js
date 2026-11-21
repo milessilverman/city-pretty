@@ -459,7 +459,8 @@ function recommendForParcel(parcelFacts, ctx) {
   const zoningKnown = !!(p.base_zoning_code && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(p.base_zoning_code).trim()));
   if (!zoningKnown) missing.push("base_zoning_code");
   if (zoningKnown && zoningFn) {
-    const ex = Object.assign({ historic_district_hpoz: false, coastal_commission_or_sma: false, fema_100yr_floodway: false, calfire_or_state_vhfhsz: false, airport_noise_or_runway_zone: false, williamson_or_ag_preserve: false, public_or_tribal_land: false, everglades_or_wekiva_or_trpa: false, population_threshold_ineligible: false }, p.exclusions || {});
+    // A flag the caller does not supply is "not checked" (left out), never false.
+    const ex = Object.assign({}, p.exclusions || {});
     try {
       zoning = zoningFn(Object.assign({}, p, { exclusions: ex, municipality_pop: num(p.municipality_pop), county_pop: num(p.county_pop), dist_to_heavy_rail_mi: num(p.dist_to_heavy_rail_mi), dist_to_frequent_bus_or_brt_mi: num(p.dist_to_frequent_bus_or_brt_mi), lot_sqft: num(p.lot_sqft != null ? p.lot_sqft : p.lotSqft) }), ctx.laws);
     } catch (e) { zoning = null; }

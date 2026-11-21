@@ -1062,3 +1062,110 @@ ADU and lot-split answers for such lots say that the Zoning row shows a code the
 - Live check (19 Nov 2026, `scripts/live_check_corridors.mjs`, LIVE_PORT 9061): Guadalupe TX (Seguin, 10 neighborhoods),
   Larimer CO (Fort Collins, 21) and Rowan NC (Salisbury, 11, on two corridors) match Census TIGERweb block groups within 1 mile;
   `data/backtests/live_check_corridors_2026-11-19.json`.
+
+### Correction: housing-law site exclusions were one rule for every state (found and fixed 19 Nov 2026)
+
+**What was wrong.** `evaluateByRightHousing` (in `app/app.js` and `src/engines/statutoryZoningEngine.js`) returned no laws at all for a
+parcel if any of four flags was true (`fema_100yr_floodway`, `calfire_or_state_vhfhsz`, `williamson_or_ag_preserve`,
+`public_or_tribal_land`), whatever state the parcel was in and whether or not that state's statute has such an exclusion.
+Only 9 of the 45 records (the four SB 79 tiers, SB 9, Florida Live Local, Texas SB 840, Washington HB 1337 and Idaho's ADU law) had a list of their own; 36 had none, and the page passed `false` for six conditions it never checks (airport zones,
+working waterfronts, Wekiva and Everglades areas, agricultural preserves, public or tribal land, population thresholds). Two
+errors followed:
+
+- **Wrongly blocking (every state).** The page really reads three flags: FEMA special flood hazard area (every state), CAL FIRE
+  very high zone (California only) and a historic overlay (Los Angeles only). A parcel in a FEMA flood area anywhere in the country
+  got no state housing law, including laws whose text has no flood exclusion (Vermont, Massachusetts, Montana, Rhode Island,
+  Oregon's middle-housing and ADU laws, Washington's, and others). In California a very-high-fire parcel was blocked from SB 79, the ADU
+  law and AB 2097, though SB 79 bars that zone only from its streamlined-approval route (Gov. Code 65912.159(a)(3)).
+- **Wrongly permitting.** Conditions the page does not check were treated as absent, so laws were shown as applying that
+  the text excludes in places the page cannot see: Florida Live Local (airport-impacted areas, Wekiva and Everglades areas,
+  conservation easements, and others), Texas SB 840 (heavy industrial zoning, 3,000 ft of an airport), Maine (coastal
+  barriers, special flood hazard areas, a Lewiston and Auburn watershed), Utah, and California SB 9, whose exclusion list
+  points to a 2021 version of Gov. Code 65913.4 that has not been read.
+
+**What changed.** Each record now carries `exclusion_sources` (one entry per exclusion: machine key, the statute's wording, citation,
+URL, checked date, optional scope note) and `exclusions_review` (`confirmed` or `not confirmed`, with a note; "not confirmed" is also
+in `verification.unverified_fields`). The old `statutory_exclusions` strings are gone. The engine, after a law's own conditions pass:
+a listed exclusion whose flag is true blocks the law and the output (`excluded_by_statute`) quotes the statute; a listed exclusion
+whose flag is null (not checked), or any unconfirmed list, gives "not determined" naming what is missing; a flag the law does not
+list has no effect on it; an entry marked `limits` (SB 79's fire zone, Idaho's flood-plain and hazard laws, Washington's historic
+carve-out) leaves the law on the parcel and is quoted with it. The note on a flood exclusion says the page's flag is FEMA's special
+flood hazard area. The page now passes `null`, not `false`, for every condition it does not read. `investmentDecisionEngine` no
+longer fills missing flags with `false`. Both engine copies are identical (`tests/unit/engineCopies.test.ts` names them).
+
+**Result: 30 of 45 lists confirmed from the statute text, 15 not confirmed.** Not confirmed: Connecticut (three records; the state's
+site fails the certificate check through this machine's proxy and its page is a script shell), SB 9 (2021 text of 65913.4 not read),
+Utah (current code page script-rendered), Austin HOME (city page, not the ordinances), DC 11-U253 (page lists versions, no text),
+Raleigh (403), Minneapolis (plan page), and six laws the engine never applies to one parcel (Colorado HB24-1313 and 1304, Massachusetts
+MBTA, Washington SB 5184, Virginia 2209.4, Idaho 67-6542). The page checks only three flags, so any law whose list names another
+condition (airport zones, wetlands, conservation easements, water and sewer service, and so on) now says "not determined" instead of
+"allowed"; that is deliberate, and follow-up N6 in `WORK-QUEUE.md` covers settling the rest and adding parcel layers.
+
+Exclusions before and now, by record (the "before" column is the list on file at 996c1c4; "four flags" are the blanket rule above):
+
+| State | Record | Before | Now | Source (first entry; every entry has its own wording and URL in the record) |
+|---|---|---|---|---|
+| CA | `ca_sb79_tier1` | own list of 3; plus 4 flags that blocked it everywhere | 3: rent controlled housing site, rent controlled housing site prior use, mobilehome or rv park site; limits only: calfire or state vhfhsz, airport noise or runway zone | Cal. Gov. Code 65912.157(h)(1) — https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip |
+| CA | `ca_sb79_tier2` | own list of 3; plus 4 flags that blocked it everywhere | 3: rent controlled housing site, rent controlled housing site prior use, mobilehome or rv park site; limits only: calfire or state vhfhsz, airport noise or runway zone | Cal. Gov. Code 65912.157(h)(1) — https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip |
+| CA | `ca_sb79_tier2_light_rail_quarter` | own list of 3; plus 4 flags that blocked it everywhere | 3: rent controlled housing site, rent controlled housing site prior use, mobilehome or rv park site; limits only: calfire or state vhfhsz, airport noise or runway zone | Cal. Gov. Code 65912.157(h)(1) — https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip |
+| CA | `ca_sb79_tier2_light_rail_half` | own list of 3; plus 4 flags that blocked it everywhere | 3: rent controlled housing site, rent controlled housing site prior use, mobilehome or rv park site; limits only: calfire or state vhfhsz, airport noise or runway zone | Cal. Gov. Code 65912.157(h)(1) — https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip |
+| CA | `ca_sb9_lot_split` | own list of 4; plus 4 flags that blocked it everywhere | NOT CONFIRMED: list points to 65913.4(a)(6)(B)-(K) as it read on 16 Sep 2021; that version not read | https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202120220SB9 |
+| CA | `ca_ab2097` | no own list; plus 4 flags that blocked it everywhere | none in the text | read in full, no site exclusion — https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202120220AB2097 |
+| FL | `fl_live_local` | own list of 6; plus 4 flags that blocked it everywhere | 7 (the 6 on file, Wekiva and Everglades split): airport noise or runway zone, working waterfront in industrial zone, wekiva study area, everglades protection area, open character district, area of critical state concern, recorded conservation easement | Fla. Stat. 166.04151(7)(o)1. — https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html |
+| TX | `tx_sb840` | own list of 4; plus 4 flags that blocked it everywhere | 4: heavy industrial zoning, within 1000 ft of heavy industrial use, airport noise or runway zone, clear zone or accident potential zone | Tex. Loc. Gov't Code 218.101(c)(1) — https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00840F.htm |
+| WA | `wa_hb1110` | no own list; plus 4 flags that blocked it everywhere | 5: critical areas or buffers, puget sound island sole source aquifer, impaired reservoir watershed, urban separator, lot from residential lot split | RCW 36.70A.635(8)(a) — https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635 |
+| OR | `or_hb2001` | no own list; plus 4 flags that blocked it everywhere | none in the text | read in full, no site exclusion — https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html |
+| AZ | `az_hb2720_2721` | no own list; plus 4 flags that blocked it everywhere | 11: area not incorporated, lacks urban services, not served by water and sewer, not zoned residential, unincorporated interim zoning, title 48 chapter 6 article 4 area, public airport vicinity, military airport vicinity, tribal land, military airport vicinity adu, airport vicinity over 65 db | Laws 2024 ch. 197 (HB 2721) — https://www.azleg.gov/legtext/56leg/2R/laws/0197.pdf |
+| TX | `tx_austin_home` | no own list; plus 4 flags that blocked it everywhere | NOT CONFIRMED: source is a city web page, not the ordinances | https://www.austintexas.gov/development-services/home-amendments |
+| CO | `co_hb24_1313` | no own list; plus 4 flags that blocked it everywhere | NOT CONFIRMED: jurisdiction-wide duty, never applied to one parcel | https://leg.colorado.gov/bills/hb24-1313 |
+| CO | `co_hb24_1152` | no own list; plus 4 flags that blocked it everywhere | 3: not served by water and sewer, historic property outside district, fema 100yr floodway | C.R.S. 29-35-102(9)(a) — https://leg.colorado.gov/sites/default/files/2024a_1152_signed.pdf |
+| MN | `mn_minneapolis_2040` | no own list; plus 4 flags that blocked it everywhere | NOT CONFIRMED: source is a plan page, not an ordinance; law unverified | https://minneapolis2040.com/topics/housing/ |
+| MT | `mt_sb323` | no own list; plus 4 flags that blocked it everywhere | none in the text | read in full, no site exclusion — https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html |
+| ME | `me_ld2003` | no own list; plus 4 flags that blocked it everywhere | 5: lewiston auburn drinking water watershed, coastal barrier, fema 100yr floodway, coastal sand dune system, title 12 chapter 423a land | 30-A M.R.S. 4364-A(1-B)(A) — https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html |
+| VT | `vt_act47` | no own list; plus 4 flags that blocked it everywhere | none in the text | read in full, no site exclusion — https://legislature.vermont.gov/statutes/section/24/117/04412 |
+| MA | `ma_mbta_communities` | no own list; plus 4 flags that blocked it everywhere | NOT CONFIRMED: jurisdiction-wide duty, never applied to one parcel | https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3A |
+| NC | `nc_raleigh_missing_middle` | no own list; plus 4 flags that blocked it everywhere | NOT CONFIRMED: city page returns 403; law unverified | https://raleighnc.gov/planning-and-building/services/missing-middle-housing |
+| UT | `ut_hb82_iadu` | no own list; plus 4 flags that blocked it everywhere | NOT CONFIRMED: current Utah Code page is script-rendered; only the 2021 enrolled bill was read | https://le.utah.gov/~2021/bills/static/HB0082.html |
+| WA | `wa_hb1337_adu` | own list of 2; plus 4 flags that blocked it everywhere | 2: critical areas or buffers, impaired reservoir watershed | RCW 36.70A.681(4) — https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681 |
+| WA | `wa_sb5184_parking` | no own list; plus 4 flags that blocked it everywhere | NOT CONFIRMED: jurisdiction-wide parking rule, never applied to one parcel | https://lawfilesext.leg.wa.gov/biennium/2025-26/Pdf/Bills/Session%20Laws/Senate/5184-S.SL.pdf |
+| WA | `wa_hb1042_existing_buildings` | no own list; plus 4 flags that blocked it everywhere | none in the text; limits only: historic district hpoz | Laws 2023 ch. 285 sec. 1(2)(e) (code cities) and sec. 2(2)(e) (cities) — https://lawfilesext.leg.wa.gov/biennium/2023-24/Pdf/Bills/Session%20Laws/House/1042-S.SL.pdf |
+| OR | `or_adu_197a425` | no own list; plus 4 flags that blocked it everywhere | none in the text | read in full, no site exclusion — https://www.oregonlegislature.gov/bills_laws/ors/ors197a.html |
+| OR | `or_commercial_197a460` | no own list; plus 4 flags that blocked it everywhere | 5: not adequately served, slope 25 percent or more, fema 100yr floodway, goal constrained hazard or resource land, vacant or recently added to ugb | ORS 197A.460(3)(b)(A) — https://www.oregonlegislature.gov/bills_laws/ors/ors197A.html |
+| MT | `mt_adu_76_2_345` | no own list; plus 4 flags that blocked it everywhere | none in the text | read in full, no site exclusion — https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0450/0760-0020-0030-0450.html |
+| MT | `mt_commercial_76_2_304_4` | no own list; plus 4 flags that blocked it everywhere | none in the text | read in full, no site exclusion — https://leg.mt.gov/bills/mca/title_0760/chapter_0020/part_0030/section_0040/0760-0020-0030-0040.html |
+| MA | `ma_adu_40a3` | no own list; plus 4 flags that blocked it everywhere | none in the text | read in full, no site exclusion — https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3 |
+| RI | `ri_adu_large_lot` | no own list; plus 4 flags that blocked it everywhere | none in the text | read in full, no site exclusion — https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm |
+| RI | `ri_adu_existing_footprint` | no own list; plus 4 flags that blocked it everywhere | none in the text | read in full, no site exclusion — https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm |
+| CA | `ca_adu_66323` | no own list; plus 4 flags that blocked it everywhere | none in the text | read in full, no site exclusion — https://codes.findlaw.com/ca/government-code/gov-sect-66323/ |
+| AZ | `az_adaptive_reuse_9_462_10` | no own list; plus 4 flags that blocked it everywhere | 6: historic district hpoz, local historic designation, national register historic area, military airport vicinity, public airport vicinity, tribal land | A.R.S. 9-462.10(G)(1) — https://www.azleg.gov/ars/9/00462-10.htm |
+| TX | `tx_sb15_small_lots` | no own list; plus 4 flags that blocked it everywhere | 3: law enforcement training center area, airport noise or runway zone, military airport overlay zone | Tex. Loc. Gov't Code 211.052(b)(1) — https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00015F.htm |
+| ID | `id_adu_67_6541` | own list of 1; plus 4 flags that blocked it everywhere | 1: historic district hpoz; limits only: fema 100yr floodway, environmental hazard aquifer slope habitat land | Idaho Code 67-6541(2) — https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6541/ |
+| ID | `id_starter_home_67_6542` | no own list; plus 4 flags that blocked it everywhere | NOT CONFIRMED: subdivision rule, never applied to one parcel | https://legislature.idaho.gov/statutesrules/idstat/Title67/T67CH65/SECT67-6542/ |
+| NV | `nv_adu_ordinance_278_257` | no own list; plus 4 flags that blocked it everywhere | 1: interstate compact regional planning area | NRS 278.257(5) — https://www.leg.state.nv.us/nrs/nrs-278.html#NRS278Sec257 |
+| CA | `ca_ab2011_affordable` | no own list; plus 4 flags that blocked it everywhere | 13: coastal commission or sma, prime farmland, wetlands, calfire or state vhfhsz, hazardous waste site, earthquake fault zone, fema 100yr floodway, fema regulatory floodway, conservation plan land, protected species habitat, recorded conservation easement, historic register demolition, mobilehome or rv park site | Cal. Gov. Code 65912.111(e) — https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip |
+| CO | `co_hb24_1304_parking` | no own list; plus 4 flags that blocked it everywhere | NOT CONFIRMED: jurisdiction-wide parking rule, never applied to one parcel | https://leg.colorado.gov/sites/default/files/2024a_1304_signed.pdf |
+| VA | `va_parking_2209_4` | no own list; plus 4 flags that blocked it everywhere | NOT CONFIRMED: jurisdiction-wide parking rule, never applied to one parcel | https://law.lis.virginia.gov/vacode/title15.2/chapter22/section15.2-2209.4/ |
+| VA | `va_small_lot_2286_2` | no own list; plus 4 flags that blocked it everywhere | 1: historic district hpoz | Va. Code 15.2-2286.2(D) — https://law.lis.virginia.gov/vacode/title15.2/chapter22/section15.2-2286.2/ |
+| DC | `dc_adu_accessory_apartment_u253` | no own list; plus 4 flags that blocked it everywhere | NOT CONFIRMED: page lists rule versions, no regulation text | https://dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-U253 |
+| CT | `ct_adu_8_2o` | no own list; plus 4 flags that blocked it everywhere | NOT CONFIRMED: cga.ct.gov unreachable (certificate error); page is a script shell | https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99440&Index=I%3a%5czindex%5csurs&HitCount=2&hits=470+471+&hc=2&req=%28number+contains+8%2D2o%2A%29&Item=0 |
+| CT | `ct_parking_8_3n` | no own list; plus 4 flags that blocked it everywhere | NOT CONFIRMED: cga.ct.gov unreachable (certificate error); page is a script shell | https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99443&Index=I%3a%5czindex%5csurs&HitCount=2&hits=2ba+2bb+&hc=2&req=%28number+contains+8%2D3n%2A%29&Item=0 |
+| CT | `ct_middle_housing_8_2s` | no own list; plus 4 flags that blocked it everywhere | NOT CONFIRMED: cga.ct.gov unreachable (certificate error); page is a script shell | https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99441&Index=I%3a%5czindex%5csurs&HitCount=2&hits=14b+14c+&hc=2&req=%28number+contains+8%2D2s%2A%29&Item=0 |
+
+Tests: `tests/unit/exclusionsPerStatute.test.ts` (new; for every confirmed record each listed exclusion, when its flag is true, is
+reported with the statute's wording; a flag the law does not list has no effect; an unconfirmed list is never allowed; engine cases
+for Montana, Florida, Texas, Colorado, Oregon, California SB 9 and SB 79, Washington). Tests that encoded the blanket rule or an
+all-false flag set were rewritten to say what the page checks: `audit.test.ts` (Florida Everglades, SB 79 fire zone), `statuteCorrections1119.test.ts`
+(Florida key names, SB 79 and Texas lists), `stateLaws50.test.ts`, `investmentDecisionEngine.test.ts` and `parcelHouseAuditor.test.ts`
+(the SB 9 lot split is now "not determined", not "allowed"), and `engineCopies.test.ts` (extended).
+
+Live checks (19 Nov 2026, `scripts/live_check_exclusions.mjs`, LIVE_PORT 9051; before = a clean copy of 996c1c4, after = this branch;
+results in `data/backtests/live_check_exclusions_2026-11-19.json`). Only California among the changed states has a zoning source on
+the page, so Los Angeles went through the page's click path; for Vermont, Massachusetts and Maine the page's own FEMA check and
+engine ran on the real point with zoning R-1 supplied by the script:
+
+| State, point | Before | After |
+|---|---|---|
+| CA, a Los Angeles R1-1 lot (33.97192, -118.457608) | "State laws the screening engine applies here: CA SB 9 (California HOME Act) — two units per lot and urban lot split, CA: ADU and junior ADU approved ministerially on single-family lots." | "State laws the screening engine applies here: CA: ADU and junior ADU approved ministerially on single-family lots. ... Not applied: CA SB 9 (California HOME Act) — two units per lot and urban lot split (Not determined: the list of sites this law excludes has not been confirmed against the statute text.)" |
+| VT, Montpelier (44.2594, -72.5753), FEMA Zone AE | no laws (flood flag blocked everything) | `vt_act47` applies (the Vermont text lists no exclusion) |
+| MA, Boston Seaport (42.3519, -71.044), FEMA Zone AE | no laws | `ma_adu_40a3` applies (no exclusion in the text) |
+| ME, Portland (43.6615, -70.2553), FEMA Zone X | `me_ld2003` applies | not determined: the law excludes a Lewiston or Auburn watershed lot, a coastal barrier, a coastal sand dune system and Title 12 chapter 423-A land (each where the text says), and the page has not checked these |

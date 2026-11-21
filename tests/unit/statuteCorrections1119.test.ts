@@ -7,23 +7,20 @@ import * as path from "path";
 // against the official text on that date.
 const LAWS = JSON.parse(fs.readFileSync(path.join(__dirname, "../../app/data/statutes.json"), "utf-8"));
 
+// The page's real flags only; other exclusions are "not checked". clearFor(id) stands in for "every exclusion the law
+// lists was checked and is absent".
 const BASE_EXCLUSIONS: ParcelContext["exclusions"] = {
   historic_district_hpoz: false,
-  coastal_commission_or_sma: false,
   fema_100yr_floodway: false,
   calfire_or_state_vhfhsz: false,
-  airport_noise_or_runway_zone: false,
-  williamson_or_ag_preserve: false,
-  public_or_tribal_land: false,
-  wekiva_or_everglades_protection_area: false,
-  population_threshold_ineligible: false,
 };
+const clearFor = (id: string) => Object.fromEntries(LAWS.find((r: any) => r.id === id).exclusion_sources.map((e: any) => [e.key, false]));
 
 describe("19 Nov 2026 statute corrections", () => {
   const flParcel = (over: Record<string, any> = {}): ParcelContext => ({
     parcel_id: "12086-100", state_code: "FL", county_fips: "12086", municipality_pop: 455000, county_pop: 2686000,
     base_zoning_code: "RS-1", is_commercial_or_mixed_use: false, is_single_family_residential: true,
-    dist_to_heavy_rail_mi: null, dist_to_frequent_bus_or_brt_mi: null, exclusions: { ...BASE_EXCLUSIONS }, ...over,
+    dist_to_heavy_rail_mi: null, dist_to_frequent_bus_or_brt_mi: null, exclusions: { ...BASE_EXCLUSIONS, ...clearFor("fl_live_local") }, ...over,
   } as ParcelContext);
 
   it("Florida Live Local also reaches county, city and school-district land and large religious-institution land whatever the zoning", () => {
@@ -44,22 +41,27 @@ describe("19 Nov 2026 statute corrections", () => {
     expect(comm.applicable_statutes.map(s => s.id)).toContain("fl_live_local");
   });
 
-  it("Florida Live Local exclusions are the ones in s. 166.04151(7)(o), with no TRPA; the Wekiva / Everglades flag excludes", () => {
+  it("Florida Live Local exclusions are the ones in s. 166.04151(7)(o), with no TRPA; each excludes only through the Florida record", () => {
     const fl = LAWS.find((r: any) => r.id === "fl_live_local");
-    const keys = fl.statutory_exclusions.map((e: string) => e.split(/[\s(]/)[0]);
-    expect(keys).toEqual(expect.arrayContaining(["airport_noise_or_runway_zone", "working_waterfront_in_industrial_zone", "wekiva_or_everglades_protection_area", "open_character_district", "area_of_critical_state_concern", "recorded_conservation_easement"]));
-    expect(JSON.stringify(fl.statutory_exclusions)).not.toMatch(/trpa/i);
-    expect(fl.verification.unverified_fields.join(" ")).toMatch(/statutory_exclusions/);
+    const keys = fl.exclusion_sources.map((e: any) => e.key);
+    expect(keys).toEqual(["airport_noise_or_runway_zone", "working_waterfront_in_industrial_zone", "wekiva_study_area", "everglades_protection_area", "open_character_district", "area_of_critical_state_concern", "recorded_conservation_easement"]);
+    expect(JSON.stringify(fl.exclusion_sources)).not.toMatch(/trpa/i);
+    expect(fl.statutory_exclusions).toBeUndefined();
+    expect(fl.exclusions_review.status).toBe("confirmed");
     const comm = flParcel({ is_commercial_or_mixed_use: true, is_single_family_residential: false });
-    const excluded = evaluateByRightHousing({ ...comm, exclusions: { ...BASE_EXCLUSIONS, wekiva_or_everglades_protection_area: true } }, LAWS);
+    const excluded = evaluateByRightHousing({ ...comm, exclusions: { ...comm.exclusions, wekiva_study_area: true } }, LAWS);
     expect(excluded.applicable_statutes.map(s => s.id)).not.toContain("fl_live_local");
+    expect(excluded.excluded_by_statute[0].reason).toContain("The Wekiva Study Area, as described in s. 369.316.");
+    // the old combined flag name is no longer a Florida exclusion
+    const old = evaluateByRightHousing({ ...comm, exclusions: { ...comm.exclusions, wekiva_or_everglades_protection_area: true } }, LAWS);
+    expect(old.applicable_statutes.map(s => s.id)).toContain("fl_live_local");
   });
 
   it("SB 79: a county missing from the list on file is reported as not confirmed, not ruled out; SB 722 is cited", () => {
     const parcel = (county: string): ParcelContext => ({
       parcel_id: county + "-1", state_code: "CA", county_fips: county, municipality_pop: 120000, county_pop: 1000000,
       base_zoning_code: "C2", is_commercial_or_mixed_use: true, is_single_family_residential: false,
-      dist_to_heavy_rail_mi: 0.2, dist_to_frequent_bus_or_brt_mi: null, exclusions: { ...BASE_EXCLUSIONS },
+      dist_to_heavy_rail_mi: 0.2, dist_to_frequent_bus_or_brt_mi: null, exclusions: { ...BASE_EXCLUSIONS, ...clearFor("ca_sb79_tier1") },
     });
     const outside = evaluateByRightHousing(parcel("06013"), LAWS);
     expect(outside.applicable_statutes.map(s => s.id)).not.toContain("ca_sb79_tier1");
@@ -70,8 +72,10 @@ describe("19 Nov 2026 statute corrections", () => {
     expect(inList.applicable_statutes.map(s => s.id)).toContain("ca_sb79_tier1");
     const t1 = LAWS.find((r: any) => r.id === "ca_sb79_tier1");
     expect(t1.statute_citation).toMatch(/SB 722/);
-    expect(t1.statutory_exclusions.join(" ")).toMatch(/mobilehome_or_rv_park_site/);
-    expect(JSON.stringify(t1.statutory_exclusions)).not.toMatch(/sea_level_rise|local_historic_register/);
+    expect(t1.exclusion_sources.map((e: any) => e.key)).toContain("mobilehome_or_rv_park_site");
+    expect(JSON.stringify(t1.exclusion_sources)).not.toMatch(/sea_level_rise|local_historic_register/);
+    // the fire zone is a limit on the streamlining route, not an exclusion of the law
+    expect(t1.exclusion_sources.find((e: any) => e.key === "calfire_or_state_vhfhsz").effect).toBe("limits");
   });
 
   it("Vermont, Arizona and Oregon: unit counts and dates shown only where the official text fixes them", () => {
@@ -84,7 +88,7 @@ describe("19 Nov 2026 statute corrections", () => {
     const or = LAWS.find((r: any) => r.id === "or_hb2001");
     expect(or.effective_date).toBeNull();
     const tx = LAWS.find((r: any) => r.id === "tx_sb840");
-    expect(tx.statutory_exclusions.join(" ")).toMatch(/1,000 feet|within_1000_ft_of_heavy_industrial_use/);
+    expect(tx.exclusion_sources.map((e: any) => e.wording).join(" ")).toMatch(/1,000 feet/);
   });
 
   it("statutes.json and state-housing-laws.json stay identical", () => {

@@ -11,17 +11,15 @@ import * as path from "path";
 // The statute engine reads app/data/statutes.json; these tests run it against the real file.
 const LAWS = JSON.parse(fs.readFileSync(path.join(__dirname, "../../app/data/statutes.json"), "utf-8"));
 
+// Only the flags the page really reads (flood: FEMA special flood hazard area; fire: California very high zone; historic:
+// Los Angeles). Every other exclusion is "not checked" (left out), never false. A test that wants a law to apply passes
+// clearFor(id): false for each exclusion that law lists, standing in for "that check ran and found nothing".
 const BASE_EXCLUSIONS: ParcelContext["exclusions"] = {
   historic_district_hpoz: false,
-  coastal_commission_or_sma: false,
   fema_100yr_floodway: false,
   calfire_or_state_vhfhsz: false,
-  airport_noise_or_runway_zone: false,
-  williamson_or_ag_preserve: false,
-  public_or_tribal_land: false,
-  wekiva_or_everglades_protection_area: false,
-  population_threshold_ineligible: false,
 };
+const clearFor = (id: string) => Object.fromEntries(LAWS.find((r: any) => r.id === id).exclusion_sources.map((e: any) => [e.key, false]));
 
 describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
   it("1. Texas SB 840 (2025) needs both population thresholds on file and commercial zoning", () => {
@@ -36,7 +34,7 @@ describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
       is_single_family_residential: false,
       dist_to_heavy_rail_mi: 0.3,
       dist_to_frequent_bus_or_brt_mi: 0.1,
-      exclusions: { ...BASE_EXCLUSIONS },
+      exclusions: { ...BASE_EXCLUSIONS, ...clearFor("tx_sb840") },
     };
     const houstonRes = evaluateByRightHousing(houstonCommercial, LAWS);
     expect(houstonRes.net_by_right_feasible).toBe(true);
@@ -68,10 +66,13 @@ describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
       is_single_family_residential: false,
       dist_to_heavy_rail_mi: 0.4,
       dist_to_frequent_bus_or_brt_mi: 0.2,
-      exclusions: { ...BASE_EXCLUSIONS, wekiva_or_everglades_protection_area: true },
+      exclusions: { ...BASE_EXCLUSIONS, ...clearFor("fl_live_local"), everglades_protection_area: true },
     };
-    expect(evaluateByRightHousing(evergladesParcel, LAWS).net_by_right_feasible).toBe(false);
-    const miamiRes = evaluateByRightHousing({ ...evergladesParcel, exclusions: { ...BASE_EXCLUSIONS } }, LAWS);
+    const blocked = evaluateByRightHousing(evergladesParcel, LAWS);
+    expect(blocked.net_by_right_feasible).toBe(false);
+    expect(blocked.excluded_by_statute.map((x: any) => x.id)).toEqual(["fl_live_local"]);
+    expect(blocked.excluded_by_statute[0].reason).toContain("The Everglades Protection Area, as defined in s. 373.4592(2).");
+    const miamiRes = evaluateByRightHousing({ ...evergladesParcel, exclusions: { ...BASE_EXCLUSIONS, ...clearFor("fl_live_local") } }, LAWS);
     expect(miamiRes.net_by_right_feasible).toBe(true);
     const ll = miamiRes.applicable_statutes.find(s => s.id === "fl_live_local")!;
     expect(ll.tax_exemption_pct).toBe(0.75);
@@ -91,7 +92,7 @@ describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
       is_single_family_residential: false,
       dist_to_heavy_rail_mi: 0.2,
       dist_to_frequent_bus_or_brt_mi: 0.05,
-      exclusions: { ...BASE_EXCLUSIONS },
+      exclusions: { ...BASE_EXCLUSIONS, ...clearFor("ca_sb79_tier1") },
     };
     const res = evaluateByRightHousing(laTransitParcel, LAWS);
     const t1 = res.applicable_statutes.find(s => s.id === "ca_sb79_tier1")!;
@@ -102,8 +103,15 @@ describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
     // County eligibility list is from a secondary source: reported as not confirmed.
     expect(t1.unconfirmed_fields.join(" ")).toMatch(/eligible_counties/);
 
-    const fire = evaluateByRightHousing({ ...laTransitParcel, exclusions: { ...BASE_EXCLUSIONS, calfire_or_state_vhfhsz: true } }, LAWS);
-    expect(fire.net_by_right_feasible).toBe(false);
+    // A very high fire zone limits only SB 79's streamlined-approval route (Gov. Code 65912.159(a)(3)); the law stays on the
+    // parcel and the output quotes that limit. Sites in 65912.157(h) (rent-controlled housing, mobilehome parks) are excluded.
+    const fire = evaluateByRightHousing({ ...laTransitParcel, exclusions: { ...laTransitParcel.exclusions, calfire_or_state_vhfhsz: true } }, LAWS);
+    const fireT1 = fire.applicable_statutes.find(s => s.id === "ca_sb79_tier1")!;
+    expect(fireT1.exclusion_limits.join(" ")).toContain("very high fire hazard severity zone");
+    const mh = evaluateByRightHousing({ ...laTransitParcel, exclusions: { ...laTransitParcel.exclusions, mobilehome_or_rv_park_site: true } }, LAWS);
+    expect(mh.applicable_statutes.map(s => s.id)).not.toContain("ca_sb79_tier1");
+    const mhT1 = mh.excluded_by_statute.find((x: any) => x.id === "ca_sb79_tier1")!;
+    expect(mhT1.reason).toContain("Mobilehome Residency Law");
   });
 
   it("3b. Laws whose text could not be checked never apply; missing zoning never implies residential", () => {

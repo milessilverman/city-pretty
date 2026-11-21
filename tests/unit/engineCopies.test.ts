@@ -15,6 +15,13 @@ describe("engine copies: the page's code is the tested code", () => {
   it("finds the shared engines", () => {
     expect(rows.filter((r: any) => r.in_app).length).toBeGreaterThan(20);
   });
+  it("the exclusion check and the law evaluator are compared, and the page runs the same text as the tests", () => {
+    for (const name of ["statuteExclusionCheck", "evaluateByRightHousing", "statuteAppliesTo"]) {
+      const row = rows.find((r: any) => r.name === name);
+      expect(row && row.in_app, name).toBe(true);
+      expect(row.identical, name).toBe(true);
+    }
+  });
   it("every shared function and constant is identical", () => {
     const diff = rows.filter((r: any) => r.in_app && !r.identical && !BINDINGS.has(r.name)).map((r: any) => `${r.file} ${r.kind} ${r.name}`);
     expect(diff).toEqual([]);
