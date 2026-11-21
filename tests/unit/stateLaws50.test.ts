@@ -79,6 +79,11 @@ describe("50-state review: the engine applies the new laws only where every cond
   it("California: ADU + junior ADU ministerially on single-family lots, not on commercial land", () => {
     expect(ids(evaluateByRightHousing(sfr({ state_code: "CA", county_fips: "06037" }), LAWS))).toContain("ca_adu_66323");
     expect(ids(evaluateByRightHousing(commercial({ state_code: "CA", county_fips: "06037" }), LAWS))).not.toContain("ca_adu_66323");
+    // Gov. Code § 66323(a) reaches "a residential or mixed-use zone" and names lots with a multifamily dwelling
+    // (docs/audit/site_exclusions/ca_notes.md, B1): a multifamily-zoned lot gets the ADU record, and never SB 9.
+    const multi = evaluateByRightHousing({ ...sfr({ state_code: "CA", county_fips: "06037" }), base_zoning_code: "R3-1", is_single_family_residential: false, is_multifamily_residential: true } as any, LAWS);
+    expect(ids(multi)).toContain("ca_adu_66323");
+    expect(ids(multi)).not.toContain("ca_sb9_lot_split");
   });
 
   it("Texas SB 15: only large cities, and only with the unplatted-tract condition, which is reported as unchecked", () => {

@@ -236,8 +236,12 @@ async function main() {
           if (m.rent == null && CORR[bg] && CORR[bg].rent != null) m.rent = CORR[bg].rent;
           const eHv = await fmt(m.hv), eRent = m.rent ? "$" + Math.round(m.rent).toLocaleString("en-US") + "/mo" : "–";   // to the dollar, formatted here
           const eHomes = await page.evaluate((x) => (0, eval)("fmtN")(x), m.homes);
-          const pass = panel.includes(`Typical home value${eHv}`) && panel.includes(`Median rent${eRent}`) && panel.includes(`Homes${eHomes}`);
-          ok("neighborhood", pass, `expected home value ${eHv}, rent ${eRent}, homes ${eHomes}` + (pass ? "" : " | panel: " + (panel.match(/Typical home value.{0,140}/) || [""])[0]));
+          // A top-coded rent: the page shows "$N or more/mo" (its ACS top-code rule), which matches when the file's value is at
+          // least N. Found 20 Nov 2026 on Travis block group 484530010004, where this check expected the stored top-code to the dollar.
+          const top = panel.match(/Median rent\$([\d,]+) or more\/mo/);
+          const rentOk = top ? (m.rent != null && m.rent >= Number(top[1].replace(/,/g, ""))) : panel.includes(`Median rent${eRent}`);
+          const pass = panel.includes(`Typical home value${eHv}`) && rentOk && panel.includes(`Homes${eHomes}`);
+          ok("neighborhood", pass, `expected home value ${eHv}, rent ${eRent}${top ? " (page shows the top-code: " + top[0].replace("Median rent", "") + ")" : ""}, homes ${eHomes}` + (pass ? "" : " | panel: " + (panel.match(/Typical home value.{0,140}/) || [""])[0]));
         }
         // tree canopy (details table is in a <details>; textContent includes it)
         const teV = te && Array.isArray(te[bg]) && te[bg][0] != null ? Math.round(te[bg][0]) : null;

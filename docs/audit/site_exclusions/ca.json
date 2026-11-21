@@ -1,0 +1,1116 @@
+{
+ "fetched_on": "2026-11-20",
+ "source_note": "All statute text was read on 2026-11-20 from the California Legislative Counsel's official bulk database at downloads.leginfo.legislature.ca.gov (pubinfo_2025.zip, LAW_SECTION_TBL and its .lob files; pubinfo_2021.zip, BILL_VERSION_TBL), opened over HTTP range requests with the repo's scripts/ca_pubinfo_section.py reader. leginfo.legislature.ca.gov section pages and the FindLaw copy returned HTTP 403 to curl and were not used. Quotes are the XML text with tags removed and whitespace collapsed; '[...]' marks an omission, '||' separates quotes from different provisions. Every quote was sliced by script from the fetched text, not retyped.",
+ "schema_notes": "excluded: true = the text makes a lot in that condition ineligible (see exception_quote); false = operative sections read and no such exclusion found; null = no single yes/no (reason in note). Extra keys beyond the requested schema: source_note, schema_notes, cross_reference (per record), path_specific (SB 79 only: true/false/null per approval path).",
+ "records": {
+  "ca_sb79_tier1": {
+   "sections_read": [
+    {
+     "citation": "Cal. Gov. Code § 65912.155",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.155.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.156",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.156.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.157",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.157.20261002 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-07-16; history: Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026."
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.158",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.158.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.159",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.159.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.160",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.160.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.161",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.161.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.162",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.162.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65913.4",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65913.4.20257742 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Amended by Stats. 2025, Ch. 774, Sec. 2. (SB 597) Effective January 1, 2026. Repealed as of January 1, 2036, by its own provisions."
+    }
+   ],
+   "cross_reference": {
+    "quote_65912_159_a_3": "(3) The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4.",
+    "quote_65912_159_b": "(b) Any housing development proposed pursuant to Section 65912.157 not seeking streamlined approval under Section 65913.4 shall be reviewed according to the jurisdiction’s development review process and Section 65589.5, except that any local zoning standard conflicting with the requirements of this chapter shall not apply.",
+    "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific."
+   },
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": null,
+     "path_specific": {
+      "allowed_use_standards_65912_157": false,
+      "streamlined_ministerial_65912_159": true,
+      "local_ordinance_may_exclude_site_65912_161_b": false
+     },
+     "quote": "(3) The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4. || § 65913.4(a)(6): (G) Within a special flood hazard area subject to inundation by the 1 percent annual chance flood (100-year flood) as determined by the Federal Emergency Management Agency in any official maps published by the Federal Emergency Management Agency. [...] (H) Within a regulatory floodway as determined by the Federal Emergency Management Agency in any official maps published by the Federal Emergency Management Agency, unless the development has received a no-rise certification in accordance with Section 60.3(d)(3) of Title 44 of the Code of Federal Regulations.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": "A development may be located on a site described in this subparagraph if either of the following are met: (i) The site has been subject to a Letter of Map Revision prepared by the Federal Emergency Management Agency and issued to the local jurisdiction. (ii) The site meets Federal Emergency Management Agency requirements necessary to meet minimum flood plain management criteria of the National Flood Insurance Program pursuant to Part 59 (commencing with Section 59.1) and Part 60 (commencing with Section 60.1) of Subchapter B of Chapter I of Title 44 of the Code of Federal Regulations.",
+     "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific. § 65912.157 (read in full) has no flood exclusion. § 65912.161(b)(1)(E) lets a local ordinance exclude 'Sites that are vulnerable to one foot of sea level rise' (not the FEMA flood zone)."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": null,
+     "path_specific": {
+      "allowed_use_standards_65912_157": false,
+      "streamlined_ministerial_65912_159": true,
+      "local_ordinance_may_exclude_site_65912_161_b": true
+     },
+     "quote": "(3) The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4. || § 65913.4(a)(6): (D) Within a very high fire hazard severity zone, as determined by the Department of Forestry and Fire Protection pursuant to Section 51178, or within the state responsibility area, as defined in Section 4102 of the Public Resources Code. || § 65912.161: (b) (1) Prior to one year following the adoption of the seventh revision of the housing element, Section 65912.157 shall not apply to any of the following for which the local government has adopted an ordinance in accordance with Section 65912.160 indicating the site’s exclusion: [...] (D) Sites within a very high fire hazard severity zone, as determined by the Department of Forestry and Fire Protection pursuant to Section 51178, or within the state responsibility area, as defined in Section 4102 of the Public Resources Code.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": "This subparagraph does not apply to sites that have adopted fire hazard mitigation measures pursuant to existing building standards or state fire mitigation measures applicable to the development, including, but not limited to, standards established under all of the following or their successor provisions: (i) Section 4291 of the Public Resources Code or Section 51182, as applicable. (ii) Section 4290 of the Public Resources Code. (iii) Chapter 7A of the California Building Code (Title 24 of the California Code of Regulations).",
+     "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific. Fire-specific: (1) streamlined path barred in a VHFHSZ or state responsibility area unless the § 65913.4(a)(6)(D) mitigation exception applies; (2) until one year after the seventh housing element revision, § 65912.157 does not apply to VHFHSZ / state-responsibility-area sites IF the local government adopted an ordinance excluding them (whether a given city did so was not researched); (3) § 65912.157(j) requires consistency with objective fire safety standards: (j) A development proposed pursuant to this chapter shall be consistent with the height, noise, and safety standards of an adopted airport land use compatibility plan or Department of Defense Air Installation Compatible Use Zones developed pursuant to Section 21675 of the Public Utilities Code, and of otherwise applicable objective fire safety standards established pursuant to the California Building Code, the California Fire Code, the California Wildland-Urban Interface Code, the Health and Safety Code, the Public Resources Code, or Chapter 6.8 (commencing with Section 51175) of Part 1 of Division 1 of Title 5 of this code."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": null,
+     "path_specific": {
+      "allowed_use_standards_65912_157": false,
+      "streamlined_ministerial_65912_159": true,
+      "local_ordinance_may_exclude_site_65912_161_b": false
+     },
+     "quote": "(3) The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4. || § 65913.4(a)(6): (B) Either prime farmland or farmland of statewide importance, as defined pursuant to the United States Department of Agriculture land inventory and monitoring criteria, as modified for California, and designated on the maps prepared by the Farmland Mapping and Monitoring Program of the Department of Conservation, or land zoned or designated for agricultural protection or preservation by a local ballot measure that was approved by the voters of that jurisdiction.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific. ENGINE FLAG MISMATCH: (a)(6)(B) names FMMP prime farmland / farmland of statewide importance and voter-approved agricultural protection zoning, not Williamson Act contracts. Separately, § 65912.157(a) only reaches a 'site zoned for residential, mixed, or commercial development', so agriculturally zoned land is outside the section on its face."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": null,
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "No exclusion of publicly owned or tribal land found in §§ 65912.155-65912.162 (all read in full) or in § 65913.4(a)(1)-(7) (read in full; rest of § 65913.4 keyword-searched for tribal/histor/public land/parkland). § 65912.158 in fact creates a track for transit-agency-OWNED land. On the streamlined path only, § 65913.4(b)(4) makes a project ineligible where a registered tribal cultural resource is on the site: '(4) A project shall not be eligible for the streamlined, ministerial process described in subdivision (c) if any of the following apply: (A) There is a tribal cultural resource that is on a national, state, tribal, or local historic register list located on the site of the project.' That is about cultural resources, not land ownership."
+    },
+    "historic_district_hpoz": {
+     "excluded": null,
+     "path_specific": {
+      "allowed_use_standards_65912_157": false,
+      "streamlined_ministerial_65912_159": null,
+      "local_ordinance_may_exclude_site_65912_161_b": true
+     },
+     "quote": "(b) (1) Prior to one year following the adoption of the seventh revision of the housing element, Section 65912.157 shall not apply to any of the following for which the local government has adopted an ordinance in accordance with Section 65912.160 indicating the site’s exclusion: [...] (F) Sites with a historic resource designated as of January 1, 2025, on a local register. || § 65913.4(a)(7): (C) The development would require the demolition of a historic structure that was placed on a national, state, or local historic register.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific. Historic-specific: § 65912.157 has no historic exclusion. A local ordinance may exclude 'Sites with a historic resource designated as of January 1, 2025, on a local register' until one year after the seventh housing element revision (§ 65912.161(b)(1)(F)); whether a given city did so was not researched. On the streamlined path the test is demolition of a registered historic structure (§ 65913.4(a)(7)(C)), not district membership, hence streamlined = null."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Rent-controlled housing sites; mobilehome / RV parks (§ 65912.157(h))",
+     "quote": "(h) A development proposed pursuant to this section shall not be located on any of the following: (1) A site containing more than two units where the development would require the demolition of housing that is subject to any form of rent or price control through a public entity’s valid exercise of its police power that has been occupied by tenants within the past seven years. (2) A site that was previously used for more than two units of housing that were demolished within seven years before the development proponent submits an application under this section and any of the units were subject to any form of rent or price control through a public entity’s valid exercise of its police power. (3) The existing parcel of land or site is governed under the Mobilehome Residency Law (Chapter 2.5 (commencing with Section 798) of Title 2 of Part 2 of Division 2 of the Civil Code), the Recreational Vehicle Park Occupancy Law (Chapter 2.6 (commencing with Section 799.20) of Title 2 of Part 2 of Division 2 of the Civil Code), the Mobilehome Parks Act (Part 2.1 (commencing with Section 18200) of Division 13 of the Health and Safety Code), or the Special Occupancy Parks Act (Part 2.3 (commencing with Section 18860) of Division 13 of the Health and Safety Code).",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Site must be zoned residential, mixed or commercial and within one-half or one-quarter mile of a transit-oriented development stop",
+     "quote": "(a) A housing development project shall be an allowed use as a transit-oriented housing development on any site zoned for residential, mixed, or commercial development within one-half or one-quarter mile of a transit-oriented development stop",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Airport land use plan and fire safety standards (§ 65912.157(j))",
+     "quote": "(j) A development proposed pursuant to this chapter shall be consistent with the height, noise, and safety standards of an adopted airport land use compatibility plan or Department of Defense Air Installation Compatible Use Zones developed pursuant to Section 21675 of the Public Utilities Code, and of otherwise applicable objective fire safety standards established pursuant to the California Building Code, the California Fire Code, the California Wildland-Urban Interface Code, the Health and Safety Code, the Public Resources Code, or Chapter 6.8 (commencing with Section 51175) of Part 1 of Division 1 of Title 5 of this code.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Timing / unincorporated areas (§ 65912.157(n))",
+     "quote": "(n) This section shall not apply to a local agency until July 1, 2026, unless the local agency adopts an ordinance or local transit-oriented development alternative plan deemed compliant by the department before July 1, 2026. It shall not apply within an unincorporated area of a county until the 7th regional housing needs allocation cycle.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Local ordinance may exempt areas with no short walking path, or industrial employment hubs (§ 65912.160(e))",
+     "quote": "(e) The ordinance may designate areas within one-half mile of a transit-oriented development stop as exempt from the provisions of this chapter if: (1) The local government makes findings supported by substantial evidence that there exists no walking path of less than one mile from that location to the transit-oriented development stop. (2) A local government with at least 15 transit-oriented development stops designates the area as an industrial employment hub. An industrial employment hub shall be a contiguous area of at least 250 acres designated in the jurisdiction’s general plan on or before January 1, 2025, as an employment lands area; the parcels within it shall be primarily dedicated to industrial use as defined in paragraph (3) of subdivision (f) of Section 65912.121; and housing shall not be a permitted use on any of the sites so excluded.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Local ordinance exclusions until one year after the seventh housing element (§ 65912.161(b)(1)), incl. sea level rise",
+     "quote": "(b) (1) Prior to one year following the adoption of the seventh revision of the housing element, Section 65912.157 shall not apply to any of the following for which the local government has adopted an ordinance in accordance with Section 65912.160 indicating the site’s exclusion: [...] (D) Sites within a very high fire hazard severity zone, as determined by the Department of Forestry and Fire Protection pursuant to Section 51178, or within the state responsibility area, as defined in Section 4102 of the Public Resources Code. (E) Sites that are vulnerable to one foot of sea level rise, as determined by the National Oceanic and Atmospheric Administration, the Ocean Protection Council, the United States Geological Survey, the University of California, or a local government’s coastal hazards vulnerability assessment. (F) Sites with a historic resource designated as of January 1, 2025, on a local register.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Jurisdiction with an approved local alternative plan (§ 65912.161(d))",
+     "quote": "(d) Section 65912.157 shall not apply within a jurisdiction that has a local transit-oriented alternative plan that has been approved by the department as satisfying the requirements of this section in effect.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Streamlined path only: rest of current § 65913.4(a)(6) (coastal, wetlands, hazardous waste, earthquake fault, conservation lands, habitat, conservation easement)",
+     "quote": "(C) Wetlands, as defined in the United States Fish and Wildlife Service Manual, Part 660 FW 2 (June 21, 1993). [...] (F) Within a delineated earthquake fault zone as determined by the State Geologist in any official maps published by the State Geologist, unless the development complies with applicable seismic protection building code standards adopted by the California Building Standards Commission under the California Building Standards Law (Part 2.5 (commencing with Section 18901) of Division 13 of the Health and Safety Code), and by any local building department under Chapter 12.2 (commencing with Section 8875) of Division 1 of Title 2. [...] (I) Lands identified for conservation in an adopted natural community conservation plan pursuant to the Natural Community Conservation Planning Act (Chapter 10 (commencing with Section 2800) of Division 3 of the Fish and Game Code), habitat conservation plan pursuant to the federal Endangered Species Act of 1973 (16 U.S.C. Sec. 1531 et seq.), or other adopted natural resource protection plan. (J) Habitat for protected species identified as candidate, sensitive, or species of special status by state or federal agencies, fully protected species, or species protected by the federal Endangered Species Act of 1973 (16 U.S.C. Sec. 1531 et seq.), the California Endangered Species Act (Chapter 1.5 (commencing with Section 2050) of Division 3 of the Fish and Game Code), or the Native Plant Protection Act (Chapter 10 (commencing with Section 1900) of Division 2 of the Fish and Game Code). (K) Lands under conservation easement.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    }
+   ]
+  },
+  "ca_sb79_tier2": {
+   "sections_read": [
+    {
+     "citation": "Cal. Gov. Code § 65912.155",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.155.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.156",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.156.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.157",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.157.20261002 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-07-16; history: Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026."
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.158",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.158.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.159",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.159.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.160",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.160.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.161",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.161.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.162",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.162.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65913.4",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65913.4.20257742 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Amended by Stats. 2025, Ch. 774, Sec. 2. (SB 597) Effective January 1, 2026. Repealed as of January 1, 2036, by its own provisions."
+    }
+   ],
+   "cross_reference": {
+    "quote_65912_159_a_3": "(3) The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4.",
+    "quote_65912_159_b": "(b) Any housing development proposed pursuant to Section 65912.157 not seeking streamlined approval under Section 65913.4 shall be reviewed according to the jurisdiction’s development review process and Section 65589.5, except that any local zoning standard conflicting with the requirements of this chapter shall not apply.",
+    "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific."
+   },
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": null,
+     "path_specific": {
+      "allowed_use_standards_65912_157": false,
+      "streamlined_ministerial_65912_159": true,
+      "local_ordinance_may_exclude_site_65912_161_b": false
+     },
+     "quote": "(3) The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4. || § 65913.4(a)(6): (G) Within a special flood hazard area subject to inundation by the 1 percent annual chance flood (100-year flood) as determined by the Federal Emergency Management Agency in any official maps published by the Federal Emergency Management Agency. [...] (H) Within a regulatory floodway as determined by the Federal Emergency Management Agency in any official maps published by the Federal Emergency Management Agency, unless the development has received a no-rise certification in accordance with Section 60.3(d)(3) of Title 44 of the Code of Federal Regulations.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": "A development may be located on a site described in this subparagraph if either of the following are met: (i) The site has been subject to a Letter of Map Revision prepared by the Federal Emergency Management Agency and issued to the local jurisdiction. (ii) The site meets Federal Emergency Management Agency requirements necessary to meet minimum flood plain management criteria of the National Flood Insurance Program pursuant to Part 59 (commencing with Section 59.1) and Part 60 (commencing with Section 60.1) of Subchapter B of Chapter I of Title 44 of the Code of Federal Regulations.",
+     "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific. § 65912.157 (read in full) has no flood exclusion. § 65912.161(b)(1)(E) lets a local ordinance exclude 'Sites that are vulnerable to one foot of sea level rise' (not the FEMA flood zone)."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": null,
+     "path_specific": {
+      "allowed_use_standards_65912_157": false,
+      "streamlined_ministerial_65912_159": true,
+      "local_ordinance_may_exclude_site_65912_161_b": true
+     },
+     "quote": "(3) The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4. || § 65913.4(a)(6): (D) Within a very high fire hazard severity zone, as determined by the Department of Forestry and Fire Protection pursuant to Section 51178, or within the state responsibility area, as defined in Section 4102 of the Public Resources Code. || § 65912.161: (b) (1) Prior to one year following the adoption of the seventh revision of the housing element, Section 65912.157 shall not apply to any of the following for which the local government has adopted an ordinance in accordance with Section 65912.160 indicating the site’s exclusion: [...] (D) Sites within a very high fire hazard severity zone, as determined by the Department of Forestry and Fire Protection pursuant to Section 51178, or within the state responsibility area, as defined in Section 4102 of the Public Resources Code.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": "This subparagraph does not apply to sites that have adopted fire hazard mitigation measures pursuant to existing building standards or state fire mitigation measures applicable to the development, including, but not limited to, standards established under all of the following or their successor provisions: (i) Section 4291 of the Public Resources Code or Section 51182, as applicable. (ii) Section 4290 of the Public Resources Code. (iii) Chapter 7A of the California Building Code (Title 24 of the California Code of Regulations).",
+     "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific. Fire-specific: (1) streamlined path barred in a VHFHSZ or state responsibility area unless the § 65913.4(a)(6)(D) mitigation exception applies; (2) until one year after the seventh housing element revision, § 65912.157 does not apply to VHFHSZ / state-responsibility-area sites IF the local government adopted an ordinance excluding them (whether a given city did so was not researched); (3) § 65912.157(j) requires consistency with objective fire safety standards: (j) A development proposed pursuant to this chapter shall be consistent with the height, noise, and safety standards of an adopted airport land use compatibility plan or Department of Defense Air Installation Compatible Use Zones developed pursuant to Section 21675 of the Public Utilities Code, and of otherwise applicable objective fire safety standards established pursuant to the California Building Code, the California Fire Code, the California Wildland-Urban Interface Code, the Health and Safety Code, the Public Resources Code, or Chapter 6.8 (commencing with Section 51175) of Part 1 of Division 1 of Title 5 of this code."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": null,
+     "path_specific": {
+      "allowed_use_standards_65912_157": false,
+      "streamlined_ministerial_65912_159": true,
+      "local_ordinance_may_exclude_site_65912_161_b": false
+     },
+     "quote": "(3) The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4. || § 65913.4(a)(6): (B) Either prime farmland or farmland of statewide importance, as defined pursuant to the United States Department of Agriculture land inventory and monitoring criteria, as modified for California, and designated on the maps prepared by the Farmland Mapping and Monitoring Program of the Department of Conservation, or land zoned or designated for agricultural protection or preservation by a local ballot measure that was approved by the voters of that jurisdiction.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific. ENGINE FLAG MISMATCH: (a)(6)(B) names FMMP prime farmland / farmland of statewide importance and voter-approved agricultural protection zoning, not Williamson Act contracts. Separately, § 65912.157(a) only reaches a 'site zoned for residential, mixed, or commercial development', so agriculturally zoned land is outside the section on its face."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": null,
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "No exclusion of publicly owned or tribal land found in §§ 65912.155-65912.162 (all read in full) or in § 65913.4(a)(1)-(7) (read in full; rest of § 65913.4 keyword-searched for tribal/histor/public land/parkland). § 65912.158 in fact creates a track for transit-agency-OWNED land. On the streamlined path only, § 65913.4(b)(4) makes a project ineligible where a registered tribal cultural resource is on the site: '(4) A project shall not be eligible for the streamlined, ministerial process described in subdivision (c) if any of the following apply: (A) There is a tribal cultural resource that is on a national, state, tribal, or local historic register list located on the site of the project.' That is about cultural resources, not land ownership."
+    },
+    "historic_district_hpoz": {
+     "excluded": null,
+     "path_specific": {
+      "allowed_use_standards_65912_157": false,
+      "streamlined_ministerial_65912_159": null,
+      "local_ordinance_may_exclude_site_65912_161_b": true
+     },
+     "quote": "(b) (1) Prior to one year following the adoption of the seventh revision of the housing element, Section 65912.157 shall not apply to any of the following for which the local government has adopted an ordinance in accordance with Section 65912.160 indicating the site’s exclusion: [...] (F) Sites with a historic resource designated as of January 1, 2025, on a local register. || § 65913.4(a)(7): (C) The development would require the demolition of a historic structure that was placed on a national, state, or local historic register.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific. Historic-specific: § 65912.157 has no historic exclusion. A local ordinance may exclude 'Sites with a historic resource designated as of January 1, 2025, on a local register' until one year after the seventh housing element revision (§ 65912.161(b)(1)(F)); whether a given city did so was not researched. On the streamlined path the test is demolition of a registered historic structure (§ 65913.4(a)(7)(C)), not district membership, hence streamlined = null."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Rent-controlled housing sites; mobilehome / RV parks (§ 65912.157(h))",
+     "quote": "(h) A development proposed pursuant to this section shall not be located on any of the following: (1) A site containing more than two units where the development would require the demolition of housing that is subject to any form of rent or price control through a public entity’s valid exercise of its police power that has been occupied by tenants within the past seven years. (2) A site that was previously used for more than two units of housing that were demolished within seven years before the development proponent submits an application under this section and any of the units were subject to any form of rent or price control through a public entity’s valid exercise of its police power. (3) The existing parcel of land or site is governed under the Mobilehome Residency Law (Chapter 2.5 (commencing with Section 798) of Title 2 of Part 2 of Division 2 of the Civil Code), the Recreational Vehicle Park Occupancy Law (Chapter 2.6 (commencing with Section 799.20) of Title 2 of Part 2 of Division 2 of the Civil Code), the Mobilehome Parks Act (Part 2.1 (commencing with Section 18200) of Division 13 of the Health and Safety Code), or the Special Occupancy Parks Act (Part 2.3 (commencing with Section 18860) of Division 13 of the Health and Safety Code).",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Site must be zoned residential, mixed or commercial and within one-half or one-quarter mile of a transit-oriented development stop",
+     "quote": "(a) A housing development project shall be an allowed use as a transit-oriented housing development on any site zoned for residential, mixed, or commercial development within one-half or one-quarter mile of a transit-oriented development stop",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Airport land use plan and fire safety standards (§ 65912.157(j))",
+     "quote": "(j) A development proposed pursuant to this chapter shall be consistent with the height, noise, and safety standards of an adopted airport land use compatibility plan or Department of Defense Air Installation Compatible Use Zones developed pursuant to Section 21675 of the Public Utilities Code, and of otherwise applicable objective fire safety standards established pursuant to the California Building Code, the California Fire Code, the California Wildland-Urban Interface Code, the Health and Safety Code, the Public Resources Code, or Chapter 6.8 (commencing with Section 51175) of Part 1 of Division 1 of Title 5 of this code.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Timing / unincorporated areas (§ 65912.157(n))",
+     "quote": "(n) This section shall not apply to a local agency until July 1, 2026, unless the local agency adopts an ordinance or local transit-oriented development alternative plan deemed compliant by the department before July 1, 2026. It shall not apply within an unincorporated area of a county until the 7th regional housing needs allocation cycle.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Local ordinance may exempt areas with no short walking path, or industrial employment hubs (§ 65912.160(e))",
+     "quote": "(e) The ordinance may designate areas within one-half mile of a transit-oriented development stop as exempt from the provisions of this chapter if: (1) The local government makes findings supported by substantial evidence that there exists no walking path of less than one mile from that location to the transit-oriented development stop. (2) A local government with at least 15 transit-oriented development stops designates the area as an industrial employment hub. An industrial employment hub shall be a contiguous area of at least 250 acres designated in the jurisdiction’s general plan on or before January 1, 2025, as an employment lands area; the parcels within it shall be primarily dedicated to industrial use as defined in paragraph (3) of subdivision (f) of Section 65912.121; and housing shall not be a permitted use on any of the sites so excluded.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Local ordinance exclusions until one year after the seventh housing element (§ 65912.161(b)(1)), incl. sea level rise",
+     "quote": "(b) (1) Prior to one year following the adoption of the seventh revision of the housing element, Section 65912.157 shall not apply to any of the following for which the local government has adopted an ordinance in accordance with Section 65912.160 indicating the site’s exclusion: [...] (D) Sites within a very high fire hazard severity zone, as determined by the Department of Forestry and Fire Protection pursuant to Section 51178, or within the state responsibility area, as defined in Section 4102 of the Public Resources Code. (E) Sites that are vulnerable to one foot of sea level rise, as determined by the National Oceanic and Atmospheric Administration, the Ocean Protection Council, the United States Geological Survey, the University of California, or a local government’s coastal hazards vulnerability assessment. (F) Sites with a historic resource designated as of January 1, 2025, on a local register.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Jurisdiction with an approved local alternative plan (§ 65912.161(d))",
+     "quote": "(d) Section 65912.157 shall not apply within a jurisdiction that has a local transit-oriented alternative plan that has been approved by the department as satisfying the requirements of this section in effect.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Streamlined path only: rest of current § 65913.4(a)(6) (coastal, wetlands, hazardous waste, earthquake fault, conservation lands, habitat, conservation easement)",
+     "quote": "(C) Wetlands, as defined in the United States Fish and Wildlife Service Manual, Part 660 FW 2 (June 21, 1993). [...] (F) Within a delineated earthquake fault zone as determined by the State Geologist in any official maps published by the State Geologist, unless the development complies with applicable seismic protection building code standards adopted by the California Building Standards Commission under the California Building Standards Law (Part 2.5 (commencing with Section 18901) of Division 13 of the Health and Safety Code), and by any local building department under Chapter 12.2 (commencing with Section 8875) of Division 1 of Title 2. [...] (I) Lands identified for conservation in an adopted natural community conservation plan pursuant to the Natural Community Conservation Planning Act (Chapter 10 (commencing with Section 2800) of Division 3 of the Fish and Game Code), habitat conservation plan pursuant to the federal Endangered Species Act of 1973 (16 U.S.C. Sec. 1531 et seq.), or other adopted natural resource protection plan. (J) Habitat for protected species identified as candidate, sensitive, or species of special status by state or federal agencies, fully protected species, or species protected by the federal Endangered Species Act of 1973 (16 U.S.C. Sec. 1531 et seq.), the California Endangered Species Act (Chapter 1.5 (commencing with Section 2050) of Division 3 of the Fish and Game Code), or the Native Plant Protection Act (Chapter 10 (commencing with Section 1900) of Division 2 of the Fish and Game Code). (K) Lands under conservation easement.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    }
+   ]
+  },
+  "ca_sb79_tier2_light_rail_quarter": {
+   "sections_read": [
+    {
+     "citation": "Cal. Gov. Code § 65912.155",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.155.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.156",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.156.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.157",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.157.20261002 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-07-16; history: Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026."
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.158",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.158.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.159",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.159.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.160",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.160.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.161",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.161.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.162",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.162.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65913.4",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65913.4.20257742 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Amended by Stats. 2025, Ch. 774, Sec. 2. (SB 597) Effective January 1, 2026. Repealed as of January 1, 2036, by its own provisions."
+    }
+   ],
+   "cross_reference": {
+    "quote_65912_159_a_3": "(3) The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4.",
+    "quote_65912_159_b": "(b) Any housing development proposed pursuant to Section 65912.157 not seeking streamlined approval under Section 65913.4 shall be reviewed according to the jurisdiction’s development review process and Section 65589.5, except that any local zoning standard conflicting with the requirements of this chapter shall not apply.",
+    "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific."
+   },
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": null,
+     "path_specific": {
+      "allowed_use_standards_65912_157": false,
+      "streamlined_ministerial_65912_159": true,
+      "local_ordinance_may_exclude_site_65912_161_b": false
+     },
+     "quote": "(3) The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4. || § 65913.4(a)(6): (G) Within a special flood hazard area subject to inundation by the 1 percent annual chance flood (100-year flood) as determined by the Federal Emergency Management Agency in any official maps published by the Federal Emergency Management Agency. [...] (H) Within a regulatory floodway as determined by the Federal Emergency Management Agency in any official maps published by the Federal Emergency Management Agency, unless the development has received a no-rise certification in accordance with Section 60.3(d)(3) of Title 44 of the Code of Federal Regulations.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": "A development may be located on a site described in this subparagraph if either of the following are met: (i) The site has been subject to a Letter of Map Revision prepared by the Federal Emergency Management Agency and issued to the local jurisdiction. (ii) The site meets Federal Emergency Management Agency requirements necessary to meet minimum flood plain management criteria of the National Flood Insurance Program pursuant to Part 59 (commencing with Section 59.1) and Part 60 (commencing with Section 60.1) of Subchapter B of Chapter I of Title 44 of the Code of Federal Regulations.",
+     "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific. § 65912.157 (read in full) has no flood exclusion. § 65912.161(b)(1)(E) lets a local ordinance exclude 'Sites that are vulnerable to one foot of sea level rise' (not the FEMA flood zone)."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": null,
+     "path_specific": {
+      "allowed_use_standards_65912_157": false,
+      "streamlined_ministerial_65912_159": true,
+      "local_ordinance_may_exclude_site_65912_161_b": true
+     },
+     "quote": "(3) The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4. || § 65913.4(a)(6): (D) Within a very high fire hazard severity zone, as determined by the Department of Forestry and Fire Protection pursuant to Section 51178, or within the state responsibility area, as defined in Section 4102 of the Public Resources Code. || § 65912.161: (b) (1) Prior to one year following the adoption of the seventh revision of the housing element, Section 65912.157 shall not apply to any of the following for which the local government has adopted an ordinance in accordance with Section 65912.160 indicating the site’s exclusion: [...] (D) Sites within a very high fire hazard severity zone, as determined by the Department of Forestry and Fire Protection pursuant to Section 51178, or within the state responsibility area, as defined in Section 4102 of the Public Resources Code.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": "This subparagraph does not apply to sites that have adopted fire hazard mitigation measures pursuant to existing building standards or state fire mitigation measures applicable to the development, including, but not limited to, standards established under all of the following or their successor provisions: (i) Section 4291 of the Public Resources Code or Section 51182, as applicable. (ii) Section 4290 of the Public Resources Code. (iii) Chapter 7A of the California Building Code (Title 24 of the California Code of Regulations).",
+     "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific. Fire-specific: (1) streamlined path barred in a VHFHSZ or state responsibility area unless the § 65913.4(a)(6)(D) mitigation exception applies; (2) until one year after the seventh housing element revision, § 65912.157 does not apply to VHFHSZ / state-responsibility-area sites IF the local government adopted an ordinance excluding them (whether a given city did so was not researched); (3) § 65912.157(j) requires consistency with objective fire safety standards: (j) A development proposed pursuant to this chapter shall be consistent with the height, noise, and safety standards of an adopted airport land use compatibility plan or Department of Defense Air Installation Compatible Use Zones developed pursuant to Section 21675 of the Public Utilities Code, and of otherwise applicable objective fire safety standards established pursuant to the California Building Code, the California Fire Code, the California Wildland-Urban Interface Code, the Health and Safety Code, the Public Resources Code, or Chapter 6.8 (commencing with Section 51175) of Part 1 of Division 1 of Title 5 of this code."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": null,
+     "path_specific": {
+      "allowed_use_standards_65912_157": false,
+      "streamlined_ministerial_65912_159": true,
+      "local_ordinance_may_exclude_site_65912_161_b": false
+     },
+     "quote": "(3) The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4. || § 65913.4(a)(6): (B) Either prime farmland or farmland of statewide importance, as defined pursuant to the United States Department of Agriculture land inventory and monitoring criteria, as modified for California, and designated on the maps prepared by the Farmland Mapping and Monitoring Program of the Department of Conservation, or land zoned or designated for agricultural protection or preservation by a local ballot measure that was approved by the voters of that jurisdiction.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific. ENGINE FLAG MISMATCH: (a)(6)(B) names FMMP prime farmland / farmland of statewide importance and voter-approved agricultural protection zoning, not Williamson Act contracts. Separately, § 65912.157(a) only reaches a 'site zoned for residential, mixed, or commercial development', so agriculturally zoned land is outside the section on its face."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": null,
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "No exclusion of publicly owned or tribal land found in §§ 65912.155-65912.162 (all read in full) or in § 65913.4(a)(1)-(7) (read in full; rest of § 65913.4 keyword-searched for tribal/histor/public land/parkland). § 65912.158 in fact creates a track for transit-agency-OWNED land. On the streamlined path only, § 65913.4(b)(4) makes a project ineligible where a registered tribal cultural resource is on the site: '(4) A project shall not be eligible for the streamlined, ministerial process described in subdivision (c) if any of the following apply: (A) There is a tribal cultural resource that is on a national, state, tribal, or local historic register list located on the site of the project.' That is about cultural resources, not land ownership."
+    },
+    "historic_district_hpoz": {
+     "excluded": null,
+     "path_specific": {
+      "allowed_use_standards_65912_157": false,
+      "streamlined_ministerial_65912_159": null,
+      "local_ordinance_may_exclude_site_65912_161_b": true
+     },
+     "quote": "(b) (1) Prior to one year following the adoption of the seventh revision of the housing element, Section 65912.157 shall not apply to any of the following for which the local government has adopted an ordinance in accordance with Section 65912.160 indicating the site’s exclusion: [...] (F) Sites with a historic resource designated as of January 1, 2025, on a local register. || § 65913.4(a)(7): (C) The development would require the demolition of a historic structure that was placed on a national, state, or local historic register.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific. Historic-specific: § 65912.157 has no historic exclusion. A local ordinance may exclude 'Sites with a historic resource designated as of January 1, 2025, on a local register' until one year after the seventh housing element revision (§ 65912.161(b)(1)(F)); whether a given city did so was not researched. On the streamlined path the test is demolition of a registered historic structure (§ 65913.4(a)(7)(C)), not district membership, hence streamlined = null."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Rent-controlled housing sites; mobilehome / RV parks (§ 65912.157(h))",
+     "quote": "(h) A development proposed pursuant to this section shall not be located on any of the following: (1) A site containing more than two units where the development would require the demolition of housing that is subject to any form of rent or price control through a public entity’s valid exercise of its police power that has been occupied by tenants within the past seven years. (2) A site that was previously used for more than two units of housing that were demolished within seven years before the development proponent submits an application under this section and any of the units were subject to any form of rent or price control through a public entity’s valid exercise of its police power. (3) The existing parcel of land or site is governed under the Mobilehome Residency Law (Chapter 2.5 (commencing with Section 798) of Title 2 of Part 2 of Division 2 of the Civil Code), the Recreational Vehicle Park Occupancy Law (Chapter 2.6 (commencing with Section 799.20) of Title 2 of Part 2 of Division 2 of the Civil Code), the Mobilehome Parks Act (Part 2.1 (commencing with Section 18200) of Division 13 of the Health and Safety Code), or the Special Occupancy Parks Act (Part 2.3 (commencing with Section 18860) of Division 13 of the Health and Safety Code).",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Site must be zoned residential, mixed or commercial and within one-half or one-quarter mile of a transit-oriented development stop",
+     "quote": "(a) A housing development project shall be an allowed use as a transit-oriented housing development on any site zoned for residential, mixed, or commercial development within one-half or one-quarter mile of a transit-oriented development stop",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Airport land use plan and fire safety standards (§ 65912.157(j))",
+     "quote": "(j) A development proposed pursuant to this chapter shall be consistent with the height, noise, and safety standards of an adopted airport land use compatibility plan or Department of Defense Air Installation Compatible Use Zones developed pursuant to Section 21675 of the Public Utilities Code, and of otherwise applicable objective fire safety standards established pursuant to the California Building Code, the California Fire Code, the California Wildland-Urban Interface Code, the Health and Safety Code, the Public Resources Code, or Chapter 6.8 (commencing with Section 51175) of Part 1 of Division 1 of Title 5 of this code.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Timing / unincorporated areas (§ 65912.157(n))",
+     "quote": "(n) This section shall not apply to a local agency until July 1, 2026, unless the local agency adopts an ordinance or local transit-oriented development alternative plan deemed compliant by the department before July 1, 2026. It shall not apply within an unincorporated area of a county until the 7th regional housing needs allocation cycle.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Local ordinance may exempt areas with no short walking path, or industrial employment hubs (§ 65912.160(e))",
+     "quote": "(e) The ordinance may designate areas within one-half mile of a transit-oriented development stop as exempt from the provisions of this chapter if: (1) The local government makes findings supported by substantial evidence that there exists no walking path of less than one mile from that location to the transit-oriented development stop. (2) A local government with at least 15 transit-oriented development stops designates the area as an industrial employment hub. An industrial employment hub shall be a contiguous area of at least 250 acres designated in the jurisdiction’s general plan on or before January 1, 2025, as an employment lands area; the parcels within it shall be primarily dedicated to industrial use as defined in paragraph (3) of subdivision (f) of Section 65912.121; and housing shall not be a permitted use on any of the sites so excluded.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Local ordinance exclusions until one year after the seventh housing element (§ 65912.161(b)(1)), incl. sea level rise",
+     "quote": "(b) (1) Prior to one year following the adoption of the seventh revision of the housing element, Section 65912.157 shall not apply to any of the following for which the local government has adopted an ordinance in accordance with Section 65912.160 indicating the site’s exclusion: [...] (D) Sites within a very high fire hazard severity zone, as determined by the Department of Forestry and Fire Protection pursuant to Section 51178, or within the state responsibility area, as defined in Section 4102 of the Public Resources Code. (E) Sites that are vulnerable to one foot of sea level rise, as determined by the National Oceanic and Atmospheric Administration, the Ocean Protection Council, the United States Geological Survey, the University of California, or a local government’s coastal hazards vulnerability assessment. (F) Sites with a historic resource designated as of January 1, 2025, on a local register.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Jurisdiction with an approved local alternative plan (§ 65912.161(d))",
+     "quote": "(d) Section 65912.157 shall not apply within a jurisdiction that has a local transit-oriented alternative plan that has been approved by the department as satisfying the requirements of this section in effect.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Streamlined path only: rest of current § 65913.4(a)(6) (coastal, wetlands, hazardous waste, earthquake fault, conservation lands, habitat, conservation easement)",
+     "quote": "(C) Wetlands, as defined in the United States Fish and Wildlife Service Manual, Part 660 FW 2 (June 21, 1993). [...] (F) Within a delineated earthquake fault zone as determined by the State Geologist in any official maps published by the State Geologist, unless the development complies with applicable seismic protection building code standards adopted by the California Building Standards Commission under the California Building Standards Law (Part 2.5 (commencing with Section 18901) of Division 13 of the Health and Safety Code), and by any local building department under Chapter 12.2 (commencing with Section 8875) of Division 1 of Title 2. [...] (I) Lands identified for conservation in an adopted natural community conservation plan pursuant to the Natural Community Conservation Planning Act (Chapter 10 (commencing with Section 2800) of Division 3 of the Fish and Game Code), habitat conservation plan pursuant to the federal Endangered Species Act of 1973 (16 U.S.C. Sec. 1531 et seq.), or other adopted natural resource protection plan. (J) Habitat for protected species identified as candidate, sensitive, or species of special status by state or federal agencies, fully protected species, or species protected by the federal Endangered Species Act of 1973 (16 U.S.C. Sec. 1531 et seq.), the California Endangered Species Act (Chapter 1.5 (commencing with Section 2050) of Division 3 of the Fish and Game Code), or the Native Plant Protection Act (Chapter 10 (commencing with Section 1900) of Division 2 of the Fish and Game Code). (K) Lands under conservation easement.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    }
+   ]
+  },
+  "ca_sb79_tier2_light_rail_half": {
+   "sections_read": [
+    {
+     "citation": "Cal. Gov. Code § 65912.155",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.155.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.156",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.156.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.157",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.157.20261002 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-07-16; history: Amended (as added by Stats. 2025, Ch. 512, Sec. 1) by Stats. 2026, Ch. 100, Sec. 2. (SB 722) Effective July 16, 2026."
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.158",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.158.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.159",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.159.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.160",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.160.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.161",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.161.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.162",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.162.20255121 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 512, Sec. 1 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65913.4",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65913.4.20257742 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Amended by Stats. 2025, Ch. 774, Sec. 2. (SB 597) Effective January 1, 2026. Repealed as of January 1, 2036, by its own provisions."
+    }
+   ],
+   "cross_reference": {
+    "quote_65912_159_a_3": "(3) The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4.",
+    "quote_65912_159_b": "(b) Any housing development proposed pursuant to Section 65912.157 not seeking streamlined approval under Section 65913.4 shall be reviewed according to the jurisdiction’s development review process and Section 65589.5, except that any local zoning standard conflicting with the requirements of this chapter shall not apply.",
+    "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific."
+   },
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": null,
+     "path_specific": {
+      "allowed_use_standards_65912_157": false,
+      "streamlined_ministerial_65912_159": true,
+      "local_ordinance_may_exclude_site_65912_161_b": false
+     },
+     "quote": "(3) The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4. || § 65913.4(a)(6): (G) Within a special flood hazard area subject to inundation by the 1 percent annual chance flood (100-year flood) as determined by the Federal Emergency Management Agency in any official maps published by the Federal Emergency Management Agency. [...] (H) Within a regulatory floodway as determined by the Federal Emergency Management Agency in any official maps published by the Federal Emergency Management Agency, unless the development has received a no-rise certification in accordance with Section 60.3(d)(3) of Title 44 of the Code of Federal Regulations.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": "A development may be located on a site described in this subparagraph if either of the following are met: (i) The site has been subject to a Letter of Map Revision prepared by the Federal Emergency Management Agency and issued to the local jurisdiction. (ii) The site meets Federal Emergency Management Agency requirements necessary to meet minimum flood plain management criteria of the National Flood Insurance Program pursuant to Part 59 (commencing with Section 59.1) and Part 60 (commencing with Section 60.1) of Subchapter B of Chapter I of Title 44 of the Code of Federal Regulations.",
+     "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific. § 65912.157 (read in full) has no flood exclusion. § 65912.161(b)(1)(E) lets a local ordinance exclude 'Sites that are vulnerable to one foot of sea level rise' (not the FEMA flood zone)."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": null,
+     "path_specific": {
+      "allowed_use_standards_65912_157": false,
+      "streamlined_ministerial_65912_159": true,
+      "local_ordinance_may_exclude_site_65912_161_b": true
+     },
+     "quote": "(3) The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4. || § 65913.4(a)(6): (D) Within a very high fire hazard severity zone, as determined by the Department of Forestry and Fire Protection pursuant to Section 51178, or within the state responsibility area, as defined in Section 4102 of the Public Resources Code. || § 65912.161: (b) (1) Prior to one year following the adoption of the seventh revision of the housing element, Section 65912.157 shall not apply to any of the following for which the local government has adopted an ordinance in accordance with Section 65912.160 indicating the site’s exclusion: [...] (D) Sites within a very high fire hazard severity zone, as determined by the Department of Forestry and Fire Protection pursuant to Section 51178, or within the state responsibility area, as defined in Section 4102 of the Public Resources Code.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": "This subparagraph does not apply to sites that have adopted fire hazard mitigation measures pursuant to existing building standards or state fire mitigation measures applicable to the development, including, but not limited to, standards established under all of the following or their successor provisions: (i) Section 4291 of the Public Resources Code or Section 51182, as applicable. (ii) Section 4290 of the Public Resources Code. (iii) Chapter 7A of the California Building Code (Title 24 of the California Code of Regulations).",
+     "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific. Fire-specific: (1) streamlined path barred in a VHFHSZ or state responsibility area unless the § 65913.4(a)(6)(D) mitigation exception applies; (2) until one year after the seventh housing element revision, § 65912.157 does not apply to VHFHSZ / state-responsibility-area sites IF the local government adopted an ordinance excluding them (whether a given city did so was not researched); (3) § 65912.157(j) requires consistency with objective fire safety standards: (j) A development proposed pursuant to this chapter shall be consistent with the height, noise, and safety standards of an adopted airport land use compatibility plan or Department of Defense Air Installation Compatible Use Zones developed pursuant to Section 21675 of the Public Utilities Code, and of otherwise applicable objective fire safety standards established pursuant to the California Building Code, the California Fire Code, the California Wildland-Urban Interface Code, the Health and Safety Code, the Public Resources Code, or Chapter 6.8 (commencing with Section 51175) of Part 1 of Division 1 of Title 5 of this code."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": null,
+     "path_specific": {
+      "allowed_use_standards_65912_157": false,
+      "streamlined_ministerial_65912_159": true,
+      "local_ordinance_may_exclude_site_65912_161_b": false
+     },
+     "quote": "(3) The proposed project shall comply with all other requirements of Section 65913.4, including, but not limited to, the prohibition against a site that is within a very high fire hazard severity zone, pursuant to subparagraph (D) of paragraph (6) of subdivision (a) of Section 65913.4. || § 65913.4(a)(6): (B) Either prime farmland or farmland of statewide importance, as defined pursuant to the United States Department of Agriculture land inventory and monitoring criteria, as modified for California, and designated on the maps prepared by the Farmland Mapping and Monitoring Program of the Department of Conservation, or land zoned or designated for agricultural protection or preservation by a local ballot measure that was approved by the voters of that jurisdiction.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific. ENGINE FLAG MISMATCH: (a)(6)(B) names FMMP prime farmland / farmland of statewide importance and voter-approved agricultural protection zoning, not Williamson Act contracts. Separately, § 65912.157(a) only reaches a 'site zoned for residential, mixed, or commercial development', so agriculturally zoned land is outside the section on its face."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": null,
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "No exclusion of publicly owned or tribal land found in §§ 65912.155-65912.162 (all read in full) or in § 65913.4(a)(1)-(7) (read in full; rest of § 65913.4 keyword-searched for tribal/histor/public land/parkland). § 65912.158 in fact creates a track for transit-agency-OWNED land. On the streamlined path only, § 65913.4(b)(4) makes a project ineligible where a registered tribal cultural resource is on the site: '(4) A project shall not be eligible for the streamlined, ministerial process described in subdivision (c) if any of the following apply: (A) There is a tribal cultural resource that is on a national, state, tribal, or local historic register list located on the site of the project.' That is about cultural resources, not land ownership."
+    },
+    "historic_district_hpoz": {
+     "excluded": null,
+     "path_specific": {
+      "allowed_use_standards_65912_157": false,
+      "streamlined_ministerial_65912_159": null,
+      "local_ordinance_may_exclude_site_65912_161_b": true
+     },
+     "quote": "(b) (1) Prior to one year following the adoption of the seventh revision of the housing element, Section 65912.157 shall not apply to any of the following for which the local government has adopted an ordinance in accordance with Section 65912.160 indicating the site’s exclusion: [...] (F) Sites with a historic resource designated as of January 1, 2025, on a local register. || § 65913.4(a)(7): (C) The development would require the demolition of a historic structure that was placed on a national, state, or local historic register.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "SB 79 has two layers. Layer 1, § 65912.157: the project 'shall be an allowed use' with state height/density/FAR floors; its own site list is subdivision (h) (rent-controlled housing, mobilehome/RV parks) and contains none of the five conditions. Layer 2, § 65912.159(a): OPTIONAL streamlined ministerial approval under § 65913.4, which requires 'all other requirements of Section 65913.4', i.e. the current (a)(6) site list. § 65912.159(b): a project not seeking streamlining is reviewed under the local process and the Housing Accountability Act. So the condition blocks ministerial approval, not the § 65912.157 zoning standards. excluded is therefore null (not a single yes/no); see path_specific. Historic-specific: § 65912.157 has no historic exclusion. A local ordinance may exclude 'Sites with a historic resource designated as of January 1, 2025, on a local register' until one year after the seventh housing element revision (§ 65912.161(b)(1)(F)); whether a given city did so was not researched. On the streamlined path the test is demolition of a registered historic structure (§ 65913.4(a)(7)(C)), not district membership, hence streamlined = null."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Rent-controlled housing sites; mobilehome / RV parks (§ 65912.157(h))",
+     "quote": "(h) A development proposed pursuant to this section shall not be located on any of the following: (1) A site containing more than two units where the development would require the demolition of housing that is subject to any form of rent or price control through a public entity’s valid exercise of its police power that has been occupied by tenants within the past seven years. (2) A site that was previously used for more than two units of housing that were demolished within seven years before the development proponent submits an application under this section and any of the units were subject to any form of rent or price control through a public entity’s valid exercise of its police power. (3) The existing parcel of land or site is governed under the Mobilehome Residency Law (Chapter 2.5 (commencing with Section 798) of Title 2 of Part 2 of Division 2 of the Civil Code), the Recreational Vehicle Park Occupancy Law (Chapter 2.6 (commencing with Section 799.20) of Title 2 of Part 2 of Division 2 of the Civil Code), the Mobilehome Parks Act (Part 2.1 (commencing with Section 18200) of Division 13 of the Health and Safety Code), or the Special Occupancy Parks Act (Part 2.3 (commencing with Section 18860) of Division 13 of the Health and Safety Code).",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Site must be zoned residential, mixed or commercial and within one-half or one-quarter mile of a transit-oriented development stop",
+     "quote": "(a) A housing development project shall be an allowed use as a transit-oriented housing development on any site zoned for residential, mixed, or commercial development within one-half or one-quarter mile of a transit-oriented development stop",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Airport land use plan and fire safety standards (§ 65912.157(j))",
+     "quote": "(j) A development proposed pursuant to this chapter shall be consistent with the height, noise, and safety standards of an adopted airport land use compatibility plan or Department of Defense Air Installation Compatible Use Zones developed pursuant to Section 21675 of the Public Utilities Code, and of otherwise applicable objective fire safety standards established pursuant to the California Building Code, the California Fire Code, the California Wildland-Urban Interface Code, the Health and Safety Code, the Public Resources Code, or Chapter 6.8 (commencing with Section 51175) of Part 1 of Division 1 of Title 5 of this code.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Timing / unincorporated areas (§ 65912.157(n))",
+     "quote": "(n) This section shall not apply to a local agency until July 1, 2026, unless the local agency adopts an ordinance or local transit-oriented development alternative plan deemed compliant by the department before July 1, 2026. It shall not apply within an unincorporated area of a county until the 7th regional housing needs allocation cycle.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Local ordinance may exempt areas with no short walking path, or industrial employment hubs (§ 65912.160(e))",
+     "quote": "(e) The ordinance may designate areas within one-half mile of a transit-oriented development stop as exempt from the provisions of this chapter if: (1) The local government makes findings supported by substantial evidence that there exists no walking path of less than one mile from that location to the transit-oriented development stop. (2) A local government with at least 15 transit-oriented development stops designates the area as an industrial employment hub. An industrial employment hub shall be a contiguous area of at least 250 acres designated in the jurisdiction’s general plan on or before January 1, 2025, as an employment lands area; the parcels within it shall be primarily dedicated to industrial use as defined in paragraph (3) of subdivision (f) of Section 65912.121; and housing shall not be a permitted use on any of the sites so excluded.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Local ordinance exclusions until one year after the seventh housing element (§ 65912.161(b)(1)), incl. sea level rise",
+     "quote": "(b) (1) Prior to one year following the adoption of the seventh revision of the housing element, Section 65912.157 shall not apply to any of the following for which the local government has adopted an ordinance in accordance with Section 65912.160 indicating the site’s exclusion: [...] (D) Sites within a very high fire hazard severity zone, as determined by the Department of Forestry and Fire Protection pursuant to Section 51178, or within the state responsibility area, as defined in Section 4102 of the Public Resources Code. (E) Sites that are vulnerable to one foot of sea level rise, as determined by the National Oceanic and Atmospheric Administration, the Ocean Protection Council, the United States Geological Survey, the University of California, or a local government’s coastal hazards vulnerability assessment. (F) Sites with a historic resource designated as of January 1, 2025, on a local register.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Jurisdiction with an approved local alternative plan (§ 65912.161(d))",
+     "quote": "(d) Section 65912.157 shall not apply within a jurisdiction that has a local transit-oriented alternative plan that has been approved by the department as satisfying the requirements of this section in effect.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Streamlined path only: rest of current § 65913.4(a)(6) (coastal, wetlands, hazardous waste, earthquake fault, conservation lands, habitat, conservation easement)",
+     "quote": "(C) Wetlands, as defined in the United States Fish and Wildlife Service Manual, Part 660 FW 2 (June 21, 1993). [...] (F) Within a delineated earthquake fault zone as determined by the State Geologist in any official maps published by the State Geologist, unless the development complies with applicable seismic protection building code standards adopted by the California Building Standards Commission under the California Building Standards Law (Part 2.5 (commencing with Section 18901) of Division 13 of the Health and Safety Code), and by any local building department under Chapter 12.2 (commencing with Section 8875) of Division 1 of Title 2. [...] (I) Lands identified for conservation in an adopted natural community conservation plan pursuant to the Natural Community Conservation Planning Act (Chapter 10 (commencing with Section 2800) of Division 3 of the Fish and Game Code), habitat conservation plan pursuant to the federal Endangered Species Act of 1973 (16 U.S.C. Sec. 1531 et seq.), or other adopted natural resource protection plan. (J) Habitat for protected species identified as candidate, sensitive, or species of special status by state or federal agencies, fully protected species, or species protected by the federal Endangered Species Act of 1973 (16 U.S.C. Sec. 1531 et seq.), the California Endangered Species Act (Chapter 1.5 (commencing with Section 2050) of Division 3 of the Fish and Game Code), or the Native Plant Protection Act (Chapter 10 (commencing with Section 1900) of Division 2 of the Fish and Game Code). (K) Lands under conservation easement.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    }
+   ]
+  },
+  "ca_sb9_lot_split": {
+   "sections_read": [
+    {
+     "citation": "Cal. Gov. Code § 65852.21",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65852.21.2026567 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-06-30; history: Amended by Stats. 2026, Ch. 56, Sec. 7. (SB 1426) Effective June 30, 2026."
+    },
+    {
+     "citation": "Cal. Gov. Code § 66411.7",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV66411.7.2026569 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-06-30; history: Amended by Stats. 2026, Ch. 56, Sec. 9. (SB 1426) Effective June 30, 2026."
+    },
+    {
+     "citation": "Cal. Gov. Code § 65913.4(a)(6) as printed in Assembly Bill 1174, Chapter 160, Statutes of 2021 (chaptered text; CHAPTERED/APPROVED/FILED 2021-09-16, urgency statute)",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2021.zip",
+     "source_kind": "official",
+     "as_of": "BILL_VERSION_TBL row 20210AB117492CHP, file BILL_VERSION_TBL_8486.lob in pubinfo_2021.zip (archive Last-Modified header: Mon, 28 Nov 2022 05:27:40 GMT). Used for the SB 9 cross-reference to § 65913.4 'as that section read on September 16, 2021'."
+    },
+    {
+     "citation": "Cal. Gov. Code § 65913.4",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65913.4.20257742 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Amended by Stats. 2025, Ch. 774, Sec. 2. (SB 597) Effective January 1, 2026. Repealed as of January 1, 2036, by its own provisions."
+    }
+   ],
+   "cross_reference": {
+    "quote_65852_21": "(2) The parcel satisfies the requirements specified in subparagraphs (B) to (K), inclusive, of paragraph (6) of subdivision (a) of Section 65913.4, as that section read on September 16, 2021.",
+    "quote_66411_7": "(C) The parcel satisfies the requirements specified in subparagraphs (B) to (K), inclusive, of paragraph (6) of subdivision (a) of Section 65913.4, as that section read on September 16, 2021.",
+    "note": "Both SB 9 sections freeze the list at § 65913.4(a)(6)(B)-(K) 'as that section read on September 16, 2021'. The text quoted is paragraph (6) as printed in AB 1174 (Stats. 2021, Ch. 160), an urgency statute chaptered, approved and filed on 2021-09-16. The version of § 65913.4 in force immediately before AB 1174 was NOT fetched, so whether paragraph (6) differed between the two texts on that date is not confirmed. The CURRENT § 65913.4(a)(6) (read in full) words (D) and (E) differently; SB 9 does not use the current wording."
+   },
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": true,
+     "quote": "(G) Within a special flood hazard area subject to inundation by the 1 percent annual chance flood (100-year flood) as determined by the Federal Emergency Management Agency in any official maps published by the Federal Emergency Management Agency. [...] (H) Within a regulatory floodway as determined by the Federal Emergency Management Agency in any official maps published by the Federal Emergency Management Agency, unless the development has received a no-rise certification in accordance with Section 60.3(d)(3) of Title 44 of the Code of Federal Regulations.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2021.zip",
+     "exception_quote": "A development may be located on a site described in this subparagraph if either of the following are met: (i) The site has been subject to a Letter of Map Revision prepared by the Federal Emergency Management Agency and issued to the local jurisdiction. (ii) The site meets Federal Emergency Management Agency requirements necessary to meet minimum flood plain management criteria of the National Flood Insurance Program pursuant to Part 59 (commencing with Section 59.1) and Part 60 (commencing with Section 60.1) of Subchapter B of Chapter I of Title 44 of the Code of Federal Regulations. || floodway: unless the development has received a no-rise certification in accordance with Section 60.3(d)(3) of Title 44 of the Code of Federal Regulations.",
+     "note": "Incorporated by § 65852.21(a)(2) and § 66411.7(a)(3)(C). Two separate items: (G) special flood hazard area (1 percent / 100-year), lifted by a FEMA Letter of Map Revision or by meeting NFIP minimum flood plain management criteria; (H) regulatory floodway, lifted only by a no-rise certification. §§ 65852.21 and 66411.7 read in full; 2021 paragraph (6) read in full. Both SB 9 sections freeze the list at § 65913.4(a)(6)(B)-(K) 'as that section read on September 16, 2021'. The text quoted is paragraph (6) as printed in AB 1174 (Stats. 2021, Ch. 160), an urgency statute chaptered, approved and filed on 2021-09-16. The version of § 65913.4 in force immediately before AB 1174 was NOT fetched, so whether paragraph (6) differed between the two texts on that date is not confirmed. The CURRENT § 65913.4(a)(6) (read in full) words (D) and (E) differently; SB 9 does not use the current wording."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": true,
+     "quote": "(D) Within a very high fire hazard severity zone, as determined by the Department of Forestry and Fire Protection pursuant to Section 51178, or within a high or very high fire hazard severity zone as indicated on maps adopted by the Department of Forestry and Fire Protection pursuant to Section 4202 of the Public Resources Code.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2021.zip",
+     "exception_quote": "This subparagraph does not apply to sites excluded from the specified hazard zones by a local agency, pursuant to subdivision (b) of Section 51179, or sites that have adopted fire hazard mitigation measures pursuant to existing building standards or state fire mitigation measures applicable to the development.",
+     "note": "Incorporated list item (D), 2021 wording: covers a very high zone under § 51178 and a HIGH or very high zone on maps adopted under Pub. Resources Code § 4202. The exclusion does not apply to sites a local agency excluded under § 51179(b) or sites 'that have adopted fire hazard mitigation measures pursuant to existing building standards or state fire mitigation measures applicable to the development'. So a fire-zone flag alone does not settle ineligibility. Both SB 9 sections freeze the list at § 65913.4(a)(6)(B)-(K) 'as that section read on September 16, 2021'. The text quoted is paragraph (6) as printed in AB 1174 (Stats. 2021, Ch. 160), an urgency statute chaptered, approved and filed on 2021-09-16. The version of § 65913.4 in force immediately before AB 1174 was NOT fetched, so whether paragraph (6) differed between the two texts on that date is not confirmed. The CURRENT § 65913.4(a)(6) (read in full) words (D) and (E) differently; SB 9 does not use the current wording."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": true,
+     "quote": "(B) Either prime farmland or farmland of statewide importance, as defined pursuant to United States Department of Agriculture land inventory and monitoring criteria, as modified for California, and designated on the maps prepared by the Farmland Mapping and Monitoring Program of the Department of Conservation, or land zoned or designated for agricultural protection or preservation by a local ballot measure that was approved by the voters of that jurisdiction.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2021.zip",
+     "exception_quote": null,
+     "note": "ENGINE FLAG MISMATCH: the text excludes (1) prime farmland or farmland of statewide importance as designated on the Department of Conservation Farmland Mapping and Monitoring Program maps and (2) land zoned or designated for agricultural protection or preservation by a voter-approved local ballot measure. It does NOT name Williamson Act contracts or agricultural preserves. A Williamson Act / agricultural preserve flag by itself is not what the statute tests; no exception stated in (B)."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": null,
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "No exclusion for publicly owned or tribal land found. Read in full: § 65852.21, § 66411.7 (current) and § 65913.4(a)(6)(A)-(K) as printed in AB 1174 (2021). The nearest items are conservation-related, not ownership-related: (I) Lands identified for conservation in an adopted natural community conservation plan pursuant to the Natural Community Conservation Planning Act (Chapter 10 (commencing with Section 2800) of Division 3 of the Fish and Game Code), habitat conservation plan pursuant to the federal Endangered Species Act of 1973 (16 U.S.C. Sec. 1531 et seq.), or other adopted natural resource protection plan. (J) Habitat for protected species identified as candidate, sensitive, or species of special status by state or federal agencies, fully protected species, or species protected by the federal Endangered Species Act of 1973 (16 U.S.C. Sec. 1531 et seq.), the California Endangered Species Act (Chapter 1.5 (commencing with Section 2050) of Division 3 of the Fish and Game Code), or the Native Plant Protection Act (Chapter 10 (commencing with Section 1900) of Division 2 of the Fish and Game Code). (K) Lands under conservation easement. Federal or tribal trust land may be outside local zoning for other legal reasons; that was not researched."
+    },
+    "historic_district_hpoz": {
+     "excluded": true,
+     "quote": "(5) The development is not located in either the following: (A) A contributing structure within a historic district included on the State Historic Resources Inventory, as defined in Section 5020.1 of the Public Resources Code, or historic property or district pursuant to a city or county ordinance. (B) A parcel individually listed as a historical resource included in the State Historic Resources Inventory, as defined in Section 5020.1 of the Public Resources Code, or within a property individually designated or listed as a city or county landmark under a city or county ordinance.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "Two-unit development (§ 65852.21(a)(5)): not allowed in a contributing structure within a State Historic Resources Inventory historic district, in a 'historic property or district pursuant to a city or county ordinance', or on an individually listed / locally designated landmark. Urban lot split (§ 66411.7(a)(3)(E)-(F)) is narrower for districts: landmark parcels are excluded outright, but inside a historic district the split is barred only if it requires demolition or alteration of a contributing structure or of an existing exterior structural wall. Lot-split text: (E) The parcel is not located within a historical landmark property included on the State Historic Resources Inventory, as defined in Section 5020.1 of the Public Resources Code, or within a site that is designated or listed as a city or county landmark pursuant to a city or county ordinance. (F) The proposed urban lot split does not require demolition or alteration of either of the following: (i) A contributing structure located within either a historic district that is included on the California Register of Historical Resources or within a historic district listed or designated pursuant to a city or county ordinance. (ii) An existing exterior structural wall of a structure located within either a historic district that is included on the California Register of Historical Resources or within a historic district listed or designated pursuant to a city or county ordinance. Also § 65852.21(b)(4): '(4) A local agency may adopt objective standards for the purposes of maintaining the historical value of a historic district listed in the California Register of Historical Resources.'"
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Wetlands (incorporated 2021 list item C)",
+     "quote": "(C) Wetlands, as defined in the United States Fish and Wildlife Service Manual, Part 660 FW 2 (June 21, 1993).",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2021.zip"
+    },
+    {
+     "what": "Hazardous waste site unless cleared (item E, 2021 wording)",
+     "quote": "(E) A hazardous waste site that is listed pursuant to Section 65962.5 or a hazardous waste site designated by the Department of Toxic Substances Control pursuant to Section 25356 of the Health and Safety Code, unless the State Department of Public Health, State Water Resources Control Board, or Department of Toxic Substances Control has cleared the site for residential use or residential mixed uses.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2021.zip"
+    },
+    {
+     "what": "Earthquake fault zone unless building-code compliant (item F)",
+     "quote": "(F) Within a delineated earthquake fault zone as determined by the State Geologist in any official maps published by the State Geologist, unless the development complies with applicable seismic protection building code standards adopted by the California Building Standards Commission under the California Building Standards Law (Part 2.5 (commencing with Section 18901) of Division 13 of the Health and Safety Code), and by any local building department under Chapter 12.2 (commencing with Section 8875) of Division 1 of Title 2.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2021.zip"
+    },
+    {
+     "what": "Conservation plan lands (item I)",
+     "quote": "(I) Lands identified for conservation in an adopted natural community conservation plan pursuant to the Natural Community Conservation Planning Act (Chapter 10 (commencing with Section 2800) of Division 3 of the Fish and Game Code), habitat conservation plan pursuant to the federal Endangered Species Act of 1973 (16 U.S.C. Sec. 1531 et seq.), or other adopted natural resource protection plan.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2021.zip"
+    },
+    {
+     "what": "Protected species habitat (item J)",
+     "quote": "(J) Habitat for protected species identified as candidate, sensitive, or species of special status by state or federal agencies, fully protected species, or species protected by the federal Endangered Species Act of 1973 (16 U.S.C. Sec. 1531 et seq.), the California Endangered Species Act (Chapter 1.5 (commencing with Section 2050) of Division 3 of the Fish and Game Code), or the Native Plant Protection Act (Chapter 10 (commencing with Section 1900) of Division 2 of the Fish and Game Code).",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2021.zip"
+    },
+    {
+     "what": "Conservation easement (item K)",
+     "quote": "(K) Lands under conservation easement.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2021.zip"
+    },
+    {
+     "what": "Coastal zone is item (A) of the 2021 list and is NOT incorporated (SB 9 incorporates only (B) to (K)); Coastal Act still applies",
+     "quote": "(k) Nothing in this section shall be construed to supersede or in any way alter or lessen the effect or application of the California Coastal Act of 1976 (Division 20 (commencing with Section 30000) of the Public Resources Code), except that the local agency shall not be required to hold public hearings for coastal development permit applications for a housing development pursuant to this section.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Must be in a single-family residential zone, in an urbanized area or urban cluster",
+     "quote": "(a) A proposed housing development containing no more than two residential units within a single-family residential zone shall be considered ministerially, without discretionary review or a hearing, if the proposed housing development meets all of the following requirements: (1) The parcel subject to the proposed housing development is located within a city, the boundaries of which include some portion of either an urbanized area or urban cluster, as designated by the United States Census Bureau, or, for unincorporated areas, a legal parcel wholly within the boundaries of an urbanized area or urban cluster, as designated by the United States Census Bureau.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Protected / tenant-occupied housing and Ellis Act withdrawals (two-unit)",
+     "quote": "(3) Notwithstanding any provision of this section or any local law, the proposed housing development would not require demolition or alteration of any of the following types of housing: (A) Housing that is subject to a recorded covenant, ordinance, or law that restricts rents to levels affordable to persons and families of moderate, low, or very low income. (B) Housing that is subject to any form of rent or price control through a public entity’s valid exercise of its police power. (C) Housing that has been occupied by a tenant in the last three years. (4) The parcel subject to the proposed housing development is not a parcel on which an owner of residential real property has exercised the owner’s rights under Chapter 12.75 (commencing with Section 7060) of Division 7 of Title 1 to withdraw accommodations from rent or lease within 15 years before the date that the development proponent submits an application.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Protected / tenant-occupied housing and Ellis Act withdrawals (lot split)",
+     "quote": "(D) The proposed urban lot split would not require demolition or alteration of any of the following types of housing: (i) Housing that is subject to a recorded covenant, ordinance, or law that restricts rents to levels affordable to persons and families of moderate, low, or very low income. (ii) Housing that is subject to any form of rent or price control through a public entity’s valid exercise of its police power. (iii) A parcel or parcels on which an owner of residential real property has exercised the owner’s rights under Chapter 12.75 (commencing with Section 7060) of Division 7 of Title 1 to withdraw accommodations from rent or lease within 15 years before the date that the development proponent submits an application. (iv) Housing that has been occupied by a tenant in the last three years.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Parcel made by an earlier urban lot split; adjacent parcel split by same owner",
+     "quote": "(G) The parcel has not been established through prior exercise of an urban lot split as provided for in this section. (H) Neither the owner of the parcel being subdivided nor any person acting in concert with the owner has previously subdivided an adjacent parcel using an urban lot split as provided for in this section.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Health and safety denial (case-by-case finding, not a mapped exclusion)",
+     "quote": "(d) Notwithstanding subdivision (a), a local agency may deny a proposed housing development project if the building official makes a written finding, based upon a preponderance of the evidence, that the proposed housing development project would have a specific, adverse impact, as defined and determined in paragraph (2) of subdivision (d) of Section 65589.5, upon public health and safety for which there is no feasible method to satisfactorily mitigate or avoid the specific, adverse impact.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    }
+   ]
+  },
+  "ca_ab2097": {
+   "sections_read": [
+    {
+     "citation": "Cal. Gov. Code § 65863.2",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65863.2.20224592 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2023-01-01; history: Stats. 2022, Ch. 459, Sec. 2 (history line not captured)"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": null,
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "§ 65863.2 read in full (subdivisions (a)-(i)); it contains no site-condition exclusion of this kind. The section is a parking rule keyed only to distance from public transit; it incorporates no site list."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": null,
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "§ 65863.2 read in full (subdivisions (a)-(i)); it contains no site-condition exclusion of this kind. The section is a parking rule keyed only to distance from public transit; it incorporates no site list."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": null,
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "§ 65863.2 read in full (subdivisions (a)-(i)); it contains no site-condition exclusion of this kind. The section is a parking rule keyed only to distance from public transit; it incorporates no site list."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": null,
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "§ 65863.2 read in full (subdivisions (a)-(i)); it contains no site-condition exclusion of this kind. The section is a parking rule keyed only to distance from public transit; it incorporates no site list."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": null,
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "§ 65863.2 read in full (subdivisions (a)-(i)); it contains no site-condition exclusion of this kind. The section is a parking rule keyed only to distance from public transit; it incorporates no site list."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Operative rule (distance to public transit only)",
+     "quote": "(a) A public agency shall not impose or enforce any minimum automobile parking requirement on a residential, commercial, or other development project if the project is located within one-half mile of public transit.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Case-by-case local findings can restore parking minimums (not a mapped site exclusion)",
+     "quote": "(b) Notwithstanding subdivision (a), a city, county, or city and county may impose or enforce minimum automobile parking requirements on a project that is located within one-half mile of public transit if the public agency makes written findings, within 30 days of the receipt of a completed application, that not imposing or enforcing minimum automobile parking requirements on the development would have a substantially negative impact, supported by a preponderance of the evidence in the record, on any of the following: (1) The city’s, county’s, or city and county’s ability to meet its share of the regional housing need in accordance with Section 65584 for low- and very low income households. (2) The city’s, county’s, or city and county’s ability to meet any special housing needs for the elderly or persons with disabilities identified in the analysis required pursuant to paragraph (7) of subdivision (a) of Section 65583. (3) Existing residential or commercial parking within one-half mile of the housing development project.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Transient lodging projects are not a 'project'",
+     "quote": "(6) “Project” does not include a project where any portion is designated for use as a hotel, motel, bed and breakfast inn, or other transient lodging, except where a portion of a housing development project is designated for use as a residential hotel, as defined in Section 50519 of the Health and Safety Code.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Event centers; pre-2023 commercial parking contracts",
+     "quote": "(d) Notwithstanding subdivision (a), an event center shall provide parking, as required by local ordinance, for employees and other workers.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    }
+   ]
+  },
+  "ca_adu_66323": {
+   "sections_read": [
+    {
+     "citation": "Cal. Gov. Code § 66323",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV66323.20255206 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Amended by Stats. 2025, Ch. 520, Sec. 6. (SB 543) Effective January 1, 2026."
+    },
+    {
+     "citation": "Cal. Gov. Code § 66314",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV66314.202567109 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Amended by Stats. 2025, Ch. 67, Sec. 109. (AB 1170) Effective January 1, 2026."
+    },
+    {
+     "citation": "Cal. Gov. Code § 66317",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV66317.20255203 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Amended by Stats. 2025, Ch. 520, Sec. 3. (SB 543) Effective January 1, 2026."
+    },
+    {
+     "citation": "Cal. Gov. Code § 66329",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV66329.20254912 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2025-10-10; history: Amended by Stats. 2025, Ch. 491, Sec. 2. (AB 462) Effective October 10, 2025."
+    },
+    {
+     "citation": "Cal. Gov. Code § 66313",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV66313.20255202 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Amended by Stats. 2025, Ch. 520, Sec. 2. (SB 543) Effective January 1, 2026."
+    },
+    {
+     "citation": "Cal. Gov. Code § 66321",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV66321.20255205 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Amended by Stats. 2025, Ch. 520, Sec. 5. (SB 543) Effective January 1, 2026."
+    },
+    {
+     "citation": "Cal. Gov. Code § 66322",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV66322.2024720 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2024-03-25; history: Added by Stats. 2024, Ch. 7, Sec. 20. (SB 477) Effective March 25, 2024."
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": null,
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "No such exclusion found. Read in full: § 66323 (subdivisions (a)-(f)), § 66314, § 66317, § 66329, § 66322. Keyword-searched only (flood, fire hazard, histor, farmland, agricultur, tribal): §§ 66310, 66311, 66312, 66313, 66315, 66316, 66318, 66319, 66320, 66321, 66325, 66326, 66328, 66330, 66331. Not returned by the bulk-table lookup and so NOT read: §§ 66324, 66327, 66332. § 66323(a) applies 'Notwithstanding Sections 66314 to 66322, inclusive', so the local-ordinance powers in § 66314 do not limit § 66323 units."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": null,
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "No such exclusion found. Read in full: § 66323 (subdivisions (a)-(f)), § 66314, § 66317, § 66329, § 66322. Keyword-searched only (flood, fire hazard, histor, farmland, agricultur, tribal): §§ 66310, 66311, 66312, 66313, 66315, 66316, 66318, 66319, 66320, 66321, 66325, 66326, 66328, 66330, 66331. Not returned by the bulk-table lookup and so NOT read: §§ 66324, 66327, 66332. § 66323(a) applies 'Notwithstanding Sections 66314 to 66322, inclusive', so the local-ordinance powers in § 66314 do not limit § 66323 units. Fire appears only as a setback condition for converted-space units: '(C) The side and rear setbacks are sufficient for fire and safety.' and in the sprinkler rule of § 66323(d)."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": null,
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "No such exclusion found. Read in full: § 66323 (subdivisions (a)-(f)), § 66314, § 66317, § 66329, § 66322. Keyword-searched only (flood, fire hazard, histor, farmland, agricultur, tribal): §§ 66310, 66311, 66312, 66313, 66315, 66316, 66318, 66319, 66320, 66321, 66325, 66326, 66328, 66330, 66331. Not returned by the bulk-table lookup and so NOT read: §§ 66324, 66327, 66332. § 66323(a) applies 'Notwithstanding Sections 66314 to 66322, inclusive', so the local-ordinance powers in § 66314 do not limit § 66323 units. The only land-use gate is zoning: '(a) Notwithstanding Sections 66314 to 66322, inclusive, a local agency shall ministerially approve an application for a building permit within a residential or mixed-use zone'. Land in an agricultural zone that is not a residential or mixed-use zone is outside § 66323 by that wording, not by an agricultural exclusion."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": null,
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "No such exclusion found. Read in full: § 66323 (subdivisions (a)-(f)), § 66314, § 66317, § 66329, § 66322. Keyword-searched only (flood, fire hazard, histor, farmland, agricultur, tribal): §§ 66310, 66311, 66312, 66313, 66315, 66316, 66318, 66319, 66320, 66321, 66325, 66326, 66328, 66330, 66331. Not returned by the bulk-table lookup and so NOT read: §§ 66324, 66327, 66332. § 66323(a) applies 'Notwithstanding Sections 66314 to 66322, inclusive', so the local-ordinance powers in § 66314 do not limit § 66323 units."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": null,
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "No such exclusion found. Read in full: § 66323 (subdivisions (a)-(f)), § 66314, § 66317, § 66329, § 66322. Keyword-searched only (flood, fire hazard, histor, farmland, agricultur, tribal): §§ 66310, 66311, 66312, 66313, 66315, 66316, 66318, 66319, 66320, 66321, 66325, 66326, 66328, 66330, 66331. Not returned by the bulk-table lookup and so NOT read: §§ 66324, 66327, 66332. § 66323(a) applies 'Notwithstanding Sections 66314 to 66322, inclusive', so the local-ordinance powers in § 66314 do not limit § 66323 units. Historic resources appear only as (1) a design-standard power in § 66314(b)(1) for local ordinances: 'standards that prevent adverse impacts on any real property that is listed in the California Register of Historical Resources.' (which § 66323 overrides), (2) a parking exemption in § 66322, and (3) garage-demolition notice in § 66314(f). None makes a lot ineligible."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Must be within a residential or mixed-use zone, on a lot with a proposed or existing single-family or multifamily dwelling",
+     "quote": "(a) Notwithstanding Sections 66314 to 66322, inclusive, a local agency shall ministerially approve an application for a building permit within a residential or mixed-use zone to create any of the following units, or any combination of the following units:",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Coastal Act still applies (§ 66329(a))",
+     "quote": "(a) Except as provided in subdivision (b), nothing in this article shall be construed to supersede or in any way alter or lessen the effect or application of the California Coastal Act of 1976",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Local ordinance area designation (§ 66314(a)) - applies to ordinance-based ADUs, overridden for § 66323 units",
+     "quote": "(a) Designate areas within the jurisdiction of the local agency where accessory dwelling units may be permitted. The designation of areas may be based on the adequacy of water and sewer services and the impact of accessory dwelling units on traffic flow and public safety.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "SB 9 interaction: no ADU required on parcels using both SB 9 authorities (§ 65852.21(f))",
+     "quote": "(f) Notwithstanding Article 2 (commencing with Section 66314) or Article 3 (commencing with Section 66333) of Chapter 13, a local agency shall not be required to permit an accessory dwelling unit or a junior accessory dwelling unit on parcels that use both the authority contained within this section and the authority contained in Section 66411.7.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    }
+   ]
+  },
+  "ca_ab2011_affordable": {
+   "sections_read": [
+    {
+     "citation": "Cal. Gov. Code § 65912.110",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.110.20226473 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2023-01-01; history: Stats. 2022, Ch. 647, Sec. 3 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.111",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.111.20242724 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2025-01-01; history: Amended by Stats. 2024, Ch. 272, Sec. 4. (AB 2243) Effective January 1, 2025. Repealed as of January 1, 2033, pursuant to Sec. 65912.105."
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.112",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.112.20242725 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2025-01-01; history: Stats. 2024, Ch. 272, Sec. 5 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.113",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.113.20242726 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2025-01-01; history: Stats. 2024, Ch. 272, Sec. 6 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.114",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.114.20255005 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 500, Sec. 5 (history line not captured)"
+    },
+    {
+     "citation": "Cal. Gov. Code § 65913.4",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65913.4.20257742 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Amended by Stats. 2025, Ch. 774, Sec. 2. (SB 597) Effective January 1, 2026. Repealed as of January 1, 2036, by its own provisions."
+    },
+    {
+     "citation": "Cal. Gov. Code § 65912.121",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "source_kind": "official",
+     "as_of": "LAW_SECTION_TBL row GOV65912.121.20255006 in pubinfo_2025.zip (archive Last-Modified header: Mon, 16 Nov 2026 05:26:36 GMT); row effective date 2026-01-01; history: Stats. 2025, Ch. 500, Sec. 6 (history line not captured)",
+     "note": "Article 3 (mixed-income, commercial corridors) site list, read for comparison; the record ca_ab2011_affordable is Article 2 (§§ 65912.110-65912.114)."
+    }
+   ],
+   "cross_reference": {
+    "quote_65912_111_e": "(e) It satisfies the requirements specified in paragraph (6) of subdivision (a) of Section 65913.4, exclusive of clause (iv) of subparagraph (A) of paragraph (6) of subdivision (a) of Section 65913.4.",
+    "note": "§ 65912.111(e) pulls in ALL of the CURRENT § 65913.4(a)(6) except clause (A)(iv). No 'as that section read on' date is given, so the current paragraph (6) is used. § 65912.121(g) has the same sentence."
+   },
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": true,
+     "quote": "(G) Within a special flood hazard area subject to inundation by the 1 percent annual chance flood (100-year flood) as determined by the Federal Emergency Management Agency in any official maps published by the Federal Emergency Management Agency. [...] (H) Within a regulatory floodway as determined by the Federal Emergency Management Agency in any official maps published by the Federal Emergency Management Agency, unless the development has received a no-rise certification in accordance with Section 60.3(d)(3) of Title 44 of the Code of Federal Regulations.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": "A development may be located on a site described in this subparagraph if either of the following are met: (i) The site has been subject to a Letter of Map Revision prepared by the Federal Emergency Management Agency and issued to the local jurisdiction. (ii) The site meets Federal Emergency Management Agency requirements necessary to meet minimum flood plain management criteria of the National Flood Insurance Program pursuant to Part 59 (commencing with Section 59.1) and Part 60 (commencing with Section 60.1) of Subchapter B of Chapter I of Title 44 of the Code of Federal Regulations.",
+     "note": "Via § 65912.111(e) -> current § 65913.4(a)(6)(G) and (H). Flood hazard area: allowed with a FEMA Letter of Map Revision or if the site meets NFIP minimum flood plain management criteria. Floodway: allowed only with a no-rise certification (in the quote). §§ 65912.110-65912.113 read in full; § 65912.114 keyword-searched (flood, fire, histor, farmland, agricultur, tribal, coastal); § 65913.4(a)(1)-(7) read in full."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": true,
+     "quote": "(D) Within a very high fire hazard severity zone, as determined by the Department of Forestry and Fire Protection pursuant to Section 51178, or within the state responsibility area, as defined in Section 4102 of the Public Resources Code. || § 65912.111(h): (h) For a vacant site, the site satisfies both of the following: (1) It does not contain tribal cultural resources, as defined by Section 21074 of the Public Resources Code, that could be affected by the development that were found pursuant to a consultation as described by Section 21080.3.1 of the Public Resources Code and the effects of which cannot be mitigated pursuant to the process described in Section 21080.3.2 of the Public Resources Code. (2) It is not within a very high fire hazard severity zone, as indicated on maps adopted by the Department of Forestry and Fire Protection pursuant to Section 4202 of the Public Resources Code or as designated pursuant to subdivisions (a) and (b) of Section 51179.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": "This subparagraph does not apply to sites that have adopted fire hazard mitigation measures pursuant to existing building standards or state fire mitigation measures applicable to the development, including, but not limited to, standards established under all of the following or their successor provisions: (i) Section 4291 of the Public Resources Code or Section 51182, as applicable. (ii) Section 4290 of the Public Resources Code. (iii) Chapter 7A of the California Building Code (Title 24 of the California Code of Regulations).",
+     "note": "Two separate rules. (1) Via § 65912.111(e): current § 65913.4(a)(6)(D) excludes a very high fire hazard severity zone (§ 51178) or the state responsibility area, but 'does not apply to sites that have adopted fire hazard mitigation measures'. (2) § 65912.111(h)(2): a VACANT site must not be in a very high fire hazard severity zone; that paragraph states no mitigation exception. So: vacant lot in VHFHSZ = ineligible; developed lot in VHFHSZ = ineligible unless the mitigation exception applies."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": true,
+     "quote": "(B) Either prime farmland or farmland of statewide importance, as defined pursuant to the United States Department of Agriculture land inventory and monitoring criteria, as modified for California, and designated on the maps prepared by the Farmland Mapping and Monitoring Program of the Department of Conservation, or land zoned or designated for agricultural protection or preservation by a local ballot measure that was approved by the voters of that jurisdiction.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "ENGINE FLAG MISMATCH: via § 65912.111(e) -> § 65913.4(a)(6)(B). The text names FMMP prime farmland / farmland of statewide importance and voter-approved agricultural protection zoning, not Williamson Act contracts or agricultural preserves. In the coastal zone only, (A)(v)(II) also excludes 'prime agricultural land, as defined in Sections 30113 and 30241 of the Public Resources Code'."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": null,
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "No exclusion for publicly owned or tribal land found in §§ 65912.110-65912.113 (read in full) or the incorporated § 65913.4(a)(6) (read in full). Related but different: for a vacant site, § 65912.111(h)(1) requires that it 'does not contain tribal cultural resources ... the effects of which cannot be mitigated' (see the fire quote for the full text); (a)(6)(I)-(K) exclude conservation-plan lands, protected-species habitat and conservation easements."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "(f) The development is not located on a site where either of the following apply: (1) The development would require the demolition of a historic structure that was placed on a national, state, or local historic register.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+     "exception_quote": null,
+     "note": "No exclusion for being inside a historic district or on a landmark parcel as such. The only historic rule is the quoted § 65912.111(f)(1): the site is ineligible if the development 'would require the demolition of a historic structure' on a national, state or local register. That cannot be decided from a district map alone."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Zone must principally permit office, retail or parking",
+     "quote": "(a) It is located in a zone where office, retail, or parking are a principally permitted use.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Urbanized area and 75 percent urban perimeter",
+     "quote": "(b) It is a legal parcel or parcels that meet either of the following: (1) It is within a city where the city boundaries include some portion of an urbanized area, as designated by the United States Census Bureau. (2) It is in an unincorporated area, and the legal parcel or parcels are wholly within the boundaries of an urbanized area, as designated by the United States Census Bureau. (c) At least 75 percent of the perimeter of the site adjoins parcels that are developed with urban uses. For purposes of this subdivision, parcels that are only separated by a street, pedestrian path, or bicycle path shall be considered to be adjoined.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Industrial use on or adjoining the site",
+     "quote": "(d) (1) It is not on a site or adjoined to any site where more than one-third of the square footage on the site is dedicated to industrial use.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Mobilehome / RV / special occupancy park",
+     "quote": "(2) The existing parcel of land or site that is governed under the Mobilehome Residency Law (Chapter 2.5 (commencing with Section 798) of Title 2 of Part 2 of Division 2 of the Civil Code), the Recreational Vehicle Park Occupancy Law (Chapter 2.6 (commencing with Section 799.20) of Title 2 of Part 2 of Division 2 of the Civil Code), the Mobilehome Parks Act (Part 2.1 (commencing with Section 18200) of Division 13 of the Health and Safety Code), or the Special Occupancy Parks Act (Part 2.3 (commencing with Section 18860) of Division 13 of the Health and Safety Code).",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Neighborhood plan area",
+     "quote": "(g) For a site within a neighborhood plan area, the neighborhood plan applicable to the site permitted multifamily housing development on the site.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Within 3,200 feet of oil or gas extraction or refining (§ 65912.113(d))",
+     "quote": "(d) None of the housing is located within 3,200 feet of a facility that actively extracts or refines oil or natural gas.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Coastal zone areas (current § 65913.4(a)(6)(A), minus clause (iv))",
+     "quote": "(A) (i) An area of the coastal zone subject to paragraph (1) or (2) of subdivision (a) of Section 30603 of the Public Resources Code. (ii) An area of the coastal zone that is not subject to a certified local coastal program or a certified land use plan. (iii) An area of the coastal zone that is vulnerable to five feet of sea level rise, as determined by the National Oceanic and Atmospheric Administration, the Ocean Protection Council, the United States Geological Survey, the University of California, or a local government’s coastal hazards vulnerability assessment. (iv) In a parcel within the coastal zone that is not zoned for multifamily housing. (v) In a parcel in the coastal zone and located on either of the following: (I) On, or within a 100-foot radius of, a wetland, as defined in Section 30121 of the Public Resources Code. (II) On prime agricultural land, as defined in Sections 30113 and 30241 of the Public Resources Code.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Wetlands",
+     "quote": "(C) Wetlands, as defined in the United States Fish and Wildlife Service Manual, Part 660 FW 2 (June 21, 1993).",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Hazardous waste site (exceptions follow in the statute)",
+     "quote": "(E) A hazardous waste site that is listed pursuant to Section 65962.5 or a hazardous waste site designated by the Department of Toxic Substances Control pursuant to Section 25356 of the Health and Safety Code, unless either of the following apply:",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Earthquake fault zone unless code compliant",
+     "quote": "(F) Within a delineated earthquake fault zone as determined by the State Geologist in any official maps published by the State Geologist, unless the development complies with applicable seismic protection building code standards adopted by the California Building Standards Commission under the California Building Standards Law (Part 2.5 (commencing with Section 18901) of Division 13 of the Health and Safety Code), and by any local building department under Chapter 12.2 (commencing with Section 8875) of Division 1 of Title 2.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Conservation plan lands",
+     "quote": "(I) Lands identified for conservation in an adopted natural community conservation plan pursuant to the Natural Community Conservation Planning Act (Chapter 10 (commencing with Section 2800) of Division 3 of the Fish and Game Code), habitat conservation plan pursuant to the federal Endangered Species Act of 1973 (16 U.S.C. Sec. 1531 et seq.), or other adopted natural resource protection plan.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Protected species habitat",
+     "quote": "(J) Habitat for protected species identified as candidate, sensitive, or species of special status by state or federal agencies, fully protected species, or species protected by the federal Endangered Species Act of 1973 (16 U.S.C. Sec. 1531 et seq.), the California Endangered Species Act (Chapter 1.5 (commencing with Section 2050) of Division 3 of the Fish and Game Code), or the Native Plant Protection Act (Chapter 10 (commencing with Section 1900) of Division 2 of the Fish and Game Code).",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    },
+    {
+     "what": "Conservation easement",
+     "quote": "(K) Lands under conservation easement.",
+     "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip"
+    }
+   ]
+  }
+ }
+}

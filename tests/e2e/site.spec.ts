@@ -1357,6 +1357,76 @@ test("methods panel financing and stormwater text come from sourced records (LA 
   expect(errors).toEqual([]);
 });
 
+// Found 19 Nov 2026 at 2107 Duxbury Cir (zone R1V2-O, assessor use "Single"): the Zoning row showed the mapped zone, but
+// the owner playbook said "Zoning is not on file" because it read a `zone` field LA's zone_rules rows do not have.
+test("an LA lot in a mapped single-family variation zone reaches the state-law screen with its zoning code (live click path)", async ({ page }) => {
+  let ring: number[][] = [];
+  await page.route(/LACounty_Parcel\/MapServer\/0\/query/, (route: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
+    body: JSON.stringify({ features: [{ attributes: { AIN: "5000000002", SitusFullAddress: "2 TEST ST LOS ANGELES CA", UseCode: "0100", UseType: "Residential", UseDescription: "Single",
+      Roll_LandValue: 400000, Roll_ImpValue: 150000, Roll_LandBaseYear: "2012", YearBuilt1: "1952", SQFTmain1: 1500, Bedrooms1: 4, Bathrooms1: 1, Units1: 1 }, geometry: { rings: [ring] } }] }) }));
+  await openPage(page);
+  // A point inside a real R1 variation polygon (R1V2, R1R3, ...) of the page's own LA zoning layer, where a zone_rules row matches.
+  const found = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s), Z = ev("D").layers.zoning, zCell = ev("zCell"), zoneAt = ev("zoneAt"), zoneRules = ev("zoneRules");
+    for (const k of Object.keys(Z.cells)) for (const z of zCell(k)) {
+      if (!/^R1[A-Z]\d/.test(z.zone) || z.cat !== "single-family" || !z.rings || !z.rings[0] || !zoneRules(z.zone, z.juris)) continue;
+      const r = z.rings[0], c = { lat: r.reduce((s: number, q: number[]) => s + q[0], 0) / r.length, lng: r.reduce((s: number, q: number[]) => s + q[1], 0) / r.length };
+      const hit = zoneAt(c);
+      if (hit && hit.zone === z.zone) return { ll: c, zone: z.zone as string };
+    }
+    return null;
+  });
+  expect(found).toBeTruthy();
+  const { ll, zone } = found as { ll: { lat: number; lng: number }; zone: string };
+  ring = [[ll.lng - 0.0002, ll.lat - 0.00012], [ll.lng + 0.0002, ll.lat - 0.00012], [ll.lng + 0.0002, ll.lat + 0.00012], [ll.lng - 0.0002, ll.lat + 0.00012], [ll.lng - 0.0002, ll.lat - 0.00012]];
+  await page.evaluate((p) => (0, eval)("houseAt")(p), ll);
+  await page.waitForFunction(() => { const b = document.querySelector("#house"); const ah = (0, eval)("typeof activeHouse !== 'undefined' ? activeHouse : null");
+    return !!b && !b.querySelector(".house-loading") && !!b.querySelector(".owner-playbook-card") && !!ah && !!ah.st && ah.st.rDone && ah.st.osmDone; }, null, { timeout: 60_000 });
+  const pb = await page.evaluate(() => (document.querySelector("#house .owner-playbook-card") as HTMLElement).innerText);
+  expect(pb).not.toContain("Zoning is not on file");
+  // The hazard checks the laws depend on are not answered in the test sandbox, so the panel may say "not confirmed".
+  // With those answers supplied (not historic, not in a floodway, not very-high fire), the same function screens the laws.
+  const scr = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s), ah = ev("activeHouse");
+    const R = { hpoz: { ok: true, v: [] }, hcm: { ok: true, v: [] }, hc: { ok: true, v: [] }, fema: { sfha: false }, fire: { vh: false } };
+    const out = ev("computePropertyPlaybook")(ah.a, 6000, {}, ev("zoneRules")(ev("zoneAt")(ah.ll).zone, "Los Angeles"), ah.ll, { R });
+    return { onFile: out.zoningOnFile, ids: out.all.map((x: any) => x.id), text: out.all.map((x: any) => x.rationale).join(" | ") };
+  });
+  expect(scr.onFile).toBe(true);
+  expect(scr.ids).toEqual(expect.arrayContaining(["lot_split_duplex", "adu"]));
+  expect(scr.text).toContain(`recorded zoning (${zone})`);
+  // Single-family needs the jurisdiction's published SB 9 list as well as the layer's category (docs/audit/la_sb9_zone_scope.md):
+  // the County lists "Zone R-1 or R-A" only, so a County A-1 lot the layer calls single-family is screened for no single-family law.
+  const cls = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s), Z = ev("D").layers.zoning, zCell = ev("zCell"), f = ev("bundleZoneClass"), pb = ev("computePropertyPlaybook");
+    const R = { hpoz: { ok: true, v: [] }, hcm: { ok: true, v: [] }, hc: { ok: true, v: [] }, fema: { sfha: false }, fire: { vh: false } };
+    const out: Record<string, any> = {};
+    for (const k of Object.keys(Z.cells)) for (const z of zCell(k)) {
+      const key = z.juris === "Unincorporated LA County" && z.cat === "single-family" ? (/^A-1/.test(z.zone) ? "countyA1" : /^R-1/.test(z.zone) ? "countyR1" : null)
+        : z.juris === "Los Angeles" && /^R3-1$/.test(z.zone) ? "cityR3" : z.juris === "Los Angeles" && z.cat === "single-family" && /^R1P/.test(z.zone) ? "cityR1P" : null;
+      if (!key || out[key] || !z.rings || !z.rings[0]) continue;
+      const r = z.rings[0], c = { lat: r.reduce((s: number, q: number[]) => s + q[0], 0) / r.length, lng: r.reduce((s: number, q: number[]) => s + q[1], 0) / r.length };
+      const hit = ev("zoneAt")(c);
+      if (!hit || hit.zone !== z.zone) continue;
+      out[key] = { cls: f(z), ids: pb({ AIN: "1", UseDescription: "Single" }, 8000, {}, null, c, { R }).all.map((x: any) => x.id) };
+    }
+    return out;
+  });
+  expect(cls.countyR1.cls).toBe("single-family");
+  expect(cls.countyR1.ids).toContain("lot_split_duplex");
+  expect(cls.countyA1.cls).toBe("none");
+  expect(cls.countyA1.ids).not.toContain("lot_split_duplex");
+  expect(cls.cityR3.cls).toBe("multifamily");
+  expect(cls.cityR3.ids).not.toContain("lot_split_duplex");
+  expect(cls.cityR1P.cls).toBe("none");   // parking variants are not on the City's list
+  // The Invest view's "This house" reads the same lot the same way.
+  await page.click("#view-switch [data-view=invest]");
+  await page.waitForFunction(() => { const h = document.querySelector("#iv-house"); return !!h && /Backyard home \(ADU\)/.test(h.textContent || ""); }, null, { timeout: 90_000 });
+  const ih = await page.evaluate(() => (document.querySelector("#iv-house") as HTMLElement).innerText);
+  expect(ih).not.toContain("zoning code unknown");
+  expect(ih).not.toContain("not classed here as single-family");
+});
+
 test("California house checks state SB 9, ADU sale and fee rules only as the statutes say (live click path, LA)", async ({ page }) => {
   let ll = { lat: 0, lng: 0 }, ring: number[][] = [];
   await page.route(/LACounty_Parcel\/MapServer\/0\/query/, (route: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
