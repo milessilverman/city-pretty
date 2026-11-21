@@ -1,0 +1,193 @@
+{
+ "ran_on": "2026-11-21T10:02:08.561Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "48453": {
+   "county": "Travis TX (West South Central)",
+   "state": "TX",
+   "points": [
+    {
+     "bg": "484530301001",
+     "lat": 30.381998,
+     "lng": -97.756404,
+     "service": "Travis Central Appraisal District parcels (City of Austin copy)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $769k, rent $1,672/mo, homes 475"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2026 release (file dated 2026-03-13), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"-2.6°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for TX"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Travis County · 484530301001; page \"Census area: Travis County · block group 484530301001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1817 for 48453; page \"HUD Fair Market Rent (FY2027): 1 bed $1,530 · 2 bed $1,817 · 3 bed $2,292/moAustin-Round Rock-San Marcos, TX MSA. HUD's voucher benchmark (rent plus utilities),\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 826 ft; page \"Ground elevation: 826 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Austin: Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "484530413001",
+     "lat": 30.421934,
+     "lng": -97.720369,
+     "service": "Travis Central Appraisal District parcels (City of Austin copy)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $563k, rent $2,293/mo, homes 628"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 5 pts (current release); page: 5 pts, Tree Equity Score 2026 release (file dated 2026-03-13), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 4.7 pts below its 50% goal; box: \"4.7 pts below its 50% goal\" / \"+1.6°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for TX"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Travis County · 484530413001; page \"Census area: Travis County · block group 484530413001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1817 for 48453; page \"HUD Fair Market Rent (FY2027): 1 bed $1,530 · 2 bed $1,817 · 3 bed $2,292/moAustin-Round Rock-San Marcos, TX MSA. HUD's voucher benchmark (rent plus utilities),\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 792 ft; page \"Ground elevation: 792 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Austin: Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "484530408001",
+     "lat": 30.373956,
+     "lng": -97.707929,
+     "service": "Travis Central Appraisal District parcels (City of Austin copy)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $470k, rent $1,488/mo, homes 688"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 10 pts (current release); page: 10 pts, Tree Equity Score 2026 release (file dated 2026-03-13), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 10.2 pts below its 50% goal; box: \"10.2 pts below its 50% goal\" / \"+2.3°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for TX"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Travis County · 484530408001; page \"Census area: Travis County · block group 484530408001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1817 for 48453; page \"HUD Fair Market Rent (FY2027): 1 bed $1,530 · 2 bed $1,817 · 3 bed $2,292/moAustin-Round Rock-San Marcos, TX MSA. HUD's voucher benchmark (rent plus utilities),\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 728 ft; page \"Ground elevation: 728 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Austin: Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9205' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9205' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9205' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_48453.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_48453.json.gz"
+   ]
+  }
+ }
+}

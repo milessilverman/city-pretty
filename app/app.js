@@ -2137,9 +2137,10 @@ const fmt$ = v => {
 const fmtN = v => v == null || isNaN(v) ? "–" : Math.round(v).toLocaleString();
 // Rent to the dollar: fmt$ rounds to thousands, which showed a $2,356 median rent as "$2k" (found by the live panel check).
 // Census ACS top-code for median gross rent is 3501 ("$3,500 or more"), bottom-code is 99/100 ("$100 or less").
+// Exactly 3500 is a published estimate, not the code (Census 2024 jam values: "$3,500 or more" = numeric 3501), so it is shown to the dollar.
 const fmtRent = v => {
   if (v == null || isNaN(v) || !v) return "–";
-  if (v >= 3500) return "$3,500 or more/mo";
+  if (v >= 3501) return "$3,500 or more/mo";
   if (v > 0 && v <= 100) return "$100 or less/mo";
   return "$" + Math.round(v).toLocaleString("en-US") + "/mo";
 };
