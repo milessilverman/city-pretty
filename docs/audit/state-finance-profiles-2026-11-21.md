@@ -31,8 +31,8 @@ pages themselves were kept in the session's scratch folder and are not committed
 
 | Status | Before (16 Nov) | After (21 Nov) |
 |---|---|---|
-| verified | 4 (AZ, CA, TX, WA) | 10 (AK, AL, AZ, CA, DC, KY, LA, NM, TX, WA) |
-| partially verified | 25 | 37 |
+| verified | 4 (AZ, CA, TX, WA) | 11 (AK, AL, AZ, CA, DC, KY, LA, NM, TX, WA, WY) |
+| partially verified | 25 | 36 |
 | could not check | 1 (IL) | 2 (NH, PR) |
 | unverified | 22 | 3 (IN, NY, PA) |
 
@@ -108,9 +108,14 @@ could-not-check, or set to unknown.
 | MA | partially verified -> partially verified | 1 | 0 | 1 | 0 | malegislature.gov; www.mass.gov returned 403 |
 | KS | partially verified -> partially verified | 1 | 1 | 0 | 0 | www.ksrevisor.gov |
 | NE | partially verified -> partially verified | 1 | 1 | 0 | 0 | nebraskalegislature.gov |
+| NV | partially verified -> partially verified | 1 | 1 | 0 | 0 | www.leg.state.nv.us |
+| IA | partially verified -> partially verified | 2 | 1 | 0 | 1 | www.legis.iowa.gov |
+| WY | partially verified -> verified | 4 | 2 | 2 | 0 | wyoleg.gov (Title 39 as compiled on the Legislature's site) |
 
-Not reached this round: ID, IA, MN, MO, MT, ND, NV, SD, UT, WV, WY (their open fields are unchanged and still listed as
-not confirmed).
+Not reached this round: ID, MN, MO, MT, ND, SD, UT, WV (their open fields are unchanged and still listed as not
+confirmed). code.wvlegislature.gov did not answer when tried; le.utah.gov returned only its menu for the section tried.
+
+Overall: 44 profiles touched, 175 fields checked: 93 confirmed, 18 corrected, 64 withheld (10 of them set to unknown).
 
 ## Corrections (old -> new, source)
 
@@ -140,6 +145,8 @@ All are also logged in `docs/DATA-AUDIT-AND-TRANSPARENCY.md` (21 Nov 2026 entry)
 | SC | uncaps_on_sale | false | true | S.C. Code 12-37-3140(A)(1)(b): value is set as of "December thirty-first of the year in which an assessable transfer of interest has occurred" |
 | VA | reassessment_cycle_years | 1 | 4 | Va. Code 58.1-3252: "a general reassessment of real estate every four years" (counties; 3, 5 or 6 by option) |
 | VT | reassessment_cycle_years | 3 | 6 | Department of Taxes: "Vermont towns are required to reappraise every six years as of January 2025" |
+| WY | annual_assessment_cap | null (no cap) | 0.04 | W.S. 39-11-105(a)(xliii): exempts assessed value of a single-family home "in excess of the prior year assessed value ... plus four percent (4%)" |
+| WY | homestead_exemption_rule | none | 25% of market value (first $1,000,000) | W.S. 39-11-105(a)(xlvi): "twenty-five percent (25%) of the fair market value of a single family residential structure and the associated improved land" |
 | WI | reassessment_cycle_years | 1 | 5 | DOR PB-060: "within 10% of full value in the same year, at least once within a five-year period" |
 
 Other record changes: LA's `source_url` pointed at Constitution art. VII s. 11 (Budgets) and now points at s. 18; CT, DE,

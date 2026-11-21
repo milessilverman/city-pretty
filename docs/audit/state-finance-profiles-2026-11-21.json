@@ -531,6 +531,29 @@
     }
    }
   },
+  "IA": {
+   "host": "www.legis.iowa.gov (Iowa Code)",
+   "status_before": "partially_verified",
+   "status_after": "partially_verified",
+   "fields": {
+    "reassessment_cycle_years": {
+     "status": "confirmed",
+     "source_url": "https://www.legis.iowa.gov/docs/code/428.4.pdf",
+     "quote": "Real estate shall be listed and assessed in 1981 and every two years thereafter.",
+     "note": "Iowa Code 428.4(1): each odd-numbered year is a reassessment year.",
+     "fetched_at": "2026-11-21T10:51:47.454430+00:00Z",
+     "http": "200"
+    },
+    "homestead_exemption_rule": {
+     "status": "not_confirmed",
+     "source_url": "https://www.legis.iowa.gov/docs/code/425.1.pdf",
+     "quote": "a credit against the tax on each eligible homestead in the state in an amount equal to the actual levy on the first four thousand eight hundred fifty dollars of actual value for each homestead",
+     "note": "Iowa Code 425.1(2). The $4,850 is right, but it is a tax credit computed on actual (market) value, not a deduction from assessed value as stored (flat_assessed); left not confirmed.",
+     "fetched_at": "2026-11-21T10:51:47.738853+00:00Z",
+     "http": "200"
+    }
+   }
+  },
   "IL": {
    "host": "tax.illinois.gov (Illinois Department of Revenue: PIO-16 'An Overview of Property Tax' and the Property Tax Relief page); www.ilga.gov still did not answer",
    "status_before": "could_not_check",
@@ -1104,6 +1127,21 @@
     }
    }
   },
+  "NV": {
+   "host": "www.leg.state.nv.us (Nevada Revised Statutes chapter 361)",
+   "status_before": "partially_verified",
+   "status_after": "partially_verified",
+   "fields": {
+    "reassessment_cycle_years": {
+     "status": "confirmed",
+     "source_url": "https://www.leg.state.nv.us/nrs/nrs-361.html",
+     "quote": "The county assessor shall then determine the taxable value of all such property, and shall then list and assess it to the person, firm, corporation, association or company owning it on July 1 of that fiscal year.",
+     "note": "NRS 361.260(1): taxable value is determined 'Each year'; a full reappraisal is required 'at least once every 5 years' (NRS 361.260(6)), with land values factored in other years.",
+     "fetched_at": "2026-11-21T10:51:30.195670+00:00Z",
+     "http": "200"
+    }
+   }
+  },
   "NY": {
    "host": "www.tax.ny.gov (Department of Taxation and Finance, Office of Real Property Tax Services); www.nysenate.gov (RPTL § 1805) returned 403",
    "status_before": "unverified",
@@ -1584,6 +1622,56 @@
      "status": "not_confirmed",
      "quote": "",
      "note": "Stored as 'none'. The Department's guide lists a 'Homestead tax credit' under assistance with property taxes, which is a credit rather than a reduction in assessed value; its terms were not read, so not confirmed."
+    }
+   }
+  },
+  "WY": {
+   "host": "wyoleg.gov (Wyoming Statutes, Title 39 as compiled on the Legislature's site when fetched)",
+   "status_before": "partially_verified",
+   "status_after": "verified",
+   "fields": {
+    "annual_assessment_cap": {
+     "status": "corrected",
+     "source_url": "https://wyoleg.gov/statutes/compress/title39.pdf",
+     "quote": "the amount of the exemption under this paragraph shall be any assessed value of the single family residential structure that is in excess of the prior year assessed value less any exemption authorized under this paragraph in the prior year, plus four percent (4%)",
+     "note": "Corrected from null (no cap). W.S. 39-11-105(a)(xliii), with the same 4% rule for the improved land under the home in (xliv): increases above 4% a year are exempt for single-family residential property. It does not apply to new construction or additions.",
+     "old": null,
+     "new": 0.04,
+     "fetched_at": "2026-11-21T10:52:20.270336+00:00Z",
+     "http": "200"
+    },
+    "uncaps_on_sale": {
+     "status": "confirmed",
+     "source_url": "https://wyoleg.gov/statutes/compress/title39.pdf",
+     "quote": "(II) The owner acquired the property during the prior calendar year.",
+     "note": "One of the cases in which 'The exemption under this paragraph is not applicable and the property shall be valued at full value'; transfers between spouses, by court order, to the prior owner's trust or company are not acquisitions.",
+     "fetched_at": "2026-11-21T10:52:20.270336+00:00Z",
+     "http": "200"
+    },
+    "reassessment_cycle_years": {
+     "status": "confirmed",
+     "source_url": "https://wyoleg.gov/statutes/compress/title39.pdf",
+     "quote": "All taxable property shall be annually valued at its fair market value.",
+     "note": "",
+     "fetched_at": "2026-11-21T10:52:20.270336+00:00Z",
+     "http": "200"
+    },
+    "homestead_exemption_rule": {
+     "status": "corrected",
+     "source_url": "https://wyoleg.gov/statutes/compress/title39.pdf",
+     "quote": "The amount of the exemption under this paragraph shall be twenty-five percent (25%) of the fair market value of a single family residential structure and the associated improved land, provided that the exemption shall only apply to the first one million dollars ($1,000,000.00) of the fair market value",
+     "note": "Corrected from 'none'. W.S. 39-11-105(a)(xlvi), the homeowner tax exemption; from tax year 2026 the owner must live in the home at least eight months of the year. The model applies the 25% without the $1,000,000 limit (stored as max_market_value_usd).",
+     "old": {
+      "type": "none",
+      "amount_or_pct": 0
+     },
+     "new": {
+      "type": "percent_market",
+      "amount_or_pct": 0.25,
+      "max_market_value_usd": 1000000
+     },
+     "fetched_at": "2026-11-21T10:52:20.270336+00:00Z",
+     "http": "200"
     }
    }
   }

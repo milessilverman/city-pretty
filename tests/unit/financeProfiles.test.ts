@@ -82,6 +82,8 @@ describe("state finance profiles", () => {
     expect(P.MA.reassessment_cycle_years).toBe(1); // G.L. c. 59, 2A: valuation as of 1 January each year
     expect(P.OH.homestead_exemption_rule).toBeNull(); // R.C. 323.152: seniors/disabled only, of true value
     expect(P.RI.res_assessment_ratio).toBeNull(); // R.I.G.L. 44-5-12: uniform percentage up to 100%
+    expect(P.WY.annual_assessment_cap).toBe(0.04); // W.S. 39-11-105(a)(xliii): increases above 4% exempt
+    expect(P.WY.homestead_exemption_rule).toMatchObject({ type: "percent_market", amount_or_pct: 0.25 }); // (xlvi)
   });
 
   it("a calculator field counts as confirmed only when it is not listed as unverified", () => {

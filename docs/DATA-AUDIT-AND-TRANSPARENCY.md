@@ -47,7 +47,7 @@ the record is **not** confirmed.
 | Research studies (`research.json`) | 39 | 8 | 21 | 3 | 7 (source link broken) | 13 nonexistent studies; all "$ per $1" figures; HealthLine figures corrected (round 3) | `audit/research-audit.md` |
 | Case studies (`case_studies.json`) | 8 | | 5 | 1 | 2 (source link broken) | all unsourced money figures nulled; HealthLine and Cultural Trail figures re-sourced (round 3) | `audit/research-audit.md` |
 | State housing laws (`statutes.json`) | 21 | 15 | 4 | 1 | 1 (Minneapolis 2040: cited law not confirmed) | 1 (a bill that never passed); 18 corrected | `audit/laws-finance-audit.md` |
-| State finance profiles (`state_finance_profiles.json`) | 52 | 10 (AK, AL, AZ, CA, DC, KY, LA, NM, TX, WA) | 37 | 2 (NH, PR) | 3 (IN, NY, PA: checked, nothing confirmed) | round 3: TX homestead $100,000 -> $140,000, TX reappraisal 1 -> 3 years, CO homestead 'none' -> unknown; round 4 (21 Nov): 26 values corrected or set to unknown in 20 states | `audit/laws-finance-audit.md`, `audit/state-finance-profiles-2026-11-21.md` |
+| State finance profiles (`state_finance_profiles.json`) | 52 | 11 (AK, AL, AZ, CA, DC, KY, LA, NM, TX, WA, WY) | 36 | 2 (NH, PR) | 3 (IN, NY, PA: checked, nothing confirmed) | round 3: TX homestead $100,000 -> $140,000, TX reappraisal 1 -> 3 years, CO homestead 'none' -> unknown; round 4 (21 Nov): 28 values corrected or set to unknown in 21 states | `audit/laws-finance-audit.md`, `audit/state-finance-profiles-2026-11-21.md` |
 | Funding programs (`funding_programs.json`) | 11 | 2 | 6 | 2 | 1 (source link broken) | round 3: CA Urban Greening funding source, cycle and portal corrected | `audit/laws-finance-audit.md` |
 | Construction unit costs (`unit_costs.json`) | 32 | 9 | 12 | 7 | 4 (no source) | 3 wrong bid prices corrected; CDOT Walsenburg price confirmed at its new address (round 3) | `audit/costs-transit-audit.md` |
 | Transit projects (`transit_pipelines.json`) | 5 | | 5 | | | invented housing/EV details nulled | `audit/costs-transit-audit.md` |
@@ -763,7 +763,7 @@ was made from a test that didn't cover the live page.
 - 8 unit costs and 2 rail corridors couldn't be reached from the audit machine (TxDOT, ADOT, FRA block it). Re-check
   from a normal browser.
 - State finance profiles (21 Nov): NH and PR could not be fetched; IN, NY and PA were checked but nothing could be
-  confirmed; 11 partly verified profiles (ID, IA, MN, MO, MT, ND, NV, SD, UT, WV, WY) were not re-checked in round 4
+  confirmed; 8 partly verified profiles (ID, MN, MO, MT, ND, SD, UT, WV) were not re-checked in round 4
   (`audit/state-finance-profiles-2026-11-21.md`). The page computes no tax-increment amount outside California.
 - **HUD Fair Market Rents (resolved FY2027):** FY2027 rents took effect 1 Oct 2026 (Federal Register
   2026-17891). Replaced the map-service pull with a direct machine pull from HUD's official FMR API
@@ -1259,7 +1259,7 @@ no block group in the Travis County file holds it, and the live check would repo
 Other counties' files were not searched for a stored 3500. The places that leave a top-coded rent out of a calculation
 (`m.rent < 3500` in `app/app.js`) were left as they are, so an exact 3500 is also left out there.
 
-### Correction: state finance profiles held numbers no source gave; 26 values corrected or withheld in 20 states (found and fixed 21 Nov 2026)
+### Correction: state finance profiles held numbers no source gave; 28 values corrected or withheld in 21 states (found and fixed 21 Nov 2026)
 
 **What was wrong.** 22 profiles in `app/data/state_finance_profiles.json` had never been checked, Illinois could not be
 checked on 16 Nov, and the four "verified" profiles (AZ, CA, TX, WA) had a quote on file for only some of the fields the
@@ -1308,11 +1308,14 @@ per-field evidence: `docs/audit/state-finance-profiles-2026-11-21.json`.
 - VT `reassessment_cycle_years` 3 -> 6: Department of Taxes, "required to reappraise every six years as of January 2025".
 - WI `reassessment_cycle_years` 1 -> 5: DOR PB-060, "within 10% of full value in the same year, at least once within a
   five-year period".
+- WY `annual_assessment_cap` null -> 0.04 and `homestead_exemption_rule` none -> 25% of market value (first $1,000,000):
+  W.S. 39-11-105(a)(xliii) exempts a home's assessed value "in excess of the prior year assessed value ... plus four percent
+  (4%)", and (a)(xlvi) exempts "twenty-five percent (25%) of the fair market value" of a single-family home and its land.
 - LA `source_url` pointed at Constitution art. VII s. 11 (Budgets); it now points at s. 18.
 - OR's homestead rule and CO's null cap had been counted as confirmed with no quote on file; both are now listed as not
   confirmed.
 
-**Result.** verified 4 -> 10 (AK, AL, AZ, CA, DC, KY, LA, NM, TX, WA); partly verified 25 -> 37; could not check 1 -> 2
+**Result.** verified 4 -> 11 (AK, AL, AZ, CA, DC, KY, LA, NM, TX, WA, WY); partly verified 25 -> 36; could not check 1 -> 2
 (NH, PR: no official host answered); unverified 22 -> 3 (IN, NY, PA: checked, nothing could be confirmed).
 New unit test (`tests/unit/financeProfiles.test.ts`): every tax-increment field counted as confirmed must carry a quote
 and an https source URL, and a verified profile may list no unverified field.
@@ -1323,6 +1326,6 @@ DC, Essex NJ and Cook IL (`data/backtests/live_check_finance_profiles_2026-11-21
 the downstate 33.3% ratio once Illinois's ratio was confirmed; the profile's new `scope_note` is now printed in both
 places and the rerun shows it.
 
-**Not done.** 11 partly verified profiles (ID, IA, MN, MO, MT, ND, NV, SD, UT, WV, WY) were not re-checked. Fields stored
+**Not done.** 8 partly verified profiles (ID, MN, MO, MT, ND, SD, UT, WV) were not re-checked. Fields stored
 as "no cap" or "no homestead exemption" were confirmed only where a source said so; most such fields stay listed as not
 confirmed. The advisor (Cloudflare Worker) does not read these profiles.

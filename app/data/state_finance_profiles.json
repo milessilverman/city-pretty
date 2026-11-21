@@ -933,21 +933,20 @@
     "statutory_citation": "Iowa Code \u00a7 441.21 (Rollback Assessment) & \u00a7 403 (Urban Renewal / TIF)",
     "source_url": "https://www.legis.iowa.gov/docs/ico/chapter/441.pdf",
     "retrieved": "2026-11-15",
-    "last_verified": null,
-    "verified_by": null,
+    "last_verified": "2026-11-21",
+    "verified_by": "state_statute_database",
     "verification": {
       "status": "partially_verified",
-      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
-      "checked_on": "2026-11-16",
+      "method": "Round 4 (21 Nov 2026): www.legis.iowa.gov (Iowa Code); per-field quotes in field_evidence. Earlier rounds: Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
+      "checked_on": "2026-11-21",
       "evidence": "res_assessment_ratio: 'the percentage of actual value at which agricultural and residential property shall be ass'",
       "unverified_fields": [
         "res_assessment_ratio",
         "annual_assessment_cap",
         "uncaps_on_sale",
-        "reassessment_cycle_years",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: res_assessment_ratio, annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -956,6 +955,20 @@
         "quote": "the percentage of actual value at which agricultural and residential property shall be assessed shall be calculated in accordance with the methods provided",
         "checked_on": "2026-11-16",
         "note": "Corrected from 0.5: Iowa's residential assessment percentage is recalculated each year by formula; no single number is correct."
+      },
+      "reassessment_cycle_years": {
+        "status": "confirmed",
+        "source_url": "https://www.legis.iowa.gov/docs/code/428.4.pdf",
+        "quote": "Real estate shall be listed and assessed in 1981 and every two years thereafter.",
+        "checked_on": "2026-11-21",
+        "note": "Iowa Code 428.4(1): each odd-numbered year is a reassessment year."
+      },
+      "homestead_exemption_rule": {
+        "status": "not_confirmed",
+        "source_url": "https://www.legis.iowa.gov/docs/code/425.1.pdf",
+        "quote": "a credit against the tax on each eligible homestead in the state in an amount equal to the actual levy on the first four thousand eight hundred fifty dollars of actual value for each homestead",
+        "checked_on": "2026-11-21",
+        "note": "Iowa Code 425.1(2). The $4,850 is right, but it is a tax credit computed on actual (market) value, not a deduction from assessed value as stored (flat_assessed); left not confirmed."
       }
     }
   },
@@ -1609,20 +1622,19 @@
     "statutory_citation": "Nev. Rev. Stat. \u00a7 361.225 (35% Taxable Ratio), \u00a7 361.4723 (3% Abatement) & \u00a7 278C (TIF)",
     "source_url": "https://www.leg.state.nv.us/nrs/nrs-361.html",
     "retrieved": "2026-11-15",
-    "last_verified": null,
-    "verified_by": null,
+    "last_verified": "2026-11-21",
+    "verified_by": "state_statute_database",
     "verification": {
       "status": "partially_verified",
-      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
-      "checked_on": "2026-11-16",
+      "method": "Round 4 (21 Nov 2026): www.leg.state.nv.us (Nevada Revised Statutes chapter 361); per-field quotes in field_evidence. Earlier rounds: Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
+      "checked_on": "2026-11-21",
       "evidence": "res_assessment_ratio: 'NRS 361.225 Rate of assessment. All property subject to taxation must be assessed at 35 pe'; annual_assessment_cap: 'an increase in the tax bill of the owner of a home by more than 3 percent over the tax bil'",
       "unverified_fields": [
         "annual_assessment_cap",
         "uncaps_on_sale",
-        "reassessment_cycle_years",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
     },
     "tax_bill_growth_cap": 0.03,
     "field_evidence": {
@@ -1639,6 +1651,13 @@
         "quote": "an increase in the tax bill of the owner of a home by more than 3 percent over the tax bill of that homeowner for the previous year constitutes a severe economic hardship",
         "checked_on": "2026-11-16",
         "note": "Corrected from 0.03: NRS 361.4723 limits growth in the tax bill of an owner-occupied single-family home, not the assessed value; stored as tax_bill_growth_cap."
+      },
+      "reassessment_cycle_years": {
+        "status": "confirmed",
+        "source_url": "https://www.leg.state.nv.us/nrs/nrs-361.html",
+        "quote": "The county assessor shall then determine the taxable value of all such property, and shall then list and assess it to the person, firm, corporation, association or company owning it on July 1 of that fiscal year.",
+        "checked_on": "2026-11-21",
+        "note": "NRS 361.260(1): taxable value is determined 'Each year'; a full reappraisal is required 'at least once every 5 years' (NRS 361.260(6)), with land values factored in other years."
       }
     }
   },
@@ -2751,31 +2770,27 @@
     "state_code": "WY",
     "res_assessment_ratio": 0.095,
     "comm_assessment_ratio": 0.095,
-    "annual_assessment_cap": null,
+    "annual_assessment_cap": 0.04,
     "uncaps_on_sale": true,
     "reassessment_cycle_years": 1,
     "homestead_exemption_rule": {
-      "type": "none",
-      "amount_or_pct": 0
+      "type": "percent_market",
+      "amount_or_pct": 0.25,
+      "max_market_value_usd": 1000000
     },
     "tif_vehicle_name": "WY Urban Renewal TIF",
     "statutory_citation": "Wyo. Stat. Ann. \u00a7 39-13-103 (9.5% Res Ratio, 2024 HB 45 4% Cap) & \u00a7 15-9 (TIF)",
     "source_url": "https://wyoleg.gov/statutes/compress/title39.pdf",
     "retrieved": "2026-11-15",
-    "last_verified": null,
-    "verified_by": null,
+    "last_verified": "2026-11-21",
+    "verified_by": "state_statute_database",
     "verification": {
-      "status": "partially_verified",
-      "method": "Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
-      "checked_on": "2026-11-16",
+      "status": "verified",
+      "method": "Round 4 (21 Nov 2026): wyoleg.gov (Wyoming Statutes, Title 39 as compiled on the Legislature's site when fetched); per-field quotes in field_evidence. Earlier rounds: Round 2 (16 Nov 2026): statute text or state revenue department page fetched; per-field evidence in field_evidence.",
+      "checked_on": "2026-11-21",
       "evidence": "res_assessment_ratio: 'All other property, real and personal ... nine and one-half percent (9.5%)'",
-      "unverified_fields": [
-        "annual_assessment_cap",
-        "uncaps_on_sale",
-        "reassessment_cycle_years",
-        "homestead_exemption_rule"
-      ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state)."
+      "unverified_fields": [],
+      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> verified; 2 field(s) confirmed, 2 corrected."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -2784,6 +2799,34 @@
         "quote": "All other property, real and personal ... nine and one-half percent (9.5%)",
         "checked_on": "2026-11-16",
         "note": ""
+      },
+      "annual_assessment_cap": {
+        "status": "corrected",
+        "source_url": "https://wyoleg.gov/statutes/compress/title39.pdf",
+        "quote": "the amount of the exemption under this paragraph shall be any assessed value of the single family residential structure that is in excess of the prior year assessed value less any exemption authorized under this paragraph in the prior year, plus four percent (4%)",
+        "checked_on": "2026-11-21",
+        "note": "Corrected from null (no cap). W.S. 39-11-105(a)(xliii), with the same 4% rule for the improved land under the home in (xliv): increases above 4% a year are exempt for single-family residential property. It does not apply to new construction or additions."
+      },
+      "uncaps_on_sale": {
+        "status": "confirmed",
+        "source_url": "https://wyoleg.gov/statutes/compress/title39.pdf",
+        "quote": "(II) The owner acquired the property during the prior calendar year.",
+        "checked_on": "2026-11-21",
+        "note": "One of the cases in which 'The exemption under this paragraph is not applicable and the property shall be valued at full value'; transfers between spouses, by court order, to the prior owner's trust or company are not acquisitions."
+      },
+      "reassessment_cycle_years": {
+        "status": "confirmed",
+        "source_url": "https://wyoleg.gov/statutes/compress/title39.pdf",
+        "quote": "All taxable property shall be annually valued at its fair market value.",
+        "checked_on": "2026-11-21",
+        "note": ""
+      },
+      "homestead_exemption_rule": {
+        "status": "corrected",
+        "source_url": "https://wyoleg.gov/statutes/compress/title39.pdf",
+        "quote": "The amount of the exemption under this paragraph shall be twenty-five percent (25%) of the fair market value of a single family residential structure and the associated improved land, provided that the exemption shall only apply to the first one million dollars ($1,000,000.00) of the fair market value",
+        "checked_on": "2026-11-21",
+        "note": "Corrected from 'none'. W.S. 39-11-105(a)(xlvi), the homeowner tax exemption; from tax year 2026 the owner must live in the home at least eight months of the year. The model applies the 25% without the $1,000,000 limit (stored as max_market_value_usd)."
       }
     }
   },
