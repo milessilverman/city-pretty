@@ -74,7 +74,7 @@ audit doc the same day.
   with the page's findings attached. Offline eval: `npm run eval:advisor -- --scripted` (58 cases, no wrong answers);
   it answers 0 of the 113 model-eval questions, because every one of them names an address or another place.
 - Optional Worker secret added: `NREL_API_KEY` for the solar tool (without it the tool keeps the shared DEMO_KEY).
-- Open: LA lots inside a mapped zone reach the legal screen with no zoning code (see the 19 Nov correction in
+- Resolved 21 Nov by merging `claude/upbeat-rubin-7orjxv` (live check `data/backtests/live_check_la_zoning_screen_2026-11-21.json`: 2107 Duxbury Cir, zone R1V2-O reaches the screen). Was: LA lots inside a mapped zone reach the legal screen with no zoning code (see the 19 Nov correction in
   `DATA-AUDIT-AND-TRANSPARENCY.md`), so ADU and lot-split answers there say "not determined".
 
 ## Running now (background)
