@@ -252,3 +252,46 @@ The method is the Northeast batch's (`small-counties-northeast.md`), unchanged.
 - Live check from R2 (`LIVE_PORT=9337`): Kittitas and Walla Walla, 3 points each, all with the house panel on live
   parcel records: all 10 checks pass at all 6 points. Data files from the r2.dev address (HEAD 200, GET 200).
 - R2: dry run "27 files, net +0.034 GB, projected 1.334 GB"; after 1,333,673,648 bytes (1,621 objects).
+
+## New Mexico (28 of 28 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Catron (35003) | 3,743 | 5 | 1,059,643 | D | 0 |
+| Chaves (35005) | 64,217 | 53 | 859,688 | C | 44 |
+| Cibola (35006) | 26,845 | 23 | 535,556 | C | 13 |
+| Colfax (35007) | 12,322 | 16 | 772,527 | C | 11 |
+| Curry (35009) | 47,638 | 43 | 139,260 | D | 37 |
+| De Baca (35011) | 1,576 | 2 | 191,297 | D | 0 |
+| Eddy (35015) | 61,105 | 44 | 571,562 | C | 41 |
+| Grant (35017) | 27,775 | 25 | 1,694,664 | C | 21 |
+| Guadalupe (35019) | 4,381 | 4 | 287,167 | C | 0 |
+| Harding (35021) | 741 | 1 | 230,304 | D | 0 |
+| Hidalgo (35023) | 4,041 | 3 | 580,831 | C | 0 |
+| Lea (35025) | 73,733 | 61 | 254,365 | C | 50 |
+| Lincoln (35027) | 20,224 | 23 | 544,773 | D | 17 |
+| Los Alamos (35028) | 19,435 | 17 | 162,754 | C | 17 |
+| Luna (35029) | 25,611 | 19 | 781,604 | C | 14 |
+| McKinley (35031) | 70,431 | 62 | 1,525,401 | C | 23 |
+| Mora (35033) | 4,149 | 5 | 355,982 | C | 0 |
+| Otero (35035) | 68,816 | 60 | 914,926 | D | 34 |
+| Quay (35037) | 8,564 | 12 | 269,835 | D | 9 |
+| Rio Arriba (35039) | 40,070 | 30 | 4,137,496 | C | 19 |
+| Roosevelt (35041) | 18,928 | 16 | 204,965 | D | 14 |
+| San Miguel (35047) | 26,850 | 31 | 670,080 | C | 18 |
+| Sierra (35051) | 11,500 | 12 | 1,412,755 | D | 11 |
+| Socorro (35053) | 16,200 | 14 | 943,486 | D | 8 |
+| Taos (35055) | 34,543 | 30 | 858,653 | C | 18 |
+| Torrance (35057) | 15,490 | 12 | 236,125 | C | 0 |
+| Union (35059) | 4,013 | 4 | 321,952 | D | 0 |
+| Valencia (35061) | 78,458 | 55 | 380,646 | C | 50 |
+| **28 counties** | **791,399** | **682** | **20,898,297** | 17 C, 11 D | 469 |
+
+- New Mexico cut alone: 148 s, peak osmium memory 4.16 GB, 152 MB. Build: fetch 11-95 s, build 74-109 s per county.
+- Census spot check: all 146 counties so far, 3,204 of 3,204 values equal (0% mismatch). Tract-median flags: 28
+  counties added, no existing county changed, 0 mismatches.
+- Crash counts: New Mexico has no state crash source connected.
+- Live check from R2 (`LIVE_PORT=9338`): Los Alamos and Taos, 3 points each; neither county has a parcel service on
+  the page (house rows not checkable); neighborhood, canopy, canopy goal, crash text, state laws and console pass at
+  all 6. Data files from the r2.dev address (HEAD 200, GET 200).
+- R2: dry run "29 files, net +0.021 GB, projected 1.355 GB"; after 1,354,578,978 bytes (1,649 objects).
