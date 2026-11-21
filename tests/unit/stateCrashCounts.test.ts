@@ -32,8 +32,11 @@ describe("rebuilt state crash counts", () => {
         expect(v[0]).toBeLessThanOrEqual(v[2]);
         expect(v[1]).toBeLessThanOrEqual(v[2]);
       }
-      // the boundary rule can only add crashes relative to strictly-inside counting
-      expect(rows.reduce((s, [, v]) => s + v[2], 0)).toBeGreaterThanOrEqual(m.strict_within_totals[2]);
+      // the boundary rule can only add crashes relative to strictly-inside counting. Each count is stored rounded to 4
+      // decimals (1/k parts, scripts/build_state_crash_counts.py), so the stored sum can fall short of the exact sum by
+      // at most 0.00005 per block group (e.g. 23003, built 21 Nov 2026: stored sum 3993.9998, strictly-inside total 3994).
+      const rounding = rows.length * 0.00005;
+      expect(rows.reduce((s, [, v]) => s + v[2], 0) + rounding).toBeGreaterThanOrEqual(m.strict_within_totals[2]);
     });
   }
 });

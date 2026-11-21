@@ -234,7 +234,10 @@ async function main() {
           const m = Object.assign({}, fileM);
           if (m.hv == null && CORR[bg] && CORR[bg].hv != null) m.hv = CORR[bg].hv;
           if (m.rent == null && CORR[bg] && CORR[bg].rent != null) m.rent = CORR[bg].rent;
-          const eHv = await fmt(m.hv), eRent = m.rent ? "$" + Math.round(m.rent).toLocaleString("en-US") + "/mo" : "–";   // to the dollar, formatted here
+          // Rent to the dollar, formatted here. Census top-codes median gross rent (B25064) as 3501 = "$3,500+" and
+          // bottom-codes it as 100 or less; those are shown as "$3,500 or more" / "$100 or less", not as a dollar figure.
+          const eHv = await fmt(m.hv), eRent = !m.rent ? "–" : m.rent >= 3501 ? "$3,500 or more/mo" : m.rent <= 100 ? "$100 or less/mo"
+            : "$" + Math.round(m.rent).toLocaleString("en-US") + "/mo";
           const eHomes = await page.evaluate((x) => (0, eval)("fmtN")(x), m.homes);
           const pass = panel.includes(`Typical home value${eHv}`) && panel.includes(`Median rent${eRent}`) && panel.includes(`Homes${eHomes}`);
           ok("neighborhood", pass, `expected home value ${eHv}, rent ${eRent}, homes ${eHomes}` + (pass ? "" : " | panel: " + (panel.match(/Typical home value.{0,140}/) || [""])[0]));
