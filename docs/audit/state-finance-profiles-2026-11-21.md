@@ -200,3 +200,8 @@ The Cloudflare Worker advisor (`workers/`) does not read `state_finance_profiles
 `STATE_FINANCE_PROFILES`, `assessment_ratio` and `financeProfile`). On the page, the profile is used only by the
 tax-increment section (`eifdSection`) and the methods panel (`methodsFinancingHtml`), which show only fields not listed
 in `unverified_fields`, label the record with its status, and compute nothing outside California.
+
+## Tests
+
+`npm test` (38 files, 894 tests) and `npm run typecheck` passed before each commit. `PW_PORT=9320 npm run test:e2e -- --trace off`
+ran once at the end, on commit `bab5a1b`: 87 passed (8.5 min).
