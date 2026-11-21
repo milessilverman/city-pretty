@@ -38,3 +38,36 @@ The method is the Northeast batch's (`small-counties-northeast.md`), unchanged.
 - Crash counts: Arizona has no state crash source connected; the files say crash gaps are not scored.
 - R2: before 1,220,931,278 bytes (1,503 objects); dry run "7 files, net +0.009 GB, projected 1.230 GB"; after
   1,230,170,981 bytes (1,509 objects).
+
+## Nevada (15 of 15 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Churchill (32001) | 25,805 | 20 | 411,232 | D | 16 |
+| Douglas (32005) | 49,623 | 35 | 530,124 | C | 28 |
+| Elko (32007) | 54,047 | 39 | 1,110,109 | C | 22 |
+| Esmeralda (32009) | 1,028 | 1 | 890,171 | C | 0 |
+| Eureka (32011) | 1,585 | 2 | 249,001 | D | 0 |
+| Humboldt (32013) | 17,289 | 14 | 921,939 | C | 12 |
+| Lander (32015) | 5,770 | 5 | 609,078 | C | 0 |
+| Lincoln (32017) | 4,405 | 5 | 723,308 | D | 0 |
+| Lyon (32019) | 61,680 | 40 | 766,661 | C | 24 |
+| Mineral (32021) | 4,542 | 5 | 488,987 | D | 0 |
+| Nye (32023) | 54,344 | 35 | 6,408,751 | C | 27 |
+| Pershing (32027) | 6,487 | 6 | 452,878 | C | 0 |
+| Storey (32029) | 4,140 | 3 | 301,510 | C | 1 |
+| White Pine (32033) | 8,735 | 9 | 377,155 | D | 5 |
+| Carson City (32510) | 58,384 | 45 | 263,453 | C | 44 |
+| **15 counties** | **357,864** | **264** | **14,504,357** | 10 C, 5 D | 179 |
+
+- Nevada cut alone: 112 s, peak osmium memory 4.10 GB, 154 MB. Build: fetch 14-190 s, build 87-159 s per county.
+- Census spot check: AZ and NV together 444 of 444 values equal (0% mismatch). Tract-median flags: 15 counties added,
+  no existing county changed, 0 mismatches.
+- OpenStreetMap ID for ID vs a live Overpass query of the same box (maps.mail.ru mirror; 504 twice on each first):
+  Greenlee AZ 1,235 = 1,235 roads, 0 = 0 bus stops; Esmeralda NV 1,810 = 1,810 roads, 14 = 14 bus stops (0%).
+- Live check from R2 (`LIVE_PORT=9333`): Carson City, 3 points with the house panel on live parcel records: all 10
+  checks pass at each (neighborhood, canopy, canopy goal, crash text, state laws, Census area, HUD rent, FEMA, USGS,
+  console); Douglas, 3 points, no parcel service (house rows not checkable), the rest pass. Both data files came from
+  the r2.dev address (HEAD 200, GET 200). Failed loads on the page: optional files (404), overpass-api.de blocked by
+  CORS from this machine, three 403s, as in earlier batches.
+- R2: dry run "16 files, net +0.015 GB, projected 1.245 GB"; after 1,244,679,103 bytes (1,524 objects).

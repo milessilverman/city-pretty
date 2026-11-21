@@ -1,0 +1,58 @@
+{
+ "_source": {
+  "script": "scripts/check_osm_extract_vs_overpass.py",
+  "note": "West small counties, 21 Nov 2026: ID-for-ID comparison of the county extract with a live Overpass query of the same box (maps.mail.ru mirror). Both counties are cut from us-west-latest.osm.pbf (data timestamp 2026-11-21T01:28:06Z) by osm_split.py. The mirror answered 504 twice on each county before answering."
+ },
+ "counties": {
+  "04011": {
+   "fips": "04011",
+   "box_s_w_n_e": "32.40635000020783,-109.51582900029324,33.79812300002303,-109.02670099994292",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-21T01:28:06Z",
+   "checked_at": "2026-11-21T12:12:27Z",
+   "roads": {
+    "direct": 1235,
+    "extract": 1235,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  },
+  "32009": {
+   "fips": "32009",
+   "box_s_w_n_e": "36.951110999846236,-118.44814400024724,38.49379699997494,-117.14476499987818",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-21T01:28:06Z",
+   "checked_at": "2026-11-21T12:16:29Z",
+   "roads": {
+    "direct": 1810,
+    "extract": 1810,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 14,
+    "extract": 14,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  }
+ }
+}
