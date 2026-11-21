@@ -1,0 +1,189 @@
+{
+ "_source": {
+  "script": "scripts/check_osm_extract_vs_overpass.py",
+  "note": "Montana small counties, 21 Nov 2026: ID-for-ID comparison of the county extract (cut from us-west-latest.osm.pbf, data timestamp 2026-11-21T01:28:06Z, by osm_split.py) with a live Overpass query of the same box (maps.mail.ru mirror). 30007 Broadwater is interior. 30005 Blaine borders Canada: its box reaches 49.02 N; the 16 roads missing from the extract were looked up by ID on the same mirror (blaine_missing_bounds) and every one lies wholly north of 49.005 N, i.e. in Canada, outside the us-west file."
+ },
+ "counties": {
+  "30007": {
+   "fips": "30007",
+   "box_s_w_n_e": "45.813499999766,-111.80794999978507,46.80186700026051,-111.03692899959813",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-21T01:28:06Z",
+   "checked_at": "2026-11-21T15:20:27Z",
+   "roads": {
+    "direct": 2408,
+    "extract": 2408,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  },
+  "30005": {
+   "fips": "30005",
+   "box_s_w_n_e": "47.69990000000182,-109.57175800028803,49.02042999985359,-108.21635700036857",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-21T01:28:06Z",
+   "checked_at": "2026-11-21T15:17:29Z",
+   "roads": {
+    "direct": 2378,
+    "extract": 2362,
+    "missing_from_extract": [
+     195287077,
+     195287081,
+     195287085,
+     195287130,
+     195287140,
+     195287148,
+     195287152,
+     195287157,
+     195288436,
+     195428810,
+     195603053,
+     195603072,
+     195603098,
+     195603101,
+     195603105,
+     195603117
+    ],
+    "extra_in_extract": [],
+    "n_missing": 16,
+    "n_extra": 0,
+    "match": false
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  }
+ },
+ "blaine_missing_bounds": [
+  {
+   "id": 195287077,
+   "highway": "unclassified",
+   "name": null,
+   "minlat": 49.0069536,
+   "maxlat": 49.0287795
+  },
+  {
+   "id": 195287081,
+   "highway": "unclassified",
+   "name": null,
+   "minlat": 49.0069536,
+   "maxlat": 49.0069801
+  },
+  {
+   "id": 195287085,
+   "highway": "unclassified",
+   "name": null,
+   "minlat": 49.005273,
+   "maxlat": 49.0287823
+  },
+  {
+   "id": 195287130,
+   "highway": "unclassified",
+   "name": null,
+   "minlat": 49.0081063,
+   "maxlat": 49.0287542
+  },
+  {
+   "id": 195287140,
+   "highway": "unclassified",
+   "name": null,
+   "minlat": 49.0052654,
+   "maxlat": 49.0053148
+  },
+  {
+   "id": 195287148,
+   "highway": "unclassified",
+   "name": null,
+   "minlat": 49.0069537,
+   "maxlat": 49.0287424
+  },
+  {
+   "id": 195287152,
+   "highway": "unclassified",
+   "name": null,
+   "minlat": 49.0069096,
+   "maxlat": 49.0070649
+  },
+  {
+   "id": 195287157,
+   "highway": "unclassified",
+   "name": null,
+   "minlat": 49.0052305,
+   "maxlat": 49.0053148
+  },
+  {
+   "id": 195288436,
+   "highway": "primary",
+   "name": "Highway 37",
+   "minlat": 49.0070649,
+   "maxlat": 49.1596354
+  },
+  {
+   "id": 195428810,
+   "highway": "unclassified",
+   "name": null,
+   "minlat": 49.0142886,
+   "maxlat": 49.0287912
+  },
+  {
+   "id": 195603053,
+   "highway": "unclassified",
+   "name": null,
+   "minlat": 49.0140725,
+   "maxlat": 49.028773
+  },
+  {
+   "id": 195603072,
+   "highway": "unclassified",
+   "name": null,
+   "minlat": 49.0052444,
+   "maxlat": 49.0056129
+  },
+  {
+   "id": 195603098,
+   "highway": "unclassified",
+   "name": null,
+   "minlat": 49.0056129,
+   "maxlat": 49.0069532
+  },
+  {
+   "id": 195603101,
+   "highway": "unclassified",
+   "name": null,
+   "minlat": 49.0068782,
+   "maxlat": 49.0287395
+  },
+  {
+   "id": 195603105,
+   "highway": "unclassified",
+   "name": null,
+   "minlat": 49.0069532,
+   "maxlat": 49.0287427
+  },
+  {
+   "id": 195603117,
+   "highway": "unclassified",
+   "name": null,
+   "minlat": 49.0115109,
+   "maxlat": 49.0287308
+  }
+ ]
+}

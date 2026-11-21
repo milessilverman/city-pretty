@@ -2525,6 +2525,26 @@
    "rent_own": 1,
    "rent_tract": 1
   },
+  "30021": {
+   "hv_own": 8,
+   "rent_own": 7,
+   "rent_tract": 3,
+   "hv_tract": 2
+  },
+  "30023": {
+   "hv_own": 11,
+   "rent_tract": 5,
+   "rent_own": 6
+  },
+  "30025": {
+   "hv_own": 3,
+   "rent_own": 3
+  },
+  "30027": {
+   "hv_own": 9,
+   "rent_own": 10,
+   "hv_tract": 1
+  },
   "30029": {
    "hv_own": 81,
    "rent_own": 60,
@@ -2536,6 +2556,66 @@
    "rent_tract": 13,
    "rent_own": 62,
    "hv_tract": 3
+  },
+  "30033": {
+   "hv_own": 1,
+   "rent_own": 1
+  },
+  "30035": {
+   "hv_own": 12,
+   "rent_tract": 4,
+   "hv_tract": 2,
+   "rent_own": 10
+  },
+  "30037": {
+   "hv_own": 1,
+   "rent_own": 1
+  },
+  "30039": {
+   "hv_own": 3,
+   "rent_own": 1
+  },
+  "30041": {
+   "hv_own": 13,
+   "rent_own": 9,
+   "rent_tract": 4,
+   "hv_tract": 1
+  },
+  "30043": {
+   "hv_own": 9,
+   "rent_own": 6,
+   "rent_tract": 3
+  },
+  "30045": {
+   "hv_own": 2,
+   "rent_tract": 1,
+   "rent_own": 1
+  },
+  "30047": {
+   "hv_own": 27,
+   "rent_own": 22,
+   "rent_tract": 5
+  },
+  "30049": {
+   "hv_own": 52,
+   "rent_own": 41,
+   "rent_tract": 13,
+   "hv_tract": 2
+  },
+  "30051": {
+   "hv_own": 2,
+   "rent_own": 2
+  },
+  "30053": {
+   "hv_own": 19,
+   "rent_tract": 7,
+   "rent_own": 13,
+   "hv_tract": 1
+  },
+  "30055": {
+   "hv_own": 2,
+   "rent_own": 1,
+   "rent_tract": 1
   },
   "30063": {
    "hv_own": 84,
