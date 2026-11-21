@@ -946,7 +946,7 @@
         "uncaps_on_sale",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: res_assessment_ratio, annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
+      "notes": "Round 2 (16 Nov) checked the fields it then listed in field_evidence. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: res_assessment_ratio, annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -999,7 +999,7 @@
         "uncaps_on_sale",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
+      "notes": "Round 2 (16 Nov) checked the fields it then listed in field_evidence. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -1237,7 +1237,7 @@
       "unverified_fields": [
         "res_assessment_ratio"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: res_assessment_ratio."
+      "notes": "Round 2 (16 Nov) checked the fields it then listed in field_evidence. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: res_assessment_ratio."
     },
     "field_evidence": {
       "reassessment_cycle_years": {
@@ -1297,7 +1297,7 @@
         "uncaps_on_sale",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 0 field(s) confirmed, 1 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
+      "notes": "Round 2 (16 Nov) checked the fields it then listed in field_evidence. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 0 field(s) confirmed, 1 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -1341,7 +1341,7 @@
       "unverified_fields": [
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 3: old legislature.mi.gov/statutes/ URL returns 404; replaced with the MCL page the field evidence was read from. Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: homestead_exemption_rule."
+      "notes": "Round 2 (16 Nov) checked the fields it then listed in field_evidence. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 3: old legislature.mi.gov/statutes/ URL returns 404; replaced with the MCL page the field evidence was read from. Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: homestead_exemption_rule."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -1588,7 +1588,7 @@
         "uncaps_on_sale",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
+      "notes": "Round 2 (16 Nov) checked the fields it then listed in field_evidence. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -1634,7 +1634,7 @@
         "uncaps_on_sale",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
+      "notes": "Round 2 (16 Nov) checked the fields it then listed in field_evidence. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 1 field(s) confirmed, 0 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
     },
     "tax_bill_growth_cap": 0.03,
     "field_evidence": {
@@ -1996,7 +1996,7 @@
         "uncaps_on_sale",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 0 field(s) confirmed, 0 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
+      "notes": "Round 2 (16 Nov) checked the fields it then listed in field_evidence. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 0 field(s) confirmed, 0 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -2208,7 +2208,7 @@
         "res_assessment_ratio",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 2 field(s) confirmed, 0 corrected; still not confirmed: res_assessment_ratio, homestead_exemption_rule."
+      "notes": "Round 2 (16 Nov) checked the fields it then listed in field_evidence. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 2 field(s) confirmed, 0 corrected; still not confirmed: res_assessment_ratio, homestead_exemption_rule."
     },
     "field_evidence": {
       "reassessment_cycle_years": {
@@ -2267,7 +2267,7 @@
         "annual_assessment_cap",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 0 field(s) confirmed, 1 corrected; still not confirmed: annual_assessment_cap, homestead_exemption_rule."
+      "notes": "Round 2 (16 Nov) checked the fields it then listed in field_evidence. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 0 field(s) confirmed, 1 corrected; still not confirmed: annual_assessment_cap, homestead_exemption_rule."
     },
     "reassessment_increase_cap": 0.15,
     "field_evidence": {
@@ -2591,7 +2591,7 @@
         "uncaps_on_sale",
         "homestead_exemption_rule"
       ],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 0 field(s) confirmed, 1 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
+      "notes": "Round 2 (16 Nov) checked the fields it then listed in field_evidence. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> partially_verified; 0 field(s) confirmed, 1 corrected; still not confirmed: annual_assessment_cap, uncaps_on_sale, homestead_exemption_rule."
     },
     "field_evidence": {
       "res_assessment_ratio": {
@@ -2790,7 +2790,7 @@
       "checked_on": "2026-11-21",
       "evidence": "res_assessment_ratio: 'All other property, real and personal ... nine and one-half percent (9.5%)'",
       "unverified_fields": [],
-      "notes": "Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> verified; 2 field(s) confirmed, 2 corrected."
+      "notes": "Round 2 (16 Nov) checked the fields it then listed in field_evidence. Round 2: removed non_pledgeable_share, rsmeans_cost_multiplier, tree_capital_cost_usd, climate_energy_regime (no source in any state). Round 4 (2026-11-21): status partially_verified -> verified; 2 field(s) confirmed, 2 corrected."
     },
     "field_evidence": {
       "res_assessment_ratio": {

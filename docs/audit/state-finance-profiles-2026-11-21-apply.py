@@ -81,7 +81,7 @@ for st, ev in out.items():
     if still: note += f"; still not confirmed: {', '.join(still)}"
     if withheld: note += ". Withheld (no source sentence found): " + " ".join(withheld)
     if ev.get("note"): note += ". " + ev["note"]
-    oldnotes = v.get("notes", "").replace("Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. ", "Before round 4 (21 Nov 2026) this profile was not checked against a source. ")
+    oldnotes = v.get("notes", "").replace("Only the 10 featured states were checked against statute text. Treat every number in this profile as unverified. ", "Before round 4 (21 Nov 2026) this profile was not checked against a source. ").replace("Round 2 checked the fields listed in field_evidence; every other number in this profile is unverified.", "Round 2 (16 Nov) checked the fields it then listed in field_evidence.")
     v["notes"] = (oldnotes + " " + note.rstrip(".") + ".").strip()
     if not any(e.get("quote") for e in ev["fields"].values()): v["method"] = f"Round 4 (21 Nov 2026): {ev['host']}.{earlier}"
     if status == "verified" or done:
