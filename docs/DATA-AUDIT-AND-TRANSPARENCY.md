@@ -1692,4 +1692,6 @@ parcel is more than 2x or under 0.5x the outline (61.8% of the parcels found). N
 Sample re-check: 0 of 30 parcel records and 0 of 20 OpenStreetMap elements differed. Not done: large single-storey retail with big parking (no tag
 defines it without guessing), and golf, brownfield or vacant land in a few Phoenix and Seattle clusters where the mirror kept answering 504 (listed in
 the report). Owner names are stored only for public agencies and companies; a test fails if a personal-name pattern appears. Nothing was corrected:
-no earlier record of this kind existed outside Los Angeles.
+no earlier record of this kind existed outside Los Angeles. One e2e test (`tests/e2e/invest.spec.ts`, budget test) expected Travis County's Properties card to say no sites
+have been measured; that stopped being true when its station-area sites were added, so it now expects the card to say they are measured from
+OpenStreetMap and the county parcel record and to show no homes, margin or market-value rows for them.

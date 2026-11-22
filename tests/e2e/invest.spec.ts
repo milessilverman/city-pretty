@@ -136,9 +136,12 @@ test("changing the budget changes which plays are listed", async ({ page }) => {
   await page.click("[data-iv-budget='4']");
   const big = await page.locator("#invest .iv-play").count();
   expect(big).toBeGreaterThan(small);
-  // Travis County has no underused site on this base (the hand-typed Austin golf course and parking lot were removed as
-  // fabricated, tests/unit/provenance.test.ts), so the card says none are listed instead of inventing one.
-  await expect(page.locator("#iv-sites")).toContainText("No underused sites have been measured");
+  // Travis County has no site in underused_sites.json (the hand-typed Austin golf course and parking lot were removed as
+  // fabricated, tests/unit/provenance.test.ts). Its sites are the station-area ones measured from OpenStreetMap
+  // (app/data/station_sites/48453.json, added 22 Nov 2026): each is labelled so, and none shows a home count, value if built or margin.
+  await expect(page.locator("#iv-sites")).toContainText("measured from OpenStreetMap and the county parcel record");
+  await expect(page.locator("#iv-sites")).not.toContainText("No underused sites have been measured");
+  expect(await page.locator("#iv-sites dt", { hasText: /Developer margin|Homes it could hold|Market land value/ }).count()).toBe(0);
   expect(await badWords(page)).toEqual([]);
   // the local project table has no length or cost, so the light-rail project is listed without a cost figure
   await expect(page.locator("#iv-transit")).toContainText("Project Connect");
