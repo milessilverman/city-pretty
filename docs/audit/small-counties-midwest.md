@@ -416,3 +416,111 @@ Files: `data/backtests/midwest_ne_census_spot_2026-11-22.json`, `data/backtests/
 
 Files: `data/backtests/midwest_ks_census_spot_2026-11-22.json`, `data/backtests/midwest_osm_xcheck_20001_2026-11-22.json`,
 `..._20003_...`, `data/backtests/live_check_panels_2026-11-22_midwest_ks.json`.
+
+## Minnesota (75 of 75 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Aitkin County (27001) | 16,056 | 19 | 433,945 | D | 0 |
+| Becker County (27005) | 35,343 | 31 | 464,814 | C | 13 |
+| Beltrami County (27007) | 46,512 | 37 | 782,719 | D | 19 |
+| Benton County (27009) | 41,593 | 29 | 308,166 | C | 18 |
+| Big Stone County (27011) | 5,127 | 6 | 349,010 | D | 0 |
+| Blue Earth County (27013) | 69,871 | 50 | 436,741 | C | 35 |
+| Brown County (27015) | 25,800 | 26 | 299,672 | D | 13 |
+| Carlton County (27017) | 36,518 | 29 | 397,528 | D | 16 |
+| Cass County (27021) | 30,992 | 29 | 1,031,309 | C | 0 |
+| Chippewa County (27023) | 12,377 | 12 | 286,701 | D | 6 |
+| Chisago County (27025) | 57,991 | 38 | 449,868 | D | 22 |
+| Clay County (27027) | 66,059 | 43 | 501,123 | C | 36 |
+| Clearwater County (27029) | 8,616 | 10 | 290,006 | D | 0 |
+| Cook County (27031) | 5,635 | 7 | 601,438 | D | 0 |
+| Cottonwood County (27033) | 11,458 | 13 | 306,144 | D | 0 |
+| Crow Wing County (27035) | 67,686 | 59 | 535,208 | D | 22 |
+| Dodge County (27039) | 21,045 | 16 | 226,266 | D | 5 |
+| Douglas County (27041) | 39,575 | 31 | 297,153 | D | 19 |
+| Faribault County (27043) | 13,914 | 18 | 187,014 | D | 0 |
+| Fillmore County (27045) | 21,414 | 23 | 549,608 | D | 0 |
+| Freeborn County (27047) | 30,623 | 31 | 196,164 | C | 20 |
+| Goodhue County (27049) | 47,943 | 36 | 1,211,230 | C | 16 |
+| Grant County (27051) | 6,127 | 5 | 160,053 | D | 0 |
+| Houston County (27055) | 18,653 | 13 | 665,432 | C | 3 |
+| Hubbard County (27057) | 21,831 | 18 | 300,220 | D | 0 |
+| Isanti County (27059) | 42,596 | 24 | 252,961 | D | 9 |
+| Itasca County (27061) | 45,275 | 45 | 1,007,167 | D | 12 |
+| Jackson County (27063) | 9,933 | 12 | 216,175 | C | 0 |
+| Kanabec County (27065) | 16,390 | 15 | 218,199 | D | 0 |
+| Kandiyohi County (27067) | 44,079 | 34 | 246,226 | C | 23 |
+| Kittson County (27069) | 4,084 | 5 | 212,346 | D | 0 |
+| Koochiching County (27071) | 11,833 | 14 | 719,902 | D | 10 |
+| Lac qui Parle County (27073) | 6,682 | 7 | 390,661 | D | 0 |
+| Lake County (27075) | 10,879 | 13 | 1,007,693 | D | 0 |
+| Lake of the Woods County (27077) | 3,821 | 5 | 309,249 | D | 0 |
+| Le Sueur County (27079) | 29,113 | 23 | 315,615 | C | 3 |
+| Lincoln County (27081) | 5,603 | 5 | 256,853 | D | 0 |
+| Lyon County (27083) | 25,503 | 24 | 343,610 | C | 12 |
+| McLeod County (27085) | 36,798 | 29 | 189,907 | D | 20 |
+| Mahnomen County (27087) | 5,358 | 5 | 208,029 | D | 0 |
+| Marshall County (27089) | 8,909 | 12 | 289,855 | D | 0 |
+| Martin County (27091) | 19,780 | 21 | 200,360 | D | 11 |
+| Meeker County (27093) | 23,468 | 22 | 253,905 | C | 9 |
+| Mille Lacs County (27095) | 27,125 | 20 | 261,596 | D | 3 |
+| Morrison County (27097) | 34,249 | 30 | 545,851 | D | 10 |
+| Mower County (27099) | 40,343 | 34 | 300,434 | C | 24 |
+| Murray County (27101) | 8,097 | 9 | 236,563 | D | 0 |
+| Nicollet County (27103) | 34,411 | 22 | 419,423 | C | 17 |
+| Nobles County (27105) | 22,041 | 22 | 223,653 | D | 13 |
+| Norman County (27107) | 6,367 | 8 | 190,446 | D | 0 |
+| Otter Tail County (27111) | 60,475 | 57 | 618,297 | C | 15 |
+| Pennington County (27113) | 13,791 | 14 | 125,092 | D | 11 |
+| Pine County (27115) | 29,640 | 23 | 648,017 | D | 0 |
+| Pipestone County (27117) | 9,284 | 11 | 154,240 | D | 0 |
+| Polk County (27119) | 30,705 | 32 | 736,205 | C | 16 |
+| Pope County (27121) | 11,418 | 12 | 222,366 | D | 6 |
+| Red Lake County (27125) | 3,915 | 5 | 144,501 | D | 0 |
+| Redwood County (27127) | 15,350 | 16 | 298,994 | C | 6 |
+| Renville County (27129) | 14,558 | 17 | 252,093 | C | 0 |
+| Rice County (27131) | 67,917 | 49 | 401,976 | C | 36 |
+| Rock County (27133) | 9,621 | 9 | 153,083 | D | 5 |
+| Roseau County (27135) | 15,302 | 14 | 286,995 | D | 0 |
+| Sibley County (27143) | 15,005 | 16 | 216,712 | D | 0 |
+| Steele County (27147) | 37,439 | 28 | 185,197 | C | 22 |
+| Stevens County (27149) | 9,739 | 11 | 196,407 | D | 6 |
+| Swift County (27151) | 9,748 | 12 | 239,417 | D | 0 |
+| Todd County (27153) | 25,575 | 25 | 363,776 | C | 1 |
+| Traverse County (27155) | 3,243 | 5 | 184,773 | D | 0 |
+| Wabasha County (27157) | 21,565 | 19 | 855,261 | D | 5 |
+| Wadena County (27159) | 14,256 | 15 | 205,547 | C | 6 |
+| Waseca County (27161) | 18,885 | 15 | 168,001 | C | 7 |
+| Watonwan County (27165) | 11,205 | 12 | 172,802 | D | 0 |
+| Wilkin County (27167) | 6,371 | 8 | 277,062 | D | 5 |
+| Winona County (27169) | 49,779 | 41 | 983,547 | C | 32 |
+| Yellow Medicine County (27173) | 9,451 | 14 | 555,805 | D | 0 |
+| **75 counties** | **1,795,733** | **1,569** | **28,730,377** | 25 C, 50 D | 618 |
+
+- Minnesota cut alone: 115 s, peak osmium memory 4.15 GB, 339 MB (cut while Kansas was building). Build: fetch 9-86 s,
+  build 170-245 s per county, four at a time (the Kansas post-processing and checks ran alongside, so these are slower
+  than Kansas's), about 65 min from the first county to the last.
+- Bus frequency: 57 counties have none (no feed that is read has a stop with 7-9 am departures in or near the county);
+  18 have feeds. Rail distance: 62 counties have no station in or near them.
+- Census spot check: 75 counties, 1,772 of 1,772 values equal (0% mismatch). Tract-median flags: 75 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru): Aitkin 2,072 = 2,072 roads, 0 = 0 bus stops; Becker 2,817 =
+  2,817 roads, 0 = 0 bus stops (0 missing, 0 extra).
+- Crash counts: Minnesota has no state crash source connected (`national/STATE_CRASH_SOURCES.md` notes a DPS layer with
+  2025 onwards only; none is wired into the pipeline).
+- Live check from R2 (`LIVE_PORT=9191`): Crow Wing and Blue Earth, 3 points each. Crow Wing's 3 points had the house
+  panel on live parcel records (Minnesota's statewide parcel service) and pass every check; Blue Earth's 3 points had no
+  parcel at the point, so their house-panel rows are not checkable and the rest pass: 42 pass, 0 fail, 12 not
+  checkable. Each data file came from the r2.dev address (GET 200).
+- Tests: `tests/unit/transitCorridors.test.ts` checks each corridor stop's `county_on_page` flag against the manifest. It
+  was not run after Kansas; after Minnesota it failed on four stops whose counties are now on the page, and
+  `app/data/intercity_transit_corridors.json` was updated: Cambridge MN (Isanti, 27059) and Hinckley MN (Pine, 27115),
+  Newton KS (Harvey, 20079) and Arkansas City KS (Cowley, 20035) now say `county_on_page: true`. Nothing else in the
+  file changed (4 lines).
+- R2: before 1,460,159,149 bytes (2,023 objects); dry run "76 files, net +0.029 GB, projected 1.489 GB"; after
+  1,488,908,420 bytes (2,098 objects): 28,749,271 bytes added (the 75 data files, 28,730,377, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/midwest_mn_census_spot_2026-11-22.json`, `data/backtests/midwest_osm_xcheck_27001_2026-11-22.json`,
+`..._27005_...`, `data/backtests/live_check_panels_2026-11-22_midwest_mn.json`.
