@@ -4370,8 +4370,8 @@ let parcelLayer = null;
 function houseHint() {
   const el = $("#house"); if (el) el.remove();
   const box = document.createElement("div"); box.id = "house"; box.className = "section";
-  box.innerHTML = `<p class="small muted">Zoom in to street level (zoom 17) and click a single home to check what that house can add: ADU, SB 9 split, pool, solar and more.</p>`;
-  const v = $("#panel .verdict"); if (v) v.after(box);
+  box.innerHTML = `<p class="small muted">Zoom in to street level (zoom 17) and click a single home to check what that house can add: ADU, SB 9 split, pool, solar and more. Its zoning, the housing laws that apply, its FEMA flood zone and its assessed value are listed with it. <button type="button" class="linkish" data-jump="zoomlots">Zoom in to this area's lots</button></p>`;
+  const v = $("#house-slot") || $("#panel .verdict"); if (v) v.after(box);
 }
 // Parcel use from the county's own use field. Many counties publish numeric codes (Florida's DOR "0100" is a
 // single-family home), so anything that is not clearly worded stays "unknown" rather than being guessed.
@@ -5668,7 +5668,7 @@ async function houseAt(ll, fOverride = null) {
   const _cRec = countyOf() || "County Assessor";
   box.innerHTML = `<h3>This home</h3><div class="house-loading"><span class="spin"></span><div>Pulling records from ${_cRec}…</div></div>`;
   const panel = $("#panel");
-  const v = $("#panel .verdict") || $("#panel h2");
+  const v = $("#house-slot") || $("#panel .verdict") || $("#panel h2");
   if (v && v.after) { v.after(box); }
   else if (panel) { panel.innerHTML = ""; panel.appendChild(box); }
   const tok = {}; houseTok = tok;
@@ -6888,6 +6888,46 @@ function onAduSliderChange(val) {
 // ---------------- address search: find a home by street address (County Assessor parcels)
 let addrTimer = null;
 function hideAddr() { const el = $("#addr-results"); if (el) el.remove(); }
+// --- Search helpers (usability pass, 20 Nov 2026) ---
+// Hides the map's hover label while the pointer is over the suggestion list. (It used to call Leaflet's
+// map.closeTooltip() with no tooltip, which throws: a script error on every pointer move over the list.)
+let _ttClosedAt = 0;
+function closeMapTooltips() {
+  const now = Date.now(); if (now - _ttClosedAt < 300) return; _ttClosedAt = now;
+  try { if (typeof map !== "undefined" && map) map.eachLayer(l => { if (l.isTooltipOpen && l.isTooltipOpen()) l.closeTooltip(); }); } catch (e) {}
+}
+let _addrSeq = 0;          // the newest suggestion lookup; older answers are dropped
+let _matchNote = null;     // { id, text }: what the last search matched, shown at the top of that area's panel
+function setMatchNote(id, text) { _matchNote = id ? { id: String(id), text: String(text || "") } : null; }
+// The names of the county that is open (search used to read Orange County's list in Los Angeles once it had loaded).
+function activeSearchMap() {
+  if (typeof activeCounty !== "undefined" && activeCounty === "oc" && typeof D_OC !== "undefined" && D_OC && D_OC.search) return D_OC.search;
+  return (typeof D !== "undefined" && D && D.meta && D.meta.search) || {};
+}
+// Names matching the typed text, best first: the exact name, names starting with it, names with a word starting with
+// it, then names containing it; shorter names first within each group.
+function rankNameMatches(text, limit) {
+  const q = String(text || "").trim().toLowerCase(); if (q.length < 2) return [];
+  const map = activeSearchMap(), out = [];
+  for (const k of Object.keys(map)) {
+    const n = k.toLowerCase(), i = n.indexOf(q); if (i < 0) continue;
+    const head = n.split(",")[0];
+    out.push({ name: k, bgId: map[k], rank: (n === q || head === q) ? 0 : i === 0 ? 1 : /[\s,(\-\/]/.test(n[i - 1]) ? 2 : 3 });
+  }
+  out.sort((a, b) => a.rank - b.rank || a.name.length - b.name.length || a.name.localeCompare(b.name));
+  return out.slice(0, limit || 5);
+}
+// Enter on a partly typed name ("silver", "echo p") opens the best name that starts with it, if there is one.
+function bestNameMatch(text) {
+  const q = String(text || "").trim(); if (q.length < 3) return null;
+  const m = rankNameMatches(q, 1)[0];
+  return m && m.rank <= 1 ? m : null;
+}
+// A geocoder answer that is an area (ZIP code, town, whole street), not a point: it has no single lot to open.
+function isAreaLevelMatch(h) {
+  const t = h && h.attrs && h.attrs.Addr_type;
+  return /^(Postal|PostalLoc|PostalExt|Locality|StreetName)$/.test(String(t || ""));
+}
 let addrPin = null;
 function jsonpGet(url, ms = 15000) {   // the Census Bureau geocoder answers JSONP (format=jsonp&callback=), not CORS
   return new Promise((resolve, reject) => {
@@ -7024,13 +7064,27 @@ async function addressSearchUS(text) {
     const svc = getParcelService({ lat: h.lat, lng: h.lon });
     if (svc && svc.counties && svc.counties.length) fips = svc.counties[0];
   }
-  if (fips && typeof openCounty === "function" && fips !== activeFips()) {
+  const hasFile = fips && typeof countyBundleEls === "function" && countyBundleEls().some(e => e.dataset.fips === fips);
+  if (fips && hasFile && typeof openCounty === "function" && fips !== activeFips()) {
     try { await openCounty(fips, bg); } catch(e) {}
   }
-  if (bg && byId.has(bg)) {
-    select(bg, false);
-  } else if (typeof selectAt === "function") {
-    selectAt({ lat: h.lat, lng: h.lon });
+  const hitF = (bg && byId.has(bg)) ? byId.get(bg) : allFeatures().find(f => pointInFeature(f, h.lon, h.lat));
+  if (!hitF && (!fips || fips !== activeFips())) {
+    // Nowhere to show: the map used to jump to an empty spot with the old county still named in the header.
+    showToast(`Found \u201c${h.label}\u201d, but City Pretty has no data for that place. Still showing ${countyOf()}.`);
+    return;
+  }
+  const area = isAreaLevelMatch(h), zip = h.attrs && /^Postal/.test(String(h.attrs.Addr_type || ""));
+  if (hitF) {
+    setMatchNote(hitF.properties.id, area
+      ? `Matched ${zip ? "ZIP code" : "the place"} \u201c${h.label}\u201d. ${zip ? "A ZIP code" : "It"} covers more than one area on this map; this is the area at its center. Click the map for the others.`
+      : `Matched the address \u201c${h.label}\u201d. This is the area around it; its lot is described under \u201cThis home\u201d below.`);
+    select(hitF.properties.id, area);
+  }
+  if (area) {
+    if (!hitF) { if (map.stop) map.stop(); map.setView([h.lat, h.lon], 13, { animate: true }); }
+    showToast(`Found: ${h.label}`);
+    return;
   }
   
   if (map.stop) map.stop();
@@ -7142,24 +7196,8 @@ async function addressSearch(text, go) {
       const qLower = q.toLowerCase();
 
       // 1. Match local neighborhoods and communities in current county
-      const localMatches = [];
-      let searchMap = null;
-      if (typeof isOrangeActive === "function" && isOrangeActive() && typeof D_OC !== "undefined" && D_OC && D_OC.search) {
-        searchMap = D_OC.search;
-      } else if (typeof D_OC !== "undefined" && D_OC && D_OC.search) {
-        searchMap = D_OC.search;
-      } else if (typeof D !== "undefined" && D && D.meta && D.meta.search) {
-        searchMap = D.meta.search;
-      }
-      if (searchMap) {
-        const keys = Object.keys(searchMap);
-        for (const k of keys) {
-          if (k.toLowerCase().includes(qLower)) {
-            localMatches.push({ name: k, bgId: searchMap[k] });
-            if (localMatches.length >= 4) break;
-          }
-        }
-      }
+      const seq = ++_addrSeq;
+      const localMatches = rankNameMatches(q, 5);
 
       // 2. Match Planned P3 Transit Stations & Hubs
       const stationMatches = [];
@@ -7210,36 +7248,37 @@ async function addressSearch(text, go) {
         }
       } catch(e) {}
 
+      if (seq !== _addrSeq) return;   // a newer keystroke has its own lookup under way: do not paint this older answer over it
       hideAddr();
       if (!localMatches.length && !stationMatches.length && !countyMatches.length && !cands.length) return;
 
       const box = document.createElement("div");
-      box.id = "addr-results";
+      box.id = "addr-results"; box.setAttribute("role", "group"); box.setAttribute("aria-label", "Search suggestions");
 
       let html = "";
       if (localMatches.length > 0) {
-        html += `<div style="padding:6px 10px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#64748b;background:#f8fafc;border-bottom:1px solid #e2e8f0;">Local Neighborhoods & Communities</div>`;
+        html += `<div style="padding:6px 10px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#475569;background:#f8fafc;border-bottom:1px solid #e2e8f0;">Neighborhoods in ${esc(countyOf())}</div>`;
         localMatches.forEach(m => {
           html += `<button type="button" class="addr-item" data-type="local" data-bg="${esc(m.bgId)}" data-label="${esc(m.name)}" style="text-align:left;display:flex;align-items:center;gap:8px;width:100%;padding:9px 12px;border:none;border-bottom:1px solid #f1f5f9;background:#fff;cursor:pointer;font-size:13px;color:#0f172a;transition:background 0.15s;"><span style="color:#0284c7;font-size:14px"><svg class=ic aria-hidden=true><use href=#i-city /></svg></span> <span>${highlightQuery(m.name, q)}</span></button>`;
         });
       }
 
       if (stationMatches.length > 0) {
-        html += `<div style="padding:6px 10px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#0284c7;background:#f0f9ff;border-bottom:1px solid #bae6fd;">Planned P3 Rail & Transit Stations</div>`;
+        html += `<div style="padding:6px 10px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#0369a1;background:#f0f9ff;border-bottom:1px solid #bae6fd;">Planned rail and transit stations</div>`;
         stationMatches.forEach((s, idx) => {
           html += `<button type="button" class="addr-item" data-type="station" data-idx="${idx}" style="text-align:left;display:flex;align-items:center;gap:8px;width:100%;padding:9px 12px;border:none;border-bottom:1px solid #f1f5f9;background:#fff;cursor:pointer;font-size:13px;color:#0f172a;transition:background 0.15s;"><span style="color:#0284c7;font-size:14px"><svg class=ic aria-hidden=true><use href=#i-train /></svg></span> <div><div style="font-weight:600">${highlightQuery(s.name, q)}</div><div style="font-size:11px;color:#64748b">${esc(s.metroName)}</div></div></button>`;
         });
       }
 
       if (countyMatches.length > 0) {
-        html += `<div style="padding:6px 10px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#64748b;background:#f8fafc;border-bottom:1px solid #e2e8f0;">US Counties</div>`;
+        html += `<div style="padding:6px 10px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#475569;background:#f8fafc;border-bottom:1px solid #e2e8f0;">Counties</div>`;
         countyMatches.forEach(m => {
           html += `<button type="button" class="addr-item" data-type="county" data-fips="${esc(m.fips)}" data-label="${esc(m.name)}" style="text-align:left;display:flex;align-items:center;gap:8px;width:100%;padding:9px 12px;border:none;border-bottom:1px solid #f1f5f9;background:#fff;cursor:pointer;font-size:13px;color:#0f172a;transition:background 0.15s;"><span style="color:#8b5cf6;font-size:14px"><svg class=ic aria-hidden=true><use href=#i-building /></svg></span> <span>${highlightQuery(m.name, q)}</span></button>`;
         });
       }
 
       if (cands.length > 0) {
-        html += `<div style="padding:6px 10px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#64748b;background:#f8fafc;border-bottom:1px solid #e2e8f0;">Specific Addresses & Houses (USA)</div>`;
+        html += `<div style="padding:6px 10px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#475569;background:#f8fafc;border-bottom:1px solid #e2e8f0;">Addresses, ZIP codes and places</div>`;
         cands.forEach((c, idx) => {
           html += `<button type="button" class="addr-item" data-type="cand" data-i="${idx}" style="text-align:left;display:flex;align-items:center;gap:8px;width:100%;padding:9px 12px;border:none;border-bottom:1px solid #f1f5f9;background:#fff;cursor:pointer;font-size:13px;color:#0f172a;transition:background 0.15s;"><span style="color:#e11d48;font-size:14px"><svg class=ic aria-hidden=true><use href=#i-pin /></svg></span> <span>${highlightQuery(c.address, q)}</span></button>`;
         });
@@ -7253,15 +7292,15 @@ async function addressSearch(text, go) {
 
         L.DomEvent.disableClickPropagation(box);
         L.DomEvent.disableScrollPropagation(box);
-        box.addEventListener("mouseenter", () => { if (typeof map !== "undefined" && map && map.closeTooltip) map.closeTooltip(); });
-        box.addEventListener("mousemove", (e) => { e.stopPropagation(); if (typeof map !== "undefined" && map && map.closeTooltip) map.closeTooltip(); });
-        box.addEventListener("mouseover", (e) => { e.stopPropagation(); if (typeof map !== "undefined" && map && map.closeTooltip) map.closeTooltip(); });
+        box.addEventListener("mouseenter", () => { closeMapTooltips(); });
+        box.addEventListener("mousemove", (e) => { e.stopPropagation(); closeMapTooltips(); });
+        box.addEventListener("mouseover", (e) => { e.stopPropagation(); closeMapTooltips(); });
 
         box.querySelectorAll("button.addr-item").forEach(b => {
           b.onmouseenter = () => {
             box.querySelectorAll("button.addr-item").forEach(other => other.style.background = "#fff");
             b.style.background = "#e0f2fe";
-            if (typeof map !== "undefined" && map && map.closeTooltip) map.closeTooltip();
+            closeMapTooltips();
           };
           b.onmouseleave = () => { b.style.background = "#fff"; };
           b.onclick = (e) => {
@@ -7271,6 +7310,7 @@ async function addressSearch(text, go) {
               const bgId = b.dataset.bg;
               qInput.value = b.dataset.label;
               hideAddr();
+              if (bgId) setMatchNote(bgId, "Matched the name \u201c" + b.dataset.label + "\u201d.");
               if (bgId && typeof select === "function") select(bgId, true);
             } else if (type === "station") {
               const s = stationMatches[+b.dataset.idx];
@@ -8316,6 +8356,86 @@ function p3Section(p, m) {
 }
 
 
+// --- Neighborhood panel summary (usability pass, 20 Nov 2026). No figure is computed here: every value is one the
+// panel already showed, moved to the top and given a plain label, its unit and its source line.
+function panelNotesHtml(id, p, m) {
+  let h = "";
+  if (_matchNote && _matchNote.id === String(id) && _matchNote.text) h += `<p class="match-note" id="match-note" role="status">${esc(_matchNote.text)}</p>`;
+  let same = 0;
+  try { for (const f of allFeatures()) { const q = f.properties; if (q && q.n === p.n && q.c === p.c) same++; } } catch (e) {}
+  if (same > 1) h += `<p class="area-note" id="area-note">One of <b>${fmtN(same)}</b> areas on this map named ${esc(p.n)}. The numbers below are for this one area${m.homes != null ? ` (${fmtN(m.homes)} homes)` : ""}, outlined on the map, not for the whole neighborhood.</p>`;
+  return h;
+}
+const NOF = why => `<span class="nof">not on file</span>${why ? ": " + why : ""}`;
+function glanceHtml(id, p, m, oc, ocReal) {
+  const acsLbl = oc && !ocReal ? "estimate (preliminary)" : ocReal ? "Census ACS 2020–24" : "Census ACS 5-Year";
+  const z = m.z && m.z.top ? m.z : null;   // the area's own zoning shares from the county file only (never the zones that happen to be in the map view)
+  const zTop = z ? String(z.top || "").split("; ").filter(x => x && !/ 0%$/.test(x))[0] : null;
+  const school = m.fc && m.fc.school != null ? (m.fc.school < 80.45 ? "<0.1 mi" : (m.fc.school / 1609).toFixed(1) + " mi") : null;
+  return `<section class="section glance" id="glance" data-sec="glance" aria-labelledby="glance-h"><h3 id="glance-h">The numbers for this area</h3><div class="tiles">
+    ${tile("Typical home value", fmt$(m.hv), esc(oc && !ocReal ? "neighborhood estimate (preliminary)" : (() => { const t = hvSourceText(m.hvs), n = acsNote(id, "hv", m); return n && !/tract/.test(t) ? (t ? t + "; " : "") + n : t; })()))}
+    ${tile("Median rent", fmtRent(m.rent), m.rent == null ? NOF("no rent figure for this area in the county file") : "per month · " + acsLbl + (acsNote(id, "rent") ? ": " + acsNote(id, "rent") : ""))}
+    ${tile("Household income", m.inc != null ? fmt$(m.inc) : "–", m.inc == null ? NOF("no income figure for this area in the county file") : "median, per year · " + acsLbl)}
+    ${tile("Homes", fmtN(m.homes), [m.own != null ? Math.round(m.own) + "% owner-occupied" : "", m.pop != null ? fmtN(m.pop) + " residents" : ""].filter(Boolean).join(" · "))}
+    ${tile("Violent crime", m.vc != null ? (+m.vc).toFixed(1) + " per 1k" : "no data", m.vc != null ? `per 1,000 residents, 12 months · ${esc(m.ag || "")}` : (activeFips() === "06037" ? "independent police" : isCAActive() ? "agency not in CA DOJ data" : "no crime source outside California"))}
+    <div class="tile" id="glance-crash"><div class="k">Serious crashes</div><div class="v">…</div><div class="s">loading the crash counts</div></div>
+    ${tile("Buses per hour", m.bt != null ? Math.round(m.bt) + "/hr" : busUnknown(m) ? "unknown" : "–", m.bt != null ? "at the busiest stop" : busUnknown(m) ? "a bus operator's schedule is missing here" : NOF("no bus schedule counted here"))}
+    ${tile("Nearest rail", m.rm != null ? (m.rm / 1609).toFixed(1) + " mi" : "–", m.rm != null ? "straight-line distance" : NOF("no rail distance in the county file"))}
+    ${tile("Nearest school", school || "–", school ? "from the middle of this area" : NOF("no school distance in the county file"))}
+    ${tile("Zoning", zTop ? esc(zTop) : "–", zTop ? `most common zone, share of zoned land · <button type="button" class="linkish" data-jump="zoning">what it allows</button>` : NOF("no zoning shares for this area in the county file") + ` · <button type="button" class="linkish" data-jump="zoning">state housing laws</button>`)}
+    ${tile("Flood zone", "by lot", `FEMA maps flood zones lot by lot · <button type="button" class="linkish" data-jump="flood">see a lot's flood zone</button>`)}
+    ${tile("Heat vs. urban area", m.ht != null ? (m.ht > 0 ? "+" : "") + (+m.ht).toFixed(1) + "°F" : "–", m.ht == null ? NOF("no heat figure for this area") : oc && !ocReal ? "estimate (preliminary)" : ocReal ? "Tree Equity Score 2021 vs urbanized-area mean" : "Tree Equity Score 2021 (2010 block groups)")}
+  </div></section>`;
+}
+// The crash tile reads the same count as the profile row (crashCountsFor loads its file on first use, so it is filled in
+// once the file has arrived; the profile row could only show it on a second visit).
+function fillCrashTile(id, tries) {
+  const el = document.getElementById("glance-crash"); if (!el || selected !== id) return;
+  const fips = activeFips(), cc = crashCountsFor(fips);
+  if (cc === undefined && (tries || 0) < 40) { setTimeout(() => fillCrashTile(id, (tries || 0) + 1), 250); return; }
+  const m = (D.details[id] || {}).m || {}, row = cc ? cc[id] : null, yrs = cc && cc._meta && Array.isArray(cc._meta.years) ? cc._meta.years.join("–") : "";
+  let v = "–", s = NOF("no located crash records for this county");
+  if (Array.isArray(row)) { v = crashN(row[1]); s = `killed or seriously injured${yrs ? ", " + yrs : ""}; inside or on its boundary streets` + (Number.isInteger(+row[1]) ? "" : " (a crash on a shared boundary is split between the areas, so the count can be a fraction)"); }
+  else if (m.ksi != null) { v = fmtN(m.ksi); s = "fatal or severe crashes, older count (boundary crashes on one side only)"; }
+  el.querySelector(".v").textContent = v; el.querySelector(".s").innerHTML = s;
+}
+function panelJumpHtml(p) {
+  const b = (k, t) => `<button type="button" data-jump="${k}">${t}</button>`;
+  return `<nav class="panel-jump" id="panel-jump" aria-label="Jump to a part of this panel"><button type="button" class="pj-name" data-jump="top" title="Back to the top of ${esc(p.n)} and show it on the map"><svg class=ic aria-hidden=true><use href=#i-pin /></svg><span>${esc(p.n)}</span></button>${b("glance", "Numbers")}${b("home", "A lot")}${b("zoning", "Zoning")}${b("projects", "Projects")}${b("sites", "Sites")}${b("profile", "All numbers")}</nav>`;
+}
+function panelJump(key) {
+  const P = document.getElementById("panel"); if (!P) return;
+  if (key === "top") {
+    const f = byId.get(selected);
+    if (f && typeof map !== "undefined" && map) { const b = L.geoJSON(f).getBounds(); if (b && b.isValid()) map.fitBounds(b, { maxZoom: 15, padding: [60, 60] }); }
+    P.scrollTop = 0; if (getComputedStyle(P).overflowY === "visible") window.scrollTo(0, 0);
+    const nm = document.getElementById("panel-name"); if (nm) nm.focus({ preventScroll: true });
+    return;
+  }
+  if (key === "zoomlots") {   // lots can be clicked from zoom 16; go to the middle of the open area at street level
+    const f = byId.get(selected);
+    if (f && typeof map !== "undefined" && map) { const b = L.geoJSON(f).getBounds(); if (b && b.isValid()) map.setView(b.getCenter(), 17); }
+    if (getComputedStyle(P).overflowY === "visible") window.scrollTo(0, 0);
+    return;
+  }
+  if (key === "flood") {   // a lot's FEMA flood zone is in its live public records
+    const lf = document.querySelector("#house [data-live-facts]");
+    if (lf) { lf.scrollIntoView({ block: "start" }); return; }
+    key = "home";
+  }
+  if (key === "home" && !document.getElementById("house") && typeof houseHint === "function") houseHint();
+  const el = key === "home" ? (document.getElementById("house") || document.getElementById("house-slot")) : P.querySelector(`[data-sec="${key}"]`);
+  if (!el) return;
+  if (el.tagName === "DETAILS") el.open = true;
+  el.scrollIntoView({ block: "start" });
+  const fo = el.tagName === "DETAILS" ? el.querySelector("summary") : el; if (fo && fo.focus) { if (!fo.hasAttribute("tabindex") && fo.tagName !== "SUMMARY") fo.setAttribute("tabindex", "-1"); fo.focus({ preventScroll: true }); }
+}
+document.addEventListener("click", e => { const t = e.target && e.target.closest ? e.target.closest("#panel [data-jump]") : null; if (t) { e.preventDefault(); panelJump(t.dataset.jump); } });
+// "What to build here": the Invest view for the area that is open, not the county's first-ranked one.
+function openInvestFor(id) {
+  if (window.cpInvest && typeof window.cpInvest.openFor === "function") window.cpInvest.openFor(id);
+  else { const b = document.querySelector('#view-switch [data-view="invest"]'); if (b) b.click(); }
+}
 // Bounds to fit for a block group. A block group of islands on both sides of the 180th meridian (Aleutians West) is stored on the
 // continuous longitude scale (166 W = 194), so its own bounds are 20+ degrees wide, mostly ocean; its largest part is fitted instead.
 // Every other block group: its bounds, as before.
@@ -8359,20 +8479,23 @@ function select(id, fly) {
 
   const topRng = (top && D.catalog[top.id]) ? formatVpdRange(top.vpd, D.catalog[top.id]?.grade, top.id, m) : null;
   const inC = compareList.includes(id), oc = isOCArea(m), ocReal = oc && !!(D_OC && D_OC.meta && D_OC.meta.schema >= 2);
-  let h = `<div class="eyebrow">${String(id).length === 12 ? "BLOCK GROUP" : "CENSUS TRACT"} ${esc(id)} · ${esc(p.c)} · ${fmtN(m.acres)} acres</div><h2>${esc(p.n)}</h2>
-    <p class="subname">Name from ${esc(m.ns || "")}${m.csa && m.csa !== p.n && !m.county ? " · County area: " + esc(m.csa) : ""}</p>
+  let h = `<div class="eyebrow" title="${String(id).length === 12 ? "A Census block group: the smallest area the Census publishes these figures for, usually a few hundred homes." : "A Census tract: a Census area of a few thousand people."}">${String(id).length === 12 ? "CENSUS BLOCK GROUP" : "CENSUS TRACT"} ${esc(id)} · ${esc(p.c)} · ${fmtN(m.acres)} acres</div><h2 id="panel-name" tabindex="-1">${esc(p.n)}</h2>
+    <p class="subname">Name from ${esc(m.ns || "")}${m.csa && m.csa !== p.n && !m.county ? " · County area: " + esc(m.csa) : ""}</p>${panelNotesHtml(id, p, m)}
     <div class="action-bar">
+      <button type="button" class="action-pill${inC ? " active" : ""}" id="btn-compare-panel" onclick="toggleCompare(this.dataset.geoid)" data-geoid="${esc(id)}">${inC ? "✓ In comparison (remove)" : "<svg class=ic aria-hidden=true><use href=#i-compare /></svg> Add to compare"}</button>
+      <button type="button" class="action-pill" id="btn-compare-open" onclick="openCompareDrawer()" title="Open the side-by-side comparison"${compareList.length ? "" : " hidden"}>View comparison (${compareList.length})</button>
+      <button type="button" class="action-pill" id="btn-build-here" onclick="openInvestFor(this.dataset.geoid)" data-geoid="${esc(id)}" title="Open the Invest view for this area: what to build and what it could return"><svg class=ic aria-hidden=true><use href=#i-trend /></svg> What to build here</button>
       <button type="button" class="action-pill" onclick="copyShareLink()" title="Copy shareable link"><svg class=ic aria-hidden=true><use href=#i-link /></svg> Share</button>
       <button type="button" class="action-pill" onclick="copyAreaSummary(this.dataset.geoid)" data-geoid="${esc(id)}" title="Copy markdown brief"><svg class=ic aria-hidden=true><use href=#i-copy /></svg> Copy summary</button>
       <button type="button" class="action-pill" onclick="document.body.classList.remove('prospectus-printing'); window.print();" title="Print 1-page dossier"><svg class=ic aria-hidden=true><use href=#i-print /></svg> Print</button>
-      <button type="button" class="action-pill${inC ? " active" : ""}" id="btn-compare-panel" onclick="toggleCompare(this.dataset.geoid)" data-geoid="${esc(id)}">${inC ? "✓ In comparison" : "<svg class=ic aria-hidden=true><use href=#i-compare /></svg> Compare"}</button>
       <button type="button" class="action-pill${renterViewOn ? " active" : ""}" id="btn-renter-panel" onclick="toggleRenterView()">${renterViewOn ? "<svg class=ic aria-hidden=true><use href=#i-users /></svg> Renter view (on)" : "<svg class=ic aria-hidden=true><use href=#i-users /></svg> Renter view"}</button>
       <button type="button" class="action-pill" onclick="exportNeighborhoodBrief(this.dataset.geoid, 'csv')" data-geoid="${esc(id)}" title="Download CSV dataset for this block group"><svg class=ic aria-hidden=true><use href=#i-download /></svg> Export CSV</button>
       <button type="button" class="action-pill" onclick="exportNeighborhoodBrief(this.dataset.geoid, 'pdf')" data-geoid="${esc(id)}" title="Export policy brief for residents and council"><svg class=ic aria-hidden=true><use href=#i-file /></svg> Export brief (PDF)</button>
       <button type="button" class="action-pill" onclick="openCorrection('${id}')"><svg class=ic aria-hidden=true><use href=#i-edit /></svg> Suggest correction</button>
-    </div>`;
+    </div><div id="house-slot"></div>${glanceHtml(id, p, m, oc, ocReal)}${panelJumpHtml(p)}<!--panel-groups-->`;
   if (oc && !(D_OC && D_OC.meta && D_OC.meta.schema >= 2)) h += `<div class="prelim-banner warn"><span class="prelim-icon"><svg class=ic aria-hidden=true><use href=#i-alert /></svg></span><span><b>Orange County coverage is preliminary.</b> Home values, rents, crime, heat and project sizing here are neighborhood-level estimates assembled from public sources. They have not been checked against Census, Assessor, police or transit-schedule records the way LA County's block groups have. Read them as a sketch, not a measurement.</span></div>`;
 
+  h += `<h3 class="panel-group" data-sec="projects" id="pg-projects">Public projects that could raise values here</h3>`;
   h += (top && top.vpd >= 1 && D.catalog[top.id] && topRng) ? `<p class="verdict" data-best-bet="${esc(top.id)}">Best bet: <b>${esc(D.catalog[top.id].name.replace(/^([A-Z])(?=[a-z])/, c => c.toLowerCase()))}</b>${/\d/.test(top.project) ? ` (${esc(top.project)})` : ""}. Expected return: <b>${topRng.estStr}</b> of home value per $1 (band ${topRng.str}). ${ivChip(top.id)}</p>`
     : top ? `<p class="verdict" data-best-bet="">None of the projects with a sourced effect returns $1 of home value per $1 here. The quality-of-life projects below are still worth a look.</p>`
     : `<p class="verdict" data-best-bet="">No sourced estimate is available here yet: none of the projects whose effect and cost could be checked applies to this area.${otherIdeas.length ? " Other ideas are listed below without numbers." : ""}</p>`;
@@ -8412,15 +8535,6 @@ function select(id, fly) {
     </div>
   </div>`;
 
-  // Core Vitals Tiles
-  h += `<div class="section"><div class="tiles">
-    ${tile("Typical home value", fmt$(m.hv), esc(oc && !ocReal ? "neighborhood estimate (preliminary)" : (() => { const t = hvSourceText(m.hvs), n = acsNote(id, "hv", m); return n && !/tract/.test(t) ? (t ? t + "; " : "") + n : t; })()))}
-    ${tile("Median rent", fmtRent(m.rent), oc && !ocReal ? "estimate (preliminary)" : (ocReal ? "Census ACS 2020–24" : "Census ACS 5-Year") + (m.rent != null && acsNote(id, "rent") ? ": " + acsNote(id, "rent") : ""))}
-    ${tile("Homes", fmtN(m.homes), `${m.own != null ? Math.round(m.own) + "% owner-occupied" : ""}`)}
-    ${tile("Heat vs median", m.ht != null ? (m.ht > 0 ? "+" : "") + (+m.ht).toFixed(1) + "°F" : "–", oc && !ocReal ? "estimate (preliminary)" : ocReal ? "Tree Equity Score 2021 vs urbanized-area mean" : "Tree Equity Score 2021 (2010 block groups)")}
-    ${tile("Violent crime", m.vc != null ? (+m.vc).toFixed(1) + " per 1k" : "no data", m.vc != null ? `12 mo · ${esc(m.ag || "")}` : (activeFips() === "06037" ? "independent police" : isCAActive() ? "agency not in CA DOJ data" : "no crime source outside California"))}
-    ${tile("Bus service", m.bt != null ? Math.round(m.bt) + "/hr" : busUnknown(m) ? "unknown" : "–", m.rm != null ? `rail ${(m.rm / 1609).toFixed(1)} mi` : "")}
-  </div></div>`;
 
   if (pkg.length) {
 
@@ -8441,22 +8555,23 @@ function select(id, fly) {
     }
   }
 
+  let gMore = "", gBuild = "";   // sections shown above the public-project block: more numbers, and what can be built
   // Collapsible Sections for everything else
-  h += `<details class="panel-sec"><summary><b>Neighborhood Plan &amp; Missing Amenities</b></summary><div class="sec-content">${gapSection(p, m)}</div></details>`;
+  h += `<details class="panel-sec" data-sec="plan"><summary><b>What this area is missing, and adopted plans</b></summary><div class="sec-content">${gapSection(p, m)}</div></details>`;
 
   // (The Multi-Project Synergy Simulator was removed 2026-11-16: its costs, lifts and synergy multipliers were invented.)
 
   // 2. Specific Park Improvements & Effects
-  h += `<details class="panel-sec"><summary><b>Specific Park Improvements &amp; Effects</b></summary><div class="sec-content">${parkImprovementsSection(m)}</div></details>`;
+  h += `<details class="panel-sec" data-sec="parks"><summary><b>Park improvements and their effects</b></summary><div class="sec-content">${parkImprovementsSection(m)}</div></details>`;
 
   // 3. Geography-Specific Improvements (Coastal vs Inland Trails)
-  h += `<details class="panel-sec"><summary><b>Geography-Specific Improvements (Coastal vs. Inland Trails)</b></summary><div class="sec-content">${geographicImprovementsSection(p, m)}</div></details>`;
+  h += `<details class="panel-sec" data-sec="geo"><summary><b>Coast, river and trail improvements</b></summary><div class="sec-content">${geographicImprovementsSection(p, m)}</div></details>`;
 
   // 4. Public-Private Partnerships (P3) & Transit Joint Development Pipeline
-  h += `<details class="panel-sec" open><summary><b>Transit corridor on file</b></summary><div class="sec-content">${p3Section(p, m)}</div></details>`;
+  h += `<details class="panel-sec" data-sec="p3"><summary><b>Transit corridor on file</b></summary><div class="sec-content">${p3Section(p, m)}</div></details>`;
 
   const cats = ["All", ...CATS.filter(c => val.some(r => D.catalog[r.id] && D.catalog[r.id].category === c))];
-  h += `<details class="panel-sec"><summary><b>All Ranked Value Projects (${val.length})</b></summary><div class="sec-content">
+  h += `<details class="panel-sec" data-sec="ranked"><summary><b>All projects ranked by value back per $1 (${val.length})</b></summary><div class="sec-content">
     <div class="cat-tabs" role="group" aria-label="Filter by category">${cats.map((c, i) => `<button type="button" data-cat="${esc(c)}" aria-pressed="${i === 0}">${esc(c)}</button>`).join("")}</div>
     <div class="recs" id="valrecs"></div>
     ${hidden ? `<p class="small muted">${hidden} estimate${hidden > 1 ? "s" : ""} hidden by the catalog-grade filter above.</p>` : ""}
@@ -8464,17 +8579,17 @@ function select(id, fly) {
   </div></details>`;
 
   h += otherIdeasHtml(otherIdeas);
-  if (qol.length) h += `<details class="panel-sec"><summary><b>Quality-of-Life Projects (${qol.length})</b></summary><div class="sec-content"><p class="small muted">Sorted by neighborhood need compared with county medians.</p><div class="recs">${qol.map((r, i) => recCard(r, i, "qol")).join("")}</div></div></details>`;
+  if (qol.length) h += `<details class="panel-sec" data-sec="qol"><summary><b>Quality-of-life projects (${qol.length})</b></summary><div class="sec-content"><p class="small muted">Sorted by neighborhood need compared with county medians.</p><div class="recs">${qol.map((r, i) => recCard(r, i, "qol")).join("")}</div></div></details>`;
 
-  if (pol.length) h += `<details class="panel-sec"><summary><b>Zoning &amp; Policy Reforms</b></summary><div class="sec-content"><div class="recs">${pol.map((r, i) => recCard(r, i, "policy")).join("")}</div></div></details>`;
+  if (pol.length) h += `<details class="panel-sec" data-sec="policy"><summary><b>Zoning and policy changes</b></summary><div class="sec-content"><div class="recs">${pol.map((r, i) => recCard(r, i, "policy")).join("")}</div></div></details>`;
 
-  if (own.length || (D.upgrades || []).length) h += `<details class="panel-sec"><summary><b>For an Individual Homeowner Here</b></summary><div class="sec-content"><div class="recs">${own.map((r, i) => recCard(r, i, "owner")).join("")}</div>${upgradeTable(m)}</div></details>`;
+  if (own.length || (D.upgrades || []).length) gBuild += `<details class="panel-sec" data-sec="owner"><summary><b>For a homeowner here: upgrades and their cost</b></summary><div class="sec-content"><div class="recs">${own.map((r, i) => recCard(r, i, "owner")).join("")}</div>${upgradeTable(m)}</div></details>`;
 
-  h += `<details class="panel-sec"><summary><b>Zoning: What Can Be Built Here</b></summary><div class="sec-content">${zoningSection({ ...m, city: p.c })}</div></details>`;
-  h += `<details class="panel-sec" open><summary><b>Specific Places for These Projects</b></summary><div class="sec-content" id="sites-sec"><p class="small muted">Loading the site candidates…</p></div></details>`;
-  h += `<details class="panel-sec"><summary><b>Underused Land &amp; Infill Sites</b></summary><div class="sec-content">${underSection(p)}</div></details>`;
-  h += `<details class="panel-sec"><summary><b>Public Facilities Nearby</b></summary><div class="sec-content">${facilitySection(m)}</div></details>`;
-  h += `<details class="panel-sec"><summary><b>${isCAActive() ? "EIFD Tax-Increment Financing Calculator" : "Tax-Increment Financing"}</b></summary><div class="sec-content">${fundSummary(pkg, id)}${eifdSection(p, m)}</div></details>`;
+  gBuild = `<details class="panel-sec" data-sec="zoning"><summary><b>Zoning and state housing laws</b></summary><div class="sec-content">${zoningSection({ ...m, city: p.c })}</div></details>` + gBuild;
+  h += `<details class="panel-sec" data-sec="sites" open><summary><b>Where these projects could go</b></summary><div class="sec-content" id="sites-sec"><p class="small muted">Loading the site candidates…</p></div></details>`;
+  gBuild += `<details class="panel-sec" data-sec="under"><summary><b>Underused land and infill sites</b></summary><div class="sec-content">${underSection(p)}</div></details>`;
+  gMore += `<details class="panel-sec" data-sec="facilities"><summary><b>Schools and public facilities nearby</b></summary><div class="sec-content">${facilitySection(m)}</div></details>`;
+  h += `<h3 class="panel-group" id="pg-money">Paying for it, and the data behind this page</h3><details class="panel-sec" data-sec="tif"><summary><b>${isCAActive() ? "Paying with future property tax (EIFD calculator)" : "Paying with future property tax (tax-increment financing)"}</b></summary><div class="sec-content">${fundSummary(pkg, id)}${eifdSection(p, m)}</div></details>`;
 
   const kv = [], add = (k, v, f = x => x) => { if (v != null && v !== "" && !(typeof v === "number" && isNaN(v))) kv.push(`<span>${k}</span><span>${f(v)}</span>`); };
   add("Population", m.pop, fmtN); add("Median household income", m.inc, fmt$); add("Median rent", m.rent, v => fmtRent(v) + (acsNote(id, "rent") ? ` (${acsNote(id, "rent")})` : "")); add("Median year built", m.yb, v => Math.round(v));
@@ -8489,11 +8604,12 @@ function select(id, fly) {
   add("Freeway distance", m.fw, v => fmtN(v) + " m"); add("Nearest supermarket", m.gro, v => (v / 1609).toFixed(1) + " mi"); add("Restaurants & cafés within 400 m", m.din, fmtN);
   add("Nearest public tennis court", m.ten, v => (v / 1609).toFixed(1) + " mi"); add("Nearest dog park", m.dog, v => (v / 1609).toFixed(1) + " mi"); add("Nearest public pool", m.pool, v => (v / 1609).toFixed(1) + " mi");
   add("Nearest EV fast charger mapped", m.ev, v => (v / 1609).toFixed(1) + " mi");
-  if (kv.length) h += `<details class="panel-sec"><summary><b>Area Profile &amp; ${oc ? "Statistics" : "Census Statistics"}</b></summary><div class="sec-content">${oc && !ocReal ? '<p class="small muted">Neighborhood-level estimates (preliminary Orange County pass), not Census block-group tabulations.</p>' : ocReal ? '<p class="small muted">Census ACS 2020–24 block-group tabulations (tract medians where the block-group value is not published); distances and counts computed from ' + (isOrangeActive() ? "OpenStreetMap (5 Nov 2026 extract), OCTA GTFS, CDE, CHP CCRS 2016–2025, CA DOJ and OC Parks data" : esc(((D_OC && D_OC.meta && D_OC.meta.sources) || []).filter(r => r && r[3] && !/^ACS|^TIGERweb Tracts/.test(r[0])).map(r => r[0]).join(", "))) + '.</p>' : ""}<div class="kv">${kv.join("")}</div></div></details>`;
+  if (kv.length) gMore = `<details class="panel-sec" data-sec="profile"><summary><b>All the numbers for this area: people, housing, safety, distances</b></summary><div class="sec-content">${oc && !ocReal ? '<p class="small muted">Neighborhood-level estimates (preliminary Orange County pass), not Census block-group tabulations.</p>' : ocReal ? '<p class="small muted">Census ACS 2020–24 block-group tabulations (tract medians where the block-group value is not published); distances and counts computed from ' + (isOrangeActive() ? "OpenStreetMap (5 Nov 2026 extract), OCTA GTFS, CDE, CHP CCRS 2016–2025, CA DOJ and OC Parks data" : esc(((D_OC && D_OC.meta && D_OC.meta.sources) || []).filter(r => r && r[3] && !/^ACS|^TIGERweb Tracts/.test(r[0])).map(r => r[0]).join(", "))) + '.</p>' : ""}<div class="kv">${kv.join("")}</div></div></details>` + gMore;
 
-  h += `<details class="panel-sec technical-appendix"><summary><b>Technical Appendix &amp; Data Pipeline Status</b></summary><div class="sec-content">${renderTechAppendix(ocReal)}</div></details>`;
+  h += `<details class="panel-sec technical-appendix" data-sec="appendix"><summary><b>Data sources and build status</b></summary><div class="sec-content">${renderTechAppendix(ocReal)}</div></details>`;
 
-  $("#panel").innerHTML = h; $("#panel").scrollTop = 0;
+  h = h.replace("<!--panel-groups-->", (gMore ? `<h3 class="panel-group" id="pg-more">More numbers</h3>` + gMore : "") + (gBuild ? `<h3 class="panel-group" id="pg-build">What can be built</h3>` + gBuild : ""));
+  $("#panel").innerHTML = h; $("#panel").scrollTop = 0; fillCrashTile(id);
   eifdWire(p); fillSites(p);
   if (typeof updateCanopyHud === "function") updateCanopyHud(p);
   $("#panel").querySelectorAll("[data-site]").forEach(el => el.onclick = () => { const U = D.layers.underused, sid = +el.dataset.site;
@@ -8839,7 +8955,7 @@ function toggleCompare(id) {
       return;
     }
     compareList.push(id);
-    showToast("Added to comparison drawer");
+    showToast(compareList.length < 2 ? "Added to the comparison. Add one more area to compare (up to 3)." : `Added: ${compareList.length} areas in the comparison. Open it with \u201cView comparison\u201d.`);
   }
   updateCompareUI();
 }
@@ -8928,9 +9044,12 @@ function updateCompareUI() {
   const pBtn = $("#btn-compare-panel");
   if (pBtn) {
     const inC = compareList.includes(selected);
-    pBtn.innerHTML = inC ? "✓ In comparison" : "<svg class=ic aria-hidden=true><use href=#i-compare /></svg> Compare";
+    pBtn.innerHTML = inC ? "✓ In comparison (remove)" : "<svg class=ic aria-hidden=true><use href=#i-compare /></svg> Add to compare";
     pBtn.classList.toggle("active", inC);
+    pBtn.setAttribute("aria-pressed", inC ? "true" : "false");
   }
+  const oBtn = $("#btn-compare-open");
+  if (oBtn) { oBtn.hidden = !compareList.length; oBtn.textContent = `View comparison (${compareList.length})`; }
 }
 
 
@@ -10029,7 +10148,7 @@ function renderCompareDrawer() {
               <h4 style="margin:0 0 2px 0;font-size:13px;font-weight:800;color:#0f172a;">${esc(h.address)}</h4>
               <div style="font-size:10.5px;color:#64748b;">APN ${esc(h.ain)} &middot; ${esc(h.county)}</div>
             </div>
-            <button type="button" class="small btn-remove-compare" data-ain="${esc(h.ain)}" style="background:none;border:none;cursor:pointer;color:var(--ink-3);font-size:14px;font-weight:700;" title="Remove property">✕</button>
+            <button type="button" class="small btn-remove-compare" data-ain="${esc(h.ain)}" style="background:none;border:none;cursor:pointer;color:var(--ink-3);font-size:14px;font-weight:700;" title="Remove property" aria-label="Close">✕</button>
           </div>
 
           <div style="background:${b ? '#f0fdf4' : '#f8fafc'};border:1px solid ${b ? '#bbf7d0' : '#e2e8f0'};border-radius:6px;padding:8px;margin-bottom:10px;">
@@ -10075,7 +10194,7 @@ function renderCompareDrawer() {
       <div class="compare-col">
         <div style="display:flex;justify-content:space-between;align-items:baseline">
           <h4>${esc(p.n)}</h4>
-          <button type="button" class="small btn-remove-compare-hood" style="background:none;border:none;cursor:pointer;color:var(--ink-3);font-size:14px;font-weight:700;" onclick="toggleCompare(this.dataset.geoid); renderCompareDrawer();" data-geoid="${esc(id)}" title="Remove neighborhood">✕</button>
+          <button type="button" class="small btn-remove-compare-hood" style="background:none;border:none;cursor:pointer;color:var(--ink-3);font-size:14px;font-weight:700;" onclick="toggleCompare(this.dataset.geoid); renderCompareDrawer();" data-geoid="${esc(id)}" title="Remove neighborhood" aria-label="Close">✕</button>
         </div>
         <div class="c-row"><span class="k">City</span><span class="v">${esc(p.c)}</span></div>
         <div class="c-row"><span class="k">Typical Home Value</span><span class="v">${fmt$(m.hv)}${m.hv != null && acsNote(id, "hv", m) ? ` <span class="small muted">(${acsNote(id, "hv", m)})</span>` : ""}</span></div>
@@ -10833,6 +10952,9 @@ function buildStamp(override) {
 }
 function switchCounty(c, wantBgId) {
   performance.mark("sw:start"); activeCounty = c;
+  // A block group still selected from another county made activeFips() answer with that county, so the header kept its name.
+  if (c === "oc" && typeof selected !== "undefined" && selected && D_OC && D_OC.details && !D_OC.details[selected]) selected = null;
+  { const qEl = $("#q"); if (qEl && !(wantBgId || "")) qEl.value = ""; }
   if (typeof window !== "undefined") window.activeCounty = activeCounty;
   const btnLa = $("#btn-county-la"), btnOc = $("#btn-county-oc");
   if (btnLa) btnLa.classList.toggle("active", c === "la");
@@ -10980,7 +11102,7 @@ async function init() {
   const handleSearchSubmit = val => {
     val = String(val || "").trim();
     if (!val) return;
-    hideAddr();
+    hideAddr(); clearTimeout(addrTimer); _addrSeq++;   // a suggestion lookup still under way must not reopen the list over the result
     const valLower = val.toLowerCase();
     let id = null;
     if (typeof D_OC !== "undefined" && D_OC && D_OC.search) {
@@ -10998,7 +11120,8 @@ async function init() {
         }
       }
     }
-    if (id) { select(id, true); return; }
+    if (!id && !/\d/.test(val) && typeof bestNameMatch === "function") { const bm = bestNameMatch(val); if (bm) { id = bm.bgId; val = bm.name; $("#q").value = bm.name; } }
+    if (id) { if (typeof setMatchNote === "function") setMatchNote(id, "Matched the name \u201c" + val + "\u201d."); select(id, true); return; }
     if (typeof countyBundleEls === "function") {
       const matchCounty = countyBundleEls().find(e => {
         const cn = (e.dataset.name || "").toLowerCase().replace(/ county| parish/g, "").trim();
@@ -11008,7 +11131,8 @@ async function init() {
     }
     addressSearchUS(val);
   };
-  $("#q").onchange = e => handleSearchSubmit(e.target.value);
+  // (No submit on "change": that event fires when the box loses focus, so the first click after a search re-ran it,
+  // redrew the panel under the pointer and swallowed the click; clicking a suggestion ran the half-typed text instead.)
   let activeSearchIndex = -1;
   function updateActiveSearchItem(items) {
     items.forEach((item, idx) => {
@@ -11318,7 +11442,7 @@ function updateHouseMapPopup(a, lot, ll, st, houseHv, z, R, valCheck, valLow, va
   `;
 
   if (!houseMapPopup) {
-    houseMapPopup = L.popup({ maxWidth: 420, minWidth: 300, className: "house-leaflet-popup", autoPan: true });
+    houseMapPopup = L.popup({ maxWidth: 420, minWidth: 300, className: "house-leaflet-popup", autoPan: true, autoPanPaddingTopLeft: [12, 64] });   // 64: clear of the map toolbar, which covered the popup's first lines
   }
   houseMapPopup.setLatLng(ll).setContent(content).openOn(map);
 }

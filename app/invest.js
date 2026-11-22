@@ -220,7 +220,8 @@ function build(fips, B, d) {
   const rk = eng.rankNeighborhoods(B, { backtest: d.backtest, prediction: d.prediction });
   const ranked = rk.ranked || [];
   const clean = ranked.filter(r => !(r.dataFlags && r.dataFlags.length));
-  let hood = iv.hood && ranked.some(r => r.id === iv.hood) ? iv.hood : null;
+  // An area opened from the map panel ("What to build here") is kept even when it has no ranking: Build works from its own figures.
+  let hood = iv.hood && (ranked.some(r => r.id === iv.hood) || (iv.pinned === iv.hood && B.details[iv.hood])) ? iv.hood : null;
   if (!hood && typeof selected !== "undefined" && selected && B.details[selected] && clean.slice(0, 5).some(r => r.id === selected)) hood = selected;
   if (!hood) hood = clean.length ? clean[0].id : (ranked[0] && ranked[0].id) || null;
   iv.hood = hood;
@@ -352,7 +353,7 @@ function buildLists(m) {
   out.hiddenN = rec.ideas.length - aff.length; out.ideasAll = aff.length;
   for (const x of aff) {
     const key = hasFig(x.valuePerDollar) ? keyFig("Back per $1", fig(x.valuePerDollar)) : hasFig(x.cost) ? keyFig("Cost", fig(x.cost)) : null;
-    const item = { kind: "idea", name: x.name, chip: x.kind || "improvement", x, key };
+    const item = { kind: "idea", name: x.name, chip: KIND_TXT[x.kind] || x.kind || "improvement", x, key };
     (key ? out.on : out.off).push(item);
   }
   return out;
@@ -407,7 +408,9 @@ function plainMissing(t) {
   if (/^[a-z]+[A-Z]\w*/.test(x) && par) return par[1].replace(/^for /, "");
   return x.replace(/\s*\([^)]*\)/g, "");
 }
-const NAV = [["iv-where", "Where"], ["iv-build", "Build"], ["iv-sites", "Properties"], ["iv-house", "This house"], ["iv-transit", "Transit"]];
+// The catalog's kind codes in plain words (the rows used to show "qol", "value", "owner")
+const KIND_TXT = { qol: "quality of life", value: "raises home values", owner: "homeowner project", policy: "policy change", regional: "regional project" };
+const NAV = [["iv-where", "Where"], ["iv-build", "Build"], ["iv-sites", "Properties"], ["iv-house", "This house"], ["iv-transit", "Transit"], ["iv-courses", "Courses of action"]];
 const navHTML = () => `<nav class="iv-nav" aria-label="Sections">${NAV.map(([id, l]) => `<button type="button" data-iv-jump="${id}">${l}</button>`).join("")}</nav>`;
 
 // ---------------------------------------------------------------- card: where
@@ -479,7 +482,7 @@ function buildCard(m, open) {
   if (rec.missing && rec.missing.length) offItems.push({ name: "Other inputs for this area", why: missList(rec.missing) });
   return `<section class="iv-card" id="iv-build" aria-labelledby="iv-build-h">
     <h3 id="iv-build-h">Build</h3>
-    <p class="iv-lede">For <b>${esc2(d.n || "the selected area")}</b>${d.c ? `, ${esc2(d.c)}` : ""}. Housing plays and public improvements, strongest evidence and best return first.</p>
+    <p class="iv-lede">For <b>${esc2(d.n || "the selected area")}</b>${d.c ? `, ${esc2(d.c)}` : ""}. Housing plays and public improvements, strongest evidence and best return first.${m.ranked.some(r => r.id === m.hood) ? "" : ` <span class="iv-muted" id="iv-unranked">This area is not in the Where ranking above (it failed a data check or a Census input is missing), so only its own figures are used here.</span>`} <button type="button" class="tool-btn" id="iv-build-map" data-iv-map="${esc2(m.hood)}"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span>Back to this area on the map</span></button></p>
     ${shown.length ? `<ul class="iv-plays">${shown.map(rowFor).join("")}</ul>` : `<p class="iv-empty">Nothing with a cost figure is listed at this budget.</p>`}
     ${bl.on.length > 5 ? `<button type="button" class="tool-btn" data-iv="more-ideas">${iv.moreIdeas ? "Show fewer" : `Show all ${bl.on.length}`}</button>` : ""}
     ${bl.hiddenPlays ? `<p class="iv-gated">${bl.hiddenPlays} larger housing ${bl.hiddenPlays === 1 ? "play opens" : "plays open"} at a bigger budget.</p>` : ""}
@@ -798,6 +801,11 @@ function render() {
       <p class="iv-foot">Everything here comes from public data and the tests described above. It is a starting point for due diligence, not advice. A figure marked Not on file is missing from our data, and we do not fill gaps with guesses.</p></div>`;
     if (!fresh) window.scrollTo(0, y);
     window.__cpDecisionBrief = m.brief;
+    if (iv.want) {   // opened from a neighborhood panel: land on Build for that area, or say why it is another one
+      const w = iv.want; iv.want = null;
+      if (m.hood !== w && typeof showToast === "function") showToast("That area has no figures in this county's Invest data, so Build shows the county's first-ranked area instead.");
+      const c = document.getElementById("iv-build"); if (c && c.scrollIntoView) c.scrollIntoView({ block: "start" });
+    }
   });
 }
 
@@ -818,6 +826,7 @@ function setInvest(on, opts) {
     clearTimeout(render._t);
   }
 }
+function openFor(id) { iv.want = id || null; if (id) { iv.hood = id; iv.pinned = id; iv.moreIdeas = false; } setInvest(true); }
 function leaveToMap(id) {
   if (window.cpExplore && window.cpExplore.setView) window.cpExplore.setView("map"); else { document.body.classList.remove("explore-mode"); }
   setInvest(false);
@@ -1092,6 +1101,6 @@ document.addEventListener("click", e => {
 });
 document.addEventListener("keydown", e => { if (e.key === "Enter" && e.target && e.target.id === "pc-budget-in") { e.preventDefault(); pcSetBudget(); } });
 
-window.cpInvest = { render, advisorInputs, setView: v => setInvest(v === "invest"), get state() { return iv; }, get courses() { return pc; } };
+window.cpInvest = { render, openFor, advisorInputs, setView: v => setInvest(v === "invest"), get state() { return iv; }, get courses() { return pc; } };
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();
