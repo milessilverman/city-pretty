@@ -128,9 +128,12 @@ function auditSingleHouseParcel(input) {
   const hasZoning = !!(input.zoningCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(input.zoningCode).trim()));
   const rawZone = hasZoning ? String(input.zoningCode).trim() : null;
   const zoneOrUse = String(rawZone || "") + " " + String(input.useDescription || "");
-  const isComm = hasZoning && /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-  const isMulti = hasZoning && (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(rawZone));
-  const isSfr = hasZoning && !isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(rawZone || "").trim()));
+  // input.zoningCategory: the zoning map's own class for the zone, when the caller has one (LA's bundle layer). It decides;
+  // the text tests misread LA's R1 variation zones (R1V2-O has no word boundary after R1, and R1R3 reads as R3).
+  const zCat = hasZoning && /^(single-family|multifamily|commercial|none$)/.test(String(input.zoningCategory || "")) ? String(input.zoningCategory) : null;
+  const isComm = hasZoning && (zCat ? /^commercial/.test(zCat) : /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse));
+  const isMulti = hasZoning && (zCat ? zCat === "multifamily" : (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(rawZone)));
+  const isSfr = hasZoning && (zCat ? zCat === "single-family" : (!isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(rawZone || "").trim()))));
 
   const parcelCtx = {
     parcel_id: input.parcelId,
@@ -141,6 +144,7 @@ function auditSingleHouseParcel(input) {
     base_zoning_code: rawZone,
     is_commercial_or_mixed_use: isComm,
     is_single_family_residential: isSfr,
+    is_multifamily_residential: isMulti,
     dist_to_heavy_rail_mi: input.distToHeavyRailMi ?? null,
     dist_to_frequent_bus_or_brt_mi: input.distToFrequentBusMi ?? null,
     exclusions: {
@@ -168,20 +172,16 @@ function auditSingleHouseParcel(input) {
   } else if (!statutoryZoning.laws_loaded) {
     statutoryNotes = "State housing law records are still loading; by-right screening will update once available.";
   } else if ((statutoryZoning.applicable_statutes || []).length) {
-    statutoryNotes = "State laws the screening engine applies here: " + statutoryZoning.applicable_statutes.map(s => s.short_name || s.citation).filter(Boolean).join(", ") + ". Unverified screening — confirm with the planning department.";
-  } else if ((statutoryZoning.not_confirmed || []).length) {
-    const unconfirmedReasons = statutoryZoning.not_confirmed.map(nc => `${nc.name} (${nc.reason})`).join("; ");
-    statutoryNotes = "Screening not confirmed for state housing laws: " + unconfirmedReasons + ". Local zoning governs.";
-  } else if ((statutoryZoning.excluded_by_statute || []).length) {
-    statutoryNotes = "Excluded by the law's own text: " + statutoryZoning.excluded_by_statute.map(x => x.name + " — " + x.detail).join(" ") + " Local zoning governs.";
+    statutoryNotes = "State laws the screening engine applies here: " + statutoryZoning.applicable_statutes.map(s => s.short_name || s.citation).filter(Boolean).join(", ") + ". Unverified screening — confirm with the planning department."
+      + ((statutoryZoning.not_confirmed || []).length ? " Not confirmed: " + statutoryZoning.not_confirmed.map(nc => `${nc.name} (${nc.reason})`).join("; ") : "")
+      + ((statutoryZoning.excluded_by_statute || []).length ? " Ruled out here: " + statutoryZoning.excluded_by_statute.map(nc => `${nc.name} (${nc.reason})`).join("; ") : "");
+  } else if ((statutoryZoning.not_confirmed || []).length || (statutoryZoning.excluded_by_statute || []).length) {
+    // Laws that are not determined and laws the lot is excluded from by their own text are both named, with the reason.
+    const list = l => (l || []).map(nc => `${nc.name} (${nc.reason})`).join("; ");
+    statutoryNotes = [(statutoryZoning.not_confirmed || []).length ? "Screening not confirmed for state housing laws: " + list(statutoryZoning.not_confirmed) + "." : "",
+      (statutoryZoning.excluded_by_statute || []).length ? "Ruled out here: " + list(statutoryZoning.excluded_by_statute) + "." : ""].filter(Boolean).join(" ") + " Local zoning governs.";
   } else {
     statutoryNotes = "No state housing law in the screening engine applies to this parcel as recorded. Local zoning governs.";
-  }
-  if ((statutoryZoning.applicable_statutes || []).length) {
-    // Laws that were held back by an exclusion in their own text, or whose exclusion list could not be settled, are named too.
-    const heldBack = (statutoryZoning.excluded_by_statute || []).map(x => x.name + " — " + x.detail)
-      .concat((statutoryZoning.not_confirmed || []).filter(nc => /^Not determined/.test(nc.reason)).map(nc => nc.name + " (" + nc.reason + ")"));
-    if (heldBack.length) statutoryNotes += " Not applied: " + heldBack.join("; ");
   }
 
   // 4. Roof area (geometry model; see roof engine assumptions) and solar system size. No dollar outputs: install
@@ -241,6 +241,8 @@ function auditSingleHouseParcel(input) {
       state_code: statutoryZoning.state_code,
       base_zoning_code: statutoryZoning.base_zoning_code,
       applicable_statutes: statutoryZoning.applicable_statutes,
+      not_confirmed: statutoryZoning.not_confirmed || [],
+      excluded_by_statute: statutoryZoning.excluded_by_statute || [],
       statutory_exclusions: statutoryZoning.statutory_exclusions,
       net_by_right_feasible: statutoryZoning.net_by_right_feasible,
       privateCovenantsDisclaimer: "Private covenants: state housing laws override city zoning but may not cancel recorded HOA covenants or CC&Rs. Check the title report.",

@@ -1,0 +1,565 @@
+{
+ "ran_on": "2026-11-21T10:04:57.006Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "33009": {
+   "state": "NH",
+   "points": [
+    {
+     "bg": "330099617014",
+     "lat": 43.656788,
+     "lng": -72.266136,
+     "service": "NH GRANIT Statewide Cadastral Parcel Mosaic",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $354k, rent $2,024/mo, homes 485"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for NH"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Grafton County · 330099617014; page \"Census area: Grafton County · block group 330099617014(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR [1719,1719] for 33009; page \"HUD Fair Market Rent (FY2027): 2 bed $1,719/moHUD's voucher benchmark (rent plus utilities), not a market asking rent. New England: HUD sets FMRs by town; 40 to\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 827 ft; page \"Ground elevation: 827 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "330099616042",
+     "lat": 43.694253,
+     "lng": -72.282995,
+     "service": "NH GRANIT Statewide Cadastral Parcel Mosaic",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $849k, rent $1,519/mo, homes 341"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for NH"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Grafton County · 330099616042; page \"Census area: Grafton County · block group 330099616042(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR [1719,1719] for 33009; page \"HUD Fair Market Rent (FY2027): 2 bed $1,719/moHUD's voucher benchmark (rent plus utilities), not a market asking rent. New England: HUD sets FMRs by town; 40 to\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 533 ft; page \"Ground elevation: 533 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "330099612013",
+     "lat": 43.624104,
+     "lng": -71.710186,
+     "service": "NH GRANIT Statewide Cadastral Parcel Mosaic",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $279k, rent $1,389/mo, homes 609"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for NH"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Grafton County · 330099612013; page \"Census area: Grafton County · block group 330099612013(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR [1719,1719] for 33009; page \"HUD Fair Market Rent (FY2027): 2 bed $1,719/moHUD's voucher benchmark (rent plus utilities), not a market asking rent. New England: HUD sets FMRs by town; 40 to\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1077 ft; page \"Ground elevation: 1,077 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_33009.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_33009.json.gz"
+   ]
+  },
+  "34009": {
+   "state": "NJ",
+   "points": [
+    {
+     "bg": "340090217012",
+     "lat": 38.973271,
+     "lng": -74.921495,
+     "service": "Parcels and MOD-IV Composite of NJ, Web Mercator (NJOGIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $620k, rent $802/mo, homes 894"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"-4.2°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for NJ"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Cape May County · 340090217012; page \"Census area: Cape May County · block group 340090217012(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1857 for 34009; page \"HUD Fair Market Rent (FY2027): 1 bed $1,521 · 2 bed $1,857 · 3 bed $2,431/moCape May County, NJ HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: unmapped; page \"FEMA flood zone: Not available (No effective FEMA flood map here (unmapped, not 'no risk'))(FEMA National Flood Hazard L\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 19 ft; page \"Ground elevation: 19 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "340090218043",
+     "lat": 39.030525,
+     "lng": -74.935543,
+     "service": "Parcels and MOD-IV Composite of NJ, Web Mercator (NJOGIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $271k, rent $1,461/mo, homes 966"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 15 pts (current release); page: 15 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 15.3 pts below its 40% goal; box: \"15.3 pts below its 40% goal\" / \"-1.4°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for NJ"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Cape May County · 340090218043; page \"Census area: Cape May County · block group 340090218043(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1857 for 34009; page \"HUD Fair Market Rent (FY2027): 1 bed $1,521 · 2 bed $1,857 · 3 bed $2,431/moCape May County, NJ HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: unmapped; page \"FEMA flood zone: Not available (No effective FEMA flood map here (unmapped, not 'no risk'))(FEMA National Flood Hazard L\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 8 ft; page \"Ground elevation: 8 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "340090216004",
+     "lat": 38.982223,
+     "lng": -74.832735,
+     "service": "Parcels and MOD-IV Composite of NJ, Web Mercator (NJOGIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $449k, rent $1,033/mo, homes 778"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 25 pts (current release); page: 25 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 24.7 pts below its 30% goal; box: \"24.7 pts below its 30% goal\" / \"+9.6°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for NJ"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Cape May County · 340090216004; page \"Census area: Cape May County · block group 340090216004(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1857 for 34009; page \"HUD Fair Market Rent (FY2027): 1 bed $1,521 · 2 bed $1,857 · 3 bed $2,431/moCape May County, NJ HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: AE; page \"FEMA flood zone: Zone AE · special flood hazard areaFederally backed mortgages here require flood insurance.(FEMA Nation\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 5 ft; page \"Ground elevation: 5 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_34009.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_34009.json.gz"
+   ]
+  },
+  "44001": {
+   "state": "RI",
+   "points": [
+    {
+     "bg": "440010306023",
+     "lat": 41.716478,
+     "lng": -71.275114,
+     "service": "Rhode Island Tax Parcels (RIDEM / RIGIS, 37 towns)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $426k, rent $1,165/mo, homes 615"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 8 pts (current release); page: 8 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 7.8 pts below its 50% goal; box: \"7.8 pts below its 50% goal\" / \"+1.7°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for RI"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Bristol County · 440010306023; page \"Census area: Bristol County · block group 440010306023(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR [1879,1879] for 44001; page \"HUD Fair Market Rent (FY2027): 2 bed $1,879/moHUD's voucher benchmark (rent plus utilities), not a market asking rent. New England: HUD sets FMRs by town; 3 tow\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 53 ft; page \"Ground elevation: 53 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "440010307002",
+     "lat": 41.672623,
+     "lng": -71.270727,
+     "service": "Rhode Island Tax Parcels (RIDEM / RIGIS, 37 towns)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $289k, rent $1,574/mo, homes 834"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 6 pts (current release); page: 6 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 6.4 pts below its 20% goal; box: \"6.4 pts below its 20% goal\" / \"+7.1°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for RI"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Bristol County · 440010307002; page \"Census area: Bristol County · block group 440010307002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR [1879,1879] for 44001; page \"HUD Fair Market Rent (FY2027): 2 bed $1,879/moHUD's voucher benchmark (rent plus utilities), not a market asking rent. New England: HUD sets FMRs by town; 3 tow\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 50 ft; page \"Ground elevation: 50 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "440010304001",
+     "lat": 41.730616,
+     "lng": -71.292765,
+     "service": "Rhode Island Tax Parcels (RIDEM / RIGIS, 37 towns)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": false,
+       "detail": "expected home value $981k, rent $3,501/mo, homes 348 | panel: Typical home value$981kCensus ACS 2020-24 median value for this block group (Census values stop at $2M) Median rent$3,500 or more/moCensus ACS 2020–24: tract "
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 7 pts (current release); page: 7 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 6.6 pts below its 50% goal; box: \"6.6 pts below its 50% goal\" / \"-2.8°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for RI"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Bristol County · 440010304001; page \"Census area: Bristol County · block group 440010304001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR [1879,1879] for 44001; page \"HUD Fair Market Rent (FY2027): 2 bed $1,879/moHUD's voucher benchmark (rent plus utilities), not a market asking rent. New England: HUD sets FMRs by town; 3 tow\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 19 ft; page \"Ground elevation: 19 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "fail",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9311' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_44001.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_44001.json.gz"
+   ]
+  }
+ }
+}

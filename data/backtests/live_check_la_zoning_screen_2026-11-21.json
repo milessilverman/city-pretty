@@ -1,0 +1,39 @@
+{
+ "checked_at": "2026-11-21T09:50:54.609Z",
+ "port": 9203,
+ "lots": [
+  {
+   "address": "2107 Duxbury Cir, Los Angeles, CA",
+   "geocode": {
+    "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=2107%20Duxbury%20Cir%2C%20Los%20Angeles%2C%20CA&benchmark=Public_AR_Current&format=json",
+    "matched": "2107 DUXBURY CIR, LOS ANGELES, CA, 90034",
+    "lat": 34.044585345365,
+    "lng": -118.394940640403
+   },
+   "checks": {
+    "lot_is_in_a_mapped_zone": true,
+    "zoning_row_shows_mapped_zone": true,
+    "screen_uses_mapped_zone": true,
+    "playbook_has_zoning": true,
+    "this_house_has_zoning": true,
+    "playbook_names_adu_and_sb9": true,
+    "this_house_names_adu_and_sb9": true
+   },
+   "errors": [],
+   "opened": {
+    "ll": {
+     "lat": 34.044585345365,
+     "lng": -118.39524064040299
+    },
+    "situs": "2107 DUXBURY CIR LOS ANGELES CA 90034"
+   },
+   "mapped_zone": "R1V2-O",
+   "use_description": "Single",
+   "zone_category": "single-family",
+   "screen_code": "R1V2-O",
+   "playbook_text": "CA SB 9 Unverified screening CA SB 9 (California HOME Act) — two units per lot and urban lot split Cost, return and cash flow: Not modeled yet — no sourced cost data. Law: CA SB 9 (California HOME Act) — two units per lot and urban lot split — Cal. Gov. Code §§ 65852.21, 66411.7; §§ 65852.21 and 66411.7 amended by Stats. 2026, Ch. 56 (SB 1426), effective 2026-06-30 The screening engine reads CA SB 9 (California HOME Act) — two units per lot and urban lot split — Cal. Gov. Code §§ 65852.21, 66411.7; §§ 65852.21 and 66411.7 amended by Stats. 2026, Ch. 56 (SB 1426), effective 2026-06-30 as applying to this parcel's recorded zoning (R1V2-O): up to 4 units. Lot on file: 9,450 sq ft. This is unverified screening; confirm eligibility with the planning department. Also screened: CA: ADUs approved ministerially on lots with a dwelling in residential zonesNot confirmed: CA SB 79 — Tier 2 TOD stop (light rail / 48+ trains / qualifying BRT), within 1/4 mile; CA SB 79 — Tier 2 TOD stop (light rail / 48+ trains / qualifying BRT), 1/4 to 1/2 mile (city pop ≥ 35,000) (Not on file for this parcel: distance to light rail / qualifying BRT). Next steps Confirm with the city or county planning department that this law applies to this parcel.Check the title report for HOA covenants or easements that limit building.Get local contractor bids before estimating cost or return. Private covenants: state housing laws override city zoning but may not cancel recorded HOA covenants or CC&Rs. Check the title report before spending on design. Copy Memo Export Prospectus (PDF)",
+   "this_house_text": "This house2107 DUXBURY CIR LOS ANGELES CA 90034 (parcel 4309009032). No addition has a cost or value figure on file. Not on file yet (5) - what data is missingBackyard home (ADU) Allowed by state law no sourced cost for \"Backyard home (ADU)\" in CA (app/data/unit_costs.json lists public-works items only: sidewalk, curb ramp, led streetlight, rrfb, sound wall, speed hump); no sourced value for \"Backyard home (ADU)\" (needs a local sales study of what it adds)Add a bedroom Law not determined Law: set by local height, floor-area and setback rules; no local rule table is loaded. no sourced cost for \"Add a bedroom\" in CA (app/data/unit_costs.json lists public-works items only: sidewalk, curb ramp, led streetlight, rrfb, sound wall, speed hump); no sourced value for \"Add a bedroom\" (needs a local sales study of what it adds)Add a bathroom Law not determined Law: set by local height, floor-area and setback rules; no local rule table is loaded. no sourced cost for \"Add a bathroom\" in CA (app/data/unit_costs.json lists public-works items only: sidewalk, curb ramp, led streetlight, rrfb, sound wall, speed hump); no sourced value for \"Add a bathroom\" (needs a local sales study of what it adds)Add a second storey Law not determined Law: set by local height, floor-area and setback rules; no local rule table is loaded. no sourced cost for \"Add a second storey\" in CA (app/data/unit_costs.json lists public-works items only: sidewalk, curb ramp, led streetlight, rrfb, sound wall, speed hump); no sourced value for \"Add a second storey\" (needs a local sales study of what it adds)Split the lot Allowed by state law no sourced cost for \"Split the lot\" in CA (app/data/unit_costs.json lists public-works items only: sidewalk, curb ramp, led streetlight, rrfb, sound wall, speed hump); no sourced value for \"Split the lot\" (needs a local sales study of what it adds) Zoning, statutes and caveatsState laws that apply to this lot: CA SB 9 (California HOME Act) — two units per lot and urban lot split — Cal. Gov. Code §§ 65852.21, 66411.7; §§ 65852.21 and 66411.7 amended by Stats. 2026, Ch. 56 (SB 1426), effective 2026-06-30; CA: ADUs approved ministerially on lots with a dwelling in residential zones — Cal. Gov. Code §§ 66317(a)(1), 66323(a). statutes from app/data/statutes.json via the statute engine (evaluateByRightHousing); only laws whose text was checked can applyLaws on file that could not be applied hereCA SB 79 — Tier 2 TOD stop (light rail / 48+ trains / qualifying BRT), within 1/4 mile: Not on file for this parcel: distance to light rail / qualifying BRT.CA SB 79 — Tier 2 TOD stop (light rail / 48+ trains / qualifying BRT), 1/4 to 1/2 mile (city pop ≥ 35,000): Not on file for this parcel: distance to light rail / qualifying BRT.No cost or value is filled in unless a sourced table row is passed in; app/data/unit_costs.json has no house-addition costs and no sourced value of an addition is on file yet.A state law marked as allowing something here is a screen, not a permit: the city or county decides."
+  }
+ ],
+ "failed": 0
+}

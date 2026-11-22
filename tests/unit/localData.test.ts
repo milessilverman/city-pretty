@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 // The advisor's tools over City Pretty's audited tables (workers/localData.ts).
 import { describe, expect, it } from "vitest";
 import {
@@ -44,5 +45,21 @@ describe("advisor tools over audited tables", () => {
     const r = await runAdvisorTool("state_housing_laws", { state: "CA" }, {});
     expect(r.isError).toBe(false);
     expect(r.sources[0].url).toBe("repo://app/data/statutes.json");
+  });
+  it("matches intercity corridors to a county by a named stop, and marks same-state corridors state_only", () => {
+    const data = JSON.parse(readFileSync("app/data/intercity_transit_corridors.json", "utf8")) as any[];
+    const hasStop = (c: any, f: string) => (c.proposed_stations || []).some((s: any) => s.fips === f);
+    const r: any = transitProjectsFor("48113", "TX");
+    const inter = r.value.records.filter((x: any) => x.county_match);
+    const expectedStop = data.filter((c) => hasStop(c, "48113")).map((c) => c.id).sort();
+    expect(expectedStop.length).toBeGreaterThan(0);
+    expect(inter.filter((x: any) => x.county_match === "stop_in_county").map((x: any) => x.id).sort()).toEqual(expectedStop);
+    for (const x of inter.filter((x: any) => x.county_match === "state_only")) {
+      expect(hasStop(x, "48113")).toBe(false);
+      expect(x.states).toContain("TX");
+    }
+    // stop matches are listed before state-only ones
+    const kinds = inter.map((x: any) => x.county_match);
+    expect(kinds.lastIndexOf("stop_in_county")).toBeLessThan(kinds.indexOf("state_only") === -1 ? Infinity : kinds.indexOf("state_only"));
   });
 });

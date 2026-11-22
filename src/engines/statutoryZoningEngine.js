@@ -20,6 +20,11 @@
  *    the output quotes the statute. A listed condition the page has not checked (null) or an exclusion list not yet
  *    confirmed against the statute text (rec.exclusions_review.status other than "confirmed") gives "not determined",
  *    never "allowed". A condition the statute does not list has no effect on that law.
+ *  - An entry with effect "conditional" is an exclusion the text makes only on terms the page cannot see (a local
+ *    ordinance or a local determination, or one part of the law only). Present or not checked, it gives "not
+ *    determined" with those terms quoted; it never rules the law out and never lets it apply. An entry with effect
+ *    "limits" narrows the law without removing it and is reported with the law. (22 Nov 2026: the two branches'
+ *    per-law designs merged on this one; the other branch's per-condition evidence is kept as rec.site_conditions.)
  */
 
 const STATUTE_USABLE_STATUSES = new Set(["verified", "partially_verified"]);
@@ -126,6 +131,7 @@ function statuteAppliesTo(rec, parcel) {
       // optional population and lot-size floors; any condition the parcel record can't express (unmapped_condition) is
       // reported as missing, never assumed.
       if (rec.applies_to_zone === "commercial") { if (!comm) return { applies: false, missing }; }
+      else if (rec.applies_to_zone === "residential") { if (!sfr && !parcel.is_multifamily_residential) return { applies: false, missing }; }   // single-family or multifamily zoning
       else if (!sfr) return { applies: false, missing };
       if (!popAtLeast(rec.municipality_pop_min)) return { applies: false, missing };
       if (rec.min_lot_size_sqft != null) {
@@ -148,16 +154,19 @@ function statuteExclusionCheck(rec, parcel) {
   const review = rec.exclusions_review || {};
   const confirmed = review.status === "confirmed" && Array.isArray(rec.exclusion_sources);
   // An entry with effect "limits" does not remove the law from the parcel (it narrows a route or leaves other laws in force);
-  // it is reported with the law but never blocks it or makes it "not determined".
-  const present = [], notChecked = [], limitsPresent = [], limitsNotChecked = [];
+  // it is reported with the law but never blocks it or makes it "not determined". An entry with effect "conditional"
+  // excludes the site only on terms the page cannot see (e.condition): present, it makes the law "not determined" with
+  // those terms; not checked, it counts as not checked.
+  const present = [], notChecked = [], limitsPresent = [], limitsNotChecked = [], conditionalPresent = [];
   for (const e of entries) {
-    const v = ex[e.key], lim = e.effect === "limits";
-    if (v === true) (lim ? limitsPresent : present).push(e);
+    const v = ex[e.key], lim = e.effect === "limits", cond = e.effect === "conditional";
+    if (v === true) (lim ? limitsPresent : cond ? conditionalPresent : present).push(e);
     else if (v !== false) (lim ? limitsNotChecked : notChecked).push(e);
   }
   const quote = e => "\"" + e.wording + "\"" + (e.citation ? " (" + e.citation + ")" : "") +
-    (e.key === "fema_100yr_floodway" ? ". The page's flood flag is FEMA's special flood hazard area (the 100-year floodplain)" + (e.scope_note ? "; " + e.scope_note : "") : (e.scope_note ? ". " + e.scope_note : ""));
-  return { confirmed, present, notChecked, limitsPresent, limitsNotChecked, quote, review };
+    (e.key === "fema_100yr_floodway" ? ". The page's flood flag is FEMA's special flood hazard area (the 100-year floodplain)" + (e.scope_note ? "; " + e.scope_note : "") : (e.scope_note ? ". " + e.scope_note : "")) +
+    (e.exception ? ". The text's exception: \"" + e.exception + "\"" : "");
+  return { confirmed, present, notChecked, limitsPresent, limitsNotChecked, conditionalPresent, quote, review };
 }
 
 function evaluateByRightHousing(parcel, laws) {
@@ -209,7 +218,11 @@ function evaluateByRightHousing(parcel, laws) {
       continue;
     }
     if (!exc.confirmed) {
-      base.not_confirmed.push({ id: rec.id, name: label, reason: "Not determined: the list of sites this law excludes has not been confirmed against the statute text" + (exc.present.length ? " (the page found a condition that may be on it: " + exc.present.map(e => e.key).join(", ") + ")" : "") + "." });
+      base.not_confirmed.push({ id: rec.id, name: label, reason: "Not determined: the list of sites this law excludes has not been confirmed against the statute text" + (exc.present.length ? " (the page found a condition that may be on it: " + exc.present.map(e => e.label || e.key).join("; ") + ")" : "") + "." });
+      continue;
+    }
+    if (exc.conditionalPresent.length) {
+      base.not_confirmed.push({ id: rec.id, name: label, reason: "Not determined: the lot is in " + exc.conditionalPresent.map(e => (e.label || e.key) + ", which the law's text excludes " + (e.condition || "only on terms the page cannot see") + ": " + exc.quote(e)).join("; ") + ". The page cannot see whether that applies to this lot." + (exc.notChecked.length ? " The page has also not checked " + exc.notChecked.map(e => (e.label || e.key) + " (" + (e.citation || "statute text") + ")").join("; ") + "." : "") });
       continue;
     }
     if (exc.notChecked.length) {
