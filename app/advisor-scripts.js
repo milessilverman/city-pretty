@@ -425,6 +425,17 @@ function answerBudget(p, snap) {
     (unpriced ? `\n${unpriced} ${unpriced === 1 ? "play has" : "plays have"} no cost on file, so ${unpriced === 1 ? "it" : "they"} cannot be matched to a budget: ${all.filter(x => !(x.cost && isNum(x.cost.value))).map(x => x.name).join(", ")}.` : "") +
     `\nThis only compares your budget with the costs on file (the pipeline's [modelled] estimates, which include 10 years of upkeep for public improvements); it does no other financial maths.`;
   out.findings.push(`Budget ${money(p.budget)} in ${where}: within budget: ${fits.map(x => `${x.name} (${money(x.cost.value)})`).join("; ") || "none"}; over budget: ${over}; no cost on file: ${unpriced}`);
+  // courses of action (project cards, src/engines/projectCardEngine.js fitToBudget): a course fits when the top of its cost range is at or under the budget
+  const PCE = typeof window !== "undefined" && window.ProjectCardEngine ? window.ProjectCardEngine : (typeof require !== "undefined" ? require("../src/engines/projectCardEngine.js") : null);
+  if (PCE && Array.isArray(snap.projectCards) && snap.projectCards.length) {
+    const f = PCE.fitToBudget(snap.projectCards, p.budget);
+    const rng = c => `${money(c.cost.low.value)}${c.cost.high.value !== c.cost.low.value ? " to " + money(c.cost.high.value) : ""} [${c.cost.basis}]${c.costLabel ? ", " + c.costLabel : ""}`;
+    out.text += `\n\n**Courses of action:** ${f.within.length} ${f.within.length === 1 ? "course costs" : "courses cost"} at most ${money(p.budget)} (the top of the cost range), ${f.straddle.length} could (the range straddles it), ${f.over.length} cost more; ${f.uncosted} have no cost on file and ${f.notAssessed} could not be assessed.` +
+      f.within.concat(f.straddle).slice(0, 6).map(c => `\n- **${c.label}** (${c.subject}): ${rng(c)}${f.straddle.includes(c) ? " (could fit)" : ""}`).join("") +
+      `\nListed by the strength of the evidence, not by return.`;
+    for (const c of f.within) out.matched.push({ name: c.label + " (" + c.subject + ")", cost: c.cost.high.value });
+    out.findings.push(`Courses of action at ${money(p.budget)}: fit: ${f.within.map(c => `${c.label} for ${c.subject} (${rng(c)})`).join("; ") || "none"}; could fit: ${f.straddle.length}; over: ${f.over.length}; no cost on file: ${f.uncosted}; not assessed: ${f.notAssessed}`);
+  }
   return out;
 }
 
@@ -491,7 +502,7 @@ function pageSnapshot() {
   const E = G.InvestmentDecisionEngine;
   const inv = G.cpInvest && G.cpInvest.advisorInputs ? G.cpInvest.advisorInputs() : Promise.resolve(null);
   return inv.then(I => {
-    const snap = { county: { fips, name: (I && I.countyName) || (typeof countyOf === "function" ? countyOf() : null), state: typeof activeState === "function" ? activeState() : null }, thresholds: E ? E.TRANSIT_THRESHOLDS : null, hood: null, lot: null, hud: null, brief: null, honest: I && I.honest || null, sites: I && I.countySites || [] };
+    const snap = { county: { fips, name: (I && I.countyName) || (typeof countyOf === "function" ? countyOf() : null), state: typeof activeState === "function" ? activeState() : null }, thresholds: E ? E.TRANSIT_THRESHOLDS : null, hood: null, lot: null, hud: null, brief: null, honest: I && I.honest || null, sites: I && I.countySites || [], projectCards: I && I.projectCards || null };
     const oc = typeof D_OC !== "undefined" && D_OC && D_OC.meta && D_OC.meta.fips === fips ? D_OC : null;
     snap.acsLabel = oc && oc.meta.acs ? (/\bACS\b/.test(oc.meta.acs) ? `Census ${oc.meta.acs}` : `Census ACS ${oc.meta.acs}`) : "Census ACS 5-year";
     const sel = typeof selected !== "undefined" ? selected : null;

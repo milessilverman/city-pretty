@@ -159,7 +159,7 @@ function transitUplift(nearStops, effects) {
       average: fig(r.effect_pct, "% change in property value", r.source_url, "measured"),
       range: range(r.range_low_pct, r.range_high_pct, "% change in property value (lowest to highest published estimate)", r.source_url, "measured"),
       caveat: r.caveat || null })),
-    caution: `The station site is not chosen: ${s.stopCity} is a stop city named in the corridor's source document, located at the Census point of the city (${s.miles} miles from here). Each band applies only to land at that distance from the eventual station. The corridor record's own check: ${String(s.corridorStatus).replace(/_/g, " ")}.`,
+    caution: `The station site is not chosen: ${s.stopCity} is a stop city in the corridor record, placed at a city point (${s.coordinateBasis ? "the record's own note: " + String(s.coordinateBasis).replace(/\.$/, "") : "its basis is not stated"}; ${s.miles ? s.miles + " miles from here" : "the neighborhoods counted lie within " + STOP_RADIUS_MI + " mile of that point"}). Each band applies only to land at that distance from the eventual station. The corridor record's own check: ${String(s.corridorStatus).replace(/_/g, " ")}.`,
     missing: use.length ? [] : [`no verified study row for ${m.mode} in app/data/transit_value_effects.json`],
   };
 }
@@ -225,6 +225,10 @@ function buildProjectCard(subject, ctx) {
       legal = { determined: true, basis: "none needed", note: "keeping the property as it is needs no approval; renting spaces to the public may need a local permit (local rules are not on file)" };
     } else if (!zr.ran) {
       skip(c, zr.why); continue;
+    } else if (c.id === "adu" && S.kind === "site") {
+      // a redevelopment site record (golf course, parking lot, vacant land) shows no home; the ADU law on file covers lots
+      // with a proposed or existing dwelling, and building the main home is a different course
+      skip(c, `the site record shows no existing home (${S.siteKind || "site"}); the ADU law on file covers lots with a proposed or existing dwelling, and building the main home is not one of these courses`, "does_not_apply"); continue;
     } else if (c.id === "adu") {
       const s = zr.applicable.find(ADU_LAW);
       if (!s) { const h = heldFor(zr, ADU_LAW); skip(c, h.length ? h : [S.parcel.is_single_family_residential || S.parcel.is_multifamily_residential ? `no state ADU law on file for ${state || "this state"} applies to this ${S.kind}; local ADU rules (not on file) decide` : `the ${S.kind}'s zoning (${S.parcel.base_zoning_code}) is not classed here as single-family or multifamily residential, so no ADU law on file was applied`]); continue; }
@@ -401,7 +405,7 @@ function holdCost(out, S, vm, inputs, missing) {
       return;
     }
     if (cv && num(cv.value) != null && vm && p80 != null) {
-      out.cost = range(Math.max(0, cv.value * (1 - p80)), cv.value * (1 + p80), "USD, today's value (back-tested estimate; 80% of test sales were within this band)", cv.source || vm.source, "modelled");
+      out.cost = range(Math.round(Math.max(0, cv.value * (1 - p80))), Math.round(cv.value * (1 + p80)), "USD, today's value (back-tested estimate; 80% of test sales were within this band)", cv.source || vm.source, "modelled");
       out.cost.label = "back-tested home-value estimate";
       inputs.push(inputRow("Back-tested estimate for this lot", cv.value, "USD", cv.source || vm.source, "modelled", cv.method || null));
       inputs.push(inputRow(`Tested error band (${cv.tested.band || "all sales"}): 80% of test sales were within`, round(p80 * 100, 1), "%", vm.source, "measured", `median error ${round(vm.tested.mdape * 100, 1)}% on ${vm.tested.n.toLocaleString("en-US")} sales`));
@@ -422,7 +426,11 @@ function holdCost(out, S, vm, inputs, missing) {
     inputs.push(inputRow(`Recorded sales (${n} sales, ${String(d0).slice(0, 7)} to ${String(d1).slice(0, 7)}, ${sales.length} block group${sales.length === 1 ? "" : "s"} with 5 or more)`, null, null, "app/data/county_valuation_models.json", "measured", "the sales the county's tested model is anchored on"));
     return;
   }
-  const hv = bgs.filter(b => num(b.hv) != null);
+  // Census top-codes the median at $2,000,000 or more (stored as 2,000,001) and bottom-codes it at $10,000 or less: such a
+  // block group has no upper (or lower) figure, so it is left out of the range and counted instead.
+  const coded = bgs.filter(b => num(b.hv) != null && (b.hv >= 2000001 || b.hv <= 10000));
+  const hv = bgs.filter(b => num(b.hv) != null && !coded.includes(b));
+  if (coded.length) inputs.push(inputRow(`Block groups left out of the range: Census reports their median as "$2,000,000 or more" or "$10,000 or less"`, coded.length, "block groups", hv.length ? hv[0].hvSource : coded[0].hvSource, "measured"));
   if (hv.length) {
     const vals = hv.map(b => b.hv);
     out.cost = range(Math.min(...vals), Math.max(...vals), hv.length === 1 ? "USD, Census median home value in this block group (owners' own estimate)" : "USD, Census median home value, lowest to highest block group (owners' own estimate)", hv[0].hvSource || "Census ACS 5-year median home value", "measured", hv.length === 1 ? "a Census median, not a price range" : null);
@@ -536,6 +544,7 @@ function cardsForAdvisor(cards, maxChars) {
   const res = { schema: "city-pretty/project-cards-for-advisor@1", howToRead: "Courses of action per subject from app/data tables; ranges are low-high; a course with no cost says why. Ordered by evidence, not by return.", cards: out.slice() };
   while (JSON.stringify(res).length > cap && res.cards.length > 1) res.cards.pop();
   if (JSON.stringify(res).length > cap && res.cards.length === 1) { res.cards[0].notAssessed = res.cards[0].notAssessed.slice(0, 2); res.cards[0].courses = res.cards[0].courses.slice(0, 4); }
+  if (JSON.stringify(res).length > cap) res.cards = [];   // the cap is a hard limit: the advisor brief must stay under the Worker's size limit
   res.truncated = out.length - res.cards.length;
   return res;
 }

@@ -2,6 +2,7 @@
 //   node scripts/brief.mjs 48453            plain text
 //   node scripts/brief.mjs 48453 --json     the JSON the Invest view and the AI advisor read
 //   node scripts/brief.mjs 48453 --area 484530023271   pick the neighborhood (block group) to detail
+//   node scripts/brief.mjs 48453 --budget 800000    also fit the courses of action to a budget
 // Uses the same tables as the Invest view: the idea catalog from the LA bundle, the verification audit
 // (intervention_verification.json: only audited ideas carry figures), state laws, unit costs, valuation models and the
 // California bundle corrections the page applies. Los Angeles County (06037) is packed differently and is not supported.
@@ -55,6 +56,32 @@ let brief = E.buildDecisionBrief(bundle, { top: 5 }, ctx);
 const area = areaArg || brief.topNeighborhoods?.[0]?.id;
 if (area) brief = E.buildDecisionBrief(bundle, { top: 5, blockGroupId: area }, ctx);
 
+// Courses of action (src/engines/projectCardEngine.js): the selected area, the county's measured sites and each planned-rail
+// stop city, built from the same tables as the Invest view's section (pcSubjects / pcCtx in app/invest.js). Only
+// display-allowed cost rows are passed, so no internal-only estimate is computed here either.
+const P = require("../src/engines/projectCardEngine.js");
+const CSA = require("../src/engines/corridorStopAreas.js");
+const ST = { "06": "CA", "12": "FL", "48": "TX" }[fips.slice(0, 2)] || (data("hud_fair_market_rents.json").records.find((r) => r.fips === fips) || {}).state_code || null;
+const pctx = { laws: ctx.laws, buildingCosts: data("building_costs.json").rows.filter((r) => r.display_allowed === true), fundingRules: data("housing_funding_rules.json"), incomeLimits: data("hud_income_limits.json"),
+  fmr: data("hud_fair_market_rents.json"), valuationModels: ctx.valuationModels, valuationBenchmarks: data("valuation_backtest_benchmarks.json"), transitEffects: data("transit_value_effects.json"), corridors: data("intercity_transit_corridors.json") };
+const bgRow = (id) => { const m = (bundle.details[id] || {}).m || {}; return { id, hv: Number.isFinite(m.hv) ? m.hv : null, hvSource: m.hvs || "Census ACS 5-year median home value" }; };
+const stopCards = [];
+for (const c of pctx.corridors) {
+  for (const r of CSA.stopAreasForCounty(c, bundle, fips, 1)) {
+    if (!r.ok || !r.stop.coordinate_basis || stopCards.some((s) => s.c === c.id && s.city === r.stop.city)) continue;
+    stopCards.push({ c: c.id, city: r.stop.city, subject: { kind: "stop_area", id: r.stop.id, name: `Around the ${r.stop.city} stop city (${c.name})`, countyFips: fips, stateCode: ST, city: r.stop.city, blockGroups: r.areas.map((a) => bgRow(a.id)),
+      nearStops: [{ corridorId: c.id, corridorName: c.name, corridorType: c.corridor_type || null, corridorStatus: (c.verification && c.verification.status) || "unverified", stopId: r.stop.id, stopCity: r.stop.city, miles: null, coordinateBasis: r.stop.coordinate_basis }],
+      sitesNearby: ctx.underusedSites.filter((s) => s.countyFips === fips && r.areas.some((a) => a.id === s.blockGroupId)).length } });
+  }
+}
+const subjects = [];
+if (area && bundle.details[area]) subjects.push({ kind: "neighborhood", id: area, name: bundle.details[area].m.n || area, countyFips: fips, stateCode: ST, city: bundle.details[area].m.c || null, blockGroups: [bgRow(area)] });
+for (const s of ctx.underusedSites.filter((x) => x.countyFips === fips).sort((a, b) => (b.acres || 0) - (a.acres || 0)).slice(0, 6)) subjects.push({ kind: "site", id: s.id, name: s.name, siteKind: s.kind, countyFips: fips, stateCode: ST, city: s.cityName || null, acres: Number.isFinite(s.acres) ? { value: s.acres, source: s.sourceUrl } : null, parcel: { parcel_id: s.id, state_code: ST, county_fips: fips, base_zoning_code: s.baseZoning || null, municipality_name: s.cityName || null, is_commercial_or_mixed_use: /commercial/.test(s.zoningCategory || ""), is_multifamily_residential: s.zoningCategory === "multifamily", is_single_family_residential: s.zoningCategory === "single-family", exclusions: {}, lot_sqft: Number.isFinite(s.acres) ? s.acres * 43560 : null } });
+for (const s of stopCards) subjects.push(s.subject);
+const cards = subjects.map((s) => P.buildProjectCard(s, pctx));
+brief.projectCards = P.cardsForAdvisor(cards, Math.min(6000, 19500 - JSON.stringify(E.briefForAdvisor(brief)).length));
+const budgetArg = args.includes("--budget") ? Number(args[args.indexOf("--budget") + 1]) : null;
+
 if (asJson) { console.log(JSON.stringify(brief, null, 2)); process.exit(0); }
 
 const money = (v) => (v == null ? "not on file" : "$" + Math.round(v).toLocaleString("en-US"));
@@ -84,6 +111,24 @@ if (t) {
   out.push("", `TRANSIT for ${t.name || "this area"}: ${t.verdict}${t.scale ? ", scale: " + t.scale : ""}`);
   if (t.verdictMeaning) out.push("  " + t.verdictMeaning);
   for (const r of t.reasons || []) out.push("  - " + r);
+}
+const rg = (r) => (r ? (r.low.value === r.high.value ? money(r.low.value) : `${money(r.low.value)} to ${money(r.high.value)}`) + ` [${r.basis}]` : null);
+out.push("", "COURSES OF ACTION (project cards; ranges, every input sourced: see docs/PROJECT-CARDS.md)");
+for (const c of cards) {
+  out.push(`  ${c.subject.kind}: ${c.subject.name}`);
+  for (const x of c.courses) {
+    out.push(`    - ${x.label}: cost ${rg(x.cost) || "not on file (" + x.costWhy + ")"}${x.cost && x.cost.label ? " (" + x.cost.label + ")" : ""}`);
+    if (x.income) out.push(`        income ${rg(x.income.perUnitMonthly)} per home per month (${x.income.label})`);
+    out.push(`        value ${x.value ? rg(x.value) : x.valueWhy}`);
+    if (x.transitUplift) for (const b of x.transitUplift.bands) out.push(`        near ${x.transitUplift.stop.city} stop city, ${b.band}: average ${b.average.value}%, studies ranged ${b.range ? b.range.low.value + "% to " + b.range.high.value + "%" : "not on file"}`);
+  }
+  for (const n of c.notAssessed) out.push(`    x ${n.label}: could not be assessed: ${n.missing[0]}`);
+}
+if (budgetArg != null && Number.isFinite(budgetArg)) {
+  const f = P.fitToBudget(cards, budgetArg);
+  out.push("", `WITH ${money(budgetArg)}: ${f.within.length} fit, ${f.straddle.length} could fit, ${f.over.length} cost more, ${f.uncosted} have no cost on file, ${f.notAssessed} could not be assessed`);
+  for (const x of f.within) out.push(`  fits: ${x.label} (${x.subject}): ${rg(x.cost)}`);
+  for (const x of f.straddle) out.push(`  could fit: ${x.label} (${x.subject}): ${rg(x.cost)}`);
 }
 if ((brief.missing || []).length) { out.push("", "MISSING DATA"); for (const m of brief.missing) out.push("  - " + m); }
 console.log(out.join("\n"));

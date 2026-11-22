@@ -717,7 +717,7 @@ function render() {
     const m = iv.model;
     const open = openSet();
     const y = window.scrollY;
-    el.innerHTML = `<div class="iv-wrap">${headerHTML(m, open)}<div class="iv-cards">${whereCard(m, open)}${buildCard(m, open)}${sitesCard(m, open)}${houseCard(m, open)}${transitCard(m, open)}</div>
+    el.innerHTML = `<div class="iv-wrap">${headerHTML(m, open)}<div class="iv-cards">${whereCard(m, open)}${buildCard(m, open)}${sitesCard(m, open)}${houseCard(m, open)}${transitCard(m, open)}</div>${coursesSection(m, open)}
       <p class="iv-foot">Everything here comes from public data and the tests described above. It is a starting point for due diligence, not advice. A figure marked Not on file is missing from our data, and we do not fill gaps with guesses.</p></div>`;
     if (!fresh) window.scrollTo(0, y);
     window.__cpDecisionBrief = m.brief;
@@ -793,15 +793,221 @@ function advisorInputs() {
   const r = ready();
   if (r.state === "nodata") return Promise.resolve({ state: "nodata", fips: r.fips });
   if (r.state !== "ok" || !E()) return Promise.resolve(null);
-  return loadData().then(d => {
+  return Promise.all([loadData(), loadPcData()]).then(([d]) => {
     const r2 = ready(); if (r2.state !== "ok") return null;
     const ctx = { backtest: d.backtest, catalog: D.catalog, verification: d.verification, underusedSites: d.sites, sites: (typeof SITES !== "undefined") ? SITES : null, costBenchmarks: engineCosts(d.cost), valueEffects: engineEffects(d.effects),
       laws: d.laws || undefined, unitCosts: d.unitCosts, valuationModels: d.valuationModels, prediction: d.prediction };
     const sl = siteLists({ countySites: d.sites.filter(s => s && s.countyFips === r2.fips) });
-    return { state: "ok", fips: r2.fips, countyName: countyShort(), B: r2.B, ctx, pf: parcelFacts(), honest: honest(d.backtest, r2.fips, countyShort()), countySites: sl.all.map(s => Object.assign({}, s, { displayName: siteName(s) })) };
+    return { state: "ok", fips: r2.fips, countyName: countyShort(), B: r2.B, ctx, pf: parcelFacts(), honest: honest(d.backtest, r2.fips, countyShort()), countySites: sl.all.map(s => Object.assign({}, s, { displayName: siteName(s) })), projectCards: pcCardsForAdvisorInputs(r2, d) };
   });
 }
 
-window.cpInvest = { render, advisorInputs, setView: v => setInvest(v === "invest"), get state() { return iv; } };
+// ================================================================ Courses of action (project cards)
+// Self-contained section. src/engines/projectCardEngine.js builds one card per subject (the selected neighborhood, the
+// open lot, each measured site, each planned-rail stop city in the county); this block only gathers the subjects and
+// formats the cards. It never reads or renders a card's internal_only branch (rows marked display_allowed: false), and
+// the advisor gets only the engine's compact cardsForAdvisor form.
+const pc = { data: null, p: null, budget: null, allSites: false, key: null, cards: null, advKey: null, advCards: null };
+const PCE = () => window.ProjectCardEngine;
+const PC_SITES_SHOWN = 6;
+function loadPcData() {
+  if (pc.p) return pc.p;
+  const get = f => fetch("app/data/" + f).then(r => r.ok ? r.json() : null).catch(() => null);
+  const j = id => (typeof cpJson === "function" ? cpJson(id) : Promise.resolve(null)).catch(() => null);
+  pc.p = Promise.all([get("building_costs.json"), get("housing_funding_rules.json"), get("hud_income_limits.json"), j("hud-fmr"), j("valuation-benchmarks")])
+    .then(([bc, fr, il, fmr, vb]) => (pc.data = { buildingCosts: (bc && bc.rows) || [], fundingRules: fr, incomeLimits: il, fmr, valuationBenchmarks: vb }));
+  return pc.p;
+}
+function pcStop(corr, stop, miles) {
+  return { corridorId: corr.id, corridorName: corr.name, corridorType: corr.corridor_type || null, corridorStatus: (corr.verification && corr.verification.status) || "unverified", stopId: stop.id, stopCity: stop.city, miles, coordinateBasis: stop.coordinate_basis || null };
+}
+function pcSubjects(m) {
+  const fips = m.fips, st = typeof activeState === "function" ? activeState() : null;
+  const det = id => (m.B.details[id] && m.B.details[id].m) || {};
+  const bgRow = id => { const x = det(id); return { id, hv: isNum(x.hv) ? x.hv : null, hvSource: x.hvs ? String(typeof hvSourceText === "function" ? hvSourceText(x.hvs) : x.hvs) : "Census ACS 5-year median home value for the block group" }; };
+  const areas = [];
+  // a stop is used only where its record says how its point was placed (one Austin stop has no stated basis), and one
+  // card per stop city: stop names in an unverified record are not used
+  for (const ce of m.corrEval || []) for (const s of ce.stops || []) if (s.ok && s.stop.coordinate_basis && !areas.some(a => a.corr.id === ce.row.id && a.stop.city === s.stop.city)) areas.push({ corr: ce.row, stop: s.stop, areas: s.areas });
+  const nearBg = id => areas.filter(a => a.areas.some(x => x.id === id)).map(a => pcStop(a.corr, a.stop, a.areas.find(x => x.id === id).miles || null));
+  const out = [];
+  if (m.hood && m.B.details[m.hood]) out.push({ kind: "neighborhood", id: m.hood, name: hoodName(m, m.hood), countyFips: fips, stateCode: st, city: det(m.hood).c || null, blockGroups: [bgRow(m.hood)], nearStops: nearBg(m.hood) });
+  const h = (typeof activeHouse !== "undefined") ? activeHouse : null;
+  if (m.pf && h) {
+    let juris = null; try { const z = h.ll && typeof zoneAt === "function" ? zoneAt(h.ll) : null; juris = z && z.juris ? String(z.juris) : null; } catch (e) { juris = null; }
+    const v = h.valuation || null;
+    let cv = null;
+    if (v && isNum(v.estimatedValue) && /^Recorded sale/.test(String(v.valuationMethod || ""))) cv = { value: v.estimatedValue, recordedSale: true, source: "the lot's panel: " + v.valuationMethod, method: v.valuationMethod };
+    else if (v && isNum(v.estimatedValue) && v.backtest && v.backtest.pass) cv = { value: v.estimatedValue, source: "the lot's panel: " + (v.valuationMethod || "back-tested estimate"), method: v.confidenceRating || null };
+    else if (v) cv = { value: null, reason: String(v.withheldReason || v.confidenceRating || "no back-tested estimate for this lot").replace(/^No estimate:\s*/, "") };
+    out.push({ kind: "lot", id: m.pf.facts.parcel_id, name: m.pf.address || "The lot open on the map", countyFips: fips, stateCode: st, city: juris, point: h.ll || null,
+      parcel: Object.assign({}, m.pf.facts, { municipality_name: juris }), railStationMi: m.pf.facts.dist_to_heavy_rail_mi, currentValue: cv });
+  }
+  const sites = m.countySites.slice().sort((a, b) => (b.acres || 0) - (a.acres || 0));
+  for (const s of (pc.allSites ? sites : sites.slice(0, PC_SITES_SHOWN))) {
+    const uf = ((s.verification && s.verification.unverified_fields) || []).map(u => String(u).split(/[\s(]/)[0]);
+    const acresOk = isNum(s.acres) && !uf.includes("acres");
+    const railOk = isNum(s.distanceToRailMeters) && !uf.includes("distanceToRailMeters");
+    out.push({ kind: "site", id: s.id, name: siteName(s), siteKind: s.kind || null, countyFips: fips, stateCode: st, city: s.cityName || null,
+      acres: acresOk ? { value: s.acres, source: s.sourceUrl || "app/data/underused_sites.json" } : null,
+      railStationMi: railOk ? s.distanceToRailMeters / 1609.344 : null,
+      railNote: railOk && s.nearestRailStation ? `the site record names its nearest rail station (${s.nearestRailStation}, ${Math.round(s.distanceToRailMeters)} m away) but not that station's mode, which the SB 79 tiers depend on` : null,
+      nearStops: s.blockGroupId ? nearBg(s.blockGroupId) : [],
+      parcel: { parcel_id: s.id, state_code: st, county_fips: fips, base_zoning_code: s.baseZoning || null, municipality_name: s.cityName || null, is_commercial_or_mixed_use: /commercial/.test(s.zoningCategory || ""), is_single_family_residential: s.zoningCategory === "single-family", is_multifamily_residential: s.zoningCategory === "multifamily", exclusions: {}, lot_sqft: acresOk ? s.acres * 43560 : null } });
+  }
+  for (const a of areas) out.push({ kind: "stop_area", id: a.stop.id, name: `Around the ${a.stop.city} stop city (${a.corr.name})`, countyFips: fips, stateCode: st, city: a.stop.city,
+    blockGroups: a.areas.map(x => bgRow(x.id)), nearStops: [pcStop(a.corr, a.stop, null)], sitesNearby: m.countySites.filter(s => a.areas.some(x => x.id === s.blockGroupId)).length });
+  return { subjects: out, sitesHidden: pc.allSites ? 0 : Math.max(0, sites.length - PC_SITES_SHOWN), sitesAll: sites.length };
+}
+function pcCtx() {
+  const d = iv.data, P = pc.data;
+  return { laws: d.laws || undefined, buildingCosts: P.buildingCosts, fundingRules: P.fundingRules, incomeLimits: P.incomeLimits, fmr: P.fmr, valuationModels: d.valuationModels, valuationBenchmarks: P.valuationBenchmarks, transitEffects: { rows: d.effects }, corridors: d.corridors };
+}
+function pcCards(m) {
+  const h = (typeof activeHouse !== "undefined") ? activeHouse : null;
+  const key = [iv.key, pc.allSites, h && h.valuation ? h.valuation.estimatedValue : "-", h && h.ll ? h.ll.lat + "," + h.ll.lng : "-"].join("|");
+  if (pc.key === key && pc.cards && pc.model === m) return pc.cards;
+  const S = pcSubjects(m), ctx = pcCtx();
+  const cards = S.subjects.map(s => { try { return PCE().buildProjectCard(s, ctx); } catch (e) { return null; } }).filter(Boolean);
+  pc.cards = { cards, sitesHidden: S.sitesHidden, sitesAll: S.sitesAll }; pc.key = key; pc.model = m;
+  return pc.cards;
+}
+// For the scripted advisor ("I have $X"): the same cards the section shows, built from the current model.
+function pcCardsForAdvisorInputs(r2, d) {
+  if (!PCE() || !pc.data) return null;
+  try {
+    const m = iv.model && iv.model.fips === r2.fips ? iv.model : (pc.advKey === r2.fips + "|" + iv.hood && pc.advModel) ? pc.advModel : (pc.advModel = build(r2.fips, r2.B, d));
+    pc.advKey = r2.fips + "|" + iv.hood;
+    return pcCards(m).cards;
+  } catch (e) { return null; }
+}
+
+const pcMoney = v => "$" + Math.round(v).toLocaleString("en-US");
+function pcVal(f) {
+  const u = String(f.unit || ""), v = f.value;
+  if (/^USD/.test(u)) return pcMoney(v);
+  if (/^% /.test(u) || /^%$/.test(u)) return (v > 0 ? "+" : "") + v + "%";
+  if (/^acres/.test(u)) return v.toFixed(2) + " acres";
+  if (/sq ft/.test(u)) return Math.round(v).toLocaleString("en-US") + " sq ft";
+  if (/^homes/.test(u)) return Math.round(v).toLocaleString("en-US") + (Math.round(v) === 1 ? " home" : " homes");
+  if (/^x /.test(u)) return v + "x";
+  return String(v) + (u ? " " + u : "");
+}
+function pcRange(r) {
+  if (!r || !r.low || !isNum(r.low.value)) return "";
+  const u = String(r.unit || ""), pre = /\(up to\)/.test(u) ? "up to " : /at least/.test(u) ? "at least " : "";
+  const txt = pre + (r.low.value === r.high.value ? pcVal(r.low) : pcVal(r.low) + " to " + pcVal(r.high));
+  return `<span class="pc-fig" title="${esc2(u)}">${esc2(txt)}</span> ${basisTag(r.basis)} ${srcMark(r.source)}${r.exact ? `<span class="iv-muted"> (${esc2(typeof r.exact === "string" ? r.exact : "exact")})</span>` : ""}`;
+}
+const pcFig = f => f && isNum(f.value) ? `<span class="pc-fig" title="${esc2(f.unit || "")}">${esc2(pcVal(f))}</span> ${basisTag(f.basis)} ${srcMark(f.source)}` : "";
+const PC_KIND = { neighborhood: "Selected area", lot: "Open lot", site: "Site", stop_area: "Stop city" };
+function pcLegal(x) {
+  const l = x.legal;
+  if (l.basis === "statute") return `<span class="iv-chip" title="${esc2(l.note || "")}">${esc2(String(l.citation || "").split(" — ")[0])}</span>`;
+  if (l.basis === "zoning on file") return `<span class="iv-chip">Zoning on file: ${esc2(l.zone)}</span>`;
+  return `<span class="iv-chip">No approval needed to hold</span>`;
+}
+function pcSize(x) {
+  if (x.course === "hold") return x.size && x.size.area ? pcRange(x.size.area) : nof(x.sizeWhy);
+  const s = x.size || {};
+  const parts = [s.units ? pcRange(s.units) : null, s.sqft ? pcRange(s.sqft) : null].filter(Boolean);
+  return parts.length ? parts.join("; ") : nof("not sized: " + ((x.missing || []).filter(t => /^Size/.test(t)).map(t => t.replace(/^Size \([^)]*\): /, "")).join("; ") || "no limit on file"));
+}
+function pcMoneyHTML(x) {
+  if (!x.publicMoney.length) return `<span class="iv-muted">${x.course === "hold" ? "No programme on file pays for holding a property" : x.course === "adu" ? "No programme on file applied to one market-rate ADU" : "None applied: a market-rate course (see the course with an affordable share)"}</span>`;
+  return `<ul class="pc-pm">${x.publicMoney.map(p => `<li><b>${esc2(p.programme)}</b>: ${esc2(p.status)}${p.cap ? `; federal cap ${pcRange(p.cap)}` : ""}${p.why && p.why.length ? `<span class="iv-muted"> (because ${esc2(p.why.join("; "))})</span>` : ""}${(p.rules || []).length ? `<ul class="pc-rules">${p.rules.map(r => `<li class="iv-muted">${esc2(r.text)}${r.quote ? `: "${esc2(r.quote)}"` : ""} ${srcMark(r.url)}</li>`).join("")}</ul>` : ""}</li>`).join("")}</ul>${x.affordableUnits ? `<p class="iv-muted">Affordable share: ${pcRange(x.affordableUnits)}</p>` : ""}`;
+}
+function pcIncome(x) {
+  if (!x.income) return nof(x.incomeWhy);
+  const i = x.income;
+  return `${pcRange(i.perUnitMonthly)} per home per month${i.yearly ? `; ${pcRange(i.yearly)} a year` : ""}${i.at80 ? `; at the 80% limit ${pcRange(i.at80)}` : ""}<br><span class="iv-muted">${esc2(i.label)}</span>`;
+}
+function pcUplift(t) {
+  if (!t) return "";
+  return `<div class="pc-wide"><dt>Near a planned stop</dt><dd><span class="iv-muted">${esc2(t.stop.corridor)}, ${esc2(t.stop.city)} stop city. Effect on nearby values in published studies (${esc2(t.modeUsed)}; ${esc2(t.modeNote)}):</span>
+    <ul class="pc-up">${t.bands.map(b => `<li>${esc2(b.band)}${b.propertyType ? ` (${esc2(b.propertyType)})` : ""}: average ${pcFig(b.average)}${b.range ? `, studies ranged ${pcRange(b.range)}` : ""} <span class="iv-muted">${esc2(String(b.study).split(",")[0])}</span></li>`).join("")}</ul>
+    <p class="iv-muted">${esc2(t.caution)}</p></dd></div>`;
+}
+function pcInputs(x) {
+  const rows = x.inputs.map(r => {
+    const v = r.range ? pcRange(r.range) : isNum(r.value) ? `<span class="pc-fig">${esc2(/^USD/.test(r.unit || "") ? pcMoney(r.value) : r.value.toLocaleString("en-US") + (r.unit ? " " + r.unit : ""))}</span>` : r.text ? esc2(r.text) : "";
+    return `<tr><td>${esc2(r.name)}${r.note ? `<br><span class="iv-muted">${esc2(r.note)}</span>` : ""}</td><td>${v}</td><td>${basisTag(r.basis)}</td><td>${srcMark(r.source)}</td></tr>`;
+  }).join("");
+  return `<div class="iv-tablewrap"><table class="iv-table pc-inputs"><thead><tr><th>Input</th><th>Value</th><th>Tag</th><th>Source</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+function pcCourse(x, open, key) {
+  return `<li class="pc-course" data-pc-course="${esc2(x.course)}${x.affordable ? "-aff" : ""}"><div class="pc-course-h"><b>${esc2(x.label)}</b> ${pcLegal(x)}</div>
+    <dl class="iv-dl pc-dl">
+      <div><dt>Size</dt><dd>${pcSize(x)}</dd></div>
+      <div><dt>Cost</dt><dd>${x.cost ? `${pcRange(x.cost)}${x.cost.label ? `<br><span class="iv-muted">${esc2(x.cost.label)}${x.course === "adu" ? "; the lot itself is not included" : ""}</span>` : ""}` : nof(x.costWhy)}</dd></div>
+      <div><dt>Public money</dt><dd>${pcMoneyHTML(x)}</dd></div>
+      <div><dt>Income</dt><dd>${pcIncome(x)}</dd></div>
+      <div><dt>Value</dt><dd>${x.value ? `${pcRange(x.value)}${x.valueNote ? `<br><span class="iv-muted">${esc2(x.valueNote)}</span>` : ""}` : nof(x.valueWhy)}</dd></div>
+      ${pcUplift(x.transitUplift)}
+    </dl>
+    ${det(open, key, `Every input and its source (${x.inputs.length}), what could break it, what is missing`, `${pcInputs(x)}
+      ${x.risks.length ? `<p class="iv-k">What could break it</p><ul class="iv-caveats">${x.risks.map(t => `<li>${esc2(t)}</li>`).join("")}</ul>` : ""}
+      ${x.missing.length ? `<p class="iv-k">What is missing</p><ul class="iv-caveats">${x.missing.map(t => `<li>${esc2(t)}</li>`).join("")}</ul>` : ""}`)}</li>`;
+}
+function pcCard(card, open) {
+  const s = card.subject, k = "pc-" + s.kind + "-" + String(s.id || s.name);
+  const costed = card.courses.filter(x => x.cost).length;
+  const st0 = s.kind === "stop_area" && s.nearStops && s.nearStops[0] ? s.nearStops[0].corridorStatus : null;
+  const summary = `<span class="pc-kind">${esc2(PC_KIND[s.kind] || s.kind)}</span> <b>${esc2(s.name || "")}</b>${st0 && st0 !== "verified" ? ` <span class="iv-chip iv-unconf">corridor record: ${esc2(String(st0).replace(/_/g, " "))}</span>` : ""} <span class="iv-muted">${card.courses.length} ${card.courses.length === 1 ? "course" : "courses"}, ${costed} with a cost on file, ${card.notAssessed.length} could not be assessed</span>`;
+  const na = card.notAssessed.length ? `<div class="pc-na"><p class="iv-k">Could not be assessed (${card.notAssessed.length})</p><ul>${card.notAssessed.map(n => `<li><b>${esc2(n.label)}</b><ul class="iv-caveats">${n.missing.map(t => `<li>${esc2(t)}</li>`).join("")}</ul></li>`).join("")}</ul></div>` : "";
+  return `<details class="pc-card" data-pc-subject="${esc2(s.kind)}" ${dk(open, k)}><summary>${summary}</summary>
+    <ul class="pc-courses">${card.courses.map((x, i) => pcCourse(x, open, k + "-" + x.course + (x.affordable ? "-aff" : ""))).join("")}</ul>${na}</details>`;
+}
+function pcFitHTML(cards) {
+  const preset = BUDGET_OK(), b = pc.budget != null ? pc.budget : preset;
+  if (!isFinite(b)) {
+    const f = PCE().fitToBudget(cards, Number.MAX_SAFE_INTEGER);
+    return `<p class="pc-fit-line">With no upper limit: <b>${f.within.length}</b> ${f.within.length === 1 ? "course has" : "courses have"} a cost on file; ${f.uncosted} ${f.uncosted === 1 ? "has" : "have"} no cost on file and ${f.notAssessed} could not be assessed.</p>`;
+  }
+  const f = PCE().fitToBudget(cards, b);
+  const li = (x, tag) => `<li><span class="iv-chip">${tag}</span> <b>${esc2(x.label)}</b> <span class="iv-muted">${esc2(x.subject || "")}</span>: ${pcRange(x.cost)}${x.costLabel ? ` <span class="iv-muted">(${esc2(x.costLabel)})</span>` : ""}</li>`;
+  const list = f.within.map(x => li(x, "Fits")).concat(f.straddle.map(x => li(x, "Could fit"))).slice(0, 8);
+  return `<p class="pc-fit-line">With <b>${esc2(pcMoney(b))}</b>: <b>${f.within.length}</b> ${f.within.length === 1 ? "course costs" : "courses cost"} at most this (the top of the range), <b>${f.straddle.length}</b> could (the range straddles it), ${f.over.length} cost more; ${f.uncosted} ${f.uncosted === 1 ? "has" : "have"} no cost on file and ${f.notAssessed} could not be assessed.</p>
+    ${list.length ? `<ul class="pc-fitlist">${list.join("")}</ul>` : ""}<p class="iv-muted">Listed by the strength of the evidence (measured cost before modelled, a checked law before a partly checked one), not by return: no return figure here has a tested basis.</p>`;
+}
+function coursesSection(m, open) {
+  if (!PCE()) return "";
+  if (!pc.data) { loadPcData().then(() => { if (iv.view === "invest") render(); }); return `<section class="pc-wrap" id="iv-courses"><h3>Courses of action</h3><p class="iv-loading"><span class="spin"></span> Loading cost and funding tables…</p></section>`; }
+  const C = pcCards(m);
+  // the advisor's brief must stay under the Worker's limit (DECISION_BRIEF_MAX_CHARS, 20,000 in
+  // src/ai/advisorGroundingContract.ts): the cards get the room the rest of the brief leaves, at most 6,000 characters
+  if (m.brief) {
+    m.brief.projectCards = null;
+    const used = JSON.stringify(E().briefForAdvisor(m.brief)).length, room = Math.min(6000, 19500 - used);
+    m.brief.projectCards = room > 400 ? PCE().cardsForAdvisor(C.cards, room) : null;
+  }
+  const bv = pc.budget != null ? pc.budget : (isFinite(BUDGET_OK()) ? BUDGET_OK() : "");
+  return `<section class="pc-wrap" id="iv-courses" aria-labelledby="iv-courses-h">
+    <h3 id="iv-courses-h">Courses of action</h3>
+    <p class="iv-lede">What could be done, at what cost, for the selected area, the open lot, ${C.sitesAll ? "each measured site, " : ""}and each planned-rail stop city in ${esc2(countyShort())}. A course is listed only where a law or the zoning on file settles that it is allowed; costs come only from tables that may be shown here. Every result is a range with its source.</p>
+    <div class="pc-budget"><label for="pc-budget-in">How much money do you have?</label>
+      <input id="pc-budget-in" type="number" min="0" step="1000" inputmode="numeric" value="${esc2(bv)}" placeholder="for example 150000">
+      <button type="button" class="tool-btn primary" data-pc="budget">Find courses</button></div>
+    <div class="pc-fit" id="pc-fit">${pcFitHTML(C.cards)}</div>
+    <div class="pc-cards">${C.cards.map(c => pcCard(c, open)).join("")}</div>
+    ${C.sitesAll > PC_SITES_SHOWN ? `<button type="button" class="tool-btn" data-pc="all-sites">${pc.allSites ? `Show the ${PC_SITES_SHOWN} largest sites` : `Show all ${C.sitesAll} sites`}</button>` : ""}
+  </section>`;
+}
+function pcSetBudget() {
+  const el = document.getElementById("pc-budget-in");
+  const v = el ? Number(String(el.value).replace(/[,$\s]/g, "")) : NaN;
+  pc.budget = isFinite(v) && v >= 0 && String(el.value).trim() !== "" ? v : null;
+  render();
+}
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-pc],[data-iv-budget]");
+  if (!t || !host() || !host().contains(t)) return;
+  if (t.dataset.ivBudget != null) { pc.budget = null; return; }   // the preset buttons win over a typed amount
+  if (t.dataset.pc === "budget") pcSetBudget();
+  else if (t.dataset.pc === "all-sites") { pc.allSites = !pc.allSites; render(); }
+});
+document.addEventListener("keydown", e => { if (e.key === "Enter" && e.target && e.target.id === "pc-budget-in") { e.preventDefault(); pcSetBudget(); } });
+
+window.cpInvest = { render, advisorInputs, setView: v => setInvest(v === "invest"), get state() { return iv; }, get courses() { return pc; } };
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();

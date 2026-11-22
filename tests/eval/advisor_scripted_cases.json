@@ -481,6 +481,43 @@
    "question": "Can I build 2 units?",
    "snapshot": "sutter_lot",
    "expect": "handoff"
+  },
+  {
+   "id": "budget_cards_800k",
+   "question": "I have $800,000",
+   "snapshot": "travis",
+   "expect": "budget",
+   "must_include": [
+    "Courses of action",
+    "Hold and rent the spaces",
+    "Census median home value",
+    "not by return"
+   ]
+  },
+  {
+   "id": "budget_cards_lot_150k",
+   "question": "What can I do with $150k?",
+   "snapshot": "sutter_lot",
+   "expect": "budget",
+   "must_include": [
+    "Courses of action",
+    "have no cost on file"
+   ]
+  },
+  {
+   "id": "budget_cards_tiny",
+   "question": "My budget is $5,000",
+   "snapshot": "travis",
+   "expect": "budget",
+   "must_include": [
+    "0 courses cost at most $5,000"
+   ]
+  },
+  {
+   "id": "budget_cards_two_amounts",
+   "question": "I have $200,000 or $400,000, which courses?",
+   "snapshot": "travis",
+   "expect": "handoff"
   }
  ]
 }

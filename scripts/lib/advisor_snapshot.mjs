@@ -14,6 +14,15 @@ import { fileURLToPath } from "node:url";
 const require = createRequire(import.meta.url);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const E = require(path.join(root, "src/engines/investmentDecisionEngine.js"));
+const P = require(path.join(root, "src/engines/projectCardEngine.js"));
+// The tables the Invest view's Courses of action section passes to the project card engine (pcCtx in app/invest.js)
+let _pctx = null;
+export function projectCardCtx(T) {
+  if (_pctx) return _pctx;
+  _pctx = { laws: T.laws, buildingCosts: json("app/data/building_costs.json").rows, fundingRules: json("app/data/housing_funding_rules.json"), incomeLimits: json("app/data/hud_income_limits.json"),
+    fmr: T.hud, valuationModels: T.valuationModels, valuationBenchmarks: json("app/data/valuation_backtest_benchmarks.json"), transitEffects: json("app/data/transit_value_effects.json"), corridors: json("app/data/intercity_transit_corridors.json") };
+  return _pctx;
+}
 const read = rel => fs.readFileSync(path.join(root, rel));
 const json = rel => JSON.parse(read(rel).toString("utf8"));
 const isNum = v => typeof v === "number" && isFinite(v);
@@ -85,6 +94,12 @@ export function nodeSnapshot(opts) {
   }
   const ctx = { backtest: T.backtest, catalog: T.catalog, verification: T.verification, underusedSites: T.sites, sites: null, costBenchmarks: T.costBenchmarks, valueEffects: T.valueEffects, laws: T.laws, unitCosts: T.unitCosts, valuationModels: T.valuationModels };
   snap.brief = E.buildDecisionBrief(B, { blockGroupId: bg && B.details[bg] ? bg : null, parcel: opts.lot ? opts.lot.facts : null, top: 10 }, ctx);
+  // courses of action for the selected area and the fixture lot (the page builds the same cards in app/invest.js)
+  const st = opts.lot && opts.lot.facts ? opts.lot.facts.state_code : ({ "06": "CA", "48": "TX", "12": "FL" })[fips.slice(0, 2)] || null;   // the fixture counties only
+  const pctx = projectCardCtx(T);
+  snap.projectCards = [];
+  if (bg && B.details[bg]) snap.projectCards.push(P.buildProjectCard({ kind: "neighborhood", id: bg, name: B.details[bg].m.n || bg, countyFips: fips, stateCode: st, blockGroups: [{ id: bg, hv: isNum(B.details[bg].m.hv) ? B.details[bg].m.hv : null, hvSource: B.details[bg].m.hvs || "Census ACS 5-year median home value" }] }, pctx));
+  if (opts.lot && opts.lot.facts) snap.projectCards.push(P.buildProjectCard({ kind: "lot", id: opts.lot.facts.parcel_id, name: opts.lot.address, countyFips: fips, stateCode: st, city: opts.lot.city || null, parcel: opts.lot.facts }, pctx));
   return snap;
 }
 
