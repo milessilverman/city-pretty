@@ -288,3 +288,131 @@ Files: `data/backtests/midwest_ia_census_spot_2026-11-22.json`, `data/backtests/
 
 Files: `data/backtests/midwest_ne_census_spot_2026-11-22.json`, `data/backtests/midwest_osm_xcheck_31001_2026-11-22.json`,
 `..._31005_...`, `data/backtests/live_check_panels_2026-11-22_midwest_ne.json`.
+
+## Kansas (100 of 100 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Allen County (20001) | 12,483 | 13 | 187,412 | D | 7 |
+| Anderson County (20003) | 7,834 | 7 | 140,616 | D | 0 |
+| Atchison County (20005) | 16,208 | 16 | 169,505 | D | 11 |
+| Barber County (20007) | 4,069 | 5 | 129,518 | D | 0 |
+| Barton County (20009) | 25,097 | 22 | 134,270 | D | 14 |
+| Bourbon County (20011) | 14,394 | 14 | 139,292 | D | 9 |
+| Brown County (20013) | 9,343 | 10 | 111,154 | D | 0 |
+| Butler County (20015) | 68,287 | 53 | 311,746 | D | 32 |
+| Chase County (20017) | 2,561 | 3 | 106,937 | D | 0 |
+| Chautauqua County (20019) | 3,370 | 3 | 85,704 | D | 0 |
+| Cherokee County (20021) | 19,151 | 21 | 148,816 | D | 0 |
+| Cheyenne County (20023) | 2,628 | 3 | 130,789 | D | 0 |
+| Clark County (20025) | 1,974 | 2 | 87,384 | D | 0 |
+| Clay County (20027) | 8,048 | 8 | 145,288 | D | 4 |
+| Cloud County (20029) | 8,898 | 10 | 139,673 | D | 6 |
+| Coffey County (20031) | 8,308 | 8 | 152,892 | D | 0 |
+| Comanche County (20033) | 1,729 | 2 | 93,449 | D | 0 |
+| Cowley County (20035) | 34,411 | 30 | 221,154 | D | 25 |
+| Crawford County (20037) | 39,008 | 34 | 136,383 | D | 23 |
+| Decatur County (20039) | 2,726 | 3 | 112,278 | D | 0 |
+| Dickinson County (20041) | 18,445 | 16 | 255,564 | C | 7 |
+| Doniphan County (20043) | 7,503 | 10 | 225,630 | D | 4 |
+| Edwards County (20047) | 2,779 | 4 | 83,008 | D | 0 |
+| Elk County (20049) | 2,453 | 4 | 111,147 | D | 0 |
+| Ellis County (20051) | 28,920 | 26 | 196,690 | D | 21 |
+| Ellsworth County (20053) | 6,360 | 6 | 120,161 | D | 0 |
+| Finney County (20055) | 38,084 | 29 | 154,680 | C | 26 |
+| Ford County (20057) | 34,074 | 27 | 159,782 | C | 23 |
+| Franklin County (20059) | 26,106 | 22 | 192,203 | D | 12 |
+| Geary County (20061) | 35,815 | 31 | 389,762 | C | 30 |
+| Gove County (20063) | 2,799 | 3 | 129,183 | D | 0 |
+| Graham County (20065) | 2,389 | 3 | 63,501 | D | 0 |
+| Grant County (20067) | 7,229 | 6 | 71,435 | D | 6 |
+| Gray County (20069) | 5,701 | 6 | 86,001 | D | 0 |
+| Greeley County (20071) | 1,304 | 2 | 35,089 | D | 0 |
+| Greenwood County (20073) | 5,919 | 6 | 137,016 | D | 0 |
+| Hamilton County (20075) | 2,471 | 2 | 44,599 | D | 0 |
+| Harper County (20077) | 5,400 | 6 | 77,619 | D | 0 |
+| Harvey County (20079) | 33,756 | 28 | 163,709 | C | 20 |
+| Haskell County (20081) | 3,641 | 4 | 49,188 | D | 0 |
+| Hodgeman County (20083) | 1,652 | 2 | 101,159 | D | 0 |
+| Jackson County (20085) | 13,341 | 11 | 189,798 | D | 0 |
+| Jefferson County (20087) | 18,349 | 13 | 249,586 | C | 1 |
+| Jewell County (20089) | 2,916 | 3 | 166,186 | D | 0 |
+| Kearny County (20093) | 3,864 | 3 | 95,022 | D | 0 |
+| Kingman County (20095) | 7,186 | 7 | 116,387 | D | 0 |
+| Kiowa County (20097) | 2,422 | 3 | 86,538 | D | 0 |
+| Labette County (20099) | 19,869 | 18 | 142,178 | D | 10 |
+| Lane County (20101) | 1,461 | 2 | 47,320 | D | 0 |
+| Leavenworth County (20103) | 83,123 | 62 | 694,273 | C | 48 |
+| Lincoln County (20105) | 2,923 | 4 | 105,622 | D | 0 |
+| Linn County (20107) | 9,767 | 10 | 160,292 | D | 0 |
+| Logan County (20109) | 2,707 | 3 | 93,521 | D | 0 |
+| Lyon County (20111) | 32,186 | 31 | 269,167 | D | 28 |
+| McPherson County (20113) | 30,205 | 23 | 171,125 | D | 11 |
+| Marion County (20115) | 11,754 | 13 | 192,550 | D | 0 |
+| Marshall County (20117) | 9,993 | 9 | 204,959 | D | 0 |
+| Meade County (20119) | 3,903 | 4 | 70,155 | D | 0 |
+| Miami County (20121) | 34,938 | 33 | 247,723 | D | 11 |
+| Mitchell County (20123) | 5,779 | 6 | 115,325 | D | 0 |
+| Montgomery County (20125) | 30,940 | 31 | 183,607 | D | 21 |
+| Morris County (20127) | 5,340 | 6 | 163,015 | D | 0 |
+| Morton County (20129) | 2,611 | 3 | 41,769 | D | 0 |
+| Nemaha County (20131) | 10,160 | 9 | 138,395 | D | 0 |
+| Neosho County (20133) | 15,656 | 17 | 125,028 | D | 10 |
+| Ness County (20135) | 2,653 | 4 | 88,485 | D | 0 |
+| Norton County (20137) | 5,359 | 5 | 149,474 | D | 0 |
+| Osage County (20139) | 15,744 | 15 | 175,974 | D | 0 |
+| Osborne County (20141) | 3,452 | 4 | 147,425 | D | 0 |
+| Ottawa County (20143) | 5,819 | 6 | 121,103 | D | 0 |
+| Pawnee County (20145) | 6,144 | 7 | 95,944 | D | 4 |
+| Phillips County (20147) | 4,813 | 7 | 163,345 | D | 0 |
+| Pottawatomie County (20149) | 26,204 | 17 | 453,598 | C | 6 |
+| Pratt County (20151) | 9,127 | 8 | 76,026 | D | 6 |
+| Rawlins County (20153) | 2,516 | 2 | 103,090 | D | 0 |
+| Reno County (20155) | 61,553 | 57 | 258,909 | C | 43 |
+| Republic County (20157) | 4,646 | 7 | 108,216 | D | 0 |
+| Rice County (20159) | 9,350 | 9 | 136,348 | D | 0 |
+| Riley County (20161) | 71,946 | 59 | 536,940 | C | 53 |
+| Rooks County (20163) | 4,813 | 5 | 127,649 | D | 0 |
+| Rush County (20165) | 2,947 | 3 | 87,066 | D | 0 |
+| Russell County (20167) | 6,679 | 9 | 156,103 | D | 6 |
+| Saline County (20169) | 53,668 | 44 | 194,968 | D | 39 |
+| Scott County (20171) | 5,027 | 5 | 59,294 | D | 0 |
+| Seward County (20175) | 21,486 | 17 | 86,367 | D | 16 |
+| Sheridan County (20179) | 2,426 | 2 | 63,722 | D | 0 |
+| Sherman County (20181) | 5,858 | 6 | 120,618 | D | 6 |
+| Smith County (20183) | 3,552 | 4 | 124,820 | D | 0 |
+| Stafford County (20185) | 3,978 | 4 | 102,608 | D | 0 |
+| Stanton County (20187) | 2,038 | 2 | 36,459 | D | 0 |
+| Stevens County (20189) | 5,162 | 5 | 50,060 | D | 0 |
+| Sumner County (20191) | 22,353 | 24 | 221,315 | D | 10 |
+| Thomas County (20193) | 7,885 | 7 | 88,511 | D | 5 |
+| Trego County (20195) | 2,777 | 3 | 102,538 | D | 0 |
+| Wabaunsee County (20197) | 7,009 | 8 | 263,722 | D | 0 |
+| Wallace County (20199) | 1,417 | 2 | 71,395 | D | 0 |
+| Washington County (20201) | 5,533 | 7 | 151,861 | D | 0 |
+| Wichita County (20203) | 2,091 | 3 | 45,253 | D | 0 |
+| Wilson County (20205) | 8,505 | 9 | 121,297 | D | 0 |
+| Woodson County (20207) | 3,109 | 4 | 85,179 | D | 0 |
+| **100 counties** | **1,332,359** | **1,214** | **14,776,609** | 10 C, 90 D | 614 |
+
+- Kansas cut alone: 145 s, peak osmium memory 4.21 GB, 146 MB. Build: fetch 7-25 s, build 85-137 s per county, four at a
+  time (the Nebraska checks and the Minnesota cut ran alongside), 100 counties built in about 46 min of build time.
+  Finished counties were exported while the rest were still building, to stay under the disk limit (each finished
+  build folder holds about 19 MB of its own files).
+- Bus frequency: 93 counties have none (no feed that is read has a stop with 7-9 am departures in or near the county);
+  7 have feeds. Rail distance: 96 counties have no station in or near them.
+- Census spot check: 100 counties, 1,972 of 1,972 values equal (0% mismatch). Tract-median flags: 100 counties added,
+  no existing county changed, 0 values matching neither the block group nor the tract.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru): Allen 1,960 = 1,960 roads, 0 = 0 bus stops; Anderson 1,780 = 1,780 roads, 0 = 0 bus stops (0 missing, 0 extra). The mirror answered 504 on all 8 tries for Anderson's roads the first time, so that result was replaced by a second run that answered.
+- Crash counts: Kansas has no state crash source connected (`national/STATE_CRASH_SOURCES.md` lists KDOT's fatal and
+  suspected-serious crashes only; none is wired into the pipeline).
+- Live check from R2 (`LIVE_PORT=9191`): Riley and Saline, 3 points each. None of the 100 counties has a parcel service
+  on the page, so the house-panel rows (Census area, HUD rent, FEMA, USGS) are not checkable; neighborhood, canopy,
+  canopy goal, crash text, state laws and console pass at all 6 points (30 pass, 0 fail, 24 not checkable). Each data
+  file came from the r2.dev address (GET 200).
+- R2: before 1,445,357,457 bytes (1,923 objects); dry run "101 files, net +0.015 GB, projected 1.460 GB"; after
+  1,460,159,149 bytes (2,023 objects): 14,801,692 bytes added (the 100 data files, 14,776,609, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/midwest_ks_census_spot_2026-11-22.json`, `data/backtests/midwest_osm_xcheck_20001_2026-11-22.json`,
+`..._20003_...`, `data/backtests/live_check_panels_2026-11-22_midwest_ks.json`.
