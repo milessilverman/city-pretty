@@ -220,8 +220,12 @@
    "snapshot": "sutter_lot",
    "expect": "lot_split",
    "must_include": [
-    "Allowed by",
-    "66411.7"
+    "Not determined",
+    "SB 9",
+    "has not been confirmed against the statute text"
+   ],
+   "must_not_include": [
+    "Allowed by"
    ]
   },
   {
