@@ -196,6 +196,46 @@ function legalFromStatute(s, laws) {
     unconfirmedFields: s.unconfirmed_fields || [], limitsNotChecked: s.exclusion_limits_not_checked || [], note: "a screen, not a permit: the city or county decides" };
 }
 
+// ---------------------------------------------------------------- the site's own zoning code (app/data/site_zoning)
+// zl: StationSites.limitsOf output (every value carries its section, quote and URL). Why the code row does not let a
+// multifamily course run, in words for the not-assessed list.
+function zoningWhy(zl) {
+  if (zl.notDetermined) return `has rules that are not determined: ${zl.notDetermined}`;
+  if (zl.housing === false) return `is ${zl.category || "of a category not determined"}, and ${zl.city}'s code does not permit housing there${zl.housingSource && zl.housingSource.section ? " (" + zl.housingSource.section + ")" : ""}`;
+  if (zl.housing == null) return `is ${zl.category || "of a category not determined"}; whether ${zl.city}'s code permits housing there is not on file${zl.housingWhy ? ": " + zl.housingWhy : ""}`;
+  return `is ${zl.category}, which is not a multifamily or mixed-use category`;
+}
+// Homes and floor area the code allows on the mapped lot: the code's density (lot area per home, or floor area divided
+// by a dwelling-unit factor) times the measured area. Modelled; both inputs shown.
+function zoningSizing(zl, acres, acresSrc, S) {
+  const d = zl.density, src = d && d.source ? d.source.url : null;
+  const out = { units: null, sqft: null, zoneInputs: [], unitsWhy: null, sqftWhy: null };
+  const ratio = num(S.parcelRatio);
+  const areaNote = "the mapped lot's outline" + (S.kind === "site" ? " (OpenStreetMap), not the county parcel" : "") + (ratio != null && (ratio > 2 || ratio < 0.5) ? `; the county parcel is ${ratio} times this area, so its area is not used` : "");
+  const homesAt = x => { const f = Math.floor(x); return (d.roundUpFrom != null && x - f >= d.roundUpFrom) ? f + 1 : f; };
+  if (!d) out.unitsWhy = `the density limit for ${zl.zone} is not determined: ${zl.densityWhy || "not stated in the code text on file"}`;
+  else if (acres == null) out.unitsWhy = "the site area is not on file";
+  else if (d.method === "lot_area_per_home") {
+    const n = homesAt(acres * SQFT_PER_ACRE / d.sqftPerHome);
+    out.units = range(n, n, "homes the zoning allows on the mapped lot (up to)", src, "modelled", "the code's lot area per home and the measured site area");
+    out.zoneInputs.push(inputRow(`Density the zoning allows (${zl.zone}, ${d.source ? d.source.section : "code"})`, d.sqftPerHome, "sq ft of lot area per home", src, "measured", d.source ? `"${d.source.quote}"` : null));
+    if (d.rounding) out.zoneInputs.push(inputRow(`Rounding (${d.rounding.section})`, `a fraction of ${d.roundUpFrom} or more counts as one more home`, null, d.rounding.url, "measured", `"${d.rounding.quote}"`));
+  } else if (d.method === "floor_area_over_factor") {
+    const lo = homesAt(d.farLow * acres * SQFT_PER_ACRE / d.duFactor), hi = homesAt(d.farHigh * acres * SQFT_PER_ACRE / d.duFactor);
+    out.units = range(lo, hi, "homes the zoning allows on the mapped lot (up to)", src, "modelled", lo === hi ? "the code's floor-area ratio and dwelling-unit factor times the measured site area" : null);
+    out.zoneInputs.push(inputRow(`Dwelling-unit factor (${d.source ? d.source.section : "code"})`, d.duFactor, "sq ft of residential floor area per home", src, "measured", d.source ? `"${d.source.quote}"` : null));
+    out.zoneInputs.push(inputRow(`Residential floor-area ratio (${zl.zone}${d.farSource && d.farSource.section ? ", " + d.farSource.section : ""})`, d.farLow === d.farHigh ? d.farLow : `${d.farLow} to ${d.farHigh}`, "x lot area", d.farSource ? d.farSource.url : null, "measured", d.farSource ? [((d.farSource.rows || []).join("; ")), d.farSource.note].filter(Boolean).join(". ") : null));
+  } else out.unitsWhy = `the density rule for ${zl.zone} is of a kind this engine does not apply`;
+  if (zl.far && acres != null) out.sqft = range(Math.floor(zl.far.low * acres * SQFT_PER_ACRE), Math.floor(zl.far.high * acres * SQFT_PER_ACRE), "sq ft of floor area the zoning allows (up to)", zl.far.url, "modelled", zl.far.low === zl.far.high ? "the code's floor-area ratio times the measured site area" : null);
+  else out.sqftWhy = zl.far ? "the site area is not on file" : `no floor-area ratio for ${zl.zone} is in the code text on file`;
+  if (zl.far && !(d && d.method === "floor_area_over_factor")) out.zoneInputs.push(inputRow(`Floor-area ratio (${zl.zone}, ${zl.far.section || "code"})`, zl.far.low === zl.far.high ? zl.far.low : `${zl.far.low} to ${zl.far.high}`, "x lot area", zl.far.url, "measured", zl.far.quote ? `"${zl.far.quote}"` : null));
+  if (acres != null) out.zoneInputs.push(inputRow("Site area used for sizing", round(acres, 2), "acres", acresSrc, "measured", areaNote));
+  if (zl.heightFt) out.zoneInputs.push(inputRow(`Height limit (${zl.zone}, ${zl.heightFt.section})`, zl.heightFt.low === zl.heightFt.high ? zl.heightFt.low : `${zl.heightFt.low} to ${zl.heightFt.high}`, "feet", zl.heightFt.url, "measured", zl.heightFt.quote ? `"${zl.heightFt.quote}"` : null));
+  out.zoneRisks = (zl.cautions || []).map(c => `Zoning: ${c.text}${c.section ? " (" + c.section + ")" : ""}: "${c.quote}"`)
+    .concat([`Zoning: ${zl.parkingWhy || "parking minimums were not read"}`, "Zoning: the zone is read at the site's interior point; a lot that crosses a district line has more than one zone"]);
+  return out;
+}
+
 // ---------------------------------------------------------------- place facts
 // Card rows that hold for the site's place whatever is built: whether its tract or ZIP area is one where the tax credit's
 // 130% basis applies, the tax-credit rent ceilings and HUD Fair Market Rents for its county, and what new homes in 5+
@@ -350,13 +390,17 @@ function buildProjectCard(subject, ctx) {
     } else {
       // multifamily: a multifamily law applied by the statute engine, or the lot's own multifamily zoning on file
       const s = zr.applicable.find(MF_LAW);
-      const mfZone = !!(S.parcel && S.parcel.is_multifamily_residential);
+      // the site's own zoning code row (app/data/site_zoning, StationSites.limitsOf): housing permitted by the code's text
+      const zl = S.parcel && S.parcel.zoning_limits ? S.parcel.zoning_limits : null;
+      const zoneHousing = !!(zl && !zl.notDetermined && zl.housing === true && /^(multifamily|mixed-use)$/.test(zl.category || ""));
+      const mfZone = !!(S.parcel && S.parcel.is_multifamily_residential) || zoneHousing;
       const station = c.id !== "small_multifamily";
       const railOk = num(S.railStationMi) != null && S.railStationMi <= RAIL_STATION_AREA_MI;
       if (station && !railOk && !nearStops.length) { skip(c, num(S.railStationMi) != null ? `the nearest rail station on file is ${round(S.railStationMi, 2)} miles away (station-area courses need one within ${RAIL_STATION_AREA_MI} mile) and no planned-rail stop city is within ${STOP_RADIUS_MI} mile` : `no rail station distance is on file for this ${S.kind} and no planned-rail stop city is within ${STOP_RADIUS_MI} mile`, "does_not_apply"); continue; }
       if (!s && !mfZone) {
         const h = heldFor(zr, MF_LAW);
-        const why = [`the ${S.kind}'s zoning (${S.parcel.base_zoning_code}) is not classed as multifamily, and ${h.length ? "no state multifamily law on file could be applied: " + h.length + " could not be confirmed (listed next)" : "no state multifamily law on file applies"}`].concat(h.slice(0, 3)).concat(h.length > 3 ? [`and ${h.length - 3} more laws on file with the same kind of gap`] : []);
+        const zw = zl ? zoningWhy(zl) : null;
+        const why = [`the ${S.kind}'s zoning (${S.parcel.base_zoning_code}) ${zw || "is not classed as multifamily"}, and ${h.length ? "no state multifamily law on file could be applied: " + h.length + " could not be confirmed (listed next)" : "no state multifamily law on file applies"}`].concat(h.slice(0, 3)).concat(h.length > 3 ? [`and ${h.length - 3} more laws on file with the same kind of gap`] : []);
         if (station && S.railNote) why.push(S.railNote);
         skip(c, why); continue;
       }
@@ -368,9 +412,15 @@ function buildProjectCard(subject, ctx) {
         sizing = { units, sqft, density: d, far, acres, acresSrc,
           unitsWhy: units ? null : d == null ? "the law on file sets no minimum density" : "the site area is not on file",
           sqftWhy: sqft ? null : far == null ? "the law on file sets no floor-area ratio" : "the site area is not on file" };
+      } else if (zoneHousing) {
+        const hs = zl.housingSource || {};
+        legal = { determined: true, basis: "zoning on file", zone: zl.zone, url: hs.url || null,
+          note: `${zl.city}'s code permits housing in ${zl.zone} (${zl.category}${hs.section ? ", " + hs.section : ""}); a screen, not a permit`, quote: hs.quote || null };
+        sizing = zoningSizing(zl, acres, acresSrc, S);
       } else {
-        legal = { determined: true, basis: "zoning on file", zone: S.parcel.base_zoning_code, note: `the zoning map classes ${S.parcel.base_zoning_code} as multifamily; a screen, not a permit` };
-        sizing = { units: null, sqft: null, unitsWhy: `the density limit for ${S.parcel.base_zoning_code} is not in the zoning standards on file (app/data/zoning_standards.json)`, sqftWhy: "no floor-area limit for this zone on file" };
+        legal = { determined: true, basis: "zoning on file", zone: S.parcel.base_zoning_code, note: `the zoning map classes ${S.parcel.base_zoning_code} as multifamily; a screen, not a permit`, url: zl && zl.categorySource ? zl.categorySource.url : null };
+        sizing = { units: null, sqft: null, unitsWhy: zl && zl.densityWhy ? `the density limit for ${S.parcel.base_zoning_code} is not determined: ${zl.densityWhy}` : `the density limit for ${S.parcel.base_zoning_code} is not in the zoning standards on file (app/data/zoning_standards.json)`, sqftWhy: "no floor-area limit for this zone on file",
+          zoneRisks: zl ? (zl.cautions || []).map(c => `Zoning: ${c.text}${c.section ? " (" + c.section + ")" : ""}: "${c.quote}"`) : null };
       }
     }
     const variants = c.affordable ? [false, true] : [false];
@@ -408,7 +458,10 @@ function courseFigures(c, aff, k) {
     for (const u of legal.unconfirmedFields) risks.push(`Legal: not confirmed in the law's text: ${u}`);
     for (const u of legal.limitsNotChecked) risks.push(`Legal: the law limits itself where ${u}; not checked for this ${S.kind}`);
     risks.push("Legal: " + legal.note);
-  } else if (legal.basis === "zoning on file") inputs.push(inputRow("Legal basis", legal.note, null, "the parcel zoning layer", "measured"));
+  } else if (legal.basis === "zoning on file") {
+    inputs.push(inputRow("Legal basis", legal.note, null, legal.url || "the parcel zoning layer", "measured", legal.quote ? `"${legal.quote}"` : null));
+    risks.push("Legal: " + legal.note);
+  }
   else risks.push("Legal: " + legal.note);
 
   // ---- size
@@ -420,10 +473,12 @@ function courseFigures(c, aff, k) {
     out.size = sizing ? { units: sizing.units, sqft: sizing.sqft } : null;
     if (sizing && !sizing.units) missing.push("Size (homes): " + (sizing.unitsWhy || "not sized"));
     if (sizing && !sizing.sqft) missing.push("Size (floor area): " + (sizing.sqftWhy || "not sized"));
-    if (sizing && sizing.units) inputs.push(inputRow("Homes", sizing.units.low.value, sizing.units.unit, sizing.units.source, sizing.units.basis, sizing.units.exact));
+    if (sizing && sizing.units) inputs.push(inputRow("Homes", sizing.units.low.value === sizing.units.high.value ? sizing.units.low.value : `${sizing.units.low.value} to ${sizing.units.high.value}`, sizing.units.unit, sizing.units.source, sizing.units.basis, sizing.units.exact));
     if (sizing && sizing.density != null) inputs.push(inputRow("Minimum density the law requires", sizing.density, "homes per acre", legal.url, "measured"));
     if (sizing && sizing.far != null) inputs.push(inputRow("Floor-area ratio the law allows", sizing.far, "x site area", legal.url, "measured"));
     if (sizing && sizing.acres != null && (sizing.density != null || sizing.far != null)) inputs.push(inputRow("Site area", round(sizing.acres, 2), "acres", sizing.acresSrc, "measured"));
+    if (sizing && sizing.zoneInputs) inputs.push(...sizing.zoneInputs);
+    if (sizing && sizing.zoneRisks) risks.push(...sizing.zoneRisks);
   }
 
   // ---- cost (displayable rows only)
@@ -448,8 +503,10 @@ function courseFigures(c, aff, k) {
   } else {
     const pc = (c.id === "small_multifamily" || /^station_/.test(c.id)) ? place("cost") : null;
     const homes = out.size && out.size.units ? out.size.units.low.value : null;
+    const homesHi = out.size && out.size.units ? out.size.units.high.value : null;
     if (pc && pc.range && homes != null && homes > 0) {
-      out.cost = range(pc.range.low.value * homes, pc.range.high.value * homes, "USD, declared permit valuation of the structure (homes sized above x the county's value per home on 5+ unit permits)", pc.source, "modelled");
+      // fewest homes at the lowest year's value to most homes at the highest year's value
+      out.cost = range(pc.range.low.value * homes, pc.range.high.value * homesHi, "USD, declared permit valuation of the structure (homes sized above x the county's value per home on 5+ unit permits)", pc.source, "modelled");
       out.cost.label = "declared permit valuations, structure only";
       inputs.push(inputRow(`Declared value per new home, 5+ unit buildings, ${pc.place}`, null, "USD per home", pc.source, "measured", pc.rows.map(r => `${r.year}: $${r.value.toLocaleString("en-US")} (${r.homes.toLocaleString("en-US")} homes)`).join("; ")));
       inputs[inputs.length - 1].range = pc.range;

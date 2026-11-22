@@ -1,0 +1,887 @@
+{
+ "seed": 20261123,
+ "checked": "2026-11-22",
+ "script": "scripts/recheck_site_zoning.py",
+ "n": 15,
+ "zoneSame": 15,
+ "homesSame": 15,
+ "costSame": 15,
+ "sites": [
+  {
+   "id": "ss:36081:way/546943598",
+   "city": "New York city",
+   "acres": 0.65,
+   "card": {
+    "zone": "C4-2",
+    "homes": [
+     91,
+     125
+    ],
+    "cost": [
+     13926458,
+     21869125
+    ]
+   },
+   "zoneAgain": [
+    "C4-2"
+   ],
+   "specialDistrictAgain": [],
+   "equivalentAgain": "R6",
+   "codeAgain": {
+    "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+    "district": "R6",
+    "farValues": [
+     2.2,
+     3.0
+    ],
+    "rows": [
+     "R6A R6 R6-1 R7B 3.00 3.90 3.0",
+     "R6 2.20 3.90 2.2"
+    ],
+    "duFactor": 680
+   },
+   "permitRows": [
+    [
+     2023,
+     161100,
+     7505
+    ],
+    [
+     2024,
+     153038,
+     4918
+    ],
+    [
+     2025,
+     174953,
+     2992
+    ]
+   ],
+   "byHand": {
+    "homes": [
+     91,
+     125
+    ],
+    "cost": [
+     13926458,
+     21869125
+    ]
+   },
+   "zoneSame": true,
+   "homesSame": true,
+   "costSame": true
+  },
+  {
+   "id": "ss:06073:way/52835841",
+   "city": "San Diego city",
+   "acres": 1.36,
+   "card": {
+    "zone": "CC-3-8",
+    "homes": [
+     99,
+     99
+    ],
+    "cost": [
+     16544187,
+     20440530
+    ]
+   },
+   "zoneAgain": [
+    "CC-3-8"
+   ],
+   "codeAgain": {
+    "url": "https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division05.pdf",
+    "sentence": "CC-3-8 is intended to accommodate development with a high intensity, pedestrian orientation and permits a maximum density of 1 dwelling unit for each 600 square feet of lot area",
+    "sqftPerHome": 600
+   },
+   "permitRows": [
+    [
+     2023,
+     167113,
+     7424
+    ],
+    [
+     2024,
+     206470,
+     6939
+    ],
+    [
+     2025,
+     175819,
+     7057
+    ]
+   ],
+   "byHand": {
+    "homes": [
+     99,
+     99
+    ],
+    "cost": [
+     16544187,
+     20440530
+    ]
+   },
+   "zoneSame": true,
+   "homesSame": true,
+   "costSame": true
+  },
+  {
+   "id": "ss:36047:way/609830158",
+   "city": "New York city",
+   "acres": 0.54,
+   "card": {
+    "zone": "R6A",
+    "homes": [
+     104,
+     104
+    ],
+    "cost": [
+     15915952,
+     18195112
+    ]
+   },
+   "zoneAgain": [
+    "R6A"
+   ],
+   "specialDistrictAgain": [],
+   "codeAgain": {
+    "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+    "district": "R6A",
+    "farValues": [
+     3.0
+    ],
+    "rows": [
+     "R6A R6 R6-1 R7B 3.00 3.90 3.0"
+    ],
+    "duFactor": 680
+   },
+   "permitRows": [
+    [
+     2023,
+     161100,
+     7505
+    ],
+    [
+     2024,
+     153038,
+     4918
+    ],
+    [
+     2025,
+     174953,
+     2992
+    ]
+   ],
+   "byHand": {
+    "homes": [
+     104,
+     104
+    ],
+    "cost": [
+     15915952,
+     18195112
+    ]
+   },
+   "zoneSame": true,
+   "homesSame": true,
+   "costSame": true
+  },
+  {
+   "id": "ss:06073:way/1514073094",
+   "city": "San Diego city",
+   "acres": 0.82,
+   "card": {
+    "zone": "CC-3-8",
+    "homes": [
+     60,
+     60
+    ],
+    "cost": [
+     10026780,
+     12388200
+    ]
+   },
+   "zoneAgain": [
+    "CC-3-8"
+   ],
+   "codeAgain": {
+    "url": "https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division05.pdf",
+    "sentence": "CC-3-8 is intended to accommodate development with a high intensity, pedestrian orientation and permits a maximum density of 1 dwelling unit for each 600 square feet of lot area",
+    "sqftPerHome": 600
+   },
+   "permitRows": [
+    [
+     2023,
+     167113,
+     7424
+    ],
+    [
+     2024,
+     206470,
+     6939
+    ],
+    [
+     2025,
+     175819,
+     7057
+    ]
+   ],
+   "byHand": {
+    "homes": [
+     60,
+     60
+    ],
+    "cost": [
+     10026780,
+     12388200
+    ]
+   },
+   "zoneSame": true,
+   "homesSame": true,
+   "costSame": true
+  },
+  {
+   "id": "ss:36047:way/284698715",
+   "city": "New York city",
+   "acres": 2.15,
+   "card": {
+    "zone": "R8",
+    "homes": [
+     829,
+     991
+    ],
+    "cost": [
+     126868502,
+     173378423
+    ]
+   },
+   "zoneAgain": [
+    "R8"
+   ],
+   "specialDistrictAgain": [],
+   "codeAgain": {
+    "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+    "district": "R8",
+    "farValues": [
+     6.02,
+     7.2
+    ],
+    "rows": [
+     "R8A R8X R8 6.02 7.20 6.02",
+     "R8 7.20 8.64 7.2"
+    ],
+    "duFactor": 680
+   },
+   "permitRows": [
+    [
+     2023,
+     161100,
+     7505
+    ],
+    [
+     2024,
+     153038,
+     4918
+    ],
+    [
+     2025,
+     174953,
+     2992
+    ]
+   ],
+   "byHand": {
+    "homes": [
+     829,
+     991
+    ],
+    "cost": [
+     126868502,
+     173378423
+    ]
+   },
+   "zoneSame": true,
+   "homesSame": true,
+   "costSame": true
+  },
+  {
+   "id": "ss:06073:way/1534441306",
+   "city": "San Diego city",
+   "acres": 1.02,
+   "card": {
+    "zone": "CC-3-9",
+    "homes": [
+     111,
+     111
+    ],
+    "cost": [
+     18549543,
+     22918170
+    ]
+   },
+   "zoneAgain": [
+    "CC-3-9"
+   ],
+   "codeAgain": {
+    "url": "https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division05.pdf",
+    "sentence": "CC-3-9 is intended to accommodate development with a high intensity, pedestrian orientation and permits a maximum density of 1 dwelling unit for each 400 square feet of lot area",
+    "sqftPerHome": 400
+   },
+   "permitRows": [
+    [
+     2023,
+     167113,
+     7424
+    ],
+    [
+     2024,
+     206470,
+     6939
+    ],
+    [
+     2025,
+     175819,
+     7057
+    ]
+   ],
+   "byHand": {
+    "homes": [
+     111,
+     111
+    ],
+    "cost": [
+     18549543,
+     22918170
+    ]
+   },
+   "zoneSame": true,
+   "homesSame": true,
+   "costSame": true
+  },
+  {
+   "id": "ss:36047:way/395655351",
+   "city": "New York city",
+   "acres": 0.83,
+   "card": {
+    "zone": "R7A",
+    "homes": [
+     212,
+     212
+    ],
+    "cost": [
+     32336360,
+     36610704
+    ]
+   },
+   "zoneAgain": [
+    "R7A"
+   ],
+   "specialDistrictAgain": [],
+   "codeAgain": {
+    "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+    "district": "R7A",
+    "farValues": [
+     4.0
+    ],
+    "rows": [
+     "R7A R7-1 R7-2 4.00 5.01 4.0"
+    ],
+    "duFactor": 680
+   },
+   "permitRows": [
+    [
+     2023,
+     161100,
+     14851
+    ],
+    [
+     2024,
+     152530,
+     9789
+    ],
+    [
+     2025,
+     172692,
+     6573
+    ]
+   ],
+   "byHand": {
+    "homes": [
+     212,
+     212
+    ],
+    "cost": [
+     32336360,
+     36610704
+    ]
+   },
+   "zoneSame": true,
+   "homesSame": true,
+   "costSame": true
+  },
+  {
+   "id": "ss:06073:way/1148329178",
+   "city": "San Diego city",
+   "acres": 4.66,
+   "card": {
+    "zone": "CO-3-3",
+    "homes": [
+     338,
+     338
+    ],
+    "cost": [
+     56484194,
+     69786860
+    ]
+   },
+   "zoneAgain": [
+    "CO-3-3"
+   ],
+   "codeAgain": {
+    "url": "https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division05.pdf",
+    "sentence": "CO-3-3 is intended to accommodate a mix of office and residential uses and permits a maximum density of 1 dwelling unit for each 600 square feet of lot area",
+    "sqftPerHome": 600
+   },
+   "permitRows": [
+    [
+     2023,
+     167113,
+     7424
+    ],
+    [
+     2024,
+     206470,
+     6939
+    ],
+    [
+     2025,
+     175819,
+     7057
+    ]
+   ],
+   "byHand": {
+    "homes": [
+     338,
+     338
+    ],
+    "cost": [
+     56484194,
+     69786860
+    ]
+   },
+   "zoneSame": true,
+   "homesSame": true,
+   "costSame": true
+  },
+  {
+   "id": "ss:36047:way/826539010",
+   "city": "New York city",
+   "acres": 0.74,
+   "card": {
+    "zone": "C4-3",
+    "homes": [
+     104,
+     142
+    ],
+    "cost": [
+     15915952,
+     24843326
+    ]
+   },
+   "zoneAgain": [
+    "C4-3"
+   ],
+   "specialDistrictAgain": [],
+   "equivalentAgain": "R6",
+   "codeAgain": {
+    "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+    "district": "R6",
+    "farValues": [
+     2.2,
+     3.0
+    ],
+    "rows": [
+     "R6A R6 R6-1 R7B 3.00 3.90 3.0",
+     "R6 2.20 3.90 2.2"
+    ],
+    "duFactor": 680
+   },
+   "permitRows": [
+    [
+     2023,
+     161100,
+     7505
+    ],
+    [
+     2024,
+     153038,
+     4918
+    ],
+    [
+     2025,
+     174953,
+     2992
+    ]
+   ],
+   "byHand": {
+    "homes": [
+     104,
+     142
+    ],
+    "cost": [
+     15915952,
+     24843326
+    ]
+   },
+   "zoneSame": true,
+   "homesSame": true,
+   "costSame": true
+  },
+  {
+   "id": "ss:06073:way/1279284443",
+   "city": "San Diego city",
+   "acres": 0.75,
+   "card": {
+    "zone": "RM-2-5",
+    "homes": [
+     22,
+     22
+    ],
+    "cost": [
+     3676486,
+     4542340
+    ]
+   },
+   "zoneAgain": [
+    "RM-2-5"
+   ],
+   "codeAgain": {
+    "url": "https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division04.pdf",
+    "sentence": "RM-2-5 permits a maximum density of 1 dwelling unit for each 1,500 square feet of lot area",
+    "sqftPerHome": 1500
+   },
+   "permitRows": [
+    [
+     2023,
+     167113,
+     7424
+    ],
+    [
+     2024,
+     206470,
+     6939
+    ],
+    [
+     2025,
+     175819,
+     7057
+    ]
+   ],
+   "byHand": {
+    "homes": [
+     22,
+     22
+    ],
+    "cost": [
+     3676486,
+     4542340
+    ]
+   },
+   "zoneSame": true,
+   "homesSame": true,
+   "costSame": true
+  },
+  {
+   "id": "ss:36047:way/617104287",
+   "city": "New York city",
+   "acres": 1.78,
+   "card": {
+    "zone": "R5",
+    "homes": [
+     171,
+     171
+    ],
+    "cost": [
+     26082630,
+     29530332
+    ]
+   },
+   "zoneAgain": [
+    "R5"
+   ],
+   "specialDistrictAgain": [],
+   "codeAgain": {
+    "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21",
+    "district": "R5",
+    "farValues": [
+     1.5
+    ],
+    "rows": [
+     "R5A R5B R5 1.5"
+    ],
+    "duFactor": 680
+   },
+   "permitRows": [
+    [
+     2023,
+     161100,
+     14851
+    ],
+    [
+     2024,
+     152530,
+     9789
+    ],
+    [
+     2025,
+     172692,
+     6573
+    ]
+   ],
+   "byHand": {
+    "homes": [
+     171,
+     171
+    ],
+    "cost": [
+     26082630,
+     29530332
+    ]
+   },
+   "zoneSame": true,
+   "homesSame": true,
+   "costSame": true
+  },
+  {
+   "id": "ss:06073:way/1304913225",
+   "city": "San Diego city",
+   "acres": 1.15,
+   "card": {
+    "zone": "CC-4-5",
+    "homes": [
+     33,
+     33
+    ],
+    "cost": [
+     5514729,
+     6813510
+    ]
+   },
+   "zoneAgain": [
+    "CC-4-5"
+   ],
+   "codeAgain": {
+    "url": "https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division05.pdf",
+    "sentence": "CC-4-5 is intended to accommodate development with a high intensity, pedestrian orientation and permits a maximum density of 1 dwelling unit for each 1,500 square feet of lot area",
+    "sqftPerHome": 1500
+   },
+   "permitRows": [
+    [
+     2023,
+     167113,
+     7424
+    ],
+    [
+     2024,
+     206470,
+     6939
+    ],
+    [
+     2025,
+     175819,
+     7057
+    ]
+   ],
+   "byHand": {
+    "homes": [
+     33,
+     33
+    ],
+    "cost": [
+     5514729,
+     6813510
+    ]
+   },
+   "zoneSame": true,
+   "homesSame": true,
+   "costSame": true
+  },
+  {
+   "id": "ss:36047:way/676144141",
+   "city": "New York city",
+   "acres": 0.59,
+   "card": {
+    "zone": "R6",
+    "homes": [
+     83,
+     113
+    ],
+    "cost": [
+     12702154,
+     19769689
+    ]
+   },
+   "zoneAgain": [
+    "R6"
+   ],
+   "specialDistrictAgain": [],
+   "codeAgain": {
+    "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+    "district": "R6",
+    "farValues": [
+     2.2,
+     3.0
+    ],
+    "rows": [
+     "R6A R6 R6-1 R7B 3.00 3.90 3.0",
+     "R6 2.20 3.90 2.2"
+    ],
+    "duFactor": 680
+   },
+   "permitRows": [
+    [
+     2023,
+     161100,
+     7505
+    ],
+    [
+     2024,
+     153038,
+     4918
+    ],
+    [
+     2025,
+     174953,
+     2992
+    ]
+   ],
+   "byHand": {
+    "homes": [
+     83,
+     113
+    ],
+    "cost": [
+     12702154,
+     19769689
+    ]
+   },
+   "zoneSame": true,
+   "homesSame": true,
+   "costSame": true
+  },
+  {
+   "id": "ss:06073:way/1490632550",
+   "city": "San Diego city",
+   "acres": 0.94,
+   "card": {
+    "zone": "RM-1-1",
+    "homes": [
+     14,
+     14
+    ],
+    "cost": [
+     2339582,
+     2890580
+    ]
+   },
+   "zoneAgain": [
+    "RM-1-1"
+   ],
+   "codeAgain": {
+    "url": "https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division04.pdf",
+    "sentence": "RM-1-1 permits a maximum density of 1 dwelling unit for each 3,000 square feet of lot area",
+    "sqftPerHome": 3000
+   },
+   "permitRows": [
+    [
+     2023,
+     167113,
+     7424
+    ],
+    [
+     2024,
+     206470,
+     6939
+    ],
+    [
+     2025,
+     175819,
+     7057
+    ]
+   ],
+   "byHand": {
+    "homes": [
+     14,
+     14
+    ],
+    "cost": [
+     2339582,
+     2890580
+    ]
+   },
+   "zoneSame": true,
+   "homesSame": true,
+   "costSame": true
+  },
+  {
+   "id": "ss:36047:way/884955518",
+   "city": "New York city",
+   "acres": 0.63,
+   "card": {
+    "zone": "R7A",
+    "homes": [
+     161,
+     161
+    ],
+    "cost": [
+     24557330,
+     27803412
+    ]
+   },
+   "zoneAgain": [
+    "R7A"
+   ],
+   "specialDistrictAgain": [],
+   "codeAgain": {
+    "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+    "district": "R7A",
+    "farValues": [
+     4.0
+    ],
+    "rows": [
+     "R7A R7-1 R7-2 4.00 5.01 4.0"
+    ],
+    "duFactor": 680
+   },
+   "permitRows": [
+    [
+     2023,
+     161100,
+     14851
+    ],
+    [
+     2024,
+     152530,
+     9789
+    ],
+    [
+     2025,
+     172692,
+     6573
+    ]
+   ],
+   "byHand": {
+    "homes": [
+     161,
+     161
+    ],
+    "cost": [
+     24557330,
+     27803412
+    ]
+   },
+   "zoneSame": true,
+   "homesSame": true,
+   "costSame": true
+  }
+ ]
+}

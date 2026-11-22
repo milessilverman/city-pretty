@@ -790,7 +790,7 @@ function render() {
   loadData().then(d => {
     if (iv.view !== "invest") return;
     const r2 = ready(); if (r2.state !== "ok") { render(); return; }
-    if (window.StationSites && !window.StationSites.cached(r2.fips)) window.StationSites.load(r2.fips).then(() => window.StationSites.loadPlaces ? window.StationSites.loadPlaces(r2.fips) : null).then(() => { if (iv.view === "invest") { iv.key = null; pc.key = null; render(); } });
+    if (window.StationSites && !window.StationSites.cached(r2.fips)) window.StationSites.load(r2.fips).then(() => window.StationSites.loadPlaces ? window.StationSites.loadPlaces(r2.fips) : null).then(() => window.StationSites.loadZoning ? window.StationSites.loadZoning(r2.fips) : null).then(() => { if (iv.view === "invest") { iv.key = null; pc.key = null; render(); } });
     const p = parcelFacts();
     const key = [r2.fips, iv.hood, p && p.facts.parcel_id, p && p.facts.base_zoning_code, p && p.facts.exclusions && JSON.stringify(p.facts.exclusions), d.laws ? d.laws.length : -1, d.verification ? 1 : 0, typeof SITES !== "undefined" && SITES ? 1 : 0].join("|");
     if (key !== iv.key || !iv.model) { iv.model = build(r2.fips, r2.B, d); iv.key = key; }
@@ -938,8 +938,8 @@ function pcSubjects(m) {
       acres: acresOk ? { value: s.acres, source: s.sourceUrl || "app/data/underused_sites.json" } : null,
       railStationMi: railOk ? s.distanceToRailMeters / 1609.344 : null,
       railNote: railOk && s.nearestRailStation ? `the site record names its nearest rail station (${s.nearestRailStation}, ${Math.round(s.distanceToRailMeters)} m away) but not that station's mode, which the SB 79 tiers depend on` : null,
-      nearStops: s.blockGroupId ? nearBg(s.blockGroupId) : [], place: s.place || null,
-      parcel: { parcel_id: s.id, state_code: st, county_fips: fips, base_zoning_code: s.baseZoning || null, municipality_name: s.cityName || null, is_commercial_or_mixed_use: /commercial/.test(s.zoningCategory || ""), is_single_family_residential: s.zoningCategory === "single-family", is_multifamily_residential: s.zoningCategory === "multifamily", exclusions: {}, lot_sqft: acresOk ? s.acres * 43560 : null } });
+      nearStops: s.blockGroupId ? nearBg(s.blockGroupId) : [], place: s.place || null, parcelRatio: s.parcel && isNum(s.parcel.r) ? s.parcel.r : null,
+      parcel: { parcel_id: s.id, state_code: st, county_fips: fips, base_zoning_code: s.baseZoning || null, municipality_name: s.cityName || null, is_commercial_or_mixed_use: /commercial/.test(s.zoningCategory || ""), is_single_family_residential: s.zoningCategory === "single-family", is_multifamily_residential: s.zoningCategory === "multifamily", exclusions: {}, lot_sqft: acresOk ? s.acres * 43560 : null, zoning_limits: s.zoningLimits || null } });
   }
   for (const a of areas) out.push({ kind: "stop_area", id: a.stop.id, name: `Around the ${a.stop.city} stop city (${a.corr.name})`, countyFips: fips, stateCode: st, city: a.stop.city,
     blockGroups: a.areas.map(x => bgRow(x.id)), nearStops: [pcStop(a.corr, a.stop, null)], sitesNearby: m.countySites.filter(s => a.areas.some(x => x.id === s.blockGroupId)).length });

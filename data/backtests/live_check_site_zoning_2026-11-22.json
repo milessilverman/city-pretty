@@ -1,0 +1,472 @@
+{
+ "run_on": "2026-11-22T19:38:29.693Z",
+ "port": 9251,
+ "places": {
+  "travis": {
+   "fips": "48453",
+   "siteCards": 41,
+   "stationSiteCards": 41,
+   "sizedStationSiteCards": 0,
+   "opened": [
+    {
+     "id": "ss:48453:way/30769048",
+     "name": "Golf course near Montopolis / Crossing Place",
+     "open": true,
+     "zoningFact": null,
+     "smallMultifamily": {
+      "notAssessed": "the site's zoning (MF-3) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP 403 (Cloudflare bot check, 'Performing security verification')), and no state multifamily law on file applies"
+     },
+     "dollarsShown": 19,
+     "dollarsNotOnTheCard": [],
+     "homesShown": [
+      18311,
+      12145,
+      9780
+     ],
+     "homesNotOnTheCard": [],
+     "badText": 0
+    },
+    {
+     "id": "ss:48453:way/187669417",
+     "name": "Surface parking lot near Waterfront / Lady Bird Lake",
+     "open": true,
+     "zoningFact": null,
+     "smallMultifamily": {
+      "notAssessed": "the site's zoning (LI-NP) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP 403 (Cloudflare bot check, 'Performing security verification')), and no state multifamily law on file applies"
+     },
+     "dollarsShown": 19,
+     "dollarsNotOnTheCard": [],
+     "homesShown": [
+      18311,
+      12145,
+      9780
+     ],
+     "homesNotOnTheCard": [],
+     "badText": 0
+    }
+   ],
+   "sectionBadText": 0,
+   "picked": [
+    0,
+    1
+   ],
+   "zoningAttached": true,
+   "screenshots": [
+    "/home/user/city-pretty/.claude/worktrees/agent-a375892024f562b5a/data/backtests/site_zoning_travis_1.png",
+    "/home/user/city-pretty/.claude/worktrees/agent-a375892024f562b5a/data/backtests/site_zoning_travis_2.png"
+   ],
+   "errors": []
+  },
+  "los_angeles": {
+   "fips": "06037",
+   "siteCards": 240,
+   "stationSiteCards": 150,
+   "sizedStationSiteCards": 0,
+   "opened": [
+    {
+     "id": "ss:06037:way/1486726152",
+     "name": "Vacant or brownfield land near Santa Clarita",
+     "open": true,
+     "zoningFact": null,
+     "smallMultifamily": {
+      "notAssessed": "the zoning code is not on file for this site"
+     },
+     "dollarsShown": 19,
+     "dollarsNotOnTheCard": [],
+     "homesShown": [
+      12607,
+      8807,
+      9376
+     ],
+     "homesNotOnTheCard": [],
+     "badText": 0
+    },
+    {
+     "id": "ss:06037:way/56135439",
+     "name": "Golf course near Century City / Constellation",
+     "open": true,
+     "zoningFact": null,
+     "smallMultifamily": {
+      "notAssessed": "the site's zoning (A1-1XL) has rules that are not determined: the map's category \"Agricultural\" is not one of the categories used here, and no state multifamily law on file could be applied: 4 could not be confirmed (listed next)"
+     },
+     "dollarsShown": 19,
+     "dollarsNotOnTheCard": [],
+     "homesShown": [
+      12607,
+      8807,
+      9376
+     ],
+     "homesNotOnTheCard": [],
+     "badText": 0
+    }
+   ],
+   "sectionBadText": 0,
+   "picked": [
+    0,
+    1
+   ],
+   "zoningAttached": true,
+   "screenshots": [
+    "/home/user/city-pretty/.claude/worktrees/agent-a375892024f562b5a/data/backtests/site_zoning_los_angeles_1.png",
+    "/home/user/city-pretty/.claude/worktrees/agent-a375892024f562b5a/data/backtests/site_zoning_los_angeles_2.png"
+   ],
+   "errors": []
+  },
+  "kings": {
+   "fips": "36047",
+   "siteCards": 150,
+   "stationSiteCards": 150,
+   "sizedStationSiteCards": 33,
+   "opened": [
+    {
+     "id": "ss:36047:way/199103470",
+     "name": "Golf course near Bay Ridge–95th Street",
+     "open": true,
+     "zoningFact": "Zoning Resolution, and no state multifamily law on file applies",
+     "smallMultifamily": {
+      "notAssessed": "the site's zoning (PARK) is public/open space; whether New York City's code permits housing there is not on file: parkland is not a zoning district; no housing rule applies from the Zoning Resolution, and no state multifamily law on file applies"
+     },
+     "dollarsShown": 19,
+     "dollarsNotOnTheCard": [],
+     "homesShown": [
+      14851,
+      9789,
+      6573
+     ],
+     "homesNotOnTheCard": [],
+     "badText": 0
+    },
+    {
+     "id": "ss:36047:relation/951304",
+     "name": "Golf course near 85th Street–Forest Parkway",
+     "open": true,
+     "zoningFact": "Zoning Resolution, and no state multifamily law on file applies",
+     "smallMultifamily": {
+      "notAssessed": "the site's zoning (PARK) is public/open space; whether New York City's code permits housing there is not on file: parkland is not a zoning district; no housing rule applies from the Zoning Resolution, and no state multifamily law on file applies"
+     },
+     "dollarsShown": 19,
+     "dollarsNotOnTheCard": [],
+     "homesShown": [
+      7505,
+      4918,
+      2992
+     ],
+     "homesNotOnTheCard": [],
+     "badText": 0
+    },
+    {
+     "id": "ss:36047:way/510604051",
+     "name": "Surface parking lot near West 8th Street–New York Aquarium",
+     "open": true,
+     "zoningFact": "Zoning on file: R6",
+     "smallMultifamily": {
+      "legal": "zoning on file R6",
+      "homes": [
+       611,
+       834
+      ],
+      "cost": [
+       93195830,
+       144025128
+      ],
+      "costWhy": null
+     },
+     "dollarsShown": 130,
+     "dollarsNotOnTheCard": [],
+     "homesShown": [
+      14851,
+      9789,
+      6573,
+      611,
+      834,
+      14851,
+      9789,
+      6573,
+      611,
+      834,
+      123,
+      14851,
+      9789,
+      6573,
+      611,
+      834,
+      14851,
+      9789,
+      6573,
+      611,
+      834,
+      123,
+      14851,
+      9789,
+      6573,
+      611,
+      834,
+      14851,
+      9789,
+      6573,
+      611,
+      834,
+      123,
+      14851,
+      9789,
+      6573
+     ],
+     "homesNotOnTheCard": [],
+     "badText": 0
+    },
+    {
+     "id": "ss:36047:relation/8353880",
+     "name": "Surface parking lot near Eastern Parkway–Brooklyn Museum",
+     "open": true,
+     "zoningFact": "Zoning on file: R6",
+     "smallMultifamily": {
+      "legal": "zoning on file R6",
+      "homes": [
+       493,
+       672
+      ],
+      "cost": [
+       75197290,
+       116049024
+      ],
+      "costWhy": null
+     },
+     "dollarsShown": 130,
+     "dollarsNotOnTheCard": [],
+     "homesShown": [
+      14851,
+      9789,
+      6573,
+      493,
+      672,
+      14851,
+      9789,
+      6573,
+      493,
+      672,
+      99,
+      14851,
+      9789,
+      6573,
+      493,
+      672,
+      14851,
+      9789,
+      6573,
+      493,
+      672,
+      99,
+      14851,
+      9789,
+      6573,
+      493,
+      672,
+      14851,
+      9789,
+      6573,
+      493,
+      672,
+      99,
+      14851,
+      9789,
+      6573
+     ],
+     "homesNotOnTheCard": [],
+     "badText": 0
+    }
+   ],
+   "sectionBadText": 0,
+   "picked": [
+    0,
+    1,
+    27,
+    38
+   ],
+   "zoningAttached": true,
+   "screenshots": [
+    "/home/user/city-pretty/.claude/worktrees/agent-a375892024f562b5a/data/backtests/site_zoning_kings_1.png",
+    "/home/user/city-pretty/.claude/worktrees/agent-a375892024f562b5a/data/backtests/site_zoning_kings_2.png",
+    "/home/user/city-pretty/.claude/worktrees/agent-a375892024f562b5a/data/backtests/site_zoning_kings_3.png"
+   ],
+   "errors": []
+  },
+  "san_diego": {
+   "fips": "06073",
+   "siteCards": 150,
+   "stationSiteCards": 150,
+   "sizedStationSiteCards": 6,
+   "opened": [
+    {
+     "id": "ss:06073:way/1211528955",
+     "name": "Golf course near Fashion Valley",
+     "open": true,
+     "zoningFact": null,
+     "smallMultifamily": {
+      "notAssessed": "the site's zoning (OC-1-1) is public/open space; whether City of San Diego's code permits housing there is not on file: the open space use table was not read, and no state multifamily law on file could be applied: 4 could not be confirmed (listed next)"
+     },
+     "dollarsShown": 19,
+     "dollarsNotOnTheCard": [],
+     "homesShown": [
+      7424,
+      6939,
+      7057
+     ],
+     "homesNotOnTheCard": [],
+     "badText": 0
+    },
+    {
+     "id": "ss:06073:way/44501411",
+     "name": "Golf course near Crouch Street",
+     "open": true,
+     "zoningFact": null,
+     "smallMultifamily": {
+      "notAssessed": "the zoning code is not on file for this site"
+     },
+     "dollarsShown": 19,
+     "dollarsNotOnTheCard": [],
+     "homesShown": [
+      7424,
+      6939,
+      7057
+     ],
+     "homesNotOnTheCard": [],
+     "badText": 0
+    },
+    {
+     "id": "ss:06073:way/1574911440",
+     "name": "Surface parking lot near Rio Vista",
+     "open": true,
+     "zoningFact": "Zoning on file: CO-3-3",
+     "smallMultifamily": {
+      "legal": "zoning on file CO-3-3",
+      "homes": [
+       545,
+       545
+      ],
+      "cost": [
+       91076585,
+       112526150
+      ],
+      "costWhy": null
+     },
+     "dollarsShown": 130,
+     "dollarsNotOnTheCard": [],
+     "homesShown": [
+      7424,
+      6939,
+      7057,
+      545,
+      545,
+      7424,
+      6939,
+      7057,
+      545,
+      109,
+      545,
+      7424,
+      6939,
+      7057,
+      545,
+      545,
+      7424,
+      6939,
+      7057,
+      545,
+      109,
+      545,
+      7424,
+      6939,
+      7057,
+      545,
+      545,
+      7424,
+      6939,
+      7057,
+      545,
+      109,
+      545,
+      7424,
+      6939,
+      7057
+     ],
+     "homesNotOnTheCard": [],
+     "badText": 0
+    },
+    {
+     "id": "ss:06073:way/1148329178",
+     "name": "Surface parking lot near Rio Vista",
+     "open": true,
+     "zoningFact": "Zoning on file: CO-3-3",
+     "smallMultifamily": {
+      "legal": "zoning on file CO-3-3",
+      "homes": [
+       338,
+       338
+      ],
+      "cost": [
+       56484194,
+       69786860
+      ],
+      "costWhy": null
+     },
+     "dollarsShown": 130,
+     "dollarsNotOnTheCard": [],
+     "homesShown": [
+      7424,
+      6939,
+      7057,
+      338,
+      338,
+      7424,
+      6939,
+      7057,
+      338,
+      68,
+      338,
+      7424,
+      6939,
+      7057,
+      338,
+      338,
+      7424,
+      6939,
+      7057,
+      338,
+      68,
+      338,
+      7424,
+      6939,
+      7057,
+      338,
+      338,
+      7424,
+      6939,
+      7057,
+      338,
+      68,
+      338,
+      7424,
+      6939,
+      7057
+     ],
+     "homesNotOnTheCard": [],
+     "badText": 0
+    }
+   ],
+   "sectionBadText": 0,
+   "picked": [
+    0,
+    1,
+    25,
+    45
+   ],
+   "zoningAttached": true,
+   "screenshots": [
+    "/home/user/city-pretty/.claude/worktrees/agent-a375892024f562b5a/data/backtests/site_zoning_san_diego_1.png",
+    "/home/user/city-pretty/.claude/worktrees/agent-a375892024f562b5a/data/backtests/site_zoning_san_diego_2.png",
+    "/home/user/city-pretty/.claude/worktrees/agent-a375892024f562b5a/data/backtests/site_zoning_san_diego_3.png"
+   ],
+   "errors": []
+  }
+ }
+}

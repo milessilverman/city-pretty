@@ -1,0 +1,5071 @@
+{
+ "label": "zoning_after",
+ "built": "2026-11-22",
+ "script": "scripts/measure_site_cards.mjs",
+ "inputs": "the page's displayable inputs only (pcSubjects / pcCtx in app/invest.js); no data/internal rows",
+ "sites": 7098,
+ "counties": 42,
+ "sitesWithCostRange": 7098,
+ "sitesWithPublicMoneyThatApplies": 4639,
+ "sitesWhereTheLocationRuleIsKnown": 7079,
+ "sitesWithIncomeRange": 7095,
+ "sitesWithNothing": 0,
+ "nothingBy": [],
+ "courses": {
+  "hold": {
+   "assessed": 7098,
+   "filled": {
+    "size": 7098,
+    "cost": 0,
+    "publicMoney": 0,
+    "income": 0,
+    "value": 0
+   },
+   "why": {
+    "size": [],
+    "cost": [
+     {
+      "reason": "the purchase price is not on file: the site record's market land value is an unverified model estimate, and its assessed value is a tax base, not a price",
+      "sites": 7098,
+      "counties": 42,
+      "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+     }
+    ],
+    "publicMoney": [
+     {
+      "reason": "no programme listed",
+      "sites": 7098,
+      "counties": 42,
+      "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+     }
+    ],
+    "income": [
+     {
+      "reason": "space rental income not on file: no sourced rate for parking, storage or roof space is in the data (research prompt # (renting out every space))",
+      "sites": 7098,
+      "counties": 42,
+      "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+     }
+    ],
+    "value": [
+     {
+      "reason": "the purchase price is not on file: the site record's market land value is an unverified model estimate, and its assessed value is a tax base, not a price",
+      "sites": 7098,
+      "counties": 42,
+      "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+     }
+    ]
+   }
+  },
+  "small_multifamily": {
+   "assessed": 359,
+   "filled": {
+    "size": 296,
+    "cost": 275,
+    "publicMoney": 0,
+    "income": 359,
+    "value": 0
+   },
+   "why": {
+    "size": [
+     {
+      "reason": "Size (homes): the density limit for R#-# is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this",
+      "sites": 19,
+      "counties": 2,
+      "topCounties": "36081:15, 36047:4"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 15,
+      "counties": 1,
+      "topCounties": "06037:15"
+     },
+     {
+      "reason": "Size (homes): the density limit for R# is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this z",
+      "sites": 8,
+      "counties": 2,
+      "topCounties": "36047:4, 36081:4"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#XL is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 6,
+      "counties": 1,
+      "topCounties": "06037:6"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]RD#-#-O is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 2,
+      "counties": 1,
+      "topCounties": "06037:2"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-#-O is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 2,
+      "counties": 1,
+      "topCounties": "06037:2"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-#VL-CPIO is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 2,
+      "counties": 1,
+      "topCounties": "06037:2"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#-HPOZ is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 2,
+      "counties": 1,
+      "topCounties": "06037:2"
+     },
+     {
+      "reason": "Size (homes): the density limit for (Q)R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-#-O is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for (Q)R#-#VL is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-#D is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#-HCR is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#B is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this ",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "36047:1"
+     }
+    ],
+    "cost": [
+     {
+      "reason": "cost not computed: the county's declared value per home is on file (see the place rows) but the number of homes is not sized for this site",
+      "sites": 84,
+      "counties": 4,
+      "topCounties": "06037:35, 06073:21, 36081:19, 36047:9"
+     }
+    ],
+    "publicMoney": [
+     {
+      "reason": "no programme listed",
+      "sites": 359,
+      "counties": 4,
+      "topCounties": "36047:153, 36081:88, 06073:83, 06037:35"
+     }
+    ],
+    "income": [],
+    "value": [
+     {
+      "reason": "no finished value: a value needs a sourced capitalisation rate or a valuation model tested on this kind of building in this county; neither is on file (income and cost are shown instead)",
+      "sites": 236,
+      "counties": 2,
+      "topCounties": "36047:153, 06073:83"
+     },
+     {
+      "reason": "no finished value: this county's tested home-value model (…) was tested on existing one- and two-family homes, not on new apartment buildings; a value needs a sourced capitalisation rate or a valuation model tested on this kind of building here",
+      "sites": 123,
+      "counties": 2,
+      "topCounties": "36081:88, 06037:35"
+     }
+    ]
+   }
+  },
+  "small_multifamily+affordable": {
+   "assessed": 359,
+   "filled": {
+    "size": 296,
+    "cost": 275,
+    "publicMoney": 0,
+    "income": 359,
+    "value": 0
+   },
+   "why": {
+    "size": [
+     {
+      "reason": "Size (homes): the density limit for R#-# is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this",
+      "sites": 19,
+      "counties": 2,
+      "topCounties": "36081:15, 36047:4"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 15,
+      "counties": 1,
+      "topCounties": "06037:15"
+     },
+     {
+      "reason": "Size (homes): the density limit for R# is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this z",
+      "sites": 8,
+      "counties": 2,
+      "topCounties": "36047:4, 36081:4"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#XL is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 6,
+      "counties": 1,
+      "topCounties": "06037:6"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]RD#-#-O is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 2,
+      "counties": 1,
+      "topCounties": "06037:2"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-#-O is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 2,
+      "counties": 1,
+      "topCounties": "06037:2"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-#VL-CPIO is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 2,
+      "counties": 1,
+      "topCounties": "06037:2"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#-HPOZ is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 2,
+      "counties": 1,
+      "topCounties": "06037:2"
+     },
+     {
+      "reason": "Size (homes): the density limit for (Q)R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-#-O is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for (Q)R#-#VL is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-#D is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#-HCR is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#B is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this ",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "36047:1"
+     }
+    ],
+    "cost": [
+     {
+      "reason": "cost not computed: the county's declared value per home is on file (see the place rows) but the number of homes is not sized for this site",
+      "sites": 84,
+      "counties": 4,
+      "topCounties": "06037:35, 06073:21, 36081:19, 36047:9"
+     }
+    ],
+    "publicMoney": [
+     {
+      "reason": "Low-Income Housing Tax Credit (federal): could apply; not computed | HOME Investment Partnerships (…): could apply; not computed | FHA multifamily mortgage insurance (HUD Section #(d)(…) and others): could apply; not computed | State housing tax credits, trust",
+      "sites": 359,
+      "counties": 4,
+      "topCounties": "36047:153, 36081:88, 06073:83, 06037:35"
+     }
+    ],
+    "income": [],
+    "value": [
+     {
+      "reason": "no finished value: a value needs a sourced capitalisation rate or a valuation model tested on this kind of building in this county; neither is on file (income and cost are shown instead)",
+      "sites": 236,
+      "counties": 2,
+      "topCounties": "36047:153, 06073:83"
+     },
+     {
+      "reason": "no finished value: this county's tested home-value model (…) was tested on existing one- and two-family homes, not on new apartment buildings; a value needs a sourced capitalisation rate or a valuation model tested on this kind of building here",
+      "sites": 123,
+      "counties": 2,
+      "topCounties": "36081:88, 06037:35"
+     }
+    ]
+   }
+  },
+  "station_conventional": {
+   "assessed": 339,
+   "filled": {
+    "size": 281,
+    "cost": 262,
+    "publicMoney": 0,
+    "income": 339,
+    "value": 0
+   },
+   "why": {
+    "size": [
+     {
+      "reason": "Size (homes): the density limit for R#-# is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this",
+      "sites": 19,
+      "counties": 2,
+      "topCounties": "36081:15, 36047:4"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 13,
+      "counties": 1,
+      "topCounties": "06037:13"
+     },
+     {
+      "reason": "Size (homes): the density limit for R# is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this z",
+      "sites": 8,
+      "counties": 2,
+      "topCounties": "36047:4, 36081:4"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#XL is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 6,
+      "counties": 1,
+      "topCounties": "06037:6"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-#VL-CPIO is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 2,
+      "counties": 1,
+      "topCounties": "06037:2"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#-HPOZ is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 2,
+      "counties": 1,
+      "topCounties": "06037:2"
+     },
+     {
+      "reason": "Size (homes): the density limit for (Q)R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-#-O is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-#-O is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for (Q)R#-#VL is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-#D is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#-HCR is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#B is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this ",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "36047:1"
+     }
+    ],
+    "cost": [
+     {
+      "reason": "cost not computed: the county's declared value per home is on file (see the place rows) but the number of homes is not sized for this site",
+      "sites": 77,
+      "counties": 4,
+      "topCounties": "06037:30, 36081:19, 06073:19, 36047:9"
+     }
+    ],
+    "publicMoney": [
+     {
+      "reason": "no programme listed",
+      "sites": 339,
+      "counties": 4,
+      "topCounties": "36047:149, 36081:84, 06073:76, 06037:30"
+     }
+    ],
+    "income": [],
+    "value": [
+     {
+      "reason": "no finished value: a value needs a sourced capitalisation rate or a valuation model tested on this kind of building in this county; neither is on file (income and cost are shown instead)",
+      "sites": 225,
+      "counties": 2,
+      "topCounties": "36047:149, 06073:76"
+     },
+     {
+      "reason": "no finished value: this county's tested home-value model (…) was tested on existing one- and two-family homes, not on new apartment buildings; a value needs a sourced capitalisation rate or a valuation model tested on this kind of building here",
+      "sites": 114,
+      "counties": 2,
+      "topCounties": "36081:84, 06037:30"
+     }
+    ]
+   }
+  },
+  "station_conventional+affordable": {
+   "assessed": 339,
+   "filled": {
+    "size": 281,
+    "cost": 262,
+    "publicMoney": 0,
+    "income": 339,
+    "value": 0
+   },
+   "why": {
+    "size": [
+     {
+      "reason": "Size (homes): the density limit for R#-# is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this",
+      "sites": 19,
+      "counties": 2,
+      "topCounties": "36081:15, 36047:4"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 13,
+      "counties": 1,
+      "topCounties": "06037:13"
+     },
+     {
+      "reason": "Size (homes): the density limit for R# is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this z",
+      "sites": 8,
+      "counties": 2,
+      "topCounties": "36047:4, 36081:4"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#XL is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 6,
+      "counties": 1,
+      "topCounties": "06037:6"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-#VL-CPIO is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 2,
+      "counties": 1,
+      "topCounties": "06037:2"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#-HPOZ is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 2,
+      "counties": 1,
+      "topCounties": "06037:2"
+     },
+     {
+      "reason": "Size (homes): the density limit for (Q)R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-#-O is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-#-O is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for (Q)R#-#VL is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-#D is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#-HCR is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#B is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this ",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "36047:1"
+     }
+    ],
+    "cost": [
+     {
+      "reason": "cost not computed: the county's declared value per home is on file (see the place rows) but the number of homes is not sized for this site",
+      "sites": 77,
+      "counties": 4,
+      "topCounties": "06037:30, 36081:19, 06073:19, 36047:9"
+     }
+    ],
+    "publicMoney": [
+     {
+      "reason": "Low-Income Housing Tax Credit (federal): could apply; not computed | HOME Investment Partnerships (…): could apply; not computed | FHA multifamily mortgage insurance (HUD Section #(d)(…) and others): could apply; not computed | State housing tax credits, trust",
+      "sites": 339,
+      "counties": 4,
+      "topCounties": "36047:149, 36081:84, 06073:76, 06037:30"
+     }
+    ],
+    "income": [],
+    "value": [
+     {
+      "reason": "no finished value: a value needs a sourced capitalisation rate or a valuation model tested on this kind of building in this county; neither is on file (income and cost are shown instead)",
+      "sites": 225,
+      "counties": 2,
+      "topCounties": "36047:149, 06073:76"
+     },
+     {
+      "reason": "no finished value: this county's tested home-value model (…) was tested on existing one- and two-family homes, not on new apartment buildings; a value needs a sourced capitalisation rate or a valuation model tested on this kind of building here",
+      "sites": 114,
+      "counties": 2,
+      "topCounties": "36081:84, 06037:30"
+     }
+    ]
+   }
+  },
+  "station_prefab": {
+   "assessed": 339,
+   "filled": {
+    "size": 281,
+    "cost": 262,
+    "publicMoney": 0,
+    "income": 339,
+    "value": 0
+   },
+   "why": {
+    "size": [
+     {
+      "reason": "Size (homes): the density limit for R#-# is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this",
+      "sites": 19,
+      "counties": 2,
+      "topCounties": "36081:15, 36047:4"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 13,
+      "counties": 1,
+      "topCounties": "06037:13"
+     },
+     {
+      "reason": "Size (homes): the density limit for R# is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this z",
+      "sites": 8,
+      "counties": 2,
+      "topCounties": "36047:4, 36081:4"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#XL is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 6,
+      "counties": 1,
+      "topCounties": "06037:6"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-#VL-CPIO is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 2,
+      "counties": 1,
+      "topCounties": "06037:2"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#-HPOZ is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 2,
+      "counties": 1,
+      "topCounties": "06037:2"
+     },
+     {
+      "reason": "Size (homes): the density limit for (Q)R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-#-O is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-#-O is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for (Q)R#-#VL is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-#D is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#-HCR is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#B is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this ",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "36047:1"
+     }
+    ],
+    "cost": [
+     {
+      "reason": "cost not computed: the county's declared value per home is on file (see the place rows) but the number of homes is not sized for this site",
+      "sites": 77,
+      "counties": 4,
+      "topCounties": "06037:30, 36081:19, 06073:19, 36047:9"
+     }
+    ],
+    "publicMoney": [
+     {
+      "reason": "no programme listed",
+      "sites": 339,
+      "counties": 4,
+      "topCounties": "36047:149, 36081:84, 06073:76, 06037:30"
+     }
+    ],
+    "income": [],
+    "value": [
+     {
+      "reason": "no finished value: a value needs a sourced capitalisation rate or a valuation model tested on this kind of building in this county; neither is on file (income and cost are shown instead)",
+      "sites": 225,
+      "counties": 2,
+      "topCounties": "36047:149, 06073:76"
+     },
+     {
+      "reason": "no finished value: this county's tested home-value model (…) was tested on existing one- and two-family homes, not on new apartment buildings; a value needs a sourced capitalisation rate or a valuation model tested on this kind of building here",
+      "sites": 114,
+      "counties": 2,
+      "topCounties": "36081:84, 06037:30"
+     }
+    ]
+   }
+  },
+  "station_prefab+affordable": {
+   "assessed": 339,
+   "filled": {
+    "size": 281,
+    "cost": 262,
+    "publicMoney": 0,
+    "income": 339,
+    "value": 0
+   },
+   "why": {
+    "size": [
+     {
+      "reason": "Size (homes): the density limit for R#-# is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this",
+      "sites": 19,
+      "counties": 2,
+      "topCounties": "36081:15, 36047:4"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 13,
+      "counties": 1,
+      "topCounties": "06037:13"
+     },
+     {
+      "reason": "Size (homes): the density limit for R# is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this z",
+      "sites": 8,
+      "counties": 2,
+      "topCounties": "36047:4, 36081:4"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#XL is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 6,
+      "counties": 1,
+      "topCounties": "06037:6"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-#VL-CPIO is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 2,
+      "counties": 1,
+      "topCounties": "06037:2"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#-HPOZ is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 2,
+      "counties": 1,
+      "topCounties": "06037:2"
+     },
+     {
+      "reason": "Size (homes): the density limit for (Q)R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for [Q]R#-#-O is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-#-O is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for (Q)R#-#VL is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#-#D is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for RD#-#-HCR is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "06037:1"
+     },
+     {
+      "reason": "Size (homes): the density limit for R#B is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this ",
+      "sites": 1,
+      "counties": 1,
+      "topCounties": "36047:1"
+     }
+    ],
+    "cost": [
+     {
+      "reason": "cost not computed: the county's declared value per home is on file (see the place rows) but the number of homes is not sized for this site",
+      "sites": 77,
+      "counties": 4,
+      "topCounties": "06037:30, 36081:19, 06073:19, 36047:9"
+     }
+    ],
+    "publicMoney": [
+     {
+      "reason": "Low-Income Housing Tax Credit (federal): could apply; not computed | HOME Investment Partnerships (…): could apply; not computed | FHA multifamily mortgage insurance (HUD Section #(d)(…) and others): could apply; not computed | State housing tax credits, trust",
+      "sites": 339,
+      "counties": 4,
+      "topCounties": "36047:149, 36081:84, 06073:76, 06037:30"
+     }
+    ],
+    "income": [],
+    "value": [
+     {
+      "reason": "no finished value: a value needs a sourced capitalisation rate or a valuation model tested on this kind of building in this county; neither is on file (income and cost are shown instead)",
+      "sites": 225,
+      "counties": 2,
+      "topCounties": "36047:149, 06073:76"
+     },
+     {
+      "reason": "no finished value: this county's tested home-value model (…) was tested on existing one- and two-family homes, not on new apartment buildings; a value needs a sourced capitalisation rate or a valuation model tested on this kind of building here",
+      "sites": 114,
+      "counties": 2,
+      "topCounties": "36081:84, 06037:30"
+     }
+    ]
+   }
+  }
+ },
+ "notAssessed": {
+  "adu": [
+   {
+    "reason": "the zoning code is not on file for this site",
+    "sites": 5452,
+    "counties": 39,
+    "topCounties": "17031:800, 48113:756, 04013:611, 53033:476, 06037:466"
+   },
+   {
+    "reason": "the site record shows no existing home (Surface parking lot); the ADU law on file covers lots with a proposed or existing dwelling, and building the main home is not one of these courses",
+    "sites": 1479,
+    "counties": 11,
+    "topCounties": "06073:387, 36047:336, 06037:306, 36081:124, 08031:81"
+   },
+   {
+    "reason": "the site record shows no existing home (Vacant or brownfield land); the ADU law on file covers lots with a proposed or existing dwelling, and building the main home is not one of these courses",
+    "sites": 154,
+    "counties": 9,
+    "topCounties": "36047:67, 36081:29, 06037:26, 24510:8, 47037:7"
+   },
+   {
+    "reason": "the site record shows no existing home (Golf course); the ADU law on file covers lots with a proposed or existing dwelling, and building the main home is not one of these courses",
+    "sites": 13,
+    "counties": 6,
+    "topCounties": "06073:4, 36047:3, 36081:2, 06037:2, 47157:1"
+   }
+  ],
+  "state_law_units": [
+   {
+    "reason": "the zoning code is not on file for this site",
+    "sites": 5452,
+    "counties": 39,
+    "topCounties": "17031:800, 48113:756, 04013:611, 53033:476, 06037:466"
+   },
+   {
+    "reason": "no state law on file that allows two or more units by right applies to this site",
+    "sites": 1577,
+    "counties": 11,
+    "topCounties": "36047:406, 06037:331, 06073:330, 36081:155, 47037:85"
+   },
+   {
+    "reason": "CA SB # (California HOME Act) — two units per lot and urban lot split: Not determined: the list of sites this law excludes has not been confirmed against the statute text.",
+    "sites": 69,
+    "counties": 2,
+    "topCounties": "06073:66, 06037:3"
+   }
+  ],
+  "small_multifamily": [
+   {
+    "reason": "the zoning code is not on file for this site",
+    "sites": 5452,
+    "counties": 39,
+    "topCounties": "17031:800, 48113:756, 04013:611, 53033:476, 06037:466"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 116,
+    "counties": 5,
+    "topCounties": "24510:59, 26163:24, 41051:20, 47157:9, 47037:4"
+   },
+   {
+    "reason": "the site's zoning (…) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a b",
+    "sites": 93,
+    "counties": 1,
+    "topCounties": "06037:93"
+   },
+   {
+    "reason": "the site's zoning (…) is industrial, and New York City's code does not permit housing there (…), and no state multifamily law on file applies",
+    "sites": 82,
+    "counties": 2,
+    "topCounties": "36047:71, 36081:11"
+   },
+   {
+    "reason": "the site's zoning (…) is industrial, and City of San Diego's code does not permit housing there (…), and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 77,
+    "counties": 1,
+    "topCounties": "06073:77"
+   },
+   {
+    "reason": "the site's zoning (…) is mixed-use; whether City of San Diego's code permits housing there is not on file: multiple dwelling units are permitted with footnote # of Table #-#A, which excludes Prime Industrial Land; whether the site is on Prime Industrial Land i",
+    "sites": 76,
+    "counties": 1,
+    "topCounties": "06073:76"
+   },
+   {
+    "reason": "the site's zoning (…) is single-family, which is not a multifamily or mixed-use category, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 66,
+    "counties": 1,
+    "topCounties": "06073:66"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: residences are allowed in certain M#-# districts (…); whether this site is in one is not checked, and no state multifamily law on file applies",
+    "sites": 54,
+    "counties": 2,
+    "topCounties": "36047:44, 36081:10"
+   },
+   {
+    "reason": "the site's zoning (…) is public/open space; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP",
+    "sites": 49,
+    "counties": 1,
+    "topCounties": "06037:49"
+   },
+   {
+    "reason": "the site's zoning (DTC) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 48,
+    "counties": 1,
+    "topCounties": "47037:48"
+   },
+   {
+    "reason": "the site's zoning (…) is mixed-use; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a bo",
+    "sites": 46,
+    "counties": 1,
+    "topCounties": "06037:46"
+   },
+   {
+    "reason": "the site's zoning (…) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a b",
+    "sites": 40,
+    "counties": 1,
+    "topCounties": "06037:40"
+   },
+   {
+    "reason": "the site's zoning (PARK) is public/open space; whether New York City's code permits housing there is not on file: parkland is not a zoning district; no housing rule applies from the Zoning Resolution, and no state multifamily law on file applies",
+    "sites": 33,
+    "counties": 2,
+    "topCounties": "36047:26, 36081:7"
+   },
+   {
+    "reason": "the site's zoning (…) is commercial, and New York City's code does not permit housing there (…), and no state multifamily law on file applies",
+    "sites": 27,
+    "counties": 2,
+    "topCounties": "36047:20, 36081:7"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the zone allows only limited residential use, and the limit is in the use table, not read here, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 26,
+    "counties": 1,
+    "topCounties": "06073:26"
+   },
+   {
+    "reason": "the site's zoning (CX) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 25,
+    "counties": 1,
+    "topCounties": "41051:25"
+   },
+   {
+    "reason": "the site's zoning (CMX) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 23,
+    "counties": 1,
+    "topCounties": "08031:23"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district LIC, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 18,
+    "counties": 1,
+    "topCounties": "36047:18"
+   },
+   {
+    "reason": "the site's zoning (…) is commercial, and City of San Diego's code does not permit housing there (§#(b)), and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 17,
+    "counties": 1,
+    "topCounties": "06073:17"
+   },
+   {
+    "reason": "the site's zoning (…) is single-family, which is not a multifamily or mixed-use category, and no state multifamily law on file applies",
+    "sites": 16,
+    "counties": 2,
+    "topCounties": "36081:10, 36047:6"
+   },
+   {
+    "reason": "the site's zoning (CBD) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 15,
+    "counties": 1,
+    "topCounties": "08031:15"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district OP, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 15,
+    "counties": 1,
+    "topCounties": "36047:15"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (listed next",
+    "sites": 13,
+    "counties": 1,
+    "topCounties": "06073:13"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "sites": 13,
+    "counties": 1,
+    "topCounties": "48453:13"
+   },
+   {
+    "reason": "the site's zoning (LAX) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a",
+    "sites": 12,
+    "counties": 1,
+    "topCounties": "06037:12"
+   },
+   {
+    "reason": "the site's zoning (CW) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a ",
+    "sites": 9,
+    "counties": 1,
+    "topCounties": "06037:9"
+   },
+   {
+    "reason": "the site's zoning (CMP) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 8,
+    "counties": 1,
+    "topCounties": "08031:8"
+   },
+   {
+    "reason": "the site's zoning (GTR) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 8,
+    "counties": 1,
+    "topCounties": "08031:8"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district DJ, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 8,
+    "counties": 2,
+    "topCounties": "36047:5, 36081:3"
+   },
+   {
+    "reason": "the site's zoning (MUI) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 8,
+    "counties": 1,
+    "topCounties": "47037:8"
+   },
+   {
+    "reason": "the site's zoning (P-NP) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "sites": 8,
+    "counties": 1,
+    "topCounties": "48453:8"
+   },
+   {
+    "reason": "the site's zoning (CCPD-PC) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 7,
+    "counties": 1,
+    "topCounties": "06073:7"
+   },
+   {
+    "reason": "the site's zoning (SP) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 7,
+    "counties": 1,
+    "topCounties": "47037:7"
+   },
+   {
+    "reason": "the site's zoning (GO) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "sites": 7,
+    "counties": 1,
+    "topCounties": "48453:7"
+   },
+   {
+    "reason": "the site's zoning (CCPD-RE) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 6,
+    "counties": 1,
+    "topCounties": "06073:6"
+   },
+   {
+    "reason": "the site's zoning (OSA) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 6,
+    "counties": 1,
+    "topCounties": "08031:6"
+   },
+   {
+    "reason": "the site's zoning (CMS) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 6,
+    "counties": 1,
+    "topCounties": "08031:6"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district SG, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 6,
+    "counties": 1,
+    "topCounties": "36047:6"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district MX-# whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 6,
+    "counties": 2,
+    "topCounties": "36047:3, 36081:3"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the map's category \"Parking\" is not one of the categories used here, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 5,
+    "counties": 1,
+    "topCounties": "06037:5"
+   },
+   {
+    "reason": "the site's zoning (…) is public/open space; whether City of San Diego's code permits housing there is not on file: the open space use table was not read, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 5,
+    "counties": 1,
+    "topCounties": "06073:5"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district CI, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 5,
+    "counties": 1,
+    "topCounties": "36047:5"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district HY, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 5,
+    "counties": 1,
+    "topCounties": "36047:5"
+   },
+   {
+    "reason": "the site's zoning (IR) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 5,
+    "counties": 1,
+    "topCounties": "47037:5"
+   },
+   {
+    "reason": "the site's zoning (CS) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 5,
+    "counties": 1,
+    "topCounties": "47037:5"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the map's category \"Agricultural\" is not one of the categories used here, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06037:4"
+   },
+   {
+    "reason": "the site's zoning (UC(CA)-CDO) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HT",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06037:4"
+   },
+   {
+    "reason": "the site's zoning (HJ(EC)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06037:4"
+   },
+   {
+    "reason": "the site's zoning (CCPD-CORE) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (lis",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06073:4"
+   },
+   {
+    "reason": "the site's zoning (CCPD-ER) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06073:4"
+   },
+   {
+    "reason": "the site's zoning (CCPD-NC) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06073:4"
+   },
+   {
+    "reason": "the site's zoning (OSB) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "08031:4"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked, and no state multifamily law on file applies",
+    "sites": 4,
+    "counties": 2,
+    "topCounties": "36047:2, 36081:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district SW, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 4,
+    "counties": 2,
+    "topCounties": "36047:2, 36081:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district LM, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "36047:4"
+   },
+   {
+    "reason": "the site's zoning (PUD-NP) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "48453:4"
+   },
+   {
+    "reason": "the site's zoning (…) is single-family; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "06037:3"
+   },
+   {
+    "reason": "the site's zoning (CRX) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "08031:3"
+   },
+   {
+    "reason": "the site's zoning (BSC) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "24510:3"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district G, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "36047:3"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district SHP, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "36047:3"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district CL, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "36047:3"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district DB, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "36047:3"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district EHC, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "36081:3"
+   },
+   {
+    "reason": "the site's zoning (IG) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "47037:3"
+   },
+   {
+    "reason": "the site's zoning (CF) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "47037:3"
+   },
+   {
+    "reason": "the site's zoning ((Q)M#-#VL) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTT",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (DNSP-SN) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP ",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (UI(CA)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (UC(CA)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (FWY) has rules that are not determined: the map's category \"Freeway\" is not one of the categories used here, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (UV(CA)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (ADP) is mixed-use; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a ",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (MU(EC)) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (CCA-SN-O) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (CCPD-BP) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06073:2"
+   },
+   {
+    "reason": "the site's zoning (CCPD-MC) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06073:2"
+   },
+   {
+    "reason": "the site's zoning (MMX) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "08031:2"
+   },
+   {
+    "reason": "the site's zoning (GMS) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "08031:2"
+   },
+   {
+    "reason": "the site's zoning (I-MU) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "24510:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district BSC, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "36047:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district CR-# whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 2,
+    "counties": 2,
+    "topCounties": "36047:1, 36081:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district HP, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "36081:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district MMU, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "36081:2"
+   },
+   {
+    "reason": "the site's zoning (EMP) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "47157:2"
+   },
+   {
+    "reason": "the site's zoning (HJ(EC)-O) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning ((Q)C#-#VL-RIO) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning ((T)[Q]C#-#D-O) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning ((Q)P-#D-HPOZ) has rules that are not determined: the map's category \"Parking\" is not one of the categories used here, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (HR(EC)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (ADP-TCN) is mixed-use; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning ((T)(Q)C#-#D-SN-CPIO) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this m",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning ((Q)C#-#D) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (OS) is public/open space; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTT",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (NI(EC)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning ((T)(Q)C#-#) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HT",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (GW(CA)) is public/open space; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (CCPD-I) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (listed",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06073:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: RT-#-# is not among the zones parsed here (…), and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06073:1"
+   },
+   {
+    "reason": "the site's zoning (CCPD-OS) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06073:1"
+   },
+   {
+    "reason": "the site's zoning (LJSPD-SF) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (list",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06073:1"
+   },
+   {
+    "reason": "the site's zoning (IB) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "08031:1"
+   },
+   {
+    "reason": "the site's zoning (EMX) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "08031:1"
+   },
+   {
+    "reason": "the site's zoning (GMU) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "08031:1"
+   },
+   {
+    "reason": "the site's zoning (UMS) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "08031:1"
+   },
+   {
+    "reason": "the site's zoning (USU) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "08031:1"
+   },
+   {
+    "reason": "the site's zoning (GRO) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "08031:1"
+   },
+   {
+    "reason": "the site's zoning (ESU) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "08031:1"
+   },
+   {
+    "reason": "the site's zoning (PD) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "26163:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district BNY, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36047:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district HRP, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36047:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: M#-#A carries an A suffix, whose use rules (…) are not read here, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36047:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district AAM, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36047:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district BR, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36047:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district HSQ, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36047:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district HRW, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36081:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district DFR, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36081:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district #th, TA, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36081:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district J, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36081:1"
+   },
+   {
+    "reason": "the site's zoning (IH) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "41051:1"
+   },
+   {
+    "reason": "the site's zoning (EX) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "41051:1"
+   },
+   {
+    "reason": "the site's zoning (OS) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "41051:1"
+   },
+   {
+    "reason": "the site's zoning (CS,IR) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "47037:1"
+   },
+   {
+    "reason": "the site's zoning (MUI-A) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "47037:1"
+   },
+   {
+    "reason": "the site's zoning (LI-NP) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "48453:1"
+   },
+   {
+    "reason": "the site's zoning (GO-CO-ETOD-DBETOD-NP) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "48453:1"
+   },
+   {
+    "reason": "the site's zoning (DMU) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "48453:1"
+   },
+   {
+    "reason": "the site's zoning (CS-MU-V-CO-ETOD-DBETOD-NP) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "48453:1"
+   },
+   {
+    "reason": "the site's zoning (GO-ETOD-DBETOD) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "48453:1"
+   },
+   {
+    "reason": "the site's zoning (CBD) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "48453:1"
+   }
+  ],
+  "station_conventional": [
+   {
+    "reason": "the zoning code is not on file for this site",
+    "sites": 5452,
+    "counties": 39,
+    "topCounties": "17031:800, 48113:756, 04013:611, 53033:476, 06037:466"
+   },
+   {
+    "reason": "no rail station distance is on file for this site and no planned-rail stop city is within # mile",
+    "sites": 387,
+    "counties": 9,
+    "topCounties": "47037:85, 08031:84, 24510:64, 41051:48, 48453:38"
+   },
+   {
+    "reason": "the site's zoning (…) is industrial, and New York City's code does not permit housing there (…), and no state multifamily law on file applies",
+    "sites": 81,
+    "counties": 2,
+    "topCounties": "36047:70, 36081:11"
+   },
+   {
+    "reason": "the nearest rail station on file is # miles away (…) and no planned-rail stop city is within # mile",
+    "sites": 80,
+    "counties": 4,
+    "topCounties": "06037:28, 06073:28, 36047:17, 36081:7"
+   },
+   {
+    "reason": "the site's zoning (…) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a b",
+    "sites": 80,
+    "counties": 1,
+    "topCounties": "06037:80"
+   },
+   {
+    "reason": "the site's zoning (…) is mixed-use; whether City of San Diego's code permits housing there is not on file: multiple dwelling units are permitted with footnote # of Table #-#A, which excludes Prime Industrial Land; whether the site is on Prime Industrial Land i",
+    "sites": 73,
+    "counties": 1,
+    "topCounties": "06073:73"
+   },
+   {
+    "reason": "the site's zoning (…) is industrial, and City of San Diego's code does not permit housing there (…), and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 60,
+    "counties": 1,
+    "topCounties": "06073:60"
+   },
+   {
+    "reason": "the site's zoning (…) is single-family, which is not a multifamily or mixed-use category, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 58,
+    "counties": 1,
+    "topCounties": "06073:58"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: residences are allowed in certain M#-# districts (…); whether this site is in one is not checked, and no state multifamily law on file applies",
+    "sites": 51,
+    "counties": 2,
+    "topCounties": "36047:41, 36081:10"
+   },
+   {
+    "reason": "the site's zoning (…) is mixed-use; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a bo",
+    "sites": 44,
+    "counties": 1,
+    "topCounties": "06037:44"
+   },
+   {
+    "reason": "the site's zoning (…) is public/open space; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP",
+    "sites": 42,
+    "counties": 1,
+    "topCounties": "06037:42"
+   },
+   {
+    "reason": "the site's zoning (…) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a b",
+    "sites": 37,
+    "counties": 1,
+    "topCounties": "06037:37"
+   },
+   {
+    "reason": "the site's zoning (…) is commercial, and New York City's code does not permit housing there (…), and no state multifamily law on file applies",
+    "sites": 27,
+    "counties": 2,
+    "topCounties": "36047:20, 36081:7"
+   },
+   {
+    "reason": "the site's zoning (PARK) is public/open space; whether New York City's code permits housing there is not on file: parkland is not a zoning district; no housing rule applies from the Zoning Resolution, and no state multifamily law on file applies",
+    "sites": 27,
+    "counties": 2,
+    "topCounties": "36047:20, 36081:7"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the zone allows only limited residential use, and the limit is in the use table, not read here, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 25,
+    "counties": 1,
+    "topCounties": "06073:25"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district LIC, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 18,
+    "counties": 1,
+    "topCounties": "36047:18"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district OP, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 15,
+    "counties": 1,
+    "topCounties": "36047:15"
+   },
+   {
+    "reason": "the site's zoning (…) is commercial, and City of San Diego's code does not permit housing there (§#(b)), and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 14,
+    "counties": 1,
+    "topCounties": "06073:14"
+   },
+   {
+    "reason": "the site's zoning (…) is single-family, which is not a multifamily or mixed-use category, and no state multifamily law on file applies",
+    "sites": 14,
+    "counties": 2,
+    "topCounties": "36081:8, 36047:6"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (listed next",
+    "sites": 13,
+    "counties": 1,
+    "topCounties": "06073:13"
+   },
+   {
+    "reason": "the site's zoning (LAX) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a",
+    "sites": 9,
+    "counties": 1,
+    "topCounties": "06037:9"
+   },
+   {
+    "reason": "the site's zoning (CW) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a ",
+    "sites": 7,
+    "counties": 1,
+    "topCounties": "06037:7"
+   },
+   {
+    "reason": "the site's zoning (CCPD-PC) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 7,
+    "counties": 1,
+    "topCounties": "06073:7"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district DJ, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 7,
+    "counties": 2,
+    "topCounties": "36047:5, 36081:2"
+   },
+   {
+    "reason": "the site's zoning (CCPD-RE) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 6,
+    "counties": 1,
+    "topCounties": "06073:6"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district SG, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 6,
+    "counties": 1,
+    "topCounties": "36047:6"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district MX-# whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 6,
+    "counties": 2,
+    "topCounties": "36047:3, 36081:3"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district CI, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 5,
+    "counties": 1,
+    "topCounties": "36047:5"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district HY, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 5,
+    "counties": 1,
+    "topCounties": "36047:5"
+   },
+   {
+    "reason": "the site's zoning (UC(CA)-CDO) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HT",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06037:4"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the map's category \"Parking\" is not one of the categories used here, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06037:4"
+   },
+   {
+    "reason": "the site's zoning (HJ(EC)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06037:4"
+   },
+   {
+    "reason": "the site's zoning (CCPD-CORE) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (lis",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06073:4"
+   },
+   {
+    "reason": "the site's zoning (CCPD-ER) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06073:4"
+   },
+   {
+    "reason": "the site's zoning (CCPD-NC) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06073:4"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked, and no state multifamily law on file applies",
+    "sites": 4,
+    "counties": 2,
+    "topCounties": "36047:2, 36081:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district SW, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 4,
+    "counties": 2,
+    "topCounties": "36047:2, 36081:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district LM, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "36047:4"
+   },
+   {
+    "reason": "the site's zoning (…) is public/open space; whether City of San Diego's code permits housing there is not on file: the open space use table was not read, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "06073:3"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district G, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "36047:3"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district SHP, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "36047:3"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district DB, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "36047:3"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district EHC, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "36081:3"
+   },
+   {
+    "reason": "the site's zoning ((Q)M#-#VL) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTT",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (DNSP-SN) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP ",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (UI(CA)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (UC(CA)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (FWY) has rules that are not determined: the map's category \"Freeway\" is not one of the categories used here, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (ADP) is mixed-use; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a ",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (CCA-SN-O) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (…) is single-family; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (CCPD-BP) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06073:2"
+   },
+   {
+    "reason": "the site's zoning (CCPD-MC) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06073:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district BSC, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "36047:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district CL, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "36047:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district HP, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "36081:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district MMU, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "36081:2"
+   },
+   {
+    "reason": "the site's zoning (HJ(EC)-O) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning ((Q)C#-#VL-RIO) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (UV(CA)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning ((T)[Q]C#-#D-O) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning ((Q)P-#D-HPOZ) has rules that are not determined: the map's category \"Parking\" is not one of the categories used here, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (HR(EC)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (ADP-TCN) is mixed-use; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (MU(EC)) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning ((T)(Q)C#-#D-SN-CPIO) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this m",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (NI(EC)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (GW(CA)) is public/open space; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (CCPD-I) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (listed",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06073:1"
+   },
+   {
+    "reason": "the site's zoning (CCPD-OS) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06073:1"
+   },
+   {
+    "reason": "the site's zoning (LJSPD-SF) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (list",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06073:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district BNY, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36047:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: M#-#A carries an A suffix, whose use rules (…) are not read here, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36047:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district AAM, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36047:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district BR, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36047:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district HSQ, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36047:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district HRW, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36081:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district CR-# whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36081:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district DFR, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36081:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district #th, TA, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36081:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district J, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36081:1"
+   }
+  ],
+  "station_prefab": [
+   {
+    "reason": "the zoning code is not on file for this site",
+    "sites": 5452,
+    "counties": 39,
+    "topCounties": "17031:800, 48113:756, 04013:611, 53033:476, 06037:466"
+   },
+   {
+    "reason": "no rail station distance is on file for this site and no planned-rail stop city is within # mile",
+    "sites": 387,
+    "counties": 9,
+    "topCounties": "47037:85, 08031:84, 24510:64, 41051:48, 48453:38"
+   },
+   {
+    "reason": "the site's zoning (…) is industrial, and New York City's code does not permit housing there (…), and no state multifamily law on file applies",
+    "sites": 81,
+    "counties": 2,
+    "topCounties": "36047:70, 36081:11"
+   },
+   {
+    "reason": "the nearest rail station on file is # miles away (…) and no planned-rail stop city is within # mile",
+    "sites": 80,
+    "counties": 4,
+    "topCounties": "06037:28, 06073:28, 36047:17, 36081:7"
+   },
+   {
+    "reason": "the site's zoning (…) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a b",
+    "sites": 80,
+    "counties": 1,
+    "topCounties": "06037:80"
+   },
+   {
+    "reason": "the site's zoning (…) is mixed-use; whether City of San Diego's code permits housing there is not on file: multiple dwelling units are permitted with footnote # of Table #-#A, which excludes Prime Industrial Land; whether the site is on Prime Industrial Land i",
+    "sites": 73,
+    "counties": 1,
+    "topCounties": "06073:73"
+   },
+   {
+    "reason": "the site's zoning (…) is industrial, and City of San Diego's code does not permit housing there (…), and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 60,
+    "counties": 1,
+    "topCounties": "06073:60"
+   },
+   {
+    "reason": "the site's zoning (…) is single-family, which is not a multifamily or mixed-use category, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 58,
+    "counties": 1,
+    "topCounties": "06073:58"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: residences are allowed in certain M#-# districts (…); whether this site is in one is not checked, and no state multifamily law on file applies",
+    "sites": 51,
+    "counties": 2,
+    "topCounties": "36047:41, 36081:10"
+   },
+   {
+    "reason": "the site's zoning (…) is mixed-use; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a bo",
+    "sites": 44,
+    "counties": 1,
+    "topCounties": "06037:44"
+   },
+   {
+    "reason": "the site's zoning (…) is public/open space; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP",
+    "sites": 42,
+    "counties": 1,
+    "topCounties": "06037:42"
+   },
+   {
+    "reason": "the site's zoning (…) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a b",
+    "sites": 37,
+    "counties": 1,
+    "topCounties": "06037:37"
+   },
+   {
+    "reason": "the site's zoning (…) is commercial, and New York City's code does not permit housing there (…), and no state multifamily law on file applies",
+    "sites": 27,
+    "counties": 2,
+    "topCounties": "36047:20, 36081:7"
+   },
+   {
+    "reason": "the site's zoning (PARK) is public/open space; whether New York City's code permits housing there is not on file: parkland is not a zoning district; no housing rule applies from the Zoning Resolution, and no state multifamily law on file applies",
+    "sites": 27,
+    "counties": 2,
+    "topCounties": "36047:20, 36081:7"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the zone allows only limited residential use, and the limit is in the use table, not read here, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 25,
+    "counties": 1,
+    "topCounties": "06073:25"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district LIC, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 18,
+    "counties": 1,
+    "topCounties": "36047:18"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district OP, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 15,
+    "counties": 1,
+    "topCounties": "36047:15"
+   },
+   {
+    "reason": "the site's zoning (…) is commercial, and City of San Diego's code does not permit housing there (§#(b)), and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 14,
+    "counties": 1,
+    "topCounties": "06073:14"
+   },
+   {
+    "reason": "the site's zoning (…) is single-family, which is not a multifamily or mixed-use category, and no state multifamily law on file applies",
+    "sites": 14,
+    "counties": 2,
+    "topCounties": "36081:8, 36047:6"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (listed next",
+    "sites": 13,
+    "counties": 1,
+    "topCounties": "06073:13"
+   },
+   {
+    "reason": "the site's zoning (LAX) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a",
+    "sites": 9,
+    "counties": 1,
+    "topCounties": "06037:9"
+   },
+   {
+    "reason": "the site's zoning (CW) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a ",
+    "sites": 7,
+    "counties": 1,
+    "topCounties": "06037:7"
+   },
+   {
+    "reason": "the site's zoning (CCPD-PC) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 7,
+    "counties": 1,
+    "topCounties": "06073:7"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district DJ, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 7,
+    "counties": 2,
+    "topCounties": "36047:5, 36081:2"
+   },
+   {
+    "reason": "the site's zoning (CCPD-RE) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 6,
+    "counties": 1,
+    "topCounties": "06073:6"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district SG, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 6,
+    "counties": 1,
+    "topCounties": "36047:6"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district MX-# whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 6,
+    "counties": 2,
+    "topCounties": "36047:3, 36081:3"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district CI, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 5,
+    "counties": 1,
+    "topCounties": "36047:5"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district HY, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 5,
+    "counties": 1,
+    "topCounties": "36047:5"
+   },
+   {
+    "reason": "the site's zoning (UC(CA)-CDO) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HT",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06037:4"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the map's category \"Parking\" is not one of the categories used here, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06037:4"
+   },
+   {
+    "reason": "the site's zoning (HJ(EC)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06037:4"
+   },
+   {
+    "reason": "the site's zoning (CCPD-CORE) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (lis",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06073:4"
+   },
+   {
+    "reason": "the site's zoning (CCPD-ER) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06073:4"
+   },
+   {
+    "reason": "the site's zoning (CCPD-NC) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "06073:4"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked, and no state multifamily law on file applies",
+    "sites": 4,
+    "counties": 2,
+    "topCounties": "36047:2, 36081:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district SW, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 4,
+    "counties": 2,
+    "topCounties": "36047:2, 36081:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district LM, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 4,
+    "counties": 1,
+    "topCounties": "36047:4"
+   },
+   {
+    "reason": "the site's zoning (…) is public/open space; whether City of San Diego's code permits housing there is not on file: the open space use table was not read, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "06073:3"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district G, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "36047:3"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district SHP, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "36047:3"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district DB, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "36047:3"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district EHC, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 3,
+    "counties": 1,
+    "topCounties": "36081:3"
+   },
+   {
+    "reason": "the site's zoning ((Q)M#-#VL) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTT",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (DNSP-SN) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP ",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (UI(CA)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (UC(CA)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (FWY) has rules that are not determined: the map's category \"Freeway\" is not one of the categories used here, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (ADP) is mixed-use; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a ",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (CCA-SN-O) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (…) is single-family; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06037:2"
+   },
+   {
+    "reason": "the site's zoning (CCPD-BP) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06073:2"
+   },
+   {
+    "reason": "the site's zoning (CCPD-MC) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "06073:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district BSC, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "36047:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district CL, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "36047:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district HP, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "36081:2"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district MMU, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 2,
+    "counties": 1,
+    "topCounties": "36081:2"
+   },
+   {
+    "reason": "the site's zoning (HJ(EC)-O) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning ((Q)C#-#VL-RIO) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (UV(CA)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning ((T)[Q]C#-#D-O) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning ((Q)P-#D-HPOZ) has rules that are not determined: the map's category \"Parking\" is not one of the categories used here, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (HR(EC)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (ADP-TCN) is mixed-use; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (MU(EC)) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning ((T)(Q)C#-#D-SN-CPIO) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this m",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (NI(EC)) is industrial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP #",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (GW(CA)) is public/open space; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06037:1"
+   },
+   {
+    "reason": "the site's zoning (CCPD-I) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (listed",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06073:1"
+   },
+   {
+    "reason": "the site's zoning (CCPD-OS) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (liste",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06073:1"
+   },
+   {
+    "reason": "the site's zoning (LJSPD-SF) has rules that are not determined: not a Chapter # base zone: the designator is a planned district zone, whose own regulations (…) were not read, and no state multifamily law on file could be applied: # could not be confirmed (list",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "06073:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district BNY, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36047:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: M#-#A carries an A suffix, whose use rules (…) are not read here, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36047:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district AAM, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36047:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district BR, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36047:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district HSQ, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36047:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district HRW, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36081:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district CR-# whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36081:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district DFR, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36081:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district #th, TA, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36081:1"
+   },
+   {
+    "reason": "the site's zoning (…) has rules that are not determined: the site's point lies in special purpose district J, whose rules modify or supersede the base district's, and no state multifamily law on file applies",
+    "sites": 1,
+    "counties": 1,
+    "topCounties": "36081:1"
+   }
+  ]
+ },
+ "placeFacts": {
+  "qct_dda": {
+   "filled": 7079,
+   "why": [
+    {
+     "reason": "the census tract of this site is not on file (…)",
+     "sites": 8,
+     "counties": 3,
+     "topCounties": "32003:5, 06073:2, 17031:1"
+    },
+    {
+     "reason": "the ZIP Code Tabulation Area of this site is not on file",
+     "sites": 7,
+     "counties": 3,
+     "topCounties": "36047:4, 06037:2, 53033:1"
+    },
+    {
+     "reason": "ZIP area # is not on HUD's # metropolitan DDA sheet",
+     "sites": 4,
+     "counties": 3,
+     "topCounties": "36047:2, 48113:1, 06073:1"
+    }
+   ]
+  },
+  "cost": {
+   "filled": 7098,
+   "why": []
+  },
+  "rent_limits": {
+   "filled": 7095,
+   "why": [
+    {
+     "reason": "HUD's tax-credit (MTSP) income limits are not on file for county #: HTTP #; New England: HUD sets limits by town / area (entity ids are town-level), so no county-wide row exists and none is invented",
+     "sites": 3,
+     "counties": 1,
+     "topCounties": "25025:3"
+    }
+   ]
+  },
+  "fmr": {
+   "filled": 7095,
+   "why": [
+    {
+     "reason": "HUD Fair Market Rent not on file for county #",
+     "sites": 3,
+     "counties": 1,
+     "topCounties": "25025:3"
+    }
+   ]
+  }
+ },
+ "blockersRanked": [
+  {
+   "reason": "publicMoney: no programme listed",
+   "sites": 8135,
+   "counties": 42,
+   "topCounties": "06073:988, 06037:895, 36047:857, 17031:800, 48113:756"
+  },
+  {
+   "reason": "cost: the purchase price is not on file: the site record's market land value is an unverified model estimate, and its assessed value is a tax base, not a price",
+   "sites": 7098,
+   "counties": 42,
+   "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+  },
+  {
+   "reason": "income: space rental income not on file: no sourced rate for parking, storage or roof space is in the data (research prompt # (renting out every space))",
+   "sites": 7098,
+   "counties": 42,
+   "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+  },
+  {
+   "reason": "value: the purchase price is not on file: the site record's market land value is an unverified model estimate, and its assessed value is a tax base, not a price",
+   "sites": 7098,
+   "counties": 42,
+   "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+  },
+  {
+   "reason": "course not assessed (adu): the zoning code is not on file for this site",
+   "sites": 5452,
+   "counties": 39,
+   "topCounties": "17031:800, 48113:756, 04013:611, 53033:476, 06037:466"
+  },
+  {
+   "reason": "course not assessed (state_law_units): the zoning code is not on file for this site",
+   "sites": 5452,
+   "counties": 39,
+   "topCounties": "17031:800, 48113:756, 04013:611, 53033:476, 06037:466"
+  },
+  {
+   "reason": "course not assessed (small_multifamily): the zoning code is not on file for this site",
+   "sites": 5452,
+   "counties": 39,
+   "topCounties": "17031:800, 48113:756, 04013:611, 53033:476, 06037:466"
+  },
+  {
+   "reason": "course not assessed (station_conventional): the zoning code is not on file for this site",
+   "sites": 5452,
+   "counties": 39,
+   "topCounties": "17031:800, 48113:756, 04013:611, 53033:476, 06037:466"
+  },
+  {
+   "reason": "course not assessed (station_prefab): the zoning code is not on file for this site",
+   "sites": 5452,
+   "counties": 39,
+   "topCounties": "17031:800, 48113:756, 04013:611, 53033:476, 06037:466"
+  },
+  {
+   "reason": "course not assessed (state_law_units): no state law on file that allows two or more units by right applies to this site",
+   "sites": 1577,
+   "counties": 11,
+   "topCounties": "36047:406, 06037:331, 06073:330, 36081:155, 47037:85"
+  },
+  {
+   "reason": "course not assessed (adu): the site record shows no existing home (Surface parking lot); the ADU law on file covers lots with a proposed or existing dwelling, and building the main home is not one of these courses",
+   "sites": 1479,
+   "counties": 11,
+   "topCounties": "06073:387, 36047:336, 06037:306, 36081:124, 08031:81"
+  },
+  {
+   "reason": "value: no finished value: a value needs a sourced capitalisation rate or a valuation model tested on this kind of building in this county; neither is on file (income and cost are shown instead)",
+   "sites": 1372,
+   "counties": 2,
+   "topCounties": "36047:902, 06073:470"
+  },
+  {
+   "reason": "publicMoney: Low-Income Housing Tax Credit (federal): could apply; not computed | HOME Investment Partnerships (…): could apply; not computed | FHA multifamily mortgage insurance (HUD Section #(d)(…) and others): could apply; not computed | State housing tax credits, trust",
+   "sites": 1037,
+   "counties": 4,
+   "topCounties": "36047:451, 36081:256, 06073:235, 06037:95"
+  },
+  {
+   "reason": "value: no finished value: this county's tested home-value model (…) was tested on existing one- and two-family homes, not on new apartment buildings; a value needs a sourced capitalisation rate or a valuation model tested on this kind of building here",
+   "sites": 702,
+   "counties": 2,
+   "topCounties": "36081:512, 06037:190"
+  },
+  {
+   "reason": "cost: cost not computed: the county's declared value per home is on file (see the place rows) but the number of homes is not sized for this site",
+   "sites": 476,
+   "counties": 4,
+   "topCounties": "06037:190, 06073:118, 36081:114, 36047:54"
+  },
+  {
+   "reason": "course not assessed (station_conventional): no rail station distance is on file for this site and no planned-rail stop city is within # mile",
+   "sites": 387,
+   "counties": 9,
+   "topCounties": "47037:85, 08031:84, 24510:64, 41051:48, 48453:38"
+  },
+  {
+   "reason": "course not assessed (station_prefab): no rail station distance is on file for this site and no planned-rail stop city is within # mile",
+   "sites": 387,
+   "counties": 9,
+   "topCounties": "47037:85, 08031:84, 24510:64, 41051:48, 48453:38"
+  },
+  {
+   "reason": "course not assessed (adu): the site record shows no existing home (Vacant or brownfield land); the ADU law on file covers lots with a proposed or existing dwelling, and building the main home is not one of these courses",
+   "sites": 154,
+   "counties": 9,
+   "topCounties": "36047:67, 36081:29, 06037:26, 24510:8, 47037:7"
+  },
+  {
+   "reason": "course not assessed (small_multifamily): the site's zoning (…) has rules that are not determined: no code table for this jurisdiction was built in this job, and no state multifamily law on file applies",
+   "sites": 116,
+   "counties": 5,
+   "topCounties": "24510:59, 26163:24, 41051:20, 47157:9, 47037:4"
+  },
+  {
+   "reason": "size: Size (homes): the density limit for R#-# is not determined: the site is in Manhattan, where the Manhattan Core is a special density area with its own unit rules; whether this point is in the Core is not checked | Size (floor area): no floor-area limit for this",
+   "sites": 114,
+   "counties": 2,
+   "topCounties": "36081:90, 36047:24"
+  },
+  {
+   "reason": "course not assessed (small_multifamily): the site's zoning (…) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a b",
+   "sites": 93,
+   "counties": 1,
+   "topCounties": "06037:93"
+  },
+  {
+   "reason": "size: Size (homes): the density limit for R#-# is not determined: the code's lot area per dwelling unit is not on file (…) | Size (floor area): no floor-area limit for this zone on file",
+   "sites": 82,
+   "counties": 1,
+   "topCounties": "06037:82"
+  },
+  {
+   "reason": "course not assessed (small_multifamily): the site's zoning (…) is industrial, and New York City's code does not permit housing there (…), and no state multifamily law on file applies",
+   "sites": 82,
+   "counties": 2,
+   "topCounties": "36047:71, 36081:11"
+  },
+  {
+   "reason": "course not assessed (station_conventional): the site's zoning (…) is industrial, and New York City's code does not permit housing there (…), and no state multifamily law on file applies",
+   "sites": 81,
+   "counties": 2,
+   "topCounties": "36047:70, 36081:11"
+  },
+  {
+   "reason": "course not assessed (station_prefab): the site's zoning (…) is industrial, and New York City's code does not permit housing there (…), and no state multifamily law on file applies",
+   "sites": 81,
+   "counties": 2,
+   "topCounties": "36047:70, 36081:11"
+  },
+  {
+   "reason": "course not assessed (station_conventional): the nearest rail station on file is # miles away (…) and no planned-rail stop city is within # mile",
+   "sites": 80,
+   "counties": 4,
+   "topCounties": "06037:28, 06073:28, 36047:17, 36081:7"
+  },
+  {
+   "reason": "course not assessed (station_conventional): the site's zoning (…) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a b",
+   "sites": 80,
+   "counties": 1,
+   "topCounties": "06037:80"
+  },
+  {
+   "reason": "course not assessed (station_prefab): the nearest rail station on file is # miles away (…) and no planned-rail stop city is within # mile",
+   "sites": 80,
+   "counties": 4,
+   "topCounties": "06037:28, 06073:28, 36047:17, 36081:7"
+  },
+  {
+   "reason": "course not assessed (station_prefab): the site's zoning (…) is commercial; whether City of Los Angeles's code permits housing there is not on file: the zoning code's text is not on file: it is published on American Legal Publishing (codelibrary.amlegal.com), which answered this machine HTTP # (a b",
+   "sites": 80,
+   "counties": 1,
+   "topCounties": "06037:80"
+  },
+  {
+   "reason": "course not assessed (small_multifamily): the site's zoning (…) is industrial, and City of San Diego's code does not permit housing there (…), and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+   "sites": 77,
+   "counties": 1,
+   "topCounties": "06073:77"
+  },
+  {
+   "reason": "course not assessed (small_multifamily): the site's zoning (…) is mixed-use; whether City of San Diego's code permits housing there is not on file: multiple dwelling units are permitted with footnote # of Table #-#A, which excludes Prime Industrial Land; whether the site is on Prime Industrial Land i",
+   "sites": 76,
+   "counties": 1,
+   "topCounties": "06073:76"
+  },
+  {
+   "reason": "course not assessed (station_conventional): the site's zoning (…) is mixed-use; whether City of San Diego's code permits housing there is not on file: multiple dwelling units are permitted with footnote # of Table #-#A, which excludes Prime Industrial Land; whether the site is on Prime Industrial Land i",
+   "sites": 73,
+   "counties": 1,
+   "topCounties": "06073:73"
+  },
+  {
+   "reason": "course not assessed (station_prefab): the site's zoning (…) is mixed-use; whether City of San Diego's code permits housing there is not on file: multiple dwelling units are permitted with footnote # of Table #-#A, which excludes Prime Industrial Land; whether the site is on Prime Industrial Land i",
+   "sites": 73,
+   "counties": 1,
+   "topCounties": "06073:73"
+  },
+  {
+   "reason": "course not assessed (state_law_units): CA SB # (California HOME Act) — two units per lot and urban lot split: Not determined: the list of sites this law excludes has not been confirmed against the statute text.",
+   "sites": 69,
+   "counties": 2,
+   "topCounties": "06073:66, 06037:3"
+  },
+  {
+   "reason": "course not assessed (small_multifamily): the site's zoning (…) is single-family, which is not a multifamily or mixed-use category, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+   "sites": 66,
+   "counties": 1,
+   "topCounties": "06073:66"
+  },
+  {
+   "reason": "course not assessed (station_conventional): the site's zoning (…) is industrial, and City of San Diego's code does not permit housing there (…), and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+   "sites": 60,
+   "counties": 1,
+   "topCounties": "06073:60"
+  },
+  {
+   "reason": "course not assessed (station_prefab): the site's zoning (…) is industrial, and City of San Diego's code does not permit housing there (…), and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+   "sites": 60,
+   "counties": 1,
+   "topCounties": "06073:60"
+  },
+  {
+   "reason": "course not assessed (station_conventional): the site's zoning (…) is single-family, which is not a multifamily or mixed-use category, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+   "sites": 58,
+   "counties": 1,
+   "topCounties": "06073:58"
+  },
+  {
+   "reason": "course not assessed (station_prefab): the site's zoning (…) is single-family, which is not a multifamily or mixed-use category, and no state multifamily law on file could be applied: # could not be confirmed (listed next)",
+   "sites": 58,
+   "counties": 1,
+   "topCounties": "06073:58"
+  },
+  {
+   "reason": "course not assessed (small_multifamily): the site's zoning (…) has rules that are not determined: residences are allowed in certain M#-# districts (…); whether this site is in one is not checked, and no state multifamily law on file applies",
+   "sites": 54,
+   "counties": 2,
+   "topCounties": "36047:44, 36081:10"
+  }
+ ],
+ "byCounty": {
+  "11001": {
+   "name": "District of Columbia",
+   "sites": 29,
+   "cost": 29,
+   "moneyApplies": 14,
+   "moneyKnown": 29,
+   "income": 29,
+   "nothing": 0
+  },
+  "12031": {
+   "name": "Duval County",
+   "sites": 73,
+   "cost": 73,
+   "moneyApplies": 68,
+   "moneyKnown": 73,
+   "income": 73,
+   "nothing": 0
+  },
+  "12057": {
+   "name": "Hillsborough County",
+   "sites": 22,
+   "cost": 22,
+   "moneyApplies": 21,
+   "moneyKnown": 22,
+   "income": 22,
+   "nothing": 0
+  },
+  "12086": {
+   "name": "Miami-Dade County",
+   "sites": 147,
+   "cost": 147,
+   "moneyApplies": 123,
+   "moneyKnown": 147,
+   "income": 147,
+   "nothing": 0
+  },
+  "13121": {
+   "name": "Fulton County",
+   "sites": 13,
+   "cost": 13,
+   "moneyApplies": 7,
+   "moneyKnown": 13,
+   "income": 13,
+   "nothing": 0
+  },
+  "17031": {
+   "name": "Cook County",
+   "sites": 800,
+   "cost": 800,
+   "moneyApplies": 407,
+   "moneyKnown": 799,
+   "income": 800,
+   "nothing": 0
+  },
+  "18097": {
+   "name": "Marion County",
+   "sites": 144,
+   "cost": 144,
+   "moneyApplies": 65,
+   "moneyKnown": 144,
+   "income": 144,
+   "nothing": 0
+  },
+  "22071": {
+   "name": "Orleans Parish",
+   "sites": 5,
+   "cost": 5,
+   "moneyApplies": 2,
+   "moneyKnown": 5,
+   "income": 5,
+   "nothing": 0
+  },
+  "24510": {
+   "name": "Baltimore city",
+   "sites": 75,
+   "cost": 75,
+   "moneyApplies": 54,
+   "moneyKnown": 75,
+   "income": 75,
+   "nothing": 0
+  },
+  "25025": {
+   "name": "Suffolk County",
+   "sites": 3,
+   "cost": 3,
+   "moneyApplies": 3,
+   "moneyKnown": 3,
+   "income": 0,
+   "nothing": 0
+  },
+  "26163": {
+   "name": "Wayne County",
+   "sites": 30,
+   "cost": 30,
+   "moneyApplies": 20,
+   "moneyKnown": 30,
+   "income": 30,
+   "nothing": 0
+  },
+  "27053": {
+   "name": "Hennepin County",
+   "sites": 58,
+   "cost": 58,
+   "moneyApplies": 50,
+   "moneyKnown": 58,
+   "income": 58,
+   "nothing": 0
+  },
+  "27123": {
+   "name": "Ramsey County",
+   "sites": 97,
+   "cost": 97,
+   "moneyApplies": 56,
+   "moneyKnown": 97,
+   "income": 97,
+   "nothing": 0
+  },
+  "29095": {
+   "name": "Jackson County",
+   "sites": 3,
+   "cost": 3,
+   "moneyApplies": 2,
+   "moneyKnown": 3,
+   "income": 3,
+   "nothing": 0
+  },
+  "32003": {
+   "name": "Clark County",
+   "sites": 78,
+   "cost": 78,
+   "moneyApplies": 25,
+   "moneyKnown": 73,
+   "income": 78,
+   "nothing": 0
+  },
+  "34013": {
+   "name": "Essex County",
+   "sites": 49,
+   "cost": 49,
+   "moneyApplies": 26,
+   "moneyKnown": 49,
+   "income": 49,
+   "nothing": 0
+  },
+  "36047": {
+   "name": "Kings County",
+   "sites": 406,
+   "cost": 406,
+   "moneyApplies": 355,
+   "moneyKnown": 400,
+   "income": 406,
+   "nothing": 0
+  },
+  "36081": {
+   "name": "Queens County",
+   "sites": 164,
+   "cost": 164,
+   "moneyApplies": 124,
+   "moneyKnown": 164,
+   "income": 164,
+   "nothing": 0
+  },
+  "37119": {
+   "name": "Mecklenburg County",
+   "sites": 88,
+   "cost": 88,
+   "moneyApplies": 68,
+   "moneyKnown": 88,
+   "income": 88,
+   "nothing": 0
+  },
+  "37183": {
+   "name": "Wake County",
+   "sites": 67,
+   "cost": 67,
+   "moneyApplies": 19,
+   "moneyKnown": 67,
+   "income": 67,
+   "nothing": 0
+  },
+  "39035": {
+   "name": "Cuyahoga County",
+   "sites": 20,
+   "cost": 20,
+   "moneyApplies": 16,
+   "moneyKnown": 20,
+   "income": 20,
+   "nothing": 0
+  },
+  "39049": {
+   "name": "Franklin County",
+   "sites": 35,
+   "cost": 35,
+   "moneyApplies": 28,
+   "moneyKnown": 35,
+   "income": 35,
+   "nothing": 0
+  },
+  "41051": {
+   "name": "Multnomah County",
+   "sites": 49,
+   "cost": 49,
+   "moneyApplies": 20,
+   "moneyKnown": 49,
+   "income": 49,
+   "nothing": 0
+  },
+  "42101": {
+   "name": "Philadelphia County",
+   "sites": 13,
+   "cost": 13,
+   "moneyApplies": 11,
+   "moneyKnown": 13,
+   "income": 13,
+   "nothing": 0
+  },
+  "47037": {
+   "name": "Davidson County",
+   "sites": 85,
+   "cost": 85,
+   "moneyApplies": 38,
+   "moneyKnown": 85,
+   "income": 85,
+   "nothing": 0
+  },
+  "47157": {
+   "name": "Shelby County",
+   "sites": 11,
+   "cost": 11,
+   "moneyApplies": 3,
+   "moneyKnown": 11,
+   "income": 11,
+   "nothing": 0
+  },
+  "48029": {
+   "name": "Bexar County",
+   "sites": 8,
+   "cost": 8,
+   "moneyApplies": 3,
+   "moneyKnown": 8,
+   "income": 8,
+   "nothing": 0
+  },
+  "48113": {
+   "name": "Dallas County",
+   "sites": 756,
+   "cost": 756,
+   "moneyApplies": 420,
+   "moneyKnown": 755,
+   "income": 756,
+   "nothing": 0
+  },
+  "48201": {
+   "name": "Harris County",
+   "sites": 395,
+   "cost": 395,
+   "moneyApplies": 315,
+   "moneyKnown": 395,
+   "income": 395,
+   "nothing": 0
+  },
+  "48439": {
+   "name": "Tarrant County",
+   "sites": 102,
+   "cost": 102,
+   "moneyApplies": 78,
+   "moneyKnown": 102,
+   "income": 102,
+   "nothing": 0
+  },
+  "48453": {
+   "name": "Travis County",
+   "sites": 41,
+   "cost": 41,
+   "moneyApplies": 26,
+   "moneyKnown": 41,
+   "income": 41,
+   "nothing": 0
+  },
+  "53033": {
+   "name": "King County",
+   "sites": 476,
+   "cost": 476,
+   "moneyApplies": 282,
+   "moneyKnown": 475,
+   "income": 476,
+   "nothing": 0
+  },
+  "55079": {
+   "name": "Milwaukee County",
+   "sites": 35,
+   "cost": 35,
+   "moneyApplies": 31,
+   "moneyKnown": 35,
+   "income": 35,
+   "nothing": 0
+  },
+  "04013": {
+   "name": "Maricopa County",
+   "sites": 611,
+   "cost": 611,
+   "moneyApplies": 375,
+   "moneyKnown": 611,
+   "income": 611,
+   "nothing": 0
+  },
+  "04019": {
+   "name": "Pima County",
+   "sites": 10,
+   "cost": 10,
+   "moneyApplies": 0,
+   "moneyKnown": 10,
+   "income": 10,
+   "nothing": 0
+  },
+  "06037": {
+   "name": "Los Angeles County",
+   "sites": 800,
+   "cost": 800,
+   "moneyApplies": 618,
+   "moneyKnown": 798,
+   "income": 800,
+   "nothing": 0
+  },
+  "06059": {
+   "name": "Orange County",
+   "sites": 151,
+   "cost": 151,
+   "moneyApplies": 65,
+   "moneyKnown": 151,
+   "income": 151,
+   "nothing": 0
+  },
+  "06065": {
+   "name": "Riverside County",
+   "sites": 85,
+   "cost": 85,
+   "moneyApplies": 52,
+   "moneyKnown": 85,
+   "income": 85,
+   "nothing": 0
+  },
+  "06071": {
+   "name": "San Bernardino County",
+   "sites": 166,
+   "cost": 166,
+   "moneyApplies": 165,
+   "moneyKnown": 166,
+   "income": 166,
+   "nothing": 0
+  },
+  "06073": {
+   "name": "San Diego County",
+   "sites": 753,
+   "cost": 753,
+   "moneyApplies": 548,
+   "moneyKnown": 750,
+   "income": 753,
+   "nothing": 0
+  },
+  "08031": {
+   "name": "Denver County",
+   "sites": 92,
+   "cost": 92,
+   "moneyApplies": 31,
+   "moneyKnown": 92,
+   "income": 92,
+   "nothing": 0
+  },
+  "08041": {
+   "name": "El Paso County",
+   "sites": 53,
+   "cost": 53,
+   "moneyApplies": 5,
+   "moneyKnown": 53,
+   "income": 53,
+   "nothing": 0
+  }
+ },
+ "byCity": {
+  "Tempe city": {
+   "sites": 65,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Phoenix city": {
+   "sites": 461,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Mesa city": {
+   "sites": 77,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Maricopa city": {
+   "sites": 8,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Pima County (unincorporated)": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Tucson city": {
+   "sites": 8,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Santa Clarita city": {
+   "sites": 13,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Los Angeles city": {
+   "sites": 337,
+   "zone": 334,
+   "category": 322,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Buena Park city": {
+   "sites": 10,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Pomona city": {
+   "sites": 24,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Monterey Park city": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "El Segundo city": {
+   "sites": 38,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Manhattan Beach city": {
+   "sites": 8,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Long Beach city": {
+   "sites": 44,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Azusa city": {
+   "sites": 5,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Redondo Beach city": {
+   "sites": 12,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Industry city": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Norwalk city": {
+   "sites": 18,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Commerce city": {
+   "sites": 5,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Los Angeles County (unincorporated)": {
+   "sites": 40,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Pasadena city": {
+   "sites": 40,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Montclair city": {
+   "sites": 32,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Downey city": {
+   "sites": 6,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Glendora city": {
+   "sites": 12,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Burbank city": {
+   "sites": 26,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Santa Monica city": {
+   "sites": 30,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Compton city": {
+   "sites": 11,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Hawthorne city": {
+   "sites": 17,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Signal Hill city": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "San Dimas city": {
+   "sites": 4,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Arcadia city": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Santa Fe Springs city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Lynwood city": {
+   "sites": 4,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Irwindale city": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Montebello city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Palmdale city": {
+   "sites": 4,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Inglewood city": {
+   "sites": 10,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Baldwin Park city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Duarte city": {
+   "sites": 4,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Claremont city": {
+   "sites": 8,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "El Monte city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "La Verne city": {
+   "sites": 4,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Lancaster city": {
+   "sites": 13,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "South Pasadena city": {
+   "sites": 7,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Covina city": {
+   "sites": 4,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Glendale city": {
+   "sites": 4,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Culver City city": {
+   "sites": 11,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Upland city": {
+   "sites": 18,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Beverly Hills city": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Carson city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "San Fernando city": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Tustin city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Anaheim city": {
+   "sites": 29,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Irvine city": {
+   "sites": 20,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Mission Viejo city": {
+   "sites": 7,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Santa Ana city": {
+   "sites": 37,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Laguna Niguel city": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "San Juan Capistrano city": {
+   "sites": 9,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Fullerton city": {
+   "sites": 14,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Orange city": {
+   "sites": 21,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Garden Grove city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "San Clemente city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Ontario city": {
+   "sites": 8,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Riverside city": {
+   "sites": 61,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Corona city": {
+   "sites": 8,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Perris city": {
+   "sites": 8,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Riverside County (unincorporated)": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Palm Springs city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Jurupa Valley city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Needles city": {
+   "sites": 7,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "San Bernardino city": {
+   "sites": 18,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Victorville city": {
+   "sites": 10,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Rancho Cucamonga city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Redlands city": {
+   "sites": 62,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Fontana city": {
+   "sites": 12,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Barstow city": {
+   "sites": 5,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Rialto city": {
+   "sites": 6,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "San Diego city": {
+   "sites": 442,
+   "zone": 396,
+   "category": 395,
+   "homes": 62,
+   "courseCost": 62
+  },
+  "Oceanside city": {
+   "sites": 40,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Carlsbad city": {
+   "sites": 8,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "San Marcos city": {
+   "sites": 29,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Chula Vista city": {
+   "sites": 42,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "National City city": {
+   "sites": 45,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Escondido city": {
+   "sites": 18,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "La Mesa city": {
+   "sites": 35,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Santee city": {
+   "sites": 18,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "El Cajon city": {
+   "sites": 47,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Solana Beach city": {
+   "sites": 5,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Lemon Grove city": {
+   "sites": 5,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Vista city": {
+   "sites": 7,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Encinitas city": {
+   "sites": 10,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "San Diego County (unincorporated)": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Denver city": {
+   "sites": 85,
+   "zone": 84,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Aurora city": {
+   "sites": 7,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Colorado Springs city": {
+   "sites": 53,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "District of Columbia": {
+   "sites": 29,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Jacksonville city": {
+   "sites": 73,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Tampa city": {
+   "sites": 22,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Miami Springs city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Hialeah city": {
+   "sites": 4,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Aventura city": {
+   "sites": 14,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Miami-Dade County (unincorporated)": {
+   "sites": 23,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Miami Gardens city": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Miami city": {
+   "sites": 85,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Medley town": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Coral Gables city": {
+   "sites": 12,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "South Miami city": {
+   "sites": 4,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Opa-locka city": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Atlanta city": {
+   "sites": 13,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "county 17043 (unincorporated)": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Cook County (unincorporated)": {
+   "sites": 6,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Orland Park village": {
+   "sites": 11,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Highland Park city": {
+   "sites": 7,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Worth village": {
+   "sites": 4,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Golf village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Chicago city": {
+   "sites": 520,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Homewood village": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Skokie village": {
+   "sites": 10,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "River Grove village": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Deerfield village": {
+   "sites": 11,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Burnham village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Glencoe village": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Itasca village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "University Park village": {
+   "sites": 4,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Chicago Ridge village": {
+   "sites": 4,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Evanston city": {
+   "sites": 4,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Prospect Heights city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Bensenville village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Blue Island city": {
+   "sites": 5,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Glenview village": {
+   "sites": 9,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Northbrook village": {
+   "sites": 7,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Arlington Heights village": {
+   "sites": 17,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Schaumburg village": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Rosemont village": {
+   "sites": 12,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Cicero town": {
+   "sites": 8,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Mokena village": {
+   "sites": 5,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Harvey city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "South Holland village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Tinley Park village": {
+   "sites": 11,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Oak Lawn village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Park Ridge city": {
+   "sites": 10,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Des Plaines city": {
+   "sites": 6,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Hanover Park village": {
+   "sites": 5,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Roselle village": {
+   "sites": 5,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Wheeling village": {
+   "sites": 10,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Brookfield village": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Matteson village": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Maywood village": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Barrington village": {
+   "sites": 6,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Bartlett village": {
+   "sites": 7,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Schiller Park village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Park Forest village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Oak Forest city": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Elgin city": {
+   "sites": 7,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Wilmette village": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "East Hazel Crest village": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Midlothian village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Olympia Fields village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Buffalo Grove village": {
+   "sites": 6,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Palos Park village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Palos Heights city": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "La Grange village": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Richton Park village": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "River Forest village": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Forest Park village": {
+   "sites": 4,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Willow Springs village": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Elmhurst city": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Morton Grove village": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Franklin Park village": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Riverside village": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Mount Prospect village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Berwyn city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Palatine village": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "La Grange Park village": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "county 17097 (unincorporated)": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Hinsdale village": {
+   "sites": 5,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Oak Park village": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Flossmoor village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Calumet Park village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Lemont village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Romeoville village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Berkeley village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Hazel Crest village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Indianapolis city (balance)": {
+   "sites": 144,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "New Orleans city": {
+   "sites": 5,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Baltimore city": {
+   "sites": 75,
+   "zone": 64,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Boston city": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Detroit city": {
+   "sites": 25,
+   "zone": 25,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Minneapolis city": {
+   "sites": 58,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "St. Paul city": {
+   "sites": 97,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Kansas City city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "North Kansas City city": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Clark County (unincorporated)": {
+   "sites": 65,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Las Vegas city": {
+   "sites": 13,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Newark city": {
+   "sites": 49,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "New York city": {
+   "sites": 561,
+   "zone": 561,
+   "category": 561,
+   "homes": 213,
+   "courseCost": 213
+  },
+  "county 36059 (unincorporated)": {
+   "sites": 5,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Floral Park village": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Lawrence village": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Charlotte city": {
+   "sites": 88,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Raleigh city": {
+   "sites": 67,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Cleveland city": {
+   "sites": 20,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Columbus city": {
+   "sites": 35,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Portland city": {
+   "sites": 49,
+   "zone": 48,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Philadelphia city": {
+   "sites": 13,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Nashville-Davidson metropolitan government (balance)": {
+   "sites": 85,
+   "zone": 85,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Memphis city": {
+   "sites": 11,
+   "zone": 11,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "San Antonio city": {
+   "sites": 8,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Carrollton city": {
+   "sites": 14,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Grand Prairie city": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Irving city": {
+   "sites": 84,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Dallas city": {
+   "sites": 440,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Richardson city": {
+   "sites": 83,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Grapevine city": {
+   "sites": 21,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Addison town": {
+   "sites": 48,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Fort Worth city": {
+   "sites": 73,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Garland city": {
+   "sites": 13,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Plano city": {
+   "sites": 23,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Coppell city": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Lewisville city": {
+   "sites": 10,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Rowlett city": {
+   "sites": 8,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Farmers Branch city": {
+   "sites": 17,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "University Park city": {
+   "sites": 5,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Houston city": {
+   "sites": 395,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "North Richland Hills city": {
+   "sites": 10,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Arlington city": {
+   "sites": 3,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Hurst city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Richland Hills city": {
+   "sites": 2,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Austin city": {
+   "sites": 41,
+   "zone": 38,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Seattle city": {
+   "sites": 140,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Mountlake Terrace city": {
+   "sites": 11,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "SeaTac city": {
+   "sites": 30,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Puyallup city": {
+   "sites": 18,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Federal Way city": {
+   "sites": 61,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "King County (unincorporated)": {
+   "sites": 7,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Redmond city": {
+   "sites": 59,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Renton city": {
+   "sites": 5,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Tukwila city": {
+   "sites": 10,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Kent city": {
+   "sites": 19,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Tacoma city": {
+   "sites": 15,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Des Moines city": {
+   "sites": 9,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Bellevue city": {
+   "sites": 59,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Auburn city": {
+   "sites": 7,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Shoreline city": {
+   "sites": 9,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Mercer Island city": {
+   "sites": 8,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "county 53053 (unincorporated)": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Sumner city": {
+   "sites": 7,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Lakewood city": {
+   "sites": 1,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  },
+  "Milwaukee city": {
+   "sites": 35,
+   "zone": 0,
+   "category": 0,
+   "homes": 0,
+   "courseCost": 0
+  }
+ }
+}

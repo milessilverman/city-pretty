@@ -1,0 +1,164 @@
+{
+ "built": "2026-11-22",
+ "builder": "pipeline/site_zoning_build.py",
+ "audit": "docs/audit/site-zoning-2026-11-23.md",
+ "columns": [
+  "zoning jurisdiction (place:<Census place GEOID> = incorporated place; county:<FIPS> = unincorporated county land)",
+  "zone code (null = not on file)",
+  "index into sources: how the code was read",
+  "optional: the code-table key when it differs from the code (a site-specific row)",
+  "optional: { why } the zoning service's answer when it gave no code, or { overlay } NYC commercial overlay at the point"
+ ],
+ "cities": {
+  "place:0666000": {
+   "key": "san_diego",
+   "name": "City of San Diego",
+   "table": "codes/san_diego.json",
+   "codes": 62
+  },
+  "place:0644000": {
+   "key": "los_angeles",
+   "name": "City of Los Angeles",
+   "table": "codes/los_angeles.json",
+   "codes": 171
+  },
+  "place:3651000": {
+   "key": "nyc",
+   "name": "New York City",
+   "table": "codes/nyc.json",
+   "codes": 118
+  },
+  "place:4805000": {
+   "key": "austin",
+   "name": "City of Austin",
+   "table": "codes/austin.json",
+   "codes": 0
+  }
+ },
+ "counties": [
+  "04013",
+  "04019",
+  "06037",
+  "06059",
+  "06065",
+  "06071",
+  "06073",
+  "08031",
+  "08041",
+  "11001",
+  "12031",
+  "12057",
+  "12086",
+  "13121",
+  "17031",
+  "18097",
+  "22071",
+  "24510",
+  "25025",
+  "26163",
+  "27053",
+  "27123",
+  "29095",
+  "32003",
+  "34013",
+  "36047",
+  "36081",
+  "37119",
+  "37183",
+  "39035",
+  "39049",
+  "41051",
+  "42101",
+  "47037",
+  "47157",
+  "48029",
+  "48113",
+  "48201",
+  "48439",
+  "48453",
+  "53033",
+  "55079"
+ ],
+ "notOnFile": {
+  "place:4805000": {
+   "city": "Austin",
+   "tried": [
+    {
+     "url": "https://library.municode.com/tx/austin/codes/land_development_code",
+     "result": "HTTP 403 (Cloudflare bot check, 'Performing security verification')",
+     "on": "2026-11-22"
+    },
+    {
+     "url": "https://api.municode.com/Clients/name?clientName=austin&stateAbbr=tx",
+     "result": "HTTP 403",
+     "on": "2026-11-22"
+    },
+    {
+     "url": "https://www.austintexas.gov/planning/zoning-resources-site-regulations",
+     "result": "HTTP 200; the City's page links to Municode for the code text (Permitted Use Chart, 25-2-491; Site Development Regulations, 25-2-492)",
+     "on": "2026-11-22"
+    }
+   ]
+  },
+  "place:0644000": {
+   "city": "Los Angeles",
+   "tried": [
+    {
+     "url": "https://codelibrary.amlegal.com/codes/los_angeles/latest/lapz/0-0-0-2527",
+     "result": "HTTP 403 (Cloudflare bot check)",
+     "on": "2026-11-22"
+    },
+    {
+     "url": "https://codelibrary.amlegal.com/codes/los_angeles/latest/lapz/0-0-0-1",
+     "result": "HTTP 403",
+     "on": "2026-11-22"
+    },
+    {
+     "url": "https://planning.lacity.gov/zoning/original-code",
+     "result": "HTTP 200; the City says Chapter 1 'is published in the Municipal Code' and links to American Legal",
+     "on": "2026-11-22"
+    }
+   ]
+  },
+  "place:1714000": {
+   "city": "Chicago",
+   "tried": [
+    {
+     "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2627958",
+     "result": "HTTP 403",
+     "on": "2026-11-22"
+    }
+   ]
+  },
+  "place:4819000": {
+   "city": "Dallas",
+   "tried": [
+    {
+     "url": "https://codelibrary.amlegal.com/codes/dallas/latest/dallas_tx/0-0-0-1",
+     "result": "HTTP 403",
+     "on": "2026-11-22"
+    }
+   ]
+  },
+  "place:0455000": {
+   "city": "Phoenix",
+   "tried": [
+    {
+     "url": "https://phoenix.municipal.codes/ZO",
+     "result": "HTTP 403",
+     "on": "2026-11-22"
+    }
+   ]
+  },
+  "place:5363000": {
+   "city": "Seattle",
+   "tried": [
+    {
+     "url": "https://seattle.municipal.codes/SMC/23.44.010",
+     "result": "HTTP 403",
+     "on": "2026-11-22"
+    }
+   ]
+  }
+ }
+}

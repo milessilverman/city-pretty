@@ -32,13 +32,17 @@ function subjectFor(s, st) {
   const railOk = Number.isFinite(s.distanceToRailMeters) && !uf.includes("distanceToRailMeters");
   return { kind: "site", id: s.id, name: s.name, siteKind: s.kindLabel || s.kind || null, countyFips: s.countyFips, stateCode: st, city: s.cityName || null,
     acres: acresOk ? { value: s.acres, source: s.sourceUrl } : null, railStationMi: railOk ? s.distanceToRailMeters / 1609.344 : null, nearStops: [], place: s.place || null,
-    parcel: { parcel_id: s.id, state_code: st, county_fips: s.countyFips, base_zoning_code: s.baseZoning || null, municipality_name: s.cityName || null, is_commercial_or_mixed_use: false, is_single_family_residential: false, is_multifamily_residential: false, exclusions: {}, lot_sqft: acresOk ? s.acres * 43560 : null } };
+    parcelRatio: s.parcel && Number.isFinite(s.parcel.r) ? s.parcel.r : null,
+    parcel: { parcel_id: s.id, state_code: st, county_fips: s.countyFips, base_zoning_code: s.baseZoning || null, municipality_name: s.cityName || null, is_commercial_or_mixed_use: /commercial/.test(s.zoningCategory || ""), is_single_family_residential: s.zoningCategory === "single-family", is_multifamily_residential: s.zoningCategory === "multifamily", exclusions: {}, lot_sqft: acresOk ? s.acres * 43560 : null, zoning_limits: s.zoningLimits || null } };
 }
 const key = (t) => String(t || "(no reason given)").replace(/\$?\d[\d,.]*/g, "#").replace(/\(([^()]*)\)/g, (m) => (/#/.test(m) || m.length > 40 ? "(…)" : m)).replace(/county #/g, "county #").slice(0, 260);
 
+const zdir = path.join(root, "app/data/site_zoning");
+const ZI = fs.existsSync(path.join(zdir, "index.json")) ? JSON.parse(fs.readFileSync(path.join(zdir, "index.json"), "utf8")) : null;
+const ZT = ZI ? Object.fromEntries(Object.values(ZI.cities).map((c) => [c.key, JSON.parse(fs.readFileSync(path.join(zdir, c.table), "utf8"))])) : {};
 const files = fs.readdirSync(path.join(root, "app/data/station_sites")).filter((f) => /^\d{5}\.json$/.test(f)).sort();
 const rows = ["size", "cost", "publicMoney", "income", "value"];
-const T = { sites: 0, counties: 0, courses: {}, notAssessed: {}, place: {}, anyCost: 0, anyMoneyApplies: 0, anyMoneyKnown: 0, anyIncome: 0, nothing: 0, nothingWhy: {}, byCounty: {} };
+const T = { sites: 0, counties: 0, courses: {}, notAssessed: {}, place: {}, anyCost: 0, anyMoneyApplies: 0, anyMoneyKnown: 0, anyIncome: 0, nothing: 0, nothingWhy: {}, byCounty: {}, byCity: {} };
 const bump = (o, k, fips) => { o[k] = o[k] || { sites: 0, counties: {} }; o[k].sites++; o[k].counties[fips] = (o[k].counties[fips] || 0) + 1; };
 for (const f of files) {
   const doc = JSON.parse(fs.readFileSync(path.join(root, "app/data/station_sites", f), "utf8"));
@@ -46,6 +50,11 @@ for (const f of files) {
   const sites = SS.normalize(doc);
   const placesFile = path.join(root, "app/data/station_site_places", f);
   if (SS.attachPlaces && fs.existsSync(placesFile)) SS.attachPlaces(sites, JSON.parse(fs.readFileSync(placesFile, "utf8")));
+  // the sites' zoning (app/data/site_zoning), as StationSites.loadZoning attaches it on the page; NOZONING=1 measures without it
+  const zFile = path.join(root, "app/data/site_zoning", f);
+  if (SS.attachZoning && fs.existsSync(zFile)) SS.attachZoning(sites, JSON.parse(fs.readFileSync(zFile, "utf8")), ZT, ZI);
+  // NOZONING=1: the page as it was before the zoning files (the jurisdiction name is kept only to group the table)
+  if (process.env.NOZONING) for (const x of sites) { delete x.baseZoning; delete x.zoningCategory; delete x.zoningLimits; delete x.cityName; }
   T.counties++;
   const C = (T.byCounty[fips] = { name: doc.county, sites: sites.length, cost: 0, moneyApplies: 0, moneyKnown: 0, income: 0, nothing: 0 });
   for (const s of sites) {
@@ -72,6 +81,13 @@ for (const f of files) {
       if (k === "qct_dda" && pf.boost) hasMoneyKnown = true;
       if (k === "cost" && pf.range) hasCost = true;
     }
+    const cityName = (s.zoning && s.zoning.name) || "(jurisdiction not on file)";
+    const Y = (T.byCity[cityName] = T.byCity[cityName] || { sites: 0, zone: 0, category: 0, homes: 0, courseCost: 0 });
+    Y.sites++;
+    if (s.baseZoning) Y.zone++;
+    if (s.zoningLimits && s.zoningLimits.category) Y.category++;
+    if (card.courses.some((x) => x.size && x.size.units && x.course !== "hold")) Y.homes++;
+    if (card.courses.some((x) => x.course !== "hold" && x.cost)) Y.courseCost++;
     if (hasCost) { T.anyCost++; C.cost++; }
     if (hasMoney) { T.anyMoneyApplies++; C.moneyApplies++; }
     if (hasMoney || hasMoneyKnown) { T.anyMoneyKnown++; C.moneyKnown++; }
@@ -89,7 +105,7 @@ const out = { label, built: new Date().toISOString().slice(0, 10), script: "scri
   nothingBy: rank(T.nothingWhy), courses: Object.fromEntries(Object.entries(T.courses).map(([k, c]) => [k, { assessed: c.assessed, filled: c.filled, why: Object.fromEntries(rows.map((r) => [r, rank(c.why[r])])) }])),
   notAssessed: Object.fromEntries(Object.entries(T.notAssessed).map(([k, o]) => [k, rank(o)])),
   placeFacts: Object.fromEntries(Object.entries(T.place).map(([k, p]) => [k, { filled: p.filled, why: rank(p.why) }])),
-  blockersRanked: rank(blockers).slice(0, 40), byCounty: T.byCounty };
+  blockersRanked: rank(blockers).slice(0, 40), byCounty: T.byCounty, byCity: T.byCity };
 fs.mkdirSync(path.join(root, "data/backtests"), { recursive: true });
 fs.writeFileSync(path.join(root, `data/backtests/site_cards_measure_${label}.json`), JSON.stringify(out, null, 1));
 const md = [`# Site cards measured (${label}, ${out.built})`, "", `${out.sites} sites in ${out.counties} counties (app/data/station_sites). Inputs: ${out.inputs}.`, "",
@@ -104,6 +120,9 @@ const md = [`# Site cards measured (${label}, ${out.built})`, "", `${out.sites} 
   ...out.blockersRanked.map((r, i) => `| ${i + 1} | ${r.reason.replace(/\|/g, "/")} | ${r.sites} | ${r.counties} | ${r.topCounties} |`), "",
   "## Sites showing nothing, by first reason", "", "| Reason | Sites | Counties |", "|---|---|---|", ...out.nothingBy.map((r) => `| ${r.reason.replace(/\|/g, "/")} | ${r.sites} | ${r.counties} |`), "",
   "## By county", "", "| County | Sites | Cost range | Money rule applies | Location rule known | Income range | Nothing |", "|---|---|---|---|---|---|---|",
-  ...Object.entries(out.byCounty).map(([f, c]) => `| ${f} ${c.name} | ${c.sites} | ${c.cost} | ${c.moneyApplies} | ${c.moneyKnown} | ${c.income} | ${c.nothing} |`), ""];
+  ...Object.entries(out.byCounty).map(([f, c]) => `| ${f} ${c.name} | ${c.sites} | ${c.cost} | ${c.moneyApplies} | ${c.moneyKnown} | ${c.income} | ${c.nothing} |`), "",
+  "## By zoning jurisdiction (largest 40 by sites)", "", "| Jurisdiction | Sites | Zone code passed to the card | Zoning category from a code table | A home count (any building course) | A building course with a total cost |", "|---|---|---|---|---|---|",
+  ...Object.entries(out.byCity).sort((a, b) => b[1].sites - a[1].sites).slice(0, 40).map(([n, c]) => `| ${n} | ${c.sites} | ${c.zone} | ${c.category} | ${c.homes} | ${c.courseCost} |`),
+  `| all | ${out.sites} | ${Object.values(out.byCity).reduce((a, c) => a + c.zone, 0)} | ${Object.values(out.byCity).reduce((a, c) => a + c.category, 0)} | ${Object.values(out.byCity).reduce((a, c) => a + c.homes, 0)} | ${Object.values(out.byCity).reduce((a, c) => a + c.courseCost, 0)} |`, ""];
 fs.writeFileSync(path.join(root, `data/backtests/site_cards_measure_${label}.md`), md.join("\n"));
 console.log(md.slice(0, 40).join("\n"));

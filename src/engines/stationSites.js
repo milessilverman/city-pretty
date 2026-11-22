@@ -55,16 +55,26 @@ function facts(s) {
   rows.push(["Near", `${n.n} (${CLASS[n.c] || n.c}${n.ln ? "; " + n.ln : ""}), ${m(n.d)} m from the middle of the site${n.u ? ". The project's own record marks this stop location as unverified" : ""}`]);
   if (s.also && s.also.length) rows.push(["Also within range", s.also.join("; ")]);
   rows.push(["From OpenStreetMap", `${o.id}, tagged ${o.tag}${o.access ? "; access=" + o.access : ""}. Area measured from the outline: ${s.acres} acres; buildings cover ${Math.round((o.builtShare || 0) * 100)}% of it. Data dated ${(o.source.dataTimestamp || "").slice(0, 10) || "not stated"} (${o.source.source || ""})`]);
-  if (!p) rows.push(["County parcel record", "Not on file: " + (s.parcelWhy || "no parcel record was matched")]);
+  if (!p) { rows.push(["County parcel record", "Not on file: " + (s.parcelWhy || "no parcel record was matched")]); if (s.zoning) rows.push(zoningFact(s.zoning)); }
   else {
     rows.push(["County parcel record", `${p.id ? "parcel " + p.id : "parcel id not given by the service"}; parcel area ${p.pa != null ? p.pa + " acres" : "not given"}${p.r != null ? " (" + p.r + " times the outline)" : ""}; retrieved ${p.d}`]);
     rows.push(["Land use on the record", p.ut || p.uc ? [p.ut, p.uc ? "code " + p.uc : null].filter(Boolean).join(", ") : "Not on file: the service gives no use field, or it was blank"]);
     const own = p.ot ? (p.own ? p.own + " (" + p.ot + ")" : p.ot + (/name not stored/.test(p.ot) ? "" : " (name not shown)")) : null;
     rows.push(["Owner on the record", own || p.oc ? [own, p.oc ? "the service's own owner-type code: " + p.oc : null].filter(Boolean).join("; ") : "Not on file: the service gives no owner field, or it was blank"]);
     rows.push(["Zoning code on the record", p.zn || "Not on file: the service gives no zoning field, or it was blank"]);
+    if (s.zoning) rows.push(zoningFact(s.zoning));
     rows.push(["Assessed land value", p.lv != null ? "$" + m(p.lv) + " (the county's figure for the parcel)" : p.mm ? "Withheld: the parcel is " + p.r + " times the outline's area, so the value is for the whole parcel" : "Not on file: the service gives no land value field, or it was blank"]);
   }
   return rows;
+}
+
+// One fact row for the site's zoning: the zone, where it was read, who zones the site, and the code-table category.
+function zoningFact(z) {
+  const who = z.name ? "zoned by " + z.name : null;
+  if (!z.zone) return ["Zoning", "Not on file: " + [z.why || "no zone code was found for this site", who].filter(Boolean).join("; ")];
+  const how = z.how && z.how.kind === "point" ? `the city's zoning map asked at the site's point (${z.how.url}, ${z.how.asked})` : "the county parcel record's zoning field";
+  const cat = z.row ? (z.row.notDetermined ? "rules not determined: " + z.row.notDetermined : "category " + (z.row.category || "not determined") + (z.row.categoryBasis ? " (" + z.row.categoryBasis + ")" : "")) : "code rules not on file: " + (z.tableWhy || "no code table");
+  return ["Zoning", `${z.zone}${z.overlay && z.overlay.length ? " with commercial overlay " + z.overlay.join(", ") : ""}, from ${how}; ${who ? who + "; " : ""}${cat}`];
 }
 
 function loadIndex() {
@@ -102,7 +112,80 @@ function loadPlaces(fips) {
   return Promise.all([placesP[fips], load(fips)]).then(([doc, list]) => { attachPlaces(list, doc); return doc; });
 }
 
-const api = { load, cached, normalize, facts, loadPlaces, attachPlaces, placeOf, KIND, CLASS, PAGE_MAX };
+// Zoning of each site (app/data/site_zoning/, pipeline/site_zoning_build.py, docs/audit/site-zoning-2026-11-23.md):
+// the government that zones the site, the zone code (the city's zoning map asked at the site's point, or the county
+// parcel record) and, where the city's code text was fetched, the code-table row with its quotes. Attached as
+// site.zoning; site.baseZoning, site.zoningCategory, site.cityName and site.zoningLimits are what the card engine reads.
+const ZBASE = "app/data/site_zoning/";
+// the code table's categories, in the words the page's parcel facts test (/commercial/ marks commercial or mixed use)
+const CAT_WORDS = { "single-family": "single-family", multifamily: "multifamily", commercial: "commercial", "mixed-use": "commercial / mixed use", industrial: "industrial", "public/open space": "open space / public", "planned/special": "planned or special district" };
+const shortName = n => String(n || "").replace(/ \(balance\)$/, "").replace(/ (city|town|village|metropolitan government)$/, "").replace(/^Nashville-Davidson$/, "Nashville");
+// The card engine's view of one code row: only what the row states, each with its source; nothing filled in.
+// A code table stores a quote used by several rows once, in table.quotes, and the rows point at it as { ref: id }.
+function resolveRefs(x, quotes) {
+  if (Array.isArray(x)) return x.map(v => resolveRefs(v, quotes));
+  if (!x || typeof x !== "object") return x;
+  if (typeof x.ref === "string" && Object.keys(x).length === 1) return quotes && quotes[x.ref] ? resolveRefs(quotes[x.ref], quotes) : null;
+  const o = {};
+  for (const k of Object.keys(x)) o[k] = resolveRefs(x[k], quotes);
+  return o;
+}
+function limitsOf(row, table, zone, how) {
+  if (!row) return null;
+  row = resolveRefs(row, table && table.quotes);
+  const nd = row.notDetermined || null;
+  const h = row.housing || {}, d = row.density || {}, f = row.far || null, ht = row.height || null;
+  const quoteOf = x => x && x.quote ? { section: x.section || null, quote: x.quote, url: x.url || null, fetched: x.fetched || null } : null;
+  const out = { zone, city: table.city, code: table.code, category: row.category || null, categoryBasis: row.categoryBasis || null, categorySource: row.categorySource || null, notDetermined: nd, notDeterminedSource: nd ? quoteOf(row.quote) : null,
+    housing: nd ? null : (h.permitted === true || h.permitted === false ? h.permitted : null), housingWhy: nd || h.why || h.note || null, housingSource: quoteOf(h),
+    density: null, densityWhy: nd || d.why || null, far: null, farWhy: null, heightFt: null, cautions: (row.cautions || []).map(c => ({ text: c.text, quote: c.quote, section: c.section, url: c.url })), zoneSource: how || null };
+  if (!nd && d.method === "lot_area_per_home" && typeof d.sqftPerHome === "number") out.density = { method: d.method, sqftPerHome: d.sqftPerHome, duPerAcre: d.duPerAcre, roundUpFrom: d.roundUpFrom, formula: d.formula, source: quoteOf(d.rule), rounding: quoteOf(d.rounding) };
+  if (!nd && d.method === "floor_area_over_factor" && typeof d.duFactor === "number" && f && typeof f.low === "number") out.density = { method: d.method, duFactor: d.duFactor, farLow: f.low, farHigh: f.high, roundUpFrom: d.roundUpFrom, duPerAcre: d.duPerAcre, formula: d.formula, source: quoteOf(d.factor), rule: quoteOf(d.rule), farSource: { section: f.section, url: f.url, rows: f.rows, note: f.note } };
+  if (!nd && f && typeof f.low === "number") out.far = { low: f.low, high: f.high, section: f.section || null, url: f.url || null, quote: f.quote || (f.rows || []).join("; ") || null, note: f.note || null };
+  if (!nd && ht && Array.isArray(ht.maxFt)) out.heightFt = { low: ht.maxFt[0], high: ht.maxFt[1], section: ht.section, url: ht.url, quote: ht.quote };
+  out.parkingWhy = (row.parking && row.parking.why) || "parking minimums were not read for this code";
+  return out;
+}
+function attachZoning(list, doc, tables, index) {
+  if (!doc || !doc.sites || !Array.isArray(list)) return list;
+  const names = (doc.places || {});
+  for (const s of list) {
+    const r = doc.sites[s.osm && s.osm.id];
+    if (!Array.isArray(r)) continue;
+    const [juris, zone, si, key] = r;
+    const extra = r.slice(3).filter(x => x && typeof x === "object");
+    const how = doc.sources && doc.sources[si] ? doc.sources[si] : null;
+    const city = index && index.cities ? index.cities[juris] : null, T = city && tables ? tables[city.key] : null;
+    const row = T && zone ? resolveRefs(T.codes[typeof key === "string" ? key : zone] || null, T.quotes) : null;
+    const z = { juris, name: names[juris] || (city && city.name) || null, zone: zone || null, how, why: (extra.find(x => x.why) || {}).why || null, overlay: (extra.find(x => x.overlay) || {}).overlay || null,
+      table: city ? city.table : null, tableWhy: (!T || T.notOnFile) && index && index.notOnFile && index.notOnFile[juris] ? "the city's code text could not be fetched" : !T ? "no code table for this jurisdiction was built in this job" : zone && !row ? `the code table for ${city.name} has no row for ${zone}` : null, row };
+    s.zoning = z;
+    if (zone) s.baseZoning = zone;
+    if (z.name) s.cityName = shortName(z.name);
+    if (row) { s.zoningCategory = CAT_WORDS[row.category] || null; s.zoningLimits = limitsOf(row, T, zone, how); }
+    // a zone with no code row: the card says why its rules are not determined, rather than "not classed as multifamily"
+    else if (zone) s.zoningLimits = { zone, city: z.name ? shortName(z.name) : null, category: null, notDetermined: (z.tableWhy || "no code table") + (index && index.notOnFile && index.notOnFile[juris] ? " (" + index.notOnFile[juris].tried[0].url + ": " + index.notOnFile[juris].tried[0].result + ")" : ""), cautions: [], zoneSource: how };
+  }
+  return list;
+}
+let zIndexP = null;
+const zTables = {}, zCounty = {};
+function loadZoning(fips) {
+  if (!fips || typeof fetch !== "function") return Promise.resolve(null);
+  const j = u => fetch(ZBASE + u).then(r => r.ok ? r.json() : null).catch(() => null);
+  if (!zIndexP) zIndexP = j("index.json");
+  return zIndexP.then(ix => {
+    if (!ix || !(ix.counties || []).includes(fips)) return null;
+    if (!zCounty[fips]) zCounty[fips] = j(fips + ".json");
+    return zCounty[fips].then(doc => {
+      const keys = [...new Set(Object.values((doc && doc.sites) || {}).map(r => ix.cities[r[0]]).filter(Boolean).map(c => c.key))];
+      for (const k of keys) if (!zTables[k]) zTables[k] = j("codes/" + k + ".json");
+      return Promise.all([load(fips), Promise.all(keys.map(k => zTables[k].then(t => [k, t])))]).then(([list, ts]) => { attachZoning(list, doc, Object.fromEntries(ts.filter(x => x[1])), ix); return doc; });
+    });
+  });
+}
+
+const api = { load, cached, normalize, facts, loadPlaces, attachPlaces, placeOf, loadZoning, attachZoning, limitsOf, resolveRefs, shortName, KIND, CLASS, PAGE_MAX };
 if (typeof module !== "undefined" && module.exports) module.exports = api;
 else root.StationSites = api;
 })(typeof window !== "undefined" ? window : this);

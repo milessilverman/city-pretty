@@ -1,0 +1,875 @@
+{
+ "seed": 20261123,
+ "generator": "mulberry32",
+ "n": 15,
+ "poolByCity": {
+  "New York city": 213,
+  "San Diego city": 62
+ },
+ "sample": [
+  {
+   "id": "ss:36081:way/546943598",
+   "osm": "way/546943598",
+   "fips": "36081",
+   "placeCounty": "36081",
+   "city": "New York city",
+   "juris": "place:3651000",
+   "point": [
+    40.760054,
+    -73.832013
+   ],
+   "acres": 0.65,
+   "zone": "C4-2",
+   "zoneSource": {
+    "kind": "point",
+    "url": "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/nyzd/FeatureServer/0",
+    "asked": "2026-11-22"
+   },
+   "zoneKey": "C4-2",
+   "density": {
+    "method": "floor_area_over_factor",
+    "duFactor": 680,
+    "farLow": 2.2,
+    "farHigh": 3,
+    "roundUpFrom": 0.75,
+    "duPerAcre": [
+     140.93,
+     192.18
+    ],
+    "formula": "homes = floor-area ratio x lot area / 680; a fraction of three-quarters or more counts as one home (ZR 23-52)",
+    "source": {
+     "section": "23-52",
+     "quote": "For all other types of multiple dwelling residences , the applicable dwelling unit factor shall be 680. Fractions equal to or greater than three-quarters resulting from this calculation shall be considered to be one dwelling unit .",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-52",
+     "fetched": "2026-11-22"
+    },
+    "rule": {
+     "section": "23-52",
+     "quote": "In the districts indicated, for buildings containing multiple dwelling residences , the maximum number of dwelling units permitted shall be determined by dividing the maximum residential floor area permitted on the zoning lot by the applicable dwelling unit factor.",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-52",
+     "fetched": "2026-11-22"
+    },
+    "farSource": {
+     "section": "23-22",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+     "rows": [
+      "R6A R6^1 R6-1 R7B | 3.00 | 3.90 (For zoning lots, or portions thereof, located within 100 feet of a wide street)",
+      "R6 | 2.20 | 3.90"
+     ],
+     "note": "the standard column; the higher column for qualifying affordable or senior housing is not used; the higher figure applies only within 100 feet of a wide street, which is not checked here"
+    }
+   },
+   "legal": "zoning on file",
+   "homes": [
+    91,
+    125
+   ],
+   "cost": [
+    13926458,
+    21869125
+   ],
+   "costSource": "https://www2.census.gov/econ/bps/County/co2025a.txt"
+  },
+  {
+   "id": "ss:06073:way/52835841",
+   "osm": "way/52835841",
+   "fips": "06073",
+   "placeCounty": "06073",
+   "city": "San Diego city",
+   "juris": "place:0666000",
+   "point": [
+    32.867226,
+    -117.206388
+   ],
+   "acres": 1.36,
+   "zone": "CC-3-8",
+   "zoneSource": {
+    "kind": "point",
+    "url": "https://webmaps.sandiego.gov/arcgis/rest/services/DSD/Zoning_Base/MapServer/0",
+    "asked": "2026-11-22"
+   },
+   "zoneKey": "CC-3-8",
+   "density": {
+    "method": "lot_area_per_home",
+    "sqftPerHome": 600,
+    "duPerAcre": [
+     72.6,
+     72.6
+    ],
+    "roundUpFrom": 0.5,
+    "formula": "homes = lot area / 600 square feet (1 dwelling unit for each 600 square feet of lot area); a fraction of 0.50 or more counts as one more home (§113.0222(a)(1))",
+    "source": {
+     "section": "§131.0507",
+     "quote": "CC-3-8 is intended to accommodate development with a high intensity, pedestrian orientation and permits a maximum density of 1 dwelling unit for each 600 square feet of lot area",
+     "url": "https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division05.pdf",
+     "fetched": "2026-11-22"
+    },
+    "rounding": {
+     "section": "§113.0222(a)(1)",
+     "quote": "If the quotient resulting from this calculation exceeds a whole number by 0.50 or more, the number of dwelling units shall be increased to the next whole number.",
+     "url": "https://docs.sandiego.gov/municode/MuniCodeChapter11/Ch11Art03Division02.pdf",
+     "fetched": "2026-11-22"
+    }
+   },
+   "legal": "zoning on file",
+   "homes": [
+    99,
+    99
+   ],
+   "cost": [
+    16544187,
+    20440530
+   ],
+   "costSource": "https://www2.census.gov/econ/bps/County/co2025a.txt"
+  },
+  {
+   "id": "ss:36047:way/609830158",
+   "osm": "way/609830158",
+   "fips": "36047",
+   "placeCounty": "36081",
+   "city": "New York city",
+   "juris": "place:3651000",
+   "point": [
+    40.586232,
+    -73.81718
+   ],
+   "acres": 0.54,
+   "zone": "R6A",
+   "zoneSource": {
+    "kind": "point",
+    "url": "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/nyzd/FeatureServer/0",
+    "asked": "2026-11-22"
+   },
+   "zoneKey": "R6A",
+   "density": {
+    "method": "floor_area_over_factor",
+    "duFactor": 680,
+    "farLow": 3,
+    "farHigh": 3,
+    "roundUpFrom": 0.75,
+    "duPerAcre": [
+     192.18,
+     192.18
+    ],
+    "formula": "homes = floor-area ratio x lot area / 680; a fraction of three-quarters or more counts as one home (ZR 23-52)",
+    "source": {
+     "section": "23-52",
+     "quote": "For all other types of multiple dwelling residences , the applicable dwelling unit factor shall be 680. Fractions equal to or greater than three-quarters resulting from this calculation shall be considered to be one dwelling unit .",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-52",
+     "fetched": "2026-11-22"
+    },
+    "rule": {
+     "section": "23-52",
+     "quote": "In the districts indicated, for buildings containing multiple dwelling residences , the maximum number of dwelling units permitted shall be determined by dividing the maximum residential floor area permitted on the zoning lot by the applicable dwelling unit factor.",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-52",
+     "fetched": "2026-11-22"
+    },
+    "farSource": {
+     "section": "23-22",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+     "rows": [
+      "R6A R6^1 R6-1 R7B | 3.00 | 3.90"
+     ],
+     "note": "the standard column; the higher column for qualifying affordable or senior housing is not used"
+    }
+   },
+   "legal": "zoning on file",
+   "homes": [
+    104,
+    104
+   ],
+   "cost": [
+    15915952,
+    18195112
+   ],
+   "costSource": "https://www2.census.gov/econ/bps/County/co2025a.txt"
+  },
+  {
+   "id": "ss:06073:way/1514073094",
+   "osm": "way/1514073094",
+   "fips": "06073",
+   "placeCounty": "06073",
+   "city": "San Diego city",
+   "juris": "place:0666000",
+   "point": [
+    32.745192,
+    -117.191959
+   ],
+   "acres": 0.82,
+   "zone": "CC-3-8",
+   "zoneSource": {
+    "kind": "point",
+    "url": "https://webmaps.sandiego.gov/arcgis/rest/services/DSD/Zoning_Base/MapServer/0",
+    "asked": "2026-11-22"
+   },
+   "zoneKey": "CC-3-8",
+   "density": {
+    "method": "lot_area_per_home",
+    "sqftPerHome": 600,
+    "duPerAcre": [
+     72.6,
+     72.6
+    ],
+    "roundUpFrom": 0.5,
+    "formula": "homes = lot area / 600 square feet (1 dwelling unit for each 600 square feet of lot area); a fraction of 0.50 or more counts as one more home (§113.0222(a)(1))",
+    "source": {
+     "section": "§131.0507",
+     "quote": "CC-3-8 is intended to accommodate development with a high intensity, pedestrian orientation and permits a maximum density of 1 dwelling unit for each 600 square feet of lot area",
+     "url": "https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division05.pdf",
+     "fetched": "2026-11-22"
+    },
+    "rounding": {
+     "section": "§113.0222(a)(1)",
+     "quote": "If the quotient resulting from this calculation exceeds a whole number by 0.50 or more, the number of dwelling units shall be increased to the next whole number.",
+     "url": "https://docs.sandiego.gov/municode/MuniCodeChapter11/Ch11Art03Division02.pdf",
+     "fetched": "2026-11-22"
+    }
+   },
+   "legal": "zoning on file",
+   "homes": [
+    60,
+    60
+   ],
+   "cost": [
+    10026780,
+    12388200
+   ],
+   "costSource": "https://www2.census.gov/econ/bps/County/co2025a.txt"
+  },
+  {
+   "id": "ss:36047:way/284698715",
+   "osm": "way/284698715",
+   "fips": "36047",
+   "placeCounty": "36081",
+   "city": "New York city",
+   "juris": "place:3651000",
+   "point": [
+    40.73297,
+    -73.865461
+   ],
+   "acres": 2.15,
+   "zone": "R8",
+   "zoneSource": {
+    "kind": "point",
+    "url": "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/nyzd/FeatureServer/0",
+    "asked": "2026-11-22"
+   },
+   "zoneKey": "R8",
+   "density": {
+    "method": "floor_area_over_factor",
+    "duFactor": 680,
+    "farLow": 6.02,
+    "farHigh": 7.2,
+    "roundUpFrom": 0.75,
+    "duPerAcre": [
+     385.63,
+     461.22
+    ],
+    "formula": "homes = floor-area ratio x lot area / 680; a fraction of three-quarters or more counts as one home (ZR 23-52)",
+    "source": {
+     "section": "23-52",
+     "quote": "For all other types of multiple dwelling residences , the applicable dwelling unit factor shall be 680. Fractions equal to or greater than three-quarters resulting from this calculation shall be considered to be one dwelling unit .",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-52",
+     "fetched": "2026-11-22"
+    },
+    "rule": {
+     "section": "23-52",
+     "quote": "In the districts indicated, for buildings containing multiple dwelling residences , the maximum number of dwelling units permitted shall be determined by dividing the maximum residential floor area permitted on the zoning lot by the applicable dwelling unit factor.",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-52",
+     "fetched": "2026-11-22"
+    },
+    "farSource": {
+     "section": "23-22",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+     "rows": [
+      "R8A R8X R8 | 6.02 | 7.20",
+      "R8 | 7.20^1 | 8.64^2 (For zoning lots, or portions thereof, located within 100 feet of a wide street)"
+     ],
+     "note": "the standard column; the higher column for qualifying affordable or senior housing is not used; the higher figure applies only within 100 feet of a wide street, which is not checked here"
+    }
+   },
+   "legal": "zoning on file",
+   "homes": [
+    829,
+    991
+   ],
+   "cost": [
+    126868502,
+    173378423
+   ],
+   "costSource": "https://www2.census.gov/econ/bps/County/co2025a.txt"
+  },
+  {
+   "id": "ss:06073:way/1534441306",
+   "osm": "way/1534441306",
+   "fips": "06073",
+   "placeCounty": "06073",
+   "city": "San Diego city",
+   "juris": "place:0666000",
+   "point": [
+    32.78997,
+    -117.20384
+   ],
+   "acres": 1.02,
+   "zone": "CC-3-9",
+   "zoneSource": {
+    "kind": "point",
+    "url": "https://webmaps.sandiego.gov/arcgis/rest/services/DSD/Zoning_Base/MapServer/0",
+    "asked": "2026-11-22"
+   },
+   "zoneKey": "CC-3-9",
+   "density": {
+    "method": "lot_area_per_home",
+    "sqftPerHome": 400,
+    "duPerAcre": [
+     108.9,
+     108.9
+    ],
+    "roundUpFrom": 0.5,
+    "formula": "homes = lot area / 400 square feet (1 dwelling unit for each 400 square feet of lot area); a fraction of 0.50 or more counts as one more home (§113.0222(a)(1))",
+    "source": {
+     "section": "§131.0507",
+     "quote": "CC-3-9 is intended to accommodate development with a high intensity, pedestrian orientation and permits a maximum density of 1 dwelling unit for each 400 square feet of lot area",
+     "url": "https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division05.pdf",
+     "fetched": "2026-11-22"
+    },
+    "rounding": {
+     "section": "§113.0222(a)(1)",
+     "quote": "If the quotient resulting from this calculation exceeds a whole number by 0.50 or more, the number of dwelling units shall be increased to the next whole number.",
+     "url": "https://docs.sandiego.gov/municode/MuniCodeChapter11/Ch11Art03Division02.pdf",
+     "fetched": "2026-11-22"
+    }
+   },
+   "legal": "zoning on file",
+   "homes": [
+    111,
+    111
+   ],
+   "cost": [
+    18549543,
+    22918170
+   ],
+   "costSource": "https://www2.census.gov/econ/bps/County/co2025a.txt"
+  },
+  {
+   "id": "ss:36047:way/395655351",
+   "osm": "way/395655351",
+   "fips": "36047",
+   "placeCounty": "36047",
+   "city": "New York city",
+   "juris": "place:3651000",
+   "point": [
+    40.693269,
+    -73.958833
+   ],
+   "acres": 0.83,
+   "zone": "R7A",
+   "zoneSource": {
+    "kind": "point",
+    "url": "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/nyzd/FeatureServer/0",
+    "asked": "2026-11-22"
+   },
+   "zoneKey": "R7A",
+   "density": {
+    "method": "floor_area_over_factor",
+    "duFactor": 680,
+    "farLow": 4,
+    "farHigh": 4,
+    "roundUpFrom": 0.75,
+    "duPerAcre": [
+     256.24,
+     256.24
+    ],
+    "formula": "homes = floor-area ratio x lot area / 680; a fraction of three-quarters or more counts as one home (ZR 23-52)",
+    "source": {
+     "section": "23-52",
+     "quote": "For all other types of multiple dwelling residences , the applicable dwelling unit factor shall be 680. Fractions equal to or greater than three-quarters resulting from this calculation shall be considered to be one dwelling unit .",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-52",
+     "fetched": "2026-11-22"
+    },
+    "rule": {
+     "section": "23-52",
+     "quote": "In the districts indicated, for buildings containing multiple dwelling residences , the maximum number of dwelling units permitted shall be determined by dividing the maximum residential floor area permitted on the zoning lot by the applicable dwelling unit factor.",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-52",
+     "fetched": "2026-11-22"
+    },
+    "farSource": {
+     "section": "23-22",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+     "rows": [
+      "R7A R7-1^1 R7-2^1 | 4.00 | 5.01"
+     ],
+     "note": "the standard column; the higher column for qualifying affordable or senior housing is not used"
+    }
+   },
+   "legal": "zoning on file",
+   "homes": [
+    212,
+    212
+   ],
+   "cost": [
+    32336360,
+    36610704
+   ],
+   "costSource": "https://www2.census.gov/econ/bps/County/co2025a.txt"
+  },
+  {
+   "id": "ss:06073:way/1148329178",
+   "osm": "way/1148329178",
+   "fips": "06073",
+   "placeCounty": "06073",
+   "city": "San Diego city",
+   "juris": "place:0666000",
+   "point": [
+    32.775563,
+    -117.13585
+   ],
+   "acres": 4.66,
+   "zone": "CO-3-3",
+   "zoneSource": {
+    "kind": "point",
+    "url": "https://webmaps.sandiego.gov/arcgis/rest/services/DSD/Zoning_Base/MapServer/0",
+    "asked": "2026-11-22"
+   },
+   "zoneKey": "CO-3-3",
+   "density": {
+    "method": "lot_area_per_home",
+    "sqftPerHome": 600,
+    "duPerAcre": [
+     72.6,
+     72.6
+    ],
+    "roundUpFrom": 0.5,
+    "formula": "homes = lot area / 600 square feet (1 dwelling unit for each 600 square feet of lot area); a fraction of 0.50 or more counts as one more home (§113.0222(a)(1))",
+    "source": {
+     "section": "§131.0504",
+     "quote": "CO-3-3 is intended to accommodate a mix of office and residential uses and permits a maximum density of 1 dwelling unit for each 600 square feet of lot area",
+     "url": "https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division05.pdf",
+     "fetched": "2026-11-22"
+    },
+    "rounding": {
+     "section": "§113.0222(a)(1)",
+     "quote": "If the quotient resulting from this calculation exceeds a whole number by 0.50 or more, the number of dwelling units shall be increased to the next whole number.",
+     "url": "https://docs.sandiego.gov/municode/MuniCodeChapter11/Ch11Art03Division02.pdf",
+     "fetched": "2026-11-22"
+    }
+   },
+   "legal": "zoning on file",
+   "homes": [
+    338,
+    338
+   ],
+   "cost": [
+    56484194,
+    69786860
+   ],
+   "costSource": "https://www2.census.gov/econ/bps/County/co2025a.txt"
+  },
+  {
+   "id": "ss:36047:way/826539010",
+   "osm": "way/826539010",
+   "fips": "36047",
+   "placeCounty": "36081",
+   "city": "New York city",
+   "juris": "place:3651000",
+   "point": [
+    40.70029,
+    -73.910898
+   ],
+   "acres": 0.74,
+   "zone": "C4-3",
+   "zoneSource": {
+    "kind": "point",
+    "url": "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/nyzd/FeatureServer/0",
+    "asked": "2026-11-22"
+   },
+   "zoneKey": "C4-3",
+   "density": {
+    "method": "floor_area_over_factor",
+    "duFactor": 680,
+    "farLow": 2.2,
+    "farHigh": 3,
+    "roundUpFrom": 0.75,
+    "duPerAcre": [
+     140.93,
+     192.18
+    ],
+    "formula": "homes = floor-area ratio x lot area / 680; a fraction of three-quarters or more counts as one home (ZR 23-52)",
+    "source": {
+     "section": "23-52",
+     "quote": "For all other types of multiple dwelling residences , the applicable dwelling unit factor shall be 680. Fractions equal to or greater than three-quarters resulting from this calculation shall be considered to be one dwelling unit .",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-52",
+     "fetched": "2026-11-22"
+    },
+    "rule": {
+     "section": "23-52",
+     "quote": "In the districts indicated, for buildings containing multiple dwelling residences , the maximum number of dwelling units permitted shall be determined by dividing the maximum residential floor area permitted on the zoning lot by the applicable dwelling unit factor.",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-52",
+     "fetched": "2026-11-22"
+    },
+    "farSource": {
+     "section": "23-22",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+     "rows": [
+      "R6A R6^1 R6-1 R7B | 3.00 | 3.90 (For zoning lots, or portions thereof, located within 100 feet of a wide street)",
+      "R6 | 2.20 | 3.90"
+     ],
+     "note": "the standard column; the higher column for qualifying affordable or senior housing is not used; the higher figure applies only within 100 feet of a wide street, which is not checked here"
+    }
+   },
+   "legal": "zoning on file",
+   "homes": [
+    104,
+    142
+   ],
+   "cost": [
+    15915952,
+    24843326
+   ],
+   "costSource": "https://www2.census.gov/econ/bps/County/co2025a.txt"
+  },
+  {
+   "id": "ss:06073:way/1279284443",
+   "osm": "way/1279284443",
+   "fips": "06073",
+   "placeCounty": "06073",
+   "city": "San Diego city",
+   "juris": "place:0666000",
+   "point": [
+    32.556049,
+    -117.04662
+   ],
+   "acres": 0.75,
+   "zone": "RM-2-5",
+   "zoneSource": {
+    "kind": "point",
+    "url": "https://webmaps.sandiego.gov/arcgis/rest/services/DSD/Zoning_Base/MapServer/0",
+    "asked": "2026-11-22"
+   },
+   "zoneKey": "RM-2-5",
+   "density": {
+    "method": "lot_area_per_home",
+    "sqftPerHome": 1500,
+    "duPerAcre": [
+     29.04,
+     29.04
+    ],
+    "roundUpFrom": 0.5,
+    "formula": "homes = lot area / 1,500 square feet (1 dwelling unit for each 1,500 square feet of lot area); a fraction of 0.50 or more counts as one more home (§113.0222(a)(1))",
+    "source": {
+     "section": "§131.0406",
+     "quote": "RM-2-5 permits a maximum density of 1 dwelling unit for each 1,500 square feet of lot area",
+     "url": "https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division04.pdf",
+     "fetched": "2026-11-22"
+    },
+    "rounding": {
+     "section": "§113.0222(a)(1)",
+     "quote": "If the quotient resulting from this calculation exceeds a whole number by 0.50 or more, the number of dwelling units shall be increased to the next whole number.",
+     "url": "https://docs.sandiego.gov/municode/MuniCodeChapter11/Ch11Art03Division02.pdf",
+     "fetched": "2026-11-22"
+    }
+   },
+   "legal": "zoning on file",
+   "homes": [
+    22,
+    22
+   ],
+   "cost": [
+    3676486,
+    4542340
+   ],
+   "costSource": "https://www2.census.gov/econ/bps/County/co2025a.txt"
+  },
+  {
+   "id": "ss:36047:way/617104287",
+   "osm": "way/617104287",
+   "fips": "36047",
+   "placeCounty": "36047",
+   "city": "New York city",
+   "juris": "place:3651000",
+   "point": [
+    40.592435,
+    -73.981096
+   ],
+   "acres": 1.78,
+   "zone": "R5",
+   "zoneSource": {
+    "kind": "point",
+    "url": "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/nyzd/FeatureServer/0",
+    "asked": "2026-11-22"
+   },
+   "zoneKey": "R5",
+   "density": {
+    "method": "floor_area_over_factor",
+    "duFactor": 680,
+    "farLow": 1.5,
+    "farHigh": 1.5,
+    "roundUpFrom": 0.75,
+    "duPerAcre": [
+     96.09,
+     96.09
+    ],
+    "formula": "homes = floor-area ratio x lot area / 680; a fraction of three-quarters or more counts as one home (ZR 23-52)",
+    "source": {
+     "section": "23-52",
+     "quote": "For all other types of multiple dwelling residences , the applicable dwelling unit factor shall be 680. Fractions equal to or greater than three-quarters resulting from this calculation shall be considered to be one dwelling unit .",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-52",
+     "fetched": "2026-11-22"
+    },
+    "rule": {
+     "section": "23-52",
+     "quote": "In the districts indicated, for buildings containing multiple dwelling residences , the maximum number of dwelling units permitted shall be determined by dividing the maximum residential floor area permitted on the zoning lot by the applicable dwelling unit factor.",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-52",
+     "fetched": "2026-11-22"
+    },
+    "farSource": {
+     "section": "23-21",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-21",
+     "rows": [
+      "R5A R5B R5 | 1.50 | 2.00"
+     ],
+     "note": "the standard column; the higher column for qualifying affordable or senior housing is not used"
+    }
+   },
+   "legal": "zoning on file",
+   "homes": [
+    171,
+    171
+   ],
+   "cost": [
+    26082630,
+    29530332
+   ],
+   "costSource": "https://www2.census.gov/econ/bps/County/co2025a.txt"
+  },
+  {
+   "id": "ss:06073:way/1304913225",
+   "osm": "way/1304913225",
+   "fips": "06073",
+   "placeCounty": "06073",
+   "city": "San Diego city",
+   "juris": "place:0666000",
+   "point": [
+    32.583089,
+    -117.085103
+   ],
+   "acres": 1.15,
+   "zone": "CC-4-5",
+   "zoneSource": {
+    "kind": "point",
+    "url": "https://webmaps.sandiego.gov/arcgis/rest/services/DSD/Zoning_Base/MapServer/0",
+    "asked": "2026-11-22"
+   },
+   "zoneKey": "CC-4-5",
+   "density": {
+    "method": "lot_area_per_home",
+    "sqftPerHome": 1500,
+    "duPerAcre": [
+     29.04,
+     29.04
+    ],
+    "roundUpFrom": 0.5,
+    "formula": "homes = lot area / 1,500 square feet (1 dwelling unit for each 1,500 square feet of lot area); a fraction of 0.50 or more counts as one more home (§113.0222(a)(1))",
+    "source": {
+     "section": "§131.0507",
+     "quote": "CC-4-5 is intended to accommodate development with a high intensity, pedestrian orientation and permits a maximum density of 1 dwelling unit for each 1,500 square feet of lot area",
+     "url": "https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division05.pdf",
+     "fetched": "2026-11-22"
+    },
+    "rounding": {
+     "section": "§113.0222(a)(1)",
+     "quote": "If the quotient resulting from this calculation exceeds a whole number by 0.50 or more, the number of dwelling units shall be increased to the next whole number.",
+     "url": "https://docs.sandiego.gov/municode/MuniCodeChapter11/Ch11Art03Division02.pdf",
+     "fetched": "2026-11-22"
+    }
+   },
+   "legal": "zoning on file",
+   "homes": [
+    33,
+    33
+   ],
+   "cost": [
+    5514729,
+    6813510
+   ],
+   "costSource": "https://www2.census.gov/econ/bps/County/co2025a.txt"
+  },
+  {
+   "id": "ss:36047:way/676144141",
+   "osm": "way/676144141",
+   "fips": "36047",
+   "placeCounty": "36081",
+   "city": "New York city",
+   "juris": "place:3651000",
+   "point": [
+    40.755441,
+    -73.829036
+   ],
+   "acres": 0.59,
+   "zone": "R6",
+   "zoneSource": {
+    "kind": "point",
+    "url": "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/nyzd/FeatureServer/0",
+    "asked": "2026-11-22"
+   },
+   "zoneKey": "R6",
+   "density": {
+    "method": "floor_area_over_factor",
+    "duFactor": 680,
+    "farLow": 2.2,
+    "farHigh": 3,
+    "roundUpFrom": 0.75,
+    "duPerAcre": [
+     140.93,
+     192.18
+    ],
+    "formula": "homes = floor-area ratio x lot area / 680; a fraction of three-quarters or more counts as one home (ZR 23-52)",
+    "source": {
+     "section": "23-52",
+     "quote": "For all other types of multiple dwelling residences , the applicable dwelling unit factor shall be 680. Fractions equal to or greater than three-quarters resulting from this calculation shall be considered to be one dwelling unit .",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-52",
+     "fetched": "2026-11-22"
+    },
+    "rule": {
+     "section": "23-52",
+     "quote": "In the districts indicated, for buildings containing multiple dwelling residences , the maximum number of dwelling units permitted shall be determined by dividing the maximum residential floor area permitted on the zoning lot by the applicable dwelling unit factor.",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-52",
+     "fetched": "2026-11-22"
+    },
+    "farSource": {
+     "section": "23-22",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+     "rows": [
+      "R6A R6^1 R6-1 R7B | 3.00 | 3.90 (For zoning lots, or portions thereof, located within 100 feet of a wide street)",
+      "R6 | 2.20 | 3.90"
+     ],
+     "note": "the standard column; the higher column for qualifying affordable or senior housing is not used; the higher figure applies only within 100 feet of a wide street, which is not checked here"
+    }
+   },
+   "legal": "zoning on file",
+   "homes": [
+    83,
+    113
+   ],
+   "cost": [
+    12702154,
+    19769689
+   ],
+   "costSource": "https://www2.census.gov/econ/bps/County/co2025a.txt"
+  },
+  {
+   "id": "ss:06073:way/1490632550",
+   "osm": "way/1490632550",
+   "fips": "06073",
+   "placeCounty": "06073",
+   "city": "San Diego city",
+   "juris": "place:0666000",
+   "point": [
+    32.712818,
+    -117.095956
+   ],
+   "acres": 0.94,
+   "zone": "RM-1-1",
+   "zoneSource": {
+    "kind": "point",
+    "url": "https://webmaps.sandiego.gov/arcgis/rest/services/DSD/Zoning_Base/MapServer/0",
+    "asked": "2026-11-22"
+   },
+   "zoneKey": "RM-1-1",
+   "density": {
+    "method": "lot_area_per_home",
+    "sqftPerHome": 3000,
+    "duPerAcre": [
+     14.52,
+     14.52
+    ],
+    "roundUpFrom": 0.5,
+    "formula": "homes = lot area / 3,000 square feet (1 dwelling unit for each 3,000 square feet of lot area); a fraction of 0.50 or more counts as one more home (§113.0222(a)(1))",
+    "source": {
+     "section": "§131.0406",
+     "quote": "RM-1-1 permits a maximum density of 1 dwelling unit for each 3,000 square feet of lot area",
+     "url": "https://docs.sandiego.gov/municode/MuniCodeChapter13/Ch13Art01Division04.pdf",
+     "fetched": "2026-11-22"
+    },
+    "rounding": {
+     "section": "§113.0222(a)(1)",
+     "quote": "If the quotient resulting from this calculation exceeds a whole number by 0.50 or more, the number of dwelling units shall be increased to the next whole number.",
+     "url": "https://docs.sandiego.gov/municode/MuniCodeChapter11/Ch11Art03Division02.pdf",
+     "fetched": "2026-11-22"
+    }
+   },
+   "legal": "zoning on file",
+   "homes": [
+    14,
+    14
+   ],
+   "cost": [
+    2339582,
+    2890580
+   ],
+   "costSource": "https://www2.census.gov/econ/bps/County/co2025a.txt"
+  },
+  {
+   "id": "ss:36047:way/884955518",
+   "osm": "way/884955518",
+   "fips": "36047",
+   "placeCounty": "36047",
+   "city": "New York city",
+   "juris": "place:3651000",
+   "point": [
+    40.701259,
+    -73.947017
+   ],
+   "acres": 0.63,
+   "zone": "R7A",
+   "zoneSource": {
+    "kind": "point",
+    "url": "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/nyzd/FeatureServer/0",
+    "asked": "2026-11-22"
+   },
+   "zoneKey": "R7A",
+   "density": {
+    "method": "floor_area_over_factor",
+    "duFactor": 680,
+    "farLow": 4,
+    "farHigh": 4,
+    "roundUpFrom": 0.75,
+    "duPerAcre": [
+     256.24,
+     256.24
+    ],
+    "formula": "homes = floor-area ratio x lot area / 680; a fraction of three-quarters or more counts as one home (ZR 23-52)",
+    "source": {
+     "section": "23-52",
+     "quote": "For all other types of multiple dwelling residences , the applicable dwelling unit factor shall be 680. Fractions equal to or greater than three-quarters resulting from this calculation shall be considered to be one dwelling unit .",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-52",
+     "fetched": "2026-11-22"
+    },
+    "rule": {
+     "section": "23-52",
+     "quote": "In the districts indicated, for buildings containing multiple dwelling residences , the maximum number of dwelling units permitted shall be determined by dividing the maximum residential floor area permitted on the zoning lot by the applicable dwelling unit factor.",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-52",
+     "fetched": "2026-11-22"
+    },
+    "farSource": {
+     "section": "23-22",
+     "url": "https://zr.planning.nyc.gov/article-ii/chapter-3/23-22",
+     "rows": [
+      "R7A R7-1^1 R7-2^1 | 4.00 | 5.01"
+     ],
+     "note": "the standard column; the higher column for qualifying affordable or senior housing is not used"
+    }
+   },
+   "legal": "zoning on file",
+   "homes": [
+    161,
+    161
+   ],
+   "cost": [
+    24557330,
+    27803412
+   ],
+   "costSource": "https://www2.census.gov/econ/bps/County/co2025a.txt"
+  }
+ ]
+}

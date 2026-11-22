@@ -1716,6 +1716,28 @@ zoning. Re-derived by hand for 10 random sites in 8 counties: 130 figures, 0 dif
 - **Found, not changed:** 467 of 5,613 sites near existing stations are counted within 0.5 mile by their outline's edge
   but are more than 0.5 mile away by the interior point the card uses.
 
+### Station-site zoning: zone, category and the code's own density (22-23 Nov 2026, `audit/site-zoning-2026-11-23.md`)
+
+Added: the government that zones each of the 7,098 sites (Census TIGER/Line 2024 places); the zone at the site's point
+from the city's own zoning map for New York, San Diego, Los Angeles and Austin (else the parcel record's code); code tables
+built from the codes' own text for New York (Zoning Resolution: FAR / 680 per ZR 23-52) and San Diego (Municipal Code:
+"1 dwelling unit for each N square feet of lot area", rounded per §113.0222); Los Angeles categories from the Department
+of City Planning's own map category (its code text is on American Legal Publishing, which answered HTTP 403). Austin's
+code (Municode, Cloudflare bot check) is not on file. Cards: zone passed for 0 -> 1,646 sites, a code-table category for
+0 -> 1,278, a home count and a total structure cost for 0 -> 275 (213 New York, 62 San Diego). Re-derived by hand: 15
+random sites (2 cities; no other city has a home count), 15/15 zone, homes and cost the same. Found:
+
+- **Correction (own work, before publishing):** San Diego's density rounds a fraction of 0.50 or more up
+  (§113.0222(a)(1)); the first build floored it. Found by reading Table 131-04G's footnote; fixed and tested with the
+  code's own worked example (1.5 acres at 1 per 2,000 sq ft = 33).
+- **Correction:** a multifamily course with a range of homes was costed with the lowest home count at both ends
+  (`courseFigures`); no published course had a range before. It now runs from the fewest homes at the lowest year's value
+  to the most homes at the highest.
+- **Correction:** `audit/site-cards-2026-11-22.md` said querying the zoning services "would add codes, not categories".
+  Los Angeles's own zoning layer carries a category per zone (CATEGORY field), now used.
+- **Found, not changed:** in San Diego County, 503 parcel records (303 in the City) hold SANDAG one-digit codes and in Maricopa 581 hold
+  "CONTACT LOCAL JURISDICTION"; neither is a zone, and neither is passed to the card.
+
 ### Ease-of-use pass (20-22 Nov 2026, `audit/usability-2026-11-20.md`)
 
 Layout and wording only; no figure, source or calculation changed. Mistakes found on the page while doing it:
