@@ -41,6 +41,7 @@ const costRows = (data("transit_cost_benchmarks.json").rows || []).filter((r) =>
 const effectMode = (l) => { const t = String(l || "").toLowerCase(); return /light rail/.test(t) ? "light_rail" : /heavy rail|metro/.test(t) ? "heavy_rail" : /commuter/.test(t) ? "commuter_rail" : /bus rapid|brt/.test(t) ? "brt" : "all_rail"; };
 const ctx = {
   backtest: data("neighborhood_score_backtest.json"),
+  prediction: data("neighborhood_prediction.json"),
   catalog: la.catalog,
   verification: data("intervention_verification.json"),
   underusedSites: data("underused_sites.json"),

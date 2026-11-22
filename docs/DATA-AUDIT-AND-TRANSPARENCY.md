@@ -1598,3 +1598,19 @@ not checked it gives "not determined" with those terms; it never rules a law out
   located on an individual residential lot and serving only that lot"; Idaho Code 67-6541(7)(a) "Building codes, fire
   safety standards, and flood plain regulations". Washington's RCW 36.70A.635(4)(b)(v) ("susceptible to wildfires") only
   applies where a city chose the 75 percent alternative, so it is conditional.
+### Neighborhood prediction: leading signals tested, no edge over "cheapest tracts" (22 Nov 2026)
+`docs/PREDICTION-MODEL.md` (method committed before any evaluation), `app/data/neighborhood_prediction.json`. A walk-forward test of
+16 dated signals (mortgage applications, loan sizes, investor buying, denial rates, permits, jobs, ACS composition, price trends) on the
+50 back-test counties did **not** beat the plain cheapest-tracts screen on 5-year county-relative price change, so by the pre-written rule no
+county uses it; the screen stays everywhere and now shows its tested 5-year range by home-value fifth and its measured hit rate. Also found:
+the cheap-tract edge has shrunk sharply in recent windows (see the doc's B.2-B.3), and the stated 80% ranges held only about three quarters of
+outcomes in the test, which the page and file now say. Fixed in passing: `scripts/signals/loaders.py` `level_to_tract20` / `count_to_tract20`
+crashed on the 471 crosswalk rows with a blank weight (water-only tracts with no land, e.g. 01003990000); they now skip them. No published
+file had used those functions.
+
+### Correction: the Zillow tables were committed, although the signals page says they are git-ignored (found 22 Nov 2026)
+`docs/audit/prediction-signals-2026-11-22.md` says the Zillow tables are "git-ignored (`data/signals/.gitignore`)". They were not: that file's
+pattern `data/signals/zillow_*` is read relative to `data/signals/`, so it matched nothing, and commit a245b7b added the four
+`data/signals/zillow_*.csv.gz` tables (terms not confirmed: internal testing only). Fixed on this branch: the pattern is now `zillow_*` and the
+four files are removed from the index (they stay on disk for internal tests). **They remain in the history of a245b7b and every branch
+built on it**; removing them from history needs the owner's decision (a history rewrite of shared branches).
