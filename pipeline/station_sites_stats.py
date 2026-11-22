@@ -27,7 +27,7 @@ def main():
     got = [r for r in pq if r.get("parcel")]
     ok = [r for r in got if not r["parcel"]["mismatch"]]
     S["parcel"] = {"queried": len(pq), "parcel_found": len(got), "found_rate": round(len(got) / len(pq), 3), "no_parcel_at_point": sum(1 for r in pq if not r.get("parcel") and "no parcel" in (r.get("parcelWhy") or "")),
-                   "service_error": sum(1 for r in pq if not r.get("parcel") and "did not answer" in (r.get("parcelWhy") or "")),
+                   "service_error": sum(1 for r in pq if not r.get("parcel") and (r.get("parcelWhy") or "").startswith("service")),
                    "area_ok_0.5_to_2": len(ok), "area_mismatch": len(got) - len(ok), "mismatch_rate_of_found": round((len(got) - len(ok)) / max(1, len(got)), 3),
                    "parcel_larger_than_2x": sum(1 for r in got if (r["parcel"]["areaRatio"] or 0) > 2), "parcel_smaller_than_half": sum(1 for r in got if r["parcel"]["areaRatio"] and r["parcel"]["areaRatio"] < 0.5),
                    "with_owner_type": sum(1 for r in got if r["parcel"]["ownerType"]), "with_owner_name_stored": sum(1 for r in got if r["parcel"]["owner"]), "with_land_value": sum(1 for r in got if r["parcel"]["landValue"] is not None),
@@ -36,6 +36,7 @@ def main():
     for r in pq:
         p = r.get("parcel")
         nm = (p or {}).get("service") or next((a["parcelService"] for a in anchors["anchors"] if a["id"] == r["near"]["id"]), None)
+        nm = {"own lookup (LA County GIS)": "Los Angeles County Assessor parcels (LA County GIS)", "own lookup (OC Public Works parcels)": "Orange County parcels (OC Public Works / ocgis.com)"}.get(nm, nm)
         c = byservice[nm]
         c["queried"] += 1
         if p:

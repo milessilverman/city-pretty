@@ -7,6 +7,15 @@ Rule for every item: a number reaches the page or the AI only if it was fetched 
 is withheld with the reason. Each item ends with tests passing and a commit; anything I get wrong is reported in the
 audit doc the same day.
 
+## Status 22 Nov 2026 (station-area sites)
+
+- **Done:** `app/data/station_sites/<fips>.json` (42 counties, each under 300 KB, plus `index.json`): measured candidate lots near
+  stations and stop cities, loaded by `src/engines/stationSites.js`, listed in the Invest view's Properties card and passed to the
+  project card engine as site subjects. Method, counts, re-check and limits: `docs/audit/station-sites-2026-11-22.md`.
+- **Open:** large single-storey retail with big parking (not defined from tags); golf, brownfield and vacant land in a few Phoenix and
+  Seattle clusters (Overpass 504s; re-run `pipeline/station_sites_osm.py` for the group, finished clusters are cached); the 68 stop cities
+  with no parcel service; King County's service answers 500 to part of its lookups (re-run `pipeline/station_sites_parcels.py`).
+
 ## Status 19 Nov 2026 (planned rail corridors)
 
 - **Done:** `app/data/intercity_transit_corridors.json` now holds all 69 FRA FY22 Corridor ID selections (4 Amtrak-led, 65 by

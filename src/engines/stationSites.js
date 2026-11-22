@@ -57,7 +57,7 @@ function facts(s) {
   else {
     rows.push(["County parcel record", `${p.id ? "parcel " + p.id : "parcel id not given by the service"}; parcel area ${p.pa != null ? p.pa + " acres" : "not given"}${p.r != null ? " (" + p.r + " times the outline)" : ""}; retrieved ${p.d}`]);
     rows.push(["Land use on the record", p.ut || p.uc ? [p.ut, p.uc ? "code " + p.uc : null].filter(Boolean).join(", ") : "Not on file: the service gives no use field, or it was blank"]);
-    const own = p.ot ? (p.own ? p.own + " (" + p.ot + ")" : p.ot + ", name not shown") : null;
+    const own = p.ot ? (p.own ? p.own + " (" + p.ot + ")" : p.ot + (/name not stored/.test(p.ot) ? "" : " (name not shown)")) : null;
     rows.push(["Owner on the record", own || p.oc ? [own, p.oc ? "the service's own owner-type code: " + p.oc : null].filter(Boolean).join("; ") : "Not on file: the service gives no owner field, or it was blank"]);
     rows.push(["Zoning code on the record", p.zn || "Not on file: the service gives no zoning field, or it was blank"]);
     rows.push(["Assessed land value", p.lv != null ? "$" + m(p.lv) + " (the county's figure for the parcel)" : p.mm ? "Withheld: the parcel is " + p.r + " times the outline's area, so the value is for the whole parcel" : "Not on file: the service gives no land value field, or it was blank"]);

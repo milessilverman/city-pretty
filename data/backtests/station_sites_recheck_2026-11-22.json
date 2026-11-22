@@ -1,0 +1,518 @@
+{
+ "made": "2026-11-22",
+ "seed": 20261122,
+ "population": {
+  "records": 7098,
+  "with_parcel": 6433
+ },
+ "parcel": [
+  {
+   "osm": "way/1177629978",
+   "fips": "36081",
+   "service": "NYC MapPLUTO (NYC Department of City Planning)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/681335805",
+   "fips": "36047",
+   "service": "NYC MapPLUTO (NYC Department of City Planning)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/1345142266",
+   "fips": "06073",
+   "service": "SanGIS Parcels (hosted by SANDAG)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/472145854",
+   "fips": "48113",
+   "service": "Dallas County GIS Parcels",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/219066570",
+   "fips": "17031",
+   "service": "Cook County GIS - Current Parcel (cookVwrDynmc layer 44)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/471973631",
+   "fips": "48113",
+   "service": "Dallas County GIS Parcels",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/1496071509",
+   "fips": "48113",
+   "service": "Dallas County GIS Parcels",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/902420158",
+   "fips": "04013",
+   "service": "Maricopa County Assessor Parcels",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/1300959229",
+   "fips": "04013",
+   "service": "Maricopa County Assessor Parcels",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/127628638",
+   "fips": "48113",
+   "service": "Dallas County GIS Parcels",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/432362789",
+   "fips": "17031",
+   "service": "Cook County GIS - Current Parcel (cookVwrDynmc layer 44)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/727352928",
+   "fips": "04013",
+   "service": "Maricopa County Assessor Parcels",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/1159765002",
+   "fips": "06059",
+   "service": "Orange County parcels (OC Public Works / ocgis.com)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/293383460",
+   "fips": "17031",
+   "service": "Cook County GIS - Current Parcel (cookVwrDynmc layer 44)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/313762428",
+   "fips": "32003",
+   "service": "Clark County Assessor Parcels (Assessor/Layers)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/866436450",
+   "fips": "48201",
+   "service": "Harris County GIS Parcels",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/906517741",
+   "fips": "32003",
+   "service": "Clark County Assessor Parcels (Assessor/Layers)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/1279051263",
+   "fips": "06073",
+   "service": "SanGIS Parcels (hosted by SANDAG)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/144915951",
+   "fips": "48113",
+   "service": "Dallas County GIS Parcels",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/392364988",
+   "fips": "17031",
+   "service": "Cook County GIS - Current Parcel (cookVwrDynmc layer 44)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/1423876239",
+   "fips": "06073",
+   "service": "SanGIS Parcels (hosted by SANDAG)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/329025640",
+   "fips": "17031",
+   "service": "Cook County GIS - Current Parcel (cookVwrDynmc layer 44)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/1055194766",
+   "fips": "36047",
+   "service": "NYC MapPLUTO (NYC Department of City Planning)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/1279292793",
+   "fips": "06073",
+   "service": "SanGIS Parcels (hosted by SANDAG)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/378373549",
+   "fips": "48201",
+   "service": "Harris County GIS Parcels",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "relation/3640426",
+   "fips": "48201",
+   "service": "Harris County GIS Parcels",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/292156929",
+   "fips": "36047",
+   "service": "NYC MapPLUTO (NYC Department of City Planning)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/1571971257",
+   "fips": "27053",
+   "service": "Parcels, Compiled from Opt-In Open Data Counties, Minnesota (MnGeo)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "relation/18206633",
+   "fips": "06073",
+   "service": "SanGIS Parcels (hosted by SANDAG)",
+   "result": "same",
+   "diffs": []
+  },
+  {
+   "osm": "way/476340960",
+   "fips": "12086",
+   "service": "Florida Statewide Parcels (FGIO / Dept. of Revenue Property Tax Oversight)",
+   "result": "same",
+   "diffs": []
+  }
+ ],
+ "osm": [
+  {
+   "osm": "way/259008606",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking, parking=surface",
+   "result": "same",
+   "tags_now": {
+    "access": "private",
+    "amenity": "parking",
+    "parking": "surface"
+   },
+   "version": 2,
+   "timestamp": "2025-12-24T05:19:49Z",
+   "acres_now_geodesic": 1.01,
+   "acres_file": 1.0,
+   "area_within_2pct": true
+  },
+  {
+   "osm": "way/388173214",
+   "kind_file": "vacant_or_brownfield",
+   "tag_file": "landuse=brownfield",
+   "result": "same",
+   "tags_now": {
+    "landuse": "brownfield"
+   },
+   "version": 2,
+   "timestamp": "2022-01-02T21:45:27Z",
+   "acres_now_geodesic": 0.53,
+   "acres_file": 0.53,
+   "area_within_2pct": true
+  },
+  {
+   "osm": "way/226155883",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking, parking=surface",
+   "result": "same",
+   "tags_now": {
+    "access": "customers",
+    "amenity": "parking",
+    "parking": "surface"
+   },
+   "version": 2,
+   "timestamp": "2023-01-04T01:11:36Z",
+   "acres_now_geodesic": 3.81,
+   "acres_file": 3.78,
+   "area_within_2pct": true
+  },
+  {
+   "osm": "way/54367944",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking, parking=surface",
+   "result": "same",
+   "tags_now": {
+    "amenity": "parking",
+    "parking": "surface"
+   },
+   "version": 1,
+   "timestamp": "2010-04-05T10:36:50Z",
+   "acres_now_geodesic": 1.4,
+   "acres_file": 1.39,
+   "area_within_2pct": true
+  },
+  {
+   "osm": "way/1221435271",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking (no parking tag)",
+   "result": "same",
+   "tags_now": {
+    "amenity": "parking"
+   },
+   "version": 1,
+   "timestamp": "2023-11-05T23:43:40Z",
+   "acres_now_geodesic": 2.41,
+   "acres_file": 2.4,
+   "area_within_2pct": true
+  },
+  {
+   "osm": "relation/15840067",
+   "kind_file": "golf_course",
+   "tag_file": "leisure=golf_course",
+   "result": "same",
+   "tags_now": {
+    "leisure": "golf_course"
+   },
+   "version": 1,
+   "timestamp": "2023-05-10T23:14:46Z"
+  },
+  {
+   "osm": "relation/19598242",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking (no parking tag)",
+   "result": "same",
+   "tags_now": {
+    "amenity": "parking"
+   },
+   "version": 1,
+   "timestamp": "2025-09-13T18:29:58Z"
+  },
+  {
+   "osm": "way/1278685129",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking, parking=surface",
+   "result": "same",
+   "tags_now": {
+    "amenity": "parking",
+    "parking": "surface"
+   },
+   "version": 3,
+   "timestamp": "2026-11-08T00:55:37Z",
+   "acres_now_geodesic": 1.3,
+   "acres_file": 1.3,
+   "area_within_2pct": true
+  },
+  {
+   "osm": "way/207001528",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking, parking=surface",
+   "result": "same",
+   "tags_now": {
+    "access": "customers",
+    "amenity": "parking",
+    "parking": "surface"
+   },
+   "version": 2,
+   "timestamp": "2025-08-28T07:24:18Z",
+   "acres_now_geodesic": 1.65,
+   "acres_file": 1.64,
+   "area_within_2pct": true
+  },
+  {
+   "osm": "way/508822662",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking, parking=surface",
+   "result": "same",
+   "tags_now": {
+    "amenity": "parking",
+    "parking": "surface"
+   },
+   "version": 5,
+   "timestamp": "2021-06-12T18:35:42Z",
+   "acres_now_geodesic": 0.55,
+   "acres_file": 0.55,
+   "area_within_2pct": true
+  },
+  {
+   "osm": "relation/539059",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking (no parking tag)",
+   "result": "same",
+   "tags_now": {
+    "amenity": "parking"
+   },
+   "version": 2,
+   "timestamp": "2014-07-21T06:17:29Z"
+  },
+  {
+   "osm": "way/746052614",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking, parking=surface",
+   "result": "same",
+   "tags_now": {
+    "access": "yes",
+    "amenity": "parking",
+    "parking": "surface"
+   },
+   "version": 4,
+   "timestamp": "2026-01-17T15:59:19Z",
+   "acres_now_geodesic": 0.73,
+   "acres_file": 0.73,
+   "area_within_2pct": true
+  },
+  {
+   "osm": "way/208763625",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking (no parking tag)",
+   "result": "same",
+   "tags_now": {
+    "amenity": "parking"
+   },
+   "version": 1,
+   "timestamp": "2013-03-07T20:37:46Z",
+   "acres_now_geodesic": 4.98,
+   "acres_file": 4.95,
+   "area_within_2pct": true
+  },
+  {
+   "osm": "way/754037927",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking (no parking tag)",
+   "result": "same",
+   "tags_now": {
+    "amenity": "parking"
+   },
+   "version": 2,
+   "timestamp": "2019-12-09T17:12:07Z",
+   "acres_now_geodesic": 0.93,
+   "acres_file": 0.93,
+   "area_within_2pct": true
+  },
+  {
+   "osm": "way/157976459",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking, parking=surface",
+   "result": "same",
+   "tags_now": {
+    "amenity": "parking",
+    "parking": "surface"
+   },
+   "version": 3,
+   "timestamp": "2024-05-18T01:08:43Z",
+   "acres_now_geodesic": 0.96,
+   "acres_file": 0.96,
+   "area_within_2pct": true
+  },
+  {
+   "osm": "way/664054941",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking (no parking tag)",
+   "result": "same",
+   "tags_now": {
+    "amenity": "parking"
+   },
+   "version": 1,
+   "timestamp": "2019-01-17T05:51:39Z",
+   "acres_now_geodesic": 2.92,
+   "acres_file": 2.9,
+   "area_within_2pct": true
+  },
+  {
+   "osm": "way/422638133",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking (no parking tag)",
+   "result": "same",
+   "tags_now": {
+    "amenity": "parking"
+   },
+   "version": 1,
+   "timestamp": "2016-06-03T12:41:57Z",
+   "acres_now_geodesic": 0.61,
+   "acres_file": 0.61,
+   "area_within_2pct": true
+  },
+  {
+   "osm": "way/147501337",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking (no parking tag)",
+   "result": "same",
+   "tags_now": {
+    "access": "private",
+    "amenity": "parking"
+   },
+   "version": 2,
+   "timestamp": "2012-01-31T00:52:03Z",
+   "acres_now_geodesic": 1.78,
+   "acres_file": 1.77,
+   "area_within_2pct": true
+  },
+  {
+   "osm": "way/1095000919",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking (no parking tag)",
+   "result": "same",
+   "tags_now": {
+    "amenity": "parking"
+   },
+   "version": 1,
+   "timestamp": "2022-09-15T19:05:59Z",
+   "acres_now_geodesic": 0.6,
+   "acres_file": 0.6,
+   "area_within_2pct": true
+  },
+  {
+   "osm": "way/338722674",
+   "kind_file": "surface_parking",
+   "tag_file": "amenity=parking (no parking tag)",
+   "result": "same",
+   "tags_now": {
+    "amenity": "parking"
+   },
+   "version": 2,
+   "timestamp": "2024-05-16T22:02:58Z",
+   "acres_now_geodesic": 1.11,
+   "acres_file": 1.1,
+   "area_within_2pct": true
+  }
+ ],
+ "summary": {
+  "parcel_checked": 30,
+  "parcel_same": 30,
+  "parcel_differs": 0,
+  "parcel_no_answer": 0,
+  "osm_checked": 20,
+  "osm_same": 20,
+  "osm_tags_differ": 0,
+  "area_checked_ways": 17,
+  "area_within_2pct": 17,
+  "osm_deleted_or_missing": 0
+ }
+}

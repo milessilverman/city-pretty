@@ -155,26 +155,34 @@ def service_for(fips, A):
     return None
 
 
+def _ask(q, params, key, tries=4):
+    """one point query; an ArcGIS error body (some servers answer 500 now and then) is retried after a pause"""
+    d = None
+    for i in range(tries):
+        d = get_json(q, params, key=key)
+        if not d.get("error"):
+            return d
+        time.sleep(2 * (i + 1))
+    return d
+
+
 def lookup(svc, lat, lng):
     """-> dict with parcel facts, or {'error': ...}"""
     url = svc["url"].rstrip("/")
     q = url + "/query"
     params = {"geometry": f"{lng:.7f},{lat:.7f}", "geometryType": "esriGeometryPoint", "inSR": "4326", "spatialRel": "esriSpatialRelIntersects", "outFields": "*", "returnGeometry": "true", "outSR": "4326", "f": "json"}
     try:
-        d = get_json(q, params, key=url)
+        d = _ask(q, params, url)
+        if d.get("error"):
+            # some layers refuse outFields=*: ask for the registry's own fields
+            fl = ",".join(f[0] for f in svc.get("fields", []) if not str(f[0]).endswith("()")) or None
+            if fl:
+                params["outFields"] = fl
+                d = _ask(q, params, url)
     except Exception as e:
         return {"error": "service did not answer: " + str(e)}
     if d.get("error"):
-        # some services refuse outFields=*: ask for the registry's own fields
-        fl = ",".join(f[0] for f in svc.get("fields", []) if not str(f[0]).endswith("()")) or None
-        if fl:
-            params["outFields"] = fl
-            try:
-                d = get_json(q, params, key=url)
-            except Exception as e:
-                return {"error": "service did not answer: " + str(e)}
-        if d.get("error"):
-            return {"error": "service error: " + json.dumps(d["error"])[:120]}
+        return {"error": "service error: " + json.dumps(d["error"])[:120]}
     feats = [f for f in d.get("features") or [] if esri_contains(rings_of(f), lng, lat)]
     if not feats:
         return {"none": True}
@@ -251,7 +259,10 @@ def main():
     jobs = []
     for fn in sorted(f for f in os.listdir(os.path.join(work, "cands")) if f.endswith(".json")):
         d = json.load(open(os.path.join(work, "cands", fn)))
+        failed = set(d["info"].get("failed_anchor_ids") or [])   # an Overpass query for these anchors failed: their lots were not checked for buildings, so they are left out
         for r in d["records"]:
+            if r["near"]["id"] in failed:
+                continue
             a = anch[r["near"]["id"]]
             svc = byname.get(a["parcelService"]) or (service_for(a["fips"], reg) if a["fips"] in ("06037", "06059") else None)
             if a["fips"] == "06037":

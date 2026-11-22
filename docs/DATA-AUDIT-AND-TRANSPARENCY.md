@@ -1681,3 +1681,15 @@ Cause: `scripts/costs/fetch_hud_income_limits.py` built its list from `counties/
 people $83,300; Orange County $138,600 and $93,050. The script now adds them (`EXTRA_FIPS`) and fails if either is neither a row nor a
 failed entry; the raw responses are saved as `tests/fixtures/costs/hud_il/06037.json` and `06059.json` and the new tests compare the rows
 with them. County count 1,036 -> 1,038.
+
+### Station-area redevelopment sites, new (22 Nov 2026, `audit/station-sites-2026-11-22.md`)
+Redevelopment sites existed only for Los Angeles County, so project cards for station areas elsewhere had none. `app/data/station_sites/` now holds
+8,763 candidate lots (surface parking, vacant or brownfield land, golf courses of 0.5 acre or more) within 0.5 mile of the 30 stations of the
+local projects on file and of existing rail stations in the 15 largest counties on file (1,885 stations), and within 1 mile of the 40 largest
+corridor stop cities that have a parcel service. Sizes are measured from OpenStreetMap outlines (openstreetmap.fr extracts of 17 to 21 Nov, or the
+maps.mail.ru Overpass mirror on 22 Nov); parcel facts are what each county's service returned on 22 Nov, and a parcel value is withheld when the
+parcel is more than 2x or under 0.5x the outline (61.8% of the parcels found). No homes count, value if built or margin is given for any of them.
+Sample re-check: 0 of 30 parcel records and 0 of 20 OpenStreetMap elements differed. Not done: large single-storey retail with big parking (no tag
+defines it without guessing), and golf, brownfield or vacant land in a few Phoenix and Seattle clusters where the mirror kept answering 504 (listed in
+the report). Owner names are stored only for public agencies and companies; a test fails if a personal-name pattern appears. Nothing was corrected:
+no earlier record of this kind existed outside Los Angeles.

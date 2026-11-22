@@ -75,10 +75,22 @@ def main():
                 row["result"] = "same" if c and c[0] == s["k"] and c[1] == s["tag"] else "tags differ"
                 row["tags_now"] = {k: v for k, v in (el.get("tags") or {}).items() if k in ("amenity", "parking", "landuse", "vacant", "leisure", "building", "access")}
                 row["version"] = el.get("version"); row["timestamp"] = el.get("timestamp")
+                if typ == "way":   # the area again, by a different method: the way's current nodes and a geodesic area (pyproj), against the file's acres
+                    try:
+                        from pyproj import Geod
+                        jf = json.loads(urllib.request.urlopen(urllib.request.Request(f"https://api.openstreetmap.org/api/0.6/way/{oid}/full.json", headers=P.UA), timeout=40).read())
+                        nodes = {e["id"]: (e["lon"], e["lat"]) for e in jf["elements"] if e["type"] == "node"}
+                        pts = [nodes[i] for i in el["nodes"]]
+                        a_m2, _ = Geod(ellps="WGS84").polygon_area_perimeter([p[0] for p in pts], [p[1] for p in pts])
+                        row["acres_now_geodesic"] = round(abs(a_m2) / 4046.8564224, 2); row["acres_file"] = s["ac"]
+                        row["area_within_2pct"] = abs(row["acres_now_geodesic"] - s["ac"]) <= 0.02 * s["ac"]
+                    except Exception as ex:
+                        row["area_check"] = "not done: " + str(ex)[:60]
+                    time.sleep(1.1)
         res["osm"].append(row)
     n = lambda L, v: sum(1 for x in L if x["result"] == v)
     res["summary"] = {"parcel_checked": len(res["parcel"]), "parcel_same": n(res["parcel"], "same"), "parcel_differs": n(res["parcel"], "differs"), "parcel_no_answer": sum(1 for x in res["parcel"] if str(x["result"]).startswith("no answer")),
-                      "osm_checked": len(res["osm"]), "osm_same": n(res["osm"], "same"), "osm_tags_differ": n(res["osm"], "tags differ"), "osm_deleted_or_missing": sum(1 for x in res["osm"] if x["result"] in ("deleted",) or str(x["result"]).startswith("HTTP"))}
+                      "osm_checked": len(res["osm"]), "osm_same": n(res["osm"], "same"), "osm_tags_differ": n(res["osm"], "tags differ"), "area_checked_ways": sum(1 for x in res["osm"] if "area_within_2pct" in x), "area_within_2pct": sum(1 for x in res["osm"] if x.get("area_within_2pct")), "osm_deleted_or_missing": sum(1 for x in res["osm"] if x["result"] in ("deleted",) or str(x["result"]).startswith("HTTP"))}
     os.makedirs(os.path.dirname(out_fn), exist_ok=True)
     json.dump(res, open(out_fn, "w"), indent=1)
     print(json.dumps(res["summary"]))

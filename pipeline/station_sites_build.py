@@ -41,6 +41,29 @@ def compact(rec, src_idx, anchor=None):
     return o
 
 
+def coverage(work, anchors):
+    """which anchors were searched: a group whose run did not finish, or a cluster of anchors whose Overpass query failed after retries, is listed as not searched;
+    anchors whose golf / brownfield / greenfield / vacant queries failed were searched for parking only"""
+    groups = json.load(open(os.path.join(work, "groups.json")))
+    gof = {i: k for k, g in groups.items() for i in g["anchors"]}
+    done, failed, partial = {}, set(), {}
+    cdir = os.path.join(work, "cands")
+    for fn in os.listdir(cdir):
+        if fn.endswith(".json"):
+            info = json.load(open(os.path.join(cdir, fn)))["info"]
+            done[info["group"]] = info
+            failed |= set(info.get("failed_anchor_ids") or [])
+            partial.update(info.get("kinds_not_searched") or {})
+    out = {}
+    for cls in ("pipeline_station", "corridor_stop_city", "existing_station"):
+        L = [a for a in anchors["anchors"] if a["cls"] == cls]
+        ns = [a for a in L if gof[a["id"]] not in done or a["id"] in failed]
+        out[cls] = {"anchors": len(L), "searched": len(L) - len(ns), "notSearched": [a["name"] + " (" + a["fips"] + ")" for a in ns],
+                    "parkingOnly": sum(1 for a in L if a["id"] in partial and a not in ns)}
+    out["sources"] = {g: {"backend": i["backend"], "dataTimestamp": i["data_timestamp"]} for g, i in sorted(done.items())}
+    return out
+
+
 def main():
     work = sys.argv[1]
     out = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, "app/data/station_sites")
@@ -57,7 +80,7 @@ def main():
         by[d["rec"]["near"]["fips"]].append(d)
     caps = json.load(open(os.path.join(work, "cap_counts.json")))
     fmap = json.load(open(os.path.join(work, "field_map.json"))) if os.path.exists(os.path.join(work, "field_map.json")) else {}
-    index = {"built": time.strftime("%Y-%m-%d"), "rules": RULES, "counties": {}, "scope": anchors["notes"]}
+    index = {"built": time.strftime("%Y-%m-%d"), "rules": RULES, "counties": {}, "scope": anchors["notes"], "coverage": coverage(work, anchors)}
     today = time.strftime("%Y-%m-%d")
     for fips, items in sorted(by.items()):
         items.sort(key=lambda d: -d["rec"]["acres"])

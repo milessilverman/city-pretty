@@ -203,55 +203,83 @@ def overpass_try(q, label, tries=6):
         return None
 
 
-def elements_from_overpass(anchors, work):
-    cands, blds, stamps = [], [], []
-    seen = set()
-    failed = []
-    for ci, c in enumerate(clusters(anchors, 0.06)):
-        w, s, e, n = c["b"]
-        bb = f"{s:.5f},{w:.5f},{n:.5f},{e:.5f}"
-        # small queries with exact tag values (a regex on landuse made the mirror time out); each is retried by itself
-        qs = [f'way["amenity"="parking"]({bb});', f'rel["amenity"="parking"]({bb});',
-              f'way["leisure"="golf_course"]({bb});rel["leisure"="golf_course"]({bb});way["landuse"="brownfield"]({bb});rel["landuse"="brownfield"]({bb});',
-              f'way["landuse"="greenfield"]({bb});rel["landuse"="greenfield"]({bb});way["vacant"="yes"]({bb});rel["vacant"="yes"]({bb});']
-        ids, ok = [], True
-        for qi, qq in enumerate(qs):
-            j = overpass_try(f'[out:json][timeout:180];({qq});out tags geom;', f"cluster {ci + 1} part {qi + 1}")
-            if j is None:
-                ok = False; continue
-            stamps.append((j.get("osm3s") or {}).get("timestamp_osm_base"))
-            for el in j["elements"]:
-                t = el.get("tags") or {}
-                cl = classify(t)
-                if not cl or (el["type"], el["id"]) in seen:
-                    continue
-                g = poly_from_overpass(el)
-                if g is None:
-                    continue
-                seen.add((el["type"], el["id"]))
-                cands.append((el["type"], el["id"], t, cl[0], cl[1], g)); ids.append((el["type"], el["id"], g))
-        # buildings that touch a candidate big enough to matter and near an anchor
-        big = [x for x in ids if polygon_acres(x[2]) >= MIN_ACRES and near_any(x[2], c["a"])]
-        wid = [x[1] for x in big if x[0] == "way"]
-        rid = [x[1] for x in big if x[0] == "relation"]
-        for part in range(0, max(len(wid), 1), 150):
-            wp = wid[part:part + 150]
-            if not wp and not (rid and part == 0):
+def one_cluster(ci, c, cache_dir):
+    """-> (cands, blds, stamps, ok) for one cluster; a finished cluster is cached on disk so a restart does not repeat it"""
+    from shapely import wkt
+    w, s, e, n = c["b"]
+    bb = f"{s:.5f},{w:.5f},{n:.5f},{e:.5f}"
+    fn = os.path.join(cache_dir, f"ov_{s:.4f}_{w:.4f}_{n:.4f}_{e:.4f}.json")
+    if os.path.exists(fn):
+        d = json.load(open(fn))
+        return [(x[0], x[1], x[2], x[3], x[4], wkt.loads(x[5])) for x in d["cands"]], [wkt.loads(x) for x in d["blds"]], d["stamps"], (True, d.get("optional_failed", []))
+    # small queries with exact tag values (a regex on landuse made the mirror time out); each is retried by itself
+    qs = [f'way["amenity"="parking"]({bb});', f'rel["amenity"="parking"]({bb});',
+          f'way["leisure"="golf_course"]({bb});rel["leisure"="golf_course"]({bb});way["landuse"="brownfield"]({bb});rel["landuse"="brownfield"]({bb});',
+          f'way["landuse"="greenfield"]({bb});rel["landuse"="greenfield"]({bb});way["vacant"="yes"]({bb});rel["vacant"="yes"]({bb});']
+    cands, blds, stamps, ids, ok, seen, opt_failed = [], [], [], [], True, set(), []
+    for qi, qq in enumerate(qs):
+        j = overpass_try(f'[out:json][timeout:180];({qq});out tags geom;', f"cluster {ci + 1} part {qi + 1}", 6 if qi < 2 else 4)
+        if j is None:
+            if qi < 2:
+                ok = False   # parking could not be read: the cluster is not searched
+            else:
+                opt_failed.append(["golf courses and brownfield land", "greenfield and vacant land"][qi - 2])   # these two kinds are missing for this cluster
+            continue
+        stamps.append((j.get("osm3s") or {}).get("timestamp_osm_base"))
+        for el in j["elements"]:
+            t = el.get("tags") or {}
+            cl = classify(t)
+            if not cl or (el["type"], el["id"]) in seen:
                 continue
-            sel = (f"way(id:{','.join(map(str, wp))});" if wp else "") + (f"rel(id:{','.join(map(str, rid))});" if rid and part == 0 else "")
-            jb = overpass_try(f'[out:json][timeout:180];({sel})->.c;(way["building"](around.c:0);rel["building"](around.c:0););out tags geom;', f"cluster {ci + 1} buildings")
-            if jb is None:
-                ok = False; continue
-            for el in jb["elements"]:
-                t = el.get("tags") or {}
-                if is_building(t):
-                    g = poly_from_overpass(el)
-                    if g is not None:
-                        blds.append(g)
+            g = poly_from_overpass(el)
+            if g is None:
+                continue
+            seen.add((el["type"], el["id"]))
+            cands.append((el["type"], el["id"], t, cl[0], cl[1], g)); ids.append((el["type"], el["id"], g))
+    # buildings that touch a candidate big enough to matter and near an anchor
+    big = [x for x in ids if polygon_acres(x[2]) >= MIN_ACRES and near_any(x[2], c["a"])]
+    wid = [x[1] for x in big if x[0] == "way"]
+    rid = [x[1] for x in big if x[0] == "relation"]
+    for part in range(0, max(len(wid), 1), 150):
+        wp = wid[part:part + 150]
+        if not wp and not (rid and part == 0):
+            continue
+        sel = (f"way(id:{','.join(map(str, wp))});" if wp else "") + (f"rel(id:{','.join(map(str, rid))});" if rid and part == 0 else "")
+        jb = overpass_try(f'[out:json][timeout:180];({sel})->.c;(way["building"](around.c:0);rel["building"](around.c:0););out tags geom;', f"cluster {ci + 1} buildings")
+        if jb is None:
+            ok = False; continue
+        for el in jb["elements"]:
+            t = el.get("tags") or {}
+            if is_building(t):
+                g = poly_from_overpass(el)
+                if g is not None:
+                    blds.append(g)
+    print(f"cluster {ci + 1}: {len(c['a'])} anchors, {len(ids)} tagged polygons, {len(blds)} buildings{'' if ok else ' (A QUERY FAILED)'}", file=sys.stderr)
+    if ok:
+        os.makedirs(cache_dir, exist_ok=True)
+        json.dump({"cands": [[x[0], x[1], x[2], x[3], x[4], x[5].wkt] for x in cands], "blds": [b.wkt for b in blds], "stamps": stamps, "optional_failed": opt_failed}, open(fn, "w"))
+    return cands, blds, stamps, (ok, opt_failed)
+
+
+def elements_from_overpass(anchors, work):
+    from concurrent.futures import ThreadPoolExecutor
+    cache_dir = os.path.join(os.path.dirname(work.rstrip("/")), "ovcache")
+    cl = clusters(anchors, 0.06)
+    with ThreadPoolExecutor(int(os.environ.get("OVERPASS_THREADS", "3"))) as ex:
+        res = list(ex.map(lambda ic: one_cluster(ic[0], ic[1], cache_dir), enumerate(cl)))
+    cands, blds, stamps, failed, seen, partial = [], [], [], [], set(), {}
+    for c, (cd, bl, st, okp) in zip(cl, res):
+        ok, optf = okp
+        for a in c["a"]:
+            if optf:
+                partial[a["id"]] = optf
+        for x in cd:
+            if (x[0], x[1]) not in seen:
+                seen.add((x[0], x[1])); cands.append(x)
+        blds += bl; stamps += st
         if not ok:
             failed += [a["id"] for a in c["a"]]
-        print(f"cluster {ci + 1}: {len(c['a'])} anchors, {len(ids)} tagged polygons, {len(blds)} buildings so far{'' if ok else ' (A QUERY FAILED)'}", file=sys.stderr)
-    return cands, blds, {"source": "Overpass mirror maps.mail.ru", "url": OVERPASS, "data_timestamp": max(x for x in stamps if x) if any(stamps) else None, "backend": "overpass", "failed_anchor_ids": sorted(set(failed))}
+    return cands, blds, {"source": "Overpass mirror maps.mail.ru", "url": OVERPASS, "data_timestamp": max(x for x in stamps if x) if any(stamps) else None, "backend": "overpass", "failed_anchor_ids": sorted(set(failed)), "kinds_not_searched": partial}
 
 
 def polygon_acres(g):
