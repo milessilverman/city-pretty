@@ -1,5 +1,5 @@
 {
- "run_on": "2026-11-22T19:38:29.693Z",
+ "run_on": "2026-11-22T19:53:55.298Z",
  "port": 9251,
  "places": {
   "travis": {
@@ -14,7 +14,7 @@
      "open": true,
      "zoningFact": null,
      "smallMultifamily": {
-      "notAssessed": "the site's zoning (MF-3) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP 403 (Cloudflare bot check, 'Performing security verification')), and no state multifamily law on file applies"
+      "notAssessed": "the site's zoning (MF-3) has rules that are not determined: the city's code text could not be fetched (library.municode.com: HTTP 403 (Cloudflare bot check, 'Performing security verification')), and no state multifamily law on file applies"
      },
      "dollarsShown": 19,
      "dollarsNotOnTheCard": [],
@@ -32,7 +32,7 @@
      "open": true,
      "zoningFact": null,
      "smallMultifamily": {
-      "notAssessed": "the site's zoning (LI-NP) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP 403 (Cloudflare bot check, 'Performing security verification')), and no state multifamily law on file applies"
+      "notAssessed": "the site's zoning (LI-NP) has rules that are not determined: the city's code text could not be fetched (library.municode.com: HTTP 403 (Cloudflare bot check, 'Performing security verification')), and no state multifamily law on file applies"
      },
      "dollarsShown": 19,
      "dollarsNotOnTheCard": [],

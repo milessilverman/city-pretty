@@ -219,7 +219,8 @@ describe("attaching the files to the sites", () => {
     expect(s.cityName).toBe("Austin");
     // the card then says the rules are not determined and why, with the first URL tried
     expect(s.zoningLimits.category).toBeNull();
-    expect(s.zoningLimits.notDetermined).toMatch(/could not be fetched \(https:\/\/library\.municode\.com\/tx\/austin/);
+    expect(s.zoningLimits.notDetermined).toMatch(/could not be fetched \(library\.municode\.com: HTTP 403/);
+    expect(s.zoningLimits.notDeterminedSource.url).toBe("https://library.municode.com/tx/austin/codes/land_development_code");
     const card = P.buildProjectCard({ kind: "site", id: s.id, name: s.name, countyFips: fips, stateCode: "TX", acres: { value: s.acres, source: s.sourceUrl }, nearStops: [],
       parcel: { parcel_id: s.id, state_code: "TX", county_fips: fips, base_zoning_code: s.baseZoning, municipality_name: s.cityName, exclusions: {}, zoning_limits: s.zoningLimits } }, ctx);
     expect(skipped(card, "small_multifamily").missing[0]).toContain("has rules that are not determined: the city's code text could not be fetched");

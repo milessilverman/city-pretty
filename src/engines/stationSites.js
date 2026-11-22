@@ -72,7 +72,9 @@ function facts(s) {
 function zoningFact(z) {
   const who = z.name ? "zoned by " + z.name : null;
   if (!z.zone) return ["Zoning", "Not on file: " + [z.why || "no zone code was found for this site", who].filter(Boolean).join("; ")];
-  const how = z.how && z.how.kind === "point" ? `the city's zoning map asked at the site's point (${z.how.url}, ${z.how.asked})` : "the county parcel record's zoning field";
+  // host names only in running text (a bare URL is one long word that overflows a phone screen); the full URLs are in
+  // the site file and the card's sources
+  const how = z.how && z.how.kind === "point" ? `the city's zoning map asked at the site's point (${hostOf(z.how.url)}, ${z.how.asked})` : "the county parcel record's zoning field";
   const cat = z.row ? (z.row.notDetermined ? "rules not determined: " + z.row.notDetermined : "category " + (z.row.category || "not determined") + (z.row.categoryBasis ? " (" + z.row.categoryBasis + ")" : "")) : "code rules not on file: " + (z.tableWhy || "no code table");
   return ["Zoning", `${z.zone}${z.overlay && z.overlay.length ? " with commercial overlay " + z.overlay.join(", ") : ""}, from ${how}; ${who ? who + "; " : ""}${cat}`];
 }
@@ -119,6 +121,7 @@ function loadPlaces(fips) {
 const ZBASE = "app/data/site_zoning/";
 // the code table's categories, in the words the page's parcel facts test (/commercial/ marks commercial or mixed use)
 const CAT_WORDS = { "single-family": "single-family", multifamily: "multifamily", commercial: "commercial", "mixed-use": "commercial / mixed use", industrial: "industrial", "public/open space": "open space / public", "planned/special": "planned or special district" };
+const hostOf = u => { const m = String(u || "").match(/^https?:\/\/([^/]+)/); return m ? m[1] : String(u || ""); };
 const shortName = n => String(n || "").replace(/ \(balance\)$/, "").replace(/ (city|town|village|metropolitan government)$/, "").replace(/^Nashville-Davidson$/, "Nashville");
 // The card engine's view of one code row: only what the row states, each with its source; nothing filled in.
 // A code table stores a quote used by several rows once, in table.quotes, and the rows point at it as { ref: id }.
@@ -164,7 +167,7 @@ function attachZoning(list, doc, tables, index) {
     if (z.name) s.cityName = shortName(z.name);
     if (row) { s.zoningCategory = CAT_WORDS[row.category] || null; s.zoningLimits = limitsOf(row, T, zone, how); }
     // a zone with no code row: the card says why its rules are not determined, rather than "not classed as multifamily"
-    else if (zone) s.zoningLimits = { zone, city: z.name ? shortName(z.name) : null, category: null, notDetermined: (z.tableWhy || "no code table") + (index && index.notOnFile && index.notOnFile[juris] ? " (" + index.notOnFile[juris].tried[0].url + ": " + index.notOnFile[juris].tried[0].result + ")" : ""), cautions: [], zoneSource: how };
+    else if (zone) s.zoningLimits = { zone, city: z.name ? shortName(z.name) : null, category: null, notDetermined: (z.tableWhy || "no code table") + (index && index.notOnFile && index.notOnFile[juris] ? " (" + hostOf(index.notOnFile[juris].tried[0].url) + ": " + index.notOnFile[juris].tried[0].result + ")" : ""), notDeterminedSource: index && index.notOnFile && index.notOnFile[juris] ? { url: index.notOnFile[juris].tried[0].url } : null, cautions: [], zoneSource: how };
   }
   return list;
 }

@@ -1031,7 +1031,7 @@
     "topCounties": "06073:13"
    },
    {
-    "reason": "the site's zoning (…) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "reason": "the site's zoning (…) has rules that are not determined: the city's code text could not be fetched (library.municode.com: HTTP # (…)), and no state multifamily law on file applies",
     "sites": 13,
     "counties": 1,
     "topCounties": "48453:13"
@@ -1073,7 +1073,7 @@
     "topCounties": "47037:8"
    },
    {
-    "reason": "the site's zoning (P-NP) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "reason": "the site's zoning (P-NP) has rules that are not determined: the city's code text could not be fetched (library.municode.com: HTTP # (…)), and no state multifamily law on file applies",
     "sites": 8,
     "counties": 1,
     "topCounties": "48453:8"
@@ -1091,7 +1091,7 @@
     "topCounties": "47037:7"
    },
    {
-    "reason": "the site's zoning (GO) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "reason": "the site's zoning (GO) has rules that are not determined: the city's code text could not be fetched (library.municode.com: HTTP # (…)), and no state multifamily law on file applies",
     "sites": 7,
     "counties": 1,
     "topCounties": "48453:7"
@@ -1223,7 +1223,7 @@
     "topCounties": "36047:4"
    },
    {
-    "reason": "the site's zoning (PUD-NP) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "reason": "the site's zoning (PUD-NP) has rules that are not determined: the city's code text could not be fetched (library.municode.com: HTTP # (…)), and no state multifamily law on file applies",
     "sites": 4,
     "counties": 1,
     "topCounties": "48453:4"
@@ -1637,37 +1637,37 @@
     "topCounties": "47037:1"
    },
    {
-    "reason": "the site's zoning (LI-NP) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "reason": "the site's zoning (LI-NP) has rules that are not determined: the city's code text could not be fetched (library.municode.com: HTTP # (…)), and no state multifamily law on file applies",
     "sites": 1,
     "counties": 1,
     "topCounties": "48453:1"
    },
    {
-    "reason": "the site's zoning (GO-CO-ETOD-DBETOD-NP) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "reason": "the site's zoning (GO-CO-ETOD-DBETOD-NP) has rules that are not determined: the city's code text could not be fetched (library.municode.com: HTTP # (…)), and no state multifamily law on file applies",
     "sites": 1,
     "counties": 1,
     "topCounties": "48453:1"
    },
    {
-    "reason": "the site's zoning (DMU) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "reason": "the site's zoning (DMU) has rules that are not determined: the city's code text could not be fetched (library.municode.com: HTTP # (…)), and no state multifamily law on file applies",
     "sites": 1,
     "counties": 1,
     "topCounties": "48453:1"
    },
    {
-    "reason": "the site's zoning (CS-MU-V-CO-ETOD-DBETOD-NP) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "reason": "the site's zoning (CS-MU-V-CO-ETOD-DBETOD-NP) has rules that are not determined: the city's code text could not be fetched (library.municode.com: HTTP # (…)), and no state multifamily law on file applies",
     "sites": 1,
     "counties": 1,
     "topCounties": "48453:1"
    },
    {
-    "reason": "the site's zoning (GO-ETOD-DBETOD) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "reason": "the site's zoning (GO-ETOD-DBETOD) has rules that are not determined: the city's code text could not be fetched (library.municode.com: HTTP # (…)), and no state multifamily law on file applies",
     "sites": 1,
     "counties": 1,
     "topCounties": "48453:1"
    },
    {
-    "reason": "the site's zoning (CBD) has rules that are not determined: the city's code text could not be fetched (https://library.municode.com/tx/austin/codes/land_development_code: HTTP # (…)), and no state multifamily law on file applies",
+    "reason": "the site's zoning (CBD) has rules that are not determined: the city's code text could not be fetched (library.municode.com: HTTP # (…)), and no state multifamily law on file applies",
     "sites": 1,
     "counties": 1,
     "topCounties": "48453:1"
