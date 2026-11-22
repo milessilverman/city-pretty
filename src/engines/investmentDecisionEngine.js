@@ -867,6 +867,8 @@ function briefForAdvisor(brief) {
     parcel: p ? { parcelId: p.parcelId, zoning: p.zoning, expansions: (p.expansions || []).map(e => ({ expansion: e.expansion, label: e.label, legal: e.legal, costLow: f(e.cost.low), costHigh: f(e.cost.high), valueAdded: f(e.valueAdded), netValue: f(e.netValue), missing: e.missing })), missing: p.missing } : null,
     transit: t ? { name: t.name || null, verdict: t.verdict, scale: t.scale, verdictMeaning: t.verdictMeaning || null, homesPerNetAcre: t.density ? f(t.density.homesPerNetAcre) : null, reasons: t.reasons || [], missing: t.missing || [] } : null,
     caveats: brief.caveats, missing: brief.missing, sources: brief.sources,
+    // courses of action (src/engines/projectCardEngine.js cardsForAdvisor: compact, capped, no internal-only branch)
+    projectCards: brief.projectCards && brief.projectCards.schema === "city-pretty/project-cards-for-advisor@1" ? brief.projectCards : null,
   };
 }
 
